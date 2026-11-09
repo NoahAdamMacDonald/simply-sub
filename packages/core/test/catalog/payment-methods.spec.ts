@@ -65,6 +65,14 @@ describe('namesPaymentMethod', () => {
     ['Mobile Wallets: Satispay', 'satispay', true],
     ['Apple Pay, Cash App, PayPal', 'cash-app', true],
     ['Apple Pay, Cash App, PayPal', 'cash', false],
+    // iQIYI's checkout and discovery+ Canada's help centre (M11.15).
+    ['Credit/Debit Card PayPal Alipay', 'alipay', true],
+    [
+      'Your discovery+ subscription including billing will be managed through TELUS and Koodo.',
+      'provider-billing',
+      true,
+    ],
+    ['Billing will be managed through Apple.', 'provider-billing', false],
     ['Swish, Eps transfer, Bancontact, iDEAL | Wero, and Przelewy24', 'bank-transfer', true],
     ['GoCardless (Direct Debit)', 'bank-transfer', true],
     // ChatGPT's in the UK and the EEA (M11.15).

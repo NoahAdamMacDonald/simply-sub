@@ -1,0 +1,2717 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 3, part 2): ZEE5's global service (Z5X Global
+# FZ LLC's, zee5.com/global), read in Edge from Canada and through each other country's exit. Its plan page
+# (zee5.com/global/myaccount/subscription) prices by where the visitor is, each country in its own currency, and its
+# plans differ by country (the owner's choice of 2026-11-09: a plan of its own wherever the devices differ):
+# - All Access ("All Access" in Canada, "Movies, Series, Live TV + KidZ + International Content" elsewhere): "4 Devices"
+#   in Canada, the US, Ireland, Germany, France, the Netherlands, Italy and Spain, "3 Devices" in the UK and "2
+#   Devices" in Australia and New Zealand;
+# - KidZ ("Premium kids’ content"): "3 Devices" in Canada and the US, "2 Devices" elsewhere; none in Spain;
+# - seven language packs (the cards "All content in Hindi, Punjabi, Bhojpuri", "Tamil Movies, Series, TV Shows, Live TV"
+#   and so on for Telugu, Marathi, Bengali, Malayalam and Kannada), "3 Devices" each; none in Australia, New Zealand
+#   or Spain.
+# Each card's periods are its own: 1 month, 3 months (the UK and the euro countries) and 12 months, every period priced
+# where it's sold (the owner's rule of 2026-11-09). Every card: "Live TV", "Best (4k)" and "Best (Dolby Atmos)"; the
+# page: "Live TV streaming will include ads.4K plan is supported on 4K TVs and Connected devices only. Sports content is
+# not available in 4k quality."
+# Region checklist, 2026-11-09: 1. the global site has one address for every country (zee5.com/global); 2. no country
+# or currency picker; 4. the plan cards, never past "Continue" (it asks to sign in); 6. Edge, through each country's
+# exit. Its help centre is India's too (rupee examples), the only one it has.
+# Bundles: none on its global pages. Resellers: none; its help centre's partners (Jio, Airtel, Vi, Tata Play) are
+# India's, outside the catalog's regions.
+
+# Coverage: zee5.all-access in GB, AU and NZ: sold there with fewer devices, as zee5.all-access-3-devices (GB) and
+# zee5.all-access-2-devices (AU, NZ) (the plan page, 2026-11-09).
+
+# Coverage: zee5.all-access-3-devices in CA, US, IE, DE, FR, NL, IT, ES, AU and NZ: the UK's All Access (2026-11-09).
+
+# Coverage: zee5.all-access-2-devices in CA, US, GB, IE, DE, FR, NL, IT and ES: Australia's and New Zealand's All
+# Access (2026-11-09).
+
+# Coverage: zee5.kidz in GB, IE, DE, FR, NL, IT, AU and NZ: sold there on 2 devices, as zee5.kidz-2-devices; Spain's
+# plan page lists no KidZ, so none in ES either (2026-11-09).
+
+# Coverage: zee5.kidz-2-devices in CA and US: sold there on 3 devices, as zee5.kidz; and none in ES (2026-11-09).
+
+# Coverage: zee5.hindi-punjabi-bhojpuri, zee5.tamil, zee5.telugu, zee5.marathi, zee5.bengali, zee5.malayalam and
+# zee5.kannada in AU, NZ and ES: those countries' plan pages list no language pack (2026-11-09).
+
+id: zee5
+name: ZEE5
+aliases: [zee 5, z5]
+website: https://www.zee5.com
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    IT: EUR,
+    ES: EUR,
+    AU: AUD,
+    NZ: NZD,
+  }
+cancelUrl: https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+sources: { pricing: https://www.zee5.com/global/myaccount/subscription }
+notes: Its global service; India's ZEE5 is a service of its own. A plan's devices and packs differ by country.
+# Ways to pay, read 2026-11-09 in its terms: "online payments through Your credit card or debit card or net banking
+# account or cash card", India's words for a bank transfer and a prepaid card, which no way to pay here names, and the
+# app stores' and Roku's billing. No page names the card networks.
+paymentMethods:
+  - methods: [card, app-store]
+    page: Terms of use
+    url: https://www.zee5.com/global/termsofuse
+    quotes:
+      - 'online payments through Your credit card or debit card'
+      - 'Apple In-App Purchase (IAP), Google In-App-Purchase (IAP), Amazon In-App-Purchase (IAP), Roku Pay'
+
+# Owner (M11.2), read 2026-11-09 on its about page.
+owner:
+  name: Zee Entertainment Enterprises Ltd.
+  page:
+    name: About ZEE5
+    url: https://www.zee5.com/global/aboutus
+  quotes:
+    - 'As the digital entertainment destination of Zee Entertainment Enterprises Ltd.'
+    - 'Zee 5 is India’s largest homegrown video streaming platform and the global window for South Asian content, reaching viewers across 190+ countries.'
+  country:
+    code: IN
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09: its terms and help centre say how to turn renewal off, not which day it renews.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.zee5.com/global/termsofuse
+    - https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+  lastVerified: 2026-11-09
+
+# Perks (M11.6): what each plan's card says it includes beyond the features, in its words. All Access has every
+# language, KidZ and international programmes ("Movies, Series, Live TV + KidZ + International Content"); a pack has
+# its language; KidZ its kids' programmes.
+perks:
+  - id: hindi-punjabi-bhojpuri
+    name: All content in Hindi, Punjabi, Bhojpuri
+  - id: tamil
+    name: Tamil Movies, Series, TV Shows, Live TV
+  - id: telugu
+    name: Telugu Movies, Series, TV Shows, Live TV
+  - id: marathi
+    name: Marathi Movies, Series, TV Shows, Live TV
+  - id: bengali
+    name: Bengali Movies, Series, TV Shows, Live TV
+  - id: malayalam
+    name: Malayalam Movies, Series, TV Shows, Live TV
+  - id: kannada
+    name: Kannada Movies, Series, TV Shows, Live TV
+  - id: kidz
+    name: Premium kids’ content
+  - id: international
+    name: International Content
+
+# Apps (the cross-category features), read 2026-11-09 in its help centre's supported devices: a computer's browser,
+# Android and iPhone or iPad, and Android or Google TV, Samsung and LG TVs, Apple TV, Fire Stick and Chromecast.
+features:
+  platforms: [web, android, ios, tv]
+
+# Features, read 2026-11-09:
+# - every card: "Live TV", "Best (4k)" and "Best (Dolby Atmos)", and its devices ("4 Devices", "3 Devices", "2
+#   Devices"), which its terms make a limit at once ("available to You on either one or limited number of End User
+#   device concurrently"), so concurrent streams, inferred;
+# - ads: no page calls a plan ad-free, its terms list "ad-supported subscription plans" and may add ads "irrespective of
+#   the subscription type", and the plan page says live TV includes ads, so ad-free is false;
+# - downloads: "Downloads are available only on the Zee 5 Android and iOS apps" and "You need an active Zee 5
+#   subscription to download" (its help centre), on no stated number of devices, so 1, inferred;
+# - profiles: its privacy policy's "Kid’s Profile feature" and "others you permit to set up profiles under your account",
+#   without a number, so 2, inferred.
+plans:
+  - id: zee5.all-access
+    name: 'All Access'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 4 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks:
+      [
+        hindi-punjabi-bhojpuri,
+        tamil,
+        telugu,
+        marathi,
+        bengali,
+        malayalam,
+        kannada,
+        kidz,
+        international,
+      ]
+    notes: 'Every language, KidZ, international programmes and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 124.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 6.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 32.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.all-access-3-devices
+    name: 'All Access (3 devices)'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks:
+      [
+        hindi-punjabi-bhojpuri,
+        tamil,
+        telugu,
+        marathi,
+        bengali,
+        malayalam,
+        kannada,
+        kidz,
+        international,
+      ]
+    notes: 'The UK’s All Access, on 3 devices.'
+    prices:
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 29.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.all-access-2-devices
+    name: 'All Access (2 devices)'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 2 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks:
+      [
+        hindi-punjabi-bhojpuri,
+        tamil,
+        telugu,
+        marathi,
+        bengali,
+        malayalam,
+        kannada,
+        kidz,
+        international,
+      ]
+    notes: 'Australia’s and New Zealand’s All Access, on 2 devices.'
+    prices:
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 14.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 54.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 54.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.kidz
+    name: 'KidZ'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [kidz]
+    notes: 'Premium kids’ programmes, with live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.kidz-2-devices
+    name: 'KidZ (2 devices)'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 2 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [kidz]
+    notes: 'KidZ on 2 devices, as the UK, the euro countries, Australia and New Zealand sell it.'
+    prices:
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 2.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 2.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 2.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 2.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 2.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 2.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 24.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 24.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.hindi-punjabi-bhojpuri
+    name: 'Hindi, Punjabi & Bhojpuri'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [hindi-punjabi-bhojpuri]
+    notes: 'A language pack: Hindi, Punjabi & Bhojpuri films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.tamil
+    name: 'Tamil'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [tamil]
+    notes: 'A language pack: Tamil films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.telugu
+    name: 'Telugu'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [telugu]
+    notes: 'A language pack: Telugu films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.marathi
+    name: 'Marathi'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [marathi]
+    notes: 'A language pack: Marathi films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.bengali
+    name: 'Bengali'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [bengali]
+    notes: 'A language pack: Bengali films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.malayalam
+    name: 'Malayalam'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [malayalam]
+    notes: 'A language pack: Malayalam films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+  - id: zee5.kannada
+    name: 'Kannada'
+    link: https://www.zee5.com/global/myaccount/subscription
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+    inferred:
+      streaming.concurrent-streams:
+        reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
+        page:
+          name: Terms of use
+          url: https://www.zee5.com/global/termsofuse
+        lastVerified: 2026-11-09
+      streaming.download-devices:
+        reason: 'Subscribers can download on its Android and iOS apps, on no stated number of devices, so at least one.'
+        page:
+          name: 'How can I download videos on Zee 5?'
+          url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its privacy policy names a Kids Profile beside your own, without saying how many profiles an account has, so at least two.'
+        page:
+          name: Privacy policy
+          url: https://www.zee5.com/global/privacypolicy
+        lastVerified: 2026-11-09
+    perks: [kannada]
+    notes: 'A language pack: Kannada films, series, TV shows and live TV.'
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 82.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/myaccount/subscription,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its global Terms of Use ("Last Updated: September 11, 2026", Z5X Global
+# FZ LLC's), its privacy policy's part for users outside India (the part for India's users is ZEEL's, not rated), its
+# help centre's articles on renewal, upgrades and downloads, and its sign-in page, which signs you up too. Its
+# "Preferences" and "Do not Sell or Share my Personal Information" links open a consent manager behind the sign-in, not
+# read: it asks you to sign in. Its terms say an account's username is "by using Your mobile number"; the global sign-up
+# form takes a mobile number or an email address (Edge showed it email only once), and the form is what's rated. Its
+# terms make what you post (comments) Z5X's: content rights aren't a streaming topic, as for the other streaming
+# services, so no notable.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://www.zee5.com/global/termsofuse
+    - name: 'Privacy policy'
+      url: https://www.zee5.com/global/privacypolicy
+    - name: 'Sign up'
+      url: https://www.zee5.com/global/signin
+    - name: 'Plans'
+      url: https://www.zee5.com/global/myaccount/subscription
+    - name: 'How to manage auto-renewal'
+      url: https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+    - name: 'Upgrade to a yearly All Access subscription'
+      url: https://helpcenter.zee5.com/portal/en/kb/articles/upgrade-to-a-yearly-all-access-subscription
+    - name: 'How can I download videos on Zee 5?'
+      url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use ZEE5 and its ads, and what devices you use. To stop it, you email it to withdraw your consent.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'We collect information about you and your use of our service, your interactions with us and our advertising, as well as information regarding your computer or other device used to access our service (such as smart TVs, mobile devices, tablets, and certain streaming devices).'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Withdrawing Consent: For withdrawing your consent at any time during your tenure with us, you may choose to do so by sending us an e-mail.'
+      action:
+        name: 'How to withdraw your consent'
+        url: https://www.zee5.com/global/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Using ZEE5 counts as agreeing to it sharing your information with other companies for marketing and ads. To stop it, you email it.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'By using ZEE5 you also consent to sharing of your Personal Information with third parties for marketing and advertising purposes.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Withdrawing Consent: For withdrawing your consent at any time during your tenure with us, you may choose to do so by sending us an e-mail.'
+      action:
+        name: 'How to withdraw your consent'
+        url: https://www.zee5.com/global/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'Ad companies show you ads picked from what you do. You can turn that off in your account’s Preference Centre; you still see ads, just not picked for you.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'We use third-party advertising companies to serve personalised advertisements when you visit or use our website, mobile application or services.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'you can turn off behavioural advertisement anytime by visiting the Preference Centre'
+      action:
+        name: 'Preferences'
+        url: https://www.zee5.com/global/consent-manager
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say whether what you write or upload trains AI.'
+      pages: [https://www.zee5.com/global/privacypolicy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and gives no time limits.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'We retain your personal information for as long as necessary.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask by email to delete your account, with no stated time. If you still have a plan, it ends at once with no refund.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'You/Users can request for account deletion by writing an email to dpo@zee.com.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Users with an active subscription plan: Erasure of your information from the Platform will result in Your active subscription being terminated without any refunds.'
+      action:
+        name: 'How to ask for deletion'
+        url: https://www.zee5.com/global/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy names a right to a copy of your data only in the UK and Europe.'
+      pages: [https://www.zee5.com/global/privacypolicy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In the UK and Europe you can ask for your data and for it to be passed on, as the law allows.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'request access to your personal data; request correction of your personal data; request erasure of your personal data; object to processing of your personal data; request restriction of processing your personal data; and request transfer of your personal data.'
+      action:
+        name: 'How to ask for your data'
+        url: https://www.zee5.com/global/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over your information when a court or a government legally requires it, and says nothing more.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'In the event of any requirement by court order, government, or quasi-government agency to disclose your Personal Information, we will disclose information as may be legally required.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'It can send your information to companies anywhere in the world, with only “reasonable steps” to protect it.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'We operate globally and may transfer your personal information to individual companies, its affiliated companies or third parties in locations around the world for the purposes described in this privacy policy.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Wherever your personal information is transferred, stored or processed by us, we will take reasonable steps to safeguard the privacy of your personal information.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with a mobile number or an email address and a one-time code, and say you’re over 18; a plan takes your payment details.'
+      sources:
+        - url: https://www.zee5.com/global/signin
+          quote: 'Scan the QR code or enter mobile number or email to log in'
+        - url: https://www.zee5.com/global/signin
+          quote: 'Verify using OTP'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: good
+      reason: 'It isn’t meant for anyone under 18, deletes children’s information collected without a parent’s consent, and shows no targeted ads on Kids Profiles.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Our services are intentionally not designed for or directed at persons less than 18 years of age.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'If Company becomes aware that any PII of persons less than 18 years of age has been collected by the Company without verified parental consent, then Company will take the appropriate steps to delete any such information and notify the parent.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'ZEE5 does not show or allow any form of personalized or targeted advertising within the Kids Profile.'
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it keeps its security measures up to date: no outside audit, certification or way to report a security flaw is named.'
+      sources:
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'We are continuously implementing and updating administrative, technical, and physical security measures to help protect your information against unauthorized access, loss, destruction, or alteration.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can turn off renewal online at any time, after a page asking you to stay.'
+      sources:
+        - url: https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+          quote: "Before you go, here's a quick look at what's waiting for you on Zee 5. If you still want to cancel, the steps are at the end of this article."
+        - url: https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+          quote: 'Choose Cancel Renewal and confirm'
+      action:
+        name: 'How to cancel renewal'
+        url: https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: bad
+      reason: 'It never refunds a payment, whatever happens, even one an app store takes after you’ve deleted your account.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Payments once made by credit card or debit card or net banking or cash cards or via any other mode available shall not be refunded in any circumstances.'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Under such circumstances, if Z5X receives any payments through Your auto-recurring payment method, You will not be entitled to any refunds whatsoever.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: bad
+      reason: 'It can change its prices at any time, with or without telling you.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Further, Z5X reserves the right, at any time, with or without notice and without any liability to:'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: '(v) modify the prices for Subscription Packages or any part of Zee 5 service.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its plan page offers no free trial and its terms describe none; its privacy policy only mentions checking who can have one.'
+      pages:
+        - https://www.zee5.com/global/myaccount/subscription
+        - https://www.zee5.com/global/termsofuse
+        - https://www.zee5.com/global/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help centre don’t say it reminds you before a plan renews.'
+      pages:
+        - https://www.zee5.com/global/termsofuse
+        - https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price.'
+      pages: [https://www.zee5.com/global/termsofuse]
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'You can upgrade at any time and pay only the difference; a cheaper plan waits until yours ends.'
+      sources:
+        - url: https://helpcenter.zee5.com/portal/en/kb/articles/upgrade-to-a-yearly-all-access-subscription
+          quote: 'Yes. You can upgrade at any time. The cost is adjusted based on the value remaining in your current subscription.'
+        - url: https://helpcenter.zee5.com/portal/en/kb/articles/upgrade-to-a-yearly-all-access-subscription
+          quote: 'Downgrades are not available during an active subscription. You can choose a different plan after your current plan expires.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of Mumbai, India, not to a private referee, and you can’t join a class action.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'YOU AND Z5X AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'courts of Mumbai, India shall have exclusive jurisdiction over all disputes arising in connection with these Terms of Use.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'New terms take effect as soon as it changes them, and it doesn’t have to tell you.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'The Updated Terms of Use shall be effective immediately and shall supersede these Terms of Use.'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Z5X shall not be under an obligation to notify You of any changes to the Terms of Use.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or close your account for any reason, without telling you, and give no money back.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Z5X reserves the right, in its sole discretion, to suspend or terminate Your access to all or any part of ZEE5, for any reason, with or without notice.'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'You agreed that upon suspension or termination, no amount shall be refunded to You by Z5X.'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or end ZEE5, with or without telling you, and says it owes you nothing when it does.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Z5X reserves the right to modify or discontinue Zee 5 at its sole discretion with or without notice to You.'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'Z5X shall not be liable to You or any third party in any manner, should Z5X exercise its right to modify or discontinue the ZEE 5.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.zee5.com/global/termsofuse]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid letting anyone else benefit from your ZEE5, and you may use it only on devices you alone control, though its privacy policy expects you may let others set up profiles.'
+      sources:
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'You shall not permit any third party to benefit from the use or functionality of Zee 5, either directly or via any facility management, timesharing, service bureau or any other arrangement.'
+        - url: https://www.zee5.com/global/termsofuse
+          quote: 'You shall only use the Zee 5 on Device that is under Your exclusive control and ownership.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Please note that if you allow others to use your account (including others you permit to set up profiles under your account)'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads work only in its Android and iOS apps, and last up to 30 days.'
+      sources:
+        - url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+          quote: 'Downloads are available only on the Zee 5 Android and iOS apps.'
+        - url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
+          quote: "Up to 30 days, as long as you don't uninstall the app or clear its cache."
+      lastVerified: 2026-11-09

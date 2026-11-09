@@ -1,0 +1,244 @@
+url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+method: fetch
+saved: 2026-11-09
+
+Help and Feedback
+VIP rights
+More
+How to calculate the membership validity period?
+The duration of iQIYI's non-recurrent monthly, quarterly, and yearly subscriptions (including VIP gift cards) are based on calendar months, quarters, and years.
+Auto-renewing recurrent monthly, quarterly, and yearly subscriptions are charged on a calendar month, quarter, and year basis, with the validity of each period aligning with the billing cycle.
+I have purchased a membership, but it shows that I am not a member.
+1. Please check whether you have logged in with the correct membership account;
+2. Please check whether the payment transaction has completed successfully;
+3. If you use Google/Apple Pay, the activation time might have some delay time. Please wait for a moment and check it again later;
+4. If you are an iOS user, please check whether you have purhcased a membership without logging in;
+If you are still unable to obtain membership privileges, please submit your issue on the devices that you used to purchase the membership and provide a screenshot of purchase record. Our customer service staff will check it for you according to the information you submitted.
+Why has my VIP expired?
+Please check the following:
+1. VIP has expired as normal: Please check the type of the VIP package you have purchased. If you have purchased a non-subscription type, your VIP will not be automatically renewed at the expiry date.
+2. VIP has expired because you have applied for a refund after purchasing VIP: Please check the details of your transaction. If you have requested a refund for the previous transaction, your VIP status will be changed to expired.
+3. We suggest you check if you have logged in to the right VIP account.
+4. A delay in VIP status update due to network latency. We suggest you wait for a moment and log in again to check.
+If none of the above situations apply, please log in to your account and submit a feedback report within the iQIYI app. We are more than happy to assist you. Here are the ways to submit feedback on different platforms:
+Mobile App: "Me" - "Help and Feedback" - "Feedback"
+Web Browser: Bottom of the page, click on "Support & Help" - "Help and Feedback" - "Feedback"
+TV App: "Settings" - "Feedback" or "Functions" - "Feedback"
+Why does the page show that I am not a member after my money has been deducted from my apple ID?
+1. It is recommended that you verify whether you are logged in to the correct member account;
+2. Please confirm whether you have purchased membership without logging in. If you confirm that you purchased membership without logging in to iQIYI, please click on the personal homepage in the APP [Me]-[Help and Feedback]-[Feedback]. Select the corresponding question to submit help feedback telling of the problem you encountered and provide the transaction voucher and a mobile phone number that you have not registered/bound, and the customer service staff will help you with the query based on the information you provide.
+You can find your payment history by following these steps:
+Method 1: App Store - Tap on the profile icon in the top right corner - Tap on your Apple ID - Purchase History - Total Bill.
+Method 2: Settings - Tap on your Apple ID - Media & Purchase - View Account - Purchase History - Total Bill.
+Why can't I watch VIP content even though I am a VIP?
+Please check the following:
+1. The membership status: Check whether the current membership account is activated.
+2. Account Malfuction: [Standard VIP Member] can watch VIP content on two devices at the same time; [Premium VIP Member] can watch VIP content on four devices at the same time; If your account is used by multiple devices, please manage the devices through [Setting]-[Account and Security]-[Device Management] in your mobile APP.
+3. Prompt for playback errors: Please submit [Feedback] on the playback page and provide the specific titles/episode so that we can solve it for you as soon as possible.
+Payment
+More
+What payment methods are supported?
+At this moment, payment via bank card/Google/Apple is available on iQIYI. We are developing more payment methods, stay tuned!
+1. You can use Google（Android）/Apple（iOS） to purchase on mobile APP. The specific payment methods available on Google/Apple depend on Google Store/Apple Store.
+2. You can use bank card to purchase on PC Website.
+Please refer to the actual purchase page of your area for the specific payment methods available.
+3. TV App:
+If you are accessing via Apple TV, please follow the prompts to purchase using your logged-in Apple account.
+If you are accessing via Android TV, please follow the prompts to purchase with your Google account.
+If you visit us via Roku TV, Roku Pay is the only available payment method there.
+How to join the VIP membership?
+Mobile App:
+There are two ways to visit the VIP page:
+Click the golden “VIP” icon on the top navigation bar, or you can check the VIP privileges in the VIP column on the homepage and click “Join Now” to select and purchase the type of VIP you want.
+You can use Google（Android）/Apple（iOS） to purchase on mobile APP. The specific payment methods available on Google/Apple depend on Google Store/Apple Store.
+PC Website (iq.com):
+Please click the golden “VIP” icon on the navigation bar in the upper right corner and complete the purchase following the popup window.
+You can use bank card to purchase on PC Website.
+Please refer to the actual purchase page of your area for the specific payment methods available.
+TV App:
+If you visit via Apple TV or Android TV, use the remote controller to open the side bar and click "Me" - "My membership", and you can choose the type of VIP there. Please follow the steps as prompted and use your logged-in Apple/Google account to make your purchase.
+If you visit us via Roku TV, please use the remote controller to open the side bar and click “Me” where you will see the option “My VIP”. By clicking “My VIP”, you can see the type of VIP available on Roku TV. Follow the instruction on TV screen to complete your purchase using Roku Pay.
+Note: The VIP subscription is linked to the account you logged in when purchasing. You cannot transfer the VIP to another account after purchasing.
+What should I do when my payment failed?
+Please check if you have enough balance in your payment account first.
+Google/Apple：
+1. If you cannot jump to the payment page, we suggest you try again after updating the version of Google/Apple Store. If the problem is still unsolved, we suggest you submit it in “Help and Feedback” - "Feedback" in the App with your frequently used email address. We will handle it for you via email reply.
+2. If you cannot complete the payment on the payment page, we suggest you consult the customer service of Google/Apple.
+Bank card payment:
+1. Please check if your bank card information is correct and whether there is an international payment limit.
+2. If you were notified that this was a risky transaction when purchasing, maybe the reason is that you have tried to pay too many times today. We suggest you try again after 24 hours.
+If the payment fails again, we suggest you submit your problem with the screenshot of failed payment via “Feedback”.
+How to redeem the VIP voucher code?
+1. Website: Visit https://www.iQ.com/vip/codekey using mobile browser or laptop/desktop browser.
+2. You need to log in to your iQIYI account before redeeming to ensure that the VIP privilege will be received by the right account.
+3. Please read the instructions on the redeem page carefully. If you have other questions, please contact the customer service and we will be very willing to help you.
+Friendly reminder: When entering the activation code, there is no need to include the hyphens ("-") from the code. Also, please ensure that you enter the code exactly as it is, with correct uppercase and lowercase letters as the code is case-sensitive.
+Why it says my voucher code has already been redeemed?
+Your activation code cannot be redeemed under the following circumstances:
+1. The activation code has been redeemed: An activation code can only be redeemed once. If you have already entered the code, please check whether the membership has taken effect in the correct account;
+2. The activation code is expired: If your activation code is expired, it cannot be redeemed. It is recommended that you contact the provider of the activation code for further information.
+Automatic renewal
+Why was my account charged automatically?
+If you have selected the automatic renewal service or automatic renewal service package when purchasing VIP earlier, automatic renewal service is included in your VIP account.
+Since your automatic renewal has not been canceled in time, you will be charged 24 hours prior to the corresponding renewal dates of every week/month/season/year.
+How to cancel the automatic renewal?
+Paid using Apple
+Method 1: Please select "Settings" in the iOS device - go to "Settings" and click on "Apple ID" - "Subscription" - click on the option that you need to cancel the auto-renewal service.
+Method 2: "App Store" click on "Apple ID" at the top of the screen - under "Subscription," click on "Management" - cancel the subscription service.
+If you cannot cancel it yourself, you can also contact the Apple customer service for help.
+Paid using Google Play
+1. Open “Play Store” on your Android phone. You need to log in the Google account you used for purchase.
+2. Click the upper left corner of the main page or the profile picture to open the full menu.
+3. You can view all the subscriptions in “Payments and subscriptions” – “Subscriptions”. Click “Manage” in the lower right corner of the subscription list – select “Cancel subscriptions”.
+4. The service expiry date will appear on the screen. Select “Cancel subscriptions” to cancel the subscription.
+If you cannot cancel it yourself, you can also contact the Google Play customer service for help.
+Paid by bank card and other payment methods
+(1) PC Website:
+1. Please click to visit https://www.iq.com/ and log in to your VIP account.
+2. Click the profile picture in the upper right corner – “My Account”, scroll down and click the “Change” on the right of “Manage Subscription” to manage your subscription.
+(2) Mobile App:
+1. You can manage automatic renewal of your account as follows: Click【Me】-【Help and Feedback】-【Self service-Manage Subscription】
+Paid using third-party platforms
+If you have purchased the VIP on third-party platforms, please contact the third-party platform to cancel the subscription.
+Please note: Please cancel your subscription at least 24 hours prior to the renewal date, otherwise your subscription may be renewed.
+After automatic renewal, the page shows that my membership expires.
+1. Deduction failed: please check your account deduction information and verify whether the deduction is successful.
+2. Network delay results in a delay of activating VIP privileges, please wait for a moment for another login.
+3. Please verify whether you log into a correct member account.
+If not applicable, please submit [Help and Feedback] - [Feedback] in the app. Afterwards, the customer service staff will reply to you by email.
+Will I remain a VIP member after canceling the automatic renewal?
+If you have successfully canceled the renewal, you can use your current VIP normally until its expiry. After the VIP expiry, the system will not automatically renew it for you. You will not be a VIP member or able to enjoy the VIP privileges anymore. However, you can still enjoy all our free content.
+We strongly suggest you join our VIP again to watch VIP content, skip ads and enjoy more VIP privileges.
+Account
+More
+How to link email/phone number?
+For your account security, we suggest you link the email or phone number you frequently use. You can link your email/phone number following the steps below:
+1. iQIYI mobile App: Enter iQIYI mobile App, log in to your account and click “Me” – “Settings” – “Account and Security” to manage your email address and phone number.
+2. iQIYI PC Website (iq.com): Visit https://www.iq.com/ in your web browser, log in to your iQIYI account then click Profile picture – “My Account” to manage your email address and phone number.
+*Note: If you need to use the linked phone number/email + password to log in, you can manage your account password following the steps below: Enter iQIYI and log in to your account – click “Settings” – Select “Account and Security – Set the phone number/email – “Password management”.
+How to change linked email/mobile number?
+1. iQIYI mobile user: Open the iQIYI APP on your mobile device, log in your account and click the [Me] - [Settings] - [Account and Security] to
+manage your email and mobile number;
+2. iQIYI web brower user (iq.com): Visit https://www.iq.com/ on a computer, log in to your iQIYI account and click your [Profile] - [My Account] - [Account and Security] to manage your email and mobile number.
+How to delete my account?
+*Please note that after deleting your account, your personal information, VIP privileges etc. will be erased right away and the deleted account cannot be recovered. If you do not need to use our App for the time being, we suggest you cancel the renewal instead of deleting the account.
+If you need to delete the account, you can do it yourself following the steps below:
+PC Website (iq.com): Profile picture – “My Account” – “Delete account”
+Mobile App: “Me” – “Settings” – “Account and Security” – “Delete account”.
+If you have any problem, we suggest you submit it via “Feedback” in the App and we will handle it for you via email reply.
+Where can I find my UID?
+You can find your unique User ID after log in to your iQIYI APP through mibile device, and then click [Me] - [Profile Picture]. Your "User ID" is located at the bottom of the page.
+How to change the account password?
+1. If you forgot your password, please click [Recover Password] on the login page and recover your password through the linked email/mobile number;
+2. If you need to modify your password after login, you can change it using one of the following methods:
+iQIYI mobile user: Please log in to your account and click [Me] - [Settings] - [Account and Security] - [Password Management] to change your password.
+The iQIYI web brower user (iq.com): Please log in to your account and click the [Profile] - [My Account] to change your account password.
+Activity
+VIP Promotion
+Please refer to the real-time display in the iQIYI app for the VIP promotion event.
+Some promotions may be limited to new users or specific time periods. Please carefully read the promotional VIP package prices and renewal terms before subscribing.
+FAQ:
+1. Does the promotional VIP package include an auto-renewal service?
+When you purchase VIP, the VIP package you choose will show whether it includes the auto-renewal service and the associated renewal terms.
+2. What happens to my VIP membership period and auto-renewal if I purchase a promotional package while my current VIP is still active?
+① Under the same account, if you purchase a VIP while your existing VIP is still valid, the remaining VIP will be automatically extended. When you have multiple types of VIPs at the same time, the VIP with a higher level will be prioritized for consumption.
+（*Due to system restrictions with certain payment methods (e.g. Apple/Google), recurring purchases may trigger automatic processing of previous orders per platform policies. Please refer to actual payment confirmation for final validation.）
+② Even if you have purchased a new promotional VIP package, the previous automatic renewal will not be automatically turned off. If you do not cancel the automatic renewal you activated previously, it will cause you to still be charged.
+③ Even if the promotional VIP package you purchased includes auto-renewal service, it will not affect any previously activated auto-renewal services that are currently in effect.
+④ If you enable multiple auto-renewal services under your iQIYI account using different payment methods, your VIP service may automatically renew for different billing cycles through each payment method.
+To avoid this, please check and manage your auto-renewal in iQIYI APP as follows: Click【Me】-【Help and Feedback】-【Self service-Manage Subscription】
+3. Why do I see different promotional prices on the webpage/TV app/mobile app?
+Promotional offers may vary across different platforms, which is why you might see different promotional prices. Please refer to the information displayed in iQIYI.
+4. I selected the promotional VIP package, but why does it show the full price when I pay?
+Due to restrictions on some payment methods, you may be unable to participate in the promotion. You may try switching to the iQIYI website (https://www.iq.com/) or using a different payment method to make the purchase. We recommend that you check the order price before confirming payment. Please refer to the actual payment for the specific price.
+If I purchase the promotional package, what will happen to the VIP membership I purchased previously?
+Please do not worry,
+Under the same account, if you purchase a membership while your existing membership is still valid, the remaining membership will be automatically extended. When you have multiple types of memberships simultaneously, the higher-level membership will be prioritized and consumed first.
+**Due to system restrictions with certain payment methods (e.g. Apple/Google), recurring purchases may trigger automatic processing of previous orders per platform policies. Please refer to actual payment confirmation for final validation.
+I have purchased the promotional package. Why was I charged again?
+The promotional package you purchased will not affect the subscription renewal already on your account.
+Even if you have purchased a promotional package, you will be charged within 24 hours before the corresponding renewal date if you have not previously turned off the auto-renewal.
+Please refer to the frequently asked question 【How to cancel the automatic renewal?】 for renewal management issues.
+Friend referral rules
+1. Any user who logs into an iQIYI account is qualified for "Friend Referral Rewards".
+2. You can obtain your dedicated link by clicking [Friend Referral Rewards]- [Invite Now] on your homepage“Me”
+3. A member can be successfully referred by sharing the link with your friend and inviting him/her to download and register an iQIYI account via the link.
+4. Please note: your friend should be a user that downloads the iQIYI APP and register an account for the first time.
+Why did I not get the VIP after referring it to my friend?
+Please check:
+1. Whether this is your friend’s first time registering an account.
+2. Whether your friend has downloaded the APP and registered an account via your referral link.
+3. Whether your friend has received the referral awards before. If the account or device of your friend has received the referral awards via other people’s referral, you cannot receive the referral awards.
+4. If you meet the three previous criteria, we suggest you restart and re-enter the APP to check if you have received the awards.
+If you still have not received the VIP, we suggest you send the following information to contactus@qiyi.com and we will check it for you using the information you provide.
+1. The account UIDs of you and your friend
+2. The APP downloading source of your friend
+3. Your sharing link
+4. The time of your referral and your friend’s download
+Playback
+More
+What should I do when there is an error message on the playback page?
+Please clear cache, restart the playback platform, keep the network connection stable and try again. If the playback is still unavailable, please send feedback with the specific name and episode number of the series and screenshots on the playback platform.
+Here are the ways to submit feedback on different platforms:
+Mobile App: "Me" - "Help and Feedback" - [Feedback]
+Web Browser: Bottom of the page, click on "Support & Help" - "Help and Feedback" - [Feedback]
+TV App: "Settings" - "Feedback" or "Me" - "Customer Support"
+The client plays no sound?
+1. No sound while online play: please try it after the network is kept stable. If the problem persists, please submit feedback in the app and please provide a screencapture of the specific series, episode, and the issue you are experiencing;
+2. No sound while offline play: please try it again after you have deleted the downloaded video. If the problem persists, please submit feedback in the app and please provide a screencapture of the specific series, episode, and the issue you are experiencing;.
+What should I do when the playback page is buffering?
+Mobile App: Please try clearing the cache within the settings of the app. Here's how you can do it: go to "My" - "Settings" - "Clear Cache" within the app. After clearing the cache, restart the app and ensure a stable network connection before using it again.
+PC Website: Please try to refresh the playback page after clearing cache, or please try to turn the network device (router) off, re-connect to the network, enter the iQIYI website and log in to your account to use again.
+TV App: We suggest you turn the power of the TV and the network connection off, restart and try again.
+If these cannot solve your problem, please log in to your account and submit a feedback report within the iQIYI app. We are more than happy to assist you. Here are the ways to submit feedback on different platforms:
+Mobile App: "Me" - "Help and Feedback" - "Feedback"
+Web Browser: Bottom of the page, click on "Support & Help" - "Help and Feedback" - "Feedback"
+TV App: "Settings" - "Feedback" or "Me" - "Customer Support"
+How to submit [Feedback]?
+Here are the ways to submit feedback on different platforms:
+Mobile App: "Me" - "Help and Feedback" - "Feedback"
+Web Browser: Bottom of the page, click on "Support & Help" - "Help and Feedback" - "Feedback"
+TV App: "Settings" - "Feedback" or "Me" - "Customer Support"
+Please select the right category for the issue you are facing. In the description, give as much detail as possible about the problem and include relevant information. Lastly, provide your frequently used email address (phone numbers are not supported currently). Our customer service team will email you a solution within 3-7 business days.
+What should I do when the client page flashes back/cannot be loaded?
+1. Network: restart the APP and try to open the page again after switching to more stable network connection.
+2. Installation package: please download the latest formal APP through Google Play or Apple Store.
+Download
+More
+How to download videos?
+Mobile App:
+1. You can click “Download” on the half screen playback page to choose the episodes and resolution you want to download.
+2. Please click the lower right corner to enter the full screen playback mode and click the “Settings” icon in the upper right corner, then click “Download”.
+*You can click “Download” at the menu bar at the bottom of the homepage to view your downloaded videos.
+PC Website/TV App:
+At this moment, downloading videos is not available. Please watch the videos online. You are welcome to download iQIYI App on your mobile phone and watch videos anytime.
+What if the downloaded video cannot be played?
+1. Playback error: Please restart the client, and download the video using WIFI after the cached video has been deleted. If the issue persists, please submit a feedback in the app and give the specific name for the drama that the issue has occurred on, the episode, as well as a screencapture;
+2. VIP privileges expired: Due to copyright protection policies, the member-exclusive videos you have downloaded can only be viewed using your membership account. If your membership has expired, the previously downloaded member-exclusive videos will also be unavailable for playback.
+What if the downloaded video has no subtitles?
+You can switch subtitles at the bottom of the full-screen playback page of the video.
+If there are still no subtitles available, we recommend deleting the previously downloaded videos and using Wi-Fi to re-download them.
+If the issue persists, please submit a feedback in the app and give the specific name for the drama that the issue has occurred on, the episode, as well as a screencapture;
+What if the downloaded videos have no sound?
+Please try it again after you have deleted the downloaded video. If the problem persists, please submit feedback in the app and provide the specific title and episode.
+Why can't I successfully download the video?
+Video download is linked to network conditions. Please try it again after switching network and check whether the storage space is enough.
+If the issue persists, please submit a feedback in the app and give the specific name for the drama that the issue has occurred on, the episode, as well as a screencapture;
+Subtitle
+How to change the subtitles?
+You can choose the language you want by clicking “Subtitles” at the bottom of the full screen playback page.
+If there are no corresponding subtitle options available, we recommend referring to the frequently asked questions section related to subtitles, specifically the questions "After I chose the subtitles, why are there no corresponding subtitles displayed?" and "Why are there no subtitles I want?"
+After I chose the subtitles, why are there no corresponding subtitles displayed?
+You can change the language of the subtitles by clicking the “Subtitles” at the bottom of the full screen playback page.
+If you chose the subtitles that cannot be displayed, please send feedback on the playback platform with the drama title, episode number and screenshot of the issue that you are currently facing.
+Why are some variety shows without subtitles?
+Due to some variety shows cannot use AI translation, subtitles cannot be provided temporarily, and we are working hard to solve it. We apologize for the inconvenience, please watch other available content. And we encourage you to submit feedback in the app and provide the name of the variety show without subtitles, and we'll solve it as soon as possible.
+Why are there no subtitles I want?
+You can choose the language you want by clicking “Subtitles” at the bottom of the full screen playback page. If there are no corresponding subtitle options available, it could be due to subtitles being under production or the language subtitles you desire are not supported for the movie you are currently watching.
+You can submit your needs via feedback. We value your feedback a lot and will relay it to the relevant department.
+Feedback
+Loading...
+请输入文字进行搜索
+网络异常
+服务端异常
+Copy successfully

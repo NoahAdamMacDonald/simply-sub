@@ -58,8 +58,11 @@ API contract's prices are illustrative and never a source. This skill is how to 
   `retired: <date>` with its last prices kept, and `endsOn` when it ends for its subscribers too; one whose
   subscribers move to another plan gets a dated entry in `data/redirects.yaml`. Ask the user before retiring or
   redirecting anything. `npm run data:validate` fails when a published id disappears.
-- **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
-  asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
+- **Every interval and every price list the provider sells.** That means every billing period it sells (a month, 3
+  months, 6 months, a year, a week, as each is stated), each priced only in the regions that sell it (ZEE5's 3-month
+  plans are the UK's and the euro countries': the owner's rule of 2026-11-09), every region in scope (the catalog's
+  regions, or GLOBAL), and every currency the buyer can pick. The app offers an item only the periods priced where
+  it's bought (`pickPrice`'s one source region), so a period one country sells never shows in another.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
   to `data/features.yaml` ids; anything else is a perk (M11.6): listed once in the provider's `perks` with an id and
   its words as the name (`{ id: fortnite-crew, name: Fortnite Crew }`), and by id on the plans that have it. A perk's
@@ -106,7 +109,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **The owner and outside ratings** (M11.2), by the policy-research skill's rules: the company behind it (every
     provider needs one), and for an antivirus or a news outlet the raters in `data/raters.yaml`.
   - **Every way to pay** (`paymentMethods`, required of every provider): its payment methods help article, pricing
-    page or terms, for cards, PayPal, Apple and Google Pay, Klarna, Satispay, Cash App, app stores and platforms that
+    page or terms, for cards, PayPal, Apple and Google Pay, Klarna, Satispay, Cash App, Alipay, app stores and platforms that
     bill for it (Amazon's Prime Video channels), gift cards, a bank transfer or direct debit (iDEAL | Wero, Swish,
     Bancontact, GoCardless), cash, crypto and a TV, internet or phone provider's bill, each named in a quote. Read
     every country's own page when they can differ (Netflix's eleven, Disney+'s with the help centre's country picked):
@@ -305,7 +308,17 @@ which reads each page as a visitor there would, before any hand reading:
   the baselines that saved the wrong page, as for HBO Max. Its terms for each country are listed on
   wbd.com/discoveryplus/legal/terms-of-use, Europe's as PDFs: read them with `pdftotext -enc UTF-8 -layout` (curly
   apostrophes and accents come through), check quotes against that text, and delete the empty baselines the baseline
-  run saves for them. Canada's discovery+ is Rogers Sports & Media's (discoveryplus.ca), its own provider.
+  run saves for them. Canada's discovery+ is Rogers Sports & Media's (discoveryplus.ca), its own provider: its plan cards
+  are on secure.discoveryplus.ca/pricing (a crossed-out line is one the plan lacks: read the screenshot), and its help
+  centre (support.discoveryplus.ca) answers a plain fetch with 403 and reads in Edge.
+- **ZEE5's plans** (M11.15): zee5.com/global/myaccount/subscription prices by where the visitor is, and the same card
+  can have another device count in another country (All Access's 4, 3 or 2), so each country's cards are read through
+  its exit and a plan's features checked there too. Each card shows its own periods only once clicked (`click:` its
+  description, "Tamil Movies, Series, TV Shows, Live TV"); the pack names are images. Its help centre is India's.
+- **iQIYI's order page** (M11.15, iq.com/vip/order): some countries' cards show only one plan's, behind Standard and
+  Premium tabs (`nth:1:Standard`). Ireland and the Netherlands price in a bare "$", which the page's own data names
+  (`"currencyUnit":"USD"`); read it as part of the page. Its help centre's answers and its Security Response Center's
+  English (`#oversea`) are in the page but shown only when opened.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

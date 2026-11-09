@@ -82,7 +82,8 @@ export type AcceptedNetworks = z.infer<typeof acceptedNetworksSchema>;
 
 /**
  * The ways a provider can be paid (M11.5): cards, wallets, app stores, gift cards, a bank, cash and crypto. Klarna,
- * Satispay and Cash App are the wallets the 13's pages named beyond those (the owner's choice, 2026-11-03).
+ * Satispay and Cash App are the wallets the 13's pages named beyond those (the owner's choice, 2026-11-03), and Alipay
+ * iQIYI's checkout (M11.15, the owner's choice of 2026-11-09).
  */
 export const paymentMethodSchema = z.enum([
   'card',
@@ -92,6 +93,7 @@ export const paymentMethodSchema = z.enum([
   'klarna',
   'satispay',
   'cash-app',
+  'alipay',
   'app-store',
   'gift-card',
   'bank-transfer',

@@ -260,6 +260,12 @@ this file to them: change both together.
   first), amazon.ca's version, with its sign-in page for sign-up data. Rate each service's own terms beside it: Prime
   Video's Terms of Use are one document for every country (with Germany's price clause), and the Amazon Prime Terms
   and Conditions of Use are each store's (amazon.ca's send disputes to arbitration). Its help pages read in Edge.
+- The Rogers Privacy Policy, with its Mobile Application Privacy Policy, covers the Rogers Group:
+  `data/policies/rogers-privacy.yaml` (M11.15, discovery+ Canada first). Rate each Rogers service's own terms beside
+  it: discovery+ Canada's include Rogers' Acceptable Use Policy (on the same page) and its Arbitration Protocol (a PDF
+  from rogers.com/terms). The Digital Privacy Policy it names for cookies has no link on Rogers' pages.
+- ZEE5's privacy policy has two parts: the one for users outside India (Z5X Global's) is rated, the one for India's
+  users isn't. Its sign-in page signs you up too.
 - Netflix's help articles ask for a country; their text still loads.
 - CBC/Radio-Canada's general terms for its digital services (which ICI TOU.TV's subscription includes) load each
   answer only when its question is clicked: open each in Edge (`read-page.cjs`, `click:` by the question's text).

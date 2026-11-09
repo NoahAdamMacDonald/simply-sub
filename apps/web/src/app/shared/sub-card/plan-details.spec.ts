@@ -607,6 +607,29 @@ describe('PlanDetails', () => {
       expect([satispay?.getAttribute('role'), satispay?.tabIndex]).toEqual([null, -1]);
     });
 
+    it('draws Alipay by its mark (M11.15)', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const wallets = {
+        methods: ['alipay' as const],
+        regions: ['CA'],
+        page: 'Wallets in Canada',
+        url: 'https://mullvad.net/en/help/wallets-ca',
+        quotes: ['Alipay'],
+      };
+      await show(
+        'mullvad.vpn',
+        {},
+        { ...mullvad, paymentMethods: [...(mullvad.paymentMethods ?? []), wallets] },
+      );
+      await tab('Facts');
+
+      expect(payLines()).toEqual([['Card (networks not verified)', 'Gift card'], ['Alipay']]);
+      const alipay = Array.from(panel()?.querySelectorAll<HTMLElement>('.pay-chip') ?? []).find(
+        (chip) => chip.getAttribute('aria-label') === 'Alipay',
+      );
+      expect(alipay?.querySelector('svg path')?.getAttribute('fill')).toBe('currentColor');
+    });
+
     it('cites the page naming the currencies, linked to its words', async () => {
       await show('mullvad.vpn');
       await tab('Facts');

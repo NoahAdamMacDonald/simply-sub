@@ -1,0 +1,811 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 3, part 2): iQIYI's international service
+# (iq.com, iQIYI International Singapore's), read in Edge from Canada and through each other country's exit. Its order
+# page (iq.com/vip/order) prices by where the visitor is, a Standard and a Premium card each Monthly and Yearly, the
+# regular price struck through beside the first term's ("Subscription is renewed at C$119.99 after the discount ends"):
+# Canada in C$, the US in $, the UK in £, New Zealand in NZ$, Germany, France and Spain in €, and Ireland and the
+# Netherlands in US dollars (the page's own data: "currencyUnit":"USD"). Australia's and Italy's exits got the page
+# without its plans, through three exits each, so they're unread.
+# Region checklist, 2026-11-09: 1. one address for every country; 2. its language picker changes no prices; 3. the
+# page's own data names each country's currency; 4. the plan cards, never past "Log in to purchase"; 6. Edge, through
+# each country's exit.
+# Bundles: none on its pages. Resellers: none named; its footer's "VIP Reseller Application" is a form for shops to
+# apply.
+
+id: iqiyi
+name: iQIYI
+aliases: [iq.com, iqiyi international, aiqiyi]
+website: https://www.iq.com
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  { GLOBAL: USD, CA: CAD, US: USD, GB: GBP, NZ: NZD, IE: USD, NL: USD, DE: EUR, FR: EUR, ES: EUR }
+cancelUrl: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+sources: { pricing: https://www.iq.com/vip/order }
+notes: iQIYI's international service, with Asian dramas, films, variety shows and anime. Mainland China's iQIYI is a service of its own.
+# Accepted cards and ways to pay, read 2026-11-09 on the order page in every country read (its card names "MasterCard,
+# Visa, JCB"; Alipay beside PayPal in Canada, the US, Ireland and the Netherlands) and in its privacy policy (the app
+# stores' billing). Its help centre: "At this moment, payment via bank card/Google/Apple is available on iQIYI", and
+# Roku Pay on Roku TVs.
+acceptedNetworks:
+  GLOBAL:
+    networks: [mastercard, visa, jcb]
+    url: https://www.iq.com/vip/order
+    quotes:
+      - 'MasterCard, Visa, JCB'
+paymentMethods:
+  - methods: [card, paypal, alipay]
+    regions: [CA, US, IE, NL]
+    page: 'Join VIP'
+    url: https://www.iq.com/vip/order
+    quotes:
+      - 'Credit/Debit Card'
+      - 'PayPal'
+      - 'Alipay'
+  - methods: [card, paypal]
+    regions: [GB, NZ, DE, FR, ES]
+    page: 'Join VIP'
+    url: https://www.iq.com/vip/order
+    quotes:
+      - 'Credit/Debit Card'
+      - 'PayPal'
+  - methods: [app-store]
+    page: 'Privacy policy'
+    url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+    quotes:
+      - 'such as Apple App Store, Google Play Billing, and MasterCard'
+
+# Owner (M11.2), read 2026-11-09 on its investor site.
+owner:
+  name: 'iQIYI, Inc., a public company (Nasdaq: IQ)'
+  website: https://ir.iqiyi.com
+  page:
+    name: 'iQIYI investor relations'
+    url: https://ir.iqiyi.com/
+  quotes:
+    - 'iQIYI, Inc. (Nasdaq: IQ) (“iQIYI” or the “Company”) is a leading provider of online entertainment video services in China.'
+  country:
+    code: CN
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09 in its help centre ("you will be charged 24 hours prior to the corresponding
+# renewal dates of every week/month/season/year").
+renewalAnchor:
+  kind: same-date
+  page: Help and feedback
+  url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+  quotes:
+    - 'Auto-renewing recurrent monthly, quarterly, and yearly subscriptions are charged on a calendar month, quarter, and year basis, with the validity of each period aligning with the billing cycle.'
+  lastVerified: 2026-11-09
+
+# Apps (the cross-category features), read 2026-11-09: its footer's "Computer", "Phone", "TV" and "Web" apps (a
+# Windows PC app, the App Store and Google Play, Apple TV, Android TV and Roku in its help centre).
+features:
+  platforms: [windows, ios, android, tv, web]
+
+# Features, read 2026-11-09 on its VIP privileges page (iq.com/vip/privilege) and the order page's lists:
+# - streams: "Concourent watching on multiple screens": 1 free, 2 Standard, 4 Premium ("Standard VIP can access VIP
+#   content on 2 devices simultaneously. Premium VIP can access VIP content up to 4 devices simultaneously"), as its VIP
+#   terms ("two devices simultaneously in case of Standard VIP; c) four devices simultaneously in case of Premium VIP");
+# - quality: "720P", "1080P", "4K";
+# - ads: "VIP members can skip some pre-roll ads (ads shown in the player before content playback start), not including
+#   ads inserted in the video or other types of ads", so no plan is ad-free, though the page's heading says "without
+#   ads";
+# - HDR: Premium's list has "Dolby Audio + Dolby Vision" and Standard's "Dolby Audio" (Canada's, the US's, Germany's
+#   and Spain's order pages; Ireland's and the Netherlands' say "Dolby Cinema" for both); Dolby Audio isn't Dolby
+#   Atmos;
+# - downloads: "VIP Download" on both VIP plans ("The download privilege is unavailable for basic membership", its VIP
+#   terms), on no stated number of devices, so 1, inferred;
+# - no page names profiles or Kids profiles. Its VIP terms also name a "basic membership", which no order page sells.
+plans:
+  - id: iqiyi.free
+    name: Free
+    link: https://www.iq.com/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 1
+    notes: Its free shows, with ads.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.iq.com/vip/privilege
+  - id: iqiyi.standard
+    name: Standard
+    link: https://www.iq.com/vip/order
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+    inferred:
+      streaming.download-devices:
+        reason: 'Its VIP plans can download, on no stated number of devices, so at least one.'
+        page:
+          name: VIP privileges
+          url: https://www.iq.com/vip/privilege
+        lastVerified: 2026-11-09
+    notes: Skips some ads before a show starts, not those during it.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: IE,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: IE,
+          currency: USD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NL,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NL,
+          currency: USD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+  - id: iqiyi.premium
+    name: Premium
+    link: https://www.iq.com/vip/order
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+    inferred:
+      streaming.download-devices:
+        reason: 'Its VIP plans can download, on no stated number of devices, so at least one.'
+        page:
+          name: VIP privileges
+          url: https://www.iq.com/vip/privilege
+        lastVerified: 2026-11-09
+    notes: Skips some ads before a show starts, not those during it. 4K and Dolby Vision on selected titles and devices.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 119.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 119.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NZ,
+          currency: NZD,
+          amount: 149.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: IE,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: IE,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NL,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: NL,
+          currency: USD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its Terms of Service ("Last Updated: June 7th, 2024"), the Terms of VIP
+# Membership Service they include (updated October 18, 2024, which prevail for VIP), its privacy policy (English part,
+# "Updated on: November 6, 2026"), its help centre's answers (Edge shows them as you open each), the sign-up form on
+# the order page, and its Security Response Center (its bug bounty, in English at #oversea). Its Cookie Policy adds
+# no topic.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+    - name: 'Terms of VIP membership service'
+      url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+    - name: 'Privacy policy'
+      url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+    - name: 'VIP privileges'
+      url: https://www.iq.com/vip/privilege
+    - name: 'Join VIP'
+      url: https://www.iq.com/vip/order
+    - name: 'Help and feedback'
+      url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+    - name: 'Security Response Center'
+      url: https://security.iqiyi.com/#oversea
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you watch, search and do, and guesses your age, gender and tastes. You can turn off its personal picks in the app; for the rest you must ask it.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'We will automatically collect the information about your interaction with Our Services, including records of your browsing, playing, searching, bookmarking, scheduling, sharing, downloading, commenting, and advertisement interactions'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'We may speculate on certain information about you, including your age range, gender, channel preferences, and video album preferences.'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'You can contact us to request that We stop processing your personal information for specific purposes.'
+      action:
+        name: 'Your rights and how to use them'
+        url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Ad companies collect your information through iQIYI, and it gives LiveRamp an ID made from your email or phone. Opting out of LiveRamp is on LiveRamp’s own site.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'Our advertisement partners may collect some of your personal information through our platform, or We may share with them the information automatically collected by us'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'We will provide privacy protection identifiers to Liveramp, so as to better showcase suitable advertisement content to you.'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'We will not sell your personal information.'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'It shows you ads picked from what you do. You can turn that off in the app’s privacy settings; you still see ads, just not picked for you.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'In case you no longer want to receive personalized contents and advertisements, you can disable them at any time within the application through the following path'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'After you disable personalized recommendations, you will still see the advertisements and contents randomly recommended by us'
+      action:
+        name: 'How to turn off personalised ads'
+        url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy says your information helps improve its own machine learning, not whether what you write trains AI models used elsewhere.'
+      pages: [https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and gives no time limits.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'We only retain your personal information for the period necessary for providing Our Services and achieving the above-mentioned purposes.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself, on its website or in the app, and your information is erased right away.'
+      sources:
+        - url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+          quote: 'your personal information, VIP privileges etc. will be erased right away and the deleted account cannot be recovered.'
+        - url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+          quote: 'PC Website (iq.com): Profile picture – “My Account” – “Delete account”'
+      action:
+        name: 'How to delete your account'
+        url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can see some of your information in your account, and ask it for a copy of the rest.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'You can also contact us to request access, query, or copying of more of your personal information, and We will provide you with a copy of your personal information in electronic form.'
+      action:
+        name: 'How to ask for your data'
+        url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over your information when the law or a court order requires it, and is usually not allowed to tell you.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'In accordance with the applicable laws and regulations, or the valid legal procedural documents such as subpoenas, court orders, or search warrants, such disclosure may be made with or without your consent, or with or without notice, and We are generally prohibited from notifying you of such disclosure.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information is kept in Singapore, and its group’s companies and partners elsewhere may reach it, under protections it describes only in general terms.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'At present, our data center is located in Singapore, and We will transfer the collected personal information of you to our data center in Singapore for centralized storage and subsequent processing.'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: "IQIYI Group's affiliated companies and our third-party partners may be granted remote access to some of your personal information"
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In the UK and Europe, your information leaves only under the safeguards the law recognises, such as the EU’s standard contract terms.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'standard contractual terms are one of the appropriate protection measures approved by the European Commission and have also been approved by the UK and Switzerland.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address, a mobile number, Google or Facebook, and confirm you’re of legal age; a plan takes your payment details.'
+      sources:
+        - url: https://www.iq.com/vip/order
+          quote: 'Sign up with Email'
+        - url: https://www.iq.com/vip/order
+          quote: 'I confirm I am of legal age per laws of my residence, and I have read and agree to Terms of Service and Privacy Agreement'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to use it; younger people may use it only under a parent’s or guardian’s watch. It doesn’t say it keeps targeted ads away from them.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'you must be at least 18 years old to use Our Services.'
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: 'Minors shall read this Policy with the accompaniment and guidance of their legal guardians, and may use IQIYI services under the supervision of their legal guardians only after reading and accepting this Policy.'
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: good
+      reason: 'Its security is certified to ISO 27001 and other standards, and it pays researchers who report security flaws, but it publishes no audit reports.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+          quote: "The relevant information security management system involved in IQIYI's services has passed ISO/IEC 27001, ISO/IEC 29151, ISO/IEC 27701, and PCI DSS certifications."
+        - url: https://security.iqiyi.com/#oversea
+          quote: 'Security researchers are welcome to submit vulnerabilities and threat intelligence for iQIYI global products.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can turn off renewal online at any time and keep VIP until it ends, but at least 24 hours before it renews.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'you may cancel you auto-renewal subscription at any time by contacting the customer service provided in Section 10.1 or by yourself on iQIYI.'
+        - url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+          quote: 'Please cancel your subscription at least 24 hours prior to the renewal date, otherwise your subscription may be renewed.'
+      action:
+        name: 'How to cancel automatic renewal'
+        url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back once a payment goes through, unless iQIYI is at fault, but you keep VIP until the end of the time you paid for.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'each installment payment in respect of the Subscription Fee is non-refundable once successfully paid, unless we committed a breach of contract under this Agreement'
+        - url: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+          quote: 'If you have successfully canceled the renewal, you can use your current VIP normally until its expiry.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In the UK and Europe you can cancel within 14 days of buying for a full refund, if you haven’t watched anything.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: "If you are a subscriber in the European Economic Area (EEA) or the United Kingdom, you may cancel this Agreement within fourteen (14) natural days from the effective date of your subscription, and you will receive a full refund of the Subscription Fee paid for that subscription period, provided that you do not access or watch iQIYI's content or use any VIP Membership benefits through your account."
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before raising the price of a plan that renews by itself, without saying how far ahead, and you can turn renewal off first.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'If iQIYI adjusts the Subscription Fee when the Auto-Renew feature is enabled on your subscription, iQIYI will notify you by one or more reasonable means such as bulletin board and private message.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'If you do not agree to the adjusted auto-renewable Subscription Fee, you may cancel auto-renewal for your subscription as stipulated in this Agreement, and the term of your membership will terminate upon the expiration of the current membership service period.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A cheap first month or year renews at the full price when it ends, with your payment details, and no reminder is promised.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'any promotional price or discounted fees you enjoy shall only apply to the promotional period as notified to you by iQIYI.'
+        - url: https://www.iq.com/vip/order
+          quote: 'Subscription is renewed at C$119.99 after the discount ends.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help centre say it charges you 24 hours before the renewal date and don’t promise a reminder; its privacy policy lists expiry reminders only among messages it may send.'
+      pages:
+        - https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+        - https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+        - https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: good
+      reason: 'The price is all iQIYI charges. Your bank may add its own fees, such as for paying from abroad.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'you may be charged a specific fee by the relevant bank or payment institution, which may include cross-border transaction fees or other processing fees related to your payment.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'does not relate to fees collected by iQIYI.'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Buy Premium while on Standard and Premium starts at once, with your Standard time waiting until it ends; a cheaper plan starts after the dearer one.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'your VIP service terms will be consumed in the order of Premium VIP, Standard VIP, and basic membership.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'The end of the duration of your prioritized membership marks the start of the validity of subsequent memberships.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Either side can send a dispute to a private referee (an arbitrator) in Hong Kong, working in Chinese, and you can’t join a class action.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'Any party may also submit any dispute to the Hong Kong International Arbitration Center (HKIAC) for arbitration administrated under the HKIAC Administered Arbitration Rules in force when the notice of arbitration is submitted.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'The arbitration language shall be Chinese.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'each party may bring an action against the other party only in an individual capacity, and not as a plaintiff or class member in any purported class or representative proceeding.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'Changes to its VIP terms apply 15 days after it posts them. Its general terms change at once, with notice first only for changes that cut your rights.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'The modifications will become effective fifteen (15) days after the updated version is posted.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'We may modify this Agreement from time to time and the modifications to this Agreement will take effect immediately after modification.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'If these modifications to this Agreement, in our sole discretion, make substantial reduction or significant alteration upon your rights hereunder, we will notify you via announcement posted on our platform, pop-ups, or any other means by which you could reasonably obtain notice before the modifications take effect.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can cancel your subscription for any reason after telling you in writing, and nothing says you’d get money back; for a broken rule you get none.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'iQIYI may cancel your subscription to the Service upon written advance notice to you.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'you will not receive a refund of all or any portion of your Subscription Fee.'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change what VIP includes and remove shows, even downloaded ones, and says it isn’t liable for that. You can apply for compensation for a direct loss.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'If certain content is taken down, and even if you have downloaded or cached such content locally, you may not be able to watch such content.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'We shall not be liable to you or any third party for any change or termination of iQIYI Services.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'we will make reasonable compensation to you based on the confirmed actual and direct loss upon your application.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It can close an account that hasn’t been used for 180 days, without saying it warns you first.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'we have the right to suspend or permanently terminate, cancel or withdraw your account, interrupt or end the provision of further iQIYI Services to you without bearing any responsibilities:'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'Your account has not been used for 180 consecutive days;'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid letting anyone else use your account, though its VIP page calls it a shared account for the whole family.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'shall not transfer, lend, rent, sell, share or authorize in any way other person to use the account'
+        - url: https://www.iq.com/vip/privilege
+          quote: 'A shared account for the whole family to enjoy a vast library of content anytime and anywhere, without ads.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'An account works on up to five devices, and going over can get you logged out. It may limit downloads, without saying how.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'The same VIP account allows your use on up to five devices'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'limitations may be imposed on the download and offline viewing of Offline Titles'
+      lastVerified: 2026-11-09
+    - topic: other.notable
+      title: Guest purchases stay on one device
+      tier: neutral
+      reason: 'VIP bought in Apple’s App Store without signing in is tied to that device: lose, reset or replace it and the VIP is gone. Signing in before you buy avoids it.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'Because Apple App Store allows non-registered users to buy the iQIYI VIP Membership service in Guest Mode, the service will be bound to the device with which this service was purchased.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'If your device is lost, damaged, upgraded, restored, emptied or subjected to other similar situations, you may not continue to use the iQIYI VIP Membership benefits bound to this device, and you shall bear the losses incurred as a result.'
+      lastVerified: 2026-11-09
