@@ -3,8 +3,9 @@
 # page (iq.com/vip/order) prices by where the visitor is, a Standard and a Premium card each Monthly and Yearly, the
 # regular price struck through beside the first term's ("Subscription is renewed at C$119.99 after the discount ends"):
 # Canada in C$, the US in $, the UK in £, New Zealand in NZ$, Germany, France and Spain in €, and Ireland and the
-# Netherlands in US dollars (the page's own data: "currencyUnit":"USD"). Australia's and Italy's exits got the page
-# without its plans, through three exits each, so they're unread.
+# Netherlands in US dollars (the page's own data: "currencyUnit":"USD"). Australia's prices were read on 2026-11-09
+# through a Sydney exit (its first three exits got the page without its plans: "Subscription is renewed at A$149.99
+# after the discount ends"); Italy's exits, eight in all, still got it without its plans, so Italy is unread.
 # Region checklist, 2026-11-09: 1. one address for every country; 2. its language picker changes no prices; 3. the
 # page's own data names each country's currency; 4. the plan cards, never past "Log in to purchase"; 6. Edge, through
 # each country's exit.
@@ -18,7 +19,19 @@ website: https://www.iq.com
 category: streaming
 spendCategory: streaming
 billingCurrency:
-  { GLOBAL: USD, CA: CAD, US: USD, GB: GBP, NZ: NZD, IE: USD, NL: USD, DE: EUR, FR: EUR, ES: EUR }
+  {
+    GLOBAL: USD,
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    NZ: NZD,
+    AU: AUD,
+    IE: USD,
+    NL: USD,
+    DE: EUR,
+    FR: EUR,
+    ES: EUR,
+  }
 cancelUrl: https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
 sources: { pricing: https://www.iq.com/vip/order }
 notes: iQIYI's international service, with Asian dramas, films, variety shows and anime. Mainland China's iQIYI is a service of its own.
@@ -204,6 +217,26 @@ plans:
       - {
           region: NZ,
           currency: NZD,
+          amount: 99.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: AU,
+          currency: AUD,
           amount: 99.99,
           interval: year,
           intervalCount: 1,
@@ -402,6 +435,26 @@ plans:
       - {
           region: NZ,
           currency: NZD,
+          amount: 149.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.iq.com/vip/order,
+        }
+      - {
+          region: AU,
+          currency: AUD,
           amount: 149.99,
           interval: year,
           intervalCount: 1,
