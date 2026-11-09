@@ -228,7 +228,8 @@
   source: wikidata
   wikidata: Q20056642
   sitelinks: 58
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: daily-mail
   name: Daily Mail
   website: https://www.dailymail.co.uk

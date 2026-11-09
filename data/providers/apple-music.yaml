@@ -1,0 +1,347 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 1), read with Edge or a plain fetch from Canada.
+# Pages, each quoted where it's used:
+# Pricing: apple.com/<country>/apple-music, one page per country (the US's at apple.com/apple-music), each in its
+# currency whoever reads it: Individual and Family, monthly only.
+# Where it's sold: every catalog region (each country's page). No availableIn: Apple sells it in most of the world.
+# Region checklist, 2026-11-09: 1. apple.com's country paths gave each region's price; 2.–7. not needed.
+# Not listed: the Student Plan ("Special pricing for verified students"), an eligibility-only offer, as for Spotify's.
+# Bundles: Apple One ("Bundle your Apple Music plan with Apple TV, Apple Arcade, Apple Fitness+, Apple News+ and
+# iCloud+") includes it, with services not in the catalog yet. Official resellers: none; Apple Gift Cards and mobile
+# network providers are ways to pay (below and the privacy notice), not shops.
+# Features, read 2026-11-09 on its Canadian page: "Over 100 million songs, ad‑free and available to download for offline
+# listening", "Spatial Audio and lossless audio quality", where "“Hi‑Res Lossless” refers to lossless audio from 48kHz
+# to 192kHz" (its FAQ), and Dolby Atmos music (its FAQ); the Family Plan's "up to six people in the family"; "Free
+# access to the Apple Music Classical app" on both plans (a perk). It plays any song ("allows you to listen to over 100
+# million songs") and includes no audiobooks.
+
+id: apple-music
+name: Apple Music
+website: https://www.apple.com/apple-music/
+# Apple Support, where its payment methods are.
+domains: [support.apple.com]
+category: music
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://support.apple.com/en-ca/118428
+sources: { pricing: https://www.apple.com/ca/apple-music/ }
+# Payment methods, read 2026-11-04 on Apple Support's "Payment methods that you can use with your Apple Account", one
+# list per country: most credit and debit cards, PayPal, Apple Pay and an Apple Account balance from an Apple Gift
+# Card in Canada, the US and Australia; those and mobile phone billing in the UK, Ireland, Germany, France, the
+# Netherlands, Spain and Italy; cards in New Zealand (its balance comes from an "App Store Card"). The page names no
+# card networks ("Most credit and debit cards"), so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal, apple-pay, gift-card]
+    regions: [CA, US, AU]
+    page: 'Payment methods that you can use with your Apple Account'
+    url: https://support.apple.com/en-ca/111741
+    quotes:
+      [
+        'Most credit and debit cards',
+        'PayPal',
+        'Apple Pay',
+        'from redeeming Apple Gift Card or adding funds',
+      ]
+  - methods: [card, paypal, apple-pay, gift-card, provider-billing]
+    regions: [GB, IE, DE, FR, NL, ES, IT]
+    page: 'Payment methods that you can use with your Apple Account'
+    url: https://support.apple.com/en-ca/111741
+    quotes:
+      [
+        'Most credit and debit cards',
+        'PayPal',
+        'Apple Pay',
+        'from redeeming Apple Gift Card or adding funds',
+        'Mobile phone billing',
+      ]
+  - methods: [card]
+    regions: [NZ]
+    page: 'Payment methods that you can use with your Apple Account'
+    url: https://support.apple.com/en-ca/111741
+    quotes: ['Most credit and debit cards']
+
+# Owner: Apple Inc., a public company; Apple Canada Inc. sells it in Canada, and Apple Inc. in the US (its terms'
+# "Definition of Apple").
+owner:
+  name: 'Apple Inc., a public company (NASDAQ: AAPL)'
+  website: https://investor.apple.com
+  page:
+    name: "Apple's investor FAQ"
+    url: https://investor.apple.com/faq/default.aspx
+  quotes:
+    - 'Apple stock is traded on The Nasdaq Stock Market LLC under the ticker symbol AAPL.'
+  country:
+    code: US
+    page:
+      name: Media Services Terms and Conditions
+      url: https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+    quotes:
+      - 'Apple Inc., located at One Apple Park Way, Cupertino, California'
+    lastVerified: 2026-11-04
+  lastVerified: 2026-11-04
+
+# Renewal day (M11.5), read 2026-11-04: its terms charge "no more than twenty-four (24) hours prior to the start of the
+# latest Subscription period", and Apple Support's cancelling article doesn't say which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.apple.com/legal/internet-services/itunes/ca/terms.html
+    - https://support.apple.com/en-ca/118428
+  lastVerified: 2026-11-04
+
+# Apps (the cross-category features), read 2026-11-09 on its Canadian page: "on your iPhone, iPad, Apple Watch, Apple TV
+# 4K, Mac and HomePod speakers", "online at music.apple.com/ca", and "on Windows and Android devices, Sonos speakers,
+# Amazon Echo, Google Nest, smart TVs and more". Sign-in is an Apple Account's, as for Apple TV.
+features:
+  platforms: [ios, macos, windows, android, web, tv]
+  account.sign-in: [password, push-approval, sms]
+
+perks:
+  - id: classical
+    name: Apple Music Classical app
+
+plans:
+  - id: apple-music.individual
+    name: Individual
+    link: https://www.apple.com/ca/apple-music/
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    perks: [classical]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/ca/apple-music/
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/apple-music/
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/uk/apple-music/
+      - region: AU
+        currency: AUD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/au/apple-music/
+      - region: NZ
+        currency: NZD
+        amount: 18.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/nz/apple-music/
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/ie/apple-music/
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/de/apple-music/
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/fr/apple-music/
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/nl/apple-music/
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/es/apple-music/
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/it/apple-music/
+  - id: apple-music.family
+    name: Family
+    link: https://www.apple.com/ca/apple-music/
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      account.users: 6
+    perks: [classical]
+    notes: Shared with up to five others through Family Sharing, each with their own library and recommendations.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/ca/apple-music/
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/apple-music/
+      - region: GB
+        currency: GBP
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/uk/apple-music/
+      - region: AU
+        currency: AUD
+        amount: 23.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/au/apple-music/
+      - region: NZ
+        currency: NZD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/nz/apple-music/
+      - region: IE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/ie/apple-music/
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/de/apple-music/
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/fr/apple-music/
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/nl/apple-music/
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/es/apple-music/
+      - region: IT
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.apple.com/it/apple-music/
+
+# Terms and policies, read 2026-11-09 (M11.15): Apple's Media Services Terms and Conditions and its Privacy Policy, rated
+# once as shared documents (data/policies/apple-media-services.yaml, apple-privacy.yaml), and "Apple Music & Privacy",
+# the app's own notice, for how long it keeps your library and what you play.
+policies:
+  shared: [apple-media-services, apple-privacy]
+  links:
+    - name: Apple Music & Privacy
+      url: https://www.apple.com/legal/privacy/data/en/apple-music/
+    - name: Switch to a different subscription plan
+      url: https://support.apple.com/en-ca/118448
+    - name: Get an Apple Music family subscription
+      url: https://support.apple.com/en-ca/109339
+  ratings:
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Apple Support says how to switch between Individual and Family, but not what happens to the time you’ve already paid for.'
+      pages:
+        - https://support.apple.com/en-ca/118448
+        - https://support.apple.com/en-ca/109339
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your music library while you subscribe and for a short time after, and records of what you play for as long as financial reporting laws say.'
+      sources:
+        - url: https://www.apple.com/legal/privacy/data/en/apple-music/
+          quote: 'We associate your cloud library information with you for as long as you remain subscribed and for a short time after.'
+        - url: https://www.apple.com/legal/privacy/data/en/apple-music/
+          quote: 'We retain records of the songs you play for the periods specified by applicable laws relating to financial reporting.'
+      lastVerified: 2026-11-09
