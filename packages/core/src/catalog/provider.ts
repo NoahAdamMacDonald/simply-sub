@@ -301,6 +301,20 @@ export const inferredFeatureSchema = z.strictObject({
 });
 export type InferredFeature = z.infer<typeof inferredFeatureSchema>;
 
+/**
+ * A feature value no official page states or lets be inferred, taken from a publication that says it (M11.16, the
+ * owner's choices of 2026-11-09): only to fill a gap, a required feature or what a site that can't be read hides. The
+ * card marks it with its source, the optimizer never lets it satisfy a feature ranked Needed or higher, and a
+ * Settings switch leaves every such value out.
+ */
+export const thirdPartyFeatureSchema = z.strictObject({
+  publisher: textSchema.describe('The publication that says it, as the card names it (The Verge)'),
+  url: httpsUrlSchema.describe("Its page, on the publisher's own site, never the provider's"),
+  quote: textSchema.describe('Its words there that state the value, word for word'),
+  lastVerified: isoDateSchema.describe('When the page was read'),
+});
+export type ThirdPartyFeature = z.infer<typeof thirdPartyFeatureSchema>;
+
 export const planSchema = z
   .strictObject({
     id: planIdSchema.describe('<provider id>.<slug> (netflix.standard)'),
@@ -347,6 +361,12 @@ export const planSchema = z
       .record(dottedSlugSchema, inferredFeatureSchema)
       .describe(
         'Feature id → why its value is inferred and from which page (M11.9): a value no official page states, which the card marks',
+      )
+      .optional(),
+    thirdParty: z
+      .record(dottedSlugSchema, thirdPartyFeatureSchema)
+      .describe(
+        'Feature id → the publication its value comes from (M11.16): a gap no official page fills, which the card marks and a setting leaves out',
       )
       .optional(),
     perks: z

@@ -786,6 +786,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   checkCurrencies(provider, own, context, report);
   checkSourceRepo(provider, own, context, report);
   checkInferred(provider, own, context, report);
+  checkThirdParty(provider, own, context, report);
   checkAccounts(provider, own, context, report);
 }
 
@@ -816,6 +817,43 @@ function checkInferred(
         );
       }
       checkReadOn(inferred.lastVerified, [...path, 'lastVerified'], today, report);
+    }
+  });
+}
+
+/**
+ * Third-party feature values (M11.16): each names a value the plan states, its own or its provider's, that isn't also
+ * inferred, from a page that isn't on the provider's own sites, read no later than today.
+ */
+function checkThirdParty(
+  provider: Provider,
+  own: readonly string[],
+  { today }: CheckContext,
+  report: Report,
+): void {
+  const sites = ownPages(provider, own);
+  provider.plans.forEach((plan, planIndex) => {
+    for (const [featureId, claim] of Object.entries(plan.thirdParty ?? {})) {
+      const path = ['plans', planIndex, 'thirdParty', featureId];
+      if (
+        !Object.hasOwn(plan.features, featureId) &&
+        !Object.hasOwn(provider.features ?? {}, featureId)
+      ) {
+        report(path, 'Names a feature the plan doesn’t state: give its value in features first');
+      }
+      if (Object.hasOwn(plan.inferred ?? {}, featureId)) {
+        report(
+          path,
+          'Is inferred too: a value is inferred from an official page or taken from a third party, not both',
+        );
+      }
+      if (isOnDomain(claim.url, sites)) {
+        report(
+          [...path, 'url'],
+          `Is ${provider.name}'s own page: an official page's value goes in features, or in inferred with a reason`,
+        );
+      }
+      checkReadOn(claim.lastVerified, [...path, 'lastVerified'], today, report);
     }
   });
 }

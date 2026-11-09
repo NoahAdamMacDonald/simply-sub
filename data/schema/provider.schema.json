@@ -623,6 +623,46 @@
             },
             "description": "Feature id → why its value is inferred and from which page (M11.9): a value no official page states, which the card marks"
           },
+          "thirdParty": {
+            "type": "object",
+            "propertyNames": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*(?:\\.[a-z0-9]+(?:-[a-z0-9]+)*)*$",
+              "patternErrorMessage": "Use kebab-case segments joined by dots (video.quality, password-manager.item-types)"
+            },
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "publisher": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "The publication that says it, as the card names it (The Verge)"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "Its page, on the publisher's own site, never the provider's"
+                },
+                "quote": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Its words there that state the value, word for word"
+                },
+                "lastVerified": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                  "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                  "description": "When the page was read"
+                }
+              },
+              "required": ["publisher", "url", "quote", "lastVerified"],
+              "additionalProperties": false
+            },
+            "description": "Feature id → the publication its value comes from (M11.16): a gap no official page fills, which the card marks and a setting leaves out"
+          },
           "perks": {
             "minItems": 1,
             "type": "array",
