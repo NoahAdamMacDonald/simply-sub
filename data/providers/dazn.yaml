@@ -27,7 +27,9 @@ billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
 sources: { pricing: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing }
 notes: Canada's and the US's prices; its other countries sell lineups of their own, not read in yet.
-# Payment methods, read 2026-11-09 in its terms. Its pages name no card networks.
+# Payment methods, read 2026-11-09 in its terms. Its pages name no card networks. Its terms also allow paying "using
+# your account with a third party", and its help centre has articles on DAZN through Amazon Prime Video and Roku, not
+# read for this.
 paymentMethods:
   - methods: [card, paypal]
     page: 'Terms & conditions'
@@ -92,7 +94,7 @@ plans:
           name: Switch to Ultimate
           url: https://www.dazn.com/en-CA/help/articles/29840829716893-switch-to-ultimate-heres-why-its-worth-it
         lastVerified: 2026-11-09
-    notes: In Canada it's also $24.99 a month on a 12-month term that renews for another 12. The US's Annual - Pay Monthly is $24.99 a month the same way.
+    notes: In Canada it's also $24.99 a month on a 12-month term that renews for another 12. The US's Annual - Pay Monthly is $24.99 a month for 12 months; its page names streams only, not downloads.
     prices:
       - {
           region: CA,
@@ -291,24 +293,26 @@ policies:
       lastVerified: 2026-11-09
     - topic: privacy.data-sharing
       tier: poor
-      reason: 'It sells or shares your information with partners for its marketing. Outside California, you can turn that off only with each browser’s cookie switch.'
+      reason: 'It shares your hashed email address and device identifiers with ad partners such as LiveRamp and The Trade Desk, which you can withdraw from; an account setting to stop it is offered only in some places.'
       sources:
         - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
-          quote: 'We sell or share your personal information with our partners, third parties or affiliates for our marketing or other purposes.'
+          quote: 'such as your email (in hashed, pseudonymous form), mobile advertising identifier, IP address, or information about your browser or operating system, with our partner LiveRamp and its group companies, acting as joint controllers.'
         - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
-          quote: 'You can exercise your rights as a Californian resident, including the Right to Opt-Out of Selling'
+          quote: 'We and The Trade Desk (our advertising partner) will act as a joint controller of your personal data and use your email address to create a unique advertising identifier (the EUID).'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'Depending on the territory where you are located, you can customise your preferences from the Settings section of your DAZN account.'
       action:
         name: 'Its privacy notice'
         url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
       lastVerified: 2026-11-09
     - topic: privacy.ads-tracking
       tier: poor
-      reason: 'It and its ad partners show you ads picked from a profile of you, by consent where the law asks and otherwise by default; you turn them off in each browser’s cookie settings.'
+      reason: 'It and its ad partners show you ads picked from a profile of you. Where offered, an account setting turns that off; otherwise it’s each browser’s or device’s settings.'
       sources:
         - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
           quote: 'Use the information we and our advertising partners hold about you to help us sell our ad inventory and to make the ads you see more relevant and tailored to your interests.'
         - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
-          quote: 'More information on opting-out of tailored ads can be found in our Cookie Notice.'
+          quote: 'Depending on the territory where you are located, you can customise your preferences from the Settings section of your DAZN account. You can also accept or decline cookies by modifying the settings on your Internet browser or device.'
       action:
         name: 'Its cookie notice'
         url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
@@ -366,7 +370,7 @@ policies:
       lastVerified: 2026-11-09
     - topic: privacy.sign-up-data
       tier: neutral
-      reason: 'You sign up with an email address and a password, then your payment details.'
+      reason: 'Its sign-up article (the form itself didn’t load) has you sign up with an email address and a password, then your payment details.'
       sources:
         - url: https://www.dazn.com/en-CA/help/articles/16195664216477-how-to-sign-up-on-DAZN
           quote: 'Create an account by entering your email address and password.'
@@ -434,11 +438,9 @@ policies:
           quote: 'In the event we incur a cost (e.g. for a bank charge) due to being unable to process a payment for reasons for which you are responsible or a payment being recalled, we may charge you such cost incurred.'
       lastVerified: 2026-11-09
     - topic: billing.plan-changes
-      tier: good
-      reason: 'You can upgrade or downgrade at any time, though it doesn’t say how the price is worked out.'
-      sources:
-        - url: https://www.dazn.com/en-CA/help/articles/16195664216477-how-to-sign-up-on-DAZN
-          quote: 'You can downgrade or upgrade at any time.'
+      status: not-stated
+      reason: 'Its help centre says you can upgrade or downgrade at any time, but not what happens to what you’ve paid.'
+      pages: [https://www.dazn.com/en-CA/help/articles/16195664216477-how-to-sign-up-on-DAZN]
       lastVerified: 2026-11-09
     - topic: legal.disputes
       tier: good
@@ -485,9 +487,19 @@ policies:
           quote: 'Unless otherwise specified in your subscription plan, your account details (including login information) are personal to you and must not be shared with anybody or made accessible to others.'
       lastVerified: 2026-11-09
     - topic: service.device-limits
-      tier: poor
+      tier: neutral
       reason: 'It caps the devices you can register, at a number it gives only at sign-up, and once you reach it you can swap one device a month.'
       sources:
         - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
           quote: 'Once you have reached your Maximum Limit, you will only be entitled to make one (1) change to your registered devices each month, unless your subscription plan explicitly states otherwise.'
+      lastVerified: 2026-11-09
+    - topic: other.notable
+      title: A penalty of 20 months’ fees
+      tier: poor
+      reason: 'If you, or someone you gave your login to, show it in a bar or other public place, it can charge 20 months of your plan’s price for each breach in the past year.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'we are entitled to require you to pay to us, as liquidated damages, an amount calculated by multiplying the value of one standalone month for that subscription plan (as set out on the DAZN Service) by twenty (20), for each breach identified in the previous 12 months'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'The liquidated damages sum is also payable if you enable a third-party to make any part of the Content publicly available in commercial premises by providing the third-party with your user account details.'
       lastVerified: 2026-11-09

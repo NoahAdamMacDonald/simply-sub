@@ -2150,7 +2150,7 @@ in every D1 `json` column search parses.
     Italy's stay unread. Amazon's stores are read from the archive by the bot (`data/automation.yaml`'s `archived`).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 3 and Prime Video done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done)
 
 ---
 

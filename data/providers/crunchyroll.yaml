@@ -19,32 +19,27 @@ billingCurrency: { US: USD }
 cancelUrl: https://www.crunchyroll.com/tos/
 sources: { pricing: https://www.crunchyroll.com/premium }
 notes: US monthly prices only, read from the Internet Archive's copy of its plans page; its yearly prices and other countries' are unread.
-# Ways to pay, read 2026-11-09 in its terms: subscriptions through TV providers and other platforms. The checkout's
-# own methods weren't reached.
+# Ways to pay, read 2026-11-09 in its terms: subscriptions through app stores, TV providers and other platforms. The
+# checkout's own methods weren't reached.
 paymentMethods:
-  - methods: [provider-billing]
+  - methods: [app-store, provider-billing]
     page: 'Terms of Service'
     url: https://www.crunchyroll.com/tos/
     quotes:
       - 'If you purchase a Subscription through an application store, internet or TV provider, mobile carrier or other authorized third-party platform'
 
-# Owner (M11.2), read 2026-11-09 in its terms; where it is, from the address its terms give for opting out of
-# arbitration. Its privacy policy is Sony Pictures Entertainment's.
+# Owner (M11.2), read 2026-11-09 in Sony Pictures' press release about Crunchyroll ("About Crunchyroll"): a joint venture
+# of Sony Pictures Entertainment and Aniplex, both Sony Group's. Its terms are with Crunchyroll, LLC, in Los Angeles.
 owner:
-  name: 'Crunchyroll, LLC'
+  name: 'Sony Group, through Sony Pictures Entertainment and Aniplex'
+  website: https://www.sonypictures.com
   page:
-    name: 'Terms of Service'
-    url: https://www.crunchyroll.com/tos/
+    name: 'About Crunchyroll (Sony Pictures)'
+    url: https://www.sonypictures.com/corp/press_releases/2026/10080
   quotes:
-    - 'These Terms of Service (the “ Terms ”) establish the relationship between you (“ you ” or “ User ”) and Crunchyroll, LLC'
+    - 'Crunchyroll, LLC is an independently operated joint venture between U.S.-based Sony Pictures Entertainment and Japan’s Aniplex, a subsidiary of Sony Music Entertainment (Japan) Inc., both subsidiaries of Tokyo-based Sony Group.'
   country:
-    code: US
-    page:
-      name: 'Terms of Service'
-      url: https://www.crunchyroll.com/tos/
-    quotes:
-      - '5750 Wilshire Boulevard, Suite 110, Los Angeles, CA 90036, USA'
-    lastVerified: 2026-11-09
+    code: JP
   lastVerified: 2026-11-09
 
 # Renewal day (M11.5), read 2026-11-09: its terms charge "on the renewal processing date", without naming it.
@@ -96,7 +91,7 @@ plans:
           url: https://www.crunchyroll.com/premium
         lastVerified: 2026-10-23
       streaming.download-devices:
-        reason: 'Its plan cards include offline viewing without saying on how many devices, so at least one.'
+        reason: 'Each plan card lists offline viewing (a later section names it only for Mega and Ultimate Fans), without saying on how many devices, so at least one.'
         page:
           name: Crunchyroll Premium
           url: https://www.crunchyroll.com/premium
@@ -258,6 +253,8 @@ policies:
       sources:
         - url: https://intl.sonypictures.com/en/privacy-policy
           quote: 'your Personal Data will be transferred to and processed in the United States and other countries that may not provide the same level of data protection as your home country.'
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'with relation to the EEA, standard contractual clauses approved by the European Commission; and with the UK, standard contractual clauses approved by the UK government.'
       lastVerified: 2026-11-09
     - topic: privacy.sign-up-data
       status: not-stated
@@ -360,6 +357,8 @@ policies:
       sources:
         - url: https://www.crunchyroll.com/tos/
           quote: 'Crunchyroll reserves the right to suspend, limit, or terminate your Account and your access to the Services for any reason or no reason whatsoever, with or without notice'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'if terminated due to your breach, you shall not be entitled to any refund, credit, or proration of any fees paid in advance.'
       lastVerified: 2026-11-09
     - topic: legal.service-changes
       tier: poor
@@ -367,6 +366,8 @@ policies:
       sources:
         - url: https://www.crunchyroll.com/tos/
           quote: 'Crunchyroll reserves the right to modify, suspend, or discontinue any part of the Services at its sole discretion, with or without notice.'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'Such modifications may include changes to Content availability, features, pricing, and access methods.'
       lastVerified: 2026-11-09
     - topic: legal.inactivity
       status: not-stated
@@ -383,7 +384,7 @@ policies:
           quote: 'we reserve the right to block or deactivate devices, limit or terminate access, where we reasonably believe such devices are being used in violation of these Terms'
       lastVerified: 2026-11-09
     - topic: service.device-limits
-      tier: poor
+      tier: neutral
       reason: 'Its device and stream limits are set when you subscribe and can change, and it may cap registered devices without saying how many.'
       sources:
         - url: https://www.crunchyroll.com/tos/

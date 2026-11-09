@@ -3,7 +3,8 @@
 # Not Acceptable", so Canada's prices come from the Internet Archive's copy of the picker of 2026-10-10 (its plan data:
 # "Paramount+ basic monthly - Canada", planTier "ads", "$7.99/Month" and "$70.99/Year"; "NEW Paramount+ monthly -
 # Canada", "standard", "$11.99/Month" and "$106.99/Year"; "Paramount+ premium monthly - Canada", "premium",
-# "$15.99/Month" and "$142.99/Year"). Its home page says "Plans start from $7.99 CAD / Month + tax".
+# "$15.99/Month" and "$142.99/Year"). Its home page says "Plans start from $7.99 CAD / Month + tax". The plans' titles
+# end in "- Trial", but the data marks none as one ("trial":false), as its plans article gives Canada no free trial.
 # Features: its help centre's plans article, read 2026-11-04 (Basic with ads, Standard and Premium, each "available in"
 # Canada among others).
 # Region checklist, 2026-11-09: 1. paramountplus.com/ca; 4. the sign-up picker (no plans shown; the archive's copy);
@@ -14,7 +15,7 @@
 id: paramount-plus
 name: Paramount+
 website: https://www.paramountplus.com
-domains: [paramount.com, pplus.legal, viacomcbsprivacy.com]
+domains: [paramount.com, pplus.legal, viacomcbsprivacy.com, skydance.com]
 category: streaming
 spendCategory: streaming
 billingCurrency: { CA: CAD }
@@ -30,15 +31,17 @@ paymentMethods:
       - 'If we receive updated payment details or debit/credit card information'
       - 'If you signed up for a Subscription that is set to auto-renew through a third party (for example, via an app store or one of our third party partners)'
 
-# Owner (M11.2), read 2026-11-09 in Paramount Skydance's privacy policy; where it is, from its postal address there.
-# Canada's service is "Paramount Streaming Canada, a division of Paramount Entertainment Canada ULC" (its terms).
+# Owner (M11.2), read 2026-11-09 on Paramount Skydance's brands page for Paramount+; where it is, from the postal
+# address in its privacy policy. Canada's service is "Paramount Streaming Canada, a division of Paramount Entertainment
+# Canada ULC" (its terms).
 owner:
   name: 'Paramount Skydance Corporation'
+  website: https://www.skydance.com
   page:
-    name: 'Paramount Skydance Privacy Policy'
-    url: https://www.viacomcbsprivacy.com/en/policy
+    name: 'Paramount+ (Paramount Skydance brands)'
+    url: https://www.skydance.com/about/brands/paramount-plus
   quotes:
-    - 'Paramount Skydance is a leading global media and entertainment company'
+    - "The flagship streaming home of Paramount's premium original series and global brands"
   country:
     code: US
     page:
@@ -199,6 +202,8 @@ policies:
         - url: https://legal.paramount.com/ca/en/pplus/termsofuse
           quote: 'you will not be refunded for any fees you have paid.'
         - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'there are certain circumstances in which you may be legally entitled to a refund under consumer protection legislation'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
           quote: 'you will be able to continue to use your Subscription until the cancellation takes effect'
       lastVerified: 2026-11-09
     - topic: billing.price-changes
@@ -284,7 +289,11 @@ policies:
           quote: 'unless authorised by these Terms of Use, allow anyone else to use your Account or access your credentials'
       lastVerified: 2026-11-09
     - topic: service.device-limits
-      status: not-stated
-      reason: 'Its terms list kinds of download limits but leave their numbers to its help centre, which wasn’t read for them.'
-      pages: [https://legal.paramount.com/ca/en/pplus/termsofuse]
+      tier: neutral
+      reason: 'It can limit how many shows you download, on how many devices and for how long, and downloads expire when you cancel.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: '(a) restrictions on the total number of Downloads per Account; (b) the maximum number of devices that can hold Downloads'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'If you cancel your Subscription, or we no longer have the necessary rights to the downloaded Content, access to such Downloads will automatically expire.'
       lastVerified: 2026-11-09
