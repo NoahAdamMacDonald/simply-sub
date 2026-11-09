@@ -165,8 +165,9 @@ export interface Suggestion {
   lostServices: { itemId: string; title: string }[];
   gained: FeatureChange[];
   /**
-   * The third-party claims it rests on (M11.16): a feature the list has that a plan it moves to gives only by a
-   * publication's word, named with its source, so the card can say so.
+   * The third-party claims it rests on (M11.16): a feature of an item it changes that's kept only by a publication's
+   * word (a plan it moves to, or another item's that keeps a removed one's), named with its source, so the card can
+   * say so.
    */
   thirdParty?: { key: RankKey; label: string; publisher: string; url: string }[];
 }

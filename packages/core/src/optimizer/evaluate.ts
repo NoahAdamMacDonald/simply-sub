@@ -1,5 +1,6 @@
+import type { ThirdPartyFeature } from '../catalog/provider';
 import { slotsFrom } from './coverage';
-import type { ItemModel, OptimizerModel } from './model';
+import type { Contribution, ItemModel, OptimizerModel } from './model';
 import { severityOfRank, severities, type Severity } from './suggestion';
 
 // Judging a combination of options (BLUEPRINT §10.2, §10.4). Every key an item provides is checked for that item, in
@@ -99,33 +100,67 @@ export function counts(
 }
 
 /**
+ * Whether a contribution keeps a key ranked Needed or higher for `item` (M11.16): anything but a third-party value,
+ * which counts only for the items whose plan it is as they have it.
+ */
+export function firmFor(contribution: Contribution, item: ItemModel): boolean {
+  return (
+    contribution.claim === undefined ||
+    (contribution.own === true && contribution.forItems.includes(item.index))
+  );
+}
+
+/**
  * The slots of a check that `choice` (an option per item) leaves without the key. What replaces the item is the option
- * it's decided by, so only a removed item needs the others looked at. A key ranked Needed or higher isn't kept by a
- * plan that gives it only through a third-party value (M11.16).
+ * it's decided by, so only a removed item needs the others looked at. With `firmOnly` (a key ranked Needed or higher,
+ * by default), only what firmFor allows keeps it.
  */
 export function lostSlots(
   model: OptimizerModel,
   check: KeyCheck,
   choice: ArrayLike<number>,
+  firmOnly = check.level === blocked,
 ): number {
   const item = model.items[check.item];
   const own = model.options[choice[check.item]];
-  // A third-party value never keeps a key ranked Needed or higher (M11.16).
-  const firmOnly = check.level === blocked;
   let kept = 0;
   for (const contribution of own.byKey.get(check.key) ?? []) {
-    if (firmOnly && contribution.weak) continue;
+    if (firmOnly && !firmFor(contribution, item)) continue;
     if (contribution.forItems.includes(item.index)) kept |= contribution.mask;
   }
   if ((check.need & ~kept) === 0 || !own.removes.includes(item.index)) return check.need & ~kept;
   for (const other of check.affecting) {
     if (other === item.index) continue;
     for (const contribution of model.options[choice[other]].byKey.get(check.key) ?? []) {
-      if (firmOnly && contribution.weak) continue;
+      if (firmOnly && !firmFor(contribution, item)) continue;
       if (counts(contribution, item, true)) kept |= contribution.mask;
     }
   }
   return check.need & ~kept;
+}
+
+/**
+ * The third-party claim a check rests on in `choice` (M11.16): its key is kept, but wouldn't be without a claim that
+ * isn't its item's own plan's. Undefined when it's lost, or kept without one.
+ */
+export function claimKept(
+  model: OptimizerModel,
+  check: KeyCheck,
+  choice: ArrayLike<number>,
+): ThirdPartyFeature | undefined {
+  if (lostSlots(model, check, choice) !== 0 || lostSlots(model, check, choice, true) === 0) {
+    return undefined;
+  }
+  const item = model.items[check.item];
+  const removed = losesService(model, item, choice);
+  for (const other of check.affecting) {
+    for (const contribution of model.options[choice[other]].byKey.get(check.key) ?? []) {
+      if (!firmFor(contribution, item) && counts(contribution, item, removed)) {
+        return contribution.claim;
+      }
+    }
+  }
+  return undefined;
 }
 
 /** Whether `choice` gives up the item's service: its option removes it. */

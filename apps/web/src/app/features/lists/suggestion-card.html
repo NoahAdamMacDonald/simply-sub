@@ -80,7 +80,13 @@
         <!-- One run of text, so its publisher wraps with the words before it. -->
         <span class="claim">
           {{ claim.label }}, per
-          <a [href]="claim.url" target="_blank" rel="noopener noreferrer">{{ claim.publisher }}</a>
+          <a
+            [href]="claim.url"
+            target="_blank"
+            rel="noopener"
+            [attr.aria-label]="claim.publisher + ' (opens in a new tab)'"
+            >{{ claim.publisher }}</a
+          >
         </span>
       }
     </p>

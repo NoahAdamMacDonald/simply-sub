@@ -1,7 +1,7 @@
 import type { FxRates } from '../catalog/convert';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { inclusionsOf, planOf } from '../catalog/plan-lookup';
-import type { Plan } from '../catalog/provider';
+import type { Plan, ThirdPartyFeature } from '../catalog/provider';
 import { isRetired } from '../catalog/retired';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
@@ -68,8 +68,8 @@ interface Cost {
 interface Part {
   provider: number;
   keys: number[];
-  /** The keys only a third-party value gives (M11.16): never enough for a key ranked Needed or higher. */
-  weak?: ReadonlySet<number>;
+  /** The keys only a third-party value gives, each with its claim (M11.16). */
+  claims?: ReadonlyMap<number, ThirdPartyFeature>;
 }
 
 /** A rank key a plan gives under a provider, in some slots, and whose person it gives it to. */
@@ -79,8 +79,13 @@ export interface Contribution {
   mask: number;
   /** The items whose own replacement it is: the item itself, or the ones an extra member, bundle or suite replaces. */
   forItems: readonly number[];
-  /** Given only by a third-party value of a plan it changes to (M11.16): it keeps no key ranked Needed or higher. */
-  weak?: true;
+  /**
+   * Given only by a third-party value, whose claim this is (M11.16): it keeps no key ranked Needed or higher, but for
+   * the items whose plan it is as they have it (`own`).
+   */
+  claim?: ThirdPartyFeature;
+  /** The plan `forItems` have now: kept, billed another way, or as an extra member or in a bundle. */
+  own?: true;
 }
 
 export interface ItemModel {
@@ -268,9 +273,12 @@ class ModelBuilder {
         return plans.map(({ provider, plan }) => ({
           provider: this.provider(provider.id),
           keys: this.keysOf(plan, catalog),
+          claims: this.claimsOf(plan, catalog),
         }));
       }
     }
+    const found =
+      resolved.planId === undefined || !catalog ? undefined : planOf(catalog, resolved.planId);
     const service =
       resolved.providerId ??
       (resolved.customSubId === undefined
@@ -280,6 +288,7 @@ class ModelBuilder {
       {
         provider: this.provider(service),
         keys: resolved.providedKeys.map((key) => this.key(key, catalog)),
+        ...(found && catalog && { claims: this.claimsOf(found.plan, catalog) }),
       },
     ];
   }
@@ -295,12 +304,17 @@ class ModelBuilder {
   }
 
   private keepContributions(item: ItemModel): Contribution[] {
-    return contributionsOf(item.parts, item.active, [item.index]);
+    return contributionsOf(item.parts, item.active, [item.index], true);
   }
 
   /** The item's parts up to its next charge: what's paid for already. */
   private paidContributions(item: ItemModel): Contribution[] {
-    return contributionsOf(item.parts, item.active & slotsBefore(item.changeSlot), [item.index]);
+    return contributionsOf(
+      item.parts,
+      item.active & slotsBefore(item.changeSlot),
+      [item.index],
+      true,
+    );
   }
 
   // ── Options of one item ────────────────────────────────────────────────────────────────────────────────────────
@@ -339,9 +353,10 @@ class ModelBuilder {
         // A plan no longer sold is never offered, its own other billing period included (M10.27).
         if (isRetired(plan, provider, this.context.today)) continue;
         const keys = this.keysOf(plan, catalog);
+        const claims = this.claimsOf(plan, catalog);
         // The item's own plan on another billing period changes nothing it gives, its third-party values included.
-        const weak = plan.id === current.id ? new Set<number>() : this.weakOf(plan, catalog);
-        if (!includesAll(firm(keys, weak), item.critical)) continue;
+        const own = plan.id === current.id;
+        if (!includesAll(own ? keys : firm(keys, claims), item.critical)) continue;
         for (const price of this.periodsFor(plan.prices, provider, item, plan)) {
           if (plan.id === current.id && samePeriod(price, listItem.billing)) continue;
           const changed = changedItem(
@@ -371,9 +386,10 @@ class ModelBuilder {
             [
               ...this.paidContributions(item),
               ...contributionsOf(
-                [{ provider: item.parts[0].provider, keys, weak }],
+                [{ provider: item.parts[0].provider, keys, claims }],
                 item.active & slotsFrom(item.changeSlot),
                 [item.index],
+                own,
               ),
             ],
             [],
@@ -487,7 +503,8 @@ class ModelBuilder {
           addOn?.grantsPlan === undefined ? undefined : planOf(catalog, addOn.grantsPlan);
         if (!addOn || !granted || room < 1) continue;
         const keys = this.keysOf(granted.plan, catalog);
-        const weak = this.weakOf(granted.plan, catalog);
+        const claims = this.claimsOf(granted.plan, catalog);
+        const onIt = (member: ItemModel) => member.resolved.planId === granted.plan.id;
         const members = this.items.filter(
           (member) =>
             member !== host &&
@@ -498,7 +515,7 @@ class ModelBuilder {
             member.resolved.providerId === provider.id &&
             member.resolved.region === host.resolved.region &&
             !member.essential &&
-            includesAll(firm(keys, weak), member.critical),
+            includesAll(onIt(member) ? keys : firm(keys, claims), member.critical),
         );
         for (const chosen of subsets(members, 1, room)) {
           // Each member joins on its own next charge, when its own plan ends (M8.5).
@@ -522,9 +539,10 @@ class ModelBuilder {
               ...chosen.flatMap((member) => [
                 ...this.paidContributions(member),
                 ...contributionsOf(
-                  [{ provider: member.parts[0].provider, keys, weak }],
+                  [{ provider: member.parts[0].provider, keys, claims }],
                   member.active & host.active & slotsFrom(member.changeSlot),
                   [member.index],
+                  onIt(member),
                 ),
               ]),
             ],
@@ -564,13 +582,16 @@ class ModelBuilder {
         }
         const included = plans.filter((found) => found !== undefined);
         const keys = included.map(({ plan }) => this.keysOf(plan, catalog));
-        const weak = included.map(({ plan }) => this.weakOf(plan, catalog));
+        const claims = included.map(({ plan }) => this.claimsOf(plan, catalog));
         const choices = included.map(({ provider, plan }, index) =>
           this.joiners(region).filter(
             (member) =>
               member.resolved.providerId === provider.id &&
               (!member.essential || member.resolved.planId === plan.id) &&
-              includesAll(firm(keys[index], weak[index]), member.critical),
+              includesAll(
+                member.resolved.planId === plan.id ? keys[index] : firm(keys[index], claims[index]),
+                member.critical,
+              ),
           ),
         );
         for (const matched of assignments(choices)) {
@@ -588,13 +609,14 @@ class ModelBuilder {
               members,
               added,
               on,
-              included.map(({ provider }, index) => ({
+              included.map(({ provider, plan }, index) => ({
                 part: {
                   provider: this.provider(provider.id),
                   keys: keys[index],
-                  weak: weak[index],
+                  claims: claims[index],
                 },
                 forItems: matched[index] === undefined ? [] : [matched[index].index],
+                own: matched[index]?.resolved.planId === plan.id,
               })),
               start,
               {
@@ -626,14 +648,14 @@ class ModelBuilder {
           const users = plan.features['account.users'];
           const copies = typeof users === 'number' ? users : 1;
           const keys = this.keysOf(plan, catalog);
-          const weak = this.weakOf(plan, catalog);
+          const claims = this.claimsOf(plan, catalog);
           const candidates = this.joiners(region).filter(
             (member) =>
               member.resolved.planId !== plan.id &&
               (includes.has(member.resolved.planId ?? '') ||
                 includes.has(member.resolved.providerId ?? '')) &&
               !member.essential &&
-              includesAll(firm(keys, weak), member.critical),
+              includesAll(firm(keys, claims), member.critical),
           );
           for (const members of subsets(candidates, 2, maxGroupSize)) {
             const perPlan = new Map<string, number>();
@@ -656,7 +678,7 @@ class ModelBuilder {
                 on,
                 [
                   {
-                    part: { provider: this.provider(provider.id), keys, weak },
+                    part: { provider: this.provider(provider.id), keys, claims },
                     forItems: members.map((member) => member.index),
                   },
                 ],
@@ -685,7 +707,7 @@ class ModelBuilder {
     members: readonly ItemModel[],
     added: ResolvedItem,
     on: IsoDate,
-    parts: readonly { part: Part; forItems: readonly number[] }[],
+    parts: readonly { part: Part; forItems: readonly number[]; own?: boolean }[],
     start: number,
     action: SuggestionAction,
     signature: string,
@@ -697,8 +719,8 @@ class ModelBuilder {
       members.reduce((total, member) => sum(total, member.before), after),
       [
         ...members.flatMap((member) => this.paidContributions(member)),
-        ...parts.flatMap(({ part, forItems }) =>
-          contributionsOf([part], slotsFrom(start), forItems),
+        ...parts.flatMap(({ part, forItems, own }) =>
+          contributionsOf([part], slotsFrom(start), forItems, own),
         ),
       ],
       [],
@@ -822,19 +844,30 @@ class ModelBuilder {
   }
 
   /**
-   * The keys a plan gives only through its third-party values (M11.16): what it would lose without them. A plan the
-   * list moves to never keeps a key ranked Needed or higher with them alone.
+   * The keys a plan gives only through its third-party values, each with the claim that gives it (M11.16): what it
+   * would lose without them.
    */
-  private weakOf(
-    plan: Pick<Plan, 'id' | 'features' | 'perks' | 'thirdParty'>,
-    catalog: CatalogData,
-  ): Set<number> {
-    if (!plan.thirdParty) return new Set();
-    const features = Object.fromEntries(
-      Object.entries(plan.features).filter(([id]) => !Object.hasOwn(plan.thirdParty ?? {}, id)),
-    );
-    const firm = new Set(this.keysOf({ ...plan, features }, catalog));
-    return new Set(this.keysOf(plan, catalog).filter((key) => !firm.has(key)));
+  private claimsOf(plan: Plan, catalog: CatalogData): Map<number, ThirdPartyFeature> {
+    const claims = new Map<number, ThirdPartyFeature>();
+    const claimed = plan.thirdParty;
+    if (!claimed) return claims;
+    const without = (left: (id: string) => boolean) =>
+      new Set(
+        this.keysOf(
+          {
+            ...plan,
+            features: Object.fromEntries(Object.entries(plan.features).filter(([id]) => !left(id))),
+          },
+          catalog,
+        ),
+      );
+    const firmKeys = without((id) => Object.hasOwn(claimed, id));
+    const keys = this.keysOf(plan, catalog).filter((key) => !firmKeys.has(key));
+    for (const [id, claim] of Object.entries(claimed)) {
+      const others = without((other) => other === id);
+      for (const key of keys) if (!others.has(key) && !claims.has(key)) claims.set(key, claim);
+    }
+    return claims;
   }
 
   private key(key: RankKey, catalog: CatalogData | undefined): number {
@@ -1003,22 +1036,27 @@ function contributionsOf(
   parts: readonly Part[],
   mask: number,
   forItems: readonly number[],
+  own = false,
 ): Contribution[] {
   if (mask === 0) return [];
   return parts.flatMap((part) =>
-    part.keys.map((key): Contribution => ({
-      provider: part.provider,
-      key,
-      mask,
-      forItems,
-      ...(part.weak?.has(key) && { weak: true as const }),
-    })),
+    part.keys.map((key): Contribution => {
+      const claim = part.claims?.get(key);
+      return {
+        provider: part.provider,
+        key,
+        mask,
+        forItems,
+        ...(claim && { claim }),
+        ...(claim && own && { own: true as const }),
+      };
+    }),
   );
 }
 
 /** A plan's keys without the ones only its third-party values give (M11.16). */
-function firm(keys: readonly number[], weak: ReadonlySet<number>): number[] {
-  return weak.size === 0 ? [...keys] : keys.filter((key) => !weak.has(key));
+function firm(keys: readonly number[], claims: ReadonlyMap<number, unknown>): number[] {
+  return claims.size === 0 ? [...keys] : keys.filter((key) => !claims.has(key));
 }
 
 function sum(a: Cost, b: Cost): Cost {

@@ -107,4 +107,88 @@ describe('optimize: third-party values (M11.16)', () => {
     `);
     expect(result.suggestions.every((suggestion) => !suggestion.thirdParty)).toBe(true);
   });
+
+  it('never keep a removed item’s Needed feature through another’s claim, and name it for a Wanted one', () => {
+    const data = catalogWith({
+      'mullvad.vpn': {
+        features: { 'vpn.included': true, 'vpn.multi-hop': true },
+        thirdParty: { 'vpn.multi-hop': claim },
+      },
+    });
+    const items = [item('mullvad.vpn'), item('ivpn.pro')];
+    const needed = run(data, items, { 'vpn.included': 'needed', 'vpn.multi-hop': 'needed' });
+    expect(cards(needed)).toMatchInlineSnapshot(`
+      [
+        "yellow | Remove Mullvad VPN | save 93.75 | estimated | lose Mullvad VPN",
+      ]
+    `);
+    const wanted = run(data, items, { 'vpn.included': 'needed', 'vpn.multi-hop': 'wanted' });
+    expect(cards(wanted)).toMatchInlineSnapshot(`
+      [
+        "yellow | Remove IVPN Pro | save 153.72 | lose IVPN Pro",
+      ]
+    `);
+    expect(wanted.suggestions.map((suggestion) => suggestion.thirdParty)).toMatchInlineSnapshot(`
+      [
+        [
+          {
+            "key": "vpn.multi-hop",
+            "label": "Multi-hop",
+            "publisher": "The Verge",
+            "url": "https://www.theverge.com/netflix-standard-hdr",
+          },
+        ],
+      ]
+    `);
+  });
+
+  it('name the claim an extra member rests on', () => {
+    const result = run(withHdr(), [item('netflix.premium'), item('netflix.premium')], {
+      'video.quality=4k': 'unwanted',
+      'video.hdr': 'wanted',
+    });
+    expect(cards(result)).toMatchInlineSnapshot(`
+      [
+        "red | Make Netflix Premium an extra member on Netflix Premium | save 201.60 | lose video.quality=4k (unwanted)",
+        "yellow | Downgrade Netflix Premium → Standard with ads | save 201.60 | lose video.quality=4k (unwanted), video.hdr (wanted), streaming.ad-free (not-ranked)",
+        "yellow | Downgrade Netflix Premium → Standard with ads | save 201.60 | lose video.quality=4k (unwanted), video.hdr (wanted), streaming.ad-free (not-ranked)",
+      ]
+    `);
+    expect(result.suggestions.map((suggestion) => suggestion.thirdParty)).toMatchInlineSnapshot(`
+      [
+        [
+          {
+            "key": "video.hdr",
+            "label": "HDR",
+            "publisher": "The Verge",
+            "url": "https://www.theverge.com/netflix-standard-hdr",
+          },
+        ],
+        undefined,
+        undefined,
+      ]
+    `);
+  });
+
+  it('count for an item reaching the plan it has through an extra member or a bundle', () => {
+    const standard = run(withHdr(), [item('netflix.standard'), item('netflix.standard')], {
+      'video.hdr': 'needed',
+    });
+    expect(cards(standard)).toMatchInlineSnapshot(`
+      [
+        "free | Make Netflix Standard an extra member on Netflix Standard | save 138.60",
+      ]
+    `);
+    const data = catalogWith({ 'crave.premium': { thirdParty: { 'streaming.ad-free': claim } } });
+    const bundled = run(data, [item('disney-plus.premium'), item('crave.premium')], {
+      'streaming.ad-free': 'needed',
+    });
+    expect(cards(bundled)).toMatchInlineSnapshot(`
+      [
+        "free | Replace Disney+ Premium and Crave Premium with Disney+ and Crave Premium Bundle | save 122.72",
+        "yellow | Downgrade Disney+ Premium → Standard, annual billing + Remove Crave Premium | save 354.78 | lose Crave Premium, video.quality=4k (not-ranked), video.hdr (not-ranked)",
+      ]
+    `);
+    expect([...standard.suggestions, ...bundled.suggestions].some((s) => s.thirdParty)).toBe(false);
+  });
 });

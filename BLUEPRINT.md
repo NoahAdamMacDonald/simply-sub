@@ -3286,8 +3286,9 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
   month it was provided before**.
 - **Third-party values** (M11.16, section 4.2 rule 12) never keep a Needed, Critical or Essential feature: a plan the
   item moves to, or another item that would keep it, must give it on an official page's word. They keep the lower
-  ranks, and a card that rests on one says "Rests on third-party claims", each linked to its source. The item's own
-  plan billed another way changes nothing it gives, so its own third-party values still count.
+  ranks, and a card that rests on one says "Rests on third-party claims", each linked to its source. The plan an item
+  has, kept, billed another way, or reached as an extra member or in a bundle, changes nothing it gives, so its own
+  third-party values still count for it.
 - **Perks** (M11.6) are rank keys like features': a Needed perk keeps a plan of its provider that has it, and a lost
   Wanted one makes a suggestion yellow. An unranked perk is Not ranked, so a dearer plan that differs only in perks is
   downgraded in red unless they're ranked.

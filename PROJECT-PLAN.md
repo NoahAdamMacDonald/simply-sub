@@ -2162,11 +2162,14 @@ in every D1 `json` column search parses.
   lastVerified }`. Validation refuses a feature the plan's features don't give (a provider-wide one included, so the
   setting can take it from the plan), one in `inferred` too, a page on the provider's sites (its policies' and owner's
   included) and a date after today. The quote-check script reads it like any other quote.
-- **The optimizer:** a plan's keys that only its third-party values give are weak (core's model, `Contribution.weak`).
-  A weak key never keeps a Needed, Critical or Essential rank (`lostSlots`, and the critical keys a plan must keep);
-  it keeps Wanted and the ranks below as any key does. The item's own plan billed another way has no weak keys. A
-  suggestion lists the weak keys it moves to that the list has (`Suggestion.thirdParty`), which the card shows as
-  "Rests on third-party claims: HDR, per The Verge", each publisher linked.
+- **The optimizer:** a plan's keys that only its third-party values give carry their claim (core's model,
+  `Contribution.claim`). One never keeps a Needed, Critical or Essential rank (evaluate's `firmFor`, used by
+  `lostSlots`, `cardsOf` and the critical keys a plan must keep), whether the item moves to that plan or another
+  item would keep a removed one's key; it keeps Wanted and the ranks below as any key does. The plan an item has
+  (kept, billed another way, or reached as an extra member or in a bundle, `Contribution.own`) counts for it as it
+  is. A suggestion lists the keys of the items it changes that are kept only through a claim (`claimKept`,
+  `Suggestion.thirdParty`), which the card shows as "Rests on third-party claims: HDR, per The Verge", each
+  publisher linked.
 - **The setting:** Settings' Catalog card has "Use third-party claims", on by default, with a hint; off, it saves
   `skipThirdParty: true` on this device, and CatalogStore serves every file through core's `withoutThirdParty` (each
   plan without its third-party values and its `thirdParty`, made once per file), so the cards, Search, ranking and the
