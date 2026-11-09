@@ -318,9 +318,9 @@
   source: wikidata
   wikidata: Q27903045
   sitelinks: 40
-  status: unreadable
-  date: 2026-11-04
   note: 'Read 2026-11-04: its plans and features are in its help centre, but its sign-up page shows the reader no plans or prices from Canada (only "Plans start from $7.99 CAD" on its home page), and its site answers "406 Not Acceptable" through other countries'' exits, so its prices need reading from an ordinary connection'
+  status: done
+  date: 2026-11-09
 - id: deezer
   name: Deezer
   website: https://www.deezer.com
