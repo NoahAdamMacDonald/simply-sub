@@ -1,0 +1,87 @@
+url: https://help.odysee.tv/category-basics/category-accountcreation/accountcreation/
+method: fetch
+saved: 2026-11-09
+
+Creating an Account | Odysee Help Hub
+Skip to main content
+Help Hub
+English English
+Español
+Français
+Deutsch
+Português
+Italiano
+Odysee
+Search
+Help Hub
+Odysee Basics
+What is Odysee?
+Setting Up Your Account
+Creating an Account
+Verification
+Logging In
+Changing Your Password
+Changing Your Email
+Deleting Your Account
+YouTube Sync
+Channels
+Content Interaction
+Uploading Content
+Livestreaming
+Wallet & Monetization
+Playlists
+Memberships
+Tips and hyperchat
+Odysee's Blockchain
+Legacy Monetization
+Moderation Tools
+Content Discovery
+Channel Categories
+Odysee Premium
+Copyright Policy
+Community Guidelines
+Assets
+Unexpected errors
+Payments Chart
+Odysee Basics
+Setting Up Your Account
+Creating an Account
+Creating an Account
+To create an account, go to the sign-up screen by clicking the Sign Up button. On the web version, this is at the top right corner.
+On mobile, you'll click the avatar icon , which will show Sign Up in the dropdown menu.
+On the sign-up screen, you'll enter an email and a password.
+Better safe than sorry!
+We don't have password strength requirements, but we strongly recommend longer, complex passwords. We'll also check if your password has ever been leaked in the past, in which case you'll have to enter a new one.
+Do you have a YouTube channel?
+If you're attempting to sync a YouTube channel, be sure to click and checkmark "Sync my YouTube channel."
+For a walkthrough of the remainder of the sync process, as well as other information about the YouTube sync program, visit our YouTube sync guide by clicking here. We also recommend visiting the requirements and limits category to learn more about synchronization.
+After clicking the Sign Up button on the previous screen, you'll be asked to confirm your email. This involves clicking on a link that will be sent to your email and doing a CAPTCHA from your web browser.
+Note
+Your must click on the link sent to your email. If you don't see a captcha, try a different browser. The confirmation email may take up to 10 minutes. If you don't receive an email, please email us: [email protected]
+After confirming, your original tab will progress to this screen, where you're recommended channels to follow.
+All new accounts will follow @Odysee and @OdyseeHelp channels automatically.
+Tags: Sign-up
+Sync YouTube Channel
+Suggest a change
+Previous
+Setting Up Your Account
+Next
+Verification
+Help Hub
+Index
+Community
+Odysee
+Discord
+Reddit
+Facebook
+Instagram
+Twitter
+TikTok
+More
+GitHub
+Privacy Policy
+Terms of Use
+Careers
+[email protected]
+Community Guidelines
+Copyright © 2026 Odysee Holdings, Inc.
