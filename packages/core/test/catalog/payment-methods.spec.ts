@@ -95,6 +95,9 @@ describe('namesPaymentMethod', () => {
     ['Où obtenir du soutien pour un abonnement facturé par Bell ?', 'provider-billing', true],
     ['through Amazon Prime Video as an add-on channel', 'app-store', true],
     ['Apple App Store, Google Play Store and Roku Channel Store', 'app-store', true],
+    // Crunchyroll's terms (M11.15).
+    ['through an application store, internet or TV provider', 'app-store', true],
+    ['our application stores your preferences', 'app-store', false],
   ] as const)('reads "%s" as %s: %s', (text, method, named) => {
     expect(namesPaymentMethod(text, method)).toBe(named);
   });

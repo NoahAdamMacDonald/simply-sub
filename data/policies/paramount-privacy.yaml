@@ -1,0 +1,116 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Paramount Skydance's Privacy Policy, which covers its services
+# (Paramount+ first), rated once here with its Minors' Privacy Policy, which the policy sends readers to for minors.
+# Each provider names it in its policies' shared.
+# Read 2026-11-09 (M11.15), from Canada: the English versions (viacomcbsprivacy.com/en/policy, where pplus.legal/privacy
+# leads, "Last Modified: May 12, 2026", and privacy.paramount.com/en/minors-policy).
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: paramount-privacy
+name: Paramount Skydance's Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://www.viacomcbsprivacy.com/en/policy
+  - name: "Minors' privacy policy"
+    url: https://privacy.paramount.com/en/minors-policy
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It uses your information to analyse and improve its services and to personalise its ads and marketing. Opting out is by request, and partial.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'Recognizing and understanding your preferences, interests, and demographic information so that we can personalize the ads we deliver to you'
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'Please note that if you opt out of interest-based advertising, some information will still be collected for other purposes, such as research, analytics, and internal operations.'
+    action:
+      name: 'Its Privacy Rights Center'
+      url: https://www.viacomcbsprivacy.com/en/policy
+    lastVerified: 2026-11-09
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It shares identifiers, hashed email addresses and what you do on its services with social media companies and ad partners. Opting out is device by device and browser by browser.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'The types of information we share include online identifiers, email addresses (or hashed email address), and information about your online interactions on the Paramount Services.'
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'Please note that your choice to opt out is device- or browser-specific and you will need to manage your preferences for each device or browser you use.'
+    action:
+      name: 'Its Privacy Rights Center'
+      url: https://www.viacomcbsprivacy.com/en/policy
+    lastVerified: 2026-11-09
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It and its partners pick ads from what you do on and off its services, across your devices; you opt out device by device and browser by browser.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'we may collect information about you on the Paramount Services and on Third-Party Services to help serve advertising relevant to your interests across your devices, browsers, and on and off the Paramount Services.'
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'Please note that your choice to opt out is device- or browser-specific and you will need to manage your preferences for each device or browser you use.'
+    action:
+      name: 'Its privacy policy'
+      url: https://www.viacomcbsprivacy.com/en/policy
+    lastVerified: 2026-11-09
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy policy doesn’t say whether what you write, upload or say trains AI.'
+    pages: [https://www.viacomcbsprivacy.com/en/policy]
+    lastVerified: 2026-11-09
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it thinks reasonably necessary, and some records after you leave, with no periods named.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'We will retain your personal information for the time period reasonably necessary to achieve the purposes described in this privacy policy'
+    lastVerified: 2026-11-09
+  - topic: privacy.data-deletion
+    tier: neutral
+    reason: 'You can delete details in your account, or ask through its Privacy Rights Center for the rest to be deleted, answered within the time the law sets.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'The right to request the erasure or deletion of your personal information'
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'We will respond to your request within the time period required under the law.'
+    action:
+      name: 'Its Privacy Rights Center'
+      url: https://www.viacomcbsprivacy.com/en/policy
+    lastVerified: 2026-11-09
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask for a copy of your information, or for it to be passed to another company, within the time the law sets.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'The right to request that we transfer (port) your personal information to another company or third party'
+    action:
+      name: 'Its Privacy Rights Center'
+      url: https://www.viacomcbsprivacy.com/en/policy
+    lastVerified: 2026-11-09
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It shares your information with authorities when it thinks the law or legal process requires it, or to protect rights and safety, and says nothing more.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'We will share your information with our legal and tax advisors, insurers, law enforcement, judicial and other government bodies, and others when we think it is necessary to do so to comply with the law, the legal process'
+    lastVerified: 2026-11-09
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your information can go to the US and other countries with weaker protection, under standard contract clauses where it applies them.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'Paramount is a global company that may transfer your personal information to a country (including the United States) that does not provide the same level of protection for your personal information.'
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'we have put in place standard contractual clauses approved under data protection laws in Argentina, Brazil, the EEA, Switzerland, and the United Kingdom to facilitate transfers to the United States.'
+    lastVerified: 2026-11-09
+  - topic: privacy.children
+    tier: good
+    reason: 'It never shows minors ads picked from who they are or what they like, and collects no more about them than its services need.'
+    sources:
+      - url: https://privacy.paramount.com/en/minors-policy
+        quote: 'We do not show you advertisements using personal information about who you are, what you like, other games you’ve played, shows you’ve watched, or sites and apps you have used.'
+      - url: https://privacy.paramount.com/en/minors-policy
+        quote: 'we do not collect more information from or about minors than we need to power our services'
+    lastVerified: 2026-11-09
+  - topic: security.practices
+    tier: poor
+    reason: 'It describes commercially reasonable measures in general terms, and names no independent audit or way to report a security flaw.'
+    sources:
+      - url: https://www.viacomcbsprivacy.com/en/policy
+        quote: 'We have adopted commercially reasonable technical, administrative, and physical security measures designed to protect your personal information from loss, misuse, unauthorized access, and alteration.'
+    lastVerified: 2026-11-09

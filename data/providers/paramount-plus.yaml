@@ -1,0 +1,299 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 4), Canada only. Its sign-up picker shows no
+# plans to the reader, from here or over an ordinary connection, and its site answers other countries' exits with "406
+# Not Acceptable", so Canada's prices come from the Internet Archive's copy of the picker of 2026-10-10 (its plan data:
+# "Paramount+ basic monthly - Canada", planTier "ads", "$7.99/Month" and "$70.99/Year"; "NEW Paramount+ monthly -
+# Canada", "standard", "$11.99/Month" and "$106.99/Year"; "Paramount+ premium monthly - Canada", "premium",
+# "$15.99/Month" and "$142.99/Year"). Its home page says "Plans start from $7.99 CAD / Month + tax". The plans' titles
+# end in "- Trial", but the data marks none as one ("trial":false), as its plans article gives Canada no free trial.
+# Features: its help centre's plans article, read 2026-11-04 (Basic with ads, Standard and Premium, each "available in"
+# Canada among others).
+# Region checklist, 2026-11-09: 1. paramountplus.com/ca; 4. the sign-up picker (no plans shown; the archive's copy);
+# 6. Edge from here and a browser over an ordinary connection, then the Internet Archive. Its other countries are unread
+# (406 through their exits), and no page read lists every country it's sold in, so availableIn is left out.
+# Bundles: none read. Resellers: none.
+
+id: paramount-plus
+name: Paramount+
+website: https://www.paramountplus.com
+domains: [paramount.com, pplus.legal, viacomcbsprivacy.com, skydance.com]
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD }
+cancelUrl: https://legal.paramount.com/ca/en/pplus/termsofuse
+sources: { pricing: https://www.paramountplus.com/ca/account/signup/pickplan/ }
+notes: Canada's prices only; its other countries' pages couldn't be read.
+# Ways to pay, read 2026-11-09 in its Canadian terms (cards, and app stores and partners that bill for it).
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Terms of use'
+    url: https://legal.paramount.com/ca/en/pplus/termsofuse
+    quotes:
+      - 'If we receive updated payment details or debit/credit card information'
+      - 'If you signed up for a Subscription that is set to auto-renew through a third party (for example, via an app store or one of our third party partners)'
+
+# Owner (M11.2), read 2026-11-09 on Paramount Skydance's brands page for Paramount+; where it is, from the postal
+# address in its privacy policy. Canada's service is "Paramount Streaming Canada, a division of Paramount Entertainment
+# Canada ULC" (its terms).
+owner:
+  name: 'Paramount Skydance Corporation'
+  website: https://www.skydance.com
+  page:
+    name: 'Paramount+ (Paramount Skydance brands)'
+    url: https://www.skydance.com/about/brands/paramount-plus
+  quotes:
+    - "The flagship streaming home of Paramount's premium original series and global brands"
+  country:
+    code: US
+    page:
+      name: 'Paramount Skydance Privacy Policy'
+      url: https://www.viacomcbsprivacy.com/en/policy
+    quotes:
+      - '1515 Broadway New York NY 10036 UNITED STATES OF AMERICA'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09: its terms take payment "at the start of each billing period", and changing your
+# payment method "may adjust the day", without naming it.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://legal.paramount.com/ca/en/pplus/termsofuse]
+  lastVerified: 2026-11-09
+
+# Features, read 2026-11-04 in its help centre's plans article: Basic (with ads) "Experience in full HD", "Stream on 1
+# device at a time", "Stream with ads"; Standard full HD, "Stream on 2 devices at once", "Ad-free streaming",
+# "Download and watch on the go"; Premium "Experience in 4K UHD, HDR10, Dolby Vision and Dolby Atmos", "Stream on 4
+# devices at once", ad-free, downloads. Downloads on no stated number of devices, so 1, inferred. "Subscriptions
+# described as ad-free will still feature advertising breaks in live Content" (its terms).
+plans:
+  - id: paramount-plus.basic-ads
+    name: Basic with ads
+    link: https://www.paramountplus.com/ca/
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 1
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-10,
+          sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 70.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-10,
+          sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+  - id: paramount-plus.standard
+    name: Standard
+    link: https://www.paramountplus.com/ca/
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+    inferred:
+      streaming.download-devices:
+        reason: 'Its plans article says you can download and watch on the go, without saying on how many devices, so at least one.'
+        page:
+          name: Paramount+ subscription plans
+          url: https://support.paramountplus.com/s/article/PI-Can-you-tell-me-more-about-the-Paramount-subscription-plan?language=en_US
+        lastVerified: 2026-11-04
+    notes: Live content still has ad breaks.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-10,
+          sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 106.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-10,
+          sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+  - id: paramount-plus.premium
+    name: Premium
+    link: https://www.paramountplus.com/ca/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+    inferred:
+      streaming.download-devices:
+        reason: 'Its plans article says you can download and watch on the go, without saying on how many devices, so at least one.'
+        page:
+          name: Paramount+ subscription plans
+          url: https://support.paramountplus.com/s/article/PI-Can-you-tell-me-more-about-the-Paramount-subscription-plan?language=en_US
+        lastVerified: 2026-11-04
+    notes: Live content still has ad breaks.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 15.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-10,
+          sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 142.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-10,
+          sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its Canadian Terms of Use ("LAST UPDATED : July 31, 2026", Paramount
+# Streaming Canada's) and help centre's plans article; Paramount Skydance's privacy policy is a shared document
+# (data/policies/paramount-privacy.yaml). Its sign-up form wasn't reached, so sign-up data stays unrated.
+policies:
+  shared: [paramount-privacy]
+  links:
+    - name: 'Terms of use'
+      url: https://legal.paramount.com/ca/en/pplus/termsofuse
+    - name: 'Paramount+ subscription plans'
+      url: https://support.paramountplus.com/s/article/PI-Can-you-tell-me-more-about-the-Paramount-subscription-plan?language=en_US
+  ratings:
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its sign-up form opens only after a plan is picked, which the reader didn’t reach, and its terms don’t list what an account needs.'
+      pages: [https://legal.paramount.com/ca/en/pplus/termsofuse]
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in your account at any time, with no fee, and keep watching until the end of your billing period.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'you can manage or cancel your Subscription at any time by going to your Account at www.paramountplus.com/account'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'you will not be required to pay a fee or penalty to cancel your Subscription'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but keep watching to the end of the period; in Québec and British Columbia the law can let you end it sooner with a refund.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'you will not be refunded for any fees you have paid.'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'there are certain circumstances in which you may be legally entitled to a refund under consumer protection legislation'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'you will be able to continue to use your Subscription until the cancellation takes effect'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It gives at least 30 days’ notice of a new price, which never applies in a billing period you’ve started, so you can cancel first.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'We will provide you with at least thirty (30) days’ notice of any price change that applies to your Subscription. Price changes will not come into effect during your current billing period, so will only apply on renewal'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Its free trials are only for Austria, France, Germany, Italy, Switzerland, the UK and Ireland, not Canada.'
+      pages:
+        - https://support.paramountplus.com/s/article/PI-Can-you-tell-me-more-about-the-Paramount-subscription-plan?language=en_US
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews unless you cancel before the next billing date, but not that it reminds you first.'
+      pages: [https://legal.paramount.com/ca/en/pplus/termsofuse]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: good
+      reason: 'The price is all Paramount+ charges; your card’s issuer may add its own fees, such as for paying from abroad.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'For some payment methods, the relevant issuer may charge you certain fees, such as a foreign transaction fee or other fees relating to the processing of your payment method.'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'An upgrade starts at once, with your unused days credited; a downgrade starts at the end of your billing period.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'When you upgrade, any unused days from your current Subscription will be credited towards the cost of your new Subscription.'
+        - url: https://support.paramountplus.com/s/article/PI-Can-you-tell-me-more-about-the-Paramount-subscription-plan?language=en_US
+          quote: 'If you downgrade plans, your new plan will start at the end of your current billing period.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: great
+      reason: 'Your own province’s law applies, and you can take a dispute to a court where you live, with no arbitration.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'governed by and construed in accordance with the laws in effect in your Canadian jurisdiction of residence.'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'As a consumer, you have the right to refer the matter to a Canadian competent court of law where you reside.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It gives at least 30 days’ notice of a change that disadvantages you, and you can refuse it and keep your old terms until you cancel.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'If we reasonably consider that any change to these Terms of Use will materially disadvantage you, or where required by law, we will provide you with at least 30 days’ notice of these changes'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'the version of the Terms of Use that you previously accepted will continue to apply to your use of the Service until cancellation of your Subscription has taken effect.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your plan for any reason on reasonable notice, but then you keep it to the end of the period or get the rest back; for a breach, only after a warning.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'on reasonable notice to you for any reason other than those set out in (a) to (c) above'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'you have breached these Terms of Use and (if it could be remedied) have not remedied that breach despite having been previously warned by us'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Shows come and go. It tells you 30 days before a change that disadvantages you, and refunds what you’ve paid for if you cancel over it.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'If we make any significant changes to the Service which will materially disadvantage you (“ Major Change ”), we will notify you at least 30 days in advance of the Major Change taking effect'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'This Content may change from time to time so that new content, such as programmes and channels, may become available whilst existing content will be withdrawn.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://legal.paramount.com/ca/en/pplus/termsofuse]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid letting anyone else use your account or sign-in, unless they say otherwise.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'unless authorised by these Terms of Use, allow anyone else to use your Account or access your credentials'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'It can limit how many shows you download, on how many devices and for how long, and downloads expire when you cancel.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: '(a) restrictions on the total number of Downloads per Account; (b) the maximum number of devices that can hold Downloads'
+        - url: https://legal.paramount.com/ca/en/pplus/termsofuse
+          quote: 'If you cancel your Subscription, or we no longer have the necessary rights to the downloaded Content, access to such Downloads will automatically expire.'
+      lastVerified: 2026-11-09
