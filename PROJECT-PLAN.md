@@ -2128,10 +2128,19 @@ in every D1 `json` column search parses.
     choices: `alipay` is a way to pay (with its Simple Icons mark), and the price-research skill reads every period a
     provider sells, each priced only where it's sold (ZEE5's 3 months), which `pickPrice` already shows only there. Core's
     same-date renewal wording reads "charged on a calendar month ... basis" (iQIYI).
+  - **Streaming, batch 3, part 3** (2026-11-09): SkyShowtime (`skyshowtime`: Standard with ads, Standard and Premium in
+    the Netherlands and Spain, the owner's choice; Spain sells no yearly Standard or Premium, and both countries'
+    6-month deals and Spain's commitment prices are first-term offers, left out); Viaplay (`viaplay`, the Netherlands
+    only: Basic with ads and Standard, a year paid once for 12 months, so not renewing by itself), Videoland's since
+    it bought Viaplay Group's Dutch business on 30 October 2026, rated by its terms as written (the owner's choice), whose
+    clauses Videoland's interim terms keep from 30 November 2026; and Odysee (`odysee`: Premium and Premium+, priced in
+    its help centre, whose plans wait in core's `awaitingRequiredFeatures` for their video quality, streams and ads, the
+    owner's choice). discovery+'s UK, Irish and Italian price changes rise to Great, as calibrated: a new price only
+    from the next billing period, with 30 days' notice. Core reads an owner's country in its own language ("Nederland")
+    and Viaplay's Dutch billing date, moved only to today, as the date you signed up.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2, Prime Video and batch 3's parts 1 and 2
-        done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 3 and Prime Video done)
 
 ---
 

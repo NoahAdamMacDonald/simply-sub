@@ -129,7 +129,9 @@ API contract's prices are illustrative and never a source. This skill is how to 
     `first-of-month` or `end-of-month`; `kind: not-stated` with the `pages` read when none says. Terms often say the
     date you signed up by what it implies: a charge whose timing changes only "if your subscription began on a date
     not contained in a given month" (Disney's and Bell Media's terms) is billed on that date each month, and core reads
-    that wording as `same-date`; "renews at the end of the billing period" alone says no day. The item dialog
+    that wording as `same-date`, as it does a billing date you can move only to today (Viaplay's Dutch "Je kunt de
+    betaaldatum alleen wijzigen naar de huidige datum"); "renews at the end of the billing period" alone says no day.
+    Another language's wording is added to core's `renewalWrittenAs` with a test. The item dialog
     suggests a new item's renewal from it and asks "Billed on…" only when it doesn't settle that.
   - **Source code** (`sourceRepo`, M11.5): when its own pages say its code is open (an "Open source" page, its
     downloads' "Source code" link), the repository that page links, quoted, with `software.open-source` provider-wide
@@ -319,6 +321,18 @@ which reads each page as a visitor there would, before any hand reading:
   Premium tabs (`nth:1:Standard`). Ireland and the Netherlands price in a bare "$", which the page's own data names
   (`"currencyUnit":"USD"`); read it as part of the page. Its help centre's answers and its Security Response Center's
   English (`#oversea`) are in the page but shown only when opened.
+- **SkyShowtime's plans** (M11.15): skyshowtime.com/<country> and its help centre price by country: read each through
+  its exit. The Netherlands' "6-maandendeal" and Spain's "6 meses" renew monthly, and Spain's "Mensual superahorro"
+  plans commit you to 6 or 12 months at a lower monthly price: first-term offers, left out. Spain's help article lists
+  yearly Estándar and Prémium prices its plan picker doesn't sell; the picker's periods count.
+- **Viaplay's Dutch cards** (M11.15, viaplay.com/nl-nl, through a Dutch exit): a year is "Eenmalige betaling, 12
+  maanden vast", one payment for 12 fixed months, so `autoRenew: false`; its terms then continue the plan monthly, or
+  for another fixed term, as the offer says. Its help article "Informatie over onze pakketten" still lists a 12-month
+  contract paid monthly that the cards no longer sell. Its account form (viaplay.com/checkout/register/<package>, after
+  "Koop nu") loads without signing in; read its fields only.
+- **Odysee's Premium** (M11.15): odysee.com/$/premium asks you to sign up first, so its help centre's Premium article
+  (help.odysee.tv/premium) is the page that prices it, in a bare "$" (its terms count in "USD"). The help centre's
+  sitemap.xml lists every article (account deletion, memberships, the payments chart).
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

@@ -112,7 +112,8 @@ their own.
   owner's quotes say it ("a Swiss corporation"), the code alone; else a `page` of its own with one to three `quotes`
   and `lastVerified`, in the same order of pages, or an address in its terms or corporate information ("Los Gatos, CA
   95032, USA"). Its words name the country, its people, or in an address a state or province ("Bristol,
-  Connecticut"): validation checks it (core's `namesCountry`), and a code alone ("CA") names none.
+  Connecticut"): validation checks it (core's `namesCountry`), and a code alone ("CA") names none. A page in another
+  language can name it in its own ("Nederland", Viaplay's Dutch help centre): add that name to `namesCountry`'s list.
 - **Outside ratings** (M11.2): only from raters in `data/raters.yaml`, whose terms were read before they were added
   (its header lists those read and left out, and why: Ad Fontes, Media Bias/Fact Check, AllSides, AV-Comparatives,
   SE Labs). A new rater is read for its terms first and added only when they plainly allow showing its label with a
@@ -266,6 +267,16 @@ this file to them: change both together.
   from rogers.com/terms). The Digital Privacy Policy it names for cookies has no link on Rogers' pages.
 - ZEE5's privacy policy has two parts: the one for users outside India (Z5X Global's) is rated, the one for India's
   users isn't. Its sign-in page signs you up too.
+- SkyShowtime's terms are one contract in each country's language: rate them once, from the Dutch, and its privacy
+  policy the same way. Its help centre's data request form (OneTrust) is where deletion and copies are asked for.
+- Viaplay in the Netherlands is Videoland's (DPG Media) since 30 October 2026. Its terms (viaplay.com/nl-nl/terms,
+  Viaplay Group's) are rated as written, the owner's choice; from 30 November 2026 Videoland's interim terms
+  (viaplay.com/nl-nl/interim-terms: the same clauses under Dutch law, with a 14-day withdrawal that refunds the unused
+  days) and DPG Media's privacy policy apply, so quote terms sentences that both versions have, and re-rate its privacy
+  topics from DPG Media's policy then. Its help centre and terms read through a Dutch exit.
+- Odysee's terms don't mention Premium, and its privacy policy is a general template (Google AdSense, Do Not Track):
+  most billing topics stay `not-stated`. Its terms' quotes mix curly and straight quotation marks (“Services"): copy
+  them from the saved text.
 - Netflix's help articles ask for a country; their text still loads.
 - CBC/Radio-Canada's general terms for its digital services (which ICI TOU.TV's subscription includes) load each
   answer only when its question is clicked: open each in Edge (`read-page.cjs`, `click:` by the question's text).
