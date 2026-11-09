@@ -132,6 +132,24 @@ describe('planBody', () => {
     expect(body.data.inferred).toEqual(inferred);
   });
 
+  it('says which values come from a third party, and from which publication (M11.16)', () => {
+    const thirdParty = {
+      'video.quality': {
+        publisher: 'The Verge',
+        url: 'https://www.theverge.com/netflix-plans',
+        quote: 'Standard streams in 1080p.',
+        lastVerified: '2026-11-09',
+      },
+    };
+    const body = planBody(
+      netflix,
+      { ...standard, thirdParty },
+      { ...canada, registry, bundleIds: [] },
+    );
+    expect(issues(planBodySchema, body)).toEqual([]);
+    expect(body.data.thirdParty).toEqual(thirdParty);
+  });
+
   it('adds its provider, rank keys, add-ons and bundles where the contract puts them', () => {
     const body = planBody(netflix, standard, {
       ...canada,

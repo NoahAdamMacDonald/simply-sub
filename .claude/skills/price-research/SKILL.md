@@ -75,7 +75,12 @@ API contract's prices are illustrative and never a source. This skill is how to 
     that were silent; a required enum or number no page states is never guessed. When a page gives a reason for a
     value (a speed article's "HD content", an app's highest quality setting), record it with the plan's `inferred`
     (the reason and that page), which the card marks for the user to judge (BLUEPRINT §4.2 rule 11, the owner's choice
-    of 2026-11-03); when none does, ask the user, who may add the plan to core's `awaitingRequiredFeatures`.
+    of 2026-11-03). When none does, and the site was read every way this skill allows (an exit, the archive's copy
+    as a backup), a named publication's own page may give the value, never a price: record it with the plan's
+    `thirdParty` (`publisher`, `url`, `quote` word for word, `lastVerified`), which the card marks "third-party", the
+    optimizer never counts for a Needed rank and Settings can leave out (BLUEPRINT §4.2 rule 12, the owner's choice of
+    2026-11-09). Reviews and the tech press only, never forums or user posts. When no publication states it either,
+    ask the user, who may add the plan to core's `awaitingRequiredFeatures`.
   - **Provider-wide facts once:** platforms, sign-in methods, open source, audio and subtitle languages and support
     channels (`providerWide: true` in the registry) go in the provider's own `features` when every plan has them, and
     a plan states one only where it differs. Category features stay on each plan, even when all are the same.

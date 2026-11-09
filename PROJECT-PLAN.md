@@ -1057,6 +1057,7 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
 | M11.12 | Interest and net cost (§3.1, core): interest a year from the tiers and the balance, the fee after waivers, and net cost; Home and the lists show interest earned beside spending, never inside subscription totals | A fixture's balance gives the interest its tiers state; a fee the balance waives counts $0 |
 | M11.13 | The finance optimizer (BLUEPRINT §10.6): the balance where a paid rate pays for itself, the cost of holding a waiver's minimum against paying the fee, moving savings to a better account the user has or one sold in their region, and a warning when a balance passes its insurer's limit; worded as information, not advice | A $10 monthly fee for 1.5 points more is worth it above $8,000; a balance over its insurer's limit warns |
 | M11.14 | Rate history (the bot): rates read like prices, each change kept with its date; for a rate that follows the Bank of Canada's, how many days it took to follow its last changes | After a fixture change of the Bank of Canada's rate, a linked rate's lag shows on its card |
+| M11.16 | Third-party claims (added 2026-11-09, the owner's choice; BLUEPRINT §4.2 rule 12): a plan's `thirdParty` (publisher, url, quote, date) for a value only a publication gives, validated (the plan's own feature, not inferred too, off the provider's sites); the feature list's "third-party" mark; the optimizer counts it for Wanted and lower ranks only, and a card that rests on one names its source; Settings' "Use third-party claims", on by default | A plan's third-party value shows its mark and source; a Needed feature it alone gives blocks the change; with the setting off, the card shows the feature as not stated and the optimizer ignores it |
 | M11.15 | The research, a category at a time (the guide's §7): feature-discovery for the category, then its providers in batch pull requests of about 10, each reviewed by a second model; pushed once per batch, and web searches after sitemaps and known paths, SearXNG before the paid engines (the guide's §7.2). In order: AI, streaming, music, VPN, password managers and authenticators, antivirus, storage, email, gaming, office and creative, news; then browsers, search, DNS, file sharing, calendars, maps, social, jobs, developer tools; then finance, after M11.10–M11.14 | Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date |
 
 #### M11 specs
@@ -2151,6 +2152,35 @@ in every D1 `json` column search parses.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done)
+
+**M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
+- **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on
+  a site read every way the price-research skill allows (directly, through an exit, the archive's copy as a backup).
+  First party whenever possible, and an inferred value (M11.9) before a third party's. Never a price, a policy rating
+  or a provider fact: a named publication's own page, quoted word for word.
+- **Shape:** the plan's `thirdParty` maps a feature id of its own `features` to `{ publisher, url, quote,
+  lastVerified }`. Validation refuses a feature the plan's features don't give (a provider-wide one included, so the
+  setting can take it from the plan), one in `inferred` too, a page on the provider's sites (its policies' and owner's
+  included) and a date after today. The quote-check script reads it like any other quote.
+- **The optimizer:** a plan's keys that only its third-party values give carry their claim (core's model,
+  `Contribution.claim`). One never keeps a Needed, Critical or Essential rank (evaluate's `firmFor`, used by
+  `lostSlots`, `cardsOf` and the critical keys a plan must keep), whether the item moves to that plan or another
+  item would keep a removed one's key; it keeps Wanted and the ranks below as any key does. The plan an item has
+  (kept, billed another way, or reached as an extra member or in a bundle, `Contribution.own`) counts for it as it
+  is. A suggestion lists the keys of the items it changes that are kept only through a claim (`claimKept`,
+  `Suggestion.thirdParty`), which the card shows as "Rests on third-party claims: HDR, per The Verge", each
+  publisher linked.
+- **The setting:** Settings' Catalog card has "Use third-party claims", on by default, with a hint; off, it saves
+  `skipThirdParty: true` on this device, and CatalogStore serves every file through core's `withoutThirdParty` (each
+  plan without its third-party values and its `thirdParty`, made once per file), so the cards, Search, ranking and the
+  optimizer never see them.
+- **Acceptance**
+  - [x] A plan's third-party value shows "third-party" beside it, linking the publication, with its quote as the
+        tooltip
+  - [x] A Needed feature only a third-party value gives blocks the change; a Wanted one is kept, and the card names
+        the source
+  - [x] With the setting off, the value isn't there: the card shows the feature as not stated, and the optimizer
+        ignores it
 
 ---
 
@@ -3365,6 +3395,8 @@ place.
 - 📍 opens a dialog for country, province or state, and currency (the currency follows the country unless you change it), with the sales tax that follows: "Sales tax 13% (Ontario)" and a "Use my own rate" checkbox (BLUEPRINT §4.8). It shares the first-run dialog's fields (P1). Cancel or Escape changes nothing.
 - **Appearance** (M4.2): System, Light or Dark, saved in `settings.theme` (BLUEPRINT §8.1).
 - **Catalog** (M4.3): "Updated Oct 22, 2026 · version c4f9a21" (the build date and version of the user's region's file), or "Not downloaded yet". [Check for updates] checks now and says what it found in a live region under it: "You have the latest catalog.", "Downloaded the latest catalog.", "You're offline. Try again when you're back online." or "Couldn't check for updates. Try again later."
+  Under it (M11.16), "Use third-party claims", on by default, on this device: off, the app reads the catalog without
+  the values only a publication gives (BLUEPRINT §4.2 rule 12).
 - **App** (M10.6), after Your data:
   - **Install**, left out in the installed app: what installing does, then [Install Simply Sub] when the browser offers it (Chromium), which shows the browser's dialog once, or else the steps for each browser (Chrome or Edge's address bar, Chrome on Android, Safari on an iPhone or iPad and on a Mac, Firefox on Android). Installed from the tab: "Installed: open Simply Sub from your apps, home screen or taskbar."
   - **Version:** "Version fd54aac, built Oct 29, 2026" (the commit and day of the build), or "A development build". Its own [Check for updates] asks the service worker and says what it found: "You have the latest version.", "A new version is ready: reload to use it." (the prompt shows too), the offline message or the failure. With no worker (a development build, or a browser that refuses them): "Each visit loads the latest version." instead.

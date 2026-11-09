@@ -194,6 +194,19 @@ describe('SettingsPage', () => {
     await vi.waitFor(async () => expect(await saved()).not.toHaveProperty('searchAllResellers'));
   });
 
+  it('keeps Use third-party claims, on unless it’s turned off (M11.16)', async () => {
+    const claims = await loader.getHarness(
+      MatCheckboxHarness.with({ label: 'Use third-party claims' }),
+    );
+    expect(await claims.isChecked()).toBe(true);
+    expect(text()).toContain('marked “third-party” with its source');
+
+    await claims.uncheck();
+    await vi.waitFor(async () => expect((await saved()).skipThirdParty).toBe(true));
+    await claims.check();
+    await vi.waitFor(async () => expect(await saved()).not.toHaveProperty('skipThirdParty'));
+  });
+
   describe('the 📍 dialog', () => {
     async function open(): Promise<HarnessLoader> {
       await (await loader.getHarness(MatButtonHarness.with({ text: /Ontario, Canada/ }))).click();

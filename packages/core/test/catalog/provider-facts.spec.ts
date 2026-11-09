@@ -375,6 +375,41 @@ describe('validateCatalog, for inferred feature values (M11.9)', () => {
   });
 });
 
+describe('validateCatalog, for third-party feature values (M11.16)', () => {
+  const claim = {
+    publisher: 'The Verge',
+    url: 'https://www.theverge.com/netflix-plans',
+    quote: 'Standard streams in 1080p.',
+    lastVerified: today,
+  };
+
+  it('marks a value the plan states, from a publication off its sites', () => {
+    expect(
+      messages(catalogWith(netflix, ['plans', 0, 'thirdParty'], { 'video.quality': claim })),
+    ).toEqual([]);
+  });
+
+  it('refuses a feature the plan doesn’t state, its own page, an inferred value and a page not read yet', () => {
+    const file = catalogWith(netflix, ['plans', 0, 'thirdParty'], {
+      'vpn.kill-switch': { ...claim, url: 'https://example.com/help', lastVerified: '2099-01-01' },
+      'video.quality': claim,
+    });
+    const inferred = {
+      reason: 'Its help recommends a speed for HD content.',
+      page: { name: 'Help Center', url: 'https://example.com/help/306' },
+      lastVerified: today,
+    };
+    expect(
+      messages(edited(file, netflix, ['plans', 0, 'inferred'], { 'video.quality': inferred })),
+    ).toEqual([
+      `${netflix} plans.0.thirdParty.vpn.kill-switch: Names a feature the plan’s features don’t give: give its value there first`,
+      `${netflix} plans.0.thirdParty.vpn.kill-switch.url: Is Netflix's own page: an official page's value goes in features, or in inferred with a reason`,
+      `${netflix} plans.0.thirdParty.vpn.kill-switch.lastVerified: 2099-01-01 is after today (${today})`,
+      `${netflix} plans.0.thirdParty.video.quality: Is inferred too: a value is inferred from an official page or taken from a third party, not both`,
+    ]);
+  });
+});
+
 describe('validateCatalog, for currencies', () => {
   it('takes them from its own sites, for the ways to pay it lists', () => {
     expect(messages(catalogWith(mullvad, ['currencies'], [cash]))).toEqual([]);

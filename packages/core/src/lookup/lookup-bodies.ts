@@ -135,6 +135,7 @@ export const planBodySchema = z.strictObject({
       .optional(),
     featureLabels: planShape.featureLabels,
     inferred: planShape.inferred,
+    thirdParty: planShape.thirdParty,
     perks: planShape.perks,
     notes: planShape.notes,
     prices: planShape.prices,

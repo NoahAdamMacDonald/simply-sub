@@ -2,8 +2,10 @@ import type { Rank } from '../user/rank';
 import {
   blocked,
   buildChecks,
+  claimKept,
   counts,
   evaluate,
+  firmFor,
   levelOf,
   losesService,
   type Checks,
@@ -134,23 +136,26 @@ function cardsOf(model: OptimizerModel, checks: Checks, plan: Int32Array): numbe
     for (const index of model.options[change].items) {
       const item = model.items[index];
       const removed = losesService(model, item, plan);
-      // The slots an option gives the key in, for this item.
-      const gives = (option: number, key: number) =>
-        (model.options[option].byKey.get(key) ?? []).reduce(
-          (mask, contribution) =>
-            counts(contribution, item, removed) ? mask | contribution.mask : mask,
-          0,
-        );
       for (const check of checks.byItem[index]) {
-        let settled = gives(change, check.key);
+        // The slots an option gives the key in, for this item: as lostSlots counts them (M11.16).
+        const firmOnly = check.level === blocked;
+        const gives = (option: number) =>
+          (model.options[option].byKey.get(check.key) ?? []).reduce(
+            (mask, contribution) =>
+              counts(contribution, item, removed) && (!firmOnly || firmFor(contribution, item))
+                ? mask | contribution.mask
+                : mask,
+            0,
+          );
+        let settled = gives(change);
         for (const other of check.affecting) {
-          if (isKeep(model, plan[other])) settled |= gives(plan[other], check.key);
+          if (isKeep(model, plan[other])) settled |= gives(plan[other]);
         }
         if ((check.need & ~settled) === 0) continue;
         for (const other of check.affecting) {
           const option = plan[other];
           if (option === change || isKeep(model, option)) continue;
-          if (gives(option, check.key) !== 0 || gives(model.keep[other], check.key) !== 0) {
+          if (gives(option) !== 0 || gives(model.keep[other]) !== 0) {
             parent.set(find(option), find(change));
           }
         }
@@ -224,6 +229,22 @@ function suggestionOf(
       }
     }
   }
+  // The third-party claims it rests on (M11.16): a key of an item it changes that's kept only through one.
+  const thirdParty = new Map<string, NonNullable<Suggestion['thirdParty']>[number]>();
+  for (const index of new Set(card.flatMap((option) => model.options[option].items))) {
+    for (const check of checks.byItem[index]) {
+      const key = model.keyIds[check.key];
+      const claim = thirdParty.has(key) ? undefined : claimKept(model, check, choice);
+      if (claim) {
+        thirdParty.set(key, {
+          key,
+          label: model.labels[check.key],
+          publisher: claim.publisher,
+          url: claim.url,
+        });
+      }
+    }
+  }
   const next12 = evaluation.cost;
   return {
     fingerprint,
@@ -243,6 +264,7 @@ function suggestionOf(
       title: model.items[index].suggested.title,
     })),
     gained: [...gained.values()],
+    ...(thirdParty.size > 0 && { thirdParty: [...thirdParty.values()] }),
   };
 }
 

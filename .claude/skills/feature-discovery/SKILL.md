@@ -80,7 +80,9 @@ which moves users' ranks.
 A plan that doesn't list a boolean has it as **false**, and an unlisted set is **empty**. So leaving a value out is
 a claim, and for a feature `requiredIn` the plan's category it's an error (M11.4). For every provider in the category, either source the value or say what you inferred and from what (in the
 YAML comment and the PR). Mullvad's P2P was inferred from its terms, because leaving it out would have said "no P2P".
-If a provider's value can't be found or inferred, raise it with the user before adding the feature.
+If a provider's value can't be found or inferred, a named publication's own page may give it as the plan's
+`thirdParty` value, cited and quoted (BLUEPRINT §4.2 rule 12: the card marks it, and it never counts for a Needed
+rank); with none, raise it with the user before adding the feature.
 
 ## 5. Propose before editing
 

@@ -22,6 +22,25 @@
             >inferred</a
           >
         }
+        @if (line.thirdParty; as claim) {
+          <!-- Its source's page: the publication's words are the tooltip, and the link's name says whose. -->
+          &ngsp;<a
+            class="third-party"
+            [href]="claim.url"
+            target="_blank"
+            rel="noopener"
+            [matTooltip]="'“' + claim.quote + '” (' + claim.publisher + ')'"
+            matTooltipTouchGestures="off"
+            [attr.aria-label]="
+              'Third-party, from ' +
+              claim.publisher +
+              ' (opens in a new tab): “' +
+              claim.quote +
+              '”'
+            "
+            >third-party</a
+          >
+        }
         @for (ranked of line.ranks; track ranked.key) {
           <span class="rank">
             <ss-rank-chip [rank]="ranked.rank" />

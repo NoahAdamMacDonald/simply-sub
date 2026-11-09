@@ -174,6 +174,18 @@
             </button>
           </div>
           <p class="check-message" role="status">{{ checkMessage() }}</p>
+          <mat-checkbox
+            [checked]="saved.skipThirdParty !== true"
+            aria-describedby="third-party-hint"
+            (change)="setThirdParty($event.checked)"
+          >
+            Use third-party claims
+          </mat-checkbox>
+          <p id="third-party-hint" class="hint">
+            A few features no official page states come from a publication, marked “third-party”
+            with its source. They never count for a feature you need. Off, cards show them as not
+            stated, and Search and Optimizations leave them out.
+          </p>
         </section>
 
         <!-- Folded until opened (M4.7): it can't be undone. Its summary is in the Tab order, as a summary is. -->

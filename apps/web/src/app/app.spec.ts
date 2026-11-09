@@ -45,9 +45,10 @@ describe('App', () => {
     });
 
     it('says nothing will be saved, in place of the app', async () => {
-      const { fixture, element } = setup();
+      const { element } = setup();
       await until(() => TestBed.inject(SettingsStore).status() === 'error');
-      await fixture.whenStable();
+      // The notice is a chunk of its own.
+      await until(() => element.querySelector('main h1') !== null, 5000);
 
       expect(element.querySelector('ss-shell')).toBeNull();
       expect(element.querySelector('main h1')?.textContent).toBe('Nothing will be saved');
@@ -59,7 +60,8 @@ describe('App', () => {
     it('carries on in memory after [Continue anyway], and says so', async () => {
       const { fixture, element } = setup();
       await until(() => TestBed.inject(SettingsStore).status() === 'error');
-      await fixture.whenStable();
+      // The notice is a chunk of its own.
+      await until(() => element.querySelector('main h1') !== null, 5000);
 
       const button = [...element.querySelectorAll('button')].find(
         (candidate) => candidate.textContent?.trim() === 'Continue anyway',
