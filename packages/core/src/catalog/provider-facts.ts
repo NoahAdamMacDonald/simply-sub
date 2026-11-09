@@ -28,11 +28,13 @@ export const renewalAnchorNames: Readonly<Record<RenewalAnchorKind, string>> = {
  * French) is billed on the same date each month but in shorter months, you "subscribe on your preferred billing
  * date" when the day you subscribe sets it (Claude's billing help), and a subscription "charged on a calendar month ...
  * basis, with the validity of each period aligning with the billing cycle" runs a calendar month from each charge
- * (iQIYI's help centre, M11.15); without that last part, a calendar month could be the 1st to the last day.
+ * (iQIYI's help centre, M11.15); without that last part, a calendar month could be the 1st to the last day. A billing
+ * date you can move only to today ("Je kunt de betaaldatum alleen wijzigen naar de huidige datum", Viaplay's Dutch help
+ * centre, where moving it starts a new subscription that day) is the day you subscribe, too.
  */
 const renewalWrittenAs: Readonly<Record<RenewalAnchorKind, RegExp>> = {
   'same-date':
-    /\b(?:date|day) (?:that |when )?you (?:sign(?:ed)? up|subscribed?|joined|purchased|started|bought)\b|\bsame (?:day|date)\b|\banniversary\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbegan on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b|\bcharged on a calendar month(?:, quarter,? and year)? basis, with the validity of each period aligning with the billing cycle\b/i,
+    /\b(?:date|day) (?:that |when )?you (?:sign(?:ed)? up|subscribed?|joined|purchased|started|bought)\b|\bsame (?:day|date)\b|\banniversary\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbegan on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b|\bcharged on a calendar month(?:, quarter,? and year)? basis, with the validity of each period aligning with the billing cycle\b|\bje kunt de betaaldatum alleen wijzigen naar de huidige datum\b/i,
   'every-30-days': /\b(?:30|thirty)[- ]days?\b|\b30 jours\b/i,
   'first-of-month':
     /\b(?:1st|first(?: day)?) of (?:each|every|the|the following|the next) (?:calendar )?month\b|\bpremier (?:jour )?(?:de|du) (?:chaque )?mois\b|\b1er (?:de|du) (?:chaque )?mois\b/i,

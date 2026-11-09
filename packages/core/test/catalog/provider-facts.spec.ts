@@ -209,6 +209,9 @@ describe('namesRenewalAnchor', () => {
     ],
     ['Charged on a calendar month basis.', 'same-date', false],
     ['Charged on a calendar month basis.', 'first-of-month', false],
+    // Viaplay's Dutch help centre (M11.15): a billing date moved only to today, the day a new subscription starts.
+    ['Je kunt de betaaldatum alleen wijzigen naar de huidige datum.', 'same-date', true],
+    ['Je kunt de betaaldatum wijzigen.', 'same-date', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],
     ['You’re billed on the 1st of each month.', 'first-of-month', true],
