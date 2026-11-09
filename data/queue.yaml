@@ -32,9 +32,9 @@
   category: streaming
   source: own
   wikidata: Q1142035
-  status: unreadable
-  date: 2026-10-28
   note: Its plans and prices are only on crunchyroll.com/premium, which shows the bot an error page ("Something Went Wrong"); its help centre's membership article sends readers there for the prices
+  status: done
+  date: 2026-11-09
 - id: claude
   name: Claude
   website: https://claude.com

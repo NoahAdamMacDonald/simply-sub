@@ -1,0 +1,391 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 4). Its plans and prices are only on
+# crunchyroll.com/premium, which shows the reader "Something Went Wrong" from here, through exits and over an ordinary
+# connection, so the prices come from the Internet Archive's copy of 2026-10-23, the newest whose page was saved with its
+# plan cards (later copies hold only the page's script). The archive reads from the US: its cards price in US dollars
+# "+ Applicable taxes" ("Fan $9.99/mo", "Mega Fan $13.99/mo", "Ultimate Fan $17.99/mo"). Its "Yearly" tab ("Save 16%")
+# isn't in the saved page, so only monthly prices are stored.
+# Region checklist, 2026-11-09: 1. crunchyroll.com/premium (an error page live); 6. Edge from here, through exits and
+# over an ordinary connection, then the Internet Archive. Its other countries' prices are unread, and no page read lists
+# where it's sold, so availableIn is left out.
+# Bundles: none read. Resellers: none.
+
+id: crunchyroll
+name: Crunchyroll
+website: https://www.crunchyroll.com
+domains: [sonypictures.com]
+category: streaming
+spendCategory: streaming
+billingCurrency: { US: USD }
+cancelUrl: https://www.crunchyroll.com/tos/
+sources: { pricing: https://www.crunchyroll.com/premium }
+notes: US monthly prices only, read from the Internet Archive's copy of its plans page; its yearly prices and other countries' are unread.
+# Ways to pay, read 2026-11-09 in its terms: subscriptions through TV providers and other platforms. The checkout's
+# own methods weren't reached.
+paymentMethods:
+  - methods: [provider-billing]
+    page: 'Terms of Service'
+    url: https://www.crunchyroll.com/tos/
+    quotes:
+      - 'If you purchase a Subscription through an application store, internet or TV provider, mobile carrier or other authorized third-party platform'
+
+# Owner (M11.2), read 2026-11-09 in its terms; where it is, from the address its terms give for opting out of
+# arbitration. Its privacy policy is Sony Pictures Entertainment's.
+owner:
+  name: 'Crunchyroll, LLC'
+  page:
+    name: 'Terms of Service'
+    url: https://www.crunchyroll.com/tos/
+  quotes:
+    - 'These Terms of Service (the “ Terms ”) establish the relationship between you (“ you ” or “ User ”) and Crunchyroll, LLC'
+  country:
+    code: US
+    page:
+      name: 'Terms of Service'
+      url: https://www.crunchyroll.com/tos/
+    quotes:
+      - '5750 Wilshire Boulevard, Suite 110, Los Angeles, CA 90036, USA'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09: its terms charge "on the renewal processing date", without naming it.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://www.crunchyroll.com/tos/]
+  lastVerified: 2026-11-09
+
+# Apps (the cross-category features), read 2026-10-23 on its plans page: "Watch on Smart TVs, Playstation, Xbox,
+# Chromecast, Apple TV, Blu-ray players, and more", and its website.
+features:
+  platforms: [web, tv, console]
+
+# Perks (M11.6): its plan cards' lines that no feature describes, in their words.
+perks:
+  - id: game-vault
+    name: Access to Crunchyroll Game Vault
+  - id: manga
+    name: Access to Crunchyroll Manga
+  - id: free-shipping-over-50
+    name: Free shipping on Crunchyroll Store orders of $50 or more
+  - id: free-shipping
+    name: Free shipping on all Crunchyroll Store orders
+  - id: annual-swag-bag
+    name: Exclusive swag bag after 12 consecutive months
+  - id: early-access-drops
+    name: Early access to Crunchyroll Store drops
+
+# Features, read 2026-10-23 on its plans page's cards: "No ads*" on every plan ("*Plans may include trailers and
+# promotional messaging"), streams "1 device", "4 devices" and "6 devices" "at a time", and "Offline Viewing" on each
+# card, on no stated number of devices, so 1, inferred. Its comparison says "Download HD videos" and names no
+# resolution, so 720p (HD), inferred. Its terms let the account holder add profiles, with no number, so 2, inferred;
+# Teen Profiles are for 13 to 17, not children.
+plans:
+  - id: crunchyroll.fan
+    name: Fan
+    link: https://www.crunchyroll.com/premium
+    features:
+      video.quality: 720p
+      ad-free: true
+      streaming.concurrent-streams: 1
+      streaming.download-devices: 1
+      streaming.profiles: 2
+    inferred: &inferred
+      video.quality:
+        reason: 'Its plans page offers HD videos without naming a resolution, so at least 720p (HD).'
+        page:
+          name: Crunchyroll Premium
+          url: https://www.crunchyroll.com/premium
+        lastVerified: 2026-10-23
+      streaming.download-devices:
+        reason: 'Its plan cards include offline viewing without saying on how many devices, so at least one.'
+        page:
+          name: Crunchyroll Premium
+          url: https://www.crunchyroll.com/premium
+        lastVerified: 2026-10-23
+      streaming.profiles:
+        reason: 'Its terms let the account holder create more profiles without saying how many, so at least two.'
+        page:
+          name: Terms of Service
+          url: https://www.crunchyroll.com/tos/
+        lastVerified: 2026-11-09
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-23,
+          sourceUrl: https://www.crunchyroll.com/premium,
+        }
+  - id: crunchyroll.mega-fan
+    name: Mega Fan
+    link: https://www.crunchyroll.com/premium
+    features:
+      video.quality: 720p
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+      streaming.profiles: 2
+    inferred: *inferred
+    perks: [game-vault, free-shipping-over-50]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 13.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-23,
+          sourceUrl: https://www.crunchyroll.com/premium,
+        }
+  - id: crunchyroll.ultimate-fan
+    name: Ultimate Fan
+    link: https://www.crunchyroll.com/premium
+    features:
+      video.quality: 720p
+      ad-free: true
+      streaming.concurrent-streams: 6
+      streaming.download-devices: 1
+      streaming.profiles: 2
+    inferred: *inferred
+    perks: [game-vault, manga, free-shipping, annual-swag-bag, early-access-drops]
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-23,
+          sourceUrl: https://www.crunchyroll.com/premium,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its Terms of Service (Crunchyroll, LLC's) and the privacy policy it
+# links, Sony Pictures Entertainment's Privacy and Cookies Policy, whose international version ("effective as of 27
+# July, 2022") is what crunchyroll.com/privacy opens from here (US residents get sonypictures.com's, not read). Its
+# Store's Terms of Sale and SMS Terms are for the store and text messages, not the subscription. Its sign-up form
+# wasn't reached.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.crunchyroll.com/tos/
+    - name: 'Privacy and Cookies Policy (Sony Pictures)'
+      url: https://intl.sonypictures.com/en/privacy-policy
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It analyses what you watch and how often, to tailor content and improve its services. Stopping that takes an objection through its rights page.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'To analyse how the Content is used (including frequency and length of viewings)'
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'To tailor Content, including providing you with personalized Content in the context of our streaming services'
+      action:
+        name: 'Its privacy policy'
+        url: https://intl.sonypictures.com/en/privacy-policy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives social media platforms your email address or phone number, converted to a code, to target ads; it asks first only where the law requires.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'we may convert your email address, telephone number, or other information into a unique value and provide it to these third-party platforms for matching purposes.'
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'To the extent required by law, we will ask for your consent before setting these cookies.'
+      action:
+        name: 'Its Cookie Consent Tool'
+        url: https://intl.sonypictures.com/en/privacy-policy
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and other companies track what you view to show you ads, on its sites and elsewhere; you can refuse only in each browser’s cookie tool, where the law asks.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'To show adverts and Content recommendations that are more relevant to your interests'
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'We also allow other organizations to use tracking technologies for these advertising purposes.'
+      action:
+        name: 'Its Cookie Consent Tool'
+        url: https://intl.sonypictures.com/en/privacy-policy
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say whether what you write or upload trains AI.'
+      pages: [https://intl.sonypictures.com/en/privacy-policy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information no longer than it decides it needs, and names no periods.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'We retain your Personal Data for no longer than is necessary to fulfil the purpose for which it is processed.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask for your information to be deleted, done as soon as practicable, but copies may stay in its archives.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'We will make reasonable efforts to make such requested changes in our then-active and relevant consumer databases as soon as practicable'
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'residual and/or cached data may remain archived thereafter'
+      action:
+        name: 'Its privacy policy'
+        url: https://intl.sonypictures.com/en/privacy-policy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'Where the law gives you the right, you can ask for your information in a form you can take elsewhere.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'as well as the right to access, review, port, delete, or to block or to object to, or withdraw consent to the processing of certain Personal Data'
+      action:
+        name: 'Its privacy policy'
+        url: https://intl.sonypictures.com/en/privacy-policy
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It shares information with authorities when it believes in good faith the law requires it, or to enforce its terms and protect rights and safety.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'We may share information with government and law enforcement authorities and with other parties involved in, or contemplating, legal proceedings to comply with a legal obligation, when we believe in good faith that the law requires it'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information goes to the US and other countries with weaker protection, under standard contract clauses for transfers from Europe and the UK.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'your Personal Data will be transferred to and processed in the United States and other countries that may not provide the same level of data protection as your home country.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its sign-up form wasn’t reached, and its terms don’t list what an account needs.'
+      pages: [https://www.crunchyroll.com/tos/]
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'It isn’t meant for under-13s, and 13- to 17-year-olds watch on a parent’s Teen Profile with parental controls, but it doesn’t say it keeps targeted ads from them.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'Individuals aged 13 to 17 may access the Services only under the supervision of a parent or legal guardian through a Teen Profile.'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'You understand the Services are not intended for users under 13.'
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes appropriate measures in general terms, and names no independent audit or way to report a security flaw.'
+      sources:
+        - url: https://intl.sonypictures.com/en/privacy-policy
+          quote: 'We maintain appropriate technical and organizational measures to protect Personal Data from loss, misuse, alteration, or unintentional destruction.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in your account settings at any time, and keep your plan until the end of the period you paid for.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'You may cancel your automatically-renewing Subscription at any time, before the date your Subscription renewal is processed by managing your Account settings'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'you will continue to receive access to the Subscription Service until the end of the then-current Subscription period'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but keep your plan until the period ends; in the EU you can cancel within 14 days for a prorated refund.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'When you cancel a Subscription, you cancel only future charges associated with your Subscription'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'If you are an EU resident, you are entitled to cancel your purchase and request a refund without stating the reason during the 14 days following the date of your purchase'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only at your next billing period, with notice first, so you can change or cancel your plan before paying it.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'The modified Fees will take effect at the start of the next billing period.'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'you will have the opportunity to change or cancel your Subscription prior to incurring the new charges.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial needs your payment method and turns into your paid plan unless you cancel first, and it won’t remind you unless the law requires.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'You must provide a valid Payment Method to claim a Trial Subscription'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'Crunchyroll will not notify you that your Trial Subscription is about to end unless such notice is required by applicable law.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews until you cancel, but not that it reminds you first.'
+      pages: [https://www.crunchyroll.com/tos/]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, it can charge “any other charges incurred” without saying what they are.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'you authorize us to charge your selected payment method (the " Payment Method ") for the applicable Fee, taxes, and any other charges incurred.'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms don’t say how switching plans works or is charged.'
+      pages: [https://www.crunchyroll.com/tos/]
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to private arbitration, one person at a time with no class actions, unless you opt out by email or post within 30 days.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'In the event that process fails, all Disputes (except those identified in Section 13.5) will be resolved through binding arbitration.'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'You can opt out of the Arbitration Agreement and Class Action Waiver by notifying Crunchyroll in writing no later than thirty (30) days of your acceptance of any update to these Terms or your first use of the Service'
+      action:
+        name: 'Opt out of arbitration (its terms)'
+        url: https://www.crunchyroll.com/tos/
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time, tells you of a big change only as the law requires, and using it afterwards means you accept.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'If we determine a revision to these Terms, in our sole discretion, is material, we will notify you as required by law.'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'Use of the Services by you after any modification to these Terms constitutes your acceptance of these Terms as modified.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your account for any reason or none, with or without notice, and gives nothing back if it says you broke its terms.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'Crunchyroll reserves the right to suspend, limit, or terminate your Account and your access to the Services for any reason or no reason whatsoever, with or without notice'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change, suspend or end any part of the service, its prices and features included, at its sole discretion, with or without notice.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'Crunchyroll reserves the right to modify, suspend, or discontinue any part of the Services at its sole discretion, with or without notice.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.crunchyroll.com/tos/]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'Only your immediate household may use your account, and it checks your use and can block devices it believes are shared.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'The Services and the access granted are strictly limited to the immediate household of the primary Account holder (persons residing at the same physical residential address).'
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'we reserve the right to block or deactivate devices, limit or terminate access, where we reasonably believe such devices are being used in violation of these Terms'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: poor
+      reason: 'Its device and stream limits are set when you subscribe and can change, and it may cap registered devices without saying how many.'
+      sources:
+        - url: https://www.crunchyroll.com/tos/
+          quote: 'We may limit the number of simultaneous streams or registered devices associated with your Account, and we may enforce such limits using technical measures.'
+      lastVerified: 2026-11-09
