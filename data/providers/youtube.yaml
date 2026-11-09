@@ -9,6 +9,11 @@
 # United States"). The Two-person plan is sold in Australia and France among them (its article's list).
 # Where it's sold: Premium and Premium Lite in every catalog region (the available locations article's two lists; Lite's
 # says "Great Britain"). No availableIn: both lists run to most of the world.
+# YouTube Music Premium (M11.15, music, 2026-11-09): youtube.com/musicpremium, which prices by where the visitor is too:
+# read from Canada, and through a US, UK, Australian, German, French, Dutch, Spanish and Italian exit, each page in that
+# country's currency (the US's and Europe's checked against YouTube Premium's prices in the same session). Its annual
+# plan ("12 months for CA$119.99", "Doesn't automatically renew") is sold in Canada, the US and Germany among them, and a
+# Two-person plan in Australia and France. Its Student plans aren't listed, as Premium's aren't.
 # Region checklist, 2026-11-04: 1. youtube.com/premium has no country paths, and gl= changes the country it names but
 # not its prices (gl=NZ from Canada still showed CA$); 2. no picker; 3. not looked for; 4. checkout not opened; 5. the
 # help centre has no price list by country; 6. read through each country's exit: New Zealand's three showed
@@ -21,9 +26,16 @@
 # a month) is offered to a "randomly selected group of users in Canada" (the family plan article), so it isn't
 # listed either.
 
-# Coverage: youtube.* in NZ, IE and NL: youtube.com/premium prices by where the visitor is, and each of those
-# countries' exits showed Australia's prices, the UK's, or "YouTube Premium is not available in your country"
-# (2026-11-04), so their prices stay unread.
+# Coverage: youtube.* in NZ and IE: youtube.com/premium and youtube.com/musicpremium price by where the visitor is,
+# and those countries' exits showed Australia's prices or the UK's (2026-11-04, and again 2026-11-09), so their prices
+# stay unread.
+
+# Coverage: youtube.premium, youtube.premium-family, youtube.premium-two-person and youtube.premium-lite in NL: the
+# Netherlands' exits showed "YouTube Premium is not available in your country" (2026-11-04), so their prices stay
+# unread; YouTube Music Premium's page there priced in euros (2026-11-09).
+
+# Coverage: youtube.music-premium-two-person in CA, US, GB, DE, NL, ES and IT: YouTube Music Premium's page sells a
+# Two-person plan only in Australia and France among the catalog's regions (each country's exit, 2026-11-09).
 
 # Coverage: youtube.premium-two-person in CA, US, GB, DE, ES and IT: the Two-person plan "is currently only available
 # in" a list of countries that has Australia and France and none of these (its article, 2026-11-04).
@@ -227,6 +239,10 @@ features:
 # family plan article) and "one other member of your household" (the Two-person plan article). Premium includes
 # YouTube Music Premium (youtube.com/premium), so its plans are music plans too. Premium Lite isn't ad free: "Ads,
 # however, may still appear on music content, Shorts, and when you search or browse" (its article).
+# Music (M11.15), read 2026-11-09 in YouTube Music Help: "On-demand playback for podcasts, songs, and music videos" for
+# every listener, and Premium members "get access to all of the features listed above" (What is YouTube Music?);
+# downloads to listen offline for "a YouTube Music Premium member" (Download music & podcasts to listen offline); and
+# its best audio "High ... Bitrate: 256kbps AAC & OPUS" (Change your audio quality).
 # Official resellers: none. Google Play and Apple bill it in their apps (above), and YouTube's "partner provider"
 # article covers companies that sell it with their own plans: ways to pay, not shops.
 plans:
@@ -242,6 +258,9 @@ plans:
       streaming.download-devices: 10
       streaming.kids-profiles: true
       streaming.french-content: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -376,6 +395,9 @@ plans:
       streaming.download-devices: 10
       streaming.kids-profiles: true
       streaming.french-content: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
       account.users: 6
     inferred:
       streaming.french-content:
@@ -480,6 +502,9 @@ plans:
       streaming.download-devices: 10
       streaming.kids-profiles: true
       streaming.french-content: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
       account.users: 2
     inferred:
       streaming.french-content:
@@ -618,6 +643,278 @@ plans:
           autoRenew: true,
           lastVerified: 2026-11-04,
           sourceUrl: https://www.youtube.com/premium,
+        }
+
+  - id: youtube.music-premium
+    name: Music Premium
+    link: https://www.youtube.com/musicpremium
+    categories: [music]
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+    perks: [background-play]
+    notes: "YouTube Music Premium alone: music without ads, offline and in the background, but not YouTube's other videos."
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 119.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: false,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 119.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: false,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 12.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 119.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: false,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+  - id: youtube.music-premium-family
+    name: Music Premium Family
+    link: https://www.youtube.com/musicpremium
+    categories: [music]
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      account.users: 6
+    perks: [background-play]
+    notes: YouTube Music Premium shared with up to 5 others in your household, aged 13 or older.
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 18.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 18.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 16.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 22.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 18.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 16.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+  - id: youtube.music-premium-two-person
+    name: Music Premium Two-person
+    link: https://www.youtube.com/musicpremium
+    categories: [music]
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      account.users: 2
+    perks: [background-play]
+    notes: YouTube Music Premium shared with one other member of your household, aged 13 or older.
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 18.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.youtube.com/musicpremium,
         }
 
 # Terms and policies, read 2026-11-04 (M11.15): the YouTube Terms of Service (effective January 5, 2022, as served in
