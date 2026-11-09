@@ -105,7 +105,8 @@
   source: wikidata
   wikidata: Q689141
   sitelinks: 104
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: the-washington-post
   name: The Washington Post
   website: https://washingtonpost.com

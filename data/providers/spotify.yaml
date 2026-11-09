@@ -1,0 +1,844 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 1), read with Edge from Canada. Pages, each quoted
+# where it's used:
+# Pricing: each country's Premium page (spotify.com/<country>/premium/: ca-en, us, uk, au, nz, ie, de-en, nl-en, and
+# France's, Spain's and Italy's in their own languages, which have no English page), each in that country's currency
+# whoever reads it. Every country sells Individual, Duo and Family monthly; Audiobooks+ is each country's
+# /audiobooks/ page.
+# Region checklist, 2026-11-09: 1. a country path for each of the catalog's eleven regions, all read; 2. the footer's
+# country picker leads to the same paths; 3. not needed; 4. checkout not opened (it asks you to log in); 5. the help
+# centre's payment article sends you to the checkout; 6. Edge read every page; 7. no bill offered.
+# Not listed: Premium Student, which is "Offer available only to students at an accredited higher education
+# institution" (its card): the catalog has no way to mark who may buy a plan yet, as with YouTube's; the US's
+# Audiobooks Access, whose card shows no price ("Learn more"), and whose help article isn't found.
+# Bundles: the US Student plan "currently includes access to Hulu plan" (its card), a student offer, not listed. None
+# else on the Premium pages.
+# Official resellers: none. Spotify gift cards "are no longer available for purchase" (Spotify gift cards article), and
+# partner companies ("your phone or internet provider") bill it themselves: a way to pay, not shops.
+# Features, read 2026-11-09: Premium's "Ad-free music listening", "Lossless music" ("sound quality up to
+# 24-bit/44.1 kHz") and "Offline listening", and "Full control over what plays next" ("Repeat songs, play albums in any
+# order, and skip as many times as you want") on the Premium page; the free plan's sound "High: Equivalent to
+# approximately 160kbit/s" at best (Audio quality), "On the free version, you can only download podcasts" (Listen
+# offline), and "You will still be able to listen to music in shuffle mode, with ads" (Closing your account). Every
+# Premium card lists "15 hours/month of listening time from our audiobooks subscriber catalog" (12 hours in Germany,
+# France, the Netherlands, Spain and Italy), Duo's and Family's "(plan manager only)". Duo is "2 Premium accounts" and
+# Family "Up to 6 Premium accounts", with "Parental controls over all plan members" (a perk).
+# Apps: its download page names devices (Mobile, Computer, Tablet, Car, PlayStation, Xbox, TV, Speaker, Web Player), not
+# systems, so its platforms aren't listed.
+id: spotify
+name: Spotify
+website: https://www.spotify.com
+# Its help centre and investor relations site.
+domains: [support.spotify.com, investors.spotify.com, newsroom.spotify.com]
+category: music
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+cancelUrl: https://support.spotify.com/ca-en/article/cancel-premium/
+sources: { pricing: https://www.spotify.com/ca-en/premium/ }
+# Owner (M11.2), read 2026-11-09: its investor relations site names the company and its listing. Spotify Technology
+# S.A. is registered in Luxembourg (its 6-K for the second quarter of 2024, on its investor site's document host,
+# s29.q4cdn.com, which isn't one of its sites); its terms are with Spotify AB in Stockholm, the country given.
+owner:
+  name: 'Spotify Technology S.A., a public company (NYSE: SPOT)'
+  page:
+    name: Spotify Technology S.A. to Announce Results for Third Quarter 2026
+    url: https://investors.spotify.com/news/news-details/2026/Spotify-Technology-S-A--to-Announce-Results-for-Third-Quarter-2026/default.aspx
+  quotes:
+    - 'Spotify Technology S.A. (NYSE: SPOT) will post its third quarter 2026 results and deck to shareholders on Thursday, October 22, 2026 before market open.'
+  country:
+    code: SE
+    page:
+      name: Terms of Use
+      url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+    quotes:
+      - 'These Terms are between you and Spotify AB, Regeringsgatan 19, 111 53, Stockholm, Sweden.'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+# Ways to pay (M11.5), read 2026-11-09: the help centre's "Accepted payment methods" says only that the checkout lists
+# them ("All the payment options for your account’s location will be on the next page"), which needs an account; its
+# article on changing payment details names a card and partner companies. No card networks are named, so
+# acceptedNetworks is left out.
+paymentMethods:
+  - methods: [card, provider-billing]
+    page: How to change your payment details
+    url: https://support.spotify.com/ca-en/article/change-payment-details/
+    quotes:
+      - Add a payment card
+      - 'If your plan is with a partner company (ex. your phone or internet provider), they manage your payments.'
+renewalAnchor:
+  kind: same-date
+  page: Your billing date
+  url: https://support.spotify.com/ca-en/article/billing-date/
+  quotes:
+    - Your billing cycle starts on the date you subscribed.
+  lastVerified: 2026-11-09
+
+# Perks (M11.6): Family's parental controls, in its card's words.
+perks:
+  - id: parental-controls
+    name: Parental controls over all plan members
+
+plans:
+  - id: spotify.free
+    name: Free
+    link: https://www.spotify.com/ca-en/free/
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: false
+      music.offline: false
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ca-en/free/
+  - id: spotify.premium
+    name: Premium Individual
+    link: https://www.spotify.com/ca-en/premium/
+    features:
+      ad-free: true
+      audio.quality: lossless
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: true
+    addOnIds: [spotify.audiobooks-plus]
+    notes: 15 hours of audiobooks a month from its subscriber catalog (12 in Germany, France, the Netherlands, Spain and Italy).
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ca-en/premium/
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/us/premium/
+      - region: GB
+        currency: GBP
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/uk/premium/
+      - region: AU
+        currency: AUD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/au/premium/
+      - region: NZ
+        currency: NZD
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nz/premium/
+      - region: IE
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ie/premium/
+      - region: DE
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/de-en/premium/
+      - region: FR
+        currency: EUR
+        amount: 12.14
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/fr/premium/
+      - region: NL
+        currency: EUR
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nl-en/premium/
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/es/premium/
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/it/premium/
+  - id: spotify.duo
+    name: Premium Duo
+    link: https://www.spotify.com/ca-en/premium/
+    features:
+      ad-free: true
+      audio.quality: lossless
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: true
+      account.users: 2
+    addOnIds: [spotify.audiobooks-plus]
+    notes: Two Premium accounts for a couple at the same address. The audiobook hours are the plan manager's only.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ca-en/premium/
+      - region: US
+        currency: USD
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/us/premium/
+      - region: GB
+        currency: GBP
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/uk/premium/
+      - region: AU
+        currency: AUD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/au/premium/
+      - region: NZ
+        currency: NZD
+        amount: 28.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nz/premium/
+      - region: IE
+        currency: EUR
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ie/premium/
+      - region: DE
+        currency: EUR
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/de-en/premium/
+      - region: FR
+        currency: EUR
+        amount: 17.20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/fr/premium/
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nl-en/premium/
+      - region: ES
+        currency: EUR
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/es/premium/
+      - region: IT
+        currency: EUR
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/it/premium/
+  - id: spotify.family
+    name: Premium Family
+    link: https://www.spotify.com/ca-en/premium/
+    features:
+      ad-free: true
+      audio.quality: lossless
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: true
+      account.users: 6
+    perks: [parental-controls]
+    addOnIds: [spotify.audiobooks-plus]
+    notes: Up to 6 Premium accounts for family members at the same address. The audiobook hours are the plan manager's only.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 23.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ca-en/premium/
+      - region: US
+        currency: USD
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/us/premium/
+      - region: GB
+        currency: GBP
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/uk/premium/
+      - region: AU
+        currency: AUD
+        amount: 27.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/au/premium/
+      - region: NZ
+        currency: NZD
+        amount: 33.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nz/premium/
+      - region: IE
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ie/premium/
+      - region: DE
+        currency: EUR
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/de-en/premium/
+      - region: FR
+        currency: EUR
+        amount: 21.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/fr/premium/
+      - region: NL
+        currency: EUR
+        amount: 23.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nl-en/premium/
+      - region: ES
+        currency: EUR
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/es/premium/
+      - region: IT
+        currency: EUR
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/it/premium/
+
+# Audiobooks+ (each country's /audiobooks/ page, read 2026-11-09): "Enjoy 15 hours of audiobook listening added to your
+# account each month", "a paid subscription ... billed on top of your existing Premium plan". The US's Audiobooks Access
+# plan (audiobook hours with free music) shows no price on its page, so it isn't listed.
+addOns:
+  - id: spotify.audiobooks-plus
+    name: Audiobooks+
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ca-en/audiobooks/
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/us/audiobooks/
+      - region: GB
+        currency: GBP
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/uk/audiobooks/
+      - region: AU
+        currency: AUD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/au/audiobooks/
+      - region: NZ
+        currency: NZD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nz/audiobooks/
+      - region: IE
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/ie/audiobooks/
+      - region: DE
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/de-en/audiobooks/
+      - region: FR
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/fr/audiobooks/
+      - region: NL
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/nl-en/audiobooks/
+      - region: ES
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/es/audiobooks/
+      - region: IT
+        currency: EUR
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.spotify.com/it/audiobooks/
+
+# Terms and policies, read 2026-11-09 (M11.15): the Terms of Use (Canada's, last updated August 26, 2025; the US's,
+# Australia's, Germany's in German, and the UK's, Ireland's, the Netherlands', France's, Spain's and Italy's for their
+# dispute clauses), the Paid Subscription Terms, the Privacy Policy (effective 12 June 2026), the Cookies Policy and
+# User Guidelines (no topic beyond the terms'), the Card Terms (gift cards, no longer sold), its page on reporting
+# security issues, and its help centre's articles on cancelling, refunds, billing, Family and Duo plans, offline
+# listening, closing an account and downloading your data. Calibrated against YouTube's and Netflix's grades. Its
+# terms send disputes to arbitration with a class action waiver "where permitted", in Canada, the UK, Ireland and the
+# euro countries alike (each country's copy has the same section); the US's have their own, Germany's and Australia's
+# none. Not rated: rights over your content and its apps' licence (not topics for music).
+policies:
+  links:
+    - name: Terms of Use
+      url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+    - name: Terms of Use (US)
+      url: https://www.spotify.com/us/legal/end-user-agreement/
+    - name: Terms of Use (Australia)
+      url: https://www.spotify.com/au/legal/end-user-agreement/
+    - name: Allgemeine Nutzungsbedingungen (Germany, in German)
+      url: https://www.spotify.com/de-en/legal/end-user-agreement/
+    - name: Paid Subscription Terms
+      url: https://www.spotify.com/ca-en/legal/paid-subscription-terms/
+    - name: Privacy Policy
+      url: https://www.spotify.com/ca-en/legal/privacy-policy/
+    - name: Report security issues
+      url: https://www.spotify.com/ca-en/about-us/contact/report-security-issues/
+    - name: How to cancel Premium plans
+      url: https://support.spotify.com/ca-en/article/cancel-premium/
+    - name: Closing your account and deleting your data
+      url: https://support.spotify.com/ca-en/article/close-account/
+    - name: Understanding my data
+      url: https://support.spotify.com/ca-en/article/understanding-my-data/
+    - name: Listen offline
+      url: https://support.spotify.com/ca-en/article/listen-offline/
+    - name: Family plan
+      url: https://support.spotify.com/ca-en/article/family-plan/
+    - name: Duo plan
+      url: https://support.spotify.com/ca-en/article/duo-plan/
+    - name: Address and verification for Family plan
+      url: https://support.spotify.com/ca-en/article/address-and-verification-for-family-plan/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what you listen to and do on Spotify to improve the app and its suggestions. A private session hides some listening, but to stop the rest you have to ask it.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'to help us develop and improve our personalised recommendations'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'start a Private session'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'Spotify is processing your personal data on the legal basis of legitimate interests, or'
+      action:
+        name: Account privacy settings
+        url: https://www.spotify.com/account/privacy/
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your data with advertising partners, and with partners who promote Spotify and may combine it with what they know about you. Its Tailored Ads setting covers only some of that.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'So they can help us deliver more relevant advertising to you on the Spotify Service, and help measure the effectiveness of ads.'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'Our partners may also combine the personal data we share with them with other data they collect about you, e.g. your use of their services.'
+      action:
+        name: Account privacy settings
+        url: https://www.spotify.com/account/privacy/
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The free plan has ads chosen from what you do. Turning off tailored ads still leaves ads picked from what you’re listening to right now, on free and paid plans.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'you will receive less relevant advertising on our free Service Option, as well as our paid Service Option, as applicable'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'This type of advertising is based on your registration information and information about your real-time usage of Spotify, such as what you are currently listening to on our services.'
+      action:
+        name: Account privacy settings
+        url: https://www.spotify.com/account/privacy/
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'It trains its machine learning models on how you use Spotify, including what you type into its AI features. You can only object by contacting it.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'This includes development and training of algorithmic and machine learning models, which help us to keep our service safe and enhance our users’ experience.'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'prompts in AI powered features'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'Object to us processing your personal data.'
+      action:
+        name: Its privacy policy
+        url: https://www.spotify.com/ca-en/legal/privacy-policy/
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it. Some things have set times, like searches, deleted after 90 days, but your listening history stays as long as your account does.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: "We keep your personal data only as long as necessary to provide you with the Spotify Service and for Spotify's legitimate and essential business purposes, such as:"
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'For example, personal data you may input as part of search queries is deleted after 90 days.'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'We also keep streaming history for the life of an account'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can close your account and have your data deleted from its help page. Deleting starts after 7 days, but it doesn’t say how long it takes.'
+      sources:
+        - url: https://support.spotify.com/ca-en/article/close-account/
+          quote: 'If you want to close your account and delete your data permanently from all Spotify apps and services, you can click the following link.'
+        - url: https://support.spotify.com/ca-en/article/close-account/
+          quote: 'After those 7 days, your account cannot be reactivated and the process to delete your data will be initiated.'
+      action:
+        name: Close your account and delete your data
+        url: https://support.spotify.com/ca-en/article/close-account/
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download a copy of your data yourself, from your account’s privacy page, as files in JSON, a common format other apps can read.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'use the ‘Download your data’ tool on your Account Privacy page, or'
+        - url: https://support.spotify.com/ca-en/article/understanding-my-data/
+          quote: 'When you use the automated Download your data tool, you will receive several files in JSON format.'
+      action:
+        name: Download your data (account privacy)
+        url: https://www.spotify.com/account/privacy/
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It gives your data to authorities when the law requires it, and also when it thinks it right, for things like criminal investigations or lawsuits.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'We will do so when we believe in good faith it is necessary, including:'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: "for our own or a third party's justifiable interest such as criminal investigations, litigation, protecting someone’s safety, or preventing death or imminent bodily harm."
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can go to other countries, some with weaker privacy laws, under the EU’s standard contracts that require the other side to protect it.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'This includes processing of your data in countries whose data protection laws are not considered to be as strong as EU/EEA laws or the laws which apply where you live.'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'Transfers of personal data to other countries outside of the EU/EEA are protected by Standard Contractual Clauses (‘SCCs’) as the appropriate safeguard.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account takes a name, an email or phone number, a password, your birthday and gender. Duo and Family plans also ask for your street address.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'Personal data that we need to create your Spotify account and that enables you to use the Spotify Service.'
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'We may ask for and process your street address for the following reasons:'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be old enough for your country to use Spotify, and it deletes a younger child’s data it finds. Families can make managed accounts for kids instead.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: "If you're under the Age Limit, do not create or use the standard Spotify Service."
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: "If we learn that we’ve collected the personal data of a child under the applicable Age Limit, we'll take reasonable steps to delete the personal data."
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel on your account page at any time, and keep Premium until the end of the period you paid for.'
+      sources:
+        - url: https://support.spotify.com/ca-en/article/cancel-premium/
+          quote: 'Cancel your Premium plan any time on your account page.'
+        - url: https://support.spotify.com/ca-en/article/cancel-premium/
+          quote: 'Your Premium stays until your next billing date, then your account switches to free.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You don’t get money back for part of a month, but you keep Premium to the end of it. Within 14 days of first buying, you can change your mind and pay only for what you used.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'We do not provide refunds or credits for any partial subscription periods, except as expressly stated in these Terms.'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'If you purchase a Paid Subscription with no Trial, you agree you have fourteen (14) days after your purchase to withdraw for any reason and must pay us for the services provided up until the time you tell us that you have changed your mind.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you ahead of a new price, which starts only at your next billing period, so you can cancel first.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'will communicate any price changes to you in advance on reasonable notice'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'Price changes will take effect at the start of the next subscription period following the date of the price change.'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'If you do not agree to a price change, you can reject the change by unsubscribing from the applicable Paid Subscription prior to the price change going into effect.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its trial turns into a paid plan on the card you gave unless you cancel before it ends. Its terms don’t say it reminds you first.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/paid-subscription-terms/
+          quote: 'Unless cancelled before the end of the Trial Period, or such Trial is in conjunction with a Prepaid Period, you will automatically become a subscriber to the particular Paid Subscription that you chose to sign up to under the Trial'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews every month until you cancel, but not that it reminds you first.'
+      pages:
+        - https://www.spotify.com/ca-en/legal/end-user-agreement/
+        - https://www.spotify.com/ca-en/legal/paid-subscription-terms/
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms name no fees besides the price and tax.'
+      pages:
+        - https://www.spotify.com/ca-en/legal/end-user-agreement/
+        - https://www.spotify.com/ca-en/legal/paid-subscription-terms/
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: poor
+      reason: 'If you join a Duo or Family plan from your own Premium, you switch at once and lose the time you already paid for.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/paid-subscription-terms/
+          quote: "any unused time you've already paid for, including any remaining free or discounted Trial days, under your then-current Paid Subscription will be forfeited."
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to private arbitration, one person at a time, with no class actions and no way to opt out, wherever the law lets it, as in Canada outside Quebec, the UK and the EU.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'If you are located in, are based in, have offices in, or do business in a jurisdiction in which this Section 6.3. is enforceable, the following mandatory arbitration provisions apply to you:'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'will be determined by mandatory binding individual arbitration'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'YOU AND SPOTIFY AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: 'In the US, disputes go to private arbitration with no class actions. You can opt out only in a mass case, after two rounds of group mediation.'
+      sources:
+        - url: https://www.spotify.com/us/legal/end-user-agreement/
+          quote: 'THESE TERMS CONTAIN A MANDATORY ARBITRATION PROVISION THAT, AS FURTHER SET FORTH IN SECTION 6 BELOW, REQUIRES THE USE OF ARBITRATION ON AN INDIVIDUAL BASIS TO RESOLVE DISPUTES'
+        - url: https://www.spotify.com/us/legal/end-user-agreement/
+          quote: 'Neither party may participate as a plaintiff, claimant, or class member in any class, collective, consolidated, private attorney general, or representative proceeding (whether in court or arbitration).'
+        - url: https://www.spotify.com/us/legal/end-user-agreement/
+          quote: 'You may opt out of arbitration by providing an individual, personally signed notice of your intention to opt out of arbitration to Spotify via email at tounotice@spotify.com within thirty (30) days after the conclusion of the second global mediation session.'
+      action:
+        name: How to opt out (its US terms)
+        url: https://www.spotify.com/us/legal/end-user-agreement/
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      regions: [DE]
+      tier: great
+      reason: 'In Germany, German law applies, and its terms name no arbitration, no court of its choosing and no ban on group lawsuits.'
+      sources:
+        - url: https://www.spotify.com/de-en/legal/end-user-agreement/
+          quote: 'deutschem Recht, unter Ausschluss der Kollisionsnormen'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      regions: [AU]
+      tier: good
+      reason: 'In Australia, disputes go to the courts of New South Wales, under its law, with no arbitration.'
+      sources:
+        - url: https://www.spotify.com/au/legal/end-user-agreement/
+          quote: 'Laws of New South Wales'
+        - url: https://www.spotify.com/au/legal/end-user-agreement/
+          quote: 'Exclusive; Courts of New South Wales'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about changes before they start, by email or in the app for big ones, but doesn’t say how far ahead.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'We may make changes to these Terms (including any additional Spotify terms and conditions incorporated by reference herein) from time to time by notifying you of such changes by any reasonable means (before they take effect)'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can close or suspend your account if it believes you broke its terms, with no money back. If it ends your paid plan for other reasons, it gives 14 days’ notice and lets you finish the period.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'suspend your access to the Spotify Service at any time if we believe you have breached any of these Terms'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'Spotify will not refund any amounts that you have already paid'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: "we reserve the right to terminate a Paid Subscription at any time, on no less than 14 days' notice to you."
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change or stop features and plans, and songs or audiobooks can disappear without notice. If it ends a plan you prepaid, it refunds the unused part.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'we may modify, suspend, or stop (permanently or temporarily) providing all or part of the Spotify Service (including particular functions, features, subscription plans and promotional offerings).'
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'Spotify or the applicable owners may remove access to particular songs, videos, podcasts, audiobooks and other Content without notice.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.spotify.com/ca-en/legal/end-user-agreement/
+        - https://www.spotify.com/ca-en/legal/privacy-policy/
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: neutral
+      reason: 'It pays security experts who find and report problems, through a bug bounty, but doesn’t say outside experts check its security or publish what they find.'
+      sources:
+        - url: https://www.spotify.com/ca-en/about-us/contact/report-security-issues/
+          quote: 'please submit it to our bounty program hosted by HackerOne.'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'An Individual plan is for you alone: your login is for your personal use only.'
+      sources:
+        - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+          quote: 'Your username and password are for your personal use only and should be kept confidential.'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      plans: [spotify.duo, spotify.family]
+      tier: poor
+      reason: 'You share it only with people at your address, and Spotify checks: someone it can’t confirm within 7 days goes back to the free plan.'
+      sources:
+        - url: https://support.spotify.com/ca-en/article/family-plan/
+          quote: 'Premium Family is a discounted plan for up to 6 family members who live together, including the plan manager.'
+        - url: https://support.spotify.com/ca-en/article/duo-plan/
+          quote: 'Premium Duo is a discount plan for 2 people who live together.'
+        - url: https://support.spotify.com/ca-en/article/address-and-verification-for-family-plan/
+          quote: 'If it fails or they miss the 7-day window, the member loses access to the plan and switches to the free version.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads work on up to 5 devices, 10,000 songs each, and you must go online every 30 days to keep them.'
+      sources:
+        - url: https://support.spotify.com/ca-en/article/listen-offline/
+          quote: 'You can download as many as 10,000 tracks on each of up to 5 different devices.'
+        - url: https://support.spotify.com/ca-en/article/listen-offline/
+          quote: 'You need to go online at least once every 30 days to keep your downloads.'
+      lastVerified: 2026-11-09
