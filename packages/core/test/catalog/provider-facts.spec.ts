@@ -201,6 +201,13 @@ describe('namesRenewalAnchor', () => {
       true,
     ],
     ['Your subscription began on a Tuesday.', 'same-date', false],
+    // iQIYI's help centre (M11.15): each period a calendar month from the one before.
+    [
+      'Auto-renewing recurrent monthly, quarterly, and yearly subscriptions are charged on a calendar month, quarter, and year basis, with the validity of each period aligning with the billing cycle.',
+      'same-date',
+      true,
+    ],
+    ['Charged on a calendar month basis.', 'first-of-month', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],
     ['You’re billed on the 1st of each month.', 'first-of-month', true],

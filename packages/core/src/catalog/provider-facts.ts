@@ -25,12 +25,13 @@ export const renewalAnchorNames: Readonly<Record<RenewalAnchorKind, string>> = {
 /**
  * How a page writes each kind, in English and French. The date you signed up is also written by what it implies (M11.9):
  * a subscription that "began on a date not contained in a given month" (Disney's and Bell Media's terms, and their
- * French) is billed on the same date each month but in shorter months, and you "subscribe on your preferred billing
- * date" when the day you subscribe sets it (Claude's billing help).
+ * French) is billed on the same date each month but in shorter months, you "subscribe on your preferred billing
+ * date" when the day you subscribe sets it (Claude's billing help), and a subscription "charged on a calendar month ...
+ * basis" runs a calendar month from each charge (iQIYI's help centre, M11.15).
  */
 const renewalWrittenAs: Readonly<Record<RenewalAnchorKind, RegExp>> = {
   'same-date':
-    /\b(?:date|day) (?:that |when )?you (?:sign(?:ed)? up|subscribed?|joined|purchased|started|bought)\b|\bsame (?:day|date)\b|\banniversary\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbegan on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b/i,
+    /\b(?:date|day) (?:that |when )?you (?:sign(?:ed)? up|subscribed?|joined|purchased|started|bought)\b|\bsame (?:day|date)\b|\banniversary\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbegan on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b|\bcharged on a calendar month(?:, quarter,? and year)? basis\b/i,
   'every-30-days': /\b(?:30|thirty)[- ]days?\b|\b30 jours\b/i,
   'first-of-month':
     /\b(?:1st|first(?: day)?) of (?:each|every|the|the following|the next) (?:calendar )?month\b|\bpremier (?:jour )?(?:de|du) (?:chaque )?mois\b|\b1er (?:de|du) (?:chaque )?mois\b/i,
