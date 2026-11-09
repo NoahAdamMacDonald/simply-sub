@@ -14,6 +14,7 @@ export const paymentMethodNames: Readonly<Record<PaymentMethod, string>> = {
   klarna: 'Klarna',
   satispay: 'Satispay',
   'cash-app': 'Cash App',
+  alipay: 'Alipay',
   'app-store': 'App store or platform billing',
   'gift-card': 'Gift card',
   'bank-transfer': 'Bank transfer or direct debit',
@@ -41,6 +42,7 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   klarna: /\bklarna\b/i,
   satispay: /\bsatispay\b/i,
   'cash-app': /\bcash\s?app\b/i,
+  alipay: /\bali\s?pay\b/i,
   'app-store':
     /\bapp\s?store\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b|\bthird[- ]party\s+billing\b|\bachats?\s+intégrés?|\bchannel\s+store\b|\bamazon\s+prime\b|\bprime\s+video\b/i,
   'gift-card': /\bgift\s?cards?\b|\bcartes?[- ]cadeaux?\b|\bvouchers?\b|\bprepaid\s+cards?\b/i,

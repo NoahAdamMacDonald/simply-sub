@@ -1484,7 +1484,8 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   Pass, Disney+, Hulu, ESPN), Canada (Crave, TSN, RDS, ICI TOU.TV), Switzerland, Sweden and Romania.
 - **Ways to pay** (M11.5's `paymentMethods`, pulled forward on 2026-11-02 at the owner's request, so cash, crypto and
   gift cards are never missed): every provider lists them, as entries of `methods` (card, PayPal, Apple Pay, Google
-  Pay, Klarna, Satispay, Cash App, app store or platform billing (Amazon's Prime Video channels too), gift cards, a
+  Pay, Klarna, Satispay, Cash App, Alipay (iQIYI's checkout, M11.15), app store or platform billing (Amazon's Prime
+  Video channels too), gift cards, a
   bank transfer or direct debit (iDEAL | Wero, Swish, Bancontact, GoCardless), cash, crypto, a TV, internet or phone
   provider's bill, other) with the `page` and `url` that list them and `quotes` naming each, which validation checks
   (core's `namesPaymentMethod`, in English and French); an entry per page, for everywhere or for some `regions`, the
@@ -1494,7 +1495,7 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   per page citing it with its quotes as the tooltip ("according to its Payment options"). Each way to pay is a chip of
   its glyphs (the owner's design, 2026-11-03): a Material Symbol for the generic ones (card, gift card, bank transfer
   or direct debit, cash, crypto, app store, a provider's bill), a brand's mark for PayPal, Apple Pay, Google Pay,
-  Klarna and Cash App, and on the card chip the marks of the networks a page names there (Visa, Mastercard, American
+  Klarna, Cash App and Alipay, and on the card chip the marks of the networks a page names there (Visa, Mastercard, American
   Express, Discover, JCB), or "networks not verified" where none does (no `acceptedNetworks`, the owner's wording).
   A chip is focusable, its name ("Card: Visa, Mastercard or American Express") its tooltip and, as an image's name,
   what a screen reader says; a way or network with no glyph (Satispay, Interac, UnionPay) shows its name. The marks
