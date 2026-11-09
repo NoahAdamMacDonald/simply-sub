@@ -58,8 +58,11 @@ API contract's prices are illustrative and never a source. This skill is how to 
   `retired: <date>` with its last prices kept, and `endsOn` when it ends for its subscribers too; one whose
   subscribers move to another plan gets a dated entry in `data/redirects.yaml`. Ask the user before retiring or
   redirecting anything. `npm run data:validate` fails when a published id disappears.
-- **Every interval and every price list the provider sells.** That means monthly and yearly (other periods only when the user
-  asks), every region in scope (ask: usually CA and US, or GLOBAL), and every currency the buyer can pick.
+- **Every interval and every price list the provider sells.** That means every billing period it sells (a month, 3
+  months, 6 months, a year, a week, as each is stated), each priced only in the regions that sell it (ZEE5's 3-month
+  plans are the UK's and the euro countries': the owner's rule of 2026-11-09), every region in scope (the catalog's
+  regions, or GLOBAL), and every currency the buyer can pick. The app offers an item only the periods priced where
+  it's bought (`pickPrice`'s one source region), so a period one country sells never shows in another.
 - **Read the features from the same pages:** quality, streams, downloads, devices, users, storage and limits. Map them
   to `data/features.yaml` ids; anything else is a perk (M11.6): listed once in the provider's `perks` with an id and
   its words as the name (`{ id: fortnite-crew, name: Fortnite Crew }`), and by id on the plans that have it. A perk's
