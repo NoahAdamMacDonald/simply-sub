@@ -2142,7 +2142,8 @@ in every D1 `json` column search parses.
   - **Streaming, batch 4** (2026-11-09): the sites batch 2 couldn't read, by the owner's new rule (official pages
     first, over an ordinary connection when a site refuses this machine's, and the Internet Archive's copy only as a
     backup): DAZN (`dazn`: DAZN and DAZN+, Standard or Ultimate, in Canada, read over an ordinary connection, and the
-    US's monthly and yearly plans from the archive), Paramount+ (`paramount-plus`: Basic with ads, Standard and Premium
+    US's plans, whose help article a plain fetch reads; its European countries' own lineups are left for a batch of
+    their own), Paramount+ (`paramount-plus`: Basic with ads, Standard and Premium
     in Canada, its prices from the archive's copy of its plan picker), with Paramount Skydance's privacy policy as a
     shared document (`data/policies/paramount-privacy.yaml`), and Crunchyroll (`crunchyroll`: Fan, Mega Fan and
     Ultimate Fan, the US's monthly prices from the archive). iQIYI's Australian prices read through a Sydney exit;
