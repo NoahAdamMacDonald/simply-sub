@@ -31,7 +31,8 @@ export const paymentMethods = Object.keys(paymentMethodNames) as PaymentMethod[]
  * How a page writes each method, in English and French. A gift card isn't a card payment, so "card" alone must not
  * follow "gift", and Cash App isn't cash. `other` stands for any method not listed, so no page names it. A bank's own
  * payments (iDEAL | Wero, Swish, Eps, Bancontact, Przelewy24) and a direct debit (GoCardless) are bank transfers, and
- * an app store includes a platform that bills for the provider (Roku's Channel Store, Amazon's Prime Video channels).
+ * an app store includes a platform that bills for the provider (Roku's Channel Store, Amazon's Prime Video channels),
+ * and "an application store" (Crunchyroll's terms).
  * A bank debit (ChatGPT's "Bank debit via Link") is a bank transfer too, and billing "managed through TELUS and Koodo"
  * (discovery+ Canada's) a provider's bill.
  */
@@ -45,7 +46,7 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   'cash-app': /\bcash\s?app\b/i,
   alipay: /\bali\s?pay\b/i,
   'app-store':
-    /\bapp\s?store\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b|\bthird[- ]party\s+billing\b|\bachats?\s+intégrés?|\bchannel\s+store\b|\bamazon\s+prime\b|\bprime\s+video\b/i,
+    /\bapp\s?store\b|\b(?:an|the)\s+application\s+stores?\b|\bgoogle\s+play\b|\bin-app\b|\bitunes\b|\bplay\s+store\b|\bamazon\s+appstore\b|\bthird[- ]party\s+billing\b|\bachats?\s+intégrés?|\bchannel\s+store\b|\bamazon\s+prime\b|\bprime\s+video\b/i,
   'gift-card': /\bgift\s?cards?\b|\bcartes?[- ]cadeaux?\b|\bvouchers?\b|\bprepaid\s+cards?\b/i,
   'bank-transfer':
     /\bbank\s+(?:transfer|wire|account)s?\b|\bbank\s+debit\b(?!\s+cards?\b)|\bwire\s+transfers?\b|\bdirect\s+debit\b|\bsepa\b|\bideal\b|\bwero\b|\bvirement\b|\bswish\b|\beps\s+(?:transfer|überweisung)\b|\bbancontact\b|\bprzelewy24\b|\bgocardless\b/i,
