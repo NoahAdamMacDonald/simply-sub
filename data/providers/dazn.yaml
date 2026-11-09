@@ -1,0 +1,492 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 4). DAZN turns away readers on a VPN
+# ("Disable your VPN to continue") and through other countries' exits, so Canada's pages were read over an ordinary
+# connection; its sign-up app showed "There's a problem opening DAZN just now" even then.
+# Pricing: Canada's help article "DAZN plans and pricing" (its tiers DAZN and DAZN+, each Standard or Ultimate, at
+# "Monthly Flex", "Annual Pay (Instalment)" and "Annual Pay (Upfront)" prices), and the US's, read from the Internet
+# Archive's copy of 2026-10-29 because the live site can't be read from here (Monthly $34.99 on one stream, Annual - Pay
+# Upfront $249.99 on two). Annual Pay (Instalment) is a 12-month term paid monthly that its terms renew for another 12
+# months ("continue to be automatically extended by the length of the minimum term"); the catalog stores no minimum
+# term, so the plans' notes give it, as Viaplay's 12-month contract.
+# Region checklist, 2026-11-09: 1. dazn.com/<locale>/help (the en-CA plans article; other locales' copies of it are in
+# the Internet Archive for the US only, and the UK's is from July); 4. the sign-up app, which fails to load; 6. Edge
+# through each exit (refused), then a browser over an ordinary connection (Canada). Its other countries are unread, and
+# no page read lists where it's sold, so availableIn is left out.
+# Bundles: none on its pages. Resellers: none.
+
+# Coverage: dazn.one-stream in CA: Canada's monthly plan streams on 2 devices (Standard), so it has no one-stream plan.
+# Coverage: dazn.ultimate, dazn.plus-standard and dazn.plus-ultimate in US: the archived US page prices one plan
+# only, and the live US site can't be read from here.
+
+id: dazn
+name: DAZN
+website: https://www.dazn.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD, US: USD }
+cancelUrl: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+sources:
+  { pricing: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing }
+notes: Canada's and the US's prices; its other countries' pages couldn't be read.
+# Payment methods, read 2026-11-09 in its terms. Its pages name no card networks.
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'Terms & conditions'
+    url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+    quotes:
+      - 'Payment must be made by credit card; debit card; Paypal or through another current, valid, accepted method of payment including supported third party payment providers'
+
+# Owner (M11.2), read 2026-11-09 in its terms.
+owner:
+  name: 'DAZN Limited, a DAZN Group company'
+  page:
+    name: 'Terms & conditions'
+    url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+  quotes:
+    - 'DAZN Limited is a DAZN Group company'
+    - 'registered in United Kingdom and having its registered office at 12 Hammersmith Grove, London, England, W6 7AP'
+  country:
+    code: GB
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09 in its terms: billed "on the calendar day corresponding to the commencement of
+# your Paid Subscription".
+renewalAnchor:
+  kind: same-date
+  page: 'Terms & conditions'
+  url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+  quotes:
+    - 'In some cases, the date for billing may change, for example if your subscription began on a day not contained in a given month'
+  lastVerified: 2026-11-09
+
+# Apps (the cross-category features), read 2026-11-09 in its sign-up article: the website, TVs and TV streaming
+# devices, iPhone and iPad, Android, and Xbox and PlayStation.
+features:
+  platforms: [web, tv, ios, android, console]
+
+# Perks (M11.6): what its plans add that no feature describes, in its words.
+perks:
+  - id: multiview
+    name: 'Multiview: watch multiple games at once'
+  - id: fubo-soccer
+    name: Top-tier soccer content from Fubo TV
+
+# Features, read 2026-11-09: "All DAZN programmes and live streams are available in 1080p Full High Definition" (its
+# internet speed article); Standard "Watch on 2 devices at the same time" and "Download content for offline viewing",
+# Ultimate "Watch on 3 devices at the same time" and Multiview, with downloads "available on Standard & Ultimate" (its
+# Ultimate article), on no stated number of devices, so 1, inferred. No plan is ad-free: Ultimate has only "No
+# Pre-roll Ads", and its live broadcasts carry their own. No profiles. The US's monthly plan streams on one device.
+plans:
+  - id: dazn.standard
+    name: DAZN Standard
+    link: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.live: [sports]
+    inferred:
+      streaming.download-devices:
+        reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
+        page:
+          name: Switch to Ultimate
+          url: https://www.dazn.com/en-CA/help/articles/29840829716893-switch-to-ultimate-heres-why-its-worth-it
+        lastVerified: 2026-11-09
+    notes: In Canada it's also $24.99 a month on a 12-month term that renews for another 12. The US's Annual - Pay Monthly is $24.99 a month the same way.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 249.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 249.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-29,
+          sourceUrl: https://www.dazn.com/en-US/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+  - id: dazn.one-stream
+    name: DAZN (one stream)
+    link: https://www.dazn.com/en-US/help/articles/16184063399709-DAZN-plans-and-pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 1
+      streaming.live: [sports]
+    notes: The US's monthly plan, on one device in one place at a time.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 34.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-10-29,
+          sourceUrl: https://www.dazn.com/en-US/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+  - id: dazn.ultimate
+    name: DAZN Ultimate
+    link: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.live: [sports]
+    inferred:
+      streaming.download-devices:
+        reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
+        page:
+          name: Switch to Ultimate
+          url: https://www.dazn.com/en-CA/help/articles/29840829716893-switch-to-ultimate-heres-why-its-worth-it
+        lastVerified: 2026-11-09
+    perks: [multiview]
+    notes: Streams in up to 2 places at once, with no pre-roll ads. Also $29.99 a month on a 12-month term that renews for another 12.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 39.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 269.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+  - id: dazn.plus-standard
+    name: DAZN+ Standard
+    link: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.live: [sports]
+    inferred:
+      streaming.download-devices:
+        reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
+        page:
+          name: Switch to Ultimate
+          url: https://www.dazn.com/en-CA/help/articles/29840829716893-switch-to-ultimate-heres-why-its-worth-it
+        lastVerified: 2026-11-09
+    perks: [fubo-soccer]
+    notes: Also $44.99 a month on a 12-month term that renews for another 12.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 54.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 449.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+  - id: dazn.plus-ultimate
+    name: DAZN+ Ultimate
+    link: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.live: [sports]
+    inferred:
+      streaming.download-devices:
+        reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
+        page:
+          name: Switch to Ultimate
+          url: https://www.dazn.com/en-CA/help/articles/29840829716893-switch-to-ultimate-heres-why-its-worth-it
+        lastVerified: 2026-11-09
+    perks: [multiview, fubo-soccer]
+    notes: Streams in up to 2 places at once, with no pre-roll ads. Also $49.99 a month on a 12-month term that renews for another 12.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 59.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 469.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15) over an ordinary connection: Canada's Terms & conditions (DAZN Limited's,
+# under English law), its Global Privacy Notice ("Last updated: 24/06/2025", with its USA and Canada notice and cookie
+# notice on the same page) and its help centre's plans and sign-up articles. Its coins and community guidelines are
+# for its social features, not the subscription.
+policies:
+  links:
+    - name: 'Terms & conditions'
+      url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+    - name: 'Privacy policy and cookie notice'
+      url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+    - name: 'How to sign up on DAZN'
+      url: https://www.dazn.com/en-CA/help/articles/16195664216477-how-to-sign-up-on-DAZN
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It builds a profile of your interests from what you watch, for recommendations, ads and marketing, and studies how you use it. Stopping that takes an objection by email.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'For profiling purposes so that we can (subject to any preferences you have expressed (including consent, where required)) build a profile about you and your interests'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'To use data analytics, research, development, testing and analysis to improve and enhance our services'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'To exercise your rights, please see the Contact Us section.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It sells or shares your information with partners for its marketing. Outside California, you can turn that off only with each browser’s cookie switch.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'We sell or share your personal information with our partners, third parties or affiliates for our marketing or other purposes.'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'You can exercise your rights as a Californian resident, including the Right to Opt-Out of Selling'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and its ad partners show you ads picked from a profile of you, by consent where the law asks and otherwise by default; you turn them off in each browser’s cookie settings.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'Use the information we and our advertising partners hold about you to help us sell our ad inventory and to make the ads you see more relevant and tailored to your interests.'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'More information on opting-out of tailored ads can be found in our Cookie Notice.'
+      action:
+        name: 'Its cookie notice'
+        url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy notice doesn’t say whether what you write or say to it trains AI.'
+      pages: [https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it needs it, which for most of it is seven years.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'For the majority of information we hold, this will be seven years from the retention event.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can ask by email to have your information deleted, and it aims to finish within a month, or three for complex requests.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'erasure of your personal information where processing is no longer necessary for purposes for which it was collected.'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'will aim to complete your request within one calendar month; such a period may be extended by two further months where necessary'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your information, or for it to be passed to another company, within a month.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'transfer of your personal information to another data controller.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law or the authorities require it, or it reasonably believes they do, and to enforce its terms or protect against piracy.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'comply with any applicable law, regulation, legal obligation or regulatory/law enforcement authority request'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can go to any country it or its partners work in, under recognised safeguards such as adequacy decisions and standard contract clauses.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'your personal information may be transferred, stored and processed between any of the countries in which we, our entities or third parties operate for any of the purposes set out above.'
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'standard data protection clauses as adopted by the European Commission or UK Government are in place governing the transfer'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password, then your payment details.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16195664216477-how-to-sign-up-on-DAZN
+          quote: 'Create an account by entering your email address and password.'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to subscribe, and it deletes children’s information it finds, but says nothing more about them.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'We do not knowingly collect and/or share personal information about children and take steps to delete such information without notification should we become aware of such processing.'
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes industry-standard measures in general terms, and names no independent audit or way to report a security flaw.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16394152093597-privacy-policy-and-cookie-notice
+          quote: 'we deploy industry-standard physical, technical and organisational security measures in the collection, storage, use and transfer of your information.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: poor
+      reason: 'You cancel online in My Account, but with 30 days’ notice: a yearly plan runs out its term, and a monthly one is charged for the days past your last full month.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'You may terminate your Paid Subscription by logging in on the “My Account” page and clicking on the "Cancel Membership" button'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'unless the subscription is validly terminated by you by providing a minimum of thirty (30) days’ notice'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'we will charge to your chosen Payment Method (on your last billing date) a pro rata amount based on the number of days from the end of the last Complete Billing Period until date of termination.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but keep your plan until the end of the period.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'you will continue to have access to the subscription plan until the end of your subscription period at which point it will terminate'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'any amounts already paid for the Paid Subscription will not be refunded in case of your cancellation.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It emails you at least 30 days before a new price applies; for a rise of over 5%, you can end your plan when it starts.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'any price change for Paid Subscriptions will apply at the earliest after thirty (30) days as of our e-mail notification to your most recently registered e-mail address.'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'If a price increase made pursuant to Sections 4.7 is more than 5% of the price applicable immediately prior to the date of the increase, you will be entitled to terminate your Paid Subscription'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A free period is charged on your payment method when it ends unless you cancel first, and no reminder is promised.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'Your Payment Method (as defined below) will be billed the applicable amount for your subscription on the date indicated when you sign up for the DAZN Service, unless you cancel your subscription in accordance with Section 6 prior to the end of the free trial period, if any.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms renew a yearly plan for another year unless you give 30 days’ notice, but don’t say it reminds you first.'
+      pages: [https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: neutral
+      reason: 'The price is all you pay, unless a payment fails for a reason that’s yours: then it can pass on its bank’s charge.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'In the event we incur a cost (e.g. for a bank charge) due to being unable to process a payment for reasons for which you are responsible or a payment being recalled, we may charge you such cost incurred.'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'You can upgrade or downgrade at any time, though it doesn’t say how the price is worked out.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16195664216477-how-to-sign-up-on-DAZN
+          quote: 'You can downgrade or upgrade at any time.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to England’s courts, which its terms choose, with no arbitration.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'you agree to irrevocably submit to the exclusive jurisdiction of the courts of England.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It emails you at least 30 days before a change to its terms or your plan, and you can cancel in that time.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'will be notified to you by us via email notice to the most recent email address we hold for you at least 30 days prior to their entry into force.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your plan with 60 days’ notice and refund what you prepaid, or at once if it believes you broke its terms or harm other subscribers.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'We may terminate our agreement with you at any time with sixty (60) days’ prior notice via email to the end of the current subscription period.'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'your use of the DAZN Service is abusive, disruptive, excessive or against the interests of other subscribers'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can remove content at any time without notice, and takes no liability when an event it advertised isn’t shown.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'We retain the right to remove, or alter, any Content made available through the DAZN Service at any time, without providing notice to you.'
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'We will not have any liability to you for the cancellation or abandonment of any event or the failure to show any event as scheduled or advertised'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Your account is yours alone: its terms forbid sharing it, or your password, with anyone, unless your plan says otherwise.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'Unless otherwise specified in your subscription plan, your account details (including login information) are personal to you and must not be shared with anybody or made accessible to others.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: poor
+      reason: 'It caps the devices you can register, at a number it gives only at sign-up, and once you reach it you can swap one device a month.'
+      sources:
+        - url: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
+          quote: 'Once you have reached your Maximum Limit, you will only be entitled to make one (1) change to your registered devices each month, unless your subscription plan explicitly states otherwise.'
+      lastVerified: 2026-11-09
