@@ -1,0 +1,328 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 3, part 2), read in Edge from Canada: Rogers
+# Sports & Media's discovery+, its own provider (the owner's choice of 2026-11-04). Warner Bros. Discovery's discovery+
+# (discovery-plus) is sold in the US, the UK, Ireland and Italy; its help centre: "As of February 17, 2026, the
+# discovery+ service provided by Warner Bros. Discovery is no longer available in Canada".
+# Pricing: the sign-up page's plan cards (secure.discoveryplus.ca/pricing): "discovery+" at "$7.99 Per Month", with its
+# "Unlimited access without ads" and "Offline downloads for on-the-go viewing" lines crossed out, and "discovery+ Ad
+# Free" at "$9.99 Per Month" with both. The FAQ on discoveryplus.ca still says "$5.99/month + tax" and "$8.99/month +
+# tax"; the plan cards are the prices sign-up charges, so they're used. Monthly only: "Your subscription automatically
+# renews every month" (the FAQ).
+# Region checklist, 2026-11-09: 1. discoveryplus.ca and its sign-up pages are Canada's only; 4. the plan cards, never
+# past them (the account step answered with an error page here); 5. its help centre's Plans & Pricing article links the
+# same page. Sold in Canada only (its terms).
+# Bundles: none on its pages. Resellers: none; TELUS and Koodo bill it on their own services ("Your discovery+
+# subscription including billing will be managed through TELUS and Koodo"), and Amazon's Prime Video channels sell it,
+# partners, not resellers.
+
+id: discovery-plus-canada
+name: discovery+ Canada
+aliases: [discovery plus canada, discoveryplus.ca]
+website: https://www.discoveryplus.ca
+category: streaming
+spendCategory: streaming
+billingCurrency: { CA: CAD }
+# Its terms: "The Service is only available to users of a Site while in Canada".
+availableIn: [CA]
+cancelUrl: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
+sources: { pricing: https://secure.discoveryplus.ca/pricing }
+notes: Rogers Sports & Media's discovery+, sold in Canada since February 2026. Warner Bros. Discovery's discovery+ is sold in other countries.
+# Accepted cards and ways to pay, read 2026-11-09 in its help centre (Visa, MasterCard and AMEX; app stores; Prime
+# Video's channel) and its terms ("a valid credit card (Visa, MasterCard or American Express)", or an Authorized
+# Distributor's account: TELUS and Koodo, whose pages say "billing will be managed through TELUS and Koodo", in words
+# no way to pay names).
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://support.discoveryplus.ca/hc/en-ca/articles/46379235594516-Which-credit-cards-do-you-accept
+    quotes:
+      - 'We accept Visa, MasterCard, or AMEX.'
+paymentMethods:
+  - methods: [card]
+    page: 'Which credit cards do you accept?'
+    url: https://support.discoveryplus.ca/hc/en-ca/articles/46379235594516-Which-credit-cards-do-you-accept
+    quotes:
+      - 'We accept Visa, MasterCard, or AMEX.'
+  - methods: [app-store]
+    page: 'How do I cancel my subscription?'
+    url: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
+    quotes:
+      - 'If you subscribed through the iOS App Store or Google Play Store, you’ll need to cancel your subscription through the same platform you used to sign up.'
+  - methods: [app-store]
+    page: 'I subscribe to discovery+ on Prime Video'
+    url: https://support.discoveryplus.ca/hc/en-ca/articles/46379495008148-I-subscribe-to-discovery-on-Prime-Video-Can-I-sign-in-on-the-discovery-app
+    quotes:
+      - 'If you subscribe to discovery+ with Prime Video, you can only watch through the Prime Video app.'
+
+# Owner (M11.2), read 2026-11-09: its terms name the company; Rogers Sports & Media's about page says where it is.
+owner:
+  name: Rogers Sports & Media (Rogers Media Inc.)
+  website: https://www.rogerssportsandmedia.com
+  page:
+    name: Terms of service
+    url: https://secure.discoveryplus.ca/terms-of-service
+  quotes:
+    - 'Welcome to discovery+, a video streaming service (the “Service”) provided by or on behalf of Rogers Media Inc. and its affiliates'
+  country:
+    code: CA
+    page:
+      name: 'About Us (Rogers Sports & Media)'
+      url: https://www.rogerssportsandmedia.com/about-us/
+    quotes:
+      - 'Rogers Sports & Media is Canada’s fastest growing sports and entertainment content provider, reaching 95% of Canadians through premium content and cross-platform advertising solutions.'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09: its terms renew "monthly, annually, or at the frequency indicated when you
+# subscribe" and its FAQ "every month", without saying which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://secure.discoveryplus.ca/terms-of-service
+    - https://www.discoveryplus.ca/
+  lastVerified: 2026-11-09
+
+# Apps (the cross-category features), read 2026-11-09: "most smartphones, tablets and desktop browsers, and most
+# connected devices, including Amazon Fire TV streaming devices and Amazon Fire TV Edition Smart TVs; Apple iPads,
+# iPhones, iPod Touches and Apple TVs; Google devices and platforms including Android phones, tablets and Android OS
+# devices, and Samsung Smart TVs from 2018 and newer" (the FAQ on discoveryplus.ca). No game consoles.
+features:
+  platforms: [ios, android, web, tv]
+
+# Features, read 2026-11-09 in its help centre (support.discoveryplus.ca, which answers only a browser) and terms:
+# - video quality: the devices article's chart gives each device's "maximum resolution", 1080p at most (Apple TV 4K,
+#   iPhone, iPad and web browsers; Fire TV and Android 720p);
+# - streams: its terms, "We allow you to view the Content on up to two (2) Digital Devices at a time", which they call a
+#   breach to circumvent; its help centre says "on up to 4 devices at once". The terms' 2 is used (the owner's choice of
+#   2026-11-09);
+# - profiles: "You can create up to five unique, personalized profiles with your discovery+ account", Kids Profiles "for
+#   children 12 and under", and "discovery+ does not offer customizable parental controls";
+# - ads: the plan cards ("discovery+" has "Unlimited access without ads" crossed out; the FAQ: "stream with limited
+#   ads");
+# - downloads: "only subscribers with an ad-free subscription are able to download", "You can download up to 100
+#   titles at a time", on no stated number of devices;
+# - live: "It does not include live channels." No French programmes are named.
+plans:
+  - id: discovery-plus-canada.with-ads
+    name: With ads
+    link: https://secure.discoveryplus.ca/pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+    notes: The plan discovery+ calls “discovery+”, with limited ads.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://secure.discoveryplus.ca/pricing,
+        }
+  - id: discovery-plus-canada.ad-free
+    name: Ad Free
+    link: https://secure.discoveryplus.ca/pricing
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows up to 100 downloads at a time without saying on how many devices, so at least one.'
+        page:
+          name: 'How many shows or videos can I download?'
+          url: https://support.discoveryplus.ca/hc/en-ca/articles/46379285238676-How-many-shows-or-videos-can-I-download
+        lastVerified: 2026-11-09
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://secure.discoveryplus.ca/pricing,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its Terms of Service ("Updated: December 9, 2026"; the French version
+# says 2025), which include Rogers' Acceptable Use Policy (on the same page, and at rogers.com/terms) and, for
+# arbitration, Rogers' Arbitration Protocol (arbitration where you live, its fees refunded for claims under $50,000:
+# no grade changes), its help centre's billing articles, the sign-up page's lines (marketing consent), and the Rogers
+# Privacy Policy, rated once as a shared document (data/policies/rogers-privacy.yaml). Rogers Sports & Media's own
+# website terms (the footer's "RSM Terms of Service") are for its websites, not discovery+: no topic. Its sign-up form
+# opens after a plan is picked and answered with an error page here, so what an account needs stays unrated.
+policies:
+  shared: [rogers-privacy]
+  links:
+    - name: 'Terms of service'
+      url: https://secure.discoveryplus.ca/terms-of-service
+    - name: 'Plans'
+      url: https://secure.discoveryplus.ca/pricing
+    - name: 'How do I cancel my subscription?'
+      url: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
+    - name: 'Will I get a refund if I cancel?'
+      url: https://support.discoveryplus.ca/hc/en-ca/articles/46379210264084-Will-I-get-a-refund-if-I-cancel
+    - name: 'How to change my existing plan?'
+      url: https://support.discoveryplus.ca/hc/en-ca/articles/53590874226068-How-to-change-my-existing-plan
+    - name: 'How many shows or videos can I download?'
+      url: https://support.discoveryplus.ca/hc/en-ca/articles/46379285238676-How-many-shows-or-videos-can-I-download
+    - name: 'How do I create a kids profile?'
+      url: https://support.discoveryplus.ca/hc/en-ca/articles/46379779390100-How-do-I-create-a-kids-profile
+    - name: 'Rogers Privacy Policy'
+      url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+  ratings:
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its terms ask for accurate details without listing them, and its sign-up form couldn’t be read.'
+      pages: [https://secure.discoveryplus.ca/terms-of-service]
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to have an account, and Kids Profiles show only shows for children 12 and under. Its policies don’t say how it treats children’s data or the ads they see.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'You must be of the age of majority in the province in which you reside in order to be a Registered User.'
+        - url: https://support.discoveryplus.ca/hc/en-ca/articles/46379779390100-How-do-I-create-a-kids-profile
+          quote: 'You can create a Kids Profile to limit viewing to age-appropriate content for children 12 and under.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online in your account at any time, and keep watching until the end of the time you paid for. In Quebec it ends when you cancel, with the rest refunded.'
+      sources:
+        - url: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
+          quote: 'To cancel your subscription, log in to your account using a web browser. From the top-right menu, go to Account > Billing > Cancel Subscription.'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'That cancellation (including your loss of access to the cancelled Subscription Content) will be effective as of the end of the last subscription period for which you have already paid.'
+      action:
+        name: 'How to cancel discovery+'
+        url: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Outside Quebec you get no money back when you cancel, but you keep watching until the end of the time you paid for. In Quebec you get back what you haven’t used.'
+      sources:
+        - url: https://support.discoveryplus.ca/hc/en-ca/articles/46379210264084-Will-I-get-a-refund-if-I-cancel
+          quote: 'Users outside Quebec are not eligible for refunds.'
+        - url: https://support.discoveryplus.ca/hc/en-ca/articles/46379210264084-Will-I-get-a-refund-if-I-cancel
+          quote: 'If you’re in Quebec, you’ll receive a prorated refund when you cancel.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'Its terms say prices can change at any time, without promising to tell you first.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'Prices and availability of Subscription Content are subject to change at any time.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A free first period needs your card, which it holds the price on, and turns into a paid subscription when it ends. You can cancel during it by contacting discovery+, and no reminder is promised.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'If your Subscription Content includes an initial promotional period, then you acknowledge that your credit card will be authorized for up to the amount representing the price of the Subscription Content during the promotional period, however, your credit card will not be charged until after the end of the promotional period.'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'You may cancel your subscription to the Subscription Content at any time within an initial promotional period, by notifying us through one of the contact options accessible at Section 19, and your credit card (or other payment method) will not be charged.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews on its own and charges you without telling you first.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'you authorize us (without further notice to you) to charge the renewal subscription price'
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: great
+      reason: 'It charges the plan’s price and taxes, and names no other fees.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'you authorize us to charge the credit card that you provide to us the amount representing the price of the Subscription Content that you ordered (plus applicable taxes)'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its help centre says you change plans where you bought it, but not whether the change is prorated or waits for your renewal.'
+      pages:
+        - https://support.discoveryplus.ca/hc/en-ca/articles/53590874226068-How-to-change-my-existing-plan
+        - https://secure.discoveryplus.ca/terms-of-service
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Outside Quebec, a private referee (an arbitrator) settles any dispute instead of a court, with no way to opt out. Only people in Alberta can choose a court, once a dispute has started.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'will be determined by final and binding arbitration to the exclusion of the courts'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'If you are a resident of Alberta you may decide, after a dispute has arisen, whether to use the arbitration process to resolve the dispute or instead to pursue an action or other proceeding in court to resolve the dispute.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'If you have an account, it tells you in writing at least 30 days before changing its terms or the service, and you can cancel instead.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'If you are a Registered User, then we may modify these Terms or change any aspect of the Service at any time, upon no less than 30 days’ prior written notice to you'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'If you do not accept any modification to these Terms or change to the Service, then your sole remedy is to cancel the Service by sending us a notice to that effect no later than 30 days after the modification or change takes effect.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can block or cancel your account without warning if you break its terms or rules, and nothing says you’d get money back.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'Rogers may at any time, without notice to you, restrict, block, suspend or cancel any or all of your use of a Site (or any portion thereof), the Service or your account if you fail to comply in full with any of these Terms or any other terms, agreements, or policies (including, without limitation, our Acceptable Use Policy) that apply to a Site and the use of it.'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can suspend or end the service, or any part of it, at any time without telling you, and says it owes you nothing for it.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'Rogers may at any time, without notice or liability, refund, suspend or discontinue the Service (or any portion of it).'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'Rogers may impose limits on certain features and services or restrict your access to parts or all of the Software or the Service without notice or liability.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://secure.discoveryplus.ca/terms-of-service]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its usage rules, which its terms say cover discovery+, forbid sharing your service with anyone without Rogers’ consent.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'share or transfer your Services without our express consent'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'For greater certainty, the term “Services” in our Acceptable Use Policy includes the Services covered under these Terms.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Ad Free lets you keep up to 100 downloads at a time. How long they last isn’t stated, and its terms say it can vary.'
+      sources:
+        - url: https://support.discoveryplus.ca/hc/en-ca/articles/46379285238676-How-many-shows-or-videos-can-I-download
+          quote: 'You can download up to 100 titles at a time.'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'The amount of Downloadable Content permissible for each discovery+ account (across all Digital Devices) and the expiration rules for each piece of Downloadable Content may vary.'
+      lastVerified: 2026-11-09
+    - topic: other.notable
+      title: Marketing messages to subscribe
+      tier: neutral
+      reason: 'You must agree to get its marketing messages to pay for a plan. You can unsubscribe from them in each email or text.'
+      sources:
+        - url: https://secure.discoveryplus.ca/pricing
+          quote: 'Consent for discovery+ to send marketing messages is required during the payment process.'
+        - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+          quote: 'You can let us know if you no longer wish to receive marketing messages via email or SMS by following the unsubscribe process in those messages.'
+      lastVerified: 2026-11-09
+    - topic: other.notable
+      title: Remote access to your devices
+      tier: bad
+      reason: 'Its terms let Rogers connect to your devices from afar and run scripts on them, with full access during remote support.'
+      sources:
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'Rogers may connect remotely to and run scripts on your Digital Device(s). As part of remote Support, Rogers and its agents will have full access to your Digital Device(s).'
+      lastVerified: 2026-11-09

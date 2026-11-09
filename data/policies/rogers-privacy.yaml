@@ -1,0 +1,123 @@
+# A shared policy document (BLUEPRINT §4.10): the Rogers Privacy Policy ("Effective Date: April 13, 2025"), which
+# covers the Rogers Group, Rogers Sports & Media among it, so discovery+ in Canada, with the Rogers Mobile Application
+# Privacy Policy for its apps. Rated once here; each Rogers service names it in its policies' shared and rates its own
+# terms. Read 2026-11-09 (M11.15) in Edge, with Rogers' privacy pages: Privacy, CRTC & Consumer Codes (its Adobe device
+# co-op line), the annual transparency report, access to information and the marketing FAQ. The Rogers Digital Privacy
+# Policy, which the privacy policy names for cookies, has no link on these pages and wasn't found, and no page names a
+# way to report a security flaw.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: rogers-privacy
+name: The Rogers Privacy Policy
+links:
+  - name: 'Rogers Privacy Policy'
+    url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+  - name: 'Rogers Mobile Application Privacy Policy'
+    url: https://www.rogers.com/support/privacy/policy-mobile-apps
+  - name: 'Privacy, CRTC and consumer codes'
+    url: https://www.rogers.com/support/privacy
+  - name: 'Annual transparency report'
+    url: https://www.rogers.com/support/cyber-security/privacy/annual-transparency-report
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It records what you watch and do in its apps, to improve its products and market to you. To stop it, you write to its privacy office.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/policy-mobile-apps
+        quote: 'Usage data, including content and advertisements viewed on our digital properties, search history, content you share, products and services you download, purchase or subscribe for, language preference, transaction history, time spent and other digital information through cookies, pixel tags, web beacons, and other technologies.'
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'to understand needs and develop or enhance products and services;'
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'You can request to withdraw your consent using the information provided under “Addressing Your Privacy Questions, Requests and Concerns” below.'
+    action:
+      name: 'How to withdraw your consent'
+      url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+    lastVerified: 2026-11-09
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It shares your information with companies it picks, to market to you, and it’s in Adobe’s device co-op, which links your devices across companies’ sites. To stop it, you write to its privacy office.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'We also use your personal information within the Rogers Group and share it with carefully chosen third parties to market to you, including the following:'
+      - url: https://www.rogers.com/support/privacy
+        quote: 'Rogers Communications participates in the Adobe Marketing Cloud Device Co-op to better understand how you use our website and apps across the various devices you use, and to deliver tailored promotions.'
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'We will not sell your personal information to any organization or person, unless we sell or transfer any part of our business.'
+    action:
+      name: 'How to withdraw your consent'
+      url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+    lastVerified: 2026-11-09
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It shows you ads picked from what you do, and follows which site you came from and go to next. You can only stop it by writing to its privacy office.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'to deliver marketing communications, personalized offers, and interest-based ads to you on behalf of members of the Rogers Group or carefully chosen third parties;'
+      - url: https://www.rogers.com/support/privacy/policy-mobile-apps
+        quote: 'We also collect information about the site you came from before visiting our digital properties and the site you go to next.'
+    action:
+      name: 'How to withdraw your consent'
+      url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+    lastVerified: 2026-11-09
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy policies don’t say whether what you write or upload trains AI.'
+    pages:
+      - https://www.rogers.com/support/privacy/rogers-privacy-policy
+      - https://www.rogers.com/support/privacy/policy-mobile-apps
+    lastVerified: 2026-11-09
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it decides it needs it, and gives no time limits for what its apps collect.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'Rogers will only retain your personal information for as long as it is necessary to fulfill the purpose for which it was collected or for sufficient time to allow you access to the information if it was used by us to make a decision about you or your account.'
+      - url: https://www.rogers.com/support/privacy/policy-mobile-apps
+        quote: 'Rogers will only retain your personal information for as long as necessary to fulfill the purpose for which it was collected.'
+    lastVerified: 2026-11-09
+  - topic: privacy.data-deletion
+    tier: poor
+    reason: 'You may be able to delete your app account yourself, but not always, and not while you have a service with Rogers or owe it money.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/policy-mobile-apps
+        quote: 'If you created a profile or account in one of our Apps, you may be able to deactivate or delete it. In some circumstances, however, this may not be possible.'
+      - url: https://www.rogers.com/support/privacy/policy-mobile-apps
+        quote: 'In addition, if you have an active service account or owe a balance on your account, your information and App account cannot be deleted.'
+    action:
+      name: 'Deleting an app account'
+      url: https://www.rogers.com/support/privacy/policy-mobile-apps
+    lastVerified: 2026-11-09
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask in writing for the information it keeps about you, and it answers within the time Canadian privacy law sets.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'If you wish to access your personal information, you must make a request in writing.'
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'Once we have confirmed the details of your requests and validated your identity, we will respond within the prescribed timeframes set out in applicable Canadian privacy law.'
+    action:
+      name: 'Privacy information request form'
+      url: https://www.rogers.com/forms/privacy-information-request-form
+    lastVerified: 2026-11-09
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It hands over information when the law requires or allows it, without asking you, and publishes how many requests police and governments make each year.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'We may also collect, use, or disclose personal information without your knowledge or consent where it is required or permitted by law.'
+      - url: https://www.rogers.com/support/cyber-security/privacy/annual-transparency-report
+        quote: 'Since 2013, we have published the details of the number of requests for customer personal information received from law enforcement and government agencies in our annual Transparency Report.'
+    lastVerified: 2026-11-09
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your information may be kept or handled outside Canada, with protections it says meet Canadian privacy law, but other countries’ laws may then apply.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'Your personal information may be stored or processed in or outside Canada. No matter where this happens, the information will be protected with appropriate security safeguards and standards that adhere to applicable Canadian privacy laws.'
+    lastVerified: 2026-11-09
+  - topic: security.practices
+    tier: poor
+    reason: 'It says it checks its own security often, but names no outside audit or certification and no way to report a security flaw.'
+    sources:
+      - url: https://www.rogers.com/support/privacy/rogers-privacy-policy
+        quote: 'We regularly review and audit our security measures and procedures to ensure that they remain effective and are consistent with industry best practices.'
+    lastVerified: 2026-11-09

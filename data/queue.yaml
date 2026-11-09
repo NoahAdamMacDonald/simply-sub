@@ -742,6 +742,14 @@
   sitelinks: 19
   status: done
   date: 2026-11-04
+- id: discovery-plus-canada
+  name: discovery+ Canada
+  website: https://www.discoveryplus.ca
+  category: streaming
+  source: manual
+  status: done
+  date: 2026-11-09
+  note: "Rogers Sports & Media's discovery+, its own provider beside Warner Bros. Discovery's (the owner's choice, 2026-11-04)"
 - id: 1password
   name: 1Password
   website: https://1password.com
