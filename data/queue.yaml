@@ -330,7 +330,8 @@
   source: wikidata
   wikidata: Q602243
   sitelinks: 39
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: napster
   name: Napster
   website: https://www.napster.com
