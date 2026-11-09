@@ -1,7 +1,8 @@
 url: https://www.amazon.com.au/prime
-method: browser
-saved: 2026-11-04
+method: archive
+saved: 2026-11-09
 
+Amazon.com.au: Amazon Prime
 Skip to
 Main content
 Keyboard shortcuts
@@ -35,9 +36,10 @@ Alt
 Z
 To move between items, use your keyboard's up or down arrows.
 .com.au
-Delivering to Sydney 2000
-To change, sign in or enter a postcode
+Deliver to
+United States
 All
+Select the department that you want to search in
 All Departments
 Alexa Skills
 Amazon Devices
@@ -82,14 +84,14 @@ Stationery & Office Products
 Subscribe & Save
 Toys & Games
 Video Games
+Search Amazon.com.au
 EN
 Hello, sign in
 Account & Lists
 Returns
 & orders
+0
 Basket
-Sign in
-New customer? Start here.
 All
 Amazon Haul
 Best Sellers
@@ -106,19 +108,21 @@ Home
 Electronics
 Video Games
 Toys & Games
+Beauty
 Audible
 Amazon Renewed
-Beauty
-Computers
-Automotive
 Sports & Outdoors
+Automotive
+Computers
 Health & Personal Care
 Pet Supplies
 Sell on Amazon
 Kindle Books
 Customer Service
-Explore other plans
-Start your 30-day free trial
+Make every day better with Prime
+Get fast, free delivery, great entertainment, exclusive early access to offers and more. Experience it for yourself!
+After your Free Trial, Amazon Prime is just $12.99/month. Cancel anytime. Prime Free Delivery excludes select remote areas.
+Explore other plans Start your 30-day free trial
 Unlock your Prime benefits now:
 Fast, free delivery
 Enjoy free delivery in as fast as one day—no minimum purchase on Prime eligible orders. Excludes select remote areas. Learn more about delivery restrictions: www.amazon.com.au/deliveryrestrictions
@@ -137,8 +141,6 @@ Prime Reading
 Prime members read for free. Get access to a rotating selection of over a thousand e-books, comics, short works and more.
 Exclusive deals
 As a Prime member enjoy 30 minute early access to Prime eligible lightning deals and exclusive access to special shopping deals and events.
-Blink Outdoor Camera 2K+ (2 Pack) for $49
-Save on Blink Outdoor Camera 2K+ (2 pack) when you join Prime. Eligible new-to-Prime customers will receive email confirmations that a credit has been applied to their account. Terms and Conditions apply: www.amazon.com.au/b?node=5628052051
 Choose your plan
 Enjoy your free 30-day trial of Prime. After your free trial, Prime is just $12.99 per month. Cancel anytime.
 Prime Monthly
@@ -147,7 +149,12 @@ per month after trial
 Prime Annual
 $99
 per year after trial
-Start your 30 days trial
+Start your free 30-day trial Enjoy your free 30-day trial of Prime. After your free trial, Prime is just $12.99 per month. Cancel anytime.
+Enjoy your free 30-day trial of Prime. After your free trial, Prime is just $99 per year. Cancel anytime.
+Your recently viewed items and featured recommendations
+›
+View or edit your browsing history
+After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.
 Back to top
 Get to know us
 About Us

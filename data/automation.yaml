@@ -34,5 +34,19 @@ search:
 # robots.txt and icons). It compares the Internet Archive's newest copy of each with its baseline instead, so a changed
 # page still reaches the weekly review, which reads the live page with the standard reader; prices there are confirmed
 # only by that review, and a page read only from the archive for over 90 days goes to it too. A subdomain is included
-# (help.openai.com).
-archived: [chatgpt.com, openai.com]
+# (help.openai.com). Amazon's stores (the owner's choice of 2026-11-09): their help pages answer the baseline reader with
+# 403 and amazon.it with 503; primevideo.com and aboutamazon.com read as usual.
+archived:
+  [
+    chatgpt.com,
+    openai.com,
+    amazon.ca,
+    amazon.com,
+    amazon.co.uk,
+    amazon.com.au,
+    amazon.de,
+    amazon.es,
+    amazon.fr,
+    amazon.it,
+    amazon.nl,
+  ]
