@@ -308,7 +308,17 @@ which reads each page as a visitor there would, before any hand reading:
   the baselines that saved the wrong page, as for HBO Max. Its terms for each country are listed on
   wbd.com/discoveryplus/legal/terms-of-use, Europe's as PDFs: read them with `pdftotext -enc UTF-8 -layout` (curly
   apostrophes and accents come through), check quotes against that text, and delete the empty baselines the baseline
-  run saves for them. Canada's discovery+ is Rogers Sports & Media's (discoveryplus.ca), its own provider.
+  run saves for them. Canada's discovery+ is Rogers Sports & Media's (discoveryplus.ca), its own provider: its plan cards
+  are on secure.discoveryplus.ca/pricing (a crossed-out line is one the plan lacks: read the screenshot), and its help
+  centre (support.discoveryplus.ca) answers a plain fetch with 403 and reads in Edge.
+- **ZEE5's plans** (M11.15): zee5.com/global/myaccount/subscription prices by where the visitor is, and the same card
+  can have another device count in another country (All Access's 4, 3 or 2), so each country's cards are read through
+  its exit and a plan's features checked there too. Each card shows its own periods only once clicked (`click:` its
+  description, "Tamil Movies, Series, TV Shows, Live TV"); the pack names are images. Its help centre is India's.
+- **iQIYI's order page** (M11.15, iq.com/vip/order): some countries' cards show only one plan's, behind Standard and
+  Premium tabs (`nth:1:Standard`). Ireland and the Netherlands price in a bare "$", which the page's own data names
+  (`"currencyUnit":"USD"`); read it as part of the page. Its help centre's answers and its Security Response Center's
+  English (`#oversea`) are in the page but shown only when opened.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

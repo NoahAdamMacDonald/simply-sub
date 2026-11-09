@@ -2119,9 +2119,19 @@ in every D1 `json` column search parses.
     is Rogers Sports & Media's, its own provider in part 2 (the owner's choice). HBO Max's fees and account sharing
     drop to Poor: its terms have discovery+'s "service fees" and household-sharing clauses. Core's same-date renewal
     wording reads "the date when you signed up".
+  - **Streaming, batch 3, part 2** (2026-11-09): discovery+ Canada (`discovery-plus-canada`, Rogers Sports & Media's:
+    With ads and Ad Free, monthly, two streams from its terms though its help centre says four, the owner's choice), with
+    the Rogers Privacy Policy as a shared document (`data/policies/rogers-privacy.yaml`) for the Rogers services that
+    follow; ZEE5 (`zee5`, its global service: All Access, KidZ and seven language packs, a plan of its own wherever a
+    country's device count differs, the owner's choice, and each pack's language a perk); and iQIYI (`iqiyi`, iq.com:
+    Free, Standard and Premium, Ireland and the Netherlands billed in US dollars, Australia and Italy unread). The owner's
+    choices: `alipay` is a way to pay (with its Simple Icons mark), and the price-research skill reads every period a
+    provider sells, each priced only where it's sold (ZEE5's 3 months), which `pickPrice` already shows only there. Core's
+    same-date renewal wording reads "charged on a calendar month ... basis" (iQIYI).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2 and Prime Video done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 and 2, Prime Video and batch 3's parts 1 and 2
+        done)
 
 ---
 
