@@ -2,20 +2,21 @@
 # ("Disable your VPN to continue") and through other countries' exits, so Canada's pages were read over an ordinary
 # connection; its sign-up app showed "There's a problem opening DAZN just now" even then.
 # Pricing: Canada's help article "DAZN plans and pricing" (its tiers DAZN and DAZN+, each Standard or Ultimate, at
-# "Monthly Flex", "Annual Pay (Instalment)" and "Annual Pay (Upfront)" prices), and the US's, read from the Internet
-# Archive's copy of 2026-10-29 because the live site can't be read from here (Monthly $34.99 on one stream, Annual - Pay
-# Upfront $249.99 on two). Annual Pay (Instalment) is a 12-month term paid monthly that its terms renew for another 12
+# "Monthly Flex", "Annual Pay (Instalment)" and "Annual Pay (Upfront)" prices), and the US's, which a plain fetch reads
+# from here (Monthly $34.99 on one stream, Annual - Pay Upfront $249.99 on two; the Internet Archive's copy of 2026-10-29
+# says the same). Annual Pay (Instalment) is a 12-month term paid monthly that its terms renew for another 12
 # months ("continue to be automatically extended by the length of the minimum term"); the catalog stores no minimum
 # term, so the plans' notes give it, as Viaplay's 12-month contract.
-# Region checklist, 2026-11-09: 1. dazn.com/<locale>/help (the en-CA plans article; other locales' copies of it are in
-# the Internet Archive for the US only, and the UK's is from July); 4. the sign-up app, which fails to load; 6. Edge
-# through each exit (refused), then a browser over an ordinary connection (Canada). Its other countries are unread, and
-# no page read lists where it's sold, so availableIn is left out.
+# Region checklist, 2026-11-09: 1. dazn.com/<locale>/help (its plans article in each locale); 4. the sign-up app, which
+# fails to load; 6. Edge through each exit (refused), a browser over an ordinary connection (Canada), and a plain fetch.
+# The UK's, Germany's, Italy's, Spain's and France's plans articles read with a plain fetch too, but each sells a
+# lineup of its own (Germany's Super Sports and Unlimited, Italy's Full and Goal, Spain's sport packs, France's Ligue 1+
+# offers), left for a batch of their own. No page read lists where it's sold, so availableIn is left out.
 # Bundles: none on its pages. Resellers: none.
 
 # Coverage: dazn.one-stream in CA: Canada's monthly plan streams on 2 devices (Standard), so it has no one-stream plan.
-# Coverage: dazn.ultimate, dazn.plus-standard and dazn.plus-ultimate in US: the archived US page prices one plan
-# only, and the live US site can't be read from here.
+# Coverage: dazn.ultimate, dazn.plus-standard and dazn.plus-ultimate in US: the US's plans article prices one plan
+# only.
 
 id: dazn
 name: DAZN
@@ -25,7 +26,7 @@ spendCategory: streaming
 billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
 sources: { pricing: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing }
-notes: Canada's and the US's prices; its other countries' pages couldn't be read.
+notes: Canada's and the US's prices; its other countries sell lineups of their own, not read in yet.
 # Payment methods, read 2026-11-09 in its terms. Its pages name no card networks.
 paymentMethods:
   - methods: [card, paypal]
@@ -120,7 +121,7 @@ plans:
           interval: year,
           intervalCount: 1,
           autoRenew: true,
-          lastVerified: 2026-10-29,
+          lastVerified: 2026-11-09,
           sourceUrl: https://www.dazn.com/en-US/help/articles/16184063399709-DAZN-plans-and-pricing,
         }
   - id: dazn.one-stream
@@ -140,7 +141,7 @@ plans:
           interval: month,
           intervalCount: 1,
           autoRenew: true,
-          lastVerified: 2026-10-29,
+          lastVerified: 2026-11-09,
           sourceUrl: https://www.dazn.com/en-US/help/articles/16184063399709-DAZN-plans-and-pricing,
         }
   - id: dazn.ultimate
