@@ -2455,9 +2455,10 @@ plans:
 # FZ LLC's), its privacy policy's part for users outside India (the part for India's users is ZEEL's, not rated), its
 # help centre's articles on renewal, upgrades and downloads, and its sign-in page, which signs you up too. Its
 # "Preferences" and "Do not Sell or Share my Personal Information" links open a consent manager behind the sign-in, not
-# read: it asks you to sign in. Its terms say an account's username is "by using Your mobile number", but the global
-# sign-up asks for an email address; the form is what's rated. Its terms make what you post (comments) Z5X's: content
-# rights aren't a streaming topic, as for the other streaming services, so no notable.
+# read: it asks you to sign in. Its terms say an account's username is "by using Your mobile number"; the global sign-up
+# form takes a mobile number or an email address (Edge showed it email only once), and the form is what's rated. Its
+# terms make what you post (comments) Z5X's: content rights aren't a streaming topic, as for the other streaming
+# services, so no notable.
 policies:
   links:
     - name: 'Terms of use'
@@ -2569,10 +2570,10 @@ policies:
       lastVerified: 2026-11-09
     - topic: privacy.sign-up-data
       tier: neutral
-      reason: 'You sign up with an email address and a one-time code, and say you’re over 18; a plan takes your payment details.'
+      reason: 'You sign up with a mobile number or an email address and a one-time code, and say you’re over 18; a plan takes your payment details.'
       sources:
         - url: https://www.zee5.com/global/signin
-          quote: 'Scan the QR code or enter email address to log in'
+          quote: 'Scan the QR code or enter mobile number or email to log in'
         - url: https://www.zee5.com/global/signin
           quote: 'Verify using OTP'
       lastVerified: 2026-11-09

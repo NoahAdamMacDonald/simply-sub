@@ -1,0 +1,18 @@
+url: https://security.iqiyi.com/#oversea
+method: browser
+saved: 2026-11-09
+
+爱奇艺安全应急响应中心
+iQIYI Security Response Center
+首页 提交漏洞 公告 荣誉排行 礼品兑换 加入我们 合作方入口 EN 登录
+iQIYI Security Response Center
+About Us
+The iQIYI Security Response Center (a.k.a. 71SRC) is a vulnerability collection and emergency response platform established by the iQIYI security team.71SRC aims at protecting privacy and data for hundreds of millions of iQIYI users.
+Our Policy
+Security researchers are welcome to submit vulnerabilities and threat intelligence for iQIYI global products. (websites, mobile APPs, etc.)As soon as the report is confirmed by our staff, you will be rewarded certain 71SRC points which can be exchanged for Amazon gift cards.The rewards for one vulnerability report range from 30RMB to 18,000RMB (around 4.3USD to 2,580USD). In some cases, rewards can be doubled if a critical vulnerability related to iQIYI core business was reported.
+Submit Report
+To ensure your report could be processed in a timely manner, we recommend you to send the security vulnerability via e-mail: echo NzFzcmNAcWl5aS5jb20K|base64 -d . A detailed description of the vulnerability and a proof of concept (POC) will be appreciated.
+If You have any questions(including inquiries or complaints), please contact us via e-mail at contactus@qiyi.com.
+关于爱奇艺|提交漏洞|安全邮箱|投诉建议
+Copright @2015- All Rights Reserved 爱奇艺安全应急响应中心 京ICP证11032965号京网文【2021】2567-714号
+留言
