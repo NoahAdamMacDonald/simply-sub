@@ -1,238 +1,256 @@
 url: https://www.amazon.fr/amazonprime
-method: browser
-saved: 2026-11-04
+method: archive
+saved: 2026-11-09
 
-Skip to
-Main content
-Keyboard shortcuts
-Search
-ALT
+Amazon.fr : Amazon Prime
+Passer à
+Contenu principal
+Raccourcis clavier
+Rechercher
+opt
 +
 /
-Basket
+Panier
 shift
 +
-ALT
+opt
 +
 C
-Home
+Accueil
 shift
 +
-ALT
+opt
 +
 H
-Orders
+Commandes
 shift
 +
-ALT
+opt
 +
 O
-Show/Hide shortcuts
+Afficher/masquer les raccourcis
 shift
 +
-ALT
+opt
 +
 Z
-To move between items, use your keyboard's up or down arrows.
+Pour vous déplacer entre les articles, utilisez les flèches vers le haut ou vers le bas de votre clavier.
 .fr
-Delivering to Nantes 44000
-Update location
-All
-All Departments
+Livraison à 44000 Nantes
+Mettre à jour l’emplacement
+Toutes nos catégories
+Sélectionnez la section dans laquelle vous souhaitez faire votre recherche.
+Toutes nos catégories
 Alexa Skills
-Amazon Devices
 Amazon Global Store
 Amazon Haul
-Amazon Resale
-Apps & Games
-Audible Audiobooks
-Automotive
-Baby
-Beauty
-Books
-CDs & Vinyl
-Classical Music
-Computers & Accessories
-Deals
-Digital Music
+Amazon Seconde main
+Animalerie
+Appareils Amazon
+Applis & Jeux
+Auto et Moto
+Bagages et accessoires de voyage
+Beauté et Parfum
+Beauté Premium
+Boutique chèques-cadeaux
+Boutique Kindle
+Bricolage
+Bébés & Puériculture
+Cuisine & Maison
 DVD & Blu-ray
-Electronics & Photo
-Fashion
-Women's Clothing, Shoes and Jewellery
-Men's Clothing, Shoes and Jewellery
-Girl's Clothing, Shoes and Jewellery
-Boy's Clothing, Shoes and Jewellery
-Baby Clothing, Shoes & Jewellery
-Garden
-Gift Cards
-Grocery
+Epicerie
+Fournitures de bureau
+Gros électroménager
 Handmade
-Health & Personal Care
-Home Improvement
-Industrial & Scientific
-Kindle Store
-Kitchen
-Large Appliances
-Lighting
-Luggage and travel gear
+High-Tech
+Hygiène et Santé
+Informatique
+Instruments de musique & Sono
+Jardin
+Jeux et Jouets
+Jeux vidéo
+Livres
+Livres audio Audible
+Logiciels
+Luminaires et Eclairage
 Luxury Stores
-Musical Instruments & DJ Equipment
-Office Products & Supplies
-PC & Video Games
-Pet Supplies
-Premium Beauty
+Mode
+Vêtements, chaussures et bijoux pour femmes
+Vêtements, chaussures et bijoux pour hommes
+Vêtements, chaussures et bijoux pour filles
+Vêtements, chaussures et bijoux pour garçons
+Vêtements, chaussures et bijoux pour bébés
+Moins de 10€
+Musique : CD & Vinyles
+Musique classique
 Prime Video
-Software
-Sports and Leisure
-Subscribe & Save
-Toys & Games
-Under $10
-EN
-Hello, sign in
-Account & Lists
-Orders
-Basket
-All
+Prévoyez et Économisez
+Secteur industriel et scientifique
+Sports et loisirs
+Téléchargement de musique
+Ventes Flash
+Rechercher Amazon.fr
+FR
+Bonjour, Identifiez-vous
+Compte et listes
+Commandes
+Panier
+Toutes
 Amazon Haul
-Best Sellers
-Our Deals
-New Releases
-Sell on Amazon
-Shopper Toolkit
-Gift Cards
+Meilleures ventes
+Ventes Flash
+Dernières Nouveautés
+Vendre
+sur Amazon
+Guide de l’acheteur
+Cartes cadeaux
 Prime
-Home and kitchen
-PC & Video Games
-Electronics
-Toys & Games
-Baby
+High-Tech
+Cuisine et maison
+Jeux vidéo
+Jeux et Jouets
+Bébé
 Prime Video
-Custom Products
-Computers
-Health & Personal Care
-Beauty
-Fashion
-Everyday
-Sports & Outdoors
-Car & Motorbike
-Premium Brands
-Subscribe & Save
-Free Delivery
-Kindle Books
-Customer Service
+Produits personnalisés
+Informatique
+Santé et produits d’hygiène
+Produits du Quotidien
+Mode
+Beauté
+Sports & Activités en plein-air
+Auto et moto
+Marques Premium
+Prévoyez et Économisez
+Livraison gratuite
+Ebooks Kindle
+Service Client
 Amazon.fr
-Amazon Hub Collection Locations
-Our Deals
+Points de retrait Amazon Hub
+Ventes Flash
 Outlet
-Bestsellers
-Amazon Resale
-Amazon Services
-See more plans
-Start my 30-day free trial
-Check out what's included with your Prime membership
-Fast Delivery
-Unlimited Premium Delivery on millions of eligible items
-Exclusive Deals
-Help yourself to a selection of special Prime member deals, and early access to Lightning Deals.
-More Prime benefits
+Coupons
+Meilleures ventes
+Amazon Seconde main
+Nos idées cadeaux
+Services Amazon
+Rejoignez Prime et profitez de 30 jour d’essai GRATUIT
+Livraison accélérée, films et séries en streaming et bien plus encore
+Après l'essai GRATUIT de 30 jours, Prime coûte seulement 6,99 €/mois. Annulez à tout moment.
+Comparer les durées Commencer mon essai gratuit de 30 jours
+Jetez un œil à tout ce que l'abonnement Prime inclut.
+Livraison accélérée
+Livraison en 1 jour ouvré gratuite et illimitée avec Prime sur des millions d'articles éligibles
+Ventes Flash
+Accès prioritaire 30 minutes avant le démarrage officiel des Ventes Flash éligibles
+Et bien plus encore
 Prime Reading
-Enjoy hundreds of new books, magazines, and more each month.
+Choisissez votre prochaine lecture parmi des centaines de romans, de polars, et de livres pour enfants.
 Prime Video
-New releases. Award-winning Amazon Originals. Watch what you love on your favourite devices with limited ads.
-Amazon Music with Prime
-All the most popular ad-free music and podcasts
+Vous pouvez regarder les programmes Amazon Original exclusifs et des milliers de films et séries populaires (avec publicité limitée).
+Amazon Music Prime
+Votre abonnement Prime inclut toute la musique et les meilleurs podcasts sans publicité.
 Amazon Luna
-Play a curated selection of premium games and the entire Game Night Collection of party games
+Jouez aux jeux que vous aimez et découvrez de nouveaux jeux préférés, notamment des jeux d'action-aventure, des jeux de société et bien plus encore.
 Amazon Photos
-Enjoy unlimited, full-resolution photo storage.
+Stockage gratuit et illimité de vos photos avec Amazon Photos
 Prime Day
-An annual event exclusively for Prime members, delivering two days of epic savings.
-Choose your plan
-After your free trial Prime is just €6.99/month.
-Prime Monthly
-€6.99
-per month after trial
-Prime Annual
-€69.90
-per year after trial
-Prime for students and 18-24 year-olds (monthly)
-€3.49
-per month after the free trial
-Start your 30-day trial
-You may be wondering
-Where can I learn more about the various Prime benefits?
-To learn more about a specific Prime benefit mentioned on this page, visit amazon.fr/primebenefits
-If I’m not satisfied, what is the Prime cancellation policy? Will I be refunded?
-When will I be billed for my membership?
-When your free trial or membership period ends we'll automatically charge for the next membership period.
-Back to top
-Get to Know Us
-About Amazon
-Careers
-Sustainability
+Prime Day est un événement shopping mondial réservé exclusivement aux membres du programme Amazon Prime.
+Choisissez votre offre
+Après la période d'essai gratuite, Amazon Prime coûte 6,99 € par mois
+Abonnement mensuel
+6,99 €
+par mois après l'essai
+Abonnement annuel
+69,90 €
+par an après l'essai
+Prime pour les étudiants et les 18-24 ans (mensuel)
+3,49 €
+par mois après l'essai
+Commencez votre essai de 30 jours Après la période d'essai gratuite, Amazon Prime coûte 6,99 € par mois
+Après la période d'essai gratuite, Amazon Prime coûte 69,90 € par an
+90 jours d'essai sponsorisé par Microsoft Surface. Après votre essai, l'abonnement coûtera 3,49 €/mois au lieu de 6,99 €.
+Annulez à tout moment.
+Avez-vous des questions?
+Où puis-je en savoir plus sur les différents avantages Prime ?
+Pour en savoir plus sur un avantage Prime spécifique mentionné sur cette page, rendez-vous sur amazon.fr/primebenefits
+Si je ne suis pas satisfait, quelle est la politique d'annulation Prime ? Serai-je remboursé ?
+Si vous avez souscrit à Prime directement sur le site Amazon, vous pouvez résilier votre abonnement à tout moment depuis la rubrique Votre compte Amazon Prime. Les abonnés n'ayant pas utilisé leurs avantages Prime peuvent bénéficier d'un remboursement complet de leur abonnement en cours.
+Quand serai-je facturé pour mon abonnement?
+Une fois votre période d'essai terminée, vous serez facturé pour la période suivante selon le type de plan choisi.
+Vos articles vus récemment et vos recommandations en vedette
+›
+Afficher ou modifier votre historique de navigation
+Après avoir consulté un produit, regardez ici pour revenir simplement sur les pages qui vous intéressent.
+Retour en haut
+Pour mieux nous connaître
+À propos d'Amazon
+Carrières
+Durabilité
 Amazon Science
-Make Money with Us
-Sell on Amazon
-Sell on Amazon Business
-Sell on Amazon Handmade
-Brand Registry and New Seller Incentives
-Associates Programme
-Fulfilment by Amazon
-Supply to Amazon
-Sell Globally with Amazon
-Advertise Your Products
-Independently Publish with Us
+Gagnez de l'argent
+Vendez sur Amazon
+Vendez sur Amazon Business
+Vendez sur Amazon Handmade
+Protégez et développez votre marque
+Devenez Partenaire
+Expédié par Amazon
+Livrer à Amazon
+Vendez dans le monde entier avec Amazon
+Faites la promotion de vos produits
+Auto-publiez votre livre
 Amazon Pay
-›See More Make Money with Us
-Amazon Payment Methods
-Payment Methods Help
-Payment in instalments
-Amazon Currency Converter
-Gift Cards
-Top Up Your Account
-Top Up Your Account in Store
-Let Us Help You
-Track Packages or View Orders
-Delivery Rates & Policies
+›Voir plus : Gagner de l'argent avec nous
+Moyens de paiement Amazon
+Cartes de paiement
+Paiement en plusieurs fois
+Convertisseur de devises Amazon
+Cartes cadeaux
+Recharge en ligne
+Recharge en point de vente
+Besoin d'aide ?
+Voir ou suivre vos commandes
+Tarifs et options de livraison
 Amazon Prime
-Return, Replace or Withdraw
-Legal Guarantee
-Recalls and Product Safety Alerts
-Recycling
-Amazon Mobile App
-Customer Service
-Accessibility
-Lists and Gifting
-Report illegal content
-English France
+Retour, remplacement ou retractation
+Garantie légale
+Rappels et alertes de sécurité des produits
+Recyclage (y compris les équipements électriques et électroniques)
+Infos sur notre Marketplace
+Application Amazon Mobile
+Service Client
+Accessibilité
+Liste de cadeaux
+Signaler un contenu illégal
+Français
+France
 Amazon Music
-Stream millions
-of songs
+Écoutez des millions
+de chansons
 AbeBooks
-Books, art
-& collectables
+Livres, art
+& articles de collection
 Amazon Web Services
-Scalable Cloud
-Computing Services
+Services de Cloud
+Computing Flexibles
 Audible
-Download Audiobooks
+Livres audio
+télécharger
 Kindle Direct Publishing
-Indie Digital & Print Publishing
-Made Easy
-Amazon Resale
-Great Deals on
-Quality Used Products
+Auto-publiez facilement
+vos livres au format numérique
+Amazon Seconde main
+Produits d'occasion ou emballage ouvert
 Shopbop
-Designer
-Fashion Brands
+Vêtements de Marque
+& Mode
 Amazon Advertising
-Find, attract and
-engage customers
+Ciblez, attirez et
+fidélisez vos clients
 Amazon Business
-30-day payment. Excluding VAT.
-For professionals.
-Conditions of Use & Sale
-Privacy Notice
-Cookies Notice
-Interest-Based Ads Notice
-© 1996-2025, Amazon.com, Inc. or its affiliates
+Paiement 30 jours. Hors TVA.
+Pour les professionnels.
+Conditions générales de vente
+Vos informations personnelles
+Cookies
+Annonces basées sur vos centres d’intérêt
+© 1996-2026, Amazon.com Inc. ou ses affiliés

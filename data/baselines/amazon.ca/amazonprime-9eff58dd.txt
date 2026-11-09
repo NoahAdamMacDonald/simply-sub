@@ -1,7 +1,8 @@
 url: https://www.amazon.ca/amazonprime
-method: browser
-saved: 2026-11-04
+method: archive
+saved: 2026-11-09
 
+Amazon.ca: Amazon Prime
 Skip to
 Main content
 Keyboard shortcuts
@@ -38,6 +39,7 @@ To move between items, use your keyboard's up or down arrows.
 Delivering to Balzac T4B 2T3
 Update location
 All
+Select the department you want to search in
 All Departments
 Alexa Skills
 Amazon Devices
@@ -81,41 +83,44 @@ Subscribe & Save
 Tools & Home Improvement
 Toys & Games
 Video Games
+Search Amazon.ca
 EN
 Hello, sign in
 Account & Lists
 Returns
 & Orders
+0
 Cart
 All
 Amazon Haul
 Best Sellers
 Amazon Basics
-Deals Store
-New Releases
 Prime
+New Releases
+Deals Store
 Electronics
 Music
 Home
-Computer & Video Games
 Home Improvement
-Grocery
-Toys & Games
-Health & Household
 Sports & Outdoors
-Pet Supplies
-Automotive
-Baby
 Fashion
-Computers
-Beauty & Personal Care
+Health & Household
+Toys & Games
 Custom Products
-Audible
-Subscribe & Save
-Sell
+Automotive
+Computers
 Gift Cards
+Pet Supplies
+Computer & Video Games
+Beauty & Personal Care
+Grocery
+Baby
+Audible
+Sell
+Subscribe & Save
 Kindle Books
-Ali G: Who Iz I? - New original movie
+Customer Service
+Prime | Movies and TV Shows
 Today's Deals
 Outlet Deals
 Amazon Resale
@@ -123,9 +128,11 @@ Coupons
 Book Deals
 Subscribe & Save
 Buy More & Save
-Explore other plans
-Start your free 30-day trial
-Are you a student or 19-24 years old?
+New members, try Prime
+free for 30 days
+Free delivery, award-winning TV, exclusive deals, and more
+Only $9.99/month (plus tax) after trial. Cancel anytime.
+Explore other plans Start your free 30-day trial Are you a student or 19-24 years old?
 Unlock the best of Amazon with Prime
 Convenient options
 Enjoy Same-Day, One-Day, and Two-Day Delivery on millions of items.
@@ -157,15 +164,22 @@ per year after trial
 Prime for Students & 19-24 year olds
 $4.99
 per month after trial
-Start your 30 days trial
+Start your free 30-day trial Enjoy your free 30-day trial of Prime. After, Prime is just $9.99 per month. Cancel anytime.
+Enjoy your free 30-day trial of Prime. After, Prime is just $99 per year. Cancel anytime.
+Enjoy a 6-month trial of Prime for Students or 19-24 year olds. Then get Prime at half the price, just $9.99 $4.99 per month. Cancel anytime.
 Learn more about plan discounts up to 50% off for:
 19-24 year olds and students
 You may be wondering
 Where can I learn more about the various Prime benefits?
 To learn more about all the benefits Prime has to offer, visit www.amazon.ca/primebenefits
 If I’m not satisfied, what is the Prime cancellation policy? Will I be refunded?
+If you signed-up for your Prime membership directly through us, you may cancel your Prime membership at any time by visiting Your Account and adjusting your membership settings. Paid members who haven't used their benefits are eligible for a full refund of the current membership period.
 When will I be billed for my membership?
 When your free trial or membership period ends we'll automatically charge for the next membership period.
+Your recently viewed items and featured recommendations
+›
+View or edit your browsing history
+After viewing product detail pages, look here to find an easy way to navigate back to pages that interest you.
 Back to top
 Get to Know Us
 Careers
@@ -198,7 +212,8 @@ Manage your Content and Devices
 Recalls and Product Safety Alerts
 Registry & Gift List
 Customer Service
-English Canada
+English
+Canada
 Amazon Music
 Stream millions
 of songs

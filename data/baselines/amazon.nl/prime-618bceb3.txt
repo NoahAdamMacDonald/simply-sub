@@ -1,6 +1,6 @@
 url: https://www.amazon.nl/prime
-method: fetch
-saved: 2026-11-04
+method: archive
+saved: 2026-11-09
 
 Amazon.nl: Amazon Prime
 Skip to
@@ -76,6 +76,7 @@ EN
 Hello, sign in
 Account & Lists
 Orders
+0
 Shopping-
 Basket
 All
@@ -87,9 +88,8 @@ Your Amazon.nl
 Kindle Books
 Customer Service
 Sell on Amazon
-30 days free
-Try Amazon Prime free for 30 days
-With Amazon Prime you get fast delivery included, exclusive deals, Prime Video with limited ads and more
+There's something for everyone with Prime!
+Check out what's included with your Prime membership.
 After your Free Trial, Amazon Prime is just €4.99/month. Ongoing subscription until cancelled.
 See more plans Try Prime
 Unlock the best of Amazon with Prime

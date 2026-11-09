@@ -1,7 +1,8 @@
 url: https://www.amazon.co.uk/amazonprime
-method: browser
-saved: 2026-11-04
+method: archive
+saved: 2026-11-09
 
+Amazon.co.uk: Amazon Prime
 Skip to
 Main content
 Keyboard shortcuts
@@ -35,13 +36,13 @@ ALT
 Z
 To move between items, use your keyboard's up or down arrows.
 .co.uk
-Delivering to London E177QZ
-Update location
+Deliver to
+United States
 All
+Select the department you want to search in
 All Departments
 Alexa Skills
 Amazon Devices
-Amazon Fresh
 Amazon Global Store
 Amazon Haul
 Amazon Resale
@@ -53,7 +54,6 @@ Books
 Car & Motorbike
 CDs & Vinyl
 Classical Music
-Co-op
 Computers & Accessories
 Deals
 Digital Music
@@ -68,20 +68,17 @@ Boy's Clothing, Shoes and Jewellery
 Baby Clothing, Shoes & Jewellery
 Garden & Outdoors
 Gift Cards
-Gopuff
 Grocery
 Handmade
 Health & Personal Care
 Home & Business Services
 Home & Kitchen
-Iceland
 Industrial & Scientific
 Kindle Store
 Large Appliances
 Lighting
 Luggage and travel gear
 Luxury Stores
-Morrisons
 Musical Instruments & DJ Equipment
 PC & Video Games
 Pet Supplies
@@ -92,10 +89,12 @@ Sports & Outdoors
 Stationery & Office Supplies
 Subscribe & Save
 Toys & Games
+Search Amazon.co.uk
 Hello, sign in
 Account & Lists
 Returns
 & Orders
+0
 Basket
 All
 Amazon Haul
@@ -134,14 +133,14 @@ Resale
 Outlet
 Subscribe & Save
 Vouchers
-Amazon Prime
 Prime Video
 Prime Student
 Mobile Apps
 Amazon Pickup Locations
-See more plans
-Start your 30 days free trial
-Are you a Student or 18-24 years old?
+Your next 30 days, on us: welcome to everything Prime
+Unlimited One-Day Delivery, Prime Video with limited ads, exclusive deals and more
+Only £8.99/month after free trial. Ongoing subscription until cancelled
+See more plans Try Prime now Are you a Student or 18-24 years old?
 Unlock the best of Amazon with Prime
 Convenient delivery options
 Enjoy unlimited Same-Day delivery on eligible orders above £20 (selected postcodes only), along with One-Day Delivery in the UK, and Priority Delivery to ROI on millions of items.
@@ -171,16 +170,25 @@ per year after trial
 Prime for Students and 18-24 year-olds (monthly)
 £4.49
 per month after trial
-Start your 30-day free trial
+Start your 30-day free trial Enjoy your 30-day free trial of Prime. After, Prime is just £8.99 per month. Ongoing subscription until cancelled.
+Enjoy your 30-day free trial of Prime. After, Prime is just £95 per year. Ongoing subscription until cancelled.
+6-month trial courtesy of Microsoft Surface, for new members only. After your trial, your Prime membership will automatically renew at £4.49/month.
+(50% off compared to the regular Prime membership).
 You may be wondering
 Where can I learn more about the various Prime benefits?
 To learn more about a specific Prime benefit mentioned on this page, visit amazon.co.uk/primeinsider
 Can I share my Prime benefits with other family members?
+Prime members can share certain benefits with another adult in their Amazon Family. Prime Student is not included in the Amazon Family sharing of Prime benefits.
 What is the Prime cancellation policy? Will I be refunded?
 If you signed-up for your Prime membership directly through us, you may cancel your Prime membership at any time by visiting Your Account and adjusting your membership settings. Paid members who haven't used their benefits may be eligible for a full refund of the current membership period.
 When will I be billed for my membership?
+When your free trial or membership period ends we'll automatically charge for the next membership period.
 My question remains unanswered. Where can I find more information?
 You can contact us at amazon.co.uk/contact-us
+Your recently viewed items and featured recommendations
+›
+View or edit your browsing history
+After viewing product detail pages, look here to find an easy way to navigate back to pages you are interested in.
 Back to top
 Get to Know Us
 Careers
@@ -226,7 +234,8 @@ Customer Service
 Accessibility
 Lists and Gifting
 Report illegal content
-£GBP - Pounds United Kingdom
+US$USD - U.S. Dollar
+United Kingdom
 Amazon Music
 Stream millions
 of songs

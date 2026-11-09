@@ -1,6 +1,6 @@
 url: https://www.amazon.com/amazonprime
-method: fetch
-saved: 2026-11-04
+method: archive
+saved: 2026-11-09
 
 Amazon.com: Amazon Prime
 Skip to
@@ -36,12 +36,13 @@ alt
 Z
 To move between items, use your keyboard's up or down arrows.
 .us
-Delivering to Nashville 37217
+Delivering to Sanfrancisco 94102
 Update location
 All
 Select the department you want to search in
 All Departments
 Alexa Skills
+Amazon Autos
 Amazon Devices
 Amazon Fresh
 Amazon Global Store
@@ -80,12 +81,14 @@ Home & Kitchen
 Industrial & Scientific
 Just for Prime
 Kindle Store
+Lucky
 Luggage & Travel Gear
 Luxury Stores
 Magazine Subscriptions
 Movies & TV
 Musical Instruments
 Office Products
+Pet Food Express
 Pet Supplies
 Premium Beauty
 Prime Video
@@ -106,6 +109,7 @@ Hello, sign in
 Account & Lists
 Returns
 & Orders
+0
 Cart
 All
 Holiday Shop
@@ -113,16 +117,16 @@ Custom Products
 Home Improvement
 Toys & Games
 Pet Supplies
-Prime
 Gift Cards
+Prime
 Groceries
 Amazon Home
+Medical Care
 Today's Deals
 Coupons
 Whole Foods
 Pharmacy
 Audible
-Medical Care
 Beauty & Personal Care
 Music
 Registry
@@ -132,11 +136,11 @@ Automotive
 Handmade
 Video Games
 Baby
-Amazon Haul
 Smart Home
+Amazon Haul
 Subscribe & Save
-Best Sellers
 Gift Shop
+Best Sellers
 Works with Alexa
 Join Prime and
 elevate your Amazon experience
