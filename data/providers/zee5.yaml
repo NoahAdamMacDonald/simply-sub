@@ -2455,8 +2455,9 @@ plans:
 # FZ LLC's), its privacy policy's part for users outside India (the part for India's users is ZEEL's, not rated), its
 # help centre's articles on renewal, upgrades and downloads, and its sign-in page, which signs you up too. Its
 # "Preferences" and "Do not Sell or Share my Personal Information" links open a consent manager behind the sign-in, not
-# read. Its terms say an account's username is "by using Your mobile number", but the global sign-up asks for an email
-# address; the form is what's rated.
+# read: it asks you to sign in. Its terms say an account's username is "by using Your mobile number", but the global
+# sign-up asks for an email address; the form is what's rated. Its terms make what you post (comments) Z5X's: content
+# rights aren't a streaming topic, as for the other streaming services, so no notable.
 policies:
   links:
     - name: 'Terms of use'
@@ -2500,7 +2501,7 @@ policies:
       lastVerified: 2026-11-09
     - topic: privacy.ads-tracking
       tier: neutral
-      reason: 'Ad companies show you ads picked from what you do. You can turn that off in its Preference Centre; you still see ads, just not picked for you.'
+      reason: 'Ad companies show you ads picked from what you do. You can turn that off in your account’s Preference Centre; you still see ads, just not picked for you.'
       sources:
         - url: https://www.zee5.com/global/privacypolicy
           quote: 'We use third-party advertising companies to serve personalised advertisements when you visit or use our website, mobile application or services.'
@@ -2624,11 +2625,12 @@ policies:
           quote: '(v) modify the prices for Subscription Packages or any part of Zee 5 service.'
       lastVerified: 2026-11-09
     - topic: billing.free-trials
-      status: not-applicable
-      reason: 'Its plan page and terms offer no free trial.'
+      status: not-stated
+      reason: 'Its plan page offers no free trial and its terms describe none; its privacy policy only mentions checking who can have one.'
       pages:
         - https://www.zee5.com/global/myaccount/subscription
         - https://www.zee5.com/global/termsofuse
+        - https://www.zee5.com/global/privacypolicy
       lastVerified: 2026-11-09
     - topic: billing.renewal-notice
       status: not-stated
@@ -2694,12 +2696,14 @@ policies:
       lastVerified: 2026-11-09
     - topic: service.account-sharing
       tier: bad
-      reason: 'Its terms forbid letting anyone else benefit from your ZEE5, and you may use it only on devices you alone control.'
+      reason: 'Its terms forbid letting anyone else benefit from your ZEE5, and you may use it only on devices you alone control, though its privacy policy expects you may let others set up profiles.'
       sources:
         - url: https://www.zee5.com/global/termsofuse
           quote: 'You shall not permit any third party to benefit from the use or functionality of Zee 5, either directly or via any facility management, timesharing, service bureau or any other arrangement.'
         - url: https://www.zee5.com/global/termsofuse
           quote: 'You shall only use the Zee 5 on Device that is under Your exclusive control and ownership.'
+        - url: https://www.zee5.com/global/privacypolicy
+          quote: 'Please note that if you allow others to use your account (including others you permit to set up profiles under your account)'
       lastVerified: 2026-11-09
     - topic: service.device-limits
       tier: neutral
@@ -2709,12 +2713,4 @@ policies:
           quote: 'Downloads are available only on the Zee 5 Android and iOS apps.'
         - url: https://helpcenter.zee5.com/portal/en/kb/articles/how-can-i-download-videos-on-zee-5
           quote: "Up to 30 days, as long as you don't uninstall the app or clear its cache."
-      lastVerified: 2026-11-09
-    - topic: other.notable
-      title: What you post becomes ZEE5’s
-      tier: poor
-      reason: 'Anything you post on ZEE5, such as a comment, becomes its property.'
-      sources:
-        - url: https://www.zee5.com/global/termsofuse
-          quote: 'You hereby agree that all intellectual property rights, title and interest in the End User generated content published or generated on Zee 5 by You shall vest with Z5X.'
       lastVerified: 2026-11-09

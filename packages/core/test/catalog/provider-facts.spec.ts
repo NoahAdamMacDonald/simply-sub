@@ -207,6 +207,7 @@ describe('namesRenewalAnchor', () => {
       'same-date',
       true,
     ],
+    ['Charged on a calendar month basis.', 'same-date', false],
     ['Charged on a calendar month basis.', 'first-of-month', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],

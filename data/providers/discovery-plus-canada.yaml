@@ -10,9 +10,8 @@
 # Region checklist, 2026-11-09: 1. discoveryplus.ca and its sign-up pages are Canada's only; 4. the plan cards, never
 # past them (the account step answered with an error page here); 5. its help centre's Plans & Pricing article links the
 # same page. Sold in Canada only (its terms).
-# Bundles: none on its pages. Resellers: none; TELUS and Koodo bill it on their own services ("Your discovery+
-# subscription including billing will be managed through TELUS and Koodo"), and Amazon's Prime Video channels sell it,
-# partners, not resellers.
+# Bundles: none on its pages. Resellers: none; TELUS and Koodo bill it on their own services, and Amazon's Prime Video
+# channels sell it: partners, not resellers.
 
 id: discovery-plus-canada
 name: discovery+ Canada
@@ -26,10 +25,9 @@ availableIn: [CA]
 cancelUrl: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
 sources: { pricing: https://secure.discoveryplus.ca/pricing }
 notes: Rogers Sports & Media's discovery+, sold in Canada since February 2026. Warner Bros. Discovery's discovery+ is sold in other countries.
-# Accepted cards and ways to pay, read 2026-11-09 in its help centre (Visa, MasterCard and AMEX; app stores; Prime
-# Video's channel) and its terms ("a valid credit card (Visa, MasterCard or American Express)", or an Authorized
-# Distributor's account: TELUS and Koodo, whose pages say "billing will be managed through TELUS and Koodo", in words
-# no way to pay names).
+# Accepted cards and ways to pay, read 2026-11-09 in its help centre (Visa, MasterCard and AMEX; app stores; TELUS's and
+# Koodo's bills; Prime Video's channel) and its terms ("a valid credit card (Visa, MasterCard or American Express)", or
+# "your account with an Authorized Distributor").
 acceptedNetworks:
   CA:
     networks: [visa, mastercard, amex]
@@ -47,6 +45,11 @@ paymentMethods:
     url: https://support.discoveryplus.ca/hc/en-ca/articles/46379215681172-How-do-I-cancel-my-subscription
     quotes:
       - 'If you subscribed through the iOS App Store or Google Play Store, you’ll need to cancel your subscription through the same platform you used to sign up.'
+  - methods: [provider-billing]
+    page: 'Subscribing to discovery+ through TELUS'
+    url: https://support.discoveryplus.ca/hc/en-ca/articles/46379189180180-Subscribing-to-discovery-through-TELUS
+    quotes:
+      - 'Your discovery+ subscription including billing will be managed through TELUS and Koodo.'
   - methods: [app-store]
     page: 'I subscribe to discovery+ on Prime Video'
     url: https://support.discoveryplus.ca/hc/en-ca/articles/46379495008148-I-subscribe-to-discovery-on-Prime-Video-Can-I-sign-in-on-the-discovery-app
@@ -215,11 +218,13 @@ policies:
           quote: 'If you’re in Quebec, you’ll receive a prorated refund when you cancel.'
       lastVerified: 2026-11-09
     - topic: billing.price-changes
-      tier: poor
-      reason: 'Its terms say prices can change at any time, without promising to tell you first.'
+      tier: good
+      reason: 'Prices can change at any time, but if you have an account it must tell you in writing at least 30 days before changing any part of the service, and you can cancel instead.'
       sources:
         - url: https://secure.discoveryplus.ca/terms-of-service
           quote: 'Prices and availability of Subscription Content are subject to change at any time.'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'If you are a Registered User, then we may modify these Terms or change any aspect of the Service at any time, upon no less than 30 days’ prior written notice to you'
       lastVerified: 2026-11-09
     - topic: billing.free-trials
       tier: poor
@@ -278,12 +283,12 @@ policies:
       lastVerified: 2026-11-09
     - topic: legal.service-changes
       tier: poor
-      reason: 'It can suspend or end the service, or any part of it, at any time without telling you, and says it owes you nothing for it.'
+      reason: 'It can limit or cut off parts of the service without notice and says it owes you nothing. Ending a subscription you pay Rogers for takes 30 days’ written notice (60 in Quebec), with no refund promised.'
       sources:
         - url: https://secure.discoveryplus.ca/terms-of-service
-          quote: 'Rogers may at any time, without notice or liability, refund, suspend or discontinue the Service (or any portion of it).'
-        - url: https://secure.discoveryplus.ca/terms-of-service
           quote: 'Rogers may impose limits on certain features and services or restrict your access to parts or all of the Software or the Service without notice or liability.'
+        - url: https://secure.discoveryplus.ca/terms-of-service
+          quote: 'Rogers may discontinue any Subscription Content that you subscribe to upon no less than 30 days’ (if you are a resident of Québec, 60 days’) advance written notice to you.'
       lastVerified: 2026-11-09
     - topic: legal.inactivity
       status: not-stated
@@ -291,13 +296,9 @@ policies:
       pages: [https://secure.discoveryplus.ca/terms-of-service]
       lastVerified: 2026-11-09
     - topic: service.account-sharing
-      tier: bad
-      reason: 'Its usage rules, which its terms say cover discovery+, forbid sharing your service with anyone without Rogers’ consent.'
-      sources:
-        - url: https://secure.discoveryplus.ca/terms-of-service
-          quote: 'share or transfer your Services without our express consent'
-        - url: https://secure.discoveryplus.ca/terms-of-service
-          quote: 'For greater certainty, the term “Services” in our Acceptable Use Policy includes the Services covered under these Terms.'
+      status: not-stated
+      reason: 'Its terms expect others to use your account, a minor you allow among them, but don’t say who may. Rogers’ usage rules forbid sharing or transferring “your Services” without its consent.'
+      pages: [https://secure.discoveryplus.ca/terms-of-service]
       lastVerified: 2026-11-09
     - topic: service.device-limits
       tier: neutral

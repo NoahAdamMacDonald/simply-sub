@@ -90,8 +90,9 @@ features:
 # - ads: "VIP members can skip some pre-roll ads (ads shown in the player before content playback start), not including
 #   ads inserted in the video or other types of ads", so no plan is ad-free, though the page's heading says "without
 #   ads";
-# - HDR: Premium's list has "Dolby Audio + Dolby Vision" and Standard's "Dolby Audio" (the US's and Canada's order
-#   page); Dolby Audio isn't Dolby Atmos;
+# - HDR: Premium's list has "Dolby Audio + Dolby Vision" and Standard's "Dolby Audio" (Canada's, the US's, Germany's
+#   and Spain's order pages; Ireland's and the Netherlands' say "Dolby Cinema" for both); Dolby Audio isn't Dolby
+#   Atmos;
 # - downloads: "VIP Download" on both VIP plans ("The download privilege is unavailable for basic membership", its VIP
 #   terms), on no stated number of devices, so 1, inferred;
 # - no page names profiles or Kids profiles. Its VIP terms also name a "basic membership", which no order page sells.
@@ -704,11 +705,12 @@ policies:
           quote: 'Subscription is renewed at C$119.99 after the discount ends.'
       lastVerified: 2026-11-09
     - topic: billing.renewal-notice
-      tier: neutral
-      reason: 'Its privacy policy says it may remind you when your VIP is about to end, but its terms don’t promise a reminder before a plan renews.'
-      sources:
-        - url: https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
-          quote: 'reminder on expiration of VIP membership service'
+      status: not-stated
+      reason: 'Its terms and help centre say it charges you 24 hours before the renewal date and don’t promise a reminder; its privacy policy lists expiry reminders only among messages it may send.'
+      pages:
+        - https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+        - https://intl-help.iq.com/m/?mod=ca&lang=en_us&entry=pc
+        - https://www.iq.com/intl-common/international-privacyagreement.html?lang=en_us
       lastVerified: 2026-11-09
     - topic: billing.fees
       tier: good
@@ -741,12 +743,14 @@ policies:
       lastVerified: 2026-11-09
     - topic: legal.terms-changes
       tier: neutral
-      reason: 'It posts or emails changes to the VIP terms 15 days before they apply, and you can cancel first.'
+      reason: 'Changes to its VIP terms apply 15 days after it posts them. Its general terms change at once, with notice first only for changes that cut your rights.'
       sources:
         - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
           quote: 'The modifications will become effective fifteen (15) days after the updated version is posted.'
-        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
-          quote: 'Before the modification comes into effect, you may cancel the Service rather than accept the modification.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'We may modify this Agreement from time to time and the modifications to this Agreement will take effect immediately after modification.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'If these modifications to this Agreement, in our sole discretion, make substantial reduction or significant alteration upon your rights hereunder, we will notify you via announcement posted on our platform, pop-ups, or any other means by which you could reasonably obtain notice before the modifications take effect.'
       lastVerified: 2026-11-09
     - topic: legal.account-closure
       tier: poor
@@ -758,11 +762,13 @@ policies:
           quote: 'you will not receive a refund of all or any portion of your Subscription Fee.'
       lastVerified: 2026-11-09
     - topic: legal.service-changes
-      tier: neutral
-      reason: 'It can change what VIP includes and remove shows, even ones you’ve downloaded. If a change costs you, you can apply for compensation.'
+      tier: poor
+      reason: 'It can change what VIP includes and remove shows, even downloaded ones, and says it isn’t liable for that. You can apply for compensation for a direct loss.'
       sources:
         - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
           quote: 'If certain content is taken down, and even if you have downloaded or cached such content locally, you may not be able to watch such content.'
+        - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
+          quote: 'We shall not be liable to you or any third party for any change or termination of iQIYI Services.'
         - url: https://www.iq.com/intl-common/international-useragreement.html?lang=en_us
           quote: 'we will make reasonable compensation to you based on the confirmed actual and direct loss upon your application.'
       lastVerified: 2026-11-09
@@ -792,4 +798,14 @@ policies:
           quote: 'The same VIP account allows your use on up to five devices'
         - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
           quote: 'limitations may be imposed on the download and offline viewing of Offline Titles'
+      lastVerified: 2026-11-09
+    - topic: other.notable
+      title: Guest purchases stay on one device
+      tier: neutral
+      reason: 'VIP bought in Apple’s App Store without signing in is tied to that device: lose, reset or replace it and the VIP is gone. Signing in before you buy avoids it.'
+      sources:
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'Because Apple App Store allows non-registered users to buy the iQIYI VIP Membership service in Guest Mode, the service will be bound to the device with which this service was purchased.'
+        - url: https://www.iq.com/intl-common/international-vip-membership-service.html?lang=en_us
+          quote: 'If your device is lost, damaged, upgraded, restored, emptied or subjected to other similar situations, you may not continue to use the iQIYI VIP Membership benefits bound to this device, and you shall bear the losses incurred as a result.'
       lastVerified: 2026-11-09

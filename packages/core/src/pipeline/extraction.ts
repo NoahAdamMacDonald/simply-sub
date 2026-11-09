@@ -1233,6 +1233,7 @@ const paymentMethodAliases: Readonly<Record<string, PaymentMethod>> = {
   ideal: 'bank-transfer',
   swish: 'bank-transfer',
   'cash-app-pay': 'cash-app',
+  'ali-pay': 'alipay',
 };
 
 function toPaymentMethod(name: string): PaymentMethod | undefined {

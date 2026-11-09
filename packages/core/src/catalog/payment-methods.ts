@@ -32,7 +32,8 @@ export const paymentMethods = Object.keys(paymentMethodNames) as PaymentMethod[]
  * follow "gift", and Cash App isn't cash. `other` stands for any method not listed, so no page names it. A bank's own
  * payments (iDEAL | Wero, Swish, Eps, Bancontact, Przelewy24) and a direct debit (GoCardless) are bank transfers, and
  * an app store includes a platform that bills for the provider (Roku's Channel Store, Amazon's Prime Video channels).
- * A bank debit (ChatGPT's "Bank debit via Link") is a bank transfer too.
+ * A bank debit (ChatGPT's "Bank debit via Link") is a bank transfer too, and billing "managed through TELUS and Koodo"
+ * (discovery+ Canada's) a provider's bill.
  */
 const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   card: /(?<!gift\s)\bcards?\b|\bcartes?\s+(?:de\s+)?(?:cr[ée]dit|d[ée]bit)|\bvisa\b|\bmaster\s?card\b|\bamerican\s+express\b|\bamex\b/i,
@@ -51,7 +52,7 @@ const writtenAs: Readonly<Record<Exclude<PaymentMethod, 'other'>, RegExp>> = {
   cash: /\bcash\b(?!\s?app\b)|\besp[eè]ces\b/i,
   crypto: /\bcrypto|\bbitcoin\b|\bmonero\b|\bbtc\b|\bxmr\b/i,
   'provider-billing':
-    /\b(?:tv|television|internet|mobile|mobility|wireless|phone|cable)\s+(?:service\s+)?(?:provider|carrier|bill)s?\b|\bcarrier\s+billing\b|\bmobile\s+(?:phone|operator)\b|\boperator\s+billing\b|\bfournisseur\b|\badd\s+\w+\s+to\s+(?:their|your)\s+bill\b|\bfactur[ée]e?s?\s+par\s+bell\b|\bbell[- ]billed\b|\bbilled\s+(?:through|by)\s+bell\b/i,
+    /\b(?:tv|television|internet|mobile|mobility|wireless|phone|cable)\s+(?:service\s+)?(?:provider|carrier|bill)s?\b|\bcarrier\s+billing\b|\bmobile\s+(?:phone|operator)\b|\boperator\s+billing\b|\bfournisseur\b|\badd\s+\w+\s+to\s+(?:their|your)\s+bill\b|\bfactur[ée]e?s?\s+par\s+bell\b|\bbell[- ]billed\b|\bbilled\s+(?:through|by)\s+bell\b|\b(?:billing|billed)\b[^.]{0,40}\b(?:through|by)\s+(?:telus|koodo)\b/i,
 };
 
 /** Whether `text` names `method`. `other` is never named. */
