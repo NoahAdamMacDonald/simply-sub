@@ -1,0 +1,542 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 3, part 3), read through a Dutch and a Spanish
+# exit: SkyShowtime, for the catalog's countries that sell it, the Netherlands and Spain (the owner's choice of
+# 2026-11-04). Its pages are each country's language.
+# Pricing: the Netherlands' help article "Abonnementen en kosten" (its table of plans, and "Standaard met reclame 6.99
+# EUR per maand 55.99 EUR per jaar", "Standaard 9.99 EUR per maand 79.99 EUR per jaar", "Premium 13.99 EUR per maand
+# 109.99 per jaar", as skyshowtime.com/nl's plan cards), and Spain's plan picker on skyshowtime.com/es ("Estándar con
+# anuncios" 5,99 € al mes or 47,99 € al año, "Estándar" 8,99 €/mes and "Prémium" 13,99 €/mes, monthly only: Spain's help
+# article still lists 71.99 and 109.99 EUR a year for those two, which the picker doesn't sell). First-term offers are
+# left out: the Netherlands' "6-maandendeal" and Spain's "6 meses" renew monthly, and Spain's "Mensual superahorro"
+# plans (6,69 € and 10,49 € a month for 12 months, 6,99 € and 10,99 € for 6) renew at the monthly price.
+# Region checklist, 2026-11-09: 1. skyshowtime.com/<country> and its help centres; 2. the plan picker's tabs and
+# periods; 4. the plan cards, never past them; 6. Edge, through each country's exit. Its where-can-i-stream page lists
+# where it's sold; Kosovo, which has no ISO code, is left out of availableIn.
+# Bundles: none on its pages. Resellers: none; its help centre's telecom providers (in the Netherlands and Spain among
+# others) sell it in their own bundles, partners, not resellers.
+
+id: skyshowtime
+name: SkyShowtime
+aliases: [sky showtime]
+website: https://www.skyshowtime.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { NL: EUR, ES: EUR }
+# "SkyShowtime is available in: Albania, Andorra, Bosnia & Herzegovina, Bulgaria, Croatia, Czechia, Denmark, Finland,
+# Hungary, Kosovo, Montenegro, North Macedonia, Norway, Netherlands, Poland, Portugal, Romania, Serbia, Slovakia,
+# Slovenia, Spain and Sweden." (skyshowtime.com/where-can-i-stream)
+availableIn: [AL, AD, BA, BG, HR, CZ, DK, FI, HU, ME, MK, NO, NL, PL, PT, RO, RS, SK, SI, ES, SE]
+cancelUrl: https://www.skyshowtime.com/nl/terms
+sources:
+  {
+    pricing: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+  }
+notes: Sold in the Netherlands, Spain and other European countries; not in Canada, the US or the UK.
+# Accepted cards and ways to pay, read 2026-11-09 in each country's help centre ("Betalen voor SkyShowtime", "Cómo
+# pagar SkyShowtime": by country, Diners in Spain only, iDEAL in the Netherlands only) and its sign-up article (app
+# stores). Its telecom providers bill it in their bundles, in words no way to pay names.
+acceptedNetworks:
+  NL:
+    networks: [visa, mastercard, amex]
+    url: https://www.skyshowtime.com/nl/help/article/how-to-pay-for-skyshowtime
+    quotes:
+      - 'Visa'
+      - 'MasterCard'
+      - 'Amex'
+  ES:
+    networks: [visa, mastercard, other, amex]
+    url: https://www.skyshowtime.com/es/help/article/how-to-pay-for-skyshowtime
+    quotes:
+      - 'Visa'
+      - 'MasterCard'
+      - 'Diners'
+      - 'Amex'
+paymentMethods:
+  - methods: [card, paypal, bank-transfer, apple-pay]
+    regions: [NL]
+    page: 'Betalen voor SkyShowtime (in Dutch)'
+    url: https://www.skyshowtime.com/nl/help/article/how-to-pay-for-skyshowtime
+    quotes:
+      - 'Visa'
+      - 'PayPal'
+      - 'iDeal'
+      - 'Apple Pay (alleen via de Safari-browser)'
+  - methods: [card, paypal, apple-pay]
+    regions: [ES]
+    page: 'Cómo pagar SkyShowtime (in Spanish)'
+    url: https://www.skyshowtime.com/es/help/article/how-to-pay-for-skyshowtime
+    quotes:
+      - 'Visa'
+      - 'PayPal'
+      - 'Apple Pay (solo desde el navegador Safari)'
+  - methods: [app-store]
+    page: 'Aanmelden voor SkyShowtime (in Dutch)'
+    url: https://www.skyshowtime.com/nl/help/article/how-to-sign-up-to-skyshowtime
+    quotes:
+      - 'Aanmelden via een appstore'
+
+# Owner (M11.2), read 2026-11-09 on its corporate site; where it is, from its privacy policy's address.
+owner:
+  name: 'SkyShowtime Limited, a joint venture of Comcast and Paramount Skydance'
+  website: https://corporate.skyshowtime.com
+  page:
+    name: About SkyShowtime
+    url: https://corporate.skyshowtime.com/about/
+  quotes:
+    - 'A joint venture of Comcast and Paramount, a Skydance Corporation, SkyShowtime brings together the best of Hollywood and local entertainment in one place.'
+  country:
+    code: GB
+    page:
+      name: 'Privacyverklaring (in Dutch)'
+      url: https://www.skyshowtime.com/nl/privacy
+    quotes:
+      - 'Sky Central, Grant Way, Isleworth, Middlesex, TW7 5QD, United Kingdom'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09: its terms take each payment "op of rond de datum die wordt vermeld wanneer u
+# zich aanmeldt" (on or around the date stated when you sign up), which doesn't name the day.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://www.skyshowtime.com/nl/terms]
+  lastVerified: 2026-11-09
+
+# Apps (the cross-category features), read 2026-11-09: the app on iOS and Android, smart TVs (LG, Samsung, Android TV,
+# Fire TV) and the website (its help centre's supported devices).
+features:
+  platforms: [ios, android, tv, web]
+
+# Features, read 2026-11-09 in each country's help article on plans (the same table in Dutch and Spanish): third-party
+# ads only on Standard with ads ("Reclame van derden: Ja / Nee / Nee"; every plan "may include promotional trailers"
+# for its own films and series), Full HD on every plan and 4K UHD on Premium, Dolby Atmos on Premium, streams 1, 2 and
+# 5, downloads 0, 30 and 100 ("maximaal 30 films tegelijk"), on no stated number of devices, so 1, inferred; profiles
+# "voor elk van je gezinsleden, waaronder je kinderen", with no number, so 2, inferred; Kids profiles for children 12 and
+# under.
+plans:
+  - id: skyshowtime.standard-ads
+    name: Standard with ads
+    link: https://www.skyshowtime.com/nl
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+    inferred:
+      streaming.profiles:
+        reason: 'Its help centre has profiles for each member of your family, your children included, without saying how many, so at least two.'
+        page:
+          name: 'SkyShowtime-profielen maken en bewerken (in Dutch)'
+          url: https://www.skyshowtime.com/nl/help/article/create-and-edit-skyshowtime-profiles
+        lastVerified: 2026-11-09
+    notes: Standaard met reclame in the Netherlands, Estándar con anuncios in Spain.
+    prices:
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 55.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/es,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 47.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/es,
+        }
+  - id: skyshowtime.standard
+    name: Standard
+    link: https://www.skyshowtime.com/nl
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows 30 downloads without saying on how many devices, so at least one.'
+        page:
+          name: 'Abonnementen en kosten (in Dutch)'
+          url: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its help centre has profiles for each member of your family, your children included, without saying how many, so at least two.'
+        page:
+          name: 'SkyShowtime-profielen maken en bewerken (in Dutch)'
+          url: https://www.skyshowtime.com/nl/help/article/create-and-edit-skyshowtime-profiles
+        lastVerified: 2026-11-09
+    notes: Standaard in the Netherlands, Estándar in Spain. It may show trailers for SkyShowtime's own films and series.
+    prices:
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 79.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/es,
+        }
+  - id: skyshowtime.premium
+    name: Premium
+    link: https://www.skyshowtime.com/nl
+    features:
+      video.quality: 4k
+      audio.dolby-atmos: true
+      ad-free: true
+      streaming.concurrent-streams: 5
+      streaming.download-devices: 1
+      streaming.profiles: 2
+      streaming.kids-profiles: true
+    inferred:
+      streaming.download-devices:
+        reason: 'It allows 100 downloads without saying on how many devices, so at least one.'
+        page:
+          name: 'Abonnementen en kosten (in Dutch)'
+          url: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing
+        lastVerified: 2026-11-09
+      streaming.profiles:
+        reason: 'Its help centre has profiles for each member of your family, your children included, without saying how many, so at least two.'
+        page:
+          name: 'SkyShowtime-profielen maken en bewerken (in Dutch)'
+          url: https://www.skyshowtime.com/nl/help/article/create-and-edit-skyshowtime-profiles
+        lastVerified: 2026-11-09
+    notes: Prémium in Spain. It may show trailers for SkyShowtime's own films and series.
+    prices:
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 13.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 109.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 13.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.skyshowtime.com/es,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its Terms of Use in Dutch and Spanish (one contract, the same clauses:
+# rated from the Dutch, so no country needs a rating of its own), its privacy policy ("Laatst bijgewerkt: december
+# 2025"), and its help centre's articles on plans, plan changes, devices, deleting your account and signing up. Its
+# cookie notice adds no topic.
+policies:
+  links:
+    - name: 'Gebruiksvoorwaarden (in Dutch)'
+      url: https://www.skyshowtime.com/nl/terms
+    - name: 'Privacyverklaring (in Dutch)'
+      url: https://www.skyshowtime.com/nl/privacy
+    - name: 'Je abonnement wijzigen (in Dutch)'
+      url: https://www.skyshowtime.com/nl/help/article/update-your-plan
+    - name: 'Apparaten beheren (in Dutch)'
+      url: https://www.skyshowtime.com/nl/help/article/rename-add-or-sign-out-all-devices-on-skyshowtime
+    - name: 'Je SkyShowtime-account permanent sluiten (in Dutch)'
+      url: https://www.skyshowtime.com/nl/help/article/how-do-i-delete-my-skyshowtime-account-and-data
+    - name: 'Aanmelden voor SkyShowtime (in Dutch)'
+      url: https://www.skyshowtime.com/nl/help/article/how-to-sign-up-to-skyshowtime
+    - name: 'Abonnementen en kosten (in Dutch)'
+      url: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies what you watch to track how its shows do. Stopping that takes a request to its privacy team.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'de prestaties van de content van SkyShowtime te volgen en registreren (door het kijkgedrag van gebruikers te analyseren)'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'U heeft het recht uw gegevens in te zien, te corrigeren, te laten verwijderen, te laten overdragen, de verwerking ervan te beperken'
+      action:
+        name: 'Your privacy rights (in Dutch)'
+        url: https://www.skyshowtime.com/nl/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your details with Comcast and Paramount companies to market to you, and with FreeWheel and Meta for ads. You can stop marketing emails, but its ads follow each browser’s cookie choices.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Delen we uw persoonlijke informatie met externe partijen (waaronder Comcast Group- en Paramount-bedrijven) om hen in staat te stellen u marketingberichten te sturen, in overeenstemming met uw marketingvoorkeuren en abonnementstype'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'FreeWheel treedt op als een onafhankelijke beheerder met betrekking tot gepersonaliseerde reclame.'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Meta Ireland is een gezamenlijke verwerkingsverantwoordelijke voor de gezamenlijke verwerking'
+      action:
+        name: 'Its privacy policy (in Dutch)'
+        url: https://www.skyshowtime.com/nl/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It targets ads at you on social media, partly on its own say-so; you can only change it in each browser’s cookie settings, or on a smart TV in your account.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Aanbieden van doelgerichte reclame op sociale media en gerelateerde platform'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'u kunt uw Cookievoorkeuren op elk moment aanpassen via de link "Cookievoorkeuren" in de voettekst van de betreffende websites'
+      action:
+        name: 'Its privacy policy (in Dutch)'
+        url: https://www.skyshowtime.com/nl/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say whether what you write or upload trains AI.'
+      pages: [https://www.skyshowtime.com/nl/privacy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it or the law lets it, and names no periods.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'We bewaren uw persoonsgegevens zo lang als noodzakelijk of toegestaan, daarbij rekening houdend met de doeleinden waarvoor ze werden verkregen en in overeenstemming met de geldende wetgeving.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can ask with its online form to close your account and delete your data, and it takes up to 30 days.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/help/article/how-do-i-delete-my-skyshowtime-account-and-data
+          quote: 'Je kunt de definitieve sluiting van je account of toegang tot je persoonsgegevens aanvragen door het SkyShowtime-formulier voor het aanvragen van toegang tot gegevens in te dienen.'
+        - url: https://www.skyshowtime.com/nl/help/article/how-do-i-delete-my-skyshowtime-account-and-data
+          quote: 'Vanaf het moment dat je je e-mailadres verifieert, kan het tot 30 dagen duren voordat je verzoek is verwerkt.'
+      action:
+        name: 'How to close your account (in Dutch)'
+        url: https://www.skyshowtime.com/nl/help/article/how-do-i-delete-my-skyshowtime-account-and-data
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask with the same form for your data to be passed on to you.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/help/article/how-do-i-delete-my-skyshowtime-account-and-data
+          quote: 'Overdragen van je persoonsgegevens'
+      action:
+        name: 'Its data request form (in Dutch)'
+        url: https://www.skyshowtime.com/nl/help/article/how-do-i-delete-my-skyshowtime-account-and-data
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law, a court or the police require it, or when it reasonably believes they do, and says nothing more.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'We delen uw persoonsgegevens als we hiertoe verplicht zijn om te voldoen (en/of wanneer we redelijkerwijs menen dat we verplicht zijn om te voldoen) aan een wettelijke of regelgevingsverplichting, zoals een gerechtelijk bevel, regelgevings- of rechtshandhavingsacties'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your information stays in the EU or countries the EU says protect it enough; anywhere else, only under the EU’s approved contract terms.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Ter bescherming van uw persoonsgegevens zal SkyShowtime uw persoonsgegevens alleen doorgeven binnen de Europese Unie en naar landen waarvan de Europese Commissie heeft bepaald dat er sprake is van een afdoende beschermingsniveau.'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Wanneer dit niet mogelijk is, gebruiken we een modelcontract dat door regelgevingsautoriteiten, zoals de Europese Commissie, is goedgekeurd.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password, and the payment page asks for your name and address.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/help/article/how-to-sign-up-to-skyshowtime
+          quote: 'Maak een account aan door je e-mailadres en wachtwoord in te vullen.'
+        - url: https://www.skyshowtime.com/nl/help/article/how-to-sign-up-to-skyshowtime
+          quote: 'Typ op de pagina met betalingsgegevens je naam en adres in en kies je'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: good
+      reason: 'No one under 18 can have an account, and children watch only with a parent’s consent. Kids profiles get no personalised picks.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Personen jonger dan 18 jaar mogen zelf geen SkyShowtime-account hebben, maar mogen SkyShowtime wel gebruiken met toestemming en onder toezicht van een ouder of voogd.'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Er zijn geen personaliseringsfuncties voor kind-profielen.'
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms and privacy policy name no outside audit or certification, and no way to report a security flaw.'
+      pages:
+        - https://www.skyshowtime.com/nl/terms
+        - https://www.skyshowtime.com/nl/privacy
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online in your account at any time, at no cost, and keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'U kunt ons Contract en uw abonnement om welke reden dan ook en op elk moment opzeggen door de terugkerende kosten van uw abonnement stop te zetten, zonder extra kosten of annuleringskosten.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Om uw abonnement op SkyShowtime op te zeggen, gaat u naar uw Accountpagina op de SkyShowtime-website.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Tenzij we u anders hebben meegedeeld, blijft u bij opzegging toegang houden tot SkyShowtime tot het einde van de periode waarvoor u heeft betaald'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You usually get no money back but keep watching until the period ends; a yearly plan can end early with the rest refunded. Starting at once gives up the 14-day right to withdraw.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Normaal gesproken krijgt u geen geld terug, maar behoudt u de toegang tot SkyShowtime tot het einde van de periode waarvoor u heeft betaald.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als u een jaarabonnement heeft, heeft u mogelijk een aanvullende optie om uw abonnement op te zeggen en te beëindigen vóór de volgende factureringsdatum (in dat geval ontvangt u een terugbetaling voor de resterende maanden van uw factureringscyclus).'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als gevolg daarvan verliest u elk wettelijk recht op een'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It emails you at least a month before a price goes up, and the new price starts only at your next billing date, so you can cancel first at no cost.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als we onze prijzen verhogen, sturen we minstens één (1) maand van tevoren een e-mail naar het e-mailadres dat u ons heeft gegeven.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Prijsverhogingen gaan pas in op de eerstvolgende factuurdatum.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A free or cheaper first period needs your payment details and turns into the regular price unless you cancel, and it sends no reminder first.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als u zich rechtstreeks via SkyShowtime aanmeldt voor een Promotieaanbieding, dient u ons uw betalingsgegevens te geven'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Tenzij anders vermeld, sturen we u geen herinnering vóór het einde van de Promotieaanbieding.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews until you cancel, but not that it reminds you first.'
+      pages: [https://www.skyshowtime.com/nl/terms]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: good
+      reason: 'Its prices include VAT and any other costs, and it charges nothing to change currency. Your card’s issuer may add its own fees.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'de prijzen omvatten btw en eventuele andere kosten'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'We rekenen geen kosten of toeslagen voor het wisselen van valuta.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Voor sommige betaalmethoden kan de uitgevende instelling u bepaalde kosten in rekening brengen'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'An upgrade starts at once, with your unused days taken off the price; a downgrade or a shorter period starts when your current one ends.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/help/article/update-your-plan
+          quote: 'het bedrag voor de ongebruikte dagen op je maandabonnement wordt bij betaling afgeprijsd'
+        - url: https://www.skyshowtime.com/nl/help/article/update-your-plan
+          quote: 'Over het algemeen geldt dat als je je abonnement downgradet of de looptijd ervan verkort (van jaarlijkse naar maandelijkse facturering), de wijzigingen altijd pas ingaan aan het einde van je huidige factureringscyclus of contractperiode.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: great
+      reason: 'Disputes go to the courts, either the Netherlands’ or those of the EU country where you live.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Elk geschil in het kader van ons Contract kan worden behandeld door de niet-exclusieve jurisdictie van de relevante rechtbanken van Nederland, zoals anders overeengekomen tussen ons, of, als u in de EU woont, de rechtbanken van het deel van de EU waarin u woont.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: great
+      reason: 'It tells you at least a month before a big change to its terms, and if you cancel because it harms you, you get back the time you paid for.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als we wezenlijke wijzigingen aanbrengen in ons Contract, informeren we u hierover minstens één (1) maand voordat de wijziging ingaat'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als de wijziging ingaat vóór het einde van de periode waarvoor u heeft betaald en u heeft opgezegd en u wordt wezenlijk benadeeld door de wijziging, dan zullen we u terugbetalen of gedeeltelijk terugbetalen voor minstens het resterende deel van de periode waarvoor u al heeft betaald'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your subscription at any time, but then you keep watching until your period ends or get the rest back. For a minor breach it gives you 14 days to fix it.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'We kunnen ons Contract met u (of een deel ervan) op elk gewenst moment opzeggen.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'zorgen we ervoor dat u ofwel (a) toegang heeft tot de dienst voor de rest van uw gebruiksperiode; of (b) een terugbetaling ontvangt voor minstens het resterende bedrag dat u heeft betaald na de opzeggingsdatum als u geen toegang heeft tot de dienst.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'hoewel we u bij niet-ernstige schendingen eerst de kans zullen geven om binnen 14 dagen de schending te herstellen'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Shows and features change. It tells you a month before a change that matters, and you can cancel at no cost; a refund is possible, not promised.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als een dergelijke wijziging de functionaliteit van de SkyShowtime-diensten wezenlijk beïnvloedt, informeren we u hierover één (1) maand voordat de wijziging van kracht wordt.'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Als u wezenlijk nadeel ondervindt van de wijziging, kunnen we u terugbetalen of gedeeltelijk terugbetalen voor minstens het resterende deel van de periode waarvoor u al heeft betaald'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.skyshowtime.com/nl/terms]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'Only people who live with you may use your account, and it can limit devices and users to stop sharing outside your home.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'Alleen personen die in hetzelfde huishouden wonen als u, hebben toegang tot uw SkyShowtime-account (met uw toestemming)'
+        - url: https://www.skyshowtime.com/nl/terms
+          quote: 'om het delen van een account buiten huishoudens te voorkomen'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'An account keeps up to 10 devices, the oldest dropped as you add more, and Premium holds at most 30 films downloaded at a time.'
+      sources:
+        - url: https://www.skyshowtime.com/nl/help/article/rename-add-or-sign-out-all-devices-on-skyshowtime
+          quote: 'Apparaten worden automatisch verwijderd uit je SkyShowtime-account wanneer je de limiet van 10 apparaten bereikt, terwijl je nieuwe apparaten toevoegt.'
+        - url: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing
+          quote: 'Je kunt maximaal 30 films tegelijk downloaden'
+      lastVerified: 2026-11-09
