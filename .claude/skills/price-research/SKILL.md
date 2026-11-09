@@ -295,7 +295,8 @@ which reads each page as a visitor there would, before any hand reading:
 - **OpenAI's pages** (ChatGPT, M11.15): chatgpt.com, openai.com and help.openai.com answer a plain fetch (curl,
   WebFetch) with 403, and read in Edge with no bot check. The bot, which names itself in its user agent, meets a bot
   check on most of them, so they're in `data/automation.yaml`'s `archived` (the owner's choice of 2026-11-04): the bot
-  and `data:baselines` read the Internet Archive's newest copy instead, for a change only, never as a source. chatgpt.com/pricing prices by where the visitor is, and its
+  and `data:baselines` read the Internet Archive's newest copy instead, for a change only. chatgpt.com/pricing prices
+  by where the visitor is, and its
   Pro card shows only the cheapest tier's local price ("From"); its comparison table's ticks are images (read the
   screenshot). Its help articles' links come from the page, not its text.
 - **Amazon's pages** (Prime Video, M11.15): each store's Prime page (`amazon.<tld>/amazonprime`, Australia's and the
@@ -334,6 +335,19 @@ which reads each page as a visitor there would, before any hand reading:
 - **Odysee's Premium** (M11.15): odysee.com/$/premium asks you to sign up first, so its help centre's Premium article
   (help.odysee.tv/premium) is the page that prices it, in a bare "$" (its terms count in "USD"). The help centre's
   sitemap.xml lists every article (account deletion, memberships, the payments chart).
+- **A site that can't be read** (the owner's rule of 2026-11-09): official pages first, read over an ordinary
+  connection when a site refuses this machine's ("Disable your VPN to continue": DAZN). Only when no route reads the live
+  page, use the Internet Archive's newest copy as a backup (`archive.org/wayback/available?url=…`, then
+  `web.archive.org/web/<timestamp>id_/<url>` for the page as saved): cite the live URL, say "the Internet Archive's copy
+  of <date>" in the comment, set `lastVerified` to the copy's date, and take prices only from a copy at most 30 days
+  old. Some copies hold only a page's script: look for one saved with its content (Crunchyroll's 2026-10-23), or for
+  the plan data in the page's JSON (Paramount+'s picker: `planTier`, `"price":"$7.99\/Month"`).
+- **DAZN's plans** (M11.15): its help article "DAZN plans and pricing" has each country's tiers (DAZN and DAZN+,
+  Standard or Ultimate) and periods, read over an ordinary connection in Canada; its sign-up app fails to load even
+  then. Annual Pay (Instalment) is a 12-month term paid monthly that renews for another 12: the catalog stores no
+  minimum term, so it goes in the plans' notes.
+- **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
+  copies are US pages, and their Yearly tab's prices aren't saved.
 
 - **Element-screenshot overlap:** sticky headers and skip links can overlap an element screenshot. Trust the
   full-page snap.

@@ -277,6 +277,13 @@ this file to them: change both together.
   Pro, Formula 1's own service on an F1 account: Formula 1's Digital Products Terms of Use, F1 TV Subscription Terms and
   Privacy Policy (account.formula1.com/#/en/terms-of-use, subscription-terms, privacy-policy, which read in Edge) are
   rated where they're worse than Viaplay's own; its help centre (f1help.formula1.com) shows nothing in Edge.
+- Paramount Skydance's Privacy Policy, with its Minors' Privacy Policy, covers every Paramount service:
+  `data/policies/paramount-privacy.yaml` (M11.15, Paramount+ first; pplus.legal/privacy leads to
+  viacomcbsprivacy.com/en/policy). Rate each service's own terms beside it: Paramount+'s are each country's
+  (legal.paramount.com/ca/en/pplus/termsofuse for Canada).
+- Crunchyroll's privacy link opens Sony Pictures Entertainment's Privacy and Cookies Policy, its international version
+  from here (US residents get sonypictures.com's). DAZN's Canadian terms and its Global Privacy Notice (with its USA
+  and Canada notice) read over an ordinary connection only.
 - SkyShowtime's help centre answers "page not found" for its cancelling article: its account article ("Dingen die je
   kunt doen in je SkyShowtime-account") is the cancel link and the action for its account's ad and marketing settings.
 - Odysee's terms don't mention Premium, and its privacy policy is a general template (Google AdSense, Do Not Track):
