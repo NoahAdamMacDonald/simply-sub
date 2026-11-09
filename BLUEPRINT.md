@@ -399,6 +399,17 @@ one canonical feature describes the same capability across every provider, whate
    and none gives a reason for still waits in core's `awaitingRequiredFeatures` (TSN's and RDS's video quality).
    ESPN Select's (HD, from its connection speed article's "HD content") and ICI RDI's (1080p, the app's highest
    setting) are the first.
+12. **Third-party values are cited, and count for less** (M11.16, the owner's choice of 2026-11-09). First party
+   whenever possible: a value only a publication gives fills a gap no official page fills, read directly, through an
+   exit or from the Internet Archive's copy, and never a price. It goes in the plan's own `features` as usual, and the
+   plan's `thirdParty` names the publication with its page off the provider's sites and its words there
+   (`{ publisher, url, quote, lastVerified }`; validation refuses one the plan's features don't give, one that's
+   inferred too and one on the provider's own sites). The feature list marks it "third-party", linking the page, with
+   the quote as its tooltip; `GET /plans/:id` returns it. It keeps a feature ranked Wanted or lower, never one ranked
+   Needed or higher (section 10.2), and a suggestion that rests on one names its source. Settings' "Use third-party
+   claims" (on by default, `skipThirdParty` when off, on each device) leaves them out everywhere: the app reads the
+   catalog without them (core's `withoutThirdParty`), so cards show those features as not stated and Search, ranking
+   and the optimizer never count them.
 
 **Ranked perks** (M11.6, the owner's choice on 2026-10-30). A provider lists its perks once, with ids
 (`perks: [{ id: fortnite-crew, name: Fortnite Crew passes }]`), and each plan lists the ids it has. Each perk is a
@@ -3273,6 +3284,10 @@ Lives in `packages/core/src/optimizer/`. It's a **pure function**:
   plan of the same provider that keeps that feature at the same or a higher level.
 - **Needed:** after any change, every Needed feature must still be provided by at least one item **in every
   month it was provided before**.
+- **Third-party values** (M11.16, section 4.2 rule 12) never keep a Needed, Critical or Essential feature: a plan the
+  item moves to, or another item that would keep it, must give it on an official page's word. They keep the lower
+  ranks, and a card that rests on one says "Rests on third-party claims", each linked to its source. The item's own
+  plan billed another way changes nothing it gives, so its own third-party values still count.
 - **Perks** (M11.6) are rank keys like features': a Needed perk keeps a plan of its provider that has it, and a lost
   Wanted one makes a suggestion yellow. An unranked perk is Not ranked, so a dearer plan that differs only in perks is
   downgraded in red unless they're ranked.

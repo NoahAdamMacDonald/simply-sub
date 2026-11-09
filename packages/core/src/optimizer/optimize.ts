@@ -224,6 +224,29 @@ function suggestionOf(
       }
     }
   }
+  // The claims the plans it moves to rest on, for a feature the list has (M11.16): its own plan billed another way
+  // rests on nothing new.
+  const thirdParty = new Map<string, NonNullable<Suggestion['thirdParty']>[number]>();
+  for (const option of card) {
+    const { byKey, added } = model.options[option];
+    for (const [number, contributions] of byKey) {
+      const key = model.keyIds[number];
+      if (!provided.has(number) || thirdParty.has(key) || !contributions.some((c) => c.weak)) {
+        continue;
+      }
+      const claim = added
+        .flatMap((plan) => Object.entries(plan.thirdParty ?? {}))
+        .find(([featureId]) => key === featureId || key.startsWith(`${featureId}=`))?.[1];
+      if (claim) {
+        thirdParty.set(key, {
+          key,
+          label: model.labels[number],
+          publisher: claim.publisher,
+          url: claim.url,
+        });
+      }
+    }
+  }
   const next12 = evaluation.cost;
   return {
     fingerprint,
@@ -243,6 +266,7 @@ function suggestionOf(
       title: model.items[index].suggested.title,
     })),
     gained: [...gained.values()],
+    ...(thirdParty.size > 0 && { thirdParty: [...thirdParty.values()] }),
   };
 }
 

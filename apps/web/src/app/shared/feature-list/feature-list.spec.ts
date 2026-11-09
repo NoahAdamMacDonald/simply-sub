@@ -98,4 +98,27 @@ describe('FeatureList', () => {
       'Inferred from Help Center (opens in a new tab): Its help recommends a speed for 4K content.',
     );
   });
+
+  it('marks a value third-party, linking the publication it comes from (M11.16)', async () => {
+    fixture.componentRef.setInput('thirdParty', {
+      'vpn.devices': {
+        publisher: 'The Verge',
+        url: 'https://www.theverge.com/vpn-devices',
+        quote: 'It covers 10 devices.',
+        lastVerified: '2026-11-03',
+      },
+    });
+    await fixture.whenStable();
+
+    expect(lines()[3]).toBe('VPN devices: 10 devices third-party');
+    const links = (fixture.nativeElement as HTMLElement).querySelectorAll<HTMLAnchorElement>(
+      'a.third-party',
+    );
+    expect(links).toHaveLength(1);
+    expect(links[0].href).toBe('https://www.theverge.com/vpn-devices');
+    expect(links[0].target).toBe('_blank');
+    expect(links[0].getAttribute('aria-label')).toBe(
+      'Third-party, from The Verge (opens in a new tab): “It covers 10 devices.”',
+    );
+  });
 });

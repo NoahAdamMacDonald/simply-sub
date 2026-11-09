@@ -149,6 +149,8 @@ export interface ResolvedItem {
   features: Plan['features'];
   /** Which of a catalog plan's feature values are inferred, and from which page (M11.9). */
   inferred?: Plan['inferred'];
+  /** Which come from a third party, and from which publication (M11.16). */
+  thirdParty?: Plan['thirdParty'];
   /**
    * Its service categories (data/categories.yaml): a catalog plan's (planCategories), a bundle's plans' together, and
    * none for a custom plan.
@@ -322,6 +324,7 @@ export function resolveItem(item: ListItem, context: ResolveContext): ItemResolu
         addOns,
         features: plan.features,
         ...(plan.inferred && { inferred: plan.inferred }),
+        ...(plan.thirdParty && { thirdParty: plan.thirdParty }),
         categories: [...planCategories(plan, provider)],
         ...(networks && { acceptedNetworks: networks }),
         ...(periodChange && { periodChange }),

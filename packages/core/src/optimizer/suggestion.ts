@@ -164,6 +164,11 @@ export interface Suggestion {
    */
   lostServices: { itemId: string; title: string }[];
   gained: FeatureChange[];
+  /**
+   * The third-party claims it rests on (M11.16): a feature the list has that a plan it moves to gives only by a
+   * publication's word, named with its source, so the card can say so.
+   */
+  thirdParty?: { key: RankKey; label: string; publisher: string; url: string }[];
 }
 
 /** What optimize found for one list. */

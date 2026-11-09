@@ -143,6 +143,28 @@ describe('CatalogStore', () => {
       expect(store.catalogFor('CA')).toBe(store.catalog());
     });
 
+    it('leaves out third-party values once Settings turns them off (M11.16)', async () => {
+      const file = cached('CA');
+      const [plan] = file.snapshot.data.providers[0].plans;
+      plan.features = { 'vpn.included': true, 'vpn.devices': 10 };
+      plan.thirdParty = {
+        'vpn.devices': {
+          publisher: 'The Verge',
+          url: 'https://www.theverge.com/mullvad',
+          quote: 'It covers 10 devices.',
+          lastVerified: '2026-10-20',
+        },
+      };
+      const store = await started({ settings: settingsIn('CA'), files: [file] });
+      const shown = () => store.catalog()?.providers[0].plans[0];
+      expect(shown()?.features).toEqual({ 'vpn.included': true, 'vpn.devices': 10 });
+
+      await TestBed.inject(SettingsStore).update({ skipThirdParty: true });
+      await until(() => shown()?.thirdParty === undefined);
+      expect(shown()?.features).toEqual({ 'vpn.included': true });
+      expect(store.catalogFor('CA')).toBe(store.catalog());
+    });
+
     it('asks only for index.json when the cached version is current', async () => {
       const store = await started({ settings: settingsIn('CA'), files: [cached('CA')] });
       expect(store.lastCheck()).toBe('current');

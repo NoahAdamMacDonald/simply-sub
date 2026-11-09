@@ -53,6 +53,11 @@ export const settingsSchema = z
      * it for less.
      */
     searchAllResellers: z.literal(true).optional(),
+    /**
+     * The catalog is read without its third-party values (M11.16, core's withoutThirdParty), on this device. Left out,
+     * they count, marked with their source.
+     */
+    skipThirdParty: z.literal(true).optional(),
     /** What catalog updates changed in the lists' prices this past month, newest first, for Home (P2, M7.10). */
     priceChanges: z.array(priceChangeSchema).min(1).max(maxPriceChanges).optional(),
     /** What catalog updates changed in the lists' plans this past month, newest first, for Home (P2, M10.27). */

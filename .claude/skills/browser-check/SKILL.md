@@ -728,6 +728,19 @@ RDI's "Video quality: 1080p (Full HD)" with an "inferred" link to the help artic
 named "Inferred from <page> (opens in a new tab): <reason>"; Tab from the card's expand button reaches it, and its
 tooltip gives the reason. With axe, screenshots and no horizontal scroll: 29 checks.
 
+`check-m11-third-party.cjs` (M11.16, third-party values) checks on `ng serve` for a Canadian in Alberta (base URL ending
+in `/`, after `npm run data:build` on the branch), with `CA.json` answered so Netflix Standard with ads' download
+devices come from a publication (no catalog plan has one yet), in both themes at both widths, keyboard only: Search's
+Netflix details, its Standard with ads chip chosen, mark the value "third-party", linking the publication in a new
+tab, named "Third-party, from <publisher> (opens in a new tab): “<quote>”", reached by Tab with the quote as its
+tooltip; Optimizations for Streaming (Netflix Standard, written to IndexedDB) shows the downgrade to Standard with ads
+with "Rests on third-party claims: Download devices: …, per The Verge", the publisher's link reached by Tab; Settings'
+"Use third-party claims", on, turned off by Space (`skipThirdParty` in IndexedDB), after which neither the mark, the
+value nor the note is there. Light and wide only, the "Nothing will be saved" notice (a chunk of its own since M11.16)
+with IndexedDB blocked, and Continue anyway. With axe, screenshots and no horizontal scroll: 80 checks. Once the list
+has Netflix Standard, Search's card shows that plan first: choose a plan's chip (`label.chip`) before reading its
+features.
+
 `check-m11-facts.cjs` (M11.5, provider facts) checks Search's cards and the item dialog on `ng serve` for a Canadian in
 Alberta (base URL ending in `/`, after `npm run data:build` on the branch), in both themes at both widths: Mullvad's
 Ways to pay with the currencies its cash takes ("Cash in EUR, USD … or NZD, according to its Terms of service"), then

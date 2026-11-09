@@ -120,6 +120,42 @@ describe('OptimizationsPage', () => {
     expect(button('How suggestions are chosen')?.getAttribute('aria-describedby')).toBeTruthy();
   });
 
+  it('names the third-party claims a card rests on, each linked (M11.16)', async () => {
+    const claim = {
+      publisher: 'The Verge',
+      url: 'https://www.theverge.com/netflix-ads',
+      quote: 'The ads plan streams in 1080p.',
+      lastVerified: '2026-10-20',
+    };
+    const data: CatalogData = {
+      ...searchCatalogData,
+      providers: searchCatalogData.providers.map((provider) => ({
+        ...provider,
+        plans: provider.plans.map((plan) =>
+          plan.id === 'netflix.standard-ads'
+            ? { ...plan, thirdParty: { 'video.quality': claim } }
+            : plan,
+        ),
+      })),
+    };
+    TestBed.overrideProvider(CatalogStore, {
+      useValue: { catalog: signal<CatalogData | undefined>(data), catalogFor: () => data },
+    });
+    await plant();
+    await open(work.id);
+    await until(() => shown().length === 4);
+
+    const card = page().querySelector('ss-suggestion-card[data-severity="red"]');
+    expect(Array.from(card?.querySelectorAll('.features') ?? []).map(text)).toEqual([
+      'You lose: Ad free (Not ranked)',
+      'Rests on third-party claims: Video quality: 1080p (Full HD), per The Verge',
+    ]);
+    expect(card?.querySelector('.features a')?.getAttribute('href')).toBe(claim.url);
+    // The annual billing keeps the plan, so it rests on nothing new.
+    const free = page().querySelector('ss-suggestion-card[data-severity="free"]');
+    expect(text(free)).not.toContain('third-party');
+  });
+
   it('puts a card’s changes on the list’s draft and stays, for the next, saving nothing until Save (M8.4)', async () => {
     await plant();
     // Crave Premium too, whose downgrade has nothing to do with Netflix's.

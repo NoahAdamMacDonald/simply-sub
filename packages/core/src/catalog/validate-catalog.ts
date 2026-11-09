@@ -835,11 +835,9 @@ function checkThirdParty(
   provider.plans.forEach((plan, planIndex) => {
     for (const [featureId, claim] of Object.entries(plan.thirdParty ?? {})) {
       const path = ['plans', planIndex, 'thirdParty', featureId];
-      if (
-        !Object.hasOwn(plan.features, featureId) &&
-        !Object.hasOwn(provider.features ?? {}, featureId)
-      ) {
-        report(path, 'Names a feature the plan doesn’t state: give its value in features first');
+      // The plan's own, never the provider's: the setting that leaves claims out takes them from the plan (M11.16).
+      if (!Object.hasOwn(plan.features, featureId)) {
+        report(path, 'Names a feature the plan’s features don’t give: give its value there first');
       }
       if (Object.hasOwn(plan.inferred ?? {}, featureId)) {
         report(

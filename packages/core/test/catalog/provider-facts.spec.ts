@@ -402,7 +402,7 @@ describe('validateCatalog, for third-party feature values (M11.16)', () => {
     expect(
       messages(edited(file, netflix, ['plans', 0, 'inferred'], { 'video.quality': inferred })),
     ).toEqual([
-      `${netflix} plans.0.thirdParty.vpn.kill-switch: Names a feature the plan doesn’t state: give its value in features first`,
+      `${netflix} plans.0.thirdParty.vpn.kill-switch: Names a feature the plan’s features don’t give: give its value there first`,
       `${netflix} plans.0.thirdParty.vpn.kill-switch.url: Is Netflix's own page: an official page's value goes in features, or in inferred with a reason`,
       `${netflix} plans.0.thirdParty.vpn.kill-switch.lastVerified: 2099-01-01 is after today (${today})`,
       `${netflix} plans.0.thirdParty.video.quality: Is inferred too: a value is inferred from an official page or taken from a third party, not both`,

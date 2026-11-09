@@ -73,6 +73,18 @@
       }
     </p>
   }
+  @if (suggestion().thirdParty; as claims) {
+    <p class="features">
+      <span class="label">Rests on third-party claims:</span>
+      @for (claim of claims; track claim.key) {
+        <!-- One run of text, so its publisher wraps with the words before it. -->
+        <span class="claim">
+          {{ claim.label }}, per
+          <a [href]="claim.url" target="_blank" rel="noopener noreferrer">{{ claim.publisher }}</a>
+        </span>
+      }
+    </p>
+  }
 
   <div class="actions">
     @if (dismissed()) {

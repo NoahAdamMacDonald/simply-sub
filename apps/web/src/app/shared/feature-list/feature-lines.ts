@@ -10,6 +10,8 @@ export interface FeatureLine {
   value?: string;
   /** A value no official page states (M11.9): why it's inferred, and the page it's inferred from. */
   inferred?: { reason: string; page: string; url: string };
+  /** A value only a publication gives (M11.16): its name, page and words. */
+  thirdParty?: { publisher: string; url: string; quote: string };
   ranks: { key: RankKey; rank: Rank; option?: string }[];
   children: FeatureLine[];
 }

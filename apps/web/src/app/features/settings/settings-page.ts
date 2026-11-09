@@ -264,6 +264,11 @@ export class SettingsPage {
     void this.settings.update({ searchAllResellers: on ? true : undefined });
   }
 
+  /** The catalog's third-party values count (M11.16). On by default, on this device. */
+  protected setThirdParty(on: boolean): void {
+    void this.settings.update({ skipThirdParty: on ? undefined : true });
+  }
+
   protected setMode(mode: ThemeMode): void {
     this.theme.setMode(mode);
   }

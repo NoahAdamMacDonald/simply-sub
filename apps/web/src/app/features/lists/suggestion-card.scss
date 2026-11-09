@@ -135,6 +135,17 @@ article {
   gap: 6px;
 }
 
+// A third-party claim's source (M11.16), as the cards' text links (Plan ↗, Cancel ↗).
+.claim a {
+  border-radius: 4px;
+  color: var(--ss-accent-text);
+
+  &:focus-visible {
+    outline: 2px solid var(--ss-accent-text);
+    outline-offset: 2px;
+  }
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

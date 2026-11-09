@@ -1,5 +1,6 @@
 @if (storageBlocked()) {
-  <ss-storage-blocked />
+  <!-- "Nothing will be saved" (P15), loaded only when IndexedDB can't be opened. -->
+  <ng-container #storageBlocked />
 } @else if (locked()) {
   <!-- The lock screen (P15), loaded only when the app lock is on. -->
   <ng-container #lockScreen />

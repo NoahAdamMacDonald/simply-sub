@@ -30,8 +30,9 @@ li {
   color: var(--ss-text-muted);
 }
 
-// An inferred value's mark (M11.9): small and muted, a link to the page it's inferred from.
-.inferred {
+// An inferred value's mark (M11.9) and a third-party one's (M11.16): small and muted, a link to the page it's from.
+.inferred,
+.third-party {
   color: var(--ss-text-muted);
   font: var(--mat-sys-body-small);
   font-style: italic;

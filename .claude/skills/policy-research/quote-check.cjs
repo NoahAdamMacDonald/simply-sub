@@ -1,6 +1,6 @@
 // Checks every policy quote in data/providers/*.yaml and data/policies/*.yaml against the text saved from its page (SKILL.md, step 4),
 // and the quotes of each provider's facts whose page is saved too: its owner, ways to pay, currencies, renewal day,
-// source code and accepted cards (M11.5).
+// source code and accepted cards (M11.5), and its plans' third-party values (M11.16).
 // Usage: node quote-check.cjs <repo root> <pages.json> [facts], where pages.json maps each quoted URL to its saved text
 // file (paths relative to pages.json). Prints each quote that isn't on its page word for word, with the page's own
 // wording when only quotes, dashes or spaces differ, and exits non-zero if any is wrong. A policy quote needs its page
@@ -64,7 +64,7 @@ function check(label, url, quote) {
   if (near) console.log(`  the page has: "${near}"`);
 }
 
-/** A provider's facts, each with its page and the quotes from it (M11.5). */
+/** A provider's facts, each with its page and the quotes from it (M11.5), its plans' third-party values too (M11.16). */
 function facts(data) {
   const anchor = data.renewalAnchor;
   return [
@@ -83,6 +83,13 @@ function facts(data) {
       entry.url,
       entry.quotes,
     ]),
+    ...(data.plans ?? []).flatMap((plan) =>
+      Object.entries(plan.thirdParty ?? {}).map(([feature, claim]) => [
+        `${plan.id} thirdParty.${feature}`,
+        claim.url,
+        [claim.quote],
+      ]),
+    ),
   ].filter(Boolean);
 }
 

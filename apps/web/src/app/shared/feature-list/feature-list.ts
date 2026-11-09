@@ -13,7 +13,8 @@ import { FeatureLines, type FeatureLine } from './feature-lines';
  * A plan's features, each under its parent group, with the user's rank beside each key it provides that's ranked
  * (Search's and List view's expanded cards, P4 and P8). Core's planFeatureRows picks the rows, from the catalog's
  * registry; `ranks` are the item's effective ranks or the profile's, and an unranked key shows nothing. A value no
- * official page states is marked inferred, with the page it's inferred from (M11.9).
+ * official page states is marked inferred, with the page it's inferred from (M11.9), or third-party, with the
+ * publication it's from (M11.16).
  */
 @Component({
   selector: 'ss-feature-list',
@@ -29,18 +30,27 @@ export class FeatureList {
   readonly ranks = input<Readonly<Partial<Record<RankKey, Rank>>>>({});
   /** Which values are inferred, and from which page: the plan's (M11.9). */
   readonly inferred = input<Plan['inferred']>();
+  /** Which come from a third party, and from which publication: the plan's (M11.16). */
+  readonly thirdParty = input<Plan['thirdParty']>();
 
   protected readonly lines = computed(() => {
     const ranks = this.ranks();
     const inferred = this.inferred() ?? {};
+    const thirdParty = this.thirdParty() ?? {};
     const line = (row: PlanFeatureRow): FeatureLine => {
       const from = Object.hasOwn(inferred, row.feature.id) ? inferred[row.feature.id] : undefined;
+      const claim = Object.hasOwn(thirdParty, row.feature.id)
+        ? thirdParty[row.feature.id]
+        : undefined;
       return {
         id: row.feature.id,
         name: row.feature.name,
         ...(row.value !== undefined && { value: row.value }),
         ...(from && {
           inferred: { reason: from.reason, page: from.page.name, url: from.page.url },
+        }),
+        ...(claim && {
+          thirdParty: { publisher: claim.publisher, url: claim.url, quote: claim.quote },
         }),
         ranks: row.keys.flatMap(({ key, option }) => {
           const rank = ranks[key];

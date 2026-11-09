@@ -50,6 +50,7 @@ export * from './catalog/retired';
 export * from './catalog/seed-sql';
 export * from './catalog/seed-resume';
 export * from './catalog/snapshot';
+export * from './catalog/third-party';
 export * from './catalog/plan-lookup';
 export {
   formatCatalogIssue,

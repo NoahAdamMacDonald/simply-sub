@@ -11,6 +11,7 @@ import {
 import {
   catalogCheckDue,
   catalogFileKey,
+  withoutThirdParty,
   type CatalogCache,
   type CatalogData,
   type Timestamp,
@@ -94,8 +95,11 @@ export class CatalogStore {
     return country === undefined ? undefined : this.fileFor(country);
   });
 
+  /** Each file's data without its third-party values, made once (M11.16). */
+  private readonly withoutClaims = new WeakMap<CatalogData, CatalogData>();
+
   /** The catalog for the user's country. Undefined before the first run, and until a file has been downloaded. */
-  readonly catalog = computed<CatalogData | undefined>(() => this.countryFile()?.snapshot.data);
+  readonly catalog = computed<CatalogData | undefined>(() => this.dataOf(this.countryFile()));
 
   /** The catalog's version (`37f6573`) and when it was built, as an ISO timestamp. */
   readonly version = computed(() => this.countryFile()?.snapshot.meta.catalogVersion);
@@ -177,7 +181,19 @@ export class CatalogStore {
 
   /** The catalog for a list item bought in `region`: the file that serves that region, if it's been downloaded. */
   catalogFor(region: string): CatalogData | undefined {
-    return this.fileFor(region)?.snapshot.data;
+    return this.dataOf(this.fileFor(region));
+  }
+
+  /** A file's data as the app reads it: without its third-party values when Settings leaves them out (M11.16). */
+  private dataOf(file: CatalogCache | undefined): CatalogData | undefined {
+    const data = file?.snapshot.data;
+    if (!data || this.settings.saved()?.skipThirdParty !== true) return data;
+    let stripped = this.withoutClaims.get(data);
+    if (!stripped) {
+      stripped = withoutThirdParty(data);
+      this.withoutClaims.set(data, stripped);
+    }
+    return stripped;
   }
 
   /** The file that serves `region`, found with the regions of the latest file, which are the current catalog's. */
