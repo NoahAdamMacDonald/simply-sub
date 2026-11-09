@@ -188,7 +188,8 @@
   source: wikidata
   wikidata: Q568769
   sitelinks: 66
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: financial-times
   name: Financial Times
   website: https://www.ft.com

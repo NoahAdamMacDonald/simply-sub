@@ -1,0 +1,523 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 1), read with Edge from Canada and through each
+# country's exit. Pages, each quoted where it's used:
+# Pricing: checkout.soundcloud.com/go (soundcloud.com/go), which prices by where the visitor is: read from Canada
+# ("CA$6.99/month"), and through a US, UK, Australian, New Zealand, Irish, German, French, Dutch, Spanish and Italian
+# exit, each page in that country's currency. Go and Go+, monthly by their cards, which its SoundCloud Go Terms bill as
+# "a 30-day period" that "will thereafter renew automatically for additional 30-day periods", so they're priced every 30
+# days. The Student discount ("Get SoundCloud Go+ for 50% off") isn't listed, as other students' offers aren't.
+# Region checklist, 2026-11-09: 1. no country paths; 2. no picker; 3. not looked for; 4. checkout's plan page read, no
+# further; 5. none; 6. Edge from Canada and through each exit; 7. no bill offered.
+# Bundles and resellers: none on its pages; Apple bills it in its app (its Go terms), a way to pay.
+# Features, read 2026-11-09: each card's "Ad-free listening", "Save unlimited tracks for offline listening", "Access
+# full catalog" and "High quality audio", and Go+'s "Mix tracks within select DJ apps" (a perk). Its help centre says
+# otherwise of Go: "High-quality streaming is an exclusive feature for SoundCloud Go+ subscribers. While standard tracks
+# are streamed at 160kbps AAC, HQ tracks are encoded in 256kbps AAC" (High Quality Streaming), and Go+ "Grants full
+# access to the entire catalog, high-quality audio" (Choosing the Right Subscription); the plan cards win, as the price
+# research rule says, and the pull request asks the owner. Free listeners "can stream 96k and 160k" (Audio Streaming
+# Formats), so Standard. No audiobooks.
+
+id: soundcloud
+name: SoundCloud
+website: https://soundcloud.com
+# Its checkout, help centre and legal pages.
+domains: [checkout.soundcloud.com, help.soundcloud.com, pages.soundcloud.com]
+category: music
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+cancelUrl: https://help.soundcloud.com/hc/en-us/articles/360056011234-Cancel-your-subscription
+sources: { pricing: https://checkout.soundcloud.com/go }
+# Owner (M11.2), read 2026-11-09: its terms' Disclosures name the company that offers it.
+owner:
+  name: SoundCloud Global Limited & Co. KG
+  page:
+    name: Terms of Use
+    url: https://soundcloud.com/terms-of-use
+  quotes:
+    - 'The services hereunder are offered by SoundCloud Global Limited & Co. KG, a company incorporated under the laws of Germany and with its main place of business at Karl-Marx-Strasse 101, 12043 Berlin, Germany.'
+  country:
+    code: DE
+  lastVerified: 2026-11-09
+# Ways to pay and cards (M9.2, M11.5), read 2026-11-09 in its SoundCloud Go Terms.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: SoundCloud Go and SoundCloud DJ Terms of Use
+    url: https://pages.soundcloud.com/go-terms-of-use
+    quotes:
+      - 'Payment can be made by Visa, Mastercard, American Express or PayPal'
+      - 'If you subscribe to SoundCloud Go via the SoundCloud In-App purchase, the terms and conditions of the Apple app store through which you make the purchase will apply'
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://pages.soundcloud.com/go-terms-of-use
+    quotes: ['Payment can be made by Visa, Mastercard, American Express or PayPal']
+renewalAnchor:
+  kind: every-30-days
+  page: SoundCloud Go and SoundCloud DJ Terms of Use
+  url: https://pages.soundcloud.com/go-terms-of-use
+  quotes:
+    - 'If you purchase a Go or Go+ Subscription, your Go or Go+ Subscription will be for a 30-day period, and your Go or Go+ Subscription will thereafter renew automatically for additional 30-day periods.'
+  lastVerified: 2026-11-09
+
+# Apps (the cross-category features), read 2026-11-09: "SoundCloud Go is currently compatible with internet enabled
+# computers and Android and iOS smartphones and iOS tablets" (its Go terms).
+features:
+  platforms: [web, android, ios]
+
+perks:
+  - id: dj-apps
+    name: Mix tracks within select DJ apps
+
+plans:
+  - id: soundcloud.free
+    name: Free
+    link: https://soundcloud.com
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: false
+      audiobooks.included: false
+    inferred:
+      music.on-demand:
+        reason: 'Its terms describe a platform where anyone listens to what others upload, free with ads, and no page limits free listeners to shuffle play or a number of skips.'
+        page:
+          name: Terms of Use
+          url: https://soundcloud.com/terms-of-use
+        lastVerified: 2026-11-09
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+  - id: soundcloud.go
+    name: Go
+    link: https://checkout.soundcloud.com/go
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - region: CA
+        currency: CAD
+        amount: 6.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: AU
+        currency: AUD
+        amount: 7.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: NZ
+        currency: NZD
+        amount: 7.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: IE
+        currency: EUR
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: DE
+        currency: EUR
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: FR
+        currency: EUR
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: NL
+        currency: EUR
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: ES
+        currency: EUR
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: IT
+        currency: EUR
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+  - id: soundcloud.go-plus
+    name: Go+
+    link: https://checkout.soundcloud.com/go
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    perks: [dj-apps]
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - region: CA
+        currency: CAD
+        amount: 12.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: AU
+        currency: AUD
+        amount: 14.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: NZ
+        currency: NZD
+        amount: 17.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://checkout.soundcloud.com/go
+
+# Terms and policies, read 2026-11-09 (M11.15): the Terms of Use (last amended January 19, 2026; the page has its French
+# copy too), the SoundCloud Go and SoundCloud DJ Terms of Use, the Privacy Policy, and its help centre's cancelling
+# article. Its Community Guidelines and Cookie Policy hold no topic beyond these. Calibrated against Spotify's and
+# Deezer's grades. Not rated: rights over your content and its apps' licence (not topics for music).
+policies:
+  links:
+    - name: Terms of Use
+      url: https://soundcloud.com/terms-of-use
+    - name: SoundCloud Go and SoundCloud DJ Terms of Use
+      url: https://pages.soundcloud.com/go-terms-of-use
+    - name: Privacy Policy
+      url: https://soundcloud.com/pages/privacy
+    - name: Cancel your subscription
+      url: https://help.soundcloud.com/hc/en-us/articles/360056011234-Cancel-your-subscription
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use SoundCloud for its business. You can turn off its analytics only in each device’s own settings.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'To perform data and business analytics'
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'You can disable mobile analytics and bug reporting through these same settings'
+      action:
+        name: Its privacy policy (your choices)
+        url: https://soundcloud.com/pages/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares a coded copy of your email with advertisers and social networks to show you its ads elsewhere, and lets them track you with cookies. You can limit that only in cookie or device settings.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'Where permissible under applicable law we may share your email address (in hashed form, so that it does not identify you personally) with advertising partners, including social networks, in order to target you with ads for SoundCloud products on third party websites and applications.'
+      action:
+        name: Its privacy policy (your choices)
+        url: https://soundcloud.com/pages/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: neutral
+      reason: 'The free plan shows ads chosen for you. You can turn personal ads off in your settings, and then see general ones.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'If you do not want SoundCloud to deliver “interest based” or personalized ads for third party products, you can adjust your Settings in the “Advertising” tab (for EU/EEA/U.K. and California users, under “Cookie Manager”).'
+      action:
+        name: Its privacy policy (advertising settings)
+        url: https://soundcloud.com/pages/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether it trains AI on what you upload or listen to.'
+      pages: [https://soundcloud.com/terms-of-use, https://soundcloud.com/pages/privacy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data while you have an account, and for 3 years after the year you cancel, for the law.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'We generally retain personal data for as long as is necessary to provide services to you under your account, i.e. as long as your contract is ongoing and for the sake of legal obligations, for 3 years following the end of the year in which your contract was canceled'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account yourself in your settings, which deletes your data apart from backups, but it doesn’t say how long that takes.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'If you have an account and would like to delete it, you may do so by adjusting your Settings in the account tab.'
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'If you delete your account, all personal data associated with your account (except for backup copies)'
+      action:
+        name: Its privacy policy (deleting your account)
+        url: https://soundcloud.com/pages/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can see much of your data in your settings, and ask it for a copy in a format other apps can read.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'you may also be entitled to request copies of personal data you have provided to us in machine-readable format.'
+      action:
+        name: Its privacy policy (your rights)
+        url: https://soundcloud.com/pages/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It gives your data to authorities when the law requires it, and also for checked requests about crimes or suspected wrongdoing.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: '(iii) to respond to verified requests relating to a criminal investigation or alleged or suspected illegal activity'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can leave Europe, under the EU’s standard contracts or another legal way.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'We utilize appropriate safeguards such as Standard Contractual Clauses approved by the European Commission, or another legally approved mechanism, to ensure the lawful transfer of your personal data outside of the EEA.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account takes your email, age or birthday, postal code, a username (a nickname is fine) and a password.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'your age or birthdate, postal code, a username (which may be your real name or a pseudonym) and a password'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 16 in Europe and the UK, or 13 elsewhere, to use SoundCloud.'
+      sources:
+        - url: https://soundcloud.com/pages/privacy
+          quote: 'Anyone under the age of 16 in the EEA and UK, or 13 in the United States and the rest of the world, is not permitted to use the Platform and must not attempt to register an account or submit any personal data to us.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel on its website at any time, and keep Go until the end of the period you paid for.'
+      sources:
+        - url: https://help.soundcloud.com/hc/en-us/articles/360056011234-Cancel-your-subscription
+          quote: 'When you cancel your SoundCloud Go subscription, you’ll keep your premium features—including ad-free listening and offline downloads—until your current billing cycle ends.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back for the rest of a period, but you keep Go until it ends.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: 'If you have a Subscription, and terminate this Agreement before the end of such Subscription, we are unable to offer any refund for any unexpired period of your Subscription.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you at least six weeks before a price goes up, and the new price starts only when you renew after that, so you can cancel first.'
+      sources:
+        - url: https://pages.soundcloud.com/go-terms-of-use
+          quote: 'we will communicate these change(s) to you at least six (6) weeks in advance and the changes will only take effect with respect to any renewal of your Go or Go+ Subscription following the applicable six (6) week period.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its trial turns into a paid plan unless you cancel before it ends. Its terms don’t say it reminds you first.'
+      sources:
+        - url: https://pages.soundcloud.com/go-terms-of-use
+          quote: 'However, any applicable cancellation must occur prior to the end of the respective Trial or Special Offer period.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say Go renews every 30 days on its own, but not that it reminds you first.'
+      pages: [https://pages.soundcloud.com/go-terms-of-use]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms name no fees besides the price.'
+      pages: [https://pages.soundcloud.com/go-terms-of-use]
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'You can move between Go and Go+ at any time, and pay or get back the difference for the time left.'
+      sources:
+        - url: https://pages.soundcloud.com/go-terms-of-use
+          quote: 'If you upgrade or downgrade you will immediately be charged the difference in price or you will immediately be refunded.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of Berlin, under German law, with no arbitration, unless your country’s law says otherwise, as in the US and the EU.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: 'Except where otherwise required by the mandatory law of the United States or any member state of the European Union'
+        - url: https://soundcloud.com/terms-of-use
+          quote: '(ii) you hereby agree, and SoundCloud agrees, to submit to the exclusive jurisdiction of the courts in Berlin, Germany for resolution of any dispute, action or proceeding arising in connection with this Agreement.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes to its terms, which start two weeks later. If you don’t agree, you can close your account.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: 'the revised Terms of Use will become effective two (2) weeks after such notification'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can close your account for breaking its rules, and also in other circumstances it decides are reasonable, with no money back.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: '(iv) in other reasonable circumstances as determined by SoundCloud at its discretion.'
+        - url: https://pages.soundcloud.com/go-terms-of-use
+          quote: 'Please note we do not offer refunds to Go or Go+ Subscription holders whose accounts are terminated as a result of repeated infringement'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can stop SoundCloud, or any part of it, at any time and for any reason, and says it isn’t responsible for that.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: 'SoundCloud reserves the right at any time and for any reason to suspend, discontinue, terminate or cease providing access to the Platform or any part thereof, temporarily or permanently, and whether in its entirety or with respect to individual territories only.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://soundcloud.com/terms-of-use, https://soundcloud.com/pages/privacy]
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has security measures you mustn’t get around, and names no security audit, certification or way to report a flaw.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: '(xvi) You must not violate, circumvent or attempt to violate or circumvent any data security measures employed by SoundCloud or any Uploader'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Someone else may use your account with your permission. Go plays on one device at a time.'
+      sources:
+        - url: https://soundcloud.com/terms-of-use
+          quote: "(xiii) You must not use or attempt to use another person's account, password, or other information, unless you have express permission from that other person."
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Go works on up to three devices, playing on one at a time, and offline tracks disappear if you don’t log in for 30 days.'
+      sources:
+        - url: https://pages.soundcloud.com/go-terms-of-use
+          quote: 'Your Go or Go+ Subscription can be used on up to three different devices at a time, although streaming while you’re logged in is limited to one device at a time.'
+        - url: https://pages.soundcloud.com/go-terms-of-use
+          quote: 'Otherwise, Content you select for offline listening will be automatically removed from your device after 30 days.'
+      lastVerified: 2026-11-09
