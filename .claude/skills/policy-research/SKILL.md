@@ -273,7 +273,12 @@ this file to them: change both together.
   Viaplay Group's) are rated as written, the owner's choice; from 30 November 2026 Videoland's interim terms
   (viaplay.com/nl-nl/interim-terms: the same clauses under Dutch law, with a 14-day withdrawal that refunds the unused
   days) and DPG Media's privacy policy apply, so quote terms sentences that both versions have, and re-rate its privacy
-  topics from DPG Media's policy then. Its help centre and terms read through a Dutch exit.
+  topics from DPG Media's policy then. Its help centre and terms read through a Dutch exit. Every plan includes F1 TV
+  Pro, Formula 1's own service on an F1 account: Formula 1's Digital Products Terms of Use, F1 TV Subscription Terms and
+  Privacy Policy (account.formula1.com/#/en/terms-of-use, subscription-terms, privacy-policy, which read in Edge) are
+  rated where they're worse than Viaplay's own; its help centre (f1help.formula1.com) shows nothing in Edge.
+- SkyShowtime's help centre answers "page not found" for its cancelling article: its account article ("Dingen die je
+  kunt doen in je SkyShowtime-account") is the cancel link and the action for its account's ad and marketing settings.
 - Odysee's terms don't mention Premium, and its privacy policy is a general template (Google AdSense, Do Not Track):
   most billing topics stay `not-stated`. Its terms' quotes mix curly and straight quotation marks (“Services"): copy
   them from the saved text.

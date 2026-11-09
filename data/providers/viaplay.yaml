@@ -6,8 +6,9 @@
 # owner's choice of 2026-11-09).
 # Pricing: viaplay.com/nl-nl's plan cards: Basis "met advertenties", "€19,99/maand. Opzegbaar op elk moment" or
 # "€179/jaar", and Standaard, "€21.99/maand. Opzegbaar op elk moment." or "€199/jaar". A year is "Eenmalige betaling, 12
-# maanden vast" (one payment for 12 fixed months), so it doesn't renew by itself; its terms then turn a fixed term into
-# a monthly subscription, or another fixed term, "afhankelijk van wat er in de koopaanbieding staat". Its help article
+# maanden vast" (one payment for 12 fixed months), stored as renewed by hand (autoRenew false), as YouTube's prepaid
+# years are (the owner's choice of 2026-11-09): the card doesn't say what follows, and its terms turn a fixed term into a
+# monthly subscription, or another fixed term, "afhankelijk van wat er in de koopaanbieding staat". Its help article
 # "Informatie over onze pakketten" also lists a 12-month contract paid monthly (€16,99 and €19,99 a month), which the
 # cards no longer sell: a commitment price, left out.
 # Region checklist, 2026-11-09: 1. viaplay.com/nl-nl and its Dutch help centre; 2. the plan cards' monthly and yearly
@@ -89,7 +90,7 @@ perks:
   - id: formula-1
     name: Every Formula 1 race, qualifying and practice live, with Dutch commentary
   - id: f1-tv-pro
-    name: F1 TV Pro access
+    name: F1 TV Pro access, on an F1 account of your own
   - id: premier-league
     name: 'Premier League: 342 of the 380 matches live (2026/27)'
   - id: pdc-darts
@@ -122,7 +123,7 @@ plans:
           url: https://help.viaplay.com/nl/age-restriction-profile/
         lastVerified: 2026-11-09
     perks: [formula-1, f1-tv-pro, premier-league, pdc-darts, more-sport]
-    notes: Basis in Dutch, with no offline viewing. A year is one payment for 12 months; its terms then continue the plan monthly, or for another fixed term, as the offer says.
+    notes: Basis in Dutch, with no offline viewing. A year is one payment for 12 months, renewed by hand. Its card doesn't say what follows; its terms continue a fixed term monthly, or for another term, as the offer says.
     prices:
       - {
           region: NL,
@@ -169,7 +170,7 @@ plans:
           url: https://help.viaplay.com/nl/age-restriction-profile/
         lastVerified: 2026-11-09
     perks: [formula-1, f1-tv-pro, premier-league, pdc-darts, more-sport]
-    notes: Standaard in Dutch. It can still show sponsorship and product placement. A year is one payment for 12 months; its terms then continue the plan monthly, or for another fixed term, as the offer says.
+    notes: Standaard in Dutch. It can still show sponsorship and product placement. A year is one payment for 12 months, renewed by hand. Its card doesn't say what follows; its terms continue a fixed term monthly, or for another term, as the offer says.
     prices:
       - {
           region: NL,
@@ -197,12 +198,26 @@ plans:
 # help centre's articles on cancelling, changing plans, devices, downloads and paying, and its sign-up form. Every terms
 # quote is word for word in Videoland's interim terms too, which keep these clauses from 30 November 2026; the privacy
 # ratings are Viaplay Group's policy until DPG Media's applies then.
+# F1 TV Pro, on every plan, is Formula 1's own service on an F1 account ("Een apart F1-account en akkoord gaan met de
+# voorwaarden van F1"): its Digital Products Terms of Use, F1 TV Subscription Terms and Privacy Policy (read
+# 2026-11-09, their English versions) are rated where they're worse than Viaplay's own (the owner's rule for a benefit
+# another company runs) and hold the same grades elsewhere; their billing clauses are for F1 TV bought from Formula 1.
+# Its Cookie Policy adds no topic, and its help centre's comparison of F1 TV's devices and streams showed nothing in
+# Edge here, so it's unread.
 policies:
   links:
     - name: 'Voorwaarden (in Dutch)'
       url: https://viaplay.com/nl-nl/terms
     - name: 'Privacyverklaring (in Dutch)'
       url: https://viaplay.com/nl-nl/privacy
+    - name: 'Viaplay’s plans (in Dutch)'
+      url: https://viaplay.com/nl-nl/
+    - name: 'Formula 1 Digital Products Terms of Use'
+      url: https://account.formula1.com/#/en/terms-of-use
+    - name: 'F1 TV Subscription Terms'
+      url: https://account.formula1.com/#/en/subscription-terms
+    - name: 'Formula 1 Privacy Policy'
+      url: https://account.formula1.com/#/en/privacy-policy
     - name: 'Pakket opzeggen (in Dutch)'
       url: https://help.viaplay.com/nl/cancel-package/
     - name: 'Pakket beheren (in Dutch)'
@@ -262,13 +277,13 @@ policies:
       pages: [https://viaplay.com/nl-nl/privacy]
       lastVerified: 2026-11-09
     - topic: privacy.data-retention
-      tier: neutral
-      reason: 'It keeps your information as long as it needs it, with some stated periods: crash logs 3 months, support chats 3 years and voice recordings a month.'
+      tier: poor
+      reason: 'Viaplay names periods for some of your data, but the F1 account that every plan’s F1 TV Pro needs keeps your data as long as Formula 1 thinks necessary, with no periods.'
       sources:
-        - url: https://viaplay.com/nl-nl/privacy
-          quote: 'Wij bewaren je persoonsgegevens zo lang als nodig is om de specifieke doeleinden te bereiken waarvoor ze zijn verzameld of zoals vereist door de wet, waarna ze worden verwijderd of geanonimiseerd.'
-        - url: https://viaplay.com/nl-nl/privacy
-          quote: 'We bewaren informatie over fouten en servicecrashes om de technische functionaliteit van onze service tot maximaal 3 maanden na verzameling te garanderen.'
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'We will only retain your personal data for as long as reasonably necessary to fulfil the purposes we collected it for, including for the purposes of satisfying any legal, regulatory, tax, accounting or reporting requirements.'
         - url: https://viaplay.com/nl-nl/privacy
           quote: 'tot een maximum van 3 jaar voor logs en tekstdialogen, en 1 maand voor stemopnames'
       lastVerified: 2026-11-09
@@ -295,9 +310,13 @@ policies:
         url: https://viaplay.com/nl-nl/privacy
       lastVerified: 2026-11-09
     - topic: privacy.government-requests
-      tier: neutral
-      reason: 'It hands your data to authorities when a law, an official decision or a government request obliges it, and says nothing more.'
+      tier: poor
+      reason: 'Viaplay hands your data to authorities when it’s obliged to, but Formula 1, whose account every plan’s F1 TV Pro needs, may give it to agencies to protect its own lawful interests.'
       sources:
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'Any law enforcement or similar agency where we consider this necessary to protect our rights, property, lawful interests, or safety, our customers, or others.'
         - url: https://viaplay.com/nl-nl/privacy
           quote: 'We kunnen jouw gegevens delen met overheidsinstanties of andere officiële instellingen of instanties wanneer we hiertoe verplicht zijn op grond van wet- of regelgeving, een officieel besluit of een verzoek van de overheid.'
       lastVerified: 2026-11-09
@@ -322,13 +341,15 @@ policies:
           quote: 'uw betalingsgegevens registreren en een gebruikelijke kredietbeoordeling ondergaan'
       lastVerified: 2026-11-09
     - topic: privacy.children
-      tier: good
-      reason: 'No one under 18 can have an account, younger viewers need a parent’s approval, and it doesn’t knowingly aim ads at minors.'
+      tier: neutral
+      reason: 'Viaplay is for adults and doesn’t knowingly aim ads at minors. Formula 1’s account, which every plan’s F1 TV Pro needs, takes 16- and 17-year-olds in some places with a parent’s consent and says nothing of their ads.'
       sources:
-        - url: https://viaplay.com/nl-nl/privacy
-          quote: 'We richten ons niet bewust met onze advertenties op minderjareigen en verzamelen niet bewust persoonsgegevens van minderjarigen.'
-        - url: https://viaplay.com/nl-nl/privacy
-          quote: 'Als je jonger dan 18 jaar bent, kun je Viaplay alleen gebruiken met de betrokkenheid, het toezicht en de goedkeuring van een ouder of wettelijke voogd.'
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'In the case of U.S. residents and residents of any other applicable territory, individuals over the age of 16, but under the age of 18, may utilise the Service with the consent of a parent or legal guardian.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'If you have reason to believe that a child under the age of 16 has provided personal data to us without parental consent, please contact us so that we can delete that data.'
       lastVerified: 2026-11-09
     - topic: security.practices
       tier: poor
@@ -387,30 +408,36 @@ policies:
       lastVerified: 2026-11-09
     - topic: billing.plan-changes
       tier: good
-      reason: 'An upgrade starts at once, with the rest of your old plan refunded; a downgrade starts at your next billing date. During a fixed term, such as a prepaid year, you can’t downgrade.'
+      reason: 'An upgrade starts at once, with the rest of your old plan refunded; a downgrade starts at your next billing date. During a fixed term, such as a prepaid year, you can’t change your plan yourself.'
       sources:
         - url: https://help.viaplay.com/nl/manage-package/
           quote: 'Eventuele resterende tijd van je vorige pakket wordt automatisch terugbetaald.'
         - url: https://help.viaplay.com/nl/manage-package/
           quote: 'Gaat in vanaf de volgende facturatiedatum.'
         - url: https://help.viaplay.com/nl/manage-package/
-          quote: 'Als je een pakket met een contractperiode hebt, kun je tijdens de contractperiode niet downgraden naar een ander pakket.'
+          quote: 'Je kunt je pakket niet wijzigen op Viaplay.com als: je betaalt via Apple (iTunes), of je Viaplay hebt via een tv-provider of een zenderpakket. je een contractperiode hebt op je Viaplay-pakket.'
       lastVerified: 2026-11-09
     - topic: legal.disputes
-      tier: great
-      reason: 'Disputes go to a Dutch court, and you can choose one near where you live.'
+      tier: good
+      reason: 'Viaplay’s disputes go to a Dutch court near where you live, but every plan’s F1 TV Pro comes with Formula 1’s terms, which send them to England’s courts unless your consumer rights let you sue at home.'
       sources:
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: 'Except in the case of U.S. residents, you can bring legal proceedings in respect of these Terms in the English courts UNLESS statutory and/or consumer rights apply to you which allow your local law to apply and/or entitle you to bring legal proceedings in your local court instead.'
         - url: https://viaplay.com/nl-nl/terms
           quote: 'Indien partijen niet tot overeenstemming kunnen komen, kan het geschil voor de bevoegde Nederlandse rechtbank worden gebracht. Als consument heeft u het recht om voor de rechtbank in een plaats dicht bij uw woonplaats te kiezen.'
       lastVerified: 2026-11-09
     - topic: legal.terms-changes
-      tier: good
-      reason: 'It emails you at least 30 days before a significant change for the worse, and you can cancel before it starts.'
+      tier: poor
+      reason: 'Viaplay emails you 30 days before a big change for the worse, but every plan’s F1 TV Pro comes with Formula 1’s terms, which change when it posts them; using F1 TV afterwards accepts them.'
       sources:
-        - url: https://viaplay.com/nl-nl/terms
-          quote: 'We zullen u per e-mail informeren, uiterlijk dertig (30) kalenderdagen voordat de wijziging van kracht wordt, over eventuele aanzienlijke ongunstige veranderingen die niet onbeduidend zijn of veranderingen die strijdig zijn met deze Voorwaarden.'
-        - url: https://viaplay.com/nl-nl/terms
-          quote: 'Als we deze Voorwaarden wijzigen, heeft u het recht om uw abonnement met ingang van de datum waarop de wijziging van kracht wordt, op te zeggen'
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We reserve the right to make changes, modifications, amendments and/or updates to these Terms from time to time by posting such changes in this document'
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: 'By using the Digital Products after any such changes are made to these Terms, you agree to comply with, and be bound by, the updated Terms in force at that time.'
       lastVerified: 2026-11-09
     - topic: legal.account-closure
       tier: neutral
@@ -424,13 +451,15 @@ policies:
           quote: 'Indien u een abonnement met Vaste Termijn hebt, kunnen wij verlangen dat u de Abonnementsvergoeding onmiddellijk volledig voldoet voor de rest van de Vaste Termijn.'
       lastVerified: 2026-11-09
     - topic: legal.service-changes
-      tier: neutral
-      reason: 'Its shows and features can change while you subscribe. It emails you 30 days before a significant change for the worse, and you can cancel.'
+      tier: poor
+      reason: 'Viaplay’s shows and features can change, with 30 days’ email before a change for the worse, but every plan’s F1 TV Pro can change or lose content at Formula 1’s sole discretion, which takes no liability for it.'
       sources:
-        - url: https://viaplay.com/nl-nl/terms
-          quote: 'Zo kunnen functies en content die beschikbaar waren in Viaplay toen uw abonnement begon of toen u een Eenmalige Betaling deed, veranderen gedurende de periode waarin u gebruiker bent.'
-        - url: https://viaplay.com/nl-nl/terms
-          quote: 'We zullen u per e-mail informeren, uiterlijk dertig (30) kalenderdagen voordat de wijziging van kracht wordt, over eventuele aanzienlijke ongunstige veranderingen die niet onbeduidend zijn of veranderingen die strijdig zijn met deze Voorwaarden.'
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We may add, vary, replace or withdraw content and features included within the Services, and the range of payment options and payment currencies, and the platforms or vendors from which the Services are made available may change in our sole discretion.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'we exclude all liability from: (a) any unauthorised use of the Services; (b) suspending, terminating, varying or withdrawing any of the Services in accordance with these Terms and/or any of the content and features included in those Services'
       lastVerified: 2026-11-09
     - topic: legal.inactivity
       tier: poor
@@ -442,13 +471,15 @@ policies:
           quote: 'Je wordt als inactief beschouwd als je gedurende de voorgeschreven periode geen inhoud hebt gekocht, niet hebt ingelogd of Viaplay op welke manier dan ook hebt gebruikt.'
       lastVerified: 2026-11-09
     - topic: service.account-sharing
-      tier: poor
-      reason: 'Only people who live with you may use your account, and it can suspend your access at once if it believes the account is misused.'
+      tier: bad
+      reason: 'Viaplay lets only people who live with you use your account, but every plan’s F1 TV Pro can’t be shared with anyone: Formula 1’s terms forbid letting any other person watch it.'
       sources:
+        - url: https://viaplay.com/nl-nl/
+          quote: 'Een apart F1-account en akkoord gaan met de voorwaarden van F1 zijn noodzakelijk om toegang te krijgen tot F1® TV Pro.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'only access or view the Service via personal, secure devices and never permit any other person to access the Service.'
         - url: https://viaplay.com/nl-nl/terms
           quote: 'U mag alleen toegang tot uw account delen met personen die in uw huishouden wonen, tenzij uw abonnementstype anders toelaat.'
-        - url: https://viaplay.com/nl-nl/terms
-          quote: 'Als wij reden hebben om te geloven dat het account is misbruikt, behouden wij het recht voor om uw toegang tot Viaplay onmiddellijk op te schorten'
       lastVerified: 2026-11-09
     - topic: service.device-limits
       tier: neutral

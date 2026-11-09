@@ -29,8 +29,9 @@ paymentMethods:
     quotes:
       - 'When ordering or registering on our site, as appropriate, you may be asked to enter your name, email address, mailing address, phone number, credit card information or other details'
 
-# Owner (M11.2), read 2026-11-09 in its terms (the company they're with); where it is, from the address its terms give
-# for copyright notices. Its help centre's footer names Odysee Holdings, Inc.
+# Owner (M11.2), read 2026-11-09 in its terms (the company they're with). Where it is: its terms give no address of
+# Odysee Inc.'s own, so the US comes from its copyright agent's, Space Odysee Inc. in New York, the address its privacy
+# policy also gives; its help centre's footer names Odysee Holdings, Inc.
 owner:
   name: 'Odysee Inc.'
   page:
@@ -254,7 +255,7 @@ policies:
       lastVerified: 2026-11-09
     - topic: billing.free-trials
       status: not-stated
-      reason: 'Its Premium article offers no free trial, and its terms describe none.'
+      reason: 'Its Premium article and terms describe no free trial, and its Premium page, behind the sign-up, wasn’t read.'
       pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
       lastVerified: 2026-11-09
     - topic: billing.renewal-notice

@@ -28,7 +28,9 @@ billingCurrency: { NL: EUR, ES: EUR }
 # Hungary, Kosovo, Montenegro, North Macedonia, Norway, Netherlands, Poland, Portugal, Romania, Serbia, Slovakia,
 # Slovenia, Spain and Sweden." (skyshowtime.com/where-can-i-stream)
 availableIn: [AL, AD, BA, BG, HR, CZ, DK, FI, HU, ME, MK, NO, NL, PL, PT, RO, RS, SK, SI, ES, SE]
-cancelUrl: https://www.skyshowtime.com/nl/terms
+# Its help centre's cancelling article answers "page not found"; "Dingen die je kunt doen in je SkyShowtime-account"
+# lists "Annuleer je abonnement of herstart het".
+cancelUrl: https://www.skyshowtime.com/nl/help/article/things-you-can-do-in-your-skyshowtime-account
 sources:
   {
     pricing: https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing,
@@ -319,30 +321,32 @@ policies:
         url: https://www.skyshowtime.com/nl/privacy
       lastVerified: 2026-11-09
     - topic: privacy.data-sharing
-      tier: poor
-      reason: 'It shares your details with Comcast and Paramount companies to market to you, and with FreeWheel and Meta for ads. You can stop marketing emails, but its ads follow each browser’s cookie choices.'
+      tier: neutral
+      reason: 'It shares your details with Comcast and Paramount companies for marketing, and with ad and social-media partners. Your account settings stop the marketing and social-media ads; ads picked for you need your cookie consent.'
       sources:
         - url: https://www.skyshowtime.com/nl/privacy
           quote: 'Delen we uw persoonlijke informatie met externe partijen (waaronder Comcast Group- en Paramount-bedrijven) om hen in staat te stellen u marketingberichten te sturen, in overeenstemming met uw marketingvoorkeuren en abonnementstype'
         - url: https://www.skyshowtime.com/nl/privacy
-          quote: 'FreeWheel treedt op als een onafhankelijke beheerder met betrekking tot gepersonaliseerde reclame.'
+          quote: 'U kunt zich te allen tijde afmelden voor deze gerichte reclame via uw SkyShowtime-accountinstellingen.'
         - url: https://www.skyshowtime.com/nl/privacy
-          quote: 'Meta Ireland is een gezamenlijke verwerkingsverantwoordelijke voor de gezamenlijke verwerking'
+          quote: 'Als u een abonnement met reclame heeft en cookies heeft ingeschakeld om gepersonaliseerde reclame te ontvangen (met uw toestemming (op basis van cookie-instellingen) van ons en onze externe partners)'
       action:
-        name: 'Its privacy policy (in Dutch)'
-        url: https://www.skyshowtime.com/nl/privacy
+        name: 'Your account settings (in Dutch)'
+        url: https://www.skyshowtime.com/nl/help/article/things-you-can-do-in-your-skyshowtime-account
       lastVerified: 2026-11-09
     - topic: privacy.ads-tracking
-      tier: poor
-      reason: 'It targets ads at you on social media, partly on its own say-so; you can only change it in each browser’s cookie settings, or on a smart TV in your account.'
+      tier: neutral
+      reason: 'It targets ads at you on social media unless you turn that off in your account settings; on Standard with ads, it picks ads for you only if you accept its cookies.'
       sources:
         - url: https://www.skyshowtime.com/nl/privacy
           quote: 'Aanbieden van doelgerichte reclame op sociale media en gerelateerde platform'
         - url: https://www.skyshowtime.com/nl/privacy
-          quote: 'u kunt uw Cookievoorkeuren op elk moment aanpassen via de link "Cookievoorkeuren" in de voettekst van de betreffende websites'
+          quote: 'U kunt zich te allen tijde afmelden voor deze gerichte reclame via uw SkyShowtime-accountinstellingen.'
+        - url: https://www.skyshowtime.com/nl/privacy
+          quote: 'Als u een abonnement met reclame heeft en cookies heeft ingeschakeld om gepersonaliseerde reclame te ontvangen (met uw toestemming (op basis van cookie-instellingen) van ons en onze externe partners)'
       action:
-        name: 'Its privacy policy (in Dutch)'
-        url: https://www.skyshowtime.com/nl/privacy
+        name: 'Your account settings (in Dutch)'
+        url: https://www.skyshowtime.com/nl/help/article/things-you-can-do-in-your-skyshowtime-account
       lastVerified: 2026-11-09
     - topic: privacy.ai-training
       status: not-stated
@@ -420,8 +424,8 @@ policies:
         - https://www.skyshowtime.com/nl/privacy
       lastVerified: 2026-11-09
     - topic: billing.cancellation
-      tier: good
-      reason: 'You can cancel online in your account at any time, at no cost, and keep watching until the end of the time you paid for.'
+      tier: great
+      reason: 'You cancel on your account page at any time, at no cost, and keep watching until the end of the time you paid for.'
       sources:
         - url: https://www.skyshowtime.com/nl/terms
           quote: 'U kunt ons Contract en uw abonnement om welke reden dan ook en op elk moment opzeggen door de terugkerende kosten van uw abonnement stop te zetten, zonder extra kosten of annuleringskosten.'
@@ -432,12 +436,12 @@ policies:
       lastVerified: 2026-11-09
     - topic: billing.refunds
       tier: neutral
-      reason: 'You usually get no money back but keep watching until the period ends; a yearly plan can end early with the rest refunded. Starting at once gives up the 14-day right to withdraw.'
+      reason: 'You usually get no money back but keep watching until the period ends. After a yearly plan’s first 12 months, you can cancel by email for the rest back, losing access at once. Starting at once gives up the 14-day right to withdraw.'
       sources:
         - url: https://www.skyshowtime.com/nl/terms
           quote: 'Normaal gesproken krijgt u geen geld terug, maar behoudt u de toegang tot SkyShowtime tot het einde van de periode waarvoor u heeft betaald.'
         - url: https://www.skyshowtime.com/nl/terms
-          quote: 'Als u een jaarabonnement heeft, heeft u mogelijk een aanvullende optie om uw abonnement op te zeggen en te beëindigen vóór de volgende factureringsdatum (in dat geval ontvangt u een terugbetaling voor de resterende maanden van uw factureringscyclus).'
+          quote: 'Op deze manier kunt u ons op elk moment laten weten dat u na de minimumtermijn van 12 maanden wilt opzeggen en een terugbetaling wilt voor het resterende deel van de factureringscyclus (vanaf het moment dat u automatische verlenging uitschakelt en een terugbetaling aanvraagt, heeft u geen toegang meer tot SkyShowtime).'
         - url: https://www.skyshowtime.com/nl/terms
           quote: 'Als gevolg daarvan verliest u elk wettelijk recht op een'
       lastVerified: 2026-11-09

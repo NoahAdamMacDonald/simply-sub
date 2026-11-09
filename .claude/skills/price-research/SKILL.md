@@ -326,10 +326,11 @@ which reads each page as a visitor there would, before any hand reading:
   plans commit you to 6 or 12 months at a lower monthly price: first-term offers, left out. Spain's help article lists
   yearly Estándar and Prémium prices its plan picker doesn't sell; the picker's periods count.
 - **Viaplay's Dutch cards** (M11.15, viaplay.com/nl-nl, through a Dutch exit): a year is "Eenmalige betaling, 12
-  maanden vast", one payment for 12 fixed months, so `autoRenew: false`; its terms then continue the plan monthly, or
-  for another fixed term, as the offer says. Its help article "Informatie over onze pakketten" still lists a 12-month
-  contract paid monthly that the cards no longer sell. Its account form (viaplay.com/checkout/register/<package>, after
-  "Koop nu") loads without signing in; read its fields only.
+  maanden vast", one payment for 12 fixed months, stored as renewed by hand (`autoRenew: false`, the owner's choice), as
+  YouTube's prepaid years are. The card doesn't say what follows; its terms continue a fixed term monthly, or for
+  another term, as the offer says, and the plans' notes say so. Its help article "Informatie over onze pakketten" still
+  lists a 12-month contract paid monthly that the cards no longer sell. Its account form
+  (viaplay.com/checkout/register/<package>, after "Koop nu") loads without signing in; read its fields only.
 - **Odysee's Premium** (M11.15): odysee.com/$/premium asks you to sign up first, so its help centre's Premium article
   (help.odysee.tv/premium) is the page that prices it, in a bare "$" (its terms count in "USD"). The help centre's
   sitemap.xml lists every article (account deletion, memberships, the payments chart).
