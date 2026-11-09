@@ -14,6 +14,9 @@
 # Bundles: none on its pages. Resellers: none; its help centre's telecom providers (in the Netherlands and Spain among
 # others) sell it in their own bundles, partners, not resellers.
 
+# Coverage: skyshowtime.* in AL, AD, BA, BG, HR, CZ, DK, FI, HU, ME, MK, NO, PL, PT, RO, RS, SK, SI and SE: sold there,
+# but outside the catalog's countries, so not read (the owner's choice of 2026-11-04: the Netherlands and Spain only).
+
 id: skyshowtime
 name: SkyShowtime
 aliases: [sky showtime]
