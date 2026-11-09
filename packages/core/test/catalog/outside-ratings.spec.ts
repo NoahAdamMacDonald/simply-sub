@@ -471,6 +471,10 @@ describe('ownerCitation', () => {
     ['Bucharest, Romania', 'RO', true],
     ['Minato-ku, Tokyo, Japan', 'JP', true],
     ['Bucharest, Romania', 'SE', false],
+    // Videoland's, on Viaplay's Dutch help centre (M11.15): the Netherlands' own name.
+    ['Videoland, een van de toonaangevende streaming- en tv-aanbieders van Nederland', 'NL', true],
+    ['a Dutch broadcaster', 'NL', true],
+    ['Nederlandse', 'BE', false],
   ] as const)('reads "%s" as naming %s: %s', (text, code, named) => {
     expect(namesCountry(text, code)).toBe(named);
   });

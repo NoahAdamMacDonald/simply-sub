@@ -378,7 +378,8 @@
   source: wikidata
   wikidata: Q102046570
   sitelinks: 33
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: bilibili
   name: Bilibili
   website: https://www.bilibili.com
@@ -798,7 +799,8 @@
   source: wikidata
   wikidata: Q111385238
   sitelinks: 16
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: zee5
   name: ZEE5
   website: https://www.zee5.com
@@ -875,7 +877,8 @@
   source: wikidata
   wikidata: Q18246842
   sitelinks: 14
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: pluto-tv
   name: Pluto TV
   website: https://pluto.tv

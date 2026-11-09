@@ -366,7 +366,8 @@ function labelProblem(key: string, registry: FeatureRegistry, ids: CatalogIds): 
  * warning, not an error. Their files' comments name the pages that were silent. M11.9 inferred ESPN Select's and ICI
  * RDI's from pages that bear on them (`inferred`); RDS's and TSN's pages give no reason to infer any, no Rumble page
  * says how many streams Premium plays at once, and no Italian page names the video quality of discovery+'s Italian plans
- * (M11.15, the owner's choices of 2026-11-04).
+ * (M11.15, the owner's choices of 2026-11-04). Odysee's Premium article names neither tier's video quality, streams or
+ * ads, and its Premium page is behind its sign-up (the owner's choice of 2026-11-09).
  */
 export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = new Map([
   ['rds.standard', ['video.quality']],
@@ -376,6 +377,8 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['discovery-plus.intrattenimento-con-pubblicita', ['video.quality']],
   ['discovery-plus.intrattenimento', ['video.quality']],
   ['discovery-plus.intrattenimento-sport', ['video.quality']],
+  ['odysee.premium', ['video.quality', 'streaming.concurrent-streams', 'ad-free']],
+  ['odysee.premium-plus', ['video.quality', 'streaming.concurrent-streams', 'ad-free']],
 ]);
 
 /**

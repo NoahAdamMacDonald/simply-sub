@@ -1,0 +1,322 @@
+# Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 3, part 3), read with Edge from Canada: Odysee
+# Premium, "a way to support Odysee directly in exchange for exclusive benefits". Its Premium page (odysee.com/$/premium)
+# asks you to sign up first, so its help centre's Premium article is the page that prices it: "The standard premium tier
+# is charged yearly, at 99 cents per month, for a total of $11.89. Premium+ can be charged monthly at $2.99, or yearly at
+# $32.89.", in US dollars (its terms count in "USD"), one price for everywhere.
+# Region checklist, 2026-11-09: one US-dollar price on its help page for every country; the plan picker is behind the
+# sign-up, so no regional prices to find.
+# Bundles: none on its pages. Resellers: none.
+
+id: odysee
+name: Odysee
+website: https://odysee.com
+# Its help centre.
+domains: [odysee.tv]
+category: streaming
+spendCategory: streaming
+billingCurrency: { GLOBAL: USD }
+# No page says how to cancel Premium: its Premium article calls it "a membership", and its help centre's "Canceling a
+# Membership" (for creators' memberships) is the nearest page.
+cancelUrl: https://help.odysee.tv/category-memberships/category-donorportal/canceling/
+sources: { pricing: https://help.odysee.tv/premium/ }
+# Payment methods, read 2026-11-09: no page lists the ways to pay for Premium (its Premium page is behind the sign-up);
+# its privacy policy says ordering may ask for credit card details, and its help centre's payments chart processes
+# creators' memberships through Stripe.
+paymentMethods:
+  - methods: [card]
+    page: 'Privacy Policy'
+    url: https://odysee.com/$/privacypolicy
+    quotes:
+      - 'When ordering or registering on our site, as appropriate, you may be asked to enter your name, email address, mailing address, phone number, credit card information or other details'
+
+# Owner (M11.2), read 2026-11-09 in its terms (the company they're with). Where it is: its terms give no address of
+# Odysee Inc.'s own, so the US comes from its copyright agent's, Space Odysee Inc. in New York, the address its privacy
+# policy also gives; its help centre's footer names Odysee Holdings, Inc.
+owner:
+  name: 'Odysee Inc.'
+  page:
+    name: 'Terms of Service'
+    url: https://odysee.com/$/tos
+  quotes:
+    - '(collectively, our “Services" ) of Odysee Inc.'
+  country:
+    code: US
+    page:
+      name: 'Terms of Service'
+      url: https://odysee.com/$/tos
+    quotes:
+      - '171 Madison Avenue Room 601 New York City, NY, USA 10016'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+
+# Renewal day (M11.5), read 2026-11-09: its Premium article says only that each tier is "charged yearly" or "charged
+# monthly", and its terms don't mention Premium.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://help.odysee.tv/premium/]
+  lastVerified: 2026-11-09
+
+# Perks (M11.6): what its Premium article lists, in its words, for both tiers.
+perks:
+  - id: early-access-features
+    name: 'Exclusive and early access features: recommended content, homepage customization, links and images in comments'
+  - id: verification
+    name: Automatically eligible for verification
+  - id: premium-badge
+    name: A Premium badge on one channel
+
+# Features, read 2026-11-09: its Premium article names neither tier's video quality, streams or ads, and its Premium
+# page is behind its sign-up, so both plans wait in core's awaitingRequiredFeatures for all three (the owner's choice of
+# 2026-11-09); until then they show the same perks at different prices. No page names profiles or downloads.
+plans:
+  - id: odysee.premium
+    name: Premium
+    link: https://help.odysee.tv/premium/
+    features: {}
+    perks: [early-access-features, verification, premium-badge]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 11.89,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://help.odysee.tv/premium/,
+        }
+  - id: odysee.premium-plus
+    name: Premium+
+    link: https://help.odysee.tv/premium/
+    features: {}
+    perks: [early-access-features, verification, premium-badge]
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://help.odysee.tv/premium/,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 32.89,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://help.odysee.tv/premium/,
+        }
+
+# Terms and policies, read 2026-11-09 (M11.15): its Terms of Service ("Last Updated: February 2025"), its Privacy Policy
+# ("Last edited on 2025-02-13") and its help centre's articles on Premium, creating an account and deleting it. Its
+# terms don't mention Premium.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://odysee.com/$/tos
+    - name: 'Privacy Policy'
+      url: https://odysee.com/$/privacypolicy
+    - name: 'Odysee Premium'
+      url: https://help.odysee.tv/premium/
+    - name: 'Creating an account'
+      url: https://help.odysee.tv/category-basics/category-accountcreation/accountcreation/
+    - name: 'Deleting your account'
+      url: https://help.odysee.tv/category-basics/deletingyouraccount/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what you do to tailor what it shows you and studies how its site is used; you can only limit that in each browser’s cookie settings.'
+      sources:
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'To personalize your experience and to allow us to deliver the type of content and product offerings in which you are most interested.'
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'Compile aggregate data about site traffic and site interactions in order to offer better site experiences and tools in the future.'
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'You do this through your browser settings.'
+      action:
+        name: 'Its privacy policy'
+        url: https://odysee.com/$/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Google’s ad cookies on its site follow you, it gives other companies data about visitors for marketing, and it may pass on your personal information once it has told you. Opting out is browser by browser.'
+      sources:
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'We do not sell, trade, or otherwise transfer to outside parties your Personally Identifiable Information unless we provide users with advance notice.'
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'However, non-personally identifiable visitor information may be provided to other parties for marketing, advertising, or other uses.'
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'Google, as a third-party vendor, uses cookies to serve ads on our site.'
+      action:
+        name: 'Its privacy policy'
+        url: https://odysee.com/$/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Google’s ads on its site are picked from your visits there and to other sites. You can turn that off only browser by browser, in Google’s settings or with Do Not Track.'
+      sources:
+        - url: https://odysee.com/$/privacypolicy
+          quote: "Google's use of the DART cookie enables it to serve ads to our users based on previous visits to our site and other sites on the Internet."
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'Users can set preferences for how Google advertises to you using the Google Ad Settings page.'
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'We honor Do Not Track signals and Do Not Track, plant cookies, or use advertising when a Do Not Track (DNT) browser mechanism is in place.'
+      action:
+        name: 'Its privacy policy'
+        url: https://odysee.com/$/privacypolicy
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you upload or write trains AI.'
+      pages: [https://odysee.com/$/privacypolicy, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say how long it keeps your information.'
+      pages: [https://odysee.com/$/privacypolicy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You ask for your account to be deleted in its settings, after removing your content yourself, with no stated time, and what you publish stays on its blockchain.'
+      sources:
+        - url: https://help.odysee.tv/category-basics/deletingyouraccount/
+          quote: 'Currently the account deletion is partly a manual process.'
+        - url: https://help.odysee.tv/category-basics/deletingyouraccount/
+          quote: 'You can remove all content from your account and send an account deletion request using the "Delete Account" option from the Settings'
+        - url: https://odysee.com/$/tos
+          quote: 'We are not able to delete or remove Content that has been published through Odysee and that may be accessible via the Services.'
+      action:
+        name: 'Deleting your account'
+        url: https://help.odysee.tv/category-basics/deletingyouraccount/
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy and help centre don’t say you can get a copy of your data.'
+      pages: [https://odysee.com/$/privacypolicy]
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It releases information when that’s appropriate to comply with the law, enforce its policies or protect rights and safety, and says nothing more.'
+      sources:
+        - url: https://odysee.com/$/privacypolicy
+          quote: "We may also release information when it's release is appropriate to comply with the law, enforce our site policies, or protect ours or others' rights, property or safety."
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say where your information is kept.'
+      pages: [https://odysee.com/$/privacypolicy]
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password, and confirm the email; Premium adds your payment details.'
+      sources:
+        - url: https://help.odysee.tv/category-basics/category-accountcreation/accountcreation/
+          quote: "On the sign-up screen, you'll enter an email and a password."
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13 or older, and under 18 only with a parent’s supervision. It doesn’t say it keeps its ads and their tracking away from teenagers.'
+      sources:
+        - url: https://odysee.com/$/tos
+          quote: 'You must be at least 13 years of age to access or use our Services.'
+        - url: https://odysee.com/$/tos
+          quote: 'If you are under 18 years of age (or the age of legal majority where you live), you may only access or use our Services under the supervision of a parent or legal guardian who agrees to be bound by these Terms.'
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It scans its site for known flaws and promises to email you within 7 business days of a breach, but names no independent audit or way to report a security flaw.'
+      sources:
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'Our website is scanned on a regular basis for security holes and known vulnerabilities in order to make your visit to our site as safe as possible.'
+        - url: https://odysee.com/$/privacypolicy
+          quote: 'We will notify you via email: Within 7 business days'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      status: not-stated
+      reason: 'Its terms and Premium article don’t say how to cancel Premium; its help centre explains only cancelling a creator’s membership.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: poor
+      reason: 'It gives no refunds for Premium, and doesn’t say you keep it to the end of the period you paid for.'
+      sources:
+        - url: https://help.odysee.tv/premium/
+          quote: 'Refunds are not available'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms and Premium article don’t say how it changes Premium’s price or whether it tells you first.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its Premium article and terms describe no free trial, and its Premium page, behind the sign-up, wasn’t read.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its Premium article says each tier is charged monthly or yearly, but not that it reminds you before a renewal.'
+      pages: [https://help.odysee.tv/premium/]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and Premium article don’t say whether anything is added to the price.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: bad
+      reason: 'You can’t move between Premium and Premium+, so changing means ending one and buying the other, and it gives no refunds.'
+      sources:
+        - url: https://help.odysee.tv/premium/
+          quote: 'You cannot upgrade or downgrade a membership at this time.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to private arbitration in Delaware, one person at a time, with no class actions and no way to opt out; only small claims court is left.'
+      sources:
+        - url: https://odysee.com/$/tos
+          quote: 'Instead, you and the Company will arbitrate Disputes through binding arbitration'
+        - url: https://odysee.com/$/tos
+          quote: 'Any Dispute arising out of or related to these Terms or the Services is personal to you and the Company and will be resolved solely through individual arbitration and will not be brought as a class arbitration, class action or any other type of representative proceeding.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, and using Odysee afterwards means you accept them.'
+      sources:
+        - url: https://odysee.com/$/tos
+          quote: 'If we make changes to these Terms, we will provide notice of such changes by posting the revised Terms to the Services and updating the “Last Updated" date at the top of these Terms.'
+        - url: https://odysee.com/$/tos
+          quote: 'Your continued use of the Services following our provision of any such notice will confirm your acceptance of the revised Terms.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your access at its sole discretion, without notice, and says nothing of a refund.'
+      sources:
+        - url: https://odysee.com/$/tos
+          quote: 'we reserve the right, without notice and in our sole discretion, to terminate this agreement or suspend your right to access the Services.'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'Its terms and Premium article don’t say how it may change Premium or what it includes.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms and Premium article don’t say who can use your Premium.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages name no limits on devices or downloads.'
+      pages: [https://help.odysee.tv/premium/, https://odysee.com/$/tos]
+      lastVerified: 2026-11-09
