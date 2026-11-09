@@ -534,7 +534,8 @@
   source: wikidata
   wikidata: Q15913890
   sitelinks: 26
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: bitwarden
   name: Bitwarden
   website: https://bitwarden.com
