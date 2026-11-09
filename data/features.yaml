@@ -74,6 +74,43 @@
     - { id: sports, name: Live sports, aliases: [sports streaming, live games] }
   aliases: [live broadcasts]
 
+# ── Music (M11.15, the owner's choice of 2026-11-09) ───────────────────────────
+# From Spotify's, Apple Music's, YouTube Music's, Deezer's and SoundCloud's plan pages, read 2026-11-09. Audio quality
+# is the best a plan streams: Standard is lossy below 256 kbps; High lossy at 256 to 320 kbps ("High quality audio");
+# Lossless up to 48 kHz (CD quality, and Spotify's "24-bit/44.1 kHz"); Hi-Res Lossless above 48 kHz (Apple Music's
+# "48kHz to 192kHz"). Dolby Atmos (Apple's Spatial Audio) and People included are reused.
+- id: audio.quality
+  name: Audio quality
+  category: music
+  type: enum
+  values:
+    - { id: standard, name: Standard }
+    - { id: high, name: High (256 to 320 kbps), aliases: [high quality, 320 kbps] }
+    - { id: lossless, name: Lossless, aliases: [hifi, hi-fi, flac, cd quality], headline: true }
+    - id: hi-res
+      name: Hi-Res Lossless
+      aliases: [hi-res, high resolution, max quality]
+      headline: true
+  aliases: [sound quality, bitrate]
+  requiredIn: [music]
+- id: music.on-demand
+  name: Play any song
+  category: music
+  type: boolean
+  aliases: [on demand, pick and play, play in any order]
+  requiredIn: [music]
+- id: music.offline
+  name: Offline listening
+  category: music
+  type: boolean
+  aliases: [download music, offline mode]
+  requiredIn: [music]
+- id: audiobooks.included
+  name: Audiobooks included
+  category: music
+  type: boolean
+  aliases: [audiobook hours, audiobook credits]
+
 # ── VPN ────────────────────────────────────────────────────────────────────────
 - id: vpn.included
   name: VPN
@@ -609,7 +646,7 @@
   category: general
   type: boolean
   aliases: [no ads, ad free, without ads]
-  requiredIn: [streaming]
+  requiredIn: [streaming, music]
 - id: platforms
   name: Platforms
   category: general
