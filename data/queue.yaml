@@ -876,7 +876,8 @@
   source: wikidata
   wikidata: Q18246842
   sitelinks: 14
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: pluto-tv
   name: Pluto TV
   website: https://pluto.tv
