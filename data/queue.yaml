@@ -431,7 +431,8 @@
   source: wikidata
   wikidata: Q19711013
   sitelinks: 31
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: yahoo-mail
   name: Yahoo! Mail
   website: https://mail.yahoo.com
