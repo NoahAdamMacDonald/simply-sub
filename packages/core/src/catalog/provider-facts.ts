@@ -194,7 +194,8 @@ const countryWrittenAs: Readonly<Record<string, string>> = {
   CH: 'Swiss|Suisses?',
   SE: 'Swedish|Suédois(?:es?)?',
   RO: 'Romanian|Roumaine?s?',
-  GB: 'UK|U\\.K\\.|British|Britannique',
+  // Its nations too, as a US state names the US: Mixcloud's terms say "incorporated in England" (M11.15).
+  GB: 'UK|U\\.K\\.|British|Britannique|(?<!New\\s)England|Scotland|Wales|Northern Ireland|Angleterre|[ÉE]cosse|Pays de Galles|Irlande du Nord',
   // Its own name too: Viaplay's Dutch help centre names Videoland's country only in Dutch (M11.15).
   NL: 'Dutch|Néerlandaise?s?|Nederland(?:se)?',
 };
