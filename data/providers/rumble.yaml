@@ -72,7 +72,28 @@ features:
 # devices, so 1 (inferred); video quality: creators upload "with up to 4K quality", so 4K (inferred). No page says how
 # many streams play at once: the plan is in core's awaitingRequiredFeatures (the owner's choice of 2026-11-04). No
 # profiles or Kids profiles (no one under 18 may use it).
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): Rumble's videos and live streams play
+# without Premium, which its terms define as "programmatic advertisement-free Content" ("pre-roll video advertisements"
+# and "mid-roll video advertisements"), so the free site has those ads. No page states the video quality or streams of a
+# viewer without Premium, so it waits in core's awaitingRequiredFeatures.
 plans:
+  - id: rumble.free
+    name: Free
+    link: https://rumble.com/
+    features:
+      ad-free: false
+    notes: Its videos and live streams, with pre-roll and mid-roll ads.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://rumble.com/s/terms,
+        }
   - id: rumble.premium
     name: Premium
     link: https://rumble.com/premium

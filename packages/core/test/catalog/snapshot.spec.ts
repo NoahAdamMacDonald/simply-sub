@@ -108,6 +108,7 @@ describe('buildCatalogData', () => {
       'category',
       'spendCategory',
       'paymentMethods',
+      'freeUse',
       'billingCurrency',
       'cancelUrl',
       'plans',

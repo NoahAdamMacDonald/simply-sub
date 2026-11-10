@@ -377,8 +377,17 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['discovery-plus.intrattenimento-con-pubblicita', ['video.quality']],
   ['discovery-plus.intrattenimento', ['video.quality']],
   ['discovery-plus.intrattenimento-sport', ['video.quality']],
-  ['odysee.premium', ['video.quality', 'streaming.concurrent-streams', 'ad-free']],
-  ['odysee.premium-plus', ['video.quality', 'streaming.concurrent-streams', 'ad-free']],
+  ['odysee.free', ['video.quality', 'streaming.concurrent-streams']],
+  ['odysee.premium', ['video.quality', 'streaming.concurrent-streams']],
+  ['odysee.premium-plus', ['video.quality', 'streaming.concurrent-streams']],
+  ['youtube.free', ['streaming.concurrent-streams']],
+  ['viki.free', ['streaming.concurrent-streams']],
+  ['rumble.free', ['video.quality', 'streaming.concurrent-streams']],
+  ['ici-tou-tv.free', ['streaming.concurrent-streams']],
+  ['zee5.free', ['video.quality', 'streaming.concurrent-streams']],
+  ['dazn.free', ['streaming.concurrent-streams']],
+  ['amazon-prime-video.free', ['video.quality', 'streaming.concurrent-streams']],
+  ['apple-music.radio', ['audio.quality']],
 ]);
 
 /**

@@ -141,7 +141,80 @@ features:
 # events" (its Ad Free article): an add-on can't add to a plan's features here. The US differs: "up to four different
 # titles" at once, and 4K and Dolby Atmos only with Prime Video Ultra, which streams "up to five" (Amazon's US help),
 # as the notes say. Amazon Prime includes Prime Video sold alone.
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): those channels and more, with no
+# membership. Amazon's "What you need to know about Prime Video", read 2026-11-09: "All customers, regardless of whether
+# they have a Prime membership, can access programming via Prime Video subscriptions ... as well as more than 1,000 free
+# ad-supported (FAST) Channels in the U.S., UK, Germany, Austria, France, Italy, and Spain. They can also rent or buy
+# titles, and enjoy even more content for free with ads." So it's priced in those of the catalog's countries. No page
+# states the video quality or streams of what's free, so it waits in core's awaitingRequiredFeatures.
 plans:
+  - id: amazon-prime-video.free
+    name: Free with ads
+    link: https://www.primevideo.com/
+    features:
+      ad-free: false
+    notes: More than 1,000 free ad-supported channels, and other titles free with ads, for any Amazon customer in the US, the UK, Germany, France, Italy and Spain.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
   - id: amazon-prime-video.amazon-prime
     name: Amazon Prime
     link: https://www.amazon.ca/amazonprime

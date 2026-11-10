@@ -250,6 +250,13 @@ renewalAnchor:
     - 'If your billing date does not occur on the last day of each month (for example, the 31st), you will be billed on the last day of that month instead.'
   lastVerified: 2026-11-02
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plans article lists paid
+# plans only.
+freeUse:
+  kind: none
+  pages: [https://help.netflix.com/en/node/24926]
+  lastVerified: 2026-11-09
+
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: smart TVs and
 # streaming players, Android, iPhone and iPad, the Netflix app for Windows, netflix.com in a browser (a Mac's way),
 # PlayStation and Xbox (node 14361); a password, or the sign-in codes and links it sends "to your email address or phone

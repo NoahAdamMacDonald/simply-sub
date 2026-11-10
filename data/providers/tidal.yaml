@@ -80,6 +80,13 @@ renewalAnchor:
     - 'Tidal subscription fees are charged every 30 days rather than on a set date each month.'
   lastVerified: 2026-11-09
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its help centre's "Subscription
+# Types" lists Individual, Family and DJ only; its free tier of 2021 is gone.
+freeUse:
+  kind: none
+  pages: [https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types]
+  lastVerified: 2026-11-09
+
 perks:
   - id: dj-software
     name: Access the full catalog through compatible DJ software

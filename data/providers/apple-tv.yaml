@@ -95,6 +95,14 @@ renewalAnchor:
     - https://support.apple.com/en-ca/118428
   lastVerified: 2026-11-04
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: only a trial ("7 days free,
+# then $14.99/month"); its "Watch Premieres for Free" row is a few series' first episodes, a sample rather than a way to
+# use it free.
+freeUse:
+  kind: none
+  pages: [https://tv.apple.com/ca]
+  lastVerified: 2026-11-09
+
 # Apps and sign-in (the cross-category features), read 2026-11-04: the Apple TV app "on your Apple devices, smart TVs,
 # web and more" (tv.apple.com/ca: iPhone, iPad, Mac & Windows, Apple Vision Pro, Android and the web, and Samsung, LG,
 # Roku, Fire TV, Google TV, PlayStation, Xbox and others); an Apple Account's password, with a "six-digit verification

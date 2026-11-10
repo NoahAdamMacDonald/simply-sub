@@ -23,7 +23,7 @@ name: DAZN
 website: https://www.dazn.com
 category: streaming
 spendCategory: streaming
-billingCurrency: { CA: CAD, US: USD }
+billingCurrency: { CA: CAD, US: USD, GLOBAL: USD }
 cancelUrl: https://www.dazn.com/en-CA/help/articles/16391473315101-terms-conditions
 sources: { pricing: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing }
 notes: Canada's and the US's prices; its other countries sell lineups of their own, not read in yet.
@@ -77,7 +77,38 @@ perks:
 # Ultimate "Watch on 3 devices at the same time" and Multiview, with downloads "available on Standard & Ultimate" (its
 # Ultimate article), on no stated number of devices, so 1, inferred. No plan is ad-free: Ultimate has only "No
 # Pre-roll Ads", and its live broadcasts carry their own. No profiles. The US's monthly plan streams on one device.
+# Free (2026-11-09, the owner's item: services used free, with ads or limits; the owner's ladder that day: the
+# provider's own page, then several third parties or a recent archive copy, then an older archive copy or one third
+# party): its help centre's "Free-Offer" article, which help.dazn.com now sends to a sign-in and dazn.com won't show
+# this machine, read in the Internet Archive's copy of 2025-10-10 (Canada's): "DAZN has launched a new and free option
+# that gives sports fans free access to selected content within the DAZN app" and "all you have to do is register with
+# DAZN and you can watch selected live events, highlights and non-live content without an additional subscription".
+# Still offered in 2026, by two third parties read that day: TechRadar's "Is DAZN free?" (last updated 2026-03-31: "its
+# own free ad-supported tier, which it began rolling out globally in early 2024" and "The free tier allows new and
+# existing customers to access selected content without the need to pay for an account") and CableTV's DAZN review
+# (2026-06-09: "the service does offer a free tier that gives you access to the newly integrated FIFA+ platform, Red
+# Bull TV content, weekly boxing build-up events, and select live coverage without requiring payment information"). Its
+# video quality is every programme's (above); no page says how many streams play at once, so it waits in core's
+# awaitingRequiredFeatures.
 plans:
+  - id: dazn.free
+    name: DAZN Free
+    link: https://www.dazn.com/
+    features:
+      video.quality: 1080p
+      ad-free: false
+    notes: Selected live events, highlights and on-demand programmes, with ads, for anyone with a DAZN account. What's free depends on the country and DAZN's rights.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://help.dazn.com/hc/en-ca/articles/16738769256733-Free-Offer,
+        }
   - id: dazn.standard
     name: DAZN Standard
     link: https://www.dazn.com/en-CA/help/articles/16184063399709-DAZN-plans-and-pricing

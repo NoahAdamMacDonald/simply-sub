@@ -65,14 +65,36 @@ perks:
   - id: premium-badge
     name: A Premium badge on one channel
 
-# Features, read 2026-11-09: its Premium article names neither tier's video quality, streams or ads, and its Premium
-# page is behind its sign-up, so both plans wait in core's awaitingRequiredFeatures for all three (the owner's choice of
-# 2026-11-09); until then they show the same perks at different prices. No page names profiles or downloads.
+# Features, read 2026-11-09: its Premium article names neither tier's video quality or streams, and its Premium page
+# is behind its sign-up, so both plans wait in core's awaitingRequiredFeatures for them (the owner's choice of
+# 2026-11-09); until then they show the same perks at different prices. No page names profiles or downloads. Ads: none
+# for anyone, from its own channel's "NO MORE ADS" (odysee.com, 2024-08-05: "Starting today, we're removing all ads."),
+# read 2026-11-09, so every plan is ad free.
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): watching Odysee needs no Premium, and has
+# no ads since that post. It waits for the same two features as Premium.
 plans:
+  - id: odysee.free
+    name: Free
+    link: https://odysee.com/
+    features:
+      ad-free: true
+    notes: Its videos and live streams, with no ads; Premium adds the perks.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://odysee.com/@Odysee:8/nomoreads:f,
+        }
   - id: odysee.premium
     name: Premium
     link: https://help.odysee.tv/premium/
-    features: {}
+    features:
+      ad-free: true
     perks: [early-access-features, verification, premium-badge]
     prices:
       - {
@@ -88,7 +110,8 @@ plans:
   - id: odysee.premium-plus
     name: Premium+
     link: https://help.odysee.tv/premium/
-    features: {}
+    features:
+      ad-free: true
     perks: [early-access-features, verification, premium-badge]
     prices:
       - {

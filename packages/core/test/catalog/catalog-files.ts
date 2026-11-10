@@ -124,8 +124,9 @@ const streaming = {
 };
 
 /**
- * Who owns a provider, how it can be paid and the day it renews on (M11.2, M11.5), from its own pages: every provider
- * says, and every one whose paid plans renew by the month or year.
+ * Who owns a provider, how it can be paid, the day it renews on (M11.2, M11.5) and that it has no free use (2026-11-09),
+ * from its own pages: every provider says, every one whose paid plans renew by the month or year, and every one with no
+ * free plan.
  */
 function facts(owner: string, site: string, methods: Provider['paymentMethods'] = undefined) {
   return {
@@ -145,7 +146,13 @@ function facts(owner: string, site: string, methods: Provider['paymentMethods'] 
       },
     ],
     renewalAnchor: renewsOnSignUp(site),
+    freeUse: noFreeUse(site),
   };
+}
+
+/** No free use, from its plans page (2026-11-09): every provider without a free plan says. */
+export function noFreeUse(site: string): NonNullable<Provider['freeUse']> {
+  return { kind: 'none', pages: [`${site}/plans`], lastVerified: '2026-10-20' };
 }
 
 /** A renewal day on the date the buyer signed up, as most providers say (M11.5). */
@@ -244,6 +251,7 @@ const mullvad = {
   category: 'vpn',
   spendCategory: 'software',
   billingCurrency: { GLOBAL: 'EUR' },
+  freeUse: noFreeUse('https://mullvad.net'),
   owner: {
     name: 'Mullvad VPN AB',
     page: { name: 'About Mullvad', url: 'https://mullvad.net/en/about' },

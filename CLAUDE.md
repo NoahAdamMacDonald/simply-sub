@@ -76,7 +76,9 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
 - Payment page (Phase 4): manual cards with network, credit/debit, flat cash-back %, FX fee %, optional monthly limit. Never store card numbers. Cards are filtered by the provider's `acceptedNetworks`.
 - Automation is Cloudflare-first (Workers Builds, a Cron Worker bot, Workflows, Workers AI). The catalog stays in Git and the bot only opens PRs.
 - Every list item counts toward totals, including duplicate plans (lists can be per family member).
-- Catalog scope: personal and family plans. A free plan has one price with amount 0 and creates no charges.
+- Catalog scope: personal and family plans. A free plan has one price with amount 0 (one per country when only some
+  countries have it) and creates no charges. Free use a provider's pages offer (with ads or limits) is a free plan; a
+  provider with none says so in `freeUse`, with the pages read (BLUEPRINT §4.3).
   Business and per-seat plans are out of scope for v1.
 - A provider's all-in-one plans (Proton Unlimited, Duo, Family) are suite plans: normal plans with their own
   features and `includes-subscription`, not bundles. Bundle files are only for deals whose features are exactly

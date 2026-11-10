@@ -409,7 +409,9 @@ one canonical feature describes the same capability across every provider, whate
    Needed or higher (section 10.2), and a suggestion that rests on one names its source. Settings' "Use third-party
    claims" (on by default, `skipThirdParty` when off, on each device) leaves them out everywhere: the app reads the
    catalog without them (core's `withoutThirdParty`), so cards show those features as not stated and Search, ranking
-   and the optimizer never count them.
+   and the optimizer never count them. The one price third parties may settle is that a free tier exists, when the
+   provider's own pages can't be read (the owner's ladder of 2026-11-09, section 14: its own page, then several third
+   parties or a recent archive copy, then an older archive copy or one third party).
 
 **Ranked perks** (M11.6, the owner's choice on 2026-10-30). A provider lists its perks once, with ids
 (`perks: [{ id: fortnite-crew, name: Fortnite Crew passes }]`), and each plan lists the ids it has. Each perk is a
@@ -569,6 +571,8 @@ sources: { pricing: https://help.netflix.com/en/node/24926 }
 # Optional and left out here: aliases, domains (its other sites, section 4.9), availableIn (section 4.7), cancelFee
 # (text), notes, resellers (section 4.9), features (its provider-wide ones, section 4.2 rule 9:
 # `features: { platforms: [web, android, ios, tv] }`, which every plan has unless it states its own).
+# Free use (2026-11-09): what its pages offer free, with ads or limits, is a plan with a price of 0; a provider with
+# none says `freeUse: { kind: none, pages: [<its plans page>], lastVerified }`, which validation requires.
 # Optional fields are
 # omitted, never empty or null.
 
@@ -3724,6 +3728,25 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-09, free use)**
+- **The audit:** every provider without a free plan was read for free use, its help centre and home page as well as
+  its plans page. Free plans added: YouTube (YouTube and YouTube Music with ads), Odysee (no ads for anyone since its
+  "NO MORE ADS" post of 2024-08-05, which made its Premium plans ad free too), Viki ("certain content with ads and SD
+  quality"), ICI TOU.TV (« l'offre gratuite », with ads), Rumble (its terms' "programmatic" ads), ZEE5 (FREE5), DAZN
+  (DAZN Free), Prime Video (free ad-supported channels and titles in the US, the UK, Germany, France, Italy and Spain,
+  a price of 0 in each) and Apple Music (Apple Music Radio). Their required features no page states wait in core's
+  `awaitingRequiredFeatures`. None for the other 20, among them Crunchyroll, whose ad-supported tier ended on
+  2025-12-31, and Apple TV, whose free premieres are a sample.
+- **The check** (the owner's choice of the proposals): a provider with no free plan records `freeUse: { kind: none,
+  pages, lastVerified }`, the pages read on its own sites, which `data:validate` requires (and refuses beside a free
+  plan); the extraction asks for it and drops it beside a free plan, and the batch review's "Free use" line says
+  which, or that the draft says neither. Validation can't read pages, so the pipeline is where free use is found.
+- **Third parties fill gaps** (the owner's ladder that day): when a provider's own pages can't be read, whether it's
+  free goes by its own page first, then several third parties or a recent archive copy, then an older archive copy
+  or one third party. DAZN's free tier rests on its archived help article of 2025-10-10 and two third parties of 2026;
+  Crunchyroll's end on two third parties. Section 4.2 rule 12 still holds for features: a third party never gives a
+  price but this one, that a free tier exists.
 
 **Resolved (2026-11-09, tax marked as included)**
 - **The audit:** three providers use `taxIncluded`: Bitdefender (163 prices), Mullvad's own five and ProxyStore's seven

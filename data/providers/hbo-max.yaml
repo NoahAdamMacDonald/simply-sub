@@ -83,6 +83,13 @@ renewalAnchor:
     - https://help.hbomax.com/us-en/Answer/Detail/000002556
   lastVerified: 2026-11-04
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plans pages sell paid plans
+# only.
+freeUse:
+  kind: none
+  pages: [https://help.hbomax.com/us-en/Answer/Detail/000002547]
+  lastVerified: 2026-11-09
+
 # Features, read 2026-11-04 through a US exit ("What's included with each plan?"): Basic with Ads and Standard "Stream
 # on 2 devices at once" in "Full HD 1080p"; Premium "Stream on 4 devices at once (only 2 for sports)", "4K Ultra HD
 # video quality (as available)" and "Dolby Atmos immersive audio (as available)"; downloads "30" on Standard and 100 on

@@ -258,6 +258,27 @@ export const renewalAnchorSchema = z
 export type RenewalAnchor = z.infer<typeof renewalAnchorSchema>;
 
 /**
+ * Whether a provider can be used free (the owner's item of 2026-11-09): free use its own pages offer, with ads or
+ * limits, is a plan with a price of 0; a provider with none says so here, with the pages read, so every provider has
+ * answered. A free trial that turns into a paid plan isn't free use.
+ */
+export const freeUseSchema = z
+  .strictObject({
+    kind: z
+      .literal('none')
+      .describe('Its own pages offer no free use: only paid plans, or a trial that turns into one'),
+    pages: z
+      .array(httpsUrlSchema)
+      .min(1, 'List the pages read')
+      .describe(
+        "The pages read that offer none: its plans page, its help centre, on its own sites, its policies' or its owner's",
+      ),
+    lastVerified: isoDateSchema.describe('When the pages were read'),
+  })
+  .superRefine((free, ctx) => addDuplicateIssues(ctx, free.pages, (index) => ['pages', index]));
+export type FreeUse = z.infer<typeof freeUseSchema>;
+
+/**
  * Where a provider's source code is (M11.5, with software.open-source): the repository, or the account holding its
  * repositories, as the provider's own page links it, with that page's words saying the code is open.
  */
@@ -521,6 +542,11 @@ export const providerSchema = z
     renewalAnchor: renewalAnchorSchema
       .describe(
         'The day it renews on (M11.5), quoted from its terms or billing help, or not-stated: every provider whose paid plans renew by the month or year says',
+      )
+      .optional(),
+    freeUse: freeUseSchema
+      .describe(
+        'That its own pages offer no free use, with the pages read: every provider without a free plan (a price of 0) says',
       )
       .optional(),
     billingCurrency: z

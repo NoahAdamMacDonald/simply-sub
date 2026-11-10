@@ -80,6 +80,13 @@ renewalAnchor:
     - 'Je kunt de betaaldatum alleen wijzigen naar de huidige datum.'
   lastVerified: 2026-11-09
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its pages sell Basic with ads
+# and Standard only.
+freeUse:
+  kind: none
+  pages: [https://viaplay.com/nl-nl/]
+  lastVerified: 2026-11-09
+
 # Apps (the cross-category features), read 2026-11-09 on its home page ("Viaplay is waar je bent"): Chromecast, Apple
 # TV, Android TV and smart TVs, PC and Mac in a browser, iPhone, iPad and Android, and PlayStation.
 features:

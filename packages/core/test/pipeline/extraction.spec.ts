@@ -166,6 +166,8 @@ function answer(more: object = {}) {
         ],
       },
     ],
+    // Its pages offer only paid plans, and an introductory price.
+    freeUse: 'none',
     ...more,
   });
 }
@@ -326,6 +328,40 @@ describe('draftFromAnswer', () => {
     expect(draft.provider?.plans.flatMap((plan) => plan.prices)).not.toContainEqual(
       expect.objectContaining({ taxIncluded: expect.anything() }),
     );
+  });
+
+  it('takes free use: a free plan, or none on its plans pages, and says when the answer gives neither', () => {
+    expect(draftFromAnswer(answer(), context()).provider?.freeUse).toEqual({
+      kind: 'none',
+      pages: ['https://www.streamco.example/plans'],
+      lastVerified: context().today,
+    });
+    const withFree = answer({
+      plans: [
+        { name: 'Free', prices: [price(0, 'Free: $0 / month')] },
+        { name: 'Standard', prices: [price(18.99, 'Standard: $18.99 / month')] },
+      ],
+    });
+    const freePage = {
+      ...context(),
+      pages: context().pages.map((page) =>
+        page.name === 'pricing' ? { ...page, text: `${page.text} Free: $0 / month.` } : page,
+      ),
+    };
+    const free = draftFromAnswer(withFree, freePage);
+    expect(free.provider?.plans.map((plan) => plan.name)).toEqual(['Free', 'Standard']);
+    expect(free.provider).not.toHaveProperty('freeUse');
+    expect(free.issues.filter(({ subject }) => subject === 'Free use')).toEqual([]);
+    const silent = draftFromAnswer(answer({ freeUse: undefined }), context());
+    expect(silent.provider).not.toHaveProperty('freeUse');
+    expect(silent.issues.filter(({ subject }) => subject === 'Free use')).toEqual([
+      {
+        kind: 'warning',
+        subject: 'Free use',
+        reason:
+          'No free plan, and no word that its pages offer none: look for free use (its help centre’s “Is it free?”) and add a free plan or freeUse by hand',
+      },
+    ]);
   });
 
   it('never keeps a first-term price, a business plan or an implausible amount', () => {

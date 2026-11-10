@@ -97,6 +97,11 @@ const dailyPlanet = {
     pages: ['https://www.dailyplanet.example.com/terms'],
     lastVerified: '2026-10-20',
   },
+  freeUse: {
+    kind: 'none',
+    pages: ['https://www.dailyplanet.example.com/subscribe'],
+    lastVerified: '2026-10-20',
+  },
   ratings: [
     {
       rater: 'bias-check',
@@ -348,9 +353,12 @@ describe('validateCatalog, for owners', () => {
     expect(messages(withRaters([[['owner', 'lastVerified'], '2026-10-24']]))).toEqual([
       `${planet} owner.lastVerified: 2026-10-24 is after today (2026-10-23)`,
     ]);
-    // The renewal days read the same day warn too (M11.5): the owners' are what this test is about.
+    // The renewal days and free use read the same day warn too (M11.5, 2026-11-09): the owners' are what this test is
+    // about.
     const owners = messages(withRaters([[['ratings'], undefined]]), '2027-10-21').filter(
-      (message) => !message.includes('renewalAnchor.lastVerified'),
+      (message) =>
+        !message.includes('renewalAnchor.lastVerified') &&
+        !message.includes('freeUse.lastVerified'),
     );
     expect(owners).toEqual(
       [

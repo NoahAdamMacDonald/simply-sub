@@ -63,6 +63,7 @@ export const bank = {
   id: 'example-bank',
   name: 'Example Bank',
   ...finance,
+  freeUse: { kind: 'none', pages: ['https://example.com/plans'], lastVerified: today },
   plans: [
     {
       id: 'example-bank.unlimited',

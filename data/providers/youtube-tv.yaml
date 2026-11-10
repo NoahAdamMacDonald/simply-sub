@@ -77,6 +77,13 @@ renewalAnchor:
     - 'The date of this charge will become your monthly billing date going forward.'
   lastVerified: 2026-11-04
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plans page sells paid plans
+# and a trial only.
+freeUse:
+  kind: none
+  pages: [https://tv.youtube.com/learn/explore-plans/]
+  lastVerified: 2026-11-09
+
 # Perks (M11.6): what tells its plans apart that no feature describes, in their words: the channel genres each plan
 # carries besides sports (the plans page's tabs: "Sports", "News", "Entertainment", "Family"), and "Unlimited DVR
 # space" on every plan.

@@ -37,6 +37,7 @@ search:
 # (help.openai.com). Amazon's stores (the owner's choice of 2026-11-09): their help pages answer the baseline reader with
 # 403 and amazon.it with 503; primevideo.com and aboutamazon.com read as usual. Tidal (2026-11-09, M11.15): tidal.com and
 # its help centre answer with 403, and tidal.com's pages show nothing even to a browser on an ordinary connection.
+# DAZN's old help centre (2026-11-09): help.dazn.com sends every reader to a sign-in; its articles moved to dazn.com.
 archived:
   [
     chatgpt.com,
@@ -51,4 +52,5 @@ archived:
     amazon.it,
     amazon.nl,
     tidal.com,
+    help.dazn.com,
   ]

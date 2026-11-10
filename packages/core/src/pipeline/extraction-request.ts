@@ -103,6 +103,9 @@ on its page word for word is thrown away.
 
 Plans and prices
 - Personal and family plans only. A business, team or per-seat plan is "business": true. A free plan has one price of 0.
+- Free use: when its pages offer the service free, with ads or limits ("watch with ads", "free with an account", "Free"
+  beside its plans), that's a plan with one price of 0, quoting those words. When they offer only paid plans or a trial
+  that turns into one, "freeUse": "none". Look in its help centre too ("Is it free?", "without a subscription").
 - The regular price: what the plan renews at. "$53.88 for the first year, then $83.88" is 83.88. A sale, introductory or
   first-term price alone is "regular": false. A struck-through price beside a lower one is usually the regular one.
 - The billing period as the page states it: monthly is month × 1, yearly is year × 1, quarterly is month × 3,

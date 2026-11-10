@@ -62,6 +62,13 @@ renewalAnchor:
     - 'In some cases, the timing of a recurring charge may change, such as if your payment method does not settle as expected or if your subscription began on a date not contained in a given month.'
   lastVerified: 2026-11-03
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its subscribe page sells its
+# plans and bundles only.
+freeUse:
+  kind: none
+  pages: [https://www.crave.ca/en/subscribe]
+  lastVerified: 2026-11-09
+
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: smart TVs and streaming devices, PlayStation and
 # Xbox, PC and Mac computers in a web browser, and Apple and Android phones and tablets (its device compatibility FAQ); a
 # Bell Media account's password ("How to sign in to Crave"); live chat and a phone line, every day from 9 a.m. to 11

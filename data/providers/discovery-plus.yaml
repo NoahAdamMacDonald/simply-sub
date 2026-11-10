@@ -77,6 +77,13 @@ renewalAnchor:
     - 'You will be billed in monthly intervals, based on the date when you signed up.'
   lastVerified: 2026-11-04
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its pages sell its paid plans
+# and a trial only.
+freeUse:
+  kind: none
+  pages: [https://www.discoveryplus.com/]
+  lastVerified: 2026-11-09
+
 # Apps (the cross-category features), read 2026-11-04: "Stream on your mobile device, tablet, computer, game console
 # and connected TV" (the US home page), with downloads "on iOS and Android mobile devices".
 features:

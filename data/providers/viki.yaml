@@ -19,7 +19,19 @@ domains: [support.viki.com]
 category: streaming
 spendCategory: streaming
 billingCurrency:
-  { CA: CAD, US: USD, AU: AUD, GB: GBP, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+  {
+    CA: CAD,
+    US: USD,
+    AU: AUD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
 cancelUrl: https://support.viki.com/hc/articles/200138904
 sources: { pricing: https://www.viki.com/pass }
 # Accepted cards and ways to pay, read 2026-11-04 in its help centre ("How can I pay for Viki Pass and Rentals?"):
@@ -67,7 +79,29 @@ renewalAnchor:
 # Features, read 2026-11-04 on viki.com/pass (above): Plus's offline viewing names no number of devices, so 1
 # (inferred). No profiles or Kids profiles (no one under 18 may use it), no live programmes, and no French audio named:
 # its shows come with subtitles in many languages, which the French-content feature doesn't count.
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): its help centre's "Do I need to pay to
+# watch on Viki?": "Viki is free! There's no need to pay to watch certain videos on Viki or the Viki apps." and "If you
+# do not wish to pay a subscription, you can still watch certain content with ads and SD quality on our website or
+# apps." No page says how many streams play at once without a pass, so it waits in core's awaitingRequiredFeatures.
 plans:
+  - id: viki.free
+    name: Free
+    link: https://www.viki.com/
+    features:
+      video.quality: 480p
+      ad-free: false
+    notes: Some of its shows and films, with ads, in SD. A Viki Pass adds the rest, in HD and without ads.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://support.viki.com/hc/en-us/articles/201780204-Do-I-need-to-pay-to-watch-on-Viki,
+        }
   - id: viki.standard
     name: Standard
     link: https://www.viki.com/pass
