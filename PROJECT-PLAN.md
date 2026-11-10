@@ -1039,7 +1039,8 @@ providers to several hundred in about 30 service categories, so the rules and th
    and protection, and an optimizer that weighs a fee against interest (BLUEPRINT §4.11, §10.6).
 4. **The research** (M11.15): a category at a time, as the pipeline's batch pull requests (M10.13's way).
 
-Telecom (mobile and home internet) needs a design of its own first (the guide's §4) and isn't part of M11.
+Telecom (mobile and home internet) needed a design of its own first (the guide's §4): designed on 2026-11-10 with the
+owner (M11.17, BLUEPRINT §4.12), its mobile plans with national prices join the research, and province prices follow.
 
 | ID | Task | Done when |
 |---|---|---|
@@ -1059,6 +1060,7 @@ Telecom (mobile and home internet) needs a design of its own first (the guide's 
 | M11.14 | Rate history (the bot): rates read like prices, each change kept with its date; for a rate that follows the Bank of Canada's, how many days it took to follow its last changes | After a fixture change of the Bank of Canada's rate, a linked rate's lag shows on its card |
 | M11.16 | Third-party claims (added 2026-11-09, the owner's choice; BLUEPRINT §4.2 rule 12): a plan's `thirdParty` (publisher, url, quote, date) for a value only a publication gives, validated (the plan's own feature, not inferred too, off the provider's sites); the feature list's "third-party" mark; the optimizer counts it for Wanted and lower ranks only, and a card that rests on one names its source; Settings' "Use third-party claims", on by default | A plan's third-party value shows its mark and source; a Needed feature it alone gives blocks the change; with the setting off, the card shows the feature as not stated and the optimizer ignores it |
 | M11.15 | The research, a category at a time (the guide's §7): feature-discovery for the category, then its providers in batch pull requests of about 10, each reviewed by a second model; pushed once per batch, and web searches after sitemaps and known paths, SearXNG before the paid engines (the guide's §7.2). In order: AI, streaming, music, VPN, password managers and authenticators, antivirus, storage, email, gaming, office and creative, news; then browsers, search, DNS, file sharing, calendars, maps, social, jobs, developer tools; then finance, after M11.10–M11.14 | Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date |
+| M11.17 | Phone and internet plans (added 2026-11-10, the owner's choice; BLUEPRINT §4.12): the design (scope, the regular price for carriers, automatic-payment discounts, fees, provinces, features, terms, ways to pay) and the Phone & internet feature group; then province prices: ISO 3166-2 regions (`CA-QC`) on prices and `availableIn`, picked from the province Settings has for sales tax, in coverage, Search's Sold in and the API | A national mobile plan validates with its features; then a Quebec price shows to a user in Quebec and Ontario's to one in Ontario, and a plan sold only in Quebec is Not offered in Ontario |
 
 #### M11 specs
 
@@ -2173,6 +2175,13 @@ in every D1 `json` column search parses.
     outside North America, monthly only there, and outside the Middle East and North Africa it streams Arabic songs
     only, a notable rating). Anghami's billing-date wording joins core's same-date patterns. mixcloud.com answers this
     machine with a bot check, so Mixcloud moves to part 4, from the Internet Archive's copies.
+  - **Preparing the full catalog** (2026-11-10, with the owner, before research runs without the owner): the feature
+    groups of every category with no provider yet, in the registry ahead of the research (the owner's choice; each
+    group's comment says what it's for), Books & audiobooks and Smart home & security as service categories with their
+    Wikidata classes, telecom designed (M11.17), and the owner's decisions on news bias, ad blockers and free-only
+    services (BLUEPRINT §14). The categories that already have providers add their features as the research reaches
+    them, every provider's value with them: Proton's Docs and Sheets (`office.apps`, `collaboration.real-time`) and
+    Google One's longer Meet calls (`video-calls.*`) are the known ones.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 3 done)
@@ -2210,6 +2219,23 @@ in every D1 `json` column search parses.
   (104 checks in both themes at both widths, by keyboard, with axe). Validation now counts the shared documents a
   provider names among its policies' sites, as the renewal day's check does, so a "third-party" page on one of them
   (hulu.com, for ESPN) is refused.
+
+**M11.17 — Phone and internet plans** (BLUEPRINT §4.12; added 2026-11-10)
+- **Designed** (2026-11-10, with the owner, while preparing the full catalog): what's in scope (mobile plans for a
+  phone you bring, postpaid and prepaid, and home internet), the regular price as carriers state it (after a
+  first-term offer; a guaranteed price with its date in the notes; automatic payments' discount in the price, the
+  price without it in the notes; other discounts and fees out, the fees graded by `billing.fees`), provinces, terms
+  (the Wireless Code and Internet Code quoted from the carrier's own terms; one company's documents shared by its
+  brands), ways to pay and owners. The Phone & internet feature group is in the registry (`mobile.*`,
+  `internet.*`), each plan stating `mobile.included` and `internet.included`.
+- **Next, province prices:** `regionSchema` and `availableIn` take ISO 3166-2 subdivisions (`CA-QC`), `pickPrice`
+  prefers the user's province's price over the country's, coverage and Search's Sold in judge a subdivision as its
+  country's part, and the API's region filter matches both. Regional carriers and most home internet wait for it.
+- **Acceptance**
+  - [x] The design is written (BLUEPRINT §4.12) and the feature group validates
+  - [ ] A national mobile plan validates with its features (the research's first carrier)
+  - [ ] A Quebec price shows to a user in Quebec and Ontario's to one in Ontario; a plan sold only in Quebec is Not
+        offered in Ontario
 
 **The M11 audit** (2026-11-09): every acceptance box of M11.1–M11.14 and M11.16 holds; M11.15 is under way. What's
 left, each waiting for the owner:
