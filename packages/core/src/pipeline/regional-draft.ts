@@ -6,6 +6,7 @@ import type { IsoDate } from '../dates/iso-date';
 import { moneyIn, sameAmount, sameCurrency } from './amounts';
 import type { ExtractionIssue, ExtractionPage } from './extraction';
 import { findQuote } from './quotes';
+import { saysTaxIncluded } from './tax-wording';
 
 // A region's prices for a provider the catalog has (BLUEPRINT §6.5, PROJECT-PLAN M10.12): its pricing page for that
 // region, read in the browser as a visitor there, answers what the provider's plans cost there. Only those prices are
@@ -187,12 +188,15 @@ export function regionalPrices(
       continue;
     }
     const tax = found.taxIncluded && pages.get(found.taxIncluded.page);
-    const taxWords = tax && found.taxIncluded && findQuote(found.taxIncluded.quote, tax.text);
+    const onPage = tax && found.taxIncluded && findQuote(found.taxIncluded.quote, tax.text);
+    const taxWords = onPage && saysTaxIncluded(onPage) ? onPage : undefined;
     if (found.taxIncluded && !taxWords) {
       issues.push({
         kind: 'warning',
         subject,
-        reason: 'Its "tax included" words aren’t on the page, so tax counts as added.',
+        reason: onPage
+          ? 'Its "tax included" words don’t say the price includes tax, so tax counts as added.'
+          : 'Its "tax included" words aren’t on the page, so tax counts as added.',
       });
     }
     const renews =

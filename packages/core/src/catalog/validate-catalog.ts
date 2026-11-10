@@ -19,6 +19,7 @@ import {
 } from './policy-topic';
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
+import { saysTaxExcluded, saysTaxIncluded } from '../pipeline/tax-wording';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
@@ -1678,6 +1679,14 @@ function checkResellerListing(
   listing.offers.forEach((offer, offerIndex) => {
     const pricesPath = [...path, 'offers', offerIndex, 'prices'];
     prices.check(offer.prices, pricesPath);
+    offer.prices.forEach((price, priceIndex) => {
+      if (price.taxExcluded && !saysTaxExcluded(price.taxExcluded.quote)) {
+        report(
+          [...pricesPath, priceIndex, 'taxExcluded', 'quote'],
+          'Doesn’t say tax is added to the price: quote the shop’s words that do ("Excl. VAT"), or leave taxExcluded out',
+        );
+      }
+    });
     if (!reseller) return;
     const domains = resellerDomains(reseller);
     offer.prices.forEach((price, priceIndex) => {
@@ -1977,6 +1986,12 @@ class PriceChecks {
         this.report(
           [...at, 'retired'],
           `${price.retired} is after today (${today}): use the day the provider stopped selling it`,
+        );
+      }
+      if (price.taxIncluded && !saysTaxIncluded(price.taxIncluded.quote)) {
+        this.report(
+          [...at, 'taxIncluded', 'quote'],
+          'Doesn’t say the price includes tax: quote the page’s words that do ("Including VAT.", "Sales tax included."), or leave taxIncluded out, so tax is added in Canada and the US',
         );
       }
       this.count++;

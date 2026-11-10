@@ -1285,7 +1285,9 @@ The rules live in `packages/core/src/tax/`: the rates and subdivision lists sinc
   `taxIncluded: { quote }`, the source page's own words, and nothing is added to it anywhere (`addedSalesTax` in
   core). It's per price, since a provider can include tax in one price list and not another. pickPrice passes it on
   as `taxIncluded: true` in the API's `pricing` entries. Price research, the extraction (section 6.5) and the
-  nightly check (section 6.4) all record or recheck the wording.
+  nightly check (section 6.4) all record or recheck the wording, and the quote must say it: `data:validate` and the
+  extraction refuse words that don't (core's `saysTaxIncluded`: "Including VAT.", "Sales tax included.", "TVA
+  incluse.", in the catalog's languages), so a price that's only the same everywhere isn't `taxIncluded`.
 - **Rates:**
   - A built-in table for Canada's 13 provinces and territories (`canadianSalesTax`): each one's combined rate on
     digital subscriptions, GST/HST plus the provincial tax where it covers digital services (BC's PST, Manitoba's
@@ -3722,6 +3724,21 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-09, tax marked as included)**
+- **The audit:** three providers use `taxIncluded`: Bitdefender (163 prices), Mullvad's own five and ProxyStore's seven
+  reseller prices for Proton and Mullvad. No bundle does.
+- **ProxyStore:** its quote, "It does not affect the price or the goods." (its page asks where you live "for tax
+  reasons"), doesn't say the price includes tax, and neither do its terms, so its prices lost `taxIncluded`, and tax
+  is added in Canada and the US. Validation and the pipeline now hold a `taxIncluded` quote to words that say so, and
+  a reseller's `taxExcluded` to words that leave tax to be added (core's `saysTaxIncluded` and `saysTaxExcluded`,
+  section 4.8).
+- **Bitdefender:** the owner thought its prices leave tax out. Read again from a Canadian connection: its plan cards
+  say "Sales tax included.", and its checkout's order summary "Taxes included" with the total equal to the price (the
+  US's: "May apply according to your location"), while each English page's comparison section gives the same prices
+  with "Plus applicable sales tax". Kept, the owner's choice, for Canada, the UK, Australia and New Zealand; the euro
+  countries' pages say it in both places.
+- **Mullvad:** "one flat monthly rate ... Including VAT." still holds.
 
 **Resolved (2026-11-04, compact expanded cards)**
 - **Tabs** (the owner's pick of three designs, B): a Search card's details open on Overview, the plan at a glance

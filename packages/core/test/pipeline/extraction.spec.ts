@@ -295,6 +295,39 @@ describe('draftFromAnswer', () => {
     expect(draft.provider).toBeUndefined();
   });
 
+  it('keeps tax words only when they’re on the page and say the price includes tax', () => {
+    const draft = draftFromAnswer(
+      answer({
+        plans: [
+          {
+            name: 'Standard',
+            prices: [
+              price(18.99, 'Standard: $18.99 / month', { taxIncluded: 'Choose your plan.' }),
+            ],
+          },
+          {
+            name: 'Premium',
+            prices: [
+              price(23.99, 'Premium: $23.99 / month', { taxIncluded: 'Prices include tax.' }),
+            ],
+          },
+        ],
+      }),
+      context(),
+    );
+    expect(
+      draft.issues
+        .filter(({ reason }) => reason.includes('tax included'))
+        .map(({ subject, reason }) => `${subject}: ${reason}`),
+    ).toEqual([
+      'Standard, CA 18.99 CAD every 1 month: Its "tax included" words don’t say the price includes tax, so tax is added in Canada and the US',
+      'Premium, CA 23.99 CAD every 1 month: Its "tax included" words aren’t on the page, so tax is added in Canada and the US',
+    ]);
+    expect(draft.provider?.plans.flatMap((plan) => plan.prices)).not.toContainEqual(
+      expect.objectContaining({ taxIncluded: expect.anything() }),
+    );
+  });
+
   it('never keeps a first-term price, a business plan or an implausible amount', () => {
     const draft = draftFromAnswer(
       answer({

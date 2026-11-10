@@ -28,6 +28,7 @@ import type { PageKind } from './find-pages';
 import { onProviderSite } from './find-pages';
 import { idFromName } from './queue';
 import { findQuote } from './quotes';
+import { saysTaxExcluded, saysTaxIncluded } from './tax-wording';
 import { httpsAddress, parseWebAddress } from './web-address';
 
 // Extraction (BLUEPRINT §6.5 ④, M3.4): a model reads a provider's saved pages and answers in the shape below, every
@@ -493,13 +494,14 @@ export function draftFromAnswer(
       let taxIncluded: { quote: string } | undefined;
       if (price.taxIncluded) {
         const words = findQuote(price.taxIncluded, pages.get(price.page)?.text ?? '');
-        if (words) taxIncluded = { quote: words };
+        if (words && saysTaxIncluded(words)) taxIncluded = { quote: words };
         else
           issues.push({
             kind: 'warning',
             subject: label,
-            reason:
-              'Its "tax included" words aren’t on the page, so tax is added in Canada and the US',
+            reason: words
+              ? 'Its "tax included" words don’t say the price includes tax, so tax is added in Canada and the US'
+              : 'Its "tax included" words aren’t on the page, so tax is added in Canada and the US',
             page: price.page,
             quote: price.taxIncluded,
           });
@@ -785,9 +787,10 @@ export function draftFromAnswer(
           });
           return [];
         }
-        const words =
+        const found =
           claimed.taxExcluded &&
           findQuote(claimed.taxExcluded, pages.get(claimed.page)?.text ?? '');
+        const words = found && saysTaxExcluded(found) ? found : undefined;
         return [
           { ...price, sourceUrl: price.sourceUrl, ...(words && { taxExcluded: { quote: words } }) },
         ];

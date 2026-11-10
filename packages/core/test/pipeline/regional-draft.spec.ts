@@ -94,6 +94,24 @@ describe('regionalPrices', () => {
     ]);
   });
 
+  it('keeps tax words only when they say the price includes tax', () => {
+    const { prices, issues } = regionalPrices(
+      {
+        prices: [
+          price({ taxIncluded: { page: 'pricing', quote: 'Plans in the United Kingdom.' } }),
+        ],
+      },
+      context,
+      '2026-10-29',
+    );
+    expect(issues.map(({ reason }) => reason)).toEqual([
+      'Its "tax included" words don’t say the price includes tax, so tax counts as added.',
+    ]);
+    expect(prices.map(({ price: kept }) => kept)).not.toContainEqual(
+      expect.objectContaining({ taxIncluded: expect.anything() }),
+    );
+  });
+
   it('drops what the page doesn’t show, or isn’t the region’s, saying why', () => {
     const { prices, issues } = regionalPrices(
       {
