@@ -1,0 +1,60 @@
+url: https://help.mixcloud.com/hc/en-us/articles/27489434859036-Logging-into-Mixcloud-using-one-time-codes
+method: fetch
+saved: 2026-11-10
+
+Logging into Mixcloud using one-time codes – Mixcloud Help Center
+Submit a request
+Sign in
+Mixcloud Help Center
+My Mixcloud profile
+Logging in and passwords
+Articles in this section
+I can't log in to my Mixcloud account
+My address isn't receiving one-time codes
+I forgot or lost access to the email address for my Mixcloud account
+I haven’t received my one-time code
+Logging into Mixcloud using one-time codes
+Login changes - one-time codes
+CAPTCHA issues ('Are you a robot?')
+Reset or change my account password
+Recover a Mixcloud account that was created with Facebook
+How do I change my password?
+See more
+Logging into Mixcloud using one-time codes
+We're updating how you log in to Mixcloud. Instead of a password, you'll receive a six-digit code by email each time you sign in. This change is rolling out gradually, so you may still see the previous login screen for now.
+Read on or jump to a section:
+How to log in using a one-time code
+I need to log in using a password instead
+I use Facebook login to access my account
+I haven’t received my code yet
+How to log in using a one-time code
+Go to mixcloud.com/login, or click Log in or Switch account from the menu bar.
+Enter your email address or username and click Continue. Mixcloud will send a code to the email address on your account.
+Check your inbox for an email from noreply@mixcloudmail.com with a six-digit code. The code is valid for 30 minutes.
+Enter the code, and you’re all set! You’ll be logged in automatically after entering the last digit.
+FAQs
+I need to log in using a password instead
+One-time codes help keep your Mixcloud account secure, but we understand that some users may share accounts (eg. stations and labels), and all of the account users may not have access to the email address associated with the account.
+You can still use a password to log in.
+If you’ve previously set up a password on your account,
+Look for the Log in with your password option on the code entry screen. Click it, enter your password, and you're in.
+If you don't have a password yet
+You can set up a password for your account using the Forgot password link on the password screen. Enter your email address or username and we'll send you a reset link. Once you've set a password, it will appear as an option during login.
+I use Facebook login to access my account
+Facebook login is no longer supported as an ongoing login method, but you can still access your account. On the login screen, click Looking for Facebook login? Learn more.
+From there, log in with Facebook one more time and add an email address to your account. After that, you'll be all set up to use one-time codes going forward. Read more here.
+I haven’t received my code yet
+Your one-time code should arrive quickly after you request it, but may take a couple of minutes. If your email address is correct and the email isn’t in your spam, check out this article for further troubleshooting steps.
+Was this article helpful?
+14 out of 27 found this helpful
+Have more questions? Submit a request
+Return to top
+Related articles
+Recover a Mixcloud account that was created with Facebook
+I can't log in to my Mixcloud account
+Login changes - one-time codes
+I haven’t received my one-time code
+Reset or change my account password
+Mixcloud
+Support
+Submit a request

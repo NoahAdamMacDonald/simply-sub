@@ -1,5 +1,5 @@
 url: https://help.mixcloud.com/hc/en-us/articles/360004030660-How-do-I-cancel-my-subscription
-method: archive
+method: fetch
 saved: 2026-11-10
 
 How do I cancel my subscription? – Mixcloud Help Center
@@ -44,15 +44,15 @@ Please make sure to cancel your subscription before your next payment is due to 
 --
 If you need further assistance with cancelling your subscription or have any other questions, please fill out this form and we'll get back to you as soon as possible.
 Was this article helpful?
-955 out of 2119 found this helpful
+964 out of 2139 found this helpful
 Have more questions? Submit a request
 Return to top
 Related articles
 Which subscription is right for me?
+I can't log in to my Mixcloud account
 Reset or change my account password
 What happens when a creator ends their Creator Subscriptions?
 How do I get receipts and invoices for my subscription?
-I can't log in to my Mixcloud account
 Mixcloud
 Support
 Submit a request

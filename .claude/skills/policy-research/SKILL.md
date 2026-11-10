@@ -21,8 +21,9 @@ their own.
 - **Official pages only:** the provider's terms of service (or subscriber agreement), privacy policy, its apps'
   licence, the agreements those include, cookie notice, refund or cancellation help, household or sharing rules,
   download limits, sign-up form, and its own posts on audits.
-  Search and third-party summaries only to *find* a page. A page behind a bot check is left out and reported: never
-  try to get past one.
+  Search and third-party summaries only to *find* a page. A page that refuses one reader is read another way first
+  (price-research's "Reaching a site": a plain fetch, a headed browser, an exit), then from the Internet Archive's
+  copy; a page no way reads is left out and reported.
 - **Shared documents first** (M11.1): one company's policy often covers several providers (Disney's privacy policy:
   Disney+, Hulu and ESPN). Before reading a provider's policies, look in `data/policies/` for a document that covers
   it, and name it in `policies.shared`. A new one is rated once in `data/policies/<id>.yaml` (`id`, `name`, `links`,

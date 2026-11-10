@@ -388,6 +388,7 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['dazn.free', ['streaming.concurrent-streams']],
   ['amazon-prime-video.free', ['video.quality', 'streaming.concurrent-streams']],
   ['apple-music.radio', ['audio.quality']],
+  ['paramount-plus.essential', ['video.quality']],
 ]);
 
 /**

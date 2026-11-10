@@ -1,16 +1,19 @@
-# Researched by hand on 2026-11-10 (M11.15, the music category, part 4). www.mixcloud.com shows a security check
-# ("Performing security verification", 2026-11-09), which isn't retried, so its own pages are the Internet Archive's
-# newest copies (Premium, terms and privacy policy of 2026-11-09, Pro of 2026-11-05, the paid subscriptions policy of
-# 2026-09-25), and its help centre (help.mixcloud.com) was read from Canada. Pages, each quoted where it's used:
+# Researched by hand on 2026-11-10 (M11.15, the music category, part 4). www.mixcloud.com shows a browser a security
+# check ("Performing security verification", 2026-11-09) but serves the bot's plain fetch, which names itself, so its
+# pages were read that way from Canada on 2026-11-10 (the owner's choice that day: a plain fetch the site serves gets
+# no check past), as was its help centre (help.mixcloud.com). The Internet Archive's newest copies (2026-09-25 to
+# 2026-11-09) have the same words. Pages, each quoted where it's used:
 # Pricing: mixcloud.com/premium: "Get unrestricted listening $7.99 / month + sales tax. Cancel anytime.", and
 # mixcloud.com/pro: "Annual $11.25 / month Save 25% when paid annually" and "Monthly $15.00 / month", whose page data
-# gives "currency:"USD"" and the yearly "$135.00". The archive reads from the US, so they're the US's; other
-# countries' prices aren't read (the security check), so it's unknown there, not "not offered". Not listed: Creator
+# gives "currency:"USD"" and the yearly "$135.00". Read from Canada: Mixcloud's own Cloudflare placed this reading
+# in Canada (its /cdn-cgi/trace said "loc=CA"), so Canadians pay these US dollars, as with Anghami and Tidal; the
+# archive's copies, read from the US, show the same, so they're the US's too. Other countries' prices aren't read.
+# Not listed: Creator
 # Subscriptions, each creator's own and priced by them, Pro for students (50% off with UNiDAYS, proof of enrolment)
 # and Pro Enterprise (brands and radio stations).
 # Free: its help centre's "Which subscription is right for me?" ("While Mixcloud is free to use on our basic plan").
-# Region checklist, 2026-11-10: 1. its Premium and Pro pages, its help centre; 4. never past the plan cards; 6. the
-# archive's copies, and its help centre from Canada.
+# Region checklist, 2026-11-10: 1. its Premium and Pro pages, its help centre; 4. never past the plan cards; 6. a
+# plain fetch from Canada, and the archive's copies for the US.
 # Bundles and resellers: none on its pages.
 # Features: the Premium page's comparison ("Get unlimited replays", "Listen without ads", "Seek through shows without
 # restrictions"; "Listen offline Download and listen wherever you are.") and the help centre's: free listening plays
@@ -28,10 +31,10 @@ website: https://www.mixcloud.com
 domains: [help.mixcloud.com]
 category: music
 spendCategory: streaming
-billingCurrency: { US: USD }
+billingCurrency: { CA: USD, US: USD }
 cancelUrl: https://help.mixcloud.com/hc/en-us/articles/360004030660-How-do-I-cancel-my-subscription
 sources: { pricing: https://www.mixcloud.com/premium/ }
-# Owner (M11.2): its terms of use (the archive's copy of 2026-11-09) name Mixcloud Limited, a company incorporated in
+# Owner (M11.2): its terms of use name Mixcloud Limited, a company incorporated in
 # England. A private company, so no shares are listed.
 owner:
   name: Mixcloud Limited
@@ -47,9 +50,9 @@ owner:
       url: https://www.mixcloud.com/terms/
     quotes:
       - 'a company incorporated in England'
-    lastVerified: 2026-11-09
-  lastVerified: 2026-11-09
-# Ways to pay (M11.5): a card, through its payment processor (its privacy policy, the archive's copy of 2026-11-09).
+    lastVerified: 2026-11-10
+  lastVerified: 2026-11-10
+# Ways to pay (M11.5): a card, through its payment processor (its privacy policy).
 # Its help centre says only "Accepted payment options may depend on your device and territory", and a subscription
 # can't be started in its apps, so no app store bills it.
 paymentMethods:
@@ -58,15 +61,14 @@ paymentMethods:
     url: https://www.mixcloud.com/privacy/
     quotes:
       - 'your credit or debit card information and other financial data which you submit that is needed to process your payment will be collected by the payment processor with which we work.'
-# Renewal day (M11.5): its paid subscriptions policy (the archive's copy of 2026-09-25) bills on the day you
-# subscribed, or the month's last day when that month has no such day.
+# Renewal day (M11.5): its paid subscriptions policy bills on the day you subscribed, or the month's last day when that month has no such day.
 renewalAnchor:
   kind: same-date
   page: Paid subscriptions policy
   url: https://www.mixcloud.com/subscription-terms/
   quotes:
     - 'The Subscription Fee will be billed on the same day as the Initial Subscription Date (the "Recurring Subscription Date"), with each such period being a "Monthly Billing Cycle" or "Annual Billing Cycle".'
-  lastVerified: 2026-09-25
+  lastVerified: 2026-11-10
 
 features:
   platforms: [web, ios, android]
@@ -93,10 +95,18 @@ plans:
         page:
           name: Mixcloud Pro
           url: https://www.mixcloud.com/pro/
-        lastVerified: 2026-11-05
+        lastVerified: 2026-11-10
     notes: With ads. Each show plays up to 4 times in 14 days, with 6 fast-forwards and 6 rewinds an hour.
     prices:
       - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://help.mixcloud.com/hc/en-us/articles/360004030700-Which-subscription-is-right-for-me
+      - region: CA
         currency: USD
         amount: 0
         interval: month
@@ -118,7 +128,7 @@ plans:
         page:
           name: Mixcloud Pro
           url: https://www.mixcloud.com/pro/
-        lastVerified: 2026-11-05
+        lastVerified: 2026-11-10
     notes: Every public show without playback limits, with upfront tracklists, and downloads in its apps.
     prices:
       - region: US
@@ -127,7 +137,15 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-09
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.mixcloud.com/premium/
+      - region: CA
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
         sourceUrl: https://www.mixcloud.com/premium/
   - id: mixcloud.pro
     name: Pro
@@ -143,7 +161,7 @@ plans:
         page:
           name: Mixcloud Pro
           url: https://www.mixcloud.com/pro/
-        lastVerified: 2026-11-05
+        lastVerified: 2026-11-10
     perks: [creator-toolkit]
     notes: For creators, with unlimited uploads, uploads in HQ audio, live streaming and ways to earn. Listening is as on the free plan, with ads.
     prices:
@@ -153,7 +171,15 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-05
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.mixcloud.com/pro/
+      - region: CA
+        currency: USD
+        amount: 15
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
         sourceUrl: https://www.mixcloud.com/pro/
       - region: US
         currency: USD
@@ -161,12 +187,20 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-05
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.mixcloud.com/pro/
+      - region: CA
+        currency: USD
+        amount: 135
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
         sourceUrl: https://www.mixcloud.com/pro/
 
-# Terms and policies (M11.15): its terms of use and privacy policy (the archive's copies of 2026-11-09), its paid
-# subscriptions policy (the archive's copy of 2026-09-25, its newest), and its help centre's articles on cancelling,
-# creating an account (which describes its sign-up form, behind the security check) and downloads, read 2026-11-10.
+# Terms and policies (M11.15), read 2026-11-10: its terms of use, privacy policy and paid subscriptions policy, and
+# its help centre's articles on cancelling, creating an account (which describes its sign-up form, drawn in a
+# browser, which meets the security check), downloads and one-time codes.
 # Calibrated against SoundCloud's, Spotify's, Deezer's and Tidal's grades. Not rated: rights over your content and its
 # apps' licence (not topics for music).
 policies:
@@ -201,7 +235,7 @@ policies:
       action:
         name: Its privacy policy (cookies)
         url: https://www.mixcloud.com/privacy/
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.data-sharing
       tier: poor
       reason: 'It gives your cookies’ details to Facebook’s and Google’s ad networks, and your usage data to ad platforms. You can opt out of personal ads only through cookies.'
@@ -213,7 +247,7 @@ policies:
       action:
         name: Its privacy policy (opting out)
         url: https://www.mixcloud.com/privacy/
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.ads-tracking
       tier: poor
       reason: 'Free listening has ads, chosen with Facebook’s and Google’s ad networks from your cookies. Opting out of personal ads works only through cookies, browser by browser.'
@@ -225,19 +259,19 @@ policies:
       action:
         name: Its privacy policy (opting out)
         url: https://www.mixcloud.com/privacy/
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.ai-training
       status: not-stated
       reason: 'Its terms and privacy policy don’t say whether it trains AI on what you upload or how you listen.'
       pages: [https://www.mixcloud.com/privacy/, https://www.mixcloud.com/terms/]
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.data-retention
       tier: poor
       reason: 'It keeps your data as long as it thinks necessary to keep the service going, or until you ask it not to, with no set periods.'
       sources:
         - url: https://www.mixcloud.com/privacy/
           quote: 'We store your data for as long as long as is necessary to continue providing a great continuous experience on the Mixcloud Platform or until requested otherwise by you.'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.data-deletion
       tier: neutral
       reason: 'You can delete your account in its settings, or ask by email, but it doesn’t say how long removing your data takes.'
@@ -247,12 +281,12 @@ policies:
       action:
         name: Its privacy policy (deleting your data)
         url: https://www.mixcloud.com/privacy/
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.data-portability
       status: not-stated
       reason: 'Its privacy policy gives a copy of your data only as a right people in the European Union have.'
       pages: [https://www.mixcloud.com/privacy/]
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.government-requests
       tier: neutral
       reason: 'It gives your data to courts, police and governments only as far as the law requires. It doesn’t say it tells you.'
@@ -261,7 +295,7 @@ policies:
           quote: 'we may disclose information to any courts, law enforcement bodies or governmental authorities in order to comply with our legal obligations and respond to any claims asserted against us.'
         - url: https://www.mixcloud.com/privacy/
           quote: 'We will only disclose information to the extent we are legally obligated to do so'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.data-location
       tier: neutral
       reason: 'It’s run from London and may move your data to other countries, including the US, under standard contractual clauses.'
@@ -270,7 +304,7 @@ policies:
           quote: 'This may involve information being collected within the European Economic Area being transferred to countries outside of the European Economic Area, including the United States'
         - url: https://www.mixcloud.com/privacy/
           quote: 'We utilize appropriate safeguards, such as standard contractual clauses from the European Commission or a relevant supervisory authority'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: privacy.sign-up-data
       tier: neutral
       reason: 'Signing up asks for your email address, a username you choose and a password, and a paid plan needs a card.'
@@ -288,14 +322,14 @@ policies:
           quote: 'Children under the age of 16 are not eligible to use the Mixcloud Platform.'
         - url: https://www.mixcloud.com/privacy/
           quote: 'we will delete this information immediately'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: security.practices
       tier: poor
       reason: 'It describes its security procedures and a breach protocol in general terms, and names no audit or way to report a flaw.'
       sources:
         - url: https://www.mixcloud.com/privacy/
           quote: 'We have put in place suitable physical, electronic and managerial procedures to safeguard and secure the information we collect, including a security breach protocol.'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: billing.cancellation
       tier: great
       reason: 'You cancel on its website at any time, in a few clicks, and keep your plan until the period ends.'
@@ -313,14 +347,14 @@ policies:
           quote: 'No further subscription fees will be billed and no refund will be made of any subscription fees already billed and paid.'
         - url: https://www.mixcloud.com/subscription-terms/
           quote: 'you will continue to receive the subscription benefit until the end of the current billing cycle'
-      lastVerified: 2026-09-25
+      lastVerified: 2026-11-10
     - topic: billing.price-changes
       tier: poor
       reason: 'It can change its prices from time to time and only posts them on its website, with no notice promised.'
       sources:
         - url: https://www.mixcloud.com/subscription-terms/
           quote: 'The subscription rates are posted on our website and we may vary these from time to time: please see our Pricing Page for the rates in force for the current month.'
-      lastVerified: 2026-09-25
+      lastVerified: 2026-11-10
     - topic: billing.free-trials
       tier: neutral
       reason: 'When it offers a free trial or a promotional price, that turns into the full price unless you cancel first, which you can do at any time. It doesn’t say it reminds you.'
@@ -329,33 +363,33 @@ policies:
           quote: 'Once any "Promotional Period" has ended, the subscription will renew automatically and the Account Holder will subsequently be billed for the full Subscription Fee at the relevant monthly or annual frequency as described above.'
         - url: https://www.mixcloud.com/subscription-terms/
           quote: 'You may cancel your subscription at any time, for any reason.'
-      lastVerified: 2026-09-25
+      lastVerified: 2026-11-10
     - topic: billing.renewal-notice
       status: not-stated
       reason: 'Its subscription policy says a plan renews on its own each month or year, but not that it reminds you first.'
       pages: [https://www.mixcloud.com/subscription-terms/]
-      lastVerified: 2026-09-25
+      lastVerified: 2026-11-10
     - topic: billing.fees
       tier: great
       reason: 'It names no fees beyond the price and sales tax.'
       sources:
         - url: https://www.mixcloud.com/premium/
           quote: '+ sales tax. Cancel anytime.'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: billing.plan-changes
       tier: good
       reason: 'Changing plans charges the prorated difference for the rest of the period, and the new price applies from your next billing date.'
       sources:
         - url: https://www.mixcloud.com/subscription-terms/
           quote: 'If you change your subscription package in the future, the change in the subscription payment amount will take effect at the next billing cycle, and an additional payment may be charged to account for the prorated change in service.'
-      lastVerified: 2026-09-25
+      lastVerified: 2026-11-10
     - topic: legal.disputes
       tier: good
       reason: 'Disputes go to the courts of London under English law, with no arbitration.'
       sources:
         - url: https://www.mixcloud.com/terms/
           quote: 'This User Agreement and the interpretation of this User Agreement shall be governed by and construed in accordance with the laws of England and in relation to any claim brought hereunder you agree to submit to the jurisdiction of the courts of London, England.'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: legal.terms-changes
       tier: bad
       reason: 'It can change its terms at any time without telling you first, and using it afterwards means you accept them.'
@@ -364,7 +398,7 @@ policies:
           quote: 'We may add, delete or amend parts of this User Agreement at our sole discretion and at any time without prior notice to you.'
         - url: https://www.mixcloud.com/terms/
           quote: 'By continuing to use the Platform you are agreeing to be bound by the then-current User Agreement as revised and posted here.'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: legal.account-closure
       tier: bad
       reason: 'It can close any account for any reason, with no notice promised, and refunds nothing if it decides you broke its terms.'
@@ -373,14 +407,14 @@ policies:
           quote: "We also reserve the right to close any account for any reason (including during any 'free trial')."
         - url: https://www.mixcloud.com/subscription-terms/
           quote: 'If we withdraw access to The Service because these Terms of Service have been breached, no refund will be payable by us.'
-      lastVerified: 2026-09-25
+      lastVerified: 2026-11-10
     - topic: legal.service-changes
       tier: poor
       reason: 'It can remove any show at any time, for any reason, and says it owes you nothing for it.'
       sources:
         - url: https://www.mixcloud.com/terms/
           quote: 'to remove or withdraw any User Submission (or other user-generated content on the Platform) in whole or in part, at any time for any reason or no reason, with or without notice and with no liability of any kind.'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: legal.inactivity
       tier: poor
       reason: 'It can disable an account for good after 6 months without listening, uploading or logging in, with no warning promised.'
@@ -389,7 +423,7 @@ policies:
           quote: 'To keep your account active, be sure to log in and listen or upload a piece of audio content at least every 6 months.'
         - url: https://www.mixcloud.com/terms/
           quote: 'Accounts may be permanently disabled due to prolonged inactivity (based on a combination of listening, uploading, logging in, and the date an account was created).'
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: service.account-sharing
       status: not-stated
       reason: 'Its terms tell you to keep your password private, and its help says stations and labels share accounts, but nothing says whether you may share Premium.'
@@ -397,7 +431,7 @@ policies:
         - https://www.mixcloud.com/terms/
         - https://www.mixcloud.com/subscription-terms/
         - https://help.mixcloud.com/hc/en-us/articles/27489434859036-Logging-into-Mixcloud-using-one-time-codes
-      lastVerified: 2026-11-09
+      lastVerified: 2026-11-10
     - topic: service.device-limits
       tier: neutral
       reason: 'Premium downloads shows on up to three devices at a time, which you manage in its settings, and they’re removed if you log out.'

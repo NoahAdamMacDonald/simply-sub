@@ -97,14 +97,30 @@ try {
       continue;
     }
     // A page the pipeline read this run (render-pages) isn't requested again.
-    const rendered = (await readPage(page.url, page.owners)) ?? (await renderer.render(page.url));
+    let rendered = (await readPage(page.url, page.owners)) ?? (await renderer.render(page.url));
+    const facts = citedFacts(catalog.providers, catalog.bundles, page.url, catalog.policySets);
+    // A site can check a browser for bots yet serve the bot's own plain fetch, as it names itself (Mixcloud, the
+    // owner's choice of 2026-11-10): that page is the bot's view, kept only when it has every fact the catalog rests on.
+    if ('error' in rendered && rendered.error.startsWith('A bot check')) {
+      const served = await web.page(page.url);
+      if (!('error' in served) && missing(served.text, facts).length === 0) {
+        rendered = {
+          url: page.url,
+          finalUrl: served.url,
+          title: '',
+          status: 200,
+          servedText: served.text,
+          renderedText: served.text,
+          views: [],
+        };
+      }
+    }
     if ('error' in rendered) {
       unread.push(`${page.url} (${page.owners.join(', ')}): ${rendered.error}`);
       continue;
     }
     // The bot reads it with a plain fetch only when the HTML as served has what it shows, and every fact the catalog
     // rests on it.
-    const facts = citedFacts(catalog.providers, catalog.bundles, page.url, catalog.policySets);
     const shown = [rendered.renderedText, ...rendered.views.map((view) => view.text)].join('\n');
     const method =
       servedCovers(rendered.servedText, rendered.renderedText) &&

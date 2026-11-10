@@ -1,5 +1,5 @@
 url: https://www.mixcloud.com/terms/
-method: archive
+method: fetch
 saved: 2026-11-10
 
 Terms and Conditions | Mixcloud
@@ -39,9 +39,9 @@ Upgrade
 Upgrade
 Upgrade
 Pro for Creators Upload unlimited shows and live stream without takedowns.
-Loading...
+Go Pro for $11.25 / MO when paid annually, pay monthly
 Premium for listeners Listen to your favorite DJs and shows offline and without limits.
-Loading...
+Go Premium for $7.99 / MO
 Appearance Light Dark Auto
 Open Menu
 Blog
@@ -169,7 +169,3 @@ If you are the operator of a commercial or non personal website and would like t
 11.5 Nothing in this User Agreement is intended to confer on any third party (whether referred to in this User Agreement by name, class, description or otherwise) any benefit or any right under any legislation in any country to enforce any provisions of this User Agreement.
 11.6 Nothing in this User Agreement shall create any partnership, client, fiduciary or other professional or employment relationship.
 11.7 This User Agreement and the interpretation of this User Agreement shall be governed by and construed in accordance with the laws of England and in relation to any claim brought hereunder you agree to submit to the jurisdiction of the courts of London, England.
-Pro for Creators Upload unlimited shows and live stream without takedowns.
-Go Pro for $11.25 / MO when paid annually, pay monthly
-Premium for listeners Listen to your favorite DJs and shows offline and without limits.
-Go Premium for $7.99 / MO

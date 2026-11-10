@@ -15,6 +15,11 @@
 # "Crunchyroll's Ad-Supported Streaming Ends Today" (2025-12-31: "Crunchyroll is officially shutting down its
 # ad-supported streaming tier today").
 
+# Coverage: crunchyroll.* in CA: sold in Canada, but its prices are only on crunchyroll.com/premium, an error page to
+# every reader tried (Edge, headed Edge, a plain fetch, exits, an ordinary connection; 2026-11-10), and the Internet
+# Archive's copies are the US's. Third parties report Canadian prices in CAD, which the catalog never copies. For the
+# full catalog's run: read it again, or set availableIn from a page that lists its countries.
+
 id: crunchyroll
 name: Crunchyroll
 website: https://www.crunchyroll.com

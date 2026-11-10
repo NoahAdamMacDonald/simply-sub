@@ -16,10 +16,13 @@ API contract's prices are illustrative and never a source. This skill is how to 
 
 ## Rules
 
-- **Official pages only.** Use the provider's site, its help centre, or the seller's own page for a bundle or
-  add-on (starz.ca for the STARZ add-on to Crave). Use web search and third-party articles only to *find* pages
-  or to flag a question. Never copy a price from them. When an official page won't give an answer, say so and
-  leave the field out rather than guess.
+- **Direct from the provider first, then fallbacks** (the owner's requirement, 2026-11-10: we need the information,
+  so reach the site whatever way works). Use the provider's site, its help centre, or the seller's own page for a
+  bundle or add-on (starz.ca for the STARZ add-on to Crave), read any way that gets the live page ("Reaching a
+  site", below). Only when no way reads the live page: the Internet Archive's copy, then cited third parties ("A site
+  that can't be read"). Web search and third-party articles also help *find* pages. Never copy a price from a third
+  party (a free tier's existence is the one exception). When nothing gives an answer, say so and leave the field out
+  rather than guess.
 - **Regular prices, not offers.** Store the price a subscription renews at. "Billed at $53.88 for the first 12
   months, then renews at $83.88 every 12 months" means `amount: 83.88`. Struck-through prices are usually the
   monthly price, shown next to the yearly per-month rate (see Proton). A first-term offer can go in `notes`; users
@@ -294,6 +297,14 @@ which reads each page as a visitor there would, before any hand reading:
    region (`--dry-run` stops before the branch): the prices with a link to each quote, and the providers left out with
    why. `EU` is the region for a provider that charges every euro country the same; otherwise each country's own.
 
+## Canada and the US are never "unknown"
+
+`npm run data:coverage` (in CI since 2026-11-10) fails when a provider's availability in Canada or the US is unknown:
+no price there and no `availableIn`. Search's Sold in hides an unknown provider, so a service sold in Canada but priced
+only in the US vanishes for Canadians (Mixcloud). Price it there (a page read from that country, even in another
+currency: `region: CA, currency: USD`), or set `availableIn` from an official list when it isn't sold there, or explain
+it in a "Coverage: <provider>.* in CA: …" note when neither can be read yet.
+
 ## After writing the files
 
 1. `npx prettier --write data/providers data/bundles`. For a new provider, `npm run data:icons` fetches its logo
@@ -310,10 +321,17 @@ which reads each page as a visitor there would, before any hand reading:
 - **Some US sites block this machine (in Canada):** hbomax.com and plus.espn.com answer Access Denied, and
   nfl.com/plus redirects to DAZN's international NFL Game Pass. Their US prices can't be read here: report them,
   and read what their help centres show (support.espn.com does). help.hulu.com works.
-- **Bot checks:** support.nfl.com and assistance.radio-canada.ca show a Cloudflare check the driver doesn't pass.
-  Never try to get past one (another browser mode, other headers, another tool): use the provider's other official
-  pages (ICI TOU.TV's subscription terms have its cancel steps, and its pages' footer says where it's sold), or
-  report the page as unread.
+- **Reaching a site** (the owner's requirement, 2026-11-10): when one way is refused or shows a bot check, try the
+  others before any fallback, in roughly this order: `read-page.cjs` (Edge); a plain fetch (`curl --compressed`, with
+  the bot's user agent or an ordinary browser's); Edge headed rather than headless, or with an ordinary browser user
+  agent, waiting for an automatic check ("Verifying you are human…", Cloudflare's "Performing security verification")
+  to clear on its own; another country's exit; the Mullvad Browser reader; a split-tunnelled browser for sites that
+  refuse VPN addresses. Mixcloud shows Edge a check but serves a plain fetch (2026-11-10). A check that needs a person
+  (a CAPTCHA, or a page you must click through, like Amazon's "continue shopping") is beyond Claude here: this
+  machine's permission guard refuses it as bot-check circumvention, so skip that page and use the provider's other
+  official pages (ICI TOU.TV's subscription terms have its cancel steps, and its pages' footer says where it's sold),
+  then the fallbacks. support.nfl.com and assistance.radio-canada.ca showed checks on 2026-10-27: try them again this
+  way before falling back.
 - **Plan tabs** (TSN, RDS): Monthly, 3 Months, Annual and Bundles are tabs (`click:3 Months`); a plan missing
   from a tab isn't sold for that period. Their terms renew every period except in Quebec, monthly there: a note.
 - **Google's plans** (Google AI, M11.15): each country's Gemini page (`gemini.google/<country>/subscriptions/?hl=<lang>`)
@@ -332,7 +350,8 @@ which reads each page as a visitor there would, before any hand reading:
   Netherlands' `/prime`) shows its monthly and annual cards through that country's exit. primevideo.com/offers prices
   by where the visitor is: it prices Prime (or Prime Video alone, in New Zealand) only where there's no Amazon store,
   and elsewhere hands off to the store. The US's `amazon.com/gp/video/offers` answered with Amazon's "continue
-  shopping" page, a bot check: never click past it. Help articles belong to one store: an amazon.com `nodeId` can be
+  shopping" page, which the permission guard won't let Claude click: read the page without clicking (the plan cards
+  sit below the ads notice that also says "Continue shopping"). Help articles belong to one store: an amazon.com `nodeId` can be
   missing on amazon.ca ("We can't find the page"), so quote the store's own article. Amazon's stores are `archived`,
   so `data:baselines` saves the archive's newest copy, which for a help article can be years old (Amazon Music's terms:
   a copy of 2020, before the terms of 2026-09-30): keep a new baseline only when its text has the facts read today,
@@ -369,9 +388,9 @@ which reads each page as a visitor there would, before any hand reading:
 - **Odysee's Premium** (M11.15): odysee.com/$/premium asks you to sign up first, so its help centre's Premium article
   (help.odysee.tv/premium) is the page that prices it, in a bare "$" (its terms count in "USD"). The help centre's
   sitemap.xml lists every article (account deletion, memberships, the payments chart).
-- **A site that can't be read** (the owner's rule of 2026-11-09): official pages first, read over an ordinary
-  connection when a site refuses this machine's ("Disable your VPN to continue": DAZN). Only when no route reads the live
-  page, use the Internet Archive's newest copy as a backup (`archive.org/wayback/available?url=…`, then
+- **A site that can't be read** (the owner's rule of 2026-11-09): official pages first, every way "Reaching a site"
+  lists, an ordinary connection included when a site refuses this machine's ("Disable your VPN to continue": DAZN).
+  Only when no route reads the live page, use the Internet Archive's newest copy as a backup (`archive.org/wayback/available?url=…`, then
   `web.archive.org/web/<timestamp>id_/<url>` for the page as saved): cite the live URL, say "the Internet Archive's copy
   of <date>" in the comment, set `lastVerified` to the copy's date, and take prices only from a copy at most 30 days
   old. Some copies hold only a page's script: look for one saved with its content (Crunchyroll's 2026-10-23), or for
@@ -403,13 +422,13 @@ which reads each page as a visitor there would, before any hand reading:
   yearly prices are the monthly price times the period, not a regular price. A plain fetch gets 406 and its help
   centre (support.anghami.com) 403; both read in Edge. play.anghami.com/terms and /privacy are pages not found: its
   terms and privacy policy are one page, anghami.com/legal.
-- **Mixcloud** (M11.15): mixcloud.com (its Premium page, FAQs, terms and privacy policy) answers this machine with a
-  bot check, which is never retried another way; its help centre (help.mixcloud.com) opens but links Premium's details
-  back to mixcloud.com. The Internet Archive's copies (`id_`, fetched with `curl --compressed`: without it the copy
-  comes back gzipped and page-text reads nothing) hold the pages' text and the plan data (`premiumPlanInfo`, its amount
-  and currency), but no country. www.mixcloud.com is in `data/automation.yaml`'s `archived` (an entry's `www.` is
-  dropped, so its help centre is archived too), so `data:baselines` saves the archive's copies. The help centre reads
-  live with a plain fetch, and its search (`help.mixcloud.com/api/v2/help_center/articles/search.json?query=<words>`)
+- **Mixcloud** (M11.15): mixcloud.com shows a browser (Edge, the baseline reader) Cloudflare's "Performing security
+  verification", but serves the bot's plain fetch (`curl --compressed -A "SimplySubBot/1.0 (+https://sub.simplely.ca/)"`)
+  with HTTP 200, so read its pages that way (see "Reaching a site"); `data:baselines` falls back to that fetch when the
+  browser meets a check and saves it when it has every cited fact. Its page data (`premiumPlanInfo`, amount and
+  currency) names no country. Pro's yearly price is only in that data ("Annual $11.25 / month" is the text), so the
+  bot can't confirm it by text. An Internet Archive copy (`id_`) needs `curl --compressed`, or it comes back gzipped
+  and page-text reads nothing. Its help centre reads with a plain fetch, and its search (`help.mixcloud.com/api/v2/help_center/articles/search.json?query=<words>`)
   finds articles its menus don't show (sign-in, downloads).
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.

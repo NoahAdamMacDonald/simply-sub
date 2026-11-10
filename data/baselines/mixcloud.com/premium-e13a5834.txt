@@ -1,10 +1,9 @@
 url: https://www.mixcloud.com/premium/
-method: archive
+method: fetch
 saved: 2026-11-10
 
 Mixcloud Premium | Mixcloud
-Pro for creatorsPremium for listeners
-Upgrade to Premium
+Pro for creatorsPremium for listeners Upgrade to Premium
 for listeners
 Enhance your listening experience
 Listen offline, on repeat, ad-free and more.

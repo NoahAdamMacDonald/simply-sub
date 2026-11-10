@@ -1,3 +1,16 @@
+# US plans, read 2026-11-10 through a US exit on paramountplus.com/account/signup/pickplan (Monthly and Annual tabs):
+# "Paramount+ Essential $8.99/month" or "$89.99/year", "Ad supported", "Stream on 3 devices at once", "Get select
+# SHOWTIME® series"; "Paramount+ Premium $13.99/month" or "$139.99/year", "Everything in Essential, plus: No ads
+# except live TV", "Watch in 4K UHD, Dolby Vision or HDR10", "Download movies & shows", "Get all of SHOWTIME®". The US
+# sells its own two plans (its help centre's plans article lists Canada's three for other countries only), so they're
+# plans of their own. No page states Essential's video quality: it waits in core's awaitingRequiredFeatures.
+
+# Coverage: paramount-plus.basic-ads, paramount-plus.standard and paramount-plus.premium in US: the US sells Essential
+# and Premium (US) instead (its US plan picker, 2026-11-10).
+
+# Coverage: paramount-plus.essential and paramount-plus.premium-us in CA: Canada sells Basic with ads, Standard and
+# Premium instead (its plans article).
+
 # Researched by hand on 2026-11-09 (M11.15, the streaming category, batch 4), Canada only. Its sign-up picker shows no
 # plans to the reader, from here or over an ordinary connection, and its site answers other countries' exits with "406
 # Not Acceptable", so Canada's prices come from the Internet Archive's copy of the picker of 2026-10-10 (its plan data:
@@ -18,7 +31,7 @@ website: https://www.paramountplus.com
 domains: [paramount.com, pplus.legal, viacomcbsprivacy.com, skydance.com]
 category: streaming
 spendCategory: streaming
-billingCurrency: { CA: CAD }
+billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://legal.paramount.com/ca/en/pplus/termsofuse
 sources: { pricing: https://www.paramountplus.com/ca/account/signup/pickplan/ }
 notes: Canada's prices only; its other countries' pages couldn't be read.
@@ -175,6 +188,72 @@ plans:
           autoRenew: true,
           lastVerified: 2026-10-10,
           sourceUrl: https://www.paramountplus.com/ca/account/signup/pickplan/,
+        }
+  - id: paramount-plus.essential
+    name: Essential
+    link: https://www.paramountplus.com/
+    features:
+      ad-free: false
+      streaming.concurrent-streams: 3
+    notes: With ads. Select SHOWTIME series. Sold in the US.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.paramountplus.com/account/signup/pickplan/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.paramountplus.com/account/signup/pickplan/,
+        }
+  - id: paramount-plus.premium-us
+    name: Premium (US)
+    link: https://www.paramountplus.com/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: true
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+    inferred:
+      streaming.download-devices:
+        reason: 'Its US plan picker says you can download movies and shows, without saying on how many devices, so at least one.'
+        page:
+          name: Pick your plan (US)
+          url: https://www.paramountplus.com/account/signup/pickplan/
+        lastVerified: 2026-11-10
+    notes: All of SHOWTIME and CBS live. Live TV still has ads. 4K, Dolby Vision and HDR10 on select titles. Sold in the US.
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 13.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.paramountplus.com/account/signup/pickplan/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 139.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.paramountplus.com/account/signup/pickplan/,
         }
 
 # Terms and policies, read 2026-11-09 (M11.15): its Canadian Terms of Use ("LAST UPDATED : July 31, 2026", Paramount

@@ -52,6 +52,9 @@ jobs:
       # Prints each problem as an annotation on the PR (BLUEPRINT §6.2), and fails when an id main publishes is gone
       # without being retired or redirected (the ids guard, BLUEPRINT §4.3).
       - run: npm run data:validate
+      # Every provider's regions priced, and a provider whose availability in Canada or the US is unknown explained or
+      # fixed, since Search's Sold in hides it there (Mixcloud, 2026-11-10).
+      - run: npm run data:coverage
       # What seeding this pull request's catalog would write to D1, against main's at the merge base (M11.8): a notice,
       # never a failure, since the seed's daily budget holds back what doesn't fit.
       - run: npm run data:writes

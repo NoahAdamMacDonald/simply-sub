@@ -77,6 +77,22 @@ describe('coverageGaps', () => {
     ]);
   });
 
+  it('flags a provider whose availability in Canada or the US is unknown, as Mixcloud was in Canada', () => {
+    const mixcloud = provider('mixcloud', [
+      plan('mixcloud.free', [price('US', 0)]),
+      plan('mixcloud.premium', [price('US', 7.99)]),
+    ]);
+    expect(coverageGaps([mixcloud])).toEqual([
+      { provider: 'mixcloud', plan: 'mixcloud.*', region: 'CA', why: 'home' },
+    ]);
+    // Priced in Canada too, or listed as sold only in the US, it's known there.
+    const priced = provider('mixcloud', [
+      plan('mixcloud.premium', [price('US', 7.99), price('CA', 7.99)]),
+    ]);
+    expect(coverageGaps([priced])).toEqual([]);
+    expect(coverageGaps([{ ...mixcloud, availableIn: ['US'] }])).toEqual([]);
+  });
+
   it('takes a group’s and everywhere’s prices for a region in them', () => {
     const vpn = provider('vpn', [
       plan('vpn.basic', [price('EU', 5), price('US', 6)]),
