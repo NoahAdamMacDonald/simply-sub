@@ -514,6 +514,7 @@ describe('ownerCitation', () => {
     ['a company incorporated in England', 'GB', true],
     ['registered in Scotland', 'GB', true],
     ['offices across New England', 'GB', false],
+    ['the courts of New South Wales', 'GB', false],
   ] as const)('reads "%s" as naming %s: %s', (text, code, named) => {
     expect(namesCountry(text, code)).toBe(named);
   });

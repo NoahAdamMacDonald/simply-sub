@@ -185,6 +185,8 @@ policies:
       url: https://help.mixcloud.com/hc/en-us/articles/360004053779-How-do-I-create-a-Mixcloud-account
     - name: 'FAQ: Managing downloaded content in the app'
       url: https://help.mixcloud.com/hc/en-us/articles/7170987505042-FAQ-Managing-downloaded-content-in-the-app
+    - name: Logging into Mixcloud using one-time codes
+      url: https://help.mixcloud.com/hc/en-us/articles/27489434859036-Logging-into-Mixcloud-using-one-time-codes
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -321,7 +323,7 @@ policies:
       lastVerified: 2026-09-25
     - topic: billing.free-trials
       tier: neutral
-      reason: 'A free trial or promotional price turns into the full price unless you cancel first, which you can do at any time. It doesn’t say it reminds you.'
+      reason: 'When it offers a free trial or a promotional price, that turns into the full price unless you cancel first, which you can do at any time. It doesn’t say it reminds you.'
       sources:
         - url: https://www.mixcloud.com/subscription-terms/
           quote: 'Once any "Promotional Period" has ended, the subscription will renew automatically and the Account Holder will subsequently be billed for the full Subscription Fee at the relevant monthly or annual frequency as described above.'
@@ -390,8 +392,11 @@ policies:
       lastVerified: 2026-11-09
     - topic: service.account-sharing
       status: not-stated
-      reason: 'Its terms tell you to keep your password private and make you answer for all use of your login, but don’t say whether you may share Premium.'
-      pages: [https://www.mixcloud.com/terms/, https://www.mixcloud.com/subscription-terms/]
+      reason: 'Its terms tell you to keep your password private, and its help says stations and labels share accounts, but nothing says whether you may share Premium.'
+      pages:
+        - https://www.mixcloud.com/terms/
+        - https://www.mixcloud.com/subscription-terms/
+        - https://help.mixcloud.com/hc/en-us/articles/27489434859036-Logging-into-Mixcloud-using-one-time-codes
       lastVerified: 2026-11-09
     - topic: service.device-limits
       tier: neutral

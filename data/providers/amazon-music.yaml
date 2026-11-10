@@ -32,12 +32,15 @@
 # catalogue": Canada and the US among them) and the Single Device plan ("doesn't have access to HD, Ultra HD, and
 # Spatial Audio"). Free and Standard play only "select audiobooks that are available across Amazon Music", not
 # Audible's catalogue, so audiobooks aren't counted as included there. Free and the Single Device plan stream SD only,
-# whose bitrate Amazon's developer documentation gives ("Audio Formats", developer.amazon.com: "For Free and Prime,
-# only standard definition (SD) is available", SD in Opus at "48 kbps", "192 kbps" and "320 kbps"), so High. Apps
-# (its compare page and HD article): iOS, Android, Fire TV, Fire Tablet, "Amazon Music for Web" and "The Amazon Music
-# app for PC, Mac"; the Single Device plan plays on "a single compatible Echo or Fire TV device". Sign-in: Amazon's
-# Two-Step Verification articles ("text message or authenticator app", "your password", "Passkeys" and "a trusted
-# device").
+# whose bitrate no help page gives; Amazon's developer documentation, a preview for its API ("Audio Formats",
+# developer.amazon.com: "For Free and Prime, only standard definition (SD) is available", SD in Opus at "48 kbps", "192
+# kbps" and "320 kbps"), gives the best as 320 kbps, so High, inferred. Apps (its compare page and HD article): iOS,
+# Android, Fire TV, Fire Tablet, "Amazon Music for Web" and "The Amazon Music app for PC, Mac"; the Single Device plan
+# plays on "a single compatible Echo or Fire TV device" (the registry has no value for speakers). Sign-in, the Amazon
+# account's: "Why Can't I Sign into My Account?" ("Some accounts use a password, while others use a one-time security
+# code sent to your mobile number or email, or a passkey saved on your device"), "Recover Your Account after Two-Step
+# Verification Fails" ("from a trusted device") and "What is Two-Step Verification?", in its Amazon Business section
+# but about any account's settings ("by text message or authenticator app").
 
 id: amazon-music
 name: Amazon Music
@@ -105,6 +108,12 @@ paymentMethods:
     url: https://www.amazon.com/music/i/faq
     quotes:
       - 'using a payment method like a credit or debit card'
+  - methods: [app-store, provider-billing]
+    regions: [US]
+    page: Switch Amazon Music Unlimited Plans
+    url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GFH65TCNXDADUAW3
+    quotes:
+      - 'If you signed up through a third party, such as Apple App Store, Google Play, or a mobile service provider, you may need to contact them directly.'
 # Renewal day (M11.5), read 2026-11-10: its terms renew a plan automatically and keep "the original
 # renewal/subscription date" after a late payment, and its settings show "the next due date", without saying which
 # day of the month that is.
@@ -115,7 +124,7 @@ renewalAnchor:
 
 features:
   platforms: [windows, macos, android, ios, web, tv]
-  account.sign-in: [password, passkey, totp, sms, trusted-device]
+  account.sign-in: [password, passkey, totp, sms, email-code, trusted-device]
 
 plans:
   - id: amazon-music.free
@@ -126,6 +135,13 @@ plans:
       audio.quality: high
       music.on-demand: false
       music.offline: false
+    inferred:
+      audio.quality:
+        reason: 'Free plays only SD, which no help page measures. Amazon’s developer documentation gives SD’s bitrates as 48, 192 and 320 kbps, so up to 320 kbps.'
+        page:
+          name: Audio Formats (Amazon Music developer documentation)
+          url: https://developer.amazon.com/docs/music/audio-formats.html
+        lastVerified: 2026-11-10
     notes: With ads. Top playlists and thousands of stations in shuffle play, and select songs on demand in the mobile apps. It stops after an hour without activity.
     prices:
       - region: CA
@@ -268,6 +284,13 @@ plans:
       music.offline: false
       audiobooks.included: false
       platforms: [tv]
+    inferred:
+      audio.quality:
+        reason: 'Without HD or Ultra HD it plays only SD, which no help page measures. Amazon’s developer documentation gives SD’s bitrates as 48, 192 and 320 kbps, so up to 320 kbps.'
+        page:
+          name: Audio Formats (Amazon Music developer documentation)
+          url: https://developer.amazon.com/docs/music/audio-formats.html
+        lastVerified: 2026-11-10
     notes: Unlimited on one Echo or Fire TV, chosen when you subscribe, without HD, spatial audio or audiobooks.
     prices:
       - region: CA
@@ -341,26 +364,30 @@ policies:
           quote: 'You can use Amazon Music Unlimited until your plan ends.'
       lastVerified: 2026-11-10
     - topic: billing.price-changes
-      tier: neutral
-      reason: 'It tells you before a new price starts, without saying how far ahead, and a higher price never applies to the term you’ve paid for.'
+      tier: great
+      reason: 'It tells you ahead of a new price, which never changes the term you’ve paid for, so you can cancel before it starts.'
       sources:
         - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
           quote: 'We will notify you in advance before any price changes to your Unlimited Plan become effective.'
         - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
           quote: 'HOWEVER, ANY INCREASE IN THE FEE WILL BE COMMUNICATED TO YOU IN ADVANCE AND WILL NOT AFFECT THE COST OF YOUR UNLIMITED PLAN DURING ITS TERM.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'you may cancel your Unlimited Plan at any time with effect to the end of its term by visiting your Amazon Music Settings'
       lastVerified: 2026-11-10
     - topic: billing.free-trials
       tier: neutral
-      reason: 'Its 30-day trial turns into a paid plan unless you cancel before it ends, which you can do at any time. It doesn’t say it reminds you first.'
+      reason: 'Its 30-day trial may need a payment method, and turns into a paid plan unless you cancel before it ends, which you can do at any time. Its terms don’t say whether it reminds you first.'
       sources:
         - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
           quote: 'Some Trial Plans may, as communicated to you, automatically convert to a paid plan unless you cancel before the end of the Trial Plan.'
         - url: https://www.amazon.ca/music/unlimited
           quote: 'Free for 30 days. Cancel anytime.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'you may be required to be logged in to the account and have a valid payment method associated with it'
       lastVerified: 2026-11-10
     - topic: billing.renewal-notice
       status: not-stated
-      reason: 'Its terms say a plan renews on its own unless you turn that off, but not that it reminds you first.'
+      reason: 'Its terms say a plan renews on its own unless you turn that off, into the plan Amazon picks as closest to yours, but not that it reminds you first.'
       pages: [https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010]
       lastVerified: 2026-11-10
     - topic: billing.fees

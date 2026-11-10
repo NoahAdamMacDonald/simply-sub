@@ -134,11 +134,12 @@ perks:
 
 # Apps (the cross-category features), read 2026-11-04 in Prime Video's help: apps "for mobile devices running
 # Android, iOS, and Windows", for Fire TV, smart TVs, set-top boxes and game consoles, and the web ("through your web
-# browser", its usage rules). Sign-in, read 2026-11-10: the Amazon account's Two-Step Verification articles ("text
-# message or authenticator app", "your password", "Passkeys" and "a trusted device"), as for Amazon Music.
+# browser", its usage rules). Sign-in, read 2026-11-10: the Amazon account's help articles, as for Amazon Music ("a
+# password", "a one-time security code sent to your mobile number or email", "a passkey", "a trusted device", and
+# "text message or authenticator app" for Two-Step Verification).
 features:
   platforms: [windows, android, ios, web, tv, console]
-  account.sign-in: [password, passkey, totp, sms, trusted-device]
+  account.sign-in: [password, passkey, totp, sms, email-code, trusted-device]
 
 # Features, read 2026-11-04 from Canada in Prime Video's help: its usage rules ("You can stream up to three titles at
 # the same time using the same Amazon account"; downloads: "You can download available titles to only two devices at
@@ -541,7 +542,9 @@ addOns:
   # and amazon.com/music/unlimited, yearly "$119.00 CAD per year" (amazon.ca's FAQ, its pricing tab) and "$119/year"
   # (amazon.com's FAQ); the yearly Family plan, "$219.00 CAD per year" and "$219/year (available to Prime members
   # only)"; Standard "($10.49 /mo. for Prime members)" and "($9.99 /mo. for Prime members)" on each country's
-  # /music/standard. The plans' features are Amazon Music's: an add-on gives a plan only in its own file.
+  # /music/standard. The plans' features are Amazon Music's: an add-on gives a plan only in its own file. Other
+  # countries' Prime member prices aren't read yet, so these add-ons aren't shown there, as Ad free isn't where its
+  # price wasn't read.
   - id: amazon-prime-video.music-unlimited
     name: Amazon Music Unlimited
     prices:
