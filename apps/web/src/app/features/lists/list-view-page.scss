@@ -245,6 +245,11 @@ ss-item-card {
   margin-bottom: 4px;
 }
 
+// The yearly total's choice, above the totals it changes (P4).
+.money ss-yearly-total-switch {
+  margin-bottom: 12px;
+}
+
 // The mini calendar: below 960 px under the totals, folded behind a button; from there at the top of the side column,
 // under its heading (P4).
 .money .list-calendar {

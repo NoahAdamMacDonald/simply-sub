@@ -714,7 +714,17 @@ scroll. Wait for the suggestions to narrow before reading them: the whole list s
 `check-features.cjs` expects the Banking & investing card since M11.10, and the Apps, languages & support card and ranks Kids profiles where it ranked Ad free, and
 `check-search.cjs`'s "video quality" suggestions no longer include Ad free. Since M11.5 `check-features.cjs` opens
 Apps, languages & support beside VPN with Mullvad listed (its open-source value), and since M11.6
-`check-list-view.cjs`'s Tab order has the totals' two breakdown buttons after Export (M10's, missed until then).
+`check-list-view.cjs`'s Tab order has the totals' two breakdown buttons after Export (M10's, missed until then), and
+since 2026-11-10 the Yearly total's chosen choice before them.
+
+`check-list-view-yearly.cjs` (P4, 2026-11-10, List view's yearly total) checks on `ng serve` for a Canadian in Alberta
+(base URL ending in `/`, after `npm run data:build` on the branch) with budgets of $60 a month and $500 a year and
+Streaming's Netflix Standard (all year) and Crave Premium from June 1, so this year's total and the next 12 months'
+differ: "Yearly total" is a radio group of This year (chosen) and Next 12 months above the totals; by keyboard alone,
+Tab reaches the chosen one and an arrow chooses Next 12 months, which the annual line names ("in the next 12 months")
+at its total, with "Breakdown of the next 12 months", saved as `settings.yearlyTotal` and kept through a reload; the
+annual warning is unchanged; an arrow back clears the setting. In both themes at 1280, 960 and 360 px (the side column
+narrowest at 960), with axe, screenshots and no horizontal scroll: 103 checks. It answers `GET /fx` itself.
 Since M11.9 `check-search.cjs` runs to its end again (it stopped at the VPN category from M11.3 on): Bitdefender's
 Antivirus Free is the first free plan by name, Bitdefender is in VPN before Mullvad (Premium VPN is cheaper a month),
 ESPN Unlimited is among the 4K results without Native pricing only, a US user sees Netflix's ratings from its Canadian

@@ -1,0 +1,15 @@
+// Its label, then the two choices under it, as the budgets' headings sit over their bars.
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.label {
+  font: var(--mat-sys-title-small);
+}
+
+.choices {
+  max-width: 100%;
+}

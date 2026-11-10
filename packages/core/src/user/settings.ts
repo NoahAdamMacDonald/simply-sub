@@ -58,6 +58,11 @@ export const settingsSchema = z
      * they count, marked with their source.
      */
     skipThirdParty: z.literal(true).optional(),
+    /**
+     * List view's yearly total and its annual budget bar are the next 12 months' (PROJECT-PLAN §3.1, P4), on this
+     * device. Left out, they're this calendar year's.
+     */
+    yearlyTotal: z.literal('next-12-months').optional(),
     /** What catalog updates changed in the lists' prices this past month, newest first, for Home (P2, M7.10). */
     priceChanges: z.array(priceChangeSchema).min(1).max(maxPriceChanges).optional(),
     /** What catalog updates changed in the lists' plans this past month, newest first, for Home (P2, M10.27). */

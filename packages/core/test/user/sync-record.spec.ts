@@ -73,6 +73,11 @@ describe('withSharedTime', () => {
     expect(
       withSharedTime(before, { ...before, theme: 'dark', updatedAt: later }).sharedUpdatedAt,
     ).toBe('2026-10-19T10:00:00.000Z');
+    // List view's yearly total is this device's (P4), as the theme is.
+    expect(
+      withSharedTime(before, { ...before, yearlyTotal: 'next-12-months', updatedAt: later })
+        .sharedUpdatedAt,
+    ).toBe('2026-10-19T10:00:00.000Z');
   });
 
   it('takes the last change before there was one, and the save itself for new settings', () => {
