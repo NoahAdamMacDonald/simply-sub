@@ -57,7 +57,11 @@ what the `scheduled-claude` reviewer runs each week (setup below), and it works 
      If it's there, set `amount` and `lastVerified` (today) and keep `sourceUrl`. An edit the bot already made (a
      change over ±30%, a price Workers AI read) is confirmed or corrected the same way. A `taxIncluded` whose words are
      gone, a reseller no longer named, a card network gone: check the new text and keep or correct the bot's edit.
-     Only a sale price, another currency or no price on the page: leave it for the owner.
+     Only a sale price, another currency or no price on the page: leave it for the owner. **Check which country the
+     page priced for first** (price-research's Rules): on a page that prices by where the visitor is, the bot counts a
+     bare `$` as any dollar, and Google has shown a Canadian address the US page ("GL":"US", YouTube Music,
+     2026-11-09). A Canadian price counts only where the text says `CA$`, `C$` or `CAD`, or its data `"GL":"CA"`;
+     otherwise the bot's edit is another country's price: revert it and leave the item for the owner with that reason.
    - **A price report** ("**Netflix Premium** in US: 1 report of 26.99 USD monthly …, and its page couldn't be read
      this week", PROJECT-PLAN M10.10): visitors said the price is wrong, and the bot couldn't read the page to check.
      There's no new text, so leave it for the owner with that reason. A report is never evidence on its own: a price
