@@ -1,0 +1,68 @@
+url: https://help.soundcloud.com/hc/en-us/articles/360056011234-Cancel-your-subscription
+method: fetch
+saved: 2026-11-09
+
+Cancel your subscription – SoundCloud Help Center
+Toggle navigation menu
+Status Page
+We’re currently experiencing downtime with our Insights service, for updates
+check on our Status Blog.
+SoundCloud Help Center
+Subscriptions & Billing
+Subscription Overview
+Subscription Overview
+Search
+Cancel your subscription
+Managing your SoundCloud subscription is straightforward. From adjusting your plan to canceling or renewing, SoundCloud provides complete control over your experience. This article explains how to cancel your subscription and what you will lose out on when you do so.
+What happens when I cancel my Artist subscription?
+If you downgrade to a Basic plan, your oldest uploads over the free limit will be hidden from listeners, but nothing will be deleted. You can still view these hidden tracks on your Tracks page. Your hidden tracks, stats, and comments will be saved and fully restored if you upgrade to Pro again.
+If you distributed or monetized content through SoundCloud for Artists, it will be removed from third-party platforms like Spotify and Apple Music and de-monetized 30 days after your subscription ends.
+You have 30 days to renew your subscription to keep your content distributed and monetized.
+If your content has already been taken down, it should be reinstated within 7 days of a successful subscription renewal. If your releases are still not redelivered within that time frame, you'll need to contact us via our AI agent to restore distribution and monetization.
+What happens when I cancel my Go subscription?
+When you cancel your SoundCloud Go subscription, you’ll keep your premium features—including ad-free listening and offline downloads—until your current billing cycle ends. You can check the exact "expires" date on your Subscriptions page.
+Once that period is over, your account will automatically revert to our free, ad-supported experience. You won’t be charged again, provided you canceled before your next scheduled billing date.
+Need a break or having technical issues?
+Before your distributed tracks are removed from platforms like Spotify and Apple Music and before monetization is impacted, reach out to our support team via our AI agent. If the AI agent cannot resolve your issue, you will be escalated to a support specialist who can help troubleshoot your account.
+How do I cancel my subscription?
+Sign in to your account on a desktop or mobile browser and go to your Subscriptions page. Subscription cancellations cannot be completed on the SoundCloud app.
+Click Edit next to your current subscription.
+Select Opt-out of your current plan at the bottom of the page.
+Then Confirm and Cancel your Plan.
+Once you refresh your page, if the subscription page shows "EXPIRES" next to your billing date, it means you have successfully canceled.
+Subscriptions purchased through the Apple App Store or Google Play.
+If you purchased your subscription through the Apple App Store, you must cancel it directly with Apple; if you purchased it through Google Play, you must cancel it directly with Google Play.
+To cancel, visit Apple Support or Google Play Help for step-by-step instructions. SoundCloud can't help with cancellations or refunds for subscriptions purchased on iOS devices.
+Can I request a refund for my subscription?
+SoundCloud does not offer refunds for delivered subscriptions. However, you can opt out of further payments during the current billing cycle. If you cancel your subscription, you will retain access to all features for the remainder of the period you’ve already paid for. Once that period ends, your account will be downgraded to the free SoundCloud experience.
+For more details on SoundCloud’s refund policy, please refer to our Terms of Use.
+For questions on subscription management, please visit this article.
+Was this article helpful?
+Yes
+No
+Have more questions? Submit a request
+Related articles
+What happens when I cancel my Go subscription?
+SoundCloud Status
+Start Monetizing with SoundCloud for Artists
+Denon DJ / Numark Integration
+Common Distribution Issues
+Articles in this section
+Choosing the Right Subscription
+Subscription Management
+Cancel your subscription
+Troubleshoot payment failures
+Sales Tax & VAT
+SoundCloud
+For Artists
+Terms of Use
+Cookie Manager
+English (United States)
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português do Brasil
+Svenska

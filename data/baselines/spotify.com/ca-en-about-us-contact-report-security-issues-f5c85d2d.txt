@@ -1,0 +1,64 @@
+url: https://www.spotify.com/ca-en/about-us/contact/report-security-issues/
+method: fetch
+saved: 2026-11-09
+
+Security Bug Bounty - Spotify
+Skip to content
+Spotify – Home
+Premium plans
+Premium Individual
+1 account – for one person.
+Premium Duo
+2 accounts – for couples under one roof.
+Premium Family
+Up to 6 accounts – for family under one roof.
+Premium Student
+1 account – discount for eligible students.
+Support
+Download
+Sign up
+Log in
+Menu
+Hello, researcher!
+We're big believers in protecting your privacy and security. As a company, we not only have a vested interest, but also a deep desire to see the Internet remain as safe as possible for us all.
+So, needless to say, we take security issues very seriously.
+Your Spotify account
+For password and login problems, if you think your account has been “stolen”, or you're having other issues with your Spotify account, please visit our support site.
+Visit Support
+Spotting major security issues
+If you have discovered a vulnerability in Spotify or another serious security issue, please submit it to our bounty program hosted by HackerOne.
+Visit HackerOne
+Credit where it's due
+We'd like to publicly thank the people here for their help in reporting security issues to us. We're very grateful for their assistance.
+Spotify – Home
+Company
+About
+Jobs
+For the Record
+Communities
+For Artists
+For creators
+For authors
+Developers
+Advertising
+Investors
+Vendors
+Useful links
+Support
+Web Player
+Free Mobile App
+Import your music
+Spotify Plans
+Premium Individual
+Premium Duo
+Premium Family
+Premium Student
+Spotify Free
+Australia
+Legal
+Safety and Privacy Centre
+Privacy Policy
+Cookies
+About Ads
+Accessibility
+© 2026 Spotify AB

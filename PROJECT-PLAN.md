@@ -2149,9 +2149,19 @@ in every D1 `json` column search parses.
     shared document (`data/policies/paramount-privacy.yaml`), and Crunchyroll (`crunchyroll`: Fan, Mega Fan and
     Ultimate Fan, the US's monthly prices from the archive). iQIYI's Australian prices read through a Sydney exit;
     Italy's stay unread. Amazon's stores are read from the archive by the bot (`data/automation.yaml`'s `archived`).
+  - **Music, part 1** (2026-11-09): four features the owner chose, `audio.quality` (Standard, High, Lossless up to 48
+    kHz, Hi-Res Lossless above), `music.on-demand` (Play any song) and `music.offline`, each required in music, and
+    `audiobooks.included`; Ad free is required in music too, and a Music & audio card joins the Features page.
+    YouTube's Premium plans state them, and YouTube Music Premium joins as three plans of `youtube` (Individual, Family,
+    and Two-person in Australia and France). Spotify (`spotify`: Free, Premium Individual, Duo and Family, every catalog
+    region, with Audiobooks+ as an add-on), Apple Music (`apple-music`: Individual and Family, under Apple's shared
+    documents), Deezer (`deezer`: Free, Premium, Duo and Family, monthly and yearly, through each country's exit; no
+    Free in five countries, no Duo in New Zealand, which prices in US dollars) and SoundCloud (`soundcloud`: Free, Go
+    and Go+, priced every 30 days as its Go terms bill them). The owner chose Amazon Music as a provider of its own,
+    with the Prime member price as an add-on on Amazon Prime, for part 2.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: part 1 done)
 
 **M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
 - **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on
