@@ -112,7 +112,8 @@ Plans and prices
   for one price across the European Union, GLOBAL for one price everywhere. A converted figure ("€5 is about CA$7.84")
   is not a price in that currency.
 - "taxIncluded": only when the page says the price includes sales tax or VAT for every buyer ("Including VAT."), with its
-  exact words. "+ tax", "excl. VAT" or "taxes calculated at checkout" means leave it out.
+  exact words, which must say so: a price that's only the same everywhere isn't. "+ tax", "excl. VAT" or "taxes
+  calculated at checkout" means leave it out.
 - "autoRenew": false only for prepaid time that never renews by itself.
 - An add-on is bought on top of plans (an extra member, a channel): its name, the plans it goes with, and its prices.
 - A renamed plan is the same plan, never a new one: give the name the page uses now, and when the page says what it was

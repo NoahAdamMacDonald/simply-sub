@@ -54,7 +54,8 @@ function price(
   };
 }
 
-const included = { taxIncluded: { quote: 'It does not affect the price or the goods.' } };
+/** A shop whose price includes tax wherever the buyer is: ProxyStore's here, as a fixture (its own words don't say so). */
+const included = { taxIncluded: { quote: 'Prices include VAT.' } };
 const excluded = { taxExcluded: { quote: 'excl. VAT' } };
 
 function listing(reseller: string, quote: string, prices: ResellerPrice[]): ResellerListing {
@@ -212,6 +213,28 @@ describe('a provider’s resellers', () => {
 describe('validateCatalog with resellers', () => {
   it('accepts resellers the provider names, with their prices on their own pages', () => {
     expect(messages(withResellers())).toEqual([]);
+  });
+
+  it('refuses tax words that don’t say what they’re quoted for (BLUEPRINT §4.8, §4.9)', () => {
+    const vague = { quote: 'It does not affect the price or the goods.' };
+    const files = edited(
+      edited(withResellers(), mullvadFile, ['plans', 0, 'prices', 0, 'taxIncluded'], vague),
+      mullvadFile,
+      ['resellers', 2, 'offers', 0, 'prices'],
+      [
+        price('GLOBAL', 'EUR', 27, 'month', 6, 'https://digitalgoods.proxystore.de/en', {
+          taxIncluded: vague,
+        }),
+        price('GLOBAL', 'EUR', 54, 'month', 12, 'https://digitalgoods.proxystore.de/en', {
+          taxExcluded: { quote: 'Prices in euros' },
+        }),
+      ],
+    );
+    expect(messages(files)).toEqual([
+      'data/providers/mullvad.yaml plans.0.prices.0.taxIncluded.quote: Doesn’t say the price includes tax: quote the page’s words that do ("Including VAT.", "Sales tax included."), or leave taxIncluded out, so tax is added in Canada and the US',
+      'data/providers/mullvad.yaml resellers.2.offers.0.prices.0.taxIncluded.quote: Doesn’t say the price includes tax: quote the page’s words that do ("Including VAT.", "Sales tax included."), or leave taxIncluded out, so tax is added in Canada and the US',
+      'data/providers/mullvad.yaml resellers.2.offers.0.prices.1.taxExcluded.quote: Doesn’t say tax is added to the price: quote the shop’s words that do ("Excl. VAT"), or leave taxExcluded out',
+    ]);
   });
 
   it('needs every listed reseller in data/resellers.yaml', () => {

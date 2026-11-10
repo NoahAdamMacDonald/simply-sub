@@ -147,6 +147,12 @@ perks:
 # The five euro countries' prices are the same. Each region's pages say tax is included, beside each price ("Sales tax
 # included.", "Inklusive MwSt.", "TVA incluse.", "Inclusief BTW.", "IVA incluido.", "IVA inclusa."), Canada's as well
 # (taxIncluded, missing from its prices until now); the US's say "Plus applicable sales tax."
+# Tax, read again 2026-11-09 from a Canadian connection with Mullvad Browser: the English pages (Canada, the UK,
+# Australia, New Zealand) still say "Sales tax included." beside each plan's price, but their "Compare Bitdefender
+# Products" section gives the same prices with "Plus applicable sales tax", the US's wording. The checkout (2Checkout,
+# "the merchant of record for this transaction") settles it: Canada's and the UK's order summaries say "Taxes included"
+# with the total equal to the price (CA$59.99, £49.99), where the US's says "May apply according to your location". So
+# the taxIncluded stays (the owner's choice that day). The euro countries' pages say it in both places.
 
 # Monthly billing (the owner's tasks), read 2026-11-03 with Mullvad Browser: only Ultimate's cards sell it (stored,
 # every region), and Digital Identity Protection's "1- Month Plan" in Canada, the UK and New Zealand, whose pages say
