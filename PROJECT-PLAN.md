@@ -2809,6 +2809,13 @@ back):
 - **Budget warnings (M7.7):** each has ✕ and "Show 1 hidden budget warning", for this list alone; the bars take their
   colour from the scale (P2).
 
+**Since the owner's request of 2026-11-10:** a **Yearly total** above the totals, a labelled segmented button (a radio
+group: one tab stop, the arrows choose) of **This year** and **Next 12 months**, This year by default. Next 12 months
+makes the annual line the next 12 months' total (§3.1) against the annual budget, "$516.47 of $500.00 in the next 12
+months", its bar and breakdown the same period; the annual budget warning still checks this calendar year, as Home's
+does. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once; Home and the Lists
+page keep this year. `check-list-view-yearly.cjs` (browser-check skill).
+
 BLUEPRINT §14 has the details.
 
 **Acceptance**

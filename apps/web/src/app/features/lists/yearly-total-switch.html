@@ -1,0 +1,10 @@
+<span class="label" [id]="id">Yearly total</span>
+<mat-button-toggle-group
+  class="choices"
+  [attr.aria-labelledby]="id"
+  [value]="yearly()"
+  (change)="choose($event)"
+>
+  <mat-button-toggle value="calendar">This year</mat-button-toggle>
+  <mat-button-toggle value="next-12-months">Next 12 months</mat-button-toggle>
+</mat-button-toggle-group>

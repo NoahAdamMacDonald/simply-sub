@@ -117,10 +117,11 @@
 
     <div class="layout" [class.with-features]="total() > 0">
       <!-- This month and this year against the budgets, or alone without them (P4, M7.2): on the right from 960 px,
-           above the cards under it. -->
+           above the cards under it. The yearly total is this year's or the next 12 months', as chosen above it. -->
       @if (total() > 0 && totals(); as totals) {
         <div class="money">
-          <ss-budget-totals [metrics]="totals" [listIds]="listIds()" />
+          <ss-yearly-total-switch />
+          <ss-budget-totals [metrics]="totals" [listIds]="listIds()" [yearly]="yearly()" />
           @if (!wide()) {
             <ng-container [ngTemplateOutlet]="listCalendar" />
           }

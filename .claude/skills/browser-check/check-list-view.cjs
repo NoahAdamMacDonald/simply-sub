@@ -423,7 +423,7 @@ async function openView(page, listId = LIST) {
       // its top.
       await view(page).locator('h1').click();
       const stops = [];
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 14; i++) {
         await page.keyboard.press('Tab');
         // A name with a colon comes back quoted, and a link's line ends in a colon.
         stops.push((await stop(page)).replace(/:$/, '').replace(/^'(.*)'$/, '$1'));
@@ -432,6 +432,8 @@ async function openView(page, listId = LIST) {
         'link "Lists"',
         'link "Edit list"',
         'button "Export"',
+        // The yearly total's choice above the totals (P4, 2026-11-10): one stop, the chosen one.
+        'radio "This year" [checked]',
         // The totals' breakdowns (M10), this month's and this year's.
         'button "Breakdown of this month"',
         `button "Breakdown of ${new Date().getFullYear()}"`,

@@ -3088,7 +3088,7 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 |---|---|
 | **Home** | **All lists combined** against the monthly and annual budgets |
 | **Lists overview: each list card** | **That list's share** of the total budget (its own cost ÷ budget) |
-| **View list** | Only **that list's** cost against the budgets |
+| **View list** | Only **that list's** cost against the budgets; its yearly total this year's or, as chosen on the device, the next 12 months' against the annual budget (PROJECT-PLAN P4) |
 | **Calendar** | **The displayed month only**: spent so far (payments dated up to today) against the month's total, for the lists currently shown, with a tick mark at the monthly budget (none when the budget is past the month's total). Its colour compares the month's total with the budget |
 
 **Colours (M7.7, the user's choice):** a bar's fill is one colour, which changes gradually with how far along its
@@ -3752,6 +3752,17 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-10, List view's yearly total)**
+- **The owner's request:** switch List view's yearly figure between This year (what's left to pay this calendar year,
+  past charges included) and Next 12 months (a full year's cost from today), both PROJECT-PLAN §3.1's terms, already in
+  core's `listMetrics` (`thisYear`, `next12`, `next12Range`): no new money maths in the app.
+- **The owner's choices of the mock-ups:** a labelled segmented button, Yearly total, above the totals (not in the
+  header), and the annual budget warning kept on this calendar year, as Home's is, so one dismissal still covers both.
+- **As built:** `ss-yearly-total-switch` (Material's button toggles: a radio group named by its label, one tab stop,
+  the arrows choose), `ss-budget-totals`' `yearly` input for the annual line's total, words ("in the next 12 months"),
+  bar and breakdown, and `settings.yearlyTotal` (`next-12-months`, left out for this year), a device-only setting as the
+  theme is: not in `sharedSettingsFields`. The initial bundle is unchanged (499.50 kB).
 
 **Resolved (2026-11-10, the nightly bot in parts)**
 - **What failed:** the Workflow runs of 2026-11-07, 11-08 and 11-09 each ended "Errored" after about 42 minutes. Their

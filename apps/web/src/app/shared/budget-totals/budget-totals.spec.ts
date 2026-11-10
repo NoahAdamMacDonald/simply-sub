@@ -62,7 +62,7 @@ describe('BudgetTotals', () => {
   });
 
   function render(
-    inputs: Partial<Record<'metrics' | 'compact' | 'prompt' | 'name', unknown>> = {},
+    inputs: Partial<Record<'metrics' | 'compact' | 'prompt' | 'name' | 'yearly', unknown>> = {},
   ) {
     const fixture = TestBed.createComponent(BudgetTotals);
     fixture.componentRef.setInput('metrics', metrics);
@@ -96,6 +96,30 @@ describe('BudgetTotals', () => {
     expect(bars[0].getAttribute('aria-labelledby')).toBe(heading);
     expect(bars[0].getAttribute('aria-valuetext')).toBe('50%, $100.00 of $200.00');
     expect(bars[1].getAttribute('aria-valuenow')).toBe('25');
+  });
+
+  it('shows the next 12 months’ total against the annual budget, when List view asks (P4)', () => {
+    const element = render({ yearly: 'next-12-months' });
+    expect(totals(element)).toEqual([
+      '$100.00 of $200.00 this month',
+      '≈ $1,200.00 of $1,000.00 in the next 12 months',
+    ]);
+    expect(element.querySelectorAll('h2')[1]?.textContent?.trim()).toBe('Annual budget');
+    // The bar against the annual budget: full, its text saying how far over.
+    expect(element.querySelectorAll('ss-budget-bar')[1].getAttribute('aria-valuetext')).toBe(
+      '120%, $1,200.00 of $1,000.00',
+    );
+    // Its breakdown adds up the same period.
+    expect(
+      Array.from(element.querySelectorAll('button')).map((button) =>
+        button.getAttribute('aria-label'),
+      ),
+    ).toContain('Breakdown of the next 12 months');
+    saved.set(alberta);
+    expect(totals(render({ yearly: 'next-12-months' }))).toEqual([
+      '$100.00 this month',
+      '≈ $1,200.00 in the next 12 months',
+    ]);
   });
 
   it('shows a total alone without its budget, with a way to set one on Home', () => {

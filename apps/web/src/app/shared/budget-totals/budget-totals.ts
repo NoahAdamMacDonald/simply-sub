@@ -1,14 +1,21 @@
 import { Component, booleanAttribute, computed, inject, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { monthOf, monthRange, yearRange, type DateRange, type ListMetrics } from '@simply-sub/core';
+import {
+  monthOf,
+  monthRange,
+  next12Range,
+  yearRange,
+  type DateRange,
+  type ListMetrics,
+} from '@simply-sub/core';
 import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { BudgetBar } from '../budget-bar/budget-bar';
 import { CostBreakdown } from '../cost-breakdown/cost-breakdown';
 import { amountText } from '../price-tag/price-text';
 
-/** One budget's line: this month's or this year's total, against its budget when there's one. */
+/** One budget's line: this month's total, or this year's or the next 12 months', against its budget if there's one. */
 interface BudgetLine {
   kind: 'month' | 'year';
   heading: string;
@@ -19,9 +26,9 @@ interface BudgetLine {
   spoken: string;
   /** Home's link in place of a missing budget. */
   prompt: string;
-  /** Its period, which its breakdown adds up (M10.30): this month, or this year. */
+  /** Its period, which its breakdown adds up (M10.30): this month, this year or the next 12 months. */
   range: DateRange;
-  /** "this month", "2026": the breakdown's name for it. */
+  /** "this month", "2026", "the next 12 months": the breakdown's name for it. */
   period: string;
 }
 
@@ -31,7 +38,8 @@ let nextId = 0;
  * This month's and this year's totals against the budgets (PROJECT-PLAN §3.1, BLUEPRINT §8.1.1, M7.2): Home's for
  * every list together (P2), a list's on List view (P4) and on its Lists card (P3). Each budget that's set is a bar
  * with "$100 of $200 this month" beside it; without one, the total alone, and on Home "Set a monthly budget →". The
- * totals include sales tax, as charges do.
+ * totals include sales tax, as charges do. List view's yearly total can be the next 12 months' instead (`yearly`),
+ * against the same annual budget.
  */
 @Component({
   selector: 'ss-budget-totals',
@@ -52,12 +60,15 @@ export class BudgetTotals {
   readonly name = input('');
   /** The lists the totals are of, which the breakdowns add up (M10.30); left out, every list. */
   readonly listIds = input<ReadonlySet<string>>();
+  /** The yearly total: this calendar year's, or the next 12 months' (List view's choice, P4). */
+  readonly yearly = input<'calendar' | 'next-12-months'>('calendar');
 
   protected readonly id = `ss-budget-totals-${nextId++}`;
   protected readonly lines = computed<BudgetLine[]>(() => {
     const saved = this.settings.saved();
-    const { thisMonth, thisYear, converted } = this.metrics();
+    const { thisMonth, thisYear, next12, converted } = this.metrics();
     const year = this.today().slice(0, 4);
+    const twelve = this.yearly() === 'next-12-months';
     const money = (amount: number) => amountText(amount, saved?.currency ?? 'USD', saved?.country);
     const line = (
       kind: BudgetLine['kind'],
@@ -67,7 +78,8 @@ export class BudgetTotals {
       when: string,
       prompt: string,
     ): BudgetLine => {
-      const approx = kind === 'month' ? converted.thisMonth : converted.thisYear;
+      const approx =
+        kind === 'month' ? converted.thisMonth : twelve ? converted.next12 : converted.thisYear;
       const of = budget === undefined || this.compact() ? '' : ` of ${money(budget)}`;
       return {
         kind,
@@ -77,8 +89,13 @@ export class BudgetTotals {
         shown: `${approx ? '≈ ' : ''}${money(amount)}${of} ${when}`,
         spoken: `${approx ? 'about ' : ''}${money(amount)}${of} ${when}`,
         prompt,
-        range: kind === 'month' ? monthRange(monthOf(this.today())) : yearRange(this.today()),
-        period: kind === 'month' ? 'this month' : year,
+        range:
+          kind === 'month'
+            ? monthRange(monthOf(this.today()))
+            : twelve
+              ? next12Range(this.today())
+              : yearRange(this.today()),
+        period: kind === 'month' ? 'this month' : twelve ? 'the next 12 months' : year,
       };
     };
     return [
@@ -93,9 +110,9 @@ export class BudgetTotals {
       line(
         'year',
         'Annual budget',
-        thisYear,
+        twelve ? next12 : thisYear,
         saved?.annualBudget,
-        this.compact() ? 'this year' : `in ${year}`,
+        twelve ? 'in the next 12 months' : this.compact() ? 'this year' : `in ${year}`,
         'Set an annual budget',
       ),
     ];

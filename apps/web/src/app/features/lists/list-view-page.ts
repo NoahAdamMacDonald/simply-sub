@@ -66,6 +66,7 @@ import { averageText } from './average-text';
 import { editRow } from './edit-rows';
 import { ListFilters, listQuery, noListFilters, type ListFilterState } from './list-filters';
 import { OptimizationsLink } from './optimizations-link';
+import { YearlyTotalSwitch } from './yearly-total-switch';
 
 /**
  * List view (PROJECT-PLAN P4, M6.8): one list's subscriptions as cards (ss-item-card), pinned ones first, with what the
@@ -101,6 +102,7 @@ import { OptimizationsLink } from './optimizations-link';
     PageHeader,
     RouterLink,
     TypeCounts,
+    YearlyTotalSwitch,
   ],
   templateUrl: './list-view-page.html',
   styleUrl: './list-view-page.scss',
@@ -293,6 +295,8 @@ export class ListViewPage {
     const listId = this.listId();
     return listId === undefined ? undefined : this.metrics.metrics(listId);
   });
+  /** Its yearly total: this calendar year's, or the next 12 months' as chosen on this device (P4). */
+  protected readonly yearly = computed(() => this.settings.saved()?.yearlyTotal ?? 'calendar');
   /** The mini calendar's month (P4, M7.4): this one, until ‹ or › moves it, and the new one at midnight into it. */
   protected readonly calendarMonth = linkedSignal<IsoDate, IsoMonth>({
     source: this.today,
