@@ -15,10 +15,12 @@
 # "Crunchyroll's Ad-Supported Streaming Ends Today" (2025-12-31: "Crunchyroll is officially shutting down its
 # ad-supported streaming tier today").
 
-# Coverage: crunchyroll.* in CA: sold in Canada, but its prices are only on crunchyroll.com/premium, an error page to
-# every reader tried (Edge, headed Edge, a plain fetch, exits, an ordinary connection; 2026-11-10), and the Internet
-# Archive's copies are the US's. Third parties report Canadian prices in CAD, which the catalog never copies. For the
-# full catalog's run: read it again, or set availableIn from a page that lists its countries.
+# Canada (2026-11-10, the owner's choice: when its pages can't be read, a named publication's prices): its own price
+# page fails for every reader and its announcement of the prices ("Crunchyroll Updates Membership Pricing to Give Fans
+# More of What They Love", 2026-02-02) is drawn by scripts live and in the archive, so Canada's prices are MobileSyrup's:
+# "Fan (monthly) — $10.99", "Fan (annual) — $109.99", "Mega Fan (monthly) — $13.49", "Mega Fan (annual) — $134.99"
+# ("Crunchyroll is getting more expensive -- here are the new Canadian prices", 2026-02-03), and Ultimate Fan, launched
+# in Canada on June 25, 2026, "$17.99 or $179.99 annually" (2026-06-26). Read again from its own page when it opens.
 
 id: crunchyroll
 name: Crunchyroll
@@ -26,7 +28,7 @@ website: https://www.crunchyroll.com
 domains: [sonypictures.com]
 category: streaming
 spendCategory: streaming
-billingCurrency: { US: USD }
+billingCurrency: { CA: CAD, US: USD }
 cancelUrl: https://www.crunchyroll.com/tos/
 sources: { pricing: https://www.crunchyroll.com/premium }
 notes: US monthly prices only, read from the Internet Archive's copy of its plans page; its yearly prices and other countries' are unread.
@@ -131,6 +133,26 @@ plans:
           lastVerified: 2026-10-23,
           sourceUrl: https://www.crunchyroll.com/premium,
         }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://mobilesyrup.com/2026/02/03/crunchyroll-price-increase-canada-breakdown/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 109.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://mobilesyrup.com/2026/02/03/crunchyroll-price-increase-canada-breakdown/,
+        }
   - id: crunchyroll.mega-fan
     name: Mega Fan
     link: https://www.crunchyroll.com/premium
@@ -153,6 +175,26 @@ plans:
           lastVerified: 2026-10-23,
           sourceUrl: https://www.crunchyroll.com/premium,
         }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 13.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://mobilesyrup.com/2026/02/03/crunchyroll-price-increase-canada-breakdown/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 134.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://mobilesyrup.com/2026/02/03/crunchyroll-price-increase-canada-breakdown/,
+        }
   - id: crunchyroll.ultimate-fan
     name: Ultimate Fan
     link: https://www.crunchyroll.com/premium
@@ -174,6 +216,26 @@ plans:
           autoRenew: true,
           lastVerified: 2026-10-23,
           sourceUrl: https://www.crunchyroll.com/premium,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 17.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://mobilesyrup.com/2026/06/26/crunchyroll-ultimate-fan-membership-manga/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 179.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://mobilesyrup.com/2026/06/26/crunchyroll-ultimate-fan-membership-manga/,
         }
 
 # Terms and policies, read 2026-11-09 (M11.15): its Terms of Service (Crunchyroll, LLC's) and the privacy policy it

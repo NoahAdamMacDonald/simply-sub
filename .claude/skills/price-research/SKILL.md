@@ -20,9 +20,11 @@ API contract's prices are illustrative and never a source. This skill is how to 
   so reach the site whatever way works). Use the provider's site, its help centre, or the seller's own page for a
   bundle or add-on (starz.ca for the STARZ add-on to Crave), read any way that gets the live page ("Reaching a
   site", below). Only when no way reads the live page: the Internet Archive's copy, then cited third parties ("A site
-  that can't be read"). Web search and third-party articles also help *find* pages. Never copy a price from a third
-  party (a free tier's existence is the one exception). When nothing gives an answer, say so and leave the field out
-  rather than guess.
+  that can't be read"). Web search and third-party articles also help *find* pages. A price from a third party is the
+  last resort (the owner's choice, 2026-11-10: Crunchyroll's Canadian prices): only when neither the live page nor an
+  archive copy of the provider's own pages shows it, from a named publication (the tech press, not forums or AI
+  sites), the newest that agrees with the others, with `sourceUrl` its article and the comment quoting it and saying
+  why. When nothing gives an answer, say so and leave the field out rather than guess.
 - **Regular prices, not offers.** Store the price a subscription renews at. "Billed at $53.88 for the first 12
   months, then renews at $83.88 every 12 months" means `amount: 83.88`. Struck-through prices are usually the
   monthly price, shown next to the yearly per-month rate (see Proton). A first-term offer can go in `notes`; users
