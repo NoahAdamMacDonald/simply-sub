@@ -3,10 +3,12 @@
 
 # What a provider or plan is: a provider's main `category`, where a buyer would look first, and each plan's
 # `categories`, every one it fits (BLUEPRINT §4.5). Ids are permanent once published, like the catalog's: rename the
-# name, never the id. The order is Search's Category list's.
+# name, never the id. The order is Search's Category list's. Books & audiobooks and Smart home & security joined on
+# 2026-11-10, with their features, ahead of the full catalog's research (M11.15).
 service:
   - { id: streaming, name: Streaming video, icon: live_tv }
   - { id: music, name: Music & audio, icon: music_note }
+  - { id: books, name: Books & audiobooks, icon: menu_book }
   - { id: vpn, name: VPN, icon: vpn_lock }
   - { id: privacy-suite, name: Privacy suites, icon: shield }
   - { id: security, name: Antivirus & device security, icon: gpp_good }
@@ -32,20 +34,34 @@ service:
   - { id: jobs, name: Jobs & careers, icon: work }
   - { id: shopping, name: Shopping & memberships, icon: shopping_cart }
   - { id: delivery, name: Food delivery & rides, icon: delivery_dining }
+  - { id: home, name: Smart home & security, icon: home }
   - { id: telecom, name: Phone & internet, icon: cell_tower }
   - { id: finance, name: Banking & investing, icon: account_balance }
 # How the Features page groups features: a feature's `category`.
 feature:
   - { id: streaming, name: Streaming }
   - { id: music, name: Music & audio }
+  - { id: books, name: Books & audiobooks }
   - { id: vpn, name: VPN }
-  - { id: storage, name: Storage }
+  - { id: storage, name: Storage & file sharing }
   - { id: email, name: Email }
   - { id: security, name: Security & passwords }
   - { id: ai, name: AI }
   - { id: gaming, name: Gaming }
   - { id: bundle, name: Included services }
-  - { id: productivity, name: Productivity & calendar }
+  - { id: productivity, name: 'Office, calendar & calls' }
+  - { id: creative, name: Creative & design }
+  - { id: developer, name: Developer tools & hosting }
+  - { id: web, name: 'Browsers, search & DNS' }
+  - { id: social, name: Social media }
+  - { id: news, name: News & magazines }
+  - { id: jobs, name: Jobs & careers }
+  - { id: maps, name: Maps & transit }
+  - { id: shopping, name: 'Shopping, delivery & rides' }
+  - { id: education, name: Learning }
+  - { id: fitness, name: Fitness & wellness }
+  - { id: home, name: Smart home & security }
+  - { id: telecom, name: Phone & internet }
   - { id: general, name: 'Apps, languages & support' }
   - { id: account, name: Accounts & sharing }
   - { id: finance, name: Banking & investing }
