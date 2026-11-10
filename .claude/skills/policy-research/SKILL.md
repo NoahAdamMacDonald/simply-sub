@@ -107,7 +107,10 @@ their own.
   a copyright line or a payment line alone, and give the shares in `name` when the page does ("ESPN is 72 percent
   owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League"). Never
   Wikipedia or the press as the source. Every provider needs one (a public company is its own: "Netflix, Inc., a
-  public company (NASDAQ: NFLX)").
+  public company (NASDAQ: NFLX)"). A company with a majority or controlling owner names both (the owner's rule,
+  2026-11-09): the company, then its owner ("Anghami Inc. (NASDAQ: ANGH), majority-owned by OSN Group"), quoting the
+  page that states the stake, the owner's or its group's own (KIPCO's release, with its site in `website`) or the
+  company's; "majority" rather than a share the page dates, which may have changed since.
 - **Where it's from** (the owner's choice, 2026-11-03): `owner.country`, the company's ISO 3166-1 code. When the
   owner's quotes say it ("a Swiss corporation"), the code alone; else a `page` of its own with one to three `quotes`
   and `lastVerified`, in the same order of pages, or an address in its terms or corporate information ("Los Gatos, CA

@@ -51,15 +51,18 @@ billingCurrency:
   }
 cancelUrl: https://support.anghami.com/hc/en-us/articles/224891887-How-to-Cancel-Your-Anghami-Plus-Subscription
 sources: { pricing: https://www.anghami.com/plus }
-# Owner (M11.2), read 2026-11-09: its investor relations page, a public company's own. OSN Streaming Limited is its
-# controlling shareholder (its 2026 filings there), which the page's own words don't state.
+# Owner (M11.2), read 2026-11-09: Anghami Inc. is a public company (its investor relations page: "Anghami Inc.
+# (NASDAQ: ANGH)") with a majority owner, OSN Group, so both are named (the owner's rule of 2026-11-09). The stake is
+# from KIPCO's release on the deal (KIPCO is OSN's parent group), as of 2024, so the name says "majority" rather than a
+# share that may have changed since.
 owner:
-  name: 'Anghami Inc., a public company (NASDAQ: ANGH)'
+  name: 'Anghami Inc. (NASDAQ: ANGH), majority-owned by OSN Group'
   page:
-    name: Investor Relations
-    url: https://www.anghami.com/investors
+    name: Anghami & OSN+ successfully complete milestone transaction (KIPCO)
+    url: https://kipco.com/anghami-osn-successfully-complete-milestone-transaction-creating-an-entertainment-powerhouse/
+  website: https://kipco.com
   quotes:
-    - 'Anghami Inc. (NASDAQ: ANGH), the leading music and entertainment streaming platform in the MENA region'
+    - 'OSN Group has acquired 55.45% in Anghami, giving it a majority stake at a valuation of $3.69 per share'
   country:
     code: AE
     page:
