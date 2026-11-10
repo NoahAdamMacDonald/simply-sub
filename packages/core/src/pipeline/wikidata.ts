@@ -24,13 +24,17 @@ export interface WikidataClass {
  * are instances of, and on 2026-11-02 (M11.3) from what Firefox, DuckDuckGo, Proton Mail, Quad9, Google Maps,
  * GitHub, AWS, Figma, Uber Eats, Indeed, Rogers, N26 and others are, each class checked for the services it finds
  * with 8 Wikipedia articles or more. Plain "subscription" (Q322948) is left out: it says nothing about the category.
- * Wikidata files WeTransfer and Smash as file hosting, so file sharing and calendars fill mostly by hand.
+ * Wikidata files WeTransfer and Smash as file hosting, so file sharing and calendars fill mostly by hand. On
+ * 2026-11-10, books and smart home: Audible and Storytel are audiobook publishers (beside print publishers), and Home
+ * Assistant is home automation, while Ring, Nest, Arlo and SimpliSafe are only companies, so those fill by hand too.
  */
 export const wikidataClasses: readonly WikidataClass[] = [
   { qid: 'Q59152282', name: 'video streaming service', category: 'streaming' },
   { qid: 'Q16294865', name: 'subscription video on demand service', category: 'streaming' },
   { qid: 'Q829548', name: 'over-the-top media service', category: 'streaming' },
   { qid: 'Q15590336', name: 'music streaming service', category: 'music' },
+  // Mostly publishers of print books too: the best-known few.
+  { qid: 'Q1644277', name: 'audiobook publisher', category: 'books', limit: 15 },
   { qid: 'Q56240391', name: 'virtual private network service', category: 'vpn' },
   { qid: 'Q1281199', name: 'password manager', category: 'passwords' },
   { qid: 'Q4825890', name: 'authenticator', category: 'passwords' },
@@ -76,6 +80,7 @@ export const wikidataClasses: readonly WikidataClass[] = [
   { qid: 'Q3181044', name: 'online food ordering', category: 'delivery' },
   { qid: 'Q27973', name: 'ridesharing company', category: 'delivery' },
   { qid: 'Q65295049', name: 'online taxi service', category: 'delivery' },
+  { qid: 'Q848436', name: 'home automation', category: 'home' },
   // Telecom waits for a design of its own (PROJECT-PLAN M11), and finance for M11.10: the best-known few.
   { qid: 'Q1941618', name: 'mobile network operator', category: 'telecom', limit: 15 },
   { qid: 'Q11371', name: 'internet service provider', category: 'telecom', limit: 15 },

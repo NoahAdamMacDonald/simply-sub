@@ -584,7 +584,8 @@ These aren't subscriptions with a price list. Researching them before the model 
 promotions weekly, and most advertised prices are promotional, which the catalog refuses. It needs rules for what a
 "regular" price is (the price after the promotion, if stated), a feature group (`mobile.data`, speeds, speed after the
 cap, rollover, roaming, 5G, hotspot, eSIM; `internet.speed-down`, `speed-up`, `data-cap`) and its bundles (Crave with
-Bell, Rogers' StreamSaver). Start with each carrier's main plans only.
+Bell, Rogers' StreamSaver). Start with each carrier's main plans only. *Designed on 2026-11-10 with the owner: BLUEPRINT
+§4.12 and PROJECT-PLAN M11.17, with the `mobile.*` and `internet.*` features in the registry.*
 
 ---
 
@@ -721,6 +722,8 @@ Decided on 2026-10-30:
 Still open (each one blocks only the task named):
 1. The rubrics' wording (§1.4), final in M11.1's pull request.
 2. Renaming `streaming.ad-free` to `ad-free`, with its migration (§2.3, M11.4).
-3. Ad blocking and Morphe: list neutrally, or leave out (§3.4, M11.15).
-4. Free-only software, and when (§6, M11.15).
+3. Ad blocking and Morphe: list neutrally, or leave out (§3.4, M11.15). *Decided 2026-11-10: listed neutrally, never
+   suggested in place of YouTube Premium (BLUEPRINT §14).*
+4. Free-only software, and when (§6, M11.15). *Decided 2026-11-10: in scope, each as a provider with a free plan,
+   researched with its category (BLUEPRINT §14).*
 5. Mullvad VPN exits for regional prices: decided 2026-11-02, asked once per batch, listing the countries (M11.7).

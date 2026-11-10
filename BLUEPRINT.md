@@ -1617,6 +1617,54 @@ price list, so they reuse what fits and add what doesn't:
   "Following the Bank of Canada: 1 day after Jun 4, 2026 (to 2.25%); …".
 - **Information, not advice:** the app says so wherever it suggests a finance change.
 
+### 4.12 Phone and internet plans (designed 2026-11-10: M11.17)
+Carriers' plans, designed with the owner before the full catalog's research. They're subscriptions with a price list,
+so they reuse the plan model; what differs is which price counts and where it's sold:
+- **Scope:** personal mobile plans for a phone you bring (postpaid and prepaid) and home internet. Phones and their
+  financing, business plans, TV packages and home phone lines are out for now. A streaming service a plan includes
+  is `includes-subscription`, and internet with streaming sold at a price of its own is a bundle (section 4.4:
+  Rogers' StreamSaver, Bell's internet with Crave).
+- **The regular price** (section 4.3), worded for carriers:
+  - "$65/mo for 24 months, then $80" is a first-term offer, so the price is $80. A time-limited price whose page names
+    no later price isn't added until one does.
+  - A price the page guarantees for a time ("price locked for 2 years") with no other price named is the price, and
+    the plan's notes say until when.
+  - **Automatic payments:** a discount that needs only automatic payments, from a card or a bank account the buyer
+    chooses, is in the price, since carriers headline it and anyone can have it; the notes give the price without it
+    ("$5 more a month without automatic payments").
+  - Discounts that need anything else (a second product, the carrier's credit card, a student or employer programme,
+    loyalty, a promo code, bonus data for a time) aren't in the price.
+  - One-time fees (connection, activation, a SIM) and monthly fees on top (a modem's rental, US "regulatory" fees)
+    aren't in the price either: the notes give them, `internet.equipment-included` says whether the modem costs
+    extra, and the `billing.fees` topic grades them.
+  - Prepaid plans billed every 30 days are `interval: day, intervalCount: 30`; one that renews from a balance or a
+    stored card by itself is `autoRenew: true`.
+- **Where it's sold, and provinces.** Prices are per country (section 4.7). A mobile plan with one price in every
+  province the carrier sells in is priced for the country (`CA`): research reads at least Ontario, Quebec, British
+  Columbia and Alberta, or each province the carrier serves. A plan sold only in some provinces or priced by province
+  (regional carriers such as Videotron, SaskTel and Eastlink, and most home internet, which is sold by address) waits
+  for province prices: M11.17's second part, ISO 3166-2 regions (`CA-QC`) on prices and `availableIn`, picked from the
+  province Settings already has for sales tax. In the US, a plan with one national price is `US`, and home internet
+  sold by address at one national price (5G home internet, satellite) is `US`, its notes saying it depends on the
+  address. Coverage maps aren't recorded: the network a plan runs on and its 5G stand in.
+- **Features** (section 4.2, the registry's Phone & internet group): every telecom plan states `mobile.included` and
+  `internet.included`. A mobile plan states its data at full speed, what happens after it (charged, stops or slowed)
+  and the slowed speed, a top speed when it's capped, 4G, 5G or 5G+, the network it runs on, roaming and unlimited
+  calls by country, hotspot, eSIM, Wi-Fi calling, rollover and whether it's prepaid. Home internet states its download
+  and upload speeds, unlimited data, the connection (fibre, cable, DSL, fixed wireless, satellite) and whether the
+  modem is included. A plan shared by several lines states `account.users`; a carrier's own extra (satellite texting)
+  is a perk.
+- **Terms** are rated like any provider's (section 4.10). Canada's Wireless Code and Internet Code bind every Canadian
+  carrier; a carrier's terms that say the Code applies are quoted as its own words, since the user agrees to the
+  carrier's terms, not the Code. A company's documents are rated once as shared documents for its brands (BCE: Bell,
+  Virgin Plus, Lucky Mobile; Rogers: Rogers, Fido, chatr; TELUS: TELUS, Koodo, Public Mobile; Quebecor: Videotron,
+  Freedom Mobile, Fizz), beside the existing `bell-privacy` and `rogers-privacy`. A fixed term's fee to leave is
+  `cancelFee`, and `billing.cancellation` grades it.
+- **Ways to pay:** pre-authorized debit and online-banking bill payments are `bank-transfer`, cash at a store or a
+  branch is `cash`, and a prepaid voucher is `gift-card`.
+- **Owners:** each brand's company, from the parent's own brands page (Fido and chatr: Rogers Communications; Koodo
+  and Public Mobile: TELUS; Fizz and Freedom Mobile: Quebecor, through Videotron).
+
 ---
 
 ## 5. Catalog API
@@ -3752,6 +3800,26 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-10, preparing the full catalog)**
+- **Features first, the owner's choice:** the feature groups for every category with no provider yet are in the
+  registry before the research reaches them (books, file sharing, office and video calls, creative, developer tools
+  and hosting, browsers, search, DNS, social, news, jobs, maps, delivery, learning, fitness, smart home, phone and
+  internet), with `software.self-hostable` for everyone and Ad free required in search and social. The Features page
+  lists them while no plan has them yet. Categories with providers (streaming, music, AI, VPN, passwords, security,
+  storage, email, calendar, gaming, shopping) get theirs as the research reaches them, with every provider's value.
+- **Two service categories:** Books & audiobooks and Smart home & security, with feature categories for every new
+  group.
+- **Telecom is designed** (section 4.12, M11.17): mobile plans priced the same across a country are researched now;
+  province prices, and the home internet that needs them, are M11.17's second part.
+- **News without bias labels:** the outlets go in with their owners, prices, features and terms; bias and reliability
+  wait until a rater allows its labels to be shown (section 4.10), never the catalog's own judgement.
+- **Ad blockers, SponsorBlock and Morphe** (the guide's §3.4): listed neutrally as free tools, their notes saying what
+  YouTube's terms say of blocking its ads or modified apps (a rating quotes only a provider's own documents); the
+  optimizer never suggests them in place of YouTube Premium.
+- **Free-only services are in scope** (the owner's research list): a service with only free use is a provider with a
+  free plan (browsers, DNS resolvers, Pluto TV, Kick), so the queue's entries left out as "Free, with ads" are
+  queued again as the research reaches them.
 
 **Resolved (2026-11-10, List view's yearly total)**
 - **The owner's request:** switch List view's yearly figure between This year (what's left to pay this calendar year,
