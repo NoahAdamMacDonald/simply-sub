@@ -38,7 +38,11 @@ async function snap(page, name) {
 
 (async () => {
   fs.mkdirSync(outDir, { recursive: true });
-  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  // HEADED=1 opens a visible window: some sites refuse a headless browser but serve an ordinary one (2026-11-10).
+  const browser = await chromium.launch({
+    channel: 'msedge',
+    headless: process.env.HEADED !== '1',
+  });
   // The browser's own user agent, as the discovery pipeline's (scripts/lib/browser.ts): a site that prices by where the
   // visitor is can show a headless one another country's prices (claude.com/pricing showed Canada the US's).
   const probe = await browser.newPage();
