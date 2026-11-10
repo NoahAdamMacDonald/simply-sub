@@ -3,6 +3,7 @@ import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import {
   filterCount,
+  subdivisionName,
   type ActivityFilter,
   type CatalogData,
   type CatalogQuery,
@@ -46,6 +47,8 @@ export class SearchFilters {
   /** The user's currency and country, which write the amounts. */
   readonly currency = input.required<string>();
   readonly country = input<string>();
+  /** Settings' province or state, which Sold in judges by (M11.17). */
+  readonly subdivision = input<string>();
   /** Whether Sold in starts on: Settings' searchSoldOnly. */
   readonly soldByDefault = input(false);
 
@@ -75,7 +78,14 @@ export class SearchFilters {
     () => filterCount(this.query(), { soldOnly: this.soldByDefault() }) > 0,
   );
   /** The user's country, by name: Sold in Canada. */
-  protected readonly countryName = computed(() => countryName(this.country() ?? ''));
+  /** Where Sold in judges: the user's province when they gave one (M11.17), else their country. */
+  protected readonly soldIn = computed(() => {
+    const subdivision = this.subdivision();
+    return (
+      (subdivision !== undefined && subdivisionName(subdivision)) ||
+      countryName(this.country() ?? '')
+    );
+  });
 
   /** A thumb let go: the new limits, as one history entry for a run of moves. */
   protected choosePrice({ min, max }: PriceLimits): void {

@@ -1,5 +1,3 @@
-import { subdivisionName } from '../tax/subdivisions';
-
 // The region codes a price, billingCurrency or availableIn can use (BLUEPRINT §4.7): ISO 3166-1 alpha-2 codes,
 // groups of them (EU), and GLOBAL for one price wherever a provider sells; a price and availableIn can also name a
 // province or state (CA-QC, M11.17), which is part of its country as a country is part of its group. regionSchema
@@ -53,7 +51,9 @@ export const regionGroups: Readonly<Record<string, readonly string[]>> = {
  * Settings lists (core's subdivisionsOf: Canada's and the US's), since the user's own is where it's picked for.
  */
 export function isSubdivision(code: string): boolean {
-  return subdivisionName(code) !== undefined;
+  // Its shape only: the app reads validated files, and the names table (core's subdivisionsOf) stays out of its first
+  // download. Validation checks it's one Settings lists (validateCatalog's isSellingRegion).
+  return /^[A-Z]{2}-[A-Z0-9]{1,3}$/.test(code);
 }
 
 /** The country a region is in: a province's (CA-QC → CA), else the region itself. */
@@ -98,11 +98,6 @@ export function membersOf(region: string): readonly string[] {
 /** Whether a catalog file can use `code` as a region: an ISO code, a group or GLOBAL. */
 export function isCatalogRegion(code: string): boolean {
   return code === globalRegion || Object.hasOwn(regionGroups, code) || isoRegions.has(code);
-}
-
-/** Whether a price or availableIn can name `code`: a catalog region, or a province or state (M11.17). */
-export function isSellingRegion(code: string): boolean {
-  return isCatalogRegion(code) || isSubdivision(code);
 }
 
 /**

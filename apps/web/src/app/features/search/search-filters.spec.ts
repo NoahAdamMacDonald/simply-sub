@@ -292,6 +292,20 @@ describe('SearchFilters', () => {
   });
 
   describe('sold in', () => {
+    it('is named after the user’s province when they gave one (M11.17)', async () => {
+      await setup();
+      fixture.componentRef.setInput('subdivision', 'CA-QC');
+      await fixture.whenStable();
+
+      expect(
+        await loader.getHarness(MatCheckboxHarness.with({ label: 'Sold in Quebec' })),
+      ).toBeTruthy();
+      const input = element().querySelector('.sold input');
+      expect(
+        element().querySelector(`#${input?.getAttribute('aria-describedby')}`)?.textContent,
+      ).toBe('Only plans priced for Quebec');
+    });
+
     it('is a checkbox named after the user’s country, with a hint', async () => {
       await setup();
       const sold = await loader.getHarness(MatCheckboxHarness.with({ label: 'Sold in Canada' }));

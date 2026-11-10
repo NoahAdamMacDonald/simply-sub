@@ -79,6 +79,7 @@ import {
   settledBillingDay,
   sharedRankEdits,
   sharedRanksFor,
+  subdivisionIn,
   taxAddedRegions,
   typedPrice,
   type BillingDay,
@@ -278,8 +279,12 @@ export class ItemDialog {
   private readonly priceContext = computed<PriceContext>(() => {
     const fx = this.fx.rates();
     const billingCurrency = this.provider()?.billingCurrency;
+    const { region } = this.model();
+    // Bought in the user's own country, it's priced and sold for their province (M11.17).
+    const subdivision = subdivisionIn(region, this.settings.saved());
     return {
-      region: this.model().region,
+      region,
+      ...(subdivision !== undefined && { subdivision }),
       currency: this.currency(),
       ...(billingCurrency && { billingCurrency }),
       ...(fx && { fx }),
@@ -381,7 +386,8 @@ export class ItemDialog {
           .filter(
             (plan) =>
               plan.id === this.model().planId ||
-              availability(plan.prices, provider, context.region) !== 'not-offered',
+              availability(plan.prices, provider, context.region, context.subdivision) !==
+                'not-offered',
           )
           .map((plan) => ({
             id: plan.id,

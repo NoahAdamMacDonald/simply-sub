@@ -55,13 +55,19 @@ const quebecOnly = [price('CA-QC', 35)];
 const carrier = seller([national, byProvince, quebecOnly]);
 
 describe('provinces as regions', () => {
-  it('knows the provinces and states Settings lists, each part of its country', () => {
+  it('reads a province or state by its shape, each part of its country', () => {
+    // The shape only: validation checks it's one Settings lists (below), which keeps their names out of the app's
+    // first download.
     expect([isSubdivision('CA-QC'), isSubdivision('US-NY'), isSubdivision('CA-XX')]).toEqual([
       true,
       true,
+      true,
+    ]);
+    expect([isSubdivision('CA'), isSubdivision('GLOBAL'), isSubdivision('ca-qc')]).toEqual([
+      false,
+      false,
       false,
     ]);
-    expect([isSubdivision('CA'), isSubdivision('FR-75')]).toEqual([false, false]);
     expect([countryOf('CA-QC'), countryOf('US-NY'), countryOf('CA'), countryOf('EU')]).toEqual([
       'CA',
       'US',

@@ -353,10 +353,10 @@
       "type": "array",
       "items": {
         "type": "string",
-        "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
-        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL"
+        "pattern": "^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$",
+        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL"
       },
-      "description": "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Left out, it's sold where it has prices and unknown elsewhere"
+      "description": "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Provinces or states when it sells in only some of a country's (CA-QC, M11.17). Left out, it's sold where it has prices and unknown elsewhere"
     },
     "cancelUrl": {
       "type": "string",
@@ -727,9 +727,9 @@
               "properties": {
                 "region": {
                   "type": "string",
-                  "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
-                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
-                  "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+                  "pattern": "^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$",
+                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL",
+                  "description": "Where this price applies: an ISO 3166-1 alpha-2 region, a group (EU), a province or state priced on its own (CA-QC, M11.17), or GLOBAL"
                 },
                 "currency": {
                   "type": "string",
@@ -1398,9 +1398,9 @@
               "properties": {
                 "region": {
                   "type": "string",
-                  "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
-                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
-                  "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+                  "pattern": "^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$",
+                  "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL",
+                  "description": "Where this price applies: an ISO 3166-1 alpha-2 region, a group (EU), a province or state priced on its own (CA-QC, M11.17), or GLOBAL"
                 },
                 "currency": {
                   "type": "string",
@@ -1541,9 +1541,9 @@
                     "properties": {
                       "region": {
                         "type": "string",
-                        "pattern": "^(?:[A-Z]{2}|GLOBAL)$",
-                        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL",
-                        "description": "Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL"
+                        "pattern": "^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$",
+                        "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL",
+                        "description": "Where this price applies: an ISO 3166-1 alpha-2 region, a group (EU), a province or state priced on its own (CA-QC, M11.17), or GLOBAL"
                       },
                       "currency": {
                         "type": "string",

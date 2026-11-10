@@ -20,6 +20,7 @@ import {
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import { saysTaxExcluded, saysTaxIncluded } from '../pipeline/tax-wording';
+import { subdivisionName } from '../tax/subdivisions';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
@@ -31,7 +32,6 @@ import {
   globalRegion,
   groupsOf,
   isCatalogRegion,
-  isSellingRegion,
   isSubdivision,
   isoRegions,
   membersOf,
@@ -1833,6 +1833,14 @@ function checkBillingCurrency(
       }
     }
   }
+}
+
+/**
+ * Whether a price or availableIn can name `code`: a catalog region, or a province or state Settings lists (M11.17).
+ * Kept out of regions.ts, which the app loads first, with the names table it needs.
+ */
+function isSellingRegion(code: string): boolean {
+  return isCatalogRegion(code) || subdivisionName(code) !== undefined;
 }
 
 /**

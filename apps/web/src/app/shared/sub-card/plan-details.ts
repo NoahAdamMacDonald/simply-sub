@@ -29,6 +29,7 @@ import {
   quoteLink,
   renewalAnchorNames,
   repositoryLabel,
+  subdivisionIn,
   type AddRequest,
   type BundleSaving,
   type CardNetwork,
@@ -194,11 +195,18 @@ export class PlanDetails {
     const data = this.catalog.catalog();
     if (!saved || !data) return undefined;
     const fx = this.fx.rates();
+    // Priced and sold for the user's province (M11.17).
+    const subdivision = subdivisionIn(saved.country, saved);
     return planExtras(
       this.provider(),
       this.plan(),
       data,
-      { region: saved.country, currency: saved.currency, ...(fx && { fx }) },
+      {
+        region: saved.country,
+        ...(subdivision !== undefined && { subdivision }),
+        currency: saved.currency,
+        ...(fx && { fx }),
+      },
       this.today(),
     );
   });

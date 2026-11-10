@@ -202,6 +202,11 @@ export class SettingsPage {
     const saved = this.saved();
     return saved && countryName(saved.country);
   });
+  /** Where Search's Sold in judges: the province when one is saved (M11.17), else the country. */
+  protected readonly soldIn = computed(() => {
+    const subdivision = this.saved()?.subdivision;
+    return (subdivision !== undefined && subdivisionName(subdivision)) || this.country();
+  });
 
   /** Whether Search starts with Sold in on (P8, M5.6); kept only when it's on. */
   /** The page's groups and their sections, for "On this page" (M4.7): the most used first. */

@@ -51,9 +51,9 @@
     [aria-describedby]="id + '-sold'"
     (change)="chooseSold($event.checked)"
   >
-    Sold in {{ countryName() }}
+    Sold in {{ soldIn() }}
   </mat-checkbox>
-  <p class="hint" [id]="id + '-sold'">Only plans priced for {{ countryName() }}</p>
+  <p class="hint" [id]="id + '-sold'">Only plans priced for {{ soldIn() }}</p>
 </div>
 
 <button

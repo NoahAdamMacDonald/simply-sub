@@ -256,6 +256,24 @@ describe('financeSuggestions: moving savings (§10.6)', () => {
     });
   });
 
+  it('leaves out an account sold only in another province (M11.17)', () => {
+    // A credit union of British Columbia: its availableIn names the province, its price is Canada's.
+    const credit = {
+      ...savingsProvider('example-hisa', [{ slug: 'hisa', fee: 0, rate: 4 }]),
+      availableIn: ['CA-BC'],
+    };
+    const { holding, suggest } = setup([fintech, credit]);
+    expect(kinds(suggest([holding('example-fintech.essential', 5000)]))).toEqual([]);
+    // Someone in British Columbia is told about it.
+    const { holding: inBc, input } = setup([fintech, credit]);
+    const bc = { ...input([]).context, place: { country: 'CA', subdivision: 'CA-BC' } };
+    const move = financeSuggestions({
+      ...input([inBc('example-fintech.essential', 5000)]),
+      context: bc,
+    }).find(({ kind }) => kind === 'move-savings');
+    expect(move).toMatchObject({ to: { plan: { planId: 'example-hisa.hisa', rate: 4 } } });
+  });
+
   it('leaves out an account the user can’t open', () => {
     const studentsOnly: Provider = {
       ...savingsProvider('example-hisa', [{ slug: 'hisa', fee: 0, rate: 4 }]),
