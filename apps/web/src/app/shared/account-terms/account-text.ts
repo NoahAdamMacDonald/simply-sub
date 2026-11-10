@@ -6,7 +6,7 @@ import {
   type FollowedChange,
 } from '@simply-sub/core';
 import { dateText } from '../date-text';
-import { wholeAmountText } from '../price-tag/price-text';
+import { amountText, wholeAmountText } from '../price-tag/price-text';
 
 // How a finance account's terms read on a card (M11.10, BLUEPRINT §4.11): plain sentences built from its account
 // block, money in the user's country's way, as price tags write it.
@@ -147,6 +147,7 @@ export function limitLines(
       values.day !== undefined && `${money(values.day)} a day`,
       values.week !== undefined && `${money(values.week)} a week`,
       values.month !== undefined && `${money(values.month)} a month`,
+      values.year !== undefined && `${money(values.year)} a year`,
     ]
       .filter((part): part is string => typeof part === 'string')
       .join(', ')}`;
@@ -154,10 +155,11 @@ export function limitLines(
     ...(limits.debits !== undefined ? [`${limits.debits} transactions a month included`] : []),
     ...(limits.eTransfer ? [period('e-Transfers', limits.eTransfer)] : []),
     ...(limits.atmWithdrawal ? [period('ATM withdrawals', limits.atmWithdrawal)] : []),
+    ...(limits.purchases ? [period('Card purchases', limits.purchases)] : []),
   ];
 }
 
-/** "CDIC, up to $100,000, in your name". */
+/** "CDIC, up to $100,000, held in trust for you, through Peoples Trust Company". */
 export function protectionText(
   protection: Account['protection'],
   currency: string,
@@ -168,5 +170,34 @@ export function protectionText(
     protection.limit === undefined
       ? ''
       : `, up to ${wholeAmountText(protection.limit, currency, country)}`;
-  return `${insurerNames[protection.insurer]}${limit}, ${heldNames[protection.held]}`;
+  // Whose cover it is, when another institution holds the money (2026-11-10).
+  const through = protection.through ? `, through ${listText(protection.through, 'and')}` : '';
+  return `${insurerNames[protection.insurer]}${limit}, ${heldNames[protection.held]}${through}`;
+}
+
+const feePeriods: Record<NonNullable<Account['fees']>['items'][number]['per'], string> = {
+  use: 'each',
+  month: 'a month',
+  year: 'a year',
+};
+
+/**
+ * Its fees beyond the monthly one (2026-11-10), in a line: "Interac e-Transfer $1.50 each; Foreign exchange 2.50% of the
+ * amount; Paper statements $2.00 a month".
+ */
+export function feesText(
+  fees: NonNullable<Account['fees']>,
+  currency: string,
+  country: string | undefined,
+): string {
+  return fees.items
+    .map((fee) => {
+      const parts = [
+        fee.amount !== undefined && amountText(fee.amount, currency, country),
+        fee.percent !== undefined && `${rateText(fee.percent)} of the amount`,
+      ].filter((part): part is string => typeof part === 'string');
+      const per = fee.amount !== undefined ? ` ${feePeriods[fee.per]}` : '';
+      return `${fee.name} ${parts.join(' plus ')}${per}`;
+    })
+    .join('; ');
 }

@@ -983,7 +983,8 @@ function checkRenewalAnchor(
 /** A page's lastVerified: not after today, and a warning once it's a year old, like a policy's. */
 /**
  * Finance accounts (M11.10, BLUEPRINT §4.11): a finance provider's plans are accounts, each with its terms, and it says
- * who regulates it; no other provider's plan is one. Its rates and its protection are quoted from its own pages.
+ * who regulates it; no other provider's plan is one. Its rates, its protection and its fees are quoted from its own
+ * pages.
  */
 function checkAccounts(
   provider: Provider,
@@ -1013,6 +1014,7 @@ function checkAccounts(
         ? [{ url: plan.account.rates.sourceUrl, at: [...path, 'rates', 'sourceUrl'] }]
         : []),
       { url: plan.account.protection.url, at: [...path, 'protection', 'url'] },
+      ...(plan.account.fees ? [{ url: plan.account.fees.url, at: [...path, 'fees', 'url'] }] : []),
     ];
     for (const { url, at } of pages) {
       if (!isOnDomain(url, sites)) {
@@ -1039,6 +1041,9 @@ function checkAccounts(
       today,
       report,
     );
+    if (plan.account.fees) {
+      checkReadOn(plan.account.fees.lastVerified, [...path, 'fees', 'lastVerified'], today, report);
+    }
   });
   if (finance && !provider.regulators) {
     report([], 'Say who regulates it (regulators), each with its register’s page for it');

@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import type { Account } from '@simply-sub/core';
+import { quoteLink, type Account } from '@simply-sub/core';
 import { AccountTerms } from './account-terms';
 
 const account: Account = {
@@ -79,6 +79,29 @@ describe('AccountTerms (M11.10)', () => {
       'Following the Bank of Canada: not yet after Jun 4, 2026 (to 2.25%); 1 day after Mar 12, 2026 (to 2.50%); the same day as Jan 29, 2026 (to 2.75%); not after Oct 30, 2025 (to 3.00%)',
     );
     expect(render(account).querySelector('li.followed')).toBeNull();
+  });
+
+  it('lists its other fees, linked to its fee page scrolled to its words (2026-11-10)', () => {
+    const element = render({
+      ...account,
+      fees: {
+        items: [{ name: 'Interac e-Transfer', amount: 1.5, per: 'use' }],
+        url: 'https://example.com/fees',
+        quotes: ['Interac e-Transfer: $1.50 each'],
+        lastVerified: '2026-11-10',
+      },
+    });
+    const line = [...element.querySelectorAll('li')].find((li) =>
+      li.textContent?.includes('Other fees'),
+    );
+    expect(line?.textContent?.replace(/\s+/g, ' ').replace('open_in_new', '').trim()).toBe(
+      'Other fees: Interac e-Transfer $1.50 each, according to its fee page',
+    );
+    const link = line?.querySelector('a');
+    expect([link?.getAttribute('href'), link?.getAttribute('aria-label')]).toEqual([
+      quoteLink('https://example.com/fees', ['Interac e-Transfer: $1.50 each']),
+      'Its fee page, opens in a new tab',
+    ]);
   });
 
   it('leaves out what an account doesn’t have', () => {

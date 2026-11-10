@@ -1587,6 +1587,16 @@ price list, so they reuse what fits and add what doesn't:
   of order or a first one above 0, a waiver with no condition, and protection with no quote; every plan of a finance
   provider is an account and no other plan is; a finance provider names its `regulators` (each a name, its register's
   page for the provider, and when it was read); rates and protection are quoted from the provider's own sites.
+- **As built (M11.19, the owner's items of 2026-11-10, before the finance research):** `limits` add `purchases` (what
+  the card can spend) and a `year` to each period; `protection.through` names the member institutions that hold the
+  money when the provider doesn't (KOHO's Peoples Trust Company), each named in its quotes, and the card says "CDIC,
+  up to $100,000, held in trust for you, through Peoples Trust Company"; `fees` lists its other fees from its own fee
+  page (each a `name`, an `amount` each time, a month or a year, or a `percent` of the amount, such as a foreign
+  exchange fee), each name and figure checked against the page's words (1.5 as 1.50, 1.5 or 1,50), shown as "Other
+  fees: Interac e-Transfer $1.50 each; Foreign exchange 2.50% of the amount", linked to the page. Baselines check
+  the fee and protection pages' words. The features add LIF and DPSP (through an employer) to registered accounts, a
+  partner network's ATMs (THE EXCHANGE, ACCULINK), and `finance.credit-cards`, provider-wide: the networks of the
+  credit cards an institution issues, since a card isn't an account plan.
 - **Finance features** (a feature category of their own, through feature-discovery): account types and registered
   accounts (TFSA, RRSP, FHSA, RESP, RDSP, RRIF, LIRA), cards and their networks (Interac debit, Visa Debit,
   Mastercard, prepaid, credit), Interac e-Transfer, ATM network and fee refunds, cash deposits (branch, partner, Canada
