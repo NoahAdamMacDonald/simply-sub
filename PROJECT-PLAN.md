@@ -2167,9 +2167,15 @@ in every D1 `json` column search parses.
     refuses this machine and shows nothing even on an ordinary connection, so its pricing, terms and privacy notice are
     the Internet Archive's copies and the bot reads tidal.com from the archive too (`data/automation.yaml`); its other
     countries' prices stay unread. Pandora, Anghami and Mixcloud follow in part 3, Amazon Music in part 4.
+  - **Music, part 3** (2026-11-09): Pandora (`pandora`: Free, Plus, Premium and Premium Family, US only, read through
+    a US exit; no official page states its audio quality, so it's SoundGuys' 192 kbps, the first third-party claim,
+    M11.16) and Anghami (`anghami`: Free, Plus and Family in every catalog region, in US dollars; Plus is cheaper
+    outside North America, monthly only there, and outside the Middle East and North Africa it streams Arabic songs
+    only, a notable rating). Anghami's billing-date wording joins core's same-date patterns. mixcloud.com answers this
+    machine with a bot check, so Mixcloud moves to part 4, from the Internet Archive's copies.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 and 2 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 3 done)
 
 **M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
 - **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on

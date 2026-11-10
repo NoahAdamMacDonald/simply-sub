@@ -1,0 +1,459 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 3). Pandora is sold in the US only, and from Canada
+# its site answers "Pandora is unavailable in this country or region", so pandora.com was read through a US exit and
+# its help centre from Canada. Pages, each quoted where it's used:
+# Pricing: pandora.com/plans (and /upgrade, the same cards): Pandora Plus "$5.99 / month" and Pandora Premium "$11.99 /
+# month", and Premium Family from its help article ("$19.99/monthly or $219.89/annually"). Plus's and Premium's
+# yearly prices show only in a signed-in account's settings ("The yearly subscription plan option is only available when
+# purchased directly through Pandora"), so they aren't listed. The Student and Military plans need proof of
+# eligibility and aren't listed either.
+# Where it's sold: "The Services are available only in the United States of America and its territories" (its terms).
+# Region checklist: not needed (US only).
+# Bundles and resellers: none on its pages; Apple, Google Play, Amazon Appstore, Roku and T-Mobile bill it (its cancelling
+# article): ways to pay.
+# Features, read 2026-11-09 on pandora.com/plans (the screenshot shows what each plan lacks): Free has "Search and play
+# what you want *" and "Unlimited skips *" only after "viewing an ad", and no offline listening or playlists; Plus
+# "Ad-free personalized stations", "Offline listening", and search and play only after an ad; Premium "Ad-free
+# personalized music", "Search and play what you want", "Unlimited offline listening"; Premium Family "all of the
+# features of Pandora Premium to up to six unique Pandora accounts" (its help article). No official page states its
+# audio quality (its help names only an "Audio Quality" setting), so audio quality is a third party's: SoundGuys lists
+# its three settings, the highest "High (192 kbps MP3)", so Standard for all (M11.16). No audiobooks.
+
+id: pandora
+name: Pandora
+website: https://www.pandora.com
+# Its help centre.
+domains: [help.pandora.com]
+category: music
+spendCategory: streaming
+availableIn: [US]
+billingCurrency: { US: USD }
+cancelUrl: https://help.pandora.com/s/article/Cancel-your-Subscription-1519949295562?language=en_US
+sources: { pricing: https://www.pandora.com/plans }
+# Owner (M11.2), read 2026-11-09 through a US exit: its privacy policy is Sirius XM's, which names Pandora as its
+# subsidiary and gives Sirius XM's address.
+owner:
+  name: Sirius XM Radio LLC (SiriusXM)
+  page:
+    name: Privacy Policy
+    url: https://www.pandora.com/privacy
+  quotes:
+    - 'describes the personal data collected and processed by Sirius XM Radio LLC and its subsidiaries, including Pandora Media, LLC'
+  country:
+    code: US
+    page:
+      name: Privacy Policy
+      url: https://www.pandora.com/privacy
+    quotes:
+      - 'Sirius XM Radio LLC, 1221 Avenue of the Americas, 35th Floor, New York, NY 10104'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+# Ways to pay (M11.5), read 2026-11-09: a card (its privacy policy's payment data), PayPal (its billing article), and
+# the stores that bill it (its cancelling article, which also names T-Mobile without calling it a phone bill, so it isn't
+# listed). No card networks named.
+paymentMethods:
+  - methods: [card]
+    page: Privacy Policy
+    url: https://www.pandora.com/privacy
+    quotes:
+      - 'This may include, credit or debit card number, expiration date, billing zip code, secure payment token associated with your payment card.'
+  - methods: [paypal]
+    page: Change your billing method or subscription plan
+    url: https://help.pandora.com/s/article/Change-your-Payment-Information-1519949295577?language=en_US
+    quotes:
+      - Manage a PayPal-billed subscription
+  - methods: [app-store]
+    page: How to cancel your subscription
+    url: https://help.pandora.com/s/article/Cancel-your-Subscription-1519949295562?language=en_US
+    quotes:
+      - Cancel my Apple-billed subscription or trial
+      - Cancel my Google Play-billed subscription or trial
+# Renewal day (M11.5): its rate-change article says a new price "applies at your next monthly billing date", and no page
+# says which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://help.pandora.com/s/article/2026-Pandora-Subscription-Rate-Change?language=en_US
+    - https://www.pandora.com/legal
+  lastVerified: 2026-11-09
+
+plans:
+  - id: pandora.free
+    name: Free
+    link: https://www.pandora.com/plans
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+    thirdParty:
+      audio.quality:
+        publisher: SoundGuys
+        url: https://www.soundguys.com/spotify-vs-pandora-36915/
+        quote: 'There are currently three options for sound quality: Low (32 kbps AAC+), Standard (64 kbps AAC+), High (192 kbps MP3).'
+        lastVerified: 2026-11-09
+    notes: With ads. You can search and play a song, or skip without limit, after viewing an ad.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.pandora.com/plans
+  - id: pandora.plus
+    name: Plus
+    link: https://www.pandora.com/plans
+    features:
+      ad-free: true
+      audio.quality: standard
+      music.on-demand: false
+      music.offline: true
+      audiobooks.included: false
+    thirdParty:
+      audio.quality:
+        publisher: SoundGuys
+        url: https://www.soundguys.com/spotify-vs-pandora-36915/
+        quote: 'There are currently three options for sound quality: Low (32 kbps AAC+), Standard (64 kbps AAC+), High (192 kbps MP3).'
+        lastVerified: 2026-11-09
+    notes: Ad-free stations with unlimited skips; you can search and play a song after viewing an ad.
+    prices:
+      - region: US
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.pandora.com/plans
+  - id: pandora.premium
+    name: Premium
+    link: https://www.pandora.com/plans
+    features:
+      ad-free: true
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    thirdParty:
+      audio.quality:
+        publisher: SoundGuys
+        url: https://www.soundguys.com/spotify-vs-pandora-36915/
+        quote: 'There are currently three options for sound quality: Low (32 kbps AAC+), Standard (64 kbps AAC+), High (192 kbps MP3).'
+        lastVerified: 2026-11-09
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.pandora.com/plans
+  - id: pandora.premium-family
+    name: Premium Family
+    link: https://www.pandora.com/plans
+    features:
+      ad-free: true
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      account.users: 6
+    thirdParty:
+      audio.quality:
+        publisher: SoundGuys
+        url: https://www.soundguys.com/spotify-vs-pandora-36915/
+        quote: 'There are currently three options for sound quality: Low (32 kbps AAC+), Standard (64 kbps AAC+), High (192 kbps MP3).'
+        lastVerified: 2026-11-09
+    notes: Premium for up to six accounts, each playing one stream at a time.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://help.pandora.com/s/article/000002262?language=en_US
+      - region: US
+        currency: USD
+        amount: 219.89
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://help.pandora.com/s/article/000002262?language=en_US
+
+# Terms and policies, read 2026-11-09 (M11.15): its Services Terms of Use and Sirius XM's Privacy Policy (both through a
+# US exit; the policy covers SiriusXM's other services too, a shared document once SiriusXM joins the catalog), and its
+# help centre's articles on the 2026 rate change, cancelling, refunds, billing, deleting an account, offline mode and
+# Premium Family, its Subscription Terms (through a US exit) and its sign-up form, whose line names only the Terms of
+# Use and the Privacy Policy. Its Premium Trial Terms are a 90-day trial code's, with no topic beyond these. Its
+# Subscription Terms upgrade a plan at once, prorated, but its billing article makes every change on the next billing
+# date, so switching plans is graded by the article. Calibrated against Spotify's, Deezer's and Tidal's grades. Not
+# rated: rights over your content and its apps' licence (not topics for music).
+policies:
+  links:
+    - name: Plans
+      url: https://www.pandora.com/plans
+    - name: Services Terms of Use
+      url: https://www.pandora.com/legal
+    - name: Subscription Terms
+      url: https://www.pandora.com/legal/subscription
+    - name: Sign up
+      url: https://www.pandora.com/account/register
+    - name: Privacy Policy (Sirius XM)
+      url: https://www.pandora.com/privacy
+    - name: 2026 Pandora Subscription Rate Change
+      url: https://help.pandora.com/s/article/2026-Pandora-Subscription-Rate-Change?language=en_US
+    - name: How to cancel your subscription
+      url: https://help.pandora.com/s/article/Cancel-your-Subscription-1519949295562?language=en_US
+    - name: Refunds
+      url: https://help.pandora.com/s/article/Refunds-1519949304443?language=en_US
+    - name: Change your billing method or subscription plan
+      url: https://help.pandora.com/s/article/Change-your-Payment-Information-1519949295577?language=en_US
+    - name: How to Delete Your Pandora Account
+      url: https://help.pandora.com/s/article/Cancel-Deactivate-or-Delete-your-Account-1519949295569?language=en_US
+    - name: Offline Mode and Downloads
+      url: https://help.pandora.com/s/article/Offline-Mode-and-Downloads?language=en_US
+    - name: Pandora Premium Family Plan
+      url: https://help.pandora.com/s/article/000002262?language=en_US
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its site and apps, including session replays, for analytics. You can limit only the cookies, browser by browser.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'Sirius XM may record through session replay technology details of your interactions with the Services'
+        - url: https://www.pandora.com/privacy
+          quote: 'To disable sharing through cookies set on our site by third parties for advertising and analytics purposes, please adjust your settings by clicking on either Cookie Settings or Manage Cookies from the footer of our webpages.'
+      action:
+        name: Its privacy policy (cookie settings)
+        url: https://www.pandora.com/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your email and device data with other companies for their own advertising and marketing. You can limit that only through cookie settings, or a state’s opt-out where you live.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'We may share or otherwise make available your email address, Device Data, or other personal information with unaffiliated third parties with whom we have a business relationship for ours or for their own business and advertising/marketing purposes'
+      action:
+        name: Its privacy policy (your choices)
+        url: https://www.pandora.com/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The free plan has ads, and ad companies track you on its sites. Opting out of personal ads is partial, and you can’t opt out of all ads.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'Sirius XM works with advertisers, advertising agencies, and providers of ad-related services for targeted advertising-related purposes.'
+        - url: https://www.pandora.com/privacy
+          quote: 'Please note, it is not possible to opt-out of all advertising on the Services.'
+      action:
+        name: Its privacy policy (your choices)
+        url: https://www.pandora.com/privacy
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether it trains AI on your listening or what you post.'
+      pages: [https://www.pandora.com/legal, https://www.pandora.com/privacy]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it thinks reasonably necessary, for its services, marketing and research, with no set periods.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'We retain personal data for as long as reasonably necessary for the purposes set out in this Policy'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account yourself (a paid one once its plan has ended), but it doesn’t say how long removing your data takes.'
+      sources:
+        - url: https://help.pandora.com/s/article/Cancel-Deactivate-or-Delete-your-Account-1519949295569?language=en_US
+          quote: 'If you delete your account, that decision is final.'
+        - url: https://help.pandora.com/s/article/Cancel-Deactivate-or-Delete-your-Account-1519949295569?language=en_US
+          quote: 'I want to permanently delete my Pandora Plus or Pandora Premium account.'
+      action:
+        name: How to Delete Your Pandora Account
+        url: https://help.pandora.com/s/article/Cancel-Deactivate-or-Delete-your-Account-1519949295569?language=en_US
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy gives a copy of your data only as a right some states’ residents have.'
+      pages: [https://www.pandora.com/privacy]
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your data to the police and courts where the law requires, such as for a valid subpoena. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'Law Enforcement and Government Agencies/Where Required By Law (including third parties in connection with court or other legal actions including valid subpoenas)'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'The service is run from the US, for people who live there. It doesn’t describe how your data is protected when it moves.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'The Services are controlled and operated from the United States.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Its sign-up form asks for your email address, a password, your birth year, your ZIP code and your gender.'
+      sources:
+        - url: https://www.pandora.com/account/register
+          quote: 'Email Address'
+        - url: https://www.pandora.com/account/register
+          quote: 'Birth Year'
+        - url: https://www.pandora.com/account/register
+          quote: 'Zip Code'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: good
+      reason: 'Under-18s need a parent’s consent, and it doesn’t sell or use for targeted ads the data of users it knows are under 18.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'or if you have parental consent and reside in an Authorized Jurisdiction where the minimum age with parental consent is 13, you must be at least 13 years of age ("Minimum Age")'
+        - url: https://www.pandora.com/privacy
+          quote: 'We do not “sell”, or use or “share” for targeted advertising purposes, the personal data of consumers we know to be less than 18 years of age.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel on its website and keep your plan to the end of the period, but must cancel at least 24 hours before it renews.'
+      sources:
+        - url: https://help.pandora.com/s/article/Cancel-your-Subscription-1519949295562?language=en_US
+          quote: 'be sure to cancel your subscription or trial at least 24 hours beforehand.'
+        - url: https://help.pandora.com/s/article/Cancel-your-Subscription-1519949295562?language=en_US
+          quote: 'Select Switch Plans and click Cancel Subscription in the bottom corner of the screen.'
+        - url: https://www.pandora.com/legal/subscription
+          quote: 'If you cancel your Subscription Product during your current Access Period, your access to the Subscription Services will continue until the end of your then-current Access Period, at which point it will expire.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Its terms give no money back, though its help says a yearly plan bought on its website gets back the unused part. You keep your plan to the end of the period.'
+      sources:
+        - url: https://www.pandora.com/legal/subscription
+          quote: 'Purchase and/or redemption of your Subscription Product is final and non-refundable; Pandora will not issue you any refund, including partial, pro-rated, or otherwise unless required to do so by law.'
+        - url: https://help.pandora.com/s/article/Refunds-1519949304443?language=en_US
+          quote: 'We offer pro-rated refunds for annual subscriptions purchased directly through the Pandora website.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It emails you 30 days before a new price, which starts only at your next billing date, never on time you’ve paid for, so you can cancel first.'
+      sources:
+        - url: https://www.pandora.com/legal/subscription
+          quote: 'We will provide you with thirty (30) days prior notice via email before changes in Subscription Products or Fees take effect.'
+        - url: https://www.pandora.com/legal/subscription
+          quote: 'Any changes to the Subscription Products or Fees will be effective upon your next billing cycle, and will not apply retroactively or to the remainder of your current Access Period.'
+        - url: https://help.pandora.com/s/article/2026-Pandora-Subscription-Rate-Change?language=en_US
+          quote: 'Monthly plans: Updated price applies at your next monthly billing date'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial usually needs a card, and turns into a paid plan unless you turn off renewal first. It doesn’t say it reminds you.'
+      sources:
+        - url: https://www.pandora.com/legal/subscription
+          quote: 'In most cases, you will be required to provide a credit card or other payment method in order to redeem the Trial, and in order to ensure uninterrupted access to the Subscription Services after your Trial expires.'
+        - url: https://www.pandora.com/plans
+          quote: 'Subscription automatically renews after trial or current Access Period unless canceled in advance.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its pages say a plan renews on its own, but not that it reminds you first.'
+      pages: [https://www.pandora.com/plans, https://www.pandora.com/legal]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      tier: poor
+      reason: 'Its terms mention late fees, without saying how much.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'Unless otherwise stated, all fees and charges are due and payable in advance, are non-refundable, and are exclusive of any applicable federal, state, or local taxes.'
+        - url: https://www.pandora.com/legal
+          quote: 'All such fees and charges (including any taxes and late fees, as applicable)'
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'A change of plan starts on your next billing date.'
+      sources:
+        - url: https://help.pandora.com/s/article/Change-your-Payment-Information-1519949295577?language=en_US
+          quote: "Choose the plan you'd prefer and the changes will be made on your next billing date."
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to private arbitration, one person at a time, with no class actions and no way to opt out.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'ANY DISPUTE BETWEEN US, UNLESS PROVIDED OTHERWISE HEREIN, WILL BE RESOLVED BY BINDING ARBITRATION ON AN INDIVIDUAL BASIS AS OUTLINED IN SECTION 25 BELOW.'
+        - url: https://www.pandora.com/legal
+          quote: 'You do not have the right to act as a class representative or participate as a member of a class of claimants with respect to any dispute submitted to arbitration or litigation.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It emails you about big changes to its terms, which start 30 days later, except new features and legal changes, which start at once.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'You agree that such material changes will be effective thirty (30) days after our notice to you, except for changes that relate to new features or for legal reasons, which will become effective immediately.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can close your account at any time, for any reason, by emailing you first, and its subscription terms refund nothing unless a law requires it.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'We may terminate this Agreement and your access to the Services at any time and for any reason by providing notice to the email address you provided us.'
+        - url: https://www.pandora.com/legal/subscription
+          quote: 'Purchase and/or redemption of your Subscription Product is final and non-refundable; Pandora will not issue you any refund, including partial, pro-rated, or otherwise unless required to do so by law.'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or limit any feature at any time, with or without notice, and says it owes you nothing for it.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'Pandora may alter the availability of any feature of the Services, or impose new limitations on your use of the Services, at any time with or without notice, liability, or obligation with respect to such feature or limitation.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.pandora.com/legal, https://www.pandora.com/privacy]
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes commercially reasonable security steps in general terms, and names no audit or way to report a flaw.'
+      sources:
+        - url: https://www.pandora.com/privacy
+          quote: 'Sirius XM takes commercially reasonable steps designed to secure your personal data'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'A plan is for your own personal use, not for anyone else.'
+      sources:
+        - url: https://www.pandora.com/legal
+          quote: 'for your own individual, personal, non-commercial purposes only and not for the sublicense to or use by third parties.'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      plans: [pandora.premium-family]
+      tier: great
+      reason: 'Premium Family gives up to six people their own accounts, and names no household rule.'
+      sources:
+        - url: https://help.pandora.com/s/article/000002262?language=en_US
+          quote: 'Pandora Premium Family Plan offers all of the features of Pandora Premium to up to six unique Pandora accounts.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Premium downloads songs, albums and playlists to play offline, with licensing limits it doesn’t spell out.'
+      sources:
+        - url: https://help.pandora.com/s/article/Offline-Mode-and-Downloads?language=en_US
+          quote: "Premium subscribers have the ability to download many songs, albums, stations, or playlists from Pandora's library for offline listening."
+        - url: https://help.pandora.com/s/article/Offline-Mode-and-Downloads?language=en_US
+          quote: 'Licensing restrictions may apply.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      plans: [pandora.plus]
+      tier: poor
+      reason: 'Plus downloads only up to three of your top stations, and you can’t choose which.'
+      sources:
+        - url: https://help.pandora.com/s/article/Offline-Mode-and-Downloads?language=en_US
+          quote: "Plus subscribers cannot choose which stations they'd like available for offline listening."
+        - url: https://help.pandora.com/s/article/Offline-Mode-and-Downloads?language=en_US
+          quote: 'Instead, Pandora will download up to three of your top stations and your Thumbprint Radio.'
+      lastVerified: 2026-11-09

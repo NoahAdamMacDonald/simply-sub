@@ -367,6 +367,17 @@ which reads each page as a visitor there would, before any hand reading:
   article prices the US in USD, and its payment article says it bills "every 30 days"; tidal.com's pricing, terms and
   privacy are read from the Internet Archive (its terms there are Canada's version). tidal.com is in
   `data/automation.yaml`'s `archived`.
+- **Pandora and Anghami** (M11.15): pandora.com tells Canada "Pandora is unavailable in this country or region", so it
+  is read through a US exit; its help centre (help.pandora.com) reads from Canada, and no official page states its
+  audio quality. anghami.com/plus prices by where the visitor is, always in USD, so the page never names the country:
+  Canada's, the US's and the rest's prices differ, which shows each exit was placed. Its struck-through 6-month and
+  yearly prices are the monthly price times the period, not a regular price. A plain fetch gets 406 and its help
+  centre (support.anghami.com) 403; both read in Edge. play.anghami.com/terms and /privacy are pages not found: its
+  terms and privacy policy are one page, anghami.com/legal.
+- **Mixcloud** (M11.15): mixcloud.com (its Premium page, FAQs, terms and privacy policy) answers this machine with a
+  bot check, which is never retried another way; its help centre (help.mixcloud.com) opens but links Premium's details
+  back to mixcloud.com. The Internet Archive's copies (`id_`, fetched with `curl --compressed`) hold the pages' text and
+  the plan data (`premiumPlanInfo`, its amount and currency), but no country.
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
 

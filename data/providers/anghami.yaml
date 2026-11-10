@@ -1,0 +1,746 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 3), read with Edge from Canada and through each
+# country's exit. Anghami is the Middle East and North Africa's music service; outside that region it sells a plan of
+# Arabic songs only (its help centre: "Anghami is only authorized to stream international songs within the MENA
+# region"), which the plans' notes and a notable rating say. Pages, each quoted where it's used:
+# Pricing: anghami.com/plus, which prices by where the visitor is, always in US dollars: read from Canada ("renews at
+# USD4.69/month", a 6-Months Single Plan at USD24.99 and a Yearly Plan at USD49.99, each beside a struck-through USD29.99
+# and USD59.99, about six and twelve times the US monthly price), and through a US exit ("renews at USD4.99/month", the same
+# 6-month and yearly prices) and a UK, Australian, New Zealand, Irish, German, French, Dutch, Spanish and Italian exit
+# ("renews at USD2.99/month", monthly only). The Family Plan is "USD 7.49 monthly" everywhere. The struck-through prices
+# aren't offers: its help centre's 12-month article says a year "saves $10 compared to buying 12 months at the per-month
+# price, which totals $60", and its terms bill "on a monthly, half-yearly, or yearly basis". The first month free is
+# an offer, not listed.
+# Not listed: Anghami Gold (users "outside the MENA region" aren't eligible, its help centre), the Student Plan ("a 50%
+# discount" for verified students, as other students' offers aren't), and the Ads-Free Offer ($0.99 for two weeks,
+# offered to some free users, which "will not renew automatically").
+# Region checklist, 2026-11-09: 1. no country paths; 2. no picker (its language menu changes only the language); 3. not
+# looked for; 4. checkout not opened; 5. its help centre gives US-dollar figures only ("usually costs $4.99 per month");
+# 6. Edge from Canada and through each exit, each page in US dollars, so the page itself doesn't name the country: the
+# prices differ by exit (Canada's, the US's and the rest's); 7. no bill offered.
+# Bundles and resellers: none on its pages; mobile operators, Fawry, Tamara, Paymob and vouchers in the Middle East and
+# North Africa (its Ways to subscribe), and PlayStation Network (its cancelling article), bill it: ways to pay, not
+# resellers. Gift cards are its own.
+# Features, read 2026-11-09 in its help centre: Plus has "Ad-Free Listening", "Unlimited Downloads" and "High Audio
+# Quality" (What Are the Exclusive Features of Anghami Plus?), and its quality setting goes up to "Pristine – 320
+# kbit/s (highest available)", so High. Free "Listen to your favorite songs" and plays your playlists, with ads,
+# limited skips and no downloads (Features of Anghami Free Plan); its best quality isn't stated, but the higher bitrate
+# is a Plus feature and the settings below Pristine are 96 and 160 kbit/s, so Standard (inferred). The Family Plan
+# brings "up to six accounts" with Plus (Anghami Family Plan Subscription Guide). Dolby Atmos plays on some songs and
+# devices, which the registry doesn't record. No audiobooks.
+
+id: anghami
+name: Anghami
+website: https://www.anghami.com
+# Its help centre.
+domains: [support.anghami.com]
+category: music
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: USD,
+    AU: USD,
+    NZ: USD,
+    IE: USD,
+    DE: USD,
+    FR: USD,
+    NL: USD,
+    ES: USD,
+    IT: USD,
+  }
+cancelUrl: https://support.anghami.com/hc/en-us/articles/224891887-How-to-Cancel-Your-Anghami-Plus-Subscription
+sources: { pricing: https://www.anghami.com/plus }
+# Owner (M11.2), read 2026-11-09: its investor relations page, a public company's own. OSN Streaming Limited is its
+# controlling shareholder (its 2026 filings there), which the page's own words don't state.
+owner:
+  name: 'Anghami Inc., a public company (NASDAQ: ANGH)'
+  page:
+    name: Investor Relations
+    url: https://www.anghami.com/investors
+  quotes:
+    - 'Anghami Inc. (NASDAQ: ANGH), the leading music and entertainment streaming platform in the MENA region'
+  country:
+    code: AE
+    page:
+      name: Investor Relations
+      url: https://www.anghami.com/investors
+    quotes:
+      - 'In 2021, Anghami relocated its headquarters to Abu Dhabi (United Arab Emirates) as part of the Abu Dhabi Global Market (ADGM)'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+# Ways to pay (M11.5), read 2026-11-09 in its help centre: a card, PayPal and the app stores (its 1-month article),
+# Apple Pay (its own article), and its gift cards (anghami.com/plus). Its card article names Visa and Mastercard. The
+# Middle East's and North Africa's ways (mobile operators, Fawry, Tamara, Paymob, OneCard) aren't listed, and nor is
+# PlayStation Network, which only its cancelling article names.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: Details of 1-Month Anghami Subscription
+    url: https://support.anghami.com/hc/en-us/articles/360000559447-Details-of-1-Month-Anghami-Subscription
+    quotes:
+      - Apple/or Google Play from the Mobile app directly
+      - Credit card from Android App or from the website
+      - PayPal from the website
+  - methods: [apple-pay]
+    page: Subscribe to Anghami Using Apple Pay
+    url: https://support.anghami.com/hc/en-us/articles/360009667080-Subscribe-to-Anghami-Using-Apple-Pay
+    quotes:
+      - Choose Apple Pay as your payment method
+  - methods: [gift-card]
+    page: Anghami Plus
+    url: https://www.anghami.com/plus
+    quotes:
+      - Anghami Plus Gift Cards
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard]
+    url: https://support.anghami.com/hc/en-us/articles/9175760067098-Subscribe-to-Anghami-Using-Your-Card
+    quotes:
+      - 'Enter your credit or debit card details (Visa or Mastercard)'
+# Renewal day (M11.5): a new billing date is the day you subscribe again, after cancelling.
+renewalAnchor:
+  kind: same-date
+  page: Can I Change My Billing Date?
+  url: https://support.anghami.com/hc/en-us/articles/224891427-Can-I-Change-My-Billing-Date
+  quotes:
+    - 'The next step is now choosing the date when you would like your payment method to be charged each month and then subscribe again to Anghami+'
+  lastVerified: 2026-11-09
+
+plans:
+  - id: anghami.free
+    name: Free
+    link: https://www.anghami.com/plus
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: false
+      audiobooks.included: false
+    inferred:
+      audio.quality:
+        reason: 'Its quality settings are 96, 160 and 320 kbit/s, and its help names the higher bitrate as a Plus feature, so Free’s best is 160 kbit/s, Standard.'
+        page:
+          name: How can I change the Streaming and Download Audio Quality on Anghami?
+          url: https://support.anghami.com/hc/en-us/articles/360016329493-How-can-I-change-the-Streaming-and-Download-Audio-Quality-on-Anghami
+        lastVerified: 2026-11-09
+      music.on-demand:
+        reason: 'Its help says Free lets you listen to your favourite songs and play your playlists, with limited skips and no rewinding.'
+        page:
+          name: Features of Anghami Free Plan
+          url: https://support.anghami.com/hc/en-us/articles/360000567688-Features-of-Anghami-Free-Plan
+        lastVerified: 2026-11-09
+    notes: With ads and limited skips. Outside the Middle East and North Africa, Arabic songs only.
+    prices:
+      - region: CA
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: GB
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: AU
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: NZ
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: IE
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: DE
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: FR
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: NL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: ES
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: IT
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+  - id: anghami.plus
+    name: Plus
+    link: https://www.anghami.com/plus
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    notes: Outside the Middle East and North Africa, Arabic songs only, at a lower price outside North America.
+    prices:
+      - region: CA
+        currency: USD
+        amount: 4.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: CA
+        currency: USD
+        amount: 24.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: CA
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: US
+        currency: USD
+        amount: 24.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: GB
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: AU
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: NZ
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: IE
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: DE
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: FR
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: NL
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: ES
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: IT
+        currency: USD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+  - id: anghami.family
+    name: Family
+    link: https://www.anghami.com/plus
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      account.users: 6
+    notes: Plus for up to six accounts in one household. Outside the Middle East and North Africa, Arabic songs only.
+    prices:
+      - region: CA
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: US
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: GB
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: AU
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: NZ
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: IE
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: DE
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: FR
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: NL
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: ES
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+      - region: IT
+        currency: USD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.anghami.com/plus
+
+# Terms and policies, read 2026-11-09 (M11.15): its Terms of Use & Privacy Policy (one page, anghami.com/legal, last
+# updated December 10th, 2024, which includes its chat and Live Radio rules and its authorised ways to buy), and its
+# help centre's articles on renewing, cancelling, refunds, free trials, deleting an account, the Family Plan, the
+# 12-month plan, sign-up data, payment security and its music restrictions. play.anghami.com/terms and /privacy show
+# only a page not found, and its help centre's Refund Policy article didn't open from its section. Calibrated against
+# Spotify's, Deezer's and Pandora's grades. Not rated: rights over your content and its apps' licence (not topics for
+# music).
+policies:
+  links:
+    - name: Anghami Plus
+      url: https://www.anghami.com/plus
+    - name: Terms of Use & Privacy Policy
+      url: https://www.anghami.com/legal
+    - name: Anghami Plus Renewal and Cancelation Policy
+      url: https://support.anghami.com/hc/en-us/articles/225104248-Anghami-Plus-Renewal-and-Cancelation-Policy
+    - name: How to Cancel Your Anghami Plus Subscription?
+      url: https://support.anghami.com/hc/en-us/articles/224891887-How-to-Cancel-Your-Anghami-Plus-Subscription
+    - name: What happens when you cancel your subscription?
+      url: https://support.anghami.com/hc/en-us/articles/224949747-What-happens-when-you-cancel-your-subscription
+    - name: 'Free Trial Terms: Renewal and Cancellation Policy'
+      url: https://support.anghami.com/hc/en-us/articles/225104408-Free-Trial-Terms-Renewal-and-Cancellation-Policy
+    - name: Details of 12-Months Anghami Subscription
+      url: https://support.anghami.com/hc/en-us/articles/360000567308-Details-of-12-Months-Anghami-Subscription
+    - name: How to delete your Anghami account?
+      url: https://support.anghami.com/hc/en-us/articles/224890447-How-to-delete-your-Anghami-account
+    - name: Why Do You Need My Date of Birth & Gender Information?
+      url: https://support.anghami.com/hc/en-us/articles/225138167-Why-Do-You-Need-My-Date-of-Birth-Gender-Information
+    - name: Anghami Family Plan Subscription Guide
+      url: https://support.anghami.com/hc/en-us/articles/360000567548-Anghami-Family-Plan-Subscription-Guide
+    - name: What Are the Exclusive Features of Anghami Plus?
+      url: https://support.anghami.com/hc/en-us/articles/9126057943578-What-Are-the-Exclusive-Features-of-Anghami-Plus
+    - name: Why can’t I see international songs?
+      url: https://support.anghami.com/hc/en-us/articles/227960908-Why-can-t-I-see-international-songs
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It collects details of your device, including a list of your other apps, and keeps how you use it for its own analysis. You can only refuse cookies in your browser.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'inventory of other apps on User device'
+        - url: https://www.anghami.com/legal
+          quote: 'We will also retain Usage Data for internal analysis purposes.'
+        - url: https://www.anghami.com/legal
+          quote: 'User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent.'
+      action:
+        name: Its privacy policy (cookies)
+        url: https://www.anghami.com/legal
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell or rent your personal information, but its website uses marketing cookies, which you can refuse only browser by browser.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'We do not sell, trade, or rent Users personal identification information to others.'
+        - url: https://www.anghami.com/legal
+          quote: 'We use cookies, including optional marketing cookies, to enhance your experience.'
+      action:
+        name: Its privacy policy (cookies)
+        url: https://www.anghami.com/legal
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The free plan has ads, chosen using the birth date and gender you give when signing up. You can only refuse cookies in your browser.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/225138167-Why-Do-You-Need-My-Date-of-Birth-Gender-Information
+          quote: 'To help us deliver more relevant advertisements'
+        - url: https://www.anghami.com/legal
+          quote: 'User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent.'
+      action:
+        name: Its privacy policy (cookies)
+        url: https://www.anghami.com/legal
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether it trains AI on your listening, chats or what you post.'
+      pages: [https://www.anghami.com/legal]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it, and deletes a closed account’s data 30 days after you close it.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'We will retain your Personal Data only for as long as it is necessary for the purposes set out in this Privacy Policy.'
+        - url: https://www.anghami.com/legal
+          quote: 'If you choose to delete your account, all data associated with it will be permanently deleted after 30 days, unless you choose to reactivate your account before this period ends.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in the app (once a paid plan has ended), and its data is deleted for good 30 days later.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'If you choose to delete your account, all data associated with it will be permanently deleted after 30 days, unless you choose to reactivate your account before this period ends.'
+        - url: https://support.anghami.com/hc/en-us/articles/224890447-How-to-delete-your-Anghami-account
+          quote: 'If you have an active Anghami Plus subscription, you must cancel it and wait until your account is free before deleting your account.'
+      action:
+        name: How to delete your Anghami account
+        url: https://support.anghami.com/hc/en-us/articles/224890447-How-to-delete-your-Anghami-account
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy gives a copy of your data only as a right people in Europe have.'
+      pages: [https://www.anghami.com/legal]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      regions: [IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In the EU, you can ask it for a copy of your data in a format other services can read.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'If you are a resident of the EEA, you have certain data protection rights.'
+        - url: https://www.anghami.com/legal
+          quote: 'You have the right to be provided with a copy of the information we have on you in a structured, machine-readable and commonly used format.'
+      action:
+        name: Its privacy policy (your rights)
+        url: https://www.anghami.com/legal
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It says only that it may work with the police, such as when someone’s safety is at risk. It doesn’t say it needs a court order or tells you.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'We may work with law enforcement, including when we believe that there’s risk of physical harm or threat to public safety.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your personal data is stored on servers in Ireland, under EU privacy law. It doesn’t say whether it’s ever moved elsewhere.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'Personal Data we collect is stored on secure servers located in Ireland, in accordance with applicable data protection laws.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up asks for your month and year of birth and your gender, which it uses for ads and marketing.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/225138167-Why-Do-You-Need-My-Date-of-Birth-Gender-Information
+          quote: 'When signing up for a new Anghami account, we ask for your month and year of birth as well as your gender identity for the following reasons:'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      status: not-stated
+      reason: 'Its privacy policy states an age rule only for people in Europe.'
+      pages: [https://www.anghami.com/legal]
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      regions: [IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In the EU, under-16s need a parent’s consent, and it removes a child’s data it finds without one.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'If you are from the European Economic Area (EEA) and under the age of 16, you must provide us with a parental consent.'
+        - url: https://www.anghami.com/legal
+          quote: 'If we become aware that we have collected Personal Data from children under the age of 16, without verification of parental consent, we take steps to remove that information from our servers.'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel on its website or in its app and keep your plan to the end of the period, but must cancel at least 48 hours before it renews.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/225104248-Anghami-Plus-Renewal-and-Cancelation-Policy
+          quote: 'By subscribing, you agree to allow Anghami to charge you for the renewal unless you cancel it at least 48 hours prior to the renewal date.'
+        - url: https://support.anghami.com/hc/en-us/articles/225104248-Anghami-Plus-Renewal-and-Cancelation-Policy
+          quote: 'After cancelling, your subscription remains active until the end of your current billing cycle.'
+        - url: https://support.anghami.com/hc/en-us/articles/224891887-How-to-Cancel-Your-Anghami-Plus-Subscription
+          quote: 'Go to anghami.com/manage-account'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get all your money back within 14 days of buying, but only if you haven’t opened the app. After that, nothing back, but you keep your plan to the end.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'you have the right to cancel your purchase and receive a full refund within 14 days of purchase.'
+        - url: https://www.anghami.com/legal
+          quote: 'However, if you access the Anghami app within the 14-day period, you will no longer be eligible for a refund if you decide to cancel your purchase.'
+        - url: https://support.anghami.com/hc/en-us/articles/224949747-What-happens-when-you-cancel-your-subscription
+          quote: 'No refunds are issued for any unused time remaining in your subscription.'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms and help don’t say whether it tells you before raising the price.'
+      pages:
+        [
+          https://www.anghami.com/legal,
+          https://support.anghami.com/hc/en-us/articles/225104248-Anghami-Plus-Renewal-and-Cancelation-Policy,
+        ]
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its trial turns into a paid plan unless you cancel before it ends, which you can do at any time. It says you must keep track of the end date yourself.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/225104408-Free-Trial-Terms-Renewal-and-Cancellation-Policy
+          quote: 'If you do not cancel before the trial ends, the subscription you selected will automatically begin, and you’ll be charged the standard rate.'
+        - url: https://support.anghami.com/hc/en-us/articles/225104408-Free-Trial-Terms-Renewal-and-Cancellation-Policy
+          quote: 'You are responsible for tracking the trial end date and canceling before it renews if you do not wish to continue.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its pages say a plan renews on its own and show the date in your account, but not that it reminds you first.'
+      pages:
+        [
+          https://support.anghami.com/hc/en-us/articles/225104248-Anghami-Plus-Renewal-and-Cancelation-Policy,
+          https://www.anghami.com/legal,
+        ]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and help name no fees beyond the price.'
+      pages:
+        [
+          https://www.anghami.com/legal,
+          https://support.anghami.com/hc/en-us/articles/225104248-Anghami-Plus-Renewal-and-Cancelation-Policy,
+        ]
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: bad
+      reason: 'To move to the yearly plan, you must cancel, wait for your plan to end and subscribe again.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/360000567308-Details-of-12-Months-Anghami-Subscription
+          quote: 'If you are currently subscribed, you must cancel your current subscription and wait until your account switches to FREE to opt for the 12-month plan.'
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      status: not-stated
+      reason: 'Its terms have no arbitration clause and don’t say which courts hear a dispute.'
+      pages: [https://www.anghami.com/legal]
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms and privacy policy at any time by posting them with a new date, and using Anghami afterwards means you accept them.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'Anghami has the discretion to update this privacy policy at any time.'
+        - url: https://www.anghami.com/legal
+          quote: 'Your continued use of the Site/App following the posting of changes to this policy will be deemed your acceptance of those changes.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can close or suspend your account at any time for misuse or activity it finds suspicious, and keeps what you paid.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'Anghami reserves the right to terminate and/or suspend your account at any time in case of unauthorised use of the service.'
+        - url: https://www.anghami.com/legal
+          quote: 'If Anghami terminates or suspends your account for any suspicious activity, Anghami shall have no liability or responsibility to you, and will not refund any amounts that you have previously paid.'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'Its terms don’t say it can take away what you paid for.'
+      pages: [https://www.anghami.com/legal]
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.anghami.com/legal]
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes its security in general terms, and names no audit or way to report a flaw.'
+      sources:
+        - url: https://www.anghami.com/legal
+          quote: 'We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site/App.'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Plus is for one account, and its terms forbid giving your password to anyone else.'
+      sources:
+        - url: https://www.anghami.com/plus
+          quote: 'this subscription can be activated on 1 single account.'
+        - url: https://www.anghami.com/legal
+          quote: "provide your password to any other person or using any other person's username and password"
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      plans: [anghami.family]
+      tier: good
+      reason: 'The Family Plan gives up to six accounts to family members who live together, with no checks stated.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/360000567548-Anghami-Family-Plan-Subscription-Guide
+          quote: 'The family plan should only be used by family members who live in the same household'
+        - url: https://support.anghami.com/hc/en-us/articles/360000567548-Anghami-Family-Plan-Subscription-Guide
+          quote: 'A total of 6 accounts'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: great
+      reason: 'Plus lets you download as much music as you like to play offline.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/9126057943578-What-Are-the-Exclusive-Features-of-Anghami-Plus
+          quote: 'Download all the music you love and listen offline anytime, anywhere—no internet needed.'
+      lastVerified: 2026-11-09
+    - topic: other.notable
+      title: Arabic songs only outside the Middle East
+      tier: bad
+      reason: 'Its licences let it play international songs only in the Middle East and North Africa. Elsewhere, its plans give you Arabic songs only.'
+      sources:
+        - url: https://support.anghami.com/hc/en-us/articles/227960908-Why-can-t-I-see-international-songs
+          quote: 'Due to licensing agreements with music labels, Anghami is only authorized to stream international songs within the MENA region (Middle East and North Africa).'
+        - url: https://support.anghami.com/hc/en-us/articles/227960908-Why-can-t-I-see-international-songs
+          quote: 'Anghami offers a discounted subscription for users outside the MENA region. This plan provides limited access to Arabic songs.'
+      lastVerified: 2026-11-09

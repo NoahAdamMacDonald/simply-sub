@@ -1,0 +1,83 @@
+url: https://help.pandora.com/s/article/Offline-Mode-and-Downloads?language=en_US
+method: browser
+saved: 2026-11-09
+
+Skip to Main Content
+Support - Home
+Home
+Subscriptions
+Account
+In the Home / On the Go
+More
+Offline Mode and Downloads
+This feature is only available to our current Pandora Plus, Premium, or Premium Family subscribers, and only for iOS or Android mobile devices, and Apple Watches.
+Frequently asked questions:
+How does offline listening differ depending on my subscription level?
+How much storage do I need to download a station?
+What happens to my downloads if my subscription ends?
+How to:
+Download content for Offline Mode
+Download podcasts for Offline Mode
+Automatic Offline Mode
+Enable or disable Offline Mode
+Sort or view your offline content
+Download settings
+Remove all downloads
+How does offline listening differ depending on my subscription level?
+Pandora Plus subscribers:
+Plus subscribers cannot choose which stations they'd like available for offline listening. Instead, Pandora will download up to three of your top stations and your Thumbprint Radio. By default, these stations will be downloaded while your device is connected to Wi-Fi.
+You can give a thumbs up, thumbs down, skip, or replay while in Offline Mode, just as you would with any other station. Pandora will periodically review this feedback to further tune your stations.
+Each week, we will revisit the stations we’ve stored for offline listening and swap in stations that are eligible to be cached offline. Available offline stations will always be your most-listened-to stations.
+For Premium or Premium Family subscribers:
+Premium subscribers have the ability to download many songs, albums, stations, or playlists from Pandora's library for offline listening. Licensing restrictions may apply.
+How much storage do I need to download content?
+Offline content can use up anywhere from 300 MB-700 MB of device space depending on the type that's been downloaded. For example, classical music may take up more space than a pop station.
+Because we know you care about the space on your phone, Pandora will never use the last 500 MB of storage available. When Pandora detects that there is not enough storage on your device for all of your offline stations, we will download as many stations as we possibly can. Keep in mind that storage limits on Apple Watches may differ.
+What happens to my downloads if my subscription ends?
+Downloaded stations, albums, songs or playlists (depending on your subscription level) will be available within the Pandora app while your subscription is active. However, you'll lose access to offline content if your subscription is interrupted,
+It's not possible to transfer your Pandora music collection to an external music library like Apple Music. If you're outside of our app, or if you're accessing Pandora from our website or another type of device, you won't be able to view those downloads.
+If you'd prefer to download music for your personal collection in order to access it elsewhere, we recommend buying it from an online music store or authorized retailer.
+Download content for Offline Mode
+The process for downloading content to your device differs based on your subscription level.
+Plus subscribers:
+Pandora will automatically download three of your top stations to get you started, as well as your Thumbprint Radio (if you have not deleted it).
+Premium or Premium Family subscribers:
+To download content from My Collection, tap the title of the song or album and then the download button (icon with arrow pointing downward).
+Stop progress at any point during the downloading process, by tapping the download icon again.
+Download podcasts for Offline Mode
+It's not currently possible to download podcasts for offline listening.
+Automatic Offline Mode
+If you lose your Wi-Fi and cell network connection, we'll switch you to Offline Mode. When this happens, Pandora will alert you with a notification to let you know that we are switching you to offline listening and choose a station for you to listen to.
+Enable or disable Offline Mode
+If you'd like to enable or disable Offline Mode, go to your Profile and tap the Settings gear in the top right corner. Find the Offline Mode switch at the bottom of the menu to turn Offline Mode on or off.
+You also have the option to switch back to online mode from the Now Playing screen (as long as a Wi-Fi or cellular connection is available).
+To do that:
+Click on the ribbon above the album art that says Offline Mode.
+Follow the prompt that asks you to confirm that you would like to Go Online.
+Sort or view your offline content
+By default, songs, albums, stations, and playlists in Offline Mode are sorted by most recently downloaded. Artists, however, are sorted from A-Z.
+To view only downloads, tap the row just under the Recently Played carousel, and a menu will drop down that will allow you to filter your collection. Toggle the switch to Show Only Downloads to view only content that is stored on your device.
+Download settings
+By default, we will only download content for you over Wi-Fi. However, you can opt-in to also download using your cellular connection. You can change this feature in the Settings.
+Remove all downloads
+You can remove your downloaded content by signing out of Pandora on your device, or from the My Collection screen.
+To remove your downloads from the My Collection screen:
+Go to Profile and the select Settings.
+Select Audio Quality and Downloads.
+Tap Reset downloads at the bottom and confirm that you would like all the offline content that’s been downloaded to your device removed.
+Preferred Language
+English (US)
+Trending Articles
+Change your billing method or subscription plan
+Cancel your subscription
+Web Troubleshooting: Allowlist Pandora with your Ad Blocker
+Pandora + Alexa
+Password and Login Help
+Need extra help?
+ASK THE COMMUNITY
+EMAIL US
+AboutJobsAdvertisingBusinessesFor ArtistsInvestorBlogGiftsPrivacyCommunityAd Preferences
+Offline Mode and Downloads
+We use cookies on our site to customize and enhance your user experience, monitor for security or fraud, and assist our marketing efforts. By clicking the “Accept Cookies” button, you also agree to this use and to let us share your information with third-party marketing companies. You cannot opt-out of our Strictly Necessary and Functional Cookies as they are deployed to ensure the proper functioning of our website. Click here to learn more about these cookies: Privacy Policy
+Cookie Settings
+Reject Cookies Accept Cookies

@@ -579,7 +579,8 @@
   source: wikidata
   wikidata: Q1196431
   sitelinks: 25
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: keepass
   name: KeePass
   website: https://keepass.info
@@ -994,7 +995,7 @@
   wikidata: Q6883832
   sitelinks: 12
   status: queued
-  note: 'Mixcloud Premium is a listener plan (7.99 a month, its premium page on 2026-11-09), for music part 3; its pages answer this machine with a bot check at times'
+  note: 'For music part 4: mixcloud.com answers this machine with a bot check (2026-11-09), but the Internet Archive has its Premium page ($7.99 a month), terms, privacy policy and subscription terms from September and October 2026, and its help centre compares Free and Premium'
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse
@@ -1082,8 +1083,8 @@
   source: wikidata
   wikidata: Q16526979
   sitelinks: 9
-  status: queued
-  note: 'Sells to Canada (anghami.com/plus: USD4.69 a month, read 2026-11-09), for music part 3'
+  status: done
+  date: 2026-11-09
 - id: emsisoft-anti-malware
   name: Emsisoft Anti-Malware
   website: https://www.emsisoft.com/de/software/antimalware
