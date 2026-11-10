@@ -11,7 +11,7 @@ import {
   type ResolvedItem,
   type UnresolvedReason,
 } from '../../src';
-import { catalog, edited } from '../catalog/catalog-files';
+import { catalog, edited, price } from '../catalog/catalog-files';
 
 const data = buildCatalogData(readCatalogSource(catalog()), 'https://sub.simplely.ca/icons/');
 
@@ -94,6 +94,39 @@ function reason(result: ItemResolution): UnresolvedReason | undefined {
 }
 
 describe('resolveItem', () => {
+  describe('a catalog plan priced by province (M11.17)', () => {
+    // Crave's Premium priced in Ontario and Quebec, and for Canada as a whole.
+    const byProvince = buildCatalogData(
+      readCatalogSource(
+        edited(
+          catalog(),
+          'data/providers/crave.yaml',
+          ['plans', 1, 'prices'],
+          [price('CA', 'CAD', 22), price('CA-ON', 'CAD', 24), price('CA-QC', 'CAD', 20)],
+        ),
+      ),
+      'https://sub.simplely.ca/icons/',
+    );
+    const premium = item({ kind: 'catalog', planId: 'crave.premium' });
+    const amount = (context: ResolveContext, extra: Partial<ListItem> = {}) =>
+      resolved(resolveItem({ ...premium, ...extra }, { ...context, catalog: byProvince })).price
+        .amount;
+
+    it('is priced for the user’s province, as their sales tax is', () => {
+      expect(amount({ ...canadian, taxPlace: { country: 'CA', subdivision: 'CA-QC' } })).toBe(20);
+      expect(amount({ ...canadian, taxPlace: { country: 'CA', subdivision: 'CA-ON' } })).toBe(24);
+      // Another province, or none: Canada's price.
+      expect(amount({ ...canadian, taxPlace: { country: 'CA', subdivision: 'CA-BC' } })).toBe(22);
+      expect(amount(canadian)).toBe(22);
+    });
+
+    it('is priced for the country as a whole when it was bought in another one', () => {
+      const quebec = { ...canadian, taxPlace: { country: 'US', subdivision: 'US-NY' } };
+      // Settings in New York, the item bought in Canada: no province of Canada is the user's.
+      expect(amount(quebec, { region: 'CA' })).toBe(22);
+    });
+  });
+
   describe('a catalog plan', () => {
     it('is named, priced in the user’s region and currency, and lists what it provides', () => {
       const netflix = resolved(

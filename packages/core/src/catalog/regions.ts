@@ -1,6 +1,7 @@
 // The region codes a price, billingCurrency or availableIn can use (BLUEPRINT §4.7): ISO 3166-1 alpha-2 codes,
-// groups of them (EU), and GLOBAL for one price wherever a provider sells. regionSchema (formats.ts) only checks
-// the shape; validateCatalog checks a code is one of these.
+// groups of them (EU), and GLOBAL for one price wherever a provider sells; a price and availableIn can also name a
+// province or state (CA-QC, M11.17), which is part of its country as a country is part of its group. regionSchema
+// (formats.ts) only checks the shape; validateCatalog checks a code is one of these.
 
 /** One price wherever the provider sells. */
 export const globalRegion = 'GLOBAL';
@@ -45,9 +46,48 @@ export const regionGroups: Readonly<Record<string, readonly string[]>> = {
   EU: 'AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MT NL PL PT RO SE SI SK'.split(' '),
 };
 
-/** The groups `region` belongs to (DE → EU), in the order to try them. */
+/**
+ * Whether `code` is a province, territory or state a price or availableIn can name (M11.17): an ISO 3166-2 code that
+ * Settings lists (core's subdivisionsOf: Canada's and the US's), since the user's own is where it's picked for.
+ */
+export function isSubdivision(code: string): boolean {
+  // Its shape only: the app reads validated files, and the names table (core's subdivisionsOf) stays out of its first
+  // download. Validation checks it's one Settings lists (validateCatalog's isSellingRegion).
+  return /^[A-Z]{2}-[A-Z0-9]{1,3}$/.test(code);
+}
+
+/** The country a region is in: a province's (CA-QC → CA), else the region itself. */
+export function countryOf(region: string): string {
+  return isSubdivision(region) ? region.slice(0, region.indexOf('-')) : region;
+}
+
+/**
+ * The groups `region` belongs to, in the order to try them: a group (DE → EU), and for a province its country, then
+ * the country's groups (CA-QC → CA).
+ */
 export function groupsOf(region: string): string[] {
+  if (isSubdivision(region)) {
+    const country = countryOf(region);
+    return [country, ...groupsOf(country)];
+  }
   return Object.keys(regionGroups).filter((group) => regionGroups[group].includes(region));
+}
+
+/**
+ * The user's province or state where prices and availability are decided for `region` (M11.17): Settings' own when
+ * `region` is their country, so an item bought elsewhere is priced for that country as a whole.
+ */
+export function subdivisionIn(
+  region: string,
+  place: { country: string; subdivision?: string } | undefined,
+): string | undefined {
+  const subdivision = place?.subdivision;
+  return place?.country === region &&
+    subdivision !== undefined &&
+    countryOf(subdivision) === region &&
+    subdivision !== region
+    ? subdivision
+    : undefined;
 }
 
 /** A group's members (EU → AT, BE, …), or none for a region that isn't a group. */
@@ -60,9 +100,17 @@ export function isCatalogRegion(code: string): boolean {
   return code === globalRegion || Object.hasOwn(regionGroups, code) || isoRegions.has(code);
 }
 
-/** Why `code` isn't a region, with the fix: the message validateCatalog reports. */
-export function regionProblem(code: string): string {
-  return code === 'UK'
-    ? '"UK" isn\'t an ISO 3166-1 region code: use GB for the United Kingdom'
-    : `"${code}" isn't an ISO 3166-1 alpha-2 region code (CA, US, GB), a group (${Object.keys(regionGroups).join(', ')}) or GLOBAL`;
+/**
+ * Why `code` isn't a region, with the fix: the message validateCatalog reports. Where provinces and states may be
+ * named (prices and availableIn), `selling` says so.
+ */
+export function regionProblem(code: string, selling = false): string {
+  if (code === 'UK') return '"UK" isn\'t an ISO 3166-1 region code: use GB for the United Kingdom';
+  const groups = Object.keys(regionGroups).join(', ');
+  if (/^[A-Z]{2}-/.test(code)) {
+    return selling
+      ? `"${code}" isn't a province or state the catalog knows: Canada's and the US's (CA-QC, US-NY)`
+      : `"${code}" is a province or state, which only prices and availableIn name: use its country, ${code.slice(0, 2)}`;
+  }
+  return `"${code}" isn't an ISO 3166-1 alpha-2 region code (CA, US, GB)${selling ? ', a province or state (CA-QC)' : ''}, a group (${groups}) or GLOBAL`;
 }

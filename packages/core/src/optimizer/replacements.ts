@@ -1,5 +1,6 @@
 import { availability } from '../catalog/availability';
 import { planCategories } from '../catalog/plan-categories';
+import { subdivisionIn } from '../catalog/regions';
 import { pickPrice, type PickedPrice } from '../catalog/pick-price';
 import { isRetired } from '../catalog/retired';
 import type { IsoDate } from '../dates/iso-date';
@@ -61,13 +62,18 @@ export function replacements(
       .flatMap((provider) =>
         provider.plans.flatMap((plan): ReplacementPlan[] => {
           if (plan.id === resolved.planId || isRetired(plan, provider, context.today)) return [];
-          if (availability(plan.prices, provider, resolved.region) === 'not-offered') return [];
+          // Sold in the user's province, in their own country (M11.17).
+          const subdivision = subdivisionIn(resolved.region, context.place);
+          if (availability(plan.prices, provider, resolved.region, subdivision) === 'not-offered') {
+            return [];
+          }
           const categories = planCategories(plan, provider);
           if (!resolved.categories.some((id) => categories.includes(id))) return [];
           const provided = planKeys(plan, catalog.features);
           if (!keys.every((key) => provided.includes(key))) return [];
           const picked = pickPrice(plan.prices, {
             region: resolved.region,
+            ...(subdivision !== undefined && { subdivision }),
             currency: context.currency,
             ...(provider.billingCurrency && { billingCurrency: provider.billingCurrency }),
             ...(context.fx && { fx: context.fx }),

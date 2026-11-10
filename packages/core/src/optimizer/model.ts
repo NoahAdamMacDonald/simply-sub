@@ -1,4 +1,5 @@
 import type { FxRates } from '../catalog/convert';
+import { subdivisionIn } from '../catalog/regions';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { inclusionsOf, planOf } from '../catalog/plan-lookup';
 import type { Plan, ThirdPartyFeature } from '../catalog/provider';
@@ -820,8 +821,11 @@ class ModelBuilder {
 
   /** Where `seller`'s prices are picked; a finance account `plan`'s fee has no sales tax (M11.12). */
   private priceContext(region: string, seller: SnapshotProvider, plan?: Plan): PriceContext {
+    // The user's province's prices first, in their own country (M11.17).
+    const subdivision = subdivisionIn(region, this.context.place);
     return {
       region,
+      ...(subdivision !== undefined && { subdivision }),
       currency: this.context.currency,
       ...(seller.billingCurrency && { billingCurrency: seller.billingCurrency }),
       ...(this.context.fx && { fx: this.context.fx }),

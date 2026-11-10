@@ -1205,6 +1205,15 @@ Every price row carries its `region` and `currency` (`regions.ts`). A region is 
 - a **group** priced once for all its members: `EU` covers the 27 member states, so a Swede is offered and charged
   the EU price. New groups go in `regionGroups`;
 - **`GLOBAL`**: one price wherever the provider sells.
+- a **province or state** (M11.17), ISO 3166-2 (`CA-QC`, `US-NY`), one of those Settings lists: only a price's
+  `region` and `availableIn` name one (validation refuses it as a way to pay's or a card network's region). It's part
+  of its country as a country is part of its group (`groupsOf('CA-QC')` is `CA`): the user's own (Settings'
+  `subdivision`, given through core's `subdivisionIn` only for an item bought in their own country) comes first in
+  `pickPrice` and decides `availability`; without one, a country counts as sold where any of its provinces is, and
+  a province's price is picked when the country has none. Its prices are in its country's file (`CA.json`), and no
+  file is written for it. Regional carriers, home internet priced by province and credit unions use it: a credit
+  union's `availableIn: [CA-BC]` keeps it out of an Ontarian's Search and finance suggestions, and the card says "Not
+  offered in Ontario" while it's sold elsewhere in Canada. Search's Sold in is named after the province then.
 
 **Where something is sold** (`availability.ts`). The catalog fills Canada first, so a missing price isn't proof
 that a service isn't sold somewhere. Each check gives `offered`, `not-offered` or `unknown`:
@@ -1647,14 +1656,14 @@ so they reuse the plan model; what differs is which price counts and where it's 
     extra, and the `billing.fees` topic grades them.
   - Prepaid plans billed every 30 days are `interval: day, intervalCount: 30`; one that renews from a balance or a
     stored card by itself is `autoRenew: true`.
-- **Where it's sold, and provinces.** Prices are per country (section 4.7). A mobile plan with one price in every
-  province the carrier sells in is priced for the country (`CA`): research reads at least Ontario, Quebec, British
-  Columbia and Alberta, or each province the carrier serves. A plan sold only in some provinces or priced by province
-  (regional carriers such as Videotron, SaskTel and Eastlink, and most home internet, which is sold by address) waits
-  for province prices: M11.17's second part, ISO 3166-2 regions (`CA-QC`) on prices and `availableIn`, picked from the
-  province Settings already has for sales tax. In the US, a plan with one national price is `US`, and home internet
-  sold by address at one national price (5G home internet, satellite) is `US`, its notes saying it depends on the
-  address. Coverage maps aren't recorded: the network a plan runs on and its 5G stand in.
+- **Where it's sold, and provinces** (section 4.7). A mobile plan with one price in every province the carrier sells
+  in is priced for the country (`CA`): research reads at least Ontario, Quebec, British Columbia and Alberta, or each
+  province the carrier serves. A plan priced by province gets a price per province (`CA-QC`, built in M11.17's second
+  part on 2026-11-10), and a carrier sold only in some provinces (Videotron, SaskTel, Eastlink) lists them in
+  `availableIn`; the user's province, which Settings has for sales tax, picks the price and decides what's sold.
+  Home internet is sold by address, so a plan is priced for the provinces whose page prices it, its notes saying it
+  depends on the address. In the US, a plan with one national price is `US`, a state's own price `US-NY`. Coverage
+  maps aren't recorded: the network a plan runs on and its 5G stand in.
 - **Features** (section 4.2, the registry's Phone & internet group): every telecom plan states `mobile.included` and
   `internet.included`. A mobile plan states its data at full speed, what happens after it (charged, stops or slowed)
   and the slowed speed, a top speed when it's capped, 4G, 5G or 5G+, the network it runs on, roaming and unlimited
@@ -3818,8 +3827,9 @@ None.
   storage, email, calendar, gaming, shopping) get theirs as the research reaches them, with every provider's value.
 - **Two service categories:** Books & audiobooks and Smart home & security, with feature categories for every new
   group.
-- **Telecom is designed** (section 4.12, M11.17): mobile plans priced the same across a country are researched now;
-  province prices, and the home internet that needs them, are M11.17's second part.
+- **Telecom is designed** (section 4.12, M11.17), and province prices are built (M11.17's second part, the owner's
+  request of the day to get finance ready too: a credit union is sold in its province only): carriers, home internet
+  and credit unions are priced and sold by province (section 4.7).
 - **News without bias labels:** the outlets go in with their owners, prices, features and terms; bias and reliability
   wait until a rater allows its labels to be shown (section 4.10), never the catalog's own judgement.
 - **Ad blockers, SponsorBlock and Morphe** (the guide's §3.4): listed neutrally as free tools, their notes saying what

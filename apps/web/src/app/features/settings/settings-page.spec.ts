@@ -168,12 +168,12 @@ describe('SettingsPage', () => {
     await vi.waitFor(async () => expect((await saved()).theme).toBe('dark'));
   });
 
-  it('keeps Search’s Sold in default, on or left out', async () => {
+  it('keeps Search’s Sold in default, on or left out, named after the province (M11.17)', async () => {
     const sold = await loader.getHarness(
-      MatCheckboxHarness.with({ label: "Show only what's sold in Canada" }),
+      MatCheckboxHarness.with({ label: "Show only what's sold in Ontario" }),
     );
     expect(await sold.isChecked()).toBe(false);
-    expect(text()).toContain('Search starts with its “Sold in Canada” filter on.');
+    expect(text()).toContain('Search starts with its “Sold in Ontario” filter on.');
 
     await sold.check();
     await vi.waitFor(async () => expect((await saved()).searchSoldOnly).toBe(true));

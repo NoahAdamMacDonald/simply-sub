@@ -13,7 +13,7 @@ import {
   type FxRates,
   type ListItem,
 } from '../../src';
-import { catalog, edited } from '../catalog/catalog-files';
+import { catalog, edited, price } from '../catalog/catalog-files';
 import { bank, fintech, withFinance } from '../catalog/finance-files';
 
 // The fixture catalog (catalog-files.ts): Netflix (CA and US prices, Premium in the US only), Crave (CA only), Mullvad
@@ -255,6 +255,40 @@ describe('searchCatalog', () => {
 
   describe('where it’s sold', () => {
     const craveInCanada = edited(catalog(), 'data/providers/crave.yaml', ['availableIn'], ['CA']);
+
+    it('prices and sells by the user’s province (M11.17)', () => {
+      // Crave priced by province: Standard in Ontario and Quebec, Premium in Quebec only.
+      const byProvince = edited(
+        edited(
+          catalog(),
+          'data/providers/crave.yaml',
+          ['plans', 0, 'prices'],
+          [price('CA-ON', 'CAD', 12.99), price('CA-QC', 'CAD', 10.99)],
+        ),
+        'data/providers/crave.yaml',
+        ['plans', 1, 'prices'],
+        [price('CA-QC', 'CAD', 20)],
+      );
+      const shown = (context: CatalogSearchContext, query: CatalogQuery = { q: 'crave' }) =>
+        searchCatalog(query, context).flatMap((result) =>
+          result.kind === 'priced'
+            ? result.plans.map((plan) => [plan.plan.id, plan.pricing[0]?.amount])
+            : [],
+        );
+      const inOntario = { ...ontario, catalog: regionData('CA', byProvince) };
+      expect(shown(inOntario)).toEqual([['crave.standard', 12.99]]);
+      const inQuebec = { ...inOntario, settings: { ...ontario.settings, subdivision: 'CA-QC' } };
+      expect(shown(inQuebec)).toEqual([
+        ['crave.standard', 10.99],
+        ['crave.premium', 20],
+      ]);
+      // Without a province, it's sold somewhere in Canada: the first province's price.
+      const somewhere = { ...inOntario, settings: { country: 'CA', currency: 'CAD' } };
+      expect(shown(somewhere, { q: 'crave', soldOnly: true })).toEqual([
+        ['crave.standard', 12.99],
+        ['crave.premium', 20],
+      ]);
+    });
 
     it('gives a plan with no price in the user’s country its fallback price, marked unknown', () => {
       const [crave] = searchCatalog({ q: 'crave' }, american);

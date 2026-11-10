@@ -1,5 +1,11 @@
 import * as z from 'zod';
-import { currencySchema, httpsUrlSchema, isoDateSchema, regionSchema, textSchema } from './formats';
+import {
+  currencySchema,
+  httpsUrlSchema,
+  isoDateSchema,
+  sellingRegionSchema,
+  textSchema,
+} from './formats';
 
 export const intervalSchema = z.enum(['day', 'week', 'month', 'year']);
 export type Interval = z.infer<typeof intervalSchema>;
@@ -10,8 +16,8 @@ export type Interval = z.infer<typeof intervalSchema>;
  */
 export const priceSchema = z
   .strictObject({
-    region: regionSchema.describe(
-      'Where this price applies: an ISO 3166-1 alpha-2 region, or GLOBAL',
+    region: sellingRegionSchema.describe(
+      'Where this price applies: an ISO 3166-1 alpha-2 region, a group (EU), a province or state priced on its own (CA-QC, M11.17), or GLOBAL',
     ),
     currency: currencySchema.describe('The ISO 4217 currency of amount'),
     amount: z

@@ -62,6 +62,15 @@ export const regionSchema = pattern(
   'Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL',
 );
 
+/**
+ * Where something is sold or priced (a price's region, availableIn): a region as regionSchema writes it, or an
+ * ISO 3166-2 province or state (CA-QC, M11.17).
+ */
+export const sellingRegionSchema = pattern(
+  /^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$/,
+  'Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL',
+);
+
 /** ISO 4217 currency code. */
 export const currencySchema = pattern(
   /^[A-Z]{3}$/,

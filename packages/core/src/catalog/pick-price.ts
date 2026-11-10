@@ -1,9 +1,9 @@
 import * as z from 'zod';
 import { exchangeRate, type FxRates } from './convert';
-import { currencySchema, isoDateSchema, regionSchema, textSchema } from './formats';
+import { currencySchema, isoDateSchema, sellingRegionSchema, textSchema } from './formats';
 import { monthlyEquivalent } from './monthly-equivalent';
 import { intervalSchema, type Interval, type Price } from './price';
-import { globalRegion, groupsOf } from './regions';
+import { countryOf, globalRegion, groupsOf } from './regions';
 
 // pickPrice (BLUEPRINT §4.7): which of a plan's, add-on's or bundle's stored prices a user sees, and in which
 // currency. Everything is shown and totalled in the user's currency, converted when the price isn't in it.
@@ -11,6 +11,11 @@ import { globalRegion, groupsOf } from './regions';
 export interface PriceContext {
   /** The user's region, from Settings or a list item's own region: what decides the price they're charged. */
   region: string;
+  /**
+   * The user's province or state when `region` is their own country (core's subdivisionIn, M11.17): its own price
+   * comes before the country's. Without it, a province's price is picked only when the country has none.
+   */
+  subdivision?: string;
   /** The user's currency. */
   currency: string;
   /** The provider's billingCurrency: in a region priced in several currencies, the one it charges. */
@@ -61,7 +66,7 @@ export const pickedPriceSchema = z.strictObject({
     .optional(),
   source: z
     .strictObject({
-      region: regionSchema,
+      region: sellingRegionSchema,
       amount: z.number().nonnegative(),
       currency: currencySchema,
     })
@@ -88,8 +93,8 @@ const periodOrder: Record<Interval, number> = { day: 0, week: 1, month: 2, year:
 /**
  * The prices to show, one per interval and shortest first, all from one source region and currency, so a plan
  * never mixes a region's monthly price with another region's yearly one. The source is the first that fits:
- * 1. The user's region, then a group it belongs to (EU for Sweden): what they're charged there, converted if it
- *    isn't in their currency.
+ * 1. The user's province (M11.17), their region, then a group it belongs to (EU for Sweden): what they're charged
+ *    there, converted if it isn't in their currency.
  * 2. A price in the user's currency from elsewhere: GLOBAL first, then US, GB, EU and the regions listed.
  * 3. A GLOBAL price in another currency, converted.
  * 4. US, GB or EU, then the first region listed, converted.
@@ -112,8 +117,11 @@ export function pickPrice(all: readonly Price[], context: PriceContext): PickedP
 
 function pickSource(
   prices: readonly Price[],
-  { region, currency, billingCurrency }: PriceContext,
+  { region, subdivision, currency, billingCurrency }: PriceContext,
 ): { region: string; currency: string } | undefined {
+  // A province is part of its country (groupsOf: CA-QC → CA), so its price comes first, then the country's.
+  const place =
+    subdivision !== undefined && countryOf(subdivision) === region ? subdivision : region;
   const inRegion = (where: string) => {
     const currencies = prices
       .filter((price) => price.region === where)
@@ -132,7 +140,7 @@ function pickSource(
     prices.some((price) => price.region === where && price.currency === currency),
   );
   return (
-    [region, ...groupsOf(region)].map(inRegion).find((found) => found !== undefined) ??
+    [place, ...groupsOf(place)].map(inRegion).find((found) => found !== undefined) ??
     (sameCurrency === undefined ? undefined : { region: sameCurrency, currency }) ??
     elsewhere.map(inRegion).find((found) => found !== undefined)
   );

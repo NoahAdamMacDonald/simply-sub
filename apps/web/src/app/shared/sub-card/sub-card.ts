@@ -14,6 +14,9 @@ import {
   formerlyText,
   itemFormerName,
   planTitle,
+  providerAvailability,
+  subdivisionIn,
+  subdivisionName,
   type AddRequest,
   type CatalogResult,
   type PickedPrice,
@@ -204,6 +207,19 @@ export class SubCard {
   protected readonly country = computed(() => {
     const code = this.settings.saved()?.country;
     return code && countryName(code);
+  });
+  /**
+   * Where a provider the user's place doesn't get isn't offered: their province when it's sold elsewhere in their
+   * country (M11.17: a credit union of another province), else their country.
+   */
+  protected readonly notOfferedIn = computed(() => {
+    const saved = this.settings.saved();
+    if (!saved) return undefined;
+    const subdivision = subdivisionIn(saved.country, saved);
+    const inCountry = providerAvailability(this.provider(), saved.country) !== 'not-offered';
+    return (
+      (subdivision !== undefined && inCountry && subdivisionName(subdivision)) || this.country()
+    );
   });
   /** "Cheaper at" over the shops when they all are, else "Also sold at" (Settings' "Show every reseller", M5.13). */
   protected readonly dealsLabel = computed(() =>

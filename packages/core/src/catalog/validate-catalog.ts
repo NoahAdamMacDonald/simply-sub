@@ -20,6 +20,7 @@ import {
 import { automationSchema } from '../pipeline/automation';
 import { onSites, providerSiteKeys, queueFileSchema } from '../pipeline/queue';
 import { saysTaxExcluded, saysTaxIncluded } from '../pipeline/tax-wording';
+import { subdivisionName } from '../tax/subdivisions';
 import type { Price } from './price';
 import { providerSchema, type AddOn, type Plan, type Provider } from './provider';
 import { ratersFileSchema, ratingIsOld, ratingDay, ratingSubjects, type Rater } from './rater';
@@ -27,9 +28,11 @@ import { bankOfCanadaFileSchema } from './bank-of-canada';
 import { redirectsFileSchema } from './redirects';
 import { isRetired } from './retired';
 import {
+  countryOf,
   globalRegion,
   groupsOf,
   isCatalogRegion,
+  isSubdivision,
   isoRegions,
   membersOf,
   regionProblem,
@@ -1833,9 +1836,17 @@ function checkBillingCurrency(
 }
 
 /**
+ * Whether a price or availableIn can name `code`: a catalog region, or a province or state Settings lists (M11.17).
+ * Kept out of regions.ts, which the app loads first, with the names table it needs.
+ */
+function isSellingRegion(code: string): boolean {
+  return isCatalogRegion(code) || subdivisionName(code) !== undefined;
+}
+
+/**
  * availableIn is the full list of regions a provider sells in, so it covers every region a plan or add-on is
- * priced in: a member state through its group too, and a group through itself or one of its members. A missing
- * region is reported once per file.
+ * priced in: a member state through its group too, a group through itself or one of its members, and a province
+ * through its country, a country through one of its provinces (M11.17). A missing region is reported once per file.
  */
 function checkAvailableIn(
   provider: Provider,
@@ -1848,18 +1859,20 @@ function checkAvailableIn(
         ['availableIn', index],
         'GLOBAL means everywhere: list regions here, or leave availableIn out',
       );
-    } else if (!isCatalogRegion(region)) {
-      report(['availableIn', index], regionProblem(region));
+    } else if (!isSellingRegion(region)) {
+      report(['availableIn', index], regionProblem(region, true));
     }
   });
+  // A country is listed through one of its provinces too (M11.17): a price for the country, at the same amount in
+  // each province it's sold in.
   const listed = (region: string) =>
     [region, ...groupsOf(region), ...membersOf(region)].some((covered) =>
       availableIn.includes(covered),
-    );
+    ) || availableIn.some((listing) => isSubdivision(listing) && countryOf(listing) === region);
   const reported = new Set<string>();
   for (const { item, path, kind } of pricedItems(provider)) {
     item.prices.forEach(({ region }, index) => {
-      if (region === globalRegion || !isCatalogRegion(region) || reported.has(region)) {
+      if (region === globalRegion || !isSellingRegion(region) || reported.has(region)) {
         return;
       }
       if (!listed(region)) {
@@ -2018,8 +2031,8 @@ class PriceChecks {
     const first = new Map<string, number>();
     prices.forEach((price, index) => {
       const at = [...path, index];
-      if (!isCatalogRegion(price.region)) {
-        this.report([...at, 'region'], regionProblem(price.region));
+      if (!isSellingRegion(price.region)) {
+        this.report([...at, 'region'], regionProblem(price.region, true));
       }
       if (!currencies.has(price.currency)) {
         this.report([...at, 'currency'], `"${price.currency}" isn't a real ISO 4217 currency code`);

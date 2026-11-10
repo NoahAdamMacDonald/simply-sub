@@ -1,5 +1,6 @@
 import type { Account, AccountKind } from '../catalog/account';
 import { availability } from '../catalog/availability';
+import { subdivisionIn } from '../catalog/regions';
 import { pickPrice, type PickedPrice } from '../catalog/pick-price';
 import type { Plan } from '../catalog/provider';
 import { isRetired } from '../catalog/retired';
@@ -181,21 +182,26 @@ function eligible(account: Account, facts: ItemAccount, today: IsoDate): boolean
   return !account.eligibility || conditionMet(account.eligibility, facts, today) === true;
 }
 
-/** `provider`'s account plans sold where the item was bought, of one kind and currency, priced for the user. */
+/**
+ * `provider`'s account plans sold where the item was bought, of one kind and currency, priced for the user: in the
+ * user's own country, sold in their province (M11.17), so a credit union of another province isn't suggested.
+ */
 function soldAccounts(
   provider: SnapshotProvider,
   kind: AccountKind,
   region: string,
   input: OptimizerInput,
 ): { plan: Plan & { account: Account }; price: PickedPrice }[] {
-  const { today, currency, fx } = input.context;
+  const { today, currency, fx, place } = input.context;
+  const subdivision = subdivisionIn(region, place);
   return provider.plans.flatMap((plan) => {
     const { account } = plan;
     if (!account || account.kind !== kind || account.currency !== currency) return [];
     if (isRetired(plan, provider, today)) return [];
-    if (availability(plan.prices, provider, region) === 'not-offered') return [];
+    if (availability(plan.prices, provider, region, subdivision) === 'not-offered') return [];
     const [price] = pickPrice(plan.prices, {
       region,
+      ...(subdivision !== undefined && { subdivision }),
       currency,
       ...(provider.billingCurrency && { billingCurrency: provider.billingCurrency }),
       ...(fx && { fx }),

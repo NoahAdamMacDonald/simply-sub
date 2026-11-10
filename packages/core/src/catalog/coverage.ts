@@ -1,5 +1,5 @@
 import type { Plan, Provider } from './provider';
-import { globalRegion, groupsOf } from './regions';
+import { countryOf, globalRegion, groupsOf, isSubdivision } from './regions';
 
 // Regional coverage (M11.7, the guide's §3.2): where a provider is sold and which of its paid plans have no price
 // there, so a region left unread shows. Claude's paid plans had US prices only until M10.17, and a Canadian with Sold
@@ -45,10 +45,20 @@ export function coverageRegions(
   return regions;
 }
 
-/** Whether a plan has a price still sold for a buyer in `region`: its own, a group's it's in, or everywhere's. */
+/**
+ * Whether a plan has a price still sold for a buyer in `region`: its own, its country's or a group's it's in, or
+ * everywhere's; for a country, one of its provinces' too (M11.17: a plan sold in some provinces is sold in it).
+ */
 function pricedIn(plan: Pick<Plan, 'prices'>, region: string): boolean {
   const places = new Set([region, ...groupsOf(region), globalRegion]);
-  return plan.prices.some((price) => price.retired === undefined && places.has(price.region));
+  return plan.prices.some(
+    (price) =>
+      price.retired === undefined &&
+      (places.has(price.region) ||
+        (!isSubdivision(region) &&
+          isSubdivision(price.region) &&
+          countryOf(price.region) === region)),
+  );
 }
 
 /**

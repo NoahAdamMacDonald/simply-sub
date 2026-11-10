@@ -3,6 +3,7 @@ import { bundleFeatures } from '../catalog/bundle-deal';
 import { acceptedNetworksIn } from '../catalog/card-networks';
 import { isoDateSchema } from '../catalog/formats';
 import { convert, type FxRates } from '../catalog/convert';
+import { subdivisionIn } from '../catalog/regions';
 import { pickPrice, typedPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
 import { closestPeriod, periodLostOn, storedPrice } from '../catalog/period-change';
 import { planOf } from '../catalog/plan-lookup';
@@ -541,12 +542,15 @@ function hasDates(billing: ListItem['billing']): boolean {
 }
 
 function priceContext(
-  { currency, fx }: ResolveContext,
+  { currency, fx, taxPlace }: ResolveContext,
   region: string,
   provider?: SnapshotProvider,
 ): PriceContext {
+  // Bought in the user's own country, it's priced for their province (M11.17), where it has a price of its own.
+  const subdivision = subdivisionIn(region, taxPlace);
   return {
     region,
+    ...(subdivision !== undefined && { subdivision }),
     currency,
     ...(provider?.billingCurrency && { billingCurrency: provider.billingCurrency }),
     ...(fx && { fx }),

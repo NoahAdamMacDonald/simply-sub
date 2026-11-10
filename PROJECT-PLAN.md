@@ -2229,13 +2229,29 @@ in every D1 `json` column search parses.
   (the Wireless Code and Internet Code quoted from the carrier's own terms; one company's documents shared by its
   brands), ways to pay and owners. The Phone & internet feature group is in the registry (`mobile.*`,
   `internet.*`), each plan stating `mobile.included` and `internet.included`.
-- **Next, province prices:** `regionSchema` and `availableIn` take ISO 3166-2 subdivisions (`CA-QC`), `pickPrice`
-  prefers the user's province's price over the country's, coverage and Search's Sold in judge a subdivision as its
-  country's part, and the API's region filter matches both. Regional carriers and most home internet wait for it.
+- **Province prices, as built** (2026-11-10, the owner's request to get finance ready too: a credit union is sold in its
+  province only):
+  - **Core:** a price's `region` and `availableIn` take a province or state (`sellingRegionSchema`: ISO 3166-2, one
+    Settings lists), part of its country as a country is part of its group (`groupsOf('CA-QC')` is `CA`); ways to pay,
+    card networks and currencies stay a country's. `subdivisionIn` gives Settings' province only for an item bought
+    in the user's own country, and `pickPrice` (`PriceContext.subdivision`) and `availability` put it first: a
+    plan priced only in Quebec isn't offered in Ontario once the provider is priced anywhere in Canada, and without a
+    province a country counts as sold where any of its provinces is. A province's prices are in its country's file
+    (`regionPrices`), and the index writes no file for it; coverage counts a plan sold in some provinces as sold in
+    the country; validation checks each province is known and that `availableIn` covers it (a country through one of
+    its provinces too).
+  - **Where it's used:** Search (`SearchContext.subdivision`, the API's queries have none), a card's extras, resellers,
+    items' prices (resolveItem, through the tax place), the optimizer's replacements and finance suggestions (a
+    credit union of another province isn't suggested), and the item dialog.
+  - **The pages:** a provider sold elsewhere in the user's country says "Not offered in Ontario", and Search's Sold in
+    and Settings' Search default are named after the province.
+  - **Checks:** core's `provinces.spec.ts` and cases in search, resolveItem and finance suggestions; the card's,
+    Search filters' and Settings' specs; `check-m11-provinces.cjs` (53 checks: a fixture carrier priced by province
+    and a British Columbian credit union, for Ontario then Quebec, both themes at both widths, with axe).
 - **Acceptance**
   - [x] The design is written (BLUEPRINT §4.12) and the feature group validates
   - [ ] A national mobile plan validates with its features (the research's first carrier)
-  - [ ] A Quebec price shows to a user in Quebec and Ontario's to one in Ontario; a plan sold only in Quebec is Not
+  - [x] A Quebec price shows to a user in Quebec and Ontario's to one in Ontario; a plan sold only in Quebec is Not
         offered in Ontario
 
 **M11.18 — A public company's shares** (BLUEPRINT §4.10; added 2026-11-10)

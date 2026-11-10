@@ -1,7 +1,7 @@
 import * as z from 'zod';
 import { regionSchema } from './formats';
 import type { Price } from './price';
-import { globalRegion, groupsOf, membersOf } from './regions';
+import { countryOf, globalRegion, groupsOf, isSubdivision, membersOf } from './regions';
 import type { ResellerListing } from './reseller';
 import { catalogMetaSchema, type CatalogMeta, type CatalogSnapshot } from './snapshot';
 
@@ -12,13 +12,18 @@ import { catalogMetaSchema, type CatalogMeta, type CatalogSnapshot } from './sna
 // look a region up in the index instead of trying its file (regionFileFor, in catalog-sync.ts).
 
 /**
- * The prices pickPrice can pick for a buyer in `region`, in any currency: those of the region, or else of the
- * first group it belongs to that has any, since pickPrice's rule 1 then always wins. An item priced in neither keeps
- * every price, because rules 2 to 4 can pick any region, depending on the buyer's currency.
+ * The prices pickPrice can pick for a buyer in `region`, in any currency: those of the region and its provinces
+ * (M11.17: a buyer's province is picked from their country's file), or else of the first group it belongs to that has
+ * any, since pickPrice's rule 1 then always wins. An item priced in neither keeps every price, because rules 2 to 4
+ * can pick any region, depending on the buyer's currency.
  */
 export function regionPrices<T extends Price>(prices: readonly T[], region: string): T[] {
   for (const where of [region, ...groupsOf(region)]) {
-    const there = prices.filter((price) => price.region === where);
+    const there = prices.filter(
+      (price) =>
+        price.region === where ||
+        (isSubdivision(price.region) && countryOf(price.region) === where),
+    );
     if (there.length > 0) {
       return there;
     }
@@ -39,7 +44,9 @@ export function regionResellers(
   const usable = new Set([region, ...groupsOf(region), ...membersOf(region), globalRegion]);
   return resellers.flatMap((listing) => {
     const offers = listing.offers.flatMap((offer) => {
-      const prices = offer.prices.filter((price) => usable.has(price.region));
+      const prices = offer.prices.filter(
+        (price) => usable.has(price.region) || usable.has(countryOf(price.region)),
+      );
       return prices.length > 0 ? [{ ...offer, prices }] : [];
     });
     return offers.length > 0 ? [{ ...listing, offers }] : [];
@@ -92,11 +99,18 @@ export const catalogIndexSchema = z.strictObject({
 });
 export type CatalogIndex = z.infer<typeof catalogIndexSchema>;
 
-/** data/catalog/index.json: a file for every region with a price, except GLOBAL, whose prices apply everywhere. */
+/**
+ * data/catalog/index.json: a file for every region with a price, except GLOBAL, whose prices apply everywhere. A
+ * province's prices are in its country's file (M11.17), so it has none of its own.
+ */
 export function buildCatalogIndex(meta: CatalogMeta): CatalogIndex {
   return {
     catalogVersion: meta.catalogVersion,
     generatedAt: meta.generatedAt,
-    regions: meta.regions.filter((region) => region !== globalRegion),
+    regions: [
+      ...new Set(
+        meta.regions.filter((region) => region !== globalRegion).map((region) => countryOf(region)),
+      ),
+    ].sort(),
   };
 }

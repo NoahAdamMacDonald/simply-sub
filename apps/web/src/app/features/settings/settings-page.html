@@ -77,10 +77,10 @@
             aria-describedby="search-sold-hint"
             (change)="setSoldOnly($event.checked)"
           >
-            Show only what's sold in {{ country() }}
+            Show only what's sold in {{ soldIn() }}
           </mat-checkbox>
           <p id="search-sold-hint" class="hint">
-            Search starts with its “Sold in {{ country() }}” filter on. You can still turn it off
+            Search starts with its “Sold in {{ soldIn() }}” filter on. You can still turn it off
             there.
           </p>
           <mat-checkbox

@@ -4,7 +4,7 @@ import { bankOfCanadaFileSchema, type BankOfCanadaChange } from './bank-of-canad
 import { bundleSchema, type Bundle } from './bundle';
 import { categoriesFileSchema, type Categories } from './category';
 import { featuresFileSchema, type Feature } from './feature';
-import { httpsUrlSchema, regionSchema } from './formats';
+import { httpsUrlSchema, regionSchema, sellingRegionSchema } from './formats';
 import { policySetSchema, type PolicySet } from './policy';
 import { policyTopicSchema, policyTopicsFileSchema, type PolicyTopic } from './policy-topic';
 import { providerSchema, type Provider } from './provider';
@@ -106,7 +106,7 @@ export const catalogMetaSchema = z.strictObject({
     )
     .optional(),
   regions: z
-    .array(regionSchema)
+    .array(sellingRegionSchema)
     .describe(
       "Every region with a price in the catalog, sorted: the full catalog's, even in a region file",
     ),

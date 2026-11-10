@@ -54,7 +54,13 @@ export function resellerDeals(
     context,
   );
   if (!direct) return [];
-  const usable = new Set([context.region, ...groupsOf(context.region), globalRegion]);
+  // A reseller's price for the buyer's province counts too (M11.17).
+  const usable = new Set([
+    ...(context.subdivision !== undefined ? [context.subdivision] : []),
+    context.region,
+    ...groupsOf(context.region),
+    globalRegion,
+  ]);
   const knowsTax = taxAddedRegions.has(context.taxPlace.country);
   const deals = (provider.resellers ?? []).flatMap((listing): ResellerDeal[] => {
     const reseller = resellers.find((candidate) => candidate.id === listing.reseller);

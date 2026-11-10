@@ -428,6 +428,34 @@ describe('SubCard', () => {
     expect(query('button.expand')).toBeNull();
   });
 
+  it('names the user’s province when the provider is sold only elsewhere in their country (M11.17)', async () => {
+    // Hulu as a British Columbian service: priced for Canada, sold only in BC.
+    const hulu = searchCatalogData.providers.find((provider) => provider.id === 'hulu');
+    if (!hulu) throw new Error('The fixture has Hulu');
+    const inBc = {
+      ...hulu,
+      availableIn: ['CA-BC'],
+      plans: hulu.plans.map((plan) => ({
+        ...plan,
+        prices: plan.prices.map((price) => ({ ...price, region: 'CA', currency: 'CAD' })),
+      })),
+    };
+    const [result] = searchCatalog(
+      { q: 'hulu' },
+      {
+        catalog: { ...searchCatalogData, providers: [inBc] },
+        settings: alberta,
+        fx,
+        items: [],
+        today,
+      },
+    );
+    expect(result.kind).toBe('not-offered');
+    await show(result);
+
+    expect(shown('.prices')).toBe('Not offered in Alberta');
+  });
+
   it('shows the fallback price of a plan whose availability is unknown', async () => {
     const american: Settings = {
       ...alberta,

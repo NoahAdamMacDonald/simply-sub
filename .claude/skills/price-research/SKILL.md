@@ -42,7 +42,11 @@ API contract's prices are illustrative and never a source. This skill is how to 
   (`"GL":"CA"`). A bare `$` names no country. When the page shows another country's, read the region through a
   country's exit, and save its baseline (`data:baselines`) from a reading that shows the region's prices too.
 - **Region codes:** ISO 3166-1 alpha-2 (`GB` for the United Kingdom, never `UK`), `EU` when one price covers the
-  whole EU, and `GLOBAL` for one price wherever the provider sells.
+  whole EU, and `GLOBAL` for one price wherever the provider sells. A province or state (`CA-QC`, `US-NY`: M11.17)
+  only where the page prices by province (a carrier, home internet) or the provider sells only in some (a credit
+  union, a regional carrier: its `availableIn` lists them). A price the same in every province it's sold in is the
+  country's (`CA`), with `availableIn` naming the provinces when it isn't sold in all of them. Ways to pay, card
+  networks and currencies stay a country's.
 - **`availableIn` only from an official list.** When the provider says where it sells ("only in the US", a country
   list in its help centre, terms that say the service "is intended for use in Canada"), set `availableIn` to that
   full list and quote it in a comment. Every provider sold in certain countries only gets one. Otherwise leave it
