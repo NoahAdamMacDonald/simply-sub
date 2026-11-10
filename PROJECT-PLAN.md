@@ -1062,6 +1062,7 @@ owner (M11.17, BLUEPRINT §4.12), its mobile plans with national prices join the
 | M11.15 | The research, a category at a time (the guide's §7): feature-discovery for the category, then its providers in batch pull requests of about 10, each reviewed by a second model; pushed once per batch, and web searches after sitemaps and known paths, SearXNG before the paid engines (the guide's §7.2). In order: AI, streaming, music, VPN, password managers and authenticators, antivirus, storage, email, gaming, office and creative, news; then browsers, search, DNS, file sharing, calendars, maps, social, jobs, developer tools; then finance, after M11.10–M11.14 | Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date |
 | M11.17 | Phone and internet plans (added 2026-11-10, the owner's choice; BLUEPRINT §4.12): the design (scope, the regular price for carriers, automatic-payment discounts, fees, provinces, features, terms, ways to pay) and the Phone & internet feature group; then province prices: ISO 3166-2 regions (`CA-QC`) on prices and `availableIn`, picked from the province Settings has for sales tax, in coverage, Search's Sold in and the API | A national mobile plan validates with its features; then a Quebec price shows to a user in Quebec and Ontario's to one in Ontario, and a plan sold only in Quebec is Not offered in Ontario |
 | M11.18 | A public company's shares (added 2026-11-10, the owner's item; BLUEPRINT §4.10): `owner.stock` with its listings (exchange and ticker symbol), the listed company when it's the owner's parent, and a majority holder (of its shares or votes), quoted like the owner; the card's Facts and Overview; the tickers that were words in owners' names moved into it | Netflix's card says "Stock: NASDAQ: NFLX"; validation refuses a symbol or holder no quote names |
+| M11.19 | Finance terms for the research (added 2026-11-10, the owner's items; BLUEPRINT §4.11): card purchase limits and a yearly limit, the institutions that hold the money when the provider doesn't (`protection.through`), the account's other fees from its fee page, and features for LIF, DPSP, partner-network ATMs and the credit cards an institution issues | A fintech's card says whose cover it is and lists its other fees, each checked against its page's words |
 
 #### M11 specs
 
@@ -2271,6 +2272,26 @@ in every D1 `json` column search parses.
     Euronext Paris but no symbol, so it waits for the research. The skills say how (policy-research's owner rules).
 - **Acceptance**
   - [x] Netflix's card says "Stock: NASDAQ: NFLX"; validation refuses a symbol or holder no quote names
+
+**M11.19 — Finance terms for the research** (BLUEPRINT §4.11; added 2026-11-10)
+- **Why:** the owner asked, before the finance research, for every fee and limit (spending limits by day, week and
+  month, e-Transfer limits up to a year), whether the money is insured directly or through another institution, the
+  lesser-known registered accounts, ATM networks, and the credit cards a bank issues. M11.10 covered the rest; with
+  M11.17's provinces, a credit union is sold only in its province.
+- **As built** (2026-11-10):
+  - **Core:** `account.ts`: `limits.purchases` and a `year` on every period; `protection.through`, each institution
+    named in its quotes; `fees` (`items` of `name`, `amount` or `percent`, `per` use, month or year, with the page's
+    `url`, `quotes` and `lastVerified`), each name and figure checked against the words (a whole number: 1.5 isn't
+    in "11.50"; 1.50, 1.5 and 1,50 count). Validation keeps the fee page on its own sites and its date no later than
+    today; baselines cite it, with the protection page's words too. `hasWord` moved to `checks.ts` for both checks.
+  - **Features:** `finance.registered-accounts` adds LIF and DPSP (through an employer), `finance.atm` a partner
+    network's ATMs, and `finance.credit-cards` (provider-wide: Visa, Mastercard, American Express) the cards an
+    institution issues.
+  - **The card:** "Card purchases: up to $5,000 a day", "…, $100,000 a year", "Protection: CDIC, up to $100,000,
+    held in trust for you, through Peoples Trust Company", and "Other fees: Interac e-Transfer $1.50 each; …,
+    according to its fee page" linked to its words.
+- **Acceptance**
+  - [x] A fintech's card says whose cover it is and lists its other fees, each checked against its page's words
 
 **The M11 audit** (2026-11-09): every acceptance box of M11.1–M11.14 and M11.16 holds; M11.15 is under way. What's
 left, each waiting for the owner:

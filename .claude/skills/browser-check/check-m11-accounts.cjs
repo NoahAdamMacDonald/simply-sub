@@ -2,8 +2,8 @@
 // (dev builds only: no real finance provider is in the catalog before M11.15), for a Canadian in Ontario, in both
 // themes at 1280 and 360 px: the two fixture accounts' lines (interest by tier with its bonus, the waivers, the limits,
 // the protection, who may open it, and since M11.14 how soon the fintech's rate followed the Bank of Canada's last
-// changes), the posted-rates and protection links (the second scrolled to its words), reached
-// by Tab with the protection's quote as its tooltip, the muted text against the tokens, axe, screenshots and no
+// changes; since M11.19 its card's limits, its other fees and who holds the money), the posted-rates, fee page and
+// protection links (the last two scrolled to their words), reached by Tab with their quotes as tooltips, the muted text against the tokens, axe, screenshots and no
 // horizontal scroll.
 // Usage: node check-m11-accounts.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
 const fs = require('fs');
@@ -144,7 +144,11 @@ async function lines(section) {
               'Interest: 3.50% a year, 2.00% from $50,000, on each part of the balance. It moves with the Bank of Canada’s rate. 4.00% instead if you have $2,000 of direct deposits a month posted rates',
               // How soon it followed the Bank's last changes (M11.14).
               'Following the Bank of Canada: not yet after Oct 29, 2026 (to 2.50%); 2 days after Oct 30, 2025 (to 2.25%); the same day as Sep 18, 2025 (to 2.50%)',
-              'Protection: CDIC, held in trust for you, according to its page',
+              // Its card's limits, its other fees and who holds the money (M11.19).
+              'e-Transfers: up to $3,000 a day, $100,000 a year',
+              'Card purchases: up to $5,000 a day',
+              'Other fees: Interac e-Transfer $1.50 each; Foreign exchange 2.50% of the amount, according to its fee page',
+              'Protection: CDIC, held in trust for you, through Peoples Trust Company, according to its page',
               'Open to you if you hold $100,000 with it',
             ]),
           JSON.stringify(shown[1]),
@@ -156,26 +160,42 @@ async function lines(section) {
           );
         check(
           `${label}: each link opens its page in a new tab, the protection's scrolled to its words`,
-          links.length === 3 &&
+          links.length === 4 &&
             links.every(([, target]) => target === '_blank') &&
             links[0][0] ===
               'https://example.com/deposit-insurance#:~:text=Your%20eligible%20deposits%20are%20protected%20by%20CDIC.' &&
-            links[1][0] === 'https://example.com/rates',
+            links[1][0] === 'https://example.com/rates' &&
+            links[2][0].startsWith('https://example.com/fees#:~:text=') &&
+            links[2][2] === 'Its fee page, opens in a new tab',
           JSON.stringify(links),
         );
-        // Tab from the posted-rates link reaches the protection link, whose tooltip is its quote.
+        // Tab from the posted-rates link reaches the fee page, then the protection link, each tooltip its quotes.
         await section.locator('a').nth(1).focus();
+        await page.keyboard.press('Tab');
+        const feeFocus = await page.evaluate(() =>
+          document.activeElement?.getAttribute('aria-label'),
+        );
+        const feeTip = page.locator('.mat-mdc-tooltip-show');
+        await feeTip.waitFor({ timeout: 5000 }).catch(() => undefined);
+        const feeWords = (await feeTip.count()) > 0 ? (await feeTip.textContent()).trim() : '';
+        check(
+          `${label}: Tab reaches the fee page, its tooltip the provider's words (M11.19)`,
+          feeFocus === 'Its fee page, opens in a new tab' &&
+            feeWords === '“Interac e-Transfer: $1.50 each” “Foreign exchange: 2.5% of the amount”',
+          `${feeFocus} / ${feeWords}`,
+        );
         await page.keyboard.press('Tab');
         const focused = await page.evaluate(() =>
           document.activeElement?.getAttribute('aria-label'),
         );
-        const tooltip = page.locator('.mat-mdc-tooltip-show');
+        // The fee page's tooltip can still be fading: wait for the protection's own words.
+        const tooltip = page.locator('.mat-mdc-tooltip-show', { hasText: 'Peoples Trust' });
         await tooltip.waitFor({ timeout: 5000 }).catch(() => undefined);
         const tip = (await tooltip.count()) > 0 ? (await tooltip.textContent()).trim() : '';
         check(
           `${label}: Tab reaches the protection link, its tooltip the provider's words`,
           focused === 'Page on who protects the money, opens in a new tab' &&
-            tip === '“Your money is held in trust at CDIC member institutions.”',
+            tip === '“Your money is held in trust at Peoples Trust Company, a CDIC member.”',
           `${focused} / ${tip}`,
         );
         const looks = await section.evaluate((group) => {

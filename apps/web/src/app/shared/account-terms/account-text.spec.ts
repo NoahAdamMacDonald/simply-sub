@@ -1,5 +1,12 @@
 import type { Account } from '@simply-sub/core';
-import { conditionText, limitLines, protectionText, ratesText, waiversText } from './account-text';
+import {
+  conditionText,
+  feesText,
+  limitLines,
+  protectionText,
+  ratesText,
+  waiversText,
+} from './account-text';
 
 const rates: NonNullable<Account['rates']> = {
   follows: 'none',
@@ -68,5 +75,55 @@ describe('account text (M11.10)', () => {
         'CA',
       ),
     ).toBe('No deposit insurance, held in trust for you');
+  });
+
+  // The owner's items of 2026-11-10.
+  it('writes card purchase and yearly limits, and whose cover it is', () => {
+    expect(
+      limitLines(
+        { eTransfer: { day: 3000, year: 100_000 }, purchases: { day: 5000 } },
+        'CAD',
+        'CA',
+      ),
+    ).toEqual([
+      'e-Transfers: up to $3,000 a day, $100,000 a year',
+      'Card purchases: up to $5,000 a day',
+    ]);
+    expect(
+      protectionText(
+        {
+          insurer: 'cdic',
+          held: 'trust',
+          limit: 100_000,
+          through: ['Peoples Trust Company'],
+          url: 'https://example.com/cdic',
+          quotes: ['Held in trust at Peoples Trust Company.'],
+          lastVerified: '2026-11-10',
+        },
+        'CAD',
+        'CA',
+      ),
+    ).toBe('CDIC, up to $100,000, held in trust for you, through Peoples Trust Company');
+  });
+
+  it('writes its other fees in a line: each amount and when, or a percent of the amount', () => {
+    expect(
+      feesText(
+        {
+          items: [
+            { name: 'Interac e-Transfer', amount: 1.5, per: 'use' },
+            { name: 'Foreign exchange', percent: 2.5, per: 'use' },
+            { name: 'Paper statements', amount: 2, per: 'month' },
+          ],
+          url: 'https://example.com/fees',
+          quotes: ['Interac e-Transfer $1.50, foreign exchange 2.5%, paper statements $2'],
+          lastVerified: '2026-11-10',
+        },
+        'CAD',
+        'CA',
+      ),
+    ).toBe(
+      'Interac e-Transfer $1.50 each; Foreign exchange 2.50% of the amount; Paper statements $2.00 a month',
+    );
   });
 });

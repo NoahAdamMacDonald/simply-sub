@@ -88,6 +88,21 @@ function facts(data) {
       entry.url,
       entry.quotes,
     ]),
+    // A finance account's words on who protects the money and on its other fees (M11.19).
+    ...(data.plans ?? []).flatMap((plan) =>
+      [
+        plan.account?.protection && [
+          `${plan.id} account.protection`,
+          plan.account.protection.url,
+          plan.account.protection.quotes,
+        ],
+        plan.account?.fees && [
+          `${plan.id} account.fees`,
+          plan.account.fees.url,
+          plan.account.fees.quotes,
+        ],
+      ].filter(Boolean),
+    ),
     ...(data.plans ?? []).flatMap((plan) =>
       Object.entries(plan.thirdParty ?? {}).map(([feature, claim]) => [
         `${plan.id} thirdParty.${feature}`,

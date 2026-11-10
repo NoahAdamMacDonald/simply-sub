@@ -198,7 +198,8 @@ const presetTags: Tag[] = tagColorPresets.map(({ name, color }, index) => ({
 export class ComponentsPage {
   /**
    * M11.10's two fixture accounts, as core's tests have them: a bank's fee a balance waives, a fintech's paid rate, which
-   * follows the Bank of Canada's (M11.14).
+   * follows the Bank of Canada's (M11.14), with its card's limits, its other fees and the institution that holds its
+   * money (M11.19).
    */
   protected readonly accounts: { name: string; account: Account }[] = [
     {
@@ -240,11 +241,22 @@ export class ComponentsPage {
             { change: '2025-09-18', rate: 2.5, on: '2025-09-18' },
           ],
         },
+        limits: { eTransfer: { day: 3000, year: 100_000 }, purchases: { day: 5000 } },
+        fees: {
+          items: [
+            { name: 'Interac e-Transfer', amount: 1.5, per: 'use' },
+            { name: 'Foreign exchange', percent: 2.5, per: 'use' },
+          ],
+          url: 'https://example.com/fees',
+          quotes: ['Interac e-Transfer: $1.50 each', 'Foreign exchange: 2.5% of the amount'],
+          lastVerified: '2026-11-10',
+        },
         protection: {
           insurer: 'cdic',
           held: 'trust',
+          through: ['Peoples Trust Company'],
           url: 'https://example.com/protection',
-          quotes: ['Your money is held in trust at CDIC member institutions.'],
+          quotes: ['Your money is held in trust at Peoples Trust Company, a CDIC member.'],
           lastVerified: '2026-11-03',
         },
         eligibility: { minAssets: 100_000 },
