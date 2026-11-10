@@ -2160,9 +2160,16 @@ in every D1 `json` column search parses.
     Free in five countries, no Duo in New Zealand, which prices in US dollars) and SoundCloud (`soundcloud`: Free, Go
     and Go+, priced every 30 days as its Go terms bill them). The owner chose Amazon Music as a provider of its own,
     with the Prime member price as an add-on on Amazon Prime, for part 2.
+  - **Music, part 2** (2026-11-09): the queue's music entries triaged: VK, Melon, QQ Music, KuGou, NetEase Cloud
+    Music, JOOX and Soribada are sold only outside the catalog's regions (rejected, the owner's rule), Napster now sells
+    AI agents (out of scope) and Mixcloud answers with a bot check (unreadable); Anghami sells to Canada, for part 3.
+    Tidal (`tidal`: Individual, Family and DJ, priced every 30 days in US dollars from its help centre): tidal.com
+    refuses this machine and shows nothing even on an ordinary connection, so its pricing, terms and privacy notice are
+    the Internet Archive's copies and the bot reads tidal.com from the archive too (`data/automation.yaml`); its other
+    countries' prices stay unread. Pandora and Anghami follow in part 3, Amazon Music in part 4.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: part 1 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 and 2 done)
 
 **M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
 - **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on

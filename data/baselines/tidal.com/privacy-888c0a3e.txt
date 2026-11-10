@@ -1,0 +1,787 @@
+url: https://tidal.com/privacy
+method: archive
+saved: 2026-11-09
+
+TIDAL Privacy Notice | TIDAL
+TIDAL
+About
+What is TIDAL?
+Magazine
+Pricing & Plans
+Support
+Download TIDAL
+Transfer Music
+Supported Devices
+Get Help
+Log in
+Manage Account
+Web Player
+Start Free Trial
+About
+Click to close accordion
+What is TIDAL?
+Magazine
+Pricing & Plans
+Support
+Click to expand accordion
+Download TIDAL
+Transfer Music
+Supported Devices
+Get Help
+Start Free Trial
+Log in
+TIDAL Privacy Notice
+Effective as of November 02, 2022 (‘Effective Date’)
+Last updated as of June 25, 2026
+This Privacy Notice describes how TIDAL, its affiliated and associated entities, as further detailed below (collectively, ‘TIDAL’, ‘we’ and ‘us’) collects, uses, discloses, transfers, stores, retains or otherwise processes your personal data.
+This Privacy Notice applies when:
+You register a TIDAL account
+You use TIDAL’s content and streaming services
+You download and/or use TIDAL clients, e.g. TIDAL mobile applications, desktop player, web player or other technical interfaces provided by TIDAL (‘TIDAL clients’)
+You visit or interact with our websites and fan pages on social networks
+You interact with us in any other way, such as when you contact our customer support service, respond to our surveys, participate in our competitions, review our services, use our developer platform and similar
+Our websites, services or documents refer to this Privacy Notice
+The Privacy Notice collectively refers to the above as processing of your data in the context of provision of our ‘Services’. Our policy is to always process your personal data in accordance with applicable data protection laws and regulations.
+This Privacy Notice is separate from TIDAL’s Terms and Conditions of Use (‘Terms’), which govern your use of and access to the TIDAL Services.
+Our Privacy Notice explains:
+Who We Are
+Personal Data We Collect About You
+How We Use Your Personal Data
+Recipients With Which We Share Your Personal Data
+Social Media Networks
+Information You Choose to Make Public
+TIDAL Profiles
+TIDAL Upload
+Public and Private Playlists
+Live
+Sharing of TIDAL Profiles, Playlists and Live Sessions.
+Your Privacy Rights
+Which Rights You Have
+How to Exercise Your Rights
+Additional Disclosures for Individuals Residing in Select Jurisdictions
+Brazil
+Canada
+The European Economic Area, the United Kingdom and Switzerland
+Your Privacy Rights
+International transfers of personal data
+United States
+Personal data we collect about you and purposes for which we use personal data
+Sources of personal data
+Disclosures of personal data to third parties
+Sale of your personal data and targeted advertising
+Your Privacy Rights
+Data Retention, Deletion and Anonymisation
+Security
+Children’s Personal Data
+Integration With Third-Party Websites and Services
+Amendments to This Privacy Notice
+1. Who We Are
+For the purposes of this Privacy Notice, the ‘controller’ of your personal data is TIDAL Music AS, a Norwegian legal entity with a registered address of TIDAL Music AS, c/o CSC (Norway) AS, Postboks 2051 Vika, 0125 Oslo, Norway and correspondence address of TIDAL Music AS, c/o CSC (Norway) AS, Postboks 2051 Vika, 0125 Oslo, Norway.
+As the controller TIDAL Music AS decides why and how your personal data are handled by TIDAL when you use our Services. TIDAL Music AS is responsible for handling your data in line with the applicable data protection rules.
+If you have any questions, comments or requests regarding this Privacy Notice, please reach out to us by contacting us at support@tidal.com or to the above correspondence address. If you want to exercise your privacy rights, see further contact options in section 7.2 of this Privacy Notice.
+We have also appointed a data protection officer whom you can contact at dataprotectionofficer@tidal.com.
+2. Personal Data We Collect About You
+When we refer to ‘personal data’ in this Privacy Notice, we mean information that makes it possible for us to identify you either directly or indirectly. In some countries it is more common to use terms such as ‘personal information’, ‘personally identifiable information’ or ‘PII’. For the purposes of this Privacy Notice, these terms will be collectively referred to as ‘personal data’.
+We may collect your personal data directly from you, from your device or automatically through your use of our Services. We may also receive your personal data from third parties, as outlined below.
+This table provides more information about different categories and examples of personal data that we process about you.
+Personal data category
+Examples of personal data collected
+When we collect this data
+Identification data and contact data
+First name and last name
+TIDAL customer identifiers, including your:
+Profile name (your display name)
+Username (your unique, public identifier on our Services)
+TIDAL ID (email or phone number that you use to log in to our Services)
+Any other internal, system-generated TIDAL identifiers to distinguish you from other TIDAL customers
+Email address
+Phone number
+Identifiers from authentication partners, such as Apple or Google (if you connect those or similar accounts with your TIDAL account)
+Date of birth
+Individual Taxpayer Registration (CPF) number (Brazil only)
+Social media handles
+We collect this information when you create or update your TIDAL account, others invite you to join TIDAL, when we conduct surveys, interviews, competitions and sweepstakes and in other situations, as specified in this Privacy Notice.
+Account data
+Password
+Profile picture (optional)
+'My Picks’ that you added to your TIDAL Profile (optional)
+Your followers and TIDAL users or artists you follow
+Country
+TIDAL account registration date
+Terms and other TIDAL policies you accepted
+We collect this information when you register or update your TIDAL account.
+Subscription data
+Type of your current and previous subscription plan(s)
+Length of your subscription
+Events relating to your subscription, such as start, renewal, cancelation, upgrade or downgrade
+Information about any marketing campaigns or trial subscriptions you utilised
+Subscription discounts and related documentation proving your eligibility for discounts
+We collect this information when you subscribe to our Services or change your subscription.
+Payment and billing data
+Payment method (e.g., credit or debit card, PayPal, mobile payment, app store payment and similar)
+Payment token (A random string of characters generated from your credit or debit card information by your payment service provider. It makes the payments for our Services more secure as we do not collect or store all your credit or debit card information. Where we facilitate further payments for our Services, we provide this token together with the requested amount to your payment service provider which charges you based on this information)
+Credit or debit card expiration date and certain digits of your card (for security reasons, we do not collect or store the full number of your card)
+PayPal billing agreement number
+Phone number (for mobile payments),
+Partner user ID (for bundle package payments),
+Details of your purchase and payment history, including the information about your billing status, paying period, past payments (amount, currency, payment type and payment reference number) and overdue payment (information about failed payment and days overdue)
+Information relating to your TIDAL voucher or gift card: voucher or gift card code, first and last name, email address, postcode, country, state
+We collect this information when you register your TIDAL account, pay for your subscription or redeem your TIDAL voucher or gift card.
+Usage data
+Your music library information, including:
+Playlists you created, their titles, descriptions, prompts, content and related metadata
+Time and date of creation, last update of the playlist, indication whether the playlist is private/public and playlist followers
+Artists, albums, tracks, videos or other content you favorited or blocked and related metadata
+Time and date of adding this content to your music library or blocked
+Your search history (queries)
+Your playback history and related metadata, such as time and date of playing specific content
+Your Live session history and related metadata, such as name, time and date of your Live sessions (See section 6.4)
+Behavioural data:
+Information on how you engage with and navigate through TIDAL clients and websites – opens, taps, clicks and scrolling information
+Information about your interaction with marketing and other emails from us – email opens and clicks
+This personal data is collected when you use our Services – for example when you create a playlist, search for or play content on our Services, navigate through TIDAL clients and websites or open emails from us.
+Login data
+Date and time of your login to our Services
+TIDAL client used for login and its version
+Device and/or browser used for login
+When you log in or use the Services, our servers record the login data from your browser or device.
+Device data
+IP address of your device
+Coarse location of the device
+This information is derived from the IP address of your device. Coarse location describes your device’s general physical location, such as the city or state your device is located. We do not collect your precise location without your consent.
+Device operating system and its version
+Crash log data, diagnostic data and other app performance data
+Hardware model of the device
+Type and version of TIDAL client you use
+Online identifiers, such as cookies, pixels and similar technologies used on TIDAL websites and in TIDAL clients.
+Read the TIDAL Cookie Policy to learn more.
+We also collect hardware model information for any audio and video devices, such as speakers and headphones, TV or other devices which you may connect to your TIDAL account.
+We collect device data when you install and use TIDAL clients or when you connect third-party hardware to your TIDAL account.
+We receive this information from your browser or device.
+Marketing data
+Your preferences to receive marketing communications from us
+We collect this information when you interact with our Services – for example when you change your marketing preferences
+Content data
+Your listener content, such as audio content you may upload to our Services, including related information such as track title, release year, artist name(s) or cover picture(s)
+TIDAL content ID
+When using features that allow uploading of listener content.
+Personal data processed in the context of customer support
+In addition to the personal data categories mentioned above, we may collect information about your:
+Preferred language
+Device operating system (optional)
+Other personal data you may disclose to us in the subject, body, or attachment to your inquiry
+Date, time and transcripts of your chat or email conversations with our customer support services
+We encourage you not to share more personal data than what is necessary to assist you with your request in the subject, body, or attachment to your customer support request.
+When you contact our customer support or use our support services (e.g. chatbots), we collect these personal data from you so that we can assist with your inquiry.
+Personal data processed in the context of user-testing, surveys, reviews and interviews
+In addition to the personal data categories mentioned above, we may collect information about your:
+Preferences, opinions, recommendations, reviews and other feedback, such as your opinions on TIDAL services, features, subscription plans, pricing, suggestions for improvements, new features etc.
+User-testing sessions may be recorded in the form of a screen recording, which captures your clicks, mouse movements and similar activity within the tested environment.
+Interviews may be recorded in the form of audio or audio-visual recordings.
+The specific personal data we collect will depend on the user-testing, survey, review or interview in question. For example, if you review our services on a publicly available app store, we will collect the details of that review.
+We collect this information when you participate in a user-testing session, survey or interview that we organise, or if you choose to review our services, including on other websites or services.
+Personal data processed in the context of competitions and sweepstakes
+In addition to the personal data categories mentioned above, we may collect:
+Content of your creative responses or submissions
+Shipping address
+Payment details (if the prize is monetary)
+Tax ID number (in countries where this might be required by law)
+The specific data we collect about you will depend on the competition or sweepstake in question.
+We may collect this information if you participate in a competition or sweepstake that we organise.
+Personal data processed in the context of your interaction with our fan pages on social media networks
+This may include your comments, likes, messages and other content that you provide when you interact with our fan pages and content or when you send us a private message on third-party social media networks.
+We receive this information from you or from the operators of social media networks when you visit or interact with the content on our fan pages on third-party social media networks.
+Precise location data
+With your consent, we process precise location data from your device to power location-based features in the app.
+We receive this information when you opt in to providing this data.
+We may draw inferences from any of the information above, including about your preferences. We do not deliberately collect sensitive personal data, and would not use any such information except for the purposes for which it is collected and as authorised by law.
+We may also receive information about you from third parties that may have collected and transferred your personal data to us in accordance with their own privacy policies and/or terms of use. When we receive such information from third parties, we may combine it with the other personal data that we have collected about you as set out above and use such information either alone or in combination with the other personal data we hold for the purposes outlined in section 3. of this Privacy Notice.
+Personal data we receive from third parties
+Third party
+Description and examples of personal data collected
+TIDAL customers
+We may receive some of your data from TIDAL customers. For example, we receive your email address from a Family plan account holder who enrols you under their TIDAL Family plan. We will use this information to send you a Family plan invitation.
+Payment service providers
+When you authorise or direct a payment to us, your payment service provider may provide us with some of your payment and billing data, such as payment token, your credit or debit card expiration date and certain digits of your card, so that we may process your payments securely. We may also receive other personal data from your payment service provider if your payment failed or when you dispute a payment.
+Authentication partners
+When you log into your TIDAL account with a third-party authentication partner, such as Apple or Google, we receive some of your data from the authentication partner.
+Depending on the authentication partner you use, we may receive your:
+First and last name
+Partner identifier
+Email address
+Applications, services, platforms and devices
+When you connect your TIDAL account to a third-party application, service, platform or device, or use a third party service available via TIDAL, we may receive some information from third parties to make the connection or the sharing of content possible and to remember your connection choices. We will require your permission before we establish the connection and receive your data.
+In this respect, we may receive your identification data and contact data, account data, usage data or device data from devices, applications, services and platforms, such as:
+Audio devices – speakers, headphones, audio players and audio platforms
+Smart TVs and streamers
+Automobiles
+DJ hardware and software
+Wearables
+Voice assistants
+Applications for import/export of playlists
+Third-party social media networks
+Business partners
+If you use our Services in a bundle package with services of TIDAL’s business partners such as telecommunication service providers, we may receive your email address, phone number and partner user ID from the business partner in question.
+Ad partners and analytics service providers
+We receive some of your information from our ad partners and analytics service providers, which we engage to deliver marketing and analytics services. The data we receive from them may include some of your subscription data, such as events relating to your subscription, marketing data, such as your device ID and usage data, such as information on how you navigate through TIDAL clients. The ad partners and analytics service providers collect such information through cookies and similar technologies embedded on our websites and in TIDAL clients. Read more about the use of cookies and similar technologies, including how to control these technologies in the TIDAL Cookie Policy.
+3. How We Use Your Personal Data
+When we process your personal data, we do so because we have specific and defined reasons (‘purposes’) to do so. In this section we provide more information regarding what these purposes are and which categories of personal data we process with respect to each of the processing purposes.
+In circumstances where we also must have a legal justification (‘legal basis’) to process your personal data, we may process your personal data when:
+It is necessary for the performance of a contract between you and TIDAL: we rely on this legal basis when you request our Services and we need to process your personal data to deliver these Services in line with our Terms. We may also rely on this legal basis to process your personal data where it is necessary to take certain precontractual steps, such as to verify your eligibility for our Services.
+It is necessary for compliance with a legal obligation: we may be subject to different legal or regulatory obligations in jurisdictions where we operate, which require that we process certain personal data for specific purposes.
+We have your consent: when you have given us your free, informed, unambiguous consent to process your personal data for a specific purpose, where required. You are free to withdraw your consent at any time (see sections 7.1. and 7.2).
+It is necessary for the legitimate interests of TIDAL or a third party: we or a third party may have legitimate interests to process your personal data for various purposes that benefit TIDAL or third parties, such as other TIDAL users. Prior to relying on this legal basis, we balance the envisaged benefits of processing for TIDAL or third parties against your interests, rights and freedoms to determine if we can rely on this legal basis.
+In exceptional cases it may be necessary to process personal data in order to protect yours’ or another’s vital interests (i.e. to protect someone’s life).
+The table below sets out:
+Our purposes for processing your personal data
+Our legal basis for each purpose
+The personal data categories we use for each processing purpose
+We may collect, use, share or otherwise process personal data about you for the below purposes. We use a variety of technologies to support these purposes, for example, algorithms, artificial intelligence (AI), generative AI and machine learning.
+Processing purpose
+Legal basis / bases
+Personal data categories affected by the processing
+To provide our Services to you
+For this purpose we process your personal data to:
+Set up and manage your TIDAL account: where a TIDAL account is required to use our Services, we need to collect some of your personal data to verify your eligibility for our Services as specified in the Terms and to create your TIDAL user account. If you decide to set up your TIDAL account through authentication partners, such as Apple or Google, we will receive some of your data from third-party authentication partners. See table ‘Personal data we receive from third parties’ in section 2. We use this information to create your TIDAL account.
+Performance of contract
+Identification data and contact data
+Account data
+Verify whether our Services are available in your country and deliver the Services in line with your country requirements: we verify which country you reside in upon subscription to our Services and we associate this country with your TIDAL account in our systems. We deliver our Services in line with the local requirements in your country, such as language, legal or content requirements.
+Performance of contract
+Account data
+Record your choices, including Terms and other TIDAL policies you accepted: this may include information on which version of our Terms or other TIDAL policies you accepted.
+Performance of contract
+Identification data and contact data
+Account data
+Enrol you under a TIDAL Family plan: when a TIDAL Family plan account owner invites you to join their TIDAL Family plan, we receive some of your data from the TIDAL Family plan account owner. We send you an email inviting you to join their Family plan. If you accept the invite, we will associate your TIDAL account with the Family plan subscription.
+Legitimate interest in extending the benefit of the Family plan account owner to you, if you wish to use it
+Identification data and contact data
+Account data
+Deliver our Services and content, as requested by you: we associate your TIDAL subscription or content purchases with your TIDAL account in our systems and verify the validity of such subscription or purchases so that you can access the purchased Services or content. We may also offer optional additional services that you may choose to engage with, for example, AI features.
+Performance of contract
+Identification data and contact data
+Subscription data
+Payment and billing data
+Remember your login and connection information: we store your data so you do not have to re-enter this information during your next visit or use of our Services. We also use cookies and similar technologies for this purpose. Read the TIDAL Cookie Policy to learn more.
+Legitimate interest in facilitating the ease of use of your account at your choice and in line with your preferences
+Identification data and contact data
+Account data
+Login data
+Device data
+Facilitate your use of our Services across multiple devices: we link and store your usage data and the information about your offline devices in our internal systems so that you can use our Services; access or restore your offline content, such as your playlists, across several devices; and authorise or deauthorize selected devices in your TIDAL settings.
+Performance of contract
+Identification data and contact data
+Account data
+Usage data
+Device data
+Facilitate connection between your TIDAL user account and third-party applications, services, platforms and devices: When you connect your TIDAL account to third-party applications, services, platforms and devices or use third party services available on TIDAL, we collect, store and share some of your personal data with these third parties to make the connection or sharing of the content possible and to remember your connection choices. (See section 4.)
+Performance of contract
+Legitimate interest in providing a connection between TIDAL account and other third-party applications to facilitate a user-friendly service
+Identification data and contact data
+Account data
+Device data
+Enable you to use various social features: TIDAL customers may personalise their TIDAL profiles, make their playlists public, search for and follow other TIDAL customers and their public playlists, use ‘Live’ feature or ‘Upload’ feature. If you use any of these features, we process your personal data. See section 6. of this Privacy Notice to learn more about the privacy aspects of these features.
+Legitimate interest in enhancing the user experience on the TIDAL platform
+Identification data and contact data
+Account data
+Usage data
+Content data
+Enable you to use beta features: You may decide to test our beta features, i.e. features through which we experiment with and test new ideas. Depending on the feature that is subject to beta testing, we may process various categories of your personal data.
+We may process your data to:
+analyse and evaluate your use of the beta feature(s) tested, which includes the collection and analysis of your usage data
+collect your feedback regarding the beta features tested to inform our business decisions regarding these features; this may involve collection of your feedback through a survey or other channels
+Performance of contract
+Legitimate interest in testing additional services and features with users, if the user chooses to partake in the program
+Identification data and contact data
+Account data
+Subscription data
+Payment and billing data
+Usage data
+Content data
+Personal data processed in the context of user-testing, surveys, reviews and interviews
+Send you important messages concerning our Services: we process some of your personal data so that we can send you emails or app notifications to communicate important messages relevant to our Services. Such messages may concern updates to our Terms, to our Privacy Notice, to your subscription, along with other important, technical and security-related messages. Due to the importance of these communications, it is not possible to opt out from receiving them.
+Performance of contract
+Identification data and contact data
+Account data
+Subscription data
+Login data
+For payment and billing purposes
+For these purposes we process your personal data to:
+Safeguard and process your payments: Some features on TIDAL include transactions between you and TIDAL or you and other TIDAL customers. These transactions include TIDAL subscription payments or purchases of listener content available on TIDAL.
+If you activate these features you must provide certain information for identification and verification purposes and so that your transactions, including future transactions (such as transactions after the end of a free trial subscription), can be processed. This information is stored with third-party payment service providers, which handle transactions for TIDAL. In return, TIDAL receives payment tokens from them to facilitate your transactions without exposing your payment information.
+Note that third-party payment service providers may retain some of your information for their own purposes, in accordance with their own privacy policies and terms, or as required by law.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Subscription data
+Enable billing under a bundle package: if you use TIDAL Services under a bundle package with services of TIDAL’s business partners, we verify your identity with our business partner to confirm your eligibility for the bundle package. We may receive your email or phone number and partner user ID from the business partner. We associate partner user ID with your TIDAL account in our systems and use it to bill your use of TIDAL Services to the business partner.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Subscription data
+Usage data
+Account data
+Device data
+Facilitate that you receive a specific discount or a trial period: if you claim a specific discount or a trial period for our Services, we collect and store data to verify that you are eligible for the specific discount or trial period and to facilitate that you receive the specific discount or that you are not charged for the use of our Services within the trial period.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Subscription data
+Redeem your TIDAL voucher or gift card: if you pay for our Services by use of a gift card or voucher, we may process your data in line with your jurisdiction-specific requirements.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Keep track of your subscription payments and send you payment notifications: we keep track of your subscription payments in our internal systems. We may send you email reminders about your upcoming payments or price changes that result from the changes to your TIDAL subscription plan. If your payment failed or your subscription stops due to failed payment, we may send you email or app notifications about this.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Subscription data
+Assist you if you dispute a payment: in this context we may collect information about the disputed payment from you, compare it with our internal records and receive or share some of your personal data with your payment service provider to help you resolve the claim.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Subscription data
+Facilitate refunds and cancellations: we process your data to verify whether you are eligible for cancellation and refund in line with the Terms and to facilitate your cancellation and refund request.
+Performance of contract
+Identification data and contact data
+Payment and billing data
+Subscription data
+Usage data
+Detect and prevent payment frauds: we use cookies and similar technologies for this purpose. Read the TIDAL Cookie Policy to learn more.
+Legitimate interest in identifying unusual activity on user accounts to detect and prevent fraud
+Compliance with legal obligation
+Identification data and contact data
+Payment and billing data
+Subscription data
+Keep the records of payments to comply with our legal obligations: we are subject to various legislation in countries in which we operate, where we need to retain records of payments for bookkeeping, accounting or tax purposes.
+Compliance with a legal obligation
+Identification data and contact data
+Payment and billing data
+Subscription data
+To tailor and personalise our Services to you
+For this purpose we process your personal data to:
+Generate personalised content, search results and recommendations for you: we produce personalised content, such as your daily discovery playlists, mixes, radio stations, statistics on your top artists and content, recommendations for new music and content, search results and more. The personalised content and recommendations are based on your usage data, such as your playback history, search history, and your interactions with our content.
+We also use this data to train our personalisation and search algorithms so that they offer relevant music and search recommendations to you and to other TIDAL users.
+Some of the personalised recommendations are based on the preferences of other TIDAL users with similar listening patterns to yours or on the popular music in your country.
+Performance of contract
+Legitimate interest in providing a personalised service to users
+Usage data
+Identification data and contact data
+Account data
+Content data
+To improve our Services
+For this purpose we process your personal data to:
+Evaluate the effectiveness and performance of our existing Services and their features: we analyse the effectiveness, performance and adoption metrics of existing Services and their features, to understand how the specific Service or feature is used, how often it is used and how it can be improved.
+Develop and test new Services, technologies and features: based on the feedback from our users, we develop and test new Services, features, technologies and their designs, undertake experimentation, evaluate their impact and track their adoption metrics.
+We use a variety of tools, including cookies and similar technologies for these purposes. Read the TIDAL Cookie Policy to learn more about our use of cookies. We may also collect your feedback through user-testing sessions, surveys, reviews or interviews, through your interactions with our customer service or fan pages on third-party social media networks or review sites.
+Legitimate interest in evaluating the performance of our services and developing and testing new services, technologies and features
+Identification data and contact data
+Account data
+Subscription data
+Usage data
+Device data
+Personal data processed in the context of user-testing, surveys, reviews and interviews
+Personal data processed in the context of customer support
+Personal data processed in the context of your interaction with our fan pages on social media networks
+For our analytics, forecasting and reporting purposes
+For these purposes we process your personal data to:
+Perform business analytics: we measure and analyse how our Services perform and we prepare internal reporting on that basis. This informs our business decisions and helps us plan our resources, marketing campaigns, product direction and development activities. For example, we measure the number of our new users, total number of users for different subscription plans, demographic patterns and other usage trends for our Services. We use de-identified and/or aggregated information collected about you and other users of our Services for this purpose. Such information cannot be reasonably likely used to identify a particular individual.
+Legitimate interest in developing the TIDAL Services and the user experience
+Identification data and contact data
+Account data
+Subscription data
+Device data
+Analyse the traffic on our Services: to understand how the visitors of our Services interact with them and where the visitors come from. We use cookies and similar technologies for this purpose. Read the TIDAL Cookie Policy to learn more.
+Legitimate interest in developing the TIDAL Services and the user experience
+Identification data and contact data
+Device data
+To diagnose, troubleshoot and fix technology and security problems and to test whether our Services perform as they should
+For these purposes we process your personal data to:
+Diagnose, troubleshoot and fix technology and security problems: we collect information about errors, crashes, bugs or other technical issues and security incidents from your device. We process such information in our internal log systems and analyse log information. This helps us resolve technology problems or security issues with our Services, such as fraudulent login attempts and to prevent them from arising.
+We use a variety of tools, including cookies and similar technologies for this purpose. Read the TIDAL Cookie Policy to learn more.
+Performance of contract
+Legitimate interest in identifying unusual activity on TIDAL Services to detect and prevent security vulnerabilities, and to debug and fix errors that impair how our Services are provided
+Identification data and contact data
+Account data
+Login data
+Device data
+Usage data
+Personal data processed in the context of customer support
+Test whether our Services perform as they should: we perform testing of our Services and their features to verify that they perform without any errors, crashes or bugs.
+Legitimate interest in identifying unusual activity on TIDAL Services to detect and prevent security vulnerabilities, and to debug and fix errors that impair how our Services are provided
+Identification data and contact data
+Account data
+Login data
+Device data
+Usage data
+Personal data processed in the context of customer support
+To facilitate payments for content right holders
+We process your personal data so that we can pay the artists and other content rights owners a fair compensation for their content on TIDAL Services, such as royalties.
+For this purpose, we process your usage data, such as how many times you listened to a particular song, along with your account and subscription data and information about any payments you make.
+Legitimate interest in ensuring that artists and content rights owners receive fair compensation for their content provided on our Services
+Identification data and contact data
+Account data
+Usage data
+Subscription data
+For marketing and advertising purposes
+For these purposes we process your personal data to:
+Deliver our marketing emails and app notifications (direct marketing): consistent with your local law and your preferences for receiving marketing communications from us, we may send you emails or app notifications about our Services or events, which we consider may be of interest to you, until you opt-out. We may also deliver promotional offers and communications on behalf of third-party advertisers concerning their products or services and/or events sponsored or hosted by such advertisers.
+You can change your preferences and opt-out from receiving some or all of these types of communications in your TIDAL account settings or by contacting us as specified in section 7.2. You may unsubscribe from our marketing emails by clicking on the unsubscribe link provided in such emails. We will continue marketing to you until you opt-out.
+Consent (where legally required for direct marketing contact)
+Legitimate interest in delivering marketing campaigns to users of our Services (where consent is not legally required)
+Identification data and contact data
+Marketing data
+Subscription data
+Personalisation of our marketing campaigns: if your marketing communications settings are turned on, we may use some of your previously collected personal data, such as your usage data or marketing data to send you marketing emails or app notifications that are more personalised. For example, we may send you an offer for a bundle package with your telecommunication service provider or marketing content based on your listening habits.
+Legitimate interest in delivering marketing campaigns that are relevant to the users of our Services
+Identification data and contact data
+Marketing data
+Subscription data
+Usage data
+Targeted advertising: TIDAL and its ad partners that provide advertising or other functionality on TIDAL’s behalf, may use cookies and similar technologies to help us tailor the advertising of our Services to you as informed by your interests. The information about your interests is based on your activity, including but not limited to your browsing or product purchasing on or through our websites or on third-party websites or your responses to our marketing emails. Read the TIDAL Cookie Policy to learn more.
+Consent (where legally required).
+Legitimate interest in delivering advertising that is relevant to the users of our Services (where consent is not legally required)
+Marketing data
+Device data
+Usage data
+Identification data and contact data
+Measuring the success of our marketing campaigns: we may collect some of your subscription data, such as information about the start of a trial or a paid subscription, renewal, cancelation, upgrade or downgrade of your subscription and usage data, such as email opens and clicks. This helps us analyse the success of our marketing campaigns. Consistent with your local law and your preferences, we also receive such information through cookies or similar technologies. Read the TIDAL Cookie Policy to learn more.
+Legitimate interest in analysing the success of our marketing campaigns.
+Identification data and contact data
+Subscription data
+Usage data
+Marketing data
+Device data
+Usage data
+To comply with legal obligations and to respond to legal requests
+We are subject to legal obligations in different countries in which we offer our Services. Processing for this purpose may involve storage and sharing of your personal data with third parties, such as law enforcement authorities, courts and other public authorities, our advisors, attorneys, auditors and other third parties to comply with various obligations under the local legislation.
+We may also receive legal requests, such as a search warrant, a court order or a subpoena from authorities in countries in which we operate. We may need to access, preserve and share your personal data with law enforcement authorities, courts and other public authorities, our advisors, attorneys, auditors and others who participate in the legal process in response to a legal request. We do this if we have a good-faith belief that the law requires us to do so; that the response is required by law in that jurisdiction; that the legal request affects users in that jurisdiction and is consistent with internationally recognised standards.
+Information we process about you may be accessed, processed and retained for an extended period of time when it is the subject of a legal request or obligation. By allowing for the sharing and use of personal data for these purposes, TIDAL is not assuming any affirmative duty to undertake such actions.
+Compliance with legal obligation (where the processing is imposed by an EU law / EEA country law / UK law / Brazilian law)
+Legitimate interest in complying with legal and regulatory obligations
+Vital interests to protect someone’s life
+Any personal data categories specified in section 2. of this Privacy Notice
+To enforce our Terms and policies; to detect, investigate and take all steps necessary to address misuse, fraud or any unlawful activity on our Services; and to establish, exercise and defend legal claims
+For these purposes we process your personal data to:
+Enforce our Terms and other TIDAL policies applicable with respect to our Services and detect any violations of those Terms and policies. For example, this includes processing of your personal data to prevent repeated use of free trial by the same individuals or scanning your listener content to detect intellectual property or policy violations using automated scanning tools.
+Detect, prevent and address misuse, fraud or any unlawful activity on our Services. For example, this includes processing of your personal data:
+to investigate and take appropriate action regarding the claims of intellectual property infringement with respect to the content offered on our Services
+to detect and investigate streaming frauds, fraudulent playlists and other fraudulent use of our Services
+Protect the rights, property and safety of TIDAL, you and others, including to prevent death or imminent bodily harm
+Establish, exercise and defend legal claims
+As part of the above processing activities, we may access, preserve and share information with law enforcement, courts, our advisors, attorneys, auditors and others who participate in the investigation of the misuse, frauds or any unlawful activity on our Services or in the establishment, exercise and defence of the claims and related legal process. Information we receive about you may be accessed, processed and retained for an extended period of time when this is necessary for the above purposes. By allowing for the sharing and use of personal data for these purposes, TIDAL is not assuming any affirmative duty to undertake such actions.
+Compliance with legal obligation
+Legitimate interest in protecting the integrity of our Services and systems
+Any personal data categories specified in section 2. of this Privacy Notice
+To fulfil our contractual obligations with third parties
+This includes processing of your data to fulfil various contractual obligations TIDAL has with respect to third parties. For example, we may be contractually required to compile and share reports on how TIDAL users use our Services with our business partners to measure the effectiveness of the business partnership or to facilitate billing under bundle packages. See section 4. of this Privacy Notice for the level of detail of such reports that we share with our business partners.
+Legitimate interest in delivering information to third parties to fulfil contractual obligations
+Identification data and contact data
+Usage data
+Payment and billing data
+Subscription data
+For the purposes of competitions and sweepstakes
+If you participate in or are selected for a competition or a sweepstake which we organise, we need to process your personal data to:
+enable your participation in the competition or sweepstake
+select and announce the winners
+disclose the winners’ identities to other competition or sweepstake participants when this follows from the law (selected jurisdictions only)
+deliver a prize to you if you are the winner
+handle any disputes arising from the competition or sweepstake in question
+report and pay tax on your behalf (applicable in specific countries)
+For these purposes, we may share your personal data with our business partners if we organise a competition or sweepstake together with them. We may also publish your personal data on our website or on our business partner’s website or fan sites on social networks in case you are the winner.
+Legitimate interest in running and promoting competitions and sweepstakes, ensuring process runs fairly and to contact competition and sweepstake winners
+Identification data and contact data
+Account data
+Usage data
+Subscription data
+Personal data processed in the context of competitions and sweepstakes
+To conduct surveys, interviews, reviews and user-testing sessions
+We process your personal data if you agree to participate in our surveys, interviews or user-testing sessions. We may also process your personal data if you review our services, including on other sites or application stores.
+We conduct surveys, interviews and user-testing sessions for various purposes, such as to understand the preferences of TIDAL users or prospective customers or to collect feedback, comments, suggestions or ideas about our Services and their features. We use this information to improve our Services and for our analytics, forecasting and reporting purposes. (See above)
+In the context of surveys, interviews or user-testing sessions, we may process your personal data to:
+send you an invitation for the survey, interview or user-testing session
+process your survey, interview or user-testing session contributions
+send you a reward for your participation in the survey, interview or user-testing session, if applicable
+personalise our Services based on your responses
+How we process your personal data for surveys, interviews, reviews or user-testing sessions will differ depending on the survey, interview or testing session in question. Some surveys, interviews or user-testing sessions may be recorded in the form of an audio, an audio-visual recording or a screen recording.
+Legitimate interest in understanding the preferences and experience of our users or prospective customers to improve our Services
+Identification data and contact data
+Subscription data
+Usage data
+Personal data processed in the context of user-testing, surveys, reviews and interviews
+For customer support purposes
+We need to process your personal data so that we can assist you with your inquiry when you contact our customer support, either through our official customer support contact channels or our support channels on third-party social networks.
+Performance of contract
+Personal data processed in the context of customer support
+Personal data processed in the context of your interaction with our fan pages on social media networks
+To communicate with you on social networks and to analyse the use of our fan pages
+TIDAL has fan pages, accounts and profiles (‘fan pages’) on third-party social media networks through which we publish and share various content to promote our Services. You can comment or otherwise interact with our fan pages and posted content. You can also send us messages.
+Insofar as you interact with our fan pages on social media networks, we process your personal data to communicate with you and for additional purposes mentioned above, such as to:
+assist you with your customer support inquiry
+improve our Services, such as by collecting your opinions regarding our Services and their features
+carry out surveys, competitions and sweepstakes
+establish, exercise and defend legal claims
+We also process your data to analyse the reach and use of our fan pages. See section 5.
+Legitimate interest in providing enhanced connectivity across the TIDAL Services, social networks and fan pages
+Identification data and contact data
+Personal data processed in the context of your interaction with our fan pages on social media networks
+Location data
+With your consent, we process precise location data from your device to power location-based features in the app. We use this information to personalise your music experience based on where you are – for example, to surface playlists featuring artists local to your area, to highlight live events near you, and to support similar location-aware discovery features.
+Consent
+Precise location data
+If we intend to process your personal data for any purpose other than the purposes set out above, we will notify you of the purpose for such processing and will provide any other relevant information, either by updating this Privacy Notice or, in the case of material change, by notifying you by email or push notification.
+4. Recipients With Which We Share Your Personal Data
+We share your data with third parties if you give us your permission, if it is necessary for the performance of the contract we have with you or if we have a legitimate interest for such sharing. See the overview of different third-party recipients with which we may share your data.
+Category of recipient
+Why we share your data (purpose)
+Data categories we share
+Business units and subsidiaries
+TIDAL is one of the legal entities of Block, Inc. We may share your data with other business units (Square, Cash App, Afterpay/Clearpay) and between wholly-owned subsidiaries of Block, Inc. For example, we may share your information internally to understand how you engage with our company products to help make our Services better for you and for everyone, to help us build Services tailored to your preferences, and to help protect our services and maintain a trusted environment.
+Depending on the purpose for which we share this data, it may include the data categories specified in section 2. of this Privacy Notice.
+Processors (service providers)
+We engage trusted service providers which process personal data on our behalf and according to our instructions. Our written agreements set out our mutual obligations and responsibilities, including technical and organisational measures which the processors need to adopt to adequately protect the personal data they process on our behalf.
+Some of these processors include cloud service providers, which operate the technical infrastructure we use to process and store your data and to deliver our Services; content delivery networks; customer relationship management platforms; customer data platforms; user-testing platforms; AI service providers; chatbots; and contractors who help us deliver customer support services.
+Depending on the purpose for which we engage the specific processor, the processors may be able to process the personal data categories specified in section 2. of this Privacy Notice on our behalf.
+Third-party applications, services and platforms
+When you connect your TIDAL user account to third-party applications, social network accounts or devices, share content or port your playlists between TIDAL and third-party services, or use third party services available on TIDAL, we share some of your personal data with the third parties selected by you to make the connection or sharing of the content possible and to remember your connection choices.
+This may include sharing of your data with third-party social media networks, applications, audio devices, TVs, smart devices, cars, voice assistants and similar.
+TIDAL is not responsible for the functionality, privacy, or security measures of any third-party applications, social networks or devices that you have connected to your TIDAL account or shared content with. Refer to their privacy policies to learn more about how these third parties process your personal data.
+Identification data and contact data
+Usage data
+Device data
+Payment service providers
+We may share some of your personal data with your payment service provider to process your payments, refunds or for related payment processing purposes, including for anti-fraud purposes or to assist you in investigating and resolving your claim if you contest a payment. Your payment service provider may further process the shared personal data for its own purposes, as outlined in its terms and privacy policy.
+Payment and billing data
+Identification data and contact data
+Content data
+Business partners
+We share your personal data with some of our business partners, such as telecommunication providers, with which we may provide bundle services to you or with which we organise competitions and sweepstakes.
+When you use our Services through a bundle package with services provided by our business partners, we may have to share some information with the business partners to enable billing and to measure the effectiveness of our partnership. We only share limited information with our partners for these purposes, such as partner user ID, username or the number of new or active subscribers under the bundle offer during a particular billing period.
+Occasionally, such as when there is a technical problem to set up your TIDAL account or subscription under the bundle package or when there is any inquiry or dispute relating to the bundle package, we may share some of your personal data with the business partner to effectively resolve such issue.
+When we organise competitions or sweepstakes together with our partners, we may share some of your personal data with these partners. This may include your name or your address if the partner is responsible for announcing the competition winners or for shipping prizes to the winners.
+Subscription data
+Usage data
+Identification data and contact data
+Personal data processed in the context of competitions and sweepstakes
+Ad partners and analytics service providers
+We use third-party services for our analytics, forecasting and reporting purposes and for marketing and advertising purposes. We use cookies and similar technologies, through which we collect and share various data with the ad partners and analytics service providers that help us with our analytics and marketing efforts. Read the TIDAL Cookie Policy to learn more.
+Marketing data
+Usage data
+Subscription data
+Device data
+Law enforcement and other public authorities, legal representatives, auditors and other third parties
+We may share your personal data with public authorities, such as law enforcement authorities, courts and other public authorities, our advisors, auditors and other third parties to comply with legal obligations or legal requests to which we may be subject; to enforce or apply our Terms and policies; to detect, prevent and address misuse, fraud and other unlawful activity on our Services; to protect the rights, property and safety of TIDAL, you and others, including to prevent death or imminent bodily harm; and to establish, exercise and defend legal claims.
+Any personal data categories specified in section 2. of this Privacy Notice
+Purchasers of our business
+We may share your personal data with a buyer or a prospective buyer of our business and its advisors and auditors if we or substantially all of our assets are acquired by or sold to a third party. If our business or assets are bought by a third party, the personal data held by us will be one of the transferred assets.
+Any personal data categories specified in section 2. of this Privacy Notice
+TIDAL customers
+TIDAL customers can upload listener content to our Services (for more details refer to 6.2 below). When you listen to such content, we collect your usage data (e.g., the number of times you listened to the specific content) to generate aggregated statistics for TIDAL customers who own the content. These statistics include the number of unique plays and unique listeners for their content but do not directly disclose identities of such listeners.
+Usage data
+TIDAL artists
+Depending on the Services you use, a TIDAL artist may be the data controller of your data in their own right. Where applicable, we may facilitate the sharing of your personal data with them.
+Any personal data categories specified in section 2. of this Privacy Notice
+We may de-identify your data, and combine and aggregate your de-identified information with other information in a way that it no longer enables your identification and share that de-identified, aggregated information with other third parties not mentioned above – for example, with artists or content rights holders whose content we licence. Such de-identified and aggregated statistics may include demographic data, such as how many users constitute a particular age group, general locations of where groups of users reside and similar data.
+5. Social Media Networks
+We use various usage analytics and insight tools offered by the operators of social media networks, through which we can view general, anonymised statistics about our fan pages, such as interactions and reach of our posts and demographic information about our fan page visitors (e.g. age, gender, region). We can optimise the content we offer on our fan pages on that basis.
+Whenever you interact with our fan pages, operators of the social media networks use cookies and similar technologies to track the usage behaviour of fan page visits. This information is collected regardless of whether you are a logged in user of the particular social media network or not. On that basis, we receive various insights from the operators of social networks.
+We do not have access to the personal data which the operators of social media networks use to create such insights. The selection and processing of your data for insights is performed exclusively by the operators of social networks. However, in some cases, when using these usage analysis and insight tools, we are jointly responsible (‘joint controllers’) with the operators of the social media networks for processing your data to the extent indicated below.
+When you visit our profile or fan pages on Facebook, Instagram, LinkedIn and TikTok (each the ‘Social Media Network’), the Social Media Network and TIDAL act as joint controllers with respect to the collection of your data and the creation of insights. We have entered into joint controller terms with each Social Media Network to govern the relationship between TIDAL and the Social Media Network with respect to this processing. The Social Media Network is the primary controller for the collection of your data that is used for the creation of insight reports. The Social Media Network is therefore responsible for enabling your privacy rights in line with the applicable privacy laws. More information on how the Social Media Network processes your personal data, including the legal basis the Social Media Network relies on and the ways to exercise privacy rights against the Social Media Network, can be found in each Social Media Network’s own Privacy Policy (Facebook, Instagram, LinkedIn, TikTok).
+When you visit our X or YouTube profiles, X or Google (as the operator of YouTube), as relevant, collects and processes your personal data to the extent described in their privacy policies. Through statistics, we receive anonymised information from X and Google – for example about the number of our X and YouTube profile visits, about how successful our posts are or about what interests our followers pursue. Please refer to the X and YouTube privacy policies for further information on how they process your personal data.
+Note that when you visit our fan pages, the operators of social media process your data also for their own purposes, which are not covered in this Privacy Notice. We have no influence over the data processing operations of third parties. In this regard, we refer you to the privacy policy of the respective social network.
+6. Information You Choose to Make Public
+6.1. TIDAL Profiles
+The following information will be always public on our Services as part of your TIDAL Profile:
+your TIDAL Profile name and Username,
+your TIDAL Profile picture (optional),
+your followers and TIDAL users and artists you follow,
+your public playlists, including their titles, descriptions, playlist cover picture, content and the number of TIDAL users who have added these playlists to their collection,
+‘My Picks’ that you added to your TIDAL Profile (optional),
+your social media handles (optional),
+your listener content, if made public (optional, see section 6.2 below)
+The extent of your information visible to others on our Services will depend on the information you choose to share about yourself. You can change or delete some of the information you provided about yourself.
+You may also decide to import a picture from your device or third-party social media networks, and to have such picture published as a Profile picture on your TIDAL Profile. TIDAL will request your permission before importing your picture from a third-party social media network. You can delete or update your Profile picture by importing a new one at any time.
+6.2. TIDAL Upload
+TIDAL Upload feature allows you to upload your own audio content to our Services, including key information such as track title, release year, artist name(s), cover picture(s) or explicit content flag (collectively referred to as ‘listener content’).
+You can choose the privacy settings for your listener content (public or private) and to share it with others (see section 6.5 for more detail about sharing). If your listener content is public, it will be searchable and playable by others on TIDAL, searchable and indexed on search engines, and it can be featured or promoted on our Services, such as on TIDAL’'s home page or in TIDAL playlists.
+We may also provide our or third party AI tools as part of Upload, such as tools for lyrics transcription, cover picture generation, stem separation and more. When you use these AI tools, you agree, as specified in the Terms, that you will not include any sensitive personal data of any individual (i.e. data that reveals racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, health data or data concerning anyone’s sex life or sexual orientation) in any input to these AI tool. Additionally, we encourage you to avoid sharing more personal data than necessary when using these AI tools.
+If you decide to monetise or purchase listener content, you will be redirected to engage directly with a payment service provider (for example Stripe, under their own privacy notice). The payment service provider may require that you provide them with your data so that they can handle payments. They may process and retain this information for their own purposes, in accordance with their own privacy policies and terms, or as required by law. Additionally, you may need to create an account directly with that payment provider.
+When you upload listener content on our Services, we scan such content to detect any intellectual property or TIDAL Content Guidelines violations using automated scanning tools. Others may also report your listener content, if it violates intellectual property rights or TIDAL Content Guidelines. In such cases, we need to process your data to review the flagged claim and to take appropriate action as specified in our Terms. We may also use automated scanning tools to scan the uploaded listener content for explicit language.
+6.3. Public and Private Playlists
+You can create public playlists which will appear in your profile, be searchable on our Services, and be available for other TIDAL users to add to their collection. Your playlists may also feature in other places in the TIDAL app, such as the home page. You can change your playlist to private if you do not want this. Once you make your playlist public, we scan the playlist title and description with the use of AI technologies to ensure the playlist content does not violate our TIDAL Content Guidelines.
+Note that if other TIDAL users add your public playlist to their collections, subsequent changing of the playlist to private setting will not automatically remove the playlist from other users’ collections. At present, you can only delete your playlist so that it is removed from everyone’s music collections. Accordingly, if you shared your public or private playlist through a shareable URL link with other TIDAL users (see below) and they added such a playlist to their collections, at present you can only remove the playlist from their collections by deleting it.
+If you add a playlist created by another TIDAL user to your collection, the playlist creator will be able to see your TIDAL profile name among the playlist fans.
+6.4. Live
+You can share your Live session with others. When you start a Live session, the listeners will be able to see the content you are playing, the name of your Live session, your TIDAL Profile name, Username and Profile picture, and they will be able to visit your TIDAL Profile. Your Live session may be also featured on TIDAL Services and visible in TIDAL clients to any TIDAL user. Other TIDAL users, such as your followers, may receive a notification that you have started a Live session. Audiences outside of TIDAL will also be able to see your Live session and TIDAL Profile if they have a URL link to your Live session (see section 6.5). The listeners who joined your Live session will also be able to react with emojis to your Live session and such reactions will be visible to you and to the other listeners.
+6.5. Sharing of TIDAL Profiles, Listener Content, Playlists and Live Sessions
+You and other TIDAL users will be able to share your TIDAL Profile or parts of your TIDAL Profile, such as ‘MyPicks’, public playlists, listener content and Live sessions on third-party social networks or messaging platforms with a shareable URL link or by clicking on social media logos for selected social networks in TIDAL clients. You can also share your private playlists with your selected audience with a shareable URL link.
+Note that these URLs are not private, which means that any third party with access to your TIDAL Profile URL, public or private playlist URL, listener content URL or Live session URL will be able to access the shared information. They will be able to preview your TIDAL Profile, your public or private playlists and listen to your listener content or Live session. The third-party platforms may also store a copy of this information to support the features of their own services.
+7. Your Privacy Rights
+7.1. Which Rights You Have
+You have a number of rights when we process your personal data, as provided by applicable privacy laws. These include:
+Right to be informed about how we process your personal data
+You have the right to know how we process your personal data. We provide such information through this Privacy Notice, through information on our Services and by answering your inquiries when you contact us. (See ‘Right of access to your personal data’).
+Right of access to your personal data
+You can ask whether we process your personal data, and if we do, you can ask for a copy of your personal data and for information on certain other aspects of the processing, such as purposes of the processing; categories of the personal data processed; recipients or categories of recipients of the data; source of the data where we have not received your data directly from you; information about the existence of automated decision-making or profiling; and information about other privacy rights you have in relation to your personal data.
+Right to rectification of inaccurate or incomplete personal data
+You have the right to have your incorrect or incomplete data corrected. You may correct some categories of your personal data yourself in your TIDAL account.
+Right to deletion (erasure) of your personal data
+You have the right to ask us to delete your personal data under certain circumstances, for example when:
+Your personal data are no longer necessary in relation to the purposes for which we have collected them
+You withdraw your consent to processing of your personal data (see ‘Right to withdraw consent’) and there is no other legal ground for the processing
+You object to the processing (see ‘Right to object’) and there are no overriding legitimate grounds for the processing or when you object to processing of your data for direct marketing purposes
+Your personal data were unlawfully processed by us
+The erasure is mandated under a law to which we are subject
+We have collected the personal data of a child (see section 11.)
+Right to restriction of processing of your personal data
+Under certain circumstances you may request that we stop processing some or all of your personal data temporarily. You may request the restriction of processing if:
+You have contested the accuracy of your personal data (see ‘Right to rectification of inaccurate or incomplete personal data’) for the period of verification of the accuracy of your personal data
+When we unlawfully processed your personal data and instead of erasure of such data you request restriction of their use
+When we no longer need your personal data in relation to the purposes for which they were collected but you require such data for the establishment, exercise or defence of legal claims
+When you have objected to the processing (see ‘Right to object’), pending the verification on our end whether our legitimate grounds override your interests.
+Right to data portability
+You have the right to receive a copy of your personal data in a machine-readable (electronic) format and to have it sent to another service provider, if our legal basis for processing your personal data is your consent or performance of contract.
+Right to object
+You have the right to object to the processing of your personal data on certain grounds.
+When we process your personal data for TIDAL’s or third party’s legitimate interests: See the overview in section 3., which specifies for which purposes we rely on legitimate interests as our legal basis to process your data. When we receive your request on this ground, we will no longer process your personal data for such purposes, unless we demonstrate that we have compelling legitimate grounds to continue processing your personal data for these purposes, which override your interests, rights and freedoms or where we need to process such data for the establishment, exercise or defence of legal claims.
+When we process your data for direct marketing purposes: You can also object at any time that we process your personal data for direct marketing purposes. If you object, we will no longer process your data for such purposes.
+You may change your preferences and opt out from receiving some or all of these types of direct marketing communications in your TIDAL account settings, or you may contact us through the contact points provided in section 7.2. You may also unsubscribe from our marketing emails by clicking on the unsubscribe link provided in such emails.
+See also ‘Right to erasure (deletion) of your personal data’ and ‘Right to restriction of processing of your personal data’ above that are related to the Right to object.
+Right not to be subject to automated decision-making
+You have the right not to be subject to a decision based solely on automated processing (i.e., decisions made by machines without human involvement), including profiling, which would produce legal effects or similarly affect you significantly. Our processing of your data does not involve this type of automated decision-making.
+Right to withdraw consent
+Where we rely on your consent to process your personal data for a particular purpose, you may withdraw your consent at any time. See the overview in section 3., which specifies for which purposes we rely on your consent as our legal basis. If you withdraw your consent, we will stop processing your personal data for the specific purpose(s). This does not affect the lawfulness of processing of your data before you have revoked the consent.
+See also ‘Right to deletion (erasure) of your personal data’ that is related to the Right to withdraw consent.
+Right to lodge a complaint
+If you reside in selected jurisdictions, you are entitled, in line with the local data protection law, to contact your local authorities regarding any question, concern or complaint you have relating to our processing of your personal data. Please refer to section 8. below to verify whether you have this right in your jurisdiction and how to exercise it.
+Right of non-discrimination
+You have the right to not be discriminated against if you exercise any of your privacy rights outlined above. We will not discriminate against you or deny, charge different prices for, or provide a different quality of our Services if you choose to exercise these rights, although some of the functionality and features available on the Services may change or no longer be available to you.
+7.2. How to Exercise Your Rights
+Deleting your TIDAL account or selected information:
+If you wish to delete your TIDAL account and related personal data, you can use a self-service deletion button in TIDAL clients (Android and iOS apps) and on TIDAL account pages (account.tidal.com/profile).
+Deletion of your TIDAL account means that your TIDAL account and related personal data will be deleted and/or anonymised (i.e. rendered in such a way that you are no longer identifiable). You will immediately lose access to your music library (favorites and playlists), purchased content, your TIDAL public profile, account data and history. If you cannot complete self-service deletion for any reason, please contact our customer support team (see the contact details in the following section). Note that under some circumstances we are legally not required to comply with a deletion request. For more information in this regard see section 9. We have also published an article with more information about self-service deletion.
+TIDAL also provides you with an option to remove certain personal data in your TIDAL account without deleting your whole TIDAL account. You can for example delete your folders, playlists, playlists descriptions, remove tracks from your playlists, remove added artists and other content from your library, remove ‘MyPicks’, followers / following and similar.
+Other privacy rights:
+You can request to exercise any of your privacy rights:
+with an email to support@tidal.com
+with the customer support contact form
+with the online chat with our customer support agents at support.tidal.com (chat available Monday–Friday in specific hours)
+Please note that when you make a request to exercise your rights, we may require that you provide information and follow procedures so that we can verify your identity. Where possible, we will attempt to match the information that you provide in your request to information we already have on file to verify your identity. If we are able to verify your request, we will process it.
+We will assess any request to exercise these rights on a case-by-case basis. We will respond to your request within the periods required by applicable data protection law. However, we may not always be able to comply fully with your request. We will notify you in that event.
+8. Additional Disclosures for Individuals Residing in Select Jurisdictions
+8.1. Brazil
+This section is relevant if you reside in Brazil. TIDAL complies with the Brazilian General Data Protection Law (Law No. 13,709/2018) (the ‘LGPD’). This Privacy Notice includes all the necessary disclosures in line with the LGPD.
+You have privacy rights under the LGPD, which are outlined in section 7.1 of this Privacy Notice. You may contact us in line with section 7.2 to exercise any of these rights.
+You also have the right to information regarding the shared use of personal data, which means that you have the right to receive complete information about data sharing or data transfers between TIDAL and third parties. You can find the overview of the shared use of your personal data in section 4. of this Privacy Notice.
+If you are not satisfied with how we handled your request to exercise your rights or you have any other questions or concerns about your rights or this Privacy Notice, please contact our data protection officer at dataprotectionofficer@tidal.com.
+You also have the right to complain to your national data protection authority Autoridade Nacional de Proteção de Dados.
+We may share your personal data with third parties outside of Brazil, as provided in section 4. This may include transfers of your personal data to the United States, to the European Economic Area countries and to the United Kingdom.
+8.2. Canada
+This section is relevant if you reside in Canada. TIDAL complies with the Canadian Personal Information Protection and Electronic Documents Act (‘PIPEDA’). This Privacy Notice includes all the necessary disclosures in line with the PIPEDA.
+If you are dissatisfied with how we handled your privacy request, you have right to make a written submission to the Privacy Commissioner in your jurisdiction or to the Office of the Privacy Commissioner of Canada at the address below:
+Office of the Privacy Commissioner of Canada
+30 Victoria Street Gatineau
+Quebec K1A 1H3
+https://www.priv.gc.ca/en
+8.3. The European Economic Area, the United Kingdom and Switzerland
+This section is relevant if you reside in any of the European Economic Area countries (the ‘EEA’) (i.e., Austria, Belgium, Bulgaria, Croatia, Republic of Cyprus, Czech Republic, Denmark, Estonia, Finland, France, Germany, Greece, Hungary, Iceland, Ireland, Italy, Latvia, Liechtenstein, Lithuania, Luxembourg, Malta, Netherlands, Norway, Poland, Portugal, Romania, Slovakia, Slovenia, Spain and Sweden), in the United Kingdom (the ‘UK’) or in Switzerland. It includes disclosures in line with the General Data Protection Regulation (Regulation (EU) 2016/679 and its UK equivalent, UK Data Protection Act 2018) (the ‘GDPR’) and disclosures in line with the Swiss Federal Act on Data Protection (the ‘FADP’).
+8.3.1. Your Privacy Rights
+The GDPR and the FADP give you rights as described in section 7.1, which you can exercise in line with section 7.2.
+If you are not satisfied with how we handled your request to exercise any of your rights or you have any other questions or concerns about your rights or this Privacy Notice, please contact our data protection officer at TIDAL Music AS Data Protection Officer, c/o CSC (Norway) AS, Postboks 2051 Vika, 0125 Oslo, Norway or at dataprotectionofficer@tidal.com.
+You also have the right to lodge a complaint with the relevant data protection authority. You may contact the Norwegian data protection authority (Datatilsynet), which is the competent data protection authority for TIDAL, or your local data protection authority about any questions or concerns you might have. You can find the overview of data protection authorities in different EEA countries here. For the UK, you have the right to lodge a complaint with us or with the data protection authority for the UK, the Information Commissioner’s Office, which you may contact here. The data protection authority for Switzerland is the Federal Data Protection and Information Commissioner (FDPIC), who you may contact here.
+8.3.2. International transfers of personal data
+As described in section 4. of this Privacy Notice, we share your data both internally with our affiliates and group companies, as well externally with our processors and other third parties. Some of these recipients are located in countries outside of the EEA, the UK and Switzerland. Your data may be transferred to the United States and eventually globally, including to such countries, whose laws may not provide an equivalent level of protection for your personal data as is the level of protection guaranteed in the EEA, the UK and Switzerland.
+These transfers are necessary and essential for us to provide our Services to you. Prior to your personal data being shared with third parties, we will take contractual or other steps reasonably necessary to ensure that your personal data is treated securely by such third parties.
+To transfer your data, we rely on adequacy decisions issued by the European Commission and the FDPIC respectively, as well as EU Standard Contractual Clauses that have been adopted by the European Commission and the UK International Data Transfer Addendum and Swiss Addendum. For more information, including how to obtain a copy of these documents please contact us through our contact points provided in section 7.2. You can also access the Standard Contractual Clauses approved by the European Commission here.
+8.4. United States
+This section supplements the TIDAL Privacy Notice and is applicable to residents of U.S. states that have adopted comprehensive privacy legislation, including California, Colorado, Connecticut, Delaware, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Utah, Virginia (“selected U.S. states”).
+8.4.1. Personal data we collect about you and purposes for which we use personal data
+In the past 12 months, we have collected the categories of your personal data as described in section 2. of this Privacy Notice and used it for the purposes described in section 3. of this Privacy Notice.
+8.4.2. Sources of personal data
+We may have obtained your personal data from a variety of sources, including directly from you, your device, from your use of our Services and from third parties, as described in section 2. of this Privacy Notice.
+8.4.3. Disclosures of personal data to third parties
+Please refer to section 4. of this Privacy Notice for the categories of third parties to which we may have disclosed personal data.
+8.4.4. Sale of your personal data and targeted advertising
+In the past 12 months, TIDAL has not disclosed personal data in a manner that it considers a sale or share within the meaning of applicable state laws as we do not place relevant cookies or similar technologies without your affirmative consent.
+With your consent, TIDAL and third parties that provide advertising or other functionality on our behalf may use cookies and similar technologies to help us advertise our Services to you as informed by your interests. See the TIDAL Cookie Policy to learn more about targeted advertising. Where you choose to opt in and direct TIDAL to disclose this information, you have the right to opt out at any time, as described below.
+8.4.5. Your Privacy Rights
+Please refer to section 7.1 of this Privacy Notice to understand which privacy rights you may have. If you are a resident of a selected U.S. state and would like to exercise your rights as described above, please refer to the contact information provided in section 7.2. In accordance with applicable state law, if we deny your privacy right you may appeal our decision by contacting us via dataprotectionofficer@tidal.com.
+To help protect your privacy and maintain security, we may take steps described in section 7.2 to verify your identity before granting you access to your personal data or honouring your other requests.
+You may designate an authorised agent to make a request on your behalf as permitted under law. Before we process that request, we may require that you provide the authorised agent with written permission to do so – for example, a power of attorney.
+Right to opt out of sharing personal data for targeted advertising: Before we place any targeting cookies on your device when you visit TIDAL websites or use TIDAL clients, we will request your consent through a cookie preference centre. You can opt out of targeted advertising at any time through the cookie preference centre. If you opt in, you can also opt out at any time by clicking on ‘Cookie Settings’ link at the bottom of our websites or you can opt out of certain targeted advertising on TIDAL mobile, desktop and web clients by modifying your cookie preferences through the ‘Privacy preferences’ button in the settings of your TIDAL client.
+You may also adjust the privacy settings though your browser settings or through centralised solutions for targeted advertising opt out from third-party advertisers who are members of the Network Advertising Initiative (NAI) or who follow the Digital Advertising Alliance’s (DAA) Self-Regulatory Principles for Online Behavioural Advertising.
+Where required by applicable law, our websites also honour opt-out preference signals from your browser, known as the Global Privacy Control. Visit the Global Privacy Control website to learn more. Please note that your preferences will apply only to the specific website browser from which you opt out. If you delete cookies, change web browsers, reset your mobile advertising ID, or use a different device, you may need to opt out again.
+On your mobile device you may use “Limit Ad Tracking” on iOS or “Opt Out of Ads Personalization” on Android.
+Read the TIDAL Cookie Policy for more information.
+California rights:
+Right of access: In addition to the right of access described in section 7.1 above, California residents may have the right to request a copy of your personal data and information regarding:
+The categories and specific pieces of personal data we have collected about you
+The categories of sources from which we have collected your personal data
+The business or commercial purpose for which we have collected or shared your personal data
+The categories of third parties to which we have disclosed your personal data
+The categories of personal data about you that we have disclosed disclosed for a business purpose, and the categories of third parties to which we have disclosed such information for a business purpose
+Shine the Light: California residents are entitled once a year, free of charge, to request and obtain certain information regarding our disclosure, if any, of certain categories of personal data to third parties for their direct marketing purposes in the preceding calendar year. We do not share personal data with third parties for their own direct marketing purposes.
+Do Not Track: Some web browsers transmit “do-not-track” signals to websites. Because of differences in how web browsers incorporate and activate this feature, it is not always clear whether users intend for these signals to be transmitted, or whether they even are aware of them. At this time our websites are not designed to respond to these signals or similar mechanisms from browsers.
+9. Data Retention, Deletion and Anonymisation
+Data retention:
+We will keep your personal data only for the period necessary to fulfil the purposes for which we collect and process your personal data, as described in this Privacy Notice and in accordance with applicable law. This means that the retention periods will vary according to the data category and the purpose we have to process your personal data. The retention periods for data are determined on a case-by-case basis that depends on the following factors:
+The nature of the personal data and why it is collected and processed. The length of time we will keep your personal data will generally be determined by how long we need that information to provide you with our Services and to provide customer support.
+For example:
+As set out in this Privacy Policy, we require account data to deliver our Services. We need to keep it for the duration your TIDAL account exists so that we can maintain your account.
+Similarly, we will keep some of your usage data, such as your playlists or folders for the lifetime of your account.
+For so long as we are required by law to do so. We are subject to various legal obligations in countries in which we operate, such as bookkeeping, accounting, tax or audit obligations, which require that we keep certain data for specified periods.
+For example, we will keep your information:
+To respond to a legal request or to comply with applicable law. We must keep your information where we have a legal obligation to do so. For example, if we receive a valid legal request, such as a preservation order or search warrant, related to your account, we preserve your information after you delete your account.
+To deal with and resolve requests, disputes or complaints.
+For litigation or regulatory matters. For example, we preserve your information related to a legal claim or complaint, such as where we are subject to a regulatory investigation or where we need to defend ourselves in legal proceedings about a claim related to your information or where we need to respond to a regulator in relation to a legal or regulatory complaint made by you or someone else.
+Issues relating to the safety, security and integrity of our Services and to protect rights, property and users. For example, we keep information where it is necessary to investigate misuse of our Services, such as fraud.
+Data deletion and anonymisation:
+Subject to applicable law, after the lapse of the retention periods, we will delete or permanently anonymise your personal data so that it is no longer capable of identifying you.
+If you request that we delete your TIDAL user account, we will treat your TIDAL account deletion request as a request for erasure (deletion) of your personal data (see section 7.1 ‘Right to deletion (erasure) of your personal data’) and we will delete or anonymise your personal data, so that it no longer identifies you, in accordance with applicable law.
+Depending on the jurisdiction in which you reside, there may be circumstances in which we retain your personal data for lawful reasons after receiving a deletion request, for example if:
+We have a legal obligation to keep some of your personal data
+It is necessary for the establishment, exercise or defence of legal claims (e.g. when there is an unresolved issue or claim relating to your TIDAL user account or your use of our Services)
+We have compelling legitimate grounds to retain some of your personal data that overrides your interests in having your data deleted (e.g., for fraud prevention purposes, to enforce our Terms and similar)
+We cannot verify your identity or confirm that the personal data that we maintain relates to you, or if we cannot verify that you have the authority to make a request on behalf of another individual
+There is another exception under the applicable legislation in the country or state of your residence (e.g., exceptions applicable under the California Consumer Privacy Act)
+In such cases, we will keep limited information about you in a protected form for the period necessary to fulfil processing under the applicable exception.
+10. Security
+We strive to keep your data safe. While we think we have strong defences in place, no one can ever guarantee that hackers won’t be able to break into our sites or steal your data while it is stored or flowing from you to us or vice versa.
+We take reasonable measures, including administrative, technical, and physical safeguards to protect your information from loss, theft, misuse, unauthorised access, disclosure, alteration, and destruction. Nevertheless, the internet is not a 100% secure environment, and we cannot guarantee absolute security of the transmission or storage of your information. We hold information about you both at our own premises and with the assistance of third-party service providers.
+Some of your personal data will be publicly accessible on TIDAL Services as described in section 6. Your data will be also accessible by our employees and third parties, as described in section 4., which require access for the purposes described in this Privacy Notice and only on a need-to-know basis.
+We recommend that you always use strong passwords, that you change them regularly and that you do not use the same passwords for your TIDAL account as you already use to access other services or devices. We also recommend that you always access the Services and make payments from a secure computer or device. Any third-party services that you use to connect to your TIDAL account may also affect your information.
+Please note that information collected by third parties may not have the same security protections as information you submit to us. We are not responsible for the functionality, privacy, or security measures of such third parties.
+11. Children’s Personal Data
+Our Services and their content are not directed at children under the age of 13. We do not knowingly collect or solicit any personal data from children under the age of 13 or knowingly allow such persons to register for our Services. If you are under the age of 13, please do not use our Services, do not browse our websites and do not send us any of your personal data. If we learn that we have collected personal data from a child under the age 13, we will promptly delete that information, in accordance with applicable law. If you are a parent or guardian and believe that we may have collected personal data from your child, please notify us immediately by sending an email to support@tidal.com.
+If you are 13 – 17 years of age, you may use our Services in line with our Terms. We reserve the right to limit access to our Services for children aged 13 – 17 years, if their use of our Services or processing of personal data would be illegal or would require a consent of a parent or guardian, according to law applicable in their country of residence.
+12. Integration With Third-Party Websites and Services
+Our Services may contain links to third-party websites or services. We do not control and we are not responsible for the privacy practices employed by any websites or services linked to or from our Services, including the information or content contained within them. When you use a link to go from our Services to another website or service, our Privacy Notice does not apply to those third-party websites or services. Your browsing and interaction on any third party website or service, including those that have a link on our Services, are subject to that third party’s own rules and policies. In addition, we are not responsible and do not have control over any third parties that you authorise to access your personal data. If you are using a third-party website or service and you allow them to access your personal data, you do so at your own risk. Please refer to that third party’s privacy policy to understand how it processes your personal data.
+13. Amendments to This Privacy Notice
+Our Services are subject to constant improvements and future changes may influence what personal data we process and how we collect, use, share, store or otherwise process it. We may develop other Services in the future which are currently not mentioned in this Privacy Notice. The Privacy Notice will apply to them accordingly, unless stated otherwise upon the launch of the new Services.
+This Privacy Notice may be updated to reflect new changes in our Services, changes in legal framework or improvements in how we handle personal data. When we make material changes to the Privacy Notice, we will provide you with notice as appropriate under the circumstances, by sending you an email or notification within a TIDAL client. Unless stated otherwise, our most recent Privacy Notice applies to all information that we process about you.
+Get Started Start Free Trial
+Download TIDAL
+Pricing & Plans
+Transfer Music
+Supported Devices
+Get Support
+Discover TIDAL About
+Magazine
+TIDAL Connect
+Account Sign Up
+Redeem Voucher
+Redeem Giftcard
+Manage Account
+Company What is TIDAL?
+Partners
+Careers
+Press
+Start Free Trial
+TIDAL is an artist-first, fan-centered music streaming platform that delivers over 180 million songs in HiFi sound quality to the global music community.
+© 2026 TIDAL Music AS Privacy Notice
+Terms and Conditions
+Cookie Settings
+Accessibility Statement
+Contact
+English
+© 2026 TIDAL Music AS
