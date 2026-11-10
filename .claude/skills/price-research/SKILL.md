@@ -403,8 +403,10 @@ which reads each page as a visitor there would, before any hand reading:
 - **Pages that price by where the visitor is** (youtube.com/premium, mubi.com/<country>/memberships, Google One):
   a country path or `gl=` changes the country a page names, not its prices. Read each region through its exit, and
   keep a page only in that region's currency: Google's pages placed New Zealand's exits in Australia, Ireland's in the
-  UK and the Netherlands' nowhere (2026-11-04). Their baselines, read from Canada, show Canada's prices, so the bot
-  sends the other regions' to a person.
+  UK and the Netherlands' nowhere (2026-11-04). Canada too: Google can place this machine in the US (its page's
+  `"GL":"US"`, bare `$`), which stored YouTube Music's US prices as Canada's (2026-11-09). Keep a Canadian price only
+  with its `CA$`, and when this machine gets another country's page, read Canada through a Canadian exit, its baseline
+  too. Their baselines, read from Canada, show Canada's prices, so the bot sends the other regions' to a person.
 - **"Every 30 days"** (MUBI's help centre): store `interval: day, intervalCount: 30` (and 360 for its yearly plan),
   with a renewalAnchor of `every-30-days`.
 - **Help centres that turn Canada away** (HBO Max's sends a Canadian visitor to its geo-availability page): read
