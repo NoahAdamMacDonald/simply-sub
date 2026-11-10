@@ -417,6 +417,33 @@ describe('validateCatalog, for third-party feature values (M11.16)', () => {
   });
 });
 
+describe('validateCatalog, for free use (2026-11-09)', () => {
+  const proton = 'data/providers/proton.yaml';
+  const none = (pages: string[], lastVerified = today) => ({ kind: 'none', pages, lastVerified });
+
+  it('takes a free plan, or a record that its own pages offer none', () => {
+    // Netflix records none from its plans page; Proton has Proton Free.
+    expect(messages(catalog())).toEqual([]);
+  });
+
+  it('refuses a provider that says neither, or both', () => {
+    expect(messages(catalogWith(netflix, ['freeUse'], undefined))).toEqual([
+      `${netflix}: Say whether its own pages offer free use: a free plan with a price of 0, or freeUse: { kind: none, pages, lastVerified } with the pages read`,
+    ]);
+    expect(messages(catalogWith(proton, ['freeUse'], none(['https://proton.me/pricing'])))).toEqual(
+      [`${proton} freeUse: Has a free plan: leave freeUse out`],
+    );
+  });
+
+  it('takes the pages from its own sites, read by today', () => {
+    const elsewhere = none(['https://www.reddit.com/r/netflix'], '2099-01-01');
+    expect(messages(catalogWith(netflix, ['freeUse'], elsewhere))).toEqual([
+      `${netflix} freeUse.pages.0: Must be a page of Netflix's own sites, its policies' or its owner's (example.com)`,
+      `${netflix} freeUse.lastVerified: 2099-01-01 is after today (${today})`,
+    ]);
+  });
+});
+
 describe('validateCatalog, for currencies', () => {
   it('takes them from its own sites, for the ways to pay it lists', () => {
     expect(messages(catalogWith(mullvad, ['currencies'], [cash]))).toEqual([]);

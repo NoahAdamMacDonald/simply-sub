@@ -94,6 +94,32 @@ describe('batchReview', () => {
     );
   });
 
+  it('says whether it can be used free: its free plans, none on its pages, or not said (2026-11-09)', () => {
+    expect(body).toContain('- **Free use:** not said: add a free plan or freeUse before merging');
+    const freeUse = {
+      kind: 'none' as const,
+      pages: ['https://claude.com/pricing'],
+      lastVerified: '2026-10-28',
+    };
+    const none = batchReview([{ ...claude, provider: { ...claude.provider!, freeUse } }], {
+      date: '2026-10-28',
+      extractor: 'Workers AI',
+    });
+    expect(none).toContain('- **Free use:** none on [its page](https://claude.com/pricing)');
+    const plan = claude.provider!.plans[0];
+    const free = {
+      ...plan,
+      id: 'claude.free',
+      name: 'Free',
+      prices: [{ ...plan.prices[0], amount: 0 }],
+    };
+    const withFree = batchReview(
+      [{ ...claude, provider: { ...claude.provider!, plans: [free, plan] } }],
+      { date: '2026-10-28', extractor: 'Workers AI' },
+    );
+    expect(withFree).toContain('- **Free use:** Free');
+  });
+
   it('lists the proposed features, what was dropped and what to check', () => {
     expect(body).toContain('  - Projects: true on Pro, “Projects to organize chats”');
     expect(body).toContain(

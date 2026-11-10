@@ -54,6 +54,7 @@ billingCurrency:
     ES: EUR,
     AU: AUD,
     NZ: NZD,
+    GLOBAL: USD,
   }
 cancelUrl: https://helpcenter.zee5.com/portal/en/kb/articles/how-do-i-cancel-auto-renewal-of-my-subscription
 sources: { pricing: https://www.zee5.com/global/myaccount/subscription }
@@ -128,7 +129,28 @@ features:
 #   subscription to download" (its help centre), on no stated number of devices, so 1, inferred;
 # - profiles: its privacy policy's "Kid’s Profile feature" and "others you permit to set up profiles under your account",
 #   without a number, so 2, inferred.
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): FREE5, its blog's "FREE5 On ZEE5: The One
+# Link That Lets You Watch Movies, Shows & Web Series For Free": "FREE5 brings that mood and bundles free-to-watch
+# movies, TV shows, and web series for families and friends in one place to share". Not ad free, as no plan is (its
+# terms, above). No page states its video quality or streams, so it waits in core's awaitingRequiredFeatures.
 plans:
+  - id: zee5.free
+    name: FREE5
+    link: https://www.zee5.com/global
+    features:
+      ad-free: false
+    notes: Its free movies, TV shows, web series, live TV channels and sports highlights, with ads.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.zee5.com/global/blog/free5-on-zee5-the-one-link-that-lets-you-watch-movies-shows-web-series-for-free/,
+        }
   - id: zee5.all-access
     name: 'All Access'
     link: https://www.zee5.com/global/myaccount/subscription

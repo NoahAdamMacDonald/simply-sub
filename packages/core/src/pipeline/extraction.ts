@@ -11,6 +11,7 @@ import type {
   AddOn,
   CardNetwork,
   CurrenciesEntry,
+  FreeUse,
   PaymentMethod,
   PaymentMethods,
   Perk,
@@ -208,6 +209,12 @@ const extractedAnswerSchema = z.object({
     })
     .optional()
     .describe('Which day a paid plan renews on, from its terms or billing help'),
+  freeUse: z
+    .enum(['none'])
+    .optional()
+    .describe(
+      'none when its pages offer only paid plans, or a trial that turns into one. Free use is a plan with a price of 0',
+    ),
   sourceRepo: z
     .object({
       url: z
@@ -835,6 +842,20 @@ export function draftFromAnswer(
     });
     return { comments, issues, proposedFeatures, evidence, newResellers: [] };
   }
+  // Free use (2026-11-09): a free plan, or none on the plans pages read.
+  const free = plans.some((plan) => plan.prices.some((price) => price.amount === 0));
+  const plansRead = context.pages.filter((page) => page.kind === 'pricing').map((page) => page.url);
+  let freeUse: FreeUse | undefined;
+  if (!free && answer.freeUse === 'none' && plansRead.length > 0) {
+    freeUse = { kind: 'none', pages: [...new Set(plansRead)], lastVerified: context.today };
+  } else if (!free) {
+    issues.push({
+      kind: 'warning',
+      subject: 'Free use',
+      reason:
+        'No free plan, and no word that its pages offer none: look for free use (its help centre’s “Is it free?”) and add a free plan or freeUse by hand',
+    });
+  }
   const cancelUrl = mainPage(context.pages, 'cancel')?.url;
   if (!cancelUrl) {
     issues.push({
@@ -856,6 +877,7 @@ export function draftFromAnswer(
     ...(facts.paymentMethods.length > 0 && { paymentMethods: facts.paymentMethods }),
     ...(facts.currencies.length > 0 && { currencies: facts.currencies }),
     ...(facts.renewalAnchor && { renewalAnchor: facts.renewalAnchor }),
+    ...(freeUse && { freeUse }),
     ...billingCurrencyOf([...plans, ...addOns]),
     ...(availableIn && { availableIn }),
     ...(cancelUrl && { cancelUrl }),

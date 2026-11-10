@@ -116,6 +116,16 @@ function providerSection(entry: BatchProvider): string {
       `- **${cell(plan.name)}:** ${prices.join(' · ')}${features ? `. ${cell(features)}` : ''}`,
     );
   }
+  const free = provider.plans.filter((plan) => plan.prices.some((price) => price.amount === 0));
+  lines.push(
+    `- **Free use:** ${
+      free.length > 0
+        ? cell(free.map((plan) => plan.name).join(', '))
+        : provider.freeUse
+          ? `none on ${provider.freeUse.pages.map((url) => `[its page](${linkTarget(url)})`).join(', ')}`
+          : 'not said: add a free plan or freeUse before merging'
+    }`,
+  );
   if (provider.acceptedNetworks) {
     lines.push(
       `- **Cards:** ${Object.entries(provider.acceptedNetworks)

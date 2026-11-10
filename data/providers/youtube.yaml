@@ -60,6 +60,7 @@ billingCurrency:
     NL: EUR,
     ES: EUR,
     IT: EUR,
+    GLOBAL: USD,
   }
 cancelUrl: https://support.google.com/youtube/answer/6308278
 sources: { pricing: https://www.youtube.com/premium }
@@ -245,7 +246,54 @@ features:
 # its best audio "High ... Bitrate: 256kbps AAC & OPUS" (Change your audio quality).
 # Official resellers: none. Google Play and Apple bill it in their apps (above), and YouTube's "partner provider"
 # article covers companies that sell it with their own plans: ways to pay, not shops.
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): YouTube and YouTube Music with no
+# membership. YouTube Music Help's "What is YouTube Music?": "You can enjoy YouTube Music without a paid membership.
+# Ad-supported YouTube Music includes: On-demand playback for podcasts, songs, and music videos" and "Access to
+# audio-only, background play, and downloads for most podcasts", where Music Premium adds "Background play for music",
+# "Music without ads", "Audio-only music playback" and "Music downloads". Its video quality, HDR, Kids profiles and
+# French content are every viewer's, from the pages Premium's cite; its audio is "Normal" (128kbps), since "YouTube
+# Music Premium members can select the bitrate" (Change your audio quality). No page says how many streams play at once
+# without a membership (its streaming limits are members': "Premium, Premium Lite, or Music Premium members can stream
+# videos and audio on only one device at a time"), so the plan waits in core's awaitingRequiredFeatures.
 plans:
+  - id: youtube.free
+    name: Free
+    link: https://www.youtube.com/
+    categories: [streaming, music]
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.kids-profiles: true
+      streaming.french-content: true
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: false
+    inferred:
+      audio.quality:
+        reason: 'Only YouTube Music Premium members can choose a bitrate, so a listener without it keeps the "Normal" one: 128kbps.'
+        page:
+          name: Change your audio quality
+          url: https://support.google.com/youtubemusic/answer/9076559
+        lastVerified: 2026-11-09
+      streaming.french-content:
+        reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
+        page:
+          name: Terms of Service
+          url: https://www.youtube.com/t/terms
+        lastVerified: 2026-11-09
+    notes: YouTube and YouTube Music with ads. Music plays only while the app is open and doesn't download; most podcasts do both.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://support.google.com/youtubemusic/answer/6313529,
+        }
   - id: youtube.premium
     name: Premium
     link: https://www.youtube.com/premium

@@ -83,6 +83,16 @@ renewalAnchor:
     - 'if your subscription began on a day not contained in a given month (e.g. if you have a monthly subscription and became a paying subscriber on January 31, your payment method would be billed next on February 28)'
   lastVerified: 2026-11-03
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plans article sells Select
+# and Unlimited; without one, ESPN's news, scores and clips aren't its streams.
+freeUse:
+  kind: none
+  pages:
+    [
+      https://support.espn.com/hc/en-us/articles/40375475974036-ESPN-Select-or-Unlimited-Plans-and-Prices,
+    ]
+  lastVerified: 2026-11-09
+
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its fan support centre: web browsers,
 # iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported Devices); a
 # MyDisney email address and password (Disney+'s MyDisney article names ESPN); chat ("contact us by clicking the Chat

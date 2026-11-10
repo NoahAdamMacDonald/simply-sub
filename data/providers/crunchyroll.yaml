@@ -8,6 +8,12 @@
 # over an ordinary connection, then the Internet Archive. Its other countries' prices are unread, and no page read lists
 # where it's sold, so availableIn is left out.
 # Bundles: none read. Resellers: none.
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none since its ad-supported tier
+# ended on 2025-12-31. Its own pages can't be read from here (above), and the archive's copy of its premium page lists
+# only the three paid tiers; two third parties read that day say so: BGR's "Crunchyroll Is Ending Its Free Plan"
+# (2025-12-10: "starting January 1, 2026, Crunchyroll will no longer offer this ad-based service") and AnimeMojo's
+# "Crunchyroll's Ad-Supported Streaming Ends Today" (2025-12-31: "Crunchyroll is officially shutting down its
+# ad-supported streaming tier today").
 
 id: crunchyroll
 name: Crunchyroll
@@ -46,6 +52,13 @@ owner:
 renewalAnchor:
   kind: not-stated
   pages: [https://www.crunchyroll.com/tos/]
+  lastVerified: 2026-11-09
+
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its ad-supported tier ended on
+# 2025-12-31 (above); the archive's copy of its premium page lists only the paid tiers.
+freeUse:
+  kind: none
+  pages: [https://www.crunchyroll.com/premium]
   lastVerified: 2026-11-09
 
 # Apps (the cross-category features), read 2026-10-23 on its plans page: "Watch on Smart TVs, Playstation, Xbox,

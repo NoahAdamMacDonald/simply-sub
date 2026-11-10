@@ -144,6 +144,16 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **Source code** (`sourceRepo`, M11.5): when its own pages say its code is open (an "Open source" page, its
     downloads' "Source code" link), the repository that page links, quoted, with `software.open-source` provider-wide
     (open-source apps when the apps are; fully open only when the servers' code is published too).
+  - **Free use** (the owner's item of 2026-11-09): whether the service can be used free, with ads or limits. Its plans
+    page often sells only the paid plans, so read its help centre ("Is it free?", "Do I need to pay?", "without a
+    subscription") and its home page too: YouTube's, Viki's, ICI TOU.TV's and Amazon's free use was only there. Free
+    use is a plan with a price of 0 (one per country when only some have it, as Prime Video's free channels), its
+    features from those pages and its notes saying what's free; a trial that turns into a paid plan isn't. With none,
+    `freeUse: { kind: none, pages, lastVerified }` names the pages read, which `data:validate` requires of every
+    provider without a free plan. When the provider's own pages can't be read, the owner's ladder (2026-11-09) decides
+    whether it's free: its own page first, then several third parties or a recent archive copy, then an older archive
+    copy or one third party (DAZN's free tier: its archived help article and two third parties of 2026; Crunchyroll's
+    end on 2025-12-31: two third parties).
 - **Report what you couldn't verify**, each with the reason (geo-blocked, not stated, conflicting).
 
 ## Which tool

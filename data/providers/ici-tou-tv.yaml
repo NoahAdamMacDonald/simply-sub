@@ -67,7 +67,7 @@ perks:
 # Read 2026-10-26 on ici.tou.tv/abonnement: EXTRA, ICI RDI and the two together, monthly only, each "3 diffusions en
 # continu à la fois". EXTRA's 1080p is from ici.tou.tv/abonnement-extra-crave and crave.ca/en/subscribe; that ICI
 # TOU.TV page gives EXTRA 2 streams in the Crave bundle, against 3 on its own page and on Crave's, so this uses 3.
-# The free ICI TOU.TV catalogue with ads has no plan page, so it isn't a plan here. The Crave bundles are in
+# The free ICI TOU.TV catalogue with ads is the Free plan (2026-11-09), from its help centre. The Crave bundles are in
 # data/bundles.
 # Read 2026-11-02 (M11.4, the required streaming features): ICI RDI is "Chaîne en direct ICI RDI avec publicité" on
 # ici.tou.tv/abonnement, so it isn't ad free. Its video quality: that page states 1080p for EXTRA only. M11.9 infers
@@ -97,7 +97,40 @@ features:
 # no downloads; its plans offer a « zone Jeunesse », not kids profiles, and no page names HDR, so none (inferred).
 # Profiles (M11.15), searched 2026-11-04: its help centre has no article on profiles or parental controls, and an
 # account is a Radio-Canada account, one person's, so none (inferred).
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): Radio-Canada's help centre, « Quelle est
+# la différence entre le gratuit et l'EXTRA? »: « ICI TOU.TV vous donne accès gratuitement à vos émissions en
+# rattrapage, à des séries originales, des films et des documentaires, ainsi qu’à une vaste sélection de contenus
+# jeunesse. », where EXTRA adds « une image HD » and no ads; and « Les utilisateurs de l’offre gratuite n'ont pas accès
+# aux contenus de l'EXTRA et ont de courtes publicités vidéo ou des bannières. » (« Pourquoi y a-t-il des publicités
+# lors de mon visionnement sur ICI TOU.TV? »). Its video quality is inferred from EXTRA's HD; no page says how many
+# streams play at once, so it waits in core's awaitingRequiredFeatures.
 plans:
+  - id: ici-tou-tv.free
+    name: Free
+    link: https://ici.tou.tv/
+    features:
+      video.quality: 480p
+      ad-free: false
+      streaming.french-content: true
+    inferred:
+      video.quality:
+        reason: 'EXTRA adds « une image HD » to what the free offer gives, so the free offer is in SD.'
+        page:
+          name: Quelle est la différence entre le gratuit et l'EXTRA?
+          url: https://assistance.radio-canada.ca/hc/fr/articles/360035075832
+        lastVerified: 2026-11-09
+    notes: Catch-up shows, originals, films, documentaries and children's shows, with short video ads or banners. EXTRA adds the rest.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://assistance.radio-canada.ca/hc/fr/articles/360035075832,
+        }
   - id: ici-tou-tv.extra
     name: EXTRA
     link: https://ici.tou.tv/abonnement-extra

@@ -303,6 +303,37 @@
       ],
       "description": "The day it renews on (M11.5), quoted from its terms or billing help, or not-stated: every provider whose paid plans renew by the month or year says"
     },
+    "freeUse": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "none",
+          "description": "Its own pages offer no free use: only paid plans, or a trial that turns into one"
+        },
+        "pages": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri",
+            "pattern": "^https://",
+            "patternErrorMessage": "Use a full https:// URL"
+          },
+          "description": "The pages read that offer none: its plans page, its help centre, on its own sites, its policies' or its owner's"
+        },
+        "lastVerified": {
+          "type": "string",
+          "format": "date",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+          "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+          "description": "When the pages were read"
+        }
+      },
+      "required": ["kind", "pages", "lastVerified"],
+      "additionalProperties": false,
+      "description": "That its own pages offer no free use, with the pages read: every provider without a free plan (a price of 0) says"
+    },
     "billingCurrency": {
       "type": "object",
       "propertyNames": {

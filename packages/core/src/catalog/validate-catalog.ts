@@ -784,6 +784,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   checkOwner(provider, own, context, report);
   checkPaymentMethods(provider, own, report);
   checkRenewalAnchor(provider, own, context, report);
+  checkFreeUse(provider, own, context, report);
   checkCurrencies(provider, own, context, report);
   checkSourceRepo(provider, own, context, report);
   checkInferred(provider, own, context, report);
@@ -1051,6 +1052,47 @@ function checkAccounts(
     }
     checkReadOn(regulator.lastVerified, ['regulators', index, 'lastVerified'], today, report);
   });
+}
+
+/**
+ * Free use (the owner's item of 2026-11-09): every provider still sold has a free plan (a price of 0 still sold) or
+ * says its own pages offer none (`freeUse`, with the pages read on its own sites, its policies' or its owner's), never
+ * both.
+ */
+function checkFreeUse(
+  provider: Provider,
+  own: readonly string[],
+  { today, policySets }: CheckContext,
+  report: Report,
+): void {
+  const free = provider.plans.some(
+    (plan) =>
+      plan.retired === undefined &&
+      plan.prices.some((price) => price.amount === 0 && price.retired === undefined),
+  );
+  const none = provider.freeUse;
+  if (!none) {
+    if (!free && provider.retired === undefined) {
+      report(
+        [],
+        'Say whether its own pages offer free use: a free plan with a price of 0, or freeUse: { kind: none, pages, lastVerified } with the pages read',
+      );
+    }
+    return;
+  }
+  if (free) {
+    report(['freeUse'], 'Has a free plan: leave freeUse out');
+  }
+  const sites = ownPages(provider, own, policySets);
+  none.pages.forEach((url, index) => {
+    if (!isOnDomain(url, sites)) {
+      report(
+        ['freeUse', 'pages', index],
+        `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+      );
+    }
+  });
+  checkReadOn(none.lastVerified, ['freeUse', 'lastVerified'], today, report);
 }
 
 function checkReadOn(

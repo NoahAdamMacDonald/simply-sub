@@ -34,6 +34,7 @@ billingCurrency:
     NL: EUR,
     ES: EUR,
     IT: EUR,
+    GLOBAL: USD,
   }
 cancelUrl: https://support.apple.com/en-ca/118428
 sources: { pricing: https://www.apple.com/ca/apple-music/ }
@@ -112,7 +113,30 @@ perks:
   - id: classical
     name: Apple Music Classical app
 
+# Free (2026-11-09, the owner's item: services used free, with ads or limits): Apple Music Radio, which its page offers
+# to everyone ("Listen to Apple Music Radio for free", apple.com/ca/apple-music, with "live local, global and artist-led
+# radio shows and stations"). Radio isn't songs on demand or downloads, and no page says whether it has ads, so not
+# ad free, or its audio quality, which waits in core's awaitingRequiredFeatures.
 plans:
+  - id: apple-music.radio
+    name: Apple Music Radio
+    link: https://www.apple.com/ca/apple-music/
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+    notes: Its live radio shows and stations, free. Songs on demand, downloads and lossless audio need a plan.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.apple.com/ca/apple-music/,
+        }
   - id: apple-music.individual
     name: Individual
     link: https://www.apple.com/ca/apple-music/

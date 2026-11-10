@@ -86,6 +86,13 @@ sourceRepo:
 # and US$5.59, as the page's own figures do. The checkout also sells 2, 3 and 6 months (seen by the project owner on
 # 2026-10-26; it needs an account), at the same €5 a month.
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its pricing page asks "Why no
+# free plan?" and answers it.
+freeUse:
+  kind: none
+  pages: [https://mullvad.net/en/pricing]
+  lastVerified: 2026-11-09
+
 # VPN features, read 2026-10-25 on mullvad.net: devices and anonymous signup on /en/vpn; 50 server countries on
 # /en/servers; WireGuard only since OpenVPN's removal on 2026-01-15 (/en/blog/removing-openvpn-15th-january-2026),
 # with obfuscation (UDP-over-TCP, Shadowsocks: /en/help/connecting-to-mullvad-vpn-from-restrictive-locations); the

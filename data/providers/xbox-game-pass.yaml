@@ -92,6 +92,13 @@ renewalAnchor:
     - https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/turn-on-recurring-billing
   lastVerified: 2026-11-03
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plans page sells paid tiers
+# only; free-to-play games don't need it.
+freeUse:
+  kind: none
+  pages: [https://www.xbox.com/en-CA/xbox-game-pass]
+  lastVerified: 2026-11-09
+
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: Essential, Premium and Ultimate play on Xbox
 # consoles and PCs, and stream to phones, tablets and PCs through the Xbox app or a browser and to select LG, Samsung and
 # VIDAA TVs and Fire TV (xbox.com/en-CA/cloud-gaming); PC Game Pass is for Windows, cloud gaming "Not included with PC

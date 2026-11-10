@@ -75,6 +75,13 @@ renewalAnchor:
     - 'if your subscription began on a day not contained in a given month (e.g. if you have a monthly subscription and became a paying subscriber on January 31, your payment method would be billed next on February 28)'
   lastVerified: 2026-11-03
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plans article sells paid
+# plans only.
+freeUse:
+  kind: none
+  pages: [https://help.hulu.com/article/hulu-how-much-does-hulu-cost]
+  lastVerified: 2026-11-09
+
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: web browsers, iPhone
 # and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported devices); a MyDisney
 # email address and password (MyDisney login details); "live support 24 hours a day 7 days a week", by chat (How to

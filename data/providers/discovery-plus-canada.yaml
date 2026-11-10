@@ -84,6 +84,13 @@ renewalAnchor:
     - https://www.discoveryplus.ca/
   lastVerified: 2026-11-09
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its pricing page sells With ads
+# and Ad Free only.
+freeUse:
+  kind: none
+  pages: [https://secure.discoveryplus.ca/pricing]
+  lastVerified: 2026-11-09
+
 # Apps (the cross-category features), read 2026-11-09: "most smartphones, tablets and desktop browsers, and most
 # connected devices, including Amazon Fire TV streaming devices and Amazon Fire TV Edition Smart TVs; Apple iPads,
 # iPhones, iPod Touches and Apple TVs; Google devices and platforms including Android phones, tablets and Android OS

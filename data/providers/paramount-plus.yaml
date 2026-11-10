@@ -59,6 +59,13 @@ renewalAnchor:
   pages: [https://legal.paramount.com/ca/en/pplus/termsofuse]
   lastVerified: 2026-11-09
 
+# Free use (2026-11-09, the owner's item: services used free, with ads or limits): none: its plan picker (the archive's
+# copy) sells paid plans only.
+freeUse:
+  kind: none
+  pages: [https://www.paramountplus.com/ca/account/signup/pickplan/]
+  lastVerified: 2026-11-09
+
 # Features, read 2026-11-04 in its help centre's plans article: Basic (with ads) "Experience in full HD", "Stream on 1
 # device at a time", "Stream with ads"; Standard full HD, "Stream on 2 devices at once", "Ad-free streaming",
 # "Download and watch on the go"; Premium "Experience in 4K UHD, HDR10, Dolby Vision and Dolby Atmos", "Stream on 4
