@@ -3814,8 +3814,9 @@ None.
   province prices, and the home internet that needs them, are M11.17's second part.
 - **News without bias labels:** the outlets go in with their owners, prices, features and terms; bias and reliability
   wait until a rater allows its labels to be shown (section 4.10), never the catalog's own judgement.
-- **Ad blockers, SponsorBlock and Morphe** (the guide's §3.4): listed neutrally as free tools, with a notable rating
-  quoting YouTube's terms where they bear on them; the optimizer never suggests them in place of YouTube Premium.
+- **Ad blockers, SponsorBlock and Morphe** (the guide's §3.4): listed neutrally as free tools, their notes saying what
+  YouTube's terms say of blocking its ads or modified apps (a rating quotes only a provider's own documents); the
+  optimizer never suggests them in place of YouTube Premium.
 - **Free-only services are in scope** (the owner's research list): a service with only free use is a provider with a
   free plan (browsers, DNS resolvers, Pluto TV, Kick), so the queue's entries left out as "Free, with ads" are
   queued again as the research reaches them.
