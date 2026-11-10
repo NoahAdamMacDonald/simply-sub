@@ -110,6 +110,43 @@
   category: music
   type: boolean
   aliases: [audiobook hours, audiobook credits]
+  requiredIn: [books]
+
+# ── Books & audiobooks (the owner's choice of 2026-11-10) ──────────────────────
+# Designed with the owner ahead of the full catalog's research (M11.15), for Kindle Unlimited, Kobo Plus, Everand,
+# Storytel, Audible, Libro.fm and the like; each provider's values come from its own pages as the research reaches it.
+# Audiobooks are audiobooks.included (above), required here too. A provider measuring listening its own way (hours,
+# credits, unlocks) states it in its plan's notes, or as books to keep when it gives books for good.
+- id: books.reading
+  name: Reading included
+  category: books
+  type: set
+  values:
+    - { id: ebooks, name: Ebooks, aliases: [e-books, kindle books] }
+    - { id: magazines, name: Magazines }
+    - { id: newspapers, name: Newspapers }
+    - { id: comics, name: Comics and manga, aliases: [manga, graphic novels] }
+  aliases: [ebook subscription, reading subscription]
+  requiredIn: [books]
+- id: books.library
+  name: Titles included
+  category: books
+  type: number
+  unit: titles
+  tiers:
+    - { id: 10000+, name: '10,000 or more titles', min: 10000 }
+    - { id: 100000+, name: '100,000 or more titles', min: 100000 }
+    - { id: 1000000+, name: A million or more titles, min: 1000000 }
+  aliases: [catalogue size, catalog size, library size]
+- id: books.keep
+  name: Books to keep each month
+  category: books
+  type: number
+  unit: books a month
+  tiers:
+    - { id: 1+, name: At least 1 book a month, min: 1 }
+    - { id: 2+, name: 2 or more books a month, min: 2 }
+  aliases: [book credits, keep forever, yours to keep]
 
 # ── VPN ────────────────────────────────────────────────────────────────────────
 - id: vpn.included
@@ -243,6 +280,51 @@
     - { id: 1000+, name: 1 TB or more, min: 1000 }
   aliases: [drive, online storage]
   requiredIn: [storage]
+
+# ── File sharing (the owner's choice of 2026-11-10) ────────────────────────────
+# Sending files rather than keeping them: WeTransfer, Filemail, Smash, LocalSend, PairDrop, KDE Connect, AirDrop and
+# the like, designed ahead of the research (M11.15). End-to-end encryption waits for the cross-category feature the
+# storage research adds, with Proton's values. A transfer with no size limit or links that never expire is unlimited.
+- id: file-sharing.transfer
+  name: How files travel
+  category: storage
+  type: set
+  values:
+    - {
+        id: nearby,
+        name: Between devices nearby,
+        aliases: [local network, lan, bluetooth, wi-fi direct],
+      }
+    - { id: peer-to-peer, name: Directly between devices online, aliases: [p2p, webrtc] }
+    - { id: cloud, name: Through its servers, aliases: [download link, cloud transfer] }
+  aliases: [file transfer, send files]
+  requiredIn: [file-sharing]
+- id: file-sharing.max-file-size
+  name: Largest file you can send
+  category: storage
+  type: number
+  unit: GB
+  tiers:
+    - { id: 2+, name: 2 GB or more, min: 2 }
+    - { id: 10+, name: 10 GB or more, min: 10 }
+    - { id: 100+, name: 100 GB or more, min: 100 }
+  aliases: [file size limit, transfer size, max file size]
+  requiredIn: [file-sharing]
+- id: file-sharing.link-expiry
+  name: How long links last
+  category: storage
+  type: number
+  unit: days
+  tiers:
+    - { id: 7+, name: A week or more, min: 7 }
+    - { id: 30+, name: 30 days or more, min: 30 }
+    - { id: 365+, name: A year or more, min: 365 }
+  aliases: [link expiry, expiration date]
+- id: file-sharing.no-account
+  name: Send without an account
+  category: storage
+  type: boolean
+  aliases: [no sign-up, no registration, anonymous transfer]
 
 # ── Email ──────────────────────────────────────────────────────────────────────
 - id: email.addresses
@@ -635,6 +717,913 @@
   aliases: [online calendar]
   requiredIn: [calendar]
 
+# ── The full catalog's groups (the owner's choice of 2026-11-10) ──────────────
+# Designed with the owner ahead of the full catalog's research (M11.15), for the categories with no provider yet, from
+# the catalog guide's starter profiles (docs/catalog-expansion-guide.md §2.4) and the owner's research list. Each
+# provider's values come from its own pages as the research reaches it, and a value its pages show that a feature
+# lacks is added then. A capability another group has uses that group's feature (BLUEPRINT §4.2 rule 10).
+
+# Office apps and video calls. Proton's Docs and Sheets get their values when the research reaches software.
+- id: office.apps
+  name: Office apps
+  category: productivity
+  type: set
+  values:
+    - { id: documents, name: Documents, aliases: [word processor, docs, writer] }
+    - { id: spreadsheets, name: Spreadsheets, aliases: [excel, sheets, calc] }
+    - { id: presentations, name: Presentations, aliases: [slides, powerpoint, impress, keynote] }
+    - { id: notes, name: Notes, aliases: [note-taking, notebooks, onenote] }
+    - { id: pdf-editing, name: PDF editing, aliases: [pdf editor, edit pdfs] }
+    - { id: diagrams, name: Diagrams and whiteboards, aliases: [whiteboard, flowcharts, visio] }
+    - { id: forms, name: Forms and surveys, aliases: [surveys, questionnaires] }
+    - { id: databases, name: Databases, aliases: [access, base] }
+  aliases: [office suite, productivity suite]
+- id: office.file-formats
+  name: Office file formats
+  category: productivity
+  type: set
+  values:
+    - id: microsoft-office
+      name: Microsoft Office (.docx, .xlsx, .pptx)
+      aliases: [docx, xlsx, pptx, ooxml]
+    - id: opendocument
+      name: OpenDocument (.odt, .ods, .odp)
+      aliases: [odt, ods, odp, odf]
+  aliases: [file compatibility, document formats]
+- id: office.offline
+  name: Works offline
+  category: productivity
+  type: boolean
+  aliases: [offline editing, without internet]
+- id: collaboration.real-time
+  name: Real-time co-editing
+  category: productivity
+  type: boolean
+  aliases: [collaborative editing, co-authoring, multiplayer editing, live collaboration]
+- id: video-calls.participants
+  name: People on a video call
+  category: productivity
+  type: number
+  unit: people
+  tiers:
+    - { id: 30+, name: 30 or more people, min: 30 }
+    - { id: 100+, name: 100 or more people, min: 100 }
+    - { id: 300+, name: 300 or more people, min: 300 }
+  aliases: [meeting participants, video conferencing, group video calls]
+- id: video-calls.length
+  name: Group call length
+  category: productivity
+  type: number
+  unit: minutes
+  tiers:
+    - { id: 40+, name: 40 minutes or more, min: 40 }
+    - { id: 60+, name: An hour or more, min: 60 }
+    - { id: 1440+, name: A day or more, min: 1440 }
+  aliases: [meeting time limit, call duration, call length]
+
+# ── Creative & design ──────────────────────────────────────────────────────────
+# Adobe, Canva, Figma, Affinity, DaVinci Resolve, CapCut, Blender and the like. Generative AI is ai.image-generation
+# and ai.video-generation; each provider measures generative credits its own way, so they're perks, as AI usage levels
+# are (the owner's choice of 2026-10-30).
+- id: creative.tools
+  name: Creative tools
+  category: creative
+  type: set
+  values:
+    - { id: photo-editing, name: Photo editing, aliases: [raw editing, retouching] }
+    - { id: illustration, name: Vector illustration, aliases: [vector graphics] }
+    - { id: painting, name: Drawing and painting, aliases: [digital painting, sketching, drawing] }
+    - {
+        id: graphic-design,
+        name: Graphic design and templates,
+        aliases: [social media graphics, posters],
+      }
+    - {
+        id: ui-design,
+        name: Interface design and prototyping,
+        aliases: [ux design, prototyping, wireframes],
+      }
+    - { id: page-layout, name: Page layout, aliases: [desktop publishing] }
+    - { id: video-editing, name: Video editing, aliases: [video editor] }
+    - {
+        id: motion-graphics,
+        name: Motion graphics and animation,
+        aliases: [animation, visual effects, vfx],
+      }
+    - {
+        id: audio-production,
+        name: Audio and music production,
+        aliases: [daw, recording, podcast editing],
+      }
+    - { id: 3d, name: 3D modelling, aliases: [3d modeling, sculpting, rendering] }
+  aliases: [design software, creative apps, editing software]
+  requiredIn: [creative]
+- id: creative.export-resolution
+  name: Highest video export
+  category: creative
+  type: enum
+  values:
+    - { id: 720p, name: 720p (HD) }
+    - { id: 1080p, name: 1080p (Full HD) }
+    - { id: 4k, name: 4K (Ultra HD), aliases: [uhd, 2160p] }
+    - { id: 8k, name: 8K }
+  aliases: [export quality, render resolution]
+- id: creative.no-watermark
+  name: Exports without a watermark
+  category: creative
+  type: boolean
+  aliases: [watermark free, remove watermark]
+- id: creative.assets
+  name: Stock assets included
+  category: creative
+  type: set
+  values:
+    - { id: photos, name: Stock photos }
+    - { id: videos, name: Stock video }
+    - { id: audio, name: Music and sound effects, aliases: [royalty-free music, sound effects] }
+    - { id: fonts, name: Fonts, aliases: [typefaces] }
+    - { id: templates, name: Premium templates }
+  aliases: [stock library, premium content]
+
+# ── Developer tools & hosting ──────────────────────────────────────────────────
+# Code hosts, editors and IDEs, and hosting with a flat personal price or a free tier (usage-billed cloud stays out,
+# the guide's §6). AI coding is ai.coding-agent; coding courses use the Learning features; collaboration.real-time
+# is an editor's pair programming too.
+- id: developer.ci-minutes
+  name: CI minutes a month
+  category: developer
+  type: number
+  unit: minutes a month
+  tiers:
+    - { id: 400+, name: 400 or more minutes, min: 400 }
+    - { id: 2000+, name: '2,000 or more minutes', min: 2000 }
+    - { id: 3000+, name: '3,000 or more minutes', min: 3000 }
+  aliases: [actions minutes, pipeline minutes, continuous integration, build minutes]
+- id: developer.extensions
+  name: Editor extensions from
+  category: developer
+  type: set
+  values:
+    - { id: vs-code-marketplace, name: Visual Studio Code Marketplace, aliases: [vs marketplace] }
+    - { id: open-vsx, name: Open VSX }
+    - { id: jetbrains-marketplace, name: JetBrains Marketplace, aliases: [jetbrains plugins] }
+    - { id: own, name: Its own extensions }
+  aliases: [editor plugins, ide plugins]
+- id: developer.remote-development
+  name: Remote development
+  category: developer
+  type: boolean
+  aliases: [remote ssh, dev containers, cloud workspaces]
+- id: hosting.type
+  name: Hosting type
+  category: developer
+  type: set
+  values:
+    - { id: static, name: Static sites, aliases: [jamstack, static hosting] }
+    - { id: serverless, name: Serverless functions, aliases: [edge functions, lambda functions] }
+    - { id: containers, name: Apps and containers, aliases: [docker, paas] }
+    - { id: virtual-server, name: Virtual servers, aliases: [vps, virtual machine, cloud server] }
+    - { id: shared, name: Shared web hosting, aliases: [cpanel, php hosting] }
+    - { id: wordpress, name: Managed WordPress }
+    - { id: website-builder, name: Website builder, aliases: [site builder, drag and drop] }
+  aliases: [web hosting, cloud hosting]
+  requiredIn: [cloud]
+- id: hosting.custom-domain
+  name: Your own domain
+  category: developer
+  type: boolean
+  aliases: [custom domain, connect a domain]
+- id: hosting.bandwidth
+  name: Monthly bandwidth
+  category: developer
+  type: number
+  unit: GB a month
+  tiers:
+    - { id: 100+, name: 100 GB or more, min: 100 }
+    - { id: 1000+, name: 1 TB or more, min: 1000 }
+  aliases: [data transfer, egress, traffic allowance]
+- id: hosting.disk
+  name: Disk space
+  category: developer
+  type: number
+  unit: GB
+  tiers:
+    - { id: 10+, name: 10 GB or more, min: 10 }
+    - { id: 50+, name: 50 GB or more, min: 50 }
+    - { id: 100+, name: 100 GB or more, min: 100 }
+  aliases: [ssd storage, hosting storage]
+- id: hosting.cpus
+  name: Virtual CPUs
+  category: developer
+  type: number
+  unit: vCPUs
+  tiers:
+    - { id: 2+, name: 2 or more vCPUs, min: 2 }
+    - { id: 4+, name: 4 or more vCPUs, min: 4 }
+  aliases: [vcpu, cpu cores]
+- id: hosting.memory
+  name: Memory
+  category: developer
+  type: number
+  unit: GB of RAM
+  tiers:
+    - { id: 2+, name: 2 GB or more, min: 2 }
+    - { id: 4+, name: 4 GB or more, min: 4 }
+    - { id: 8+, name: 8 GB or more, min: 8 }
+  aliases: [ram]
+
+# ── Browsers, search & DNS ─────────────────────────────────────────────────────
+# Browsers: what each is built on and what it blocks; what it shares about you is the policy topics' (privacy, and
+# service.activity-logging). The engine is its desktop and Android apps': on iPhone and iPad, every browser outside the
+# EU uses WebKit. A built-in VPN, AI assistant, password manager or calendar uses its own category's feature.
+- id: browser.engine
+  name: Browser engine
+  category: web
+  type: set
+  values:
+    - { id: chromium, name: Chromium (Blink), aliases: [blink, chrome-based, chromium-based] }
+    - { id: gecko, name: Firefox (Gecko), aliases: [firefox-based] }
+    - { id: webkit, name: Safari (WebKit), aliases: [safari-based] }
+    - { id: own, name: Its own engine, aliases: [independent engine] }
+  aliases: [based on, rendering engine, built on]
+  requiredIn: [browsers]
+- id: browser.ad-blocking
+  name: Built-in ad blocker
+  category: web
+  type: boolean
+  aliases: [blocks ads, ad blocker, shields]
+  requiredIn: [browsers]
+- id: browser.tracker-blocking
+  name: Built-in tracker blocking
+  category: web
+  type: boolean
+  aliases: [tracking protection, anti-tracking, tracking prevention]
+  requiredIn: [browsers]
+- id: browser.fingerprint-protection
+  name: Fingerprinting protection
+  category: web
+  type: boolean
+  aliases: [anti-fingerprinting, fingerprint randomization, resist fingerprinting]
+- id: browser.sync
+  name: Sync between devices
+  category: web
+  type: enum
+  values: # worst to best
+    - { id: none, name: No sync }
+    - { id: account, name: Through its servers, aliases: [cloud sync] }
+    - { id: end-to-end, name: End-to-end encrypted, aliases: [e2ee sync, encrypted sync] }
+  aliases: [bookmark sync, tab sync]
+- id: browser.extensions
+  name: Browser extensions
+  category: web
+  type: set
+  values:
+    - { id: chrome-web-store, name: From the Chrome Web Store }
+    - { id: firefox-add-ons, name: From Firefox Add-ons, aliases: [addons.mozilla.org, amo] }
+    - { id: safari, name: Safari extensions }
+    - { id: own-store, name: From its own store, aliases: [edge add-ons, opera add-ons] }
+  aliases: [browser add-ons, extension support]
+- id: browser.interface
+  name: Tabs and layout
+  category: web
+  type: set
+  values:
+    - { id: vertical-tabs, name: Vertical tabs, aliases: [sidebar tabs] }
+    - { id: tab-groups, name: Tab groups, aliases: [tab stacks, tab stacking] }
+    - { id: workspaces, name: Workspaces, aliases: [spaces] }
+    - { id: split-view, name: Split view, aliases: [tab tiling, side by side] }
+    - { id: web-panels, name: Sidebar web apps, aliases: [web panels] }
+    - { id: command-bar, name: Command bar, aliases: [quick commands, command palette] }
+    - { id: custom-themes, name: Custom themes, aliases: [theming] }
+    - { id: mouse-gestures, name: Mouse gestures }
+  aliases: [customization, customisation, browser layout]
+- id: browser.tools
+  name: Built-in tools
+  category: web
+  type: set
+  values:
+    - { id: reader-mode, name: Reader mode }
+    - { id: translation, name: Page translation, aliases: [translate pages] }
+    - { id: mail, name: Email client, aliases: [mail client] }
+    - { id: feed-reader, name: Feed reader, aliases: [rss, rss reader] }
+    - { id: notes, name: Notes }
+    - { id: screenshots, name: Screenshots, aliases: [screen capture] }
+    - { id: crypto-wallet, name: Crypto wallet, aliases: [web3 wallet] }
+    - { id: tor, name: Private windows over Tor, aliases: [tor window, onion sites] }
+  aliases: [built-in features]
+# Search engines: whose index each answers from (the owner's must-have), and what paid ones add. An engine with no
+# search limit is unlimited.
+- id: search.index
+  name: Search index
+  category: web
+  type: set
+  values:
+    - { id: own, name: Its own index, aliases: [independent index] }
+    - { id: google, name: Google's }
+    - { id: bing, name: Microsoft Bing's }
+    - { id: brave, name: Brave Search's }
+    - { id: mojeek, name: Mojeek's }
+    - { id: yandex, name: Yandex's }
+    - { id: metasearch, name: Many engines at once, aliases: [metasearch, meta search] }
+  aliases: [whose index, results from, powered by]
+  requiredIn: [search]
+- id: search.searches
+  name: Searches a month
+  category: web
+  type: number
+  unit: searches a month
+  tiers:
+    - { id: 100+, name: 100 or more searches, min: 100 }
+    - { id: 300+, name: 300 or more searches, min: 300 }
+    - { id: 1000+, name: '1,000 or more searches', min: 1000 }
+  aliases: [search limit, query limit]
+  requiredIn: [search]
+- id: search.site-ranking
+  name: Block or boost sites
+  category: web
+  type: boolean
+  aliases: [personalized results, lenses, goggles, site blocking]
+- id: search.ai-answers
+  name: AI answers
+  category: web
+  type: boolean
+  aliases: [ai summary, ai overview, answer with ai]
+- id: search.api
+  name: Search API queries a month
+  category: web
+  type: number
+  unit: queries a month
+  tiers:
+    - { id: 1000+, name: '1,000 or more queries', min: 1000 }
+    - { id: 10000+, name: '10,000 or more queries', min: 10000 }
+  aliases: [search api, api access]
+# DNS resolvers and filters: NextDNS, Control D, AdGuard DNS, Quad9, Cloudflare's 1.1.1.1, Google Public DNS, CIRA
+# Canadian Shield, Mullvad DNS. Parental controls are parental-control's; logging is a policy topic. A resolver with no
+# query limit is unlimited.
+- id: dns.protocols
+  name: Encrypted DNS
+  category: web
+  type: set
+  values:
+    - { id: doh, name: DNS over HTTPS, aliases: [doh] }
+    - { id: dot, name: DNS over TLS, aliases: [dot, private dns] }
+    - { id: doq, name: DNS over QUIC, aliases: [doq] }
+    - { id: dnscrypt, name: DNSCrypt }
+  aliases: [secure dns, dns encryption]
+  requiredIn: [dns]
+- id: dns.filtering
+  name: DNS filtering
+  category: web
+  type: set
+  values:
+    - { id: malware, name: Malware and phishing, aliases: [phishing, threat blocking] }
+    - { id: ads, name: Ads, aliases: [ad blocking] }
+    - { id: trackers, name: Trackers }
+    - { id: adult, name: Adult content, aliases: [family filter] }
+    - {
+        id: custom,
+        name: Your own block and allow lists,
+        aliases: [blocklists, denylist, allowlist],
+      }
+  aliases: [dns blocking, content filtering]
+  requiredIn: [dns]
+- id: dns.queries
+  name: DNS queries a month
+  category: web
+  type: number
+  unit: queries a month
+  tiers:
+    - { id: 300000+, name: '300,000 or more', min: 300000 }
+    - { id: 1000000+, name: A million or more, min: 1000000 }
+  aliases: [query allowance]
+  requiredIn: [dns]
+- id: dns.query-log
+  name: Query log and statistics
+  category: web
+  type: boolean
+  aliases: [dns analytics, dns logs]
+- id: dns.dnssec
+  name: DNSSEC validation
+  category: web
+  type: boolean
+  aliases: [dnssec]
+
+# ── Social media ───────────────────────────────────────────────────────────────
+# Networks, forums and messaging apps, and their paid tiers (X Premium, Meta Verified, Discord Nitro, Telegram Premium,
+# Snapchat+, Reddit's). Ad free is required here too. End-to-end encrypted messages wait for the cross-category feature
+# the storage research adds.
+- id: social.protocol
+  name: Open protocol
+  category: social
+  type: set
+  values:
+    - { id: activitypub, name: ActivityPub (the fediverse), aliases: [fediverse, mastodon] }
+    - { id: at-protocol, name: AT Protocol, aliases: [atproto] }
+    - { id: nostr, name: Nostr }
+    - { id: matrix, name: Matrix }
+  aliases: [decentralized, decentralised, federated, open network]
+  requiredIn: [social]
+- id: social.verification
+  name: Verified badge
+  category: social
+  type: boolean
+  aliases: [blue check, checkmark, verified account]
+- id: social.edit-posts
+  name: Edit posts
+  category: social
+  type: boolean
+  aliases: [edit button, edit messages]
+- id: social.post-length
+  name: Longest post or message
+  category: social
+  type: number
+  unit: characters
+  tiers:
+    - { id: 500+, name: 500 characters or more, min: 500 }
+    - { id: 1000+, name: '1,000 characters or more', min: 1000 }
+    - { id: 10000+, name: '10,000 characters or more', min: 10000 }
+  aliases: [character limit, longer posts]
+- id: social.upload-size
+  name: Largest upload
+  category: social
+  type: number
+  unit: MB
+  tiers:
+    - { id: 100+, name: 100 MB or more, min: 100 }
+    - { id: 1000+, name: 1 GB or more, min: 1000 }
+    - { id: 4000+, name: 4 GB or more, min: 4000 }
+  aliases: [upload limit, bigger uploads]
+- id: social.chronological-feed
+  name: Chronological feed
+  category: social
+  type: boolean
+  aliases: [following feed, latest first, no algorithm]
+
+# ── News & magazines ───────────────────────────────────────────────────────────
+# Bias and reliability are outside raters' (data/raters.yaml), never the catalog's own: none allows reuse yet. A
+# paper's other products (games, recipes, sports) are plans of their own, which an all-access plan includes
+# (includes-subscription).
+- id: news.unlimited-articles
+  name: Unlimited articles
+  category: news
+  type: boolean
+  aliases: [full access, digital access, all articles]
+  requiredIn: [news]
+- id: news.e-edition
+  name: Digital replica of the paper
+  category: news
+  type: boolean
+  aliases: [e-edition, epaper, e-paper, replica edition]
+- id: news.print-delivery
+  name: Print delivery
+  category: news
+  type: boolean
+  aliases: [home delivery, print edition]
+- id: news.gift-articles
+  name: Gift articles a month
+  category: news
+  type: number
+  unit: articles a month
+  tiers:
+    - { id: 1+, name: Any gift articles, min: 1 }
+    - { id: 10+, name: 10 or more a month, min: 10 }
+  aliases: [share articles, gift links]
+- id: news.audio-articles
+  name: Listen to articles
+  category: news
+  type: boolean
+  aliases: [narrated articles, read aloud]
+- id: news.puzzles
+  name: Games and puzzles
+  category: news
+  type: boolean
+  aliases: [crosswords, sudoku]
+
+# ── Jobs & careers ─────────────────────────────────────────────────────────────
+# Job seekers' paid tiers (LinkedIn Premium, XING's): employers' and recruiters' plans are business plans, out of scope.
+- id: jobs.direct-messages
+  name: Messages to people you're not connected with
+  category: jobs
+  type: number
+  unit: messages a month
+  tiers:
+    - { id: 1+, name: Any a month, min: 1 }
+    - { id: 5+, name: 5 or more a month, min: 5 }
+    - { id: 15+, name: 15 or more a month, min: 15 }
+  aliases: [inmail, message recruiters]
+- id: jobs.profile-viewers
+  name: See who viewed your profile
+  category: jobs
+  type: boolean
+  aliases: [profile visitors, who viewed my profile]
+- id: jobs.applicant-insights
+  name: How you compare to other applicants
+  category: jobs
+  type: boolean
+  aliases: [applicant insights, top applicant]
+- id: jobs.salary-insights
+  name: Salary insights
+  category: jobs
+  type: boolean
+  aliases: [salary data, pay ranges]
+
+# ── Maps & transit ─────────────────────────────────────────────────────────────
+- id: maps.directions
+  name: Directions
+  category: maps
+  type: set
+  values:
+    - { id: driving, name: Driving }
+    - { id: transit, name: Public transit, aliases: [bus, subway, train] }
+    - { id: walking, name: Walking }
+    - { id: cycling, name: Cycling, aliases: [bike, bicycle] }
+  aliases: [routes, route planning]
+  requiredIn: [maps]
+- id: maps.turn-by-turn
+  name: Turn-by-turn navigation
+  category: maps
+  type: boolean
+  aliases: [voice navigation, gps navigation]
+- id: maps.live-transit
+  name: Live transit times
+  category: maps
+  type: boolean
+  aliases: [real-time arrivals, live departures]
+- id: maps.live-traffic
+  name: Live traffic
+  category: maps
+  type: boolean
+  aliases: [traffic conditions]
+- id: maps.offline
+  name: Offline maps
+  category: maps
+  type: boolean
+  aliases: [download maps, offline navigation]
+  requiredIn: [maps]
+- id: maps.data
+  name: Map data from
+  category: maps
+  type: set
+  values:
+    - { id: own, name: Its own }
+    - { id: openstreetmap, name: OpenStreetMap, aliases: [osm] }
+    - { id: tomtom, name: TomTom }
+    - { id: here, name: HERE }
+  aliases: [map source, map provider]
+
+# ── Shopping, delivery & rides ─────────────────────────────────────────────────
+# Food and grocery delivery and rides (DashPass, Uber One, Instacart+, SkipPlus, Grubhub+, Deliveroo Plus, Lyft
+# Pink). Shopping memberships' own features (Amazon Prime's fast delivery, Costco's member prices) come with the
+# shopping research, which moves Prime's delivery perk to them (data/redirects.yaml).
+- id: delivery.services
+  name: Services
+  category: shopping
+  type: set
+  values:
+    - { id: restaurants, name: Restaurant delivery, aliases: [food delivery, takeout, takeaway] }
+    - { id: groceries, name: Grocery delivery }
+    - { id: stores, name: Delivery from other stores, aliases: [convenience, pharmacy, alcohol] }
+    - { id: rides, name: Rides, aliases: [ride-hailing, rideshare, taxi] }
+  aliases: [delivery app]
+  requiredIn: [delivery]
+- id: delivery.free-delivery
+  name: Free delivery
+  category: shopping
+  type: boolean
+  aliases: [no delivery fee, $0 delivery fee]
+  requiredIn: [delivery]
+- id: delivery.lower-service-fees
+  name: Lower service fees
+  category: shopping
+  type: boolean
+  aliases: [reduced service fees]
+- id: delivery.ride-savings
+  name: Savings on rides
+  category: shopping
+  type: boolean
+  aliases: [ride discounts, ride credits]
+
+# ── Learning ───────────────────────────────────────────────────────────────────
+# Courses, language apps and coding sites (Coursera, Udemy, Skillshare, MasterClass, Duolingo, Babbel, Brilliant,
+# Boot.dev, LeetCode).
+- id: education.subjects
+  name: Subjects
+  category: education
+  type: set
+  values:
+    - { id: languages, name: Languages, aliases: [language learning] }
+    - { id: programming, name: Programming, aliases: [coding, software development] }
+    - { id: data, name: Data and AI, aliases: [data science, machine learning] }
+    - { id: business, name: Business, aliases: [management, marketing] }
+    - { id: creative, name: Creative skills, aliases: [design courses, photography, music lessons] }
+    - { id: maths-science, name: Maths and science, aliases: [math, mathematics, science] }
+    - { id: academic, name: University courses, aliases: [degrees, college courses] }
+  aliases: [topics, courses about]
+  requiredIn: [education]
+- id: education.course-library
+  name: Courses included
+  category: education
+  type: number
+  unit: courses
+  tiers:
+    - { id: 100+, name: 100 or more courses, min: 100 }
+    - { id: 1000+, name: '1,000 or more courses', min: 1000 }
+    - { id: 10000+, name: '10,000 or more courses', min: 10000 }
+  aliases: [course catalog, course catalogue]
+- id: education.certificates
+  name: Certificates
+  category: education
+  type: boolean
+  aliases: [certificate of completion, credentials]
+- id: education.live-classes
+  name: Live classes
+  category: education
+  type: boolean
+  aliases: [live lessons, live tutors]
+- id: education.offline
+  name: Offline lessons
+  category: education
+  type: boolean
+  aliases: [download lessons, learn offline]
+
+# ── Fitness & wellness ─────────────────────────────────────────────────────────
+# Workout, tracking and wellness apps and gyms (Strava, Peloton, Apple Fitness+, Garmin Connect+, Calm, Headspace,
+# AllTrails, GoodLife). Offline trail maps are maps.offline.
+- id: fitness.activities
+  name: Activities
+  category: fitness
+  type: set
+  values:
+    - { id: running, name: Running }
+    - { id: cycling, name: Cycling, aliases: [indoor cycling, spin] }
+    - { id: strength, name: Strength training, aliases: [weights, lifting] }
+    - { id: hiit, name: HIIT and cardio, aliases: [cardio, bootcamp] }
+    - { id: yoga, name: Yoga and pilates, aliases: [pilates, stretching] }
+    - { id: hiking, name: Hiking and outdoors, aliases: [trails] }
+    - { id: swimming, name: Swimming }
+    - { id: meditation, name: Meditation and mindfulness, aliases: [mindfulness, breathing] }
+    - { id: sleep, name: Sleep, aliases: [sleep tracking, sleep stories] }
+    - { id: nutrition, name: Nutrition, aliases: [calorie counting, meal plans] }
+  aliases: [workouts, exercise types]
+  requiredIn: [fitness]
+- id: fitness.classes
+  name: Classes
+  category: fitness
+  type: set
+  values:
+    - { id: on-demand, name: On-demand classes, aliases: [video workouts, guided workouts] }
+    - { id: live, name: Live classes, aliases: [live workouts] }
+  aliases: [workout classes]
+- id: fitness.training-plans
+  name: Training plans
+  category: fitness
+  type: boolean
+  aliases: [coaching plans, personalized plans]
+- id: fitness.tracking
+  name: Activity tracking
+  category: fitness
+  type: boolean
+  aliases: [gps tracking, workout tracking, record activities]
+- id: fitness.gym-access
+  name: Gym access
+  category: fitness
+  type: boolean
+  aliases: [gym membership, club access]
+
+# ── Smart home & security ──────────────────────────────────────────────────────
+# Camera and alarm plans: Ring, Google Home Premium (Nest Aware), Arlo, Blink, Wyze, SimpliSafe and the like. A plan
+# without cameras states 0 days of video.
+- id: home.video-history
+  name: Video history
+  category: home
+  type: number
+  unit: days
+  tiers:
+    - { id: 1+, name: Any video history, min: 1 }
+    - { id: 30+, name: 30 days or more, min: 30 }
+    - { id: 60+, name: 60 days or more, min: 60 }
+  aliases: [cloud recording, video storage, event history]
+  requiredIn: [home]
+- id: home.continuous-recording
+  name: Continuous recording
+  category: home
+  type: boolean
+  aliases: [24/7 recording, around-the-clock recording]
+- id: home.cameras
+  name: Cameras covered
+  category: home
+  type: number
+  unit: cameras
+  tiers:
+    - { id: 2+, name: More than one camera, min: 2 }
+  aliases: [devices covered, number of cameras]
+- id: home.smart-alerts
+  name: Smart alerts
+  category: home
+  type: set
+  values:
+    - { id: people, name: People }
+    - { id: packages, name: Packages, aliases: [parcels] }
+    - { id: vehicles, name: Vehicles }
+    - { id: animals, name: Animals, aliases: [pets] }
+    - { id: familiar-faces, name: Familiar faces, aliases: [facial recognition] }
+  aliases: [person detection, object detection]
+- id: home.professional-monitoring
+  name: Professional monitoring
+  category: home
+  type: boolean
+  aliases: [alarm monitoring, monitoring centre, emergency dispatch]
+  requiredIn: [home]
+
+# ── Phone & internet (BLUEPRINT §4.12) ─────────────────────────────────────────
+# Mobile plans (bring your own phone, postpaid or prepaid) and home internet, as designed with the owner on
+# 2026-11-10. Every plan in telecom says whether it's a mobile plan, home internet or both, and the features under
+# each describe it. Shared plans for several lines use account.users, and streaming a plan includes
+# includes-subscription. Speeds are in Mbps, and a data allowance with no cap is unlimited.
+- id: mobile.included
+  name: Mobile plan
+  category: telecom
+  type: boolean
+  aliases: [cell phone plan, cellphone plan, wireless plan, sim plan]
+  headline: true
+  requiredIn: [telecom]
+- id: mobile.data
+  parent: mobile.included
+  name: Full-speed data
+  category: telecom
+  type: number
+  unit: GB a month
+  tiers:
+    - { id: 10+, name: 10 GB or more, min: 10 }
+    - { id: 50+, name: 50 GB or more, min: 50 }
+    - { id: 100+, name: 100 GB or more, min: 100 }
+    - { id: 250+, name: 250 GB or more, min: 250 }
+  aliases: [data allowance, high-speed data, mobile data]
+- id: mobile.after-allowance
+  parent: mobile.included
+  name: After the data allowance
+  category: telecom
+  type: enum
+  values: # worst to best
+    - { id: overage, name: Charged for more data, aliases: [overage fees, pay per use] }
+    - { id: stops, name: Data stops until you add more, aliases: [top up, add-on data] }
+    - { id: slowed, name: Keeps going at a lower speed, aliases: [throttled, reduced speed] }
+  aliases: [data cap, throttling]
+- id: mobile.slowed-speed
+  parent: mobile.included
+  name: Speed after the allowance
+  category: telecom
+  type: number
+  unit: kbps
+  tiers:
+    - { id: 512+, name: 512 kbps or faster, min: 512 }
+    - { id: 1000+, name: 1 Mbps or faster, min: 1000 }
+    - { id: 3000+, name: 3 Mbps or faster, min: 3000 }
+  aliases: [throttled speed]
+- id: mobile.max-speed
+  parent: mobile.included
+  name: Top data speed
+  category: telecom
+  type: number
+  unit: Mbps
+  tiers:
+    - { id: 100+, name: 100 Mbps or faster, min: 100 }
+    - { id: 250+, name: 250 Mbps or faster, min: 250 }
+    - { id: 1000+, name: 1 Gbps or faster, min: 1000 }
+  aliases: [speed cap, max speed]
+- id: mobile.network-technology
+  parent: mobile.included
+  name: Network technology
+  category: telecom
+  type: enum
+  values:
+    - { id: lte, name: 4G LTE, aliases: [4g] }
+    - { id: 5g, name: 5G }
+    - { id: 5g-plus, name: 5G+ (mid-band), aliases: [5g+, ultra wideband, ultra capacity] }
+  aliases: [5g access]
+- id: mobile.network
+  parent: mobile.included
+  name: Network it runs on
+  category: telecom
+  type: set
+  values:
+    - { id: bell, name: Bell }
+    - { id: rogers, name: Rogers }
+    - { id: telus, name: Telus }
+    - { id: videotron, name: Videotron }
+    - { id: freedom, name: Freedom Mobile }
+    - { id: sasktel, name: SaskTel }
+    - { id: eastlink, name: Eastlink }
+    - { id: att, name: AT&T }
+    - { id: t-mobile, name: T-Mobile }
+    - { id: verizon, name: Verizon }
+  aliases: [coverage, carrier network, mvno]
+- id: mobile.roaming
+  parent: mobile.included
+  name: Roaming included
+  category: telecom
+  type: set
+  values:
+    - { id: canada, name: In Canada }
+    - { id: us, name: In the US }
+    - { id: mexico, name: In Mexico }
+    - { id: other-countries, name: In other countries, aliases: [international roaming] }
+  aliases: [roaming, travel data]
+- id: mobile.unlimited-calls
+  parent: mobile.included
+  name: Unlimited calls to
+  category: telecom
+  type: set
+  values:
+    - { id: canada, name: Canada, aliases: [canada-wide] }
+    - { id: us, name: The US }
+    - { id: mexico, name: Mexico }
+    - { id: other-countries, name: Other countries, aliases: [international calling] }
+  aliases: [long distance, unlimited talk, nationwide calling]
+- id: mobile.hotspot
+  parent: mobile.included
+  name: Mobile hotspot
+  category: telecom
+  type: boolean
+  aliases: [tethering]
+- id: mobile.esim
+  parent: mobile.included
+  name: eSIM
+  category: telecom
+  type: boolean
+  aliases: [digital sim]
+- id: mobile.wifi-calling
+  parent: mobile.included
+  name: Wi-Fi calling
+  category: telecom
+  type: boolean
+  aliases: [wifi calling]
+- id: mobile.rollover
+  parent: mobile.included
+  name: Unused data rolls over
+  category: telecom
+  type: boolean
+  aliases: [data rollover]
+- id: mobile.prepaid
+  parent: mobile.included
+  name: Prepaid
+  category: telecom
+  type: boolean
+  aliases: [pay as you go, no credit check]
+- id: internet.included
+  name: Home internet
+  category: telecom
+  type: boolean
+  aliases: [broadband, home wifi, internet plan]
+  headline: true
+  requiredIn: [telecom]
+- id: internet.download-speed
+  parent: internet.included
+  name: Download speed
+  category: telecom
+  type: number
+  unit: Mbps
+  tiers:
+    - { id: 50+, name: 50 Mbps or faster, min: 50 }
+    - { id: 300+, name: 300 Mbps or faster, min: 300 }
+    - { id: 1000+, name: 1 Gbps or faster, min: 1000 }
+    - { id: 3000+, name: 3 Gbps or faster, min: 3000 }
+  aliases: [internet speed]
+- id: internet.upload-speed
+  parent: internet.included
+  name: Upload speed
+  category: telecom
+  type: number
+  unit: Mbps
+  tiers:
+    - { id: 10+, name: 10 Mbps or faster, min: 10 }
+    - { id: 100+, name: 100 Mbps or faster, min: 100 }
+    - { id: 1000+, name: 1 Gbps or faster, min: 1000 }
+- id: internet.unlimited-data
+  parent: internet.included
+  name: Unlimited home data
+  category: telecom
+  type: boolean
+  aliases: [no data cap, unlimited usage]
+- id: internet.connection
+  parent: internet.included
+  name: Connection type
+  category: telecom
+  type: set
+  values:
+    - { id: fibre, name: Fibre to the home, aliases: [fiber, ftth] }
+    - { id: cable, name: Cable, aliases: [docsis] }
+    - { id: dsl, name: DSL, aliases: [fibre to the node, fttn] }
+    - { id: fixed-wireless, name: Fixed wireless, aliases: [5g home internet, rural wireless] }
+    - { id: satellite, name: Satellite, aliases: [low earth orbit] }
+  aliases: [internet technology]
+- id: internet.equipment-included
+  parent: internet.included
+  name: Modem and router included
+  category: telecom
+  type: boolean
+  aliases: [modem rental, wifi router, gateway]
+
 # ── Apps, languages & support: every category (M11.4) ─────────────────────────
 # Facts about a provider as a whole (providerWide): a provider states them once in its own features, and a plan
 # states one only where it differs (BLUEPRINT §4.2 rule 9). Languages are what the service offers across its
@@ -646,7 +1635,7 @@
   category: general
   type: boolean
   aliases: [no ads, ad free, without ads]
-  requiredIn: [streaming, music]
+  requiredIn: [streaming, music, search, social]
 - id: platforms
   name: Platforms
   category: general
@@ -681,6 +1670,14 @@
     - { id: open-clients, name: Open-source apps, aliases: [open clients, open-source clients] }
     - { id: fully-open, name: Fully open source, aliases: [open-source servers] }
   aliases: [open source, oss, foss, source code]
+  providerWide: true
+# Whether you can run its server yourself (Jellyfin, Plex Media Server, SearXNG, Pi-hole, Vaultwarden), stated by its
+# own pages (the owner's choice of 2026-11-10): none of the catalog's providers before then is.
+- id: software.self-hostable
+  name: Self-hostable
+  category: general
+  type: boolean
+  aliases: [self-hosted, self hosting, host it yourself]
   providerWide: true
 - id: languages.audio
   name: Audio languages
