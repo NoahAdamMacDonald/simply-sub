@@ -117,7 +117,7 @@ sources: { pricing: https://help.netflix.com/en/node/24926 }
 # Owner (M11.2), read 2026-11-02: its investor relations site's company profile; Netflix Services Canada ULC is the
 # contracting party for Canadians (help.netflix.com/legal/corpinfo).
 owner:
-  name: 'Netflix, Inc., a public company (NASDAQ: NFLX)'
+  name: 'Netflix, Inc.'
   page:
     name: Company profile (investor relations)
     url: https://ir.netflix.net/ir-overview/profile/default.aspx
@@ -133,6 +133,9 @@ owner:
       - 'Netflix, Inc.'
       - 'Los Gatos, CA 95032, USA'
     lastVerified: 2026-11-03
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: NFLX }
   lastVerified: 2026-11-02
 # Ways to pay (M11.5), read 2026-11-02 on its payment articles for the US and Canada, and every country's own read
 # 2026-11-03 (the owner's tasks): cards, gift cards and PayPal but in New Zealand, a direct debit in the UK

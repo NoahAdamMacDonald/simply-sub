@@ -1491,6 +1491,14 @@ M1.14, M11.1), so a buyer can see what signing up means beyond the price.
   `citedPages` counts the page as a policy page, so `data:baselines` saves it and checks its quotes; the nightly check
   doesn't read it yet. All 13 have one (ESPN's is 72% Disney's, 18% Hearst's and 10% the NFL's, as its press room
   says; Netflix, Inc. is a public company; Bitdefender S.R.L. runs Bitdefender).
+- **Its shares** (the owner's item of 2026-11-10, M11.18): a public company's `owner.stock`, its `listings` (each
+  exchange as the page names it, with the ticker `symbol`), the listed `company` when it's the owner's parent (Alphabet
+  Inc. for Google LLC), and a `majorityHolder` when someone holds more than half of its shares or votes (`name`, `of`,
+  and a `percent` only from a current annual report). Its words are the owner's quotes when they name it all, else a
+  `page` of its own (an investor page, an annual report) with `quotes` and `lastVerified`, on the same sites as the
+  owner's; either page's words may name each fact, and validation checks each exchange, symbol, holder and percent is
+  named. The card's Facts give "Stock: NASDAQ: NFLX" under the owner, citing its own page when it has one, and the
+  Overview its first listing after the country. A private company has none; its owners stay in `name`.
 - **Where it's from** (the owner's choice, 2026-11-03): the owner's `country`, an ISO 3166-1 `code`, required of every
   provider. Its words are the owner's quotes when they say it (Proton's "a Swiss corporation", Bitdefender's
   "Bucharest, Romania"), else a `page` of its own with `quotes` and `lastVerified` (Netflix's corporate information,

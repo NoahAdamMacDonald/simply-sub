@@ -33,6 +33,7 @@ import {
   type BundleSaving,
   type CardNetwork,
   type CurrenciesEntry,
+  type OwnerCitation,
   type PaymentMethod,
   type PaymentMethods,
   type PickedPrice,
@@ -260,6 +261,20 @@ export class PlanDetails {
   protected readonly ownerCountry = computed(() => {
     const country = this.owner()?.country;
     return country && { name: countryName(country.code), cited: country.cited };
+  });
+  /**
+   * A public company's shares (the owner's item of 2026-11-10): "NASDAQ: NFLX", its majority holder, and its own page
+   * when the owner's doesn't say them; the Overview shows the first listing.
+   */
+  protected readonly ownerStock = computed(() => {
+    const stock = this.owner()?.stock;
+    if (!stock) return undefined;
+    const [first] = stock.listings;
+    return {
+      text: stockText(stock),
+      glance: first && `${first.exchange}: ${first.symbol}`,
+      cited: stock.cited,
+    };
   });
   /**
    * How a buyer where the user lives can pay it (M11.5), a line of chips per page that says so. A card shows the
@@ -531,6 +546,26 @@ function payChip(method: PaymentMethod, networks: readonly CardNetwork[] | undef
     glyphs: [...own, ...marks],
     ...(unmarked.length > 0 ? { words: unmarked.join(', ') } : {}),
   };
+}
+
+/**
+ * A public company's shares in a line: the listed company when it's the owner's parent, each exchange with its symbols,
+ * then its majority holder: "Alphabet Inc., Nasdaq: GOOGL, GOOG"; "NASDAQ: ANGH; majority holder: OSN Group, with
+ * 55.45% of the shares".
+ */
+function stockText(stock: NonNullable<OwnerCitation['stock']>): string {
+  const exchanges = [...new Set(stock.listings.map((listing) => listing.exchange))];
+  const listed = exchanges
+    .map((exchange) => {
+      const symbols = stock.listings.filter((listing) => listing.exchange === exchange);
+      return `${exchange}: ${symbols.map((listing) => listing.symbol).join(', ')}`;
+    })
+    .join('; ');
+  const holder = stock.majorityHolder;
+  const majority =
+    holder &&
+    `majority holder: ${holder.name}${holder.percent === undefined ? '' : `, with ${holder.percent}% of the ${holder.of}`}`;
+  return [[stock.company, listed].filter(Boolean).join(', '), majority].filter(Boolean).join('; ');
 }
 
 /** "A, B and C" (or "or"). */

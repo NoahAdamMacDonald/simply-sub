@@ -349,6 +349,33 @@ describe('validateCatalog, for owners', () => {
     ]);
   });
 
+  it('takes a public company’s shares from the same sites, read no later than today (2026-11-10)', () => {
+    const investors = (url: string, lastVerified = '2026-10-20') => ({
+      company: 'Galaxy Holdings Inc.',
+      listings: [{ exchange: 'TSX', symbol: 'GLX' }],
+      page: { name: 'Investors', url },
+      quotes: ['Galaxy Holdings Inc. (TSX: GLX)'],
+      lastVerified,
+    });
+    expect(
+      messages(
+        withRaters([
+          [['owner', 'stock'], investors('https://investors.galaxy.example.com/')],
+          [['owner', 'website'], 'https://www.galaxy.example.com'],
+        ]),
+      ),
+    ).toEqual([]);
+    expect(
+      messages(withRaters([[['owner', 'stock'], investors('https://www.tmx.example.com/glx')]])),
+    ).toEqual([
+      `${planet} owner.stock.page.url: Must be a page of Daily Planet's own sites, its policies' or its owner's (dailyplanet.example.com): give the owner's site in website when the page is there`,
+    ]);
+    const tomorrow = investors('https://www.dailyplanet.example.com/investors', '2026-10-24');
+    expect(messages(withRaters([[['owner', 'stock'], tomorrow]]))).toEqual([
+      `${planet} owner.stock.lastVerified: 2026-10-24 is after today (2026-10-23)`,
+    ]);
+  });
+
   it('refuses a read date after today, and warns once it’s a year old', () => {
     expect(messages(withRaters([[['owner', 'lastVerified'], '2026-10-24']]))).toEqual([
       `${planet} owner.lastVerified: 2026-10-24 is after today (2026-10-23)`,
@@ -498,6 +525,119 @@ describe('ownerCitation', () => {
     });
   });
 
+  it('checks that the stock’s words name each exchange, symbol and majority holder (2026-11-10)', () => {
+    const owner = {
+      ...dailyPlanet.owner,
+      quotes: [
+        'The Daily Planet is owned by Galaxy Communications, of Metropolis, New York.',
+        'Galaxy Communications (NYSE: GXC) is 61.2% owned by the Kent Family Trust.',
+      ],
+    };
+    const nyse = { exchange: 'NYSE', symbol: 'GXC' };
+    const trust = { name: 'the Kent Family Trust', percent: 61.2, of: 'shares' };
+    // The owner's quotes say it all, so the stock has no page of its own.
+    expect(
+      issues(ownerSchema, { ...owner, stock: { listings: [nyse], majorityHolder: trust } }),
+    ).toEqual([]);
+    expect(
+      issues(ownerSchema, {
+        ...owner,
+        stock: {
+          listings: [{ exchange: 'TSX', symbol: 'GX' }],
+          majorityHolder: { ...trust, name: 'Lex Holdings', percent: 61 },
+        },
+      }),
+    ).toEqual([
+      "stock.listings.0.exchange: The owner's quotes don't name TSX: give the stock a page and quotes of its own",
+      // GX is part of GXC, which doesn't count.
+      "stock.listings.0.symbol: The owner's quotes don't name GX: give the stock a page and quotes of its own",
+      "stock.majorityHolder.name: The owner's quotes don't name Lex Holdings: give the stock a page and quotes of its own",
+      "stock.majorityHolder.percent: The owner's quotes don't name 61%: give the stock a page and quotes of its own",
+    ]);
+    // Its own page's words, once it has them.
+    const investors = { name: 'Investors', url: 'https://www.dailyplanet.example.com/investors' };
+    expect(
+      issues(ownerSchema, {
+        ...owner,
+        stock: {
+          listings: [{ exchange: 'TSX', symbol: 'GX' }],
+          page: investors,
+          quotes: ['Our shares trade on the TSX as GX.'],
+          lastVerified: '2026-10-20',
+        },
+      }),
+    ).toEqual([]);
+    // Its own words and the owner's both count: the owner's give NYSE and the holder, its own TSX.
+    const both = [nyse, { exchange: 'TSX', symbol: 'GX' }, { exchange: 'Nasdaq', symbol: 'GLXY' }];
+    expect(
+      issues(ownerSchema, {
+        ...owner,
+        stock: {
+          listings: both,
+          majorityHolder: trust,
+          page: investors,
+          quotes: ['Galaxy is listed on the TSX.'],
+        },
+      }),
+    ).toEqual([
+      'stock.lastVerified: Give its page, quotes and lastVerified together, or none when the owner’s quotes say it',
+      'stock.listings.1.symbol: No quote names GX',
+      'stock.listings.2.exchange: No quote names Nasdaq',
+      'stock.listings.2.symbol: No quote names GLXY',
+    ]);
+  });
+
+  it('needs listings or a majority holder, a symbol in capitals, and a majority above half', () => {
+    const owner = dailyPlanet.owner;
+    expect(issues(ownerSchema, { ...owner, stock: {} })).toEqual([
+      'stock: Give its listings, its majority holder, or both',
+    ]);
+    expect(
+      issues(ownerSchema, {
+        ...owner,
+        stock: { listings: [{ exchange: 'NYSE', symbol: 'gxc' }] },
+      })[0],
+    ).toBe(
+      'stock.listings.0.symbol: Use the ticker symbol in capitals, as the exchange lists it (BCE, RCI.B)',
+    );
+    expect(
+      issues(ownerSchema, {
+        ...owner,
+        stock: { majorityHolder: { name: 'Galaxy Communications', percent: 50, of: 'votes' } },
+      }),
+    ).toEqual(['stock.majorityHolder.percent: A majority is more than 50%']);
+  });
+
+  it('gives the stock’s listings and majority holder, with its own page when it has one', () => {
+    const investors = { name: 'Investors', url: 'https://www.dailyplanet.example.com/investors' };
+    const quotes = ['Galaxy Holdings Inc. (TSX: GLX) is controlled by the Kent Family Trust.'];
+    expect(
+      ownerCitation({
+        ...dailyPlanet.owner,
+        stock: {
+          company: 'Galaxy Holdings Inc.',
+          listings: [{ exchange: 'TSX', symbol: 'GLX' }],
+          majorityHolder: { name: 'the Kent Family Trust', of: 'votes' },
+          page: investors,
+          quotes,
+          lastVerified: '2026-10-20',
+        },
+      }).stock,
+    ).toEqual({
+      company: 'Galaxy Holdings Inc.',
+      listings: [{ exchange: 'TSX', symbol: 'GLX' }],
+      majorityHolder: { name: 'the Kent Family Trust', of: 'votes' },
+      cited: { page: 'Investors', href: quoteLink(investors.url, quotes), quotes },
+    });
+    expect(
+      ownerCitation({
+        ...dailyPlanet.owner,
+        stock: { majorityHolder: { name: 'Galaxy Communications', of: 'shares' } },
+      }).stock,
+    ).toEqual({ listings: [], majorityHolder: { name: 'Galaxy Communications', of: 'shares' } });
+    expect(ownerCitation(dailyPlanet.owner).stock).toBeUndefined();
+  });
+
   it('links a country quoted from a page of its own (the owner’s choice, 2026-11-03)', () => {
     const contact = { name: 'Contact us', url: 'https://www.dailyplanet.example.com/contact' };
     const quotes = ['355 Main Street, Metropolis, New York, USA'];
@@ -534,5 +674,29 @@ describe('the catalog files, with raters', () => {
     expect(citedFacts(source.providers, source.bundles, about).quotes).toEqual(
       dailyPlanet.owner.quotes,
     );
+  });
+
+  it('cites the stock’s own page as a policy page, with its quotes (2026-11-10)', () => {
+    const investors = 'https://www.dailyplanet.example.com/investors';
+    const quotes = ['Galaxy Holdings Inc. (TSX: GLX)'];
+    const source = readCatalogSource(
+      withRaters([
+        [
+          ['owner', 'stock'],
+          {
+            listings: [{ exchange: 'TSX', symbol: 'GLX' }],
+            page: { name: 'Investors', url: investors },
+            quotes,
+            lastVerified: '2026-10-20',
+          },
+        ],
+      ]),
+    );
+    expect(citedPages(source.providers, source.bundles)).toContainEqual({
+      url: investors,
+      type: 'policies',
+      owners: ['daily-planet'],
+    });
+    expect(citedFacts(source.providers, source.bundles, investors).quotes).toEqual(quotes);
   });
 });

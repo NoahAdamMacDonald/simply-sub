@@ -121,7 +121,8 @@ API contract's prices are illustrative and never a source. This skill is how to 
     refunds, notice of price changes, limits on streams, devices and downloads, bundles and partner billing. Use
     them for those fields, and rate them on the policy topics with the policy-research skill (M1.13).
   - **The owner and outside ratings** (M11.2), by the policy-research skill's rules: the company behind it (every
-    provider needs one), and for an antivirus or a news outlet the raters in `data/raters.yaml`.
+    provider needs one), a public company's ticker symbols and majority holder (`owner.stock`, 2026-11-10), and for
+    an antivirus or a news outlet the raters in `data/raters.yaml`.
   - **Every way to pay** (`paymentMethods`, required of every provider): its payment methods help article, pricing
     page or terms, for cards, PayPal, Apple and Google Pay, Klarna, Satispay, Cash App, Alipay, app stores and platforms that
     bill for it (Amazon's Prime Video channels), gift cards, a bank transfer or direct debit (iDEAL | Wero, Swish,

@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipHarness } from '@angular/material/tooltip/testing';
 import {
+  quoteLink,
   searchCatalog,
   type CatalogPlan,
   type Settings,
@@ -479,6 +480,57 @@ describe('PlanDetails', () => {
 
       expect(group('Owner')).toBe('Owner Mullvad VPN AB · Sweden , according to its About us');
       expect(element().querySelectorAll('.owner a')).toHaveLength(1);
+    });
+
+    it('gives a public company’s stock symbols and majority holder, citing its own page (2026-11-10)', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const quotes = ['Amagicom AB (NASDAQ Stockholm: AMGC, AMGC.B) is controlled by Bluebird AB.'];
+      const owner = mullvad.owner && {
+        ...mullvad.owner,
+        stock: {
+          company: 'Amagicom AB',
+          listings: [
+            { exchange: 'NASDAQ Stockholm', symbol: 'AMGC' },
+            { exchange: 'NASDAQ Stockholm', symbol: 'AMGC.B' },
+          ],
+          majorityHolder: { name: 'Bluebird AB', percent: 72.5, of: 'votes' as const },
+          page: { name: 'Investors', url: 'https://mullvad.net/en/investors' },
+          quotes,
+          lastVerified: '2026-10-22',
+        },
+      };
+      await show('mullvad.vpn', {}, { ...mullvad, owner });
+
+      // The Overview gives its first listing after where it's from, read as "…, stock symbol NASDAQ Stockholm: AMGC".
+      expect(text('.glance-owner')).toBe(
+        'Mullvad VPN AB · , from Sweden · , stock symbol NASDAQ Stockholm: AMGC',
+      );
+      await tab('Facts');
+      expect(group('Owner')).toBe(
+        'Owner Mullvad VPN AB · Sweden , according to its About us ' +
+          'Stock: Amagicom AB, NASDAQ Stockholm: AMGC, AMGC.B; majority holder: Bluebird AB, with 72.5% of the votes ' +
+          ', according to its Investors',
+      );
+      const link = element().querySelectorAll<HTMLAnchorElement>('.owner a')[2];
+      expect([link?.href, link?.getAttribute('aria-label')]).toEqual([
+        quoteLink('https://mullvad.net/en/investors', quotes),
+        'Investors, opens in a new tab',
+      ]);
+    });
+
+    it('gives the stock with no link of its own when the owner’s words say it', async () => {
+      const mullvad = providerOf('mullvad.vpn');
+      const owner = mullvad.owner && {
+        ...mullvad.owner,
+        stock: { listings: [{ exchange: 'NYSE', symbol: 'MLVD' }] },
+      };
+      await show('mullvad.vpn', {}, { ...mullvad, owner });
+      await tab('Facts');
+
+      expect(group('Owner')).toBe(
+        'Owner Mullvad VPN AB · Sweden , according to its About us Stock: NYSE: MLVD',
+      );
+      expect(element().querySelectorAll('.owner a')).toHaveLength(2);
     });
 
     it('has neither for a provider with none', async () => {

@@ -1,7 +1,8 @@
 // M11.5 in the system Edge: a Search card's provider facts and the item dialog's renewal day, on the real catalog
 // (data:build's files), in both themes at 1280 and 360 px, for a Canadian in Alberta. Mullvad's Ways to pay with the
 // currencies its cash takes, each way a chip of glyphs named for screen readers and as its tooltip (Task 6), then its
-// Source code after its host's chip; Netflix's Billing day; Crave with neither. The item dialog, with
+// Source code after its host's chip; Netflix's Billing day, and its stock under its owner and at a glance (M11.18);
+// Crave with neither. The item dialog, with
 // CA.json answered so Crave bills on the 1st and TSN on the last day: Crave's suggested renewal is the next 1st and
 // TSN's this month's end, neither asking "Billed on"; TSN's typed Feb 28 isn't asked either and saves the 31st, while
 // Netflix (the date you signed up) still asks of a typed Feb 28. Keyboard: Tab through the links, their tooltips the
@@ -479,6 +480,53 @@ async function typeRenewal(page, date) {
           path: path.join(outDir, `netflix-billing-${colorScheme}-${viewport.width}.png`),
         });
         await axeCheck(page, `${label}, Netflix's Billing day with its tooltip`);
+
+        // ── Netflix: its stock under its owner (M11.18), and the first listing at a glance ─────────────
+        const owner = groupNamed(netflix, page, 'Owner');
+        const ownerWords = await shown(owner);
+        check(
+          `${label}: Netflix's Owner gives its stock, from the owner's own words (M11.18)`,
+          // innerText keeps the words for screen readers: "·, from United States".
+          /^Owner Netflix, Inc\. ·(, from)? United States, according to its .+ Stock: NASDAQ: NFLX$/.test(
+            ownerWords,
+          ),
+          ownerWords,
+        );
+        const ownerLines = await owner.locator('.owner').evaluateAll((lines) => {
+          const probe = document.createElement('span');
+          probe.style.color = 'var(--ss-text-muted)';
+          lines[0].append(probe);
+          const muted = getComputedStyle(probe).color;
+          probe.remove();
+          return {
+            count: lines.length,
+            muted: lines.every((line) => getComputedStyle(line).color === muted),
+            gap: lines[1].getBoundingClientRect().top - lines[0].getBoundingClientRect().bottom,
+          };
+        });
+        check(
+          `${label}: the stock is a muted line of its own under the owner, 4 px below it`,
+          ownerLines.count === 2 && ownerLines.muted && Math.round(ownerLines.gap) === 4,
+          JSON.stringify(ownerLines),
+        );
+        await owner.screenshot({
+          path: path.join(outDir, `netflix-stock-${colorScheme}-${viewport.width}.png`),
+        });
+        await netflix.getByRole('tab', { name: 'Overview' }).click();
+        await sleep(500);
+        const glance = netflix.locator('.glance-owner');
+        const glanceWords = (await glance.innerText()).replace(/\s+/g, ' ').trim();
+        const glanceHidden = await glance.locator('.visually-hidden').allTextContents();
+        check(
+          `${label}: the Overview gives its first listing after the country, read as ", stock symbol"`,
+          /^Netflix, Inc\. · (, from )?United States · (, stock symbol )?NASDAQ: NFLX$/.test(
+            glanceWords,
+          ) && glanceHidden.join('|') === ', from |, stock symbol ',
+          `${glanceWords} / ${glanceHidden.join('|')}`,
+        );
+        await axeCheck(page, `${label}, Netflix's Overview with its stock symbol`);
+        await netflix.getByRole('tab', { name: 'Facts' }).click();
+        await sleep(300);
 
         // ── Bitdefender: a Billing day since M11.9 (each anniversary), and no source code ────────────
         const bitdefender = await details(page, 'Bitdefender');

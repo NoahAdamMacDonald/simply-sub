@@ -76,7 +76,7 @@ paymentMethods:
 # Owner: Apple Inc., a public company; Apple Canada Inc. sells it in Canada, and Apple Inc. in the US (its terms'
 # "Definition of Apple").
 owner:
-  name: 'Apple Inc., a public company (NASDAQ: AAPL)'
+  name: 'Apple Inc.'
   website: https://investor.apple.com
   page:
     name: "Apple's investor FAQ"
@@ -91,6 +91,9 @@ owner:
     quotes:
       - 'Apple Inc., located at One Apple Park Way, Cupertino, California'
     lastVerified: 2026-11-04
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: AAPL }
   lastVerified: 2026-11-04
 
 # Renewal day (M11.5), read 2026-11-04: its terms charge "no more than twenty-four (24) hours prior to the start of the

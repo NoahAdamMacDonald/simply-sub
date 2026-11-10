@@ -194,6 +194,11 @@
               <span class="visually-hidden">, from </span>
               <span>{{ country.name }}</span>
             }
+            @if (ownerStock()?.glance; as listing) {
+              <span aria-hidden="true"> · </span>
+              <span class="visually-hidden">, stock symbol </span>
+              <span>{{ listing }}</span>
+            }
           </span>
         }
         @for (chip of glance().chips; track chip.name) {
@@ -422,6 +427,28 @@
           <mat-icon aria-hidden="true">open_in_new</mat-icon>
         </a>
       </p>
+      <!-- A public company's shares (the owner's item of 2026-11-10), citing its own page when the owner's doesn't. -->
+      @if (ownerStock(); as stock) {
+        <p class="owner">
+          <span class="subject">Stock: </span>
+          <span>{{ stock.text }}</span>
+          @if (stock.cited; as cited) {
+            <span>, according to its </span>
+            <a
+              class="outside-link"
+              [href]="cited.href"
+              target="_blank"
+              rel="noopener"
+              [matTooltip]="quotesText(cited.quotes)"
+              matTooltipTouchGestures="off"
+              [attr.aria-label]="cited.page + ', opens in a new tab'"
+            >
+              <span>{{ cited.page }}</span>
+              <mat-icon aria-hidden="true">open_in_new</mat-icon>
+            </a>
+          }
+        </p>
+      }
     </div>
   }
 

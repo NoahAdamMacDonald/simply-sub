@@ -56,7 +56,7 @@ sources: { pricing: https://www.anghami.com/plus }
 # from KIPCO's release on the deal (KIPCO is OSN's parent group), as of 2024, so the name says "majority" rather than a
 # share that may have changed since.
 owner:
-  name: 'Anghami Inc. (NASDAQ: ANGH), majority-owned by OSN Group'
+  name: 'Anghami Inc.'
   page:
     name: Anghami & OSN+ successfully complete milestone transaction (KIPCO)
     url: https://kipco.com/anghami-osn-successfully-complete-milestone-transaction-creating-an-entertainment-powerhouse/
@@ -70,6 +70,18 @@ owner:
       url: https://www.anghami.com/investors
     quotes:
       - 'In 2021, Anghami relocated its headquarters to Abu Dhabi (United Arab Emirates) as part of the Abu Dhabi Global Market (ADGM)'
+    lastVerified: 2026-11-09
+  # Its symbol from its investor page, read 2026-11-09 with its country; its majority holder in KIPCO's words above, with
+  # no percent: the release's 55.45% is a dated share, which may have changed since (the owner's rule of 2026-11-09).
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: ANGH }
+    majorityHolder: { name: OSN Group, of: shares }
+    page:
+      name: Investor Relations
+      url: https://www.anghami.com/investors
+    quotes:
+      - 'Anghami Inc. (NASDAQ: ANGH)'
     lastVerified: 2026-11-09
   lastVerified: 2026-11-09
 # Ways to pay (M11.5), read 2026-11-09 in its help centre: a card, PayPal and the app stores (its 1-month article),

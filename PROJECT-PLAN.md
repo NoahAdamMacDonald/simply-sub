@@ -1061,6 +1061,7 @@ owner (M11.17, BLUEPRINT §4.12), its mobile plans with national prices join the
 | M11.16 | Third-party claims (added 2026-11-09, the owner's choice; BLUEPRINT §4.2 rule 12): a plan's `thirdParty` (publisher, url, quote, date) for a value only a publication gives, validated (the plan's own feature, not inferred too, off the provider's sites); the feature list's "third-party" mark; the optimizer counts it for Wanted and lower ranks only, and a card that rests on one names its source; Settings' "Use third-party claims", on by default | A plan's third-party value shows its mark and source; a Needed feature it alone gives blocks the change; with the setting off, the card shows the feature as not stated and the optimizer ignores it |
 | M11.15 | The research, a category at a time (the guide's §7): feature-discovery for the category, then its providers in batch pull requests of about 10, each reviewed by a second model; pushed once per batch, and web searches after sitemaps and known paths, SearXNG before the paid engines (the guide's §7.2). In order: AI, streaming, music, VPN, password managers and authenticators, antivirus, storage, email, gaming, office and creative, news; then browsers, search, DNS, file sharing, calendars, maps, social, jobs, developer tools; then finance, after M11.10–M11.14 | Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date |
 | M11.17 | Phone and internet plans (added 2026-11-10, the owner's choice; BLUEPRINT §4.12): the design (scope, the regular price for carriers, automatic-payment discounts, fees, provinces, features, terms, ways to pay) and the Phone & internet feature group; then province prices: ISO 3166-2 regions (`CA-QC`) on prices and `availableIn`, picked from the province Settings has for sales tax, in coverage, Search's Sold in and the API | A national mobile plan validates with its features; then a Quebec price shows to a user in Quebec and Ontario's to one in Ontario, and a plan sold only in Quebec is Not offered in Ontario |
+| M11.18 | A public company's shares (added 2026-11-10, the owner's item; BLUEPRINT §4.10): `owner.stock` with its listings (exchange and ticker symbol), the listed company when it's the owner's parent, and a majority holder (of its shares or votes), quoted like the owner; the card's Facts and Overview; the tickers that were words in owners' names moved into it | Netflix's card says "Stock: NASDAQ: NFLX"; validation refuses a symbol or holder no quote names |
 
 #### M11 specs
 
@@ -2236,6 +2237,24 @@ in every D1 `json` column search parses.
   - [ ] A national mobile plan validates with its features (the research's first carrier)
   - [ ] A Quebec price shows to a user in Quebec and Ontario's to one in Ontario; a plan sold only in Quebec is Not
         offered in Ontario
+
+**M11.18 — A public company's shares** (BLUEPRINT §4.10; added 2026-11-10)
+- **As built** (2026-11-10):
+  - **Core:** `ownerStockSchema` in `rater.ts`: `listings` (`exchange` as the page names it, `symbol` in capitals), `company`
+    when the listed company is the owner's parent, `majorityHolder` (`name`, `of: shares | votes`, a `percent` above
+    50 only from a current annual report, the owner's rule of 2026-11-09), and a `page` with `quotes` and
+    `lastVerified` when the owner's quotes don't say it all. Either page's words may name each fact: validation
+    checks each exchange, symbol (a whole word: "GX" isn't in "GXC"), holder and percent (a whole number: 61 isn't in
+    "61.2%") is named, the page is on the owner's sites, and it was read no later than today. `citedPages` and
+    `citedFacts` take its page as a policy page, so baselines check its quotes; quote-check reads it too.
+  - **The card:** Facts' Owner adds "Stock: Alphabet Inc., Nasdaq: GOOGL, GOOG; majority holder: …", citing its own
+    page when it has one; the Overview adds the first listing after the country, read as ", stock symbol NASDAQ: NFLX".
+  - **Data:** the tickers that were words in owners' names moved into `stock`, from the quotes already there: Netflix,
+    Spotify, Apple Music, Apple TV, Google AI, YouTube, YouTube TV, iQIYI and TIDAL (Block); Anghami's symbol from its
+    investor page (read 2026-11-09) and OSN Group as its majority holder from KIPCO's release. Deezer's quote names
+    Euronext Paris but no symbol, so it waits for the research. The skills say how (policy-research's owner rules).
+- **Acceptance**
+  - [x] Netflix's card says "Stock: NASDAQ: NFLX"; validation refuses a symbol or holder no quote names
 
 **The M11 audit** (2026-11-09): every acceptance box of M11.1–M11.14 and M11.16 holds; M11.15 is under way. What's
 left, each waiting for the owner:

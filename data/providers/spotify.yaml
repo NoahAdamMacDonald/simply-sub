@@ -51,7 +51,7 @@ sources: { pricing: https://www.spotify.com/ca-en/premium/ }
 # Owner (M11.2), read 2026-11-09: its investor relations site names the company and its listing, and its contact page
 # its address in Luxembourg. Its terms are with its subsidiary Spotify AB, in Stockholm.
 owner:
-  name: 'Spotify Technology S.A., a public company (NYSE: SPOT)'
+  name: 'Spotify Technology S.A.'
   page:
     name: Spotify Technology S.A. to Announce Results for Third Quarter 2026
     url: https://investors.spotify.com/news/news-details/2026/Spotify-Technology-S-A--to-Announce-Results-for-Third-Quarter-2026/default.aspx
@@ -66,6 +66,9 @@ owner:
       - 'Spotify Technology S.A.'
       - 'L-1724 Luxembourg'
     lastVerified: 2026-11-09
+  stock:
+    listings:
+      - { exchange: NYSE, symbol: SPOT }
   lastVerified: 2026-11-09
 # Ways to pay (M11.5), read 2026-11-09: the help centre's "Accepted payment methods" says only that the checkout lists
 # them ("All the payment options for your account’s location will be on the next page"), which needs an account; its

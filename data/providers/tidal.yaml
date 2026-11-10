@@ -35,7 +35,7 @@ sources: { pricing: https://support.tidal.com/hc/en-us/articles/115003662825-Sub
 # Owner (M11.2), read 2026-11-09: its privacy notice names its parent, whose investor relations site says so too and
 # where it was incorporated.
 owner:
-  name: 'Block, Inc., a public company (NYSE: XYZ)'
+  name: 'Block, Inc.'
   website: https://investors.block.xyz
   page:
     name: Block investor relations
@@ -52,6 +52,9 @@ owner:
     quotes:
       - 'Block, Inc. was incorporated in June 2009 in Delaware.'
     lastVerified: 2026-11-09
+  stock:
+    listings:
+      - { exchange: NYSE, symbol: XYZ }
   lastVerified: 2026-11-09
 # Ways to pay (M11.5), read 2026-11-09 in its help centre's payment article: a card and PayPal ("Double-check the card
 # information or PayPal login credentials"), Venmo on its apps (`other`), and its cancelling article's Apple and Google

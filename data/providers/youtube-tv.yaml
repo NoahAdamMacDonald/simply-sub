@@ -49,7 +49,7 @@ paymentMethods:
 
 # Owner: Google LLC, as for YouTube (its paid services' provider), part of Alphabet.
 owner:
-  name: 'Google LLC, owned by Alphabet Inc., a public company (NASDAQ: GOOGL, GOOG)'
+  name: 'Google LLC, owned by Alphabet Inc.'
   website: https://abc.xyz
   page:
     name: "Alphabet's founders' letter"
@@ -65,6 +65,11 @@ owner:
     quotes:
       - 'The entity providing the Service is Google LLC, a company operating under the laws of Delaware'
     lastVerified: 2026-11-04
+  stock:
+    company: Alphabet Inc.
+    listings:
+      - { exchange: Nasdaq, symbol: GOOGL }
+      - { exchange: Nasdaq, symbol: GOOG }
   lastVerified: 2026-11-04
 
 # Renewal day (M11.5), read 2026-11-04 in its free trial article: the day you're first charged recurs each month. It
