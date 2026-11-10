@@ -1,0 +1,26 @@
+url: https://vdp.deezer.com/
+method: browser
+saved: 2026-11-09
+
+Welcome
+Send a report
+Deezer Bug Bounty Program
+DEEZER VULNERABILITY DISCLOSURE POLICY
+The safety and security of our customers’ data, and the reliability of our products and services, are of utmost importance to Deezer. Therefore, we aim to design and make products and services with the highest levels of security and reliability. Despite our best efforts, due to the highly complex and sophisticated nature of our products and services, vulnerabilities and errors may still be present in our products and services.
+This policy describes Deezer’s approach to requesting and receiving reports related to potential vulnerabilities and errors in its products and services from those that interact with such products and services.
+Customers, users, researchers, partners and any other person that interacts with Deezer’s products and services are encouraged to report identified vulnerabilities and errors with such products and services.
+The preferred method for contacting Deezer regarding such vulnerabilities and errors is by using the form present on this page.
+Deezer highly appreciates the efforts made by the reporting party in identifying the vulnerability or error. Reporting of such vulnerabilities and errors will contribute to improving the security and reliability of our product and services.
+Please note that supplying your contact information with your report is entirely voluntary and at your discretion. Deezer will make use of all reports that are submitted; both those submitted anonymously and those with contact information. If you do submit your contact information, Deezer will only use such information to get in touch with you regarding clarifying the details of your report, if that is necessary. Otherwise, please visit Deezer’s general privacy policy to see how we respect the privacy of your personal data: www.deezer.com/privacy-and-legal/privacy/
+By making a report to Deezer using the form on this page, or otherwise communicating a report to Deezer, regarding vulnerabilities and errors, you agree to the following terms:
+Deezer may use your report for any purpose deemed relevant by Deezer, including without limitation, for the purpose of correcting any vulnerabilities and errors that are reported and that Deezer deems to exist and to require correction. To the extent that you propose any changes and/or improvements to a Deezer product or service in your report, you assign to Deezer all use and ownership rights to such proposals.
+You confirm to Deezer that:
+You have not exploited or used in any manner, and will not exploit or use in any manner (other than for the purposes of reporting to Deezer), the discovered vulnerabilities and/or errors;
+You have not engaged, and will not engage, in testing/research of systems with the intention of harming Deezer, its customers, employees, partners or suppliers;
+You have not used, misused, deleted, altered or destroyed, and will not use, misuse, delete, alter or destroy, any data that you have accessed or may be able to access in relation to the vulnerability and/or error discovered;
+You have not conducted, and will not conduct, social engineering, spamming, phishing, denial-of-service or resource-exhaustion attacks;
+You have not tested, and will not test, the physical security of any property, building, plant or factory of Deezer;
+You have not breached, and will not breach, any applicable laws in connection with your report and your interaction with Deezer product or service that lead to your report.
+You agree not to disclose to any third party any information related to your report, the vulnerabilities and/or errors reported, nor the fact that any vulnerabilities and/or errors have been reported to Deezer.
+Deezer does not guarantee that you will receive any response from Deezer related to your report. Deezer will only contact you regarding your report if Deezer deems it necessary.
+You agree that you are making your report without any expectation or requirement of reward or other benefit, financial or otherwise, for making such report, and without any expectation or requirement that the vulnerabilities and/or errors reported are corrected by Deezer.

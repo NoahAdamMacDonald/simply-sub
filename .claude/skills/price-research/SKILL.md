@@ -351,6 +351,17 @@ which reads each page as a visitor there would, before any hand reading:
   Standard or Ultimate) and periods, read over an ordinary connection in Canada; its sign-up app fails to load even
   then. Annual Pay (Instalment) is a 12-month term paid monthly that renews for another 12: the catalog stores no
   minimum term, so it goes in the plans' notes.
+- **Music's sites** (M11.15): Spotify's Premium page has a path per country (`spotify.com/<country>/premium/`:
+  `ca-en`, `us`, `uk`, `de-en`, `nl-en`; France, Spain and Italy only in their own languages, `/fr/`, `/es/`, `/it/`),
+  each in its currency whoever reads it, and its help centre's payment article only points to the checkout. Apple
+  Music's page is per country too (`apple.com/<country>/apple-music/`, the US's at `apple.com/apple-music/`).
+  YouTube Music Premium (`youtube.com/musicpremium`), Deezer (`deezer.com/en/offers`: refuse its cookies before
+  clicking Annual) and SoundCloud (`checkout.soundcloud.com/go`) price by where the visitor is: read each country
+  through its exit. Google's consent page meets European exits first (`click?:Reject all`), and checking YouTube
+  Premium's known prices in the same session tells where an exit was placed. SoundCloud's Go terms bill "a 30-day
+  period", so its cards' "/month" is priced every 30 days. Its help centre (help.soundcloud.com) answers a plain fetch
+  with a JavaScript challenge and reads in Edge; where its Go card and its help centre's comparison disagree on Go's
+  audio, the help centre's bitrates decide (audio quality is defined by bitrate).
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
 

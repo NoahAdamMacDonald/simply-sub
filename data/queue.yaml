@@ -105,7 +105,8 @@
   source: wikidata
   wikidata: Q689141
   sitelinks: 104
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: the-washington-post
   name: The Washington Post
   website: https://washingtonpost.com
@@ -187,7 +188,8 @@
   source: wikidata
   wikidata: Q568769
   sitelinks: 66
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: financial-times
   name: Financial Times
   website: https://www.ft.com
@@ -227,7 +229,8 @@
   source: wikidata
   wikidata: Q20056642
   sitelinks: 58
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: daily-mail
   name: Daily Mail
   website: https://www.dailymail.co.uk
@@ -328,7 +331,8 @@
   source: wikidata
   wikidata: Q602243
   sitelinks: 39
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: napster
   name: Napster
   website: https://www.napster.com

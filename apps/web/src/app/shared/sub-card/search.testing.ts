@@ -2,6 +2,7 @@ import { signal } from '@angular/core';
 import type { Provider } from '@angular/core';
 import type { Account, CatalogData, FxRates, ListItem, Price, Settings } from '@simply-sub/core';
 import { CatalogStore } from '../../core/catalog/catalog-store';
+import { ClockService } from '../../core/clock/clock-service';
 import { FxStore } from '../../core/fx/fx-store';
 import { SettingsStore } from '../../core/settings/settings-store';
 
@@ -537,6 +538,8 @@ export function listItem(planId: string, listId: string, ended = false): ListIte
 /** The stores a card reads: an Albertan's settings, the catalog above and the rates. */
 export function searchStores(): Provider[] {
   return [
+    // The cards' today is the fixtures' (a renamed plan's old name lasts until an item renews), not the machine's.
+    { provide: ClockService, useValue: { today: signal(today) } },
     { provide: SettingsStore, useValue: { saved: signal<Settings | undefined>(alberta) } },
     {
       provide: CatalogStore,

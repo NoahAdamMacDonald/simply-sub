@@ -1,0 +1,935 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 1), read with Edge from Canada and through each
+# country's exit. Pages, each quoted where it's used:
+# Pricing: deezer.com/en/offers, which prices by where the visitor is: read from Canada ("CAD $11.99"), and through a
+# US, UK, Australian, New Zealand, Irish, German, French, Dutch, Spanish and Italian exit, each page in that country's
+# currency (the US's in a bare "$", New Zealand's in "US$"). Monthly, and Annual on its toggle, except Italy's, whose
+# toggle showed the same monthly prices. New Zealand sells Premium and Family only, and its page and Australia's,
+# Italy's, the Netherlands' and Spain's say "Deezer Free is not available in your country".
+# Region checklist, 2026-11-09: 1. no country paths (/en/ is the language); 2. no picker; 3. not looked for; 4. checkout
+# not opened; 5. none; 6. Edge from Canada and through each exit; 7. no bill offered.
+# Not listed: the Student plan ("Student discount"), an eligibility-only offer, as for Spotify's.
+# Bundles and resellers: its partners (telecom operators, retailers and media companies, the privacy policy's
+# "partners ... distributing our offers"; RTL+ in Germany and Fnac in France, help centre articles) sell it with their
+# own plans: partners, not shops. Deezer gift cards are its own.
+# Features, read 2026-11-09: the offers page's comparison (Free has no "Ad-free experience", "Pick and play any track",
+# "Offline listening" or "High Fidelity sound"), the help centre's "Deezer HiFi supports up to 24-bit/192 kHz on
+# compatible tracks, devices and app versions" (Deezer Hi-Fi Audio Quality) and "Deezer Free users can only use Basic
+# (64kb/s) or Standard (128kb/s) audio quality" (Deezer Audio Quality); Duo's "2 accounts" and Family's "6 accounts",
+# each with Kids profiles ("You can set up Kid profiles for children up to 12 years old", Deezer Family; "Your Duo
+# subscription can include a Kids profile", Deezer Duo). No audiobooks.
+
+# Coverage: deezer.duo in NZ: New Zealand's offers page sells Premium and Family only (through its exit, 2026-11-09).
+
+id: deezer
+name: Deezer
+website: https://www.deezer.com
+# Its help centre, account pages and investor relations site.
+domains: [support.deezer.com, account.deezer.com, vdp.deezer.com, deezer-investors.com]
+category: music
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: USD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://support.deezer.com/hc/en-gb/articles/214349245-Cancel-Your-Deezer-Subscription
+sources: { pricing: https://www.deezer.com/en/offers }
+# Owner (M11.2), read 2026-11-09: its investor relations site, and its privacy policy for where it's from.
+owner:
+  name: 'Deezer SA, a public company (Euronext Paris)'
+  website: https://www.deezer-investors.com
+  page:
+    name: Deezer investors
+    url: https://www.deezer-investors.com/
+  quotes:
+    - 'Merger with I2PO Spac and listing on Euronext in Paris'
+  country:
+    code: FR
+    page:
+      name: Your privacy on Deezer
+      url: https://www.deezer.com/legal/personal-datas
+    quotes:
+      - 'Your data is controlled by us in France (Deezer SA, 24 rue de Calais 75009 Paris), and may be shared with service providers and partners around the world.'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+# Ways to pay (M11.5), read 2026-11-09: its terms' payment article, and its help centre's payments article (Deezer Gift
+# Cards, Apple and Google Play). No card networks are named, so acceptedNetworks is left out.
+paymentMethods:
+  - methods: [card, paypal]
+    page: Terms and Conditions of Use
+    url: https://www.deezer.com/legal/cgu
+    quotes:
+      - 'Various payment methods are offered on the Site or Application (credit cards, prepaid cards, PayPal and/or other payment methods).'
+  - methods: [gift-card, app-store]
+    page: Manage Your Deezer Subscription Payments
+    url: https://support.deezer.com/hc/en-gb/articles/214349045-Manage-Your-Deezer-Subscription-Payments
+    quotes:
+      - Deezer Gift Cards
+      - Pay For Deezer Through Apple FAQs
+      - How do I resolve a Google Play payment issue?
+# Renewal day (M11.5): its terms renew a plan "for exactly the same duration as the initial term", and its help centre's
+# cancelling article doesn't say on which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.deezer.com/legal/cgu
+    - https://support.deezer.com/hc/en-gb/articles/214349245-Cancel-Your-Deezer-Subscription
+  lastVerified: 2026-11-09
+
+plans:
+  - id: deezer.free
+    name: Free
+    link: https://www.deezer.com/en/offers
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+  - id: deezer.premium
+    name: Premium
+    link: https://www.deezer.com/en/offers
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - region: CA
+        currency: CAD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: CA
+        currency: CAD
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 107.91
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: AU
+        currency: AUD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: AU
+        currency: AUD
+        amount: 125.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NZ
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NZ
+        currency: USD
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NL
+        currency: EUR
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: ES
+        currency: EUR
+        amount: 107.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+  - id: deezer.duo
+    name: Duo
+    link: https://www.deezer.com/en/offers
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      streaming.kids-profiles: true
+      account.users: 2
+    notes: Two Premium accounts for people in the same household.
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - region: CA
+        currency: CAD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: CA
+        currency: CAD
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: AU
+        currency: AUD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: AU
+        currency: AUD
+        amount: 196.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NL
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NL
+        currency: EUR
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: ES
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: ES
+        currency: EUR
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IT
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+  - id: deezer.family
+    name: Family
+    link: https://www.deezer.com/en/offers
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      streaming.kids-profiles: true
+      account.users: 6
+    notes: Up to 6 Premium accounts for one household, with Kids profiles for children up to 12.
+    prices:
+      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      - region: CA
+        currency: CAD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: CA
+        currency: CAD
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: US
+        currency: USD
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: GB
+        currency: GBP
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: AU
+        currency: AUD
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: AU
+        currency: AUD
+        amount: 240.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NZ
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NZ
+        currency: USD
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IE
+        currency: EUR
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: DE
+        currency: EUR
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: FR
+        currency: EUR
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: NL
+        currency: EUR
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: ES
+        currency: EUR
+        amount: 218.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+      - region: IT
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.deezer.com/en/offers
+
+# Terms and policies, read 2026-11-09 (M11.15): the Terms and Conditions of Use (one document for every country, under
+# the law of where you live), its privacy notice ("Your privacy on Deezer", updated September 2025; the page also keeps
+# June 2022's), its Vulnerability Disclosure Policy, and its help centre's articles on cancelling, switching plans,
+# Family, Duo and payments. Its offer terms and partner terms (on the same legal page) cover offers and partners' plans
+# only. Calibrated against Spotify's and YouTube's grades. Not rated: rights over your content and its apps' licence
+# (not topics for music).
+policies:
+  links:
+    - name: Terms and Conditions of Use
+      url: https://www.deezer.com/legal/cgu
+    - name: Your privacy on Deezer
+      url: https://www.deezer.com/legal/personal-datas
+    - name: Plans
+      url: https://www.deezer.com/en/offers
+    - name: Vulnerability Disclosure Policy
+      url: https://vdp.deezer.com/
+    - name: Cancel Your Deezer Subscription
+      url: https://support.deezer.com/hc/en-gb/articles/214349245-Cancel-Your-Deezer-Subscription
+    - name: How to Switch Your Deezer Subscription Plan
+      url: https://support.deezer.com/hc/en-gb/articles/40215679139741-How-to-Switch-Your-Deezer-Subscription-Plan-Upgrade-or-Change-Plan
+    - name: Deezer Family
+      url: https://support.deezer.com/hc/en-gb/articles/115002459285-Deezer-Family
+    - name: Deezer Duo
+      url: https://support.deezer.com/hc/en-gb/articles/16545519017885-Deezer-Duo
+  ratings:
+    - topic: privacy.data-collection
+      tier: neutral
+      reason: 'It studies how you use Deezer to improve it and build new features. You can say yes or no to that in your privacy settings.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'analyze how you use our service'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'You can consent or object to such use in your privacy settings.'
+      action:
+        name: Account settings
+        url: https://www.deezer.com/account
+      lastVerified: 2026-11-09
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It uses paying members’ data to find people like them for its ads, and shares data with partners such as phone companies and record labels. You can object only to the ad use, in your privacy settings.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'If you have subscribed to a paid plan, we use your data to find audiences that are similar to your profile.'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'On occasion, we may share your data - limited to what is necessary - with some of our partners, such as telecommunication operators, media companies or other retailers distributing our offers, music labels and recording companies, or audio device manufacturers.'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'You can consent or object to such use in your privacy settings'
+      action:
+        name: Account settings
+        url: https://www.deezer.com/account
+      lastVerified: 2026-11-09
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The free plan shows ads picked from what you do. You can say no in your cookie settings, one browser or device at a time, and then get general ads instead.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'If you use our free service, we use your data to build your user ad profile'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'You can consent or object to such use in your cookie settings.'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'If you object, only generic and less-relevant ads will be served.'
+      action:
+        name: Its privacy notice
+        url: https://www.deezer.com/legal/personal-datas
+      lastVerified: 2026-11-09
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy notice doesn’t say whether it trains AI on your listening, photos or voice.'
+      pages: [https://www.deezer.com/legal/personal-datas]
+      lastVerified: 2026-11-09
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps most of your data for 3 years after you last use Deezer, transactions for 10, and some data in an archive up to 5 years more, for the law and disputes.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'We keep your data only for so long as necessary to fulfill the purposes for which it was collected, or as required by law.'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'Then, we may keep some of your personal data in archiving for a period not exceeding five (5) years in order to comply with our legal obligations and for the management of any disputes.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account and everything linked to it yourself, in your account settings.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'You can delete your account and all personal data associated with your account in your account settings (Account management / Manage my account / DELETE MY ACCOUNT)'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'To get a copy of your data, you have to ask its customer care with a form.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'You can access and get a copy of your data by contacting our Customer Care via this form'
+      action:
+        name: Contact customer care
+        url: https://support.deezer.com/hc/en-gb/requests/new
+      lastVerified: 2026-11-09
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It says it may share your data with the police, without saying it needs a court order or a legal duty first.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'Finally, we may share your data with our parent companies and subsidiaries, with other companies in the event of an acquisition, merger or sale, or with law enforcement.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is held in France but can go to companies in countries with weaker privacy laws, under standard data protection contracts.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'Some of these recipients may be located in countries other than the one you are in, and these countries may not guarantee a level of personal data protection equivalent to that of your country.'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'In such cases, we take all necessary measures to ensure that these recipients provide appropriate safeguards, such as the execution of standard data protection clauses and the implementation of adequate security measures.'
+      lastVerified: 2026-11-09
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs an email address and your age; your name, phone number and gender are optional. A paid plan takes your payment details.'
+      sources:
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'Name, email address*, mobile phone number, social logins, age*, gender'
+        - url: https://www.deezer.com/legal/personal-datas
+          quote: 'Data marked with an * is required to allow you to sign up to Deezer, to subscribe to one of our paid plans or try & buy offers, or to use our service and its features.'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18, or 16 with a parent’s consent. Duo and Family plans can add Kids profiles for children up to 12.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'be at least 18 (eighteen) years old or 16 (sixteen) years old with the consent of a parent or legal guardian'
+        - url: https://support.deezer.com/hc/en-gb/articles/115002459285-Deezer-Family
+          quote: 'You can set up Kid profiles for children up to 12 years old'
+      lastVerified: 2026-11-09
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel online at any time and keep Premium until the end of your period, but only if you cancel at least 48 hours before it ends.'
+      sources:
+        - url: https://support.deezer.com/hc/en-gb/articles/214349245-Cancel-Your-Deezer-Subscription
+          quote: 'You can cancel your subscription at any time through the Deezer app or website.'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'Cancellation will be effective at the end of the current subscription period, if made at least 48 (forty-eight) hours before the end of the period.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'It gives no money back once you subscribe, but you keep Premium until the end of the period you paid for.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'Accordingly, no request for withdrawal, cancellation or refund will be accepted once the subscription is confirmed, to the fullest extent permitted by applicable laws.'
+        - url: https://support.deezer.com/hc/en-gb/articles/214349245-Cancel-Your-Deezer-Subscription
+          quote: "If you cancel your Deezer Premium subscription, you'll still have access to your Premium features until the end of your current subscription period."
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It emails you at least 30 days before a price goes up, and the new price starts only at your next payment, so you can cancel first.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'of any price increase at least 30 (thirty) days before it comes into effect'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'If the Subscription is not cancelled, the new price will apply to the Deezer User from the following monthly subscription payment due date.'
+      lastVerified: 2026-11-09
+    - topic: billing.free-trials
+      tier: good
+      reason: 'Its trial turns into a paid plan unless you cancel, and it reminds you 7 days before the trial ends.'
+      sources:
+        - url: https://www.deezer.com/en/offers
+          quote: 'We will remind you 7 days before your trial ends.'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'any trial or promotional offer is automatically converted into a monthly subscription at the price stated in the offer or, otherwise, at the price applicable to the monthly subscription to the Deezer Service.'
+      lastVerified: 2026-11-09
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say plans renew on their own, monthly or yearly, but not that it reminds you first.'
+      pages: [https://www.deezer.com/legal/cgu]
+      lastVerified: 2026-11-09
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms name no fees besides the price, which includes tax except in Canada.'
+      pages: [https://www.deezer.com/legal/cgu]
+      lastVerified: 2026-11-09
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'Moving up charges you at once for the new plan, and whether you get credit for the time left depends. Moving down starts when your period ends.'
+      sources:
+        - url: https://support.deezer.com/hc/en-gb/articles/40215679139741-How-to-Switch-Your-Deezer-Subscription-Plan-Upgrade-or-Change-Plan
+          quote: 'When you switch to a higher-tier plan, you will be charged immediately for the new plan.'
+        - url: https://support.deezer.com/hc/en-gb/articles/40215679139741-How-to-Switch-Your-Deezer-Subscription-Plan-Upgrade-or-Change-Plan
+          quote: 'Any credit for the remaining time on your previous plan will depend on your subscription type, payment method, and applicable terms.'
+        - url: https://support.deezer.com/hc/en-gb/articles/40215679139741-How-to-Switch-Your-Deezer-Subscription-Plan-Upgrade-or-Change-Plan
+          quote: "You will keep access to your current plan's features until the end of your billing period."
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: great
+      reason: 'Disputes go to the courts of the country where you live, under its law, with no arbitration.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'These Terms are governed by the law of the country where the Deezer User has his/her habitual residence.'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'any claim regarding the validity, interpretation and/or execution of the Terms shall be brought before the court of the country where the Deezer User has his/her habitual residence.'
+      lastVerified: 2026-11-09
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It emails you at least a month before new terms start. If you don’t agree, you can delete your account.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'of any amendments of the Terms at least 1 (one) month before they come into effect'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'If the Deezer User does not accept these amendments, he/she will have to delete his/her account on the Site or Application as mentioned in Article 7 above.'
+      lastVerified: 2026-11-09
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend your account or end your plan without notice or money back if you break its terms, such as by sharing your login.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'DEEZER has the right to suspend access to the Deezer Service by a Deezer User and/or cancel his/her subscription to the Deezer Service without notice or compensation, in the event that the Deezer User:'
+      lastVerified: 2026-11-09
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change Deezer as it sees fit, and close it for good without paying anything back, even for time you’ve paid ahead.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'To the fullest extent permitted by applicable laws, DEEZER has the right to make any changes or improvements to the Deezer Service as it deems necessary.'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'DEEZER is also entitled to shut the Deezer Service down permanently with no compensation payable.'
+      lastVerified: 2026-11-09
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages: [https://www.deezer.com/legal/cgu, https://www.deezer.com/legal/personal-datas]
+      lastVerified: 2026-11-09
+    - topic: security.practices
+      tier: neutral
+      reason: 'Anyone can report a security problem through its disclosure form, but it pays no reward and doesn’t say outside experts check its security.'
+      sources:
+        - url: https://vdp.deezer.com/
+          quote: 'Customers, users, researchers, partners and any other person that interacts with Deezer’s products and services are encouraged to report identified vulnerabilities and errors with such products and services.'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Premium is for your own private use, and using one account on several devices at once breaks its terms.'
+      sources:
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'The use of the Site and Application is only authorized for a personal and private use, therefore any other use, particularly in public premises and for businesses, is strictly forbidden.'
+        - url: https://www.deezer.com/legal/cgu
+          quote: 'Uses multiple simultaneous connections with the same account or attempts to do so;'
+      lastVerified: 2026-11-09
+    - topic: service.account-sharing
+      plans: [deezer.duo, deezer.family]
+      tier: good
+      reason: 'You share it with people in your household, each with their own account, and it names no checks.'
+      sources:
+        - url: https://support.deezer.com/hc/en-gb/articles/115002459285-Deezer-Family
+          quote: 'All Family members must reside in the same household'
+        - url: https://support.deezer.com/hc/en-gb/articles/16545519017885-Deezer-Duo
+          quote: 'As with our Family subscription, Deezer Duo requires both accounts to reside in the same household to redeem the offer.'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'A Family plan connects up to 13 devices (3 for the main account, 2 for each member), and a Duo plan up to 5.'
+      sources:
+        - url: https://support.deezer.com/hc/en-gb/articles/115002459285-Deezer-Family
+          quote: 'You can connect up to 13 devices. The main Admin can link up to 3 connected devices, while each additional Family member can link up to 2 devices'
+        - url: https://support.deezer.com/hc/en-gb/articles/16545519017885-Deezer-Duo
+          quote: 'You can connect to up to 5 devices across two profiles from a range of speakers, home devices and game consoles'
+      lastVerified: 2026-11-09

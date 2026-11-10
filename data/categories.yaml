@@ -37,6 +37,7 @@ service:
 # How the Features page groups features: a feature's `category`.
 feature:
   - { id: streaming, name: Streaming }
+  - { id: music, name: Music & audio }
   - { id: vpn, name: VPN }
   - { id: storage, name: Storage }
   - { id: email, name: Email }

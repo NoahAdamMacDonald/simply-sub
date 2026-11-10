@@ -1,0 +1,483 @@
+url: https://support.spotify.com/ca-en/article/understanding-my-data/
+method: fetch
+saved: 2026-11-09
+
+Understanding your data - Spotify Spotify Support Site Explore Premium
+Install App
+Sign up
+Log in
+Home
+Safety & privacy
+Understanding your data
+Ask
+You're engaging with an AI-powered tool.
+Manage your accountYour profile, payment and more.
+Understanding your data
+When you use the automated Download your data tool, you will receive several files in JSON format. JSON stands for JavaScript Object Notation, and is a structured, commonly used format that is capable of being understood by both computers and human beings. You may download three different packages of data, either separately or all at once. The packages will include a copy of the following data (if applicable to you).
+Account data
+Data type
+What's included
+Playlist
+A summary of the playlists created or saved, and any songs saved, including:
+Name of playlist.
+Date the playlist was last modified.
+Names of songs contained within the playlist.
+Names of artists for each song.
+Names of albums or episodes (if podcasts).
+Local track name, if the user uploaded locally saved audio to be played on Spotify service.
+Any descriptions added by the user to the playlist.
+The number of followers the playlist has.
+Streaming History (audio, video, and podcasts)
+A list of items (e.g. songs, videos, and podcasts) listened to or watched in the past year, including:
+Date and time of when the stream ended in Coordinated Universal Time format (UTC).
+Name of "creator" for each stream (e.g. the artist name of a music track).
+Name of items listened to or watched (e.g. title of music track or name of video).
+“msPlayed”- Stands for how many mili-seconds the track was listened to.
+Your Library
+A summary (at the point of the date of the request) of the content saved in Your Library (songs, episodes, shows, artists, and albums), including:
+Entity names.
+Album & Show names.
+Creators.
+Item’s Uniform Resource Identifiers (URIs).
+Search queries
+A list of searches made, including:
+The date and time the search was made.
+Type of device/platform used (such as iOS, desktop).
+Search Query shows what the user typed in the search field.
+Search Interaction URIs shows the list of URIs of the search results the user interacted with.
+For commands made by voice, see Voice Input below.
+Follow
+This includes (where available) at the point of the request:
+The number of followers the account has.
+The number of other accounts this account is following.
+The number of other accounts this account is blocking.
+Payments
+This includes details of the payment method (where available):
+Type - The card type e.g. Mastercard, Visa etc, or other form of payment such as a Gift Card, PayPal.
+Card Number - Where the payment method is via card, this is the last four digits only.
+Card Expiry - Where the payment method is via card, this is the four digit expiry date (e.g. 07/18).
+Creation Date - The date the payment details were provided to Spotify.
+Payment Country - The country where the card was issued e.g. United Kingdom, Sweden.
+Postal Code - The postal code the card is registered to.
+User Data
+This includes (where available):
+Spotify username.
+Email address.
+Country.
+Created from Facebook - This shows true if the account was created via Facebook.
+Facebook user ID - This is included if the user has turned on Facebook data processing and linked their Spotify account by signing in using Facebook log-in or created their Spotify account via Facebook.
+Preferred locale.
+Date of birth.
+Gender.
+Postal code.
+Postal address.
+Mobile number.
+Mobile operator.
+Mobile brand.
+Account creation - This is the user’s date of registration.
+Assured age - This is the user's estimated and/or confirmed age from an Age Check by a third party provider on Spotify.
+Message Data
+If messaging is available in your market and you’ve chosen to use this feature, this file contains a copy of your Message data, including the messages you’ve sent and received through Spotify’s messaging service.
+Customer Service History
+If you have been in contact with our customer service team as an identified Spotify user, your files will include a copy of that contact correspondence.
+Family Plan
+Family plan data (if you own a Premium for Family plan) which includes your address, city, country, name, state, street, and postal code.
+Inferences
+We draw certain inferences about your interests and preferences based on your usage of the Spotify service and using data obtained from our advertisers and other advertising partners. This includes a list of market segments with which you are currently associated. Depending on your settings, this data may be used to serve interest-based advertising to you within the Spotify service.
+Voice Input
+A list of commands made by voice (where available), including:
+The date and time the command was made.
+Language requested by the client.
+User catalogue shows what subscription type the user has.
+The transcribed voice utterance of the command.
+Language set by the client.
+Entity type shows the URI of the item (e.g. playlist, album, track) returned.
+Country.
+Precise Location Data
+If you have given Spotify permission to access your precise location data, your data file will include the most recent latitude and longitude coordinates collected while you used the Spotify app.
+This information may be used to support features such as providing recommendations for nearby concerts and events.
+Input/Prompts
+If you have provided prompts or other input to Spotify through certain features, your data file may include the information you submitted when interacting with those features, along with additional metadata associated with those interactions.
+Taste Profiles
+This file contains personalized summaries of your streaming taste and patterns. It may also include Spotify identifiers (URIs) for artists, podcast episodes, and audiobooks associated with your profile, any notes you have provided, and timestamps showing when the data was generated.
+Podcast Interactivity
+A list of interactions (such as comments) made to an interactivity feature of the podcast, including:
+The date and time the interaction was made.
+The text and/or content of the interaction.
+Spotify for Artists
+If you have a Spotify for Artist (S4A) account, additional data you’ve provided in your S4A account will be listed. This may include your business email address, your title and/or what role you have for a particular artist or licensor (i.e., manager, composer, publicist, etc.), and the name of your employer.
+Spotify for Creators
+If you have a Spotify for Creators account, personal data relating to your use of that account will be listed. This includes any shows you have access to and information about your permissions to manage those shows on Spotify for Creators.
+Wrapped data
+Your latest Wrapped data, if Wrapped is a feature in your market. This includes (where available):
+Number of unique artists listened to for the year.
+Top artists for the year.
+Milliseconds spent listening to the number 1 artists.
+Top percentage fan for the top artist.
+Number of genres listened to for the year.
+Top genres for the year.
+Top podcasts for the year.
+Milliseconds spent listening to the top podcast.
+Top percentage fan for the top podcast.
+Total milliseconds spent listening to podcasts for the year.
+Top tracks for the year.
+Amount of plays for the top track of the year.
+First date the top track was played for the year.
+Total distinct tracks played for the year.
+Total milliseconds listened on Spotify for the year.
+Day with the most time spent listening for the year.
+Minutes of content listened on the top listening day for the year.
+Top percentage of worldwide listeners for the year.
+One-off Wrapped stories for that year.
+Extended streaming history
+Data type
+What's included
+Extended Streaming History (audio, video, and podcasts)
+A list of items (e.g. songs, videos, and podcasts) listened to or watched during the lifetime of your account, including the following details:
+Date and time of when the stream ended in UTC format.
+Your Spotify username.
+Platform used when streaming the track (e.g. Android OS, Google Chromecast).
+For how many milliseconds the track was played.
+Country code of the country where the stream was played.
+IP address used when streaming the track.
+User agent used when streaming the track (e.g. a browser, like Mozilla Firefox, or Safari).
+Name of the track.
+Name of the artist, band or podcast.
+Name of the album of the track.
+A Spotify Track URI, that is identifying the unique music track.
+Name of the episode of the podcast.
+Name of the show of the podcast.
+A Spotify Episode URI, that is identifying the unique podcast episode.
+Reason why the track started (e.g. previous track finished or you picked it from the playlist).
+Reason why the track ended (e.g. the track finished playing or you hit the next button).
+Whether shuffle mode was used when playing the track.
+Information whether the user skipped to the next song.
+Information whether the track was played in offline mode.
+Timestamp of when offline mode was used, if it was used.
+Information whether the track was played during a private session.
+Look for the "Read Me First - Extended Streaming History" file provided with your data for a detailed description of each technical field that corresponds to the data described above.
+Technical Log Information
+Data type
+What's included
+Technical Log Information
+The Technical Log Information contains detailed technical data such as commands, error messages, and log strings that we have collected about your account to provide and troubleshoot the Spotify service and recipients to whom that data may have been disclosed.
+Look for the “Read Me First - Technical Log Information” file provided with your data for a detailed description of the technical log information. This file is provided by default in English, but you can always contact our customer support (privacy@spotify.com) if you need help understanding this data in your local language.
+Related Articles
+Data rights and privacy choices
+Safety and Privacy Centre
+Unlinking your Spotify from third-party creators
+Your sound capsule
+Talk to Spotify to discover and shape your listening
+Was this article helpful? Yes
+No
+Payments & billing
+Recommended topics
+Price updates
+Failed payment help
+Accepted payment methods
+How to change your payment details
+Spotify gift cards
+How to cancel Premium plans
+Payments for Duo plan
+Payments for Family plan
+Manage payments
+How to change your payment details
+Payments for Duo plan
+Payments for Family plan
+Check your receipts
+How to cancel Premium plans
+Your billing date
+Can’t subscribe to Premium in the iOS app
+Payment methods
+Accepted payment methods
+PayPal payments for Spotify
+Spotify gift cards
+Paying for Spotify with Google Play Billing
+Charge help
+Failed payment help
+Canceled but still charged
+Refund policy
+Charged but don’t use Spotify Premium
+Charged too much
+Charged twice
+Charged for a free trial
+Does the price for Premium include tax?
+Price updates
+Audiobook refund policy
+Contact us
+Manage your account
+Logging In
+Changing how you log into Spotify
+Can’t log in to Spotify
+Spotify login methods
+How to reset or change your Spotify password
+Logging in to Spotify with Facebook
+Logging in to Spotify with Apple
+Logging in to Spotify with Google
+Logging in to Spotify with Samsung
+Can’t play abroad
+Spotify disabled accounts
+How to log out of Spotify
+Profile Help
+Manage and customize your Spotify profile
+Your Spotify username and display name
+Your Spotify profile picture
+Profile and playlist user image guidelines
+Privacy and social controls
+Recently played artists
+Account settings
+Change your email address
+Change your country or region settings
+Closing your account and deleting your data
+Your Spotify notification settings
+Managing your ad preferences
+Edit your gender or date of birth
+How to log out of Spotify
+Unlinking your Spotify from third-party creators
+Security
+Protect your Spotify account
+Think your account’s been hacked?
+Is this Spotify email legit?
+Abuse detection
+Verify your email address
+Contact us
+Premium plans
+Available plans
+Premium Individual
+Premium Student
+Duo plan
+Family plan
+Spotify Kids
+Basic plans
+Plan settings
+Your Spotify plan details
+How to cancel Premium plans
+How to change Premium plans
+Premium not working
+Can’t join Family plan
+Can’t join Duo plan
+Premium Family
+Family plan
+Invite or remove Family plan members
+Address and verification for Family plan
+Payments for Family plan
+Can’t join Family plan
+Managed accounts for young listeners
+Setting up a managed account on Premium Family
+Graduating to a self-managed account
+Spotify Kids
+Premium Duo
+Duo plan
+Invite or remove Duo plan members
+Address and verification for Duo plan
+Payments for Duo plan
+Can’t join Duo plan
+Premium Student
+Premium Student
+Renew Premium Student
+Premium Student verification not working
+University or college not listed for Premium Student
+Managed accounts
+Managed accounts for young listeners
+Setting up a managed account on Premium Family
+Setting up a managed account
+Graduating to a self-managed account
+In-app features
+Getting started
+Getting started on Spotify
+What is Spotify?
+Your Library
+Now Playing view
+Where is Spotify available?
+Your Premium benefits
+Supported devices for Spotify
+Spotify for public or commercial use
+Spotify keyboard shortcuts
+Spotify for Artists
+Spotify for Creators
+App settings
+Video settings
+Explicit content settings
+Volume normalization
+Audio quality
+Lossless Audio Quality
+Autoplay tracks
+Transitions between tracks
+Equalizer
+How to enable private listening
+Internet and data usage
+Spotify storage information
+How to hide and display the Create button
+How to change the app language
+Offline Backup
+Exclusive mode
+Troubleshooting
+Reinstalling your Spotify app
+Updating your Spotify app
+Spotify not playing
+Why has the app changed?
+Spotify is offline
+Can’t hear any sound on Spotify
+Missing music or podcasts
+Spotify web player help
+Ongoing issues
+Faulty or inaccurate metadata
+Checking your Spotify app version
+Contact us
+Playlists
+Create and edit playlists
+Find playlists on Spotify
+Mixed Playlists
+Spotify Mixes
+Save and recover playlists
+Collaborative playlists
+Playlist folders
+Publishing playlists to your profile
+Customize your playlist cover
+Profile and playlist user image guidelines
+Social recommendations in playlists
+Prompted Playlists
+Importing your playlists to Spotify
+Features
+Add-ons
+Now Playing view
+Search
+Search autocomplete
+Your Library
+Listen offline
+Unlock Audiobooks
+Sort and filter
+Play Queue
+Recent activity
+Shuffle play
+Spotify Radio
+View lyrics
+Local files
+Follow artists, podcasts, and shows
+Spotify Connect
+Spotify on other apps
+How to hide and unhide songs
+Suggest a feature
+Exclude a playlist or track from your taste profile
+DJ
+Spotify lock screen widget on iPhone
+Spotify Home screen widget on Android
+Music videos on Spotify
+Fitness With Spotify
+Listening stats
+Your Updates
+Spotify Messages
+Talk to Spotify to discover and shape your listening
+Kids and family music
+Verified by Spotify
+About the Artist Details section
+AI Persona Badging
+AI Credits
+Save to Spotify
+Using Spotify with DJ software
+Social features
+Spotify Wrapped
+How to enable private listening
+Follow your friends and manage followers
+Share from Spotify
+Listening Activity
+Start or join a Jam
+Discord and Spotify
+Spotify on SharePlay
+Social recommendations in playlists
+Listening Party
+TikTok and Spotify
+Podcasts
+Podcasts and shows
+Spotify for Creators
+Podcast memberships
+Audiobooks
+Audiobooks in Premium plans
+Audiobooks Subscriber Catalog
+Purchasing audiobook listening time
+Audiobooks+
+Refund policy for purchased top-ups
+Unlock Audiobooks
+Audiobook refund policy
+Live events
+Live Events feed
+Presale and merch emails
+Concerts Near You
+Reserved by Spotify
+Listening privacy
+How to enable private listening
+Publishing playlists to your profile
+Playlist privacy and access
+Privacy and social controls
+Devices & troubleshooting
+Speakers
+Spotify on speakers
+Spotify on Alexa devices
+Spotify on Google devices
+Spotify on Sonos
+Spotify Connect
+Bluetooth help for Spotify
+Smart watches
+Spotify on Apple Watch
+Spotify on Fitbit
+Spotify on Garmin Smartwatch
+Spotify on Samsung Tizen smartwatches
+Spotify on Wear OS
+Spotify Connect
+Bluetooth help for Spotify
+TVs
+Spotify on TV
+Spotify Connect
+Gaming
+Spotify on PlayStation
+Spotify on Xbox
+Spotify Connect
+Discord and Spotify
+Cars
+Spotify in the car
+Google Maps and Spotify
+Spotify Connect
+Bluetooth help for Spotify
+Voice assistants
+Siri and Spotify
+Bixby and Spotify
+Spotify on Google devices
+Safety & privacy
+Data rights and privacy choices
+Understanding your data
+Age restricted content and checking your age
+Safety and Privacy Centre
+Need more help?
+Visit our help community to get answers from expert fans!
+Search or ask in Community
+Company
+About
+Jobs
+For the Record
+Communities
+For Artists
+For Creators
+For Authors
+Developers
+Advertising
+Investors
+Vendors
+Useful Links
+Support
+Web Player
+Free Mobile App
+Contact Spotify
+Spotify Plans
+Premium Individual
+Premium Duo
+Premium Family
+Premium Student
+Spotify Free
+Legal
+Safety & Privacy Center
+Privacy Policy
+Cookies
+About Ads
+Accessibility
+© 2026 Spotify AB
+Canada (English)
