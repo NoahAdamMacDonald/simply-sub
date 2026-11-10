@@ -333,7 +333,12 @@ which reads each page as a visitor there would, before any hand reading:
   by where the visitor is: it prices Prime (or Prime Video alone, in New Zealand) only where there's no Amazon store,
   and elsewhere hands off to the store. The US's `amazon.com/gp/video/offers` answered with Amazon's "continue
   shopping" page, a bot check: never click past it. Help articles belong to one store: an amazon.com `nodeId` can be
-  missing on amazon.ca ("We can't find the page"), so quote the store's own article.
+  missing on amazon.ca ("We can't find the page"), so quote the store's own article. Amazon's stores are `archived`,
+  so `data:baselines` saves the archive's newest copy, which for a help article can be years old (Amazon Music's terms:
+  a copy of 2020, before the terms of 2026-09-30): keep a new baseline only when its text has the facts read today,
+  delete the others, and restore the existing baselines the run rewrote (Amazon Music, 2026-11-10). Amazon Music's
+  service provider page (`nodeId=200738950`) lists the plans each country sells, and Amazon's developer documentation
+  (developer.amazon.com, "Audio Formats") gives SD's bitrates.
 - **discovery+'s pages** (M11.15): its European help centre uses the same article number in every country
   (`support.discoveryplus.com/<country>/Answer/Detail/000004067` is each one's plans and prices), and from Canada those
   pages and `discoveryplus.com/<country>` show North America's instead: read them through the country's exit and delete
@@ -400,8 +405,12 @@ which reads each page as a visitor there would, before any hand reading:
   terms and privacy policy are one page, anghami.com/legal.
 - **Mixcloud** (M11.15): mixcloud.com (its Premium page, FAQs, terms and privacy policy) answers this machine with a
   bot check, which is never retried another way; its help centre (help.mixcloud.com) opens but links Premium's details
-  back to mixcloud.com. The Internet Archive's copies (`id_`, fetched with `curl --compressed`) hold the pages' text and
-  the plan data (`premiumPlanInfo`, its amount and currency), but no country.
+  back to mixcloud.com. The Internet Archive's copies (`id_`, fetched with `curl --compressed`: without it the copy
+  comes back gzipped and page-text reads nothing) hold the pages' text and the plan data (`premiumPlanInfo`, its amount
+  and currency), but no country. www.mixcloud.com is in `data/automation.yaml`'s `archived` (an entry's `www.` is
+  dropped, so its help centre is archived too), so `data:baselines` saves the archive's copies. The help centre reads
+  live with a plain fetch, and its search (`help.mixcloud.com/api/v2/help_center/articles/search.json?query=<words>`)
+  finds articles its menus don't show (sign-in, downloads).
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
 

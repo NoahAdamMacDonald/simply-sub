@@ -2177,6 +2177,16 @@ in every D1 `json` column search parses.
     outside North America, monthly only there, and outside the Middle East and North Africa it streams Arabic songs
     only, a notable rating). Anghami's billing-date wording joins core's same-date patterns. mixcloud.com answers this
     machine with a bot check, so Mixcloud moves to part 4, from the Internet Archive's copies.
+  - **Music, part 4** (2026-11-10, a trial of the full catalog's research, the owner watching): Amazon Music
+    (`amazon-music`: Free, Standard, Standard Family, Unlimited, Unlimited Family and Unlimited Single Device, Canada
+    from amazon.ca and the US through a US exit; Ultra HD is Hi-Res Lossless, and Amazon's developer documentation
+    gives SD's bitrate, 320 kbps at most, so Free and Single Device are High). Its Prime member prices are Amazon
+    Prime's add-ons (the owner's choice): Unlimited monthly and yearly, the yearly Family plan (Prime members only)
+    and Standard; an add-on grants a plan only from its own file, so they carry no features. Amazon Music Prime stays
+    Prime's perk, since it's never sold alone. Mixcloud (`mixcloud`: Free, Premium and Pro for creators, US prices
+    from the Internet Archive's copies, since its site shows a security check; the bot reads them from the archive
+    too): Pro's creator toolkit is a perk, and the UK's nations now name the UK as an owner's country (its terms say
+    "incorporated in England").
   - **Preparing the full catalog** (2026-11-10, with the owner, before research runs without the owner): the feature
     groups of every category with no provider yet, in the registry ahead of the research (the owner's choice; each
     group's comment says what it's for), Books & audiobooks and Smart home & security as service categories with their
