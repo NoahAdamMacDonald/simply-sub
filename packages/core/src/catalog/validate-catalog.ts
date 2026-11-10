@@ -822,16 +822,17 @@ function checkInferred(
 }
 
 /**
- * Third-party feature values (M11.16): each names a value the plan states, its own or its provider's, that isn't also
- * inferred, from a page that isn't on the provider's own sites, read no later than today.
+ * Third-party feature values (M11.16): each names a value the plan's own features state, that isn't also inferred,
+ * from a page that isn't on the provider's own sites, its policies' (the shared documents it names included) or its
+ * owner's, read no later than today.
  */
 function checkThirdParty(
   provider: Provider,
   own: readonly string[],
-  { today }: CheckContext,
+  { today, policySets }: CheckContext,
   report: Report,
 ): void {
-  const sites = ownPages(provider, own);
+  const sites = ownPages(provider, own, policySets);
   provider.plans.forEach((plan, planIndex) => {
     for (const [featureId, claim] of Object.entries(plan.thirdParty ?? {})) {
       const path = ['plans', planIndex, 'thirdParty', featureId];

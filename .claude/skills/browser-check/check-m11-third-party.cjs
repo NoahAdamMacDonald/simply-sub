@@ -4,7 +4,9 @@
 // named for it and its words; Tab reaches it and its tooltip quotes them. Optimizations for Streaming (Netflix
 // Standard, written to IndexedDB) shows the downgrade to Standard with ads resting on the claim, its publisher linked
 // and reached by Tab. Settings' "Use third-party claims", on by default, is turned off by Space (skipThirdParty in
-// IndexedDB), and then neither the mark, the value nor the note is there. Light and wide only: the "Nothing will be
+// IndexedDB), and then neither the mark, the value nor the note is there. List view's card for Standard with ads (a
+// list of its own, so Streaming's suggestions stay as they are) marks the value the same way, and drops it with the
+// setting off. Light and wide only: the "Nothing will be
 // saved" notice, a chunk of its own since M11.16, shows when IndexedDB is blocked. With axe, screenshots and no
 // horizontal scroll. GET /fx is answered with fixed rates.
 // Usage: node check-m11-third-party.cjs <deps dir with playwright-core + axe-core> <output dir> <base url ending in />
@@ -31,6 +33,8 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const LIST = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4f';
 const NETFLIX = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a2b';
+const ADS_LIST = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c50';
+const ADS = '0192f1c5-1c2d-7e3f-8a4b-5c6d7e8f9a2c';
 const stamps = { createdAt: '2026-10-20T12:00:00.000Z', updatedAt: '2026-10-20T12:00:00.000Z' };
 
 /** The claim CA.json is answered with: no catalog plan has one yet. */
@@ -135,13 +139,12 @@ function idb(page, store, mode, value) {
 const readTable = (page, table) => idb(page, table, 'readonly');
 const putRecord = (page, table, record) => idb(page, table, 'readwrite', record);
 
-/** Streaming: Netflix Standard, billed monthly. */
-async function plantList(page) {
-  await putRecord(page, 'lists', { id: LIST, name: 'Streaming', ...stamps });
-  await putRecord(page, 'items', {
-    id: NETFLIX,
-    listId: LIST,
-    source: { kind: 'catalog', planId: 'netflix.standard' },
+/** Netflix `planId`, billed monthly, in `listId`. */
+function netflixItem(id, listId, planId) {
+  return {
+    id,
+    listId,
+    source: { kind: 'catalog', planId },
     billing: {
       mode: 'recurring',
       interval: 'month',
@@ -153,7 +156,34 @@ async function plantList(page) {
     rankOverrides: {},
     pinned: false,
     ...stamps,
+  };
+}
+
+/** Streaming: Netflix Standard. Ads: Netflix Standard with ads, for List view's card. */
+async function plantList(page) {
+  await putRecord(page, 'lists', { id: LIST, name: 'Streaming', ...stamps });
+  await putRecord(page, 'items', netflixItem(NETFLIX, LIST, 'netflix.standard'));
+  await putRecord(page, 'lists', { id: ADS_LIST, name: 'Ads', ...stamps });
+  await putRecord(page, 'items', netflixItem(ADS, ADS_LIST, 'netflix.standard-ads'));
+}
+
+/** List view's card for Netflix Standard with ads, its details open: its download devices' line. */
+async function adsCardLine(page) {
+  await page.goto(`${baseUrl}lists/${ADS_LIST}`);
+  const button = page.getByRole('button', {
+    name: 'Details: Netflix Standard with ads',
+    exact: true,
   });
+  await button.waitFor({ timeout: 20000 });
+  await button.click();
+  const details = page.locator(`[data-item="${ADS}"] .details-content`);
+  await details.waitFor();
+  await sleep(600);
+  return {
+    button,
+    details,
+    line: details.locator('ss-feature-lines li .feature', { hasText: 'Download devices' }),
+  };
 }
 
 async function axeCheck(page, label) {
@@ -306,6 +336,29 @@ async function run(browser, colorScheme, viewport) {
     });
     await axeCheck(page, `${label}, the card with its note`);
 
+    // List view: the item card marks the value too.
+    let ads = await adsCardLine(page);
+    const adsText = (await ads.line.first().innerText()).replace(/\s+/g, ' ').trim();
+    check(
+      `${label}: List view's card marks Standard with ads' download devices third-party`,
+      /^Download devices: .+ third-party$/.test(adsText),
+      adsText,
+    );
+    const adsLink = ads.line.first().locator('a.third-party');
+    check(
+      `${label}: the card's mark links the publication, in a new tab`,
+      (await adsLink.getAttribute('href')) === claim.url &&
+        (await adsLink.getAttribute('target')) === '_blank',
+    );
+    await ads.button.focus();
+    check(`${label}: Tab reaches the card's mark`, await tabTo(page, adsLink));
+    await noSideways(page, `${label} List view`);
+    await ads.line.first().scrollIntoViewIfNeeded();
+    await page.screenshot({
+      path: path.join(outDir, `third-party-list-${colorScheme}-${viewport.width}.png`),
+    });
+    await axeCheck(page, `${label}, List view's card with the mark`);
+
     // Settings: the switch, on by default, turned off by Space.
     await page.goto(`${baseUrl}settings`);
     const box = page.locator('mat-checkbox', { hasText: 'Use third-party claims' });
@@ -341,6 +394,15 @@ async function run(browser, colorScheme, viewport) {
       `${label}: off, the card shows neither the mark nor the value`,
       marks === 0 && !lines.some((shown) => shown.startsWith('Download devices')),
       lines.join(' / '),
+    );
+    ads = await adsCardLine(page);
+    const adsLines = await ads.details.locator('ss-feature-lines li .feature').allInnerTexts();
+    check(
+      `${label}: off, List view's card shows neither the mark nor the value`,
+      (await ads.details.locator('a.third-party').count()) === 0 &&
+        adsLines.length > 0 &&
+        !adsLines.some((shown) => shown.startsWith('Download devices')),
+      adsLines.join(' / '),
     );
   } finally {
     await context.close();

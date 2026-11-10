@@ -939,6 +939,23 @@ describe('shared policy documents (M11.1)', () => {
     );
   });
 
+  it('refuses a third-party value from a shared document’s site, one of its policies’ (M11.16)', () => {
+    const claim = {
+      publisher: 'The Group',
+      url: 'https://privacy.example.com/devices',
+      quote: 'Mullvad VPN works on five devices.',
+      lastVerified: today,
+    };
+    const withClaim = (files: CatalogSourceFile[]) =>
+      edited(files, 'data/providers/mullvad.yaml', ['plans', 0, 'thirdParty'], {
+        'vpn.devices': claim,
+      });
+    expect(messages(withClaim(withPolicies()))).toEqual([]);
+    expect(messages(withClaim(withSet()))).toEqual([
+      "data/providers/mullvad.yaml plans.0.thirdParty.vpn.devices.url: Is Mullvad VPN's own page: an official page's value goes in features, or in inferred with a reason",
+    ]);
+  });
+
   it('reports a document no file holds, a replacement for a topic it doesn’t rate, and a document no one names', () => {
     expect(
       messages(

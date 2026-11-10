@@ -730,14 +730,17 @@ tooltip gives the reason. With axe, screenshots and no horizontal scroll: 29 che
 
 `check-m11-third-party.cjs` (M11.16, third-party values) checks on `ng serve` for a Canadian in Alberta (base URL ending
 in `/`, after `npm run data:build` on the branch), with `CA.json` answered so Netflix Standard with ads' download
-devices come from a publication (no catalog plan has one yet), in both themes at both widths, keyboard only: Search's
+devices come from a publication (the catalog's own, Pandora's, is sold in the US only), in both themes at both widths,
+keyboard only: Search's
 Netflix details, its Standard with ads chip chosen, mark the value "third-party", linking the publication in a new
 tab, named "Third-party, from <publisher> (opens in a new tab): “<quote>”", reached by Tab with the quote as its
 tooltip; Optimizations for Streaming (Netflix Standard, written to IndexedDB) shows the downgrade to Standard with ads
-with "Rests on third-party claims: Download devices: …, per The Verge", the publisher's link reached by Tab; Settings'
-"Use third-party claims", on, turned off by Space (`skipThirdParty` in IndexedDB), after which neither the mark, the
-value nor the note is there. Light and wide only, the "Nothing will be saved" notice (a chunk of its own since M11.16)
-with IndexedDB blocked, and Continue anyway. With axe, screenshots and no horizontal scroll: 80 checks. Once the list
+with "Rests on third-party claims: Download devices: …, per The Verge", the publisher's link reached by Tab; List
+view's card for Standard with ads (a list of its own, Ads, so Streaming's suggestions stay as they are) marks it the
+same way, Tab reaching the mark from its details button; Settings' "Use third-party claims", on, turned off by Space
+(`skipThirdParty` in IndexedDB), after which neither the mark, the value nor the note is there, on Search or List
+view. Light and wide only, the "Nothing will be saved" notice (a chunk of its own since M11.16) with IndexedDB
+blocked, and Continue anyway. With axe, screenshots and no horizontal scroll: 104 checks. Once the list
 has Netflix Standard, Search's card shows that plan first: choose a plan's chip (`label.chip`) before reading its
 features.
 
