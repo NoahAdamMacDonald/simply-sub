@@ -175,6 +175,8 @@ describe('the region files and coverage, with provinces', () => {
     expect(coverageGaps([provider])).toEqual([
       // The national plan has no Quebec price of its own, which its country's covers; Quebec's plan isn't in Ontario.
       { provider: 'example', plan: 'example.plan-2', region: 'CA-ON', why: 'priced' },
+      // Sold in Canada only, with no availableIn: whether it's sold in the US is unknown.
+      { provider: 'example', plan: 'example.*', region: 'US', why: 'home' },
     ]);
   });
 });

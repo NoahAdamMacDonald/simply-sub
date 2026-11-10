@@ -28,6 +28,7 @@ const why: Record<CoverageGap['why'], string> = {
   priced: 'though its other plans have one there',
   available: 'though its availableIn lists them',
   global: 'though a plan of it is priced for everywhere',
+  home: 'so whether it’s sold there is unknown and Sold in hides it: price it there, or give availableIn from an official list',
 };
 
 let errors = 0;

@@ -1,3 +1,4 @@
+import { providerAvailability } from './availability';
 import type { Plan, Provider } from './provider';
 import { countryOf, globalRegion, groupsOf, isSubdivision } from './regions';
 
@@ -12,8 +13,11 @@ import { countryOf, globalRegion, groupsOf, isSubdivision } from './regions';
  */
 export const researchRegions: readonly string[] = ['CA', 'US'];
 
-/** Why a region counts for a provider: its plans are priced there, its availableIn lists it, or it sells everywhere. */
-export type CoverageReason = 'priced' | 'available' | 'global';
+/**
+ * Why a region counts for a provider: its plans are priced there, its availableIn lists it, it sells everywhere, or
+ * it's Canada or the US, where whether it's sold is unknown (`home`).
+ */
+export type CoverageReason = 'priced' | 'available' | 'global' | 'home';
 
 export interface CoverageGap {
   provider: string;
@@ -69,14 +73,26 @@ export function coverageGaps(providers: readonly Provider[]): CoverageGap[] {
   return providers.flatMap((provider) => {
     if (provider.retired !== undefined) return [];
     const regions = coverageRegions(provider);
-    return provider.plans
+    const plans = provider.plans
       .filter((plan) => plan.retired === undefined && plan.prices.some((price) => price.amount > 0))
       .flatMap((plan) =>
         [...regions]
           .filter(([region]) => !pricedIn(plan, region))
           .map(([region, why]) => ({ provider: provider.id, plan: plan.id, region, why })),
       );
+    return [...plans, ...unknownAtHome(provider)];
   });
+}
+
+/**
+ * Canada and the US, where the catalog's users are, when whether the provider is sold there is unknown: no price
+ * there and no availableIn. Search's Sold in hides it there, so a provider sold in Canada vanished for Canadians
+ * (Mixcloud, 2026-11-10). The fix is a price there, or availableIn from an official list when it isn't sold there.
+ */
+function unknownAtHome(provider: Provider): CoverageGap[] {
+  return researchRegions
+    .filter((region) => providerAvailability(provider, region) === 'unknown')
+    .map((region) => ({ provider: provider.id, plan: `${provider.id}.*`, region, why: 'home' }));
 }
 
 /** A "Coverage:" note in a provider file: its words, for the gaps it explains. */
