@@ -9,8 +9,8 @@
 # Payment Information), so its months are priced every 30 days.
 # Region checklist for its other regions, 2026-11-09: 1. no country paths found; 2. no picker read; 3. not looked for;
 # 4. checkout not opened; 5. its help centre gives US prices only; 6. Edge, a plain fetch and Mullvad Browser get 403
-# or nothing, a split-tunnelled Chromium nothing from tidal.com; the archive's copy of its pricing page shows a bare
-# "$" with "+ applicable taxes", so its country isn't known; 7. no bill offered.
+# or nothing, a split-tunnelled Chromium nothing from tidal.com; the archive's copy of its pricing page is the US's (its
+# page data: "countryCode" "US", "currency" "USD", 30 days); 7. no bill offered.
 # Not listed: the Student plans ("available to eligible students").
 # Bundles and resellers: none named; Apple and Google Play bill it in their apps (its cancelling article), and some
 # subscriptions come "through a third party provider ... bundled together with other services" (its terms): partners.
@@ -41,6 +41,7 @@ owner:
     name: Block investor relations
     url: https://investors.block.xyz/overview/default.aspx
   quotes:
+    - 'Each of our brands unlocks different aspects of the economy for more people.'
     - 'TIDAL is a music platform that empowers artists to thrive as entrepreneurs.'
     - 'NYSE: XYZ'
   country:
@@ -53,13 +54,19 @@ owner:
     lastVerified: 2026-11-09
   lastVerified: 2026-11-09
 # Ways to pay (M11.5), read 2026-11-09 in its help centre's payment article: a card and PayPal ("Double-check the card
-# information or PayPal login credentials"), and its cancelling article's Apple and Google Play. No card networks named.
+# information or PayPal login credentials"), Venmo on its apps (`other`), and its cancelling article's Apple and Google
+# Play. "Tidal restricts the use of prepaid cards" (the same article). No card networks named.
 paymentMethods:
   - methods: [card, paypal]
     page: Add or Update Payment Information
     url: https://support.tidal.com/hc/en-us/articles/115003662545-Add-or-Update-Payment-Information
     quotes:
       - 'Incorrect details. Double-check the card information or PayPal login credentials'
+  - methods: [other]
+    page: Add or Update Payment Information
+    url: https://support.tidal.com/hc/en-us/articles/115003662545-Add-or-Update-Payment-Information
+    quotes:
+      - 'Venmo - (IOS & Android Only)'
   - methods: [app-store]
     page: Cancel Tidal Subscription or Trial
     url: https://support.tidal.com/hc/en-us/articles/201314601-Cancel-Tidal-Subscription-or-Trial
@@ -141,9 +148,11 @@ plans:
         sourceUrl: https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types
 
 # Terms and policies (M11.15): its Terms of Use as the Internet Archive saved them on 2026-10-14 (Canada's version, with
-# Tidal Music LLC; the other countries' weren't read), its Privacy Notice as saved on 2026-10-31, and its help centre's
+# Tidal Music LLC: the page picks its text by the visitor's country, and the archive's other copies are Canada's too, so
+# the US's, the only country priced, couldn't be read), its Privacy Notice as saved on 2026-10-31, and its help centre's
 # articles on cancelling, refunds, deleting an account, Family and managing an account, read 2026-11-09 through a
-# split-tunnelled Chromium. Its Content Guidelines and AI-Powered Tools pages hold no topic beyond these. Calibrated
+# split-tunnelled Chromium. Its Content Guidelines and AI-Powered Tools pages hold no topic beyond these. Its sign-up
+# form shows nothing to this machine, so sign-up data is read from its account help. Calibrated
 # against Spotify's and Deezer's grades. Not rated: rights over your content and its apps' licence (not topics for
 # music).
 policies:
@@ -165,7 +174,7 @@ policies:
   ratings:
     - topic: privacy.data-collection
       tier: poor
-      reason: 'It uses what you play and search to train its recommendation and search systems, for you and other users. It names no setting to stop that.'
+      reason: 'It uses what you play and search to train its recommendation and search systems, for you and other users. You can only object by contacting it.'
       sources:
         - url: https://tidal.com/privacy
           quote: 'We also use this data to train our personalisation and search algorithms so that they offer relevant music and search recommendations to you and to other TIDAL users.'
@@ -187,7 +196,7 @@ policies:
       lastVerified: 2026-10-31
     - topic: privacy.ads-tracking
       tier: poor
-      reason: 'Tidal has no ads, but it and its ad partners use cookies to aim its own ads at you elsewhere, from what you do. You can refuse cookies only browser by browser.'
+      reason: 'It and its ad partners use cookies to aim its own ads at you elsewhere, from what you do. You can refuse cookies only browser by browser.'
       sources:
         - url: https://tidal.com/privacy
           quote: 'Targeted advertising: TIDAL and its ad partners that provide advertising or other functionality on TIDAL’s behalf, may use cookies and similar technologies to help us tailor the advertising of our Services to you as informed by your interests.'
@@ -195,14 +204,26 @@ policies:
         name: Its privacy notice (cookies)
         url: https://tidal.com/privacy
       lastVerified: 2026-10-31
-    - topic: privacy.ai-training
-      status: not-stated
-      reason: 'It uses AI to run its features, but its privacy notice doesn’t say whether it trains AI on what you type or upload.'
-      pages: [https://tidal.com/privacy, https://tidal.com/terms]
+    - topic: privacy.ads-tracking
+      regions: [US]
+      tier: good
+      reason: 'In the US, it places ad-targeting cookies only if you agree to them, and you can change your mind at any time.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'Before we place any targeting cookies on your device when you visit TIDAL websites or use TIDAL clients, we will request your consent through a cookie preference centre.'
       lastVerified: 2026-10-31
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'If you use its AI features, it takes a permanent right to use what you put in and get back, for any reason, including its AI products, and can pass that right on. You can’t take it back.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'transferable, irrevocable, perpetual, and sub-licensable right to use'
+        - url: https://tidal.com/terms
+          quote: 'your AI Content throughout the world in any media for any reason, including to provide, promote, and/or incorporate into the AI Products or the Tidal Service.'
+      lastVerified: 2026-10-14
     - topic: privacy.data-retention
-      tier: neutral
-      reason: 'It keeps your data as long as it needs it: your account and playlists while your account exists, and some records for as long as the law requires.'
+      tier: poor
+      reason: 'It keeps your data as long as it needs it, your account and playlists while your account exists, and states no set periods.'
       sources:
         - url: https://tidal.com/privacy
           quote: 'We need to keep it for the duration your TIDAL account exists so that we can maintain your account.'
@@ -237,8 +258,18 @@ policies:
       lastVerified: 2026-10-31
     - topic: privacy.data-location
       status: not-stated
-      reason: 'Its privacy notice says your data may go to the US and other countries, but the archive’s copy cuts off before the safeguards it uses.'
+      reason: 'Its privacy notice describes where your data goes only for people in Europe, the UK and Switzerland.'
       pages: [https://tidal.com/privacy]
+      lastVerified: 2026-10-31
+    - topic: privacy.data-location
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'Your data can go to the US and elsewhere, under the EU’s and UK’s approved safeguards, such as standard contracts.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'Your data may be transferred to the United States and eventually globally'
+        - url: https://tidal.com/privacy
+          quote: 'To transfer your data, we rely on adequacy decisions issued by the European Commission and the FDPIC respectively, as well as EU Standard Contractual Clauses that have been adopted by the European Commission and the UK International Data Transfer Addendum and Swiss Addendum.'
       lastVerified: 2026-10-31
     - topic: privacy.sign-up-data
       tier: neutral
@@ -271,11 +302,13 @@ policies:
           quote: 'If you live in a country that is not part of the United Kingdom, European Union, European Economic Area (“EEA”) or Brazil (The US and otherwise) and have purchased a Subscription, we will not refund any fees paid to us'
       lastVerified: 2026-11-09
     - topic: billing.price-changes
-      tier: poor
-      reason: 'Its terms make no promise to tell you before a new price, except as Ontario’s and Quebec’s law requires (30 days).'
+      tier: great
+      reason: 'It tells you about a new price before the end of the period in which it changes, so it applies only from your next period, and you can cancel first.'
       sources:
         - url: https://tidal.com/terms
-          quote: 'Such renewal will be billed at the non-discounted rate for the applicable Subscription tier.'
+          quote: 'Tidal may from time to time make changes to Subscription fees, and will provide you with advance notice before the end of the billing period in which the change is made.'
+        - url: https://tidal.com/terms
+          quote: 'If you do not accept the change to your Subscription, you will be entitled to cancel your Subscription.'
       lastVerified: 2026-10-14
     - topic: billing.free-trials
       tier: neutral
@@ -317,7 +350,7 @@ policies:
       lastVerified: 2026-10-14
     - topic: legal.terms-changes
       tier: neutral
-      reason: 'It tells you about changes by email or on its site, without saying how far ahead, and keeping on using Tidal means you accept them.'
+      reason: 'It tells you about changes by email or on its site, without saying how far ahead (30 days in Ontario and Quebec, by their law), and keeping on using Tidal means you accept them.'
       sources:
         - url: https://tidal.com/terms
           quote: 'provided that, for material changes, we will seek to supplement such notice by email or other means'
@@ -365,7 +398,7 @@ policies:
       reason: 'You can add up to 5 people, each with their own account, as long as their accounts are in your country.'
       sources:
         - url: https://support.tidal.com/hc/en-us/articles/360004405337-Family-Plan
-          quote: 'Add up to 5 family members to your plan. All members must have Tidal accounts located in the'
+          quote: 'Add up to 5 family members to your plan. All members must have Tidal accounts located in the same country'
       lastVerified: 2026-11-09
     - topic: service.device-limits
       tier: neutral

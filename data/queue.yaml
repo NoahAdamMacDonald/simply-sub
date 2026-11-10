@@ -140,7 +140,7 @@
   sitelinks: 85
   status: rejected
   date: 2026-11-09
-  note: "vk.ru is Russia's social network, and its music subscription is sold there; none of the catalog's regions (read 2026-11-09)"
+  note: "Sold in Russia (vk.ru), outside the catalog's regions (read 2026-11-09)"
 - id: google-ai
   name: Google AI
   website: https://gemini.google.com
@@ -692,7 +692,7 @@
   sitelinks: 21
   status: rejected
   date: 2026-11-09
-  note: "melon.com is South Korea's music service, in Korean and priced in won; none of the catalog's regions (read 2026-11-09)"
+  note: "Sold in South Korea (melon.com, in Korean, priced in won), outside the catalog's regions (read 2026-11-09)"
 - id: rumble
   name: Rumble
   website: https://rumble.com
@@ -864,7 +864,7 @@
   sitelinks: 15
   status: rejected
   date: 2026-11-09
-  note: "y.qq.com is China's music service, in Chinese; none of the catalog's regions (read 2026-11-09)"
+  note: "Sold in China (y.qq.com, in Chinese), outside the catalog's regions (read 2026-11-09)"
 - id: comodo-internet-security
   name: Comodo Internet Security
   website: https://www.comodo.com
@@ -993,9 +993,8 @@
   source: wikidata
   wikidata: Q6883832
   sitelinks: 12
-  status: unreadable
-  date: 2026-11-09
-  note: 'Read 2026-11-09: mixcloud.com/select and its help centre answer with a bot check ("Just a moment..."), so its plans stay unread'
+  status: queued
+  note: 'Mixcloud Premium is a listener plan (7.99 a month, its premium page on 2026-11-09), for music part 3; its pages answer this machine with a bot check at times'
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse
@@ -1039,7 +1038,7 @@
   sitelinks: 10
   status: rejected
   date: 2026-11-09
-  note: "soribada.com is South Korea's music service, in Korean and priced in won; none of the catalog's regions (read 2026-11-09)"
+  note: "Sold in South Korea (soribada.com, in Korean, priced in won), outside the catalog's regions (read 2026-11-09)"
 - id: keychain
   name: Keychain
   website: https://www.apple.com/osx/preview
@@ -1084,6 +1083,7 @@
   wikidata: Q16526979
   sitelinks: 9
   status: queued
+  note: 'Sells to Canada (anghami.com/plus: USD4.69 a month, read 2026-11-09), for music part 3'
 - id: emsisoft-anti-malware
   name: Emsisoft Anti-Malware
   website: https://www.emsisoft.com/de/software/antimalware
@@ -1101,7 +1101,7 @@
   sitelinks: 8
   status: rejected
   date: 2026-11-09
-  note: "kugou.com is China's music service, in Chinese; none of the catalog's regions (read 2026-11-09)"
+  note: "Sold in China (kugou.com, in Chinese), outside the catalog's regions (read 2026-11-09)"
 - id: netease-cloud-music
   name: NetEase Cloud Music
   website: https://music.163.com
@@ -1111,7 +1111,7 @@
   sitelinks: 8
   status: rejected
   date: 2026-11-09
-  note: "music.163.com is China's music service, in Chinese and priced in yuan; none of the catalog's regions (read 2026-11-09)"
+  note: "Sold in China (music.163.com, in Chinese, priced in yuan), outside the catalog's regions (read 2026-11-09)"
 - id: aol-active-virus-shield
   name: AOL Active Virus Shield
   website: https://www.activevirusshield.com
