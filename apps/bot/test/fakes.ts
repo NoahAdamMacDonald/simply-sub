@@ -243,11 +243,13 @@ export async function fakeServices(
       return found;
     },
     readBundle: async () => undefined,
+    readPolicySets: async () => [],
     readRobots: async (hosts) =>
       Object.fromEntries(hosts.map((host) => [host, 'allow-all' as const])),
     readRepository: async () => repository,
     readSettings: async () => options.settings ?? settings(),
-    readBaseline: async (url) => baselines[url] ?? null,
+    readBaselines: async (urls) =>
+      Object.fromEntries(urls.map((url) => [url, baselines[url] ?? null])),
     readTopics: async () => policyTopicsFileSchema.parse(parse(policyTopicsYaml)),
     ask: async (system, user) =>
       world.review?.(system, user) ?? { response: { decision: 'unsure', quotes: [] } },

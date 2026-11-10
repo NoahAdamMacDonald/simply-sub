@@ -42,23 +42,27 @@ import { GitHub } from './github';
 import { parse } from 'yaml';
 import type { Services } from './run';
 import { botSearch } from './search';
+import { Requests, rethrowOutOfRequests } from './requests';
 import { kvState, type BotState, type KvLike } from './state';
 import { bundleOwner, catalogIndex } from './targets';
 
 // The night's services in the Worker: the catalog D1, the web (polite: robots.txt, one request per URL, en-CA
 // headers), Browser Rendering, Workers AI, GitHub (the settings, the baselines, the pull requests) and KV (what the bot
-// remembers between nights, under bot: keys in the namespace it shares with the API). Tests use fakes of these (test/run.spec.ts).
+// remembers between nights, under bot: keys in the namespace it shares with the API). Every request out goes through
+// `requests`, which counts each step's (requests.ts). Tests use fakes of these (test/run.spec.ts).
 
 /** Canadian English, so a site that prices by locale shows Canada's (BLUEPRINT §7.7's region caveat). */
 const headers = { 'User-Agent': userAgent, 'Accept-Language': 'en-CA,en;q=0.9' };
 const timeoutMs = 15_000;
 const maxRobotsBytes = 500_000;
 
-export function workerServices(env: Env): Services {
+export function workerServices(env: Env, requests = new Requests()): Services {
+  const send = requests.fetch;
   const github = new GitHub({
     token: env.GITHUB_TOKEN,
     repository: env.GITHUB_REPOSITORY,
     base: env.GITHUB_BASE,
+    fetch: send,
   });
   const state = kvState(env.KV as unknown as KvLike);
   return {
@@ -81,31 +85,13 @@ export function workerServices(env: Env): Services {
       )
         .map((row) => JSON.parse(row.json) as Bundle)
         .filter((bundle) => here.has(bundleOwner(bundle)));
-      // Policies aren't in D1 (M11.8): the site's index of their files says which pages each cites, and the shared
-      // documents these providers check (each by the first of the night's providers naming it) are read from their
-      // files, a request each.
+      // Policies aren't in D1 (M11.8): the site's index of their files says which pages each cites, the shared
+      // documents' too, which the step checking each reads (readPolicySets).
       const policies = policyIndexPart(
-        await siteJson(new URL(policyIndexPath, env.SITE_URL)),
+        await siteJson(new URL(policyIndexPath, env.SITE_URL), send),
         namers,
       );
-      const firsts = [...namers].sort();
-      const checked = Object.keys(policies.sets).filter((set) =>
-        here.has(firsts.find((id) => policies.providers[id]?.shared?.includes(set)) ?? ''),
-      );
-      const sets = await Promise.all(
-        checked.map(async (id) =>
-          sharedPolicyFileSchema.safeParse(
-            await siteJson(new URL(sharedPolicyFilePath(id), env.SITE_URL)),
-          ),
-        ),
-      );
-      return catalogIndex(
-        providers,
-        bundles,
-        sets.flatMap((set) => (set.success ? [set.data] : [])),
-        policies,
-        namers,
-      );
+      return catalogIndex(providers, bundles, [], policies, namers);
     },
     async readProvider(id) {
       const [row] = await select<{ json: string }>(
@@ -116,16 +102,26 @@ export function workerServices(env: Env): Services {
       return row && (JSON.parse(row.json) as SnapshotProvider);
     },
     async readPolicies(url) {
-      return policyFileSchema.parse(await siteJson(url)).policies;
+      return policyFileSchema.parse(await siteJson(url, send)).policies;
+    },
+    async readPolicySets(ids) {
+      const sets = await Promise.all(
+        ids.map(async (id) =>
+          sharedPolicyFileSchema.safeParse(
+            await siteJson(new URL(sharedPolicyFilePath(id), env.SITE_URL), send),
+          ),
+        ),
+      );
+      return sets.flatMap((set) => (set.success ? [set.data] : []));
     },
     seedNext: (today) =>
       seedNext(
         catalogDatabase(env.DB),
         {
           index: async () =>
-            seedIndexSchema.parse(await siteJson(new URL(seedIndexPath, env.SITE_URL))),
+            seedIndexSchema.parse(await siteJson(new URL(seedIndexPath, env.SITE_URL), send)),
           provider: async (id) =>
-            (await siteResponse(new URL(seedProviderPath(id), env.SITE_URL))).text(),
+            (await siteResponse(new URL(seedProviderPath(id), env.SITE_URL), send)).text(),
           sha256,
         },
         { today, daily: seedDailyWrites },
@@ -140,16 +136,21 @@ export function workerServices(env: Env): Services {
     },
     async readRobots(hosts) {
       const found: Record<string, Robots> = {};
-      for (const host of hosts) found[host] = await robotsOf(host);
+      for (const host of hosts) found[host] = await robotsOf(host, send);
       return found;
     },
     readRepository: () => github.state(),
     async readSettings(commit) {
       return automationSchema.parse(parse(await github.text('data/automation.yaml', commit)));
     },
-    async readBaseline(url, commit) {
-      const text = await github.textIfThere(baselinePath(url), commit);
-      return text === undefined ? null : (readBaseline(text) ?? null);
+    async readBaselines(urls, commit) {
+      const texts = await github.texts(urls.map(baselinePath), commit);
+      return Object.fromEntries(
+        urls.map((url) => {
+          const text = texts[baselinePath(url)];
+          return [url, text === undefined ? null : (readBaseline(text) ?? null)];
+        }),
+      );
     },
     async readTopics(commit) {
       return policyTopicsFileSchema.parse(
@@ -168,9 +169,9 @@ export function workerServices(env: Env): Services {
         },
       ),
     state,
-    pages: (robots) => pageDeps(env, robots, github),
+    pages: (robots) => pageDeps(env, robots, github, send),
     async bankOfCanada(start) {
-      const { get } = politeWeb({});
+      const { get } = politeWeb({}, send);
       const got = await get(
         `${bankOfCanadaSeriesUrl}?start_date=${start}`,
         'application/json',
@@ -184,11 +185,16 @@ export function workerServices(env: Env): Services {
         return { error: 'The series isn’t JSON' };
       }
     },
-    discovery: discoveryServices(env, github, state),
+    discovery: discoveryServices(env, github, state, send),
     async readFiles(paths, commit) {
-      const files: Record<string, string> = {};
-      for (const path of paths) files[path] = await github.text(path, commit);
-      return files;
+      const texts = await github.texts(paths, commit);
+      return Object.fromEntries(
+        paths.map((path) => {
+          const text = texts[path];
+          if (text === undefined) throw new Error(`GitHub has no ${path} at ${commit}`);
+          return [path, text];
+        }),
+      );
     },
     propose: (state, made, branch) => github.propose(state, made, branch),
   };
@@ -208,14 +214,14 @@ async function select<T>(db: D1Database, sql: string, ...values: unknown[]): Pro
  * One of the site's own static files (M11.8), which data:build writes beside the catalog: the Terms and policies
  * files, and the seed's.
  */
-async function siteResponse(url: string | URL): Promise<Response> {
-  const response = await fetch(url, { headers, signal: AbortSignal.timeout(timeoutMs) });
+async function siteResponse(url: string | URL, send: typeof fetch): Promise<Response> {
+  const response = await send(url, { headers, signal: AbortSignal.timeout(timeoutMs) });
   if (!response.ok) throw new Error(`${String(url)}: ${response.status} ${response.statusText}`);
   return response;
 }
 
-async function siteJson(url: string | URL): Promise<unknown> {
-  return (await siteResponse(url)).json();
+async function siteJson(url: string | URL, send: typeof fetch): Promise<unknown> {
+  return (await siteResponse(url, send)).json();
 }
 
 /**
@@ -251,28 +257,30 @@ async function sha256(text: string): Promise<string> {
   return [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
-async function robotsOf(host: string): Promise<Robots> {
+async function robotsOf(host: string, send: typeof fetch): Promise<Robots> {
   try {
-    const response = await fetch(`https://${host}/robots.txt`, {
+    const response = await send(`https://${host}/robots.txt`, {
       headers,
       signal: AbortSignal.timeout(timeoutMs),
     });
     if (response.status >= 400 && response.status < 500) return 'allow-all';
     if (!response.ok) return 'disallow-all';
     return parseRobots((await response.text()).slice(0, maxRobotsBytes));
-  } catch {
+  } catch (error) {
+    // Out of requests isn't the site saying no: on 2026-11-09 it made every host after the 50th disallow-all.
+    rethrowOutOfRequests(error);
     return 'disallow-all';
   }
 }
 
 /** Reads the web politely: each host's robots.txt first (once a step), with the bot's User-Agent and en-CA. */
-function politeWeb(known: Readonly<Record<string, Robots>>) {
+function politeWeb(known: Readonly<Record<string, Robots>>, send: typeof fetch) {
   // A host first met in this step (an icon on a CDN, a help centre): its robots.txt, read once.
   const robots = new Map(Object.entries(known));
   const allowed = async (url: URL) => {
     let rules = robots.get(url.host);
     if (rules === undefined) {
-      rules = await robotsOf(url.host);
+      rules = await robotsOf(url.host, send);
       robots.set(url.host, rules);
     }
     return robotsAllow(rules, `${url.pathname}${url.search}`);
@@ -286,7 +294,7 @@ function politeWeb(known: Readonly<Record<string, Robots>>) {
     if (!url || !/^https?:$/.test(url.protocol)) return { error: 'Not a web address' };
     if (!(await allowed(url))) return { error: 'robots.txt doesn’t allow the bot to read it' };
     try {
-      const response = await fetch(url, {
+      const response = await send(url, {
         headers: { ...headers, Accept: accept },
         signal: AbortSignal.timeout(timeoutMs),
       });
@@ -298,6 +306,7 @@ function politeWeb(known: Readonly<Record<string, Robots>>) {
         ? { error: 'The page is too big' }
         : { url: response.url, bytes };
     } catch (error) {
+      rethrowOutOfRequests(error);
       return {
         error:
           error instanceof Error && error.name === 'TimeoutError'
@@ -330,8 +339,13 @@ async function browserText(env: Env, url: string): Promise<PageResult> {
   }
 }
 
-function pageDeps(env: Env, known: Readonly<Record<string, Robots>>, github: GitHub): PageDeps {
-  const { allowed, get } = politeWeb(known);
+function pageDeps(
+  env: Env,
+  known: Readonly<Record<string, Robots>>,
+  github: GitHub,
+  send: typeof fetch,
+): PageDeps {
+  const { allowed, get } = politeWeb(known, send);
   return {
     async page(address): Promise<PageResult> {
       const got = await get(address, 'text/html,application/xhtml+xml', 4_000_000);
@@ -374,7 +388,8 @@ function pageDeps(env: Env, known: Readonly<Record<string, Robots>>, github: Git
     async committedLogo(id) {
       try {
         return await github.bytes(`data/logos/${id}.png`, env.GITHUB_BASE);
-      } catch {
+      } catch (error) {
+        rethrowOutOfRequests(error);
         return undefined;
       }
     },
@@ -382,12 +397,17 @@ function pageDeps(env: Env, known: Readonly<Record<string, Robots>>, github: Git
 }
 
 /** What the discovery needs (M3.11): the queue and registries from GitHub, the web with a search, and Workers AI. */
-function discoveryServices(env: Env, github: GitHub, state: BotState): DiscoveryServices {
+function discoveryServices(
+  env: Env,
+  github: GitHub,
+  state: BotState,
+  send: typeof fetch,
+): DiscoveryServices {
   return {
     state,
     text: (path, commit) => github.text(path, commit),
     batchPulls: () => github.batchPulls(),
-    web: (robots, search) => discoveryWeb(env, robots, state, search),
+    web: (robots, search) => discoveryWeb(env, robots, state, search, send),
     extract: (system, user) =>
       (env.AI as unknown as { run(model: string, input: unknown): Promise<unknown> }).run(
         workersAiModel,
@@ -411,8 +431,9 @@ function discoveryWeb(
   known: Readonly<Record<string, Robots>>,
   state: BotState,
   search: { budgets: SearchBudget[]; month: string },
+  send: typeof fetch,
 ): DiscoveryWeb {
-  const { robots, allowed, get } = politeWeb(known);
+  const { robots, allowed, get } = politeWeb(known, send);
   const texts = new Map<string, string>();
   const read = new Map<string, Promise<FetchedPage | { error: string }>>();
   const find = botSearch(
@@ -426,6 +447,7 @@ function discoveryWeb(
       used: () => state.searches(search.month),
       count: (engine) => state.countSearch(search.month, engine),
     },
+    send,
   );
   return {
     // Each page once a step, whichever kind asks for it.

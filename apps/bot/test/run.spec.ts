@@ -13,7 +13,9 @@ import {
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 import { digestBranch, reviewFile } from '../src/digest';
-import { nightSlice, runNight, sliceSize } from '../src/run';
+import { NightContinues, partSteps } from '../src/night';
+import { Requests } from '../src/requests';
+import { nightSlice, runNight, sliceSize, type Services } from '../src/run';
 import { memoryState } from '../src/state';
 import { catalogIndex } from '../src/targets';
 import {
@@ -95,8 +97,16 @@ describe('a quiet night', () => {
       // Tonight's slice is the whole catalog, read in one part (M11.8).
       'read the catalog 1',
       'read robots.txt 1',
+      // Its first night: every page is due, pagesPerStep a step, and each logo in a step of its own.
       'check mullvad',
+      'check mullvad 2',
+      'check mullvad 3',
+      "check mullvad's logo",
       'check netflix',
+      'check netflix 2',
+      'check netflix 3',
+      'check netflix 4',
+      "check netflix's logo",
       // The Bank of Canada's series (M11.14), with the pricing pages.
       'read the Bank of Canada’s rate',
       'drop what tonight’s providers no longer cite',
@@ -304,11 +314,14 @@ describe('the weekly digest', () => {
       asked.push(url);
       return read(url);
     };
-    await runNight(today, stepper([]), services);
-    expect(asked).toEqual([
+    const names: string[] = [];
+    await runNight(today, stepper(names), services);
+    // Once in each step that checks a page they cite (a provider's pages are checked pagesPerStep a step).
+    expect([...new Set(asked)]).toEqual([
       'https://sub.simplely.ca/data/policies/mullvad.json',
       'https://sub.simplely.ca/data/policies/netflix.json',
     ]);
+    expect(asked.length).toBeLessThan(names.filter((name) => name.startsWith('check ')).length);
   });
 });
 
@@ -610,7 +623,8 @@ describe('a rotating slice of the catalog each night (M11.8)', () => {
       const names: string[] = [];
       await runNight(date, stepper(names), services);
       parts.push(names.filter((name) => name.startsWith('read the catalog ')).length);
-      checked.push(...names.flatMap((name) => /^check (.+)$/.exec(name)?.[1] ?? []));
+      // A provider's first step is `check <id>`, its next ones `check <id> 2` and on (pagesPerStep pages each).
+      checked.push(...names.flatMap((name) => /^check ([^ ']+)$/.exec(name)?.[1] ?? []));
     }
     // 250 providers in three slices of at most 100.
     expect(parts.sort()).toEqual([2, 4, 4]);
@@ -731,5 +745,128 @@ describe('seeding what waits (M11.8)', () => {
     const review =
       services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
     expect(review).toContain('**the catalog seed**: Seeding what waits failed: D1 is unavailable');
+  });
+});
+
+describe('a night in parts (2026-11-10)', () => {
+  /**
+   * `services` sending what the Worker's send (services.ts), through `requests`: the repository's reads, a file or a
+   * GraphQL read of many, the site's files, each robots.txt, page and download, and a pull request's calls.
+   */
+  function counted(services: Services, requests: Requests): Services {
+    const send = async (count: number) => {
+      for (let at = 0; at < count; at++) await requests.fetch('https://example.com/');
+    };
+    const pages = services.pages.bind(services);
+    return {
+      ...services,
+      readRepository: async () => (await send(4), services.readRepository()),
+      readSettings: async (commit) => (await send(1), services.readSettings(commit)),
+      readIndex: async (ids, namers) => (await send(1), services.readIndex(ids, namers)),
+      readPolicies: async (url) => (await send(1), services.readPolicies(url)),
+      readPolicySets: async (ids) => (await send(ids.length), services.readPolicySets(ids)),
+      readRobots: async (hosts) => (await send(hosts.length), services.readRobots(hosts)),
+      readBaselines: async (urls, commit) => (await send(1), services.readBaselines(urls, commit)),
+      readFiles: async (paths, commit) => (await send(1), services.readFiles(paths, commit)),
+      bankOfCanada: async (start) => (await send(1), services.bankOfCanada(start)),
+      propose: async (state, made, branch) => (
+        await send(6),
+        services.propose(state, made, branch)
+      ),
+      pages: (robots) => {
+        const deps = pages(robots);
+        return {
+          ...deps,
+          page: async (url) => (await send(1), deps.page(url)),
+          download: async (url, max, accept) => (await send(1), deps.download(url, max, accept)),
+          committedLogo: async (id) => (await send(1), deps.committedLogo(id)),
+        };
+      },
+    };
+  }
+
+  /** A changed Netflix price, for a digest to propose. */
+  function changedWorld(): World {
+    const world = quietWorld();
+    world.pages['https://help.netflix.com/en/node/24926/ca'] = netflixChanged;
+    world.ai = (request) => ({
+      response: {
+        prices: request.messages[1].content.includes('1. Netflix Standard:')
+          ? [
+              {
+                plan: 1,
+                found: true,
+                regularAmount: 19.99,
+                currency: 'CAD',
+                onlySalePrice: false,
+                quote: 'Standard: $19.99 / month',
+              },
+            ]
+          : [],
+      },
+    });
+    return world;
+  }
+
+  /** The night in parts of at most `limit` requests, as the Worker runs it: each part's requests and steps. */
+  async function inParts(limit: number) {
+    const state = memoryState();
+    const services = await fakeServices(changedWorld(), undefined, {
+      baselines: baselinesOf(quietWorld()),
+      state,
+    });
+    const parts: { sent: number; names: string[] }[] = [];
+    let summary: Awaited<ReturnType<typeof runNight>> | undefined;
+    while (summary === undefined && parts.length < 30) {
+      const done = { sent: 0, names: [] as string[] };
+      parts.push(done);
+      const requests = new Requests(async () => (done.sent++, new Response('ok')));
+      const steps = partSteps(
+        stepper(done.names),
+        requests,
+        state.night(today, parts.length > 1),
+        limit,
+      );
+      try {
+        summary = await runNight(today, steps, counted(services, requests));
+      } catch (error) {
+        if (!(error instanceof NightContinues)) throw error;
+      }
+    }
+    return { parts, summary, proposals: services.proposals };
+  }
+
+  it('goes on in new parts until it’s done, none past its requests, to the digest of one night', async () => {
+    const whole = await inParts(10_000);
+    expect(whole.parts).toHaveLength(1);
+    const { parts, summary, proposals } = await inParts(15);
+    expect(parts.length).toBeGreaterThan(3);
+    for (const { sent } of parts) expect(sent).toBeLessThanOrEqual(15);
+    // Every step ran once, but the one a part stopped at, which the next part began with.
+    const ran = parts.flatMap(({ names }) => names);
+    const repeated = ran.filter((name, at) => ran.indexOf(name) !== at);
+    expect(repeated).toEqual(parts.slice(1).map(({ names }) => names[0]));
+    // The night's digest, as one part would have made it.
+    expect(summary?.pullRequest).toBe('https://github.com/NoahAdamMacDonald/simply-sub/pull/1');
+    expect(proposals).toEqual(whole.proposals);
+  });
+
+  it('notes a side step that fails, the Bank of Canada’s rate, and still opens the digest with it', async () => {
+    const world = quietWorld();
+    const services = await fakeServices(world, undefined, { baselines: baselinesOf(world) });
+    services.bankOfCanada = async () => {
+      throw new Error('Too many subrequests by single Worker invocation.');
+    };
+    const names: string[] = [];
+    const summary = await runNight(today, stepper(names), services);
+    expect(names).toContain("note the Bank of Canada’s rate's failure");
+    // Nothing else on the night stops: the digest is built and the check dates are kept.
+    expect(names.slice(-2)).toEqual(['read the discovery batch', 'save the check dates']);
+    expect(summary.pullRequest).toBe('https://github.com/NoahAdamMacDonald/simply-sub/pull/1');
+    const review =
+      services.proposals[0].changes.find((change) => change.path === reviewFile)?.text ?? '';
+    expect(review).toContain(
+      '**the Bank of Canada’s rate**: It failed: Too many subrequests by single Worker invocation.',
+    );
   });
 });

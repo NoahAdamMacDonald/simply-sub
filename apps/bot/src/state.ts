@@ -7,14 +7,15 @@ import {
   type SearchEngine,
 } from '@simply-sub/core';
 import type { DiscoveryBatch, ServiceWork } from './discovery';
+import type { Memo } from './night';
 import type { Searches } from './search';
 import type { Finding } from './types';
 
 // What the bot remembers between nights (BLUEPRINT §6.4, M3.9), in the KV namespace it shares with the API under keys
 // that start with `bot:`: when each page and logo was last checked (one key, written once a night), the day the last
 // digest was built, what each page that changed is waiting to propose (a key per page, kept until main's
-// baseline has caught up with it), the month's searches (M3.11), and the discovery batch under way with each
-// service's work so far, until its pull request is opened. The API's nightly clean-up adds the price reports, a key per
+// baseline has caught up with it), the month's searches (M3.11), the discovery batch under way with each service's
+// work so far, until its pull request is opened, and what each step of a night in parts returned, for its next parts. The API's nightly clean-up adds the price reports, a key per
 // reported plan (M10.10), which the weekly digest takes. The catalog itself stays in Git: nothing here is a source of
 // truth.
 
@@ -39,6 +40,8 @@ export interface BotState {
   lastDigest(): Promise<IsoDate | undefined>;
   saveDigest(date: IsoDate): Promise<void>;
   pending(): Promise<Pending[]>;
+  /** The pending entries of these keys (pages' URLs, logo: and failed: keys) that are still there. */
+  pendingOf(keys: readonly string[]): Promise<Pending[]>;
   putPending(pending: Pending): Promise<void>;
   dropPending(key: string): Promise<void>;
   /** The month's searches (YYYY-MM), by engine. */
@@ -53,12 +56,17 @@ export interface BotState {
   /** The price reports the API handed over (M10.10), a plan each, until a digest has them. */
   reports(): Promise<ReportedPlan[]>;
   dropReport(plan: string): Promise<void>;
+  /**
+   * What each step of `date`'s night returned, for its later parts (night.ts), kept three days; `read` from the second
+   * part on.
+   */
+  night(date: IsoDate, read: boolean): Memo & { read: boolean };
 }
 
 /** The part of Workers KV the state uses. */
 export interface KvLike {
   get(key: string): Promise<string | null>;
-  put(key: string, value: string): Promise<void>;
+  put(key: string, value: string, options?: { expirationTtl?: number }): Promise<void>;
   delete(key: string): Promise<void>;
   list(options: { prefix: string; cursor?: string }): Promise<{
     keys: { name: string }[];
@@ -73,6 +81,9 @@ const pendingPrefix = 'bot:pending:';
 const searchPrefix = 'bot:search:';
 const discoveryKey = 'bot:discovery';
 const workPrefix = 'bot:discovery:';
+const nightPrefix = 'bot:night:';
+/** A night's steps are kept three days: its parts take minutes, and a night after has its own. */
+const nightTtl = 3 * 24 * 60 * 60;
 
 /** The state in a KV namespace. */
 export function kvState(kv: KvLike): BotState {
@@ -102,6 +113,14 @@ export function kvState(kv: KvLike): BotState {
         }
         cursor = page.list_complete ? undefined : page.cursor;
       } while (cursor);
+      return found;
+    },
+    async pendingOf(keys) {
+      const found: Pending[] = [];
+      for (const key of keys) {
+        const value = await kv.get(pendingKey(key));
+        if (value) found.push(JSON.parse(value) as Pending);
+      }
       return found;
     },
     async putPending(pending) {
@@ -148,6 +167,25 @@ export function kvState(kv: KvLike): BotState {
     async dropReport(plan) {
       await kv.delete(reportKey(plan));
     },
+    night(date, read) {
+      const key = (name: string) =>
+        `${nightPrefix}${date}:${name.length > 200 ? hash(name) : name}`;
+      return {
+        read,
+        async get(name) {
+          const value = await kv.get(key(name));
+          return value === null
+            ? undefined
+            : (JSON.parse(value) as { value: unknown } | { failed: string });
+        },
+        async put(name, value) {
+          await kv.put(key(name), JSON.stringify({ value }), { expirationTtl: nightTtl });
+        },
+        async fail(name, reason) {
+          await kv.put(key(name), JSON.stringify({ failed: reason }), { expirationTtl: nightTtl });
+        },
+      };
+    },
   };
 }
 
@@ -162,12 +200,17 @@ function parseJson(value: string | null): unknown {
 
 /** A page's KV key: a hash of its URL, since KV keys are at most 512 bytes. */
 function pendingKey(key: string): string {
-  let hash = 0x811c9dc5;
-  for (let index = 0; index < key.length; index++) {
-    hash ^= key.charCodeAt(index);
-    hash = Math.imul(hash, 0x01000193) >>> 0;
+  return `${pendingPrefix}${hash(key)}`;
+}
+
+/** An FNV-1a hash of `text`, in hex. */
+function hash(text: string): string {
+  let hashed = 0x811c9dc5;
+  for (let index = 0; index < text.length; index++) {
+    hashed ^= text.charCodeAt(index);
+    hashed = Math.imul(hashed, 0x01000193) >>> 0;
   }
-  return `${pendingPrefix}${hash.toString(16).padStart(8, '0')}`;
+  return hashed.toString(16).padStart(8, '0');
 }
 
 /** A state in memory, for the tests. */

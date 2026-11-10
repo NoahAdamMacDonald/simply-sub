@@ -2237,6 +2237,30 @@ compares each page with its baseline (`data/baselines/`, section 6.5) before any
   instead, and the findings stay pending until that pull request is merged or closed. Text files go into the commit's
   tree in one request, and only images need a blob each, so a digest of many pages stays within a step's 50 requests.
 
+**A night in parts (2026-11-10):** on the free plan a Workflow instance may send 50 requests out (Cloudflare's own
+services, D1, KV, Workers AI and Browser Rendering, have 1,000), counted for the instance, not the step. The nights of
+2026-11-07 to 2026-11-09 spent them on robots.txt (40 hosts in one step) and the startup reads, so every check failed
+"Too many subrequests" on all its tries, and the Bank of Canada's step, which nothing caught, ended the night before
+the digest. Now:
+- **Every request out is counted** (`apps/bot/src/requests.ts`): GitHub's, the site's files, robots.txt, pages, the
+  Internet Archive, icons, the Bank of Canada and the searches. A step gets what's left of its part's 40 (10 spare for a
+  failed try's), and the request that would pass it is never sent.
+- **Parts** (`night.ts`): a step that runs out stops its part, and the night goes on in a new instance
+  (`price-check-<date>-2`…, at most 20), which runs the night from the top: what earlier parts' steps returned, or
+  why they failed, is kept in KV (`bot:night:<date>:<step>`, three days), so they're neither run nor tried again, and
+  it starts where the last part stopped, a minute later, once KV has the results everywhere. A step that needs more
+  than a whole part fails, noted, rather than going on for ever.
+- **Small steps:** robots.txt only for the hosts of tonight's pages (what's due, and a reported plan's), 10 a step,
+  read each night (RFC 9309 keeps a copy a day at most); a provider's pages 8 a step (`check netflix`, `check netflix
+  2`…), its Terms and policies and their shared documents read only by a step with a page they cite, and its logo in
+  a step of its own (`check netflix's logo`); the index a request a part (the shared documents by id); the baselines a
+  step needs, and the digest's files, many in one GraphQL request (`GitHub.texts`); the digest gathered 25 pending
+  entries a step.
+- **Side steps noted:** the Bank of Canada's rate, tidying the findings, the last digest's date, the review, the
+  reports, the digest's gathering and building, and the discovery are each caught when their tries are used up and
+  noted as a `failed:` entry, so the night goes on and the week's digest lists them; the reports are let go only once a
+  digest has them.
+
 **Settings (M3.8):** `data/automation.yaml`, checked by `data:validate` against core's `automationSchema`
 (`pipeline/automation.ts`, `data/schema/automation.schema.json`): a cadence for pricing pages, policy pages, logos and
 discovery (`daily`, `weekly`, `monthly` or `off`), the digest's weekday, the reviewer (`scheduled-claude`, `workers-ai`
@@ -3728,6 +3752,20 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
 
 **Still open**
 None.
+
+**Resolved (2026-11-10, the nightly bot in parts)**
+- **What failed:** the Workflow runs of 2026-11-07, 11-08 and 11-09 each ended "Errored" after about 42 minutes. Their
+  steps show why: the first robots.txt step read 40 hosts, and with the startup's reads the instance passed the free
+  plan's 50 requests out, so the next robots.txt steps made every host "disallow-all" (a caught error) and each provider's
+  check failed "Too many subrequests by single Worker invocation" on all three tries, 90 seconds apart; then the Bank of
+  Canada's step failed uncaught, so "gather the digest" and "build the digest" never ran. The limit is the instance's
+  (Cloudflare's own guide was corrected from "per step"); a paid plan's `limits.subrequests` would raise it, which the
+  free plan doesn't allow.
+- **The fix** (section 6.4, "A night in parts"): every request counted, each step within what's left of its part's 40,
+  the night going on in new instances with earlier steps' results kept in KV, steps small enough to fit, and every
+  side step caught and noted, so the digest opens on its day and lists what failed. Tests: the parts on their own
+  (`night.spec.ts`), a night of more than three parts of 15 giving the same digest as one part, and the Bank of
+  Canada's failure noted in an opened digest (`run.spec.ts`).
 
 **Resolved (2026-11-09, free use)**
 - **The audit:** every provider without a free plan was read for free use, its help centre and home page as well as
