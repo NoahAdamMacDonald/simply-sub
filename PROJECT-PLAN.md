@@ -2155,7 +2155,8 @@ in every D1 `json` column search parses.
     YouTube's Premium plans state them, and YouTube Music Premium joins as three plans of `youtube` (Individual, Family,
     and Two-person in Australia and France). Spotify (`spotify`: Free, Premium Individual, Duo and Family, every catalog
     region, with Audiobooks+ as an add-on), Apple Music (`apple-music`: Individual and Family, under Apple's shared
-    documents), Deezer (`deezer`: Free, Premium, Duo and Family, monthly and yearly, through each country's exit; no
+    documents), Deezer (`deezer`: Free, Premium, Duo and Family, monthly and yearly (Italy monthly only), through each
+    country's exit; no
     Free in five countries, no Duo in New Zealand, which prices in US dollars) and SoundCloud (`soundcloud`: Free, Go
     and Go+, priced every 30 days as its Go terms bill them). The owner chose Amazon Music as a provider of its own,
     with the Prime member price as an add-on on Amazon Prime, for part 2.

@@ -8,13 +8,14 @@
 # Region checklist, 2026-11-09: 1. no country paths; 2. no picker; 3. not looked for; 4. checkout's plan page read, no
 # further; 5. none; 6. Edge from Canada and through each exit; 7. no bill offered.
 # Bundles and resellers: none on its pages; Apple bills it in its app (its Go terms), a way to pay.
-# Features, read 2026-11-09: each card's "Ad-free listening", "Save unlimited tracks for offline listening", "Access
-# full catalog" and "High quality audio", and Go+'s "Mix tracks within select DJ apps" (a perk). Its help centre says
-# otherwise of Go: "High-quality streaming is an exclusive feature for SoundCloud Go+ subscribers. While standard tracks
-# are streamed at 160kbps AAC, HQ tracks are encoded in 256kbps AAC" (High Quality Streaming), and Go+ "Grants full
-# access to the entire catalog, high-quality audio" (Choosing the Right Subscription); the plan cards win, as the price
-# research rule says, and the pull request asks the owner. Free listeners "can stream 96k and 160k" (Audio Streaming
-# Formats), so Standard. No audiobooks.
+# Features, read 2026-11-09: each card's "Ad-free listening" and "Save unlimited tracks for offline listening", and
+# Go+'s "Mix tracks within select DJ apps" (a perk). Go's card also lists "Access full catalog" and "High quality
+# audio", but its help centre's current comparison gives both to Go+ alone ("Grants full access to the entire catalog,
+# high-quality audio", Choosing the Right Subscription), and its bitrates: "High-quality streaming is an exclusive
+# feature for SoundCloud Go+ subscribers. While standard tracks are streamed at 160kbps AAC, HQ tracks are encoded in
+# 256kbps AAC" (High Quality Streaming). Audio quality is defined by bitrate, so Go is Standard and Go+ High, with
+# Go+'s full catalog a perk; the pull request asks the owner. Free listeners "can stream 96k and 160k" (Audio
+# Streaming Formats), so Standard. No audiobooks.
 
 id: soundcloud
 name: SoundCloud
@@ -78,6 +79,8 @@ features:
   platforms: [web, android, ios]
 
 perks:
+  - id: full-catalog
+    name: Full access to the SoundCloud catalog
   - id: dj-apps
     name: Mix tracks within select DJ apps
 
@@ -112,7 +115,7 @@ plans:
     link: https://checkout.soundcloud.com/go
     features:
       ad-free: true
-      audio.quality: high
+      audio.quality: standard
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
@@ -215,7 +218,7 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
-    perks: [dj-apps]
+    perks: [full-catalog, dj-apps]
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.
       - region: CA
@@ -309,7 +312,9 @@ plans:
 
 # Terms and policies, read 2026-11-09 (M11.15): the Terms of Use (last amended January 19, 2026; the page has its French
 # copy too), the SoundCloud Go and SoundCloud DJ Terms of Use, the Privacy Policy, and its help centre's cancelling
-# article. Its Community Guidelines and Cookie Policy hold no topic beyond these. Calibrated against Spotify's and
+# article, its articles on reporting a security vulnerability and on law enforcement requests (its Law Enforcement
+# Guidelines, which that article names, weren't found). Its Community Guidelines and Cookie Policy hold no topic beyond
+# these. Calibrated against Spotify's and
 # Deezer's grades. Not rated: rights over your content and its apps' licence (not topics for music).
 policies:
   links:
@@ -321,6 +326,10 @@ policies:
       url: https://soundcloud.com/pages/privacy
     - name: Cancel your subscription
       url: https://help.soundcloud.com/hc/en-us/articles/360056011234-Cancel-your-subscription
+    - name: Reporting a Security Vulnerability
+      url: https://help.soundcloud.com/hc/en-us/articles/115003561228-Reporting-a-Security-Vulnerability
+    - name: Law enforcement disclosure requests
+      url: https://help.soundcloud.com/hc/en-us/articles/115003449967-Law-enforcement-disclosure-requests
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -389,11 +398,11 @@ policies:
         url: https://soundcloud.com/pages/privacy
       lastVerified: 2026-11-09
     - topic: privacy.government-requests
-      tier: poor
-      reason: 'It gives your data to authorities when the law requires it, and also for checked requests about crimes or suspected wrongdoing.'
+      tier: neutral
+      reason: 'It gives your data to authorities only when the law requires it, its help centre says, though its privacy policy keeps the right to answer other checked requests.'
       sources:
-        - url: https://soundcloud.com/pages/privacy
-          quote: '(iii) to respond to verified requests relating to a criminal investigation or alleged or suspected illegal activity'
+        - url: https://help.soundcloud.com/hc/en-us/articles/115003449967-Law-enforcement-disclosure-requests
+          quote: 'In line with our Privacy Policy, we can only disclose requested information to a competent authority when we are obliged to do so by applicable law.'
       lastVerified: 2026-11-09
     - topic: privacy.data-location
       tier: neutral
@@ -499,18 +508,16 @@ policies:
       pages: [https://soundcloud.com/terms-of-use, https://soundcloud.com/pages/privacy]
       lastVerified: 2026-11-09
     - topic: security.practices
-      tier: poor
-      reason: 'It says only that it has security measures you mustn’t get around, and names no security audit, certification or way to report a flaw.'
+      tier: neutral
+      reason: 'Security experts can report problems through its disclosure programme on Bugcrowd, but it doesn’t say outside experts check its security or publish what they find.'
       sources:
-        - url: https://soundcloud.com/terms-of-use
-          quote: '(xvi) You must not violate, circumvent or attempt to violate or circumvent any data security measures employed by SoundCloud or any Uploader'
+        - url: https://help.soundcloud.com/hc/en-us/articles/115003561228-Reporting-a-Security-Vulnerability
+          quote: 'Our Responsible Disclosure program is hosted on Bugcrowd.'
       lastVerified: 2026-11-09
     - topic: service.account-sharing
-      tier: great
-      reason: 'Someone else may use your account with your permission. Go plays on one device at a time.'
-      sources:
-        - url: https://soundcloud.com/terms-of-use
-          quote: "(xiii) You must not use or attempt to use another person's account, password, or other information, unless you have express permission from that other person."
+      status: not-stated
+      reason: 'Its terms make you answer for all use of your login, whether you allowed it or not, but don’t say whether you may share Go.'
+      pages: [https://soundcloud.com/terms-of-use, https://pages.soundcloud.com/go-terms-of-use]
       lastVerified: 2026-11-09
     - topic: service.device-limits
       tier: neutral

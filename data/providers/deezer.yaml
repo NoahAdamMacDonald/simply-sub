@@ -710,8 +710,8 @@ policies:
         url: https://www.deezer.com/account
       lastVerified: 2026-11-09
     - topic: privacy.data-sharing
-      tier: neutral
-      reason: 'It uses paying members’ data to find people like them for its ads, and shares data with partners such as phone companies and record labels. You can object to the ad use in your privacy settings.'
+      tier: poor
+      reason: 'It uses paying members’ data to find people like them for its ads, and shares data with partners such as phone companies and record labels. You can object only to the ad use, in your privacy settings.'
       sources:
         - url: https://www.deezer.com/legal/personal-datas
           quote: 'If you have subscribed to a paid plan, we use your data to find audiences that are similar to your profile.'

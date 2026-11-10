@@ -48,9 +48,8 @@ billingCurrency:
   }
 cancelUrl: https://support.spotify.com/ca-en/article/cancel-premium/
 sources: { pricing: https://www.spotify.com/ca-en/premium/ }
-# Owner (M11.2), read 2026-11-09: its investor relations site names the company and its listing. Spotify Technology
-# S.A. is registered in Luxembourg (its 6-K for the second quarter of 2024, on its investor site's document host,
-# s29.q4cdn.com, which isn't one of its sites); its terms are with Spotify AB in Stockholm, the country given.
+# Owner (M11.2), read 2026-11-09: its investor relations site names the company and its listing, and its contact page
+# its address in Luxembourg. Its terms are with its subsidiary Spotify AB, in Stockholm.
 owner:
   name: 'Spotify Technology S.A., a public company (NYSE: SPOT)'
   page:
@@ -59,12 +58,13 @@ owner:
   quotes:
     - 'Spotify Technology S.A. (NYSE: SPOT) will post its third quarter 2026 results and deck to shareholders on Thursday, October 22, 2026 before market open.'
   country:
-    code: SE
+    code: LU
     page:
-      name: Terms of Use
-      url: https://www.spotify.com/ca-en/legal/end-user-agreement/
+      name: Contact
+      url: https://www.spotify.com/ca-en/about-us/contact/
     quotes:
-      - 'These Terms are between you and Spotify AB, Regeringsgatan 19, 111 53, Stockholm, Sweden.'
+      - 'Spotify Technology S.A.'
+      - 'L-1724 Luxembourg'
     lastVerified: 2026-11-09
   lastVerified: 2026-11-09
 # Ways to pay (M11.5), read 2026-11-09: the help centre's "Accepted payment methods" says only that the checkout lists
@@ -613,16 +613,13 @@ policies:
           quote: 'We also keep streaming history for the life of an account'
       lastVerified: 2026-11-09
     - topic: privacy.data-deletion
-      tier: neutral
-      reason: 'You can close your account and have your data deleted from its help page. Deleting starts after 7 days, but it doesn’t say how long it takes.'
+      tier: great
+      reason: 'You can close your account and have your data deleted yourself, from its help page. After that it keeps some data only for the law, lawsuits and safety.'
       sources:
         - url: https://support.spotify.com/ca-en/article/close-account/
           quote: 'If you want to close your account and delete your data permanently from all Spotify apps and services, you can click the following link.'
-        - url: https://support.spotify.com/ca-en/article/close-account/
-          quote: 'After those 7 days, your account cannot be reactivated and the process to delete your data will be initiated.'
-      action:
-        name: Close your account and delete your data
-        url: https://support.spotify.com/ca-en/article/close-account/
+        - url: https://www.spotify.com/ca-en/legal/privacy-policy/
+          quote: 'After your account is deleted, we keep some data for a longer time period but for very limited purposes.'
       lastVerified: 2026-11-09
     - topic: privacy.data-portability
       tier: good
@@ -731,7 +728,7 @@ policies:
       lastVerified: 2026-11-09
     - topic: legal.disputes
       tier: bad
-      reason: 'Disputes go to private arbitration, one person at a time, with no class actions and no way to opt out, wherever the law lets it, as in Canada outside Quebec, the UK and the EU.'
+      reason: 'Disputes go to private arbitration, one person at a time, with no class actions and no way to opt out, wherever the law lets it.'
       sources:
         - url: https://www.spotify.com/ca-en/legal/end-user-agreement/
           quote: 'If you are located in, are based in, have offices in, or do business in a jurisdiction in which this Section 6.3. is enforceable, the following mandatory arbitration provisions apply to you:'
@@ -757,8 +754,8 @@ policies:
       lastVerified: 2026-11-09
     - topic: legal.disputes
       regions: [DE]
-      tier: great
-      reason: 'In Germany, German law applies, and its terms name no arbitration, no court of its choosing and no ban on group lawsuits.'
+      tier: good
+      reason: 'In Germany, German law applies and its terms name no arbitration, but they don’t say which courts hear a dispute.'
       sources:
         - url: https://www.spotify.com/de-en/legal/end-user-agreement/
           quote: 'deutschem Recht, unter Ausschluss der Kollisionsnormen'

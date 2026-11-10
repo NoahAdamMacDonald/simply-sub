@@ -84,8 +84,8 @@
   category: music
   type: enum
   values:
-    - { id: standard, name: Standard }
-    - { id: high, name: High (256 to 320 kbps), aliases: [high quality, 320 kbps] }
+    - { id: standard, name: Standard (under 256 kbps) }
+    - { id: high, name: High (256 to 320 kbps), aliases: [320 kbps, 256 kbps] }
     - { id: lossless, name: Lossless, aliases: [hifi, hi-fi, flac, cd quality], headline: true }
     - id: hi-res
       name: Hi-Res Lossless

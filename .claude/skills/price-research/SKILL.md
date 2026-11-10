@@ -359,7 +359,9 @@ which reads each page as a visitor there would, before any hand reading:
   clicking Annual) and SoundCloud (`checkout.soundcloud.com/go`) price by where the visitor is: read each country
   through its exit. Google's consent page meets European exits first (`click?:Reject all`), and checking YouTube
   Premium's known prices in the same session tells where an exit was placed. SoundCloud's Go terms bill "a 30-day
-  period", so its cards' "/month" is priced every 30 days.
+  period", so its cards' "/month" is priced every 30 days. Its help centre (help.soundcloud.com) answers a plain fetch
+  with a JavaScript challenge and reads in Edge; where its Go card and its help centre's comparison disagree on Go's
+  audio, the help centre's bitrates decide (audio quality is defined by bitrate).
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
 
