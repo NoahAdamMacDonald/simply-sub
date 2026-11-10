@@ -3,9 +3,11 @@ import type { Provider } from './provider';
 import {
   ratingSubjectSchema,
   ratingSubjects,
+  type MajorityHolder,
   type Owner,
   type Rater,
   type RatingSubject,
+  type StockListing,
 } from './rater';
 
 // What a card's Outside ratings and Owner show (M11.2, BLUEPRINT §4.10): each rater's label, its date and a link to
@@ -69,11 +71,21 @@ export interface OwnerCitation {
    * doesn't say it, linked to its words.
    */
   country?: { code: string; cited?: { page: string; href: string; quotes: string[] } };
+  /**
+   * A public company's shares (the owner's item of 2026-11-10): the listed company when it's the owner's parent, its
+   * listings and majority holder, and its own page when the owner's doesn't say them, linked to its words.
+   */
+  stock?: {
+    company?: string;
+    listings: StockListing[];
+    majorityHolder?: MajorityHolder;
+    cited?: { page: string; href: string; quotes: string[] };
+  };
 }
 
 /** The company behind a provider, and a link to its own words that say so. */
 export function ownerCitation(owner: Owner): OwnerCitation {
-  const { country } = owner;
+  const { country, stock } = owner;
   return {
     name: owner.name,
     page: owner.page.name,
@@ -88,6 +100,21 @@ export function ownerCitation(owner: Owner): OwnerCitation {
               page: country.page.name,
               href: quoteLink(country.page.url, country.quotes),
               quotes: country.quotes,
+            },
+          }),
+      },
+    }),
+    ...(stock && {
+      stock: {
+        ...(stock.company && { company: stock.company }),
+        listings: stock.listings ?? [],
+        ...(stock.majorityHolder && { majorityHolder: stock.majorityHolder }),
+        ...(stock.page &&
+          stock.quotes && {
+            cited: {
+              page: stock.page.name,
+              href: quoteLink(stock.page.url, stock.quotes),
+              quotes: stock.quotes,
             },
           }),
       },

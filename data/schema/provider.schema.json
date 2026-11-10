@@ -1972,6 +1972,98 @@
           "additionalProperties": false,
           "description": "Where the company is from (the owner’s choice, 2026-11-03): every provider says"
         },
+        "stock": {
+          "type": "object",
+          "properties": {
+            "company": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The listed company, when it isn’t the owner itself but its parent (Alphabet Inc., for Google LLC)"
+            },
+            "listings": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "exchange": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "The exchange, as the page names it (TSX, NYSE, Nasdaq)"
+                  },
+                  "symbol": {
+                    "type": "string",
+                    "pattern": "^[A-Z0-9]+(?:[.-][A-Z0-9]+)*$",
+                    "description": "Its ticker symbol there (NFLX, RCI.B)"
+                  }
+                },
+                "required": ["exchange", "symbol"],
+                "additionalProperties": false
+              },
+              "description": "Where its shares trade, each with its ticker symbol"
+            },
+            "majorityHolder": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "As the page names them (OSN Group, the Rogers Control Trust)"
+                },
+                "percent": {
+                  "type": "number",
+                  "exclusiveMinimum": 50,
+                  "maximum": 100,
+                  "description": "Their part, in percent, when the page gives it: 55.45 means 55.45%"
+                },
+                "of": {
+                  "type": "string",
+                  "enum": ["shares", "votes"],
+                  "description": "Whether the page counts their part of the shares or of the votes (a dual-class company’s founders often hold most votes with few shares)"
+                }
+              },
+              "required": ["name", "of"],
+              "additionalProperties": false,
+              "description": "Who holds more than half of its shares or votes, when its pages name someone"
+            },
+            "page": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "As the card links it (Investor relations)"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "Its investor page or annual report, on the provider's sites or its owner's"
+                }
+              },
+              "required": ["name", "url"],
+              "additionalProperties": false,
+              "description": "Its page, when the owner’s page doesn’t say it"
+            },
+            "quotes": {
+              "minItems": 1,
+              "maxItems": 3,
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 },
+              "description": "Its words there that name each exchange and symbol, and the majority holder"
+            },
+            "lastVerified": {
+              "type": "string",
+              "format": "date",
+              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+              "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+              "description": "When its page was read"
+            }
+          },
+          "additionalProperties": false,
+          "description": "A public company’s ticker symbols and majority holder (the owner’s item of 2026-11-10), quoted like its name"
+        },
         "lastVerified": {
           "type": "string",
           "format": "date",

@@ -1310,6 +1310,14 @@ function checkOwner(
       checkReadOn(country.lastVerified, ['owner', 'country', 'lastVerified'], today, report);
     }
   }
+  // A public company's shares (the owner's item of 2026-11-10), from the same sites.
+  const { stock } = owner;
+  if (stock?.page && !isOnDomain(stock.page.url, sites)) {
+    report(['owner', 'stock', 'page', 'url'], offSite);
+  }
+  if (stock?.lastVerified) {
+    checkReadOn(stock.lastVerified, ['owner', 'stock', 'lastVerified'], today, report);
+  }
   checkReadOn(owner.lastVerified, ['owner', 'lastVerified'], today, report);
 }
 

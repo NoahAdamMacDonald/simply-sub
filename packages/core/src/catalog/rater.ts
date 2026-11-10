@@ -190,6 +190,148 @@ export const ownerCountrySchema = z
   });
 export type OwnerCountry = z.infer<typeof ownerCountrySchema>;
 
+/** A share listing: the exchange as the page names it, and the company's symbol there. */
+export const stockListingSchema = z.strictObject({
+  exchange: textSchema.describe('The exchange, as the page names it (TSX, NYSE, Nasdaq)'),
+  symbol: z
+    .string()
+    .regex(
+      /^[A-Z0-9]+(?:[.-][A-Z0-9]+)*$/,
+      'Use the ticker symbol in capitals, as the exchange lists it (BCE, RCI.B)',
+    )
+    .describe('Its ticker symbol there (NFLX, RCI.B)'),
+});
+export type StockListing = z.infer<typeof stockListingSchema>;
+
+/** Who holds most of a public company's shares or votes, as its own pages name them. */
+export const majorityHolderSchema = z.strictObject({
+  name: textSchema.describe('As the page names them (OSN Group, the Rogers Control Trust)'),
+  percent: z
+    .number()
+    .gt(50, 'A majority is more than 50%')
+    .max(100, 'Must be a percentage, 100 at most')
+    .describe('Their part, in percent, when the page gives it: 55.45 means 55.45%')
+    .optional(),
+  of: z
+    .enum(['shares', 'votes'])
+    .describe(
+      'Whether the page counts their part of the shares or of the votes (a dual-class company’s founders often hold most votes with few shares)',
+    ),
+});
+export type MajorityHolder = z.infer<typeof majorityHolderSchema>;
+
+/**
+ * A public company's shares (the owner's item of 2026-11-10): where they trade, and who holds most of them or most of
+ * the votes when someone does. Its own page and quotes when the owner's don't say it all (an investor page, an annual
+ * report); either one's words may name each fact.
+ */
+export const ownerStockSchema = z
+  .strictObject({
+    company: textSchema
+      .describe(
+        'The listed company, when it isn’t the owner itself but its parent (Alphabet Inc., for Google LLC)',
+      )
+      .optional(),
+    listings: z
+      .array(stockListingSchema)
+      .min(1, 'Leave listings out instead of listing none')
+      .describe('Where its shares trade, each with its ticker symbol')
+      .optional(),
+    majorityHolder: majorityHolderSchema
+      .describe('Who holds more than half of its shares or votes, when its pages name someone')
+      .optional(),
+    page: z
+      .strictObject({
+        name: textSchema.describe('As the card links it (Investor relations)'),
+        url: httpsUrlSchema.describe(
+          "Its investor page or annual report, on the provider's sites or its owner's",
+        ),
+      })
+      .describe('Its page, when the owner’s page doesn’t say it')
+      .optional(),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote where it says so')
+      .max(3, 'Quote at most three passages')
+      .describe('Its words there that name each exchange and symbol, and the majority holder')
+      .optional(),
+    lastVerified: isoDateSchema.describe('When its page was read').optional(),
+  })
+  .superRefine((stock, ctx) => {
+    if (!stock.listings && !stock.majorityHolder) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Give its listings, its majority holder, or both',
+        path: [],
+      });
+    }
+    const given = [stock.page, stock.quotes, stock.lastVerified].filter(Boolean).length;
+    if (given !== 0 && given !== 3) {
+      ctx.addIssue({
+        code: 'custom',
+        message:
+          'Give its page, quotes and lastVerified together, or none when the owner’s quotes say it',
+        path: [!stock.page ? 'page' : !stock.quotes ? 'quotes' : 'lastVerified'],
+      });
+    }
+    addDuplicateIssues(
+      ctx,
+      (stock.listings ?? []).map((listing) => `${listing.exchange} ${listing.symbol}`),
+      (index) => ['listings', index, 'symbol'],
+    );
+  });
+export type OwnerStock = z.infer<typeof ownerStockSchema>;
+
+/**
+ * Whether `text` has `word` with no letter or digit on either side: "NYSE: SPOT" has SPOT, "SPOTIFY" doesn't. A number
+ * doesn't end inside a longer one either: "61.2%" doesn't have 61.
+ */
+function hasWord(text: string, word: string): boolean {
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(
+    `(?<![\\p{L}\\p{N}]|\\p{N}[.,])${escaped}(?![\\p{L}\\p{N}]|[.,]\\p{N})`,
+    'u',
+  ).test(text);
+}
+
+/**
+ * What the words leave unsaid: each listing's exchange and symbol, the majority holder and its percent. Its own page's
+ * quotes and the owner's both count, since an investor page can give the symbol and the owner's page the holder.
+ */
+function stockProblems(
+  stock: OwnerStock,
+  ownerQuotes: readonly string[],
+): { path: (string | number)[]; message: string }[] {
+  const text = [...(stock.quotes ?? []), ...ownerQuotes].join('\n');
+  const lower = text.toLowerCase();
+  const where = stock.quotes ? 'No quote names' : "The owner's quotes don't name";
+  const fix = stock.quotes ? '' : ': give the stock a page and quotes of its own';
+  const problems = (stock.listings ?? []).flatMap((listing, index) => [
+    ...(lower.includes(listing.exchange.toLowerCase())
+      ? []
+      : [{ path: ['listings', index, 'exchange'], message: `${where} ${listing.exchange}${fix}` }]),
+    ...(hasWord(text, listing.symbol)
+      ? []
+      : [{ path: ['listings', index, 'symbol'], message: `${where} ${listing.symbol}${fix}` }]),
+  ]);
+  const holder = stock.majorityHolder;
+  if (holder && !lower.includes(holder.name.toLowerCase())) {
+    problems.push({ path: ['majorityHolder', 'name'], message: `${where} ${holder.name}${fix}` });
+  }
+  // A percent of 50 or less has its own issue (a majority is more than half).
+  if (
+    holder?.percent !== undefined &&
+    holder.percent > 50 &&
+    !hasWord(text, String(holder.percent))
+  ) {
+    problems.push({
+      path: ['majorityHolder', 'percent'],
+      message: `${where} ${holder.percent}%${fix}`,
+    });
+  }
+  return problems;
+}
+
 export const ownerSchema = z
   .strictObject({
     name: textSchema.describe(
@@ -216,10 +358,20 @@ export const ownerSchema = z
     country: ownerCountrySchema
       .describe('Where the company is from (the owner’s choice, 2026-11-03): every provider says')
       .optional(),
+    stock: ownerStockSchema
+      .describe(
+        'A public company’s ticker symbols and majority holder (the owner’s item of 2026-11-10), quoted like its name',
+      )
+      .optional(),
     lastVerified: isoDateSchema.describe('When the pages were read'),
   })
   .superRefine((owner, ctx) => {
-    const { country } = owner;
+    const { country, stock } = owner;
+    if (stock) {
+      for (const { path, message } of stockProblems(stock, owner.quotes)) {
+        ctx.addIssue({ code: 'custom', message, path: ['stock', ...path] });
+      }
+    }
     if (!country || !/^[A-Z]{2}$/.test(country.code)) return;
     const quotes = country.quotes ?? owner.quotes;
     if (!namesCountry(quotes.join('\n'), country.code)) {

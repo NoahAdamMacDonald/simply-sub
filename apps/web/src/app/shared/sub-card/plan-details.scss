@@ -242,8 +242,10 @@ ul {
   color: var(--ss-text-muted);
 }
 
-// A group's next line (the currencies after the ways to pay, M11.5), spaced like Outside ratings' lines.
-.payment + .payment {
+// A group's next line (the currencies after the ways to pay, M11.5; the owner's stock after its name), spaced like
+// Outside ratings' lines.
+.payment + .payment,
+.owner + .owner {
   margin-top: 4px;
 }
 

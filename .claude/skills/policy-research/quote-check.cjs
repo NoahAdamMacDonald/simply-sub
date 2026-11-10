@@ -74,6 +74,11 @@ function facts(data) {
       data.owner.country.page.url,
       data.owner.country.quotes ?? [],
     ],
+    data.owner?.stock?.page && [
+      'owner.stock',
+      data.owner.stock.page.url,
+      data.owner.stock.quotes ?? [],
+    ],
     ...(data.paymentMethods ?? []).map((entry) => ['paymentMethods', entry.url, entry.quotes]),
     ...(data.currencies ?? []).map((entry) => ['currencies', entry.url, entry.quotes]),
     anchor && anchor.kind !== 'not-stated' && ['renewalAnchor', anchor.url, anchor.quotes],

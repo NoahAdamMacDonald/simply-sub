@@ -106,11 +106,19 @@ their own.
   Quote the sentence that says who owns or runs it ("Mullvad VPN AB is owned by parent company Amagicom AB."), never
   a copyright line or a payment line alone, and give the shares in `name` when the page does ("ESPN is 72 percent
   owned by The Walt Disney Company, 18 percent by Hearst and 10 percent by the National Football League"). Never
-  Wikipedia or the press as the source. Every provider needs one (a public company is its own: "Netflix, Inc., a
-  public company (NASDAQ: NFLX)"). A company with a majority or controlling owner names both (the owner's rule,
-  2026-11-09): the company, then its owner ("Anghami Inc. (NASDAQ: ANGH), majority-owned by OSN Group"), quoting the
-  page that states the stake, the owner's or its group's own (KIPCO's release, with its site in `website`) or the
-  company's; "majority" rather than a share the page dates, which may have changed since.
+  Wikipedia or the press as the source. Every provider needs one (a public company is its own: "Netflix, Inc.").
+- **A public company's shares** (the owner's item of 2026-11-10): `owner.stock`, never words in `name`.
+  - `listings`: each exchange as the page names it, with its ticker `symbol` (`{ exchange: NASDAQ, symbol: NFLX }`),
+    a symbol per share class (RCI.A and RCI.B on the TSX).
+  - `company`: the listed company when it's the owner's parent (`Alphabet Inc.`, for Google LLC).
+  - `majorityHolder`: whoever holds more than half of its shares or its votes (`name`, `of: shares` or `votes`), also
+    when it's another company (OSN Group, for Anghami: the owner's rule of 2026-11-09). A `percent` only from a
+    current annual report or proxy circular, never a dated release's stake, which may have changed since.
+  - **Its words** are the owner's quotes when they name it all (Netflix's "NASDAQ: NFLX"), else a `page` of its own
+    with `quotes` and `lastVerified`: its investor page or annual report, on the provider's sites or the owner's
+    `website`. Either page's words may name each fact, and validation checks that they name each exchange, symbol,
+    holder and percent.
+  - A private company has no `stock`; its owners and their shares stay in `name`.
 - **Where it's from** (the owner's choice, 2026-11-03): `owner.country`, the company's ISO 3166-1 code. When the
   owner's quotes say it ("a Swiss corporation"), the code alone; else a `page` of its own with one to three `quotes`
   and `lastVerified`, in the same order of pages, or an address in its terms or corporate information ("Los Gatos, CA

@@ -210,7 +210,7 @@ paymentMethods:
 # Owner (M11.2), read 2026-11-04: the founders' letter on Alphabet's home page (abc.xyz, under "more"); the Gemini
 # Apps Privacy Hub names Google LLC as the company providing Gemini outside the EEA and Switzerland.
 owner:
-  name: 'Google LLC, owned by Alphabet Inc., a public company (NASDAQ: GOOGL, GOOG)'
+  name: 'Google LLC, owned by Alphabet Inc.'
   website: https://abc.xyz
   page:
     name: "Alphabet's founders' letter"
@@ -226,6 +226,11 @@ owner:
     quotes:
       - 'organized under the laws of the State of Delaware, USA, and operating under the laws of the USA'
     lastVerified: 2026-11-04
+  stock:
+    company: Alphabet Inc.
+    listings:
+      - { exchange: Nasdaq, symbol: GOOGL }
+      - { exchange: Nasdaq, symbol: GOOG }
   lastVerified: 2026-11-04
 
 # Renewal day (M11.5), read 2026-11-04: Google One's terms say "you’ll be charged at the beginning of each billing

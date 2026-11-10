@@ -186,7 +186,7 @@ paymentMethods:
 # Owner: Google LLC, which provides YouTube's paid services (the Paid Service Terms: "The entity providing the Paid
 # Services is Google LLC"), part of Alphabet, as for Google AI.
 owner:
-  name: 'Google LLC, owned by Alphabet Inc., a public company (NASDAQ: GOOGL, GOOG)'
+  name: 'Google LLC, owned by Alphabet Inc.'
   website: https://abc.xyz
   page:
     name: "Alphabet's founders' letter"
@@ -202,6 +202,11 @@ owner:
     quotes:
       - 'The entity providing the Service is Google LLC, a company operating under the laws of Delaware'
     lastVerified: 2026-11-04
+  stock:
+    company: Alphabet Inc.
+    listings:
+      - { exchange: Nasdaq, symbol: GOOGL }
+      - { exchange: Nasdaq, symbol: GOOG }
   lastVerified: 2026-11-04
 
 # Renewal day (M11.5), read 2026-11-04: the Paid Service Terms charge "on the first day of each billing period", and

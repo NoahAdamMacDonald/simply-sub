@@ -69,7 +69,7 @@ paymentMethods:
 
 # Owner (M11.2), read 2026-11-09 on its investor site.
 owner:
-  name: 'iQIYI, Inc., a public company (Nasdaq: IQ)'
+  name: 'iQIYI, Inc.'
   website: https://ir.iqiyi.com
   page:
     name: 'iQIYI investor relations'
@@ -78,6 +78,9 @@ owner:
     - 'iQIYI, Inc. (Nasdaq: IQ) (“iQIYI” or the “Company”) is a leading provider of online entertainment video services in China.'
   country:
     code: CN
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: IQ }
   lastVerified: 2026-11-09
 
 # Renewal day (M11.5), read 2026-11-09 in its help centre ("you will be charged 24 hours prior to the corresponding
