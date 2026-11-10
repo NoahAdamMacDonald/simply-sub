@@ -2,12 +2,15 @@ import { batchIdsIn, userAgent } from '@simply-sub/core';
 import type { FileChange, Proposal } from './proposal';
 
 // The bot's way to GitHub (BLUEPRINT §7.7): the REST API with a fine-grained token for this repository only (Contents
-// and Pull requests, read and write). It reads the base branch, commits its changes on branches of its own (the
-// weekly digest's, and each discovery run's), and opens or refreshes their pull requests. It never merges, and never
-// pushes to the base branch.
+// and Pull requests, read and write), and GraphQL to read many files in one request. It reads the base branch,
+// commits its changes on branches of its own (the weekly digest's, and each discovery run's), and opens or refreshes
+// their pull requests. It never merges, and never pushes to the base branch.
 
 /** In each of the bot's commit messages: a branch whose last commit lacks it has a reviewer's work on it. */
 export const botSignature = 'The nightly bot (BLUEPRINT §6.4).';
+
+/** The most files one GraphQL request reads: well under its node limit, each file a field. */
+const textsPerQuery = 50;
 
 export interface GitHubOptions {
   token: string;
@@ -92,6 +95,41 @@ export class GitHub {
     return file && new TextDecoder().decode(fromBase64(file.content));
   }
 
+  /**
+   * Text files as the commit has them, many in one GraphQL request (BLUEPRINT §6.4: a part of a night sends out at most
+   * 40), undefined for a file it doesn't have. One whose text GraphQL cuts short is read whole with the contents API.
+   */
+  async texts(
+    paths: readonly string[],
+    commit: string,
+  ): Promise<Record<string, string | undefined>> {
+    const [owner, name] = this.options.repository.split('/');
+    const found: Record<string, string | undefined> = {};
+    for (let start = 0; start < paths.length; start += textsPerQuery) {
+      const part = paths.slice(start, start + textsPerQuery);
+      const fields = part.map(
+        (path, at) =>
+          `f${at}: object(expression: ${JSON.stringify(`${commit}:${path}`)}) { ... on Blob { text isTruncated } }`,
+      );
+      const data = await this.graphql<{
+        repository: Record<string, { text: string | null; isTruncated: boolean } | null>;
+      }>(
+        `query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) { ${fields.join(' ')} } }`,
+        { owner, name },
+      );
+      for (const [at, path] of part.entries()) {
+        const blob = data.repository[`f${at}`];
+        found[path] =
+          blob === null || blob === undefined
+            ? undefined
+            : blob.isTruncated || blob.text === null
+              ? await this.text(path, commit)
+              : blob.text;
+      }
+    }
+    return found;
+  }
+
   /** A file's bytes as the commit (or branch) has it: the contents API gives files up to 1 MB. */
   async bytes(path: string, ref: string): Promise<Uint8Array> {
     const file = await this.call<{ content: string }>('GET', `contents/${path}?ref=${ref}`);
@@ -173,6 +211,25 @@ export class GitHub {
       encoding: 'base64',
     });
     return { path: change.path, mode: '100644', type: 'blob', sha: blob.sha };
+  }
+
+  /** One GraphQL query. Its errors (a field it can't answer) fail it, as a REST call's status does. */
+  private async graphql<T>(query: string, variables: Record<string, string>): Promise<T> {
+    const response = await this.fetcher('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${this.options.token}`,
+        'User-Agent': userAgent,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query, variables }),
+    });
+    if (!response.ok) throw new Error(`GitHub GraphQL: ${response.status}`);
+    const body = (await response.json()) as { data?: T; errors?: { message: string }[] };
+    if (body.errors?.length || body.data === undefined) {
+      throw new Error(`GitHub GraphQL: ${body.errors?.[0]?.message ?? 'no data'}`);
+    }
+    return body.data;
   }
 
   /** One REST call. With `missingIsUndefined`, a 404 is undefined rather than an error. */

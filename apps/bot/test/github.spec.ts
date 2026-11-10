@@ -215,3 +215,65 @@ describe('GitHub', () => {
     ]);
   });
 });
+
+describe('many files in one request (BLUEPRINT §6.4)', () => {
+  /** A GitHub whose GraphQL answers `data` (or `errors`), and whose contents API has each file whole. */
+  function graphqlGitHub(answer: unknown) {
+    const calls: { url: string; body?: { query: string; variables: unknown } }[] = [];
+    const fetcher = (async (input: RequestInfo | URL, init?: RequestInit) => {
+      const url = String(input);
+      calls.push({ url, ...(init?.body && { body: JSON.parse(String(init.body)) }) });
+      const body =
+        url === 'https://api.github.com/graphql' ? answer : { content: btoa('the whole file') };
+      return new Response(JSON.stringify(body), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }) as typeof fetch;
+    return {
+      calls,
+      github: new GitHub({
+        token: 't0ken',
+        repository: 'owner/simply-sub',
+        base: 'main',
+        fetch: fetcher,
+      }),
+    };
+  }
+
+  it('reads them with GraphQL, one it cuts short whole, and none for one the commit lacks', async () => {
+    const { calls, github } = graphqlGitHub({
+      data: {
+        repository: {
+          f0: { text: 'id: netflix\n', isTruncated: false },
+          f1: null,
+          f2: { text: 'id: bitdef', isTruncated: true },
+        },
+      },
+    });
+    const paths = [
+      'data/providers/netflix.yaml',
+      'data/baselines/none.txt',
+      'data/providers/bitdefender.yaml',
+    ];
+    expect(await github.texts(paths, 'c0ffee')).toEqual({
+      'data/providers/netflix.yaml': 'id: netflix\n',
+      'data/baselines/none.txt': undefined,
+      'data/providers/bitdefender.yaml': 'the whole file',
+    });
+    expect(calls.map((call) => call.url)).toEqual([
+      'https://api.github.com/graphql',
+      'https://api.github.com/repos/owner/simply-sub/contents/data/providers/bitdefender.yaml?ref=c0ffee',
+    ]);
+    expect(calls[0].body?.query).toContain(
+      'f0: object(expression: "c0ffee:data/providers/netflix.yaml")',
+    );
+    expect(calls[0].body?.variables).toEqual({ owner: 'owner', name: 'simply-sub' });
+  });
+
+  it('fails on a GraphQL error, as on a REST status', async () => {
+    const { github } = graphqlGitHub({ errors: [{ message: 'Bad credentials' }] });
+    await expect(github.texts(['data/automation.yaml'], 'c0ffee')).rejects.toThrow(
+      'GitHub GraphQL: Bad credentials',
+    );
+  });
+});

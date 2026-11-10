@@ -25,6 +25,7 @@ describe('stepPlan', () => {
       cited: [],
       policySets: {},
       bundleOwners: {},
+      policyPages: {},
     });
     expect(plan.withProvider).toEqual({ crave: ['bundle.a'], tsn: [] });
     expect(plan.groups).toEqual([['bundle.b', 'bundle.c'], ['bundle.d']]);
@@ -108,7 +109,9 @@ describe('stepPlan', () => {
       policies: { ...provider.policies, shared: [set.id] },
     });
     const index = catalogIndex([naming(netflix), naming(mullvad)], [], [set]);
-    expect(index.policySets).toEqual({ mullvad: [set] });
+    // By id: the step that checks it reads it (BLUEPRINT §6.4, a request where it's checked).
+    expect(index.policySets).toEqual({ mullvad: [set.id] });
+    expect(index.policyPages['mullvad']).toContain(privacy);
     expect(index.providers['mullvad']).toContain(privacy);
     expect(index.providers['netflix']).not.toContain(privacy);
     expect(index.cited.find((page) => page.url === privacy)?.owners).toEqual([
@@ -123,7 +126,7 @@ describe('stepPlan', () => {
     const parts = [netflix, mullvad].map((provider) =>
       catalogIndex([naming(provider)], [], [set], policies, ['mullvad', 'netflix']),
     );
-    expect(parts.map((part) => part.policySets)).toEqual([{}, { mullvad: [set] }]);
+    expect(parts.map((part) => part.policySets)).toEqual([{}, { mullvad: [set.id] }]);
     expect(mergeIndexes(parts).providers['netflix']).not.toContain(privacy);
     expect(policyTargets(naming(mullvad), [set]).at(-1)).toEqual({
       file: 'data/policies/example-privacy.yaml',

@@ -13,7 +13,8 @@
   "compatibility_flags": ["nodejs_compat"],
   // 03:00 UTC every night.
   "triggers": { "crons": ["0 3 * * *"] },
-  // One instance a night, named for the date: a step per provider and per bundle, each retried, then the pull request.
+  // A night is an instance or a few, each sending at most 40 requests out (the free plan allows 50 an instance): the
+  // first named for the date, the next ones price-check-<date>-2 and on, each started by the last (src/night.ts).
   "workflows": [
     { "name": "simply-sub-price-check", "binding": "PRICE_CHECK", "class_name": "PriceCheck" },
   ],

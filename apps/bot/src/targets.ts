@@ -173,20 +173,20 @@ export function policyTargets(
 }
 
 /**
- * Each shared document's step: the first of `namers`, by id, that names it, so its pages are checked once a night. Only
- * `providers`' are kept: the night reads its providers a part at a time (M11.8), and `namers` are all of them.
+ * Each shared document's step, by its id in the policy index: the first of `namers`, by id, that names it, so its pages
+ * are checked once a night. Only `providers`' are kept: the night reads its providers a part at a time (M11.8), and
+ * `namers` are all of them. The step reads the document itself (BLUEPRINT §6.4: a request each, where it's checked).
  */
 function policySetOwners(
   providers: readonly SnapshotProvider[],
-  sets: readonly PolicySet[],
   policies: PolicyIndex,
   namers: readonly string[],
-): Record<string, PolicySet[]> {
-  const owned: Record<string, PolicySet[]> = {};
+): Record<string, string[]> {
+  const owned: Record<string, string[]> = {};
   const here = new Set(providers.map((provider) => provider.id));
   const ids = [...namers].sort();
-  for (const set of sets) {
-    const owner = ids.find((id) => policies.providers[id]?.shared?.includes(set.id));
+  for (const set of Object.keys(policies.sets).sort()) {
+    const owner = ids.find((id) => policies.providers[id]?.shared?.includes(set));
     if (owner !== undefined && here.has(owner)) (owned[owner] ??= []).push(set);
   }
   return owned;
@@ -255,18 +255,23 @@ export function catalogIndex(
     bundles: {},
     hosts: [],
     cited: citedPages(providers as readonly Provider[], bundles, policies),
-    policySets: policySetOwners(providers, sets, policies, namers),
+    policySets: policySetOwners(providers, policies, namers),
     bundleOwners: Object.fromEntries(bundles.map((bundle) => [bundle.id, bundleOwner(bundle)])),
+    policyPages: {},
   };
   for (const provider of providers) {
     pagesOf([provider.website]);
+    // The pages its policies cite, and those of the shared documents its step checks.
+    const policyPages = unique([
+      ...(policies.providers[provider.id]?.links ?? []),
+      ...(index.policySets[provider.id] ?? []).flatMap((set) => policies.sets[set]?.links ?? []),
+    ]);
+    if (policyPages.length > 0) index.policyPages[provider.id] = policyPages;
     index.providers[provider.id] = pagesOf([
       ...providerTargets(provider).map((target) => target.price.sourceUrl),
       ...approvalTargets(provider).map((approval) => approval.url),
       ...networksTargets(provider).map((target) => target.url),
-      // The pages its policies cite, and those of the shared documents its step checks.
-      ...(policies.providers[provider.id]?.links ?? []),
-      ...(index.policySets[provider.id] ?? []).flatMap((set) => set.links.map((link) => link.url)),
+      ...policyPages,
     ]);
   }
   for (const bundle of bundles) {

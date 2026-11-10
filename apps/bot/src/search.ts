@@ -7,6 +7,7 @@ import {
   type SearchEngine,
   type SearchResult,
 } from '@simply-sub/core';
+import { rethrowOutOfRequests } from './requests';
 
 // The bot's web search (BLUEPRINT §6.5, M3.11): core's engines in data/automation.yaml's order (Tavily, then Brave,
 // then SearXNG), each until the bot's monthly budget there is spent, counted in KV by month. Their keys are Worker
@@ -44,7 +45,9 @@ export function botSearch(
         signal: AbortSignal.timeout(20_000),
       });
       return response.ok ? readSearchResults(engine, await response.json()) : [];
-    } catch {
+    } catch (error) {
+      // A part of the night out of requests goes on in the next (night.ts), searching again there.
+      rethrowOutOfRequests(error);
       return [];
     }
   };

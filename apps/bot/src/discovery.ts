@@ -41,6 +41,7 @@ import {
 import { parse } from 'yaml';
 import type { RepositoryState } from './github';
 import { findIcon, toBase64, type Download } from './icons';
+import { rethrowContinues } from './night';
 import type { FileChange, Proposal } from './proposal';
 import type { Step } from './run';
 import type { BotState } from './state';
@@ -207,7 +208,9 @@ export async function discover(
   for (const entry of batch.entries) {
     try {
       budget = await advance(entry, { today, budget, registries, search }, step, services);
-    } catch {
+    } catch (error) {
+      // A part of the night out of requests goes on in the next (night.ts): that's no failure of the service's.
+      rethrowContinues(error);
       // Its retries are used up: tonight goes on without it, and after a second such night a person takes it.
       await step(`note ${entry.id}'s failure`, async () => {
         const work = (await services.state.work(entry.id)) ?? {};
