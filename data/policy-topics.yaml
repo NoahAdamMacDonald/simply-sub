@@ -12,7 +12,9 @@
 #
 # `silent` is what it means when the pages say nothing: not-stated where silence proves nothing, or the grade it gets
 # where it means a missing protection (the owner's choice, 2026-10-30). Every provider rates or gives a status for each
-# topic that applies to it. A topic with categories applies only to providers with a plan in one of them; one with
+# topic that applies to it. A topic with categories applies only to providers with a plan in one of them (the newest
+# categories joined them on 2026-11-10, before the full catalog's research: a camera's recordings, a fitness app's
+# health data, a carrier's or a map's records of where you are); one with
 # paidPlans only to providers with that many paid plans. `actionFor` lists the grades that mean the user has to act
 # (an opt-out, a deletion request): a rating with one links the provider's own page for it (its `action`).
 # Shapes: packages/core/src/catalog/policy-topic.ts. Add a topic here, in its own commit, before a provider uses it.
@@ -92,7 +94,22 @@
   silent: not-stated
   actionFor: [good, poor]
   categories:
-    [storage, ai, privacy-suite, email, calendar, passwords, social, file-sharing, cloud, developer]
+    [
+      storage,
+      ai,
+      privacy-suite,
+      email,
+      calendar,
+      passwords,
+      social,
+      file-sharing,
+      cloud,
+      developer,
+      fitness,
+      home,
+      jobs,
+      telecom,
+    ]
   tiers:
     great: End-to-end or zero-access encryption by default for the main content.
     good: End-to-end encryption you can turn on for the main content.
@@ -194,7 +211,7 @@
   note: >-
     A minor is under 18 for the ads rungs; a child is under the service's stated minimum age for the deletion rung.
   silent: not-stated
-  categories: [streaming, music, gaming, education, social]
+  categories: [streaming, music, gaming, education, social, books, fitness]
   tiers:
     great: Kids' profiles collect the minimum, with no ads or tracking for minors, and parental controls.
     good: No targeted ads to minors, and parental consent.
@@ -365,6 +382,11 @@
       creative,
       cloud,
       developer,
+      fitness,
+      home,
+      maps,
+      jobs,
+      news,
     ]
   tiers:
     great: No rights beyond running the service, ending when you delete it.
@@ -437,6 +459,12 @@
       creative,
       developer,
       software,
+      books,
+      file-sharing,
+      maps,
+      fitness,
+      home,
+      dns,
     ]
   tiers:
     great: Open source, so you may read, change and share its apps.
@@ -474,7 +502,7 @@
     Great needs an independent audit of the no-logs claim, which the plans' vpn.independent-audits records
     (no-logs), and validation checks they agree.
   silent: poor
-  categories: [vpn, dns, search, browsers]
+  categories: [vpn, dns, search, browsers, telecom, maps]
   tiers:
     great: No activity or connection logs, and an independent audit found none.
     good: No activity or connection logs, as it states, without an independent audit.
@@ -499,6 +527,11 @@
       creative,
       shopping,
       delivery,
+      books,
+      fitness,
+      home,
+      news,
+      education,
     ]
   tiers:
     great: Share it with anyone, up to the plan's limits.
@@ -514,7 +547,7 @@
     Only what the device-count features don't say: registration caps and how long downloads last, never the number
     of devices or screens.
   silent: not-stated
-  categories: [streaming, music, gaming, software, vpn, security, creative]
+  categories: [streaming, music, gaming, software, vpn, security, creative, books, news]
   tiers:
     great: No limits beyond the number of screens or devices.
     good: Generous, clearly stated limits.
@@ -543,6 +576,9 @@
       creative,
       developer,
       software,
+      dns,
+      file-sharing,
+      home,
     ]
   tiers:
     great: Asks before changing anything on your device, updates included.
