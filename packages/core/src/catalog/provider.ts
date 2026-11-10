@@ -19,6 +19,7 @@ import {
   planIdSchema,
   rankKeySchema,
   regionSchema,
+  sellingRegionSchema,
   slugSchema,
   textSchema,
 } from './formats';
@@ -554,10 +555,10 @@ export const providerSchema = z
       .describe('Region → the currency actually charged there, for FX-fee maths')
       .optional(),
     availableIn: z
-      .array(regionSchema)
+      .array(sellingRegionSchema)
       .min(1, 'Leave availableIn out when the regions are unknown')
       .describe(
-        "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Left out, it's sold where it has prices and unknown elsewhere",
+        "Every region the provider sells in, when known (BLUEPRINT §4.7): elsewhere the app shows Not offered. Provinces or states when it sells in only some of a country's (CA-QC, M11.17). Left out, it's sold where it has prices and unknown elsewhere",
       )
       .optional(),
     cancelUrl: httpsUrlSchema.describe(

@@ -143,7 +143,7 @@ function priced(
   seller: SnapshotProvider,
   context: ExtrasContext,
 ): Priced | undefined {
-  const sold = availability(prices, seller, context.region);
+  const sold = availability(prices, seller, context.region, context.subdivision);
   if (sold === 'not-offered') {
     return undefined;
   }

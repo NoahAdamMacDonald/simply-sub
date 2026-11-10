@@ -1,6 +1,7 @@
 import { providerAvailability, type Availability } from '../catalog/availability';
 import type { FxRates } from '../catalog/convert';
 import type { PickedPrice } from '../catalog/pick-price';
+import { subdivisionIn } from '../catalog/regions';
 import { resellerDeals, type DealContext, type ResellerDeal } from '../catalog/reseller-deals';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
 import type { IsoDate } from '../dates/iso-date';
@@ -143,6 +144,8 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
   // searchProviders sorts the API's way; the ranks sort orders the results below.
   const providerSort = sort === 'ranks' ? 'price_asc' : sort;
   const { country: region, currency } = settings;
+  // The user's province or state (M11.17): its prices first, and only what's sold there.
+  const subdivision = subdivisionIn(region, settings);
   const filters: Omit<ProviderSearch, 'sort'> = {
     ...(q !== undefined && { q }),
     ...(query.category !== undefined && { category: query.category }),
@@ -153,6 +156,7 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
     categories: catalog.categories,
     ...(fx && { fx }),
     today,
+    ...(subdivision !== undefined && { subdivision }),
   };
   const activity = providerActivity(items, catalog.bundles, today);
   const providers = catalog.providers.filter(
@@ -167,6 +171,7 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
 
   const buyer: DealContext = {
     region,
+    ...(subdivision !== undefined && { subdivision }),
     currency,
     ...(fx && { fx }),
     taxPlace: {
@@ -243,7 +248,9 @@ export function searchCatalog(query: CatalogQuery, context: CatalogSearchContext
   const notOffered = unpriced
     ? []
     : searchProviders(
-        providers.filter((provider) => providerAvailability(provider, region) === 'not-offered'),
+        providers.filter(
+          (provider) => providerAvailability(provider, region, subdivision) === 'not-offered',
+        ),
         { ...filters, sort: providerSort },
         searching,
       ).flatMap(({ provider, matchedOn, relevance }): NotOfferedResult[] =>

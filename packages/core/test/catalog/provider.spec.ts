@@ -157,7 +157,8 @@ describe('providerSchema', () => {
       [
         ['plans', 0, 'prices', 0, 'region'],
         'CAN',
-        'Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL',
+        // A price can name a province (M11.17).
+        'Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL',
       ],
       [
         ['plans', 0, 'prices', 0, 'currency'],
@@ -270,7 +271,7 @@ describe('providerSchema', () => {
 
     it('rejects a region in availableIn that isn’t written as one', () => {
       expect(issues(providerSchema, withValue(provider, ['availableIn'], ['CA', 'us']))).toEqual([
-        'availableIn.1: Use a two-letter ISO 3166-1 region in capitals (CA, US) or GLOBAL',
+        'availableIn.1: Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL',
       ]);
     });
 

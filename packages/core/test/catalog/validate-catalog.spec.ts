@@ -852,8 +852,9 @@ describe('validateCatalog', () => {
 
     it('checks bundle prices and billingCurrency too', () => {
       const unknown = `isn't an ISO 3166-1 alpha-2 region code (CA, US, GB), a group (EU) or GLOBAL`;
+      // A price can name a province or state (M11.17), so its message says so.
       expect(messagesWith(bundleFile, ['prices', 0, 'region'], 'XX')).toEqual([
-        `data/bundles/netflix-crave.yaml prices.0.region: "XX" ${unknown}`,
+        `data/bundles/netflix-crave.yaml prices.0.region: "XX" isn't an ISO 3166-1 alpha-2 region code (CA, US, GB), a province or state (CA-QC), a group (EU) or GLOBAL`,
       ]);
       expect(messagesWith(netflix, ['billingCurrency', 'XX'], 'USD')).toEqual([
         `data/providers/netflix.yaml billingCurrency.XX: "XX" ${unknown}`,

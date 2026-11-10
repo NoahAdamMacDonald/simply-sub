@@ -42,6 +42,11 @@ export interface SearchContext {
   /** Exchange rates in the query's currency, for picking prices. */
   fx?: FxRates;
   today: IsoDate;
+  /**
+   * The user's province or state in the query's region (core's subdivisionIn, M11.17): its own prices first, and only
+   * what's sold there. The API's queries have none.
+   */
+  subdivision?: string;
 }
 
 /** A plan that matches every filter. */
@@ -393,7 +398,7 @@ function planMatch(
   plan: Plan,
   provider: SnapshotProvider,
   query: ProviderSearch,
-  { fx, today }: SearchContext,
+  { fx, today, subdivision }: SearchContext,
   required: readonly RankKeyOption[],
   terms: readonly TextTerm[],
   options: readonly RankKeyOption[],
@@ -405,12 +410,13 @@ function planMatch(
   let shown = plan.prices;
   let priced: Pick<PlanMatch, 'pricing' | 'bestMonthlyEquivalent' | 'availability'> = {};
   if (region !== undefined && currency !== undefined) {
-    const sold = availability(plan.prices, provider, region);
+    const sold = availability(plan.prices, provider, region, subdivision);
     if (sold === 'not-offered') {
       return undefined;
     }
     const pricing = pickPrice(plan.prices, {
       region,
+      ...(subdivision !== undefined && { subdivision }),
       currency,
       billingCurrency: provider.billingCurrency,
       fx,
