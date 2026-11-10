@@ -1,0 +1,495 @@
+# Researched by hand on 2026-11-09 and 2026-11-10 (M11.15, the music category, part 4), as a provider of its own with
+# the Prime member prices as add-ons of Amazon Prime (the owner's choice of 2026-11-09, data/providers/
+# amazon-prime-video.yaml). Amazon.ca's pages were read with Edge from Canada, amazon.com's through a US exit (their
+# "Delivering to" line names a US town). Pages, each quoted where it's used:
+# Pricing, Canada: amazon.ca/music/unlimited ("Auto-renews at $12.99/mo. after ($11.99/mo. for Prime members) +
+# applicable taxes"), /music/unlimited/family ("$21.99/month + any taxes after your free trial"), /music/unlimited/echo
+# ("JUST $6.29/MONTH"), /music/standard ("Auto-renews at $11.54/mo. after ($10.49 /mo. for Prime members)") and
+# /music/standard/family ("Auto-renews at $17.84/mo."), and the FAQ's pricing tab (amazon.ca/music/i/faq): "For Prime
+# members, the Amazon Music Unlimited Individual Plan will change from $11.54 CAD to $11.99 CAD per month, and from
+# $114.45 CAD to $119.00 CAD per year" and "The Amazon Music Unlimited Family Plan will change from $20.99 CAD to $21.99
+# CAD per month, and from $208.95 CAD to $219.00 CAD per year", in effect since September 30, 2026. The FAQ's other
+# tab still says "$114.45/year", the old price, so the pricing tab wins. Its yearly Family plan is "available to Prime
+# members only" (the FAQ), so the yearly prices are Prime's add-ons too.
+# Pricing, US: amazon.com/music/unlimited ("Auto-renews at $12.99/mo. after ($11.99/mo. for Prime members)"),
+# /music/unlimited/family ("$21.99/month"), /music/unlimited/echo ("Just $6.99/month"), /music/standard ("$10.99/mo.
+# after ($9.99 /mo. for Prime members)"), /music/standard/family ("$16.99/mo.") and its FAQ ("$11.99/month for a
+# monthly subscription or $119/year for an annual subscription" for Prime members; Family "$21.99/month or $219/year
+# (available to Prime members only)"). Not listed: Amazon Music Unlimited for Students, which needs proof of enrolment
+# (SheerID), and Amazon Music Prime, included with Amazon Prime (Prime's perk) and never sold alone.
+# Free: amazon.ca/music/free and amazon.com/music/free, "Free streaming music" and "No credit card required".
+# Where it's sold: Amazon Music's service provider page lists Canada's "Available Services: Amazon Music Unlimited,
+# Amazon Music Standard, Amazon Prime Music, Amazon Music (free with ads)", and the US's too. Other countries' prices
+# aren't read yet (the full catalog's region pass), so it's unknown there, not "not offered".
+# Region checklist, 2026-11-10: 1. amazon.ca and amazon.com, each plan's own page; 4. the plan pages, never past their
+# sign-up buttons; 6. Edge from Canada and through a US exit.
+# Bundles and resellers: none on its pages; Apple, Google and mobile service providers bill it (ways to pay).
+# Features, read 2026-11-10 on amazon.ca's "What are the Differences Between the Amazon Music Subscriptions?" (plan by
+# plan: on demand, ads, offline, HD, Ultra HD, spatial audio, devices and streaming limits) and its articles on HD and
+# Ultra HD ("Ultra HD tracks have a bit depth of 24 bits, with sample rates ranging from 44.1 kHz up to 192 kHz", the
+# FAQ: Hi-Res Lossless), spatial audio ("mastered in Dolby Atmos and 360 Reality Audio": Dolby Atmos), audiobooks
+# ("Certain Amazon Music Unlimited plans in the following locations allow you to access audiobooks from Audible's
+# catalogue": Canada and the US among them) and the Single Device plan ("doesn't have access to HD, Ultra HD, and
+# Spatial Audio"). Free and Standard play only "select audiobooks that are available across Amazon Music", not
+# Audible's catalogue, so audiobooks aren't counted as included there. Free and the Single Device plan stream SD only,
+# whose bitrate no help page gives; Amazon's developer documentation, a preview for its API ("Audio Formats",
+# developer.amazon.com: "For Free and Prime, only standard definition (SD) is available", SD in Opus at "48 kbps", "192
+# kbps" and "320 kbps"), gives the best as 320 kbps, so High, inferred. Apps (its compare page and HD article): iOS,
+# Android, Fire TV, Fire Tablet, "Amazon Music for Web" and "The Amazon Music app for PC, Mac"; the Single Device plan
+# plays on "a single compatible Echo or Fire TV device" (the registry has no value for speakers). Sign-in, the Amazon
+# account's: "Why Can't I Sign into My Account?" ("Some accounts use a password, while others use a one-time security
+# code sent to your mobile number or email, or a passkey saved on your device"), "Recover Your Account after Two-Step
+# Verification Fails" ("from a trusted device") and "What is Two-Step Verification?", in its Amazon Business section
+# but about any account's settings ("by text message or authenticator app").
+
+id: amazon-music
+name: Amazon Music
+aliases: [amazon music unlimited]
+website: https://music.amazon.com
+# Amazon Canada's store and help centre (amazon.com's pages count through its policies' links, as Prime Video's do:
+# listing amazon.com would claim Amazon's other services on it, such as Amazon Luna).
+domains: [amazon.ca]
+category: music
+spendCategory: streaming
+billingCurrency: { CA: CAD, US: USD }
+cancelUrl: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GCRZL3F2UZMNP3T3
+sources: { pricing: https://www.amazon.ca/music/unlimited }
+# Owner (M11.2), read 2026-11-10: Amazon's own site lists Amazon Music among its entertainment businesses, and
+# Amazon.com's Conditions of Use (through a US exit) give its address under Washington State's laws. Its shares
+# (M11.18): Amazon's investor relations page.
+owner:
+  name: 'Amazon.com, Inc.'
+  website: https://www.aboutamazon.com
+  page:
+    name: 'Amazon entertainment'
+    url: https://www.aboutamazon.com/what-we-do/entertainment
+  quotes:
+    - 'Amazon produces and delivers to customers world-class entertainment via Prime Video, Amazon MGM Studios, MGM+, Amazon Music, Audible, Wondery, Amazon Games, and Twitch.'
+  country:
+    code: US
+    page:
+      name: Amazon.com Conditions of Use
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    quotes:
+      - 'Seattle, WA 98108-1226'
+      - 'the laws of the state of Washington'
+    lastVerified: 2026-11-10
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: AMZN }
+    page:
+      name: Investor relations
+      url: https://ir.aboutamazon.com/overview/default.aspx
+    quotes:
+      - 'NASDAQ: AMZN'
+    lastVerified: 2026-11-10
+  lastVerified: 2026-11-10
+# Ways to pay (M11.5), read 2026-11-10: a card (its payment method article: "credit card rewards points" too, which
+# pay with a card's own points), and Apple, Google and mobile service providers that bill it (its cancelling article).
+# It names no card networks: Amazon.ca's "Accepted Payment Methods" is about orders, so it isn't used here. The US's
+# from its FAQ.
+paymentMethods:
+  - methods: [card]
+    regions: [CA]
+    page: Change Your Amazon Music Unlimited Subscription Payment Method
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GFNZXFN8Q9BHEUE5
+    quotes:
+      - 'You can use a credit card, credit card rewards points, or debit card.'
+  - methods: [app-store, provider-billing]
+    regions: [CA]
+    page: Cancel Your Amazon Music Unlimited Subscription
+    url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GCRZL3F2UZMNP3T3
+    quotes:
+      - 'If you subscribed to Amazon Music Unlimited through iTunes visit the Apple website to cancel your subscription.'
+      - 'If you signed up through Apple, Google, or a mobile service provider, contact them to cancel or get a refund based on their policies.'
+  - methods: [card]
+    regions: [US]
+    page: Amazon Music FAQ
+    url: https://www.amazon.com/music/i/faq
+    quotes:
+      - 'using a payment method like a credit or debit card'
+  - methods: [app-store, provider-billing]
+    regions: [US]
+    page: Switch Amazon Music Unlimited Plans
+    url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GFH65TCNXDADUAW3
+    quotes:
+      - 'If you signed up through a third party, such as Apple App Store, Google Play, or a mobile service provider, you may need to contact them directly.'
+# Renewal day (M11.5), read 2026-11-10: its terms renew a plan automatically and keep "the original
+# renewal/subscription date" after a late payment, and its settings show "the next due date", without saying which
+# day of the month that is.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010]
+  lastVerified: 2026-11-10
+
+features:
+  platforms: [windows, macos, android, ios, web, tv]
+  account.sign-in: [password, passkey, totp, sms, email-code, trusted-device]
+
+plans:
+  - id: amazon-music.free
+    name: Free
+    link: https://www.amazon.ca/music/free
+    features:
+      ad-free: false
+      audio.quality: high
+      music.on-demand: false
+      music.offline: false
+    inferred:
+      audio.quality:
+        reason: 'Free plays only SD, which no help page measures. Amazon’s developer documentation gives SD’s bitrates as 48, 192 and 320 kbps, so up to 320 kbps.'
+        page:
+          name: Audio Formats (Amazon Music developer documentation)
+          url: https://developer.amazon.com/docs/music/audio-formats.html
+        lastVerified: 2026-11-10
+    notes: With ads. Top playlists and thousands of stations in shuffle play, and select songs on demand in the mobile apps. It stops after an hour without activity.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.ca/music/free
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.com/music/free
+  - id: amazon-music.standard
+    name: Standard
+    link: https://www.amazon.ca/music/standard
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    notes: Plays on one device at a time. Amazon Prime members pay less (an add-on of Amazon Prime).
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.54
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.ca/music/standard
+      - region: US
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.com/music/standard
+  - id: amazon-music.standard-family
+    name: Standard Family
+    link: https://www.amazon.ca/music/standard/family
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      account.users: 6
+    notes: Standard for up to 6 accounts, playing on 6 devices at once.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 17.84
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.ca/music/standard/family
+      - region: US
+        currency: USD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.com/music/standard/family
+  - id: amazon-music.unlimited
+    name: Unlimited
+    link: https://www.amazon.ca/music/unlimited
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: true
+    notes: One audiobook a month from Audible's catalogue. Plays on one device at a time. Amazon Prime members pay less, monthly or yearly (an add-on of Amazon Prime).
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.amazon.ca/music/unlimited
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.com/music/unlimited
+  - id: amazon-music.unlimited-family
+    name: Unlimited Family
+    link: https://www.amazon.ca/music/unlimited/family
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: true
+      account.users: 6
+    notes: Unlimited for up to 6 family members in the same country, playing on 6 devices at once. The audiobook a month is the account holder's only. The yearly plan is for Amazon Prime members only (an add-on of Amazon Prime).
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.amazon.ca/music/unlimited/family
+      - region: US
+        currency: USD
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.com/music/unlimited/family
+  - id: amazon-music.single-device
+    name: Unlimited Single Device
+    link: https://www.amazon.ca/music/unlimited/echo
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: false
+      audiobooks.included: false
+      platforms: [tv]
+    inferred:
+      audio.quality:
+        reason: 'Without HD or Ultra HD it plays only SD, which no help page measures. Amazon’s developer documentation gives SD’s bitrates as 48, 192 and 320 kbps, so up to 320 kbps.'
+        page:
+          name: Audio Formats (Amazon Music developer documentation)
+          url: https://developer.amazon.com/docs/music/audio-formats.html
+        lastVerified: 2026-11-10
+    notes: Unlimited on one Echo or Fire TV, chosen when you subscribe, without HD, spatial audio or audiobooks.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 6.29
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://www.amazon.ca/music/unlimited/echo
+      - region: US
+        currency: USD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.amazon.com/music/unlimited/echo
+
+# Terms and policies, read 2026-11-10 (M11.15) from Canada: the Amazon Music Terms of Use (one document for every
+# country, last updated September 30, 2026), its service provider page (which names, for Canada, the Conditions of
+# Use, the Privacy Notice, Prime's terms for Prime Music, Alexa's terms and Audible Canada's), amazon.ca's and
+# amazon.com's Conditions of Use (the US's through a US exit, as US ratings), and its help on cancelling, switching
+# plans, authorized devices and the Family plan. Amazon's Privacy Notice is rated once as a shared document
+# (data/policies/amazon-privacy.yaml). Audible's conditions, for the audiobooks, are read when Audible joins (books).
+# Calibrated against Prime Video's (the same Conditions of Use), Spotify's, Deezer's and Tidal's grades. Not rated:
+# rights over your content and its apps' licence (not topics for music).
+policies:
+  shared: [amazon-privacy]
+  links:
+    - name: 'Amazon Music terms of use'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+    - name: 'Conditions of use (Canada)'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    - name: 'Conditions of use (US)'
+      url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    - name: 'Cancel your Amazon Music Unlimited subscription'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GCRZL3F2UZMNP3T3
+    - name: 'Authorized device limits'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G45Q7B98YTXXBDNB
+    - name: 'How the Family plan works'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GWGVV6VBWBXHMHQB
+    - name: 'Amazon Music Unlimited'
+      url: https://www.amazon.ca/music/unlimited
+  ratings:
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Under-18s may use it only with a parent or guardian, but its free plan’s ads may be personalized, and it doesn’t say whether minors’ are.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'If you are under 18 years of age, or the age of majority in your location, you may use the Services only with involvement of a parent or guardian.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'This service may contain advertising, and advertising may be personalized as described in the Interest-Based Ads notice applicable to you.'
+      lastVerified: 2026-11-10
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel online at any time in your Amazon Music settings, which may offer a pause first, and keep your plan to the end of the term.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'you may cancel your Unlimited Plan at any time with effect to the end of its term by visiting your Amazon Music Settings'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GCRZL3F2UZMNP3T3
+          quote: 'If your plan is eligible, you can choose to pause your monthly subscription instead of cancelling.'
+      lastVerified: 2026-11-10
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'No money back, even if you didn’t use it, but you keep your plan until it ends.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'Payment, if any, is non-refundable, even if you did not use the Services.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GCRZL3F2UZMNP3T3
+          quote: 'You can use Amazon Music Unlimited until your plan ends.'
+      lastVerified: 2026-11-10
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you ahead of a new price, which never changes the term you’ve paid for, so you can cancel before it starts.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'We will notify you in advance before any price changes to your Unlimited Plan become effective.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'HOWEVER, ANY INCREASE IN THE FEE WILL BE COMMUNICATED TO YOU IN ADVANCE AND WILL NOT AFFECT THE COST OF YOUR UNLIMITED PLAN DURING ITS TERM.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'you may cancel your Unlimited Plan at any time with effect to the end of its term by visiting your Amazon Music Settings'
+      lastVerified: 2026-11-10
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its 30-day trial may need a payment method, and turns into a paid plan unless you cancel before it ends, which you can do at any time. Its terms don’t say whether it reminds you first.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'Some Trial Plans may, as communicated to you, automatically convert to a paid plan unless you cancel before the end of the Trial Plan.'
+        - url: https://www.amazon.ca/music/unlimited
+          quote: 'Free for 30 days. Cancel anytime.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'you may be required to be logged in to the account and have a valid payment method associated with it'
+      lastVerified: 2026-11-10
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews on its own unless you turn that off, into the plan Amazon picks as closest to yours, but not that it reminds you first.'
+      pages: [https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010]
+      lastVerified: 2026-11-10
+    - topic: billing.fees
+      tier: great
+      reason: 'It names no fees beyond the price, only taxes.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'Unless legally required, the price stated does not include any taxes that we may charge.'
+      lastVerified: 2026-11-10
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'Moving up starts at once and charges the new price, and whether you get credit for the time left depends. Moving down starts when your term ends.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'If you upgrade your Unlimited Plan, the upgrade will take effect immediately, we will charge you the applicable fee, and the term of your Unlimited Plan may be extended, as described at the time you upgrade your Unlimited Plan.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'If you downgrade your Unlimited Plan, unless otherwise specified, the downgrade will take effect at the end of the term of your existing Unlimited Plan.'
+      lastVerified: 2026-11-10
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes follow Amazon’s Conditions of Use: private arbitration, one person at a time, with no class actions and no way to opt out, unless your province’s law lets you go to court.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'Any dispute or claim arising from or relating to the Agreement or the Services is subject to the dispute resolution, governing law, disclaimer of warranties and limitation of liability, and all other terms in the Amazon Conditions of Use applicable to you.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'Any dispute or claim relating in any way to your use of any Amazon Service, or to any products or services sold or distributed by Amazon or through Amazon Services will be resolved by binding arbitration, rather than in court'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'We each agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated or representative action.'
+      lastVerified: 2026-11-10
+    - topic: legal.disputes
+      regions: [US]
+      tier: bad
+      reason: 'In the US too, disputes go to private arbitration, one person at a time, with no class actions and no way to opt out.'
+      sources:
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'YOU AND WE AGREE THAT ANY DISPUTE OR CLAIM RELATING IN ANY WAY TO YOUR USE OF ANY AMAZON SERVICE, OR TO ANY PRODUCTS OR SERVICES SOLD OR DISTRIBUTED BY AMAZON OR THROUGH AMAZON.COM, WILL BE RESOLVED BY BINDING ARBITRATION RATHER THAN IN COURT.'
+        - url: https://www.amazon.com/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'YOU AND WE AGREE THAT ANY ARBITRATION PROCEEDING WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS OR REPRESENTATIVE ACTION.'
+      lastVerified: 2026-11-10
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time by posting them, and using it afterwards means you accept them, though a higher price never applies to the term you’ve paid for.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'We may amend the Agreement at any time by posting the revised terms on or through the Services or on Music Marketplace sites, but any increase in fees will not affect the cost of your Unlimited Plan during its term.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'To the extent permitted by law, your continued use of the Services or the Software after any amendment evidences your agreement to be bound by it.'
+      lastVerified: 2026-11-10
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your use of it at any time, including whenever it decides you harmed its interests, with no notice promised and no refund.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'We may terminate the Agreement or restrict, suspend, or terminate your use of the Services at any time, including if we determine that your use violates the Agreement, is improper, substantially exceeds or differs from normal use by other users, involves fraud or misuse of the Services, or harms our interests or those of another user of the Services.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'If your access to the Services is restricted, suspended, or terminated, you may be unable to access the Services and you may not receive any refund of fees or any other compensation.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'Your rights under the Agreement will automatically terminate without notice if you fail to comply with its terms.'
+      lastVerified: 2026-11-10
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change or stop any part of the service at any time, and songs come and go. If it ends your plan, it refunds the unused part.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'We may change, suspend, or discontinue the Services, or any part of them, at any time.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'If we discontinue your Unlimited Plan, and you signed up directly through us, we will give you a prorated refund of any fees paid for your Unlimited Plan.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'From time to time, we may add Content to or remove it from the Store, Unlimited, Amazon Music Prime, or from Amazon Music (free with ads).'
+      lastVerified: 2026-11-10
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+        - https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+      lastVerified: 2026-11-10
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'A plan is for one Amazon account, and its terms forbid sharing your password with anyone.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'You may not share your Amazon username and password with others or use anyone else’s Amazon username and password.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'You may only use your Individual Unlimited Plan, or Unlimited Single Device Plan in connection with one Amazon account.'
+      lastVerified: 2026-11-10
+    - topic: service.account-sharing
+      plans: [amazon-music.standard-family, amazon-music.unlimited-family]
+      tier: great
+      reason: 'The Family plans give up to six family members their own accounts, as long as they live in the same country, with no other checks.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010
+          quote: 'Up to six Amazon accounts may be associated with one Family Unlimited Plan.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GWGVV6VBWBXHMHQB
+          quote: 'Family members must all reside in the same country, and can only join one Amazon Music Unlimited Family Plan at a time.'
+      lastVerified: 2026-11-10
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Up to 10 devices can be authorized to your account, and you can remove one to add another at any time.'
+      sources:
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G45Q7B98YTXXBDNB
+          quote: 'You can have up to 10 devices authorized to your account.'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=G45Q7B98YTXXBDNB
+          quote: 'You can deauthorize a device and authorize it to another account at any time.'
+      lastVerified: 2026-11-10

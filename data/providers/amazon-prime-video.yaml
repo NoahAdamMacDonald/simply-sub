@@ -96,6 +96,16 @@ owner:
       - 'Seattle, WA 98108-1226'
       - 'the laws of the state of Washington'
     lastVerified: 2026-11-04
+  # Its shares (M11.18), read 2026-11-10 on Amazon's investor relations page.
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: AMZN }
+    page:
+      name: Investor relations
+      url: https://ir.aboutamazon.com/overview/default.aspx
+    quotes:
+      - 'NASDAQ: AMZN'
+    lastVerified: 2026-11-10
   lastVerified: 2026-11-04
 
 # Renewal day (M11.5), read 2026-11-04: its Prime terms renew the membership automatically, and a payment made late
@@ -124,9 +134,12 @@ perks:
 
 # Apps (the cross-category features), read 2026-11-04 in Prime Video's help: apps "for mobile devices running
 # Android, iOS, and Windows", for Fire TV, smart TVs, set-top boxes and game consoles, and the web ("through your web
-# browser", its usage rules).
+# browser", its usage rules). Sign-in, read 2026-11-10: the Amazon account's help articles, as for Amazon Music ("a
+# password", "a one-time security code sent to your mobile number or email", "a passkey", "a trusted device", and
+# "text message or authenticator app" for Two-Step Verification).
 features:
   platforms: [windows, android, ios, web, tv, console]
+  account.sign-in: [password, passkey, totp, sms, email-code, trusted-device]
 
 # Features, read 2026-11-04 from Canada in Prime Video's help: its usage rules ("You can stream up to three titles at
 # the same time using the same Amazon account"; downloads: "You can download available titles to only two devices at
@@ -239,7 +252,14 @@ plans:
           url: https://www.amazon.com/gp/help/customer/display.html?nodeId=TY4VVa4DCmK331KhLS
         lastVerified: 2026-11-04
     perks: [fast-delivery, music-prime, photos, prime-reading, luna, dashpass]
-    addOnIds: [amazon-prime-video.ad-free, amazon-prime-video.ultra]
+    addOnIds:
+      [
+        amazon-prime-video.ad-free,
+        amazon-prime-video.ultra,
+        amazon-prime-video.music-unlimited,
+        amazon-prime-video.music-unlimited-family,
+        amazon-prime-video.music-standard,
+      ]
     notes: Prime Video, with ads on most titles, and Amazon's shopping benefits, which vary by country. Ad free (Prime Video Ultra in the US) removes the ads, except on live TV and sports. In the US, 4K and Dolby Atmos need Ultra, and it streams 4 titles at once (5 with Ultra).
     prices:
       - {
@@ -515,6 +535,104 @@ addOns:
           autoRenew: true,
           lastVerified: 2026-11-04,
           sourceUrl: https://www.aboutamazon.com/news/entertainment/what-you-need-to-know-about-prime-video,
+        }
+  # Amazon Music's prices for Prime members (the owner's choice of 2026-11-09: Amazon Music is a provider of its own,
+  # data/providers/amazon-music.yaml, and its Prime member prices are Amazon Prime's add-ons), read 2026-11-09 and
+  # 2026-11-10 in Canada and through a US exit: Unlimited "($11.99/mo. for Prime members)" on amazon.ca/music/unlimited
+  # and amazon.com/music/unlimited, yearly "$119.00 CAD per year" (amazon.ca's FAQ, its pricing tab) and "$119/year"
+  # (amazon.com's FAQ); the yearly Family plan, "$219.00 CAD per year" and "$219/year (available to Prime members
+  # only)"; Standard "($10.49 /mo. for Prime members)" and "($9.99 /mo. for Prime members)" on each country's
+  # /music/standard. The plans' features are Amazon Music's: an add-on gives a plan only in its own file. Other
+  # countries' Prime member prices aren't read yet, so these add-ons aren't shown there, as Ad free isn't where its
+  # price wasn't read.
+  - id: amazon-prime-video.music-unlimited
+    name: Amazon Music Unlimited
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.amazon.ca/music/unlimited,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 119,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.amazon.ca/music/i/faq,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 11.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.amazon.com/music/unlimited,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 119,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.amazon.com/music/i/faq,
+        }
+  - id: amazon-prime-video.music-unlimited-family
+    name: Amazon Music Unlimited Family, yearly
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 219,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-09,
+          sourceUrl: https://www.amazon.ca/music/i/faq,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 219,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.amazon.com/music/i/faq,
+        }
+  - id: amazon-prime-video.music-standard
+    name: Amazon Music Standard
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 10.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.amazon.ca/music/standard,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-10,
+          sourceUrl: https://www.amazon.com/music/standard,
         }
 
 # Terms and policies, read 2026-11-04 (M11.15) from Canada: the Prime Video Terms of Use (one document for every

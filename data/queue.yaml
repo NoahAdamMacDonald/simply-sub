@@ -673,7 +673,8 @@
   source: wikidata
   wikidata: Q4740860
   sitelinks: 22
-  status: queued
+  status: done
+  date: 2026-11-10
 - id: xbox-cloud-gaming
   name: Xbox Cloud Gaming
   website: https://www.xbox.com/it-IT/cloud-gaming
@@ -994,8 +995,8 @@
   source: wikidata
   wikidata: Q6883832
   sitelinks: 12
-  status: queued
-  note: 'For music part 4: mixcloud.com answers this machine with a bot check (2026-11-09), but the Internet Archive has its Premium page ($7.99 a month), terms, privacy policy and subscription terms from September and October 2026, and its help centre compares Free and Premium'
+  status: done
+  date: 2026-11-10
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse

@@ -510,6 +510,11 @@ describe('ownerCitation', () => {
     ['Videoland, een van de toonaangevende streaming- en tv-aanbieders van Nederland', 'NL', true],
     ['a Dutch broadcaster', 'NL', true],
     ['Nederlandse', 'BE', false],
+    // Mixcloud's terms (M11.15): one of the UK's nations names the UK, as a US state names the US.
+    ['a company incorporated in England', 'GB', true],
+    ['registered in Scotland', 'GB', true],
+    ['offices across New England', 'GB', false],
+    ['the courts of New South Wales', 'GB', false],
   ] as const)('reads "%s" as naming %s: %s', (text, code, named) => {
     expect(namesCountry(text, code)).toBe(named);
   });
