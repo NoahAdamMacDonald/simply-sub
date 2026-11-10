@@ -673,7 +673,8 @@
   source: wikidata
   wikidata: Q4740860
   sitelinks: 22
-  status: queued
+  status: done
+  date: 2026-11-10
 - id: xbox-cloud-gaming
   name: Xbox Cloud Gaming
   website: https://www.xbox.com/it-IT/cloud-gaming
