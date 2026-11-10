@@ -3836,7 +3836,9 @@ None.
   lists them while no plan has them yet. Categories with providers (streaming, music, AI, VPN, passwords, security,
   storage, email, calendar, gaming, shopping) get theirs as the research reaches them, with every provider's value.
 - **Two service categories:** Books & audiobooks and Smart home & security, with feature categories for every new
-  group.
+  group. The policy topics that apply only to some categories name the newest too (`data/policy-topics.yaml`): a
+  camera's recordings and a fitness app's health data under content access, a carrier's and a map's records of
+  where you are under activity logging, and the rest where they bear on them.
 - **Telecom is designed** (section 4.12, M11.17), and province prices are built (M11.17's second part, the owner's
   request of the day to get finance ready too: a credit union is sold in its province only): carriers, home internet
   and credit unions are priced and sold by province (section 4.7).

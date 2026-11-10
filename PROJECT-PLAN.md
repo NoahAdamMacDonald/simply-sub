@@ -2184,6 +2184,14 @@ in every D1 `json` column search parses.
     services (BLUEPRINT §14). The categories that already have providers add their features as the research reaches
     them, every provider's value with them: Proton's Docs and Sheets (`office.apps`, `collaboration.real-time`) and
     Google One's longer Meet calls (`video-calls.*`) are the known ones.
+  - **The policy topics for the newest categories** (2026-11-10, the owner's go-ahead): the topics that apply only to
+    some categories now name the newest too, so a provider in them rates or states each one: who can read a
+    camera's recordings, a fitness app's health data, a job seeker's résumé and what goes over a phone line
+    (content access); children (books, fitness); rights over what you upload (fitness, smart home, maps, jobs,
+    news); using its apps (books, file sharing, maps, fitness, smart home, DNS); a carrier's and a map's records
+    of where you are (activity logging); account sharing (books, fitness, smart home, news, learning); device limits
+    (books, news); and changes to your device (DNS, file sharing, smart home). No provider was in them yet, so no
+    rating changed.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 3 done)
