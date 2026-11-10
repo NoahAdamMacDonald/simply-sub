@@ -2183,9 +2183,9 @@ in every D1 `json` column search parses.
     gives SD's bitrate, 320 kbps at most, so Free and Single Device are High). Its Prime member prices are Amazon
     Prime's add-ons (the owner's choice): Unlimited monthly and yearly, the yearly Family plan (Prime members only)
     and Standard; an add-on grants a plan only from its own file, so they carry no features. Amazon Music Prime stays
-    Prime's perk, since it's never sold alone. Mixcloud (`mixcloud`: Free, Premium and Pro for creators, US prices
-    from the Internet Archive's copies, since its site shows a security check; the bot reads them from the archive
-    too): Pro's creator toolkit is a perk, and the UK's nations now name the UK as an owner's country (its terms say
+    Prime's perk, since it's never sold alone. Mixcloud (`mixcloud`: Free, Premium and Pro for creators, US prices;
+    its site shows a browser a security check but serves the bot's plain fetch, which the owner allowed for accuracy,
+    so its pages are read live and `data:baselines` falls back to that fetch when the browser meets a check): Pro's creator toolkit is a perk, and the UK's nations now name the UK as an owner's country (its terms say
     "incorporated in England").
   - **Preparing the full catalog** (2026-11-10, with the owner, before research runs without the owner): the feature
     groups of every category with no provider yet, in the registry ahead of the research (the owner's choice; each

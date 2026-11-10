@@ -22,7 +22,8 @@ their own.
   licence, the agreements those include, cookie notice, refund or cancellation help, household or sharing rules,
   download limits, sign-up form, and its own posts on audits.
   Search and third-party summaries only to *find* a page. A page behind a bot check is left out and reported: never
-  try to get past one.
+  try to get past one. A plain fetch the site serves with no check is a reading, not a way past one (price-research's
+  "Bot checks").
 - **Shared documents first** (M11.1): one company's policy often covers several providers (Disney's privacy policy:
   Disney+, Hulu and ESPN). Before reading a provider's policies, look in `data/policies/` for a document that covers
   it, and name it in `policies.shared`. A new one is rated once in `data/policies/<id>.yaml` (`id`, `name`, `links`,

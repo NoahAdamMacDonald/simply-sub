@@ -1,5 +1,5 @@
 url: https://www.mixcloud.com/subscription-terms/
-method: archive
+method: fetch
 saved: 2026-11-10
 
 Paid subscriptions Policy | Mixcloud
@@ -42,6 +42,7 @@ Pro for Creators Upload unlimited shows and live stream without takedowns.
 Go Pro for $11.25 / MO when paid annually, pay monthly
 Premium for listeners Listen to your favorite DJs and shows offline and without limits.
 Go Premium for $7.99 / MO
+Appearance Light Dark Auto
 Open Menu
 Blog
 Terms of use

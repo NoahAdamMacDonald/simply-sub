@@ -1,14 +1,11 @@
 url: https://help.mixcloud.com/hc/en-us/articles/360004030700-Which-subscription-is-right-for-me
-method: archive
+method: browser
 saved: 2026-11-10
 
-Which subscription is right for me? – Mixcloud Help Center
-Submit a request
-Sign in
-Mixcloud Help Center
-Subscriptions and payments
-General
+Submit a request Sign in
+Mixcloud Help Center Subscriptions and payments General
 Articles in this section
+Mixcloud Pro - student discounts
 Which subscription is right for me?
 Supporting creators with Tips
 How do I get receipts and invoices for my subscription?
@@ -23,8 +20,7 @@ What is the difference between a Premium and a Creator subscription?
 For an enhanced listening experience:
 Premium
 Premium gives you access to an unrestricted listening experience for all public content on the platform. That means:
-Free
-Premium
+Free Premium
 Listen to our catalog
 Play any public show up to 4 times every 14 days
 Unlimited replays of public shows
@@ -34,26 +30,15 @@ Unlimited
 View tracklists
 As you listen
 Upfront
-Offline listening
-❌
-✔️
-Listen without ads
-❌
-✔️
-Listen on Mobile
-✔️
-✔️
+Offline listening ❌ ✔️
+Listen without ads ❌ ✔️
+Listen on Mobile ✔️ ✔️
 Pickup play queue across
-platforms (web, mobile & Sonos apps)
-✔️
-✔️
-Watch live streams
-✔️
-✔️
+platforms (web, mobile & Sonos apps) ✔️ ✔️
+Watch live streams ✔️ ✔️
 Access to creators' exclusive content
-*available only through Profile Subscriptions
-❌
-❌
+*available only through Creator Subscriptions
+❌ ❌
 For further information about our Premium subscription, we recommend viewing our What is Premium? article.
 Creator Subscriptions
 A Creator Subscription lets you show your favourite creators your support while giving you premium access to their profile. When listening to the content of a creator you're subscribed to, you can enjoy the Premium benefits described above plus exclusive, subscriber-only content.
@@ -61,50 +46,21 @@ If you're considering subscribing to a profile, we recommend checking out our Wh
 To access the creator toolkit:
 Pro
 Pro includes access to our creator toolkit, with features to help you consistently grow and have more fun as a creator:
-Free
-Pro
-Unlimited show and track uploads
-❌
-✔️
-Embed player on websites
-❌
-✔️
-Notify your followers of new streams, shows and tracks
-❌
-✔️
-Upload in HQ audio
-❌
-✔️
-Schedule upload releases
-❌
-✔️
-Make uploads private
-❌
-✔️
-Hide play counts
-❌
-✔️
-Disable upload comments
-❌
-✔️
-Stream privately
-❌
-✔️
-Go live from the browser
-❌
-✔️
-Archive and publish live-stream recordings
-❌
-✔️
-Preview your stream on Facebook and Twitch
-❌
-✔️
-Posts
-❌
-✔️
-Monetization
-❌
-✔️
+Free Pro
+Unlimited show and track uploads ❌ ✔️
+Embed player on websites ❌ ✔️
+Notify your followers of new streams, shows and tracks ❌ ✔️
+Upload in HQ audio ❌ ✔️
+Schedule upload releases ❌ ✔️
+Make uploads private ❌ ✔️
+Hide play counts ❌ ✔️
+Disable upload comments ❌ ✔️
+Stream privately ❌ ✔️
+Go live from the browser ❌ ✔️
+Archive and publish live-stream recordings ❌ ✔️
+Preview your stream on Facebook and Twitch ❌ ✔️
+Posts ❌ ✔️
+Monetization ❌ ✔️
 If you're considering going Pro, we recommend checking out:
 The Creator Toolkit You Can’t Do Without
 5 Reasons to Go Pro on Mixcloud
@@ -119,9 +75,11 @@ As a fan, you can subscribe to a creator's profile for a small monthly fee and g
 With a Premium subscription, you can enjoy an unrestricted listening experience on all public content available on Mixcloud. Creators' exclusive content is still restricted for Premium subscribers.
 Still have any questions? We'd be happy to help! Please fill out this form and we'll get back to you as soon as possible.
 Was this article helpful?
-1119 out of 1733 found this helpful
+1200 out of 1834 found this helpful
 Have more questions? Submit a request
-Return to top
+Recently viewed articles
+How do I cancel my subscription?
+Logging into Mixcloud using one-time codes
 Related articles
 What are Creator Subscriptions?
 How do I cancel my subscription?

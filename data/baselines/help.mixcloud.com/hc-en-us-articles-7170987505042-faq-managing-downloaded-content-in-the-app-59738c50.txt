@@ -1,5 +1,5 @@
 url: https://help.mixcloud.com/hc/en-us/articles/7170987505042-FAQ-Managing-downloaded-content-in-the-app
-method: archive
+method: fetch
 saved: 2026-11-10
 
 FAQ: Managing downloaded content in the app – Mixcloud Help Center
@@ -9,15 +9,15 @@ Mixcloud Help Center
 Shows and tracks
 Listening to content
 Articles in this section
-FAQ: Managing downloaded content in the app
 Clearing your play queue
 Can I download show and track files from Mixcloud?
 FAQ: Charts on Mixcloud
+FAQ: Managing downloaded content in the app
 Casting to external devices
 Troubleshooting playback issues
 Why can't I see the tracklist for this show?
 Using your keyboard to control playback on shows, tracks, and live streams
-Why am I only able to seek backwards and forwards a certain number of times?
+Why are there limits for rewinds and fast forwards?
 Why can I only replay a show four times?
 See more
 FAQ: Managing downloaded content in the app
@@ -49,15 +49,15 @@ How many devices can I download shows on?
 As a Premium or Creator subscriber, you can use the downloads feature on up to three devices at a time. You can manage your devices on the desktop website or in the app in your Download Settings.
 If you need further assistance with downloading content or if you have any questions, please fill out this form and we'll get back to you as soon as possible.
 Was this article helpful?
-413 out of 518 found this helpful
+437 out of 552 found this helpful
 Have more questions? Submit a request
 Return to top
 Related articles
 Recover a Mixcloud account that was created with Facebook
 What type of content can I upload to Mixcloud?
 Reset or change my account password
-How do I go live with Mixcloud?
 How do I upload on Mixcloud?
+How do I go live with Mixcloud?
 Mixcloud
 Support
 Submit a request

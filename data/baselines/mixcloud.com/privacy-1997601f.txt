@@ -1,5 +1,5 @@
 url: https://www.mixcloud.com/privacy/
-method: archive
+method: fetch
 saved: 2026-11-10
 
 Privacy policy | Mixcloud
@@ -39,9 +39,9 @@ Upgrade
 Upgrade
 Upgrade
 Pro for Creators Upload unlimited shows and live stream without takedowns.
-Loading...
+Go Pro for $11.25 / MO when paid annually, pay monthly
 Premium for listeners Listen to your favorite DJs and shows offline and without limits.
-Loading...
+Go Premium for $7.99 / MO
 Appearance Light Dark Auto
 Open Menu
 Blog
@@ -175,7 +175,3 @@ If you decide that you do not want your personal information to be used in the w
 If you wish to contact us, or have any questions or comments about this Privacy Policy, or how your personal data is being handled, please email us at Privacy@Mixcloud.com and we will respond to you as soon as practicable. You also have the right to contact a competent supervisory data protection authority.
 13 Personal Data deletion
 You may delete your account via settings, or by emailing us at Privacy@Mixcloud.com to request deletion of your personal data.
-Pro for Creators Upload unlimited shows and live stream without takedowns.
-Go Pro for $11.25 / MO when paid annually, pay monthly
-Premium for listeners Listen to your favorite DJs and shows offline and without limits.
-Go Premium for $7.99 / MO

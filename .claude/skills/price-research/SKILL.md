@@ -311,8 +311,12 @@ which reads each page as a visitor there would, before any hand reading:
   nfl.com/plus redirects to DAZN's international NFL Game Pass. Their US prices can't be read here: report them,
   and read what their help centres show (support.espn.com does). help.hulu.com works.
 - **Bot checks:** support.nfl.com and assistance.radio-canada.ca show a Cloudflare check the driver doesn't pass.
-  Never try to get past one (another browser mode, other headers, another tool): use the provider's other official
-  pages (ICI TOU.TV's subscription terms have its cancel steps, and its pages' footer says where it's sold), or
+  Never try to get past one: no other browser mode, no faked browser user agent or other headers, no retrying, no
+  solving or clicking past it (Amazon's "continue shopping"). A plain fetch that names itself (the bot's user agent,
+  `SimplySubBot/1.0 (+https://sub.simplely.ca/)`), where robots.txt allows it, is fine when the site serves it the real
+  page with no check: some sites check only browsers, and the live page is more accurate than an archived copy or a
+  third party (the owner's choice, 2026-11-10; Mixcloud). If the plain fetch meets a check or a refusal too, stop
+  there: use the provider's other official pages (ICI TOU.TV's subscription terms have its cancel steps, and its pages' footer says where it's sold), or
   report the page as unread.
 - **Plan tabs** (TSN, RDS): Monthly, 3 Months, Annual and Bundles are tabs (`click:3 Months`); a plan missing
   from a tab isn't sold for that period. Their terms renew every period except in Quebec, monthly there: a note.
@@ -403,13 +407,13 @@ which reads each page as a visitor there would, before any hand reading:
   yearly prices are the monthly price times the period, not a regular price. A plain fetch gets 406 and its help
   centre (support.anghami.com) 403; both read in Edge. play.anghami.com/terms and /privacy are pages not found: its
   terms and privacy policy are one page, anghami.com/legal.
-- **Mixcloud** (M11.15): mixcloud.com (its Premium page, FAQs, terms and privacy policy) answers this machine with a
-  bot check, which is never retried another way; its help centre (help.mixcloud.com) opens but links Premium's details
-  back to mixcloud.com. The Internet Archive's copies (`id_`, fetched with `curl --compressed`: without it the copy
-  comes back gzipped and page-text reads nothing) hold the pages' text and the plan data (`premiumPlanInfo`, its amount
-  and currency), but no country. www.mixcloud.com is in `data/automation.yaml`'s `archived` (an entry's `www.` is
-  dropped, so its help centre is archived too), so `data:baselines` saves the archive's copies. The help centre reads
-  live with a plain fetch, and its search (`help.mixcloud.com/api/v2/help_center/articles/search.json?query=<words>`)
+- **Mixcloud** (M11.15): mixcloud.com shows a browser (Edge, the baseline reader) Cloudflare's "Performing security
+  verification", but serves the bot's plain fetch (`curl --compressed -A "SimplySubBot/1.0 (+https://sub.simplely.ca/)"`)
+  with HTTP 200, so read its pages that way (see "Bot checks"); `data:baselines` falls back to that fetch when the
+  browser meets a check and saves it when it has every cited fact. Its page data (`premiumPlanInfo`, amount and
+  currency) names no country. Pro's yearly price is only in that data ("Annual $11.25 / month" is the text), so the
+  bot can't confirm it by text. An Internet Archive copy (`id_`) needs `curl --compressed`, or it comes back gzipped
+  and page-text reads nothing. Its help centre reads with a plain fetch, and its search (`help.mixcloud.com/api/v2/help_center/articles/search.json?query=<words>`)
   finds articles its menus don't show (sign-in, downloads).
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
