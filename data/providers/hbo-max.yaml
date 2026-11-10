@@ -18,6 +18,11 @@
 # Coverage: hbo-max.standard-ads in US, DE, FR, ES and IT: Standard with Ads is in the UK's and Ireland's plan lists
 # only (2026-11-04).
 
+# Coverage: hbo-max.* in CA: not sold in Canada. From Canada, hbomax.com sends a visitor to its geo-availability page,
+# "HBO Max Is Not Available in Your Region Yet", and its help centre's country picker ("Choose your country", on "Where
+# is HBO Max available?", read 2026-11-10 through a US exit) lists no Canada (Crave carries HBO's shows there). Its
+# picker lists over a hundred countries, most outside the catalog's regions, so availableIn isn't set.
+
 id: hbo-max
 name: HBO Max
 website: https://www.hbomax.com

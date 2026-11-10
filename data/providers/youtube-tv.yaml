@@ -23,6 +23,9 @@ website: https://tv.youtube.com
 domains: [support.google.com, policies.google.com]
 category: streaming
 spendCategory: streaming
+# Where it's sold (2026-11-10): "YouTube TV is available in the United States." (YouTube TV Help, "Watch YouTube TV
+# while traveling") and "YouTube TV is available throughout the United States." (answer 7370552).
+availableIn: [US]
 billingCurrency: { US: USD }
 cancelUrl: https://support.google.com/youtubetv/answer/7129668
 sources: { pricing: https://tv.youtube.com/learn/explore-plans/ }

@@ -1,3 +1,7 @@
+# Coverage: espn.* in CA: not sold in Canada (TSN carries ESPN's channels there): plus.espn.com refuses this machine
+# from Canada and through US exits (2026-11-10), its support centre names no country list, and Disney+'s bundles with
+# it are for "U.S. residents, 18+ only". Set availableIn when a page lists where it's sold.
+
 id: espn
 name: ESPN
 aliases: [espn+, espn plus]

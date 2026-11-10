@@ -2187,6 +2187,13 @@ in every D1 `json` column search parses.
     its site shows a browser a security check but serves the bot's plain fetch, which the owner allowed for accuracy,
     so its pages are read live and `data:baselines` falls back to that fetch when the browser meets a check): Pro's creator toolkit is a perk, and the UK's nations now name the UK as an owner's country (its terms say
     "incorporated in England").
+  - **Sold in Canada, and every other "unknown"** (2026-11-10, the owner's report: Mixcloud is sold in Canada but
+    didn't show there): Search's Sold in shows only plans priced where the user is, so a provider priced only in the US
+    vanished for Canadians. `data:coverage`, now in CI, flags any provider whose availability in Canada or the US is
+    unknown: it gets a price there, an `availableIn` from an official list, or a "Coverage:" note saying why not.
+    Fixed then: Mixcloud's Canadian prices (US dollars, read from Canada), Paramount+'s US plans (Essential and
+    Premium, through a US exit), YouTube TV sold only in the US; HBO Max, ESPN and discovery+ (not sold in Canada) and
+    Crunchyroll (sold there, its price page unreadable everywhere) explained.
   - **Preparing the full catalog** (2026-11-10, with the owner, before research runs without the owner): the feature
     groups of every category with no provider yet, in the registry ahead of the research (the owner's choice; each
     group's comment says what it's for), Books & audiobooks and Smart home & security as service categories with their

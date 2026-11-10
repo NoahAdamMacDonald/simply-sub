@@ -5,9 +5,10 @@
 # 2026-11-09) have the same words. Pages, each quoted where it's used:
 # Pricing: mixcloud.com/premium: "Get unrestricted listening $7.99 / month + sales tax. Cancel anytime.", and
 # mixcloud.com/pro: "Annual $11.25 / month Save 25% when paid annually" and "Monthly $15.00 / month", whose page data
-# gives "currency:"USD"" and the yearly "$135.00". The archive's copies, read from the US, show the same, so they're
-# the US's. From Canada the pages show the same US dollars, but nothing on them names the country, so Canada's price
-# isn't listed (unknown there, not "not offered"), nor other countries'. Not listed: Creator
+# gives "currency:"USD"" and the yearly "$135.00". Read from Canada: Mixcloud's own Cloudflare placed this reading
+# in Canada (its /cdn-cgi/trace said "loc=CA"), so Canadians pay these US dollars, as with Anghami and Tidal; the
+# archive's copies, read from the US, show the same, so they're the US's too. Other countries' prices aren't read.
+# Not listed: Creator
 # Subscriptions, each creator's own and priced by them, Pro for students (50% off with UNiDAYS, proof of enrolment)
 # and Pro Enterprise (brands and radio stations).
 # Free: its help centre's "Which subscription is right for me?" ("While Mixcloud is free to use on our basic plan").
@@ -30,7 +31,7 @@ website: https://www.mixcloud.com
 domains: [help.mixcloud.com]
 category: music
 spendCategory: streaming
-billingCurrency: { US: USD }
+billingCurrency: { CA: USD, US: USD }
 cancelUrl: https://help.mixcloud.com/hc/en-us/articles/360004030660-How-do-I-cancel-my-subscription
 sources: { pricing: https://www.mixcloud.com/premium/ }
 # Owner (M11.2): its terms of use name Mixcloud Limited, a company incorporated in
@@ -105,6 +106,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-10
         sourceUrl: https://help.mixcloud.com/hc/en-us/articles/360004030700-Which-subscription-is-right-for-me
+      - region: CA
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://help.mixcloud.com/hc/en-us/articles/360004030700-Which-subscription-is-right-for-me
   - id: mixcloud.premium
     name: Premium
     link: https://www.mixcloud.com/premium/
@@ -123,6 +132,14 @@ plans:
     notes: Every public show without playback limits, with upfront tracklists, and downloads in its apps.
     prices:
       - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.mixcloud.com/premium/
+      - region: CA
         currency: USD
         amount: 7.99
         interval: month
@@ -156,7 +173,23 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-10
         sourceUrl: https://www.mixcloud.com/pro/
+      - region: CA
+        currency: USD
+        amount: 15
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.mixcloud.com/pro/
       - region: US
+        currency: USD
+        amount: 135
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-10
+        sourceUrl: https://www.mixcloud.com/pro/
+      - region: CA
         currency: USD
         amount: 135
         interval: year

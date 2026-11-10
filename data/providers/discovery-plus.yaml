@@ -20,6 +20,10 @@
 # Coverage: discovery-plus.intrattenimento-con-pubblicita, discovery-plus.intrattenimento and
 # discovery-plus.intrattenimento-sport in US, GB and IE: Italy's own plans (2026-11-04).
 
+# Coverage: discovery-plus.* in CA: not sold in Canada, "As of February 17, 2026, the discovery+ service provided by
+# Warner Bros. Discovery is no longer available in Canada" (its help centre); Canada's discovery+ is
+# discovery-plus-canada. No page lists every country it's sold in, so availableIn isn't set.
+
 id: discovery-plus
 name: discovery+
 aliases: [discovery plus, discoveryplus]
