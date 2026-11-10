@@ -994,9 +994,8 @@
   source: wikidata
   wikidata: Q6883832
   sitelinks: 12
-  status: unreadable
-  date: 2026-11-09
-  note: "Mixcloud Premium is a listener plan, but mixcloud.com (its Premium page, its FAQs, its terms and privacy policy) answers this machine with a bot check (read 2026-11-09); its help centre opens and compares Free and Premium, but links Premium's price to mixcloud.com"
+  status: queued
+  note: 'For music part 4: mixcloud.com answers this machine with a bot check (2026-11-09), but the Internet Archive has its Premium page ($7.99 a month), terms, privacy policy and subscription terms from September and October 2026, and its help centre compares Free and Premium'
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse

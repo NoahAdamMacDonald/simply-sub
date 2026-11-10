@@ -375,7 +375,9 @@ which reads each page as a visitor there would, before any hand reading:
   centre (support.anghami.com) 403; both read in Edge. play.anghami.com/terms and /privacy are pages not found: its
   terms and privacy policy are one page, anghami.com/legal.
 - **Mixcloud** (M11.15): mixcloud.com (its Premium page, FAQs, terms and privacy policy) answers this machine with a
-  bot check; its help centre (help.mixcloud.com) opens but links Premium's details back to mixcloud.com.
+  bot check, which is never retried another way; its help centre (help.mixcloud.com) opens but links Premium's details
+  back to mixcloud.com. The Internet Archive's copies (`id_`, fetched with `curl --compressed`) hold the pages' text and
+  the plan data (`premiumPlanInfo`, its amount and currency), but no country.
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
 

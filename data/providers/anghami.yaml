@@ -4,7 +4,7 @@
 # region"), which the plans' notes and a notable rating say. Pages, each quoted where it's used:
 # Pricing: anghami.com/plus, which prices by where the visitor is, always in US dollars: read from Canada ("renews at
 # USD4.69/month", a 6-Months Single Plan at USD24.99 and a Yearly Plan at USD49.99, each beside a struck-through USD29.99
-# and USD59.99, six and twelve times the US monthly price), and through a US exit ("renews at USD4.99/month", the same
+# and USD59.99, about six and twelve times the US monthly price), and through a US exit ("renews at USD4.99/month", the same
 # 6-month and yearly prices) and a UK, Australian, New Zealand, Irish, German, French, Dutch, Spanish and Italian exit
 # ("renews at USD2.99/month", monthly only). The Family Plan is "USD 7.49 monthly" everywhere. The struck-through prices
 # aren't offers: its help centre's 12-month article says a year "saves $10 compared to buying 12 months at the per-month
@@ -118,10 +118,10 @@ plans:
       audiobooks.included: false
     inferred:
       audio.quality:
-        reason: 'Its help names a higher bitrate as a Plus feature, and its quality settings below Plus’s 320 kbit/s are 96 and 160 kbit/s, both Standard.'
+        reason: 'Its quality settings are 96, 160 and 320 kbit/s, and its help names the higher bitrate as a Plus feature, so Free’s best is 160 kbit/s, Standard.'
         page:
-          name: What Are the Exclusive Features of Anghami Plus?
-          url: https://support.anghami.com/hc/en-us/articles/9126057943578-What-Are-the-Exclusive-Features-of-Anghami-Plus
+          name: How can I change the Streaming and Download Audio Quality on Anghami?
+          url: https://support.anghami.com/hc/en-us/articles/360016329493-How-can-I-change-the-Streaming-and-Download-Audio-Quality-on-Anghami
         lastVerified: 2026-11-09
       music.on-demand:
         reason: 'Its help says Free lets you listen to your favourite songs and play your playlists, with limited skips and no rewinding.'
@@ -500,13 +500,16 @@ policies:
         url: https://www.anghami.com/legal
       lastVerified: 2026-11-09
     - topic: privacy.data-sharing
-      tier: great
-      reason: 'It doesn’t sell or rent your personal information, and shares it only with companies that help run its service.'
+      tier: poor
+      reason: 'It doesn’t sell or rent your personal information, but its website uses marketing cookies, which you can refuse only browser by browser.'
       sources:
         - url: https://www.anghami.com/legal
           quote: 'We do not sell, trade, or rent Users personal identification information to others.'
         - url: https://www.anghami.com/legal
-          quote: 'We may use third party service providers to help us operate our business and the Site/App or administer activities on our behalf, such as sending out newsletters or surveys.'
+          quote: 'We use cookies, including optional marketing cookies, to enhance your experience.'
+      action:
+        name: Its privacy policy (cookies)
+        url: https://www.anghami.com/legal
       lastVerified: 2026-11-09
     - topic: privacy.ads-tracking
       tier: poor
@@ -692,14 +695,6 @@ policies:
       status: not-stated
       reason: 'Its terms don’t say it can take away what you paid for.'
       pages: [https://www.anghami.com/legal]
-      lastVerified: 2026-11-09
-    - topic: legal.service-changes
-      plans: [anghami.family]
-      tier: poor
-      reason: 'It can stop the Family Plan at any time, without telling you first.'
-      sources:
-        - url: https://support.anghami.com/hc/en-us/articles/360000567548-Anghami-Family-Plan-Subscription-Guide
-          quote: 'Anghami has the right to stop this offer at any time without prior notice'
       lastVerified: 2026-11-09
     - topic: legal.inactivity
       status: not-stated

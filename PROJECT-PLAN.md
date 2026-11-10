@@ -2171,8 +2171,8 @@ in every D1 `json` column search parses.
     a US exit; no official page states its audio quality, so it's SoundGuys' 192 kbps, the first third-party claim,
     M11.16) and Anghami (`anghami`: Free, Plus and Family in every catalog region, in US dollars; Plus is cheaper
     outside North America, monthly only there, and outside the Middle East and North Africa it streams Arabic songs
-    only, a notable rating). Anghami's billing-date wording joins core's same-date patterns. Mixcloud stays unread:
-    its prices, terms and privacy policy are on mixcloud.com, which answers this machine with a bot check.
+    only, a notable rating). Anghami's billing-date wording joins core's same-date patterns. mixcloud.com answers this
+    machine with a bot check, so Mixcloud moves to part 4, from the Internet Archive's copies.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 3 done)
