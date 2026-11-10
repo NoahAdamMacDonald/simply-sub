@@ -138,7 +138,9 @@
   source: wikidata
   wikidata: Q116933
   sitelinks: 85
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "vk.ru is Russia's social network, and its music subscription is sold there; none of the catalog's regions (read 2026-11-09)"
 - id: google-ai
   name: Google AI
   website: https://gemini.google.com
@@ -340,7 +342,9 @@
   source: wikidata
   wikidata: Q275141
   sitelinks: 38
-  status: queued
+  status: out-of-scope
+  date: 2026-11-09
+  note: 'napster.com now sells AI agents ("AI agents you can see, talk to, and create with"), not a music subscription (read 2026-11-09)'
 - id: microsoft-security-essentials
   name: Microsoft Security Essentials
   website: https://support.microsoft.com/en-my/help/17150/windows-7-what-is-microsoft-security-essentials
@@ -685,7 +689,9 @@
   source: wikidata
   wikidata: Q12595115
   sitelinks: 21
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "melon.com is South Korea's music service, in Korean and priced in won; none of the catalog's regions (read 2026-11-09)"
 - id: rumble
   name: Rumble
   website: https://rumble.com
@@ -855,7 +861,9 @@
   source: wikidata
   wikidata: Q10852229
   sitelinks: 15
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "y.qq.com is China's music service, in Chinese; none of the catalog's regions (read 2026-11-09)"
 - id: comodo-internet-security
   name: Comodo Internet Security
   website: https://www.comodo.com
@@ -984,7 +992,9 @@
   source: wikidata
   wikidata: Q6883832
   sitelinks: 12
-  status: queued
+  status: unreadable
+  date: 2026-11-09
+  note: 'Read 2026-11-09: mixcloud.com/select and its help centre answer with a bot check ("Just a moment..."), so its plans stay unread'
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse
@@ -1016,7 +1026,9 @@
   source: wikidata
   wikidata: Q28187024
   sitelinks: 11
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: 'Read 2026-11-09 from Canada: "Sorry, JOOX is not available in this location. JOOX is now available in Hong Kong, Macau, Thailand, Malaysia, Indonesia."'
 - id: soribada
   name: Soribada
   website: https://www.soribada.com
@@ -1024,7 +1036,9 @@
   source: wikidata
   wikidata: Q485718
   sitelinks: 10
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "soribada.com is South Korea's music service, in Korean and priced in won; none of the catalog's regions (read 2026-11-09)"
 - id: keychain
   name: Keychain
   website: https://www.apple.com/osx/preview
@@ -1084,7 +1098,9 @@
   source: wikidata
   wikidata: Q15896237
   sitelinks: 8
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "kugou.com is China's music service, in Chinese; none of the catalog's regions (read 2026-11-09)"
 - id: netease-cloud-music
   name: NetEase Cloud Music
   website: https://music.163.com
@@ -1092,7 +1108,9 @@
   source: wikidata
   wikidata: Q20063955
   sitelinks: 8
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "music.163.com is China's music service, in Chinese and priced in yuan; none of the catalog's regions (read 2026-11-09)"
 - id: aol-active-virus-shield
   name: AOL Active Virus Shield
   website: https://www.activevirusshield.com
