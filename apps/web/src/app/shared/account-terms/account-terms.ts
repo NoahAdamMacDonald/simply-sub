@@ -5,6 +5,7 @@ import { quoteLink, type Account } from '@simply-sub/core';
 import {
   accountKindNames,
   conditionText,
+  feesText,
   followedText,
   limitLines,
   protectionText,
@@ -14,8 +15,8 @@ import {
 
 /**
  * A finance account's terms on its card (M11.10, BLUEPRINT §4.11): what it is, its posted interest, how soon it
- * followed the Bank of Canada's last changes (M11.14), what waives its fee, its limits, what protects the money (linked
- * to the provider's words), and who may open it.
+ * followed the Bank of Canada's last changes (M11.14), what waives its fee, its limits, its other fees and what protects
+ * the money (each linked to the provider's words), and who may open it.
  */
 @Component({
   selector: 'ss-account-terms',
@@ -53,6 +54,17 @@ export class AccountTerms {
       href: quoteLink(protection.url, protection.quotes),
       tooltip: protection.quotes.map((quote) => `“${quote}”`).join(' '),
     };
+  });
+  /** Its other fees (2026-11-10), linked to its fee page scrolled to its words. */
+  protected readonly fees = computed(() => {
+    const { fees, currency } = this.account();
+    return (
+      fees && {
+        text: feesText(fees, currency, this.country()),
+        href: quoteLink(fees.url, fees.quotes),
+        tooltip: fees.quotes.map((quote) => `“${quote}”`).join(' '),
+      }
+    );
   });
   protected readonly eligibility = computed(() => {
     const { eligibility, currency } = this.account();

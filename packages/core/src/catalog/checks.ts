@@ -2,6 +2,18 @@ import type * as z from 'zod';
 
 // Small helpers shared by the schemas and validateCatalog.
 
+/**
+ * Whether `text` has `word` with no letter or digit on either side: "NYSE: SPOT" has SPOT, "SPOTIFY" doesn't. A number
+ * doesn't end inside a longer one either: "61.2%" doesn't have 61.
+ */
+export function hasWord(text: string, word: string): boolean {
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(
+    `(?<![\\p{L}\\p{N}]|\\p{N}[.,])${escaped}(?![\\p{L}\\p{N}]|[.,]\\p{N})`,
+    'u',
+  ).test(text);
+}
+
 /** The index of every value that already appeared earlier in `values`. */
 export function repeatedIndexes(values: readonly string[]): number[] {
   const seen = new Set<string>();

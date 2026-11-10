@@ -60,6 +60,76 @@ describe('accountSchema', () => {
     ).toEqual(['protection.quotes: Quote its words about who protects the money']);
     expect(issues(accountSchema, { ...chequing, protection: undefined })).toHaveLength(1);
   });
+
+  // The owner's items of 2026-11-10: card spending and yearly limits, cover through another institution, other fees.
+  it('takes card purchase limits and a yearly limit', () => {
+    expect(
+      issues(accountSchema, {
+        ...chequing,
+        limits: { eTransfer: { day: 3000, year: 100_000 }, purchases: { day: 5000 } },
+      }),
+    ).toEqual([]);
+    expect(issues(accountSchema, { ...chequing, limits: { purchases: {} } })).toEqual([
+      'limits.purchases: Give at least one limit (transaction, day, week, month or year)',
+    ]);
+  });
+
+  it('names who holds the money, in its words', () => {
+    const held = {
+      ...protection,
+      held: 'trust' as const,
+      quotes: ['Your money is held in trust at Peoples Trust Company, a CDIC member.'],
+    };
+    expect(
+      issues(accountSchema, {
+        ...chequing,
+        protection: { ...held, through: ['Peoples Trust Company'] },
+      }),
+    ).toEqual([]);
+    expect(
+      issues(accountSchema, { ...chequing, protection: { ...held, through: ['Home Trust'] } }),
+    ).toEqual([
+      'protection.through.0: No quote names Home Trust: quote the words that name who holds the money',
+    ]);
+  });
+
+  it('lists its other fees, each named with its amount or percent in its words', () => {
+    const fees = {
+      items: [
+        { name: 'Interac e-Transfer', amount: 1.5, per: 'use' as const },
+        { name: 'Foreign exchange', percent: 2.5, per: 'use' as const },
+        { name: 'Paper statements', amount: 2, per: 'month' as const },
+      ],
+      url: 'https://example.com/fees',
+      quotes: [
+        'Interac e-Transfer: $1.50 each',
+        'Foreign exchange: 2.5% of the converted amount',
+        'Paper statements: $2 a month',
+      ],
+      lastVerified: today,
+    };
+    expect(issues(accountSchema, { ...chequing, fees })).toEqual([]);
+    expect(
+      issues(accountSchema, {
+        ...chequing,
+        fees: {
+          ...fees,
+          items: [
+            { name: 'Wire transfer', amount: 15, per: 'use' as const },
+            // 1.5 isn't in "$1.50"'s neighbour "$11.50".
+            { name: 'Interac e-Transfer', amount: 11, per: 'use' as const },
+            { name: 'Stop payment', per: 'use' as const },
+          ],
+        },
+      }),
+    ).toEqual([
+      'fees.items.2: Give its amount, its percent, or both',
+      'fees.items.0.name: No quote names Wire transfer',
+      'fees.items.0.amount: No quote gives 15',
+      'fees.items.1.amount: No quote gives 11',
+      'fees.items.2.name: No quote names Stop payment',
+    ]);
+  });
 });
 
 /** The errors, leaving out the topics the test catalog's providers and the fixtures don't rate. */

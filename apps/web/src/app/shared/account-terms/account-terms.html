@@ -31,6 +31,24 @@
   @for (line of limits(); track line) {
     <li>{{ line }}</li>
   }
+  @if (fees(); as fees) {
+    <li>
+      <span class="subject">Other fees: </span>
+      <span>{{ fees.text }}, according to its </span>
+      <a
+        class="outside-link"
+        [href]="fees.href"
+        target="_blank"
+        rel="noopener"
+        [matTooltip]="fees.tooltip"
+        matTooltipTouchGestures="off"
+        aria-label="Page on its fees, opens in a new tab"
+      >
+        <span>fee page</span>
+        <mat-icon aria-hidden="true">open_in_new</mat-icon>
+      </a>
+    </li>
+  }
   <li>
     <span class="subject">Protection: </span>
     <span>{{ protection().text }}, according to its </span>

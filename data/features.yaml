@@ -1781,6 +1781,10 @@
     - { id: rdsp, name: RDSP, aliases: [registered disability savings plan] }
     - { id: rrif, name: RRIF, aliases: [rif, registered retirement income fund] }
     - { id: lira, name: LIRA, aliases: [locked-in retirement account] }
+    # The owner's list of 2026-11-10 asks for the lesser-known ones too: a LIF pays out a LIRA, and a DPSP is an
+    # employer's plan the institution runs for its members.
+    - { id: lif, name: LIF, aliases: [life income fund] }
+    - { id: dpsp, name: DPSP (through an employer), aliases: [deferred profit sharing plan] }
   aliases: [registered account, tax-sheltered]
 - id: finance.usd-account
   name: US dollar account
@@ -1798,6 +1802,19 @@
     - { id: prepaid-mastercard, name: Prepaid Mastercard }
     - { id: prepaid-visa, name: Prepaid Visa }
   aliases: [debit card, prepaid card]
+# The credit cards an institution issues, by network (the owner's item of 2026-11-10: "interac, mastercard or visa
+# for their bank cards (debit, prepaid and credit)"): a fact about the institution, stated once, since a card isn't
+# an account plan. Its debit and prepaid cards are each account's finance.card.
+- id: finance.credit-cards
+  name: Credit cards it issues
+  category: finance
+  type: set
+  values:
+    - { id: visa, name: Visa }
+    - { id: mastercard, name: Mastercard }
+    - { id: amex, name: American Express, aliases: [amex] }
+  aliases: [credit card, credit cards]
+  providerWide: true
 - id: finance.e-transfer
   name: Free Interac e-Transfers
   category: finance
@@ -1816,6 +1833,11 @@
     - { id: own-network, name: At its own ATMs }
     - { id: any-atm-free, name: At any ATM in Canada }
     - { id: fee-refunds, name: Other operators' fees refunded, aliases: [atm fee reimbursement] }
+    # A shared network's machines with no surcharge (credit unions' THE EXCHANGE and ACCULINK), the owner's item
+    # of 2026-11-10.
+    - id: partner-network
+      name: At a partner network's ATMs
+      aliases: [the exchange, acculink, surcharge-free network]
   aliases: [abm, cash withdrawals, atm fees]
 - id: finance.cash-deposits
   name: Cash deposits

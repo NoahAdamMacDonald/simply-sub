@@ -154,6 +154,7 @@ export function citedPages(
     for (const plan of provider.plans) {
       cite(plan.account?.rates?.sourceUrl, 'pricing', id);
       cite(plan.account?.protection.url, 'policies', id);
+      cite(plan.account?.fees?.url, 'pricing', id);
     }
     for (const listing of provider.resellers ?? []) {
       cite(listing.approvedBy.url, 'pricing', id);
@@ -215,8 +216,13 @@ export function citedFacts(
     if (item.taxIncluded) facts.quotes.push(item.taxIncluded.quote);
   };
   for (const provider of providers) {
-    for (const plan of provider.plans)
+    for (const plan of provider.plans) {
       for (const item of plan.prices) price(item, [plan.name, `${provider.name} ${plan.name}`]);
+      // A finance account's words on who protects the money, and on its other fees (2026-11-10).
+      const { protection, fees } = plan.account ?? {};
+      if (protection?.url === url) facts.quotes.push(...protection.quotes);
+      if (fees?.url === url) facts.quotes.push(...fees.quotes);
+    }
     for (const addOn of provider.addOns ?? [])
       for (const item of addOn.prices) price(item, [addOn.name]);
     for (const listing of provider.resellers ?? []) {

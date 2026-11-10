@@ -1,6 +1,6 @@
 import * as z from 'zod';
 import { addDays, type IsoDate } from '../dates/iso-date';
-import { addDuplicateIssues } from './checks';
+import { addDuplicateIssues, hasWord } from './checks';
 import { domainSchema, httpsUrlSchema, isoDateSchema, slugSchema, textSchema } from './formats';
 import { namesCountry } from './provider-facts';
 
@@ -281,18 +281,6 @@ export const ownerStockSchema = z
     );
   });
 export type OwnerStock = z.infer<typeof ownerStockSchema>;
-
-/**
- * Whether `text` has `word` with no letter or digit on either side: "NYSE: SPOT" has SPOT, "SPOTIFY" doesn't. A number
- * doesn't end inside a longer one either: "61.2%" doesn't have 61.
- */
-function hasWord(text: string, word: string): boolean {
-  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  return new RegExp(
-    `(?<![\\p{L}\\p{N}]|\\p{N}[.,])${escaped}(?![\\p{L}\\p{N}]|[.,]\\p{N})`,
-    'u',
-  ).test(text);
-}
 
 /**
  * What the words leave unsaid: each listing's exchange and symbol, the majority holder and its percent. Its own page's

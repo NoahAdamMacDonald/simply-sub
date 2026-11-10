@@ -1207,6 +1207,11 @@
                         "type": "number",
                         "exclusiveMinimum": 0,
                         "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "year": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "A year, when the page gives one (the owner’s item of 2026-11-10)"
                       }
                     },
                     "additionalProperties": false,
@@ -1234,10 +1239,47 @@
                         "type": "number",
                         "exclusiveMinimum": 0,
                         "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "year": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "A year, when the page gives one (the owner’s item of 2026-11-10)"
                       }
                     },
                     "additionalProperties": false,
                     "description": "Cash from ATMs"
+                  },
+                  "purchases": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "At most this much at once"
+                      },
+                      "day": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "week": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "month": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "In the account's currency's major unit: 3000 means $3,000"
+                      },
+                      "year": {
+                        "type": "number",
+                        "exclusiveMinimum": 0,
+                        "description": "A year, when the page gives one (the owner’s item of 2026-11-10)"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "description": "What its card can spend: its purchase limits (the owner’s item of 2026-11-10)"
                   },
                   "debits": {
                     "type": "integer",
@@ -1247,6 +1289,66 @@
                   }
                 },
                 "additionalProperties": false
+              },
+              "fees": {
+                "type": "object",
+                "properties": {
+                  "items": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "minLength": 1,
+                          "description": "What it’s for, as the page names it (Interac e-Transfer, Non-network ATM withdrawal)"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "description": "In the account's currency"
+                        },
+                        "percent": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 100,
+                          "description": "Of the amount it’s charged on: 2.5 means 2.5% (a foreign exchange fee)"
+                        },
+                        "per": {
+                          "type": "string",
+                          "enum": ["use", "month", "year"],
+                          "description": "Each time it’s used, a month or a year"
+                        }
+                      },
+                      "required": ["name", "per"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "url": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://",
+                    "patternErrorMessage": "Use a full https:// URL",
+                    "description": "The provider's own page that lists them"
+                  },
+                  "quotes": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 1 },
+                    "description": "Its words, word for word: each fee’s name and its amount or percent"
+                  },
+                  "lastVerified": {
+                    "type": "string",
+                    "format": "date",
+                    "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                    "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                    "description": "When the page was read"
+                  }
+                },
+                "required": ["items", "url", "quotes", "lastVerified"],
+                "additionalProperties": false,
+                "description": "Its fees beyond the monthly one, as its fee page lists them (2026-11-10)"
               },
               "protection": {
                 "type": "object",
@@ -1265,6 +1367,12 @@
                     "type": "number",
                     "exclusiveMinimum": 0,
                     "description": "The cover, when the page states it (spread over several members: their total)"
+                  },
+                  "through": {
+                    "minItems": 1,
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 1 },
+                    "description": "The member institutions that hold the money, when it isn't the provider itself (KOHO's Peoples Trust Company): its cover comes through them (the owner's item of 2026-11-10)"
                   },
                   "url": {
                     "type": "string",

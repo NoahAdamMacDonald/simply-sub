@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { hasWord } from './checks';
 import { currencySchema, httpsUrlSchema, isoDateSchema, textSchema } from './formats';
 
 // A finance account's terms (BLUEPRINT §4.11, M11.10): what a plan's price can't say. An account is a plan, its
@@ -239,9 +240,12 @@ const periodLimitsSchema = z
     day: amountSchema.optional(),
     week: amountSchema.optional(),
     month: amountSchema.optional(),
+    year: amountSchema
+      .describe('A year, when the page gives one (the owner’s item of 2026-11-10)')
+      .optional(),
   })
   .refine((limits) => Object.keys(limits).length > 0, {
-    message: 'Give at least one limit (transaction, day, week or month)',
+    message: 'Give at least one limit (transaction, day, week, month or year)',
   });
 
 /** Shown on the card, not ranked. */
@@ -249,6 +253,9 @@ export const accountLimitsSchema = z
   .strictObject({
     eTransfer: periodLimitsSchema.describe('Interac e-Transfers sent').optional(),
     atmWithdrawal: periodLimitsSchema.describe('Cash from ATMs').optional(),
+    purchases: periodLimitsSchema
+      .describe('What its card can spend: its purchase limits (the owner’s item of 2026-11-10)')
+      .optional(),
     debits: z
       .int()
       .positive('Must be a whole number of at least 1')
@@ -263,28 +270,114 @@ export const accountLimitsSchema = z
 export type AccountLimits = z.infer<typeof accountLimitsSchema>;
 
 /** What protects the money if the company or its bank fails, quoted like a policy (the finance.money-protection topic grades it). */
-export const accountProtectionSchema = z.strictObject({
-  insurer: z
-    .enum(['cdic', 'provincial', 'cipf', 'none'])
-    .describe(
-      'CDIC, a provincial deposit insurer (credit unions), CIPF (investments, if the dealer fails), or none',
-    ),
-  held: z
-    .enum(['own-name', 'trust', 'company'])
-    .describe(
-      "In your name at a member, in trust for you (you're the beneficiary), or in the company's own name",
-    ),
-  limit: amountSchema
-    .describe('The cover, when the page states it (spread over several members: their total)')
-    .optional(),
-  url: httpsUrlSchema.describe("The provider's own page that says it"),
-  quotes: z
-    .array(textSchema)
-    .min(1, 'Quote its words about who protects the money')
-    .describe("The provider's own words, word for word"),
-  lastVerified: isoDateSchema.describe('When the page was read'),
-});
+export const accountProtectionSchema = z
+  .strictObject({
+    insurer: z
+      .enum(['cdic', 'provincial', 'cipf', 'none'])
+      .describe(
+        'CDIC, a provincial deposit insurer (credit unions), CIPF (investments, if the dealer fails), or none',
+      ),
+    held: z
+      .enum(['own-name', 'trust', 'company'])
+      .describe(
+        "In your name at a member, in trust for you (you're the beneficiary), or in the company's own name",
+      ),
+    limit: amountSchema
+      .describe('The cover, when the page states it (spread over several members: their total)')
+      .optional(),
+    through: z
+      .array(textSchema)
+      .min(1, 'Leave through out when the provider holds the money itself')
+      .describe(
+        "The member institutions that hold the money, when it isn't the provider itself (KOHO's Peoples Trust Company): its cover comes through them (the owner's item of 2026-11-10)",
+      )
+      .optional(),
+    url: httpsUrlSchema.describe("The provider's own page that says it"),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote its words about who protects the money')
+      .describe("The provider's own words, word for word"),
+    lastVerified: isoDateSchema.describe('When the page was read'),
+  })
+  .superRefine((protection, ctx) => {
+    const words = protection.quotes.join('\n').toLowerCase();
+    (protection.through ?? []).forEach((name, index) => {
+      if (!words.includes(name.toLowerCase())) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `No quote names ${name}: quote the words that name who holds the money`,
+          path: ['through', index],
+        });
+      }
+    });
+  });
 export type AccountProtection = z.infer<typeof accountProtectionSchema>;
+
+/**
+ * A fee beyond the monthly one (the owner's item of 2026-11-10: "any fees or limits"), as its page states it: an amount
+ * each time, a month or a year, or a percent of what it's charged on (a foreign exchange fee).
+ */
+export const accountFeeSchema = z
+  .strictObject({
+    name: textSchema.describe(
+      'What it’s for, as the page names it (Interac e-Transfer, Non-network ATM withdrawal)',
+    ),
+    amount: amountSchema.describe("In the account's currency").optional(),
+    percent: z
+      .number()
+      .positive('Must be more than 0')
+      .max(100, 'Must be a percentage, 100 at most')
+      .describe('Of the amount it’s charged on: 2.5 means 2.5% (a foreign exchange fee)')
+      .optional(),
+    per: z.enum(['use', 'month', 'year']).describe('Each time it’s used, a month or a year'),
+  })
+  .refine((fee) => fee.amount !== undefined || fee.percent !== undefined, {
+    message: 'Give its amount, its percent, or both',
+  });
+export type AccountFee = z.infer<typeof accountFeeSchema>;
+
+/** The ways a page can write a number: 1.5 as 1.50, 1.5, 1,50 or 1,5. */
+function writtenAs(value: number): string[] {
+  const fixed = value.toFixed(2);
+  const plain = String(value);
+  return [...new Set([fixed, plain, fixed.replace('.', ','), plain.replace('.', ',')])];
+}
+
+/** An account's fees beyond its monthly one, quoted from the provider's own fee page (a service charges list). */
+export const accountFeesSchema = z
+  .strictObject({
+    items: z.array(accountFeeSchema).min(1, 'List at least one fee'),
+    url: httpsUrlSchema.describe("The provider's own page that lists them"),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote its words that name each fee and its amount')
+      .describe('Its words, word for word: each fee’s name and its amount or percent'),
+    lastVerified: isoDateSchema.describe('When the page was read'),
+  })
+  .superRefine((fees, ctx) => {
+    const text = fees.quotes.join('\n');
+    const lower = text.toLowerCase();
+    fees.items.forEach((fee, index) => {
+      if (!lower.includes(fee.name.toLowerCase())) {
+        ctx.addIssue({
+          code: 'custom',
+          message: `No quote names ${fee.name}`,
+          path: ['items', index, 'name'],
+        });
+      }
+      for (const key of ['amount', 'percent'] as const) {
+        const value = fee[key];
+        if (value !== undefined && !writtenAs(value).some((written) => hasWord(text, written))) {
+          ctx.addIssue({
+            code: 'custom',
+            message: `No quote gives ${value}${key === 'percent' ? '%' : ''}`,
+            path: ['items', index, key],
+          });
+        }
+      }
+    });
+  });
+export type AccountFees = z.infer<typeof accountFeesSchema>;
 
 export const accountSchema = z
   .strictObject({
@@ -297,6 +390,9 @@ export const accountSchema = z
       .optional(),
     rates: accountRatesSchema.describe('Its interest, when it pays any').optional(),
     limits: accountLimitsSchema.optional(),
+    fees: accountFeesSchema
+      .describe('Its fees beyond the monthly one, as its fee page lists them (2026-11-10)')
+      .optional(),
     protection: accountProtectionSchema,
     eligibility: accountConditionSchema
       .describe(
