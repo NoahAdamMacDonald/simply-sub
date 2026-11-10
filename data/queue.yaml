@@ -994,8 +994,9 @@
   source: wikidata
   wikidata: Q6883832
   sitelinks: 12
-  status: queued
-  note: 'Mixcloud Premium is a listener plan (7.99 a month, its premium page on 2026-11-09), for music part 3; its pages answer this machine with a bot check at times'
+  status: unreadable
+  date: 2026-11-09
+  note: "Mixcloud Premium is a listener plan, but mixcloud.com (its Premium page, its FAQs, its terms and privacy policy) answers this machine with a bot check (read 2026-11-09); its help centre opens and compares Free and Premium, but links Premium's price to mixcloud.com"
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse
@@ -1083,8 +1084,8 @@
   source: wikidata
   wikidata: Q16526979
   sitelinks: 9
-  status: queued
-  note: 'Sells to Canada (anghami.com/plus: USD4.69 a month, read 2026-11-09), for music part 3'
+  status: done
+  date: 2026-11-09
 - id: emsisoft-anti-malware
   name: Emsisoft Anti-Malware
   website: https://www.emsisoft.com/de/software/antimalware

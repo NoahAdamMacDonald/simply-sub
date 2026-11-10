@@ -212,6 +212,13 @@ describe('namesRenewalAnchor', () => {
     // Viaplay's Dutch help centre (M11.15): a billing date moved only to today, the day a new subscription starts.
     ['Je kunt de betaaldatum alleen wijzigen naar de huidige datum.', 'same-date', true],
     ['Je kunt de betaaldatum wijzigen.', 'same-date', false],
+    // Anghami's help centre (M11.15): a new billing date is the day you subscribe again.
+    [
+      'The next step is now choosing the date when you would like your payment method to be charged each month and then subscribe again to Anghami+',
+      'same-date',
+      true,
+    ],
+    ['Choose the date when you would like to be charged each month.', 'same-date', false],
     ['Your plan renews every 30 days.', 'every-30-days', true],
     ['Un forfait de 30 jours', 'every-30-days', true],
     ['You’re billed on the 1st of each month.', 'first-of-month', true],

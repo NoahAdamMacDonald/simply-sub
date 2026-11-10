@@ -1,0 +1,41 @@
+url: https://support.anghami.com/hc/en-us/articles/227960908-Why-can-t-I-see-international-songs
+method: fetch
+saved: 2026-11-09
+
+Why can’t I see international songs? – Anghami Help Center
+Skip to main content
+Anghami Help Center
+English (United States)
+العربية
+Français
+How can we help?
+Anghami Help Center
+Privacy & Security Guidelines
+Music Restrictions
+Why can’t I see international songs?
+Updated September 22, 2026 06:36
+Due to licensing agreements with music labels, Anghami is only authorized to stream international songs within the MENA region (Middle East and North Africa).
+In some regions, content owners have exclusive deals with other platforms, which further restricts access to their catalogs on Anghami. These agreements are legally binding, and we are required to respect them.
+If Anghami detects that your account is being used outside the MENA region, or that your connection is masking your actual location, your access to international songs may be restricted after a few days.
+This can happen when:
+You are using a VPN.
+You are using Starlink or another connection that may identify your location outside the MENA region.
+You are physically outside the MENA region.
+How can I restore access to international songs?
+If you are physically in the MENA region:
+Turn off your VPN and make sure you are not using a connection that identifies you as being outside the MENA region.
+Continue using Anghami normally while physically in the MENA region.
+Wait 48–72 hours for your location to be recognized again.
+Access to international songs should automatically be restored once your account is detected as being in the MENA region.
+No manual activation is required.
+What if I see a subscription for users outside the MENA region?
+Anghami offers a discounted subscription for users outside the MENA region. This plan provides limited access to Arabic songs.
+If you are physically in the MENA region and your goal is to restore access to international songs, do not activate this subscription. Activating it will not restore access to the international catalog.
+The solution is to:
+Stay physically in the MENA region + turn off your VPN/connection masking your location + wait 48–72 hours.
+Still having an issue?
+If you are physically in the MENA region, have disabled your VPN, and have been using Anghami normally for more than 72 hours but still cannot access international songs, please contact Anghami Support.
+Was this article helpful?
+13 out of 20 found this helpful
+© Anghami Help Center
+Search...
