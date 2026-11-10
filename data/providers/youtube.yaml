@@ -10,10 +10,13 @@
 # Where it's sold: Premium and Premium Lite in every catalog region (the available locations article's two lists; Lite's
 # says "Great Britain"). No availableIn: both lists run to most of the world.
 # YouTube Music Premium (M11.15, music, 2026-11-09): youtube.com/musicpremium, which prices by where the visitor is too:
-# read from Canada, and through a US, UK, Australian, German, French, Dutch, Spanish and Italian exit, each page in that
-# country's currency (the US's and Europe's checked against YouTube Premium's prices in the same session). Its annual
-# plan ("12 months for CA$119.99", "Doesn't automatically renew") is sold in Canada, the US and Germany among them, and a
-# Two-person plan in Australia and France. Its Student plans aren't listed, as Premium's aren't.
+# read through a US, UK, Australian, German, French, Dutch, Spanish and Italian exit, each page in that country's
+# currency (the US's and Europe's checked against YouTube Premium's prices in the same session). Canada's first read,
+# from this machine, got the US page ("GL":"US", "$11.99") and was stored as CA$: read again 2026-11-10 through four
+# Canadian exits, each "CA$10.99/month", Family "CA$16.99/month" and "12 months for CA$109.99". Google can place a
+# Canadian address in the US, so a Canadian price counts only with its "CA$". Its annual plan ("Doesn't automatically
+# renew") is sold in Canada, the US and Germany among them, and a Two-person plan in Australia and France. Its Student
+# plans aren't listed, as Premium's aren't.
 # Region checklist, 2026-11-04: 1. youtube.com/premium has no country paths, and gl= changes the country it names but
 # not its prices (gl=NZ from Canada still showed CA$); 2. no picker; 3. not looked for; 4. checkout not opened; 5. the
 # help centre has no price list by country; 6. read through each country's exit: New Zealand's three showed
@@ -705,25 +708,26 @@ plans:
     perks: [background-play]
     notes: "YouTube Music Premium alone: music without ads, offline and in the background, but not YouTube's other videos."
     prices:
-      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      # Read 2026-11-09 through each country's exit; Canada's read again 2026-11-10 through Canadian exits (the first
+      # read had the US page's prices).
       - {
           region: CA,
           currency: CAD,
-          amount: 11.99,
+          amount: 10.99,
           interval: month,
           intervalCount: 1,
           autoRenew: true,
-          lastVerified: 2026-11-09,
+          lastVerified: 2026-11-10,
           sourceUrl: https://www.youtube.com/musicpremium,
         }
       - {
           region: CA,
           currency: CAD,
-          amount: 119.99,
+          amount: 109.99,
           interval: year,
           intervalCount: 1,
           autoRenew: false,
-          lastVerified: 2026-11-09,
+          lastVerified: 2026-11-10,
           sourceUrl: https://www.youtube.com/musicpremium,
         }
       - {
@@ -839,15 +843,16 @@ plans:
     perks: [background-play]
     notes: YouTube Music Premium shared with up to 5 others in your household, aged 13 or older.
     prices:
-      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      # Read 2026-11-09 through each country's exit; Canada's read again 2026-11-10 through Canadian exits (the first
+      # read had the US page's prices).
       - {
           region: CA,
           currency: CAD,
-          amount: 18.99,
+          amount: 16.99,
           interval: month,
           intervalCount: 1,
           autoRenew: true,
-          lastVerified: 2026-11-09,
+          lastVerified: 2026-11-10,
           sourceUrl: https://www.youtube.com/musicpremium,
         }
       - {
@@ -943,7 +948,7 @@ plans:
     perks: [background-play]
     notes: YouTube Music Premium shared with one other member of your household, aged 13 or older.
     prices:
-      # Read 2026-11-09: Canada from Canada; the others through each country's exit.
+      # Read 2026-11-09 through each country's exit.
       - {
           region: AU,
           currency: AUD,

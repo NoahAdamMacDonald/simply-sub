@@ -35,6 +35,12 @@ API contract's prices are illustrative and never a source. This skill is how to 
   affect the price". Wording like "+ tax", "excl. VAT" or "taxes calculated at checkout" means leave it out. When a
   page says both, the checkout's order summary settles it, read without an account or an email (Bitdefender's "Taxes
   included", 2026-11-09). A converted figure on the page ("€5 is equivalent to CA$7.84") is not a price in that currency.
+- **Which country did the page price for? Check, never assume.** This machine is in Canada, but its VPN address can
+  be placed elsewhere: Google put it in the US, so YouTube Music's US prices went in as Canada's (2026-11-09). On a
+  page that prices by where the visitor is, a price counts for a region only when the page names that region's
+  currency (`CA$`, `C$` or `CAD` for Canada; `A$`, `NZ$`, `£`, `€`, `US$`) or its own data names the country
+  (`"GL":"CA"`). A bare `$` names no country. When the page shows another country's, read the region through a
+  country's exit, and save its baseline (`data:baselines`) from a reading that shows the region's prices too.
 - **Region codes:** ISO 3166-1 alpha-2 (`GB` for the United Kingdom, never `UK`), `EU` when one price covers the
   whole EU, and `GLOBAL` for one price wherever the provider sells.
 - **`availableIn` only from an official list.** When the provider says where it sells ("only in the US", a country
@@ -160,7 +166,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
 
 | Tool | Use it for | Watch out |
 |---|---|---|
-| WebFetch | Static pages (help articles, FAQs) | It fetches from this machine, so geo-located pages show **Canada**. Its summary can misread tables, so confirm the numbers in Edge when they matter. JS-rendered pages come back empty. |
+| WebFetch | Static pages (help articles, FAQs) | It fetches from this machine, so geo-located pages usually show **Canada**, not always (check the currency: the Rules). Its summary can misread tables, so confirm the numbers in Edge when they matter. JS-rendered pages come back empty. |
 | `read-page.cjs` (Edge) | JS pages, tabs, currency menus, country pickers, accordions, carousels, image-only labels (screenshots) | Needs the deps below. Look at the screenshots when text is missing. |
 | `read-page-mullvad.cjs` (Mullvad Browser, M11.7) | A page Edge and curl can't read (the owner's DNS filter blocks it, a script fails), and policy pages | The same steps but `country:`, and the same `snap:` files. It tells every site it's en-US in UTC: a price it shows counts only once the page's currency is the region's. |
 | WebSearch | Finding the right official URL | Runs from the US, server side. Results are often stale or third-party: never a source. |
@@ -210,7 +216,7 @@ node .claude/skills/price-research/read-page.cjs "$DEPS" "$OUT" https://proton.m
 
 | Pattern (example) | How to read it | How it goes in the YAML |
 |---|---|---|
-| **Price set by your location** (Netflix, Disney+, most streamers) | This machine is in Canada. Find the per-country URL or picker. Netflix help: append the country code, `help.netflix.com/en/node/24926/us` (and `/ca`). | One price per region (`region: US, currency: USD`). `billingCurrency: { CA: CAD, US: USD }`. `sourceUrl` is the country URL. |
+| **Price set by your location** (Netflix, Disney+, most streamers) | This machine usually gets Canada's; check the page's currency first (the Rules). Find the per-country URL or picker. Netflix help: append the country code, `help.netflix.com/en/node/24926/us` (and `/ca`). | One price per region (`region: US, currency: USD`). `billingCurrency: { CA: CAD, US: USD }`. `sourceUrl` is the country URL. |
 | **Language/country picker** (Disney+) | `disneyplus.com` and the help centre redirect by IP. Open `help.disneyplus.com`, then `click?:Accept All` and `country:United States (English)` (the picker's button, named "Change country or language", shows the flag and the language since 2026-10-28), then `goto:` the article (`/article/disneyplus-price`): since 2026-11-03 a country picked on the article goes to a page not found. Check each language too (US English and Español, Canada English and Français): prices follow the country, not the language. | Plans can differ by country. A plan sold in one country only has prices there, and the app hides it in the other countries the provider is priced in. If the same name means different features (US With Ads is 4K, Canada's Standard With Ads is 1080p), make separate plans (`disney-plus.with-ads`, US only). Say in a file comment where the other country's prices come from. Other countries (M11.9): pick each on the help centre's home page ("United Kingdom (English)", "Germany (English)"…), then `goto:` the article, which is `/en-GB/article/disneyplus-price` for all of them: each country's prices, in its currency. The nightly check can't pick a country, so it sends the prices it doesn't find there to a person. |
 | **Prices filled in by a script** (Bitdefender) | Its store script fills the prices after a request the owner's DNS filter blocks, so Edge shows none (2026-11-03): read with `read-page-mullvad.cjs`. Each locale's pages (`/en-gb/`, `/de-de/`…) price in that region's currency whoever reads them, so they count. Each suite's page has an Individual and a Family card, each with its own Monthly (Ultimate only), Yearly and 2 Years tabs: `nth:1:2 Years` then `nth:2:2 Years`, in the page's language (`2 Jahre`, `2 ans`). The struck-through price ("£104.99 Save 33%") is the regular one; the one under it is the first term's. | One price per region and period, `sourceUrl` the region's page. The tax words beside the price ("Sales tax included.", "Inklusive MwSt.") are `taxIncluded`; the US's "Plus applicable sales tax." isn't. The English pages' "Compare Bitdefender Products" section says "Plus applicable sales tax" everywhere: their checkout says "Taxes included" outside the US (2026-11-09). |
 | **Buyer picks the currency** (Proton: USD, CAD, EUR, CHF) | Use the currency `<select>` (`select:Change currency=CAD`), and check every product tab and both Monthly and Yearly. The Yearly view shows the monthly price struck through, a lower per-month rate and "Billed at X every 12 months": store X as the yearly price and the struck price as the monthly one. Family and Duo plans can sit on another page (`proton.me/family`). | A `GLOBAL` price in each currency. BLUEPRINT §4.7 shows a price in the user's own currency as native. `billingCurrency: { GLOBAL: USD }` covers everyone else. A free plan keeps one `$0` price. Several currencies in one region mean the buyer can pick any of them: Optimizations suggests the cheapest on the user's card (M9.6), so list them only when the checkout lets the buyer choose. |
@@ -239,7 +245,7 @@ file's header ("# Region checklist for CA, 2026-11-03: 1. … 7. …", "none" co
    Browser (`read-page-mullvad.cjs`, below);
 7. the owner's own bill or account page, only when the owner offers it.
 
-**Another country's pages** (a site that prices by where the visitor is, and shows this machine only Canada's): ask the
+**Another country's pages** (a site that prices by where the visitor is, and shows this machine only one country's, usually Canada's): ask the
 owner. Collect those countries over a batch and ask once, at its end, listing them; the owner says when they can be
 read, or says skip. Never switch the owner's VPN yourself. A region skipped stays unread, with why, and a site's bot
 check or block still means stop.
@@ -273,7 +279,7 @@ which reads each page as a visitor there would, before any hand reading:
    `.pipeline/<id>/regions/GB/`.
 2. `npm run data:render -- <id> --region GB`: the page in the system Edge in the region's English and time zone. A page
    that went to another country's (`/en-us/` from `/en-gb/`) or shows only another currency's prices is kept as
-   unread, never extracted: a site that prices by where the visitor is shows this machine Canada's. Read that one
+   unread, never extracted: a site that prices by where the visitor is shows this machine one country's, usually Canada's. Read that one
    here only with the region's prices on screen (a country picker, or the computer's VPN if the owner wants).
 3. `npm run data:extract -- <id> --region GB --prepare`, answer `extraction.md` in `answer.json` beside it, then
    `npm run data:extract -- <id> --region GB`: core's `regionalPrices` keeps only prices for the provider's plans, in
@@ -403,8 +409,10 @@ which reads each page as a visitor there would, before any hand reading:
 - **Pages that price by where the visitor is** (youtube.com/premium, mubi.com/<country>/memberships, Google One):
   a country path or `gl=` changes the country a page names, not its prices. Read each region through its exit, and
   keep a page only in that region's currency: Google's pages placed New Zealand's exits in Australia, Ireland's in the
-  UK and the Netherlands' nowhere (2026-11-04). Their baselines, read from Canada, show Canada's prices, so the bot
-  sends the other regions' to a person.
+  UK and the Netherlands' nowhere (2026-11-04). Canada too: Google can place this machine in the US (its page's
+  `"GL":"US"`, bare `$`), which stored YouTube Music's US prices as Canada's (2026-11-09). Keep a Canadian price only
+  with its `CA$`, and when this machine gets another country's page, read Canada through a Canadian exit, its baseline
+  too. Their baselines show Canada's prices (checked by their `CA$`), so the bot sends the other regions' to a person.
 - **"Every 30 days"** (MUBI's help centre): store `interval: day, intervalCount: 30` (and 360 for its yearly plan),
   with a renewalAnchor of `every-30-days`.
 - **Help centres that turn Canada away** (HBO Max's sends a Canadian visitor to its geo-availability page): read
