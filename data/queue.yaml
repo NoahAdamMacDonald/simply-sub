@@ -138,7 +138,9 @@
   source: wikidata
   wikidata: Q116933
   sitelinks: 85
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "Sold in Russia (vk.ru), outside the catalog's regions (read 2026-11-09)"
 - id: google-ai
   name: Google AI
   website: https://gemini.google.com
@@ -340,7 +342,9 @@
   source: wikidata
   wikidata: Q275141
   sitelinks: 38
-  status: queued
+  status: out-of-scope
+  date: 2026-11-09
+  note: 'napster.com now sells AI agents ("AI agents you can see, talk to, and create with"), not a music subscription (read 2026-11-09)'
 - id: microsoft-security-essentials
   name: Microsoft Security Essentials
   website: https://support.microsoft.com/en-my/help/17150/windows-7-what-is-microsoft-security-essentials
@@ -427,7 +431,8 @@
   source: wikidata
   wikidata: Q19711013
   sitelinks: 31
-  status: queued
+  status: done
+  date: 2026-11-09
 - id: yahoo-mail
   name: Yahoo! Mail
   website: https://mail.yahoo.com
@@ -685,7 +690,9 @@
   source: wikidata
   wikidata: Q12595115
   sitelinks: 21
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "Sold in South Korea (melon.com, in Korean, priced in won), outside the catalog's regions (read 2026-11-09)"
 - id: rumble
   name: Rumble
   website: https://rumble.com
@@ -855,7 +862,9 @@
   source: wikidata
   wikidata: Q10852229
   sitelinks: 15
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "Sold in China (y.qq.com, in Chinese), outside the catalog's regions (read 2026-11-09)"
 - id: comodo-internet-security
   name: Comodo Internet Security
   website: https://www.comodo.com
@@ -985,6 +994,7 @@
   wikidata: Q6883832
   sitelinks: 12
   status: queued
+  note: 'Mixcloud Premium is a listener plan (7.99 a month, its premium page on 2026-11-09), for music part 3; its pages answer this machine with a bot check at times'
 - id: seahorse
   name: Seahorse
   website: https://wiki.gnome.org/Apps/Seahorse
@@ -1016,7 +1026,9 @@
   source: wikidata
   wikidata: Q28187024
   sitelinks: 11
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: 'Read 2026-11-09 from Canada: "Sorry, JOOX is not available in this location. JOOX is now available in Hong Kong, Macau, Thailand, Malaysia, Indonesia."'
 - id: soribada
   name: Soribada
   website: https://www.soribada.com
@@ -1024,7 +1036,9 @@
   source: wikidata
   wikidata: Q485718
   sitelinks: 10
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "Sold in South Korea (soribada.com, in Korean, priced in won), outside the catalog's regions (read 2026-11-09)"
 - id: keychain
   name: Keychain
   website: https://www.apple.com/osx/preview
@@ -1069,6 +1083,7 @@
   wikidata: Q16526979
   sitelinks: 9
   status: queued
+  note: 'Sells to Canada (anghami.com/plus: USD4.69 a month, read 2026-11-09), for music part 3'
 - id: emsisoft-anti-malware
   name: Emsisoft Anti-Malware
   website: https://www.emsisoft.com/de/software/antimalware
@@ -1084,7 +1099,9 @@
   source: wikidata
   wikidata: Q15896237
   sitelinks: 8
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "Sold in China (kugou.com, in Chinese), outside the catalog's regions (read 2026-11-09)"
 - id: netease-cloud-music
   name: NetEase Cloud Music
   website: https://music.163.com
@@ -1092,7 +1109,9 @@
   source: wikidata
   wikidata: Q20063955
   sitelinks: 8
-  status: queued
+  status: rejected
+  date: 2026-11-09
+  note: "Sold in China (music.163.com, in Chinese, priced in yuan), outside the catalog's regions (read 2026-11-09)"
 - id: aol-active-virus-shield
   name: AOL Active Virus Shield
   website: https://www.activevirusshield.com

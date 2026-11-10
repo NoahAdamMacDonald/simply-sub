@@ -362,6 +362,11 @@ which reads each page as a visitor there would, before any hand reading:
   period", so its cards' "/month" is priced every 30 days. Its help centre (help.soundcloud.com) answers a plain fetch
   with a JavaScript challenge and reads in Edge; where its Go card and its help centre's comparison disagree on Go's
   audio, the help centre's bitrates decide (audio quality is defined by bitrate).
+- **Tidal** (M11.15): tidal.com and support.tidal.com answer this machine with 403, and tidal.com's pages show nothing
+  even to a split-tunnelled Chromium on an ordinary connection, which reads the help centre. Its Subscription Types
+  article prices the US in USD, and its payment article says it bills "every 30 days"; tidal.com's pricing, terms and
+  privacy are read from the Internet Archive (its terms there are Canada's version). tidal.com is in
+  `data/automation.yaml`'s `archived`.
 - **Crunchyroll's prices** are only on crunchyroll.com/premium, an error page to every reader: the Internet Archive's
   copies are US pages, and their Yearly tab's prices aren't saved.
 

@@ -1,0 +1,409 @@
+# Researched by hand on 2026-11-09 (M11.15, the music category, part 2). tidal.com and its help centre answer this
+# machine with 403 (the VPN's addresses), and tidal.com's own pages show nothing even to a split-tunnelled Chromium on
+# an ordinary connection, which read its help centre (2026-11-09). tidal.com's pricing, sound quality, terms and privacy
+# pages are read from the Internet Archive's copies (pricing and privacy of 2026-10-31, sound quality of 2026-08-23,
+# terms of 2026-10-14), as a backup; prices come from the help centre's live Subscription Types article, in US dollars
+# ("Prices above are shown in USD, and subscription types and costs may vary depending on your location"). Pages, each
+# quoted where it's used.
+# Billing: "Tidal subscription fees are charged every 30 days rather than on a set date each month" (Add or Update
+# Payment Information), so its months are priced every 30 days.
+# Region checklist for its other regions, 2026-11-09: 1. no country paths found; 2. no picker read; 3. not looked for;
+# 4. checkout not opened; 5. its help centre gives US prices only; 6. Edge, a plain fetch and Mullvad Browser get 403
+# or nothing, a split-tunnelled Chromium nothing from tidal.com; the archive's copy of its pricing page is the US's (its
+# page data: "countryCode" "US", "currency" "USD", 30 days); 7. no bill offered.
+# Not listed: the Student plans ("available to eligible students").
+# Bundles and resellers: none named; Apple and Google Play bill it in their apps (its cancelling article), and some
+# subscriptions come "through a third party provider ... bundled together with other services" (its terms): partners.
+# Features, read from the archive's pricing page: Individual and Family each "Millions of tracks in lossless, HiRes FLAC,
+# and Dolby Atmos" and "Ad-free, offline listening", Family "For up to 6 members", DJ "A Tidal Individual Account" with
+# "Access the full catalog through compatible DJ software" (a perk); HiRes FLAC is "(Up to 24-bit, 192 kHz)" (the
+# archive's sound quality page). No audiobooks.
+
+# Coverage: tidal.* in CA, GB, AU, NZ, IE, DE, FR, NL, ES and IT: tidal.com refuses this machine and shows nothing on an
+# ordinary connection, and its help centre prices the US only (2026-11-09), so those countries' prices stay unread.
+
+id: tidal
+name: Tidal
+website: https://tidal.com
+# Its help centre and account pages.
+domains: [support.tidal.com, account.tidal.com]
+category: music
+spendCategory: streaming
+billingCurrency: { US: USD }
+cancelUrl: https://support.tidal.com/hc/en-us/articles/201314601-Cancel-Tidal-Subscription-or-Trial
+sources: { pricing: https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types }
+# Owner (M11.2), read 2026-11-09: its privacy notice names its parent, whose investor relations site says so too and
+# where it was incorporated.
+owner:
+  name: 'Block, Inc., a public company (NYSE: XYZ)'
+  website: https://investors.block.xyz
+  page:
+    name: Block investor relations
+    url: https://investors.block.xyz/overview/default.aspx
+  quotes:
+    - 'Each of our brands unlocks different aspects of the economy for more people.'
+    - 'TIDAL is a music platform that empowers artists to thrive as entrepreneurs.'
+    - 'NYSE: XYZ'
+  country:
+    code: US
+    page:
+      name: Investor FAQs
+      url: https://investors.block.xyz/resources/investor-faqs/default.aspx
+    quotes:
+      - 'Block, Inc. was incorporated in June 2009 in Delaware.'
+    lastVerified: 2026-11-09
+  lastVerified: 2026-11-09
+# Ways to pay (M11.5), read 2026-11-09 in its help centre's payment article: a card and PayPal ("Double-check the card
+# information or PayPal login credentials"), Venmo on its apps (`other`), and its cancelling article's Apple and Google
+# Play. "Tidal restricts the use of prepaid cards" (the same article). No card networks named.
+paymentMethods:
+  - methods: [card, paypal]
+    page: Add or Update Payment Information
+    url: https://support.tidal.com/hc/en-us/articles/115003662545-Add-or-Update-Payment-Information
+    quotes:
+      - 'Incorrect details. Double-check the card information or PayPal login credentials'
+  - methods: [other]
+    page: Add or Update Payment Information
+    url: https://support.tidal.com/hc/en-us/articles/115003662545-Add-or-Update-Payment-Information
+    quotes:
+      - 'Venmo - (IOS & Android Only)'
+  - methods: [app-store]
+    page: Cancel Tidal Subscription or Trial
+    url: https://support.tidal.com/hc/en-us/articles/201314601-Cancel-Tidal-Subscription-or-Trial
+    quotes:
+      - 'If you are paying for Tidal through a third-party, such as Apple or Google Play, you will need to cancel through them directly.'
+renewalAnchor:
+  kind: every-30-days
+  page: Add or Update Payment Information
+  url: https://support.tidal.com/hc/en-us/articles/115003662545-Add-or-Update-Payment-Information
+  quotes:
+    - 'Tidal subscription fees are charged every 30 days rather than on a set date each month.'
+  lastVerified: 2026-11-09
+
+perks:
+  - id: dj-software
+    name: Access the full catalog through compatible DJ software
+
+plans:
+  - id: tidal.individual
+    name: Individual
+    link: https://tidal.com/pricing
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types
+  - id: tidal.family
+    name: Family
+    link: https://tidal.com/pricing
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      account.users: 6
+    notes: You and up to 5 members, each with their own account in your country.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types
+  - id: tidal.dj
+    name: DJ
+    link: https://tidal.com/pricing
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      audio.dolby-atmos: true
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+    perks: [dj-software]
+    notes: An Individual account that also plays the full catalog in compatible DJ software.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-09
+        sourceUrl: https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types
+
+# Terms and policies (M11.15): its Terms of Use as the Internet Archive saved them on 2026-10-14 (Canada's version, with
+# Tidal Music LLC: the page picks its text by the visitor's country, and the archive's other copies are Canada's too, so
+# the US's, the only country priced, couldn't be read), its Privacy Notice as saved on 2026-10-31, and its help centre's
+# articles on cancelling, refunds, deleting an account, Family and managing an account, read 2026-11-09 through a
+# split-tunnelled Chromium. Its Content Guidelines and AI-Powered Tools pages hold no topic beyond these. Its sign-up
+# form shows nothing to this machine, so sign-up data is read from its account help. Calibrated
+# against Spotify's and Deezer's grades. Not rated: rights over your content and its apps' licence (not topics for
+# music).
+policies:
+  links:
+    - name: Terms of Use (Canada)
+      url: https://tidal.com/terms
+    - name: Privacy Notice
+      url: https://tidal.com/privacy
+    - name: Cancel Tidal Subscription or Trial
+      url: https://support.tidal.com/hc/en-us/articles/201314601-Cancel-Tidal-Subscription-or-Trial
+    - name: Refund Policy
+      url: https://support.tidal.com/hc/en-us/articles/203134791-Refund-Policy
+    - name: Delete Your Tidal Account or Artist Data
+      url: https://support.tidal.com/hc/en-us/articles/44745598330385-Delete-Your-Tidal-Account-or-Artist-Data
+    - name: Family Plan
+      url: https://support.tidal.com/hc/en-us/articles/360004405337-Family-Plan
+    - name: Manage your Tidal Account
+      url: https://support.tidal.com/hc/en-us/articles/28548632499601-Manage-your-Tidal-Account
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what you play and search to train its recommendation and search systems, for you and other users. You can only object by contacting it.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'We also use this data to train our personalisation and search algorithms so that they offer relevant music and search recommendations to you and to other TIDAL users.'
+      action:
+        name: Its privacy notice (your rights)
+        url: https://tidal.com/privacy
+      lastVerified: 2026-10-31
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your data with Block’s other businesses (Square, Cash App, Afterpay) and with ad partners through cookies. You can refuse cookies only browser by browser.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'We may share your data with other business units (Square, Cash App, Afterpay/Clearpay) and between wholly-owned subsidiaries of Block, Inc.'
+        - url: https://tidal.com/privacy
+          quote: 'We use cookies and similar technologies, through which we collect and share various data with the ad partners and analytics service providers that help us with our analytics and marketing effort'
+      action:
+        name: Its privacy notice (cookies)
+        url: https://tidal.com/privacy
+      lastVerified: 2026-10-31
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and its ad partners use cookies to aim its own ads at you elsewhere, from what you do. You can refuse cookies only browser by browser.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'Targeted advertising: TIDAL and its ad partners that provide advertising or other functionality on TIDAL’s behalf, may use cookies and similar technologies to help us tailor the advertising of our Services to you as informed by your interests.'
+      action:
+        name: Its privacy notice (cookies)
+        url: https://tidal.com/privacy
+      lastVerified: 2026-10-31
+    - topic: privacy.ads-tracking
+      regions: [US]
+      tier: good
+      reason: 'In the US, it places ad-targeting cookies only if you agree to them, and you can change your mind at any time.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'Before we place any targeting cookies on your device when you visit TIDAL websites or use TIDAL clients, we will request your consent through a cookie preference centre.'
+      lastVerified: 2026-10-31
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'If you use its AI features, it takes a permanent right to use what you put in and get back, for any reason, including its AI products, and can pass that right on. You can’t take it back.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'transferable, irrevocable, perpetual, and sub-licensable right to use'
+        - url: https://tidal.com/terms
+          quote: 'your AI Content throughout the world in any media for any reason, including to provide, promote, and/or incorporate into the AI Products or the Tidal Service.'
+      lastVerified: 2026-10-14
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it needs it, your account and playlists while your account exists, and states no set periods.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'We need to keep it for the duration your TIDAL account exists so that we can maintain your account.'
+        - url: https://tidal.com/privacy
+          quote: 'Similarly, we will keep some of your usage data, such as your playlists or folders for the lifetime of your account.'
+      lastVerified: 2026-10-31
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself, which deletes your playlists, history and details for good; it keeps only what the law, claims or fraud checks need.'
+      sources:
+        - url: https://support.tidal.com/hc/en-us/articles/44745598330385-Delete-Your-Tidal-Account-or-Artist-Data
+          quote: 'You can delete your Tidal account through self-service deletion or by contacting Tidal Support.'
+        - url: https://support.tidal.com/hc/en-us/articles/44745598330385-Delete-Your-Tidal-Account-or-Artist-Data
+          quote: 'Your playlists, favorites, listening history, profile, any music uploaded through Tidal Upload, and account details are permanently deleted and cannot be recovered.'
+      lastVerified: 2026-11-09
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your data.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'You can ask whether we process your personal data, and if we do, you can ask for a copy of your personal data'
+      action:
+        name: Its privacy notice (your rights)
+        url: https://tidal.com/privacy
+      lastVerified: 2026-10-31
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It shares your data with authorities and courts to meet legal duties and answer legal requests such as search warrants.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'We may also receive legal requests, such as a search warrant, a court order or a subpoena from authorities in countries in which we operate.'
+      lastVerified: 2026-10-31
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Its privacy notice describes where your data goes only for people in Europe, the UK and Switzerland.'
+      pages: [https://tidal.com/privacy]
+      lastVerified: 2026-10-31
+    - topic: privacy.data-location
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'Your data can go to the US and elsewhere, under the EU’s and UK’s approved safeguards, such as standard contracts.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'Your data may be transferred to the United States and eventually globally'
+        - url: https://tidal.com/privacy
+          quote: 'To transfer your data, we rely on adequacy decisions issued by the European Commission and the FDPIC respectively, as well as EU Standard Contractual Clauses that have been adopted by the European Commission and the UK International Data Transfer Addendum and Swiss Addendum.'
+      lastVerified: 2026-10-31
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account holds your full name, email address and date of birth, and a plan your payment details.'
+      sources:
+        - url: https://support.tidal.com/hc/en-us/articles/28548632499601-Manage-your-Tidal-Account
+          quote: 'View and update your personal details, such as your full name, email address, and date of birth.'
+      lastVerified: 2026-11-09
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13 to use Tidal, and it deletes a younger child’s data it finds.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'If we learn that we have collected personal data from a child under the age 13, we will promptly delete that information, in accordance with applicable law.'
+      lastVerified: 2026-10-31
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in your account settings at any time, and it ends after the last day of the period you paid for.'
+      sources:
+        - url: https://support.tidal.com/hc/en-us/articles/201314601-Cancel-Tidal-Subscription-or-Trial
+          quote: 'You can cancel your subscription or trial at any time.'
+        - url: https://tidal.com/terms
+          quote: 'The cancellation will take effect the day after the last day of your applicable subscription period.'
+      lastVerified: 2026-11-09
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Outside the UK, the EU and Brazil it gives no money back, but you keep Tidal to the end of the period.'
+      sources:
+        - url: https://support.tidal.com/hc/en-us/articles/203134791-Refund-Policy
+          quote: 'If you live in a country that is not part of the United Kingdom, European Union, European Economic Area (“EEA”) or Brazil (The US and otherwise) and have purchased a Subscription, we will not refund any fees paid to us'
+      lastVerified: 2026-11-09
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you about a new price before the end of the period in which it changes, so it applies only from your next period, and you can cancel first.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'Tidal may from time to time make changes to Subscription fees, and will provide you with advance notice before the end of the billing period in which the change is made.'
+        - url: https://tidal.com/terms
+          quote: 'If you do not accept the change to your Subscription, you will be entitled to cancel your Subscription.'
+      lastVerified: 2026-10-14
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its trial turns into a paid plan at the full price unless you cancel before it ends. It doesn’t say it reminds you first.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'Some Subscriptions may start with a free or discounted trial period (“Trial Period”), which will automatically renew upon expiration of the Trial Period at the full subscription price specified during sign up'
+      lastVerified: 2026-10-14
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews on its own, but not that it reminds you first.'
+      pages: [https://tidal.com/terms]
+      lastVerified: 2026-10-14
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms name no fees of its own besides the price and tax; your bank or carrier may add theirs.'
+      pages: [https://tidal.com/terms]
+      lastVerified: 2026-10-14
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help centre don’t say what happens to what you’ve paid when you change plans.'
+      pages:
+        [
+          https://tidal.com/terms,
+          https://support.tidal.com/hc/en-us/articles/28548632499601-Manage-your-Tidal-Account,
+        ]
+      lastVerified: 2026-11-09
+    - topic: legal.disputes
+      tier: poor
+      reason: 'In Canada, outside Quebec, disputes go to a private referee (an arbitrator) instead of a court. You can opt out only by mailing a form within 30 days of signing up.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'If you are located in, are based in, have offices in, or do business in a jurisdiction in which this Section 16 is enforceable, the following Arbitration Provision applies to you:'
+        - url: https://tidal.com/terms
+          quote: 'To reject this provision, you must send us an opt-out notice (the “Opt Out”) within thirty (30) days after you create a Tidal account or we first provide you with the right to reject this provision'
+      action:
+        name: How to opt out (its terms)
+        url: https://tidal.com/terms
+      lastVerified: 2026-10-14
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about changes by email or on its site, without saying how far ahead (30 days in Ontario and Quebec, by their law), and keeping on using Tidal means you accept them.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'provided that, for material changes, we will seek to supplement such notice by email or other means'
+        - url: https://tidal.com/terms
+          quote: 'Your continued use of the Tidal Service after any updates will constitute your acceptance of the Revised Terms.'
+      lastVerified: 2026-10-14
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time, without notice, as it alone decides, and keeps what you paid.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'at any time without notice and without responsibility or liability to you, in our sole discretion'
+        - url: https://tidal.com/terms
+          quote: '(except as expressly provided in this Agreement) Tidal will not refund any amounts that you have already paid.'
+      lastVerified: 2026-10-14
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add, change or remove features, content and plans at any time, and takes reasonable steps to tell you.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'We will take reasonable steps to notify you of any such changes by email or by providing notice on Tidal’s website or via in-app notification.'
+      lastVerified: 2026-10-14
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages: [https://tidal.com/terms, https://tidal.com/privacy]
+      lastVerified: 2026-10-31
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes reasonable safeguards in general terms, and names no security audit or way to report a flaw.'
+      sources:
+        - url: https://tidal.com/privacy
+          quote: 'We take reasonable measures, including administrative, technical, and physical safeguards to protect your information from loss, theft, misuse, unauthorised access, disclosure, alteration, and destruction.'
+      lastVerified: 2026-10-31
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'An Individual plan is for you alone: your login is for your personal use only.'
+      sources:
+        - url: https://tidal.com/terms
+          quote: 'Your username and password are for your personal use only and should be kept confidential.'
+      lastVerified: 2026-10-14
+    - topic: service.account-sharing
+      plans: [tidal.family]
+      tier: great
+      reason: 'You can add up to 5 people, each with their own account, as long as their accounts are in your country.'
+      sources:
+        - url: https://support.tidal.com/hc/en-us/articles/360004405337-Family-Plan
+          quote: 'Add up to 5 family members to your plan. All members must have Tidal accounts located in the same country'
+      lastVerified: 2026-11-09
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can download and listen offline on up to five devices, which you manage in your account.'
+      sources:
+        - url: https://support.tidal.com/hc/en-us/articles/28548632499601-Manage-your-Tidal-Account
+          quote: 'You can download and listen offline on up to five devices.'
+      lastVerified: 2026-11-09
