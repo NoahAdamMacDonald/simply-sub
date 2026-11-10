@@ -2205,6 +2205,22 @@ in every D1 `json` column search parses.
         the source
   - [x] With the setting off, the value isn't there: the card shows the feature as not stated, and the optimizer
         ignores it
+- **Checked again** (2026-11-09, the M11 audit): each item against the code (validation, `withoutThirdParty` in
+  CatalogStore, the optimizer's spec, the cards) and `check-m11-third-party.cjs`, which now opens List view's card too
+  (104 checks in both themes at both widths, by keyboard, with axe). Validation now counts the shared documents a
+  provider names among its policies' sites, as the renewal day's check does, so a "third-party" page on one of them
+  (hulu.com, for ESPN) is refused.
+
+**The M11 audit** (2026-11-09): every acceptance box of M11.1–M11.14 and M11.16 holds; M11.15 is under way. What's
+left, each waiting for the owner:
+- **M11.9:** TSN's two plans' and RDS's video quality, which no official page states or gives a reason for (three
+  warnings in core's `awaitingRequiredFeatures`). Since M11.16 a named publication's words could give it, marked
+  third-party.
+- **M11.4:** `languages.audio` and `languages.subtitles` are in the registry but stated by no plan (left out for now,
+  the owner's choice of 2026-11-03: the streaming services publish no list).
+- **Rules 11 and 12 on a bundle's card:** a bundle item's features are its plans' merged (`bundleFeatures`) without
+  their inferred or third-party marks, so a value only a plan's claim gives would show unmarked. No bundle in the
+  catalog has one at stake today (ESPN Select's inferred HD is below its bundle partners' 4K).
 
 ---
 
