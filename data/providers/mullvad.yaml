@@ -60,6 +60,10 @@ notes: >-
   Prepaid only: you add time to an account number, and nothing renews by itself. Cards can pay in many local
   currencies at a converted amount, and cryptocurrency payments get 10% off. One flat price everywhere, VAT
   included, so no sales tax is added in Canada or the US.
+# General features, read 2026-11-11: app languages from mullvad.net's footer language menu ("العربيّة, Dansk, Deutsch,
+# English, Español ... Français, Italiano, 日本語, 한국어 ... Português ... 简体中文", no Hindi), French at mullvad.net/fr. No
+# pause: its time is prepaid ("These terms will expire at the end of the period purchased", its terms). No parental
+# controls: its apps' adult-content and gambling DNS blocking is a toggle the user sets (Aiding to break habits).
 # Open source (M11.5), read 2026-11-02: /en/why-mullvad-vpn's comparison says "Code is open source" for its app on
 # Windows, macOS, Linux, Android and iOS, and links the app's repository, as its downloads' "Our source code" does
 # (/en/download/vpn/windows). Its servers' code isn't published ("The majority of software that we use and even
@@ -71,6 +75,7 @@ features:
   software.open-source: open-clients
   platforms: [windows, macos, linux, android, ios, browser-extension]
   support.channels: [email]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
 sourceRepo:
   url: https://github.com/mullvad/mullvadvpn-app
   page:

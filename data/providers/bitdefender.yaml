@@ -95,6 +95,11 @@ renewalAnchor:
     - "Your subscription will be automatically renewed prior to the expiration of the term and each anniversary thereafter for a fee at Bitdefender's then-current price and any applicable taxes, excluding promotional and discount pricing offered at the renewal time."
   lastVerified: 2026-11-03
 
+# General features, read 2026-11-11: app languages from Bitdefender Central's list ("English, French, German, Spanish,
+# Italian, Portuguese ... Japanese, Korean ... Chinese (Traditional)", answer 113564) and its country picker ("France
+# - Français"); no Hindi or Arabic. Parental controls on the family plans only: "Parental Control is not included in
+# individual plans. It is exclusively available in family plans." (answer 94159). No pause: you can "cancel your
+# automatic renewal service at any time" or cancel (answer 29081).
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03: Windows, macOS, Android and iOS on its
 # product and VPN pages ("Windows®, macOS®, Android™, iOS®"), but Antivirus Free, "Windows only"; Bitdefender Central's
 # password, with two-factor codes by email or an authenticator app and trusted devices (support answer 1581); chat or
@@ -103,6 +108,7 @@ features:
   platforms: [windows, macos, android, ios]
   account.sign-in: [password, email-code, totp, trusted-device]
   support.channels: [chat, phone, community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
 
 # Perks (M11.6): the US Ultimate Security Plus plans' lines that no feature describes (M11.9), named in their words.
 # Norton 360 with LifeLock names most of them too, so they may become features when Norton is read (M11.15).
@@ -694,6 +700,7 @@ plans:
       vpn.server-countries: 100
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
+      account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     inferred:
@@ -1284,6 +1291,7 @@ plans:
       vpn.server-countries: 100
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
+      account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     inferred:
@@ -1782,6 +1790,7 @@ plans:
       security.identity-restoration: true
       security.credit-monitoring: 1
       security.identity-theft-insurance: 1
+      account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     perks: [stolen-wallet, ssn-tracker]
@@ -1853,6 +1862,7 @@ plans:
       security.identity-restoration: true
       security.credit-monitoring: 3
       security.identity-theft-insurance: 2
+      account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     perks:
@@ -2031,6 +2041,7 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.included: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD

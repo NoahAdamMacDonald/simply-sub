@@ -298,6 +298,11 @@ perks:
 # 5 TB, 20 TB and 30 TB. People included: the paid plans share with a family group of "up to five others" (Google One's
 # AI plans page), "Access to AI benefits such as Gemini App" among what they share (its family sharing article).
 
+# General features, read 2026-11-11: app languages from Gemini's help ("The Gemini web app is currently available in
+# more than 70 languages", its list naming Arabic, Chinese, English, French, German, Hindi, Italian, Japanese, Korean,
+# Portuguese and Spanish). Parental controls: "As a parent, you're in control of your child's Gemini Apps access,
+# including turning it on or off, using the Google Family Link app" (Google For Families help), though not for
+# supervised accounts in the EEA, Switzerland and the UK. No pause: Google One's help offers only cancelling.
 # Apps and sign-in (the cross-category features), read 2026-11-04: the web, Android, iOS, macOS, and Google TV (the
 # Gemini Apps Privacy Hub's "What are Gemini Apps?"), and Windows ("Gemini for desktop: download the AI app for Windows
 # and macOS", gemini.google/ca/desktop); a Google Account's password or passkey, with Google prompts, an authenticator
@@ -308,6 +313,7 @@ features:
   platforms: [windows, macos, android, ios, web, tv]
   account.sign-in: [password, passkey, push-approval, totp, security-key, sms]
   support.channels: [community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 plans:
   - id: google-ai.free
@@ -321,6 +327,7 @@ plans:
       ai.coding-agent: true
       ai.scheduled-tasks: true
       storage.cloud: 15
+      account.parental-controls: true
     prices:
       - region: GLOBAL
         currency: USD
@@ -347,6 +354,7 @@ plans:
       storage.cloud: 400
       account.users: 6
       support.channels: [chat, phone, email, community]
+      account.parental-controls: true
     perks: [usage-2x]
     prices:
       - region: CA
@@ -454,6 +462,7 @@ plans:
       storage.cloud: 2000
       account.users: 6
       support.channels: [chat, phone, email, community]
+      account.parental-controls: true
     perks: [usage-2x, meet-premium]
     prices:
       - region: CA
@@ -602,6 +611,7 @@ plans:
       storage.cloud: 5000
       account.users: 6
       support.channels: [chat, phone, email, community]
+      account.parental-controls: true
     featureLabels:
       ai.api-credits: US$10 a month in Google Cloud credits from the Google Developer Programme
     perks:
@@ -776,6 +786,7 @@ plans:
       storage.cloud: 20000
       account.users: 6
       support.channels: [chat, phone, email, community]
+      account.parental-controls: true
     featureLabels:
       ai.api-credits: US$40 a month in Google Cloud credits from the Google Developer Programme
     perks:
@@ -896,6 +907,7 @@ plans:
       storage.cloud: 30000
       account.users: 6
       support.channels: [chat, phone, email, community]
+      account.parental-controls: true
     featureLabels:
       ai.api-credits: US$100 a month in Google Cloud credits from the Google Developer Programme
     perks:

@@ -99,6 +99,10 @@ freeUse:
   pages: [https://www.xbox.com/en-CA/xbox-game-pass]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from xbox.com's locale picker ("Canada - Français" and the others;
+# no Hindi), French at xbox.com/fr-CA. Parental controls on every plan: Xbox Family Settings, which a parent uses to
+# manage a child's account on Xbox and Windows (xbox.com/family-hub). No pause: its help offers turning off recurring
+# billing or cancelling.
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: Essential, Premium and Ultimate play on Xbox
 # consoles and PCs, and stream to phones, tablets and PCs through the Xbox app or a browser and to select LG, Samsung and
 # VIDAA TVs and Fire TV (xbox.com/en-CA/cloud-gaming); PC Game Pass is for Windows, cloud gaming "Not included with PC
@@ -108,6 +112,7 @@ freeUse:
 features:
   platforms: [windows, android, ios, web, tv, console]
   account.sign-in: [password, passkey, push-approval, security-key, totp, email-code, sms]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
 
 plans:
   - id: xbox-game-pass.essential
@@ -117,6 +122,7 @@ plans:
       gaming.game-library: 50
       gaming.cloud-gaming: 5
       gaming.online-multiplayer: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -174,6 +180,7 @@ plans:
       gaming.game-library: 200
       gaming.cloud-gaming: 10
       gaming.online-multiplayer: true
+      account.parental-controls: true
     perks: [xbox-games-within-a-year]
     prices:
       - region: CA
@@ -233,6 +240,7 @@ plans:
       gaming.day-one: true
       gaming.cloud-gaming: 15
       gaming.online-multiplayer: true
+      account.parental-controls: true
     perks: [ea-play, fortnite-crew, ubisoft-classics]
     prices:
       - region: CA
@@ -291,6 +299,7 @@ plans:
       platforms: [windows]
       gaming.game-library: 300
       gaming.day-one: true
+      account.parental-controls: true
     perks: [ea-play]
     prices:
       - region: CA
