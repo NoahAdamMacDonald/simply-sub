@@ -417,6 +417,8 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['kick.free', ['streaming.concurrent-streams']],
   // Nebula doesn't say how many streams play at once (2026-11-11).
   ['nebula.standard', ['streaming.concurrent-streams']],
+  // Tubi doesn't say how many streams play at once (2026-11-11).
+  ['tubi.free', ['streaming.concurrent-streams']],
 ]);
 
 /**

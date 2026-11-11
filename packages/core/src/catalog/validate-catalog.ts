@@ -886,11 +886,13 @@ function ownPages(
 }
 
 /**
- * How a provider can be paid (M11.5, the owner's request on 2026-11-02): every provider says, quoted from its own
- * pages, so cash, crypto and gift cards are never missed.
+ * How a provider can be paid (M11.5, the owner's request on 2026-11-02): every provider that sells something says,
+ * quoted from its own pages, so cash, crypto and gift cards are never missed. A free-only service (Pluto TV, Tubi:
+ * in scope since 2026-11-10) takes no payment, so it has nothing to say.
  */
 function checkPaymentMethods(provider: Provider, own: readonly string[], report: Report): void {
   if (!provider.paymentMethods) {
+    if (!sellsAnything(provider)) return;
     report(
       [],
       'Say how it can be paid: its own page on payment methods, quoted (paymentMethods), cash and crypto included',
@@ -917,6 +919,13 @@ function checkPaymentMethods(provider: Provider, own: readonly string[], report:
  * Whether a provider has a paid plan still sold that renews by itself by the month or year, so the day it renews on
  * decides its item's charges (M11.5): a prepaid service and a free one don't.
  */
+/** Whether any plan or add-on of the provider has a price above zero. */
+function sellsAnything(provider: Provider): boolean {
+  return [...provider.plans, ...(provider.addOns ?? [])].some((item) =>
+    item.prices.some((price) => price.amount > 0),
+  );
+}
+
 function renewsMonthly(provider: Provider): boolean {
   return provider.plans.some(
     (plan) =>
