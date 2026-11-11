@@ -18,8 +18,7 @@
 # the visitor is; 2. no country picker on pluto.tv; 3. not needed (nothing is priced); 4. no checkout; 5. its help
 # centre has no prices; 6. Edge from Canada and through each country's exit; 7. no bill offered.
 # Ways to pay: none: "No credit cards required. Pay never." (its FAQ), "Pluto TV is totally FREE! No payments, no
-# contracts, no nothing!" (How To Delete Your Account), so no paymentMethods, which core requires of every provider
-# (see the batch notes), and no renewal day.
+# contracts, no nothing!" (How To Delete Your Account), so no paymentMethods and no renewal day.
 # Bundles: none (nothing is sold). Official resellers: none. Its help centre's "What is Paramount+?" sells Paramount's
 # paid service, its own provider.
 # Features, read 2026-11-11: what it streams, from its FAQ ("free Live TV Channels, popular movies, and shows", "reality
@@ -97,7 +96,7 @@ plans:
       streaming.concurrent-streams: unlimited
       ad-free: false
       streaming.live: [tv-channels, sports]
-      streaming.content: [films, series, sports, kids, anime, documentaries, reality, news]
+      streaming.content: [films, series, sports, kids, documentaries, reality, news]
       streaming.own-media: false
       streaming.french-content: true
     inferred:

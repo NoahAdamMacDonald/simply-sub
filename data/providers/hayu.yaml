@@ -492,16 +492,12 @@ plans:
 # document (nbcuniversal-privacy, Hayu first; Peacock will share it). The terms include the Privacy Policy and Cookie
 # Notice only, and "Promotion Terms" shown with an offer. Not read: the app stores', Amazon's, Sky's and the Australian
 # partners' terms, which bill it themselves. Calibrated against Paramount+ and Sportsnet+.
-# Its privacy policy is NBCUniversal's Hayu page (nbcuniversalprivacy.com/hayu, with its Cookie Notice and Your Privacy
-# Choices), read 2026-11-11 with every section opened, rated here: Peacock's shared document rates the US policy page.
+# Its privacy policy is NBCUniversal's Hayu page (nbcuniversalprivacy.com/hayu), the same text as NBCUniversal's
+# Privacy Policy but for its date and one German company's name, so it's rated once as the shared document
+# (data/policies/nbcuniversal-privacy.yaml, Peacock's too); its sign-up data and children stay rated here.
 policies:
+  shared: [nbcuniversal-privacy]
   links:
-    - name: 'NBCUniversal Privacy Policy'
-      url: https://www.nbcuniversalprivacy.com/hayu
-    - name: 'Cookie notice'
-      url: https://www.nbcuniversalprivacy.com/privacy/cookies
-    - name: 'Your privacy choices'
-      url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
     - name: 'Terms and conditions'
       url: https://www.hayu.com/terms
     - name: 'Welcome (plans)'
@@ -647,111 +643,4 @@ policies:
           quote: 'As a subscriber, you will be able to: pair up to five (5) Devices on your account; stream Hayu Content on one (1) Device at a time'
         - url: https://www.hayu.com/terms
           quote: 'Subscribers can also temporarily download Hayu Content onto their paired mobile Devices.'
-      lastVerified: 2026-11-11
-    - topic: privacy.data-collection
-      tier: poor
-      reason: 'It records what you watch and how you use its apps and sites, down to scrolling and typing, for research and to build new services. Cookie settings stop some of it, browser by browser, but not all.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'browsing activity, scrolling and keystroke activity, advertisements viewed, forms or fields you complete or partially complete, search terms, whether you open an email, content (including videos) you view and duration'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'carrying out research and analytics for uses including improving services and developing new ones'
-        - url: https://www.nbcuniversalprivacy.com/privacy/cookies
-          quote: 'Information may still be collected and used for other purposes, such as research, online services analytics or internal operations, and to remember your opt-out preferences.'
-      action:
-        name: 'Its cookie notice and choices'
-        url: https://www.nbcuniversalprivacy.com/privacy/cookies
-      lastVerified: 2026-11-11
-    - topic: privacy.data-sharing
-      tier: poor
-      reason: 'It shares your details with Comcast’s other companies, ad partners and partners who want to sell you things. Its opt-out is for some US states; elsewhere it can’t promise others will respect it.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'We may disclose your personal information, including information that personally identifies you, to Our Related Businesses for purposes consistent with those described in our Privacy Policy, including to provide you better services, to personalize your experience, and marketing and advertising.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'If we believe you may be interested in a partner’s products or services, we may disclose information for them to market to you.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'we cannot ensure your opt out of sale or sharing/processing for targeted advertising data choices will be honored by all third parties even if you take the actions described above.'
-      action:
-        name: 'Opt out of sale, sharing and targeted ads'
-        url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
-      lastVerified: 2026-11-11
-    - topic: privacy.ads-tracking
-      tier: poor
-      reason: 'It and its ad partners pick the ads you see from what you do, on its services and on other sites. You can turn that off, but unless you’re signed in, only on each browser or device.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'providing you with advertising, including targeted advertising, based on your activities and interests'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'helping third-party advertisers and programmers deliver more relevant advertising on our Services and other services and platforms (such as web, tv, and mobile) and offline'
-        - url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
-          quote: 'If you are not logged in, your choice will only apply to this browser, and you will need to renew this choice on each browser or device where you want your choice to apply or if you clear your browser cookies.'
-      action:
-        name: 'Opt out of sale, sharing and targeted ads'
-        url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
-      lastVerified: 2026-11-11
-    - topic: privacy.ai-training
-      status: not-stated
-      reason: 'Its privacy policy doesn’t say whether what you write or upload trains AI.'
-      pages: [https://www.nbcuniversalprivacy.com/hayu]
-      lastVerified: 2026-11-11
-    - topic: privacy.data-retention
-      tier: poor
-      reason: 'It keeps your information as long as it decides it needs it, and your email for a while after you close your account, with no periods named.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'We will keep your information only for as long as it is necessary to fulfill the purposes described above, unless a longer retention is required or permitted by law.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'we retain your email address as an authentication credential (where applicable) as long as you have an account with us and an additional period of time after that for our legitimate interests and for our fraud and legal compliance purposes.'
-      lastVerified: 2026-11-11
-    - topic: privacy.data-deletion
-      tier: neutral
-      reason: 'You can ask it to delete some of your information with its online form. It answers within the time the law sets, and may say no where the law lets it.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'If you are based outside the U.S. and would like to exercise any individual right, please fill out this online form.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'We will respond within the time period prescribed by applicable law.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'Please note that you may be located in a jurisdiction where we are not obligated, or are unable, to fulfill a request. In such a case, your request may not be fulfilled.'
-      action:
-        name: 'How to ask for your information or its deletion'
-        url: https://www.nbcuniversalprivacy.com/hayu
-      lastVerified: 2026-11-11
-    - topic: privacy.data-portability
-      tier: neutral
-      reason: 'You can ask for a copy of some of your information, sometimes in a form you can take elsewhere, but there’s no way to get it yourself.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'provide access to certain information we hold about you, in some cases in a portable format, if technically feasible'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'If you are based outside the U.S. and would like to exercise any individual right, please fill out this online form.'
-      action:
-        name: 'How to ask for your information or its deletion'
-        url: https://www.nbcuniversalprivacy.com/hayu
-      lastVerified: 2026-11-11
-    - topic: privacy.government-requests
-      tier: poor
-      reason: 'Besides legal process, it may hand your information to governments and other authorities when they ask, and says nothing about telling you.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'protect and enforce the legal rights, privacy, and safety of ourselves and our visitors; protect against possible fraud or other illegal activity; respond to requests from government and other authorities; and otherwise comply with legal process.'
-      lastVerified: 2026-11-11
-    - topic: privacy.data-location
-      tier: neutral
-      reason: 'Your information can go to the US and other countries whose laws may protect it less, under data transfer agreements.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'We may transfer your information to Related Companies, service providers, and other third parties located outside of your country of residence, including in the United States.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'These measures include data transfer agreements.'
-      lastVerified: 2026-11-11
-    - topic: security.practices
-      tier: poor
-      reason: 'It says only that it has safeguards and that no security is perfect: no audits, certifications or way to report a security problem are named.'
-      sources:
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'We maintain organizational, technical, and physical safeguards to help protect the information we collect and use.'
-        - url: https://www.nbcuniversalprivacy.com/hayu
-          quote: 'Despite all reasonable practices, no security method is infallible.'
       lastVerified: 2026-11-11

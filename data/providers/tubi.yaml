@@ -15,8 +15,7 @@
 # help centre sell it there: "Disconnect any VPN — Tubi uses your IP to determine location, and VPNs can show the wrong
 # library or block playback entirely" (Why Is Content Unavailable in My Region?), so the official list decides;
 # 7. no bill offered.
-# Ways to pay: none ("no way of charging you for anything, ever"), so no paymentMethods, which core requires of every
-# provider (see the batch notes), and no renewal day.
+# Ways to pay: none ("no way of charging you for anything, ever"), so no paymentMethods and no renewal day.
 # Bundles: none (nothing is sold). Official resellers: none.
 # Features, read 2026-11-11: what it streams, from its about page ("Hollywood movies and TV shows, thousands of
 # creator-led stories and hundreds of Tubi Originals"), its help centre's live news and live sports channels (US) and
@@ -94,11 +93,8 @@ plans:
     name: Free
     link: https://tubitv.com/
     features:
-      video.quality: 4k
       ad-free: false
-      streaming.live: [tv-channels, sports]
-      streaming.content:
-        [films, series, sports, kids, anime, documentaries, reality, news, creators]
+      streaming.content: [films, series, kids, anime, documentaries, reality, creators]
       streaming.own-media: false
       streaming.french-content: true
       streaming.profiles: 8
@@ -111,7 +107,7 @@ plans:
           name: Multiple Accounts & Tubi Kids
           url: https://tubitv.com/help-center/App-Features-and-Settings/articles/42331260335643
         lastVerified: 2026-11-11
-    notes: Films, series and live channels on demand, with ads; no account needed to watch. 4K only for some live US events; live news and sports channels are the US's, French films and series Canada's. What it streams differs by country.
+    notes: Films and series on demand, with ads; no account needed to watch. In the US only, live news and sports channels and 4K for some live events; French films and series in Canada. What it streams differs by country.
     prices:
       - region: US
         currency: USD
@@ -350,14 +346,4 @@ policies:
       pages:
         - https://tubitv.com/static/terms
         - https://tubitv.com/help-center/Setup-and-Troubleshooting/articles/4410086923803
-      lastVerified: 2026-11-11
-    - topic: other.notable
-      title: What you post, used forever
-      tier: bad
-      reason: 'Anything you post on Tubi, such as comments or videos, it and anyone it chooses may use forever, anywhere, without paying you, with your name and likeness.'
-      sources:
-        - url: https://tubitv.com/static/terms
-          quote: 'You hereby grant us an unconditional, perpetual, irrevocable, worldwide, royalty-free, fully paid up, sub-licensable through multiple tiers'
-        - url: https://tubitv.com/static/terms
-          quote: 'You further hereby grant us a royalty-free license to use your name or user name, image, voice, and likeness to identify you as the source of any of your User Content.'
       lastVerified: 2026-11-11

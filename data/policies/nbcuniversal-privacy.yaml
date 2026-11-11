@@ -73,8 +73,8 @@ ratings:
         quote: 'we retain your email address as an authentication credential (where applicable) as long as you have an account with us and an additional period of time after that'
     lastVerified: 2026-11-11
   - topic: privacy.data-deletion
-    tier: poor
-    reason: 'You can ask it to delete some of your information, but where no law makes it, it may say no. Deleting it ends the service that needs it.'
+    tier: neutral
+    reason: 'You can ask it to delete some of your information; where no law makes it, it may say no. Deleting it ends the service that needs it.'
     sources:
       - url: https://www.nbcuniversalprivacy.com/privacy
         quote: 'delete certain information'
@@ -87,8 +87,8 @@ ratings:
       url: https://www.nbcuniversalprivacy.com/privacy
     lastVerified: 2026-11-11
   - topic: privacy.data-portability
-    tier: poor
-    reason: 'You can ask for some of your information, sometimes in a form you can take elsewhere, but where no law makes it, it may say no.'
+    tier: neutral
+    reason: 'You can ask for some of your information, sometimes in a form you can take elsewhere; where no law makes it, it may say no.'
     sources:
       - url: https://www.nbcuniversalprivacy.com/privacy
         quote: 'provide access to certain information we hold about you, in some cases in a portable format, if technically feasible'

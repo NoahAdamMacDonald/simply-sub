@@ -176,6 +176,12 @@ plans:
       streaming.own-media: true
       account.parental-controls: true
     inferred:
+      video.quality:
+        reason: 'It plays your own media at its own quality, and its help says 4K content is supported (on players that can show it).'
+        page:
+          name: Is 4K content supported on the Roku?
+          url: https://support.plex.tv/articles/214577427-is-4k-content-supported-on-the-roku/
+        lastVerified: 2026-11-11
       streaming.concurrent-streams:
         reason: 'Plex sets no number: its help says your own server is limited by its processor and upload speed, and the server’s owner can cap each person’s remote streams. No page says how many of its free films can play at once.'
         page:
@@ -208,6 +214,12 @@ plans:
       streaming.own-media: true
       account.parental-controls: true
     inferred:
+      video.quality:
+        reason: 'It plays your own media at its own quality, and its help says 4K content is supported (on players that can show it).'
+        page:
+          name: Is 4K content supported on the Roku?
+          url: https://support.plex.tv/articles/214577427-is-4k-content-supported-on-the-roku/
+        lastVerified: 2026-11-11
       streaming.concurrent-streams:
         reason: 'Plex sets no number: its help says your own server is limited by its processor and upload speed, and the server’s owner can cap each person’s remote streams. No page says how many of its free films can play at once.'
         page:
@@ -452,6 +464,12 @@ plans:
       streaming.own-media: true
       account.parental-controls: true
     inferred:
+      video.quality:
+        reason: 'It plays your own media at its own quality, and its help says 4K content is supported (on players that can show it).'
+        page:
+          name: Is 4K content supported on the Roku?
+          url: https://support.plex.tv/articles/214577427-is-4k-content-supported-on-the-roku/
+        lastVerified: 2026-11-11
       streaming.concurrent-streams:
         reason: 'Plex sets no number: its help says your own server is limited by its processor and upload speed, and the server’s owner can cap each person’s remote streams. No page says how many of its free films can play at once.'
         page:

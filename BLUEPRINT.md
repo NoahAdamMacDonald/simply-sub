@@ -3795,7 +3795,7 @@ official AI rules file, which CLAUDE.md loads automatically. On top of those rul
    in certain countries only gets one, quoted in a comment.
    Every plan and bundle needs its sign-up `link`, and every provider a `cancelUrl`: its cancel page, or its help
    article on cancelling (for a prepaid service, on getting unused time back). The schema requires them (M1.9).
-   Every provider also says who owns it (`owner`) and how it can be paid (`paymentMethods`), and one whose paid plans
+   Every provider also says who owns it (`owner`) and, when it sells something, how it can be paid (`paymentMethods`), and one whose paid plans
    renew by the month or year which day it renews on (`renewalAnchor`, or not-stated), each quoted from its own pages;
    add `currencies` when it takes more than its prices', and `sourceRepo` when its apps are open source (sections 4.3,
    4.10, M11.2, M11.5).

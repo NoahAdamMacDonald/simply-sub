@@ -915,10 +915,6 @@ function checkPaymentMethods(provider: Provider, own: readonly string[], report:
   });
 }
 
-/**
- * Whether a provider has a paid plan still sold that renews by itself by the month or year, so the day it renews on
- * decides its item's charges (M11.5): a prepaid service and a free one don't.
- */
 /** Whether any plan or add-on of the provider has a price above zero. */
 function sellsAnything(provider: Provider): boolean {
   return [...provider.plans, ...(provider.addOns ?? [])].some((item) =>
@@ -926,6 +922,10 @@ function sellsAnything(provider: Provider): boolean {
   );
 }
 
+/**
+ * Whether a provider has a paid plan still sold that renews by itself by the month or year, so the day it renews on
+ * decides its item's charges (M11.5): a prepaid service and a free one don't.
+ */
 function renewsMonthly(provider: Provider): boolean {
   return provider.plans.some(
     (plan) =>
