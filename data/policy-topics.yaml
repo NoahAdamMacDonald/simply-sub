@@ -14,7 +14,8 @@
 # where it means a missing protection (the owner's choice, 2026-10-30). Every provider rates or gives a status for each
 # topic that applies to it. A topic with categories applies only to providers with a plan in one of them (the newest
 # categories joined them on 2026-11-10, before the full catalog's research: a camera's recordings, a fitness app's
-# health data, a carrier's or a map's records of where you are); one with
+# health data, a carrier's or a map's records of where you are; on 2026-11-11 health records, a car's location
+# history and its over-the-air updates); one with
 # paidPlans only to providers with that many paid plans. `actionFor` lists the grades that mean the user has to act
 # (an opt-out, a deletion request): a rating with one links the provider's own page for it (its `action`).
 # Shapes: packages/core/src/catalog/policy-topic.ts. Add a topic here, in its own commit, before a provider uses it.
@@ -109,6 +110,8 @@
       home,
       jobs,
       telecom,
+      health,
+      car,
     ]
   tiers:
     great: End-to-end or zero-access encryption by default for the main content.
@@ -211,7 +214,7 @@
   note: >-
     A minor is under 18 for the ads rungs; a child is under the service's stated minimum age for the deletion rung.
   silent: not-stated
-  categories: [streaming, music, gaming, education, social, books, fitness]
+  categories: [streaming, music, gaming, education, social, books, fitness, health]
   tiers:
     great: Kids' profiles collect the minimum, with no ads or tracking for minors, and parental controls.
     good: No targeted ads to minors, and parental consent.
@@ -502,7 +505,7 @@
     Great needs an independent audit of the no-logs claim, which the plans' vpn.independent-audits records
     (no-logs), and validation checks they agree.
   silent: poor
-  categories: [vpn, dns, search, browsers, telecom, maps]
+  categories: [vpn, dns, search, browsers, telecom, maps, car]
   tiers:
     great: No activity or connection logs, and an independent audit found none.
     good: No activity or connection logs, as it states, without an independent audit.
@@ -532,6 +535,9 @@
       home,
       news,
       education,
+      health,
+      car,
+      protection,
     ]
   tiers:
     great: Share it with anyone, up to the plan's limits.
@@ -579,6 +585,7 @@
       dns,
       file-sharing,
       home,
+      car,
     ]
   tiers:
     great: Asks before changing anything on your device, updates included.
