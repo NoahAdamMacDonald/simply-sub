@@ -1,0 +1,125 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): NBCUniversal's Privacy Policy, which covers its services (Peacock
+# first; hayu too, "Hayu, under Universal Pictures Subscription Television Limited", its opening paragraph), rated once
+# here with its "Your Privacy Choices" page, where the policy sends readers to opt out of sales and targeted ads. Each
+# provider names it in its policies' shared.
+# Read 2026-11-11 (M11.15): the English version (nbcuniversalprivacy.com/privacy, where peacocktv.com's footer and
+# nbcuniversal.com/privacy lead, "Last Updated: November 17, 2025") through a US exit and again from Canada (the same
+# text), its Your Privacy Choices page (/privacy/notrtoo) and Kid's Privacy Guide (/privacy/children, "Last Updated:
+# March 1, 2025") from Canada. Its "Children's Privacy Policy" link (nbcuniversal.com/privacy/pp-full-children) opens
+# this same policy. Its California Notice (/privacy/california-consumer-privacy-act) names no retention periods and
+# changes no grade; its Cookie Notice holds the cookie choices the policy names. Calibrated against Paramount Skydance's
+# and Warner Bros. Discovery's policies.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: nbcuniversal-privacy
+name: NBCUniversal's Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://www.nbcuniversalprivacy.com/privacy
+  - name: 'Your Privacy Choices'
+    url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It uses what you do and watch for research, analytics and new products. Nothing turns that off, beyond Nielsen’s own opt-out from its TV ratings.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'carrying out research and analytics for uses including improving services and developing new ones'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'NBCUniversal video services may feature Nielsen proprietary measurement software that will allow you to contribute to market research, like Nielsen’s TV Ratings.'
+    action:
+      name: 'Its privacy choices'
+      url: https://www.nbcuniversalprivacy.com/privacy
+    lastVerified: 2026-11-11
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It gives your information to ad companies and to partners who want to sell you their things. You can opt out, but outside your account only browser by browser.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'We may disclose information to better tailor marketing and advertising on our Services and on third-party platforms.'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'If we believe you may be interested in a partner’s products or services, we may disclose information for them to market to you.'
+      - url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
+        quote: 'If you are not logged in, your choice will only apply to this browser, and you will need to renew this choice on each browser or device where you want your choice to apply or if you clear your browser cookies.'
+    action:
+      name: 'Your Privacy Choices'
+      url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
+    lastVerified: 2026-11-11
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It picks ads from what you do. Opting out stops some of it, but you can still get ads picked from what NBCUniversal knows about you, and you choose again on each device.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'providing you with advertising, including targeted advertising, based on your activities and interests'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'You may still receive advertising, including personalized ads based on NBCUniversal data on the Services.'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'Please note, if you use different browsers, devices, or services you will need to make your elections separately.'
+    action:
+      name: 'Your Privacy Choices'
+      url: https://www.nbcuniversalprivacy.com/privacy/notrtoo
+    lastVerified: 2026-11-11
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy policy doesn’t say whether what you write, upload or say trains AI.'
+    pages: [https://www.nbcuniversalprivacy.com/privacy]
+    lastVerified: 2026-11-11
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it thinks necessary, and some of it for a while after you leave, with no periods named.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'We will keep your information only for as long as it is necessary to fulfill the purposes described above, unless a longer retention is required or permitted by law.'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'we retain your email address as an authentication credential (where applicable) as long as you have an account with us and an additional period of time after that'
+    lastVerified: 2026-11-11
+  - topic: privacy.data-deletion
+    tier: poor
+    reason: 'You can ask it to delete some of your information, but where no law makes it, it may say no. Deleting it ends the service that needs it.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'delete certain information'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'Please note that you may be located in a jurisdiction where we are not obligated, or are unable, to fulfill a request. In such a case, your request may not be fulfilled.'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'Some NBCUniversal Services can only be provided if we have your information, therefore deletion of your information will result in termination of such Services.'
+    action:
+      name: 'How to make a privacy request'
+      url: https://www.nbcuniversalprivacy.com/privacy
+    lastVerified: 2026-11-11
+  - topic: privacy.data-portability
+    tier: poor
+    reason: 'You can ask for some of your information, sometimes in a form you can take elsewhere, but where no law makes it, it may say no.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'provide access to certain information we hold about you, in some cases in a portable format, if technically feasible'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'Please note that you may be located in a jurisdiction where we are not obligated, or are unable, to fulfill a request. In such a case, your request may not be fulfilled.'
+    action:
+      name: 'How to make a privacy request'
+      url: https://www.nbcuniversalprivacy.com/privacy
+    lastVerified: 2026-11-11
+  - topic: privacy.government-requests
+    tier: poor
+    reason: 'Besides following legal process, it may answer requests from governments and other authorities for your information.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'respond to requests from government and other authorities; and otherwise comply with legal process.'
+    lastVerified: 2026-11-11
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'NBCUniversal is based in the US, and your information can go to other countries, the US included, under data transfer agreements.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'We may transfer your information to Related Companies, service providers, and other third parties located outside of your country of residence, including in the United States.'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'We take steps to ensure that reasonable safeguards are in place with aim to ensure an appropriate level of protection for your information, in accordance with applicable law. These measures include data transfer agreements.'
+    lastVerified: 2026-11-11
+  - topic: security.practices
+    tier: poor
+    reason: 'It says only that it has safeguards and that no security is perfect. It names no outside checks and no way to report a security problem.'
+    sources:
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'We maintain organizational, technical, and physical safeguards to help protect the information we collect and use.'
+      - url: https://www.nbcuniversalprivacy.com/privacy
+        quote: 'Despite all reasonable practices, no security method is infallible.'
+    lastVerified: 2026-11-11

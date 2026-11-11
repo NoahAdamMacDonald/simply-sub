@@ -409,6 +409,8 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['siriusxm-canada.all-access-app-only', ['audio.quality']],
   // CBC Gem states only Premium's quality and streams (2026-11-11).
   ['cbc-gem.free', ['video.quality', 'streaming.concurrent-streams']],
+  // Peacock states Premium's and Premium Plus's quality, not Select's (2026-11-11).
+  ['peacock.select', ['video.quality']],
 ]);
 
 /**

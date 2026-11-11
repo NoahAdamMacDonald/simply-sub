@@ -1,0 +1,17 @@
+# Peacock sells it (its plan picker's Bundles tab, peacocktv.com/plans/all-monthly, read 2026-11-11 through a US exit:
+# "Apple TV and Peacock Premium Plus", "$22.99/month"), and its help centre's "Apple TV and Peacock Bundle" prices it:
+# "Peacock Premium Plus + Apple TV/$22.99 a month". Apple sells it too ("through either Peacock or Apple"). Monthly only.
+id: bundle.apple-tv-peacock-premium-plus
+name: Apple TV and Peacock Premium Plus
+soldBy: peacock
+includes: [peacock.premium-plus, apple-tv.standard]
+link: https://www.peacocktv.com/plans/all-monthly
+prices:
+  - region: US
+    currency: USD
+    amount: 22.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-11-11
+    sourceUrl: https://www.peacocktv.com/help/article/apple

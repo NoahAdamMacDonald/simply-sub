@@ -1,0 +1,456 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6). Peacock isn't sold in Canada (peacocktv.com and its help
+# centre send a Canadian visitor to peacocktv.com/unavailable: "Peacock is not yet available in your territory."), so
+# its pages were read 2026-11-11 through a US exit: the plan picker in Edge, the help centre's 114 articles (its
+# sitemap) with a plain fetch. Pages, each quoted where it's used:
+# Pricing: its help centre's "How much does a Peacock subscription cost?" ("You can sign up for a Peacock Premium plan
+# at $12.99 a month (+tax) or $129.99 per year (+tax).", Premium Plus "$19.99 a month (+tax) or $199.99 per year
+# (+tax)", "the Peacock Select Tier for $8.99/month or $89.99/year"), the same as the plan picker
+# (peacocktv.com/plans/all-monthly, which opens /plans/base: Select "$8.99/month" or "$89.99/year", Premium
+# "$12.99/month" or "$129.99/year", Premium Plus "$19.99/month" or "$199.99/year") and its "Price Increase" article
+# (new prices "as of August 18, 2026"). The annual cards' "Get 12 Months for the Price of 10" describes the regular
+# yearly price, not an offer. The old annual picker (/plans/all-annual) still shows the prices before August 18
+# ($79.99, $109.99, $169.99): not used. Prices are before tax ("(+tax)").
+# Region checklist for CA and US, 2026-11-11: 1. one site, no country paths; 2. its language picker (English, Español)
+# changes no prices; 3. the picker's page data names no country; 4. the picker's Choose buttons answered "Looks like an
+# error occurred" through the exit, so the checkout wasn't reached; 5. the help centre's prices article; 6. Edge through
+# a US exit, and a plain fetch; 7. no bill offered. Canada: not sold (its terms and help centre, below).
+# Not listed: the NBC Sports regional sports networks (monthly add-ons for some zip codes, no price on any page read),
+# Peacock Sports Pass (for bars and restaurants, sold by DAZN for Business) and the Plus add-on (no longer sold since
+# April 1, 2025).
+# Bundles: Apple TV and Peacock Premium ($17.99/month) and Premium Plus ($22.99/month), on the picker's Bundles tab and
+# its help centre's "Apple TV and Peacock Bundle" ("You can subscribe to both services in a single transaction, through
+# either Peacock or Apple."): drafted as bundle files beside this one. Official resellers: none. Its digital gift cards
+# are "sold through the third-party company, Buyatab" on Peacock's own gift card page (a payment processor, not a
+# shop). Xfinity, Spectrum, DIRECTV, Verizon +play, Xumo, Amazon, Apple, Google and Roku sign people up and bill it
+# themselves (its cancelling article lists them): partners, not listed.
+# Features, read 2026-11-11: Select has "TV Favorites from NBC, Bravo, & More" and "Excludes Sports, Movies, Live
+# Programming and Peacock Originals" (the picker; its Select Tier article: TV shows "Yes, with limited exceptions",
+# channels "Yes, but TV channels only"); Premium adds "LIVE Sports & Events" and "Hit Films & Peacock Originals";
+# Premium Plus adds "Downloads & No Ads (limited exceptions)*" and "Local NBC Station" (the Select Tier article's
+# table). 4K: "Peacock does offer certain content in 4K Ultra HD to Premium and Premium Plus subscribers" (Can I watch
+# content in 4K Ultra HD on Peacock?); no page states Select's video quality, nor does a named publication: it waits in
+# core's awaitingRequiredFeatures. No page names HDR or Dolby Atmos. Streams: "You are able to have up to three
+# concurrent streams on your account." Profiles: "you can have up to 6 profiles on your account. It can be any
+# combination of Kids and regular profiles". Downloads: "Peacock Premium Plus accounts can have a total of 25 pieces of
+# content downloaded across all devices at any one time", with no number of devices, so 1 (inferred). Ads: Select and
+# Premium have them; Premium Plus "is generally free of commercial interruptions" but live sports and channels keep
+# their breaks, so ad-free with a note, as Paramount+ Premium is. Live: Premium's sports and "50+ always-on channels"
+# (Why should I pay for Peacock?), and Premium Plus's local NBC station (a perk). What it streams: "hit movies and TV
+# shows, Originals, current NBC & Bravo hits, and LIVE Sports" (What is Peacock?), "the latest in news, sports, and pop
+# culture" (What content can I watch on Peacock?), "kid shows" and its Kids section, and Bravo's reality series (The
+# Real Housewives, Below Deck, the Select Tier article); none of your own media.
+# Pause: none (no page names one). Parental controls: "Peacock offers profile-based Maturity Rating settings and
+# Profile Pin protection so parents can limit the TV shows and movies that a profile may access" (Does Peacock have
+# parental controls?).
+
+# Coverage: peacock.* in AS, GU, MP, PR and VI: sold there ("Peacock is currently available to stream within the United
+# States and certain U.S. territories", Where is Peacock available?), but the plan picker and the prices article name
+# no territory's price, and the US exit's page showed the US's (2026-11-11).
+
+id: peacock
+name: Peacock
+website: https://www.peacocktv.com
+# NBCUniversal's privacy centre, which its footer links as its Privacy Policy.
+domains: [nbcuniversalprivacy.com]
+category: streaming
+spendCategory: streaming
+# "Peacock is currently available to stream within the United States and certain U.S. territories (American Samoa,
+# Guam, Northern Mariana Islands, Puerto Rico and the U.S. Virgin Islands)." (Where is Peacock available?), and its
+# terms: "The Peacock Service is for individuals who are 18 years of age or older and reside in the United States
+# (including its territories and possessions)."
+availableIn: [US, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD }
+cancelUrl: https://www.peacocktv.com/help/article/cancellation
+sources:
+  { pricing: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost }
+# Owner (M11.2), read 2026-11-11: its help centre names NBCUniversal; Comcast's third-quarter release (on its investor
+# site, cmcsa.com) names Peacock among its brands and its listing. Comcast plans to spin off NBCUniversal and Sky as an
+# independent company ("the proposed NBCUniversal Spin-off", the same release): re-read the owner when that completes.
+# No page read names a majority holder.
+owner:
+  name: NBCUniversal (Peacock TV LLC), part of Comcast Corporation
+  website: https://www.cmcsa.com
+  page:
+    name: What is Peacock?
+    url: https://www.peacocktv.com/help/article/what-is-peacock
+  quotes:
+    - 'Peacock is a streaming service from NBCUniversal.'
+  country:
+    code: US
+    page:
+      name: NBCUniversal Privacy Policy
+      url: https://www.nbcuniversalprivacy.com/privacy
+    quotes:
+      - '30 Rockefeller Plaza, New York, NY 10112, USA, NBCUniversal Legal Department Attn: Chief Privacy Officer.'
+    lastVerified: 2026-11-11
+  stock:
+    company: Comcast Corporation
+    listings:
+      - { exchange: Nasdaq, symbol: CMCSA }
+    page:
+      name: Comcast Reports 3rd Quarter 2026 Results
+      url: https://www.cmcsa.com/news-releases/news-release-details/comcast-reports-3rd-quarter-2026-results
+    quotes:
+      - 'Comcast Corporation (Nasdaq: CMCSA) is a global media and technology company.'
+      - 'produce, distribute, and stream leading entertainment, sports, and news through brands including NBC, Telemundo, Universal, Peacock, and Sky'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its payment methods article, and Peacock gift cards (digital, for Premium and
+# Premium Plus bought from Peacock). Also named, in words the catalog's checks don't read as a TV or internet bill:
+# Xfinity, Spectrum, DIRECTV and Verizon ("you will be billed by Verizon directly", Using Peacock with Verizon +play).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, discover, amex]
+    url: https://www.peacocktv.com/help/article/payment-methods
+    quotes:
+      - 'You may pay for a Peacock subscription via credit card (Visa/MasterCard/Discover/American Express), debit card, PayPal or in-app purchase on supported devices.'
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: What payment methods are accepted for Peacock?
+    url: https://www.peacocktv.com/help/article/payment-methods
+    quotes:
+      - 'You may pay for a Peacock subscription via credit card (Visa/MasterCard/Discover/American Express), debit card, PayPal or in-app purchase on supported devices.'
+  - methods: [gift-card]
+    page: Peacock Gift Cards
+    url: https://www.peacocktv.com/help/article/gift-cards-us
+    quotes:
+      - 'Peacock Gift Cards may be used to purchase Peacock Premium and Premium Plus subscriptions.'
+# Renewal day (M11.5): its terms (2.2) move a monthly charge only when the subscription began on a date a month lacks.
+renewalAnchor:
+  kind: same-date
+  page: Peacock Terms of Service
+  url: https://www.peacocktv.com/terms
+  quotes:
+    - 'billing for a particular Service Tier may not occur on the same date of each month if your subscription began on a date not contained in a given month (for example, if you sign up for a monthly subscription on August 31st, you will be billed next on September 30th, etc.)'
+  lastVerified: 2026-11-11
+# Free use: none. Its terms: "ACCESS TO THE PEACOCK SERVICE REQUIRES YOU TO SIGN UP FOR A SUBSCRIPTION", and the
+# picker sells paid plans only. One help article says a cancelled Premium subscriber can "watch a limited amount of
+# content for free" afterwards; its terms control where the help centre differs (1.3), and no page offers it to anyone
+# signing up.
+freeUse:
+  kind: none
+  pages:
+    - https://www.peacocktv.com/plans/all-monthly
+    - https://www.peacocktv.com/terms
+  lastVerified: 2026-11-11
+
+# Platforms: "Web Browsers", "Android", "iOS", "Connected TVs, Game Consoles and Streaming Devices" (PlayStation, Xbox,
+# Roku, Fire TV, Apple TV and smart TVs; What devices and platforms are supported by Peacock?). Sign-in: "your
+# registered email address and password" (Peacock Sign in Help); its Enhanced Security sends an email code only to show
+# or change account details, not to sign in. App languages: English and Español (every page's language picker).
+# Support: "send us an email message or chat with a live agent from 9:00AM to 1:00AM ET" (Contact Us in Customer
+# Service).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en, es]
+  support.channels: [email, chat]
+
+# Perks (M11.6): Premium Plus's local station, in its help centre's words.
+perks:
+  - id: local-nbc-station
+    name: Your 24/7 live local NBC station
+
+plans:
+  - id: peacock.select
+    name: Select
+    link: https://www.peacocktv.com/plans/all-monthly
+    features:
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 6
+      streaming.kids-profiles: true
+      account.parental-controls: true
+      streaming.content: [series, reality]
+    notes: TV shows from NBC, Bravo and more, with ads. No movies, sports, live programming or Peacock Originals.
+    prices:
+      - region: US
+        currency: USD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost
+      - region: US
+        currency: USD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost
+    addOnIds: [peacock.starz]
+
+  - id: peacock.premium
+    name: Premium
+    link: https://www.peacocktv.com/plans/all-monthly
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 6
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels, sports]
+      account.parental-controls: true
+      streaming.content: [films, series, sports, kids, reality, news]
+    notes: With ads. 4K on some titles and devices.
+    prices:
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost
+    addOnIds: [peacock.starz]
+
+  - id: peacock.premium-plus
+    name: Premium Plus
+    link: https://www.peacocktv.com/plans/all-monthly
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 6
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels, sports]
+      account.parental-controls: true
+      streaming.content: [films, series, sports, kids, reality, news]
+    inferred:
+      streaming.download-devices:
+        reason: 'Its downloads article allows 25 downloads "across all devices" without saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Can I download and watch Peacock content offline?
+          url: https://www.peacocktv.com/help/article/can-i-watch-peacock-content-offline
+        lastVerified: 2026-11-11
+    perks: [local-nbc-station]
+    notes: Mostly ad-free; live sports, channels, your local NBC station and a few shows and movies still have ads. 4K on some titles and devices. Downloads on phones and tablets.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost
+      - region: US
+        currency: USD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/how-much-does-a-peacock-subscription-cost
+    addOnIds: [peacock.starz]
+
+# STARZ in the Peacock app (its STARZ Add-On article: "adding the STARZ add-on to your active Peacock Select, Premium, or
+# Premium Plus base plan for an additional $11.99/month (+tax)"). It doesn't give a STARZ subscription: "you can only
+# watch STARZ in the Peacock app", so no grantsPlan.
+addOns:
+  - id: peacock.starz
+    name: STARZ
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.peacocktv.com/help/article/STARZ-Add-On
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 through a US exit: its Terms of Service ("Updated December 3,
+# 2025"), which include its Privacy Policy and make the help centre "Supplemental Terms" (1.3), and the help centre's
+# billing, cancelling, refunds, downloads, household and parental-controls articles. NBCUniversal's Privacy Policy,
+# its "Your Privacy Choices" page and Kid's Privacy Guide are rated once as a shared document
+# (data/policies/nbcuniversal-privacy.yaml, drafted beside this file). Not read: the sign-up form (the picker answered
+# "Looks like an error occurred" when a plan was chosen), the Peacock Gift Card Terms and the Peacock Membership beta's
+# terms (a closed beta for some subscribers), and the terms of the partners that bill it. Its terms take a perpetual,
+# irrevocable, sublicensable licence over anything you post, your name and likeness in it included (4.5.1), a topic
+# streaming doesn't have, as Sportsnet+'s identical kind of clause wasn't made notable.
+policies:
+  shared: [nbcuniversal-privacy]
+  links:
+    - name: 'Terms of Service'
+      url: https://www.peacocktv.com/terms
+    - name: 'How do I cancel my Peacock plan?'
+      url: https://www.peacocktv.com/help/article/cancellation
+    - name: 'What is Peacock’s refund policy?'
+      url: https://www.peacocktv.com/help/article/what-is-peacock-s-refund-policy
+    - name: 'Can I still purchase the monthly Plus add-on?'
+      url: https://www.peacocktv.com/help/article/plus-add-on
+    - name: 'Price Increase'
+      url: https://www.peacocktv.com/help/article/price-increase
+    - name: 'STARZ Add-On'
+      url: https://www.peacocktv.com/help/article/STARZ-Add-On
+    - name: 'What is a Peacock household?'
+      url: https://www.peacocktv.com/help/article/peacock-household
+    - name: 'Can I download and watch Peacock content offline?'
+      url: https://www.peacocktv.com/help/article/can-i-watch-peacock-content-offline
+    - name: 'Does Peacock have parental controls?'
+      url: https://www.peacocktv.com/help/article/does-peacock-have-parental-controls
+    - name: 'Choose your plan'
+      url: https://www.peacocktv.com/plans/all-monthly
+  ratings:
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its terms say you may be asked for registration details without listing them, and its sign-up form couldn’t be reached: choosing a plan showed an error.'
+      pages:
+        - https://www.peacocktv.com/terms
+        - https://www.peacocktv.com/plans/all-monthly
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to use it. Parents can set kids’ profiles with age ratings and lock profiles with a PIN, but nothing says kids’ profiles are kept from ads picked for them.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'The Peacock Service is for individuals who are 18 years of age or older and reside in the United States (including its territories and possessions).'
+        - url: https://www.peacocktv.com/help/article/does-peacock-have-parental-controls
+          quote: 'Yes, Peacock offers profile-based Maturity Rating settings and Profile Pin protection so parents can limit the TV shows and movies that a profile may access.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel in your account at any time and keep watching until the end of the time you paid for, but you must cancel by the day before it renews, or you pay for the next period.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'YOU MUST CANCEL YOUR SUBSCRIPTION NO LATER THAN THE DAY BEFORE YOUR NEXT RECURRING BILLING DATE IN ORDER TO AVOID BEING CHARGED FOR THE NEXT SUBSCRIPTION TERM.'
+        - url: https://www.peacocktv.com/terms
+          quote: 'IF YOU CANCEL, YOU WILL STILL HAVE ACCESS TO EACH SERVICE TIER THROUGH THE END OF ITS APPLICABLE SUBSCRIPTION TERM'
+        - url: https://www.peacocktv.com/help/article/cancellation
+          quote: 'Select Cancel All Subscriptions to cancel all subscriptions.'
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the time you paid for. It gives refunds only when it chooses to.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'NO PRORATED REFUNDS OR CREDITS WILL BE ISSUED UNLESS REQUIRED BY APPLICABLE LAW OR IN THE CASE OF AN IMMEDIATE UPGRADE.'
+        - url: https://www.peacocktv.com/help/article/what-is-peacock-s-refund-policy
+          quote: 'Peacock reserves the right to issue refunds at its sole discretion.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you about a new price before your next billing date, without saying how far ahead, and you can cancel first. Otherwise you renew at the new price.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'We will give you advance notice of any price change prior to the next billing date'
+        - url: https://www.peacocktv.com/terms
+          quote: 'If you do not wish to accept a price change, you may cancel your subscription in accordance with the instructions below.'
+        - url: https://www.peacocktv.com/help/article/price-increase
+          quote: 'If you are an existing Peacock user, you will be notified of the price change via email to the address currently associated with your account.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its plans have no free trial, but its STARZ add-on has a 7-day one, which needs a plan you already pay for and turns into a paid add-on unless you remove it. It may not warn you first.'
+      sources:
+        - url: https://www.peacocktv.com/help/article/STARZ-Add-On
+          quote: 'If you are billed directly by Peacock, you can get a 7-day Free Trial of STARZ if you have an active base plan that includes Peacock Select, Premium, or Premium Plus.'
+        - url: https://www.peacocktv.com/help/article/STARZ-Add-On
+          quote: 'After your trial ends, you will automatically be charged $11.99/month unless you cancel or remove the STARZ add-on from your subscription'
+        - url: https://www.peacocktv.com/terms
+          quote: 'You may not receive a separate notice that your Trial Period or Promotional Period is about to end or has ended or that your paid or full price subscription to the Peacock Service has begun unless required by applicable law.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      tier: neutral
+      reason: 'It renews on its own. Its terms name renewal notices among the messages it sends, but don’t promise one before each renewal or say when.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'You will continue to receive administrative messages from us, such as order confirmations, subscription renewal notices or other communications regarding our relationship or transactions with you.'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: poor
+      reason: 'It charges the price plus “applicable taxes and fees”, without saying what the fees are, and won’t tell you when they change.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'AT THE THEN-CURRENT SUBSCRIPTION FEE (PLUS APPLICABLE TAXES AND FEES)'
+        - url: https://www.peacocktv.com/terms
+          quote: 'we will not be able to notify you of any changes in applicable taxes or fees'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up a plan starts at once, with the unused days of your old plan refunded. Changes can wait for the end of your billing period, and moving down refunds nothing.'
+      sources:
+        - url: https://www.peacocktv.com/help/article/plus-add-on
+          quote: 'If applicable, a refund will be issued to your original payment method on file for any unused days in your current Premium plan.'
+        - url: https://www.peacocktv.com/help/article/price-increase
+          quote: 'Depending on your current plan, the change may not take effect until the end of your current billing cycle.'
+        - url: https://www.peacocktv.com/help/article/cancellation
+          quote: 'No refunds or credits will be issued, unless required by law for any prior payments made when you cancel (or downgrade) a Peacock Premium or Peacock Premium Plus plan.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to a court, never to a private referee (an arbitrator), but only to the courts of New York County.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'will be resolved in federal or state (including small claims) court, and neither party will be required to arbitrate any claims against the other.'
+        - url: https://www.peacocktv.com/terms
+          quote: 'will be brought exclusively in the federal or state (including small claims) courts located in New York County, New York'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'A change to its terms starts 30 days after it tells you or just posts it on its website. Using Peacock after that means you accept it.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'such changes will be effective (i) for existing users, thirty (30) days following either notification to you or our posting of the changes on Peacock’s website'
+        - url: https://www.peacocktv.com/terms
+          quote: 'Your continued access or use of the Peacock Service after we post changes to these Terms of Service will be deemed acceptance of these Terms of Service as modified.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can cut you off without warning if it believes you broke its terms or the law, with no money back. After giving you a refund, it may also end your account.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'You agree that we may, in our sole discretion and without notice or liability to you, restrict, suspend, or terminate your access to the Peacock Service and to any Content if we believe you are using or have used the Peacock Service in violation of these Terms of Service or applicable law.'
+        - url: https://www.peacocktv.com/terms
+          quote: 'IF WE ISSUE A REFUND, CREDIT, OR DISCOUNT, WE ARE UNDER NO OBLIGATION TO ISSUE THE SAME OR SIMILAR REFUND IN THE FUTURE AND WE MAY TERMINATE YOUR ACCOUNT, MEMBERSHIP, OR ACCESS TO THE SUBSCRIPTION.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change, pause or end any part of Peacock at any time, without notice, and says it owes you nothing when it does.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'We may change, suspend, or discontinue the Peacock Service, in whole or in part, at any time for any reason without notice or liability to you.'
+        - url: https://www.peacocktv.com/terms
+          quote: 'we reserve the right to change the terms of your subscription to any Service Tier, including the price, from time to time.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It may close an account you haven’t used for a long time, giving more than a year only as an example, and doesn’t say it will warn you.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'We also reserve the right, but are not required, to terminate any Peacock account that remains inactive for an extended period of time (for example, for more than one year).'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'Only people in your home can use your account. It watches how the account is used, and can limit or end it if it decides you shared it outside your home.'
+      sources:
+        - url: https://www.peacocktv.com/terms
+          quote: 'Unless otherwise permitted by your Service Tier, you may not share your subscription outside of your household.'
+        - url: https://www.peacocktv.com/terms
+          quote: 'If we determine, in our sole discretion, that you have violated these Terms of Service, we may limit, suspend or terminate access to the Peacock Service'
+        - url: https://www.peacocktv.com/help/article/peacock-household
+          quote: 'A household is the collection of devices associated with your primary personal residence based on where you most regularly watch Peacock.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Premium Plus can keep 25 downloads at a time across all devices. A download you start watching disappears after 48 hours, and an unwatched one after 30 days.'
+      sources:
+        - url: https://www.peacocktv.com/help/article/can-i-watch-peacock-content-offline
+          quote: 'Peacock Premium Plus accounts can have a total of 25 pieces of content downloaded across all devices at any one time.'
+        - url: https://www.peacocktv.com/help/article/can-i-watch-peacock-content-offline
+          quote: 'Downloaded content that you have started watching will automatically be removed after 48 hours.'
+        - url: https://www.peacocktv.com/help/article/can-i-watch-peacock-content-offline
+          quote: 'If content is not watched, it will automatically be removed from your downloads after 30 days or whenever the content leaves the platform (whichever is sooner).'
+      lastVerified: 2026-11-11

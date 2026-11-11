@@ -1,0 +1,456 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, its buy and sign-up pages
+# again through a US exit, and its help centre (support.starz.com) in Edge. Pages, each quoted where it's used:
+# Pricing: its buy page (starz.com/us/en/buy): "Monthly Plan", "$11.99/mo" and "Annual Plan", "$69.99/yr", in US
+# dollars before tax ("currently $11.99/month plus applicable taxes", the page's offer terms; its plan data names
+# "currency":"USD" and "country":["us"], whoever reads it, and the US exit's read showed the same), and its help
+# centre's "Annual billing" ("The cost of this subscription will be $69.99 a year, plus tax."). The buy page's "$4.99"
+# a month "for 3 months" and "$29.99 for 12 months" are first-term offers ("After completion of 12 month offer, service
+# automatically renews for additional 12 month terms at $69.99 per 12 month term"), so the regular prices are $11.99 and
+# $69.99. Its plan data also lists 3-, 6- and 10-month plans and a "STARZ + BritBox" bundle ("testing contentful
+# entry", not subscribable) that no page sells: not listed.
+# Region checklist for CA and US, 2026-11-11: 1. one site, /us/en (starz.com and /ca/en open /us/en, and /us/es
+# doesn't exist); 2. no picker; 3. the buy page's plan data (USD, "us"); 4. the sign-up page's first step (an email
+# address, or "Sign up with Google"), typing nothing; 5. its help centre's billing articles; 6. Edge from Canada and
+# through a US exit, and a plain fetch; 7. no bill offered. Canada: not sold by starz.com (its terms, below). STARZ
+# Canada (starz.ca, "Distributed by Lionsgate in Canada") sells it only through others: "STARZ is available through most
+# TV service providers in Canada, direct to consumer as an add-on to Crave, through Amazon Prime Video and Apple
+# Channels." (its FAQ, How can I get STARZ?, read 2026-11-11): Crave's add-on is crave.starz.
+# Bundles: none sold on starz.com now (its terms allow them, 4.4). Official resellers: none. Partners that bill it
+# themselves, named in its help centre: Amazon's STARZ channel ("It costs the same as our Streaming service"), Apple,
+# Google, Roku, Microsoft's Xbox, Samsung, LG, Sling TV, YouTube TV, Hulu's add-on, Sprint and cable or satellite
+# providers; and Peacock's STARZ add-on (peacock.starz, which plays STARZ in Peacock's app only).
+# Features, read 2026-11-11: "Unconditionally ad-free", "Offline streaming via downloads", "Stream on multiple devices
+# simultaneously" (the buy page); "You can stream on up to three different devices simultaneously." (How many devices can
+# watch STARZ at the same time?); "A total of 5 different profiles can be added to a subscription", and a profile for
+# kids is one with parental controls on it (How do I set up and manage Profiles?); downloads on its Apple and Android
+# apps, with no number of devices, so 1 (inferred); "STARZ provides a live stream on our website" (Can I watch live
+# content on STARZ?). Video quality: "Unfortunately, STARZ does not offer a 4K streaming option on the app or website."
+# (Do you offer 4K streaming?), and no page of its own names its best quality, so Digital Trends' review gives it
+# (third-party). What it streams: "bold original series, hit movies and riveting docuseries" (the buy page); "Family fun
+# has its time and place. And this isn't it." (its corporate page), so no kids' content; none of your own media.
+# Pause: "You may pause your subscription by visiting Settings in your Subscription account." (its terms, 4.6; the buy
+# page's plan data allows a monthly plan up to 6 billing cycles' pause and an annual one none). Parental controls:
+# "Parental Controls allow you to set a maximum movie rating and television rating for the applicable Profile." (its
+# terms, 7.2), behind a PIN (its parental controls article).
+
+# Coverage: starz.* in AS, GU, MP, PR and VI: its terms sell it in "US territories", but its buy page names no
+# territory's price, and the US exit's page showed the US's (2026-11-11).
+
+id: starz
+name: STARZ
+website: https://www.starz.com
+category: streaming
+spendCategory: streaming
+# Its terms (3.1.2): "you must reside within the fifty states of the United States of America ("US"), the District of
+# Columbia, or US territories", and (8.4) "The Platform is not available to subscribers outside of the United States".
+# They don't name the territories; the five inhabited ones are listed, as Peacock's help centre names them.
+availableIn: [US, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD }
+cancelUrl: https://support.starz.com/en_us/how-do-i-cancel-my-starz-subscription-SJdqfEWyo
+sources: { pricing: https://www.starz.com/us/en/buy }
+# Owner (M11.2), read 2026-11-11: its investor site (investors.starz.com) names the listed company, Starz Entertainment
+# Corp., separated from Lionsgate in 2025; its terms are Starz Entertainment, LLC's, "controlled and operated by Starz
+# from the United States" (the release is datelined "SANTA MONICA, Calif. and VANCOUVER, BC"). No page read names a
+# majority holder (its 2026 proxy statement wasn't read).
+owner:
+  name: Starz Entertainment Corp. (Starz Entertainment, LLC)
+  page:
+    name: Starz Entertainment Corp. Reports Results for the Third Quarter Ended September 30, 2026
+    url: https://investors.starz.com/news-releases/news-release-details/starz-entertainment-corp-reports-results-third-quarter-ended-0
+  quotes:
+    - 'STARZ (NASDAQ: STRZ) today reported results for the quarter ended September 30, 2026. This press release includes consolidated financial results for STARZ Entertainment Corp.'
+    - 'Share-based compensation represents equity award modifications in July and August 2025 in connection with the Separation from Lionsgate'
+  country:
+    code: US
+    page:
+      name: Terms of Use
+      url: https://www.starz.com/us/en/termsofuse
+    quotes:
+      - 'The Platform is controlled and operated by Starz from the United States.'
+    lastVerified: 2026-11-11
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: STRZ }
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its payment article; Apple's App Store (and Google Play, Amazon, Roku, Xbox and
+# the rest, its help centre's subscribe articles); and gift cards, redeemed by its support team ("Redeem Gift Card" in
+# every page's footer). Also named, in words the catalog's checks don't read as a TV bill: "your cable or satellite
+# company" (How to subscribe to STARZ through a cable or satellite provider).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, discover, amex]
+    url: https://support.starz.com/en_us/what-types-of-payments-do-you-accept-ryGUz4bJs
+    quotes: ['Visa', 'Mastercard', 'Discover', 'American Express']
+paymentMethods:
+  - methods: [card, paypal, apple-pay, google-pay, klarna]
+    page: What types of payments do you accept?
+    url: https://support.starz.com/en_us/what-types-of-payments-do-you-accept-ryGUz4bJs
+    quotes:
+      [
+        'Visa',
+        'Mastercard',
+        'Discover',
+        'American Express',
+        'PayPal',
+        'Apple Pay',
+        'Google Pay',
+        'Klarna',
+      ]
+  - methods: [app-store]
+    page: How to subscribe to STARZ through Apple/iTunes
+    url: https://support.starz.com/en_us/how-to-subscribe-to-starz-through-appleitunes-ryHLMNbys
+    quotes:
+      - 'From the Apple App Store, download the STARZ app'
+      - 'Approve the subscription terms through Apple'
+  - methods: [gift-card]
+    page: Redeem Gift Card
+    url: https://www.starz.com/us/en/corporatelinks
+    quotes:
+      - 'We no longer support gift card redemption directly on our site. Please contact us via live chat and our support team will redeem it for you.'
+# Renewal day (M11.5): its terms renew "AT THE END OF THE BILLING PERIOD", and its billing article says only that "STARZ
+# does not provide a way to change your billing date".
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.starz.com/us/en/termsofuse
+    - https://support.starz.com/en_us/when-will-i-be-billed-and-can-i-change-my-billing-date-By15MN1j
+  lastVerified: 2026-11-11
+# Free use: none. Its buy page sells paid plans only ("Offer does not include free trial."), and its terms (3.1.3)
+# require "an active subscription to the Service".
+freeUse:
+  kind: none
+  pages:
+    - https://www.starz.com/us/en/buy
+    - https://www.starz.com/us/en/termsofuse
+  lastVerified: 2026-11-11
+
+# Platforms: iPhone and iPad, Android, Apple TV, Fire TV, Android TV, Roku, Xbox, Samsung, LG and Vizio TVs, and "The
+# current version" of Edge, Chrome, Firefox and Safari (Supported Devices). Sign-in: "Enter the email address you used to
+# create your account and password", or "Sign in With Google" or "Sign in with Apple" (How do I log in to STARZ?); a TV
+# provider's sign-in is for those who bought it there. App languages: English (its site is /us/en only). Support: "CHAT
+# WITH US" on every help article.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password, sso]
+  languages.interface: [en]
+  support.channels: [chat]
+
+plans:
+  - id: starz.standard
+    name: STARZ
+    link: https://www.starz.com/us/en/buy
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 3
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [films, series, documentaries]
+    inferred:
+      streaming.download-devices:
+        reason: 'Its downloads article lets you download titles on its Apple and Android apps without saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: How to download content from STARZ?
+          url: https://support.starz.com/en_us/how-to-download-content-from-starz-HJ2vfEZ1s
+        lastVerified: 2026-11-11
+    thirdParty:
+      video.quality:
+        publisher: Digital Trends
+        url: https://www.digitaltrends.com/home-theater/what-is-starz/
+        quote: 'Unlike other streaming platforms, Starz caps its movie and TV show quality at 1080p'
+        lastVerified: 2026-11-11
+    notes: Its live channel streams on its website only. New subscribers on starz.com are offered a lower first term.
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.starz.com/us/en/buy
+      - region: US
+        currency: USD
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.starz.com/us/en/buy
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 in Edge from Canada: its Terms of Use ("Effective Date: June 23,
+# 2026"), its Privacy Notice (the same date), which the terms say "is not incorporated in these Terms of Use by
+# reference", its "Do Not Sell/Share" page, and its help centre's billing, cancelling, downloads, profiles and data
+# deletion articles; its sign-up page's first step, typing nothing. Not read: the sign-up steps after an email address,
+# its Privacy Rights Manager and deletion form (TrustArc's, another company's site), its Gift Card Terms (the link opens
+# an older Terms of Use with no gift card clauses) and the terms of the partners that bill it. Its terms take a perpetual,
+# irrevocable licence over feedback and anything you submit (12.4), a topic streaming doesn't have. Calibrated against
+# HBO Max (the same billing and closure wording) and Paramount+.
+policies:
+  links:
+    - name: 'Terms of Use'
+      url: https://www.starz.com/us/en/termsofuse
+    - name: 'Privacy Notice'
+      url: https://www.starz.com/us/en/privacy
+    - name: 'Do Not Sell/Share My Personal Information'
+      url: https://www.starz.com/us/en/donotsell
+    - name: 'Create Your Account'
+      url: https://www.starz.com/us/en/signup
+    - name: 'How do I cancel my STARZ subscription?'
+      url: https://support.starz.com/en_us/how-do-i-cancel-my-starz-subscription-SJdqfEWyo
+    - name: 'STARZ Terms of Use, Privacy Policy, and Data Deletion'
+      url: https://support.starz.com/en_us/starz-terms-of-use-privacy-policy-and-data-deletion-Byri4Gn2bl
+    - name: 'How to download content from STARZ?'
+      url: https://support.starz.com/en_us/how-to-download-content-from-starz-HJ2vfEZ1s
+    - name: 'How do I set up and manage Profiles?'
+      url: https://support.starz.com/en_us/how-do-i-set-up-and-manage-profiles-SJVwMEZks
+    - name: 'Buy STARZ'
+      url: https://www.starz.com/us/en/buy
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use STARZ for research, analytics and business analyses. You can only block some of it, such as Google Analytics, browser by browser.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Monitor the performance of the Services, understand how you access and use the Services, and conduct internal research and reporting, data analytics, and other business analyses.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'We use Google Analytics to collect usage details.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Please note that you will need to set preferences on each web browser and device you use to visit our Services.'
+      action:
+        name: 'Its privacy choices'
+        url: https://www.starz.com/us/en/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your information with ad partners, who may let other companies market to you, and may sell it to Amazon, Facebook, Google, Rokt and Snapchat. Opting out is browser by browser unless you’re signed in.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Partners may allow other companies to access information about you so that they may market other products you may be interested in.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'These third parties are: Amazon, Facebook, Google, Rokt, and Snapchat.'
+        - url: https://www.starz.com/us/en/donotsell
+          quote: 'If you are not logged in, your choice will only apply to this browser, and you will need to renew this choice on each browser or device where you want your choice to apply or if you clear your browser cookies.'
+      action:
+        name: 'Do Not Sell/Share My Personal Information'
+        url: https://www.starz.com/us/en/donotsell
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'STARZ has no ads, but it tracks what you browse to show you its ads elsewhere, with Google’s and Meta’s tools. Opting out covers only some of it.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'We use Google Ads and Meta Pixel to customize our advertising and to serve you ads based on your browsing behavior.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Please note this does not opt you out of being served ads from us but the ads you receive may be less relevant to you and your interests, nor will it prevent the receipt of interest-based advertising from other companies that do not participate in these programs.'
+      action:
+        name: 'Do Not Sell/Share My Personal Information'
+        url: https://www.starz.com/us/en/donotsell
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy notice and terms don’t say whether what you write, upload or say trains AI.'
+      pages:
+        - https://www.starz.com/us/en/privacy
+        - https://www.starz.com/us/en/termsofuse
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it needs it for its purposes and business, with no periods named, and some of it after you leave.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'We keep your information for as long as necessary in accordance with the purposes for which it was collected, our business needs, and our legal and regulatory obligations.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'When we no longer provide Services to you, we may still need this information for a period of time for business and legal requirements.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your information with a form, linked from its help centre, but it doesn’t say how long that takes.'
+      sources:
+        - url: https://support.starz.com/en_us/starz-terms-of-use-privacy-policy-and-data-deletion-Byri4Gn2bl
+          quote: 'Requests to remove your information from STARZ can be filled out at'
+      action:
+        name: 'Ask STARZ to delete your information'
+        url: https://support.starz.com/en_us/starz-terms-of-use-privacy-policy-and-data-deletion-Byri4Gn2bl
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: poor
+      reason: 'Only people in states with privacy laws can ask to see their information. It offers no way to download it.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'The laws of these states provide residents with one or more of the following rights:'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'to confirm whether we process your personal information and access such personal information'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.starz.com/us/en/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides laws and legal process, it may hand over your information when a government simply asks.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'We may share your information to satisfy any law, regulation, legal process, governmental request'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information can go anywhere in the world, and it promises only “reasonable steps” to protect it.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'We operate globally and may transfer your personal information with Company affiliates or third parties in locations around the world for the purposes described in this Privacy Notice.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Wherever your personal information is transferred, stored or processed by us, we will take reasonable steps to safeguard the privacy of your personal information.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up starts with an email address, or your Google account, and a password you choose, then payment. The steps after the email weren’t read.'
+      sources:
+        - url: https://www.starz.com/us/en/signup
+          quote: 'Sign up with Google'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Account information, including your email address, selected password, content preferences, and audio and video preferences.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'During the registration process, you must select a password.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to use it, and it removes a child’s information when a parent asks. Parents can cap each profile’s ratings, but nothing says how it treats teens’ data.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'By accessing and/or using the Platform, you represent you are at least 18 years of age, or the age of consent in the jurisdiction in which you access and use the Platform.'
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Upon notice from you, we will make reasonable efforts to investigate and remove the information.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'Parental Controls allow you to set a maximum movie rating and television rating for the applicable Profile.'
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it takes commercially reasonable steps and can’t guarantee security. It names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://www.starz.com/us/en/privacy
+          quote: 'Although no system can guarantee the complete security of your information, we take commercially reasonable steps, appropriate to the nature of information at issue, to protect your information with appropriate organizational, technical, and physical safeguards to protect against unauthorized access or disclosure.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online at any time and keep watching until the end of the time you paid for; it may ask you why first.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'YOU CAN CANCEL YOUR SUBSCRIPTION AT ANY TIME.'
+        - url: https://support.starz.com/en_us/how-do-i-cancel-my-starz-subscription-SJdqfEWyo
+          quote: 'When you cancel your subscription, you will still have access to STARZ until the end of that billing cycle.'
+        - url: https://support.starz.com/en_us/how-do-i-cancel-my-starz-subscription-SJdqfEWyo
+          quote: 'you may be prompted to tell us why you want to cancel your subscription during the process'
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'UNLESS REQUIRED BY APPLICABLE LAW, WE DO NOT PROVIDE CREDIT, REFUNDS, OR PRORATED BILLING FOR SUBSCRIPTIONS THAT ARE CANCELLED.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'However, you will continue to have access to the Service and Bundle through the end of your current billing period.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you about a new price as the law requires, without saying how far ahead, and you can cancel if you don’t accept it.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'Any changes to pricing will be communicated to subscribers in accordance with applicable law and if the price change is not acceptable to the subscriber, the Subscription may be cancelled.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'It offers no trial on its buy page now. Its terms say a trial needs a payment method, turns into a paid plan unless you cancel in time, and it needn’t warn you first.'
+      sources:
+        - url: https://www.starz.com/us/en/buy
+          quote: 'Offer does not include free trial.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'When you subscribe to a Trial Subscription, you must provide Starz or Distributor with a valid Payment Method.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'YOU AGREE AND ACKNOWLEDGE THAT, UNLESS REQUIRED BY APPLICABLE LAW, NEITHER STARZ NOR DISTRIBUTOR IS OBLIGATED TO NOTIFY YOU THAT YOUR TRIAL SUBSCRIPTION WILL END OR HAS ENDED.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a monthly or yearly plan renews on its own, but not that it reminds you first.'
+      pages: [https://www.starz.com/us/en/termsofuse]
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: poor
+      reason: 'Its price includes “service fees” it doesn’t describe, it can charge a processing fee after a failed payment, and you pay the costs of collecting what you owe.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'charge the applicable Subscription fee including any applicable taxes and service fees'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'we may suspend or terminate your subscription and charge a processing fee when payment is successfully authorized.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'you will remain liable for all amounts and all costs incurred to collect these amounts, such as bank overdraft fees, collection agency fees'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions or jury. You can opt out only by letter within 30 days of starting.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'Any Dispute that the parties cannot resolve through the 60-day good faith negotiation period must be brought on an individual basis and will be resolved exclusively by final and binding arbitration'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'YOU AND STARZ AGREE THAT EACH PARTY MAY BRING DISPUTES AGAINST THE OTHER PARTY IN AN INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'by sending a written letter to Starz at Starz Entertainment, LLC, 1647 Stewart St, Santa Monica, CA 90404 within thirty (30) calendar days of your initial agreement to these Terms of Use'
+      action:
+        name: 'How to opt out of arbitration (section 25.6)'
+        url: https://www.starz.com/us/en/termsofuse
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'Changes to its terms take effect as soon as they’re posted. It tells you about big changes, without saying how far ahead.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'Changes will be effective immediately upon posting, unless otherwise stated.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'If we make material changes, we will notify you through written, electronic, or other reasonable means so that you may make an informed decision regarding your continued use of the Platform.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end or limit your access at any time, without warning, for any reason or none, and can delete everything in your account.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'Starz and its Distributors each reserve the right to cancel, terminate, or restrict your access to the Platform, or any portion thereof, at any time, without notification, for any or no reason whatsoever.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'deactivate your STARZ Account and delete all information in the STARZ Account'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove shows and movies at any time without notice, says it owes you nothing, and can change your subscription’s terms and price.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'We reserve the right to modify or discontinue any Content at any time without notice or liability.'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'We reserve the right to change the terms of your Subscription, including the price, from time to time.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.starz.com/us/en/termsofuse]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid letting anyone else use your account or know your password, though its help centre says profiles let family members share it.'
+      sources:
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'allow any third party to use your STARZ Account'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'reveal your email and password or Payment Method to anyone'
+        - url: https://support.starz.com/en_us/how-do-i-set-up-and-manage-profiles-SJVwMEZks
+          quote: 'Profiles allow you to share your STARZ account with family members'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads are deleted after 2 weeks, and it can change how many you may keep and for how long whenever it likes.'
+      sources:
+        - url: https://support.starz.com/en_us/how-to-download-content-from-starz-HJ2vfEZ1s
+          quote: 'Downloaded titles are automatically deleted from the downloads list after 2 weeks'
+        - url: https://www.starz.com/us/en/termsofuse
+          quote: 'The number of temporary downloads available, and the length of time that temporary downloads remain available to you for offline viewing, may be subject to limitations which may change from time to time at our discretion.'
+      lastVerified: 2026-11-11
