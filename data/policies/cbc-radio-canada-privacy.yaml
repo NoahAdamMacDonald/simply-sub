@@ -1,0 +1,139 @@
+# A shared policy document (BLUEPRINT §4.10): CBC/Radio-Canada's Privacy Notice for Digital Platforms ("Last update:
+# December 20, 2024"), one notice for every CBC/Radio-Canada website and app, so CBC Gem and ICI TOU.TV (its youth
+# section names both: "We also offer some children’s and youth content on CBC Gem, CBC Listen, TOU.TV and OHdio").
+# Rated once here; each service names it in its policies' shared and rates its own terms. Read 2026-11-11 from the
+# English PDF its page offers ("PDF version"): the page itself shows only its contents and the cookie notice, and each
+# section has a page of its own (privacy-notice/what-we-collect, …, /your-rights). The French PDF
+# (avis-de-confidentialite-plateformes-numeriques.pdf), which ICI TOU.TV's ratings quoted, is the same notice section
+# for section. Also read: How to Submit a Privacy Request (its access right's link) and Our Approach to Artificial
+# Intelligence (nothing on training on what users send). Deleting an account differs by account (a CBC account through
+# a help-centre form, a Radio-Canada account in its account centre), so each service rates it. No security.txt or
+# disclosure page was found on cbc.ca, cbc.radio-canada.ca or gem.cbc.ca.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: cbc-radio-canada-privacy
+name: CBC/Radio-Canada's Privacy Notice for Digital Platforms
+links:
+  - name: 'Privacy Notice for Digital Platforms (PDF)'
+    url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+  - name: 'How to submit a privacy request'
+    url: https://cbc.radio-canada.ca/en/impact-and-accountability/privacy/privacy-request
+  - name: 'Our approach to artificial intelligence'
+    url: https://cbc.radio-canada.ca/en/vision/governance/approach-to-artificial-intelligence
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It records what you watch, read and search for, and adds data from other companies, to study use and pick content and ads for you. You can only limit it in each browser’s or device’s settings.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'We use our own and third-party technology to collect data about your use of our services. This includes what you read, watched, listened to or searched for, your comments, as well as how you navigate our platforms.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'We combine the information we collect about you with data obtained from third parties (social media platforms, advertising partners, data providers, etc.) in order to improve personalized content and advertising.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'We invite you to adjust the privacy settings of your browser and/or device in order to control what information is automatically tracked about you.'
+    action:
+      name: 'Its privacy choices: your browser and the DAAC'
+      url: https://cbc.radio-canada.ca/en/impact-and-accountability/privacy/privacy-notice/privacy-choices
+    lastVerified: 2026-11-11
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'A few ad companies collect how you use its apps, to show you ads there and on other sites, and it may match your email with other companies’ accounts for ads. You can only limit it browser by browser, or on the ad industry’s opt-out page.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'Third-party technologies also enable select advertising partners to collect information about your use of our platforms in order to show you personalized advertising on CBC/Radio-Canada and other companies’ platforms.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'If you use the same email address for your CBC/Radio-Canada account and an account you have with another company, we might show you personalized ads for our services on those companies’ platforms and vice-versa.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'By visiting the web page of DAAC, you can opt-out of targeted advertising by multiple companies, including CBC/Radio-Canada.'
+    action:
+      name: 'Its privacy choices: your browser and the DAAC'
+      url: https://cbc.radio-canada.ca/en/impact-and-accountability/privacy/privacy-notice/privacy-choices
+    lastVerified: 2026-11-11
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It shows you ads picked from what you look at and do on its sites and apps. You can only limit it in each browser’s or device’s privacy settings, or on the ad industry’s opt-out page.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'Personalized advertising entails showing you ads based on your online behaviour, such as what pages you visited and what content you interacted with, and any other traits and preferences we may have inferred from your use of our services.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'You can limit this type of tracking by configuring your browser and/or device privacy settings.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'By visiting the web page of DAAC, you can opt-out of targeted advertising by multiple companies, including CBC/Radio-Canada.'
+    action:
+      name: 'Its privacy choices: your browser and the DAAC'
+      url: https://cbc.radio-canada.ca/en/impact-and-accountability/privacy/privacy-notice/privacy-choices
+    lastVerified: 2026-11-11
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy notice and its page on how it uses AI don’t say whether what you write or upload trains AI.'
+    pages:
+      - https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+      - https://cbc.radio-canada.ca/en/vision/governance/approach-to-artificial-intelligence
+    lastVerified: 2026-11-11
+  - topic: privacy.data-retention
+    status: not-stated
+    reason: 'Its privacy notice doesn’t say how long it keeps your information.'
+    pages:
+      [
+        https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf,
+      ]
+    lastVerified: 2026-11-11
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask what personal information it holds about you, with its form or a signed letter, under Canada’s Privacy Act.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'Right of access: You have a right to be informed of the personal information that we hold about you.'
+      - url: https://cbc.radio-canada.ca/en/impact-and-accountability/privacy/privacy-request
+        quote: 'Fill out a Personal Information Request Form or you can send a dated and signed letter with the following information:'
+    action:
+      name: 'How to submit a privacy request'
+      url: https://cbc.radio-canada.ca/en/impact-and-accountability/privacy/privacy-request
+    lastVerified: 2026-11-11
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It says it may have to hand your information to police or a government when the law requires it, and nothing more.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'In some situations, we may be legally obliged to disclose your personal information to law enforcement or a government institution.'
+    lastVerified: 2026-11-11
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your information is kept on servers in Canada, the US or Europe, and the companies that handle it for CBC/Radio-Canada are bound by contract to keep it safe.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'your information is stored on secure servers located in Canada, the United States or the European Economic Area'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'Our service providers are strictly vetted for their privacy and information security practices and are contractually bound to handle your information in a secure and confidential manner, and in accordance with all applicable privacy laws.'
+    lastVerified: 2026-11-11
+  - topic: privacy.sign-up-data
+    tier: poor
+    reason: 'To make an account it may ask for your name, age, gender, postal code, email address and phone number.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'When you create an account with CBC/Radio-Canada, sign up for one of our newsletters, enter one of our contests or ask a question through our Help Centre, we may ask you to provide information about your name, age, gender, postal code, email address, telephone number and/or credit card.'
+    lastVerified: 2026-11-11
+  - topic: privacy.children
+    tier: neutral
+    reason: 'Ads picked for you are turned off on shows for children under 13, but teens 13 to 17 may still see ads for CBC/Radio-Canada’s own shows picked for them.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'Personalized advertising trackers are deactivated on content that is aimed at those under the age of 13.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'We may, however, personalize ads for only CBC/Radio-Canada programming on content that is aimed at youth who are between 13 and 17 years old.'
+    lastVerified: 2026-11-11
+  - topic: legal.inactivity
+    tier: poor
+    reason: 'It may close your account if you haven’t used it in two years, and doesn’t promise to warn you first.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'We may close your CBC/Radio-Canada account if you haven’t used it in two years.'
+    lastVerified: 2026-11-11
+  - topic: security.practices
+    tier: poor
+    reason: 'It says it reviews its security regularly and follows the card industry’s standard for payments, but names no outside audit and no way to report a security flaw.'
+    sources:
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'We review our security procedures on a regular basis to consider new technology.'
+      - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+        quote: 'Your credit card payments are handled in accordance with the Payment Card Industry Data Security Standard (PCI DSS).'
+    lastVerified: 2026-11-11

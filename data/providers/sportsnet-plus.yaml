@@ -1,0 +1,372 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 5), read with Edge from Canada. Pages, each quoted where it's
+# used:
+# Pricing: its pricing page (secure.sportsnetplus.ca/pricing): "STANDARD: / Monthly: / $34.99/month / Annual: /
+# $269.99/year / Citytv+ bundle: / $36.99/month" and "PREMIUM: / Monthly: / $44.99/month / Annual: / $344.99/year", and
+# all in Canadian dollars before tax ("(plus applicable taxes)", its terms). Every price is the regular one.
+# Region checklist, 2026-11-11: 1. one site (Canada only); 2. no picker; 3. not needed; 4. checkout not opened (it needs
+# an account); 5. its help centre names the cards; 6. Edge read every page; 7. no bill offered.
+# Not listed: the TV Provider Add-on ("$12.99 / Per month", "Only available to customers who have Sportsnet included in
+# their TV subscription"), which adds Sportsnet+'s exclusives to a TV package's channels: it waits for telecom's TV
+# packages, since as a plan it would read as a cheaper Standard. UFC pay-per-views ("No Subscription Required", one event at a time), the French out-of-market pass ("Laissez-
+# passer Sportsnet+ (hors marché) en français", a season bought once), and the Rogers Wireless discount (an offer).
+# Bundles: the Standard + Citytv+ bundle is a plan here, since Citytv+ isn't in the catalog yet ("The Bundle allows you to
+# stream Sportsnet+ Standard and Citytv+ content", Sportsnet+ Citytv+ Bundle FAQ); its Citytv+ access is a perk. Official
+# resellers: none; Rogers, TELUS and Koodo bill it themselves ("You can subscribe to Sportsnet+ through select
+# third-party providers, including Rogers, TELUS and Koodo"), and Amazon's Prime Video channel sells the Sportsnet
+# channels, not Sportsnet+ ("The Sportsnet Prime Video Channel is a separate subscription billed directly via Prime").
+# Features, read 2026-11-11: its live Sportsnet channels and exclusives (the comparison table); video "1080p" at best
+# ("Certain devices are capable of handling 1080p streams", What devices is Sportsnet+ available on?); streams: its
+# terms allow "only on one (1) Digital Device at a time" while its help says "A user is able to watch concurrently on up
+# to two devices at a time": the terms' number, as discovery+ Canada's (the owner's choice of 2026-11-09); no downloads
+# or profiles on any page; ads on every plan (Rogers Sports & Media sells advertising on it). Regional games are blacked
+# out outside their market on every plan.
+# Pause on its monthly plans: "if you are on a monthly subscription, you can pause your subscription for a period of 3
+# months" (Can I pause my subscription?). No parental controls: its terms leave a minor's use to you. App languages:
+# English only ("l’expérience de visionnement sur Sportsnet+ n’est offerte qu’en anglais pour le moment", its French
+# pass article).
+# Free use: none: its pages sell only paid plans, a TV package's add-on and pay-per-views (TV subscribers get it with their TV
+# package, not from Sportsnet+).
+id: sportsnet-plus
+name: Sportsnet+
+website: https://www.sportsnetplus.ca
+# Its sign-up site and help centre.
+domains: [secure.sportsnetplus.ca, watch.sportsnet.ca, support.sportsnetplus.ca]
+category: streaming
+spendCategory: streaming
+# "Sportsnet+ is only available for streaming while you are physically located in Canada." (Can I access Sportsnet+
+# internationally?), and its terms: "The Service is only available to users of a Site while in Canada".
+availableIn: [CA]
+billingCurrency: { CA: CAD }
+cancelUrl: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+sources: { pricing: https://secure.sportsnetplus.ca/pricing }
+# Owner (M11.2), read 2026-11-11: its terms name Rogers Media Inc., run as Rogers Sports & Media (discovery+ Canada's
+# owner). Rogers Communications' listings (TSX: RCI.A and RCI.B, NYSE: RCI, its investor page) wait for Rogers' own
+# provider (telecom), whose site the check accepts.
+owner:
+  name: Rogers Sports & Media (Rogers Media Inc.)
+  website: https://www.rogerssportsandmedia.com
+  page:
+    name: Terms of Service
+    url: https://secure.sportsnetplus.ca/terms-of-service
+  quotes:
+    - 'Welcome to Sportsnet+, a video streaming service (the “Service”) provided by or on behalf of Rogers Media Inc. and its affiliates'
+  country:
+    code: CA
+    page:
+      name: 'About Us (Rogers Sports & Media)'
+      url: https://www.rogerssportsandmedia.com/about-us/
+    quotes:
+      - 'Rogers Sports & Media is Canada’s fastest growing sports and entertainment content provider, reaching 95% of Canadians through premium content and cross-platform advertising solutions.'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its card article (and Visa Debit, its no-credit-card article), and the app stores
+# (its in-app article). Rogers, TELUS and Koodo bill it on their own services ("You can subscribe to Sportsnet+ through
+# select third-party providers, including Rogers, TELUS and Koodo", whose words don't match the check for a phone bill).
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, amex]
+    url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383059399700-Which-credit-cards-do-you-accept
+    quotes: ['We accept Visa, MasterCard, or AMEX']
+paymentMethods:
+  - methods: [card]
+    page: Which credit cards do you accept?
+    url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383059399700-Which-credit-cards-do-you-accept
+    quotes:
+      - 'We accept Visa, MasterCard, or AMEX'
+  - methods: [app-store]
+    page: Can I purchase the Annual Plan in-app?
+    url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383165262228-Can-I-purchase-the-Annual-Plan-in-app
+    quotes:
+      - 'available to purchase in-app on Apple, Google and Amazon'
+# Renewal day (M11.5): its billing article.
+renewalAnchor:
+  kind: same-date
+  page: When will I be billed each month?
+  url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383079312276-When-will-I-be-billed-each-month
+  quotes:
+    - 'Monthly Pass: You will be billed each month according to when your subscription began.'
+    - 'Annual Pass: You will be billed on the same day as your purchase, one year later.'
+  lastVerified: 2026-11-11
+freeUse:
+  kind: none
+  pages:
+    - https://www.sportsnetplus.ca/
+    - https://secure.sportsnetplus.ca/pricing
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): a Sportsnet account's email and password ("Enter your Sportsnet or Citytv+ credentials to
+# login"), or a TV provider's sign-in for TV subscribers (not a single sign-on for buyers, as Crave's) ("Sign in through your TV provider account", watch.sportsnet.ca); it may ask for
+# "a verification code" without saying how it's sent (its billing information article). Platforms: its devices article.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en]
+
+# Perks (M11.6): what Premium and the bundle add, in its comparison table's words.
+perks:
+  - id: out-of-market-nhl
+    name: Over 750 additional NHL games, including out-of-market games for Canadian teams
+  - id: citytv-plus
+    name: Citytv, Bravo, HGTV, Food Network, Discovery, FX, ID and more via the Citytv+ app
+
+plans:
+  - id: sportsnet-plus.standard
+    name: Standard
+    link: https://secure.sportsnetplus.ca/pricing
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+    notes: Its live Sportsnet channels and Sportsnet+ exclusives (Monday Night Hockey); regional games are blacked out outside their market. Only monthly plans can be paused. Its terms allow one stream at a time, its help centre two.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 34.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://secure.sportsnetplus.ca/pricing
+      - region: CA
+        currency: CAD
+        amount: 269.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://secure.sportsnetplus.ca/pricing
+  - id: sportsnet-plus.premium
+    name: Premium
+    link: https://secure.sportsnetplus.ca/pricing
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+    perks: [out-of-market-nhl]
+    notes: Everything in Standard, plus out-of-market NHL games and SN World's soccer and rugby events. Only monthly plans can be paused. Its terms allow one stream at a time, its help centre two.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 44.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://secure.sportsnetplus.ca/pricing
+      - region: CA
+        currency: CAD
+        amount: 344.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://secure.sportsnetplus.ca/pricing
+  - id: sportsnet-plus.standard-citytv
+    name: Standard + Citytv+
+    link: https://secure.sportsnetplus.ca/pricing
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+    perks: [citytv-plus]
+    notes: Sportsnet+ Standard with Citytv+, monthly only; cancelling ends both. Its terms allow one stream at a time, its help centre two.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 36.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://secure.sportsnetplus.ca/pricing
+# Terms and policies, read 2026-11-11 (M11.15) in Edge and through its help centre's API, from Canada: its Terms of
+# Service ("Updated: November 22, 2024"), with the Sportsnet+ Acceptable Use Policy on the same page ("Updated: November
+# 11, 2024"), which the terms include; the French version the terms link for Quebec ("In Quebec? Click here":
+# terms-of-service?page_lang=fr, "Mise à jour : 22 novembre 2024"), the same clauses in French: no grade changes; for
+# arbitration, Rogers' Arbitration Protocol (the PDF linked from rogers.com/support/terms/arbitration-protocol: arbitration
+# by the ADR Institute of Canada where you live, its fees refunded for claims under $50,000 less what small claims court
+# would cost: no grade changes); all 94 articles of its help centre (support.sportsnetplus.ca, en-gb); and the Rogers
+# Privacy Policy, rated once as a shared document (data/policies/rogers-privacy.yaml), which the site's footer links as
+# its Privacy Policy. Calibrated against discovery+ Canada (the same Rogers terms, almost word for word) and Crave.
+# Not read: the account step of sign-up (account.sportsnet.ca answered "Something went wrong" in Edge, headless and in a
+# window), so the "Subscription Terms" its terms say are shown before subscribing (6(c)) and what an account needs stay
+# unread; the footer's "RSM Terms of Service" (Rogers Sports & Media's websites' terms, which discovery+ Canada's research
+# found held no topic); and the terms of the app stores, of Amazon's Prime Video channel and of Rogers, TELUS and Koodo,
+# which bill it themselves. Its terms grant Rogers a perpetual, irrevocable, sublicensable licence over anything you post
+# ("Contributions"); discovery+ Canada's identical clause wasn't made notable (legal.content-rights isn't a streaming
+# topic), and neither is this one.
+policies:
+  shared: [rogers-privacy]
+  links:
+    - name: 'Sportsnet+ Terms of Service'
+      url: https://secure.sportsnetplus.ca/terms-of-service
+    - name: 'How do I cancel my subscription?'
+      url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+    - name: 'What happens if I upgrade to the $44.99 subscription?'
+      url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383047748756-What-happens-if-I-upgrade-to-the-44-99-subscription
+    - name: 'What happens if I change to the $34.99 subscription?'
+      url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383016304532-What-happens-if-I-change-to-the-34-99-subscription
+    - name: 'Sportsnet+ Citytv+ Bundle FAQ'
+      url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382807304084-Sportsnet-Citytv-Bundle-FAQ
+    - name: 'Rogers Wireless Discount'
+      url: https://support.sportsnetplus.ca/hc/en-gb/articles/46381971545108-Rogers-Wireless-Discount
+  ratings:
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its terms ask for a Rogers account with accurate details without listing them, and its help lists an email, a password and a card, but its sign-up form couldn’t be read.'
+      pages:
+        - https://secure.sportsnetplus.ca/terms-of-service
+        - https://support.sportsnetplus.ca/hc/en-gb/articles/46381971545108-Rogers-Wireless-Discount
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to have an account. If you let a child use it, keeping them from what they shouldn’t see is up to you, and its policies don’t say how it treats children’s data.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'You must be of the age of majority in the province in which you reside in order to be a Registered User.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'If you have authorized a minor to use a Site or the Service, then you agree to be fully responsible for: (i) controlling the minor’s access to and use of that Site or the Service; and (ii) the consequences of any misuse by the minor.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online in your account at any time and keep watching until the end of the time you paid for, though it suggests pausing instead. In Quebec it ends when you cancel, with the rest refunded.'
+      sources:
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+          quote: 'To cancel your subscription, click on the drop-down menu in the top right corner of the desktop version of watch.sportsnet.ca. Once the drop-down menu is open, click on Account and then click Billing to cancel.'
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+          quote: "If you cancel your monthly subscription, you'll still have access to Sportsnet+ until the end of your current billing cycle, and you won't be charged for the following month, except in Quebec, where cancellation will be effective right away and you will be refunded for the remaining portion of the month."
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+          quote: 'Did you know you can pause your subscription instead of cancelling?'
+      action:
+        name: 'How to cancel Sportsnet+'
+        url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Outside Quebec you get no money back when you cancel, but you keep watching until the end of the time you paid for. In Quebec you get back what you haven’t used. A pay-per-view is refunded only if its stream fails for over 30 minutes.'
+      sources:
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382899123092-How-do-I-cancel-my-subscription
+          quote: 'If you cancel after renewal or after purchasing the annual subscription, you will retain access until your next renewal date. Please note that there are no refunds.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'You will be refunded for the portion of that subscription period not completed as of the cancellation date.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'All pay-per-view sales are final and not refundable unless there is a stream outage of greater than thirty (30) consecutive minutes during the event.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: good
+      reason: 'Prices can change at any time, but if you have an account it must tell you in writing at least 30 days before changing any part of the service, and you can cancel instead.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Prices and availability of Subscription Content are subject to change at any time.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'If you are a Registered User, then we may modify these Terms or change any aspect of the Service at any time, upon no less than 30 days’ prior written notice to you.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its pages offer no trial now; its terms say a trial needs your card and is charged once it ends, cancelled by contacting Sportsnet+, with no reminder promised.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'If your Subscription Content includes a free trial, then you acknowledge that your credit card will be authorized for up to the amount representing the price of the Subscription Content during the free trial, however, your credit card will not be charged until after the end of the free trial.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'You may cancel your subscription to Subscription Content at any time within the Trial Period, by notifying us through one of the contact options accessible at Section 20, and your credit card (or other payment method) will not be charged.'
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46381971545108-Rogers-Wireless-Discount
+          quote: 'You’ll be notified via email at least 7 days before your promo period ends.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews on its own, every month or year, and charges you without telling you first.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'will automatically renew either monthly, annually, or at the frequency indicated when you subscribe, unless you cancel your subscription before the prescribed deadline'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'you authorize us (without further notice to you) to charge the renewal subscription price'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: great
+      reason: 'It charges the plan’s price and taxes, and names no other fees.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'you authorize us to charge the credit card that you provide to us the amount representing the price of the Subscription Content that you ordered (plus applicable taxes)'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Premium starts at once: you pay for a new month, less what’s left of your old plan. Moving down waits for your renewal. Switching to the Citytv+ bundle refunds the rest of your month.'
+      sources:
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383047748756-What-happens-if-I-upgrade-to-the-44-99-subscription
+          quote: 'You will be immediately billed for a full month subscription of the higher plan, minus the remaining portion of the lower plan.'
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46383016304532-What-happens-if-I-change-to-the-34-99-subscription
+          quote: 'Your existing subscription tier will remain until the next renewal. At the next renewal you will be billed and your subscription changed to the lower tier and lower price point.'
+        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382807304084-Sportsnet-Citytv-Bundle-FAQ
+          quote: 'Customers who switch to the Bundle plan mid-term will receive a prorated refund for the remainder of their monthly subscription and will be charged in full for the Bundle.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Outside Quebec, a private referee (an arbitrator) in your province settles any dispute instead of a court, and you can’t opt out. Rogers pays the arbitration’s reasonable costs.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'will be determined by final and binding arbitration to the exclusion of the courts'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Not applicable to residents of Québec: Where applicable, arbitration will be conducted in the province in which you reside'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Rogers will pay all reasonable costs associated with that arbitration.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'If you have an account, it tells you in writing at least 30 days before changing its terms or the service, and you can cancel instead.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'If you are a Registered User, then we may modify these Terms or change any aspect of the Service at any time, upon no less than 30 days’ prior written notice to you.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'If you do not accept any modification to these Terms or change to the Service, then your sole remedy is to cancel the Service by sending us a notice to that effect no later than 30 days after the modification or change takes effect.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can block or cancel your account without warning if you break its terms or rules, trying to get around a blackout among them, and nothing says you’d get money back.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Rogers may at any time, without notice to you, restrict, block, suspend or cancel any or all of your use of a Site (or any portion thereof), the Service or your account if you fail to comply in full with any of these Terms or any other terms, agreements, or policies (including, without limitation, our Acceptable Use Policy) that apply to a Site and the use of it.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Any attempt to tamper with or circumvent a blackout restriction described in this subsection is a breach of these Terms resulting in cancellation of the Service in accordance with subsection 15(a).'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can limit or cut off parts of the service without notice and says it owes you nothing. Ending a subscription you pay Rogers for takes 30 days’ written notice (60 in Quebec), with no refund promised.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Rogers may impose limits on certain features and services or restrict your access to parts or all of the Software or the Service without notice or liability.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Rogers may discontinue any Subscription Content that you subscribe to upon no less than 30 days’ (if you are a resident of Québec, 60 days’) advance written notice to you.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://secure.sportsnetplus.ca/terms-of-service]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms expect others to use your account and make you answer for them, but don’t say who may. Its usage rules forbid sharing or transferring “your Service” without Rogers’ consent.'
+      pages: [https://secure.sportsnetplus.ca/terms-of-service]
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can use it on up to 5 different devices, and trying to get around that limit breaks its terms and can end your subscription.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'We allow you to view the Content on up to 5 different Digital Devices, but only on one (1) Digital Device at a time.'
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Any attempt to circumvent that limit is a breach of these Terms, resulting in cancellation of the Service in accordance with subsection 15(a).'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Remote access to your devices
+      tier: bad
+      reason: 'Its terms let Rogers connect to your devices from afar and run scripts on them, with full access during remote support.'
+      sources:
+        - url: https://secure.sportsnetplus.ca/terms-of-service
+          quote: 'Rogers may connect remotely to and run scripts on your Digital Device(s). As part of remote Support, Rogers and its agents will have full access to your Digital Device(s).'
+      lastVerified: 2026-11-11
