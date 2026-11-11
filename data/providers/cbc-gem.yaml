@@ -1,0 +1,318 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 5), read with Edge from Canada and its help centre's API.
+# Pages, each quoted where it's used:
+# Pricing: Premium's page ("The first seven days are free, then just $5.99/month.", with "Taxes extra.") and its help
+# centre ("The Premium Subscription is $5.99 per month (plus applicable taxes)", "We do not offer yearly subscription
+# plans."), in Canadian dollars. The seven free days are a trial, so the regular price is $5.99.
+# Region checklist, 2026-11-11: 1. one site (Canada only); 2. no picker; 3. not needed; 4. checkout not opened (it
+# needs an account); 5. its help centre names the cards; 6. Edge read every page; 7. no bill offered.
+# Bundles: TELUS's Stream+ includes Premium ("If you are a TELUS customer with a Stream+ bundle customer, you
+# automatically have access to CBC Gem Premium"), for telecom. Official resellers: TELUS sells Premium alone at the same
+# price ("you can also purchase a standalone Premium subscription from Telus for $5.99 month/+ tax", its help centre's
+# TELUS article), not listed as a reseller since it's no cheaper; its conditions name "our partners TELUS and Koodo".
+# Features, read 2026-11-11: Free: "Watch current and past seasons of favourite shows on demand (ad-supported)", "Live
+# stream CBC TV, including access to all 14 local channels", "Live News and Sports streams" (What is CBC Gem?); its
+# video quality and streams aren't stated anywhere (only Premium's), so they wait (core's awaitingRequiredFeatures).
+# Premium: "up to 1080p High Definition on-demand video on supported devices" with "5.1 Dolby Digital Surround" (CBC
+# Gem 1080p and Surround Sound Support), "up to a maximum of three (3) concurrent streams" (its Subscription
+# Conditions), on-demand ad-free with exceptions but "Live TV Channels will contain advertising breaks" (CBC Gem Premium
+# Ad-Free Experience), so not ad-free (ICI TOU.TV's ICI RDI precedent), and "Live stream CBC News Network 24/7" (a
+# perk). No downloads ("Offline viewing is not supported on CBC Gem"), no profiles ("we do not offer different member
+# profiles within the same account"), no pause and no parental controls on any page; its site is in English only (its
+# French service is ICI TOU.TV).
+id: cbc-gem
+name: CBC Gem
+website: https://gem.cbc.ca
+# Its help centre and CBC/Radio-Canada's corporate site.
+domains: [cbchelp.cbc.ca, cbc.radio-canada.ca]
+category: streaming
+spendCategory: streaming
+# "CBC Gem is not available outside of Canada." (every page's footer), and "a Canadian address is required for account
+# creation" (Can I watch CBC content on Gem if I'm outside Canada?).
+availableIn: [CA]
+billingCurrency: { CA: CAD }
+cancelUrl: https://cbchelp.cbc.ca/hc/en-ca/articles/115003526954-How-do-I-cancel-my-CBC-Gem-Premium-Subscription
+sources: { pricing: https://gem.cbc.ca/premium }
+# Owner (M11.2), read 2026-11-11: CBC/Radio-Canada's digital services terms; a federal Crown corporation, not listed.
+owner:
+  name: Canadian Broadcasting Corporation (CBC/Radio-Canada)
+  page:
+    name: Terms of Use for Digital Services
+    url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+  quotes:
+    - 'THEY CONSTITUTE A BINDING AGREEMENT BETWEEN YOU AND THE CANADIAN BROADCASTING CORPORATION (CBC/Radio-Canada).'
+  country:
+    code: CA
+    page:
+      name: Privacy Notice for Digital Platforms
+      url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+    quotes:
+      - "As Canada's national public broadcaster, CBC/Radio-Canada connects with Canadians and reflects the diversity of our communities from coast to coast."
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its help centre's fee and payment article: Visa and Mastercard, credit or debit,
+# on its website ("We do not accept American Express, Interac Online, pre-paid credit card gift cards, or PayPal"), and
+# the app stores that manage subscriptions bought in their apps.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard]
+    url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+    quotes: ['Visa', 'MasterCard', 'Visa Debit', 'Debit MasterCard']
+paymentMethods:
+  - methods: [card]
+    page: What is the monthly subscription fee for a Gem Premium Subscription, and what payment types are accepted?
+    url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+    quotes:
+      - 'Only cards with a Canadian billing address will be accepted.'
+  - methods: [app-store]
+    page: What is the monthly subscription fee for a Gem Premium Subscription, and what payment types are accepted?
+    url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+    quotes:
+      - 'your subscription will be managed by Roku (Roku Pay), Amazon (Amazon Subscriptions), Google (Google Play) or Apple (Apple Subscriptions)'
+# Renewal day (M11.5): its conditions say only "the end of the monthly billing period", and its cancel article that
+# Premium "will automatically renew each month".
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://gem.cbc.ca/l/toc
+    - https://cbchelp.cbc.ca/hc/en-ca/articles/115003526954-How-do-I-cancel-my-CBC-Gem-Premium-Subscription
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): "the email address associated with your Gem account (Sign in with CBC), or ... one of two social
+# login options (Apple, or Google)" (How do I log in to the CBC Gem website?); Facebook's was removed. No page names
+# two-step sign-in. Platforms: "iOS/iPadOS ... tvOS (Apple TV), Android ... Android TV ... Fire TV ... Samsung TVs ...
+# LG TVs ... Xbox (One/S/X), and Roku", and "PC or Mac via web browser" (What devices are supported on CBC Gem?).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password, sso]
+  languages.interface: [en]
+
+# Perks (M11.6): Premium's live news channel, in its help's words.
+perks:
+  - id: cbc-news-network
+    name: Live stream CBC News Network 24/7
+
+plans:
+  - id: cbc-gem.free
+    name: Free
+    link: https://gem.cbc.ca/
+    features:
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+    notes: With ads, and a free account with a Canadian address. Kids' shows are ad-free; without an account, only kids' shows, trailers and some live news and sports.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://cbchelp.cbc.ca/hc/en-ca/articles/360013585533-What-is-CBC-Gem-CBC-Gem-General-Information
+  - id: cbc-gem.premium
+    name: Premium
+    link: https://gem.cbc.ca/premium
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 3
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+    perks: [cbc-news-network]
+    notes: On-demand shows without ads, with a few exceptions; live TV and live events still have ads. Early access to some exclusives.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11: CBC Gem Premium's Subscription Conditions (gem.cbc.ca/l/toc),
+# which include CBC/Radio-Canada's Terms of Use for its digital services ("Last revised: September 2026"; each answer
+# opens only when its question is clicked, all opened in Edge), and those include CBC's Content Submission Guidelines
+# (cbc.ca/aboutcbc/discover/submissions.html, its rules for comments and posts); the Premium page and its FAQ; and CBC's
+# help centre (cbchelp.cbc.ca, read through its Zendesk API): fees and payment, cancelling, profiles, deleting a CBC
+# account, signing up. The conditions' old links (cbc.ca/aboutcbc/discover/termsofuse.html and privacy.html) redirect to
+# the current Terms of Use and privacy notice. CBC/Radio-Canada's Privacy Notice for Digital Platforms, which ICI TOU.TV
+# shares, is rated once as a shared document (data/policies/cbc-radio-canada-privacy.yaml). The conditions' own privacy
+# paragraph says "Your information is never given or sold to third parties", but the notice describes ad partners
+# collecting data on its platforms, so the notice's sharing grade stands. The Submission Guidelines' "at any time without
+# notice" makes changes to the terms Bad, though the conditions give subscribers 30 days' notice for the rest; their
+# perpetual licence over what you post is for a topic streaming doesn't have. Not read: the sign-up form's mandatory
+# fields show only after an email and password are typed, and the Premium checkout comes after signing in.
+policies:
+  shared: [cbc-radio-canada-privacy]
+  links:
+    - name: 'Subscription conditions'
+      url: https://gem.cbc.ca/l/toc
+    - name: 'Terms of use (CBC/Radio-Canada digital services)'
+      url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+    - name: 'Content submission guidelines'
+      url: https://www.cbc.ca/aboutcbc/discover/submissions.html
+    - name: 'Premium'
+      url: https://gem.cbc.ca/premium
+    - name: 'Monthly fee and payment types'
+      url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+    - name: 'How do I cancel my CBC Gem Premium subscription?'
+      url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003526954-How-do-I-cancel-my-CBC-Gem-Premium-Subscription
+    - name: 'Can I delete my CBC account?'
+      url: https://cbchelp.cbc.ca/hc/en-ca/articles/217732637-Can-I-delete-my-CBC-Account
+    - name: 'CBC Gem Premium: ad-free experience'
+      url: https://cbchelp.cbc.ca/hc/en-ca/articles/4418073209627-CBC-Gem-Premium-Ad-Free-Experience
+    - name: 'Can I set up different member profiles?'
+      url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003516013-Can-I-set-up-different-member-profiles-on-my-CBC-Gem-account
+    - name: 'What is CBC Gem?'
+      url: https://cbchelp.cbc.ca/hc/en-ca/articles/360013585533-What-is-CBC-Gem-CBC-Gem-General-Information
+    - name: 'Privacy Notice for Digital Platforms (PDF)'
+      url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+  ratings:
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can ask to delete your CBC account with a form, then confirm it from your email. It can take up to 30 days.'
+      sources:
+        - url: https://cbchelp.cbc.ca/hc/en-ca/articles/217732637-Can-I-delete-my-CBC-Account
+          quote: 'Yes, you can. To do so, please advise us of your request by filling out the request form.'
+        - url: https://cbchelp.cbc.ca/hc/en-ca/articles/217732637-Can-I-delete-my-CBC-Account
+          quote: 'Account deletion can take 30 days to be fully processed.'
+      action:
+        name: 'Delete your CBC account'
+        url: https://cbchelp.cbc.ca/hc/en-ca/articles/217732637-Can-I-delete-my-CBC-Account
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Deleting your account can take 30 days, and it may keep some of your information after that for a while, for legal and business reasons, without saying how long.'
+      sources:
+        - url: https://cbchelp.cbc.ca/hc/en-ca/articles/217732637-Can-I-delete-my-CBC-Account
+          quote: 'Account deletion can take 30 days to be fully processed.'
+        - url: https://cbchelp.cbc.ca/hc/en-ca/articles/217732637-Can-I-delete-my-CBC-Account
+          quote: 'Some information formerly associated with your account may be retained in our systems for a time as required by law and for business purposes.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to subscribe, and kids’ shows never have ads, but teens 13 to 17 may see ads for CBC/Radio-Canada’s own shows picked for them.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'You must have reached the age of majority in your province to be able to subscribe to the CBC Gem Premium service.'
+        - url: https://cbchelp.cbc.ca/hc/en-ca/articles/4418073209627-CBC-Gem-Premium-Ad-Free-Experience
+          quote: 'Kids programming on CBC Gem (live and on-demand) will always be ad-free.'
+        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/privacy-notice-for-digital-platforms.pdf
+          quote: 'We may, however, personalize ads for only CBC/Radio-Canada programming on content that is aimed at youth who are between 13 and 17 years old.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online whenever you like and keep Premium to the end of the month, but on its website you must cancel at least 24 hours before it renews, or it renews for another month.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'You can cancel your subscription at any time by visiting https://gem.cbc.ca/account and selecting “Cancel subscription”.'
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'Subscriptions automatically renew unless cancelled at least 24-hours before the end of the monthly billing period.'
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'You will continue to have access to the premium content and features available until the end of your monthly billing period.'
+      action:
+        name: 'How to cancel CBC Gem Premium'
+        url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003526954-How-do-I-cancel-my-CBC-Gem-Premium-Subscription
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Its conditions say nothing about getting money back, but you keep Premium until the end of the month you paid for.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'You will continue to have access to the premium content and features available until the end of your monthly billing period.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It tells subscribers 30 days before a price change takes effect, and you can say no by cancelling.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'CBC may change, from time to time, any of the clauses of the Terms of Use, including the price of subscription.'
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'Such an amendment will take effect automatically, subject to 30 days notice to subscribers containing (1) the amended clause (2) the earlier version of this clause and (3) the effective date of the change.'
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'you may deny this modification by canceling your subscription.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'New subscribers get 7 free days, but you give a card to start, and it charges you the day after the trial ends unless you cancel. It doesn’t promise to remind you first.'
+      sources:
+        - url: https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+          quote: 'New subscribers receive a free, 7-day trial.'
+        - url: https://gem.cbc.ca/premium
+          quote: 'For the introductory offer, you will need to enter a valid payment method to sign up so we can process payments if you decide to keep Premium after the introductory offer.'
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'The first regular monthly subscription fee will be charged the day after the introductory offer has ended.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its conditions and help centre say Premium renews every month on its own, but not that it reminds you first.'
+      pages:
+        - https://gem.cbc.ca/l/toc
+        - https://cbchelp.cbc.ca/hc/en-ca/articles/115003526954-How-do-I-cancel-my-CBC-Gem-Premium-Subscription
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its conditions and help centre list no fees beyond the monthly price and taxes.'
+      pages:
+        - https://gem.cbc.ca/l/toc
+        - https://cbchelp.cbc.ca/hc/en-ca/articles/115003515893-What-is-the-monthly-subscription-fee-for-a-Gem-Premium-Subscription-and-what-payment-types-are-accepted
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disagreements go to Ontario’s regular courts in Toronto, not to a private referee (an arbitrator).'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'The Parties agree to recognize the exclusive jurisdiction of Ontario courts of the judicial district of Toronto, including that of the Federal Court.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'Its conditions promise subscribers 30 days’ warning, but CBC’s rules for what you post, which its general terms make part of the deal, can change at any time without notice.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'Such an amendment will take effect automatically, subject to 30 days notice to subscribers containing (1) the amended clause (2) the earlier version of this clause and (3) the effective date of the change.'
+        - url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+          quote: 'you agree to comply with these Terms of Use, the Submission Guidelines as well as all applicable laws.'
+        - url: https://www.cbc.ca/aboutcbc/discover/submissions.html
+          quote: 'CBC/Radio-Canada reserves the right to change these Content Submission Guidelines at any time without notice.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'If you break its rules, it can end your subscription at once, without warning. CBC/Radio-Canada’s general terms also let it ban or block your account whenever it decides to, with no refund promised.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'In the event of non-compliance with these Terms of Use, CBC reserves the right to suspend your access or terminate your subscription immediately without further notice.'
+        - url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+          quote: 'CBC/Radio-Canada may also revoke your ability to comment and/or ban or block your account at its sole discretion.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'What you can watch can change at any time, and CBC/Radio-Canada’s general terms say it isn’t responsible if it stops its programs or services, even on purpose.'
+      sources:
+        - url: https://gem.cbc.ca/l/toc
+          quote: 'CBC may, at its discretion, add or remove content at any time.'
+        - url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+          quote: 'CBC/Radio-Canada offers no warranty with regard to the content or operation of CBC/Radio-Canada digital services and assumes no responsibility for any interruption, whether intentional or not, in putting its programming, various services and submissions from the public online.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its conditions say what you watch is for your personal use and your password is yours to keep private, but not whether the people you live with may use your account.'
+      pages:
+        - https://gem.cbc.ca/l/toc
+        - https://cbchelp.cbc.ca/hc/en-ca/articles/115003516013-Can-I-set-up-different-member-profiles-on-my-CBC-Gem-account
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its conditions name no limit beyond how many screens can play at once, which its plan shows, and it has no downloads.'
+      pages:
+        - https://gem.cbc.ca/l/toc
+        - https://cbchelp.cbc.ca/hc/en-ca/articles/360013585533-What-is-CBC-Gem-CBC-Gem-General-Information
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Newsletters when you make an account
+      tier: neutral
+      reason: 'Making an account signs you up for its newsletter and a general CBC/Radio-Canada newsletter. You can unsubscribe at any time.'
+      sources:
+        - url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+          quote: 'When you create a CBC/Radio-Canada account and accept our Terms of Use and Privacy Notice, you will receive the newsletter of the specific product or service from which you created an account, as well as a general newsletter about our products and services.'
+        - url: https://cbc.radio-canada.ca/en/vision/governance/terms-of-use-digital-services
+          quote: 'You can unsubscribe at any time.'
+      lastVerified: 2026-11-11

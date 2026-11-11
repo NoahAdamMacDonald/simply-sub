@@ -206,21 +206,21 @@ plans:
         lastVerified: 2026-10-26
         sourceUrl: https://ici.tou.tv/abonnement
 
-# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: ICI TOU.TV's subscription conditions and CBC/Radio-
-# Canada's privacy notice, in French (the notice's sections didn't render, only its cookie notice). Not rated: the
-# other privacy topics. Free trials are not applicable (none), and account sharing and device limits not stated by its
-# conditions, statuses since M11.1.
+# Terms and policies (BLUEPRINT §4.10, M1.13), read 2026-10-27: ICI TOU.TV's subscription conditions, in French.
+# CBC/Radio-Canada's Privacy Notice for Digital Platforms, the same document as CBC Gem's, is rated once as a shared
+# document (data/policies/cbc-radio-canada-privacy.yaml, read 2026-11-11 in English); its account deletion stays rated
+# here, since a Radio-Canada account is deleted its own way. Account sharing and device limits aren't stated by its
+# conditions.
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: subscribing accepts CBC/Radio-Canada's
 # general terms for its digital services too ("aux conditions d’utilisation générales de l’espace numérique"), whose
 # answers open one by one (read in Edge, each opened). Their account blocking "à son entière discrétion" makes closing
 # your account Bad, and their changes, told by email with no lead time, make changes to the terms Neutral. The
 # subscription itself starts after signing in, so its form's agreement line wasn't read.
 policies:
+  shared: [cbc-radio-canada-privacy]
   links:
     - name: "Conditions d'utilisation (in French)"
       url: https://ici.tou.tv/abonnement/condition
-    - name: 'Avis de confidentialité (in French)'
-      url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
     - name: 'Avis de confidentialité, plateformes numériques (PDF, in French)'
       url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
     - name: 'Abonnements (in French)'
@@ -228,18 +228,6 @@ policies:
     - name: "Conditions d'utilisation de l'espace numérique (in French)"
       url: https://cbc.radio-canada.ca/fr/vision/gouvernance/conditions-dutilisations-espace-numerique
   ratings:
-    - topic: privacy.ads-tracking
-      tier: poor
-      reason: "It and a few ad partners use cookies to learn about you and show you ads picked for you. You can only limit it in each device's or browser's privacy settings."
-      sources:
-        - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
-          quote: 'Nous et un nombre restreint de nos partenaires publicitaires utilisons des témoins pour recueillir certaines de vos données et les utilisons afin d’améliorer votre expérience et de vous présenter des contenus et des publicités personnalisés.'
-        - url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
-          quote: "Si vous n'êtes pas à l'aise avec l'utilisation de ces informations, veuillez revoir les paramètres de confidentialité de votre appareil et de votre navigateur avant de poursuivre votre visite."
-      action:
-        name: 'Its privacy choices: your browser and the DAAC (in French)'
-        url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite/options-de-confidentialite
-      lastVerified: 2026-11-03
     - topic: billing.cancellation
       tier: great
       reason: 'You cancel online with one click on your account page, whenever you like, and keep watching until the end of the month you paid for.'
@@ -315,46 +303,6 @@ policies:
       lastVerified: 2026-11-03
     # M11.9's topics, pulled forward at the owner's request (2026-11-02), read that day: the conditions, and CBC/
     # Radio-Canada's privacy notice for digital platforms as the PDF its page offers (the page shows only its contents).
-    - topic: privacy.data-collection
-      tier: poor
-      reason: 'It records what you watch, read and search for, to study use and pick content and ads for you. You can only limit it in each browser’s or device’s settings.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Nous utilisons nos propres technologies et celles de tiers pour recueillir des données sur votre utilisation de nos services, c’est-à-dire ce que vous lisez, regardez, écoutez ou cherchez, de même que vos commentaires et votre façon de naviguer sur nos plateformes.'
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Nous vous invitons à configurer les paramètres de votre navigateur et/ou appareil mobile afin de gérer les données qui sont automatiquement collectées sur vous.'
-      action:
-        name: 'Its privacy choices: your browser and the DAAC (in French)'
-        url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite/options-de-confidentialite
-      lastVerified: 2026-11-02
-    - topic: privacy.data-sharing
-      tier: poor
-      reason: 'A few ad companies collect how you use it, to show you ads on its sites and other companies’ sites. You can only limit it browser by browser, or through the ad industry’s opt-out page.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'des technologies de tiers permettent à un nombre restreint de nos partenaires de recueillir de l’information sur votre utilisation de nos plateformes afin de vous présenter de la publicité personnalisée sur les plateformes de CBC/Radio-Canada et celles d’autres entreprises.'
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Rendez-vous sur le site Internet de la DAAC pour vous soustraire aux publicités ciblées de nombreuses sociétés, y compris CBC/Radio-Canada.'
-      action:
-        name: 'Its privacy choices: your browser and the DAAC (in French)'
-        url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite/options-de-confidentialite
-      lastVerified: 2026-11-02
-    - topic: privacy.ai-training
-      status: not-stated
-      reason: 'Its privacy notice (in French) doesn’t say whether what you write or upload trains AI.'
-      pages:
-        [
-          https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf,
-        ]
-      lastVerified: 2026-11-02
-    - topic: privacy.data-retention
-      status: not-stated
-      reason: 'Its privacy notice (in French) doesn’t say how long it keeps your information.'
-      pages:
-        [
-          https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf,
-        ]
-      lastVerified: 2026-11-02
     - topic: privacy.data-deletion
       tier: neutral
       reason: 'You can ask to delete your Radio-Canada account from its members’ page, but it doesn’t say how fast it does it.'
@@ -364,46 +312,6 @@ policies:
       action:
         name: 'Delete your Radio-Canada account (in French)'
         url: https://mon-compte.radio-canada.ca/
-      lastVerified: 2026-11-02
-    - topic: privacy.data-portability
-      tier: neutral
-      reason: 'You can ask what personal information it holds about you.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Le droit d’accès : Vous avez le droit de savoir quels renseignements personnels nous détenons sur vous.'
-      action:
-        name: 'How to ask for your data (in French)'
-        url: https://cbc.radio-canada.ca/fr/transparence-et-engagement/vie-privee/avis-de-confidentialite
-      lastVerified: 2026-11-02
-    - topic: privacy.government-requests
-      tier: neutral
-      reason: 'It hands over your information to police or a government only when the law makes it.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Dans certaines situations, nous pourrions avoir l’obligation légale de divulguer vos renseignements personnels à la police ou à une institution gouvernementale.'
-      lastVerified: 2026-11-02
-    - topic: privacy.data-location
-      tier: neutral
-      reason: 'Your information is kept on servers in Canada, the US or Europe.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'ceux-ci sont stockés sur des serveurs sécurisés situés au Canada, aux États-Unis ou dans l’Espace économique européen'
-      lastVerified: 2026-11-02
-    - topic: privacy.sign-up-data
-      tier: poor
-      reason: 'To make an account it may ask for your name, age, gender, postal code, email and phone number.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'nous pouvons vous demander certains renseignements personnels (nom, âge, genre, code postal, adresse courriel, numéro de téléphone ou numéro de carte de crédit)'
-      lastVerified: 2026-11-02
-    - topic: privacy.children
-      tier: neutral
-      reason: 'Ads that follow you are turned off on shows for children under 13, but teens 13 to 17 may still see its own shows promoted to them based on what they watch.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Les témoins publicitaires sont désactivés sur les contenus destinés aux enfants de moins de 13 ans.'
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Nous pouvons toutefois personnaliser la promotion de la programmation de CBC/Radio-Canada sur les contenus destinés aux jeunes âgés de 13 à 17 ans.'
       lastVerified: 2026-11-02
     - topic: billing.renewal-notice
       status: not-stated
@@ -430,18 +338,4 @@ policies:
       sources:
         - url: https://ici.tou.tv/abonnement/condition
           quote: 'CBC/Radio-Canada peut, à son entière discrétion, ajouter ou retirer du contenu.'
-      lastVerified: 2026-11-02
-    - topic: legal.inactivity
-      tier: poor
-      reason: 'It may close your account if you haven’t used it in two years, and doesn’t promise to warn you first.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Nous pourrions fermer votre compte CBC/Radio-Canada si vous ne l’avez pas utilisé depuis deux ans.'
-      lastVerified: 2026-11-02
-    - topic: security.practices
-      tier: poor
-      reason: 'It says it keeps its security up to date, but not that outside experts check it or how to report a problem.'
-      sources:
-        - url: https://site-cbc.radio-canada.ca/documents/impact-and-accountability/privacy/avis-de-confidentialite-plateformes-numeriques.pdf
-          quote: 'Nous examinons régulièrement nos procédures de sécurité afin de tenir compte des nouvelles technologies.'
       lastVerified: 2026-11-02
