@@ -80,6 +80,13 @@ renewalAnchor:
     - https://www.pandora.com/legal
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: "While our app is currently only available in English, our help site is here to
+# be a resource for Spanish speakers" (Pandora in Other Languages). No parental controls: only the listener's own
+# filter ("You can restrict Pandora from playing songs or displaying ads with explicit language", Explicit Content).
+# No pause (Cancel your Subscription).
+features:
+  languages.interface: [en]
+
 plans:
   - id: pandora.free
     name: Free

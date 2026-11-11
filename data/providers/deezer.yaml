@@ -90,6 +90,15 @@ renewalAnchor:
     - https://support.deezer.com/hc/en-gb/articles/214349245-Cancel-Your-Deezer-Subscription
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from its site's language menu (deezer.com/fr: "Offres",
+# "Connexion"; "Deutsch", "English", "Español", "Français", "Italiano", "Português (br)", "العربیة", "日本語"; no Korean,
+# Chinese or Hindi). Parental controls on Family and Duo: "Hide explicit content can be switched on or off by the
+# Admin for Family member profiles" and "Explicit content is automatically hidden for Kid profiles" (Hide Explicit
+# Content For Deezer Family Members); "Your Duo subscription can include a Kids profile" (Deezer Duo). No pause
+# (Cancel Your Deezer Subscription).
+features:
+  languages.interface: [en, fr, es, de, it, pt, ja, ar]
+
 plans:
   - id: deezer.free
     name: Free
@@ -351,6 +360,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: true
+      account.parental-controls: true
     notes: Two Premium accounts for people in the same household.
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.
@@ -521,6 +531,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: true
+      account.parental-controls: true
     notes: Up to 6 Premium accounts for one household, with Kids profiles for children up to 12.
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.

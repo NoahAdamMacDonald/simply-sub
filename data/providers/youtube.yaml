@@ -232,6 +232,11 @@ perks:
   - id: background-play-most
     name: Background play on most videos
 
+# General features, read 2026-11-11: app languages from youtube.com's language versions (?hl=fr "Accueil", "Se
+# connecter", and the others). Pause for Premium and Music Premium: "Pause or resume YouTube Premium or YouTube Music
+# Premium" (help 11950175), monthly only ("Annual plans cannot be paused"), not billed through Apple or Google Play
+# ("With Google Play billing, you cannot pause your membership", help 12016022); Premium Lite's article has no pause.
+# Parental controls: supervised accounts for kids and teens (help 10314074).
 # Apps, sign-in and support (the cross-category features), read 2026-11-04: YouTube's apps on Android and iPhone, the
 # web, and "most smart TVs, game consoles, and streaming devices" ("Download the YouTube app on your smart TV or game
 # console"); a Google Account's password or passkey with Google's second steps, as for Google AI; the help centre's
@@ -241,6 +246,7 @@ features:
   platforms: [android, ios, web, tv, console]
   account.sign-in: [password, passkey, push-approval, totp, security-key, sms]
   support.channels: [community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 # Features, read 2026-11-04 in YouTube Help: one stream at a time on Premium and Premium Lite, six on a family plan and
 # two on a Two-person plan ("YouTube Premium & streaming limits"); offline viewing "on up to 10 devices at a time" for
@@ -286,6 +292,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.parental-controls: true
     inferred:
       audio.quality:
         reason: 'Only YouTube Music Premium members can choose a bitrate, so a listener without it keeps the "Normal" one: 128kbps.'
@@ -330,6 +337,8 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.pause: true
+      account.parental-controls: true
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -472,6 +481,8 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.pause: true
+      account.parental-controls: true
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -583,6 +594,8 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.pause: true
+      account.parental-controls: true
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -625,6 +638,7 @@ plans:
       streaming.download-devices: 10
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'Its article calls Premium Lite "a new, lower-priced YouTube Premium membership", and YouTube Premium members can download on up to 10 devices at a time.'
@@ -735,6 +749,8 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.pause: true
+      account.parental-controls: true
     perks: [background-play]
     notes: "YouTube Music Premium alone: music without ads, offline and in the background, but not YouTube's other videos."
     prices:
@@ -874,6 +890,8 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.pause: true
+      account.parental-controls: true
     perks: [background-play]
     notes: YouTube Music Premium shared with up to 5 others in your household, aged 13 or older.
     prices:
@@ -983,6 +1001,8 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
+      account.pause: true
+      account.parental-controls: true
     perks: [background-play]
     notes: YouTube Music Premium shared with one other member of your household, aged 13 or older.
     prices:

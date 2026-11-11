@@ -74,9 +74,12 @@ renewalAnchor:
     - 'The Subscription Fee will be billed on the same day as the Initial Subscription Date (the "Recurring Subscription Date"), with each such period being a "Monthly Billing Cycle" or "Annual Billing Cycle".'
   lastVerified: 2026-11-10
 
+# General features, read 2026-11-11: its site and help centre are in English only (its help centre's one locale; the
+# site showed this machine a check). No pause and no parental controls on its pages.
 features:
   platforms: [web, ios, android]
   account.sign-in: [email-code, password]
+  languages.interface: [en]
 
 # Perks (M11.6): Pro's creator toolkit ("Unlock live streaming, unlimited uploads, ways to earn money and more.", its
 # Pro page), which no feature describes.

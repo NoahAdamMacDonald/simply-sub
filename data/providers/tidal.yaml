@@ -95,6 +95,13 @@ freeUse:
   pages: [https://support.tidal.com/hc/en-us/articles/115003662825-Subscription-Types]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from its help centre's locales ("Annuler votre abonnement ou ...")
+# and its App Store listing, which agree (tidal.com shows this machine a check). No parental controls: only the
+# listener's own toggle to "allow or block explicit content" (Explicit Content). No pause (Cancel Tidal Subscription
+# or Trial).
+features:
+  languages.interface: [en, fr, es, de, it, pt]
+
 perks:
   - id: dj-software
     name: Access the full catalog through compatible DJ software

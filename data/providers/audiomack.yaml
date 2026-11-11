@@ -63,12 +63,16 @@ renewalAnchor:
     - 'If your Audiomack subscription was purchased via the Audiomack website, you can cancel your subscription at any time before the end of your 30-day payment period.'
   lastVerified: 2026-11-11
 
+# General features, read 2026-11-11: its site and help centre are in English only (audiomack.com stayed English with
+# French chosen; one help-centre locale). No pause (How do I unsubscribe from Audiomack+?) and no parental controls on
+# its pages.
 # Sign-in (2026-11-11): an "email address and password", or "a third-party account like Google, Facebook, or Apple"
 # (What can I do if I can't log in to my Audiomack account?); Twitter sign-up is "discontinued". No page names two-step
 # sign-in.
 features:
   platforms: [web, ios, android]
   account.sign-in: [password, sso]
+  languages.interface: [en]
 
 plans:
   - id: audiomack.free

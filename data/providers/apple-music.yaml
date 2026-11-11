@@ -109,12 +109,17 @@ renewalAnchor:
     - https://support.apple.com/en-ca/118428
   lastVerified: 2026-11-04
 
+# General features, read 2026-11-11: app languages from the Apple Music web player's language versions
+# (music.apple.com/ca/new?l=fr: "Rechercher", "Accueil"; Hindi at /in/new?l=hi) and Apple's country picker. Parental
+# controls through Apple's Screen Time: "You can choose age-appropriate ratings for categories of apps, music, books,
+# movies, TV shows, and more" (Set up parental controls). No pause: Apple's cancel article offers none.
 # Apps (the cross-category features), read 2026-11-09 on its Canadian page: "on your iPhone, iPad, Apple Watch, Apple TV
 # 4K, Mac and HomePod speakers", "online at music.apple.com/ca", and "on Windows and Android devices, Sonos speakers,
 # Amazon Echo, Google Nest, smart TVs and more". Sign-in is an Apple Account's, as for Apple TV.
 features:
   platforms: [ios, macos, windows, android, web, tv]
   account.sign-in: [password, push-approval, sms]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 perks:
   - id: classical
@@ -136,6 +141,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.parental-controls: true
     notes: Its live radio shows and stations, free. Songs on demand, downloads and lossless audio need a plan.
     prices:
       - {
@@ -162,6 +168,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: true
+      account.parental-controls: true
     inferred:
       music.unlimited-skips:
         reason: 'It plays any of its songs on demand, with “lyrics in real time” and downloads, and no page names a skip limit, so it is unlimited.'
@@ -274,6 +281,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: true
+      account.parental-controls: true
     inferred:
       music.unlimited-skips:
         reason: 'It plays any of its songs on demand, with “lyrics in real time” and downloads, and no page names a skip limit, so it is unlimited.'

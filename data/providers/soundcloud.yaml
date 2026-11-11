@@ -76,10 +76,15 @@ renewalAnchor:
     - 'If you purchase a Go or Go+ Subscription, your Go or Go+ Subscription will be for a 30-day period, and your Go or Go+ Subscription will thereafter renew automatically for additional 30-day periods.'
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from soundcloud.com's language menu ("Deutsch", "English (US)",
+# "Español", "Français", "Italiano", "Nederlands", "Polski", "Português", "Svenska", from its script; Language
+# Settings on SoundCloud). No pause: "It is not possible to pause a subscription." (Subscription Management). No
+# parental controls: its help names none.
 # Apps (the cross-category features), read 2026-11-09: "SoundCloud Go is currently compatible with internet enabled
 # computers and Android and iOS smartphones and iOS tablets" (its Go terms).
 features:
   platforms: [web, android, ios]
+  languages.interface: [en, fr, es, de, it, pt]
 
 perks:
   - id: full-catalog

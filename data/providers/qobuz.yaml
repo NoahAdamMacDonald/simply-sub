@@ -131,6 +131,9 @@ freeUse:
     - https://www.qobuz.com/ca-en/music/streaming/offers
   lastVerified: 2026-11-11
 
+# General features, read 2026-11-11: app languages from its country and language paths (qobuz.com/ca-fr: "Qui sommes
+# nous ?", "Abonnements"; de-de, es-es, it-it, pt-br, ja-jp). No pause (How do I cancel my subscription?) and no
+# parental controls (its help centre names none).
 # Sign-in (2026-11-11): "with your email address or your Facebook account", or "your Apple account details" (How do I
 # create a Qobuz account?), a password (I can't log in), and its sign-up form's "Sign up with Google". No page names
 # two-step sign-in. Platforms: "Windows,
@@ -138,6 +141,7 @@ freeUse:
 features:
   platforms: [web, windows, macos, ios, android]
   account.sign-in: [password, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja]
 
 # Perks (M11.6): Sublime's download discounts, in its card's words.
 perks:

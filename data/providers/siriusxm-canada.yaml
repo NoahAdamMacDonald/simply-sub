@@ -61,6 +61,14 @@ renewalAnchor:
     - https://www.siriusxm.ca/terms-and-conditions/
   lastVerified: 2026-11-11
 
+# General features, read 2026-11-11: its site in English and French (siriusxm.ca/fr: "Découvrir", "S’abonner",
+# "AIDE"). Pause and parental controls on its car plans, from its Customer Agreement: a paid subscription can "be
+# temporarily suspended one time in any calendar year for a duration of up to six months" ("not available on Streaming
+# (app only) Audio Plans"), and under "Parental Control" it offers channel blocking by phone ("Channel blocking is not
+# available with the Streaming Service").
+features:
+  languages.interface: [en, fr]
+
 # Perks (M11.6): what each plan adds, in its comparison table's words.
 perks:
   - id: in-car
@@ -112,6 +120,8 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
+      account.parental-controls: true
     perks: [in-car, live-games, talk-news, howard-stern, artist-stations, podcasts]
     notes: 'In your car and in the app: 425+ channels, with Howard Stern, live NFL, MLB, NBA, NHL and NCAA games, and exclusive in-studio video.'
     prices:
@@ -135,6 +145,8 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
+      account.parental-controls: true
     perks: [in-car, talk-news, podcasts]
     notes: 'In your car and in the app: 400+ channels, with ad-free music, news, talk, comedy and sports talk.'
     prices:
@@ -158,6 +170,8 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
+      account.parental-controls: true
     perks: [in-car, talk-news]
     notes: 'In your car and in the app: 100+ channels, with ad-free music and some news and talk.'
     prices:
