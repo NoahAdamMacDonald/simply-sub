@@ -979,9 +979,9 @@
   source: wikidata
   wikidata: Q25022235
   sitelinks: 14
-  status: out-of-scope
-  date: 2026-11-04
-  note: 'Free, with ads'
+  status: done
+  date: 2026-11-11
+  note: 'Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14)'
 - id: gnome-keyring
   name: GNOME Keyring
   website: https://wiki.gnome.org/Projects/GnomeKeyring
@@ -1055,9 +1055,9 @@
   source: wikidata
   wikidata: Q21189826
   sitelinks: 12
-  status: out-of-scope
-  date: 2026-11-04
-  note: 'Free, with ads'
+  status: done
+  date: 2026-11-11
+  note: 'Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14)'
 - id: plex
   name: Plex
   website: https://plex.tv
