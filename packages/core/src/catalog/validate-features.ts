@@ -411,6 +411,10 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['cbc-gem.free', ['video.quality', 'streaming.concurrent-streams']],
   // Peacock states Premium's and Premium Plus's quality, not Select's (2026-11-11).
   ['peacock.select', ['video.quality']],
+  // Twitch and Kick don't say how many streams play at once (2026-11-11).
+  ['twitch.free', ['streaming.concurrent-streams']],
+  ['twitch.turbo', ['streaming.concurrent-streams']],
+  ['kick.free', ['streaming.concurrent-streams']],
 ]);
 
 /**

@@ -118,6 +118,13 @@
   source: own
   status: done
   date: 2026-11-11
+- id: twitch
+  name: Twitch
+  website: https://www.twitch.tv
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -529,9 +536,9 @@
   source: wikidata
   wikidata: Q117084855
   sitelinks: 27
-  status: out-of-scope
-  date: 2026-11-04
-  note: 'Free to watch; its subscriptions go to individual streamers'
+  status: done
+  date: 2026-11-11
+  note: 'Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14). Its subscriptions go to individual streamers (notes)'
 - id: hamachi
   name: Hamachi
   website: https://www.vpn.net

@@ -1,0 +1,339 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, and its help centre with a
+# plain fetch. Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14); the queue left it out on 2026-11-04
+# as "Free to watch; its subscriptions go to individual streamers". Pages, each quoted where it's used:
+# Pricing: Kick is free to watch, with ads: "KICK is available on both web and mobile platforms and is free to use,
+# whether or not someone has registered an account." (Guide for parents and educators), and "Ads are part of KICK's
+# platform-wide approach" (Advertising on KICK for viewers). It sells no plan of its own: a subscription goes to one
+# streamer ("KICK Subscriptions are a flat $5 USD per month , in every country we support", "Subscriptions are a way to
+# directly support the Streamer, not a premium tier of the platform itself", How KICK subscriptions work for Viewers),
+# so channel subscriptions are notes, not plans (the owner's rule for live channels). KICKs, bought to send Gifts, are a
+# virtual currency, not a subscription. Its help centre disagrees on ads for a channel's subscribers: "Subscribing does
+# not remove ads on KICK." (the subscriptions article) and "No, you won't see ads on channels you're subscribed to." (the
+# advertising article).
+# Region checklist, 2026-11-11: one free plan for everywhere; its subscriptions and KICKs are "denominated in USD at the
+# same global price" (International payments and currency handling on KICK), so no regional prices to find.
+# Bundles: none. Official resellers: none.
+# Features, read 2026-11-11: video quality: a growing channel streams up to "720p60", and "your channel may gain access
+# to additional livestream resolution options, including 1080p" (Why 1080p may not be available on your channel): 1080p
+# (inferred; no page names more). No page says how many streams an account plays at once: the plan waits in core's
+# awaitingRequiredFeatures (as Rumble's). No downloads for viewers (past broadcasts last "7 days" or "up to 30 days" for
+# verified streamers) and no profiles. What it streams: "you may find Streamers playing games, showcasing their artistic
+# skills, raiding podcasts, and much more" (Guide for parents and educators): creators' livestreams. Own media: no page
+# says it plays your own files. Pause: nothing to pause (no plan of its own). Parental controls: none (its guide for
+# parents and educators names only a teen's own chat settings; the mature content setting is your own).
+
+id: kick
+name: Kick
+website: https://kick.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling a channel subscription (it sells no plan of its own).
+cancelUrl: https://help.kick.com/en/articles/14994456-cancelling-a-subscription-and-our-refund-policy
+sources: { pricing: https://help.kick.com/en/articles/8956733-guide-for-parents-and-educators }
+
+# Owner (M11.2), read 2026-11-11: its Terms of Service name the company that runs it; its Privacy Policy's postal
+# address is in Melbourne. A private company: no shares listed.
+owner:
+  name: 'Kick Streaming Pty Ltd'
+  page:
+    name: 'Terms of Service'
+    url: https://kick.com/terms-of-service
+  quotes:
+    - 'These Terms of Service (these "Terms") of Kick (operated by Kick Streaming Pty Ltd (ACN 663 807 645))'
+  country:
+    code: AU
+    page:
+      name: 'Privacy Policy'
+      url: https://kick.com/privacy-policy
+    quotes:
+      - '2/287 Collins Street, Melbourne VIC 3000 Australia'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+
+# Ways to pay (M11.5), read 2026-11-11, for channel subscriptions and KICKs: Stripe's and PayPal's checkouts, with the
+# cards its terms name, and Apple's and Google Play's billing in its apps (its cancelling article). It doesn't take
+# prepaid cards for recurring subscriptions ("KICK does not support prepaid payment cards for recurring subscriptions").
+acceptedNetworks:
+  GLOBAL:
+    networks: [mastercard, visa, amex]
+    url: https://kick.com/terms-of-service
+    quotes:
+      [
+        'We accept various payment methods through Stripe and PayPal, including Mastercard, Visa, and American Express.',
+      ]
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'Terms of Service'
+    url: https://kick.com/terms-of-service
+    quotes:
+      - 'We accept various payment methods through Stripe and PayPal, including Mastercard, Visa, and American Express.'
+  - methods: [app-store]
+    page: 'Cancelling a subscription and our refund policy'
+    url: https://help.kick.com/en/articles/14994456-cancelling-a-subscription-and-our-refund-policy
+    quotes:
+      - 'they should make sure the subscription is cancelled in the Google Play app/Apple Subscriptions as well'
+
+# Sign-in (2026-11-11): its sign-up form asks for "Email", "Birthday", "Username" and "Password", with Google and Apple
+# buttons under "or continue with" (images, read from the screenshot; its privacy policy: "login through a third-party
+# social network or authentication service such as Facebook, Apple or Google"), and two-step codes from an authenticator
+# app ("Scan the QR code or enter the code into Google Authenticator.", How to enable Two-Factor Authentication).
+# Platforms: "KICK is available on both web and mobile platforms" and "The KICK app is available for free on both iOS
+# and Android." (its mobile app guide); no page names a TV or console app. App languages: its "Display language" menu
+# (the globe beside Log In) lists 36, those the registry has listed.
+features:
+  platforms: [web, ios, android]
+  account.sign-in: [password, totp, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+
+plans:
+  - id: kick.free
+    name: Free
+    link: https://kick.com/
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.content: [creators]
+      streaming.own-media: false
+    inferred:
+      video.quality:
+        reason: 'Larger channels can stream in 1080p, and smaller ones up to 720p; no page names a higher resolution.'
+        page:
+          name: Why 1080p may not be available on your channel
+          url: https://help.kick.com/en/articles/15638073-why-1080p-may-not-be-available-on-your-channel
+        lastVerified: 2026-11-11
+    notes: Live streams, past broadcasts and clips, with ads, with or without an account. A channel subscription (a flat US$5 a month everywhere) is paid to that streamer and isn't a Kick plan.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.kick.com/en/articles/8956733-guide-for-parents-and-educators
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 from Canada: its Terms of Service ("Date Modified: 23 March
+# 2026"), which include its Community Guidelines and Kick Safety Hub, its KICKs Usage Policy and the Stripe and PayPal
+# agreements for payments (not read: another company's); its Privacy Policy ("Date Modified: May 19, 2026", with its
+# European disclosures), Cookie Policy and Advertising Policy (no topic beyond the terms'); its sign-up form; its security
+# contact file (kick.com/.well-known/security.txt); and its help centre's articles on accounts, privacy settings, age
+# checks, payments, ads and law enforcement requests. Calibrated against Rumble and Odysee (creator platforms) and Twitch.
+# It has no paid plan of its own, so the billing topics don't apply. Its terms grant Kick a perpetual, irrevocable,
+# sublicensable and transferable licence over what you post, with your name, voice and likeness; legal.content-rights
+# isn't a streaming topic, and Rumble's and Sportsnet+'s like clauses weren't made notable, so this one isn't either.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://kick.com/terms-of-service
+    - name: 'Privacy Policy'
+      url: https://kick.com/privacy-policy
+    - name: 'KICKs Usage Policy'
+      url: https://kick.com/kicks-usage-policy
+    - name: 'How to create a KICK account'
+      url: https://help.kick.com/en/articles/14994466-how-to-create-a-kick-account
+    - name: 'Managing your viewer profile and privacy settings'
+      url: https://help.kick.com/en/articles/14994505-managing-your-viewer-profile-and-privacy-settings-on-kick
+    - name: 'Australian social media minimum age requirements'
+      url: https://help.kick.com/en/articles/12923998-australian-social-media-minimum-age-requirements
+    - name: 'Law enforcement requests'
+      url: https://help.kick.com/en/articles/15372673-law-enforcement-requests
+    - name: 'Security contact (security.txt)'
+      url: https://kick.com/.well-known/security.txt
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use Kick, with Google Analytics among others, and uses what you do to recommend streams. You can limit only some of it, browser by browser.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'to identify and analyze how you use our Services'
+        - url: https://kick.com/privacy-policy
+          quote: 'For example helping us to develop and improve our personalised recommendation algorithms'
+        - url: https://kick.com/privacy-policy
+          quote: "You can learn about Google Analytics' currently available opt-outs, including the Google Analytics Browser Ad-On here"
+      action:
+        name: 'Its privacy policy'
+        url: https://kick.com/privacy-policy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares an account identifier, such as a scrambled copy of your email, with ad partners and social networks, and lets ad companies follow you on its site. You can opt out only of some of it.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'We may share a common account identifier (such as a hashed email address or user ID) with our third-party advertising partners to help identify you across devices.'
+        - url: https://kick.com/privacy-policy
+          quote: 'We permit third-party online advertising networks, social media companies and other third-party services to collect information about your use of our Services over time'
+        - url: https://kick.com/privacy-policy
+          quote: 'You may also be able to opt out of some (but not all) interest-based advertising served by mobile advertising networks'
+      action:
+        name: 'Its privacy policy'
+        url: https://kick.com/privacy-policy
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It aims ads at you from what you browse, on Kick and elsewhere. A setting turns off personalised ads on Kick, but ad companies’ tracking is turned off browser by browser, and some goes on.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'We may participate in interest-based advertising and use third-party advertising companies to serve you targeted advertisements on and off our Services based on your browsing history and based on other personal information.'
+        - url: https://kick.com/privacy-policy
+          quote: 'To opt out of receiving personalized advertisements on our Services, please refer to the relevant toggle in your user preferences center.'
+        - url: https://kick.com/privacy-policy
+          quote: 'In addition, third parties may still use cookies to collect information about your use of our Services'
+      action:
+        name: 'Its privacy policy'
+        url: https://kick.com/privacy-policy
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you post, stream or write trains AI.'
+      pages: [https://kick.com/privacy-policy, https://kick.com/terms-of-service]
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and names no periods.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'We will usually store the personal information we collect about you for no longer than necessary for the purposes set out in this Privacy Policy, and in accordance with our legitimate business interests and applicable law.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You ask its support team by email to delete your account, with no stated time, and the licence you gave it over what you posted may keep some of it from being deleted.'
+      sources:
+        - url: https://help.kick.com/en/articles/14994505-managing-your-viewer-profile-and-privacy-settings-on-kick
+          quote: 'To request deletion, contact our Support Team (details below).'
+        - url: https://kick.com/privacy-policy
+          quote: 'Consistent with our Terms of Service, User Content licenses may prevent full deletion of certain public information.'
+      action:
+        name: 'Request account deletion'
+        url: https://help.kick.com/en/articles/14994505-managing-your-viewer-profile-and-privacy-settings-on-kick
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your information, and it answers within 30 days or the time your local law sets; there’s no way to download it yourself.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'If you would like to request access to your personal information, you can contact us directly at privacy@kick.com.'
+        - url: https://kick.com/privacy-policy
+          quote: 'We will respond to your inquiry within 30 days of its receipt or within the maximum applicable timeline in your jurisdiction.'
+      action:
+        name: 'Its privacy policy'
+        url: https://kick.com/privacy-policy
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives information to authorities to follow the law and answer lawful requests, through a portal for police, but doesn’t promise to tell you.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'to comply with laws or to respond to lawful requests and legal process'
+        - url: https://help.kick.com/en/articles/15372673-law-enforcement-requests
+          quote: 'KICK will review each case and cooperate in accordance with our Terms of Service, Community Guidelines and applicable Laws.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information may be moved to other countries, the US among them, under standard contract clauses where European rules apply.'
+      sources:
+        - url: https://kick.com/privacy-policy
+          quote: 'The personal information we collect may be transferred to and stored in countries outside of the jurisdiction you are in where we and our third-party service providers have operations, including in the United States.'
+        - url: https://kick.com/privacy-policy
+          quote: 'the transfer is made pursuant to appropriate safeguards, such as standard contractual clauses adopted by the European Commission'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address, your birthday, a username you choose and a password. In Australia the law also makes you confirm your age with an outside age check.'
+      sources:
+        - url: https://help.kick.com/en/articles/14994466-how-to-create-a-kick-account
+          quote: 'Enter your email address, choose a username, and create a password'
+        - url: https://help.kick.com/en/articles/14994466-how-to-create-a-kick-account
+          quote: 'Confirm your date of birth'
+        - url: https://help.kick.com/en/articles/12923998-australian-social-media-minimum-age-requirements
+          quote: 'If you are an Australian Viewer, we ask you to securely confirm your age using the k-ID system.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13 or older, and under 18 only with a parent’s supervision; it deletes a child’s information it finds. It doesn’t say it keeps its ads and their tracking away from teenagers.'
+      sources:
+        - url: https://kick.com/terms-of-service
+          quote: 'Any use or access to the Service by anyone under 13 (or under the age of digital consent in their respective country) is strictly prohibited and in violation of these Terms.'
+        - url: https://kick.com/terms-of-service
+          quote: 'If you are under the age of 18, you may use the Service only with the supervision of a parent or legal guardian and their consent and agreement to these Terms.'
+        - url: https://kick.com/privacy-policy
+          quote: 'If we learn that any personal information we collect has been provided by a child under the age of 13, we will promptly delete that personal information.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to a private referee (an arbitrator) in London, one person at a time, with no class actions. You can opt out only by email within 30 days of first agreeing.'
+      sources:
+        - url: https://kick.com/terms-of-service
+          quote: 'the Dispute shall be finally settled under the Rules of Arbitration (the "Rules") of the International Chamber of Commerce ("ICC") by a sole arbitrator in accordance with the Rules'
+        - url: https://kick.com/terms-of-service
+          quote: 'You may decline this agreement to arbitrate by contacting support@kick.com within thirty (30) days of first accepting these Terms'
+        - url: https://kick.com/terms-of-service
+          quote: 'neither you nor Company may bring a claim as a part of a class, group, collective, coordinated, consolidated or mass arbitration'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://kick.com/terms-of-service
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      regions: [AU]
+      tier: neutral
+      reason: 'In Australia disputes still go to a private referee (an arbitrator) unless you opt out within 30 days, but its ban on class actions doesn’t apply.'
+      sources:
+        - url: https://kick.com/terms-of-service
+          quote: 'This Section 11.7 does not apply to Australian Users.'
+        - url: https://kick.com/terms-of-service
+          quote: 'You may decline this agreement to arbitrate by contacting support@kick.com within thirty (30) days of first accepting these Terms'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://kick.com/terms-of-service
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It says it will tell you about big changes to its terms, but may do it by posting on its site, and its privacy and KICKs policies change as soon as they’re posted. Using Kick afterwards means you accept.'
+      sources:
+        - url: https://kick.com/terms-of-service
+          quote: 'Your continued use of the Service after any such change constitutes your acceptance of the new Terms.'
+        - url: https://kick.com/privacy-policy
+          quote: 'Any changes or modifications will be effective immediately upon posting of the changes or modifications'
+        - url: https://kick.com/kicks-usage-policy
+          quote: 'We may change this Policy from time to time with such changes effective upon messaging online or otherwise providing you an updated version.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end or suspend your access at any time, for any reason or none, without notice, and you get nothing back.'
+      sources:
+        - url: https://kick.com/terms-of-service
+          quote: 'We may permanently or temporarily terminate or suspend your access to the Service without notice and liability for any reason, including if in our sole determination you violate any provision of these Terms, or for no reason.'
+        - url: https://kick.com/terms-of-service
+          quote: 'you shall receive no refund or exchange for any Company Property, any unused time on a subscription'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of Kick without notice, and can end the KICKs you bought for any reason, owing you nothing for them.'
+      sources:
+        - url: https://kick.com/terms-of-service
+          quote: 'We may, without prior notice, change the Service; stop providing the Service or features of the Service, to you or to Users generally; or create usage limits for the Service.'
+        - url: https://kick.com/terms-of-service
+          quote: 'Kick may immediately suspend or terminate Digital Content for any or no reason, in our sole discretion, and without advance notice or liability.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://kick.com/terms-of-service]
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: neutral
+      reason: 'Its security contact file sends anyone who finds a flaw to a reporting programme on Bugcrowd, though the file’s own expiry date has passed; it names no independent audit.'
+      sources:
+        - url: https://kick.com/.well-known/security.txt
+          quote: 'Contact: https://bugcrowd.com/engagements/kick-vdp-pro'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms say you may never use someone else’s account without permission, but not whether you may let others use yours.'
+      pages: [https://kick.com/terms-of-service]
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages name no limits on devices, and viewers can’t download streams.'
+      pages: [https://kick.com/terms-of-service]
+      lastVerified: 2026-11-11
