@@ -1,0 +1,189 @@
+url: https://support.plex.tv/articles/203815766-what-is-plex-home/
+method: fetch
+saved: 2026-11-11
+
+What is Plex Home? | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+What is Plex Home?
+What is Plex Home?
+Plex Home allows you to set up a group of users that all use Plex together. For instance, there might be a family of users (parents and children) that all use Plex on various devices connected to the same Plex Media Server in their house. The Plex Home feature is intended for people that physically live together.
+Note: You can only be a member of a single Plex Home. Accepting an invitation for a second Plex Home will remove you from the first one.
+Related Page: Creating a Plex Home
+Related Page: Example Plex Home Setup
+Related Page: Consequences of Being in a Plex Home
+Plex Home Features
+Enabling or joining a Plex Home gives you several features.
+Free Plex accounts may have up to 14 managed users total in your Home (15 total users including the Home Admin account).
+Plex Pass users can also add regular Plex accounts to the home in addition to creating managed users (still bound by 15 total member limit)
+Managed Users
+The administrator for a Plex Home has the ability to create Managed Users within that home. These are often used by parents to create an account for their children, for instance.
+Managed Users do not have any email address associated with their account and cannot directly sign in to any app. (The admin or another full account that’s a member of the Plex Home needs to sign in to the app and then the Managed User can be switched to.)
+Related Page: Managed Accounts
+Fast User Switching
+Being in a Plex Home allows you to quickly switch between members of the Home in supported Plex apps. For supported apps, you can quickly switch between Home members without having to manually sign out and back in to the app.
+Note: Once in a Plex Home, you can switch to any other member of the Home in supported apps. The only limitation is that members protected with a PIN will need to be unlocked by entering the correct code before they can be used.
+Related Page: Fast User Switching
+Protect via PIN code
+Members of a Plex Home can have a PIN code set on their account. When set, it means that the code must be entered when switching to that account in a supported Plex app. For instance, parents may wish to put a PIN on their account so that their children can’t freely switch to the parent account.
+Note: Remember that setting a PIN on an account is not a replacement for good account security. A PIN should not be considered true security and is provided as a convenience to help control access when young children are involved. Do not share your account password/credentials with others and do not let others access your account.
+Ratings Profiles
+Home admins can add content ratings profiles to managed user accounts.
+Related Page: Parental Controls
+Free Access to Plex apps (Plex Pass).
+If the admin of the Plex Home has an active Plex Pass subscription, all members of a Plex Home (both Managed Users and regular accounts) will be able to use our regular mobile Plex apps from the various app stores without doing a separate one-time, in-app activation purchase.
+Regular accounts in the Plex Home only need to sign into the app using their account and it will recognize they are in a Plex Home and allow use of the app.
+For Managed User accounts, the Home admin or another regular account in the Home must sign in first, then switch to that Managed user. From then on, the Managed User will be able to select themselves in the user menu when they open the app.
+Related Page:
+Live TV and DVR access
+Plex Pass server admins that have set up Live TV & DVR can choose to enable access to just Live TV or both Live TV and DVR for individual members of their Plex Home.
+Related Page: Restrictions on Library Access
+Consequences of Being in a Plex Home
+When you create a Plex Home, there are certain things you should be aware of that may be important to you.
+There is a single admin for the Plex Home; this is the user that created the Home originally.
+When switching to another member, you have all of the access and abilities of that user.
+Some changes will be made on the Server:
+Any App, device, or tool communicating with your Server will need to be signed in to a Plex Account.
+The DLNA server will be disabled by default.
+You need an active internet connection to be able to do Fast User Switching between members of a Plex Home.
+Related Page: Consequences of Being in a Plex Home
+Related Page: Plex Home Security Changes
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: January 18, 2022
+Table of Contents
+Recently Viewed
+Using Hardware-Accelerated Streaming
+Plex: Free vs Paid
+Why am I locked out of Server Settings and how do I get in?
+Remote Streaming (Setting Up Remote Access)
+How do I manually install a plugin?
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

@@ -1,0 +1,646 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, its help centre's articles
+# one by one in Edge (support.hayu.com, a Salesforce site), and the welcome page through a UK and an Australian exit to
+# check the market pages. Pages, each quoted where it's used:
+# Pricing: its help centre's "How much does Hayu cost?", one table of every market's "Monthly-rolling", "6-month
+# rolling" and "12-month rolling" prices: "United Kingdom GBP£5.99 GBP£28.99 GBP£52.99", "Ireland €6.99 €33.99 €61.99",
+# "Australia AUD$8.99 AUD$43.99 AUD$79.99", "New Zealand* NZD$10.99 NZD$53.99 NZD$97.99", "Canada CAD$7.99 (+
+# applicable taxes) CAD$38.99 (+ applicable taxes) CAD$70.99 (+applicable taxes)", France, Spain and Italy "4.99 €
+# 23.99 € 43.99 €", "Germany €4.99 Not Available Not Available", "Netherlands €6.99 €33.99 €61.99". Its welcome page
+# (get.hayu.com/welcome) shows the same three cards for each market, "Auto-renews every month", "every 6 months" and
+# "every 12 months", read for Canada (CAD$, "+ applicable taxes") and, with its market picker (?market=GB, ?market=IE…,
+# whose page data names the market: data-market="GB", data-market-source="explicit_query"), for every other country
+# here, and through a UK and an Australian exit (£5.99, AUD$8.99: the same). The 12-month plan is stored as a year,
+# as Proton's "every 12 months" is. Canada's prices are before tax; its terms say "Subscription fees include VAT or
+# other sales taxes, if applicable", but the price table, the prices' source, doesn't say so for the other countries,
+# so no taxIncluded. New Zealand: "*New subscribers in New Zealand can access Hayu for $NZ10.99 per month. Existing
+# subscribers are $NZ9.99 a month for a limited time.": NZ$10.99 is the regular price; the existing subscribers' price
+# is a note.
+# Region checklist, 2026-11-11: 1. no locale paths for prices (get.hayu.com/<language>/welcome are languages, not
+# countries); 2. the welcome page's market picker (?market=), which names each market in its data; the US isn't one
+# (?market=US falls back to the reader's own, "request_country"); 3. the market in the page's data; 4. the sign-up form
+# (hayu.com/signup) read, nothing typed; 5. its help centre's price table, every market; 6. Edge, a plain fetch and two
+# countries' exits agree; 7. no bill offered.
+# Bundles: Sky's UK TV packages include Hayu ("Sky today announced that in a world-first, it is bringing together Disney+,
+# HBO Max, Netflix and Hayu into a single Sky TV subscription.", Sky Group's announcement, skygroup.sky): a TV package,
+# so telecom's, not listed; Sky also bills Hayu alone on Sky Glass and Sky Stream ("How can I sign up to Hayu via
+# Sky?"). Its help centre's partner articles: Amazon's Prime Video Channels ("Amazon Prime Channelsis a standalone
+# subscription billed via Amazon"), Telstra, Optus SubHub and Fetch TV in Australia, which bill it on their own
+# accounts, and TV platforms that only carry the app (Rogers Ignite and Bell TV in Canada: "You can sign up to Hayu and
+# get a free trial via Hayu.com/rogers"). Official resellers: none named on any page read; its promotional and voucher
+# codes ("How do I subscribe with a promotional or voucher code?") are offers, not a shop.
+# Features, read 2026-11-11: "We allow you to use one stream at any one time." (How many simultaneous streams can I
+# have?), and its terms: "pair up to five (5) Devices on your account; stream Hayu Content on one (1) Device at a time";
+# HD with no resolution ("you will be able to stream content in High Definition"), so 720p (HD), inferred as
+# Crunchyroll's; ad-free ("Stream your favourite reality TV shows ad-free."); downloads "on iOS and Android smartphone
+# and tablet devices", with no number of devices, so 1 (inferred); no profiles on any page; "Pausing subscriptions is
+# not possible."; a 4-digit PIN for mature content ("How can I set up a PIN?"): parental controls. What it streams:
+# "the first and only all-reality subscription video-on-demand streaming service of its kind" (About Hayu), but New
+# Zealand's page sells it as "reality TV, blockbuster movies and iconic series" ("Flexible monthly access to reality TV,
+# films and series"), so New Zealand's is a plan of its own, as Disney+'s US With Ads is.
+# Free use: none: its pages sell the paid plans with a 7-day free trial for new users.
+
+# Coverage: hayu.* in NO, SE, DK, FI, BE, LU, PT, CH, LT, EE, LV, PL, HU, CZ, AT, IS, TR, GR, RO, AL, BA, BG, HR, CY, MT,
+# RS, SK, SI, ME, MK, AD, HK, SG and PH: sold there (its price table's markets), but outside the catalog's research
+# regions, so not priced here; the same table prices them.
+
+# Coverage: hayu.standard in NZ: New Zealand sells Hayu with films and series, hayu.new-zealand, instead (its New Zealand
+# welcome page, read 2026-11-11).
+
+# Coverage: hayu.new-zealand in CA, GB, IE, AU, DE, FR, NL, ES and IT: New Zealand's own version; the other markets'
+# pages sell reality TV only (hayu.standard).
+
+id: hayu
+name: Hayu
+website: https://www.hayu.com
+# Its parent's privacy centre, where hayu.com's Privacy Policy link goes (nbcuniversalprivacy.com/hayu). Its sign-up
+# site and help centre are subdomains (get.hayu.com, support.hayu.com).
+domains: [nbcuniversalprivacy.com]
+category: streaming
+spendCategory: streaming
+# Where it's sold: its price table is "a full list of markets and prices" ("Where is Hayu available?": "Hayu is
+# available across most European countries, Australia, New Zealand, Canada, Iceland, The Philippines, Singapore and Hong
+# Kong. For a full list of markets and prices, please click here."), 45 markets ("available in 45 markets globally",
+# About Hayu). Kosovo is one; it has no ISO 3166-1 code, so it's left out (as SkyShowtime's). Not the US.
+availableIn:
+  [
+    GB,
+    IE,
+    AU,
+    NZ,
+    CA,
+    NO,
+    SE,
+    DK,
+    FI,
+    FR,
+    ES,
+    IT,
+    DE,
+    NL,
+    BE,
+    LU,
+    PT,
+    CH,
+    LT,
+    EE,
+    LV,
+    PL,
+    HU,
+    CZ,
+    AT,
+    IS,
+    TR,
+    GR,
+    RO,
+    AL,
+    BA,
+    BG,
+    HR,
+    CY,
+    MT,
+    RS,
+    SK,
+    SI,
+    ME,
+    MK,
+    AD,
+    HK,
+    SG,
+    PH,
+  ]
+billingCurrency:
+  { CA: CAD, GB: GBP, IE: EUR, AU: AUD, NZ: NZD, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+# Its terms (13.1): "If you have subscribed directly via the Website, you can cancel by logging into the “My Account”
+# section of the Website."; its help centre has no web cancel article of its own (only each TV platform's).
+cancelUrl: https://www.hayu.com/terms
+sources:
+  { pricing: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA }
+notes: New subscribers get a 7-day free trial. In New Zealand, existing subscribers pay NZ$9.99 a month for a limited time.
+
+# Owner (M11.2), read 2026-11-11: its help centre's About Hayu ("From NBCUniversal") and About NBCUniversal
+# ("NBCUniversal is a subsidiary of Comcast Corporation."). Its terms are with Universal Pictures Subscription Television
+# Limited, "a company registered in England and Wales", NBCUniversal's ("NBCUniversal (including all its brands, such as
+# Hayu, under Universal Pictures Subscription Television Limited)", its privacy policy). Where it's from: NBCUniversal's
+# headquarters, from its privacy policy. Comcast's shares: its investor site's shareholder FAQ (cmcsa.com, the owner's
+# website here); its Class B shares hold "an undilutable 33 1/3% of the voting power", not a majority, so no
+# majorityHolder.
+owner:
+  name: 'NBCUniversal, owned by Comcast Corporation'
+  website: https://www.cmcsa.com
+  page:
+    name: 'About Hayu'
+    url: https://support.hayu.com/hayuArticle?id=kA04H000000US45SAG&c=General&lang=en-CA
+  quotes:
+    - 'From NBCUniversal, Hayu is the first and only all-reality subscription video-on-demand streaming service of its kind'
+  country:
+    code: US
+    page:
+      name: 'NBCUniversal Privacy Policy'
+      url: https://www.nbcuniversalprivacy.com/hayu
+    quotes:
+      - 'NBCUniversal is a global company and has its headquarters in the United States.'
+    lastVerified: 2026-11-11
+  stock:
+    company: Comcast Corporation
+    listings:
+      - { exchange: Nasdaq, symbol: CMCSA }
+    page:
+      name: 'Shareholder services FAQs (Comcast investor relations)'
+      url: https://www.cmcsa.com/shareholder-services/faqs
+    quotes:
+      - 'In addition to CMCSA, which trades on The NASDAQ Stock Market, Comcast has a Class B common stock, which does not trade publicly'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+
+# Ways to pay (M11.5), read 2026-11-11: a payment card on hayu.com, or the app stores and partner platforms that bill it
+# (its in-app article; Amazon's Prime Video Channels, "billed via Amazon"). No page names the card networks (a Maestro
+# card works only with a 16-digit number), so no acceptedNetworks. Telstra, Optus SubHub and Fetch TV bill it to their
+# Australian customers ("Telstra account billing is available to eligible Personal customers…", "FetchTV account
+# billing"), whose words don't match the check for a phone or TV bill: noted, not listed. GCash, PayMaya, Smart and
+# Globe are the Philippines'.
+paymentMethods:
+  - methods: [card, app-store]
+    page: Can I subscribe via the mobile or TV app?
+    url: https://support.hayu.com/hayuArticle?id=kA0240000005k9VCAQ&c=Devices_Partners&lang=en-CA
+    quotes:
+      - 'You can subscribe to the Hayu app using your payment card by visiting Hayu.com or via the app stores containing the Hayu app across mobile and TV devices.'
+      - 'Please note, when you subscribe via a partner platform (iTunes, Google, Amazon, Roku, etc) your billing will need to be managed from these accounts.'
+# Renewal day (M11.5): its billing article.
+renewalAnchor:
+  kind: same-date
+  page: How do you charge my account?
+  url: https://support.hayu.com/hayuArticle?id=kA0240000009pReCAI&c=Billing&lang=en-CA
+  quotes:
+    - 'hayu is a rolling monthly service and we will charge you every month on the date you signed up.'
+    - "If your billing date is scheduled for a date that does not occur in a given month, you'll be billed on the last day of that month instead."
+  lastVerified: 2026-11-11
+freeUse:
+  kind: none
+  pages:
+    - https://get.hayu.com/welcome
+    - https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): its sign-up form takes a name, an email and a password, "Or Sign in with Apple" (hayu.com/signup;
+# its older help article still names Facebook and Twitter). No page names two-step sign-in. Platforms: "Hayu is
+# available on web at Hayu.com and on mobile via iOS App or Android App and via a wide range of TV platforms", Xbox
+# among them (Which devices can I use to watch shows on Hayu?). App languages: its welcome page's language versions
+# (get.hayu.com/fr/welcome, /de/, /es/, /it/, /pt/ and two dozen more). Audio: "Currently, all content is provided in
+# English only." (Do you offer content in any other languages?). Support: email ("please email us at support@Hayu.com",
+# its terms) and its help centre's "Message Us" form.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password, sso]
+  languages.interface: [en, fr, es, de, it, pt]
+  languages.audio: [en]
+  support.channels: [email]
+
+# Perks (M11.6): what no feature describes, in its page's words.
+perks:
+  - id: same-day-as-us
+    name: Hit shows available the same day as the US
+
+plans:
+  - id: hayu.standard
+    name: Hayu
+    link: https://www.hayu.com/signup
+    features:
+      video.quality: 720p
+      streaming.concurrent-streams: 1
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [reality]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Its help centre says you can stream in High Definition if your connection is fast enough, without naming a resolution, so at least 720p (HD).'
+        page:
+          name: Can I watch shows in HD?
+          url: https://support.hayu.com/hayuArticle?id=kA0240000009pSWCAY&c=Video_Content&lang=en-CA
+        lastVerified: 2026-11-11
+      streaming.download-devices:
+        reason: 'You can download episodes in its iPhone, iPad and Android apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Can I download shows to watch?
+          url: https://support.hayu.com/hayuArticle?id=kA0240000009pWoCAI&c=Video_Content&lang=en-CA
+        lastVerified: 2026-11-11
+    perks: [same-day-as-us]
+    notes: Reality TV only, in English. Germany sells it by the month only.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: CA
+        currency: CAD
+        amount: 38.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: CA
+        currency: CAD
+        amount: 70.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: GB
+        currency: GBP
+        amount: 28.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: GB
+        currency: GBP
+        amount: 52.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: IE
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: IE
+        currency: EUR
+        amount: 33.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: IE
+        currency: EUR
+        amount: 61.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: AU
+        currency: AUD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: AU
+        currency: AUD
+        amount: 43.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: AU
+        currency: AUD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: DE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: FR
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: FR
+        currency: EUR
+        amount: 23.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: FR
+        currency: EUR
+        amount: 43.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: NL
+        currency: EUR
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: NL
+        currency: EUR
+        amount: 33.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: NL
+        currency: EUR
+        amount: 61.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: ES
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: ES
+        currency: EUR
+        amount: 23.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: ES
+        currency: EUR
+        amount: 43.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: IT
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: IT
+        currency: EUR
+        amount: 23.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: IT
+        currency: EUR
+        amount: 43.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+  # New Zealand's Hayu: "Stream reality TV, blockbuster movies and iconic series on Hayu" (get.hayu.com/welcome?market=NZ,
+  # read 2026-11-11), the same terms, streams and apps as the others'.
+  - id: hayu.new-zealand
+    name: Hayu (New Zealand)
+    link: https://get.hayu.com/welcome?market=NZ
+    features:
+      video.quality: 720p
+      streaming.concurrent-streams: 1
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [reality, films, series]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Its help centre says you can stream in High Definition if your connection is fast enough, without naming a resolution, so at least 720p (HD).'
+        page:
+          name: Can I watch shows in HD?
+          url: https://support.hayu.com/hayuArticle?id=kA0240000009pSWCAY&c=Video_Content&lang=en-CA
+        lastVerified: 2026-11-11
+      streaming.download-devices:
+        reason: 'You can download episodes in its iPhone, iPad and Android apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Can I download shows to watch?
+          url: https://support.hayu.com/hayuArticle?id=kA0240000009pWoCAI&c=Video_Content&lang=en-CA
+        lastVerified: 2026-11-11
+    perks: [same-day-as-us]
+    notes: Reality TV, films and series, sold in New Zealand. Existing subscribers pay NZ$9.99 a month for a limited time.
+    prices:
+      - region: NZ
+        currency: NZD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: NZ
+        currency: NZD
+        amount: 53.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+      - region: NZ
+        currency: NZD
+        amount: 97.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://support.hayu.com/hayuArticle?id=kA0240000005k96CAA&c=Billing&lang=en-CA
+
+# Terms and policies, read 2026-11-11 (M11.15) in Edge from Canada: its Terms & Conditions (hayu.com/terms, one version
+# for every market, Universal Pictures Subscription Television Limited's, under English law), its sign-up form
+# (hayu.com/signup: "By clicking 'Get one week free' I confirm that I am over 18 & I agree to Hayu's Privacy Policy"; it
+# asks a first name, a last name, an email and a password, read from the form without typing), its help centre's 135
+# articles, and NBCUniversal's Privacy Policy with its Cookie Notice and Your Privacy Choices page, rated once as a shared
+# document (nbcuniversal-privacy, Hayu first; Peacock will share it). The terms include the Privacy Policy and Cookie
+# Notice only, and "Promotion Terms" shown with an offer. Not read: the app stores', Amazon's, Sky's and the Australian
+# partners' terms, which bill it themselves. Calibrated against Paramount+ and Sportsnet+.
+# Its privacy policy is NBCUniversal's Hayu page (nbcuniversalprivacy.com/hayu), the same text as NBCUniversal's
+# Privacy Policy but for its date and one German company's name, so it's rated once as the shared document
+# (data/policies/nbcuniversal-privacy.yaml, Peacock's too); its sign-up data and children stay rated here.
+policies:
+  shared: [nbcuniversal-privacy]
+  links:
+    - name: 'Terms and conditions'
+      url: https://www.hayu.com/terms
+    - name: 'Welcome (plans)'
+      url: https://get.hayu.com/welcome
+    - name: 'How do I unsubscribe from Hayu on Samsung TV?'
+      url: https://support.hayu.com/hayuArticle?id=kA01p000000bmgcCAA&c=Devices_Partners&lang=en-CA
+    - name: 'Can I change my subscription plan?'
+      url: https://support.hayu.com/hayuArticle?id=kA04H0000001QEFSA2&c=Billing&lang=en-CA
+    - name: 'How do you charge my account?'
+      url: https://support.hayu.com/hayuArticle?id=kA0240000009pReCAI&c=Billing&lang=en-CA
+    - name: 'How can I set up a PIN?'
+      url: https://support.hayu.com/hayuArticle?id=kA04H0000005ceDSAQ&c=Audience_Protection&lang=en-CA
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs your first and last name, an email address and a password, and a paid plan your payment details. Its sign-up form asks for those, and nothing is checked.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'To register your account, you will be required to provide your first and last name, email address, password, and (if you are also subscribing to the Hayu Service) your billing information.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to subscribe, and it ends the account of anyone younger it finds. Its shows aren’t for children, and you can set a PIN to keep mature ones from them.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'If we discover that you have registered for an account when in fact you are under 18 years of age/the relevant age of majority (i.e. by falsely confirming that you are of age during registration), we will terminate your subscription and access to the Hayu Service immediately and you will not be entitled to a refund of any subscription fees paid.'
+        - url: https://support.hayu.com/hayuArticle?id=kA04H0000005ceDSAQ&c=Audience_Protection&lang=en-CA
+          quote: "To keep content that is classified for mature/adult audiences away from little eyes that shouldn't see it, you can set a 4-digit PIN code to restrict access to it."
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online at any time with one button in your account, and keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'You may cancel your subscription to the Hayu Service at any time.'
+        - url: https://support.hayu.com/hayuArticle?id=kA01p000000bmgcCAA&c=Devices_Partners&lang=en-CA
+          quote: 'You can cancel your account by visiting Hayu.com/user/subscriptions and pressing the "Cancel Subscription" button.'
+        - url: https://www.hayu.com/terms
+          quote: 'if you cancel your subscription you will continue to receive the Hayu Service until the end of your current subscription'
+      action:
+        name: 'How to cancel Hayu'
+        url: https://support.hayu.com/hayuArticle?id=kA01p000000bmgcCAA&c=Devices_Partners&lang=en-CA
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Its terms promise no money back when you cancel, but you keep watching until the end of the time you paid for. If Hayu shuts down, you get back what you hadn’t used.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'if you cancel your subscription you will continue to receive the Hayu Service until the end of your current subscription'
+        - url: https://www.hayu.com/terms
+          quote: 'If this cancellation occurs part-way through a subscription period, you will be entitled to a pro-rata refund of the subscription fees that you’ve pre-paid for the remaining part of that subscription period.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you ahead of a price change, without saying how long before, and you can cancel if you don’t agree.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'Subscription fees may be varied by us from time to time, but any variation affecting your Subscription Type will be notified to you reasonably in advance and you can cancel your subscription if you do not agree to the new subscription fees.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'New subscribers get 7 free days, and its site says no payment is needed to start. The trial becomes a paid plan unless you cancel, which you can do any time during it; no reminder is promised.'
+      sources:
+        - url: https://get.hayu.com/welcome
+          quote: 'Try 7 Days Free – No Payment Required'
+        - url: https://www.hayu.com/terms
+          quote: 'Free Periods (defined in Section 11) will roll into a paid subscription unless you cancel before the end of the Free Period.'
+        - url: https://www.hayu.com/terms
+          quote: 'If you have received a Free Period, you may cancel your subscription at any time during that Free Period as further described in Section 13.2 below.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say it charges you each period until you cancel, but not that it reminds you before a renewal.'
+      pages:
+        - https://www.hayu.com/terms
+        - https://support.hayu.com/hayuArticle?id=kA0240000009pReCAI&c=Billing&lang=en-CA
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: good
+      reason: 'It charges the plan’s price and names no fees of its own; your card company may add its own handling charges.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'Your credit card processor or company may impose handling charges (as provided for in their terms of use).'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'You can switch between monthly, 6-month and yearly plans on its website, and the change starts at your next billing date.'
+      sources:
+        - url: https://support.hayu.com/hayuArticle?id=kA04H0000001QEFSA2&c=Billing&lang=en-CA
+          quote: "If you've subscribed via hayu.com, you can change your subscription plan anytime by visiting the payment page . Your change will take effect at your next billing date."
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: great
+      reason: 'English law applies, but you can take a dispute to the courts where you live, with no private referee (arbitrator), and your own country’s consumer protections still apply.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'These Terms are governed by English law (provided that such choice of law will not deprive you of any mandatory consumer protections of your home country, if different) and you can bring claims against us in the English courts. If you live outside of England, you can also bring claims against us in the courts of the country you live in.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It emails subscribers ahead of changes that hurt them, without saying how long before, and you can cancel if you don’t accept them.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'if we make any material changes to these Terms, you will (if you are a subscriber) be notified reasonably in advance via the email address you have supplied when you set up your account'
+        - url: https://www.hayu.com/terms
+          quote: 'If any changes to these Terms are unacceptable to you, you can cancel your subscription at any time as described in Section 13 below.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend your account while it looks into a breach of its terms, then end your subscription at once, with no money back for the rest of the period.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'If we discover (or determine, acting reasonably, following an investigation) that you have breached these Terms, we will have the right to cancel your subscription. Such cancellation will be effective immediately (i.e. without notice) and you will not be entitled to a refund for any partially-completed subscription period.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'Shows can be removed at any time, without telling you, and it says it’s never responsible for removing them.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'Hayu Content may be added to the Hayu Service, and/or we may remove (either temporarily or permanently) access to certain Hayu Content without notice to you.'
+        - url: https://www.hayu.com/terms
+          quote: 'In no event will we be liable to you for the removal or disabling of Hayu Content.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.hayu.com/terms]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid sharing your sign-in with anyone, and an account is for yourself only; others may only watch with you.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'share your login details with others, access or attempt to access the accounts of other Hayu users'
+        - url: https://www.hayu.com/terms
+          quote: 'You may only open an account for yourself, and not for or on behalf of any other person.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can pair up to 5 devices with your account, and downloads on your phone or tablet are only temporary.'
+      sources:
+        - url: https://www.hayu.com/terms
+          quote: 'As a subscriber, you will be able to: pair up to five (5) Devices on your account; stream Hayu Content on one (1) Device at a time'
+        - url: https://www.hayu.com/terms
+          quote: 'Subscribers can also temporarily download Hayu Content onto their paired mobile Devices.'
+      lastVerified: 2026-11-11

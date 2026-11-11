@@ -1,0 +1,157 @@
+url: https://www.twitch.tv/p/en/security/
+method: fetch
+saved: 2026-11-11
+
+Twitch.tv - Security
+Following
+Browse
+{{ display_name }}
+Browse
+Following
+Browse
+{{ display_name }}
+Browse
+Terms of service
+Privacy Notice
+Ad Choices
+Cookie Policy
+Partners
+Affiliates
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Gift Card
+Following
+Browse
+Legal
+Advertising
+Blog
+Brand
+Developers
+Security
+Help
+Jobs
+Twitch Security
+Twitch Security is responsible for creating the systems that protect the millions of streamers and stream viewers that use our platform. If that sounds interesting to you, consider checking out our jobs page for open positions.
+Need help?
+Someone else is using your Twitch account. If someone has logged in without your permission, contact Twitch Support.
+Someone is breaking the rules. If you believe another user is violating our Community Guidelines, file a user report.
+You found a security vulnerability in Twitch. Submit it through the form at the bottom of this page. See Vulnerability Reporting below.
+Protecting Your Twitch Account
+Keep your login safe!
+Anyone with your username and password can get into your Twitch account. Don’t share your password with anyone, not even someone at Twitch. Twitch will never ask for your password.
+To check whether a message really came from us, see How Twitch will contact you.
+We recommend you use a password on Twitch that you don’t use anywhere else. A password manager can create and store strong, unique passwords for you so you don’t have to remember them all.
+Use a passkey or two-factor authentication
+A password alone is the weakest way to protect your account. Twitch offers two stronger options. Use at least one.
+A passkey replaces your password. You sign in with your device’s fingerprint, face scan, or PIN instead of typing anything. Passkeys only work on the real Twitch site, so a fake login page can’t capture them. Your device or password manager creates, stores, and syncs them for you. Add, view, or remove your passkeys in your Passkey settings. Avoid adding one on a shared or public device. Learn more about passkeys and other account settings.
+Two-factor authentication (2FA) keeps your password and adds a second step: a code from your phone or authenticator app. Someone who learns your password still can’t sign in without it. Here’s how to set it up.
+Vulnerability Reporting
+So we can more effectively respond to your report, please provide any supporting material (proof-of-concept code, tool output, video, screenshots, etc.) that would be useful in helping us understand the nature and severity of the issue.
+To report a vulnerability or security concern with Twitch, submit the form at the bottom of this page.
+Good Faith Security Research
+All vulnerability research must be conducted in good faith. This means:
+You will follow this policy, and any other relevant agreements you have with us.
+Your research must consist exclusively of good faith testing, investigation, or correction of a security flaw, with the primary goal of improving the safety of Twitch and the people who use it.
+You will not violate Twitch users’ security or privacy, and will not harm individuals or the public.
+Your research proceeds only as far as necessary to demonstrate the issue, and no further.
+If a vulnerability provides unintended access to data, you will limit the amount of data you access to the minimum required for effectively demonstrating a proof of concept. Stop the research and submit a report immediately if you encounter any user data during testing, such as personal information, financial information, or proprietary information.
+You report your findings within 72 hours of identifying a potential security concern, using the form on this page.
+You give us time to resolve the issue before discussing it publicly.
+You may only interact with accounts you own or with explicit written permission from Twitch or the account owner.
+No stunt hacking.
+No extortion or harassment.
+Safe Harbor
+We consider Good Faith Security Research to be authorized activity that is protected from adversarial legal action by us. This means that, for activity conducted while this program is active, we:
+Will not bring legal action against you or report you for Good Faith Security Research, including for bypassing technological measures we use to protect the applications in scope; and,
+Will take steps to make known that you conducted Good Faith Security Research if someone else brings legal action against you.
+Note that for the purposes of safe harbor, Twitch does NOT waive a right to pursue remedies against security research activities targeting other Twitch users, including but not limited to:
+accessing, monitoring, or collecting data from accounts you do not own without written permission
+social engineering, including but not limited to phishing
+impersonating Twitch, Twitch employees, Twitch services, or Twitch products
+impersonating any other company, their employees, services, products or offerings
+denial of service, distributed denial of service, or simulated versions of either
+port, protocol, or request flooding
+any type of brute forcing
+stunt hacking
+Keep in mind that we are not able to authorize security research on third-party infrastructure, and a third party is not bound by this safe harbor statement.
+If you are unsure whether your planned testing falls inside this policy, ask us through the form on this page before you begin.
+Disclosure Policy
+Once the report has been submitted, we will work to validate the reported vulnerability. If additional information is required to validate or reproduce the issue, we will work with you to obtain it. When the initial investigation is complete, results will be delivered to you.
+A few things to note about the process:
+Third-Party Products: If the vulnerability is found to affect a third-party product, we will encourage you to notify the owner of the affected technology. Your identity will not be disclosed to the third party without your permission.
+Confirmation of Non-Vulnerabilities: If the issue cannot be validated, or is not found to be in scope, this will be shared with you.
+Vulnerability Classification: We use version 3.1 of the Common Vulnerability Scoring System (CVSS) to evaluate potential vulnerabilities. The resulting score helps quantify the severity of the issue and to prioritize our response. For more information on CVSS, please reference the NVD site.
+Historical Thanks
+Prior to integrating our Responsible Disclosure system with HackerOne, we received many helpful reports over the years. This list is no longer updated. Thank you for your contributions to security at Twitch!
+Ivan U
+Cameron Dawe
+cake
+sehno (@_sehno_)
+Eusebiu Blindu (@testalways)
+Md. Nur A Alam Dipu​ (@Dipu1A)
+Alexey Dorogin
+Néstor Amador
+Mitchel Pyl
+Sean Latimer
+Zach Meyers
+Vineet Kumar
+Zach Furbush (Zekniq)
+Waseem Ullah Siddiqui - Fastian
+Greg Stefanowich (@GStefanowich)
+Mohammad Obaid
+Jouko Pynnönen
+Glen Takahashi
+Kevin Roh (rohk)
+Eric Hurkman
+Aidan Woods (@aidantwoods)
+Ashley Boxshall
+Aditya Agrawal
+Ali Hassan Ghori
+Allan Tomol
+Benjamin Bacher
+Cirja Florinel-Vasile (@quistertow)
+Evan Ricafort (@robinhood0x00)
+Josefine Nielsen (@Pseudochu) x2
+Juan Broullón Sampedro (@The_Pr0ph3t)
+Koutrouss Naddara
+Madhu Akula
+Mehmet Nurcan
+Mohamed A. Baset
+Nakul Mohan(@Anonymous_India)
+Nemesis
+Othmane Tamagart aka 0thm4n@WhiteHatSec
+Sachin Thakuri
+Sangeetha Rajesh
+Sarath Kumar
+Shrushti Sarode
+Simone Memoli
+Stepan Obraztsov
+Swapnil A. Thaware
+Venkat (@PranavVenkatS)
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Gift Card
+Terms of service
+Privacy Notice
+Ad Choices
+Cookie Policy
+Partners
+Affiliates

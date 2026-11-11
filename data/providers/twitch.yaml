@@ -1,0 +1,642 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, and Turbo's price data
+# through each region's exit. Pages, each quoted where it's used:
+# Pricing: its help centre's "Turbo Pricing by Country" (help.twitch.tv/s/article/turbo-pricing-by-country), "the
+# monthly subscription price when purchased on the web", in each country's currency: "Canada / Canadian Dollar / $13.99
+# CAD", "United States / United States Dollar / $11.99", "United Kingdom / Pound Sterling / £11.99", Ireland, Germany,
+# France, the Netherlands, Spain and Italy "Euro / €11.99", "Australia / Australian Dollar / $15.99", "New Zealand / New
+# Zealand Dollar / $17.99", and "If your country is not listed in the tables above, the monthly price for Turbo in your
+# region is $11.99 USD." twitch.tv/turbo tells every visitor "Auto-renews at $11.99/month", but the page's own data (the
+# one Turbo offer it loads for a visitor, a month of Turbo as a gift, with its price, currency and the visitor's
+# "countryCode") gave the article's price and currency for each region, read 2026-11-11 from Canada ("countryCode":"CA",
+# "currency":"CAD", "price":1399) and through a US, UK, Irish, German, French, Dutch, Spanish, Italian, Australian and
+# New Zealand exit. Every price is the regular one; it's monthly
+# only ("At this time, Turbo may only be purchased as a monthly recurring subscription.", Turbo Overview and FAQ), and
+# its mobile apps charge more ("Learn more about subscription prices on mobile"), which isn't listed.
+# Region checklist, 2026-11-11: 1. no country paths (one help article lists every country); 2. no picker; 3. the Turbo
+# page's data names the country and currency, checked from Canada and through each region's exit; 4. checkout not
+# opened (it needs an account); 5. the help centre's pricing article; 6. Edge read every page; 7. no bill offered.
+# Not listed: gifting Turbo (a one-month Turbo for another user, "available on web only", which doesn't renew), and
+# channel subscriptions, which are paid to one streamer each ("Tier 1, Tier 2 and Tier 3 subscription levels", "a Tier 1
+# subscription costs $5.99 USD in the United States", local prices elsewhere): notes, not plans (the owner's rule for
+# live channels). Bits are a virtual currency for cheering, not a subscription.
+# Bundles: none for Turbo. Amazon Prime and Prime Video members get "a free monthly Twitch channel sub" (twitch.tv/prime,
+# and the Terms of Sale's "Prime Member Perks on Twitch") for one streamer a month: a perk of Amazon's, not Turbo.
+# Official resellers: none; Twitch Gift Cards are stored value, a way to pay (below).
+# Features, read 2026-11-11: video quality: "Upgrading to 2k (1440p) streaming offers a noticeable step up from 1080p
+# streaming" (2k Streaming on Twitch, for Partners' and Affiliates' streams); the registry's values stop at 1080p before
+# 4K, so 1080p (inferred), the same on both plans. No page says how many streams an account plays at once, so both
+# plans wait in core's awaitingRequiredFeatures (as Rumble's). No downloads for viewers (only a streamer's own past
+# broadcasts) and no profiles. Ads: free viewing has them; Turbo is "Ad-free Viewing Across Twitch" except "as part of
+# channel sponsorships", with "streamer-enabled promotions on channels and Twitch-promoted content on non-channel pages":
+# ad-free, with a note, as Crave Premium's and CBC Gem Premium's exceptions are. What it streams: "Twitch is where
+# millions of people come together live every day to chat, interact, and make their own entertainment together" (its
+# About page): creators' livestreams (its streams' categories, sports and music among them, are creators' own). Own
+# media: no page says it plays your own files.
+# Pause: none (its cancelling article offers only "Don't Renew Subscription"). Parental controls: its Family Center
+# ("Once the accounts are linked, parents can manage what their teen accesses, how long they spend on Twitch"), for
+# every plan.
+
+id: twitch
+name: Twitch
+website: https://www.twitch.tv
+# Its legal site.
+domains: [legal.twitch.com]
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    GLOBAL: USD,
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+  }
+cancelUrl: https://help.twitch.tv/s/article/cancelling-subscriptions?language=en_US
+sources: { pricing: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US }
+
+# Owner (M11.2), read 2026-11-11: its Privacy Notice names Amazon.com, Inc. as Twitch Interactive's parent; its Terms of
+# Service give Twitch Interactive's San Francisco address and its registration in Delaware. Its shares (M11.18):
+# Amazon's investor relations page, read 2026-11-11 through a US exit (Cloudflare's check stopped it from Canada).
+owner:
+  name: 'Twitch Interactive, Inc., owned by Amazon.com, Inc.'
+  website: https://www.aboutamazon.com
+  page:
+    name: 'Privacy Notice'
+    url: https://legal.twitch.com/legal/privacy-notice/
+  quotes:
+    - 'Twitch Interactive Inc. and its affiliates are subsidiaries of Amazon.com, Inc. (“Amazon”).'
+  country:
+    code: US
+    page:
+      name: Terms of Service
+      url: https://legal.twitch.com/legal/terms-of-service/
+    quotes:
+      - 'Twitch Interactive, Inc. is a company registered in the US State of Delaware under file no. 4221511.'
+    lastVerified: 2026-11-11
+  stock:
+    company: Amazon.com, Inc.
+    listings:
+      - { exchange: NASDAQ, symbol: AMZN }
+    page:
+      name: Investor relations
+      url: https://ir.aboutamazon.com/overview/default.aspx
+    quotes:
+      - 'NASDAQ: AMZN'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+
+# Ways to pay (M11.5), read 2026-11-11: its Terms of Sale, the payment methods its checkout offers ("credit / debit card,
+# Amazon Pay, Apple Pay and PayPal", with "See More Methods" by region; Amazon Pay is `other`), Twitch Gift Cards
+# (stored value in US, Canadian and Australian dollars, euros and pounds), and Apple's and Google Play's billing in its
+# apps. No page names card networks ("major credit cards, certain debit cards"), so the card is "networks not verified".
+# Its checkout's currency follows the card ("Checkout currency is set via an automatic process that references
+# information about your payment method").
+paymentMethods:
+  - methods: [card, paypal]
+    page: Terms of Sale
+    url: https://legal.twitch.com/legal/terms-of-sale/
+    quotes:
+      - 'We accept payment through major credit cards, certain debit cards, PayPal'
+  - methods: [card, apple-pay, paypal, other]
+    page: How to Update Payment Information and View Transaction History
+    url: https://help.twitch.tv/s/article/updating-payment-information-transaction-history?language=en_US
+    quotes:
+      - 'you will be prompted to select your preferred payment method from credit / debit card, Amazon Pay, Apple Pay and PayPal'
+  - methods: [gift-card]
+    page: Spending Twitch Gift Cards
+    url: https://help.twitch.tv/s/article/gift-card-spend?language=en_US
+    quotes:
+      - 'Spend gift card balance on Subs, Bits, or Turbo.'
+  - methods: [app-store]
+    page: Refunds on Twitch
+    url: https://help.twitch.tv/s/article/refunds-on-twitch?language=en_US
+    quotes:
+      - 'Twitch Support handles all refund requests for Twitch products purchased through the Android app or Google Play Store.'
+
+# Renewal day (M11.5), read 2026-11-11: its Terms of Sale charge "at the beginning of each applicable payment period",
+# and its refunds article names a "Sub Renew Date" on your Subscriptions page, without saying which day it is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://legal.twitch.com/legal/terms-of-sale/
+    - https://help.twitch.tv/s/article/refunds-on-twitch?language=en_US
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): an email or phone number and a password ("Create an account using your email address or phone
+# number", Create an Account with Twitch), "Sign up with Google", "Sign up with Apple" and "Sign up with Amazon" (its
+# social login article), passkeys ("A passkey replaces your password", Twitch Security), and two-step codes "via SMS
+# and TOTP" (its 2FA article). Platforms: twitch.tv/downloads ("Twitch App for Android", "Twitch App for iOS", Fire TV,
+# Android TV, Apple TV, LG and Samsung TVs, "PlayStation", "Xbox"). App languages: Languages on Twitch's table (ticks for
+# Twitch.tv and its mobile app in 29 languages; those the registry has are listed, no Hindi).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password, passkey, sms, totp, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+
+# Perks (M11.6): what Turbo adds that no feature describes, in its page's words.
+perks:
+  - id: turbo-badge
+    name: Turbo chat badge
+  - id: chat-colors
+    name: Custom username colors
+  - id: turbo-emotes
+    name: Glitch and Monkey versions of default Twitch emotes
+  - id: vod-storage
+    name: Past broadcasts kept 60 days instead of 7
+
+plans:
+  - id: twitch.free
+    name: Free
+    link: https://www.twitch.tv/
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.content: [creators]
+      streaming.own-media: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Some Partners and Affiliates stream in 2K (1440p), above 1080p; the next value up, 4K, is more than any page says it plays.'
+        page:
+          name: 2k Streaming on Twitch
+          url: https://help.twitch.tv/s/article/stream-quality?language=en_US
+        lastVerified: 2026-11-11
+    notes: Live streams, past broadcasts and clips, with ads, with or without an account. A channel subscription (US$5.99 a month at Tier 1 in the US) is paid to that streamer, and hides most ads on that channel only where the streamer allows it.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://legal.twitch.com/legal/terms-of-service/
+  - id: twitch.turbo
+    name: Turbo
+    link: https://www.twitch.tv/turbo
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.content: [creators]
+      streaming.own-media: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Some Partners and Affiliates stream in 2K (1440p), above 1080p; the next value up, 4K, is more than any page says it plays.'
+        page:
+          name: 2k Streaming on Twitch
+          url: https://help.twitch.tv/s/article/stream-quality?language=en_US
+        lastVerified: 2026-11-11
+    perks: [turbo-badge, chat-colors, turbo-emotes, vod-storage]
+    notes: No video or banner ads across Twitch, except channel sponsorships, streamer-enabled promotions and Twitch-promoted content. Monthly only, and dearer when bought in its mobile apps. New subscribers can get 7 days free where it's offered.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: AU
+        currency: AUD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+      - region: NZ
+        currency: NZD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://help.twitch.tv/s/article/turbo-pricing-by-country?language=en_US
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 in Edge from Canada: its Terms of Service and Terms of Sale
+# ("Last modified on 08/12/2026"), which include its Community Guidelines (read; no topic beyond what the terms say) and
+# the Trademark and DMCA Guidelines (not read: no topic); its Privacy Notice ("Last modified on 08/12/2026"), Privacy
+# Choices, Cookie Notice and State-Specific Privacy Disclosures (read through a US exit: the page sends Canada away); its
+# Security page, and its help centre's billing, account, data and parental-control articles. Twitch has a privacy notice
+# of its own, so Amazon's (data/policies/amazon-privacy.yaml) isn't shared: it applies only to what you give Amazon for
+# Prime Member Perks on Twitch ("Information you provide to Amazon is subject to the applicable Amazon Privacy Notice").
+# Calibrated against Rumble and Odysee (creator platforms) and Spotify (the same price-change wording). Its terms grant
+# Twitch an irrevocable, fully sublicensable licence over what you stream or post, with your name, likeness and voice;
+# legal.content-rights isn't a streaming topic, and Rumble's and Sportsnet+'s like clauses weren't made notable, so this
+# one isn't either. Not read: the sign-up form's second step (username, password, birthday and the agreement line show
+# only after an email is entered), Turbo's checkout (it needs an account), and its EU, EEA and UK withdrawal page (the
+# terms' link answered "404 - Page Not Found").
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://legal.twitch.com/legal/terms-of-service/
+    - name: 'Terms of Sale'
+      url: https://legal.twitch.com/legal/terms-of-sale/
+    - name: 'Privacy Notice'
+      url: https://legal.twitch.com/legal/privacy-notice/
+    - name: 'Privacy Choices'
+      url: https://legal.twitch.com/legal/privacy-choices/
+    - name: 'State-Specific Privacy Disclosures'
+      url: https://legal.twitch.com/legal/state-specific-privacy-disclosures/
+    - name: 'Cookie Notice'
+      url: https://legal.twitch.com/legal/cookie-policy/
+    - name: 'Turbo'
+      url: https://www.twitch.tv/turbo
+    - name: 'Turbo Overview and FAQ'
+      url: https://help.twitch.tv/s/article/twitch-turbo-guide?language=en_US
+    - name: 'Cancelling Subscriptions on Twitch'
+      url: https://help.twitch.tv/s/article/cancelling-subscriptions?language=en_US
+    - name: 'Refunds on Twitch'
+      url: https://help.twitch.tv/s/article/refunds-on-twitch?language=en_US
+    - name: 'Delete My Twitch Account'
+      url: https://help.twitch.tv/s/article/delete-twitch-account?language=en_US
+    - name: 'Requesting Your Data From Twitch'
+      url: https://help.twitch.tv/s/article/requesting-your-data-from-twitch?language=en_US
+    - name: 'Create an Account with Twitch'
+      url: https://help.twitch.tv/s/article/creating-an-account-with-twitch?language=en_US
+    - name: 'Sign up'
+      url: https://www.twitch.tv/signup
+    - name: 'Age Verification on Twitch'
+      url: https://help.twitch.tv/s/article/age-verification?language=en_US
+    - name: 'Parental Controls in the Family Center'
+      url: https://help.twitch.tv/s/article/family-center?language=en_US
+    - name: 'Username Transfer Policy'
+      url: https://help.twitch.tv/s/article/username-rename-and-recycling-policies?language=en_US
+    - name: 'Twitch Security'
+      url: https://www.twitch.tv/p/en/security/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use Twitch, with outside analytics services, to study trends and recommend things. The only way to stop that is to ask it, through its support form.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'understand the usage trends of our users'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'Twitch may use third-party Web analytics services in connection with the Twitch Services.'
+        - url: https://legal.twitch.com/legal/privacy-choices/
+          quote: "If you wish to object to processing of personal information, submit your request here under the 'Privacy Questions' category."
+      action:
+        name: 'Its privacy choices'
+        url: https://legal.twitch.com/legal/privacy-choices/
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares ad identifiers, and may share your email, with ad companies to aim ads at you on and off Twitch, and mixes your data with Amazon’s. Turning that off is setting by setting and device by device.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'We may share with these third parties (or they may directly collect) data such as cookie and mobile ad identifiers in order to engage in advertising activity'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'we may share information such as your email address or resettable device identifier for a specific advertising partner to “match” the information that they may have about you'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'Personal information collected by Twitch may be combined with personal information about Amazon customers'
+      action:
+        name: 'Its privacy choices'
+        url: https://legal.twitch.com/legal/privacy-choices/
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It uses what you do to pick the ads you see, on Twitch and elsewhere. Where it shows a cookie banner you can say no, but in its apps you turn ad tracking off on each device, and it ignores Do Not Track.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'Twitch may also work with third-party ad networks, advertisers, and advertising analytics providers to target (and measure the performance of) ads to you both on and off the Twitch Services.'
+        - url: https://legal.twitch.com/legal/privacy-choices/
+          quote: 'To opt out of Ad Tracking, go to the Privacy Settings on your mobile device under Tracking and/or Ads.'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'However, Twitch does not recognize or respond to browser-initiated DNT signals.'
+      action:
+        name: 'Its privacy choices'
+        url: https://legal.twitch.com/legal/privacy-choices/
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you post and say on Twitch, your chats included, may be used to build Amazon’s and Twitch’s generative AI. The only way out it names is asking it, through its support form, to stop using your data.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'the content you create and upload, your chats and communications'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'This includes using data to develop or deploy our generative AI models and services.'
+        - url: https://legal.twitch.com/legal/privacy-choices/
+          quote: "If you wish to object to processing of personal information, submit your request here under the 'Privacy Questions' category."
+      action:
+        name: 'Its privacy choices'
+        url: https://legal.twitch.com/legal/privacy-choices/
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it, with few set times: its cookies last up to 13 months, and deleting your account erases your content within 90 days.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'Twitch maintains data related to your usage of Twitch for as long as it is required to fulfill the relevant purposes described in this Privacy Notice'
+        - url: https://legal.twitch.com/legal/cookie-policy/
+          quote: 'Twitch-originated persistent cookies on Twitch Services will have a maximum lifespan of thirteen months from the time you last used the Twitch Services.'
+        - url: https://help.twitch.tv/s/article/delete-twitch-account?language=en_US
+          quote: 'Within 90 days of your request, Twitch will permanently erase all your content and close your account.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself, and it erases your content within 90 days, though it may keep some data for legal and security reasons.'
+      sources:
+        - url: https://help.twitch.tv/s/article/delete-twitch-account?language=en_US
+          quote: 'Within 90 days of your request, Twitch will permanently erase all your content and close your account.'
+        - url: https://help.twitch.tv/s/article/delete-twitch-account?language=en_US
+          quote: 'In some cases, Twitch may retain limited personal data for legal, security and other reasons permitted or required under applicable law.'
+      action:
+        name: 'Delete your Twitch account'
+        url: https://help.twitch.tv/s/article/delete-twitch-account?language=en_US
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your data yourself from its settings, as CSV files, within 14 days, though the report leaves out your Whispers (private messages).'
+      sources:
+        - url: https://help.twitch.tv/s/article/requesting-your-data-from-twitch?language=en_US
+          quote: 'Any logged-in user may request and download a summary of their user data for that account through their user settings page.'
+        - url: https://help.twitch.tv/s/article/requesting-your-data-from-twitch?language=en_US
+          quote: 'chat_messages.csv - a list of chat messages you have sent in various channels'
+        - url: https://help.twitch.tv/s/article/requesting-your-data-from-twitch?language=en_US
+          quote: 'Whispers history is not supported in this data report.'
+      action:
+        name: 'Request a copy of your data'
+        url: https://help.twitch.tv/s/article/requesting-your-data-from-twitch?language=en_US
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law or a court order requires it, and asks for proper legal process, but doesn’t promise to tell you.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'respond to a court order, judicial or other government request, subpoena, or warrant in the manner legally required'
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'All requests for information or documents related to potential, anticipated, or current legal proceedings, investigations, or disputes must be made using the appropriate level of legal process.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your data may be kept in the US or any country where Twitch, Amazon or their partners work, with protections it doesn’t describe.'
+      sources:
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'Information collected by Twitch may be stored and processed in your region, in the United States (for instance in our major data centers), or in any other country where Twitch or its affiliates, subsidiaries, partners, or service providers are located or maintain facilities.'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'we will take appropriate measures to ensure such companies protect your information adequately'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email or a phone number, a username you choose, a password and your birthday. Where a law requires it, you may have to prove your age with a face scan done on your device.'
+      sources:
+        - url: https://help.twitch.tv/s/article/creating-an-account-with-twitch?language=en_US
+          quote: "Create an account using your email address or phone number. You'll choose a username, set a password, and provide your date of birth."
+        - url: https://www.twitch.tv/signup
+          quote: 'Use phone number instead'
+        - url: https://help.twitch.tv/s/article/age-verification?language=en_US
+          quote: 'In some regions, you may need to verify your age using facial age estimation technology.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13 (16 in Australia), and teens need a parent’s supervision; it deletes a younger child’s data it finds. Parents can link a teen’s account and set limits, but it doesn’t say it keeps ads away from teens everywhere.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'The Twitch Services are not available to persons under the age of 13, the age of 16 in Australia'
+        - url: https://legal.twitch.com/legal/privacy-notice/
+          quote: 'If Twitch learns that personal information of persons under the Minimum Age has been collected on or through the Twitch Services, Twitch will take appropriate steps to delete this information.'
+        - url: https://help.twitch.tv/s/article/family-center?language=en_US
+          quote: 'Teens ages 13-17 can invite a parent or guardian to link accounts, giving both parties a shared space to manage oversight.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      regions: [US]
+      tier: good
+      reason: 'In the US it shows teens under 18 no ads picked from what they do elsewhere unless they agree, and teens need a parent who agrees to its terms.'
+      sources:
+        - url: https://legal.twitch.com/legal/state-specific-privacy-disclosures/
+          quote: 'We do not serve cross-context behavioral ads to teens under 18 years old unless they opt in.'
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'you may only use the Twitch Services under the supervision of a parent or legal guardian who agrees to be bound by these Terms of Service'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online at any time and keep Turbo to the end of the period you paid for, but you must do it at least 24 hours before it renews.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'You must cancel your Subscription Service at least 24 hours before its renewal date to avoid being charged for the next subscription period.'
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'Either party’s cancellation under the prior paragraph is effective at the end of the current payment period and your Subscription Services will continue until the end of the current payment period.'
+        - url: https://help.twitch.tv/s/article/cancelling-subscriptions?language=en_US
+          quote: 'If you are attempting to cancel a Turbo subscription, you will find this under Other Subscriptions on your Subscriptions Management page.'
+      action:
+        name: 'How to cancel a subscription'
+        url: https://help.twitch.tv/s/article/cancelling-subscriptions?language=en_US
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'It gives no refunds, except when it decides to or a law requires it, but you keep Turbo to the end of the period you paid for.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'our policy is not to allow cancellations after a purchase and not to offer refunds, including, without limitation, Subscription Services fees'
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'Either party’s cancellation under the prior paragraph is effective at the end of the current payment period and your Subscription Services will continue until the end of the current payment period.'
+        - url: https://help.twitch.tv/s/article/refunds-on-twitch?language=en_US
+          quote: "Decisions whether to refund a subscription purchase are solely within Twitch's discretion."
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you ahead of a new price, which starts only at your next billing period, so you can cancel first.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'For active recurring Subscription Services, we will provide reasonable prior notice of pricing changes.'
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'any price change will take effect at the start of the next subscription period following the date of the change'
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'If you do not wish to accept such a change, you should cancel your Subscription Service before the change takes effect.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'New Turbo subscribers can get 7 free days, but you give a payment method to start, and it renews as paid Turbo unless you cancel. It doesn’t promise to remind you first.'
+      sources:
+        - url: https://help.twitch.tv/s/article/twitch-turbo-guide?language=en_US
+          quote: 'Try Turbo for free for 7 days, with valid payment method at time of sign-up.'
+        - url: https://www.twitch.tv/turbo
+          quote: 'Auto-renews at $11.99/month. Cancel anytime.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'Turbo renews on its own every month and charges you until you cancel, with no reminder promised.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'you hereby grant Twitch permission to automatically charge the subscription fee to your chosen Payment Method (which may be your saved Payment Method) at the beginning of each applicable payment period until you cancel the Subscription Service'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: poor
+      reason: 'It may add a transaction fee to purchases, or other fees such as an early termination fee, which it shows you before you buy.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'Twitch may impose an additional transaction fee based on transactions associated with the Twitch Services, including a transaction fee applied to purchases from third parties.'
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'You agree that Twitch may charge any other applicable fees for the Twitch Services or Ancillary Products and Services, if disclosed to you in connection with your purchase, to your Payment Method, including any early termination fee.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts in San Francisco, under California law, with no private referee (an arbitrator) and no ban on class actions.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'shall be brought and resolved exclusively by the United States District Court for the Northern District of California or a California state court located in San Francisco County, California'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In the EU and the UK, disputes go to a civil court in the country where you live, and you keep your local consumer protections.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'any disputes or claims relating in any way to these Terms of Service or your use of the Twitch Services shall be resolved by a competent civil court in the country where you reside'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, and using Twitch afterwards means you accept them.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'Twitch may amend any of the terms of these Terms of Service by posting the amended terms and updating the “Last modified” date above.'
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'Your continued use of the Twitch Services after the effective date of the revised Terms of Service constitutes your acceptance of the terms.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In the EU and the UK, it tells account holders about changes to its terms ahead of time, without saying how far ahead, and you can leave before they apply.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'Twitch will provide reasonable prior notice of amendments to these Terms of Service.'
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'not canceling your agreement to use the Twitch Services under these Terms of Service before the effective date will be deemed your consent to the amended terms'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account or stop your access for any reason, without notice, Turbo included, and promises no refund.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'to block or prevent your future access to and use of the Twitch Services for any reason'
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'Our right to terminate our services, this agreement, and your license includes the ability to terminate or to suspend your access to any purchased products or services, including any subscriptions, Prime Gaming, or Turbo accounts.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: poor
+      reason: 'In the EU and the UK it still decides on its own, with no refund promised, but it tells you why without delay.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'Twitch will without delay notify you of the reason for its action.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove what Turbo includes without notice, and says it owes you nothing if something you bought becomes unavailable.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'Twitch may in its sole discretion periodically change, remove, or add any other aspect or feature of the Subscription Service without prior notice (or after providing reasonable notice where required by applicable law).'
+        - url: https://legal.twitch.com/legal/terms-of-sale/
+          quote: 'Twitch shall have no liability of any kind if an Ancillary Product or Service that has been ordered is unavailable.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and username policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://legal.twitch.com/legal/terms-of-service/
+        - https://help.twitch.tv/s/article/username-rename-and-recycling-policies?language=en_US
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: neutral
+      reason: 'Anyone who finds a security flaw can report it through its form, which it runs with HackerOne, but it names no independent audit.'
+      sources:
+        - url: https://www.twitch.tv/p/en/security/
+          quote: 'To report a vulnerability or security concern with Twitch, submit the form at the bottom of this page.'
+        - url: https://www.twitch.tv/p/en/security/
+          quote: 'Prior to integrating our Responsible Disclosure system with HackerOne, we received many helpful reports over the years.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You may not share your account, or give anyone access to it, unless Twitch says so in writing.'
+      sources:
+        - url: https://legal.twitch.com/legal/terms-of-service/
+          quote: 'Unless expressly permitted in writing by Twitch, you may not sell, rent, lease, transfer, share, or provide access to your account to anyone else'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and Turbo pages name no limits on devices, and viewers can’t download streams.'
+      pages:
+        - https://legal.twitch.com/legal/terms-of-service/
+        - https://help.twitch.tv/s/article/twitch-turbo-guide?language=en_US
+      lastVerified: 2026-11-11

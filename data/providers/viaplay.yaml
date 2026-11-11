@@ -127,6 +127,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, documentaries]
     inferred:
       streaming.profiles:
         reason: 'Its help centre sets what each profile in an account shows, for when several people in a family share it, without saying how many, so at least two.'
@@ -169,6 +170,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, documentaries]
     inferred:
       streaming.download-devices:
         reason: 'It lets you download most series and films on phones and tablets, without saying on how many, so at least one.'

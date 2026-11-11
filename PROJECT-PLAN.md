@@ -1197,7 +1197,7 @@ owner (M11.17, BLUEPRINT §4.12), its mobile plans with national prices join the
     with the terms.
 
 **Pulled forward on 2026-11-02 (the owner's feedback after M11.2), before M11.3–M11.8**
-- **From M11.5:** `paymentMethods` for every provider (BLUEPRINT §4.10, Ways to pay), required by validation and on
+- **From M11.5:** `paymentMethods` for every provider that sells something (BLUEPRINT §4.10, Ways to pay; a free-only service takes none, since 2026-11-11), required by validation and on
   the card; M11.5 keeps `currencies`, `renewalAnchor` and `sourceRepo`. An `owner` is required of every provider.
 - **From M11.9:** every topic that applies rated, or given a status, for all 13 (about 250 ratings, quoted and
   checked with `quote-check.cjs`), so `awaitingPolicyRegrade` is empty and a missing topic is an error. M11.9 still
@@ -2233,6 +2233,16 @@ in every D1 `json` column search parses.
     help centre and language menus. Parental controls are a parent's or plan manager's restriction on another
     member's account or profile, not a filter you set for yourself; Spotify Family's perk became the feature, with a
     perk redirect.
+  - **Streaming, batch 5** (2026-11-11): Canada's Sportsnet+ (`sportsnet-plus`: Standard and Premium, monthly and
+    yearly, and the Standard + Citytv+ bundle; Rogers' privacy policy shared with discovery+ Canada; its TV provider
+    add-on waits for telecom's TV packages) and CBC Gem (`cbc-gem`: Free and Premium; CBC/Radio-Canada's privacy notice
+    a shared document ICI TOU.TV uses too).
+  - **Streaming, batch 6** (2026-11-11): what a service streams (`streaming.content`) and whether it plays your own
+    media (`streaming.own-media`), with every streaming provider's value; Peacock (`peacock`, the US and its
+    territories, with NBCUniversal's privacy policy as a shared document Hayu uses too, its STARZ add-on and Apple TV
+    bundles), STARZ (`starz`, the US; Canada's STARZ stays Crave's add-on), Plex (`plex`), Twitch (`twitch`) and Kick
+    (`kick`), Hayu (`hayu`), Nebula (`nebula`), and the free Pluto TV (`pluto-tv`) and Tubi (`tubi`): a free-only
+    service needn't say how it's paid. Amazon Prime's free monthly Twitch channel subscription is a Prime perk.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 5 done)

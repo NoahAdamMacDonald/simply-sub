@@ -1,0 +1,234 @@
+url: https://support.plex.tv/articles/upgrading-subscriptions/
+method: fetch
+saved: 2026-11-11
+
+Upgrading Plex Subscriptions | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Upgrading Plex Subscriptions
+Upgrading Plex Subscriptions
+In many cases, users who currently have an active Remote Watch Pass or Plex Pass subscription can upgrade that subscription. That could be to change terms within the same subscription (e.g. go from monthly to yearly) or to upgrade across plans (switch from a Remote Watch Pass subscription to instead have a Plex Pass subscription).
+Upgrading Within the Same Subscription
+Users who already have an active Remote Watch Pass or Plex Pass subscription and wish to upgrade within the same subscription—for instance, upgrading from a monthly to yearly Plex Pass—can do so in many cases.
+Choose the tab below based on where your existing subscription is billed and managed.
+Plex Directly
+App Store
+Google Play
+Roku / Amazon
+Users who already have a Plex subscription billed and managed directly with Plex are welcome to plan terms (e.g. from monthly to yearly) at any time. For monthly-to-yearly upgrades, the new subscription term will start automatically once the currently month ends. For Plex Pass upgrades to a lifetime Plex Pass, they will automatically receive a prorated credit for any paid subscription time remaining in the current Plex Pass subscription. To upgrade:
+Sign in to your Plex account that has the existing Pass subscription.
+Go to the account Subscriptions & Payments page.
+Choose the Manage subscription button on the tile for the current subscription.
+On the Manage subscription page, select the desired upgrade plan and Continue.
+On the summary page, review the details of the subscription upgrade and then use the Upgrade button to complete the subscription upgrade.
+Once the user completes the upgrade flow, they will be charged as indicated.
+Related Page: Subscriptions & Payments
+Most users who already have an active monthly or yearly Plex Pass subscription billed and managed through the App Store/iTunes can choose to upgrade to a Plex Pass subscription that’s billed by Plex directly.
+Note: Going through this upgrade process will result in the loss of any remaining time in the existing App Store subscription. There is no credit or refund for that remaining time.
+To upgrade eligible accounts:
+Sign in to your Plex account that has the Plex Pass subscription that is billed by the App Store.
+Go to the account Subscriptions & Payments page.
+Choose the Manage subscription button on the subscription.
+Choose the new Plex Pass subscription plan (e.g. yearly or lifetime) and Continue.
+That will instruct you to go to your App Store account management and cancel future renewal of your subscription there (https://support.apple.com/billing).
+Once you’ve cancelled future renewal of the subscription, you can then confirm on our subscription upgrade page after refreshing it. (Keep in mind that continuing from that point will lose any remaining time in the existing app store subscription. There is no credit or refund for the remaining time.)
+The existing (App Store-based) subscription will then be removed from your Plex account and you’ll be taken to the page to start a new Plex Pass subscription through our site directly.
+You’ll need to start the new subscription on our site to complete the upgrade.
+Tip!: In rare cases, you may need to restart a player app or Plex Media Server to pick up the subscription status change.
+Related Page: Subscriptions & Payments
+Users who already have an active monthly or yearly Plex Pass subscription billed and managed through Google Play can choose to upgrade to a Plex Pass subscription that’s billed by Plex directly. To upgrade:
+Sign in to your Plex account that has the Plex Pass subscription that is billed by Google Play.
+Go to the account Subscriptions & Payments page.
+Choose the Manage subscription button on the subscription.
+Choose the new Plex Pass subscription plan (e.g. yearly or lifetime) and Continue.
+On the summary page, review the details of the subscription upgrade and then use the Upgrade button to complete the subscription upgrade.
+Once the user completes the upgrade flow, they will be charged as indicated and the new Plex Pass subscription will be active on the account.
+Tip!: In rare cases, you may need to restart a player app or Plex Media Server to pick up the subscription status change.
+Related Page: Subscriptions & Payments
+Due to limitations in Roku and Amazon Appstore subscription management APIs, it is not currently possible to directly upgrade Plex subscriptions. Instead, to upgrade you can:
+Cancel renewal of your current subscription through the Roku Store.
+Wait for the subscription to expire and for it to be removed from your Plex account (usually within 24 hours of the expiration on app store’s side).
+Start a new Plex subscription on the account, either through Roku/Amazon again or directly through our website.
+Related Page: Roku: Subscription Management
+Related Page: Amazon AppStore: Subscription Management
+Related Page: Plex Subscription Plans
+Upgrading from Remote Watch Pass to Plex Pass
+Sometimes, a user with a Remote Watch Pass subscription may decide that they want to upgrade to a full Plex Pass subscription. The process for doing so can vary, depending on where the Remote Watch Pass subscription is managed.
+Choose the tab below based on where your existing subscription is billed and managed.
+Plex Directly
+App Store
+Google Play
+Users who already have a Remote Watch Pass subscription billed and managed directly with Plex are welcome to upgrade to a Plex Pass subscription at any time. When doing so, they will automatically receive a prorated credit for any paid subscription time remaining in the current Remote Watch Pass subscription. To upgrade:
+Sign in to your Plex account that has the Remote Watch Pass subscription.
+Go to the account Subscriptions & Payments page.
+Choose the Upgrade to Plex Pass button on the tile for the Plex Pass subscription.
+Choose the new Plex Pass subscription plan (e.g. monthly, yearly, or lifetime) and Continue.
+On the summary page, review the details of the subscription upgrade and then use the Upgrade button to complete the subscription upgrade.
+Once the user completes the upgrade flow, they will be charged as indicated and the new Plex Pass subscription will be active on the account.
+Tip!: In rare cases, you may need to restart a player app or Plex Media Server to pick up the subscription status change.
+Related Page: Subscriptions & Payments
+For users who have an active, recurring Remote Watch Pass subscription billed through the App Store, you can upgrade to a Plex Pass subscription through the iOS/iPadOS mobile Plex app.
+Ensure that your iOS/iPadOS mobile Plex app is signed in to the Plex account that has the Remote Watch Pass subscription billed through the App Store.
+Go to Settings > Account in the app and choose the Subscriptions option.
+A Plans screen will appear, listing both the current subscription (Remote Watch Pass) and any available upgrade subscription (Plex Pass).
+Choosing the Upgrade to Plex Pass button will allow choosing from available upgrade options.
+After choosing a plan for upgrading and Continuing, the user will be prompted by the App Store to confirm the subscription upgrade.
+Related Page: Apple: Subscriptions and Billing
+Note: It is not currently possible to upgrade from a recurring subscription to a lifetime Plex Pass subscription through the App Store itself. Most eligible accounts can upgrade to a lifetime Plex Pass billed through our website, using the instructions in the “Upgrading Within the Same Subscription” section above.
+Users who already have an active monthly or yearly Remote Watch Pass subscription billed and managed through Google Play can choose to upgrade to a Plex Pass subscription that’s billed by Plex directly. To upgrade:
+Sign in to your Plex account that has the Remote Watch Pass subscription that is billed by Google Play.
+Go to the account Subscriptions & Payments page.
+Choose the Upgrade to Plex Pass button on the tile for the Plex Pass subscription.
+Choose the new Plex Pass subscription plan (e.g. yearly or lifetime) and Continue.
+On the summary page, review the details of the subscription upgrade and then use the Upgrade button to complete the subscription upgrade.
+Once the user completes the upgrade flow, they will be charged as indicated and the new Plex Pass subscription will be active on the account.
+Tip!: In rare cases, you may need to restart a player app or Plex Media Server to pick up the subscription status change.
+Related Page: Subscriptions & Payments
+Downgrading Subscriptions
+It is not currently possible to directly “downgrade” a subscription. For instance, it is not possible to switch from a yearly Plex Pass to a monthly Plex Pass, nor is it possible to downgrade from a Plex Pass to a Remote Watch Pass subscription.
+If you wish to do such a “downgrade”, you can:
+Cancel renewal of your the current Plex subscription
+Wait for the subscription to expire and for it to be removed from your Plex account (usually within 24-48 hours of the expiration)
+Start a new Plex subscription on the account
+Billing Questions or Issues
+In cases where you have a question or issue related to subscription upgrades, you can contact our Billing team.
+Related Page: Contact Billing Team
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: July 1, 2026
+Table of Contents
+Recently Viewed
+Troubleshooting Remote Access
+Sales Tax information
+Reporting Security Issues
+Restart Plex Media Server Setup from Scratch
+Downloads FAQ
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

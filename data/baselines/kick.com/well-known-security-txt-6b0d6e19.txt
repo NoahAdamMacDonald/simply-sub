@@ -1,0 +1,7 @@
+url: https://kick.com/.well-known/security.txt
+method: fetch
+saved: 2026-11-11
+
+Contact: https://bugcrowd.com/engagements/kick-vdp-pro
+Expires: 2026-06-30T11:59:00Z
+Preferred-Languages: en

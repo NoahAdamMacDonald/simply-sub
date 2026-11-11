@@ -73,6 +73,28 @@
     - { id: tv-channels, name: Live TV channels, aliases: [live tv, linear tv] }
     - { id: sports, name: Live sports, aliases: [sports streaming, live games] }
   aliases: [live broadcasts]
+# What a service streams and whether it plays your own files (the owner's choice of 2026-11-10), each from the
+# provider's own description of itself. Plex and Jellyfin stream your own media; not every title is theirs.
+- id: streaming.content
+  name: What it streams
+  category: streaming
+  type: set
+  values:
+    - { id: films, name: Films, aliases: [movies] }
+    - { id: series, name: Series, aliases: [tv shows] }
+    - { id: sports, name: Sports }
+    - { id: kids, name: Kids and family }
+    - { id: anime, name: Anime }
+    - { id: documentaries, name: Documentaries }
+    - { id: reality, name: Reality }
+    - { id: news, name: News }
+    - { id: creators, name: Creators' videos, aliases: [user videos, livestreams] }
+  aliases: [genres, content type]
+- id: streaming.own-media
+  name: Plays your own media
+  category: streaming
+  type: boolean
+  aliases: [media server, personal media, home media]
 
 # ── Music (M11.15, the owner's choice of 2026-11-09) ───────────────────────────
 # From Spotify's, Apple Music's, YouTube Music's, Deezer's and SoundCloud's plan pages, read 2026-11-09. Audio quality

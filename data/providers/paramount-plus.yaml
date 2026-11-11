@@ -101,6 +101,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 1
       account.parental-controls: true
+      streaming.content: [films, series, kids, news]
     prices:
       - {
           region: CA,
@@ -131,6 +132,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
       account.parental-controls: true
+      streaming.content: [films, series, kids, news]
     inferred:
       streaming.download-devices:
         reason: 'Its plans article says you can download and watch on the go, without saying on how many devices, so at least one.'
@@ -171,6 +173,7 @@ plans:
       streaming.concurrent-streams: 4
       streaming.download-devices: 1
       account.parental-controls: true
+      streaming.content: [films, series, kids, news]
     inferred:
       streaming.download-devices:
         reason: 'Its plans article says you can download and watch on the go, without saying on how many devices, so at least one.'
@@ -207,6 +210,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 3
       account.parental-controls: true
+      streaming.content: [films, series]
     notes: With ads. Select SHOWTIME series. Sold in the US.
     prices:
       - {
@@ -239,6 +243,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.download-devices: 1
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.download-devices:
         reason: 'Its US plan picker says you can download movies and shows, without saying on how many devices, so at least one.'

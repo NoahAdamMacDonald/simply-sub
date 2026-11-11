@@ -121,6 +121,7 @@ plans:
       ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
+      streaming.content: [sports]
     perks: [tsn-channels, multiview]
     prices:
       - region: CA
@@ -139,6 +140,7 @@ plans:
       ad-free: false
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
+      streaming.content: [sports, documentaries]
     perks:
       [tsn-channels, multiview, nfl-redzone, more-nfl-nba-games, pga-tour-live, laliga, sports-docs]
     prices:

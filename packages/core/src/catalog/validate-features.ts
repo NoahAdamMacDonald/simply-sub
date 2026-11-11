@@ -409,6 +409,16 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['siriusxm-canada.all-access-app-only', ['audio.quality']],
   // CBC Gem states only Premium's quality and streams (2026-11-11).
   ['cbc-gem.free', ['video.quality', 'streaming.concurrent-streams']],
+  // Peacock states Premium's and Premium Plus's quality, not Select's (2026-11-11).
+  ['peacock.select', ['video.quality']],
+  // Twitch and Kick don't say how many streams play at once (2026-11-11).
+  ['twitch.free', ['streaming.concurrent-streams']],
+  ['twitch.turbo', ['streaming.concurrent-streams']],
+  ['kick.free', ['streaming.concurrent-streams']],
+  // Nebula doesn't say how many streams play at once (2026-11-11).
+  ['nebula.standard', ['streaming.concurrent-streams']],
+  // Tubi states 4K only for some US live events, and no stream count (2026-11-11).
+  ['tubi.free', ['video.quality', 'streaming.concurrent-streams']],
 ]);
 
 /**

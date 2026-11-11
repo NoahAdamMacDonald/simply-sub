@@ -293,6 +293,7 @@ plans:
       music.lyrics: true
       music.live-radio: false
       account.parental-controls: true
+      streaming.content: [creators]
     inferred:
       audio.quality:
         reason: 'Only YouTube Music Premium members can choose a bitrate, so a listener without it keeps the "Normal" one: 128kbps.'
@@ -339,6 +340,7 @@ plans:
       music.live-radio: false
       account.pause: true
       account.parental-controls: true
+      streaming.content: [kids, creators]
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -483,6 +485,7 @@ plans:
       music.live-radio: false
       account.pause: true
       account.parental-controls: true
+      streaming.content: [kids, creators]
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -596,6 +599,7 @@ plans:
       music.live-radio: false
       account.pause: true
       account.parental-controls: true
+      streaming.content: [kids, creators]
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -639,6 +643,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       account.parental-controls: true
+      streaming.content: [kids, creators]
     inferred:
       streaming.download-devices:
         reason: 'Its article calls Premium Lite "a new, lower-priced YouTube Premium membership", and YouTube Premium members can download on up to 10 devices at a time.'

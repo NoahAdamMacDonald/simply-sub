@@ -8,7 +8,16 @@ import {
   type CatalogSourceFile,
   type PaymentMethods,
 } from '../../src';
-import { catalogWith, today } from './catalog-files';
+import { catalogWith, edited, today } from './catalog-files';
+
+const freePrice = {
+  region: 'GLOBAL',
+  currency: 'EUR',
+  amount: 0,
+  interval: 'month',
+  intervalCount: 1,
+  lastVerified: today,
+};
 import { issues } from './helpers';
 
 // How a provider can be paid (M11.5, pulled forward at the owner's request on 2026-11-02): every provider says, quoted
@@ -108,6 +117,17 @@ describe('validateCatalog, for payment methods', () => {
     expect(messages(catalogWith(mullvad, ['paymentMethods'], undefined))).toEqual([
       `${mullvad}: Say how it can be paid: its own page on payment methods, quoted (paymentMethods), cash and crypto included`,
     ]);
+  });
+
+  it('needs nothing from a service that takes no payment', () => {
+    const noPayment = catalogWith(mullvad, ['paymentMethods'], undefined);
+    const free = edited(
+      edited(noPayment, mullvad, ['freeUse'], undefined),
+      mullvad,
+      ['plans', 0, 'prices'],
+      [{ ...freePrice, autoRenew: false }],
+    );
+    expect(messages(free)).toEqual([]);
   });
 
   it('takes the page from its own sites, its policies’ or its owner’s', () => {

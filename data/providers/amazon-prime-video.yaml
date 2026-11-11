@@ -117,7 +117,9 @@ renewalAnchor:
 
 # Perks (M11.6): Amazon Prime's other benefits, in Canada's Prime page's words ("Same-Day, One-Day, and Two-Day
 # Delivery on millions of items", "Amazon Music Prime", "unlimited, full-resolution photo storage" in Amazon Photos,
-# "Prime Reading", "a curated selection of games on Amazon Luna" and "free DashPass"). They vary by country.
+# "Prime Reading", "a curated selection of games on Amazon Luna" and "free DashPass"). They vary by country. Twitch's
+# own Prime page adds "With your Prime membership, you get a free monthly Twitch channel sub" (twitch.tv/prime, read
+# 2026-11-11), one streamer's subscription a month, not a Twitch plan.
 perks:
   - id: fast-delivery
     name: Same-Day, One-Day and Two-Day Delivery
@@ -131,6 +133,8 @@ perks:
     name: Games on Amazon Luna
   - id: dashpass
     name: DoorDash's DashPass
+  - id: twitch-channel-sub
+    name: A free monthly Twitch channel subscription
 
 # General features, read 2026-11-11: app languages from primevideo.com's language versions (/-/fr_FR/ "Prime Video :
 # regardez des films", es_ES, de_DE, it_IT, pt_BR, ja_JP, ko_KR, zh_TW, hi_IN, ar_AE). Pause: "You can pause your
@@ -253,6 +257,7 @@ plans:
       includes-subscription: [amazon-prime-video.prime-video]
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, sports, documentaries]
     inferred:
       video.hdr:
         reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'
@@ -260,7 +265,7 @@ plans:
           name: What Is Prime Video Ultra?
           url: https://www.amazon.com/gp/help/customer/display.html?nodeId=TY4VVa4DCmK331KhLS
         lastVerified: 2026-11-04
-    perks: [fast-delivery, music-prime, photos, prime-reading, luna, dashpass]
+    perks: [fast-delivery, music-prime, photos, prime-reading, luna, dashpass, twitch-channel-sub]
     addOnIds:
       [
         amazon-prime-video.ad-free,
@@ -476,6 +481,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, documentaries]
     inferred:
       video.hdr:
         reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'

@@ -1,0 +1,313 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, and its home page in each of
+# the catalog's other countries through that country's exit. Pages, each quoted where it's used:
+# Pricing: none to read: Pluto TV is free with ads wherever it runs, "All free, no payment required. Ever." (its home
+# page, pluto.tv/ca/) and "Pluto TV is a completely free streaming service. ... No credit cards required. Pay never." (its
+# FAQ there), so its one plan is free, priced 0 in each catalog country whose own home page said so, read today through
+# that country's exit: the US's (pluto.tv/), the UK's (pluto.tv/gb_ie/, "All free, no payment required. Ever."),
+# Germany's (pluto.tv/gsa/, "Alles kostenlos, niemals eine Zahlung erforderlich."), France's (pluto.tv/fr/, "Tout ça
+# gratuitement, sans aucun paiement requis. Jamais."), Spain's (pluto.tv/es/, "Todo gratis, sin necesidad de pagar.
+# Nunca.") and Italy's (pluto.tv/it/, "Tutto gratis, senza pagare. Mai.").
+# Where it's sold: Paramount's legal centre picks Pluto TV's terms by "Region": "United States Latin America (except
+# Brazil) Brazil United Kingdom Spain France Italy Denmark Sweden Norway Germany, Switzerland and Austria Canada"
+# (legal.paramount.com/de/de/plutotv/terms-of-use), and Skydance's brand page says it "reaches viewers globally across
+# more than 35 markets". "Latin America" names no countries, so the list isn't complete and availableIn isn't set (as
+# HBO Max's). Through Australian, New Zealand, Irish and Dutch exits its site said "Pluto TV is not available in your
+# location." (pluto.tv/intl/, three Irish exits), so those countries have no price; its help centre blocks VPNs and
+# proxies, so an exit alone isn't an official list.
+# Region checklist, 2026-11-11: 1. its country paths (/ca/, /gb_ie/, /gsa/, /fr/, /es/, /it/, /br/), which follow where
+# the visitor is; 2. no country picker on pluto.tv; 3. not needed (nothing is priced); 4. no checkout; 5. its help
+# centre has no prices; 6. Edge from Canada and through each country's exit; 7. no bill offered.
+# Ways to pay: none: "No credit cards required. Pay never." (its FAQ), "Pluto TV is totally FREE! No payments, no
+# contracts, no nothing!" (How To Delete Your Account), so no paymentMethods and no renewal day.
+# Bundles: none (nothing is sold). Official resellers: none. Its help centre's "What is Paramount+?" sells Paramount's
+# paid service, its own provider.
+# Features, read 2026-11-11: what it streams, from its FAQ ("free Live TV Channels, popular movies, and shows", "reality
+# TV shows, enjoy documentaries", "live local news channels, live sports") and its guides' categories (Canada's
+# "Kids" and "Kids en Français", the US's "Anime" and "En Español"). Video quality: no page states it, but its system
+# requirements ask for "25 Mbps internet speed for 4K UHD and HDR", so 4K and HDR (inferred, as a speed article's "HD
+# content" is). Streams at once: no page of its own says (its help centre's search finds nothing), so CableTV.com's
+# review gives it (third-party): "Unlimited". No downloads, profiles, kids profiles or parental controls on any page of
+# its help centre (searched for "download", "profile", "parental": none), and no pause (nothing to pause).
+id: pluto-tv
+name: Pluto TV
+website: https://pluto.tv
+# Paramount's legal and privacy sites (legal.paramount.com, privacy.paramount.com), which its footer links.
+domains: [paramount.com]
+category: streaming
+spendCategory: streaming
+# Nothing to cancel: its help centre's account deletion article.
+cancelUrl: https://support.pluto.tv/s/article/PTV-How-To-Delete-Your-Account
+sources: { pricing: https://pluto.tv/ca/ }
+notes: Free with ads, with no paid plan.
+# Owner (M11.2), read 2026-11-11: Skydance's own brand page for Pluto TV; its terms are with Pluto Inc., whose
+# "Affiliates" are "VII and its parent company, Skydance Corporation" (its Canadian terms). Paramount Skydance
+# Corporation renamed itself Skydance Corporation when it bought Warner Bros. Discovery ("Skydance Corporation (f/k/a
+# Paramount Skydance Corporation)", 2026-10-14); paramount-plus.yaml and hbo-max.yaml still name it Paramount Skydance
+# Corporation. Where it is: the postal address in Paramount Skydance's privacy policy, as Paramount+'s. No page read
+# names a majority holder, so the stock has its listing only.
+owner:
+  name: 'Skydance Corporation (formerly Paramount Skydance Corporation)'
+  website: https://www.skydance.com
+  page:
+    name: 'Pluto TV (Skydance brands)'
+    url: https://www.skydance.com/about/brands/pluto-tv
+  quotes:
+    - 'As part of Paramount, Pluto TV has franchise access no other free streaming television service can match'
+  country:
+    code: US
+    page:
+      name: 'Paramount Skydance Privacy Policy'
+      url: https://privacy.paramount.com/en/policy
+    quotes:
+      - '1515 Broadway New York NY 10036 UNITED STATES OF AMERICA'
+    lastVerified: 2026-11-11
+  stock:
+    listings:
+      - { exchange: NYSE, symbol: SKYD }
+    page:
+      name: 'Skydance investor relations: separate trading of SKYD Class B shares'
+      url: https://ir.skydance.com/news-releases/news-release-details/skydance-provides-details-separate-trading-skyd-class-b-shares
+    quotes:
+      - 'Skydance Corporation (f/k/a Paramount Skydance Corporation) (NYSE: SKYD)'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): an email and password ("Enter the email address and click Next. Enter your password and click
+# Sign In.", How can I sign in to my Pluto TV account?), or a TV's activation code from a signed-in phone; no other
+# account or two-step sign-in on any page. Platforms: "iOS, tvOS (Apple TV)", "Android Mobile, Android TV, Chromebook,
+# Google TV", "Xbox One, Xbox Series S/X", "Roku", smart TVs, and "Web 2.0 (browsers ...), Desktop app w/ Web 2.0 (Windows
+# 11)"; PlayStation in the US only (On which devices can I watch Pluto TV?). App languages: its countries' sites, in
+# English (the US's, Canada's, the UK's), German (/gsa/), French (/fr/), Spanish (/es/), Italian (/it/) and Portuguese
+# (/br/, read through a Brazilian exit); Canada's is in English only. Support: "Chat with a live agent by visiting our
+# Contact Us page" (How To Delete Your Account).
+features:
+  platforms: [web, windows, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en, fr, es, de, it, pt]
+  support.channels: [chat]
+
+plans:
+  - id: pluto-tv.free
+    name: Free
+    link: https://pluto.tv/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.concurrent-streams: unlimited
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [films, series, sports, kids, documentaries, reality, news]
+      streaming.own-media: false
+      streaming.french-content: true
+    inferred:
+      video.quality:
+        reason: 'Its system requirements ask for 25 Mbps "for 4K UHD and HDR", so some of what it streams is in 4K; no page says which titles.'
+        page:
+          name: What are the minimum system requirements for Pluto TV?
+          url: https://support.pluto.tv/s/article/PTV-What-are-the-minimum-system-requirements-for-Pluto-TV
+        lastVerified: 2026-11-11
+      video.hdr:
+        reason: 'Its system requirements ask for 25 Mbps "for 4K UHD and HDR", so some of what it streams is in HDR; no page says which titles.'
+        page:
+          name: What are the minimum system requirements for Pluto TV?
+          url: https://support.pluto.tv/s/article/PTV-What-are-the-minimum-system-requirements-for-Pluto-TV
+        lastVerified: 2026-11-11
+    thirdParty:
+      streaming.concurrent-streams:
+        publisher: CableTV.com
+        url: https://www.cabletv.com/pluto-tv
+        quote: 'Since Pluto TV is free, it doesn’t have that petty hang-up about how many viewers can watch simultaneously. Unlimited streams for the win.'
+        lastVerified: 2026-11-11
+    notes: Live channels and shows and films on demand, with ads; no account needed. Canada has French kids' channels; anime and Spanish channels are the US's. What it streams differs by country.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/ca/
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/
+      - region: GB
+        currency: GBP
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/gb_ie/
+      - region: DE
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/gsa/
+      - region: FR
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/fr/
+      - region: ES
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/es/
+      - region: IT
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://pluto.tv/it/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 (M11.15): its Canadian Terms of Use (legal.paramount.com,
+# "Last Modified : August 1st, 2024", Pluto Inc.'s), which its help centre links as "Terms of Use (CANADA)"; its US
+# Terms of Use ("Effective Date : November 7th, 2024", for a US rating where they differ) and its UK terms ("Last
+# Modified : 14th November 2022", the same); its help centre's articles on signing up, deleting an account, its features
+# and VPNs; and its sign-up page (pluto.tv/ca/account/check-email/), which asks only for an email before the rest of
+# the form, so the help centre's list of fields is quoted. Its privacy policy is Paramount Skydance's (privacy.paramount.com,
+# "Last Modified: May 12, 2026", the same text as viacomcbsprivacy.com/en/policy), rated once as a shared document
+# (data/policies/paramount-privacy.yaml), with its Minors' Privacy Policy; its Children's Privacy Policy
+# (privacy.paramount.com/en/childrens-short, for kids) shows children ads "on our services that have ads" and doesn't sell
+# a child's information: no grade below the shared one. Its own help lets you delete your account in its apps, better
+# than the shared deletion grade, which stands. Its German, French, Italian, Spanish, Danish, Swedish and Brazilian terms
+# weren't rated (each its own language's). Calibrated against Paramount+ and CBC Gem. Not read: its terms' "Additional
+# Terms" for contests and its Shop, which it doesn't run on the pages read.
+policies:
+  shared: [paramount-privacy]
+  links:
+    - name: 'Terms of use (Canada)'
+      url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+    - name: 'Terms of use (US)'
+      url: https://legal.paramount.com/us/en/plutotv/terms-of-use
+    - name: 'Terms of use (UK)'
+      url: https://legal.paramount.com/uk/en/plutotv/terms-of-use
+    - name: 'How do I sign up for a Pluto TV account?'
+      url: https://support.pluto.tv/s/article/PTV-How-do-I-sign-up-for-a-Pluto-TV-account
+    - name: 'What streaming features are available on Pluto TV?'
+      url: https://support.pluto.tv/s/article/PTV-What-streaming-features-are-available-on-Pluto-TV
+    - name: 'Why am I asked to disable my VPN or proxy?'
+      url: https://support.pluto.tv/s/article/PTV-Why-am-I-seeing-a-message-to-disable-my-VPN-proxy-when-I-try-to-stream-a-show
+    - name: 'Pluto TV (Canada)'
+      url: https://pluto.tv/ca/
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You can watch without an account. An account asks for your email, a password, your name, birthday, gender and ZIP code.'
+      sources:
+        - url: https://pluto.tv/ca/
+          quote: 'You can create a free Pluto TV profile to sync your Favorite Live TV Channels and Watch List, and resume where you left off on other devices.'
+        - url: https://support.pluto.tv/s/article/PTV-How-do-I-sign-up-for-a-Pluto-TV-account
+          quote: 'Enter your password, name, date of birth, gender, and zip code, and click Sign Up.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Outside Quebec, a private referee (an arbitrator) settles any dispute instead of a court, one person at a time, with no class actions and no way to opt out.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: '(Not applicable to Quebec residents or where excluded by applicable law) These Terms of Use contain an arbitration clause and a class action waiver clause.'
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: 'To the fullest extent permissible by law, class arbitrations and class actions are not permitted under any circumstances.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: 'In the US you must take any dispute to private arbitration, one person at a time, with no class actions or jury. You can opt out of arbitration only if a mass arbitration leaves your claim unresolved.'
+      sources:
+        - url: https://legal.paramount.com/us/en/plutotv/terms-of-use
+          quote: 'Class arbitrations and class actions are not permitted, and a Claim may not be consolidated with any other person’s claim.'
+        - url: https://legal.paramount.com/us/en/plutotv/terms-of-use
+          quote: 'If your Claim is not resolved as part of the staged process identified above, either:'
+        - url: https://legal.paramount.com/us/en/plutotv/terms-of-use
+          quote: 'Option One: You and we may separately or by agreement, opt out of arbitration and elect to have your Claim heard in court consistent with these Terms.'
+      action:
+        name: 'Its arbitration terms (US)'
+        url: https://legal.paramount.com/us/en/plutotv/terms-of-use
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      regions: [GB]
+      tier: great
+      reason: 'In the UK you can take a dispute to the courts where you live, and its terms name no arbitration or class action ban.'
+      sources:
+        - url: https://legal.paramount.com/uk/en/plutotv/terms-of-use
+          quote: 'you may choose to bring a claim related to this Agreement in the EU or UK country in which you reside.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms by posting them, without telling you ahead, and the changes count at once; using Pluto TV afterwards means you accept them.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: 'We reserve the right to revise the terms of this Agreement, at any time and from time to time, for any reason in our sole discretion by posting an updated Terms of Use Agreement without advance notice to you, unless required by applicable law.'
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: 'Once we post them on the Services, these changes become effective immediately or as otherwise indicated and, if you use the Services after they become effective, it will signify your agreement to be bound by the changes.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can stop you using Pluto TV, or close your account, at any time and for any reason, without warning.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: 'We may terminate your use of and where applicable, registration on the Services, at any time and for any reason, with or without cause, without prior notice to you and without any liability or further obligation of any kind whatsoever to you or any other party.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'The shows, films and channels it carries can change, as any streaming catalogue’s do.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: 'Content Availability Subject to Change.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://legal.paramount.com/ca/en/plutotv/terms-of-use]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Anyone can watch without an account, but its terms say your sign-in is yours alone: no one else may use it.'
+      sources:
+        - url: https://legal.paramount.com/ca/en/plutotv/terms-of-use
+          quote: 'Your user name and password are personal to you and you may not allow any others to use your user name or password under any circumstances.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre name no limit on devices, and it has no downloads.'
+      pages:
+        - https://legal.paramount.com/ca/en/plutotv/terms-of-use
+        - https://support.pluto.tv/s/article/PTV-What-streaming-features-are-available-on-Pluto-TV
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: No VPNs
+      tier: poor
+      reason: 'It blocks every VPN and proxy, whatever the reason you use one, so you have to turn yours off to watch.'
+      sources:
+        - url: https://support.pluto.tv/s/article/PTV-Why-am-I-seeing-a-message-to-disable-my-VPN-proxy-when-I-try-to-stream-a-show
+          quote: "Since we can't determine the exact purpose or use for a VPN or proxy, we need to block any use of them."
+        - url: https://support.pluto.tv/s/article/PTV-Why-am-I-seeing-a-message-to-disable-my-VPN-proxy-when-I-try-to-stream-a-show
+          quote: 'Please disable these services on your device to stream videos.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Newsletters when you make an account
+      tier: neutral
+      reason: 'Its newsletters go to everyone with an account. You can unsubscribe from any of them.'
+      sources:
+        - url: https://support.pluto.tv/s/article/PTV-What-streaming-features-are-available-on-Pluto-TV
+          quote: 'Pluto TV viewers can receive newsletters, which are emails that go out to registered users.'
+        - url: https://support.pluto.tv/s/article/PTV-What-streaming-features-are-available-on-Pluto-TV
+          quote: 'There are 2 ways to unsubscribe:'
+      lastVerified: 2026-11-11

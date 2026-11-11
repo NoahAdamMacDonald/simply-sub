@@ -1,0 +1,108 @@
+url: https://help.twitch.tv/s/article/twitch-turbo-guide?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+PRIME GAMING & TURBO
+Turbo Overview and FAQ
+Turbo is a monthly subscription program offered on Twitch.tv. Turbo subscribers receive the following benefits:
+Ad-free Viewing Across Twitch - Watch your favorite streamers without video or banner ads, except as part of channel sponsorships. You may still see streamer-enabled promotions on channels and Twitch-promoted content on non-channel pages.
+Expanded Emoticon Set - Choose from 2 additional sets of emoticons. Glitch or monkeys; (you can always change it later).
+Custom Chat Username Colors - Stand out in chat with a custom username color.
+Chat Badge - Represent Turbo proudly with an exclusive chat badge.
+Extended Broadcast Storage - Save your past broadcasts on Twitch for 60 days instead of the standard 7 Days.
+On this page:
+Purchasing Turbo
+Turbo Benefits
+Turbo Pricing
+Frequently Asked Questions
+Purchasing Turbo
+Purchase Turbo at twitch.tv/turbo or via the Get Ad-Free button in the top-right on twitch.tv
+Turbo can also be purchased on mobile devices.
+Turbo is a monthly recurring subscription. You can manage your Turbo subscription by visiting your Subscription Management -> Turbo: twitch.tv/subscriptions?tab=turbo
+Benefits
+Ad-Free Experience across Twitch
+With Turbo, you can watch your favorite streams without video or banner ads, except as part of channel sponsorships. You may still see streamer-enabled promotions on channels and Twitch-promoted content on non-channel pages. Plus, Twitch Partners and Affiliates still earn ad revenue from Turbo subscribers who watch their channel.
+Exclusive Emoticons and Customizable Chat Colors
+Turbo subscribers can set their own custom chat color by toggling a set of 3 sliders. Members also can change basic emoticons from the standard robots to a cool set of purple glitch emotes. At time of purchase, you are presented with these options, and can change at any time by visiting your Turbo settings (users who have also linked their Amazon Prime account will see a combined tab called “Prime”).
+Exclusive Turbo Badge
+Get recognized! Turbo members get access to the Turbo supercharged Global chat badge.
+Expanded VOD Storage
+Turbo subscribers have their past broadcasts saved for 60 days, instead of the 14 days for Affiliates or the 7 days for non-monetized channels. For more information about VOD settings, visit our guide: help.twitch.tv/video-on-demand
+Pricing
+As of May 25th, 2023, the price of Turbo has been adjusted to make it locally appropriate for subscribers across many parts of the globe.
+You can review the price and currency for Turbo subscriptions in your region here: link.twitch.tv/TurboPricing
+Viewers with existing Turbo subscriptions as of May 25th, 2023 should have received an email from Twitch describing their options.
+Frequently Asked Questions
+Can I purchase Turbo on mobile?
+Yes. Turbo is available for purchase on mobile devices. Learn more about subscription prices on mobile here. If you experience an error completing this purchase on mobile, try a different payment method or contact Twitch Support here.
+Can I purchase Turbo more than 1 month in advance?
+At this time, Turbo may only be purchased as a monthly recurring subscription. If you'd like to buy Turbo months in advance, you may suggest it here: UserVoice.
+Can I gift Turbo to someone else?
+Yes. You can gift Turbo to another user on web (twitch.tv). You'll find the Gift Turbo option in the top navigation bar or on the Turbo page. Gifting Turbo is currently available on web only.
+How much does Turbo cost?
+Turbo is available at locally appropriate prices and currencies in many regions across the globe. If your region does not have local Turbo pricing available, the monthly cost of Turbo will be $11.99 USD/month if purchased on web. To see how Turbo is priced in your region, visit our guide: link.twitch.tv/TurboPricing. Try Turbo for free for 7 days, with valid payment method at time of sign-up.
+What happens to my Turbo subscription if I delete my Twitch account?
+If you temporarily disable your Twitch account, your recurring channel subscriptions (including Turbo) are set to cancel, and Twitch will not attempt to collect payment. Learn more in our guide here.
+As a Turbo subscriber, do I have the same benefits to a channel I would if I directly subscribed to them?
+Turbo and channel subscriptions are similar in that they both renew monthly. However, a Turbo subscription primarily allows you to not see most video or banner ads across Twitch. Channel subscriptions offer additional benefits such as access to emotes, badges, and more. A subscription to a particular channel may allow you to not see most video or banner ads on that channel, only if the streamer has enabled Ad-Free Viewing for subscribers.
+I want to support my favorite streamers - how does my Turbo subscription impact them?
+Turbo subscribers get to watch their favorite streamers without interruptions* from ads, and it's reasonable to ask what this means for streamers who rely on ad revenue. We built Turbo with this question in mind, and streamers continue to earn revenue from ads that Turbo subscribers miss. For streamers – revenue you receive from Turbo subscribers who watch your channel is reflected in your "Ads" revenue estimate in your payout analytics. Learn more.
+Can streamers see how much they earn from Turbo?
+Yes, streamers can see how much they earn from Turbo in the Analytics section of their dashboards. As a reminder, streamers earn revenue for missed Turbo ad impressions from viewers in their channels.
+How do streamers see Turbo revenue in their dashboard?
+Streamers can view Turbo revenue in their Earnings Analytics under "Ads & Twitch Turbo." Turbo revenue is pro-rated daily (1/30th per day) over the subscription period, providing an accurate day-by-day view of earnings consistent with other revenue types. Learn more.
+What does ad-free mean?
+With Turbo, you can watch your favorite streamers without video or banner ads, except as part of channel sponsorships. You may still see streamer-enabled promotions on channels and Twitch-promoted content on non-channel pages. If you experience ads while being an active Turbo subscriber outside of these circumstances, the issue can be commonly resolved by disabling third-party extensions or browser add-ons.
+Have you confirmed that your Turbo subscription has not recently expired? Check if you have access to other Turbo benefits like emote sets or chat badges, or visit twitch.tv/subscriptions -> Turbo Subscriptions
+Are you using the Twitch video player? Alternate players may not correctly log into your Twitch account to retrieve your Turbo status and ad-free benefits.
+Try another browser, as some may have ad blockers built in.
+If after disabling add-ons and completing the previous step you still require assistance, please contact Twitch Support here and let us know you attempted the steps in this article.
+Why are my Turbo settings called Prime Perks?
+If you are a Prime member, and also a Turbo subscriber, your Turbo settings and Prime Perks settings will be combined into one page called "Prime." For more questions on Prime, visit Prime Support.
+Why do I see ads despite my active Turbo subscription?
+If you see ads despite having an active Turbo subscription, there are a few things you can try:
+Refresh the page or update the app if you're using a mobile or desktop app. It may be a temporary issue with fetching your current subscription status.
+Confirm your Turbo subscription has not recently expired.
+Check if you are using an alternate Twitch player. Alternate players may not correctly log in to your Twitch account to retrieve your Turbo status.
+Try to disable any ad blocker you're using. We believe there may be a conflict with some ad blockers which is causing the issue.
+Try another browser, as some may have ad blockers built in.
+Why am I not able to get the free Turbo sub?
+If you already took part in a free Turbo trial, you will not be able to resubscribe to a free trial, unless otherwise indicated in the promotion. If you are unsure whether you had already taken part in a prior promo, you can check on this in your subscription history here: twitch.tv/subscriptions
+Why is my gift card not working to purchase Turbo?
+If you have a gift card balance in your Wallet, we automatically apply those funds to purchases you make on twitch.tv. If the cost of your purchase exceeds your gift card balance, we will charge the additional amount to your saved payment method. If you do not have a saved payment method then you will be prompted to add one before you can proceed with your purchase.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Turbo Overview and FAQ

@@ -124,6 +124,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 1
       account.parental-controls: true
+      streaming.content: [series, anime]
     notes: Its free shows, with ads.
     prices:
       - region: GLOBAL
@@ -143,6 +144,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
       account.parental-controls: true
+      streaming.content: [films, series, anime]
     inferred:
       streaming.download-devices:
         reason: 'Its VIP plans can download, on no stated number of devices, so at least one.'
@@ -362,6 +364,7 @@ plans:
       streaming.concurrent-streams: 4
       streaming.download-devices: 1
       account.parental-controls: true
+      streaming.content: [films, series, anime]
     inferred:
       streaming.download-devices:
         reason: 'Its VIP plans can download, on no stated number of devices, so at least one.'

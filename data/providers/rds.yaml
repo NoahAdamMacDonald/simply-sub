@@ -107,6 +107,7 @@ plans:
       streaming.live: [tv-channels, sports]
       streaming.concurrent-streams: 2
       streaming.french-content: true
+      streaming.content: [sports]
     perks: [live-sport-hours]
     prices:
       - region: CA

@@ -126,6 +126,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [series, documentaries, reality]
     notes: The plan discovery+ calls “discovery+”, with limited ads.
     prices:
       - {
@@ -149,6 +150,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [series, documentaries, reality]
     inferred:
       streaming.download-devices:
         reason: 'It allows up to 100 downloads at a time without saying on how many devices, so at least one.'

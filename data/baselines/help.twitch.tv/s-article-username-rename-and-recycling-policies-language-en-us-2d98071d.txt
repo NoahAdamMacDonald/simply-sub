@@ -1,0 +1,104 @@
+url: https://help.twitch.tv/s/article/username-rename-and-recycling-policies?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+GETTING STARTED
+TWITCH ACCOUNT
+Username Transfer Policy
+Twitch usernames are provided to the first individual to register an open and available username either during account creation or through a username change in their profile settings. To be clear, usernames are claimed on a first-come, first-served basis on Twitch.
+However, a username may be transferred or reclaimed by Twitch, without notice, if it:
+infringes another’s trademarks (please note that merely registering a username that is also a trademark is not necessarily infringement, and please visit Twitch’s Trademark Policy for more information); or
+is involved in an active impersonation (keep in mind that merely registering a username that is the same as your name is not an act of impersonation)
+We reserve the right to change this policy and to transfer, change, reclaim, or remove a username at any time.
+With any transferred username, Twitch will reassign the username from the original account holder to the new account holder. This means that any personal data and private content associated with the original account will not be accessible to the new account holder.
+On this page:
+Important things to note before you change your username
+How to Change Your Username
+Frequently Asked Questions
+Important Things to Note Before You Change Your Username
+Before changing usernames, all streamers should be aware of a few key facts and known issues that may impact your account:
+Your channel URL will not redirect to your new name. You will need to update the URL anywhere you are using it.
+If you are an Affiliate or Partner, your revenue will not be impacted. We want to stress that a username change will lead to absolutely no loss of revenue.
+If you are a Partner, your old username will not be made available again to anyone else.
+Usernames must be at least 4 characters long.
+Note for Affiliates and Partners: Changing your username will not change your ticket product name, which is used in the URL to directly link to your subscription page. The ticket product is a unique ID taken from your registration username. It cannot be changed, even after a name change has been performed.
+How to Change Your Username
+Navigate to your Settings page, scroll down to Profile Settings, and click the Edit icon on the far right side of the username field to edit your username. Enter your desired username in the username field. If your desired username is available a green checkmark will be present.
+You will be prompted to confirm your password in order to proceed with the username change. Enter your password, and click Verify.
+Upon entering and verifying your password, your username will be changed. Please note it may take several minutes to take effect across the site.
+Twitch users may change their usernames once every 60 days, but username changes will not be allowed during an active broadcast or when an active VOD upload is pending.
+Remember that all requests to obtain a username already registered to another user are subject to our Username Transfer Policy above.
+To change your username:
+You must have a verified email in order to change your username. If you do not have a verified email, you will be prompted to verify. Once you have a verified email:
+As stated above, Partner usernames will not be reassigned.
+Frequently Asked Questions
+If my username is transferred to another user by Twitch, will the new username owner have access to my information?
+No. The new owner of the username will never have access to any of your data, including credit card information, settings, or viewing history.
+Will people be able to change their username in order to circumvent channel or community timeouts/bans?
+No, they will not be able to circumvent bans or timeouts by changing their username.
+My old name still shows up in Google. Can you do anything about this?
+Unfortunately, Twitch cannot remove search results for your old username.
+Can I switch names with another account I own?
+No, account usernames cannot be swapped between two accounts you own. Once you change the username of your first account, the original username will not be available for rename on your other account, because usernames that are abandoned by non-Partnered accounts will take at least 180 days before they are available to reclaim again through self-service.
+Twitch Support does not revert accidental name changes.
+What does and does not change with my Twitch account when I change my username?
+Your channel URL will update immediately to your new username. Your username will change anywhere that your stream or video is shown on Twitch. In addition, your subscription name changes for new subscribers moving forward. However, long-time supporters with active subscriptions may continue to see your old username on invoices until they next cancel and resubscribe.
+What does not change:
+The prefix for your emotes does not update automatically. Partners may be able to request a change to their emote code.
+Links to your old profile may not redirect, so be sure to update the link wherever it may be.
+You may need to regenerate a stream key.
+Besides your username, no profile information, settings, or history changes when you update your username. This includes any content on your channel page, followed channels/followers, notification, privacy, connection settings, and more. Changing your username does not remove or change any prior enforcements for violating our Terms of Service and/or Community Guidelines.
+No rewards, benefits, or unlocks are removed from your account when you update your username. This includes channel points, emotes, Drops, tenure, subscriptions/subscribers, and more.
+Can I approach the account owner of a username that I want and attempt to swap usernames?
+No. Swapping usernames with another account owner is not supported, and may result in both account owners losing their account usernames.
+Does changing my username affect my display name? (Ex: I no longer want a CJK display name)
+Display names do not change when you change your username. Learn more about display names here
+I logged back into my Twitch account and don’t recognize the username. What can I do?
+Contact Twitch Support right away.
+How do name changes affect third-party apps (ex: loyalty bots)?
+Some third-party apps may not be able to recognize your account anymore once you have changed your name. You should contact the developer of the application to make sure they support name changes. Many developers will have some public information regarding this.
+If I change my username, will I lose my followers, view count, followed channels, or subscriptions?
+No.
+I no longer want my new name. Can I change back?
+For non-Partnered accounts, if you changed your username and would like to change it back, unfortunately we cannot facilitate this. You can change your name again in 60 days, but your original name will not become available again for at least 180 days.
+For Partnered accounts, as stated above, Twitch Support can assist you once with changing your username. This one-time benefit can be used to change your username back to the one you previously had.
+Can I have a name associated with a channel that has been banned?
+In general, usernames associated with a channel that was banned by Twitch are excluded and permanently inaccessible, except in limited circumstances decided by Twitch. Twitch does not release information about TOS banned accounts to users seeking usernames, or provide details on whether an account was banned
+Where can I find information on safety-related username policies and enforcement?
+Please visit the Safety Center for more information on our safety-related username policies regarding account usernames and display names.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Username Transfer Policy

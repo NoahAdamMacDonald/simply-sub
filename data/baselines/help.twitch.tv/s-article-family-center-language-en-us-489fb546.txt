@@ -1,0 +1,89 @@
+url: https://help.twitch.tv/s/article/family-center?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+GETTING STARTED
+Parental Controls in the Family Center
+Parental Controls gives parents visibility into their teen's activity and the ability to manage key settings. Teens ages 13-17 can invite a parent or guardian to link accounts, giving both parties a shared space to manage oversight. Once the accounts are linked, parents can manage what their teen accesses, how long they spend on Twitch, and stay informed about their activity — all from the Family Center.
+On this page:
+How to Link Parent & Teen Accounts
+How to Set Parental Controls
+Frequently Asked Questions
+How to Link Parent & Teen Accounts
+Teens can initiate linking to a parent or guardian's account through the Family Center page in account settings or during sign up.
+Both teen and parent accounts can manually unlink at any time.
+As a teen, to link accounts with a parent, begin by logging in to your Twitch account and navigating to settings.
+Select Family Center
+Locate the shareable link
+Copy the link and send to the parent you wish to link accounts with
+Once linked, both accounts will appear in the Family Center.
+How to Set Parental Controls
+Once linked, access the Parental Controls dashboard from the Family Center to toggle settings on or off. Customize anytime to stay flexible around your teen's life.
+Settings to monitor and customize on linked teen accounts include:
+Streaming & Video Uploads
+Teens can be prevented from going live and streaming their own content
+Disable the ability to create Stories or upload VODs
+Disable DMs
+Teens can be blocked from sending or receiving Whispers (direct messages).
+Protect from Sensitive Content
+Teens have a restricted ability to discover or be recommended content with certain Content Classification Labels (CCLs) that may contain sensitive content, with the option for parents to modify at their discretion.
+Enact Time Limits
+Parents can set daily time limits for Twitch across all their teen's devices.
+Frequently Asked Questions
+Do parents or guardians need a Twitch account to access Parental Controls?
+Yes. Parents or guardians must first create their own Twitch account in order to link with their teen's account and access Parental Controls.
+Can my teen see what controls I've set?
+While teens cannot see the Parental Controls dashboard, they may discover a restriction when they try to use a feature you've disabled or when they reach their time limit.
+How do I unlink my account as a parent/guardian or teen?
+Both parents/guardians and teens can unlink, or re-link, their respective accounts at any time through the Family Center page. Parents and guardians are notified via email if their teen unlinks from their account.
+As a parent, how many accounts can I link my account to?
+Parents can link up to 10 teen accounts to their account.
+What happens when a teen with Parental Controls enabled turns 18?
+When a Twitch user turns 18-years-old, any accounts they are linked to with Parental Controls will automatically unlink.
+How many parent or guardian accounts can a teen link with?
+Teen accounts can only be linked to one parent or guardian account.
+How often can the Parental Controls settings be changed?
+Parents or guardians can adjust the Parental Controls settings as often as they'd like — there are no limits in place.
+Are these settings able to be controlled on mobile?
+Yes, the Family Center dashboard and Parental Controls are available on mobile.
+What time limits can I set for my teen's account?
+Parents and guardians can set as big, or as small, of a daily time limit for their teen as they like — from one minute to 24 hours per day.
+Are parental controls mandatory for Twitch users ages 13-17?
+Not at this time. As regulatory requirements evolve around the world, we look forward to continuing to be good partners with various regulatory agencies and exploring how we can potentially utilize Parental Controls to achieve their respective goals and objectives.
+If you're experiencing issues with Parental Controls or linking accounts, contact Twitch Support here.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Parental Controls in the Family Center

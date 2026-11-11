@@ -1,0 +1,261 @@
+url: https://support.plex.tv/articles/reporting-security-issues/
+method: fetch
+saved: 2026-11-11
+
+Reporting Security Issues | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Reporting Security Issues
+Reporting Security Issues
+Plex Bug Bounty Policy
+At Plex, protecting our users’ media, accounts, and privacy is core to everything we build. We invite security researchers of all backgrounds to help us find and fix vulnerabilities before they can be exploited. If you’ve found a security issue in a Plex product or service, we want to hear from you. We’re committed to working with you fairly, transparently, and in good faith.
+This page explains what’s in scope, what we’re looking for, what won’t qualify, how to test responsibly, and how to submit a report.
+Program Scope
+Please review the following carefully before you begin testing or submit a report. Reports that fall outside the defined scope, or that match a listed out-of-scope category, generally will not be eligible for a reward.
+In-Scope Assets
+Plex web applications: app.plex.tv, watch.plex.tv, and other first-party web properties operated by Plex.
+Plex-owned domains: publicly accessible services under *.plex.tv, *.plexapp.com, or any of their subdomains that are operated by Plex.
+Plex Media Server (PMS): the Plex Media Server application and the official plexinc/pms-docker container, in their current released form.
+Plex client applications: official Plex mobile, TV, desktop, and console apps that are actively maintained.
+Plex APIs: first-party APIs served from Plex-operated infrastructure.
+Out-of-Scope Assets
+Any service hosted or operated by a third party, unless you can demonstrate a concrete impact on Plex-operated assets or user data.
+A user’s own self-hosted Plex Media Server instance, or third-party apps built on top of Plex (e.g., Tautulli, “*arr” tools). These are not Plex-operated infrastructure.
+Legacy or unmaintained applications that are no longer actively developed (for example, older TV or Alexa integrations).
+Community and forum platforms hosted on third-party services (e.g., forums.plex.tv, which runs on Discourse). Please report those through the hosting provider’s own security program.
+Vulnerabilities We’re Interested In
+We especially want to hear about issues with real, demonstrable security impact, including:
+Remote Code Execution (RCE) in Plex client applications, Plex Media Server, or cloud infrastructure
+Local privilege escalation in Plex desktop clients, installers, or background/updater services (e.g., code execution as SYSTEM or root)
+Privilege escalation and authentication/authorization bypass
+Entitlement or purchase-integrity bypass, unlocking Plex Pass or premium features without payment, or defeating in-app-purchase / StoreKit receipt validation
+Cross-account data access / IDOR affecting other users’ private data
+Plex Media Server server-side flaws, including authorization or library-sharing bypass and cross-library data access, path traversal / arbitrary file read, and disclosure of owner tokens or absolute file paths to shared or managed (Plex Home) users
+Cross-Site Scripting (XSS) with genuine cross-user impact (stored or reflected)
+Cross-Site Request Forgery (CSRF) with a meaningful state-changing effect
+SQL injection and other server-side injection
+Server-Side Request Forgery (SSRF) that reaches internal services, cloud metadata, or private networks
+Security misconfigurations that expose sensitive data or credentials
+Exposure of secrets, credentials, or sensitive personal data caused by a Plex-side flaw
+Exploitable issues on our marketing and WordPress properties. For example, stored or reflected XSS, web cache poisoning, injection, access-control flaws, or exposure of sensitive data
+Email/DNS/TLS misconfigurations or regressions. e.g.: a record that is missing, broken, expired, or downgraded from where it should be (SPF, DKIM, DMARC, DNSSEC, CAA, MTA-STS, TLS chain, etc.) and that creates real, demonstrable risk.
+When you report, please tell us the concrete impact and a realistic attack scenario.
+Vulnerabilities That Are Out-of-Scope
+The categories below are the ones we receive most often that do not qualify. In almost every case, they reflect intended behavior, a known and accepted trade-off, an issue with no crossing of a security/trust boundary, or scanner output with no demonstrated impact. Reports that fall squarely into these categories will typically be closed as non-qualifying without a reward. If you believe you have a genuine exception with real impact, tell us specifically how it crosses a trust boundary and affects another user.
+Session, token & authentication lifecycle
+Sessions or tokens not automatically invalidated after logout, password change, email change, disabling 2FA, or revoking a linked provider. This is intended. Users who want to terminate other sessions can use the “sign out connected devices” option. Revoking all authentications on every account change is deliberately not our default.
+Tokens (e.g., X-Plex-Token) appearing in URLs / GET requests over HTTPS. Tokens are obfuscated in logs and are not interceptable over TLS. We’ll only consider this with a demonstrated real interception path.
+Access/auth tokens stored in browser localStorage absent a separately-demonstrated vulnerability that reads them.
+Long-lived or long-idle sessions remaining valid. Session length is an intentional usability trade-off.
+2FA / TOTP / recovery codes
+TOTP codes being valid on multiple devices, or reusable within their time window. This is how time-based OTP works by design.
+2FA recovery/backup codes remaining valid across devices, after a password change, or “indefinitely.” Backup codes are meant to keep working.
+Email verification not being required to enable 2FA, or “bypassing” email verification. Email verification is a recovery fallback, not a security control, and requiring it here would be false security (control of the inbox already yields an emailed code).
+No re-authentication prompt before sensitive actions (linking a provider, changing a payment method, etc.) when the user is already authenticated.
+Rate limiting & anti-automation
+Rate-limit / brute-force / OTP-resend “bypasses”, including via IP rotation, VPN/proxy, X-Forwarded-For spoofing, browser-fingerprint changes, multi-account rotation, concurrent requests, or logout/login token cycling. We do not reward rate-limiting evasion.
+Missing rate limiting as a standalone finding, including “email flooding” via forms, unless you can show concrete, high-impact abuse.
+HTTP headers, redirects & CORS
+Missing HTTP security headers (HSTS, CSP, CORP, COOP, X-Permitted-Cross-Domain-Policies, X-Frame-Options, etc.) without a proven, exploitable impact.
+Clickjacking on pages with no sensitive, state-changing action.
+Open redirects and CORS “misconfigurations” on non-browser-facing (provider/admin/API) endpoints, or where no token, credential, or sensitive data is exposed.
+Information disclosure with no sensitive data
+env.js / JavaScript environment disclosure, exposed non-secret config files (e.g., .scrutinizer.yml), server-status/server-info pages, banners, version strings, and similar passive disclosures that reveal nothing sensitive.
+Files that are intentionally public — ads.txt, security.txt, robots.txt, .well-known/ contents, .env.example templates, and similar. These are meant to be reachable and disclose nothing sensitive.
+Secrets or credentials found in repositories, URLs, or archives that Plex does not own, or that Plex did not cause to be exposed/indexed.
+Credentials from third-party breach or “combo” dumps (dark web, LeakRadar, VirusTotal, etc.). These are pre-compromised users, not necessarily a Plex-side vulnerability.
+Infrastructure & report quality
+Denial of Service (DoS/DDoS) and resource-exhaustion reports, and any testing that degrades availability.
+Findings requiring a pre-existing compromise or trust-boundary crossing, e.g., “if you have root in the container you can do X,” physical access to an unlocked device, or a self-hosted PMS the reporter already controls.
+PIN-protection “bypass.” The profile/parental PIN is a convenience control, not a security boundary.
+Reports against CVEs already patched, or against infrastructure/CVEs that are not ours (e.g., managed database instances not exposed by Plex).
+Self-XSS, content spoofing / text injection with no cross-user impact, and issues requiring the victim to already possess the attacker’s (or their own) credentials.
+Output of automated scanners with no demonstrated impact, purely theoretical vulnerabilities with no proof of exploitation
+Issues affecting only outdated or end-of-life browsers or operating systems.
+Rewards
+Rewards are discretionary and are based on the severity, impact, and quality of each report. Depending on the finding, a reward may take the form of monetary compensation, a lifetime Plex Pass, or other recognition. We use the following severity ladder to set expectations about how we triage and how significant an issue is. It is not a fixed price list.
+Severity
+What it looks like
+Examples
+Critical
+Full system compromise or large-scale breach
+Remote code execution, database access, admin-panel access, mass exfiltration of user data
+High
+Access to sensitive data or elevated privileges without full compromise
+Authentication bypass, privilege escalation, significant cross-account data exposure, SSRF reaching internal services
+Medium
+Real impact requiring some user interaction or unusual conditions
+Stored/reflected XSS with cross-user impact, meaningful CSRF, notable API authorization flaws
+Low
+Minor issues or limited-impact information disclosure
+Low-impact info disclosure, misconfigurations with limited security consequence
+A few things to know about eligibility:
+Only previously unknown vulnerabilities qualify. Duplicates of an already-reported or already-known issue are not eligible.
+A vulnerability must be reproducible by Plex engineers to be eligible for a reward.
+Reports without clear security implications, or that rely on unrealistic attack scenarios, will not be rewarded.
+Monetary rewards are paid via PayPal. Researchers located in U.S.-sanctioned countries or regions are not eligible to receive monetary rewards. A current list can be found on this US Treasury Department page.
+Submission Guidelines
+Write to our Security team at [email protected]. If you’d like to encrypt your email, please use our public PGP key.
+Please send one report per vulnerability, and include:
+A clear title and a description of the vulnerability and its impact.
+Step-by-step reproduction instructions that our engineers can follow.
+The affected product, platform, URL/endpoint, and app version where applicable.
+A proof of concept with screenshots, a short video, request/response captures, or code snippets.
+The realistic attack scenario: who can exploit it, what they need, and what they gain.
+When you test:
+Only access, modify, or exfiltrate your own data. Use test accounts you control.
+If you accidentally access another user’s data, stop immediately and report it. Do not access, store, or share it further.
+Respect user privacy and the stability of our systems.
+Do not use techniques that degrade service for other users.
+Keep vulnerabilities confidential until we’ve had a chance to investigate and remediate; please coordinate any public disclosure with us.
+Rate Limits & Testing Constraints
+To keep testing safe for our users and systems, please:
+Limit automated traffic to no more than 10 requests per minute.
+Avoid testing that generates excessive emails or notifications (no more than 5 per hour).
+Limit login/authentication attempts to no more than 10 per hour.
+Avoid any testing that could affect system availability or impact other users.
+Our Commitment
+We aim to acknowledge new reports promptly and to begin triage as quickly as we can.
+We’ll keep you updated on the status of your report as we investigate and work toward a resolution.
+We’ll let you know our disposition, including when we determine an issue is intended behavior, a known/accepted trade-off, or out of scope, and why.
+Legal Safe Harbor
+We support responsible security research and will not pursue legal action against researchers who act in good faith and comply with this policy. As long as your research is conducted within the scope and constraints described here, testing only your own accounts and data, avoiding privacy violations and service disruption, and giving us a reasonable opportunity to remediate before any disclosure, we consider your activity authorized.
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: October 2, 2026
+Table of Contents
+Recently Viewed
+Restart Plex Media Server Setup from Scratch
+Downloads FAQ
+Plex HTPC Input Maps
+Purchasing a Plex Pass Subscription Through Amazon
+Purchasing a Plex Pass Subscription Through Google Play
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

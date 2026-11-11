@@ -1,0 +1,1134 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, each other country's prices
+# through that country's exit, and its help centre and legal pages with a plain fetch. Pages, each quoted where it's used:
+# Pricing: its plans page (plex.tv/plans), whose two cards price by where the visitor is, each in its own currency's code:
+# Canada's "$3.99 / CAD / Month" (Remote Watch Pass, "$39.99 / CAD / Year" yearly) and "$8.99 / CAD / Month" (Plex Pass,
+# "$89.99 / CAD / Year", "$349.99 / CAD / 5 Years", "Billed every 5 years. Cancel anytime."); through a US exit $2.99 and
+# $29.99, $6.99, $69.99 and $249.99 USD; a UK exit £2.99 and £22.99, £4.99, £49.99 and £189.99 GBP; Irish, German, French,
+# Dutch, Spanish and Italian exits all €2,99 and €27,99, €5,99, €59,99 and €229,99 EUR; an Australian exit $4.00 and
+# $45.00, $11.00, $110.00 and $390.00 AUD; three New Zealand exits (Cloudflare's trace placed one in "NZ") US dollars, the
+# US's prices. No page says its prices include tax ("The advertised prices for Plex Pass subscriptions as well as other
+# transactions do not include sales tax", its US sales tax article). Every price is the regular one; the Remote Watch
+# Pass's 14 free days are a trial. Not listed: Plex Pass for life, "Billed once" ($1,079.99 CAD, $749.99 USD, £579.99,
+# €689,99, $1,190.00 AUD), a purchase beside the subscriptions (the owner's rule: noted, not listed); movie rentals and
+# purchases (one film at a time, "available only to users located in the United States and Canada", purchases the US's
+# only); and the old mobile apps' one-time unlock, which a Remote Watch Pass replaced.
+# Region checklist, 2026-11-11: 1. its pages' hreflang (/en-ca/, /en-gb/, /en-au/, /de/, /fr/…) translate the page but
+# its prices follow the visitor; 2. no currency picker; 3. its page fills the prices by script (no prices in its HTML);
+# 4. checkout not opened (it needs an account); 5. its US sales tax article; 6. Edge read every country; 7. no bill offered.
+# Bundles: none found (its plans page, help centre and a search). Official resellers: none; it sells no gift cards ("We
+# do not currently offer the ability to “gift” a Remote Watch Pass subscription", its plans FAQ). Apple's App Store,
+# Google Play, Amazon's Appstore and Roku bill subscriptions bought in their apps: noted as ways to pay, not resellers.
+# Features, read 2026-11-11: its plans page's comparison table (ticks are images: read from its screenshots) and its
+# help centre. Plex plays your own media from a Plex Media Server you run ("Plex Media Server is a software application
+# that allows you to organize and stream your media collection from a central location", its plans FAQ), and streams its
+# own free, ad-supported films, shows and "600+ channels" of live TV to everyone. Free plays your own videos on your home
+# network only; "To stream remotely from any server you have access to, you’ll need a Remote Watch Pass or a Plex Pass"
+# (its plans FAQ). A Remote Watch Pass "does not give access to any of the other features or benefits of a regular Plex
+# Pass subscription". No plan removes the ads on Plex's own films and live TV: the table's "Ad-free streaming for Plex
+# on-demand and Plex Live TV" is "Not Available" for all three, and "having a Plex Pass will not remove ads or reduce
+# their frequency" (its free films FAQ), while "Your personal media collection ... will continue to stream to all of your
+# devices ad-free" (its live TV FAQ): ad-free is false on every plan, with a note.
+# Video quality: "Yes, “4K” content is supported, depending on what model Roku player you have" (Is 4K content supported
+# on the Roku?): your own media plays at its own quality, up to 4K; no page states the quality of Plex's free films.
+# Streams: no page gives a number: your server's processor and upload speed limit them, and its owner can set "the
+# maximum number of streams that are allowed simultaneously for any particular user, when they’re streaming remotely"
+# (Server Settings – Bandwidth and Transcoding Limits), so unlimited (inferred).
+# Downloads: Plex Pass only ("The Downloads feature requires an active Plex Pass subscription"), of your own media, not
+# of Plex's free films; no number of devices, so 1 (inferred).
+# Profiles: "Free Plex accounts may have up to 14 managed users total in your Home (15 total users including the Home
+# Admin account)" (What is Plex Home?), so 15 on every plan. Kids profiles and parental controls on every plan: "You can
+# create a managed user for your child and apply one of the preset profiles to control what type of content the child’s
+# account can access. Plex Pass subscribers can further customize the restrictions" (its free films FAQ, 2025), and the
+# Parental Controls article's "Younger Kid" profile. The plans table ticks "Enable parental controls to keep things
+# kid-friendly" for Plex Pass alone: those are the custom restrictions; the help centre's preset profiles decide.
+# What it streams: "free movies, documentaries, and TV content" (Movies & Shows Overview), "a wide assortment of
+# channels—from kids shows, anime, sports, movies, and more" (its live TV FAQ) and "action, sports, kids stuff, cooking,
+# news, and more streaming 24/7" (its free live TV page). Its live TV is channels, not live games: tv-channels only. Plex
+# Pass's recording of over-the-air TV from your own antenna and tuner is a perk.
+# No HDR: only "HDR to SDR tone mapping" for Plex Pass, which converts HDR for screens that can't show it; no page says it
+# plays HDR. No pause: its subscription management article offers only cancelling renewal.
+# Free use: the Free plan ("The basic functionality of Plex is completely free, which includes local playback of personal
+# content from your Plex Media Server, as well as our ad-supported on demand and Live TV (from Plex)", Plex: Free vs Paid).
+
+id: plex
+name: Plex
+website: https://www.plex.tv
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: USD,
+    GLOBAL: USD,
+  }
+# Its help centre's article on managing, upgrading and cancelling a subscription billed by Plex (the account's
+# Subscriptions page is behind a sign-in).
+cancelUrl: https://support.plex.tv/articles/201580107-plex-subscription-management/
+sources: { pricing: https://www.plex.tv/plans/ }
+# Owner (M11.2), read 2026-11-11: its terms name Plex GmbH and its affiliates, including Plex, Inc.; its about page names
+# no company. Private: no shares listed.
+owner:
+  name: 'Plex (Plex GmbH and its affiliates, including Plex, Inc.)'
+  page:
+    name: Terms of service
+    url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+  quotes:
+    - 'Plex GmbH and its affiliates, including Plex, Inc., a Delaware company, (together, “Plex”) is willing to license and permit use of the Plex Solution subject at all times to agreement with this TOS.'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+    quotes:
+      - 'Additionally, Plex’s headquarters are located in the United States.'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: a card or PayPal for what Plex bills (its subscription management article), and
+# the app stores for what's bought in its apps (its App Store, Google Play and Amazon articles; Roku's channel bills a
+# monthly Plex Pass too, "billed through Roku", in words the check doesn't take for an app store). No page names the card
+# networks, so no acceptedNetworks; Braintree processes its payments.
+paymentMethods:
+  - methods: [card, paypal]
+    page: Plex Subscription Management
+    url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+    quotes:
+      - 'That would let you update an existing credit card, switch to a different card, or choose to use PayPal.'
+  - methods: [app-store]
+    page: Purchasing a Plex Subscription Through the App Store/iTunes
+    url: https://support.plex.tv/articles/205976358-purchasing-a-plex-pass-subscription-through-itunes/
+    quotes:
+      - 'This subscription is billed through the App Store/iTunes and can be managed from your iOS device or from your computer.'
+  - methods: [app-store]
+    page: Purchasing a Plex Pass Subscription Through Google Play
+    url: https://support.plex.tv/articles/217563477-purchasing-a-plex-pass-subscription-through-google-play/
+    quotes:
+      - 'This subscription is billed through Google Play and can be managed from your Google Play account.'
+  - methods: [app-store]
+    page: Purchasing a Plex Pass Subscription Through Amazon
+    url: https://support.plex.tv/articles/218171737-purchasing-a-plex-pass-subscription-through-amazon/
+    quotes:
+      - 'if downloaded from the Amazon Appstore. This subscription is billed through Amazon and can be managed from your Amazon account.'
+# Renewal day (M11.5): its Subscriptions, Purchases, and Rentals terms renew "on or about the date the then-current
+# recurring Subscription period expires", which says no day, and its help centre doesn't either.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+    - https://support.plex.tv/articles/201580107-plex-subscription-management/
+  lastVerified: 2026-11-11
+
+# General features, read 2026-11-11. Platforms: "Browsers: Chrome, Edge, Firefox, and Safari", "Mobile Apps: Android,
+# iOS", "Desktop/Laptop computers: macOS, Windows, Linux", "Smart TVs: LG, Samsung, Hisense, VIZIO, and Roku TV",
+# streaming devices and "Gaming Consoles: PlayStation and Xbox" (What is Plex?). Sign-in: an email and password, "Using
+# your Google account", "Using your Apple account" (Use Google or Apple to Sign in with Plex) and two-factor codes from
+# "Any app that uses the standard TOTP protocol" (Secure Your Account with Two-Factor Authentication). Support: a contact
+# form for billing ("Billing Issues & Questions") and its community forums; "We’re unable to offer technical support by
+# email" (plex.tv/contact). App languages: plex.tv's language versions (its hreflang: English, Chinese, Dutch, French,
+# German, Hindi, Japanese, Korean, Portuguese, Russian, Spanish, Swedish), those the registry has. Self-hostable: you run
+# its Plex Media Server yourself ("Install and run the Plex Media Server on a computer (or compatible NAS device or NVIDIA
+# SHIELD) where all your media is stored", What is Plex?). Its code is closed (its terms forbid decompiling it), so
+# software.open-source is left out.
+features:
+  platforms: [web, windows, macos, linux, android, ios, tv, console]
+  account.sign-in: [password, totp, sso]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, pt, ja, ko, zh, hi]
+  software.self-hostable: true
+
+# Perks (M11.6): what the passes add that no feature describes, in its comparison table's words.
+perks:
+  - id: remote-streaming
+    name: Stream media on any device, from anywhere in the world
+  - id: server-remote-streaming
+    name: Others can stream remotely from your server for free
+  - id: skip-intro-credits
+    name: Skip intro (personal media only) and credits
+  - id: hardware-transcoding
+    name: Convert videos and stream to more devices at once
+  - id: dvr
+    name: Record HD broadcast content to your library
+  - id: plexamp-premium
+    name: Access members-only features within the Plexamp app
+  - id: partner-discounts
+    name: Get exclusive access to promos and partner discounts
+
+plans:
+  - id: plex.free
+    name: Free
+    link: https://www.plex.tv/sign-up/
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: unlimited
+      ad-free: false
+      streaming.profiles: 15
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+      streaming.content: [films, series, sports, kids, anime, documentaries, news]
+      streaming.own-media: true
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'It plays your own media at its own quality, and its help says 4K content is supported (on players that can show it).'
+        page:
+          name: Is 4K content supported on the Roku?
+          url: https://support.plex.tv/articles/214577427-is-4k-content-supported-on-the-roku/
+        lastVerified: 2026-11-11
+      streaming.concurrent-streams:
+        reason: 'Plex sets no number: its help says your own server is limited by its processor and upload speed, and the server’s owner can cap each person’s remote streams. No page says how many of its free films can play at once.'
+        page:
+          name: Server Settings – Bandwidth and Transcoding Limits
+          url: https://support.plex.tv/articles/227715247-server-settings-bandwidth-and-transcoding-limits/
+        lastVerified: 2026-11-11
+    notes: Your own videos, music and photos on your home network, and Plex’s free films, shows and live TV channels with ads. Watching your own videos away from home needs a Remote Watch Pass or Plex Pass (or a server whose owner has Plex Pass).
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://support.plex.tv/articles/202526943-plex-free-vs-paid/,
+        }
+  - id: plex.remote-watch-pass
+    name: Remote Watch Pass
+    link: https://www.plex.tv/plans/
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: unlimited
+      ad-free: false
+      streaming.profiles: 15
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+      streaming.content: [films, series, sports, kids, anime, documentaries, news]
+      streaming.own-media: true
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'It plays your own media at its own quality, and its help says 4K content is supported (on players that can show it).'
+        page:
+          name: Is 4K content supported on the Roku?
+          url: https://support.plex.tv/articles/214577427-is-4k-content-supported-on-the-roku/
+        lastVerified: 2026-11-11
+      streaming.concurrent-streams:
+        reason: 'Plex sets no number: its help says your own server is limited by its processor and upload speed, and the server’s owner can cap each person’s remote streams. No page says how many of its free films can play at once.'
+        page:
+          name: Server Settings – Bandwidth and Transcoding Limits
+          url: https://support.plex.tv/articles/227715247-server-settings-bandwidth-and-transcoding-limits/
+        lastVerified: 2026-11-11
+    perks: [remote-streaming]
+    notes: Everything in Free, plus streaming your own videos away from home from any Plex Media Server you can use, for your account (and your Plex Home’s managed users) only. Plex’s free films and live TV keep their ads. 14 days free to start.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 3.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 39.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 29.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 22.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 27.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 27.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 27.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 27.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 27.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 27.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 4,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 45,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NZ,
+          currency: USD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NZ,
+          currency: USD,
+          amount: 29.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+  - id: plex.plex-pass
+    name: Plex Pass
+    link: https://www.plex.tv/plans/
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: unlimited
+      ad-free: false
+      streaming.download-devices: 1
+      streaming.profiles: 15
+      streaming.kids-profiles: true
+      streaming.live: [tv-channels]
+      streaming.content: [films, series, sports, kids, anime, documentaries, news]
+      streaming.own-media: true
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'It plays your own media at its own quality, and its help says 4K content is supported (on players that can show it).'
+        page:
+          name: Is 4K content supported on the Roku?
+          url: https://support.plex.tv/articles/214577427-is-4k-content-supported-on-the-roku/
+        lastVerified: 2026-11-11
+      streaming.concurrent-streams:
+        reason: 'Plex sets no number: its help says your own server is limited by its processor and upload speed, and the server’s owner can cap each person’s remote streams. No page says how many of its free films can play at once.'
+        page:
+          name: Server Settings – Bandwidth and Transcoding Limits
+          url: https://support.plex.tv/articles/227715247-server-settings-bandwidth-and-transcoding-limits/
+        lastVerified: 2026-11-11
+      streaming.download-devices:
+        reason: 'You can download your own media in its phone and computer apps, but it doesn’t say on how many devices, so 1 is the least it can be.'
+        page:
+          name: Downloads Overview
+          url: https://support.plex.tv/articles/downloads-overview/
+        lastVerified: 2026-11-11
+    perks:
+      [
+        remote-streaming,
+        server-remote-streaming,
+        skip-intro-credits,
+        hardware-transcoding,
+        dvr,
+        plexamp-premium,
+        partner-discounts,
+      ]
+    notes: Remote streaming for you and everyone you share your server with, downloads of your own media, recording TV from your own antenna and tuner, custom parental restrictions and more. Plex’s free films and live TV keep their ads. Also sold for life, paid once, which isn’t listed.
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 8.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 89.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 349.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: US,
+          currency: USD,
+          amount: 249.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 49.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 189.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 59.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 229.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 11,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 110,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 390,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NZ,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NZ,
+          currency: USD,
+          amount: 69.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+      - {
+          region: NZ,
+          currency: USD,
+          amount: 249.99,
+          interval: year,
+          intervalCount: 5,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://www.plex.tv/plans/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 with a plain fetch and Edge: its Terms of Service ("Revised
+# October 30, 2025"), which include its Subscriptions, Purchases, and Rentals terms ("Revised February 03, 2025") and its
+# Privacy Policy ("Revised: May 6, 2026"); its Code of Conduct ("Updated: October 19, 2026"), for reviews and discussions;
+# its Privacy Request Center (preferences.plex.tv, where its policy sends access, deletion and opt-out requests); its
+# Opt-Out Options for Third-Party Advertising and Tracking Technologies pages; the sign-up form (its iframe's text: an
+# email and a password, or Google or Apple), whose line says "By signing up or continuing to use Plex you confirm that
+# you've read and accept the Terms of Service and Privacy Policy"; and its help centre's billing, Plex Home, downloads,
+# sign-in and bug bounty articles. Not read: the checkout (it needs an account), the app stores' terms, and the separate
+# Apple versions of its terms and privacy policy (plex.tv/about/plex-terms-of-service-apple/). Its terms give Plex a
+# transferable, sub-licensable licence over what you post, and over a public profile's watch history, reviews, name and
+# avatar for marketing (legal.content-rights isn't a streaming topic); its terms also forbid reverse engineering its
+# apps (legal.licence is for software, not streaming). Calibrated against CBC Gem, Rumble and Paramount+.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+    - name: 'Subscriptions, purchases and rentals terms'
+      url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+    - name: 'Privacy policy'
+      url: https://www.plex.tv/about/privacy-legal/
+    - name: 'Privacy request center'
+      url: https://preferences.plex.tv/privacy
+    - name: 'Opt-out options for third-party advertising'
+      url: https://www.plex.tv/about/privacy-legal/opt-out-options-for-third-party-advertising/
+    - name: 'Code of conduct'
+      url: https://www.plex.tv/about/code-of-conduct/
+    - name: 'Sign up'
+      url: https://www.plex.tv/sign-up/
+    - name: 'Plans'
+      url: https://www.plex.tv/plans/
+    - name: 'Plex subscription management'
+      url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+    - name: 'Upgrading Plex subscriptions'
+      url: https://support.plex.tv/articles/upgrading-subscriptions/
+    - name: 'Sales tax information'
+      url: https://support.plex.tv/articles/sales-tax-information/
+    - name: 'Use Google or Apple to sign in'
+      url: https://support.plex.tv/articles/use-federated-authentication-to-sign-in/
+    - name: 'Reporting security issues (bug bounty)'
+      url: https://support.plex.tv/articles/reporting-security-issues/
+    - name: 'What is Plex Home?'
+      url: https://support.plex.tv/articles/203815766-what-is-plex-home/
+    - name: 'Downloads FAQ'
+      url: https://support.plex.tv/articles/downloads-sync-faq/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you watch and do in its apps, linked to your account. You can stop your own server sending crash reports and some playback data, but not the rest.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Plex collects specific information about your activity on our Services and that information is linked to you.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'If you uncheck this button, the Optional Playback Data listed below will not be collected or sent to Plex.'
+      action:
+        name: 'Limit what your server sends to Plex'
+        url: https://www.plex.tv/about/privacy-legal/#you-have-the-right-to-limit-what-activity-data-is-sent-from-your-plex-media-server
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It sells or shares your data with advertisers, to show you ads on Plex and on other sites. You can stop that only by sending a request through its privacy request centre.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'This “sharing” or “sale” is used to deliver relevant ads to you on Plex and other third-party sites and services.'
+        - url: https://preferences.plex.tv/privacy
+          quote: 'Opt-out of the sale and/or sharing of your personal information.'
+      action:
+        name: 'Opt out in its privacy request centre'
+        url: https://preferences.plex.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its free films and live TV show ads chosen from what you do. You can limit that by request, or one device and browser at a time with your phone’s settings and industry opt-out tools.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'To personalize marketing, advertising, recommendations, and other content and experiences delivered or offered to you through the Services (as permitted by applicable law)'
+        - url: https://www.plex.tv/about/privacy-legal/opt-out-options-for-third-party-advertising/
+          quote: 'On your mobile device, you may also go to your device settings and select “Limit Ad Tracking” (for iOS devices) or “Opt out of interest-based ads” (for Android devices), which will allow you to limit our use of information collected from or about your mobile device (such as precise location data) for the purposes of serving online behavioral advertising to you.'
+      action:
+        name: 'Opt-out options for third-party advertising'
+        url: https://www.plex.tv/about/privacy-legal/opt-out-options-for-third-party-advertising/
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It says your personal data never goes into AI models. It may train them only on what you do in its apps once that’s cut off from you.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Your Personal Data is not introduced to any machine learning or artificial learning models.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Plex may also disassociate this activity information from your Personal Data to train machine learning or artificial learning models'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'It keeps your account data while you have the account and deletes it within 30 days after you delete it. Logs of how you use Plex go after 90 days.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Personal Data is retained in your Plex account for as long as you maintain that account.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'we delete the Personal Data in the Plex account within 30 days.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Data related to your use of the services (e.g., logging and error tracking) is deleted after 90 days.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can ask it to delete your data through its privacy request centre, which deletes your account too. It deletes the account’s data within 30 days, keeping only copies the law requires.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'After verifying your identity, Plex will delete Personal Data associated with your account except that we may retain archived copies as required by law.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'we delete the Personal Data in the Plex account within 30 days.'
+      action:
+        name: 'Ask Plex to delete your data'
+        url: https://preferences.plex.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your account data through its privacy request centre, and it sends it once it has checked who you are. It doesn’t say in what format.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'After verifying your identity, Plex will provide you with a copy of Personal Data associated with your account.'
+        - url: https://preferences.plex.tv/privacy
+          quote: 'Request a copy of all of your account data and email it to your desired recipient.'
+      action:
+        name: 'Ask for a copy of your data'
+        url: https://preferences.plex.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your data to authorities when a law, a legal process or a valid government request needs it, and to protect people or its rights. It doesn’t say it tells you or publish a report.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: '(a) satisfy an applicable law, regulation, legal process, or valid governmental request;'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: '(b) protect or defend the safety, rights, or property of Plex, the public, or any person.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is handled mostly in the United States. Data from the EU, the UK and Switzerland moves there under standard contract rules.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Plex and its authorized data processors process Personal Data primarily in the United States.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Data transfer mechanisms such as Standard Contractual Clauses for data transfers of EU/UK/Switzerland Personal Data to processors located in the United States.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'An account needs only an email address and a password, or your Google or Apple sign-in, and Apple’s Hide My Email works. A paid plan adds your payment details.'
+      sources:
+        - url: https://www.plex.tv/sign-up/
+          quote: 'Email address'
+        - url: https://www.plex.tv/sign-up/
+          quote: 'Create password'
+        - url: https://support.plex.tv/articles/use-federated-authentication-to-sign-in/
+          quote: 'if you choose the Hide My Email option from Apple, then Plex will not know what the real email address is'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: good
+      reason: 'Under-18s may use Plex only through a parent’s account. Children’s managed accounts get no tracking or targeted ads (its free films still have ads), and parents choose what ratings they can see.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'Individuals under the age of eighteen (18) (or the applicable age of majority) may utilize the Plex Solution only with the involvement and acceptance of (this TOS by) a parent or legal guardian and then solely as an Authorized User under a parent or legal guardian’s account.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Plex does not conduct behavioral tracking or deliver targeted advertising to users of managed accounts.'
+        - url: https://www.plex.tv/about/privacy-legal/
+          quote: 'Content access is restricted based on content ratings as configured by the parent or guardian.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online at any time and keep your plan to the end of the time you paid for, but you must cancel at least a day before it renews.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'You can cancel at any time with such cancellation effective upon expiration of the then-current Subscription period.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'To cancel, please visit this page and make a cancellation request at least one (1) day prior to the end of your then-current Subscription period.'
+        - url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+          quote: 'You will retain access to the subscription features and benefits for the remainder of your current subscription period.'
+      action:
+        name: 'How to cancel a Plex subscription'
+        url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep your plan to the end of the time you paid for. In the EU and the UK you can cancel an order within 14 days of buying it by contacting its billing team.'
+      sources:
+        - url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+          quote: 'Cancelling a subscription only cancels future renewal, it does not provide any refund for an existing subscription transaction.'
+        - url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+          quote: 'You will retain access to the subscription features and benefits for the remainder of your current subscription period.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'For individuals in the EU or UK, orders may be canceled within 14 days from the date of purchase by contacting our Billing team'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It tells you at least 30 days before your price goes up, and you can cancel before then.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'If the price of your Subscription changes, we will provide you with at least thirty (30) days’ prior notice.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'You can cancel at any time with such cancellation effective upon expiration of the then-current Subscription period.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Remote Watch Pass starts with 14 free days. You give a way to pay to start, and it charges you when the trial ends unless you cancel first; it doesn’t promise to remind you.'
+      sources:
+        - url: https://www.plex.tv/plans/
+          quote: 'Try 14 days free'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'Some Subscriptions may start with a free trial period. To avoid any charges following the trial period, you must cancel the Subscription (see below) before the expiration of the free trial period.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'To enroll in a Subscription, you must provide a current, valid, accepted method of payment (“Payment Method”).'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews on its own for the same length, monthly, yearly or every 5 years, and that it warns you of changes, but not that it reminds you before renewing.'
+      pages:
+        - https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+        - https://support.plex.tv/articles/201580107-plex-subscription-management/
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: good
+      reason: 'You pay the price plus any sales tax. Your card company may add its own fees, such as for paying in another currency, and if a payment fails you may owe Plex’s costs of collecting it.'
+      sources:
+        - url: https://support.plex.tv/articles/sales-tax-information/
+          quote: 'The advertised prices for Plex Pass subscriptions as well as other transactions do not include sales tax.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'In addition to any fee(s) for a Subscription, you are responsible for any charges (including any foreign transaction charges) that may be imposed by credit card providers or other third parties in connection with your use of or payment for the Subscription.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'Should charges for which you are responsible fail at the time payment is required, you may be responsible for costs associated with Plex’s efforts to collect amounts due in accordance with applicable laws.'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: poor
+      reason: 'Its help says moving up to Plex Pass credits your unused time, but its terms say switching plans earns no refund or credit. You can’t move down: you cancel and start again once your plan runs out.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'No refunds or credits shall be issued for partial months, upgrade/downgrades, nonuse, or termination of account due to Subscription and Rental Terms violations.'
+        - url: https://support.plex.tv/articles/upgrading-subscriptions/
+          quote: 'When doing so, they will automatically receive a prorated credit for any paid subscription time remaining in the current Remote Watch Pass subscription.'
+        - url: https://support.plex.tv/articles/upgrading-subscriptions/
+          quote: 'It is not currently possible to directly “downgrade” a subscription.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: good
+      reason: 'There’s no private referee (an arbitrator): after 90 days of trying to settle a dispute, it goes to the courts in Delaware, in the US. You give up a jury where the law allows it.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'Subject to the foregoing informal dispute resolution, any action arising from or in any way related to the Plex Solution, your use of or access to the Plex Solution, or this TOS will be brought in the courts presiding in the state of Delaware, and all parties to this TOS expressly agree to be subject to the jurisdiction of such courts.'
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'You and Plex waive trial by jury except where such waiver is prohibited by law.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms by posting them online or by emailing you, and using Plex afterwards counts as accepting them. It promises no warning ahead of time.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'Please note that Plex reserves the right to change the terms and conditions of this TOS and the terms and conditions under which the Plex Solution and its offerings are extended to you by posting online a revised TOS or e-mailing notice thereof to you.'
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'Your continued use of the Plex Solution following any addition, modification, or deletion will be conclusively deemed acceptance of any change to the terms and conditions of this TOS.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its rules, it can suspend or delete your account, and you get no refund for time left. It emails you about a moderation decision, which you can appeal once.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'If you violate this TOS, Plex has sole discretion to suspend or permanently disable your access to the Plex Solution, and we may permanently disable or delete your account or prohibit you from creating a new account.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'No refunds or credits shall be issued for partial months, upgrade/downgrades, nonuse, or termination of account due to Subscription and Rental Terms violations.'
+        - url: https://www.plex.tv/about/code-of-conduct/
+          quote: 'If your content is removed from Plex or we take another moderation action related to your Plex account, you will be notified via email.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove any feature, and a film you buy from it can stop playing if its licence ends, with Plex not liable to you.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'In addition, Plex may add, modify, or delete any aspect, program, functionality, or feature of the Plex Solution.'
+        - url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+          quote: 'In such instance, Plex will not be liable to you if a Purchase becomes unavailable for further playback.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+        - https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: neutral
+      reason: 'It runs a bug bounty that invites security researchers to find flaws, but doesn’t say outside experts audit its security or publish what they find.'
+      sources:
+        - url: https://support.plex.tv/articles/reporting-security-issues/
+          quote: 'We invite security researchers of all backgrounds to help us find and fix vulnerabilities before they can be exploited.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You may let your immediate family use your account, and its Plex Home is for people who live together. It names no checks.'
+      sources:
+        - url: https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+          quote: 'Subject to any third party license restrictions for applicable Content, you may enable members of your immediate family, for whom you will be responsible (each, an “Authorized User(s)”), to access and use the Plex Solution so long as all such use remains in compliance with this TOS.'
+        - url: https://support.plex.tv/articles/203815766-what-is-plex-home/
+          quote: 'The Plex Home feature is intended for people that physically live together.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and downloads help name no limit on devices or on how long downloads last.'
+      pages:
+        - https://www.plex.tv/about/privacy-legal/plex-terms-of-service/
+        - https://support.plex.tv/articles/downloads-sync-faq/
+      lastVerified: 2026-11-11

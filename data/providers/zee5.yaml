@@ -145,6 +145,7 @@ plans:
     features:
       ad-free: false
       account.parental-controls: true
+      streaming.content: [films, series, kids]
     notes: Its free movies, TV shows, web series, live TV channels and sports highlights, with ads.
     prices:
       - {
@@ -170,6 +171,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 4 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -426,6 +428,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -502,6 +505,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 2 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -588,6 +592,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [kids]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -663,6 +668,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [kids]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 2 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -858,6 +864,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -1093,6 +1100,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -1328,6 +1336,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -1563,6 +1572,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -1798,6 +1808,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -2033,6 +2044,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."
@@ -2268,6 +2280,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.concurrent-streams:
         reason: "Its plan card gives 3 devices, and its terms limit a subscription's content to a number of devices at once."

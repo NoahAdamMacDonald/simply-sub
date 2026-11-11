@@ -1,0 +1,232 @@
+url: https://support.plex.tv/articles/use-federated-authentication-to-sign-in/
+method: fetch
+saved: 2026-11-11
+
+Use Google or Apple to Sign in with Plex | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Use Google or Apple to Sign in with Plex
+Use Google or Apple to Sign in with Plex
+There are methods you can use to authenticate a Plex account:
+Using your Google account
+Using your Apple account
+Creating an account with your email address and a Plex-specific password
+When creating a Plex account using a Google or Apple account, you don’t need to make another password for Plex. Your Plex settings and device access will be secured using your Google or Apple account.
+If you’ve already created an account with a Plex password, you can add Google or Apple authentication to your existing account.
+Related Page: Sign in to Your Plex Account
+Notes on Security & Privacy
+Plex takes your security and privacy very seriously. We support Google and Apple accounts to make it easy to start using Plex and sign in on new devices.
+Google and Apple login are optional features. If you don’t want to use one of those logins, you’ll never have to.
+When signing in, Plex only requests the minimum permissions and information from the authentication partners. We don’t ask for access to your life story, can’t read your email, and can’t spam your friends (nor would we want to!).
+There can be security benefits to using alternate authentication methods instead of a Plex password. See Additional Security Benefits for Google or Apple Accounts later in this article.
+Creating a New Plex Account
+When opening a Plex app for the first time, you’ll be given choices for signing in.
+You have the option to use your existing Google or Apple account. There isn’t a separate page for “sign up” or “sign in” with these accounts.
+Choose either Continue with Google or Continue with Apple .
+A new window from the corresponding service will appear and ask you to confirm.
+If you haven’t signed into the corresponding service on this device, they may ask you to authenticate that account fresh.
+You will be signed in.
+The next time you need to sign in, just follow the same steps.
+Adding Google or Apple to an Existing Plex Account
+If you already have an existing Plex account, you can add the ability to authenticate with Google or Apple to make it easier to sign in on new devices.
+Same Email Address as Your Plex Account
+If your Google or Apple account has the same email address as your Plex account, you can add the corresponding service when signing in to a supported Plex app.
+Sign out of Plex.
+When signing in to Plex, choose either Continue with Google or Continue with Apple .
+A new window from the corresponding service will appear and ask you to confirm.
+If you haven’t signed into the corresponding service on this device, they may ask you to authenticate that account fresh.
+Plex will recognize that you already have a Plex account with the same email address. For security, Plex will ask you to type your existing Plex password.
+You will be signed in to the account, and your Google or Apple account will be linked.
+Warning: When using Continue with Apple , if you choose the Hide My Email option from Apple, then Plex will not know what the real email address is and will not be able to match it to an existing account. Instead, a brand new, separate account will be created. To link Apple while hiding your email, use the instructions below to manually link to Apple.
+After this first time, you will be able to quickly sign into your Plex account on any device by tapping the button for the appropriate service.
+Different Email Address from Your Plex Account
+If the email address on your Google or Apple account is different from the email address on your Plex account, you can manually link your existing account to to the desired service, using the Account settings in the Plex Web App.
+Sign in to the Plex web app using your normal Plex account credentials.
+Visit your Plex account page.
+On the Accounts tab, click the Edit button next to Linked Accounts.
+Link your Google or Apple account.
+A new window from the corresponding service will appear and ask you to confirm.
+If you haven’t signed into the corresponding service on this device, they may ask you to authenticate that account fresh.
+Your account will be linked.
+From then on, you can use the button for the appropriate service to sign into Plex. You can also continue using your Plex password by choosing Continue with Email.
+Tip!: You can link multiple authentication services to your Plex account, if desired.
+Related Page: Plex Account Page
+Notes
+Oops, I accidentally created a new account instead of linking to my existing Plex account!
+Though rare, it’s possible that you could accidentally create a new Plex account if you try to sign in with a Google or Apple account, but the email address on those accounts doesn’t match the email on your Plex account. You can fix this, though.
+Open a Private or Incognito browser window (to help ensure you’re acting on the correct account).
+Sign in to the accidentally-created account.
+Visit your Plex account page.
+Use the Delete your account action at the bottom of the Accounts area.
+In your regular browser, sign back in, using the desired/original Plex account this time.
+Manually link to the Google or Apple account as outlined earlier.
+Note: If you accidentally created an account by using Continue with Apple, then you’ll likely also need to manually unlink your Apple ID from Plex. See instructions below.
+How to use “Hide My Email” option when linking Apple to an existing Plex account
+When initially linking to an Apple account to use for authentication, Apple provides a “Hide My Email” privacy option to users. When choosing that option, your real email address will be protected and Apple will instead offer a special, masked email address.
+That’s great for your privacy, but it does mean that Plex will not know the email address of your Apple ID and thus will not be able to automatically link it to an existing Plex account.
+If you already used that option and accidentally created a brand new Plex account, you can use the information above to resolve things.
+Otherwise, you simply need to manually link the Apple ID from your regular Plex account page. More details about manually linking an account are available above.
+How to unlink an Apple ID from Plex
+If you wish to unlink your Apple ID from your Plex account, you can do so from your iOS device.
+Open the iOS system Settings app
+Tap your Apple ID account entry at the top
+Choose the Apple ID, iCloud, iTunes & App Store entry for your account
+Choose Password & Security > Apps Using Your Apple ID
+Select the entry for the Plex app
+You can then use the Stop Using Apple ID action to remove the linkage
+Warning: Before you unlink your Apple ID, you should make sure that you have another way to sign in to your Plex account: either Google Login or a separate Plex account password.
+Related Page: Manage the apps you use with Sign in with Apple
+Add a Plex password to a Google- or Apple-linked account
+If you first started using Plex with your Google or Apple account, you don’t have a separate Plex password. You can add a regular password to your account at any time. This allows signing in to the Plex account without the separate authentication service, by instead using the account email address and password.
+Sign in to the Plex web app.
+Visit your Plex account page.
+Open the Password section.
+Enter your new account password (be sure to choose a strong, unique one!) and then confirm it.
+Click the Save Changes button.
+You can now sign in to your account using a password by choosing Continue with Email on any Plex login page.
+Additional Benefits for Google or Apple Accounts
+You may find some additional features of Google or Apple accounts to be useful.
+Suspicious login warnings when signing in from unusual locations
+Google: Suspicious Sign In Prevention
+Account login history tracking
+Google: Device Activity & Security Events
+Apple: Devices signed in to Apple ID
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: July 24, 2025
+Table of Contents
+Recently Viewed
+Upgrading Plex Subscriptions
+Troubleshooting Remote Access
+Sales Tax information
+Reporting Security Issues
+Restart Plex Media Server Setup from Scratch
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

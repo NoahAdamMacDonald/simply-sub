@@ -132,7 +132,7 @@ API contract's prices are illustrative and never a source. This skill is how to 
   - **The owner and outside ratings** (M11.2), by the policy-research skill's rules: the company behind it (every
     provider needs one), a public company's ticker symbols and majority holder (`owner.stock`, 2026-11-10), and for
     an antivirus or a news outlet the raters in `data/raters.yaml`.
-  - **Every way to pay** (`paymentMethods`, required of every provider): its payment methods help article, pricing
+  - **Every way to pay** (`paymentMethods`, required of every provider that sells something; a free-only service takes none): its payment methods help article, pricing
     page or terms, for cards, PayPal, Apple and Google Pay, Klarna, Satispay, Cash App, Alipay, app stores and platforms that
     bill for it (Amazon's Prime Video channels), gift cards, a bank transfer or direct debit (iDEAL | Wero, Swish,
     Bancontact, GoCardless), cash, crypto and a TV, internet or phone provider's bill, each named in a quote. Read

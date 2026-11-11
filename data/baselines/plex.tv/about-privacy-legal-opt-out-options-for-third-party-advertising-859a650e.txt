@@ -1,0 +1,156 @@
+url: https://www.plex.tv/about/privacy-legal/opt-out-options-for-third-party-advertising/
+method: fetch
+saved: 2026-11-11
+
+Opt-Out Options for Third-Party Advertising | Plex
+Changing the site language for you. Please wait ...
+Hey!
+Our website is available in your language, would you like to switch to that? Yes No
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Opt-Out Options for Third-Party Advertising
+If you’d like more details on how we collect, use, and transfer your information, please review our Privacy Policy.
+You have the following choices regarding how we and third parties use certain information collected from or about you. We are committed to complying with the Digital Advertising Alliance (“DAA”) Self-Regulatory Principles for Online Behavioral Advertising and the DAA Application of Self-Regulatory Principles for the Mobile Environment.
+Opt-Out Options for Third-Party Online Behavioral or Interest-Based Advertising on Websites (including Mobile Websites).
+Some of the third parties that collect information from or about you on the Services in order to provide more relevant advertising to you on websites participate in the DAA Self-Regulatory Program for Online Behavioral Advertising. This program offers a centralized location where users can make choices about the use of their information for online behavioral advertising. To learn more and to make choices about the use of your information for online behavioral advertising on websites, please visit the Digital Advertising Alliance DAA WebChoices page. Please note that if you opt out of online behavioral advertising using this method, this opt-out will only apply to the specific browser or device from which you opt out.
+In addition, some of the advertisers, advertising technology companies, and service providers that perform advertising-related services for us and our business partners may be members of the Network Advertising Initiative (“NAI”), a cooperative of online marketing companies that offers a centralized tool for opting out of interest-based advertising delivered by each of its member companies. If you would like to obtain more information about interest-based advertising and the NAI and make choices about their members’ use of information from or about you on websites, please visit the Opt Out of Interest-based Advertising page. Please note that if you opt out of interest-based advertising using this method, this opt-out will only apply to the specific browser or device from which you opt out.
+There is currently no consensus among industry participants as to what “Do Not Track” means and how to respond to “Do Not Track” browser signals. As such, we do not respond to such signals. Instead, to opt-out of website-based third-party interest-based or online behavioral advertising, please exercise one of the choices listed above.
+Opt-Out Options for Third-Party Online Behavioral or Interest-Based Advertising within Mobile Applications.
+Some of the third parties that collect information from or about you on the Services in order to provide more relevant advertising to you within mobile applications participate in the DAA Self-Regulatory Program for Online Behavioral Advertising. This program offers a mobile application called the “AppChoices,” which provides a centralized location where users can make choices about the use of their information for online behavioral advertising within the mobile application environment. The AppChoices application can be downloaded from your mobile device or from your device’s app store. Please note that if you opt out of online behavioral advertising using this method, this opt-out will only apply to your mobile device.
+On your mobile device, you may also go to your device settings and select “Limit Ad Tracking” (for iOS devices) or “Opt out of interest-based ads” (for Android devices), which will allow you to limit our use of information collected from or about your mobile device (such as precise location data) for the purposes of serving online behavioral advertising to you.
+Our advertising partner SpotX provides information on opting out of SpotX Cookies.
+Our advertising partner SpringServe provides information on opting out of SpringServe Cookies.
+Privacy Policy
+Terms
+Copyright
+Trademarks
+Subscriptions and Rentals
+Code of Conduct
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising
+Language:
+The Best of Plex
+Plex Pass gives you exclusive access to awesome new features and apps.
+Learn More
+Introducing streaming music powered by TIDAL
+Level up your music library with 60 million high-quality songs.
+TIDAL is seamlessly integrated with your existing music library — beautifully organized right in Plex.
+{{#if (or hasExpiredTidalTrial hasAnyStateTidalSubsc)}}
+Choose a Plan
+{{else}}
+Start 30-Day Free Trial{{/if}}

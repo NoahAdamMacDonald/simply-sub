@@ -105,6 +105,7 @@ plans:
     features:
       video.quality: 1080p
       ad-free: false
+      streaming.content: [sports]
     notes: Selected live events, highlights and on-demand programmes, with ads, for anyone with a DAZN account. What's free depends on the country and DAZN's rights.
     prices:
       - {
@@ -127,6 +128,7 @@ plans:
       streaming.download-devices: 1
       streaming.live: [sports]
       account.pause: true
+      streaming.content: [sports]
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
@@ -175,6 +177,7 @@ plans:
       streaming.concurrent-streams: 1
       streaming.live: [sports]
       account.pause: true
+      streaming.content: [sports]
     notes: The US's monthly plan, on one device in one place at a time.
     prices:
       - {
@@ -197,6 +200,7 @@ plans:
       streaming.download-devices: 1
       streaming.live: [sports]
       account.pause: true
+      streaming.content: [sports]
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
@@ -237,6 +241,7 @@ plans:
       streaming.download-devices: 1
       streaming.live: [sports]
       account.pause: true
+      streaming.content: [sports]
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
@@ -277,6 +282,7 @@ plans:
       streaming.download-devices: 1
       streaming.live: [sports]
       account.pause: true
+      streaming.content: [sports]
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'

@@ -1,0 +1,83 @@
+url: https://help.twitch.tv/s/article/updating-payment-information-transaction-history?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+PURCHASE SUPPORT
+How to Update Payment Information and View Transaction History
+This article provides an overview of how to update your existing payment information for web purchases and view a history of your previous transactions.
+Your billing and payment information is private. Only you can see your billing details. Streamers only see your username when you subscribe or make a purchase, unless you purchase gift subscriptions anonymously.
+You must access Twitch on a web (or mobile) browser to manage these settings.
+If you're looking for your Twitch invoices, click here.
+On this page:
+Existing Payment Management
+Adding a Payment Method
+Deleting your Payment Information
+Payment and Bits Usage History
+Frequently Asked Questions
+Existing Payment Management
+To begin, head over to your Wallet page by clicking your Profile icon in the top right hand corner and selecting Wallet from the menu. Once there you will see a list of your current payment methods and a list of the subscriptions currently utilizing those payment methods.
+If you have never made a purchase before on Twitch and are trying to add a payment method on the Wallet page, please instead add a payment method during checkout of your desired product. It is not possible to manage payment methods on Twitch without associating that payment method to a specific purchase.
+Once you update the payment method, all of the subscriptions renewing under the previous payment method will now be charged to the new one.
+Most payment methods can be managed and updated via this page using the Update Payment Info button next to the payment method. Other payment methods may require you to manage them via an alternative page provided by the payment provider.
+For iOS/Android app subscriptions, you can update payment methods via your Apple App Store or Google Play settings.
+Adding a Payment Method
+If you have never made a purchase before on Twitch, you must first add a new payment method during checkout of your desired product.
+To add a payment method during checkout, select the product you wish to purchase, at which time you will be prompted to select your preferred payment method from credit / debit card, Amazon Pay, Apple Pay and PayPal. You may also select "See More Methods" at this stage for additional options.
+Not seeing your preferred payment method? Select "See More Methods" during checkout to view all available payment options for your region.
+If you have used Xsolla to make purchases on Twitch, you may add a payment method to Xsolla at any time via your Payment Management page. To get started, click the "Manage With Xsolla" button and select your preferred payment method from credit / debit card, Amazon Pay, PayPal, with many more options available.
+Deleting your Payment Information
+You may delete a payment method at any time from your Wallet page by selecting Delete on the desired payment method. Other payment methods may require you to manage them via an alternative page provided by the payment provider.
+Please note that by deleting a payment method you will be cancelling further renewals of all subscriptions under that payment method. An alternative would be to update your payment method with one that is preferred thus allowing your subscription renewals to remain unaffected.
+Payment and Bits Usage History
+This page cannot be accessed on the Twitch Mobile app. Please use Twitch on a desktop computer.
+On the Payment History tab you can filter your transactions by date by using the Start and End fields in the top left-hand corner above the table. Clicking Date or Amount at the top of the table will sort the results by the chosen category.
+If you see any purchases that you do not recognize, or if you believe that your account may have been compromised, we recommend immediately reviewing this account security article.
+You can also check your Bits usage history by clicking the Bits Usage History tab. Here, you’ll see the channel on which you used your Bits, the amount used, and when. To filter your Bits usage history by date, use the Start and End fields in the top left-hand corner above the table. Clicking Date or Amount at the top of the table will sort the results by the chosen category.
+Toggle between On-Site and Extension usage on the top right hand corner to filter for the according usage of your Bits.
+Frequently Asked Questions
+Is it possible to change checkout currency?
+It is not possible to change, set, or swap checkout currency on Twitch. Checkout currency is set via an automatic process that references information about your payment method. To ensure you’re billed in the correct currency, add a locally issued credit or debit card to your Twitch account, and choose that payment method during checkout.
+How can I change my billing information shown in Twitch invoices?
+It is not possible to alter billing information in your Twitch invoice after a purchase is made. To change the billing address shown in your Twitch invoice for future purchases, use a different payment method or update your billing information with your banking institution.
+Twitch invoices receive your billing information from the payment method used for the purchase in question, at the time the purchase is made. You may need to remove and re-add the payment method from Twitch before new billing information is shown in your invoice.
+In some cases, Twitch may receive your billing information from online payment systems like PayPal or Amazon Pay. Please update your billing information in those systems before completing a purchase on Twitch.
+Where is my invoice sent after a successful purchase?
+After a successful purchase, your receipt or transaction ID is sent to your email. For most web purchases, this email is the email associated with your Twitch account. For in-app purchases, check the email address associated with your respective app store. Learn more.
+I am having issues adding or updating my payment method — what can I do?
+For a step-by-step troubleshooting guide, please see our help article on Failed Payments for Subscriptions.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+How to Update Payment Information and View Transaction History

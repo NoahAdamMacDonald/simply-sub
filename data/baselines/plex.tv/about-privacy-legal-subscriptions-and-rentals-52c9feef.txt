@@ -1,0 +1,171 @@
+url: https://www.plex.tv/about/privacy-legal/subscriptions-and-rentals/
+method: fetch
+saved: 2026-11-11
+
+Subscriptions and Rentals | Plex
+Changing the site language for you. Please wait ...
+Hey!
+Our website is available in your language, would you like to switch to that? Yes No
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Subscriptions and Rentals
+Revised February 03, 2025
+Subscriptions, Purchases, and Rentals (defined below) are subject to these “Subscriptions, Purchases, and Rentals” terms, the Plex Terms of Service, the Plex Privacy Policy, and any other terms and conditions imposed by the third party provider of the Content, your financial services provider, and/or your mobile carrier or internet provider (collectively, the “Subscription, Purchases, and Rental Terms”). You are responsible for reviewing and following the Subscription, Purchases, and Rental Terms. Capitalized terms not defined below are defined in the Plex Terms of Service.
+Subscriptions. Access to certain Plex Solution features (e.g., Plex Pass) or Content provided by a third party (e.g., TIDAL) may require you to enroll in a subscription for a recurring period of time as specified during order or registration (“Subscription”). Subscriptions may also have particular access or usage requirements.
+Ordering. To enroll in a Subscription, you may be required to create an account or complete a registration process. The Plex Solution will connect you to any required login, account, or registration process. Orders placed are not final until confirmed by Plex.
+Trial Period. Some Subscriptions may start with a free trial period. To avoid any charges following the trial period, you must cancel the Subscription (see below) before the expiration of the free trial period.
+Fees. The applicable fee(s) for a Subscription will be specified at the time of order or when you change your Subscription. Sales tax may apply (see here for more info). Any applicable discounts or promotional prices will be noted at the time of order. Unless otherwise noted or required by applicable law, all fees are non-refundable and billed in advance for the upcoming Subscription period. For individuals in the EU or UK, orders may be canceled within 14 days from the date of purchase by contacting our Billing team. No refunds or credits shall be issued for partial months, upgrade/downgrades, nonuse, or termination of account due to Subscription and Rental Terms violations. When you order a Subscription, you will initially be charged at the rate applicable at the time of your initial request to subscribe. If the price of your Subscription changes, we will provide you with at least thirty (30) days’ prior notice.
+Billing and Payment. To enroll in a Subscription, you must provide a current, valid, accepted method of payment (“Payment Method”). By providing a Payment Method, you authorize Plex to debit the Payment Method on a recurring basis for the applicable cost of the Subscription. Following expiration of any free trial period, a Subscription is billed in advance for the identified Subscription period. In addition to any fee(s) for a Subscription, you are responsible for any charges (including any foreign transaction charges) that may be imposed by credit card providers or other third parties in connection with your use of or payment for the Subscription. Should charges for which you are responsible fail at the time payment is required, you may be responsible for costs associated with Plex’s efforts to collect amounts due in accordance with applicable laws.
+Renewal. Unless otherwise noted at time of order, a Subscription will renew automatically for recurring periods on or about the date the then-current recurring Subscription period expires. Such renewal will be for the same duration as the original Subscription period. Your Subscription will remain in effect and continue to renew automatically until it is canceled by you as set forth below, or by Plex in accordance with the Terms of Service. Please also note that Content or the features or functionality of the Plex Solution may change for the renewal period and/or may be subject to different fees. We will provide prior notice of any changes in advance of any renewal.
+Cancellation. You are responsible for the cancellation of any Subscription. You can cancel at any time with such cancellation effective upon expiration of the then-current Subscription period. To cancel, please visit this page and make a cancellation request at least one (1) day prior to the end of your then-current Subscription period.
+Prohibited Uses. Plex accounts and Subscriptions may not be transferred or resold. Attempts to buy, sell, barter, or solicit other forms of payment in exchange for any Plex account or Subscription may result in cancellation, deactivation, or deletion of your account or Subscriptions.
+Purchases. Access to certain Content provided by Plex or a third-party may require you to purchase such Content for on-demand viewing only from Plex over an indefinite period of time (“Purchase”). Before you complete any Purchase, carefully read these Subscription, Purchases, and Rental Terms. Before you can obtain a playback license to view any Purchase, you will be asked to and must accept all the terms of these Subscription, Purchases, and Rental Terms. If you do not wish to accept all the terms of these Subscription, Purchases, and Rental Terms, you will not be able to view the Purchase.
+License. The Content is owned by Plex, its content providers, and/or their licensors, and is protected by the copyright laws of the United States and/or the applicable jurisdiction, as well as other intellectual property laws and treaties. Content delivered to you through a Purchase is only licensed to you and not sold, transferred, or assigned to you. Subject to payment of any charges for a Purchase and your compliance with the Subscription, Purchases, and Rental Terms, Plex grants you a non-exclusive, non-transferable, non-assignable, non-sublicensable, and limited license, to access and view the Purchase for personal, non-commercial, and private use. The Purchase may only be transmitted to approved devices. All other rights in the Content are reserved by content providers, licensors, and the copyright holder(s). Any other use is strictly prohibited.
+Ordering. To make a Purchase, you are required to create a Plex account. Orders placed are not final until confirmed by Plex.
+Fees. The applicable fee(s) for a Purchase will be specified at the time of order. Sales tax may apply (see here for more info). Any applicable discounts or promotional prices will be noted at the time of order. Unless otherwise noted or required by applicable law, all fees are non-refundable. No refunds or credits shall be issued for termination due to Subscription, Purchase, and Rental Terms violations.
+Payment. To make a Purchase, you must provide a Payment Method. In addition to any fee(s) for a Purchase, you are responsible for any charges (including any foreign transaction charges) that may be imposed by credit card providers or other third parties in connection with your use of or payment for the Purchase(s). Should charges for which you are responsible fail at the time payment is required, you may be responsible for costs associated with Plex’s efforts to collect amounts due in accordance with applicable laws.
+Cancellation. You may cancel any unplayed Purchase within 48 hours of the Purchase (for individuals in the EU or UK, within 14 days from the date of purchase or rental) by contacting us at this page. Once playback has been initiated on any Purchase, it may not be canceled.
+Playback Quality. Plex endeavors to provide you with a high quality viewing experience. We cannot guarantee the resolution or quality of your Purchase because playback resolution and quality is dependent on your device (e.g. digital rights management (DRM) or High-Bandwidth Digital Content Protection (HDCP) compatibility) and bandwidth. Plex reserves the right to reduce the resolution and file size of your Purchase if we detect that it may otherwise not play properly due to a range of factors, including any of the foregoing reasons. Plex, its content providers, and/or their licensors do not warrant or otherwise state that the Purchase will meet your requirements, and are subject to the limitations of liability set forth in the Plex Terms of Service.
+Purchase Availability. Purchases are available for playback from Plex but may become unavailable due to potential content provider licensing restrictions or for other reasons. In such instance, Plex will not be liable to you if a Purchase becomes unavailable for further playback.
+Prohibited Uses. You may not redistribute, sell, rent, lease, transfer, reverse engineer or sublicense the Content. You may not attempt to circumvent, avoid, bypass, remove, deactivate, impair or otherwise defeat any encryption, rights signaling or copy protection technology associated with the Content.
+Rentals. Access to certain Content provided by Plex or a third-party may require you to pay a rental fee for on-demand viewing of such Content within a limited period of time (“Rental”). The Content is owned by Plex, its content providers, and/or their licensors, and is protected by the copyright laws of the United States and/or the applicable jurisdiction, as well as other intellectual property laws and treaties. Content delivered to you through a Rental is only licensed to you and not sold, transferred, or assigned to you. Subject to payment of any charges for a Rental and your compliance with the Subscription and Rental Terms, Plex grants you a non-exclusive, non-transferable, non-assignable, non-sublicensable, limited license, during the applicable viewing period, to access and view the Rental for personal, non-commercial, and private use. All other rights in the Content are reserved by content Providers, licensors, and the copyright holder(s). Any other use is strictly prohibited.
+Ordering. To purchase a Rental, you are required to create a Plex account. Orders placed are not final until confirmed by Plex.
+Fees. The applicable fee(s) for a Rental will be specified at the time of order. Sales tax may apply (see here for more info). Any applicable discounts or promotional prices will be noted at the time of order. Unless otherwise noted or required by applicable law, all fees are non-refundable. No refunds or credits shall be issued for nonuse or termination due to Subscription and Rental Terms violations.
+Payment. To purchase a Rental, you must provide a Payment Method. In addition to any fee(s) for a Rental, you are responsible for any charges (including any foreign transaction charges) that may be imposed by credit card providers or other third parties in connection with your use of or payment for the Rental(s). Should charges for which you are responsible fail at the time payment is required, you may be responsible for costs associated with Plex’s efforts to collect amounts due in accordance with applicable laws.
+Cancellation. You may cancel any unplayed Rental within 48 hours of the rental (for individuals in the EU or UK, within 14 days from the date of purchase or rental) by contacting us at this page. Once playback has been initiated on any Rental, it may not be canceled.
+Playback Quality. Plex endeavors to provide you with a high quality viewing experience. We cannot guarantee the resolution or quality of your Rental because playback resolution and quality is dependent on your device (e.g. digital rights management (DRM) or High-Bandwidth Digital Content Protection (HDCP) compatibility) and bandwidth. Plex reserves the right to reduce the resolution and file size of your Rental if we detect that it may otherwise not play properly due to a range of factors, including any of the foregoing reasons. Plex, its content providers, and/or their licensors do not warrant or otherwise state that the Rental will meet your requirements, and are subject to the limitations of liability set forth in the Plex Terms of Service.
+Prohibited Uses. You may not (i) transfer, copy, or display the Rental except as permitted in the Subscription and Rental Terms; (ii) sell, rent, lease, distribute, transfer, sublicense, reverse engineer, or broadcast any right to the Rental; (iii) remove any proprietary notices, or labels on the Rental; (iv) attempt to circumvent, avoid, disable, bypass, remove, deactivate, impair, modify, defeat, or otherwise circumvent any DRM, HDCP, or other content protection system used as part of the Rental(s); or (v) use the Rental for any commercial, promotional, or illegal purpose.
+Privacy Policy
+Terms
+Copyright
+Trademarks
+Subscriptions and Rentals
+Code of Conduct
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising
+Language:
+The Best of Plex
+Plex Pass gives you exclusive access to awesome new features and apps.
+Learn More
+Introducing streaming music powered by TIDAL
+Level up your music library with 60 million high-quality songs.
+TIDAL is seamlessly integrated with your existing music library — beautifully organized right in Plex.
+{{#if (or hasExpiredTidalTrial hasAnyStateTidalSubsc)}}
+Choose a Plan
+{{else}}
+Start 30-Day Free Trial{{/if}}

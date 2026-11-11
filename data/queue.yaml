@@ -104,6 +104,41 @@
   source: own
   status: done
   date: 2026-11-11
+- id: peacock
+  name: Peacock
+  website: https://www.peacocktv.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
+- id: starz
+  name: STARZ
+  website: https://www.starz.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
+- id: twitch
+  name: Twitch
+  website: https://www.twitch.tv
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
+- id: hayu
+  name: Hayu
+  website: https://www.hayu.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
+- id: nebula
+  name: Nebula
+  website: https://nebula.tv
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -515,9 +550,9 @@
   source: wikidata
   wikidata: Q117084855
   sitelinks: 27
-  status: out-of-scope
-  date: 2026-11-04
-  note: 'Free to watch; its subscriptions go to individual streamers'
+  status: done
+  date: 2026-11-11
+  note: 'Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14). Its subscriptions go to individual streamers (notes)'
 - id: hamachi
   name: Hamachi
   website: https://www.vpn.net
@@ -944,9 +979,9 @@
   source: wikidata
   wikidata: Q25022235
   sitelinks: 14
-  status: out-of-scope
-  date: 2026-11-04
-  note: 'Free, with ads'
+  status: done
+  date: 2026-11-11
+  note: 'Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14)'
 - id: gnome-keyring
   name: GNOME Keyring
   website: https://wiki.gnome.org/Projects/GnomeKeyring
@@ -1020,17 +1055,18 @@
   source: wikidata
   wikidata: Q21189826
   sitelinks: 12
-  status: out-of-scope
-  date: 2026-11-04
-  note: 'Free, with ads'
+  status: done
+  date: 2026-11-11
+  note: 'Re-queued 2026-11-10: free-only services are in scope (BLUEPRINT §14)'
 - id: plex
   name: Plex
   website: https://plex.tv
-  category: software
+  category: streaming
   source: wikidata
   wikidata: Q7204887
   sitelinks: 12
-  status: queued
+  status: done
+  date: 2026-11-11
 - id: mixcloud
   name: Mixcloud
   website: https://www.mixcloud.com

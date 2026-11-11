@@ -1,0 +1,349 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, its help centre also through
+# its Zendesk API (tubitvhelp.zendesk.com), and its home page through each catalog country's exit. Pages, each quoted
+# where it's used:
+# Pricing: none to read: "Tubi is a 100% free, 100% legal streaming service." and "We never ask for any credit card
+# information and have no way of charging you for anything, ever." (Is Tubi really free and legal?); "Right now, we
+# don’t have an ad-free option." (Why are there ads? Can I remove them?). So its one plan is free, priced 0 in each of
+# the catalog's countries its about page names: "Tubi is available in the US, Canada, Mexico, LATAM, United Kingdom and
+# Australia." (corporate.tubitv.com). Mexico, Puerto Rico and its Latin American countries are outside the catalog's
+# regions, so they're in availableIn without a price.
+# Region checklist, 2026-11-11: 1. no country paths (tubitv.com everywhere; Mexico's exit got tubitv.com/es-mx); 2. a
+# language picker only; 3. not needed (nothing is priced); 4. no checkout; 5. its help centre's country device lists;
+# 6. Edge from Canada and through each country's exit: the US's and the UK's home pages showed Tubi; German, French,
+# Spanish, Italian, Dutch and Irish exits got "Unfortunately, we're not currently available in your area." (gdpr.tubi.tv),
+# New Zealand's a blank page, and three Australian exits the same message or a blank page, though its about page and
+# help centre sell it there: "Disconnect any VPN — Tubi uses your IP to determine location, and VPNs can show the wrong
+# library or block playback entirely" (Why Is Content Unavailable in My Region?), so the official list decides;
+# 7. no bill offered.
+# Ways to pay: none ("no way of charging you for anything, ever"), so no paymentMethods and no renewal day.
+# Bundles: none (nothing is sold). Official resellers: none.
+# Features, read 2026-11-11: what it streams, from its about page ("Hollywood movies and TV shows, thousands of
+# creator-led stories and hundreds of Tubi Originals"), its help centre's live news and live sports channels (US) and
+# Tubi Kids, and Canada's categories ("Documentaries", "Reality TV", "Shonen Anime", "Creatorverse", "Films et séries
+# français"). Video quality: "Yes. The stream will be available in 4K UHD on supported devices." (Eagles vs. Cowboys on
+# Tubi, a US live game); otherwise its web player switches "SD" and "HD". Streams at once: no page says (its help
+# centre's 66 English articles, searched for "same time", "simultaneous", "devices at once"), and CableTV.com's review
+# says only "Don’t expect Cloud DVR and simultaneous streams", with no number, so it waits in core's
+# awaitingRequiredFeatures. No downloads: "You cannot download videos from Tubi or watch offline at this time." Profiles:
+# "Multiple Accounts gives up to 8 people with access to Tubi on a supported device their own Tubi experience", each
+# with "its own separate watch history, recommendations, watchlist", from a "Who’s Watching" screen: separate free
+# accounts rather than one account's profiles, so 8, inferred. Kids: Tubi Kids Accounts, "linked to and supervised by
+# your Tubi Account", with an age rating and "an optional 4-digit PIN" (Multiple Accounts & Tubi Kids), and parental
+# controls set with your password (Modify Tubi Parental Controls settings). No pause (nothing to pause).
+id: tubi
+name: Tubi
+website: https://tubitv.com
+category: streaming
+spendCategory: streaming
+# "Tubi is available in the US, Canada, Mexico, LATAM, United Kingdom and Australia." (corporate.tubitv.com), its LATAM
+# being "Costa Rica, Ecuador, El Salvador, Guatemala & Panama" (Supported Devices in LATAM), and Puerto Rico has its own
+# list (Supported Devices Outside of the US).
+availableIn: [US, CA, MX, PR, CR, EC, SV, GT, PA, GB, AU]
+# Nothing to cancel: its help centre's article on deleting your account.
+cancelUrl: https://tubitv.com/help-center/App-Features-and-Settings/articles/115000190954
+sources: { pricing: https://corporate.tubitv.com/ }
+notes: Free with ads, with no paid plan.
+# Owner (M11.2), read 2026-11-11: its about page; its terms are with Tubi, Inc. (San Francisco). Fox Corporation's
+# country and shares from its own investor news (investor.foxcorporation.com, on its site). No page read names a
+# majority holder.
+owner:
+  name: 'Fox Corporation'
+  website: https://www.foxcorporation.com
+  page:
+    name: 'About Tubi'
+    url: https://corporate.tubitv.com/
+  quotes:
+    - 'Headquartered in San Francisco and founded in 2014, Tubi is part of Tubi Media Group, a division of Fox Corporation.'
+  country:
+    code: US
+    page:
+      name: 'Fox Corporation Completes Acquisition of Roku'
+      url: https://investor.foxcorporation.com/news/business/2026/fox-corporation-completes-acquisition-of-roku/
+    quotes:
+      - 'New York, NY – November 6, 2026 – Fox Corporation (Nasdaq: FOXA, FOX)'
+    lastVerified: 2026-11-11
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: FOXA }
+      - { exchange: Nasdaq, symbol: FOX }
+    page:
+      name: 'Fox Corporation Completes Acquisition of Roku'
+      url: https://investor.foxcorporation.com/news/business/2026/fox-corporation-completes-acquisition-of-roku/
+    quotes:
+      - 'New York, NY – November 6, 2026 – Fox Corporation (Nasdaq: FOXA, FOX)'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): "Register via Facebook, Google, or Register via email" on the web, and "via Google, Facebook,
+# Apple, or Email" in its apps; on TVs, "Sign in with a link sent to your email" (How do I sign up and log into my Tubi
+# account on my device?). No two-step sign-in on any page. Platforms: Fire TV, Android, Android TV, Apple TV, iPhone and
+# iPad, smart TVs, Roku, "Playstation 4 and 5", "Xbox One, Series S, Series X" and "Web - tubitv.com" (Tubi Supported
+# Devices in the US), and "Windows" (Supported Devices In the UK; its site's "Open the Windows Tubi app"). App languages:
+# "United States: English, Spanish", "Canada: English, French", "Mexico & Latin America: Spanish" (Language Settings Now
+# Available on Web). Support: "Email Us" and "Chat With Us" on its help centre's pages (no phone: "Tubi does not offer
+# phone support").
+features:
+  platforms: [web, windows, ios, android, tv, console]
+  account.sign-in: [password, email-code, sso]
+  languages.interface: [en, es, fr]
+  support.channels: [email, chat]
+
+plans:
+  - id: tubi.free
+    name: Free
+    link: https://tubitv.com/
+    features:
+      ad-free: false
+      streaming.content: [films, series, kids, anime, documentaries, reality, creators]
+      streaming.own-media: false
+      streaming.french-content: true
+      streaming.profiles: 8
+      streaming.kids-profiles: true
+      account.parental-controls: true
+    inferred:
+      streaming.profiles:
+        reason: 'Up to 8 people can each have their own free Tubi account on one device, with their own history and recommendations, picked from a "Who’s Watching" screen: profiles in all but name.'
+        page:
+          name: Multiple Accounts & Tubi Kids
+          url: https://tubitv.com/help-center/App-Features-and-Settings/articles/42331260335643
+        lastVerified: 2026-11-11
+    notes: Films and series on demand, with ads; no account needed to watch. In the US only, live news and sports channels and 4K for some live events; French films and series in Canada. What it streams differs by country.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://corporate.tubitv.com/
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://corporate.tubitv.com/
+      - region: GB
+        currency: GBP
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://corporate.tubitv.com/
+      - region: AU
+        currency: AUD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://corporate.tubitv.com/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 (M11.15) in Edge from Canada: its Terms of Use ("Effective as of
+# March 3, 2026"), its Privacy Policy ("Last Updated/Effective Date: July 1, 2026"), which the terms include, Your Privacy
+# Choices and its Cookies page; its help centre's articles on signing up, deleting an account and Multiple Accounts &
+# Tubi Kids; and Fox Corporation's Responsible Vulnerability Disclosure Policy (foxcorporation.com, its owner's). Through
+# a UK exit its terms page showed an older version ("Effective as of July 1, 2024") with the same arbitration clause: no
+# grade changes. Calibrated against HBO Max and discovery+ (the same mass-arbitration opt-out), Paramount+ and CBC Gem.
+# The UK's own cookie consent (its help centre's "How do I update my consent preferences?", en-gb) wasn't rated. Not read:
+# the sign-up form's own fields (they open in a dialog after a choice of Facebook, Google or email), so the help centre's
+# list is quoted, and the privacy request forms, which are OneTrust's (privacyportal.onetrust.com), not linked.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://tubitv.com/static/terms
+    - name: 'Privacy policy'
+      url: https://tubitv.com/static/privacy
+    - name: 'Your privacy choices'
+      url: https://tubitv.com/privacy/your-privacy-choices
+    - name: 'How do I sign up and log into my Tubi account?'
+      url: https://tubitv.com/help-center/Setup-and-Troubleshooting/articles/4410093711131
+    - name: 'How do I delete my account?'
+      url: https://tubitv.com/help-center/App-Features-and-Settings/articles/115000190954
+    - name: 'How can I watch offline or download videos?'
+      url: https://tubitv.com/help-center/Setup-and-Troubleshooting/articles/4410086923803
+    - name: 'Responsible vulnerability disclosure policy (Fox Corporation)'
+      url: https://www.foxcorporation.com/responsible-vulnerability-disclosure-policy/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you watch, search and visit to improve its services and pick what it shows you, beyond what it needs to run. Opting out is partial: browser by browser, or by asking.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'Depending on your interactions with us, these technologies may also be used to collect and store information about your usage of the Tubi Services, such as pages you have visited, search history, and the video and other content you have viewed.'
+        - url: https://tubitv.com/static/privacy
+          quote: 'to measure, maintain and improve those Tubi Services and features and to develop new products and services, including conducting research and quality and safety assurance measures;'
+        - url: https://tubitv.com/static/privacy
+          quote: 'To opt out of Google Analytics specifically, please go to tools.google.com/dlpage/gaoptout.'
+      action:
+        name: 'Its privacy policy'
+        url: https://tubitv.com/static/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your device’s ad ID, IP address and other identifiers with advertising companies, and your information with partners for their marketing. You opt out device by device.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'This may include, for example, sharing certain information with advertising technology companies (e.g., identity partners), such as an advertising identifier for your device, IP address, or a “hash” of an identifier (i.e., a value generated using a cryptographic hash algorithm.)'
+        - url: https://tubitv.com/static/privacy
+          quote: 'Tubi may share information we collect about you as described in this Privacy Policy with business partners to permit them to send you marketing communications consistent with your choices.'
+        - url: https://tubitv.com/privacy/your-privacy-choices
+          quote: 'You will need to follow these opt-out instructions for each of your devices.'
+      action:
+        name: 'Your privacy choices'
+        url: https://tubitv.com/privacy/your-privacy-choices
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and its partners pick ads from what you do, on Tubi and elsewhere, across your devices. Turning that off has to be done device by device and browser by browser.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'Tubi and our service providers may use the information we collect from and about you as described in this Privacy Policy to deliver and measure more relevant, personalized ads to you when you use the Tubi Services or another service (on any of your devices).'
+        - url: https://tubitv.com/privacy/your-privacy-choices
+          quote: 'Because interest-based advertising relies on cookies and other similar technologies, opting out needs to be controlled at the device and/or browser level.'
+      action:
+        name: 'Your privacy choices'
+        url: https://tubitv.com/privacy/your-privacy-choices
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you post or write trains AI.'
+      pages: [https://tubitv.com/static/privacy, https://tubitv.com/static/terms]
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and backups for a while after you leave, with no periods named.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'We will retain your information for the period necessary to fulfill the purposes outlined in this Privacy Policy unless a longer retention period is required or allowed by law.'
+        - url: https://tubitv.com/static/privacy
+          quote: 'We may also retain backup information related to your account on our servers for some time after cancellation or your request for deletion, for fraud detection or to comply with applicable law or our internal security or recordkeeping policies.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account in its settings, or ask for your information to be deleted, with no stated time; it says it can’t always delete all of it.'
+      sources:
+        - url: https://tubitv.com/help-center/App-Features-and-Settings/articles/115000190954
+          quote: 'Scroll to the bottom and click Delete My Account.'
+        - url: https://tubitv.com/static/privacy
+          quote: 'We will try to comply with your request as soon as reasonably practicable and consistent with applicable law.'
+        - url: https://tubitv.com/static/privacy
+          quote: 'It may not always be possible to completely remove or delete all of your information due to technical constraints or contractual, financial, or legal requirements.'
+      action:
+        name: 'How do I delete my account?'
+        url: https://tubitv.com/help-center/App-Features-and-Settings/articles/115000190954
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for the information it holds about you with a request form, answered as soon as it reasonably can within the law; there’s no way to download it yourself.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'If you would like to access personal information we hold about you, delete, or correct personal information that you have previously provided directly to us, please visit www.tubitv.com/privacy/mydata or www.tubitv.com/privacy/delete or www.tubitv.com/privacy/correction and submit a request.'
+      action:
+        name: 'Its privacy policy'
+        url: https://tubitv.com/static/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides what the law requires, it may hand your information to public and government authorities simply because they ask, when it believes that’s needed.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: '(iv) comply with the law or legal process; or (v) respond to requests from public and government authorities.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information is handled in the US and any other country where it or its suppliers work, whose laws may protect it less, and it describes no safeguards.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'If you are a user located outside the United States, you understand and consent to having any personal information processed in the United States or in any other country in which we have facilities or in which we engage service providers.'
+        - url: https://tubitv.com/static/privacy
+          quote: 'The United States and other countries’ data protection laws may not be the same as those in your jurisdiction.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You can watch without an account. An account by email asks for your name, birthday, gender, email address and a password.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'This Privacy Policy applies to all users, including both those who use the Tubi Services without being registered with the Tubi Services and those who have registered an account with the Tubi Services.'
+        - url: https://tubitv.com/help-center/Setup-and-Troubleshooting/articles/4410093711131
+          quote: 'If you tapped on Register via Email: enter your Name, Birthday, Gender, Email, and Password.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Kids’ accounts and Kids Mode get only ads chosen by the show, not by what the child does. Teens need a parent’s consent, but it doesn’t say they’re spared ads picked for them.'
+      sources:
+        - url: https://tubitv.com/static/privacy
+          quote: 'To show contextual ads, to limit how many times a user sees the same ad, and to measure performance.'
+        - url: https://tubitv.com/static/terms
+          quote: 'If you are at least 13 and under 18 years of age, you may use or create an Account with Tubi only if you have the consent of your parent or guardian'
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: neutral
+      reason: 'Its owner, Fox, takes reports of security flaws by email and aims to answer within 30 days, but names no independent audit of Tubi.'
+      sources:
+        - url: https://www.foxcorporation.com/responsible-vulnerability-disclosure-policy/
+          quote: 'If you believe you have found a security vulnerability impacting Fox Corporation, we encourage you to let us know right away.'
+        - url: https://www.foxcorporation.com/responsible-vulnerability-disclosure-policy/
+          quote: 'Agrees to investigate and attempt to resolve the issue quickly, and do our best to respond within 30 days, or sooner if possible; and'
+        - url: https://tubitv.com/static/privacy
+          quote: 'Tubi uses commercially reasonable administrative, technical, personnel, and physical measures designed to safeguard information in its possession against loss, theft and unauthorized use, disclosure, or modification.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: poor
+      reason: 'You must take any dispute to private arbitration, one person at a time, with no class actions or jury. You can opt out of arbitration only if a mass arbitration leaves your claim unresolved.'
+      sources:
+        - url: https://tubitv.com/static/terms
+          quote: 'YOU AND TUBI WAIVE THE RIGHT TO BRING OR PARTICIPATE IN A CLASS ACTION IN CONNECTION WITH SUCH DISPUTES.'
+        - url: https://tubitv.com/static/terms
+          quote: 'If your claim is not resolved as part of the Bellwether Arbitration and Global Mediation process outlined above, the parties shall also have the opportunity to opt out of arbitration'
+      action:
+        name: 'Its arbitration terms'
+        url: https://tubitv.com/static/terms
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, and they count at once; using Tubi afterwards means you accept them.'
+      sources:
+        - url: https://tubitv.com/static/terms
+          quote: 'Any modification to these Terms of Use will be effective upon posting on the Tubi Services.'
+        - url: https://tubitv.com/static/terms
+          quote: 'Your continued access and/or use of the Tubi Services after any such modification is posted constitutes your acknowledgement and acceptance of the Terms of Use, as modified.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can stop you using Tubi whenever it decides, without warning.'
+      sources:
+        - url: https://tubitv.com/static/terms
+          quote: 'We may terminate your access to and use of the Tubi Services, at our sole discretion, at any time and without notice to you.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or end any part of Tubi at any time without notice, and says it isn’t responsible to you if it does.'
+      sources:
+        - url: https://tubitv.com/static/terms
+          quote: 'with respect to any or all users, at any time without notice or liability to you.'
+        - url: https://tubitv.com/static/terms
+          quote: 'You also agree that Tubi will not be liable to you for any modification, suspension, or discontinuance of any part of the Tubi Services.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://tubitv.com/static/terms, https://tubitv.com/static/privacy]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Anyone can watch without an account, and each person can have their own free one, but its terms say you mustn’t give your password to anyone.'
+      sources:
+        - url: https://tubitv.com/static/terms
+          quote: 'You agree that you will keep your password and Account information secure, that you will not disclose your Account password to anyone else'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre name no limit on devices, and it has no downloads.'
+      pages:
+        - https://tubitv.com/static/terms
+        - https://tubitv.com/help-center/Setup-and-Troubleshooting/articles/4410086923803
+      lastVerified: 2026-11-11
