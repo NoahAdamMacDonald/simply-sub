@@ -51,3 +51,10 @@
 - { kind: perk, from: perk:proton/scribe, to: ai.office-apps, on: 2026-11-04 }
 # M11.15 (the owner's choice of 2026-11-04): Hulu Premium's downloads, now that its help centre numbers the devices.
 - { kind: perk, from: perk:hulu/downloads, to: streaming.download-devices=1+, on: 2026-11-04 }
+# The owner's choice of 2026-11-11: Spotify Family's parental controls are the general feature now.
+- {
+    kind: perk,
+    from: perk:spotify/parental-controls,
+    to: account.parental-controls,
+    on: 2026-11-11,
+  }

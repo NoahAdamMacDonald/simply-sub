@@ -99,6 +99,14 @@ renewalAnchor:
     - https://www.siriusxm.com/help/subscription-renewal
   lastVerified: 2026-11-11
 
+# General features, read 2026-11-11: its site is in English (its Spanish is channels, not the app). Pause on its paid
+# car plans: "You can temporarily suspend your subscription one time in any calendar year for a period of up to six
+# months" (Can I temporarily suspend my service?), by phone, not for app-only plans (its Customer Agreement excludes
+# "Streaming (app only) Audio Plans"). No parental controls named: its Family Friendly plans leave out mature channels
+# for everyone (a perk).
+features:
+  languages.interface: [en]
+
 # Perks (M11.6): what each plan adds, in its plans pages' words.
 perks:
   - id: in-car
@@ -154,6 +162,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car]
     addOnIds: [siriusxm.sports, siriusxm.talk, siriusxm.news]
     notes: 'In your car and in the app: every music channel, ad-free. Sports, Talk and News are add-ons.'
@@ -178,6 +187,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, live-games, talk-news, in-studio-video, mature-channels]
     notes: 'In your car and in the app: all its music, sports play-by-play, talk and news, with in-studio video.'
     prices:
@@ -224,6 +234,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, live-games]
     notes: 'In your car and in the app: live games, league coverage and sports talk.'
     prices:
@@ -247,6 +258,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, live-games, talk-news, in-studio-video]
     notes: 'All Access without its mature channels.'
     prices:
@@ -270,6 +282,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks:
       [
         in-car,
@@ -302,6 +315,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, live-games, talk-news, artist-stations, merch-and-concerts]
     notes: 'Platinum without its mature channels. A $15 activation fee applies to inactive radios.'
     prices:
@@ -325,6 +339,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, live-games, talk-news, howard-stern, artist-stations, mature-channels]
     notes: 'Music, artist stations, talk, Howard Stern, comedy, news, live sports and sports talk. A $15 activation fee applies to inactive radios.'
     prices:
@@ -348,6 +363,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, live-games, talk-news, artist-stations]
     notes: 'Music & Entertainment without its mature channels. A $15 activation fee applies to inactive radios.'
     prices:
@@ -371,6 +387,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, talk-news, howard-stern, artist-stations]
     notes: 'Music plus some talk and news, with comedy and Howard Stern. A $15 activation fee applies to inactive radios.'
     prices:
@@ -394,6 +411,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: true
+      account.pause: true
     perks: [in-car, talk-news]
     notes: 'News, sports analysis, politics and talk, with traffic and weather; no music. A $15 activation fee applies to inactive radios.'
     prices:

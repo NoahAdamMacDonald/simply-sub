@@ -94,10 +94,12 @@ renewalAnchor:
     - Your billing cycle starts on the date you subscribed.
   lastVerified: 2026-11-09
 
-# Perks (M11.6): Family's parental controls, in its card's words.
-perks:
-  - id: parental-controls
-    name: Parental controls over all plan members
+# General features, read 2026-11-11: app languages from its country picker ("Canada (Français)", "España (Español)",
+# "Deutschland (Deutsch)", "San Marino (Italiano)", "Brasil (Português)", 日本, "대한민국 (한국어)", "香港（中文）", "भारत (हिन्दी)",
+# "مصر (العربية)"). Parental controls on Family only (its card's "Parental controls over all plan members", which was
+# a perk). No pause: How to cancel Premium plans has none, and its help centre finds no pause.
+features:
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 plans:
   - id: spotify.free
@@ -344,7 +346,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: false
-    perks: [parental-controls]
+      account.parental-controls: true
     addOnIds: [spotify.audiobooks-plus]
     notes: Up to 6 Premium accounts for family members at the same address. The audiobook hours are the plan manager's only.
     prices:

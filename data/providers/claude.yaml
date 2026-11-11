@@ -92,6 +92,11 @@ renewalAnchor:
     - "No, there isn't a direct way to change your subscription billing date. However, you can unsubscribe from your current plan, then resubscribe on your preferred billing date to establish your new monthly billing cycle on a different date."
   lastVerified: 2026-11-03
 
+# General features, read 2026-11-11: app languages from its help centre ("Supported Languages: English, French,
+# German, Hindi, Indonesian, Italian, Japanese, Korean, Portuguese (Brazilian), Spanish (Latin America), Spanish
+# (Spain)", How to use Claude in your preferred language). No pause (Cancel your Pro or Max subscription offers only
+# cancelling). No parental controls: "We require all users to be at least 18 years old to create and use a Claude
+# account."
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: claude.ai on the web, its desktop app for Windows,
 # macOS and Linux (in beta), iOS and Android, and Claude in Chrome (claude.com/download, "Get started with Claude", the
 # Android install article); a login link or code by email, or "Continue with Google" ("Log in to your Claude account").
@@ -100,6 +105,7 @@ renewalAnchor:
 features:
   platforms: [windows, macos, linux, android, ios, web, browser-extension]
   account.sign-in: [email-code, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, hi]
 
 plans:
   - id: claude.free

@@ -93,6 +93,8 @@ freeUse:
   pages: [https://www.tsn.ca/subscribe/]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: tsn.ca is in English only. No pause (How do I cancel my TSN subscription?) and no
+# parental controls (its FAQ has none; Bell Media's terms only say it "may offer" such tools).
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03 on its subscribe page ("Stream on Your Favourite
 # Devices"): TVs and streaming devices, TSN.ca on computers, Android, iPhone and iPad, PlayStation 5 and Xbox; a Bell
 # Media account's password (its FAQ); a phone line and chat (tsn.ca/help/contact-us: "Call: 1-833-TSN-HELP", "Chat
@@ -101,6 +103,7 @@ features:
   platforms: [web, ios, android, tv, console]
   account.sign-in: [password]
   support.channels: [phone, chat]
+  languages.interface: [en]
 
 # Official resellers: none listed (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). Its FAQ asks
 # "Can I get a bundle if I pay through a third-party TV or mobile provider?": TV and mobile providers bill it on their

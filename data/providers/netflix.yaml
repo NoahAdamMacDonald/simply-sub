@@ -260,6 +260,11 @@ freeUse:
   pages: [https://help.netflix.com/en/node/24926]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11 (Canada's help centre): app languages from its help centre's language menu (French
+# and French (Canada) among them). Pause: "If you just want to take a break, you can pause your membership instead of
+# canceling. This feature isn't available on the Basic plan" (How to cancel Netflix). Parental controls: "Set profile
+# maturity ratings or block titles" and "Lock your profile or other profiles on your account" (Parental controls on
+# Netflix); an extra member has "Only 1 profile (not Kids)" of their own (Extra Members), so neither for them.
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: smart TVs and
 # streaming players, Android, iPhone and iPad, the Netflix app for Windows, netflix.com in a browser (a Mac's way),
 # PlayStation and Xbox (node 14361); a password, or the sign-in codes and links it sends "to your email address or phone
@@ -268,6 +273,7 @@ features:
   platforms: [windows, android, ios, web, tv, console]
   account.sign-in: [password, email-code, sms]
   support.channels: [phone, chat]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 # Coverage: netflix.standard-ads in NZ, IE and NL, read 2026-11-03: each country's Plans and Pricing page lists Basic,
 # Standard and Premium, and no plan with ads.
@@ -294,6 +300,8 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -374,6 +382,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.parental-controls: true
     prices:
       - region: NZ
         currency: NZD
@@ -411,6 +420,8 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -516,6 +527,8 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.pause: true
+      account.parental-controls: true
     featureLabels:
       audio.dolby-atmos: Netflix spatial audio
     prices:

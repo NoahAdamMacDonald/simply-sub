@@ -62,10 +62,13 @@ perks:
   - id: exclusive-content
     name: Exclusive Premium content from creators
 
+# General features, read 2026-11-11: rumble.com is in English only. No pause (its Premium cancel article) and no
+# parental controls (rumble.support's search finds none).
 # Apps (the cross-category features), read 2026-11-04: Premium "covers Rumble on web, iOS, Android, Apple TV, Amazon
 # Fire TV, Roku, LG Smart TVs, and Samsung Smart TVs" (its help centre).
 features:
   platforms: [web, ios, android, tv]
+  languages.interface: [en]
 
 # Features, read 2026-11-04: no ads ("No video pre-rolls, no banner ads", its help centre; its terms define it as no
 # "programmatic" pre-roll and mid-roll ads); offline downloads "on the Rumble app on iOS and Android", with no number of

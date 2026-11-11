@@ -60,10 +60,18 @@ renewalAnchor:
     - 'In some cases, the date for billing may change, for example if your subscription began on a day not contained in a given month'
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from its help centre's languages ("Comment pouvons-nous vous aider
+# aujourd’hui?", "本日はどのようなご用件でしょうか？", "كيف يمكننا مساعدتك اليوم؟" and the others). Pause, for paid monthly plans: "You
+# can also pause your DAZN account" (its Canadian pricing page, the Internet Archive's copy of 2026-10-27, as dazn.com
+# refuses this machine); "The pause function allows you to suspend your subscription for up to 180 days", not for
+# annual plans, Apple billing or trials (its help article, the archive's copy of January 2025; it's gone from today's
+# help centre). No parental controls found (its help centre's search returns
+# nothing).
 # Apps (the cross-category features), read 2026-11-09 in its sign-up article: the website, TVs and TV streaming
 # devices, iPhone and iPad, Android, and Xbox and PlayStation.
 features:
   platforms: [web, tv, ios, android, console]
+  languages.interface: [en, fr, es, de, it, pt, ja, zh, ar]
 
 # Perks (M11.6): what its plans add that no feature describes, in its words.
 perks:
@@ -118,6 +126,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
       streaming.live: [sports]
+      account.pause: true
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
@@ -165,6 +174,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 1
       streaming.live: [sports]
+      account.pause: true
     notes: The US's monthly plan, on one device in one place at a time.
     prices:
       - {
@@ -186,6 +196,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.download-devices: 1
       streaming.live: [sports]
+      account.pause: true
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
@@ -225,6 +236,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
       streaming.live: [sports]
+      account.pause: true
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'
@@ -264,6 +276,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.download-devices: 1
       streaming.live: [sports]
+      account.pause: true
     inferred:
       streaming.download-devices:
         reason: 'It lets you download content for offline viewing on mobile devices, without saying on how many, so at least one.'

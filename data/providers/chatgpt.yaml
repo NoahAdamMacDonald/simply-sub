@@ -109,6 +109,11 @@ perks:
   - id: ultrafast
     name: Ultrafast with GPT-6 Astra and GPT-6.1 Sol
 
+# General features, read 2026-11-11: app languages from its help centre ("ChatGPT currently supports the following
+# languages: Albanian, Amharic, Arabic ... Chinese ... French ... German ... Hindi ... Italian, Japanese ... Korean
+# ... Portuguese ... Spanish"). Parental controls on every plan: "Parental controls let a parent or guardian link
+# their ChatGPT account to a teen's account, manage selected settings, set schedules" (Managing parental controls in
+# ChatGPT), "Available to all ChatGPT users" (its announcement). No pause (Canceling your ChatGPT subscription).
 # AI features (M11.9 and M11.15), read 2026-11-04 in the pricing page's comparison table (ticks from its screenshot):
 # - Image generation ("Limited" on Free), deep research ("Limited" on Free and Go), Codex ("Limited" on Free and Go) and
 #   "Excel, Word, PowerPoint, and Google Sheets extensions" ("Limited" on Free and Go) on every plan.
@@ -125,6 +130,7 @@ features:
   platforms: [windows, macos, android, ios, web, browser-extension]
   account.sign-in: [password, sso]
   support.channels: [chat]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 plans:
   - id: chatgpt.free
@@ -136,6 +142,7 @@ plans:
       ai.deep-research: true
       ai.coding-agent: true
       ai.office-apps: true
+      account.parental-controls: true
     prices:
       - region: GLOBAL
         currency: USD
@@ -156,6 +163,7 @@ plans:
       ai.coding-agent: true
       ai.office-apps: true
       ai.scheduled-tasks: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -257,6 +265,7 @@ plans:
       ai.office-apps: true
       ai.scheduled-tasks: true
       ai.early-access: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -359,6 +368,7 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$100 in the US
     perks: [dot-agent]
@@ -464,6 +474,7 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$200 in the US
     perks: [dot-agent, usage-more-than-pro-100]
@@ -489,6 +500,7 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$500 in the US
     perks: [dot-agent, usage-highest, ultrafast]

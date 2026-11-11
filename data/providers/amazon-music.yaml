@@ -126,9 +126,16 @@ renewalAnchor:
   pages: [https://www.amazon.ca/gp/help/customer/display.html?nodeId=201380010]
   lastVerified: 2026-11-10
 
+# General features, read 2026-11-11: app languages from its web players by country (music.amazon.fr "ACCUEIL", .de
+# "STARTSEITE", .es "INICIO", .it "LIBRERIA", .com.br "INÍCIO", .co.jp "ホーム"); no page shows music.amazon.ca in
+# French, and its apps follow the device's language. Pause for monthly plans bought from Amazon: "If your plan
+# is eligible, you can choose to pause your monthly subscription instead of cancelling", not "An annual plan" or "A
+# plan from Apple, Google, or a mobile service provider" (amazon.ca help). No parental controls: its explicit filter
+# is the listener's own.
 features:
   platforms: [windows, macos, android, ios, web, tv]
   account.sign-in: [password, passkey, totp, sms, email-code, trusted-device]
+  languages.interface: [en, fr, es, de, it, pt, ja]
 
 plans:
   - id: amazon-music.free
@@ -182,6 +189,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: false
+      account.pause: true
     notes: Plays on one device at a time. Amazon Prime members pay less (an add-on of Amazon Prime).
     prices:
       - region: CA
@@ -215,6 +223,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: false
+      account.pause: true
     notes: Standard for up to 6 accounts, playing on 6 devices at once.
     prices:
       - region: CA
@@ -247,6 +256,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: false
+      account.pause: true
     inferred:
       music.unlimited-skips:
         reason: 'Unlimited lets you “listen to any song, anytime, anywhere”, so skipping is never limited.'
@@ -287,6 +297,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: false
+      account.pause: true
     inferred:
       music.unlimited-skips:
         reason: 'Unlimited lets you “listen to any song, anytime, anywhere”, so skipping is never limited.'
@@ -326,6 +337,7 @@ plans:
       music.own-library: false
       music.lyrics: false
       music.live-radio: false
+      account.pause: true
     inferred:
       music.unlimited-skips:
         reason: 'Unlimited lets you “listen to any song, anytime, anywhere”, so skipping is never limited.'

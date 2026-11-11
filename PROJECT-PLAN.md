@@ -2219,9 +2219,23 @@ in every D1 `json` column search parses.
     of where you are (activity logging); account sharing (books, fitness, smart home, news, learning); device limits
     (books, news); and changes to your device (DNS, file sharing, smart home). No provider was in them yet, so no
     rating changed.
+  - **Music, part 5** (2026-11-11, the first night of the full catalog's research, without the owner): the four music
+    features (`music.unlimited-skips`, `music.own-library`, `music.lyrics`, `music.live-radio`) with every music
+    provider's value; your own music is playing files you have, not publishing tracks, and live radio a station or a
+    host's live session. SiriusXM (`siriusxm`: eleven monthly plans, the free access plan and All Music's add-ons, US
+    only) and SiriusXM Canada (`siriusxm-canada`: Sirius XM Canada Inc.'s own agreement and privacy policy, so a
+    provider of its own); no page gives SiriusXM's bitrate, so its audio quality waits. Sirius XM's privacy policy is a
+    shared document Pandora uses too. Qobuz (`qobuz`: Studio, Duo and Family monthly and yearly, Sublime yearly, in all
+    eleven regions; sold in the 27 countries its help centre lists) and Audiomack (`audiomack`: Free and Audiomack+,
+    Canada and the US, every 30 days).
+  - **Pausing, parental controls and app languages** (2026-11-11, the owner's choice): `account.pause`,
+    `account.parental-controls` and `languages.interface` in the registry, with every provider's value from its own
+    help centre and language menus. Parental controls are a parent's or plan manager's restriction on another
+    member's account or profile, not a filter you set for yourself; Spotify Family's perk became the feature, with a
+    perk redirect.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 3 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 5 done)
 
 **M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
 - **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on

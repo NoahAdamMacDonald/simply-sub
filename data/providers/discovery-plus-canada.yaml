@@ -91,12 +91,16 @@ freeUse:
   pages: [https://secure.discoveryplus.ca/pricing]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: discoveryplus.ca is in English only. No pause. Parental controls: a Kids profile
+# "automatically limits viewing" to children "aged 12 and under", though its help says it "does not offer
+# customizable parental controls" and you can switch profiles anytime (no PIN), as Viaplay's age-limited profiles.
 # Apps (the cross-category features), read 2026-11-09: "most smartphones, tablets and desktop browsers, and most
 # connected devices, including Amazon Fire TV streaming devices and Amazon Fire TV Edition Smart TVs; Apple iPads,
 # iPhones, iPod Touches and Apple TVs; Google devices and platforms including Android phones, tablets and Android OS
 # devices, and Samsung Smart TVs from 2018 and newer" (the FAQ on discoveryplus.ca). No game consoles.
 features:
   platforms: [ios, android, web, tv]
+  languages.interface: [en]
 
 # Features, read 2026-11-09 in its help centre (support.discoveryplus.ca, which answers only a browser) and terms:
 # - video quality: the devices article's chart gives each device's "maximum resolution", 1080p at most (Apple TV 4K,
@@ -121,6 +125,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.profiles: 5
       streaming.kids-profiles: true
+      account.parental-controls: true
     notes: The plan discovery+ calls “discovery+”, with limited ads.
     prices:
       - {
@@ -143,6 +148,7 @@ plans:
       streaming.download-devices: 1
       streaming.profiles: 5
       streaming.kids-profiles: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows up to 100 downloads at a time without saying on how many devices, so at least one.'

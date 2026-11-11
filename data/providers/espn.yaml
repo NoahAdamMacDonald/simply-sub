@@ -97,6 +97,10 @@ freeUse:
     ]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: espn.com in English and Spanish (ESPN Brasil's Portuguese site is another
+# product). No pause: its help, on ESPN Unlimited, says "There is no option to pause", and no page offers one for
+# Select. No parental controls: its help centre has no
+# profiles or parental-control article.
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its fan support centre: web browsers,
 # iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported Devices); a
 # MyDisney email address and password (Disney+'s MyDisney article names ESPN); chat ("contact us by clicking the Chat
@@ -105,6 +109,7 @@ features:
   platforms: [windows, android, ios, web, tv, console]
   account.sign-in: [password]
   support.channels: [chat]
+  languages.interface: [en, es]
 
 # Billing periods and resellers (M11.9), read 2026-11-03 through a US exit: monthly and annual for both plans, as
 # stored (its plans and prices article: "ESPN Select Annual Subscription $139.99/Year", "ESPN Unlimited Annual

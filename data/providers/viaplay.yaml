@@ -87,6 +87,10 @@ freeUse:
   pages: [https://viaplay.com/nl-nl/]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: its Dutch service is in Dutch, which isn't among the catalog's app languages (its
+# English help is Iceland's), so none is listed. No pause: "Je kunt je Viaplay-pakket op elk moment opzeggen" (cancel only). Parental
+# controls: age-limited profiles, "Kinderprofiel – toont alleen content die geschikt is voor kinderen"
+# (help.viaplay.com/nl/age-restriction-profile).
 # Apps (the cross-category features), read 2026-11-09 on its home page ("Viaplay is waar je bent"): Chromecast, Apple
 # TV, Android TV and smart TVs, PC and Mac in a browser, iPhone, iPad and Android, and PlayStation.
 features:
@@ -122,6 +126,7 @@ plans:
       streaming.profiles: 2
       streaming.kids-profiles: true
       streaming.live: [sports]
+      account.parental-controls: true
     inferred:
       streaming.profiles:
         reason: 'Its help centre sets what each profile in an account shows, for when several people in a family share it, without saying how many, so at least two.'
@@ -163,6 +168,7 @@ plans:
       streaming.profiles: 2
       streaming.kids-profiles: true
       streaming.live: [sports]
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It lets you download most series and films on phones and tablets, without saying on how many, so at least one.'

@@ -83,6 +83,11 @@ renewalAnchor:
     - https://proton.me/support/account/plans/payments-invoices
   lastVerified: 2026-11-03
 
+# General features, read 2026-11-11: app languages from proton.me's footer language menu ("Deutsch, English, Español
+# (España) ... Français, Italiano ... Português (Brasil) ... हिन्दी (भारत) ... 한국어, 日本語, 简体中文", no Arabic), French at
+# proton.me/fr. No pause: "You can upgrade, downgrade, or cancel your Proton subscription anytime" (Manage your
+# subscription). No parental controls: the Family administrator "manages the billing and memberships for the entire
+# family" (Get started with Proton Family), with no content restrictions.
 # Apps, sign-in, support and open source (M11.9, the cross-category features), read 2026-11-03: its apps on Windows, macOS,
 # Linux, Android and iOS, Mail and Drive on the web, Pass and VPN as browser extensions and VPN on Apple TV, Android TV
 # and Fire TV (each product's download page; each product's plan lists its own, Drive's Linux being a command-line tool);
@@ -94,6 +99,7 @@ features:
   account.sign-in: [password, totp, security-key]
   support.channels: [email]
   software.open-source: open-clients
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi]
 sourceRepo:
   url: https://github.com/ProtonMail
   page:

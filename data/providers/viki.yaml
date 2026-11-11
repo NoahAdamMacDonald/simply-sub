@@ -76,6 +76,11 @@ renewalAnchor:
     - "if you purchased a monthly Viki Pass plan on the 1st of the month, you'll continue to be billed on the 1st of each month."
   lastVerified: 2026-11-04
 
+# General features, read 2026-11-11: app languages from its help centre and site language versions. No pause (its
+# cancel article). Parental controls: PIN-locked content ratings (Content Restrictions on Viki).
+features:
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
+
 # Features, read 2026-11-04 on viki.com/pass (above): Plus's offline viewing names no number of devices, so 1
 # (inferred). No profiles or Kids profiles (no one under 18 may use it), no live programmes, and no French audio named:
 # its shows come with subtitles in many languages, which the French-content feature doesn't count.
@@ -90,6 +95,7 @@ plans:
     features:
       video.quality: 480p
       ad-free: false
+      account.parental-controls: true
     notes: Some of its shows and films, with ads, in SD. A Viki Pass adds the rest, in HD and without ads.
     prices:
       - {
@@ -109,6 +115,7 @@ plans:
       video.quality: 720p
       ad-free: true
       streaming.concurrent-streams: 1
+      account.parental-controls: true
     prices:
       - {
           region: CA,
@@ -179,6 +186,7 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 4
       streaming.download-devices: 1
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'Plus lets you "Watch offline", but no page says on how many devices, so 1 is the least it can be.'

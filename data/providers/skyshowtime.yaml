@@ -112,10 +112,15 @@ freeUse:
   pages: [https://www.skyshowtime.com/nl/help/article/skyshowtime-subscription-plans-and-pricing]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11 (its help articles' text, as skyshowtime.com blocks Canada): display languages
+# from How to change the display language of your SkyShowtime profile. No pause: its cancel article covers cancelling
+# and restarting only. Parental controls: profiles by age ("Familie … tot 12 jaar. Tiener … tot 16 jaar") and
+# "Profielvergrendeling" (Parental controls on SkyShowtime).
 # Apps (the cross-category features), read 2026-11-09: the app on iOS and Android, smart TVs (LG, Samsung, Android TV,
 # Fire TV) and the website (its help centre's supported devices).
 features:
   platforms: [ios, android, tv, web]
+  languages.interface: [en, es, pt]
 
 # Features, read 2026-11-09 in each country's help article on plans (the same table in Dutch and Spanish): third-party
 # ads only on Standard with ads ("Reclame van derden: Ja / Nee / Nee"; every plan "may include promotional trailers"
@@ -133,6 +138,7 @@ plans:
       streaming.concurrent-streams: 1
       streaming.profiles: 2
       streaming.kids-profiles: true
+      account.parental-controls: true
     inferred:
       streaming.profiles:
         reason: 'Its help centre has profiles for each member of your family, your children included, without saying how many, so at least two.'
@@ -192,6 +198,7 @@ plans:
       streaming.download-devices: 1
       streaming.profiles: 2
       streaming.kids-profiles: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows 30 downloads without saying on how many devices, so at least one.'
@@ -248,6 +255,7 @@ plans:
       streaming.download-devices: 1
       streaming.profiles: 2
       streaming.kids-profiles: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows 100 downloads without saying on how many devices, so at least one.'

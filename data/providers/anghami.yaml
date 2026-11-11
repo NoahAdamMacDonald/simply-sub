@@ -125,6 +125,13 @@ renewalAnchor:
     - 'The next step is now choosing the date when you would like your payment method to be charged each month and then subscribe again to Anghami+'
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: "Anghami is available in English, Arabic, and French." (How to change the app
+# language on Anghami?). Parental controls on Family: "You can also choose to hide explicit content for any member in
+# your plan." (How to Add or Remove Members from Your Anghami Family Plan); everyone else's "Hide explicit songs" is
+# their own setting. No pause.
+features:
+  languages.interface: [en, fr, ar]
+
 plans:
   - id: anghami.free
     name: Free
@@ -391,6 +398,7 @@ plans:
       music.own-library: true
       music.lyrics: true
       music.live-radio: true
+      account.parental-controls: true
     notes: Plus for up to six accounts in one household. Outside the Middle East and North Africa, Arabic songs only.
     prices:
       - region: CA
