@@ -119,6 +119,7 @@ plans:
       ad-free: false
       streaming.live: [tv-channels, sports]
       account.pause: true
+      streaming.content: [sports]
     notes: Its live Sportsnet channels and Sportsnet+ exclusives (Monday Night Hockey); regional games are blacked out outside their market. Only monthly plans can be paused. Its terms allow one stream at a time, its help centre two.
     prices:
       - region: CA
@@ -146,6 +147,7 @@ plans:
       ad-free: false
       streaming.live: [tv-channels, sports]
       account.pause: true
+      streaming.content: [sports]
     perks: [out-of-market-nhl]
     notes: Everything in Standard, plus out-of-market NHL games and SN World's soccer and rugby events. Only monthly plans can be paused. Its terms allow one stream at a time, its help centre two.
     prices:
@@ -174,6 +176,7 @@ plans:
       ad-free: false
       streaming.live: [tv-channels, sports]
       account.pause: true
+      streaming.content: [series, sports, news]
     perks: [citytv-plus]
     notes: Sportsnet+ Standard with Citytv+, monthly only; cancelling ends both. Its terms allow one stream at a time, its help centre two.
     prices:

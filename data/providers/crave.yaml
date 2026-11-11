@@ -108,6 +108,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids, reality, news]
     inferred:
       streaming.profiles:
         reason: 'Crave''s parental controls set "individual viewing levels for each profile on your account" for different family members, and no page gives the number, so 2 is the least it can be.'
@@ -147,6 +148,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids, reality, news]
     inferred:
       streaming.profiles:
         reason: 'Crave''s parental controls set "individual viewing levels for each profile on your account" for different family members, and no page gives the number, so 2 is the least it can be.'

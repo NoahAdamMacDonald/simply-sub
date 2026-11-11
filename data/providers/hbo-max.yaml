@@ -122,6 +122,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       account.parental-controls: true
+      streaming.content: [films, series, kids, documentaries]
     inferred:
       streaming.french-content:
         reason: 'In France it includes French channels such as TCM Cinéma, but no page lists its French programmes.'
@@ -243,6 +244,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       account.parental-controls: true
+      streaming.content: [films, series, kids, documentaries]
     inferred:
       streaming.download-devices:
         reason: 'It allows up to 30 downloads, but no page says on how many devices, so 1 is the least it can be.'
@@ -292,6 +294,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids, documentaries]
     inferred:
       streaming.download-devices:
         reason: 'It allows 30 downloads, but no page says on how many devices, so 1 is the least it can be.'
@@ -423,6 +426,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids, documentaries]
     inferred:
       streaming.download-devices:
         reason: 'It allows 100 downloads, but no page says on how many devices, so 1 is the least it can be.'

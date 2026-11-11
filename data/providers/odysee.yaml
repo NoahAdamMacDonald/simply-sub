@@ -83,6 +83,7 @@ plans:
     link: https://odysee.com/
     features:
       ad-free: true
+      streaming.content: [creators]
     notes: Its videos and live streams, with no ads; Premium adds the perks.
     prices:
       - {
@@ -100,6 +101,7 @@ plans:
     link: https://help.odysee.tv/premium/
     features:
       ad-free: true
+      streaming.content: [creators]
     perks: [early-access-features, verification, premium-badge]
     prices:
       - {
@@ -117,6 +119,7 @@ plans:
     link: https://help.odysee.tv/premium/
     features:
       ad-free: true
+      streaming.content: [creators]
     perks: [early-access-features, verification, premium-badge]
     prices:
       - {

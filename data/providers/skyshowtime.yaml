@@ -139,6 +139,7 @@ plans:
       streaming.profiles: 2
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.profiles:
         reason: 'Its help centre has profiles for each member of your family, your children included, without saying how many, so at least two.'
@@ -199,6 +200,7 @@ plans:
       streaming.profiles: 2
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.download-devices:
         reason: 'It allows 30 downloads without saying on how many devices, so at least one.'
@@ -256,6 +258,7 @@ plans:
       streaming.profiles: 2
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.download-devices:
         reason: 'It allows 100 downloads without saying on how many devices, so at least one.'

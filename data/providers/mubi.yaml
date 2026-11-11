@@ -120,6 +120,7 @@ plans:
       streaming.download-devices: 1
       streaming.french-content: true
       account.pause: true
+      streaming.content: [films, series]
     inferred:
       streaming.download-devices:
         reason: 'You can download films with its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'
@@ -365,6 +366,7 @@ plans:
       streaming.download-devices: 1
       streaming.french-content: true
       account.pause: true
+      streaming.content: [films, series]
     inferred:
       streaming.download-devices:
         reason: 'You can download films with its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'

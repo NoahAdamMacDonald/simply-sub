@@ -120,6 +120,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [films, series, documentaries, reality]
     notes: The US's discovery+ plan, with limited ads.
     prices:
       - {
@@ -143,6 +144,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       account.parental-controls: true
+      streaming.content: [films, series, documentaries, reality]
     inferred:
       streaming.download-devices:
         reason: 'It allows 100 downloads on iOS and Android devices without saying how many devices, so at least one.'
@@ -173,6 +175,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [series, documentaries, reality]
     notes: The UK's and Ireland's discovery+ plan (Ireland's Basic), with live channels, which differ by country. 4K is for select shows in the UK; Ireland's page doesn't say.
     prices:
       - {
@@ -205,6 +208,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [series, documentaries, reality]
     notes: Italy's entertainment plan with ads, with live channels.
     prices:
       - {
@@ -227,6 +231,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
       account.parental-controls: true
+      streaming.content: [series, documentaries, reality]
     inferred:
       ad-free:
         reason: 'Its cheaper plan is the one named "con pubblicità" (with ads), and the page says only live channels and sport carry ads.'
@@ -256,6 +261,7 @@ plans:
       streaming.kids-profiles: true
       streaming.live: [tv-channels, sports]
       account.parental-controls: true
+      streaming.content: [series, sports, documentaries, reality]
     inferred:
       ad-free:
         reason: 'Its cheapest plan is the one named "con pubblicità" (with ads), and the page says only live channels and sport carry ads.'

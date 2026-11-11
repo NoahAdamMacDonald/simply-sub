@@ -85,6 +85,7 @@ plans:
     link: https://rumble.com/
     features:
       ad-free: false
+      streaming.content: [creators]
     notes: Its videos and live streams, with pre-roll and mid-roll ads.
     prices:
       - {
@@ -104,6 +105,7 @@ plans:
       video.quality: 4k
       ad-free: true
       streaming.download-devices: 1
+      streaming.content: [creators]
     inferred:
       video.quality:
         reason: 'Its Premium creators can upload videos "with up to 4K quality", so it plays up to 4K; no page says so for viewers.'

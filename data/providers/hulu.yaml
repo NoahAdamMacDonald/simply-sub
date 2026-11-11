@@ -112,6 +112,7 @@ plans:
       streaming.kids-profiles: true
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, kids]
     prices:
       - region: US
         currency: USD
@@ -142,6 +143,7 @@ plans:
       streaming.kids-profiles: true
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, kids]
     perks: [watch-party]
     notes: A few shows play with ads before and after the video.
     prices:

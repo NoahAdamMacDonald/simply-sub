@@ -115,6 +115,7 @@ plans:
       video.quality: 480p
       ad-free: false
       streaming.french-content: true
+      streaming.content: [films, series, sports, kids, documentaries, news]
     inferred:
       video.quality:
         reason: 'EXTRA adds « une image HD » to what the free offer gives, so the free offer is in SD.'
@@ -142,6 +143,7 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 3
       streaming.french-content: true
+      streaming.content: [films, series, kids, documentaries]
     perks: [exclusive-premieres]
     notes: Ads play in some live and linear content.
     prices:
@@ -163,6 +165,7 @@ plans:
       streaming.live: [tv-channels]
       streaming.concurrent-streams: 3
       streaming.french-content: true
+      streaming.content: [news]
     inferred:
       video.quality:
         reason: "Its plan page states 1080p for EXTRA only. The app's highest quality setting is up to 1080p, so RDI's live channel is taken as 1080p."
@@ -194,6 +197,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.french-content: true
       includes-subscription: [ici-tou-tv.extra, ici-tou-tv.rdi]
+      streaming.content: [films, series, kids, documentaries, news]
     perks: [exclusive-premieres, rdi-channel]
     notes: ICI RDI's live channel has ads.
     prices:

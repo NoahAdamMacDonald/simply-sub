@@ -96,6 +96,7 @@ plans:
       video.quality: 480p
       ad-free: false
       account.parental-controls: true
+      streaming.content: [films, series]
     notes: Some of its shows and films, with ads, in SD. A Viki Pass adds the rest, in HD and without ads.
     prices:
       - {
@@ -116,6 +117,7 @@ plans:
       ad-free: true
       streaming.concurrent-streams: 1
       account.parental-controls: true
+      streaming.content: [films, series]
     prices:
       - {
           region: CA,
@@ -187,6 +189,7 @@ plans:
       streaming.concurrent-streams: 4
       streaming.download-devices: 1
       account.parental-controls: true
+      streaming.content: [films, series]
     inferred:
       streaming.download-devices:
         reason: 'Plus lets you "Watch offline", but no page says on how many devices, so 1 is the least it can be.'

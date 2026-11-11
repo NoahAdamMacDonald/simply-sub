@@ -127,6 +127,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 3
       streaming.live: [sports]
+      streaming.content: [sports]
     inferred:
       video.quality:
         reason: "No page says Select's quality. ESPN recommends 5.0 Mbps for HD content on Select or Unlimited, and only Unlimited is said to stream in 4K, so Select is taken as HD."
@@ -161,6 +162,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
     perks: [every-espn-network, espn-plus]
     prices:
       - region: US

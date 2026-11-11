@@ -143,6 +143,7 @@ plans:
       streaming.live: [sports]
       account.users: 6
       account.parental-controls: true
+      streaming.content: [films, series, sports, kids, documentaries]
     inferred:
       streaming.download-devices:
         reason: 'You can download its shows to your Apple devices, but it doesn’t say on how many at once, so 1 is the least it can be.'

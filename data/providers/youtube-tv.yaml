@@ -138,6 +138,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.users: 6
       account.pause: true
+      streaming.content: [series, sports, kids, reality, news]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -170,6 +171,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.users: 6
       account.pause: true
+      streaming.content: [sports]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -202,6 +204,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.users: 6
       account.pause: true
+      streaming.content: [sports, news]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -234,6 +237,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.users: 6
       account.pause: true
+      streaming.content: [series, sports, reality]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -265,6 +269,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.users: 6
       account.pause: true
+      streaming.content: [sports, kids, news]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -296,6 +301,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.users: 6
       account.pause: true
+      streaming.content: [series, sports, kids, reality]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -327,6 +333,7 @@ plans:
       streaming.live: [tv-channels]
       account.users: 6
       account.pause: true
+      streaming.content: [series, reality]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -358,6 +365,7 @@ plans:
       streaming.live: [tv-channels]
       account.users: 6
       account.pause: true
+      streaming.content: [series, reality, news]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -390,6 +398,7 @@ plans:
       streaming.live: [tv-channels]
       account.users: 6
       account.pause: true
+      streaming.content: [series, kids, reality, news]
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'

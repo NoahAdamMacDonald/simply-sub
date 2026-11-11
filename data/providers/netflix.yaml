@@ -302,6 +302,7 @@ plans:
       streaming.french-content: true
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, kids, documentaries]
     prices:
       - region: CA
         currency: CAD
@@ -383,6 +384,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       account.parental-controls: true
+      streaming.content: [films, series, kids, documentaries]
     prices:
       - region: NZ
         currency: NZD
@@ -422,6 +424,7 @@ plans:
       streaming.french-content: true
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, kids, documentaries]
     prices:
       - region: CA
         currency: CAD
@@ -529,6 +532,7 @@ plans:
       streaming.french-content: true
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, kids, documentaries]
     featureLabels:
       audio.dolby-atmos: Netflix spatial audio
     prices:

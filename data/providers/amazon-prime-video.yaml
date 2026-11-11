@@ -253,6 +253,7 @@ plans:
       includes-subscription: [amazon-prime-video.prime-video]
       account.pause: true
       account.parental-controls: true
+      streaming.content: [films, series, sports, documentaries]
     inferred:
       video.hdr:
         reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'
@@ -476,6 +477,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.parental-controls: true
+      streaming.content: [films, series, sports, documentaries]
     inferred:
       video.hdr:
         reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'
