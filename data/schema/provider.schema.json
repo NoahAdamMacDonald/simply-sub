@@ -2080,6 +2080,11 @@
           "additionalProperties": false,
           "description": "Where the company is from (the owner’s choice, 2026-11-03): every provider says"
         },
+        "volunteer": {
+          "type": "boolean",
+          "const": true,
+          "description": "A volunteer project with no company behind it (Jellyfin, the owner’s choice of 2026-11-11): it needs no country"
+        },
         "stock": {
           "type": "object",
           "properties": {
