@@ -263,6 +263,11 @@ freeUse:
   pages: [https://help.disneyplus.com/article/disneyplus-en-ca-price]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from its help on the app's display language and its site's language
+# versions (disneyplus.com/fr-ca: "CONNEXION"; no Hindi). Pause: "If you have a monthly subscription billed by
+# Disney+, you can pause it", and "If you have an Extra Member on your subscription, that profile will be paused as
+# well" (How to cancel Disney+). Parental controls: "Content ratings / Junior Mode / Profile PIN / Profile creation
+# restriction" (Parental controls); an Extra Member has their own login, so the account holder can't restrict it.
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its Canadian help centre: web browsers,
 # iPhone and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported devices); a
 # MyDisney email address and password (MyDisney login details); "live support from 24 hours a day seven days a week",
@@ -271,6 +276,7 @@ features:
   platforms: [windows, android, ios, web, tv, console]
   account.sign-in: [password]
   support.channels: [chat, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
 
 # Official resellers: none (M11.9, read 2026-11-03). Its third-party billing partners ("Docomo, J:COM, Apple, Google,
 # Amazon, Hulu (Hulu | Disney+ Set Plan), or any other platform") are ways to pay (paymentMethods).
@@ -288,6 +294,8 @@ plans:
       streaming.profiles: 7
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -382,6 +390,8 @@ plans:
       streaming.concurrent-streams: 4
       streaming.profiles: 7
       streaming.kids-profiles: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: US
         currency: USD
@@ -405,6 +415,8 @@ plans:
       streaming.profiles: 7
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD
@@ -582,6 +594,8 @@ plans:
       streaming.profiles: 7
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: CA
         currency: CAD

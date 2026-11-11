@@ -82,6 +82,10 @@ freeUse:
   pages: [https://help.hulu.com/article/hulu-how-much-does-hulu-cost]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: hulu.com is in English only (its Spanish help is about shows). Pause, monthly
+# only: "Set the duration (up to 12 weeks)", "not available for annual subscribers" or most third-party billing (Can I
+# put my Hulu subscription on pause?). Parental controls: "With PIN Protection, parents can restrict access to
+# individual profiles" (Kids profiles and PIN Protection).
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03 in its help centre: web browsers, iPhone
 # and iPad, Android, Windows 10 and 11, TVs and streaming devices, PlayStation and Xbox (Supported devices); a MyDisney
 # email address and password (MyDisney login details); "live support 24 hours a day 7 days a week", by chat (How to
@@ -90,6 +94,7 @@ features:
   platforms: [windows, android, ios, web, tv, console]
   account.sign-in: [password]
   support.channels: [chat, 24-7]
+  languages.interface: [en]
 
 # Billing periods and resellers (M11.9), read 2026-11-03 through a US exit: monthly, and yearly for With Ads only
 # (hulu.com/annual-offer: "Automatically renews on annual basis for $124.99/year", its regular price; the annual billing
@@ -105,6 +110,8 @@ plans:
       streaming.concurrent-streams: 2
       streaming.profiles: 7
       streaming.kids-profiles: true
+      account.pause: true
+      account.parental-controls: true
     prices:
       - region: US
         currency: USD
@@ -133,6 +140,8 @@ plans:
       streaming.download-devices: 5
       streaming.profiles: 7
       streaming.kids-profiles: true
+      account.pause: true
+      account.parental-controls: true
     perks: [watch-party]
     notes: A few shows play with ads before and after the video.
     prices:

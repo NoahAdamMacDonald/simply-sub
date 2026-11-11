@@ -132,6 +132,11 @@ perks:
   - id: dashpass
     name: DoorDash's DashPass
 
+# General features, read 2026-11-11: app languages from primevideo.com's language versions (/-/fr_FR/ "Prime Video :
+# regardez des films", es_ES, de_DE, it_IT, pt_BR, ja_JP, ko_KR, zh_TW, hi_IN, ar_AE). Pause: "You can pause your
+# billing and services for eligible Prime memberships" (Pause Your Amazon Prime Membership), its add-ons ending while
+# it's paused; Amazon Music's monthly plans pause too, as amazon-music's. Parental controls: "Prime Video parental
+# controls allow you to set restrictions for video content", with an Account PIN (Parental Controls on Prime Video).
 # Apps (the cross-category features), read 2026-11-04 in Prime Video's help: apps "for mobile devices running
 # Android, iOS, and Windows", for Fire TV, smart TVs, set-top boxes and game consoles, and the web ("through your web
 # browser", its usage rules). Sign-in, read 2026-11-10: the Amazon account's help articles, as for Amazon Music ("a
@@ -140,6 +145,7 @@ perks:
 features:
   platforms: [windows, android, ios, web, tv, console]
   account.sign-in: [password, passkey, totp, sms, email-code, trusted-device]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
 
 # Features, read 2026-11-04 from Canada in Prime Video's help: its usage rules ("You can stream up to three titles at
 # the same time using the same Amazon account"; downloads: "You can download available titles to only two devices at
@@ -166,6 +172,7 @@ plans:
     link: https://www.primevideo.com/
     features:
       ad-free: false
+      account.parental-controls: true
     notes: More than 1,000 free ad-supported channels, and other titles free with ads, for any Amazon customer in the US, the UK, Germany, France, Italy and Spain.
     prices:
       - {
@@ -244,6 +251,8 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       includes-subscription: [amazon-prime-video.prime-video]
+      account.pause: true
+      account.parental-controls: true
     inferred:
       video.hdr:
         reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'
@@ -466,6 +475,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       streaming.live: [sports]
+      account.parental-controls: true
     inferred:
       video.hdr:
         reason: 'Amazon’s US help says members stream in Dolby Vision, an HDR format; other countries’ pages don’t name HDR.'

@@ -95,6 +95,13 @@ freeUse:
   pages: [https://help.hbomax.com/us-en/Answer/Detail/000002547]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from hbomax.com's country and language versions (hbomax.com/fr/fr
+# in French, and the others). No pause: its cancel article offers only "Cancel Your Subscription" (the only "paused"
+# article is Apple's billing). Parental controls: "You can create a Kids profile that limits what content ratings your
+# child can watch", with "Kid-Proof Exit" and a "Profile PIN" (All about Kids profiles).
+features:
+  languages.interface: [en, fr, es, de, it, pt, zh]
+
 # Features, read 2026-11-04 through a US exit ("What's included with each plan?"): Basic with Ads and Standard "Stream
 # on 2 devices at once" in "Full HD 1080p"; Premium "Stream on 4 devices at once (only 2 for sports)", "4K Ultra HD
 # video quality (as available)" and "Dolby Atmos immersive audio (as available)"; downloads "30" on Standard and 100 on
@@ -114,6 +121,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.parental-controls: true
     inferred:
       streaming.french-content:
         reason: 'In France it includes French channels such as TCM Cinéma, but no page lists its French programmes.'
@@ -234,6 +242,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.french-content: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows up to 30 downloads, but no page says on how many devices, so 1 is the least it can be.'
@@ -282,6 +291,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       streaming.live: [sports]
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows 30 downloads, but no page says on how many devices, so 1 is the least it can be.'
@@ -412,6 +422,7 @@ plans:
       streaming.kids-profiles: true
       streaming.french-content: true
       streaming.live: [sports]
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows 100 downloads, but no page says on how many devices, so 1 is the least it can be.'

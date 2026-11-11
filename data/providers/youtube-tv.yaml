@@ -105,6 +105,10 @@ perks:
   - id: unlimited-dvr
     name: Unlimited DVR space
 
+# General features, read 2026-11-11: tv.youtube.com's language menu lists English and Spanish. Pause: "When you pause
+# your membership, you can choose the length of this paused state, from 4 weeks up to 6 months" (Cancel or pause your
+# YouTube TV membership); its add-ons pause with it. No parental controls: its age-rating filter is set from the
+# signed-in profile, with no PIN.
 # Apps and support, read 2026-11-04: "Your smart TV", "Your phone or tablet", "Your game console" and tv.youtube.com,
 # with iOS and Android apps (the welcome page); a Google Account's sign-in, as for YouTube; "We’re here to help 24/7",
 # by phone and live chat (the plans page: "Call us to speak to an agent", "Start a live chat with an agent").
@@ -112,6 +116,7 @@ features:
   platforms: [android, ios, web, tv, console]
   account.sign-in: [password, passkey, push-approval, totp, security-key, sms]
   support.channels: [phone, chat, 24-7]
+  languages.interface: [en, es]
 
 # Features, read 2026-11-04: "6 household accounts and 3 streams" and "Unlimited DVR space" on every plan (the welcome
 # page), shared with "up to 5 other members" who "Live in the same household as the family manager" (YouTube TV Help's
@@ -132,6 +137,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -163,6 +169,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -194,6 +201,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -225,6 +233,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -255,6 +264,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -285,6 +295,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels, sports]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -315,6 +326,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -345,6 +357,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'
@@ -376,6 +389,7 @@ plans:
       streaming.concurrent-streams: 3
       streaming.live: [tv-channels]
       account.users: 6
+      account.pause: true
     inferred:
       video.quality:
         reason: 'Its help says YouTube TV streams "HD video", which YouTube defines as 720 to 1080 lines, and only the 4K Plus add-on adds 4K, so 720p is the least it can be.'

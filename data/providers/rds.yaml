@@ -80,6 +80,8 @@ freeUse:
   pages: [https://www.rds.ca/abonnement/]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: rds.ca is in French only. No pause (Comment annuler mon abonnement direct à RDS
+# ?) and no parental controls (its FAQ has none; Bell Media's terms only say it may offer such tools).
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03 on its subscribe page ("Regardez sur vos appareils
 # préférés"): TVs and streaming devices, RDS.ca on computers, Android, and iPhone and iPad, with no consoles; a Bell
 # Media account's password (its FAQ); a phone line and chat (rds.ca/aide/contactez-nous: "Appelez le 1-833-RDS-AIDE",
@@ -88,6 +90,7 @@ features:
   platforms: [web, ios, android, tv]
   account.sign-in: [password]
   support.channels: [phone, chat]
+  languages.interface: [fr]
 
 # Official resellers: none listed (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). Its FAQ asks
 # « Puis-je obtenir un forfait via mon fournisseur télé, mobile ou un fournisseur tiers d'achats intégrés ? »: TV and

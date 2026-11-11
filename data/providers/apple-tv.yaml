@@ -106,6 +106,10 @@ freeUse:
   pages: [https://tv.apple.com/ca]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from Apple's country picker ("Canada (Français)" and the others).
+# Parental controls through Apple's Screen Time: "You can choose age-appropriate ratings for categories of apps,
+# music, books, movies, TV shows, and more" (Set up parental controls). No pause (Apple's Cancel a subscription from
+# Apple).
 # Apps and sign-in (the cross-category features), read 2026-11-04: the Apple TV app "on your Apple devices, smart TVs,
 # web and more" (tv.apple.com/ca: iPhone, iPad, Mac & Windows, Apple Vision Pro, Android and the web, and Samsung, LG,
 # Roku, Fire TV, Google TV, PlayStation, Xbox and others); an Apple Account's password, with a "six-digit verification
@@ -114,6 +118,7 @@ freeUse:
 features:
   platforms: [ios, macos, windows, android, web, tv, console]
   account.sign-in: [password, push-approval, sms]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
 
 # Features, read 2026-11-04: "For most content, one subscription allows you to enjoy 6 simultaneous streams" (Apple
 # Support's download and stream article); "With Family Sharing, one subscription works for up to six people"
@@ -137,6 +142,7 @@ plans:
       streaming.french-content: true
       streaming.live: [sports]
       account.users: 6
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'You can download its shows to your Apple devices, but it doesn’t say on how many at once, so 1 is the least it can be.'
