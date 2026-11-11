@@ -1307,6 +1307,8 @@ function checkOwner(
   // Where the company is from (the owner's choice, 2026-11-03), quoted like its name.
   const { country } = owner;
   if (!country) {
+    // A volunteer project (Jellyfin) has no company and so no country.
+    if (owner.volunteer) return;
     report(
       ['owner'],
       'Say where the company is from: owner.country, an ISO 3166-1 code, quoted from its own pages or its owner’s',

@@ -1,0 +1,337 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with a plain fetch from Canada (jellyfin.org, its
+# documentation, its GitHub security policy and its translation site, translate.jellyfin.org). Pages, each quoted where
+# it's used:
+# Pricing: none. Jellyfin is free, open-source software you run yourself: "The Jellyfin server and official clients are
+# free to download, now and always. There are no costs, hidden or otherwise, to use Jellyfin, either for yourself, for
+# your friends, or for your company." (its home page). It has no paid plan, no account with the project and no servers
+# for users ("Note: We do not run servers for users."), so its one plan is free, priced for everywhere. Its donations
+# (OpenCollective, and its developers' own pages) buy nothing: "We do not accept any money or benefit for any form of
+# favor or feature" (Donations to individual developers).
+# Region checklist, 2026-11-11: not needed: one free download for every country, with no prices.
+# Bundles: none. Official resellers: none; "Jellyfin is an explicitly anti-commercial project" that "Will not
+# commercialize the software ourselves" (Commercial Support). Servers others sell access to aren't Jellyfin's: "If you
+# are using or paying someone for "Jellyfin" i.e. access to a specific server: It is not us." (its server policy).
+# Features, read 2026-11-11: it plays your own media from a server you run ("Run the Jellyfin server on your system",
+# "the only media you see is your own"), so streaming.own-media and no content of its own (streaming.content: none).
+# Video quality: no page states a top quality; it plays your files as they are, and its hardware guide sizes servers
+# for "Tone-mapping 4K 60fps Dolby Vision content to 4K 60fps H264 SDR", so 4K (inferred). Streams: no number; its
+# hardware guide counts "the max number of concurrent streams all your users will consume" on your own hardware, so
+# unlimited (inferred). Ads: no page says "no ads" in so many words, but it shows only your own media and has "no
+# tracking", so ad-free (inferred). Users: the server's admin adds each person's own account, with no limit stated, so
+# unlimited profiles (inferred); each can be allowed to download ("These allow a user to download media.", no number of
+# devices, so 1, inferred) and limited by "Maximum allowed parental rating", tags and an "Access Schedule" (parental
+# controls). No kids mode of its own: a child's account is an ordinary one with a rating limit, so no kids profiles. No
+# HDR: its transcoding "doesn't support HDR to HDR tone-mapping, or passing through HDR metadata", and no page says it
+# plays HDR. Live TV and recording need your own tuner or IPTV playlist ("Jellyfin allows you to watch and record live
+# television using supported hardware", Live Broadcast): a perk, not streaming.live, since it brings no channels.
+# Free use: its one plan is free.
+id: jellyfin
+name: Jellyfin
+website: https://jellyfin.org
+# Its translation site, whose language list gives its apps' languages.
+domains: [translate.jellyfin.org]
+category: streaming
+spendCategory: streaming
+# Nothing to cancel: it's free, with no account at Jellyfin. Its home page says so ("There are no costs, hidden or
+# otherwise, to use Jellyfin").
+cancelUrl: https://jellyfin.org/
+sources: { pricing: https://jellyfin.org/ }
+# Owner (M11.2), read 2026-11-11: no company. Its Community Standards ("official Jellyfin project policy") say a project
+# of volunteers runs it, with "the Core Team or the Project Leader" deciding (its about page lists the core team). No
+# page states a country, so none.
+owner:
+  name: Jellyfin Project
+  volunteer: true
+  page:
+    name: Community standards
+    url: https://jellyfin.org/docs/general/community-standards/
+  quotes:
+    - 'Jellyfin is a project made up entirely and exclusively of Volunteers who donate their free time to the project.'
+    - 'Jellyfin is not and will never be under the control of any corporation or profit-driven entity, and does not exist to make money for anyone, including any volunteer contributors or the project leadership.'
+  lastVerified: 2026-11-11
+# Owner: a volunteer project (the owner's choice of 2026-11-11), so no company and no country; its status page says
+# "Run by the Jellyfin Project" (status.jellyfin.org). Ways to pay: none, since it sells nothing.
+# Source code (M11.5): its about page links its GitHub organization and main repository; its server and official apps
+# are GNU GPL ("Jellyfin is Free Software, licensed under the GNU GPL", its home page), so fully open.
+sourceRepo:
+  url: https://github.com/jellyfin
+  page:
+    name: About
+    url: https://jellyfin.org/docs/general/about
+  quotes:
+    - 'Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.'
+    - 'You can find our main repository on GitHub as well as our organization page.'
+  lastVerified: 2026-11-11
+
+# General features, read 2026-11-11. Platforms: its server for Windows, macOS, Linux and Docker (its downloads), and
+# official apps for Android, iOS and iPadOS, Android TV and Fire TV, Roku, webOS, Samsung Tizen and Xbox, a desktop
+# player (Jellyfin Media Player) and a web client (its clients list). Sign-in: a user's password on your own server, and
+# Quick Connect, "a temporary Quick Connect code is generated and used to authorize login from an already authenticated
+# client" (Quick Connect); an LDAP plugin is a third-party add-on. Support: its forum and Matrix chat rooms (its contact
+# page), no email or ticket support. App languages: its web client's languages on its translation site
+# (translate.jellyfin.org/projects/jellyfin/jellyfin-web/) at 97% or more translated: English, Arabic, Chinese
+# (Simplified), French, German, Italian, Japanese (99.8%), Korean (97.1%), Portuguese (99.8%) and Spanish; Hindi is 13.2%
+# translated, so it's left out. Open source and self-hostable: its home page ("Run the Jellyfin server on your system").
+# No pause (nothing to pay).
+features:
+  platforms: [web, windows, macos, linux, android, ios, tv, console]
+  account.sign-in: [password, push-approval]
+  support.channels: [community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+  software.open-source: fully-open
+  software.self-hostable: true
+
+# Perks (M11.6): live TV and recording from your own tuner, in its home page's words.
+perks:
+  - id: live-tv-dvr
+    name: Watch TV and set automatic recordings to expand your library
+
+plans:
+  - id: jellyfin.free
+    name: Free
+    link: https://jellyfin.org/downloads/
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: unlimited
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.profiles: unlimited
+      streaming.content: []
+      streaming.own-media: true
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'It plays your own files as they are, and its hardware guide sizes a server for converting 4K Dolby Vision videos as they play, so it plays 4K; no page states a top quality.'
+        page:
+          name: Hardware selection
+          url: https://jellyfin.org/docs/general/administration/hardware-selection
+        lastVerified: 2026-11-11
+      streaming.concurrent-streams:
+        reason: 'It sets no number: its hardware guide counts “the max number of concurrent streams all your users will consume” on your own server, so your hardware is the only limit.'
+        page:
+          name: Hardware selection
+          url: https://jellyfin.org/docs/general/administration/hardware-selection
+        lastVerified: 2026-11-11
+      ad-free:
+        reason: 'It shows only your own media (“the only media you see is your own”) and has no tracking, so it has no ads; no page says “no ads” in so many words.'
+        page:
+          name: Jellyfin
+          url: https://jellyfin.org/
+        lastVerified: 2026-11-11
+      streaming.download-devices:
+        reason: 'The server’s admin can let each person download media, but it doesn’t say on how many devices, so 1 is the least it can be.'
+        page:
+          name: Managing users
+          url: https://jellyfin.org/docs/general/server/users/adding-managing-users
+        lastVerified: 2026-11-11
+      streaming.profiles:
+        reason: 'Each person gets an account of their own on your server, added from its dashboard, and its documentation names no limit.'
+        page:
+          name: Managing users
+          url: https://jellyfin.org/docs/general/server/users/adding-managing-users
+        lastVerified: 2026-11-11
+    perks: [live-tv-dvr]
+    notes: Free and open source. You run the server on your own computer or NAS and stream only your own films, shows, music, books and photos to its apps; no company runs a server for you. Live TV needs your own tuner or IPTV playlist.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-11,
+          sourceUrl: https://jellyfin.org/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-11 with a plain fetch. Jellyfin has no terms of service, no
+# privacy policy and no sign-up: you download free software under the GNU GPL (its home page) and make accounts on your
+# own server, which the project never sees. So the topics about an account with it, its data and its contract are
+# not-applicable, with why. Read: its home and about pages, its Community Standards (rules for its forum and chat, and
+# "official Jellyfin project policy"), its server policy and Commercial Support page, its users, managing users, Quick
+# Connect, backup and hardware documentation, its privacy post ("A Note About Privacy and Expo for iOS", 2021), and its
+# GitHub security policy and advisories (github.com/jellyfin/jellyfin/security). Its forum (forum.jellyfin.org) and chat
+# have their own rules for posting there, which aren't part of using Jellyfin. The apps in Apple's, Google's and other
+# stores come under those stores' terms, not read. Its plugins and outside metadata services (TheMovieDB and others) are
+# third parties' with their own terms; the Community Standards say so.
+policies:
+  links:
+    - name: 'Jellyfin (home page)'
+      url: https://jellyfin.org/
+    - name: 'Community standards'
+      url: https://jellyfin.org/docs/general/community-standards/
+    - name: 'Server policy'
+      url: https://jellyfin.org/docs/general/community-standards/servers
+    - name: 'A note about privacy and Expo for iOS'
+      url: https://jellyfin.org/posts/a-note-about-privacy-and-expo
+    - name: 'Users'
+      url: https://jellyfin.org/docs/general/server/users/
+    - name: 'Managing users'
+      url: https://jellyfin.org/docs/general/server/users/adding-managing-users
+    - name: 'Backup and restore'
+      url: https://jellyfin.org/docs/general/administration/backup-and-restore
+    - name: 'Security policy (GitHub)'
+      url: https://github.com/jellyfin/jellyfin/security/policy
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: 'Jellyfin collects nothing: its server and apps don’t track you or report back, and it runs no central servers. Your data stays on your own server.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'Jellyfin has no tracking, phone-home, or central servers collecting your data.'
+        - url: https://jellyfin.org/posts/a-note-about-privacy-and-expo
+          quote: 'I want to stress again: We do not track any user activity or collect any data.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'The Jellyfin team never gets your data, so it has none to sell or share. Your own server looks up details such as posters from outside services, each with its own rules.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'Jellyfin has no tracking, phone-home, or central servers collecting your data.'
+        - url: https://jellyfin.org/docs/general/community-standards/
+          quote: 'Jellyfin can interface with multiple external services, both internally (e.g. Metadata providers) and by user configuration, each of which has its own requirements and TOS to protect itself.'
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no tracking: it shows only your own media, and nothing in it follows what you do.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'We’re also not in the media business, so the only media you see is your own.'
+        - url: https://jellyfin.org/
+          quote: 'Jellyfin has no tracking, phone-home, or central servers collecting your data.'
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'The Jellyfin team never receives anything you watch, write or upload, so there’s nothing it could train AI on.'
+      pages:
+        - https://jellyfin.org/
+        - https://jellyfin.org/posts/a-note-about-privacy-and-expo
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      status: not-applicable
+      reason: 'Jellyfin keeps no data about you: your accounts and what you watch stay on the server you run, for as long as you keep them.'
+      pages:
+        - https://jellyfin.org/
+        - https://jellyfin.org/docs/general/server/users/
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'Jellyfin keeps nothing about you. Your accounts and history live on your own server, so you delete them yourself whenever you like.'
+      sources:
+        - url: https://jellyfin.org/docs/general/server/users/
+          quote: 'Keep in mind that Jellyfin users are entirely local and no information or metadata will ever be sent to remote servers during the login process.'
+        - url: https://jellyfin.org/posts/a-note-about-privacy-and-expo
+          quote: 'I want to stress again: We do not track any user activity or collect any data.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      status: not-applicable
+      reason: 'Jellyfin holds none of your data to give back: your library, settings and history are on your own server, and its backup guide shows how to copy them.'
+      pages:
+        - https://jellyfin.org/
+        - https://jellyfin.org/docs/general/administration/backup-and-restore
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      status: not-applicable
+      reason: 'The Jellyfin team runs no servers for you and holds no data about you, so it has nothing to hand to the police or governments.'
+      pages:
+        - https://jellyfin.org/
+        - https://jellyfin.org/docs/general/community-standards/servers
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Your media and data stay on the server you run, wherever you choose to keep it. Jellyfin has no servers of its own holding them.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'Stream to any device from your own server, with no strings attached.'
+        - url: https://jellyfin.org/docs/general/community-standards/servers
+          quote: 'The Jellyfin Project itself, and members of the Jellyfin team, do not provide servers for you to use'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up with Jellyfin: you download it free, and the accounts are ones you make on your own server, which tell Jellyfin nothing.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'Note: We do not run servers for users.'
+        - url: https://jellyfin.org/docs/general/server/users/
+          quote: 'Keep in mind that Jellyfin users are entirely local and no information or metadata will ever be sent to remote servers during the login process.'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: great
+      reason: 'No ads and no tracking for anyone, children included. You can limit each person’s account to films and shows up to a rating, and to set hours.'
+      sources:
+        - url: https://jellyfin.org/docs/general/server/users/adding-managing-users
+          quote: 'Maximum allowed parental rating Allows you to select the highest rating allowed to show up for this user.'
+        - url: https://jellyfin.org/docs/general/server/users/adding-managing-users
+          quote: 'Access Schedule Allows you to set the timeframe(s) where this user is allowed to login, media can only play during the timeframe and will be stopped past it.'
+        - url: https://jellyfin.org/
+          quote: 'Jellyfin has no tracking, phone-home, or central servers collecting your data.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account and no terms of service to agree to, so no dispute clause: Jellyfin is free software you use under the GNU GPL.'
+      pages:
+        - https://jellyfin.org/
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service to change. Jellyfin is free software under the GNU GPL, and the copy you have stays yours under it.'
+      pages:
+        - https://jellyfin.org/
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no Jellyfin account to close: the accounts are on your own server, and whoever runs it manages them.'
+      pages:
+        - https://jellyfin.org/docs/general/community-standards/servers
+        - https://jellyfin.org/docs/general/server/users/
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: great
+      reason: 'Nothing can be taken away: it’s free software you keep, change and share under the GNU GPL, and its makers say it stays free to download.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'The Jellyfin server and official clients are free to download, now and always.'
+        - url: https://jellyfin.org/
+          quote: 'Jellyfin is Free Software, licensed under the GNU GPL. You can use it, study it, modify it, build it, and distribute it for free, as long as your changes are licensed the same way.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no Jellyfin account to close for not using it; the accounts on your server are yours to manage.'
+      pages:
+        - https://jellyfin.org/docs/general/server/users/
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: neutral
+      reason: 'You can report security flaws by email, and it publishes an advisory for each one after a fix. It pays no bug bounty and doesn’t say outside experts audit it.'
+      sources:
+        - url: https://github.com/jellyfin/jellyfin/security/policy
+          quote: 'please reach out for responsible disclosure via an email to security <at> jellyfin <dot> org'
+        - url: https://github.com/jellyfin/jellyfin/security/policy
+          quote: 'Once a new version of the server is released, we will wait at least 14 days (2 weeks) to publish our GHSA'
+        - url: https://github.com/jellyfin/jellyfin/security/policy
+          quote: 'We do not offer bounties in any form.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Share your server with anyone you like, free: you give each person an account of their own.'
+      sources:
+        - url: https://jellyfin.org/
+          quote: 'There are no costs, hidden or otherwise, to use Jellyfin, either for yourself, for your friends, or for your company.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: great
+      reason: 'Jellyfin sets no limit on devices or downloads. Whoever runs the server can choose to allow only some devices.'
+      sources:
+        - url: https://jellyfin.org/docs/general/server/users/adding-managing-users
+          quote: "By default the Enable access from all devices option will be enabled, disabling this option will enable you to give the user access rights per device and logins from new devices are blocked until they've been approved here."
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Security fixes only for the newest version
+      tier: neutral
+      reason: 'Only its latest version is sure to get security fixes, so whoever runs the server has to keep it updated. Its volunteers say fixes can sometimes be slow.'
+      sources:
+        - url: https://github.com/jellyfin/jellyfin/security/policy
+          quote: 'Only the most recent stable release of Jellyfin server is guaranteed to have security patches applied.'
+        - url: https://github.com/jellyfin/jellyfin/security/policy
+          quote: 'As a pure volunteer project, we recognize that we may sometimes be slow to handle vulnerabilities'
+      lastVerified: 2026-11-11

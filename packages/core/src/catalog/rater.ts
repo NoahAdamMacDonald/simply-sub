@@ -346,6 +346,12 @@ export const ownerSchema = z
     country: ownerCountrySchema
       .describe('Where the company is from (the owner’s choice, 2026-11-03): every provider says')
       .optional(),
+    volunteer: z
+      .literal(true)
+      .describe(
+        'A volunteer project with no company behind it (Jellyfin, the owner’s choice of 2026-11-11): it needs no country',
+      )
+      .optional(),
     stock: ownerStockSchema
       .describe(
         'A public company’s ticker symbols and majority holder (the owner’s item of 2026-11-10), quoted like its name',
