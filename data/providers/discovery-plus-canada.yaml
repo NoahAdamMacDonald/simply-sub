@@ -91,9 +91,9 @@ freeUse:
   pages: [https://secure.discoveryplus.ca/pricing]
   lastVerified: 2026-11-09
 
-# General features, read 2026-11-11: discoveryplus.ca is in English only. No pause. No parental controls: its help
-# says it "does not offer customizable parental controls"; its kids profile (12 and under) has no PIN, so anyone can
-# leave it (it's streaming.kids-profiles).
+# General features, read 2026-11-11: discoveryplus.ca is in English only. No pause. Parental controls: a Kids profile
+# "automatically limits viewing" to children "aged 12 and under", though its help says it "does not offer
+# customizable parental controls" and you can switch profiles anytime (no PIN), as Viaplay's age-limited profiles.
 # Apps (the cross-category features), read 2026-11-09: "most smartphones, tablets and desktop browsers, and most
 # connected devices, including Amazon Fire TV streaming devices and Amazon Fire TV Edition Smart TVs; Apple iPads,
 # iPhones, iPod Touches and Apple TVs; Google devices and platforms including Android phones, tablets and Android OS
@@ -125,6 +125,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.profiles: 5
       streaming.kids-profiles: true
+      account.parental-controls: true
     notes: The plan discovery+ calls “discovery+”, with limited ads.
     prices:
       - {
@@ -147,6 +148,7 @@ plans:
       streaming.download-devices: 1
       streaming.profiles: 5
       streaming.kids-profiles: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows up to 100 downloads at a time without saying on how many devices, so at least one.'

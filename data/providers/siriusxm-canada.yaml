@@ -64,8 +64,8 @@ renewalAnchor:
 # General features, read 2026-11-11: its site in English and French (siriusxm.ca/fr: "Découvrir", "S’abonner",
 # "AIDE"). Pause and parental controls on its car plans, from its Customer Agreement: a paid subscription can "be
 # temporarily suspended one time in any calendar year for a duration of up to six months" ("not available on Streaming
-# (app only) Audio Plans"), and under "Parental Control" it offers channel blocking by phone ("Channel blocking is not
-# available with the Streaming Service").
+# (app only) Audio Plans"), and under "Parental Control" it says to contact Customer Care "for information on channel
+# blocking" for its radios ("Channel blocking is not available with the Streaming Service").
 features:
   languages.interface: [en, fr]
 

@@ -127,8 +127,8 @@ renewalAnchor:
   lastVerified: 2026-11-10
 
 # General features, read 2026-11-11: app languages from its web players by country (music.amazon.fr "ACCUEIL", .de
-# "STARTSEITE", .es "INICIO", .it "LIBRERIA", .com.br "INÍCIO", .co.jp "ホーム"); music.amazon.ca stayed in English with
-# French chosen, and its apps follow the device's language. Pause for monthly plans bought from Amazon: "If your plan
+# "STARTSEITE", .es "INICIO", .it "LIBRERIA", .com.br "INÍCIO", .co.jp "ホーム"); no page shows music.amazon.ca in
+# French, and its apps follow the device's language. Pause for monthly plans bought from Amazon: "If your plan
 # is eligible, you can choose to pause your monthly subscription instead of cancelling", not "An annual plan" or "A
 # plan from Apple, Google, or a mobile service provider" (amazon.ca help). No parental controls: its explicit filter
 # is the listener's own.

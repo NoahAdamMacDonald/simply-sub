@@ -68,16 +68,16 @@ freeUse:
   pages: [https://www.crunchyroll.com/premium]
   lastVerified: 2026-11-09
 
-# General features, read 2026-11-11: app languages from crunchyroll.com's language menu (हिंदी among them, though its
-# Hindi subtitles article says the interface isn't in Hindi; the menu, which shows the site in Hindi, wins). Pause:
-# its terms let monthly members "pause your Subscription for a specific time period"; its help says only that Google
-# Play billing can pause (the terms are the stronger promise). Parental controls: teen profiles and profile PINs (How
+# General features, read 2026-11-11: app languages from crunchyroll.com's language menu; the menu also lists हिंदी, but
+# its Hindi article says "the Crunchyroll interface is not available in Hindi", so Hindi isn't listed. Pause: its terms
+# let monthly members "pause your Subscription for a specific time period"; its help says other billing has "no way to
+# pause" (the terms decide what's promised, the run's standing rule). Parental controls: teen profiles and profile PINs (How
 # do I set up and manage a teen profile?, How do I create a profile PIN?).
 # Apps (the cross-category features), read 2026-10-23 on its plans page: "Watch on Smart TVs, Playstation, Xbox,
 # Chromecast, Apple TV, Blu-ray players, and more", and its website.
 features:
   platforms: [web, tv, console]
-  languages.interface: [en, fr, es, de, it, pt, ko, zh, hi, ar]
+  languages.interface: [en, fr, es, de, it, pt, ko, zh, ar]
 
 # Perks (M11.6): its plan cards' lines that no feature describes, in their words.
 perks:

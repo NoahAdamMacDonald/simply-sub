@@ -638,7 +638,7 @@
   type: boolean
   aliases: [profiles, game mode, autopilot]
 - id: parental-control
-  name: Parental controls
+  name: Parental control app
   category: security
   type: set
   values:
@@ -2007,6 +2007,8 @@
 # cancelling counts; the optimizer can suggest it before a cancel. Parental controls are restrictions a parent or plan
 # manager sets on another member's account or profile (kids profiles with maturity limits, a family admin's explicit
 # filter, a PIN); a filter you set for yourself and can turn off isn't. Kids profiles stay streaming.kids-profiles too.
+# A company's own device controls count for its own services (Apple's Screen Time for Apple Music and Apple TV,
+# Google's Family Link for Gemini, Xbox Family Settings), not for other companies'.
 - id: account.pause
   name: Pause instead of cancelling
   category: account
@@ -2016,7 +2018,7 @@
   name: Parental controls
   category: account
   type: boolean
-  aliases: [kids controls, content restrictions, explicit filter]
+  aliases: [kids controls, content restrictions, kids profiles]
 
 # ── Finance (M11.10, the owner's choice of 2026-11-03) ─────────────────────────────
 # What buyers compare between banks, credit unions, fintechs and brokerages (BLUEPRINT §4.11), from TD's, RBC's, EQ

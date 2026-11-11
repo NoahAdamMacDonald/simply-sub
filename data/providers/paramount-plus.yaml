@@ -79,13 +79,13 @@ freeUse:
   pages: [https://www.paramountplus.com/ca/account/signup/pickplan/]
   lastVerified: 2026-11-09
 
-# General features, read 2026-11-11: app languages from its country versions (France's, Germany's, Italy's, Spain's
-# and Brazil's, read from the Internet Archive's copies since Canada is redirected to /ca/); Canada's site is English
-# only. No pause (How can I cancel my Paramount+ subscription?). Parental controls: "Kids Mode (also known as parental
+# General features, read 2026-11-11: its Canadian site is in English only (paramountplus.com/ca, and /ca/fr/ answers
+# 404); its other countries' sites (France's, Germany's, Italy's, Mexico's and Brazil's, read from the Internet
+# Archive's copies) are in their languages, but the catalog sells it only in Canada and the US. No pause (How can I cancel my Paramount+ subscription?). Parental controls: "Kids Mode (also known as parental
 # controls) allows parents to limit what their children watch", with "A 4-digit PIN" (What are profiles and how do
 # they work on Paramount+?).
 features:
-  languages.interface: [en, fr, es, de, it, pt]
+  languages.interface: [en]
 
 # Features, read 2026-11-04 in its help centre's plans article: Basic (with ads) "Experience in full HD", "Stream on 1
 # device at a time", "Stream with ads"; Standard full HD, "Stream on 2 devices at once", "Ad-free streaming",
