@@ -1,0 +1,588 @@
+# Researched by hand on 2026-11-11 (M11.15, streaming batch 6), read with Edge from Canada, and its sign-up page through
+# each other country's exit. Pages, each quoted where it's used:
+# Pricing: its sign-up page (nebula.tv/join) prices by where the visitor is, and the plan data it loads names the
+# country and currency (payments/stripe/v2/plans/?country=CA: "price":"8","currency":"cad"), read as part of the page:
+# Canada "$8 CAD/month" or "$80 CAD/year" ("Prices exclude taxes. Applicable taxes will be calculated at checkout.");
+# through a US exit "$6/month" or "$60/year" (its data: country=US, "usd"); the UK "£6/month" or "£60/year"; Ireland,
+# Germany, France, the Netherlands, Spain and Italy "7 €/month" or "70 €/year"; Australia "$10 AUD/month" or "$100
+# AUD/year"; New Zealand "$6 USD/month" or "$60 USD/year" (US dollars there). Italy's first exit was placed in Bulgaria
+# by its data (country=BG), so it was read again until the data said IT. The UK's, the euro countries' and Australia's
+# data mark the prices tax-inclusive ("tax_behavior":"inclusive"), but no words on the page say so, so no taxIncluded.
+# Not listed: the Lifetime membership, one payment that never renews (CA$700, US$500, £500, €550, A$800: "Pay once,
+# watch forever", go.nebula.tv/lifetime; its terms: "Lifetime subscriptions are non-cancellable and non-refundable"),
+# not a subscription; and creator links' discount ("Fans get 50% off a yearly plan", nebula.tv/wendover, CA$40 or US$30
+# for the first year), since no page says it applies at renewal and its terms (5.3) renew a discounted first period
+# at "the then-current fee".
+# Region checklist, 2026-11-11: 1. no country paths (nebula.tv has no locale versions); 2. no picker; 3. the plan data
+# the page loads, which names the country; 4. the plan picker on nebula.tv/join, never past the account form; 5. no help
+# articles on prices (its help centre has four, which point to its FAQ); 6. Edge from here and through each country's
+# exit; 7. no bill offered.
+# Bundles: none now: its CuriosityStream bundle ended in 2024 (its blog's "Unbundle": "The latest someone will get access
+# to Nebula via the CuriosityStream bundle is December 31, 2024"). Official resellers: none; it sells gift memberships
+# itself (go.nebula.tv/gift).
+# Features, read 2026-11-11: no ads ("No ads", "No need to skip what isn’t there."); downloads in its mobile apps ("Access
+# your favorites easily at all times on mobile devices."), no number of devices, so 1 (inferred); video quality: no page
+# states it for viewers, and its blog's "Starlight" (2022) says "4K videos are still going through the old system for
+# now", so it streams 4K (inferred); a video page's own stream for a visitor went up to 1080p. No page says how many
+# streams play at once (its FAQ, terms, privacy policy, help centre and blog read): the plan waits in core's
+# awaitingRequiredFeatures for it. No profiles, no parental controls on any page. Pausing: its terms ("To pause or cancel
+# a subscription, visit your Account settings."). What it streams: "Premium streaming from independent creators",
+# "Full-length documentaries, collaborative series, animated specials, and more", and its News collection.
+# Free use: none. A video page lets a visitor without an account watch one video ("First one is on us. Enjoy!"), a
+# sample before signing up; its blog's "Guest Passes" (2024) said videos "with a black timebox can be viewed for free
+# without a Nebula account", but no current page says so. Guest passes (a free week a subscriber sends a new viewer) are
+# a perk.
+
+id: nebula
+name: Nebula
+website: https://nebula.tv
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+# Its terms (5.4): "You may cancel your subscription at any time by going to the "Settings" page, selecting the
+# "Subscription" tab, and selecting "Change or Cancel."" No help article on cancelling.
+cancelUrl: https://nebula.tv/terms
+sources: { pricing: https://nebula.tv/join }
+notes: Also sold as a one-time Lifetime membership. Creator links give 50% off the first year of a yearly plan.
+
+# Owner (M11.2), read 2026-11-11: its FAQ's "Who owns Nebula?". Its terms and privacy policy are with Watch Nebula LLC
+# ("Watch Nebula LLC and its parent", the privacy policy), and its pages' copyright line names Nebula Entertainment &
+# Broadcasting LLC; no page names a Standard Broadcast LLC (its Android app's id is still tv.standard.nebula). Creator-
+# owned, so no shares listed. Where it is: its terms' contact section.
+owner:
+  name: 'Nebula Entertainment & Broadcasting LLC, owned by its creators'
+  page:
+    name: FAQ
+    url: https://nebula.tv/faq
+  quotes:
+    - 'Nebula Entertainment & Broadcasting LLC is 100% creator-owned.'
+  country:
+    code: US
+    page:
+      name: Terms of Service
+      url: https://nebula.tv/terms
+    quotes:
+      - 'Nebula is located in New York, NY.'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+
+# Ways to pay (M11.5), read 2026-11-11: a credit or debit card (its terms; its checkout is Stripe's, behind the account
+# form), the app stores and platforms that bill it (Apple, Google, Roku and Amazon's app stores, its terms' "in-app"
+# purchases), and gift memberships (its FAQ). No page names the card networks, so no acceptedNetworks. Its terms say
+# "All fees will be paid in U.S. dollars", but its pages price Canada, the UK, the euro countries and Australia in their
+# own currencies, which its plan data charges ("currency":"cad").
+paymentMethods:
+  - methods: [card]
+    page: Terms of Service
+    url: https://nebula.tv/terms
+    quotes:
+      - 'You will provide Nebula with accurate and complete billing information including legal name, address, telephone number, and credit card or debit card billing information.'
+  - methods: [app-store]
+    page: Terms of Service
+    url: https://nebula.tv/terms
+    quotes:
+      - 'When you make such "in-app" purchases, you will be billed by the applicable App Store, not us.'
+  - methods: [gift-card]
+    page: FAQ
+    url: https://nebula.tv/faq
+    quotes:
+      - 'Do you sell gift cards?'
+      - 'Yes. Lifetime, annual, and monthly gift memberships can be purchased here.'
+# Renewal day (M11.5): its terms charge "at the beginning of each subscription period", without naming the day.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://nebula.tv/terms]
+  lastVerified: 2026-11-11
+freeUse:
+  kind: none
+  pages:
+    - https://nebula.tv/join
+    - https://nebula.tv/faq
+    - https://nebula.tv/videos/wendover-why-there-are-so-many-different-hotel-brands
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): an email and a password, or "Scan a code instead" ("Scan the code to sign in", or enter the code
+# at nebula.tv/link from a signed-in device: approval on another device) (nebula.tv/login). No page names two-step
+# sign-in. Platforms: its FAQ's apps ("iOS", "tvOS", "Android", "Android TV", "Fire TV", "Roku", Samsung and LG TVs)
+# and the web; no consoles ("Okay, what about Xbox, PlayStation, etc.? We'd love to be on every platform"). App
+# languages: English only (no other language on its site or FAQ). Support: its support request form and email ("To
+# contact customer support about any Nebula issue, you may submit this Support Request Form.", support.nebula.tv).
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, push-approval]
+  languages.interface: [en]
+  support.channels: [email]
+
+# Perks (M11.6): what no feature describes, in its pages' words.
+perks:
+  - id: early-releases
+    name: Early releases available on Nebula before anywhere else
+  - id: bonus-videos
+    name: Bonus videos, including extended cuts, companion videos and interviews
+  - id: guest-passes
+    name: One guest pass per quarter for a new viewer
+
+plans:
+  - id: nebula.standard
+    name: Nebula
+    link: https://nebula.tv/join
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [creators, documentaries, news]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its blog says its 4K videos still go through its older video system while its new one handles 1080p (2022), so it streams up to 4K; no page states the quality for viewers.'
+        page:
+          name: Starlight (Nebula blog)
+          url: https://blog.nebula.tv/starlight/
+        lastVerified: 2026-11-11
+      streaming.download-devices:
+        reason: 'You can download videos to watch offline on mobile devices, without it saying on how many, so 1 is the least it can be.'
+        page:
+          name: Nebula
+          url: https://nebula.tv/
+        lastVerified: 2026-11-11
+    perks: [early-releases, bonus-videos, guest-passes]
+    notes: Creators' videos and podcasts, Nebula Originals and Nebula Plus bonus material.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: CA
+        currency: CAD
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: US
+        currency: USD
+        amount: 6
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: US
+        currency: USD
+        amount: 60
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: GB
+        currency: GBP
+        amount: 6
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: GB
+        currency: GBP
+        amount: 60
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: IE
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: IE
+        currency: EUR
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: AU
+        currency: AUD
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: AU
+        currency: AUD
+        amount: 100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: NZ
+        currency: USD
+        amount: 6
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: NZ
+        currency: USD
+        amount: 60
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: DE
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: DE
+        currency: EUR
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: FR
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: FR
+        currency: EUR
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: NL
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: NL
+        currency: EUR
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: ES
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: ES
+        currency: EUR
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: IT
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+      - region: IT
+        currency: EUR
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://nebula.tv/join
+
+# Terms and policies, read 2026-11-11 (M11.15) in Edge from Canada: its Terms of Service ("Last Revised: November 6,
+# 2025", Watch Nebula LLC's, under New York law), which include its Gift Card Terms and Conditions (nebula.tv/terms/gifts,
+# "Last Revised: June 24, 2024": a gift code is refundable until redeemed; no topic changes) and point to its Privacy
+# Policy ("Last Updated: August 31, 2023"); its sign-up form (nebula.tv/join: "I agree to the Nebula Terms of Service and
+# Privacy Policy.", an email and a password, read without typing); its FAQ; its help centre's four articles
+# (support.nebula.tv, read through its API); and its blog. The terms' store sections (merchandise) hold no streaming
+# topic. Its apps have no licence of their own: the terms' Permitted Purpose is it. No page names an audit, a bug bounty
+# or a way to report a security flaw. Calibrated against Rumble and Paramount+.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://nebula.tv/terms
+    - name: 'Privacy policy'
+      url: https://nebula.tv/privacy
+    - name: 'FAQ'
+      url: https://nebula.tv/faq
+    - name: 'Sign up'
+      url: https://nebula.tv/join
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use Nebula, records some sessions’ clicks and typing to replay them, and uses apps’ analytics tools. You can only block cookies, browser by browser.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'We use personal information for research and development purposes, including to study and improve the Services and our business, understand and analyze the usage trends and preferences of our users, and develop new features, functionality, products, and services.'
+        - url: https://nebula.tv/privacy
+          quote: "Session-replay technologies, which are third-party software used to record a video replay of users' interactions with the Services."
+        - url: https://nebula.tv/privacy
+          quote: 'Most browsers let you remove and/or stop accepting cookies from the websites you visit.'
+      action:
+        name: 'Its privacy choices'
+        url: https://nebula.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares lists of its customers with social media and ad companies to show you ads on their sites, and lets them track you. You can only limit that browser by browser and device by device.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'In addition, some of these companies may use hashed customer lists that we share with them to deliver ads to you and to similar users on their platforms.'
+        - url: https://nebula.tv/privacy
+          quote: 'We may also share personal information with third parties who we partner with for advertising campaigns or that collect information about your activity on the Services for the purposes described in the "Interest-Based Advertising" section above.'
+        - url: https://nebula.tv/privacy
+          quote: 'Many of the opt-out preferences described in this section must be set on each device and/or browser for which you want them to apply.'
+      action:
+        name: 'Its advertising choices'
+        url: https://nebula.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Nebula has no ads, but ad companies track what you do on it and on other sites to show you its ads elsewhere. You can opt out only browser by browser and device by device.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'These companies may use cookies and similar technologies to collect information about you (including the online activity information and device information described above in the section called "Personal Information Automatically Collected") over time across our Services and other websites and services or your interaction with our emails, and use that information to serve ads that they think will interest you.'
+        - url: https://nebula.tv/privacy
+          quote: 'Many of the opt-out preferences described in this section must be set on each device and/or browser for which you want them to apply.'
+      action:
+        name: 'Its advertising choices'
+        url: https://nebula.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or upload trains AI; its FAQ is only about its own productions and others training on its videos.'
+      pages: [https://nebula.tv/privacy, https://nebula.tv/terms, https://nebula.tv/faq]
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information while your account is open and as long as it decides it needs it, and may keep old copies in backups, with no periods named.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'We will retain your personal information for so long as your account is active or as necessary to fulfill the purpose of collection, including for the purposes of satisfying any legal, accounting, or reporting requirements, to establish and defend legal claims, for fraud prevention purposes, or as long as required to meet our legal obligations.'
+        - url: https://nebula.tv/privacy
+          quote: 'Note that we may keep historical information in our backup files as permitted by law.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself, from your account’s settings.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'If you wish to delete your account with us, you may do so by logging into your account and selecting "Delete account".'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy names no way to get a copy of your data, except for people in Europe and the UK.'
+      pages: [https://nebula.tv/privacy]
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'In Europe and the UK, you can ask it by email for a copy of your information in a machine-readable form; there’s no way to get it yourself.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'Port. Transfer a machine-readable copy of your personal information to you or a third party of your choice.'
+        - url: https://nebula.tv/privacy
+          quote: 'You may submit these requests by contacting us as provided at the end of this Privacy Policy.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://nebula.tv/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your information to authorities when the law or a valid request requires it, or to protect rights and safety, and says nothing more.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'Under certain circumstances, we may be required to disclose personal information to law enforcement, government authorities, and other parties if required to do so by law or in response to valid requests by public authorities (e.g., a court or a government agency).'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information is kept in the US and other countries whose laws may protect it less, and its policy doesn’t say what safeguards it uses.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'Privacy laws in the locations where we handle your personal information may not be as protective as the privacy laws in your home country.'
+        - url: https://nebula.tv/privacy
+          quote: 'If we transfer your personal information to a country outside of Europe such that we are required to apply additional safeguards to your personal information under European data protection laws, we will do so.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs an email address and a password, and a paid plan your payment details; its sign-up form asks for nothing else.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'To do so, you must provide an email address and a valid payment method.'
+        - url: https://nebula.tv/join
+          quote: 'Create your account'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 for an account; 16- and 17-year-olds may watch with a parent, and no one younger may use it. It doesn’t say what it does with a child’s data it finds.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'To register an Account with Nebula, you must be 18 years or over. If you are between the ages of 16 and 18, you will only use the Platform under the supervision of a parent or legal guardian who agrees to be bound by these Terms.'
+        - url: https://nebula.tv/privacy
+          quote: 'The Platform and Services are not intended for use by anyone under the age of 16, and we do not knowingly collect personal information from children under 16.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online at any time from your account’s settings, or by email, and the change starts with your next period, so you keep what you paid for.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'You may cancel your subscription at any time by going to the "Settings" page, selecting the "Subscription" tab, and selecting "Change or Cancel." Alternatively, you may email help@nebula.tv to cancel your subscription.'
+        - url: https://nebula.tv/terms
+          quote: 'Your changes will be applied to your next subscription period.'
+      action:
+        name: 'How to cancel (its terms)'
+        url: https://nebula.tv/terms
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Its terms say nothing about getting money back for a subscription, but cancelling takes effect at your next period, so you keep watching until then. A Lifetime membership is never refunded.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'Your changes will be applied to your next subscription period.'
+        - url: https://nebula.tv/terms
+          quote: 'Lifetime subscriptions are non-cancellable and non-refundable and are otherwise subject to all other terms and conditions in these Terms.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change its prices at any time and says it will tell you, without saying how long before.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'Nebula may change its subscription models and pricing at any time. We will provide you with notice of such changes.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its pages offer no free trial now. Its terms say a trial may need your card and charges you when it ends unless you cancel, with no reminder promised. Guest passes from a subscriber need no card and just end.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'A valid payment method may be required at sign-up for a Free Trial. If you do not cancel your Free Trial before it expires, you will automatically be charged for the subscription at the end of the Free Trial period.'
+        - url: https://nebula.tv/terms
+          quote: 'Redeeming Guest Passes requires recipients to create an Account but does not obligate recipients to include payment information.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'Before a yearly plan renews, it emails you the date. A monthly plan gets an email when it renews for the 12th month, then once a year.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'Prior to your annual subscription renewing, you will receive an email to the email address associated with your Account informing you of the date that your subscription will be renewing.'
+        - url: https://nebula.tv/terms
+          quote: 'For monthly subscribers, you will receive an e-mail if your monthly subscription is renewing for a 12th month, and thereafter on an annual basis.'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price and taxes.'
+      pages: [https://nebula.tv/terms, https://nebula.tv/join]
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Either side can send a dispute to a private referee (an arbitrator) in New York instead of a court, and you give up class actions. You can opt out only by email within 30 days of accepting the terms or of their last update.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'If you and Nebula are unable to reach a resolution to the dispute, you and Nebula will settle the dispute exclusively under the rules of the American Arbitration Association (www.adr.org) at its New York, NY office.'
+        - url: https://nebula.tv/terms
+          quote: 'YOU ACKNOWLEDGE AND AGREE THAT YOU AND NEBULA ARE EACH WAIVING THE RIGHT TO PARTICIPATE AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS ACTION OR REPRESENTATIVE PROCEEDING.'
+        - url: https://nebula.tv/terms
+          quote: 'If you are a new user, you can opt out of this arbitration obligation within 30 days of first accepting these Terms.'
+      action:
+        name: 'How to opt out of arbitration (its terms)'
+        url: https://nebula.tv/terms
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them with a new date, and using Nebula afterwards means you accept them.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'Nebula may modify these Terms at any time. Modifications become effective immediately upon your first access to or use of the Platform after the "Last Revised" date at the top of these Terms.'
+        - url: https://nebula.tv/terms
+          quote: 'Your continued access to or use of the Platform after the modifications have become effective will be deemed your conclusive acceptance of the modified Terms.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or close your account at any time, without warning, and promises no refund.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'Nebula reserves the right to suspend or terminate your Account and your access to and use of the Platform, at any time, without notice.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'Videos can be added or removed at any time, and it can change or end Nebula with or without notice, saying it owes you nothing for it. Lifetime members get only the kinds of videos there when they paid.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'We may add or remove Content from the Platform at any time.'
+        - url: https://nebula.tv/terms
+          quote: 'You agree that Nebula shall not be liable to you or to any third party for any modification, suspension, or discontinuance of the Platform.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://nebula.tv/terms]
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it builds in security and that nothing online is fully secure: no audits, certifications or way to report a security problem are named.'
+      sources:
+        - url: https://nebula.tv/privacy
+          quote: 'We build security into our Platform that is designed to protect your personal information, but no method over the Internet is fully secure.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid sharing your account details or letting anyone else use Nebula through your account.'
+      sources:
+        - url: https://nebula.tv/terms
+          quote: 'share your Account information with another person or otherwise permit another person to access the Platform through your Account'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit on devices or downloads, only that downloads stay inside its apps.'
+      pages: [https://nebula.tv/terms, https://nebula.tv/faq]
+      lastVerified: 2026-11-11
