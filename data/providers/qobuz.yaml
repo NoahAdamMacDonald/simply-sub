@@ -1,0 +1,1295 @@
+# Researched by hand on 2026-11-11 (M11.15, the music category, part 5), read with Edge from Canada. Pages, each quoted
+# where it's used:
+# Pricing: each country's offers pages (qobuz.com/<country>-en/music/streaming/offers/studio, /duo, /sublime), which
+# name the country in the path and price in its currency whoever reads them (Canada's in CA$, the US's in $). Studio
+# Solo, Duo and Family are sold monthly ("for a monthly subscription without commitment") and yearly ("for an annual
+# single payment subscription"); Sublime only yearly. A plan's card is chosen by the page's #duo and #family anchors:
+# Studio Solo "then CA$ 129.99 per year", Studio Duo "a single payment of CA$ 179.88" (its Duo page), Sublime "Annual
+# plan at CA$ 179.99 per year", Sublime Duo "CA$ 269.89", Sublime Family "CA$ 349.99", the US's the same figures in
+# dollars. The UK's (gb-en), Ireland's (ie-en), Australia's (au-en) and New Zealand's (nz-en) pages, and Germany's,
+# France's, the Netherlands', Spain's and Italy's in their own languages (de-de, fr-fr, nl-nl, es-es, it-it: their
+# English paths show nothing), each in its currency; the euro countries differ only in Studio Solo (Germany's 15,99€ a
+# month and 167,88€ a year, the Netherlands' 15,99€ and 162,00€). Studio Family's yearly price ("CA$ 17.99 / Month ... for an annual single payment subscription") has no total
+# on any page: only its monthly price is listed.
+# Region checklist, 2026-11-11: 1. country paths for all eleven regions; 2. the footer's country name; 3. not needed; 4. checkout
+# not opened (it needs an account); 5. its help centre's Payment methods lists the US, not Canada; 6. Edge read every
+# page; 7. no bill offered.
+# Not listed: Studio Student ("High quality music for student"): the catalog has no way to mark who may buy a plan.
+# Bundles: none on its offers pages. Official resellers: none named; "Give Qobuz as a gift" is its own gift page.
+# Features: every plan's "Studio quality streaming (Lossless, FLAC 24-Bit up to 192 kHz)" and "Offline listening" (its
+# offers pages and The Streaming Subscription Offers); Sublime's "Discounts on Hi-Res purchases of up to 60%" (a perk).
+# Duo is "2 independent accounts" and Family "6 independent accounts", members "living in their household" (What is
+# Qobuz Duo / Family?). Its press release of 23 July 2026 announces "real-time synchronized lyrics" in its mobile and
+# tablet app (Qobuz unveils a new player and real-time lyrics). No page read names uploads or live radio; no audiobooks.
+# Free use: none ("Can I get a free trial period": a 30-day trial only; the offers pages list paid plans only).
+id: qobuz
+name: Qobuz
+website: https://www.qobuz.com
+# Its help centre.
+domains: [help.qobuz.com]
+category: music
+spendCategory: streaming
+billingCurrency:
+  { CA: CAD, US: USD, GB: GBP, AU: AUD, NZ: NZD, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+cancelUrl: https://help.qobuz.com/en/articles/10157-how-do-i-cancel-my-subscription
+sources: { pricing: https://www.qobuz.com/ca-en/music/streaming/offers }
+# Owner (M11.2), read 2026-11-11: its privacy page names Xandrie as Qobuz's parent and gives its address in France. A
+# private company: its press release says Qobuz is "owned since 2015 by a private, primarily French family-owned group"
+# (Qobuz Society), so no shares are listed.
+owner:
+  name: Xandrie SA
+  page:
+    name: Personal data protection
+    url: https://www.qobuz.com/ca-en/discover/legals/privacy
+  quotes:
+    - 'The protection of your personal data is very important to Xandrie, Qobuz’ parent company.'
+  country:
+    code: FR
+    page:
+      name: Personal data protection
+      url: https://www.qobuz.com/ca-en/discover/legals/privacy
+    quotes:
+      - 'XANDRIE SA Legal Department, 45 rue de Delizy, 93692 Pantin CEDEX, FRANCE.'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its Payment methods article lists each country's; the US's cards and PayPal.
+# Canada isn't in its list, so Canada's are left out. Its cancelling article says "a third-party application (like
+# Apple)" may bill it, without naming a store: not listed.
+acceptedNetworks:
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.qobuz.com/en/articles/10194-payment-methods
+    quotes: ['Visa/Mastercard', 'American Express', 'Discover']
+paymentMethods:
+  - methods: [card, paypal]
+    regions: [US]
+    page: Payment methods
+    url: https://help.qobuz.com/en/articles/10194-payment-methods
+    quotes:
+      - 'Visa/Mastercard'
+      - 'PayPal'
+# Renewal day (M11.5): its help centre's When will the renewal happen?
+renewalAnchor:
+  kind: same-date
+  page: When will the renewal happen ?
+  url: https://help.qobuz.com/en/articles/10196-when-will-the-renewal-happen
+  quotes:
+    - 'Renewal will take place automatically on the anniversary date of your subscription.'
+  lastVerified: 2026-11-11
+freeUse:
+  kind: none
+  pages:
+    - https://help.qobuz.com/en/articles/10145-can-i-get-a-free-trial-period-to-experience-qobuz-streaming
+    - https://www.qobuz.com/ca-en/music/streaming/offers
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): "with your email address or your Facebook account", or "your Apple account details" (How do I
+# create a Qobuz account?), a password (I can't log in), and its sign-up form's "Sign up with Google". No page names
+# two-step sign-in. Platforms: "Windows,
+# MacOS, iOS and Android" and "the Webplayer" (its offers page).
+features:
+  platforms: [web, windows, macos, ios, android]
+  account.sign-in: [password, sso]
+
+# Perks (M11.6): Sublime's download discounts, in its card's words.
+perks:
+  - id: download-discounts
+    name: Discounts on Hi-Res purchases of up to 60%
+
+plans:
+  - id: qobuz.studio
+    name: Studio
+    link: https://www.qobuz.com/ca-en/music/streaming/offers/studio
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any of its tracks on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: The Streaming Subscription Offers
+          url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
+        lastVerified: 2026-11-11
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/studio
+      - region: CA
+        currency: CAD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/studio
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/studio
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/studio
+      - region: GB
+        currency: GBP
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/studio
+      - region: GB
+        currency: GBP
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/studio
+      - region: AU
+        currency: AUD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/studio
+      - region: AU
+        currency: AUD
+        amount: 199.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/studio
+      - region: NZ
+        currency: NZD
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/studio
+      - region: NZ
+        currency: NZD
+        amount: 209.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/studio
+      - region: IE
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/studio
+      - region: IE
+        currency: EUR
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/studio
+      - region: DE
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/studio
+      - region: DE
+        currency: EUR
+        amount: 167.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/studio
+      - region: FR
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/studio
+      - region: FR
+        currency: EUR
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/studio
+      - region: NL
+        currency: EUR
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/studio
+      - region: NL
+        currency: EUR
+        amount: 162.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/studio
+      - region: ES
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/studio
+      - region: ES
+        currency: EUR
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/studio
+      - region: IT
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/studio
+      - region: IT
+        currency: EUR
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/studio
+  - id: qobuz.studio-duo
+    name: Studio Duo
+    link: https://www.qobuz.com/ca-en/music/streaming/offers/studio
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
+      account.users: 2
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any of its tracks on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: The Streaming Subscription Offers
+          url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
+        lastVerified: 2026-11-11
+    notes: 'Two accounts for people living in the same household.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/duo
+      - region: CA
+        currency: CAD
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/duo
+      - region: US
+        currency: USD
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/duo
+      - region: US
+        currency: USD
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/duo
+      - region: GB
+        currency: GBP
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/duo
+      - region: GB
+        currency: GBP
+        amount: 179.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/duo
+      - region: AU
+        currency: AUD
+        amount: 26.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/duo
+      - region: AU
+        currency: AUD
+        amount: 275.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/duo
+      - region: NZ
+        currency: NZD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/duo
+      - region: NZ
+        currency: NZD
+        amount: 293.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/duo
+      - region: IE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/duo
+      - region: IE
+        currency: EUR
+        amount: 210.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/duo
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/duo
+      - region: DE
+        currency: EUR
+        amount: 210.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/duo
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/duo
+      - region: FR
+        currency: EUR
+        amount: 210.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/duo
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/duo
+      - region: NL
+        currency: EUR
+        amount: 210.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/duo
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/duo
+      - region: ES
+        currency: EUR
+        amount: 210.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/duo
+      - region: IT
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/duo
+      - region: IT
+        currency: EUR
+        amount: 210.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/duo
+  - id: qobuz.studio-family
+    name: Studio Family
+    link: https://www.qobuz.com/ca-en/music/streaming/offers/studio
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
+      account.users: 6
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any of its tracks on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: The Streaming Subscription Offers
+          url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
+        lastVerified: 2026-11-11
+    notes: 'Up to 6 accounts for people living in the same household. Its yearly price is shown only at checkout.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 21.90
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/studio#family
+      - region: US
+        currency: USD
+        amount: 21.90
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/studio#family
+      - region: GB
+        currency: GBP
+        amount: 21.90
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/studio#family
+      - region: AU
+        currency: AUD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/studio#family
+      - region: NZ
+        currency: NZD
+        amount: 32.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/studio#family
+      - region: IE
+        currency: EUR
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/studio#family
+      - region: DE
+        currency: EUR
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/studio#family
+      - region: FR
+        currency: EUR
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/studio#family
+      - region: NL
+        currency: EUR
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/studio#family
+      - region: ES
+        currency: EUR
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/studio#family
+      - region: IT
+        currency: EUR
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/studio#family
+  - id: qobuz.sublime
+    name: Sublime
+    link: https://www.qobuz.com/ca-en/music/streaming/offers/sublime
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
+    perks: [download-discounts]
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any of its tracks on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: The Streaming Subscription Offers
+          url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
+        lastVerified: 2026-11-11
+    notes: 'Yearly only.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 179.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/sublime
+      - region: US
+        currency: USD
+        amount: 179.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/sublime
+      - region: GB
+        currency: GBP
+        amount: 179.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/sublime
+      - region: AU
+        currency: AUD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/sublime
+      - region: NZ
+        currency: NZD
+        amount: 299.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/sublime
+      - region: IE
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/sublime
+      - region: DE
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/sublime
+      - region: FR
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/sublime
+      - region: NL
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/sublime
+      - region: ES
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/sublime
+      - region: IT
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/sublime
+  - id: qobuz.sublime-duo
+    name: Sublime Duo
+    link: https://www.qobuz.com/ca-en/music/streaming/offers/sublime
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
+      account.users: 2
+    perks: [download-discounts]
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any of its tracks on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: The Streaming Subscription Offers
+          url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
+        lastVerified: 2026-11-11
+    notes: 'Yearly only. Two accounts for people living in the same household.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 269.89
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/sublime#duo
+      - region: US
+        currency: USD
+        amount: 269.89
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/sublime#duo
+      - region: GB
+        currency: GBP
+        amount: 275.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/sublime#duo
+      - region: AU
+        currency: AUD
+        amount: 407.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/sublime#duo
+      - region: NZ
+        currency: NZD
+        amount: 479.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/sublime#duo
+      - region: IE
+        currency: EUR
+        amount: 299.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/sublime#duo
+      - region: DE
+        currency: EUR
+        amount: 299.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/sublime#duo
+      - region: FR
+        currency: EUR
+        amount: 299.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/sublime#duo
+      - region: NL
+        currency: EUR
+        amount: 299.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/sublime#duo
+      - region: ES
+        currency: EUR
+        amount: 299.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/sublime#duo
+      - region: IT
+        currency: EUR
+        amount: 299.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/sublime#duo
+  - id: qobuz.sublime-family
+    name: Sublime Family
+    link: https://www.qobuz.com/ca-en/music/streaming/offers/sublime
+    features:
+      ad-free: true
+      audio.quality: hi-res
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
+      account.users: 6
+    perks: [download-discounts]
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any of its tracks on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: The Streaming Subscription Offers
+          url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
+        lastVerified: 2026-11-11
+    notes: 'Yearly only. Up to 6 accounts for people living in the same household.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ca-en/music/streaming/offers/sublime#family
+      - region: US
+        currency: USD
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/us-en/music/streaming/offers/sublime#family
+      - region: GB
+        currency: GBP
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/gb-en/music/streaming/offers/sublime#family
+      - region: AU
+        currency: AUD
+        amount: 449.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/au-en/music/streaming/offers/sublime#family
+      - region: NZ
+        currency: NZD
+        amount: 549.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nz-en/music/streaming/offers/sublime#family
+      - region: IE
+        currency: EUR
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/ie-en/music/streaming/offers/sublime#family
+      - region: DE
+        currency: EUR
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/de-de/music/streaming/offers/sublime#family
+      - region: FR
+        currency: EUR
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/fr-fr/music/streaming/offers/sublime#family
+      - region: NL
+        currency: EUR
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/nl-nl/music/streaming/offers/sublime#family
+      - region: ES
+        currency: EUR
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/es-es/music/streaming/offers/sublime#family
+      - region: IT
+        currency: EUR
+        amount: 349.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/sublime#family
+
+# Terms and policies (M11.15), read 2026-11-11: its General conditions of use and sale (Canada's; the US's copy,
+# qobuz.com/us-en/legal/terms, has the same text word for word, so no rating is a region's), its Personal data
+# protection page (read from its HTML: the page shows only its nine headings until each is opened) with the cookie
+# banner every page shows, its cookies charter, its AI Charter, its sign-up form (qobuz.com/signup: "By clicking on
+# "Register", you accept our general terms and conditions and personal data protection policy", read typing nothing),
+# its Duo page and its help centre's articles on free trials, cancelling, deleting an account, dispute resolution,
+# changing plans, Duo and Family, and payment fees. The terms are its apps' licence too (article 7) and include no
+# other agreement. Its legal notices (with its apps' privacy policy: device details and IP address "to produce general
+# statistics about our applications"), its press room and its other help articles (renewal, offline listening,
+# newsletters, invoices, the student offer, Qobuz Wallet) hold no topic beyond these. No audit, bug bounty or
+# disclosure policy found; qobuz.com/.well-known/security.txt answers 403. Calibrated against Deezer's, Spotify's,
+# Tidal's and Mixcloud's grades. Not rated: rights over your content and its apps' licence (not topics for music).
+policies:
+  links:
+    - name: General conditions of use and sale
+      url: https://www.qobuz.com/ca-en/legal/terms
+    - name: Personal data protection
+      url: https://www.qobuz.com/ca-en/discover/legals/privacy
+    - name: Qobuz cookies charter
+      url: https://www.qobuz.com/ca-en/page/charte_cookies
+    - name: AI Charter
+      url: https://community.qobuz.com/ai-charter
+    - name: Sign up
+      url: https://www.qobuz.com/signup
+    - name: Qobuz Duo
+      url: https://www.qobuz.com/ca-en/music/streaming/offers/duo
+    - name: How do I cancel my subscription?
+      url: https://help.qobuz.com/en/articles/10157-how-do-i-cancel-my-subscription
+    - name: Can I get a free trial period to experience Qobuz streaming?
+      url: https://help.qobuz.com/en/articles/10145-can-i-get-a-free-trial-period-to-experience-qobuz-streaming
+    - name: How do I delete my account?
+      url: https://help.qobuz.com/en/articles/10174-how-do-i-delete-my-account
+    - name: Dispute resolution
+      url: https://help.qobuz.com/en/articles/10181-dispute-resolution
+    - name: How can I subscribe to a Duo or Family plan?
+      url: https://help.qobuz.com/en/articles/10142-how-can-i-subscribe-to-a-duo-or-family-plan
+    - name: Why do I see fees applying when I pay?
+      url: https://help.qobuz.com/en/articles/10163-why-do-i-see-fees-applying-when-i-pay
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what you do on Qobuz to fit the service to your tastes and for audience statistics. To object, you have to email it with your name and address.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'tailor the service towards your tastes as part of your subscription, according to your preferences'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Audience analytics (statistics and audience analysis)'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Any requests must include your full name and address and must be emailed to support@qobuz.com'
+      action:
+        name: Its privacy policy (your rights)
+        url: https://www.qobuz.com/ca-en/discover/legals/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your data with other companies only if you allow it, but some of the 15 partners behind its websites’ cookies use your data without asking. You can object in its cookie choices, browser by browser.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Partners and third parties with whom you have authorized data sharing'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Some partners do not ask for your consent to process your data and rely on their legitimate business interest.'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'You can withdraw your consent or object to data processing based on legitimate interest at any time by clicking on “Learn More” or in our Privacy Policy on this website.'
+      action:
+        name: How to refuse cookies (its cookies charter)
+        url: https://www.qobuz.com/ca-en/page/charte_cookies
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'Qobuz itself has no ads. Its websites’ advertising cookies, which pick ads to suit your interests, are used only if you agree to them.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'QOBUZ streaming offers are paid subscription offers to online music listening service without advertisements'
+        - url: https://www.qobuz.com/ca-en/page/charte_cookies
+          quote: 'We use these cookies to offer you advertisements that may be relevant to you and correspond to your interests.'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'With your agreement, we and our 15 partners use cookies or similar technologies to store, access, and process personal data like your visit on this website, IP addresses and cookie identifiers.'
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It says what you search for and listen to never trains outside AI models: it’s used only for Qobuz’s own music suggestions.'
+      sources:
+        - url: https://community.qobuz.com/ai-charter
+          quote: 'Your searches and listening behavior are never used to train external AI models, only to feed Qobuz’ own AI features to improve music recommendations.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs to: a subscriber’s while the contract lasts and as long as the law requires, and a would-be customer’s for 3 years after the last contact.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Personal data is stored for the time necessary for the purposes for which they are collected.'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'For subscribers to Xandrie’s products and services, personal data is stored for the length of the contract, in addition to periods of applicable legal requirements'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'For potential customers, personal data is stored for 3 years after the last time of contact'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself, from your account’s personal information page, or ask through its contact form and it deletes it within 48 hours.'
+      sources:
+        - url: https://help.qobuz.com/en/articles/10174-how-do-i-delete-my-account
+          quote: 'At the bottom of the page, click on the “Delete my Qobuz account permanently” link'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE SA will then delete the Customer’s account within a maximum of 48 hours after receipt of the said message.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your data to take elsewhere, by email or by post.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'a right of data portability'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Any requests must include your full name and address and must be emailed to support@qobuz.com, or posted to XANDRIE SA Legal Department, 45 rue de Delizy, 93692 Pantin CEDEX, FRANCE.'
+      action:
+        name: Its privacy policy (your rights)
+        url: https://www.qobuz.com/ca-en/discover/legals/privacy
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say what it does when police or a government ask for your data.'
+      pages:
+        [
+          https://www.qobuz.com/ca-en/legal/terms,
+          https://www.qobuz.com/ca-en/discover/legals/privacy,
+        ]
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can leave the EU: the company that stores it is outside it. It says it can use the EU’s standard contracts to protect those transfers.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'The data that Xandrie collects about you is potentially transmitted outside of the European Union.'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'For example, Xandrie uses a service provider located outside of the European Union to host your data.'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'To secure these transfers, Xandrie can, for example, set up standard clauses defined by the European Commission to regulate these flows.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up asks for your email, a password, a name for it to call you, your postal code, your birthday and your gender. A plan adds your payment details.'
+      sources:
+        - url: https://www.qobuz.com/signup
+          quote: 'What should we call you?'
+        - url: https://www.qobuz.com/signup
+          quote: 'Zipcode / Postal code'
+        - url: https://www.qobuz.com/signup
+          quote: 'Birthday'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult to buy, and children may use Qobuz only with a parent’s consent: a parent makes the Duo or Family account of anyone under 16. It says nothing about children’s data.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The Qobuz service is reserved for private individuals who are adults or who are children and have parental consent and cannot be used for professional purposes.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Accounts for minors under 16 years of age must be created by the Customer who has parental authority.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The Customer solemnly declares that he/she is of legal age and has full legal capacity to place an order on the Site'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel online in your account at any time and keep Qobuz to the end of the period, but only if you cancel at least 48 hours before it ends. Any later, it renews.'
+      sources:
+        - url: https://help.qobuz.com/en/articles/10157-how-do-i-cancel-my-subscription
+          quote: 'Click on the “Unsubscribe” link of your active subscription'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Receipt and acceptance of the cancellation will be confirmed to the Customer by e-mail, but will only take effect at the end of the current subscription period, provided that the notification thereof has been sent at least 48 hours before the end of the period.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'If the cancellation period is not respected, the subscription will be automatically renewed.'
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back once you subscribe, yearly plans included, but you keep Qobuz until the end of the month or year you paid for.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Consequently, no request for withdrawal, cancellation or refund will be admissible for the subscribed period.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'any subscription remains valid for the entire duration of the offer subscribed to or offered (monthly or annually), even if the Customer cancels his/her subscription before the end of this period.'
+        - url: https://www.qobuz.com/ca-en/music/streaming/offers/duo
+          quote: 'For a 12-month non-refundable subscription'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices at any time, or raise them for inflation or its own costs. A new price applies once it’s posted on its site, and you pay what’s in force when you’re charged.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE reserves the right to modify the prices or the present GCUS at any time.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: "The modifications will come into effect from the moment the conditions are published on the Site; the products and services will be invoiced according to the rates in force at the time of the Client's invoice."
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE SA reserves the right to automatically adjust the prices of musical recordings downloads and QOBUZ subscription offers, in the event of inflation or additional costs imposed on XANDRIE SA.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its 30-day trial turns into a paid plan on the payment method you gave unless you cancel, which you can do at any time during it. It doesn’t say it reminds you first.'
+      sources:
+        - url: https://help.qobuz.com/en/articles/10145-can-i-get-a-free-trial-period-to-experience-qobuz-streaming
+          quote: 'It is possible to enjoy a free trial for 30 days.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'At the end of these, the payment method filled in by the Customer will be reused for the automatic renewal of the Customer’s subscription at the subscription offer rate in force at the time of subscription to the trial and time-limited offer.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'During the duration of these trial and time-limited offers of the QOBUZ streaming service, the Customer may cancel his/her active subscription at any time.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      plans: [qobuz.sublime, qobuz.sublime-duo, qobuz.sublime-family]
+      status: not-applicable
+      reason: 'Sublime plans have no free trial: its trials are for every plan but Sublime.'
+      pages: [https://www.qobuz.com/ca-en/legal/terms]
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'Plans renew on their own. Before a yearly plan renews, it tells you, between three months and one month ahead, that you can stop it; it names no reminder for monthly plans.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The subscription to the STUDIO SOLO offer will be automatically renewed at the end of each subscription period'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'In the event of annual subscription, XANDRIE SA undertakes to inform the Customer, no earlier than three months and no later than one month before the offer renewal date, of his/her option not to renew the QOBUZ streaming subscription to which he/she initially subscribed.'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: poor
+      reason: 'It can add a fee to music purchases under 10 euros, and adds fees for some ways to pay, without saying how much.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'For all download sales totalling less than 10 euros, Xandrie reserves the right to charge customers a fee to cover the costs of operating the service.'
+        - url: https://help.qobuz.com/en/articles/10163-why-do-i-see-fees-applying-when-i-pay
+          quote: 'Those fees are due to external high processing costs associated with some payment methods you can use with Qobuz.'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: poor
+      reason: 'You can switch to a dearer plan at once, but switching to Duo or Family means giving up any refund for your old plan. To move to a cheaper plan, you cancel and wait for your period to end.'
+      sources:
+        - url: https://help.qobuz.com/en/articles/10142-how-can-i-subscribe-to-a-duo-or-family-plan
+          quote: 'you will be able to change it for another one if the value of the new subscription is higher than the previous one.'
+        - url: https://help.qobuz.com/en/articles/10142-how-can-i-subscribe-to-a-duo-or-family-plan
+          quote: 'Otherwise, if you want to change to a lower valued subscription, you will have to cancel it and wait until the end of your Qobuz rights'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'If, before subscribing to the STUDIO DUO offer, the Customer had already subscribed to another QOBUZ subscription offer, the Customer agrees by these CGUS to waive reimbursement of said offer.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: good
+      reason: 'There’s no arbitration: disputes go to France’s courts under French law, unless your own country’s law says otherwise. You can first ask a consumer mediator in France to help.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Unless otherwise specified by public policy provided for by the law of one of the territories provided for in Article 13 hereof, these GCUS are subject to French law.'
+        - url: https://help.qobuz.com/en/articles/10181-dispute-resolution
+          quote: 'If no amicable agreement is reached between Xandrie SA and the Customer, the French courts will have exclusive jurisdiction, unless otherwise provided in the legislation of the country of residence of the Customer.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'After a prior written request from consumers to XANDRIE SA, the mediation service can be consulted in relation to any outstanding consumer dispute.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms whenever it wants. New terms start once they’re posted on its site, and using Qobuz after that means you accept them.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE reserves the right to modify these general conditions of use and sale (hereinafter referred to as “GCUS”) at any time and at its discretion.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Use of the Service by the Customer following any modification of the present GCUS constitutes acceptance.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The modifications will come into effect from the moment the conditions are published on the Site'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can delete or suspend your account without notice or money back if you clearly break its terms, such as by giving false details when you sign up.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'In the event of a clear violation of the GCUS by the Customer, XANDRIE reserves the right to delete or temporarily deactivate the Customer’s account, without notice or compensation, in particular in the event of:'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'provision of incorrect information when registering with the Site'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can stop a plan or the whole service for good with no money back. Wallet money expires after 5 years, and music you bought that a label pulls can’t be downloaded again.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Similarly, XANDRIE reserves the right to permanently stop an offer or all services offered on the Site, without notice or compensation'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'From the withdrawal date, the musical recordings already acquired by the Customer shall no longer be available for downloading onto their Listening Devices.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The amount credited to the Balance via debit card or any other Payment Method is valid for a period of five (5) years from the purchase date.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        [
+          https://www.qobuz.com/ca-en/legal/terms,
+          https://www.qobuz.com/ca-en/discover/legals/privacy,
+        ]
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes its security only in general terms, and names no security audit or way to report a flaw.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Xandrie takes appropriate measures to maintain security and confidentiality of your personal data'
+        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+          quote: 'Xandrie chooses subcontractors and service providers with high security standards.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'A Solo plan is for you alone: your account is personal and plays on one device at a time.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Any account created is personal, named and unique.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Access to the QOBUZ streaming service is strictly personal and cannot be used on several multiple Devices at the same time, except for DUO and FAMILY offers.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      plans: [qobuz.studio-duo, qobuz.sublime-duo]
+      tier: poor
+      reason: 'You can add one family member who lives with you. Qobuz may check your IP addresses and ask for proof of address, and can cut off both accounts at once if you don’t qualify.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The primary subscriber may add one (1) secondary subscriber from among the members of the same family, residing at the same address.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE SA reserves the right to verify the compliance with this condition by monitoring the users’ IP addresses and to request further confirmation as to the personal address'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'reserves the right to terminate or suspend access immediately and at any time to the main and secondary accounts'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      plans: [qobuz.studio-family, qobuz.sublime-family]
+      tier: poor
+      reason: 'You can add up to 5 family members who live with you, and the main member must be their parent. Qobuz may check IP addresses and ask for proof of address or a family record book.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The Customer holding the primary account may add up to five (5) secondary subscribers.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE SA reserves the right to verify the compliance with this condition by monitoring the users’ IP addresses and to request further confirmation of your personal address'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'XANDRIE SA reserves the right to verify and request the supporting documents (family record book) that confirm that the main subscriber is the holder of parental authority.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads play offline for 30 days, then you must go online to keep them. On Duo and Family plans, each account links up to 3 devices: 2 phones or tablets and a computer.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'The imported music can then be listened to without an active internet connection for a period of 30 days.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'At the end of these 30 days, it will be necessary to log in to the service again in order to reactivate the right to listen to the imported music in offline mode.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'there can be no more than three (3) devices associated with each sub-account: two (2) mobile devices, in addition to access by computer.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Duo and Family may lack some music
+      plans: [qobuz.studio-duo, qobuz.studio-family, qobuz.sublime-duo, qobuz.sublime-family]
+      tier: poor
+      reason: 'Because of its deals with record labels, Duo and Family may lack some music its other plans have, and taking one removes that music from your other accounts too.'
+      sources:
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'Due to agreements made by XANDRIE SA with rights holders, some music files present in the catalogues of other QOBUZ subscription offers, may not be available in the STUDIO DUO offer catalogue.'
+        - url: https://www.qobuz.com/ca-en/legal/terms
+          quote: 'By signing up for the STUDIO DUO offer, Customers who have another subscription offer would then lose the benefit of said content on all other accounts, including the one held as part of their individual subscription.'
+      lastVerified: 2026-11-11
