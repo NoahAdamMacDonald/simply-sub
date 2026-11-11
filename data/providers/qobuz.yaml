@@ -22,6 +22,9 @@
 # Qobuz Duo / Family?). Its press release of 23 July 2026 announces "real-time synchronized lyrics" in its mobile and
 # tablet app (Qobuz unveils a new player and real-time lyrics). No page read names uploads or live radio; no audiobooks.
 # Free use: none ("Can I get a free trial period": a 30-day trial only; the offers pages list paid plans only).
+# Coverage: qobuz.* in AR, AT, BE, BR, CL, CO, DK, FI, JP, LU, MX, NO, PL, PT, SE, CH: sold there (its 27 countries), but
+# outside the catalog's eleven research regions, so their pages weren't read.
+
 id: qobuz
 name: Qobuz
 website: https://www.qobuz.com
