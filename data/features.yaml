@@ -147,6 +147,21 @@
     - { id: 1+, name: At least 1 book a month, min: 1 }
     - { id: 2+, name: 2 or more books a month, min: 2 }
   aliases: [book credits, keep forever, yours to keep]
+- id: books.e-readers
+  name: E-readers supported
+  category: books
+  type: set
+  values:
+    - { id: kindle, name: Kindle }
+    - { id: kobo, name: Kobo }
+    - { id: epub, name: Any EPUB reader, aliases: [epub, drm-free] }
+    - { id: apps, name: Its own apps only, aliases: [app only] }
+  aliases: [ereader, e-reader, reading devices]
+- id: books.offline
+  name: Read offline
+  category: books
+  type: boolean
+  aliases: [download books, offline reading]
 
 # ── VPN ────────────────────────────────────────────────────────────────────────
 - id: vpn.included
@@ -844,6 +859,15 @@
     - { id: fonts, name: Fonts, aliases: [typefaces] }
     - { id: templates, name: Premium templates }
   aliases: [stock library, premium content]
+- id: creative.ai-credits
+  name: Generative AI credits
+  category: creative
+  type: number
+  unit: credits a month
+  tiers:
+    - { id: 1+, name: Any generative credits, min: 1 }
+    - { id: 1000+, name: '1,000 or more a month', min: 1000 }
+  aliases: [generative credits, ai credits, firefly credits]
 
 # ── Developer tools & hosting ──────────────────────────────────────────────────
 # Code hosts, editors and IDEs, and hosting with a flat personal price or a free tier (usage-billed cloud stays out,
@@ -1198,6 +1222,11 @@
   category: news
   type: boolean
   aliases: [crosswords, sudoku]
+- id: news.archive
+  name: Full archive
+  category: news
+  type: boolean
+  aliases: [back issues, past articles, archives]
 
 # ── Jobs & careers ─────────────────────────────────────────────────────────────
 # Job seekers' paid tiers (LinkedIn Premium, XING's): employers' and recruiters' plans are business plans, out of scope.
@@ -1345,6 +1374,14 @@
   category: education
   type: boolean
   aliases: [download lessons, learn offline]
+- id: education.tutoring
+  name: Tutoring
+  category: education
+  type: set
+  values:
+    - { id: live, name: Live tutors, aliases: [one-on-one tutoring, human tutor] }
+    - { id: ai, name: AI tutor, aliases: [ai assistant, ai coach] }
+  aliases: [tutor, help with questions]
 
 # ── Fitness & wellness ─────────────────────────────────────────────────────────
 # Workout, tracking and wellness apps and gyms (Strava, Peloton, Apple Fitness+, Garmin Connect+, Calm, Headspace,
@@ -1389,6 +1426,23 @@
   category: fitness
   type: boolean
   aliases: [gym membership, club access]
+- id: fitness.devices
+  name: Works with
+  category: fitness
+  type: set
+  values:
+    - { id: apple-watch, name: Apple Watch, aliases: [apple health] }
+    - { id: wear-os, name: Wear OS and Google Fit, aliases: [pixel watch, health connect] }
+    - { id: garmin, name: Garmin }
+    - { id: fitbit, name: Fitbit }
+    - { id: samsung, name: Samsung Galaxy Watch, aliases: [samsung health] }
+    - { id: equipment, name: Its own equipment, aliases: [bike, treadmill, rower] }
+  aliases: [wearables, watch sync, device sync]
+- id: fitness.nutrition
+  name: Nutrition and meal plans
+  category: fitness
+  type: boolean
+  aliases: [meal plans, calorie tracking, diet]
 
 # ── Smart home & security ──────────────────────────────────────────────────────
 # Camera and alarm plans: Ring, Google Home Premium (Nest Aware), Arlo, Blink, Wyze, SimpliSafe and the like. A plan
@@ -1466,6 +1520,11 @@
   category: health
   type: boolean
   aliases: [24/7 care, around the clock]
+- id: health.french-care
+  name: Care in French
+  category: health
+  type: boolean
+  aliases: [soins en français, french-speaking doctors]
 
 # ── Device protection & warranties (the owner's choice of 2026-11-11) ──────────
 # Protection plans paid by the month or year: AppleCare+, Samsung Care+, carriers' device protection, Asurion and the

@@ -2206,6 +2206,11 @@ in every D1 `json` column search parses.
     `health.services` and `car.services` required in each), Wikidata classes (extended warranty, telemedicine and
     online pharmacy, EV charging network) and the policy topics that bear on them (health records and a car's data,
     its location history and over-the-air updates). The full catalog's research fills them.
+  - **More features for the empty groups** (2026-11-11, the owner's choice): `books.e-readers` and `books.offline`,
+    `news.archive`, `education.tutoring`, `fitness.devices` and `fitness.nutrition`, `health.french-care` and
+    `creative.ai-credits`, in the registry before any provider. The groups with providers (music's skips, own
+    library, lyrics and live radio; pausing, parental controls and the app's languages everywhere) are added with every
+    provider's value as the research reaches them.
   - **The policy topics for the newest categories** (2026-11-10, the owner's go-ahead): the topics that apply only to
     some categories now name the newest too, so a provider in them rates or states each one: who can read a
     camera's recordings, a fitness app's health data, a job seeker's résumé and what goes over a phone line
