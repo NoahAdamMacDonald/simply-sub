@@ -1026,11 +1026,12 @@
 - id: plex
   name: Plex
   website: https://plex.tv
-  category: software
+  category: streaming
   source: wikidata
   wikidata: Q7204887
   sitelinks: 12
-  status: queued
+  status: done
+  date: 2026-11-11
 - id: mixcloud
   name: Mixcloud
   website: https://www.mixcloud.com
