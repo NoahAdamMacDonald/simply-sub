@@ -30,7 +30,19 @@ domains: [help.qobuz.com]
 category: music
 spendCategory: streaming
 billingCurrency:
-  { CA: CAD, US: USD, GB: GBP, AU: AUD, NZ: NZD, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    AU: AUD,
+    NZ: NZD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
 cancelUrl: https://help.qobuz.com/en/articles/10157-how-do-i-cancel-my-subscription
 sources: { pricing: https://www.qobuz.com/ca-en/music/streaming/offers }
 # Owner (M11.2), read 2026-11-11: its privacy page names Xandrie as Qobuz's parent and gives its address in France. A
