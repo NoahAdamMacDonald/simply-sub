@@ -61,6 +61,35 @@
   category: streaming
   source: own
   status: done
+# The owner's research list of 2026-11-10 (the full catalog run).
+- id: siriusxm
+  name: SiriusXM
+  website: https://www.siriusxm.com
+  category: music
+  source: own
+  status: done
+  date: 2026-11-11
+- id: siriusxm-canada
+  name: SiriusXM Canada
+  website: https://www.siriusxm.ca
+  category: music
+  source: own
+  status: done
+  date: 2026-11-11
+- id: qobuz
+  name: Qobuz
+  website: https://www.qobuz.com
+  category: music
+  source: own
+  status: done
+  date: 2026-11-11
+- id: audiomack
+  name: Audiomack
+  website: https://audiomack.com
+  category: music
+  source: own
+  status: done
+  date: 2026-11-11
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
