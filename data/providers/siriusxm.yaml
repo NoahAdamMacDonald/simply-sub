@@ -1,0 +1,672 @@
+# Researched by hand on 2026-11-11 (M11.15, the music category, part 5), read with Edge from Canada (siriusxm.com prices
+# in US dollars whoever reads it, and serves only the US: below). Pages, each quoted where it's used:
+# Pricing: its plans page (siriusxm.com/plans: All Music, All Access, SiriusXM Sports Pass, All Access (App Only)) and
+# More Plans (siriusxm.com/plans/more), all monthly. Regular prices only: "$1 for 3 months then $11.99/mo." is $11.99,
+# "1 month Free then $5/mo." is $5. All Music's add-ons are its help article's "Add Sports for $8 per month", "Add Talk
+# for $5 per month" and "Add News for $5 per month" ("Add-ons are not sold without the All Music plan").
+# Its renewal article says "some plans let you elect to be billed on a monthly, quarterly, semi-annually, or longer
+# basis", but no page prices a longer period, so only the months are listed. "Applicable tax and other fees may apply":
+# its U.S. Music Royalty Fee "is included in the advertised prices you see" (U.S. Music Royalty Fee), and the "$15
+# Activation Fee applies to inactive radios" (More Plans) once.
+# Region checklist, 2026-11-11: 1. no country paths; 2. no picker; 3. not needed: it sells only in the US; 4. checkout not
+# opened; 5. its payment help names the networks; 6. Edge read every page; 7. no bill offered.
+# Not listed: A La Carte, A La Carte Gold and SiriusXM All-In-One, which need particular old radios ("Requires an A La
+# Carte-capable Sirius radio", "This plan requires a MiRGE SXMIR1 Radio"); the Student Streaming Platinum plan (students
+# only); the Lifetime plan ("no longer for sale").
+# Bundles: none on its plans pages; the T-Mobile offer (its help) is a phone carrier's perk, for telecom. Official
+# resellers: none named; radios sold in shops come with trials, not plans.
+# Features, read 2026-11-11: every plan is live channels, in the car by satellite and in the app ("All our popular plans
+# include streaming with the SiriusXM app"), except All Access (App Only), "Listen on your phone and other smart
+# devices". Only its shows download ("How long can I keep downloaded shows on my device?"), so no offline music; its
+# app "uses variable bit rates" (Why does the audio quality vary when I stream?), with no bitrate on any page (Tom's
+# Guide's review says SiriusXM doesn't publish one), so audio quality waits (core's awaitingRequiredFeatures). Only All
+# Music is all music, "ad-free"; the other plans add talk, news and sports, which the pages don't call ad-free. What
+# each plan adds is a perk, in its card's words.
+# Coverage: "SiriusXM provides service in the 50 United States, the District of Columbia, and Puerto Rico. If you
+# reside in Canada, SiriusXM service is available through SiriusXM Canada Inc." (Can I get SiriusXM streaming service
+# outside of the United States?): Canada is siriusxm-canada's.
+id: siriusxm
+name: SiriusXM
+website: https://www.siriusxm.com
+category: music
+spendCategory: streaming
+availableIn: [US]
+billingCurrency: { US: USD }
+cancelUrl: https://www.siriusxm.com/help/manage-or-cancel-service
+sources: { pricing: https://www.siriusxm.com/plans }
+# Owner (M11.2), read 2026-11-11: its Customer Agreement is with Sirius XM Radio LLC, which Sirius XM Holdings' annual
+# report (10-K, on its investor site) calls "our wholly owned subsidiary"; the listing from its investor site. No page
+# read names a majority holder (the 10-K leaves holders to the proxy statement, not read).
+owner:
+  name: Sirius XM Radio LLC (SiriusXM)
+  page:
+    name: Annual report on Form 10-K for 2025 (Sirius XM Holdings)
+    url: https://investor.siriusxm.com/sec-filings/all-sec-filings/content/0000908937-26-000006/0000908937-26-000006.pdf
+  quotes:
+    - 'On September 6, 2024, Sirius XM Radio LLC, our wholly owned subsidiary, converted from a Delaware corporation to a Delaware limited liability company.'
+  country:
+    code: US
+    page:
+      name: Customer Agreement
+      url: https://www.siriusxm.com/customer-agreement
+    quotes:
+      - 'Sirius XM Radio LLC, 1221 Avenue of the Americas, 35th Floor, New York, NY 10020'
+    lastVerified: 2026-11-11
+  stock:
+    company: Sirius XM Holdings Inc.
+    listings:
+      - { exchange: NASDAQ, symbol: SIRI }
+    page:
+      name: Investor Relations
+      url: https://investor.siriusxm.com/
+    quotes:
+      - 'NASDAQ: SIRI'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its payment help names the networks and debit cards; the Customer Agreement a
+# prepaid service card or gift card. Diner's Club is `other`. Paper invoices paid by cheque exist for some plans
+# ("Invoice billing is not available for all Plans"), so they aren't listed.
+acceptedNetworks:
+  US:
+    networks: [mastercard, visa, amex, discover, other, unionpay, jcb]
+    url: https://www.siriusxm.com/help/payment-and-billing-options
+    quotes:
+      - 'SiriusXM accepts a variety of credit cards, including MasterCard, Visa, American Express, Discover, Diner’s Club, China Union Pay, and JCB credit cards, as well as all debit cards.'
+paymentMethods:
+  - methods: [card]
+    page: What payment and billing options does SiriusXM provide?
+    url: https://www.siriusxm.com/help/payment-and-billing-options
+    quotes:
+      - 'SiriusXM accepts a variety of credit cards, including MasterCard, Visa, American Express, Discover, Diner’s Club, China Union Pay, and JCB credit cards, as well as all debit cards.'
+  - methods: [gift-card]
+    page: Customer Agreement
+    url: https://www.siriusxm.com/customer-agreement
+    quotes:
+      - 'You may pay by credit card, debit card, a SiriusXM® Prepaid Service card or gift card.'
+# Renewal day (M11.5): "Your card will be charged on the day you select the Subscription (or after any free period) and
+# the day of each renewal" (its Customer Agreement) says when, not which day of the month.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.siriusxm.com/customer-agreement
+    - https://www.siriusxm.com/help/subscription-renewal
+  lastVerified: 2026-11-11
+
+# Perks (M11.6): what each plan adds, in its plans pages' words.
+perks:
+  - id: in-car
+    name: SiriusXM in your car
+  - id: live-games
+    name: Live NFL, MLB, NBA, NHL and college games
+  - id: talk-news
+    name: News, talk and entertainment
+  - id: in-studio-video
+    name: Exclusive video of in-studio interviews and performances
+  - id: howard-stern
+    name: Howard Stern
+  - id: artist-stations
+    name: Artist stations
+  - id: mature-channels
+    name: Its mature channels (left out of Family Friendly plans)
+  - id: merch-and-concerts
+    name: Discounted SiriusXM merch and Nugs.net concerts
+
+plans:
+  - id: siriusxm.free
+    name: Free Access
+    link: https://www.siriusxm.com/free-trial
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car]
+    notes: Its free, ad-supported plan, on a car radio SiriusXM chooses to switch on after a trial or paid plan ends.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/customer-agreement
+  - id: siriusxm.all-music
+    name: All Music
+    link: https://www.siriusxm.com/plans
+    features:
+      ad-free: true
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car]
+    addOnIds: [siriusxm.sports, siriusxm.talk, siriusxm.news]
+    notes: 'In your car and in the app: every music channel, ad-free. Sports, Talk and News are add-ons.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans
+  - id: siriusxm.all-access
+    name: All Access
+    link: https://www.siriusxm.com/plans
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games, talk-news, in-studio-video, mature-channels]
+    notes: 'In your car and in the app: all its music, sports play-by-play, talk and news, with in-studio video.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans
+  - id: siriusxm.all-access-app-only
+    name: All Access (App Only)
+    link: https://www.siriusxm.com/plans
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [live-games, talk-news, in-studio-video, mature-channels]
+    notes: 'Everything in All Access, in the app only (no satellite radio in the car).'
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans
+  - id: siriusxm.sports-pass
+    name: SiriusXM Sports Pass
+    link: https://www.siriusxm.com/plans
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games]
+    notes: 'In your car and in the app: live games, league coverage and sports talk.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans
+  - id: siriusxm.all-access-family-friendly
+    name: All Access Family Friendly
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games, talk-news, in-studio-video]
+    notes: 'All Access without its mature channels.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+  - id: siriusxm.platinum
+    name: Platinum
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks:
+      [
+        in-car,
+        live-games,
+        talk-news,
+        howard-stern,
+        artist-stations,
+        mature-channels,
+        merch-and-concerts,
+      ]
+    notes: 'Music, artist stations, talk, Howard Stern, comedy, news, live sports, discounted SiriusXM merch and Nugs.net concerts. A $15 activation fee applies to inactive radios.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 31.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+  - id: siriusxm.platinum-family-friendly
+    name: Platinum Family Friendly
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games, talk-news, artist-stations, merch-and-concerts]
+    notes: 'Platinum without its mature channels. A $15 activation fee applies to inactive radios.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+  - id: siriusxm.music-entertainment
+    name: Music & Entertainment
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games, talk-news, howard-stern, artist-stations, mature-channels]
+    notes: 'Music, artist stations, talk, Howard Stern, comedy, news, live sports and sports talk. A $15 activation fee applies to inactive radios.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+  - id: siriusxm.music-entertainment-family-friendly
+    name: Music & Entertainment Family Friendly
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games, talk-news, artist-stations]
+    notes: 'Music & Entertainment without its mature channels. A $15 activation fee applies to inactive radios.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+  - id: siriusxm.music-showcase
+    name: Music Showcase
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, talk-news, howard-stern, artist-stations]
+    notes: 'Music plus some talk and news, with comedy and Howard Stern. A $15 activation fee applies to inactive radios.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+  - id: siriusxm.news-sports-talk
+    name: News, Sports & Talk
+    link: https://www.siriusxm.com/plans/more
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, talk-news]
+    notes: 'News, sports analysis, politics and talk, with traffic and weather; no music. A $15 activation fee applies to inactive radios.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/plans/more
+
+addOns:
+  - id: siriusxm.sports
+    name: Sports
+    prices:
+      - region: US
+        currency: USD
+        amount: 8.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/help/allmusic
+  - id: siriusxm.talk
+    name: Talk
+    prices:
+      - region: US
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/help/allmusic
+  - id: siriusxm.news
+    name: News
+    prices:
+      - region: US
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.com/help/allmusic
+
+# The policies block for the US provider `siriusxm` (Sirius XM Radio LLC), to go after everything else in
+# data/providers/siriusxm.yaml. Every rating is for every plan; notes.md suggests one more for siriusxm.platinum (its
+# free trial needs no card).
+#
+# Terms and policies, read 2026-11-11 (M11.15, the music category) in Edge: its Customer Agreement ("Last Updated: June
+# 5, 2025"), the offer details on its plans, more plans and free trial pages, its U.S. Music Royalty Fee page, its help
+# centre's articles on cancelling, automatic renewal, trials, payment, changing plans, downloads, account login and
+# registration, and privacy rights, its account registration form and the app-only plan's first sign-up step (an email
+# and a password; its next steps show only after an email is entered, so they stay unread), and the Sirius XM Privacy
+# Policy, rated once as a shared document (data/policies/siriusxm-privacy.yaml). The sign-up pages link only the Privacy
+# Policy, and their offer details the Customer Agreement. Its Website Terms of Use (siriusxm.com/sxm-web-terms-of-use,
+# "Effective: January 19, 2018", in Sirius XM Radio Inc.'s name) also send disputes to arbitration, with no opt-out, and
+# change when posted; the Customer Agreement, which covers the Site too, "supersedes any previous agreements" and
+# replaces "any prior arbitration agreement", so they change no grade. Not rated: rights over your content, its apps'
+# licence and changes to your device (not topics for music; the agreement's software updates "cannot be disabled by
+# you"). Calibrated against Pandora's, Spotify's and Amazon Music's grades.
+policies:
+  shared: [siriusxm-privacy]
+  links:
+    - name: 'Customer Agreement'
+      url: https://www.siriusxm.com/customer-agreement
+    - name: 'Try SiriusXM for free'
+      url: https://www.siriusxm.com/free-trial
+    - name: 'U.S. Music Royalty Fee'
+      url: https://www.siriusxm.com/us-music-royalty
+    - name: 'How do I manage or cancel my service?'
+      url: https://www.siriusxm.com/help/manage-or-cancel-service
+    - name: 'How long can I keep downloaded shows on my device?'
+      url: https://www.siriusxm.com/help/downloaded-shows
+    - name: 'Register your account'
+      url: https://care.siriusxm.com/phx-wc/account/registration
+    - name: 'Sirius XM Privacy Policy'
+      url: https://www.siriusxm.com/privacy-policy
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'Registering your account online asks for your name, email, phone number and ZIP code. The app-only plan’s sign-up starts with an email and a password.'
+      sources:
+        - url: https://care.siriusxm.com/phx-wc/account/registration
+          quote: 'Last Name'
+        - url: https://care.siriusxm.com/phx-wc/account/registration
+          quote: 'Phone Number'
+        - url: https://care.siriusxm.com/phx-wc/account/registration
+          quote: 'Zip Code'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: good
+      reason: 'Only adults can sign up, and it doesn’t sell, or use for targeted ads, the data of anyone it knows is under 18.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'You must be at least 18 years old to purchase a Subscription.'
+        - url: https://www.siriusxm.com/privacy-policy
+          quote: 'SiriusXM audio services users must be 18 and older to sign up.'
+        - url: https://www.siriusxm.com/privacy-policy
+          quote: 'We do not “sell”, or use or “share” for targeted advertising purposes, the personal data of consumers we know to be less than 18 years of age.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online in your account, by chat or by phone, but at least 24 hours before it renews. You keep listening to the end of the period you paid for.'
+      sources:
+        - url: https://www.siriusxm.com/help/manage-or-cancel-service
+          quote: 'Go to the Subscriptions tab in the Online Account Center'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'You must cancel at least 24 hours before your upcoming renewal date to avoid being automatically renewed and charged for a new Subscription Period.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Your cancellation will become effective at the end of your current Subscription Period (i.e., billing cycle), and no refunds or credits will be given for any partial period, except as provided below or as required by law.'
+      action:
+        name: 'How do I manage or cancel my service?'
+        url: https://www.siriusxm.com/help/manage-or-cancel-service
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Monthly plans give back the unused part only if you cancel within 7 days of starting, and longer plans within 30 days of each renewal. Otherwise there’s no money back, but you keep listening to the end of the period.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'If you cancel a monthly billed Subscription within seven (7) days of the start date of your Subscription, your Subscription will terminate immediately and any fees paid are eligible for a pro-rata refund, if requested.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'If you cancel a non-monthly billed Subscription within thirty (30) days of the start of your Subscription or each subsequent renewal charge, your Subscription will terminate immediately and fees paid for that Subscription Period are eligible for a pro-rata refund, if requested.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Cancellations after this 7-day period will be effective at the end of your current Subscription Period and any fees paid are non-refundable.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you the date a new price starts, which is only at your next billing period, never on time you’ve paid for, and you can cancel before then.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We will let you know the date on which any change will be effective.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'If you do not accept the change in pricing, you have the right to reject the change by cancelling your Subscription prior to the change taking effect.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Changes in pricing will take effect at the start of your next Subscription Period following the date of the price change.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'The app-only plan’s free months need a credit card and turn into a paid plan unless you cancel, with no reminder promised. The free Platinum trial for a car radio needs no card and just stops.'
+      sources:
+        - url: https://www.siriusxm.com/free-trial
+          quote: 'Subscribe to the All Access (App Only) plan and get your first 3 months for $0.00. Credit card required.'
+        - url: https://www.siriusxm.com/free-trial
+          quote: 'After your promotional term ends, your plan will AUTOMATICALLY RENEW every month and you will be charged at the then-current rates (currently $11.99/month), unless and until you cancel.'
+        - url: https://www.siriusxm.com/free-trial
+          quote: 'Your trial subscription will stop at the end of the stated trial period unless you decide to purchase a new plan.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews and charges you without telling you first, unless a law requires a notice.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'on an ongoing basis at the rates in effect at the time of each renewal, plus applicable fees and taxes without further notice to you (except as required by applicable law)'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: bad
+      reason: 'Its fees, to activate or change a radio’s service, for late payments and more, can change without notice, and its terms don’t say how much most are. Its music royalty fee is already in the prices shown.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We may charge you one or more of the fees below, all of which are subject to change without notice.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Activation Fee: For each radio on your account, we may charge you a fee to activate, reactivate, upgrade or modify your Service.'
+        - url: https://www.siriusxm.com/us-music-royalty
+          quote: 'The U.S. Music Royalty Fee is included in the advertised prices you see'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to more channels or ways to listen starts at once, and you pay the difference. Other changes start when your billing period ends.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Changes you make to your Plan will be effective at the end of your current Subscription Period, except for Service level upgrades (i.e., additional programming or listening options), in which case we will charge you the difference or apply a non-refundable credit toward your future renewal charges.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes instead of a court, one person at a time. You can opt out only by a signed letter within 30 days of subscribing, and even then can’t join a group lawsuit.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'ANY DISPUTE BETWEEN US, UNLESS PROVIDED OTHERWISE HEREIN, WILL BE RESOLVED BY BINDING ARBITRATION ON AN INDIVIDUAL BASIS AS OUTLINED IN SECTION 13 BELOW.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'The Opt-Out Notice must be received no later than thirty (30) days from the date of purchase or the start of your Subscription, whichever comes first.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'You do not have the right to act as a class representative or participate as a member of a class of claimants with respect to any Claim submitted to arbitration or litigation (to the extent you elect to Opt-Out of Arbitration)'
+      action:
+        name: 'How to opt out of arbitration (by letter)'
+        url: https://www.siriusxm.com/customer-agreement
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It emails you about big changes to its terms, but they can start 30 days later or as soon as they’re posted. If you don’t agree, you must cancel.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'If we make material changes to the Agreement, we will notify existing active Subscribers at the email address last on file.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'You agree that such updated Agreement will be effective either thirty (30) days after dispatch of our notice to you (or at a later time that we identify in the notice) or posting of the changes, except for changes that relate to new features or for legal reasons, which will become effective immediately.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'If you do not agree to any change to this Agreement, you must cancel your Subscription(s) as set forth in Section 4 and discontinue using the Service.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can cancel your subscription for any reason it chooses, and promises no notice and no refund.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We may cancel your Subscription if you fail to pay for your Subscription, breach this Agreement, or for any other reason in our sole discretion.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove channels, and move you to another plan, at any time without notice, and gives no refund when features stop working for a while or for good.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We reserve the right to change, rearrange, add, or delete content on the Service or in any Plan at any time, without notice.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We reserve the right to migrate you to another Plan at any time.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'No refunds will be given if your Subscription is suspended or where certain features are temporarily or permanently unavailable.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.siriusxm.com/customer-agreement, https://www.siriusxm.com/privacy-policy]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'You may share it only with people who live at your home. It can limit features or block access if it decides you share it beyond that.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'The Service is provided only for your personal, non-commercial enjoyment and may not be shared beyond your household.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We may modify access or disable features, including for security reasons, to limit account sharing outside your household or where we determine in our sole discretion that there has been misuse of your account, and block future access to the Service.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'A “household” means devices associated with your primary residence that are used by you and other individuals that also reside at that address.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'It can limit how many devices you use, and change that at any time. Some downloaded shows expire, and recordings on radios that record play only while you pay.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Simultaneous streaming is subject to limitations, and we may change the maximum number of simultaneous streams per Plan, account or household and/or impose limits on the number of devices that you may use to access the Service at any time.'
+        - url: https://www.siriusxm.com/help/downloaded-shows
+          quote: 'Some shows have expiring content – those downloads will be removed from your device as they expire.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'Subject to applicable laws, you may access such Recorded Content only as long as you pay your Subscription.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Your name and voice, used forever
+      tier: bad
+      reason: 'Anything you send it, from comments to your name, likeness and voice, it may use and let others use forever, for any purpose, without paying you.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'We are free to use and sublicense any comments, information, ideas, concepts, reviews, or techniques, or any other material including your name, likeness, personality, voice, and any other materials or information you provide to us or contained in any communication you may send or direct to us ("Feedback") in perpetuity without further compensation, acknowledgement or payment to you for any purpose whatsoever.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: A free plan with ads after your trial
+      tier: poor
+      reason: 'When a trial or paid plan ends, it may switch your car radio to its free plan with ads. To stop that, you must mail it a letter.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'The ‘Free Access Plan’ is our free advertising supported Subscription.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'You agree that in our sole discretion and without further notice to you, we may activate or reactivate your vehicle radio at no charge to you after your Trial or paid Subscription ends.'
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'You may request at any time that your radio not be activated by SiriusXM with this Plan after your Trial or paid Subscription ends by mailing a letter to Sirius XM Care, PO Box 33174, Detroit, MI 48232, Attention: No Free Access Subscription.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: 30 days to dispute a charge
+      tier: poor
+      reason: 'You must question a charge within 30 days of it, or you give up the right to dispute it.'
+      sources:
+        - url: https://www.siriusxm.com/customer-agreement
+          quote: 'If you wish to dispute any charge, you must contact us within thirty (30) days after the date of the charge in question. OTHERWISE, YOU WAIVE YOUR RIGHT TO DISPUTE THE CHARGE.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      plans: [siriusxm.platinum]
+      tier: great
+      reason: 'Its 3 free months of Platinum for a car radio need no card, and stop on their own unless you buy a plan.'
+      sources:
+        - url: https://www.siriusxm.com/free-trial
+          quote: 'No credit card required.'
+        - url: https://www.siriusxm.com/free-trial
+          quote: 'Your trial subscription will stop at the end of the stated trial period unless you decide to purchase a new plan.'
+      lastVerified: 2026-11-11

@@ -389,6 +389,24 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['amazon-prime-video.free', ['video.quality', 'streaming.concurrent-streams']],
   ['apple-music.radio', ['audio.quality']],
   ['paramount-plus.essential', ['video.quality']],
+  // SiriusXM's app "uses variable bit rates" and no page, nor a named review, gives one (2026-11-11).
+  ['siriusxm.free', ['audio.quality']],
+  ['siriusxm.all-music', ['audio.quality']],
+  ['siriusxm.all-access', ['audio.quality']],
+  ['siriusxm.all-access-app-only', ['audio.quality']],
+  ['siriusxm.sports-pass', ['audio.quality']],
+  ['siriusxm.all-access-family-friendly', ['audio.quality']],
+  ['siriusxm.platinum', ['audio.quality']],
+  ['siriusxm.platinum-family-friendly', ['audio.quality']],
+  ['siriusxm.music-entertainment', ['audio.quality']],
+  ['siriusxm.music-entertainment-family-friendly', ['audio.quality']],
+  ['siriusxm.music-showcase', ['audio.quality']],
+  ['siriusxm.news-sports-talk', ['audio.quality']],
+  ['siriusxm-canada.free', ['audio.quality']],
+  ['siriusxm-canada.platinum', ['audio.quality']],
+  ['siriusxm-canada.music-entertainment', ['audio.quality']],
+  ['siriusxm-canada.music-showcase', ['audio.quality']],
+  ['siriusxm-canada.all-access-app-only', ['audio.quality']],
 ]);
 
 /**
