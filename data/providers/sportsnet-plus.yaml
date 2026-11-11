@@ -2,11 +2,12 @@
 # used:
 # Pricing: its pricing page (secure.sportsnetplus.ca/pricing): "STANDARD: / Monthly: / $34.99/month / Annual: /
 # $269.99/year / Citytv+ bundle: / $36.99/month" and "PREMIUM: / Monthly: / $44.99/month / Annual: / $344.99/year", and
-# its TV provider add-on page ("$12.99 / Per month"), all in Canadian dollars before tax ("(plus applicable taxes)",
-# its terms). Every price is the regular one.
+# all in Canadian dollars before tax ("(plus applicable taxes)", its terms). Every price is the regular one.
 # Region checklist, 2026-11-11: 1. one site (Canada only); 2. no picker; 3. not needed; 4. checkout not opened (it needs
 # an account); 5. its help centre names the cards; 6. Edge read every page; 7. no bill offered.
-# Not listed: UFC pay-per-views ("No Subscription Required", one event at a time), the French out-of-market pass ("Laissez-
+# Not listed: the TV Provider Add-on ("$12.99 / Per month", "Only available to customers who have Sportsnet included in
+# their TV subscription"), which adds Sportsnet+'s exclusives to a TV package's channels: it waits for telecom's TV
+# packages, since as a plan it would read as a cheaper Standard. UFC pay-per-views ("No Subscription Required", one event at a time), the French out-of-market pass ("Laissez-
 # passer Sportsnet+ (hors marché) en français", a season bought once), and the Rogers Wireless discount (an offer).
 # Bundles: the Standard + Citytv+ bundle is a plan here, since Citytv+ isn't in the catalog yet ("The Bundle allows you to
 # stream Sportsnet+ Standard and Citytv+ content", Sportsnet+ Citytv+ Bundle FAQ); its Citytv+ access is a perk. Official
@@ -23,7 +24,7 @@
 # months" (Can I pause my subscription?). No parental controls: its terms leave a minor's use to you. App languages:
 # English only ("l’expérience de visionnement sur Sportsnet+ n’est offerte qu’en anglais pour le moment", its French
 # pass article).
-# Free use: none: its pages sell only paid plans, the add-on and pay-per-views (TV subscribers get it with their TV
+# Free use: none: its pages sell only paid plans, a TV package's add-on and pay-per-views (TV subscribers get it with their TV
 # package, not from Sportsnet+).
 id: sportsnet-plus
 name: Sportsnet+
@@ -59,7 +60,8 @@ owner:
     lastVerified: 2026-11-11
   lastVerified: 2026-11-11
 # Ways to pay (M11.5), read 2026-11-11: its card article (and Visa Debit, its no-credit-card article), and the app stores
-# (its in-app article). Rogers, TELUS and Koodo billing is named in the header.
+# (its in-app article). Rogers, TELUS and Koodo bill it on their own services ("You can subscribe to Sportsnet+ through
+# select third-party providers, including Rogers, TELUS and Koodo", whose words don't match the check for a phone bill).
 acceptedNetworks:
   CA:
     networks: [visa, mastercard, amex]
@@ -93,11 +95,11 @@ freeUse:
   lastVerified: 2026-11-11
 
 # Sign-in (2026-11-11): a Sportsnet account's email and password ("Enter your Sportsnet or Citytv+ credentials to
-# login") and a TV provider's sign-in ("Sign in through your TV provider account", watch.sportsnet.ca); it may ask for
+# login"), or a TV provider's sign-in for TV subscribers (not a single sign-on for buyers, as Crave's) ("Sign in through your TV provider account", watch.sportsnet.ca); it may ask for
 # "a verification code" without saying how it's sent (its billing information article). Platforms: its devices article.
 features:
   platforms: [web, ios, android, tv, console]
-  account.sign-in: [password, sso]
+  account.sign-in: [password]
   languages.interface: [en]
 
 # Perks (M11.6): what Premium and the bundle add, in its comparison table's words.
@@ -117,7 +119,7 @@ plans:
       ad-free: false
       streaming.live: [tv-channels, sports]
       account.pause: true
-    notes: Its live Sportsnet channels and Sportsnet+ exclusives (Monday Night Hockey); regional games are blacked out outside their market. Only monthly plans can be paused.
+    notes: Its live Sportsnet channels and Sportsnet+ exclusives (Monday Night Hockey); regional games are blacked out outside their market. Only monthly plans can be paused. Its terms allow one stream at a time, its help centre two.
     prices:
       - region: CA
         currency: CAD
@@ -145,7 +147,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.pause: true
     perks: [out-of-market-nhl]
-    notes: Everything in Standard, plus out-of-market NHL games and SN World's events. Only monthly plans can be paused.
+    notes: Everything in Standard, plus out-of-market NHL games and SN World's soccer and rugby events. Only monthly plans can be paused. Its terms allow one stream at a time, its help centre two.
     prices:
       - region: CA
         currency: CAD
@@ -173,7 +175,7 @@ plans:
       streaming.live: [tv-channels, sports]
       account.pause: true
     perks: [citytv-plus]
-    notes: Sportsnet+ Standard with Citytv+, monthly only; cancelling ends both.
+    notes: Sportsnet+ Standard with Citytv+, monthly only; cancelling ends both. Its terms allow one stream at a time, its help centre two.
     prices:
       - region: CA
         currency: CAD
@@ -183,25 +185,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-11
         sourceUrl: https://secure.sportsnetplus.ca/pricing
-  - id: sportsnet-plus.tv-provider-add-on
-    name: TV Provider Add-on
-    link: https://www.sportsnetplus.ca/tv-provider-add-on
-    features:
-      video.quality: 1080p
-      streaming.concurrent-streams: 1
-      ad-free: false
-      streaming.live: [tv-channels, sports]
-    notes: Only for people who get Sportsnet in a TV package; it adds the Sportsnet+ exclusives to the channels they already stream.
-    prices:
-      - region: CA
-        currency: CAD
-        amount: 12.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-11
-        sourceUrl: https://www.sportsnetplus.ca/tv-provider-add-on
-
 # Terms and policies, read 2026-11-11 (M11.15) in Edge and through its help centre's API, from Canada: its Terms of
 # Service ("Updated: November 22, 2024"), with the Sportsnet+ Acceptable Use Policy on the same page ("Updated: November
 # 11, 2024"), which the terms include; the French version the terms link for Quebec ("In Quebec? Click here":
@@ -233,12 +216,10 @@ policies:
       url: https://support.sportsnetplus.ca/hc/en-gb/articles/46382807304084-Sportsnet-Citytv-Bundle-FAQ
     - name: 'Rogers Wireless Discount'
       url: https://support.sportsnetplus.ca/hc/en-gb/articles/46381971545108-Rogers-Wireless-Discount
-    - name: 'FAQ: Sportsnet+ exclusive content'
-      url: https://support.sportsnetplus.ca/hc/en-gb/articles/55129474098196-FAQ-Sportsnet-exclusive-content
   ratings:
     - topic: privacy.sign-up-data
       status: not-stated
-      reason: 'Its terms ask for a Rogers account with accurate details without listing them, and its help lists an email, a password and a card, but its sign-up form answered with an error here.'
+      reason: 'Its terms ask for a Rogers account with accurate details without listing them, and its help lists an email, a password and a card, but its sign-up form couldn’t be read.'
       pages:
         - https://secure.sportsnetplus.ca/terms-of-service
         - https://support.sportsnetplus.ca/hc/en-gb/articles/46381971545108-Rogers-Wireless-Discount
@@ -288,7 +269,7 @@ policies:
       lastVerified: 2026-11-11
     - topic: billing.free-trials
       tier: poor
-      reason: 'A free trial needs your card, which it holds the price on, and you’re charged once it ends. You cancel it by contacting Sportsnet+, with no reminder promised. Rogers Wireless’s discount does email you 7 days before it ends.'
+      reason: 'Its pages offer no trial now; its terms say a trial needs your card and is charged once it ends, cancelled by contacting Sportsnet+, with no reminder promised.'
       sources:
         - url: https://secure.sportsnetplus.ca/terms-of-service
           quote: 'If your Subscription Content includes a free trial, then you acknowledge that your credit card will be authorized for up to the amount representing the price of the Subscription Content during the free trial, however, your credit card will not be charged until after the end of the free trial.'
@@ -366,15 +347,6 @@ policies:
       status: not-stated
       reason: 'Its terms don’t say it closes accounts you haven’t used.'
       pages: [https://secure.sportsnetplus.ca/terms-of-service]
-      lastVerified: 2026-11-11
-    # The TV Provider Add-on only: see the comment above `policies:` for its plan id.
-    - topic: legal.inactivity
-      plans: [sportsnet-plus.tv-provider-add-on]
-      tier: poor
-      reason: 'If you go 60 days without signing in with your TV provider’s login, it warns you and cancels the TV Provider Add-on 30 days later.'
-      sources:
-        - url: https://support.sportsnetplus.ca/hc/en-gb/articles/55129474098196-FAQ-Sportsnet-exclusive-content
-          quote: 'If you cancel your Sportsnet channel subscription, or you have not logged in with your TV provider credentials for 60 days to validate your entitlements, you will receive 30 days’ notice to advise you of the upcoming cancellation of your monthly TV provider add-on subscription.'
       lastVerified: 2026-11-11
     - topic: service.account-sharing
       status: not-stated

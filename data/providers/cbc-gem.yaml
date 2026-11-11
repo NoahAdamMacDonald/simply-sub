@@ -8,15 +8,16 @@
 # Bundles: TELUS's Stream+ includes Premium ("If you are a TELUS customer with a Stream+ bundle customer, you
 # automatically have access to CBC Gem Premium"), for telecom. Official resellers: TELUS sells Premium alone at the same
 # price ("you can also purchase a standalone Premium subscription from Telus for $5.99 month/+ tax", its help centre's
-# TELUS article), not listed as a reseller since it's no cheaper; its conditions name "our partners TELUS and Koodo".
+# TELUS article): a company selling it on its own service, which is noted, not listed as a reseller; its conditions
+# name "our partners TELUS and Koodo".
 # Features, read 2026-11-11: Free: "Watch current and past seasons of favourite shows on demand (ad-supported)", "Live
 # stream CBC TV, including access to all 14 local channels", "Live News and Sports streams" (What is CBC Gem?); its
 # video quality and streams aren't stated anywhere (only Premium's), so they wait (core's awaitingRequiredFeatures).
 # Premium: "up to 1080p High Definition on-demand video on supported devices" with "5.1 Dolby Digital Surround" (CBC
 # Gem 1080p and Surround Sound Support), "up to a maximum of three (3) concurrent streams" (its Subscription
 # Conditions), on-demand ad-free with exceptions but "Live TV Channels will contain advertising breaks" (CBC Gem Premium
-# Ad-Free Experience), so not ad-free (ICI TOU.TV's ICI RDI precedent), and "Live stream CBC News Network 24/7" (a
-# perk). No downloads ("Offline viewing is not supported on CBC Gem"), no profiles ("we do not offer different member
+# Ad-Free Experience): ad-free with a note, as ICI TOU.TV's EXTRA + ICI RDI, Crave Premium and Paramount+ Premium
+# are; and "Live stream CBC News Network 24/7" (a perk). No downloads ("Offline viewing is not supported on CBC Gem"), no profiles ("we do not offer different member
 # profiles within the same account"), no pause and no parental controls on any page; its site is in English only (its
 # French service is ICI TOU.TV).
 id: cbc-gem
@@ -114,7 +115,7 @@ plans:
     features:
       video.quality: 1080p
       streaming.concurrent-streams: 3
-      ad-free: false
+      ad-free: true
       streaming.live: [tv-channels, sports]
     perks: [cbc-news-network]
     notes: On-demand shows without ads, with a few exceptions; live TV and live events still have ads. Early access to some exclusives.
