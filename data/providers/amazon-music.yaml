@@ -42,6 +42,10 @@
 # Verification Fails" ("from a trusted device") and "What is Two-Step Verification?", in its Amazon Business section
 # but about any account's settings ("by text message or authenticator app").
 
+# Skips, your own music, lyrics and live radio, read from the saved FAQ (2026-11-10): Prime's songs play "on-demand
+# with no skip limits" only from "a curated selection of All-Access Playlists" (shuffle otherwise), so not unlimited;
+# Unlimited lets you "listen to any song, anytime" (inferred). No page read names lyrics, uploads or live radio (its
+# help pages showed this machine a check, 2026-11-11), so they're false until one does.
 id: amazon-music
 name: Amazon Music
 aliases: [amazon music unlimited]
@@ -135,6 +139,10 @@ plans:
       audio.quality: high
       music.on-demand: false
       music.offline: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
     inferred:
       audio.quality:
         reason: 'Free plays only SD, which no help page measures. Amazon’s developer documentation gives SD’s bitrates as 48, 192 and 320 kbps, so up to 320 kbps.'
@@ -170,6 +178,10 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
     notes: Plays on one device at a time. Amazon Prime members pay less (an add-on of Amazon Prime).
     prices:
       - region: CA
@@ -199,6 +211,10 @@ plans:
       music.offline: true
       audiobooks.included: false
       account.users: 6
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
     notes: Standard for up to 6 accounts, playing on 6 devices at once.
     prices:
       - region: CA
@@ -227,6 +243,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: true
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'Unlimited lets you “listen to any song, anytime, anywhere”, so skipping is never limited.'
+        page:
+          name: 'Amazon Music FAQ'
+          url: https://www.amazon.ca/music/i/faq
+        lastVerified: 2026-11-11
     notes: One audiobook a month from Audible's catalogue. Plays on one device at a time. Amazon Prime members pay less, monthly or yearly (an add-on of Amazon Prime).
     prices:
       - region: CA
@@ -256,6 +283,17 @@ plans:
       music.offline: true
       audiobooks.included: true
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'Unlimited lets you “listen to any song, anytime, anywhere”, so skipping is never limited.'
+        page:
+          name: 'Amazon Music FAQ'
+          url: https://www.amazon.ca/music/i/faq
+        lastVerified: 2026-11-11
     notes: Unlimited for up to 6 family members in the same country, playing on 6 devices at once. The audiobook a month is the account holder's only. The yearly plan is for Amazon Prime members only (an add-on of Amazon Prime).
     prices:
       - region: CA
@@ -284,7 +322,17 @@ plans:
       music.offline: false
       audiobooks.included: false
       platforms: [tv]
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
     inferred:
+      music.unlimited-skips:
+        reason: 'Unlimited lets you “listen to any song, anytime, anywhere”, so skipping is never limited.'
+        page:
+          name: 'Amazon Music FAQ'
+          url: https://www.amazon.ca/music/i/faq
+        lastVerified: 2026-11-11
       audio.quality:
         reason: 'Without HD or Ultra HD it plays only SD, which no help page measures. Amazon’s developer documentation gives SD’s bitrates as 48, 192 and 320 kbps, so up to 320 kbps.'
         page:

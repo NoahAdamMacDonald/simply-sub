@@ -1,0 +1,39 @@
+url: https://creators.audiomack.com/responsible-disclosure
+method: fetch
+saved: 2026-11-11
+
+Responsible Disclosure Policy | Audiomack
+Skip to main content Upgrade to ProGet Pro
+Sign UpSign In
+Upload
+Responsible Disclosure
+We value the InfoSec community and want to thank you in advance for helping make the internet a safer place. Audiomack considers the trust and the protection of our users’ data a top priority. We want to welcome all security researchers that feel the same.
+Policy
+We acknowledge the valuable role that independent security researchers play in security and as a result, we encourage responsible disclosure of any vulnerabilities that may be found in our website, api or applications. We will not take legal action against, or suspend or terminate the accounts of, researchers who discover and report security vulnerabilities in accordance with this Responsible Disclosure Policy. Audiomack reserves all legal rights in the event of any non-compliance.
+Reporting
+For the security of our users and service, we ask that you do not share details of the suspected vulnerability publicly or with any third party without express written consent from Audiomack.
+We encourage security researchers to share the details of any suspected vulnerabilities with the Audiomack Security Team by submitting the form found on this page. Audiomack will review the submission to determine if the finding is valid and has not been previously reported. At Audiomack’s discretion, you may be eligible for monetary compensation for your efforts. We require security researchers to include detailed information with steps for us to reproduce the vulnerability.
+We reserve all legal rights in the event of noncompliance.
+Prohibited Actions
+While we encourage you to discover and report to us any vulnerabilities you find in a responsible manner, the following conduct is prohibited:
+Performing actions that may negatively affect Audiomack or its users (e.g. Spam, Brute Force, Denial of Service, etc).
+Accessing, or attempting to access, data or information that does not belong to you.
+Destroying or corrupting, or attempting to destroy or corrupt, data or information that does not belong to you.
+Social engineering any Audiomack service desk or personnel.
+Violating any laws or breaching any agreements in order to discover vulnerabilities.
+Excluded Submission Types
+When reporting vulnerabilities, please consider (1) attack scenario/exploitability, and (2) security impact of the bug. The following issues are considered out of scope:
+Issues related to third-party vendors
+Rate limiting or brute force issues
+Missing or incorrect SPF/DMARC/DKIM records
+Blind XSS/SSRF with no actual exploitation
+Our Commitment
+If you responsibly report a vulnerability in accordance with this policy, we will:
+Promptly respond to acknowledge the receipt of your report.
+Notify you when we believe that the vulnerability has been remediated.
+0:000:00
+Embed
+ABOUTHELPBusiness inquiriesStyleguideCreator App
+Audiomack is an on-demand music streaming and audio discovery platform that allows artists and creators to upload limitless music and podcasts for listeners through its mobile apps and website.
+Legal & DMCAPrivacy PolicyTerms of ServiceReport a VulnerabilityDo not sell my info Manage Cookie Settings
+© 2026 Audiomack - All Rights Reserved

@@ -1,0 +1,120 @@
+# A shared policy document (BLUEPRINT §4.10): the Sirius XM Privacy Policy ("March 18, 2026"), which covers Sirius XM
+# Radio LLC and its subsidiaries, Pandora Media, LLC among them: SiriusXM's satellite and streaming services in the US,
+# and Pandora. pandora.com/privacy serves the same policy ("Effective March 18, 2026"; read 2026-11-11 in Edge, the same
+# sentences, only spacing, link text and one quotation mark differ). It doesn't cover Sirius XM Canada Inc., whose own
+# privacy policy siriusxm-canada rates. Rated once here; SiriusXM (US) and Pandora name it in their policies' shared and
+# rate their own terms.
+# Topics rated here: data collection, selling or sharing, ads and tracking, AI training, how long it keeps data,
+# deleting it, taking it with you, government requests, where it's kept, and security checks. Left to each provider,
+# because they differ: what sign-up needs (each sign-up form), children (SiriusXM is for adults, Pandora from 13 with a
+# parent's consent), and every billing, legal and service topic (each provider's own terms).
+# Read 2026-11-11 (M11.15, the music category) in Edge: the policy at siriusxm.com/privacy-policy, re-checked against
+# Pandora's ratings of 2026-11-09 (every quote they used is still there), and SiriusXM's help article on privacy rights
+# (deletion and a copy of your data only under some states' laws). Its "Your Privacy Choices" page rendered only its
+# footer, and its privacy request forms are OneTrust web forms on another company's domain, so actions link the policy.
+# siriusxm.com has no security.txt, and no page read names an audit, a certification or a way to report a security flaw.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: siriusxm-privacy
+name: The Sirius XM Privacy Policy
+links:
+  - name: 'Sirius XM Privacy Policy'
+    url: https://www.siriusxm.com/privacy-policy
+  - name: 'Frequently Asked Questions About Your Privacy Rights'
+    url: https://www.siriusxm.com/help/privacy-rights
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It records what you do on its sites and apps, even replays of your visits, for analytics. You can only turn off the cookies, and must do it again in each browser and device.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Sirius XM may record through session replay technology details of your interactions with the Services'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'To disable sharing through cookies set on our site by third parties for advertising and analytics purposes, please adjust your settings by clicking on either Cookie Settings or Manage Cookies from the footer of our webpages.'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Note that such cookie preferences do not transfer between browsers and must be reset for each browser or device that you use to access a site.'
+    action:
+      name: 'Its privacy policy (cookie settings)'
+      url: https://www.siriusxm.com/privacy-policy
+    lastVerified: 2026-11-11
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It shares your email, device data and other details with other companies for their own business and advertising. You can stop only the sharing of your email for their marketing, or use a state’s opt-out where you live.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'We may share or otherwise make available your email address, Device Data, or other personal information with unaffiliated third parties with whom we have a business relationship for ours or for their own business and advertising/marketing purposes'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'You may opt-out of our sharing of your email address for third-party marketing through your Sirius XM Online Account Center (for former or current SiriusXM audio subscribers) or by sending an email request to opt-out of sharing for third-party marketing to privacy@siriusxm.com or privacy@pandora.com, depending upon your subscription service.'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Note that Sirius XM does not sell your personal data for profit but we do engage in certain disclosures of personal data for advertising/marketing-related purposes that could be considered a “sale” under the broad definitions of state privacy laws.'
+    action:
+      name: 'Its privacy policy (your choices)'
+      url: https://www.siriusxm.com/privacy-policy
+    lastVerified: 2026-11-11
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'Ads on its services can be picked from what you do, and ad companies track you on its sites. Turning that off is partial: each choice covers one browser or device, and you can’t turn off all ads.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Sirius XM works with advertisers, advertising agencies, and providers of ad-related services for targeted advertising-related purposes.'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Note that cookie settings and other technological controls are specific to the browser or device on which such control is implemented.'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Please note, it is not possible to opt-out of all advertising on the Services.'
+    action:
+      name: 'Its privacy policy (your choices)'
+      url: https://www.siriusxm.com/privacy-policy
+    lastVerified: 2026-11-11
+  # Graded 2026-11-11: Pandora's rating of 2026-11-09 said not-stated, but the same policy's "Live Real Time Chat"
+  # paragraph says its support chat's AI learns from the chats. Good, as training only on what you send it (like
+  # feedback), which you avoid by not using the chat; nothing read says your listening, posts or voice train AI.
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'It doesn’t say whether it trains AI on what you listen to or send. Its support chat’s AI learns from chats with it, which is part of running its support, not training on your listening.'
+    pages: [https://www.siriusxm.com/privacy-policy]
+    lastVerified: 2026-11-11
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your data as long as it thinks reasonably necessary, for its services, marketing and research, with no set periods. When you change your details, it keeps the old ones too.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'We retain personal data for as long as reasonably necessary for the purposes set out in this Policy'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'to send you information related to Sirius XM, our products and services and your account; to conduct internal research, develop and improve new products and services'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Note that when you edit your personal data or change your preferences, the previous information will be retained internally as part of the history of your account for analytical, administrative, legal, and security purposes, or within backup media.'
+    lastVerified: 2026-11-11
+  - topic: privacy.data-deletion
+    status: not-stated
+    reason: 'Its privacy policy and help let you ask for your data to be deleted only if you live in a US state whose law gives that right.'
+    pages: [https://www.siriusxm.com/privacy-policy, https://www.siriusxm.com/help/privacy-rights]
+    lastVerified: 2026-11-11
+  - topic: privacy.data-portability
+    status: not-stated
+    reason: 'Its privacy policy and help give a copy of your data only as a right some US states’ residents have.'
+    pages: [https://www.siriusxm.com/privacy-policy, https://www.siriusxm.com/help/privacy-rights]
+    lastVerified: 2026-11-11
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It gives your data to police and government agencies where the law requires, such as for a valid subpoena. It doesn’t say it tells you, or publish how many requests it gets.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Law Enforcement and Government Agencies/Where Required By Law (including third parties in connection with court or other legal actions including valid subpoenas)'
+    lastVerified: 2026-11-11
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Its services are run from the US, for people who live there, and your data is handled in the US. It names no other safeguards for it.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'The Services are controlled and operated from the United States.'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'The Services audio and subscription services under this Policy are intended for use only by residents of the United States'
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'By using any of the above listed Services in this section, you consent to the transfer to and processing of your personal data in the United States.'
+    lastVerified: 2026-11-11
+  - topic: security.practices
+    tier: poor
+    reason: 'It describes commercially reasonable security steps in general terms, and names no audit or way to report a security flaw.'
+    sources:
+      - url: https://www.siriusxm.com/privacy-policy
+        quote: 'Sirius XM takes commercially reasonable steps designed to secure your personal data'
+    lastVerified: 2026-11-11

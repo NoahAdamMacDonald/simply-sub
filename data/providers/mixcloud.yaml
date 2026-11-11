@@ -24,6 +24,10 @@
 # code by email each time you sign in", or "You can still use a password to log in" (its one-time codes article,
 # updated 2026-11-10, which says "Facebook login is no longer supported as an ongoing login method", so it isn't listed).
 
+# Skips, your own music, lyrics and live radio, read 2026-11-11: Premium's "Replay, skip and rewind shows as much as
+# you like" (the archive's Premium page), so Free's aren't unlimited; anyone "will be able to watch" a live stream,
+# "even if they don't have a Mixcloud account" (FAQ: Mixcloud Live, from its help centre's API). Its uploads publish
+# shows; no page names lyrics.
 id: mixcloud
 name: Mixcloud
 website: https://www.mixcloud.com
@@ -89,6 +93,10 @@ plans:
       audio.quality: standard
       music.on-demand: true
       music.offline: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
     inferred:
       audio.quality:
         reason: 'Its Pro page gives the bitrates shows are uploaded at, 64 kbps AAC+ as standard and 160 kbps Opus in HQ audio, so nothing streams above 160 kbps.'
@@ -122,6 +130,10 @@ plans:
       audio.quality: standard
       music.on-demand: true
       music.offline: true
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
     inferred:
       audio.quality:
         reason: 'Its Pro page gives the bitrates shows are uploaded at, 64 kbps AAC+ as standard and 160 kbps Opus in HQ audio, so nothing streams above 160 kbps.'
@@ -155,6 +167,10 @@ plans:
       audio.quality: standard
       music.on-demand: true
       music.offline: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
     inferred:
       audio.quality:
         reason: 'Its Pro page gives the bitrates shows are uploaded at, 64 kbps AAC+ as standard and 160 kbps Opus in HQ audio, so nothing streams above 160 kbps.'

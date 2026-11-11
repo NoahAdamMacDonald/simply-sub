@@ -24,6 +24,11 @@
 # Family "Up to 6 Premium accounts", with "Parental controls over all plan members" (a perk).
 # Apps: its download page names devices (Mobile, Computer, Tablet, Car, PlayStation, Xbox, TV, Speaker, Web Player), not
 # systems, so its platforms aren't listed.
+# Skips, your own music, lyrics and live radio, read 2026-11-11 with Edge: Premium's "skip as many times as you want"
+# (the Premium page), so the free plan's skips aren't unlimited; "Lyrics are now available for Spotify users across
+# both our free and Premium tiers" (View lyrics); "you can also use the app to play any of the audio files legally
+# stored on your device" (Local files), with no plan named. Its radio is made from songs, not a live broadcast: no
+# live radio.
 id: spotify
 name: Spotify
 website: https://www.spotify.com
@@ -103,6 +108,10 @@ plans:
       audio.quality: standard
       music.on-demand: false
       music.offline: false
+      music.unlimited-skips: false
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     prices:
       - region: GLOBAL
         currency: USD
@@ -121,6 +130,10 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: true
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     addOnIds: [spotify.audiobooks-plus]
     notes: 15 hours of audiobooks a month from its subscriber catalog (12 in Germany, France, the Netherlands, Spain and Italy).
     prices:
@@ -222,6 +235,10 @@ plans:
       music.offline: true
       audiobooks.included: true
       account.users: 2
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     addOnIds: [spotify.audiobooks-plus]
     notes: Two Premium accounts for a couple at the same address. The audiobook hours are the plan manager's only.
     prices:
@@ -323,6 +340,10 @@ plans:
       music.offline: true
       audiobooks.included: true
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     perks: [parental-controls]
     addOnIds: [spotify.audiobooks-plus]
     notes: Up to 6 Premium accounts for family members at the same address. The audiobook hours are the plan manager's only.

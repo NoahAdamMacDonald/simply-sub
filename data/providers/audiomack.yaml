@@ -1,0 +1,449 @@
+# Researched by hand on 2026-11-11 (M11.15, the music category, part 5). Pages, each quoted where it's used:
+# Pricing: its Plus page (audiomack.com/premium redirects to audiomack.com/plus), which prices by where the reader is:
+# "CA$8.99/month after" read with Edge from Canada, and "$5.99/month after" read through a US exit. Plus is sold
+# monthly only ("Monthly Subscription"), billed by "30-day payment period" (its terms); its first 30 days free are a trial.
+# Region checklist, 2026-11-11: 1. no country paths; 2. no picker; 3. a US exit for the US; 4. checkout not opened (it
+# needs an account); 5. its help centre's Payment options lists African countries' local methods only; 6. Edge read
+# every page; 7. no bill offered. Its other regions aren't read yet.
+# Not listed: the Audiomack+ Day Pass, "a one-time purchase" that doesn't renew and isn't sold in "the United States,
+# United Kingdom, and Canada" (What is the Audiomack+ day pass?).
+# Bundles and official resellers: none named on its Plus page or help centre.
+# Features: Plus's "Ad-free Listening", "Unlimited Downloads" ("Save any song, album, or playlist for offline
+# listening") and "Unlock our full catalog" (its Plus page); free streams "at the industry standard 160kbps" and Plus
+# "at 320kpbs while on Wi-Fi" (What is the music quality/bitrate on Audiomack?); without Plus you can "offline a
+# limited selection of songs", and Plus adds "unlimited downloads, higher-quality audio streaming, song lyrics" (What is
+# a premium download?); anyone can "import and listen to audio files stored on your device directly in the Audiomack
+# app" (How do I use Audiomack's local file player?); every page's footer calls it "an on-demand music streaming and
+# audio discovery platform". No page names live radio or a skip limit.
+id: audiomack
+name: Audiomack
+website: https://audiomack.com
+# Its help centre.
+domains: [audiomack.zendesk.com]
+category: music
+spendCategory: streaming
+billingCurrency: { CA: CAD, US: USD }
+cancelUrl: https://audiomack.zendesk.com/hc/en-us/articles/360045709412-How-do-I-unsubscribe-from-Audiomack
+sources: { pricing: https://audiomack.com/plus }
+
+# Owner (M11.2), read 2026-11-11: its privacy policy names Audiomack Inc. and its country; no page names a parent or a
+# street address.
+owner:
+  name: Audiomack Inc.
+  page:
+    name: Privacy Policy
+    url: https://audiomack.com/about/privacy-policy
+  quotes:
+    - 'This Privacy Policy explains how Audiomack, a music service and mobile app owned and operated by Audiomack Inc., collects, uses, and manages your personal data.'
+  country:
+    code: US
+    page:
+      name: Privacy Policy
+      url: https://audiomack.com/about/privacy-policy
+    quotes:
+      - 'Audiomack Inc. is based in the United States and follows all applicable U.S. laws concerning data storage and privacy.'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its website and the app stores (its Terms of Service); no page names cards, PayPal
+# or wallets for Canada or the US (its Payment options article lists African countries' local methods only), and its
+# checkout needs an account, so the website's methods aren't listed.
+paymentMethods:
+  - methods: [app-store]
+    page: Terms of Service
+    url: https://audiomack.com/about/terms-of-service
+    quotes:
+      - 'By using our app and making in-app purchases, you consent to our sharing of data regarding your usage and consumption of purchased content with Apple, as part of our efforts to resolve refund requests.'
+# Renewal day (M11.5): its terms bill a website purchase by "30-day payment period", so its months are priced every 30
+# days (Mixcloud's and Tidal's precedent), though its Plus page says "Monthly Subscription".
+renewalAnchor:
+  kind: every-30-days
+  page: Terms of Service
+  url: https://audiomack.com/about/terms-of-service
+  quotes:
+    - 'If your Audiomack subscription was purchased via the Audiomack website, you can cancel your subscription at any time before the end of your 30-day payment period.'
+  lastVerified: 2026-11-11
+
+# Sign-in (2026-11-11): an "email address and password", or "a third-party account like Google, Facebook, or Apple"
+# (What can I do if I can't log in to my Audiomack account?); Twitter sign-up is "discontinued". No page names two-step
+# sign-in.
+features:
+  platforms: [web, ios, android]
+  account.sign-in: [password, sso]
+
+plans:
+  - id: audiomack.free
+    name: Free
+    link: https://audiomack.com/
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: false
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays songs on demand ("an on-demand music streaming and audio discovery platform", every page’s footer), and no page names a skip limit, so it is unlimited, as SoundCloud’s free plan.'
+        page:
+          name: Audiomack+
+          url: https://audiomack.com/plus
+        lastVerified: 2026-11-11
+    notes: With ads, and not its full catalogue. You can download a limited selection of songs.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://audiomack.com/plus
+      - region: US
+        currency: USD
+        amount: 0
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://audiomack.com/plus
+  - id: audiomack.plus
+    name: Audiomack+
+    link: https://audiomack.com/plus
+    features:
+      ad-free: true
+      audio.quality: high
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays its full catalogue on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: Audiomack+
+          url: https://audiomack.com/plus
+        lastVerified: 2026-11-11
+    notes: 320 kbps only on Wi-Fi, for tracks uploaded at that quality.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 8.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://audiomack.com/plus
+      - region: US
+        currency: USD
+        amount: 5.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://audiomack.com/plus
+
+# Terms and policies (M11.15), read 2026-11-11: its Terms of Service (undated; its Audiomack+ Premium Subscription
+# Refund Policy, its consent to share consumption data with Apple and its Supporters Program listener terms are on the
+# same page), its Privacy Policy (effective December 23, 2020), its Plus page, its Responsible Disclosure Policy
+# (creators.audiomack.com), its sign-up form, whose line names only those two documents ("By signing up you agree to
+# our Terms of Service and Privacy Policy."; the steps after the email address weren't read), and its help centre's
+# articles on cancelling, refunds through Apple and Google Play, deleting and creating an account, and downloads.
+# Its Legal & DMCA page, Accessibility Policy and "Are there rules for Audiomack users?" (the terms' acceptable use
+# again) hold no topic. Not read: its checkout (it needs an account), and Apple's and Google Play's own terms for
+# purchases in their stores. Its website's cookie banner, read from Canada, leaves personalised ads off until you
+# agree, but its apps track by default, so ads and tracking are graded from the apps. Buying in its iOS app shares
+# "your usage and consumption of purchased content with Apple" for refund requests (selling or sharing data: the same
+# grade). Calibrated against SoundCloud's, Mixcloud's, Spotify's and Deezer's grades. Not rated: rights over your
+# content and its apps' licence (not topics for music), and switching plans (one paid plan).
+policies:
+  links:
+    - name: Terms of Service
+      url: https://audiomack.com/about/terms-of-service
+    - name: Privacy Policy
+      url: https://audiomack.com/about/privacy-policy
+    - name: Audiomack+
+      url: https://audiomack.com/plus
+    - name: Responsible Disclosure Policy
+      url: https://creators.audiomack.com/responsible-disclosure
+    - name: How do I delete my account?
+      url: https://audiomack.zendesk.com/hc/en-us/articles/360045689632-How-do-I-delete-my-account
+    - name: How do I cancel or get a refund for my Audiomack+ iOS subscription?
+      url: https://audiomack.zendesk.com/hc/en-us/articles/9435149588890-How-do-I-cancel-or-get-a-refund-for-my-Audiomack-iOS-subscription
+    - name: How do I create an Audiomack account?
+      url: https://audiomack.zendesk.com/hc/en-us/articles/9435110244890-How-do-I-create-an-Audiomack-account
+    - name: How do you download music on Audiomack?
+      url: https://audiomack.zendesk.com/hc/en-us/articles/360013834432-How-do-you-download-music-on-Audiomack
+    - name: Can I restore my music on a different phone or device?
+      url: https://audiomack.zendesk.com/hc/en-us/articles/9434950353178-Can-I-restore-my-music-on-a-different-phone-or-device
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It keeps what songs you play to suggest music, and studies how you use it to build new things. To stop, you have to email it or open a ticket asking it to erase your data.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'We will, for example, store data on what songs you play on our platform to enable better recommendations in the future'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'for research and development of new products, services, or functionality; and to analyze your use of the Platform;'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'In the event you elect to withdraw your consent for Audiomack to collect data from you, you can contact us by sending an email privacy@audiomack.com from the email address associated with your account OR by logging into your account and submitting a support ticket requesting that Audiomack erase any and all personal data concerning yourself.'
+      action:
+        name: Its privacy policy (withdrawing consent)
+        url: https://audiomack.com/about/privacy-policy#accessing-updating
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares a coded copy of your email with LiveRamp, and its ad partners use what they get to follow you across devices for ads. To opt out, you change each phone’s own ad settings.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'When you use our platform, we share information that we collect from you, such as your email (in hashed form), IP address, or information about your browser or operating system, with our identity partners/service providers, including LiveRamp Inc.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'Our partners use this information to recognize you across different channels and platforms, including but not limited to, computers, mobile devices, and Smart TVs, over time for advertising, analytics, attribution, and reporting purposes.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'Users accessing audiomack from an Android or iOS mobile device may opt out of any sales of their personal information by using their mobile platform settings'
+      action:
+        name: Do not sell my info
+        url: https://audiomack.com/about/privacy-policy#accessing-updating
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Without Audiomack+ you hear ads chosen from where you are, what you searched and what you do on Audiomack. You can limit the tracking only in each phone’s ad settings, like iOS’s Limit Ad Tracking.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'For users who do not want to subscribe, this means we must run ads.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'To show you relevant ads on behalf of advertisers and/or sponsors, which may include location data, along with demographic data you make available to us or through connected third party services, recent search history, and behavior with content, ads, or other users on the Platform;'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'You may refuse to share your mobile advertising identifier (commonly known as IDFA) in our iOS app by enabling the Limit Ad Tracking feature in iOS settings.'
+      action:
+        name: Its privacy policy (cookies and ad tracking)
+        url: https://audiomack.com/about/privacy-policy#cookies
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether it trains AI on what you upload or how you listen.'
+      pages:
+        - https://audiomack.com/about/terms-of-service
+        - https://audiomack.com/about/privacy-policy
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It names no time limits for keeping your data while you have an account. If you delete the account, its help says your information is gone as soon as you do.'
+      sources:
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/360045689632-How-do-I-delete-my-account
+          quote: 'All of your account information will be lost as soon as you process the request, and it cannot be recovered'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself, in its app or on its website, and that deletes your data from its servers.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'Your data will be deleted from Audiomack’s servers if you delete your account which can be done by accessing your account on our desktop site and clicking the “Delete account” button.'
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/360045689632-How-do-I-delete-my-account
+          quote: 'Tap on the "Delete Account" option'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it by email or a support ticket to send you all the data it keeps about your account. It doesn’t say in what form or how soon.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'you can contact us by sending an email privacy@audiomack.com from the email address associated with your account OR by logging into your account and submitting a support ticket'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'You may use these same methods to request that Audiomack send to you all the data we have stored that is related to your account.'
+      action:
+        name: Submit a request
+        url: https://audiomack.zendesk.com/hc/en-us/requests/new
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It hands your data to the police for any inquiry it finds legitimate, not only for court orders, and may disclose it when it feels that protects its business interests.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'Audiomack will disclose your personal information in any case where it is necessary to do so to comply with a criminal complaint, subpoena, court order, or legitimate law enforcement inquiry.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'Audiomack may disclose your personal information if we feel it is necessary to do so to protect our intellectual property, rights, business interests, or the safety or reliability of our platform, users, employees, or stakeholders.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Audiomack and its providers are in the US, but your data can go to servers in other countries, and it doesn’t say how it’s protected there.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'Although our third party providers and services are based in the United States, there may in some circumstances be cases where data is transmitted to servers outside of the U.S. as part of the normal operation of the Platform.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'by using the Audiomack Platform you consent to the storage, transfer, collection, and transmission of your data to other territories as necessary.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs your email, a name, your age and gender, a username and a password, or you can start with Google, Apple or Facebook.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'To register for an Account, you are required to provide us with a valid email address, name, as well as your age and gender.'
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/9435110244890-How-do-I-create-an-Audiomack-account
+          quote: 'Choose your preferred sign-up option (Facebook, Google, or Apple)'
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/9435110244890-How-do-I-create-an-Audiomack-account
+          quote: 'Choose a ‘username’ then create a secured password (8+ characters, mix of upper/lowercase, numbers, and symbols)'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13, or older where your country’s law says so. If a parent tells it a younger child signed up, it removes the child’s data.'
+      sources:
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'We never knowingly or purposefully collect information from anyone under the age of 13, or under the legal age limit in their respective territory (“Age Limit”), under any circumstances.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'If you are the parent/guardian of a child under the Age Limit and believe we have collected such information, please contact us immediately at support@audiomack.com and it will be promptly removed.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel at any time under “manage subscriptions” in your profile, on its website or app, and keep Audiomack+ until the period you paid for ends.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'If your Audiomack subscription was purchased via the Audiomack website, you can cancel your subscription at any time before the end of your 30-day payment period.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'You can cancel this subscription by selecting “manage subscriptions” within your Audiomack profile on the Audiomack app or website.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'You will be able to maintain your premium subscription until the following payment cycle, at which point your account will return to the free tier.'
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back for part of a period, but you keep Audiomack+ until it ends. If you paid through Apple’s App Store, only Apple can give a refund.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'We do not provide refunds or credits for any partial subscription periods.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'You will be able to maintain your premium subscription until the following payment cycle'
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/9435149588890-How-do-I-cancel-or-get-a-refund-for-my-Audiomack-iOS-subscription
+          quote: 'Unfortunately, we are unable to cancel or issue refunds for purchases made through the iOS App Store, as these transactions are handled directly by Apple.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before it raises the price of Audiomack+, but doesn’t say how long before.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'Audiomack reserves the right to increase the price of subscriptions via advanced notice to the user.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Your first 30 days are free, then it charges the monthly price unless you cancel, which you can do at any time. It doesn’t say it reminds you before the trial ends.'
+      sources:
+        - url: https://audiomack.com/plus
+          quote: 'FREE for the first 30 days'
+        - url: https://audiomack.com/plus
+          quote: 'month after. Cancel anytime.'
+      lastVerified: 2026-11-11
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say Audiomack+ runs in 30-day periods until you cancel, but not that it reminds you before it renews.'
+      pages: [https://audiomack.com/about/terms-of-service, https://audiomack.com/plus]
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and Plus page name no fees besides the price.'
+      pages: [https://audiomack.com/about/terms-of-service, https://audiomack.com/plus]
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts of New York County, under New York law, with no private arbitration. You can’t take them to a court anywhere else.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'The Agreement shall be construed in accordance with the laws of the State of New York, without reference to principles of choice of law.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'You and Audiomack each irrevocably consent to the personal jurisdiction of the federal or state courts located in New York County, New York (“Courts”)'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'you agree that you will not bring any such action, suit or proceeding in any court other than the Courts.'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'It can change its terms at any time without telling you first, and the changes can start as soon as they’re posted. Using Audiomack afterwards means you accept them.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'Audiomack may modify this Agreement at any time without any prior notice to you and said modifications may become effective immediately upon their posting to the website.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'Your continued use of any Audiomack Service or Platform following a modification to this Agreement indicates your acceptance of the Agreement and you agree to be bound by any such modification.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your access without warning, at its own choice, over anything it finds unacceptable. If it says you broke its terms you get no money back, and otherwise a refund is up to it.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'You understand and agree that Audiomack reserves the right to delete, move, or edit any content that it may determine violates the Agreement and/or Privacy Policy or is otherwise unacceptable and may terminate your access to the Services, without prior notice and at its sole discretion.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'If you have a Subscription and your account is suspended or terminated by Audiomack due to infringing upon Audiomack’s terms of service, you will not be entitled to any refund for any unexpired period of your subscription.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'or in other reasonable circumstances as determined by Audiomack at its discretion, refunds may be payable at the reasonable discretion of Audiomack.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of Audiomack, songs and features included, at any time without notice, and says it owes you nothing for it.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'Audiomack may change, suspend or discontinue all or any aspect of any Service or Platform at any time, including the availability of any feature, database, or content, without prior notice or liability.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://audiomack.com/about/terms-of-service
+        - https://audiomack.com/about/privacy-policy
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: neutral
+      reason: 'Security researchers can report problems through its disclosure form, and it may pay them, but it doesn’t say outside experts check its security.'
+      sources:
+        - url: https://creators.audiomack.com/responsible-disclosure
+          quote: 'We encourage security researchers to share the details of any suspected vulnerabilities with the Audiomack Security Team by submitting the form found on this page.'
+        - url: https://creators.audiomack.com/responsible-disclosure
+          quote: 'At Audiomack’s discretion, you may be eligible for monetary compensation for your efforts.'
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you keep your login private and answer for everything done with it, but don’t say whether you may share Audiomack+.'
+      pages: [https://audiomack.com/about/terms-of-service, https://audiomack.com/plus]
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Without Audiomack+, you can download only 20 premium songs, though most artists let anyone download theirs. Downloads stay on the phone you saved them to.'
+      sources:
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/360013834432-How-do-you-download-music-on-Audiomack
+          quote: 'Most artists offer free downloads, but some opt for premium depending on the artist. You can download up to 20 premium tracks, while Audiomack+ subscribers get even more.'
+        - url: https://audiomack.zendesk.com/hc/en-us/articles/9434950353178-Can-I-restore-my-music-on-a-different-phone-or-device
+          quote: 'Downloaded music on Audiomack is only stored on the original device, so it can not be restored to another phone or device.'
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      plans: [audiomack.plus]
+      tier: great
+      reason: 'Audiomack+ downloads any song, album or playlist with no limit, and names no cap on devices.'
+      sources:
+        - url: https://audiomack.com/plus
+          quote: 'Unlimited Downloads'
+        - url: https://audiomack.com/plus
+          quote: 'Save any song, album, or playlist for offline listening'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Marketing emails by default
+      tier: neutral
+      reason: 'Signing up opts you in to its emails, which it may use for marketing. You can unsubscribe with the link in any of its emails.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'By signing up for an Audiomack account you opt-in to receiving emails from Audiomack.'
+        - url: https://audiomack.com/about/privacy-policy
+          quote: 'To communicate with you for marketing, support, and/or promotional purposes through email, text message, push, or in-app notifications;'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'You will have the option to opt-out of these emails by clicking the unsubscribe link included in any of our email messages.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Artist tokens can’t be refunded
+      tier: poor
+      reason: 'Tokens you buy to support artists can’t be refunded, except where the law requires, and you lose unused ones if your account closes. Audiomack may keep part of what you pay.'
+      sources:
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'All sales of Tokens are final. Tokens are non-refundable, except as required by applicable law.'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'you will lose access to any Tokens you may already have purchased'
+        - url: https://audiomack.com/about/terms-of-service
+          quote: 'Audiomack may retain a share of this revenue for itself'
+      lastVerified: 2026-11-11

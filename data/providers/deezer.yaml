@@ -20,6 +20,11 @@
 
 # Coverage: deezer.duo in NZ: New Zealand's offers page sells Premium and Family only (through its exit, 2026-11-09).
 
+# Skips, your own music, lyrics and live radio, read from the help centre on 2026-11-09 (saved): "some features, like
+# unlimited skips, downloading and offline listening, are only available to paid subscribers" (Cancel Your Deezer
+# Subscription); "active subscribers can upload their own MP3 files from the Deezer web version" (Deezer Hi-Fi);
+# "The Lyrics feature is only available for users on paid subscriptions" and "radio stations and much more on the
+# Podcasts tab or by selecting the radio icon in select countries" (Deezer Free).
 id: deezer
 name: Deezer
 website: https://www.deezer.com
@@ -95,6 +100,10 @@ plans:
       music.on-demand: false
       music.offline: false
       audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
     prices:
       - region: CA
         currency: CAD
@@ -153,6 +162,10 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.
       - region: CA
@@ -334,6 +347,10 @@ plans:
       audiobooks.included: false
       streaming.kids-profiles: true
       account.users: 2
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
     notes: Two Premium accounts for people in the same household.
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.
@@ -500,6 +517,10 @@ plans:
       audiobooks.included: false
       streaming.kids-profiles: true
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
     notes: Up to 6 Premium accounts for one household, with Kids profiles for children up to 12.
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.

@@ -105,6 +105,31 @@
   type: boolean
   aliases: [download music, offline mode]
   requiredIn: [music]
+# Skips, your own music, lyrics and live radio (the owner's choice of 2026-11-11), each from the provider's plan pages
+# or help centre. Your own music is playing files you have (uploads, a synced library, local files), not publishing
+# tracks for others (SoundCloud's, Tidal's and Mixcloud's uploads). Live radio is a live broadcast to tune into: a
+# radio station or a host's live session (Apple Music Radio, Mixcloud Live, Anghami's Live Radio). They're optional
+# comparisons, so no requiredIn: a provider whose pages don't say leaves them out.
+- id: music.unlimited-skips
+  name: Unlimited skips
+  category: music
+  type: boolean
+  aliases: [skip limit, skip songs]
+- id: music.own-library
+  name: Your own music
+  category: music
+  type: boolean
+  aliases: [upload music, sync library, local files]
+- id: music.lyrics
+  name: Lyrics
+  category: music
+  type: boolean
+  aliases: [real-time lyrics, synced lyrics]
+- id: music.live-radio
+  name: Live radio
+  category: music
+  type: boolean
+  aliases: [radio stations, live shows]
 - id: audiobooks.included
   name: Audiobooks included
   category: music

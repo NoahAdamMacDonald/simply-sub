@@ -14,6 +14,10 @@
 # access to the Apple Music Classical app" on both plans (a perk). It plays any song ("allows you to listen to over 100
 # million songs") and includes no audiobooks.
 
+# Skips, your own music, lyrics and live radio, read 2026-11-11 with Edge: "lyrics in real time" (the Apple Music
+# page's FAQ) and "Live at Apple Music Radio" (its page, free with the radio plan too); "Sync Library requires a
+# subscription to Apple Music" (Use Sync Library with your Apple Music subscription). No page names a skip limit for
+# the on-demand plans (inferred).
 id: apple-music
 name: Apple Music
 website: https://www.apple.com/apple-music/
@@ -128,6 +132,10 @@ plans:
       ad-free: false
       music.on-demand: false
       music.offline: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
     notes: Its live radio shows and stations, free. Songs on demand, downloads and lossless audio need a plan.
     prices:
       - {
@@ -150,6 +158,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays any of its songs on demand, with “lyrics in real time” and downloads, and no page names a skip limit, so it is unlimited.'
+        page:
+          name: 'Apple Music'
+          url: https://www.apple.com/ca/apple-music/
+        lastVerified: 2026-11-11
     perks: [classical]
     prices:
       - region: CA
@@ -251,6 +270,17 @@ plans:
       music.offline: true
       audiobooks.included: false
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays any of its songs on demand, with “lyrics in real time” and downloads, and no page names a skip limit, so it is unlimited.'
+        page:
+          name: 'Apple Music'
+          url: https://www.apple.com/ca/apple-music/
+        lastVerified: 2026-11-11
     perks: [classical]
     notes: Shared with up to five others through Family Sharing, each with their own library and recommendations.
     prices:
