@@ -1933,6 +1933,26 @@
     - { id: ar, name: Arabic }
   aliases: [subtitles, captions, closed captions]
   providerWide: true
+# Which languages its app or website can be shown in (the owner's choice of 2026-11-11): French matters in Quebec and
+# New Brunswick. From a help article's list, its language picker or its pages' language versions.
+- id: languages.interface
+  name: App languages
+  category: general
+  type: set
+  values:
+    - { id: en, name: English }
+    - { id: fr, name: French, aliases: [français] }
+    - { id: es, name: Spanish, aliases: [español] }
+    - { id: de, name: German, aliases: [deutsch] }
+    - { id: it, name: Italian, aliases: [italiano] }
+    - { id: pt, name: Portuguese, aliases: [português] }
+    - { id: ja, name: Japanese }
+    - { id: ko, name: Korean }
+    - { id: zh, name: Chinese, aliases: [mandarin, cantonese] }
+    - { id: hi, name: Hindi }
+    - { id: ar, name: Arabic }
+  aliases: [interface language, app in french, display language]
+  providerWide: true
 - id: support.channels
   name: Support
   category: general
@@ -1982,6 +2002,21 @@
       }
   aliases: [login, log in, two-factor authentication, 2fa, mfa]
   providerWide: true
+
+# Pausing and parental controls (the owner's choice of 2026-11-11), for every category. A pause offered only while
+# cancelling counts; the optimizer can suggest it before a cancel. Parental controls are restrictions a parent or plan
+# manager sets on another member's account or profile (kids profiles with maturity limits, a family admin's explicit
+# filter, a PIN); a filter you set for yourself and can turn off isn't. Kids profiles stay streaming.kids-profiles too.
+- id: account.pause
+  name: Pause instead of cancelling
+  category: account
+  type: boolean
+  aliases: [pause subscription, hold membership, freeze]
+- id: account.parental-controls
+  name: Parental controls
+  category: account
+  type: boolean
+  aliases: [kids controls, content restrictions, explicit filter]
 
 # ── Finance (M11.10, the owner's choice of 2026-11-03) ─────────────────────────────
 # What buyers compare between banks, credit unions, fintechs and brokerages (BLUEPRINT §4.11), from TD's, RBC's, EQ
