@@ -1,0 +1,164 @@
+url: https://help.twitch.tv/s/article/creating-an-account-with-twitch?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+GETTING STARTED
+Create an Account with Twitch
+Creating an account on Twitch allows you to interact with streamers and the community via chat, follow your favorite streamers to receive alerts when they go live, and broadcast to the Twitch community from your channel.
+Can't access your existing account? If you're having trouble logging in, forgot your password, or lost access to your email or phone number, visit our Account Access & Login Issues Guide for complete recovery options. Don't create a new account if you're trying to recover an existing one.
+When signing up for an account, you must agree to our Terms of Service and Privacy Policy. You are held to our Community Guidelines as well. Accounts found to violate these are subject to penalty, including account suspension. Please take the time to read these documents carefully.
+On this page:
+Ways to Create Your Account
+Account Creation Requirements
+Troubleshooting Common Issues
+Creating Additional Twitch Accounts
+Frequently Asked Questions
+Ways to Create Your Account
+Twitch offers multiple ways to create an account. Visit twitch.tv or download the Twitch mobile app and select Sign Up to get started.
+Already have a Twitch account? If you're trying to log in but can't remember your username or password, see our Account Access Guide instead of creating a new account.
+Traditional Signup
+Create an account using your email address or phone number. You'll choose a username, set a password, and provide your date of birth.
+Social Login
+Sign up quickly using an existing account from one of these providers:
+Sign up with Google
+Sign up with Apple
+Sign up with Amazon
+When using social login, Twitch will access your name and email address from your chosen provider. You'll still need to choose a username and provide your date of birth to complete account creation.
+Learn more about social login, including how to manage your connected accounts, in our Social Login guide.
+Additional Authentication Methods
+Twitch may introduce additional authentication methods in the future, such as passwordless login using biometrics or security keys. Check the signup page for the latest available options.
+Account Creation Requirements
+Regardless of which signup method you choose, you'll need to provide:
+Username: Between 4-25 characters in length. If your desired username isn't available, you'll need to choose another. Learn more about username policies.
+Date of Birth: Required to verify you meet age requirements for using Twitch.
+Verification Method: Either a phone number (mobile only, no landlines or VOIP) or email address for account verification.
+When creating an account, double-check that the information provided is correct. If you lose access to your account and need to go through account recovery, having accurate information will greatly assist in that process.
+Verification Process
+After submitting your signup information, Twitch will send a 6-digit one-time password (OTP) via SMS or email to verify your contact information. Enter this code within 5 minutes to complete verification.
+Desktop
+Mobile
+When signing up with your phone number, add your country code. Most phones will automatically add your country code for you; however, double-check, or you may not be able to receive text messages from us. SMS and data rates may apply.
+Why Verify Your Email?
+If you signed up using your phone number, we highly recommend also adding and verifying your email address. This will:
+Provide an additional recovery method if you lose access to your phone
+Allow us to send you notifications for channels you follow (if enabled)
+Allow you to chat in channels that require verified email
+Ensure you receive critical account information
+Troubleshooting Common Issues
+Username Not Available
+If your desired username is taken, you'll need to choose a different one. Twitch does not release inactive usernames. Learn more about username policies.
+Not Receiving Verification Code
+If you don't receive your verification code within 5 minutes during signup:
+Go back and double-check that your phone number or email address is entered correctly
+Check your spam or junk folder if using email
+Ensure your phone can receive SMS messages if using phone verification
+If using Apple's "Hide My Email" feature, check your Apple Mail junk folder
+Wait 5 minutes - delivery can be delayed
+Still not receiving codes? See our comprehensive troubleshooting guide: Not Receiving Verification Codes
+Email Already in Use
+If you receive an error that your email is already associated with another account, what are you trying to do?
+Your Situation
+What to Do
+I forgot I already have an account
+Use the Account Recovery Tool to find your username, then log in
+I want to create a second account
+See Creating Additional Accounts below - you must enable this on your first account
+I disabled my old account
+Deletion takes 90 days. See If You Deleted Your Account
+I can't access the old account
+See the Account Access & Login Issues Guide for recovery steps and support options
+Signing up with a phone number that's already on another account? That works without any extra steps. See Using a Phone Number on Multiple Accounts.
+Social Login Issues
+If you're experiencing issues with Google, Apple, or Amazon login:
+Ensure you're signed into the correct provider account
+Check that the email from your social login provider isn't already linked to a different Twitch account
+Complete any two-factor authentication required by your provider
+If the provider's services are down, wait and try again later
+For detailed social login troubleshooting, see our Social Login guide.
+Account Recovery
+Need more help accessing your account? Our Account Access & Login Issues Guide covers lost passwords, lost email/phone access, Account Recovery Tool instructions, and complete troubleshooting for all login scenarios.
+If you're having trouble accessing an existing account, visit our Account Recovery page or request a password reset.
+Creating Additional Twitch Accounts
+What are you trying to do?
+I want to access my existing account — You probably don't need a second account. Try Account Recovery to find your username, or request a password reset to the email in question — the reset email will show you which username is associated with it.
+I genuinely want to create a second account — If you're using the same email, follow the steps below to enable additional account creation. If you're using the same phone number, no extra steps are needed.
+Someone may have used my email without my knowledge — Contact Twitch Support immediately.
+Additional Twitch accounts can be created at any time granted you adhere to the Terms of Service and Community Guidelines.
+Email Verification
+When verifying the email address on your account, additional creation of accounts with that email address becomes disabled to prevent abusive behavior against you.
+If you have a verified email on your account, click Enable additional account creation in your Settings to create additional Twitch accounts; turning this on will allow you to register a single additional account.
+Phone Verification
+You can use the same verified phone number on more than one Twitch account. Enter the number when you sign up and verify it with the code we send. You don't need to change any settings on your other accounts. See Using a Phone Number on Multiple Accounts.
+If You Don't Remember the Original Account Username
+If you have forgotten the username associated with the other account, you can use the Self Recovery Tool to retrieve a list of the username(s) associated with your email address or phone number.
+When using the recovery tool:
+Go to twitch.tv/user/account-recovery
+Enter your email address, or select your country code and enter your phone number
+Click Continue
+Click "I Don't Know My Username"
+We'll email or text you a list of ALL accounts linked to it
+If You Deleted Your Account
+If you have deleted your other account, you should be able to automatically re-enable your account simply by logging in to it. If you cannot log into your account, we recommend that you request a password reset.
+It could take a few minutes to process your request and appear in your inbox.
+If you have recently requested to have your account deleted, keep in mind that the entire process will take around 90 days. You should receive an email or a text message once this has been finalized. At any point during the 90 days, if you re-enable the account by logging into it, you will be removed from the queue and need to start the deletion process from the beginning.
+Frequently Asked Questions
+What's the difference between signing up with email/phone vs. social login?
+Traditional signup requires you to create a password, while social login uses your existing Google, Apple, or Amazon account credentials. Both methods create a full Twitch account with the same features.
+Can I add a password to my account if I signed up with social login?
+Accounts created using social login cannot add a password from the settings page. A password can only be created through the Account Recovery process. Contact Support for assistance.
+Can I use the same email or phone number for multiple Twitch accounts?
+Phone number: yes. Verify it on each account; no settings change is needed. Email: social login does not support email addresses associated with multiple Twitch accounts. For traditional signup, you must enable "additional account creation" on the original account before using the same email elsewhere.
+Why can't I change my email or password?
+If your account was created via social login, email and password changes may be restricted for security reasons. Contact Support for assistance.
+I forgot which social provider I used to sign up. How can I find out?
+Try each social login option (Google, Apple, Amazon), or check your email inbox for Twitch emails to identify which provider was used. You can also check Login Options in your Settings.
+What should I do if I lose access to my Google, Apple, or Amazon account?
+You'll need to recover access to your provider account first. Visit Google Account Help, Apple ID Support, or Amazon Account Help for assistance.
+Can I disconnect my social login from my Twitch account?
+Once you add a social login, you cannot disconnect it yourself. Contact Support for assistance disconnecting a social login method.
+Do I need to verify both my email and phone number?
+You only need to verify one method to create your account, but we highly recommend verifying both. This provides additional recovery options and ensures you receive important account notifications.
+Why does Twitch need my date of birth?
+Your date of birth verifies that you meet the age requirements for using Twitch and helps us comply with legal requirements for protecting minors online.
+Can I change my username after creating my account?
+Yes, you can change your username from your account settings. Learn more about username changes.
+I deleted my account but can't reuse my email yet. Why?
+Account deletion takes 90 days to complete. During this time, your email remains linked to the deleted account. You must wait for the deletion to finalize, or re-enable the account and enable "Additional account creation" before deleting it again. See If You Deleted Your Account. Phone numbers aren't affected: you can add yours to another account right away.
+Can my child under 13 use Twitch?
+No, Twitch requires users to be at least 13 years old. For comprehensive information about age requirements, safety tools, and keeping teens safe on Twitch, see our Guide for Parents and Educators.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Creating an Account with Twitch

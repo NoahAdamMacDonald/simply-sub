@@ -1,0 +1,174 @@
+url: https://support.plex.tv/articles/205976358-purchasing-a-plex-pass-subscription-through-itunes/
+method: fetch
+saved: 2026-11-11
+
+Purchasing a Plex Subscription Through the App Store/iTunes | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Purchasing a Plex Subscription Through the App Store/iTunes
+Purchasing a Plex Subscription Through the App Store/iTunes
+It is possible to purchase both Remote Watch Pass and Plex Pass subscriptions directly through the Plex for iOS app or Apple TV apps. This subscription is billed through the App Store/iTunes and can be managed from your iOS device or from your computer.
+A Plex Pass subscription purchased in the app provides all the same features and benefits, but there are some slight differences in how it is managed when compared to a subscription through our website. Continue reading this full article for details.
+To purchase a Plex subscription through the iOS app:
+Use the Subscribe button at the center of the Settings > Upgrade screen.
+A purchase window will appear to let you confirm the in-app subscription
+Warning!: Plex subscriptions purchased through the app cannot be refunded by us, so we encourage you to test the functionality of the app prior to purchasing!
+How can I manage my App Store/iTunes Plex subscription?
+Since the Plex subscription offered from within the app is billed through the App Store/iTunes, you will need to use either your iOS device or your computer to manage your subscription. This includes updating your payment information, viewing, changing, or cancelling a monthly/yearly Plex subscription.
+Related Page: Apple: Billing and Subscriptions
+How do I switch from being billed through the App Store to start being billed directly by Plex?
+In order to switch to being billed directly from plex.tv, you will need to:
+Use your iOS device or computer to stop renewal of your current recurring Plex subscription
+Let your current month (or year) through the App Store run out
+Once the subscription has expired, wait until it is removed from your Plex account (it usually takes 24-48 hours to be removed)
+Create a new Plex subscription from the Plex website
+Tip!: If you are being billed through iTunes and have any questions regarding billing, please contact Apple Support.
+Related Page: Apple: Billing and Subscriptions
+Related Page: Sign up for a Plex subscription
+How do I upgrade an App Store subscription?
+Due to limitations in the App Store APIs, it is not currently possible to directly upgrade an App Store-based subscription, unfortunately. You can instead use the information in the section above to stop your current App Store subscription. Once the current subscription expires, you could then start a new subscription either through iTunes or through our website.
+I restarted a cancelled sub via the App Store, how do I get it to appear on my Plex account?
+If you previously had a monthly or yearly subscription billed through the App Store that expired and you then restarted the subscription, it will not immediately be shown on your Plex account. This is because the App Store doesn’t tell us that the subscription was restarted. To sync things up again, please:
+Open your Plex for iOS app
+Ensure that you are signed in to the correct Plex account
+Use the Restore Purchases button on the app activation screen
+That will sync up information from the App Store with your Plex account.
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: October 27, 2025
+Table of Contents
+Recently Viewed
+Manage Recommendations
+What is Plex Home?
+Plex: Free vs Paid
+Using Hardware-Accelerated Streaming
+Why am I locked out of Server Settings and how do I get in?
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

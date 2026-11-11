@@ -1,0 +1,403 @@
+url: https://www.plex.tv/about/privacy-legal/
+method: fetch
+saved: 2026-11-11
+
+Privacy Policy | Plex
+Changing the site language for you. Please wait ...
+Hey!
+Our website is available in your language, would you like to switch to that? Yes No
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Privacy Policy
+Revised: May 6, 2026
+PDF of the current version
+Prior Versions
+What’s new in this version
+Expanded children’s protection section to clarify managed account protections and provide parents/guardians with steps to contact us
+We care about the privacy and protection of personal data. We strive to be transparent in our data collection practices while providing you with a service that you love and trust. This Privacy Policy sets forth our personal information processing policy which explains how we collect, use, and share personal data about you, and also when and how you can control what we collect and do with it. Our Privacy Policy applies to the data collected through products and services provided by Plex GmbH and its affiliates including Plex, Inc., (together, “Plex”), which include our websites, apps, and all other Plex-branded software and services (collectively, our “Services”). This Privacy Policy may be updated from time to time. We will notify you of any changes by posting the new Privacy Policy on the Plex.tv website. If we make any material changes to the Personal Data that we collect and/or how we use it, we will first obtain your consent before applying any of those changes. You are advised to consult this Privacy Policy regularly for any changes.
+Your Plex Privacy Rights
+What Personal Data can Plex collect?
+What information does Plex collect about my activity on the Services?
+When does Plex collect Personal Data?
+Why does Plex need Personal Data?
+Who does Plex share or sell Personal Data with?
+Where does Plex store Personal Data?
+How does Plex protect Personal Data?
+Does Plex collect information from children?
+What about external links and services?
+More privacy questions?
+US State-Specific Rights Disclosures
+What information does Plex collect from my Plex Media Server?
+What information does Plex either anonymize or aggregate?
+Your Plex Privacy Rights
+You have the right to unsubscribe from Plex emails
+In your Plex Account Settings, click “Manage emails” from the “Email Subscription Settings” and select “Unsubscribe from ALL” and click “Update Preferences” to unsubscribe from our emails. In the alternative, from any Plex promotional email, click the “unsubscribe” link and follow the steps in the previous sentence. Please note that you cannot opt out from receiving all Plex communications, including administrative messages, service announcements, and messages regarding the terms and conditions of your account.
+You have the right to know the Personal Data that Plex has collected
+After verifying your identity, Plex will provide you with a copy of Personal Data associated with your account. Click here to submit this request or email us at [email protected].
+You have the right to have Plex delete the Personal Data that it has collected
+After verifying your identity, Plex will delete Personal Data associated with your account except that we may retain archived copies as required by law. Keep in mind that this option will result in the full deletion of your Plex account itself (including any subscriptions associated with that account such as Plex Pass). The account will no longer be accessible once you do so. Click here to submit this request or email us at [email protected].
+You have the right to set your preferences for the sharing and selling of Personal Data associated with your account
+Click here to set your preferences.
+You have the right to select which cookies we may use when you visit the Plex website
+Click here to update your preferences.
+You have the right to limit what activity data is sent from your Plex Media Server
+Crash reports. In your Plex Media Server Settings, click “General” and uncheck the box next to: “Send crash reports to Plex” to disable sending crash reports to Plex.
+Push notifications. In your Plex Media Server Settings, click “General” and uncheck the box next to: “Push Notifications” to disable notifications to your devices which could contain information about the contents of your personal library.
+Optional playback data and Plex Media Server/Library data. For more information about the types of data Plex collects from the media server, please see “What information does Plex collect from my Plex Media Server?”
+If you’d like to opt-out of sending us this data, log into your Plex account and return to this page.
+Send playback data to Plex
+Sending us this data helps us run and improve our services. If you uncheck this button, the Optional Playback Data listed below will not be collected or sent to Plex.
+Something went wrong. We could not load the consent option. If you're using an Ad-Blocker, please disable it.
+You can reload this page or try later. Alternatively, please contact support
+What Personal Data can Plex collect?
+“Personal Data” is information that we collect that: may identify you as an individual; is reasonably associated with you; or is defined as such under applicable laws or regulations. The below lists reflect the data we require to complete the purposes listed later in the Policy (“Why Plex collects it”). Data listed as “optional” is not required and you provide that data (and any other data that we do not require) to us at your discretion.
+If you are a user of the Services
+Location (derived from IP-address to the city-level), Plex-activity (see “What information does Plex collect about my activity on the Services?”)
+Registered Plex account holder: username, email, password
+Optional: name, image (e.g., avatar), watch history, reviews, payment information, age, gender.
+If you are a job applicant
+Name, email, educational info, job history, job title, location (derived from IP-address to the city-level)
+Optional: image (e.g., avatar), address, phone, salary requirements, demographic info
+If you are conducting business with Plex
+Name, email, company, job title, address, location (derived from IP-address to the city-level)
+Optional: image (e.g., avatar)
+What information does Plex collect about my activity on the Services?
+Plex collects specific information about your activity on our Services and that information is linked to you.
+Connections (i.e. individuals you interact with on Plex)
+Access granted to a Plex Media Server, account friendships, managed users on your account, Watch Together session attendee details
+Plex transactional information (i.e. purchases, subscriptions, and email interactions)
+Amount paid, point of purchase, read-status for emails/announcements, source of transactions (e.g, via email, ad), subscription details
+Debugging, diagnostics, and usage information (i.e. how effectively Plex is working)
+Ad interactions, crash reports (opt-out available here), logs, performance data
+Application information (i.e. the way that you access Plex)
+Product, version, user agent
+Device information (i.e. the device that runs the application you use to access Plex)
+Advertising id (opt-out available here), architecture, city, country, device, device id, display, latitude-truncated, layout, local time, longitude-truncated, memory, model, orientation, platform, platform version, power, region, screen resolution, timezone, vendor, watch connected, zip
+Network and session information (i.e. the connection from your application to Plex)
+Network link type, network status, secure connection, session length
+Interaction information (i.e. searching on Plex)
+Action, anonymous, authenticated, event, page, timestamp
+Playback information (i.e. watching content on Plex)
+All content: Agent, audio, audio bitrate, audio channels, audio decision, audio profile, auto preview playback, blocked, buffering count, buffering duration, buffer duration from seeks, buffering count, buffering duration, client, codecs, cold start, column count, connection type, context, download category, download size, download url, drm, error, first run, ingested at, initialization time, item count, latency, launch info, local, metadata id, mmp, mode, muted, num items, num seeks, origin, owned, owner, num seeks, page ready time, pages loaded, pane, percent watched, pinned PMS sources, pinned provider sources, playback count, playback latency, playback stack, play time, preview playback, provider, rated at, rating, relayed, requested height, requested max bitrate, requested width, retries, seconds paused, seconds watched, server type, settings, source, start time, subtitle, subtitle decision, subtitle format, total active download time, total download time, value, video, video bitrate, video decision, video height, video profile, video width, viewed, viewed at, watch together.
+Plex Media Server Library Data: architecture, enable BIF Generation, enable credits marker generation, frequency Ghz, gpus, include adult content, memory Mb, music analysis, num channels, num episodes, num items, num locations, num photos, num tracks, num videos, users invited, uuid
+Optional Plex Media Server/Library Data (opt-out available here): Bit rate, completion status, duration, library agent, library language, library scanner, library type, number of Plex accounts with access to library, offset, resolutionserver published, timestamp for the last time an item was added and played for each unique combination of container, video codec, and audio codec, total number of items in library, number of items in library based on unique combination of container, video codec, audio codec. For more information on data collected from the Plex Media Server, see “What information does Plex collect from my Plex Media Server?”
+If activity information is either anonymized or made part of an aggregated set of information (e.g., usage statistics and viewing trends), it cannot be linked to you. You can read more about this information in “What information does Plex either anonymize or aggregate?”.
+Plex may also disassociate this activity information from your Personal Data to train machine learning or artificial learning models for purposes discussed in “Why does Plex need Personal Data?”. Your Personal Data is not introduced to any machine learning or artificial learning models.
+When does Plex collect Personal Data?
+If you are a user of the Services
+When you visit or engage with our Services
+When you create a Plex account
+When you authorize an external service (e.g., social networking site) to make your profile available to third-party companies such as Plex when you create an account using that external service
+When you contact us
+If you are a job applicant
+When you apply for a job at Plex
+When you authorize a job networking platform to make your profile available to third-party companies such as Plex
+If you are conducting business with Plex
+When you engage in business transactional discussions with Plex
+When you are providing services to Plex
+Why does Plex need Personal Data?
+If you are a user of the Services
+To provide, improve, and enhance our Services
+To respond to your requests
+To inform you about activity on your Plex account
+To communicate with you about Plex (as permitted by applicable law)
+To personalize marketing, advertising, recommendations, and other content and experiences delivered or offered to you through the Services (as permitted by applicable law)
+To deliver third-party advertising
+To facilitate your payment for any products and services we sell
+If you are a job applicant
+To recruit you for a role at Plex
+To consider and process your job application
+If you are conducting business with Plex
+To facilitate discussions about and memorializations of business discussions
+To enable you to provide your services to Plex
+Who does Plex share or sell Personal Data with?
+Third-party service providers
+Third-party service providers assist us in providing the Services including payment processors, business and analytics providers, content providers, marketers, and cloud service providers. All of these third parties are contractually required to only use your Personal Data for the specific purposes of providing the services requested of them.
+Other third-parties
+Certain disclosures of Personal Data that we make to third parties may constitute the “sale” of your personal information, “sharing” of your personal information (including for “cross-context behavioral advertising” purposes), or “processing” of your Personal Data for purposes of “targeted advertising” under applicable laws. This “sharing” or “sale” is used to deliver relevant ads to you on Plex and other third-party sites and services. For details on how to limit what is shared with and sold to third-party advertisers, see “Your Plex Privacy Rights”.
+If you have set your account to public settings, then your watch history, reviews, or other data from the Services that you share publicly may be shared with both the public and third parties for marketing purposes. Learn more about your account settings here.
+In addition, Plex reserves the right to share Personal Data to the extent necessary to:
+(a) satisfy an applicable law, regulation, legal process, or valid governmental request;
+(b) protect or defend the safety, rights, or property of Plex, the public, or any person.
+(c) facilitate a merger, acquisition, bankruptcy, dissolution, reorganization, or similar transaction or other proceeding involving Plex that includes or requires the transfer of the Personal Data.
+Where does Plex store Personal Data?
+Plex and its authorized data processors process Personal Data primarily in the United States.
+How does Plex protect Personal Data?
+Data privacy best practices
+Plex takes measures to ensure that Personal Data is collected and processed in accordance with data privacy best practices which include:
+Privacy impact assessments of dataflows to ensure that the data collected is limited to what is needed to accomplish the purpose of the data processing.
+Data transfer mechanisms such as Standard Contractual Clauses for data transfers of EU/UK/Switzerland Personal Data to processors located in the United States.
+Technical measures
+Within the Plex Media Server software, Plex provides publicly trusted TLS certificates for end-to-end encrypted connections among our servers, Services, and client applications. For more information, please review our support article on the topic.
+We have commercially reasonable physical, electronic, and organizational procedures to help safeguard and secure your Personal Data.
+Data retention policy
+Personal Data is retained in your Plex account for as long as you maintain that account. When you delete your Plex account, we delete the Personal Data in the Plex account within 30 days. We may retain some usage statistics (including IP addresses which only provide a coarse location to the city level) in order to improve Plex’s services but this data is no longer linked to the Personal Data.
+Data related to your use of the services (e.g., logging and error tracking) is deleted after 90 days.
+Website cookies are reset after 14 days.
+Does Plex collect information from children?
+Plex does not knowingly collect, use, or disclose Personal Data from anyone under the age of 13. If we learn or are notified that we have collected Personal Data from an individual under 13 outside of a managed account, we will take steps to delete that Personal Data as soon as possible.
+Managed Accounts
+Plex provides parents and guardians the ability to create managed accounts for their children under the parent’s or guardian’s Plex account. Managed accounts include the following built-in protections:
+Plex does not conduct behavioral tracking or deliver targeted advertising to users of managed accounts.
+Content access is restricted based on content ratings as configured by the parent or guardian.
+Personal Data associated with a managed account is not sold or shared with third-party advertisers.
+Parents and guardians retain full control over managed accounts, including the ability to review, modify, or delete the account and its associated data at any time. Learn more about managing these accounts here. Parents or guardians who become aware that their child has created an independent Plex account may contact us at [email protected] to request deletion of that account and its associated data.
+What about external links and services?
+Plex may offer and you may choose to use products or services from third parties in connection with our Services that may contain links to or otherwise interface with third-party websites, products, services, or other technologies. These include online payment systems operated by third parties (e.g., Braintree) which enable you to make secure online payments. They also include integrations with control and playback mechanisms such as Sonos, Amazon Alexa, IFTTT, Zapier, SmartThings, webhooks, etc. Any such third-party technology may collect information from you or use other services or technologies that collect information from you. Any information collection by these third-party technologies is governed by the privacy practices of those third-party technologies. Plex is not affiliated with, does not control, and is not responsible for the collection of information by such third-party technologies.
+More privacy questions?
+If you have questions about this Privacy Policy, please submit them on our contact page.
+All data access or deletion requests should be submitted here.
+US state-specific rights disclosures
+This section contains disclosures required by applicable state laws. If you are a resident of such states, this section of the Privacy Policy contains disclosures required by law and explains rights that may be available to you. Our use of the terms “sell” and “share” below generally refers to the California definitions.
+Personal Data That Plex Collects, Discloses, and Shares.
+The below table identifies the categories of Personal Data (“PI” in the table) we may have collected in the past 12 months, the source of collection, our purpose for collecting it, and the categories of third parties to whom we have disclosed and/or shared it.
+Category of PI
+Personal and online identifiers (e.g., first and last name, email address (including hashed emails), or unique online identifiers)
+Sources of PI
+Consumers, authorized third parties services and social media accounts you connect to Plex, service providers, content providers, advertisers on our Services
+Commercial or business purposes for collecting the PI
+Auditing related to our interactions with you; Legal compliance; Provide targeted advertising; Content delivery and recommendations; Detecting and protecting against security incidents, fraud, and illegal activity; Debugging; Performing services (for us or our service provider) such as account servicing, processing orders and payments, and analytics; Internal research for technological improvement; Internal operations; Activities to maintain and improve our services; and Other one-time uses
+Categories of third parties to whom the PI is disclosed
+Content providers; service providers and vendors; third parties, such as social networks you connect to Plex and advertising partners; analytics providers; payment processors; and government entities
+Categories of third parties to whom the PI is shared and sold
+Advertising technology companies and advertisers
+Category of PI
+Characteristics of protected classification (age, gender)
+Sources of PI
+Consumers
+Commercial or business purposes for collecting the PI
+Legal compliance; Provide targeted advertising
+Categories of third parties to whom the PI is disclosed
+Advertising technology companies; advertisers; and analytics providers
+Categories of third parties to whom the PI is shared and sold
+Advertising technology companies and advertisers
+Category of PI
+Payment and billing information
+Sources of PI
+Consumers, content providers
+Commercial or business purposes for collecting the PI
+Billing to provide Plex subscription services; payments to content providers
+Categories of third parties to whom the PI is disclosed
+Payment processors and service providers
+Categories of third parties to whom the PI is shared
+None
+Category of PI
+Commercial or transactions information (e.g., records of services purchased, obtained, or considered)
+Sources of PI
+Consumers, advertisers on our Services, service providers
+Commercial or business purposes for collecting the PI
+Auditing related to our interactions with you; Legal compliance; Provide targeted advertising, Content delivery and recommendations; Detecting and protecting against security incidents, fraud, and illegal activity; Debugging; Performing services (for us or our service provider) such as account servicing, processing orders and payments, and analytics; Internal research for technological improvement; Internal operations; Activities to maintain and improve our services; and Other one-time uses.
+Categories of third parties to whom the PI is disclosed
+Content providers; service providers and vendors; authorized third parties services and social media accounts you connect to Plex, advertising partners; analytics providers; payment processors; and government entities.
+Categories of third parties to whom the PI is shared or sold
+Advertising technology companies and advertisers
+Category of PI
+Internet or other electronic network activity information (such as interactions with a website, email, application, or advertisement)
+Sources of PI
+Consumers, advertisers on our Services, third parties and social media you connect to Plex and advertising partners, service providers, and content providers
+Commercial or business purposes for collecting the PI
+Auditing related to our interactions with you; Legal compliance; Provide targeted advertising, Content delivery and recommendations; Detecting and protecting against security incidents, fraud, and illegal activity; Debugging; Performing services (for us or our service provider) such as account servicing, processing orders and payments, and analytics; Internal research for technological improvement; Internal operations; Activities to maintain and improve our services; and Other one-time uses.
+Categories of third parties to whom the PI is disclosed
+Content providers; service providers and vendors; third parties, such as social networks you connect to Plex and advertising partners; analytics providers; payment processors; and government entities.
+Categories of third parties to whom the PI is shared or sold
+Advertising technology companies and advertisers
+Category of PI
+Geolocation information (such as ZIP code or city based on IP address)
+Sources of PI
+Consumers, service providers
+Commercial or business purposes for collecting the PI
+Auditing related to our interactions with you; Legal compliance; Provide targeted advertising; Content delivery and recommendations; Detecting and protecting against security incidents, fraud, and illegal activity; Debugging; Performing services (for us or our service provider) such as account servicing, processing orders and payments, and analytics; Internal research for technological improvement; Internal operations; Activities to maintain and improve our services; and Other one-time uses.
+Categories of third parties to whom the PI is disclosed
+Content providers; service providers and vendors; third parties, such as social networks you connect to Plex and advertising partners; analytics providers; payment processors; and government entities.
+Categories of third parties to whom the PI is shared and sold
+Advertising technology companies and advertisers.
+Category of PI
+Inferences drawn from the above information about your predicted characteristics and preferences
+Sources of PI
+Consumers, service providers, and content providers
+Purposes for collecting the PI
+Auditing related to our interactions with you; Legal compliance; Provide targeted advertising; Content delivery and recommendations; Detecting and protecting against security incidents, fraud, and illegal activity; Debugging; Performing services (for us or our service provider) such as account servicing, processing orders and payments, and analytics; Internal research for technological improvement; Internal operations; Activities to maintain and improve our services; and Other one-time uses.
+Categories of third parties to whom the PI is disclosed
+Content providers; service providers and vendors; third parties, such as social networks you connect to Plex and advertising partners; analytics providers; payment processors; and government entities.
+Categories of third parties to whom the PI is shared or sold
+Advertising technology companies and advertisers
+Category of PI
+Other information about you that is linked to the personal information above (such as metadata about content you view, timestamps to allow playback, and data related to third party content)
+Sources of PI
+Consumers, service providers, third parties and social media you connect to Plex, content providers, and advertisers on our Services
+Commercial or business purposes for collecting the PI
+Auditing related to our interactions with you; Legal compliance; Provide targeted advertising; Content delivery and recommendations; Detecting and protecting against security incidents, fraud, and illegal activity; Debugging; Performing services (for us or our service provider) such as account servicing, processing orders and payments, and analytics; Internal research for technological improvement; Internal operations; Activities to maintain and improve our services; and Other one-time uses.
+Categories of third parties to whom the PI is disclosed
+Content providers; service providers and vendors; third parties, such as social networks you connect to Plex and advertising partners; analytics providers; payment processors; and government entities.
+Categories of third parties to whom the PI is shared or sold
+Advertising technology companies and advertisers.
+We may share information that has been de-identified or aggregated without limitation. We may use and share aggregated and deidentified information to the extent permitted by applicable law. When we use deidentified information, we maintain and use the information in deidentified form and do not attempt to reidentify it, except to check whether our deidentification processes satisfy the requirements of applicable law.
+Personal Data Retention. Plex will retain each category of Personal Data in accordance with applicable laws and as reasonably necessary for our processing purposes set forth under this Privacy Policy.
+Your Rights Regarding Personal Data. Applicable state laws provide residents of those states with rights regarding the Personal Data collected by businesses. You may exercise the following rights regarding your Personal Data, subject to certain exceptions and limitations:
+The right to confirm whether we process Personal Data about you.
+The right to correct inaccuracies in the Personal Data we have collected about you.
+The right to know the categories and specific pieces of Personal Data we collect, use, disclose, the categories of sources from which we collected your Personal Data, our purposes for collecting or selling your Personal Data, the categories of your Personal Data that we have disclosed for a business purpose, and the categories of third parties with which we have shared Personal Data.
+Depending on your state, the right to obtain a list of the specific third parties or categories to which we have disclosed Personal Data.
+The right to request that we delete the Personal Data we have collected about you.
+The right to opt out of (i) the sharing of Personal Data for targeted advertising or (ii) the sale of Personal Data. Please note that if you opt out of certain practices, we may be unable to provide you with some services. Additionally, we do not knowingly sell or share Personal Data of individuals under 16.
+Depending on your state, the right to receive a portable and readily usable copy of the Personal Data we have collected about you, to the extent feasible.
+The right not to receive discriminatory treatment for the exercise of these privacy rights.
+To exercise any of the above rights, please visit “Your Plex Privacy Rights”.
+We do not use or disclose sensitive personal information for purposes other than as permitted under the CCPA.
+We may require additional information to verify your requests to exercise your rights or understand the scope of your request. You will not be required to create an account with us to submit a request or have it fulfilled. If you do have an account, we will require you to submit your request from the email address associated with your account. You may designate an authorized agent to make a request on your behalf by submitting a request from the email associated with your account and providing the Plex username or email address of your agent.
+If you have submitted a request that you feel we have not reasonably fulfilled, you may contact us to appeal our decision by emailing us.
+Universal opt-out mechanisms (“UOOMs”). Under some applicable state laws, certain mechanisms or technologies may be used to signal your opt-out preferences to entities that process personal data. To the extent that we are able to recognize signals from these UOOMs and they are legally sufficient, we will process these signals as requests to opt out of sales or processing for the purposes of targeted advertising. Depending on the UOOM you select, the opt-out may apply only to certain interactions, such as a specific browser or device. You may select and install a UOOM of your preference per the provider’s instructions.
+What information does Plex collect from my Plex Media Server?
+Plex understands that you have personal content that you store using the Plex Media Server software (“Personal Content”).
+Plex collects the following Personal Data from your Plex Media Server: email, IP address and username.
+Plex does NOT share information about your Personal Content with third parties.
+Plex does NOT collect:
+Content titles of your Personal Content.
+Filenames EXCEPT those that may be collected through optional crash reports.
+Metadata for Personal Content (e.g., information about the specific file, cover art, subtitles, running length, etc.) EXCEPT to customize viewed content syncing to enhance your account or if you have enabled metadata matching capabilities in which case such data will be anonymously sent to us or you have integrated with a third-party control or playback mechanism that requires us to access your metadata to play the relevant content (e.g., if you use Amazon Alexa to play a particular song or movie from your Personal Content, then our Services may search your Personal Content metadata in order to find and play the song or movie requested.)
+Data transferred through the Plex Relay Service. If you use the Plex Relay Service to connect or stream your Personal Content to another device, we will transfer the data necessary to perform the service. All such traffic is encrypted from end-to-end in a manner that makes it impossible for Plex or the Plex Relay Service to decrypt or view any data. The data transferred via the Plex Relay Service is not stored by Plex except for the temporary buffering of data required to provide you with an optimal streaming experience. You can disable the Plex Relay Service by turning off the “Enable Relay” preference in the “Network” section of your Plex Media Server Settings.
+Plex does collect:
+Configuration data. Information about your configuration or use of our Services when you create a Plex Media Server on a local device, connect to a Plex Media Server that you or another person have configured, or download or connect to a Plex app, or interact with or use other Plex software or Service. This information may include an IP address, the number of files, and information used to secure access to our Services.
+Activity data. Information about your activity as described in “What information does Plex collect about my activity on the Services?”
+What information does Plex either anonymize or aggregate?
+Certain activity information is either anonymized or made part of an aggregated set of information. This means that it cannot be linked to you. These activities are:
+TV program guide data:
+Zip codes and local television providers.
+Server / library data:
+The data listed under Plex Media Server/Library Data in “What information does Plex collect about my activity on the Services?”
+DVR device information:
+Manufacturer name and model
+Privacy Policy
+Terms
+Copyright
+Trademarks
+Subscriptions and Rentals
+Code of Conduct
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising
+Language:
+The Best of Plex
+Plex Pass gives you exclusive access to awesome new features and apps.
+Learn More
+Introducing streaming music powered by TIDAL
+Level up your music library with 60 million high-quality songs.
+TIDAL is seamlessly integrated with your existing music library — beautifully organized right in Plex.
+{{#if (or hasExpiredTidalTrial hasAnyStateTidalSubsc)}}
+Choose a Plan
+{{else}}
+Start 30-Day Free Trial{{/if}}

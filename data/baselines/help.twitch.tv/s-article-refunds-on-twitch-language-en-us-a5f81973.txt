@@ -1,0 +1,90 @@
+url: https://help.twitch.tv/s/article/refunds-on-twitch?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+PURCHASE SUPPORT
+Refunds on Twitch
+Have an issue with a purchase and would like to request a refund? Here's how you can submit a refund request.
+Not all purchases on the Twitch services are refundable. See our Terms of Sale for additional information.
+On this page:
+Recurring Subscriptions
+Gift Subscriptions
+Bits
+Gift Cards
+Unauthorized transactions
+Technical / Purchase
+Abuse of refund policy
+Submitting a refund request
+Refund Timelines
+Recurring Subscriptions
+Twitch makes certain offerings – for example, channel subs and Turbo – available to users on a subscription basis with recurring payments. You may cancel existing subscriptions up to 24 hours before your Sub Renew Date (which can be viewed on your Subscriptions page) to avoid being charged for the next renewal period. To do so, select the "Do Not Renew" option under your Subscription settings.
+We may share reasons subscribers choose to cancel their subscriptions with streamers in an anonymous, aggregated way to help streamers better understand their community.
+We may offer limited refunds on purchases of recurring subscriptions. When reviewing refund requests, we primarily look at historical refund requests from purchasers' accounts and actions taken with respect to those requests. Decisions whether to refund a subscription purchase are solely within Twitch's discretion.
+Outside of the example above, we do not offer refunds for recurring subscriptions (including channel subscriptions and Turbo) except in circumstances where technical issues impact the purchase or benefits relating to a subscription, where the purchase of a subscription was fraudulently made, or where otherwise required by law.
+Gift Subscriptions
+When you purchase a gift subscription for another user, the recipient will be notified and subscription benefits will become available to them immediately after your purchase is completed. Gift subscriptions are not refundable except where the purchaser experienced a technical issue with the purchase, the purchase was fraudulently made, or where otherwise required by law.
+Bits
+If Bits are purchased and Cheered, this action cannot be reversed / refunded except for technical issues, suspected fraudulent activity with a particular purchase, or where otherwise mandated by law.
+Please see our Terms of Sale for additional information.
+Gift Cards
+Twitch does not collect retailer purchase information, and cannot process refunds for unredeemed gift cards purchased from third-party retailers. If you have questions about a return or refund for the gift card itself, please contact the retailer where you purchased it. Any refund would be subject to that retailer's policies.
+If you made a purchase on Twitch using your wallet balance funded in whole or in part by a redeemed gift card, the standard refund policies in our Terms of Sales and on this page apply to that purchase. Contact Twitch Support for assistance.
+Unauthorized transactions
+If you notice suspicious or unrecognized transactions that do not match your regular purchasing history, contact us immediately at this link. Provide as much detail as possible so our Support team can review the incident. We may refund transactions that we determine were made without the user's authorization, and take appropriate action against the originating account of the unauthorized transaction(s).
+As part of the process of investigating your refund request, we may need to ask for information about the payment method(s) used and/or other information to locate the underlying account.
+Technical Issue with Purchase
+If you experienced a technical issue with completing or receiving your purchase or benefits, please raise a case with us and provide as much detail as possible so our team can assist you. Examples of technical issues include duplicate purchases, specific error messages, missing benefits, or other outages. Please be sure to include any additional information about your issue, including screenshots, error codes, and (if applicable) which Twitch channels are involved.
+Abuse of refund policy
+Twitch reserves the right to restrict purchase access or suspend accounts that are found to be in violation of our refund policies.
+Please see our Community Guidelines, and Terms of Service for additional information.
+Submitting a refund request
+How you submit a refund request depends on where you made your purchase. First, identify your purchase type by checking your invoice or receipt:
+Identifying Your Purchase Type
+Your invoice ID format tells you where the purchase was made:
+Google Play purchases: Invoice IDs begin with "GPA." followed by groups of numbers and letters separated by dashes (example: GPA.1234-5678-9012-34567)
+Apple purchases: Invoice IDs are alphanumeric (example: MSXH6MDFH4)
+Web purchases: Invoice IDs consist of a series of numbers
+Your invoice is sent to the email associated with your Twitch account (for web purchases) or your app store account (for mobile purchases). Check your email inbox or spam folder for your receipt.
+Purchases Made on Web or Android App
+To submit a refund request for purchases made on the Twitch website or through the Twitch Android app, make sure you're logged into the Twitch Help Portal and visit this link. You may need to select the relevant dropdown entries (e.g., for a recurring subscription refund request, select "Subscriptions" then "Refund Request.").
+Android/Google Play purchases: Twitch Support handles all refund requests for Twitch products purchased through the Android app or Google Play Store. Do not contact Google Play support for Twitch purchase refunds. When submitting your request, include your Google Play invoice number from your email receipt (format: GPA.1234-5678-9012-34567).
+Purchases Made on iOS App
+If you would like to request a refund for a purchase made through the Twitch iOS app, please contact Apple support for help. Apple handles support matters regarding such purchases directly, and Apple's refund policy will apply.
+Refund Timeline
+If a refund is issued, funds will be issued to your original payment method within 10 business days.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Refunds on Twitch

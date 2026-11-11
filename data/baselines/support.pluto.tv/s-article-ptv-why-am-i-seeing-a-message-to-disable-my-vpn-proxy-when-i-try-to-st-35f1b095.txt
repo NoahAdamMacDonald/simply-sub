@@ -1,0 +1,35 @@
+url: https://support.pluto.tv/s/article/PTV-Why-am-I-seeing-a-message-to-disable-my-VPN-proxy-when-I-try-to-stream-a-show
+method: browser
+saved: 2026-11-11
+
+Skip to Main Content
+Pluto TV Help Center - Home
+HOME
+Expand search
+GO BACK HOME
+TROUBLESHOOTING
+Why am I seeing a message to disable my VPN/proxy when I try to stream a show?
+What does this mean?
+If you receive this message, it means we've detected that your device is connected to a VPN, proxy service, or other software that may reroute your internet traffic outside your current region. Please disable these services on your device to stream videos.
+How do I know if I'm on a VPN or proxy?
+VPNs or proxies require manually enabling. If you have not personally set up a VPN or proxy on your device, please contact your ISP to have them verify your IP address.
+How do I disable them?
+The best way to do this is to make sure your device's network settings are set to “Automatic”. You can also try restoring your device's default network settings. If neither of these options work, please contact your device manufacturer or ISP for assistance.
+I'm using a VPN or proxy for legitimate reasons.
+Since we can't determine the exact purpose or use for a VPN or proxy, we need to block any use of them. We apologize for the inconvenience! Please disable the service to continue streaming.
+Was this article helpful?
+Like
+Dislike
+TRENDING ARTICLES
+Accessibility Contact Information (US)
+Accessibility Contact Information (Canada)
+Troubleshooting Closed Captioning
+Closed Captioning Overview
+Authorized Pluto TV Platforms
+Terms of Use (US) |
+Terms of Use (CANADA) |
+Privacy Policy |
+Your Privacy Choices |
+California Notice
+PlutoTV © 2026 Skydance. All Rights Reserved.
+Why am I seeing a message to disable my VPN/proxy when I try to stream a show?

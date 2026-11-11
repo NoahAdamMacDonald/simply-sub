@@ -1,0 +1,122 @@
+url: https://help.twitch.tv/s/article/age-verification?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+GETTING STARTED
+Age Verification on Twitch
+Age verification helps us comply with local laws and create a safe, age-appropriate experience on Twitch. In some regions, you may need to verify your age using facial age estimation technology. This quick, one-time process helps keep our community safe.
+On this page:
+How to Complete Age Verification
+Age Verification Troubleshooting
+Frequently Asked Questions
+How to Complete Age Verification
+To comply with local laws, Twitch has minimum age requirements that vary by region. When you sign up, you need to provide your birth date. If you don't meet the minimum age for your region, you won't be able to create an account. Learn more.
+In some regions, we use on-device facial age estimation technology to verify your age.
+When You May Need to Verify Your Age
+Creating a New Account: If you're in an affected region, you may need to verify your age when signing up.
+Logging In: Existing users in affected regions may be prompted to verify their age when logging in.
+Prior to watching certain content: Existing users in affected regions may be prompted to verify their age prior to watching content labeled with certain Content Classification Labels (CCLs).
+How to Complete Verification
+Step 1: When prompted, you'll see a "Verify Your Age" screen explaining the requirement.
+Step 2: Complete the face scan by:
+Allowing camera access when prompted
+Ensuring you're in a well-lit area
+Removing headwear that covers your face
+Keeping glasses on if you normally wear them
+Following on-screen instructions for the scan
+Step 3: Receive confirmation of your verification status and proceed with your Twitch experience.
+To protect your privacy, Twitch and k-ID (a third-party vendor we partner with to verify your age) do not store your face scan video selfies. The video selfie used for facial age estimation is analyzed entirely on your device and will never leave it. The information you provide will be used solely for age verification purposes and will not be used for anything else.
+Age Verification Troubleshooting
+If you experience a technical issue with the face scan:
+Ensure you're in good lighting conditions
+Check that your camera is working properly
+Remove face coverings or accessories that might interfere
+Try again in a different location with better lighting
+If you need further assistance, please contact k-ID Support, or consult their Age Verification help resources here.
+For security reasons, verification attempts are limited daily. If you exceed the limit, wait 24 hours before trying again.
+Frequently Asked Questions
+Sections:
+General FAQ
+UK FAQ
+Australia FAQ
+Turkey FAQ
+General FAQ
+Why does Twitch require age verification?
+Age verification helps ensure that users meet the minimum age required to use Twitch, and also helps make sure that certain types of content are only seen by people who meet the age requirements for their region.
+What happens if I don't meet the age requirements?
+If you don't meet the minimum age required in your region to use Twitch, you will not be allowed to have an account on Twitch. Certain types of content on Twitch may also require you to meet a minimum age in your region, so if you do not meet the required age you will not be able to view that content. If you believe your estimated age is incorrect, you can appeal through Twitch Support with proper age documentation here. If your account was suspended for being under the minimum age and you are older than that age, appeal through our contact form using the "Privacy Questions" category and "Age Suspension Appeal" sub-category. Learn more in Date of Birth Changes.
+Can I opt out of age verification?
+No. Age verification is required by law in certain regions. If you are in an affected region, you may be prompted to verify your age when creating an account, logging in, or prior to watching certain content.
+What content is age-restricted on Twitch?
+In certain regions, and where required by local law, content labeled with certain Content Classification Labels (CCLs) requires age verification to access.
+I am a parent and found out my child is using Twitch even though they don't meet the minimum age requirement in our area. What should I do?
+If you are a parent or a legal guardian of a child who has created a Twitch account, you can contact Twitch at privacy@twitch.tv to have the account closed and personal information deleted, or to make a data access request about that account. When notifying Twitch, please include any information, such as the username, that will aid in identifying the account. If you are not a parent or a legal guardian, please report the child through our reporting tool. You can find step-by-step information about reporting on the “Filing a Report” page. If Safety Operations finds sufficient evidence of the user being under the minimum age required to use Twitch in their area, they will indefinitely suspend the account.
+What resources are there for parents of teens that want to use Twitch?
+On a global level, Twitch requires all users to at least be 13 years of age. Twitch users between the ages of 13 and the legal age of adulthood in their area of residence may only use Twitch under the supervision of a parent or legal guardian. More information on how to provide a safe experience for Twitch users between the ages of 13 and 18 can be found here.
+UK FAQ
+I am a UK resident under the age of 18. Can I still use Twitch?
+Yes, you can still continue to use Twitch but will not be able to view certain content labeled with Content Classification Labels (CCLs).
+What do I do if I experience an error when trying to verify my age?
+Review the error message for details. If this does not resolve the issue, please contact k-ID Support, or visit their help resources here.
+What do I do if I experience crashing while trying to verify my age?
+Please contact k-ID Support, or visit their help resources here.
+Is my facial scan stored or shared?
+No. Your facial scan is processed immediately on your device to estimate your age and is not stored or shared. The technology only confirms whether you meet age requirements.
+How many times do I need to verify my age?
+Age verification is a one-time process. Once verified, you will not need to verify again on that same account.
+How long does the verification process take?
+The facial scanning and age estimation process typically takes up to a minute to complete. Manual reviews through the Twitch Support appeal process may take longer depending on the complexity of the case. If you believe your estimated age is incorrect, you can appeal through Twitch Support with proper age documentation here.
+Australia FAQ
+I am an Australian resident under the age of 16. Why can’t I have a Twitch account?
+In compliance with Australia’s Social Media Minimum Age ("SMMA") law, Twitch will no longer allow Australian residents under the age of 16 to have an account. As of December 10, 2025, Australians under the age of 16 will not be allowed to create a Twitch account, and existing Twitch users under the age of 16 will have their accounts disabled on January 9, 2026.
+What steps can I take to preserve my account before it is disabled?
+If you have VODs on your channel that you would like to retain, we recommend that you download them prior to January 9. For more details on how to download your videos, you can refer to our help article.
+What will happen to my recurring subscriptions or purchases after my account is disabled?
+Any recurring subscriptions that you have purchased will not renew as of January 9, 2026 and if you have any active subscriptions (excluding gifted subscriptions) extending past January 9, they will be refunded. If you have any Bits remaining in your account on January 9, we will refund them to the payment method that was used to purchase them.
+Can I re-enable my Twitch account once I turn 16 or will I have to create a new account?
+Yes, once you turn 16 you can reach out to customer support to request that your account be reinstated, so that you can maintain your previous account username.
+Turkey FAQ
+I am a Turkish resident under the age of 15. Why can’t I have a Twitch account?
+In compliance with Turkish law, Twitch will no longer allow Turkish residents under the age of 15 to have an account. Starting October 29, 2026, new users in Turkey under the age of 15 will not be allowed to create a Twitch account. Existing residents of Turkey with Twitch accounts under the age of 15 will have their accounts disabled in February 2027.
+What steps can I take to preserve my account before it is disabled?
+If you have VODs on your channel that you would like to retain, we recommend that you download them prior to February 2027. For more details on how to download your videos, you can refer to our help article.
+What will happen to my recurring subscriptions or purchases after my account is disabled?
+Any recurring subscriptions that you have purchased will not renew as of your account being disabled in February 2027, and if you have any active subscriptions (excluding gifted subscriptions) extending past the disable date, they will be refunded. If you have any Bits remaining in your account as of the disabled date, we will refund them to the payment method that was used to purchase them.
+Can I re-enable my Twitch account once I turn 15 or will I have to create a new account?
+Yes, once you turn 15 you can reach out to customer support to request that your account be re-enabled, so that you can maintain your previous account username.
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Age Verification on Twitch

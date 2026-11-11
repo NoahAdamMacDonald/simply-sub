@@ -1,0 +1,127 @@
+url: https://help.twitch.tv/s/article/requesting-your-data-from-twitch?language=en_US
+method: browser
+saved: 2026-11-11
+
+Skip to Navigation
+Skip to Main Content
+Search...
+Search
+Login
+Home
+Topics
+Topic Catalog
+Preferred Language
+English (US)
+GETTING STARTED
+Requesting Your Data From Twitch
+You have the right to access, review, update/correct, transfer, or delete your information on Twitch. Learn more.
+On this page:
+Who Can Request Data?
+Requesting Your Data
+Receiving Your Data
+Frequently Asked Questions
+Who Can Request Data?
+Any logged-in user may request and download a summary of their user data for that account through their user settings page. This feature is available for users on desktop. Those who are not logged in or no longer have access to their account may still request their data by filling out the Contact Us form.
+Can't log in? See our FAQ
+Requesting Your Data
+To download your user data directly, visit your Security and Privacy settings from your Settings page. Follow these steps:
+Navigate to your Privacy Settings
+In the Download Your Data section, click Request a Copy of Your Data
+Select the categories of data to include in your report.
+Customize the date range of your report
+Submit your request
+The date range of your report can be as recent as today, or as far back as the date you opened your account.
+Once a request has been submitted, you won't be able to make changes until your report is completed.
+Receiving Your Data
+Reports are completed within 14 days. You will receive a notification on Twitch when your report(s) are ready to be downloaded.
+Return to your Privacy Settings page where the report was requested. Click Download a Copy of your Data.
+Understanding Your Data Report
+When you download your data, you will receive your report broken down into different subfolders with files named after the event or action they track. These different files can help you sort through your data based on category.
+Data Category
+Folder Name
+Description
+Account History
+accounts
+A log of account actions you've taken, such as logging in and out, enabling two-factor authentication, or changing your name and email.
+User Information
+users
+Data about your Twitch account, such as username, login information, account creation date, and last login/broadcast date.
+Ad & Commercial Breaks History
+ads
+A history of ads viewed by you, your ads consent preferences and commercials that were run on your channel.
+Bits & Subscriptions History
+commerce
+A log of your purchases of Bits and Cheers made, as well as which subscriptions you have purchased on Twitch.
+Developer History
+developer
+A log of events that describe the authorizations you have provided to developer accounts
+Follows History
+community
+A history of follow/unfollow actions for channels and games.
+Extensions
+extensions
+A history of extensions you have installed, interacted with, and made purchases from.
+Viewing & Chat History
+site_history
+A log of your viewing and chat activity across all channels for both live and VOD content, as well as any searches you performed from the browse page.
+VODs History
+vod
+A history of changes to you made to VODs on your channel.
+Each folder contains a number of files, named after the event or action it tracks. For example, the folder, site_history, includes 6 files with the following names:
+chat_messages.csv - a list of chat messages you have sent in various channels
+minute_watched.csv - a log of how many minutes you’ve watched per day, per channel.
+minute_broadcast.csv - a log of how many minutes you’ve broadcast.
+search_query.csv - your search history on Twitch.
+pageview.csv - a log of all the different pages you visited on Twitch.
+Frequently Asked Questions
+I no longer have access to my Twitch account. How can I request a copy of my data?
+You may contact Twitch Support here by email and request your data access report directly.
+Why do I need to request a copy of my data?
+You don’t need to. However, you have several rights regarding your personal information, including the right to access a copy of your data, request its deletion, correct any inaccuracies, limit certain uses, or request a portable copy that can be shared with other services. Learn more about your rights in our Privacy Notice.
+How can I delete the data you have about me?
+To delete your Twitch data, you must delete your Twitch account. Learn more in our guide here: help.twitch.tv/s/article/delete-twitch-account
+I have a question about data in my access report. What should I do?
+Depending on the type of info you request, we may or may not be able to provide additional information or support. Contact Twitch Support here, and we'll see what we can do.
+If I have multiple Twitch accounts, must I request my data from each account individually?
+Yes.
+I don’t recognize some of the activity in my data report. What should I do?
+First, make sure that you have secured your account with 2FA. If you think your account has been compromised, contact Twitch Support here. Learn more in our knowledge guide: help.twitch.tv/s/article/two-factor-authentication
+Some of the data in my report is missing. What should I do?
+Please note that these reports do not include some of your personal information maintained by Twitch which you can access yourself by logging into your Twitch or Amazon account, such as your Twitch Purchase History. Twitch is also unable to provide data relating to alleged violations of our Community Guidelines as part of your data access request in order to preserve the rights of other users on Twitch.
+It's also possible that you have other Twitch accounts. You can recover your account information using this form.
+There was an error when attempting to process my request. What do I do?
+Contact our support team here and let us know what happened.
+Someone is requesting that I send them the information in my data report. Should I do it?
+The information in this report should never be shared, or downloaded on a public computer or device.
+Can I request my Whispers history?
+Whispers history is not supported in this data report.
+Can I request another report before I receive my first report?
+No. You must wait for your first requested report to complete before you can request another, or make any alterations.
+Why do I have a subscription with an end date so far in the future?
+In your Subscriptions History, you may notice a subscription with an end date far into the future. You could be a recipient of a lifetime subscription from a Partner. Learn more about lifetime subscriptions in our knowledge guide: help.twitch.tv/s/article/lifetime-subscriber-guide-for-partners
+Was this article helpful?
+Trending Articles
+How to Create, Edit, and Share Clips
+Content Classification Labels
+On-Demand Content on Twitch
+Joining the Affiliate Program
+Broadcasting Guidelines
+Follow us on X
+Contact Support
+About
+Careers
+Blog
+Press
+Brand
+Developers
+Platforms
+Prime
+Bits
+Extensions
+Advertise
+Music
+Partners
+Affiliates
+Mobile
+Legal
+Requesting Your Data From Twitch

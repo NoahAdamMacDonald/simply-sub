@@ -1,0 +1,176 @@
+url: https://support.plex.tv/articles/217563477-purchasing-a-plex-pass-subscription-through-google-play/
+method: fetch
+saved: 2026-11-11
+
+Purchasing a Plex Pass Subscription Through Google Play | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Purchasing a Plex Pass Subscription Through Google Play
+Purchasing a Plex Pass Subscription Through Google Play
+This article only applies to Plex for Android version 10.27.1 and below
+It is possible to purchase a Plex Pass subscription directly through the Plex for Android app itself, if downloaded from Google Play. This subscription is billed through Google Play and can be managed from your Google Play account.
+A subscription purchased in the app provides all the same features and benefits, but there are some slight differences in how it is managed when compared to a subscription through our own website. Continue reading this full article for details.
+To purchase a Plex Pass subscription through the Android app:
+If you haven’t yet activated the mobile app at all, you can choose the Activate Plex option under the main app menu. There, you’ll see a Subscribe to Plex Pass button. On Android TV, you can subscribe using the Get a Plex Pass option from the User Menu (accessed by selecting your avatar image) located at the top of the the Navigation Side Bar .
+You’ll see a page letting you choose to subscribe to a monthly, yearly, or a lifetime Plex Pass subscription.
+A purchase window will appear to let you confirm the in-app subscription.
+Warning!: Plex Pass subscriptions purchased through the app are billed through Google Play and not us, so we encourage you to test the basic functionality of the app prior to subscribing!
+How can I manage my Plex Pass subscription through Google Play?
+Since the Plex Pass subscriptions offered from within the app are billed through Google Play, you will typically manage your subscription through Google Payments. This includes updating your payment information, viewing, changing, or cancelling the monthly/yearly Google Play Plex Pass subscription renewals.
+Related Page: Google: Subscriptions on Google Play
+Related Page: Google: Manage your subscriptions
+It’s also possible to cancel future renewal of your Google Play subscription (but not change payment information) through our website like normal. When signed in to your account, you can visit your account subscriptions page and cancel renewal of a subscription there.
+Related Page: Account Subscriptions Page
+Related Page: Plex Subscription Management
+How do I switch from being billed through Google Play to start being billed directly through Plex?
+In order to switch to being billed directly from plex.tv, you will need to:
+Sign in to our site and visit your account Subscriptions page
+Cancel your subscription so that it will not renew on Google Play
+Add a recurring payment method to start billing through us when the next period starts
+Tip!: If you are being billed through Google Play and have any questions regarding billing, please contact Google Payments support.
+Related Page: Plex Subscription Management
+How do I upgrade my Google Play subscription to a yearly or lifetime Plex Pass subscription?
+To switch to a yearly or lifetime subscription, you will need to:
+Sign in to our site and visit your account Subscriptions page
+Cancel your subscription so that it will not renew on Google Play
+Add a recurring payment method and choose the yearly or lifetime options to start billing through us (upgrades to yearly will take effect when the current subscription period ends; upgrades to lifetime will be billed immediately)
+Related Page: Plex Subscription Management
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: April 4, 2025
+Table of Contents
+Recently Viewed
+Manage Recommendations
+Purchasing a Plex Subscription Through the App Store/iTunes
+What is Plex Home?
+Using Hardware-Accelerated Streaming
+Plex: Free vs Paid
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

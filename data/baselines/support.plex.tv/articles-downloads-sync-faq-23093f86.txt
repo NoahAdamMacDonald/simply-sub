@@ -1,0 +1,216 @@
+url: https://support.plex.tv/articles/downloads-sync-faq/
+method: fetch
+saved: 2026-11-11
+
+Downloads FAQ | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Downloads FAQ
+Downloads FAQ
+Some of these options only apply to the older Plex for iOS app (version 8.45 and below) and Plex for Android mobile (version 10.27.1 and below)
+Tip!: Our “Downloads” functionality is a premium feature that requires an active Plex Pass subscription. In most situations, the subscription is required on the Plex account using the app where the content is downloaded, but more specific details can be found below.
+Is a Plex Pass subscription needed to use Downloads?
+Yes, though which account needs the subscription can vary, depending on the situation and when both the user (client) and server owner Plex accounts were created (before or on/after 2022-08-01 UTC). See the matrix below. If there is a dot present at the intersection of a “server owner” row and “client user” column, then access to the Downloads feature will be available. If no dot is present at the intersection, then the Downloads feature will not be available to use.
+Client User Account
+Created Before*
+Created After*
+Server Owner Account
+is
+Free
+has
+Plex Pass
+is
+Free
+has
+Plex Pass
+Created
+Before*
+is Free
+•
+•
+has Plex Pass
+•
+•
+•
+Created
+After*
+is Free
+•
+•
+has Plex Pass
+•
+•
+* Where the cutoff date in question is midnight (morning) 2022-08-01 00:00 UTC.
+Explained another way, if the client user account has an active Plex Pass subscription, it will always be able to use the Downloads feature. (That includes when a server owner is behaving as a client, by accessing their own server.) If the client user account does not have an active Plex Pass subscription (i.e. it’s a “free” account), then the only way it will be able to use the Downloads feature is if all of the following are true:
+The client user account was created before the cutoff
+The server owner account was created before the cutoff
+The server owner account has an active Plex Pass subscription
+If the client user is not also the owner of the Plex Media Server, then the owner will need to have enabled the Allow Downloads option when granting access to the server/libraries.
+Related Page: Restrictions on Library Access
+Can Managed Users use Downloads?
+Yes. Managed users will be able to use Downloads as long as the admin of the Plex Home has an active Plex Pass and has enabled the Allow Downloads option when granting access to the libraries.
+Can I download media without having to transcode it?
+Yes, that is generally the case. If the device you are using can direct play a file, it can be downloaded without needing to transcode.
+Not every file is guaranteed to be able to download without requiring a transcode. For instance, not every file will be capable of direct play on a device or the server might have remote streaming limitation in place (which can still apply when downloading remotely). But a wide range of content will be able to download without requiring a transcode.
+Can I download content at a lower quality to save space?
+Yes. There is a separate setting for Downloads. These are global settings that will apply to all content you download. If you change the setting, it will only affect content you Download in the future; existing (already downloaded) content will not be changed.
+Are subtitles downloaded?
+Subtitles can be downloaded following your current subtitle burn-in option on your client. If the stream will currently play the subtitle without needing to be burned-in to the video, they will be downloaded as they are. If you have set your subtitles to always burn-in, then the subtitle will be burned-in prior to download and no additional subtitles will be downloaded.
+Can I use ASS/SSA subtitles with my anime videos now?
+Our mobile Plex apps do not fully support all formatting capabilities possible with ASS/SSA subtitles. If you want all the formatting that comes with that subtitle format, you will need to set your app to burn in the subtitle (this is the default behavior for ASS/SSA subtitles). If you do not burn in the subtitle, it will be downloaded and you can choose to enable it during playback, but you will only see the text with basic formatting.
+Downloads to our Windows/Mac/Linux desktop app fully support ASS/SSA subtitles natively.
+Can I download my entire library?
+The Downloads feature is not designed or intended for downloading an entire library of content onto a device. You can choose specific items to download. That includes individual movies, episodes, or tracks; entire seasons, shows, albums, or artists; playlists; and more.
+Can I cast/fling downloaded content to another Plex client or through Chromecast?
+Casting or flinging downloaded content to another device is currently not supported, sorry.
+Can managed users on the same device see content another user downloaded?
+Yes. Downloaded content does not have a concept of ownership. Parental restrictions do not apply to Downloads, so managed users can see, play, and manage all previously downloaded content.
+Does the watched status for downloaded content update with the server?
+Yes. The client will store and track playback progress per user. Your watched status will not be impacted by other users on the same device. The watched status will be updated with the server when the app next connects to the server to update information.
+Will the app continue to download media if the device goes to sleep or the screen saver activates?
+No. File transfers cannot work if the app is moved to the background such as when the screen turns off or the device goes to sleep. The app must be running in the foreground. If the app is on the “Items” tab of the “Downloads” library, the app will actively keep the device awake and continue to download media to your device.
+Can I prevent friends from using Downloads if I’ve granted them access to my server?
+Yes. The Allow Downloads option when granting another user access to a server library lets you choose whether or not you want that other account to be able to download. Even if you allow the user permission to download, that user will still need their own Plex Pass subscription to do so, as outlined earlier.
+I tried to use Downloads but the status just shows as “Initializing Downloads”.
+Some downloads require obtaining information from the server before it can be downloaded. This may take many minutes, depending on the amount of content available on the server. Simple Download jobs such as a single video or a single TV show should begin almost immediately.
+Can I download from Plex-provided content such as streaming on demand content?
+No. You can only download personal content, from a Plex Media Server you have access to, where the server admin has allowed you to download.
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: June 16, 2025
+Table of Contents
+Recently Viewed
+Plex HTPC Input Maps
+Purchasing a Plex Pass Subscription Through Amazon
+Purchasing a Plex Pass Subscription Through Google Play
+Purchasing a Plex Subscription Through the App Store/iTunes
+Manage Recommendations
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

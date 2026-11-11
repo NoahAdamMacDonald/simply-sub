@@ -1,0 +1,185 @@
+url: https://support.plex.tv/articles/sales-tax-information/
+method: fetch
+saved: 2026-11-11
+
+Sales Tax information | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Sales Tax information
+Sales Tax information
+Sales Tax
+Does Plex collect sales tax in the United States?
+Plex does collect sales tax on behalf of the states for transactions (on subscriptions and transactions billed and managed directly by Plex) from accounts located in applicable states. Tax rates can vary by county, city, or state, and are based on the rates applicable at the time of the transaction charge. These amounts can change over time with local tax requirements.
+Do the advertised prices include sales tax?
+The advertised prices for Plex Pass subscriptions as well as other transactions do not include sales tax. If sales tax applies, it will be stated separately on the transaction receipt, which can be accessed in the account Payments page (for subscriptions) or Transaction History info on the account page (for movie rentals and purchases).
+Why is sales tax collected?
+The U.S. Supreme Court decision in South Dakota v. Wayfair, Inc. resulted in a fundamental change in state taxation, by granting the state authority to impose sales tax on out-of-state transactions without requiring the seller’s physical presence in the state. Wayfair overturned a long-standing physical presence standard in favor of economic factors as the basis for determining taxability, typically the number of sales transactions and/or sales dollars over the prior 12 months.
+In the wake of Wayfair, not surprisingly, a growing number of states have begun to adopt these economic factors to determine and collect sales taxes, and Plex is now required to collect and remit state and local sales tax on each subscription (billed and manage directly by Plex) sold in those states. All of the sales tax collected for a transaction is remitted to the appropriate state/jurisdiction and Plex does not retain it.
+Where is sales tax collected?
+While the list most certainly will change over time, as of 2021-05-04, the following states/jurisdictions will have sales tax collected by Plex:
+Arizona
+District of Columbia
+Hawaii
+Illinois
+Indiana
+Kentucky
+Maine
+Michigan
+Minnesota
+Nebraska
+New Jersey
+New York
+North Carolina
+Pennsylvania
+Rhode Island
+South Dakota
+Texas
+Utah
+Vermont
+Washington
+West Virginia
+Wisconsin
+Wyoming
+Subscription transactions from accounts located in these states/jurisdictions will have their appropriate sales tax collected.
+Does this apply to all subscriptions and transactions?
+Sales tax will be collected for all subscriptions and transactions billed and managed by Plex, from accounts located in applicable states. This would include Plex Pass (lifetime plans as well as recurring transactions) subscriptions as well as movie rentals and purchases.
+Subscriptions and transactions through an app store such as Google Play or the App Store/iTunes will not have sales tax collected by Plex itself, though the app store will likely collect relevant sales tax itself.
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: February 4, 2025
+Table of Contents
+Recently Viewed
+Reporting Security Issues
+Restart Plex Media Server Setup from Scratch
+Downloads FAQ
+Plex HTPC Input Maps
+Purchasing a Plex Pass Subscription Through Amazon
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising

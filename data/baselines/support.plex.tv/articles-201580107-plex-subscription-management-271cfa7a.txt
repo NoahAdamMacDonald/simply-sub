@@ -1,0 +1,187 @@
+url: https://support.plex.tv/articles/201580107-plex-subscription-management/
+method: fetch
+saved: 2026-11-11
+
+Plex Subscription Management | Plex Support
+Features
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Organize and stream your media
+Ultimate DVR
+Watch and record broadcast TV
+Plexamp
+Music app made for audiophiles
+Apps & Devices
+Enjoy Plex wherever you are
+API Documentation
+Plex Media Server API
+Plex for All
+Free Live TV
+Tune in anytime, on any device
+Free Movies & Shows
+Stream 50K+ titles on demand
+Rentals
+Browse movies to rent
+Discover
+Find movies, shows, and friends
+Sign Out
+Navigate
+Plans
+Download
+Support
+Plex for Pros
+My Media
+Ultimate DVR
+Plexamp
+Apps & Devices
+API Documentation
+Plex for All
+Free Live TV
+Free Movies & Shows
+Rentals
+Discover
+Support Articles
+Support
+Articles
+Plex Subscription Management
+Plex Subscription Management
+Accessing Subscription Information
+Tip!: If you have billing questions or issues related to a Plex subscription, please visit our website and fill out the form.
+Users with either a Plex Pass or Remote Watch Pass subscription billed by Plex can manage that subscription at any time. Doing so is available from the Subscriptions & Payments page.
+Access to that page is available though the Plex website. You can access both Subscription and Payment information directly from your main Account page in the web app (e.g. Accounts under the top right menu, when signed in). For those users with a subscription through an app store, not all management actions will be available; see each section below for more specific information.
+From the Subscription & Payments page, you can manage your Plex subscription (upgrade to a new plan, cancel future renewal, etc.), view existing transaction receipts, or update your payment method. Users who do not currently have an active subscription will find links to information about the subscriptions we offer.
+Related Page: Subscriptions & Payments
+Upgrade a Recurring Subscription
+Tip!: Visit our Upgrading Plex Subscriptions article for more specific details about upgrading subscriptions.
+Users who have a recurring monthly or yearly Plex Pass subscription can choose to upgrade to a higher subscription plan at any time. When upgrading a Plex Pass subscription that’s billed directly by us (not through an app store), you’ll receive a prorated credit (based on the time remaining in your current subscription period) applied against the transaction for the new subscription plan. That way, you won’t be paying for any time you don’t use.
+For instance, if you started a yearly Plex Pass subscription and then chose to upgrade to a lifetime plan 6 months into the year, you’d receive ~half the yearly transaction as credit for the lifetime plan upgrade.
+There are some important things to note:
+Subscriptions billed and managed through an app store cannot be upgraded in the same manner and the upgrade options can vary depending on the app store.
+If you start a subscription by redeeming a promotion code (e.g. “3 free months”) and choose to upgrade during the promotion period, there is no credit offered or applied based on whatever free time is remaining.
+Related Page: Upgrading Plex Subscriptions
+You can upgrade from the account Subscription & Payments page.
+Click on the Manage button on the top right next to your current subscription title.
+Choose the upgraded subscription plan you would like to have under Available Upgrades and Continue
+You will get a verification/summary page providing details on what you will be charged now and next billing date
+Hit the Upgrade button to complete the subscription upgrade
+Related Page: Subscriptions & Payments
+Cancel Renewal For a Subscription
+If you have a recurring subscription billed by Plex, you are welcome to cancel future renewal of it at any time. You will retain access to the subscription features and benefits for the remainder of your current subscription period. At the end of the period, the subscription will then expire and there will be no renewal.
+Notes:
+Cancelling a subscription only cancels future renewal, it does not provide any refund for an existing subscription transaction.
+Management—including cancellation— of subscriptions through an app store can vary. For some, you are able to cancel from your Plex subscriptions page, just like normal. Others can be managed only through the app store itself. Please see information in the appropriate article for more specifics about how to handle management of app store subscriptions:
+Amazon Appstore subscriptions
+Google Play subscriptions
+iTunes subscriptions
+Roku Channel Store subscriptions
+To cancel future renewal of a recurring subscription from the account subscriptions page hit the Manage button then the cancel automatic renewal link.
+Related Page: Subscriptions & Payments
+View/Update the Payment Method
+From your account Subscription & Payments page, you can view the current payment information used for any active subscription. Even without a subscription, you may have a payment method on file for use with movie rentals or purchases. From here, you can also choose to edit/update the billing information. That would let you update an existing credit card, switch to a different card, or choose to use PayPal.
+Note: We do not store any of your billing details on our servers. The data is encrypted and securely stored by our payment processor, Braintree. A copy of the Braintree security policy is available on their website.
+Related Page: Subscriptions & Payments
+View Transactions and Receipts
+Your Subscriptions & Payments page also allows you to view current and past transactions. For instance, you can see the date a renewal occurred as well as the amount of the renewal.
+Click the button at the right side of any line item to view full details of that particular transaction. When viewing the details, you’ll have the opportunity to print the receipt, if desired. When printing, you can use the Add More Info button to add additional details for printing such as a purchase order number, address, or more.
+Related Page: Subscriptions & Payments
+Share this
+Was this article helpful?
+Yes
+No
+1000
+You've already provided feedback for this article, thank you for helping us improve our articles.
+Thank you for helping us improve our articles.
+Thank you for helping us improve our articles! We'll take it from here.
+You've already provided feedback for this article, thank you.
+Looks like you already left that comment.
+To vote if this article was helpful, please sign in with your plex account.
+Last modified on: February 16, 2026
+Table of Contents
+Recently Viewed
+How do I manually install a plugin?
+Accessing a Server through Relay
+Chromecast, AirPlay, and Casting
+Account Audio/Subtitle Language Settings
+Frequently Asked Questions – Watch Together
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+We value your privacy.
+Plex and our partners use standard Web technologies, such as browser cookies, which may be necessary to make our site work and enable core functionality, such as security, network management, and accessibility. You may disable these by changing your browser settings, but note that it may affect how our site functions.
+We’d also like to enable analytics cookies, optional to you, to improve our website by collecting and reporting information on how you use it; we specifically use Google and Facebook analytics to derive insights about who is doing what on our site and to help us improve your experience. We won’t set these optional cookies unless you agree to and enable them. This tool will set a cookie on your device to remember your preferences once you have accepted.
+I Accept
+I Reject
+More Options
+Plex’s use of cookies
+Necessary cookies make our site work. We’d also like to enable analytics cookies, optional to you, to help us improve the site and your experience. This tool will set a cookie on your device to remember your preferences once you have accepted. You can change your mind and change your consent choices at any time by returning to this site.
+For more information on how these cookies work please see our Tracking Technologies page.
+Necessary cookies
+Necessary cookies enable core functionality on our site, such as security, network management, and accessibility. You may disable these by changing your browser settings, but it may affect how the site functions.
+Analytics cookies
+Analytics cookies help us improve our website by collecting and reporting information on how you use it; we specifically use Google analytics to derive insights about who is doing what on our site. These cookies collect information anonymously.
+OFF
+Third Party Cookies
+Third-party cookies enable us to correctly attribute traffic driven to our site; specifically, we use Facebook cookies to measure performance of Facebook campaigns, as well as cookies from Commission Junction, which help us see traffic directed to our site by affiliates we work with in marketing.
+OFF
+Accept All
+Reject All
+Save & Exit
+{{#if (or isSignedIn isSigninIn) }}
+{{#if isSigninIn }}
+Signing you in, Please wait ...
+{{else}}
+Redirecting you, please wait ...
+{{/if}}
+{{else}}
+Account Sign in
+Create your free account
+No credit card required.
+{{/if}}
+Company
+About
+Careers
+Our Culture
+Giving
+Press Room
+Partners
+Plex Gear
+The Plex Blog
+Advertise with Us
+Watch Free on Plex
+Watch Free Movies
+TV Channel Finder
+Free A24 Movies on Plex
+Trending on Plex
+Discover
+What to Watch Now
+What To Watch on Netflix
+What To Watch on Hulu
+Movies Database
+My Media
+Plex Media Server
+Plans
+Download App
+Available Devices
+Plexamp
+Bug Bounty
+Resources
+Finding Help
+Support Library
+Community Forums
+Code of Conduct
+Billing Questions
+Status
+CordCutter
+Get in Touch
+Copyright © 2026 Plex
+Privacy & Legal
+Accessibility
+Accessibility
+Manage Cookies
+Do Not Sell or Share My Personal Information / Opt-out of Targeted Advertising
