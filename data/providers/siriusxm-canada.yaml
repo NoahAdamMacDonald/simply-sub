@@ -45,7 +45,8 @@ owner:
       - 'Our Privacy Officer may be contacted by email at privacy@siriusxm.ca or by postal mail at Sirius XM Canada Inc., 351 King Street East, Suite 1000, Toronto, Ontario, M5A 0L6.'
     lastVerified: 2026-11-11
   lastVerified: 2026-11-11
-# Ways to pay (M11.5), read 2026-11-11: its Customer Agreement; no page names card networks.
+# Ways to pay (M11.5), read 2026-11-11: its Customer Agreement; no page names card networks. It also names "an
+# authorized third party (such as Google, Apple, Roku" selling it, without naming their stores.
 paymentMethods:
   - methods: [card, gift-card]
     page: Customer Agreement
@@ -78,7 +79,7 @@ perks:
 plans:
   - id: siriusxm-canada.free
     name: Free Access
-    link: https://www.siriusxm.ca/about-your-trial/
+    link: https://www.siriusxm.ca/terms-and-conditions/
     features:
       ad-free: false
       music.on-demand: false
@@ -303,8 +304,8 @@ policies:
         url: https://www.siriusxm.ca/privacy-policy/
       lastVerified: 2026-11-11
     - topic: privacy.government-requests
-      tier: neutral
-      reason: 'It hands over your information when it believes the law, a court or a government request needs it. It doesn’t say it tells you, or publish how many requests it gets.'
+      tier: poor
+      reason: 'It may hand over your information when a government asks, even without a court order. It doesn’t say it tells you, or publish how many requests it gets.'
       sources:
         - url: https://www.siriusxm.ca/privacy-policy/
           quote: 'We will disclose your personal information as long as we believe it is reasonably necessary to:'
@@ -430,7 +431,7 @@ policies:
       lastVerified: 2026-11-11
     - topic: legal.disputes
       tier: bad
-      reason: 'Outside Quebec, a private referee (an arbitrator) in Toronto settles any dispute instead of a court, with no way to opt out.'
+      reason: 'Outside Quebec, a private referee (an arbitrator) in Toronto settles disputes instead of a court, and you can’t opt out. Its agreement doesn’t stop you joining a class action.'
       sources:
         - url: https://www.siriusxm.ca/terms-and-conditions/
           quote: 'If we cannot resolve a Claim informally, subject to applicable provincial laws, any Claim either of us asserts will be resolved only by binding arbitration in accordance with the UNCITRAL Arbitration Rules in force at the time the arbitration is initiated.'
@@ -451,8 +452,8 @@ policies:
           quote: 'Specifically, notices of renewal, price changes, account-related notifications and updates to this Agreement will be sent to your last email address on file.'
       lastVerified: 2026-11-11
     - topic: legal.account-closure
-      tier: bad
-      reason: 'It can cancel your subscription for any reason it chooses, and promises no notice and no refund.'
+      tier: poor
+      reason: 'It can cancel your subscription for any reason it chooses. Its agreement doesn’t promise you notice first.'
       sources:
         - url: https://www.siriusxm.ca/terms-and-conditions/
           quote: 'We may cancel your Subscription if you fail to pay for your Subscription, breach this Agreement, or for any other reason in our sole discretion.'

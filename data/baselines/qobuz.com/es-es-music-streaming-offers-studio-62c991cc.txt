@@ -1,0 +1,776 @@
+url: https://www.qobuz.com/es-es/music/streaming/offers/studio#family
+method: fetch
+saved: 2026-11-11
+
+Oferta Studio - Desde 12,49€/mes - Qobuz
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--sections--navbar-menu#mobileContentBack" class="inline-flex items-center justify-center size-56 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default active:text-button-icon-primary-pressed"
+>
+Atrás
+eqho--sections--navbar-menu#toggleMobileNav" data-eqho--sections--navbar-menu-target="mobileBurger" data-close-label="Cerrar menú" data-close-search-label="Cerrar búsqueda" data-open-label="Abrir la navegación" aria-controls="navbar-mobile-drawer"
+>
+eqho--sections--navbar-menu#pressNavItem mouseenter->eqho--sections--navbar-menu#hoverNavItem mousemove->eqho--sections--navbar-menu#hoverNavItem mouseleave->eqho--sections--navbar-menu#cancelHover click->eqho--sections--navbar-menu#togglePanel keydown->eqho--sections--navbar-menu#onNavItemKeydown"
+data-eqho--sections--navbar-menu-variant-param="about-us"
+>
+Quiénes somos
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="inline-flex items-center justify-center size-24 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed w-0 overflow-hidden focus-visible:w-24 data-[state=closed]:rotate-90 data-[state=open]:-rotate-90 transition-[width,transform] duration-150 ease-out rounded-s" data-toggle-button="" data-state="closed" aria-haspopup="true" aria-expanded="false" aria-controls="navbar-panel-about-us"
+>
+Submenú Quiénes somos
+eqho--sections--navbar-menu#pressNavItem mouseenter->eqho--sections--navbar-menu#hoverNavItem mousemove->eqho--sections--navbar-menu#hoverNavItem mouseleave->eqho--sections--navbar-menu#cancelHover click->eqho--sections--navbar-menu#togglePanel keydown->eqho--sections--navbar-menu#onNavItemKeydown"
+data-eqho--sections--navbar-menu-variant-param="subscriptions"
+>
+Suscripciones
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="inline-flex items-center justify-center size-24 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed w-0 overflow-hidden focus-visible:w-24 data-[state=closed]:rotate-90 data-[state=open]:-rotate-90 transition-[width,transform] duration-150 ease-out rounded-s" data-toggle-button="" data-state="closed" aria-haspopup="true" aria-expanded="false" aria-controls="navbar-panel-subscriptions"
+>
+Submenú Suscripciones
+eqho--sections--navbar-menu#pressNavItem mouseenter->eqho--sections--navbar-menu#hoverNavItem mousemove->eqho--sections--navbar-menu#hoverNavItem mouseleave->eqho--sections--navbar-menu#cancelHover click->eqho--sections--navbar-menu#togglePanel keydown->eqho--sections--navbar-menu#onNavItemKeydown"
+data-eqho--sections--navbar-menu-variant-param="download-store"
+>
+Tienda de descargas
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="inline-flex items-center justify-center size-24 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed w-0 overflow-hidden focus-visible:w-24 data-[state=closed]:rotate-90 data-[state=open]:-rotate-90 transition-[width,transform] duration-150 ease-out rounded-s" data-toggle-button="" data-state="closed" aria-haspopup="true" aria-expanded="false" aria-controls="navbar-panel-download-store"
+>
+Submenú Tienda de descargas
+eqho--sections--navbar-menu#pressNavItem mouseenter->eqho--sections--navbar-menu#hoverNavItem mousemove->eqho--sections--navbar-menu#hoverNavItem mouseleave->eqho--sections--navbar-menu#cancelHover click->eqho--sections--navbar-menu#togglePanel keydown->eqho--sections--navbar-menu#onNavItemKeydown"
+data-eqho--sections--navbar-menu-variant-param="magazine"
+>
+Revista
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="inline-flex items-center justify-center size-24 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed w-0 overflow-hidden focus-visible:w-24 data-[state=closed]:rotate-90 data-[state=open]:-rotate-90 transition-[width,transform] duration-150 ease-out rounded-s" data-toggle-button="" data-state="closed" aria-haspopup="true" aria-expanded="false" aria-controls="navbar-panel-magazine"
+>
+Submenú Revista
+eqho--sections--navbar-menu#pressNavItem mouseenter->eqho--sections--navbar-menu#hoverNavItem mousemove->eqho--sections--navbar-menu#hoverNavItem mouseleave->eqho--sections--navbar-menu#cancelHover click->eqho--sections--navbar-menu#togglePanel keydown->eqho--sections--navbar-menu#onNavItemKeydown"
+data-eqho--sections--navbar-menu-variant-param="our-apps"
+>
+Las apps de Qobuz
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="inline-flex items-center justify-center size-24 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed w-0 overflow-hidden focus-visible:w-24 data-[state=closed]:rotate-90 data-[state=open]:-rotate-90 transition-[width,transform] duration-150 ease-out rounded-s" data-toggle-button="" data-state="closed" aria-haspopup="true" aria-expanded="false" aria-controls="navbar-panel-our-apps"
+>
+Submenú Las apps de Qobuz
+eqho--sections--navbar-menu#closePanel">
+Qobuz Club
+eqho--sections--navbar-menu#togglePanel keydown->eqho--sections--navbar-menu#onNavItemKeydown"
+data-eqho--sections--navbar-menu-variant-param="account"
+aria-busy="true"
+>
+Quiénes somos
+eqho--sections--navbar-menu#openMobileContent"
+data-eqho--sections--navbar-menu-variant-param="about-us"
+>
+Suscripciones
+eqho--sections--navbar-menu#openMobileContent"
+data-eqho--sections--navbar-menu-variant-param="subscriptions"
+>
+Tienda de descargas
+eqho--sections--navbar-menu#openMobileContent"
+data-eqho--sections--navbar-menu-variant-param="download-store"
+>
+Revista
+eqho--sections--navbar-menu#openMobileContent"
+data-eqho--sections--navbar-menu-variant-param="magazine"
+>
+Las apps de Qobuz
+eqho--sections--navbar-menu#openMobileContent"
+data-eqho--sections--navbar-menu-variant-param="our-apps"
+>
+Qobuz Club
+Quiénes somos
+Acerca de Qobuz
+Qobuz Lifestyle
+Leer nuestro blog
+Redes sociales
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-40 !size-44 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en Facebook
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-40 !size-44 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en Instagram
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-40 !size-44 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en YouTube
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-40 !size-44 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en TikTok
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-40 !size-44 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en X (Twitter)
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-40 !size-44 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en LinkedIn
+Planes de streaming
+Todos los planes
+Studio Duo
+Studio Family
+Studio Student
+Streaming & Descargas
+Sublime
+Explorar por género
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="all-genres">
+Todo
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-pop-rock">
+Pop/Rock
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-jazz">
+Jazz
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-classique">
+Música Clásica
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-electro">
+Electrónica
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-soul-funk-rap">
+Soul/Funk/R&B
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-metal">
+Metal
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-rap-hip-hop">
+Hip-Hop/Rap
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-blues-country-folk">
+Blues/Country/Folk
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-musique-de-films">
+Bandas sonoras
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-musiques-du-monde">
+World music
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-amerique-latine">
+América Latina
+eqho--modules--navbar-content#showMobileGenrePanel" data-eqho--modules--navbar-content-genre-id-param="genre-flamenco">
+Flamenco
+Todo
+Selecciones
+Todas las playlists
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Todo
+En calidad Hi-Res
+Por Premio
+Por género
+Pop/Rock
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Jazz
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Música Clásica
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Electrónica
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Soul/Funk/R&B
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Metal
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Géneros
+Hard Rock
+Hip-Hop/Rap
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Blues/Country/Folk
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Bandas sonoras
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+World music
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+América Latina
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Flamenco
+Selecciones
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Actualidad
+Todos los artículos
+Panoramas
+Todos los panoramas
+Hi-Fi
+Todo sobre Hi-Fi
+Banco de pruebas
+Tutoriales
+Entrevistas
+Todas las entrevistas
+Lecturas
+Videos
+One Cover One Word
+Más
+Acerca de
+Colaboradores
+Plataformas
+Escritorio & Web
+Móvil & Tablet
+Audio
+Televisores y reproductores multimedia
+Auto
+Mi cuenta
+Mi plan de streaming
+Los miembros de mi plan
+Mis compras
+Mi cartera
+Mis favoritos
+Mi información personal
+Mis notificaciones y gustos
+Mis facturas
+Mis vales
+Mis servicios externos
+¿Necesitas ayuda?
+FAQ
+Contáctanos
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer bg-button-primary-background-default text-button-primary-content-default hover:bg-button-primary-background-hover hover:text-button-primary-content-hover active:bg-button-primary-background-pressed active:text-button-primary-content-pressed"
+>
+Cerrar sesión
+eqho--sections--navbar-menu#hoverOverlay click->eqho--sections--navbar-menu#closePanel"
+>
+eqho--sections--navbar-menu#onPanelKeydown"
+>
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--modules--navbar-content#close" class="inline-flex items-center justify-center size-40 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed order-last ml-auto -mr-8 shrink-0"
+>
+Cerrar menú
+Quiénes somos
+Acerca de Qobuz
+Qobuz Lifestyle
+Leer nuestro blog
+Redes sociales
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-xs h-26 gap-6 px-8 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-30 !size-36 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en Facebook
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-xs h-26 gap-6 px-8 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-30 !size-36 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en Instagram
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-xs h-26 gap-6 px-8 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-30 !size-36 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en YouTube
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-xs h-26 gap-6 px-8 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-30 !size-36 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en TikTok
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-xs h-26 gap-6 px-8 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-30 !size-36 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en X (Twitter)
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-xs h-26 gap-6 px-8 cursor-pointer border border-separator-border bg-button-secondary-background-default text-button-secondary-content-default hover:border-transparent hover:bg-button-secondary-background-hover hover:text-button-secondary-content-hover active:border-transparent active:bg-button-secondary-background-pressed active:text-button-secondary-content-pressed !rounded-full !p-0 aspect-square !size-30 !size-36 hover:!border-separator-border active:!border-separator-border" target="_blank" rel="noopener"
+>
+Abrir Qobuz en LinkedIn
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--modules--navbar-content#close" class="inline-flex items-center justify-center size-40 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed order-last ml-auto -mr-8 shrink-0"
+>
+Cerrar menú
+Planes de streaming
+Todos los planes
+Studio Duo
+Studio Family
+Studio Student
+Streaming & Descargas
+Sublime
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--modules--navbar-content#close" class="inline-flex items-center justify-center size-40 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed order-last ml-auto -mr-8 shrink-0"
+>
+Cerrar menú
+Explorar por género
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="all-genres" data-eqho--modules--navbar-content-target="genreItem">
+Todo
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-pop-rock" data-eqho--modules--navbar-content-target="genreItem">
+Pop/Rock
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-jazz" data-eqho--modules--navbar-content-target="genreItem">
+Jazz
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-classique" data-eqho--modules--navbar-content-target="genreItem">
+Música Clásica
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-electro" data-eqho--modules--navbar-content-target="genreItem">
+Electrónica
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-soul-funk-rap" data-eqho--modules--navbar-content-target="genreItem">
+Soul/Funk/R&B
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-metal" data-eqho--modules--navbar-content-target="genreItem">
+Metal
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-rap-hip-hop" data-eqho--modules--navbar-content-target="genreItem">
+Hip-Hop/Rap
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-blues-country-folk" data-eqho--modules--navbar-content-target="genreItem">
+Blues/Country/Folk
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-musique-de-films" data-eqho--modules--navbar-content-target="genreItem">
+Bandas sonoras
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-musiques-du-monde" data-eqho--modules--navbar-content-target="genreItem">
+World music
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-amerique-latine" data-eqho--modules--navbar-content-target="genreItem">
+América Latina
+eqho--modules--navbar-content#showPanel focusin->eqho--modules--navbar-content#showPanel keydown->eqho--modules--navbar-content#onGenreKeydown" data-eqho--modules--navbar-content-genre-id-param="genre-flamenco" data-eqho--modules--navbar-content-target="genreItem">
+Flamenco
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Todas las playlists
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Todo
+div>div:last-child]:opacity-0"
+aria-label="Todo"
+>
+En calidad Hi-Res
+Por Premio
+Por género
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+Géneros
+div>div:last-child]:opacity-0"
+aria-label="Géneros"
+>
+Hard Rock
+div>div:last-child]:opacity-0"
+>
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--modules--navbar-content#onGenrePanelKeydown"
+class="flex gap-48 items-start data-[state=closed]:hidden data-[state=open]:animate-fade-in motion-reduce:animate-none"
+>
+Selecciones
+div>div:last-child]:opacity-0"
+aria-label="Selecciones"
+>
+Ofertas actuales
+Novedades
+Reseñado en la prensa
+Pedidos anticipados
+Lanzamientos remasterizados
+Qobuzissime
+Discografía Ideal Qobuz
+Colección Qobuz Hi-Res 24-Bit
+Colección Qobuz DSD
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--modules--navbar-content#close" class="inline-flex items-center justify-center size-40 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed order-last ml-auto -mr-8 shrink-0"
+>
+Cerrar menú
+Actualidad
+Todos los artículos
+Panoramas
+Todos los panoramas
+Hi-Fi
+Todo sobre Hi-Fi
+Banco de pruebas
+Tutoriales
+Entrevistas
+Todas las entrevistas
+Lecturas
+Videos
+One Cover One Word
+Más
+Acerca de
+Colaboradores
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--modules--navbar-content#close" class="inline-flex items-center justify-center size-40 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed order-last ml-auto -mr-8 shrink-0"
+>
+Cerrar menú
+Plataformas
+Escritorio & Web
+Móvil & Tablet
+Audio
+Televisores y reproductores multimedia
+Auto
+Escuchar ahora
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer bg-button-primary-background-default text-button-primary-content-default hover:bg-button-primary-background-hover hover:text-button-primary-content-hover active:bg-button-primary-background-pressed active:text-button-primary-content-pressed" target="_blank" rel="noopener"
+>
+Abrir el Web Player
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured click->eqho--modules--navbar-content#close" class="inline-flex items-center justify-center size-40 transition-colors duration-200 ease-out select-none focus cursor-pointer text-button-icon-primary-default hover:text-button-icon-primary-hover active:text-button-icon-primary-pressed order-last ml-auto -mr-8 shrink-0"
+>
+Cerrar menú
+Mi cuenta
+Mi plan de streaming
+Los miembros de mi plan
+Mis compras
+Mi cartera
+Mis favoritos
+Mi información personal
+Mis notificaciones y gustos
+Mis facturas
+Mis vales
+Mis servicios externos
+¿Necesitas ayuda?
+FAQ
+Contáctanos
+eqho--bases--button#click:captured keydown->eqho--bases--button#keydown:captured" class="transition-colors duration-200 ease-out select-none rounded-m focus flex min-w-0 max-w-full justify-center items-center overflow-hidden w-fit typo-main-button-default-s h-32 gap-8 px-12 cursor-pointer bg-button-primary-background-default text-button-primary-content-default hover:bg-button-primary-background-hover hover:text-button-primary-content-hover active:bg-button-primary-background-pressed active:text-button-primary-content-pressed"
+>
+Cerrar sesión
+Qobuz Studio
+Streaming ilimitado de música en Lossless & Hi-Res
+1 mes gratis
+Más de 100 millones de pistas
+Streaming en calidad Studio (Lossless, FLAC de 24 bits hasta 192 kHz.)
+Contenido editorial original
+Cámbiate a Qobuz, la única plataforma de música que combina audio en alta resolución inigualable con una remuneración más justa para los artistas.
+Studio
+Solo
+Tu música en total tranquilidad
+1 cuenta
+Tu suscripción actual
+12,49€ / Mes
+-17%
+por una suscripción anual que pagas de una sola vez
+Tu suscripción actual
+14,99€ / Mes
+por una suscripción mensual sin compromiso
+Studio
+Duo
+Tu música con otra persona
+2 cuentas*
+Tu suscripción actual
+17,50€ / Mes
+-12%
+por una suscripción anual que pagas de una sola vez
+Tu suscripción actual
+19,99€ / Mes
+por una suscripción mensual sin compromiso
+Studio
+Family
+La música en alta calidad para todos
+6 cuentas*
+Tu suscripción actual
+20,83€ / Mes
+-17%
+por una suscripción anual que pagas de una sola vez
+Tu suscripción actual
+24,99€ / Mes
+por una suscripción mensual sin compromiso
+Studio
+Student
+Música de alta calidad para estudiantes
+1 cuenta
+Tu suscripción actual
+5,99€ / Mes
+por una suscripción mensual sin compromiso
+*personas que viven en el mismo hogar
+Probar gratis
+¿Quieres coleccionar tus álbumes favoritos en alta calidad y con descuentos especiales? → Descubre Sublime desde 16,66€ al mes.
+Ayuda
+Configuración de cookies
+Web Player
+¿Quiénes somos?
+Oportunidades laborales
+El Blog Qobuz
+Espacio de prensa
+Negocio y partners
+Qobuz Society
+Código Ético IA
+Ofertas de streaming
+Qobuz Duo
+Oferta Qobuz Family
+Suscripción Qobuz Student Nuestro ecosistema
+Qobuz Connect
+Descarga Qobuz
+Regala Qobuz
+Descubrir la alta calidad de sonido
+Tienda de descargas
+Qobuz Lifestyle
+Xandrie
+© 2026 XANDRIE SA - 45 rue de Delizy, 93692 Pantin CEDEX, France
+Informaciones legales
+Condiciones generales de utilización y de venta
+Protección de datos personales
+Cookies
+Accesibilidad: no conforme
+Spain
+Argentina
+Australia
+Austria
+Belgium
+Français
+Nederlands
+Brazil
+Canada
+English
+Français
+Chile
+Colombia
+Denmark
+Finland
+France
+Germany
+Ireland
+Italy
+Japan
+Luxembourg
+Deutsch
+Français
+Mexico
+Netherlands
+New Zealand
+Norway
+Poland
+Portugal
+Spain
+Sweden
+Switzerland
+Deutsch
+Français
+United Kingdom
+United States

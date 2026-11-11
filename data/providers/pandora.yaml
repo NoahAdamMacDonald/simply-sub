@@ -207,7 +207,8 @@ plans:
         sourceUrl: https://help.pandora.com/s/article/000002262?language=en_US
 
 # Terms and policies, read 2026-11-09 (M11.15): its Services Terms of Use and Sirius XM's Privacy Policy (both through a
-# US exit; the policy covers SiriusXM's other services too, a shared document once SiriusXM joins the catalog), and its
+# US exit; pandora.com/privacy is the same policy as siriusxm.com/privacy-policy, re-read 2026-11-11 and rated once as
+# a shared document, data/policies/siriusxm-privacy.yaml), and its
 # help centre's articles on the 2026 rate change, cancelling, refunds, billing, deleting an account, offline mode and
 # Premium Family, its Subscription Terms (through a US exit) and its sign-up form, whose line names only the Terms of
 # Use and the Privacy Policy. Its Premium Trial Terms are a 90-day trial code's, with no topic beyond these. Its

@@ -68,15 +68,9 @@ ratings:
   # paragraph says its support chat's AI learns from the chats. Good, as training only on what you send it (like
   # feedback), which you avoid by not using the chat; nothing read says your listening, posts or voice train AI.
   - topic: privacy.ai-training
-    tier: good
-    reason: 'Its support chat may be an AI that learns from your chats with it. If you don’t want that, it asks you not to use the chat.'
-    sources:
-      - url: https://www.siriusxm.com/privacy-policy
-        quote: 'During a Customer Support Chat, you may be interacting with a non-human, artificial intelligence application (the “AI Agent”).'
-      - url: https://www.siriusxm.com/privacy-policy
-        quote: 'The chat session, including any information contained within it, may be retained and used by the AI Agent to learn and improve its ability to support customers of the Services.'
-      - url: https://www.siriusxm.com/privacy-policy
-        quote: 'If you do not consent to such recording, use, and retention, please do not use the chat assistance feature.'
+    status: not-stated
+    reason: 'It doesn’t say whether it trains AI on what you listen to or send. Its support chat’s AI learns from chats with it, which is part of running its support, not training on your listening.'
+    pages: [https://www.siriusxm.com/privacy-policy]
     lastVerified: 2026-11-11
   - topic: privacy.data-retention
     tier: poor

@@ -29,6 +29,39 @@ website: https://www.qobuz.com
 domains: [help.qobuz.com]
 category: music
 spendCategory: streaming
+# Where it's sold: "Qobuz is currently available in 27 countries" (its help centre's Where is Qobuz available?, updated
+# this week), listed there; its terms' article 13 still lists 20 (without Argentina, Brazil, Chile, Colombia, Mexico,
+# Poland and Portugal), and its 2026 press release names Poland "its 27th country".
+availableIn:
+  [
+    AR,
+    AU,
+    AT,
+    BE,
+    BR,
+    CA,
+    CL,
+    CO,
+    DK,
+    FI,
+    FR,
+    DE,
+    IE,
+    IT,
+    JP,
+    LU,
+    NL,
+    MX,
+    NZ,
+    NO,
+    PL,
+    PT,
+    ES,
+    SE,
+    CH,
+    GB,
+    US,
+  ]
 billingCurrency:
   {
     CA: CAD,
@@ -307,7 +340,7 @@ plans:
         lastVerified: 2026-11-11
         sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/studio
   - id: qobuz.studio-duo
-    name: Studio Duo
+    name: Duo
     link: https://www.qobuz.com/ca-en/music/streaming/offers/studio
     features:
       ad-free: true
@@ -506,7 +539,7 @@ plans:
         lastVerified: 2026-11-11
         sourceUrl: https://www.qobuz.com/it-it/music/streaming/offers/duo
   - id: qobuz.studio-family
-    name: Studio Family
+    name: Family
     link: https://www.qobuz.com/ca-en/music/streaming/offers/studio
     features:
       ad-free: true
@@ -526,7 +559,7 @@ plans:
           name: The Streaming Subscription Offers
           url: https://help.qobuz.com/en/articles/10135-the-streaming-subscription-offers
         lastVerified: 2026-11-11
-    notes: 'Up to 6 accounts for people living in the same household. Its yearly price is shown only at checkout.'
+    notes: 'Up to 6 accounts for people living in the same household. Its pages give its yearly plan only per month, with no total, so only the monthly price is listed.'
     prices:
       - region: CA
         currency: CAD
@@ -1011,9 +1044,9 @@ policies:
       sources:
         - url: https://www.qobuz.com/ca-en/discover/legals/privacy
           quote: 'Partners and third parties with whom you have authorized data sharing'
-        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+        - url: https://www.qobuz.com/ca-en/music/streaming/offers/duo
           quote: 'Some partners do not ask for your consent to process your data and rely on their legitimate business interest.'
-        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+        - url: https://www.qobuz.com/ca-en/music/streaming/offers/duo
           quote: 'You can withdraw your consent or object to data processing based on legitimate interest at any time by clicking on “Learn More” or in our Privacy Policy on this website.'
       action:
         name: How to refuse cookies (its cookies charter)
@@ -1027,7 +1060,7 @@ policies:
           quote: 'QOBUZ streaming offers are paid subscription offers to online music listening service without advertisements'
         - url: https://www.qobuz.com/ca-en/page/charte_cookies
           quote: 'We use these cookies to offer you advertisements that may be relevant to you and correspond to your interests.'
-        - url: https://www.qobuz.com/ca-en/discover/legals/privacy
+        - url: https://www.qobuz.com/ca-en/music/streaming/offers/duo
           quote: 'With your agreement, we and our 15 partners use cookies or similar technologies to store, access, and process personal data like your visit on this website, IP addresses and cookie identifiers.'
       lastVerified: 2026-11-11
     - topic: privacy.ai-training

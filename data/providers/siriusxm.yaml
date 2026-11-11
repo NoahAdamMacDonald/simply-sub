@@ -64,8 +64,10 @@ owner:
     lastVerified: 2026-11-11
   lastVerified: 2026-11-11
 # Ways to pay (M11.5), read 2026-11-11: its payment help names the networks and debit cards; the Customer Agreement a
-# prepaid service card or gift card. Diner's Club is `other`. Paper invoices paid by cheque exist for some plans
-# ("Invoice billing is not available for all Plans"), so they aren't listed.
+# prepaid service card or gift card, and Apple's App Store. Diner's Club is `other`. Also named, in words the catalog's
+# checks don't read as those ways: "ACH payment (electronic debit from your account)" and cheques for invoiced plans
+# ("Invoice billing is not available for all Plans"), Roku ("billed through Roku") and T-Mobile ("billed by T-Mobile",
+# How do I manage or cancel my service?), so they're named here only.
 acceptedNetworks:
   US:
     networks: [mastercard, visa, amex, discover, other, unionpay, jcb]
@@ -78,6 +80,11 @@ paymentMethods:
     url: https://www.siriusxm.com/help/payment-and-billing-options
     quotes:
       - 'SiriusXM accepts a variety of credit cards, including MasterCard, Visa, American Express, Discover, Diner’s Club, China Union Pay, and JCB credit cards, as well as all debit cards.'
+  - methods: [app-store]
+    page: Customer Agreement
+    url: https://www.siriusxm.com/customer-agreement
+    quotes:
+      - 'App Store (iOS) subscribers: You agree that Apple, and its subsidiaries, are third party beneficiaries of this Customer Agreement'
   - methods: [gift-card]
     page: Customer Agreement
     url: https://www.siriusxm.com/customer-agreement
@@ -114,7 +121,7 @@ perks:
 plans:
   - id: siriusxm.free
     name: Free Access
-    link: https://www.siriusxm.com/free-trial
+    link: https://www.siriusxm.com/customer-agreement
     features:
       ad-free: false
       music.on-demand: false
@@ -410,7 +417,7 @@ addOns:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-11
-        sourceUrl: https://www.siriusxm.com/help/allmusic
+        sourceUrl: https://www.siriusxm.com/help/all-music
   - id: siriusxm.talk
     name: Talk
     prices:
@@ -421,7 +428,7 @@ addOns:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-11
-        sourceUrl: https://www.siriusxm.com/help/allmusic
+        sourceUrl: https://www.siriusxm.com/help/all-music
   - id: siriusxm.news
     name: News
     prices:
@@ -432,7 +439,7 @@ addOns:
         intervalCount: 1
         autoRenew: true
         lastVerified: 2026-11-11
-        sourceUrl: https://www.siriusxm.com/help/allmusic
+        sourceUrl: https://www.siriusxm.com/help/all-music
 
 # The policies block for the US provider `siriusxm` (Sirius XM Radio LLC), to go after everything else in
 # data/providers/siriusxm.yaml. Every rating is for every plan; notes.md suggests one more for siriusxm.platinum (its
@@ -588,8 +595,8 @@ policies:
           quote: 'If you do not agree to any change to this Agreement, you must cancel your Subscription(s) as set forth in Section 4 and discontinue using the Service.'
       lastVerified: 2026-11-11
     - topic: legal.account-closure
-      tier: bad
-      reason: 'It can cancel your subscription for any reason it chooses, and promises no notice and no refund.'
+      tier: poor
+      reason: 'It can cancel your subscription for any reason it chooses. Its agreement doesn’t promise you notice first.'
       sources:
         - url: https://www.siriusxm.com/customer-agreement
           quote: 'We may cancel your Subscription if you fail to pay for your Subscription, breach this Agreement, or for any other reason in our sole discretion.'

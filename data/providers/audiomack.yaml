@@ -13,7 +13,8 @@
 # "at 320kpbs while on Wi-Fi" (What is the music quality/bitrate on Audiomack?); without Plus you can "offline a
 # limited selection of songs", and Plus adds "unlimited downloads, higher-quality audio streaming, song lyrics" (What is
 # a premium download?); anyone can "import and listen to audio files stored on your device directly in the Audiomack
-# app" (How do I use Audiomack's local file player?). No page names live radio or a skip limit.
+# app" (How do I use Audiomack's local file player?); every page's footer calls it "an on-demand music streaming and
+# audio discovery platform". No page names live radio or a skip limit.
 id: audiomack
 name: Audiomack
 website: https://audiomack.com
@@ -79,10 +80,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
-      music.unlimited-skips: false
+      music.unlimited-skips: true
       music.own-library: true
       music.lyrics: false
       music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays songs on demand ("an on-demand music streaming and audio discovery platform", every page’s footer), and no page names a skip limit, so it is unlimited, as SoundCloud’s free plan.'
+        page:
+          name: Audiomack+
+          url: https://audiomack.com/plus
+        lastVerified: 2026-11-11
     notes: With ads, and not its full catalogue. You can download a limited selection of songs.
     prices:
       - region: CA

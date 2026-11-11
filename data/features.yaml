@@ -108,7 +108,8 @@
 # Skips, your own music, lyrics and live radio (the owner's choice of 2026-11-11), each from the provider's plan pages
 # or help centre. Your own music is playing files you have (uploads, a synced library, local files), not publishing
 # tracks for others (SoundCloud's, Tidal's and Mixcloud's uploads). Live radio is a live broadcast to tune into: a
-# radio station or a host's live session (Apple Music Radio, Mixcloud Live, Anghami's Live Radio).
+# radio station or a host's live session (Apple Music Radio, Mixcloud Live, Anghami's Live Radio). They're optional
+# comparisons, so no requiredIn: a provider whose pages don't say leaves them out.
 - id: music.unlimited-skips
   name: Unlimited skips
   category: music
