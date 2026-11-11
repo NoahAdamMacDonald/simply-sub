@@ -90,6 +90,13 @@
   source: own
   status: done
   date: 2026-11-11
+- id: sportsnet-plus
+  name: Sportsnet+
+  website: https://www.sportsnetplus.ca
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-11
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
