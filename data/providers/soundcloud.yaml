@@ -17,6 +17,9 @@
 # Go+'s full catalog a perk; the pull request asks the owner. Free listeners "can stream 96k and 160k" (Audio
 # Streaming Formats), so Standard. No audiobooks.
 
+# Skips, your own music, lyrics and live radio, read 2026-11-11: no page names a skip limit (the Go pages, Shuffling
+# and Repeating tracks: inferred); its uploads publish your tracks for others, not a music library; no page names
+# lyrics or live radio.
 id: soundcloud
 name: SoundCloud
 website: https://soundcloud.com
@@ -94,7 +97,17 @@ plans:
       music.on-demand: true
       music.offline: false
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
     inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays tracks on demand, and neither the Go pages nor the help centre names a skip limit, so it is unlimited.'
+        page:
+          name: 'Shuffling and Repeating tracks'
+          url: https://help.soundcloud.com/hc/en-us/articles/115003449687-Shuffling-and-Repeating-tracks
+        lastVerified: 2026-11-11
       music.on-demand:
         reason: 'Its terms describe a platform where anyone listens to what others upload, free with ads, and no page limits free listeners to shuffle play or a number of skips.'
         page:
@@ -119,6 +132,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays tracks on demand, and neither the Go pages nor the help centre names a skip limit, so it is unlimited.'
+        page:
+          name: 'Shuffling and Repeating tracks'
+          url: https://help.soundcloud.com/hc/en-us/articles/115003449687-Shuffling-and-Repeating-tracks
+        lastVerified: 2026-11-11
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.
       - region: CA
@@ -218,6 +242,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays tracks on demand, and neither the Go pages nor the help centre names a skip limit, so it is unlimited.'
+        page:
+          name: 'Shuffling and Repeating tracks'
+          url: https://help.soundcloud.com/hc/en-us/articles/115003449687-Shuffling-and-Repeating-tracks
+        lastVerified: 2026-11-11
     perks: [full-catalog, dj-apps]
     prices:
       # Read 2026-11-09: Canada from Canada; the others through each country's exit.

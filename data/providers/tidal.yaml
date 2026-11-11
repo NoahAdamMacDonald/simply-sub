@@ -22,6 +22,11 @@
 # Coverage: tidal.* in CA, GB, AU, NZ, IE, DE, FR, NL, ES and IT: tidal.com refuses this machine and shows nothing on an
 # ordinary connection, and its help centre prices the US only (2026-11-09), so those countries' prices stay unread.
 
+# Skips, your own music, lyrics and live radio, read 2026-11-11: "Each line of the song is highlighted as it plays"
+# (View lyrics, from its help centre's API, which answers a plain fetch); Upload is for "your own original audio"
+# ("Upload tracks you own the rights to", Tidal Upload), publishing rather than your music library; a Live session
+# "may be also featured on TIDAL Services and visible in TIDAL clients to any TIDAL user" (the archive's privacy
+# notice). No page names a skip limit (inferred).
 id: tidal
 name: Tidal
 website: https://tidal.com
@@ -105,6 +110,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: true
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any track you choose, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: 'Pricing (the Internet Archive’s copy of 2026-10-31)'
+          url: https://tidal.com/pricing
+        lastVerified: 2026-11-11
     prices:
       - region: US
         currency: USD
@@ -125,6 +141,17 @@ plans:
       music.offline: true
       audiobooks.included: false
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: true
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any track you choose, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: 'Pricing (the Internet Archive’s copy of 2026-10-31)'
+          url: https://tidal.com/pricing
+        lastVerified: 2026-11-11
     notes: You and up to 5 members, each with their own account in your country.
     prices:
       - region: US
@@ -145,6 +172,17 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: true
+    inferred:
+      music.unlimited-skips:
+        reason: 'Every plan plays any track you choose, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: 'Pricing (the Internet Archive’s copy of 2026-10-31)'
+          url: https://tidal.com/pricing
+        lastVerified: 2026-11-11
     perks: [dj-software]
     notes: An Individual account that also plays the full catalog in compatible DJ software.
     prices:

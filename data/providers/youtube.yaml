@@ -43,6 +43,11 @@
 # Coverage: youtube.premium-two-person in CA, US, GB, DE, ES and IT: the Two-person plan "is currently only available
 # in" a list of countries that has Australia and France and none of these (its article, 2026-11-04).
 
+# Skips, your own music, lyrics and live radio (YouTube Music's plans), read 2026-11-11 with Edge: ad-supported
+# YouTube Music has "Queuing, repeat, and unlimited skipping" (What is YouTube Music?); "You can play uploaded songs in
+# the background, ad-free and offline—even if you are not currently a YouTube Music Premium subscriber" (Upload music to
+# your YouTube Music library); "You can view translated lyrics to any song on YouTube Music" (Customize your music &
+# podcasts). No live radio named. Premium Lite isn't a music plan, so it has none of these.
 id: youtube
 name: YouTube
 website: https://www.youtube.com
@@ -277,6 +282,10 @@ plans:
       audio.quality: standard
       music.on-demand: true
       music.offline: false
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     inferred:
       audio.quality:
         reason: 'Only YouTube Music Premium members can choose a bitrate, so a listener without it keeps the "Normal" one: 128kbps.'
@@ -317,6 +326,10 @@ plans:
       audio.quality: high
       music.on-demand: true
       music.offline: true
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -455,6 +468,10 @@ plans:
       music.on-demand: true
       music.offline: true
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -562,6 +579,10 @@ plans:
       music.on-demand: true
       music.offline: true
       account.users: 2
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     inferred:
       streaming.french-content:
         reason: "YouTube's videos come from people across the globe, in French among many languages; no page counts them."
@@ -710,6 +731,10 @@ plans:
       audio.quality: high
       music.on-demand: true
       music.offline: true
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     perks: [background-play]
     notes: "YouTube Music Premium alone: music without ads, offline and in the background, but not YouTube's other videos."
     prices:
@@ -845,6 +870,10 @@ plans:
       music.on-demand: true
       music.offline: true
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     perks: [background-play]
     notes: YouTube Music Premium shared with up to 5 others in your household, aged 13 or older.
     prices:
@@ -950,6 +979,10 @@ plans:
       music.on-demand: true
       music.offline: true
       account.users: 2
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: false
     perks: [background-play]
     notes: YouTube Music Premium shared with one other member of your household, aged 13 or older.
     prices:

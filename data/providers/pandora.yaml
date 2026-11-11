@@ -18,6 +18,10 @@
 # audio quality (its help names only an "Audio Quality" setting), so audio quality is a third party's: SoundGuys lists
 # its three settings, the highest "High (192 kbps MP3)", so Standard for all (M11.16). No audiobooks.
 
+# Skips, your own music, lyrics and live radio, read 2026-11-09 and 2026-11-11 with Edge: Premium and Plus have
+# "Unlimited skips", Free "Unlimited skips *" with "*Unlock by viewing an ad" (2026 Pandora Subscription Rate Change),
+# so not unlimited; "Free Pandora listeners and Pandora Plus subscribers can view lyrics" and "Pandora Premium
+# subscribers can simply scroll down" (Lyrics). No page names uploads or live radio: its stations are made from songs.
 id: pandora
 name: Pandora
 website: https://www.pandora.com
@@ -86,6 +90,10 @@ plans:
       music.on-demand: false
       music.offline: false
       audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
     thirdParty:
       audio.quality:
         publisher: SoundGuys
@@ -111,6 +119,10 @@ plans:
       music.on-demand: false
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
     thirdParty:
       audio.quality:
         publisher: SoundGuys
@@ -136,6 +148,10 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
     thirdParty:
       audio.quality:
         publisher: SoundGuys
@@ -161,6 +177,10 @@ plans:
       music.offline: true
       audiobooks.included: false
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: false
+      music.lyrics: true
+      music.live-radio: false
     thirdParty:
       audio.quality:
         publisher: SoundGuys

@@ -28,6 +28,10 @@
 # brings "up to six accounts" with Plus (Anghami Family Plan Subscription Guide). Dolby Atmos plays on some songs and
 # devices, which the registry doesn't record. No audiobooks.
 
+# Skips, your own music, lyrics and live radio, read from the help centre (2026-11-09, and its API 2026-11-11):
+# Anghami Plus's "Skip unlimited songs", "Live Radio" ("Host your own live broadcast") (What Are the Exclusive Features
+# of Anghami Plus?) and "You can view lyrics and sing them" (Features of Anghami Free Plan, under Plus); uploading
+# your own music "is available only for Anghami Plus subscribers" (Upload your own music and sync to Mobile).
 id: anghami
 name: Anghami
 website: https://www.anghami.com
@@ -131,6 +135,10 @@ plans:
       music.on-demand: true
       music.offline: false
       audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: false
     inferred:
       audio.quality:
         reason: 'Its quality settings are 96, 160 and 320 kbit/s, and its help names the higher bitrate as a Plus feature, so Free’s best is 160 kbit/s, Standard.'
@@ -243,6 +251,10 @@ plans:
       music.on-demand: true
       music.offline: true
       audiobooks.included: false
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
     notes: Outside the Middle East and North Africa, Arabic songs only, at a lower price outside North America.
     prices:
       - region: CA
@@ -375,6 +387,10 @@ plans:
       music.offline: true
       audiobooks.included: false
       account.users: 6
+      music.unlimited-skips: true
+      music.own-library: true
+      music.lyrics: true
+      music.live-radio: true
     notes: Plus for up to six accounts in one household. Outside the Middle East and North Africa, Arabic songs only.
     prices:
       - region: CA
