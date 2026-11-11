@@ -81,6 +81,12 @@ export const wikidataClasses: readonly WikidataClass[] = [
   { qid: 'Q27973', name: 'ridesharing company', category: 'delivery' },
   { qid: 'Q65295049', name: 'online taxi service', category: 'delivery' },
   { qid: 'Q848436', name: 'home automation', category: 'home' },
+  // 2026-11-11, the owner's choice. Device protection's companies (Asurion, SquareTrade) are plain businesses there,
+  // so its class has no instances yet: its providers come from the owner's list.
+  { qid: 'Q4379942', name: 'extended warranty', category: 'protection' },
+  { qid: 'Q46994', name: 'telemedicine', category: 'health' },
+  { qid: 'Q3081320', name: 'online pharmacy', category: 'health', limit: 15 },
+  { qid: 'Q37929123', name: 'electric vehicle charging network', category: 'car', limit: 15 },
   // Telecom waits for a design of its own (PROJECT-PLAN M11), and finance for M11.10: the best-known few.
   { qid: 'Q1941618', name: 'mobile network operator', category: 'telecom', limit: 15 },
   { qid: 'Q11371', name: 'internet service provider', category: 'telecom', limit: 15 },

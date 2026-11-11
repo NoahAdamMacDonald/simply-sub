@@ -1435,6 +1435,140 @@
   aliases: [alarm monitoring, monitoring centre, emergency dispatch]
   requiredIn: [home]
 
+# ── Health & telehealth (the owner's choice of 2026-11-11) ─────────────────────
+# Virtual care memberships and health subscriptions: Maple, Teladoc, Amazon One Medical and RxPass, Hims & Hers and the
+# like, ahead of the full catalog's research; each provider's values come from its own pages. A plan's people covered
+# is account.users, and where it's offered (often by province or state) is availableIn and its prices' regions.
+- id: health.services
+  name: Care included
+  category: health
+  type: set
+  values:
+    - {
+        id: virtual-visits,
+        name: Doctor visits by video or phone,
+        aliases: [virtual care, telehealth visits],
+      }
+    - { id: prescriptions, name: Prescriptions and renewals, aliases: [prescription refills] }
+    - { id: mental-health, name: Mental health care, aliases: [therapy, counselling] }
+    - { id: specialists, name: Specialists, aliases: [dermatology, specialist referrals] }
+    - { id: lab-tests, name: Lab tests, aliases: [blood work] }
+    - { id: pharmacy-delivery, name: Medication delivery, aliases: [mail-order pharmacy] }
+  aliases: [telehealth, virtual care, online doctor]
+  requiredIn: [health]
+- id: health.unlimited-visits
+  name: Unlimited visits
+  category: health
+  type: boolean
+  aliases: [no visit fees, unlimited appointments]
+- id: health.always-open
+  name: Open 24/7
+  category: health
+  type: boolean
+  aliases: [24/7 care, around the clock]
+
+# ── Device protection & warranties (the owner's choice of 2026-11-11) ──────────
+# Protection plans paid by the month or year: AppleCare+, Samsung Care+, carriers' device protection, Asurion and the
+# like. A deductible or service fee per claim is the plan's notes until a provider needs a feature for it.
+- id: protection.devices
+  name: Devices covered
+  category: protection
+  type: set
+  values:
+    - { id: phone, name: Phones, aliases: [smartphone, iphone] }
+    - { id: computer, name: Computers, aliases: [laptop, mac, pc] }
+    - { id: tablet, name: Tablets, aliases: [ipad] }
+    - { id: watch, name: Watches, aliases: [smartwatch, apple watch] }
+    - { id: audio, name: Headphones and speakers, aliases: [airpods, earbuds] }
+    - { id: tv, name: TVs and home electronics, aliases: [television, game console] }
+    - { id: appliances, name: Home appliances, aliases: [fridge, washer] }
+  aliases: [covered devices, what is covered]
+  requiredIn: [protection]
+- id: protection.accidental-damage
+  name: Accidental damage
+  category: protection
+  type: boolean
+  aliases: [drops, spills, cracked screen]
+  requiredIn: [protection]
+- id: protection.theft-loss
+  name: Theft and loss
+  category: protection
+  type: boolean
+  aliases: [lost phone, stolen device]
+- id: protection.device-count
+  name: Devices per plan
+  category: protection
+  type: number
+  unit: devices
+  tiers:
+    - { id: 2+, name: More than one device, min: 2 }
+  aliases: [multi-device plan]
+- id: protection.claims
+  name: Claims a year
+  category: protection
+  type: number
+  unit: claims a year
+  tiers:
+    - { id: 2+, name: Two or more claims a year, min: 2 }
+  aliases: [incidents, repairs a year]
+
+# ── Car & driving (the owner's choice of 2026-11-11) ───────────────────────────
+# Connected-car plans (OnStar, Tesla Premium Connectivity, BMW ConnectedDrive), driver-assistance subscriptions, EV
+# charging memberships (Tesla Supercharging, FLO, Electrify America Pass+), roadside assistance (CAA, AAA) and parking
+# apps, ahead of the full catalog's research.
+- id: car.services
+  name: What's included
+  category: car
+  type: set
+  values:
+    - {
+        id: connected-car,
+        name: Remote app and connected features,
+        aliases: [remote start, vehicle location],
+      }
+    - { id: driver-assistance, name: Driver assistance, aliases: [self-driving, autopilot] }
+    - { id: ev-charging, name: EV charging, aliases: [charging membership, supercharging] }
+    - {
+        id: roadside-assistance,
+        name: Roadside assistance,
+        aliases: [towing, battery boost, flat tire],
+      }
+    - { id: parking, name: Parking, aliases: [parking app] }
+    - { id: in-car-data, name: In-car internet, aliases: [wifi hotspot, car hotspot] }
+    - { id: navigation, name: Live navigation and traffic, aliases: [traffic, map updates] }
+  aliases: [car subscription, vehicle services]
+  requiredIn: [car]
+- id: car.charging-discount
+  name: Lower charging prices
+  category: car
+  type: boolean
+  aliases: [discounted charging, member charging rates]
+- id: car.roadside-calls
+  name: Roadside calls a year
+  category: car
+  type: number
+  unit: calls a year
+  tiers:
+    - { id: 4+, name: 4 or more a year, min: 4 }
+  aliases: [service calls, callouts]
+- id: car.towing-distance
+  name: Towing distance
+  category: car
+  type: number
+  unit: km
+  tiers:
+    - { id: 100+, name: 100 km or more, min: 100 }
+    - { id: 200+, name: 200 km or more, min: 200 }
+  aliases: [tow distance]
+- id: car.vehicles
+  name: Vehicles covered
+  category: car
+  type: number
+  unit: vehicles
+  tiers:
+    - { id: 2+, name: More than one vehicle, min: 2 }
+  aliases: [cars covered, household vehicles]
+
 # ── Phone & internet (BLUEPRINT §4.12) ─────────────────────────────────────────
 # Mobile plans (bring your own phone, postpaid or prepaid) and home internet, as designed with the owner on
 # 2026-11-10. Every plan in telecom says whether it's a mobile plan, home internet or both, and the features under

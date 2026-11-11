@@ -3839,6 +3839,12 @@ None.
   group. The policy topics that apply only to some categories name the newest too (`data/policy-topics.yaml`): a
   camera's recordings and a fitness app's health data under content access, a carrier's and a map's records of
   where you are under activity logging, and the rest where they bear on them.
+- **Three more service categories** (2026-11-11, the owner's choice): Device protection & warranties (AppleCare+,
+  Samsung Care+, carriers' plans), Health & telehealth (Maple, Teladoc, RxPass) and Car & driving (connected-car
+  plans, EV charging memberships, roadside assistance, parking), each with its features (`protection.*`, `health.*`,
+  `car.*`) and a Wikidata class. Content access covers health records and a car's data, activity logging a car's
+  location history, and changes to your device a car's over-the-air updates. Creators' memberships (Patreon,
+  Substack, channel memberships) stay out: each creator sets its own price, so they're custom subscriptions.
 - **Telecom is designed** (section 4.12, M11.17), and province prices are built (M11.17's second part, the owner's
   request of the day to get finance ready too: a credit union is sold in its province only): carriers, home internet
   and credit unions are priced and sold by province (section 4.7).

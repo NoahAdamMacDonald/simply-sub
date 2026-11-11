@@ -4,7 +4,8 @@
 # What a provider or plan is: a provider's main `category`, where a buyer would look first, and each plan's
 # `categories`, every one it fits (BLUEPRINT §4.5). Ids are permanent once published, like the catalog's: rename the
 # name, never the id. The order is Search's Category list's. Books & audiobooks and Smart home & security joined on
-# 2026-11-10, with their features, ahead of the full catalog's research (M11.15).
+# 2026-11-10, with their features, ahead of the full catalog's research (M11.15); Device protection, Health & telehealth
+# and Car & driving on 2026-11-11, the owner's choice.
 service:
   - { id: streaming, name: Streaming video, icon: live_tv }
   - { id: music, name: Music & audio, icon: music_note }
@@ -12,6 +13,7 @@ service:
   - { id: vpn, name: VPN, icon: vpn_lock }
   - { id: privacy-suite, name: Privacy suites, icon: shield }
   - { id: security, name: Antivirus & device security, icon: gpp_good }
+  - { id: protection, name: Device protection & warranties, icon: verified_user }
   - { id: passwords, name: Password managers & authenticators, icon: password }
   - { id: email, name: Email, icon: mail }
   - { id: calendar, name: Calendars, icon: calendar_month }
@@ -30,10 +32,12 @@ service:
   - { id: social, name: Social media, icon: forum }
   - { id: news, name: News & magazines, icon: newspaper }
   - { id: fitness, name: Fitness & wellness, icon: fitness_center }
+  - { id: health, name: Health & telehealth, icon: medical_services }
   - { id: education, name: Learning & education, icon: school }
   - { id: jobs, name: Jobs & careers, icon: work }
   - { id: shopping, name: Shopping & memberships, icon: shopping_cart }
   - { id: delivery, name: Food delivery & rides, icon: delivery_dining }
+  - { id: car, name: Car & driving, icon: directions_car }
   - { id: home, name: Smart home & security, icon: home }
   - { id: telecom, name: Phone & internet, icon: cell_tower }
   - { id: finance, name: Banking & investing, icon: account_balance }
@@ -60,7 +64,10 @@ feature:
   - { id: shopping, name: 'Shopping, delivery & rides' }
   - { id: education, name: Learning }
   - { id: fitness, name: Fitness & wellness }
+  - { id: health, name: Health & telehealth }
   - { id: home, name: Smart home & security }
+  - { id: protection, name: Device protection }
+  - { id: car, name: Car & driving }
   - { id: telecom, name: Phone & internet }
   - { id: general, name: 'Apps, languages & support' }
   - { id: account, name: Accounts & sharing }
