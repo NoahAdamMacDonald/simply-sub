@@ -88,10 +88,14 @@ freeUse:
   pages: [https://www.discoveryplus.com/]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: its US and UK sites in English and Italy's in Italian (discoveryplus.com/it/it:
+# "Accedi"). No pause (its help has only playback articles). Parental controls: family profiles with ratings and
+# profile PINs (help.discoveryplus.com 360053336814 and 32717648250903; the UK help for Italy's plans).
 # Apps (the cross-category features), read 2026-11-04: "Stream on your mobile device, tablet, computer, game console
 # and connected TV" (the US home page), with downloads "on iOS and Android mobile devices".
 features:
   platforms: [ios, android, web, tv, console]
+  languages.interface: [en, it]
 
 # Features, read 2026-11-04: the US's plan cards ("Stream on 4 devices at once", "Full HD video resolution", Ad-Free's
 # "100 downloads to watch on the go", counted in titles with no number of devices, so 1, inferred; its help centre:
@@ -115,6 +119,7 @@ plans:
       streaming.concurrent-streams: 4
       streaming.profiles: 5
       streaming.kids-profiles: true
+      account.parental-controls: true
     notes: The US's discovery+ plan, with limited ads.
     prices:
       - {
@@ -137,6 +142,7 @@ plans:
       streaming.download-devices: 1
       streaming.profiles: 5
       streaming.kids-profiles: true
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'It allows 100 downloads on iOS and Android devices without saying how many devices, so at least one.'
@@ -166,6 +172,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
+      account.parental-controls: true
     notes: The UK's and Ireland's discovery+ plan (Ireland's Basic), with live channels, which differ by country. 4K is for select shows in the UK; Ireland's page doesn't say.
     prices:
       - {
@@ -197,6 +204,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
+      account.parental-controls: true
     notes: Italy's entertainment plan with ads, with live channels.
     prices:
       - {
@@ -218,6 +226,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.live: [tv-channels]
+      account.parental-controls: true
     inferred:
       ad-free:
         reason: 'Its cheaper plan is the one named "con pubblicità" (with ads), and the page says only live channels and sport carry ads.'
@@ -246,6 +255,7 @@ plans:
       streaming.profiles: 5
       streaming.kids-profiles: true
       streaming.live: [tv-channels, sports]
+      account.parental-controls: true
     inferred:
       ad-free:
         reason: 'Its cheapest plan is the one named "con pubblicità" (with ads), and the page says only live channels and sport carry ads.'

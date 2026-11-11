@@ -91,12 +91,16 @@ freeUse:
   pages: [https://secure.discoveryplus.ca/pricing]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: discoveryplus.ca is in English only. No pause. No parental controls: its help
+# says it "does not offer customizable parental controls"; its kids profile (12 and under) has no PIN, so anyone can
+# leave it (it's streaming.kids-profiles).
 # Apps (the cross-category features), read 2026-11-09: "most smartphones, tablets and desktop browsers, and most
 # connected devices, including Amazon Fire TV streaming devices and Amazon Fire TV Edition Smart TVs; Apple iPads,
 # iPhones, iPod Touches and Apple TVs; Google devices and platforms including Android phones, tablets and Android OS
 # devices, and Samsung Smart TVs from 2018 and newer" (the FAQ on discoveryplus.ca). No game consoles.
 features:
   platforms: [ios, android, web, tv]
+  languages.interface: [en]
 
 # Features, read 2026-11-09 in its help centre (support.discoveryplus.ca, which answers only a browser) and terms:
 # - video quality: the devices article's chart gives each device's "maximum resolution", 1080p at most (Apple TV 4K,

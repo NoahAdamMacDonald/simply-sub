@@ -93,6 +93,13 @@ freeUse:
   pages: [https://mubi.com/en/ca/memberships]
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from its help on language settings and its language versions
+# (mubi.com/fr/ca: "À L'AFFICHE / CONNEXION / À PROPOS / ABONNEMENTS"). Pause: Can I pause my subscription?
+# (help.mubi.com article 270), "if you pause your subscription" (When will my subscription fee be charged?); only its
+# Notebook magazine "cannot be paused". No parental controls on its help.
+features:
+  languages.interface: [en, fr, es, de, it, pt]
+
 # Perks (M11.6): MUBI GO's line that no feature describes, in its words.
 perks:
   - id: weekly-cinema-ticket
@@ -112,6 +119,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
       streaming.french-content: true
+      account.pause: true
     inferred:
       streaming.download-devices:
         reason: 'You can download films with its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'
@@ -356,6 +364,7 @@ plans:
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
       streaming.french-content: true
+      account.pause: true
     inferred:
       streaming.download-devices:
         reason: 'You can download films with its iPhone and Android apps, but it doesn’t say on how many devices, so 1 is the least it can be.'

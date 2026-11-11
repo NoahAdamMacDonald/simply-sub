@@ -80,6 +80,8 @@ renewalAnchor:
   pages: [https://ici.tou.tv/abonnement/condition]
   lastVerified: 2026-11-03
 
+# General features, read 2026-11-11: ICI TOU.TV is in French only. No pause and no parental controls in its help
+# centre (searched "pause", "suspendre", "contrôle parental", "NIP").
 # Apps and sign-in (M11.9, the cross-category features), read 2026-11-03: browsers on Windows and Mac, Android, iOS, TVs and
 # streaming devices, and Xbox One and Series X|S (ici.tou.tv/nos-plateformes, its help centre's platforms article); a
 # Radio-Canada account's email address and password (its help centre's sign-in article); a request form
@@ -88,6 +90,7 @@ features:
   platforms: [web, android, ios, tv, console]
   account.sign-in: [password]
   support.channels: [email]
+  languages.interface: [fr]
 
 # Official resellers: none (M11.9, read 2026-11-03; the owner's choice that day: noted, not listed). The TELUS et Koodo
 # tab of ici.tou.tv/abonnement: "ICI TOU.TV EXTRA avec pubs", "Inclus", "AVEC UN FORFAIT TELUS" (and Koodo), which is

@@ -93,10 +93,13 @@ renewalAnchor:
     - 'Auto-renewing recurrent monthly, quarterly, and yearly subscriptions are charged on a calendar month, quarter, and year basis, with the validity of each period aligning with the billing cycle.'
   lastVerified: 2026-11-09
 
+# General features, read 2026-11-11: app languages from iq.com's language versions (?lang=en_us and the others). No
+# pause. Parental controls: a playback PIN with ratings (its help's forgotten-PIN article).
 # Apps (the cross-category features), read 2026-11-09: its footer's "Computer", "Phone", "TV" and "Web" apps (a
 # Windows PC app, the App Store and Google Play, Apple TV, Android TV and Roku in its help centre).
 features:
   platforms: [windows, ios, android, tv, web]
+  languages.interface: [en, es, pt, ja, ko, zh]
 
 # Features, read 2026-11-09 on its VIP privileges page (iq.com/vip/privilege) and the order page's lists:
 # - streams: "Concourent watching on multiple screens": 1 free, 2 Standard, 4 Premium ("Standard VIP can access VIP
@@ -120,6 +123,7 @@ plans:
       video.quality: 720p
       ad-free: false
       streaming.concurrent-streams: 1
+      account.parental-controls: true
     notes: Its free shows, with ads.
     prices:
       - region: GLOBAL
@@ -138,6 +142,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 2
       streaming.download-devices: 1
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'Its VIP plans can download, on no stated number of devices, so at least one.'
@@ -356,6 +361,7 @@ plans:
       ad-free: false
       streaming.concurrent-streams: 4
       streaming.download-devices: 1
+      account.parental-controls: true
     inferred:
       streaming.download-devices:
         reason: 'Its VIP plans can download, on no stated number of devices, so at least one.'
