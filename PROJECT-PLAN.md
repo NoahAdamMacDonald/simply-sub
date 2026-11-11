@@ -2228,6 +2228,11 @@ in every D1 `json` column search parses.
     shared document Pandora uses too. Qobuz (`qobuz`: Studio, Duo and Family monthly and yearly, Sublime yearly, in all
     eleven regions; sold in the 27 countries its help centre lists) and Audiomack (`audiomack`: Free and Audiomack+,
     Canada and the US, every 30 days).
+  - **Pausing, parental controls and app languages** (2026-11-11, the owner's choice): `account.pause`,
+    `account.parental-controls` and `languages.interface` in the registry, with every provider's value from its own
+    help centre and language menus. Parental controls are a parent's or plan manager's restriction on another
+    member's account or profile, not a filter you set for yourself; Spotify Family's perk became the feature, with a
+    perk redirect.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 5 done)
