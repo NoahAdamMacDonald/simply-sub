@@ -1,0 +1,522 @@
+# Researched by hand on 2026-11-11 (M11.15, the music category, part 5), read with Edge from Canada. Sirius XM Canada
+# Inc. sells SiriusXM in Canada under its own Customer Agreement and Privacy Policy, so it's a provider of its own
+# (SiriusXM's US service is siriusxm). Pages, each quoted where it's used:
+# Pricing: its plans page (siriusxm.ca/plans/): "Car + app" Platinum "$30.99/month", Music & Entertainment
+# "$25.99/month" and Music Showcase "$18.99/month", and "App only" All Access (App Only) "$11.99/month", each "Taxes
+# extra"; its Customer Agreement has you "pay us in advance, in Canadian Dollars". Monthly only: its agreement mentions
+# other "payment schedules" without a price on any page. Family Friendly versions, which leave out "the mature channels",
+# are ordered by phone with no price shown, so they aren't listed.
+# Region checklist, 2026-11-11: 1. no country paths (siriusxm.ca is Canada's); 2. its QC and FR links are Quebec's and
+# French pages; 3. not needed; 4. checkout not opened; 5. no payment help names networks; 6. Edge read every page; 7. no
+# bill offered.
+# Not listed: its business, fleet, marine and aviation plans; the Lifetime plan ("no longer offered for sale").
+# Bundles and official resellers: none named on its plans pages.
+# Features, read 2026-11-11: its plans page's comparison table (ticks, read from the page's screenshot): Platinum has
+# everything, including "Live NFL, MLB®, NBA, NHL®, NCAA games", "Howard Stern Channel & Video" and "Artist Stations";
+# Music & Entertainment has music, news, talk, podcasts and sports talk; Music Showcase "SOME" music, news and talk; All
+# Access (App Only) everything but the car. Each plan's extras are perks. Its app shows live channels; as with
+# SiriusXM in the US, no page measures its sound, so audio quality waits (core's awaitingRequiredFeatures).
+# Coverage: "We offer the Services only within the provinces and territories of Canada" (its Customer Agreement).
+id: siriusxm-canada
+name: SiriusXM Canada
+website: https://www.siriusxm.ca
+category: music
+spendCategory: streaming
+availableIn: [CA]
+billingCurrency: { CA: CAD }
+# Its help centre's How do I cancel my service?
+cancelUrl: https://listenercare.siriusxm.ca/prweb/PRServletCustomCA/help/SupportCenterExCA/article/KCP-4394
+sources: { pricing: https://www.siriusxm.ca/plans/ }
+# Owner (M11.2), read 2026-11-11: its about page; Sirius XM Holdings' annual report (10-K) gives who holds its shares.
+# A private company, so no listing.
+owner:
+  name: 'Sirius XM Canada Inc. (70% of its equity and 33% of its votes held by Sirius XM Holdings, the rest by two other shareholders)'
+  page:
+    name: About SiriusXM
+    url: https://www.siriusxm.ca/about-siriusxm/
+  quotes:
+    - 'Sirius XM Canada Inc., operating as SiriusXM Canada, is the country’s leading entertainment company.'
+  country:
+    code: CA
+    page:
+      name: Privacy Policy
+      url: https://www.siriusxm.ca/privacy-policy/
+    quotes:
+      - 'Our Privacy Officer may be contacted by email at privacy@siriusxm.ca or by postal mail at Sirius XM Canada Inc., 351 King Street East, Suite 1000, Toronto, Ontario, M5A 0L6.'
+    lastVerified: 2026-11-11
+  lastVerified: 2026-11-11
+# Ways to pay (M11.5), read 2026-11-11: its Customer Agreement; no page names card networks.
+paymentMethods:
+  - methods: [card, gift-card]
+    page: Customer Agreement
+    url: https://www.siriusxm.ca/terms-and-conditions/
+    quotes:
+      - 'Card Billing: You may pay by credit card, debit/credit card, SiriusXM gift cards, or any other form of payment accepted by SiriusXM Canada'
+# Renewal day (M11.5): "Your card will be charged on the day you select the Subscription (or after any free period) and
+# on the day of each renewal" (its Customer Agreement) says when, not which day of the month.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.siriusxm.ca/terms-and-conditions/
+  lastVerified: 2026-11-11
+
+# Perks (M11.6): what each plan adds, in its comparison table's words.
+perks:
+  - id: in-car
+    name: SiriusXM in your car
+  - id: live-games
+    name: Live NFL, MLB, NBA, NHL and NCAA games
+  - id: talk-news
+    name: News, talk and entertainment
+  - id: howard-stern
+    name: Howard Stern Channel & Video
+  - id: artist-stations
+    name: Artist Stations
+  - id: podcasts
+    name: Original & Popular Podcasts
+
+plans:
+  - id: siriusxm-canada.free
+    name: Free Access
+    link: https://www.siriusxm.ca/about-your-trial/
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car]
+    notes: Its free, ad-supported plan, which it may offer on a car radio after a trial or paid plan ends.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.ca/terms-and-conditions/
+  - id: siriusxm-canada.platinum
+    name: Platinum
+    link: https://www.siriusxm.ca/plans/
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, live-games, talk-news, howard-stern, artist-stations, podcasts]
+    notes: 'In your car and in the app: 425+ channels, with Howard Stern, live NFL, MLB, NBA, NHL and NCAA games, and exclusive in-studio video.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 30.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.ca/plans/
+  - id: siriusxm-canada.music-entertainment
+    name: Music & Entertainment
+    link: https://www.siriusxm.ca/plans/
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, talk-news, podcasts]
+    notes: 'In your car and in the app: 400+ channels, with ad-free music, news, talk, comedy and sports talk.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 25.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.ca/plans/
+  - id: siriusxm-canada.music-showcase
+    name: Music Showcase
+    link: https://www.siriusxm.ca/plans/
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [in-car, talk-news]
+    notes: 'In your car and in the app: 100+ channels, with ad-free music and some news and talk.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.ca/plans/
+  - id: siriusxm-canada.all-access-app-only
+    name: All Access (App Only)
+    link: https://www.siriusxm.ca/plans/
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      audiobooks.included: false
+      music.unlimited-skips: false
+      music.own-library: false
+      music.lyrics: false
+      music.live-radio: true
+    perks: [live-games, talk-news, howard-stern, artist-stations, podcasts]
+    notes: 'Its channels in the app only (none in the car).'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-11
+        sourceUrl: https://www.siriusxm.ca/plans/
+
+# The policies block for `siriusxm-canada` (Sirius XM Canada Inc.), to go after everything else in
+# data/providers/siriusxm-canada.yaml. Sirius XM Canada is a company of its own, with its own Customer Agreement and
+# Privacy Policy: the Sirius XM Privacy Policy (siriusxm-privacy) says it doesn't apply to "Services provided by Sirius
+# XM Canada Inc.", so this block names no shared document. Plan ids weren't known when these were graded, so every
+# rating is for every plan.
+#
+# Terms and policies, read 2026-11-11 (M11.15, the music category) in Edge from Canada: its Customer Agreement Terms
+# ("Last Updated: August 1, 2026"; the footer's "Site Terms" link opens the same page), its Privacy Policy ("Last
+# Updated: June 1, 2025"), the plans page and its app-only tab (offer details), its free trial page, its support
+# centre's articles on cancelling and changing a subscription (their stable links redirect to a session page), and its
+# account registration form. The app-only plan's sign-up shows the plan, then asks for the account only after Continue
+# in its checkout, which wasn't opened. The French versions (siriusxm.ca/fr/conditions-generales) weren't read: the
+# agreement says the English one governs. Not rated: rights over your content, its apps' licence and changes to your
+# device (not topics for music; its software updates "cannot be disabled by you"). Quebec's own rules (the Consumer
+# Protection Act) are named in reasons; per the procedure they change no grade. Calibrated against discovery+ Canada's,
+# Crave's, Spotify's and Pandora's grades.
+policies:
+  links:
+    - name: 'Customer Agreement Terms'
+      url: https://www.siriusxm.ca/terms-and-conditions/
+    - name: 'Privacy Policy'
+      url: https://www.siriusxm.ca/privacy-policy/
+    - name: 'Plans'
+      url: https://www.siriusxm.ca/plans/
+    - name: 'Start your SiriusXM trial'
+      url: https://www.siriusxm.ca/trial/try-siriusxm/
+    - name: 'Cancelling Your SiriusXM Service'
+      url: https://listenercare.siriusxm.ca/prweb/PRServletCustomCA/help/SupportCenterExCA/article/KCP-4394
+    - name: 'Register your account'
+      url: https://care.siriusxm.ca/phx-wc/account/registration
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you listen to and where you are, for recommendations, research and other business. You can’t stop that; you can only refuse analytics and ad cookies on its sites.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Likewise, you may not disable the collection of Listener Usage Data or Vehicle Radio Usage from your use of our online media player, our mobile applications, and Enabled Radios, as such data is necessary for SiriusXM to fulfil its reporting obligations under various copyright tariffs, for content recommendations, and for wireless data costs (as applicable).'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'The Sites and SiriusXM Streaming service will determine your location for the purposes of controlling access to certain content using your Internet protocol address, as well as for the purposes of research, analysis, product development and other business purposes.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Our Sites may allow you to opt out of cookies used for analytics and cookies used for advertising.'
+      action:
+        name: 'Its privacy policy (your choices)'
+        url: https://www.siriusxm.ca/privacy-policy/
+      lastVerified: 2026-11-11
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares data about you, under a code instead of your name, with ad companies to show you ads elsewhere, and Google may use your voice searches for its own purposes. You can limit only some of it.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'we share your pseudonymous information with ad servers and platforms, advertising agencies and other advertising entities to serve ads on the Sites, on the Services and on third-party websites.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We and Google/Service Provider may also collect and use voice data for the purposes set forth in our respective privacy policies, including quality assurance and to optimize the product and user experience.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'You may learn more about this practice and your choices to limit uses of this pseudonymous information by third-party service providers at networkadvertising.org/choices.'
+      action:
+        name: 'Its privacy policy (your choices)'
+        url: https://www.siriusxm.ca/privacy-policy/
+      lastVerified: 2026-11-11
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It uses cookies and what you listen to for ads, its own and other companies’, on its sites and elsewhere. Turning that off is partial: each opt-out covers one browser or one device.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Cookies also help us track visitors, track usage, conduct research, target advertising, and enhance and personalize the Sites and the Services to the interests of users.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We use this Listener Usage Data along with cookie information to enhance our Services for you, for troubleshooting and research, and for advertising of our Services and the services of third parties.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Also, mobile app opt-outs are limited to a specific device, while browser-based opt-outs are limited to a specific browser.'
+      action:
+        name: 'Its privacy policy (your choices)'
+        url: https://www.siriusxm.ca/privacy-policy/
+      lastVerified: 2026-11-11
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether what you say or type to it trains AI.'
+      pages:
+        [https://www.siriusxm.ca/privacy-policy/, https://www.siriusxm.ca/terms-and-conditions/]
+      lastVerified: 2026-11-11
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information for “a limited period of time” after you stop using it, without saying how long.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We may retain your personal information for a limited period of time after you cease using our Sites or Services for purposes of internal account management, to resolve disputes, enforce our Customer Agreement, technical and legal requirements and constraints related to the security, legal compliance, integrity and operation of the Sites and the Services.'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'Its privacy policy names no way to have your data deleted, and says what it collects during free listening can’t be deleted. You can write to its privacy officer.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We cannot provide access to, stop the collection of, or delete the Listener Usage Data or Vehicle Radio Usage data which we collect from devices that are not associated with a trial or paying subscriber, or when you are using our Services during our “free listening” periods.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Our Privacy Officer may be contacted by email at privacy@siriusxm.ca or by postal mail at Sirius XM Canada Inc., 351 King Street East, Suite 1000, Toronto, Ontario, M5A 0L6.'
+      action:
+        name: 'Its privacy policy (contact its Privacy Officer)'
+        url: https://www.siriusxm.ca/privacy-policy/
+      lastVerified: 2026-11-11
+    - topic: privacy.data-portability
+      tier: poor
+      reason: 'You can see much of your account information in My Account, or ask customer care, but it doesn’t offer a full copy you can take elsewhere.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We give you access to a broad range of information about your account and your interactions with us in the “My Account” portion of siriusxm.ca.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'You may also have access to the foregoing by contacting customer care by phone (1-888-539-7474) or email (care@siriusxm.ca).'
+      action:
+        name: 'Its privacy policy (access your information)'
+        url: https://www.siriusxm.ca/privacy-policy/
+      lastVerified: 2026-11-11
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over your information when it believes the law, a court or a government request needs it. It doesn’t say it tells you, or publish how many requests it gets.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We will disclose your personal information as long as we believe it is reasonably necessary to:'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'comply with any applicable law, regulation, legal process or governmental or regulatory request'
+      lastVerified: 2026-11-11
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information is kept in Canada and the US, and companies it hires can reach it from other countries, Morocco, Egypt, Tunisia and the Philippines among them. It doesn’t say how it’s protected when it moves.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Personal information may be stored in Canada or with our Affiliates and Service Providers in Canada and the United States, where it will be subject to the legal regimes of those jurisdictions and may be disclosable to others as required by local laws, including to government, law enforcement, or participants in court proceedings.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'Personal information may be accessed by our Service Providers in countries including Canada, the United States, Morocco, Egypt, Tunisia and the Philippines.'
+      lastVerified: 2026-11-11
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'Registering your account online asks for your name, email, phone number and postal code.'
+      sources:
+        - url: https://care.siriusxm.ca/phx-wc/account/registration
+          quote: 'Last Name'
+        - url: https://care.siriusxm.ca/phx-wc/account/registration
+          quote: 'Phone Number'
+        - url: https://care.siriusxm.ca/phx-wc/account/registration
+          quote: 'Postal Code'
+      lastVerified: 2026-11-11
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Only adults can subscribe, and Family Friendly plans leave out mature channels, but the app can’t block channels. Its privacy policy doesn’t say how it treats children’s data or ads.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'You must be at least the age of majority in your province or territory of residence to purchase a Subscription.'
+        - url: https://www.siriusxm.ca/plans/
+          quote: 'Yes, when you order a Family Friendly version of a plan, the mature channels are excluded.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Channel blocking is not available with the Streaming Service; therefore, it is your responsibility to impose listening restrictions that you consider appropriate on others.'
+      lastVerified: 2026-11-11
+    - topic: security.practices
+      tier: poor
+      reason: 'It describes its security in general terms, and names no audit or way to report a security flaw.'
+      sources:
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'We use a combination of security measures to safeguard the confidentiality of the personal information you provide us.'
+      lastVerified: 2026-11-11
+    - topic: billing.cancellation
+      tier: poor
+      reason: 'Car plans cancel only by calling or chatting with its staff, who want to sort out your reasons first. The app-only plan cancels online in your account.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'All Subscriptions may be cancelled by phone by directly calling the phone number below:'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Streaming (App-Only) Subscriptions may be cancelled any time (except for scheduled or emergency maintenance) by logging into your account at www.siriusxm.ca/myaccount and following the cancellation instructions.'
+        - url: https://listenercare.siriusxm.ca/prweb/PRServletCustomCA/help/SupportCenterExCA/article/KCP-4394
+          quote: 'If you wish to cancel for any other reason, please contact us as we would like to understand and resolve any issue you may have had.'
+      action:
+        name: 'Cancelling Your SiriusXM Service'
+        url: https://listenercare.siriusxm.ca/prweb/PRServletCustomCA/help/SupportCenterExCA/article/KCP-4394
+      lastVerified: 2026-11-11
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Cancel within 15 days of starting and you get your money back. After that there’s no refund for part of a period, but you keep listening to its end. Quebec and Newfoundland refund unused time.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'If you cancel a monthly billed Subscription within fifteen (15) days of the start date of your Subscription, your Subscription will terminate immediately and any fees paid are eligible for a full refund, if requested.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Your Subscription will remain active until your cancellation becomes effective at the end of your current Subscription Period (i.e., billing period), and no refunds or credits will be given for any partial period, except as provided below or as required by law.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'You will be entitled to a refund of any Subscription fees paid in advance and for which no Services were yet provided as of the effective date of such cancellation.'
+      lastVerified: 2026-11-11
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It gives at least 30 days’ notice of a new price, which starts only with your next billing period, and you can cancel before it does.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Any changes or modifications will be effective on at least thirty (30) days’ notice to you.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'If you do not accept the change in pricing, you have the right to reject the change by cancelling your Subscription prior to the change taking effect.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Changes in pricing will take effect at the start of your next Subscription Period following the date of the price change.'
+      lastVerified: 2026-11-11
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 3 free months need a credit card and turn into a paid plan unless you cancel, with no reminder promised. A trial that comes with a new car just stops.'
+      sources:
+        - url: https://www.siriusxm.ca/trial/try-siriusxm/
+          quote: 'Subscribe to the Platinum plan and get your first 3 months for $0.00. A credit card is required.'
+        - url: https://www.siriusxm.ca/trial/try-siriusxm/
+          quote: 'After your first 3 months, your subscription will continue on a monthly billing plan and you will be charged at the then-current rate, (currently $30.99/month), for an indeterminate term and services will continue, unless and until you cancel.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Trial Subscriptions that are included with the purchase or lease of a vehicle or specific offers that state they do not automatically renew will stop at the end of their trial period.'
+      lastVerified: 2026-11-11
+    # The agreement's next paragraphs promise a written notice "between the 90th and 60th day" before plans of six months
+    # or more end; it follows the paragraph for Quebec and sends you to Subsection 4(c), the cancelling rules for BC,
+    # Quebec and Newfoundland, so it's read as theirs (notes.md). Read as everyone's, this would be good.
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'Outside Quebec, it renews and charges you without telling you first, unless a law requires a notice.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'on an on-going basis at the regular full-price rates in effect at the time of each renewal, plus applicable fees and taxes, without further notice to you (except as required by applicable law)'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: '(This paragraph is not applicable to Residents of Québec or to Plans whose Offer Details expressly state that they do not automatically renew).'
+      lastVerified: 2026-11-11
+    - topic: billing.fees
+      tier: bad
+      reason: 'Outside Quebec, its fees can change without notice, and the fee to activate or change a radio’s service has no stated amount. Others have caps, such as a late fee of up to $5 a month.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Fees: (This Section is not applicable to Residents of Quebec*) We may charge you one or more of the fees below, if applicable, all of which are subject to change without notice.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Activation Fee: If applicable, for each radio on your account, we may charge you a fee to activate, reactivate, upgrade or modify your Service.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'If we do not receive your payment by the billing due date, we may charge you a late fee of up to $5.00 per month or partial month until the delinquent amount is paid in full, subject to applicable law.'
+      lastVerified: 2026-11-11
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to more channels or ways to listen starts at once, and you pay the difference. Other changes start when your billing period ends, and a cheaper plan’s difference is credited to your next bill.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Changes you make to your Plan will be effective at the end of your current Subscription Period, except for Service level upgrades (i.e., additional programming or listening options), in which case we will charge you the difference or apply a non-refundable credit toward your future renewal charges.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'If the new fee is less than the fee for your current Plan or payment schedule on the same Receiver, you will receive the credit on your account, and it will be automatically applied to your next charge.'
+      lastVerified: 2026-11-11
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Outside Quebec, a private referee (an arbitrator) in Toronto settles any dispute instead of a court, with no way to opt out.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'If we cannot resolve a Claim informally, subject to applicable provincial laws, any Claim either of us asserts will be resolved only by binding arbitration in accordance with the UNCITRAL Arbitration Rules in force at the time the arbitration is initiated.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'The place of the arbitration shall be the City of Toronto, Ontario, Canada.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Billing Disputes: (This Section is not applicable to Residents of Quebec*)'
+      lastVerified: 2026-11-11
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It emails you about changes to its terms at least 30 days before they start, and you can cancel before then.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Any changes or modifications will be effective on at least thirty (30) days’ notice to you.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'YOU HAVE THE RIGHT TO CANCEL THE SERVICES AT ANY TIME PRIOR TO THE CHANGES TAKING EFFECT IF CHANGES TO THESE TERMS ARE NOT ACCEPTABLE TO YOU.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Specifically, notices of renewal, price changes, account-related notifications and updates to this Agreement will be sent to your last email address on file.'
+      lastVerified: 2026-11-11
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can cancel your subscription for any reason it chooses, and promises no notice and no refund.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'We may cancel your Subscription if you fail to pay for your Subscription, breach this Agreement, or for any other reason in our sole discretion.'
+      lastVerified: 2026-11-11
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or drop channels at any time, with or without notice, gives no refund when features go away, and keeps what you prepaid if it stops broadcasting.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'We reserve the right to change, rearrange, add, or delete programming, including canceling, moving or adding channels, at any time, with or without notice to you.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'No refunds will be given if your Subscription is suspended or where certain features are temporarily or permanently unavailable.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'IN THE UNLIKELY EVENT THAT WE CEASE BROADCASTING THE SERVICE, FOR ANY REASON, ALL PREPAID SUBSCRIPTIONS WILL BE TREATED AS NON-REFUNDABLE.'
+      lastVerified: 2026-11-11
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        [https://www.siriusxm.ca/terms-and-conditions/, https://www.siriusxm.ca/privacy-policy/]
+      lastVerified: 2026-11-11
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms expect others to use your account, and allow one login at a time, but don’t say who may share it.'
+      pages: [https://www.siriusxm.ca/terms-and-conditions/]
+      lastVerified: 2026-11-11
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Recordings made on radios that can record play only while you pay, and it can limit or charge for that. It names no other device or download limits.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'Subject to applicable laws, you may access such Recorded Content only as long as you pay your Subscription.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'We reserve the right to change, reduce, eliminate or charge a fee for this and/or any related functionality.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: Your name and voice, used forever
+      tier: bad
+      reason: 'Anything you send it or post, from comments to your name, likeness and voice, it may use and let others use forever, for any purpose, without paying you.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'We are free to use and sublicense any comments, information, ideas, concepts, reviews, or techniques, or any other material including your name, likeness, personality, voice, and any other materials or information you provide to us or contained in any communication you may send or direct to us (“Feedback”) in perpetuity without further compensation, acknowledgment or payment to you for any purpose whatsoever.'
+        - url: https://www.siriusxm.ca/privacy-policy/
+          quote: 'you grant us the royalty-free, unrestricted, worldwide, perpetual, irrevocable, non-exclusive and fully sub-licensable right and licence to use, reproduce, communicate, make available, modify, adapt, publish, translate, create derivative works from, distribute, perform and display such User Content'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: A free plan with ads after your trial
+      tier: poor
+      reason: 'When a trial or paid plan ends, it may switch your car radio to its free plan with ads. To stop that, you have to call it.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'The Free Access Plan is our free advertising supported Subscription that we may offer.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'You agree that we may activate this Plan on your inactive Receiver and the availability of this Service to you is determined solely by SiriusXM.'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'You may request that your vehicle not be activated with this Plan after your trial or paid Subscription by calling us at 1-888-539-7474.'
+      lastVerified: 2026-11-11
+    - topic: other.notable
+      title: 30 days to dispute a charge
+      tier: poor
+      reason: 'You must question a charge within 30 days of getting your statement, or you give up the right to dispute it, unless a law says otherwise.'
+      sources:
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'If you purchased your Subscription directly from us and you wish to dispute any charge, you must contact SiriusXM Canada within thirty (30) days after the date you receive the statement in question'
+        - url: https://www.siriusxm.ca/terms-and-conditions/
+          quote: 'OTHERWISE, YOU WAIVE YOUR RIGHT TO DISPUTE THE CHARGE, subject to applicable law.'
+      lastVerified: 2026-11-11
