@@ -426,6 +426,9 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['super-channel.plus', ['streaming.concurrent-streams']],
   ['super-channel.channels', ['video.quality']],
   ['super-channel.free', ['video.quality', 'streaming.concurrent-streams']],
+  // Acorn TV and Sundance Now state neither their quality nor their streams (2026-11-13).
+  ['acorn-tv.standard', ['video.quality', 'streaming.concurrent-streams']],
+  ['sundance-now.standard', ['video.quality', 'streaming.concurrent-streams']],
 ]);
 
 /**

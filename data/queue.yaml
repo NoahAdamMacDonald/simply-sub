@@ -209,6 +209,27 @@
   source: own
   status: done
   date: 2026-11-13
+- id: acorn-tv
+  name: Acorn TV
+  website: https://acorn.tv
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: sundance-now
+  name: Sundance Now
+  website: https://www.sundancenow.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: hidive
+  name: HIDIVE
+  website: https://www.hidive.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

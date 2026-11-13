@@ -1,0 +1,295 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, its sign-up page
+# (www.hidive.com/signup) again through a US, a UK, an Irish, an Australian and a New Zealand exit, and its help centre
+# (support.hidive.com, a Stonly knowledge base whose guides' steps are all in each page) in Edge and with a plain fetch.
+# Pages, each quoted where it's used:
+# Pricing: no page shows a country's prices in words: its help centre's prices article ("How much does HIDIVE cost?")
+# is gone (a page not found), its welcome page says "Plans starting at $7.99/month" from Canada and through US and UK exits alike (with hidden cards,
+# "US $7.99 /MONTH" and "$79.99 /YEAR"), and the plan picker is step 2 of the sign-up ("1 Create Login 2 Select a plan
+# 3 Checkout"), past the account form, which wasn't filled in. Its sign-up page loads each plan's prices as part of the
+# page (its "licences", with the reader's own currency marked "local"), read through each country's exit: MONTHLY and
+# ANNUAL at USD 7.99 and 79.99 in the US, CAD 9.99 and 99.99 from Canada, GBP 5.99 and 59.99 through the UK exit, AUD
+# 9.99 and 99.99 through the Australian one and NZD 9.99 and 99.99 through the New Zealand one; Ireland has a family of
+# its own ("Monthly (IRE)" EUR 4.99, "ANNUAL (IRE)" EUR 49.99). So each price's sourceUrl is the sign-up page, and the
+# nightly check will send them to a person. The data marks every price but the US's tax-inclusive ("taxInclusive":
+# true, Canada's too), but no words on the pages say so, so no taxIncluded (notes.md). The US's are before tax (its
+# Questions About Tax article: "your HIDIVE membership total charge includes tax if your billing address is in a taxing
+# jurisdiction").
+# Region checklist for CA, US, GB, IE, AU and NZ, 2026-11-13: 1. no country paths (welcome.hidive.com and
+# www.hidive.com for all); 2. no picker; 3. the sign-up page's plan data, which marks the reader's currency for each
+# exit; 4. the sign-up page's first step, typing nothing; 5. its help centre has no prices article now, and its tax
+# article covers US states only; 6. Edge from Canada and through each country's exit, and a plain fetch; 7. no bill
+# offered. Not sold in the euro sample but Ireland (its terms' country list, below; "the service will no longer be
+# available in certain areas outside of North America, as of 12/14/2023", its help centre).
+# Bundles: none sold by HIDIVE. Official resellers: none. Partners that bill it themselves, named in its help centre:
+# Apple (iTunes), Google Play, Roku, and the add-on subscriptions of Amazon Prime, the Roku Channel, Apple TV and Xfinity
+# ("These types of add-on subscriptions are completely separate subscriptions and are not managed through our system").
+# Features, read 2026-11-13: "you are entitled to two concurrent streams" (Can I log in from my phone, tablet, and
+# computer at the same time?), which its plan data's "Stream on up to two devices at a time" and "maxConcurrency": 2
+# match; "As a premium member, you can create up to 3 profiles." (How many profiles can I create?); downloads in its
+# iPhone, iPad, Android and Fire apps ("You can only download 20 titles at a time"), with no number of devices, so 1
+# (inferred); "ad-free streaming" (Do you offer a free trial?). Video quality: its playback article's speeds stop at
+# 1080p ("For 1080P videos, we recommend 13.5 megabits per second download"), so 1080p (inferred). What it streams: "a
+# passion-driven anime streaming service" (What is HIDIVE?); none of your own media. No kids profiles, parental
+# controls, live channels or pause on any page read (its plan data's "pauseConfiguration" is "DISABLED").
+# Free use: none: its plans start with a 7-day free trial that "will automatically convert to a paid membership" (Do you
+# offer a free trial?), and its plan data holds only the two paid licences.
+
+# Coverage: hidive.* in AS, GU, MP, PR and VI: its terms sell it in "US Territories", but no page names a territory's
+# price, and the US exit's page showed the US's (2026-11-13).
+
+id: hidive
+name: HIDIVE
+website: https://www.hidive.com
+# Its owner's site, where hidive.com's Terms of Use, Privacy Policy and Cookie Policy links lead (through
+# amcnetworks.com, to amcglobalmedia.com).
+domains: [amcglobalmedia.com]
+category: streaming
+spendCategory: streaming
+# Its terms: "The Services are intended for viewing solely within the United States, and the countries identified at
+# this link", "HIDIVE: Australia, Canada, Ireland, New Zealand, The United Kingdom, US Territories." Its help centre
+# has no country list. The territories are the five inhabited ones, as Peacock's help centre names them.
+availableIn: [US, CA, GB, IE, AU, NZ, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD, CA: CAD, GB: GBP, IE: EUR, AU: AUD, NZ: NZD }
+# Its help centre's "How do I Cancel my HIDIVE Membership?" for a subscription bought on its website ("Scroll down on the
+# page, click the 'Cancel Membership' option, and follow the prompts.").
+cancelUrl: https://support.hidive.com/kb/guide/en/how-do-i-cancel-my-hidive-membership-wi1vHE1YQu/Steps/4321263
+sources: { pricing: https://www.hidive.com/signup }
+# Owner (M11.2), read 2026-11-13: AMC Global Media Inc., from its third-quarter release on its own site, which names
+# HIDIVE among its streaming services, its listing and where it's based (its welcome page: "© 2020-2026 AMC Global
+# Media Inc."). No page read names a majority holder.
+owner:
+  name: AMC Global Media Inc.
+  website: https://www.amcglobalmedia.com
+  page:
+    name: AMC Global Media Inc. Reports Third Quarter 2026 Results
+    url: https://www.amcglobalmedia.com/2026/11/09/amc-global-media-inc-reports-third-quarter-2026-results/
+  quotes:
+    - 'AMC Global Media (Nasdaq: AMCX) is home to many of the greatest stories and characters in TV and film and the premier destination for passionate and engaged fan communities around the world.'
+    - 'Its portfolio includes targeted streaming services AMC+, Acorn TV, Shudder, Sundance Now, HIDIVE and All Reality'
+    - 'AMC Global Media is headquartered in the United States, with international operations in Iberia, Latin America, Central Europe, the U.K., Australia and New Zealand.'
+  country:
+    code: US
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: AMCX }
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13 in its help centre: "all major credit cards and PayPal" on its website, Apple
+# (iTunes) and Google Play, and Amazon's Prime Video Channels add-on (core's app-store). Roku, the Roku Channel, Apple
+# TV and Xfinity bill it too. "All major credit cards" names no network, so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal]
+    page: Methods of payments and taxes
+    url: https://support.hidive.com/kb/guide/en/methods-of-payments-and-taxes-mEQ7GtPi7C/Steps/4307552
+    quotes:
+      - 'Payment Methods: We accept all major credit cards and PayPal.'
+  - methods: [app-store]
+    page: How do I Cancel my HIDIVE Membership?
+    url: https://support.hidive.com/kb/guide/en/how-do-i-cancel-my-hidive-membership-wi1vHE1YQu/Steps/4321333
+    quotes:
+      - 'If you signed up via the HIDIVE app via iTunes / Apple, you can cancel your subscription by following these steps:'
+  - methods: [app-store]
+    page: How do I Cancel my HIDIVE Membership?
+    url: https://support.hidive.com/kb/guide/en/how-do-i-cancel-my-hidive-membership-wi1vHE1YQu/Steps/4321334
+    quotes:
+      - 'If you signed up via Google Play through the HIDIVE Android app, you can cancel your subscription by following these steps:'
+  - methods: [app-store]
+    page: How do I Cancel my HIDIVE Membership?
+    url: https://support.hidive.com/kb/guide/en/how-do-i-cancel-my-hidive-membership-wi1vHE1YQu/Steps/4321335
+    quotes:
+      - 'If you purchased the HIDIVE add-on channel via Amazon Prime, you will need to go into the Video Subscription settings in your Amazon Prime account to cancel your account.'
+# Renewal day (M11.5): its terms bill "on the calendar day corresponding to the beginning of your Billing Period", and
+# a sign-up on a day a month lacks bills on that month's last day: the day you signed up.
+renewalAnchor:
+  kind: same-date
+  page: AMC Streaming Services Terms of Use
+  url: https://www.amcglobalmedia.com/terms-of-use/
+  quotes:
+    - 'If your paid subscription begins on a day not contained in a given month, and your Billing Period is every month, your Payment Method will be billed on the last day of such month.'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.hidive.com/
+    - https://support.hidive.com/kb/guide/en/do-you-offer-a-free-trial-iGHssh7L1C/Steps/4307597
+  lastVerified: 2026-11-13
+
+# Platforms: "HIDIVE is available at www.hidive.com on web browsers and as an app on these devices:" iPhone and iPad,
+# Android phones and tablets, Android TV, Roku, Xbox, Apple TV, Fire TV, Fire tablets, Chromecast, LG, Samsung TVs and
+# Galaxy phones, and Vizio (What devices are supported?). Sign-in: "Email *" and "Password *" (its sign-up and sign-in
+# pages; its plan data names one way to sign in, "ID"). App languages: English (its pages and help centre are in
+# English only). Audio and subtitles: left out. No page lists them across the catalogue (the owner's rule of
+# 2026-11-03); only its site's settings data does ("audioLanguages": en_US and ja_JP; "subtitleLanguages": en_US,
+# es_MX, es_ES and pt_PT), with its welcome page's "Dubbed For You" row. Support: "Chat: Click the Chat Icon on the bottom right of the page." and
+# "Phone: 844-326-4635" (Contact Us).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en]
+  support.channels: [chat, phone]
+
+plans:
+  - id: hidive.standard
+    name: HIDIVE
+    link: https://www.hidive.com/signup
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 2
+      streaming.download-devices: 1
+      streaming.profiles: 3
+      streaming.content: [anime]
+      streaming.own-media: false
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its playback help lists the internet speed each quality needs, and the highest it lists is 1080p.'
+        page:
+          name: I'm having problems with video loading and/or playback
+          url: https://support.hidive.com/kb/guide/en/im-having-problems-with-video-loading-and-or-playback-vC0dBQS4lg/Steps/4307539
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'You can download up to 20 titles in its iPhone, iPad, Android and Fire apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: How does offline downloading work?
+          url: https://support.hidive.com/kb/guide/en/how-does-offline-downloading-work-XNhqD8braY/Steps/4307580
+        lastVerified: 2026-11-13
+    notes: Its pages call it Monthly and Annual; its help centre calls a subscriber a premium member.
+    prices:
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: CA
+        currency: CAD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: CA
+        currency: CAD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: GB
+        currency: GBP
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: IE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: IE
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: AU
+        currency: AUD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: AU
+        currency: AUD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: NZ
+        currency: NZD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+      - region: NZ
+        currency: NZD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hidive.com/signup
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada. HIDIVE has no terms or privacy policy of its
+# own now: its sign-up form's and footer's Terms of Use, Privacy Policy and Cookie Policy (amcnetworks.com's links,
+# which lead to amcglobalmedia.com; www.hidive.com/privacy-policy leads there too, and /terms and /privacy are pages not
+# found) are AMC Global Media's AMC Streaming Services Terms of Use, Privacy Policy and Cookies Policy (all "June 27,
+# 2025"), which name HIDIVE and are rated once as shared documents (data/policies/amc-global-media-terms.yaml and
+# amc-global-media-privacy.yaml, drafted in .pipeline/amc-plus). Rated here from HIDIVE's own pages: its sign-up page's
+# first step (typing nothing) and its help centre's downloads article. Its help centre's billing articles hold the same
+# as the shared terms (no refund for a trial that renewed, access to the end of the period; a trial cancelled early
+# ends at once). Not read: the sign-up steps after the account form (the plan picker and checkout, whose payment form,
+# in its page data, says "you allow Dice Technology LTD to charge your card for future payments in accordance with
+# their terms": notes.md), the "Additional Terms" of its promotions, and the terms of the partners that bill it.
+policies:
+  shared: [amc-global-media-terms, amc-global-media-privacy]
+  links:
+    - name: 'Sign Up - HIDIVE'
+      url: https://www.hidive.com/signup
+    - name: 'How do I sign up for HIDIVE?'
+      url: https://support.hidive.com/kb/guide/en/how-do-i-sign-up-for-hidive-sro3rVO5a4/Steps/4672741
+    - name: 'How does offline downloading work?'
+      url: https://support.hidive.com/kb/guide/en/how-does-offline-downloading-work-XNhqD8braY/Steps/4307580
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up starts with an email address and a password you choose, then a plan and payment details, even for the free trial. The steps after the account form weren’t read.'
+      sources:
+        - url: https://www.hidive.com/signup
+          quote: 'Confirm Password *'
+        - url: https://support.hidive.com/kb/guide/en/how-do-i-sign-up-for-hidive-sro3rVO5a4/Steps/4672741
+          quote: 'You will be able to add your email, a password and then select the membership plan that suits you.'
+        - url: https://support.hidive.com/kb/guide/en/how-do-i-sign-up-for-hidive-sro3rVO5a4/Steps/4672741
+          quote: 'requiring billing info as part of the trial sign-up process'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can keep up to 20 downloads at a time, and once you start watching one you have 48 hours to finish it.'
+      sources:
+        - url: https://support.hidive.com/kb/guide/en/how-does-offline-downloading-work-XNhqD8braY/Steps/4307580
+          quote: 'You can only download 20 titles at a time'
+        - url: https://support.hidive.com/kb/guide/en/how-does-offline-downloading-work-XNhqD8braY/Steps/4307580
+          quote: 'Once you hit start in a downloaded title then you have 48hrs to watch'
+      lastVerified: 2026-11-13
