@@ -146,6 +146,90 @@
   source: own
   status: done
   date: 2026-11-11
+- id: morphe
+  name: Morphe
+  website: https://morphe.software
+  category: software
+  source: own
+  status: done
+  date: 2026-11-13
+- id: britbox
+  name: BritBox
+  website: https://www.britbox.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: emby
+  name: Emby
+  website: https://emby.media
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: amc-plus
+  name: AMC+
+  website: https://www.amcplus.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: shudder
+  name: Shudder
+  website: https://www.shudder.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: hollywood-suite
+  name: Hollywood Suite
+  website: https://hollywoodsuite.ca
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: super-channel
+  name: Super Channel
+  website: https://superchannel.ca
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: criterion-channel
+  name: The Criterion Channel
+  website: https://www.criterionchannel.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: curiosity-stream
+  name: Curiosity Stream
+  website: https://curiositystream.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: acorn-tv
+  name: Acorn TV
+  website: https://acorn.tv
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: sundance-now
+  name: Sundance Now
+  website: https://www.sundancenow.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: hidive
+  name: HIDIVE
+  website: https://www.hidive.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

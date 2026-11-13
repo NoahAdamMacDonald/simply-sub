@@ -1,0 +1,951 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, its plans page again through
+# a US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exit, its help centre
+# (help.curiositystream.com, all 38 articles) in Edge, and its terms and privacy policy with a plain fetch. Pages, each
+# quoted where it's used:
+# Pricing: its plans page (curiositystream.com/plans) prices by where the visitor is, and the pricing data it loads
+# (api-use1.curiositystream.com/pricing, read as part of the page) names each country's currency: Canada "CA$7.99/month"
+# and "Billed CA$67.99 annually" for Standard, "CA$15.99/month" and "Billed CA$109.99 annually" for Smart Bundle
+# ("currency":"CAD"; its Smart Bundle sign-up page: "CA$109.99/year + tax"); through a US exit $5.99 and $49.99, $11.99
+# and $79.99 ("USD"); the UK £4.99 and £35.99, £7.99 and £58.99 ("GBP"); Ireland, Germany, France, the Netherlands, Spain
+# and Italy €4.99 and €41.99, €9.99 and €67.99 ("EUR"); Australia A$6.95 and A$60.95, A$15.95 and A$109.95 ("AUD");
+# New Zealand NZ$7.99 and NZ$64.99, NZ$19.99 and NZ$132.99 ("NZD"). The cards' "/month" figures for the annual plans
+# (CA$5.67, CA$9.17) are the yearly price spread over 12 months. Its help centre's "International subscription pricing
+# information" still gives older US prices ($4.99 and $39.99, $9.99 and $69.99, updated 2026-01-23), and its terms say
+# "All fees are charged in US Dollars (USD)", but the plans page and its data, which the sign-up uses, price each country
+# in its own currency, so they decide. The UK's, Europe's and Oceania's data mark the prices tax-inclusive
+# ("is_tax_inclusive":true), but no words on the page say so, so no taxIncluded (Nebula's precedent). Not listed: its
+# "$3 for 3 months" offer (curiositystream.com/free), a first term; gift cards (a prepaid Standard or Smart Bundle year);
+# and bulk subscriptions for businesses, schools and libraries.
+# Region checklist, 2026-11-13: 1. no country paths (one site; its /es pages only translate); 2. a language
+# menu (English, Deutsch, Español), no country picker; 3. the plans page's pricing data, which names each currency; 4. the
+# plan picker up to its account form (an email and a password), typing nothing; 5. its help centre's international
+# pricing and tax articles; 6. Edge from Canada and through each country's exit, and a plain fetch; 7. no bill offered.
+# Bundles: its Smart Bundle is its own plan (Curiosity Stream with Tastemade Cooking, Kidstream, Curiosity University and
+# SOMM TV, none of them in the catalog), so a plan with perks, not a bundle file. Its bundle with Nebula ended on
+# 2024-12-31 (Nebula's file). Official resellers: none; it sells gift cards itself. Partners that sell it as their own
+# add-on, "separate from a normal Curiosity Stream subscription" (What platforms and devices do you currently support?):
+# Amazon Prime Video (Canada too since 2026-09-30, its investor site's news), Comcast's Xfinity, Sling TV, layer3tv and
+# fuboTV; ISPs that include it free (Flow, BTC, Rev); noted, not listed.
+# Features, read 2026-11-13: both plans' pricing data say "definition":"Ultra High Definition Streaming"
+# ("encoding":"4k"), and its gift page: "Standard Annual is our most popular plan, and includes 3,000+ shows at up to 4K
+# HDR resolution."
+# and "Smart Bundle Annual includes everything in Standard Annual". Its plans table (a screenshot: the ticks are images)
+# gives both plans "Download and watch" and only Smart Bundle "Watch on different screens at the same time", with no
+# number, so Standard plays on 1 screen and Smart Bundle on 2 at least (inferred). Downloads: "You can save up to 10 hours
+# of content at a time." on its Android and iOS apps (Offline Viewing with Mobile Apps), no number of devices, so 1
+# (inferred). Ads: no page of its own says ad-free (its App Store listing, Apple's site, says "award-winning, ad-free
+# content"); its company profile sets the Curiosity Stream service apart from its "free, ad-supported channels", so
+# ad-free (inferred). No profiles: Kids Mode is "account-wide when enabled", and turning it off asks for the account's
+# password (What is Kids Mode?), so parental controls. Pausing: "Choose the duration you would like to pause your
+# subscription (1, 2, or 3 months)." for monthly plans billed by it (How do I pause my subscription?). What it streams:
+# "Stream thousands of films, series, and shows." (its about page), "premium documentaries and series" (its plans page),
+# and "CuriosityKIDS, a dedicated collection of safe, entertaining and inspiring programs for families" (its comparison
+# page); none of your own media.
+# Free use: none. Its plans are paid, with no trial now (the pricing data: "has_trial":false); curiositystream.com/free
+# lets anyone watch six documentaries "to celebrate our 10th Anniversary", a sample, and its free, ad-supported channels
+# (Curiosity Now and others) are on other companies' services.
+
+id: curiosity-stream
+name: Curiosity Stream
+website: https://curiositystream.com
+category: streaming
+spendCategory: streaming
+# No availableIn: "Curiosity Stream is available worldwide in all countries." (Can I be a Curiosity Stream subscriber if I
+# am an international customer?), and it prices "in AED, AUD, BRL, CAD, CHF, COP, CZK, DKK, EUR, GBP, HKD, IDR, INR, MXN,
+# MYR, NOK, NZD, PHP, PLN, RON, SAR, SEK, SGD, TRY, and ZAR for those located elsewhere" (International subscription
+# pricing information); only the research regions are priced here.
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+cancelUrl: https://help.curiositystream.com/en/article/8b4f94-how-do-i-cancel-my-subscription
+sources: { pricing: https://curiositystream.com/plans }
+
+# Owner (M11.2), read 2026-11-13: its investor site's results release (investors.curiositystream.com, its own site); its
+# terms and privacy policy are CuriosityStream Inc.'s, of Silver Spring, Maryland ("Curiosity Inc." in its terms' notice
+# address). Its founder is Discovery Channel's John Hendricks (its about page); no page read names a majority holder (its
+# proxy statement wasn't read). The release also calls it "a leading provider of AI model training datasets" from its own
+# media library, which isn't your data.
+owner:
+  name: CuriosityStream Inc.
+  page:
+    name: CuriosityStream Delivers Strong Third Quarter 2026 Results and Raises Outlook
+    url: https://investors.curiositystream.com/single-news-releases/?storyId=5110135861797180
+  quotes:
+    - 'CuriosityStream Inc. (NASDAQ: CURI), a global factual entertainment company, today announced its financial results for the quarter ended September 30, 2026.'
+    - 'CuriosityStream also reaches millions of subscribers worldwide, operating the flagship Curiosity Stream SVOD service'
+  country:
+    code: US
+    page:
+      name: Terms of Use
+      url: https://curiositystream.com/terms
+    quotes:
+      - 'You agree that the laws of the United States and the State of Maryland govern these Terms of Use'
+      - 'Curiosity Inc., 8484 Georgia Ave., Suite 700, Silver Spring, MD 20910, Attn: Legal.'
+    lastVerified: 2026-11-13
+  stock:
+    listings:
+      - { exchange: NASDAQ, symbol: CURI }
+  lastVerified: 2026-11-13
+
+# Ways to pay (M11.5), read 2026-11-13: its help centre's international article (cards), its billing article (Apple,
+# Google Play, Roku and Amazon's Appstore) and its gift card article. The pricing data offers PayPal only through the
+# Australian and German exits ("paypal":{"available":true}), and no page names it, so it isn't listed. The Amazon Prime
+# Video, Xfinity, Sling TV and fuboTV add-ons are those companies' own subscriptions (above).
+acceptedNetworks:
+  GLOBAL:
+    networks: [mastercard, visa, discover, amex]
+    url: https://help.curiositystream.com/en/article/b8b37c-can-i-be-a-curiosity-stream-subscriber-if-i-am-an-international-customer
+    quotes:
+      - 'Currently we accept major credit/debit cards that have the MASTERCARD, VISA, DISCOVER, or AMERICAN EXPRESS logo on them.'
+paymentMethods:
+  - methods: [card]
+    page: Can I be a Curiosity Stream subscriber if I am an international customer?
+    url: https://help.curiositystream.com/en/article/b8b37c-can-i-be-a-curiosity-stream-subscriber-if-i-am-an-international-customer
+    quotes:
+      - 'Currently we accept major credit/debit cards that have the MASTERCARD, VISA, DISCOVER, or AMERICAN EXPRESS logo on them.'
+  - methods: [app-store]
+    page: Subscribing/Managing Curiosity Stream using Roku, Google Play, iTunes, and Amazon Billing
+    url: https://help.curiositystream.com/en/article/f156ed-subscribing-managing-curiosity-stream-using-roku-google-play-itunes-and-amazon
+    quotes:
+      - 'Subscribing/Managing Curiosity Stream using Roku, Google Play, iTunes, and Amazon Billing'
+      - 'you can create your account using a different Billing payment method, (i.e. apple, google, Roku)'
+  - methods: [gift-card]
+    page: Curiosity Stream Gift Cards
+    url: https://help.curiositystream.com/en/article/642d7c-curiosity-stream-gift-cards
+    quotes:
+      - 'Follow the steps on the gift card page to purchase a digital gift card that will be emailed to the recipient on the date of your choice.'
+      - 'New Users: During the sign-up process, on the payment details page, instead of entering credit card information, you will select "Gift Card" and follow the prompts.'
+# Renewal day (M11.5): its terms bill "at the beginning of your Subscription Period" ("if you select a monthly
+# subscription, you will be billed for an additional month at the beginning of the next month"), and its help centre
+# says "For monthly accounts, that billing period is 30 days" (What are the benefits of a Curiosity Stream annual
+# standard plan?): neither names the day, and they disagree on the month, so its months are priced as months.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://curiositystream.com/terms
+    - https://help.curiositystream.com/en/article/66f2f1-how-does-curiosity-stream-work
+    - https://help.curiositystream.com/en/article/a2ab65-what-are-the-benefits-of-a-curiosity-stream-annual-standard-plan
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://curiositystream.com/plans
+    - https://curiositystream.com/free
+    - https://help.curiositystream.com/en/article/66f2f1-how-does-curiosity-stream-work
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "Any laptop, desktop, PC, or Mac via an up-to-date web browser", Fire TV,
+# Roku, Chromecast, Android, Android TV, iPhone and iPad, Apple TV, "Xbox One" and smart TVs (What platforms and devices
+# do you currently support?). Sign-in: "Email" and "Password" (curiositystream.com/login); "Sign In With TV Provider" is
+# for those its partner ISPs give it to. App languages: its sites' language menu ("English", "Deutsch", "Español").
+# Support: "please contact us directly at 1-844-778-8999, Monday-Friday 11AM-7PM Eastern Time or anytime at
+# help@curiositystream.com" (Curiosity Stream Gift Cards); its pages' chat bubble wasn't opened, and its privacy policy
+# calls its chat a "chatbot".
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en, de, es]
+  support.channels: [email, phone]
+
+# Perks (M11.6): the services the Smart Bundle includes, none of them in the catalog. Tastemade Cooking is in the US,
+# Canada, the UK, Australia and Germany only ("Tastemade (US, Canada, United Kingdom, Australia & Germany)", Smart Bundle
+# FAQ), and Kidstream in the US, the UK, Canada, Ireland, Australia and New Zealand among the research regions (the
+# bundle data its plans page loads), though every country's plan card lists all four.
+perks:
+  - id: tastemade-cooking
+    name: Bundled access to Tastemade Cooking
+  - id: kidstream
+    name: Bundled access to Kidstream
+  - id: curiosity-university
+    name: Bundled access to Curiosity University
+  - id: somm-tv
+    name: Bundled access to SOMM TV
+
+plans:
+  - id: curiosity-stream.standard
+    name: Standard
+    link: https://curiositystream.com/plans
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.concurrent-streams: 1
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [films, series, documentaries, kids]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    inferred:
+      ad-free:
+        reason: 'No page of its own says it has no ads, but its company profile lists the Curiosity Stream subscription service apart from its free, ad-supported channels, and its plan pages show no ads.'
+        page:
+          name: CuriosityStream Delivers Strong Third Quarter 2026 Results and Raises Outlook
+          url: https://investors.curiositystream.com/single-news-releases/?storyId=5110135861797180
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'You can save up to 10 hours of shows to watch offline in its Android and iOS apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Offline Viewing with Mobile Apps
+          url: https://help.curiositystream.com/en/article/638112-offline-viewing-with-mobile-apps
+        lastVerified: 2026-11-13
+    notes: Thousands of documentaries and series on science, history, nature and more, up to 4K HDR, on one screen at a time, with downloads. Monthly plans billed by Curiosity Stream can be paused for 1 to 3 months.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: CA
+        currency: CAD
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: US
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: GB
+        currency: GBP
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: GB
+        currency: GBP
+        amount: 35.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IE
+        currency: EUR
+        amount: 41.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: AU
+        currency: AUD
+        amount: 6.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: AU
+        currency: AUD
+        amount: 60.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: DE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: DE
+        currency: EUR
+        amount: 41.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: FR
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: FR
+        currency: EUR
+        amount: 41.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NL
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NL
+        currency: EUR
+        amount: 41.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: ES
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: ES
+        currency: EUR
+        amount: 41.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IT
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IT
+        currency: EUR
+        amount: 41.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+
+  # Smart Bundle: everything in Standard ("Smart Bundle Annual includes everything in Standard Annual", its gift page),
+  # plus "Watch on different screens at the same time" and its four bundled services (its plans page).
+  - id: curiosity-stream.smart-bundle
+    name: Smart Bundle
+    link: https://curiositystream.com/plans
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.concurrent-streams: 2
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [films, series, documentaries, kids]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'Its plans table says Smart Bundle lets you watch on different screens at the same time, without saying how many, so 2 is the least it can be.'
+        page:
+          name: Plans
+          url: https://curiositystream.com/plans
+        lastVerified: 2026-11-13
+      ad-free:
+        reason: 'No page of its own says it has no ads, but its company profile lists the Curiosity Stream subscription service apart from its free, ad-supported channels, and its plan pages show no ads.'
+        page:
+          name: CuriosityStream Delivers Strong Third Quarter 2026 Results and Raises Outlook
+          url: https://investors.curiositystream.com/single-news-releases/?storyId=5110135861797180
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'You can save up to 10 hours of shows to watch offline in its Android and iOS apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Offline Viewing with Mobile Apps
+          url: https://help.curiositystream.com/en/article/638112-offline-viewing-with-mobile-apps
+        lastVerified: 2026-11-13
+    perks: [tastemade-cooking, kidstream, curiosity-university, somm-tv]
+    notes: Everything in Standard on more than one screen at a time, plus Tastemade Cooking, Kidstream, Curiosity University and SOMM TV, each on its own account; Tastemade Cooking and Kidstream only in some countries. Your name and email go to those services for sign-in and their marketing.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 15.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: CA
+        currency: CAD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: GB
+        currency: GBP
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: GB
+        currency: GBP
+        amount: 58.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IE
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IE
+        currency: EUR
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: AU
+        currency: AUD
+        amount: 15.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: AU
+        currency: AUD
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 132.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: DE
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: DE
+        currency: EUR
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: FR
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: FR
+        currency: EUR
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NL
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: NL
+        currency: EUR
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: ES
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: ES
+        currency: EUR
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IT
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+      - region: IT
+        currency: EUR
+        amount: 67.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://curiositystream.com/plans
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch and in Edge: its Terms of Use ("Effective Date:
+# March 19, 2024", CuriosityStream Inc.'s, under Maryland law, with sections for users in Germany) and its Privacy Policy
+# ("Last Updated: March 19, 2024"), which the terms incorporate; its Gift Subscription Terms (curiositystream.com/
+# giftterms: no topic changes); its sign-up forms (curiositystream.com/plans: "Email" and "Password"; its Smart Bundle
+# page's: name, country and card, and "By subscribing to Curiosity Stream, you agree to our Terms of Use and Privacy
+# Policy.", read without typing); and its help centre's billing, cancelling, pause, plan change, download and Kids Mode
+# articles. Its apps have no licence of their own (the terms' section 2). Not read: its opt-out form (a Google form,
+# another company's site), the steps after the account form, and the bundled services' own terms. Its terms take a
+# perpetual, irrevocable licence over what you submit (section 8), a topic streaming doesn't have. Calibrated against
+# STARZ and Nebula.
+policies:
+  links:
+    - name: 'Terms of Use'
+      url: https://curiositystream.com/terms
+    - name: 'Privacy Policy'
+      url: https://curiositystream.com/privacy
+    - name: 'Smart Bundle sign-up'
+      url: https://curiositystream.com/smartbundle
+    - name: 'How does Curiosity Stream work?'
+      url: https://help.curiositystream.com/en/article/66f2f1-how-does-curiosity-stream-work
+    - name: 'How do I cancel my subscription?'
+      url: https://help.curiositystream.com/en/article/8b4f94-how-do-i-cancel-my-subscription
+    - name: 'What are the benefits of a Curiosity Stream annual standard plan?'
+      url: https://help.curiositystream.com/en/article/a2ab65-what-are-the-benefits-of-a-curiosity-stream-annual-standard-plan
+    - name: 'How do I change my streaming plan?'
+      url: https://help.curiositystream.com/en/article/f643c2-how-do-i-change-my-streaming-plan
+    - name: 'Taxes Applicable to Your Subscription'
+      url: https://help.curiositystream.com/en/article/e038ac-taxes-applicable-to-your-subscription
+    - name: 'Offline Viewing with Mobile Apps'
+      url: https://help.curiositystream.com/en/article/638112-offline-viewing-with-mobile-apps
+    - name: 'What is Kids Mode?'
+      url: https://help.curiositystream.com/en/article/bc4c20-what-is-kids-mode
+    - name: 'Bulk Purchase FAQ (Business, Education & Libraries)'
+      url: https://help.curiositystream.com/en/article/767e99-bulk-purchase-faq-business-education-libraries
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use its sites for analytics and marketing, and may record your clicks and typing to replay them. Opting out covers only some of its tools.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'To generate web analytics and compile user information for marketing purposes, advertising, conducting marketing analysis, providing you with recommendations for products or services based on your profile, and promotional material planning and distribution.'
+        - url: https://curiositystream.com/privacy
+          quote: 'We may use session replay technology to monitor how you interact with our Sites or services.'
+        - url: https://curiositystream.com/privacy
+          quote: 'Note that the opt-out is specific to Google activities and does not affect the activities of other ad networks or analytics providers that we may use.'
+      action:
+        name: 'Its cookie choices (privacy policy)'
+        url: https://curiositystream.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It may sell or share your information with ad partners, and Meta can use what its pixel sees for its own ads. Opting out means filling in a form.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'We may sell or share identifiers, commercial information, internet or other electronic network activity information, and any of the categories of personal information listed in Section B, below.'
+        - url: https://curiositystream.com/privacy
+          quote: 'Please note that through the Meta Pixel, Facebook can connect this data with your Facebook account and use it for its own advertising purposes'
+        - url: https://curiositystream.com/privacy
+          quote: 'If you want to opt-out of this use, please fill out this form'
+      action:
+        name: 'Do Not Sell or Share My Personal Information'
+        url: https://curiositystream.com/privacy#information-sharing
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It tracks what you do on its sites to show you targeted ads on other sites. You can opt out of its own cookies or send the Global Privacy Control, but other ad companies’ cookies stay.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'Targeting Tools on the Sites may result in information about your activity on the Sites being transmitted from your browser to CS and third parties, which, in turn, may result in the display of targeted advertisements on third-party websites and platforms, including advertisements for CS content.'
+        - url: https://curiositystream.com/privacy
+          quote: 'You can opt-out of first-party cookies by clicking here'
+        - url: https://curiositystream.com/privacy
+          quote: 'We do not recognize all DNT signals but we do recognize the Global Privacy Control.'
+      action:
+        name: 'Its cookie choices (privacy policy)'
+        url: https://curiositystream.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or upload trains AI.'
+      pages: [https://curiositystream.com/privacy, https://curiositystream.com/terms]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it needs it to serve you, then for an “appropriate period” for its business and legal needs. It names no periods.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'We will retain your personal information for as long as necessary to provide the products and services you have requested. Afterwards, we may retain data for an appropriate period to protect ourselves from legal claims, to administer our business, or to the extent permitted by applicable law'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You can delete only some details yourself, such as your email or mailing address, in your account. Only people in Europe, the UK and some US states can ask for everything to be deleted.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'You can also specifically update, change, or delete certain personal information (such as your email address, mailing address, and payment method) on the Sites by logging into your account'
+      action:
+        name: 'Your account'
+        url: https://curiositystream.com/account
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'In Europe and the UK, you can ask it to delete your information, but it doesn’t say how long that takes.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'Additionally, individuals located in the EEA, United Kingdom, and Switzerland have the right to'
+        - url: https://curiositystream.com/privacy
+          quote: 'Request the deletion, anonymization or restriction of the processing of your personal information;'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://curiositystream.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy names no way to get a copy of your data, except for people in Europe, the UK and some US states.'
+      pages: [https://curiositystream.com/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'In Europe and the UK, you can ask it for an electronic copy of your information to take elsewhere; there’s no way to get it yourself.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'Additionally, individuals located in the EEA, United Kingdom, and Switzerland have the right to'
+        - url: https://curiositystream.com/privacy
+          quote: 'Receive an electronic copy of your personal information, if you would like such a copy for yourself or to port your personal information to a different provider;'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://curiositystream.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides what the law requires, it uses and may hand over your information for informal requests from police or governments.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'and informal requests from law enforcement or other governmental authorities'
+        - url: https://curiositystream.com/terms
+          quote: 'CS reserves the right to access and disclose in accordance with applicable law any information, including, without limitation, user names of accounts and other information, to comply with applicable laws and lawful government requests.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information can be sent to its own companies and others anywhere in the world, and outside Europe it doesn’t say what protects it.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'CS may transfer that information to its affiliates and subsidiaries or to other third parties, across borders, and from your country or jurisdiction to other countries or jurisdictions around the world.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'From Europe and the UK, your information goes to the US, whose privacy laws are weaker, protected by the EU’s standard contract terms.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'please note that you are transferring your personal information to the United States which does not have the same data protection laws as the EU/EEA'
+        - url: https://curiositystream.com/privacy
+          quote: 'In case of such transfer, appropriate safeguards (e.g., EU standard contractual clauses) will be used to ensure an adequate level of protection of your personal information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password, then give your name, address and card to pay.'
+      sources:
+        - url: https://help.curiositystream.com/en/article/66f2f1-how-does-curiosity-stream-work
+          quote: '3. Create an account by entering your email address and a password.'
+        - url: https://curiositystream.com/privacy
+          quote: 'Email address, first and last name, mailing address and billing information if you subscribe to the Sites.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'It isn’t meant for anyone under 16 (18 in Europe), and deletes a child’s information it finds. Kids Mode hides unsuitable shows for the whole account.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'The Sites are not intended for use by persons under the age of 16, or under the age of 18 for visitors located in the European Economic Area ("EEA").'
+        - url: https://curiositystream.com/privacy
+          quote: 'In the event that we learn that a person under these ages has provided CS with personal information, we will promptly delete such personal information from our systems.'
+        - url: https://help.curiositystream.com/en/article/bc4c20-what-is-kids-mode
+          quote: 'Kids Mode is a viewing mode within your account settings that excludes films that may not be appropriate for young children.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses reasonable measures and firewalls. It names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'We implement reasonable security measures to protect against the loss, misuse, unauthorized access, disclosure, alteration or destruction of the information you provide us.'
+        - url: https://curiositystream.com/privacy
+          quote: 'We use firewalls to protect your information from unauthorized access, disclosure, alteration, or destruction.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online at any time from your account, with no fee, and keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'You have the right to cancel your subscription without fee or penalty at any time.'
+        - url: https://curiositystream.com/terms
+          quote: 'After cancellation, you will have continued access to the applicable content and/or services for the remainder of the current Subscription Period'
+        - url: https://help.curiositystream.com/en/article/8b4f94-how-do-i-cancel-my-subscription
+          quote: '3. Select Cancel Plan in the top right corner.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, a yearly plan included, but you keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'you will not receive any refund, unless otherwise stated at the time of cancellation'
+        - url: https://curiositystream.com/smartbundle
+          quote: 'There are no refunds for partial months or years.'
+        - url: https://help.curiositystream.com/en/article/a2ab65-what-are-the-benefits-of-a-curiosity-stream-annual-standard-plan
+          quote: 'By opting to save with an annual plan, the charge is non-refundable after the payment has been processed.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you about a new price ahead of time, in the way the law requires, without saying how far ahead; a new price starts with your next period.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'We may change the price of Paid Subscriptions from time to time, but we will communicate any price changes to you in advance in the manner required by applicable law (if any)'
+        - url: https://curiositystream.com/terms
+          quote: 'Price changes for Paid Subscriptions will take effect at the start of the next Subscription Period.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its plans offer no free trial now. Its terms say a trial charges your card when it ends unless you cancel, and promise no reminder.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'If you do not cancel your free trial within the trial period set out in the terms of the free trial, it will automatically convert to a Paid Subscription.'
+        - url: https://curiositystream.com/terms
+          quote: 'This means that we will charge your payment card for the applicable subscription fee once your free trial period ends'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews on its own, but not that it reminds you first.'
+      pages:
+        - https://curiositystream.com/terms
+        - https://help.curiositystream.com/en/article/66f2f1-how-does-curiosity-stream-work
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'Outside the US, its terms say what you’re billed can change from one period to the next with exchange rates and currency conversion fees, though its pages price each country in its own currency.'
+      sources:
+        - url: https://help.curiositystream.com/en/article/e038ac-taxes-applicable-to-your-subscription
+          quote: 'For subscribers located outside of the United States, the amounts billed may vary over billing periods due to fluctuating foreign currency rates and currency conversion fees.'
+        - url: https://curiositystream.com/terms
+          quote: 'All fees are charged in US Dollars (USD).'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      regions: [US]
+      tier: great
+      reason: 'In the US you pay the plan’s price plus any sales tax, and nothing more.'
+      sources:
+        - url: https://help.curiositystream.com/en/article/e038ac-taxes-applicable-to-your-subscription
+          quote: 'For those subscribers located in a jurisdiction that does not charge an applicable tax, no amount will be charged beyond our subscription plan price.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: poor
+      reason: 'A switch takes effect at once and the new price starts at your next billing date, so moving to a cheaper plan gives up the rest of the dearer one you paid for.'
+      sources:
+        - url: https://help.curiositystream.com/en/article/f643c2-how-do-i-change-my-streaming-plan
+          quote: '3. Choose the plan that you would like to change to. You will automatically be switched to the new plan or billing period (monthly <-> annual).'
+        - url: https://help.curiositystream.com/en/article/f643c2-how-do-i-change-my-streaming-plan
+          quote: '4. Your card will automatically be charged at the start of your next billing period in the amount of your new plan!'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'After 60 days of talks, disputes go to a court in Maryland, one person at a time, with no class actions or jury. A private referee (an arbitrator) decides only if a court throws that rule out.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'If, at the end of the Informal Negotiation Period (and not before), and only after the completion of the Conference, the Dispute has not been resolved, then the Dispute shall be resolved by a court located in the state of Maryland'
+        - url: https://curiositystream.com/terms
+          quote: 'YOU AND CS FURTHER AGREE TO BRING AND MAINTAIN ANY SUCH LITIGATION SOLELY ON AN INDIVIDUAL BASIS.'
+        - url: https://curiositystream.com/terms
+          quote: 'IN THE EVENT THAT A COURT OF COMPETENT JURISDICTION DETERMINES THAT SECTION 18.B OF THESE TERMS (INDIVIDUAL LITIGATION) IS INVALID OR UNENFORCEABLE, YOU AND CS AGREE THAT THE DISPUTE WILL BE DECIDED BY BINDING ARBITRATION ON AN INDIVIDUAL BASIS.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [DE]
+      tier: great
+      reason: 'In Germany, disputes go to the court where you live, and its US rules on class actions and private referees don’t apply.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'In deviation from Section 18, any dispute between the parties will be resolved by the competent court of the place where you have your residence or elective domicile.'
+        - url: https://curiositystream.com/terms
+          quote: 'SECTION 18 DOES NOT APPLY IF YOU ARE A USER BASED IN GERMANY.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, using the service afterwards means you accept them, and changes can even apply to the past.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'By continuing to use the Sites, or any portion thereof, after we post any such changes, you accept these Terms of Use, as modified.'
+        - url: https://curiositystream.com/terms
+          quote: 'You agree that, to the extent permitted by law, any changes to these Terms of Use shall apply retroactively.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      regions: [DE]
+      tier: good
+      reason: 'In Germany, it must send you changes two months before they apply, and you can end your subscription free of charge before then.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'Amendments to these Terms of Use shall be offered to you in text form no later than two (2) months before their proposed date of entry into force.'
+        - url: https://curiositystream.com/terms
+          quote: 'If changes are offered to you, you may also terminate the contract without notice and free of charge before the proposed date of entry into force of the changes.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your use of the service at once if you break its terms or give false account details, and its terms promise no refund.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'We shall have the right to immediately terminate these Terms of Use and your use of the Sites in the event of any breach by you of these Terms of Use.'
+        - url: https://curiositystream.com/terms
+          quote: 'If you provide any information that is untrue, inaccurate, or incomplete, we reserve the right to terminate your account and suspend your use of any and all of the Sites.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      regions: [DE]
+      tier: poor
+      reason: 'In Germany, it can close your account for any reason with a week’s notice, and its terms promise no refund.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: "In deviation from Section 19, we may terminate the account and your use of the Sites for convenience with one (1) week's prior notice."
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or end the service at any time, and the Smart Bundle’s partner services can be changed or dropped whenever it likes.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'We may change, restrict access to, suspend or discontinue the Sites, or any portion of the Sites, at any time and at our sole discretion.'
+        - url: https://curiositystream.com/terms
+          quote: 'Content Bundle offers, including content partners, are subject to change and may be modified or terminated at any time.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://curiositystream.com/terms]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'It tells you not to give your password to anyone else, and its help centre says people can’t share log-ins.'
+      sources:
+        - url: https://curiositystream.com/privacy
+          quote: 'To protect the integrity of the information contained in this record, you should not disclose or otherwise reveal your password to third parties.'
+        - url: https://help.curiositystream.com/en/article/767e99-bulk-purchase-faq-business-education-libraries
+          quote: 'as individuals cannot share credentials.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads in its mobile apps are capped at 10 hours of shows at a time.'
+      sources:
+        - url: https://help.curiositystream.com/en/article/638112-offline-viewing-with-mobile-apps
+          quote: 'You can save up to 10 hours of content at a time.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: No claims over its tracking
+      tier: bad
+      reason: 'Its terms make you promise never to sue it over what its tracking tools send to other companies, and say signing up in order to bring a claim breaks its terms and could cost you its legal fees.'
+      sources:
+        - url: https://curiositystream.com/terms
+          quote: 'YOU WILL NOT INITIATE ANY LITIGATION OR OTHERWISE ASSERT ANY CLAIM AGAINST CS BASED, IN WHOLE OR IN PART, ON SUCH TRANSMISSIONS'
+        - url: https://curiositystream.com/terms
+          quote: 'for the purpose of, or with the intention of initiating, future litigation or arbitration'
+        - url: https://curiositystream.com/terms
+          quote: "CS can elect to void this agreement, without prejudice to CS's ability to seek damages, expressly including CS's attorneys' fees, from you resulting from your breach of these Terms of Use and/or the fraudulent conduct described above."
+      lastVerified: 2026-11-13

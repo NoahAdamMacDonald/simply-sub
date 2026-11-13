@@ -1,0 +1,300 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, and Amazon's channel offer
+# again through a Canadian exit. Pages, each quoted where it's used:
+# What it sells: Hollywood Suite is four movie channels and an on-demand library sold through others, never by itself:
+# "Hollywood Suite is available exclusively from Canadian TV Service Providers. We don’t offer Hollywood Suite as a
+# standalone or “over-the-top” streaming service directly to consumers." (its help centre, Can I subscribe directly to
+# Hollywood Suite?), and "Hollywood Suite is available to over 10 million households across Canada, exclusively through
+# Canadian television service providers and Amazon Prime Video Channels." (its owner's release of 2026-09-28). Its "Get
+# Hollywood Suite" page lists 48 sellers by province: 47 TV providers (a channel of their TV packages, its page data's
+# prices from 3.50 to 23 dollars a month, telecom's to list) and Amazon Prime Video ("$4.99/month", "Start your free
+# trial today!", "Add channels you love. Watch anywhere. Cancel anytime. No cable required."), the one way to stream it
+# on its own. So its one plan is the Prime Video channel, billed by Amazon (app-store), never a plan of Amazon's. Apple
+# TV and Roku aren't named.
+# Pricing: Amazon's offer page for the channel (primevideo.com/offers?benefitId=hollywoodsuiteca, reached from the Get
+# page's "Start your free trial today!" link): "7-day free trial", "$5.99/month after trial", in a bare "$"; its page
+# data names Canada ("recordTerritory":"CA","currentTerritory":"CA", the benefit "hollywoodsuiteca"), from here and
+# through a Canadian exit, so CA$5.99. The Get page's "$4.99/month" (its page data's "pricePerMonth":"4.99", the page
+# "updated" 2026-04-10) is lower than what Amazon charges now: the seller's checkout price is used (notes.md). Monthly
+# only; the seven free days are a trial.
+# Region checklist for CA, 2026-11-13: 1. one site, hollywoodsuite.ca, English only, no locale paths; 2. no picker but a
+# province filter of TV providers; 3. the Get page's own data (its providers list) and Amazon's offer data
+# ("recordTerritory":"CA"); 4. Amazon's offer page up to "Start your 7-day free trial", never past it; 5. its help
+# centre (TV providers "from $6/month", no streaming price); 6. Edge from here, a plain fetch (the pages need
+# JavaScript), and a Canadian exit for Amazon's page; 7. no bill offered. US and elsewhere: not sold (availableIn).
+# Bundles: none: its pages sell no bundle, and the TV providers' packages that include it (Beanfield's "More Movies
+# package", SaskTel's "MaxTV Fully Loaded", Shaw Direct's Medium and Large packages) are telecom's. Official resellers:
+# none; Amazon bills it on its own service (a partner, noted), as do the TV providers.
+# Features, read 2026-11-13: "uncut and commercial-free on demand and on 4 channels" (its home page) and "four exclusive
+# HD channels" (its owner's release), so ad-free; Amazon's channel page lists its four live channels under "Watch Live"
+# ("Hollywood Suite 70s+", "Hollywood Suite 80s & 90s", "Hollywood Suite 2000s", "Hollywood Suite 2010s+") and its
+# films, one of them "Superbad (4K UHD)": 4K for some titles (inferred). Streams: Amazon's usage rules for "Third-Party
+# Add-On Subscriptions": "You can stream up to three titles (including Prime Video titles, which are available with an
+# Amazon Prime or Prime Video subscription) at the same time using the same Amazon account." Downloads: "Many
+# third-party add-on subscription titles" can be downloaded, but no page says whether its titles are, so none listed.
+# What it streams: "Must-see movies from yesterday to today, plus exclusive new series from around the world" (its home
+# page); none of your own media. Pause: none on any page. Parental controls: none of its own (Amazon's Prime Video
+# controls are Amazon's, which count only for Amazon's own services).
+# Free use: none. Its pages sell it only through TV providers and Amazon, and Amazon's free week is a trial.
+
+id: hollywood-suite
+name: Hollywood Suite
+website: https://hollywoodsuite.ca
+category: streaming
+spendCategory: streaming
+# "Hollywood Suite is available exclusively from Canadian TV Service Providers" (its help centre), and "available to
+# over 10 million households across Canada, exclusively through Canadian television service providers and Amazon Prime
+# Video Channels" (its owner's release); its terms promote "programs, films, music and other products available in
+# Canada".
+availableIn: [CA]
+billingCurrency: { CA: CAD }
+# No cancel page of its own: its help centre sends subscribers to whoever bills them ("Contact your Television Service
+# Provider ... if you need assistance with your account or billing details"); Prime Video channels are cancelled in the
+# Amazon account ("you may cancel any time by visiting Your Account", Prime Video's terms, 4(d)).
+cancelUrl: https://hollywoodsuite.ca/help-centre
+sources: { pricing: https://www.primevideo.com/offers?benefitId=hollywoodsuiteca }
+notes: Streamed on its own only as an Amazon Prime Video channel. Canadian TV providers add it to their TV packages.
+# Owner (M11.2), read 2026-11-13: Anthem Sports & Entertainment's own news release names it "an Anthem Sports &
+# Entertainment company" (Anthem agreed to buy it on 2024-09-25, its release of that day; its site's footer now reads
+# "ANTHEM CANADA TV CORP."). Its terms and privacy policy are still HOLLYWOOD SUITE INC.'s. Where Anthem is: its
+# services page. A private company: no page names a listing.
+owner:
+  name: Anthem Sports & Entertainment Inc. (Hollywood Suite Inc.)
+  website: https://www.anthemse.com
+  page:
+    name: Hollywood Suite Commemorates National Day for Truth and Reconciliation with Full Day of Indigenous Programming
+    url: https://www.anthemse.com/post/hollywood-suite-commemorates-national-day-for-truth-and-reconciliation-with-full-day-of-indigenous-p
+  quotes:
+    - 'Hollywood Suite is an Anthem Sports & Entertainment company.'
+  country:
+    code: CA
+    page:
+      name: Anthem Services
+      url: https://www.anthemse.com/broadcastservices
+    quotes:
+      - 'Headquarters: Toronto, Ontario, Canada & Denver, Colorado USA'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: Amazon's Prime Video Channels (app-store, as the schema names them) and a TV
+# provider's bill, from its owner's release and its help centre. No page names a card network: Amazon takes the
+# payment.
+paymentMethods:
+  - methods: [app-store, provider-billing]
+    page: Hollywood Suite Commemorates National Day for Truth and Reconciliation (Anthem Sports & Entertainment)
+    url: https://www.anthemse.com/post/hollywood-suite-commemorates-national-day-for-truth-and-reconciliation-with-full-day-of-indigenous-p
+    quotes:
+      - 'Hollywood Suite is available to over 10 million households across Canada, exclusively through Canadian television service providers and Amazon Prime Video Channels.'
+  - methods: [provider-billing]
+    page: How do I get Hollywood Suite?
+    url: https://hollywoodsuite.ca/help-centre
+    quotes:
+      - 'Hollywood Suite is available exclusively from Canadian TV Service Providers, from $6/month.'
+# Renewal day (M11.5): Prime Video's terms renew a subscription "automatically" and keep "the original billing date"
+# after a failed payment, without saying which day that is; its own pages say nothing on billing.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.primevideo.com/help?nodeId=202095490
+    - https://hollywoodsuite.ca/help-centre
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://hollywoodsuite.ca/get-hollywood-suite
+    - https://hollywoodsuite.ca/help-centre
+    - https://www.primevideo.com/offers?benefitId=hollywoodsuiteca
+  lastVerified: 2026-11-13
+
+# Platforms (2026-11-13): it has no app of its own; its Prime Video channel streams "to your web browser,
+# Internet-connected TVs, Blu-ray players, set-top-boxes, Fire tablets and other compatible devices", and downloads to
+# "Android and iOS devices" (Amazon's usage rules for third-party add-on subscriptions). Sign-in: none of its own (the
+# buyer's Amazon account), so not stated. App languages: its site is in English only (no French version); Prime Video's
+# own app has more. Support: "Send us your questions, comments and suggestions and we’ll respond as soon as possible."
+# with "info@hollywoodsuite.ca" (its contact page); no chat or phone line for viewers (its phone number is for
+# accessibility feedback), and its help centre sends account and billing problems to whoever bills you.
+features:
+  platforms: [web, ios, android, tv]
+  languages.interface: [en]
+  support.channels: [email]
+
+plans:
+  - id: hollywood-suite.standard
+    name: Hollywood Suite
+    link: https://hollywoodsuite.ca/get-hollywood-suite
+    features:
+      video.quality: 4k
+      ad-free: true
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels]
+      streaming.content: [films, series]
+      streaming.own-media: false
+    inferred:
+      video.quality:
+        reason: 'Its Prime Video channel lists one film, "Superbad (4K UHD)", in 4K, so at least that title streams in 4K. Its owner calls the four live channels HD, and no page names a best quality.'
+        page:
+          name: Hollywood Suite (Prime Video Channels)
+          url: https://www.primevideo.com/?contentId=hollywoodsuiteca&ref_=atv_surl_hollywoodsuiteca&benefitId=hollywoodsuiteca&contentType=subscription
+        lastVerified: 2026-11-13
+    notes: An Amazon Prime Video channel, billed by Amazon, after a 7-day free trial. Four live movie channels and on-demand films and series, uncut and without ads. Its 3 streams at once are shared with Prime Video's own titles.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.primevideo.com/offers?benefitId=hollywoodsuiteca
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada: its own Terms of Use ("last updated on
+# October 25, 2011", for its website, which include its Privacy Policy) and Privacy Policy, its help centre, and, since
+# its one plan is bought and watched on Prime Video, every agreement that buyer accepts: the Prime Video Terms of Use
+# ("Last Updated: August 26, 2026"), which include the Prime Video Usage Rules and amazon.ca's Conditions of Use ("Last
+# updated: October 30, 2026"), and Amazon's Privacy Notice, rated once as a shared document
+# (data/policies/amazon-privacy.yaml). Its own privacy policy grades no worse than Amazon's on any privacy topic (its
+# website's analytics and ad partners' cookies are "Non-Personal Information", it "will not sell, rent or trade in
+# Personal Information", it says nothing on how long it keeps data or where), so only its children's clause is rated
+# from it. Not read: the TV providers' terms, which bill it in their packages. Its website terms take a perpetual,
+# irrevocable licence over what you send it through social networks, a topic streaming doesn't have (as STARZ's). Plan
+# changes don't apply (one paid plan). Calibrated against Prime Video (the same Amazon clauses) and STARZ.
+policies:
+  shared: [amazon-privacy]
+  links:
+    - name: 'Terms of Use'
+      url: https://hollywoodsuite.ca/terms-of-use
+    - name: 'Privacy Policy'
+      url: https://hollywoodsuite.ca/privacy
+    - name: 'Get Hollywood Suite'
+      url: https://hollywoodsuite.ca/get-hollywood-suite
+    - name: 'Prime Video terms of use'
+      url: https://www.primevideo.com/help?nodeId=202095490
+    - name: 'Prime Video usage rules'
+      url: https://www.primevideo.com/help?nodeId=202095500
+    - name: 'Conditions of use (Amazon Canada)'
+      url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+    - name: 'Hollywood Suite on Prime Video Channels'
+      url: https://www.primevideo.com/offers?benefitId=hollywoodsuiteca
+  ratings:
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Under-18s may watch only with a parent or guardian. Its own website collects a child’s details only to check their age and run a contest, and nothing says how teens’ data is treated.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you are under 18 years of age, or the age of majority in your location, you may use the Service only with involvement of a parent or guardian.'
+        - url: https://hollywoodsuite.ca/privacy
+          quote: 'We take particular care in the collection of Personal Information from children under the age of 13 and only collect the Personal Information from a child under 13 years of age to the extent that it is reasonably necessary to verify the child’s age, to administer the child’s participation in a contest or promotion and, if the child wins a prize, to contact the child’s parent or guardian.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel the channel at any time, online in your Amazon account.'
+      sources:
+        - url: https://hollywoodsuite.ca/get-hollywood-suite
+          quote: 'Add channels you love. Watch anywhere. Cancel anytime.'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you signed-up for your video-only subscription or membership directly through us, you may cancel any time by visiting Your Account and adjusting your membership settings'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Amazon refunds you in full if you cancel within 3 business days of signing up or of your trial ending, less what you watched. After that, only if you haven’t watched since your last payment.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you cancel within 3 business days of signing up for, or converting from a free trial to, a paid membership (or, for customers in the UK and European Union, within 14 days of receiving confirmation of your subscription or membership service), we will refund your full membership fee'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you cancel at any other time, we will refund your full membership fee only if Digital Content available as part of your video-only membership has not been accessed through your account since your latest membership charge.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'A new price starts only when you renew, but Amazon promises notice only where the law requires it.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'may change over time and by location without notice (except as may be required by applicable law)'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'However, any increase in subscription fee will not apply until your subscription is renewed.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 7-day trial needs an Amazon account with a payment method and turns into a paid subscription on its own, without a reminder unless the law requires one.'
+      sources:
+        - url: https://www.primevideo.com/offers?benefitId=hollywoodsuiteca
+          quote: '$5.99/month after trial'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'you may be required to be logged in to the account and have a valid payment method associated with it'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If you purchase a subscription or start a free trial for a subscription, your subscription will automatically continue, and you authorize us (without further notice, unless required by applicable law) to collect the then-applicable periodic subscription fee'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews every month without telling you first, unless the law requires it.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'UNLESS YOU NOTIFY US BEFORE A CHARGE THAT YOU WANT TO CANCEL OR DO NOT WANT TO AUTO RENEW, YOU UNDERSTAND THAT YOUR SUBSCRIPTION WILL AUTOMATICALLY CONTINUE AND YOU AUTHORIZE US (WITHOUT NOTICE TO YOU, UNLESS REQUIRED BY APPLICABLE LAW) TO COLLECT THE THEN-APPLICABLE PERIODIC SUBSCRIPTION FEE INCLUDING ANY TAXES, USING ANY PAYMENT METHOD WE HAVE ON FILE FOR YOU.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: great
+      reason: 'Amazon names no fees beyond the price and taxes.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'The pricing for subscriptions or memberships may include VAT and/or other taxes.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes over the subscription go to Amazon’s private referee (an arbitrator), one person at a time, with no class actions, unless your province’s law lets you go to court. Its website’s own terms name Ontario’s courts.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'Any dispute or claim arising from or relating to this Agreement or the Service is subject to the governing law, disclaimer of warranties and limitation of liability, dispute resolution and class action waiver (if applicable), and all other terms in the Amazon Conditions of Use of your Video Marketplace (noted here).'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'Any dispute or claim relating in any way to your use of any Amazon Service, or to any products or services sold or distributed by Amazon or through Amazon Services will be resolved by binding arbitration, rather than in court'
+        - url: https://www.amazon.ca/gp/help/customer/display.html?nodeId=GLSBYFE9MGKKQXXM
+          quote: 'We each agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated or representative action.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'Amazon and Hollywood Suite each change their terms by posting new ones, and carrying on watching or visiting means you accept them.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'by posting the revised terms in connection with the Service or on your Video Marketplace'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'To the maximum extent permitted by law, your continued use of the Service or Software following any changes will constitute your acceptance of such changes.'
+        - url: https://hollywoodsuite.ca/terms-of-use
+          quote: 'Your continued use of this Site, will signify your acceptance of any revisions.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'Amazon can end your access at its discretion without notice, refunding the unused part, but nothing if it decides you broke its terms.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'We may terminate your access to the Service, including any subscription available as part of the Service, at our discretion without notice (except as may be required by applicable law).'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'If we do so, we will give you a pro-rated refund of your subscription fee (if any); however, if you violate any of the terms of this Agreement, your rights under this Agreement will automatically terminate without notice, and Amazon may, in its discretion, immediately revoke your access to the Service and to Digital Content without refund of any fees.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'The channel can change or drop its features and films, and Amazon can stop any part of the service without notice and says it owes you nothing.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'Third parties that provide subscription services (for example, through Prime Video add-on subscriptions) may change or discontinue the features of their services or the content in their services.'
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'Amazon reserves the right to suspend, or discontinue the Service, or any part of the Service, at any time and without notice (except as required by applicable law or set out above), and Amazon will not be liable to you should it exercise such rights, even if your ability to use Digital Content is impacted by the change.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Neither its terms nor Amazon’s say an account you haven’t used is closed.'
+      pages:
+        - https://hollywoodsuite.ca/terms-of-use
+        - https://www.primevideo.com/help?nodeId=202095490
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Amazon’s terms expect your household to watch under your account, and name no checks on who does.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095490
+          quote: 'you accept this Agreement on behalf of yourself and all members of your household and others who use the Service under your account'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads, where a title allows them, last 30 days, and 48 hours once you start watching, and Amazon caps how many titles you can download at a time.'
+      sources:
+        - url: https://www.primevideo.com/help?nodeId=202095500
+          quote: "For downloaded videos, you'll typically have 30 days to begin watching the video after you download it and once you start watching it, you'll typically have 48 hours to finish watching it."
+        - url: https://www.primevideo.com/help?nodeId=202095500
+          quote: 'We set a maximum number of titles that can be downloaded at a time across Prime or Prime Video and third-party add-on subscriptions titles across all devices associated with your Amazon account which may vary based on your location and other factors.'
+      lastVerified: 2026-11-13

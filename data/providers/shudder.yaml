@@ -1,0 +1,322 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, its sign-up page
+# (watch.shudder.com/signup) again through a US, a UK, an Irish, an Australian and a New Zealand exit, and its help centre
+# (support.shudder.com, a Stonly knowledge base whose guides' steps are all in each page) in Edge and with a plain
+# fetch. Pages, each quoted where it's used:
+# Pricing: its help centre's "How much does Shudder cost?", one step per country: the US ("our monthly plan for just
+# $9.99 per month, or save with an annual membership for $99.99 per year", "Monthly with Ads" "for only $7.99 per month.
+# Taxes may apply."), Canada ("$9.99 per month", "$99.99 ... in Canada"), the UK ("£5.99 per month", "£59.99"), Ireland
+# ("€4.99 per month", "€47.99 (equals only €3.99/month)"), Australia and New Zealand ("$7.99 per month", "$79.99"). Its
+# sign-up page loads each country's plans as part of the page (its "licences", by the reader's country), which name the
+# currency: "Shudder Membership (CA)" Annual 99.99 and Monthly 9.99 "CAD"; the US's "Annual Premium" 99.99, "Monthly
+# Premium" 9.99 and "Monthly With Ads" 7.99 "USD"; the UK's 59.99 and 5.99 "GBP"; Australia's 79.99 and 7.99 "AUD"; New
+# Zealand's 79.99 and 7.99 "NZD"; Ireland's 4.99 and 47.88 "EUR" (effective 2026-02-04). Ireland's year is stored as
+# €47.88, what the sign-up page charges, which is the article's own "€3.99/month" times twelve; the article's "€47.99" is
+# a note in notes.md. The non-US plans' data mark their prices tax-inclusive ("taxInclusive": true), but no words on the
+# pages say so, so no taxIncluded. The home page's "UNLOCK 70% OFF" (a first-year Annual Premium discount, "Offer is
+# valid only until December 1, 2026") is an offer, left out.
+# Region checklist for CA, US, GB, IE, AU and NZ, 2026-11-13: 1. no country paths (shudder.com/countries/* and /plans
+# open watch.shudder.com); 2. no picker; 3. the sign-up page's plan data, which names the currency for each country's
+# exit; 4. the sign-up page's first step ("1 Create Account 2 Select Plan 3 Checkout"), typing nothing; 5. its help
+# centre's prices article, one step per country; 6. Edge from Canada and through each country's exit, and a plain
+# fetch; 7. no bill offered. Not sold in the euro sample (its help centre's country list).
+# Bundles: none sold by Shudder; AMC+ includes Shudder's library (amc-plus's plans list it). Official resellers: none.
+# Partners that bill it themselves, named in its help centre: Amazon Prime Video, Apple TV Channels, Roku Channels and
+# YouTube TV ("add-on channel"), whose Shudder "is a completely separate subscription and is not managed through our
+# system", and the app stores (in-app purchase).
+# Features, read 2026-11-13: "Most of our content is available in 1080p (HD) for a great viewing experience." (What
+# resolutions are titles available in?); "One account can have up to 5 profiles - but note: only 4 users can stream at
+# the same time." (Meet the new Shudder); "download up to 20 eligible titles directly to your phone or tablet" in its iOS
+# and Android apps, with no number of devices, so 1 (inferred); the plans' "Watch ad-free and download on the go*"
+# ("*Live TV and some on-demand content may include ads, promos or sponsorships; some titles may not be downloadable.")
+# and With Ads' "US only, no downloads", "Not supported on Xbox"; "Shudder TV is a 24/7 livestream of handpicked movies
+# and series" (What is ShudderTV?). What it streams: "horror, thriller, and supernatural movies and series" (its home
+# page's FAQ). No kids profiles or parental controls on any page read. Pause: none (no page names one, and the sign-up
+# page's plan data has "pauseConfiguration" "DISABLED").
+# Free use: none: its pages sell the paid plans with a 7-day free trial ("Try Shudder free for seven days and cancel
+# anytime.").
+
+# Coverage: shudder.with-ads in CA, GB, IE, AU and NZ: "US only" (its help centre's US prices, read 2026-11-13), and each
+# other country's sign-up page offers only Monthly and Annual.
+
+# Coverage: shudder.* in AS, GU, MP, PR and VI: sold there ("the US (and its territories)"), but no page names a
+# territory's price, and the US exit's page showed the US's (2026-11-13).
+
+id: shudder
+name: Shudder
+website: https://www.shudder.com
+# Its owner's site, where shudder.com's Terms and Conditions, Privacy and Cookies links lead (amcglobalmedia.com).
+domains: [amcglobalmedia.com]
+category: streaming
+spendCategory: streaming
+# "Shudder is currently available in the US (and its territories), Canada, UK, Ireland, Australia and New Zealand."
+# (Where is Shudder available?), and its terms: "Shudder:Australia, Canada, Ireland, New Zealand, The United Kingdom, US
+# Territories." beside the United States. The territories are the five inhabited ones, as Peacock's help centre names
+# them.
+availableIn: [US, CA, GB, IE, AU, NZ, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD, CA: CAD, GB: GBP, IE: EUR, AU: AUD, NZ: NZD }
+# Its help centre's "How do I cancel?" for a subscription billed by Shudder.com ("Navigate to your subscription and click
+# the “Cancel” button.").
+cancelUrl: https://support.shudder.com/kb/guide/en/how-do-i-cancel-lM9ZKZYnA8/Steps/3747434
+sources:
+  {
+    pricing: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735111,
+  }
+# Owner (M11.2), read 2026-11-13: AMC Global Media Inc., from its third-quarter release on its own site, which names
+# Shudder among its streaming services, its listing and where it's based. No page read names a majority holder.
+owner:
+  name: AMC Global Media Inc.
+  website: https://www.amcglobalmedia.com
+  page:
+    name: AMC Global Media Inc. Reports Third Quarter 2026 Results
+    url: https://www.amcglobalmedia.com/2026/11/09/amc-global-media-inc-reports-third-quarter-2026-results/
+  quotes:
+    - 'AMC Global Media (Nasdaq: AMCX) is home to many of the greatest stories and characters in TV and film and the premier destination for passionate and engaged fan communities around the world.'
+    - 'Its portfolio includes targeted streaming services AMC+, Acorn TV, Shudder, Sundance Now, HIDIVE and All Reality'
+    - 'AMC Global Media is headquartered in the United States, with international operations in Iberia, Latin America, Central Europe, the U.K., Australia and New Zealand.'
+  country:
+    code: US
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: AMCX }
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13 in its help centre: a card on its website (its billing article) or PayPal (its
+# cancelling article), and the app stores and platforms that bill it (in-app purchase; Amazon Prime Video, Apple TV
+# Channels and Roku Channels: core's app-store). YouTube TV bills it too ("YoutubeTV", its add-on channel list), in words
+# the catalog's checks don't read as a TV bill. No page names the card networks, so no acceptedNetworks.
+paymentMethods:
+  - methods: [card]
+    page: How do I update my billing information?
+    url: https://support.shudder.com/kb/guide/en/how-do-i-update-my-billing-information-OM6rdV9Moc/Steps/3747743
+    quotes:
+      - 'Select an existing card to edit, or select “Add Card” to add another payment method.'
+  - methods: [paypal]
+    page: How do I cancel?
+    url: https://support.shudder.com/kb/guide/en/how-do-i-cancel-lM9ZKZYnA8/Steps/3747434
+    quotes:
+      - 'If you signed up on the website using PayPal as payment method, please log into your PayPal account and cancel the recurring payment to Shudder.'
+  - methods: [app-store]
+    page: How can I subscribe to Shudder?
+    url: https://support.shudder.com/kb/guide/en/how-can-i-subscribe-to-shudder-3cVD1LakxM/Steps/3747721
+    quotes:
+      - "The final step will be your device's app store asking you to confirm your subscription"
+  - methods: [app-store]
+    page: How can I subscribe to Shudder?
+    url: https://support.shudder.com/kb/guide/en/how-can-i-subscribe-to-shudder-3cVD1LakxM/Steps/3747725
+    quotes:
+      - 'Adding the Shudder channel to Apple TV Channels, Prime Video or Roku Channels does not also give access via the Shudder app.'
+# Renewal day (M11.5): its terms bill "on the calendar day corresponding to the beginning of your Billing Period", and
+# a sign-up on a day a month lacks bills on that month's last day: the day you signed up.
+renewalAnchor:
+  kind: same-date
+  page: AMC Streaming Services Terms of Use
+  url: https://www.amcglobalmedia.com/terms-of-use/
+  quotes:
+    - 'If your paid subscription begins on a day not contained in a given month, and your Billing Period is every month, your Payment Method will be billed on the last day of such month.'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.shudder.com/
+    - https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735111
+  lastVerified: 2026-11-13
+
+# Platforms: "Shudder Website", "Apple", "Android", "Fire TV", "LG TV (US & CA only)", "Roku", "Samsung Galaxy (US only)",
+# "Samsung TV", "Vizio", "Xbox" (What devices does Shudder support?), and Apple TV and Android TV / Google TV (its
+# in-app purchase list). Sign-in: "Email *" and "Password *" (watch.shudder.com/login). App languages: English (its
+# pages and help centre are in English only). Subtitles: "Subtitles off" or "English (US)" (How do I turn on
+# subtitles?). Support: its help centre's contact form ("Shudder Contact Form").
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en]
+  languages.subtitles: [en]
+  support.channels: [email]
+
+plans:
+  - id: shudder.premium
+    name: Premium
+    link: https://watch.shudder.com/signup
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      streaming.content: [films, series]
+      streaming.own-media: false
+      account.parental-controls: false
+    inferred:
+      streaming.download-devices:
+        reason: 'You can download up to 20 titles to your phone or tablet in its iOS and Android apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Downloads & Watching Offline
+          url: https://support.shudder.com/kb/guide/en/downloads-watching-offline-6mBRPV3tDW/Steps/5048086
+        lastVerified: 2026-11-13
+    notes: Its pages call it Monthly and Annual (Monthly Premium and Annual Premium in the US). Live TV and some on-demand titles still have ads, promos or sponsorships; some titles can't be downloaded.
+    prices:
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3638132
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3638132
+      - region: CA
+        currency: CAD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/5170963
+      - region: CA
+        currency: CAD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/5170963
+      - region: GB
+        currency: GBP
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735112
+      - region: GB
+        currency: GBP
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735112
+      - region: IE
+        currency: EUR
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735114
+      - region: IE
+        currency: EUR
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://watch.shudder.com/signup
+      - region: AU
+        currency: AUD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735113
+      - region: AU
+        currency: AUD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735113
+      - region: NZ
+        currency: NZD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735115
+      - region: NZ
+        currency: NZD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3735115
+
+  - id: shudder.with-ads
+    name: With Ads
+    link: https://watch.shudder.com/signup
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      streaming.content: [films, series]
+      streaming.own-media: false
+      account.parental-controls: false
+      platforms: [web, ios, android, tv]
+    notes: Its pages call it Monthly with Ads. US only; with ads, no downloads, and not on Xbox.
+    prices:
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.shudder.com/kb/guide/en/how-much-does-shudder-cost-Umm93c54c2/Steps/3638132
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada. The AMC Streaming Services Terms of Use and
+# AMC Global Media's Privacy Policy and Cookies Policy (all "June 27, 2025") cover every AMC streaming service, Shudder
+# by name, and are rated once as shared documents (data/policies/amc-global-media-terms.yaml and amc-global-media-privacy.yaml,
+# drafted in .pipeline/amc-plus). Rated here from Shudder's own pages: its sign-up page's first step (typing nothing) and
+# its help centre's articles on changing plans and on downloads. Not read: the sign-up steps after the account form
+# (the plan picker and checkout), the "Additional Terms" of its promotions, its contact form, and the terms of the
+# partners that bill it.
+policies:
+  shared: [amc-global-media-terms, amc-global-media-privacy]
+  links:
+    - name: 'Sign Up'
+      url: https://watch.shudder.com/signup
+    - name: 'How can I change my subscription?'
+      url: https://support.shudder.com/kb/guide/en/how-can-i-change-my-subscription-QZSkIiPQET/Steps/5049956
+    - name: 'Downloads & Watching Offline'
+      url: https://support.shudder.com/kb/guide/en/downloads-watching-offline-6mBRPV3tDW/Steps/5048086
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up starts with an email address and a password you choose, then a plan and payment. The steps after the account form weren’t read.'
+      sources:
+        - url: https://watch.shudder.com/signup
+          quote: 'Create Account'
+        - url: https://watch.shudder.com/signup
+          quote: 'Confirm Password *'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'You can switch between monthly and yearly in your account, but to change before your plan renews you have to cancel and sign up again once it ends.'
+      sources:
+        - url: https://support.shudder.com/kb/guide/en/how-can-i-change-my-subscription-QZSkIiPQET/Steps/5049956
+          quote: 'If you are a new Shudder subscriber, or your subscription has renewed since March 5th, you can switch between the monthly and annual plan directly in your account on the Shudder website or mobile app.'
+        - url: https://support.shudder.com/kb/guide/en/how-can-i-change-my-subscription-QZSkIiPQET/Steps/5049956
+          quote: 'If you wish to change your subscription type prior to your next renewal date, we suggest that you cancel your current subscription plan and, once it expires, simply re-subscribe to your preferred plan!'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can keep up to 20 downloads on a phone or tablet. An unwatched one disappears after 30 days, and one you’ve started after 48 hours.'
+      sources:
+        - url: https://support.shudder.com/kb/guide/en/downloads-watching-offline-6mBRPV3tDW/Steps/5048086
+          quote: 'Available on the Shudder app for iOS and Android, you can now download up to 20 eligible titles directly to your phone or tablet and watch them later without an internet connection.'
+        - url: https://support.shudder.com/kb/guide/en/downloads-watching-offline-6mBRPV3tDW/Steps/5048086
+          quote: "Unwatched downloads will expire after 30 days. Once you've started watching a downloaded title, it will expire within 48 hours."
+      lastVerified: 2026-11-13

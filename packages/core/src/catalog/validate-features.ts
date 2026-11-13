@@ -419,6 +419,16 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['nebula.standard', ['streaming.concurrent-streams']],
   // Tubi states 4K only for some US live events, and no stream count (2026-11-11).
   ['tubi.free', ['video.quality', 'streaming.concurrent-streams']],
+  // AMC+ states no video quality on any page read (2026-11-13).
+  ['amc-plus.with-ads', ['video.quality']],
+  ['amc-plus.premium', ['video.quality']],
+  // Super Channel states Super Channel+'s quality but no stream count, and nothing for its channels (2026-11-13).
+  ['super-channel.plus', ['streaming.concurrent-streams']],
+  ['super-channel.channels', ['video.quality']],
+  ['super-channel.free', ['video.quality', 'streaming.concurrent-streams']],
+  // Acorn TV and Sundance Now state neither their quality nor their streams (2026-11-13).
+  ['acorn-tv.standard', ['video.quality', 'streaming.concurrent-streams']],
+  ['sundance-now.standard', ['video.quality', 'streaming.concurrent-streams']],
 ]);
 
 /**

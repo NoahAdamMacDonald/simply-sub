@@ -1,0 +1,249 @@
+url: https://github.com/MorpheApp/morphe-manager
+method: browser
+saved: 2026-11-13
+
+Skip to content
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+MorpheApp
+morphe-manager
+Repository navigation
+Code
+Issues
+37
+(37)
+Pull requests
+1
+(1)
+Actions
+Projects
+Security and quality
+Insights
+morphe-manager
+Public
+Sponsor
+Notifications
+Fork271
+(271)
+Star10.3k
+(10.3k)
+main
+4 Branches
+455 Tags
+Code
+Latest commit
+semantic-release-bot
+chore: Publish release v2.5.0 [skip ci]
+6bd844d
+·
+History
+2,876 Commits
+Folders and files
+Name Last commit message Last commit date
+.github
+fix: Patch on JDK 25 in 64-bit processes, keeping JDK 17 for 32-bit A…
+app
+chore: Release v2.5.0 [skip ci]
+assets
+chore: Update branding repo url
+buildSrc
+feat: Show the open-source licenses without AboutLibraries
+docs
+fix: Mount after patching unless installing manually
+gradle
+chore: Bump dependencies
+patcher-core
+feat: Show patching progress as the patcher reports it
+.gitattributes
+fix: Harden root mount installs (#737)
+.gitignore
+chore: Merge URV 1.6.0 (#6)
+.releaserc
+chore: Show features and improvements before bug fixes in release notes
+CHANGELOG.md
+chore: Release v2.5.0 [skip ci]
+CONTRIBUTING.md
+chore: Add pull request template
+LICENSE
+chore: Initial commit
+NOTICE
+chore: Add a “No warranty provided” statement to the NOTICE file and …
+README.md
+chore: Bring the guides back in line with the app
+app-release.json
+chore: Publish release v2.5.0 [skip ci]
+build.gradle.kts
+feat: Show the open-source licenses without AboutLibraries
+crowdin.yml
+ci: Improve GitHub push to Crowdin
+gradle.properties
+fix: Patch on JDK 25 in 64-bit processes, keeping JDK 17 for 32-bit A…
+gradlew
+chore: Update gradle to 9.6.1
+gradlew.bat
+chore: Update gradle and npm
+package-lock.json
+chore: Show features and improvements before bug fixes in release notes
+package.json
+chore: Show features and improvements before bug fixes in release notes
+settings.gradle.kts
+chore: Pre-release cleanup of dead code, resources and dependencies
+Repository files navigation
+README
+Contributing
+GPL-3.0 license
+💊 Morphe
+Want to watch ads? Us neither.
+Morphe is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you back control over your experience. No root required.
+✨ Why Morphe?
+Modern apps are full of ads and dark patterns designed to grab your attention. Morphe patches them at the bytecode level - modifying the app directly on your device, without any of your data leaving it. The result is a cleaner version of the app you already know, exactly the way you want it.
+📲 Download
+→ Download at morphe.software
+The website will guide you to the latest release for your device. No account needed.
+🚀 How it works
+Install Morphe from morphe.software.
+Pick an app - YouTube, YouTube Music, or Reddit are supported out of the box.
+Choose your mode:
+Simple mode - designed for a one-tap experience. Just tap Patch and Morphe handles the rest with sensible defaults. No configuration needed.
+Expert mode - gives you full control. Choose exactly which of the 100+ patches to apply, configure per-patch options (colors, toggles, and more), and fine-tune everything before patching.
+Provide the APK - Morphe guides you through obtaining the original app file via step-by-step dialogs. The patching itself happens entirely on your device.
+Install and enjoy - once patching is complete, install the result like any normal APK.
+Everything happens locally. Morphe never uploads your APKs or personal data anywhere.
+📖 Guides
+Step-by-step walkthroughs with screenshots, covering patching in both modes, installers, updates, patch sources, backups, and customization: → Morphe guides
+🔧 Features
+Patching
+Simple mode for one-tap patching with curated defaults
+Expert mode for full patch selection, per-patch configuration, and experimental version support
+Expert mode also shows an expanded patching screen with real-time logs and live RAM usage monitoring during patching
+100+ patches for YouTube, YouTube Music, and Reddit
+Support for split APKs
+Optional "Optimize for device architecture" mode - skips split APK modules for unsupported CPU architectures, locales, and screen densities during merge, and strips native libraries for unsupported architectures from plain APKs after patching
+Sends a notification the moment patching finishes, so you don't have to keep the app open
+Optional completion sound, with a distinct tone for success and failure
+Optional auto-install right after patching completes, through Shizuku, or through the system installer where Android lets Morphe replace a build it installed itself
+Batch patching - select several apps and patch them in one queue, with every question asked up front so the run never stops to wait for you
+A re-patch banner on the home screen when a patch source releases changes for your apps, counting them and queueing them all in one tap
+Patch options (Simple mode: available in the Advanced tab; Expert mode: available on the patch selection screen)
+Custom app display name, launcher icon, and header logo per app, with built-in creators that generate every density variant for you
+App theme colors (background color presets)
+Hide Shorts app shortcut and widget (YouTube)
+And more, depending on installed patch bundles
+Patch sources
+Add any compatible patch bundle via GitHub URL or deep link
+Per-source pre-release toggle to get early patch access
+Automatic background update notifications (even when the app is closed)
+Sort your app list and patch sources however you like (name, install date, and more)
+Installer
+Standard Android installer
+Shizuku, Shizuku+ or Sui for installs with no confirmation dialog
+Root installer with Magisk module support (mount-based, no data loss on update)
+Play Store installer variants, so Google Play recognizes itself as the install source (with a warning about the trade-off - Play Store may then offer updates that would overwrite your patched build)
+Any third-party installer apps detected on the system are also available as an option
+Prompt-on-install option to choose per session
+On rooted devices, Morphe asks whether you want a Root Mount install or a Standard install before patching starts, and adjusts the applied patches to match your choice
+Appearance
+System / Light / Dark / Material You themes
+Pure Black mode for OLED screens
+Accent color selection
+Animated backgrounds - pick one you like, or let Morphe shuffle them for you on each launch, daily, or every three days
+App icon selection
+Home screen
+Friendly time-of-day greeting when you open the app
+Rearrange your app list into the order that suits you
+Group your apps by patch source or your own categories
+Hide apps you never patch, and bring them back whenever you like
+Home cards for apps patched with universal patches, not just app-specific ones
+Multi-select and bulk actions for cleaning up saved APKs and patch selections, and for patching several apps in one queue
+Launcher shortcuts for re-patching outdated apps, checking for updates, and jumping straight into patching a recently patched app
+Floating scroll-to-top button when your lists get long
+A short guided tour after your first patch, so you know where everything lives
+Advanced
+Import/export your Morphe settings as JSON, with a Replace or Merge choice on import
+Import/export your signing keystore
+Manage saved original APKs and patched APKs
+Manage saved patch selections per app
+GitHub Personal Access Token support for higher API rate limits
+Process runtime - run patching in a separate process for better stability, with configurable memory limit
+Bytecode processing mode - controls how bytecode is processed during patching, affecting patching speed, memory usage, and output APK size
+Built-in file picker as an alternative to the system one, with an option to show hidden files
+Optional external trigger, so automation apps can queue a batch through an intent, gated by a per-app confirmation
+Export debug logs for troubleshooting
+❓ New to GitHub?
+If you ended up here but aren't sure what to do next - no worries. Here's the short version:
+Go to the Releases page.
+Under Assets, tap the file ending in .apk to download it.
+Open the downloaded file on your Android device and tap Install.
+If Android asks you to allow installs from unknown sources, follow the prompt to enable it - this is required for any app not from the Play Store.
+That's it. Once Morphe is installed, everything else happens inside the app - the guides above walk you through the first patch.
+For FAQs and troubleshooting, visit morphe.software or join the community on Reddit.
+📙 Contributing
+Thank you for considering contributing to Morphe. You can find the contribution guidelines here.
+❗ About
+Morphe is built on the foundation of ReVanced Manager and URV. All changes made by Morphe are documented in the Git history.
+📜 License
+Morphe is licensed under the GNU General Public License v3.0, with additional conditions under GPLv3 Section 7:
+Name & Branding Restrictions (7c & 7e): Derivative works must use their own distinct branding. The "Morphe" name, logos, and trademarks may not be used for the branding or title of derivative works (e.g., names like "Morphe Plus", "Morphe Expanded", or "Morphe UserXYZ" are strictly prohibited).
+See the LICENSE file for the full GPLv3 terms and the NOTICE file for full conditions of GPLv3 Section 7.
+About
+Morphe app patcher for Android
+Morphe.software
+Topics
+android
+apk
+app
+morphe
+patcher
+patches
+youtube
+Resources
+Readme
+GPL-3.0 license
+Contributing
+Contributing
+Activity
+Custom properties
+Stars
+10.3k stars
+Watchers
+64 watching
+Forks
+271 forks
+Report repository
+Releases
+452
+(452)
+v2.5.0
+Latest
++ 451 releases
+Sponsor this project
+https://Morphe.software/donate
+Contributors
+32
+(32)
++ 18 contributors
+Languages
+Kotlin
+99.5%
+Other
+0.5%
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information

@@ -1,0 +1,674 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, the US's pages through a US
+# exit, Australia's through an Australian exit and britbox.com through a UK exit; its two help centres (help.britbox.com
+# for North America and the Nordic countries, britboxaustralia.zendesk.com for Australia) through their Zendesk API, every
+# article. Pages, each quoted where it's used:
+# Pricing: its help centre's "How much is a BritBox subscription?", one list by country: "Canada $10.99 a month, $109.99 a
+# year or $149.99 a year for Premier. GST is additional and not included in the subscription price." and "United States
+# $10.99 a month, $109.99 per year or $149.99 a year for Premier. Taxes may be added depending on the state." The same
+# three cards on britbox.com/ca (its page data: "Price Increase 2024 - Monthly (CA)", "price":10.99,"currency":"CAD", and
+# the annual's 109.99 CAD) and on britbox.com through a US exit (its data: "(US)", "currency":"USD"); Premier's $149.99
+# on watch.britbox.com/ca/premier and /us/premier and on each country's sign-up page (its address names
+# "country=ca" or "country=us"). Premier "is an annual-only plan" (What is BritBox Premier?). Australia's own help
+# centre: "BritBox in Australia is $13.99 a month, or $139.99 a year. GST is included in the subscription price.", the
+# same as britbox.com/au through an Australian exit ("$13.99/month", "$139.99/year"); that page's data still lists older
+# AUD 8.99 and 89.99 plans its cards don't show, so the cards and the help centre decide. The annual cards' "Get 12
+# months for the price of 10" describes the regular yearly price, and the 7-day trial isn't a price. Australia's GST
+# words ("GST is included in the subscription price.") don't fit core's tax wording ("GST is included" with a word
+# between), so no taxIncluded: it changes nothing, since tax is added only in Canada and the US.
+# Region checklist for CA and US, 2026-11-13: 1. its hreflang links (britbox.com for en-us, /ca, /au, /fi, /no, /se,
+# /dk; a country path read from elsewhere redirects to the reader's own, /au to /ca from here); 2. no picker; 3. each
+# page's plan data names its country and currency; 4. the sign-up page's first step (an email address), typing
+# nothing; 5. both help centres' price and tax articles; 6. Edge from here and through US, Australian and UK exits, and a
+# plain fetch; 7. no bill offered. The UK: not sold ("Unfortunately, BritBox is not currently available where you are.",
+# britbox.com/gb/locationnotvalidated through a UK exit, 2026-11-13; ITVX is a separate provider, not drafted here).
+# Not listed: gift subscriptions (US and Canada, prepaid gifts of a plan) and US gift cards (up to $200), which pay for a
+# plan rather than being plans.
+# Bundles: none sold by BritBox. Amazon's Prime Video Channels sells US bundles with BritBox (Hallmark+, MGM+ and BBC
+# Select at $13.99 a month, Wonder Project $14.99, STARZ $17.99, the "Amazon Super Bundle" $29.99) and The Roku Channel
+# two (BBC Select and STARZ), "exclusively through Amazon Prime Video Channels" or "through The Roku Channel" (its help
+# centre's bundle articles): partners' products, not listed. Official resellers: none; Amazon, Apple TV Channels, The
+# Roku Channel, Google Play and Apple's App Store bill it themselves, and Comcast's Xfinity, Pluto TV (a free US channel
+# of a few shows) and, in the Nordic countries, Ruutu+, Telenor, Telia, TV2 and TV4: partners, noted, not listed.
+# Features, read 2026-11-13: "BritBox is ad-free." (Are there ads or commercials?); standard plans "supports 2 concurrent
+# streams" and Premier "allows you to stream on up to 4 devices at the same time" (Can I stream BritBox Premier on
+# multiple devices?); "In the United States and Canada, 4K UHD is available to Premier subscribers." (Where can I watch in
+# 4K UHD?), and the standard plans' quality: its speed article lists "Full high definition (FHD) 1080p" with only 4K
+# kept for Premier, so 1080p, inferred (the review of 2026-11-13; its streaming terms article says only "HD"); downloads for Premier only in North America, "Downloads can be spread
+# across up to 5 different devices"; "BritBox doesn’t offer separate user profiles at the moment"; parental controls
+# with a four-digit PIN and viewing restrictions (How do I enable parental controls?); "BritBox subscriptions cannot be
+# paused or placed on hold". BritBox Live, a scheduled stream of its own shows in the US only, isn't a TV channel, so no
+# streaming.live there. Australia's plans differ: "Mobile downloads" and "Up to Full-HD video quality" (its cards; its 4K
+# article says "some shows and films in UHD", but the cards that sell the plan say Full HD), "The maximum number of
+# devices allowed is four.", three live channels (BBC First, BBC Entertain and BBC Select, What are the BBC Live
+# Channels?), so Australia's is a plan of its own. What it streams: "classic dramas and comedies to fresh originals and
+# day-of-UK soaps" (What is BritBox?), "shows and films", and BBC Select's "hundreds of documentaries and factual
+# programming" (Premier, and a live channel in Australia); none of your own media.
+# Free use: none: its plans start with a 7-day trial that turns into the plan, and the free BritBox channel on Pluto TV is
+# Pluto TV's ("Pluto TV free streaming service with ads/commercials", Is the BritBox channel on PlutoTV the same as
+# subscribing to BritBox?).
+
+# Coverage: britbox.* in DK, FI, NO and SE: sold there (its country list), but outside the catalog's research regions, so
+# not priced here; its prices article lists them (Denmark 79 DKK a month and 599 DKK a year, Finland €7.99 and €59.99,
+# Norway 89 NOK and 699 NOK, Sweden 89 SEK and 695 SEK, "VAT Included."), with 4K, downloads and up to 4 devices (2 in
+# Sweden), and Danish and Finnish annual plans that don't renew on their own: a plan of their own when they're read.
+
+# Coverage: britbox.standard and britbox.premier in AU: Australia sells its own plan, britbox.australia, with downloads,
+# Full HD and live channels, and no Premier ("available to customers in the United States and Canada", What is BritBox
+# Premier?).
+
+# Coverage: britbox.australia in CA and US: North America sells britbox.standard and britbox.premier instead.
+
+id: britbox
+name: BritBox
+website: https://www.britbox.com
+# Australia's help centre, which britbox.com/au links as its help centre.
+domains: [britboxaustralia.zendesk.com]
+category: streaming
+spendCategory: streaming
+# "BritBox is available in: Australia Canada United States* Sweden Finland** Denmark Norway", "*Subscriptions are
+# available in all fifty states but not in the U.S. territories." and "**Subscriptions are available only in mainland
+# Finland (not in the Aland Islands)." (What countries is BritBox available in?, both help centres).
+availableIn: [CA, US, AU, DK, FI, NO, SE]
+billingCurrency: { CA: CAD, US: USD, AU: AUD }
+cancelUrl: https://help.britbox.com/hc/en-us/articles/360042977193-How-do-I-cancel
+sources:
+  {
+    pricing: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription,
+  }
+# Owner (M11.2), read 2026-11-13: BBC Studios' own page names BritBox among "our own channels and streaming platforms";
+# BritBox's privacy policy: "BritBox is a service run by BritBox, LLC.", and its terms are BritBox, LLC's (New York, its
+# privacy contact). Australia's is "a service run by The BritBox Australia Partnership" (its privacy policy), whose
+# partners no page read names. BBC Studios is the BBC's commercial company, not listed: no shares.
+owner:
+  name: 'BBC Studios (BritBox, LLC)'
+  website: https://www.bbcstudios.com
+  page:
+    name: 'Global channels and streaming (BBC Studios)'
+    url: https://www.bbcstudios.com/what-we-do/global-channels-streaming/
+  quotes:
+    - 'directly to our engaged and loyal fans via our own channels and streaming platforms.'
+    - 'the leading streamer specialising in British programming BritBox'
+  country:
+    code: GB
+    page:
+      name: 'About us (BBC Studios)'
+      url: https://www.bbcstudios.com/about-us/
+    quotes:
+      - 'BBC Studios Distribution Limited, company number 01420028, 1 Television Centre, 101 Wood Lane, London, United Kingdom, W12 7FA.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: each help centre's payment methods article (cards for everyone; Apple Pay and
+# PayPal in the US only; Apple Pay in Australia; Amazon's Prime Video Channels everywhere, Apple TV Channels, and The
+# Roku Channel in the US) and Premier's article ("Apple App Store", "Google Play"); US gift cards. In the Nordic
+# countries, Telia, TV2, TV4, Ruutu+ and Telenor bill it too (not a research region).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover, unionpay, jcb, other]
+    url: https://help.britbox.com/hc/en-us/articles/360058393253-What-credit-debit-cards-can-I-use
+    quotes:
+      [
+        'American Express',
+        'China UnionPay',
+        'Diners',
+        'Discover',
+        'JCB',
+        'Maestro',
+        'Mastercard',
+        'Visa',
+      ]
+  AU:
+    networks: [visa, mastercard, amex, discover, unionpay, jcb, other]
+    url: https://britboxaustralia.zendesk.com/hc/en-us/articles/30147855471511-What-credit-debit-cards-can-I-use
+    quotes:
+      [
+        'American Express',
+        'China UnionPay',
+        'Diners',
+        'Discover',
+        'JCB',
+        'Maestro',
+        'Mastercard',
+        'Visa',
+      ]
+paymentMethods:
+  - methods: [card, app-store]
+    page: What payment methods do you accept?
+    url: https://help.britbox.com/hc/en-us/articles/360042838034-What-payment-methods-do-you-accept
+    quotes:
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+      - 'Amazon Prime Video Channels - available in all regions where BritBox is supported'
+  - methods: [app-store]
+    page: Is BritBox Premier available to me?
+    url: https://help.britbox.com/hc/en-us/articles/44741438108951-Is-BritBox-Premier-available-to-me
+    quotes: ['Apple App Store', 'Google Play']
+  - methods: [card, apple-pay, paypal, app-store]
+    regions: [US]
+    page: What payment methods do you accept?
+    url: https://help.britbox.com/hc/en-us/articles/360042838034-What-payment-methods-do-you-accept
+    quotes:
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+      - 'We accept Apple Pay in the United States.'
+      - 'We accept PayPal for subscriptions in the United States.'
+      - 'Amazon Prime Video Channels - available in all regions where BritBox is supported'
+  - methods: [app-store]
+    regions: [US]
+    page: Is BritBox Premier available to me?
+    url: https://help.britbox.com/hc/en-us/articles/44741438108951-Is-BritBox-Premier-available-to-me
+    quotes: ['Apple App Store', 'Google Play']
+  - methods: [gift-card]
+    regions: [US]
+    page: How do BritBox Gift Cards work? (United States)
+    url: https://help.britbox.com/hc/en-us/articles/19582385394455-How-do-BritBox-Gift-Cards-work-United-States
+    quotes:
+      - 'Both e-cards and physical gift cards are available for purchase and redemption in the United States.'
+  - methods: [card, apple-pay, app-store]
+    regions: [AU]
+    page: What payment methods do you accept?
+    url: https://britboxaustralia.zendesk.com/hc/en-us/articles/30019790940567-What-payment-methods-do-you-accept
+    quotes:
+      - 'American Express'
+      - 'Mastercard'
+      - 'Visa'
+      - 'We accept Apple Pay.'
+      - 'If you sign up or re-subscribe through our app on Amazon Prime Video Channels or the Apple TV Channels, you can pay for your subscription using your billing account with these partner platforms.'
+# Renewal day (M11.5): its billing article, for monthly and annual plans.
+renewalAnchor:
+  kind: same-date
+  page: When will I be charged for my subscription?
+  url: https://help.britbox.com/hc/en-us/articles/360042818174-When-will-I-be-charged-for-my-subscription
+  quotes:
+    - 'You will be billed automatically on the same day as your original subscription start date for monthly and annual subscriptions, when applicable after the initial 7-day free trial ends or on the sign-up date.'
+  lastVerified: 2026-11-13
+# Free use: none (see the header): its plans are paid, after a 7-day trial for new subscribers.
+freeUse:
+  kind: none
+  pages:
+    - https://www.britbox.com/ca
+    - https://help.britbox.com/hc/en-us/articles/360043315353-Can-I-try-BritBox-before-I-subscribe
+    - https://help.britbox.com/hc/en-us/articles/4406198958359-Is-the-BritBox-channel-on-PlutoTV-the-same-as-subscribing-to-BritBox
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "Stream using a web browser on your Mac or Windows desktop/laptop",
+# Android TV, Apple TV, Fire TV, Roku, Samsung, LG, Hisense and Vizio TVs, Xfinity and Rogers devices, and its iPhone,
+# iPad and Android apps (What devices can I use to watch BritBox?); no consoles ("using a web browser via a Smart TV, game
+# console ... is not supported"). Sign-in: "Enter your email address and password", or "Enter the 4-digit code sent to
+# the email address you used to sign in" (How do I log into my account?); TVs pair with a code entered on
+# britbox.com/activate, where you sign in with your password. App languages: English (its sites are en-us, en-ca and
+# en-au). Support: "please contact our Customer Care team by email or by initiating a chat" (Why am I having trouble
+# receiving or using my BritBox sign-in code?).
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, email-code]
+  languages.interface: [en]
+  support.channels: [email, chat]
+
+# Perks (M11.6): what Premier adds that no feature describes, in its help centre's words.
+perks:
+  - id: early-access
+    name: Watch featured new releases early
+  - id: bbc-select
+    name: Access to BBC Select documentaries and factual series
+  - id: premier-extras
+    name: Access to Premier Extras, including behind-the-scenes content and bonus features
+
+plans:
+  - id: britbox.standard
+    name: BritBox
+    link: https://www.britbox.com/
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 2
+      ad-free: true
+      streaming.content: [films, series, documentaries]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Its speed article lists 720p, 1080p and 4K, and keeps only 4K for Premier subscribers in the US and Canada, so Standard streams up to 1080p.'
+        page:
+          name: What internet speed or bandwidth do I need to stream BritBox?
+          url: https://help.britbox.com/hc/en-us/articles/360043206313-What-internet-speed-or-bandwidth-do-I-need-to-stream-BritBox
+        lastVerified: 2026-11-13
+    notes: British dramas, comedies, mysteries and day-of-UK soaps, ad-free, on 2 screens at once. No downloads. 7 days free for new subscribers. A subscription from the US or Canada can be watched in either country.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription
+      - region: CA
+        currency: CAD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription
+      - region: US
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription
+
+  # BritBox Premier (US and Canada): "4K UHD streaming on supported titles and devices", "Streaming on up to 4 devices at
+  # the same time", downloads and BBC Select (What is BritBox Premier?). Annual only, with no free trial.
+  - id: britbox.premier
+    name: Premier
+    link: https://watch.britbox.com/us/premier
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: 4
+      ad-free: true
+      streaming.download-devices: 5
+      streaming.content: [films, series, documentaries]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: true
+    perks: [early-access, bbc-select, premier-extras]
+    notes: Everything in BritBox, plus featured new releases up to a month early, BBC Select’s documentaries, 4K on some titles, 4 screens at once and downloads (25 at a time, on up to 5 devices). Yearly only, with no free trial.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.britbox.com/hc/en-us/articles/360043315613-How-much-is-a-BritBox-subscription
+
+  # Australia's BritBox (britbox.com/au, read 2026-11-13 through an Australian exit): "Ad-free streaming", "Mobile
+  # downloads", "Up to Full-HD video quality", and its three BBC live channels; "A subscription allows downloads on up to
+  # five devices." (its downloads article).
+  - id: britbox.australia
+    name: BritBox (Australia)
+    link: https://www.britbox.com/au
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 4
+      ad-free: true
+      streaming.download-devices: 5
+      streaming.live: [tv-channels]
+      streaming.content: [films, series, documentaries]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'Its help says an account can be used on four devices at most; its North American help counts the same kind of device limit as streams at once (the standard plan’s 2 devices are its 2 concurrent streams).'
+        page:
+          name: Can I watch on multiple devices?
+          url: https://britboxaustralia.zendesk.com/hc/en-us/articles/30019896881047-Can-I-watch-on-multiple-devices
+        lastVerified: 2026-11-13
+    notes: Ad-free British TV with three live BBC channels (BBC First, BBC Entertain and BBC Select), downloads on phones and tablets and up to Full HD. Promos may play around the live channels. 7 days free for new subscribers.
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://britboxaustralia.zendesk.com/hc/en-us/articles/30019629198487-How-much-is-a-BritBox-subscription
+      - region: AU
+        currency: AUD
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://britboxaustralia.zendesk.com/hc/en-us/articles/30019629198487-How-much-is-a-BritBox-subscription
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13: its Terms & Conditions for Canada (britbox.com/ca, "Last
+# amended on 19 August 2025", Ontario law) and for the US (through a US exit, the same date, with an arbitration clause,
+# section 19), its Privacy Policy ("Last amended 19 August 2025", BritBox, LLC's, the same for both countries), which the
+# terms incorporate; Australia's own Terms of Use and Privacy Policy (through an Australian exit, "Last amended on 3 June
+# 2025", The BritBox Australia Partnership's, New South Wales law); the sign-up page's first step (an email address),
+# typing nothing, whose US line says "By clicking 'Continue', you agree to the BritBox terms and conditions and privacy
+# policy."; and both help centres' billing, cancelling, refunds, trial, plan change, downloads and devices articles.
+# Australia's privacy policy gives the same grades as North America's ("We won't sell or rent your data to others." but
+# it shares hashed customer lists with social networks, opt-out by email): no ratings of its own. Ratings for the whole
+# provider follow the worst of the North American documents; Canada's and Australia's better clauses are ratings of
+# their own. Not read: the Nordic countries' terms (not a research region), the partners' terms (Amazon, Apple, Roku,
+# Google), the deletion form and the California notice (linked from the policy, not opened). Its terms forbid reverse
+# engineering its apps (legal.licence isn't a streaming topic). Calibrated against STARZ, Peacock and Hayu.
+policies:
+  links:
+    - name: 'Terms & conditions (Canada)'
+      url: https://www.britbox.com/ca/terms-and-conditions
+    - name: 'Terms & conditions (US)'
+      url: https://www.britbox.com/us/terms-and-conditions
+    - name: 'Terms of use (Australia)'
+      url: https://www.britbox.com/au/terms-and-conditions
+    - name: 'Privacy policy'
+      url: https://www.britbox.com/ca/privacy
+    - name: 'Create your account'
+      url: https://www.britbox.com/ca/account/signup
+    - name: 'How do I cancel?'
+      url: https://help.britbox.com/hc/en-us/articles/360042977193-How-do-I-cancel
+    - name: 'What is BritBox’s refund policy?'
+      url: https://help.britbox.com/hc/en-us/articles/33658492512407-What-is-BritBox-s-refund-policy
+    - name: 'Can I try BritBox before I subscribe?'
+      url: https://help.britbox.com/hc/en-us/articles/360043315353-Can-I-try-BritBox-before-I-subscribe
+    - name: 'Does BritBox send renewal reminders? (United States & Canada)'
+      url: https://help.britbox.com/hc/en-us/articles/40495832359319-Does-BritBox-send-renewal-reminders-United-States-Canada
+    - name: 'Why is my subscription more expensive than expected?'
+      url: https://help.britbox.com/hc/en-us/articles/30094342163863-Why-is-my-subscription-more-expensive-than-expected
+    - name: 'How do I upgrade to BritBox Premier?'
+      url: https://help.britbox.com/hc/en-us/articles/34271232085655-How-do-I-upgrade-to-BritBox-Premier-United-States-Canada
+    - name: 'Can I switch back to the standard BritBox plan?'
+      url: https://help.britbox.com/hc/en-us/articles/34271417200023-Can-I-switch-back-to-the-standard-BritBox-plan-United-States-Canada
+    - name: 'Can I download shows and films to watch offline?'
+      url: https://help.britbox.com/hc/en-us/articles/360042786414-Can-I-download-shows-and-films-to-watch-offline
+    - name: 'Can I watch on multiple devices?'
+      url: https://help.britbox.com/hc/en-us/articles/360047421454-Can-I-watch-on-multiple-devices
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies what you watch and do to predict things about you, and buys more data about you from data sellers. You can limit cookies only device by device and browser by browser.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'Data we infer about you: We use information we know about you and how you use the BritBox services to predict things about you.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'We may purchase data from specialist data resellers, including demographic information, publicly available information, purchase data and advertiser data'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'Your selections are specific to the device, website, and browser you are using.'
+      action:
+        name: 'Its privacy choices'
+        url: https://www.britbox.com/ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your information across the BBC’s companies for marketing and ads, and gives social networks a scrambled copy of its customer list to show you ads. You can stop the list sharing only by emailing it.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'your information may be shared between companies in the BBC group (including BBC Public Service and BBC Studios companies such as UKTV and bbc.com) for the purposes of research, analysis, marketing and ad-serving.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'You can opt-out of your email address being included within the customer lists we share with social media services and other networks to market our service as described in section 3, by contacting us as follows:'
+      action:
+        name: 'How to opt out (its privacy policy)'
+        url: https://www.britbox.com/ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'BritBox has no ads, but ad companies track you on its site and elsewhere to show you its ads on other sites. You can turn that off only device by device and browser by browser.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'These companies may use tracking technologies to collect information about your use of our services, which they use to target our marketing messages to you.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'Your selections are specific to the device, website, and browser you are using.'
+      action:
+        name: 'Its cookie and advertising choices'
+        url: https://www.britbox.com/ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or send trains AI; its terms only forbid others training AI on its shows and site.'
+      pages: [https://www.britbox.com/ca/privacy, https://www.britbox.com/ca/terms-and-conditions]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information while you use BritBox and for a while after you leave, for its own analysis and business, without saying how long.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'We’ll keep your information for as long as you use our services and for a period of time after you have stopped using the services for analysis, administrative and business purposes.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your information through customer care or a form, after cancelling any subscription. It doesn’t say how long that takes.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'If you’d like us to delete information about you from our records, please contact us via customer services or by using the details below.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'If you have a subscription, you need to cancel this before we’ll let you delete your account or payment card.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://www.britbox.com/ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it in writing for a copy of your information, in a machine-readable form where the law gives you that right. It may charge a fee where the law allows.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'You may have the right to request that we provide to you, or a third party you have chosen, certain personal information in a structured, commonly used, machine-readable format.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'If permitted under applicable law, we reserve the right to charge a reasonable fee for this service.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://www.britbox.com/ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your information to the police and government bodies when the law requires or allows it, and says nothing about telling you or publishing a report.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'We may disclose your personal information to law enforcement agencies, government/regulatory bodies, internet service providers and content protection organizations as required or allowed by law.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information can be stored in the EU, Japan, Pakistan, the Philippines or other countries. It promises an equivalent level of protection without saying how.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'Some of our business functions, IT systems and customer services are managed, administered or hosted from locations outside of the United States or Canada, including the EU, Japan, Pakistan and the Philippines.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'Where this is the case, we’ll take steps to ensure your information receives an equivalent level of protection.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up starts with an email address; a subscription then needs your name, billing address and card details.'
+      sources:
+        - url: https://www.britbox.com/ca/account/signup
+          quote: 'Start by entering the email you want to use for your BritBox account.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'you’re required to submit: your name, email address, billing address, and payment card details.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to use it, and it deletes an account it finds is a child’s. It says it doesn’t sell under-16s’ data, but nothing about ads for teens; parents can lock shows with a PIN.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'If we obtain actual knowledge that a user is under the age of eighteen (18), we will promptly delete all information associated with such account.'
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'We do not knowingly “sell” or “share” the personal information of minors under 16 years of age.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online at any time and keep watching until the end of the time you paid for, but you must cancel at least 24 hours before it renews.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'You may cancel your BritBox subscription at any time. If you cancel your subscription, the cancellation will be effective at the end of the then current billing period.'
+        - url: https://help.britbox.com/hc/en-us/articles/360042977193-How-do-I-cancel
+          quote: 'Cancel at least 24 hours before your next renewal or payment date to avoid being charged for the next billing cycle.'
+      action:
+        name: 'How do I cancel?'
+        url: https://help.britbox.com/hc/en-us/articles/360042977193-How-do-I-cancel
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the time you paid for. If a yearly plan renews by mistake, you can ask for the unused whole months back.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'PAYMENTS ARE NONREFUNDABLE AND THERE ARE NO REFUNDS OR CREDITS FOR PARTIALLY USED PERIODS.'
+        - url: https://help.britbox.com/hc/en-us/articles/33658492512407-What-is-BritBox-s-refund-policy
+          quote: "If you’d prefer a pro-rated refund for unused time, contact us to request one. Where applicable we'll remove your access and refund any remaining time, rounded down to the nearest month."
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change its prices whenever it likes, and a new price starts after it emails you, without saying how far ahead.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'We reserve the right to adjust pricing for our Services at any time in our sole and absolute discretion. Any changes to your subscription fee will take effect following email notice to you'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      regions: [AU]
+      tier: good
+      reason: 'In Australia it tells you at least 30 days before a new price, and you can cancel before it starts.'
+      sources:
+        - url: https://www.britbox.com/au/terms-and-conditions
+          quote: 'We reserve the right to adjust pricing for our Services in our sole and absolute discretion by providing you with at least 30 days’ prior notice before such adjustment takes effect.'
+        - url: https://www.britbox.com/au/terms-and-conditions
+          quote: 'If you do not wish to pay the adjusted price, then you can cancel your subscription during this notice period and the cancellation will take effect from your next billing date.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'New subscribers get 7 days free, with a way to pay given up front, and it charges you unless you cancel a day before the trial ends. It says it sends no renewal reminders.'
+      sources:
+        - url: https://help.britbox.com/hc/en-us/articles/360043315353-Can-I-try-BritBox-before-I-subscribe
+          quote: 'Please cancel at least 24 hours before your free trial ends to avoid being charged'
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'You must provide us with a current, valid credit card or other method of payment accepted by BritBox (“Payment Method”) to utilize your subscription.'
+        - url: https://help.britbox.com/hc/en-us/articles/40495832359319-Does-BritBox-send-renewal-reminders-United-States-Canada
+          quote: 'We don’t send renewal reminders'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews on its own and says plainly that it sends no reminder first.'
+      sources:
+        - url: https://help.britbox.com/hc/en-us/articles/40495832359319-Does-BritBox-send-renewal-reminders-United-States-Canada
+          quote: 'We don’t send renewal reminders'
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'Your BritBox subscription will automatically renew at the end of each subscription period.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and tax, it may charge "any other charges" you run up using it, without saying what they are. Your card company may add its own fees too.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'By creating an account and providing a Payment Method, you authorize us and our payment processor to charge your monthly and/or annual subscription fee at the current rate as at each billing date, any other charges you may incur in connection with your access to and use of the Services, as well as any applicable taxes to your Payment Method.'
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'For certain Payment Methods, your Payment Method provider may charge you a foreign transaction fee or other charges and you are responsible for all of these charges.'
+        - url: https://help.britbox.com/hc/en-us/articles/30094342163863-Why-is-my-subscription-more-expensive-than-expected
+          quote: 'However, the final cost of your subscription may vary when subscribing through a partner platform due to additional service fees and regional adjustments.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Premier starts at once, with your unused time credited. Moving back to the standard plan waits for the end of the time you paid for.'
+      sources:
+        - url: https://help.britbox.com/hc/en-us/articles/34271232085655-How-do-I-upgrade-to-BritBox-Premier-United-States-Canada
+          quote: 'We’ll automatically apply a prorated credit for the unused portion of your current plan toward your new Premier subscription.'
+        - url: https://help.britbox.com/hc/en-us/articles/34271417200023-Can-I-switch-back-to-the-standard-BritBox-plan-United-States-Canada
+          quote: 'If you’ve upgraded to BritBox Premier and decide to return to the standard plan, you can do that at the end of your billing period.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'In the US, a private referee (an arbitrator) settles disputes one person at a time, with no class actions or jury. You can opt out only by email within 30 days of starting.'
+      sources:
+        - url: https://www.britbox.com/us/terms-and-conditions
+          quote: 'If you are a resident of the United States or its territories, the Terms require the use of arbitration to resolve disputes and otherwise limit the remedies available to you in the event of a dispute.'
+        - url: https://www.britbox.com/us/terms-and-conditions
+          quote: 'WILL BE RESOLVED INDIVIDUALLY, WITHOUT RESORT TO ANY FORM OF CLASS ACTION OR REPRESENTATIVE PROCEEDING.'
+        - url: https://www.britbox.com/us/terms-and-conditions
+          quote: 'You may opt-out by e-mail by sending a written notification to support-us@britbox.com.'
+      action:
+        name: 'How to opt out of arbitration (section 19)'
+        url: https://www.britbox.com/us/terms-and-conditions
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [CA]
+      tier: good
+      reason: 'In Canada there’s no private referee (an arbitrator): disputes go to the courts, under Ontario’s law.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'These Terms shall be governed by and construed in accordance with the laws of the Province of Ontario applicable to contracts made and wholly performed therein, excluding its conflicts of law provisions.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [AU]
+      tier: good
+      reason: 'In Australia there’s no private referee (an arbitrator): disputes go to the courts of New South Wales.'
+      sources:
+        - url: https://www.britbox.com/au/terms-and-conditions
+          quote: 'Any dispute arising out of or relating to these Terms or your access or use of the Services will be subject to the exclusive jurisdiction of the courts located within the State of New South Wales to the extent these Terms allow any court determination, and you hereby submit to the jurisdiction of such courts.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, they count at once, and using BritBox afterwards means you accept them.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'Changes are effective when they are posted.'
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'Your continued use of the Services following any changes shall constitute your agreement to these Terms as amended and form a binding agreement between you and BritBox.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      regions: [AU]
+      tier: neutral
+      reason: 'In Australia a change starts 30 days after it’s posted or you’re told, and you can cancel if it hurts you badly. Using BritBox afterwards means you accept it.'
+      sources:
+        - url: https://www.britbox.com/au/terms-and-conditions
+          quote: 'Any changes to these provisions will be incorporated into revised Terms that we will post on this page with such changes to take effect upon 30 days’ from posting or notification'
+        - url: https://www.britbox.com/au/terms-and-conditions
+          quote: 'If you do not agree to, or cannot comply with the revised Terms, or such change has a significant detrimental impact to you, you may cancel your subscription to the Services.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can shut you out whenever it decides, with or without warning, for breaking its terms or any other reason, and payments are never refunded.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'PLEASE NOTE THAT YOU MAY BE DENIED ACCESS TO THE SERVICES, IN THE SOLE DISCRETION OF BRITBOX, WITH OR WITHOUT PRIOR NOTICE TO YOU, FOR NONCOMPLIANCE WITH ANY PROVISION OF THIS AGREEMENT OR FOR ANY OTHER REASON.'
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'PAYMENTS ARE NONREFUNDABLE AND THERE ARE NO REFUNDS OR CREDITS FOR PARTIALLY USED PERIODS.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or end its plans at any time, and doesn’t promise how much of what a plan sells (such as 4K or early shows) you’ll get.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'We reserve the right to modify or terminate our offered subscription plans at any time.'
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'If you purchase a particular subscription plan in order to access particular Content, functionality or transmission quality on the Service, or Content at a particular time we do not guarantee that any minimum amount of Content and/or Content with such functionality or transmission quality will be made available.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.britbox.com/ca/terms-and-conditions, https://www.britbox.com/ca/privacy]
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has taken steps to protect your information and that nothing online is fully safe. It names no outside checks and no way to report a security flaw.'
+      sources:
+        - url: https://www.britbox.com/ca/privacy
+          quote: 'Even though we have taken steps to help protect the information in our control, you should be aware that security measures cannot provide absolute protection.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You may share your account with the people you live with, and it names no checks. Sharing outside your home isn’t allowed.'
+      sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'Unless expressly permitted by your subscription plan, you may not share your subscription outside of your household.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Signing in on a new device past the limit signs out the oldest one. Downloads: 25 at a time, gone after 30 days, or 48 hours once you start watching.'
+      sources:
+        - url: https://help.britbox.com/hc/en-us/articles/360047421454-Can-I-watch-on-multiple-devices
+          quote: 'When you sign in on a new device after reaching the limit, the oldest device on your list will be signed out.'
+        - url: https://help.britbox.com/hc/en-us/articles/360042786414-Can-I-download-shows-and-films-to-watch-offline
+          quote: 'Downloaded content will automatically be removed from your ‘Downloads’ list after 30 days.'
+        - url: https://help.britbox.com/hc/en-us/articles/360042786414-Can-I-download-shows-and-films-to-watch-offline
+          quote: 'Once you start watching a downloaded title, it will be removed from your ‘Downloads’ list after 48 hours.'
+      lastVerified: 2026-11-13

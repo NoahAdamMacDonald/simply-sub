@@ -1,0 +1,279 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, its home page again through
+# a US, an Australian, a New Zealand and a UK exit, and its help centre (support.amcplus.com, a Stonly knowledge base
+# whose guides' steps are all in each page) in Edge and with a plain fetch. Pages, each quoted where it's used:
+# Pricing: its help centre's "How much does AMC+ cost?" ("$7.99 Monthly with Ads", "$10.99 Monthly Premium", "$109.99
+# Annual Premium"), the same three cards as amcplus.com read through a US exit ("Plans from $7.99/Mo.", "MONTHLY WITH ADS
+# ... $7.99/MONTH", "MONTHLY PREMIUM ... $10.99/MONTH", "ANNUAL PREMIUM ... $109.99/YEAR"). Neither names a currency: the
+# US's, since amcplus.com sends Canada, Australia and New Zealand to pages of their own, priced in CAD, AUD and NZD. The
+# annual card's "$131.88" struck through is twelve monthly payments, not an offer.
+# Canada: amcplus.com sends a Canadian visitor to amcplus.com/countries/canada, "Plans start at $10.99 CAD/month", with
+# the same three cards in a bare "$" ($109.99/YEAR, $10.99/MONTH and "MONTHLY WITH ADS ... $7.99/MONTH"). A Canadian plan
+# from $10.99 leaves no room for a $7.99 one, so Premium's two prices are Canada's (in CAD, the page's currency) and
+# With Ads isn't priced there (the Coverage note below). Its older page (/countries/canada-3, "Plans start at $6.99
+# CAD/month", © 2020-2024) isn't linked from the site: not used.
+# Australia and New Zealand: their pages (/countries/australia, /countries/newzealand, read from Canada and through each
+# country's exit) say only "Plans from $8.99 AUD/Mo." and "Plans from $9.99 NZD/Mo.", naming no plan or period (their
+# hidden plan cards are an old US template, $4.99 to $8.99 and "$83.88 BILLED ANNUALLY"); the plan picker is past the
+# account form ("STEP 1 OF 3 Create Your Free Account"), which wasn't filled in. So they're unpriced (Coverage below).
+# Region checklist for CA, US, AU and NZ, 2026-11-13: 1. country paths (/countries/canada, /australia, /newzealand); no
+# hreflang links; 2. no picker; 3. the sign-up page's own data (gw.cds.amcn.com's account settings and "products.json")
+# names only Verizon's US promotions, and its geolocation "ca"; 4. the sign-up page's first step, typing nothing; 5. its
+# help centre's prices article (no country) and "Where is AMC+ available?"; 6. Edge from Canada and through each
+# country's exit, and a plain fetch; 7. no bill offered. Through a UK exit amcplus.com shows "The AMC+ app is not
+# available in your location." (its geographic-restriction page): not sold in the UK, Ireland or the euro sample (its
+# terms' list, below).
+# Bundles: none sold on amcplus.com. AMC+ is itself AMC's bundle of its services ("full access to Shudder, Sundance Now,
+# and IFC Films Unlimited", its FAQ's Canada answer; "Acorn TV and Shudder content" in Australia and New Zealand), so
+# its plans list Shudder and Sundance Now in includes-subscription (IFC Films Unlimited isn't in the catalog; Acorn TV
+# only in Australia and New Zealand, where AMC+ isn't priced yet). VIZIO's "STARZ and AMC+ Offer" (a VIZIO blog post found by search) is
+# a TV maker's limited-time promotion, not read or listed. Official resellers: none. Partners that bill it themselves,
+# named in its help centre: Apple TV Channels, Amazon Prime Video Channels and The Roku Channel ("These AMC+ add-on
+# channels are completely separate subscriptions and are not managed through our system"), the app stores, and TV
+# providers (Comcast Xfinity, Cox, Dish, DirecTV, Philo, Rogers, Sling, Spectrum, Verizon, YouTube TV; Telus in its
+# FAQ); Spectrum's and DIRECTV's packages include With Ads ("Complimentary AMC+ Access for Spectrum and DirecTV
+# Customers").
+# Features, read 2026-11-13: "Watch ad-free (exclusions apply*)" and "Download to watch on the go**" on Premium's cards,
+# "Watch with ads" on With Ads' ("*Live TV and select on demand programming may contain ads, promos, or sponsorships",
+# "**Some titles may not be available for download."); its privacy policy says the ad tier may lack "downloading content
+# for offline viewing". Downloads on its mobile apps with no number of devices, so 1 (inferred). Live: "Enjoy popular TV
+# networks like AMC plus streaming-only exclusives, including The Walking Dead Channel." (its FAQ). What it streams:
+# "world-class originals, award-winning series and exclusive movies" (its FAQ). Streams at once: no page states a
+# number; the service settings its sign-up page loads cap AMC+ at 4 ("videoConcurrencyLimit": 4, "concurrencyBehaviour":
+# "BLOCK_NEW_USER"), so 4 (inferred). TV Guide's review (2025-05-14) and CableTV.com's (2025-05-06) say five: not used,
+# since AMC's own settings give 4. Video quality: no AMC page names it (its terms say only that HD, Ultra HD and 4K
+# "depends on your subscription" for every AMC service), and the one publication found that states it (The Streamable,
+# "Can you watch anything on AMC+ in 4K?") refused this machine's browsers, so it waits in core's
+# awaitingRequiredFeatures. No profiles, kids profiles or parental controls on any page read; no pause.
+# Free use: none ("You still need a subscription.", its activation article; its terms' free episodes are "for limited
+# promotional periods").
+
+# Coverage: amc-plus.* in AU and NZ: sold there (its help centre and terms), but their pages give only "Plans from $8.99
+# AUD/Mo." and "Plans from $9.99 NZD/Mo." without naming the plan, and the plan picker is past the account form
+# (amcplus.com/countries/australia and /newzealand, read 2026-11-13 through each country's exit).
+
+# Coverage: amc-plus.with-ads in CA: Canada's page shows a "MONTHLY WITH ADS" card at $7.99, but says "Plans start at
+# $10.99 CAD/month", so whether Canada sells it, and at what price, isn't known (amcplus.com/countries/canada, read
+# 2026-11-13).
+
+# Coverage: amc-plus.* in AS, GU, MP, PR and VI: its terms sell it in "US Territories", but no page names a territory's
+# price, and the US exit's page showed the US's (2026-11-13).
+
+id: amc-plus
+name: AMC+
+website: https://www.amcplus.com
+# Its owner's site, where amcplus.com/terms, /privacy and /cookies lead (amcglobalmedia.com).
+domains: [amcglobalmedia.com]
+category: streaming
+spendCategory: streaming
+# "AMC+ is available in: The US Canada Australia New Zealand" (Where is AMC+ available?), and its terms: "The Services are
+# intended for viewing solely within the United States, and the countries identified at this link", "AMC+:Australia,
+# Canada, New Zealand, US Territories." They don't name the territories; the five inhabited ones are listed, as
+# Peacock's help centre names them.
+availableIn: [US, CA, AU, NZ, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD, CA: CAD }
+# Its help centre's "How do I cancel AMC+?" (a direct subscription: amcplus.com/account/subscription, "Click Cancel").
+cancelUrl: https://support.amcplus.com/kb/guide/en/how-do-i-cancel-amc-iIPM4dreK2/Steps/3763651
+sources:
+  {
+    pricing: https://support.amcplus.com/kb/guide/en/how-much-does-amc-cost-U5e3Em4jJs/Steps/3677985,
+  }
+notes: Canada's prices only for Premium; Australia's and New Zealand's pages name only a starting price.
+# Owner (M11.2), read 2026-11-13: AMC Global Media Inc., from its third-quarter release on its own site, which names
+# its listing and where it's based (amcnetworks.com's legal pages lead to amcglobalmedia.com, and the App Store still
+# names the app's developer "AMC Networks Inc."). Its terms are AMC Global Media Inc.'s "and/or its subsidiaries"; amcplus.com's footer names AMC Global
+# Media Inc. (US) and AMC Networks Entertainment LLC (its Canadian page). No page read names a majority holder (the
+# release counts 29,674,947 Class A and 11,484,408 Class B shares; its proxy statement wasn't read).
+owner:
+  name: AMC Global Media Inc.
+  website: https://www.amcglobalmedia.com
+  page:
+    name: AMC Global Media Inc. Reports Third Quarter 2026 Results
+    url: https://www.amcglobalmedia.com/2026/11/09/amc-global-media-inc-reports-third-quarter-2026-results/
+  quotes:
+    - 'AMC Global Media (Nasdaq: AMCX) is home to many of the greatest stories and characters in TV and film and the premier destination for passionate and engaged fan communities around the world.'
+    - 'Its portfolio includes targeted streaming services AMC+, Acorn TV, Shudder, Sundance Now, HIDIVE and All Reality'
+    - 'AMC Global Media is headquartered in the United States, with international operations in Iberia, Latin America, Central Europe, the U.K., Australia and New Zealand.'
+  country:
+    code: US
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: AMCX }
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13 in its help centre: a card on amcplus.com (its card article), the app stores and
+# the platforms that bill it (Apple TV Channels, Amazon Prime Video Channels, The Roku Channel: core's app-store), and
+# a TV provider's bill. No page names the card networks (its terms say "a valid credit, debit, or other payment method"),
+# so no acceptedNetworks; no PayPal, gift cards or other ways on any page read.
+paymentMethods:
+  - methods: [card]
+    page: How do I update my credit card information?
+    url: https://support.amcplus.com/kb/guide/en/how-do-i-update-my-credit-card-information-Rn9RCx0m83/Steps/3735093
+    quotes:
+      - 'How do I update my credit card information?'
+  - methods: [app-store]
+    page: Can I get AMC+ without a cable or satellite service provider?
+    url: https://support.amcplus.com/kb/guide/en/can-i-get-amc-without-a-cable-or-satellite-service-provider-8G9NxADtUf/Steps/3735052
+    quotes:
+      - 'In that case, you will be billed through the app store for that device (Apple App Store, Google Play, etc).'
+      - 'AMC+ is also available via Apple TV Channels, Amazon Prime Video Channels, and The Roku Channel.'
+  - methods: [provider-billing]
+    page: How do I subscribe to AMC+?
+    url: https://support.amcplus.com/kb/guide/en/how-do-i-subscribe-to-amc-BQkzEfcsuK/Steps/3677762
+    quotes:
+      - 'AMC+ is available as a premium add-on channel from several TV providers.'
+# Renewal day (M11.5): its terms bill "on the calendar day corresponding to the beginning of your Billing Period", and
+# a sign-up on a day a month lacks bills on that month's last day: the day you signed up.
+renewalAnchor:
+  kind: same-date
+  page: AMC Streaming Services Terms of Use
+  url: https://www.amcglobalmedia.com/terms-of-use/
+  quotes:
+    - 'If your paid subscription begins on a day not contained in a given month, and your Billing Period is every month, your Payment Method will be billed on the last day of such month.'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.amcplus.com/
+    - https://support.amcplus.com/kb/guide/en/how-do-i-activate-my-tv-connected-app-what-is-activation-c6neGdWzrR/Steps/3679780
+  lastVerified: 2026-11-13
+
+# Platforms: "AMC+ can be accessed at amcplus.com using a web browser, and on our apps for:" iPhone and iPad, Apple TV,
+# Fire TV, Android phones and tablets, Android TV, Chromecast, Roku, Samsung TV, Vizio TV, Xfinity boxes and Xumo (What
+# devices does AMC+ support?); no consoles. Sign-in: "EMAIL" and "PASSWORD" (amcplus.com/login); a TV provider's sign-in
+# is for those who bought it there. App languages: English (its pages and help centre are in English only). Support:
+# its help centre's contact form ("Contact AMC+", its "AMC+ Contact Form").
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password]
+  languages.interface: [en]
+  support.channels: [email]
+
+# AMC+ includes Shudder's library, though not Shudder's own apps ("Your AMC+ sign-in credentials will not work on the
+# individual apps for Shudder, Sundance Now, IFC Films Unlimited and AMC.", its FAQ), so each plan lists the Shudder
+# plan with the same ads: Premium the ad-free one, With Ads the ad-supported one, and Sundance Now's one plan (its
+# library, not its apps, likewise). IFC Films Unlimited isn't in the catalog; Acorn TV (Australia and New Zealand only)
+# joins once AMC+ is priced there.
+plans:
+  - id: amc-plus.with-ads
+    name: With Ads
+    link: https://www.amcplus.com/create
+    features:
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.live: [tv-channels]
+      streaming.content: [films, series]
+      streaming.own-media: false
+      account.parental-controls: false
+      includes-subscription: [shudder.with-ads, sundance-now.standard]
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'The service settings its sign-up page loads cap AMC+ at 4 streams at once ("videoConcurrencyLimit": 4) and block a new one past that; no help article names a number.'
+        page:
+          name: Create Your Free Account
+          url: https://www.amcplus.com/create
+        lastVerified: 2026-11-13
+    notes: Its pages call it Monthly with Ads. With ads, and no downloads.
+    prices:
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.amcplus.com/kb/guide/en/how-much-does-amc-cost-U5e3Em4jJs/Steps/3677985
+
+  - id: amc-plus.premium
+    name: Premium
+    link: https://www.amcplus.com/create
+    features:
+      ad-free: true
+      streaming.concurrent-streams: 4
+      streaming.download-devices: 1
+      streaming.live: [tv-channels]
+      streaming.content: [films, series]
+      streaming.own-media: false
+      account.parental-controls: false
+      includes-subscription: [shudder.premium, sundance-now.standard]
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'The service settings its sign-up page loads cap AMC+ at 4 streams at once ("videoConcurrencyLimit": 4) and block a new one past that; no help article names a number.'
+        page:
+          name: Create Your Free Account
+          url: https://www.amcplus.com/create
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'Its plan cards offer "Download to watch on the go" in its mobile apps, without saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: AMC+
+          url: https://www.amcplus.com/
+        lastVerified: 2026-11-13
+    notes: Its pages call it Monthly Premium and Annual Premium. Live TV and some on-demand titles still have ads, promos or sponsorships; some titles can't be downloaded.
+    prices:
+      - region: US
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.amcplus.com/kb/guide/en/how-much-does-amc-cost-U5e3Em4jJs/Steps/3677985
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.amcplus.com/kb/guide/en/how-much-does-amc-cost-U5e3Em4jJs/Steps/3677985
+      - region: CA
+        currency: CAD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.amcplus.com/countries/canada
+      - region: CA
+        currency: CAD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.amcplus.com/countries/canada
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada. The AMC Streaming Services Terms of Use and
+# AMC Global Media's Privacy Policy and Cookies Policy (all "June 27, 2025") cover every AMC streaming service and are
+# rated once as shared documents (data/policies/amc-global-media-terms.yaml and amc-global-media-privacy.yaml, drafted beside
+# this file). Rated here from AMC+'s own pages: its sign-up page's first step (typing nothing) and its help centre's
+# subscribing, cancelling, prices and card articles. Not read: the sign-up steps after the email address (the plan
+# picker and checkout), the "Additional Terms" of its promotions, its contact form, and the terms of the partners that
+# bill it.
+policies:
+  shared: [amc-global-media-terms, amc-global-media-privacy]
+  links:
+    - name: 'Create Your Free Account'
+      url: https://www.amcplus.com/create
+    - name: 'How do I subscribe to AMC+?'
+      url: https://support.amcplus.com/kb/guide/en/how-do-i-subscribe-to-amc-BQkzEfcsuK/Steps/3677760
+    - name: 'How much does AMC+ cost?'
+      url: https://support.amcplus.com/kb/guide/en/how-much-does-amc-cost-U5e3Em4jJs/Steps/3677985
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up starts with an email address and a password you choose, then a plan and payment. The steps after the email weren’t read.'
+      sources:
+        - url: https://www.amcplus.com/create
+          quote: 'Create Your Free Account'
+        - url: https://www.amcplus.com/create
+          quote: 'Password must be at least 8 characters'
+        - url: https://support.amcplus.com/kb/guide/en/how-do-i-subscribe-to-amc-BQkzEfcsuK/Steps/3677760
+          quote: 'Enter your preferred email address'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its help centre and terms don’t say when a switch between its three plans takes effect, or what happens to the time you’ve paid for.'
+      pages:
+        - https://support.amcplus.com/kb/guide/en/how-do-i-subscribe-to-amc-BQkzEfcsuK/Steps/3677760
+        - https://support.amcplus.com/kb/guide/en/how-much-does-amc-cost-U5e3Em4jJs/Steps/3677985
+      lastVerified: 2026-11-13

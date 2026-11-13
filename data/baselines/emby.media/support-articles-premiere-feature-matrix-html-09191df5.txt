@@ -1,0 +1,189 @@
+url: https://emby.media/support/articles/Premiere-Feature-Matrix.html
+method: browser
+saved: 2026-11-13
+
+Emby Docs
+Emby Home
+Support Home
+Server Docs
+Client Docs
+Premiere Docs
+Support Home
+Emby Premiere
+Feature Matrix
+Search support topics
+Emby Documentation
+Emby Server
+Emby Apps
+Supplemental Articles
+Emby Premiere
+Emby Premiere
+Purchasing Premiere
+Membership Options
+Feature Matrix
+Premiere Key Delivery
+Keys Valid With Emby 4.0
+Lost Premiere Keys
+Key Invalid Or Missing
+Upgrade Membership
+Premiere Limits
+App Store Price Differences
+Cancel Subscription
+Using Multiple Servers
+Update Credit Card
+Change Payment Method
+Emby Premiere Feature Matrix
+Note: Emby Premiere is tied to a server by installing a key in its configuration. Therefore, all of the Premiere features below apply when connected to a server with a valid Premiere key. The server connected at the time governs Premiere status.
+For technical background, see hardware-accelerated media processing and HDR tone mapping.
+Server / All Apps
+Feature Free Premiere
+Browse Media
+✔
+✔
+Library Organization and Metadata Gathering
+✔
+✔
+Users and user management
+✔
+✔
+Parental Controls
+✔
+✔
+Emby Connect (simplified remote login)
+✔
+✔
+Intro Skipping
+✔
+Cinema Intros
+✔
+Limit the number of concurrent video playback sessions
+✔
+Live TV
+✔
+Free Guide Data (US Canada and UK)
+✔
+DVR
+✔
+Hardware Accelerated Transcoding *
+✔
+HDR Tone Mapping When Transcoding
+✔
+In-playback subtitle search
+✔
+CoverArt Plug-in (advanced image treatment)
+✔
+Backup and Restore Plug-in
+✔
+Downloads & Sync
+✔
+LDAP Integration
+✔
+Content Conversion
+✔
+Smart Home (Alexa/Google Home)
+✔
+Podcasts
+✔
+Webhooks
+✔
+Theme Songs and Videos (user provided and in supported apps)
+✔
+Lyrics display (user provided in supported apps)
+✔
+Themes for Clients - More than a dozen themes to choose from
+✔
+* Nvidia Shield and WD NAS devices do not require Premiere for HW Acceleration
+PC or Mobile Browser
+Feature Free Premiere
+Full Playback
+✔
+✔
+Live TV
+✔
+TV Mode
+✔
+Emby Windows
+Feature Free Premiere
+Limited Playback (one-minute only)
+✔
+✔
+Full Playback
+✔
+Offline Media
+✔
+Live TV
+✔
+Emby Linux
+Feature Free Premiere
+Limited Playback (one-minute only)
+✔
+✔
+Full Playback
+✔
+Live TV
+✔
+Emby for MacOS
+Feature Free Premiere
+Limited Playback (one-minute only)
+✔
+✔
+Full Playback
+✔
+Offline Media
+✔
+Live TV
+✔
+Mobile Apps (iOS and Android)
+Feature Free App Unlock Premiere
+Limited Playback (one-minute only)
+✔
+✔
+Full Playback
+✔
+✔
+Apple Carplay/Android Auto
+✔
+Apple Watch Support
+✔
+Camera Upload
+✔
+Offline Media
+✔
+Live TV
+✔
+Android on TV or Fire TV
+Feature Free Premiere
+Full Playback
+*
+✔
+Live TV
+✔
+Offline Media
+✔
+* Playback for up to 5 TV devices
+Roku, Apple TV, Smart TV (LG and Samsung)
+Feature Free Premiere
+Full Playback
+✔
+✔
+Live TV
+✔
+Game Consoles (Xbox, PS4)
+Feature Free Premiere
+Limited Playback (one-minute only)
+✔
+✔
+Full Playback
+✔
+Live TV
+✔
+ON THIS PAGE
+Server / All Apps
+PC Or Mobile Browser
+Emby Windows
+Emby Linux
+Emby For MacOS
+Mobile Apps (IOS And Android)
+Android On TV Or Fire TV
+Roku, Apple TV, Smart TV (LG And Samsung)
+Game Consoles (Xbox, PS4)

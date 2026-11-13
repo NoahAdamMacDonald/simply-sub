@@ -164,6 +164,12 @@ describe('namesRenewalAnchor', () => {
     ['Netflix membership plans are billed monthly on the date you signed up.', 'same-date', true],
     ['Your billing cycle starts on the date you sign up.', 'same-date', true],
     ['Renews on the same day each month', 'same-date', true],
+    // Emby Premiere's terms (M11.15).
+    [
+      'automatically renew on the same calendar date of the following calendar month',
+      'same-date',
+      true,
+    ],
     // What implies it (M11.9): Disney's and Bell Media's terms, in English and French, and Claude's billing help.
     [
       'the timing of a recurring charge may change, such as if your subscription began on a date not contained in a given month.',
@@ -171,6 +177,8 @@ describe('namesRenewalAnchor', () => {
       true,
     ],
     ['if your subscription began on a day not contained in a given month', 'same-date', true],
+    // AMC Global Media's streaming terms (M11.15).
+    ['If your paid subscription begins on a day not contained in a given month', 'same-date', true],
     [
       'si votre abonnement a commencé à une date non comprise dans un mois donné.',
       'same-date',

@@ -2243,9 +2243,17 @@ in every D1 `json` column search parses.
     bundles), STARZ (`starz`, the US; Canada's STARZ stays Crave's add-on), Plex (`plex`), Twitch (`twitch`) and Kick
     (`kick`), Hayu (`hayu`), Nebula (`nebula`), and the free Pluto TV (`pluto-tv`) and Tubi (`tubi`): a free-only
     service needn't say how it's paid. Amazon Prime's free monthly Twitch channel subscription is a Prime perk.
+  - **Streaming, batch 7** (2026-11-13): Canada's Hollywood Suite (`hollywood-suite`: sold only through TV providers
+    and its Prime Video channel) and Super Channel (`super-channel`: Super Channel+ direct, its channels on Prime Video
+    and Apple TV, and its free channels); AMC Global Media's AMC+ (`amc-plus`, which includes Shudder and Sundance
+    Now), Shudder (`shudder`), Acorn TV (`acorn-tv`), Sundance Now (`sundance-now`) and HIDIVE (`hidive`), on its terms
+    and privacy policy as shared documents; BritBox (`britbox`), the Criterion Channel (`criterion-channel`: Canada
+    charged in US dollars), Curiosity Stream (`curiosity-stream`, eleven regions), the Emby media server (`emby`), and
+    Morphe (`morphe`), a free tool that patches YouTube's apps, listed neutrally as software (BLUEPRINT §14). Core reads
+    "same calendar date" and "begins on a day not contained in a given month" as the date you signed up.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 4 and Prime Video done; music: parts 1 to 5 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 7 and Prime Video done; music: parts 1 to 5 done)
 
 **M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
 - **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on

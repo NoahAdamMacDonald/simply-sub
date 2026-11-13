@@ -1,0 +1,491 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada (emby.media's home, Premiere,
+# about, download, support, terms and privacy pages) and with a plain fetch (its documentation, emby.media/support, whose
+# articles are static pages listed in its search index, and its Premiere terms). Pages, each quoted where it's used:
+# Pricing: its Premiere page (emby.media/premiere.html), the same for everyone (the prices are in the page's own HTML):
+# "Monthly $4.99/Each Month (recurring)", "1 Year $54/1 Year", "Lifetime $119/One-time", "All prices are in USD." The
+# year doesn't renew: "This is a Premiere membership that will be good for one year from the date of purchase. It will
+# not automatically renew so you will need to re-purchase it at the end of that one year." (Premiere Membership
+# Options), so it's `autoRenew: false`. No page says the prices include tax.
+# Not listed: Lifetime ($119, "valid for the entire life of the Emby product"), a one-time purchase beside the
+# subscriptions (the owner's rule for lifetime plans, as Plex Pass's and Nebula's); the Extended Premiere options ("50
+# Devices Monthly $13.99/Each Month (recurring)", "80 Devices Monthly $23.99/Each Month (recurring)",
+# emby.media/premiere-ext.html), the same Premiere for more than its 30 devices, which no feature tells apart; and the
+# individual app unlocks in Apple's, Google's and Amazon's stores ("Some apps have the option to unlock basic playback
+# individually"), priced by those stores, where Premiere also costs more ("those store platforms take a significant
+# commission", App Store Price Differences).
+# Region checklist, 2026-11-13: not needed: one price list in US dollars for every country, in the page's own HTML.
+# Bundles: none. Official resellers: none; it sells Premiere itself through PayPal and its card form, and in its apps
+# through the app stores.
+# Features, read 2026-11-13: Emby Server plays your own media ("Emby organizes and streams your own videos, music,
+# photos, and live TV from your personal server to every screen you own.", its home page) and has no content of its own
+# ("Emby is NOT a media streaming service. We provide no content.", its Premiere page), so streaming.own-media and
+# streaming.content: none. Its Feature Matrix sets Free against Premiere: users, parental controls, Emby Connect and full
+# playback in browsers, Roku, Apple TV and smart TVs are free; Live TV, DVR, hardware transcoding, "Downloads & Sync" and
+# full playback in its mobile, desktop and console apps are Premiere's (free there: "Limited Playback (one-minute only)";
+# Android TV and Fire TV free "Playback for up to 5 TV devices"). Video quality: no page states a top quality; it plays
+# your files as they are, and its naming guide keeps a film's "1080p", "4K" and "720p" versions side by side, so 4K
+# (inferred). Streams: no number: Premiere's limit "is a device limit NOT a concurrent connection limit" (Premiere
+# Limits), and a server's admin may "Limit the number of concurrent video playback sessions" (Feature Matrix), so
+# unlimited (inferred), as Plex's and Jellyfin's. Users: "The only required field is a user name." (Users), with no limit,
+# so unlimited profiles (inferred). Downloads: Premiere's, on its "30 Devices per Premiere key" (its Premiere terms), so
+# 30 (inferred). Ads: no page says "no ads", but it shows only your own media, so ad-free (inferred). Parental controls on
+# both: "set the max parental rating for a user" (Parental Controls); no kids mode of its own. No pause: a monthly plan
+# is only cancelled (Cancel Subscription). Live TV and recording need your own tuner ("You must have your own server
+# installed and your own media or Live TV tuner."): a perk, not streaming.live, since it brings no channels.
+# Free use: the free Emby Server, its Free plan.
+
+id: emby
+name: Emby
+website: https://emby.media
+category: streaming
+spendCategory: streaming
+billingCurrency: { GLOBAL: USD }
+# Its documentation's cancelling article (a monthly plan is the only one that renews).
+cancelUrl: https://emby.media/support/articles/Premiere-Canceling.html
+sources: { pricing: https://emby.media/premiere.html }
+notes: Emby Premiere is also sold for life, paid once ($119), and for 50 or 80 devices a month; neither is listed.
+# Owner (M11.2), read 2026-11-13: its terms. Private: no shares listed.
+owner:
+  name: 'Emby, LLC'
+  page:
+    name: Terms of service
+    url: https://emby.media/terms.html
+  quotes:
+    - 'owned and operated by Emby, LLC, a North Carolina limited liability company'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://emby.media/terms.html
+    quotes:
+      - 'owned and operated by Emby, LLC, a North Carolina limited liability company'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its Purchasing Emby Premiere article (PayPal, a card form, and in-app purchases
+# billed by the app stores). No page names the card networks (the card form opens only after choosing a plan), so no
+# acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: Purchasing Emby Premiere
+    url: https://emby.media/support/articles/Premiere-Purchase.html
+    quotes:
+      - 'PayPal - On the Emby Media web site you select the option you wish to purchase and click the "Checkout with PayPal" button.'
+      - 'Direct Credit Card Payment - On the Emby Media web site you select the option you wish to purchase and click the "Pay with card" button.'
+      - 'If you use this option, you will manage your subscription through the normal mechanisms of the account for that particular device (e.g. iTunes, Amazon or Google account).'
+# Renewal day (M11.5): its Premiere terms renew a monthly term "on the same calendar date of the following calendar
+# month" (an April 1 sign-up renews on May 1), the date you signed up.
+renewalAnchor:
+  kind: same-date
+  page: Emby Premiere terms
+  url: https://emby.media/premiereterms.html
+  quotes:
+    - 'The term, if selected, shall automatically renew on the same calendar date of the following calendar month (for example purposes only, if enrolled on April 1 of a given year, the term shall expire on April 30 of the given month and automatically renew on May 1 of the given year).'
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: its server for Windows, Linux, macOS, FreeBSD, NAS devices and Docker,
+# and apps for "Amazon Fire TV", "Android TV", "Apple TV", "Chromecast", "LG Smart TV", "Roku", "Samsung Smart TV",
+# "Xbox", "PlayStation 4", "Android", "iOS", "Windows", "Linux", "macOS" and a "Web App" (Download Emby). Sign-in: a user
+# name and password on your own server, or an Emby Connect account's ("one set of username/password credentials", Emby
+# Connect); its apps' "PIN process" finds a server, and no page says how. Support: its community forum and email
+# ("please send an email to billingsupport@emby.media", Emby Premiere). App languages: left out: its server asks you
+# "to choose a display language" from "as many languages as possible" (Installation), but no page read lists them. Its
+# code is closed: its terms license the software and forbid attempts "to discover the source code" (apart from the
+# open-source components it includes), so software.open-source is left out, as Plex's is; Emby was open source before,
+# but no page of its own says so now. Self-hostable: "Run Emby Server on a computer or NAS on your home network."
+features:
+  platforms: [web, windows, macos, linux, android, ios, tv, console]
+  account.sign-in: [password]
+  support.channels: [email, community]
+  software.self-hostable: true
+
+# Perks (M11.6): what Premiere adds that no feature describes, in its Premiere page's words.
+perks:
+  - id: live-tv-dvr
+    name: Schedule individual recordings, series recordings, and more with Emby DVR
+  - id: free-apps
+    name: Enjoy full access to Emby for Android, Fire TV, iOS, Xbox One and PS4
+  - id: hardware-transcoding
+    name: Hardware Accelerated Transcoding
+  - id: cinema-intros
+    name: Cinema Intros
+  - id: carplay-android-auto
+    name: CarPlay/Android Auto
+  - id: convert-content
+    name: Automatically Convert Content
+  - id: backup-restore
+    name: Backup and Restore
+  - id: folder-sync
+    name: Folder Sync
+  - id: smart-home
+    name: Smart Home
+
+plans:
+  - id: emby.free
+    name: Free
+    link: https://emby.media/download.html
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: unlimited
+      ad-free: true
+      streaming.profiles: unlimited
+      streaming.content: []
+      streaming.own-media: true
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'It plays your own files as they are, and its naming guide keeps a film’s 1080p, 4K and 720p versions side by side, so 4K plays; no page states a top quality.'
+        page:
+          name: Movie Naming
+          url: https://emby.media/support/articles/Movie-Naming.html
+        lastVerified: 2026-11-13
+      streaming.concurrent-streams:
+        reason: 'It sets no number of streams at once: Premiere’s limit is on devices, “NOT a concurrent connection limit”, so your own server’s hardware is the limit.'
+        page:
+          name: Premiere Limits
+          url: https://emby.media/support/articles/Premiere-Limits.html
+        lastVerified: 2026-11-13
+      ad-free:
+        reason: 'It shows only your own media (“We provide no content.”), so it has no ads; no page says “no ads” in so many words.'
+        page:
+          name: Emby Premiere
+          url: https://emby.media/premiere.html
+        lastVerified: 2026-11-13
+      streaming.profiles:
+        reason: 'Each person gets a user of their own on your server, where a user name is the only field needed, and its documentation names no limit.'
+        page:
+          name: Users
+          url: https://emby.media/support/articles/Users.html
+        lastVerified: 2026-11-13
+    notes: Free server software. You run Emby Server on your own computer or NAS and stream only your own videos, music and photos; full playback in web browsers and on Roku, Apple TV and smart TVs. Its phone, computer and console apps play one minute only without Premiere or an app unlock, and Android TV and Fire TV up to 5 TV devices.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://emby.media/support/articles/Premiere-Feature-Matrix.html
+
+  - id: emby.premiere
+    name: Emby Premiere
+    link: https://emby.media/premiere.html
+    features:
+      video.quality: 4k
+      streaming.concurrent-streams: unlimited
+      ad-free: true
+      streaming.download-devices: 30
+      streaming.profiles: unlimited
+      streaming.content: []
+      streaming.own-media: true
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'It plays your own files as they are, and its naming guide keeps a film’s 1080p, 4K and 720p versions side by side, so 4K plays; no page states a top quality.'
+        page:
+          name: Movie Naming
+          url: https://emby.media/support/articles/Movie-Naming.html
+        lastVerified: 2026-11-13
+      streaming.concurrent-streams:
+        reason: 'It sets no number of streams at once: Premiere’s limit is on devices, “NOT a concurrent connection limit”, so your own server’s hardware is the limit.'
+        page:
+          name: Premiere Limits
+          url: https://emby.media/support/articles/Premiere-Limits.html
+        lastVerified: 2026-11-13
+      ad-free:
+        reason: 'It shows only your own media (“We provide no content.”), so it has no ads; no page says “no ads” in so many words.'
+        page:
+          name: Emby Premiere
+          url: https://emby.media/premiere.html
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'Downloads are a Premiere feature, and its terms allow Premiere features on 30 devices per key, without a separate number for downloads.'
+        page:
+          name: Emby Premiere Terms of Service
+          url: https://emby.media/premiereterms.html
+        lastVerified: 2026-11-13
+      streaming.profiles:
+        reason: 'Each person gets a user of their own on your server, where a user name is the only field needed, and its documentation names no limit.'
+        page:
+          name: Users
+          url: https://emby.media/support/articles/Users.html
+        lastVerified: 2026-11-13
+    perks:
+      [
+        live-tv-dvr,
+        free-apps,
+        hardware-transcoding,
+        cinema-intros,
+        carplay-android-auto,
+        convert-content,
+        backup-restore,
+        folder-sync,
+        smart-home,
+      ]
+    notes: A key for your own server that unlocks its apps’ full playback, downloads, Live TV and DVR with your own tuner, hardware transcoding and more for everyone using that server, on up to 30 devices, in one household. The yearly membership doesn’t renew on its own. Also sold for life ($119, paid once), not listed.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://emby.media/premiere.html
+      - region: GLOBAL
+        currency: USD
+        amount: 54
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-13
+        sourceUrl: https://emby.media/premiere.html
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13: its Terms of Service ("Updated August 16, 2026"), which include
+# its Privacy Policy ("The Effective Date of this Privacy Policy is 25 March 2015") and its "Operating Rules and
+# Policies"; its Emby Premiere Terms of Service ("Updated: Dec 23, 2024"), which buying Premiere accepts ("Purchasing any
+# option above is an acceptance of the Emby Premiere Terms of Service."); and its documentation's Premiere articles
+# (purchasing, membership options, limits, cancelling, upgrading, app store prices). Every page's footer says
+# "Downloading any Emby software constitutes acceptance of these terms." Its privacy policy covers its website, forums
+# and Emby Connect; your server and its media stay on your machine ("EMBY does not have access to, nor host, any of the
+# User Content available through the Access Services", its terms). Not read: the card form and PayPal's checkout (they
+# open after choosing a plan), its forum's own rules, and the app stores' terms. Its terms take a transferable,
+# sublicensable licence over what you post on its forums (legal.content-rights isn't a streaming topic) and forbid
+# reverse engineering its software (legal.licence isn't either). Calibrated against Plex, Jellyfin and Nebula.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://emby.media/terms.html
+    - name: 'Emby Premiere terms of service'
+      url: https://emby.media/premiereterms.html
+    - name: 'Privacy policy'
+      url: https://emby.media/privacy.html
+    - name: 'Emby Premiere'
+      url: https://emby.media/premiere.html
+    - name: 'Purchasing Emby Premiere'
+      url: https://emby.media/support/articles/Premiere-Purchase.html
+    - name: 'Premiere membership options'
+      url: https://emby.media/support/articles/Premiere-Membership-Options.html
+    - name: 'Emby Premiere (documentation)'
+      url: https://emby.media/support/articles/Emby-Premiere.html
+    - name: 'Premiere limits'
+      url: https://emby.media/support/articles/Premiere-Limits.html
+    - name: 'Cancel subscription'
+      url: https://emby.media/support/articles/Premiere-Canceling.html
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its website and Emby Connect record how you use them and how your apps reach your server, to improve its services. You can only turn off cookies, browser by browser.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'We may use Website Usage Information for a variety of purposes, including enhancing or otherwise improving the Website.'
+        - url: https://emby.media/privacy.html
+          quote: 'We collect information and/or data related to the connection between Users and a User Machine.'
+        - url: https://emby.media/privacy.html
+          quote: 'You may disable cookies or Flash Cookies on your Device, but some features of the Website may not function properly.'
+      action:
+        name: 'Its privacy policy'
+        url: https://emby.media/privacy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It may use your information in marketing deals with other companies. It says it won’t hand it over for their own marketing without your consent, and you can stop only its own emails.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'We may use your Personal Information for promotional and marketing purposes with companies with whom we enter into marketing and promotional arrangements.'
+        - url: https://emby.media/privacy.html
+          quote: 'We do not provide your Personal Information to third parties for those third parties’ marketing purposes unless you consent to such sharing at the time you provide your Personal Information.'
+      action:
+        name: 'Its privacy policy'
+        url: https://emby.media/privacy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Emby has no ads in its apps, but advertisers’ content on its website may collect what you do and your device’s ID. You can only turn off cookies, browser by browser.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'The Website may contain content that is supplied by a third party, including advertisers, and those third parties may collect Website Usage Information and your Device Identifier when web pages from the Website are served to your Device.'
+        - url: https://emby.media/privacy.html
+          quote: 'You may disable cookies or Flash Cookies on your Device, but some features of the Website may not function properly.'
+      action:
+        name: 'Its privacy policy'
+        url: https://emby.media/privacy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you post or upload trains AI.'
+      pages: [https://emby.media/privacy.html, https://emby.media/terms.html]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: bad
+      reason: 'It states no time for keeping your information, and what you remove from your profile may stay in its systems for its own admin use.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'When you edit your Personal Information or change your preferences on the Website, information that you remove may persist internally for EMBY’s administrative purposes.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'To have your profile removed, you post a request in a thread on its forum. It may not delete everything: some data can stay on backups.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'If you wish to remove your Profile from the Website, please post a comment in the “General Discussion” portion of the website forum in the thread labeled “For forum issues please post in this thread” and request that your Profile be removed from the Website.'
+        - url: https://emby.media/privacy.html
+          quote: 'Also, please note that it is not always possible to completely remove or delete all of your information from our databases and that residual data may remain on backup media or for other reasons, and if you have made any public postings on the Website such as in the Public Areas, these communications are not automatically removed.'
+      action:
+        name: 'Ask in its forum'
+        url: https://emby.media/community/
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy names no way to get a copy of your information. Your media and library stay on your own server.'
+      pages: [https://emby.media/privacy.html]
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides legal orders, it may hand your information to government authorities who simply ask during an investigation, without telling you.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: '(ii) at the request of governmental authorities conducting an investigation'
+        - url: https://emby.media/privacy.html
+          quote: 'Such disclosures may be carried out without notice to you.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Its website is run in the United States under US law, and it describes no safeguards for your information. Your media stays on your own server.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'This Website is operated in the United States and is designed and targeted to U.S. audiences and is governed by and operated in accordance with the laws of the United States.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Emby needs no account: you install its server free. Buying Premiere takes an email address and your card, or your PayPal account.'
+      sources:
+        - url: https://emby.media/support/articles/Premiere-Purchase.html
+          quote: 'This will produce a form where you will need to provide a valid email address (very important as this is how you will receive your key) and your credit card information.'
+        - url: https://emby.media/support/articles/Premiere-Purchase.html
+          quote: "Since we don't require you to have an account with us, this is the email we are given by PayPal with the transaction."
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Its website isn’t for children under 13, and it deletes a young child’s information it learns of. On your own server, you can limit each person to films and shows up to a rating.'
+      sources:
+        - url: https://emby.media/terms.html
+          quote: 'Children under the age of 13 are prohibited from using the Website.'
+        - url: https://emby.media/privacy.html
+          quote: 'If we are notified that a person under 13 years of age has submitted Personal Information to us, we will delete that Personal Information.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'Only the monthly plan renews. You stop it yourself online, in PayPal or its subscription page, and keep Premiere to the end of the time you paid for.'
+      sources:
+        - url: https://emby.media/support/articles/Premiere-Canceling.html
+          quote: 'The only subscription level you should ever need to cancel is the Monthly one as it is the only one that automatically renews.'
+        - url: https://emby.media/support/articles/Premiere-Canceling.html
+          quote: 'When you cancel, it just cancels the auto recurring payment going forward. Your Premiere features will remain in effect until the expiration date of your last subscription.'
+      action:
+        name: 'Cancel subscription'
+        url: https://emby.media/support/articles/Premiere-Canceling.html
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back, except when it chooses to refund, but you keep Premiere to the end of the time you paid for.'
+      sources:
+        - url: https://emby.media/premiereterms.html
+          quote: 'Any and all fees related to Emby Subscriptions are non-refundable.'
+        - url: https://emby.media/premiereterms.html
+          quote: 'If you cancel your Subscription, you will not be charged again, and your Subscription will last until the end of the then current term.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms and Premiere terms don’t say whether it tells you before raising the monthly price.'
+      pages: [https://emby.media/premiereterms.html, https://emby.media/terms.html]
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Its Premiere page sells no free trial: the server is free, and Premiere is paid from the start.'
+      pages: [https://emby.media/premiere.html]
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'The yearly membership never renews on its own. The monthly plan does, and no reminder before it is stated.'
+      sources:
+        - url: https://emby.media/premiereterms.html
+          quote: 'If you select automatic renewal at the time of the subscription, then your subscription will be renewed automatically, and thereby the Term will be renewed automatically at the end of the then current Term.'
+        - url: https://emby.media/support/articles/Premiere-Membership-Options.html
+          quote: 'It will not automatically renew so you will need to re-purchase it at the end of that one year.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: neutral
+      reason: 'Its own prices have no fees, but buying Premiere inside an app costs more, to cover the app store’s cut.'
+      sources:
+        - url: https://emby.media/support/articles/Premiere-Purchase.html
+          quote: 'Some of these options may have additional charges due to the costs of the platform involved.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'A private referee (an arbitrator) in North Carolina settles any dispute, one person at a time, with no class actions and no way to opt out. You pay the fees to start it.'
+      sources:
+        - url: https://emby.media/terms.html
+          quote: 'shall be settled by arbitration administered by the American Arbitration Association (“AAA”)'
+        - url: https://emby.media/terms.html
+          quote: 'THERE SHALL BE NO RIGHT OR AUTHORITY FOR ANY CLAIMS TO BE ARBITRATED OR LITIGATED ON A CLASS ACTION OR CONSOLIDATED BASIS'
+        - url: https://emby.media/terms.html
+          quote: 'THE PARTY INTIATING THE ARBITRATION MUST ADVANCE ALL ARBITRATION FILING FEES AND ARBITRATOR’S COSTS PRIOR TO THE COMMENCEMENT OF THE ARBITRATION.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It changes its terms by posting them on its website, and they start 10 days later, so you can leave first. It doesn’t say it tells you.'
+      sources:
+        - url: https://emby.media/terms.html
+          quote: 'Any amendments to these Terms will be effective 10 days after being posted on https:///www.emby.media.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can take away your right to use its software at any time, for any reason, and promises no refund.'
+      sources:
+        - url: https://emby.media/terms.html
+          quote: 'you agree that Emby may revoke or terminate the license granted to you under this paragraph at any time for any reason in its sole discretion.'
+        - url: https://emby.media/premiereterms.html
+          quote: 'Any and all fees related to Emby Subscriptions are non-refundable.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove Premiere’s apps and features whenever it likes, or stop offering its software, with no refund promised.'
+      sources:
+        - url: https://emby.media/premiereterms.html
+          quote: 'Subscriptions provide access to the software and features indicated below (which may be modified, updated, removed from time to time in Emby’s sole discretion).'
+        - url: https://emby.media/terms.html
+          quote: 'You understand that Emby or its licensors may modify or discontinue offering the Software or Website at any time.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://emby.media/terms.html, https://emby.media/premiereterms.html]
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses commercially reasonable efforts and can’t guarantee security. It names no outside checks and no way to report a security flaw.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'Once we receive your data, we shall use commercially reasonable efforts to help protect and secure the information you provide to us.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Your free server can be shared with anyone. Premiere is for one household, and everyone using your server gets it, up to its device limit.'
+      sources:
+        - url: https://emby.media/support/articles/Premiere-Limits.html
+          quote: 'All of the standard Emby Premiere membership options are designed for single-household use and carry with them a limit of 30 devices supported for Emby Premiere features.'
+        - url: https://emby.media/support/articles/Emby-Premiere.html
+          quote: 'So, anyone who connects to your server will enjoy the benefits of Premiere (within the specified limits of your subscription) and will also count towards your device limits.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Premiere works on 30 devices, each counted for about a week after it’s used, and you can’t remove one from the count. Streams at once aren’t limited.'
+      sources:
+        - url: https://emby.media/support/articles/Premiere-Limits.html
+          quote: 'The system tracks device usage for about a week.'
+        - url: https://emby.media/support/articles/Premiere-Limits.html
+          quote: "You can't. The system tracks this automatically."
+      lastVerified: 2026-11-13
