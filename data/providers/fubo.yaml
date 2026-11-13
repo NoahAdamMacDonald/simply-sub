@@ -1,0 +1,1160 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with Edge from Canada (fubo.tv prices Canada in
+# C$ for this machine), through a US exit for the US's pages and through a Spanish exit for Spain's, its help centres
+# (support.fubo.tv's en-us and en-ca articles, and Fubo Spain's fubotv-espana.zendesk.com, every article through their
+# public article lists) with a plain fetch, and its terms and privacy policy (legal.fubo.tv) in Edge. Pages, each quoted
+# where it's used:
+# Pricing: its plans page (fubo.tv/welcome/plans) prices by where the visitor is, and the plan data it loads
+# (api.fubo.tv/subscriptions/products, read as part of the page) names each country's currency. Canada ("CAD"): Sports
+# Monthly C$31.49, Sports Quarterly "C$83.97 every 3 months", Sports Annual "C$293.99 every 12 months", Sports Pro
+# Monthly C$54.99, Sports Pro Quarterly "C$149.97 every 3 months", Sports Pro Annual "C$449.93", Cricket with Sports Plus
+# C$9.99, "C$26.96" every 3 months and "C$89.93" every 12 months, MLB.TV Monthly "C$39.99/mo after trial" and MLB.TV
+# Annual "C$239.90" every 12 months; the first-term offers ("C$44.97" for the first quarter, "C$230.99" for the first
+# year, Sports Pro's "C$39.99 for the first month" and "C$134.97" for the first quarter) aren't stored. Through a US exit
+# ("USD"): Pro "$88.99 per month", Elite "$98.99 per month" and Latino "$19.99 per month" after a first-month offer, the
+# plans page's only plans for new subscribers there; Fubo Sports on its own page (fubo.tv/stream/fubo-sports: "$54.99
+# for month 1, $64.99/mo thereafter"). Spain: fubo.tv/welcome through a Spanish exit, in its FAQ: "3,99€/mes con la
+# suscripción anual, 4,99€/mes con la trimestral o 5,99€/mes con la suscripción mensual" (its plans page answered "No
+# pudimos recuperar los planes disponibles": the plan data failed there). Spain's quarterly and yearly amounts are those
+# per-month rates times 3 and 12 (14.97 and 47.88), since the FAQ prices them by the month.
+# Also sold, not listed: Canada's monthly plans "With a 12 month commitment" (Sports C$25.99, Sports Pro C$44.99 a
+# month; the plans' notes), the US's Core and Ultra ("currently only available in select markets", priced only in a
+# help article for existing subscribers) and older plans (Essential, Ultimate, Deluxe), Fubo Sports Quarterly ($194.97,
+# for existing subscribers), Latino quarterly and yearly ("only the Latino monthly plan is currently available for
+# purchase"), My Local Sports (an add-on to Fubo Sports "Starting at" $9.99 more, by region), and the add-ons that sell
+# another service or a single network (MLB.TV, DAZN, Paramount+ with SHOWTIME, STARZ, MGM+ and their bundle, FOX Nation,
+# Hallmark+, RAI Italia, TV5MONDE, Zee Family; Canada's MLB.TV, DAZN, ATN Cricket and Super Channel), as YouTube TV's
+# premium networks are. Add-ons a plan already includes (Unlimited DVR, Family Share, Unlimited Screens, Premier League
+# 4K) are listed only where a plan can add them.
+# Region checklist for CA, US and ES, 2026-11-13: 1. no country paths (fubo.tv/ca is a page not found; the help centre
+# has en-us, en-ca, es-us and es-es locales); 2. a postal code picker, no country picker; 3. the plan data, which names
+# CAD and USD; 4. the sign-up form up to its email, password and postal code, typing nothing; 5. the help centres'
+# plans, billing and availability articles; 6. Edge from Canada and through each exit, and a plain fetch; 7. no bill
+# offered. The UK, Ireland, Australia, New Zealand, Germany, France, the Netherlands and Italy aren't sold (availableIn).
+# Bundles: none. Fubo and Hulu + Live TV are one company's but "separate services" (its help centre), and fubo.tv only
+# links to hulu.com for Hulu + Live TV. Official resellers: none; no gift cards. Partners: Roku bills its plans ("Roku
+# In-App Billing"), and Amazon Prime Video Channels sells Fubo Sports Network, a channel of its own, in Canada; noted.
+# Free use: Fubo Free, for "select former Fubo subscribers" on "select devices" in the US (fubo.free).
+# Renewal day: its billing article says "The date that you are billed is based on the date you became a paying Fubo
+# subscriber." and "if you were first billed for service on March 17th, you will be billed and your subscription will
+# automatically renew on the 17th of each subsequent month unless you choose to cancel": the date you signed up.
+
+# Coverage: fubo.pro, fubo.elite, fubo.sports-news, fubo.latino and fubo.free in CA and ES: Canada's and Spain's plan
+# pages and help centres sell other plans ("The programming available in these countries is not the same as what's
+# available in the U.S.", Is Fubo available in my country?).
+# Coverage: fubo.sports, fubo.sports-pro, fubo.cricket and fubo.mlb-tv in US and ES: Canada's plans, sold only there
+# (the US's and Spain's plan pages list none of them).
+# Coverage: fubo.spain in CA and US: Spain's plan, sold only there (its own help centre and FAQ).
+
+id: fubo
+name: Fubo
+website: https://www.fubo.tv
+# Its investor files (s21.q4cdn.com, linked from ir.fubo.tv's Annual Reports) and Fubo Spain's help centre.
+domains: [s21.q4cdn.com, fubotv-espana.zendesk.com]
+category: streaming
+spendCategory: streaming
+# Where it's sold, read 2026-11-13: "Fubo is available in Canada, the US/US territories, and Spain." (Is Fubo available
+# in my country?, en-ca). The US territories aren't named, so they're left out.
+availableIn: [US, CA, ES]
+billingCurrency: { US: USD, CA: CAD, ES: EUR }
+cancelUrl: https://support.fubo.tv/hc/en-us/articles/360021527991-How-do-I-Cancel-My-Fubo-Subscription
+# Canada's monthly plans "With a 12 month commitment" (the plans page), read 2026-11-13 in How do Annual Plans with
+# Monthly Billing Work? (en-ca): "If you choose to cancel your annual plan with monthly billing before the end of your
+# 12-month commitment, you will incur an early termination fee." Its other plans have none.
+cancelFee: 'In Canada, the monthly plans with a 12-month commitment charge an early termination fee if you cancel before the 12 months end: C$49.50 for Sports, C$90.00 for Sports Pro.'
+sources: { pricing: https://www.fubo.tv/welcome/plans }
+
+# Owner (M11.2), read 2026-11-13 on its investor site (ir.fubo.tv): FuboTV Inc., which "owns Hulu + Live TV
+# (entertainment), Fubo (sports) and Molotov" since its combination with Disney's Hulu + Live TV (closed on 2025-10-29,
+# its results release). Its stock: its investor FAQ ("Our stock is traded on the NYSE under the symbol FUBO.") and its
+# 2025 annual report (Form ARS, its letter dated June 16, 2026), which says Hulu, Disney's, holds 70% of its votes.
+# Where it's from: its privacy policy.
+owner:
+  name: FuboTV Inc.
+  page:
+    name: Investor Relations
+    url: https://ir.fubo.tv/overview/default.aspx
+  quotes:
+    - 'FuboTV Inc. (NYSE: FUBO) is a consumer-first live TV streaming company'
+    - 'FuboTV Inc. owns Hulu + Live TV (entertainment), Fubo (sports) and Molotov (entertainment and sports), which stream in markets around the globe. FuboTV Inc. is an affiliate of The Walt Disney Company.'
+  country:
+    code: US
+    page:
+      name: Privacy Policy
+      url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+    quotes:
+      - 'Information collected through the Services is controlled by Fubo, which is headquartered in the United States.'
+    lastVerified: 2026-11-13
+  stock:
+    listings:
+      - { exchange: NYSE, symbol: FUBO }
+    majorityHolder: { name: Hulu, of: votes, percent: 70 }
+    page:
+      name: 2025 Annual Report
+      url: https://s21.q4cdn.com/819998841/files/doc_financials/2025/ar/c4e8f511-214a-4b84-a4f2-cd6dbf04ad78.pdf
+    quotes:
+      - 'Fubo is majority owned and controlled (70% interest (calculated on a fully diluted basis)) directly by Hulu and consolidated by Disney as the parent of Hulu.'
+      - 'shares of Class B Common Stock representing, in the aggregate, a 70% voting interest in the Company'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Ways to pay (M11.5), read 2026-11-13: the US's payment article (cards and Cash App), Canada's ("all major credit and
+# debit cards", no networks named), Spain's FAQ on fubo.tv/welcome (through a Spanish exit), and Roku's In-App Billing
+# for its plans (its Roku sign-up article, in both countries' help centres). Its terms also name "Apple" among third
+# parties that bill it, which no page of its own sells through, so not listed.
+acceptedNetworks:
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://support.fubo.tv/hc/en-us/articles/115003535667-What-Payment-Methods-Does-Fubo-Accept
+    quotes:
+      - Visa
+      - MasterCard
+      - American Express
+      - Discover
+  ES:
+    networks: [visa, mastercard, discover, amex]
+    url: https://www.fubo.tv/welcome
+    quotes:
+      - 'Aceptamos tarjetas de crédito y de débito Visa, MasterCard, Discover y American Express.'
+paymentMethods:
+  - methods: [card, cash-app]
+    regions: [US]
+    page: What Payment Methods Does Fubo Accept?
+    url: https://support.fubo.tv/hc/en-us/articles/115003535667-What-Payment-Methods-Does-Fubo-Accept
+    quotes:
+      - 'Credit and Debit Cards'
+      - CashApp
+  - methods: [app-store]
+    regions: [US]
+    page: How do I sign up using my Roku?
+    url: https://support.fubo.tv/hc/en-us/articles/360000750832-How-do-I-sign-up-using-my-Roku
+    quotes:
+      - 'The Pro, Elite, Ultimate and Latino plans are offered through Roku In-App Billing.'
+  - methods: [card]
+    regions: [CA]
+    page: What forms of payment are accepted?
+    url: https://support.fubo.tv/hc/en-ca/articles/115003535667-What-forms-of-payment-are-accepted
+    quotes:
+      - 'We accept all major credit and debit cards.'
+  - methods: [app-store]
+    regions: [CA]
+    page: How do I sign up using my Roku?
+    url: https://support.fubo.tv/hc/en-ca/articles/360000750832-How-do-I-sign-up-using-my-Roku
+    quotes:
+      - 'when creating your subscription through In-App Billing on your Roku device you must manage your subscription via your Roku.com account.'
+  - methods: [card]
+    regions: [ES]
+    page: Preguntas frecuentes (fubo.tv)
+    url: https://www.fubo.tv/welcome
+    quotes:
+      - 'Aceptamos tarjetas de crédito y de débito Visa, MasterCard, Discover y American Express.'
+# Renewal day (M11.5): its billing article bills on the date you first paid each month (above), wording core doesn't
+# read yet; its terms say only that plans "automatically renew".
+renewalAnchor:
+  kind: same-date
+  page: How am I billed for Fubo?
+  url: https://support.fubo.tv/hc/en-us/articles/4495904869517-How-am-I-billed-for-Fubo
+  quotes:
+    - 'The date that you are billed is based on the date you became a paying Fubo subscriber.'
+    - 'For example, if you were first billed for service on March 17th, you will be billed and your subscription will automatically renew on the 17th of each subsequent month unless you choose to cancel.'
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: Fire TV, Android phones and tablets, Android TV and Google TV, Apple TV,
+# "Mac and PC" browsers, Chromecast, Hisense, iPhone and iPad, LG, Roku, Samsung and "Xbox One" (What devices can I watch
+# Fubo on?). Sign-in: "your email, password, and zip code", or "third party single sign on credentials such as those
+# for Apple, Google, and Facebook" (its privacy policy), and "a unique code sent to your email address" for Fubo Sports
+# in the US (Does Fubo use Two-Factor Authentication?). App languages: "To view the Fubo website in English, go here"
+# and "To view the Fubo website in Spanish, go here" (The Fubo website is in the wrong language). Support: "Live Chat is
+# available from 10:00 AM - 10:00 PM ET, 7 days a week" and "Phone support is available from 10:00 AM - 10:00 PM ET"
+# (How do I Contact Fubo Support?), and "email us at support@fubo.tv" (its terms); its "Virtual Assistant" answers
+# around the clock, not a person.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password, sso, email-code]
+  languages.interface: [en, es]
+  support.channels: [chat, phone, email]
+
+# Perks (M11.6): what tells its plans apart that no feature describes, in their words (its plan cards and comparison).
+perks:
+  - id: unlimited-dvr
+    name: Unlimited Cloud DVR
+  - id: local-channels
+    name: ABC, CBS, FOX, NBC
+  - id: local-sports
+    name: Local NBA, NHL and MLB games
+  - id: fubo-extra
+    name: Fubo Extra
+  - id: news-plus
+    name: News Plus
+  - id: fubo-vip
+    name: Fubo VIP
+  - id: dazn
+    name: All NFL games via NFL Game Pass on DAZN
+  - id: mlb-tv
+    name: Every out-of-market MLB game available live
+  - id: cricket
+    name: 100's of live cricket matches
+
+# Features, read 2026-11-13. Ads: "Fubo does not offer a fully ad-free subscription plan" (Does Fubo show ads?). Video
+# quality: the US's Elite card says "4K included" and Canada's Sports plans "Includes Premier League 4K" (their plan
+# data includes the 4K add-on); its speed articles list "1080p ... Some video on-demand using connected devices" and 4K
+# only with the plans that include it, so the rest stream 1080p at most (inferred). Streams: the US's Pro, Elite and
+# Fubo Sports cards "Watch on up to 10 screens at once" (10 at home "plus 3 additional devices outside the home", How
+# Many Devices Can I Stream Fubo From at the Same Time?), Latino "Watch on up to 2 screens at once"; Canada "All current
+# Fubo Canada bundle plans include Family Share, which allows you to stream from three devices at a time", and its
+# MLB.TV cards "Watch on up to 10 screens"; Spain "dos dispositivos al mismo tiempo". Profiles: "You can create up to
+# six profiles" ("hasta seis perfiles" in Spain); no Kids profiles and no parental controls on any page read. No
+# downloads (its DVR is in the cloud). Pausing: "Fubo does not offer the ability to pause or suspend subscriptions" (US
+# and Canada); Spain's cancel article offers "pausar tu suscripción". What it streams: "top leagues and teams, plus
+# popular shows, movies and news for the entire household" (fubo.tv's description), each plan's own card or page for
+# the rest (below).
+plans:
+  - id: fubo.pro
+    name: Pro
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 10
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [films, series, sports, news]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+      includes-subscription: [espn.unlimited]
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article lists 1080p for some on-demand video and 4K only with the plans that include it, so 1080p is the most this plan streams.'
+        page:
+          name: How fast does my internet connection need to be?
+          url: https://support.fubo.tv/hc/en-us/articles/115002184828-How-fast-does-my-internet-connection-need-to-be
+        lastVerified: 2026-11-13
+    perks: [unlimited-dvr, local-channels, local-sports]
+    addOnIds:
+      [
+        fubo.sports-plus-redzone,
+        fubo.4k-plus,
+        fubo.fubo-extra,
+        fubo.news-plus,
+        fubo.sports-lite,
+        fubo.international-sports-plus,
+        fubo.adventure-plus,
+        fubo.fubo-select,
+        fubo.latino-plus,
+        fubo.portuguese-plus,
+      ]
+    notes: 229 channels with local channels and ESPN Unlimited, on 10 screens at home plus 3 away. Depending on where you live, a regional sports fee of $3.99 to $16.99 a month is added.
+    prices:
+      - region: US
+        currency: USD
+        amount: 88.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  - id: fubo.elite
+    name: Elite
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 10
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [films, series, sports, news]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+      includes-subscription: [espn.unlimited]
+    perks: [unlimited-dvr, local-channels, local-sports, fubo-extra, news-plus, fubo-vip]
+    addOnIds:
+      [
+        fubo.sports-plus-redzone,
+        fubo.sports-lite,
+        fubo.international-sports-plus,
+        fubo.adventure-plus,
+        fubo.fubo-select,
+        fubo.latino-plus,
+        fubo.portuguese-plus,
+      ]
+    notes: 290 channels, Pro's plus Fubo Extra, News Plus and 4K, on 10 screens at home plus 3 away. Depending on where you live, a regional sports fee of $3.99 to $16.99 a month is added.
+    prices:
+      - region: US
+        currency: USD
+        amount: 98.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  # Fubo Sports ("Sports + News" in its help centre), sold on a page of its own.
+  - id: fubo.sports-news
+    name: Fubo Sports
+    link: https://www.fubo.tv/stream/fubo-sports/
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 10
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, news]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+      includes-subscription: [espn.unlimited]
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article lists 1080p for some on-demand video and 4K only with the plans that include it, so 1080p is the most this plan streams.'
+        page:
+          name: How fast does my internet connection need to be?
+          url: https://support.fubo.tv/hc/en-us/articles/115002184828-How-fast-does-my-internet-connection-need-to-be
+        lastVerified: 2026-11-13
+    perks: [unlimited-dvr, local-channels]
+    addOnIds: [fubo.nfl-redzone]
+    notes: 30+ sports channels with ESPN Unlimited and local channels where available, on 10 screens at once. Signing in from a new device away from home asks for a code sent by email.
+    prices:
+      - region: US
+        currency: USD
+        amount: 64.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/stream/fubo-sports/
+
+  - id: fubo.latino
+    name: Latino
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, series, news]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article lists 1080p for some on-demand video and 4K only with the plans that include it, so 1080p is the most this plan streams.'
+        page:
+          name: How fast does my internet connection need to be?
+          url: https://support.fubo.tv/hc/en-us/articles/115002184828-How-fast-does-my-internet-connection-need-to-be
+        lastVerified: 2026-11-13
+    perks: [unlimited-dvr]
+    addOnIds:
+      [fubo.family-share, fubo.unlimited-screens, fubo.entretenimiento-plus, fubo.portuguese-plus]
+    notes: 59 Spanish-language channels of sports, TV, news and entertainment, on 2 screens at once.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  # Fubo Free (free use, the owner's item of 2026-11-09): "over 170 free ad-supported channels" for "select former Fubo
+  # subscribers" on "select devices" (How does Fubo Free work?). No page says how many screens it plays on at once.
+  - id: fubo.free
+    name: Fubo Free
+    link: https://support.fubo.tv/hc/en-us/articles/27176011209869-How-does-Fubo-Free-work
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.live: [tv-channels]
+      streaming.content: [series, films]
+      streaming.own-media: false
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article lists 1080p for some on-demand video and 4K only with the plans that include it, so 1080p is the most it streams.'
+        page:
+          name: How fast does my internet connection need to be?
+          url: https://support.fubo.tv/hc/en-us/articles/115002184828-How-fast-does-my-internet-connection-need-to-be
+        lastVerified: 2026-11-13
+    notes: Over 170 free channels with ads, for some former subscribers whose plan or trial has ended, on some devices (not Roku or Samsung TVs). No local channels or regional sports.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.fubo.tv/hc/en-us/articles/27176011209869-How-does-Fubo-Free-work
+
+  # Canada's plans, read from this machine in C$ (above). Sports: "57 channels", "Premier League & Serie A", "Includes
+  # Premier League 4K", "Unlimited Cloud DVR" on every period's card.
+  - id: fubo.sports
+    name: Sports
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, series, films]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    perks: [unlimited-dvr]
+    addOnIds: [fubo.sports-plus]
+    notes: 57 channels with the Premier League and Serie A, the Premier League in 4K. Also C$25.99 a month with a 12-month commitment (not in Quebec), with a C$49.50 fee to cancel before it ends.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 31.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 83.97
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 293.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  # Sports Pro: Sports with DAZN ("All NFL games via NFL Game Pass on DAZN", "Plus Champions League, Europa League,
+  # Bundesliga and more on DAZN").
+  - id: fubo.sports-pro
+    name: Sports Pro
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, series, films]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    perks: [unlimited-dvr, dazn]
+    addOnIds: [fubo.sports-plus]
+    notes: Sports' 57 channels plus DAZN's NFL Game Pass, Champions League, Europa League and Bundesliga. Also C$44.99 a month with a 12-month commitment (not in Quebec), with a C$90.00 fee to cancel before it ends.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 54.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 149.97
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 449.93
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  - id: fubo.cricket
+    name: Cricket with Sports Plus
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article lists 1080p for some on-demand video and 4K only with the plans that include it, so 1080p is the most this plan streams.'
+        page:
+          name: How fast does my internet connection need to be?
+          url: https://support.fubo.tv/hc/en-ca/articles/115002184828-How-fast-does-my-internet-connection-need-to-be
+        lastVerified: 2026-11-13
+    perks: [unlimited-dvr, cricket]
+    notes: 41 channels with the IPL, ICC and PSL and the Sports Plus channels.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 26.96
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 89.93
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  # MLB.TV: Fubo's own plan with MLB's out-of-market games, after a 5-day trial (its plan data: "trialPeriodLength": 5).
+  - id: fubo.mlb-tv
+    name: MLB.TV
+    link: https://www.fubo.tv/welcome/plans
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 10
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article lists 1080p for some on-demand video and 4K only with the plans that include it, so 1080p is the most this plan streams.'
+        page:
+          name: How fast does my internet connection need to be?
+          url: https://support.fubo.tv/hc/en-ca/articles/115002184828-How-fast-does-my-internet-connection-need-to-be
+        lastVerified: 2026-11-13
+    perks: [unlimited-dvr, mlb-tv]
+    notes: 64 channels with every out-of-market MLB game; Toronto Blue Jays games are blacked out across Canada.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 39.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+      - region: CA
+        currency: CAD
+        amount: 239.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome/plans
+
+  # Spain's plan ("The Fubo Spain base plan is available as a monthly, quarterly, or yearly subscription", Is Fubo
+  # available in my country?), read through a Spanish exit: series, cartoons and entertainment ("Top series, dibujos,
+  # programas y mucho más") and "otros eventos deportivos", on 2 devices, with 30 hours of recordings ("con las 30 horas
+  # de espacio que te regalamos en la grabadora"). Its speed table stops at 1080p.
+  - id: fubo.spain
+    name: Fubo (Spain)
+    link: https://www.fubo.tv/welcome
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 2
+      streaming.profiles: 6
+      streaming.live: [tv-channels, sports]
+      streaming.content: [series, films, kids, sports]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its Spanish help centre’s speed table goes up to 1080p, for connected devices, and lists no 4K, so 1080p is the most it streams.'
+        page:
+          name: ¿Qué velocidad necesita tener mi conexión a internet?
+          url: https://fubotv-espana.zendesk.com/hc/es-es/articles/360012660011--Qu%C3%A9-velocidad-necesita-tener-mi-conexi%C3%B3n-a-internet
+        lastVerified: 2026-11-13
+    notes: Spanish TV channels, series, films and cartoons, on 2 devices at once, with 30 hours of recordings. The quarterly and yearly prices are its 4.99 € and 3.99 € a month times 3 and 12.
+    prices:
+      - region: ES
+        currency: EUR
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome
+      - region: ES
+        currency: EUR
+        amount: 14.97
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome
+      - region: ES
+        currency: EUR
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.fubo.tv/welcome
+
+# Add-ons, read 2026-11-13: the US's on the plans page's Add-ons tab through a US exit (monthly, as the US's plans are
+# sold), NFL RedZone on Fubo Sports' page ("Add NFL RedZone to Fubo Sports for only $9.99/mo."), and Canada's Sports Plus
+# on its Add-ons tab ("C$5.99/mo"), with its quarterly ("1499") and yearly ("5388") prices in the plan data. Which plans
+# take each: the plan data's add-on lists.
+addOns:
+  - id: fubo.sports-plus-redzone
+    name: Sports Plus with NFL RedZone
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 10.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.4k-plus
+    name: 4K Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.fubo-extra
+    name: Fubo Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 7.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.news-plus
+    name: News Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 2.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.sports-lite
+    name: Sports Lite
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.international-sports-plus
+    name: International Sports Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.adventure-plus
+    name: Adventure Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 4.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.fubo-select
+    name: Fubo Select
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.latino-plus
+    name: Latino Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 19.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.portuguese-plus
+    name: Portuguese Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.entretenimiento-plus
+    name: Entretenimiento Plus
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.family-share
+    name: Family Share
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.unlimited-screens
+    name: Unlimited Screens
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+  - id: fubo.nfl-redzone
+    name: NFL RedZone
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 9.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/stream/fubo-sports/,
+        }
+  - id: fubo.sports-plus
+    name: Sports Plus
+    prices:
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 5.99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 14.99,
+          interval: month,
+          intervalCount: 3,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 53.88,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.fubo.tv/welcome/plans,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge: its Terms of Service ("Effective Date:September 10,
+# 2025", fuboTV Media, Inc.'s, one document for the US and Canada: the en-US and en-CA versions are the same text) and
+# Privacy Policy ("Effective Date:May 27, 2026"), its own, not The Walt Disney Company's (data/policies/disney-privacy.yaml
+# doesn't apply: Fubo's policy names "fuboTV Media Inc. and its parent and affiliates"); its sign-up form
+# (fubo.tv/signup: "Email", "Password", "Home postal code" and "By continuing, I agree to the Terms of Service,
+# acknowledge the Privacy Policy, and agree to receive promotional emails regarding Fubo.", read without typing); its
+# security.txt; and its help centre's cancelling, refunds, trial, billing, fees, privacy, sharing, home network and DVR
+# articles. Its apps have no licence of their own (the terms' 7.b licenses them "for your own lawful, personal,
+# non-commercial use"). Not read: Spain's own terms and privacy policy (fubo.tv in Spain links legal pages not opened
+# here), its Privacy Center's request form (a dialog that showed no text), its cookie policy, and the steps after the
+# sign-up form. Calibrated against YouTube TV and Curiosity Stream.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+    - name: 'Privacy Policy'
+      url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+    - name: 'Sign up'
+      url: https://www.fubo.tv/signup
+    - name: 'Fubo Sports'
+      url: https://www.fubo.tv/stream/fubo-sports/
+    - name: 'security.txt'
+      url: https://www.fubo.tv/security.txt
+    - name: 'What Is Fubo’s Cancellation Policy?'
+      url: https://support.fubo.tv/hc/en-us/articles/360004457571-What-Is-Fubo-s-Cancellation-Policy
+    - name: 'How do I Cancel My Fubo Subscription?'
+      url: https://support.fubo.tv/hc/en-us/articles/360021527991-How-do-I-Cancel-My-Fubo-Subscription
+    - name: 'How do Annual Plans with Monthly Billing Work? (Canada)'
+      url: https://support.fubo.tv/hc/en-ca/articles/40220269315085-How-do-Annual-Plans-with-Monthly-Billing-Work
+    - name: 'How am I billed for Fubo?'
+      url: https://support.fubo.tv/hc/en-us/articles/4495904869517-How-am-I-billed-for-Fubo
+    - name: 'How does the free trial work?'
+      url: https://support.fubo.tv/hc/en-us/articles/115003648828-How-does-the-free-trial-work
+    - name: 'What is the Regional Sports Fee?'
+      url: https://support.fubo.tv/hc/en-us/articles/360046050051-What-is-the-Regional-Sports-Fee
+    - name: 'How can I manage my privacy?'
+      url: https://support.fubo.tv/hc/en-us/articles/18450594233357-How-can-I-manage-my-privacy
+    - name: 'How Many Devices Can I Stream Fubo From at the Same Time?'
+      url: https://support.fubo.tv/hc/en-us/articles/115001440248-How-Many-Devices-Can-I-Stream-Fubo-From-at-the-Same-Time
+    - name: 'How does Cloud DVR on Fubo work?'
+      url: https://support.fubo.tv/hc/en-us/articles/115002082007-How-does-Cloud-DVR-on-Fubo-work
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you watch and how you use it, and may combine that with what you do on other sites and apps. You can turn off only some of it, tool by tool.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'We and vendors on our behalf also may combine diagnostic and usage information collected on our Services with other information about your online activities over time, including use of other devices, websites, or apps, if such services also use the same vendors.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'To prevent Google Analytics from using your information for analytics, you may install the Google Analytics Opt-out Browser Add-on by clicking here.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'On select platforms, Fubo uses Nielsen’s proprietary measurement software to inform us and advertising service providers of the content consumption habits of our users to better serve their needs.'
+      action:
+        name: 'Your rights and choices (privacy policy)'
+        url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: bad
+      reason: 'It may sell your information to other companies for their own use. Only people where a law gives them the right, such as some US states, can say no.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'we may disclose (including by selling, renting, or licensing or making available) your information to other businesses or third parties for use for their own purposes for monetary or other valuable consideration.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'Depending upon your jurisdiction, you may opt out of such sales by contacting us as described in this Policy.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It picks ads for you from what you do. You can opt out only device by device, and for its apps only by emailing it.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'Customize content, preferences, and advertising (including targeted advertising) on or for the Services;'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'Please note that these opt-outs apply per device, so you will have to opt-out for each device through which you access our Services.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'You must still email us as set forth above to opt out for our streaming Services.'
+      action:
+        name: 'Your rights and choices (privacy policy)'
+        url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms say its chat tools may use AI language models, but neither they nor its privacy policy say whether what you write trains AI.'
+      pages:
+        - https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+        - https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and names no time limits.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'We keep your information for as long as we determine is necessary for the purposes for which it is processed.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your account and information through its Privacy Center, but it doesn’t say how long that takes.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/18450594233357-How-can-I-manage-my-privacy
+          quote: 'Select Delete all my data'
+        - url: https://support.fubo.tv/hc/en-us/articles/18450594233357-How-can-I-manage-my-privacy
+          quote: 'Once received, we will delete your Fubo account and all personal information, with the exception of some data we keep in order to comply with applicable laws.'
+      action:
+        name: 'Make a Privacy Request'
+        url: https://legal.fubo.tv/policies/en-US/?modal=take-control
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy offers a copy of your information only where a local law gives you that right.'
+      pages: [https://legal.fubo.tv/policies/en-US/?name=privacy-policy]
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law or a court order asks for it, and says nothing about telling you or publishing how often.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'We may access, retain and disclose the information we collect and maintain about you if required to do so by law or in a good faith belief that such access, retention, or disclosure is reasonably necessary to: (i) comply with law (e.g., disclosure to regulators) or legal process (e.g., a subpoena or court order);'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information is kept in the US, and may also go to other countries, with safeguards it doesn’t describe.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'The data is we collect through the Services is stored on secure servers located in the United States.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'We may also store information on servers and equipment in other countries depending on a variety of factors, including the locations of our users and vendors.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'We will ensure that transfers of personal data to a third country or an international organization are subject to appropriate safeguards.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address, a password and your home postal code, which decides your channels, then a card to pay.'
+      sources:
+        - url: https://www.fubo.tv/signup
+          quote: 'Your location determines what channels are available to you.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'This includes your email, password, and zip code, and you may also register using third party single sign on credentials such as those for Apple, Google, and Facebook.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to open an account, and it says it doesn’t knowingly collect information from children under 13. It has no Kids profiles.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'You may not register for an account if You are under the age of 18.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'We do not knowingly collect personal information from children under 13.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: neutral
+      reason: 'It names an email address for reporting security problems, but doesn’t say outside experts check its security.'
+      sources:
+        - url: https://www.fubo.tv/security.txt
+          quote: 'If you believe you have found a security vulnerability on fubo.tv or its services,'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online at any time, past an offer of a discount to stay, and keep watching until the end of the period you paid for.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/360021527991-How-do-I-Cancel-My-Fubo-Subscription
+          quote: 'You may be offered the option to keep your subscription and receive a discount'
+        - url: https://support.fubo.tv/hc/en-us/articles/360021527991-How-do-I-Cancel-My-Fubo-Subscription
+          quote: 'If you cancel your paid Fubo subscription, you will continue to have service until the end of your current billing period'
+      action:
+        name: 'How do I Cancel My Fubo Subscription?'
+        url: https://support.fubo.tv/hc/en-us/articles/360021527991-How-do-I-Cancel-My-Fubo-Subscription
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      regions: [CA]
+      plans: [fubo.sports, fubo.sports-pro]
+      tier: bad
+      reason: 'In Canada, if you choose the cheaper monthly price with a 12-month commitment, cancelling before the year ends costs C$49.50 (Sports) or C$90.00 (Sports Pro).'
+      sources:
+        - url: https://support.fubo.tv/hc/en-ca/articles/40220269315085-How-do-Annual-Plans-with-Monthly-Billing-Work
+          quote: 'If you choose to cancel your annual plan with monthly billing before the end of your 12-month commitment, you will incur an early termination fee.'
+        - url: https://support.fubo.tv/hc/en-ca/articles/40220269315085-How-do-Annual-Plans-with-Monthly-Billing-Work
+          quote: 'Sports: C$49.50'
+        - url: https://support.fubo.tv/hc/en-ca/articles/40220269315085-How-do-Annual-Plans-with-Monthly-Billing-Work
+          quote: 'Sports Pro: C$90.00'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the period you paid for.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/360004457571-What-Is-Fubo-s-Cancellation-Policy
+          quote: 'If you choose to cancel, your current paid subscription will continue through the end of your current billing cycle. Note that we do not provide refunds for prepaid or partial months of service.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It emails you about a new price, which starts with your next period, and you can cancel first; it doesn’t say how far ahead.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'We will post a notice of any changed prices within support.fubo.tv and if you have an Account, we will send an email to the email address in your Account regarding the price change.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'any price changes to Your subscription will take effect at the beginning of the next subscription period following notice to You.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its trials need a card up front and turn into a paid plan on their own; its help and terms name no reminder. Cancelling ends the trial at once.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/115003648828-How-does-the-free-trial-work
+          quote: "To activate the trial, you'll need to provide a credit or debit card."
+        - url: https://support.fubo.tv/hc/en-us/articles/115003648828-How-does-the-free-trial-work
+          quote: 'At the end of the trial period, your subscription will automatically transition to a paid plan, and your card will be charged for your first billing cycle.'
+        - url: https://support.fubo.tv/hc/en-us/articles/115003648828-How-does-the-free-trial-work
+          quote: 'Canceling during your trial will result in an immediate expiration of the trial, and any remaining trial days will not be accessible.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      plans: [fubo.sports-news]
+      tier: good
+      reason: 'Fubo Sports’ trial turns into a paid plan on its own, but its page promises a reminder the day before it ends.'
+      sources:
+        - url: https://www.fubo.tv/stream/fubo-sports/
+          quote: 'We’ll remind you the day before your trial ends. Watch TV, not the clock.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help say your plan renews on its own, but not that it reminds you first.'
+      pages:
+        - https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+        - https://support.fubo.tv/hc/en-us/articles/4495904869517-How-am-I-billed-for-Fubo
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'Where Pro or Elite include local sports channels, it adds a regional sports fee of up to $16.99 a month, set by where you live, which you can’t remove.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/360046050051-What-is-the-Regional-Sports-Fee
+          quote: 'The Regional Sports Fee is based on your area, and will be up to $16.99/month.'
+        - url: https://support.fubo.tv/hc/en-us/articles/360046050051-What-is-the-Regional-Sports-Fee
+          quote: 'If you subscribe to a plan that includes regional sports programming, the regional sports fee will automatically be applied to your bill, and it cannot be removed from your account.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'A new plan starts at once: moving up, you pay the difference for the rest of the month; moving down, you get the difference back as a credit.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/4495904869517-How-am-I-billed-for-Fubo
+          quote: "I'm upgrading my base plan: You'll start receiving your new plan right away, and at the time the change is made, you'll be billed a prorated amount based on the time remaining on your current billing cycle"
+        - url: https://support.fubo.tv/hc/en-us/articles/4495904869517-How-am-I-billed-for-Fubo
+          quote: "I'm downgrading my base plan: You'll start receiving your new plan right away, and on your next billing cycle date, you'll receive a prorated credit for the price difference between the two plans"
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      regions: [CA]
+      plans: [fubo.sports, fubo.sports-pro]
+      tier: neutral
+      reason: 'In Canada, on the monthly price with a 12-month commitment, you can’t change plans until the commitment ends.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-ca/articles/40220269315085-How-do-Annual-Plans-with-Monthly-Billing-Work
+          quote: 'Plan changes are not allowed until after the end of your 12-month commitment.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to a private referee (an arbitrator), in New York for Canadians, with no class actions. You can opt out only by email within 30 days of first using it.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'THESE TERMS CONTAIN A CLASS WAIVER AS WELL AS A MANDATORY ARBITRATION PROVISION THAT MAY IMPACT YOUR LEGAL RIGHTS IN THE EVENT OF A DISPUTE.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'The notice must be sent within 30 days of June 3, 2024, or your first use of the Services, whichever is later;'
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'For residents in Canada (and anywhere else outside the United States), arbitration shall be initiated in the County of New York, State of New York, United States of America'
+      action:
+        name: 'How to opt out (Terms of Service, 22.4)'
+        url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms take effect as soon as they’re posted, and using the service afterwards means you accept them.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'If Fubo changes any term or condition, said modification, revision, and additional information shall be posted here, automatically replace the existing terms and conditions, become effective immediately, and become binding on all users of this site to the extent permitted by applicable law.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'However, You will be deemed to have agreed to any and all modifications through Your continued use of the Platform, Content or Services following such notice period.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or close your account, with or without warning, for anything it decides is inappropriate, and what you paid is never refunded.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'upon any other conduct deemed by Fubo, in its sole discretion, to be inappropriate or detrimental to the Platform, Fubo, or any other User or third party.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'all Fees will be non-refundable once paid to Fubo (including upon any termination or suspension of this Agreement)'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change its channels and features at any time without owing you anything, and move you to another plan.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'Fubo reserves the right, at any time, to modify the functionality of the Platform and any portion of the Content or Services without any liability to you.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'Fubo also reserves the right to transition you to a different subscription plan.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://legal.fubo.tv/policies/en-US/?name=terms-of-service]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: poor
+      reason: 'Its terms say your account is for you alone, but its help lets family share it. TVs can stream from only one place at a time.'
+      sources:
+        - url: https://legal.fubo.tv/policies/en-US/?name=terms-of-service
+          quote: 'Your Account is for Your personal use and Your User Account ID may be used only by You alone.'
+        - url: https://support.fubo.tv/hc/en-us/articles/115001440248-How-Many-Devices-Can-I-Stream-Fubo-From-at-the-Same-Time
+          quote: 'While sharing your login details is not recommended, you can share your Fubo account with your family members'
+        - url: https://support.fubo.tv/hc/en-us/articles/115001440248-How-Many-Devices-Can-I-Stream-Fubo-From-at-the-Same-Time
+          quote: 'No, you can only stream Fubo on a TV device from one location at a time'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: good
+      reason: 'Recordings stay in your cloud DVR for 9 months, then are deleted. It names no limit on how many devices you sign in.'
+      sources:
+        - url: https://support.fubo.tv/hc/en-us/articles/115002082007-How-does-Cloud-DVR-on-Fubo-work
+          quote: 'Recordings that remain on your Cloud DVR for 9 months will automatically expire and be deleted at that time'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Promotional emails by signing up
+      tier: neutral
+      reason: 'Signing up means agreeing to its promotional emails; you can unsubscribe from the link in each one.'
+      sources:
+        - url: https://www.fubo.tv/signup
+          quote: 'By continuing, I agree to the Terms of Service, acknowledge the Privacy Policy, and agree to receive promotional emails regarding Fubo.'
+        - url: https://legal.fubo.tv/policies/en-US/?name=privacy-policy
+          quote: 'In commercial email messages, you can also opt-out by following the instructions located at the bottom of such emails.'
+      lastVerified: 2026-11-13
