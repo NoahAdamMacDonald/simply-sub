@@ -286,6 +286,20 @@
   source: own
   status: done
   date: 2026-11-13
+- id: mlb-tv
+  name: MLB.TV
+  website: https://www.mlb.com/live-stream-games
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: f1-tv
+  name: F1 TV
+  website: https://f1tv.formula1.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
