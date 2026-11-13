@@ -1,0 +1,374 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with Edge from Canada, its help centre
+# (help.kanopy.com, a MadCap Flare site: all 50 articles its table of contents lists) with a plain fetch, and its library
+# and university finders in Edge, searching by city. Pages, each quoted where it's used:
+# Pricing: nothing is sold. "We stream thoughtful entertainment to your preferred device with no fees and no commercials
+# by partnering with public libraries and universities." (its about page) and "Kanopy does not charge you because the
+# public library or university covers all associated costs, allowing you to watch for free with no ads." (its home
+# page's "How is Kanopy free for me?"). "Kanopy is only available through libraries, so you need to be a member of a
+# participating library to start watching Kanopy." (the same FAQ). So its one plan is free, priced 0.
+# Where: no page lists the countries it's offered in. Its footer's region menu ("Australia", "United States",
+# "Singapore", "Hong Kong", "Canada", "New Zealand", "United Kingdom", "Europe", "Worldwide", "Middle East") changes
+# the catalogue shown, and its press page counts "200+ Countries Where Kanopy is Watched", so there's no availableIn.
+# Its public library finder (kanopy.com/en/signup/find/publiclibrary) gives each library's address with its country:
+# Toronto Public Library ("Toronto ON M4W 1L4 CA"), the US's (Gold Coast Public Library, "Glen Head, NY 11545 US"), the
+# UK's (London Borough of Tower Hamlets, "E1 1BU GB"; Cardiff Libraries, "CF10 1FL GB"), Ireland's (South Dublin County
+# Libraries, "D24 YXW3 IE"), Australia's (City Of Sydney Library, "Sydney New South Wales 2000 AU") and New Zealand's
+# (Wellington City Libraries, "Wellington 6011 NZ"), so the plan is priced 0 in those six. Searches for Berlin, Hamburg,
+# Paris, Lyon, Amsterdam, Rotterdam, Madrid, Barcelona, Milano and Roma found no public library there; its university
+# finder lists Freie Universität Berlin, the University of Amsterdam, the American University of Paris, Universitat
+# Autònoma de Barcelona and the University of Milan - Bicocca, but names no countries, so Germany, France, the
+# Netherlands, Spain and Italy stay unpriced (unknown, not "not offered").
+# Region checklist, 2026-11-13: 1. no country paths (kanopy.com/en, /fr and /de are languages); 2. a region menu
+# without prices; 3. not needed (nothing is priced); 4. its sign-up stops at the library card; 5. none (no prices);
+# 6. Edge from Canada and a plain fetch; 7. no bill offered.
+# Ways to pay: none (it's free; no paymentMethods and no renewal day). Bundles: none. Official resellers: none: its
+# libraries and universities pay for it (its librarians' site, lib.kanopy.com).
+# Features, read 2026-11-13: what it streams, from its home page ("Find movies, documentaries, foreign films, classic
+# cinema, independent films and educational videos", "ad-free films and series"), its press page ("along with television
+# and kids programming") and Kanopy Kids ("Kanopy's curated collection of content for children, with a focus on ages
+# 2-8"). Video quality: no page names a resolution; "Some older films are not available in high definition"
+# (Troubleshooting poor video quality) says the rest are, so 720p, inferred (HD with no resolution: Crunchyroll's and
+# Hayu's precedent). The Streamable's Kanopy page (read with WebFetch: its site timed out in Edge) says "Most video
+# streams are in 720p HD. Some video streams are available in 1080p HD.", which isn't used: the official inference fills
+# the gap. Streams at once: no page of its own says ("You can log in to your Kanopy account on any number of devices."
+# is about signing in). The Streamable's "you can stream on an unlimited number of devices" was read only through a
+# summarising fetch (its site timed out in Edge) and still names the old "Play Credit", so it can't be quoted word for
+# word: waiting (awaitingRequiredFeatures, 2026-11-13). No
+# downloads: "An internet connection is required to watch videos; they can't be downloaded for offline viewing." (Playing
+# videos). No profiles on any page. Parental controls: "With Kanopy's parental controls enabled, you can only view titles
+# in Kanopy Kids. To exit Kanopy Kids or watch videos outside of Kanopy Kids, you'll need to enter a four-digit PIN."
+# (Using parental controls). No pause (nothing to pause). Limits, in the plan's notes: "Each month, you receive a set
+# number of tickets from your library. Your tickets reset on the first day of the month, and unused tickets don't roll
+# over to the next month." and "Kanopy Kids videos never use tickets." (Using tickets); "There's no limit on the number
+# of unlimited viewing titles you can watch or the number of times you can watch them." (Watching unlimited viewing
+# titles); a ticketed season is "available for 3 days" to "7 days" by its running time (Watching series).
+id: kanopy
+name: Kanopy
+website: https://www.kanopy.com
+category: streaming
+spendCategory: streaming
+# Nothing to cancel: its help centre's article on deleting your account.
+cancelUrl: https://help.kanopy.com/en-us/4129.htm
+sources: { pricing: https://www.kanopy.com/en }
+notes: Free through participating public libraries and universities, with no ads.
+# Owner (M11.2), read 2026-11-13: its press site (press.kanopy.com) says it joined OverDrive; its terms and privacy policy
+# are Kanopy, Inc.'s ("and its affiliates"), at "One OverDrive Way Cleveland, OH 44125". OverDrive's own pages (its "The
+# OverDrive family of brands" and app lists name Kanopy) give its headquarters; no page read names OverDrive's own owners
+# or any shares, so no stock (OverDrive, Inc. is private).
+owner:
+  name: 'OverDrive, Inc.'
+  website: https://company.overdrive.com
+  page:
+    name: 'Kanopy press: About'
+    url: https://press.kanopy.com/
+  quotes:
+    - '2021 – Kanopy became part of the OverDrive family of brands.'
+  country:
+    code: US
+    page:
+      name: 'Contact Us (OverDrive)'
+      url: https://company.overdrive.com/contact/
+    quotes:
+      - 'Cleveland, OH 44125 USA'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Sign-in (2026-11-13): "Enter your name, email address, and password, then select Sign up." or "Sign Up with Apple or
+# Sign Up with Google" (Getting started with Kanopy for public library users); university users sign in "with a valid
+# university login" (its home page's FAQ). No two-step sign-in on any page. Platforms: "On a Windows computer, Mac, or
+# Chromebook, you can use Kanopy in your web browser", iPhones and iPads, Android, Fire tablets, and "Android TV and Google
+# TV", "Apple TV", "Fire TV", "Roku" and "Samsung TV" (Supported browsers and devices). App languages: its site in English
+# (kanopy.com/en), French (kanopy.com/fr: "Regardez des milliers de films gratuitement") and German (kanopy.com/de:
+# "Streame Tausende von Filmen kostenlos"); /es, /it, /nl, /pt, /ja, /zh, /ko and /ar go to English. Support: its
+# "SUPPORT" link is a contact form ("If you need help deleting your account, please contact us."); no chat or phone.
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, sso]
+  languages.interface: [en, fr, de]
+  support.channels: [email]
+
+plans:
+  - id: kanopy.free
+    name: Free with a library card
+    link: https://www.kanopy.com/en/signup
+    features:
+      video.quality: 720p
+      ad-free: true
+      streaming.content: [films, series, kids, documentaries]
+      streaming.own-media: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'No page names a resolution, but its help says only some older films aren’t in high definition, so the rest are HD: 720p at least.'
+        page:
+          name: Troubleshooting poor video quality
+          url: https://help.kanopy.com/en-us/4147.htm
+        lastVerified: 2026-11-13
+    notes: Free for members of participating public libraries and universities, with no ads; check that yours offers it. Your library gives you a set number of tickets to play titles each month (reset on the 1st, unused ones don't roll over). Kanopy Kids and unlimited-viewing titles use none. No downloads.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kanopy.com/en/signup/find/publiclibrary
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kanopy.com/en/signup/find/publiclibrary
+      - region: GB
+        currency: GBP
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kanopy.com/en/signup/find/publiclibrary
+      - region: IE
+        currency: EUR
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kanopy.com/en/signup/find/publiclibrary
+      - region: AU
+        currency: AUD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kanopy.com/en/signup/find/publiclibrary
+      - region: NZ
+        currency: NZD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kanopy.com/en/signup/find/publiclibrary
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada: its Terms of Service ("Revised 12 June
+# 2024"; a French version too), its Privacy Policy ("Revised: June 2022") and, on the same page once opened, its European
+# Privacy Notice ("Revised: March 2025", for EU and EEA users and markets "that wish to see our policies in light of
+# GDPR-like regulations"), and its cookie banner and Cookie Settings panel there; its help centre's articles on signing
+# up, its age requirement, deleting an account, logging out, cookie settings, parental controls and playing videos; and
+# its about page. The terms say the apps are "subject to the applicable end user license agreement for each app": no
+# licence of its own is linked, and its apps' store pages weren't read. Its help centre's footer ("By accessing this
+# site, you agree to our Terms and Conditions, our Privacy Policy ... and develop targeted ads") is OverDrive's help site
+# and links OverDrive's privacy policy, which doesn't mention Kanopy's service: not rated. OverDrive's security.txt
+# (overdrive.com/.well-known/security.txt) gives security@overdrive.com, says "OverDrive does not offer a bug bounty
+# program." and expired on 2026-01-01: a contact, not a programme, so security stays at its generic claims. Its terms
+# take a perpetual, irrevocable licence over what you submit (section 6), a topic streaming doesn't have. Not read: the
+# sign-up form's last steps (they need a library card) and the institution agreements its terms include. Calibrated
+# against Tubi and CBC Gem.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.kanopy.com/en/terms
+    - name: 'Privacy Policy (with its European Privacy Notice and cookie settings)'
+      url: https://www.kanopy.com/en/privacy
+    - name: 'About Kanopy'
+      url: https://www.kanopy.com/en/about-us
+    - name: 'Changing cookie settings'
+      url: https://help.kanopy.com/en-us/4279.htm
+    - name: 'Deleting your account'
+      url: https://help.kanopy.com/en-us/4129.htm
+    - name: 'Logging out'
+      url: https://help.kanopy.com/en-us/4128.htm
+    - name: 'Using parental controls'
+      url: https://help.kanopy.com/en-us/4167.htm
+    - name: 'Playing videos'
+      url: https://help.kanopy.com/en-us/4173.htm
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It tracks how you use Kanopy (pages, time spent, your IP address) with Google’s analytics tools. Its website asks before optional cookies; elsewhere you can only limit it in your browser’s or device’s settings.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'We use cookies and persistent device identifiers to collect and store information such as time of visit, pages visited, time spent on each page, IP address, browser type, and type of operating system used.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'You can limit your browser or mobile device from providing certain information by adjusting the settings in the browser, operating system or device.'
+        - url: https://help.kanopy.com/en-us/4279.htm
+          quote: 'Kanopy.com uses both required and optional cookies. You can change your cookie settings at any time.'
+      action:
+        name: 'Changing cookie settings'
+        url: https://help.kanopy.com/en-us/4279.htm
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It says it doesn’t sell your information, and shares it with companies that run Kanopy for it. Google’s ad cookies, for OverDrive’s own ads, are used on its websites only if you agree.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'Kanopy does not sell your PII.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'Kanopy may disclose information to service providers solely for business purposes.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'These cookies make OverDrive services, their content, and advertisements for OverDrive products or services more relevant to your interests, limit the number of ads, and measure the effectiveness of ads.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'Kanopy shows no ads. Cookies that pick OverDrive’s ads for you are only on its websites, not in the Kanopy app, and its website asks before using them.'
+      sources:
+        - url: https://www.kanopy.com/en/about-us
+          quote: 'We stream thoughtful entertainment to your preferred device with no fees and no commercials by partnering with public libraries and universities.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: "These cookies are not in products such as Libby, Sora, and the Kanopy app or in libraries' OverDrive collection websites."
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'We’d like to use other cookies to improve performance and gather anonymous usage data so we can design better services.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether what you write or submit trains AI.'
+      pages: [https://www.kanopy.com/en/terms, https://www.kanopy.com/en/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it needs it, and backups for a while after. Once you delete your account, it removes what identifies you within 30 days.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'We will retain your information as long as necessary for the purposes outlined in this Privacy Policy, and for a commercially reasonable time thereafter for backup, archival, fraud prevention or detection, audit purposes, or as otherwise required by law.'
+        - url: https://help.kanopy.com/en-us/4129.htm
+          quote: 'When you delete your Kanopy account, your personally identifiable information will be removed within 30 days.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself on its website or in its phone apps, and it removes what identifies you within 30 days.'
+      sources:
+        - url: https://help.kanopy.com/en-us/4129.htm
+          quote: 'When you delete your Kanopy account, your personally identifiable information will be removed within 30 days.'
+        - url: https://help.kanopy.com/en-us/4129.htm
+          quote: 'To delete your account on the Kanopy website:'
+      action:
+        name: 'Deleting your account'
+        url: https://help.kanopy.com/en-us/4129.htm
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of what it holds about you; there’s no way to download it yourself.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'You may request that we delete, retrieve, or update your PII by emailing privacy@kanopy.com'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.kanopy.com/en/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over what you watch only when a court order or subpoena makes it, and tries to narrow the request. It doesn’t promise to tell you or publish a report.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'If we are compelled to disclose your Service activity pursuant to a court order or subpoena, or to a person or agency with the relevant administrative or legislative investigative power, we will seek to challenge and limit the scope and comply with the authorized agency or person only as required by law.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information is kept with cloud companies in the US, with no other choice. Transfers from Europe are covered by the EU’s standard contracts.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'Our cloud providers are based in the USA. We do not offer the option of hosting data elsewhere.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'Kanopy has adopted Standard Contractual Clauses (SCCs) to safeguard international data transfers in certain jurisdictions, including transfers of PII from the EU to the US.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs your name and email address, and your library card number and PIN (or your university login) to prove you’re a member.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'In order to access the content on Kanopy you must create an account and submit your name and email address.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'When you are authenticating through your institution, you may need to provide your institution or library name, library card number and/or pin, student identification number, and other similar information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: good
+      reason: 'Kanopy has no ads at all, so none aimed at children. Under-18s need a parent’s approval, and a PIN can keep the account in Kanopy Kids on every device.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'While individuals under the age of 18 may access or use the Service, they may do so only with the involvement, supervision, and approval of a parent or legal guardian.'
+        - url: https://help.kanopy.com/en-us/4167.htm
+          quote: 'Parental control settings are linked to your Kanopy account and apply to all your devices.'
+        - url: https://www.kanopy.com/en/about-us
+          quote: 'We stream thoughtful entertainment to your preferred device with no fees and no commercials by partnering with public libraries and universities.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says your data is encrypted and its staff use strong sign-in, but names no independent check of its security and no programme for reporting flaws.'
+      sources:
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'Technical access controls include password protection, multifactor authentication, and single sign on.'
+        - url: https://www.kanopy.com/en/privacy
+          quote: 'Data is encrypted at rest and in transit over the Internet.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Its terms open by saying disputes go to binding private arbitration (a private referee), one person at a time. The section they point to sends claims to Ohio’s courts instead, still with no class actions.'
+      sources:
+        - url: https://www.kanopy.com/en/terms
+          quote: 'THE TOS REQUIRES BINDING ARBITRATION TO RESOLVE ANY DISPUTE OR CLAIM ARISING OUT OF OR RELATING IN ANY WAY TO THE TOS OR YOUR ACCESS TO OR USE OF THE SERVICE'
+        - url: https://www.kanopy.com/en/terms
+          quote: 'Any dispute, and all claims (as defined in Section 1) shall be brought in the state or federal courts residing in the State of Ohio, United States of America'
+        - url: https://www.kanopy.com/en/terms
+          quote: 'The Parties agree that all claims (as defined in Section 1) shall be adjudicated only on an individual basis not in a class, consolidated or representative action or similar process.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms whenever it likes by posting them, and using Kanopy afterwards means you accept them.'
+      sources:
+        - url: https://www.kanopy.com/en/terms
+          quote: 'Kanopy may, at its discretion, update the TOS at any time.'
+        - url: https://www.kanopy.com/en/terms
+          quote: 'BY REGISTERING FOR AN ACCOUNT OR OTHERWISE ACCESSING OR USING THE SERVICE, YOU AGREE TO BE BOUND BY THE TOS, INCLUDING ANY UPDATES OR REVISIONS POSTED HERE OR OTHERWISE COMMUNICATED TO YOU.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its terms, your access ends at once, with or without warning. It also ends if your library or university stops its Kanopy agreement.'
+      sources:
+        - url: https://www.kanopy.com/en/terms
+          quote: 'In the event that you violate the TOS, all rights granted to you under the TOS shall terminate immediately, with or without notice to you.'
+        - url: https://www.kanopy.com/en/terms
+          quote: 'To the extent that your access to the Service arises from an Institution Agreement, such access shall terminate upon termination of the applicable Institution Agreement.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or end any part of Kanopy at any time, with or without warning, and says it isn’t responsible to you if it does.'
+      sources:
+        - url: https://www.kanopy.com/en/terms
+          quote: 'Kanopy reserves the right at any time to modify or discontinue the Service (or any portion thereof) with or without notice, and Kanopy shall not be liable to you for any such modification or discontinuance.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.kanopy.com/en/terms, https://www.kanopy.com/en/privacy]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms say you may not share your account or password with anyone.'
+      sources:
+        - url: https://www.kanopy.com/en/terms
+          quote: 'You may not share your account or password with anyone.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: great
+      reason: 'You can sign in on as many devices as you like. There are no downloads to limit.'
+      sources:
+        - url: https://help.kanopy.com/en-us/4128.htm
+          quote: 'You can log in to your Kanopy account on any number of devices.'
+        - url: https://help.kanopy.com/en-us/4173.htm
+          quote: "An internet connection is required to watch videos; they can't be downloaded for offline viewing."
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Marketing emails for its public titles
+      tier: neutral
+      reason: 'Watching the few titles open to everyone without an account means giving your name and email, and agreeing to its marketing emails. You can unsubscribe.'
+      sources:
+        - url: https://www.kanopy.com/en/terms
+          quote: 'Furthermore, by providing Kanopy with this information, you agree to abide by Kanopy’s Terms of Service, and to receive marketing and promotional emails from Kanopy.'
+        - url: https://www.kanopy.com/en/terms
+          quote: 'You can stop receiving emails from Kanopy by following the unsubscribe instructions in those emails.'
+      lastVerified: 2026-11-13
