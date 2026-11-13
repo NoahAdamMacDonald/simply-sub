@@ -1,0 +1,789 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read through a US exit for its plan pages
+# (sling.com/service and each plan's page, which price by billing ZIP code), and with Edge from Canada for its help
+# centre (sling.com/help), terms and privacy notice, which sling.com shows this machine too. Pages, each quoted where
+# it's used:
+# Pricing: its compare page (sling.com/service/compare-plans): Essentials "$19.99/mo", Select "from $19.99/mo",
+# Essentials & Select "from $34.99/mo", Orange "from $45.99/mo", Blue "from $45.99/mo", Orange & Blue "from $60.99/mo",
+# all monthly ("Sling is a monthly subscription"). The plan data the page loads (slingcommerce.com's packages, read as
+# part of the page) gives each plan's price without local channels ("base_price":"19.99", "45.99", "60.99"…) and higher
+# ones where its lineup adds local ABC, FOX or NBC by ZIP code: Select $24.99 or $29.99, Essentials & Select $39.99 or
+# $44.99, Blue $49.99 or $54.99, Orange & Blue $64.99 or $69.99. The "from" prices are stored, with the others in each
+# plan's notes. Its Day Passes (1, 3 and 7 days) are gone: "Though Sling Passes are no longer available" (its blog's
+# passes article, updated 2026-10-13); sling.com/service/day-pass now opens the plans page.
+# Also sold, not listed: its International and Sling Latino base packs (Hindi, Brasil, Arabic, Polish, Sling Latino and
+# 30-odd more, each a language's channels), premium services sold through it (HBO Max, Paramount+ with SHOWTIME, STARZ,
+# MGM+, AMC+, discovery+ and others, which sell another service, as YouTube TV's premium networks), NBA Team Passes,
+# pay-per-view, the 4 Extras and Total TV deals (bundles of the Extras below), and promotions (prepaid months, a free
+# first month of premiums).
+# Where it's sold: "Currently, our content is only available for streaming within the United States and Puerto Rico."
+# (Error Code 11-601).
+# Region checklist, 2026-11-13: a US and Puerto Rico service, so no other region to read. Puerto Rico isn't priced: its
+# plans page prices by ZIP code, read through a mainland exit.
+# Bundles: none; Orange & Blue and Essentials & Select are its own plans ("two separate Sling TV services ... offered
+# together for a multi-service discount", its terms). Official resellers: none; its gift cards are sold by retailers
+# (Walmart, Best Buy, GameStop, Target) and by Sling. Partners that bill it: Amazon and Roku ("If you pay for the
+# Services through your account with a third party (e.g., Amazon, Roku)", its terms); noted.
+# Free use: Sling Freestream (sling-tv.freestream).
+
+# Coverage: sling-tv.* in PR: it streams in Puerto Rico (Error Code 11-601), but no page read prices it there.
+
+id: sling-tv
+name: Sling TV
+website: https://www.sling.com
+category: streaming
+spendCategory: streaming
+availableIn: [US, PR]
+billingCurrency: { US: USD, PR: USD }
+cancelUrl: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+sources: { pricing: https://www.sling.com/service/compare-plans }
+
+# Owner (M11.2), read 2026-11-13 on EchoStar's investor site (ir.echostar.com, its own: echostar.com lists Sling among
+# "Our Brands"), whose ticker changed from SATS to ECHO on June 24, 2026 ("EchoStar Corporation is officially changing
+# its Nasdaq stock ticker symbol from "SATS" to "ECHO" Effective June 24, 2026", its release of June 22, 2026). Sling TV
+# L.L.C. runs the service (its terms). No page read names a majority holder (EchoStar's proxy statement wasn't read).
+# Where it's from: its terms' notice address in Colorado.
+owner:
+  name: 'Sling TV L.L.C., owned by EchoStar Corporation'
+  website: https://www.echostar.com
+  page:
+    name: EchoStar Investors
+    url: https://ir.echostar.com/investors
+  quotes:
+    - 'EchoStar Corporation (Nasdaq: ECHO) is a premier provider of technology, networking services, television entertainment and connectivity, offering consumer, enterprise, operator and government solutions worldwide under its EchoStar®, Boost Mobile®, Boost Infinite, Sling TV, DISH TV, Hughes®, HughesNet®, HughesON™, and JUPITER™ brands.'
+  country:
+    code: US
+    page:
+      name: Terms of Use
+      url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+    quotes:
+      - 'Sling TV L.L.C., Attn: Office of the General Counsel, 9601 South Meridian Boulevard, Englewood, Colorado 80112'
+    lastVerified: 2026-11-13
+  stock:
+    company: EchoStar Corporation
+    listings:
+      - { exchange: Nasdaq, symbol: ECHO }
+  lastVerified: 2026-11-13
+
+# Ways to pay (M11.5), read 2026-11-13 in its help centre: cards, PayPal, Apple Pay, Google Pay and Amazon Pay (other)
+# (Billing & payments' "What payment methods can I use?"), gift cards (its gift card page), and billing by "other third
+# party billing services" (its pause article) such as Amazon and Roku (its terms). Its pause article also names
+# "BitPay", which no page offers as a way to pay, so it isn't listed. No page names card networks.
+paymentMethods:
+  - methods: [card, paypal, apple-pay, google-pay, other]
+    page: Billing & payments
+    url: https://www.sling.com/help/en/account-questions/billing-payments
+    quotes:
+      - 'Sling accepts debit and credit cards, or you can select Express Pay at checkout to use tools like PayPal, Apple Pay, Google Pay and Amazon Pay.'
+  - methods: [gift-card]
+    page: Sling TV gift cards
+    url: https://www.sling.com/deals/gift-card
+    quotes:
+      - 'You can also purchase and customize a Sling TV gift card online here.'
+  - methods: [app-store]
+    page: Pause or cancel your subscription
+    url: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+    quotes:
+      - 'Subscriptions made through Apple Pay, Google Pay or other third party billing services'
+# Renewal day (M11.5), read 2026-11-13 in its terms (5.C) and Billing & payments ("Monthly subscriptions are charged on
+# the same calendar day every month until you cancel."): the day you first paid, or a shorter month's last days.
+renewalAnchor:
+  kind: same-date
+  page: Terms of Use
+  url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+  quotes:
+    - 'For Subscription Services, we automatically bill you each month on the calendar day corresponding to the date on which you first commenced payment for Subscription Services.'
+    - 'If your paid membership to any Subscription Service began on a day not contained in a given month, then we may bill you on a day in the applicable month or such other day as we deem appropriate'
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: AirTV, Echo Show, Fire TV, Android phones and tablets, Android TV,
+# Apple TV, Chrome, Edge and Safari browsers, Chromecast, Google Nest, iPhone and iPad, LG, Roku, Samsung, VIZIO, Xbox
+# and Xfinity Flex (Sling TV Supported Devices). Sign-in: "Sling uses your email address to sign in." with a password
+# (Passwords & security). App languages: its sites and help centre are in English, and no page offers its apps in
+# another (its privacy notice has a Spanish copy). Support: "Our ChatBot is here for quick support 24/7" and "Request a
+# live agent. They can join the chat or give you a call for in-depth support. Live support available from 8:00 AM -
+# 1:00 AM ET." (Contact us).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en]
+  support.channels: [chat, phone]
+
+# Perks (M11.6), in its plan pages' words.
+perks:
+  - id: dvr-50-hours
+    name: 50 hours of free cloud DVR
+  - id: local-channels
+    name: 'Local channels: FOX, ABC, and NBC access in select markets'
+  - id: fox-one
+    name: App access to FOX One
+
+# Features, read 2026-11-13. Ads: live channels carry ads (Freestream is "Sling's ad-supported TV service"); no plan is
+# sold ad-free. Streams: "1 stream included" (Orange, Essentials), "3 streams included" (Blue, Select), and "up to 4"
+# for Orange & Blue and Essentials & Select (its compare page), "one stream via your Sling Orange service and three
+# streams via your Sling Blue service" (its terms, 2.I), the same for Essentials & Select. Video quality: each plan's
+# lineup in its plan data lists 4K channels ("ESPN 4K" in Essentials and Orange, "USA 4K" and "Fox Sports 1 4K" in Blue,
+# both bundles all of theirs), which "4K on Sling" streams with no add-on ("If an event is available in 4K in the market
+# you live in, you’ll see two assets"); Select lists none, and its terms speak only of "high-definition (“HD”)
+# content", so 720p (inferred, the Crunchyroll and Hayu precedent). Pausing: "A standard pause can be applied to your
+# account for up to 6 months." (Pause or cancel your subscription). Parental controls: "Parental controls: Create locks
+# based on ratings and content." with an account (Freestream). No downloads; profiles with an account, their number not
+# stated. What it streams: each plan's page (below).
+plans:
+  - id: sling-tv.essentials
+    name: Sling Essentials
+    link: https://www.sling.com/service/sling-essentials
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 1
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, kids, series]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    perks: [dvr-50-hours]
+    addOnIds:
+      [
+        sling-tv.sports-extra,
+        sling-tv.news-extra,
+        sling-tv.entertainment-extra,
+        sling-tv.hollywood-extra,
+        sling-tv.lifestyle-extra,
+        sling-tv.heartland-extra,
+        sling-tv.kids-extra,
+        sling-tv.latino-extra,
+        sling-tv.unlimited-dvr,
+      ]
+    notes: 10+ channels including ESPN, ESPN2, Disney and Freeform, on 1 screen at a time.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/service/compare-plans
+
+  - id: sling-tv.select
+    name: Sling Select
+    link: https://www.sling.com/service/sling-select
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      streaming.content: [news, sports, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Its terms speak only of high-definition ("HD") content, which names no resolution, and Select’s lineup has no 4K channel, so 720p is the least it can be.'
+        page:
+          name: Terms of Use
+          url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+        lastVerified: 2026-11-13
+    perks: [dvr-50-hours, local-channels, fox-one]
+    addOnIds:
+      [
+        sling-tv.sports-extra,
+        sling-tv.news-extra,
+        sling-tv.entertainment-extra,
+        sling-tv.hollywood-extra,
+        sling-tv.lifestyle-extra,
+        sling-tv.heartland-extra,
+        sling-tv.kids-extra,
+        sling-tv.latino-extra,
+        sling-tv.unlimited-dvr,
+      ]
+    notes: 10+ channels including FOX News, NFL Network, National Geographic and FS1, on 3 screens at once. $24.99 or $29.99 a month where it includes local ABC, FOX or NBC.
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/service/compare-plans
+
+  - id: sling-tv.essentials-select
+    name: Sling Essentials & Select
+    link: https://www.sling.com/service/sling-essentials-and-select
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, kids, series, news, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    perks: [dvr-50-hours, local-channels, fox-one]
+    addOnIds:
+      [
+        sling-tv.sports-extra-bundle,
+        sling-tv.news-extra,
+        sling-tv.entertainment-extra,
+        sling-tv.hollywood-extra,
+        sling-tv.lifestyle-extra,
+        sling-tv.heartland-extra,
+        sling-tv.kids-extra,
+        sling-tv.latino-extra,
+        sling-tv.unlimited-dvr,
+      ]
+    notes: Essentials' and Select's channels together, on up to 4 screens (1 for Essentials' channels, 3 for Select's). $39.99 or $44.99 a month where it includes local ABC, FOX or NBC.
+    prices:
+      - region: US
+        currency: USD
+        amount: 34.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/service/compare-plans
+
+  - id: sling-tv.orange
+    name: Sling Orange
+    link: https://www.sling.com/service/sling-orange
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 1
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, kids, news, series]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    perks: [dvr-50-hours]
+    addOnIds:
+      [
+        sling-tv.sports-extra,
+        sling-tv.news-extra,
+        sling-tv.entertainment-extra,
+        sling-tv.hollywood-extra,
+        sling-tv.lifestyle-extra,
+        sling-tv.heartland-extra,
+        sling-tv.kids-extra,
+        sling-tv.latino-extra,
+        sling-tv.unlimited-dvr,
+      ]
+    notes: 30+ channels including ESPN, TNT, Disney Channel and CNN, on 1 screen at a time.
+    prices:
+      - region: US
+        currency: USD
+        amount: 45.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/service/compare-plans
+
+  - id: sling-tv.blue
+    name: Sling Blue
+    link: https://www.sling.com/service/sling-blue
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels, sports]
+      streaming.content: [news, series, sports, reality, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    perks: [dvr-50-hours, local-channels, fox-one]
+    addOnIds:
+      [
+        sling-tv.sports-extra,
+        sling-tv.news-extra,
+        sling-tv.entertainment-extra,
+        sling-tv.hollywood-extra,
+        sling-tv.lifestyle-extra,
+        sling-tv.heartland-extra,
+        sling-tv.kids-extra,
+        sling-tv.latino-extra,
+        sling-tv.unlimited-dvr,
+      ]
+    notes: 40+ channels including NFL Network, Bravo, CNN, FOX News, FS1, USA and Discovery, on 3 screens at once. $49.99 or $54.99 a month where it includes local ABC, FOX or NBC.
+    prices:
+      - region: US
+        currency: USD
+        amount: 45.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/service/compare-plans
+
+  - id: sling-tv.orange-blue
+    name: Sling Orange & Blue
+    link: https://www.sling.com/service/sling-orange-and-blue
+    features:
+      video.quality: 4k
+      ad-free: false
+      streaming.concurrent-streams: 4
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, news, series, kids, reality, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: true
+    perks: [dvr-50-hours, local-channels, fox-one]
+    addOnIds:
+      [
+        sling-tv.sports-extra-bundle,
+        sling-tv.news-extra,
+        sling-tv.entertainment-extra,
+        sling-tv.hollywood-extra,
+        sling-tv.lifestyle-extra,
+        sling-tv.heartland-extra,
+        sling-tv.kids-extra,
+        sling-tv.latino-extra,
+        sling-tv.unlimited-dvr,
+      ]
+    notes: Orange's and Blue's 50 channels together, on up to 4 screens (1 for Orange's channels, 3 for Blue's). $64.99 or $69.99 a month where it includes local ABC, FOX or NBC.
+    prices:
+      - region: US
+        currency: USD
+        amount: 60.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/service/compare-plans
+
+  # Freestream (free use, the owner's item of 2026-11-09): "Sling's ad-supported TV service offering over 600 live TV
+  # channels and an extensive library of on-demand shows and movies for free- no credit card needed" (its help). No page
+  # says how many screens it plays on at once.
+  - id: sling-tv.freestream
+    name: Sling Freestream
+    link: https://www.sling.com/freestream
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.live: [tv-channels]
+      streaming.content: [series, films, news]
+      streaming.own-media: false
+      account.parental-controls: true
+    inferred:
+      video.quality:
+        reason: 'Its terms speak only of high-definition ("HD") content, which names no resolution, so 720p is the least it can be.'
+        page:
+          name: Terms of Use
+          url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+        lastVerified: 2026-11-13
+    notes: 600+ free channels and on-demand shows with ads, no account needed; with a free account, 10 hours of recordings, favourites and parental controls.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.sling.com/freestream
+
+# Add-ons, read 2026-11-13 in the plan data the plans page loads (slingcommerce.com's packages): Sports Extra "11.00"
+# on Essentials, Select, Orange and Blue and "15.00" on the two bundles ("Get Select + Sports Extra starting at
+# $30.99/mo", sling.com/service), the themed Extras at "6.00" ("Themed channel packs start at $6/mo", its add-ons page),
+# Latino Extra at "5.00", and Unlimited DVR "for just $5/mo" (its plans pages' FAQ). Each Extra is sold for every base
+# plan (a variant per plan in the data).
+addOns:
+  - id: sling-tv.sports-extra
+    name: Sports Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 11,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service,
+        }
+  - id: sling-tv.sports-extra-bundle
+    name: Sports Extra (Orange & Blue, Essentials & Select)
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 15,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service,
+        }
+  - id: sling-tv.news-extra
+    name: News Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.entertainment-extra
+    name: Entertainment Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.hollywood-extra
+    name: Hollywood Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.lifestyle-extra
+    name: Lifestyle Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.heartland-extra
+    name: Heartland Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.kids-extra
+    name: Kids Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.latino-extra
+    name: Latino Extra
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 5,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/add-ons,
+        }
+  - id: sling-tv.unlimited-dvr
+    name: Unlimited DVR + Replays
+    prices:
+      - {
+          region: US,
+          currency: USD,
+          amount: 5,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://www.sling.com/service/compare-plans,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge: its Terms of Use (Sling TV L.L.C.'s, under Colorado
+# law), its Privacy Notice ("Effective Date: January 1, 2026") and its privacy portal (Your privacy choices), its sign-up
+# start (sling.com/get-started: "Enter your email", typing nothing), and its help centre's pause and cancel, billing,
+# account changes, Freestream, streams and 4K articles. Not read: its EULA (the terms incorporate it; no link to it was
+# found on the pages read), the arbitration opt-out form's own page, the privacy portal's request forms, EchoStar's proxy
+# statement, and the sign-up steps after the email. It isn't covered by a shared document in data/policies/. Calibrated
+# against YouTube TV and Fubo.
+policies:
+  links:
+    - name: 'Terms of Use'
+      url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+    - name: 'Privacy Notice'
+      url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+    - name: 'Sign up'
+      url: https://www.sling.com/get-started
+    - name: 'Pause or cancel your subscription'
+      url: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+    - name: 'Billing & payments'
+      url: https://www.sling.com/help/en/account-questions/billing-payments
+    - name: 'Edit your subscription'
+      url: https://www.sling.com/help/en/account-questions/account-changes
+    - name: 'Compare plans'
+      url: https://www.sling.com/service/compare-plans
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what everyone in your home watches, and may record your typing and clicks on its sites. You can turn off only some of its tracking, tool by tool.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'When you or someone in your household watches a video program through our Services, we may collect a record of your viewing activity.'
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We also may use session replay software, which collects information about your interaction with the Services, including keystrokes, mouse movements, and form field entries'
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'Google provides an opt-out of Google Analytics by downloading and installing the browser add-on located here tools.google.com/dlpage/gaoptout/.'
+      action:
+        name: 'Your privacy choices'
+        url: https://www.sling.com/offer-details/disclaimers/your-privacy-choices
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: bad
+      reason: 'It sells or shares your information with ad networks, social networks and data brokers, and may give your name and address to mailing lists. Only residents of some US states can say no.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We sell or share these categories of personal information to data analytics providers, advertising partners and/or networks, social media networks, and data brokers.'
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We may disclose your name and postal address to other parties, such as charities, marketing organizations, corporate affiliates, or other businesses for “mailing list” purposes.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It picks the ads you see from what you watch and buy. Opting out works device by device, and you still get ads.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We use information such as service packages purchased, pay-per-view or video-on-demand purchases, and program viewing data.'
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'Please note that even if you opt out, you will still receive advertising from Sling and third parties, and your opt out preferences will only apply to the specific device.'
+      action:
+        name: 'Your privacy choices'
+        url: https://www.sling.com/offer-details/disclaimers/your-privacy-choices
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say whether what you write or say trains AI.'
+      pages:
+        - https://www.sling.com/offer-details/disclaimers/terms-of-use
+        - https://www.sling.com/offer-details/disclaimers/privacy-notice
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it needs it, including for its own business purposes, and names no time limits.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We retain personal information about you for the amount of time necessary to provide our Services and for as long as required to satisfy legal or tax requirements, for fraud prevention, or for other business purposes.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask an agent in its chat to cancel your account and delete its information, but it doesn’t say how long that takes.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'UNLESS AND UNTIL YOU CONTACT US TO PERMANENTLY CANCEL AND DELETE INFORMATION RELATED TO YOUR MEMBERSHIP ACCOUNT BY CONTACTING CUSTOMER SERVICE BY COMMUNICATING WITH AN AGENT VIA THE CHAT FUNCTION'
+      action:
+        name: 'Contact us (chat)'
+        url: https://www.sling.com/help/en/contact-us
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy notice offers a copy of your information only to residents of the US states whose laws give that right.'
+      pages: [https://www.sling.com/offer-details/disclaimers/privacy-notice]
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information for subpoenas, court orders and other lawful requests, and says nothing about telling you or publishing how often.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We may be required by law to comply with a valid legal process, such as a subpoena, court order, or search warrant, or where there is a lawful request, to disclose information about you.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Its privacy notice doesn’t say where your information is stored.'
+      pages: [https://www.sling.com/offer-details/disclaimers/privacy-notice]
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You start with an email address, then give your name, billing address and card to pay; a phone number isn’t required.'
+      sources:
+        - url: https://www.sling.com/get-started
+          quote: "If you don’t have a Sling account, we'll help you create one."
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We collect and keep personal information you give to us when you sign up for an account, including: your name, service address, billing address, e-mail address, telephone number, bank account and/or debit/credit card number, logins and passwords and security questions and codes used to access the Services, and other account information.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'You understand that you do not need to provide a cellular phone number to receive Services.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to sign up, and it tries to remove information a younger person gave it. Parents can lock shows by rating.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'If you are under the age of 18, then you are not permitted to register with us or provide your personal information to us.'
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'If we learn that a person under the age of eighteen has provided personal information through the Services, we will use reasonable efforts to remove such information from our files.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it makes commercially reasonable efforts. It names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/privacy-notice
+          quote: 'We use commercially reasonable efforts to prevent unauthorized third-party access to information about you.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in your account online, with no fee, and keep watching until your next bill date.'
+      sources:
+        - url: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+          quote: 'To cancel a recurring monthly Sling subscription, sign in to your account and select Manage then select Cancel.'
+        - url: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+          quote: 'Your Sling access will continue until the date of your next regular bill, but you won’t be charged again.'
+      action:
+        name: 'Pause or cancel your subscription'
+        url: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the month you paid for.'
+      sources:
+        - url: https://www.sling.com/help/en/account-questions/account-changes/pause-cancel-subscription
+          quote: 'No, we only provide refunds for special circumstances, not for the cancellation of prepaid or partial months of service.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'YOU UNDERSTAND AND AGREE THAT PAYMENTS ARE NONREFUNDABLE.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices at any time, and its terms promise no more notice than something it may post on its website.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'In the event that we add, alter, and/or change any prices, fees, and/or charges, then you agree to pay such added, altered, and/or changed prices, fees, and/or charges.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'Any notice required or permitted to be given by Sling TV under these Terms of Use may be provided by any reasonable means, including by mail, by publication on the www.sling.com website'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial; anyone can watch Freestream free instead.'
+      pages: [https://www.sling.com/service/compare-plans]
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help say your plan renews each month on its own, but not that it reminds you first.'
+      pages:
+        - https://www.sling.com/offer-details/disclaimers/terms-of-use
+        - https://www.sling.com/help/en/account-questions/billing-payments
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: bad
+      reason: 'It can add new fees and surcharges whenever it decides, and charge interest and late fees.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'Sling TV may, from time to time and at any time, change the amount of or basis for determining any fees or charges, and/or institute new fees, surcharges, or other charges as determined by us'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'We may apply interest and late fees for any amounts paid following the date when due'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Adding channels starts at once and you pay the difference for the rest of the month; removing them takes effect at your next bill, with no refund.'
+      sources:
+        - url: https://www.sling.com/help/en/account-questions/account-changes
+          quote: 'When you add content to your subscription, Sling will immediately collect a prorated amount to cover the change for your current month.'
+        - url: https://www.sling.com/help/en/account-questions/account-changes
+          quote: 'When you remove add-ons from your subscription, a refund isn’t issued. You’ll have access to the subscription you removed until the end of your billing cycle, and your next payment will be at the new price.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to a private referee (an arbitrator) or small claims court, one person at a time. You can opt out only by a written notice within 30 days of signing up.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'THESE SLING TV TERMS OF USE REQUIRE THE USE OF MANDATORY AND BINDING ARBITRATION ON AN INDIVIDUAL BASIS TO RESOLVE DISPUTES'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'All Disputes between you and Sling TV must be resolved on an individual basis.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'Rights to Opt-Out. If you do not agree to this Arbitration Provision, you have 30 days after you set up an account with us or you start your Services, whichever happens first, to opt out of this Arbitration Provision.'
+      action:
+        name: 'Arbitration opt-out notice'
+        url: https://www.sling.com/offer-details/disclaimers/terms-of-use/arbitration
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts new terms on its site, and for subscribers they start 30 days later; if you don’t accept them, you must write to it before then.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'Any revised version of these Terms of Use will be effective immediately, except that, solely with respect to existing Authenticated Users, such revised version will be effective 30 days following the day on which the revisions were first posted, unless expressly and specifically stated otherwise.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend your account without warning for anything it finds suspicious, close it for any purpose, and never refunds what you paid.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'without providing notice to you, place on hold (or otherwise suspend) your Membership Account in connection with any activity that we believe to be fraudulent, illegal, in violation of these Terms of Use, or otherwise suspicious.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'or until we elect to permanently cancel your Membership Account and Subscription Services (as defined below) for any purpose'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'YOU UNDERSTAND AND AGREE THAT PAYMENTS ARE NONREFUNDABLE.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can drop or change channels, packages and features at any time, and you get no credit or refund when it does.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'Sling TV may, permanently or temporarily, add, delete, rearrange, alter, interrupt, change, and/or eliminate:'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'you are not entitled to any credits, refunds, price reductions, or any other form of compensation because of any such addition'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.sling.com/offer-details/disclaimers/terms-of-use]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms say you may not share your sign-in with anyone.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'you may not reveal or share your Login Credentials with anyone.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: poor
+      reason: 'Its DVR deletes older recordings when it runs out of space, and it can end your DVR at any time, taking your recordings with it.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'If you program the DVR to record more programming than it can hold in the space available, then some programs that you have previously recorded may be deleted.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'We reserve the right to terminate the DVR (and/or all or any portion of your access to the DVR) at any time in our sole and absolute discretion'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: 15 days to question a bill
+      tier: poor
+      reason: 'If you think a bill is wrong, you must tell it within 15 days; after that, the bill counts as accepted.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'If you believe you have been billed in error, you must contact our Customer Service immediately, and in no event more than 15 days following the date you receive any bill for which you are seeking correction.'
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'Failure to timely notify us of any dispute will constitute your acceptance of the corresponding billed amounts.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: One year to bring a claim
+      tier: poor
+      reason: 'Any claim you have against it must be filed within one year, whatever the law would otherwise allow.'
+      sources:
+        - url: https://www.sling.com/offer-details/disclaimers/terms-of-use
+          quote: 'You agree that regardless of any law to the contrary, any claim, Dispute, or cause of action by you arising out of or related to our Services pursuant to these Terms of Use must be filed within one year following the date on which such claim, Dispute, or cause of action arose'
+      lastVerified: 2026-11-13

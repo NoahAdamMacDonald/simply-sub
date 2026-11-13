@@ -435,6 +435,9 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   // Kanopy states no stream count; Hoopla no video or audio quality (2026-11-13).
   ['kanopy.free', ['streaming.concurrent-streams']],
   ['hoopla.free', ['video.quality', 'audio.quality']],
+  // Fubo Free and Sling Freestream state no stream count (2026-11-13).
+  ['fubo.free', ['streaming.concurrent-streams']],
+  ['sling-tv.freestream', ['streaming.concurrent-streams']],
 ]);
 
 /**

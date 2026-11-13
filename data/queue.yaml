@@ -272,6 +272,20 @@
   source: own
   status: done
   date: 2026-11-13
+- id: fubo
+  name: Fubo
+  website: https://www.fubo.tv
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: sling-tv
+  name: Sling TV
+  website: https://www.sling.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
