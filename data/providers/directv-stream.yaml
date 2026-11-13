@@ -1,0 +1,1138 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8). directv.com answers every reader that comes through the
+# VPN (Edge from Canada, Mullvad Browser, a plain fetch and three US exits) with Akamai's "Access Denied" or "An error
+# occurred while processing your request", so every directv.com page was read 2026-11-13 with a split-tunnelled scratchpad
+# Chromium on an ordinary connection (the reading ladder's fourth step; split tunnelling put back after). Its pages price
+# for a US ZIP code ("Showing details for: Dallas, TX 75001") whoever reads them. Pages, each quoted where it's used:
+# What's priced: DIRECTV's internet service ("DIRECTV Streaming App Only via Internet (like Hulu+ Live TV & YouTube TV)",
+# its packages FAQ; once DIRECTV STREAM, "Streaming Live TV from DIRECTV (formerly DIRECTV STREAM)", its stream page):
+# the four Signature streaming packages, the Spanish Óptimo Más package, the seven Genre Packs and MyFree DIRECTV. Its
+# satellite service (directv.com/satellite, 24-month agreements, an activation fee) is telecom, left out; so are DIRECTV
+# FOR BUSINESS and U-verse TV.
+# Pricing, all monthly, in US dollars before tax ("+ taxes & fees"): the packages page (directv.com/packages) gives each
+# Signature package's regular price struck through beside a first month's offer and 24 months' discount: ENTERTAINMENT
+# "$94.99/mo." ("Price reflects $30 off for 1st mo.; $5 off for mos 2-24."), CHOICE "$99.99/mo.", ULTIMATE "$129.99/mo."
+# and PREMIER "$174.99/mo.", and the stream page names ENTERTAINMENT's regular rate ("curr. $94.99/mo. for
+# ENTERTAINMENT"). The same prices are sold with your own device (directv.com/stream, "Streaming Packages with your own
+# device") or with a leased Gemini device for $10 a month ("$74.99/mo. w/Gemini device lease" against "$64.99" for the
+# first month), equipment, not a plan or add-on: noted on the plans. Óptimo Más™ "$89.99/mo." (its Spanish page, "$64.99
+# w/OPTIMO MAS pkg & your own device"; its page data "price":"89.99"). The Genre Packs page (directv.com/genre-packs):
+# MyEntertainment "$42.99/mo", MySports "$64.99/mo", Duo: MyEntertainment + MyNews "$74.99/mo. + tax", MiEspañol
+# "$37.99/mo", MyKids "$20.99/mo. + tax", MyNews "$44.99/mo" and Duo: MySports + MyNews "$79.99/mo. + tax", each the rate
+# after its offer ("curr. $42.99/mo.", "curr. $44.99/mo.", "curr. $37.99/mo."). First months' offers ($64.99, $49.99,
+# $34.99 for two months…), 5-day trials and "A year of Netflix on us" with a Gemini device are offers, not stored. No
+# yearly or other period is sold: "We will automatically renew Your Service and any subscriptions with Us each month,
+# until You cancel." (its Residential Terms of Service, 7.c).
+# Fees: "Regional Sports Fee Up to $23.99 Applies to programming packages that include regional sports" (its Fee
+# Schedule, for Streaming App Only too; the packages page says "Regional Sports Fee up to $19.99/mo." and Dallas's
+# cards add $13.99), so CHOICE and up cost up to $23.99 more where regional sports networks are carried; the catalog has
+# no fee field for a streaming plan, so the plans' notes say so. No Early Termination Fee for Streaming App Only (the
+# Fee Schedule's "No").
+# Where it's sold: "Enjoy service in all 50 states and the District of Columbia." and "Heads up: DIRECTV isn't available
+# in Puerto Rico, the U.S. Virgin Islands, or outside the U.S." (Get entertainment your way with DIRECTV), and its terms
+# (18.d): "The Software and the Service are intended only for individuals located in the United States (excluding Puerto
+# Rico and U.S. Virgin Islands)."
+# Region checklist for CA and US, 2026-11-13: 1. one site, no locale paths (its legal pages have an Español version of
+# the same terms); 2. a ZIP code picker, which changes local channels and the regional sports fee, not the package
+# prices; 3. its page data (schema.org offers in USD, "price":"94.99" for MyEntertainment's and the packages' first-month
+# prices); 4. its plan builder (directv.com/shop/build) answers "Access Denied" even on an ordinary connection, so it
+# wasn't read; 5. its help centre's billing, fee and streaming articles; 6. Edge, Mullvad Browser and a plain fetch
+# through the VPN (blocked), the split-tunnelled Chromium (read); 7. no bill offered. Canada: not sold (the statements
+# above).
+# Bundles: none as bundle files. Its plans include other services, listed in includes-subscription: ESPN Unlimited with
+# every Signature package and MySports ("ESPN Unlimited included in every Streaming Package", its app page; "Gemini not
+# required for ESPN Unlimited with Streaming Packages"), Disney+, Hulu, HBO Max Basic With Ads and AMC+ with
+# MyEntertainment, Disney+ with MyKids, and PREMIER's premium networks; Disney+ and Hulu come with a Signature package
+# only with a Gemini device ("Get Disney+, Hulu Bundle, and ESPN Unlimited when you add a Gemini device for just $10/mo."),
+# so they're not listed there. MiEspañol's ViX Premium with Ads isn't in the catalog. DIRECTV also bills other services
+# (Netflix, Peacock, Apple TV and more, "Manage your Netflix subscription through your DIRECTV account") and sells
+# AT&T internet bundles: partners' products, noted, not listed. Official resellers: none ("Find a Retailer" lists stores
+# that sell its satellite service). Seasonal sports passes (NBA League Pass, MLB.TV, NHL CENTER ICE, Apple TV's sports)
+# are leagues' and others' subscriptions it bills, priced by season, not listed.
+# Features, read 2026-11-13: 4K: "If you’re a subscriber to any base package and have a 4K-compatible TV, you’ll have
+# access to 4K content at no extra cost." and "For the best experience, enable HDR on your TV and streaming device." (its
+# 4K UHD streaming FAQ); its glossary calls the Genre Packs "base Genre Pack"s, so theirs is inferred. Streams: "Most
+# customers can enjoy unlimited concurrent streaming with DIRECTV on all of your compatible devices while connected to
+# your in-home network." and "On the go and off your home network? You'll have access to up to 3 concurrent streams."
+# (its streaming limits article; the packages page's "Unlimited streams for unlimited screens"), so unlimited, noted
+# (another article says "up to 20 devices at the same time while on your home network"). "Plus, you can have up to 5
+# profiles for the family." (its app page); no kids profiles or downloads on any page read. Parental controls: a
+# four-digit PIN that restricts ratings (Set up DIRECTV parental controls). Pause: "If you get your DIRECTV service over
+# the internet (no satellite dish) sign in and select “Pause service”" (its cancel page), not MyFree, which has nothing
+# to pause. Live channels with ads. What it streams, from its own descriptions: ENTERTAINMENT "includes all your
+# essential channels packed with entertainment, news, and sports", ULTIMATE "More sports & movies including: CBS Sports
+# Network, Discovery Family, FX Movie Channel", PREMIER the premium networks; the Genre Packs by their names and cards
+# ("60+ popular entertainment channels", "10+ channels that focus on breaking news and information", "10+ Engaging
+# channels for nonstop fun and learning made just for kids", MiEspañol's "Spanish-language shows, movies and sports");
+# MyFree's "Movies, shows, news, sports & more" with a "Family & Kids" lineup. None of your own media.
+
+id: directv-stream
+name: DIRECTV
+aliases: [DIRECTV STREAM, DIRECTV via Internet]
+website: https://www.directv.com
+category: streaming
+spendCategory: streaming
+availableIn: [US]
+billingCurrency: { US: USD }
+# Its cancel page; Streaming App Only customers cancel by signing in ("Cancel service") or by chat or phone.
+cancelUrl: https://www.directv.com/customer/cancel-help/
+sources: { pricing: https://www.directv.com/packages/ }
+# Owner (M11.2), read 2026-11-13: its About us page's history ends with TPG's ownership; its terms are DIRECTV, LLC's
+# ("“DIRECTV,” “We,” “Our” and “Us” mean DIRECTV, LLC", 1). TPG Capital is TPG Inc.'s private equity platform, and
+# DIRECTV is a portfolio company of its funds, so no stock: TPG Inc.'s listing (NASDAQ) isn't DIRECTV's owner's. Where
+# it's from: no page read states its home country in words (its privacy notices' address is "2260 E Imperial Hwy, El
+# Segundo, CA 90245"); its About us page's history places its start in Mississippi and its satellites over US markets.
+owner:
+  name: 'DIRECTV, LLC (a portfolio company of TPG Capital)'
+  page:
+    name: 'About us'
+    url: https://www.directv.com/insider/corporate/company/
+  quotes:
+    - 'DIRECTV becomes a wholly owned portfolio company of TPG Capital'
+  # Country: its privacy policy's address is "2260 East Imperial Highway, El Segundo, CA 90245" (Video Privacy Policy),
+  # which core doesn't read as the US by itself ("CA" is Canada's code too); its leadership page places its executives
+  # in El Segundo, California.
+  country:
+    code: US
+    page:
+      name: 'Our team'
+      url: https://www.directv.com/insider/corporate/team/
+    quotes:
+      - 'Rob is based in El Segundo, California.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its payment method article for customers streaming over the internet (cards and
+# PayPal; "Paying with a bank account (ACH) is currently not allowed for customers streaming over the internet."), and
+# the partners it names for those who signed up through them (Amazon Fire TV, Roku, Google Play). Autopay is required
+# ("Auto Bill Pay is required for You to get Service.", its terms). Its satellite customers' ways (cheques, cash at
+# payment partners) aren't the streaming service's.
+acceptedNetworks:
+  US:
+    networks: [visa, mastercard, amex, discover]
+    url: https://www.directv.com/support/article/000093622
+    quotes:
+      - 'Enter a new debit or credit card (Visa, MasterCard, American Express, and Discover).'
+paymentMethods:
+  - methods: [card, paypal, app-store]
+    page: Update Payment Method for DIRECTV
+    url: https://www.directv.com/support/article/000093622
+    quotes:
+      - 'Enter a new debit or credit card (Visa, MasterCard, American Express, and Discover).'
+      - 'Add PayPal as your payment method.'
+      - 'Google Play'
+# Renewal day (M11.5): its terms charge Streaming App Only customers each month from the day a trial ends, moved to the
+# 1st of the next month when that day is the 29th, 30th or 31st ("if Your Renewal Date falls on the 29th, 30th, or 31st
+# of a month, then We will charge Your Payment Method on the first day of the next month", 7.d), which core's wording
+# doesn't read and which isn't the same-date kind's shorter-month rule; its billing article: "Your monthly billing date
+# is auto assigned and cannot be changed." notes.md has the block for core to extend.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.directv.com/legal/directv-residential-terms-of-service/
+    - https://www.directv.com/support/article/000083249
+  lastVerified: 2026-11-13
+
+# Perks (M11.6): what tells its packages apart that no feature describes, in their words: "Unlimited Cloud DVR recording"
+# (the Signature cards) and "Unlimited hours of cloud DVR storage" (the Genre Packs' cards; MyKids' and MyNews' cards
+# don't list it, and MyFree has no DVR, "DVR function not available for MyFree DIRECTV customers", its terms); CHOICE's
+# "Specialty sports including: ACC Network, Big Ten Network, MLB Network, NBA TV, SEC Network & more." and "Regional
+# Sports Networks for watching your local teams"; ULTIMATE's "More sports & movies"; PREMIER's premium networks (HBO Max,
+# Paramount+ with SHOWTIME, STARZ and Cinemax, which the catalog doesn't have).
+perks:
+  - id: unlimited-cloud-dvr
+    name: Unlimited cloud DVR
+  - id: specialty-sports
+    name: Specialty sports networks
+  - id: regional-sports-networks
+    name: Regional Sports Networks
+  - id: more-sports-and-movies
+    name: More sports & movies channels
+  - id: premium-networks
+    name: Premium networks (HBO Max, Paramount+ with SHOWTIME, STARZ, Cinemax)
+
+# General features, read 2026-11-13: platforms from its compatible devices article (Gemini, Fire TV, Android and Google
+# TV, Chromecast, Apple TV, LG, Samsung, VIZIO, Roku, Meta Quest; Chrome, Safari and Edge; iPhone, iPad and Android
+# phones), no consoles. Sign-in: "In addition to your username and password, you're asked to enter a one-time code sent
+# to your email or phone number on file." (Update Payment Method for DIRECTV). Support: chat and phone ("You can chat
+# with Us online to cancel Your Service by going to www.directv.com or You can call Us at 800.531.5000", its terms). App
+# languages: English and Spanish (its legal and privacy pages' "English (U.S.)" and "Español" versions; the app's own
+# languages aren't listed).
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, email-code, sms]
+  languages.interface: [en, es]
+  support.channels: [chat, phone]
+
+plans:
+  - id: directv-stream.entertainment
+    name: ENTERTAINMENT
+    link: https://www.directv.com/packages/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [series, sports, news]
+      includes-subscription: [espn.unlimited]
+    perks: [unlimited-cloud-dvr]
+    addOnIds:
+      [
+        directv-stream.hbo-max,
+        directv-stream.paramount-plus-showtime,
+        directv-stream.starz,
+        directv-stream.cinemax,
+        directv-stream.mgm-plus,
+        directv-stream.movies-extra-peacock,
+        directv-stream.sports-pack,
+        directv-stream.deportes,
+        directv-stream.espanol,
+        directv-stream.brazilian,
+        directv-stream.korean,
+        directv-stream.vietnamese,
+      ]
+    notes: 90+ live channels with your local channels and ESPN Unlimited. Unlimited streams on your home network, 3 away from it. Disney+ and Hulu (with ads) come only with a leased Gemini device ($10 a month). 4K on occasional live events.
+    prices:
+      - region: US
+        currency: USD
+        amount: 94.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/packages/
+
+  - id: directv-stream.choice
+    name: CHOICE
+    link: https://www.directv.com/packages/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [series, sports, news]
+      includes-subscription: [espn.unlimited]
+    perks: [unlimited-cloud-dvr, specialty-sports, regional-sports-networks]
+    addOnIds:
+      [
+        directv-stream.hbo-max,
+        directv-stream.paramount-plus-showtime,
+        directv-stream.starz,
+        directv-stream.cinemax,
+        directv-stream.mgm-plus,
+        directv-stream.movies-extra-peacock,
+        directv-stream.sports-pack,
+        directv-stream.deportes,
+        directv-stream.espanol,
+        directv-stream.brazilian,
+        directv-stream.korean,
+        directv-stream.vietnamese,
+      ]
+    notes: 125+ channels, ENTERTAINMENT's plus specialty sports and your Regional Sports Networks, which add a Regional Sports Fee of up to $23.99 a month (varies by ZIP code). Unlimited streams at home, 3 away. Disney+ and Hulu only with a leased Gemini device ($10 a month).
+    prices:
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/packages/
+
+  - id: directv-stream.ultimate
+    name: ULTIMATE
+    link: https://www.directv.com/packages/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [films, series, sports, kids, news]
+      includes-subscription: [espn.unlimited]
+    perks: [unlimited-cloud-dvr, specialty-sports, regional-sports-networks, more-sports-and-movies]
+    addOnIds:
+      [
+        directv-stream.hbo-max,
+        directv-stream.paramount-plus-showtime,
+        directv-stream.starz,
+        directv-stream.cinemax,
+        directv-stream.mgm-plus,
+        directv-stream.sports-pack,
+        directv-stream.deportes,
+        directv-stream.espanol,
+        directv-stream.brazilian,
+        directv-stream.korean,
+        directv-stream.vietnamese,
+      ]
+    notes: 160+ channels, CHOICE's plus more sports and movie channels; a Regional Sports Fee of up to $23.99 a month (varies by ZIP code). Unlimited streams at home, 3 away. Disney+ and Hulu only with a leased Gemini device ($10 a month).
+    prices:
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/packages/
+
+  - id: directv-stream.premier
+    name: PREMIER
+    link: https://www.directv.com/packages/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [films, series, sports, kids, news]
+      includes-subscription: [espn.unlimited, hbo-max, paramount-plus.premium-us, starz.standard]
+    perks:
+      [
+        unlimited-cloud-dvr,
+        specialty-sports,
+        regional-sports-networks,
+        more-sports-and-movies,
+        premium-networks,
+      ]
+    addOnIds:
+      [
+        directv-stream.mgm-plus,
+        directv-stream.sports-pack,
+        directv-stream.deportes,
+        directv-stream.espanol,
+        directv-stream.brazilian,
+        directv-stream.korean,
+        directv-stream.vietnamese,
+      ]
+    notes: 185+ channels, ULTIMATE's plus HBO Max, Paramount+ with SHOWTIME, STARZ and Cinemax, with their apps; a Regional Sports Fee of up to $23.99 a month (varies by ZIP code). Unlimited streams at home, 3 away. Disney+ and Hulu only with a leased Gemini device ($10 a month).
+    prices:
+      - region: US
+        currency: USD
+        amount: 174.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/packages/
+
+  - id: directv-stream.optimo-mas
+    name: Óptimo Más
+    link: https://www.directv.com/spanish/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [series]
+    notes: A Spanish-language streaming package. Unlimited streams at home, 3 away. Its pages don't list the add-ons it takes (Deportes, Español and the international add-ons need an English package), and it doesn't include ESPN Unlimited.
+    prices:
+      - region: US
+        currency: USD
+        amount: 89.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/spanish/
+
+  - id: directv-stream.myentertainment
+    name: MyEntertainment
+    link: https://www.directv.com/genre-packs/myentertainment/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [series, reality]
+      includes-subscription:
+        [disney-plus.with-ads, hulu.with-ads, hbo-max.basic-ads, amc-plus.with-ads]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls MyEntertainment "a base Genre Pack".'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls MyEntertainment "a base Genre Pack".'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    perks: [unlimited-cloud-dvr]
+    addOnIds: [directv-stream.mycinema]
+    notes: 60+ entertainment channels (FX, HGTV, A&E, Bravo), with Disney+, Hulu, HBO Max Basic With Ads and AMC+ (with ads) included. No local channels. Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 42.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+  - id: directv-stream.mysports
+    name: MySports
+    link: https://www.directv.com/genre-packs/mysports/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [sports]
+      includes-subscription: [espn.unlimited]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls the Genre Packs "base Genre Pack"s; its live 4K channels carry "Occasional live sporting events".'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    perks: [unlimited-cloud-dvr]
+    addOnIds: [directv-stream.mysports-extra, directv-stream.myhome-team, directv-stream.mycinema]
+    notes: 20+ sports and broadcast networks (ESPN, FS1, TNT, NFL Network) with ESPN Unlimited. Local teams' regional networks only with the MyHome Team add-on; blackouts apply. Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 64.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+  - id: directv-stream.mynews
+    name: MyNews
+    link: https://www.directv.com/genre-packs/mynews/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [news]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    addOnIds: [directv-stream.mycinema]
+    notes: 10+ news channels (CNN, FOX News, MS Now) with your local channels. Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 44.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/mynews/
+
+  - id: directv-stream.mykids
+    name: MyKids
+    link: https://www.directv.com/genre-packs/mykids/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [kids]
+      includes-subscription: [disney-plus]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    addOnIds: [directv-stream.mycinema]
+    notes: 10+ kids' channels with Disney+ included (its plan isn't named). Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 20.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+  - id: directv-stream.miespanol
+    name: MiEspañol
+    link: https://www.directv.com/genre-packs/miespanol/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [films, series, sports]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls MiEspañol "a base Genre Pack".'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls MiEspañol "a base Genre Pack".'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    perks: [unlimited-cloud-dvr]
+    notes: 60+ Spanish-language channels (Univision, Telemundo, TUDN, ESPN Deportes) with fútbol from 22 leagues, and ViX Premium with ads included. Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 37.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+  - id: directv-stream.duo-mysports-mynews
+    name: 'Duo: MySports + MyNews'
+    link: https://www.directv.com/genre-packs/mysports-mynews-duo/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels, sports]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [sports, news]
+      includes-subscription: [espn.unlimited]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    perks: [unlimited-cloud-dvr]
+    addOnIds: [directv-stream.mysports-extra, directv-stream.myhome-team, directv-stream.mycinema]
+    notes: MySports and MyNews together, 30+ sports and broadcast networks with your local channels and ESPN Unlimited; blackouts apply. Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+  - id: directv-stream.duo-myentertainment-mynews
+    name: 'Duo: MyEntertainment + MyNews'
+    link: https://www.directv.com/genre-packs/duo-myentertainment-mynews/
+    features:
+      video.quality: 4k
+      video.hdr: true
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      account.pause: true
+      account.parental-controls: true
+      streaming.content: [series, reality, news]
+      includes-subscription:
+        [disney-plus.with-ads, hulu.with-ads, hbo-max.basic-ads, amc-plus.with-ads]
+    inferred:
+      video.quality:
+        reason: 'Its 4K FAQ gives 4K content to "any base package", and its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+      video.hdr:
+        reason: 'Its 4K FAQ says to "enable HDR" for 4K content, which it gives to "any base package"; its glossary calls the Genre Packs "base Genre Pack"s.'
+        page:
+          name: DIRECTV 4K UHD streaming FAQ
+          url: https://www.directv.com/support/article/000093513
+        lastVerified: 2026-11-13
+    perks: [unlimited-cloud-dvr]
+    addOnIds: [directv-stream.mycinema]
+    notes: MyEntertainment and MyNews together, 70+ channels with your local channels, and Disney+, Hulu, HBO Max Basic With Ads and AMC+ (with ads) included. Unlimited streams at home, 3 away.
+    prices:
+      - region: US
+        currency: USD
+        amount: 74.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+  - id: directv-stream.myfree
+    name: MyFree DIRECTV
+    link: https://www.directv.com/myfree-directv/
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.concurrent-streams: unlimited
+      streaming.profiles: 5
+      streaming.live: [tv-channels]
+      account.pause: false
+      account.parental-controls: true
+      streaming.content: [films, series, sports, kids, news]
+    inferred:
+      video.quality:
+        reason: 'Its internet speed article says its HD shows and movies "play best using 720p or better"; its 4K FAQ gives 4K only to subscribers to a base package, which MyFree isn''t.'
+        page:
+          name: Get internet speed suggestions for DIRECTV
+          url: https://www.directv.com/support/article/000093620
+        lastVerified: 2026-11-13
+      streaming.concurrent-streams:
+        reason: 'Its app page, which offers MyFree DIRECTV as one of its plans, promises "unlimited simultaneous streams on unlimited screens" on your home network, and 3 out of home.'
+        page:
+          name: DIRECTV app
+          url: https://www.directv.com/technology/app/
+        lastVerified: 2026-11-13
+    notes: 150+ free channels with ads (FAST), with an email address and no card; no local channels, regional sports networks or DVR. Free channels are also included with every paid plan.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/myfree-directv/
+
+# Add-ons, read 2026-11-13, each monthly: the premium channels (each page: "currently $18.49/mo. for HBO Max", "currently
+# $13.99/mo. + tax" for Paramount+ with SHOWTIME, "$11.99/mo. thereafter" for STARZ, "currently $10.99/mo.+ tax" for
+# CINEMAX, "currently $7.99/mo." for MGM+, after their 2- or 3-month offers), added to a Signature package ("MGM+ is only
+# available to DIRECTV Signature TV plan customers"; PREMIER includes the first four); Movies Extra Pack + Peacock
+# Premium ("curr. $9.99/mo. via DIRECTV", for ENTERTAINMENT or CHOICE); DIRECTV Sports Pack ("Plan price + $14.99/mo.",
+# "Available with any Signature package"); the Spanish add-ons ("DIRECTV Deportes ... $4.99/mo." and "Español ...
+# $15.00/mo.", each "Start with an English base package"); the international add-ons for customers "connecting via
+# Internet" (Brazilian "$20 /mo .", Korean "$30 /mo .", Vietnamese "$20 /mo .", "Choose your English base package"); and
+# the Genre Packs' mini-packs (MySports Extra "$13.99/mo" with MySports or the MySports Duo, MyCinema "$10.99/mo" with
+# every Genre Pack but MiEspañol, MyHome Team "$19.99/mo. + tax" with MySports or the MySports Duo). The premium
+# channels include their apps, which the catalog's own plans don't stand in for here (a channel add-on, not the app's
+# plan).
+addOns:
+  - id: directv-stream.hbo-max
+    name: HBO Max
+    prices:
+      - region: US
+        currency: USD
+        amount: 18.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/premium-channels/hbo-max/
+  - id: directv-stream.paramount-plus-showtime
+    name: Paramount+ with SHOWTIME
+    prices:
+      - region: US
+        currency: USD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/premium-channels/paramountplus-with-showtime/
+  - id: directv-stream.starz
+    name: STARZ
+    prices:
+      - region: US
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/premium-channels/starz/
+  - id: directv-stream.cinemax
+    name: CINEMAX
+    prices:
+      - region: US
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/premium-channels/cinemax/
+  - id: directv-stream.mgm-plus
+    name: MGM+
+    prices:
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/premium-channels/mgm-plus/
+  - id: directv-stream.movies-extra-peacock
+    name: Movies Extra Pack + Peacock Premium
+    prices:
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/premium-channels/movies-extra-pack/
+  - id: directv-stream.sports-pack
+    name: DIRECTV Sports Pack
+    prices:
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/sports/nfl/redzone/
+  - id: directv-stream.deportes
+    name: DIRECTV Deportes
+    prices:
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/spanish/
+  - id: directv-stream.espanol
+    name: Español
+    prices:
+      - region: US
+        currency: USD
+        amount: 15
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/spanish/
+  - id: directv-stream.brazilian
+    name: Brazilian programming
+    prices:
+      - region: US
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/international/
+  - id: directv-stream.korean
+    name: Korean programming
+    prices:
+      - region: US
+        currency: USD
+        amount: 30
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/international/
+  - id: directv-stream.vietnamese
+    name: Vietnamese programming
+    prices:
+      - region: US
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/international/
+  - id: directv-stream.mysports-extra
+    name: MySports Extra
+    prices:
+      - region: US
+        currency: USD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+  - id: directv-stream.mycinema
+    name: MyCinema
+    prices:
+      - region: US
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+  - id: directv-stream.myhome-team
+    name: MyHome Team
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.directv.com/genre-packs/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with the split-tunnelled Chromium: its Residential Terms of
+# Service ("Effective as of November 10, 2026", which cover Streaming App Only, Streaming App + Equipment, Satellite and
+# MyFree DIRECTV, and include its Fee Schedule and, for leased devices, its Equipment Lease Agreement), its Privacy Policy
+# (its "Read Policy" link, directv.com/privacy/video-privacy-policy, updated January 1, 2026), its Advertising Notice,
+# its Fee Schedule ("Effective as of June 25, 2026"), and its help centre's cancelling, streaming limits, billing,
+# payment and parental controls articles. Also read, with nothing worse for these topics: its Website Terms of Use, its
+# DIRECTV STREAM Device Terms of Use (for its own devices, which name the AT&T Acceptable Use Policy, not read) and its
+# Cookie Notice. Not read: the plan builder and sign-up steps (directv.com/shop answers "Access Denied"), its Biometric
+# Information Privacy Notice (its privacy policy says it "may collect biometric information ... like a scan of face
+# geometry"), the arbitration PDFs and the included services' own terms. Calibrated against STARZ and YouTube TV.
+policies:
+  links:
+    - name: 'Residential Terms of Service'
+      url: https://www.directv.com/legal/directv-residential-terms-of-service/
+    - name: 'Privacy Policy'
+      url: https://www.directv.com/privacy/video-privacy-policy/
+    - name: 'Fee Schedule'
+      url: https://www.directv.com/legal/directv-fee-schedule/
+    - name: 'Cancel your DIRECTV service'
+      url: https://www.directv.com/customer/cancel-help/
+    - name: 'Streaming limits'
+      url: https://www.directv.com/support/article/000079946
+    - name: 'Why is my bill higher than expected?'
+      url: https://www.directv.com/support/article/000071814
+    - name: 'Update Payment Method for DIRECTV'
+      url: https://www.directv.com/support/article/000093622
+    - name: 'Set up DIRECTV parental controls'
+      url: https://www.directv.com/support/article/000093537
+    - name: 'MyFree DIRECTV'
+      url: https://www.directv.com/myfree-directv/
+    - name: 'Streaming with your own device'
+      url: https://www.directv.com/stream/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you and your household use DIRECTV, with session replay on its websites, and to keep you as a customer. You can only switch off parts, such as Nielsen’s measuring, device by device.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We use your information to conduct analytics relating to you, and to your use of our Products and Services.'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We use session replay, screen capture, and similar tools'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'Remember, if You want to opt out, You must follow the above steps on each of Your devices.'
+      action:
+        name: 'Your Privacy Choices'
+        url: https://www.directv.com/privacy/choices/
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: bad
+      reason: 'It may sell or share what you watch, your interests and your demographics with other companies for their own ads. Only people in some states can opt out of that.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We may also sell or share the information we collect, including your viewing information, demographic information, and information about your general and specific interests, with business customers for their own advertising or marketing uses'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'to opt out of the sale and sharing of personal information under certain state privacy laws'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Every subscriber gets ads picked from what they watch, unless they opt out in its privacy center. Ads elsewhere follow you through cookies and device IDs, which you turn off browser by browser or in each device’s settings.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'by default all DIRECTV subscribers are enrolled in Personalized Advertising'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'To manage Personalized Advertising, including to opt out, please visit our subscriber Privacy Preference Center and log in.'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'You may limit the sharing of information with your Device advertising ID (Apple or Android devices) in the App through your device settings'
+      action:
+        name: 'Your Privacy Choices'
+        url: https://www.directv.com/privacy/choices/
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you type to its chat tools or say to its assistants can be kept and used to train its AI, and its policy offers no way to say no.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'When you use our Products and Services, or interact with their features, like chatbots, digital assistants, or other tools powered by AI, we may process your information using automated and manual (human) methods, including training our AI and machine learning models using your information.'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We may collect information you enter into the chat box and retain transcripts for the uses described in this Policy.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as its business needs it. It names upper limits: account records up to 10 years after you leave, marketing data up to 6 years.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We keep your information as long as we need it for business, tax, or legal purposes.'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'Personal information collected for purposes like maintaining your account (e.g., sales and billing information) is retained while we have a relationship with you, plus a period of no more than 10 years after that relationship ends;'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'Personal information collected for marketing purposes is generally retained for a maximum period of 6 years; and'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'Only people in the states with privacy laws it lists can ask it to delete their information, and with exceptions. It offers no way for everyone else.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'Subject to certain exceptions, the right to delete personal information that we have collected from you.'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'You have additional privacy choices if you live in one of these states.'
+      action:
+        name: 'Your Privacy Choices'
+        url: https://www.directv.com/privacy/choices/
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: poor
+      reason: 'Only people in the states with privacy laws it lists can ask what information it has about them. It offers no way to download it.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'The right to know what personal information we have collected about you'
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'You have additional privacy choices if you live in one of these states.'
+      action:
+        name: 'Your Privacy Choices'
+        url: https://www.directv.com/privacy/choices/
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over subscribers’ information for court orders and subpoenas, following legal process, and tells you first only where the law requires and it can.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We may disclose subscriber personal information in response to lawful requests, such as court orders, subpoenas, and discovery requests, and will follow appropriate legal process, including providing affected subscribers with prior notice where legally required and where legally permitted and practicable.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information can be kept in the United States or other countries it doesn’t name, and it describes no safeguards for moving it.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'Information we collect may be processed and stored in the United States or in other countries where we or our affiliates or service providers process information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'MyFree needs only an email address. A paid plan adds a card and its billing address, which becomes your service address. Its sign-up pages refused this reader.'
+      sources:
+        - url: https://www.directv.com/myfree-directv/
+          quote: 'All that’s needed is your email address to register your account.'
+        - url: https://www.directv.com/support/article/000093622
+          quote: 'Enter your billing address associated with your payment method; this is used as your DIRECTV service address.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'It doesn’t knowingly collect information from anyone under 18; children watch on a parent’s account, and a PIN can lock shows by rating. It says nothing more about children’s data.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'We do not knowingly collect personal information from anyone under the age of 18.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'If someone is under the applicable age of majority, they can still utilize the Service with the involvement of a parent or legal guardian, under that parent or guardian’s account and following these Terms.'
+        - url: https://www.directv.com/support/article/000093537
+          quote: 'It’s easy to set up a four-digit personal identification number (PIN) to control who can watch shows with specific content ratings.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has safeguards and can’t guarantee your information’s protection. It names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://www.directv.com/privacy/video-privacy-policy/
+          quote: 'Though we cannot guarantee the protection of your information, we’ve established safeguards designed to secure information we collect.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online by signing in, or by chat or phone, where it may first offer you a better deal. You keep watching until the end of the billing cycle.'
+      sources:
+        - url: https://www.directv.com/customer/cancel-help/
+          quote: 'If you get your DIRECTV service over the internet (no satellite dish) sign in and select "Cancel service".'
+        - url: https://www.directv.com/customer/cancel-help/
+          quote: 'Chat now or call us at 800.531.5000. We’ll review your current entertainment package and make sure you’re getting the best value.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'Your cancellation is effective on the last day of the billing cycle in which You cancel.'
+      action:
+        name: 'Cancel your DIRECTV service'
+        url: https://www.directv.com/customer/cancel-help/
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back for the rest of the month when you cancel, but you keep watching until the end of the billing cycle.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'You will not receive a prorated credit or refund for any partial periods or Content You did not watch when Your Service is cancelled, unless prohibited by law.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'You will receive Service through the Effective Date.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change its prices and fees whenever it decides, and tells you by email or post. Its terms give no lead time for prices; package changes usually come with 30 days’ notice, and you may cancel.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'We have the right to change any of Our pricing, fees, or related charges.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'We will notify You of any of these changes at the email or the mailing address registered with Your account, except as otherwise provided by these Terms.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'If the change is within Our control, We usually give You 30 days’ notice.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its trials need a card up front and turn into a paid plan unless you cancel before they end. It doesn’t say it reminds you first.'
+      sources:
+        - url: https://www.directv.com/stream/
+          quote: 'A valid card is required; a temporary hold may be changed during trial period.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'If Your subscription to the Service starts with a free trial, You must cancel prior to the end of the free trial or Your subscription will automatically renew for the price in effect at the time You enrolled in the free trial or the then-prevailing rate.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your service renews every month on its own, but not that it reminds you first.'
+      pages: [https://www.directv.com/legal/directv-residential-terms-of-service/]
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: bad
+      reason: 'Besides the package price, packages with regional sports carry a Regional Sports Fee of up to $23.99 a month, and it may add other fees without notice.'
+      sources:
+        - url: https://www.directv.com/legal/directv-fee-schedule/
+          quote: 'Applies to programming packages that include regional sports'
+        - url: https://www.directv.com/legal/directv-fee-schedule/
+          quote: 'DIRECTV may impose other fees without notice.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'When you change your package partway through a month, your bill shows partial charges and credits for it.'
+      sources:
+        - url: https://www.directv.com/support/article/000071814
+          quote: 'You have partial charges and credits due to service changes made in the middle of the billing period'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions or jury, and you can’t opt out; you can only reject later changes to the clause. Small claims court is still allowed.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'DIRECTV and You agree to arbitrate all disputes between You and Us, except for claims arising from bodily injury or death.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'DIRECTV AND YOU AGREE THAT EACH MAY BRING OR ASSERT CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, REPRESENTATIVE, OR PRIVATE ATTORNEY GENERAL PROCEEDING IN ARBITRATION AND IN COURT.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'This is not a rejection of arbitration altogether.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them on its site, and using DIRECTV afterwards means you accept them. You can cancel instead.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'DIRECTV may modify or amend these Terms at any time.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'By continuing to use DIRECTV Service after the updated Terms are available on the website, You are agreeing to those changes.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can cancel your service at any time for any reason, with or without telling you.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'We have the right to cancel Your Service and/or disable the Software at any time for any reason.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'We may do this with or without notice to You.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change its packages and channels. Movies you bought or rented stop playing when your paid service ends, and it owes you nothing if they become unavailable.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'We have the right to change, add, or remove Our programming packages, their Content, selections, prices, and any Service We offer'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'If Your Paid Service is cancelled or otherwise deactivated, then Your access to all TVOD will be disabled.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'DIRECTV is not liable to You if TVOD becomes unavailable for purchase, download, rent, or streaming.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes paid accounts you haven’t used.'
+      pages: [https://www.directv.com/legal/directv-residential-terms-of-service/]
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      plans: [directv-stream.myfree]
+      tier: poor
+      reason: 'It may end your free MyFree access if you haven’t used it for “a long time”, without saying how long or that it warns you.'
+      sources:
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'We may also end Your MyFree DIRECTV access if Your account has been inactive for a long time'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Everyone on your home network can watch at once, and 3 streams elsewhere. Its terms ask you to keep your password private, except with adults you allow to manage the account.'
+      sources:
+        - url: https://www.directv.com/support/article/000079946
+          quote: 'Most customers can enjoy unlimited concurrent streaming with DIRECTV on all of your compatible devices while connected to your in-home network.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'You must keep Your password for Your account private.'
+        - url: https://www.directv.com/legal/directv-residential-terms-of-service/
+          quote: 'You can authorize them by sharing Your confidential account password with them.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can move your home network only 4 times a year, and away from home only 2 TV-connected devices can stream at once.'
+      sources:
+        - url: https://www.directv.com/support/article/000079946
+          quote: 'If you move or change your internet service provider, you can update your home network up to 4 times in a 12-month period.'
+        - url: https://www.directv.com/support/article/000079946
+          quote: 'Keep in mind only 2 streaming devices connected to a TV can be accessed simultaneously out of home'
+      lastVerified: 2026-11-13
