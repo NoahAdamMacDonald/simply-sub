@@ -195,6 +195,20 @@
   source: own
   status: done
   date: 2026-11-13
+- id: criterion-channel
+  name: The Criterion Channel
+  website: https://www.criterionchannel.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: curiosity-stream
+  name: Curiosity Stream
+  website: https://curiositystream.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
