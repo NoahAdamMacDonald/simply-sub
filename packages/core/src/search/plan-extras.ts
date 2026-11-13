@@ -1,8 +1,7 @@
-import { availability, type Availability } from '../catalog/availability';
+import { availability, type Availability, type SoldItem } from '../catalog/availability';
 import type { Bundle } from '../catalog/bundle';
 import { bundleSavings, type BundleSaving } from '../catalog/bundle-deal';
 import { pickPrice, type PickedPrice, type PriceContext } from '../catalog/pick-price';
-import type { Price } from '../catalog/price';
 import type { AddOn, Plan } from '../catalog/provider';
 import { isRetired } from '../catalog/retired';
 import type { CatalogData, SnapshotProvider } from '../catalog/snapshot';
@@ -78,7 +77,7 @@ export function planExtras(
 
   const addOns = (plan.addOnIds ?? []).flatMap((id): PricedAddOn[] => {
     const addOn = provider.addOns?.find((candidate) => candidate.id === id);
-    const sold = addOn && priced(addOn.prices, provider, context);
+    const sold = addOn && priced(addOn, provider, context);
     return addOn && sold ? [{ addOn, ...sold }] : [];
   });
 
@@ -86,7 +85,7 @@ export function planExtras(
     .filter((bundle) => bundle.includes.includes(plan.id))
     .flatMap((bundle): BundleOffer[] => {
       const seller = providerOf(bundle.soldBy);
-      const sold = seller && priced(bundle.prices, seller, context);
+      const sold = seller && priced(bundle, seller, context);
       const plans = bundle.includes.flatMap((id) => planOf(id) ?? []);
       if (
         !seller ||
@@ -119,7 +118,7 @@ export function planExtras(
       return found ? [found] : [];
     },
   );
-  const suitePrice = priced(plan.prices, provider, context);
+  const suitePrice = priced(plan, provider, context);
   const plansOnly = includes.flatMap(({ provider: owner, plan: included }) =>
     included ? [{ provider: owner, plan: included }] : [],
   );
@@ -137,17 +136,20 @@ export function planExtras(
   return { addOns, bundles, ...(suite && { suite }) };
 }
 
-/** Prices picked for the user, or undefined when availability says it isn't sold there or nothing could be picked. */
+/**
+ * An add-on's, a bundle's or a plan's prices picked for the user, or undefined when availability says it isn't sold
+ * there or nothing could be picked.
+ */
 function priced(
-  prices: readonly Price[],
+  item: SoldItem,
   seller: SnapshotProvider,
   context: ExtrasContext,
 ): Priced | undefined {
-  const sold = availability(prices, seller, context.region, context.subdivision);
+  const sold = availability(item, seller, context.region, context.subdivision);
   if (sold === 'not-offered') {
     return undefined;
   }
-  const pricing = pickPrice(prices, {
+  const pricing = pickPrice(item.prices, {
     ...context,
     ...(seller.billingCurrency && { billingCurrency: seller.billingCurrency }),
   });
@@ -163,7 +165,7 @@ function savingsAgainst(
   return bundleSavings(
     { pricing: deal.pricing, offered: deal.availability === 'offered' },
     plans.map(({ provider, plan }) => {
-      const part = priced(plan.prices, provider, context);
+      const part = priced(plan, provider, context);
       return { pricing: part?.pricing ?? [], offered: part?.availability === 'offered' };
     }),
   );

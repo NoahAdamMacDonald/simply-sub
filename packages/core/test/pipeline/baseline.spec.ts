@@ -215,6 +215,63 @@ describe('citedPages, for finance accounts (M11.14)', () => {
   });
 });
 
+describe('a plan’s soldIn and notSoldIn pages (M11.20)', () => {
+  const where = {
+    ...provider,
+    plans: [
+      {
+        ...provider.plans[0],
+        soldIn: [
+          {
+            regions: ['CA'],
+            url: 'https://mullvad.net/en/help/where',
+            quotes: ['Sold in Canada'],
+            lastVerified: '2026-11-13',
+          },
+        ],
+        notSoldIn: [
+          {
+            regions: ['US'],
+            url: 'https://mullvad.net/en/help/where',
+            quotes: ['Not available'],
+            lastVerified: '2026-11-13',
+          },
+          {
+            regions: ['GB'],
+            url: 'https://mullvad.net/en/help/gb',
+            quotes: ['Not sold in the UK'],
+            lastVerified: '2026-11-13',
+          },
+        ],
+      },
+    ],
+  } as Provider;
+
+  it('cites their pages as pricing', () => {
+    const pages = citedPages([where], []);
+    expect(pages).toContainEqual({
+      url: 'https://mullvad.net/en/help/where',
+      type: 'pricing',
+      owners: ['mullvad'],
+    });
+    expect(pages).toContainEqual({
+      url: 'https://mullvad.net/en/help/gb',
+      type: 'pricing',
+      owners: ['mullvad'],
+    });
+  });
+
+  it('gives their quotes on each page', () => {
+    expect(citedFacts([where], [], 'https://mullvad.net/en/help/where').quotes).toEqual([
+      'Sold in Canada',
+      'Not available',
+    ]);
+    expect(citedFacts([where], [], 'https://mullvad.net/en/help/gb').quotes).toEqual([
+      'Not sold in the UK',
+    ]);
+  });
+});
+
 describe('ratesIn and pageShowsRate (M11.14)', () => {
   it('reads every rate a page writes, in percent', () => {
     const text = 'Earn 2.25% on savings, 2,5 % in Quebec, up to 4% bonus, 12.5% on cards';

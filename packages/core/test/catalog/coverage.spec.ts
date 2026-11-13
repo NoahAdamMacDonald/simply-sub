@@ -7,6 +7,7 @@ import {
   type Plan,
   type Price,
   type Provider,
+  type SoldRegions,
 } from '../../src';
 
 // Regional coverage (M11.7, the guide's §3.2): the regions a provider is sold in where a paid plan has no price, and
@@ -39,6 +40,16 @@ function provider(id: string, plans: Plan[], extra: Partial<Provider> = {}): Pro
     cancelUrl: 'https://example.com/cancel',
     plans,
     ...extra,
+  };
+}
+
+/** An entry of soldIn or notSoldIn (M11.20): the provider's own page says so of these regions. */
+function sold(...regions: string[]): SoldRegions {
+  return {
+    regions,
+    url: 'https://example.com/where',
+    quotes: ['Not available'],
+    lastVerified: '2026-11-13',
   };
 }
 
@@ -120,6 +131,35 @@ describe('coverageGaps', () => {
       { provider: 'gone', plan: 'gone.us', region: 'CA', why: 'priced' },
     ]);
     expect(coverageGaps([{ ...gone, retired: '2026-10-01' }])).toEqual([]);
+  });
+
+  it('leaves out a region a plan’s notSoldIn names (M11.20)', () => {
+    // F1 TV: Pro isn't sold in the US, so it has no price to give there; Access is, and New Zealand isn't read yet.
+    const f1 = provider(
+      'f1-tv',
+      [
+        plan('f1-tv.access', [price('CA', 3.29)]),
+        plan('f1-tv.pro', [price('CA', 12.99)], { notSoldIn: [sold('US')] }),
+      ],
+      { availableIn: ['CA', 'US', 'NZ'] },
+    );
+    expect(coverageGaps([f1])).toEqual([
+      { provider: 'f1-tv', plan: 'f1-tv.access', region: 'US', why: 'available' },
+      { provider: 'f1-tv', plan: 'f1-tv.access', region: 'NZ', why: 'available' },
+      { provider: 'f1-tv', plan: 'f1-tv.pro', region: 'NZ', why: 'available' },
+    ]);
+  });
+
+  it('still flags a soldIn region with no price (M11.20)', () => {
+    // MLB.TV is sold in Canada, but its price there isn't read: soldIn says so, and the gap stays for a note.
+    const mlb = provider('mlb-tv', [
+      plan('mlb-tv.all-teams', [price('US', 149.99)], { soldIn: [sold('CA')] }),
+      plan('mlb-tv.mlb-plus-international', [price('CA', 5.99, { currency: 'USD' })]),
+    ]);
+    expect(coverageGaps([mlb])).toEqual([
+      { provider: 'mlb-tv', plan: 'mlb-tv.all-teams', region: 'CA', why: 'priced' },
+      { provider: 'mlb-tv', plan: 'mlb-tv.mlb-plus-international', region: 'US', why: 'priced' },
+    ]);
   });
 });
 

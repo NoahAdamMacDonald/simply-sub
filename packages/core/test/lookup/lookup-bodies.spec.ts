@@ -228,6 +228,48 @@ describe('planBody', () => {
   });
 });
 
+describe('planBody, with a plan’s soldIn and notSoldIn (M11.20)', () => {
+  const page = {
+    url: 'https://example.com/where',
+    quotes: ['Not available'],
+    lastVerified: '2026-10-20',
+  };
+
+  it('keeps them, and gives a plan no prices where its notSoldIn says it isn’t sold', () => {
+    const proton = providerOf('proton');
+    const vpnPlus = {
+      ...planOf(proton, 'proton.vpn-plus'),
+      notSoldIn: [{ regions: ['US'], ...page }],
+    };
+    const us = { query: { region: 'US', currency: 'USD' }, fx: usd, catalogVersion: 'abc1234' };
+    const body = planBody(proton, vpnPlus, { ...us, registry, bundleIds: [] });
+    expect(issues(planBodySchema, body)).toEqual([]);
+    expect(body.data.notSoldIn).toEqual(vpnPlus.notSoldIn);
+    expect(body.data).not.toHaveProperty('pricing');
+    // Its price for everywhere still applies elsewhere.
+    expect(planBody(proton, vpnPlus, { ...canada, registry, bundleIds: [] }).data.pricing).toEqual([
+      expect.objectContaining({ amount: 12.49, currency: 'CAD', native: true }),
+    ]);
+  });
+
+  it('prices a plan where its soldIn says it’s sold, converted', () => {
+    const premium = {
+      ...planOf(netflix, 'netflix.premium'),
+      soldIn: [{ regions: ['CA'], ...page }],
+    };
+    const body = planBody(netflix, premium, { ...canada, registry, bundleIds: [] });
+    expect(issues(planBodySchema, body)).toEqual([]);
+    expect(body.data.soldIn).toEqual(premium.soldIn);
+    expect(body.data.pricing).toEqual([
+      expect.objectContaining({
+        currency: 'CAD',
+        native: false,
+        source: expect.objectContaining({ region: 'US' }),
+      }),
+    ]);
+  });
+});
+
 describe('bundlesBody', () => {
   const [bundle] = bundles;
 

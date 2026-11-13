@@ -1,11 +1,12 @@
 import type { Price } from './price';
-import type { Provider } from './provider';
+import type { Plan, Provider, SoldRegions } from './provider';
 import { countryOf, globalRegion, groupsOf, isSubdivision } from './regions';
 
 // Where a provider, plan, add-on or bundle is sold (BLUEPRINT §4.7). The catalog fills Canada first, so a missing
 // price isn't proof that something isn't sold somewhere: without availableIn, a region the catalog has no prices
 // for is unknown, not "not offered". A province or state (M11.17) is part of its country: the user's own decides
-// when it's given, and without it a country counts as sold where any of its provinces is.
+// when it's given, and without it a country counts as sold where any of its provinces is. Where prices alone would
+// say otherwise, a plan's own soldIn and notSoldIn (M11.20) state what its provider's page says.
 
 /**
  * - `offered`: sold in the region. pickPrice gives its price, converted when it isn't in the user's currency.
@@ -15,6 +16,9 @@ import { countryOf, globalRegion, groupsOf, isSubdivision } from './regions';
 export type Availability = 'offered' | 'not-offered' | 'unknown';
 
 type Seller = Pick<Provider, 'plans' | 'availableIn'>;
+
+/** What availability reads of a plan, add-on or bundle: its prices, and a plan's own soldIn and notSoldIn. */
+export type SoldItem = Pick<Plan, 'prices'> & Partial<Pick<Plan, 'soldIn' | 'notSoldIn'>>;
 
 /**
  * Whether the provider sells in `region`, or in the user's province of it (`subdivision`, core's subdivisionIn).
@@ -35,22 +39,25 @@ export function providerAvailability(
 
 /**
  * Whether one plan or add-on of `provider`, or a bundle it sells, is sold in `region` (or the user's province of it).
- * Once the catalog has the provider's prices for a region, an item without one there isn't sold there: Disney+'s
- * US-only plans aren't offered in Canada, and a plan priced only in Quebec isn't offered in Ontario once the provider
- * is priced anywhere in Canada.
+ * A plan's notSoldIn comes first, before its prices, so it can leave a place out of a wider price (a Canadian price,
+ * except Quebec). Once the catalog has the provider's prices for a region, an item without one there isn't sold there,
+ * unless its soldIn names it: Disney+'s US-only plans aren't offered in Canada, and a plan priced only in Quebec isn't
+ * offered in Ontario once the provider is priced anywhere in Canada.
  */
 export function availability(
-  prices: readonly Price[],
+  item: SoldItem,
   provider: Seller,
   region: string,
   subdivision?: string,
 ): Availability {
   const place = placeOf(region, subdivision);
-  const seller = providerAvailability(provider, region, subdivision);
-  if (seller === 'not-offered') {
+  if (
+    providerAvailability(provider, region, subdivision) === 'not-offered' ||
+    names(soldRegions(item.notSoldIn), place)
+  ) {
     return 'not-offered';
   }
-  if (hasPriceFor(prices, place)) {
+  if (hasPriceFor(item.prices, place) || covers(soldRegions(item.soldIn), place)) {
     return 'offered';
   }
   const pricedThere = provider.plans.some((plan) =>
@@ -64,6 +71,19 @@ export function availability(
   return pricedThere ? 'not-offered' : provider.availableIn ? 'offered' : 'unknown';
 }
 
+/** The regions a plan's soldIn or notSoldIn entries name. */
+export function soldRegions(entries: readonly SoldRegions[] | undefined): string[] {
+  return (entries ?? []).flatMap((entry) => entry.regions);
+}
+
+/**
+ * `regions` name `place` or what it's part of (a province's country, a country's group). Unlike covers, a country
+ * isn't named through one of its provinces: "not sold in Quebec" says nothing of Canada as a whole.
+ */
+export function names(regions: readonly string[], place: string): boolean {
+  return regions.includes(place) || groupsOf(place).some((group) => regions.includes(group));
+}
+
 /** Where the user is for `region`: their province of it when given, else the region. */
 function placeOf(region: string, subdivision: string | undefined): string {
   return subdivision !== undefined && countryOf(subdivision) === region ? subdivision : region;
@@ -75,13 +95,12 @@ function hasPriceFor(prices: readonly Price[], place: string): boolean {
 }
 
 /**
- * `regions` covers `place`: it lists it or a group it belongs to (a province's country, a country's EU); and a country
- * with no province given is covered by any of its provinces, since it's sold somewhere in it.
+ * `regions` covers `place`: it names it (names), and a country with no province given is covered by any of its
+ * provinces, since it's sold somewhere in it.
  */
 function covers(regions: readonly string[], place: string): boolean {
   return (
-    regions.includes(place) ||
-    groupsOf(place).some((group) => regions.includes(group)) ||
+    names(regions, place) ||
     (!isSubdivision(place) &&
       regions.some((region) => isSubdivision(region) && countryOf(region) === place))
   );

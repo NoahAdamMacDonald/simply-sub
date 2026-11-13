@@ -14,6 +14,7 @@ import {
   formatCatalogIssue,
   type Price,
   type Provider,
+  type SoldRegions,
 } from '../../src';
 import { catalog, edited, today } from './catalog-files';
 
@@ -46,6 +47,16 @@ function seller(plans: Price[][], availableIn?: string[]): Seller {
       prices,
     })),
     ...(availableIn && { availableIn }),
+  };
+}
+
+/** An entry of soldIn or notSoldIn (M11.20): the provider's own page says so of these regions. */
+function sold(...regions: string[]): SoldRegions {
+  return {
+    regions,
+    url: 'https://example.com/where',
+    quotes: ['Not available in Quebec'],
+    lastVerified: '2026-11-13',
   };
 }
 
@@ -120,30 +131,47 @@ describe('pickPrice, by province', () => {
 
 describe('availability, by province', () => {
   it('is offered where the user’s province or its country has a price', () => {
-    expect(availability(national, carrier, 'CA', 'CA-ON')).toBe('offered');
-    expect(availability(byProvince, carrier, 'CA', 'CA-ON')).toBe('offered');
-    expect(availability(quebecOnly, carrier, 'CA', 'CA-QC')).toBe('offered');
+    expect(availability({ prices: national }, carrier, 'CA', 'CA-ON')).toBe('offered');
+    expect(availability({ prices: byProvince }, carrier, 'CA', 'CA-ON')).toBe('offered');
+    expect(availability({ prices: quebecOnly }, carrier, 'CA', 'CA-QC')).toBe('offered');
   });
 
   it('isn’t offered in another province once the provider is priced anywhere in the country', () => {
-    expect(availability(quebecOnly, carrier, 'CA', 'CA-ON')).toBe('not-offered');
-    expect(availability(byProvince, carrier, 'CA', 'CA-BC')).toBe('not-offered');
+    expect(availability({ prices: quebecOnly }, carrier, 'CA', 'CA-ON')).toBe('not-offered');
+    expect(availability({ prices: byProvince }, carrier, 'CA', 'CA-BC')).toBe('not-offered');
     // Priced only by province, with no country price at all.
-    expect(availability(quebecOnly, seller([quebecOnly, byProvince]), 'CA', 'CA-NS')).toBe(
-      'not-offered',
-    );
+    expect(
+      availability({ prices: quebecOnly }, seller([quebecOnly, byProvince]), 'CA', 'CA-NS'),
+    ).toBe('not-offered');
   });
 
   it('counts a country as sold where any of its provinces is, without the user’s province', () => {
-    expect(availability(quebecOnly, carrier, 'CA')).toBe('offered');
+    expect(availability({ prices: quebecOnly }, carrier, 'CA')).toBe('offered');
     expect(providerAvailability(seller([quebecOnly]), 'CA')).toBe('offered');
+  });
+
+  it('reads a Canadian price with notSoldIn Quebec as Canada except Quebec (M11.20)', () => {
+    const notQuebec = { prices: national, notSoldIn: [sold('CA-QC')] };
+    expect(availability(notQuebec, carrier, 'CA', 'CA-QC')).toBe('not-offered');
+    expect(availability(notQuebec, carrier, 'CA', 'CA-ON')).toBe('offered');
+    expect(availability(notQuebec, carrier, 'CA')).toBe('offered');
+  });
+
+  it('reads soldIn one province as its country does a province’s price (M11.20)', () => {
+    // A sibling is priced for Canada, so without soldIn a plan priced only in the US isn't offered in Canada.
+    const quebec = { prices: [price('US', 30, 'USD')], soldIn: [sold('CA-QC')] };
+    expect(availability(quebec, carrier, 'CA', 'CA-QC')).toBe('offered');
+    expect(availability(quebec, carrier, 'CA')).toBe('offered');
+    expect(availability(quebec, carrier, 'CA', 'CA-ON')).toBe('not-offered');
+    const canada = { prices: [price('US', 30, 'USD')], soldIn: [sold('CA')] };
+    expect(availability(canada, carrier, 'CA', 'CA-ON')).toBe('offered');
   });
 
   it('takes availableIn’s provinces as the full list', () => {
     const credit = seller([national], ['CA-BC']);
     expect(providerAvailability(credit, 'CA', 'CA-BC')).toBe('offered');
     expect(providerAvailability(credit, 'CA', 'CA-ON')).toBe('not-offered');
-    expect(availability(national, credit, 'CA', 'CA-ON')).toBe('not-offered');
+    expect(availability({ prices: national }, credit, 'CA', 'CA-ON')).toBe('not-offered');
     // A country covers its provinces.
     expect(providerAvailability(seller([national], ['CA']), 'CA', 'CA-QC')).toBe('offered');
     // Unknown elsewhere, as before.

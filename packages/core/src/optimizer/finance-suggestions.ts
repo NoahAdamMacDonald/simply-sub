@@ -198,7 +198,7 @@ function soldAccounts(
     const { account } = plan;
     if (!account || account.kind !== kind || account.currency !== currency) return [];
     if (isRetired(plan, provider, today)) return [];
-    if (availability(plan.prices, provider, region, subdivision) === 'not-offered') return [];
+    if (availability(plan, provider, region, subdivision) === 'not-offered') return [];
     const [price] = pickPrice(plan.prices, {
       region,
       ...(subdivision !== undefined && { subdivision }),

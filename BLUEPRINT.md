@@ -837,7 +837,7 @@ can't drift. Everything is exported from `@simply-sub/core`.
 | `monthly-equivalent.ts` | `monthlyEquivalent(price)` (PROJECT-PLAN §3.1) |
 | `regions.ts` | `isoRegions`, `regionGroups` (EU), `groupsOf`, `membersOf`, `isCatalogRegion`, `regionProblem`: the region codes a catalog file can use (section 4.7) |
 | `region-currency.ts` | `regionCurrency(region)`: the currency each region pays in (EU: EUR, GLOBAL: USD), the default `currency` of `GET /providers` and the first-run dialog |
-| `availability.ts` | `providerAvailability(provider, region)`, `availability(prices, provider, region)` (`Availability`): whether something is sold in a region (section 4.7) |
+| `availability.ts` | `providerAvailability(provider, region)`, `availability(item, provider, region)` (`Availability`, `SoldItem`: a plan, add-on or bundle, its prices and a plan's `soldIn` and `notSoldIn`), `soldRegions`, `names`: whether something is sold in a region (section 4.7) |
 | `pick-price.ts` | `pickPrice(prices, context)` (`PickedPrice`, `PriceContext`): the prices a user sees (section 4.7) |
 | `registry-files.ts` | `featuresBody`, `categoriesBody` (`featuresBodySchema`, `categoriesBodySchema`): the `GET /features` and `GET /categories` files (section 6.3) |
 | `convert.ts` | `fxRatesSchema` (`FxRates`, the `/fx` data), `exchangeRate`, `convert` (section 4.7) |
@@ -886,6 +886,9 @@ type Feature = {
 type FeatureValue = boolean | number | string | string[];
 type RankKey = string;       // 'ad-free' | 'video.quality=4k' | 'streaming.concurrent-streams=2-4' …
 
+// Regions a provider's own page says a plan is, or isn't, sold in (section 4.7, M11.20): one fact with its words.
+interface SoldRegions { regions: string[]; url: string; quotes: string[]; lastVerified: string }
+
 interface Plan {
   id: string;                // '<provider id>.<slug>' (netflix.standard)
   name: string;
@@ -896,6 +899,8 @@ interface Plan {
   featureLabels?: Record<RankKey, string>;   // feature id or rank key → the provider's wording
   perks?: string[];          // ids of its provider's perks ({ id, name }), each a rank key (M11.6)
   notes?: string;
+  soldIn?: SoldRegions[];    // sold there with no price yet, where a sibling's price would say not (section 4.7)
+  notSoldIn?: SoldRegions[]; // not sold there, though its provider is; read before its prices (section 4.7)
   prices: Price[];           // at least one
   addOnIds?: string[];       // ids from the provider's addOns
   addOnLimit?: number;       // needs addOnIds
@@ -1224,11 +1229,21 @@ that a service isn't sold somewhere. Each check gives `offered`, `not-offered` o
 - **A plan, add-on or bundle** (`availability`, with the bundle's `soldBy` provider) is `offered` where it has a
   price. Where the provider has prices
   but this item has none, it's `not-offered`: Canada's Disney+ plans are known, and the US-only With Ads plan isn't
-  one of them. Elsewhere it follows the provider.
+  one of them. Elsewhere it follows the provider. A plan can say so itself, from the provider's own page (M11.20):
+  `notSoldIn` (regions it isn't sold in though the provider is: F1 TV Pro in the US; read before prices, so a
+  Canadian price can leave Quebec out) and `soldIn` (regions it's sold in with no price yet, where a sibling's price
+  would make it read not offered: MLB.TV outside the US, `offered` at a fallback price). Each entry has its regions,
+  the page, its words and the date. Neither is a full list: a region they don't name follows the rules above, and a
+  sibling's `soldIn` never makes a region's plans known, since only prices do.
 - The app hides `not-offered` plans, shows "Not offered in Canada" on a provider with none offered (it can still be
   added as a custom subscription), and shows an `unknown` item's fallback price with "No price for Canada yet".
 - `validateCatalog` checks that every region code is real, that `availableIn` lists every region the provider is
-  priced in (a member through its group counts), and that it doesn't list `GLOBAL`.
+  priced in (a member through its group counts), and that it doesn't list `GLOBAL`. A plan's `soldIn` and
+  `notSoldIn` name real regions, never `GLOBAL` and never one region in both (`soldIn: [CA]` with `notSoldIn:
+  [CA-QC]` is Canada except Quebec); `soldIn` only where the provider is known to sell and the plan has no price
+  still sold, so it never adds a region to the provider's; `notSoldIn` only where `availableIn` sells, and never
+  where the plan has a price still sold (a wider one passes: `GLOBAL` with `notSoldIn: [US]`); each from a page of
+  the provider's own sites, read no later than today; and every region `availableIn` lists keeps a plan sold there.
 
 **Choosing which price to show** (`pickPrice` in `packages/core/src/catalog/pick-price.ts`, M1.7), given the
 user's region and currency from Settings (or a list item's own region). It works on any price list: a plan's, an
@@ -2060,6 +2075,14 @@ Validation fails if:
   `GLOBAL` (`UK` gets "use GB")
 - a provider has `availableIn`, and a plan or add-on is priced in a region it doesn't cover (a member state is
   covered by its group, and a group by itself or a member), or it lists `GLOBAL`
+- a plan's `soldIn` or `notSoldIn` (M11.20, section 4.7) names a region that isn't real, `GLOBAL`, or a region the
+  other list names (itself, or the country or group it's part of: `notSoldIn: [CA-QC]` beside `soldIn: [CA]`
+  passes); `soldIn` names a region its provider isn't known to sell in (not in `availableIn`, or without it, no
+  plan priced there) or one the plan has a price still sold for (its own, its country's or group's, or `GLOBAL`; a
+  province's price says nothing of its country); `notSoldIn` names a region `availableIn` doesn't cover, or the plan
+  has a price still sold in a region it names (a province's too; a wider price passes: `GLOBAL`, `EU` with `DE`,
+  `CA` with `CA-QC`); every plan still sold has a region `availableIn` lists in its `notSoldIn`; or an entry quotes
+  a page off the provider's own sites, its policies' or its owner's, or was read after today
 - a plan, add-on or bundle repeats a price (the same region, currency, interval and intervalCount)
 - a currency in a price or in `billingCurrency` isn't a real ISO 4217 code (`Intl.supportedValuesOf('currency')`;
   the schema only checks that it's three capital letters)
@@ -2072,7 +2095,8 @@ Validation warns (but passes) when `lastVerified` is older than 90 days: one war
 the oldest price. It warns when a plan's features name a service category it isn't in and its `notIn` doesn't list
 (M11.3, section 4.5), and when two of a provider's plans still sold cost differently for the same region, currency and
 period with the same features and perks (M11.4, M11.6, section 4.2 rule 8). It also warns about a provider or reseller without a logo in `data/logos/`, which the app shows as
-a letter, about a reseller no provider lists, and about an owner, renewal day or source code read over a year ago.
+a letter, about a reseller no provider lists, and about an owner, renewal day, source code or a plan's `soldIn` or
+`notSoldIn` read over a year ago.
 
 A broken file gets its own errors, and the checks that would only repeat them are skipped: a provider that fails
 its schema isn't checked against the registry, references to it aren't flagged, and a broken feature definition
@@ -2082,7 +2106,8 @@ isn't used to check plans.
 a provider is sold in (its plans' price regions, its `availableIn`, and Canada and the US when a plan is priced for
 everywhere) where a paid plan still sold has no price (core's `coverageGaps`). A gap passes when the provider file
 explains it in a comment block of its own, "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>"
-(`coverageNotes`, `explains`); the rest fail it. The 13 providers from before it had warnings instead until M11.9 filled
+(`coverageNotes`, `explains`); the rest fail it. A region a plan's `notSoldIn` names isn't a gap (M11.20), since the
+plan has no price to give there; one its `soldIn` names still is until its price is read, so its note says why. The 13 providers from before it had warnings instead until M11.9 filled
 or explained their gaps (core's `awaitingCoverage`, removed then). It isn't in CI: a research batch runs it before its
 pull request.
 

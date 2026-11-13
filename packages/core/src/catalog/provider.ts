@@ -337,6 +337,33 @@ export const thirdPartyFeatureSchema = z.strictObject({
 });
 export type ThirdPartyFeature = z.infer<typeof thirdPartyFeatureSchema>;
 
+/**
+ * Regions a provider's own page says a plan is, or isn't, sold in (BLUEPRINT §4.7, M11.20): a single fact with its
+ * words, where the catalog's prices alone would say otherwise.
+ */
+export const soldRegionsSchema = z
+  .strictObject({
+    regions: z
+      .array(sellingRegionSchema)
+      .min(1, 'List at least one region')
+      .describe(
+        'The regions the page says it of: countries, a group (EU), provinces or states (CA-QC); never GLOBAL',
+      ),
+    url: httpsUrlSchema.describe(
+      "The provider's own page that says so (a help article, its plan page), on its own sites, its policies' or its owner's",
+    ),
+    quotes: z
+      .array(textSchema)
+      .min(1, 'Quote where it says so')
+      .max(3, 'Quote at most three passages')
+      .describe('Its words there, word for word'),
+    lastVerified: isoDateSchema.describe('When the page was read'),
+  })
+  .superRefine((entry, ctx) => {
+    addDuplicateIssues(ctx, entry.regions, (index) => ['regions', index]);
+  });
+export type SoldRegions = z.infer<typeof soldRegionsSchema>;
+
 export const planSchema = z
   .strictObject({
     id: planIdSchema.describe('<provider id>.<slug> (netflix.standard)'),
@@ -409,6 +436,20 @@ export const planSchema = z
         'The day it ends for its current subscribers too, when the provider says so: needs retired. Items on it count until then',
       )
       .optional(),
+    soldIn: z
+      .array(soldRegionsSchema)
+      .min(1, 'Leave soldIn out instead of listing none')
+      .describe(
+        "Regions its provider's own page says this plan is sold in, though it has no price there yet (BLUEPRINT §4.7): where the provider's other plans are priced, it would read Not offered. Not a full list: elsewhere it's sold where it has a price",
+      )
+      .optional(),
+    notSoldIn: z
+      .array(soldRegionsSchema)
+      .min(1, 'Leave notSoldIn out instead of listing none')
+      .describe(
+        "Regions its provider's own page says this plan isn't sold in, though the provider sells there (BLUEPRINT §4.7): the app hides it there. A price for a wider place still applies elsewhere (a Canadian price, except Quebec)",
+      )
+      .optional(),
     prices: pricesSchema,
     account: accountSchema
       .describe(
@@ -451,6 +492,21 @@ export const planSchema = z
         });
       }
     });
+    // A region named in two entries of one list (a repeat within one entry is that entry's own issue).
+    for (const list of ['soldIn', 'notSoldIn'] as const) {
+      const named = (plan[list] ?? []).flatMap((entry, entryIndex) =>
+        entry.regions.flatMap((region, index) =>
+          entry.regions.indexOf(region) === index
+            ? [{ region, path: [list, entryIndex, 'regions', index] }]
+            : [],
+        ),
+      );
+      addDuplicateIssues(
+        ctx,
+        named.map(({ region }) => region),
+        (index) => named[index].path,
+      );
+    }
     addDuplicateIssues(ctx, plan.addOnIds ?? [], (index) => ['addOnIds', index]);
     if (plan.addOnLimit !== undefined && plan.addOnIds === undefined) {
       ctx.addIssue({ code: 'custom', message: 'addOnLimit needs addOnIds', path: ['addOnLimit'] });

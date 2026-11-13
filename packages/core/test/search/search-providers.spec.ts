@@ -141,6 +141,33 @@ describe('searchProviders', () => {
       expect(matches[0].plans[0].pricing?.[0]).toMatchObject({ currency: 'USD', native: false });
     });
 
+    it('leaves out a plan its notSoldIn names there, and keeps a soldIn plan with a converted price (M11.20)', () => {
+      const page = {
+        url: 'https://example.com/where',
+        quotes: ['Not available'],
+        lastVerified: '2026-10-20',
+      };
+      // Proton's VPN Plus, priced for everywhere, isn't sold in Canada; Netflix Premium, priced in the US, is.
+      const files = edited(
+        edited(
+          catalog(),
+          'data/providers/proton.yaml',
+          ['plans', 1, 'notSoldIn'],
+          [{ regions: ['CA'], ...page }],
+        ),
+        'data/providers/netflix.yaml',
+        ['plans', 2, 'soldIn'],
+        [{ regions: ['CA'], ...page }],
+      );
+      const matches = search(canada, files);
+      const plansOf = (id: string) =>
+        matches.find((match) => match.provider.id === id)?.plans ?? [];
+      expect(plansOf('proton').map((plan) => plan.plan.id)).not.toContain('proton.vpn-plus');
+      const premium = plansOf('netflix').find((plan) => plan.plan.id === 'netflix.premium');
+      expect(premium?.availability).toBe('offered');
+      expect(premium?.pricing?.[0]).toMatchObject({ currency: 'CAD', native: false });
+    });
+
     it('sorts by price, high to low', () => {
       expect(search({ ...canada, sort: 'price_desc' }).map((match) => match.provider.id)).toEqual([
         'crave',

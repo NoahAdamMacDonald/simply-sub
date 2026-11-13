@@ -34,6 +34,8 @@ const planFields: readonly string[] = [
   'categories',
   'notIn',
   'features',
+  'soldIn',
+  'notSoldIn',
   'prices',
   'retired',
   'endsOn',

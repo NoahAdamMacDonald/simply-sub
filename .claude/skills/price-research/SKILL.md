@@ -56,6 +56,16 @@ API contract's prices are illustrative and never a source. This skill is how to 
   list in its help centre, terms that say the service "is intended for use in Canada"), set `availableIn` to that
   full list and quote it in a comment. Every provider sold in certain countries only gets one. Otherwise leave it
   out: a region without prices is then shown as unknown, not as "not offered" (BLUEPRINT §4.7).
+- **A plan's `soldIn` and `notSoldIn`, only from the provider's own words, and only where prices would say
+  otherwise** (M11.20). A plan the provider's page says isn't sold in a country it sells in ("Not available" under
+  the plan with that country picked, "no longer available to buy directly") gets `notSoldIn` with the regions, the
+  page and its words. A plan its page says is sold in a country where you can't read its price, while another plan
+  of the provider is priced there, gets `soldIn` the same way, and a "Coverage:" note for the missing price. Never
+  from a redirect, a missing card or a guess: a country whose own page lists other plans needs neither, because its
+  prices already say so. Name only the countries whose pages you read. When a `soldIn` plan's price is read later,
+  add the price and take the region out. Re-read these pages whenever you re-verify the provider, and bump
+  `lastVerified`. A page that shows the words only after something is picked (a country in a drop-down) is saved
+  with each view, joined into one text for its URL, so quote-check finds them.
 - **Accepted card networks, per region, only from the provider's own words** (M9.2). Find its payment methods page
   (the help centre's "payment methods" or "payment options", a pricing FAQ such as Proton's "What payment methods can
   I use?", the checkout when it opens without an account). For each region the page covers, set
@@ -267,7 +277,8 @@ and each region's code:
 # Coverage: netflix.standard-ads isn't sold in NZ, IE or NL: each country's page lists no ads plan
 # (help.netflix.com/en/node/24926/nz, read 2026-11-03).
 ```
-A gap no note explains fails the report.
+A gap no note explains fails the report. A plan the provider's own page says isn't sold somewhere takes `notSoldIn`
+instead of a note (above); a region not read yet, or a plan a country's own plan list simply lacks, keeps the note.
 
 **Record the browser that read each page** in the header beside its date ("read 2026-11-03 with Mullvad Browser"):
 Edge unless it says otherwise. The pipeline's page records name theirs (`browser`), and its drafts' header says it.

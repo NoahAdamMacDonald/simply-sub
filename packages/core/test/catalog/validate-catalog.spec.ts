@@ -918,6 +918,158 @@ describe('validateCatalog', () => {
     });
   });
 
+  describe('a plan’s soldIn and notSoldIn (M11.20)', () => {
+    // Netflix's plans: Standard with ads (CA, US), Standard (CA, US) and Premium (US only), on example.com.
+    const entry = (...regions: string[]) => ({
+      regions,
+      url: 'https://example.com/where',
+      quotes: ['Not available'],
+      lastVerified: '2026-10-20',
+    });
+    type List = 'soldIn' | 'notSoldIn';
+    const also = (files: CatalogSourceFile[], index: number, list: List, ...regions: string[]) =>
+      edited(files, netflix, ['plans', index, list], [entry(...regions)]);
+    const plan = (index: number, list: List, ...regions: string[]) =>
+      also(catalog(), index, list, ...regions);
+    /** Premium priced in these places, with EUR charged in Europe. */
+    const premiumIn = (...prices: ReturnType<typeof price>[]) =>
+      edited(
+        edited(catalog(), netflix, ['plans', 2, 'prices'], prices),
+        netflix,
+        ['billingCurrency'],
+        { CA: 'CAD', US: 'USD', EU: 'EUR', DE: 'EUR' },
+      );
+    const usPremium = price('US', 'USD', 26.99);
+    /** Mullvad's one plan, priced GLOBAL, with an entry on mullvad.net. */
+    const mullvadWith = (list: List, region: string) =>
+      edited(
+        catalog(),
+        mullvad,
+        ['plans', 0, list],
+        [{ ...entry(region), url: 'https://mullvad.net/en/where' }],
+      );
+
+    it('accepts both lists where prices alone would say otherwise', () => {
+      expect(messages(also(plan(2, 'soldIn', 'CA'), 0, 'notSoldIn', 'GB'))).toEqual([]);
+    });
+
+    it('needs real regions, never GLOBAL', () => {
+      expect(messages(plan(2, 'soldIn', 'GLOBAL', 'UK'))).toEqual([
+        'data/providers/netflix.yaml plans.2.soldIn.0.regions.0: GLOBAL means everywhere: list regions here, or leave soldIn out',
+        'data/providers/netflix.yaml plans.2.soldIn.0.regions.1: "UK" isn\'t an ISO 3166-1 region code: use GB for the United Kingdom',
+      ]);
+      expect(messages(plan(0, 'notSoldIn', 'GLOBAL', 'CA-XX'))).toEqual([
+        'data/providers/netflix.yaml plans.0.notSoldIn.0.regions.0: GLOBAL means everywhere: a plan sold nowhere is retired, not listed in notSoldIn',
+        "data/providers/netflix.yaml plans.0.notSoldIn.0.regions.1: \"CA-XX\" isn't a province or state the catalog knows: Canada's and the US's (CA-QC, US-NY)",
+      ]);
+    });
+
+    it('refuses a region in both lists, but not a country with one of its provinces left out', () => {
+      const both =
+        "plans.2.soldIn.0.regions.0: notSoldIn says it isn't sold in CA: a region can't be in both";
+      expect(messages(also(plan(2, 'soldIn', 'CA'), 2, 'notSoldIn', 'CA'))).toEqual([
+        `data/providers/netflix.yaml ${both}`,
+      ]);
+      expect(messages(also(plan(2, 'soldIn', 'CA-QC'), 2, 'notSoldIn', 'CA'))).toEqual([
+        `data/providers/netflix.yaml ${both}`,
+      ]);
+      expect(messages(also(plan(2, 'soldIn', 'CA'), 2, 'notSoldIn', 'CA-QC'))).toEqual([]);
+    });
+
+    it('takes soldIn only where the provider is known to sell', () => {
+      const listed = edited(plan(2, 'soldIn', 'MX'), netflix, ['availableIn'], ['CA', 'US']);
+      expect(messages(listed)).toEqual([
+        "data/providers/netflix.yaml plans.2.soldIn.0.regions.0: availableIn has no MX, but this plan's soldIn lists it: add MX to availableIn",
+      ]);
+      expect(messages(plan(2, 'soldIn', 'IE'))).toEqual([
+        "data/providers/netflix.yaml plans.2.soldIn.0.regions.0: No plan of netflix is priced in IE, so the catalog doesn't know it sells there: price a plan there first, or set availableIn from its official list",
+      ]);
+    });
+
+    it('takes notSoldIn only where the provider sells, a group through a member', () => {
+      const listed = edited(plan(2, 'notSoldIn', 'MX'), netflix, ['availableIn'], ['CA', 'US']);
+      expect(messages(listed)).toEqual([
+        "data/providers/netflix.yaml plans.2.notSoldIn.0.regions.0: netflix isn't sold in MX at all (availableIn): leave it out of notSoldIn",
+      ]);
+      const europe = edited(
+        plan(2, 'notSoldIn', 'EU'),
+        netflix,
+        ['availableIn'],
+        ['CA', 'US', 'DE'],
+      );
+      expect(messages(europe)).toEqual([]);
+    });
+
+    it('refuses soldIn where the plan has a price: its own region’s, its group’s or GLOBAL', () => {
+      expect(messages(plan(0, 'soldIn', 'CA'))).toEqual([
+        "data/providers/netflix.yaml plans.0.soldIn.0.regions.0: Its CA price says it's sold in CA: take CA out of soldIn",
+      ]);
+      const european = premiumIn(usPremium, price('EU', 'EUR', 22));
+      expect(messages(also(european, 2, 'soldIn', 'DE'))).toEqual([
+        "data/providers/netflix.yaml plans.2.soldIn.0.regions.0: Its EU price says it's sold in DE: take DE out of soldIn",
+      ]);
+      expect(messages(mullvadWith('soldIn', 'SE'))).toEqual([
+        "data/providers/mullvad.yaml plans.0.soldIn.0.regions.0: Its GLOBAL price says it's sold in SE: take SE out of soldIn",
+      ]);
+      // A province's price says nothing of its whole country.
+      const quebec = premiumIn(usPremium, price('CA-QC', 'CAD', 25));
+      expect(messages(also(quebec, 2, 'soldIn', 'CA'))).toEqual([]);
+    });
+
+    it('refuses a price where notSoldIn says it isn’t sold, a place inside it too', () => {
+      const refused = (region: string) =>
+        `notSoldIn says this plan isn't sold in ${region}: remove this price (or mark it retired), or take ${region} out of notSoldIn`;
+      expect(messages(plan(0, 'notSoldIn', 'US'))).toEqual([
+        `data/providers/netflix.yaml plans.0.prices.1.region: ${refused('US')}`,
+      ]);
+      const quebec = premiumIn(usPremium, price('CA-QC', 'CAD', 25));
+      expect(messages(also(quebec, 2, 'notSoldIn', 'CA'))).toEqual([
+        `data/providers/netflix.yaml plans.2.prices.1.region: ${refused('CA')}`,
+      ]);
+      const germany = premiumIn(usPremium, price('DE', 'EUR', 22));
+      expect(messages(also(germany, 2, 'notSoldIn', 'EU'))).toEqual([
+        `data/providers/netflix.yaml plans.2.prices.1.region: ${refused('EU')}`,
+      ]);
+    });
+
+    it('lets a wider price stand, and a retired one', () => {
+      expect(messages(mullvadWith('notSoldIn', 'US'))).toEqual([]);
+      const european = premiumIn(usPremium, price('EU', 'EUR', 22));
+      expect(messages(also(european, 2, 'notSoldIn', 'DE'))).toEqual([]);
+      expect(messages(plan(0, 'notSoldIn', 'CA-QC'))).toEqual([]);
+      const retired = ['plans', 0, 'prices', 1, 'retired'];
+      expect(messages(edited(plan(0, 'notSoldIn', 'US'), netflix, retired, '2026-10-01'))).toEqual(
+        [],
+      );
+    });
+
+    it('needs a plan sold in each region availableIn lists', () => {
+      const twoPlans = also(plan(0, 'notSoldIn', 'MX'), 1, 'notSoldIn', 'MX');
+      const everyPlan = also(twoPlans, 2, 'notSoldIn', 'MX');
+      const regions = ['CA', 'US', 'MX'];
+      expect(messages(edited(everyPlan, netflix, ['availableIn'], regions))).toEqual([
+        "data/providers/netflix.yaml availableIn.2: Every plan's notSoldIn names MX: take it out of availableIn",
+      ]);
+      expect(messages(edited(twoPlans, netflix, ['availableIn'], regions))).toEqual([]);
+    });
+
+    it('needs the provider’s own page, read no later than today', () => {
+      const path = ['plans', 2, 'notSoldIn', 0];
+      const own = plan(2, 'notSoldIn', 'GB');
+      expect(
+        messages(edited(own, netflix, [...path, 'url'], 'https://elsewhere.org/where')),
+      ).toEqual([
+        "data/providers/netflix.yaml plans.2.notSoldIn.0.url: Must be a page of Netflix's own sites, its policies' or its owner's (example.com)",
+      ]);
+      expect(messages(edited(own, netflix, [...path, 'lastVerified'], '2026-10-24'))).toEqual([
+        'data/providers/netflix.yaml plans.2.notSoldIn.0.lastVerified: 2026-10-24 is after today (2026-10-23)',
+      ]);
+      expect(messages(edited(own, netflix, [...path, 'lastVerified'], '2025-10-01'))).toEqual([
+        'warning: data/providers/netflix.yaml plans.2.notSoldIn.0.lastVerified: Read on 2025-10-01, over a year ago: read the page again',
+      ]);
+    });
+  });
+
   describe('prices', () => {
     const craveMonthly = () =>
       (dataOf(catalog(), crave) as { plans: { prices: object[] }[] }).plans[0].prices[0];

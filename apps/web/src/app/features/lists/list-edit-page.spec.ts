@@ -130,6 +130,33 @@ const withNetworks: CatalogData = {
   ),
 };
 
+/** The test catalog, with Netflix's Standard with ads not sold in Alberta, as its own page would say (M11.20). */
+const adsNotInAlberta: CatalogData = {
+  ...searchCatalogData,
+  providers: searchCatalogData.providers.map((provider) =>
+    provider.id === 'netflix'
+      ? {
+          ...provider,
+          plans: provider.plans.map((plan) =>
+            plan.id === 'netflix.standard-ads'
+              ? {
+                  ...plan,
+                  notSoldIn: [
+                    {
+                      regions: ['CA-AB'],
+                      url: 'https://help.netflix.com/en/node/24926',
+                      quotes: ['Not available in Alberta'],
+                      lastVerified: '2026-10-20',
+                    },
+                  ],
+                }
+              : plan,
+          ),
+        }
+      : provider,
+  ),
+};
+
 function fields(planId: string, extra: Partial<NewRecord<'items'>> = {}): NewRecord<'items'> {
   return {
     listId: '',
@@ -755,6 +782,24 @@ describe('ListEditPage', () => {
       expect(await (await control(loader, 'Next renewal', MatInputHarness)).getValue()).toBe(
         '2026-11-25',
       );
+    });
+
+    it('leaves out a plan its notSoldIn says isn’t sold where it’s bought (M11.20)', async () => {
+      catalogData = adsNotInAlberta;
+      const loader = await openDialog(`${editor()}?add=netflix.standard&interval=year`);
+      // Standard with ads isn't sold in the user's Alberta, and Premium is sold only in the US.
+      expect(await choices(await control(loader, 'Plan', MatSelectHarness))).toEqual([
+        'Standard — $189.99 / year',
+      ]);
+    });
+
+    it('keeps a plan its notSoldIn leaves out when it’s the one chosen (M11.20)', async () => {
+      catalogData = adsNotInAlberta;
+      const loader = await openDialog(`${editor()}?add=netflix.standard-ads&interval=month`);
+      expect(await choices(await control(loader, 'Plan', MatSelectHarness))).toEqual([
+        'Standard with ads — $7.99 / mo',
+        'Standard — $18.99 / mo',
+      ]);
     });
 
     it('asks for a billing day when the date is a shorter month’s last day', async () => {

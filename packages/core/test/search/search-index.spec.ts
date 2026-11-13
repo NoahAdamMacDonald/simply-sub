@@ -12,7 +12,7 @@ import {
   withPlanFeatures,
   type SnapshotProvider,
 } from '../../src';
-import { catalog, today } from '../catalog/catalog-files';
+import { catalog, edited, today } from '../catalog/catalog-files';
 
 // What GET /providers reads in D1 since shape 4 (M11.8): the slim search JSON must give the same results as the full
 // one, and the FTS5 index must find every provider searchProviders matches, whatever the text.
@@ -95,6 +95,36 @@ describe('the search JSON (M11.8)', () => {
     expect(Object.keys(mullvad ?? {})).not.toContain('notes');
     expect(Object.keys(mullvad ?? {})).not.toContain('owner');
     expect(JSON.stringify(slim).length).toBeLessThan(JSON.stringify(data.providers).length);
+  });
+
+  it('keeps a plan’s soldIn and notSoldIn, which decide where it’s sold (M11.20)', () => {
+    const page = {
+      url: 'https://example.com/where',
+      quotes: ['Not available'],
+      lastVerified: '2026-10-20',
+    };
+    const soldIn = [{ regions: ['CA'], ...page }];
+    const notSoldIn = [{ regions: ['CA'], ...page }];
+    const files = edited(
+      edited(catalog(), 'data/providers/netflix.yaml', ['plans', 2, 'soldIn'], soldIn),
+      'data/providers/proton.yaml',
+      ['plans', 1, 'notSoldIn'],
+      notSoldIn,
+    );
+    const full = buildCatalogData(readCatalogSource(files), 'https://sub.simplely.ca/icons/');
+    const searched = full.providers.map(searchProviderOf);
+    const planOf = (provider: string, index: number) =>
+      searched.find((candidate) => candidate.id === provider)?.plans[index];
+    expect(planOf('netflix', 2)?.soldIn).toEqual(soldIn);
+    expect(planOf('proton', 1)?.notSoldIn).toEqual(notSoldIn);
+    const queries: Record<string, string>[] = [
+      { region: 'CA' },
+      { region: 'CA', sort: 'price_asc' },
+      { q: 'vpn', region: 'CA' },
+    ];
+    for (const params of queries) {
+      expect(body(searched, params)).toEqual(body(full.providers, params));
+    }
   });
 
   it.each([

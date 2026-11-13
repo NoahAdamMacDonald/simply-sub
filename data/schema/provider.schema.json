@@ -719,6 +719,92 @@
             "patternErrorMessage": "Use a real date written YYYY-MM-DD",
             "description": "The day it ends for its current subscribers too, when the provider says so: needs retired. Items on it count until then"
           },
+          "soldIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$",
+                    "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL"
+                  },
+                  "description": "The regions the page says it of: countries, a group (EU), provinces or states (CA-QC); never GLOBAL"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "The provider's own page that says so (a help article, its plan page), on its own sites, its policies' or its owner's"
+                },
+                "quotes": {
+                  "minItems": 1,
+                  "maxItems": 3,
+                  "type": "array",
+                  "items": { "type": "string", "minLength": 1 },
+                  "description": "Its words there, word for word"
+                },
+                "lastVerified": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                  "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                  "description": "When the page was read"
+                }
+              },
+              "required": ["regions", "url", "quotes", "lastVerified"],
+              "additionalProperties": false
+            },
+            "description": "Regions its provider's own page says this plan is sold in, though it has no price there yet (BLUEPRINT §4.7): where the provider's other plans are priced, it would read Not offered. Not a full list: elsewhere it's sold where it has a price"
+          },
+          "notSoldIn": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "regions": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(?:[A-Z]{2}(?:-[A-Z0-9]{1,3})?|GLOBAL)$",
+                    "patternErrorMessage": "Use a two-letter ISO 3166-1 region in capitals (CA, US), a province or state (CA-QC), or GLOBAL"
+                  },
+                  "description": "The regions the page says it of: countries, a group (EU), provinces or states (CA-QC); never GLOBAL"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://",
+                  "patternErrorMessage": "Use a full https:// URL",
+                  "description": "The provider's own page that says so (a help article, its plan page), on its own sites, its policies' or its owner's"
+                },
+                "quotes": {
+                  "minItems": 1,
+                  "maxItems": 3,
+                  "type": "array",
+                  "items": { "type": "string", "minLength": 1 },
+                  "description": "Its words there, word for word"
+                },
+                "lastVerified": {
+                  "type": "string",
+                  "format": "date",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$",
+                  "patternErrorMessage": "Use a real date written YYYY-MM-DD",
+                  "description": "When the page was read"
+                }
+              },
+              "required": ["regions", "url", "quotes", "lastVerified"],
+              "additionalProperties": false
+            },
+            "description": "Regions its provider's own page says this plan isn't sold in, though the provider sells there (BLUEPRINT §4.7): the app hides it there. A price for a wider place still applies elsewhere (a Canadian price, except Quebec)"
+          },
           "prices": {
             "minItems": 1,
             "type": "array",

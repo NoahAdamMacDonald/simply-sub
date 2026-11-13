@@ -64,7 +64,7 @@ export function replacements(
           if (plan.id === resolved.planId || isRetired(plan, provider, context.today)) return [];
           // Sold in the user's province, in their own country (M11.17).
           const subdivision = subdivisionIn(resolved.region, context.place);
-          if (availability(plan.prices, provider, resolved.region, subdivision) === 'not-offered') {
+          if (availability(plan, provider, resolved.region, subdivision) === 'not-offered') {
             return [];
           }
           const categories = planCategories(plan, provider);
