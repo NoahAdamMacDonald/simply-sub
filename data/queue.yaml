@@ -153,6 +153,20 @@
   source: own
   status: done
   date: 2026-11-13
+- id: britbox
+  name: BritBox
+  website: https://www.britbox.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: emby
+  name: Emby
+  website: https://emby.media
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
