@@ -300,6 +300,13 @@
   source: own
   status: done
   date: 2026-11-13
+- id: mcafee
+  name: McAfee
+  website: https://www.mcafee.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -741,7 +748,8 @@
   source: wikidata
   wikidata: Q1783235
   sitelinks: 27
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: ubuntu-one
   name: Ubuntu One
   website: https://web.archive.org/web/20131231040314/https://one.ubuntu.com
