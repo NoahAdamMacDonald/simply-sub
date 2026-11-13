@@ -1,5 +1,5 @@
 import * as z from 'zod';
-import { availability, type Availability } from '../catalog/availability';
+import { availability, type Availability, type SoldItem } from '../catalog/availability';
 import { bundleSchema, type Bundle } from '../catalog/bundle';
 import {
   bundleFeatures,
@@ -138,6 +138,8 @@ export const planBodySchema = z.strictObject({
     thirdParty: planShape.thirdParty,
     perks: planShape.perks,
     notes: planShape.notes,
+    soldIn: planShape.soldIn,
+    notSoldIn: planShape.notSoldIn,
     prices: planShape.prices,
     pricing: pricingSchema.optional(),
     addOns: z
@@ -177,7 +179,7 @@ export function planBody(
   const addOns = (plan.addOnIds ?? [])
     .flatMap((id) => provider.addOns?.find((addOn) => addOn.id === id) ?? [])
     .map((addOn) => priced(addOn, provider, context));
-  const pricing = picking(plan.prices, provider, context).picked?.map(apiPickedPrice);
+  const pricing = picking(plan, provider, context).picked?.map(apiPickedPrice);
   const data = rebuilt(plan, (key, value) => {
     switch (key) {
       case 'name':
@@ -261,7 +263,7 @@ export function bundlesBody(
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0))
     .flatMap((bundle): BundleResult[] => {
       const seller = providerOf(bundle.soldBy);
-      const sold = picking(bundle.prices, seller, context);
+      const sold = picking(bundle, seller, context);
       if (sold.availability === 'not-offered') {
         return [];
       }
@@ -271,7 +273,7 @@ export function bundlesBody(
         if (!plan) {
           throw new Error(`Plan ${planId} is missing from provider ${provider.id}`);
         }
-        return { provider, plan, ...picking(plan.prices, provider, context) };
+        return { provider, plan, ...picking(plan, provider, context) };
       });
       const savings = sold.picked
         ? bundleSavings(
@@ -364,7 +366,7 @@ function priced<T extends { prices: Price[] }>(
   provider: SnapshotProvider,
   context: LookupContext,
 ): Priced<T> {
-  const pricing = picking(item.prices, provider, context).picked?.map(apiPickedPrice);
+  const pricing = picking(item, provider, context).picked?.map(apiPickedPrice);
   return pricing
     ? (rebuilt(item, (key, value) =>
         key === 'prices'
@@ -382,7 +384,7 @@ function priced<T extends { prices: Price[] }>(
  * Nothing without a region, and no prices when it isn't offered there.
  */
 function picking(
-  prices: readonly Price[],
+  item: SoldItem,
   provider: SnapshotProvider,
   { query, fx }: LookupContext,
 ): { availability?: Availability; picked?: PickedPrice[] } {
@@ -390,11 +392,11 @@ function picking(
   if (region === undefined || currency === undefined) {
     return {};
   }
-  const available = availability(prices, provider, region);
+  const available = availability(item, provider, region);
   return {
     availability: available,
     ...(available !== 'not-offered' && {
-      picked: pickPrice(prices, {
+      picked: pickPrice(item.prices, {
         region,
         currency,
         billingCurrency: provider.billingCurrency,

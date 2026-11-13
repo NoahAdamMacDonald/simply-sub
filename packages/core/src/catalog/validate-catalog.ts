@@ -1,6 +1,7 @@
 import type * as z from 'zod';
 import { addDays, type IsoDate } from '../dates/iso-date';
 import { iconProblem, readPngImage } from '../icons/icon-image';
+import { names, providerAvailability, soldRegions } from './availability';
 import { bundleSchema, type Bundle } from './bundle';
 import { categoriesFileSchema, type Categories } from './category';
 import { choices, didYouMean, idOf, listedMoreThanOnce, repeatedIndexes } from './checks';
@@ -772,6 +773,7 @@ function checkProvider(provider: Provider, context: CheckContext, report: Report
   if (provider.availableIn) {
     checkAvailableIn(provider, provider.availableIn, report);
   }
+  checkSoldIn(provider, own, context, report);
   provider.resellers?.forEach((listing, index) =>
     checkResellerListing(provider, listing, ['resellers', index], context, prices, report),
   );
@@ -1899,6 +1901,118 @@ function checkAvailableIn(
         );
       }
     });
+  }
+}
+
+/**
+ * A plan's soldIn and notSoldIn (M11.20, BLUEPRINT §4.7): single facts from the provider's own page, read no later than
+ * today, each where the catalog's prices alone would say otherwise. Their regions are real, never GLOBAL, and never in
+ * both lists. soldIn names only where the provider is known to sell and the plan has no price still sold; a plan has
+ * no price still sold where its notSoldIn says it isn't, which names only where the provider sells; and every region
+ * availableIn lists has a plan sold in it.
+ */
+function checkSoldIn(
+  provider: Provider,
+  own: readonly string[],
+  { today }: CheckContext,
+  report: Report,
+): void {
+  const sites = ownPages(provider, own);
+  const stillSold = (price: Price) => price.retired === undefined || price.retired > today;
+  provider.plans.forEach((plan, planIndex) => {
+    const notSold = soldRegions(plan.notSoldIn);
+    for (const list of ['soldIn', 'notSoldIn'] as const) {
+      plan[list]?.forEach((entry, entryIndex) => {
+        const path = ['plans', planIndex, list, entryIndex];
+        entry.regions.forEach((region, index) => {
+          const at = [...path, 'regions', index];
+          if (region === globalRegion) {
+            report(
+              at,
+              list === 'soldIn'
+                ? 'GLOBAL means everywhere: list regions here, or leave soldIn out'
+                : 'GLOBAL means everywhere: a plan sold nowhere is retired, not listed in notSoldIn',
+            );
+          } else if (!isSellingRegion(region)) {
+            report(at, regionProblem(region, true));
+          } else if (list === 'soldIn') {
+            checkSoldRegion(provider, plan.prices.filter(stillSold), notSold, region, at, report);
+          } else if (
+            provider.availableIn &&
+            [region, ...membersOf(region)].every(
+              (place) => providerAvailability(provider, place) === 'not-offered',
+            )
+          ) {
+            report(
+              at,
+              `${provider.id} isn't sold in ${region} at all (availableIn): leave it out of notSoldIn`,
+            );
+          }
+        });
+        if (!isOnDomain(entry.url, sites)) {
+          report(
+            [...path, 'url'],
+            `Must be a page of ${provider.name}'s own sites, its policies' or its owner's (${sites.join(', ')})`,
+          );
+        }
+        checkReadOn(entry.lastVerified, [...path, 'lastVerified'], today, report);
+      });
+    }
+    // A price for a wider place still applies elsewhere: GLOBAL except the US, Canada except Quebec.
+    plan.prices.forEach((price, index) => {
+      const named = stillSold(price) && notSold.find((region) => names([region], price.region));
+      if (named) {
+        report(
+          ['plans', planIndex, 'prices', index, 'region'],
+          `notSoldIn says this plan isn't sold in ${named}: remove this price (or mark it retired), or take ${named} out of notSoldIn`,
+        );
+      }
+    });
+  });
+  const sold = provider.plans.filter((plan) => !isRetired(plan, provider, today));
+  provider.availableIn?.forEach((region, index) => {
+    if (sold.length > 0 && sold.every((plan) => names(soldRegions(plan.notSoldIn), region))) {
+      report(
+        ['availableIn', index],
+        `Every plan's notSoldIn names ${region}: take it out of availableIn`,
+      );
+    }
+  });
+}
+
+/**
+ * One region of a plan's soldIn: not one its notSoldIn names, where the provider is known to sell (so soldIn never adds
+ * a region to the provider's), and not one the plan has a price for (its own, its group's or country's, or GLOBAL; a
+ * province's price says nothing of its whole country).
+ */
+function checkSoldRegion(
+  provider: Provider,
+  prices: readonly Price[],
+  notSold: readonly string[],
+  region: string,
+  path: CatalogIssuePath,
+  report: Report,
+): void {
+  const excluded = notSold.find((other) => names([other], region));
+  if (excluded) {
+    report(path, `notSoldIn says it isn't sold in ${excluded}: a region can't be in both`);
+  }
+  if (providerAvailability(provider, region) !== 'offered') {
+    report(
+      path,
+      provider.availableIn
+        ? `availableIn has no ${region}, but this plan's soldIn lists it: add ${region} to availableIn`
+        : `No plan of ${provider.id} is priced in ${region}, so the catalog doesn't know it sells there: price a plan there first, or set availableIn from its official list`,
+    );
+  }
+  const price = prices.find(
+    (candidate) => candidate.region === globalRegion || names([candidate.region], region),
+  );
+  if (price) {
+    report(
+      path,
+      `Its ${price.region} price says it's sold in ${region}: take ${region} out of soldIn`,
+    );
   }
 }
 

@@ -1063,6 +1063,7 @@ owner (M11.17, BLUEPRINT §4.12), its mobile plans with national prices join the
 | M11.17 | Phone and internet plans (added 2026-11-10, the owner's choice; BLUEPRINT §4.12): the design (scope, the regular price for carriers, automatic-payment discounts, fees, provinces, features, terms, ways to pay) and the Phone & internet feature group; then province prices: ISO 3166-2 regions (`CA-QC`) on prices and `availableIn`, picked from the province Settings has for sales tax, in coverage, Search's Sold in and the API | A national mobile plan validates with its features; then a Quebec price shows to a user in Quebec and Ontario's to one in Ontario, and a plan sold only in Quebec is Not offered in Ontario |
 | M11.18 | A public company's shares (added 2026-11-10, the owner's item; BLUEPRINT §4.10): `owner.stock` with its listings (exchange and ticker symbol), the listed company when it's the owner's parent, and a majority holder (of its shares or votes), quoted like the owner; the card's Facts and Overview; the tickers that were words in owners' names moved into it | Netflix's card says "Stock: NASDAQ: NFLX"; validation refuses a symbol or holder no quote names |
 | M11.19 | Finance terms for the research (added 2026-11-10, the owner's items; BLUEPRINT §4.11): card purchase limits and a yearly limit, the institutions that hold the money when the provider doesn't (`protection.through`), the account's other fees from its fee page, and features for LIF, DPSP, partner-network ATMs and the credit cards an institution issues | A fintech's card says whose cover it is and lists its other fees, each checked against its page's words |
+| M11.20 | A plan's own regions (added 2026-11-13, the owner's brief; BLUEPRINT §4.7): a plan's `soldIn` and `notSoldIn`, each entry regions quoted from the provider's own page with its date; `availability` reads `notSoldIn` before prices and `soldIn` where only a sibling's price would say not offered; validation, coverage, baselines and the search JSON; F1 TV's Pro and Premium, MLB.TV, and MLB+ (outside the US) restored | F1 TV Pro isn't offered in the US and Access is; MLB+ (outside the US) is priced in six countries and MLB.TV is still offered there |
 
 #### M11 specs
 
@@ -2365,6 +2366,39 @@ in every D1 `json` column search parses.
     according to its fee page" linked to its words.
 - **Acceptance**
   - [x] A fintech's card says whose cover it is and lists its other fees, each checked against its page's words
+
+**M11.20 — A plan's own regions** (BLUEPRINT §4.7; added 2026-11-13, the owner's brief)
+- **Why:** `availability` infers from prices, and two of its inferences are wrong where prices can't be read. A
+  region `availableIn` lists with no price reads offered for every plan: F1 TV Pro and Premium in the US, the UK and
+  five more, where F1's Location Availability says "Not available". A region where a sibling plan is priced reads not
+  offered for a plan with no price there: MLB.TV in Canada once MLB+ (outside the US) is priced there, though MLB
+  sells it in season at a price no off-season page states, so that plan was held back. The owner's brief: "Do what
+  you think would be best and most easy to keep updatable and reliable."
+- **As built** (2026-11-13):
+  - **Core:** `soldRegionsSchema` (`regions`, `url`, `quotes` 1 to 3, `lastVerified`) and a plan's `soldIn` and
+    `notSoldIn`. `availability(item, provider, region)` takes the item: `notSoldIn` is read before its prices, so a
+    wider price leaves a place out (a Canadian price, except Quebec), and `soldIn` after them, where only a sibling's
+    price would say not offered. Neither is a full list, and a sibling's `soldIn` never makes a region's plans known.
+    `coverageGaps` skips a region `notSoldIn` names; `soldIn` closes no gap, so its note says why the price is
+    missing. Validation's rules are BLUEPRINT §6.2's. `citedPages` cites their pages as pricing and `citedFacts`
+    gives their quotes, so `data:baselines` saves them; the search JSON and `GET /plans/:id` keep both fields.
+  - **Data:** F1 TV Pro and Premium aren't sold in the US, the UK, Ireland, Australia, Germany, Spain or Italy, nor
+    Premium in France (Location Availability, each country picked); MLB.TV is sold in Canada, the UK, Australia,
+    Germany, France and the Netherlands (MLB.TV on ESPN); MLB+ (outside the US) is priced in those six, in USD.
+  - **Unchanged, as before:** a region `availableIn` lists that nobody has priced reads offered at a fallback price for
+    a plan nothing is said about (F1 TV Pro in Brazil).
+  - **Follow-up, a task of its own:** a target in the bot for these quotes, so one that leaves its page is reported,
+    with the country to pick for words only a drop-down shows. The yearly `lastVerified` warning and the
+    price-research skill's re-reading cover them meanwhile.
+- **Acceptance**
+  - [x] F1 TV Pro and Premium aren't offered in the US, the UK, Ireland, Australia, Germany, Spain or Italy, nor
+        Premium in France; Access is; all three are in Canada, New Zealand and the Netherlands
+  - [x] MLB+ (outside the US) is priced in CA, GB, AU, DE, FR and NL, and MLB.TV is still offered there
+  - [x] A file without the fields reads as before (core's availability and coverage specs unchanged but for the
+        call's first argument)
+  - [x] `npm run data:validate` refuses a price in a region `notSoldIn` names, a `soldIn` region outside
+        `availableIn`, and a region in both lists
+  - [x] `npm run data:coverage` passes with F1's first note removed
 
 **The M11 audit** (2026-11-09): every acceptance box of M11.1–M11.14 and M11.16 holds; M11.15 is under way. What's
 left, each waiting for the owner:

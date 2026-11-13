@@ -386,8 +386,7 @@ export class ItemDialog {
           .filter(
             (plan) =>
               plan.id === this.model().planId ||
-              availability(plan.prices, provider, context.region, context.subdivision) !==
-                'not-offered',
+              availability(plan, provider, context.region, context.subdivision) !== 'not-offered',
           )
           .map((plan) => ({
             id: plan.id,

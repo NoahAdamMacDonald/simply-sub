@@ -441,6 +441,7 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   // MLB states no stream count on its own pages (ESPN's "3 devices" is ESPN's) (2026-11-13).
   ['mlb-tv.all-teams', ['streaming.concurrent-streams']],
   ['mlb-tv.mlb-plus', ['streaming.concurrent-streams']],
+  ['mlb-tv.mlb-plus-international', ['streaming.concurrent-streams']],
 ]);
 
 /**

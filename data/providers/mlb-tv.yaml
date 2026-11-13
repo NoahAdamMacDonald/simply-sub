@@ -42,20 +42,16 @@
 # Free use: none: MLB.TV and MLB+ are paid; MLB.com's free highlights are its news site's, and the free spring-training
 # games of 2026 were a promotion for account holders.
 
-# Coverage: mlb-tv.all-teams in CA, GB, AU, DE, FR, NL: MLB sells MLB.TV to buyers outside the US in season ("For
-# subscribers outside the US market, MLB.TV is available through MLB directly as it has traditionally been offered.",
-# its MLB.TV on ESPN page), but in the off-season (read 2026-11-13) its pages sell them only the Offseason pass and MLB+,
-# and no page states the season's price outside the US.
-
-# Coverage: mlb-tv.* in CA: MLB sells both MLB.TV (in season) and MLB+ to Canadians, but MLB.TV's price outside the US
-# isn't on any off-season page, and pricing MLB+ alone would make MLB.TV read "Not offered" here (below).
+# Coverage: mlb-tv.all-teams in CA, GB, AU, DE, FR, NL: MLB sells MLB.TV to buyers outside the US in season (its
+# soldIn, quoted from the MLB.TV on ESPN page), but in the off-season (read 2026-11-13) its pages sell them only the
+# Offseason pass and MLB+, and no page states the season's price outside the US. Read /live-stream-games/subscribe
+# through each country in season, add the prices and take the country out of soldIn.
 
 # Coverage: mlb-tv.mlb-plus in CA, GB, AU, DE, FR, NL: outside the US, MLB+ comes without MLB Network ("*MLB Network
-# streams are available to subscribers in the U.S. ONLY (not available internationally).", MLB+ FAQs), and its cards
-# read through Canadian, UK, Australian, German, French and Dutch exits on 2026-11-13 price it in USD: 59.99 a year and
-# 5.99 a month. It isn't a plan of its own here yet: once MLB+ has a price in a country, core reads MLB.TV, which MLB
-# sells there in season at a price no off-season page states, as "Not offered" there. Add both in season (the review
-# of 2026-11-13; plan-level availability is for the owner).
+# streams are available to subscribers in the U.S. ONLY (not available internationally).", MLB+ FAQs), so it's
+# mlb-tv.mlb-plus-international there.
+
+# Coverage: mlb-tv.mlb-plus-international in US: the US buys mlb-tv.mlb-plus, with MLB Network.
 
 id: mlb-tv
 name: MLB.TV
@@ -198,6 +194,17 @@ plans:
         lastVerified: 2026-11-13
     perks: [out-of-market-games, live-audio, big-inning, minor-league]
     notes: 'Every out-of-market regular-season game live, with MLB Network (US only), MLB+ and archives. Blackouts: "Home television territory blackout restrictions apply regardless of whether a Club is home or away", and "select regular season, special event, and Postseason games are unavailable on MLB.TV domestically and internationally". The yearly plan renews about March 1; the monthly one bills only through October, restarting about March 1. Not sold in the off-season: prices are the 2026 season''s.'
+    # Sold outside the US too, by MLB itself, in season: its MLB.TV on ESPN page (read 2026-11-13 through a US exit).
+    # Named here only for the six countries whose own pages were read that day and price MLB+ (outside the US); no
+    # off-season page states MLB.TV's price there (the Coverage note above), so the app shows the US's, in USD, which
+    # MLB charges everywhere ("transacted in U.S. Dollars").
+    soldIn:
+      - regions: [CA, GB, AU, DE, FR, NL]
+        url: https://www.mlb.com/live-stream-games/partners/espn
+        quotes:
+          - 'For subscribers outside the US market, MLB.TV is available through MLB directly as it has traditionally been offered.'
+          - 'International subscribers will continue to buy and stream through MLB.'
+        lastVerified: 2026-11-13
     prices:
       - region: US
         currency: USD
@@ -250,6 +257,127 @@ plans:
         lastVerified: 2026-11-13
         sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
       - region: US
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+
+  # MLB+ outside the US (read 2026-11-13 through Canadian, UK, Australian, German, French and Dutch exits): the same
+  # cards and prices in USD, but "MLB Network streams are available to subscribers in the U.S. ONLY (not available
+  # internationally)" (MLB+ FAQs), so no live TV channel.
+  - id: mlb-tv.mlb-plus-international
+    name: MLB+ (outside the US)
+    link: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.live: [sports]
+      streaming.content: [sports, documentaries]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its help centre says its media player streams in SD and HD, without naming a resolution, so HD is taken as 720p.'
+        page:
+          name: Network Troubleshooting
+          url: https://support.mlb.com/s/article/Network-Troubleshooting?language=en_US
+        lastVerified: 2026-11-13
+    perks: [live-audio, big-inning, minor-league]
+    notes: Blackout-free radio of every game, live Minor League games, MLB Big Inning and MLB's original shows. MLB Network isn't available outside the US. Charged in US dollars. 7 days free for new subscribers.
+    prices:
+      - region: CA
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: CA
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: GB
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: GB
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: AU
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: AU
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: DE
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: DE
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: FR
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: FR
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: NL
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: NL
         currency: USD
         amount: 5.99
         interval: month

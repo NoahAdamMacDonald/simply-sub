@@ -485,7 +485,7 @@ counts them.
 | Currency charged per region | `billingCurrency` | yes |
 | Every currency it accepts, and other ways to pay (cash, crypto, PayPal, gift cards, app stores) | `paymentMethods` and `currencies` (beyond its prices') | yes (M11.5) |
 | How a month is counted: every 30 days, the same date each month (a shorter month's last day, then back), the 1st, or the end of the month | `renewalAnchor`; "every 30 days" stays `day` × 30 | yes (M11.5) |
-| Where it's sold | `availableIn` | yes |
+| Where it's sold | `availableIn`; a plan's `soldIn` and `notSoldIn` (M11.20) | yes |
 | Categories it fits | `category` (main) and each plan's `categories` | yes (§5) |
 | Open source, with repository link | `software.open-source` and `sourceRepo` | yes (M11.4, M11.5) |
 | Sign-in security | `account.sign-in` | no |
@@ -499,6 +499,8 @@ browser wasn't shown Canadian prices, the browser's own user agent was). To catc
 1. **A coverage report** (`npm run data:coverage`, new): provider × plan × region, warning when a plan has prices in
    some of the provider's regions and not others, or a provider sold in a region (`availableIn`) has paid plans with
    no price there. Claude would have shown "Pro, Max 5x, Max 20x: no CA". Run it on the existing catalog first.
+   A plan the provider's own page says isn't sold in a region takes `notSoldIn` there, quoted, and has no gap
+   (M11.20).
 2. **A region checklist** before writing "none found" for a region. The header comment records each step's result:
    1. locale URLs and `hreflang` links (`/en-ca/`, `/ca/`, `?country=CA`), as M10.12 does;
    2. the page's country, language and currency pickers;

@@ -150,11 +150,14 @@ export function citedPages(
     for (const item of [...provider.plans, ...(provider.addOns ?? [])]) {
       for (const price of item.prices) cite(price.sourceUrl, 'pricing', id);
     }
-    // A finance account's posted rates, read like prices, and the page on what protects the money (M11.14).
+    // A finance account's posted rates, read like prices, and the page on what protects the money (M11.14); the pages
+    // that say where a plan is or isn't sold (M11.20).
     for (const plan of provider.plans) {
       cite(plan.account?.rates?.sourceUrl, 'pricing', id);
       cite(plan.account?.protection.url, 'policies', id);
       cite(plan.account?.fees?.url, 'pricing', id);
+      for (const entry of [...(plan.soldIn ?? []), ...(plan.notSoldIn ?? [])])
+        cite(entry.url, 'pricing', id);
     }
     for (const listing of provider.resellers ?? []) {
       cite(listing.approvedBy.url, 'pricing', id);
@@ -222,6 +225,9 @@ export function citedFacts(
       const { protection, fees } = plan.account ?? {};
       if (protection?.url === url) facts.quotes.push(...protection.quotes);
       if (fees?.url === url) facts.quotes.push(...fees.quotes);
+      // Its words on where it is or isn't sold (M11.20).
+      for (const entry of [...(plan.soldIn ?? []), ...(plan.notSoldIn ?? [])])
+        if (entry.url === url) facts.quotes.push(...entry.quotes);
     }
     for (const addOn of provider.addOns ?? [])
       for (const item of addOn.prices) price(item, [addOn.name]);

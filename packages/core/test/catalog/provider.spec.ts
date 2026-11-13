@@ -98,6 +98,64 @@ describe('providerSchema', () => {
     });
   });
 
+  describe('a plan’s soldIn and notSoldIn (M11.20)', () => {
+    const plan = ['plans', 0];
+    const entry = (regions: string[], quotes = ['Not available']) => ({
+      regions,
+      url: 'https://help.netflix.com/en/node/24926',
+      quotes,
+      lastVerified: '2026-11-13',
+    });
+
+    it('accepts both lists on a plan, each entry with its regions, page, words and date', () => {
+      const both = withValue(
+        withValue(provider, [...plan, 'soldIn'], [entry(['CA', 'CA-QC'])]),
+        [...plan, 'notSoldIn'],
+        [entry(['US']), entry(['EU'], ['Not available', 'Coming soon'])],
+      );
+      expect(issues(providerSchema, both)).toEqual([]);
+    });
+
+    it.each([
+      [['soldIn'], [], 'Leave soldIn out instead of listing none'],
+      [['notSoldIn'], [], 'Leave notSoldIn out instead of listing none'],
+      [['notSoldIn', 0, 'regions'], [], 'List at least one region'],
+      [['notSoldIn', 0, 'quotes'], [], 'Quote where it says so'],
+      [['notSoldIn', 0, 'quotes'], ['a', 'b', 'c', 'd'], 'Quote at most three passages'],
+      [['soldIn', 0, 'url'], 'http://help.netflix.com', 'Use a full https:// URL'],
+    ])('rejects %j = %j', (path, value, message) => {
+      const listed = withValue(
+        withValue(provider, [...plan, 'soldIn'], [entry(['CA'])]),
+        [...plan, 'notSoldIn'],
+        [entry(['US'])],
+      );
+      expect(issues(providerSchema, withValue(listed, [...plan, ...path], value))).toEqual([
+        `plans.0.${path.join('.')}: ${message}`,
+      ]);
+    });
+
+    it('rejects an unknown key on an entry', () => {
+      const extra = withValue(
+        provider,
+        [...plan, 'notSoldIn'],
+        [{ ...entry(['US']), page: 'Help' }],
+      );
+      expect(issues(providerSchema, extra)).toEqual([
+        'plans.0.notSoldIn.0: Unrecognized key: "page"',
+      ]);
+    });
+
+    it('rejects a region twice in one entry, or in two entries of one list, once', () => {
+      expect(
+        issues(providerSchema, withValue(provider, [...plan, 'notSoldIn'], [entry(['US', 'US'])])),
+      ).toEqual(['plans.0.notSoldIn.0.regions.1: "US" is listed more than once']);
+      const twice = withValue(provider, [...plan, 'soldIn'], [entry(['US']), entry(['GB', 'US'])]);
+      expect(issues(providerSchema, twice)).toEqual([
+        'plans.0.soldIn.1.regions.1: "US" is listed more than once',
+      ]);
+    });
+  });
+
   describe('unknown keys', () => {
     it.each([
       ['on the provider', ['cancelURL'], ': Unrecognized key: "cancelURL"'],

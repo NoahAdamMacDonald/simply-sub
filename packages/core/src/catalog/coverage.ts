@@ -1,4 +1,4 @@
-import { providerAvailability } from './availability';
+import { names, providerAvailability, soldRegions } from './availability';
 import type { Plan, Provider } from './provider';
 import { countryOf, globalRegion, groupsOf, isSubdivision } from './regions';
 
@@ -67,7 +67,8 @@ function pricedIn(plan: Pick<Plan, 'prices'>, region: string): boolean {
 
 /**
  * Every region a provider is sold in where one of its paid plans still sold has no price: plans priced in some of its
- * regions and not others, and paid plans with no price where it sells. A free plan (every price 0) has none to give.
+ * regions and not others, and paid plans with no price where it sells. A free plan (every price 0) has none to give,
+ * and a region a plan's notSoldIn names isn't a gap (M11.20). Its soldIn closes none: the price is still missing.
  */
 export function coverageGaps(providers: readonly Provider[]): CoverageGap[] {
   return providers.flatMap((provider) => {
@@ -77,7 +78,9 @@ export function coverageGaps(providers: readonly Provider[]): CoverageGap[] {
       .filter((plan) => plan.retired === undefined && plan.prices.some((price) => price.amount > 0))
       .flatMap((plan) =>
         [...regions]
-          .filter(([region]) => !pricedIn(plan, region))
+          .filter(
+            ([region]) => !pricedIn(plan, region) && !names(soldRegions(plan.notSoldIn), region),
+          )
           .map(([region, why]) => ({ provider: provider.id, plan: plan.id, region, why })),
       );
     return [...plans, ...unknownAtHome(provider)];

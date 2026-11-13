@@ -212,10 +212,9 @@ describe('the file each region is served', () => {
       expect(items).toHaveLength(full.length);
       full.forEach((item, position) => {
         const trimmed = items[position];
-        expect(
-          availability(trimmed.prices, trimmed.provider, region),
-          `${item.id} in ${region}`,
-        ).toBe(availability(item.prices, item.provider, region));
+        expect(availability(trimmed, trimmed.provider, region), `${item.id} in ${region}`).toBe(
+          availability(item, item.provider, region),
+        );
         for (const currency of currencies) {
           for (const rates of [fx, undefined]) {
             const context = {
@@ -240,5 +239,50 @@ describe('the file each region is served', () => {
     const count = (items: typeof full) => items.reduce((sum, item) => sum + item.prices.length, 0);
     expect(count(served.get('CA') ?? [])).toBeLessThan(count(full));
     expect(count(served.get('EU') ?? [])).toBeLessThan(count(full));
+  });
+});
+
+describe('the region files, with a plan’s own soldIn and notSoldIn (M11.20)', () => {
+  const page = {
+    url: 'https://example.com/where',
+    quotes: ['Not available'],
+    lastVerified: '2026-11-13',
+  };
+  // Premium (US, AU, JP) is sold in Canada at a price not read, as MLB.TV is outside the US; Standard with ads isn't
+  // sold in France, though its EU price would cover it, as F1 TV Pro isn't in the US.
+  const snapshot = snapshotOf(
+    edited(
+      edited(
+        worldCatalog(),
+        'data/providers/netflix.yaml',
+        ['plans', 2, 'soldIn'],
+        [{ regions: ['CA'], ...page }],
+      ),
+      'data/providers/netflix.yaml',
+      ['plans', 0, 'notSoldIn'],
+      [{ regions: ['FR'], ...page }],
+    ),
+  );
+  const index = buildCatalogIndex(snapshot.meta);
+
+  it('keeps them, so availability answers as the full catalog does', () => {
+    const full = itemsOf(snapshot);
+    for (const [region, id, expected] of [
+      ['CA', 'netflix.premium', 'offered'],
+      ['FR', 'netflix.standard-ads', 'not-offered'],
+      ['SE', 'netflix.standard-ads', 'offered'],
+    ] as const) {
+      const code = regionFileFor(region, index);
+      const item = full.find((candidate) => candidate.id === id);
+      const trimmed = itemsOf(regionSnapshot(snapshot, code ?? region)).find(
+        (candidate) => candidate.id === id,
+      );
+      if (!item || !trimmed) throw new Error(`No ${id}`);
+      expect(trimmed.prices.length).toBeLessThanOrEqual(item.prices.length);
+      expect(availability(item, item.provider, region), `${id} in ${region}`).toBe(expected);
+      expect(availability(trimmed, trimmed.provider, region), `${id} in ${region}'s file`).toBe(
+        expected,
+      );
+    }
   });
 });

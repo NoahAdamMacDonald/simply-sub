@@ -410,7 +410,7 @@ function planMatch(
   let shown = plan.prices;
   let priced: Pick<PlanMatch, 'pricing' | 'bestMonthlyEquivalent' | 'availability'> = {};
   if (region !== undefined && currency !== undefined) {
-    const sold = availability(plan.prices, provider, region, subdivision);
+    const sold = availability(plan, provider, region, subdivision);
     if (sold === 'not-offered') {
       return undefined;
     }

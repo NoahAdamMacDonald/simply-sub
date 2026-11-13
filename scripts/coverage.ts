@@ -58,6 +58,7 @@ console.log(
     `${errors > 0 ? `, ${plural(errors, 'error')}` : ''}.`,
 );
 console.log(
-  'Explain a gap in the provider file with a comment block of its own: "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>".',
+  'Explain a gap in the provider file with a comment block of its own: "# Coverage: <plan id> (or <provider>.*) in <REGION>: <why>". ' +
+    "A plan its provider's own page says isn't sold there takes notSoldIn instead, with the page quoted.",
 );
 process.exitCode = errors > 0 ? 1 : 0;
