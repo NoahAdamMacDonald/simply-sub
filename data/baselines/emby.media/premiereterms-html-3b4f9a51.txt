@@ -1,0 +1,57 @@
+url: https://emby.media/premiereterms.html
+method: fetch
+saved: 2026-11-13
+
+Emby Premiere Terms of Service - Emby
+☰
+How it Works
+Download
+Premiere
+News
+Support
+Emby Connect
+Emby Terms of Service
+Home Emby Terms of Service
+Updated: Dec 23, 2024
+In addition to the Terms of Service and Privacy Policy indicated on the Website, Emby Premiere Subscriptions are governed by the following terms:
+Subscriptions: Emby offers a subscription which provides access to certain features and services for the term of the subscription ("Subscription").
+Term: The Subscription(s) are offered on a monthly, annual, or lifetime basis, as selected by You. (the "Term"). If you select automatic renewal at the time of the subscription, then your subscription will be renewed automatically, and thereby the Term will be renewed automatically at the end of the then current Term.
+Lifetime Term: Lifetime shall mean the entire period in which the respective product, services, and/or features, as indicated below and updated from time to time, are offered for license.
+Annual Term: Annual shall mean a recurring twelve consecutive calendar month period, which term shall end on the immediately preceding date of the thirteenth calendar month after the date enrolled. The term, if selected, shall automatically renew on the same calendar date of the same calendar date and month in the next calendar year (for example purposes only, if enrolled on April 1 of a given year, the term shall expire on March 31 of the next given year and automatically renew on April 1 of the next given year).
+Monthly Term: Monthly shall mean a recurring monthly period, which term shall end on the immediately preceding date of the next calendar month after to the date enrolled. The term, if selected, shall automatically renew on the same calendar date of the following calendar month (for example purposes only, if enrolled on April 1 of a given year, the term shall expire on April 30 of the given month and automatically renew on May 1 of the given year).
+Premiere Devices:
+Emby Premier shall allow for a certain amount of total devices per subscription for access to Premier only features and apps. Unless otherwise indicated on the website, Emby Premiere shall be limited to 30 Devices per Premiere key. Extended device plans may be available. Please check the website.
+A "Premiere Device" is defined as any mobile, computer, or other electronic device which registers with the Emby server with a unique "device id". The device id is a uniquely generated id that is dependent on both device model, OS version, and application. Each unique device id shall be counted as a separate Device. It is possible that a single machine (whether mobile, desktop computer, or otherwise) with multiple applications installed on the machine may register as a new device id per application. In this event, each unique device id will be counted as separate devices.
+The Premiere Device shall be granted access to Premiere applications and services for the Subscription Term. The system will automatically manage the devices as being granted Premiere Device access throughout the Subscription term on a rolling date-of-access basis. The term for this rolling period is to be determined by the system and may change from time to time without notice. Any devices in excess of the permitted number or upon expiration of the given Subscription Term may no longer have access to any Premiere functionality, apps, or services.
+Refunds: Any and all fees related to Emby Subscriptions are non-refundable. However, Emby may in its’ sole discretion, provided refunds on a case by case basis.
+Termination. If you cancel your Subscription, you will not be charged again, and your Subscription will last until the end of the then current term. Upon termination, your access to the Subscription required apps and services may be terminated and/or removed.
+Please note that certain portions of the product, services, and/or features may require internet connections and/or additional services from Emby, which may be offered separately.
+Subscriptions provide access to the software and features indicated below (which may be modified, updated, removed from time to time in Emby’s sole discretion).
+For the Term of your Subscription, access is provided to the following applications, server features and plugins* (some applications, server features and plugins may require accounts and/or services from or with third parties):
+Apps - The following mobile, TV, and computer applications are available with a Premier Subscription:
+Emby iOS app (current version for iPhone and iPad available through Apple App Store)**
+Emby Android app (current version for Android-based phones and tablets available through the Google App Store)**
+Emby Android TV app (current version for Google Nexus Player, Nvidia Shield Console and new model TVs with "Android TV" built in - available through the Google App Store)
+Emby Fire TV app (current version for Amazon Fire TV and Fire TV Stick 1st and 2nd gen - available through the Amazon App Store)
+Emby for Xbox and Windows (current version for Windows computers and Xbox - available through the Microsoft store)
+Server Plugins – The following server plugins are available with a Premier Subscription (Server plugins are downloadable through the server web interface).***
+CoverArt - Provides enhanced image treatments for media posters. Allowing you to customize their look and provide additional media information on the cover itself.
+Trailers - Provides current streaming trailers from various public sources.
+Server Configuration Backup - Provides backup and restoring of most server configuration settings.
+Genre Cleaner - Allows you to customize the genres on your media items by defining automatic mappings. e.g. all "Sci-Fi" and "Science Fiction" can be automatically merged into one "Science Fiction" genre.
+Podcasts - Provides various public podcast feeds for display and playback within Emby apps. e.g. Ted Talks
+Server Features – The following Server features are available with a Premier Subscription (through the server web interface).***
+Mobile offline - Download your media to your supported Emby mobile app for off-line access and playback. (Currently supports the Windows 8.1 app)
+Live TV Guide Data - for US, Canada and UK only
+Folder Sync - Sync your media to any file-system folder providing alternate versions converted for easier playback on some mobile devices.
+Live TV Series Recordings - Setup recordings to record episodes of shows via the internal Live TV feature of the server. (Repeat series recordings are only available with Emby Premiere.)****
+Cinema Mode - Play current trailers and/or custom intros before your video playback for that true "Cinema" experience. Works in conjunction with the Trailers plug-in.
+Other Features - Other features that may be made available from time to time
+Applications, plugins and service may also be available from 3rd parties. Emby has no control over features, costs, services or any restrictions related to these apps.
+* The list of applications, server plugins and server features provided along with an Emby Subscription may be changed, updated, or modified from time to time.
+** These applications are also available for purchase or otherwise without a Subscription for playback only.
+*** These applications unlock specific features for the application as indicated in the description of the app.
+**** Requires access to Live TV broadcasts and TV schedules
+© 2026 Emby LLC
+Emby is designed to help you manage your personal media library, such as home videos and photos.
+Please see our terms of use and privacy policy. Downloading any Emby software constitutes acceptance of these terms.
