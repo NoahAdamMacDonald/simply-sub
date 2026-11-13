@@ -478,5 +478,5 @@ policies:
         - url: https://emby.media/support/articles/Premiere-Limits.html
           quote: 'The system tracks device usage for about a week.'
         - url: https://emby.media/support/articles/Premiere-Limits.html
-          quote: 'You can''t. The system tracks this automatically.'
+          quote: "You can't. The system tracks this automatically."
       lastVerified: 2026-11-13

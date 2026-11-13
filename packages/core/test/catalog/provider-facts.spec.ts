@@ -165,7 +165,11 @@ describe('namesRenewalAnchor', () => {
     ['Your billing cycle starts on the date you sign up.', 'same-date', true],
     ['Renews on the same day each month', 'same-date', true],
     // Emby Premiere's terms (M11.15).
-    ['automatically renew on the same calendar date of the following calendar month', 'same-date', true],
+    [
+      'automatically renew on the same calendar date of the following calendar month',
+      'same-date',
+      true,
+    ],
     // What implies it (M11.9): Disney's and Bell Media's terms, in English and French, and Claude's billing help.
     [
       'the timing of a recurring charge may change, such as if your subscription began on a date not contained in a given month.',

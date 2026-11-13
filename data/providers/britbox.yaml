@@ -516,7 +516,7 @@ policies:
         - url: https://www.britbox.com/ca/terms-and-conditions
           quote: 'PAYMENTS ARE NONREFUNDABLE AND THERE ARE NO REFUNDS OR CREDITS FOR PARTIALLY USED PERIODS.'
         - url: https://help.britbox.com/hc/en-us/articles/33658492512407-What-is-BritBox-s-refund-policy
-          quote: 'If you’d prefer a pro-rated refund for unused time, contact us to request one. Where applicable we''ll remove your access and refund any remaining time, rounded down to the nearest month.'
+          quote: "If you’d prefer a pro-rated refund for unused time, contact us to request one. Where applicable we'll remove your access and refund any remaining time, rounded down to the nearest month."
       lastVerified: 2026-11-13
     - topic: billing.price-changes
       tier: neutral
