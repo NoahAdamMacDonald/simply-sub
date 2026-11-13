@@ -24,7 +24,8 @@
 # terms' list, below).
 # Bundles: none sold on amcplus.com. AMC+ is itself AMC's bundle of its services ("full access to Shudder, Sundance Now,
 # and IFC Films Unlimited", its FAQ's Canada answer; "Acorn TV and Shudder content" in Australia and New Zealand), so
-# its plans list Shudder in includes-subscription. VIZIO's "STARZ and AMC+ Offer" (a VIZIO blog post found by search) is
+# its plans list Shudder and Sundance Now in includes-subscription (IFC Films Unlimited isn't in the catalog; Acorn TV
+# only in Australia and New Zealand, where AMC+ isn't priced yet). VIZIO's "STARZ and AMC+ Offer" (a VIZIO blog post found by search) is
 # a TV maker's limited-time promotion, not read or listed. Official resellers: none. Partners that bill it themselves,
 # named in its help centre: Apple TV Channels, Amazon Prime Video Channels and The Roku Channel ("These AMC+ add-on
 # channels are completely separate subscriptions and are not managed through our system"), the app stores, and TV
@@ -161,7 +162,7 @@ plans:
       streaming.content: [films, series]
       streaming.own-media: false
       account.parental-controls: false
-      includes-subscription: [shudder.with-ads]
+      includes-subscription: [shudder.with-ads, sundance-now.standard]
     inferred:
       streaming.concurrent-streams:
         reason: 'The service settings its sign-up page loads cap AMC+ at 4 streams at once ("videoConcurrencyLimit": 4) and block a new one past that; no help article names a number.'
@@ -191,7 +192,7 @@ plans:
       streaming.content: [films, series]
       streaming.own-media: false
       account.parental-controls: false
-      includes-subscription: [shudder.premium]
+      includes-subscription: [shudder.premium, sundance-now.standard]
     inferred:
       streaming.concurrent-streams:
         reason: 'The service settings its sign-up page loads cap AMC+ at 4 streams at once ("videoConcurrencyLimit": 4) and block a new one past that; no help article names a number.'

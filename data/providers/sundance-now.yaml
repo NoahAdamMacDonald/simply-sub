@@ -1,0 +1,196 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, its home and sign-up pages
+# again through a US exit, and its help centre (support.sundancenow.com, a Stonly knowledge base whose guides' steps
+# are all in each page) in Edge and with a plain fetch. Pages, each quoted where it's used:
+# Pricing: its help centre's "How much does Sundance Now cost?" ("When you sign up directly on our website, a
+# subscription in the U.S. and Canada costs $7.99 per month. For a 24% savings, subscribe annually for $74.99."), the
+# same as its home page's cards from Canada and through a US exit ("ANNUAL MEMBERSHIP $74.99/yr", "MONTHLY MEMBERSHIP
+# $7.99/mo", "Billed Monthly"). Neither names a currency; the settings its sign-up page loads as part of the page name
+# the reader's country and currency: "country":"ca", "currencyCode":"cad" with "Sundance-Web-Canada-Monthly-Trial-2026"
+# 7.99 and "Sundance-Web-Canada-Annual-Trial-2026" 74.99 from Canada, and "country":"us", "currencyCode":"usd" with
+# 7.99 and 74.99 through the US exit. So the same numbers are CA$ in Canada and US$ in the US. Prices are before tax
+# ("The Sundance Now advertised price does not include sales tax.", its Sales Tax article). The home page's "Value of
+# $6.25/mo*" is the annual price divided by twelve, not an offer; its cancel offers (50% off for 3 months, $59.99 for
+# a year, in the same settings) are retention offers, left out.
+# Region checklist for CA and US, 2026-11-13: 1. no country paths; 2. no picker; 3. the sign-up page's settings, which
+# name the country and currency for each reader; 4. the sign-up page's first step ("Step 1 of 2 (Next:
+# Pricing/Promos)"), typing nothing; 5. its help centre's prices and sales tax articles; 6. Edge from Canada and
+# through a US exit, and a plain fetch; 7. no bill offered. The same settings list Germany and Austria among its
+# supported regions, but say "Sorry, we no longer support subscriptions in Germany. To continue watching, please find
+# Sundance Now on Amazon Prime Video.", and its help centre and terms sell it only in North America (below): no euro
+# sample prices.
+# Bundles: none sold by Sundance Now; AMC+ includes it ("BUNDLE UP WITH AMC+ Get Sundance Now plus world-class
+# originals from AMC & the spine-tingling horror of Shudder with AMC+.", its home page). Official resellers: none.
+# Partners that bill it themselves, named in its help centre: Apple, Google Play (Android), Amazon (Fire TV), Roku and
+# Samsung (in-app), and Amazon Prime Video Channels, The Roku Channel and Apple TV Channels ("your subscription is
+# managed entirely by that platform"). Its settings name TV providers too (Dish, Sling, Fubo, Frontier, Ziply Fiber),
+# which no help article names.
+# Features, read 2026-11-13: ad-free: "No ads." and "Stream %s ad-free on all your favorite devices." (its site's own
+# text, in the settings its pages load). No downloads on any page read (its devices, iPhone, Android and web articles
+# name none). What it streams: "the premium streaming home for independent film" with "Thought-provoking true crime
+# and documentaries" (What is Sundance Now?), "independent films, documentaries, and filmmaker-driven stories" (Partner
+# Channel vs. Direct Subscription Access); none of your own media. No profiles, kids profiles, parental controls, live
+# channels or pause on any page read.
+# Video quality and streams at once: no Sundance Now page states either (its help centre's 22 guides, its home and
+# sign-up pages, its settings, which hold only a blocking message, "Too many people are using this account.", and the
+# terms, which say only that HD, Ultra HD and 4K "depends on your subscription" and that an account "may be limited by
+# simultaneous stream and device usage"). A web search's summaries of reviews disagree (three, four or unlimited
+# streams; 720p or "up to HD"), and The Streamable's pages refuse this machine's browsers, so neither is guessed: the
+# plan waits in core's awaitingRequiredFeatures (notes.md).
+# Free use: none: its pages sell the paid plan with a 7-day free trial ("You’ll be automatically signed up for a
+# one-time 7-day free trial", How do I sign up?), and "TRY SUNDANCE NOW FREE ON AMC+" is AMC+'s trial.
+
+# Coverage: sundance-now.* in AS, GU, MP, PR and VI: sold there ("the US, US territories and Canada"), but no page names
+# a territory's price, and the US exit's page showed the US's (2026-11-13).
+
+id: sundance-now
+name: Sundance Now
+website: https://www.sundancenow.com
+# Its owner's site, where sundancenow.com's Terms, Privacy and Cookies links lead (amcglobalmedia.com).
+domains: [amcglobalmedia.com]
+category: streaming
+spendCategory: streaming
+# "Sundance Now is available in the US, US territories and Canada." (Where is Sundance Now available?), and its terms:
+# "Sundance Now:Canada, US Territories." beside the United States. The territories are the five inhabited ones, as
+# Peacock's help centre names them.
+availableIn: [US, CA, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD, CA: CAD }
+# Its help centre's "How do I cancel?" for a subscription bought on its website ("Click 'Cancel Membership' on the lower
+# right-hand side under 'Membership Settings'").
+cancelUrl: https://support.sundancenow.com/kb/guide/en/how-do-i-cancel-uOKPrbaflT/Steps/4673056
+sources:
+  {
+    pricing: https://support.sundancenow.com/kb/guide/en/how-much-does-sundance-now-cost-s3D6y3oCFk/Steps/4286482,
+  }
+# Owner (M11.2), read 2026-11-13: AMC Global Media Inc., from its third-quarter release on its own site, which names
+# Sundance Now among its streaming services, its listing and where it's based. Its home page says "© 2020-2025 AMC
+# Networks Entertainment LLC." No page read names a majority holder.
+owner:
+  name: AMC Global Media Inc.
+  website: https://www.amcglobalmedia.com
+  page:
+    name: AMC Global Media Inc. Reports Third Quarter 2026 Results
+    url: https://www.amcglobalmedia.com/2026/11/09/amc-global-media-inc-reports-third-quarter-2026-results/
+  quotes:
+    - 'AMC Global Media (Nasdaq: AMCX) is home to many of the greatest stories and characters in TV and film and the premier destination for passionate and engaged fan communities around the world.'
+    - 'Its portfolio includes targeted streaming services AMC+, Acorn TV, Shudder, Sundance Now, HIDIVE and All Reality'
+    - 'AMC Global Media is headquartered in the United States, with international operations in Iberia, Latin America, Central Europe, the U.K., Australia and New Zealand.'
+  country:
+    code: US
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: AMCX }
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13 in its help centre: a debit or credit card or PayPal on its website, the app
+# stores, and Amazon's Prime Video Channels add-on (core's app-store). No page names the card networks, so no
+# acceptedNetworks.
+paymentMethods:
+  - methods: [card, app-store]
+    page: How do I sign up?
+    url: https://support.sundancenow.com/kb/guide/en/how-do-i-sign-up-gS0GJMJJNa/Steps/4286483
+    quotes:
+      - 'You can create an account with a debit or credit card by clicking here.'
+      - 'Note: If you sign up using an app store and want to make changes to your subscription, you will need to do so within the app store.'
+  - methods: [paypal]
+    page: How do I cancel?
+    url: https://support.sundancenow.com/kb/guide/en/how-do-i-cancel-uOKPrbaflT/Steps/4673056
+    quotes:
+      - 'If you signed up on the website using PayPal as payment method, please log into your PayPal account and cancel the recurring payment to Sundance Now.'
+  - methods: [app-store]
+    page: How do I cancel?
+    url: https://support.sundancenow.com/kb/guide/en/how-do-i-cancel-uOKPrbaflT/Steps/4673066
+    quotes:
+      - 'If you purchased the Sundance Now add-on channel via Amazon Prime, you will need to go into the Prime Video Subscription settings within your Amazon Prime account to cancel your subscription to the Sundance Now Channel.'
+# Renewal day (M11.5): its terms bill "on the calendar day corresponding to the beginning of your Billing Period", and
+# a sign-up on a day a month lacks bills on that month's last day: the day you signed up.
+renewalAnchor:
+  kind: same-date
+  page: AMC Streaming Services Terms of Use
+  url: https://www.amcglobalmedia.com/terms-of-use/
+  quotes:
+    - 'If your paid subscription begins on a day not contained in a given month, and your Billing Period is every month, your Payment Method will be billed on the last day of such month.'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.sundancenow.com/
+    - https://support.sundancenow.com/kb/guide/en/how-do-i-sign-up-gS0GJMJJNa/Steps/4286483
+  lastVerified: 2026-11-13
+
+# Platforms: "Sundance Now can be accessed at SundanceNow.com using a web browser, and on our apps for:" iPhone, iPad
+# and Apple TV, Amazon Fire TV, Android phones, tablets and Android TV, Roku, Samsung TV and Vizio TV (What devices does
+# Sundance Now support?); no consoles. Sign-in: "EMAIL ADDRESS" and "PASSWORD" (sundancenow.com/login). App languages:
+# English (its pages and help centre are in English only). Support: "Chat (9am-12am ET) 7 days a week", "Phone (+1
+# 855-744-1215)" and "EMAIL OUR SUPPORT TEAM" (its help centre's contact step).
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password]
+  languages.interface: [en]
+  support.channels: [chat, phone, email]
+
+plans:
+  - id: sundance-now.standard
+    name: Sundance Now
+    link: https://www.sundancenow.com/signup
+    features:
+      ad-free: true
+      streaming.content: [films, documentaries]
+      streaming.own-media: false
+      account.parental-controls: false
+    notes: Its pages call it the Monthly Membership and the Annual Membership.
+    prices:
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.sundancenow.com/kb/guide/en/how-much-does-sundance-now-cost-s3D6y3oCFk/Steps/4286482
+      - region: US
+        currency: USD
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.sundancenow.com/kb/guide/en/how-much-does-sundance-now-cost-s3D6y3oCFk/Steps/4286482
+      - region: CA
+        currency: CAD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.sundancenow.com/kb/guide/en/how-much-does-sundance-now-cost-s3D6y3oCFk/Steps/4286482
+      - region: CA
+        currency: CAD
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.sundancenow.com/kb/guide/en/how-much-does-sundance-now-cost-s3D6y3oCFk/Steps/4286482
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada. Its footer's and sign-up form's Terms,
+# Privacy and Cookies (sundancenow.com/terms, /privacy and /cookies, and amcnetworks.com's links, which lead to
+# amcglobalmedia.com) are AMC Global Media's AMC Streaming Services Terms of Use, Privacy Policy and Cookies Policy (all
+# "June 27, 2025"), which name Sundance Now and are rated once as shared documents (data/policies/amc-global-media-terms.yaml
+# and amc-global-media-privacy.yaml, drafted in .pipeline/amc-plus). Rated here from Sundance Now's own pages: its
+# sign-up page's first step, typing nothing. Its help centre says nothing more on the other topics (it has no downloads
+# or profiles articles). Not read: the sign-up steps after the account form (the plan and checkout), the "Additional
+# Terms" of its promotions, and the terms of the partners that bill it.
+policies:
+  shared: [amc-global-media-terms, amc-global-media-privacy]
+  links:
+    - name: 'Create Your Free Account'
+      url: https://www.sundancenow.com/signup
+  ratings:
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up starts with an email address and a password you choose, then a plan and a card. The steps after the account form weren’t read.'
+      sources:
+        - url: https://www.sundancenow.com/signup
+          quote: 'Create Your Free Account'
+        - url: https://www.sundancenow.com/signup
+          quote: 'Step 1 of 2 (Next: Pricing/Promos)'
+      lastVerified: 2026-11-13
