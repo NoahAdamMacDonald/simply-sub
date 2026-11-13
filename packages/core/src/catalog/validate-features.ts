@@ -422,6 +422,10 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   // AMC+ states no video quality on any page read (2026-11-13).
   ['amc-plus.with-ads', ['video.quality']],
   ['amc-plus.premium', ['video.quality']],
+  // Super Channel states Super Channel+'s quality but no stream count, and nothing for its channels (2026-11-13).
+  ['super-channel.plus', ['streaming.concurrent-streams']],
+  ['super-channel.channels', ['video.quality']],
+  ['super-channel.free', ['video.quality', 'streaming.concurrent-streams']],
 ]);
 
 /**

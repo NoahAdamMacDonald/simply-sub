@@ -1,0 +1,511 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, Super Channel+'s checkout
+# again through a Canadian exit (from here it opens superchannelplus.ca/unavailable), and its help centres
+# (superchannelplus.ca/help, Vimeo OTT's, in Edge; allarcoentertainment.zendesk.com through its API). Pages, each
+# quoted where it's used:
+# What it sells: "Subscribe today through your preferred cable service provider, approved streaming platform, or
+# directly with Super Channel+." (superchannel.ca/subscribe). Super Channel+ is its own streaming service, sold
+# directly: "On demand library of movies and series (no live channels)", while Super Channel is "Four live 24/7 linear
+# channels (Fuse, Heart & Home, Vault & Quest) with scheduled programming, plus an on demand library of movies and
+# series", bought "through a TV provider, Amazon Prime Video or Apple TV" (Super Channel+'s FAQ, What is the difference
+# between Super Channel+ and Super Channel?). So three plans: Super Channel+ (direct), Super Channel (the channels on
+# Amazon's Prime Video Channels or the Apple TV app, billed by them: app-store, never a plan of Amazon's or Apple's) and
+# its free channels. The other 49 cards on the subscribe page (Fubo and 48 TV providers, its page data's prices from 3.5
+# to 17 dollars a month) sell the channels in their own TV packages: telecom's to list.
+# Pricing: Super Channel+'s page (signup.superchannelplus.ca): "Monthly", "C$11.49", "per month (incl. tax)", and
+# "Annual", "C$114.90", "per year (incl. tax)", "Make the Switch to Annual and Enjoy 2 Months Free"; with "Your 14-day
+# free trial begins immediately." (its FAQ), a trial. Its price is stated with tax included, so taxIncluded; Super
+# Channel's subscribe page shows the same service at "$9.99/Month" (its Super Channel+ card), which with 15% HST is
+# C$11.49 (notes.md). Super Channel on Prime Video and Apple TV: "$9.99/Month" on each one's card on
+# superchannel.ca/subscribe ("Prime members can subscribe to Super Channel with Prime Video Channels and watch both live
+# TV and On Demand.", "Subscribe to Super Channel on the Apple TV app and watch both live TV and On Demand."), the same
+# as Amazon's offer page (primevideo.com/offers?benefitId=superchannelca: "7-day free trial", "$9.99/month after
+# trial", its data "recordTerritory":"CA", from here and through a Canadian exit), so CA$9.99 before tax. Apple's own
+# channel page wasn't found (the subscribe page links Super Channel+'s App Store app), so Apple's price is Super
+# Channel's word only. Free channels: "FREE, NO SUBSCRIPTION REQUIRED!" (superchannel.ca/freechannels, an image's
+# words) and "Super Channel offers two free ad-supported channels, Super Channel Uncovered and Super Channel Hearties,
+# available on streaming platforms including Tubi, Plex, Xumo Play, LG, Roku, Pluto and Samsung TV Plus." (its press
+# releases).
+# Billing period: its FAQ and help centre bill monthly plans "on the same day each month", though its terms' purchase
+# section says "Monthly plans renew for 30-day periods": the billing pages' month is used (notes.md).
+# Region checklist for CA, 2026-11-13: 1. superchannel.ca and superchannelplus.ca, English only, no locale paths; 2. a
+# time-zone picker only; 3. the pricing cards are fixed text, and Amazon's offer data names CA; 4. Super Channel+'s
+# checkout through a Canadian exit, to its account step ("Create your account"), never further; 5. its help centres
+# (Zendesk's "How much does Super Channel cost?": "Subscriptions start as low as $9.95 per month" through providers); 6.
+# Edge, a plain fetch (Vimeo's help needs JavaScript) and a Canadian exit; 7. no bill offered. Elsewhere: not sold.
+# Bundles: none on its pages (Fubo's is an add-on to its own TV plans, "Subscribe to Super Channel with FuboTV and watch
+# both live TV and On Demand.", telecom's). Official resellers: none; it sells gift subscriptions itself ("You can gift
+# your favorite subscription networks to others.", its help centre).
+# Features, read 2026-11-13: ad-free ("completely uncut and ad-free!", the subscribe page; "Unlimited Content, Ad-Free
+# Experience", Super Channel+'s card). Super Channel+: video "we cap 1080p video at 5 Mbps" (Video playback), so 1080p
+# (inferred); streams: "You can only watch content on a limited number of devices at once" (its too-many-devices
+# article) with no number on any page or named review, so it waits in core's awaitingRequiredFeatures; downloads in its
+# iOS and Android apps, on no stated number of devices, so 1 (inferred); pause: "Monthly subscriptions can be paused for
+# one, two, or three months at a time" (How do I pause my subscription?), on the website only. Its help centre's
+# viewer and kids profiles articles are Vimeo's, "only available if your streaming service has turned them on", and no
+# page says Super Channel+ has: not listed. Super Channel on Prime Video: Amazon's usage rules for third-party add-on
+# subscriptions ("You can stream up to three titles (including Prime Video titles ...) at the same time using the same
+# Amazon account"); no page states its video quality (Amazon's channel page labels no title 4K or HD), so it waits.
+# Free channels: neither quality nor streams stated (they play in other companies' apps): both wait. What it streams:
+# "exclusive series, movies and documentaries" (What programs are available on Super Channel?); the free channels'
+# "Feel-good shows, timeless romance" and "true crime, unsolved mysteries, and thrilling dramas" (Discover the World of
+# FREE Channels); none of your own media.
+
+id: super-channel
+name: Super Channel
+website: https://superchannel.ca
+# Super Channel+'s site, sign-up and help centre, and Super Channel's help centre.
+domains: [superchannelplus.ca, allarcoentertainment.zendesk.com]
+category: streaming
+spendCategory: streaming
+# "Super Channel is a national pay television service and is licensed to operate within Canada." (its help centre,
+# Where is Super Channel available?), and "The Service is intended for use in Canada" (Super Channel+'s terms, 5(e)).
+availableIn: [CA]
+billingCurrency: { CA: CAD }
+cancelUrl: https://www.superchannelplus.ca/help/subscribing/how-do-i-cancel-my-subscription
+sources: { pricing: https://signup.superchannelplus.ca/ }
+notes: Super Channel+ streams its on-demand library. The live channels stream through Amazon's Prime Video Channels and the Apple TV app, or come with Canadian TV providers. Two free channels play on Tubi, Pluto TV and other free services.
+# Owner (M11.2), read 2026-11-13: its press releases' boilerplate; Super Channel+'s privacy policy is Allarco
+# Entertainment 2008 Inc.'s ("the operator of the service known as “Super Channel+”"), at "1189-5328 Calgary Trail NW,
+# Edmonton, AB". Where it is: its help centre (no page names Alberta in words). A private company: no listing named.
+owner:
+  name: Allarco Entertainment 2008 Inc.
+  page:
+    name: Super Channel to Premiere Funny Money - The Dane Cook Story (press release)
+    url: https://superchannel.ca/press-releases/super-channel-to-premiere-funny-money-the-dane-cook-story
+  quotes:
+    - 'Super Channel is owned by Allarco Entertainment 2008 Inc., an Edmonton-based media company.'
+  country:
+    code: CA
+    page:
+      name: Where is Super Channel available?
+      url: https://allarcoentertainment.zendesk.com/hc/en-us/articles/206191477-Where-is-Super-Channel-available
+    quotes:
+      - 'Super Channel is a national pay television service and is licensed to operate within Canada.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: a payment card (its privacy policy), Google Pay and Stripe's Link wallet (other:
+# a wallet no id names) on Super Channel+'s checkout (its help centre), the app stores that bill Super Channel+ in their
+# apps (Apple, Google Play, Roku, Amazon: its cancelling article), and, for the live channels, Amazon's Prime Video
+# Channels, the Apple TV app and a TV provider's bill (its FAQ). No page names a card network ("Visa Gift Cards and other
+# kinds of pre-paid gift cards are not supported", its card article), and the checkout's payment step comes after an
+# account: no acceptedNetworks.
+paymentMethods:
+  - methods: [card]
+    page: Privacy Policy (Super Channel+)
+    url: https://www.superchannelplus.ca/privacy
+    quotes:
+      - 'You must also provide valid payment card information if you wish to sign up for a free trial, subscription, or make any other purchase.'
+  - methods: [google-pay]
+    page: How do I pay with Google Pay?
+    url: https://www.superchannelplus.ca/help/subscribing/how-do-i-pay-with-google-pay
+    quotes:
+      - 'To pay using Google Pay, you must be using the Chrome web browser, be signed in to your Google account, and have a payment method associated with your Google account.'
+  - methods: [other]
+    page: How Do I Use Stripe Link?
+    url: https://www.superchannelplus.ca/help/subscribing/how-do-i-use-stripe-link
+    quotes:
+      - 'Link is a digital wallet that facilitates a quicker checkout with credit/debit cards.'
+  - methods: [app-store]
+    page: How do I cancel my subscription (unsubscribe)?
+    url: https://www.superchannelplus.ca/help/subscribing/how-do-i-cancel-my-subscription
+    quotes:
+      - 'If you signed up within a Google Play/Android app, follow the steps here:'
+      - 'If you signed up within the Roku channel, follow the steps here:'
+  - methods: [app-store, provider-billing]
+    page: What is the difference between Super Channel+ and Super Channel?
+    url: https://signup.superchannelplus.ca/faq
+    quotes:
+      - 'Subscribe through a TV provider, Amazon Prime Video or Apple TV.'
+# Renewal day (M11.5): its FAQ, and its help centre's "Subscriptions get charged on the same day each month that you
+# have subscribed." Its terms' "Monthly plans renew for 30-day periods" disagrees (notes.md).
+renewalAnchor:
+  kind: same-date
+  page: When will I be charged for my Super Channel+ subscription?
+  url: https://signup.superchannelplus.ca/faq
+  quotes:
+    - 'Monthly Subscription: After your trial ends, your card will be charged on the same day each month.'
+  lastVerified: 2026-11-13
+
+# Platforms (2026-11-13): Super Channel+'s terms (5(j)): its app from "Canadian Apple App Store or the Canadian Google
+# Play store" (iOS, Android, Fire OS), "Amazon Fire TV", "Android TV", "Apple TV", "LG Smart TV", "Samsung Smart TVs",
+# "Roku devices", and "your computer at www.superchannelplus.ca" (Chrome, Edge, Firefox, Safari). Sign-in: "enter your
+# password and click Sign In", or "an email link that will log you in, once clicked" (How do I log in?). App languages:
+# English (its sites have no French version; the App Store lists "English"; Vimeo's checkout "may be translated" in
+# parts). Support: its help centre's request form and "You may call us during regular business hours at
+# 1-780-430-2800." (How do I contact you?).
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, email-code]
+  languages.interface: [en]
+  support.channels: [email, phone]
+
+plans:
+  - id: super-channel.plus
+    name: Super Channel+
+    link: https://www.superchannelplus.ca/checkout/subscribe/purchase
+    features:
+      video.quality: 1080p
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [films, series, documentaries]
+      streaming.own-media: false
+      account.pause: true
+    inferred:
+      video.quality:
+        reason: 'Its help centre''s video playback article caps "1080p video at 5 Mbps" and names no higher resolution, so 1080p is the best it streams.'
+        page:
+          name: Video playback
+          url: https://www.superchannelplus.ca/help/watching/video-playback
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'Its help centre lets you download videos in its iPhone, iPad and Android apps without saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: How do I download videos to my iPhone or iPad?
+          url: https://www.superchannelplus.ca/help/using-the-ios-app/how-do-i-download-videos-to-my-iphone-or-ipad
+        lastVerified: 2026-11-13
+    notes: On-demand films, series and documentaries, without the live channels. 14-day free trial. Only monthly plans bought on its website can be paused, for one to three months. Prices include tax.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: per month (incl. tax)
+        lastVerified: 2026-11-13
+        sourceUrl: https://signup.superchannelplus.ca/
+      - region: CA
+        currency: CAD
+        amount: 114.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: per year (incl. tax)
+        lastVerified: 2026-11-13
+        sourceUrl: https://signup.superchannelplus.ca/
+
+  - id: super-channel.channels
+    name: Super Channel
+    link: https://superchannel.ca/subscribe
+    features:
+      ad-free: true
+      streaming.concurrent-streams: 3
+      streaming.live: [tv-channels]
+      streaming.content: [films, series, documentaries]
+      streaming.own-media: false
+    notes: Its four live channels (Fuse, Heart & Home, Vault and Quest) and on-demand library, as an Amazon Prime Video channel for Prime members or in the Apple TV app, billed by them, after a free trial. Its 3 streams at once are Amazon's limit, shared with Prime Video's own titles.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://superchannel.ca/subscribe
+
+  - id: super-channel.free
+    name: Free channels
+    link: https://superchannel.ca/freechannels
+    features:
+      ad-free: false
+      streaming.live: [tv-channels]
+      streaming.content: [series, documentaries]
+      streaming.own-media: false
+    notes: Two free channels with ads, Super Channel Hearties and Super Channel Uncovered, live and on demand in Tubi, Pluto TV, Xumo Play, Samsung TV Plus and other free apps. No subscription needed.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://superchannel.ca/freechannels
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada: Super Channel+'s Viewer Terms of Service
+# Agreement ("Last updated: Apr 8, 2025": its Terms of Use and its Subscription Terms and Payment on one page, which
+# include its Privacy Policy), its Privacy Policy (the same date), its cookie policy (Vimeo OTT's), the checkout's
+# account step through a Canadian exit ("By continuing, you agree to our Terms of Service and acknowledge our Privacy
+# Policy"), its FAQ and its help centre's 101 articles (Vimeo's, with Super Channel+'s name); superchannel.ca's own
+# Terms of Use and short privacy policy (its website and newsletters: no grade worse than Super Channel+'s) and its
+# Zendesk help centre's 13 articles. Not read: Vimeo's own privacy policy (vimeo.com/privacy, which its policy points
+# to for the service it runs), and Amazon's, Apple's and the TV providers' terms, which bill the live channels. Super
+# Channel+'s terms give Vimeo.com, Inc. the right to enforce them as "a third-party beneficiary". Calibrated against
+# Crave (the same arbitration clause) and STARZ.
+policies:
+  links:
+    - name: 'Viewer Terms of Service Agreement'
+      url: https://www.superchannelplus.ca/tos
+    - name: 'Privacy Policy'
+      url: https://www.superchannelplus.ca/privacy
+    - name: 'Cookie Policy'
+      url: https://www.superchannelplus.ca/cookies
+    - name: 'Super Channel+ FAQ'
+      url: https://signup.superchannelplus.ca/faq
+    - name: 'Create your account'
+      url: https://www.superchannelplus.ca/checkout/subscribe/purchase
+    - name: 'Help Center'
+      url: https://www.superchannelplus.ca/help
+    - name: 'How do I delete my account?'
+      url: https://www.superchannelplus.ca/help/account-settings/how-do-i-delete-my-account
+    - name: 'How do I get a refund?'
+      url: https://www.superchannelplus.ca/help/account-settings/refund
+    - name: 'How do I download videos to my iPhone or iPad?'
+      url: https://www.superchannelplus.ca/help/using-the-ios-app/how-do-i-download-videos-to-my-iphone-or-ipad
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records your device and how you use Super Channel+, and studies that use to improve it. To say no, you must email its privacy office.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Each time you visit our Service, we automatically collect certain information about your device and your interaction with our Service.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Analyze how the Service is being used for troubleshooting and improvements'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Simply, contact a representative of our privacy office at the following e-mail address to have your consent withdrawn: privacyofficer@superchannel.ca'
+      action:
+        name: 'Withdraw your consent by email (privacy policy)'
+        url: https://www.superchannelplus.ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It lets advertising and analytics partners collect information straight from you, and may use your email to find people like you for its ads if you agree. Its cookie banner’s “Do Not Sell or Share” choice is the way out.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'We may use tracking technologies that allow third-party advertising and/or analytics partners to collect information directly from our subscribers and logged-out website visitors.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Upon receiving proper consent from you, we may wish to include your email address in our email list to create a “Lookalike” audience.'
+        - url: https://www.superchannelplus.ca/help
+          quote: 'Do Not Sell or Share My Personal Information'
+      action:
+        name: 'Do Not Sell or Share My Personal Information'
+        url: https://www.superchannelplus.ca/help
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It uses your information for its advertising, here and on other websites. You can opt out of ad targeting only through industry pages and your browser’s cookie settings.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Conduct advertising activities, which may include displaying advertisements before, during or after our content, displaying advertisements on third party websites, and understanding the effectiveness of our advertising efforts'
+        - url: https://www.superchannelplus.ca/cookies
+          quote: 'To opt out of the collection and use of your information for ad targeting, you can visit the following pages:'
+        - url: https://www.superchannelplus.ca/cookies
+          quote: 'You may change your browser’s settings to delete cookies that have already been set and to reject new cookies.'
+      action:
+        name: 'Its cookie policy’s opt-outs'
+        url: https://www.superchannelplus.ca/cookies
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or upload trains AI.'
+      pages:
+        - https://www.superchannelplus.ca/privacy
+        - https://www.superchannelplus.ca/tos
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as its purposes need, with no periods named, and after you cancel may keep some to send you offers.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Further, we will retain your personal information only for so long as is necessary to fulfil our stated purposes.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'When you cancel your subscription, we may preserve certain account information to (i) let you know about new offers and content; (ii) preserve your account, if you ever wish to re-subscribe; and (iii) enforce our rights, where we believe in good faith that preservation is necessary to do so.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You ask its support team to delete your account, and it then removes all the data, but it doesn’t say how long that takes.'
+      sources:
+        - url: https://www.superchannelplus.ca/help/account-settings/how-do-i-delete-my-account
+          quote: 'In order to delete your account, click on the "contact us" link below and then submit a request to support to delete your account.'
+        - url: https://www.superchannelplus.ca/help/account-settings/how-do-i-delete-my-account
+          quote: 'Once the request is processed, all the data will be permanently removed from your account.'
+      action:
+        name: 'How to delete your account'
+        url: https://www.superchannelplus.ca/help/account-settings/how-do-i-delete-my-account
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can email its privacy officer for a copy of your information in a format you can use elsewhere, answered within 45 days.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'For data portability requests, we will select a format to provide your Personal Information that is readily useable and should allow you to transmit the information from one entity to another entity without hindrance.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'We endeavor to respond to a verifiable consumer request within forty-five (45) days of its receipt.'
+      action:
+        name: 'Ask for your information by email (privacy policy)'
+        url: https://www.superchannelplus.ca/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over your information when the law or a subpoena requires it, and says nothing about telling you or publishing reports.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'Legal Situations: By law or subpoena or if we believe that such action is necessary to comply with the law or legal process served on us or affiliated parties.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say where your information is kept.'
+      pages: [https://www.superchannelplus.ca/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up asks for an email address and a password you choose, then a payment card, even for the free trial.'
+      sources:
+        - url: https://www.superchannelplus.ca/checkout/subscribe/purchase
+          quote: "First, create your Super Channel+ account. You'll add payment next."
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'To sign up for a free trial or make a purchase, you must create an account by providing us with your email address and a password.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'You must also provide valid payment card information if you wish to sign up for a free trial, subscription, or make any other purchase.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to subscribe, and children may watch only through a parent’s account, under supervision. It disables access a parent didn’t allow, but says nothing on children’s data.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'You must be 18 years of age, or of legal age and legally competent in the applicable jurisdiction in which you reside, to subscribe to the Super Channel+ service.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'Persons under 18 may access the Super Channel+ service only under the supervision of a parent or legal guardian and through the parent or legal guardian’s account.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'If you believe your child is using your account and does not have your permission, please contact us immediately so that we can disable access.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It names passwords, firewalls and encryption, but no outside checks or way to report a security problem, and makes you carry the risk of a breach.'
+      sources:
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'We take commercially reasonable steps to maintain the security of customer information via a variety of access controls, including password protection, electronic firewalls, and data encryption.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'By using the Service, you agree to assume all risk in connection with your Personal Information.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online, past an offer to pause, but at least a day before it renews. You keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'To the extent permitted by applicable law, subscriptions automatically renew for the subscription period unless canceled at least one day before the renewal date listed in your Billing Settings.'
+        - url: https://signup.superchannelplus.ca/faq
+          quote: 'Choose either Pause (temporary halt) or No thanks, I want to cancel, then click Continue.'
+        - url: https://signup.superchannelplus.ca/faq
+          quote: 'Subscription access continues until the end of the current billing cycle; no further charges will occur.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments aren’t refunded, but you keep watching until the end of the time you paid for. If you paid on its website, it may look at a refund request.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'ALL PURCHASES, INCLUDING RECURRING CHARGES, ARE FINAL AND NON-REFUNDABLE.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'Following any cancellation, however, you will continue to have access to Super Channel+ through the end of your current billing period.'
+        - url: https://www.superchannelplus.ca/help/account-settings/refund
+          quote: 'Contact us and we will review your request.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It tries to email you at least 30 days before a new price, and you can cancel instead.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'In the event of a price change, we will attempt to notify you at least thirty (30) days in advance of the change by sending an email to the email address you have registered for your account.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'If you do not wish to accept a price change, you may cancel your subscription.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 14-day trial needs your card and turns into a paid plan unless you cancel before it ends. Nothing says it reminds you first.'
+      sources:
+        - url: https://signup.superchannelplus.ca/faq
+          quote: 'Your 14-day free trial begins immediately.'
+        - url: https://www.superchannelplus.ca/privacy
+          quote: 'You must also provide valid payment card information if you wish to sign up for a free trial, subscription, or make any other purchase.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'When a free trial period ends, your paid subscription begins (unless you have canceled before the end of the free trial period), and you must pay the full monthly or annual fee.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: neutral
+      reason: 'It may email you about renewals, but doesn’t promise a reminder before it charges you.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'We may also send you other emails concerning your account status and renewals.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, it may charge “transaction fees” it doesn’t name or price.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'you authorize us to charge your Payment Method the subscription fee, along with any other taxes or transaction fees which may apply to your use of the Super Channel+ Service.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'Switching between monthly and yearly takes effect only at the end of the time you’ve paid for.'
+      sources:
+        - url: https://signup.superchannelplus.ca/faq
+          quote: 'Your new subscription rate will take effect at the end of your current billing cycle, ensuring uninterrupted access to Super Channel+.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Unless you live in Ontario, Quebec or Saskatchewan, a private referee (an arbitrator) in your city settles disputes instead of a court, one person at a time, and you give up a trial.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'You agree to the Arbitration Agreement and class action waiver described in Super Channel+ Subscription Terms and Payment Section 4, [Arbitration Agreement], as applicable, to resolve any disputes with us (except for matters that may be taken to small claims court).'
+        - url: https://www.superchannelplus.ca/tos
+          quote: '(This section is not applicable to Ontario, Quebec, or Saskatchewan residents or were excluded by applicable law).'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'You expressly waive the right to resolve any dispute through any other means, including by trial.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'Changes to its terms reach existing subscribers 30 days after they’re posted, and you can cancel first. It doesn’t promise to tell you directly.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'For existing subscribers, such changes will be effective thirty (30) days following the posting of such changes on the Super Channel+ Service.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'If you do not agree to the Super Channel+ Terms (or any updates or changes to the Super Channel+ Terms) then you must cancel your subscription and discontinue your use of the Super Channel+ Service.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend or close your account if you break its terms, with no refund, and it may decline to renew you.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'We reserve the right to suspend or terminate your account for your breach of the terms hereof.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'We may decline renewals.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'ALL PURCHASES, INCLUDING RECURRING CHARGES, ARE FINAL AND NON-REFUNDABLE.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can add or remove shows and films at any time, change features, plans and prices for some or all users, and says it owes you nothing for what isn’t available.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'We may add or remove Programs from the channel at any time.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'Super Channel+ service reserves the right to test and/or implement updates and changes to the Super Channel+ service, including but not limited to features, plans, promotions, and pricing, with some or all our users at any time.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'We will not be liable to you for any blackouts, location-based limitations, device-based limitations, content-viewing windows, availability of content, or other restrictions or limitations in connection with the Super Channel+ service.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.superchannelplus.ca/tos]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid sharing your login with anyone; only a parent’s child may watch through their account.'
+      sources:
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'You must safeguard the confidentiality of your account credentials and may not share your account credentials with anyone.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'Persons under 18 may access the Super Channel+ service only under the supervision of a parent or legal guardian and through the parent or legal guardian’s account.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Downloads must be started within 30 days and finished within 48 hours, and it may limit how many titles and devices hold downloads.'
+      sources:
+        - url: https://www.superchannelplus.ca/help/using-the-ios-app/how-do-i-download-videos-to-my-iphone-or-ipad
+          quote: 'Currently, when offline, you have 30 days to start playback; you then have 48 hours to finish playback once it has started before you need to reconnect to the internet to obtain a new license if the content has DRM.'
+        - url: https://www.superchannelplus.ca/tos
+          quote: 'For example, such limitations may include restrictions on the number of Offline Titles per account, the maximum number of devices that can contain Offline Titles, the time within which you will need to begin viewing Offline Titles, the number of times Offline Titles may be viewed, and how long the Offline Titles will remain accessible.'
+      lastVerified: 2026-11-13
