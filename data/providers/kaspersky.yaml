@@ -1,0 +1,871 @@
+# Researched by hand on 2026-11-13 (M11.15, security batch 1), read from Canada with Edge (each country's plan pages, with
+# ?ignoreredirects=true, the switch its own country picker uses) and a plain fetch (its EULA, privacy policy, about,
+# transparency and support pages), and its US statement through a US exit. Pages, each quoted where it's used:
+# Pricing: each country's /standard, /plus and /premium pages, whose buy block shows the plan's card ("3 Devices | 1
+# Year") with a first-year offer and the regular price: "*Introductory price for the first year of your subscription. It
+# will renew automatically at $114.99 per year." (Canada; the UK's in £, Australia's "renewed at $99.95/year", whose page
+# data names "AUD"; Germany's "verlängert sich automatisch zu 54,99 € pro Jahr", France's "renouvelé automatiquement au
+# prix de 34,99 € par an", the Netherlands' "verlengd tegen € 34,99 per jaar", Spain's "Se renovará de forma automática
+# a 34,99 € por año", Italy's "Il rinnovo avverrà automaticamente al costo di 34,99 € all'anno"). The renewal price is
+# stored. 2- and 3-year terms are first-term offers that renew yearly ("*Then renews at $114.99 per year. Savings compared
+# to 2X the annual renewal price of $114.99.", Canada's Premium, 2026-11-13), so only yearly prices are stored.
+# Each country's card sells a different device count: Standard 3, Plus 5, Premium 10 in Canada and Australia; Premium 5 in
+# the UK and Germany; 1, 3 and 5 in the Netherlands; 1 on every card in France, Spain and Italy. A plan per tier and device
+# count, priced where its card sells it (the Coverage notes below). Australia's prices say "All prices are inclusive of
+# tax." (taxIncluded). Its purchase FAQ for Canada's store (2Checkout) says only "The price indicated includes anticipated
+# VAT"; Canada's prices are stored before tax.
+# Region checklist for CA and US, 2026-11-13: 1. country sites (kaspersky.ca, usa.kaspersky.com; its picker's
+# ?ignoreredirects=true); 2. each card's device and term picker (Canada's Premium: only 10 devices, 1, 2 or 3 years);
+# 3. its page data ("priceList":["ca/en/cad"], "priceCurrency":"CAD"); 4. not opened past "Buy Now"; 5. its purchase FAQ
+# for Canada (2Checkout); 6. Edge, a plain fetch, and a US exit; 7. no bill. The US: not sold (Coverage note below).
+# New Zealand: its picker's "New Zealand" opens kaspersky.com.au (Australian dollars), so not priced as NZ. Ireland: no
+# country site in its picker (not priced).
+# Bundles: none found. Official resellers: none named for home plans ("Find a reseller" and "Find a distributor" are its
+# business channel's). Amazon gift cards with Premium are an offer, not a plan.
+# Free use: its free Virus Removal Tool (a plan) and Rescue Disk (in the tool's notes); its plans' free trials aren't
+# plans.
+# Not drafted: Kaspersky VPN Secure Connection, Password Manager and Safe Kids sold alone, and its older Anti-Virus,
+# Internet Security and Total Security (updates only: "Still using our previous products plans?").
+
+# Coverage: kaspersky.* in US: Kaspersky stopped selling there in 2024 under a US government ruling: "In conformity with
+# the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its
+# anti-virus software and cybersecurity products in the United States ahead of July 20, 2024." (its statement of July 18,
+# 2024 on usa.kaspersky.com, read 2026-11-13 through a US exit). No official country list exists, so no availableIn.
+# Coverage: kaspersky.standard in FR, NL, ES and IT: their Standard card is for 1 device, kaspersky.standard-1-device.
+# Coverage: kaspersky.standard-1-device in CA, AU, GB and DE: their Standard card is for 3 devices, kaspersky.standard.
+# Coverage: kaspersky.plus in FR, NL, ES and IT: their Plus card is for 1 device (3 in the Netherlands).
+# Coverage: kaspersky.plus-3-devices in CA, AU, GB, DE, FR, ES and IT: only the Netherlands' Plus card is for 3 devices.
+# Coverage: kaspersky.plus-1-device in CA, AU, GB, DE and NL: their Plus card is for 5 devices (3 in the Netherlands).
+# Coverage: kaspersky.premium in GB, DE, NL, FR, ES and IT: their Premium card is for 5 devices (1 in France, Spain, Italy).
+# Coverage: kaspersky.premium-5-devices in CA, AU, FR, ES and IT: their Premium card is for 10 devices (1 in France, Spain
+# and Italy).
+# Coverage: kaspersky.premium-1-device in CA, AU, GB, DE and NL: their Premium card is for 10 or 5 devices.
+
+id: kaspersky
+name: Kaspersky
+website: https://www.kaspersky.com
+# Its country sites (each one's own prices) and its EULAs' host.
+domains:
+  [
+    kaspersky.ca,
+    kaspersky.co.uk,
+    kaspersky.com.au,
+    kaspersky.de,
+    kaspersky.fr,
+    kaspersky.nl,
+    kaspersky.es,
+    kaspersky.it,
+    kaspersky-labs.com,
+  ]
+category: security
+spendCategory: software
+billingCurrency:
+  { CA: CAD, GB: GBP, AU: AUD, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR, GLOBAL: USD }
+# Its purchase FAQ for Canada's store: "Click the “Stop auto-renewal” button to cancel the Auto-Renewal plan."
+cancelUrl: https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
+sources: { pricing: https://www.kaspersky.ca/premium }
+# Owner (M11.2), read 2026-11-13: Kaspersky's holding company is Kaspersky Labs Limited, a UK private company, from its
+# own strategic report on media.kaspersky.com (the newest on its site is for financial year 2020). The software's
+# rightholder is its Russian subsidiary: "Rightholder (owner of all rights, whether exclusive or otherwise, to the
+# Software) means AO Kaspersky Lab, a company incorporated according to the laws of the Russian Federation." (its EULA),
+# which is also its privacy policy's controller, in Moscow.
+owner:
+  name: Kaspersky Labs Limited
+  page:
+    name: Strategic Report and Corporate Governance Report (Kaspersky Labs Limited, 2020)
+    url: https://media.kaspersky.com/en/Strategic%20Report%20and%20Corporate%20Governance%20Report%20Kaspersky%20Labs%20Limited.pdf
+  quotes:
+    - 'Kaspersky Labs Limited (the “Company”), a private company limited by shares, and its subsidiaries'
+    - 'registered in the United Kingdom.'
+  country:
+    code: GB
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its purchase FAQ for Canada's store (2Checkout, which bills it: "The charge for your
+# order will appear on your credit card as: 2CO*, 2CO, 2Checkout."). Other countries' stores' FAQs weren't read.
+acceptedNetworks:
+  CA:
+    networks: [mastercard, visa, amex]
+    url: https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
+    quotes: ['We accept payment by credit cards of Mastercard, Visa, American Express, Paypal.']
+paymentMethods:
+  - methods: [card, paypal]
+    regions: [CA]
+    page: Frequently asked questions about purchasing
+    url: https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
+    quotes:
+      - 'We accept payment by credit cards of Mastercard, Visa, American Express, Paypal.'
+# Renewal day (M11.5): its subscription terms charge "15 days before your subscription ends", a day core's renewal kinds
+# don't have, so not-stated (notes.md).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.kaspersky.ca/premium
+  lastVerified: 2026-11-13
+# Lab results (M11.2), read 2026-11-13: AV-TEST's newest Windows test of home-user products, July and August 2026 (report
+# 261411). AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/kaspersky-lab-premium-21.24--21.25-261411/
+    tested: Premium 21.24 & 21.25, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/kaspersky-lab-premium-21.24--21.25-261411/
+    tested: Premium 21.24 & 21.25, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/kaspersky-lab-premium-21.24--21.25-261411/
+    tested: Premium 21.24 & 21.25, Windows 11
+
+# General features, read 2026-11-13. Platforms: every plan "Compatible with: Windows® macOS® Android™ iOS®". Sign-in: its
+# Kaspersky Account's email and password, "a two-step verification via phone or app", and "an external account
+# (Facebook, Apple account, etc.)" (its privacy policy). Support channels and app languages: not read (left out). No
+# pause (it renews "each term until you cancel it").
+features:
+  platforms: [windows, macos, android, ios]
+  account.sign-in: [password, sms, totp, sso]
+
+# Perks (M11.6): the plan comparison's lines no feature describes, in its words (Canada's downloads page and plan pages).
+perks:
+  - id: hdd-health
+    name: Hard Drive Health Monitor
+  - id: identity-wallet
+    name: Identity Protection Wallet
+  - id: remote-access-detection
+    name: Remote Access Detection
+  - id: remote-it-support
+    name: 24/7 Remote IT Support
+  - id: expert-virus-removal
+    name: Expert Virus Check & Removal
+  - id: safe-kids
+    name: Kaspersky Safe Kids (1 year free)
+
+# Features (read 2026-11-13): Canada's "Compare our new protection levels" (its downloads page) and plan pages. Every plan:
+# "Real-time Antivirus", "Anti-Virus, Anti-Malware and Anti-Ransomware Protection", "Safe Web Browsing", "Anti-Phishing",
+# "Two-Way Firewall", "Performance Optimisation", "Do Not Disturb Mode", "Online Payment Protection". Plus and Premium add
+# "Crypto Threat Protection", "Hard Drive Health Monitor", "Data Leak Checker", "Unlimited & Fast VPN" and "Password
+# Manager"; Premium adds "Identity Protection Wallet", "Remote Access Detection", "Smart Home Monitor" ("Checks your home
+# Wi-Fi for vulnerabilities"), "24/7 Remote IT Support", the expert checks and Safe Kids for a year. Its VPN page: "120+
+# server locations across 93 countries", WireGuard, "Split Tunneling"; Premium's page: "Ensure your online actions aren’t
+# logged" and "Torrent faster". No kill switch, multi-hop or audit stated. The other countries' cards list the same tiers;
+# their own comparison tables weren't read. No page read names scan kinds or behaviour-based detection.
+plans:
+  - id: kaspersky.standard
+    name: 'Standard'
+    link: https://www.kaspersky.ca/standard
+    features:
+      antivirus.devices: 3
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 80.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.ca/standard
+      - region: AU
+        currency: AUD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: All prices are inclusive of tax.
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.com.au/standard?ignoreredirects=true
+      - region: GB
+        currency: GBP
+        amount: 45.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.co.uk/standard?ignoreredirects=true
+      - region: DE
+        currency: EUR
+        amount: 54.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.de/standard?ignoreredirects=true
+  - id: kaspersky.standard-1-device
+    name: 'Standard, 1 device'
+    link: https://www.kaspersky.fr/standard?ignoreredirects=true
+    features:
+      antivirus.devices: 1
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall]
+    prices:
+      - region: FR
+        currency: EUR
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.fr/standard?ignoreredirects=true
+      - region: NL
+        currency: EUR
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.nl/standard?ignoreredirects=true
+      - region: ES
+        currency: EUR
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.es/standard?ignoreredirects=true
+      - region: IT
+        currency: EUR
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.it/standard?ignoreredirects=true
+  - id: kaspersky.plus
+    name: 'Plus'
+    link: https://www.kaspersky.ca/plus
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.devices: 5
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall]
+      antivirus.cryptomining: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 93
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.p2p: true
+    perks: [hdd-health]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.ca/plus
+      - region: AU
+        currency: AUD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: All prices are inclusive of tax.
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.com.au/plus?ignoreredirects=true
+      - region: GB
+        currency: GBP
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.co.uk/plus?ignoreredirects=true
+      - region: DE
+        currency: EUR
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.de/plus?ignoreredirects=true
+  - id: kaspersky.plus-3-devices
+    name: 'Plus, 3 devices'
+    link: https://www.kaspersky.nl/plus?ignoreredirects=true
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.devices: 3
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall]
+      antivirus.cryptomining: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 93
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.p2p: true
+    perks: [hdd-health]
+    prices:
+      - region: NL
+        currency: EUR
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.nl/plus?ignoreredirects=true
+  - id: kaspersky.plus-1-device
+    name: 'Plus, 1 device'
+    link: https://www.kaspersky.fr/plus?ignoreredirects=true
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.devices: 1
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall]
+      antivirus.cryptomining: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 93
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.p2p: true
+    perks: [hdd-health]
+    prices:
+      - region: FR
+        currency: EUR
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.fr/plus?ignoreredirects=true
+      - region: ES
+        currency: EUR
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.es/plus?ignoreredirects=true
+      - region: IT
+        currency: EUR
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.it/plus?ignoreredirects=true
+  - id: kaspersky.premium
+    name: 'Premium'
+    link: https://www.kaspersky.ca/premium
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.devices: 10
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.cryptomining: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 93
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.p2p: true
+    perks:
+      [
+        hdd-health,
+        identity-wallet,
+        remote-access-detection,
+        remote-it-support,
+        expert-virus-removal,
+        safe-kids,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 114.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.ca/premium
+      - region: AU
+        currency: AUD
+        amount: 139.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: All prices are inclusive of tax.
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.com.au/premium?ignoreredirects=true
+  - id: kaspersky.premium-5-devices
+    name: 'Premium, 5 devices'
+    link: https://www.kaspersky.co.uk/premium?ignoreredirects=true
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.devices: 5
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.cryptomining: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 93
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.p2p: true
+    perks:
+      [
+        hdd-health,
+        identity-wallet,
+        remote-access-detection,
+        remote-it-support,
+        expert-virus-removal,
+        safe-kids,
+      ]
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 62.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.co.uk/premium?ignoreredirects=true
+      - region: DE
+        currency: EUR
+        amount: 104.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.de/premium?ignoreredirects=true
+      - region: NL
+        currency: EUR
+        amount: 104.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.nl/premium?ignoreredirects=true
+  - id: kaspersky.premium-1-device
+    name: 'Premium, 1 device'
+    link: https://www.kaspersky.fr/premium?ignoreredirects=true
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.devices: 1
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.cryptomining: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 93
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.p2p: true
+    perks:
+      [
+        hdd-health,
+        identity-wallet,
+        remote-access-detection,
+        remote-it-support,
+        expert-virus-removal,
+        safe-kids,
+      ]
+    prices:
+      - region: FR
+        currency: EUR
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.fr/premium?ignoreredirects=true
+      - region: ES
+        currency: EUR
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.es/premium?ignoreredirects=true
+      - region: IT
+        currency: EUR
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.it/premium?ignoreredirects=true
+  # Free use, read 2026-11-13: "Get simple but powerful tools completely free" (its downloads page): the Virus Removal Tool
+  # ("a free, on-demand utility that scans an infected computer and removes viruses") and the Rescue Disk ("Disinfects
+  # your PC when you can’t boot the operating system."), each "Free Forever". The Rescue Disk is a tool of its own, said in
+  # the notes, not a feature of the tool.
+  - id: kaspersky.virus-removal-tool
+    name: Virus Removal Tool
+    link: https://www.kaspersky.ca/downloads/free-virus-removal-tool
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.scans: [on-demand]
+    notes: "A free scanner for Windows that you run when you think your computer is infected; it doesn't protect you in real time. Its free Rescue Disk cleans a computer that won't start."
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.kaspersky.ca/downloads/free-virus-removal-tool
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13: its EULA for Kaspersky Standard, Plus and Premium for Windows,
+# Canada's version (from its EULA page, read in Edge; the US arbitration clause in it applies "If you reside in the
+# United States"), its privacy policy (kaspersky.ca/web-privacy-policy: its websites, Kaspersky Account and My
+# Kaspersky), the subscription terms on Canada's plan pages ("How your subscription works"), its purchase FAQ for Canada
+# and its transparency centre. Not read: the Terms of Use of Kaspersky Security Network (the EULA's Section B names
+# them), each country's own EULA and checkout terms, and its VPN's and Safe Kids' own EULAs.
+policies:
+  links:
+    - name: Licence (EULA, Canada)
+      url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+    - name: Privacy policy
+      url: https://www.kaspersky.ca/web-privacy-policy
+    - name: How your subscription works (plan page)
+      url: https://www.kaspersky.ca/premium
+    - name: Purchase FAQ (Canada)
+      url: https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
+    - name: Transparency Center
+      url: https://www.kaspersky.com/transparency-center
+    - name: Downloads and free trials
+      url: https://www.kaspersky.ca/downloads
+    - name: Statement on the US (2024)
+      url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send it details of your programs, devices and online activity to improve its products, and its licence gives no way to stop that. You can turn off only its cloud threat network (KSN).'
+      sources:
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'In order to enhance the protection of information and improve the quality of the Software and services, You agree to automatically provide Kaspersky Lab with the following information of a statistical and administrative nature'
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'Also, You can activate and deactivate the Kaspersky Security Network service at any time in the Software settings window.'
+      action:
+        name: 'Turning off Kaspersky Security Network'
+        url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It shares your data only with companies working for it, its own group, authorities when the law requires, or others you agree to.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'We will only share your personal data with external recipients if there is a legal justification for doing so or you have consented to it.'
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: "utilizing the European Commission's Standard Contractual Clauses for transfers of personal data between its group companies"
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'It tracks how you use its websites and emails only if you agree, and you can take that back.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'The legal basis for processing your personal data for these web analysis and performance measurement purposes is your consent.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say whether your data trains AI models.'
+      pages:
+        - https://www.kaspersky.ca/web-privacy-policy
+        - https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It names some times: website logs go after a year, and your account data within six months of deleting the account.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'Logfiles are deleted no later than 1 year after creation.'
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'Data is deleted no later than 6 (six) calendar months after the account is deleted.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your Kaspersky account yourself at any time, and its data is gone within six months.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'You can view, update, correct your account information and password, set up a two-step verification via phone or app for authentication, and, also, delete your account at any time.'
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'Data is deleted no later than 6 (six) calendar months after the account is deleted.'
+      action:
+        name: 'How to delete your Kaspersky account'
+        url: https://www.kaspersky.ca/web-privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data in a common file format.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'We will provide to you, or a third party you have chosen, your personal data in a structured, commonly used, machine-readable format.'
+      action:
+        name: 'How to ask for a copy of your data'
+        url: https://www.kaspersky.ca/web-privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives authorities data when the law requires, and publishes a report on the requests it gets. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'Public bodies: Authorities and state institutions, such as public prosecutors’ offices, courts or tax authorities, to which we may have to transmit personal data in individual cases.'
+        - url: https://www.kaspersky.com/transparency-center
+          quote: 'The company has issued its first Transparency Report, including Law enforcement and government requests report, as well as User data request report'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data may be handled in many countries, Russia and China among them, under the EU’s standard contract terms between its own companies.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'The personal data provided by users to Kaspersky can be processed in countries outside the European Union (EU) or the European Economic Area (EEA) and can include the following: United Kingdom, Switzerland, Canada, Singapore, Russia, Japan, USA, Mexico, China, Azerbaijan, Turkey, Brazil, Kazakhstan.'
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: "utilizing the European Commission's Standard Contractual Clauses for transfers of personal data between its group companies"
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Its account needs an email address and a password, and a phone number only if you turn on two-step sign-in.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'In order to create Kaspersky Account and have access to all of its functions, you will need to provide us with your email address (which will be your user name) and a password.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online in My Kaspersky at any time, and keep your protection until the end of the time you paid for.'
+      sources:
+        - url: https://www.kaspersky.ca/premium
+          quote: 'You can cancel the auto-renewal of your subscription at any time.'
+        - url: https://www.kaspersky.ca/premium
+          quote: 'If you cancel, you will have full protection until the end of the already paid term.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can get all your money back within 30 days of buying, and within 30 days of each automatic renewal.'
+      sources:
+        - url: https://www.kaspersky.ca/premium
+          quote: 'You have the right to withdraw from the subscription contract and get full refund within 30 days from the date of the order.'
+        - url: https://www.kaspersky.ca/premium
+          quote: 'Your initial subscription purchase can be fully refunded as well as the automatic payments for subscription renewal.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It emails you the renewal price before it renews, but doesn’t say how long before.'
+      sources:
+        - url: https://www.kaspersky.ca/premium
+          quote: 'Renewal price may differ from the introductory price and is subject to change. We will notify you of the renewal price for your subscription via email prior to the renewal date.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its pages offer free trials but don’t say whether one turns into a paid plan.'
+      pages:
+        - https://www.kaspersky.ca/downloads
+        - https://www.kaspersky.ca/premium
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you before every automatic renewal, though it doesn’t say how long before. It charges you 15 days before your term ends.'
+      sources:
+        - url: https://www.kaspersky.ca/premium
+          quote: 'We will notify you about your upcoming auto-renewal via email.'
+        - url: https://www.kaspersky.ca/premium
+          quote: 'To ensure uninterrupted protection, we will attempt to charge your payment method 15 days before your subscription ends.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages list no fees beyond the price and taxes.'
+      pages:
+        - https://www.kaspersky.ca/premium
+        - https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its pages don’t say what happens to what you paid when you change plans.'
+      pages:
+        - https://www.kaspersky.ca/premium
+        - https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'In Canada its licence follows Ontario’s law, with no private referee (arbitration), and you keep any right to go to court where you live.'
+      sources:
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'c. Canada. If you obtained the Software in Canada, the laws of the Province of Ontario.'
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'Similarly, if you are an individual consumer, the provisions of Section A Clause 14.1 shall not affect any mandatory right you may have to take action in your country of residence under the laws of that country.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      status: not-stated
+      reason: 'Its licence and subscription terms don’t say whether or how it tells you before changing them.'
+      pages:
+        - https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+        - https://www.kaspersky.ca/premium
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its licence, it can end it at any time without telling you, and you get no money back.'
+      sources:
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'in the event of any breach by You of any of the terms and conditions of this Agreement, the Rightholder shall at any time without notice to You be entitled to terminate this License to use the Software without refunding the purchase price or any part thereof.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'Its licence doesn’t say whether it can take away features you paid for.'
+      pages:
+        - https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'If you don’t use your Kaspersky account for five years, it deletes the account, and it doesn’t say it warns you first.'
+      sources:
+        - url: https://www.kaspersky.ca/web-privacy-policy
+          quote: 'If the account remains inactive for a period of 5 (five) years, it will be automatically completely deleted from our system.'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: good
+      reason: 'You may use its apps on the number of devices you paid for, but not copy, resell or take them apart beyond what the law allows.'
+      sources:
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'You are granted a non-exclusive license to use the Software within the scope of the functionality described in the User Manual'
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'You shall not emulate, clone, rent, lend, lease, sell, modify, decompile, or reverse-engineer the Software or disassemble or create derivative works based on the Software or any portion thereof with the sole exception of a non-waivable right granted to You by applicable legislation'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors have checked its security every year since 2019 (SOC 2), it is ISO 27001 certified, and it pays people who find security bugs.'
+      sources:
+        - url: https://www.kaspersky.com/transparency-center
+          quote: 'The company has been continuously and successfully passing SOC 2 audits since 2019.'
+        - url: https://www.kaspersky.com/transparency-center
+          quote: 'Kaspersky reinforced its security credentials by re-certifying its information security management system (ISMS) against ISO/IEC 27001:2022'
+        - url: https://www.kaspersky.com/transparency-center
+          quote: 'Kaspersky has been continuously working on its Bug Bounty Program.'
+      lastVerified: 2026-11-13
+    - topic: service.activity-logging
+      tier: good
+      reason: 'It says its VPN doesn’t log what you do online. No outside check of that is published.'
+      sources:
+        - url: https://www.kaspersky.ca/premium
+          quote: 'Ensure your online actions aren’t logged'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its licence covers a number of devices but doesn’t say who may use them; you may hand the whole licence to someone else.'
+      pages:
+        - https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: bad
+      reason: 'If you change your computer it may make you activate again, and it can limit how many times, without saying how many.'
+      sources:
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'You may be required by the Rightholder to repeat activation of the Software, the count of which may be limited by the Rightholder.'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: poor
+      reason: 'Its apps download and install updates and new versions on their own, and add browser extensions, and its licence gives no way to stop that.'
+      sources:
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'You agree that the Software is supplied with the option of automatic renewal, which provides automatic downloading and installation of enhancements, patches and/or modifications for the Software and components, as well as new versions of the Software.'
+        - url: https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+          quote: 'You agree that the Software automatically downloads extensions for web browsers, which are necessary to ensure basic functionality of the licensed Software.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Not sold in the US
+      tier: neutral
+      reason: 'Kaspersky stopped selling in the United States in July 2024, after a US government ruling, and may not send US users updates since September 30, 2024.'
+      sources:
+        - url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+          quote: 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        - url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+          quote: 'Starting from September 30, 2024, Kaspersky will be prohibited from providing anti-virus signature updates and codebase updates to U.S. consumers and businesses.'
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      status: not-stated
+      reason: 'The pages read don’t say who can read what you keep in its password manager (its own licence and privacy policy weren’t read).'
+      pages:
+        - https://www.kaspersky.ca/web-privacy-policy
+        - https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      status: not-stated
+      reason: 'Its licence takes no rights over your own files or passwords.'
+      pages:
+        - https://products.s.kaspersky-labs.com/homeuser/Kaspersky4Win2021/21.27.6.532abc/multilanguage-INT-0.320.0/english-CA/189d40eaa33f428293617bc2d5f3c202/saas_eula_en-ca.txt
+      lastVerified: 2026-11-13
