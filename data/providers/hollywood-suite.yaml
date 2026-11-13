@@ -129,7 +129,7 @@ plans:
       streaming.own-media: false
     inferred:
       video.quality:
-        reason: 'Its Prime Video channel lists "Superbad (4K UHD)" among its films, so some titles stream in 4K; its owner calls the four live channels HD, and no page names a best quality.'
+        reason: 'Its Prime Video channel lists one film, "Superbad (4K UHD)", in 4K, so at least that title streams in 4K. Its owner calls the four live channels HD, and no page names a best quality.'
         page:
           name: Hollywood Suite (Prime Video Channels)
           url: https://www.primevideo.com/?contentId=hollywoodsuiteca&ref_=atv_surl_hollywoodsuiteca&benefitId=hollywoodsuiteca&contentType=subscription

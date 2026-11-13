@@ -826,7 +826,7 @@ policies:
       lastVerified: 2026-11-13
     - topic: billing.fees
       tier: poor
-      reason: 'Outside the US, what you’re billed can change from one period to the next with exchange rates and currency conversion fees.'
+      reason: 'Outside the US, its terms say what you’re billed can change from one period to the next with exchange rates and currency conversion fees, though its pages price each country in its own currency.'
       sources:
         - url: https://help.curiositystream.com/en/article/e038ac-taxes-applicable-to-your-subscription
           quote: 'For subscribers located outside of the United States, the amounts billed may vary over billing periods due to fluctuating foreign currency rates and currency conversion fees.'

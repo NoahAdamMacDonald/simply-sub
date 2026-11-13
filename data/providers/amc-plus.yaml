@@ -149,8 +149,9 @@ features:
 
 # AMC+ includes Shudder's library, though not Shudder's own apps ("Your AMC+ sign-in credentials will not work on the
 # individual apps for Shudder, Sundance Now, IFC Films Unlimited and AMC.", its FAQ), so each plan lists the Shudder
-# plan with the same ads: Premium the ad-free one, With Ads the ad-supported one. Sundance Now, IFC Films Unlimited and
-# Acorn TV (in Australia and New Zealand) join it once they're in the catalog.
+# plan with the same ads: Premium the ad-free one, With Ads the ad-supported one, and Sundance Now's one plan (its
+# library, not its apps, likewise). IFC Films Unlimited isn't in the catalog; Acorn TV (Australia and New Zealand only)
+# joins once AMC+ is priced there.
 plans:
   - id: amc-plus.with-ads
     name: With Ads

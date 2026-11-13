@@ -32,8 +32,8 @@
 # Features, read 2026-11-13: "BritBox is ad-free." (Are there ads or commercials?); standard plans "supports 2 concurrent
 # streams" and Premier "allows you to stream on up to 4 devices at the same time" (Can I stream BritBox Premier on
 # multiple devices?); "In the United States and Canada, 4K UHD is available to Premier subscribers." (Where can I watch in
-# 4K UHD?), and the standard plans' quality: "BritBox streams in HD (High Definition)" (its streaming terms article), no
-# resolution, so 720p (HD), inferred as Hayu's; downloads for Premier only in North America, "Downloads can be spread
+# 4K UHD?), and the standard plans' quality: its speed article lists "Full high definition (FHD) 1080p" with only 4K
+# kept for Premier, so 1080p, inferred (the review of 2026-11-13; its streaming terms article says only "HD"); downloads for Premier only in North America, "Downloads can be spread
 # across up to 5 different devices"; "BritBox doesn’t offer separate user profiles at the moment"; parental controls
 # with a four-digit PIN and viewing restrictions (How do I enable parental controls?); "BritBox subscriptions cannot be
 # paused or placed on hold". BritBox Live, a scheduled stream of its own shows in the US only, isn't a TV channel, so no
@@ -220,7 +220,7 @@ plans:
     name: BritBox
     link: https://www.britbox.com/
     features:
-      video.quality: 720p
+      video.quality: 1080p
       streaming.concurrent-streams: 2
       ad-free: true
       streaming.content: [films, series, documentaries]
@@ -229,10 +229,10 @@ plans:
       account.parental-controls: true
     inferred:
       video.quality:
-        reason: 'Its help centre says BritBox streams in HD and keeps 4K for Premier in the US and Canada, without naming a resolution, so at least 720p (HD).'
+        reason: 'Its speed article lists 720p, 1080p and 4K, and keeps only 4K for Premier subscribers in the US and Canada, so Standard streams up to 1080p.'
         page:
-          name: What are the essential streaming terms every BritBoxer should know?
-          url: https://help.britbox.com/hc/en-us/articles/30145714682519-What-are-the-essential-streaming-terms-every-BritBoxer-should-know
+          name: What internet speed or bandwidth do I need to stream BritBox?
+          url: https://help.britbox.com/hc/en-us/articles/360043206313-What-internet-speed-or-bandwidth-do-I-need-to-stream-BritBox
         lastVerified: 2026-11-13
     notes: British dramas, comedies, mysteries and day-of-UK soaps, ad-free, on 2 screens at once. No downloads. 7 days free for new subscribers. A subscription from the US or Canada can be watched in either country.
     prices:
@@ -556,9 +556,11 @@ policies:
           quote: 'Your BritBox subscription will automatically renew at the end of each subscription period.'
       lastVerified: 2026-11-13
     - topic: billing.fees
-      tier: good
-      reason: 'You pay the price plus tax. Your card company may add its own fees, such as for paying in another currency, and partners like Amazon may charge more.'
+      tier: poor
+      reason: 'Besides the price and tax, it may charge "any other charges" you run up using it, without saying what they are. Your card company may add its own fees too.'
       sources:
+        - url: https://www.britbox.com/ca/terms-and-conditions
+          quote: 'By creating an account and providing a Payment Method, you authorize us and our payment processor to charge your monthly and/or annual subscription fee at the current rate as at each billing date, any other charges you may incur in connection with your access to and use of the Services, as well as any applicable taxes to your Payment Method.'
         - url: https://www.britbox.com/ca/terms-and-conditions
           quote: 'For certain Payment Methods, your Payment Method provider may charge you a foreign transaction fee or other charges and you are responsible for all of these charges.'
         - url: https://help.britbox.com/hc/en-us/articles/30094342163863-Why-is-my-subscription-more-expensive-than-expected

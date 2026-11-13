@@ -152,7 +152,7 @@ plans:
       account.pause: true
     inferred:
       video.quality:
-        reason: 'Its help centre''s video playback article caps "1080p video at 5 Mbps" and names no higher resolution, so 1080p is the best it streams.'
+        reason: 'Its video playback article says Super Channel+ plays "1080p video at 5 Mbps". Its other speed tables, up to 4K, are general guides, so 1080p.'
         page:
           name: Video playback
           url: https://www.superchannelplus.ca/help/watching/video-playback
@@ -186,6 +186,9 @@ plans:
         lastVerified: 2026-11-13
         sourceUrl: https://signup.superchannelplus.ca/
 
+  # Bought on Prime Video or Apple TV, so Amazon's or Apple's terms govern the purchase (billing, cancelling, refunds);
+  # the policies below are Super Channel+'s own and apply to this plan only for what Super Channel itself does. Plan-
+  # scoped ratings from Amazon's and Apple's terms are for the owner (the review of 2026-11-13).
   - id: super-channel.channels
     name: Super Channel
     link: https://superchannel.ca/subscribe

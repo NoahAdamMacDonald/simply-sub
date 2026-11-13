@@ -158,7 +158,7 @@ plans:
       account.parental-controls: false
     inferred:
       video.quality:
-        reason: 'Its help centre says you need faster internet to watch in HD, without naming a resolution or offering 4K, so at least 720p (HD).'
+        reason: 'Its help centre says you need faster internet to watch in HD. Its speed list, from 240p to "4K and higher", is a general guide, not what it streams, so at least 720p (HD).'
         page:
           name: What can I do if the stream quality is bad?
           url: https://criterionchannel.zendesk.com/hc/en-us/articles/25879985242268-What-can-I-do-if-the-stream-quality-is-bad

@@ -319,14 +319,23 @@ policies:
       pages: [https://emby.media/privacy.html, https://emby.media/terms.html]
       lastVerified: 2026-11-13
     - topic: privacy.data-retention
-      status: not-stated
-      reason: 'Its privacy policy doesn’t say how long it keeps your information.'
-      pages: [https://emby.media/privacy.html]
+      tier: bad
+      reason: 'It states no time for keeping your information, and what you remove from your profile may stay in its systems for its own admin use.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'When you edit your Personal Information or change your preferences on the Website, information that you remove may persist internally for EMBY’s administrative purposes.'
       lastVerified: 2026-11-13
     - topic: privacy.data-deletion
-      status: not-stated
-      reason: 'Its privacy policy offers a way to correct your information, but not to have it deleted, except a child’s.'
-      pages: [https://emby.media/privacy.html]
+      tier: poor
+      reason: 'To have your profile removed, you post a request in a thread on its forum. It may not delete everything: some data can stay on backups.'
+      sources:
+        - url: https://emby.media/privacy.html
+          quote: 'If you wish to remove your Profile from the Website, please post a comment in the “General Discussion” portion of the website forum in the thread labeled “For forum issues please post in this thread” and request that your Profile be removed from the Website.'
+        - url: https://emby.media/privacy.html
+          quote: 'Also, please note that it is not always possible to completely remove or delete all of your information from our databases and that residual data may remain on backup media or for other reasons, and if you have made any public postings on the Website such as in the Public Areas, these communications are not automatically removed.'
+      action:
+        name: 'Ask in its forum'
+        url: https://emby.media/community/
       lastVerified: 2026-11-13
     - topic: privacy.data-portability
       status: not-stated
@@ -399,8 +408,8 @@ policies:
       pages: [https://emby.media/premiere.html]
       lastVerified: 2026-11-13
     - topic: billing.renewal-notice
-      tier: great
-      reason: 'Nothing renews unless you choose it: the yearly membership ends after a year, and only the monthly plan, sold as recurring, renews on its own.'
+      tier: good
+      reason: 'The yearly membership never renews on its own. The monthly plan does, and no reminder before it is stated.'
       sources:
         - url: https://emby.media/premiereterms.html
           quote: 'If you select automatic renewal at the time of the subscription, then your subscription will be renewed automatically, and thereby the Term will be renewed automatically at the end of the then current Term.'
