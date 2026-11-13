@@ -38,9 +38,6 @@
 # archives"; none of your own media.
 # Free use: none: its plans are paid (free trials, when offered, turn into a plan: its terms' clause 14).
 
-# Coverage: f1-tv.pro and f1-tv.premium in US, GB, IE, AU, DE, ES, IT, and f1-tv.premium in FR: not sold there; F1's
-# Location Availability shows "Not available" under them for each of those countries (read 2026-11-13).
-
 # Coverage: f1-tv.* in AX, DZ, AO, AI, AG, AR, AW, AU, AT, AZ, BS, BH, BD, BB, BE, BT, BA, BW, BR, VG, BG, KY, TD, CL,
 # CN, CO, CR, HR, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, EE, FI, FR, DE, GH, GR, GD, GP, GT, GG, HT, HN, HK, HU, IS,
 # IN, ID, IM, IL, IT, JM, JP, JE, JO, KE, KW, LA, LV, LB, LT, LU, MY, MV, MT, MQ, MR, MX, MC, MS, MA, MZ, NA, NP, NL,
@@ -365,6 +362,21 @@ plans:
       account.parental-controls: false
     perks: [live-timing, onboard-cameras, support-series]
     notes: Every F1 session live and on demand, ad-free, with onboard cameras, live team radios and the support series live, in up to 1080p on one device at a time. Not sold directly in the US, the UK, Ireland, Australia, Germany, Spain or Italy.
+    # Where it isn't sold (Location Availability, read 2026-11-13 with each country picked in its drop-down): "Not
+    # available" at the foot of Pro's column, the second of three ("Official F1® Live Stream"), and the United States'
+    # footnote (Germany's view says it too: "F1 TV Pro & Premium are no longer available to buy directly through F1 in
+    # this territory."). The page shows these words only with a country picked, so a baseline of it as served doesn't
+    # have them. Canada, New Zealand, the Netherlands and France show no "Not available" under Pro.
+    notSoldIn:
+      - regions: [US]
+        url: https://f1help.formula1.com/article/Location-Availability
+        quotes:
+          - '*F1 TV Pro & Premium are no longer available to buy directly through F1.'
+        lastVerified: 2026-11-13
+      - regions: [GB, IE, AU, DE, ES, IT]
+        url: https://f1help.formula1.com/article/Location-Availability
+        quotes: ['Not available']
+        lastVerified: 2026-11-13
     prices:
       - region: CA
         currency: CAD
@@ -400,6 +412,19 @@ plans:
       account.parental-controls: false
     perks: [live-timing, onboard-cameras, support-series, multiview]
     notes: Everything in Pro, plus 4K HDR on supported TV devices, Multiview of up to 4 feeds and up to 6 devices at once. In the US it comes with Apple TV instead. Not sold in the UK, Ireland, Australia, Germany, France, Spain or Italy.
+    # Where it isn't sold (Location Availability, read 2026-11-13 with each country picked): "Not available" at the
+    # foot of Premium's column, the third ("Ultimate F1® Live Immersion"), France's included, and the United States'
+    # footnote. Canada, New Zealand and the Netherlands show no "Not available" under Premium.
+    notSoldIn:
+      - regions: [US]
+        url: https://f1help.formula1.com/article/Location-Availability
+        quotes:
+          - '*F1 TV Pro & Premium are no longer available to buy directly through F1.'
+        lastVerified: 2026-11-13
+      - regions: [GB, IE, AU, DE, FR, ES, IT]
+        url: https://f1help.formula1.com/article/Location-Availability
+        quotes: ['Not available']
+        lastVerified: 2026-11-13
     prices:
       - region: CA
         currency: CAD
