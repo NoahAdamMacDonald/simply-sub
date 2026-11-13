@@ -146,6 +146,13 @@
   source: own
   status: done
   date: 2026-11-11
+- id: morphe
+  name: Morphe
+  website: https://morphe.software
+  category: software
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

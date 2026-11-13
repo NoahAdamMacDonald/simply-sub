@@ -1,0 +1,281 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read from Canada with Edge (morphe.software, its FAQ,
+# donate, MicroG and translate pages, its Open Collective and Crowdin pages) and a plain fetch (its GitHub repositories
+# and documentation; YouTube's Terms of Service and help). Pages, each quoted where it's used:
+# What it is: a free, open-source Android app that patches the official YouTube, YouTube Music and Reddit apps on your
+# own phone ("Morphe is an Android app that patches YouTube, YouTube Music, and Reddit - stripping ads and giving you
+# back control over your experience. No root required.", its Morphe Manager README), with a desktop tool (Morphe
+# Desktop) that does the same from a computer. It's software, not a streaming service: listed neutrally as a free tool
+# (BLUEPRINT §14, the owner's choice of 2026-11-10), never as a way around YouTube's own plans, so no streaming features
+# and no perks, and its notes say what YouTube's terms say of modified apps and blocking ads.
+# Pricing: none. It's free ("Open source and free forever.", its home page's footer), with no account ("No account
+# needed.", its README), so its one plan is free, priced for everywhere. Donations through Open Collective (one-time,
+# "BACKER $5/mo", "MEGA SUPPORTER $50/mo", its donate page) buy nothing but a name on its backers list ("Your name
+# appears on our backers list."), so they aren't plans; Open Collective's page names "Fiscal Host: Open Source
+# Collective", which holds the donations.
+# Region checklist, 2026-11-13: not needed: one free download for every country, with no prices.
+# Bundles: none. Official resellers: none; it sells nothing. Ways to pay: none.
+# Copies from other sites aren't Morphe's: "you should not use pre-patched APKs" (its FAQ), and "The official and only
+# safe way to use Morphe is to patch yourself on your phone using the Android Morphe app or on your computer using
+# Morphe Desktop." APK mirror sites were not used as sources.
+# Free use: its one plan is free.
+id: morphe
+name: Morphe
+website: https://morphe.software
+category: software
+spendCategory: software
+# Nothing to cancel: it's free, with no account. Its home page is the closest page ("Open source and free forever.").
+cancelUrl: https://morphe.software/
+sources: { pricing: https://morphe.software/ }
+# Owner (M11.2), read 2026-11-13: no company. Its FAQ says a team of former ReVanced developers made it and an
+# open-source community runs it; its GitHub organisation's profile says "Morphe is an independent project based on prior
+# work from ReVanced", and its licence NOTICE calls it "the Morphe software project". Its Open Collective page names a
+# fiscal host (Open Source Collective) that holds donations, not an owner. No page states a country, so a volunteer
+# project (Jellyfin's precedent, the owner's choice of 2026-11-11) with none.
+owner:
+  name: Morphe project
+  volunteer: true
+  page:
+    name: FAQ & Troubleshooting
+    url: https://morphe.software/faq
+  quotes:
+    - 'Morphe is not affiliated with ReVanced. Morphe was created by a team of former ReVanced developers and contributors.'
+    - 'Since we are an open-source community and depend on outside help, you can always check out our GitHub repositories and contribute to Morphe by creating an issue or pull request.'
+  lastVerified: 2026-11-13
+# Source code (M11.5): its home page links its GitHub organisation (github.com/MorpheApp, which GitHub shows as verified
+# for morphe.software). Its app (Morphe Manager), patches, patcher and desktop tool are each "GPL-3.0" there, with extra
+# terms under the GPL's section 7 on its name and logo (its README). It runs no servers for users, and "All source code
+# for Morphe is open-source and free for anyone to inspect." (its FAQ), so fully open.
+sourceRepo:
+  url: https://github.com/MorpheApp
+  page:
+    name: Morphe
+    url: https://morphe.software/
+  quotes:
+    - 'Browse the source code, report bugs, and contribute to Morphe development.'
+    - 'Open source and free forever.'
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: Morphe Manager is "an Android app" (its README; "Download Morphe For
+# Android devices", its home page), and Morphe Desktop ("Requires Java 21+ to run") runs on Windows, macOS and Linux (its
+# documentation: "On Windows, Morphe currently forces bytecode mode to FULL regardless of what you pass to this flag
+# (workaround for a platform-specific issue). The flag still works as expected on macOS and Linux."). Not on iOS ("it is
+# not available on iOS", its FAQ); an Android TV only "may be possible", so no tv. Sign-in: none, it has no accounts.
+# Support: its GitHub issues and Reddit community ("Follow us, report issues, and help make Morphe better", its home
+# page), no email or ticket support. App languages: its home page links its Crowdin project ("Help translate Morphe into
+# your language"), whose translations "are reviewed and shipped in real Morphe releases" (its translate page); every
+# registry language there is 99% or more translated (Hindi 99%, Arabic, Chinese, French, Japanese, Portuguese and Spanish
+# 100%, German and Italian 99%, Korean 100%), read 2026-11-13 on crowdin.com/project/morphe, the threshold Jellyfin's
+# (97%). Its website's own picker has every one but Hindi. Not self-hostable: it's an app, not a server. No pause or
+# parental controls (no account). Ad free isn't stated: it isn't required in software, and Morphe's own app shows none,
+# but a value here could be read as a way to remove YouTube's ads, which the owner's decision rules out.
+features:
+  platforms: [android, windows, macos, linux]
+  support.channels: [community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+  software.open-source: fully-open
+
+# YouTube's own terms on modified apps and blocking ads (BLUEPRINT §14), read 2026-11-13: its Terms of Service
+# (youtube.com/t/terms, Canada's version, "Effective as of January 5, 2022") and its help article "Allow ads on videos
+# that you watch" (support.google.com/youtube/answer/14129599). Reddit's terms, for the Reddit patches, weren't read.
+notes: 'Morphe changes YouTube’s own apps on your phone. YouTube’s Terms of Service say of the apps it provides: "You are not allowed to copy, modify, distribute, sell, or lease any part of the software", and that you are not allowed to "circumvent, disable, fraudulently engage with, or otherwise interfere with any part of the Service". YouTube’s help centre says: "When you block YouTube ads, you violate YouTube’s Terms of Service" and "If you continue to use ad blockers, we may block your video playback."'
+
+plans:
+  - id: morphe.free
+    name: Free
+    link: https://morphe.software/
+    features: {}
+    notes: 'Free and open source. It patches the official YouTube, YouTube Music and Reddit apps on your own Android phone (or from a computer with Morphe Desktop). Its pages list "Ad Blocking" ("Removes all ads from the home feed and video player for uninterrupted viewing."), SponsorBlock ("Automatically skips sponsored segments and other non-essential parts of videos."), "Return Dislikes" and background play ("Removes restrictions on background playback, including playing kids videos in the background."). "MicroG is required to use YouTube Morphe and YT Music Morphe".'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-13,
+          sourceUrl: https://morphe.software/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13. Morphe has no terms of service, no sign-up and no privacy
+# policy page (morphe.software/privacy and /terms are pages not found): its FAQ's "What is Morphe's privacy policy?" is
+# its privacy statement, and its apps are free software under the GNU GPL v3 with section 7 terms on its name and logo
+# (its README and NOTICE files). So the topics about an account, its contract and data it holds about you are
+# not-applicable, with why; its website's analytics are graded as the FAQ states them. Read: its home page, FAQ, donate,
+# MicroG and translate pages, its GitHub organisation, Morphe Manager's README, licence and NOTICE, its guides
+# (updating patched apps, storage and saved data, the APK download helper), Morphe Patches' README and NOTICE, Morphe
+# Desktop's README and documentation, and Morphe Manager's security page on GitHub ("No security policy detected",
+# "There aren't any published security advisories": GitHub's words, not quoted). Not Morphe's own and not rated: MicroG
+# (its own open-source project, Apache-2.0 on GitHub), SponsorBlock, Return YouTube Dislike and DeArrow (outside
+# services its patches use), APKMirror (where its guides send you for the original app), Crowdin, Open Collective, its
+# Reddit community, and the patched apps' own companies' terms (YouTube's are quoted in the provider's notes).
+policies:
+  links:
+    - name: 'FAQ & Troubleshooting'
+      url: https://morphe.software/faq
+    - name: 'Morphe (home page)'
+      url: https://morphe.software/
+    - name: 'Morphe Manager (GitHub)'
+      url: https://github.com/MorpheApp/morphe-manager
+    - name: 'Updating a patched app (GitHub)'
+      url: https://github.com/MorpheApp/morphe-manager/blob/main/docs/updating-patched-apps.md
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'Its apps send it nothing. But its website counts your visits with Umami and Google Analytics, and it gives no way to turn that off.'
+      sources:
+        - url: https://morphe.software/faq
+          quote: 'The website uses Umami and Google Analytics 4: No cookies, no advertising, no profiling, and no data is sold or shared.'
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'Everything happens locally. Morphe never uploads your APKs or personal data anywhere.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It says it sells and shares no data. Patched apps do ask outside services, such as SponsorBlock’s servers, for things like which parts of a video to skip.'
+      sources:
+        - url: https://morphe.software/faq
+          quote: 'The website uses Umami and Google Analytics 4: No cookies, no advertising, no profiling, and no data is sold or shared.'
+        - url: https://morphe.software/faq
+          quote: 'This likely means that the SponsorBlock servers are having issues.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no tracking for ads: its website has no advertising and builds no profiles, and it adds no tracking to the apps it patches.'
+      sources:
+        - url: https://morphe.software/faq
+          quote: 'The website uses Umami and Google Analytics 4: No cookies, no advertising, no profiling, and no data is sold or shared.'
+        - url: https://morphe.software/faq
+          quote: 'Morphe does not add analytics or data collection to any patched apps.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'Morphe never receives what you watch, write or upload: patching happens on your phone, so there’s nothing it could train AI on.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+        - https://morphe.software/faq
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      status: not-stated
+      reason: 'Its apps send it nothing to keep, but it doesn’t say how long its website keeps the visit data its analytics collect.'
+      pages:
+        - https://morphe.software/faq
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'Morphe keeps almost nothing about you: what its app saves stays on your phone, where you can delete it yourself.'
+      sources:
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'Everything happens locally. Morphe never uploads your APKs or personal data anywhere.'
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'Morphe patches them at the bytecode level - modifying the app directly on your device, without any of your data leaving it.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-applicable
+      reason: 'Morphe holds none of your data to give back. Its settings stay on your phone, and you can export them as a file yourself.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+        - https://morphe.software/faq
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its pages don’t say what it does if police or governments ask. Its apps send it nothing; only its website collects visit data.'
+      pages:
+        - https://morphe.software/faq
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'What its app saves stays on your phone, but it doesn’t say where its website’s analytics data is kept.'
+      pages:
+        - https://morphe.software/faq
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you download it free, with no account and nothing to fill in.'
+      sources:
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'The website will guide you to the latest release for your device. No account needed.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account and no terms of service to agree to, so no dispute clause: Morphe is free software you use under the GNU GPL.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service to change. Morphe is free software under the GNU GPL, and the copy you have stays yours under it.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no Morphe account to close: you download it and use it without signing up.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Nothing you make or upload goes to Morphe: it patches apps on your own phone and uploads nothing.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: great
+      reason: 'Nothing can be taken away: it’s free software under the GNU GPL that you keep, and its makers say it stays free.'
+      sources:
+        - url: https://morphe.software/
+          quote: 'Open source and free forever.'
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'Morphe is licensed under the GNU General Public License v3.0'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no Morphe account to close for not using it.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source under the GNU GPL: anyone may read, change and share them. A changed version must use its own name and logo, not Morphe’s.'
+      sources:
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'Morphe is licensed under the GNU General Public License v3.0'
+        - url: https://morphe.software/faq
+          quote: 'All source code for Morphe is open-source and free for anyone to inspect.'
+        - url: https://github.com/MorpheApp/morphe-manager
+          quote: 'Derivative works must use their own distinct branding.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says anyone can read its code and its community reviews it, but it describes no outside security checks and no way to report security problems.'
+      sources:
+        - url: https://morphe.software/faq
+          quote: 'All source code for Morphe is open-source and free for anyone to inspect. Our community actively reviews and contributes to the codebase.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      status: not-applicable
+      reason: 'There’s no Morphe account to share: anyone can download it free, without one.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+        - https://morphe.software/
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-applicable
+      reason: 'There’s no account, so nothing registers or counts your devices.'
+      pages:
+        - https://github.com/MorpheApp/morphe-manager
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: great
+      reason: 'It changes an app only when you patch it, and leaves system files alone. New versions are only announced: you update by patching again yourself.'
+      sources:
+        - url: https://morphe.software/faq
+          quote: "Morphe only modifies app packages and doesn't touch system files."
+        - url: https://github.com/MorpheApp/morphe-manager/blob/main/docs/updating-patched-apps.md
+          quote: 'Updating means patching again.'
+        - url: https://github.com/MorpheApp/morphe-manager/blob/main/docs/updating-patched-apps.md
+          quote: 'Background update notifications - notifies you about new Morphe and patch releases.'
+      lastVerified: 2026-11-13
