@@ -164,6 +164,12 @@ describe('namesRenewalAnchor', () => {
     ['Netflix membership plans are billed monthly on the date you signed up.', 'same-date', true],
     ['Your billing cycle starts on the date you sign up.', 'same-date', true],
     ['Renews on the same day each month', 'same-date', true],
+    // Malwarebytes' auto-renewal help (M11.15).
+    [
+      'the payment method on file is charged automatically at the end of a trial period or on the subscription expiration date.',
+      'same-date',
+      true,
+    ],
     // Fubo's billing help (M11.15).
     [
       'The date that you are billed is based on the date you became a paying Fubo subscriber.',
