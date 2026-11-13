@@ -1,0 +1,467 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 7), read with Edge from Canada, its plan page again through a
+# US exit, criterion.com (its terms, privacy policy and FAQ, behind Cloudflare's check) in Edge with a visible window,
+# and its help centre (criterionchannel.zendesk.com, every article) through its Zendesk API. Pages, each quoted where
+# it's used:
+# Pricing: its plan page (criterionchannel.com/subscribe), which sends a Canadian reader to ca.criterionchannel.com:
+# "Annual", "US$99.99 / year" and "Monthly", "US$10.99 / month" (its plan data: "price":"US$99.99", "price":"US$10.99");
+# through a US exit www.criterionchannel.com/subscribe shows "$99.99 / year" and "$10.99 / month". Its help centre's
+# "How much is a Criterion Channel subscription?": "Monthly subscription: $10.99 USD", "Annual subscription: $99.99 USD",
+# "This subscription rate does not include any applicable taxes for your region." and "Our pricing is in USD, as we are
+# a US-based company. Subscription charges will be converted to CAD by your bank or credit card issuer at the time of
+# the charge.", so Canada is priced in US dollars. criterion.com's Channel FAQ gives the same two prices. The 7-day free
+# trial isn't a price. Not listed: gift subscriptions (criterionchannel.com/buy-a-gift, "Annual US$99.99 / year"), a
+# prepaid year rather than a plan of its own.
+# Region checklist for CA and US, 2026-11-13: 1. its country hosts (ca.criterionchannel.com for Canada, www for the US;
+# no locale paths, no hreflang); 2. no picker; 3. the plan page's data (the same US-dollar prices on both hosts); 4. the
+# plan picker up to the account form (login.criterion.com's "Create Your Criterion Account": an email address), typing
+# nothing; 5. its help centre's price article (USD for Canada, tax added); 6. Edge from Canada, a plain fetch, and Edge
+# through a US exit; 7. no bill offered. Other countries: not sold (its help centre and terms, below).
+# Bundles: none: its plan page sells the two periods only, and its help centre and criterion.com name no bundle.
+# Official resellers: none; it sells gift subscriptions itself. Apple's App Store, Google Play, Amazon (Fire TV) and Roku
+# bill it in its apps (partners, not resellers).
+# Features, read 2026-11-13: "all ad-free" (the plan page); "You can log in and stream on up to three devices at the same
+# time under one Criterion Channel subscription." (What devices can I watch The Criterion Channel on?); Criterion 24/7,
+# "a 24/7 live channel" that "runs continuously, offering an “always-on” experience similar to traditional TV" (How to
+# Watch and What to Expect), a linear channel as STARZ's live stream is. Video quality: no page names its best quality;
+# "To view HD you will need to have higher download speeds." (What can I do if the stream quality is bad?), so 720p
+# (HD), inferred as BritBox's and Hayu's; its troubleshooting article's speed table lists 240p up to "4K and higher" only
+# as a reference. Downloads: only its app store listings (Apple's and Google Play's) say "Download movies and extras you
+# love for offline viewing", and no page on its own sites does, so no streaming.download-devices. No page names profiles
+# or parental controls (its help centre, terms, privacy policy and FAQs read). Pausing: "You may cancel or pause your
+# subscription at any time." (its help centre's price article and criterion.com's Channel FAQ). What it streams: "an
+# eclectic mix of classic and contemporary films from Hollywood and around the world" and "original programming
+# exclusive to the service" (What is The Criterion Channel?), its "Documentaries" category and its series pages
+# (criterionchannel.com/series/...); none of your own media.
+# Free use: none: a 7-day trial that turns into the plan ("A Criterion Channel subscription starts with a one-time 7-day
+# free trial"); without a subscription you can only browse and watch trailers and teasers.
+
+# Coverage: criterion-channel.* in AS, GU, MP, PR and VI: its terms sell it to those who "reside in the United States
+# (including its territories and possessions)", but no page names a territory's price; its plan page through a US exit
+# showed the US's (2026-11-13).
+
+id: criterion-channel
+name: The Criterion Channel
+website: https://www.criterionchannel.com
+# Its help centre, which criterionchannel.com/support opens.
+domains: [criterionchannel.zendesk.com]
+category: streaming
+spendCategory: streaming
+# "the Criterion Channel is available only in the U.S. and Canada at this time." (If I live outside of the United States
+# and Canada, can I stream movies from the Criterion Channel?), and its terms (1.3): "The Services are intended for
+# individuals who are 18 years of age or older and reside in the United States (including its territories and
+# possessions) or Canada." The five inhabited territories are listed, as STARZ's are.
+availableIn: [CA, US, AS, GU, MP, PR, VI]
+billingCurrency: { CA: USD, US: USD }
+cancelUrl: https://criterionchannel.zendesk.com/hc/en-us/articles/29448929126940-How-do-I-cancel-my-subscription
+sources: { pricing: https://www.criterionchannel.com/subscribe }
+notes: Priced in US dollars in Canada too. 7 days free for new subscribers.
+
+# Owner (M11.2), read 2026-11-13: criterion.com's Channel FAQ calls the Channel "our streaming platform"; its Terms of Use
+# (which criterionchannel.com/terms-of-use opens) are "a legal agreement between you and Criterion Janus Holdings LLC",
+# and its privacy policy's controller is Criterion Collection LLC. Janus Films is its sister company ("The companies
+# have similar missions but focus on different markets.", criterion.com's FAQ). No page read names shares or a listing:
+# a private company, no stock.
+owner:
+  name: 'The Criterion Collection (Criterion Janus Holdings LLC)'
+  website: https://www.criterion.com
+  page:
+    name: 'FAQ: Channel Support (The Criterion Collection)'
+    url: https://www.criterion.com/faq/channel
+  quotes:
+    - 'CriterionChannel.com is our streaming platform and requires a subscription for access.'
+    - 'In addition to hosting a rotating selection from the Criterion Collection and Janus Films’ celebrated library of more than 1,500 films'
+  country:
+    code: US
+    page:
+      name: Terms of Use
+      url: https://www.criterion.com/terms
+    quotes:
+      - 'The Services are controlled and operated by Criterion from the United States.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Ways to pay (M11.5), read 2026-11-13: its help centre's price article (cards on the website; Apple, Google Play, Amazon
+# and Roku in its apps) and its rejected-payment article (PayPal). Its gift page sells a prepaid year ("Give the gift of
+# the Criterion Channel", criterionchannel.com/buy-a-gift) but no page calls it a gift card, so it isn't listed. Its
+# checkout is Cleeng's ("CLEENG is our trusted partner that manages video e-commerce activities.", Who is Cleeng?),
+# behind the account form, so not read.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+    quotes: ['Visa', 'MasterCard', 'American Express', 'Discover']
+paymentMethods:
+  - methods: [card, app-store]
+    page: How much is a Criterion Channel subscription?
+    url: https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+    quotes:
+      - 'Credit and debit cards accepted:'
+      - 'Visa'
+      - 'MasterCard'
+      - 'American Express'
+      - 'Discover'
+      - 'Google Play (Android app): Payment is processed through your Google Play account'
+      - 'Roku app: Payment is processed through your Roku account.'
+  - methods: [paypal]
+    page: What to Do If Your Payment Is Rejected
+    url: https://criterionchannel.zendesk.com/hc/en-us/articles/24806454666908-What-to-Do-If-Your-Payment-Is-Rejected
+    quotes:
+      - 'Payments from your PayPal account balance usually process smoothly.'
+# Renewal day (M11.5): its terms charge "at the start of every new billing period" and its account page shows "the date of
+# your next expected charge", without saying which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.criterion.com/terms
+    - https://criterionchannel.zendesk.com/hc/en-us/articles/29453282356508-How-do-I-update-my-account-details
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.criterionchannel.com/subscribe
+    - https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+    - https://www.criterion.com/faq/channel
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: Roku, Apple TV, Android and Amazon devices, Xbox, Samsung TVs, iPhone and
+# iPad, Android phones, and "a computer web browser" (criterion.com's Channel FAQ; What devices can I watch The Criterion
+# Channel on?). Sign-in: an email address, then a password ("Click Sign in in the top right corner of the page and enter
+# your email address.", "Underneath the password field, select Reset your password.", I'm having trouble signing in);
+# TVs pair with a code entered on criterionchannel.com/activate, where you sign in. Its Criterion.com single sign-on
+# ("Criterion.com and CriterionChannel.com accounts are linked and have a Single Sign-On (SSO)") is the same company's
+# account, not another company's. App languages: English (its sites and help centre are English only). Support: email
+# ("contact channelhelp@criterion.com", "emails are answered Monday to Friday during business hours ET") and its help
+# centre's form; its "chatbot" is a bot, not live chat.
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en]
+  support.channels: [email]
+
+# Perks (M11.6): what no feature describes, in its own words.
+perks:
+  - id: supplements
+    name: More than 5,000 supplementary features, including introductions, interviews, video essays and commentary tracks
+
+plans:
+  - id: criterion-channel.standard
+    name: The Criterion Channel
+    link: https://www.criterionchannel.com/subscribe
+    features:
+      video.quality: 720p
+      streaming.concurrent-streams: 3
+      ad-free: true
+      streaming.live: [tv-channels]
+      streaming.content: [films, series, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its help centre says you need faster internet to watch in HD, without naming a resolution or offering 4K, so at least 720p (HD).'
+        page:
+          name: What can I do if the stream quality is bad?
+          url: https://criterionchannel.zendesk.com/hc/en-us/articles/25879985242268-What-can-I-do-if-the-stream-quality-is-bad
+        lastVerified: 2026-11-13
+    perks: [supplements]
+    notes: Classic and contemporary films from Hollywood and around the world, the Criterion Collection and Janus Films’ library, shorts, bonus features and the Criterion 24/7 live channel, ad-free, on 3 screens at once. Its mobile apps’ store listings offer downloads.
+    prices:
+      - region: CA
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.criterionchannel.com/subscribe
+      - region: CA
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.criterionchannel.com/subscribe
+      - region: US
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.criterionchannel.com/subscribe
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.criterionchannel.com/subscribe
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13: The Criterion Collection's Terms of Use ("Last update September
+# 24, 2026", Criterion Janus Holdings LLC's, under New York law) and Privacy Policy ("Effective September 24, 2026",
+# Criterion Collection LLC's, with California, other states' and Canada's notices), both on criterion.com, which
+# criterionchannel.com's footer opens; its sign-up form (login.criterion.com, from criterionchannel.com/signup: "By
+# clicking “Continue,” you acknowledge that you have read and agree to the Terms & Conditions and confirm that you have
+# reviewed our Privacy Policy.", an email address first, read without typing); its Privacy Rights Request Form (for
+# residents of the states its policy lists); criterion.com's FAQs; and its help centre's billing, cancelling, refund,
+# devices and sign-in articles. Its apps have no licence of their own (the terms' Limited License, 5.2). Not read: its
+# list of the third parties it may sell to (criterion.com/cookie-list, which Cloudflare's check kept from loading), the
+# cookie settings panel, the steps after the email address, and the terms of the app stores that bill it. Its terms take
+# a perpetual, irrevocable licence over anything you submit (5.3), a topic streaming doesn't have. Calibrated against
+# STARZ and Nebula.
+policies:
+  links:
+    - name: 'Terms of Use'
+      url: https://www.criterion.com/terms
+    - name: 'Privacy Policy'
+      url: https://www.criterion.com/privacy
+    - name: 'Create Your Criterion Account'
+      url: https://www.criterionchannel.com/signup
+    - name: 'How do I cancel my subscription?'
+      url: https://criterionchannel.zendesk.com/hc/en-us/articles/29448929126940-How-do-I-cancel-my-subscription
+    - name: 'How do I get a refund?'
+      url: https://criterionchannel.zendesk.com/hc/en-us/articles/24806247534236-How-do-I-get-a-refund
+    - name: 'How much is a Criterion Channel subscription?'
+      url: https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+    - name: 'What devices can I watch The Criterion Channel on?'
+      url: https://criterionchannel.zendesk.com/hc/en-us/articles/24806312682012-What-devices-can-I-watch-The-Criterion-Channel-on
+    - name: "Why hasn't my subscription renewed?"
+      url: https://criterionchannel.zendesk.com/hc/en-us/articles/25881167961244-Why-hasn-t-my-subscription-renewed
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use the Channel and what you like, with Google Analytics among other tools. You can only limit its cookies, browser by browser and device by device.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'Manage, maintain, and operate the Services; diagnose or fix technology problems; monitor the performance of the Services; analyze user preferences and trends; and understand how you access and use the Services.'
+        - url: https://www.criterion.com/privacy
+          quote: 'We use Google Analytics to collect usage details.'
+        - url: https://www.criterion.com/privacy
+          quote: 'Please note that you will need to set preferences on each browser and device you use to visit our Services.'
+      action:
+        name: 'Its privacy choices'
+        url: https://www.criterion.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its ad partners may let other companies use what they learn about you to market to you, and it builds look-alike audiences for ads. Stopping that takes an email, or cookie settings on each browser.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'These partners may allow other companies to access information about you so that they may market other products and services you may be interested in.'
+        - url: https://www.criterion.com/privacy
+          quote: 'To opt-out of this, please send an email to privacy@criterion.com and include “opt-out” in the subject line'
+        - url: https://www.criterion.com/privacy
+          quote: 'Please note that you will need to set preferences on each browser and device you use to visit our Services.'
+      action:
+        name: 'Its privacy choices'
+        url: https://www.criterion.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The Channel has no ads, but Criterion uses Google’s and Meta’s tools to show you its ads based on what you browse. You can only turn that off browser by browser, or ad network by ad network.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'We use Google and Meta customize our advertising and to serve you ads based on your browsing behavior.'
+        - url: https://www.criterion.com/privacy
+          quote: 'Please note that you will need to set preferences on each browser and device you use to visit our Services.'
+        - url: https://www.criterion.com/privacy
+          quote: 'Please note this does not opt you out of being served ads, nor will it prevent the receipt of interest-based advertising from other companies that do not participate in these programs.'
+      action:
+        name: 'Its privacy choices'
+        url: https://www.criterion.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or upload trains AI.'
+      pages: [https://www.criterion.com/privacy, https://www.criterion.com/terms]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information while you’re a customer, and for an unnamed time after you leave for business and legal needs. It names no periods.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'Certain information is maintained throughout our relationship with you in order to provide the Services. When we no longer provide Services to you, we may still need this information for a period of time for business and legal requirements.'
+        - url: https://www.criterion.com/privacy
+          quote: 'Internet or other similar network activity is typically deleted at regular intervals when the information is no longer necessary for the purpose for which it was collected.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      status: not-stated
+      reason: 'Its privacy policy lets people in California and some other US states ask for their data to be deleted, but names no way for anyone else, Canadians included.'
+      pages: [https://www.criterion.com/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy names no way to get a copy of your data, except for people in Canada and some US states, who can ask to see it.'
+      pages: [https://www.criterion.com/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      regions: [CA]
+      tier: poor
+      reason: 'In Canada you can ask, by form or email, to see and correct your information, but it offers no copy to take elsewhere.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'If you are a Canadian resident, subject to applicable law, you have the right to access, update and correct inaccuracies in, and withdraw consent to our collection, use and disclosure of, your personal information in our custody or control.'
+        - url: https://www.criterion.com/privacy
+          quote: 'You may submit a request to exercise your rights by using the Privacy Rights Request Form or by contacting us via email at privacy@criterion.com.'
+      action:
+        name: 'How to ask (its privacy policy, Canada)'
+        url: https://www.criterion.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides court orders and legal process, it may hand over your information when police or a government simply ask, national security included.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'respond to subpoena, court order, or other legal process or request'
+        - url: https://www.criterion.com/privacy
+          quote: 'in response to court orders, law enforcement or legal process, including for national security purposes, which may include lawful access by U.S. or foreign courts, law enforcement or other government authorities'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'If you live outside the US, your information can be stored and used outside your country, the US included, and it doesn’t say what protects it there.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'If you access or use our Services outside of the United States, you understand that we and our service providers may access, collect, process, and store your personal information outside of the jurisdiction in which you reside, including in the United States.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up asks for an email address and a password you choose; its policy says an account also holds your name, and a paid plan needs your payment details.'
+      sources:
+        - url: https://www.criterionchannel.com/signup
+          quote: 'Email address *'
+        - url: https://www.criterion.com/terms
+          quote: 'During the registration process, you must select a password.'
+        - url: https://www.criterion.com/privacy
+          quote: 'Account information, including your name, email address, selected password, and content preferences.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to use it. It doesn’t say what it does with a child’s information it finds, and offers no kids’ profiles or parental controls.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'The Services are intended for individuals who are 18 years of age or older and reside in the United States (including its territories and possessions) or Canada.'
+        - url: https://www.criterion.com/terms
+          quote: 'You must be at least eighteen (18) years of age or older to register for an account.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses safeguards and can’t guarantee security. It names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://www.criterion.com/privacy
+          quote: 'We use a combination of physical, technical, and administrative safeguards to protect the information we collect through the Services.'
+        - url: https://www.criterion.com/privacy
+          quote: 'we cannot guarantee the security of the networks, systems, servers, devices, and databases we operate or that are operated on our behalf.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online in a few clicks and keep watching until the time you paid for runs out, but you must cancel by the day before it renews.'
+      sources:
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/29448929126940-How-do-I-cancel-my-subscription
+          quote: 'Under Current plan, choose Cancel Subscription.'
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/29448929126940-How-do-I-cancel-my-subscription
+          quote: 'You will continue to have access through the duration you already paid for or your free trial.'
+        - url: https://www.criterion.com/terms
+          quote: 'You must cancel your subscription on the day before your next recurring billing date in order to avoid being charged for the next billing period.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'If you paid on its website, you can ask for a refund within 7 days of a monthly charge or 30 days of a yearly one, but it decides case by case and never refunds part of a period.'
+      sources:
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/24806247534236-How-do-I-get-a-refund
+          quote: 'Annual subscriptions: within 30 days of billing'
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/24806247534236-How-do-I-get-a-refund
+          quote: 'Monthly subscriptions: within 7 days of billing'
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+          quote: 'Please contact us and we will review your request on a case by case basis.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you about a new price before your next billing date, without saying how far ahead, and you can cancel if you don’t accept it.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'We will give you advance notice of any price change prior to the next billing date, but we will not be able to notify you of any changes in applicable taxes or fees.'
+        - url: https://www.criterion.com/terms
+          quote: 'If you do not wish to accept a price change, you may cancel your subscription in accordance with Section 3.4 below.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Every plan starts with a 7-day free trial that charges your card when it ends, and it needn’t remind you first.'
+      sources:
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+          quote: 'After your free trial ends, your credit card will be charged at either the monthly or annual rate you selected when you registered for an account.'
+        - url: https://www.criterion.com/terms
+          quote: 'You may not receive separate notice that your Trial Period is about to end or has ended or that your paid or full price subscription to the Services has begun unless such notice is required by applicable law.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a monthly or yearly plan renews on its own, but not that it reminds you first.'
+      pages:
+        - https://www.criterion.com/terms
+        - https://criterionchannel.zendesk.com/hc/en-us/articles/25881167961244-Why-hasn-t-my-subscription-renewed
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'It charges the price plus “applicable taxes and fees” it doesn’t describe, and Canadians pay in US dollars, so their bank may add a conversion fee.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'AT THE THEN-CURRENT SUBSCRIPTION FEE (PLUS APPLICABLE TAXES AND FEES)'
+        - url: https://criterionchannel.zendesk.com/hc/en-us/articles/29838332177564-How-much-is-a-Criterion-Channel-subscription
+          quote: 'We cannot predict any conversion rates or fees collected by your bank or card issuer.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to a court in New York, not a private referee, but you give up class actions and a jury trial, and must bring a claim within a year.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'You and Criterion agree that any complaint, dispute, or disagreement, whether based on past, present, or future events, arising out of or related in any way to these Terms, any use of the Services, or User Content will be resolved in New York federal or state (including small claims) court.'
+        - url: https://www.criterion.com/terms
+          quote: 'ANY RIGHT TO PURSUE OR TO PARTICIPATE AS A PLAINTIFF OR AS A CLASS MEMBER IN ANY LEGAL ACTION, PROCEEDING, CAUSE OF ACTION OR COUNTERCLAIM ON A CLASS OR CONSOLIDATED BASIS OR IN A REPRESENTATIVE CAPACITY.'
+        - url: https://www.criterion.com/terms
+          quote: 'must be filed within one (1) year after such claim or cause of action arose or be forever barred.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms take effect as soon as they’re posted, and using the Channel afterwards means you accept them.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'Changes will be effective immediately and will apply only on a going-forward basis unless otherwise provided.'
+        - url: https://www.criterion.com/terms
+          quote: 'Use of the Services following such modification constitutes your acceptance of the modified Terms.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end or suspend your access at once, without warning, for a breach or any other reason it chooses, and says it owes you nothing.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'Criterion may terminate or suspend your access to the Services immediately, without prior notice or liability, if Criterion believes you have violated the Terms or for any other reason in Criterion’s sole discretion.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove films, or change or end the Channel, at any time without notice, and says it owes you nothing for it.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'We may change, suspend, or discontinue the Services, in whole or in part, at any time for any reason without notice or liability to you.'
+        - url: https://www.criterion.com/terms
+          quote: 'We reserve the right to modify or discontinue any Content at any time without notice or liability.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.criterion.com/terms]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms say you won’t let anyone else use your account, even though it streams on three devices at once.'
+      sources:
+        - url: https://www.criterion.com/terms
+          quote: 'By registering, you agree that you will not allow others to use your account and that you are fully responsible for all activities that occur under your account.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre name no limit on registered devices or downloads, only the three screens at once.'
+      pages:
+        - https://www.criterion.com/terms
+        - https://criterionchannel.zendesk.com/hc/en-us/articles/24806312682012-What-devices-can-I-watch-The-Criterion-Channel-on
+      lastVerified: 2026-11-13
