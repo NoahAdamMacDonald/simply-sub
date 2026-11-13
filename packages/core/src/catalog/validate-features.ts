@@ -419,6 +419,9 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['nebula.standard', ['streaming.concurrent-streams']],
   // Tubi states 4K only for some US live events, and no stream count (2026-11-11).
   ['tubi.free', ['video.quality', 'streaming.concurrent-streams']],
+  // AMC+ states no video quality on any page read (2026-11-13).
+  ['amc-plus.with-ads', ['video.quality']],
+  ['amc-plus.premium', ['video.quality']],
 ]);
 
 /**

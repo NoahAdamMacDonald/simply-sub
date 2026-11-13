@@ -173,6 +173,8 @@ describe('namesRenewalAnchor', () => {
       true,
     ],
     ['if your subscription began on a day not contained in a given month', 'same-date', true],
+    // AMC Global Media's streaming terms (M11.15).
+    ['If your paid subscription begins on a day not contained in a given month', 'same-date', true],
     [
       'si votre abonnement a commencé à une date non comprise dans un mois donné.',
       'same-date',
