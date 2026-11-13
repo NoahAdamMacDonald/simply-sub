@@ -1,0 +1,1622 @@
+# Researched by hand on 2026-11-13 (M11.15, security batch 1), read from Canada with Edge and a plain fetch: each country's
+# eset.com pages, ESET's own eStore (buy.eset.com), its help centre (help.eset.com), knowledgebase (support.eset.com),
+# legal hub, trust centre and AV-TEST's page. Pages, each quoted where it's used:
+# Pricing: each country's page holds its eStore's price data for every device count and period (1 to 10 devices on
+# Essential and Premium, 5 to 10 on Ultimate, 1 to 5 on NOD32 Antivirus and Mobile Security; 1, 2 or 3 years), shown
+# when you pick them: Canada's and the US's /home-store/, the UK's, Australia's and Germany's /home/protection-plans/,
+# the Netherlands' /producten/, Italy's home page and /privati/antivirus/, and France's /acheter/ (whose prices load only
+# in the browser: read in Edge, picking 1 device and 2 or 3 years). "Price valid for the first term only." and "If a
+# savings amount is shown, it describes the difference between the first term’s price and the official list price."
+# (Canada's store): the regular price is the struck one where a price is struck (2- and 3-year terms, and the UK's,
+# Australia's and the Netherlands' Black Friday cards), else the one shown, and subscriptions renew "using the payment
+# details currently on file and standard subscription pricing" (KB6205); the UK's page: "Renews at the regular price."
+# Each plan is priced for its smallest device count, and more devices are the extra-device add-on (see addOns). No page
+# sells monthly billing. Canada's cart says "excluding Sales tax"; France's prices say "TTC" (taxIncluded).
+# Region checklist for CA and US, 2026-11-13: 1. country paths (/ca/, /us/); 2. the store's device and year pickers;
+# 3. the eStore price data in each page (internalId CA_EN_…, "CAD", US_EN_…); 4. Canada's cart, up to "PROCEED TO
+# CHECKOUT"; 5. KB6205 (auto-renewal, US and Canada) and the subscription FAQ; 6. Edge and a plain fetch; 7. no bill.
+# Other countries: ESET's own eStore sells on eset.com/uk, /au, /de, /fr, /nl and /it (priced here). Ireland's page
+# sends buyers to mrc.eset.ie, New Zealand's to shop.eset.co.nz and Spain's to comprar.eset.es: country distributors'
+# shops, not eset.com's own pages, so not priced (the brief's rule); Ireland's page still lists the withdrawn Password
+# Manager and only "from €39.99".
+# Bundles: none found (the stores, plan pages and FAQ). Official resellers: none named for home plans; "Find a Reseller"
+# is its business channel's, and its return policy says only that "resellers of the ESET product line may have
+# different return policies". Google Play bills the Android app's subscription (ESET HOME's "Manage your Google Play
+# subscription"): a partner, noted, not listed.
+# Free use: two free plans, its Android app's free version and its Online Scanner for Windows.
+# Not drafted: ESET Small Business Security and ESET Security for Gamers (small-office and gaming editions), and
+# Smart TV Security sold alone (it comes with every HOME Security tier).
+
+# Coverage: eset.ultimate in US: the US sells its own Ultimate, eset.ultimate-us, with identity theft insurance.
+# Coverage: eset.ultimate-us in CA, GB, AU, DE, FR, NL and IT: sold in the US only ("It's currently available to customers
+# in the United States.", eset.com/us/home/identity-protection).
+# Coverage: eset.nod32 in AU, DE and NL: their store pages sell no NOD32 Antivirus (eset.com/au and /de's
+# /home/nod32-antivirus/ are pages not found, and the Dutch product page lists none), read 2026-11-13.
+
+id: eset
+name: ESET
+website: https://www.eset.com
+category: security
+spendCategory: software
+billingCurrency:
+  { CA: CAD, US: USD, GB: GBP, AU: AUD, DE: EUR, FR: EUR, NL: EUR, IT: EUR, GLOBAL: USD }
+# Its knowledgebase article on turning off auto-renewal (US and Canada eStore).
+cancelUrl: https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+sources: { pricing: https://www.eset.com/ca/home-store/ }
+# Owner (M11.2), read 2026-11-13: its Terms of Use name the company that runs ESET HOME (rule 3), ESET, spol. s r.o., a
+# private company ("we remain independent", its careers page) in Bratislava; ESET Canada Inc. sells in Canada (its
+# pages' footer). Its press kit names the country in English ("Slovak Republic" in the terms isn't a name core's
+# namesCountry knows).
+owner:
+  name: 'ESET, spol. s r.o.'
+  page:
+    name: Terms of Use (ESET HOME)
+    url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+  quotes:
+    - 'These Terms of Use ("Terms") constitute a special agreement between ESET, spol. s r. o., having its registered office at Einsteinova 24, 85101 Bratislava, Slovak Republic'
+  country:
+    code: SK
+    page:
+      name: Press kit
+      url: https://www.eset.com/ph/newsroom/press-kit/
+    quotes:
+      - 'ESET headquarters are based in Aupark Tower, Einsteinova 24, Bratislava, Slovakia'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its knowledgebase's card article (every eStore) names a credit or debit card but
+# no networks; France's eStore FAQ names its networks, Google Pay and Apple Pay. No page read names PayPal (Canada's
+# checkout wasn't opened past the cart).
+acceptedNetworks:
+  FR:
+    networks: [visa, mastercard]
+    url: https://www.eset.com/fr/foire-questions-estore/
+    quotes: ['carte bancaire (Visa / MasterCard)']
+paymentMethods:
+  - methods: [card]
+    page: '[KB8740] Update credit card and contact information for your ESET subscriptions in ESET eStore'
+    url: https://support.eset.com/en/kb8740-manage-account-and-credit-card-information-for-your-eset-subscriptions
+    quotes:
+      - 'Select Credit/debit card and click Edit to change the credit card information.'
+  - methods: [card, google-pay, apple-pay]
+    regions: [FR]
+    page: 'Foire aux questions eStore'
+    url: https://www.eset.com/fr/foire-questions-estore/
+    quotes:
+      - 'Pour le moment, les seuls modes de paiement disponibles sont : carte bancaire (Visa / MasterCard), Google Pay et Apple Pay.'
+# Renewal day (M11.5): KB6205 says a subscription renews "At the end of your subscription period", which names no day,
+# and its help article only that it "remains active until the end of the current period"; not-stated (notes.md).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+    - https://help.eset.com/home_eset/en-US/license_autorenewal.html
+  lastVerified: 2026-11-13
+# Lab results (M11.2), read 2026-11-13: AV-TEST's newest Windows test of home-user products, July and August 2026 (report
+# 261407). AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/eset-security-ultimate-19.1--19.2-261407/
+    tested: Security Ultimate 19.1 & 19.2, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/eset-security-ultimate-19.1--19.2-261407/
+    tested: Security Ultimate 19.1 & 19.2, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/eset-security-ultimate-19.1--19.2-261407/
+    tested: Security Ultimate 19.1 & 19.2, Windows 11
+
+# General features, read 2026-11-13. Sign-in: ESET HOME's password, two-factor codes from an authenticator app ("ESET
+# HOME supports the TOTP (Time-based One-time password) protocol"), remembered devices ("Forget devices") and Apple or
+# Google sign-in ("third-party authentication provided by Apple or Google", its privacy policy). Support: Canada's
+# contact page ("Live chat", "Send an email to technical support or sales using our interactive form.", "Phone
+# support"). App languages: its Windows apps' installer list (KB3552: English, Français, Deutsch, Italiano, Português,
+# 日本語 Japanese, 简体字 simplified Chinese, 한국어 Korean, and others the registry lacks; no Spanish, Hindi or Arabic).
+# No pause (auto-renewal is "continuous unless disabled"). Parental controls: ESET Parental Control, in every HOME
+# Security tier on Windows and Android, lets a parent filter websites and apps, set time rules and find a child's device.
+# Platforms per plan: the tiers cover Windows, macOS, Android, iOS and Android TV (Smart TV Security, KB2393 and ESET
+# HOME's "Products and features"); NOD32 "Secures Windows and macOS devices"; Mobile Security is Android's.
+# Its password manager: "On October 21, 2025, ESET stopped selling Password Manager." (its End of Life page), so no plan
+# sold now has one (password-manager false); subscribers before then keep it until their term ends.
+features:
+  account.sign-in: [password, totp, trusted-device, sso]
+  support.channels: [chat, email, phone]
+  languages.interface: [en, fr, de, it, pt, ja, ko, zh]
+
+# Perks (M11.6): what the plan pages list that no feature describes, in their words.
+perks:
+  - id: secure-data
+    name: Encryption of sensitive data and photos
+  - id: liveguard
+    name: ESET LiveGuard
+  - id: ai-chats
+    name: Safer AI Chats
+  - id: vpn-router
+    name: VPN for Router
+  - id: metadata-cleanup
+    name: Metadata Cleanup
+  - id: ssn-tracking
+    name: Social Security Number Tracking
+  - id: lost-wallet
+    name: Lost Wallet Assistance
+  - id: app-lock
+    name: App Lock
+
+# Features (read 2026-11-13): the plan cards and "Explore all features by platform" on each country's plans page, KB2393's
+# table, the VPN page and the NOD32 help.
+# - Every tier: "Real-time antivirus protection", Ransomware Shield ("detects and blocks threats that tries to lock you out
+#   of your own data"), Anti-Phishing and Safe Browsing, Safe Banking ("secured browser mode"), Firewall and Network
+#   Inspector ("test your home router and smart devices for vulnerabilities"), Antispam, Anti-Theft ("Lock and track
+#   missing devices"), Parental Control, Webcam Protection and Microphone Monitor, Gamer Mode; on Android, Call Filter and
+#   "Anti-Phishing & Anti-Smishing". Behaviour-based detection and scheduled scans from the NOD32 help (HIPS's "Deep
+#   Behavioral Inspection"; "Scanning can be configured as a scheduled task from Tools > Scheduler."), which the tiers'
+#   Windows apps build on: inferred on the tiers. No cryptomining, vulnerability-scan or optimizer wording on any page.
+# - Premium adds ESET LiveGuard, Folder Guard, Secure Data, AI Conversation Security and ESET VPN: "Unlimited VPN data",
+#   "Premium includes up to 40 countries", 3 VPN devices, WireGuard, IKEv2, OpenVPN (UDP and TCP) and Stealth, "Firewall
+#   with Kill Switch", "Split Tunneling", "No Logs Policy". No published VPN audit, P2P, multi-hop or port forwarding.
+# - Ultimate adds Ransomware Remediation ("restore everything in moments"), Identity Protection ("dark web monitoring"),
+#   Metadata Cleanup, Website Settings Review, VPN for Router and "server locations in over 70 countries".
+plans:
+  - id: eset.essential
+    name: HOME Security Essential
+    link: https://www.eset.com/ca/home/protection-plans/
+    features:
+      platforms: [windows, macos, android, ios, tv]
+      antivirus.devices: 1
+      antivirus.ransomware: [blocking]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms, calls]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock]
+      antivirus.activity-modes: true
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    inferred:
+      antivirus.behavioural:
+        reason: 'The plans'' pages don''t name it. Their Windows app is built on NOD32, whose help says its HIPS "analyzes the behavior of all programs running on the device" (Deep Behavioral Inspection), on by default.'
+        page:
+          name: HIPS - Host Intrusion Prevention System (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_hips_main.html
+        lastVerified: 2026-11-13
+      antivirus.scans:
+        reason: 'The plans'' pages say only "fast scans". The NOD32 help their Windows app is built on describes scans you start and scans scheduled from Tools > Scheduler.'
+        page:
+          name: Device scan (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_page_scan.html
+        lastVerified: 2026-11-13
+    notes: 'Priced for 1 device: each extra device, up to 10, is an extra-device add-on (ESET sells 1 to 10 on one subscription). Its password manager was withdrawn from new subscriptions on 21 October 2025.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: DE
+        currency: EUR
+        amount: 39.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 39.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 49.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+      - region: CA
+        currency: CAD
+        amount: 99.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 99.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 69.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 119.99
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: DE
+        currency: EUR
+        amount: 79.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 79.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 79.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 99.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+      - region: CA
+        currency: CAD
+        amount: 149.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 149.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 104.98
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 179.98
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 119.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 119.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 149.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+    addOnIds: [eset.extra-device]
+    addOnLimit: 9
+  - id: eset.premium
+    name: HOME Security Premium
+    link: https://www.eset.com/ca/home/protection-plans/
+    categories: [security, vpn]
+    features:
+      platforms: [windows, macos, android, ios, tv]
+      antivirus.devices: 1
+      antivirus.ransomware: [blocking]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms, calls]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock]
+      antivirus.activity-modes: true
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.devices: 3
+      vpn.server-countries: 40
+    perks: [secure-data, liveguard, ai-chats]
+    featureLabels:
+      antivirus.secure-browser: 'Safe Banking & Browsing'
+    inferred:
+      antivirus.behavioural:
+        reason: 'The plans'' pages don''t name it. Their Windows app is built on NOD32, whose help says its HIPS "analyzes the behavior of all programs running on the device" (Deep Behavioral Inspection), on by default.'
+        page:
+          name: HIPS - Host Intrusion Prevention System (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_hips_main.html
+        lastVerified: 2026-11-13
+      antivirus.scans:
+        reason: 'The plans'' pages say only "fast scans". The NOD32 help their Windows app is built on describes scans you start and scans scheduled from Tools > Scheduler.'
+        page:
+          name: Device scan (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_page_scan.html
+        lastVerified: 2026-11-13
+    notes: 'Priced for 1 device: each extra device, up to 10, is an extra-device add-on. Its VPN works on up to 3 devices (5 when bought for more than 10 devices), in up to 40 countries.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: DE
+        currency: EUR
+        amount: 69.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 69.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 79.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+      - region: CA
+        currency: CAD
+        amount: 159.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 159.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 129.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 199.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: DE
+        currency: EUR
+        amount: 139.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 139.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 139.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 159.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+      - region: CA
+        currency: CAD
+        amount: 239.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 239.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 194.96
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 299.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 209.98
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 209.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 239.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+    addOnIds: [eset.extra-device]
+    addOnLimit: 9
+  - id: eset.ultimate
+    name: HOME Security Ultimate
+    link: https://www.eset.com/ca/home/protection-plans/
+    categories: [security, vpn]
+    features:
+      platforms: [windows, macos, android, ios, tv]
+      antivirus.devices: 5
+      antivirus.ransomware: [blocking, file-recovery]
+      security.dark-web-monitoring: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms, calls]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock]
+      antivirus.activity-modes: true
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.devices: 10
+      vpn.server-countries: 70
+    perks: [secure-data, liveguard, ai-chats, vpn-router, metadata-cleanup]
+    featureLabels:
+      antivirus.secure-browser: 'Safe Banking & Browsing'
+    inferred:
+      antivirus.behavioural:
+        reason: 'The plans'' pages don''t name it. Their Windows app is built on NOD32, whose help says its HIPS "analyzes the behavior of all programs running on the device" (Deep Behavioral Inspection), on by default.'
+        page:
+          name: HIPS - Host Intrusion Prevention System (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_hips_main.html
+        lastVerified: 2026-11-13
+      antivirus.scans:
+        reason: 'The plans'' pages say only "fast scans". The NOD32 help their Windows app is built on describes scans you start and scans scheduled from Tools > Scheduler.'
+        page:
+          name: Device scan (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_page_scan.html
+        lastVerified: 2026-11-13
+    notes: 'Priced for 5 devices: each extra device, up to 10, is an extra-device add-on. Its VPN works on up to 10 devices plus one router, in over 70 countries. In the United States it is a plan of its own, with identity theft insurance.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: GB
+        currency: GBP
+        amount: 114.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: DE
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 119.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+      - region: CA
+        currency: CAD
+        amount: 259.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: GB
+        currency: GBP
+        amount: 229.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 279.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: DE
+        currency: EUR
+        amount: 239.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 239.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 239.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 259.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+      - region: CA
+        currency: CAD
+        amount: 389.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: GB
+        currency: GBP
+        amount: 344.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/protection-plans/
+      - region: AU
+        currency: AUD
+        amount: 419.96
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/protection-plans/
+      - region: FR
+        currency: EUR
+        amount: 359.96
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 359.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 389.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/
+    addOnIds: [eset.extra-device]
+    addOnLimit: 5
+  - id: eset.ultimate-us
+    name: HOME Security Ultimate (United States)
+    link: https://www.eset.com/us/home/protection-plans/
+    categories: [security, vpn]
+    features:
+      platforms: [windows, macos, android, ios, tv]
+      antivirus.devices: 5
+      antivirus.ransomware: [blocking, file-recovery]
+      security.dark-web-monitoring: true
+      security.identity-restoration: true
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 1
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms, calls]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.secure-browser: true
+      antivirus.anti-spam: true
+      antivirus.anti-theft: [locate, lock]
+      antivirus.activity-modes: true
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: true
+      vpn.devices: 10
+      vpn.server-countries: 70
+    perks:
+      [secure-data, liveguard, ai-chats, vpn-router, metadata-cleanup, ssn-tracking, lost-wallet]
+    featureLabels:
+      antivirus.secure-browser: 'Safe Banking & Browsing'
+    inferred:
+      antivirus.behavioural:
+        reason: 'The plans'' pages don''t name it. Their Windows app is built on NOD32, whose help says its HIPS "analyzes the behavior of all programs running on the device" (Deep Behavioral Inspection), on by default.'
+        page:
+          name: HIPS - Host Intrusion Prevention System (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_hips_main.html
+        lastVerified: 2026-11-13
+      antivirus.scans:
+        reason: 'The plans'' pages say only "fast scans". The NOD32 help their Windows app is built on describes scans you start and scans scheduled from Tools > Scheduler.'
+        page:
+          name: Device scan (NOD32 help)
+          url: https://help.eset.com/eav/19/en-US/idh_page_scan.html
+        lastVerified: 2026-11-13
+    notes: 'The United States’ Ultimate: everything in Ultimate, with Identity Protection’s "Identity recovery + $1M insurance", credit report monitoring from one bureau, Social Security Number tracking and Lost Wallet Assistance. Priced for 5 devices; each extra device, up to 10, is an add-on.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 179.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: US
+        currency: USD
+        amount: 359.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: US
+        currency: USD
+        amount: 539.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+    addOnIds: [eset.extra-device]
+    addOnLimit: 5
+  - id: eset.nod32
+    name: NOD32 Antivirus
+    link: https://www.eset.com/ca/home/antivirus/
+    features:
+      platforms: [windows, macos]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.devices: 1
+      antivirus.ransomware: [blocking]
+    notes: 'For Windows and macOS. Priced for 1 device: each extra device, up to 5, is an extra-device add-on.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 24.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/nod32-antivirus/
+      - region: FR
+        currency: EUR
+        amount: 29.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: IT
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/privati/antivirus/
+      - region: CA
+        currency: CAD
+        amount: 79.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 79.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 49.97
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/nod32-antivirus/
+      - region: IT
+        currency: EUR
+        amount: 79.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/privati/antivirus/
+      - region: CA
+        currency: CAD
+        amount: 119.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 119.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 74.95
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/nod32-antivirus/
+      - region: IT
+        currency: EUR
+        amount: 119.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/privati/antivirus/
+    addOnIds: [eset.extra-device]
+    addOnLimit: 4
+  - id: eset.mobile-security
+    name: Mobile Security for Android
+    link: https://www.eset.com/ca/home/mobile-security-android/
+    features:
+      platforms: [android]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.devices: 1
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, sms, calls]
+      antivirus.secure-browser: true
+      antivirus.anti-theft: [locate, lock]
+    perks: [app-lock]
+    notes: 'The paid ("Premium") version of its Android app. Priced for 1 device: each extra device, up to 5, is an extra-device add-on.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 12.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 13.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/mobile-security-android/
+      - region: AU
+        currency: AUD
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/mobile-security-android/
+      - region: DE
+        currency: EUR
+        amount: 15.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/mobile-security-android/
+      - region: FR
+        currency: EUR
+        amount: 15.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded:
+          quote: TTC
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/fr/acheter/
+      - region: NL
+        currency: EUR
+        amount: 15.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 19.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/privati/mobile-security-android/
+      - region: CA
+        currency: CAD
+        amount: 25.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 39.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 27.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/mobile-security-android/
+      - region: AU
+        currency: AUD
+        amount: 49.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/mobile-security-android/
+      - region: DE
+        currency: EUR
+        amount: 31.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/de/home/mobile-security-android/
+      - region: NL
+        currency: EUR
+        amount: 31.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 39.98
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/privati/mobile-security-android/
+      - region: CA
+        currency: CAD
+        amount: 38.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 59.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: GB
+        currency: GBP
+        amount: 41.96
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/uk/home/mobile-security-android/
+      - region: AU
+        currency: AUD
+        amount: 74.97
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/au/home/mobile-security-android/
+      - region: NL
+        currency: EUR
+        amount: 47.96
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/nl/producten/
+      - region: IT
+        currency: EUR
+        amount: 59.96
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/it/privati/mobile-security-android/
+    addOnIds: [eset.extra-device]
+    addOnLimit: 4
+  # Free use (the owner's item), read 2026-11-13: its Android app is free without a subscription ("Download free
+  # antivirus or upgrade in-app to get Premium features free for 30 days.", with "Smart Scan", "In-depth Scan" and
+  # "Real-Time Protection ... Automatically scans new apps and files for threats as soon as they're downloaded."), the
+  # paid features marked "Available in paid ESET Mobile Security Premium" (scheduled scanning among them).
+  - id: eset.mobile-security-free
+    name: Mobile Security for Android (free)
+    link: https://www.eset.com/ca/home/free-virus-scan-android/
+    features:
+      platforms: [android]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [on-demand]
+    notes: 'The free version of its Android app: scans you start and real-time scanning of new apps and files. Anti-phishing, anti-theft, payment protection, call filter, app lock and scheduled scans are in the paid version.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home/free-virus-scan-android/
+  # Its Online Scanner: "One-time scan to remove malware and threats from your computer for FREE" for Windows, no real-time
+  # protection ("Scanner vs. full protection"), read 2026-11-13.
+  - id: eset.online-scanner
+    name: Online Scanner
+    link: https://www.eset.com/ca/home/online-scanner/
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.scans: [on-demand]
+    notes: "A free one-time scan that finds and removes malware on a Windows computer. It doesn't protect you in real time."
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home/online-scanner/
+
+# The extra device (the owner-facing note is in notes.md): Canada’s cart sells it ("Secure another PC, laptop,
+# Android device, or iPhone by adding an extra device to your protection plan.", "+ $5.00", "ADD EXTRA DEVICE", read
+# 2026-11-13 in Edge), and both North American stores’ price data rise by exactly CA$5 or US$5 a device a year (twice and three
+# times that for 2 and 3 years) on every plan. Elsewhere the per-device steps are within a cent of 5 (GBP, AUD, EUR) and
+# no cart was read, so the add-on is priced in Canada and the US only.
+addOns:
+  - id: eset.extra-device
+    name: Extra device
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 5
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 5
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: CA
+        currency: CAD
+        amount: 10
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 10
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+      - region: CA
+        currency: CAD
+        amount: 15
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/ca/home-store/
+      - region: US
+        currency: USD
+        amount: 15
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.eset.com/us/home-store/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch: its Terms of Use (ESET HOME, effective
+# September 17, 2024, which say purchase and payment terms are "agreed separately"), the ESET HOME Privacy Policy (the
+# same date; the VPN's privacy link leads to it), the HOME Security apps' licence (ESET Smart Security Premium 19's EULA,
+# the same text as NOD32's), the VPN app's EULA, Canada's return policy, the auto-renewal knowledgebase articles (KB6205,
+# KB8245 for the UK, KB2393), the stores' price notes, its trust centre and vulnerability reporting policy. Read for no
+# topic: its cookie policy (only strictly necessary cookies by default, as the privacy policy says) and legal
+# information page. Not read: Identity Protection's US partner's terms (no page names it), and the eStore's own
+# auto-renewal agreement, "available on screen in the ESET eStore as you complete your purchase" (after the payment
+# form).
+policies:
+  links:
+    - name: Terms of Use
+      url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+    - name: Licence (EULA)
+      url: https://help.eset.com/essp/19/en-US/eula.html
+    - name: Privacy policy
+      url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+    - name: Return policy (Canada)
+      url: https://www.eset.com/ca/policy-hub/return-policy/
+    - name: Auto-renewal (KB6205)
+      url: https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+    - name: Subscription auto-renewal (help)
+      url: https://help.eset.com/home_eset/en-US/license_autorenewal.html
+    - name: Pricing and payment (KB8245, UK)
+      url: https://support.eset.com/en/kb8245-pricing-and-payment-faqs-uk-customers
+    - name: Subscription FAQ (KB2393)
+      url: https://support.eset.com/en/licensing-faq-home-users
+    - name: Store price notes (Canada)
+      url: https://www.eset.com/ca/home-store/
+    - name: Online Scanner (free trial note)
+      url: https://www.eset.com/ca/home/online-scanner/
+    - name: Password Manager end of life
+      url: https://support-eol.eset.com/en/pwm_discontinuing.html
+    - name: Trust Center
+      url: https://trust.eset.com/
+    - name: Reporting vulnerabilities
+      url: https://www.eset.com/us/security-vulnerability-reporting/
+    - name: ESET VPN
+      url: https://www.eset.com/ca/home/eset-vpn/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Beyond running the service, it uses your device and usage data to improve its systems, and you can only object by writing to it. Sending it suspicious files, crash reports and usage statistics is your choice.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'for the purpose of provision update and upgrade services and for the purpose of maintenance, security and improvement of our backend infrastructure.'
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'Legitimate interest legal basis (Art. 6 (1) (f) GDPR), that enables us to process data on how our customers use our Services and their satisfaction to provide our users with the best protection, support and experience We can offer.'
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'LiveGrid Feedback System function includes collecting and sending of Infiltrations with associated metadata and Information to ESET. You may activate this function during the installation of the Product.'
+      action:
+        name: 'How to use your privacy rights'
+        url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It says it doesn’t share your data with other companies. Its own companies and the partners that sell and support it may get your licence, billing and support details.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'We do not share your data with third parties.'
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'Licensing, billing and technical support information processed by ESET may be transferred to and from affiliates or partners for the purpose of fulfilling the EULA, such as providing services or support.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'Its sites and account use only the cookies they need, unless you agree to more.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'By default, We only use cookies that are strictly necessary for the functioning of our website and the Services requested by You.'
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'We will ask for your consent to use any other cookies as those that are strictly necessary.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether your data trains AI models.'
+      pages:
+        - https://help.eset.com/home_eset/en-US/privacy_policy.html
+        - https://help.eset.com/home_eset/en-US/terms_of_use.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Some data has a stated time: parental-control data 60 to 90 days, and licence details are made anonymous within a year after your licence ends. Billing records stay 10 years, as the law requires.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'ESET is legally obliged to keep the billing information for a period of 10 years. However, the licensing information will be anonymized no later than 12 months after the expiration of the license.'
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'Data collected via ESET Parental Control will be processed only for providing You with the Service and they will be deleted sixty (60) to ninety (90) days after their collection.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your data, by its support form or by email, but it doesn’t say how soon.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'To exercise your data subject’s rights, you can contact us via support form or by e-mail at dpo@eset.sk.'
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'Right to Erasure. As a data subject, you have the right to request the deletion or restriction of the processing of your personal data.'
+      action:
+        name: 'How to ask for your data to be deleted'
+        url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data, which it sends as a spreadsheet.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'Right to Data Portability. We are happy to provide You, as a data subject, with the personal data processed by ESET in the xls format.'
+      action:
+        name: 'How to ask for a copy of your data'
+        url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say what it does when police or governments ask for your data.'
+      pages:
+        - https://help.eset.com/home_eset/en-US/privacy_policy.html
+        - https://help.eset.com/home_eset/en-US/terms_of_use.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: good
+      reason: 'It keeps data in the European Union when it can, and moves it elsewhere only under the EU’s approved safeguards.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'ESET prefers to process its data in the European Union (EU).'
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'We use approved SCCs to contractually bind both parties and ensure that the recipient processes personal data in compliance with GDPR requirements.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Its account needs your full name, country and email address.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'Your full name, country, and valid email address are required for registration and use of the Account and provision and maintenance of Services'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can turn off automatic renewal in its online store at any time, after confirming your email, and keep your protection until the end of the time you paid for.'
+      sources:
+        - url: https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+          quote: 'Auto-renewal is continuous unless disabled via the ESET eStore'
+        - url: https://help.eset.com/home_eset/en-US/license_autorenewal.html
+          quote: 'Once disabled, the subscription remains active until the end of the current period and then expires automatically.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'If you’re not happy, you can get all your money back within 30 days of buying, by phoning it. It doesn’t say the same for a renewal.'
+      sources:
+        - url: https://www.eset.com/ca/policy-hub/return-policy/
+          quote: 'If you are not 100% satisfied with your purchase, we will be happy to accept a return for a full refund of the purchase price.'
+        - url: https://www.eset.com/ca/policy-hub/return-policy/
+          quote: 'Returning your purchase with ESET Canada is just a phone call away.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It emails you before a price changes, and tells you about a yearly renewal 30 days ahead, so you can cancel first.'
+      sources:
+        - url: https://www.eset.com/ca/home-store/
+          quote: 'While price is subject to change, we will always send you a notification email in advance.'
+        - url: https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+          quote: 'We will inform you about auto-renewal 30 days before your renewal date (for annual subscriptions)'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: great
+      reason: 'Its 30-day free trial asks for no card, so it can’t turn into a paid plan on its own.'
+      sources:
+        - url: https://www.eset.com/ca/home/online-scanner/
+          quote: 'Free trial (VPN not included) No credit card details required, no unexpected charges to worry about.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you 30 days before a yearly subscription renews.'
+      sources:
+        - url: https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+          quote: 'We will inform you about auto-renewal 30 days before your renewal date (for annual subscriptions)'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages list no fees beyond the price and taxes.'
+      pages:
+        - https://www.eset.com/ca/home-store/
+        - https://help.eset.com/home_eset/en-US/terms_of_use.html
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'You can add devices or upgrade at once and pay only for the time left; your end date stays the same. It doesn’t say how moving down works.'
+      sources:
+        - url: https://support.eset.com/en/kb8245-pricing-and-payment-faqs-uk-customers
+          quote: 'ESET eStore will maintain the same expiry date and calculate the prorated price for your extra devices.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to a court in Bratislava, Slovakia, with no private referee (arbitration). People living in the EU can also go to their own courts.'
+      sources:
+        - url: https://help.eset.com/essp/19/en-US/eula.html
+          quote: 'You expressly agree that any disputes or claims ensuing from this Agreement with respect to the Provider or any disputes or claims relating to use of the Software shall be settled by Bratislava I District Court and You expressly agree to the said court exercising jurisdiction.'
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'If You are a consumer and have a habitual residence in the EU, You may also bring a claim to enforce your consumer rights in the place of exclusive jurisdiction or in the EU country where You live.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about new terms by email or in its app. They apply from the day you’re told, but you can cancel within 30 days if you don’t agree.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'You will be notified about any revision of these Terms or Special Terms by email or via your Product or Account.'
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'If You disagree with the proposed changes to these Terms or Special Terms, You may cancel your Account and/or cancel the affected purchased Services within 30 days after receiving a notice of the change.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its rules, it can end your licence or close your account, and it doesn’t promise a refund.'
+      sources:
+        - url: https://help.eset.com/essp/19/en-US/eula.html
+          quote: 'If You fail to comply with any of the provisions of this Agreement, the Provider shall be entitled to withdraw from the Agreement, without prejudice to any entitlement or legal remedy open to the Provider in such eventualities.'
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'ESET reserves a right to terminate your Account, discontinue the provision of Services, or refuse their provision in such cases.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its updates can add, change or take away features, as when it stopped selling its password manager in 2025.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'The update may include adding, removing or modifying any features or functionalities included in Services or replacing them entirely.'
+        - url: https://support-eol.eset.com/en/pwm_discontinuing.html
+          quote: 'ESET stopped selling Password Manager.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://help.eset.com/home_eset/en-US/terms_of_use.html
+        - https://help.eset.com/home_eset/en-US/privacy_policy.html
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use its apps only at home, for yourself and your family, not for work, and you may not take them apart unless the law lets you.'
+      sources:
+        - url: https://help.eset.com/essp/19/en-US/eula.html
+          quote: 'A Home Edition version of the Software shall be used exclusively in private and/or non-commercial environments for home and family use only.'
+        - url: https://help.eset.com/essp/19/en-US/eula.html
+          quote: 'You may not reverse engineer, reverse compile or disassemble the Software or otherwise attempt to discover the source code of the Software, except to the extent that this restriction is expressly prohibited by law.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors certify its security (ISO 27001 and SOC 2), and it has a process for reporting security bugs that credits the people who find them.'
+      sources:
+        - url: https://trust.eset.com/
+          quote: 'ISO/IEC 27001:2022'
+        - url: https://trust.eset.com/
+          quote: 'SOC 2 Type 2'
+        - url: https://www.eset.com/us/security-vulnerability-reporting/
+          quote: 'ESET is a strong believer in, as well as a practitioner of, the responsible disclosure process and publicly credits security vulnerability reporters for their efforts if they do not wish to remain anonymous.'
+      lastVerified: 2026-11-13
+    - topic: service.activity-logging
+      tier: good
+      reason: 'Its VPN keeps no logs of what you do, it says. No outside check of that is published.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/privacy_policy.html
+          quote: 'VPN does not apply retention to the logs.'
+        - url: https://www.eset.com/ca/home/eset-vpn/
+          quote: 'No Logs Policy : Guarantees that your online activities are never tracked or stored.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: great
+      reason: 'You can share your subscription with family and friends from your ESET HOME account, up to its number of devices.'
+      sources:
+        - url: https://help.eset.com/home_eset/en-US/terms_of_use.html
+          quote: 'share them with your family and friends or enjoy other functionalities as described in the documentation'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: good
+      reason: 'Each paid device covers one system on one device. Reinstalling doesn’t use one up, and you can free a device you no longer use.'
+      sources:
+        - url: https://support.eset.com/en/licensing-faq-home-users
+          quote: 'Each seat protects one operating system on one device.'
+        - url: https://support.eset.com/en/licensing-faq-home-users
+          quote: 'No, you can reinstall your ESET application for troubleshooting purposes anytime.'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: neutral
+      reason: 'Its apps update themselves unless you turn that off, and updates can add or remove features.'
+      sources:
+        - url: https://help.eset.com/essp/19/en-US/eula.html
+          quote: "This function is enabled under the Software's standard settings and Updates are therefore installed automatically, unless the End User has disabled the automatic installation of Updates."
+      lastVerified: 2026-11-13
