@@ -1,0 +1,141 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): AMC Global Media Inc.'s Privacy Policy, with its Cookies Policy,
+# which together cover AMC's streaming services (AMC+ and Shudder first): "one or more of AMC’s streaming services,
+# offerings, or channels (including, without limitation, AMC+, Acorn TV, HIDIVE, Shudder, and Sundance Now)", its
+# scope. amcplus.com/privacy and amcnetworks.com/privacy-policy/ (the services' footers' link) lead here. Rated once
+# here; each provider names it in its policies' shared.
+# Read 2026-11-13 (M11.15) in Edge from Canada: the Privacy Policy ("EFFECTIVE DATE: June 27, 2025"), its Cookies
+# Policy ("Last Updated: June 27, 2025") and, for children, the AMC Streaming Services Terms of Use (the same date,
+# rated in amc-global-media-terms.yaml), which the policy says it is "incorporated into". Its "Do Not Sell or Share My
+# Personal Information" and "Your Privacy Choices" links are OneTrust's cookie panel (a button, no page of its own), so
+# the actions link the policy's choices section. Calibrated against NBCUniversal's and STARZ's policies.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: amc-global-media-privacy
+name: AMC Global Media’s Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://www.amcglobalmedia.com/privacy-policy/
+  - name: 'Cookies policy'
+    url: https://www.amcglobalmedia.com/cookies/
+  - name: 'Terms of use'
+    url: https://www.amcglobalmedia.com/terms-of-use/
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It studies how you use its services and guesses your interests to grow its business. You can turn off some of its tracking, but only device by device.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Learn or make inferences about your interests or how you use the Services, in connection with identifying how to expand our business opportunities'
+      - url: https://www.amcglobalmedia.com/cookies/
+        quote: 'You can request to opt out of the use of Performance and Targeted Advertising Technologies using the privacy preference sliders on our website or in our mobile applications.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Please note that you will need to set preferences on each device you use to visit the Services.'
+    action:
+      name: 'Its privacy choices'
+      url: https://www.amcglobalmedia.com/privacy-policy/
+    lastVerified: 2026-11-13
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It may sell or share your information with ad, marketing and analytics companies, and lets social networks’ tracking pixels collect it. You turn this off device by device.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Categories of third parties to whom this information may be sold or shared'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Social media platforms and other third parties may also collect information about you via pixels, cookies, or other tracking technologies used on the Services.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Please note that you will need to set preferences on each device you use to visit the Services.'
+    action:
+      name: 'Its privacy choices'
+      url: https://www.amcglobalmedia.com/privacy-policy/
+    lastVerified: 2026-11-13
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It follows what you do on its services and other sites to pick ads for you, there and elsewhere. Opting out is device by device, and doesn’t stop every company.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Advertise and market to you, including across other websites and platforms, on behalf of ourselves and our trusted partners, including targeted advertising.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Please note this does not opt you out of being served ads, nor will it prevent the receipt of interest-based advertising from other companies that do not participate in these programs.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Please note that you will need to set preferences on each device you use to visit the Services.'
+    action:
+      name: 'Its privacy choices'
+      url: https://www.amcglobalmedia.com/privacy-policy/
+    lastVerified: 2026-11-13
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its privacy policy and terms don’t say whether what you write, upload or say trains AI.'
+    pages:
+      - https://www.amcglobalmedia.com/privacy-policy/
+      - https://www.amcglobalmedia.com/terms-of-use/
+    lastVerified: 2026-11-13
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it thinks necessary, at least while you have an account, and some of it after you leave, with no periods named.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'We retain your personal information for as long as is necessary to carry out the purposes set out in this Policy, unless a longer retention period is required by applicable law or is necessary for us to protect our rights.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'When your account or subscription is over, we may retain certain personal information for purposes such as complying with our legal obligations, resolving disputes, preventing fraud or misuse of promotions, and protecting our rights and interests.'
+    lastVerified: 2026-11-13
+  - topic: privacy.data-deletion
+    tier: neutral
+    reason: 'You can email its support team to have some or all of your information deleted, but it doesn’t say how long that takes, and the law may let it say no.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Delete all or some of the personal information we have about you'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'You may submit a request to exercise your rights to know/access or delete your personal information by sending an email to the customer support email address for your Service that is set forth in Section 7.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'We may have a reason under the law why we do not have to comply with your request, or why we may comply with it in a more limited way than you anticipated.'
+    action:
+      name: 'How to ask for your information to be deleted'
+      url: https://www.amcglobalmedia.com/privacy-policy/
+    lastVerified: 2026-11-13
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'Where local law gives you the right, you can email to ask for a copy of your information in a form you can take elsewhere.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'receive personal information in a usable electronic format and transmit it to a third party (also known as the right of data portability)'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'You have the right to request access to personal information collected about you in a portable format'
+    action:
+      name: 'How to ask for a copy of your information'
+      url: https://www.amcglobalmedia.com/privacy-policy/
+    lastVerified: 2026-11-13
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It hands over your information when the law requires it, such as for a court order or a valid police request, and says nothing more.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'We will share your personal information to comply with laws to which we are subject, for example, in response to a court order or subpoena or a valid request from law enforcement.'
+    lastVerified: 2026-11-13
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your information is mostly kept in the US, where the law may protect it less than at home, and sent elsewhere under standard data transfer contracts.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'We generally process information in and subject to the laws of the United States, which may not provide the same level of protection for your information as your home country.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'When we conduct such transfers, we put in place appropriate safeguards (such as standard contractual clauses) in accordance with applicable legal requirements.'
+    lastVerified: 2026-11-13
+  - topic: privacy.children
+    tier: neutral
+    reason: 'You must be an adult to sign up, and it isn’t meant for children under 13. A parent can ask it to delete a child’s information, but nothing says it keeps ads picked for you away from teens.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'You are eighteen (18) years of age or older, or the age of majority in your province, territory, or country, if you are registering as a User on the Services.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you are under the age of thirteen (13), the Services are not intended for your use.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'If we have inadvertently collected the personal information of a child under 18, or equivalent minimum age depending on jurisdiction, a parent or guardian of that child may contact us at privacy@amcglobalmedia.com to request that we delete the information from our records or otherwise cease the use of that information.'
+    lastVerified: 2026-11-13
+  - topic: security.practices
+    tier: poor
+    reason: 'It says only that it uses safeguards and that no security is perfect. It names no outside checks and no way to report a security problem.'
+    sources:
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'We use technical, administrative, and physical security safeguards designed to protect the information that we collect or receive against loss and unauthorized access, use, modification, or disclosure.'
+      - url: https://www.amcglobalmedia.com/privacy-policy/
+        quote: 'Please be aware that, despite our ongoing efforts, no security measures are perfect or impenetrable.'
+    lastVerified: 2026-11-13

@@ -1,0 +1,133 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): the AMC Streaming Services Terms of Use, one agreement for every
+# AMC Global Media streaming service: "one or more of AMC’s streaming services, offerings, or channels (including,
+# without limitation, AMC+, Acorn TV, HIDIVE, Shudder, and Sundance Now)", its opening. amcplus.com/terms,
+# shudder.com/terms and amcnetworks.com/terms-of-use/ all lead here. Rated once here (AMC+ and Shudder first); each
+# provider names it in its policies' shared and rates its own help centre's rules beside it.
+# Read 2026-11-13 (M11.15) in Edge from Canada ("Effective Date: June 27, 2025"). It includes the Privacy Policy and the
+# Cookie Policy (rated in amc-global-media-privacy.yaml) and "Additional Terms" for promotions, none read. Its dispute
+# section's arbitration binds users "in the United States or any other Territory where such provision is not otherwise
+# prohibited", so it's graded for every region; Australia and the UK may also sue at home, and the UK, Austria and
+# Brazil have a cancelling window with a refund (section 19), which changes no grade. Its "Time to Sue" (one year)
+# and a fee for skipping its informal step are part of its disputes clause. Calibrated against STARZ's terms and the
+# Disney+, ESPN, and Hulu Subscriber Agreement.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: amc-global-media-terms
+name: The AMC Streaming Services Terms of Use
+links:
+  - name: 'Terms of use'
+    url: https://www.amcglobalmedia.com/terms-of-use/
+ratings:
+  - topic: billing.cancellation
+    tier: good
+    reason: 'You can cancel at any time and keep watching until the end of the time you paid for. Cancelling during a free trial or a promotion may end it at once.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'You may cancel your subscription at any time for any reason.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you cancel your subscription, you will have access to the Services through the remainder of the current Subscription Term that you have paid for and your subscription will automatically end on the last day of the Subscription Term.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you cancel your subscription during a free trial or while using a promotional code or other credits, cancellation may be effective immediately.'
+    lastVerified: 2026-11-13
+  - topic: billing.refunds
+    tier: neutral
+    reason: 'You get no money back when you cancel, but you keep watching until the end of the time you paid for.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'AMC DOES NOT PROVIDE REFUNDS OR CREDITS FOR ANY PARTIAL-BILLING PERIOD OR PARTIAL SUBSCRIPTION PERIODS OR FOR UNWATCHED CONTENT ACCESSIBLE THROUGH THE SERVICES, unless required by law.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you cancel your subscription, you will have access to the Services through the remainder of the current Subscription Term that you have paid for and your subscription will automatically end on the last day of the Subscription Term.'
+    lastVerified: 2026-11-13
+  - topic: billing.price-changes
+    tier: great
+    reason: 'It writes to you at least 30 days before raising the price, and the new price starts only when the time you already paid for ends, so you can cancel first.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If we increase the pre-tax price of the Services, we will provide you with at least thirty (30) days’ prior written notice and such price increase will take effect at the end of the current Subscription Term you have paid for.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you do not wish to keep your subscription at the increased price, you may terminate your subscription to the Services in accordance with Section 19 of these Terms of Use and such termination will be effective at the end of the current Subscription Term you have paid for.'
+    lastVerified: 2026-11-13
+  - topic: billing.free-trials
+    tier: poor
+    reason: 'A free trial needs your payment details first and turns into a paid plan unless you cancel before it ends. Its terms don’t promise to remind you.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you do not cancel your subscription to Services within the time allotted for such free trial, your subscription will be automatically converted from a free trial to a paid subscription to Services and you will be charged for your subscription following the conclusion of the free trial.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'Upon receiving an offer for and choosing to start a free trial of the Services or when activating a gift membership, if you do not already have a Registered Account, you will need to follow the steps described above in this Section 5 and create a Registered Account, which includes providing your Billing Account information.'
+    lastVerified: 2026-11-13
+  - topic: billing.renewal-notice
+    status: not-stated
+    reason: 'Its terms say a monthly or yearly plan renews on its own, but not that it reminds you before it does.'
+    pages: [https://www.amcglobalmedia.com/terms-of-use/]
+    lastVerified: 2026-11-13
+  - topic: billing.fees
+    tier: poor
+    reason: 'Besides the price and tax, it can charge “any other charges you may incur” without listing them, and you pay your bank’s fees if a payment fails.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'you authorize your Provider to charge your Billing Account for the subscription fee at the then-current rate, and any other charges you may incur in connection with your use of the Services, plus any applicable taxes'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'You are solely responsible for any and all fees charged to your Billing Account by the applicable issuer, bank or financial institution, including, but not limited to, membership, overdraft, insufficient funds and over the credit limit fees.'
+    lastVerified: 2026-11-13
+  - topic: legal.disputes
+    tier: poor
+    reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions or jury. You can opt out only by certified letter within 30 days of first using it.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'Any Covered Dispute must be brought on an individual basis and will be resolved exclusively by final, non-appealable, and binding arbitration (“Arbitration”) before an arbitrator mutually selected by the Parties (the “Arbitrator”).'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'THE PARTIES WAIVE THE RIGHT TO TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION, MASS ACTION, GROUP ACTION, REPRESENTATIVE ACTION, AND/OR COLLECTIVE ACTION IN ANY DISPUTE.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'The notice must be sent within thirty (30) days of your first use of the Services after the effective date of the Services, otherwise you shall be bound to arbitrate disputes in accordance with the terms of those Sections.'
+    action:
+      name: 'How to opt out of arbitration (section 27)'
+      url: https://www.amcglobalmedia.com/terms-of-use/
+    lastVerified: 2026-11-13
+  - topic: legal.terms-changes
+    tier: neutral
+    reason: 'It emails subscribers about big changes, without saying how far ahead. Using it after a change starts means you accept it.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'If you have a current subscription for Services or are a registered User, we will email you about any material changes to these Terms of Use.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'Your continued use of the Services after the Effective Date of the modified Terms of Use will be taken as acceptance of such updated Terms of Use.'
+    lastVerified: 2026-11-13
+  - topic: legal.account-closure
+    tier: neutral
+    reason: 'It can end or limit your account without warning or money back if it decides you broke its terms or the law.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'We may terminate or restrict your use of or registration to the Services at any time, without compensation or notice, at our sole discretion, if you are in violation of these Terms of Use or are engaged in any illegal or unauthorized use of the Services.'
+    lastVerified: 2026-11-13
+  - topic: legal.service-changes
+    tier: poor
+    reason: 'It can add or remove shows and movies whenever it likes, even during the time you paid for, and says it owes you nothing when it does.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'You understand that the Content and Services available to you may change over time, including during the Subscription Term.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'To the maximum extent permitted by applicable law, we are not liable for the removal or disabling of any Services, materials, or access thereto, or for any changes to the functionality of the Services.'
+    lastVerified: 2026-11-13
+  - topic: legal.inactivity
+    status: not-stated
+    reason: 'Its terms don’t say it closes accounts you haven’t used.'
+    pages: [https://www.amcglobalmedia.com/terms-of-use/]
+    lastVerified: 2026-11-13
+  - topic: service.account-sharing
+    tier: bad
+    reason: 'Its terms say an account is for one person only and can’t be passed on, though they make you answer for anyone who watches with your sign-in.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'The AMC Registered Accounts are for individual use only.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'Your account is personal to you, and you may not transfer it to any other party.'
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'You are responsible for ensuring that all persons who access Content using your User Credentials are aware of these Terms of Use and that they comply with them'
+    lastVerified: 2026-11-13
+  - topic: service.device-limits
+    tier: neutral
+    reason: 'It may limit how many titles you download, on which devices and where, and for how long they last, without saying how in its terms.'
+    sources:
+      - url: https://www.amcglobalmedia.com/terms-of-use/
+        quote: 'Limitations and expiration rules may apply including the amount of Content available for download, maximum number of downloads, and geographic and device restrictions.'
+    lastVerified: 2026-11-13
