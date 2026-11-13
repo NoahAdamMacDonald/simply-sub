@@ -1,0 +1,568 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), in the off-season. mlb.com refuses this machine's
+# address ("Error 403 Access Denied"), so its pages were read with Edge through a Canadian exit and through a US exit
+# (most US exits were refused too), and again through a UK, Australian, German, French and Dutch exit; its help centre
+# (support.mlb.com, every MLB.TV and billing article its sitemap lists) in Edge from Canada. Pages, each quoted where
+# it's used:
+# Pricing, the off-season (read 2026-11-13): mlb.com's subscribe page sells US buyers "MLB.TV Offseason $29.99
+# /one-time", "MLB+ $59.99 /yearly" and "MLB+ $5.99 /monthly" (its page data: "currencyCode":"USD"), and sends every
+# other country to /subscribe/offseason/intl, which sells only the Offseason pass; the all-packages page, read from
+# Canada, the UK, Australia, Germany, France and the Netherlands, offers MLB+ too (BUY NOW, to the same MLB+ page with
+# the same cards and USD data). "All online subscription products and MLB.com Shop orders are transacted in U.S.
+# Dollars." (How are currency exchange issues handled?), so every country is priced in USD. The season's plan: "The
+# MLB.TV Seasonal plan is $149.99/season for a full season of access to MLB.TV. The MLB.TV Monthly plan is
+# $29.99/month." (mlb.com's MLB.TV on ESPN page, through a US exit), the regular price both renew at ("Both plans will
+# automatically renew before each season on or around March 1 at the then-current price"); in-season price drops are
+# offers ("MLB.TV seasonal offering will go through in-season price drops"), and ESPN Unlimited subscribers' $134.99 is
+# a member price, left out. No page read today shows the season's price for buyers outside the US ("International
+# subscribers will continue to buy and stream through MLB").
+# Not listed: the MLB.TV Offseason pass ($29.99, "will expire on or about March 23, 2027 and will not be automatically
+# renewed": a one-time pass, Sportsnet+'s French season pass precedent); the in-market club streams of the 2026 season
+# (Dbacks.TV, Padres.TV and others, "$99.99 per season or $19.99 per month", and the bundle with MLB.TV, "$199.99 per
+# season or $39.99 per month", A complete guide to watching MLB.TV in 2026, March 2026), sold only inside a club's home
+# territory and not on sale now; MLB.TV Single Team, which only the terms' billing section names ("MLB.TV Single
+# Team") and no page sells today; and the regional networks the all-packages page links (Detroit SportsNet, SNLA+, SNY,
+# MASN+), other companies' services.
+# Region checklist, 2026-11-13: 1. no country paths (one site; /es pages translate); 2. no picker; 3. the page data
+# names USD everywhere; 4. checkout not opened (commerce.mlb.com needs an account); 5. its currency and tax articles;
+# 6. Edge through exits (Ireland's, New Zealand's, Spain's and Italy's were all refused), a plain fetch through the same
+# exits; 7. no bill offered.
+# Bundles: in the US, new MLB.TV buyers buy it through ESPN ("New for the 2026 season, MLB.TV is now available to
+# purchase and stream through the ESPN App in the US market"), with a month of ESPN Unlimited free: ESPN's offer, not a
+# bundle MLB sells. Official resellers: none; ESPN, Apple, Google, Roku and Amazon bill it themselves, and T-Mobile gives
+# it to its customers: partners, noted, not listed.
+# Features, read 2026-11-13: video: "The MLB.TV media player supports both SD and HD quality streams" with no
+# resolution, so 720p (inferred, the Crunchyroll and Hayu precedent); streams at once: no page says how many ("Logged In
+# Too Many Times" only says the account "is being used to access in multiple locations"), so every plan waits
+# (awaitingRequiredFeatures); ads: no page says whether games carry ads, so false; MLB Network, "Live MLB Network access
+# within the US", is a live TV channel; MiLB games and MLB Big Inning stream live; "player features, documentaries and
+# classic programs" on demand (How Do I Access Featured On Demand Content?). Blackouts: games are blacked out in their
+# home television territory and for national partners' exclusive games (plan notes, quoted from its blackout notice).
+# No pause ("There is no option to pause ESPN Unlimited or MLB.TV during or after the MLB season"); no parental controls
+# on any page read. App languages: its sites' language menu ("Español", "日本語", "한국어").
+# Free use: none: MLB.TV and MLB+ are paid; MLB.com's free highlights are its news site's, and the free spring-training
+# games of 2026 were a promotion for account holders.
+
+# Coverage: mlb-tv.all-teams in CA, GB, AU, DE, FR, NL: MLB sells MLB.TV to buyers outside the US in season ("For
+# subscribers outside the US market, MLB.TV is available through MLB directly as it has traditionally been offered.",
+# its MLB.TV on ESPN page), but in the off-season (read 2026-11-13) its pages sell them only the Offseason pass and MLB+,
+# and no page states the season's price outside the US.
+
+# Coverage: mlb-tv.* in CA: MLB sells both MLB.TV (in season) and MLB+ to Canadians, but MLB.TV's price outside the US
+# isn't on any off-season page, and pricing MLB+ alone would make MLB.TV read "Not offered" here (below).
+
+# Coverage: mlb-tv.mlb-plus in CA, GB, AU, DE, FR, NL: outside the US, MLB+ comes without MLB Network ("*MLB Network
+# streams are available to subscribers in the U.S. ONLY (not available internationally).", MLB+ FAQs), and its cards
+# read through Canadian, UK, Australian, German, French and Dutch exits on 2026-11-13 price it in USD: 59.99 a year and
+# 5.99 a month. It isn't a plan of its own here yet: once MLB+ has a price in a country, core reads MLB.TV, which MLB
+# sells there in season at a price no off-season page states, as "Not offered" there. Add both in season (the review
+# of 2026-11-13; plan-level availability is for the owner).
+
+id: mlb-tv
+name: MLB.TV
+website: https://www.mlb.com/live-stream-games
+category: streaming
+spendCategory: streaming
+# No availableIn: no page lists the countries it sells in. Ireland, New Zealand, Spain and Italy weren't read (mlb.com
+# refused every exit there), so they're unknown.
+billingCurrency: { US: USD, CA: USD, GB: USD, AU: USD, DE: USD, FR: USD, NL: USD }
+cancelUrl: https://support.mlb.com/s/article/How-to-Cancel-your-Subscription?language=en_US
+sources: { pricing: https://www.mlb.com/live-stream-games/subscribe/mlbplus }
+
+# Owner (M11.2), read 2026-11-13: MLB's own MLB.TV on ESPN page; its terms and privacy policy are MLB Advanced Media,
+# L.P.'s (New York), the league's digital company. Major League Baseball is owned by its 30 clubs, not listed: no
+# shares.
+owner:
+  name: Major League Baseball (MLB Advanced Media, L.P.)
+  page:
+    name: MLB.TV on ESPN
+    url: https://www.mlb.com/live-stream-games/partners/espn
+  quotes:
+    - "MLB.TV is Major League Baseball's out-of-market direct-to-consumer product, available this season in the ESPN App in the US market."
+  country:
+    code: US
+    page:
+      name: About MLB
+      url: https://www.mlb.com/official-information/about-mlb
+    quotes:
+      - 'Major League Baseball (MLB) is the most historic professional sports league in the United States and consists of 30 member clubs in the U.S. and Canada, representing the highest level of professional baseball.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Ways to pay (M11.5), read 2026-11-13: its help centre's Payment Methods article (cards and PayPal) and its App Store
+# and Google Play articles; its cancelling article also names Roku and Amazon as partners that bill it ("Did you
+# purchase your subscription through a partner?"), in words no way to pay names. In the US, new buyers pay ESPN
+# ("purchase and stream through the ESPN App"), which no id names: other.
+acceptedNetworks:
+  GLOBAL:
+    networks: [mastercard, visa, amex, discover]
+    url: https://support.mlb.com/s/article/Payment-Methods?language=en_US
+    quotes: ['MasterCard', 'Visa', 'American Express', 'Discover']
+paymentMethods:
+  - methods: [card, paypal]
+    page: Payment Methods
+    url: https://support.mlb.com/s/article/Payment-Methods?language=en_US
+    quotes:
+      - 'Mastercard is the preferred credit card of MLB.com, however you can purchase MLB.TV with all major debit and credit cards. MasterCard and PayPal are also accepted.'
+  - methods: [app-store]
+    page: Purchase Assistance - Apple App Store
+    url: https://support.mlb.com/s/article/Purchase-Assistance-Apple-App-Store?language=en_US
+    quotes: ['Purchase Assistance - Apple App Store']
+  - methods: [app-store]
+    page: Purchase Assistance - Google Play Store
+    url: https://support.mlb.com/s/article/Purchase-Assistance-Google-Play-Store?language=en_US
+    quotes: ['Purchase Assistance - Google Play Store']
+  - methods: [card, paypal]
+    regions: [US]
+    page: Payment Methods
+    url: https://support.mlb.com/s/article/Payment-Methods?language=en_US
+    quotes:
+      - 'Mastercard is the preferred credit card of MLB.com, however you can purchase MLB.TV with all major debit and credit cards. MasterCard and PayPal are also accepted.'
+  - methods: [app-store]
+    regions: [US]
+    page: Purchase Assistance - Apple App Store
+    url: https://support.mlb.com/s/article/Purchase-Assistance-Apple-App-Store?language=en_US
+    quotes: ['Purchase Assistance - Apple App Store']
+  - methods: [app-store]
+    regions: [US]
+    page: Purchase Assistance - Google Play Store
+    url: https://support.mlb.com/s/article/Purchase-Assistance-Google-Play-Store?language=en_US
+    quotes: ['Purchase Assistance - Google Play Store']
+  - methods: [other]
+    regions: [US]
+    page: MLB.TV on ESPN
+    url: https://www.mlb.com/live-stream-games/partners/espn
+    quotes:
+      - 'New for the 2026 season, MLB.TV is now available to purchase and stream through the ESPN App in the US market'
+# Renewal day (M11.5): its terms, for monthly plans; yearly MLB.TV renews "on or about March 1", before each season,
+# and MLB+ Yearly "on or around the anniversary date of your initial subscription" (the plans' notes).
+renewalAnchor:
+  kind: same-date
+  page: MLB.com Terms of Use
+  url: https://www.mlb.com/official-information/terms-of-use
+  quotes:
+    - 'The primary credit or debit card you have stored in the Payment Profile section of your MLB.com account will be charged on or about the same date each month of your subscription during any Major League Baseball season and each subsequent year as set forth above.'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.mlb.com/live-stream-games/subscribe/allpackages
+    - https://www.mlb.com/live-stream-games/subscribe/mlbplus
+    - https://www.mlb.com/live-stream-games/partners/espn
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "Web, iOS, tvOS, Android Mobile, Android TV, FireTV, Fire Tablet,
+# Samsung TV, LG, Vizio (10), Roku, XBOX, Sony PlayStation, XUMO, COX." (MLB.TV on ESPN), and the MLB app's own device
+# articles (Apple TV, Fire TV, Android TV, Roku, Samsung, LG, PlayStation, Xbox, Chromecast, Xumo). Sign-in: "The email
+# address and password you enter will be used for future sign-ins." (Account Settings). Support: phone ("US Phone and
+# Text Support: 866-244-2291"), a chat ("Request human chat through the CS Virtual Assistant") and email or its form
+# (How to Cancel your Subscription).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en, es, ja, ko]
+  support.channels: [email, chat, phone]
+
+# Perks (M11.6): what the plans add that no feature describes, in its pages' words.
+perks:
+  - id: out-of-market-games
+    name: Live, out-of-market regular season games (both home and away feeds)
+  - id: live-audio
+    name: Blackout-free live and on-demand audio of all regular season MLB games
+  - id: big-inning
+    name: MLB Big Inning
+  - id: minor-league
+    name: Live MiLB games
+
+plans:
+  # MLB.TV (the 2026 season's plan, sold from about March 1): "Live, out-of-market regular season games (both home and
+  # away feeds)", "Live MLB Network access within the US", "On-demand and archived MLB games", "MLB Big Inning", and
+  # MLB+ ("MLB+, which is included with all MLB.TV subscriptions").
+  - id: mlb-tv.all-teams
+    name: MLB.TV
+    link: https://www.mlb.com/live-stream-games/partners/espn
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, documentaries]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+      includes-subscription: [mlb-tv.mlb-plus]
+    inferred:
+      video.quality:
+        reason: 'Its help centre says its media player streams in SD and HD, without naming a resolution, so HD is taken as 720p.'
+        page:
+          name: Network Troubleshooting
+          url: https://support.mlb.com/s/article/Network-Troubleshooting?language=en_US
+        lastVerified: 2026-11-13
+    perks: [out-of-market-games, live-audio, big-inning, minor-league]
+    notes: 'Every out-of-market regular-season game live, with MLB Network (US only), MLB+ and archives. Blackouts: "Home television territory blackout restrictions apply regardless of whether a Club is home or away", and "select regular season, special event, and Postseason games are unavailable on MLB.TV domestically and internationally". The yearly plan renews about March 1; the monthly one bills only through October, restarting about March 1. Not sold in the off-season: prices are the 2026 season''s.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/partners/espn
+      - region: US
+        currency: USD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/partners/espn
+
+  # MLB+ in the US: "Stream MLB Network 24/7 (US Only) for an entire calendar year. Plus, watch an expanded library of
+  # premium content." (its cards), and "blackout-free live and on-demand audio of all regular season MLB games, 24/7
+  # access to live *MLB Network programming ..., live MiLB games, MLB Big Inning, and original series/documentaries"
+  # (MLB+ FAQs). "MLB+ is the rebranded MLB At Bat subscription for the 2026 season."
+  - id: mlb-tv.mlb-plus
+    name: MLB+
+    link: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+    features:
+      video.quality: 720p
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports, documentaries]
+      streaming.own-media: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its help centre says its media player streams in SD and HD, without naming a resolution, so HD is taken as 720p.'
+        page:
+          name: Network Troubleshooting
+          url: https://support.mlb.com/s/article/Network-Troubleshooting?language=en_US
+        lastVerified: 2026-11-13
+    perks: [live-audio, big-inning, minor-league]
+    notes: MLB Network 24/7, blackout-free radio of every game, live Minor League games and MLB Big Inning, without MLB's own game streams. The yearly plan renews on the date you bought it; the monthly one bills all year. 7 days free for new subscribers.
+    prices:
+      - region: US
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+      - region: US
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 through a Canadian exit: its Terms of Use Agreement ("LAST
+# UPDATED: MARCH 11, 2025", MLB Advanced Media, L.P.'s, New York law, with an arbitration agreement), which every MLB
+# product's buyer accepts ("By signing in, I understand and agree to be bound by the MLB.com Terms of Use and Privacy
+# Policy.", its sign-in page); its Privacy Policy ("updated as of July 6, 2026"); and its help centre's refund,
+# cancelling, MLB+, account sharing, device and payment articles, and the MLB.TV on ESPN page. Not read: the sign-up
+# form past the email step (it opens only from the sign-in page's script), the checkout (commerce.mlb.com needs an
+# account), ESPN's terms for MLB.TV bought there, the app stores' terms, and the California notice the policy links.
+# Its terms take a perpetual, irrevocable licence over what you post (legal.content-rights isn't a streaming topic).
+# Calibrated against Sportsnet+ and Curiosity Stream.
+policies:
+  links:
+    - name: 'MLB.com Terms of Use'
+      url: https://www.mlb.com/official-information/terms-of-use
+    - name: 'MLB Privacy Policy'
+      url: https://www.mlb.com/official-information/privacy-policy
+    - name: 'MLB.TV on ESPN'
+      url: https://www.mlb.com/live-stream-games/partners/espn
+    - name: 'Account Settings'
+      url: https://support.mlb.com/s/article/Account-Settings?language=en_US
+    - name: 'What is the refund policy?'
+      url: https://support.mlb.com/s/article/What-is-the-refund-policy?language=en_US
+    - name: 'How to Cancel your Subscription'
+      url: https://support.mlb.com/s/article/How-to-Cancel-your-Subscription?language=en_US
+    - name: 'MLB+ FAQs'
+      url: https://support.mlb.com/s/article/MLB-plus-faq?language=en_US
+    - name: 'Can I Share My Account With Others?'
+      url: https://support.mlb.com/s/article/Can-I-Share-My-Account-With-Others?language=en_US
+    - name: 'Desktop & Laptop | Logged In Too Many Times'
+      url: https://support.mlb.com/s/article/Desktop-and-laptopt-logged-In-Too-Many-Times?language=en_US
+    - name: 'How are currency exchange issues handled?'
+      url: https://support.mlb.com/s/article/How-are-currency-exchange-issues-handled?language=en_US
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its sites and apps for analytics and may buy more data about you, such as your interests, from other companies. You can block Google Analytics only browser by browser.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'We may also obtain certain data, such as demographic data or information about your interest and preferences, from third parties, as set forth in Sections 3 and 7(k) below.'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'As with many websites, we use Google Analytics to understand how you and other visitors engage with MLB Properties'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: "If you don't want Analytics to be used in your browser, you can install the Google Analytics browser add-on"
+      action:
+        name: 'Its privacy choices (privacy policy)'
+        url: https://www.mlb.com/official-information/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It says it has sold or shared your information in the past year, and passes a scrambled copy of your email to ad companies and social networks. Only some US states’ residents get a full opt-out; elsewhere, opting out is partial.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'MLB has disclosed, sold or shared personal information to parties for a business or commercial purpose in the past 12 months.'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'Instead, a unique code (hashed email address) is disclosed to the applicable Social Network in order for that identifier to be matched against existing users of the relevant Social Network and to identify potentially relevant audiences for targeted advertising.'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'You have the right to direct us at any time to not sell your personal information or share your personal information for cross-context behavioral advertising.'
+      action:
+        name: 'Do Not Sell or Share My Personal Information'
+        url: https://www.mlb.com/official-information/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Ad companies track what you do on its sites and elsewhere to target ads, even with methods your browser can’t block. It ignores Do Not Track, and the opt-outs it points to cover only some ad companies.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: "A permitted network advertiser may use cookies, web beacons or similar technologies to collect information about your interaction with the MLB Properties in order to tailor certain advertisements and content delivered within the MLB Properties and on other websites within such network advertiser's ad network."
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'Please keep in mind that your web browser may not permit you to block the use of these non-cookie technologies, and those browser settings that block cookies may have no effect on such techniques.'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'we do not alter our Website’s data and information collection and use practices when we receive a “Do Not Track” signal from your browser.'
+      action:
+        name: 'Its ad choices (privacy policy)'
+        url: https://www.mlb.com/official-information/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      regions: [GB, EU]
+      tier: good
+      reason: 'In the UK and Europe, it asks before setting cookies, so ad tracking depends on your consent.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'Customers within the UK and EEA will be asked for consent prior to the setting of cookies.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or post trains AI.'
+      pages:
+        - https://www.mlb.com/official-information/privacy-policy
+        - https://www.mlb.com/official-information/terms-of-use
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it thinks reasonably necessary, including for its business, names no periods, and may keep it longer.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'We retain your personal information for as long as reasonably necessary and proportionate to achieve the purposes and uses set out in this Privacy Policy, as authorized by law, and to meet legal, taxation, accounting, risk management or business requirements.'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'These retention periods may be extended where circumstances so require or until a particular query, investigation or dispute is fully resolved.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'To close your account and delete your information you must phone customer service, and it keeps what it needs for its records. US state residents can ask too, but it may refuse “for certain other reasons”.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'If you want to review or revise other personal information you have provided to us, or to close your account(s) and have us delete the applicable account personal information (except what is needed for record-keeping purposes) call Customer Service at 866-244-2291 (within the United States) or 1-315-203-6761 (outside the United States).'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'We will not delete your information if we need it to protect the security, integrity or functionality of our operations and systems, to comply with legal obligations, to provide you with a good or service you requested, or for certain other reasons.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://www.mlb.com/official-information/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Its privacy policy names no way to get a copy of your data to take elsewhere, except for people in the UK, Europe and some US states.'
+      pages: [https://www.mlb.com/official-information/privacy-policy]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'In the UK and Europe, you can ask it for a copy of your information, or to send it to another company.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'For customers in the UK and EEA, you have the right to see a copy of the personal information that we hold about you'
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'or the transfer of your personal information to another data controller.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://www.mlb.com/official-information/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides court orders and warrants, its terms keep its right to comply with requests from governments and the police, without saying it needs legal process or will tell you.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'We may be required to disclose your personal and non-personal information pursuant to judicial or governmental subpoenas, warrants or orders.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: "MLB's performance under this Agreement is subject to applicable law and nothing contained herein is in derogation of MLB's right or obligation to comply with governmental, court and law enforcement requests or requirements relating to your use of the MLB Digital Properties or information provided to or gathered by MLB with respect to such use."
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information goes to the United States, which it says doesn’t protect it as the UK and Europe do. It relies on your purchase or consent and names no safeguards.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'If you submit personal information to us, or to a Service Provider, via the MLB Properties, you will be voluntarily transferring this personal information to the United States, a jurisdiction which does not provide the same framework as the UK or EEA for the protection of personal information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'You sign up with an email address and a password, but buying may require your name, address, phone number and card details.'
+      sources:
+        - url: https://support.mlb.com/s/article/Account-Settings?language=en_US
+          quote: 'The email address and password you enter will be used for future sign-ins.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'In order to purchase Merchandise, Auctions, Tickets, Services or any other products via the MLB Digital Properties or via Third Party Sales Locations, you may be required to provide complete and accurate personal information, including, without limitation, your name, address, telephone number, email address, credit or debit card information and shipping address.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Children under 13 can’t use the parts that need personal information without a parent’s consent, and it doesn’t knowingly sell under-16s’ data without permission. It says nothing about ads for teens.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: "Because of federal law, we are not permitted to knowingly collect any personal information from a child under the age of thirteen without the consent of that child's parent or guardian."
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'MLB does not knowingly sell or share the personal information of minors under 16 years of age without affirmative authorization.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online in your account at any time, or by email, phone or chat, and keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://support.mlb.com/s/article/How-to-Cancel-your-Subscription?language=en_US
+          quote: 'To manage your subscription online, please go to the Account Section on MLB.com. Click the Manage Subscriptions section of the page and cancel online.'
+        - url: https://support.mlb.com/s/article/What-is-the-refund-policy?language=en_US
+          quote: 'The Services to which you are subscribed will be accessible until cancellation is effective.'
+      action:
+        name: 'How to Cancel your Subscription'
+        url: https://support.mlb.com/s/article/How-to-Cancel-your-Subscription?language=en_US
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: good
+      reason: 'You get your money back if you ask within 5 days of buying or of a yearly renewal, once a season at most. After that, and for monthly payments, there are no partial refunds.'
+      sources:
+        - url: https://support.mlb.com/s/article/What-is-the-refund-policy?language=en_US
+          quote: 'MLB will refund the purchase price you paid for a subscription Service (e.g., MLB.TV or MLB+) offered via the MLB Digital Properties if you make a refund request on the applicable MLB Digital Property via the account management tools in the Audio/Video Subscriptions section of your MLB.com account or via email to subscriptioncancel@mlb.com within five (5) days of your initial purchase or within five (5) days of any annual automatic renewal date.'
+        - url: https://support.mlb.com/s/article/What-is-the-refund-policy?language=en_US
+          quote: 'In no event will MLB grant you more than one (1) refund during any given Major League Baseball season or provide partial or pro-rated refunds.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It renews at whatever the price is that season, and may tell you of a new price just by posting a notice on its pages.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: "your subscription will automatically renew annually on or about March 1 each year at the then-current year's regular full yearly price"
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'By purchasing or using any Services, you agree that MLB may notify you about changes to prices and/or Services by sending an email to an address you have provided to MLB or by publishing a notice on the informational page(s) of the MLB Digital Properties applicable to the Services.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'MLB+ starts with 7 days free, then bills the card you gave on the eighth day unless you cancel. You can cancel any time in the 7 days, but no reminder is promised.'
+      sources:
+        - url: https://support.mlb.com/s/article/MLB-plus-faq?language=en_US
+          quote: 'You may cancel a 7-day risk-free trial of MLB + Yearly and Monthly any time during the 7-day window and will still have access to MLB +for the full 7 days.'
+        - url: https://support.mlb.com/s/article/MLB-plus-faq?language=en_US
+          quote: 'If you do not cancel, you will be billed on the eighth day for the current Yearly or Monthly subscription price.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews on its own and its terms let it charge you without notice. It says it emails MLB.TV subscribers before each season about their renewal, but promises nothing before monthly renewals.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'UNLESS YOU NOTIFY US BEFORE THE BEGINNING OF THE NEXT APPLICABLE BILLING (AND RENEWAL) PERIOD THAT YOU WISH TO CANCEL ANY AUTOMATICALLY RENEWING SERVICE, YOUR SUBSCRIPTION WILL AUTOMATICALLY RENEW AND YOU AUTHORIZE US (WITHOUT NOTICE TO YOU) TO COLLECT THE APPLICABLE SUBSCRIPTION FEE AND ANY TAXES USING ANY CREDIT OR DEBIT CARD SAVED IN THE PAYMENT PROFILE SECTION OF YOUR MLB.COM ACCOUNT.'
+        - url: https://www.mlb.com/live-stream-games/partners/espn
+          quote: 'We will email you before the start of the next MLB season with details about your MLB.TV renewal.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: neutral
+      reason: 'Beyond the price, it can charge $100 if you get around a blackout, and a full subscription for each person you share your password with. Outside the US you pay in US dollars, and your bank may add its own fees.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'IF YOU CIRCUMVENT, OR ATTEMPT TO CIRCUMVENT, ANY HOME TELEVISION TERRITORY (HTT) BLACKOUT RESTRICTION OR OTHER USE RESTRICTION: YOUR SUBSCRIPTION WILL BE SUBJECT TO IMMEDIATE TERMINATION AND A CHARGE OF ONE HUNDRED DOLLARS ($100.00) FOR EARLY TERMINATION'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: "MLB RESERVES THE RIGHT TO CHARGE A USER THE FULL SERVICES' SUBSCRIPTION FEE FOR EACH INDIVIDUAL WITH WHOM THE USER HAS SHARED THEIR PASSWORD."
+        - url: https://support.mlb.com/s/article/How-are-currency-exchange-issues-handled?language=en_US
+          quote: "Banks and payment card issuers may convert currency to local currency in accordance with that bank or issuer's policies and practices regarding exchange rates and may charge foreign transaction and/or currency exchange fees."
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help centre don’t say what happens when you switch between MLB.TV and MLB+, or between monthly and yearly.'
+      pages:
+        - https://www.mlb.com/official-information/terms-of-use
+        - https://support.mlb.com/s/article/What-is-the-refund-policy?language=en_US
+        - https://support.mlb.com/s/article/MLB-plus-faq?language=en_US
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions or jury. You can opt out only as part of a mass arbitration, after two rounds; privacy claims go to New York’s courts.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'This Agreement contains a Dispute Resolution section, including an arbitration agreement, class action waiver, and jury trial waiver that affect your legal rights.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'You also may individually opt out of arbitration by providing your individual, personally signed notice of your intention to opt out to MLB via email to legaldepartment@mlb.com within thirty (30) days after the conclusion of the second global mediation session.'
+      action:
+        name: 'Its dispute rules (terms, section 11)'
+        url: https://www.mlb.com/official-information/terms-of-use
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time by posting them, and using MLB.TV afterwards means you accept them.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'MLB may change the terms of this Agreement at any time, and your use of an MLB Digital Property after such change is posted will mean that you accept such change.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end the agreement or cut off your access at any time, for any reason, without notice, and never gives partial refunds.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'This Agreement may also be immediately terminated at any time by MLB in its sole discretion.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: "MLB may also impose limits on certain offerings and features or restrict your access to parts, or the entirety, of the MLB Digital Properties without notice or liability at any time in MLB's exclusive discretion"
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'In no event will MLB provide partial or pro-rated refunds; see below for further details regarding refunds.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or drop any part of what you pay for at any time, and says it isn’t liable if a feature isn’t available. Games can be blacked out where you are.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'MLB may change, suspend or discontinue any aspect of the MLB Digital Properties at any time, including the availability of any product, Merchandise, Auctions offering, Ticket offering, Service, feature, database or content.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'IN NO EVENT SHALL MLB OR ANY OTHER MLB ENTITY BE LIABLE FOR ANY FAILURE, INTERRUPTION OR ERROR WITH RESPECT TO ANY ASPECT OF THE MLB DIGITAL PROPERTIES, INCLUDING THE AVAILABILITY OF ANY FEATURE OR FUNCTIONALITY.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.mlb.com/official-information/terms-of-use
+        - https://www.mlb.com/official-information/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that accounts are password protected and that it uses standard encryption in some places. It names no outside checks and no way to report a security flaw.'
+      sources:
+        - url: https://www.mlb.com/official-information/privacy-policy
+          quote: 'In certain areas, we use industry-standard SSL encryption to protect data transmissions.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Sharing your username and password with anyone is strictly forbidden, and it can charge you a full subscription for each person you share it with.'
+      sources:
+        - url: https://support.mlb.com/s/article/Can-I-Share-My-Account-With-Others?language=en_US
+          quote: 'No. Sharing of your username and password is strictly prohibited.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'SHARING OF PASSWORDS TO ANY OF THE MLB DIGITAL PROPERTIES IS STRICTLY FORBIDDEN.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: bad
+      reason: 'It blocks an account it sees used in several places with a “Logged In Too Many Times” message, without saying where the limit is.'
+      sources:
+        - url: https://support.mlb.com/s/article/Desktop-and-laptopt-logged-In-Too-Many-Times?language=en_US
+          quote: 'If you are seeing this message, it means that your MLB.TV account is being used to access in multiple locations.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Claims expire after a year
+      tier: bad
+      reason: 'You must tell MLB in writing about any claim within a year or lose it for good, and its liability for anything is capped at $50.'
+      sources:
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'YOU AGREE TO PROVIDE WRITTEN NOTICE OF ANY CLAIM OR DISPUTE, INCLUDING THOSE RAISED IN ARBITRATION AS DESCRIBED IN SECTION 11 BELOW, TO MLB WITHIN ONE YEAR OF THE CLAIM OR DISPUTE ARISING OR IT IS FOREVER WAIVED AND TIME BARRED.'
+        - url: https://www.mlb.com/official-information/terms-of-use
+          quote: 'THE MAXIMUM LIABILITY OF MLB, ANY OTHER MLB ENTITY OR ANY VENDOR FOR ANY CLAIM ARISING OUT OF OR IN CONNECTION WITH THE MLB DIGITAL PROPERTIES, INCLUDING BUT NOT LIMITED TO ANY PRODUCTS, AUCTIONS, TICKETS, MERCHANDISE, OR SERVICES AVAILABLE THEREFROM, IS $50.'
+      lastVerified: 2026-11-13

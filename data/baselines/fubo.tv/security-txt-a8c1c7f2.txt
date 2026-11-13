@@ -1,0 +1,22 @@
+url: https://www.fubo.tv/security.txt
+method: fetch
+saved: 2026-11-13
+
+# security.txt for fubo.tv
+# Purpose:
+# If you believe you have found a security vulnerability on fubo.tv or its services,
+# please report it to us responsibly. We value the security of our users and
+# welcome reports that help us improve our platform.
+Contact: mailto:secops@fubo.tv
+# How to Report:
+# - Provide a detailed description of the vulnerability.
+# - Include steps to reproduce the issue.
+# - Attach supporting evidence (e.g., screenshots, logs, or proof-of-concept code).
+# - Do not test vulnerabilities that may disrupt services or compromise user data.
+# Preferred Language for Vulnerability Reports
+Preferred-Languages: en
+# Scope
+Canonical: https://fubo.tv
+Canonical: https://*.fubo.tv
+# Expires
+Expires: 2025-12-31T23:59:59Z

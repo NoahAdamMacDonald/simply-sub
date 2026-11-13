@@ -429,6 +429,18 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   // Acorn TV and Sundance Now state neither their quality nor their streams (2026-11-13).
   ['acorn-tv.standard', ['video.quality', 'streaming.concurrent-streams']],
   ['sundance-now.standard', ['video.quality', 'streaming.concurrent-streams']],
+  // NBA League Pass states no stream count for its free plan or NBA TV alone (2026-11-13).
+  ['nba-league-pass.free', ['streaming.concurrent-streams']],
+  ['nba-league-pass.nba-tv', ['streaming.concurrent-streams']],
+  // Kanopy states no stream count; Hoopla no video or audio quality (2026-11-13).
+  ['kanopy.free', ['streaming.concurrent-streams']],
+  ['hoopla.free', ['video.quality', 'audio.quality']],
+  // Fubo Free and Sling Freestream state no stream count (2026-11-13).
+  ['fubo.free', ['streaming.concurrent-streams']],
+  ['sling-tv.freestream', ['streaming.concurrent-streams']],
+  // MLB states no stream count on its own pages (ESPN's "3 devices" is ESPN's) (2026-11-13).
+  ['mlb-tv.all-teams', ['streaming.concurrent-streams']],
+  ['mlb-tv.mlb-plus', ['streaming.concurrent-streams']],
 ]);
 
 /**

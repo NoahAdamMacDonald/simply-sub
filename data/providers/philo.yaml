@@ -1,0 +1,606 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with Edge through a US exit for philo.com's pricing,
+# home and FAQ pages (from Canada every philo.com page in Edge says "Sorry, Philo is only available in the United
+# States... for now."), and with a plain fetch from Canada for its terms, privacy policy and help centre
+# (help.philo.com, every article in its sitemap). Pages, each quoted where it's used:
+# Pricing: its pricing page (philo.com/go/pricing, through a US exit): Essential "$25/mo" and Bundle+ "$33/mo", and its
+# add-ons (Hallmark+ "$9/mo", ALLBLK "$7/mo", MGM+ "$8/mo", Movies & More "$3/mo", STARZ "$12/mo", and the Bundle+
+# upgrades HBO Max Standard "$13/mo", AMC+ ad-free "$4/mo" and discovery+ ad-free "$8/mo"). Its help centre gives the
+# same in words ("Essential is our $25 base plan", "Bundle+ is our $33 base plan", Subscription plans) and Hallmark+'s
+# exact price ("Hallmark+ add-on for $8.99 more per month", which the pricing page rounds to $9). The yearly prices are
+# its Annual Billing article's: "Essential is $275.88/year (+ taxes where applicable) with Annual Billing" and "Bundle+
+# is $359.88/year (+ taxes where applicable) with Annual Billing", for subscribers billed by Philo; its Essential and
+# Bundle+ articles round them ("$275/year", "$360/year"), so the Annual Billing article's exact figures are used. All
+# in US dollars before tax ("Prices listed do not include sales tax.", its terms). The Welcome Back 2026 Offer ($19.99 a
+# month for three months, then "currently $25.00/month") is a first-term offer, not stored. "Pricing may vary through
+# third-party billers": Amazon, Apple, Google, Roku, Samsung and Vizio may add a surcharge (its surcharge article).
+# Where it's sold: the US and its territories only: "Philo is available for your viewing pleasure anywhere and
+# everywhere in the United States, along with U.S territories, commonwealths, and possessions including: American Samoa
+# District of Columbia Guam Puerto Rico Northern Mariana Islands U.S. Virgin Islands" (Watch Philo outside the U.S.), and
+# "Philo’s Services are not available outside the United States." (its privacy policy).
+# Region checklist for CA and US, 2026-11-13: 1. one site, no locale paths or hreflang; 2. no picker; 3. its pricing
+# page's prices are drawn by its script (a plain fetch shows none), so the US exit's Edge read is the source; 4. the
+# sign-up form wasn't opened (philo.com/login/subscribe shows the home page's plans first); 5. its help centre's plans,
+# Annual Billing and payment articles; 6. Edge from Canada (the unavailable page), Edge through a US exit, and a plain
+# fetch; 7. no bill offered. Canada: not sold (the official statements above).
+# Bundles: none as bundle files. Bundle+ is Philo's own plan with HBO Max Basic with Ads, discovery+ (with ads) and
+# AMC+'s ad-supported content included, so it lists them in includes-subscription. Official resellers: none found (no
+# resellers, gift card or retail page on philo.com or in its help centre). Partners that bill it themselves: Amazon,
+# Apple, Google, Roku, Samsung and Vizio ("third-party billing partners", How to pay for Philo), noted, not listed.
+# Features, read 2026-11-13: "Philo streams video in high definition (HD) resolution, with live TV in 720p and
+# on-demand content in 1080p." (Video and audio quality), so 1080p, its best; "Philo allows three different streams to
+# play at the same time." (Limit of simultaneous streams; its terms say the same for the Free Channels plan); "Each
+# account can have up to 10 profiles" (Profiles), with no kids profiles; "Philo doesn’t currently have the option for
+# parental controls." (Parental controls); live channels "with ads (just like cable)" and "Sports and Local Channels: Not
+# included." (the pricing page), so live TV channels and no sports; no downloads (its help centre has none, only the
+# cloud DVR). What it streams: its pricing page describes its channels as "Focused on entertainment, lifestyle, and
+# family.", and its lineup's categories are "Comedy", "Crime & Drama", "Documentary", "Family", "Home & Lifestyle",
+# "Music", "News", "Outdoors & Sports", "Reality" and "Sci-Fi & Fantasy", with "75,000+ movies and shows" on demand;
+# the Free Channels plan has "free news, comedy, reality, and entertainment channels" (its free channels page). None of
+# your own media. Pause: none (its cancel, billing and plan articles offer only cancelling; no help article mentions
+# pausing).
+
+# Coverage: philo.* in AS, GU, MP, PR and VI: sold there ("U.S territories, commonwealths, and possessions", its help
+# centre), but its pricing page names no territory's price, and the US exit's page showed the US's (2026-11-13).
+
+id: philo
+name: Philo
+website: https://www.philo.com
+# Its help centre (help.philo.com), on philo.com's own domain.
+category: streaming
+spendCategory: streaming
+# The US and its territories (the help centre's list in the header comment; the District of Columbia is the US's).
+availableIn: [US, AS, GU, MP, PR, VI]
+billingCurrency: { US: USD }
+cancelUrl: https://help.philo.com/account-billing/cancel/
+sources: { pricing: https://www.philo.com/go/pricing }
+# Owner (M11.2), read 2026-11-13: Philo, Inc., which its privacy policy and terms name as the company that provides and
+# operates it ("The Services are owned and operated by Philo", its terms), a private company; no page of its own names
+# its shareholders, so no stock and no holders.
+owner:
+  name: 'Philo, Inc.'
+  page:
+    name: 'Philo Privacy Policy'
+    url: https://www.philo.com/about/privacy
+  quotes:
+    - 'This Privacy Policy applies to these Services provided by Philo, Inc.'
+    - 'Philo is a Delaware corporation, and we provide the Services only to residents located in the United States.'
+  country:
+    code: US
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its payment article, for subscribers billed by Philo (cards, a bank account
+# through Stripe's Link, Apple Pay, Cash App and Google Pay) and through its third-party billing partners.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, discover, amex]
+    url: https://help.philo.com/account-billing/payment/
+    quotes:
+      - 'We accept credit cards from Visa, Mastercard, Discover, and American Express, and debit cards from Visa, Mastercard, and American Express.'
+paymentMethods:
+  - methods: [card, bank-transfer, apple-pay, cash-app, google-pay, app-store]
+    page: How to pay for Philo
+    url: https://help.philo.com/account-billing/payment/
+    quotes:
+      - 'We accept credit cards from Visa, Mastercard, Discover, and American Express, and debit cards from Visa, Mastercard, and American Express.'
+      - 'We accept direct bank account payments through Stripe’s Link system.'
+      - 'We accept digital wallet payments through Apple Pay, Cash App, and Google Pay.'
+      - 'or through one of our third-party billing partners (Amazon, Apple, Google, Roku, Samsung, and Vizio).'
+# Renewal day (M11.5), read 2026-11-13: its billing date article: the day your subscription begins, each month, and a
+# shorter month's last day.
+renewalAnchor:
+  kind: same-date
+  page: How to view and change your billing date
+  url: https://help.philo.com/account-billing/billing-date/
+  quotes:
+    - 'From then on, you’ll be charged that same day of each month.'
+    - 'If your billing date is scheduled for a date that doesn’t occur every month (like the 31st), you’ll be billed on the last day of that month instead.'
+  lastVerified: 2026-11-13
+
+# Perks (M11.6): the paid plans' cloud DVR, in their words: "1-year unlimited DVR" (the pricing page), "unlimited DVR
+# storage included at no extra cost, and your recordings are saved for a full year" (Save + record with DVR); the Free
+# Channels plan saves select titles for 30 days only.
+perks:
+  - id: unlimited-dvr
+    name: 1-year unlimited DVR
+
+# General features, read 2026-11-13: platforms from its supported devices article (Android TV, Apple TV, Chromecast,
+# Fire TV, LG, Roku, Samsung and Vizio TVs; Mac and PC browsers; Android, Fire tablets, iPhone and iPad), no consoles.
+# Sign-in: "Enter the mobile number or email address associated with your account and click the link (or enter the
+# code) sent to your phone or email." (How to sign in to Philo), with no password. Support: "Chat with us daily from 6
+# AM to midnight ET", "Give us a call" and "email us at help@philo.com" (Contact us). App languages: English (philo.com
+# and its help centre have no other language version or picker).
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [email-code, sms]
+  languages.interface: [en]
+  support.channels: [chat, phone, email]
+
+plans:
+  - id: philo.free
+    name: Free Channels
+    link: https://www.philo.com/go/free-channels
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 10
+      streaming.live: [tv-channels]
+      account.pause: false
+      account.parental-controls: false
+      streaming.content: [films, series, reality, news]
+    notes: Free with ads, with no credit card; an account (an email address) is needed only to save shows. Select titles can be recorded for 30 days. Live TV streams in 720p, on-demand titles in 1080p.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.philo.com/go/free-channels
+
+  - id: philo.essential
+    name: Essential
+    link: https://www.philo.com/go/pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 10
+      streaming.live: [tv-channels]
+      account.pause: false
+      account.parental-controls: false
+      streaming.content: [films, series, kids, documentaries, reality, news]
+    perks: [unlimited-dvr]
+    addOnIds:
+      [philo.allblk, philo.hallmark-plus, philo.mgm-plus, philo.movies-and-more, philo.starz]
+    notes: 70+ live channels with ads, no sports or local channels; recordings skip the ads. Live TV streams in 720p, on-demand titles in 1080p. A 7-day free trial for new subscribers. Add-ons and yearly billing only when billed by Philo.
+    prices:
+      - region: US
+        currency: USD
+        amount: 25
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.philo.com/go/pricing
+      - region: US
+        currency: USD
+        amount: 275.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/annual-billing/
+
+  - id: philo.bundle-plus
+    name: Bundle+
+    link: https://www.philo.com/go/pricing
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.concurrent-streams: 3
+      streaming.profiles: 10
+      streaming.live: [tv-channels]
+      account.pause: false
+      account.parental-controls: false
+      streaming.content: [films, series, kids, documentaries, reality, news]
+      includes-subscription: [hbo-max.basic-ads, discovery-plus.with-ads, amc-plus.with-ads]
+    perks: [unlimited-dvr]
+    addOnIds:
+      [
+        philo.allblk,
+        philo.amc-plus-ad-free,
+        philo.discovery-plus-ad-free,
+        philo.hallmark-plus,
+        philo.hbo-max-standard,
+        philo.mgm-plus,
+        philo.movies-and-more,
+        philo.starz,
+      ]
+    notes: Everything in Essential, with HBO Max Basic with Ads (in the HBO Max app), discovery+ and AMC+'s ad-supported content (with Shudder and Sundance Now). No free trial. Add-ons and yearly billing only when billed by Philo.
+    prices:
+      - region: US
+        currency: USD
+        amount: 33
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.philo.com/go/pricing
+      - region: US
+        currency: USD
+        amount: 359.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/annual-billing/
+
+# Add-ons, read 2026-11-13: each monthly only ("Annual Billing is not available for our any of our add-ons", Annual
+# Billing) and only for subscribers billed by Philo; the AMC+, discovery+ and HBO Max upgrades with Bundle+ only (their
+# articles: "currently only available with a Bundle+"). Prices from the Subscription plans article, each "more per
+# month" on the plan's price.
+addOns:
+  - id: philo.allblk
+    name: ALLBLK
+    prices:
+      - region: US
+        currency: USD
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.amc-plus-ad-free
+    name: AMC+ ad-free upgrade
+    prices:
+      - region: US
+        currency: USD
+        amount: 4
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.discovery-plus-ad-free
+    name: discovery+ (ad-free)
+    prices:
+      - region: US
+        currency: USD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.hallmark-plus
+    name: Hallmark+
+    prices:
+      - region: US
+        currency: USD
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.hbo-max-standard
+    name: HBO Max Standard
+    prices:
+      - region: US
+        currency: USD
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.movies-and-more
+    name: Movies & More
+    prices:
+      - region: US
+        currency: USD
+        amount: 3
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.mgm-plus
+    name: MGM+
+    prices:
+      - region: US
+        currency: USD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+  - id: philo.starz
+    name: STARZ
+    prices:
+      - region: US
+        currency: USD
+        amount: 12
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.philo.com/account-billing/packages/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch: its Terms of Service Agreement ("Last
+# Updated and Effective: October 9, 2026"), which include its Additional Terms of Service for Apple Devices, Nielsen
+# Product Terms, Free Trial and Promotional Offers terms and Text Message Program Terms (the same page), its Privacy
+# Policy ("UPDATED AND EFFECTIVE DATE: Aug 3, 2026"), and its help centre's billing, cancelling, deletion, sharing and
+# opt-out articles. The sign-up form (philo.com/pricing, then an email address) names only the Terms of Service and
+# Privacy Policy ("Check the Terms of Service & Privacy Policy checkbox", How to sign up for Philo); it wasn't opened.
+# Not read: the Chart its privacy policy links (a separate page) and the partners' terms (HBO Max's and discovery+'s
+# Legal Terms, which Bundle+ subscribers accept when they activate them, are those providers' own). Calibrated against
+# STARZ and YouTube TV.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.philo.com/about/terms
+    - name: 'Privacy Policy'
+      url: https://www.philo.com/about/privacy
+    - name: 'How to cancel your Philo subscription or trial'
+      url: https://help.philo.com/account-billing/cancel/
+    - name: 'How to delete your account'
+      url: https://help.philo.com/account-billing/delete/
+    - name: 'Opting out of sales, sharing, and targeted advertising'
+      url: https://help.philo.com/using-philo/do-not-sell/
+    - name: 'How to change your subscription plan'
+      url: https://help.philo.com/account-billing/change-your-plan/
+    - name: 'Monthly billing email reminders'
+      url: https://help.philo.com/account-billing/email-reminders/
+    - name: 'Third-party biller surcharge'
+      url: https://help.philo.com/account-billing/surcharge/
+    - name: 'Profiles'
+      url: https://help.philo.com/using-philo/profiles/
+    - name: 'Save + record with DVR'
+      url: https://help.philo.com/using-philo/save/
+    - name: '7-day Essential free trial'
+      url: https://help.philo.com/using-philo/free-trial/
+    - name: 'Parental controls'
+      url: https://help.philo.com/using-philo/parental-controls/
+    - name: 'Free Channels'
+      url: https://www.philo.com/go/free-channels
+    - name: 'Limit of simultaneous streams'
+      url: https://help.philo.com/using-philo/stream-limit/
+    - name: 'How to sign up for Philo'
+      url: https://help.philo.com/using-philo/sign-up/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use Philo, including with session replay and Google Analytics, for its own analytics. Opting out of the tracking tools is set browser by browser and device by device.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'Philo may use session replay technology to record your interactions with the Services, such as what pages you visit on the Services, how long you visit those pages, and any links you click or information you provide.'
+        - url: https://www.philo.com/about/privacy
+          quote: 'We use Google Analytics, which uses cookies and similar technologies to collect and analyze information about the use of Services and report on activities and trends.'
+        - url: https://www.philo.com/about/privacy
+          quote: 'Your opt-out choices are typically browser and device specific'
+      action:
+        name: 'Opt out of sales, sharing and targeted ads'
+        url: https://help.philo.com/using-philo/do-not-sell/
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your information with outside business partners for their own marketing, and with ad companies. You can opt out profile by profile when signed in, or browser by browser and device by device.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'We may share your information for business purposes with our third party service providers and unaffiliated third-party business partners for their business and marketing purposes'
+        - url: https://help.philo.com/using-philo/do-not-sell/
+          quote: 'If your account has more than one Profile, please note that this setting is managed on a per-Profile basis.'
+        - url: https://help.philo.com/using-philo/do-not-sell/
+          quote: 'Please note that your opt-out is specific to your device or browser.'
+      action:
+        name: 'Opt out of sales, sharing and targeted ads'
+        url: https://help.philo.com/using-philo/do-not-sell/
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Philo has ads, and what you watch can pick them. Ad companies track you on Philo and elsewhere. You can turn off personalized ads, but only profile by profile or device by device.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'The general categories of Content you view may also be used to show you more relevant advertising.'
+        - url: https://www.philo.com/about/privacy
+          quote: 'they may use this information to perform advertising related services for us and our business partners, including tailoring ads on the Services and elsewhere online'
+        - url: https://help.philo.com/using-philo/do-not-sell/
+          quote: 'Un-toggle (slide the toggle to the left) the Enable personalized ads setting as shown below.'
+      action:
+        name: 'Opt out of sales, sharing and targeted ads'
+        url: https://help.philo.com/using-philo/do-not-sell/
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write to it, such as support chats, trains AI. Its helpers may use AI to work for it.'
+      pages:
+        - https://www.philo.com/about/privacy
+        - https://www.philo.com/about/terms
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It names no time limits. After you cancel it keeps your name, email and phone number, and after you delete your account some information can stay in backups.'
+      sources:
+        - url: https://help.philo.com/account-billing/cancel/
+          quote: 'After you cancel your subscription, we’ll retain certain parts of your information, including your name, email address, and phone number.'
+        - url: https://help.philo.com/account-billing/delete/
+          quote: 'your information may remain in back-up storage for some period of time'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'To delete your account you ask its support team by email, form or phone, and it doesn’t say how long it takes. It keeps some information the law or its accounting needs.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'If you want to delete your Account, you may email us at help@philo.com , contact us at philo.com/contact , or call us at 855-CSPHILO (855-277-4456), but without an Account, you cannot use the Philo Subscription Service.'
+        - url: https://help.philo.com/account-billing/delete/
+          quote: 'After you delete your account, we may retain information from or about you under applicable law, including for various legal, operational, accounting, and auditing purposes'
+      action:
+        name: 'How to delete your account'
+        url: https://help.philo.com/account-billing/delete/
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your information by email, form or phone. It offers no download of its own.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'If you wish to update, correct, or otherwise have access to your personal data in our records, please use one of the mechanisms below.'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.philo.com/about/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands your information over when the law or legal process requires, and what you watch only to police with a court order, as the law requires. Nothing more is promised.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'Comply with legal obligations or legal processes;'
+        - url: https://www.philo.com/about/privacy
+          quote: 'Philo only shares the Video Viewing History category of data in the ordinary course of business, such as customer service providers and technology systems service providers, with your consent, to law enforcement, in response to a court order, and as otherwise allowed under 18 U.S.C. § 2710, the Video Privacy Protection Act (VPPA).'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information is kept in the United States and other countries it doesn’t name, and it describes no safeguards for it.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'you are consenting to the collection, transfer, storage, and processing of such information in the United States and other countries.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up needs an email address, then payment details for a paid plan; a free trial may also ask for your name, phone number and ZIP code. Free Channels need no account.'
+      sources:
+        - url: https://help.philo.com/using-philo/sign-up/
+          quote: 'Enter your email address.'
+        - url: https://www.philo.com/about/terms
+          quote: 'During the trial period, you will be asked to provide additional information, which may include your name, email address and/or mobile phone number, billing zip code, and payment method information.'
+        - url: https://www.philo.com/go/free-channels
+          quote: 'No, you can start watching instantly without an account.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to make an account, and minors may watch only with an adult. It has no parental controls or kids profiles, and asks you to tell it if it collected a child’s data.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'Minors may only use the service under the supervision of an adult.'
+        - url: https://help.philo.com/using-philo/parental-controls/
+          quote: 'Philo doesn’t currently have the option for parental controls.'
+        - url: https://www.philo.com/about/privacy
+          quote: 'If you learn we have collected personal data from a child without such consent, please email us at help@philo.com'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it takes commercially reasonable steps and can’t guarantee security. It names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://www.philo.com/about/privacy
+          quote: 'While Philo takes commercially reasonable steps designed to secure your personal data, no data transmission over the Internet, wireless transmission, or electronic storage of data can be guaranteed to be 100% secure.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel online in a few clicks on your Account page and keep watching until the end of the time you paid for, then you move to the Free Channels.'
+      sources:
+        - url: https://help.philo.com/account-billing/cancel/
+          quote: 'Click Cancel my subscription .'
+        - url: https://help.philo.com/account-billing/cancel/
+          quote: 'Click Complete cancellation to confirm.'
+        - url: https://help.philo.com/account-billing/cancel/
+          quote: 'Once you cancel your Philo subscription or trial, you’ll still be able to watch the content included in that paid subscription for the remainder of your current billing cycle'
+      action:
+        name: 'How to cancel'
+        url: https://help.philo.com/account-billing/cancel/
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://help.philo.com/account-billing/cancel/
+          quote: 'Philo has a no refund policy — cancellation ensures that you won’t be charged again in the future, but you won’t receive a refund for your current billing period.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you when the price changes, without saying how far ahead.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'The price of your subscription may change, and we will notify you of any changes.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 7-day trial usually needs payment details up front and turns into a paid plan unless you cancel during it. It doesn’t say it reminds you first.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'Generally, you will be asked to provide your mobile number or email address and payment information in order to activate a Philo account and start the initial free Trial.'
+        - url: https://www.philo.com/about/terms
+          quote: 'At the conclusion of the applicable Trial Period, the free Trial Offer immediately expires and your account automatically converts to a paid subscription for the Philo services (plus taxes).'
+        - url: https://help.philo.com/using-philo/free-trial/
+          quote: 'You can cancel anytime before your trial ends for absolutely no charge.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It usually emails you once a year about your subscription, and before every monthly bill if you turn on billing reminders in Settings.'
+      sources:
+        - url: https://help.philo.com/account-billing/email-reminders/
+          quote: 'Typically, we send you one annual email reminder about your active Philo subscription.'
+        - url: https://help.philo.com/account-billing/email-reminders/
+          quote: 'If you’d prefer to receive monthly billing email reminders, you can follow the steps below.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'If you pay through Amazon, Apple, Google, Roku, Samsung or Vizio, you may pay a surcharge it doesn’t put a number on. Paying Philo directly avoids it.'
+      sources:
+        - url: https://help.philo.com/account-billing/surcharge/
+          quote: 'If you subscribe to Philo through certain third-party billers (like Amazon, Apple, Google, Roku, Samsung, or Vizio), you may be subject to a surcharge.'
+        - url: https://www.philo.com/about/terms
+          quote: 'At the beginning of each new subscription term, the cost of each subscription plus applicable taxes, fees, and surcharges will automatically be charged to your Account without further notice.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Bundle+ starts at once and you pay the difference for the rest of the month. Moving down to Essential waits until your next bill.'
+      sources:
+        - url: https://help.philo.com/account-billing/change-your-plan/
+          quote: 'If you upgrade from Essential to Bundle+, you’ll immediately move to the Bundle+ plan. You’ll be charged a prorated amount for Bundle+ for the remainder of the month.'
+        - url: https://help.philo.com/account-billing/change-your-plan/
+          quote: 'If you downgrade from Bundle+ to Essential, you’ll stay on the Bundle+ plan until your next billing cycle, at which point you’ll move to the Essential plan.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions or jury, and its terms offer no way to opt out. Small claims court is still allowed.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'WILL BE RESOLVED BY BINDING ARBITRATION BEFORE A SOLE ARBITRATOR (RATHER THAN IN COURT BEFORE A JURY).'
+        - url: https://www.philo.com/about/terms
+          quote: 'YOU AND WE AGREE THAT ANY DISPUTE RESOLUTION PROCEEDINGS WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, REPRESENTATIVE, CONSOLIDATED OR MASS ACTION.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms can take effect as soon as they’re posted, and using Philo means you accept them. If you don’t agree, you can stop and ask for a refund of the unused time within 30 days.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'Amendments will be effective immediately or, if required by law, 30 days after notice to you, which may be given by posting the amendments on our Services, by text message or by electronic or conventional mail.'
+        - url: https://www.philo.com/about/terms
+          quote: 'If you do not agree to any amendment, you may not use our Services, and you may receive a pro-rated refund for any of your pre-paid fees for our Services you do not use by contacting us through philo.com/contact within 30 days of the effective date of the amendment .'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can refuse you the service for any reason, owes you nothing if it cuts you off, and gives no refunds for any reason unless the law requires.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'In our discretion, we reserve the right to deny the creation of any Account, and the right to deny use of our Services for any reason.'
+        - url: https://www.philo.com/about/terms
+          quote: 'You agree that Philo will have no liability to you if your access to our Services is terminated.'
+        - url: https://www.philo.com/about/terms
+          quote: 'Unless we are required by law, we will not provide a refund or credit for any reason, including without limitation, for any period remaining in your subscription after you cancel your subscription.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of Philo at any time without notice and says it owes you nothing. Your recordings are gone if you cancel and come back later.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'We reserve the right at any time to change or discontinue any of our Services or any element or feature of our Services without notice or liability to you.'
+        - url: https://help.philo.com/using-philo/save/
+          quote: "If you cancel your subscription and later reactivate, your favorites will still be saved, but you'll no longer have access to any of your previous recordings."
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It may delete the data of an account it decides is dormant, without saying after how long or warning you.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'In addition, we reserve the right to delete data for an Account that we determine is dormant.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Its terms let adults in your household add profiles, up to 10, and its help centre invites friends too. It names no checks on who shares.'
+      sources:
+        - url: https://www.philo.com/about/terms
+          quote: 'Other members of your household living at the same address that are at least 18 years old may create profiles connected to your Account.'
+        - url: https://help.philo.com/using-philo/profiles/
+          quote: 'Each account can have up to 10 profiles, so feel free to share with your family and friends!'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages limit only how many streams play at once (three); they say nothing about registering devices or downloads, which it doesn’t offer.'
+      pages:
+        - https://help.philo.com/using-philo/stream-limit/
+        - https://www.philo.com/about/terms
+      lastVerified: 2026-11-13

@@ -1,0 +1,710 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8). Its help centre (f1help.formula1.com, every F1 TV
+# article its sitemap lists, and Location Availability with each research country picked) and its terms read with Edge
+# from Canada; its sign-up (account.formula1.com) refuses every exit ("You are accessing this service from a restricted
+# geographic region."), so its plan page (formula1.com/en-ca/subscribe-to-f1-tv) was read over an ordinary connection
+# in Canada. Pages, each quoted where it's used:
+# Pricing: formula1.com/en-ca/subscribe-to-f1-tv's plan cards, "TV Access ... $39.99 / Year", "TV Pro ... $99.99 /
+# Year" and "TV Premium ... $129.99 / Year", with a Yearly and a Monthly toggle; its page data names each plan, period
+# and currency ("Name":"Access Monthly", "Amount":4.99, "Code":"CAD", "F1 TV Access Monthly Canada CAD n01"; Pro
+# Monthly 12.99, Premium Monthly 16.99), each with "Discount":0 and "Intropricing":"False", so the regular prices. Its
+# subscription terms say "All Fees are inclusive of applicable local sales tax or VAT", but no words on the plan page do,
+# so no taxIncluded (notes.md has it for the owner). Other countries' prices: formula1.com sends this machine's own
+# connection to Canada's page ("?e=georedir&from=gb&to=ca"), and every exit gets the sign-up's restricted-region page.
+# Region checklist, 2026-11-13: 1. formula1.com's locale paths (/en-ca/, /en-gb/, /en-us/: each georedirects to the
+# reader's own); 2. its "Select your country of residence" step, past the plan page, wasn't reached from any exit; 3. the
+# plan page's data names Canada and CAD; 4. the sign-up, refused through exits; 5. its help centre's Location
+# Availability (each country's plans) and payment articles; 6. Edge from here, through Canadian, US, UK and German exits,
+# a plain fetch through UK, US and New Zealand exits, and a browser over an ordinary connection (Canada only); 7. no
+# bill offered.
+# Which plans each country sells (Location Availability, read 2026-11-13 with each country picked): Canada, New Zealand
+# and the Netherlands all three; France Access and Pro ("Not available" under Premium; its Access gets "Access to Live
+# Events only. Replays and highlights are not available in this region."); the US, the UK, Ireland, Australia,
+# Germany, Spain and Italy Access only ("Not available" under Pro and Premium; the US's: "*F1 TV Pro & Premium are no
+# longer available to buy directly through F1."). "If your country is not listed, F1 TV is not available there."
+# Bundles: none sold by F1. Partners that add Pro or Premium to their own packages ("We've teamed up with a selection of
+# TV and mobile partners, so you can add an F1 TV Pro or F1 TV Premium subscription to your existing package"): Apple TV
+# (Premium, "USA only"), Fuji TV, FanCode (India), Claro Brasil, Telcel, Telmex, Foxtel, Viaplay (Netherlands) and
+# Canal+ (France): noted, not listed; Viaplay's plans include F1 TV Pro (viaplay.yaml). Official resellers: none; Apple,
+# Google, Roku and Amazon bill it themselves. Vouchers and intro prices are offers ("when your discount period ends, your
+# subscription will renew at the full advertised price").
+# Features, read 2026-11-13: F1 TV Streaming Quality's table ("International: UHD HDR 2160p" on Premium, "SDR 1080p" on
+# Pro); "F1 TV Pro subscription, you can stream on one device at a time" and "F1 TV Premium subscription, you can stream
+# on up to six devices at the same time" (Manage your Devices); Pro "Official live stream: watch all F1 sessions live
+# and on demand, ad free" and Premium "Ad-free, live and on-demand streaming of all F1 sessions"; Access has no live
+# video ("Access to the official live race video stream is not part of F1 TV Access") and no page names its quality,
+# streams or ads: quality and streams inferred, ads false. No downloads or profiles on any page. Pause: "Need a break
+# from F1 TV? There are two options available" (Pause your Subscription). No parental controls on any page read (F1 Kids
+# is a commentary feed). What it streams: F1 sessions, support series, "Exclusive shows, documentaries and race
+# archives"; none of your own media.
+# Free use: none: its plans are paid (free trials, when offered, turn into a plan: its terms' clause 14).
+
+# Coverage: f1-tv.pro and f1-tv.premium in US, GB, IE, AU, DE, ES, IT, and f1-tv.premium in FR: not sold there; F1's
+# Location Availability shows "Not available" under them for each of those countries (read 2026-11-13).
+
+# Coverage: f1-tv.* in AX, DZ, AO, AI, AG, AR, AW, AU, AT, AZ, BS, BH, BD, BB, BE, BT, BA, BW, BR, VG, BG, KY, TD, CL,
+# CN, CO, CR, HR, CW, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, EE, FI, FR, DE, GH, GR, GD, GP, GT, GG, HT, HN, HK, HU, IS,
+# IN, ID, IM, IL, IT, JM, JP, JE, JO, KE, KW, LA, LV, LB, LT, LU, MY, MV, MT, MQ, MR, MX, MC, MS, MA, MZ, NA, NP, NL,
+# NZ, NI, NG, NO, OM, PK, PY, PE, PH, PL, PT, PR, QA, IE, RO, BL, KN, LC, MF, VC, SM, SA, RS, SG, SX, SK, SI, ZA, KR,
+# ES, LK, SE, CH, TW, TH, TT, TN, TR, TC, UG, UA, AE, GB, US, VI, UY, VA, ZM, ZW: F1 TV sells there (its Location
+# Availability list), but its sign-up refuses every exit this machine can use ("You are accessing this service from a
+# restricted geographic region.", account.formula1.com through US, UK, German and Canadian exits, 2026-11-13), and
+# formula1.com's plan page sends this machine's own connection to Canada's ("e=georedir&from=gb&to=ca"), so only
+# Canada's prices were read. The Internet Archive has a US copy of 2026-11-08 but answered 429.
+
+id: f1-tv
+name: F1 TV
+website: https://f1tv.formula1.com
+# formula1.com's plan page, its sign-up and account pages (account.formula1.com) and its help centre (f1help).
+domains: [formula1.com]
+category: streaming
+spendCategory: streaming
+# "If your country is not listed, F1 TV is not available there." (Location Availability, its drop-down's 132 countries,
+# read 2026-11-13), and its terms: "Our F1 TV products are restricted to residents of certain territories".
+availableIn:
+  [
+    AX,
+    DZ,
+    AO,
+    AI,
+    AG,
+    AR,
+    AW,
+    AU,
+    AT,
+    AZ,
+    BS,
+    BH,
+    BD,
+    BB,
+    BE,
+    BT,
+    BA,
+    BW,
+    BR,
+    VG,
+    BG,
+    CA,
+    KY,
+    TD,
+    CL,
+    CN,
+    CO,
+    CR,
+    HR,
+    CW,
+    CY,
+    CZ,
+    DK,
+    DJ,
+    DM,
+    DO,
+    EC,
+    EG,
+    SV,
+    EE,
+    FI,
+    FR,
+    DE,
+    GH,
+    GR,
+    GD,
+    GP,
+    GT,
+    GG,
+    HT,
+    HN,
+    HK,
+    HU,
+    IS,
+    IN,
+    ID,
+    IM,
+    IL,
+    IT,
+    JM,
+    JP,
+    JE,
+    JO,
+    KE,
+    KW,
+    LA,
+    LV,
+    LB,
+    LT,
+    LU,
+    MY,
+    MV,
+    MT,
+    MQ,
+    MR,
+    MX,
+    MC,
+    MS,
+    MA,
+    MZ,
+    NA,
+    NP,
+    NL,
+    NZ,
+    NI,
+    NG,
+    NO,
+    OM,
+    PK,
+    PY,
+    PE,
+    PH,
+    PL,
+    PT,
+    PR,
+    QA,
+    IE,
+    RO,
+    BL,
+    KN,
+    LC,
+    MF,
+    VC,
+    SM,
+    SA,
+    RS,
+    SG,
+    SX,
+    SK,
+    SI,
+    ZA,
+    KR,
+    ES,
+    LK,
+    SE,
+    CH,
+    TW,
+    TH,
+    TT,
+    TN,
+    TR,
+    TC,
+    UG,
+    UA,
+    AE,
+    GB,
+    US,
+    VI,
+    UY,
+    VA,
+    ZM,
+    ZW,
+  ]
+billingCurrency: { CA: CAD }
+cancelUrl: https://f1help.formula1.com/article/cancel-your-subscription
+sources: { pricing: https://www.formula1.com/en-ca/subscribe-to-f1-tv }
+
+# Owner (M11.2), read 2026-11-13: F1 TV is Formula One Digital Media Limited's ("We operate and supply the streaming
+# service known as F1 TV", its subscription terms), part of Formula 1, which Liberty Media owns (its own overview page;
+# F1's corporate site links "Formula One Group/Liberty Media Corporation financial news"). Liberty Media's tracking
+# stock for Formula 1, from the same page; no page read names a majority holder.
+owner:
+  name: Formula 1 (Liberty Media Corporation)
+  website: https://www.libertymedia.com
+  page:
+    name: Overview (Liberty Media)
+    url: https://www.libertymedia.com/about/overview
+  quotes:
+    - 'Liberty Media Corporation consists of our wholly-owned subsidiaries Formula 1 ® , MotoGP™, and other minority investments.'
+    - 'The Series A and Series C Liberty Formula One common stock trade on the Nasdaq Global Select Market under the stock symbols FWONA and FWONK, respectively.'
+    - 'The Series B Liberty Formula One common stock is quoted on the OTC Markets under the symbol FWONB.'
+  country:
+    code: GB
+    page:
+      name: F1 TV Subscription Terms
+      url: https://account.formula1.com/#/en/subscription-terms
+    quotes:
+      - 'We are Formula One Digital Media Limited, a company registered in England and Wales with company registration number 08915039 whose registered address is at No. 2 St. James’s Market, London SW1Y 4AH, England.'
+    lastVerified: 2026-11-13
+  stock:
+    company: Liberty Media Corporation
+    listings:
+      - { exchange: Nasdaq, symbol: FWONA }
+      - { exchange: Nasdaq, symbol: FWONK }
+      - { exchange: OTC Markets, symbol: FWONB }
+  lastVerified: 2026-11-13
+
+# Ways to pay (M11.5), read 2026-11-13: its Accepted Payment Methods article ("PayPal is not currently supported.";
+# Amex isn't taken in France), and its terms for the app stores (Apple, Google; Roku and Amazon too: "through a third
+# party platform (e.g. Roku, Amazon)"). TV and mobile partners bill Pro or Premium in their own packages (the header).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://f1help.formula1.com/article/Accepted-payment-methods
+    quotes: ['Visa', 'Mastercard', 'American Express (Amex)']
+  FR:
+    networks: [visa, mastercard]
+    url: https://f1help.formula1.com/article/Accepted-payment-methods
+    quotes:
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express is not available for users signing up from France'
+paymentMethods:
+  - methods: [card, google-pay, apple-pay]
+    page: Accepted Payment Methods
+    url: https://f1help.formula1.com/article/Accepted-payment-methods
+    quotes:
+      - 'Visa'
+      - 'Mastercard'
+      - 'American Express (Amex)'
+      - 'Google Pay (selected countries)'
+      - 'Apple Pay (selected countries)'
+      - 'Debit cards'
+  - methods: [app-store]
+    page: F1 TV Subscription Terms
+    url: https://account.formula1.com/#/en/subscription-terms
+    quotes:
+      - 'or through a third party platform (such as the Apple App store or the Google Play store)'
+# Renewal day (M11.5): its subscription terms, clause 7.1.
+renewalAnchor:
+  kind: same-date
+  page: F1 TV Subscription Terms
+  url: https://account.formula1.com/#/en/subscription-terms
+  quotes:
+    - 'an annual subscription, your subscription will automatically renew on the anniversary of your purchase'
+    - 'the payment method provided at the time of the initial purchase of the Services will be charged accordingly on the corresponding date of initial purchase in every subsequent month'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.formula1.com/en-ca/subscribe-to-f1-tv
+    - https://f1help.formula1.com/article/F1TV-Access
+    - https://f1help.formula1.com/article/Promotions-Offers
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "F1 TV is available on Web, Apps, Google TV, Apple TV, Roku and Amazon
+# Fire TV" (its home page), with iOS and Android apps ("Picture in Picture: available on iOS and Android"); "You cannot
+# access F1 TV through mobile browsers". Sign-in: "log in with your email address and password" (Update Personal
+# Details). App languages: its help centre's and account pages' language menus (English, Français, Deutsch, Español,
+# Nederlands, Português, 日本語; Dutch isn't one of the registry's values). Subtitles: English, French and Spanish
+# (Subtitles: "The live broadcast will be in English only with no subtitles."). Support: "reach out via live chat or
+# email".
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password]
+  languages.interface: [en, fr, de, es, pt, ja]
+  languages.subtitles: [en, fr, es]
+  support.channels: [chat, email]
+
+# Perks (M11.6): what its plan cards list that no feature describes, in their words.
+perks:
+  - id: live-timing
+    name: Live timing, telemetry, tyre usage and driver maps
+  - id: onboard-cameras
+    name: Live onboard cameras and team radios
+  - id: support-series
+    name: Live access to F2, F3, F1 Academy and Porsche Supercup
+  - id: multiview
+    name: Multiview - build your custom multi-feed view
+
+plans:
+  # F1 TV Access: "Live data tools", "Race replays: watch delayed race replays on demand", "Team radio recaps",
+  # "Exclusive content: documentaries, shows and access to the F1 race archives"; no live video.
+  - id: f1-tv.access
+    name: F1 TV Access
+    link: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: false
+      streaming.content: [sports, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    inferred:
+      video.quality:
+        reason: 'Its streaming quality article gives every F1 TV Pro feed 1080p and keeps 4K for Premium; Access’s replays are the same sessions on demand, so up to 1080p.'
+        page:
+          name: F1 TV Streaming Quality
+          url: https://f1help.formula1.com/article/f1-tv-streaming-quality
+        lastVerified: 2026-11-13
+      streaming.concurrent-streams:
+        reason: 'Its terms forbid watching where anyone else can watch at the same time, and Pro, the plan above Access, streams on one device at a time.'
+        page:
+          name: F1 TV Subscription Terms
+          url: https://account.formula1.com/#/en/subscription-terms
+        lastVerified: 2026-11-13
+    perks: [live-timing]
+    notes: 'Live timing and data, delayed race replays, team radio recaps, shows, documentaries and the race archive, with no live video. In Canada, "full event replays will be available 48hrs after the event"; in France, Access has live timing only.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+      - region: CA
+        currency: CAD
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+
+  # F1 TV Pro: "Official live stream: watch all F1 sessions live and on demand, ad free", "Onboard cameras", "Team
+  # radios", "Support series coverage: live races from F2, F3, F1 Academy and Porsche Supercup".
+  - id: f1-tv.pro
+    name: F1 TV Pro
+    link: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: true
+      streaming.live: [sports]
+      streaming.content: [sports, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    perks: [live-timing, onboard-cameras, support-series]
+    notes: Every F1 session live and on demand, ad-free, with onboard cameras, live team radios and the support series live, in up to 1080p on one device at a time. Not sold directly in the US, the UK, Ireland, Australia, Germany, Spain or Italy.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+      - region: CA
+        currency: CAD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+
+  # F1 TV Premium: "Live Streaming in 4K UHD", "Multiview: Watch up to 4 live feeds at once", "Stream live on up to 6
+  # devices at the same time", and everything in Pro.
+  - id: f1-tv.premium
+    name: F1 TV Premium
+    link: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.concurrent-streams: 6
+      ad-free: true
+      streaming.live: [sports]
+      streaming.content: [sports, documentaries]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    perks: [live-timing, onboard-cameras, support-series, multiview]
+    notes: Everything in Pro, plus 4K HDR on supported TV devices, Multiview of up to 4 feeds and up to 6 devices at once. In the US it comes with Apple TV instead. Not sold in the UK, Ireland, Australia, Germany, France, Spain or Italy.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+      - region: CA
+        currency: CAD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge: its F1 TV Subscription Terms ("Last Updated: August
+# 2025"), the Digital Products Terms of Use they supplement ("Last Updated: August 2025", with an arbitration agreement
+# for US residents), and its Fan Privacy Policy ("Last Updated: April 2025"), all Formula One Digital Media Limited's;
+# its help centre's cancelling, payment, devices, deletion and upgrade articles, and the plan page's renewal and upgrade
+# notes. Viaplay's research of 2026-11-09 rated the same documents (viaplay.yaml): the same clauses grade the same here.
+# Not read: its Cookies Policy (account.formula1.com/#/en/cookie-policy, which the terms include), the sign-up form
+# (refused through every exit), and the app stores' and TV partners' terms. Calibrated against Viaplay and Sportsnet+.
+policies:
+  links:
+    - name: 'F1 TV Subscription Terms'
+      url: https://account.formula1.com/#/en/subscription-terms
+    - name: 'Digital Products Terms of Use'
+      url: https://account.formula1.com/#/en/terms-of-use
+    - name: 'Fan Privacy Policy'
+      url: https://account.formula1.com/#/en/privacy-policy
+    - name: 'Subscribe to F1 TV (Canada)'
+      url: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+    - name: 'Buy F1 TV through the web'
+      url: https://f1help.formula1.com/article/Buy-F1-TV-through-the-web
+    - name: 'Cancel your Subscription'
+      url: https://f1help.formula1.com/article/cancel-your-subscription
+    - name: 'Upgrade your Subscription'
+      url: https://f1help.formula1.com/article/upgrade-your-subscription
+    - name: 'Personal Data Erasure Request'
+      url: https://f1help.formula1.com/article/personal-data-erasure-request
+    - name: 'Manage your Devices'
+      url: https://f1help.formula1.com/article/manage-devices
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its sites and apps, down to clicks and scrolling, to analyse and personalise them and to profile you for marketing. You can only object by email.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'Usage Data – which includes information about how you use our Digital Products and your visit, including the full Uniform Resource Locators (URL) clickstream to, through and from our Digital Products (including date and time), pages you viewed or searched for, page response times, download errors, length of visits to certain pages, page interaction information (such as scrolling, clicks, and mouse-overs), and methods used to browse away from the page and any phone number used to call our customer service number.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'To analyse use of our Digital Products and carry out market research so that we can improve the products and services we offer:'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'If you require any further help from us in relation to the above rights, please email general@en.formula1.com.'
+      action:
+        name: 'Your legal rights (privacy policy)'
+        url: https://account.formula1.com/#/en/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your data with partners who use it for their own ends, and with social media and ad companies, which some US laws call a sale. Opting out is through cookie settings site by site, or a form.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'Our third party partners who act as independent data controllers in respect of your personal data, where we have the necessary legal basis, e.g. consent.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'As is common practice among businesses that operate websites and applications, we may share certain identifiers, internet or other electronic network activity information with social media, advertising, and analytics partners in a manner that – under some US privacy laws – may be considered (a) a “sale” of information, (b) “sharing” of information for cross-context behavioral advertising, or (c) targeted advertising.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'You can opt-out by visiting our Erasure Request Form and submit a request or call +1 (888) 988-5663 for more information.'
+      action:
+        name: 'Opt-out rights (privacy policy)'
+        url: https://account.formula1.com/#/en/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It shows you ads on other sites and social media based on your data, on your consent or its own interests. Turning that off takes its cookie settings and each other site’s.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'To present you with targeted and personalised adverts on third-party websites and applications, including social media sites:'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'For targeted or personalised marketing on third party sites and applications, you can adjust your cookie preferences on F1 sites as well as amending them directly on the third party sites you are receiving advertisement on.'
+      action:
+        name: 'Marketing opt-out (privacy policy)'
+        url: https://account.formula1.com/#/en/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or say to it trains AI; its terms only forbid others training AI on its content.'
+      pages:
+        - https://account.formula1.com/#/en/privacy-policy
+        - https://account.formula1.com/#/en/terms-of-use
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it thinks reasonably necessary, names no periods, and may keep it longer if it expects a complaint or a lawsuit.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'We will only retain your personal data for as long as reasonably necessary to fulfil the purposes we collected it for, including for the purposes of satisfying any legal, regulatory, tax, accounting or reporting requirements.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'We may retain your personal data for a longer period in the event of a complaint or if we reasonably believe there is a prospect of litigation in respect to our relationship with you.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to erase all your data with a form, and it confirms when that’s done, without saying how long it takes.'
+      sources:
+        - url: https://f1help.formula1.com/article/personal-data-erasure-request
+          quote: 'Complete the form below to request the erasure of data we hold about you under applicable privacy laws.'
+        - url: https://f1help.formula1.com/article/personal-data-erasure-request
+          quote: "We'll send you confirmation once your request has been completed."
+      action:
+        name: 'Personal Data Erasure Request'
+        url: https://f1help.formula1.com/article/personal-data-erasure-request
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for your data in a machine-readable format, or for it to be sent to another company, where the law allows.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'Obtain your personal data in a structured, commonly used, machine-readable format or request transfer of your personal data to another organisation, subject to statutory criteria being met (Right to data portability).'
+      action:
+        name: 'Your legal rights (privacy policy)'
+        url: https://account.formula1.com/#/en/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may give your data to the police or similar agencies whenever it thinks that protects its rights, property or “lawful interests”, not only when the law requires.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'Any law enforcement or similar agency where we consider this necessary to protect our rights, property, lawful interests, or safety, our customers, or others.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: good
+      reason: 'It’s a UK company, and when your data leaves the UK or EU it goes only to countries judged to protect it, or under a binding agreement.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'We will only transfer your personal data to countries that have been deemed to provide an adequate level of protection for personal data.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'Where a country does not have an adequate level of protection, we will only transfer your personal data where a binding agreement is in place with that third party in compliance with data protection laws.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You need an F1 account (an email and a password) and your date of birth, then a billing address that matches your card.'
+      sources:
+        - url: https://f1help.formula1.com/article/Buy-F1-TV-through-the-web
+          quote: "You'll need an F1 account to purchase a subscription. If you already have one, you can use your existing email address and password"
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'the date of birth provided as part of the sign-up process is accurate'
+        - url: https://f1help.formula1.com/article/Buy-F1-TV-through-the-web
+          quote: 'Your billing address needs to match your actual location, and your billing details must match the address'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 (16 in the US with a parent’s consent). It deletes data a child under 16 gave without consent once told, and doesn’t share under-16s’ data for cross-site ads.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'In the case of U.S. residents and residents of any other applicable territory, individuals over the age of 16, but under the age of 18, may utilise the Service with the consent of a parent or legal guardian.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'If you have reason to believe that a child under the age of 16 has provided personal data to us without parental consent, please contact us so that we can delete that data.'
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'We do not share information of individuals we know to be under the age of 16 for cross-context behavioral advertising.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online in your account at any time and keep watching until the end of the month or year you paid for.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'using the ‘Account’ section of the Site;'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'When you cancel your subscription in accordance with this Clause, you will continue to have access to the relevant Service until the end of the month or year (as applicable) you have paid for.'
+      action:
+        name: 'Cancel your Subscription'
+        url: https://f1help.formula1.com/article/cancel-your-subscription
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get a full refund if you cancel within 14 days of first buying; after that, refunds are only given in some cases, and you keep watching to the end of what you paid for.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'You have the right to cancel your purchase of the Service, and receive a full refund without giving any reason, any time up to 14 days from the date of the initial purchase.'
+        - url: https://f1help.formula1.com/article/cancel-your-subscription
+          quote: 'Refunds are not issued automatically and are only granted if you cancel within a specified period.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'A new price starts only when your subscription renews, never during time you’ve paid for, but it doesn’t promise to tell you about the new price first.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We reserve the right to modify the price of the Service for new or renewed subscriptions, but current subscriptions will not be affected.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'For the avoidance of doubt, we will only modify the price of your subscription following the end of its current term, on the date on which your subscription automatically renews.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A free trial, when it offers one, turns into a paid subscription unless you cancel, and charges you when it ends without further notice.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'If you have provided us with the necessary details, you will be charged the Fees applicable to the subscription for the Service in force at the time upon expiration of the Free Trial Period and without further notice.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you 30 days and again 7 days before a yearly plan renews. Monthly plans get a reminder only every six months.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'in the case of an annual subscription, thirty (30) days and again seven (7) days prior to your subscription renewing; and'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'in the case of a monthly subscription, every six (6) months.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: great
+      reason: 'Its prices include sales tax or VAT, and it names no fees of its own; your bank or wallet may add its own.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'All Fees are inclusive of applicable local sales tax or VAT (or similar or equivalent) in force from time to time.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'These additional charges are not part of the Fees, and we are not responsible for such charges.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'An upgrade on its website starts at once, with what’s left of your old plan credited. Where no upgrade is offered, you must cancel and buy the new plan.'
+      sources:
+        - url: https://www.formula1.com/en-ca/subscribe-to-f1-tv
+          quote: 'If you are upgrading via web then your upgrade will take place immediately and you will be pro-rated the remaining balance of your existing subscription.'
+        - url: https://f1help.formula1.com/article/upgrade-your-subscription
+          quote: "If you've followed the steps above and didn't see any upgrade options, you will need to cancel your current subscription and upgrade with a new one."
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US, disputes go to England’s courts, unless your consumer rights let you go to a court where you live.'
+      sources:
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: 'Except in the case of U.S. residents, you can bring legal proceedings in respect of these Terms in the English courts UNLESS statutory and/or consumer rights apply to you which allow your local law to apply and/or entitle you to bring legal proceedings in your local court instead.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: 'In the US, a private referee (an arbitrator) settles disputes, with no class actions or jury. You can opt out only by post within 30 days, and the class-action waiver still applies.'
+      sources:
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: 'U.S. Residents: BY USING OUR DIGITAL PRODUCTS, YOU AGREE TO THE MANDATORY ARBITRATION PROVISION AND CLASS ACTION WAIVER BELOW.'
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: '30-Day Right to Opt Out. You have the right to opt out of the provisions of this Arbitration Agreement by sending written notice of your decision to opt out to us within 30 days after first accepting the Terms of Use to the following address:'
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: 'If you opt out of this Arbitration Agreement, all other parts of this Agreement, including the class action waiver, will continue to apply to you, unless precluded by law.'
+      action:
+        name: 'How to opt out of arbitration (terms of use)'
+        url: https://account.formula1.com/#/en/terms-of-use
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its F1 TV terms by posting them; for major changes it only tries to email you. Using F1 TV afterwards means you accept them.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We reserve the right to make changes, modifications, amendments and/or updates to these Terms from time to time by posting such changes in this document'
+        - url: https://account.formula1.com/#/en/terms-of-use
+          quote: 'By using the Digital Products after any such changes are made to these Terms, you agree to comply with, and be bound by, the updated Terms in force at that time.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your subscription with no refund if it believes you broke its terms or acted inappropriately. If it stops F1 TV itself, it refunds the time you paid for.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We may end the contract for the Services at any time without refunding or compensating you if:'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'we suspect or believe that you’ve committed or may be committing a breach of any of these Terms (including those set out at Clause 9.2);'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We will refund (on a pro-rata basis) any sums you have paid in advance for the Services which will not be provided.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can add, change or remove content and features whenever it decides, and takes no liability for removing them.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'We may add, vary, replace or withdraw content and features included within the Services, and the range of payment options and payment currencies, and the platforms or vendors from which the Services are made available may change in our sole discretion.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'suspending, terminating, varying or withdrawing any of the Services in accordance with these Terms and/or any of the content and features included in those Services;'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://account.formula1.com/#/en/subscription-terms
+        - https://account.formula1.com/#/en/terms-of-use
+        - https://account.formula1.com/#/en/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has appropriate security measures and a plan for breaches. It names no outside checks and no way to report a security flaw.'
+      sources:
+        - url: https://account.formula1.com/#/en/privacy-policy
+          quote: 'We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorised way, altered or disclosed.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You may never let anyone else use your F1 TV, even at home, or share your password.'
+      sources:
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'at any given time, only access or view the Service via personal, secure devices and never permit any other person to access the Service.'
+        - url: https://account.formula1.com/#/en/subscription-terms
+          quote: 'You must keep your password secure and never share passwords or other access codes with anyone or in any way make them accessible to others.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages give each plan’s number of streams at once, but no limit on the devices you sign in on; there are no downloads.'
+      pages:
+        - https://f1help.formula1.com/article/manage-devices
+        - https://account.formula1.com/#/en/subscription-terms
+      lastVerified: 2026-11-13

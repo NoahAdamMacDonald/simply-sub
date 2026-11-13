@@ -1,0 +1,386 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with Edge from Canada and a plain fetch: its help
+# centre (hoopladigital.com/faq, all 189 answers, which its page carries in its own data and shows one topic at a time),
+# its blog's support articles (theloop.hoopladigital.com), its about, sign-up, terms and privacy pages. Pages, each quoted
+# where it's used:
+# Pricing: nothing is sold. "No, Hoopla is a free service provided to library users by participating libraries." (Are
+# there any fees to use Hoopla?), and its libraries pay for each borrow ("When a patron borrows a title their library is
+# charged X amount for the title", its daily borrow limit answer). So its one plan is free, priced 0 in each country its
+# help centre names: "Libraries across the United States, Canada, Australia, and New Zealand offer Hoopla." (What is
+# Hoopla?), which is its availableIn too; its privacy notice has sections for "Residents of Canada", "Australia" and "New
+# Zealand" besides the US's. The UK, Ireland and the euro sample aren't on that list.
+# Region checklist, 2026-11-13: 1. no country paths (one site for every country); 2. no country or currency picker (the
+# site follows the browser's language); 3. not needed (nothing is priced); 4. its sign-up asks first for a library, then
+# "Your valid library card number (and PIN if required)" and "A valid email address" (read without typing); 5. none (no
+# prices); 6. Edge from Canada and a plain fetch; 7. no bill offered.
+# Ways to pay: none (it's free; no paymentMethods and no renewal day). Bundles: none. Official resellers: none: libraries
+# pay for it. Its BingePasses lend partners' collections (Hallmark+, Curiosity Stream's classes, magazines) for seven
+# days with one borrow: perks, not bundles, since nothing is bought.
+# Features, read 2026-11-13: what it lends, from its about page ("digital video (movies and TV shows), music, audiobooks,
+# Ebooks and comics") and its help centre ("eBooks, audiobooks, comics, movies, and TV"; Kids Mode, "designed especially
+# for kids (up to age 12)"), so it fits music and books as well as streaming. Video quality: no page states it. Its Fire
+# TV answer's "Streaming is available in 4K resolution." sits under "Additional Fire TV Features" beside "Fire TV
+# supports voice control.", so it describes the device, not Hoopla's films; its speed advice asks for "2-3 available
+# Mbps". Waiting (awaitingRequiredFeatures, the review of 2026-11-13). Streams at once: "Hoopla however, can only run one stream per
+# account at a given time" (Can I link my Hoopla account to multiple streaming set top boxes?) and "you can only use your
+# account on one device at a time" (Can I use Hoopla on multiple devices?). Ads: "No subscription fees", "No late fees",
+# "No ads" (What Is Hoopla Digital?, its blog). Downloads: "download content for offline access" in its apps (Features on
+# Hoopla), "If you wish to download a title, you can do so on any of our three mobile apps (Android, iOS, Kindle)", with
+# no number of devices, so 1, inferred. Music: "you can stream full albums" and "Hoopla also offers offline listening."
+# (Where Can I Stream Music for Free?); no page, nor a named publication found, gives its audio quality, so the plan
+# waits in core's awaitingRequiredFeatures for audio.quality (notes.md). Books: eBooks, audiobooks, "comics and manga";
+# downloads stay in its apps, "nor can it be sent to your Amazon Kindle E-Reader" (Can I transfer Hoopla content...?).
+# No profiles ("We are working on a way to accommodate multiple accounts."). Kids Mode is a filter anyone can turn on or
+# off in settings, with no PIN on any page ("Kids Mode is a feature that should be used with parental guidance."), so
+# no parental controls; libraries can block titles and ratings for their own patrons. No pause (nothing to pause).
+# Limits, in the plan's notes: "This limit is set by your local library" and "This limit will reset at the beginning of
+# the calendar month. Unused borrows will not roll over into the next month." (How many items can I borrow a month?);
+# "Most Movies and TV episodes are available for 72 hours (3 days)", "Most Music albums are available for 7 days" and
+# "Most Audiobooks, Comics, and eBooks are available for 21 days" (How long is borrowed content available?); some titles
+# are Flex borrows, "only one person at a time may borrow a Flex title", with holds.
+id: hoopla
+name: Hoopla
+aliases: [hoopla digital]
+website: https://www.hoopladigital.com
+category: streaming
+spendCategory: streaming
+# "Libraries across the United States, Canada, Australia, and New Zealand offer Hoopla." (its help centre's What is
+# Hoopla?).
+availableIn: [US, CA, AU, NZ]
+# Nothing to cancel: its help centre says to email it to delete your account.
+cancelUrl: https://www.hoopladigital.com/faq
+sources: { pricing: https://www.hoopladigital.com/faq }
+notes: Free through participating public libraries, with no ads.
+# Owner (M11.2), read 2026-11-13: its about page; its terms and privacy notice are Midwest Tape, LLC's ("an Ohio
+# company"), of Holland, Ohio. A private company: no page names its owners or any shares.
+owner:
+  name: 'Midwest Tape, LLC'
+  page:
+    name: 'About hoopla'
+    url: https://www.hoopladigital.com/about
+  quotes:
+    - 'hoopla is the digital service of Midwest Tape, a leading provider of entertainment media products and services: DVDs, CDs, audiobooks and shelf-ready solutions, to public libraries across North America for over a quarter of a century.'
+  country:
+    code: US
+    page:
+      name: 'Privacy Notice'
+      url: https://www.hoopladigital.com/privacy
+    quotes:
+      - 'Midwest Tape, the owner and operator of https://www.hoopladigital.com (the “Website”) and applications used to access the Hoopla services and its content (the “Apps”), and all related services (collectively the “Services”), is a limited liability company formed under the laws of the State of Ohio.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Sign-in (2026-11-13): its log-in page's "Email", "Password" and "Log In Through Your Organization" (hoopladigital.com/
+# login); no two-step sign-in on any page. Platforms: "recent versions of Microsoft Edge, Google Chrome, Safari and
+# Firefox on Windows and Mac" ("Titles on the Windows and MacOS platforms are only available for streaming"),
+# Chromebooks, Android, iOS, Amazon Fire tablets, Apple TV, Fire TV, Roku, Android TV, LG and Samsung TVs, and Apple
+# CarPlay and Android Auto (Supported Devices); no Linux. App languages: its site shows itself in French to a browser set
+# to French ("Livres, vidéos et musique - tous gratuits à votre bibliothèque publique!") and in Spanish to one set to
+# Spanish ("Libros, videos y música: ¡gratis en tu biblioteca pública!"), read 2026-11-13; its help answers stay in
+# English. Support: "please email us at feedback@hoopladigital.com" and its contact form; "There is no patron support
+# phone line for Hoopla digital."
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, sso]
+  languages.interface: [en, fr, es]
+  support.channels: [email]
+
+# Perks (M11.6): what no feature describes, in its help centre's words. Each depends on the library ("Content
+# availability varies by library.").
+perks:
+  - id: bingepass
+    name: BingePass
+  - id: seasonpass
+    name: SeasonPass
+  - id: bonus-borrows
+    name: Bonus Borrows
+
+plans:
+  - id: hoopla.free
+    name: Free with a library card
+    link: https://www.hoopladigital.com/register
+    categories: [streaming, music, books]
+    features:
+      streaming.concurrent-streams: 1
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: [films, series, kids]
+      streaming.own-media: false
+      music.on-demand: true
+      music.offline: true
+      audiobooks.included: true
+      books.reading: [ebooks, comics]
+      books.offline: true
+      books.e-readers: [apps]
+    inferred:
+      streaming.download-devices:
+        reason: 'You can download titles to play offline in its Android, iOS and Kindle apps, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Features on Hoopla
+          url: https://theloop.hoopladigital.com/support/articles/apps-and-devices/features-on-hoopla/
+        lastVerified: 2026-11-13
+    perks: [bingepass, seasonpass, bonus-borrows]
+    notes: Free for members of participating public libraries, with no ads; check that yours offers it. Your library sets how many titles you borrow each month (reset on the 1st, unused ones don't roll over). Films and TV are yours for 3 days, music 7, books 21. One stream at a time.
+    prices:
+      - region: US
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hoopladigital.com/faq
+      - region: CA
+        currency: CAD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hoopladigital.com/faq
+      - region: AU
+        currency: AUD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hoopladigital.com/faq
+      - region: NZ
+        currency: NZD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.hoopladigital.com/faq
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge from Canada and with a plain fetch: its Terms and
+# Conditions of Use ("Last Modified: June 10, 2026"), which include its Privacy Notice ("Last Updated: July 6, 2026") and
+# its Cookie Notice; its sign-up page; its help centre's answers on deleting an account, devices, borrowing and Kids Mode;
+# and its blog's What Is Hoopla Digital?. Its terms are also its apps' licence (section 5), graded under legal.licence
+# since the plan is in books. Its cookie banner from Canada starts with every optional cookie off (Functional,
+# Performance & Analytical, Targeting). The privacy notice's "Do Not Sell or Share My Personal Information" link is a
+# US state law right (section 10) and wasn't on its pages' footer from Canada, so the provider-wide sharing grade doesn't
+# count it. Its terms take a perpetual, irrevocable licence over your ratings (section 8), a topic streaming doesn't have.
+# Not read: the Cookie Notice as a page of its own (its banner's preferences were read), the sign-up steps after choosing
+# a library (they need a library card), and the "Deactivate My Account" option (it's inside an account). Calibrated
+# against Tubi, Curiosity Stream and Kanopy.
+policies:
+  links:
+    - name: 'Terms and Conditions of Use'
+      url: https://www.hoopladigital.com/terms
+    - name: 'Privacy Notice'
+      url: https://www.hoopladigital.com/privacy
+    - name: 'Help Center'
+      url: https://www.hoopladigital.com/faq
+    - name: 'Sign up'
+      url: https://www.hoopladigital.com/register
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you borrow, where you are and how you use its apps, to measure and improve them and to personalise. Its website asks before optional cookies, but its apps offer no such choice.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'When you interact with the Website or Apps, we automatically collect the following categories of information: account information, transaction information, location information, communications, device information, client and log data, and usage information.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'For analytics, research, and product and Service improvements: This includes tracking and measuring the performance of the Website, Apps, Services, marketing communications, and other content;'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'To review and update your preferences for most types of cookies (other than those that are strictly necessary) for our Services, click the “Cookie Preferences” link in the footer of the Website.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.hoopladigital.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your information, borrowing history included, to ad companies, social networks and analytics firms, who may use it for themselves. Saying no works browser by browser, or by asking.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'However, we may disclose certain Personal Information to third parties, such as advertising technology partners, data analytics providers, social media platforms, and advertising networks, so that we can provide you with targeted advertising and measure and improve the effectiveness of our advertising campaigns.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'These third parties may receive other valuable consideration or benefit from the use of the disclosed information for their own purposes, such as improving or enhancing their own products, records, or services.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'If our Website, Apps, and/or Services detect that your browser or device is transmitting a GPC signal, we will process that signal as an opt-out request for that browser or device in accordance with applicable law.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.hoopladigital.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Hoopla has no ads, but it follows you to show you its own ads on other sites and social networks, matched by your email address too. Its cookie choices work only browser by browser.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'We utilize remarketing tracking cookies and conversion pixels to display targeted offers for our products and services to you across the web and various social media networks, where permitted by applicable law and subject to user choice mechanisms.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Midwest Tape also utilizes custom audiences based on user email addresses, enabling us to present targeted offers.'
+        - url: https://www.hoopladigital.com/faq
+          quote: 'We use cookies for essential site functionality (which are always on) and optional cookies for analytics and personalized advertising.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.hoopladigital.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you type and get back can train its own AI unless you opt out in your account settings, and even then anything flagged for a safety review or that you report can still be used.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'We may use your inputs and outputs to train our models and improve our Services where allowed by law, unless you opt out through your account settings or by contacting us at privacy@hoopladigital.com.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Even if you opt out, we may use inputs and outputs for model improvement when your interactions are flagged for safety review and/or you have explicitly reported materials to us through our feedback mechanisms.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.hoopladigital.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: bad
+      reason: 'It names no periods, and even after it changes or deletes your information it may keep all of it, for analytics among other things. Some leftovers are never removed.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'We retain each category of Personal Information for only as long as necessary to fulfill the purposes described in this Privacy Notice or as otherwise required or permitted by applicable law.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Although our active systems and databases will reflect updates that have been requested and processed, we may retain all Personal Information for backup purposes, archiving, fraud and abuse prevention, analytics, and to satisfy any legal obligations that we reasonably believe are applicable.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'There may also be residual information that will remain within our databases and other records, which will not be removed.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'To have your account deleted you email its support, with no time promised. You can only deactivate it yourself, in your account.'
+      sources:
+        - url: https://www.hoopladigital.com/faq
+          quote: 'If you need to have your account deleted please reach out to us at feedback@hoopladigital.com!'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'You can deactivate your User Account at any time by contacting us at privacy@hoopladigital.com or by selecting the “Deactivate My Account” option in your User Account.'
+      action:
+        name: 'Its help centre (Additional Support)'
+        url: https://www.hoopladigital.com/faq
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'Where the law gives you the right, you can ask by email or letter to see what it holds about you; there’s no way to download it yourself.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Under applicable privacy laws, you may have the right to request to review, make amendments to, have deleted, or otherwise exercise your rights over your Personal Information that we hold, subject to certain legal limitations and requirements.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'We will process any request in accordance with – and where required by – applicable law with respect to your Personal Information.'
+      action:
+        name: 'Its privacy notice'
+        url: https://www.hoopladigital.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides court orders, it may hand your information to government bodies simply because they ask, whenever it decides in good faith that it should.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Regardless of any other provision in this Privacy Notice, we reserve the right to disclose any personally identifiable or non-personally identifiable information about you where we determine in good faith that such disclosure is necessary or appropriate to: (a) fulfill a government request;'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Hoopla runs in the US, and Canadians’ information goes to US data centres or countries with similar protection. Its service providers work under contracts and legal safeguards.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'The Website, the Services, and the Apps are hosted within the United States, and can be accessed from the United States and from other countries around the world.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'When Midwest Tape collects Personal Information belonging to Canadian residents (including those in Quebec), it transfers some of that data to data centers in the United States and/or to other foreign jurisdictions with similar privacy protections.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Our service providers may process your Personal Information, on our behalf and at our direction for the purposes described in this Privacy Notice, subject to contractual restrictions, safeguards consistent with applicable law, and their respective privacy notices'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up needs your library card number (and PIN if your library asks for one) and an email address, read from its sign-up page.'
+      sources:
+        - url: https://www.hoopladigital.com/register
+          quote: 'Your valid library card number (and PIN if required)'
+        - url: https://www.hoopladigital.com/register
+          quote: 'A valid email address'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'Accounts are for adults; children use Hoopla with a parent, and Kids Mode only filters titles. If it finds a child’s information, it says it will try to remove it promptly.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'If you are under that age, you are welcome to use Hoopla, but only with the express consent and involvement of a parent or legal guardian.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'Midwest Tape does not knowingly collect any Personal Information from children under the age of majority.'
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'We will use our best efforts to promptly remove such information from our records and unsubscribe the child from any marketing lists.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses standard security measures. It names no independent check and no programme for reporting flaws.'
+      sources:
+        - url: https://www.hoopladigital.com/privacy
+          quote: 'We use standard physical, technical, and administrative measures designed to reduce the risk of loss, misuse, unauthorized access, disclosure, or modification of your Personal Information.'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use its website and apps only for your own personal, non-commercial use, and the permission can be taken back.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'We grant you a limited, revocable, and non-exclusive license to use the Website and Apps for your personal and non-commercial use only.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Any dispute goes to binding private arbitration (a private referee) in Ohio, one person at a time, with no class actions, and its terms give no way to opt out.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'You agree to resolve any claims relating to the Website, the Services, and/or the Apps (including claims that arose before the effective date of these Terms) through final and binding arbitration before a single arbitrator in Lucas County, Ohio, USA.'
+        - url: https://www.hoopladigital.com/terms
+          quote: 'To the fullest extent permitted by law, you agree that all proceedings related to any claims, regardless of venue or forum, shall be conducted only on an individual basis and not in a class, consolidated, collective, private attorney general, or representative action, except as provided in the Batch Arbitration Procedures section above.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'Changes to its terms count as soon as they’re posted, and using Hoopla afterwards means you accept them.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'Any changes are effective immediately once we post them, and your continued use of Hoopla means you accept those updates—even if you haven’t clicked "I Agree" again.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account whenever it likes, for any reason or none, without warning.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'Hoopla Digital also reserves the right to terminate your account at any time, without notice, for any reason or for no reason.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or end Hoopla, or any part of it, at any time with or without warning, and says it isn’t responsible to you if it does.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'Hoopla Digital reserves the right at any time and from time to time to modify or discontinue, temporarily or permanently, the Website, Apps, or Services (or any part thereof) with or without notice.'
+        - url: https://www.hoopladigital.com/terms
+          quote: 'You agree that Hoopla Digital will not be liable to you or any third party for any modification, suspension, or discontinuance of the Website, Apps, or Services.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages: [https://www.hoopladigital.com/terms, https://www.hoopladigital.com/privacy]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms say your account is for you alone and nobody else may use it.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: "Your account is for you alone—please don't let others use it."
+        - url: https://www.hoopladigital.com/terms
+          quote: 'Your account is personal. Please keep your password secure and do not share your login information.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'You can use any number of devices, but downloads disappear when the loan ends: most films and TV after 3 days, books after 21.'
+      sources:
+        - url: https://www.hoopladigital.com/faq
+          quote: 'You can use Hoopla with any number of supported devices.'
+        - url: https://www.hoopladigital.com/terms
+          quote: 'Downloads are temporary and will expire automatically at the end of the lending period.'
+        - url: https://www.hoopladigital.com/faq
+          quote: 'Most Movies and TV episodes are available for 72 hours (3 days) from the time you borrow the title.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Ads by email from it and its partners
+      tier: neutral
+      reason: 'Signing up means agreeing to newsletters, promotions and other ads from Hoopla and its partners. You can unsubscribe from them.'
+      sources:
+        - url: https://www.hoopladigital.com/terms
+          quote: 'You also agree that by registering with Hoopla Digital, you consent to receive newsletters, emails, promotions, and other advertisements from Hoopla Digital or its partners.'
+        - url: https://www.hoopladigital.com/terms
+          quote: 'Follow the opt-out or "unsubscribe" instructions in our promotional content.'
+      lastVerified: 2026-11-13

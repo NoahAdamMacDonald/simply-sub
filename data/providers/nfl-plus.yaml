@@ -1,0 +1,498 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8). nfl.com/plus sends a Canadian visitor to DAZN
+# (dazn.com/nfl), so its pages were read 2026-11-13 through a US exit: nfl.com/plus and its plan picker
+# (id.nfl.com/select-subscription) in Edge, its help centre (support.nfl.com, all 195 articles) through its Zendesk API,
+# and its legal pages with a plain fetch (the same text from Canada and through the US exit). Pages, each quoted where
+# it's used:
+# Pricing: its help centre's "How much does NFL+ cost?" ("NFL+ is priced at $6.99/month or $49.99/year.**", "NFL+
+# Premium is priced at $14.99/month or $99.99/season.**", "**Plus applicable taxes") and "How much does NFL+ cost?
+# Monthly and Annual, Regular and Premium." (the same four prices); the plan picker through a US exit ("$6.99/month" and
+# "$14.99/month", then "$49.99/year" and "$99.99/year" on its Annual tab: screenshots; its page data names
+# "currency":"USD" and each plan's "periodUnit"). Premium's "/season" in one article is the same yearly plan: its
+# subscription terms renew a yearly plan "each year on the anniversary of your Start Date". Its page data also lists
+# $0 passes (Bud Light's, complimentary codes), which aren't sold.
+# Region checklist for CA and US, 2026-11-13: 1. no country paths (nfl.com/plus/international has no prices); 2. no
+# picker; 3. the plan picker's data names USD; 4. the plan picker, up to its Sign up buttons; 5. its help centre's price
+# and availability articles; 6. Edge from here (sent to DAZN) and through a US exit, and a plain fetch; 7. no bill
+# offered. Canada: not sold (its availability articles, below; "Canadian users can visit the DAZN Guide.", What is the
+# difference between an NFL+ annual subscription and a monthly subscription?): DAZN, in the catalog, streams the NFL
+# outside the US.
+# Not listed: NFL Sunday Ticket ("NFL Sunday Ticket is not available with NFL+ or NFL+ Premium. NFL Sunday Ticket is
+# available through YouTube and YouTubeTV.", How can I access Sunday Ticket on NFL+?), YouTube's product; NFL+ Premium
+# gift cards via TAPPP ("$14.99 — 1-month" and "$99.99 — 1-year", which don't renew: prepaid gifts of the plan, a way to
+# pay below); offers (the Military and First Responder discount, DraftKings' month of Premium, Bud Light's pass and the
+# "30% off for 3 Months" offer); NFL+ Subscriber Perks (partner offers, the same on both plans).
+# Bundles: Disney+ sells NFL+ Premium with its Disney+, Hulu, ESPN Unlimited bundles ($45.99 and $54.99 a month,
+# disneyplus.com/welcome/nfl-plus-premium-redzone, read through a US exit), drafted as bundle files beside this one;
+# ESPN adds it to ESPN Unlimited bought from ESPN ("You can add NFL+ Premium to your ESPN Unlimited subscription",
+# ESPN's help centre), with no price on any page read: a partner's add-on, noted. Official resellers: none; Apple,
+# Google, Roku, Amazon and the Disney+ and ESPN offers bill it themselves.
+# Features, read 2026-11-13: "NFL+ is offered up to 1080p / (30 or 60) FPS" (What is the highest quality stream
+# available?); "Three concurrent streams are allowed with your NFL+ or NFL+ Premium subscription." (How many concurrent
+# streams…?); "during live game broadcasts, users will see advertising consistent with the television broadcast" (Are
+# there ads in the video-on-demand content…?), so neither plan is ad-free; NFL Network's 24/7 live stream on both and
+# NFL RedZone's on Premium (TV channels), and live games: "Live regular season and postseason games are generally
+# available only on mobile phones and tablets" (its subscription terms); no downloads ("You are also expressly
+# prohibited from downloading the content", the same terms); no profiles. What it streams: football, "NFL library
+# programming" and NFL Films (What is NFL+?); none of your own media. Blackouts: "Live preseason games are subject to
+# local blackouts; certain games are restricted to mobile devices. Local games are the games that are available on TV in
+# your market." (nfl.com/plus).
+# Pause: "you can now pause your NFL+ monthly subscription" (How to Pause My NFL+ Billing). Parental controls: none on
+# any page read. Free use: none: nfl.com/plus says "Subscription required for NFL+", and the NFL app's free news and
+# highlights aren't NFL+'s streams (ESPN's precedent).
+id: nfl-plus
+name: NFL+
+website: https://www.nfl.com/plus
+category: streaming
+spendCategory: streaming
+# "NFL+ and NFL+ Premium are only available in the United States." and "* NFL+ is not available in US territories."
+# (Is NFL+ or NFL+ Premium available outside the U.S.?), and its subscription terms: "Subscription Products are only
+# available to users within the 50 states of the United States and Washington, D.C.".
+availableIn: [US]
+billingCurrency: { US: USD }
+# Its help centre's cancelling article ("Click the Cancel button").
+cancelUrl: https://support.nfl.com/hc/en-us/articles/35869799227540-How-do-I-cancel-my-NFL-subscription
+sources:
+  { pricing: https://support.nfl.com/hc/en-us/articles/35869739723028-How-much-does-NFL-cost }
+# Owner (M11.2), read 2026-11-13: its subscription terms are the NFL's, and NFL.com's terms say the NFL's sites and apps
+# "are operated by NFL Enterprises, LLC", with the National Football League's New York address. The NFL isn't a listed
+# company: no shares.
+owner:
+  name: National Football League (NFL Enterprises LLC)
+  page:
+    name: NFL – Subscription, Authentication and Mobile Products Terms and Conditions
+    url: https://www.nfl.com/legal/subscriptions_terms/
+  quotes:
+    - 'govern your use of the subscription, authentication and mobile products offered by the NFL from time to time'
+    - 'NFL+ and NFL+ Premium are collectively referred to herein as the "Subscription Products."'
+  country:
+    code: US
+    page:
+      name: NFL.com - Terms and Conditions
+      url: https://www.nfl.com/legal/terms/
+    quotes:
+      - 'write to Legal Department, Attn: NFL.com, National Football League, 345 Park Avenue, 7th Floor, New York, NY 10154'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its payment article (cards and PayPal), its price article (iTunes, Android,
+# Roku, Apple TV and Amazon Fire in-app), and NFL+ Premium gift cards redeemed through TAPPP. Also billed by Disney+ and
+# ESPN for their NFL+ Premium offers ("If you have NFL+ Premium through Disney+, please visit the Disney+ Help Center",
+# NFL+ Premium through Disney+ and ESPN), in words the catalog's checks don't read as a way to pay.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://support.nfl.com/hc/en-us/articles/35869719249300-How-can-I-pay-for-NFL
+    quotes:
+      - 'You may use any major Credit Card as a payment method (e.g. Visa, MasterCard, American Express, Discover Network, PayPal).'
+paymentMethods:
+  - methods: [card, paypal]
+    page: How can I pay for NFL+?
+    url: https://support.nfl.com/hc/en-us/articles/35869719249300-How-can-I-pay-for-NFL
+    quotes:
+      - 'You may use any major Credit Card as a payment method (e.g. Visa, MasterCard, American Express, Discover Network, PayPal).'
+  - methods: [app-store]
+    page: How much does NFL+ cost? Monthly and Annual, Regular and Premium.
+    url: https://support.nfl.com/hc/en-us/articles/35869716246804-How-much-does-NFL-cost-Monthly-and-Annual-Regular-and-Premium
+    quotes:
+      - 'If you subscribe through a third party such as iTunes, Android, Roku, AppleTV, Amazon Fire, or PayPal you may encounter additional fees'
+  - methods: [gift-card]
+    page: NFL+ Gift Card via TAPPP – Frequently Asked Questions
+    url: https://support.nfl.com/hc/en-us/articles/53607952866324-NFL-Gift-Card-via-TAPPP-Frequently-Asked-Questions
+    quotes:
+      - 'To redeem your NFL+ Premium gift card, follow the steps below:'
+# Renewal day (M11.5): its subscription terms (5(d)) renew a yearly plan on the anniversary of the day you bought it,
+# and its pause article's example renews a monthly one on the same day each month.
+renewalAnchor:
+  kind: same-date
+  page: NFL – Subscription, Authentication and Mobile Products Terms and Conditions
+  url: https://www.nfl.com/legal/subscriptions_terms/
+  quotes:
+    - 'will continue for one year and automatically renew each year on the anniversary of your Start Date'
+  lastVerified: 2026-11-13
+freeUse:
+  kind: none
+  pages:
+    - https://www.nfl.com/plus
+    - https://support.nfl.com/hc/en-us/articles/35869713822100-What-is-NFL
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "TV, PC, PHONE & TABLET" (the plan cards), and iPhone, iPad, Apple TV,
+# Android phones, tablets and TV, Roku, Fire TV, Xbox Series S and X, and Vizio, LG and Samsung TVs (Which devices are
+# compatible with NFL+?). Sign-in: an NFL account's email and password, or "a biometrics passkey" (Using biometric
+# authentication as an alternative to a password); Google, Apple and Facebook sign-in were removed (How to remove social
+# login from NFL.com?). App languages: English (nfl.com/plus, its plan picker and its help centre, whose only locale is
+# en-us). Audio: "All content in NFL+ and NFL+ Premium is available in English. Certain content is available in SAP."
+# (What language streams are available…?). Support: a request form, email (support@nfl.com), chat and a phone line
+# answered by a voice assistant (Contact Us).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password, passkey]
+  languages.interface: [en]
+  languages.audio: [en]
+  support.channels: [email, chat, phone]
+
+# Perks (M11.6): what the plans add that no feature describes, in its help centre's words.
+perks:
+  - id: live-game-audio
+    name: Live game audio (home, away, & national calls) for every game
+  - id: game-replays
+    name: Game replays (full game, condensed game, and all-22 coaches film)
+  - id: nfl-pro
+    name: NFL Pro
+  - id: nfl-redzone
+    name: NFL RedZone
+
+plans:
+  - id: nfl-plus.standard
+    name: NFL+
+    link: https://www.nfl.com/plus
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 3
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    perks: [live-game-audio]
+    notes: Live local and primetime regular season and postseason games on phones and tablets only, NFL Network's 24/7 stream, live out-of-market preseason games, live audio of every game and ad-free on-demand NFL programming. "Live preseason games are subject to local blackouts"; local games are those on TV in your market. Live games carry their TV ads. Only monthly plans can be paused.
+    prices:
+      - region: US
+        currency: USD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.nfl.com/hc/en-us/articles/35869739723028-How-much-does-NFL-cost
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.nfl.com/hc/en-us/articles/35869739723028-How-much-does-NFL-cost
+
+  # NFL+ Premium: "With NFL+ Premium, you can access everything from NFL+, and: NFL RedZone NFL Pro Game replays (full
+  # game, condensed game, and all-22 coaches film)" (What is NFL+?).
+  - id: nfl-plus.premium
+    name: NFL+ Premium
+    link: https://www.nfl.com/plus
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 3
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+    perks: [live-game-audio, nfl-redzone, game-replays, nfl-pro]
+    notes: Everything in NFL+, plus NFL RedZone, full, condensed and All-22 coaches film game replays on any device, and NFL Pro (desktop and mobile web). Live games are on phones and tablets only, with their TV ads; "Live preseason games are subject to local blackouts". Its help centre calls the yearly plan $99.99 a season. Only monthly plans can be paused.
+    prices:
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.nfl.com/hc/en-us/articles/35869739723028-How-much-does-NFL-cost
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.nfl.com/hc/en-us/articles/35869739723028-How-much-does-NFL-cost
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch (the same text from Canada and through a US
+# exit): the NFL's Subscription, Authentication and Mobile Products Terms and Conditions ("[Updated: September 4,
+# 2026]", NFL+'s own terms), which include NFL.com's Terms and Conditions ("Updated: May 16, 2024", New York law,
+# arbitration in section 18) and its Privacy Policy ("Updated: March 16, 2026", which NFL.com's terms include); the
+# sign-up page (id.nfl.com/account/sign-up, in Edge), whose line says "By clicking "Create Account", I agree to the
+# NFL's Terms and Conditions"; and its help centre's billing, cancelling, refund, pause, plan change, devices and
+# account articles. Its "Subscriptions - Terms & Conditions (ROW)" link opens NFL Game Pass's terms for China, not
+# NFL+'s: no topic. Not read: the Data Subject Request Portal and OneTrust forms the policy links, the app stores' and
+# Disney+'s and ESPN's terms for their billing, and TAPPP's gift card terms. NFL.com's terms grant the NFL a perpetual,
+# irrevocable, sublicensable licence over anything you post (legal.content-rights isn't a streaming topic). Calibrated
+# against Peacock, STARZ and BritBox (US terms), and Sportsnet+ and DAZN (sports).
+policies:
+  links:
+    - name: 'Subscription, Authentication and Mobile Products Terms and Conditions'
+      url: https://www.nfl.com/legal/subscriptions_terms/
+    - name: 'NFL.com Terms and Conditions'
+      url: https://www.nfl.com/legal/terms/
+    - name: 'NFL.com Privacy Policy'
+      url: https://www.nfl.com/legal/privacy/
+    - name: 'Create your NFL account'
+      url: https://id.nfl.com/account/sign-up
+    - name: 'How do I cancel my NFL+ subscription?'
+      url: https://support.nfl.com/hc/en-us/articles/35869799227540-How-do-I-cancel-my-NFL-subscription
+    - name: 'How do I delete my account?'
+      url: https://support.nfl.com/hc/en-us/articles/35869701525396-How-do-I-delete-my-account
+    - name: 'Why haven’t I been charged for my NFL+ or NFL+ Premium yearly subscription?'
+      url: https://support.nfl.com/hc/en-us/articles/35869823930900-Why-haven-t-I-been-charged-for-my-NFL-or-NFL-Premium-yearly-subscription
+    - name: 'How can I pay for NFL+?'
+      url: https://support.nfl.com/hc/en-us/articles/35869719249300-How-can-I-pay-for-NFL
+    - name: 'How much does NFL+ cost? Monthly and Annual, Regular and Premium.'
+      url: https://support.nfl.com/hc/en-us/articles/35869716246804-How-much-does-NFL-cost-Monthly-and-Annual-Regular-and-Premium
+    - name: 'Which NFL+ plan is right for me?'
+      url: https://support.nfl.com/hc/en-us/articles/39796576862996-Which-NFL-plan-is-right-for-me
+    - name: 'How can I downgrade my NFL+ subscription plan?'
+      url: https://support.nfl.com/hc/en-us/articles/35869760481428-How-can-I-downgrade-my-NFL-subscription-plan
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you do on its sites and apps, may collect details such as your race or sexual orientation, and buys more about you from data brokers. You can limit cookies only site by site and app by app.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'Demographic information, which may include gender, race, ethnicity, and sexual orientation, and other protected classifications under relevant state or federal law;'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'we may receive information about you from other members of the NFL Family and from other sources, such as your friends, social networks, publicly available sources, data brokers, advertising partners, and our business partners and sponsors'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'To disable optional cookies (cookies other than those categorized as strictly necessary above), please utilize the Cookie Settings of the applicable website or navigate to Privacy Settings in applicable apps.'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.nfl.com/legal/privacy/
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your information to business partners for their offers, and your location to other companies for their ads. Only people in some places can opt out, through a link on its sites.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'We may disclose your information to select business partners so that they can provide you with special offers, promotional materials, and other materials that may be of interest to you.'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'We also may disclose your geolocation information to third parties so that they may provide you with geographically relevant advertising'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'Depending on the jurisdiction in which you reside, you may also be afforded the right to opt out of the sale, sharing, or processing of your personal information'
+      action:
+        name: 'Its privacy choices (its privacy policy)'
+        url: https://www.nfl.com/legal/privacy/
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Ad partners track you on its sites and elsewhere to target ads, and its apps may even listen for silent signals to place you. You can turn this off only browser by browser and in your device settings.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'For example, we may conduct analysis on your behavior in order to provide you with Interest-Based Advertising both on and off the Services.'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: "the Services may also track your device's precise geolocation by responding to beacons or inaudible signals sent to your device's microphone"
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'you should enable the signal separately for each browser and/or device from which you would like to be opted out'
+      action:
+        name: 'Interest-based advertising (its privacy policy)'
+        url: https://www.nfl.com/legal/privacy/
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or send trains AI.'
+      pages: [https://www.nfl.com/legal/privacy/, https://www.nfl.com/legal/terms/]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it thinks reasonably necessary, without saying for how long.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'We will retain your information for as long as reasonably necessary for the purposes set out above'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it to delete your account through a form in its help centre. It doesn’t promise how long that takes.'
+      sources:
+        - url: https://support.nfl.com/hc/en-us/articles/35869701525396-How-do-I-delete-my-account
+          quote: 'To delete your account, please submit your request here.'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'To exercise your access, deletion, and correction rights, please submit your request by visiting our Data Subject Request Portal .'
+      action:
+        name: 'How do I delete my account?'
+        url: https://support.nfl.com/hc/en-us/articles/35869701525396-How-do-I-delete-my-account
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'Where the law gives you the right, you can ask for your information in a machine-readable form, or for it to be sent to another company.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'To obtain and have your personal information transferred to another party in a structured, commonly used, and machine-readable format ("data portability").'
+      action:
+        name: 'Data subject rights (its privacy policy)'
+        url: https://www.nfl.com/legal/privacy/
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may hand your information to the government or others who ask it to cooperate, even when no law requires it.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'comply with or respond to law enforcement or legal process or a request for cooperation by a government or other entity, whether or not legally required'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can go to the US and other countries, under safeguards such as standard data protection clauses.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'some of these parties may be located in countries other than your own, such as the United States'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'where required, we implement measures such as standard data protection contractual clauses to ensure that any transferred personal information remains protected and secure'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'Its terms say buying a plan may need your name, address and phone number as well as your email and card, and its account form has you confirm you’re 18.'
+      sources:
+        - url: https://id.nfl.com/account/sign-up
+          quote: 'I confirm that I am at least 18 years of age.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'In order to purchase a Subscription Product, you may be required to provide complete and accurate personal information, including, without limitation, your name, address, telephone number, e-mail address, credit card information, and billing address.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 18 to make an account, and it deletes information it learns a child gave it. It doesn’t sell under-16s’ data for ads, and has no parental controls.'
+      sources:
+        - url: https://id.nfl.com/account/sign-up
+          quote: 'I confirm that I am at least 18 years of age.'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'If the NFL learns that a child has provided personal information under this Privacy Notice, the NFL will delete it or otherwise comply with applicable law.'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'Note that we do not knowingly sell or share for cross-context behavioral advertising the personal information of consumers under 16 years of age.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel online in your account at any time, and keep watching until the end of the time you paid for.'
+      sources:
+        - url: https://support.nfl.com/hc/en-us/articles/35869799227540-How-do-I-cancel-my-NFL-subscription
+          quote: 'If you cancel your NFL+ subscription with time left on your billing period, you will have access through the end of your current billing period.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'log in to your NFL.com account and visit the "Manage Subscriptions" page; then click "Manage Subscription" next to your NFL+ subscription and click "Cancel."'
+      action:
+        name: 'How do I cancel my NFL+ subscription?'
+        url: https://support.nfl.com/hc/en-us/articles/35869799227540-How-do-I-cancel-my-NFL-subscription
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back when you cancel, but you keep watching until the end of the time you paid for. It refunds only in rare cases it decides.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'Payments are nonrefundable and there are no refunds or credits for partially used subscription periods.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'You will have continued access to the Subscription Product for the remainder of your paid subscription period.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before a new price starts, usually from your next renewal, but doesn’t say how far ahead.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'For customers who are currently subscribed to an automatically renewing Subscription Product, we will provide advance notice of any change to the applicable Fees before the change takes effect.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'Unless otherwise stated in the notice, the revised Fees will apply beginning with the next renewal occurring after the effective date of the change.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A free or discounted start, when it offers one, turns into the full price unless you cancel. You give your payment details at checkout, and no reminder is promised.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'Subscription Products will be subject to all applicable Fees (plus applicable taxes) immediately following completion of the Promotion unless you cancel your subscription in accordance with the applicable instructions below.'
+        - url: https://support.nfl.com/hc/en-us/articles/35869719249300-How-can-I-pay-for-NFL
+          quote: 'On the checkout page, enter your payment information.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'A yearly plan comes with a reminder at least 30 days before it renews. A monthly one renews with no reminder.'
+      sources:
+        - url: https://support.nfl.com/hc/en-us/articles/35869823930900-Why-haven-t-I-been-charged-for-my-NFL-or-NFL-Premium-yearly-subscription
+          quote: 'If you have signed up for a yearly subscription with us, you will be notified at least 30 days before your subscription is scheduled to renew and unless you cancel, you will be charged on the renewal date.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'your subscription will automatically renew each month and you will be charged the then-current applicable Fees (plus any applicable taxes)'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and tax, it may charge "transaction fees" it doesn’t name, and buying through an app store or PayPal may cost more.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'you authorize us to charge the subscription fee to your payment method on file, along with any other taxes or transaction fees which may apply to your use of the Subscription Product'
+        - url: https://support.nfl.com/hc/en-us/articles/35869716246804-How-much-does-NFL-cost-Monthly-and-Annual-Regular-and-Premium
+          quote: 'If you subscribe through a third party such as iTunes, Android, Roku, AppleTV, Amazon Fire, or PayPal you may encounter additional fees'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Premium starts at once, and you pay only for what’s left of your billing period. Moving down starts when your current period ends.'
+      sources:
+        - url: https://support.nfl.com/hc/en-us/articles/39796576862996-Which-NFL-plan-is-right-for-me
+          quote: 'You can upgrade at any time from your subscription settings. You will be charged a prorated amount for the Premium plan for the remainder of your billing period.'
+        - url: https://support.nfl.com/hc/en-us/articles/35869760481428-How-can-I-downgrade-my-NFL-subscription-plan
+          quote: 'Please keep in mind that your subscription will begin the new plan once your current cycle ends (ie. end of 30 days for monthly or end of the season).'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions. You can opt out only by letter within 30 days of first agreeing.'
+      sources:
+        - url: https://www.nfl.com/legal/terms/
+          quote: 'all disputes arising out of or relating to the Services or this Agreement (including the Privacy Policy) that cannot be settled through informal negotiation will be settled exclusively through confidential binding arbitration administered by the American Arbitration Association ("AAA").'
+        - url: https://www.nfl.com/legal/terms/
+          quote: 'NEITHER YOU NOR THE NFL WILL SEEK TO HAVE ANY DISPUTE HEARD AS A CLASS ACTION OR IN ANY OTHER PROCEEDING IN WHICH EITHER PARTY ACTS OR PROPOSES TO ACT IN A REPRESENTATIVE CAPACITY.'
+        - url: https://www.nfl.com/legal/terms/
+          quote: 'you may opt out of the provisions of this Section [18.4] within 30 days after the date that you first agree to this Agreement by sending a letter'
+      action:
+        name: 'How to opt out of arbitration (section 18.4)'
+        url: https://www.nfl.com/legal/terms/
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms count as soon as they’re posted, and using NFL+ afterwards means you accept them.'
+      sources:
+        - url: https://www.nfl.com/legal/terms/
+          quote: 'If we supplement, supersede, or otherwise amend this Agreement at any time, the amended Agreement will take effect immediately when it is posted.'
+        - url: https://www.nfl.com/legal/terms/
+          quote: 'Your use of the Services after our posting of amendments to this Agreement will constitute your acceptance of this Agreement, as modified.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your access at any time, with or without a reason or warning, and owes you no refund if it suspends or closes your account.'
+      sources:
+        - url: https://www.nfl.com/legal/terms/
+          quote: 'We reserve the right, in our sole discretion, to terminate this Agreement, any licenses herein or your access to all or part of the Services, with or without notice and with or without cause, at any time.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'We are not obligated to credit or discount a subscription if your account is terminated, suspended, or placed on hold by either a representative of the NFL or by the automated processes of the NFL.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop NFL+ at any time without warning, and says it owes you nothing if something you paid for goes away.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'We also reserve the right to upgrade, revise, modify, discontinue, shut down or cease offering any Product at any time, without prior notice to customers, and products or services may become unavailable without notice.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'We shall have no liability of any kind if a Product that has been purchased becomes unavailable.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.nfl.com/legal/subscriptions_terms/
+        - https://www.nfl.com/legal/terms/
+        - https://www.nfl.com/legal/privacy/
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has safeguards and that no system is fully secure. It names no outside checks and no way to report a security flaw.'
+      sources:
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'We have implemented technical and organizational safeguards designed to appropriately protect your personal information against accidental, unauthorized, or unlawful access, use, loss, destruction, or damage.'
+        - url: https://www.nfl.com/legal/privacy/
+          quote: 'Still, no system can be guaranteed to be 100% secure.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You may share it with the people you live with, and it names no checks. Sharing outside your home isn’t allowed.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'The Products and any content accessed through the Products are for your personal, non-commercial use only and may not be shared with anyone outside of your household.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Live games play only on phones and tablets and can’t be cast to a TV, and you can’t download anything to watch offline.'
+      sources:
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'Live regular season and postseason games are generally available only on mobile phones and tablets; games that are available only on mobile phones and tablets may not be "cast" to other devices, including televisions.'
+        - url: https://www.nfl.com/legal/subscriptions_terms/
+          quote: 'You are also expressly prohibited from downloading the content accessible via NFL+, NFL+ Premium and/or the Add-On Product(s).'
+      lastVerified: 2026-11-13
