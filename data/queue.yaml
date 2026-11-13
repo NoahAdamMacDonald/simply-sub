@@ -513,14 +513,15 @@
   sitelinks: 53
   status: done
   date: 2026-11-04
-- id: avast-antivirus
+- id: avast
   name: Avast Antivirus
   website: https://www.avast.ua/free-antivirus-download
   category: security
   source: wikidata
   wikidata: Q1574
   sitelinks: 49
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: hbo-max
   name: HBO Max
   website: https://www.hbomax.com
@@ -791,14 +792,6 @@
   category: passwords
   source: wikidata
   wikidata: Q56319818
-  sitelinks: 26
-  status: queued
-- id: norton-antivirus
-  name: Norton AntiVirus
-  website: https://ca.norton.com
-  category: security
-  source: wikidata
-  wikidata: Q741128
   sitelinks: 26
   status: queued
 - id: playstation-now
@@ -1159,14 +1152,16 @@
   wikidata: Q1588112
   sitelinks: 14
   status: queued
-- id: norton-360
+- id: norton
   name: Norton 360
   website: https://no.norton.com/360
   category: security
   source: wikidata
   wikidata: Q608921
   sitelinks: 14
-  status: queued
+  status: done
+  date: 2026-11-13
+  note: "One provider for Norton's plans (2026-11-13), with Norton AntiVirus's entry (Wikidata Q741128) folded in"
 - id: yandex-mail
   name: Yandex Mail
   website: https://mail.yandex.ru

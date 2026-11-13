@@ -442,6 +442,11 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['mlb-tv.all-teams', ['streaming.concurrent-streams']],
   ['mlb-tv.mlb-plus', ['streaming.concurrent-streams']],
   ['mlb-tv.mlb-plus-international', ['streaming.concurrent-streams']],
+  // Avast names no VPN server-country count on any page read (2026-11-13).
+  ['avast.ultimate', ['vpn.server-countries']],
+  ['avast.ultimate-mac', ['vpn.server-countries']],
+  ['avast.ultimate-10-devices', ['vpn.server-countries']],
+  ['avast.premium-vpn', ['vpn.server-countries']],
 ]);
 
 /**
