@@ -2251,9 +2251,15 @@ in every D1 `json` column search parses.
     charged in US dollars), Curiosity Stream (`curiosity-stream`, eleven regions), the Emby media server (`emby`), and
     Morphe (`morphe`), a free tool that patches YouTube's apps, listed neutrally as software (BLUEPRINT §14). Core reads
     "same calendar date" and "begins on a day not contained in a given month" as the date you signed up.
+  - **Streaming, batch 8** (2026-11-13): live TV (Fubo, `fubo`, in the US, Canada and Spain; Sling TV, `sling-tv`;
+    DIRECTV's streaming packages, `directv-stream`, satellite left for telecom; Philo, `philo`), the leagues' own
+    services (NFL+, `nfl-plus`, with Disney+'s NFL+ Premium bundles; NBA League Pass, `nba-league-pass`; MLB.TV,
+    `mlb-tv`, whose MLB+ abroad waits for MLB.TV's international price; F1 TV, `f1-tv`, priced in Canada) and the
+    library services Kanopy (`kanopy`) and Hoopla (`hoopla`). Viaplay's F1 TV Pro perk became
+    `includes-subscription: [f1-tv.pro]`, with a perk redirect.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
-        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 7 and Prime Video done; music: parts 1 to 5 done)
+        (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
 
 **M11.16 — Third-party claims** (BLUEPRINT §4.2 rule 12, §10.2; added 2026-11-09)
 - **When:** a feature a category requires, or one a card would otherwise leave out, that no official page states, on
