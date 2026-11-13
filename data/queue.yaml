@@ -258,6 +258,20 @@
   source: own
   status: done
   date: 2026-11-13
+- id: kanopy
+  name: Kanopy
+  website: https://www.kanopy.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: hoopla
+  name: Hoopla
+  website: https://www.hoopladigital.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

@@ -432,6 +432,9 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   // NBA League Pass states no stream count for its free plan or NBA TV alone (2026-11-13).
   ['nba-league-pass.free', ['streaming.concurrent-streams']],
   ['nba-league-pass.nba-tv', ['streaming.concurrent-streams']],
+  // Kanopy states no stream count; Hoopla no video or audio quality (2026-11-13).
+  ['kanopy.free', ['streaming.concurrent-streams']],
+  ['hoopla.free', ['video.quality', 'audio.quality']],
 ]);
 
 /**
