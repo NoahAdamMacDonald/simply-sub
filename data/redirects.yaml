@@ -58,3 +58,6 @@
     to: account.parental-controls,
     on: 2026-11-11,
   }
+# Streaming batch 8 (the owner's standing decision for a perk that is another provider's plan): Viaplay's F1 TV Pro is
+# f1-tv.pro in its plans' includes-subscription now. Users' ranks move to live sports, which F1 TV Pro streams.
+- { kind: perk, from: perk:viaplay/f1-tv-pro, to: streaming.live=sports, on: 2026-11-13 }

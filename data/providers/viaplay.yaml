@@ -97,11 +97,12 @@ features:
   platforms: [ios, android, tv, web, console]
 
 # Perks (M11.6): each line of its plan cards that no feature describes, the same on both plans, named in their words.
+# F1 TV Pro, on both plans ("Toegang tot F1® TV Pro*", "Het abonnement bevat toegang tot F1® TV Pro", viaplay.com/nl-nl
+# read 2026-11-13 through a Dutch exit), is F1 TV's own plan, so it's f1-tv.pro in the plans' includes-subscription
+# since F1 TV joined the catalog (the owner's standing decision; data/redirects.yaml moves the perk's ranks).
 perks:
   - id: formula-1
     name: Every Formula 1 race, qualifying and practice live, with Dutch commentary
-  - id: f1-tv-pro
-    name: F1 TV Pro access, on an F1 account of your own
   - id: premier-league
     name: 'Premier League: 342 of the 380 matches live (2026/27)'
   - id: pdc-darts
@@ -128,6 +129,7 @@ plans:
       streaming.live: [sports]
       account.parental-controls: true
       streaming.content: [films, series, sports, documentaries]
+      includes-subscription: [f1-tv.pro]
     inferred:
       streaming.profiles:
         reason: 'Its help centre sets what each profile in an account shows, for when several people in a family share it, without saying how many, so at least two.'
@@ -135,7 +137,7 @@ plans:
           name: 'Leeftijdsbeperking inschakelen op een profiel (in Dutch)'
           url: https://help.viaplay.com/nl/age-restriction-profile/
         lastVerified: 2026-11-09
-    perks: [formula-1, f1-tv-pro, premier-league, pdc-darts, more-sport]
+    perks: [formula-1, premier-league, pdc-darts, more-sport]
     notes: Basis in Dutch, with no offline viewing. A year is one payment for 12 months, renewed by hand. Its card doesn't say what follows; its terms continue a fixed term monthly, or for another term, as the offer says.
     prices:
       - {
@@ -171,6 +173,7 @@ plans:
       streaming.live: [sports]
       account.parental-controls: true
       streaming.content: [films, series, sports, documentaries]
+      includes-subscription: [f1-tv.pro]
     inferred:
       streaming.download-devices:
         reason: 'It lets you download most series and films on phones and tablets, without saying on how many, so at least one.'
@@ -184,7 +187,7 @@ plans:
           name: 'Leeftijdsbeperking inschakelen op een profiel (in Dutch)'
           url: https://help.viaplay.com/nl/age-restriction-profile/
         lastVerified: 2026-11-09
-    perks: [formula-1, f1-tv-pro, premier-league, pdc-darts, more-sport]
+    perks: [formula-1, premier-league, pdc-darts, more-sport]
     notes: Standaard in Dutch. It can still show sponsorship and product placement. A year is one payment for 12 months, renewed by hand. Its card doesn't say what follows; its terms continue a fixed term monthly, or for another term, as the offer says.
     prices:
       - {
