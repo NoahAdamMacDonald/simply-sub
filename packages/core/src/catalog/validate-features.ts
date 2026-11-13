@@ -429,6 +429,9 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   // Acorn TV and Sundance Now state neither their quality nor their streams (2026-11-13).
   ['acorn-tv.standard', ['video.quality', 'streaming.concurrent-streams']],
   ['sundance-now.standard', ['video.quality', 'streaming.concurrent-streams']],
+  // NBA League Pass states no stream count for its free plan or NBA TV alone (2026-11-13).
+  ['nba-league-pass.free', ['streaming.concurrent-streams']],
+  ['nba-league-pass.nba-tv', ['streaming.concurrent-streams']],
 ]);
 
 /**

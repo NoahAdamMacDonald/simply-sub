@@ -1,0 +1,1041 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with Edge from Canada; its packages page
+# (nba.com/league-pass-purchase, where nba.com/watch/league-pass-stream leads) again through a US, a UK, an Irish, an
+# Australian, a New Zealand, a German, a French, a Dutch, a Spanish and an Italian exit, in Edge (its Season and Monthly
+# tabs) and with a plain fetch (its page data); its help centre (support.watch.nba.com, all 111 articles) through its
+# Zendesk API; its legal pages with a plain fetch. Pages, each quoted where it's used:
+# Pricing: the packages page prices by where the visitor is, and its data names the country and currency for each read
+# ("xLpPackageCountry":"CA" with "currency":"CAD", "US" with "USD", "GB" with "GBP", "AU" with "AUD", "NZ" with "NZD",
+# and each euro country with "EUR"). Canada's cards: League Pass Premium "$184.99 / SEASON" or "$27.99 / MO", League
+# Pass "$129.99 / SEASON" or "$19.99 / MO", and Team Pass "$17.99 / month" (More Plans); the others' are in the plans
+# below, each the card's own price, with no first-term offer (the student, GovX and promo-code discounts are offers).
+# Its renewal policy: "Season-Long League Pass subscriptions will automatically renew at the full season price before
+# the beginning of every season." and "Monthly League Pass subscriptions will be automatically renewed every 30 days."
+# (League Pass Renewal Policy), so a season is a yearly price that renews on its own (bought once a season, "PREPAY AND
+# SAVE", from 10/20/2026 to 10/03/2027 in Canada's page data), and its months are priced every 30 days, as SoundCloud's.
+# Taxes: the US's fees "shall be exclusive of U.S. state and local sales taxes" (Subscriber Agreement), and elsewhere
+# "the Fees shall be inclusive of value-added taxes and any other indirect taxes. As it relates to Canada, the Fees
+# shall be exclusive of applicable Canadian sales taxes." (League Pass Terms of Use, outside the US): no taxIncluded,
+# since the packages page doesn't say so and tax is added only in Canada and the US.
+# Region checklist for CA, US, GB, IE, AU, NZ, DE, FR, NL, ES and IT, 2026-11-13: 1. no country paths (one packages
+# page); 2. no picker; 3. the page data names each read's country and currency; 4. the checkout (watch.nba.com/secure)
+# answered "Access Denied", so it wasn't reached; 5. its help centre's availability, renewal and blackout articles; 6.
+# Edge from here and through each country's exit, and a plain fetch through each; 7. no bill offered.
+# Not listed: League Pass Audio (US, "$9.99", a season's live radio broadcasts that "does not automatically renew":
+# audio only, with no video for the streaming category's required features, left for the owner); NBA Single Game (one
+# game at a time, in the apps only); Commercial League Pass (for businesses); the US's 12-month gift (a prepaid gift of
+# the plan); the teams' own in-market services (BlazerVision, ClipperVision, Jazz+, Kings+, MavsTV+, Pelicans+, Suns+,
+# Thunder+, Bucks+, Lakers Spectrum SportsNet+).
+# Bundles: none sold by the NBA. Official resellers: none. Partners that bill it themselves: Amazon's Prime Video
+# Channels ("NBA League Pass through Amazon Prime Subscriptions is available to purchase in the following countries",
+# every research region among them), the app stores, Roku, Samsung and Vizio TVs, US TV providers (AT&T U-Verse, Blue
+# Ridge, Comcast Xfinity, Cox | Spectrum and others, US TV Provider Partners), and phone and TV companies abroad (Orange
+# and Bouygues in France, MTN, Vodacom, Safaricom and Cell C in Africa, Vivo and Terra in Brazil, Totalplay, Izzi and
+# Megacable in Mexico).
+# Features, read 2026-11-13: the cards (the same in every country read): League Pass "With commercials", "1 device",
+# "Download to Watch Offline: Not included", "Multiview: Up to 4 games at once"; Premium "No commercials. In-arena
+# streams during breaks.", "Up to 3 devices", downloads "Included" (on phones and tablets, no number of devices, so 1,
+# inferred); Team Pass: "Stream games on one device at a time", one team's games (NBA Team Pass). Video quality: "The
+# NBA app supports video quality of 1080p/60fps." (its Chromecast and Roku articles). League Pass includes NBA TV ("NBA
+# TV is included with an NBA League Pass or NBA League Pass Premium subscription", NBA TV), a 24-hour live channel; NBA
+# TV alone is sold in the US only. Blackouts: "Blackouts apply in the United States and Canada while every NBA game is
+# available live with League Pass in other countries." (League Pass Blackout Guide). What it streams: NBA games, NBA
+# TV's "news, analysis, and highlights" and "classic thematic programming"; none of your own media. Broadcasts: "There
+# are also broadcasts in other languages including Spanish and Portuguese" (the packages page's FAQ).
+# Pause: monthly plans bought on NBA.com ("you can pause your subscription whenever you need a break", Pausing a League
+# Pass Subscription); seasons can't. Parental controls: none on any page read.
+# Free use: "Fans can watch hundreds of full Classic Games and other original NBA content for free by signing in with an
+# NBA ID." (Classic Games and Original NBA Content), a free plan below.
+
+# Coverage: nba-league-pass.nba-tv in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: NBA TV alone is sold in the US only
+# ("Fans in the U.S. can purchase an NBA TV subscription without buying NBA League Pass.", NBA TV; its card is "US Only"
+# in the packages page's data); elsewhere it comes with League Pass.
+
+id: nba-league-pass
+name: NBA League Pass
+website: https://www.nba.com/watch/league-pass-stream
+category: streaming
+spendCategory: streaming
+# Where it's sold: "League Pass is not available in Belarus, China, Cuba, Iran, North Korea, Russia, Syria, and Ukraine
+# (Crimea, Donetsk People’s Republic, and Luhansk People’s Republic)." (Global NBA League Pass Availability), and Team
+# Pass not in India either (NBA Team Pass): a list of where it isn't, so no availableIn; every research region is
+# priced.
+# GLOBAL: the free plan's currency, and the US dollars its terms may collect in elsewhere ("We reserve the right to
+# collect Fees in U.S. Dollars").
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help centre's cancelling article ("My Account > Manage Plan, next to Subscription").
+cancelUrl: https://support.watch.nba.com/hc/en-us/articles/115000590674-Cancelling-your-NBA-League-Pass
+sources: { pricing: https://www.nba.com/league-pass-purchase }
+# Owner (M11.2), read 2026-11-13: its terms (outside the US) say NBA Media Ventures, LLC runs it through the National
+# Basketball Association's site; the US's Subscriber Agreement names NBA Media Ventures "WITH TURNER DIGITAL BASKETBALL
+# SERVICES, INC." and NBA Digital Services US LLC. The NBA isn't a listed company: no shares.
+owner:
+  name: National Basketball Association (NBA Media Ventures, LLC)
+  page:
+    name: League Pass Terms of Use (Outside USA)
+    url: https://www.nba.com/league-pass-termsofuse-outside-us
+  quotes:
+    - 'NBA LEAGUE PASS AND NBA TV (EACH, A “Service”) ARE VIDEO PROGRAMMING SERVICES OPERATED BY NBA MEDIA VENTURES, LLC (“NBAMV”) AND ITS AFFILIATES'
+    - 'THESE SERVICES ARE PROVIDED THROUGH THE OFFICIAL INTERNET WEB SITE OF THE NATIONAL BASKETBALL ASSOCIATION (“NBA”)'
+  country:
+    code: US
+    page:
+      name: NBA Privacy Policy
+      url: https://www.nba.com/privacy-policy
+    quotes:
+      - 'By writing to us at 645 Fifth Avenue, New York, NY 10022, Attn: NBA Fan Relations;'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its terms (a card or PayPal), its purchasing article (the app stores) and its
+# Amazon article (Prime Video Channels); in the US, also US TV providers (US TV Provider Partners). No page names the
+# card networks, and the checkout couldn't be reached. Its terms reserve "the right to collect Fees in U.S. Dollars"
+# outside the US. Abroad, Orange, Bouygues and other phone companies bill it too, in words the catalog's checks don't
+# read as a phone bill.
+paymentMethods:
+  - methods: [card, paypal]
+    page: League Pass Terms of Use (Outside USA)
+    url: https://www.nba.com/league-pass-termsofuse-outside-us
+    quotes:
+      - 'You may only receive a Service if you are a subscriber to the applicable Service in good standing with a valid, authorized payment method (e.g., credit card or PayPal account) on file with Us.'
+  - methods: [app-store]
+    page: Purchasing NBA League Pass
+    url: https://support.watch.nba.com/hc/en-us/articles/115000585813-Purchasing-NBA-League-Pass
+    quotes:
+      - 'NBA League Pass is also available as an in-app purchase in the NBA App through the Apple App Store, Google Play Store, and Amazon App Store on mobile phones and tablets.'
+  - methods: [app-store]
+    page: League Pass with Amazon Prime
+    url: https://support.watch.nba.com/hc/en-us/articles/34813181782679-League-Pass-with-Amazon-Prime
+    quotes:
+      - 'fans in select countries have the option to purchase NBA League Pass through Amazon Prime Subscriptions'
+  - methods: [card, paypal]
+    regions: [US]
+    page: Subscriber Agreement
+    url: https://www.nba.com/subscriberagreement
+    quotes:
+      - 'You may only receive a Service if you are a subscriber to the applicable Service in good standing with a valid, authorized payment method (e.g., credit card or PayPal account) on file with Us.'
+  - methods: [app-store]
+    regions: [US]
+    page: Purchasing NBA League Pass
+    url: https://support.watch.nba.com/hc/en-us/articles/115000585813-Purchasing-NBA-League-Pass
+    quotes:
+      - 'NBA League Pass is also available as an in-app purchase in the NBA App through the Apple App Store, Google Play Store, and Amazon App Store on mobile phones and tablets.'
+  - methods: [app-store]
+    regions: [US]
+    page: League Pass with Amazon Prime
+    url: https://support.watch.nba.com/hc/en-us/articles/34813181782679-League-Pass-with-Amazon-Prime
+    quotes:
+      - 'fans in select countries have the option to purchase NBA League Pass through Amazon Prime Subscriptions'
+  - methods: [provider-billing]
+    regions: [US]
+    page: US TV Provider Partners
+    url: https://support.watch.nba.com/hc/en-us/articles/16847553816087-US-TV-Provider-Partners
+    quotes:
+      - 'NBA League Pass is available for purchase through participating U.S. TV providers.'
+# Renewal day (M11.5): its renewal policy renews monthly subscriptions every 30 days (seasons "before the beginning of
+# every season").
+renewalAnchor:
+  kind: every-30-days
+  page: League Pass Renewal Policy
+  url: https://support.watch.nba.com/hc/en-us/articles/360055657714-League-Pass-Renewal-Policy
+  quotes:
+    - 'Monthly League Pass subscriptions will be automatically renewed every 30 days.'
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: the NBA App on iPhone, iPad, Android phones and tablets, Chromecast,
+# Roku, Apple TV, Android TV, Fire TV, Hisense, Comcast, Xumo, Samsung and Vizio TVs, PlayStation and Xbox, and Apple
+# Vision Pro, Meta Quest and Samsung XR, and NBA.com on a computer (Supported Devices & Requirements). Sign-in: an NBA
+# ID's email and password ("Enter your email and password and tap ‘Sign In’", Logging in to your NBA ID on the NBA App);
+# a TV provider's sign-in is only for those it bills. App languages: its help centre's language versions (English,
+# German, Spanish, French, Italian, Japanese, Korean, Portuguese and Chinese, with Thai and Turkish, which the registry
+# lacks; DAZN's precedent). Audio: home and away broadcasts, and "broadcasts in other languages including Spanish and
+# Portuguese" (the packages page). Support: its request form and live chat ("whether through our request form or via
+# live chat", Additional Help), WhatsApp messaging, and phone in the US only ("We do not offer phone support for fans
+# outside of the United States at this time.", US Phone Support).
+features:
+  platforms: [web, ios, android, tv, console]
+  account.sign-in: [password]
+  languages.interface: [en, de, es, fr, it, ja, ko, pt, zh]
+  languages.audio: [en, es, pt]
+  support.channels: [email, chat]
+
+# Perks (M11.6): what its plans add that no feature describes, in its help centre's words.
+perks:
+  - id: multiview
+    name: Watch up to 4 games at once with Multiview
+
+plans:
+  # Free with an NBA ID (Classic Games and Original NBA Content): "Available Classic Games include a selection of full
+  # games for each team as well as all NBA Finals series since 1990." NBA ID "is currently available everywhere in the
+  # world, outside of China" (What is an NBA ID?). No page says whether it has ads (so not ad-free) or how many streams
+  # play at once (core's awaitingRequiredFeatures).
+  - id: nba-league-pass.free
+    name: NBA ID (free)
+    link: https://www.nba.com/account/sign-in
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.parental-controls: false
+    notes: Hundreds of full classic games, every NBA Finals since 1990 and original NBA content, free once you sign in with an NBA ID. No live games.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://support.watch.nba.com/hc/en-us/articles/28006218859415-Classic-Games-and-Original-NBA-Content
+
+  - id: nba-league-pass.league-pass
+    name: League Pass
+    link: https://www.nba.com/league-pass-purchase
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+      includes-subscription: [nba-league-pass.nba-tv]
+    perks: [multiview]
+    notes: Out-of-market games live and on demand, with commercials, on 1 device at a time, and NBA TV's 24/7 stream. "Blackouts apply in the United States and Canada while every NBA game is available live with League Pass in other countries"; "In the United States, blackouts include local NBA team games and all nationally broadcast games; in Canada, blackouts include all nationally broadcast games". The season price covers a season and renews before the next; monthly plans renew every 30 days and can be paused.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: CA
+        currency: CAD
+        amount: 19.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: US
+        currency: USD
+        amount: 16.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: GB
+        currency: GBP
+        amount: 114.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: GB
+        currency: GBP
+        amount: 16.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IE
+        currency: EUR
+        amount: 121.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IE
+        currency: EUR
+        amount: 18.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: AU
+        currency: AUD
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: AU
+        currency: AUD
+        amount: 24.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NZ
+        currency: NZD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NZ
+        currency: NZD
+        amount: 24.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: DE
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: FR
+        currency: EUR
+        amount: 146.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: FR
+        currency: EUR
+        amount: 21.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NL
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NL
+        currency: EUR
+        amount: 16.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: ES
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: ES
+        currency: EUR
+        amount: 15.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IT
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IT
+        currency: EUR
+        amount: 15.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+
+  - id: nba-league-pass.premium
+    name: League Pass Premium
+    link: https://www.nba.com/league-pass-purchase
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 3
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.pause: true
+      account.parental-controls: false
+      includes-subscription: [nba-league-pass.nba-tv]
+    inferred:
+      streaming.download-devices:
+        reason: 'League Pass Premium can download games on the NBA app on phones and tablets, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Download for Offline Viewing
+          url: https://support.watch.nba.com/hc/en-us/articles/24939268210455-Download-for-Offline-Viewing
+        lastVerified: 2026-11-13
+    perks: [multiview]
+    notes: Everything in League Pass with in-arena streams instead of commercials, on up to 3 devices at once, and downloads that last 30 days. Blackouts as League Pass's ("Blackouts apply in the United States and Canada while every NBA game is available live with League Pass in other countries"). The season price covers a season and renews before the next; monthly plans renew every 30 days and can be paused.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 184.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: CA
+        currency: CAD
+        amount: 27.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: US
+        currency: USD
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: US
+        currency: USD
+        amount: 24.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: GB
+        currency: GBP
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: GB
+        currency: GBP
+        amount: 22.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IE
+        currency: EUR
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IE
+        currency: EUR
+        amount: 24.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: AU
+        currency: AUD
+        amount: 244.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: AU
+        currency: AUD
+        amount: 34.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NZ
+        currency: NZD
+        amount: 219.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NZ
+        currency: NZD
+        amount: 33.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: DE
+        currency: EUR
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: DE
+        currency: EUR
+        amount: 27.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: FR
+        currency: EUR
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: FR
+        currency: EUR
+        amount: 28.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NL
+        currency: EUR
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NL
+        currency: EUR
+        amount: 22.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: ES
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IT
+        currency: EUR
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IT
+        currency: EUR
+        amount: 21.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+
+  # Team Pass: "access to their favorite team's out-of-market games, live and on-demand" (NBA Team Pass), on the
+  # packages page's More Plans, monthly only. No page says whether it has commercials (so not ad-free; League Pass's
+  # cards say "With commercials") or whether it can be paused.
+  - id: nba-league-pass.team-pass
+    name: Team Pass
+    link: https://www.nba.com/league-pass-purchase
+    features:
+      video.quality: 1080p
+      streaming.concurrent-streams: 1
+      ad-free: false
+      streaming.live: [sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.parental-controls: false
+    notes: One team's out-of-market games, live and on demand, on 1 device at a time; the team can be changed twice a season. In a US city where the team plays, all its games are blacked out; blackouts apply in Canada too. Renews every 30 days.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 17.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: US
+        currency: USD
+        amount: 13.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: GB
+        currency: GBP
+        amount: 14.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IE
+        currency: EUR
+        amount: 16.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: AU
+        currency: AUD
+        amount: 21.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NZ
+        currency: NZD
+        amount: 21.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: DE
+        currency: EUR
+        amount: 17.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: NL
+        currency: EUR
+        amount: 14.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: ES
+        currency: EUR
+        amount: 13.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+      - region: IT
+        currency: EUR
+        amount: 13.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+
+  # NBA TV alone (US only): "Get access to NBA TV games & original content." ($8.99 / month, More Plans); "NBA TV
+  # 24-hour live stream" and "Multiple games each week" (NBA TV). No page says how many streams play at once (core's
+  # awaitingRequiredFeatures) or whether it has ads (so not ad-free). Its card says "/ month"; priced every 30 days, as
+  # the renewal policy's monthly subscriptions.
+  - id: nba-league-pass.nba-tv
+    name: NBA TV
+    link: https://www.nba.com/league-pass-purchase
+    features:
+      video.quality: 1080p
+      ad-free: false
+      streaming.live: [tv-channels, sports]
+      streaming.content: [sports]
+      streaming.own-media: false
+      account.parental-controls: false
+    notes: NBA TV's 24-hour live channel and its games, studio shows and original programming, without League Pass. US only; NBA TV games follow local blackout rules.
+    prices:
+      - region: US
+        currency: USD
+        amount: 8.99
+        interval: day
+        intervalCount: 30
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nba.com/league-pass-purchase
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch from Canada: the League Pass Terms of Use for
+# subscribers outside the US ("SUBSCRIBER AGREEMENT FOR NBA LEAGUE PASS AND NBA TV", "Last Updated: October 2023") and
+# the US's Subscriber Agreement ("Last Updated: June 2023"), the same clauses but for the operators, the taxes and a
+# US-dollar clause (both rated as one, the worse wording where they differ); NBA.com's Terms of Use, which both include
+# (arbitration in section 17, class action waiver in section 18, New York law); its Privacy Policy ("Last Updated: April
+# 2026") with its EEA/UK Privacy Statement (rated for the UK, Ireland and the euro countries) and its California
+# statement (no grade changes); the NBA ID sign-in page (nba.com/account/sign-in, in Edge), whose first step asks only
+# for an email address, so its later fields stay unread; and its help centre's renewal, cancelling, pause, downloads,
+# plan change and privacy articles. Not read: the cookie policy, the privacy portal (privacy.nba.com, a OneTrust form),
+# the app stores', Amazon's and the partners' terms. NBA.com's terms take a perpetual, irrevocable licence to anything
+# you post (legal.content-rights isn't a streaming topic). Calibrated against NFL+, DAZN, Sportsnet+ and BritBox.
+policies:
+  links:
+    - name: 'League Pass Terms of Use (outside the US)'
+      url: https://www.nba.com/league-pass-termsofuse-outside-us
+    - name: 'Subscriber Agreement (US)'
+      url: https://www.nba.com/subscriberagreement
+    - name: 'NBA.com Terms of Use'
+      url: https://www.nba.com/termsofuse
+    - name: 'NBA Privacy Policy'
+      url: https://www.nba.com/privacy-policy
+    - name: 'EEA/UK Privacy Statement'
+      url: https://www.nba.com/eeaukprivacy
+    - name: 'NBA ID sign-in'
+      url: https://www.nba.com/account/sign-in
+    - name: 'Subscription packages'
+      url: https://www.nba.com/league-pass-purchase
+    - name: 'Cancelling your NBA League Pass'
+      url: https://support.watch.nba.com/hc/en-us/articles/115000590674-Cancelling-your-NBA-League-Pass
+    - name: 'League Pass Renewal Policy'
+      url: https://support.watch.nba.com/hc/en-us/articles/360055657714-League-Pass-Renewal-Policy
+    - name: 'Data Privacy Requests'
+      url: https://support.watch.nba.com/hc/en-us/articles/360048636614-Data-Privacy-Requests
+    - name: 'What is an NBA ID?'
+      url: https://support.watch.nba.com/hc/en-us/articles/8417960943383-What-is-an-NBA-ID
+    - name: 'Changing or Upgrading your Subscription'
+      url: https://support.watch.nba.com/hc/en-us/articles/4413621487383-Changing-or-Upgrading-your-Subscription
+    - name: 'Download for Offline Viewing'
+      url: https://support.watch.nba.com/hc/en-us/articles/24939268210455-Download-for-Offline-Viewing
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its sites and apps down to your clicks and typing, builds predictions about you for marketing, and buys more data from data brokers. You can limit tracking only in each browser or device.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'for example, your clicks, keystrokes and typing patterns, cursor movements and page scrolls'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'To build predictive models, which allow us to tailor our products and services based on the data we have about how our fans’ use our products and services, as well as to tailor our marketing and advertising campaigns.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'We also obtain your personal data from other sources, including our affiliates, our partners, our customers, our vendors, third-party online services, social media platforms, data brokers, and public sources.'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.nba.com/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your information to the NBA’s teams and business partners for their own advertising and marketing. Only people in some places can opt out.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'As described in the How We Disclose Personal Data section, we also may disclose your personal data to others within the NBA Family and our business partners for their own advertising and marketing purposes.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'Depending on where you reside, you may have the right to opt out of the sale of your personal data or sharing or processing of your personal data for targeted advertising.'
+      action:
+        name: 'Your choices and rights (its privacy policy)'
+        url: https://www.nba.com/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Ad companies track what you do on its sites and elsewhere to show you its ads. Where you can opt out, the browser signal it honours works only browser by browser.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'You may see our ads on other websites or apps because we use third-party advertising services on our Online Services.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'If you use the GPC, we will process your request for your browser, but it will not apply outside of that browser to your device.'
+      action:
+        name: 'Your choices and rights (its privacy policy)'
+        url: https://www.nba.com/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In the UK and the EU it asks your consent before using ad cookies, sending you ads or giving your data to partners for them.'
+      sources:
+        - url: https://www.nba.com/eeaukprivacy
+          quote: 'Where required by applicable law, we will request your consent to use cookies, send you promotional messages and deliver advertisements about products, tickets, services, programs, or events, or disclose your data to our partners and other third parties for these purposes.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether what you write or send trains AI; it mentions only its AI-powered support chat.'
+      pages: [https://www.nba.com/privacy-policy, https://www.nba.com/termsofuse]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it needs it for its services and business, without saying how long.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'To the extent required by applicable law, we retain personal data for as long as necessary to provide our products and services and fulfill the transactions you have requested, or for other business purposes such as complying with our legal obligations, resolving disputes and enforcing our agreements.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it through a privacy request to delete your NBA ID and your information. It doesn’t say how long that takes, and deleting it ends any League Pass with it.'
+      sources:
+        - url: https://support.watch.nba.com/hc/en-us/articles/360048636614-Data-Privacy-Requests
+          quote: 'If you would like to delete your account or request that your personal information be removed, you can submit a data privacy request through our official portal.'
+        - url: https://support.watch.nba.com/hc/en-us/articles/8417960943383-What-is-an-NBA-ID
+          quote: 'Deleting your NBA ID is permanent, and you will lose access to all account-related features of your NBA ID, including all benefits and any associated subscriptions, such as NBA League Pass'
+      action:
+        name: 'Data Privacy Requests'
+        url: https://support.watch.nba.com/hc/en-us/articles/360048636614-Data-Privacy-Requests
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'Where the law allows, you can ask for the information you gave it in a machine-readable form, or for it to be sent to another company.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'In addition, subject to applicable law, you may receive, in a structured, commonly used, and machine-readable format, certain of your personal data that you have provided to us.'
+      action:
+        name: 'Your choices and rights (its privacy policy)'
+        url: https://www.nba.com/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information to follow the law or answer valid legal process, and says nothing about telling you or publishing a report.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'Comply with applicable law or respond to valid legal process.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information can be kept in the US or any country where the NBA has offices, including China, with protections it doesn’t describe.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'Personal data the NBA Family collects may be stored and processed in the region in which it is collected, in the United States, and in any other region where we maintain major operations.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'We maintain offices in Brazil, Canada, China, Egypt, Hong Kong, India, Kenya, Mexico, Nigeria, the Philippines, Senegal, South Africa, Spain, Taiwan, the United Kingdom, and the United States.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'We take steps to help ensure that the personal data we collect under this Privacy Policy is stored and processed in accordance with this Privacy Policy regardless of where the data is located.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'From the UK and the EU, your information goes to other countries such as the US under standard contract clauses, the EU’s recognised safeguard.'
+      sources:
+        - url: https://www.nba.com/eeaukprivacy
+          quote: 'Our practice when transferring personal data is to put in place appropriate safeguards as required by applicable law, such as relying on Standard Contract Clauses (Article 46 of the EU General Data Protection Regulation, the “GDPR”) or, in exceptional cases, individual consent (Article 49 of the GDPR).'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An NBA ID starts with your email address, and its terms say an account may also ask your name, address, age and gender. No phone number is named.'
+      sources:
+        - url: https://www.nba.com/account/sign-in
+          quote: 'Enter your email address to get started.'
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'To obtain access to a Service, you may be required to register with the Site, which may include providing your name, address, email address, age and gender (and/or other information requested by Us) to create a Site account.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13 to have an NBA ID, its sites aren’t meant for under-16s, and a parent can ask it to delete what a child under 13 gave it. It has no parental controls.'
+      sources:
+        - url: https://support.watch.nba.com/hc/en-us/articles/8417960943383-What-is-an-NBA-ID
+          quote: 'You must be 13 years or older to join.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'Our Online Services are not directed at children under the age of 16, and we do not knowingly collect personal data from children under the age of 13.'
+        - url: https://www.nba.com/privacy-policy
+          quote: 'If you have reason to believe that a child under the age of 13 has provided personal data to us without parental consent'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel online in your account and keep watching to the end of the time you paid for, but you must do it before a deadline shown in your account, and it counts a business day later.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'unless We receive notification from you electing to discontinue your subscription before the cancellation deadline stated under the “Subscription” Tab on your NBA ID Account Page'
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'Your election will be deemed to have been received one (1) business day after you so notify Us that you want to discontinue your subscription.'
+        - url: https://support.watch.nba.com/hc/en-us/articles/115000590674-Cancelling-your-NBA-League-Pass
+          quote: 'Cancelling your subscription will remove your access to League Pass content at the end of your current paid billing cycle.'
+      action:
+        name: 'Cancelling your NBA League Pass'
+        url: https://support.watch.nba.com/hc/en-us/articles/115000590674-Cancelling-your-NBA-League-Pass
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Its terms give no money back, but you keep watching to the end of the time you paid for. If a season pass renews, cancelling within 14 days refunds it in full.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'ALL SALES ARE FINAL. WE DO NOT GIVE FULL OR PARTIAL REFUNDS FOR SUBSCRIPTIONS THAT YOU HAVE PURCHASED REGARDLESS OF THE BASIS FOR THE REFUND REQUEST.'
+        - url: https://support.watch.nba.com/hc/en-us/articles/115000590674-Cancelling-your-NBA-League-Pass
+          quote: 'If your Season-Long League Pass has already been renewed for the upcoming season, you will automatically receive a full refund if you cancel your subscription within 14 days of being billed.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices by emailing you or just by posting them on its site, and a season pass renews at the new full season price.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'upon prior notice to you either by e-mail or by publishing the changes on the Site pages for the applicable Service'
+        - url: https://support.watch.nba.com/hc/en-us/articles/360055657714-League-Pass-Renewal-Policy
+          quote: 'Season-Long League Pass subscriptions will automatically renew at the full season price before the beginning of every season.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'When it offers a free trial, you can cancel at any time during it; otherwise it turns into the plan you picked, which renews on its own.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'YOU MAY CANCEL YOUR SUBSCRIPTION AT ANY TIME DURING THE FREE PREVIEW PERIOD.'
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'FOR CERTAIN FREE TRIAL OFFERS, IF YOU DO NOT CANCEL, THEN, UPON EXPIRATION OF THE FREE TRIAL PERIOD, YOU WILL BE ENROLLED IN THE SERVICE SUBSCRIPTION THAT YOU SELECTED WHEN YOU REGISTERED FOR THE FREE PREVIEW PERIOD'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'A season pass emails you 30 days before it renews for the next season. Monthly plans renew every 30 days with no reminder.'
+      sources:
+        - url: https://www.nba.com/league-pass-purchase
+          quote: 'Fans with season-long billing subscriptions auto-renew prior to the following season and will receive an email notifying them 30-days prior to the charge.'
+        - url: https://support.watch.nba.com/hc/en-us/articles/360055657714-League-Pass-Renewal-Policy
+          quote: 'Monthly League Pass subscriptions will be automatically renewed every 30 days.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'It can add new fees, and outside the US it may charge you in US dollars instead of your own currency, so your bank may add a conversion fee.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'We may change the Fees, or add new Fees'
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'All Fees will at all times be calculated and billed in the currency set forth on the purchase page for the Service, provided that We reserve the right to collect Fees in U.S. Dollars.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its help says you can change or upgrade your plan at any time, but not what happens to what you’ve paid.'
+      pages:
+        - https://support.watch.nba.com/hc/en-us/articles/4413621487383-Changing-or-Upgrading-your-Subscription
+        - https://www.nba.com/league-pass-termsofuse-outside-us
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes one person at a time, with no class actions; outside the US it’s held in New York. You can opt out only by email within 30 days of first using its sites.'
+      sources:
+        - url: https://www.nba.com/termsofuse
+          quote: 'Except as otherwise provided herein, any Dispute that is not resolved through the Mandatory Pre-Dispute Resolution Process shall be resolved by binding arbitration to be held in the county or parish in which you reside.'
+        - url: https://www.nba.com/termsofuse
+          quote: 'each party may bring claims (whether in court or in arbitration) against the other only in an individual capacity, and not participate as a plaintiff, claimant, or class member in any class, collective, consolidated, private attorney general, or representative proceeding'
+        - url: https://www.nba.com/termsofuse
+          quote: 'You have the right to opt out of arbitration by sending the Operator a personally signed, written notice of your decision to opt out via email to notice@nba.com within thirty (30) days of your first access or use of the Site.'
+      action:
+        name: 'How to opt out of arbitration (section 17)'
+        url: https://www.nba.com/termsofuse
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them, they count at once, and using League Pass afterwards means you accept them.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'changes to this Agreement shall be effective when posted'
+        - url: https://www.nba.com/subscriberagreement
+          quote: 'changes to this Agreement shall be effective when posted'
+        - url: https://www.nba.com/termsofuse
+          quote: 'Your continued use of the Services following the posting of changes to these Terms of Use (including the Privacy Policy) will mean you accept those changes'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can shut anyone out at any time for any reason, and if it ends your plan for breaking its rules you get no money back.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'We shall have the right, in Our sole discretion, to refuse or restrict anyone from access to any or all of any Services at any time for any reason'
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'If We terminate this Agreement or discontinue any of your Service subscriptions for cause (for example, due to your breach of this Agreement), you will not receive any refund or partial refund for any charges or Fees already incurred by or billed to you'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop League Pass, or what it shows you, at any time without notice, and says it owes you nothing.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'We further reserve the right to discontinue, suspend, terminate or change any and/or all Services, and/or their availability to you, at any time.'
+        - url: https://www.nba.com/termsofuse
+          quote: 'The Operator may also impose limits on certain features and services or restrict your access to parts or the entirety of the Services without notice or liability at any time in the Operator’s exclusive discretion'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.nba.com/league-pass-termsofuse-outside-us
+        - https://www.nba.com/termsofuse
+        - https://www.nba.com/privacy-policy
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it has safeguards. It names no outside checks and no way to report a security flaw.'
+      sources:
+        - url: https://www.nba.com/privacy-policy
+          quote: 'We maintain administrative, technical and physical safeguards designed to protect personal data against accidental, unlawful or unauthorized access, destruction, loss, alteration, disclosure or use.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Your subscription is yours alone: its terms forbid sharing your password or letting anyone else watch on your account without its written consent.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'You acknowledge and agree that your subscription to a Service is personal to you and that you will not share your Password or grant any other person access to the applicable Service, using your Password or otherwise, without Our prior written consent.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Premium’s downloads expire after 30 days, and it may limit how many devices can be signed in at once.'
+      sources:
+        - url: https://support.watch.nba.com/hc/en-us/articles/24939268210455-Download-for-Offline-Viewing
+          quote: 'All downloaded games remain available for 30 days before expiring.'
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'That We may impose restrictions on the number of concurrent log-ins via your account (e.g., may prohibit more than one Service log-in using your account at any given time).'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: A $100 charge for getting around blackouts
+      tier: poor
+      reason: 'If you try to get around a blackout or another limit, for example by appearing to be somewhere else, it ends your plan at once and charges you $100.'
+      sources:
+        - url: https://www.nba.com/league-pass-termsofuse-outside-us
+          quote: 'IF YOU CIRCUMVENT, OR ATTEMPT TO CIRCUMVENT, ANY BLACKOUT RESTRICTION OR OTHER USE RESTRICTION: YOUR SUBSCRIPTION WILL BE SUBJECT TO IMMEDIATE TERMINATION AND A CHARGE OF ONE HUNDRED DOLLARS ($100.00) FOR EARLY TERMINATION'
+      lastVerified: 2026-11-13
