@@ -1,0 +1,18 @@
+# Disney+ sells it (disneyplus.com/welcome/nfl-plus-premium-redzone, read 2026-11-13 through a US exit: "Total monthly
+# price", "$45.99 / month", "NFL+ Premium and the Disney+, Hulu, ESPN Unlimited Bundle"); ESPN's help centre links that
+# page for it ("NFL+ Premium bundled with Disney+, Hulu, ESPN Unlimited bundle"). "Access content from each service
+# separately; live local & primetime NFL+ Premium games available on phones & tablets only." Monthly only, US only.
+id: bundle.disney-hulu-espn-unlimited-nfl-plus
+name: 'NFL+ Premium and the Disney+, Hulu, ESPN Unlimited Bundle'
+soldBy: disney-plus
+includes: [disney-plus.with-ads, hulu.with-ads, espn.unlimited, nfl-plus.premium]
+link: https://www.disneyplus.com/welcome/nfl-plus-premium-redzone
+prices:
+  - region: US
+    currency: USD
+    amount: 45.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-11-13
+    sourceUrl: https://www.disneyplus.com/welcome/nfl-plus-premium-redzone
