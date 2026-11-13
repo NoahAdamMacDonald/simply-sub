@@ -584,8 +584,8 @@ policies:
           quote: 'Refunds are not issued automatically and are only granted if you cancel within a specified period.'
       lastVerified: 2026-11-13
     - topic: billing.price-changes
-      tier: neutral
-      reason: 'A new price starts only when your subscription renews, never during time you’ve paid for, but it doesn’t say it tells you about the new price first.'
+      tier: poor
+      reason: 'A new price starts only when your subscription renews, never during time you’ve paid for, but it doesn’t promise to tell you about the new price first.'
       sources:
         - url: https://account.formula1.com/#/en/subscription-terms
           quote: 'We reserve the right to modify the price of the Service for new or renewed subscriptions, but current subscriptions will not be affected.'

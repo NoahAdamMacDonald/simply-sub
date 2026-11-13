@@ -47,11 +47,15 @@
 # its MLB.TV on ESPN page), but in the off-season (read 2026-11-13) its pages sell them only the Offseason pass and MLB+,
 # and no page states the season's price outside the US.
 
-# Coverage: mlb-tv.mlb-plus in CA, GB, AU, DE, FR, NL: outside the US, MLB+ comes without MLB Network ("*MLB Network
-# streams are available to subscribers in the U.S. ONLY (not available internationally).", MLB+ FAQs), so it's
-# mlb-tv.mlb-plus-international there.
+# Coverage: mlb-tv.* in CA: MLB sells both MLB.TV (in season) and MLB+ to Canadians, but MLB.TV's price outside the US
+# isn't on any off-season page, and pricing MLB+ alone would make MLB.TV read "Not offered" here (below).
 
-# Coverage: mlb-tv.mlb-plus-international in US: the US buys mlb-tv.mlb-plus, with MLB Network.
+# Coverage: mlb-tv.mlb-plus in CA, GB, AU, DE, FR, NL: outside the US, MLB+ comes without MLB Network ("*MLB Network
+# streams are available to subscribers in the U.S. ONLY (not available internationally).", MLB+ FAQs), and its cards
+# read through Canadian, UK, Australian, German, French and Dutch exits on 2026-11-13 price it in USD: 59.99 a year and
+# 5.99 a month. It isn't a plan of its own here yet: once MLB+ has a price in a country, core reads MLB.TV, which MLB
+# sells there in season at a price no off-season page states, as "Not offered" there. Add both in season (the review
+# of 2026-11-13; plan-level availability is for the owner).
 
 id: mlb-tv
 name: MLB.TV
@@ -254,127 +258,6 @@ plans:
         lastVerified: 2026-11-13
         sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
 
-  # MLB+ outside the US (read 2026-11-13 through Canadian, UK, Australian, German, French and Dutch exits): the same
-  # cards and prices in USD, but "MLB Network streams are available to subscribers in the U.S. ONLY (not available
-  # internationally)" (MLB+ FAQs), so no live TV channel.
-  - id: mlb-tv.mlb-plus-international
-    name: MLB+ (outside the US)
-    link: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-    features:
-      video.quality: 720p
-      ad-free: false
-      streaming.live: [sports]
-      streaming.content: [sports, documentaries]
-      streaming.own-media: false
-      account.pause: false
-      account.parental-controls: false
-    inferred:
-      video.quality:
-        reason: 'Its help centre says its media player streams in SD and HD, without naming a resolution, so HD is taken as 720p.'
-        page:
-          name: Network Troubleshooting
-          url: https://support.mlb.com/s/article/Network-Troubleshooting?language=en_US
-        lastVerified: 2026-11-13
-    perks: [live-audio, big-inning, minor-league]
-    notes: Blackout-free radio of every game, live Minor League games, MLB Big Inning and MLB's original shows. MLB Network isn't available outside the US. Charged in US dollars. 7 days free for new subscribers.
-    prices:
-      - region: CA
-        currency: USD
-        amount: 59.99
-        interval: year
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: CA
-        currency: USD
-        amount: 5.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: GB
-        currency: USD
-        amount: 59.99
-        interval: year
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: GB
-        currency: USD
-        amount: 5.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: AU
-        currency: USD
-        amount: 59.99
-        interval: year
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: AU
-        currency: USD
-        amount: 5.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: DE
-        currency: USD
-        amount: 59.99
-        interval: year
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: DE
-        currency: USD
-        amount: 5.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: FR
-        currency: USD
-        amount: 59.99
-        interval: year
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: FR
-        currency: USD
-        amount: 5.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: NL
-        currency: USD
-        amount: 59.99
-        interval: year
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-      - region: NL
-        currency: USD
-        amount: 5.99
-        interval: month
-        intervalCount: 1
-        autoRenew: true
-        lastVerified: 2026-11-13
-        sourceUrl: https://www.mlb.com/live-stream-games/subscribe/mlbplus
-
 # Terms and policies (BLUEPRINT §4.10), read 2026-11-13 through a Canadian exit: its Terms of Use Agreement ("LAST
 # UPDATED: MARCH 11, 2025", MLB Advanced Media, L.P.'s, New York law, with an arbitration agreement), which every MLB
 # product's buyer accepts ("By signing in, I understand and agree to be bound by the MLB.com Terms of Use and Privacy
@@ -568,8 +451,8 @@ policies:
           quote: 'By purchasing or using any Services, you agree that MLB may notify you about changes to prices and/or Services by sending an email to an address you have provided to MLB or by publishing a notice on the informational page(s) of the MLB Digital Properties applicable to the Services.'
       lastVerified: 2026-11-13
     - topic: billing.free-trials
-      tier: neutral
-      reason: 'MLB+ starts with 7 days free that turn into a paid plan unless you cancel; you can cancel any time during them and keep the 7 days. No reminder is promised.'
+      tier: poor
+      reason: 'MLB+ starts with 7 days free, then bills the card you gave on the eighth day unless you cancel. You can cancel any time in the 7 days, but no reminder is promised.'
       sources:
         - url: https://support.mlb.com/s/article/MLB-plus-faq?language=en_US
           quote: 'You may cancel a 7-day risk-free trial of MLB + Yearly and Monthly any time during the 7-day window and will still have access to MLB +for the full 7 days.'

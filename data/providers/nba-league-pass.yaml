@@ -924,8 +924,8 @@ policies:
           quote: 'Season-Long League Pass subscriptions will automatically renew at the full season price before the beginning of every season.'
       lastVerified: 2026-11-13
     - topic: billing.free-trials
-      tier: neutral
-      reason: 'When it offers a free trial, you can cancel at any time during it; otherwise it turns into the plan you picked, which renews on its own.'
+      tier: poor
+      reason: 'When it offers a free trial, it turns into the plan you picked and charges you when the trial ends unless you cancel. You can cancel any time during it, but no reminder is promised.'
       sources:
         - url: https://www.nba.com/league-pass-termsofuse-outside-us
           quote: 'YOU MAY CANCEL YOUR SUBSCRIPTION AT ANY TIME DURING THE FREE PREVIEW PERIOD.'

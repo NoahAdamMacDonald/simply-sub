@@ -45,6 +45,9 @@
 # (the US's and Spain's plan pages list none of them).
 # Coverage: fubo.spain in CA and US: Spain's plan, sold only there (its own help centre and FAQ).
 
+# Coverage: fubo.* in AS, GU, MP, PR, VI: sold in "the US/US territories" (its availability article), but no page prices
+# the territories.
+
 id: fubo
 name: Fubo
 website: https://www.fubo.tv
@@ -53,8 +56,9 @@ domains: [s21.q4cdn.com, fubotv-espana.zendesk.com]
 category: streaming
 spendCategory: streaming
 # Where it's sold, read 2026-11-13: "Fubo is available in Canada, the US/US territories, and Spain." (Is Fubo available
-# in my country?, en-ca). The US territories aren't named, so they're left out.
-availableIn: [US, CA, ES]
+# in my country?, en-ca). Its US territories are the five inhabited ones (STARZ's and the Criterion Channel's precedent,
+# the review of 2026-11-13).
+availableIn: [US, CA, ES, AS, GU, MP, PR, VI]
 billingCurrency: { US: USD, CA: CAD, ES: EUR }
 cancelUrl: https://support.fubo.tv/hc/en-us/articles/360021527991-How-do-I-Cancel-My-Fubo-Subscription
 # Canada's monthly plans "With a 12 month commitment" (the plans page), read 2026-11-13 in How do Annual Plans with
