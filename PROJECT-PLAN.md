@@ -2264,6 +2264,9 @@ in every D1 `json` column search parses.
     password feature; Norton (`norton`, plans by country where devices or identity features differ, LifeLock in the US)
     and Avast (`avast`) on Gen Digital's privacy policy as a shared document; ESET (`eset`); Kaspersky (`kaspersky`,
     not sold in the US: its paid plans' `notSoldIn`); Malwarebytes (`malwarebytes`) and McAfee (`mcafee`).
+  - **The partly done lines** (2026-11-14): AVG (`avg`) and Avira (`avira`) on Gen Digital's privacy policy; Last.fm
+    (`last-fm`), a social service since it plays no music itself; nugs (`nugs-net`); the media apps Infuse (`infuse`)
+    and Stremio (`stremio`, free only while its Supporter payments are paused).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
