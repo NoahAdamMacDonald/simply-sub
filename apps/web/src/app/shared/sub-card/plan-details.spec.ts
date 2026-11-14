@@ -717,6 +717,28 @@ describe('PlanDetails', () => {
       );
     });
 
+    it('says how early a yearly renewal is charged (M11.21)', async () => {
+      await show('netflix.standard');
+      await tab('Facts');
+      const netflix = searchCatalogData.providers.find(({ id }) => id === 'netflix');
+      fixture.componentRef.setInput('provider', {
+        ...netflix,
+        renewalAnchor: {
+          kind: 'same-date',
+          page: 'Terms',
+          url: 'https://help.netflix.com/legal/termsofuse',
+          quotes: ['We will charge you up to 35 days before the subscription is due to end.'],
+          chargedBefore: { days: 35, upTo: true },
+          lastVerified: '2026-11-13',
+        },
+      });
+      await fixture.whenStable();
+
+      expect(group('Billing day')).toBe(
+        'Billing day The date you signed up, charged up to 35 days early , according to its Terms',
+      );
+    });
+
     it('says when its pages don’t say, with nothing to cite', async () => {
       await show('netflix.standard');
       await tab('Facts');

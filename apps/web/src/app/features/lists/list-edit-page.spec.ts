@@ -93,6 +93,26 @@ function craveRenewing(kind: 'same-date' | 'first-of-month' | 'end-of-month'): C
   };
 }
 
+/** The test catalog, with Netflix charging a yearly renewal up to 35 days before it (M11.21). */
+const netflixChargingEarly: CatalogData = {
+  ...searchCatalogData,
+  providers: searchCatalogData.providers.map((provider) =>
+    provider.id === 'netflix'
+      ? {
+          ...provider,
+          renewalAnchor: {
+            kind: 'same-date',
+            page: 'Terms',
+            url: 'https://www.netflix.com/terms',
+            quotes: ['We will charge you up to 35 days before the subscription is due to end.'],
+            chargedBefore: { days: 35, upTo: true },
+            lastVerified: '2026-10-20',
+          },
+        }
+      : provider,
+  ),
+};
+
 /** The test catalog, with a Netflix perk both its Canadian plans have (M11.6). */
 const netflixWithPerk: CatalogData = {
   ...searchCatalogData,
@@ -873,6 +893,33 @@ describe('ListEditPage', () => {
         await harness.fixture.whenStable();
         expect(dialog()?.querySelector('.billing-day')).not.toBeNull();
       });
+    });
+
+    it('charges a yearly plan as early as its provider does, with no input (M11.21)', async () => {
+      catalogData = netflixChargingEarly;
+      const loader = await openDialog(`${editor()}?add=netflix.standard&interval=year`);
+      expect(await (await control(loader, 'Next renewal', MatInputHarness)).getValue()).toBe(
+        '2027-10-25',
+      );
+      // Its next charge is 35 days before the renewal.
+      expect(dialog()?.textContent).toContain('Sep 20, 2027');
+      await press(loader, 'Add to list');
+
+      await until(() => dialog() === null);
+      expect((await addedItems())[0].billing).toMatchObject({
+        interval: 'year',
+        anchorDate: '2027-10-25',
+        chargeDaysBefore: 35,
+      });
+    });
+
+    it('charges a monthly plan of the same provider on the day', async () => {
+      catalogData = netflixChargingEarly;
+      const loader = await openDialog(`${editor()}?add=netflix.standard&interval=month`);
+      await press(loader, 'Add to list');
+
+      await until(() => dialog() === null);
+      expect((await addedItems())[0].billing).not.toHaveProperty('chargeDaysBefore');
     });
 
     describe('won’t save what the rules don’t allow, and says why at the field', () => {
