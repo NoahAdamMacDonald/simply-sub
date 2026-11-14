@@ -1,0 +1,138 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): the Microsoft Services Agreement, which covers every consumer service
+# a Microsoft account uses (Microsoft 365 and Xbox Game Pass; Outlook.com, OneDrive, Bing and Teams when they join the
+# catalog), with the Microsoft Store Terms of Sale it names for paid subscriptions, rated once here. Each provider names it
+# in its policies' shared and adds ratings from its own terms (Microsoft 365's: the Copilot Terms of Use and its billing
+# help; Xbox Game Pass's: the Xbox subscription terms, the Xbox clauses of this agreement and its benefits' terms).
+# Read 2026-11-14 from Canada with a plain fetch: Canada's version (microsoft.com/en-ca/servicesagreement, Ontario's
+# courts) and the US's (its arbitration), and the Terms of Sale (microsoft.com/en-ca/store/b/terms-of-sale, where
+# storedocs/terms-of-sale now leads). Xbox Game Pass's ratings of 2026-11-02 quote this agreement's general clauses for
+# data deletion, disputes, terms changes, account closure, lost purchases, inactivity, the licence and fees: every quote
+# is still here word for word, so those grades carry over. Its Xbox-only clauses (the Xbox content licence, Xbox software
+# updates) stay in Xbox Game Pass's file. Added from this agreement on 2026-11-14: its general content licence, software
+# updates and price changes, and Outlook.com's and OneDrive's own one-year inactivity rule.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: microsoft-services-agreement
+name: Microsoft Services Agreement
+links:
+  - name: 'Microsoft Services Agreement'
+    url: https://www.microsoft.com/en-ca/servicesagreement
+  - name: 'Microsoft Services Agreement (US)'
+    url: https://www.microsoft.com/en-us/servicesagreement
+  - name: 'Microsoft Store terms of sale'
+    url: https://www.microsoft.com/en-ca/store/b/terms-of-sale
+ratings:
+  - topic: privacy.data-deletion
+    tier: good
+    reason: 'You can close your Microsoft account yourself. After a 30 or 60 day wait, in case you change your mind, it deletes your data and content.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'When you ask us to close your Microsoft account, you can choose to put it in a suspended state for either 30 or 60 days just in case you change your mind.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Second, we’ll delete Data or Your Content associated with your Microsoft account or will otherwise disassociate it from you and your Microsoft account'
+    action:
+      name: 'Close your Microsoft account'
+      url: https://go.microsoft.com/fwlink/p/?linkid=618278
+    lastVerified: 2026-11-14
+  - topic: billing.price-changes
+    tier: good
+    reason: 'It emails you at least 15 days before a price goes up on a subscription, and you can cancel before the new price starts.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'We may change the price of the Services at any time and if you have a recurring purchase, we will notify you by email, or other reasonable manner, at least 15 days before the price change.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'If you do not agree to the price change, you must cancel and stop using the Services before the price change takes effect.'
+    lastVerified: 2026-11-14
+  - topic: billing.fees
+    tier: good
+    reason: 'The price is all Microsoft charges, plus tax. Your bank may add its own fee if it converts the currency.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/store/b/terms-of-sale
+        quote: 'Your bank might charge you additional fees for conversion or processing services when you use a credit or debit card.'
+    lastVerified: 2026-11-14
+  - topic: legal.disputes
+    tier: bad
+    reason: "In the US, a private referee (an arbitrator) decides disagreements instead of a court, you can't join a group lawsuit, and there's no way to opt out. Only small claims court stays open."
+    sources:
+      - url: https://www.microsoft.com/en-us/servicesagreement
+        quote: 'The Microsoft Services Agreement contains binding arbitration and class action waiver terms that apply to U.S. residents.'
+      - url: https://www.microsoft.com/en-us/servicesagreement
+        quote: 'You and we agree to submit disputes to a neutral arbitrator and not to sue in court in front of a judge or jury, except in small claims court.'
+    action:
+      name: 'Its arbitration terms (section 15)'
+      url: https://www.microsoft.com/en-us/servicesagreement
+    lastVerified: 2026-11-14
+  - topic: legal.disputes
+    regions: [CA]
+    tier: good
+    reason: 'In Canada, your province’s laws apply and disputes go to the courts in Ontario, with no private referee.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'You and we irrevocably consent to the exclusive jurisdiction and venue of the courts in Ontario for all disputes arising out of or relating to these Terms'
+    lastVerified: 2026-11-14
+  - topic: legal.terms-changes
+    tier: neutral
+    reason: 'It can change its terms whenever it likes and says it will tell you, but not how far ahead. If you keep using it after that, you have agreed.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'We may change these Terms at any time, and we’ll tell you when we do.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Using the Services after the changes become effective means you agree to the new terms.'
+    lastVerified: 2026-11-14
+  - topic: legal.account-closure
+    tier: neutral
+    reason: 'If you break its rules it can cut you off or close your account right away, and you may lose what you bought, your memberships and any money in your account.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'This could include limiting access to certain features or Services, stopping providing Services, closing your Microsoft account immediately or blocking delivery of a communication'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Closure of your access to a Service or your account may result in forfeiture of content licenses, associated content, memberships, and Microsoft account balances associated with the account.'
+    lastVerified: 2026-11-14
+  - topic: legal.content-rights
+    tier: neutral
+    reason: 'What you store stays yours. Microsoft may copy, keep and send it anywhere for free, to run its services, protect them and improve its products, and it deletes it when your account or service ends.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'We don’t claim ownership of Your Content. Your Content remains yours and you are responsible for it.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'To the extent necessary to provide the Services to you and others, to protect you and the Services, and to improve Microsoft products and services, you grant to Microsoft a worldwide and royalty-free intellectual property license to use Your Content, for example, to make copies of, retain, transmit, reformat, display, and distribute via communication tools Your Content on the Services.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Second, we’ll delete Data or Your Content associated with your Service or will otherwise disassociate it from you and your Microsoft account'
+    lastVerified: 2026-11-14
+  - topic: legal.service-changes
+    tier: poor
+    reason: "It can change or remove features, or stop a service, and doesn't promise you can download again what you bought if it stops offering it."
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Additionally, there may be times when we need to remove or change features or functionality of the Service or stop providing a Service or access to Third-Party Apps and Services altogether.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Except to the extent required by applicable law, we have no obligation to provide a re-download or replacement of any material, Digital Goods (defined in section 13.i), or applications previously purchased.'
+    lastVerified: 2026-11-14
+  - topic: legal.inactivity
+    tier: bad
+    reason: 'If you don’t sign in for two years it closes your Microsoft account, and your Outlook.com inbox and OneDrive after one year each, without promising a warning first. You may lose what you bought.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'This means you must sign in at least once in a two-year period to keep your Microsoft account, and associated Services (unless specified otherwise), active'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'You must sign into your Outlook.com inbox and your OneDrive (separately) at least once in a one-year period, otherwise we will close your Outlook.com inbox and your OneDrive for you.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'Third, you may lose access to products you’ve acquired.'
+    lastVerified: 2026-11-14
+  - topic: legal.licence
+    tier: poor
+    reason: 'You may use its apps on one device each, by one person at a time. For games and apps from its store, Microsoft can change the rules for using them at any time.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'we grant you the right to install and use one copy of the software per device on a worldwide basis for use by only one person at a time as part of your use of the Services.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: "Microsoft reserves the right to modify Microsoft's Usage Rules"
+    lastVerified: 2026-11-14
+  - topic: service.software-control
+    tier: poor
+    reason: 'Its apps download updates and setting changes on their own, and you may have to update to keep using them. The only way it names to stop updates is to uninstall.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'We may automatically check your version of the software and download software updates or configuration changes.'
+      - url: https://www.microsoft.com/en-ca/servicesagreement
+        quote: 'You may withdraw your consent to future software updates at any time by uninstalling the software.'
+    lastVerified: 2026-11-14

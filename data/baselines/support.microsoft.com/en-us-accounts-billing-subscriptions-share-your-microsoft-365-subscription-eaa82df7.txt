@@ -1,0 +1,308 @@
+url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/share-your-microsoft-365-subscription
+method: fetch
+saved: 2026-11-14
+
+Share your Microsoft 365 subscription | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Manage Microsoft 365
+Subscriptions from Microsoft
+Third-party subscriptions
+Missing subscription
+Buy now or renew
+Try or buy
+Renew
+Subscription expiry
+Troubleshoot renewing
+Microsoft 365 apps
+Sign in
+Get started
+Why you need to sign in
+Can't sign in
+Download, install or activate Office
+Can't install
+Share your subscription
+Share Microsoft 365
+Stop sharing Microsoft 365
+Can't share
+Manage sharing
+You received an invitation to share
+Subscription sharing FAQs
+Switch subscriptions
+Switch between Microsoft 365 subscriptions
+Compare Microsoft 365 and Office plans
+Switch to a business subscription
+Transfer to a different Microsoft account
+Convert your Microsoft 365 trial to a paid subscription
+Payments
+Change payment method or plan
+Turn recurring billing on or off
+Add a way to pay
+Update a way to pay
+Remove a way to pay
+Refunds
+Get a refund on your subscription
+Refund policy
+Cancel
+Cancel Microsoft 365
+Cancel your free trial
+Cancel other subscriptions
+Can't cancel
+Subscription versions
+Check version
+Switch between Microsoft 365 subscriptions
+Microsoft 365 for home or business
+What business product do I have?
+Difference between Microsoft 365 and Office 2024
+Difference between Microsoft 365 and free web apps
+Difference between home and business plans
+Manage your Microsoft account
+Manage your Microsoft account
+Other billing help
+Other billing help
+Share your Microsoft 365 subscription
+Applies To Microsoft 365 Microsoft 365 Family Microsoft 365 Premium Microsoft 365 Pro
+Get help with Copilot
+How do I troubleshoot 'it looks like I'm already?
+How do I share my Microsoft 365 subscription?
+Can I share an Microsoft 365 family?
+Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro subscribers can share subscription benefits with up to five other people in their family group by sending an email or copying & sharing a link.
+Note
+Sharing is not available in Microsoft 365 Basic or Microsoft 365 Personal subscriptions.
+Once the invitee has accepted the sharing invitation from the subscription owner, the invitee automatically becomes a member of the subscription owner's family group.
+Sharing is only possible if the invitee remains in the subscription owners' family group.
+If invitees are already in another family group and try to accept the sharing invitation, they will see a message that they are already a member of another family group. They would need to first leave that family group before re-accepting the sharing invitation from the subscription owner.
+Extended storage options and AI features like Copilot in Word, Excel, PowerPoint, and Outlook are only available to the subscription owner and cannot be shared with additional family group members.
+Do not share your Microsoft 365 product key. Product keys cannot be used for sharing your subscription; please use the steps below to send an email or link to each person you want to share with.
+How to share your Microsoft 365 subscription
+Go to your Microsoft 365 Services & subscriptions sharing page at account.microsoft.com/services/office/sharing
+Sign in
+Select Share.
+Note
+If you don't see the Start sharing button, you may not be the owner of the Microsoft 365 Family, Microsoft 365 Premium, or Microsoft 365 Pro subscription. If you're using a Microsoft 365 subscription that someone else shared with you, or if you have another type of Microsoft 365 subscription, you can't share your subscription with other people.
+If the person you want to share your Microsoft 365 Family, Microsoft 365 Premium, or Microsoft 365 Pro subscription with is not yet in your family group, send them an email invitation or link to join your family group. If they are already in another family group, they will need to leave it to join yours.
+Choose how you'd like to share,
+Select
+Email invite then enter their email and select Invite.
+Select
+Create link then select Copy link. You can then paste the link in an email, text, or other message and send it to those you want to share with.
+Note
+When you share your subscription with someone, they get an email from Microsoft telling them that you've shared your Microsoft 365 subscription with them.
+Each person you've shared with will need to select Get started in the email they receive to go to their Microsoft Family Safety site. If they don't have a Microsoft account, they'll be prompted to create one in order to move on.
+They should then select Join now to accept the invitation to join your family group before they can access the benefits of your Microsoft 365 subscription.
+If you need to send an invitation again, find their name, and choose Resend invite.
+They will need to accept your invitation within 48 hours. During this time, you will see "Pending invite" in your Microsoft 365 subscriptions dashboard.
+Note
+Once you have shared, they can select the Install Microsoft 365 on all your devices option on their account dashboard to install Microsoft 365 and access their OneDrive storage.
+Troubleshooting
+Troubleshoot "It looks like you're already in a family group" error message
+Sharing is only possible if the invitee joins the subscription owners' family group. If the invitee is already in another family group, they will need to leave it to join the subscription owners' family group.
+Once the invitee has joined the family group, then the subscription owner can share the Microsoft 365 Family, Microsoft 365 Premium, or Microsoft 365 Pro benefits.
+See Also
+Manage Microsoft 365 subscription sharing
+Set up Microsoft Family Safety
+Install Office on your PC or Mac
+Set up Office apps and email on a mobile device
+Someone invited you to share their Microsoft 365 subscription
+Can't find an invitation to share Microsoft 365
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

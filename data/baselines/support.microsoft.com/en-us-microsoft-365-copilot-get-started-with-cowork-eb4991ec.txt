@@ -1,0 +1,363 @@
+url: https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-cowork
+method: fetch
+saved: 2026-11-14
+
+Get started with Microsoft Copilot Cowork for personal accounts (preview) | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Get started
+Overview
+Access Copilot on Windows
+Copilot onboarding
+Getting started with Copilot on macOS
+Search
+Get started with search
+Favorite a file
+Create a PDF
+Create a To Do item
+Schedule a collaboration meeting
+Use Chat
+Explore Copilot Chat
+Prompts in Chat
+Share responses
+Summarize files
+Create video recaps
+Create content
+Set up automatic replies
+Add content
+Use voice features
+Use vision features
+Personalize Copilot Chat
+Revisit chat history
+About Chat
+About Copilot Chat licenses
+Check your Copilot license
+Grounding and Work IQ in Chat
+Understand web search
+Copilot in Microsoft 365 apps
+Limits for features and capabilities
+About Chat responses
+Cowork
+Get started with Cowork
+Start a conversation
+Take control of actions before they run
+Manage tasks and schedule prompts
+Build interactive apps
+What Cowork uses and stores
+Security considerations
+Use agents
+Get started with Agents
+Agents built by Microsoft
+Researcher agent
+Analyst agent
+Workflows agent
+Get more agents
+Create agents
+Build an agent
+Share an agent
+Uninstall an agent
+Pages
+Get started with Pages
+How Copilot Pages works
+Pages, Loop, or Notebooks
+Add chats to multiple pages
+Draft content
+Build lightweight apps
+Share pages
+Identify page authors
+Get visuals
+Convert to a Word document
+Create a PDF file
+Find pages
+Pages on mobile
+Frequently asked questions
+Notebooks
+Get started with Notebooks
+How Copilot Notebooks works
+Copilot Notebooks or OneNote
+Add reference files
+Provide custom instructions
+Share notebooks
+Find all notebooks
+Get answers and insights
+Create infographics
+Get an audio overview
+Notebooks on mobile
+Capture conversations
+Create mind maps
+Copilot Workspaces
+Frequently asked questions
+Create
+Get started with Create
+Create an image
+Design a poster
+Create a video
+Create a form
+Create a banner
+Create a draft
+Edit an image
+Create an infographic
+Create a story
+Create using a template
+Create an official Brand Kit
+Brand Kit access
+Find your creations in Copilot Library
+Apps
+Get started with apps
+Microsoft Copilot mobile app
+Get started
+Updates to mobile app
+Have a voice chat with Copilot on a mobile device
+Use Siri on iOS devices
+Widget and action buttons on iOS
+Use Copilot with Apple CarPlay
+Try Frontier
+Frontier Overview
+Copilot Video Tutorials
+Meet Microsoft Copilot
+What you can do in Copilot
+Write better prompts
+Create images and stories with Copilot
+Get started with Microsoft Copilot Cowork for personal accounts (preview)
+Note
+Home, the new starting point in Copilot where Chat and Cowork come together, is still rolling out, so what you see in the Copilot app might be different from what this article describes.
+Cowork carries out tasks on your behalf. You describe what you need in natural language, and Cowork does the work, creating documents, drafting and sending email, scheduling meetings, and managing files. You review and approve sensitive actions before it happens.
+Important
+Microsoft Copilot uses AI and may make mistakes, misinterpret instructions, or be deceived by malicious hidden instructions. Please monitor results closely and review important details, especially for tasks involving payments, personal information, communications with others, or changes to accounts or files. Copilot will ask for your approval or hand control back to you for sensitive actions. You are responsible for actions Copilot takes on your behalf. Using Copilot means you agree to the Terms of Use. See our Privacy Statement for more information.
+Cowork is available for both work or school accounts and personal Microsoft accounts. This article helps you set up Cowork for your account type and complete your first task.
+Important
+Microsoft Copilot Cowork for personal accounts is currently in preview.
+This information relates to a prerelease product that may be substantially modified before it's released. Microsoft makes no warranties, expressed or implied, with respect to the information provided in this article.
+For browser-based tasks, Cowork interacts with websites in a human like way, such as clicking, scrolling, and typing. You might be able to observe the task as it runs, stop it at any time, or take control when required. Some tasks might complete quickly, while others can take longer depending on complexity. As a task runs, you might get progress updates or intermediate results. Copilot pauses and asks for your input if it needs additional approval or information.
+What you can do with Cowork
+Create and edit Word documents, Excel spreadsheets, PowerPoint presentations, and PDFs.
+Draft, reply to, and send email, and manage your calendar.
+Manage your files in OneDrive.
+Research topics across multiple sources and compile the results.
+Prepare daily briefings and summaries.
+Run prompts on a schedule so recurring tasks happen automatically.
+Use Cowork anytime, any place with the Cowork mobile app.
+If you sign in with a work or school account, Cowork can also post messages in Teams, search across your organization for files and people, and work with files in SharePoint.
+Set up Cowork
+How you get access to Cowork depends on the type of account you sign in with. In both cases, Cowork runs in your browser at m365.cloud.microsoft and in the Microsoft Copilot desktop app.
+Note
+Cowork is available for personal and work or school accounts with similar features.
+Cowork for personal accounts is in preview.
+Cowork for work or school accounts is generally available. Learn more in Copilot Cowork overview.
+For personal accounts (preview)
+Sign in with a personal Microsoft account that has an eligible Microsoft 365 subscription.
+For work or school accounts
+Make sure you have a Microsoft Copilot license, Cowork enabled in your Microsoft Copilot environment, and usage-based and Cowork billing enabled. Additional details can be found in the Learn documentation.
+More ways to work with Cowork
+Start a conversation
+Take control of Cowork actions before they run
+Manage tasks and schedule prompts
+Copilot Tasks is moving to Cowork
+Important
+The following applies to Microsoft 365 Personal, Family, Premium, and Pro licenses.
+Copilot Tasks created with a personal Microsoft account will be moved to Cowork automatically over the following few weeks.
+Your Tasks conversations and most of the content you've created will move with you. Some features and content will work differently in Cowork. To review what's changing, visit Updates to Copilot and the Microsoft Copilot app.
+Related topics
+Application card for Microsoft Copilot
+Copilot in Microsoft 365 Personal, Family, and Premium
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

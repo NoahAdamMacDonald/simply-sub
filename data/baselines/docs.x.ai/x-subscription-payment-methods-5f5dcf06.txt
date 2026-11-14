@@ -1,0 +1,112 @@
+url: https://docs.x.ai/x-subscription/payment-methods
+method: fetch
+saved: 2026-11-14
+
+Which payment methods can I use? | SpaceXSI Docs
+API
+Grok BuildGrok BotGrokX Subscription
+Search
+⌘K
+Manage subscription
+Products
+API ConsoleGrokGrok BotGrok Build
+Status
+Loading...
+Resources
+llms.txtDiscordEmail supportTerms and Policies
+Get Started
+What is The X Subscription?
+Do I have to switch?
+Who can combine accounts?
+How to unify accounts
+I have more than one Cursor account
+X Premium customers
+Enterprise account unification
+Plans and usage
+Pricing
+Usage limits
+Extra usage credits and top-ups
+Prepaid balance and automatic top-ups
+Spending caps and alerts
+Cursor Token Rate
+Manage your subscription
+Managing The X Subscription
+Upgrade or downgrade
+Team plans, seats, and invites
+Payment methods
+Invoices & Refunds
+Cancel your subscription
+App Store subscriptions
+Google Play subscriptions
+Sign-in
+Why does signing in look different?
+Sign-in domains
+Grok Bot
+Grok Bot on The X Subscription
+Grok Bot sign-in
+Refer friends to Grok Bot
+Help
+FAQ
+API Docs
+REST Reference
+Grok Build
+Grok Bot
+Grok
+X Subscription
+Get Started
+What is The X Subscription?
+Do I have to switch?
+Who can combine accounts?
+How to unify accounts
+I have more than one Cursor account
+X Premium customers
+Enterprise account unification
+Plans and usage
+Pricing
+Usage limits
+Extra usage credits and top-ups
+Prepaid balance and automatic top-ups
+Spending caps and alerts
+Cursor Token Rate
+Manage your subscription
+Managing The X Subscription
+Upgrade or downgrade
+Team plans, seats, and invites
+Payment methods
+Invoices & Refunds
+Cancel your subscription
+App Store subscriptions
+Google Play subscriptions
+Sign-in
+Why does signing in look different?
+Sign-in domains
+Grok Bot
+Grok Bot on The X Subscription
+Grok Bot sign-in
+Refer friends to Grok Bot
+Help
+FAQ
+Manage your subscription
+Which payment methods can I use?
+Copy for LLM View as Markdown
+You can pay for The X Subscription on the web with these payment methods:
+Cards
+Apple Pay
+Google Pay
+Link
+Alipay
+If checkout doesn't accept the payment method on your current plan, choose another supported method, or keep your current plan, price, and features. Some payment methods are only available in certain countries. Checkout shows the ones you can use.
+Other reasons you may be unable to switch to The X Subscription
+If you pay for Cursor through the Apple App Store, you can switch on the web, but we can't cancel or refund your Apple subscription. After you switch, cancel it in your iPhone or iPad Settings, or Apple keeps billing you. Request any refund from Apple.
+If you already have a Cursor, SuperGrok, or X Premium subscription, switch on the web. Switching in the mobile apps isn't available yet.
+If you’re on an Enterprise team, work with your account manager to see if you’re eligible to switch.
+If you have an unpaid invoice or past-due payment, you will be unable to switch until it is settled.
+Some account setups may require help from Support before you can continue.
+Manage your payment method
+After you switch, add or update your payment method in your billing settings at grok.com/dashboard.
+Related
+How to unify accounts under The X Subscription
+Do I have to switch? What happens if I don't?
+Cursor subscriptions bought through the App Store (iPhone and iPad)
+Google Play subscriptions
+Last updated: November 2, 2026

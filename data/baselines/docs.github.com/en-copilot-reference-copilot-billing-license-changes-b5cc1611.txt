@@ -1,0 +1,679 @@
+url: https://docs.github.com/en/copilot/reference/copilot-billing/license-changes
+method: fetch
+saved: 2026-11-14
+
+Making changes to your GitHub Copilot license - GitHub Docs Skip to main content
+Skip to content
+GitHub Docs
+Search or ask Copilot/
+Menu
+Collapse sidebar
+Expand sidebar
+Home
+GitHub Copilot
+Reference
+Copilot billing
+License changes
+GitHub Copilot
+Get started
+About Copilot
+Where to use Copilot
+Copilot on GitHub.com
+Copilot in your IDE
+Copilot CLI quickstart
+Copilot app quickstart
+Copilot SDK quickstart
+Plans
+Enterprise and Copilot billing
+Best practices
+Enterprise AI governance
+Concepts
+Copilot surfaces
+GitHub Copilot app
+Copilot CLI
+Copilot on GitHub.com and Mobile
+Copilot in IDEs
+Agent capabilities
+About agents
+GitHub Copilot agents
+Third-party coding agents
+Agent apps
+Choosing and delegating agent work
+AI tools
+Agent management
+Copilot integrations
+Delegate and parallelize work
+Getting a second opinion
+Researching with agents
+Agent-powered workflows and operations
+Code review
+About automations
+Rationale, confidence, and approvals
+Dynamic workflows
+Agentic Workflows
+Copilot CLI in Actions
+About remote control
+Autopilot
+Tool search
+Computer use
+Image generation
+Prompting and context
+Prompt engineering
+Context management
+Custom instructions
+Copilot Memory
+Copilot Dreaming
+Prompt files
+Repository indexing
+Spaces
+Customizations
+Comparing customizations
+Agent skills
+Assisted permissions
+Custom agents
+MCP
+Connectors
+Hooks
+Extensions
+Plugins
+LSP servers
+Models
+Overview
+Copilot Fusion
+Auto model selection
+Bring your own key
+Utility models
+Base and LTS models
+Billing and usage
+Organizations and enterprises
+Billing
+Seats and billing cycles
+Budgets
+Individuals
+Billing
+Usage limits
+Copilot usage metrics
+All articles
+Copilot usage metrics
+Security, governance, and network settings
+Content exclusion
+Session data
+Local sandboxing
+Understanding local sandboxing
+Cloud sandboxes
+Risks and mitigations
+Network settings
+Enterprise
+Policies
+Default availability
+FedRAMP models
+New features and models
+MCP management
+Plugin standards
+OpenTelemetry
+Copilot-only enterprises
+How-tos
+Copilot on GitHub
+Set up Copilot
+Enable Copilot
+Set up for self
+Set up for organization
+Set up for enterprise
+Set up Copilot Business only
+Set up for students
+Set up for teachers and OS maintainers
+Configure access to AI models
+Configure code review
+Configure runners
+Chat with Copilot
+Get started with chat
+Chat in GitHub
+Chat in Mobile
+Customize Copilot
+Customize Copilot overview
+Add custom instructions
+Add personal instructions
+Add repository instructions
+Add organization instructions
+Customize cloud agent
+Personalize cloud sessions
+Create custom agents
+Add agent skills
+Use hooks
+Customize Actions environment
+Create a custom environment
+Configure secrets and variables
+Test custom agents
+Customize the firewall
+Configure MCP servers
+Create a plugin marketplace
+Spaces
+Create Copilot Spaces
+Collaborate with others
+Copilot for GitHub tasks
+Use Copilot to create or update issues
+Create a PR summary
+Use the GitHub MCP Server from Copilot Chat
+Use Copilot agents
+Get started
+Kick off a task
+Research, plan, iterate
+Manage agent sessions
+Copilot code review
+Review Copilot output
+Watch and fix pull requests
+Copilot in your IDE
+Set up Copilot
+Install Copilot extension
+Configure in IDE
+Configure network settings
+Authenticate to GHE.com
+Customize Copilot
+Configure custom instructions
+Add repository instructions in your IDE
+Extend Copilot with tools and context
+Extend Copilot Chat with MCP
+Set up the GitHub MCP Server
+Enterprise configuration
+Configure toolsets
+Change MCP registry
+Use Copilot Spaces
+Use plugins in Visual Studio Code
+Chat with Copilot
+Chat in IDE
+Change the chat model
+Chat in Windows Terminal
+Copilot for common tasks
+Get IDE code suggestions
+Find matching code
+Change the completion model
+Use the GitHub MCP Server
+Use Copilot agents
+Use agent mode
+Use plan mode
+Use subagents
+Use custom agents
+Use cloud agent in your IDE
+Copilot CLI
+All articles
+Copilot CLI best practices
+Set up Copilot CLI
+Install Copilot CLI
+Authenticate Copilot CLI
+Configure Copilot CLI
+Add LSP servers
+Troubleshoot Copilot CLI auth
+Use Copilot CLI
+Overview
+Allowing tools
+Use Autopilot mode
+Voice input
+Choose a model
+Computer use
+Connect to VS Code
+Delegate tasks to Copilot
+Browse issues, PRs, gists
+Ask a side question
+Cancel and roll back
+Work with multiple sessions
+Invoke custom agents
+Research with Copilot CLI
+Steer agents
+Steer a session remotely
+Set an AI credit limit
+Agentic code review
+Manage pull requests
+Speed up task completion
+Use session data
+Automate with Copilot CLI
+Quickstart
+Run the CLI programmatically
+Schedule prompts
+Automate with Actions
+Customize Copilot CLI
+Overview
+Add custom instructions
+Change settings
+Use hooks
+Add agent skills
+Add MCP servers
+Create custom agents
+Add LLM models
+Plugins: Find and install
+Plugins: Create a plugin
+Administer for enterprise
+Copilot CLI in Actions
+Sandbox Copilot
+Manage cloud sandboxes
+Use local sandboxing
+Configure local sandbox
+GitHub Copilot app
+All articles
+Customize the GitHub Copilot app
+Agent sessions
+Choose a model
+Projects
+Computer use
+Canvas extensions
+View and fix security alerts
+Managing issues and pull requests
+Automations
+Add LLM models
+Open with deep links
+Copilot SDK
+Authentication
+Authenticate
+BYOK
+Server To Server Tokens
+Features
+Agent Loop
+Changing Tools
+Citations
+Client Info
+Cloud Sessions
+Context Management
+Custom Agents
+Customization Locations
+Fleet Mode
+Hooks
+Image Input
+MCP
+Plugin Directories
+Remote Sessions
+Session Limits
+Session Persistence
+Skills
+Steering And Queueing
+Streaming Events
+Usage And Billing
+Use hooks
+Error Handling
+Hooks Overview
+Post Tool Use
+Pre Tool Use
+Session Lifecycle
+User Prompt Submitted
+User Prompt Transformed
+Integrations
+Microsoft Agent Framework
+Observability
+Opentelemetry
+Set up Copilot SDK
+Azure Managed Identity
+Backend Services
+Bundled CLI
+Choosing A Setup Path
+GitHub OAuth
+In Process Runtime
+Local CLI
+Multi Tenancy
+Scaling
+Troubleshooting
+Compatibility
+Debugging
+MCP Debugging
+GitHub Agentic Workflows
+Quickstart
+Creating agentic workflows
+Use Copilot agents
+Copilot cloud agent
+Start Copilot sessions
+Create cloud automations
+Manage rationale, confidence, and approvals
+Changing the AI model
+Configuring agent settings
+Use Copilot in the cloud on GitHub
+Use Copilot in the cloud on Mobile
+Use agent apps
+Use cloud agent via the API
+Use cloud agent from the GitHub CLI
+Use cloud agent via GitHub MCP Server
+Use cloud agent from Raycast
+Troubleshoot cloud agent
+Copilot Memory
+Create memories
+Manage for yourself
+Manage as administrator
+Copilot code review
+Dynamic workflows
+Copilot integrations
+Integrate cloud agent with Slack
+Integrate cloud agent with Teams
+Integrate cloud agent with Jira
+Integrate cloud agent with Linear
+Integrate cloud agent with Azure Boards
+Configure content exclusion
+Exclude content from Copilot
+Review changes
+Manage and track spending
+Monitor AI credits usage
+Manage company spending
+Manage your account
+Get started with a Copilot plan
+View and change your Copilot plan
+Disable Copilot Free
+Manage policies
+Administer Copilot
+Manage for organization
+Manage plan
+Subscribe
+Cancel
+Manage access
+Grant access
+Manage requests for access
+Revoke access
+Manage network access
+Manage policies
+Manage Copilot in the cloud
+Manage GitHub App access
+Configure agent runners
+Prepare for custom agents
+Manage default models
+Review activity
+Review user activity data
+Enable custom models
+Manage for enterprise
+Manage plan
+Subscribe
+Cancel plan
+Upgrade plan
+Downgrade subscription
+Manage access
+Grant access
+Disable for organizations
+View license usage
+Manage network access
+Manage enterprise policies
+Use enterprise managed settings
+Get started
+Deploy managed settings
+Enterprise team overrides
+Manage plugins and marketplaces
+Copilot Business only
+Manage agents
+Prepare for custom agents
+Create github-private repository
+Monitor agentic activity
+Manage Copilot in the cloud
+Block agentic features
+Enable Copilot code review
+Manage model availability
+Enable custom models
+Review audit logs
+Manage budget requests
+Manage MCP usage
+Configure enterprise allowlist
+Configure MCP registry
+Restrict based on registry
+Download activity report
+View usage and adoption
+View code generation
+View impact dashboard
+Troubleshoot Copilot
+Troubleshoot common issues
+View logs
+Troubleshoot firewall settings
+Troubleshoot network errors
+Troubleshoot slow responses
+Reference
+Chat cheat sheet
+Customization cheat sheet
+AI models
+Supported models
+Model comparison
+Model hosting
+Copilot feature matrix
+Keyboard shortcuts
+Copilot CLI reference
+CLI command reference
+CLI plugin reference
+CLI programmatic reference
+ACP server
+CLI configuration directory
+Plugins and marketplaces
+GitHub Copilot app reference
+Repository configuration
+Slash commands
+Built-in skills
+Custom agents configuration
+Custom instructions support
+Hooks reference
+Supported connectors
+Supported surfaces for policies
+Copilot allowlist reference
+Metrics data
+Copilot billing
+Models and pricing
+Billing cycle
+Seat assignment
+License changes
+Azure billing
+Request-based billing (legacy)
+What changed with billing (legacy)
+Copilot requests (legacy)
+Billing overview (legacy)
+Monitor premium requests (legacy)
+Model multipliers for annual plans (legacy)
+Review excluded files
+Copilot usage metrics
+Copilot usage metrics data
+Coverage and requirements
+Industry comparisons
+Interpret usage metrics
+Reconciling Copilot usage metrics
+Copilot LoC metrics
+Team-level metrics
+Example schema
+Enterprise administrators
+Agent session filters
+Agentic audit log events
+Enterprise managed settings
+MCP private registry enforcement
+OpenTelemetry reference
+Policy conflicts
+Tutorials
+All tutorials
+GitHub Copilot Cookbook
+All prompts
+Communicate effectively
+Create templates
+Summarize repository activity
+Synthesize research
+Create diagrams
+Debug errors
+Debug invalid JSON
+Handle API rate limits
+Diagnose CI test failures
+Analyze functionality
+Explore implementations
+Analyze feedback
+Generate code
+Implement a feature
+Refactor code
+Improve code readability
+Refactor for optimization
+Refactor design patterns
+Refactor data access layers
+Handle cross-cutting
+Simplify inheritance hierarchies
+Fix database deadlocks
+Translate code
+Testing code
+Generate unit tests
+Create mock objects
+Create end-to-end tests
+Analyze security
+Secure your repository
+Manage dependency updates
+Find vulnerabilities
+Customization library
+All customizations
+Custom instructions
+Your first custom instructions
+Concept explainer
+Debugging tutor
+Code reviewer
+GitHub Actions helper
+Pull request assistant
+Issue manager
+Accessibility auditor
+Testing automation
+Prompt files
+Your first prompt file
+Create README
+Onboarding plan
+Document API
+Review code
+Generate unit tests
+Custom agents
+Your first custom agent
+Implementation planner
+Bug fix teammate
+Cleanup specialist
+Cloud agent
+Get the best results
+Improve a project
+Build enterprise guardrails
+Give access to resources
+Set up budgets
+Get started with budgets
+Optimize budget configuration
+Customize code review
+Pull request lifecycle
+Enhance agent mode with MCP
+Speed up development work
+Roll out at scale
+Assign licenses
+Choose enterprise plan
+Set up self-serve licenses
+Track usage and adoption
+Remind inactive users
+Govern at scale
+Resources for approval
+Establish AI managers
+Govern for adoption
+Pilot a feature or model
+Maintain codebase standards
+Enable developers
+Drive adoption
+Roll out the Copilot app
+Understand agent workflows
+Drive agentic adoption
+Drive downstream impact
+Achieve company goals
+Increase test coverage
+Accelerate pull requests
+Reduce security debt
+Copilot usage metrics
+Communicate impact
+Measure trial success
+Explore a codebase
+Explore issues and discussions
+Explore pull requests
+Write tests
+Optimize AI usage
+Optimize Chat usage
+Optimize code reviews
+Reduce technical debt
+Stack AI pull requests
+Review AI code
+Vibe coding
+Roll out CLI hooks
+Use an AI SME
+Create CLI extensions
+Responsible use
+Chat
+Inline suggestions
+Agents
+In this article
+Making changes to your GitHub Copilot license
+Learn how changes to GitHub Copilot licenses affect billing and user access for organizations, enterprises, and personal accounts.
+Copy markdown
+In this article
+Personal accounts
+Organizations
+Enterprises
+Summary for personal plans, Copilot Business, and Copilot Enterprise
+License changes can affect access immediately or at the end of a billing cycle, depending on the plan and the action taken. Use the sections below for your account type and plan.
+Personal accounts
+What you need to know about the following actions:
+Upgrading: If you upgrade your plan (for example, from Copilot Pro to Copilot Pro+), the change is immediate. You are charged the full price of the new plan, minus the amount you already paid for your current plan.
+Downgrading/canceling: Access remains until the end of the current billing cycle. No refund for unused time.
+Included monthly allowance reset
+Paying for, renewing, upgrading, downgrading, converting from a trial, or resuming a plan after a lapse does not grant a fresh AI credits allowance immediately. Your included monthly allowance resets at 00:00:00 UTC on the first day of each calendar month, regardless of your subscription billing date.
+For example, if you exhaust your AI credits on May 28 and renew or upgrade your plan on May 30, your allowance does not reset until June 1.
+Any additional usage beyond the included allowance is charged separately and is unaffected by this monthly reset. See Usage-based billing for individuals and Setting up budgets to control spending on metered products.
+Organizations
+These rules apply to Copilot Business and Copilot Enterprise seats assigned through organizations.
+Adding seats
+Billing: Additional Copilot seats are billed for the remainder of the current billing cycle. Charges are prorated based on the date seats are added. If you pay by credit card or PayPal, you will need to pay the prorated amount for new seats upfront.
+Ability to use Copilot: Users assigned to new seats get access immediately after assignment.
+Removing seats
+Billing:
+Billing for that user stops at the end of the cycle.
+Reduced seat count takes effect at the start of the next billing cycle.
+No refunds are issued for unused time in the current cycle.
+Ability to use Copilot:
+If a seat is unassigned during a billing cycle, the affected user can still access Copilot until the end of the cycle.
+If a seat is revoked, users lose access immediately.
+Additionally:
+If Copilot is disabled at the organization level or licensed users are removed from the organization: Affected users lose access to Copilot immediately. Billing for affected users stops at the end of the cycle. If a user is restored to the organization or Copilot is reenabled during the billing cycle, the users regain access to Copilot immediately.
+Enterprises
+Enterprise owners can change seat assignments. Billing and access effects depend on how the enterprise pays for Copilot.
+Copilot access billing model
+This billing model is available through GitHub Enterprise Cloud or as Copilot Standalone.
+Removing seats
+The member-level Remove access action removes the member's Copilot seat, including assignments inherited from default, enterprise team, or organization settings. You do not need to remove the member from those teams or organizations.
+Billing: For a user with a GitHub Enterprise Cloud license, there is no change to the $0 Copilot seat charge.
+Ability to use Copilot: The member can still use Copilot until the end of the billing cycle.
+Losing a GitHub Enterprise Cloud license
+Removing a member from all organizations in the enterprise causes them to lose their underlying GitHub Enterprise Cloud license.
+Billing: The GitHub Enterprise Cloud license charge continues for the current month. The user is not automatically converted to Copilot Standalone.
+Ability to use Copilot: The user's seat is removed, and their ability to use Copilot ends immediately.
+Warning
+If a user loses their GitHub Enterprise Cloud license, their Copilot seat is removed and their included access is revoked immediately. Restoring access through Copilot Standalone requires an administrator's explicit agreement to the $10 USD per-user monthly charge. Conversion is not automatic.
+Receiving a GitHub Enterprise Cloud license
+When a Copilot Standalone user receives a GitHub Enterprise Cloud license:
+Billing: The Copilot seat charge changes from $10 USD per month to $0 immediately. GitHub Enterprise Cloud license billing applies.
+Ability to use Copilot: The user's seat is retained and reclassified as included access. They can continue using Copilot without interruption.
+Leaving the enterprise
+Billing: Charges continue through the end of the month.
+Ability to use Copilot: The user's seat is removed, and their ability to use Copilot ends immediately.
+Copilot Business and Copilot Enterprise
+These plans charge per assigned seat and include a monthly usage allowance.
+Adding seats
+Billing: Additional seats are billed on a prorated basis for the remainder of the current billing cycle. Included AI credits may also be prorated. If you pay by credit card or PayPal, you will need to pay the prorated amount for new seats upfront.
+Ability to use Copilot: Assigned users gain immediate access to Copilot.
+Removing seats
+Billing:
+Billing for that user stops at the end of the cycle.
+Reduced seat count takes effect at the start of the next billing cycle.
+No refunds are issued for unused time in the current cycle.
+Ability to use Copilot:
+If a seat is unassigned during a billing cycle, the affected user can still access Copilot until the end of the cycle.
+If a seat is revoked, users lose access immediately.
+Additionally:
+If an organization with Copilot seats is removed from an enterprise: Billing for those seats will stop at the end of the billing cycle. The users who had seats assigned by the removed organization will lose access to Copilot unless they receive a seat through another organization.
+If Copilot is disabled at the enterprise level: Any user with a Copilot license will lose access to Copilot immediately. Billing for that user stops at the end of the cycle. If Copilot is reenabled, users regain access to Copilot immediately.
+Summary for personal plans, Copilot Business, and Copilot Enterprise
+For personal, Copilot Business, and Copilot Enterprise plans:
+Proration: Applies when adding seats/licenses. You pay only for the portion of the billing cycle remaining. Included AI credits may also be prorated.
+Upgrading a personal plan: You are charged the full price of the new plan, minus the amount you already paid for your current plan.
+Ability to use Copilot: Assignments and upgrades are effective immediately for affected users. Downgrades take effect at the end of the billing cycle.
+Removing or canceling: No refunds are issued for unused time; access continues until the end of the cycle paid for, unless a seat/license is revoked.
+Scenario Plan When is billing affected? Is proration applied? When does access change? Refund for unused time?
+Add seat/license Copilot Business, Copilot Enterprise Immediately (upfront payment for credit card or PayPal) Yes Immediately (AI credits may be prorated) N/A
+Remove seat/license Copilot Business, Copilot Enterprise End of cycle N/A End of cycle (immediately if revoked) No
+Cancel subscription Personal, Copilot Business, and Copilot Enterprise plans End of cycle N/A End of cycle No
+Upgrade plan Copilot Pro, Copilot Pro+, and Copilot Max Immediate No Immediately N/A
+Downgrade plan Personal, Copilot Business, and Copilot Enterprise plans End of cycle No End of cycle No
+Back to top
+Help and support
+Was this Doc helpful?
+Yes No
+Help us make GitHub Docs great!
+All Docs are open source. See something that's wrong or unclear? Submit a pull request.
+Make a contribution
+Still need help?
+Ask the GitHub communityContact supportExpert servicesBlog
+GitHub Inc. © 2026TermsPrivacyStatusPricing

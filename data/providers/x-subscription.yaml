@@ -1,0 +1,1503 @@
+# Researched by hand on 2026-11-13 and 2026-11-14 (the full catalog run, AI batch 1), read with Edge from Canada
+# (cursor.com/pricing and its FAQ, x.ai/pricing, x.ai/grok, accounts.x.ai/sign-up, SpaceX's investor pages), cursor.com
+# /pricing again through a US, a UK and a German exit, and with a plain fetch (Cursor's help centre, Cursor's and
+# SpaceXSI's legal pages, x.ai's news posts, the SpaceXSI documentation as its Markdown copies, X's terms and privacy
+# policy, SpaceX's Form 8937 on Cursor). Pages, each quoted where it's used.
+# What it is (notes.md, the brand decision): asked for as Cursor (Hobby, Pro, Pro+, Ultra), but Cursor no longer sells
+# those plans to new customers. "Cursor is part of The X Subscription, one subscription for Grok, Cursor, and X. New
+# customers choose a plan on The X Subscription." and "Legacy Cursor plans are the plans Cursor sold before The X
+# Subscription. They aren't available to new customers, but existing subscribers keep them until they switch or cancel."
+# (Pricing and plans, Cursor's help centre). "Today we’re introducing The X Subscription, which brings together Grok,
+# Grok Bot, Cursor, and X Premium in one plan." (x.ai/news/x-subscription, 2026-10-12). One company sells it under one
+# set of terms and one account, on cursor.com, x.ai/pricing and X: "Your bundled subscription is sold to you by X
+# Subscription Corp." and "Your purchase contract for the bundled subscription is with X Subscription Corp only."
+# (Bundled Subscription Terms); "Subscriptions are only sold directly through X Subscription Corp." (cursor.com/pricing's
+# FAQ); "If you subscribed to The X Subscription on X, cancel it in X." (SpaceXSI docs, Cancel your subscription). By the
+# brand rule (one company, the same terms and account: one provider) it's one provider, named after what's sold, as
+# Google AI is: X Subscription, found as Cursor, Grok and X Premium too (aliases). The id isn't published yet: renaming
+# it to `cursor` is a search and replace if the owner prefers (notes.md).
+# Pricing: cursor.com/pricing (Free $0, Plus $8, Premium $30, Super $100 a month; Ultra $200 in its comparison table),
+# the same on x.ai/pricing, and Cursor's Pricing and plans article: "Annual billing is $80/yr for Plus, $300/yr for
+# Premium, $1,000/yr for Super, and $2,000/yr for Ultra. Prices exclude tax." The SpaceXSI docs' Pricing (docs.x.ai/
+# x-subscription/pricing) gives the same table ("$80/yr ($7/mo)", "$300/yr ($25/mo)", "$1000/yr ($84/mo)", "$2000/yr
+# ($167/mo)"). One price list for everywhere, in US dollars: the page shows a bare "$" from Canada and through a US, a UK
+# and a German exit alike, and its own data names the currency ("priceCurrency":"USD" for Plus, Premium, Super and Ultra,
+# the page's structured data); its terms charge "foreign exchange fees, and currency fluctuations" on top. None is an
+# offer; no page says they include tax ("Prices shown do not include applicable taxes or fees (e.g. VAT).").
+# Region checklist, 2026-11-13: 1. cursor.com has language versions only (hreflang de, es, fr, hi, ja, ko, pt-BR, zh),
+# no country paths; 2. no country or currency picker; 3. the page's structured data names USD for every plan; 4. checkout
+# needs an account (its "Get Plus" buttons lead to cursor.com/api/auth/checkoutDeepControl); 5. no help article prices
+# by country; 6. Edge from Canada and through a US, UK and German exit, all "$8", "$30", "$100", "$200"; 7. no bill
+# offered. Where it's sold: "Over the next few days, we’ll make it available to everyone globally." (its launch post);
+# its terms limit it to "a country supported by X Subscription Corp" but no page lists them, so no availableIn.
+# Not listed: the legacy plans (Cursor's Hobby, Start, Pro, Pro+, Ultra; SuperGrok; X Premium), which new customers
+# can't buy (notes.md); Teams seats ($30, $100 or $200 a seat, business); Enterprise; top-ups and third-party model use
+# (usage-billed, out).
+# Bundles: none: it is itself the bundle of Grok, Cursor and X Premium, priced as one plan, so no bundle file. Official
+# resellers: none: "No. Subscriptions are only sold directly through X Subscription Corp. We do not authorize any
+# resellers or third-party sellers." (cursor.com/pricing's FAQ, "Can I buy Cursor from a reseller or third party?").
+# Prices by country (read 2026-11-13 and 2026-11-14 through each country's exit, after a second agent's check): grok.com/plans
+# shows each country its own currency ("Prices shown do not include applicable taxes or fees."), regular prices after
+# its first-month offers ("50% off for 1 month, then CA$41.99 monthly"); cursor.com and x.ai/pricing show US dollars,
+# kept as the price for everywhere else.
+# Free use: the Free plan ("Free gives you access to Cursor's core features with limited usage.").
+
+id: x-subscription
+name: X Subscription
+aliases: [the x subscription, cursor, grok, supergrok, x premium, grok bot, anysphere]
+website: https://x.ai/pricing
+# Cursor's site and help centre, SpaceXSI's docs (docs.x.ai is under x.ai), the shared sign-up page (accounts.x.ai) and
+# X, where it's sold and where its X benefits and X's own terms are.
+domains: [cursor.com, x.com, grok.com]
+category: ai
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+    GLOBAL: USD,
+  }
+# Its cancel article covers The X Subscription ("Go to grok.com/dashboard/billing", "Open the options on the Current
+# plan card and choose to cancel") and the legacy plans.
+cancelUrl: https://cursor.com/help/account-and-billing/cancel
+sources: { pricing: https://cursor.com/pricing }
+notes: 'One subscription for Grok, Cursor and X Premium, sold by X Subscription Corp. (SpaceX) on cursor.com, x.ai and X since 12 October 2026. Earlier Cursor, SuperGrok and X Premium plans continue for their subscribers but are no longer sold.'
+
+# Ways to pay (M11.5), read 2026-11-13: the SpaceXSI docs' "Which payment methods can I use?" lists cards, Apple Pay,
+# Google Pay, Link (Stripe's wallet: `other`) and Alipay on the web ("Some payment methods are only available in certain
+# countries. Checkout shows the ones you can use."), and its terms add Apple's and Google's in-app purchase. No page
+# names the card networks (cursor.com/pricing's FAQ: "Self-serve plans support all major credit and debit cards."), so
+# no acceptedNetworks.
+paymentMethods:
+  - methods: [card, apple-pay, google-pay, alipay, other]
+    page: 'Which payment methods can I use?'
+    url: https://docs.x.ai/x-subscription/payment-methods
+    quotes:
+      - 'Cards'
+      - 'Apple Pay'
+      - 'Google Pay'
+      - 'Link'
+      - 'Alipay'
+  - methods: [app-store]
+    page: Bundled subscription terms
+    url: https://x.ai/legal/bundled-subscription-terms
+    quotes:
+      - 'Available payment methods may include Apple in-app purchase, Google in-app purchase'
+
+# Owner (M11.2), read 2026-11-13: sold by X Subscription Corp. (Austin, Texas: its Bundled Subscription Terms), with the
+# services "provided by the respective companies": Cursor by Anysphere, Inc., Grok by SpaceX Super Intelligence LLC, and
+# X. SpaceX owns them: its Form 8937 on the Cursor merger (ir.spacex.com, below); "SpaceX announced today that it has
+# acquired xAI." (x.ai/news/xai-joins-spacex); and its quarterly report's "Super Intelligence (“SI”) segment ... a
+# frontier LLM Grok, SI-assisted software engineering platform Cursor, and real-time information, entertainment, and
+# free speech platform X" (its Q3 2026 10-Q, linked from ir.spacex.com but served from q4cdn.com, which the provider
+# can't claim, so not cited). Listed: SpaceX's investor FAQs. No majority holder: the 10-Q gives Class B shares ten
+# votes each ("Each holder of Class B is entitled to ten votes for each share held.") but names no holder, and no annual
+# report or proxy circular was read (notes.md).
+owner:
+  name: 'Space Exploration Technologies Corp. (SpaceX)'
+  website: https://www.spacex.com
+  page:
+    name: 'Form 8937: the Anysphere (Cursor) merger'
+    url: https://ir.spacex.com/files/doc_downloads/2026/09/FINAL-Form-8937-Cursor.pdf
+  quotes:
+    - 'Space Exploration Technologies Corp. (“SpaceX”) completed its acquisition of Anysphere, Inc. (“Anysphere,” which operates as Cursor)'
+    - 'with Anysphere continuing as the surviving corporation and becoming a wholly owned subsidiary of SpaceX'
+  country:
+    code: US
+    page:
+      name: Investor FAQs
+      url: https://ir.spacex.com/faqs-and-contact/default.aspx
+    quotes:
+      - 'SpaceX is headquartered in Starbase, Texas.'
+    lastVerified: 2026-11-13
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: SPCX }
+    page:
+      name: Investor FAQs
+      url: https://ir.spacex.com/faqs-and-contact/default.aspx
+    quotes:
+      - 'SpaceX shares trade on the Nasdaq Global Select Market and Nasdaq Texas, under the ticker symbol “SPCX”.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Renewal day (M11.5), read 2026-11-13 in Cursor's billing article, which covers The X Subscription and the legacy plans
+# ("The cursor.com steps on this page apply to legacy Cursor plans", not its billing cycle). Its terms: "If you provide
+# new payment information and are successfully charged, your subscription period will be based on the original renewal
+# date" and "Mobile renewal processing dates may vary by up to 3 days."
+renewalAnchor:
+  kind: same-date
+  page: Billing and payments
+  url: https://cursor.com/help/account-and-billing/billing
+  quotes:
+    - 'Your cycle starts on the date you subscribe.'
+    - 'Individual plans renew on your signup date'
+  lastVerified: 2026-11-13
+
+# Perks (M11.6), read 2026-11-13 on cursor.com/pricing (cards and "Compare features across plans") and x.ai/pricing,
+# each line no feature describes, named in their words. Usage levels are perks (categories.md: not comparable): the
+# table's "Usage" row ("Limited", "Basic", "4x Plus", "15x Plus", "50x Plus"). X's benefits by plan from the SpaceXSI
+# docs ("Plus: a checkmark, creator tools, and fewer ads on X"; "Premium, Super, and Ultra: full X Premium+ benefits").
+perks:
+  - id: usage-4x
+    name: 4x more usage compared to Plus
+  - id: usage-15x
+    name: 15x more usage compared to Plus
+  - id: usage-50x
+    name: 50x Plus usage
+  - id: priority-access
+    name: Priority model access at peak times
+  - id: cloud-agents
+    name: Cloud agents & automations in Cursor
+  - id: code-hosting
+    name: Code hosting via Origin
+  - id: code-reviews
+    name: AI code reviews via Bugbot
+  - id: grok-api-access
+    name: Grok API access
+  - id: faster-chat
+    name: Faster Chat responses
+  - id: video-1080p
+    name: Create 1080p, 15s videos
+  - id: x-plus-benefits
+    name: A checkmark, creator tools, and fewer ads on X
+  - id: x-premium-plus-benefits
+    name: Full X Premium+ benefits
+  - id: ad-free-most-surfaces
+    name: Ad-free scrolling on most surfaces
+
+# Features, read 2026-11-13 (AI: the registry on feat/t12-ai-1), on every plan unless named:
+# - The table's rows: "Agent" (all), "Chat" ("Limited" on Free), "Image generation (Imagine)" ("Limited" on Free), "Video
+#   generation" (Premium and up), "Grok API access" (Plus and up: "Paid plans include Grok API access. API usage is
+#   billed separately at standard model rates", a perk, not ai.api-credits), "Grok Build" ("Limited" on Free), "Grok Bot"
+#   (Premium and up), "Cloud agents & automations", "Code hosting via Origin", "AI code reviews via Bugbot" and
+#   "Third-party models at API list price" (Premium and up), "Priority model access at peak times" (Super and Ultra),
+#   "Earliest access to all products & models" (Ultra: ai.early-access).
+# - Coding agent and code completion: "You can use Agent, Chat, and Tab completions with Cursor models (Grok and
+#   Composer), along with standard X." (Free, Pricing and plans), and x.ai/pricing's Plus card "Everything in Free, and:".
+#   Tab "suggests code as you type" (Tab completion).
+# - Models from several companies on Premium and up: "Free and Plus include only Cursor's first-party models (Grok 4.7,
+#   Grok 4.6, Grok 4.5, and Composer 2.5). Premium and above, Teams, Enterprise, and the legacy Pro, Pro+, and Ultra plans
+#   unlock third-party models, billed at API list price." (Available models: "other frontier models from OpenAI,
+#   Anthropic, and Google"). Paid by use from prepaid credit, so its label says so.
+# - Web search, reasoning and memory: x.ai/grok lists "Real-time web search", "Deep reasoning" and "Memory across
+#   chats", and says "Free to try on the web and in the apps. Upgrade to SuperGrok for higher limits and multi-agent
+#   reasoning.": only limits and multi-agent are a paid plan's. Voice: "Grok Chat, Voice, Imagine, and Build" (Plus's
+#   card) and "You will still have access to Grok's free tier limits on Chat and Voice" (Grok's FAQ). Multi-agent isn't
+#   listed: no page says which X Subscription plan has it (Premium has "The benefits of SuperGrok", its launch post).
+# - Uses a computer for you, Premium and up: "Your Bots work from a persistent cloud computer with a browser, command
+#   line, and filesystem." (Grok Bot docs) and "Grok Bot is included on Premium, Super, and Ultra plans." Cursor's own
+#   browser use ("useful for testing frontend changes") is a coding tool's test browser, which the feature leaves out.
+# - Scheduled tasks: "Scheduled automations are available to everyone" (Automations in Grok). Office apps: "Grok for
+#   Excel is a free Microsoft 365 add-in." and "Grok for Google Workspace is a free add-on" (their launch posts).
+# - Projects: Grok's FAQ names Projects as a grok.com feature (inferred: no page ties it to a plan); Cursor's Projects
+#   coordinate agents.
+# - Connects to: MCP servers and other apps ("Connectors are available to all Grok users", Connectors; "Bring Your Own
+#   MCP", their launch post; Cursor's MCP integrations), code editors (Cursor is one; "Cursor CLI works with any IDE or
+#   editor"), the command line (Cursor's CLI; Grok Build), and skills you make yourself ("Build new custom skills
+#   through conversation", Skills in Grok; "Type /create-skill in chat", Cursor's Skills). No API use is included.
+# - Chats kept on its servers: "Private chats and other content you ask us to delete are queued and removed within 30
+#   days" (its terms).
+# - None of these pages offers deep research as a mode, monthly API credits, or music and voice generation.
+# - Developer: "Cursor uses the Open VSX extension registry for third-party extensions" and "Cursor publishes
+#   first-party Anysphere replacements for some widely used extensions" (Extensions).
+# - Social (X): "Premium checkmark" and "Edit posts" from Plus up (the table); "Ad-free scrolling" is "Some surfaces" on
+#   Plus and "Most surfaces" from Premium, never everywhere, so ad free is false on every plan, with the perks. X uses
+#   no open protocol (no page names one: an empty set). "Create longer posts" names no length, so no post length.
+# General features, read 2026-11-13: platforms: Cursor for Mac, Windows and Linux (Download and install Cursor), Cursor
+# for iOS ("The native app runs on iPhone and iPad"), Grok "on the web at grok.com and in the iOS and Android apps"
+# (Grok's docs), and Cursor's agents on the web (cursor.com/agents). Sign-in: the shared sign-up page's "Sign up with
+# X", "Sign up with Apple", "Sign up with Google", "Sign up with GitHub" and "Sign up with email" (its email step asks
+# only for the address before more steps, unread, so only sso is listed). Support: "contact support while signed in"
+# (Cursor's help) and its forum (cursor.com's "Forum"). App languages: cursor.com's language menu (English, 简体中文,
+# 日本語, 繁體中文, Español, Français, Português, 한국어, Deutsch, हिन्दी); Cursor for iOS "is English only for now". No
+# pause (cancel only); no parental controls (its terms ask parents of teenagers to monitor them, with no controls).
+features:
+  platforms: [windows, macos, linux, android, ios, web]
+  account.sign-in: [sso]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, pt, ja, ko, zh, hi]
+
+plans:
+  - id: x-subscription.free
+    name: Free
+    link: https://cursor.com/pricing
+    categories: [ai, developer, social]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+      developer.extensions: [open-vsx, own]
+      social.protocol: []
+      ad-free: false
+    inferred:
+      ai.projects:
+        reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a paid plan."
+        page:
+          name: 'FAQ - Grok Website / Apps'
+          url: https://docs.x.ai/grok/faq
+        lastVerified: 2026-11-13
+    notes: 'Daily access to Grok, a starter allowance for Cursor’s coding agents (Grok and Composer models only) and standard X.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/pricing
+
+  - id: x-subscription.plus
+    name: Plus
+    link: https://cursor.com/pricing
+    categories: [ai, developer, social]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+      developer.extensions: [open-vsx, own]
+      social.protocol: []
+      social.verification: true
+      social.edit-posts: true
+      ad-free: false
+    inferred:
+      ai.projects:
+        reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a plan."
+        page:
+          name: 'FAQ - Grok Website / Apps'
+          url: https://docs.x.ai/grok/faq
+        lastVerified: 2026-11-13
+    perks: [grok-api-access, x-plus-benefits]
+    notes: 'Grok models only (Grok 4.7, 4.6, 4.5 and Composer 2.5) at fixed settings, without Auto, cloud agents, Bugbot or third-party models.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 99.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 119.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 129.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GLOBAL
+        currency: USD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/help/account-and-billing/pricing
+
+  - id: x-subscription.premium
+    name: Premium
+    link: https://cursor.com/pricing
+    categories: [ai, developer, social]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.computer-use: true
+      ai.model-choice: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+      developer.extensions: [open-vsx, own]
+      social.protocol: []
+      social.verification: true
+      social.edit-posts: true
+      ad-free: false
+    featureLabels:
+      ai.model-choice: Third-party models in Cursor at API list price, billed separately
+    inferred:
+      ai.projects:
+        reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a plan."
+        page:
+          name: 'FAQ - Grok Website / Apps'
+          url: https://docs.x.ai/grok/faq
+        lastVerified: 2026-11-13
+    perks:
+      [
+        usage-4x,
+        cloud-agents,
+        code-hosting,
+        code-reviews,
+        grok-api-access,
+        faster-chat,
+        x-premium-plus-benefits,
+        ad-free-most-surfaces,
+      ]
+    notes: 'The benefits of SuperGrok, Cursor Pro and X Premium+ in one plan (its launch post). Third-party models (Claude, GPT, Gemini) are paid by use from prepaid credit.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 41.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 419.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 26
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 260
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 45.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 459.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 59.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 599.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GLOBAL
+        currency: USD
+        amount: 30
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 300
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/help/account-and-billing/pricing
+
+  - id: x-subscription.super
+    name: Super
+    link: https://cursor.com/pricing
+    categories: [ai, developer, social]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.computer-use: true
+      ai.model-choice: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+      developer.extensions: [open-vsx, own]
+      social.protocol: []
+      social.verification: true
+      social.edit-posts: true
+      ad-free: false
+    featureLabels:
+      ai.model-choice: Third-party models in Cursor at API list price, billed separately
+    inferred:
+      ai.projects:
+        reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a plan."
+        page:
+          name: 'FAQ - Grok Website / Apps'
+          url: https://docs.x.ai/grok/faq
+        lastVerified: 2026-11-13
+    perks:
+      [
+        usage-15x,
+        priority-access,
+        cloud-agents,
+        code-hosting,
+        code-reviews,
+        grok-api-access,
+        faster-chat,
+        video-1080p,
+        x-premium-plus-benefits,
+        ad-free-most-surfaces,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 139.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 1399.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 90
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 900
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 149.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 1499.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 199.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 1999.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GLOBAL
+        currency: USD
+        amount: 100
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 1000
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/help/account-and-billing/pricing
+
+  - id: x-subscription.ultra
+    name: Ultra
+    link: https://cursor.com/pricing
+    categories: [ai, developer, social]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.computer-use: true
+      ai.model-choice: true
+      ai.early-access: true
+      ai.office-apps: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+      developer.extensions: [open-vsx, own]
+      social.protocol: []
+      social.verification: true
+      social.edit-posts: true
+      ad-free: false
+    featureLabels:
+      ai.model-choice: Third-party models in Cursor at API list price, billed separately
+    inferred:
+      ai.projects:
+        reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a plan."
+        page:
+          name: 'FAQ - Grok Website / Apps'
+          url: https://docs.x.ai/grok/faq
+        lastVerified: 2026-11-13
+    perks:
+      [
+        usage-50x,
+        priority-access,
+        cloud-agents,
+        code-hosting,
+        code-reviews,
+        grok-api-access,
+        faster-chat,
+        video-1080p,
+        x-premium-plus-benefits,
+        ad-free-most-surfaces,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 279.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 2799.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 180
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 1800
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 309.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 3099.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 399.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 3999.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GLOBAL
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 2000
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://cursor.com/help/account-and-billing/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch and Edge. What a buyer agrees to: the sign-up
+# page ("By continuing, you agree to the SpaceXSI Terms of Service, Privacy Policy, and Cookie Policy."), the
+# X-Subscription Consumer Terms of Service (SpaceX Super Intelligence LLC's, "for example Grok, Grokipedia, Grok Bot,
+# Cursor"; Anysphere a party for Cursor's third-party components), the Bundled Subscription Terms (X Subscription Corp.,
+# for buying, renewing, cancelling and refunds), the SpaceXSI Privacy Policy and Acceptable Use Policy, and each
+# service's own terms ("Use of each service is also subject to that Service Provider’s terms"): Cursor's Terms of
+# Service, Privacy Policy, Data Use overview and Cookie Policy (Anysphere), and X's Terms of Service and Privacy Policy
+# for the X benefits. Each rating takes the worst clause of them. Read but holding nothing worse: SpaceXSI's Acceptable
+# Use Policy and Cookie Policy (its cookie settings, below), Cursor's Security page (below), and X's Purchaser Terms
+# (legal.x.com/purchaser-terms, the legacy X Premium plans' only). Not read: the Grok and Cursor addenda (team plans
+# only, "each a “ Teams Terms ”"), the Grok Bot terms (Premium and up, its own product terms), SpaceXSI's Europe Privacy
+# Policy Addendum. Calibrated against Claude and ChatGPT.
+policies:
+  links:
+    - name: 'Bundled subscription terms'
+      url: https://x.ai/legal/bundled-subscription-terms
+    - name: 'X Subscription consumer terms'
+      url: https://x.ai/legal/x-subscription-terms-of-service
+    - name: 'SpaceXSI privacy policy'
+      url: https://x.ai/legal/privacy-policy
+    - name: 'SpaceXSI cookie policy'
+      url: https://x.ai/legal/cookie-policy
+    - name: 'Legal requests'
+      url: https://x.ai/legal/law-enforcement
+    - name: 'Billing and payments'
+      url: https://cursor.com/help/account-and-billing/billing
+    - name: 'Cursor CLI'
+      url: https://cursor.com/help/integrations/cli
+    - name: 'Cursor privacy policy'
+      url: https://cursor.com/en-US/privacy
+    - name: 'Cursor data use'
+      url: https://cursor.com/en-US/data-use
+    - name: 'Cursor security'
+      url: https://cursor.com/en-US/security
+    - name: 'Pricing and plans'
+      url: https://cursor.com/help/account-and-billing/pricing
+    - name: 'Delete your account'
+      url: https://cursor.com/help/account-and-billing/delete-account
+    - name: 'Privacy and data'
+      url: https://cursor.com/help/security-and-privacy/privacy
+    - name: 'What is The X Subscription?'
+      url: https://cursor.com/help/the-x-subscription/overview
+    - name: 'Sign up'
+      url: https://accounts.x.ai/sign-up
+    - name: 'X privacy policy'
+      url: https://x.com/en/privacy
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online whenever you like, but at least a day before it renews, or you pay for the next period. You keep it until the end of the time you paid for.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'Regardless of payment method, your subscription automatically renews unless you cancel at least 24 hours before the end of the current subscription period.'
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'Upon cancellation, your Paid Service will remain active through the end of the current period.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back unless the law says so, but you keep using it until the end of the time you paid for.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'All payments for Paid Services are final and not refundable or exchangeable, except as required by applicable law or specified in the Service.'
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'Upon cancellation, your Paid Service will remain active through the end of the current period.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you before a big price change, a new price starts only with your next period, and you can cancel before it does.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'X Subscription Corp will provide reasonable advance notice of any material price change. For subscriptions, price changes take effect at the start of the next subscription period following the change. If you do not agree with a price change, you may cancel before it takes effect'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'If you get a free trial or a special price, it turns into the full price on its own unless you cancel before it ends.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'At the end of a promotional or trial period, your subscription will automatically renew at the standard subscription fee unless you cancel before the end date of the promotion or trial.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages:
+        [
+          https://x.ai/legal/bundled-subscription-terms,
+          https://cursor.com/help/account-and-billing/billing,
+        ]
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'You pay any card, bank and currency exchange fees on top of the price, and it charges in US dollars.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'to pay the price listed for the Paid Service, along with any additional amounts relating to applicable taxes, credit card fees, bank fees, foreign transaction fees, foreign exchange fees, and currency fluctuations'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: poor
+      reason: 'A bigger plan starts at once and a smaller one when your period ends, but it may give nothing back for the time you already paid for.'
+      sources:
+        - url: https://cursor.com/help/account-and-billing/pricing
+          quote: 'Upgrades apply right away. Downgrades apply at the end of your billing period.'
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'No refund or pro-rated amount may be provided for upgrade or downgrade unless required by applicable law'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts in two Texas counties it chose, and you give up class actions. A private referee decides only if those courts can’t. Europeans go to Irish courts.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'Unless prohibited by your country’s applicable law, any disputes between you and us will be resolved by a court in Tarrant County or Wichita County, Texas, based on Texas law, except that if the forum selection clause in these Terms is unenforceable for any reason, then the dispute will be arbitrated.'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'To the extent permitted by applicable law, you agree to waive any right to bring a class action or other representative action.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes to its terms, without saying how early. If you keep using it after they start, you’ve agreed; if not, you must cancel first.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'If we make material revisions, we will notify you by service notification, email, or other reasonable means.'
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'If you do not agree, you must cancel your Paid Service before the revisions take effect.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your plan or close your account at any time for any reason, without telling you, and you get no money back.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'X Subscription Corp may suspend or terminate your access to one or more Paid Service(s), cease providing you with all or part of a Paid Service, or take any other action it deems appropriate at any time for any or no reason'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'We may terminate or suspend your access to our Service, cancel your subscription or account, or delete your data or account at any time without notice to you if we determine, at our sole discretion, that:'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'Upon Service termination, you will not be entitled to any refund, except where required by law.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It can close your account if you haven’t used it for 120 days, without warning you first.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'Your account has been inactive for more than 120 days.'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'We may terminate or suspend your access to our Service, cancel your subscription or account, or delete your data or account at any time without notice to you if we determine, at our sole discretion, that:'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'Anything you type, upload or make, your face and voice included, it may use forever for any purpose, and pass that right on to others.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'you grant an irrevocable, perpetual, transferable, sublicensable, royalty-free, and worldwide right to SpaceXSI to use, copy, store, modify, process, adapt, transmit, distribute, reproduce, publish, upload, download, display in public forums, list information regarding, make derivative works of, and distribute such Content'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'To the extent the User Content includes a person’s image, likeness, voice, or other similar attributes, you grant SpaceXSI the same rights to use those attributes as part of the User Content as described above.'
+      lastVerified: 2026-11-13
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'What it makes for you is yours, but it may still use it for its own purposes.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'SpaceXSI hereby assigns to you all of its right, title, and interest, if any, in and to Output.'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'and to aggregate your User Content and derivative works thereof for any purpose'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or drop features you pay for, owes you nothing for it, and gives no money back unless it shuts a whole paid service down.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'X Subscription Corp is not liable to you for any modification, suspension, or discontinuance of a Paid Service.'
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'There are no refunds or credits for any partial subscription periods, including in a situation where certain features, benefits and/or services are modified or discontinued.'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps are yours to use only while it lets you: it can take that back whenever it likes. You may not take them apart, and benchmark results you share must be repeatable.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'We hereby grant you a non-exclusive, limited, non-transferable, and freely revocable license to use a compiled code copy of the app(s) under your User Account'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'provide to any third party the results of any benchmark tests of the Service, unless you include all necessary information for others to replicate the tests'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use it, what you look at and your chats, with analytics tools, and keeps that usage data as its own. You can only limit cookies, browser by browser.'
+      sources:
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'This may also include information about your use of the Service and how you interact with the Service, including the types of content you view or engage with, the features you use, pages you view and your Grok conversation history.'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'All Usage Data is and will be owned solely and exclusively by us'
+        - url: https://x.ai/legal/cookie-policy
+          quote: 'On grok.com , go to the Data Controls tab under Settings and click Manage under Cookie Settings'
+      action:
+        name: 'Its cookie settings'
+        url: https://x.ai/legal/cookie-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its websites let ad companies such as Meta track you to show you its ads elsewhere, and X shares some of your data with partners who may use it for their own ends, AI included. You can only turn some of it off.'
+      sources:
+        - url: https://x.ai/legal/cookie-policy
+          quote: 'Our third-party advertising partners may use these cookies to show you relevant ads on other third-party websites and platforms.'
+        - url: https://x.com/en/privacy
+          quote: 'If you do not opt out, in some instances the recipients of the information may use it for their own independent purposes in addition to those stated in X’s Privacy Policy, including, for example, to train their artificial intelligence models, whether generative or otherwise.'
+        - url: https://x.com/en/privacy
+          quote: 'You can control whether X shares your personal information with these partners by using the “Data sharing with business partners” option in your Privacy and Safety settings .'
+      action:
+        name: 'Its cookie settings'
+        url: https://x.ai/legal/cookie-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Grok and Cursor show no ads, but their websites use cookies for targeted ads, and X shows ads chosen from what you do. Cookie choices are browser by browser; higher plans see fewer ads on X.'
+      sources:
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'Deliver relevant content and targeted advertising;'
+        - url: https://x.com/en/privacy
+          quote: 'We use your information to provide our advertising and sponsored content services subject to your settings , which helps make ads on X more relevant to you.'
+        - url: https://x.ai/legal/cookie-policy
+          quote: 'On grok.com , go to the Data Controls tab under Settings and click Manage under Cookie Settings'
+      action:
+        name: 'Its cookie settings'
+        url: https://x.ai/legal/cookie-policy
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you write and upload trains its AI, and other companies’ AI, unless you turn that off. Even then, chats flagged for safety or that you rate still can, and Cursor uses your code unless you turn on Privacy Mode.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'When logged into our Service, you can select whether or not you want us to use your User Content to improve our products and services and train our models or third-party models.'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'Even if you opt out of having your User Content used for model training, we may still use your User Content for safety security and evaluation purposes, including to improve our safety, security and moderation systems, or when: (i) you provide Feedback to us regarding any User Content; or (ii) your User Content is flagged by our automated systems for safety or security review'
+        - url: https://cursor.com/en-US/data-use
+          quote: 'If you choose to turn off “Privacy Mode”: we may use and store codebase data, prompts, editor actions, code snippets, and other code data and actions to improve our AI features and train our models.'
+      action:
+        name: 'How to turn on Privacy Mode'
+        url: https://cursor.com/help/security-and-privacy/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'Its staff and automated systems may look at what you send it for its own business, such as improving features, and no setting stops that.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'Automated systems that analyze your use of the Service and User Content may be used for business, safety, and compliance purposes. Our authorized personnel may review how you use the Service and your User Content for specific business purposes, including improving product features, investigating security incidents and potential misuse of our Service, and complying with our legal obligations and commitments to third parties.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data while it has a business need for it. Chats you delete, private chats and a deleted account are gone within 30 days, unless it must keep them for legal or safety reasons.'
+      sources:
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'We retain your personal information where we have an ongoing legitimate business need to do so.'
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'Further, if you choose to delete any or all of your conversations or if you choose to delete your account, we will delete the data within 30 days unless it is necessary to retain the data for legal, compliance, or safety purposes.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your chats and your account yourself, and they’re gone within 30 days. Files its Grok Bot made on its cloud computer need a request to support.'
+      sources:
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'Further, if you choose to delete any or all of your conversations or if you choose to delete your account, we will delete the data within 30 days unless it is necessary to retain the data for legal, compliance, or safety purposes.'
+        - url: https://cursor.com/help/account-and-billing/delete-account
+          quote: 'Account deletion is self-serve and permanent.'
+        - url: https://cursor.com/help/security-and-privacy/privacy
+          quote: 'To request deletion of files that contain personal data, contact support with your account email, the agent name, and a description of the files.'
+      action:
+        name: 'How to delete your account'
+        url: https://cursor.com/help/account-and-billing/delete-account
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data, in a form you can take elsewhere where the law allows, through its privacy portal or by email.'
+      sources:
+        - url: https://cursor.com/en-US/privacy
+          quote: 'Access and portability, meaning you can request a copy of the personal data we hold about you and, where applicable, ask us to provide it in a portable format.'
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'You may have the right to request to access, correct, update or delete your personal information, subject to certain applicable legal exceptions.'
+      action:
+        name: 'Its privacy portal'
+        url: https://x.ai/privacy-portal
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over private information only when police or courts serve proper legal papers. It doesn’t say it tells you, or publish how often.'
+      sources:
+        - url: https://x.ai/legal/law-enforcement
+          quote: 'Non-public information about our users will not be released except as required by appropriate legal process such as a subpoena, court order, or warrant.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information goes to the US or other places, and its terms don’t say how it’s protected there. (Cursor’s own policy promises legal transfer safeguards.)'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'By using the Service, you acknowledge that we may collect, use, and disclose your personal information and aggregated, pseudonymized, and/or de-identified data as set forth in our Privacy Policy , and that your personal information will be transferred to, and processed in, the United States or other locations.'
+        - url: https://cursor.com/en-US/privacy
+          quote: 'While data protection laws vary by country, we apply the protections outlined in this policy to your personal data regardless of where it is processed, and we only transfer data in accordance with legally valid transfer mechanisms.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address or another account (X, Apple, Google or GitHub). It also takes your name and date of birth, and payment details for a paid plan.'
+      sources:
+        - url: https://accounts.x.ai/sign-up
+          quote: 'Sign up with your email'
+        - url: https://x.ai/legal/privacy-policy
+          quote: 'If you create an account with us, we collect your name, contact information, account credentials, and date of birth.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 13, with a parent’s permission until 18 (Cursor itself says 18). It doesn’t knowingly collect children’s data, and Cursor deletes an under-18’s account it finds.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: "If you are a teenager between the ages of 13 and 17 years old, you must have your parent or legal guardian's permission to use the Service, and they must agree to our Terms of Service."
+        - url: https://cursor.com/en-US/privacy
+          quote: 'If we learn or have reason to suspect that a user is under the age of 18, we will investigate and, if appropriate, delete the personal data and/or the account.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: good
+      reason: 'Outside experts certify Cursor’s security every year and test it for weak spots, and it has an address to report problems to. The reports are shown only on request.'
+      sources:
+        - url: https://cursor.com/en-US/security
+          quote: 'Cursor holds AIUC-1, ISO/IEC 27001:2022, and ISO/IEC 42001:2023 certifications, along with a SOC 2 Type II attestation.'
+        - url: https://cursor.com/en-US/security
+          quote: 'We commit to at-least-annual penetration testing by reputable third parties.'
+        - url: https://cursor.com/en-US/security
+          quote: 'If you believe you have found a vulnerability in Cursor, please submit a report to security-reports@cursor.com .'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone, even at home.'
+      sources:
+        - url: https://x.ai/legal/bundled-subscription-terms
+          quote: 'You may not allow others to use your account to access any Paid Service.'
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'You may not share your account credentials or make your account available to anyone else'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves, and its terms say so. They don’t say they change anything else on your device.'
+      sources:
+        - url: https://x.ai/legal/x-subscription-terms-of-service
+          quote: 'Mobile apps may update automatically to ensure you are using the latest version.'
+        - url: https://cursor.com/help/integrations/cli
+          quote: 'Cursor CLI auto-updates by default.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Combining accounts can’t be undone
+      tier: poor
+      reason: 'Moving your Cursor, Grok or X Premium plans into this one merges the accounts for good, and cancelling later won’t bring the old plans back.'
+      sources:
+        - url: https://cursor.com/help/the-x-subscription/overview
+          quote: "The switch is permanent. It can't be undone, and Support can't undo it for you."
+      lastVerified: 2026-11-13

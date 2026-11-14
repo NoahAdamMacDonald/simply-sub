@@ -1,0 +1,378 @@
+url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/switch-between-microsoft-365-subscriptions
+method: fetch
+saved: 2026-11-14
+
+Switch between Microsoft 365 subscriptions | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Manage Microsoft 365
+Subscriptions from Microsoft
+Third-party subscriptions
+Missing subscription
+Buy now or renew
+Try or buy
+Renew
+Subscription expiry
+Troubleshoot renewing
+Microsoft 365 apps
+Sign in
+Get started
+Why you need to sign in
+Can't sign in
+Download, install or activate Office
+Can't install
+Share your subscription
+Share Microsoft 365
+Stop sharing Microsoft 365
+Can't share
+Manage sharing
+You received an invitation to share
+Subscription sharing FAQs
+Switch subscriptions
+Switch between Microsoft 365 subscriptions
+Compare Microsoft 365 and Office plans
+Switch to a business subscription
+Transfer to a different Microsoft account
+Convert your Microsoft 365 trial to a paid subscription
+Payments
+Change payment method or plan
+Turn recurring billing on or off
+Add a way to pay
+Update a way to pay
+Remove a way to pay
+Refunds
+Get a refund on your subscription
+Refund policy
+Cancel
+Cancel Microsoft 365
+Cancel your free trial
+Cancel other subscriptions
+Can't cancel
+Subscription versions
+Check version
+Switch between Microsoft 365 subscriptions
+Microsoft 365 for home or business
+What business product do I have?
+Difference between Microsoft 365 and Office 2024
+Difference between Microsoft 365 and free web apps
+Difference between home and business plans
+Manage your Microsoft account
+Manage your Microsoft account
+Other billing help
+Other billing help
+Switch between Microsoft 365 subscriptions
+Applies To Microsoft 365 for home Microsoft365.com Microsoft 365 Microsoft 365 Family Microsoft 365 for Mac Microsoft 365 for Windows Microsoft 365 Personal Microsoft account dashboard
+Get help with Copilot
+How do I change to a different Microsoft 365 subscription?
+Can you explain what happens if I add another?
+Tell me about switch between Microsoft 365 subscriptions.
+If your needs change, you can switch to a different Microsoft 365 subscription. For example, you can upgrade from Microsoft 365 Personal to Family, Premium, or Pro to share benefits with others, move from Basic (100 GB) to a plan with 1 TB or 2 TB shared OneDrive cloud storage, or upgrade to Premium or Pro for access to more AI-powered features.
+Note
+If you purchased Microsoft 365 through a third-party provider such as Apple, Google, or a retail partner, you'll need to manage or switch subscription through that provider. To find out who manages your subscription, go to account.microsoft.com/services and select Manage.
+Starting October 8, 2026, all new (including expired and repurchased) Microsoft 365 Family and Premium subscribers get 2 TB of pooled OneDrive cloud storage, and Microsoft 365 Pro subscribers get 5 TB pooled storage. From May 2, 2027, all existing Microsoft 365 Family and Premium subscribers will get 2 TB of pooled cloud storage when the subscription renews. Pooled storage means the cloud storage allowance is shared across all members of a shared subscription. Each person's mailbox, files and folders continue to remain private. All subscription types can be extended up to 10 TB to give everyone even more OneDrive storage.
+How to change to a different Microsoft 365 subscription
+Switch to a Microsoft 365 subscription with more features
+Tip
+To switch to a business subscription, see Switch to a Microsoft 365 business subscription.
+To switch to a Microsoft 365 subscription with more features, you buy another subscription and start using its benefits straight away.
+Buy the Microsoft 365 subscription that you want to switch to. Make sure to use the same Microsoft account as your current subscription when you do this.
+Check prices
+The remaining days on your current subscription will automatically convert and get added to your new subscription. The exact number of days will depend on what subscription you're moving from and what you're moving to.
+Note
+Depending on the subscription you're moving to, the adjusted number of days added to your new subscription may result in less time being added than the amount of time remaining on your original subscription.
+How many days will be added to a Microsoft 365 subscription upgrade?
+The amount of time added to your new subscription depends on the subscription type you are upgrading from and to.
+From/To
+Microsoft 365
+Personal
+Microsoft 365
+Family
+Microsoft 365
+Premium
+Microsoft 365
+Pro
+Military - Microsoft 365 Family
+-
+-
+-
+13%
+Microsoft 365 Basic
+24%
+18%
+12%
+2%
+Microsoft 365 Personal
+-
+92%
+60%
+10%
+Microsoft 365 Family
+-
+-
+78%
+13%
+Microsoft 365 Personal Japan
+100%
+92%
+80%
+13.32%
+Office 365 University
+100%
+92%
+60%
+5%
+Office 365 Services
+-
+-
+-
+10%
+Microsoft 365 Personal Classic
+84%
+65%
+42%
+7%
+Microsoft 365 Family Classic
+100%
+92%
+60%
+10%
+Microsoft 365 Premium
+-
+-
+-
+20%
+Tip
+If you're upgrading to a Microsoft 365 subscription with more features, you can buy now and start using it straight away. For more help, contact Sales support.
+Buy now
+Switch to a Microsoft 365 subscription with fewer features
+To switch to a Microsoft 365 subscription with fewer features, you must cancel your existing subscription and then buy another subscription. You'll continue to use your old subscription until it expires.
+Sign in to your Microsoft account and go to the Subscriptions tab at account.microsoft.com/services.
+Manage subscriptions
+Find your current subscription and select Manage, and then select Cancel subscription.
+The Cancel page will show you the features of your current subscription plan. If you're switching to another plan with fewer features, select the plan that works for you.
+Follow the instructions to complete the switch.
+Note
+Your existing subscription might not change immediately, but it will automatically change to the new plan when the plan renews. You won't be charged for the new plan until it renews into that plan.
+Common questions
+How do I switch to Microsoft 365 Personal after my free trial ends?
+We recommend that you sign in to Subscriptions with the Microsoft account associated with your subscription, select Turn off recurring billing before your trial ends, and then switch to Microsoft 365 Personal.
+Can I use a new product key to switch to another subscription?
+Yes, if you bought a new Microsoft 365 product key from a retailer, go to microsoft365.com/setup and sign in using the same account as your current subscription. After you enter your new product key, you'll see options for switching your plan.
+Do I have to reinstall the desktop apps after switching plans?
+If you're upgrading from Microsoft 365 Basic to another Microsoft 365 home subscription, yes, you'll now be able to install the desktop apps for Microsoft 365 on your Mac or PC. Get help with installing.
+If you are switching between any other Microsoft 365 for home use subscription, no, you won't need to reinstall the apps after switching subscriptions.
+Can I switch to a business subscription?
+Yes, you can move from Microsoft 365 Personal, Family, Premium, or Pro to a business subscription. To learn how, see Switch from Microsoft 365 Personal or Family to a business subscription.
+How can I switch to the discounted rate offered by my employer's Microsoft Workplace Discount Program?
+If you already have Microsoft 365 Personal, Family, Premium, or Pro, you can still take advantage of this discount. When you purchase through your employer's offer, additional time is added to your existing subscription, and the discounted rate will begin at your existing subscription's annual renewal date. Be sure to specify the Microsoft account that's associated with your current Microsoft 365 subscription during the purchase process.
+I don't want a subscription anymore. How can I switch to a non-subscription (one-time purchase) of Office?
+Sign in to Subscriptions with the Microsoft account associated with your subscription, and then select Turn off recurring billing.
+When your subscription expires, buy a one-time purchase of Office. Check prices.
+When you complete your purchase, open any app like Word, Excel, or PowerPoint and switch your license to begin using Office as a one-time purchase.
+See also
+Transfer a Microsoft 365 subscription to another account
+Need more help?
+Contact Support
+For technical support, go to Contact Microsoft Support, enter your problem and select Get Help. If you still need help, select Contact Support to be routed to the best support option.
+For pre-sales support, or issues with purchasing, contact Sales support.
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

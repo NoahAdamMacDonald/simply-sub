@@ -1,0 +1,172 @@
+url: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/accessing-compliance-reports-for-your-organization
+method: fetch
+saved: 2026-11-14
+
+Accessing compliance reports for your organization - GitHub Docs Skip to main content
+Skip to content
+GitHub Docs
+Search or ask Copilot/
+Menu
+Collapse sidebar
+Expand sidebar
+Home
+Organizations
+Organization security
+Manage security settings
+Access compliance reports
+Organizations
+Collaborate with groups
+About organizations
+Organization dashboard
+Best practices
+Create new organization
+Access organization settings
+Customize organization profile
+Organization news feed
+GitHub Actions metrics
+Manage membership
+Invite users to join
+Cancel or edit invitation
+Remove a member
+Reinstate a member
+Export member information
+Create accounts for people
+Manage organization roles
+Roles in an organization
+Use organization roles
+Predefined roles permissions
+Maintain ownership continuity
+Add a billing manager
+Remove billing manager
+Security manager role
+Managing moderators
+Manage repository access
+Manage repository roles
+Repository roles
+Set base permissions
+View people with access
+Manage individual access
+Manage team access
+Manage outside collaborators
+Add outside collaborator
+Cancel collaborator invitation
+Remove collaborator
+Convert member to collaborator
+Convert collaborator to member
+Reinstate collaborator
+Organize members into teams
+About organization teams
+Creating an organization team
+Add members to a team
+Team maintainers
+Team profile picture
+Code review settings
+Renaming a team
+Changing team visibility
+Configuring team notifications
+Move a team
+Add a child team
+Add or change parent team
+Remove members
+Scheduled reminders
+Deleting a team
+Manage programmatic access
+About programmatic access
+GitHub App managers
+Review installed GitHub Apps
+Set a token policy
+Manage token requests
+Review token access
+Limit app requests and installations
+Credential types reference
+Manage OAuth access
+OAuth app restrictions
+Restrict OAuth apps
+Unrestrict OAuth apps
+Approve OAuth app access
+Deny OAuth app access
+Manage organization settings
+Verify or approve a domain
+Renaming an organization
+Transfer ownership
+Restrict repository creation
+Set repo management policy
+Set visibility changes policy
+Manage forking policy
+Manage pull request reviews
+Disable or limit actions
+About private networking
+About Azure private networking
+Configuring private networking
+Troubleshooting Azure private networking
+Configure retention period
+Allow issue deletion
+Allow branch renames
+Organization discussions
+Manage repository discussions
+Manage the commit signoff policy
+Restrict team creation
+Manage scheduled reminders
+Manage default branch name
+Manage default labels
+Manage display of member names
+Manage sponsorship updates
+Manage Pages site publication
+Manage commit comments
+Archive an organization
+Delete organization
+Convert organization to user
+Upgrade to Corporate ToS
+Disable projects
+Manage projects base permissions
+Project visibility permissions
+Create rulesets
+Manage rulesets
+Repository custom properties
+Sync external custom properties
+Organization security
+Manage 2FA
+View 2FA usage
+Prepare to require 2FA
+Require 2FA
+Manage bots & service accounts
+Manage security settings
+Manage security & analysis
+Review audit log
+IP addresses in audit log
+Audit log events
+Access compliance reports
+Migrate to improved permissions
+Convert Owners team
+Convert admin team
+Migrate admin team
+In this article
+Accessing compliance reports for your organization
+You can access GitHub's compliance reports, such as our SOC reports and Cloud Security Alliance CAIQ self-assessment (CSA CAIQ), for your organization.
+Copy markdown
+Who can use this feature?
+Organization owners can access compliance reports for the organization.
+In this article
+About GitHub's compliance reports
+Accessing compliance reports for your organization
+About GitHub's compliance reports
+You can access GitHub's compliance reports in your organization settings.
+SOC 3
+Cloud Security Alliance CAIQ self-assessment (CSA CAIQ - Level 1)
+ISO/IEC 27001:2022 certification
+Accessing compliance reports for your organization
+In the upper-right corner of GitHub, click your profile picture, then click Organizations.
+Select an organization by clicking it.
+Under your organization name, click Settings. If you cannot see the "Settings" tab, select the dropdown menu, then click Settings.
+In the "Security" section of the sidebar, click Compliance.
+To the right of the report you want to access, click Download or View.
+Back to top
+Help and support
+Was this Doc helpful?
+Yes No
+Help us make GitHub Docs great!
+All Docs are open source. See something that's wrong or unclear? Submit a pull request.
+Make a contribution
+Still need help?
+Ask the GitHub communityContact supportExpert servicesBlog
+GitHub Inc. © 2026TermsPrivacyStatusPricing

@@ -1,0 +1,100 @@
+url: https://www.perplexity.ai/hub/security
+method: fetch
+saved: 2026-11-14
+
+Security at Perplexity
+Products
+Business
+Customers
+Resources
+Pricing
+See a demoTry Perplexity
+Security at Perplexity
+Visit our Trust Center
+Your security is our top priority
+Perplexity is built with modern security principles.
+SOC 2 Type 2 certified
+SOC 2 Type 2 certified by independent auditors — ensuring your information remains protected at all times.
+GDPR-compliant and HIPAA-aligned safeguards
+Your data is handled in compliance with GDPR and HIPAA aligned safeguards, using transparent collection processes and giving you full control over your personal information.
+PCI-compliant
+Comprehensive payment security that meets the highest industry standards, protecting financial data throughout every transaction.
+Secure Intelligence Institute
+In 2026, Perplexity founded the Secure Intelligence Institute to advance the security, privacy, and safety of frontier intelligence systems. In collaboration with leading academic and industry partners, the Institute pursues fundamental and applied research in AI security, translates the resulting advances into concrete improvements in Perplexity's systems, and shares knowledge and resources that help strengthen the broader AI ecosystem.
+Learn more about the Secure Intelligence Institute here.
+Access control
+Perplexity prioritizes the protection of customer data as a fundamental business imperative. Recognizing the existential threat posed by data breaches, we have implemented stringent measures to safeguard sensitive information. Our policy strictly prohibits the storage of customer data on company workstations, laptops, or removable media, ensuring that all such data is exclusively housed within secure production environments.
+To further enhance security, Perplexity utilizes AWS IAM for managing access to our production environment. We employ Single Sign-On (SSO) authentication with robust Multi-Factor Authentication (MFA) and short-lived session credentials. Additionally, we enforce Just-In-Time (JIT) access controls, granting engineers temporary access to sensitive resources only when necessary, such as for debugging purposes. To maintain the highest standards of data protection, access privileges undergo thorough reviews at least twice a year, ensuring that our security measures remain up-to-date and effective.
+Infrastructure security
+At Perplexity, we maintain strict separation between our production infrastructure and other environments like staging and testing.
+This segregation ensures data isolation, optimizes performance, and facilitates security testing without risking our live services. We achieve this through separate AWS accounts, distinct network configurations, and environment-specific access controls.
+For additional security, we leverage Cloudflare's robust services. Their global network provides comprehensive DDoS protection against both network and application-layer attacks. We also utilize Cloudflare's Web Application Firewall (WAF) to guard against common vulnerabilities, implement rate limiting to prevent abuse, and ensure all traffic is encrypted using SSL/TLS.
+Additionally, we use Wiz, a cutting-edge cloud security platform, to continuously monitor and assess the security of our cloud environments. Wiz provides real-time visibility into potential vulnerabilities, misconfigurations, and compliance risks across all environments, ensuring proactive threat detection and remediation.
+This multi-layered approach, combining environment segregation, Cloudflare's security features, and the advanced monitoring capabilities of Wiz, allows us to maintain high availability, ensure data integrity, and provide a secure platform for our users.
+Endpoint security
+At Perplexity, we implement a robust endpoint security strategy to protect our organization and customer data. We utilize Mobile Device Management (MDM) to enforce secure device policies across all company-owned devices. This allows us to implement strong password policies, encrypt device storage, enable remote wiping capabilities, enforce regular software updates, and control app installations. Our MDM policies ensure that all devices accessing company resources meet our stringent security standards, reducing the risk of data breaches through compromised endpoints.
+To further enhance our security posture, we have deployed Endpoint Detection and Response (EDR) solutions on all machines used within our organization. Our EDR system provides real-time monitoring and analysis of endpoint activity, advanced threat detection using behavioral analysis and machine learning, and rapid incident response capabilities. It also enables remote forensics to investigate and contain potential security incidents.
+Threat detection & response
+Perplexity prioritizes rapid threat detection and response by investing in advanced monitoring, observability, and alerting across our production environments. We leverage Panther SIEM to aggregate and analyze critical log sources, including AWS CloudTrail, application logs, and more. These logs provide comprehensive visibility into our infrastructure, enabling us to identify suspicious activity and potential threats quickly. Through the creation and continuous refinement of hundreds of tailored detections, we monitor for indicators of compromise (IOCs), anomalous behavior, and policy violations. This proactive approach ensures that we can detect even subtle signs of malicious activity.
+Our security team is available 24/7/365 and provides around-the-clock monitoring and incident response. The team leverages automated workflows to triage alerts and respond to potential incidents with speed and precision. When a threat is detected, our detailed playbooks guide containment, remediation, and post-incident analysis, ensuring that threats are neutralized swiftly with minimal impact.
+Bug bounty and vulnerability disclosure program
+We are committed to building strong partnerships with the security research community. In addition to conducting annual third-party penetration tests, we actively collaborate with researchers through our private Bug Bounty program on BugCrowd and our public Vulnerability Disclosure Program (VDP). We encourage you to review our VDP to understand its scope and learn how to report potential vulnerabilities.
+Third-party vendor review
+At Perplexity, we assess third-party sub-processors and vendors using a risk-based framework to ensure their privacy, security, and confidentiality practices align with our commitment to safeguarding customer data and maintaining a highly available service.
+Vendors are reviewed annually based on factors such as the sensitivity of data handled, the criticality of our reliance on their services, and their overall reputation. A current list of our sub-processors can be found on our Trust Center.
+Change management
+Perplexity utilizes an agile methodology for software development and performs extensive code reviews and testing before each release.
+We adhere to industry best practices, which include mandatory PR approvals, a suite of integration and unit tests, and preview deployments to non-production environments for manual QA.
+Developers are trained to adhere to secure coding guidelines and are aware of the OWASP Top 10 issues. Security-sensitive code is always reviewed by domain experts.
+Last updated August 21, 2026
+Visit our Trust Center
+Learn more
+Products
+Search
+Computer
+Teammates
+Comet
+API
+Deep Research
+Solutions
+By Size
+Enterprise
+By Industry
+Finance
+Legal
+Consulting
+Healthcare
+Tech
+Government
+Education
+E-commerce
+Advertising
+By Team
+Marketing
+Sales
+Product
+IT
+Pricing
+Pro
+Max
+Enterprise
+API
+Resources
+Blog
+Resource Hub
+Guides
+Customers
+Academy
+Workshops
+API docs
+Help center
+Research blog
+Security
+Trust center
+Company
+Careers
+Brand Guidelines
+Supply Store
+Privacy Policy
+Terms & Conditions
+Perplexity ©2026

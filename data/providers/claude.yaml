@@ -22,6 +22,12 @@
 # change." and "The Ultra plan is available for $200 per month."; the Max article: "The Max plan is available for $100
 # per month." So both keep their ids: claude.max-5x is Max and claude.max-20x is Ultra. Ultra's limits are new:
 # "Ultra gives you 10x the weekly usage of Pro, with no 5-hour limit for verified accounts" (it had 20 times Pro's).
+# Re-read 2026-11-13 (the AI category's new features): claude.com/pricing with Edge from Canada ("$28 if billed
+# monthly.", "$280 billed up front", Max's and Ultra's "$140" and "$280") and through a US exit ("$200 billed up
+# front). $20 if billed monthly.", Max's "$100"), and the Pro, Max and Ultra articles ("The Pro plan is available for
+# $20 per month (US)", "The Max plan is available for $100 per month.", "The Ultra plan is available for $200 per
+# month."): every price unchanged. Its individual plans are still Free, Pro, Max and Ultra (Team and Enterprise are
+# business plans).
 # Not on the pages: Max's yearly price: its help article says nothing about yearly billing; the card networks it
 # takes: its billing pages name none; the countries it sells in: its Pro article says only certain supported
 # locations; official resellers: none found.
@@ -81,6 +87,37 @@ perks:
 # Office apps (M11.15, the owner's choice of 2026-11-04), read 2026-11-04 in claude.com/pricing: Pro's "Claude in Chrome and
 # Microsoft 365", and in its comparison "Claude for Microsoft 365" on Pro, Max and Ultra, not Free. No plan lists video
 # generation.
+# The AI category's features (the owner's design, 2026-11-13), read 2026-11-13 with Edge from Canada in
+# claude.com/pricing's "Compare features across plans" (Free, Pro, Max, Ultra) and its help centre:
+# - Web search, voice, memory, projects and skills on every plan: the table's "Web search", "Voice mode", "Memory",
+#   "Projects" ("Up to 5" on Free) and "Skills" rows; "Voice mode is a beta feature available to all plans (Free,
+#   Pro, Max, Ultra, Team, and Enterprise)" (Use voice mode); "Memory is on by default for Free, Pro, Max, and Ultra
+#   plans" (Use Claude's chat search and memory to build on previous context); "Projects are available to all users,
+#   including those with free Claude accounts." (What are projects?); "Skills are available for users on Free, Pro,
+#   Max, Ultra, Team, and Enterprise plans." (What are skills?), its custom assistants.
+# - Reasoning on every plan: "Thinking lets Claude spend more time breaking down problems, planning solutions, and
+#   exploring different approaches before responding." and "Thinking cannot be turned off in Claude when using Claude
+#   Fable 5.2, Claude Haiku 5.5, Claude Sonnet 5.5, Claude Opus 5.5, Claude Fable 5.1, or Claude Opus 5." (Change the
+#   model, effort, and thinking settings), which names no plan. Free's is inferred: the table gives it "Sonnet" and
+#   "Haiku", and no page says in so many words that Free has thinking.
+# - Uses a browser for you on the paid plans: "Claude in Chrome is available on paid plans (Pro, Max, Ultra, Team, and
+#   Enterprise)" and "Claude in Chrome is a browser extension that allows Claude to read, click, and navigate websites
+#   alongside you." (Get started with Claude in Chrome); the table's "Claude in Chrome" row says No on Free.
+# - Connects to: on every plan, MCP servers and other apps ("Custom connectors using remote MCP are available on
+#   Claude, Cowork, and Claude Desktop for users on Free, Pro, Max, Ultra, Team, and Enterprise plans. Free users are
+#   limited to one custom connector." and "Web connectors are available for all users on Claude, Cowork, Claude
+#   Desktop, and Claude Mobile (iOS and Android).", Use connectors to extend Claude's capabilities) and skills; on the
+#   paid plans, Claude Code "in your terminal or supported IDE" ("Your Pro, Max, or Ultra plan also covers Claude Code
+#   in supported IDEs, including VS Code, Cursor and other VS Code forks, and JetBrains IDEs like IntelliJ and
+#   PyCharm.", Use Claude Code with your Pro, Max, or Ultra plan) and Claude in Chrome's extension; on Max and Ultra,
+#   the API, through their "$100 a month in API credits to build on the Claude Platform" and "$200 a month in API
+#   credits".
+# - Chats kept on its servers: "You also are able to delete individual conversations, which will be removed
+#   immediately from your conversation history and automatically deleted from our back-end within 30 days." (its
+#   privacy policy).
+# - None of these pages offers code completion as you type (Claude Code takes whole tasks, "allowing you to delegate
+#   complex coding tasks"), music or voice generation (voice mode's spoken replies are ai.voice), or another
+#   company's models (the table's are Opus, Sonnet, Haiku and Fable).
 
 # Renewal day (M11.5), read 2026-11-03 (M11.9) in its paid plans' billing FAQs: the day you subscribe sets the billing date,
 # which you move only by subscribing again on the day you want. Its consumer terms and invoices article don't say.
@@ -111,7 +148,22 @@ plans:
   - id: claude.free
     name: Free
     link: https://claude.com/pricing
-    features: { ai.assistant: true }
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.integrations: [mcp, connectors, custom-assistants]
+      ai.chat-storage: cloud
+    inferred:
+      ai.reasoning:
+        reason: "Its thinking article names no plan, and says thinking can't be turned off on Sonnet 5.5 and Haiku 5.5, the models the pricing table gives Free."
+        page:
+          name: Change the model, effort, and thinking settings
+          url: https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings
+        lastVerified: 2026-11-13
     prices:
       - region: GLOBAL
         currency: USD
@@ -119,7 +171,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://claude.com/pricing
 
   - id: claude.pro
@@ -131,6 +183,14 @@ plans:
       ai.deep-research: true
       ai.scheduled-tasks: true
       ai.office-apps: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       support.channels: [chat]
     prices:
       - region: US
@@ -139,7 +199,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://support.claude.com/en/articles/8325606-what-is-the-pro-plan
       - region: US
         currency: USD
@@ -147,7 +207,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://claude.com/pricing
       - region: CA
         currency: CAD
@@ -155,7 +215,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-30
+        lastVerified: 2026-11-13
         sourceUrl: https://claude.com/pricing
       - region: CA
         currency: CAD
@@ -163,7 +223,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-30
+        lastVerified: 2026-11-13
         sourceUrl: https://claude.com/pricing
 
   - id: claude.max-5x # was "Max 5x" until 2026-10-29
@@ -178,6 +238,14 @@ plans:
       ai.early-access: true
       ai.api-credits: true
       ai.office-apps: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       support.channels: [chat]
     featureLabels:
       ai.api-credits: $100 a month in API credits to build on the Claude Platform
@@ -189,7 +257,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-30
+        lastVerified: 2026-11-13
         sourceUrl: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
       - region: CA
         currency: CAD
@@ -197,7 +265,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-30
+        lastVerified: 2026-11-13
         sourceUrl: https://claude.com/pricing
 
   - id: claude.max-20x # was "Max 20x" until 2026-10-29
@@ -212,6 +280,14 @@ plans:
       ai.early-access: true
       ai.api-credits: true
       ai.office-apps: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       support.channels: [chat]
     featureLabels:
       ai.api-credits: $200 a month in API credits
@@ -223,7 +299,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-30
+        lastVerified: 2026-11-13
         sourceUrl: https://support.claude.com/en/articles/17728952-what-is-the-ultra-plan
       - region: CA
         currency: CAD
@@ -231,7 +307,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-30
+        lastVerified: 2026-11-13
         sourceUrl: https://claude.com/pricing
 
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: the consumer terms "include our

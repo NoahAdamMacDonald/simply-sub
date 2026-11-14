@@ -1,0 +1,99 @@
+url: https://www.perplexity.ai/help-center/en/articles/10354781-generating-images-with-perplexity
+method: fetch
+saved: 2026-11-14
+
+Generating Images with Perplexity - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+AI Models & Content Generation
+Generating Images with Perplexity
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+What advanced AI models are included in my subscription?
+Perplexity’s default model and how it compares to Pro
+Will Perplexity add more models?
+How do I change to my preferred AI model?
+Can I use ChatGPT plugins or import ChatGPT or Claude data?
+Can I use my ChatGPT or Claude.ai account with Perplexity?
+Troubleshooting for image generation
+What is Model Council?
+Generating Images with Perplexity
+Generating Videos with Perplexity
+Can Perplexity generate images?
+Understanding source labels
+Subscription Plans & Billing
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top How does it work?
+What model is used for image generation?
+Can I choose what model is used for image generation?
+Can I edit generated images?
+How many images can I generate per day?
+When does my image generation limit reset?
+Can I use generated images for commercial purposes?
+AI Models & Content Generation
+Generating Images with Perplexity
+Copy pageCopy page
+You can now ask Perplexity to generate and edit images by asking questions. Available now on all platforms (web, mobile and desktop apps)
+Copy pageCopy page
+The new image generation feature allows you to create custom images that complement your search within seconds.
+How does it work?
+Add your prompt to the search input and try to be as specific as possible with your instructions. Perplexity will automatically generate the image (you no longer have to click an additional button for generating the image after prompting).
+Here are some examples:
+What model is used for image generation?
+The default option automatically selects the best model for your query from our available image generation models, which include GPT Image 1, Nano Banana, and Seedream 4.5.
+Can I choose what model is used for image generation?
+You can set your model preference for image generation from the settings menu. Click the “Settings” icon in the user, select “Preferences”, and then choose an “Image generation model” of your choice. The currently available options include:
+Default: Selects the best model for your needs.
+GPT Image 1: Advanced images from OpenAI.
+Nano Banana: Google-powered visual creation (Max and Enterprise Max users get access to Nano Banana Pro)
+Seedream 4.5: Latest Bytedance design engine.
+Can I edit generated images?
+If you’re unhappy with the first result you can click on “Regenerate” below the image and we will automatically create a new image. Please note that any regeneration attempt counts towards your image generation limit.
+Alternatively, you can add a new prompt in the same session (make sure to include something like “generate an image” in your follow-up prompt).
+How many images can I generate per day?
+Image generation is available as an enhanced query, with access scaling by plan.
+Free Plan: Get access to limited image generations.
+Pro/Enterprise Pro: Unlock access to limited amount of high-quality images, plus additional medium-quality options.
+Max/Enterprise Max: Experience our most generous offering, with extensive access to high-quality image generation capabilities.
+Please note that during periods of heavy usage, image quality may slightly vary.
+When does my image generation limit reset?
+Image generation limits reset on a rolling basis rather than on a fixed calendar date. If you reach your limit, access returns automatically as older generations roll out of the usage window.
+Regenerating or editing an image counts as a new generation, and failed attempts may also count if the request was processed. The exact number of remaining generations is not currently displayed in your account settings.
+Can I use generated images for commercial purposes?
+Images generated through our service by users in Free and individual Pro and Max plans are for personal, non-commercial use only. For more details, please refer to our Terms of Service.
+Users on Enterprise Pro and Enterprise Max plans can use images generated with Perplexity for commercial purposes.
+Last modified on August 31, 2026
+What is Model Council?
+Generating Videos with Perplexity
+⌘ I

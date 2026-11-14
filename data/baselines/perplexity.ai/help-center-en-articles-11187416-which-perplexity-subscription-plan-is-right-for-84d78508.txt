@@ -1,0 +1,243 @@
+url: https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you
+method: browser
+saved: 2026-11-14
+
+Documentation Index
+Fetch the complete documentation index at: /help-center/llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Perplexity Help Center home page
+English
+Contact support
+Search...
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+What is Perplexity Pro?
+Perplexity Max
+Which Perplexity Subscription Plan is right for you?
+Billing FAQ for Pro Plan Subscribers
+How to transfer your subscription
+Billing for Android Subscriptions
+Billing for iOS Subscriptions
+Canceling a Subscription
+Refunds
+Instant Buy + Buy with PayPal
+What is Instant Buy?
+Paying in Local Currency
+How credits work on Perplexity
+Why is my subscription Paused?
+Why can’t I see my Pro status?
+What is Education Pro?
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+What Perplexity plans are available?
+Individual
+Enterprise
+API (Individual and Enterprise)
+What do I get with the Free (Standard) plan?
+What does Perplexity Pro (Individual) offer?
+What does Education Pro offer?
+What does Perplexity Max (Individual) include?
+What does Enterprise Pro include?
+What does Enterprise Max offer?
+What is the Perplexity API Platform for?
+How do the plans compare?
+How do I choose the right plan?
+Frequently asked questions
+Trial and promotional subscriptions: payment method required
+Overall requirements
+New users vs. existing users
+Where notifications appear
+How do I update my payment information?
+Need more help?
+Help Center
+/
+Subscription Plans & Billing
+/
+Which Perplexity Subscription Plan is right for you?
+SUBSCRIPTION PLANS & BILLING
+Which Perplexity Subscription Plan is right for you?
+Copy page
+Compare Perplexity subscription plans: the free Standard tier, Perplexity Pro, Max, and Education Pro, plus Enterprise and API Platform options.
+Choosing the right Perplexity plan depends on your usage needs, team size, and the features you require.
+What Perplexity plans are available?
+Individual
+Standard (Free)
+Perplexity Pro
+Perplexity Max
+Education Pro
+($10/mo with verification from SheerID).
+Enterprise
+Enterprise Pro
+Enterprise Max
+API (Individual and Enterprise)
+API Platform
+What do I get with the Free (Standard) plan?
+Search history access
+Practically unlimited basic searches
+Very limited amount of Pro Searches
+Perplexity picks the best model for your query
+Basic file uploads (limited)
+No access to advanced AI models, image generation, or premium support.
+What does Perplexity Pro (Individual) offer?
+Extended access to Pro Search
+A limited number of Create files and apps queries every 30 days
+Access to advanced AI models. For the full list, see What advanced AI models are included in my subscription?
+Image and video generation
+Increased rate limits for file and attachment uploads and analysis
+Exclusive support channels
+Up to 50 file uploads per project
+Best for: Anyone who wants the latest AI productivity and research tools.
+What does Education Pro offer?
+Education Pro is offered to verified students and educators at a discount. It includes everything in Pro — access to Perplexity Computer, access to Learn Mode, unlimited Pro Searches, file and image uploads, access to premium models, and more — plus education-specific tips and nudges.
+Best for: Students or faculty who are looking to supercharge their teaching, learning, and maximize proven study methods for long-term understanding.
+What does Perplexity Max (Individual) include?
+Max includes everything in the Pro plan, plus:
+Highest level of access to the full suite of advanced AI models: Get faster access to the latest models from OpenAI, Anthropic, and others in Perplexity Research, and create files and apps with minimal limits on volume or frequency.
+Extended limits for Create files and apps queries: Create as many reports or projects as you need using advanced tools to create dashboards, spreadsheets, presentations, and web applications.
+Early access to the newest products: Try the latest features and products before they’re available to everyone else.
+Brain (Research Preview): Max subscribers using Perplexity Computer get access to Brain, a self-improving memory system that builds a working model of your projects, people, and files so Computer can act on what you’ve been doing. Free during the current preview period.
+Priority support: Max subscribers receive the highest level of support, with dedicated infrastructure and faster response times.
+Annual billing for Max is only available on perplexity.ai.
+Best for: Users who need advanced access to Perplexity’s most powerful research features and early access to new features and products.
+What does Enterprise Pro include?
+All Pro features, plus:
+Trust Center access and strict data privacy (data never used for training)
+Per-seat pricing (starts at $40/month or $400/year per seat)
+Advanced seat management for organizations
+Internal knowledge search through shared Projects and centrally governed File Connectors
+Increased daily file uploads (with organization-level controls)
+Dedicated support
+Administrators manage billing and account access
+Projects for team collaboration, custom knowledge hubs, and internal file search.
+Best for: Businesses and organizations needing robust collaboration, security, and administrator controls.
+What does Enterprise Max offer?
+All Enterprise Pro features, plus:
+Create more files and apps: Generate the reports or projects you need with extended rate limits for advanced tools to build dashboards, spreadsheets, presentations, and web applications.
+More Research queries: Generate comprehensive reports on complex topics, using autonomous, multi-step analysis.
+Enhanced video generation: Enterprise Max users can generate 15 videos per month. Each video is 8 seconds long, includes audio, and is in landscape (16:9) format.
+Advanced models in Perplexity Search: Enterprise Max users get the highest level of access to advanced models like GPT-6 Astra and Claude Opus 5.5, with higher usage limits. This applies only within Perplexity on the web and not to programmatic access through the API, which is billed separately.
+Greater file limits: Your personal repository (My Files) holds up to 10,000 files.
+Premium security features: No seat minimum for organization-wide access to SCIM, Audit Logs, configurable Data Retention, and Insights dashboard if an organization has at least one Enterprise Max user.
+Early access to new features: Try the latest features and products before they’re available to everyone else.
+Priority support: Enterprise Max subscribers get faster support response times.
+Best for: Businesses and organizations needing advanced data security, powerful collaboration tools, and the highest access to the latest AI models, Create files and apps and Research search modes, Comet Assistant, and Perplexity’s newest features.
+What is the Perplexity API Platform for?
+Designed for developers and businesses integrating Perplexity’s AI into their own products. Get started with the Agent API Quickstart.
+Pay-as-you-go pricing: Buy credits or set up auto top-off
+No access to advanced models or Pro features within the web/app interface
+No complimentary API credits
+No data logging or storage
+Access to API projects for usage tracking and sharing API keys.
+Best for: Developers needing API access for custom applications or automation.
+How do the plans compare?
+Feature Free Pro Education Pro Max
+Pro Searches 3/day Weekly limits (average use) Weekly limits (average use) Weekly limits (advanced use)
+Research Queries 1/month Monthly limits (average use) Monthly limits (average use) Monthly limits (advanced use)
+Browser Agent (Comet Assistant) Queries No Monthly limits (average use) Monthly limits (average use) Monthly limits (advanced use)
+Advanced AI Models No Yes Yes Yes
+Image Generation No Yes Yes Yes
+File and App Creation No Monthly limits (average use) Monthly limits (average use) Monthly limits (advanced use)
+File Uploads (sessions)* Limited Weekly limits (average use) Weekly limits (average use) Weekly limits (advanced use)
+Organization File Repository No No No No
+Seat Management No No No No
+Support Basic Priority Priority Dedicated
+Data Privacy Standard Opt-out AI training available Opt-out AI training available Opt-out AI training available
+Education/NPO Discounts No No Yes (auto-applied) No
+Table 1 — Individual plan features compared.
+*For persistent files in Projects and personal repositories, additional limits apply.
+Feature Enterprise Pro Enterprise Max
+Pro Searches Extended limits (400/week) Highest limits (4000/week)
+Research Queries Extended limits (50/month) Highest limits (500/month)
+Browser Agent (Comet Assistant) Queries Extended limits (80/month) Highest limits (800/month)
+Advanced AI Models Yes Yes
+Image Generation Yes Yes
+File and App Creation Extended limits (50/month) Highest limits (500/month)
+File Uploads (sessions)* Extended limits (100/week) Highest limits (1000/week)
+Organization File Repository Being retired Being retired
+Seat Management Yes — can be combined with Enterprise Max seats Yes — can be combined with Enterprise Pro seats
+Support Dedicated Dedicated
+Data Privacy Data never used for model training Data never used for model training
+Education/NPO Discounts Yes Yes
+Table 2 — Enterprise plan features compared.
+*For persistent files in Projects and personal repositories, additional limits apply.
+The Organization File Repository is being retired on October 1, 2026 and is not available as a new Enterprise entitlement. Existing customers should download and move their organization files before the deadline. Files remaining after that date will be deleted.
+How do I choose the right plan?
+Choose Free if:
+You’re a light user, just exploring, or need occasional answers.
+Choose Pro if:
+You want advanced AI, frequent research, file analysis, or image generation.
+Choose Education Pro if:
+You’re a current student or educator looking for ways to make learning more engaging and effective, and need extended access to Perplexity Academic.
+Choose Max if:
+You’re a power user who often does deep research on topics and wants to maximize the Create files and apps feature.
+Choose Enterprise Pro if:
+You’re a business or organization needing collaboration, security, and administrator controls.
+Choose Enterprise Max if:
+You’re a business or organization requiring Enterprise-grade security, control and collaboration tools, and would benefit from Perplexity’s most advanced plan, including the highest access to Create files and apps and Research search modes.
+Choose the API Platform if:
+You’re a developer integrating Perplexity into your own products.
+Frequently asked questions
+Can I switch plans later?
+Yes. You can upgrade or downgrade your plan at any time in your account settings. For Perplexity Pro, cancel before deleting your account to avoid being charged.
+Is my data private?
+Are there discounts for students, educational institutions, nonprofits, or government agencies?
+Yes. Perplexity offers a 25% discount on Enterprise Pro and Enterprise Max seats for eligible educational institutions (not covered by the standard Student Program), nonprofit organizations, and government agencies. To apply, complete the discount request form using your organization email.
+What support is available?
+Trial and promotional subscriptions: payment method required
+If you’ve redeemed a trial or promotional subscription (for example, through a partner promotion), a valid payment method is required to activate and maintain your access.
+Overall requirements
+A valid credit or debit card is required for all promotional and trial redemptions.
+No charges are applied during your promotional/trial period.
+Unless you cancel before the trial ends, your subscription will auto-renew at the standard rate for the plan you selected during redemption (monthly or annual).
+New users vs. existing users
+New users are prompted to add a payment method during the sign-up and redemption flow.
+Existing promotional/trial users who receive a payment method prompt must add a credit or debit card within 7 days of the original notification. If no card is added within that window, your account will be downgraded to Perplexity’s free version. Once you add a valid card, your promotional access resumes immediately. Any missed days will not be added back to your trial period.
+Where notifications appear
+Email: You will receive an email notification prompting you to add a payment method.
+In-app: An in-app banner will appear prompting you to add your payment information.
+How do I update my payment information?
+Web (desktop):
+1
+Go to perplexity.ai/settings/account.
+2
+Scroll to the Subscription section.
+3
+Click Manage Plan (or Manage Subscription).
+4
+Under Billing and Shipping Information, add or update your payment method.
+Do not update your Perplexity payment information through the Google Play Store or Apple App Store. Doing so creates a new, separate subscription and you will be charged. Always update your payment method on the Perplexity website.
+Need more help?
+Contact us via Help > Contact Support. Pro subscribers can access live chat in Settings.
+Last modified on November 12, 2026
+Related topics
+Subscription Plans & Billing
+How credits work on Perplexity
+What advanced AI models are included in my subscription?
+Billing for Android Subscriptions
+PERPLEXITY MAX
+BILLING FAQ FOR PRO PLAN SUBSCRIBERS
+Ctrl+I
+Perplexity Help Center
+Where Knowledge Begins
+Visit our Blog
+Careers
+Privacy Policy
+Terms of Service
+Security
+Give us Feedback

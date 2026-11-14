@@ -1,0 +1,232 @@
+url: https://www.perplexity.ai/help-center/en/articles/10354919-what-advanced-ai-models-are-included-in-my-subscription
+method: fetch
+saved: 2026-11-14
+
+What advanced AI models are included in my subscription? - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+AI Models & Content Generation
+What advanced AI models are included in my subscription?
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+What advanced AI models are included in my subscription?
+Perplexity’s default model and how it compares to Pro
+Will Perplexity add more models?
+How do I change to my preferred AI model?
+Can I use ChatGPT plugins or import ChatGPT or Claude data?
+Can I use my ChatGPT or Claude.ai account with Perplexity?
+Troubleshooting for image generation
+What is Model Council?
+Generating Images with Perplexity
+Generating Videos with Perplexity
+Can Perplexity generate images?
+Understanding source labels
+Subscription Plans & Billing
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top Modes in Perplexity
+Advanced models available in Search Pro and Max plans
+Enterprise Pro and Enterprise Max plans
+If your Enterprise list is shorter than the table
+What does the Thinking option do?
+Models used by Model Council
+Models available in Comet
+Models available in Computer
+How should I choose a model?
+Frequently asked questions
+Need more help?
+AI Models & Content Generation
+What advanced AI models are included in my subscription?
+Copy pageCopy page
+This article lists the advanced AI models available on each Perplexity subscription, and explains what changes the list you see.
+Copy pageCopy page
+Perplexity combines web search with models built by Perplexity and by leading third-party providers. Which models you can choose depends on your plan and the mode you’re using. On the Enterprise Pro and Enterprise Max plans, it also depends on your organization’s model and data-retention settings.
+Important
+Models are subject to change. Perplexity adds new models and retires older ones as providers release them. The Search model tables below are a snapshot as of November 11, 2026 and are not a commitment to keep any individual model available. The model selector in Perplexity is always the source of truth for your account.
+Modes in Perplexity
+Search — Fast answers to everyday questions. Leave the model on Best, or choose an eligible model manually. Pro Search isn’t a separate mode or toggle; Search applies it automatically when your plan includes it. See What is Pro Search? for how search depth differs by plan.
+Deep Research — In-depth reports with more sources, charts, and advanced reasoning. Perplexity selects the models automatically. See What’s New in Advanced Deep Research.
+Learn Mode — Study a topic through interactive explanations, questions, and quizzes. See What is Learn Mode?.
+Model Council — Consult several models at once for research, complex decisions, or verification. Available on the Max and Enterprise Max plans, on web. See What is Model Council?.
+Comet — Perplexity browses the web and completes browser tasks for you. See Getting Started with Comet.
+Perplexity Computer — Assign long-running work to an autonomous agent that can research, code, create documents, and use connected tools. Requires an active subscription and available credits. See What is Computer?.
+Note
+Best is not a separate mode. It is the automatic model option inside Search: Best picks a suitable model for each query so you don’t have to.
+On the Free plan you can use Best and a limited number of Pro Searches, but you can’t choose an advanced Search model manually. Paid plans can select models as shown below, subject to usage limits. For per-plan limits, see Which Perplexity Subscription Plan is right for you?.
+Advanced models available in Search
+The tables below apply to Search, not Computer. Computer has its own model selector and availability rules.
+To change the model for a search, see How do I change to my preferred AI model?.
+Pro and Max plans
+Model
+Provider
+Pro
+Max
+GPT-6.1 Sol
+OpenAI
+Yes
+Yes
+GPT-6 Astra
+OpenAI
+No
+Yes
+Gemini 4 Carbon
+Google
+No
+Yes
+Gemini 3.8 Flash
+Google
+Yes
+Yes
+Claude Sonnet 5.5
+Anthropic
+Yes
+Yes
+Claude Opus 5.5
+Anthropic
+No
+Yes
+Claude Fable 5.2
+Anthropic
+No
+Yes
+Kimi K3
+Moonshot AI
+Yes
+Yes
+GLM 5.3
+Z.ai
+Yes
+Yes
+Grok 4.7
+xAI
+Yes
+Yes
+Nemotron 3.5 Super VL
+NVIDIA
+Yes
+Yes
+Table 1 — Search models on the Pro and Max plans, as of November 11, 2026.
+For what the top consumer tier adds beyond model access, see Perplexity Max.
+Enterprise Pro and Enterprise Max plans
+Model
+Provider
+Enterprise Pro
+Enterprise Max
+GPT-6.1 Sol
+OpenAI
+Yes
+Yes
+GPT-6 Astra
+OpenAI
+No
+Yes
+Gemini 4 Carbon
+Google
+No
+Yes
+Gemini 3.8 Flash
+Google
+Yes
+Yes
+Claude Sonnet 5.5
+Anthropic
+Yes
+Yes
+Claude Opus 5.5
+Anthropic
+No
+Yes
+Claude Fable 5.2
+Anthropic
+No
+Yes
+Kimi K3
+Moonshot AI
+Yes
+Yes
+GLM 5.3
+Z.ai
+Yes
+Yes
+Grok 4.7
+xAI
+Yes
+Yes
+Nemotron 3.5 Super VL
+NVIDIA
+Yes
+Yes
+Table 2 — Search models on the Enterprise Pro and Enterprise Max plans, as of November 11, 2026.
+For government organizations, Search offers leading models from American frontier labs. Availability depends on your plan and your organization’s settings.
+For the difference between the two Enterprise tiers, see What is Enterprise Max?.
+Important
+Both tables show standard plan availability. Trials, promotional allowances, staged rollouts, regional requirements, and Enterprise organization settings can make your model selector look different from the tables above.
+If your Enterprise list is shorter than the table
+Your organization administrator can restrict model providers or individual models. Regional requirements and data-retention settings may also make your list shorter. If a model you expect is missing, contact your organization administrator.
+Administrators can find these controls in Enterprise Organization Permissions and Data Retention and Privacy for Enterprise Organizations and Users.
+What does the Thinking option do?
+Thinking gives a model more time to reason before answering. It can help with complex or multi-step questions, but it may take longer.
+Thinking is a setting on a model, not a separate model. When it is supported, the option appears with that model in your selector. Some reasoning-focused models use Thinking automatically.
+Models used by Model Council
+Model Council runs several models on the same question and synthesizes their answers. It is available on the Max and Enterprise Max plans on web.
+Model Council has its own model selection experience, and its available models may differ from the Search tables above. For current availability and instructions, see What is Model Council?.
+Models available in Comet
+Comet has its own model selection experience, and its available models may differ from the Search tables above. See Getting Started with Comet for current availability.
+On Enterprise plans, administrators can restrict Comet features. See Comet for Enterprise and Managing Comet Assistant permissions.
+Models available in Computer
+Computer has its own model selector and availability rules, separate from Search. For current availability, see What is Computer?.
+Computer tasks use credits. See How Credits Work on Perplexity, or, on an Enterprise plan, How Credits Work for Enterprise Organizations — Member Guide and Computer for Enterprise.
+How should I choose a model?
+Start with Best for everyday questions.
+Turn on Thinking for complex reasoning, planning, coding, or multi-step analysis.
+Use Deep Research when you want a full report rather than a single answer.
+Use Model Council when comparing several model perspectives matters.
+The most reliable way to find your preference is to run the same query across a few models and compare.
+Frequently asked questions
+Will the models available to me change?
+Yes. Models are subject to change: Perplexity adds new models as providers release them and retires older ones, so the list in your model selector won’t stay fixed. Your selector always reflects what is currently available on your plan.
+Are third-party models the same as using the provider’s own app?
+No. Perplexity integrates these models with its own search, citations, tools, prompts, safety systems, and usage limits. As a result, a model in Perplexity can behave differently from the same model in the provider’s standalone product.
+Does my subscription include API access?
+No. Perplexity API usage and billing are separate from every subscription plan, and the API has its own model catalog. See API settings and API Payment and billing.
+Will my queries be used to train these models?
+For consumer Perplexity Pro and Perplexity Max plans, you can opt out of AI training data collection. See Data Collection at Perplexity for more information.
+For customers on Perplexity Enterprise plans, data is never used to train AI models. See Data Retention and Privacy for Enterprise Organizations and Users for additional details.
+Why can I not see a model listed here?
+Your plan, a staged rollout, or your region may not include it yet. On an Enterprise plan, your organization administrator may also have turned off that provider. Contact your administrator to check.
+Need more help?
+Contact us via Help > Contact Support. Pro subscribers can access live chat in Settings. On an Enterprise plan, you can also reach out to your account team.
+Last modified on November 11, 2026
+AI Models & Content Generation
+Perplexity’s default model and how it compares to Pro
+⌘ I

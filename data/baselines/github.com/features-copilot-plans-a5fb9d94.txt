@@ -1,0 +1,574 @@
+url: https://github.com/features/copilot/plans
+method: browser
+saved: 2026-11-14
+
+Skip to content
+GitHub Universe 2026
+Catch up on all that was announced.
+See what's new
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+Take flight with GitHub Copilot
+Pricing plans
+For individuals
+For businesses
+Free
+For getting started with GitHub Copilot.
+$
+0
+USD
+Get started
+Open in VS Code
+What's included:
+2,000 completions per month
+Access to Haiku 4.5, GPT-5 mini, and more
+Community Support
+Access to Copilot Fusion Standard
+No credit card required. Verified students have access to the GitHub Copilot Student plan. Learn more
+Pro
+For everyday coding with agents in GitHub Copilot.
+$
+10
+USD
+per user / month
+Get started
+Everything in Free and:
+Access to Copilot in the cloud and code review1
+Unlimited code completion and next edit suggestions2
+Access to 3rd party agents (Claude Code and Codex)
+Model selection
+$15 monthly total credits for Pro3
+Pro+
+For more complex development with premium models.
+$
+39
+USD
+per user / month
+Get started
+Everything in Pro and:
+Access to premium models, including Opus
+Audit logs
+4x+ included usage than Pro
+$70 monthly total credits for Pro+3
+Access to Copilot Fusion Standard, High, and Max
+Max
+For sustained, high-volume agent workflows with GitHub Copilot.
+$
+100
+USD
+per user / month
+Get started
+Everything in Pro+ and:
+Priority access to new models and features
+2.9x+ included usage than Pro+
+$200 monthly total credits for Max3
+BEST VALUE
+GitHub Copilot is available on your favorite platforms:
+GitHub
+GitHub
+VS Code
+VS Code
+Visual Studio
+Visual Studio
+Xcode
+Xcode
+JetBrains
+IDEs
+JetBrains IDEs
+Neovim
+Neovim
+Eclipse
+Eclipse
+Raycast
+Raycast
+SQL Server
+Management Studio
+SQL Server Management Studio
+Zed
+Zed
+Compare features
+Pricing plans
+Free
+$0
+Get started
+Pro
+$10 per month
+Get started
+Pro+
+$39 per month
+Get started
+Max
+$100 per month
+Get started
+GitHub AI Credits
+Total GitHub AI Credits
+Credits used when interacting with Copilot features. Agent mode, code review, Copilot in the cloud, Copilot CLI, and Copilot app consume GitHub AI Credits. Free plan supports CLI and agent mode. Learn more
+Limited chat and agent usage
+$15 per month
+$70 per month
+$200 per month
+Base credits
+Limited chat and agent usage
+$10 per month
+$39 per month
+$100 per month
+Flex allotment
+Variable additional usage on top of your base. Flex allotments may change over time.
+Not included
+$5 per month
+$31 per month
+$100 per month
+Pooled usage
+Included AI credits are shared org-wide with admin controls for spending.
+Not included
+Not included
+Not included
+Not included
+Purchase additional GitHub AI Credits4
+Not included
+Included
+Included
+Included
+Supported environments
+Editors and IDEs
+See all the supported editors
+Included
+Included
+Included
+Included
+CLI
+Included
+Included
+Included
+Included
+GitHub (including github.com and GitHub Mobile)
+Included
+Included
+Included
+Included
+Agent mode
+Agent mode use in VS Code, Visual Studio, JetBrains, Eclipse, and Xcode
+Included
+Included
+Included
+Included
+Integrates with MCP servers
+Included
+Included
+Included
+Included
+Custom instructions and agents
+Included
+Included
+Included
+Included
+App modernization for Java and .NET
+Not included
+Included
+Included
+Included
+Assign work to Copilot and it creates a pull request
+Not included
+Included
+Included
+Included
+Code review
+Pull request reviews in GitHub5
+Not included
+Included
+Included
+Included
+File diff reviews in code editors
+Not included
+Included
+Included
+Included
+Custom instructions with instructions.md
+Not included
+Included
+Included
+Included
+Copilot in the cloud
+Assign work to Copilot to research, plan, and write code — with or without a pull request
+Not included
+Included
+Included
+Included
+Delegate tasks to third-party coding agents like Claude by Anthropic and OpenAI Codex (Preview)
+Not included
+Not included
+Included
+Included
+Start and track issues from agents page or panel
+Not included
+Included
+Included
+Included
+Start and track issues from code editors
+Not included
+Included
+Included
+Included
+Start and track issues from third-party project management tools
+Not included
+Included
+Included
+Included
+Integrates with MCP servers
+Not included
+Included
+Included
+Included
+Custom instructions and agents
+Not included
+Included
+Included
+Included
+Copilot CLI
+Use Copilot from your terminal
+Included
+Included
+Included
+Included
+Delegate tasks to coding agents
+Included
+Included
+Included
+Included
+Make and commit code changes locally or on GitHub
+Included
+Included
+Included
+Included
+Programmatic mode
+Included
+Included
+Included
+Included
+Copilot Fusion
+Fusion Standard
+Everyday work. Copilot Fusion selects one model for each task.
+Included
+Included
+Included
+Included
+Fusion High
+Substantial, well-scoped coding tasks, such as fixing a complex bug or making a change across several files, when additional model calls may be worth the extra time and AI credits.
+Not included
+Not included
+Included
+Included
+Fusion Max
+Tasks requiring the deepest possible reasoning and most thorough analysis.
+Not included
+Not included
+Included
+Included
+Fusion Fast
+Not selectable by users. Only available in Visual Studio Code inline chat.
+Included
+Included
+Included
+Included
+Models in Copilot
+Available models
+Agent mode, code review, coding agent, Copilot CLI, and Copilot Chat use AI Credits, with usage varying by model. Model options may vary by feature. Learn more about AI Credits
+Anthropic Claude Fable 5
+Anthropic Claude Fable 5.1
+Anthropic Claude Fable 5.2
+Anthropic Claude Haiku 4.5
+Anthropic Claude Haiku 5.5
+Anthropic Claude Sonnet 4
+Anthropic Claude Sonnet 4.6
+Anthropic Claude Sonnet 5
+Anthropic Claude Sonnet 5.5
+Anthropic Claude Opus 4.8
+Anthropic Claude Opus 4.8 (fast mode) (Preview)
+Anthropic Claude Opus 5
+Anthropic Claude Opus 5.5
+OpenAI GPT-5 mini
+OpenAI GPT-5.2
+OpenAI GPT-5.2-Codex
+OpenAI GPT-5.3-Codex
+OpenAI GPT-5.4
+OpenAI GPT-5.4 mini
+OpenAI GPT-5.5
+OpenAI GPT-5.6 Sol
+OpenAI GPT-5.6 Terra
+OpenAI GPT-5.6 Luna
+OpenAI GPT-6 Astra
+OpenAI GPT-6 Luna
+OpenAI GPT-6 Sol
+OpenAI GPT-6.1 Sol
+OpenAI GPT-6.1 Terra
+Microsoft MAI-Code-1.1-Flash
+Google Gemini 3.7 Flash
+Google Gemini 3.8 Flash
+Google Gemini 4 Argon
+Google Gemini 4 Carbon
+Google Gemini 4 Hydrogen
+xAI Grok 4.5
+xAI Grok 4.6
+xAI Grok 4.7
+Kimi K3
+Anthropic Claude Fable 5
+Anthropic Claude Fable 5.1
+Anthropic Claude Fable 5.2
+Anthropic Claude Haiku 4.5
+Anthropic Claude Haiku 5.5
+Anthropic Claude Sonnet 4
+Anthropic Claude Sonnet 4.6
+Anthropic Claude Sonnet 5
+Anthropic Claude Sonnet 5.5
+Anthropic Claude Opus 4.8
+Anthropic Claude Opus 4.8 (fast mode) (Preview)
+Anthropic Claude Opus 5
+Anthropic Claude Opus 5.5
+OpenAI GPT-5 mini
+OpenAI GPT-5.2
+OpenAI GPT-5.2-Codex
+OpenAI GPT-5.3-Codex
+OpenAI GPT-5.4
+OpenAI GPT-5.4 mini
+OpenAI GPT-5.5
+OpenAI GPT-5.6 Sol
+OpenAI GPT-5.6 Terra
+OpenAI GPT-5.6 Luna
+OpenAI GPT-6 Astra
+OpenAI GPT-6 Luna
+OpenAI GPT-6 Sol
+OpenAI GPT-6.1 Sol
+OpenAI GPT-6.1 Terra
+Microsoft MAI-Code-1.1-Flash
+Google Gemini 3.7 Flash
+Google Gemini 3.8 Flash
+Google Gemini 4 Argon
+Google Gemini 4 Carbon
+Google Gemini 4 Hydrogen
+xAI Grok 4.5
+xAI Grok 4.6
+xAI Grok 4.7
+Kimi K3
+Anthropic Claude Fable 5
+Anthropic Claude Fable 5.1
+Anthropic Claude Fable 5.2
+Anthropic Claude Haiku 4.5
+Anthropic Claude Haiku 5.5
+Anthropic Claude Sonnet 4
+Anthropic Claude Sonnet 4.6
+Anthropic Claude Sonnet 5
+Anthropic Claude Sonnet 5.5
+Anthropic Claude Opus 4.8
+Anthropic Claude Opus 4.8 (fast mode) (Preview)
+Anthropic Claude Opus 5
+Anthropic Claude Opus 5.5
+OpenAI GPT-5 mini
+OpenAI GPT-5.2
+OpenAI GPT-5.2-Codex
+OpenAI GPT-5.3-Codex
+OpenAI GPT-5.4
+OpenAI GPT-5.4 mini
+OpenAI GPT-5.5
+OpenAI GPT-5.6 Sol
+OpenAI GPT-5.6 Terra
+OpenAI GPT-5.6 Luna
+OpenAI GPT-6 Astra
+OpenAI GPT-6 Luna
+OpenAI GPT-6 Sol
+OpenAI GPT-6.1 Sol
+OpenAI GPT-6.1 Terra
+Microsoft MAI-Code-1.1-Flash
+Google Gemini 3.7 Flash
+Google Gemini 3.8 Flash
+Google Gemini 4 Argon
+Google Gemini 4 Carbon
+Google Gemini 4 Hydrogen
+xAI Grok 4.5
+xAI Grok 4.6
+xAI Grok 4.7
+Kimi K3
+Anthropic Claude Fable 5
+Anthropic Claude Fable 5.1
+Anthropic Claude Fable 5.2
+Anthropic Claude Haiku 4.5
+Anthropic Claude Haiku 5.5
+Anthropic Claude Sonnet 4
+Anthropic Claude Sonnet 4.6
+Anthropic Claude Sonnet 5
+Anthropic Claude Sonnet 5.5
+Anthropic Claude Opus 4.8
+Anthropic Claude Opus 4.8 (fast mode) (Preview)
+Anthropic Claude Opus 5
+Anthropic Claude Opus 5.5
+OpenAI GPT-5 mini
+OpenAI GPT-5.2
+OpenAI GPT-5.2-Codex
+OpenAI GPT-5.3-Codex
+OpenAI GPT-5.4
+OpenAI GPT-5.4 mini
+OpenAI GPT-5.5
+OpenAI GPT-5.6 Sol
+OpenAI GPT-5.6 Terra
+OpenAI GPT-5.6 Luna
+OpenAI GPT-6 Astra
+OpenAI GPT-6 Luna
+OpenAI GPT-6 Sol
+OpenAI GPT-6.1 Sol
+OpenAI GPT-6.1 Terra
+Microsoft MAI-Code-1.1-Flash
+Google Gemini 3.7 Flash
+Google Gemini 3.8 Flash
+Google Gemini 4 Argon
+Google Gemini 4 Carbon
+Google Gemini 4 Hydrogen
+xAI Grok 4.5
+xAI Grok 4.6
+xAI Grok 4.7
+Kimi K3
+Additional features
+Inline suggestions
+2,000 per month
+Unlimited
+Unlimited
+Unlimited
+Copilot Spaces
+Included
+Included
+Included
+Included
+Policies and management
+Public code filter with code referencing
+Included
+Included
+Included
+Included
+Enterprise-grade security
+Not included
+Not included
+Not included
+Not included
+IP indemnity
+Not included
+Not included
+Not included
+Not included
+User management in github.com
+Not included
+Not included
+Not included
+Not included
+Usage metrics
+Not included
+Not included
+Not included
+Not included
+SAML SSO authentication6
+Not included
+Not included
+Not included
+Not included
+GETTING STARTED
+Start using Copilot in your favorite platforms
+GitHub
+VS Code
+Visual Studio
+Xcode
+JetBrains IDEs
+Neovim
+Eclipse
+Raycast
+SQL Server Management Studio
+Zed
+Need human help? Let’s define how to propel your team into a new era.
+Contact sales
+Frequently asked questions
+GENERAL
+PLANS & PRICING
+PRIVACY
+RESPONSIBLE AI
+GENERAL
+What is GitHub Copilot?
+GitHub Copilot is an AI coding agent that helps you write, understand, and ship software. It helps you across every step of the software development lifecycle including exploring your codebase, planning your project, automating your workflows, reviewing your changes, and resolving merge conflicts.
+Because Copilot is built into GitHub, it works within the development workflow you already use:
+Your code and its history.
+The issues and pull requests you already use to track work.
+The automations you run in your repository.
+A change can start as an issue, be picked up by an agent, return as a pull request, get reviewed for quality and security, and be merged. You and Copilot work on it in the same place, with the same context, instead of moving code into separate tools and back again.
+What languages, IDEs, and surfaces does GitHub Copilot support?
+How can I get started using GitHub Copilot?
+You can find a plethora of resources on GitHub Docs including quickstart guides for multiple surfaces and best practices. Our community has built Awesome GitHub Copilot to share reusable agents, skills, instructions, hooks, and tools built by developers to help you ship faster with Copilot. You can also find tutorials and YouTube videos to help you get started today!
+Footnotes
+Code review will incur Actions usage.
+Response times may vary during periods of high usage. Requests may be subject to rate limiting.
+Flex allotments will vary over time.
+Users who purchase Copilot Pro, Pro+, or Max through GitHub Mobile in-app purchase (IAP) can’t buy additional AI credits through GitHub Mobile.
+Runs on GitHub Actions and consumes Actions minutes.
+Authentication with SAML single sign-on (SSO) available for organizations using GitHub Enterprise Cloud.
+Site-wide Links
+THE DEVELOPER NEWSLETTER
+Get tips, technical guides, and best practices. Twice a month. Right in your inbox.
+Subscribe
+PRODUCTS
+GitHub
+Actions
+Code Quality
+Copilot
+Codespaces
+Code Security
+Secret Protection
+Pricing
+Team
+Resources
+Roadmap
+Compare GitHub
+All Features
+DEVELOPERS
+Developer API
+Education
+GitHub CLI
+GitHub Desktop
+GitHub Mobile
+Integrations
+MCP Registry
+Training
+Build with Copilot
+SUPPORT
+Docs
+Community Forum
+Professional Services
+Premium Support
+GitHub Status
+Contact GitHub
+Sitemap
+COMPANY
+About
+Why GitHub
+Customer Stories
+Blog
+Careers
+Inclusion
+Partners
+Social Impact
+Shop
+What is Git?
+© 2026 GITHUB, INC.
+TERMS
+PRIVACY
+MANAGE COOKIES
+DO NOT SHARE MY PERSONAL INFORMATION
+GitHub on LinkedIn
+GitHub on Instagram
+GitHub on YouTube
+GitHub on X
+GitHub on TikTok
+GitHub on Twitch
+GitHub’s organization on GitHub
+English

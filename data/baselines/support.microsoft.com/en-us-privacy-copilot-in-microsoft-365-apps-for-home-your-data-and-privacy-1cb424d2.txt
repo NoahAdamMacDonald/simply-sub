@@ -1,0 +1,234 @@
+url: https://support.microsoft.com/en-us/privacy/copilot-in-microsoft-365-apps-for-home-your-data-and-privacy
+method: fetch
+saved: 2026-11-14
+
+Copilot in Microsoft 365 apps for home: your data and privacy | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Copilot in Microsoft 365 apps for home: your data and privacy
+Note
+This article applies only to when you're using Copilot in Microsoft 365 apps for home, such as with a Microsoft 365 Personal, Family, Premium, or Pro plan.
+By "for home" we mean when you're signed in with a Microsoft account. For example, a personal email address.
+For more information, see Frequently asked questions about Copilot in Microsoft 365 subscriptions.
+For information about privacy for the Microsoft Copilot app, see Microsoft Copilot for individuals: your data, privacy, and responsible AI.
+Copilot is your AI assistant designed to help you with a range of tasks and activities in Microsoft 365 apps. For example, in Word, PowerPoint, Excel, Outlook, or OneNote.
+Copilot in Microsoft 365 apps is covered by the Microsoft Services Agreement. For information about how Microsoft uses your personal data, see the Microsoft Privacy Statement.
+Your data and Copilot
+A "prompt" is what you ask Copilot to help you with; the answer Copilot provides is a "response." Your "activity history" is the record of those prompts and responses.
+Copilot only makes use of the content in the file that you're working in or content in another file that you ask it to look at. For example, when you ask Copilot to help you rewrite a paragraph in a Word document or when you ask Copilot to generate a to-do list from your notes in OneNote.
+Important
+Prompts, responses, and your file contents when using Copilot in Microsoft 365 apps aren't used to train foundation models.
+We may use customer feedback, which is optional, to improve Copilot in Microsoft 365 apps, just like we use customer feedback to improve other Microsoft 365 services and Microsoft 365 productivity apps. We don't use this feedback to train the foundation models used by Copilot in Microsoft 365 apps. For more information, see Providing feedback about Microsoft Copilot with Microsoft 365 apps.
+Your personal data collected from the use of connected experiences in Microsoft 365 isn’t used to train large language models (LLMs), including those used by Microsoft 365 Copilot.
+In some apps, you can see your activity history even after you close and reopen the app. For example, in Word, Excel, and PowerPoint on Windows, Mac, and mobile devices or when using the web versions of those apps. To export your activity history for Copilot, see Manage your Copilot activity history in the privacy dashboard.
+For some apps or on certain types of devices, Copilot doesn't show your activity history after you close and reopen the app. In those cases, every time you open an app, you're starting over again with Copilot.
+Your privacy settings and Copilot
+You can choose your privacy settings when you're using Microsoft 365 apps. Your ability to use Copilot features depends on these two settings:
+Experiences that analyze content
+All connected experiences
+If you turn off either of those settings, you can't use Copilot features in these apps:
+Excel
+OneNote
+Outlook
+PowerPoint
+Word
+This applies to when you're running the most current version of these apps on Windows, Mac, iOS, or Android devices.
+These settings also turn off other features that you might want to use. For more information, see Connected experiences in Microsoft 365.
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

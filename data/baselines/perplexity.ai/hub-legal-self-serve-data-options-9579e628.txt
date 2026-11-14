@@ -1,0 +1,127 @@
+url: https://www.perplexity.ai/hub/legal/self-serve-data-options
+method: fetch
+saved: 2026-11-14
+
+Self-Serve Data Options | Perplexity
+Products
+Business
+Customers
+Resources
+Pricing
+See a demoTry Perplexity
+Self-Serve Data Options
+Legal overview
+Platform User Terms
+Enterprise & Developer Terms
+Policies & Guidelines
+Privacy & Data Protection Perplexity Data Processing AddendumPerplexity Privacy NoticeSelf-Serve Data OptionsSub-Processor Notification SubscriptionThird-Party Models & Terms
+To submit a data privacy request directly to Perplexity, you can make your request in one of these ways:
+Option 1: Use self-service for data export or deletion (recommended)
+You can export or delete your data yourself from your account settings.
+To export your data:
+Sign in to your Perplexity account on the website.
+Go to https://www.perplexity.ai/account/details.
+Click Export my data.
+You will receive an email with a link to download your data.
+To delete your account and data:
+Important: Please cancel any active subscription before you delete your account, so you are not charged after deletion.
+Sign in to your Perplexity account.
+Go to https://www.perplexity.ai/account/details, or click the bottom-left corner and select My Account.
+Scroll to the bottom of the page and select Delete account / Learn more.
+Read the information in the pop-up window and confirm the deletion.
+Option 2: Submit the Data Request Form
+You may also submit a privacy request to our team using our Data Request Form.
+Below please find additional detailed instructions on how you can delete various types of data available in your account.
+How to delete local Comet data
+Open Comet → Settings → Privacy and security → Delete browsing data.
+Select a time range.
+Select the data types you want to remove.
+Confirm deletion.
+This action clears only local data. It does not affect your Perplexity account or synced settings.
+Curious what gets stored locally? Find a full overview of local data storage here.
+Deleting your Perplexity account completely
+IMPORTANT: Please cancel your Perplexity subscription before deleting your account to avoid charges after deletion.
+You have two ways to delete your account fully.
+Delete Perplexity account yourself
+You can initiate data deletion directly from your account settings, without the need to contact support or submit a separate request.
+All account and personal data will be permanently deleted after 30 days. During this period, the account remains disabled and scheduled for erasure.
+After 30 days the account deletion is irreversible.
+If you sign in again using the same email after 30 days, a new, empty account will be created, and your previous data will not be restored.
+If you sign into your account using the same email before the 20 days, your request to delete your account will be automatically cancelled.
+Steps on how to delete the account:
+Sign into the account using the perplexity.ai website and visit https://www.perplexity.ai/account/details or click the bottom left corner and then select My Account.
+Scroll to the bottom of the page to find Learn more.
+A pop up will appear and you will be able to confirm the deletion process.
+Request Perplexity account deletion
+We recognize you may prefer us to handle deletion or are exercising your data privacy rights, in line with GDPR’s right to erasure and similar regulations.
+Go to the Data Privacy Request form.
+Select “Erase my personal data” when prompted.
+How can I stop account deletion?
+If you want to stop the deletion process, simply sign back into your account within 20 days of initiating it. This will prevent your account from being deleted. After 30 days, the account deletion is irreversible.
+Deleting your Perplexity data
+Deleting all your threads
+If you want to remove all content from the threads in your account without deleting your account:
+Visit https://www.perplexity.ai/library.
+Click the more options icon […] (three dots) on the top right.
+Select “Delete all threads”. This action cannot be undone.
+Deleting specific threads
+To remove a single thread or specific post you’ve created:
+Visit https://www.perplexity.ai/library.
+Click the more options icon […] (three dots) beside the thread you want to delete. Alternatively, go into the thread in question, click the more options icon, and select “Delete” thread.
+Deleting a specific space
+Here’s how to delete Spaces or Pages, or individual threads:
+Click the Space or page you wish to delete.
+Click the three dots (…) next to the title and select Delete.
+Please note we will ask you to double check if you wish to delete the content. This action can’t be undone.
+Deleting a specific file or image
+Files are kept for 30 days by default. To delete uploads, delete the entire thread. Learn more about file retention here.
+For more information on how Perplexity handles your data, visit the Perplexity Help Center.
+Products
+Search
+Computer
+Teammates
+Comet
+API
+Deep Research
+Solutions
+By Size
+Enterprise
+By Industry
+Finance
+Legal
+Consulting
+Healthcare
+Tech
+Government
+Education
+E-commerce
+Advertising
+By Team
+Marketing
+Sales
+Product
+IT
+Pricing
+Pro
+Max
+Enterprise
+API
+Resources
+Blog
+Resource Hub
+Guides
+Customers
+Academy
+Workshops
+API docs
+Help center
+Research blog
+Security
+Trust center
+Company
+Careers
+Brand Guidelines
+Supply Store
+Privacy Policy
+Terms & Conditions
+Perplexity ©2026

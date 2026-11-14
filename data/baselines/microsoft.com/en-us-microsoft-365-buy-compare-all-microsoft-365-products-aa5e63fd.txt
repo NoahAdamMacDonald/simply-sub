@@ -1,0 +1,701 @@
+url: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+method: fetch
+saved: 2026-11-14
+
+Compare Microsoft 365 Plans & Pricing (Formerly Office 365) - Microsoft Store
+This is the Trace Id: c848fb75a0ddccc04c0c1990ca026fc1
+Skip to main content
+Microsoft 365
+Explore Microsoft 365 apps
+Pricing for individuals
+Microsoft 365 Personal
+Microsoft 365 Family
+Microsoft 365 Premium
+Microsoft 365 Pro
+Student discount pricing
+Pricing for business
+Microsoft 365 Business Standard with Copilot
+Microsoft 365 Business Premium with Copilot
+For small business
+For schools
+For government
+Pricing for enterprise
+Microsoft 365 E3
+Microsoft 365 E5
+Microsoft 365 E7
+For enterprise
+For frontline workers
+For nonprofits
+For government
+Pricing for Copilot
+Explore Copilot
+Microsoft Teams
+Word
+Excel
+PowerPoint
+Outlook
+OneDrive
+SharePoint
+Planner
+See all apps and services
+Microsoft Office
+Windows 365
+Microsoft Viva
+Microsoft Edge
+Microsoft Agent 365
+Plans and pricing
+Customer stories
+Trust Center
+What's new
+Blog and community
+Frontier program
+Product Roadmap
+Getting started
+Learning Center
+Templates
+Rollout and adoption
+Setup and install
+Deployment assistance
+Self-help resources
+Billing support
+Community
+Contact Microsoft Support
+FAQ
+Self-help resources
+Admin self-help
+Support plans
+Find a partner
+Contact Sales
+Community
+Self-help resources
+Account management
+Educator Center
+Community
+Contact Microsoft Support
+Request support
+FAQ
+Become a partner
+Partner resources
+See all support
+Buy now
+See how Copilot powers everything you do in Microsoft 365. Discover more
+Limited-time offer
+Save 30% and get more from Microsoft 365
+Start with Microsoft 365 Premium, now $19.99 $13.99 for your first month, and bring together powerful productivity apps with Copilot, extensive AI usage and exclusive features,1 and advanced security—all in one plan. Terms apply.*
+Get offer
+For individuals
+For business
+Paid yearly
+Paid monthly
+Limited-time offer
+Microsoft 365 Personal
+$9.99 $6.99/first month
+$99.99 $69.99/first year
+Microsoft 365 Personal includes:
+For 1 person
+Sign into 5 devices at once
+Use on PCs, Macs, phones & tablets1,2
+1 TB of secure cloud storage
+Word, Excel,3 PowerPoint, Outlook and OneNote desktop apps with Microsoft Copilot1
+Advanced Copilot1 chat with higher usage than free
+Higher usage than free for visual AI assistance from your screen or camera1
+Higher usage than free for AI-generated audio (English only)1
+Use Copilot in select apps with work files in a secure way4
+Higher usage than free for AI image creation in Copilot1
+Identity,5 data, and device security
+All-day video calling and Copilot1 in Teams
+Get offer
+Get offer
+$99.99</span> $69.99/first year" data-bi-ecn="Or buy at" data-bi-ct="cta" data-bi-pa="body" class="text-break-keep-all cta my-0 font-weight-semibold modal-trigger" data-target-uri="#PersonalAnnualPaidMonthly" data-bi-bhvr="81" data-automation-test-id="cta-" data-bi-sku="007R" data-bi-ehn="Microsoft 365 Personal" data-bi-pid="cfq7ttc0k5bf" data-bi-prdname="Microsoft 365 Personal" data-bi-rpid="Yearly" data-bi-hn="Microsoft 365 Personal" data-bi-compnm="Compare Chart: Block Style" data-original-text="Or <span class="striked-original-price">$99.99</span> $69.99/first year" role="button" data-target="#PersonalAnnualPaidMonthly" aria-label="Buy yearly subscription to Microsoft 365 Personal now." target="_self" href="#PersonalAnnualPaidMonthly">
+Or $99.99 $69.99/first year
+$9.99</span> $6.99/first month" data-bi-ecn="Or <span class="striked-original-price">$9.99</span> $6.99/first month" data-bi-ct="cta" data-bi-pa="body" class="text-break-keep-all cta my-0 font-weight-semibold modal-trigger" data-target-uri="#PersonalMonthlyPaidYearly" data-bi-bhvr="81" data-automation-test-id="cta-" data-bi-sku="007Q" data-bi-ehn="Microsoft 365 Personal" data-bi-pid="cfq7ttc0k5bf" data-bi-prdname="Microsoft 365 Personal" data-bi-rpid="Monthly" data-bi-hn="Microsoft 365 Personal" data-bi-compnm="Compare Chart: Block Style" data-original-text="Or <span class="striked-original-price">$9.99</span> $6.99/first month" role="button" data-target="#PersonalMonthlyPaidYearly" aria-label="Buy monthly subscription to Microsoft 365 Personal now." target="_self" href="#PersonalMonthlyPaidYearly">
+Or $9.99 $6.99/first month
+Try free for 1 month
+Microsoft 365 Family
+$12.99/month
+$129.99/year
+Everything in Microsoft 365 Personal, plus:
+For 1 to 6 people (AI for subscription owner only)
+Each person can use on up to 5 devices simultaneously
+2 TB of shared, secure cloud storage
+Buy now
+Buy now
+Or buy at $129.99/year
+Or buy at $12.99/month
+Try free for 1 month
+Limited-time offer
+Microsoft 365 Premium
+$19.99 $13.99/first month
+$199.99 $139.99/first year
+Everything in Microsoft 365 Family, plus:
+Advanced Copilot1 chat with extensive usage
+Extensive usage for visual AI assistance from your screen or camera1
+Extensive usage for AI-generated audio (English only)1
+Agentic AI features that get things done for you, including advanced research and analytics1
+Extensive usage for AI image creation in Copilot1
+Get offer
+Get offer
+$199.99</span> $139.99/first year" data-bi-ecn="Or <span class="striked-original-price">$199.99</span> $139.99/first year" data-bi-ct="cta" data-bi-pa="body" class="text-break-keep-all cta my-0 font-weight-semibold modal-trigger" data-target-uri="#PremiumAnnualPaidMonthly" data-bi-bhvr="81" data-automation-test-id="cta-" data-bi-sku="0003" data-bi-ehn="Microsoft 365 Premium" data-bi-pid="cfq7ttc11z3q" data-bi-prdname="Microsoft 365 Premium" data-bi-rpid="Yearly" data-bi-hn="Microsoft 365 Premium" data-bi-compnm="Compare Chart: Block Style" data-original-text="Or <span class="striked-original-price">$199.99</span> $139.99/first year" role="button" data-target="#PremiumAnnualPaidMonthly" aria-label="Buy yearly subscription to Microsoft 365 Premium now." target="_self" href="#PremiumAnnualPaidMonthly">
+Or $199.99 $139.99/first year
+$19.99</span> $13.99/first month" data-bi-ecn="Or <span class="striked-original-price">$19.99</span> $13.99/first month" data-bi-ct="cta" data-bi-pa="body" class="text-break-keep-all cta my-0 font-weight-semibold modal-trigger" data-target-uri="#PremiumMonthlyPaidYearly" data-bi-bhvr="81" data-automation-test-id="cta-" data-bi-sku="0005" data-bi-ehn="Microsoft 365 Premium" data-bi-pid="cfq7ttc11z3q" data-bi-prdname="Microsoft 365 Premium" data-bi-rpid="Monthly" data-bi-hn="Microsoft 365 Premium" data-bi-compnm="Compare Chart: Block Style" data-original-text="Or <span class="striked-original-price">$19.99</span> $13.99/first month" role="button" data-target="#PremiumMonthlyPaidYearly" aria-label="Buy monthly subscription to Microsoft 365 Premium now." target="_self" href="#PremiumMonthlyPaidYearly">
+Or $19.99 $13.99/first month
+Try free for 1 month
+Limited-time offer and 1 month trial cannot be combined. Subscription automatically renews at the regular price unless cancelled in Microsoft account. See terms.
+Already have a subscription?
+Renew now
+Explore even more benefits of Microsoft 365
+Powerful productivity apps with AI
+Streamline your day with desktop versions of apps like Word, Excel, PowerPoint, Outlook, and OneNote with Microsoft Copilot.1
+Simplify your online security
+Keep you and your family safer online with continuous monitoring for threats, real-time alerts, tips, and expert guidance from Microsoft Defender.
+Trusted storage for priceless memories
+Quickly save, share, and edit your photos and files with OneDrive and Microsoft 365.
+Make the most of your day
+With Outlook as command central, you can spend less time organizing your life and more time enjoying it.
+All your ideas in one place
+Capture inspiration in text, audio, photos, and videos to create your next big idea with OneNote.
+All-day video calling
+Join group calls and talk for up to 30 hours with up to 300 people with Microsoft Teams.
+Compare Microsoft 365 with Office
+Limited-time offer
+Microsoft 365 Personal
+Subscription
+$99.99 $69.99/first year
+Get offer
+$9.99</span> $6.99/first month" data-bi-ecn="Or <span class="striked-original-price">$9.99</span> $6.99/first month" data-bi-ct="cta" data-bi-pa="body" class=" cta my-0 font-weight-semibold modal-trigger" data-target-uri="#PersonalMonthlyCompareChart" data-bi-bhvr="81" data-automation-test-id="cta-" data-bi-sku="007Q" data-bi-ehn="Microsoft 365 Personal" data-bi-pid="cfq7ttc0k5bf" data-bi-prdname="Microsoft 365 Personal" data-bi-rpid="Monthly" data-bi-hn="Microsoft 365 Personal" data-bi-compnm="Compare Chart: Block Style" data-original-text="Or <span class="striked-original-price">$9.99</span> $6.99/first month" role="button" data-target="#PersonalMonthlyCompareChart" aria-label="Buy monthly subscription to Microsoft 365 Personal now." target="_self" href="#PersonalMonthlyCompareChart">
+Or $9.99 $6.99/first month
+Try free for 1 month
+Microsoft 365 Family
+Subscription
+$129.99/year
+Buy now
+Or buy at $12.99/month
+Try free for 1 month
+Limited-time offer
+Microsoft 365 Premium
+Subscription
+$199.99 $139.99/first year
+Get offer
+$19.99</span> $13.99/first month" data-bi-ecn="Or <span class="striked-original-price">$19.99</span> $13.99/first month" data-bi-ct="cta" data-bi-pa="body" class=" cta my-0 font-weight-semibold modal-trigger" data-target-uri="#PremiumMonthlyCompareChart" data-bi-bhvr="81" data-automation-test-id="cta-" data-bi-sku="0005" data-bi-ehn="Microsoft 365 Premium" data-bi-pid="cfq7ttc11z3q" data-bi-prdname="Microsoft 365 Premium" data-bi-rpid="Monthly" data-bi-hn="Microsoft 365 Premium" data-bi-compnm="Compare Chart: Block Style" data-original-text="Or <span class="striked-original-price">$19.99</span> $13.99/first month" role="button" data-target="#PremiumMonthlyCompareChart" aria-label="Buy monthly subscription to Microsoft 365 Premium now." target="_self" href="#PremiumMonthlyCompareChart">
+Or $19.99 $13.99/first month
+Try free for 1 month
+Office Home 2024
+One-time purchase for PC or Mac
+$179.99
+Buy now
+Microsoft 365 Personal
+Buy now for $69.99/year
+Try free for 1 month
+Microsoft 365 Family
+Buy now for $129.99/year
+Try free for 1 month
+Microsoft 365 Premium
+Buy now for $139.99/year
+Try free for 1 month
+Office Home 2024
+buy now for $179.99
+Microsoft 365 Personal
+Microsoft 365 Family
+Microsoft 365 Premium
+Office Home 2024
+Microsoft 365 Personal
+Microsoft 365 Family
+Microsoft 365 Premium
+Office Home 2024
+Seamless access, storage, and security
+<span class="h6 mb-0">Seamless access, storage, and security</span>
+<span class="h6 mb-0">Seamless access, storage, and security</span>
+<span class="h6 mb-0">Seamless access, storage, and security</span>
+<span class="h6 mb-0">Seamless access, storage, and security</span>
+Number of users (unique accounts)
+Number of users (unique accounts)
+1 person
+Number of users (unique accounts)
+1 to 6 people
+Number of users (unique accounts)
+1 to 6 people
+Number of users (unique accounts)
+1 PC or Mac
+OneDrive cloud storage
+OneDrive cloud storage
+1 TB
+OneDrive cloud storage
+2 TB
+OneDrive cloud storage
+2 TB
+OneDrive cloud storage
+Free 5 GB with a Microsoft account
+OneDrive ransomware protection
+OneDrive ransomware protection
+Included
+OneDrive ransomware protection
+Included
+OneDrive ransomware protection
+Included
+OneDrive ransomware protection
+Advanced security with Microsoft Defender
+Advanced security with Microsoft Defender
+Included
+Advanced security with Microsoft Defender
+Included
+Advanced security with Microsoft Defender
+Included
+Advanced security with Microsoft Defender
+Use on up to 5 devices (Accessible on PCs, Macs, phones & tablets)1,2
+Use on up to 5 devices (Accessible on PCs, Macs, phones &amp; tablets)<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#2footnote" id="2" aria-label="Footnote 2">2</a></sup>
+Included
+Use on up to 5 devices (Accessible on PCs, Macs, phones &amp; tablets)<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#2footnote" id="2" aria-label="Footnote 2">2</a></sup>
+Included
+Use on up to 5 devices (Accessible on PCs, Macs, phones &amp; tablets)<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#2footnote" id="2" aria-label="Footnote 2">2</a></sup>
+Included
+Use on up to 5 devices (Accessible on PCs, Macs, phones &amp; tablets)<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#2footnote" id="2" aria-label="Footnote 2">2</a></sup>
+1 PC or Mac
+Ongoing support for help when you need it
+Ongoing support for help when you need it
+Included
+Ongoing support for help when you need it
+Included
+Ongoing support for help when you need it
+Included
+Ongoing support for help when you need it
+Microsoft 365 Copilot (AI for account holder only)
+<span class="h6 mb-0">Microsoft 365 Copilot&nbsp;(AI for account holder only)</span>
+<span class="h6 mb-0">Microsoft 365 Copilot&nbsp;(AI for account holder only)</span>
+<span class="h6 mb-0">Microsoft 365 Copilot&nbsp;(AI for account holder only)</span>
+<span class="h6 mb-0">Microsoft 365 Copilot&nbsp;(AI for account holder only)</span>
+Advanced Copilot chat1
+Advanced Copilot chat<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Advanced Copilot chat<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Advanced Copilot chat<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Advanced Copilot chat<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Free version only
+Productivity apps with Copilot built-in1
+Productivity apps with Copilot built-in<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Productivity apps with Copilot built-in<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Productivity apps with Copilot built-in<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Productivity apps with Copilot built-in<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Overall usage amounts1
+Overall usage amounts<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Overall usage amounts<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Overall usage amounts<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Extensive
+Overall usage amounts<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Limited usage with a free Microsoft account
+AI-powered tools to draft, edit, and summarize documents and emails1
+AI-powered tools to draft, edit, and summarize documents and emails<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+AI-powered tools to draft, edit, and summarize documents and emails<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+AI-powered tools to draft, edit, and summarize documents and emails<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Extensive
+AI-powered tools to draft, edit, and summarize documents and emails<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Get powerful analysis and insights with Copilot in Excel1,3
+Get powerful analysis and insights with Copilot in Excel<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#3footnote" id="3" aria-label="Footnote 3">3</a></sup>
+Higher than free
+Get powerful analysis and insights with Copilot in Excel<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#3footnote" id="3" aria-label="Footnote 3">3</a></sup>
+Higher than free
+Get powerful analysis and insights with Copilot in Excel<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#3footnote" id="3" aria-label="Footnote 3">3</a></sup>
+Extensive
+Get powerful analysis and insights with Copilot in Excel<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a>,<a class="ms-rte-link" href="#3footnote" id="3" aria-label="Footnote 3">3</a></sup>
+Generate a presentation outline and format with Copilot in PowerPoint1
+Generate a presentation outline and format with Copilot in PowerPoint<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Generate a presentation outline and format with Copilot in PowerPoint<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Generate a presentation outline and format with Copilot in PowerPoint<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Extensive
+Generate a presentation outline and format with Copilot in PowerPoint<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Transform content into engaging listening experiences with AI-generated audio1
+Transform content into engaging listening experiences with AI-generated audio<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Transform content into engaging listening experiences with AI-generated audio<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Transform content into engaging listening experiences with AI-generated audio<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Extensive
+Transform content into engaging listening experiences with AI-generated audio<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Answer questions from your screen or camera with visual AI assistance1
+Answer questions from your screen or camera with visual AI assistance<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Answer questions from your screen or camera with visual AI assistance<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Higher than free
+Answer questions from your screen or camera with visual AI assistance<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Extensive
+Answer questions from your screen or camera with visual AI assistance<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+AI image generation1
+AI image generation<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a></sup>
+Higher than free
+AI image generation<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a></sup>
+Higher than free
+AI image generation<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a></sup>
+Extensive
+AI image generation<sup><a class="ms-rte-link" href="#1footnote" id="1" aria-label="Footnote 1">1</a></sup>
+Limited usage with a free Microsoft account
+Use Copilot in select apps with work files in a secure way4
+Use Copilot in select apps with work files in a secure way<sup><a aria-label="Footnote 4" id="4" href="#4footnote" class="ms-rte-link">4</a></sup>
+Included
+Use Copilot in select apps with work files in a secure way<sup><a aria-label="Footnote 4" id="4" href="#4footnote" class="ms-rte-link">4</a></sup>
+Included
+Use Copilot in select apps with work files in a secure way<sup><a aria-label="Footnote 4" id="4" href="#4footnote" class="ms-rte-link">4</a></sup>
+Included
+Use Copilot in select apps with work files in a secure way<sup><a aria-label="Footnote 4" id="4" href="#4footnote" class="ms-rte-link">4</a></sup>
+Preferred access to AI models during peak times
+Preferred access to AI models during peak times
+Included
+Preferred access to AI models during peak times
+Included
+Preferred access to AI models during peak times
+Included
+Preferred access to AI models during peak times
+Agentic AI for advanced research and analytics1
+Agentic AI for advanced research and analytics<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Agentic AI for advanced research and analytics<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Agentic AI for advanced research and analytics<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Included
+Agentic AI for advanced research and analytics<sup><a aria-label="Footnote 1" id="1" href="#1footnote" class="ms-rte-link">1</a></sup>
+Productivity apps
+<span class="h6 mb-0">Productivity apps</span>
+<span class="h6 mb-0">Productivity apps</span>
+<span class="h6 mb-0">Productivity apps</span>
+<span class="h6 mb-0">Productivity apps</span>
+Word
+Word
+Included
+Word
+Included
+Word
+Included
+Word
+Included
+Excel
+Excel
+Included
+Excel
+Included
+Excel
+Included
+Excel
+Included
+PowerPoint
+PowerPoint
+Included
+PowerPoint
+Included
+PowerPoint
+Included
+PowerPoint
+Included
+Outlook
+Outlook
+Included
+Outlook
+Included
+Outlook
+Included
+Outlook
+Free version only (includes ads)
+OneNote
+OneNote
+Included
+OneNote
+Included
+OneNote
+Included
+OneNote
+Included
+Microsoft Editor
+Microsoft Editor
+Included
+Microsoft Editor
+Included
+Microsoft Editor
+Included
+Microsoft Editor
+Free version only
+Microsoft Teams
+Microsoft Teams
+Included
+Microsoft Teams
+Included
+Microsoft Teams
+Included
+Microsoft Teams
+Free version only
+Access (PC only)
+Access (PC only)
+Included
+Access (PC only)
+Included
+Access (PC only)
+Included
+Access (PC only)
+Microsoft Forms
+Microsoft Forms
+Included
+Microsoft Forms
+Included
+Microsoft Forms
+Included
+Microsoft Forms
+Free version only
+&nbsp;
+Learn more
+&nbsp;
+Learn more
+&nbsp;
+Learn more
+&nbsp;
+Learn more
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$19.99 $13.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Family
+$129.99/year (billed yearly)
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Family
+$12.99/month (billed monthly)
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Family
+$129.99/year (billed yearly)
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Family
+$12.99/month (billed monthly)
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Personal
+$99.99 $69.99/first year
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Personal
+$9.99 $6.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Personal
+$99.99 $69.99/first year
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Personal
+$9.99 $6.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Family
+$129.99/year (billed yearly)
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Family
+$12.99/month (billed monthly)
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Personal
+$99.99 $69.99/first year
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Personal
+$9.99 $6.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$199.99 $139.99/first year
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$19.99 $13.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$199.99 $139.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$19.99 $13.99/first month
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$199.99 $139.99/first year
+Cancel
+Continue
+Next step: Sign in or sign up
+You'll need an account to download and update apps, set up recurring billing, and work seamlessly across multiple devices.
+You have selected:
+Microsoft 365 Premium
+$19.99 $13.99/first month
+Cancel
+Continue
+Copilot in Microsoft 365
+Create, organize, and move faster with AI-powered help across your Microsoft 365 apps.
+View plans
+Discover Copilot
+Office Home & Business 2024
+A one-time purchase for 1 PC or Mac. Includes classic 2024 desktop versions of Word, Excel, PowerPoint, Outlook, and OneNote.
+Buy now
+Learn more
+Student plans
+Save on Microsoft 365 as a college student and get the tools you need to do your best work.
+See offer
+Frequently asked questions
+Expand All
+|
+Collapse All
+What’s the difference between Office 2024 (one-time purchase) and Microsoft 365 (subscription)?
+Office 2024 is sold as a one-time purchase, which means you pay a single, up-front cost to get Office apps for one computer. One-time purchases are available for both PCs and Macs. However, there are no upgrade options, which means if you plan to upgrade to the next major release, you'll have to buy it at full price.
+Microsoft 365 Personal, Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro are subscriptions that include powerful productivity apps and creativity tools with AI-powered features. In addition to desktop versions of popular Microsoft 365 apps like Word, PowerPoint, Excel, and Outlook with Microsoft Copilot,1 you also get spacious cloud storage, advanced security, and cloud-connected features that let you collaborate on files in real time. With a subscription, you'll always have the latest features, fixes, and security updates along with ongoing tech support at no extra cost. You can choose to pay for your subscription on a monthly or yearly basis, and use your apps on multiple PCs, Macs, tablets, and phones.
+What's the difference between Microsoft 365 Personal, Family, and Premium?
+Microsoft 365 Personal is for one person.
+Microsoft 365 Family extends many of the same benefits to multiple people in a household.
+Microsoft 365 Premium includes extensive AI usage and access to exclusive Copilot features.1
+The right subscription depends on whether you're purchasing for yourself, your family, or need more advanced capabilities.
+What's included in Microsoft 365 Premium that you won't get with Personal or Family?
+If you primarily want access to desktop versions of productivity apps with Copilot,1 advanced security, and cloud storage, Microsoft 365 Personal or Microsoft 365 Family may be enough. If you want extensive AI usage and access to exclusive Copilot features,1 Microsoft 365 Premium can provide added value to help you tackle demanding tasks, from researching business ideas and analyzing complex data to creating high-impact presentations.
+What is the best Microsoft 365 subscription for freelancers and self-employed professionals?
+For most freelancers, solopreneurs, and side business owners looking to maximize productivity and protect their work, Microsoft 365 Premium is the recommended choice. It provides extensive AI usage and exclusive Copilot features,1 advanced security, 2 TB of cloud storage, and productivity apps with Copilot1 built in to help manage clients, projects, finances, and business communications. Those who need 1 TB of cloud storage, advanced security, and productivity apps with Copilot1 can choose Microsoft 365 Personal, while Microsoft 365 Family is a good fit for households that want to share subscription benefits1 across multiple users.
+Which Microsoft 365 subscription is best for students?
+For students who want the ultimate AI and productivity experience, Microsoft 365 Premium is an excellent choice. It combines extensive AI usage and exclusive Copilot features,1 advanced security, spacious cloud storage, and productivity apps with Copilot1 built in that can help students stay organized, manage coursework, collaborate on projects, and tackle academic responsibilities with confidence. Students looking for cloud storage, advanced security, and productivity apps with Copilot1 can also choose Microsoft 365 Personal.
+Do I keep control of my documents with a Microsoft 365 subscription?
+Yes. Documents that you have created belong fully to you. You can choose to store them online on OneDrive or locally on your PC or Mac.
+If I’m not paying for a subscription, what do I get for free?
+Visit learn more about free apps.
+Can I share my AI benefits with others?
+AI features included in Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro plans are only available to the subscription owner and cannot be shared with others.
+Where can I learn more about Copilot?
+Visit our Copilot help & learning site to start using Copilot today.
+What are the usage limits?
+Your Microsoft 365 Personal, Family, Premium, or Pro subscription unlocks higher AI usage limits to experience and engage with Copilot in your Microsoft 365 apps, the Microsoft Copilot app, and beyond. Learn more about credits.
+[*]
+Offer available while advertised. Discount on first billing period. After that, subscription automatically renews at the regular price based on the billing period selected, unless cancelled in Microsoft account. You’ll be notified before any price changes. Customers who have redeemed a Microsoft 365 trial offer are not eligible. Cannot be combined with other offers. Not available in all markets.
+Features and app availability may vary by region.
+[1]
+AI features are not available in Microsoft 365 Basic. AI features only available to subscription owner and cannot be shared; usage limits apply. Learn more. Minimum age limits may apply to use of AI features. Details.
+[2]
+App availability varies by device/language. Features vary by platform. System requirements apply.
+[3]
+Copilot in Excel available to subscription owner and requires AutoSave to be enabled, meaning the file must be saved to OneDrive; it doesn't function with unsaved files.
+[4]
+Employer must have an enterprise subscription that includes Microsoft 365 desktop apps and have multi account access enabled (excludes government tenants). Applies to select AI features in Word, Excel, PowerPoint, and Outlook desktop apps and in select mobile apps. See details.
+[5]
+Identity theft monitoring is only available in the United States and US territories.
+Follow Microsoft 365
+Back To Top
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads

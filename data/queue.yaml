@@ -328,6 +328,27 @@
   source: own
   status: done
   date: 2026-11-13
+- id: x-subscription
+  name: The X Subscription
+  website: https://x.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-14
+- id: devin
+  name: Devin
+  website: https://devin.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-14
+- id: perplexity
+  name: Perplexity
+  website: https://www.perplexity.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-14
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -620,7 +641,9 @@
   source: wikidata
   wikidata: Q51707
   sitelinks: 38
-  status: queued
+  status: out-of-scope
+  date: 2026-11-14
+  note: "Discontinued (Windows 7's free antivirus; Windows' Defender replaced it), not a subscription"
 - id: android-tv
   name: Android TV
   website: https://www.android.com/tv
@@ -631,14 +654,16 @@
   status: out-of-scope
   date: 2026-11-04
   note: "Google's operating system for TVs, not a subscription"
-- id: microsoft-defender-antivirus
-  name: Microsoft Defender Antivirus
+- id: microsoft-365
+  name: Microsoft 365
   website: https://www.microsoft.com/microsoft-365/microsoft-defender-for-individuals
   category: security
   source: wikidata
   wikidata: Q243269
   sitelinks: 35
-  status: queued
+  status: done
+  date: 2026-11-14
+  note: "Wikidata's Microsoft Defender, added as microsoft-365 (2026-11-14): Defender for individuals comes with Microsoft 365 Personal, Family, Premium and Pro, and Windows' own Defender Antivirus is free with Windows"
 - id: sourceforge
   name: SourceForge
   website: https://sourceforge.net
@@ -1526,7 +1551,8 @@
   source: wikidata
   wikidata: Q364
   sitelinks: 81
-  status: queued
+  status: done
+  date: 2026-11-14
 - id: inkscape
   name: Inkscape
   website: https://inkscape.org
@@ -3075,7 +3101,9 @@
   source: wikidata
   wikidata: Q1061800
   sitelinks: 18
-  status: queued
+  status: out-of-scope
+  date: 2026-11-14
+  note: 'A browser whose only site is its source repository on GitHub, no longer developed: no subscription to list (2026-11-14)'
 - id: 1-1-1-1
   name: 1.1.1.1
   website: https://one.one.one.one

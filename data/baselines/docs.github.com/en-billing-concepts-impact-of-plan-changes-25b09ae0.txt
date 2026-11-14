@@ -1,0 +1,150 @@
+url: https://docs.github.com/en/billing/concepts/impact-of-plan-changes
+method: fetch
+saved: 2026-11-14
+
+Impact of changing your plan on billing - GitHub Docs Skip to main content
+Skip to content
+GitHub Docs
+Search or ask Copilot/
+Menu
+Collapse sidebar
+Expand sidebar
+Home
+Billing and payments
+Concepts
+Impact of plan changes
+Billing and payments
+Get started
+How billing works
+Introduction to billing
+Billing manager onboard
+Concepts
+Billing cycles
+Budgets and alerts
+Cost centers
+Azure subscriptions
+Impact of plan changes
+Discounted plans
+Enterprise billing
+Billing for enterprises
+Usage-based licenses
+Combined enterprise use
+GHES license files
+Azure DevOps licenses
+Product billing
+GitHub Actions
+GitHub Advanced Security
+GitHub Codespaces
+GitHub Code Quality
+GitHub Copilot billing
+GitHub Copilot licenses
+GitHub Packages
+Cloud and local sandboxes
+Git LFS
+Third-party payments
+GitHub Sponsors
+GitHub Marketplace apps
+How-tos
+Set up payment
+Manage payment info
+Connect Azure sub
+Redeem coupon
+Add sales tax certificate
+Manage enterprise invoice
+Payments in India
+Manage plan and licenses
+Upgrade plan
+Downgrade plan
+Change billing cycle
+Manage pending changes
+View enterprise usage
+Manage user licenses
+Set up budgets
+Products
+View product/license use
+Download license use
+Buy Advanced Security
+View and estimate spending
+Use cost centers
+Manage GHAS licenses
+Disable GHAS for enterprise
+Pay third-parties
+Upgrade Marketplace app
+Downgrade Marketplace app
+Cancel Marketplace app
+Upgrade sponsorship
+Downgrade sponsorship
+Cancel sponsorship
+End sponsorship
+Manage for client
+Create client org
+Create client enterprise
+Create as CSP partner
+Manage client org
+Troubleshooting
+Declined card
+Authorization holds
+Locked account
+Azure sub connection
+Enterprise license usage
+Reference
+Actions runner pricing
+Azure billing
+Azure subscription
+Billing reports
+Billing roles
+Cost center allocation
+GitHub license users
+License reports
+Product and SKU names
+Product usage included
+Supported payment methods
+Tutorials
+Automate usage reporting
+Monitor costs with soft budgets
+Control costs at scale
+Gather insights
+In this article
+Impact of changing your plan on billing
+Learn how upgrading or downgrading your plan is reflected in billing.
+Copy markdown
+In this article
+How plan changes affect billing
+Examples
+Further reading
+How plan changes affect billing
+When you change your paid plan, the impact on billing depends on the type of change:
+Scenario When is billing affected? Is proration applied? When does access change?
+Upgrade plan Immediate Yes Immediately
+Downgrade or cancel plan End of current cycle No End of current cycle
+Add paid seats/licenses Immediate (prorated) Yes Immediately
+Remove paid seats/licenses Next billing cycle No End of current cycle (unless access revoked)
+Key takeaways:
+Upgrades are billed and applied immediately.
+Downgrades and cancellations take effect only after the current billing cycle ends.
+Adding seats is prorated and grants immediate access.
+Removing seats takes effect in the next cycle, unless access is manually revoked.
+Each account on GitHub is billed separately. Upgrading an organization account enables paid features for the organization's repositories only and does not affect the features available in repositories owned by any associated personal accounts. Similarly, upgrading a personal account enables paid features for the personal account's repositories only and does not affect the repositories of any organization accounts. For more information about account types, see Types of GitHub accounts.
+Making a change to the GitHub plan for your personal account, organization, or enterprise account does not affect billing for use of GitHub features, such as Copilot or paid apps purchased in GitHub Marketplace.
+For more information, see GitHub's plans and How GitHub billing works.
+Examples
+The following examples illustrate how billing rules are applied in practice:
+Canceling a monthly subscription: Kumiko pays on the 5th of each month. She cancels on October 10th. Her subscription remains active until November 4th, then downgrades on November 5th.
+Switching from yearly to monthly: Ravi has a yearly subscription billed October 5th. He switches on December 10th, but the change won’t apply until the next renewal on October 5th the following year.
+Adding paid seats: Mada’s organization pays for 25 seats on the 15th. She adds 10 more on June 4th. She’s immediately charged a prorated amount for June 4–14, and billed for 35 seats starting June 15th.
+Removing paid seats: Stefan’s organization pays for 50 seats annually on May 20th. On September 30th, he removes 20 seats. The change takes effect on the next renewal (May 20th), when the organization will pay for 30 seats.
+Further reading
+Managing your plan and GitHub licenses
+Making payments to third-parties through GitHub
+View and manage paid use of GitHub products
+People who consume a license in an organization
+Back to top
+Help and support
+Was this Doc helpful?
+Yes No
+Help us make GitHub Docs great!
+All Docs are open source. See something that's wrong or unclear? Submit a pull request.
+Make a contribution
+Still need help?
+Ask the GitHub communityContact supportExpert servicesBlog
+GitHub Inc. © 2026TermsPrivacyStatusPricing

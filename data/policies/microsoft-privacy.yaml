@@ -1,0 +1,109 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): the Microsoft Privacy Statement, which covers every consumer service
+# a Microsoft account uses (Microsoft 365, and Xbox Game Pass, which rated the same clauses in its own file on 2026-11-02;
+# Bing, Edge, Outlook.com, OneDrive and Teams when they join the catalog), rated once here. Each provider names it in its
+# policies' shared and adds ratings from its own notices (Microsoft 365's: the Copilot privacy articles and the Copilot
+# Terms of Use; Xbox Game Pass's: the Xbox sections and its subscription terms).
+# Read 2026-11-14 from Canada with a plain fetch (microsoft.com/en-ca/privacy/privacystatement). Every quote Xbox Game
+# Pass's ratings took from this statement on 2026-11-02 is still on it word for word, so its grades carry over, except:
+# - privacy.data-collection quotes the statement's general diagnostic data section, not Xbox's game data (the same grade);
+# - privacy.ai-training stays with each provider: the statement's general "we may use your data to develop and train our
+#   AI models" sends you to each product's own notice ("Learn more here"), and Microsoft 365's Copilot notices deny
+#   training foundation models on your chats and files, which Xbox's pages don't. Xbox keeps its own (Bad).
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: microsoft-privacy
+name: Microsoft Privacy Statement
+links:
+  - name: 'Microsoft Privacy Statement'
+    url: https://www.microsoft.com/en-ca/privacy/privacystatement
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'Its apps send Microsoft data about crashes, performance and how you use them, partly to improve its products. You can turn off the extra (optional) data, but not the basic data it always collects.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Many Microsoft products collect diagnostic data to keep our services secure and up-to-date; help ensure they work as expected; detect, diagnose, and fix problems; and improve our products.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Products that collect diagnostic data will always collect required diagnostic data, but you can control whether to send us optional diagnostic data.'
+    action:
+      name: 'Your Microsoft privacy dashboard'
+      url: https://account.microsoft.com/privacy
+    lastVerified: 2026-11-14
+  - topic: privacy.data-sharing
+    tier: neutral
+    reason: 'It shares some of your information with ad partners for ads chosen for you. You can turn that off once in your account, for every device you sign in on.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'We also disclose personal data for digital advertising purposes.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'When you’re logged into your Microsoft account, your opt out choice will be associated with your account and applied across devices whenever you are signed in.'
+    action:
+      name: 'Turn off ad sharing in your ad settings'
+      url: https://account.microsoft.com/privacy/ad-settings
+    lastVerified: 2026-11-14
+  - topic: privacy.ads-tracking
+    tier: neutral
+    reason: 'It picks ads for you from what you are doing now, your Copilot chats included, and from what it knows about you over time, unless you turn the personal part off in your Microsoft account.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Ads may be shown that relate to the current interaction you are having with us, such as your Copilot conversations (including files you share); your current location; transactions; product usage; search queries; or the content you’re viewing.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Ads may be shown based on your current interactions with us, as well as personalised using information about you over time.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'You can opt out of receiving personalised ads through our personalised ads and offers page'
+    action:
+      name: 'Turn off personalised ads'
+      url: https://account.microsoft.com/privacy/ad-settings
+    lastVerified: 2026-11-14
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it decides it needs it, and says how long varies a lot, with no limits stated.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Because these needs can vary for different data types and the context of our interactions with you or your use of our products, actual retention periods can vary significantly.'
+    lastVerified: 2026-11-14
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can see and manage your data in its privacy dashboard, or ask Microsoft for it.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'You can control your personal data that Microsoft has obtained and exercise your data protection rights by contacting Microsoft or using various tools we provide, such as the Microsoft privacy dashboard .'
+    action:
+      name: 'Your Microsoft privacy dashboard'
+      url: https://account.microsoft.com/privacy
+    lastVerified: 2026-11-14
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It hands over data when the law or a valid court order asks, and publishes a report on those requests.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Comply with applicable law or respond to valid legal process, including from law enforcement or other government agencies.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'For more information about data we disclose in response to requests from law enforcement and other government agencies, please see our Law Enforcement Requests Report .'
+    lastVerified: 2026-11-14
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your information can go to other countries with weaker privacy laws, under the EU’s standard legal safeguards.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'We transfer personal data from the country of origin to other countries, including those that may not offer the same level of data protection as determined by the European Commission or your local data protection authority.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'In such cases, we implement legal safeguards-such as standard contractual clauses approved by the European Commission – to help protect your rights and ensure your data remains protected.'
+    lastVerified: 2026-11-14
+  - topic: privacy.sign-up-data
+    tier: neutral
+    reason: 'You sign up with a Microsoft account. In some places you may have to prove your age or who you are, where the law asks.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Depending on your jurisdiction, you may need to verify your age or identity to access some services or features.'
+    lastVerified: 2026-11-14
+  - topic: privacy.children
+    tier: great
+    reason: 'Children need a parent’s OK, give only what’s needed, and never get ads picked for them. Parents get controls for screen time and spending.'
+    sources:
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'We will not knowingly ask children under the age of consent to provide more data than is necessary to provide the product.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'As mentioned in the Advertising section, we do not deliver personalised advertising to children whose birthdate in their Microsoft account identifies them as under 18 years of age.'
+      - url: https://www.microsoft.com/en-ca/privacy/privacystatement
+        quote: 'Microsoft Family Safety can help parents and guardians through tools such as digital content filtering, screen time limits, spending for Microsoft and XBOX stores'
+    lastVerified: 2026-11-14

@@ -1,0 +1,96 @@
+url: https://docs.github.com/en/support/learning-about-github-support/about-github-support
+method: fetch
+saved: 2026-11-14
+
+About GitHub Support - GitHub Docs Skip to main content
+Skip to content
+GitHub Docs
+Search or ask Copilot/
+Menu
+Collapse sidebar
+Expand sidebar
+Home
+GitHub Support
+About GitHub Support
+About GitHub Support
+GitHub Support
+About GitHub Support
+About GitHub Support
+About Copilot in GitHub Support
+Marketplace support
+Contacting support
+Creating a ticket
+Using Copilot in GitHub Support
+View and update tickets
+Sharing feedback
+In this article
+About GitHub Support
+You can contact GitHub Support for help troubleshooting issues you encounter while using GitHub.
+Copy markdown
+In this article
+About GitHub Support
+Scope of support
+About GitHub status
+About Copilot in GitHub Support
+Granting GitHub Support temporary access to a private repository
+Further reading
+About GitHub Support
+The support options available to GitHub users depend on the products used by their personal accounts, any organizations or enterprises they are members of, and any GitHub Enterprise Server instances they manage. Each product includes a default level of support and accounts that use GitHub Enterprise can purchase GitHub Premium Support.
+GitHub plan GitHub Community Support Standard support Enterprise support Premium support
+GitHub Free
+GitHub Pro
+GitHub Team
+GitHub Enterprise Cloud Available to purchase
+GitHub Enterprise Server Available to purchase
+Before contacting GitHub Support, check GitHub Status for any active incidents affecting GitHub services. For more information, see About GitHub status.
+If your account uses a paid GitHub plan, Copilot Business, or Copilot Enterprise, you can directly contact GitHub Support.
+If your account uses GitHub Free, you can speak to GitHub users and staff on the GitHub Community discussions for most issues, and you can contact GitHub Support to report account, security, and abuse issues.
+To report account, security, and abuse issues, or to receive assisted support for a paid account, visit the GitHub Support portal. For more information, see Creating a support ticket.
+You can contact GitHub Support in English.
+You can translate English comments on a ticket into Spanish, Japanese, Portuguese (Brazil), Chinese (Simplified), French, or German. However, when responding to tickets, you should use English, unless your GitHub plan permits you to respond in Japanese. For more information, see Viewing and updating support tickets.
+Email communication from GitHub Support will always be sent from either a github.com or githubsupport.com address.
+Scope of support
+If your support request is outside of the scope of what our team can help you with, we may recommend next steps to resolve your issue outside of GitHub Support. Your support request is possibly out of GitHub Support's scope if the request is primarily about:
+Third party integrations, such as Jira
+CI/CD, such as Jenkins
+Azure DevOps (please contact Azure Support)
+Writing scripts
+Configuration of external authentication systems, such as SAML identity providers
+Open source projects
+Writing or debugging new queries for CodeQL
+Cloud provider configurations, such as virtual network setup, custom firewall, or proxy rules
+Container orchestration, such as Kubernetes setup, or networking
+Detailed assistance with workflows and data management
+Comprehensive support for customization and tool installation on GitHub Actions custom images
+Preview features. Public preview, private preview, and technical preview features are out of GitHub Support's scope.
+GitHub Copilot suggestions
+GitHub Copilot consumption questions. GitHub Support does not audit or break down Copilot usage consumption. Support can explain the billing model and point you to available usage-reporting documentation, but cannot determine why usage appears high or why included usage was exhausted sooner than expected.
+Metered billing explanations. GitHub Support does not interpret usage reporting or spending trends for metered GitHub billing products, nor provide recommendations based on that data. For more information, see Billing cycles.
+GitHub Copilot provides AI-powered code suggestions and responses. As outlined in our legal terms, you retain full responsibility for your code, including any suggestions you choose to incorporate. The quality, accuracy, relevance, or functionality of Copilot’s responses may not always meet your expectations, and mistakes may occur. It is your decision whether to use Copilot’s suggestions, and GitHub strongly recommends implementing reasonable policies and practices to prevent the use of any suggestion in a way that could violate the rights of others. This includes, but is not limited to, using the filtering features available in Copilot.
+Copilot-generated suggestions and outputs are out of scope for support. GitHub Support cannot guarantee the correctness or suitability of Copilot’s responses, and is not responsible for the results produced. If you have concerns about specific suggestions, please review all links and information provided to ensure accuracy and compliance with your requirements. For more information, see GitHub Copilot Terms and Best practices for using Copilot.
+GitHub Support does not provide support for discontinued GitHub Enterprise Server releases. If you're running a discontinued release, please upgrade to a supported version before opening a support ticket so we can help you effectively.
+For assistance with topics outside the scope of support, for guided consulting, workshops, or training for your teams, please consult with GitHub Expert Services, which offers specialized services to help you optimize your use of our platform.
+If you're uncertain if the issue is out of scope, open a ticket and we're happy to help you determine the best way to proceed.
+For security-related matters, all communication is handled in writing through support tickets. This includes incident notifications, account compromise investigations, and credential exposure. Written communication ensures responses are reviewed, fully documented, and auditable. Callback and screen share requests cannot be accommodated for these tickets.
+About GitHub status
+You can check for any incidents currently affecting GitHub services, including GitHub Copilot model availability, and view information about past incidents on GitHub's Status page.
+You can also subscribe and get alerted via email, text message, and webhook whenever there's an incident affecting GitHub.
+You can also use the GitHub Status API to check for incidents. For more information, see GitHub Status API.
+About Copilot in GitHub Support
+You can receive answers to questions relating to GitHub's products and features before submitting a support ticket by using Copilot in GitHub Support. Copilot in GitHub Support is an AI-powered tool that uses a large language model to find answers to a wide variety of support queries. If Copilot in GitHub Support cannot answer your question, You can proceed with submitting your ticket to GitHub Support. For more information, see About Copilot in GitHub Support.
+Granting GitHub Support temporary access to a private repository
+If GitHub Support needs to access a private repository to address your support request, the owner of the repository will receive an email with a link to accept or decline temporary access. The owner will have 20 days to accept or decline the request before the request expires. If the owner accepts the request, GitHub Support will have access to the repository for five days. During this window, GitHub Support staff with the required privileges can unlock the repository for up to two hours at a time, and will relock the repository if the work is completed early. All GitHub Support staff access generates audit log events, and the visibility of the repository is not affected at any time.
+GitHub Support will never access your private repositories without your explicit consent. For more information, see the Terms of Service.
+Further reading
+Creating a support ticket
+Viewing and updating support tickets
+Back to top
+Help and support
+Was this Doc helpful?
+Yes No
+Help us make GitHub Docs great!
+All Docs are open source. See something that's wrong or unclear? Submit a pull request.
+Make a contribution
+Still need help?
+Ask the GitHub communityContact supportExpert servicesBlog
+GitHub Inc. © 2026TermsPrivacyStatusPricing
