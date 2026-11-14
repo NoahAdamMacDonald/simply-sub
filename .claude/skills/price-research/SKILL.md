@@ -167,6 +167,12 @@ API contract's prices are illustrative and never a source. This skill is how to 
     betaaldatum alleen wijzigen naar de huidige datum"); "renews at the end of the billing period" alone says no day.
     Another language's wording is added to core's `renewalWrittenAs` with a test. The item dialog
     suggests a new item's renewal from it and asks "Billed on…" only when it doesn't settle that.
+    A yearly renewal charged **before** its date (M11.21: "15 days before your subscription ends", "up to 35 days
+    prior to the anniversary") is `same-date` with `chargedBefore: { days: 15 }`, or `{ days: 35, upTo: true }` when
+    the page says "up to", the quote giving the days word for word (core's `namesChargedBefore`); a charge before the
+    subscription "ends" says the date you signed up too. Never `not-stated` for it: the app charges a new yearly item
+    that many days early, the earliest for "up to", so the user needn't find the date. A reminder email's days ("we
+    will remind you 30 days before") aren't a charge.
   - **Source code** (`sourceRepo`, M11.5): when its own pages say its code is open (an "Open source" page, its
     downloads' "Source code" link), the repository that page links, quoted, with `software.open-source` provider-wide
     (open-source apps when the apps are; fully open only when the servers' code is published too).

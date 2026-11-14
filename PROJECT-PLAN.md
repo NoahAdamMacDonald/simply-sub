@@ -1064,6 +1064,7 @@ owner (M11.17, BLUEPRINT §4.12), its mobile plans with national prices join the
 | M11.18 | A public company's shares (added 2026-11-10, the owner's item; BLUEPRINT §4.10): `owner.stock` with its listings (exchange and ticker symbol), the listed company when it's the owner's parent, and a majority holder (of its shares or votes), quoted like the owner; the card's Facts and Overview; the tickers that were words in owners' names moved into it | Netflix's card says "Stock: NASDAQ: NFLX"; validation refuses a symbol or holder no quote names |
 | M11.19 | Finance terms for the research (added 2026-11-10, the owner's items; BLUEPRINT §4.11): card purchase limits and a yearly limit, the institutions that hold the money when the provider doesn't (`protection.through`), the account's other fees from its fee page, and features for LIF, DPSP, partner-network ATMs and the credit cards an institution issues | A fintech's card says whose cover it is and lists its other fees, each checked against its page's words |
 | M11.20 | A plan's own regions (added 2026-11-13, the owner's brief; BLUEPRINT §4.7): a plan's `soldIn` and `notSoldIn`, each entry regions quoted from the provider's own page with its date; `availability` reads `notSoldIn` before prices and `soldIn` where only a sibling's price would say not offered; validation, coverage, baselines and the search JSON; F1 TV's Pro and Premium, MLB.TV, and MLB+ (outside the US) restored | F1 TV Pro isn't offered in the US and Access is; MLB+ (outside the US) is priced in six countries and MLB.TV is still offered there |
+| M11.21 | Charged before the renewal (added 2026-11-13, the owner's brief; BLUEPRINT §4.3): a renewal day's `chargedBefore` (days, `upTo`), quoted from the provider's own page; a new yearly item of its plans charged that many days early (the earliest for "up to") with no input, the renewal still its anchor; every total, the calendar, the exports and the card follow; Kaspersky, McAfee, Norton and Avast | A new Norton 360 item billed yearly is charged 35 days before its next renewal, and its card says "charged up to 35 days early" |
 
 #### M11 specs
 
@@ -2405,6 +2406,48 @@ in every D1 `json` column search parses.
         `availableIn`, and a region in both lists
   - [x] `npm run data:coverage` passes with F1's first note removed
 
+**M11.21 — Charged before the renewal** (BLUEPRINT §4.3; added 2026-11-13, the owner's brief)
+- **Why:** several security vendors charge a yearly renewal before its date: Kaspersky "15 days before your
+  subscription ends", McAfee "30 days before the subscription ends", Norton and Avast "up to 35 days" before the
+  anniversary. Their `renewalAnchor` was `not-stated`, and an item was charged on its renewal date. The owner: "it
+  should still be easy for the user to click from the search list and have it all be sorted out for them (the user
+  shouldn't need to manually look for the charge dates and manually input it, the site should just do it for them)".
+- **As built** (2026-11-13):
+  - **Catalog:** a stated renewal day's optional `chargedBefore` (`days` 1 to 90, `upTo: true` when the page says "up
+    to"), its quotes saying it (core's `namesChargedBefore`: the days, then before or prior to the subscription's end,
+    expiry, anniversary or renewal; "up to" only with `upTo`). A charge before a subscription "ends" says the date you
+    signed up too (`namesRenewalAnchor` with it), since a yearly term ends on that date a year on. Only yearly periods:
+    every page that says it speaks of yearly terms, and Norton's bill monthly plans on the day. The extraction answer
+    takes it, kept as far as its checked quotes go. `data/schema/` regenerated.
+  - **"Up to" plans for the earliest day** (decided here): the charge can come any day up to then, and the earliest
+    keeps a budget from being short; the card says "up to".
+  - **Items:** a yearly item's optional `billing.chargeDaysBefore` (1 to 364, yearly only), which the item dialog sets
+    from the provider (core's `chargedBeforeDays` into `itemFromForm`'s context) for a new item and an item being
+    changed, with no field to fill: Next renewal stays the renewal date, and the footer's next charge shows the early
+    date. An optional field, so no new Dexie version: stored items read as they were.
+  - **Schedule** (§3.1): each renewal charged that many days before it, the anchor still the renewal; the one on
+    `startDate` is the purchase, charged that day, and none comes before `startDate`; a renewal on or after `endDate`
+    isn't charged. A monthly add-on on its own period is charged on its day. Next charge: a future anchor's early
+    charge, once that's today or later. "Wrong date?" and Mark renewed take a charge date and anchor the renewal that
+    many days later; a period switch (M10.28) or an Optimizations plan or period change keeps it while yearly.
+  - **Exports:** such an item's charges are calendar events of their own over the next 12 months, each "For its
+    renewal on" its date: 35 days before Mar 10 is Feb 3, or Feb 4 in a leap year, which no repeat rule Proton takes
+    writes. The totals, budgets and the other exports read the charges, so they follow.
+  - **The card:** Billing day says "The date you signed up, charged up to 35 days early"; the list editor's rows
+    "Renews Mar 10, 2027, charged Feb 3 · auto".
+  - **Data:** Kaspersky (15 days, its plan pages' Auto-renewal), McAfee (30, Canada's checkout), Norton (up to 35, its
+    licence), Avast (up to 35, Subscription details), each `same-date` with its words.
+  - **Not done:** Optimizations' new items (a bundle, a suite, a switch to another provider) don't get it, having no
+    provider facts at hand: they're charged on the renewal day until the item is opened and saved. Items added before
+    this task get it the same way.
+  - **Size:** nothing new in the initial bundle, still 499.78 kB (the card, the dialog and the rows are lazy).
+- **Acceptance**
+  - [x] A new Norton 360 item billed yearly is charged 35 days before its next renewal, with no input (the item
+        dialog's spec on a fixture, core's `itemFromForm`)
+  - [x] Its card says "The date you signed up, charged up to 35 days early"
+  - [x] `npm run data:validate` refuses a `chargedBefore` its quotes don't say, "up to" included
+  - [x] The schedule's dates hold at a month's end, Feb 29 and across New Year (core's charge-dates spec)
+
 **The M11 audit** (2026-11-09): every acceptance box of M11.1–M11.14 and M11.16 holds; M11.15 is under way. What's
 left, each waiting for the owner:
 - **M11.9:** TSN's two plans' and RDS's video quality, which no official page states or gives a reason for (three
@@ -2450,6 +2493,11 @@ These live in `packages/core` as pure functions, so every page computes them the
   - **Days and weeks** are plain counts: `day` × 30 from Jan 31 gives Mar 2, Apr 1, May 1. A 30-day plan can
     charge twice in one month, and that month's total and budget check include both.
   - Only dates on or after `startDate` (if set) and before `endDate` (if set) count.
+  - **Charged before the renewal** (`chargeDaysBefore`, M11.21): a yearly item whose provider charges before the
+    renewal date (its `renewalAnchor.chargedBefore`) is charged that many days before each renewal, the earliest day
+    when the page says "up to", so a budget is never short; `anchorDate` stays the renewal. The renewal on `startDate`
+    is the purchase, charged that day, and no charge comes before `startDate`; a renewal on or after `endDate` isn't
+    charged. A charge can fall in the month or year before its renewal, and each total counts it there.
   - No `startDate` means it's assumed to have been active already, so earlier charges this year count toward
     "this year".
   - `autoRenew: false` doesn't stop charges. It marks them `manual`, and the calendar shows "Renew manually".
@@ -2464,7 +2512,8 @@ These live in `packages/core` as pure functions, so every page computes them the
   totals. A price of 0 shows as "Free", never with ≈ (pickPrice marks it native).
 - **Next charge:** an item's first charge on or after today. An Ongoing item's anchor that's still to come is its next
   renewal (P6 asks for it so), so its next charge is on or after it: a charge counted back from it onto today is the
-  payment just made, which totals count and the calendar shows (M7.1).
+  payment just made, which totals count and the calendar shows (M7.1). One charged before its renewal (M11.21) is next
+  from that renewal's charge, once that's today or later.
 - **Specific dates (limited windows):** a charge at each window's start, then one every interval while the date is
   before the window's end. The item is active from `start` through `end`, both included. `repeatYearly` copies the
   window into every year. Example: Sep 2 – Nov 1, monthly → charges on Sep 2 and Oct 2, active until Nov 1; a window
