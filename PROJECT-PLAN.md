@@ -2258,6 +2258,11 @@ in every D1 `json` column search parses.
     `mlb-tv`, whose MLB+ abroad waits for MLB.TV's international price; F1 TV, `f1-tv`, priced in Canada) and the
     library services Kanopy (`kanopy`) and Hoopla (`hoopla`). Viaplay's F1 TV Pro perk became
     `includes-subscription: [f1-tv.pro]`, with a perk redirect.
+  - **Security, batch 1** (2026-11-13): real-time protection, behaviour-based detection and scans (`antivirus.real-time`,
+    `antivirus.behavioural`, `antivirus.scans`) in the registry; Bitdefender re-read against every antivirus, VPN and
+    password feature; Norton (`norton`, plans by country where devices or identity features differ, LifeLock in the US)
+    and Avast (`avast`) on Gen Digital's privacy policy as a shared document; ESET (`eset`); Kaspersky (`kaspersky`,
+    not sold in the US: its paid plans' `notSoldIn`); Malwarebytes (`malwarebytes`) and McAfee (`mcafee`).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
