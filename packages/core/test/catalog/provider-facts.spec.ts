@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
+  chargedBeforeDays,
   currenciesEntrySchema,
   currenciesIn,
   formatCatalogIssue,
+  namesChargedBefore,
   namesCurrency,
   namesRenewalAnchor,
   renewalAnchorKind,
   renewalAnchorSchema,
+  renewalAnchorText,
   repositoryLabel,
   validateCatalog,
   type CatalogSourceFile,
@@ -248,6 +251,79 @@ describe('namesRenewalAnchor', () => {
     ['Billed monthly.', 'same-date', false],
   ] as const)('reads "%s" as %s: %s', (text, kind, named) => {
     expect(namesRenewalAnchor(text, kind)).toBe(named);
+  });
+});
+
+// A yearly renewal charged before its date (M11.21): Kaspersky's, McAfee's, Norton's and Avast's words.
+const kaspersky =
+  'To ensure uninterrupted protection, we will attempt to charge your payment method 15 days before your subscription ends.';
+const norton =
+  'We’ll email you in advance to let you know that your subscription is due for renewal and will charge your payment type up to 35 days before the subscription is due to end.';
+const avast =
+  'The fees will be charged to your stored payment details up to 35 days prior to the anniversary of your subscription to Avast.';
+const mcafee =
+  'It will be automatically renewed and you will be charged 30 days before the subscription ends and annually thereafter at the renewal price';
+const earlyAnchor = {
+  kind: 'same-date',
+  page: 'License and Services Agreement',
+  url: 'https://example.com/lsa',
+  quotes: [norton],
+  chargedBefore: { days: 35, upTo: true },
+  lastVerified: '2026-11-13',
+} satisfies RenewalAnchor;
+
+describe('chargedBefore', () => {
+  it.each([
+    [kaspersky, 15, false, true],
+    [mcafee, 30, false, true],
+    [norton, 35, true, true],
+    [avast, 35, true, true],
+    // "Up to" goes with upTo only, and the days must be the page's.
+    [norton, 35, false, false],
+    [kaspersky, 15, true, false],
+    [kaspersky, 14, false, false],
+    ['We will remind you 30 days before you are charged.', 30, false, false],
+    ['Cancel at least 35 days before your current period ends.', 35, false, true],
+    ['Billed every 30 days.', 30, false, false],
+    ['prélevé 15 jours avant la fin de votre abonnement', 15, false, true],
+  ] as const)('reads "%s" as charged %s days before (up to: %s): %s', (text, days, upTo, named) => {
+    expect(namesChargedBefore(text, { days, ...(upTo && { upTo: true }) })).toBe(named);
+  });
+
+  it('says the date you signed up when the term ends at the renewal: Kaspersky’s words name no kind alone', () => {
+    expect(namesRenewalAnchor(kaspersky, 'same-date')).toBe(false);
+    expect(namesRenewalAnchor(kaspersky, 'same-date', { days: 15 })).toBe(true);
+    expect(namesRenewalAnchor(kaspersky, 'first-of-month', { days: 15 })).toBe(false);
+  });
+
+  it('is accepted on a renewal day when its quotes say it, and refused otherwise', () => {
+    expect(issues(renewalAnchorSchema, earlyAnchor)).toEqual([]);
+    expect(issues(renewalAnchorSchema, { ...earlyAnchor, chargedBefore: { days: 35 } })).toEqual([
+      'quotes: No quote says it renews on the date you signed up: quote the words that do',
+      'chargedBefore: No quote says it’s charged 35 days before it renews: quote the words that do',
+    ]);
+    expect(issues(renewalAnchorSchema, { ...onSignUp, chargedBefore: { days: 15 } })).toEqual([
+      'chargedBefore: No quote says it’s charged 15 days before it renews: quote the words that do',
+    ]);
+    expect(
+      issues(renewalAnchorSchema, { ...earlyAnchor, chargedBefore: { days: 0, upTo: false } }),
+    ).toEqual([
+      'chargedBefore.days: Must be at least 1 day',
+      'chargedBefore.upTo: Invalid input: expected true',
+    ]);
+  });
+
+  it('shows on the card after the kind, and gives a yearly item its days', () => {
+    expect(renewalAnchorText(earlyAnchor)).toBe(
+      'The date you signed up, charged up to 35 days early',
+    );
+    expect(renewalAnchorText({ ...earlyAnchor, chargedBefore: { days: 15 } })).toBe(
+      'The date you signed up, charged 15 days early',
+    );
+    expect(renewalAnchorText(onSignUp)).toBe('The date you signed up');
+    expect(chargedBeforeDays({ renewalAnchor: earlyAnchor })).toBe(35);
+    expect(chargedBeforeDays({ renewalAnchor: onSignUp })).toBeUndefined();
+    expect(chargedBeforeDays(undefined)).toBeUndefined();
   });
 });
 

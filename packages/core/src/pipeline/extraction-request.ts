@@ -143,6 +143,8 @@ Where it's sold and how it's paid
 - "renewalAnchor": which day a paid plan renews on, from its terms or billing help: the date you signed up
   ("same-date", with a shorter month's last day when it has no such date), "every-30-days", the 1st of each month
   ("first-of-month") or its last day ("end-of-month"), quoting the words that say so; "not-stated" when they don't.
+  A yearly renewal charged before its date ("15 days before your subscription ends", "up to 35 days prior to the
+  anniversary") is "same-date" with "chargedBefore" (its days, and "upTo" when the words say "up to"), quoted too.
 - "sourceRepo": when a page says its code is open source and shows the repository's address in its words.
 
 Official resellers

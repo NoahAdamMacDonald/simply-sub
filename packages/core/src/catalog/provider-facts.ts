@@ -1,4 +1,10 @@
-import type { CurrenciesEntry, Provider, RenewalAnchor, RenewalAnchorKind } from './provider';
+import type {
+  ChargedBefore,
+  CurrenciesEntry,
+  Provider,
+  RenewalAnchor,
+  RenewalAnchorKind,
+} from './provider';
 import { globalRegion, groupsOf } from './regions';
 
 // A provider's facts beside its ways to pay (M11.5, the guide's §3.1): the day it renews on, the currencies it takes
@@ -43,9 +49,56 @@ const renewalWrittenAs: Readonly<Record<RenewalAnchorKind, RegExp>> = {
     /\b(?:last day|end) of (?:each|every|the) (?:calendar )?month\b|\bdernier jour (?:de|du) (?:chaque )?mois\b|\bfin (?:de|du) (?:chaque )?mois\b/i,
 };
 
-/** Whether `text` says a provider renews on the days `kind` names. */
-export function namesRenewalAnchor(text: string, kind: RenewalAnchorKind): boolean {
-  return renewalWrittenAs[kind].test(text);
+/**
+ * Whether `text` says a provider renews on the days `kind` names. A charge some days before a subscription ends says
+ * when it renews, too (M11.21): at its term's end, the date you signed up a year on ("15 days before your subscription
+ * ends", Kaspersky's).
+ */
+export function namesRenewalAnchor(
+  text: string,
+  kind: RenewalAnchorKind,
+  chargedBefore?: ChargedBefore,
+): boolean {
+  if (renewalWrittenAs[kind].test(text)) return true;
+  return (
+    kind === 'same-date' && chargedBefore !== undefined && namesChargedBefore(text, chargedBefore)
+  );
+}
+
+/** The most days before its renewal a catalog renewal can be charged (M11.21): Norton's and Avast's are 35. */
+export const maxChargedBeforeDays = 90;
+
+/**
+ * Whether `text` says a renewal is charged `days` before it (M11.21), in English or French: the days, then before or
+ * prior to its end, expiry, anniversary or renewal ("15 days before your subscription ends", "up to 35 days prior to
+ * the anniversary of your subscription"). "Up to" goes with `upTo` only, so neither is read as the other.
+ */
+export function namesChargedBefore(text: string, { days, upTo }: ChargedBefore): boolean {
+  const lead = upTo ? String.raw`\b(?:up to|jusqu['’]à) ` : String.raw`(?<!\bup to |jusqu['’]à )\b`;
+  const before = String.raw`(?:days?|jours?) (?:before|prior to|ahead of|avant)\b[^.]{0,60}?`;
+  const end = String.raw`\b(?:end|ends|expires?|expiry|expiration|anniversary|renews?|renewal|fin|anniversaire|renouvellement)\b`;
+  return new RegExp(`${lead}${days}[- ]${before}${end}`, 'i').test(text);
+}
+
+/**
+ * The day a provider renews on as the card says it, after "Billing day": its kind's name, and how early a yearly
+ * renewal is charged ("The date you signed up, charged up to 35 days early").
+ */
+export function renewalAnchorText(anchor: StatedRenewalAnchor): string {
+  const early = anchor.chargedBefore;
+  const name = renewalAnchorNames[anchor.kind];
+  return early ? `${name}, charged ${early.upTo ? 'up to ' : ''}${early.days} days early` : name;
+}
+
+/**
+ * How many days before its renewal the provider charges a yearly renewal (M11.21), when its pages say: an item of its
+ * plan billed yearly is charged that many days early, the earliest day when they say "up to".
+ */
+export function chargedBeforeDays(
+  provider: Pick<Provider, 'renewalAnchor'> | undefined,
+): number | undefined {
+  const anchor = provider?.renewalAnchor;
+  return anchor && anchor.kind !== 'not-stated' ? anchor.chargedBefore?.days : undefined;
 }
 
 /** The kind of day a provider renews on, when its pages say: undefined when they don't, or it isn't known yet. */

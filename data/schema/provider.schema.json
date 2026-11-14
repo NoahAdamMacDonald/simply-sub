@@ -257,7 +257,26 @@
               "maxItems": 3,
               "type": "array",
               "items": { "type": "string", "minLength": 1 },
-              "description": "Its words there that say which day it renews on, word for word"
+              "description": "Its words there that say which day it renews on, and how many days before it a yearly renewal is charged, word for word"
+            },
+            "chargedBefore": {
+              "type": "object",
+              "properties": {
+                "days": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 90,
+                  "description": "How many days before the renewal date a yearly renewal is charged"
+                },
+                "upTo": {
+                  "description": "Its page says \"up to\" that many days: the charge can come later, and the app plans for the earliest",
+                  "type": "boolean",
+                  "const": true
+                }
+              },
+              "required": ["days"],
+              "additionalProperties": false,
+              "description": "A yearly renewal charged before its date (M11.21): \"15 days before your subscription ends\". Left out when it is charged on the day"
             },
             "lastVerified": {
               "type": "string",

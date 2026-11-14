@@ -2,6 +2,8 @@ import * as z from 'zod';
 import { cardNetworkNames, namesNetwork } from './card-networks';
 import { namesPaymentMethod, paymentMethodNames } from './payment-methods';
 import {
+  maxChargedBeforeDays,
+  namesChargedBefore,
   namesCurrency,
   namesRenewalAnchor,
   renewalAnchorKinds,
@@ -210,10 +212,32 @@ export const renewalAnchorKindSchema = z.enum(renewalAnchorKinds);
 export type RenewalAnchorKind = z.infer<typeof renewalAnchorKindSchema>;
 
 /**
+ * A yearly renewal charged before its date (M11.21): Kaspersky's "15 days before your subscription ends", Norton's "up
+ * to 35 days before the subscription is due to end". With `upTo`, the charge can come any day up to then, and the app
+ * plans for the earliest, so a budget is never short. Only yearly periods: every page that says it speaks of yearly
+ * terms, and Norton's bills its monthly plans on the day.
+ */
+export const chargedBeforeSchema = z.strictObject({
+  days: z
+    .int()
+    .min(1, 'Must be at least 1 day')
+    .max(maxChargedBeforeDays, `Use at most ${maxChargedBeforeDays} days`)
+    .describe('How many days before the renewal date a yearly renewal is charged'),
+  upTo: z
+    .literal(true)
+    .optional()
+    .describe(
+      'Its page says "up to" that many days: the charge can come later, and the app plans for the earliest',
+    ),
+});
+export type ChargedBefore = z.infer<typeof chargedBeforeSchema>;
+
+/**
  * The day a provider renews on (M11.5, the guide's §3.1): the date you signed up (a shorter month's last day when it
  * has no such date), every 30 days, the 1st or the last day of each month, quoted from its terms or billing help; or
  * not-stated, with the pages read that don't say. A new item's next renewal follows it, and the item dialog asks
- * which day it's billed on only when it doesn't settle that (PROJECT-PLAN P6).
+ * which day it's billed on only when it doesn't settle that (PROJECT-PLAN P6). A yearly renewal charged some days
+ * before its date says so too (`chargedBefore`, M11.21), and a new item's charges come that many days early.
  */
 export const renewalAnchorSchema = z
   .discriminatedUnion('kind', [
@@ -229,7 +253,14 @@ export const renewalAnchorSchema = z
         .array(textSchema)
         .min(1, 'Quote where it says so')
         .max(3, 'Quote at most three passages')
-        .describe('Its words there that say which day it renews on, word for word'),
+        .describe(
+          'Its words there that say which day it renews on, and how many days before it a yearly renewal is charged, word for word',
+        ),
+      chargedBefore: chargedBeforeSchema
+        .describe(
+          'A yearly renewal charged before its date (M11.21): "15 days before your subscription ends". Left out when it is charged on the day',
+        )
+        .optional(),
       lastVerified: isoDateSchema.describe('When the page was read'),
     }),
     z.strictObject({
@@ -248,11 +279,20 @@ export const renewalAnchorSchema = z
       addDuplicateIssues(ctx, anchor.pages, (index) => ['pages', index]);
       return;
     }
-    if (!namesRenewalAnchor(anchor.quotes.join(' '), anchor.kind)) {
+    const text = anchor.quotes.join(' ');
+    if (!namesRenewalAnchor(text, anchor.kind, anchor.chargedBefore)) {
       ctx.addIssue({
         code: 'custom',
         message: `No quote says it renews on ${renewalAnchorNames[anchor.kind].toLowerCase()}: quote the words that do`,
         path: ['quotes'],
+      });
+    }
+    const early = anchor.chargedBefore;
+    if (early && !namesChargedBefore(text, early)) {
+      ctx.addIssue({
+        code: 'custom',
+        message: `No quote says it’s charged ${early.upTo ? 'up to ' : ''}${early.days} days before it renews: quote the words that do`,
+        path: ['chargedBefore'],
       });
     }
   });

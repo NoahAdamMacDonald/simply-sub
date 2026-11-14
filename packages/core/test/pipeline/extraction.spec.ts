@@ -651,6 +651,41 @@ describe('draftFromAnswer: provider facts (M11.5)', () => {
     );
   });
 
+  it('keeps a charge before the renewal as far as its quotes say it (M11.21)', () => {
+    const quote =
+      'we will attempt to charge your payment method 15 days before your subscription ends';
+    const terms: ExtractionContext = {
+      ...context(),
+      pages: [
+        ...context().pages,
+        {
+          name: 'payment',
+          kind: 'payment',
+          url: 'https://help.streamco.example/payment',
+          text: `Auto-renewal. To ensure uninterrupted protection, ${quote}.`,
+        },
+      ],
+    };
+    const anchorOf = (chargedBefore: { days: number; upTo?: boolean }) =>
+      draftFromAnswer(
+        answer({
+          renewalAnchor: { kind: 'same-date', page: 'payment', quotes: [quote], chargedBefore },
+        }),
+        terms,
+      ).provider?.renewalAnchor;
+    expect(anchorOf({ days: 15 })).toEqual({
+      kind: 'same-date',
+      page: 'Payment methods',
+      url: 'https://help.streamco.example/payment',
+      quotes: [quote],
+      chargedBefore: { days: 15 },
+      lastVerified: '2026-10-28',
+    });
+    // Not "up to" 15 days, nor 30: without it, its words don't say the date you signed up.
+    expect(anchorOf({ days: 15, upTo: true })).toBeUndefined();
+    expect(anchorOf({ days: 30 })).toBeUndefined();
+  });
+
   it('drops a renewal day its quotes don’t say, and a repository no page shows', () => {
     const draft = draftFromAnswer(
       answer({
