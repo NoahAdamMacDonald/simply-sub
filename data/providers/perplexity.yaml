@@ -1,0 +1,613 @@
+# Researched by hand on 2026-11-13 and 2026-11-14 (the full catalog run, AI batch 1), read with Edge from Canada (its
+# Pro and Max pages, its help centre's articles with their accordions opened, its legal hub, terms, privacy notice,
+# acceptable use policy and security page), the Pro page again with the browser in French (Canada) and US English, and
+# through a UK exit. A plain fetch gets Cloudflare's challenge page (HTTP 403) on every perplexity.ai page; Edge reads them
+# with no bot check. Pages, each quoted where it's used:
+# Pricing: perplexity.ai/pro and /max ("$17" and "$167" "/month or equivalent, when billed annually"; with the browser
+# in French from Canada "17 $ US" and "167 $ US", and through a UK exit "US$17" and "US$167": one US-dollar price list,
+# whoever reads it), and its help centre: "Perplexity Pro: $20/month or $200/year" and "Perplexity Max: $200/month or
+# $2,000/year" (Using the Connector for Slack), "Perplexity Max costs $200/monthly or $2000/annually. Please note, the
+# annual billing option is only available for the web app version." (Perplexity Max). Its terms charge "in U.S.
+# Dollars", and its Paying in Local Currency article lets a web buyer pay the same plan in their own currency instead:
+# "You can select either your local currency or USD at checkout." The local amounts show only at checkout, after
+# signing in, so only US dollars are listed (no `currencies`: the article names no currency but INR, which it excludes).
+# No page says the prices include tax ("you agree to pay us the applicable fees and taxes", its terms).
+# Region checklist, 2026-11-13: 1. no country paths or hreflang on the plan pages (its help centre has 11 language
+# versions, the same prices); 2. no country or currency picker; 3. the page's own text names "$ US" / "US$" by the
+# browser's language, and no other currency; 4. checkout needs an account ("Login or sign up for free"); 5. "Paying in
+# Local Currency" (local currency at checkout, amounts not shown); 6. Edge from Canada (en-CA, en-US, fr-CA) and through
+# a UK exit, all US dollars; a plain fetch is refused; 7. no bill offered.
+# Its individual plans: "Standard (Free)", "Perplexity Pro", "Perplexity Max" and "Education Pro" ("($10/mo with
+# verification from SheerID)"), plus Enterprise Pro and Enterprise Max (per seat, business: out) and the API Platform
+# ("Pay-as-you-go pricing", usage-billed: out). Not listed: Education Pro, an eligibility-only offer for verified
+# students and educators, as for Spotify's and Apple Music's student plans.
+# Bundles: Rumble sells "Rumble Premium with a subscription to Perplexity Pro" at "$23.99/mo" (rumble.com/premium, read
+# 2026-11-14): a bundle file of its own (draft/bundle-rumble-premium-perplexity-pro.yaml). Its other partners hand out
+# promotion codes and trials ("Perplexity regularly runs promotional offers and the discount codes for these offers are
+# distributed through our partners, authorized and official channels, and on our website.", Partner promotions; Airtel,
+# Bouygues Telecom and Vivo named there): offers, not sold plans, so nothing to list.
+# Official resellers: none. No page names a shop that sells its subscription; partner codes are promotions (above).
+# Comet, its browser (free, with a Max-only "Max Assistant"), is the browsers category's later task, with its own terms
+# (perplexity.ai/hub/legal/comet-terms-of-service, saved): its Assistant is a feature of these plans
+# (ai.computer-use), the browser itself isn't listed here.
+
+id: perplexity
+name: Perplexity
+website: https://www.perplexity.ai
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help centre's cancelling article, for the web, iOS, Android and the Samsung Galaxy Store.
+cancelUrl: https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+sources: { pricing: https://www.perplexity.ai/pro }
+
+# Accepted cards (M9.2), read 2026-11-13 in its Billing FAQ for Pro Plan Subscribers, for every buyer on the web.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://www.perplexity.ai/help-center/en/articles/10353002-billing-faq-for-pro-plan-subscribers
+    quotes:
+      - 'Credit and debit cards (Visa, Master Card and AMEX)'
+# Ways to pay (M11.5), read 2026-11-13: on the web, cards, Cash App, Google and Apple Pay and an ACH transfer (Billing
+# FAQ: "Perplexity redirects you to a Stripe payments page"); in its apps, Apple's and Google's billing (Canceling a
+# Subscription; the Samsung Galaxy Store too, which the same article names). An ACH transfer is a US bank transfer, but
+# core's wording for `bank-transfer` doesn't read "ACH transfer", so it's `other` here; and its "Google and Apple Pay"
+# names Google Pay in a way core's wording doesn't read, so Google Pay is left out until core reads it (notes.md).
+paymentMethods:
+  - methods: [card, cash-app, apple-pay, other]
+    page: 'Billing FAQ for Pro Plan Subscribers'
+    url: https://www.perplexity.ai/help-center/en/articles/10353002-billing-faq-for-pro-plan-subscribers
+    quotes:
+      - 'Credit and debit cards (Visa, Master Card and AMEX)'
+      - 'Cash App'
+      - 'Google and Apple Pay'
+      - 'ACH transfer'
+  - methods: [app-store]
+    page: 'Canceling a Subscription'
+    url: https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+    quotes:
+      - 'If you subscribed through the Apple App Store or Google Play Store, the app store controls your billing.'
+
+# Owner (M11.2), read 2026-11-13: its privacy notice names the company behind the service; its terms are with "Perplexity
+# AI, Inc." and its address is San Francisco's. Private: no page names a listing.
+owner:
+  name: 'Perplexity AI, Inc.'
+  page:
+    name: Privacy notice
+    url: https://www.perplexity.ai/hub/legal/privacy-notice
+  quotes:
+    - 'Perplexity AI, Inc. is the controller of the data processed by Perplexity when you use Perplexity’s services globally.'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://www.perplexity.ai/hub/legal/terms-of-service
+    quotes:
+      - 'The Services are operated by us in the United States.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Renewal day (M11.5), read 2026-11-13: "You’re billed monthly or annually on your original billing date, depending on
+# your subscription." (Billing for Android Subscriptions; Canceling a Subscription: "You’re billed monthly or annually on
+# your original billing date, depending on your subscription."), which means the date you subscribed, but core's
+# renewal wording doesn't read "original billing date": not-stated here, with the same-date block in notes.md.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+    - https://www.perplexity.ai/help-center/en/articles/10353020-billing-for-android-subscriptions
+    - https://www.perplexity.ai/hub/legal/terms-of-service
+  lastVerified: 2026-11-13
+
+# Perks (M11.6), read 2026-11-13 on perplexity.ai/pro and /max and the help centre: usage levels (not comparable, so
+# perks), Computer's monthly credits, Max's extras and support. Pro's card: "More usage limits and memory"; Max's:
+# "Maximum Computer usage", "10,000 monthly credits", "Highest usage limits and memory". "Model Council runs several
+# models on the same question and synthesizes their answers. It is available on the Max and Enterprise Max plans on web."
+# (What advanced AI models are included in my subscription?); "Brain (Research Preview)" and "Max Assistant on Comet"
+# (Perplexity Max); support: the comparison table's "Support Basic Priority Priority Dedicated" (Free, Pro, Education
+# Pro, Max). The cards' "4,000 bonus credits" and "35,000 bonus credits" ("LIMITED TIME", "one-time, expire in 30
+# days") are offers, not perks.
+perks:
+  - id: more-usage
+    name: More usage limits and memory
+  - id: highest-usage
+    name: Highest usage limits and memory
+  - id: max-computer-usage
+    name: Maximum Computer usage
+  - id: monthly-credits
+    name: 10,000 monthly credits
+  - id: model-council
+    name: Model Council
+  - id: brain
+    name: Brain (Research Preview)
+  - id: max-assistant
+    name: Max Assistant on Comet
+  - id: priority-support
+    name: Priority support
+  - id: dedicated-support
+    name: Dedicated support
+
+# AI features (the AI category's registry, feat/t12-ai-1), read 2026-11-13 in its plan pages and help centre, on every
+# plan unless named:
+# - Web search: "Perplexity is an AI-powered search engine" that "searches the web to deliver accessible,
+#   conversational answers backed by verifiable sources" (What is Perplexity?); Free has "Practically unlimited basic
+#   searches" and "Very limited amount of Pro Searches" (Which Perplexity Subscription Plan is right for you?).
+# - Deep research: "Free users get limited access to Research. For those who need more, Perplexity Pro subscribers get
+#   extended access." (What is Research mode?), and the comparison table's "Research Queries 1/month" on Free.
+# - Memory: "Memory is a feature that allows Perplexity to remember details between your conversations" (Memory), which
+#   names no plan but Brain's (Max).
+# - Projects: "There’s no limit on how many Projects you can create." and "These limits are the same for everyone, on
+#   every plan" (What are Projects?).
+# - Reasoning, model choice and image generation on Pro and Max: "The free plan limits advanced searches to a few per day
+#   and locks you to a single default model. Pro unlocks more advanced searches with multi-step reasoning, access to all
+#   premium AI models, increased file uploads, and image generation capabilities." (perplexity.ai/pro's FAQ); "On the
+#   Free plan you can use Best and a limited number of Pro Searches, but you can’t choose an advanced Search model
+#   manually." and its Search models, from OpenAI, Google, Anthropic, Moonshot AI, Z.ai, xAI and NVIDIA on Pro and Max
+#   (What advanced AI models are included in my subscription?). The plan table says "Image Generation No" on Free, as the
+#   Free list's "No access to advanced AI models, image generation, or premium support."; the older image article
+#   (2026-08-31) gives Free "limited image generations": the newer per-plan pages decide (notes.md).
+# - Video generation on Pro and Max: "Available now for Max, Pro and Enterprise Pro/Max subscribers on Web app, iOS, and
+#   Android." (Generating Videos with Perplexity).
+# - Voice on Pro and Max: "Voice mode is available to Pro and Max subscribers." (How to use voice mode on the web and Mac
+#   app). The iOS voice assistant article names no plan, so Free's voice isn't stated (notes.md).
+# - Uses a browser or computer for you, coding agent and scheduled tasks on Pro and Max: Computer "browses the web,
+#   writes code, connects to your apps" ("Computer = an agent with tools. You ask, it actually does things — writes
+#   docs, builds slides, sends emails, browses the web, writes code, connects to your apps, and chains multi-step
+#   workflows together.") and "Computer is available on paid plans" (What is Computer?); its Automations run "on a
+#   schedule you set" and "Automations in Computer are available wherever Computer is available." (Automations in
+#   Computer); the table's "Browser Agent (Comet Assistant) Queries" "No" on Free. Free accounts' one-time "free Computer
+#   turns" ("Some free accounts") are a trial, not Free's.
+# - Early access on Max: "Early access to the newest products: Try the latest features and products before they’re
+#   available to everyone else." (Which Perplexity Subscription Plan is right for you?) and the Max card's "Priority
+#   access to new features". Pro's article lists "Exclusive Pro Perks, including early releases", but its card and the
+#   per-plan list give it to Max only (notes.md).
+# - Connects to, on Pro and Max: its apps ("The Connector for Slack is available to Perplexity Pro, Perplexity Max,
+#   Enterprise Pro and Enterprise Max users.", and the same for Dropbox, Asana, Jira, Confluence, HubSpot and Microsoft
+#   365), MCP servers ("To add a remote MCP connector, open Plugins in the sidebar and select Add custom.", Local and
+#   Remote MCPs; Plugins "Plugins that include skills need a plan that includes Perplexity Computer.") and skills you
+#   make ("Personal skills are the ones you create or upload.", "Skills are available on the web and in the Perplexity
+#   apps on every plan that includes Computer.", What is a skill?). No API use: "Does my subscription include API
+#   access? No."
+# - Chats kept on its servers: "We retain your personal information as long as your account is active." (How long
+#   Perplexity retains your search and personal data).
+# - None of these pages offers monthly API credits, code completion in an editor, music or voice generation, or the
+#   assistant inside email or office apps (its connectors bring Gmail, Outlook and Microsoft 365 into Perplexity; its
+#   Email Assistant "will soon be deprecated").
+# General features, read 2026-11-13: apps: "The app is available for Windows and Mac." (About the App), its iOS and
+# Android apps (Billing for iOS / Android Subscriptions) and the web (a Linux package runs only Portable Computer on
+# NVIDIA hardware, not listed). Sign-in: "Continue with Google, Continue with Apple, or Continue with email" and "use
+# the sign-in link or one-time code Perplexity sends you" (How to Change Your Sign-In Method). Support: "For account
+# support, billing inquiries, or bug reports, contact us via Help > Contact Support." and Discord (How can I contact the
+# Perplexity team?); Pro and Max add "Pro subscribers can access live chat in Settings." No pause: "No, subscription
+# pausing isn’t available." No parental controls (its terms ask a parent to accept them for a minor, nothing more). App
+# languages: no page lists them (its settings' "Language" picker isn't readable signed out), so none (notes.md).
+features:
+  platforms: [windows, macos, android, ios, web]
+  account.sign-in: [email-code, sso]
+  support.channels: [email, community]
+
+plans:
+  - id: perplexity.free
+    name: Free
+    link: https://www.perplexity.ai/pro
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.memory: true
+      ai.projects: true
+      ai.chat-storage: cloud
+    notes: 'Practically unlimited basic searches with Perplexity’s default model, a few Pro Searches a day, and one Research query a month.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.perplexity.ai/help-center/en/articles/11187416-which-perplexity-subscription-plan-is-right-for-you
+
+  - id: perplexity.pro
+    name: Pro
+    link: https://www.perplexity.ai/pro
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.voice: true
+      ai.computer-use: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, custom-assistants]
+      ai.chat-storage: cloud
+      support.channels: [email, chat, community]
+    perks: [more-usage, priority-support]
+    notes: 'Models from OpenAI, Google, Anthropic, xAI and others in Search (GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5, Grok 4.7, Kimi K3). Computer runs on credits bought separately; Pro includes no monthly credits.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack
+      - region: GLOBAL
+        currency: USD
+        amount: 200
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://www.perplexity.ai/help-center/en/articles/12167980-using-the-connector-for-slack
+
+  - id: perplexity.max
+    name: Max
+    link: https://www.perplexity.ai/max
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.voice: true
+      ai.computer-use: true
+      ai.coding-agent: true
+      ai.scheduled-tasks: true
+      ai.early-access: true
+      ai.integrations: [mcp, connectors, custom-assistants]
+      ai.chat-storage: cloud
+      support.channels: [email, chat, community]
+    perks:
+      [
+        highest-usage,
+        max-computer-usage,
+        monthly-credits,
+        model-council,
+        brain,
+        max-assistant,
+        dedicated-support,
+      ]
+    notes: 'Adds the most advanced models (GPT-6 Astra, Claude Opus 5.5, Gemini 4 Carbon, Claude Fable 5.2). Yearly billing only on perplexity.ai, not in its apps.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max
+      - region: GLOBAL
+        currency: USD
+        amount: 2000
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-13 with Edge: its Terms of Service, which
+# name its Privacy Policy (now its Privacy Notice); its Acceptable Use Policy ("this Policy is incorporated into the terms
+# and conditions or other agreement that you have entered into with Perplexity": the conduct it forbids, including
+# building competing products, graded with the licence); the Pro Perks Terms and Conditions (US subscriptions' partner
+# discounts: "Perplexity may provide information regarding your account to third parties in order for you to use Pro
+# Perks.", no topic worse than the privacy notice's); its Third-Party Models & Terms (the model makers' terms "do not
+# apply to you" beyond the models you use: no topic); Korea's Billing & Consumer Information (a 7-day refund for Korea,
+# outside the catalog's regions); and the help centre's billing, refund, cancelling, privacy, deletion, retention and
+# security articles. The DSA page holds contacts only. Comet's terms are the browser's (browsers category, later). Not
+# read: the sign-up form's agreement line, which shows only in the sign-in dialog after choosing a method.
+policies:
+  links:
+    - name: Terms of service
+      url: https://www.perplexity.ai/hub/legal/terms-of-service
+    - name: Privacy notice
+      url: https://www.perplexity.ai/hub/legal/privacy-notice
+    - name: Cancelling
+      url: https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+    - name: Refunds
+      url: https://www.perplexity.ai/help-center/en/articles/10354288-refunds
+    - name: Perplexity Max
+      url: https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max
+    - name: Data collection and AI training
+      url: https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+    - name: Deleting your account
+      url: https://www.perplexity.ai/help-center/en/articles/10354879-account-deletion
+    - name: How long it keeps your data
+      url: https://www.perplexity.ai/help-center/en/articles/10354873-how-long-does-perplexity-retain-my-search-history-profile-data-and-personal-information
+    - name: Self-serve data options
+      url: https://www.perplexity.ai/hub/legal/self-serve-data-options
+    - name: Phone verification
+      url: https://www.perplexity.ai/help-center/en/articles/14653777-phone-verification-for-your-account-via-sms-2fa
+    - name: Security
+      url: https://www.perplexity.ai/hub/security
+    - name: Generating images
+      url: https://www.perplexity.ai/help-center/en/articles/10354781-generating-images-with-perplexity
+    - name: Models included
+      url: https://www.perplexity.ai/help-center/en/articles/10354919-what-advanced-ai-models-are-included-in-my-subscription
+    - name: Billing FAQ
+      url: https://www.perplexity.ai/help-center/en/articles/10353002-billing-faq-for-pro-plan-subscribers
+    - name: Pro plans (cookie notice)
+      url: https://www.perplexity.ai/pro
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online in your settings in a few clicks, any time before it renews, and you keep what you paid for until the end of the period.'
+      sources:
+        - url: https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+          quote: 'Go to Settings and scroll down to find “Subscription” under Perplexity Pro. Click “Manage Subscription” to open the current plan page, then choose “Cancel subscription.”'
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'Following any cancellation by you, however, you will continue to have access to the paid Services through the end of the subscription period for which payment has already been made.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments are not refunded, but you can ask for your money back within 24 hours of a monthly charge or 72 hours of buying a year (14 days in the EU and UK), once only, and you keep access to the end of the period.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'Except as expressly set forth in these Terms or in any country-specific billing and consumer information pages, payments for any subscriptions to the Services are nonrefundable and there are no credits for partially used periods.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354288-refunds
+          quote: 'Monthly subscriptions: You can request a refund up to 24 hours after the purchase date.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354288-refunds
+          quote: 'We can’t process additional refund requests after we’ve granted a first one.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change its prices whenever it decides, and tells you a reasonable time ahead, without saying how long.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'Except as otherwise provided in these Terms, any price changes or changes to your subscription plan will take effect following reasonable notice to you.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A free trial needs a card and turns into a paid plan at the regular price unless you cancel, which you can do at any time during it.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'Upon expiration of your free trial, you will be charged the then-current subscription price for the applicable Service.'
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'You may cancel your free trial at any time by navigating to perplexity.ai/account/details, selecting “view details” and “cancel subscription” while logged in.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own at the then-current price, but not that it reminds you first.'
+      pages:
+        - https://www.perplexity.ai/hub/legal/terms-of-service
+        - https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and billing pages list no fees beyond the price and taxes.'
+      pages:
+        - https://www.perplexity.ai/hub/legal/terms-of-service
+        - https://www.perplexity.ai/help-center/en/articles/10353002-billing-faq-for-pro-plan-subscribers
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up from Pro to Max on the web starts at once, and what you already paid counts toward it. Moving down starts when your period ends.'
+      sources:
+        - url: https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max
+          quote: 'Yes, if you’ve already subscribed via web app we will carry over your balance and bill you the prorated amount for your new subscription.'
+        - url: https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max
+          quote: 'Please note that all other cancellations and downgrades will kick in at the end of your billing cycle.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by writing within 30 days of signing up."
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'You have the right to opt-out and not be bound by the arbitration provisions set forth in these Terms by sending written notice of your decision to opt-out to support@perplexity.ai or to the U.S. mailing address listed in the “How to Contact Us” section of these Terms.'
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'The notice must be sent to the Company within 30 days of your first registering to use the Services or agreeing to these Terms; otherwise you shall be bound to arbitrate disputes on a non-class basis in accordance with these Terms.'
+      action:
+        name: 'How to opt out of arbitration (section 9.6)'
+        url: https://www.perplexity.ai/hub/legal/terms-of-service
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tries to tell you about big changes to its terms, by email or a notice on its website, but they apply as soon as they are posted.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'If we make changes that are material, we will use reasonable efforts to attempt to notify you, such as by e-mail and/or by placing a prominent notice on the first page of the Website.'
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'The updated Terms will be effective as of the time of posting, or such later date as may be specified in the updated Terms.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or delete your account for any reason or none, with or without warning, and gives no refund when it says you broke its rules.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'Additionally, the Company may suspend, disable, or delete your Account and/or the Services (or any part of the foregoing) with or without notice, for any or no reason.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354288-refunds
+          quote: 'If your account is terminated for violating Perplexity’s Terms of Use, you will not receive a refund for any remaining credit or prepaid service.'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'It doesn’t claim what you type, but takes a broad licence to use, publish and share it to run, improve and promote Perplexity, while it keeps your content.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'As between the Company and you, the Company does not claim any ownership in Your Content'
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'You agree that these rights and licenses are royalty free, transferable, sub-licensable, worldwide and irrevocable (for so long as Your Content is stored with us)'
+      lastVerified: 2026-11-13
+    - topic: legal.output-rights
+      tier: poor
+      reason: 'Its terms never say you own what it writes, its licence lets it publish answers made from what you type, and the images it makes are for personal, non-commercial use only.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'including to reproduce, transmit, display, publish and distribute Output based on your Input'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354781-generating-images-with-perplexity
+          quote: 'Images generated through our service by users in Free and individual Pro and Max plans are for personal, non-commercial use only.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change its plans whenever it decides, promises no model will stay, and gives nothing back for part of a period.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'We reserve the right to change our subscription plans or adjust pricing for the paid Services in any manner and at any time as we may determine in our sole and absolute discretion.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354919-what-advanced-ai-models-are-included-in-my-subscription
+          quote: 'The Search model tables below are a snapshot as of November 11, 2026 and are not a commitment to keep any individual model available.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms say nothing about closing accounts that aren’t used.'
+      pages: [https://www.perplexity.ai/hub/legal/terms-of-service]
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use Perplexity for personal, non-commercial use only, and may not take it apart unless the law lets you.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'We hereby permit you to use the Services for your personal, non-commercial use only, provided that you comply with these Terms in connection with all such use.'
+        - url: https://www.perplexity.ai/hub/legal/terms-of-service
+          quote: 'duplicate, decompile, reverse engineer, disassemble or decode the Services (including any underlying idea or algorithm), or attempt to do any of the same;'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://www.perplexity.ai/hub/legal/terms-of-service]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for everything done on your account, but don’t say whether you may share it.'
+      pages: [https://www.perplexity.ai/hub/legal/terms-of-service]
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors certify its security (SOC 2 Type 2), outside testers check it every year, and it rewards experts who report problems.'
+      sources:
+        - url: https://www.perplexity.ai/hub/security
+          quote: 'SOC 2 Type 2 certified by independent auditors — ensuring your information remains protected at all times.'
+        - url: https://www.perplexity.ai/hub/security
+          quote: 'In addition to conducting annual third-party penetration tests, we actively collaborate with researchers through our private Bug Bounty program on BugCrowd and our public Vulnerability Disclosure Program (VDP).'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use it, even what you type and click, to study and improve its services. Turning off AI training doesn’t stop that, and cookie choices are set browser by browser.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'This may include which links you click or what you type as a prompt, or usage data such as the timing of your use or reports of crashes.'
+        - url: https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+          quote: 'Data may still be processed for service operation, legal compliance, and product improvement'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: "Because this preference is stored locally, you may need to set it again if you switch browsers or devices, or if you clear your browser's cache."
+      action:
+        name: 'Its privacy notice’s choices'
+        url: https://www.perplexity.ai/hub/legal/privacy-notice
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: "It doesn't sell your data for money, but lets advertising partners' cookies and pixels follow you across other sites. You can only say no browser by browser, or in your phone's settings."
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'We do not “sell” your personal data for money.'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'The third party may also collect data over time and across websites operated by other companies.'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'You can opt out of online targeted advertising (e.g. cookies and pixels) through the cookie consent pop-up that appears when you visit a Perplexity webpage.'
+      action:
+        name: 'Its privacy notice’s choices'
+        url: https://www.perplexity.ai/hub/legal/privacy-notice
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Perplexity shows no ads from others, but tracks you with cookies and pixels to measure and target its own ads elsewhere. You can only turn that off browser by browser.'
+      sources:
+        - url: https://www.perplexity.ai/pro
+          quote: 'Perplexity does not use these technologies to sell third party ads on our services. Perplexity uses them to measure our ad performance on third party partner websites and to improve our services.'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'Among other things, third parties may use this data to serve ads tailored to your interests, which may include ads about our products or services.'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: "Because this preference is stored locally, you may need to set it again if you switch browsers or devices, or if you clear your browser's cache."
+      action:
+        name: 'Its privacy notice’s choices'
+        url: https://www.perplexity.ai/hub/legal/privacy-notice
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you ask trains its AI unless you turn that off in settings. Turning it off only covers what you send afterwards: what it already took stays in its training data.'
+      sources:
+        - url: https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+          quote: 'For Free, Perplexity Pro and Perplexity Max users, AI Data Retention is enabled by default.'
+        - url: https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+          quote: 'Opt-outs only apply to data collected after the opt-out date'
+        - url: https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+          quote: 'Previously collected training data cannot be deleted or removed'
+      action:
+        name: 'How to turn off AI training'
+        url: https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      status: not-stated
+      reason: 'Its privacy notice and help centre don’t say who can read your chats or whether staff review them.'
+      pages:
+        - https://www.perplexity.ai/hub/legal/privacy-notice
+        - https://www.perplexity.ai/help-center/en/articles/11564572-data-collection-at-perplexity
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data while your account is open and as long as it decides it needs it. Files go after 30 days, and everything else within 30 days of deleting your account.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'We keep your personal data for only as long as necessary to fulfil the purposes in this Notice unless a longer retention period is required or permitted by law.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354873-how-long-does-perplexity-retain-my-search-history-profile-data-and-personal-information
+          quote: 'If you delete your account, your personal information will be removed from our servers within 30 days.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354879-account-deletion
+          quote: 'We only keep your files for 30 days by default.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in its settings, and your data is gone within 30 days.'
+      sources:
+        - url: https://www.perplexity.ai/help-center/en/articles/10354879-account-deletion
+          quote: 'You can initiate data deletion directly from your account settings, without the need to contact support or submit a separate request.'
+        - url: https://www.perplexity.ai/help-center/en/articles/10354879-account-deletion
+          quote: 'Your account and personal data will be permanently deleted within 30 days.'
+      action:
+        name: 'How to delete your account'
+        url: https://www.perplexity.ai/help-center/en/articles/10354879-account-deletion
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data yourself in your account settings and get a download link by email, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/self-serve-data-options
+          quote: 'You will receive an email with a link to download your data.'
+      action:
+        name: 'How to export your data'
+        url: https://www.perplexity.ai/hub/legal/self-serve-data-options
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may give your data to the police to cooperate with them, not only when the law makes it, and doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'We may share data to cooperate with law enforcement, participate in a legal process, or for legal compliance.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data may be kept in the US or other countries with weaker privacy laws. For Europe it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'By submitting your personal data to us you agree to the transfer, storage, and processing of your data in a country other than your country of residence including, but not limited to, the United States.'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'You may also request a copy of any Standard Contractual Clauses we use for the transfer of your data outside of the EEA or United Kingdom'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'To make an account you give your name and contact details, and it may ask some people for a mobile number that can get text messages.'
+      sources:
+        - url: https://www.perplexity.ai/help-center/en/articles/14653777-phone-verification-for-your-account-via-sms-2fa
+          quote: 'Perplexity may ask some users to verify a phone number before they continue using Perplexity.'
+        - url: https://www.perplexity.ai/hub/legal/privacy-notice
+          quote: 'When you make an account, we collect your name, contact information, username and password, and, in some instances, device and network identifiers.'
+      lastVerified: 2026-11-13

@@ -342,6 +342,13 @@
   source: own
   status: done
   date: 2026-11-14
+- id: perplexity
+  name: Perplexity
+  website: https://www.perplexity.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-14
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

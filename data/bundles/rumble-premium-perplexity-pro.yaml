@@ -1,0 +1,21 @@
+# For data/bundles/rumble-premium-perplexity-pro.yaml. Rumble sells it (rumble.com/premium, read 2026-11-14 with Edge from
+# Canada): "Perplexity Pro Bundle", "Bundle Rumble Premium with a subscription to Perplexity Pro and save 20%!*", "Get 2
+# premium services in one", "$23.99/mo", "Automatically renews", and "* Savings for bundle are calculated based on USD
+# prices": one US-dollar price, as Rumble's own (its provider file prices Premium for everywhere in US dollars). Monthly
+# only: the page shows no yearly bundle. Its features are Rumble Premium's and Perplexity Pro's together ("Ad-Free
+# Content", "Offline Downloads", "Access to Perplexity Pro"), so it's a bundle, not a plan. Perplexity's own pages don't
+# mention it (its help centre's partner promotions name codes and trials only).
+id: bundle.rumble-premium-perplexity-pro
+name: Rumble Premium and Perplexity Pro
+soldBy: rumble
+includes: [rumble.premium, perplexity.pro]
+link: https://rumble.com/premium
+prices:
+  - region: GLOBAL
+    currency: USD
+    amount: 23.99
+    interval: month
+    intervalCount: 1
+    autoRenew: true
+    lastVerified: 2026-11-14
+    sourceUrl: https://rumble.com/premium
