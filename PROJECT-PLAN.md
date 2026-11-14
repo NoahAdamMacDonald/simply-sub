@@ -2267,6 +2267,12 @@ in every D1 `json` column search parses.
   - **The partly done lines** (2026-11-14): AVG (`avg`) and Avira (`avira`) on Gen Digital's privacy policy; Last.fm
     (`last-fm`), a social service since it plays no music itself; nugs (`nugs-net`); the media apps Infuse (`infuse`)
     and Stremio (`stremio`, free only while its Supporter payments are paused).
+  - **AI, batch 1** (2026-11-14): eleven AI features in the registry (web search, voice, memory, projects, reasoning,
+    browser use, code completion, music and voice generation, model choice, integrations, where chats are kept) with
+    every AI plan's value; Proton's Lumo Plus; GitHub (`github`: its account plans and Copilot); the X Subscription
+    (`x-subscription`: Grok, Cursor and X Premium, sold as one plan since 2026-10-12); Devin (`devin`, Windsurf's
+    successor); Microsoft 365 (`microsoft-365`: Copilot, Office, OneDrive and Defender, on Microsoft's privacy statement
+    and services agreement as shared documents); Perplexity (`perplexity`).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
