@@ -757,6 +757,97 @@
   category: ai
   type: boolean
   aliases: [video creation, text to video]
+# The AI category's comparison (the owner's design, 2026-11-13): what Claude's, ChatGPT's, Google AI's and Lumo's own
+# plan pages and help centres state, each offered by two or more of them, under the assistant's group.
+# - Uses a browser or computer: an agent that clicks, types and fills in forms for you (Claude in Chrome, ChatGPT's
+#   built-in and cloud browsers, tasks in Gemini), not a coding tool's test browser.
+# - Code completion: suggestions as you type in your editor (Antigravity's Tab completions), not a coding agent.
+# - Music and voice generation: audio you keep (songs, podcast-style overviews), not a voice chat's spoken replies.
+# - Models from several companies: models you pick that other companies or labs made, not one maker's range.
+# - Connects to: `api` only where the plan includes API use (its monthly API credits); `custom-assistants` where you
+#   can make your own (skills, Gems, Custom Lumos), not only use other people's.
+- id: ai.web-search
+  parent: ai.assistant
+  name: Searches the web
+  category: ai
+  type: boolean
+  aliases: [web browsing, internet search]
+- id: ai.voice
+  parent: ai.assistant
+  name: Voice conversations
+  category: ai
+  type: boolean
+  aliases: [voice mode, talk to it]
+- id: ai.memory
+  parent: ai.assistant
+  name: Remembers across chats
+  category: ai
+  type: boolean
+  aliases: [chat memory, personalization]
+- id: ai.projects
+  parent: ai.assistant
+  name: Projects
+  category: ai
+  type: boolean
+  aliases: [project spaces, gemini notebook, chat folders]
+- id: ai.reasoning
+  parent: ai.assistant
+  name: Reasoning models
+  category: ai
+  type: boolean
+  aliases: [thinking, extended thinking, reasoning]
+- id: ai.computer-use
+  parent: ai.assistant
+  name: Uses a browser or computer for you
+  category: ai
+  type: boolean
+  aliases: [agent mode, browser agent, computer use]
+- id: ai.code-completion
+  parent: ai.assistant
+  name: Code completion in your editor
+  category: ai
+  type: boolean
+  aliases: [autocomplete, inline suggestions, tab completion]
+- id: ai.audio-generation
+  parent: ai.assistant
+  name: Music and voice generation
+  category: ai
+  type: boolean
+  aliases: [text to speech, music generation, voice cloning]
+- id: ai.model-choice
+  parent: ai.assistant
+  name: Models from several companies
+  category: ai
+  type: boolean
+  aliases: [choose your model, multiple models]
+- id: ai.integrations
+  parent: ai.assistant
+  name: Connects to
+  category: ai
+  type: set
+  values:
+    - { id: mcp, name: MCP servers, aliases: [model context protocol] }
+    - { id: connectors, name: Your other apps, aliases: [google drive, connectors, connected apps] }
+    - { id: api, name: An API for your own apps, aliases: [api key, endpoint] }
+    - { id: ide, name: Code editors, aliases: [vs code, jetbrains] }
+    - { id: cli, name: The command line, aliases: [terminal, cli] }
+    - { id: browser-extension, name: A browser extension }
+    - { id: custom-assistants, name: Custom assistants, aliases: [gpts, gems, skills] }
+  aliases: [integrations, plugins]
+- id: ai.chat-storage
+  parent: ai.assistant
+  name: Where your chats are kept
+  category: ai
+  type: enum
+  values: # worst to best
+    - { id: cloud, name: On its servers }
+    - {
+        id: encrypted-cloud,
+        name: "On its servers, encrypted so it can't read them",
+        aliases: [zero-access],
+      }
+    - { id: on-device, name: Only on your device, aliases: [local, offline] }
+  aliases: [chat history, local ai]
 
 # ── Gaming (M11.9) ─────────────────────────────────────────────────────────────
 # What game subscriptions compare on, as Xbox Game Pass's and PlayStation Plus's pages state them (the owner's choice of
