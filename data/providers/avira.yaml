@@ -1,0 +1,1545 @@
+# Researched by hand on 2026-11-13 (M11.15, security batch 1), read with Edge from Canada and through each research
+# country's exit (its product pages and the price data they load), with a plain fetch (its legal pages, product pages'
+# features, and its help centre through its Zendesk API) and Gen Digital's pages. Pages, each quoted where it's used:
+# Pricing: its product pages (avira.com/en/antivirus-pro, /internet-security, /prime, /vpn-pro, /buy-antivirus), which
+# price by where the visitor is: the prices they show come from avira.com's own pricing data, which names the country
+# and currency it priced ("country=GB" ... "currency":"GBP"), read 2026-11-13 through a US, UK, Irish, Australian, New
+# Zealand, German, French, Dutch, Spanish and Italian exit. New Zealand is priced in US dollars ("US$109.99",
+# "country=NZ" and "currency":"USD"); the five euro countries' prices are the same. Canada isn't priced on avira.com: read
+# from Canada, its data asks for the US's prices ("country=US", a bare "$"). Its checkout (shop.avira.com, run by its
+# online reseller Cleverbridge) prices Canada in Canadian dollars ("Canadian Dollar", "COUNTRY: Canada", "SUBTOTAL: CA$
+# 124.00" for Prime before GST and QST), read 2026-11-13 from Canada for each plan's monthly and yearly options up to
+# the payment form: Canada's prices are the checkout's, before tax, its sourceUrl the checkout link avira.com's buttons
+# use. The regular price is the one each card names ("Automatically renews at £94.99 / year, unless the renewal is
+# cancelled."); the first year's is an offer. The "2 Years" option is a first term that renews yearly ("$204.99 / First
+# 2 Years", "Automatically renews at $109.99 / year"), so monthly and yearly are stored. No product page says its prices
+# include tax (its European Terms of Sale say "Our advertised prices and the final price displayed prior to your
+# confirmation of your order are inclusive of VAT", not on the pages that price them).
+# Region checklist for CA and US, 2026-11-13: 1. avira.com has language paths (/en/, /de/...), no country paths; 2. no
+# country or currency picker; 3. its pricing data names the country (country=US from Canada); 4. the checkout, up to the
+# payment form, names Canada and CA$; 5. its help centre's payment and renewal articles; 6. Edge, the netlog of its
+# own data, and a US exit; 7. no bill offered.
+# Not drafted (notes.md): Antivirus Pro's and Internet Security's 3- and 5-device options (their device menus didn't
+# answer the reader outside Canada and the US: Antivirus Pro's US$77.99 and US$90.99 a year, CA$88 and CA$102 at
+# Canada's checkout), Phantom VPN Pro's mobile plan (in-app, US$5.99 a month), Prime Mobile for Android and iOS (in-app),
+# Mobile Security Pro, Password Manager Pro, System Speedup Pro, Software Updater Pro, Optimization Suite, Safe Shopping
+# and Secure Browser.
+# Bundles: Prime is its own suite (a plan, includes-subscription). Official resellers: none named; Cleverbridge is the
+# online reseller that runs avira.com's own checkout ("This order process is conducted by our online reseller
+# Cleverbridge GmbH"), not a shop of its own. App stores bill its mobile plans (partners, not listed).
+# Free use: Free Security (its plan below).
+
+id: avira
+name: Avira
+website: https://www.avira.com
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help centre's "How do I cancel or activate Automatic Renewal for my Avira subscription?": "Click Cancel
+# Subscription Renewal." in your account's Subscriptions.
+cancelUrl: https://support.avira.com/hc/en-us/articles/360000924057-How-do-I-cancel-or-activate-Automatic-Renewal-for-my-Avira-subscription
+sources: { pricing: https://www.avira.com/en/buy-antivirus }
+# Owner (M11.2), read 2026-11-13: its License and Services Agreement says "The Avira products and services are part of
+# Gen Digital Inc."; every avira.com page's footer: "Avira is part of Gen - a global company with a family of trusted
+# brands." Its contracts are Avira Inc.'s in the Americas and Avira Holding GmbH's (Tettnang, Germany) elsewhere. Gen's
+# Who We Are page names its headquarters; its country is the US, as Norton's, Avast's and AVG's (notes.md). Shares:
+# Gen's investor FAQs.
+owner:
+  name: Gen Digital Inc.
+  website: https://www.gendigital.com
+  page:
+    name: 'License and Services Agreement'
+    url: https://www.avira.com/en/avira-license-services-agreement
+  quotes:
+    - 'The Avira products and services are part of Gen Digital Inc.'
+  country:
+    code: US
+    page:
+      name: 'Who We Are (Gen)'
+      url: https://www.gendigital.com/us/en/who-we-are/
+    quotes:
+      - 'Our global workforce has dual headquarters in Prague, Czech Republic and Tempe, Arizona, USA.'
+    lastVerified: 2026-11-13
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: GEN }
+    page:
+      name: 'Investor FAQs (Gen)'
+      url: https://investor.gendigital.com/resources/investor-faqs/default.aspx
+    quotes:
+      - 'Gen’s ticker symbol is GEN.'
+      - 'Gen’s common stock is traded on the Nasdaq Global Select Market.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay and card networks (M11.5), read 2026-11-13 in its help centre's "What payment options does Avira offer?"
+# (its online shop: Visa, Mastercard and American Express cards, PayPal, and direct debit in Germany only) and its
+# in-app purchase article (the App Store, Google Play and the Microsoft Store bill its in-app plans). Canada's checkout
+# showed "Credit card" as its payment option.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://support.avira.com/hc/en-us/articles/360002939213-What-payment-options-does-Avira-offer
+    quotes:
+      - 'Credit card (Visa, MasterCard and American Express)'
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'What payment options does Avira offer?'
+    url: https://support.avira.com/hc/en-us/articles/360002939213-What-payment-options-does-Avira-offer
+    quotes:
+      - 'Credit card (Visa, MasterCard and American Express)'
+      - 'PayPal'
+  - methods: [app-store]
+    page: 'Canceling an Avira plan in-app purchase'
+    url: https://support.avira.com/hc/en-us/articles/4417171208849-Canceling-an-Avira-plan-in-app-purchase-on-the-Apple-App-Store-Google-Play-Store-or-Microsoft-Store
+    quotes:
+      - 'If you subscribed to an Avira plan through an in-app purchase, you can cancel or change your subscription settings only from the Apple App Store, Google Play Store, or Microsoft Store.'
+  - methods: [card, paypal, bank-transfer]
+    regions: [DE]
+    page: 'What payment options does Avira offer?'
+    url: https://support.avira.com/hc/en-us/articles/360002939213-What-payment-options-does-Avira-offer
+    quotes:
+      - 'Credit card (Visa, MasterCard and American Express)'
+      - 'Direct debit (only in Germany)'
+      - 'PayPal'
+  - methods: [app-store]
+    regions: [DE]
+    page: 'Canceling an Avira plan in-app purchase'
+    url: https://support.avira.com/hc/en-us/articles/4417171208849-Canceling-an-Avira-plan-in-app-purchase-on-the-Apple-App-Store-Google-Play-Store-or-Microsoft-Store
+    quotes:
+      - 'If you subscribed to an Avira plan through an in-app purchase, you can cancel or change your subscription settings only from the Apple App Store, Google Play Store, or Microsoft Store.'
+# Renewal day (M11.5, M11.21): renewals are billed "up to 35 days before renewal" for yearly plans and "up to 5 days"
+# for monthly ones (the subscription details on every avira.com page); its help centre's renewal article says "Yearly
+# subscription: 35 days before expiration date." and its European Terms of Sale "up to thirty-five (35) days before the
+# annual subscription is due to renew": a new yearly item is charged 35 days early, the earliest it can be.
+renewalAnchor:
+  kind: same-date
+  page: 'Legal'
+  url: https://www.avira.com/en/legal-terms
+  quotes:
+    - 'Renewal payments are billed annually (up to 35 days before renewal) or monthly (up to 5 days before renewal) depending on your billing cycle.'
+  chargedBefore: { days: 35, upTo: true }
+  lastVerified: 2026-11-13
+# Lab results (M11.2), read 2026-11-13: AV-TEST's newest home-user Windows test, Jul-Aug 2026 (report 261404), of Avira
+# Internet Security for Windows 1.1. AV-TEST's October 2026 page has no results yet. AV-Comparatives' and SE Labs'
+# results aren't listed: see data/raters.yaml.
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/avira-internet-security-for-windows-1.1-261404/
+    tested: Internet Security for Windows 1.1, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/avira-internet-security-for-windows-1.1-261404/
+    tested: Internet Security for Windows 1.1, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/avira-internet-security-for-windows-1.1-261404/
+    tested: Internet Security for Windows 1.1, Windows 11
+
+# Categories (M11.3): an antivirus first (security). Every plan but Phantom VPN Pro has its password manager (Free
+# Security's "Use our onboard Password Manager to keep track of all your passwords", Antivirus Pro's "Avira Password
+# Manager to create strong passwords", Internet Security's and Prime's Password Manager Pro), so it's in passwords too.
+# Prime has Phantom VPN Pro, unlimited, so it's a VPN plan as well; Free Security and Antivirus Pro have the free Phantom
+# VPN, "restricted to 500 MB/month of data, or 1 GB/month if you register" (the VPN Pro page), so they aren't (notIn).
+# General features, read 2026-11-13: Prime's "Get access to all our products across all platforms, including PC, Mac,
+# Android, iOS, and web browsers"; Antivirus Pro "For Windows and Mac."; Internet Security is "for Windows". Sign-in,
+# support channels and app languages: no page read lists them for every plan (Antivirus Pro's "customer support via a
+# toll-free number or email" is the paid plans').
+features:
+  platforms: [windows, macos, android, ios]
+
+# Perks (M11.6): Prime's lines no feature describes, in its page's words.
+perks:
+  - id: safe-shopping
+    name: Secure price comparison tool
+  - id: vip-support
+    name: VIP customer support
+
+# Features in depth, read 2026-11-13:
+# - Antivirus Pro's page: "Avira Antivirus Pro and Avira Free Antivirus utilize the same high-performance scan engine and
+#   the same AI-powered cloud-based detection system for real-time malware protection"; "Heuristic detection" (its
+#   detection system: behaviour-based detection, for Free too); "You can also start system scans manually" and "You can
+#   also create schedules for your scans, specifying the frequency, day, and time" (Pro); the Avira Firewall ("Windows
+#   feature"); Web Protection, which "scans the websites you want to visit for potentially harmful content — or checks
+#   if they’re classified as phishing or spam"; "ANTI-RANSOMWARE"; Smart Scan's "outdated software, network threats,
+#   privacy vulnerabilities, and performance issues"; and "Avira Antivirus Pro also includes Avira Phantom VPN for secure
+#   and anonymous surfing, Avira Password Manager to create strong passwords, Avira Software Updater for Windows that
+#   makes it a breeze to update your programs, apps, and drivers as well as Avira System Speedup".
+# - Free Security's page: "a built-in, powerful anti-ransomware", "Update outdated and vulnerable apps easily with one
+#   click", "Avira Free Security scans your home network for vulnerabilities", its browser extension's protection "from
+#   phishing attempts, harmful websites" and "hidden trackers", "Erase sensitive data securely", "Free up space on your
+#   device" and its password manager ("Generate and securely store unhackable passwords"). No scheduled scans named.
+# - Internet Security's page: Password Manager Pro ("Alerts you if your account was breached", "Identifies weak
+#   passwords across all your accounts", "Tells you which accounts use the same passwords"), Software Updater Pro
+#   ("Automatically patches your security holes"), Browser Safety ("Prevents ad networks from tracking you online"), and
+#   Free Security's card for it: "Alerts you if your data was leaked in a security breach".
+# - Prime: "Everything in Internet Security Suite" and "Premium mobile apps for Android & iOS" (Free Security's cards),
+#   "Unlimited VPN", "PC cleaner", "Security for Smartphones: Blocks phishing websites and unwanted callers" (its page);
+#   its help centre's "an android remote tracking tool to find a misplaced, lost or stolen smartphone"; Antivirus Pro's
+#   page on the premium Android app: "camera and microphone protection". "One subscription covers up to 25 devices"
+#   (5 or 25, its two options).
+# - Phantom VPN Pro (avira.com/en/vpn-pro): "1400 servers in 36 countries around the world" with its list (Isle of Man
+#   among them; its help centre's list of "virtual locations" names 35, without it), "Unlimited data", "Kill switch
+#   (Windows Feature)", "P2P file sharing", "Avira has a no-log policy and doesn’t know what websites you visit" (no audit
+#   named). Its checkout sells it for "1 device / Yearly subscription". Protocols, split tunneling and multi-hop: no page
+#   read states them.
+plans:
+  # Free Security (its page, en/free-security): antivirus, anti-ransomware, browser protection, a software updater, a
+  # home network scan, a password manager, a shredder, speed-up tools and the free Phantom VPN (500 MB a month).
+  - id: avira.free-security
+    name: 'Free Security'
+    link: https://www.avira.com/en/free-security
+    categories: [security, passwords]
+    notIn: [vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.network: [home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      security.anti-tracker: true
+      security.file-shredder: true
+      password-manager: true
+      password-manager.item-types: [login]
+      vpn.included: true
+    notes: 'Free: real-time antivirus with ransomware and phishing protection, a software updater, a password manager, a file shredder, speed-up tools and a VPN with 500 MB a month (1 GB if you register).'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/free-security
+  # Antivirus Pro, "1 Device" (its page's default option; "1 device" at its checkout), "For Windows and Mac.".
+  - id: avira.antivirus-pro
+    name: 'Antivirus Pro'
+    link: https://www.avira.com/en/antivirus-pro
+    categories: [security, passwords]
+    notIn: [vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      security.anti-tracker: true
+      security.file-shredder: true
+      password-manager: true
+      password-manager.item-types: [login]
+      vpn.included: true
+      antivirus.devices: 1
+      platforms: [windows, macos]
+    notes: 'Antivirus for 1 Windows PC or Mac, with a firewall on Windows, scheduled scans, phishing protection and the free VPN (500 MB a month).'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 7.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=2215&language=en&runtime=1&users=1&x-subscription-type=monthly&x-disable-money-back=true'
+      - region: US
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: GB
+        currency: GBP
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: IE
+        currency: EUR
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: AU
+        currency: AUD
+        amount: 5.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: NZ
+        currency: USD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: DE
+        currency: EUR
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: FR
+        currency: EUR
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: NL
+        currency: EUR
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: ES
+        currency: EUR
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: IT
+        currency: EUR
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: CA
+        currency: CAD
+        amount: 73.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=2215&language=en&runtime=12&users=1&x-subscription-type=annual'
+      - region: US
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: GB
+        currency: GBP
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: IE
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: AU
+        currency: AUD
+        amount: 66.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: NZ
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: DE
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: FR
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: NL
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: ES
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+      - region: IT
+        currency: EUR
+        amount: 49.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/antivirus-pro
+  # Internet Security, "1" device (its page's default; "1 device" at its checkout), for Windows: Antivirus Pro plus
+  # Password Manager Pro, Software Updater Pro and breach alerts.
+  - id: avira.internet-security
+    name: 'Internet Security'
+    link: https://www.avira.com/en/internet-security
+    categories: [security, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      security.anti-tracker: true
+      security.file-shredder: true
+      security.dark-web-monitoring: true
+      password-manager: true
+      password-manager.item-types: [login]
+      password-manager.health: [breached, weak, reused]
+      antivirus.devices: 1
+      platforms: [windows]
+    notes: 'Antivirus Pro for 1 Windows PC, plus Password Manager Pro with breach and weak-password alerts, automatic software and driver updates, and alerts when your data leaks.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 8.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1905&language=en&runtime=1&users=1&x-subscription-type=monthly&x-disable-money-back=true'
+      - region: US
+        currency: USD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: IE
+        currency: EUR
+        amount: 4.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: AU
+        currency: AUD
+        amount: 6.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: NZ
+        currency: USD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: DE
+        currency: EUR
+        amount: 4.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: FR
+        currency: EUR
+        amount: 4.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: NL
+        currency: EUR
+        amount: 4.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: ES
+        currency: EUR
+        amount: 4.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: IT
+        currency: EUR
+        amount: 4.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: CA
+        currency: CAD
+        amount: 80.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1905&language=en&runtime=12&users=1&x-subscription-type=annual'
+      - region: US
+        currency: USD
+        amount: 70.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: GB
+        currency: GBP
+        amount: 47.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: IE
+        currency: EUR
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: AU
+        currency: AUD
+        amount: 73.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: NZ
+        currency: USD
+        amount: 70.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: DE
+        currency: EUR
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: FR
+        currency: EUR
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: NL
+        currency: EUR
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: ES
+        currency: EUR
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+      - region: IT
+        currency: EUR
+        amount: 54.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/internet-security
+  # Prime, "5 Devices" (its page): everything in Internet Security, Phantom VPN Pro, System Speedup Pro and the premium
+  # mobile apps.
+  - id: avira.prime
+    name: 'Prime (5 devices)'
+    link: https://www.avira.com/en/prime
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, calls]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.anti-theft: [locate]
+      security.anti-tracker: true
+      security.file-shredder: true
+      security.dark-web-monitoring: true
+      security.webcam-protection: [webcam, microphone]
+      password-manager: true
+      password-manager.item-types: [login]
+      password-manager.health: [breached, weak, reused]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 36
+      vpn.kill-switch: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      antivirus.devices: 5
+      includes-subscription: [avira.internet-security, avira.phantom-vpn-pro]
+    perks: [safe-shopping, vip-support]
+    notes: 'Every Avira app on up to 5 PCs, Macs, phones or tablets: Internet Security, the unlimited Phantom VPN Pro, System Speedup Pro and the premium mobile apps.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 12.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1955&language=en&runtime=1&users=1&x-subscription-type=monthly&x-disable-money-back=true'
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: GB
+        currency: GBP
+        amount: 8.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IE
+        currency: EUR
+        amount: 9.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: AU
+        currency: AUD
+        amount: 13.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NZ
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: DE
+        currency: EUR
+        amount: 9.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: FR
+        currency: EUR
+        amount: 9.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NL
+        currency: EUR
+        amount: 9.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: ES
+        currency: EUR
+        amount: 9.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IT
+        currency: EUR
+        amount: 9.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: CA
+        currency: CAD
+        amount: 124.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1955&language=en&runtime=12&users=1&x-subscription-type=annual'
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: GB
+        currency: GBP
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IE
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: AU
+        currency: AUD
+        amount: 147.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NZ
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: DE
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: FR
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NL
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: ES
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IT
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+  # Prime, "25 Devices" (its page's other option).
+  - id: avira.prime-25-devices
+    name: 'Prime (25 devices)'
+    link: https://www.avira.com/en/prime
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, calls]
+      antivirus.network: [firewall, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.anti-theft: [locate]
+      security.anti-tracker: true
+      security.file-shredder: true
+      security.dark-web-monitoring: true
+      security.webcam-protection: [webcam, microphone]
+      password-manager: true
+      password-manager.item-types: [login]
+      password-manager.health: [breached, weak, reused]
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 36
+      vpn.kill-switch: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      antivirus.devices: 25
+      includes-subscription: [avira.internet-security, avira.phantom-vpn-pro]
+    perks: [safe-shopping, vip-support]
+    notes: 'Prime on up to 25 devices.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 15.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1956&language=en&runtime=1&users=1&x-subscription-type=monthly&x-disable-money-back=true'
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IE
+        currency: EUR
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: AU
+        currency: AUD
+        amount: 17.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NZ
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: DE
+        currency: EUR
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: FR
+        currency: EUR
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NL
+        currency: EUR
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: ES
+        currency: EUR
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IT
+        currency: EUR
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: CA
+        currency: CAD
+        amount: 152.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1956&language=en&runtime=12&users=1&x-subscription-type=annual'
+      - region: US
+        currency: USD
+        amount: 134.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: GB
+        currency: GBP
+        amount: 116.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IE
+        currency: EUR
+        amount: 134.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: AU
+        currency: AUD
+        amount: 181.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NZ
+        currency: USD
+        amount: 134.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: DE
+        currency: EUR
+        amount: 134.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: FR
+        currency: EUR
+        amount: 134.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: NL
+        currency: EUR
+        amount: 134.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: ES
+        currency: EUR
+        amount: 134.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+      - region: IT
+        currency: EUR
+        amount: 134.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/prime
+  # Phantom VPN Pro (its page, en/vpn-pro): monthly and annual plans, "1 device" at its checkout.
+  - id: avira.phantom-vpn-pro
+    name: 'Phantom VPN Pro'
+    link: https://www.avira.com/en/vpn-pro
+    categories: [vpn]
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 36
+      vpn.devices: 1
+      vpn.kill-switch: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+    notes: 'An unlimited VPN for 1 device, with servers in 36 countries, a kill switch on Windows and P2P.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 12.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1704&language=en&runtime=1&users=1&x-subscription-type=monthly&x-disable-money-back=true'
+      - region: US
+        currency: USD
+        amount: 10.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: GB
+        currency: GBP
+        amount: 7.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: IE
+        currency: EUR
+        amount: 7.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: AU
+        currency: AUD
+        amount: 10.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: NZ
+        currency: USD
+        amount: 10.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: DE
+        currency: EUR
+        amount: 7.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: FR
+        currency: EUR
+        amount: 7.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: NL
+        currency: EUR
+        amount: 7.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: ES
+        currency: EUR
+        amount: 7.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: IT
+        currency: EUR
+        amount: 7.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: CA
+        currency: CAD
+        amount: 88.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: 'https://e-shop.avira.com/checkout?product=1704&language=en&runtime=12&users=1&x-subscription-type=annual'
+      - region: US
+        currency: USD
+        amount: 78.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: GB
+        currency: GBP
+        amount: 52.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: IE
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: AU
+        currency: AUD
+        amount: 80.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: NZ
+        currency: USD
+        amount: 78.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: DE
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: FR
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: NL
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: ES
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+      - region: IT
+        currency: EUR
+        amount: 59.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avira.com/en/vpn-pro
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch from Canada. Every agreement a user accepts:
+# the subscription details on every avira.com page ("Subscription contracts begin when the transaction is complete and
+# are subject to our Terms of Sale and License & Services Agreement"); its Legal page lists them by region: the Terms of
+# Sale for "Europe, Middle East, and Africa" (avira.com/en/avira-terms-of-sale) and the "Americas"
+# (/standard-terms-conditions-business-us), the License and Services Agreement for "Europe, Middle East, and Africa"
+# (/avira-license-services-agreement, Gen's newer one) and for the "Americas, Asia-Pacific, and Japan"
+# (/end-user-license-agreement-terms-of-use-2021, its Section II for everyone outside Germany, Austria and Switzerland),
+# its Cancellation and Refund Policy, its help centre's billing articles, its Product Privacy Notice and Gen's General
+# Privacy Notice, which its Privacy Center follows ("we follow our group General Privacy Notice which includes
+# information broadly applicable across all Gen brands, services and products"), rated once as a shared document
+# (data/policies/gen-digital-privacy.yaml). The provider-wide ratings take the worse of the two regions' documents; the
+# European ones (the UK, Ireland and the euro countries) are rated for those regions where they're better. Read but
+# holding no topic of their own: its Right of Withdrawal page and the Americas Terms of Sale (they repeat the refund and
+# renewal terms). Not read: the 2021 licence's Section I (German, for Germany, Austria and Switzerland), Cleverbridge's
+# own Terms & Conditions (its checkout's reseller), the checkout's agreement line (seen, not opened) and the
+# Asia-Pacific Terms of Sale.
+policies:
+  shared: [gen-digital-privacy]
+  links:
+    - name: 'License and Services Agreement (Americas, Asia-Pacific)'
+      url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+    - name: 'License and Services Agreement (Europe)'
+      url: https://www.avira.com/en/avira-license-services-agreement
+    - name: 'Terms of Sale (Europe)'
+      url: https://www.avira.com/en/avira-terms-of-sale
+    - name: 'Cancellation and Refund Policy'
+      url: https://www.avira.com/en/cancellation-and-refund-policy
+    - name: 'Subscription details'
+      url: https://www.avira.com/en/legal-terms
+    - name: 'Cancel or activate automatic renewal'
+      url: https://support.avira.com/hc/en-us/articles/360000924057-How-do-I-cancel-or-activate-Automatic-Renewal-for-my-Avira-subscription
+    - name: 'Cancelling a renewal early'
+      url: https://support.avira.com/hc/en-us/articles/360001272298-What-happens-with-my-license-if-I-cancel-my-Avira-subscription-renewal-early
+    - name: 'Payment methods for trials'
+      url: https://support.avira.com/hc/en-us/articles/360000934758-Why-do-I-need-a-payment-method-to-start-an-Avira-trial
+    - name: 'What is Avira Prime?'
+      url: https://support.avira.com/hc/en-us/articles/360000786705-What-is-Avira-Prime
+    - name: 'Product Privacy Notice'
+      url: https://www.avira.com/en/privacy-policy/product
+    - name: 'Checkout (Canada)'
+      url: 'https://e-shop.avira.com/checkout?product=1955&language=en&runtime=12&users=1&x-subscription-type=annual'
+    - name: 'Report a security vulnerability (Gen)'
+      url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can stop it renewing in your Avira account, but its licence for the Americas and Asia-Pacific asks for three months’ notice before your term ends, where its help pages only say before the billing date.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'If you do not want to renew, you need to give us three (3) months’ notice prior to the end of a particular license term and before the beginning of the next license term so that we do not charge you.'
+        - url: https://support.avira.com/hc/en-us/articles/360000924057-How-do-I-cancel-or-activate-Automatic-Renewal-for-my-Avira-subscription
+          quote: 'To stop recurring billing for your subscription, cancel the automatic renewal before your billing date.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In Europe and the UK you can stop it renewing in your account up to the day before it charges you, and keep using it to the end of the time you paid for.'
+      sources:
+        - url: https://www.avira.com/en/avira-terms-of-sale
+          quote: 'You can cancel, or stop, the subscription renewal at any time no later than the day before you are due to be charged'
+        - url: https://support.avira.com/hc/en-us/articles/360001272298-What-happens-with-my-license-if-I-cancel-my-Avira-subscription-renewal-early
+          quote: "If you cancel your subscription early, you can continue to use your Avira product until your subscription automatically expires at the end of your current billing period — even if you're on a free trial."
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Paid monthly, you get your money back only within 14 days of first buying it, not after a monthly renewal. Paid yearly, you can get it all back within 60 days of each yearly payment.'
+      sources:
+        - url: https://www.avira.com/en/cancellation-and-refund-policy
+          quote: 'The purchase of a monthly subscription is eligible for a full refund if requested within 14 days of the date of purchase.'
+        - url: https://www.avira.com/en/cancellation-and-refund-policy
+          quote: 'Subsequent monthly charges are not eligible for a refund.'
+        - url: https://www.avira.com/en/cancellation-and-refund-policy
+          quote: 'Each subsequent annual charge is also eligible for a full refund if requested within 60 days of being charged.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'Each renewal is charged at the list price of the day. Yearly plans get an email with the price first, but its licence for the Americas and Asia-Pacific says it may not tell you, and nothing promises monthly plans any notice.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'If you signed up for automatic renewal of a particular Product, it means you would like to renew a license to such a Product at the end of a particular license term for the list price effective at the time of the renewal and you acknowledge that we may not notify you that a particular license term is ending.'
+        - url: https://www.avira.com/en/legal-terms
+          quote: 'Annual subscribers will receive an email with the renewal price beforehand.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In Europe and the UK a new price applies only when it renews, and it emails you first so you can cancel.'
+      sources:
+        - url: https://www.avira.com/en/avira-terms-of-sale
+          quote: 'A price change will not affect an order that we have already accepted, except if you expressly agree otherwise. If the price for your subscription changes at renewal, we will send you a notification email in advance and you can cancel your subscription renewal or terminate your contract if you do not accept the price change.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A trial needs a payment method and turns into a paid plan unless you cancel before it ends. It charges nothing during the trial.'
+      sources:
+        - url: https://www.avira.com/en/legal-terms
+          quote: 'For trials, a payment method is required at sign-up and will be charged at the end of the trial period, unless cancelled first.'
+        - url: https://support.avira.com/hc/en-us/articles/360000934758-Why-do-I-need-a-payment-method-to-start-an-Avira-trial
+          quote: 'You will NOT be charged during your Avira trial period.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In Europe and the UK a trial of 30 days or more turns into a paid plan, and it emails you before it charges you.'
+      sources:
+        - url: https://www.avira.com/en/avira-terms-of-sale
+          quote: 'If your Trial (of 30 days or more) automatically renews as a paid subscription, we will send you a notification email before we charge the payment method on file.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: neutral
+      reason: 'Yearly plans get an email with the renewal price before it charges you, though its licence for the Americas and Asia-Pacific says it may not tell you a term is ending. Nothing is promised for monthly plans.'
+      sources:
+        - url: https://www.avira.com/en/legal-terms
+          quote: 'Annual subscribers will receive an email with the renewal price beforehand.'
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'If you signed up for automatic renewal of a particular Product, it means you would like to renew a license to such a Product at the end of a particular license term for the list price effective at the time of the renewal and you acknowledge that we may not notify you that a particular license term is ending.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms of sale and licences list no fees beyond the price.'
+      pages:
+        [
+          https://www.avira.com/en/avira-terms-of-sale,
+          https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021,
+        ]
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms of sale and licences don’t say what happens when you switch plans.'
+      pages:
+        [
+          https://www.avira.com/en/avira-terms-of-sale,
+          https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021,
+        ]
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'In the Americas and Asia-Pacific, disputes go to the courts of Santa Clara County, California, not to a private referee (an arbitrator).'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'All claims arising out of or relating to these Terms or the Products will be litigated exclusively in the state or federal courts in Santa Clara County, California and you consent, and we consent, to personal jurisdiction in those courts.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: great
+      reason: 'In Europe and the UK, your own country’s law applies and you can take a dispute to its courts.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'is governed by the laws of the country you live in, and you can file legal disputes in the courts of that country.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts new terms on its website and will likely ask you to accept them. If you don’t agree, you can stop using it and may get a refund.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'We will publish these revised Terms on our website, but will likely require you to accept the updated Terms.'
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'If you do not agree with a modification to these Terms, you may stop using our Products and be eligible for a refund, as applicable.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In Europe and the UK it gives you 14 days’ notice of a change that hurts you, and you can leave with a refund of the time left.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'If we make material changes to the LSA which may be significantly detrimental to you, we will give you fourteen (14) days notice and provide you with the right to terminate your contract and receive a pro rate refund for the remainder of your Service term.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'Its licence for the Americas and Asia-Pacific lets it close your account whenever it likes, and promises no notice or refund.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'Nothing stated in these Terms shall limit our ability to cancel, suspend or terminate any of your Accounts at our sole discretion.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In Europe and the UK it can end your access only if you break its main terms, and it doesn’t promise a refund.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'We may terminate your access to and use of the Services if you breach any of the material terms of this LSA.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can stop selling a product or add or remove features, without telling you first.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'We may suspend or stop offering a particular Product or add or remove functionalities or features. We may perform such modifications without providing you with prior notice of such modification.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In Europe and the UK, if it drops a service or changes it for the worse, it gives you 14 days’ notice and a replacement or a refund of the time left.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'we will give you fourteen (14) days notice and (i) provide you with comparable or superior services for the remainder of your Service term without any additional charge; or (ii) provide you with the right to terminate your contract and receive a pro rata refund for the remainder of your Service term.'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its licence for the Americas and Asia-Pacific can be taken back, and it forbids taking its apps apart, with no exception for what the law allows.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'we grant you a personal, revocable, limited, non-exclusive, non-transferable license for the Products for the duration of the license term'
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'In addition, you may not, or cause any third party to do so, (a) modify, translate, decompile, create any derivative work(s) of, copy, distribute, disassemble'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In Europe and the UK its apps are for your own personal, non-business use, and you may not take them apart unless the law lets you.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'to run such copy of the Software solely for purposes of accessing and using the Services for your own personal non-commercial use during the Service Period.'
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'reverse engineer, decompile or disassemble the Software, or make any make any attempt to discover the source code, except and only to the extent that applicable law expressly permits;'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Its apps work without an account, and an Avira account needs an email address. Its checkout form asks for your first and last name to buy.'
+      sources:
+        - url: https://www.avira.com/en/privacy-policy/product
+          quote: 'If you register, we provide you with a web console in the form of a My Avira Account. This account references your email address and a password that you set.'
+        - url: 'https://e-shop.avira.com/checkout?product=1955&language=en&runtime=12&users=1&x-subscription-type=annual'
+          quote: 'FIRST NAME:'
+        - url: 'https://e-shop.avira.com/checkout?product=1955&language=en&runtime=12&users=1&x-subscription-type=annual'
+          quote: 'LAST NAME:'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: neutral
+      reason: 'Gen, its owner, takes security bug reports and may pay a reward. No outside audit of Avira is named on the pages read.'
+      sources:
+        - url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+          quote: 'we welcome the responsible disclosure of potential security vulnerabilities and bugs or any other web or product-based security concerns to improve the online risk posture of Gen and all its associated brands.'
+        - url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+          quote: 'Please beware that not all submissions may be eligible for a reward/ bounty.'
+      lastVerified: 2026-11-13
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Its VPN doesn’t record the sites you visit, but its security apps collect the websites you visit, and it doesn’t say for how long it keeps them.'
+      sources:
+        - url: https://www.avira.com/en/privacy-policy/product
+          quote: 'If you use Avira Phantom VPN we do not collect any data about the web pages you visit or the services you use on the internet.'
+        - url: https://www.avira.com/en/privacy-policy/product
+          quote: 'URLs / Websites visited'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can share it with the people you live with, such as your partner and children.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'the Services may not be accessed, used, or shared with family members, non-family members, or other individuals who do not reside with you;'
+        - url: https://support.avira.com/hc/en-us/articles/360000786705-What-is-Avira-Prime
+          quote: 'This can include computers and mobile devices used by your spouse or your kids.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit beyond the number of devices each plan covers.'
+      pages:
+        [
+          https://www.avira.com/en/avira-license-services-agreement,
+          https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021,
+        ]
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: poor
+      reason: 'As it installs, it may remove or switch off other security apps on your device.'
+      sources:
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'During the installation process, the Software may uninstall or disable other similar security products/services, or features of such products/services, if such products/services or features are incompatible with the Software or for purposes of improving the overall functionality of the Software.'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'Anything you post in its community comes with a licence forever, which can’t be taken back and which it may pass on to others. It takes no rights over your password vault.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'you grant Avira a royalty-free, unrestricted, worldwide, perpetual, irrevocable, non-exclusive and fully sub-licensable right and license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, perform, display and otherwise fully exploit Your Content'
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your passwords are encrypted as you type them, with a master password Avira doesn’t keep, so it can’t read your vault.'
+      sources:
+        - url: https://www.avira.com/en/privacy-policy/product
+          quote: 'Passwords are encrypted immediately after entry. Due to the master password you set, Avira itself is unable to access your data.'
+        - url: https://www.avira.com/en/avira-license-services-agreement
+          quote: 'We do not store or keep your Master Password so if you lose your Master Password, we cannot recover it for you.'
+      lastVerified: 2026-11-13

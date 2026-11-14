@@ -460,6 +460,9 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['mcafee.advanced-family-us', ['vpn.server-countries']],
   ['mcafee.ultimate-individual-us', ['vpn.server-countries']],
   ['mcafee.ultimate-family-us', ['vpn.server-countries']],
+  // AVG names "more than 100 server locations" but no country count (2026-11-13).
+  ['avg.ultimate', ['vpn.server-countries']],
+  ['avg.secure-vpn', ['vpn.server-countries']],
 ]);
 
 /**

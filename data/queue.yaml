@@ -718,14 +718,15 @@
   sitelinks: 30
   status: done
   date: 2026-11-13
-- id: avg-antivirus
-  name: AVG AntiVirus
+- id: avg
+  name: AVG
   website: https://www.avg.com
   category: security
   source: wikidata
   wikidata: Q209691
   sitelinks: 30
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: clam-antivirus
   name: Clam AntiVirus
   website: https://www.clamav.net
@@ -1210,14 +1211,15 @@
   wikidata: Q2659429
   sitelinks: 13
   status: queued
-- id: avira-antivirus
-  name: Avira Antivirus
+- id: avira
+  name: Avira
   website: https://www.avira.com
   category: security
   source: wikidata
   wikidata: Q791115
   sitelinks: 13
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: star-plus
   name: Star+
   website: https://www.starplus.com
