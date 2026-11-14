@@ -36,6 +36,10 @@
 # Bundles: none: it is itself the bundle of Grok, Cursor and X Premium, priced as one plan, so no bundle file. Official
 # resellers: none: "No. Subscriptions are only sold directly through X Subscription Corp. We do not authorize any
 # resellers or third-party sellers." (cursor.com/pricing's FAQ, "Can I buy Cursor from a reseller or third party?").
+# Prices by country (read 2026-11-13 and 2026-11-14 through each country's exit, after a second agent's check): grok.com/plans
+# shows each country its own currency ("Prices shown do not include applicable taxes or fees."), regular prices after
+# its first-month offers ("50% off for 1 month, then CA$41.99 monthly"); cursor.com and x.ai/pricing show US dollars,
+# kept as the price for everywhere else.
 # Free use: the Free plan ("Free gives you access to Cursor's core features with limited usage.").
 
 id: x-subscription
@@ -47,7 +51,20 @@ website: https://x.ai/pricing
 domains: [cursor.com, x.com, grok.com]
 category: ai
 spendCategory: software
-billingCurrency: { GLOBAL: USD }
+billingCurrency:
+  {
+    CA: CAD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+    GLOBAL: USD,
+  }
 # Its cancel article covers The X Subscription ("Go to grok.com/dashboard/billing", "Open the options on the Current
 # plan card and choose to cancel") and the legacy plans.
 cancelUrl: https://cursor.com/help/account-and-billing/cancel
@@ -282,6 +299,166 @@ plans:
     perks: [grok-api-access, x-plus-benefits]
     notes: 'Grok models only (Grok 4.7, 4.6, 4.5 and Composer 2.5) at fixed settings, without Auto, cloud agents, Bugbot or third-party models.'
     prices:
+      - region: CA
+        currency: CAD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 99.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 70
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 119.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 129.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
       - region: GLOBAL
         currency: USD
         amount: 8
@@ -347,6 +524,166 @@ plans:
       ]
     notes: 'The benefits of SuperGrok, Cursor Pro and X Premium+ in one plan (its launch post). Third-party models (Claude, GPT, Gemini) are paid by use from prepaid credit.'
     prices:
+      - region: CA
+        currency: CAD
+        amount: 41.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 419.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 26
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 260
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 31
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 310
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 45.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 459.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 59.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 599.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
       - region: GLOBAL
         currency: USD
         amount: 30
@@ -413,6 +750,166 @@ plans:
         ad-free-most-surfaces,
       ]
     prices:
+      - region: CA
+        currency: CAD
+        amount: 139.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 1399.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 90
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 900
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 105
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 1050
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 149.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 1499.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 199.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 1999.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
       - region: GLOBAL
         currency: USD
         amount: 100
@@ -480,6 +977,166 @@ plans:
         ad-free-most-surfaces,
       ]
     prices:
+      - region: CA
+        currency: CAD
+        amount: 279.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: CA
+        currency: CAD
+        amount: 2799.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 180
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: GB
+        currency: GBP
+        amount: 1800
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IE
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: DE
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: FR
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NL
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: ES
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 210
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: IT
+        currency: EUR
+        amount: 2100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 309.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: AU
+        currency: AUD
+        amount: 3099.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 399.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
+      - region: NZ
+        currency: NZD
+        amount: 3999.9
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://grok.com/plans
       - region: GLOBAL
         currency: USD
         amount: 200
