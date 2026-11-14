@@ -28,6 +28,10 @@
 # prices by where the visitor is (an address with gl=US still showed CA$ in Edge), so it was read through each
 # country's exit: New Zealand's and Ireland's showed Australia's and the UK's prices, and the Netherlands' no plans, so
 # those three stay unread; 7. no bill offered.
+# Re-read 2026-11-13 (the AI category's new features): the Gemini pages from Canada ("6.99 $CA/month", "26.99
+# $CA/month", "139.99 $CA/month", "279.99 $CA /month") and the US's ("$4.99/ month", "$19.99/ month", "$99.99/ month",
+# "$199.99 / month"): every monthly price unchanged. Google One's AI plans page shows the same four plans ("$6.99
+# CAD/mo", "$26.99 CAD/mo", "From $139.99 CAD/mo"); its plans page (Plus (2 TB), the yearly prices) wasn't re-read.
 # Not on the pages: Plus (400 GB)'s and Ultra's yearly prices (no page offers them); the networks of cards Google
 # One takes outside Google Play's lists.
 
@@ -298,6 +302,52 @@ perks:
 # 5 TB, 20 TB and 30 TB. People included: the paid plans share with a family group of "up to five others" (Google One's
 # AI plans page), "Access to AI benefits such as Gemini App" among what they share (its family sharing article).
 
+# The AI category's features (the owner's design, 2026-11-13), read 2026-11-13 with Edge from Canada in each plan's
+# card on the Gemini pages, Google One's comparison table (Plus, Pro, Ultra 5x, Ultra 20x; ticks from its screenshot)
+# and the Gemini Apps help, on every plan unless named:
+# - Web search: "Gemini can always use public information from Google Search, even if Keep Activity is off or you’re
+#   signed out." (Use & manage Connected Apps in Gemini, its "About Google services" section).
+# - Voice: the free card's "Gemini Live" and the table's "Gemini Live" row; "With Gemini Live, you can have a natural,
+#   free-flowing conversation with Gemini." (Talk naturally with Gemini Live).
+# - Memory: "You can get a personalized experience from Gemini Apps using memory of your past chats." (Get
+#   personalization with memory of your past Gemini chats), which asks only for an adult with Keep Activity on.
+# - Projects: "When Gemini Notebook is connected to Gemini Apps, you can use notebooks to organize your projects in a
+#   dedicated, focused space." (Organize your projects with notebooks in Gemini Apps), and the free card's "Gemini
+#   Notebook".
+# - Reasoning: the models article's table gives "No Google AI Plan" the thinking levels "Low, Medium, High", and
+#   "High: Allows the model to carefully process and reason through complex, multistep prompts." (About Gemini models).
+# - Uses a browser for you on Pro and the Ultras: "Give Gemini a goal and it can plan the steps, browse across sites and
+#   keep working in the background on your behalf" (tasks in Gemini: "Available to Google AI Pro and Ultra
+#   subscribers in selected countries.") and "Let Gemini in Chrome complete tasks for you with auto browse."
+#   ("Available to Google AI Pro and Ultra users in the US and India."); the table's "Tasks in Gemini" row has no tick
+#   for Plus, and its help asks you to "Have a Google AI Pro or Ultra subscription." Free and Plus have none here:
+#   screen automation in Android apps, "a beta feature in the Gemini mobile app" on select phones in five countries,
+#   is left out as a device's beta (notes for the owner). Tasks are "Available wherever Gemini Apps are supported,
+#   except in the European Economic Area, Nigeria, Switzerland, and the United Kingdom." (Manage your tasks & workflows
+#   in Gemini Apps), which the plans' labels say.
+# - Code completion: Google Antigravity's plan "For Individuals" ($0) has "Unlimited Tab completions", and Pro's and
+#   Ultra's "Everything in Individual and:" more (antigravity.google/pricing); Plus has the table's "Limited" agent
+#   requests.
+# - Music and voice generation: "You can create music tracks directly with Gemini Apps with Lyria, our AI music
+#   generator." (Generate music with Gemini Apps, which asks for no plan) and "You can create podcast-style
+#   conversations from documents, slides, NotebookLM notebooks, and Deep Research reports with Audio Overviews in
+#   Gemini Apps." (Generate Audio Overviews in Gemini Apps); the table's "Create music with Lyria 3.5" row.
+# - Connects to: other apps ("Gemini Apps can connect to other apps to complete your request", Use & manage Connected
+#   Apps in Gemini); MCP servers ("You can connect personal or third-party apps by linking their Model Context
+#   Protocol (MCP) server.", there, in the US only for now, and Antigravity's "Model Context Protocol (MCP) clients");
+#   code editors and the command line through Antigravity ("Editor extensions (VS Code, JetBrains, VS, Zed, Xcode,
+#   Eclipse)" and its "Terminal client"; geminicli.com: "Unpaid tier and Google One users: Gemini CLI was replaced by
+#   Antigravity CLI on June 18th, 2026."); skills ("You can use skills to create and save custom instructions that can
+#   be used across your chats and tasks in Gemini Apps.", the free card's "Skills", the table's "Custom AI experts");
+#   and, on Pro and the Ultras, the API through their Google Cloud credits ("US$10 in monthly Google Cloud credits from
+#   Google Developer Programme."). Gemini in Chrome is part of Chrome, not an extension.
+# - Chats kept on its servers: "When you are signed in and Keep Activity is on, Google stores your Gemini Apps activity
+#   in your Google Account." and "Even when Keep Activity is off, your conversations will be saved with your account
+#   for up to 72 hours" (Manage & delete your activity in Gemini Apps).
+# - No page offers another company's models (the models article lists only Gemini's). Gemini Code Assist is gone for
+#   these plans: "Starting June 18, 2026, Gemini Code Assist IDE extensions stopped serving requests for the Gemini
+#   Code Assist for individuals, Google AI Pro, and Google AI Ultra tiers." (Gemini Code Assist consumer accounts).
+
 # General features, read 2026-11-11: app languages from Gemini's help ("The Gemini web app is currently available in
 # more than 70 languages", its list naming Arabic, Chinese, English, French, German, Hindi, Italian, Japanese, Korean,
 # Portuguese and Spanish). Parental controls: "As a parent, you're in control of your child's Gemini Apps access,
@@ -326,6 +376,15 @@ plans:
       ai.deep-research: true
       ai.coding-agent: true
       ai.scheduled-tasks: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.code-completion: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
       storage.cloud: 15
       account.parental-controls: true
     prices:
@@ -335,7 +394,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/us/subscriptions/?hl=en
 
   - id: google-ai.plus
@@ -351,6 +410,15 @@ plans:
       ai.scheduled-tasks: true
       ai.office-apps: true
       ai.early-access: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.code-completion: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
       storage.cloud: 400
       account.users: 6
       support.channels: [chat, phone, email, community]
@@ -363,7 +431,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
       - region: US
         currency: USD
@@ -371,7 +439,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/us/subscriptions/?hl=en
       - region: GB
         currency: GBP
@@ -459,6 +527,15 @@ plans:
       ai.scheduled-tasks: true
       ai.office-apps: true
       ai.early-access: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.code-completion: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
       storage.cloud: 2000
       account.users: 6
       support.channels: [chat, phone, email, community]
@@ -608,12 +685,23 @@ plans:
       ai.office-apps: true
       ai.early-access: true
       ai.api-credits: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.code-completion: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
       storage.cloud: 5000
       account.users: 6
       support.channels: [chat, phone, email, community]
       account.parental-controls: true
     featureLabels:
       ai.api-credits: US$10 a month in Google Cloud credits from the Google Developer Programme
+      ai.computer-use: Tasks in Gemini (not in the EEA, Switzerland or the UK)
     perks:
       [
         usage-4x,
@@ -630,7 +718,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
       - region: CA
         currency: CAD
@@ -646,7 +734,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/us/subscriptions/?hl=en
       - region: US
         currency: USD
@@ -783,12 +871,23 @@ plans:
       ai.office-apps: true
       ai.early-access: true
       ai.api-credits: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.code-completion: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
       storage.cloud: 20000
       account.users: 6
       support.channels: [chat, phone, email, community]
       account.parental-controls: true
     featureLabels:
       ai.api-credits: US$40 a month in Google Cloud credits from the Google Developer Programme
+      ai.computer-use: Tasks in Gemini (not in the EEA, Switzerland or the UK)
     perks:
       [
         usage-5x,
@@ -807,7 +906,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
       - region: US
         currency: USD
@@ -815,7 +914,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/us/subscriptions/?hl=en
       - region: GB
         currency: GBP
@@ -904,12 +1003,23 @@ plans:
       ai.office-apps: true
       ai.early-access: true
       ai.api-credits: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.code-completion: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
       storage.cloud: 30000
       account.users: 6
       support.channels: [chat, phone, email, community]
       account.parental-controls: true
     featureLabels:
       ai.api-credits: US$100 a month in Google Cloud credits from the Google Developer Programme
+      ai.computer-use: Tasks in Gemini (not in the EEA, Switzerland or the UK)
     perks:
       [
         usage-20x,
@@ -927,7 +1037,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/ca/subscriptions/?hl=en-CA
       - region: US
         currency: USD
@@ -935,7 +1045,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://gemini.google/us/subscriptions/?hl=en
       - region: GB
         currency: GBP

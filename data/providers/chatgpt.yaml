@@ -12,6 +12,11 @@
 # Prices: the pricing page's FAQ says "We offer monthly plans for Go, Plus and Business", and the Pro article "Pro is
 # billed monthly. Annual billing and payment for multiple months in advance are not available." No page says the
 # prices include tax.
+# Re-read 2026-11-13 (the AI category's new features): the pricing page with Edge from Canada ("CA$11", "CA$25", "From
+# CA$136") and through a US exit ("$8", "$20", "$100", a bare $ as before, with "$100 with Pro 100, $200 with Pro 200,
+# or $500 with Pro 500."), and the Pro tiers article ("Monthly price (USD)": "$100", "$200", "$500"): every price
+# unchanged, and still "Pro is billed monthly. Annual billing and payment for multiple months in advance are not
+# available." Its individual plans are still Free, Go, Plus and Pro's three tiers. The other countries weren't re-read.
 # Region checklist, 2026-11-04: 1. chatgpt.com/pricing has no country path; 2. its footer's picker is the language;
 # 3. not looked for; 4. checkout needs an account; 5. "Multi-currency billing" lists the currencies, not the prices;
 # 6. each country's prices read through its exit; 7. no bill offered.
@@ -123,6 +128,41 @@ perks:
 #   page "$100 with Pro 100, $200 with Pro 200, or $500 with Pro 500".
 # - No row or card names video generation. The release notes mention Sora's "included limits" and buying "more video
 #   generations in the Sora app", but no plan page says which plans include it, so none has it here.
+# The AI category's features (the owner's design, 2026-11-13), read 2026-11-13 with Edge from Canada in the pricing
+# page's comparison table (ticks from its screenshot) and its help centre, on every plan unless named:
+# - Web search: "Web search is available on ChatGPT Free, Go, Plus, Pro, Business, Enterprise, and Edu." (Searching
+#   the web with ChatGPT), and the table's "Search" row.
+# - Voice: the table's "Voice" row (a tick on Free, "Expanded" on Go and Plus, "Unlimited*" on Pro) and the Free
+#   card's "Limited voice chats"; ChatGPT Voice: "Talk with ChatGPT in a natural, free-form voice conversation."
+# - Memory: the table's "Memory" row ("Limited" on Free, "Expanded" on Plus and Pro) and the Free card's "Limited
+#   memory and context".
+# - Projects: the table's "Projects" row, and "Project sharing is available on ChatGPT Free, Go, Plus, Pro, Business,
+#   Enterprise, and Edu across the web and mobile apps." (Projects in ChatGPT). Plus's card still lists "Projects,
+#   scheduled tasks, and custom GPTs" among what it adds; the table, the per-plan list, ticks Projects on Free and Go.
+# - Reasoning: the table's "GPT-5 Thinking Mini" row (ticks on Free and Go), Plus's "Advanced reasoning models with
+#   GPT-6" and Pro's "Pro reasoning powered by GPT-6 Astra".
+# - Uses a browser for you: the table's "Built-in browser" row, and "Use the built-in browser when a task needs a web
+#   page. You and ChatGPT can see the same page, and ChatGPT can work across tabs, download files, or wait while you
+#   sign in." (Using the built-in browser in the ChatGPT desktop app). Plus and Pro add a remote one: "Cloud browser
+#   is available in ChatGPT Work on paid ChatGPT plans in supported regions, excluding Free and Go." (Using cloud
+#   browser in ChatGPT).
+# - Connects to: MCP servers, code editors and the command line through Codex ("Codex is included across ChatGPT
+#   plans, including Free and Go.", Using Codex with your ChatGPT plan; "The ChatGPT desktop app, Codex CLI, and IDE
+#   extension support MCP servers and share MCP configuration for the same Codex host.", its MCP docs); other apps
+#   through plugins (the table's "Plugins" and "Discover & use Plugins" rows; "Connected apps that link external
+#   accounts, information, and actions.", Plugins in ChatGPT); its Chrome extension ("You can also use the ChatGPT
+#   browser extension with ChatGPT on the web.", which names no plan); skills (the table's "Skills" row); and, on
+#   Pro, the API through its "Monthly API credits".
+# - Chats kept on its servers: "Deleted chats are removed from your account view immediately and scheduled for
+#   permanent deletion within 30 days" (Deleting and archiving chats in ChatGPT), and the table's "Chat history" row.
+# - None of these pages offers code completion as you type (Codex starts "a chat with the context already open in your
+#   editor", its IDE docs), music or voice generation, or another company's models (the table's are GPT models).
+# - Pages that disagree, the table deciding as the newer per-plan list: "Skills are available to eligible ChatGPT
+#   Business, Enterprise, Healthcare, and Edu users" (Skills in ChatGPT, "Updated: 25 days ago") and "New GPT creation
+#   and publishing are not available on personal ChatGPT accounts, including Free, Go, Plus, and Pro." (GPTs in
+#   ChatGPT), against the table's Skills ticks on all four. "Custom MCP server connections and full MCP support are
+#   available for ChatGPT Business and Enterprise/Edu customers on ChatGPT web." (Connecting custom MCP servers in
+#   ChatGPT) is the web app's; Codex's clients connect them on every plan.
 # Apps and sign-in, read 2026-11-04: the table's "Access on web, iOS, Android" and "Code edits on macOS", and the
 # download page's Windows app and Chrome extension; a password, or Google, Microsoft or Apple ("Changing your account
 # sign-in method"). Support: "contact OpenAI Support using the chat widget in the Help Center" (its billing article).
@@ -142,6 +182,14 @@ plans:
       ai.deep-research: true
       ai.coding-agent: true
       ai.office-apps: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       account.parental-controls: true
     prices:
       - region: GLOBAL
@@ -150,7 +198,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
 
   - id: chatgpt.go
@@ -163,6 +211,14 @@ plans:
       ai.coding-agent: true
       ai.office-apps: true
       ai.scheduled-tasks: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       account.parental-controls: true
     prices:
       - region: CA
@@ -171,7 +227,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
       - region: US
         currency: USD
@@ -179,7 +235,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
       - region: GB
         currency: GBP
@@ -265,6 +321,14 @@ plans:
       ai.office-apps: true
       ai.scheduled-tasks: true
       ai.early-access: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       account.parental-controls: true
     prices:
       - region: CA
@@ -273,7 +337,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
       - region: US
         currency: USD
@@ -281,7 +345,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
       - region: GB
         currency: GBP
@@ -368,6 +432,14 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$100 in the US
@@ -379,7 +451,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
       - region: US
         currency: USD
@@ -387,7 +459,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://chatgpt.com/pricing/
       - region: GB
         currency: GBP
@@ -474,6 +546,14 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$200 in the US
@@ -485,7 +565,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
 
   - id: chatgpt.pro-500
@@ -500,6 +580,14 @@ plans:
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.api-credits: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.computer-use: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
       account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$500 in the US
@@ -511,7 +599,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-04
+        lastVerified: 2026-11-13
         sourceUrl: https://help.openai.com/en/articles/9793128-about-chatgpt-pro-tiers
 
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-04 with Edge: its Terms of Use, which
