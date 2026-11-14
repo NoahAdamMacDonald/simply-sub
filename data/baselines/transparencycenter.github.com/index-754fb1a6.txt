@@ -1,0 +1,67 @@
+url: https://transparencycenter.github.com/
+method: browser
+saved: 2026-11-14
+
+Skip to content
+/
+Transparency Center
+About
+User information
+Government
+More
+Repo
+Blog
+Transparency Center
+At GitHub, we put developers first and work hard to provide a safe, open, and inclusive platform for code collaboration. Our developer-first approach to content moderation minimizes disruptions to code while protecting developer privacy, taking action on abusive content, and being transparent about content moderation and disclosure of user information.
+Explore and interact with our data visualizations by reporting category, learn about our approach and commitment to transparency, or delve into the structured data in our repository.
+Latest stats
+H1 2026
+Requests for user information
+339 total requests processed
+252 information disclosures
+622 accounts affected
+Explore data
+H1 2026
+Government takedowns
+708 total requests received
+60 requests processed
+6 governments
+Explore data
+H1 2026
+DMCA takedowns
+1,537 notices processed
+494 circumvention claims
+20,111 projects taken down
+Explore data
+H1 2026
+Automated detection
+27 accounts detected via automated scanning
+12 reports by GH staff to NCMEC
+Explore data
+H1 2026
+Appeals and reinstatements
+19,035 accounts hidden
+17,596 accounts restricted
+13,104 projects disabled
+Explore data
+Transparency report updates
+Developer policy update: Intermediary liability, copyright, and transparency
+We're sharing recent policy updates that developers should know about, updating our Transparency Center with the full year of 2025 data, and looking to what's ahead.
+Learn more
+How GitHub protects developers from copyright enforcement overreach
+Why the U.S. Supreme Court case Cox v. Sony matters for developers and sharing updates to our Transparency Center and Acceptable Use Policies.
+Learn more
+Full archive of transparency reports
+The full archive of our previous transparency reports, posted on the GitHub Blog.
+Learn more
+GitHub on X
+GitHub on GitHub
+GitHub on LinkedIn
+GitHub on YouTube
+GitHub on Facebook
+GitHub on Twitch
+GitHub on TikTok
+GitHub on Instagram
+Terms
+Privacy
+© 2026 GitHub. All rights reserved.

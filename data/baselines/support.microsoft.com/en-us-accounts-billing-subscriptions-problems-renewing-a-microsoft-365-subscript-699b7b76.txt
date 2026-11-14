@@ -1,0 +1,319 @@
+url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/problems-renewing-a-microsoft-365-subscription
+method: fetch
+saved: 2026-11-14
+
+Problems renewing a Microsoft 365 subscription | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Manage Microsoft 365
+Subscriptions from Microsoft
+Third-party subscriptions
+Missing subscription
+Buy now or renew
+Try or buy
+Renew
+Subscription expiry
+Troubleshoot renewing
+Microsoft 365 apps
+Sign in
+Get started
+Why you need to sign in
+Can't sign in
+Download, install or activate Office
+Can't install
+Share your subscription
+Share Microsoft 365
+Stop sharing Microsoft 365
+Can't share
+Manage sharing
+You received an invitation to share
+Subscription sharing FAQs
+Switch subscriptions
+Switch between Microsoft 365 subscriptions
+Compare Microsoft 365 and Office plans
+Switch to a business subscription
+Transfer to a different Microsoft account
+Convert your Microsoft 365 trial to a paid subscription
+Payments
+Change payment method or plan
+Turn recurring billing on or off
+Add a way to pay
+Update a way to pay
+Remove a way to pay
+Refunds
+Get a refund on your subscription
+Refund policy
+Cancel
+Cancel Microsoft 365
+Cancel your free trial
+Cancel other subscriptions
+Can't cancel
+Subscription versions
+Check version
+Switch between Microsoft 365 subscriptions
+Microsoft 365 for home or business
+What business product do I have?
+Difference between Microsoft 365 and Office 2024
+Difference between Microsoft 365 and free web apps
+Difference between home and business plans
+Manage your Microsoft account
+Manage your Microsoft account
+Other billing help
+Other billing help
+Problems renewing a Microsoft 365 subscription
+Applies To Excel for Microsoft 365 Word for Microsoft 365 PowerPoint for Microsoft 365 Excel for Microsoft 365 for Mac Word for Microsoft 365 for Mac PowerPoint for Microsoft 365 for Mac Microsoft 365 for home Microsoft 365 admin Microsoft 365 Microsoft 365 Apps for business Microsoft 365 Copilot app for Android Microsoft 365 Copilot app for iOS Microsoft 365 Family Microsoft 365 for Mac Microsoft 365 for Windows Microsoft 365 Personal Microsoft account dashboard
+Get help with Copilot
+What are the steps to check renewal status?
+Tell me about tips and suggestions for How to renew my
+Tell me about overview of How to renew my Microsoft 365
+If you're having trouble renewing your Microsoft 365 subscription, select one of the FAQs below.
+Check your renewal status.
+After you've renewed your subscription, you can verify that the subscription has been renewed.
+Go to your Microsoft account Services & subscriptions page. Be sure to use the same Microsoft account that you used to renew your subscription.
+Sign in
+If recurring billing is turned on, you'll see the date that your subscription will renew.
+If recurring billing is turned off, you'll see the date that your subscription will expire.
+Tip
+For more information about recurring billing, see Turn recurring billing on or off.
+I'm still seeing "Renew your subscription" message.
+You might see the "Renew your subscription" message in a yellow warning bar across the top of an Office application after you've renewed Microsoft 365.
+Why it happens: Your Microsoft 365 subscription was about to expire, before you renewed.
+How to turn it off: After you renew your subscription, close all of your open Office applications and open them again to begin using them. You may have to sign in again with the Microsoft account that is associated with your subscription. If you don't want to worry about your Microsoft 365 subscription expiring in the future, consider turning on recurring billing.
+I'm getting a "Subscription expired" message.
+You might see the "Subscription expired" message in a yellow warning bar across the top of an app after you've renewed Microsoft 365.
+Why it happens: Your Microsoft 365 subscription expired, before you renewed.
+How to turn it off: After you renew your subscription, close all of your open Microsoft 365 applications and open them again to begin using them. You may have to sign in again with the Microsoft account that is associated with your subscription. If you don't want to worry about your Microsoft 365 subscription expiring in the future, consider turning on recurring billing.
+If I renew early, will I lose any unused time?
+You won't lose any unused time when you renew. Your expiration date will just extend by one month or one year, depending on what you choose.
+I just want the Office apps, without a Microsoft 365 subscription.
+Microsoft 365 subscriptions include the latest feature updates, upgrades to future versions, ongoing tech support, and more. However, if you've decided that a subscription service isn't for you, you can buy Office as a one-time purchase. Compare and buy Office products.
+I want to switch to a different Microsoft 365 subscription.
+If you have Microsoft 365 Personal and decide you now want Microsoft 365 Family so you can share your subscription with up to 5 people, or you want to switch from Microsoft 365 Family to Microsoft 365 Personal you can. See Switch to a different Microsoft 365 subscription.
+I'm getting a "Product Deactivated" error message.
+To keep using your Microsoft 365 applications, you need to reactivate the subscription. For help, see A subscription notice appears when I open a Microsoft 365 application.
+I'm getting errors when I try to renew, and I need to use Microsoft 365 right away.
+If Microsoft 365 expired and you need to use an app like Word, Excel, or PowerPoint right away, go to microsoft365.com and use the Microsoft 365 for the web apps in your web browser. You can also access your OneDrive from there. Contact Microsoft Support to get help with the renewal error.
+I renewed at a retail store and my credit card was charged, but Microsoft 365 still isn't working.
+To complete renewal, you need to go to Microsoft365.com/setup and enter the product key you got at the store, or follow the link in your email receipt. If you can't find your email receipt, check your junk mail folder.
+You might also need to follow the steps in Renew using a product key that you bought in a store, above.
+I want to renew Microsoft 365 in a different country than where I bought my original subscription.
+Contact Microsoft Support.
+I renewed, but can't install Microsoft 365 apps
+Check your renewal status to make sure the subscription was renewed and is now active. If it is active and the Install button isn't working, please contact Microsoft Support.
+Go to your Microsoft account, Payment & billing page.
+If prompted, choose Sign in and enter the Microsoft account and password associated with your Microsoft 365 subscription.
+Review the details for your Microsoft 365 subscription.
+If you see Has recurring billing, your subscription is set up for recurring billing on the date shown, unless you click Change and Turn off recurring billing or cancel it beforehand.
+If you see Expires on [date], your subscription will expire on that date, unless you renew.
+Note
+For help understanding renewal and billing dates for all Microsoft subscriptions, see Account subscription recurrence and billing dates.
+I forgot my Microsoft account password or email.
+If you can't sign into your Microsoft account, most issues can be identified by our sign-in helper tool.
+The tool will ask you to enter the email address or mobile phone number you're trying to sign in with and check the details you provide. If we detect a problem with your account, we'll tell you what you need to do to solve the problem. If we don't detect any problem, we'll guide you through how you can help yourself.
+Click the button to begin:
+Sign-in Helper
+Need more help?
+Contact Support
+For technical support, go to Contact Microsoft Support, enter your problem and select Get Help. If you still need help, select Contact Support to be routed to the best support option.
+For pre-sales support, or issues with purchasing, contact Sales support.
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

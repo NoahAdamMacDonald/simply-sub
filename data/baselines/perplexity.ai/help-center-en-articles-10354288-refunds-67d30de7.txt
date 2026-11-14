@@ -1,0 +1,116 @@
+url: https://www.perplexity.ai/help-center/en/articles/10354288-refunds
+method: fetch
+saved: 2026-11-14
+
+Refunds - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+Subscription Plans & Billing
+Refunds
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+What is Perplexity Pro?
+Perplexity Max
+Which Perplexity Subscription Plan is right for you?
+Billing FAQ for Pro Plan Subscribers
+How to transfer your subscription
+Billing for Android Subscriptions
+Billing for iOS Subscriptions
+Canceling a Subscription
+Refunds
+Instant Buy + Buy with PayPal
+What is Instant Buy?
+Paying in Local Currency
+How credits work on Perplexity
+Why is my subscription Paused?
+Why can’t I see my Pro status?
+What is Education Pro?
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top What is your refund policy?
+How can I request a refund on the desktop or mobile web?
+How can I request a refund on Apple App Store?
+How can I request a refund on Google Play Store?
+How can I request a refund on Galaxy Store?
+Additional refund scenarios
+Account termination
+Subscription Plans & Billing
+Refunds
+Copy pageCopy page
+Perplexity’s refund policy for Pro subscriptions, including 14-day EU/UK/Turkey, 7-day Korea/Brazil, and 24-hour monthly and 72-hour annual windows.
+Copy pageCopy page
+What is your refund policy?
+Our refund policies vary based on subscription type, regional laws, and account status. We can’t process additional refund requests after we’ve granted a first one.
+EU, UK, or Turkey customers
+You’re eligible for a refund if you cancel your subscription within 14 days of purchase. This applies to both monthly and annual subscriptions. Please specify that you are applying for a refund from the EU, UK, or Turkey in your request.
+South Korea or Brazil customers
+You’re eligible for a refund if you cancel your subscription within 7 days of purchase. This applies to both monthly and annual subscriptions. Please specify that you are applying for a refund from South Korea or Brazil in your request.
+All other customers:
+Monthly subscriptions: You can request a refund up to 24 hours after the purchase date. Please include details on why you are requesting a refund.
+Annual subscriptions: You’re eligible for a full refund within 72 hours of the original purchase date and time. We don’t make exceptions for requests after this period.
+We sometimes receive a high volume of refund requests, which can delay processing. If you don’t hear back within the specified windows, wait another day or two before contacting us. We always review the date you submitted your refund request. If it’s within the eligible period, you’ll receive your money back. Duplicate tickets may move you to the back of the queue, so avoid sending us multiple requests.
+How can I request a refund on the desktop or mobile web?
+Visit perplexity.ai/pro and select “Manage Subscription.” Choose “Cancel Plan.” The option to request a refund appears with the cancellation confirmation.
+If you don’t see this option, contact us via Help > Contact Support.
+How can I request a refund on Apple App Store?
+Go to reportaproblem.apple.com and sign in using the Apple ID associated with your App Store purchase. Navigate to your digital purchase history, and tap “Request a refund.”
+How can I request a refund on Google Play Store?
+To request a refund for an Android subscription, contact us via Help > Contact Support and include your Google Play email address.
+How can I request a refund on Galaxy Store?
+1
+Open the Galaxy Store app → Menu (☰) → My page → Purchase history
+2
+Find your Perplexity subscription and tap Refund or Report problem (this option is typically available within ~48 hours of purchase)
+If no refund option is available:
+1
+Cancel your subscription to stop future charges: Galaxy Store → Menu (☰) → Subscriptions → Perplexity → Unsubscribe
+2
+Contact Samsung Support at samsung.com/support to request a refund for the charge
+Additional refund scenarios
+Forgot to unsubscribe
+We may issue a refund if your request follows the guidelines above.
+Switching from annual to monthly subscription
+Refunds are possible within the established time frame. You need to start a new monthly subscription and pay the current amount.
+Usage of Computer credits and teammates
+Using bonus and monthly Computer credits reduces the refund amount by $0.01 per credit. Significant use of your monthly credit allotment may make your Max subscription payment ineligible for a refund.
+Refunds for Enterprise plans
+The same refund policy applies to Enterprise plans.
+Removing a member, canceling a pending invitation, or lowering someone’s tier partway through a billing period does not create an automatic refund or credit. The seat stays purchased for the rest of the period and can be assigned to someone else. To pay for fewer seats, an admin reduces the organization’s seat count in Billing, which takes effect at the start of the next billing period. See How Enterprise seats work.
+If you’ve accidentally purchased an Enterprise Pro or Enterprise Max plan, or need help understanding a charge on your account, contact us. We’ll be happy to assist.
+Account termination
+If your account is terminated for violating Perplexity’s Terms of Use, you will not receive a refund for any remaining credit or prepaid service.
+Last modified on November 11, 2026
+Canceling a Subscription
+Instant Buy + Buy with PayPal
+⌘ I

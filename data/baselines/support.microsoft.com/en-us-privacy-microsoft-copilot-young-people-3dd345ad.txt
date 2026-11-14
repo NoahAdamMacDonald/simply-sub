@@ -1,0 +1,258 @@
+url: https://support.microsoft.com/en-us/privacy/microsoft-copilot/young-people
+method: fetch
+saved: 2026-11-14
+
+Microsoft Copilot for individuals: Copilot for young people | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Microsoft Copilot data and privacy (for individuals)
+Overview
+Privacy controls
+Activity history
+Providing feedback
+Copilot for young people
+Transparency Note
+Microsoft Copilot for individuals: Copilot for young people
+Important
+An updated version of the Microsoft Copilot app for web, desktop, and mobile devices is available as of August 18, 2026. If you haven't updated to or downloaded the new version of the Microsoft Copilot app, this article does not apply to you. Instead, see Microsoft Copilot for Young People.
+Note
+This article applies only when you sign in with a Microsoft account, such as a personal email address, when using the Microsoft Copilot app on web, desktop, or mobile. If you're using Copilot in Microsoft 365 apps, see Copilot in Microsoft 365 apps for home: your data and privacy.
+This article does not apply when you sign in to the Microsoft Copilot app or use Copilot in Microsoft 365 apps with a work, school, or organizational (Microsoft Entra) account. For more information, see Data protection when using Microsoft Copilot for work or school.
+Your safety and privacy matter. When you use Microsoft Copilot, we want you to feel confident and informed. This page is designed to help young people understand how Copilot works, what protections are in place, and how to use it responsibly. It also includes tips your parents and guardians may find helpful.
+What is Artificial Intelligence (AI)?
+Artificial Intelligence, or AI, is a machine-based application that makes predictions, recommendations, decisions, generates content, or takes actions based on goals set by people. Think of it as a smart software that can learn, solve problems, understand what you say or type, and make sense of images or sounds. Copilot is an AI that can do things like respond to your voice instructions, analyze information, write text, create images, and a lot more.
+Can you use Copilot?
+You must be at least 13 years old to use Copilot, and in some countries or regions, the minimum age may be higher depending on regional requirements. Teens can use Copilot in a variety of ways. For example, they can use Copilot to ask questions, get help with homework, summarize information, brainstorm ideas, create images, write stories, or learn new things. For young people, Copilot may use data differently or limit certain features.
+How can you use Copilot safely?
+As an AI, Copilot can be helpful, but remember that it’s not a person. Copilot doesn’t have feelings, life experience, or human judgement. It can sometimes get things wrong, make mistakes, or misunderstand what you mean. When Copilot provides information, it's designed to use high-quality sources and include citations so you can check where the information came from.
+Copilot includes extra protections for young people, but it’s still important to remember that AI is a tool, not a friend, and shouldn't be a substitute for receiving advice from a trusted adult. This is why Copilot reminds you that it’s an AI and encourages you to check for mistakes.
+If you’re ever unsure about something Copilot generates, or you’re dealing with sensitive or important information, talk to a trusted adult first. This could be a parent, guardian, teacher, or another adult you rely on. They can help you think things through and provide emotional support in a way an AI can’t.
+Remember: AI isn't a substitute for seeking help from trusted adults in your life.
+How does Copilot use your information?
+Copilot uses what you type to generate a response to your question. For young people, Copilot doesn't personalize results based on your conversation history, and it doesn't show you personalized ads.
+While we take steps to protect your data from misuse, there's always risk in sharing data online. Keep in mind also that other users may be able to see your chats if you choose to share your conversation.
+Be cautious about what content you upload to Copilot, and avoid sharing sensitive, confidential, or identifying information like your address, logins and passwords, phone number, school information, or identifying and personal information about other people.
+How does Copilot handle sensitive topics?
+Copilot is designed to give safe, reliable answers to everyone. It checks for certain types of risky or harmful content and is designed to reply in a way that avoids exposing you to inappropriate or unsafe content.
+If you encounter unsafe or inappropriate or illegal content, you may also report it here.
+How does Copilot protect your privacy?
+Your privacy matters to us. When you use Copilot, it analyzes what you say or type so it can answer your questions, help you learn, or get things done. Microsoft works hard to protect this information and use it responsibly. Microsoft keeps this information to make Copilot work properly, keep it safe, and fix problems when something goes wrong.
+You're in control of your Copilot conversations. You can delete your chats if you don’t want them saved anymore.
+You may see ads while using Copilot, but these ads are based on what you're asking about in your chat, not on other information about you.
+To protect yourself and others, avoid sharing personal information like your full name, address, passwords, school name, personal details about other people, or images of yourself or others. If you’re unsure whether something is appropriate to discuss or upload, it’s always a good idea to check with a trusted adult first.
+What does Microsoft do to keep Copilot safe?
+Copilot is built using Microsoft’s responsible AI approach, which means the system is designed, tested, and monitored with safety as a priority. Before Copilot is released, it goes through extensive testing by experts who look for risks, including attempts to misuse the system or generate harmful content. Copilot uses safety filters and clear rules to reduce the chance of unsafe, offensive, or misleading content appearing. Every message you send is checked through these safeguards before Copilot responds.
+Microsoft also monitors how Copilot performs, reviews user feedback, and updates its systems regularly to improve accuracy and safety over time. The goal is to make Copilot helpful, safe, and transparent for everyone, including young people.
+You can read more information about this in our Transparency Note for Microsoft Copilot (for individuals).
+How do we monitor Copilot for abuse?
+To help keep Copilot safe, Microsoft uses systems that help detect harmful or abusive behavior, such as trying to generate dangerous content or breaking our Copilot Terms of Use.
+If something like that happens, Copilot may block your request or limit your access to Copilot or certain features. Humans may review your conversations in Copilot for safety, legal, product improvement, or troubleshooting. These measures help to protect our users and help maintain a respectful, safe environment.
+What parental controls does Copilot have?
+Your parent or guardian may be able to manage how you use Copilot.
+They can use tools like Microsoft Family Safety or settings on your device (Google or Apple) to do the following:
+Block access to the Copilot app or Copilot via browser.
+Set limits on when you can use Copilot (for example, during certain hours).
+Choose which features are available to you, such as image generation, voice mode, group chat, or AI companions.
+To use some of these controls, your parent or guardian may need to add you to their family group.
+These tools help keep you safe and support healthy use of technology.
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

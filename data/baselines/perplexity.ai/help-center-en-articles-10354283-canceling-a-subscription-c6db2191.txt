@@ -1,0 +1,102 @@
+url: https://www.perplexity.ai/help-center/en/articles/10354283-canceling-a-subscription
+method: fetch
+saved: 2026-11-14
+
+Canceling a Subscription - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+Subscription Plans & Billing
+Canceling a Subscription
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+What is Perplexity Pro?
+Perplexity Max
+Which Perplexity Subscription Plan is right for you?
+Billing FAQ for Pro Plan Subscribers
+How to transfer your subscription
+Billing for Android Subscriptions
+Billing for iOS Subscriptions
+Canceling a Subscription
+Refunds
+Instant Buy + Buy with PayPal
+What is Instant Buy?
+Paying in Local Currency
+How credits work on Perplexity
+Why is my subscription Paused?
+Why can’t I see my Pro status?
+What is Education Pro?
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top How do I cancel my subscription on the computer?
+How do I cancel my subscription on iOS?
+How do I cancel my subscription on Android?
+How do I cancel my subscription on the Samsung Galaxy Store?
+Subscription Plans & Billing
+Canceling a Subscription
+Copy pageCopy page
+How to cancel your Perplexity subscription on the web, iOS, or Android, plus what happens after you cancel and what to do about unexpected charges.
+Copy pageCopy page
+Cancel your subscription on the platform where you bought it. If you subscribed through the Apple App Store or Google Play Store, the app store controls your billing. The cancel option doesn’t appear in Perplexity Settings. Follow the iOS or Android steps below instead. The same applies to subscriptions bought through the Samsung Galaxy Store.
+How do I cancel my subscription on the computer?
+Go to Settings and scroll down to find “Subscription” under Perplexity Pro. Click “Manage Subscription” to open the current plan page, then choose “Cancel subscription.”
+How do I cancel my subscription on iOS?
+Open the App Store and tap the profile icon in the upper-right corner. Tap “Subscriptions,” then “Perplexity - Ask Anything.” Choose “Cancel subscription.”
+How do I cancel my subscription on Android?
+Open the Google Play app and tap the settings icon in the upper-right corner. Tap “Payments & Subscriptions,” then “Perplexity - Ask Anything.” Choose “Cancel subscription” at the bottom of the screen.
+How do I cancel my subscription on the Samsung Galaxy Store?
+If you subscribed to Perplexity Pro or Perplexity Max through the Samsung Galaxy Store, cancel it in the Galaxy Store app:
+1
+Open the Galaxy Store app and make sure you're signed in with the same Samsung account you used to subscribe.
+2
+Tap the Menu icon (three lines) in the top-left or top-right.
+3
+Tap “Subscriptions.”
+4
+Find Perplexity in the list, tap it, and then choose Unsubscribe.
+You can also see these steps in the Perplexity Android app. Open Settings and tap Manage Subscriptions in the Subscription section.
+For refunds of Galaxy Store purchases, see How can I request a refund on Galaxy Store?
+Will my subscription auto-cancel at the end of its cycle?
+You’re billed monthly or annually on your original billing date, depending on your subscription. If you don’t set your subscription to cancel at the end of your cycle, it continues to renew.
+If I delete my account, will it terminate my subscription?
+No. Deleting your account doesn’t terminate your subscription. Cancel your subscription before you delete your account.
+Can I cancel my subscription any time?
+Yes. Your account reverts to the free version after the current billing cycle ends.
+Is it possible to reactivate my subscription after canceling?
+Yes. To reactivate your subscription, go to Settings and scroll down to find “Subscription” under Perplexity Pro. Click “Manage Subscription” to open the current plan page. Click “Renew plan” or “Update plan” and complete payment.
+I’ve canceled my subscription, but I’m still being charged. What can I do?
+Double-check that you’ve canceled your subscription by going to settings and clicking “Manage subscription.” Contact us via Help > Contact Support for further assistance.
+Last modified on November 10, 2026
+Billing for iOS Subscriptions
+Refunds
+⌘ I

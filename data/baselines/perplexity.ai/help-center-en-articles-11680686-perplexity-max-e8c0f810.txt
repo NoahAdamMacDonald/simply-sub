@@ -1,0 +1,122 @@
+url: https://www.perplexity.ai/help-center/en/articles/11680686-perplexity-max
+method: fetch
+saved: 2026-11-14
+
+Perplexity Max - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+Subscription Plans & Billing
+Perplexity Max
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+What is Perplexity Pro?
+Perplexity Max
+Which Perplexity Subscription Plan is right for you?
+Billing FAQ for Pro Plan Subscribers
+How to transfer your subscription
+Billing for Android Subscriptions
+Billing for iOS Subscriptions
+Canceling a Subscription
+Refunds
+Instant Buy + Buy with PayPal
+What is Instant Buy?
+Paying in Local Currency
+How credits work on Perplexity
+Why is my subscription Paused?
+Why can’t I see my Pro status?
+What is Education Pro?
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top What is Perplexity Max?
+Key features
+Brain on Max (Research Preview) What does Brain do for Max users?
+Can I turn Brain off?
+Is my data private?
+Billing FAQ
+Subscription Plans & Billing
+Perplexity Max
+Copy pageCopy page
+Learn about Perplexity Max, including What is Perplexity Max, Key features, and Brain on Max.
+Copy pageCopy page
+What is Perplexity Max?
+Max is Perplexity’s most advanced subscription tier built for users who need the highest level of access to the latest, most advanced AI models, Create files and apps queries, and the newest products and features. Available now on all platforms.
+Perplexity Max is designed for:
+Professionals who need the highest-volume access to comprehensive analysis tools.
+Content creators and writers who require extensive research capabilities.
+Business strategists conducting competitive intelligence and market research.
+Academic researchers working on complex, multi-faceted projects.
+Power-users who want to try out the newest features ahead of everyone else.
+Key features
+Max will include everything in the Pro plan plus:
+The Highest Level Access to Our Full Suite of Advanced AI Models: Quicker access to the latest advanced AI models by OpenAI, Anthropic and others with new frontier models added as they release. Research and Create files and apps also run on more powerful models. With high usage limits.
+​This only applies within Perplexity web and does not apply to programmatic access via API, which is billed separately.
+Max Assistant on Comet: Max Assistant is Comet’s next-level mode, powered by cutting-edge reasoning models that intelligently route every request. Designed for reliability and precision, it delivers exceptional results — especially on complex, challenging tasks. With higher completion rates and smarter outputs, Max Assistant is your go-to for mission-critical work. It may take a little longer, but the results are worth the wait. As a Max subscriber, you receive the highest weekly limit on browser agent queries available across all subscription tiers.
+Brain (Research Preview): Brain is a self-improving memory system that builds a working model of your projects, people, and files in Perplexity Computer, so Computer can act on requests that build on the work you’ve already done. Learn more about Brain.
+Extended Access to Create files and apps Queries: Create as many reports or projects as you need using advanced tools to create dashboards, spreadsheets, presentations, and web applications.
+Priority Support: Max plan subscribers receive the highest level of support, with dedicated infrastructure and faster response times.
+Brain on Max (Research Preview)
+Brain is rolling out in Research Preview to Max subscribers using Perplexity Computer, free during the preview period. It is rolling out gradually — not every Max subscriber will see it on day one. Learn more about Brain.
+What does Brain do for Max users?
+Brain runs in the background and builds a working model of the projects you’re driving, the people involved, the documents behind them, and the open loops still unresolved. Computer uses that context to act on requests that depend on what you’ve been working on — with every claim linked back to its source session, file, or connector.
+Can I turn Brain off?
+Yes. Brain has its own toggle in Computer settings, independent of Search History in Memory. Turning Brain off stops it from writing new knowledge into Computer’s memory from your activity. Incognito sessions are always excluded.
+Is my data private?
+Yes. Brain is built only from your own activity — your sessions, connected tools, artifacts, and corrections — and is used only to improve your own answers. Every entry links back to the source behind it, so you can open it, check it, and edit or delete anything in Settings → Memory. Models are not trained on what Brain writes into memory.
+Billing FAQ
+Who can upgrade to Max?
+Perplexity Max is currently available only for consumers on a Free or Pro plan.
+For Enterprise users, we recommend Enterprise Max, which has been designed for users who need enterprise-grade data security, powerful collaboration tools, and the highest level of access to the latest AI models, Create files and apps and Research search modes, Comet Assistant, and Perplexity’s newest features.
+How much does the Max plan cost?
+Perplexity Max costs $200/monthly or $2000/annually. Please note, the annual billing option is only available for the web app version.
+How do I upgrade to Max (web app upgrade)?
+On the web app, you can upgrade by heading to your Settings Page > Account > Subscription > Upgrade Plan
+If you subscribed to the Pro plan via the web app, then please use the web app (not Perplexity’s mobile apps) to upgrade to Max.
+​
+If you upgrade via mobile app, this will create a new separate Max subscription in addition to your ongoing Pro subscription.
+​
+If you have any questions on this please reach out to Perplexity support via Help > Contact Support.
+If I upgrade from Pro to Max does my balance carry over?
+Yes, if you’ve already subscribed via web app we will carry over your balance and bill you the prorated amount for your new subscription. Your upgrade will be effective immediately and you’ll have access to all Max features when you upgrade.
+Mobile app upgrades
+Android app upgrades: If you have an existing Pro subscription and upgrade to Max via the Android app, Google Play immediately charges the full price of the new subscription. The remaining unused time from the previous subscription is then applied to the new subscription, extending its duration.
+iOS app upgrades: If you have an existing Pro subscription and upgrade to Max via the iOS app the remainder of your Pro subscription can be refunded to you. You will have to contact Apple Support with a refund request (Perplexity support does not manage app store subscriptions).
+Cancellation and Refunds
+EU, UK, or Turkey customers: You are eligible for a refund if you cancel within 14 days of purchase. This applies to both monthly and annual subscriptions. In the refund request, please specify you are applying for a refund from the EU, UK, or Turkey.
+South Korea or Brazil customers: You are eligible for a refund if you cancel your subscription within 7 days of purchase. This applies to both monthly and annual subscriptions. Please specify that you are applying for a refund from South Korea or Brazil in your request.
+​For all other customers: A refund request window of 24 hours for monthly subscriptions and 48 hours for annual subscriptions applies. If you cancel within that period, you can request a refund by contacting us via Help > Contact Support.
+Please note that all other cancellations and downgrades will kick in at the end of your billing cycle. You will continue to have full access to Max features until the end of the billing period.
+Last modified on September 14, 2026
+What is Perplexity Pro?
+Which Perplexity Subscription Plan is right for you?
+⌘ I

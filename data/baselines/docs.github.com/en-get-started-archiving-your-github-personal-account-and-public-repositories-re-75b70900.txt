@@ -1,0 +1,170 @@
+url: https://docs.github.com/en/get-started/archiving-your-github-personal-account-and-public-repositories/requesting-an-archive-of-your-personal-accounts-data
+method: fetch
+saved: 2026-11-14
+
+Requesting an archive of your personal account's data - GitHub Docs Skip to main content
+Skip to content
+GitHub Docs
+Search or ask Copilot/
+Menu
+Collapse sidebar
+Expand sidebar
+Home
+Get started
+Archive account and public repos
+Request account archive
+Get started
+Start your journey
+What is GitHub?
+Learning resources
+Create your repository
+Plan your work
+Connect locally
+Write and store code
+Review changes
+Deploy automatically
+Onboarding
+Getting started with your GitHub account
+Getting started with GitHub Team
+Getting started with the GitHub Enterprise Cloud trial
+Getting started with GitHub Enterprise Cloud
+Using GitHub
+Hello World
+GitHub flow
+Connecting to GitHub
+Communicating on GitHub
+Feature preview
+Supported browsers
+GitHub Mobile
+Allow network access
+Connectivity problems
+Learning about GitHub
+GitHub's plans
+GitHub language support
+Types of GitHub accounts
+Access permissions
+GitHub Advanced Security
+GitHub Code Quality
+Changes to GitHub plans
+GitHub glossary
+Learn to code
+Set up Copilot for learning
+Get started with Git
+Finding example code
+Reuse people's code
+Local development
+Debug with Copilot
+Getting feedback on your code
+Storing secrets safely
+Secure your code
+Secure your dependencies
+Accessibility
+Manage theme settings
+Keyboard shortcuts
+GitHub Command Palette
+Writing on GitHub
+Start writing on GitHub
+Quickstart
+About writing & formatting
+Basic formatting syntax
+Work with advanced formatting
+Organized data with tables
+Collapsed sections
+Create code blocks
+Create diagrams
+Mathematical expressions
+Auto linked references
+Attaching files
+About tasklists
+Permanent links to code
+Using keywords in issues and pull requests
+Work with saved replies
+About saved replies
+Creating a saved reply
+Editing a saved reply
+Deleting a saved reply
+Using saved replies
+Share content with gists
+Creating gists
+Forking and cloning gists
+Saving gists with stars
+Moderating gist comments
+Explore projects
+Discover projects
+Contribute to a project
+Finding open source projects
+Contribute to open source
+Use Copilot to explore projects
+Save repositories with stars
+Following people
+Following organizations
+Git basics
+Set up Git
+Set your username
+Caching credentials
+Repeated credential prompts
+macOS Keychain credentials
+Git workflows
+About remote repositories
+Manage remote repositories
+Associate text editors
+Handle line endings
+Ignoring files
+Git cheatsheet
+Using Git
+About Git
+Push commits to a remote
+Get changes from a remote
+Non-fast-forward error
+Splitting a subfolder
+About Git subtree merges
+About Git rebase
+Git rebase
+Resolve conflicts after rebase
+Special characters in names
+Maximum push limit
+Archive account and public repos
+Request account archive
+GitHub Archive program
+Using GitHub Docs
+Docs versions
+Hover cards
+GitHub Docs API
+GitHub Certifications
+About GitHub Certifications
+Registering for an exam
+In this article
+Requesting an archive of your personal account's data
+You can export and review the metadata that GitHub stores about your personal account.
+Copy markdown
+In this article
+Downloading an archive of your personal account's data
+Deleting access to an archive of your personal account's data
+GitHub stores repository and profile metadata from your personal account's activity. You can export your personal account's data through your account settings on GitHub or with the User Migration API.
+For more information about the data GitHub stores that is available for exporting, see REST API endpoints for migrations.
+When you request an export of your personal data through your account settings on GitHub, GitHub packages your personal data in a tar.gz file and sends you an email to your primary email address with a download link.
+By default, the download link expires after seven days. At any time before the download link expires, you can disable the link from your user settings. For more information, see Requesting an archive of your personal account's data.
+If your operating system cannot natively unpack the tar.gz file, you can use a third-party tool to extract the archived files. For more information, see How to unzip a tar.gz file on Opensource.com.
+The generated tar.gz file reflects the data stored at the time you started the data export.
+Downloading an archive of your personal account's data
+In the upper-right corner of any page on GitHub, click your profile picture, then click Settings.
+In the left sidebar, click Account.
+Under "Export account data", click Start export or New export.
+Once the export is ready to download, GitHub will send you a download link to your primary email address.
+Click the download link in your email and re-enter your password if prompted.
+You'll be redirected to a tar.gz file that you can download.
+Deleting access to an archive of your personal account's data
+You can disable the download link sent to your email before an export expires by deleting the export.
+In the upper-right corner of any page on GitHub, click your profile picture, then click Settings.
+In the left sidebar, click Account.
+In the "Export account data" section, next to the data export download you want to disable, click Delete.
+Back to top
+Help and support
+Was this Doc helpful?
+Yes No
+Help us make GitHub Docs great!
+All Docs are open source. See something that's wrong or unclear? Submit a pull request.
+Make a contribution
+Still need help?
+Ask the GitHub communityContact supportExpert servicesBlog
+GitHub Inc. © 2026TermsPrivacyStatusPricing

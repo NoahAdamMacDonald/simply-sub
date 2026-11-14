@@ -1,0 +1,107 @@
+url: https://www.perplexity.ai/help-center/en/articles/14653777-phone-verification-for-your-account-via-sms-2fa
+method: fetch
+saved: 2026-11-14
+
+Phone Verification for Your Account via SMS 2FA - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+Troubleshooting & Support
+Phone Verification for Your Account via SMS 2FA
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+How can I contact the Perplexity team?
+Need support?
+How do I submit a bug report?
+How can I report incorrect or inaccurate answers?
+About the Perplexity Discord Community
+Where do I report bugs?
+Where do I report security issues or bug bounty findings?
+Cloudflare & VPNs
+Troubleshooting access to sessions & Pro features
+Email Assistant Troubleshooting
+Phone Verification for Your Account via SMS 2FA
+Troubleshooting connectors
+Troubleshooting plugins
+On this page
+Back to top How phone verification works
+I didn’t get a code
+Common error messages
+Two-factor authentication with an authenticator app
+If you’re locked out
+You can still cancel your subscription
+Troubleshooting & Support
+Phone Verification for Your Account via SMS 2FA
+Copy pageCopy page
+How phone (SMS) verification and authenticator-app two-factor authentication work on Perplexity, how to fix common errors, and what to do if you’re locked out.
+Copy pageCopy page
+Perplexity may ask some users to verify a phone number before they continue using Perplexity. You’ll enter your mobile number, then enter the 6-digit security code we send you by SMS.
+How phone verification works
+You only need to verify once per account.
+Each Perplexity account can be linked to one phone number, and a phone number can only be used to verify one Perplexity account.
+Use a mobile number that can receive SMS. Landline, VoIP, and virtual numbers can’t be used.
+Standard message and data rates from your carrier may apply.
+I didn’t get a code
+1
+Check the number.
+The code screen shows the last 4 digits of the number we sent the code to. If the number is wrong, tap Try a different number.
+2
+Wait, then resend.
+Texts can take a minute to arrive. When the countdown ends, tap Resend code to get a new code.
+3
+Check your phone.
+Make sure your phone has signal and isn’t blocking texts from unknown senders or short codes.
+Common error messages
+“This phone number region is not yet supported.” Phone verification isn’t available for numbers from some countries or regions yet. If you have a mobile number from another country or region, try that number.
+“This phone number can’t be used for verification.” The number may be a landline, VoIP, or virtual number, or it may already be linked to another Perplexity account. Try a different mobile number.
+“Your account uses a coupon that only supports certain countries.” Your plan comes from an offer that’s limited to certain countries. Use a mobile number from one of the countries listed in the message.
+“Too many attempts.” or “Maximum attempts reached.” Wait a few minutes before you try again, then request a new code.
+“Verification code has expired.” Codes expire after a short time. Tap Resend code and enter the new code.
+Two-factor authentication with an authenticator app
+Some accounts can also turn on two-factor authentication with an authenticator app. If it’s available for your account, you’ll find Two-factor authentication under Security in your Account settings.
+When it’s on, Perplexity may ask for the 6-digit code from your authenticator app when you sign in.
+When you set it up, you get a set of backup codes. Keep them somewhere safe. If you lose access to your authenticator app, you can sign in with a backup code instead.
+If your codes are rejected, check that your phone’s date and time are set automatically, then try the newest code.
+If you’re locked out
+If you can’t complete phone verification or two-factor authentication, reach out to our support team:
+If you can sign in to Perplexity: contact us via Help > Contact Support.
+If you can’t sign in, or can’t get past the verification screen: use the support chat on any Perplexity Help Center page. Select the round Perplexity chat button in the bottom-left corner. You don’t need to be signed in. On a phone, the button stays hidden until you close the cookie banner.
+Tell us which step you’re stuck on and what message you see. Never share your SMS codes, authenticator codes, or backup codes with anyone.
+You can still cancel your subscription
+You don’t need to finish phone verification to cancel. On the phone verification screen on perplexity.ai, select Manage subscription at the top right. It opens your account settings, where you can manage or cancel a subscription you bought on the web. You can also select Log out to sign out.
+If you subscribed through the Apple App Store, Google Play, or the Samsung Galaxy Store, cancel through that store. You don’t need to sign in to Perplexity to do this. See Canceling a Subscription, including how to cancel on the Samsung Galaxy Store.
+Last modified on November 9, 2026
+Email Assistant Troubleshooting
+Troubleshooting connectors
+⌘ I

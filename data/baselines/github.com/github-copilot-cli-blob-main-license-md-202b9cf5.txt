@@ -1,0 +1,147 @@
+url: https://github.com/github/copilot-cli/blob/main/LICENSE.md
+method: fetch
+saved: 2026-11-14
+
+copilot-cli/LICENSE.md at main · github/copilot-cli · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+github
+copilot-cli
+Repository navigation
+Code
+Issues2.2k ( 2.2k )
+Pull requests49 ( 49 )
+Discussions
+Actions
+Projects
+Security and quality2 ( 2 )
+Insights
+More items
+Files Expand file tree
+main
+Breadcrumbs
+copilot-cli
+/ LICENSE.md
+Copy path
+Blame
+More file actions
+Blame
+More file actions
+Latest commit
+History
+History
+History
+36 lines (28 loc) · 3.47 KB
+main
+Breadcrumbs
+copilot-cli
+/ LICENSE.md
+Copy path
+Top
+File metadata and controls
+Preview
+Code
+Blame
+36 lines (28 loc) · 3.47 KB
+Raw
+Copy raw file
+Download raw file
+Edit and raw actions
+GitHub Copilot CLI License
+License Grant
+Subject to the terms of this License, GitHub grants you a non‑exclusive, non‑transferable, royalty‑free license to install and run copies of the GitHub Copilot CLI (the “Software”). Subject to Section 2 below, GitHub also grants you the right to reproduce and redistribute unmodified copies of the Software as part of an application or service.
+Redistribution Rights and Conditions
+You may reproduce and redistribute the Software only in accordance with all of the following conditions:
+The Software is distributed only in unmodified form;
+The Software is redistributed solely as part of an application or service that provides material functionality beyond the Software itself;
+The Software is not distributed on a standalone basis or as a primary product;
+You include a copy of this License and retain all applicable copyright, trademark, and attribution notices; and
+Your application or service is licensed independently of the Software.
+Nothing in this License restricts your choice of license for your application or service, including distribution under an open source license. This License applies solely to the Software and does not modify or supersede the license terms governing your application or its source code.
+Scope Limitations
+This License does not grant you the right to:
+Modify, adapt, translate, or create derivative works of the Software;
+Redistribute the Software except as expressly permitted in Section 2;
+Remove, alter, or obscure any proprietary notices included in the Software; or
+Use GitHub trademarks, logos, or branding except as necessary to identify the Software.
+Reservation of Rights
+GitHub and its licensors retain all right, title, and interest in and to the Software. All rights not expressly granted by this License are reserved.
+Disclaimer of Warranty
+THE SOFTWARE IS PROVIDED “AS IS,” WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING WITHOUT LIMITATION WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON‑INFRINGEMENT. THE ENTIRE RISK ARISING OUT OF USE OF THE SOFTWARE REMAINS WITH YOU.
+Limitation of Liability
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL GITHUB OR ITS LICENSORS BE LIABLE FOR ANY DAMAGES ARISING OUT OF OR RELATING TO THIS LICENSE OR THE USE OR DISTRIBUTION OF THE SOFTWARE, WHETHER IN CONTRACT, TORT, OR OTHERWISE.
+Termination
+This License terminates automatically if you fail to comply with its terms. Upon termination, you must cease all use and distribution of the Software.
+Third-Party Services.
+The Software may enable access to or interaction with services provided by GitHub, Microsoft, or other third parties. Access to a service may require a separate account, subscription, license, authorization, or other entitlement. Your use of each service is subject to the terms, agreements, and privacy notices applicable to that service and your relationship with the relevant service provider.
+For example, if you access the Software using a Microsoft 365 account or entitlement, the Microsoft 365 services made available through the Software—including any applicable data-access or AI-inference services—are provided under, and subject to, the Microsoft Product Terms and the agreement under which you or your organization obtained the applicable Microsoft 365 subscription. This License governs only your rights to use the Software and does not grant any right to access or use Microsoft 365 services or other third-party services.
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

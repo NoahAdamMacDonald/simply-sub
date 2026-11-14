@@ -1,0 +1,199 @@
+url: https://cursor.com/help/account-and-billing/pricing
+method: fetch
+saved: 2026-11-14
+
+Pricing and plans | Cursor Docs
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back Pricing and plans
+Cursor is part of The X Subscription, one subscription for Grok, Cursor, and X. New customers choose a plan on The X Subscription. If you subscribed to Cursor before it launched, you're on a legacy Cursor plan, and it keeps working as it is.
+What plans are available?
+Plan Price Included usage
+Free $0 Limited
+Plus $8/mo Base
+Premium $30/mo 4x Plus
+Super $100/mo 15x Plus
+Ultra $200/mo 50x Plus
+Teams $30, $100, or $200 per seat/mo Matches the seat's tier
+Annual billing is $80/yr for Plus, $300/yr for Premium, $1,000/yr for Super, and $2,000/yr for Ultra. Prices exclude tax.
+Every paid plan includes a weekly pool of usage for Cursor models (Grok 4.7, Grok 4.6, Grok 4.5, and Composer 2.5), shared across Cursor and Grok. Plus runs those models at fixed settings (Fast off, medium effort) without Auto, Cloud Agents, Automations, Bugbot, Origin, or third-party models. Premium and above add all of those, with third-party models at API list price paid from prepaid credit. See Models & Pricing for what each tier includes and cursor.com/pricing for the full feature comparison, including Grok and X benefits.
+Enterprise plans include pooled usage across Grok and Cursor, SCIM provisioning, audit logs, advanced admin controls, and invoice billing. Contact sales to get started.
+What are the legacy Cursor plans?
+Legacy Cursor plans are the plans Cursor sold before The X Subscription. They aren't available to new customers, but existing subscribers keep them until they switch or cancel.
+Legacy plan Price Comparable plan on The X Subscription
+Hobby Free Free
+Start (India only) ₹649/mo, tax inclusive Plus
+Pro $20/mo Premium
+Pro+ $60/mo Super
+Ultra $200/mo Ultra
+Teams Standard $40/user/mo Teams, Premium seat
+Teams Premium $120/user/mo Teams, Super seat
+Legacy plans include two monthly usage pools, Cursor Models and Other Models, and use on-demand usage for extra requests. See Legacy Cursor plans for the full comparison and Cursor Start for the India plan.
+Do I have to switch to The X Subscription?
+No. Switching is optional. Your legacy plan, price, and features continue unless you change or cancel. You can still move between legacy plans, for example from Pro to Pro+, without switching.
+If you do switch, your Cursor subscription is cancelled with a prorated refund, you pick a plan on The X Subscription, and the change is permanent. See What is The X Subscription? for eligibility and what happens to your old plans.
+What is Auto?
+Auto balances intelligence, cost, and reliability through Cursor Router. Cost mode (classic Auto) bills as a Cursor-model request and draws from your weekly pool whatever model serves it. On Teams and Enterprise with Cursor Router on, Balance and Intelligence bill at the routed model's list price: for example, if your request is routed to Opus 5, you are billed at Opus 5 pricing for that request as third-party usage paid from prepaid credit, plus the Cursor Token Rate. A Balance or Intelligence route to a third-party model does not add that rate when its cache-read price is strictly below $0.10 per million tokens across every pricing tier. Cost mode does not add it either. Individual plans have Cost mode only. See Auto modes for current rates.
+You can switch between Auto and specific models in the model picker. See available models for details.
+Is Cursor Router available on my plan?
+Cursor Router will launch for Teams and Enterprise plans. Enterprise teams start with Cursor Router off; an admin must opt in.
+It is available across the Agents window, editor, CLI, Cursor SDK, and the iOS app. See Cursor Router for how routing and optimization modes work.
+Why is the old Auto mode now called Cost mode?
+The old Auto mode was split into 3 new modes: Cost, Balance and Intelligence.
+What's included in the Free plan?
+Free gives you access to Cursor's core features with limited usage. You can use Agent, Chat, and Tab completions with Cursor models (Grok and Composer), along with standard X. The legacy Hobby plan works the same way for Cursor.
+How do I change plans on The X Subscription?
+Go to grok.com/dashboard/billing
+Open the options on the Current plan card and choose to change your plan
+Choose a plan and follow the prompts to confirm
+Upgrades apply right away. Downgrades apply at the end of your billing period. See Managing The X Subscription for payment methods, invoices, and cancellation.
+How do I change plans on a legacy Cursor plan?
+To upgrade:
+Go to cursor.com/dashboard/billing
+Find the tile with your current plan and click Adjust plan
+Select the plan you want
+Complete payment through Stripe checkout
+The change takes effect immediately. Any credit for your previous plan is based on its unused included usage, not days remaining. See Do I get a prorated refund when I upgrade my plan?
+To downgrade:
+Go to cursor.com/dashboard/billing
+Find the tile with your current plan and click Adjust plan
+Select the plan you want
+Confirm in the modal and click Schedule Downgrade
+You keep your current plan until the end of your billing period. This applies to the legacy Pro, Pro+, and Ultra plans.
+Where do I manage my subscription?
+The X Subscription: grok.com/dashboard/billing for plan changes, payment methods, invoices, top-ups, and cancellation.
+Legacy Cursor plans: cursor.com/dashboard/billing for plan changes, payment method updates, invoices, and cancellation. Click Manage in Stripe there to open the Stripe billing portal.
+What if I move from an individual plan to a Teams plan?
+When you join a team, billing state can change based on the team setup flow. If your plan state looks wrong after joining, use payment completed but plan not updated for troubleshooting steps.
+Can I switch between monthly and yearly billing?
+On The X Subscription, choose monthly or annual when you change plans at grok.com/dashboard/billing.
+On a legacy Cursor plan:
+To switch to yearly:
+Go to cursor.com/dashboard/billing
+Click Upgrade Now on the green banner at the top
+To switch to monthly:
+There is no way to switch mid-plan. Use the Adjust plan flow to schedule the switch at the end of your yearly billing period.
+Related
+What is The X Subscription?
+Billing and payments
+Cursor Start
+Cancel your subscription
+Cursor Router
+Usage and limits
+Payment completed but plan not updated
+Pricing reference
+Legacy Cursor plans
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+What plans are available?
+What are the legacy Cursor plans?
+Do I have to switch to The X Subscription?
+What is Auto?
+Is Cursor Router available on my plan?
+Why is the old Auto mode now called Cost mode?
+What's included in the Free plan?
+How do I change plans on The X Subscription?
+How do I change plans on a legacy Cursor plan?
+Where do I manage my subscription?
+What if I move from an individual plan to a Teams plan?
+Can I switch between monthly and yearly billing?
+Related
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back Pricing and plans
+Cursor is part of The X Subscription, one subscription for Grok, Cursor, and X. New customers choose a plan on The X Subscription. If you subscribed to Cursor before it launched, you're on a legacy Cursor plan, and it keeps working as it is.
+What plans are available?
+Plan Price Included usage
+Free $0 Limited
+Plus $8/mo Base
+Premium $30/mo 4x Plus
+Super $100/mo 15x Plus
+Ultra $200/mo 50x Plus
+Teams $30, $100, or $200 per seat/mo Matches the seat's tier
+Annual billing is $80/yr for Plus, $300/yr for Premium, $1,000/yr for Super, and $2,000/yr for Ultra. Prices exclude tax.
+Every paid plan includes a weekly pool of usage for Cursor models (Grok 4.7, Grok 4.6, Grok 4.5, and Composer 2.5), shared across Cursor and Grok. Plus runs those models at fixed settings (Fast off, medium effort) without Auto, Cloud Agents, Automations, Bugbot, Origin, or third-party models. Premium and above add all of those, with third-party models at API list price paid from prepaid credit. See Models & Pricing for what each tier includes and cursor.com/pricing for the full feature comparison, including Grok and X benefits.
+Enterprise plans include pooled usage across Grok and Cursor, SCIM provisioning, audit logs, advanced admin controls, and invoice billing. Contact sales to get started.
+What are the legacy Cursor plans?
+Legacy Cursor plans are the plans Cursor sold before The X Subscription. They aren't available to new customers, but existing subscribers keep them until they switch or cancel.
+Legacy plan Price Comparable plan on The X Subscription
+Hobby Free Free
+Start (India only) ₹649/mo, tax inclusive Plus
+Pro $20/mo Premium
+Pro+ $60/mo Super
+Ultra $200/mo Ultra
+Teams Standard $40/user/mo Teams, Premium seat
+Teams Premium $120/user/mo Teams, Super seat
+Legacy plans include two monthly usage pools, Cursor Models and Other Models, and use on-demand usage for extra requests. See Legacy Cursor plans for the full comparison and Cursor Start for the India plan.
+Do I have to switch to The X Subscription?
+No. Switching is optional. Your legacy plan, price, and features continue unless you change or cancel. You can still move between legacy plans, for example from Pro to Pro+, without switching.
+If you do switch, your Cursor subscription is cancelled with a prorated refund, you pick a plan on The X Subscription, and the change is permanent. See What is The X Subscription? for eligibility and what happens to your old plans.
+What is Auto?
+Auto balances intelligence, cost, and reliability through Cursor Router. Cost mode (classic Auto) bills as a Cursor-model request and draws from your weekly pool whatever model serves it. On Teams and Enterprise with Cursor Router on, Balance and Intelligence bill at the routed model's list price: for example, if your request is routed to Opus 5, you are billed at Opus 5 pricing for that request as third-party usage paid from prepaid credit, plus the Cursor Token Rate. A Balance or Intelligence route to a third-party model does not add that rate when its cache-read price is strictly below $0.10 per million tokens across every pricing tier. Cost mode does not add it either. Individual plans have Cost mode only. See Auto modes for current rates.
+You can switch between Auto and specific models in the model picker. See available models for details.
+Is Cursor Router available on my plan?
+Cursor Router will launch for Teams and Enterprise plans. Enterprise teams start with Cursor Router off; an admin must opt in.
+It is available across the Agents window, editor, CLI, Cursor SDK, and the iOS app. See Cursor Router for how routing and optimization modes work.
+Why is the old Auto mode now called Cost mode?
+The old Auto mode was split into 3 new modes: Cost, Balance and Intelligence.
+What's included in the Free plan?
+Free gives you access to Cursor's core features with limited usage. You can use Agent, Chat, and Tab completions with Cursor models (Grok and Composer), along with standard X. The legacy Hobby plan works the same way for Cursor.
+How do I change plans on The X Subscription?
+Go to grok.com/dashboard/billing
+Open the options on the Current plan card and choose to change your plan
+Choose a plan and follow the prompts to confirm
+Upgrades apply right away. Downgrades apply at the end of your billing period. See Managing The X Subscription for payment methods, invoices, and cancellation.
+How do I change plans on a legacy Cursor plan?
+To upgrade:
+Go to cursor.com/dashboard/billing
+Find the tile with your current plan and click Adjust plan
+Select the plan you want
+Complete payment through Stripe checkout
+The change takes effect immediately. Any credit for your previous plan is based on its unused included usage, not days remaining. See Do I get a prorated refund when I upgrade my plan?
+To downgrade:
+Go to cursor.com/dashboard/billing
+Find the tile with your current plan and click Adjust plan
+Select the plan you want
+Confirm in the modal and click Schedule Downgrade
+You keep your current plan until the end of your billing period. This applies to the legacy Pro, Pro+, and Ultra plans.
+Where do I manage my subscription?
+The X Subscription: grok.com/dashboard/billing for plan changes, payment methods, invoices, top-ups, and cancellation.
+Legacy Cursor plans: cursor.com/dashboard/billing for plan changes, payment method updates, invoices, and cancellation. Click Manage in Stripe there to open the Stripe billing portal.
+What if I move from an individual plan to a Teams plan?
+When you join a team, billing state can change based on the team setup flow. If your plan state looks wrong after joining, use payment completed but plan not updated for troubleshooting steps.
+Can I switch between monthly and yearly billing?
+On The X Subscription, choose monthly or annual when you change plans at grok.com/dashboard/billing.
+On a legacy Cursor plan:
+To switch to yearly:
+Go to cursor.com/dashboard/billing
+Click Upgrade Now on the green banner at the top
+To switch to monthly:
+There is no way to switch mid-plan. Use the Adjust plan flow to schedule the switch at the end of your yearly billing period.
+Related
+What is The X Subscription?
+Billing and payments
+Cursor Start
+Cancel your subscription
+Cursor Router
+Usage and limits
+Payment completed but plan not updated
+Pricing reference
+Legacy Cursor plans
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+What plans are available?
+What are the legacy Cursor plans?
+Do I have to switch to The X Subscription?
+What is Auto?
+Is Cursor Router available on my plan?
+Why is the old Auto mode now called Cost mode?
+What's included in the Free plan?
+How do I change plans on The X Subscription?
+How do I change plans on a legacy Cursor plan?
+Where do I manage my subscription?
+What if I move from an individual plan to a Teams plan?
+Can I switch between monthly and yearly billing?
+Related

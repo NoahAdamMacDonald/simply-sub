@@ -1,0 +1,67 @@
+url: https://cursor.com/help/account-and-billing/delete-account
+method: fetch
+saved: 2026-11-14
+
+Delete your account | Cursor Docs
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back Delete your account
+Account deletion is self-serve and permanent.
+How do I delete my account?
+Cancel your subscription first (if active) via Billing > Manage in Stripe > Cancel Subscription
+Go to cursor.com/dashboard
+Scroll to Advanced Account Settings
+Click Delete Account and confirm
+How do I delete a Grok Bot account?
+Grok Bot uses your Cursor account. Deleting the Cursor account also deletes Grok Bot. On iOS, you can start this from Grok Bot Settings. See Delete your Grok Bot account.
+What gets deleted when I delete my account?
+Your account and all associated data
+Chat history and settings
+All data is removed within 30 days.
+What is not affected by account deletion?
+Local project files on your computer remain untouched
+Any code you wrote using Cursor stays on your machine
+Related
+Cancel your subscription
+Change your email address
+Delete your Grok Bot account
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+How do I delete my account?
+How do I delete a Grok Bot account?
+What gets deleted when I delete my account?
+What is not affected by account deletion?
+Related
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back Delete your account
+Account deletion is self-serve and permanent.
+How do I delete my account?
+Cancel your subscription first (if active) via Billing > Manage in Stripe > Cancel Subscription
+Go to cursor.com/dashboard
+Scroll to Advanced Account Settings
+Click Delete Account and confirm
+How do I delete a Grok Bot account?
+Grok Bot uses your Cursor account. Deleting the Cursor account also deletes Grok Bot. On iOS, you can start this from Grok Bot Settings. See Delete your Grok Bot account.
+What gets deleted when I delete my account?
+Your account and all associated data
+Chat history and settings
+All data is removed within 30 days.
+What is not affected by account deletion?
+Local project files on your computer remain untouched
+Any code you wrote using Cursor stays on your machine
+Related
+Cancel your subscription
+Change your email address
+Delete your Grok Bot account
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+How do I delete my account?
+How do I delete a Grok Bot account?
+What gets deleted when I delete my account?
+What is not affected by account deletion?
+Related

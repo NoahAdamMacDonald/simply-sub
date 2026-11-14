@@ -1,0 +1,170 @@
+url: https://www.perplexity.ai/help-center/en/articles/10353002-billing-faq-for-pro-plan-subscribers
+method: fetch
+saved: 2026-11-14
+
+Billing FAQ for Pro Plan Subscribers - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+Subscription Plans & Billing
+Billing FAQ for Pro Plan Subscribers
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+What is Perplexity Pro?
+Perplexity Max
+Which Perplexity Subscription Plan is right for you?
+Billing FAQ for Pro Plan Subscribers
+How to transfer your subscription
+Billing for Android Subscriptions
+Billing for iOS Subscriptions
+Canceling a Subscription
+Refunds
+Instant Buy + Buy with PayPal
+What is Instant Buy?
+Paying in Local Currency
+How credits work on Perplexity
+Why is my subscription Paused?
+Why can’t I see my Pro status?
+What is Education Pro?
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top How do I upgrade my account via the web app?
+What payment methods do you accept?
+How do I download a subscription invoice or receipt?
+How do I update my billing information?
+Trial promotional subscriptions: payment method required
+Overall requirements
+New users vs. existing users
+Where notifications appear
+How do I update my payment information?
+How do I remove a saved payment method?
+Can I pause my subscription?
+What happens if I don’t renew my subscription?
+How do I cancel my plan?
+Additional refund scenarios
+Subscription Plans & Billing
+Billing FAQ for Pro Plan Subscribers
+Copy pageCopy page
+Billing FAQ for Perplexity Pro subscribers: upgrading through the web app, trial subscriptions, updating payment details, and canceling your plan.
+Copy pageCopy page
+How do I upgrade my account via the web app?
+1
+Go to your Settings page https://www.perplexity.ai/account/details.
+2
+Under Account, find the Subscription section.
+3
+Click Upgrade Plan and select the plan you want to use.
+4
+Perplexity redirects you to a Stripe payments page where you can enter your details.
+What payment methods do you accept?
+Credit and debit cards (Visa, Master Card and AMEX)
+Cash App
+Google and Apple Pay
+ACH transfer
+How do I download a subscription invoice or receipt?
+1
+Go to the Perplexity home page.
+2
+Click your user profile icon and select Account.
+3
+Under Subscription, click Manage Plan.
+4
+In Invoice History, find your desired date and click it.
+5
+Click Download Invoice to get a copy.
+If you purchased your subscription through the Google Play Store or App Store app, you can access invoices directly through those channels.
+How do I update my billing information?
+1
+Go to the Perplexity home page.
+2
+Click your user profile icon and select Account.
+3
+Under Subscription, click Manage Plan.
+4
+Scroll to Billing and Shipping Information and click Add payment method.
+You can’t change or update invoices that have already been created. Once you update your billing information, it will apply to future invoices only.
+Trial promotional subscriptions: payment method required
+If you’ve redeemed a trial or promotional subscription (for example, through a partner promotion), a valid payment method is required to activate and maintain your access. Here’s what you need to know:
+Overall requirements
+A valid credit or debit card is required for all promotional and trial redemptions.
+No charges are applied during your promotional/trial period.
+Unless you cancel before the trial ends, your subscription will auto-renew at the standard rate for the plan you selected during redemption (monthly or annual).
+New users vs. existing users
+New users are prompted to add a payment method during the sign-up and redemption flow.
+Existing promotional/trial users who receive a payment method prompt must add a credit or debit card within 7 days of the original notification. If you don’t add a card within that window, Perplexity downgrades your account to the free version. Once you add a valid card, your promotional access resumes immediately. However, Perplexity doesn’t add missed days back to your trial period.
+Where notifications appear
+Email: You will receive an email notification prompting you to add a payment method.
+In-app: An in-app banner will appear prompting you to add your payment information.
+How do I update my payment information?
+Web (desktop):
+1
+Go to perplexity.ai/settings/account.
+2
+Scroll to the Subscription section.
+3
+Click Manage Plan (or Manage Subscription).
+4
+Under Billing and Shipping Information, add or update your payment method.
+Do not attempt to update your Perplexity payment information through the Google Play Store or Apple App Store. Doing so will create a new, separate subscription and you will be charged. Always update your payment method via the Perplexity website.
+How do I remove a saved payment method?
+If you paid for your subscription on the Perplexity website, you can remove a saved card after the subscription ends:
+1
+Go to perplexity.ai/settings/account.
+2
+Under Your subscription, find Previous subscription and click View details.
+3
+On the billing page that opens, remove the card you no longer want to keep.
+Your billing page may still list “Perplexity UBB Inactive Plan” after your subscription ends. This isn’t a Pro or Max subscription, but it can prevent you from removing your default card. If you see the message “Your default payment method can’t be deleted because you have an active plan,” contact us via Help > Contact Support. Our team can remove the card for you.
+If you subscribed through the Apple App Store or Google Play Store, your subscription’s payment method is managed in that store, not on the Perplexity website.
+Can I pause my subscription?
+No, subscription pausing isn’t available. If you can’t make a payment, you can cancel and upgrade at a later time.
+What happens if I don’t renew my subscription?
+After the current billing cycle ends, your account reverts to the free version and loses access to Pro features.
+How do I cancel my plan?
+1
+Go to Account settings.
+2
+Under Your subscription, click Manage.
+3
+Click the Manage drop-down and select Cancel subscription.
+Additional refund scenarios
+Forgot to cancel subscription
+Perplexity may issue a refund if your request follows the guidelines mentioned above.
+Switching from annual to monthly subscription
+Refunds are possible within established timeframe.
+Account termination
+If your account is terminated for violating Perplexity’s Terms of Use, you won’t receive a refund for remaining credit or prepaid service.
+Last modified on October 20, 2026
+Which Perplexity Subscription Plan is right for you?
+How to transfer your subscription
+⌘ I

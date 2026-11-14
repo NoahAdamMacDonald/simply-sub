@@ -1,0 +1,137 @@
+url: https://www.perplexity.ai/help-center/en/articles/10353020-billing-for-android-subscriptions
+method: fetch
+saved: 2026-11-14
+
+Billing for Android Subscriptions - Perplexity Help Center
+Documentation Index
+Fetch the complete documentation index at: /llms.txt
+Use this file to discover all available pages before exploring further.
+Skip to main content
+Assistant
+Responses are generated using AI and may contain mistakes.
+Perplexity Help Center home page English
+Help Center
+Perplexity
+Enterprise
+Computer
+Perplexity API
+Contact support
+Contact support
+Search...
+Search...
+Navigation
+Subscription Plans & Billing
+Billing for Android Subscriptions
+Home
+Overview
+Getting Started
+Perplexity Enterprise
+Computer
+Teammates
+Desktop App
+Features
+AI Models & Content Generation
+Subscription Plans & Billing
+What is Perplexity Pro?
+Perplexity Max
+Which Perplexity Subscription Plan is right for you?
+Billing FAQ for Pro Plan Subscribers
+How to transfer your subscription
+Billing for Android Subscriptions
+Billing for iOS Subscriptions
+Canceling a Subscription
+Refunds
+Instant Buy + Buy with PayPal
+What is Instant Buy?
+Paying in Local Currency
+How credits work on Perplexity
+Why is my subscription Paused?
+Why can’t I see my Pro status?
+What is Education Pro?
+Account & Sign-In
+Privacy & Data
+Connectors & Integrations
+Premium Data Sources
+Comet
+Mobile Apps
+Perplexity API
+Promotions & Partnerships
+Troubleshooting & Support
+On this page
+Back to top How can I update my billing information on Android?
+How often will I get billed?
+How do I subscribe on Android?
+Can I pause my subscription?
+What happens if I don’t renew my subscription?
+How do I cancel my subscription on Android?
+If I delete my account, will it terminate my subscription?
+Can I cancel my subscription any time?
+Is it possible to reactivate my subscription after canceling?
+I’ve canceled my subscription, but I’m still being charged. What can I do?
+How can I request a refund on Android?
+How do I find my Google Play order number?
+I subscribed on Google Play, but my Perplexity account doesn’t show my plan
+Account termination
+Subscription Plans & Billing
+Billing for Android Subscriptions
+Copy pageCopy page
+Learn about Billing for Android Subscriptions, including How can I update my billing information on Android and How often will I get billed.
+Copy pageCopy page
+How can I update my billing information on Android?
+1
+Open the Google Play app.
+2
+Tap the profile icon at the top right.
+3
+Tap “Payments & subscriptions,” then “Payment methods,” and then “More payment settings.”
+4
+If prompted, sign in to Google Pay.
+5
+Under the payment method you want to edit, tap “Edit.”
+6
+Make changes and tap “Update.”
+How often will I get billed?
+You’re billed monthly or annually on your original billing date, depending on your subscription. If you don’t set your subscription to cancel at the end of your cycle, it continues to renew.
+How do I subscribe on Android?
+Tap the settings icon in the top-left corner of the app. Tap “Perplexity Pro → Learn More” and choose your plan.
+Can I pause my subscription?
+You can’t pause your subscription. If you’re unable to make a payment, you can cancel your subscription and restart it when convenient.
+What happens if I don’t renew my subscription?
+If you don’t renew your subscription because you canceled it, your account reverts to the free version after the current billing cycle ends. You no longer have access to Pro features.
+How do I cancel my subscription on Android?
+Open the Google Play app and tap the settings icon in the upper-right corner. Tap “Payments & subscriptions,” then “Perplexity - Ask Anything.” Choose “Cancel subscription” at the bottom of the screen.
+If I delete my account, will it terminate my subscription?
+No. Deleting your account doesn’t terminate your subscription. Cancel your subscription before you delete your account.
+Can I cancel my subscription any time?
+Yes. Your account reverts to the free version after the current billing cycle ends.
+Is it possible to reactivate my subscription after canceling?
+Yes. To reactivate your subscription on Google Play, go to the purchase history page and resubscribe.
+I’ve canceled my subscription, but I’m still being charged. What can I do?
+Double-check that you’ve canceled your subscription by going to settings and clicking “Manage subscription.” Contact us via Help > Contact Support for further assistance.
+How can I request a refund on Android?
+To request a refund for an Android subscription, contact us via Help > Contact Support. To speed up the process, include your Google Play email address, your Google Play order number (it starts with GPA), or both in your message.
+Google Play purchases follow the refund windows in our Refunds article. This also applies to purchases made while you were signed in to a different Perplexity account.
+How do I find my Google Play order number?
+Your Google Play order number starts with GPA (for example, GPA.1234-5678-9012-34567). You can find it in two places:
+Receipt email: Google sends a receipt to the Google account you used to pay. Search that inbox for your Google Play receipt.
+Order history: In the Google Play Store app, tap your profile icon, then Payments & subscriptions → Budget & history.
+For more help, see Google’s guide to reviewing your Google Play order history.
+I subscribed on Google Play, but my Perplexity account doesn’t show my plan
+A Google Play subscription is linked to two accounts: the Google account that paid for it, and the Perplexity account you were signed in to when you subscribed. If your plan doesn’t show, you’re usually using a different Google or Perplexity account from the one used for the purchase.
+1
+Check which Google account paid.
+While signed in to each Google account you use, open play.google.com/store/account/subscriptions. The account that lists your Perplexity subscription is the one that paid.
+2
+Check which Perplexity account you're signed in to.
+In the Perplexity app, open your account settings and check the email address. If you have more than one Perplexity account, sign out and sign in to the one you used when you subscribed.
+3
+Restore your purchase.
+While signed in to that Perplexity account, and with the Google account that paid added to your device, open the screen that shows the Pro and Max plans and tap Restore.
+Restoring moves your Google Play subscription to the Perplexity account you’re signed in to, and the other Perplexity account goes back to the free plan. Make sure you’re signed in to the account you want to keep before you tap Restore.
+If you can’t tell which Perplexity account has your subscription, contact us via Help > Contact Support. Include your Google Play order number and the Google account email you paid with.
+Account termination
+If your account is terminated for violating Perplexity’s Terms of Use, you will not receive a refund for any remaining credit or prepaid service.
+Last modified on November 11, 2026
+How to transfer your subscription
+Billing for iOS Subscriptions
+⌘ I

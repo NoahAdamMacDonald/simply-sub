@@ -1,0 +1,87 @@
+url: https://cursor.com/help/integrations/cli
+method: fetch
+saved: 2026-11-14
+
+CLI | Cursor Docs
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back CLI
+Ship code with AI agents right from your terminal.
+How do I install the CLI?
+curl https://cursor.com/install -fsS | bash
+On Windows PowerShell:
+irm 'https://cursor.com/install?win32=true' | iex
+What can the CLI do?
+The CLI brings Cursor's AI capabilities to your terminal. It supports Agent, Plan, and Ask modes for interactive coding and automation. Some features work differently or are available only in the editor.
+Learn more at cursor.com/cli.
+Can I use the CLI for automation?
+Yes. Use headless mode for scripts, CI pipelines, and GitHub Actions. Automate doc updates, trigger security reviews, or build custom coding workflows. See the Headless CLI docs for setup.
+Does the CLI work with other editors?
+Yes. Cursor CLI works with any IDE or editor. Plug it into your existing workflow anywhere you have a terminal.
+How do I authenticate the CLI?
+Run agent login or set the CURSOR_API_KEY environment variable. See the CLI authentication docs for details.
+What if the CLI can't reach Cursor's servers?
+Check your network connection first. Behind a VPN or firewall, allowlist *.cursor.sh and *.cursorapi.com. For proxy environment variables and HTTP/1.1 fallback, see CLI configuration.
+How do I update the CLI?
+Cursor CLI auto-updates by default. To update manually, run:
+agent update
+Related
+CLI overview
+CLI installation
+CLI authentication
+CLI configuration
+GitHub Actions
+cursor.com/cli
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+How do I install the CLI?
+What can the CLI do?
+Can I use the CLI for automation?
+Does the CLI work with other editors?
+How do I authenticate the CLI?
+What if the CLI can't reach Cursor's servers?
+How do I update the CLI?
+Related
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back CLI
+Ship code with AI agents right from your terminal.
+How do I install the CLI?
+curl https://cursor.com/install -fsS | bash
+On Windows PowerShell:
+irm 'https://cursor.com/install?win32=true' | iex
+What can the CLI do?
+The CLI brings Cursor's AI capabilities to your terminal. It supports Agent, Plan, and Ask modes for interactive coding and automation. Some features work differently or are available only in the editor.
+Learn more at cursor.com/cli.
+Can I use the CLI for automation?
+Yes. Use headless mode for scripts, CI pipelines, and GitHub Actions. Automate doc updates, trigger security reviews, or build custom coding workflows. See the Headless CLI docs for setup.
+Does the CLI work with other editors?
+Yes. Cursor CLI works with any IDE or editor. Plug it into your existing workflow anywhere you have a terminal.
+How do I authenticate the CLI?
+Run agent login or set the CURSOR_API_KEY environment variable. See the CLI authentication docs for details.
+What if the CLI can't reach Cursor's servers?
+Check your network connection first. Behind a VPN or firewall, allowlist *.cursor.sh and *.cursorapi.com. For proxy environment variables and HTTP/1.1 fallback, see CLI configuration.
+How do I update the CLI?
+Cursor CLI auto-updates by default. To update manually, run:
+agent update
+Related
+CLI overview
+CLI installation
+CLI authentication
+CLI configuration
+GitHub Actions
+cursor.com/cli
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+How do I install the CLI?
+What can the CLI do?
+Can I use the CLI for automation?
+Does the CLI work with other editors?
+How do I authenticate the CLI?
+What if the CLI can't reach Cursor's servers?
+How do I update the CLI?
+Related

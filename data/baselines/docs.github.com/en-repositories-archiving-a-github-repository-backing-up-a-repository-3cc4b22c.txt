@@ -1,0 +1,186 @@
+url: https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository
+method: fetch
+saved: 2026-11-14
+
+Backing up a repository - GitHub Docs Skip to main content
+Skip to content
+GitHub Docs
+Search or ask Copilot/
+Menu
+Collapse sidebar
+Expand sidebar
+Home
+Repositories
+Archive a repository
+Backing up a repository
+Repositories
+Create & manage repositories
+About repositories
+Best practices
+Quickstart for repositories
+Repository limits
+Creating a new repository
+Access to repositories
+Create from a template
+Create a template repo
+Issues-only repository
+Duplicating a repository
+Cloning a repository
+Troubleshooting cloning errors
+Renaming a repository
+Transferring a repository
+Deleting a repository
+Restore deleted repository
+View all repositories
+Manage repository settings
+Repository access and collaboration
+Invite collaborators
+Remove a collaborator
+Repository permissions
+Remove yourself
+Ownership continuity
+Customize your repository
+About READMEs
+Licensing a repository
+Display a sponsor button
+Social media preview
+Classify with topics
+About code owners
+Repository languages
+About CITATION files
+Enable features
+Disabling issues
+Disabling pull requests
+Disable projects
+Manage GitHub Actions settings
+Discussions
+Security & analysis
+Manage repository settings
+Repository visibility
+Teams & people
+Manage the forking policy
+Manage pull request reviews
+Manage default branch name
+Manage the commit signoff policy
+Manage the push policy
+Managing Git LFS objects in archives
+Configure autolinks
+Manage auto-closing issues
+Branches and merges
+Manage branches
+View branches
+Renaming a branch
+Change the default branch
+Delete & restore branches
+Configure PR merges
+About merge methods
+Configure commit merging
+Configure commit squashing
+Configure commit rebasing
+Managing merge queue
+Manage branch updates
+Manage auto merge
+Automatic branch deletion
+Manage protected branches
+About protected branches
+Branch protection rule
+Manage rulesets
+About rulesets
+Create a ruleset
+Manage a ruleset
+Convert to rulesets
+Available rules
+Troubleshooting
+Work with files
+Managing files
+Creating new files
+Add a file
+Move a file
+Edit files
+Renaming a file
+Delete files
+How changed files appear
+Using files
+Navigating code on GitHub
+View and understand files
+Permanent links to files
+Source code archives
+Working with non-code files
+Download files
+Managing large files
+Large files
+Git Large File Storage
+Install Git LFS
+Configure Git LFS
+Collaboration
+Move a file to Git LFS
+Remove files
+Resolve upload failures
+Release projects
+About releases
+Manage releases
+View releases & tags
+Searching releases
+Linking to releases
+Comparing releases
+Automated release notes
+Automate release forms
+View activity and data
+View deployment activity
+About repository graphs
+Using Pulse
+View repository traffic
+View project contributors
+Analyze changes
+Connections between repositories
+Using the activity view
+Archive a repository
+Archiving repositories
+Archive content & data
+Reference & cite content
+Backing up a repository
+In this article
+Backing up a repository
+You can use Git, a third-party tool, or the API to back up your repository.
+Copy markdown
+In this article
+Backing up a Git repository with the Git CLI
+Backing up a wiki with the Git CLI
+Backing up a Git repository and selected metadata with migration archives
+Third-party backup tools
+You may want to take backups of repositories for archiving or disaster recovery purposes.
+Depending on the GitHub features you use and your requirements (for example whether you need to be able to restore the backup), there are different backup options which include different data.
+You may want to store your backups on an external hard drive and/or upload them to a cloud-based backup or storage service such as Azure Blob Storage, Google Drive, or Dropbox.
+Backing up a Git repository with the Git CLI
+A Git repository includes all of the files and folders associated with a project, along with each file's revision history. For more information, see About Git.
+You can take a backup of a Git repository, including the revision history, by performing a mirror clone with the Git CLI.
+To perform a mirror clone, use the git clone command with the --mirror option.
+git clone --mirror https://github.com/EXAMPLE-USER/REPOSITORY.git
+If the repository includes Git Large File Storage objects, pull in the objects. For more details on Git Large File Storage and how to install it, see About Git Large File Storage.
+git lfs fetch --all
+Once you have cloned the Git repository, you can compress it into an archive (for example a .zip or .tar.gz file) and move it to a location for safe-keeping.
+You can restore your backup by decompressing the archive and then pushing the Git repository to a Git remote.
+Backing up a wiki with the Git CLI
+Wikis in GitHub are stored as Git repositories. This means that you can back up a wiki by cloning it. For more details on how to clone a wiki using Git, see Adding or editing wiki pages.
+Once you have cloned the wiki, you can compress it into an archive (for example a .zip or .tar.gz file) and move it to a location for safe-keeping.
+You can restore your backup by decompressing the archive and then pushing the wiki repository to a Git remote.
+Backing up a Git repository and selected metadata with migration archives
+You can use the REST API to generate a migration archive for a repository. For more information, see REST API endpoints for organization migrations.
+These archives are designed for moving data between GitHub products, but they can also be used to back up a repository for archiving purposes
+Warning
+Migration archives do not include all data related to a repository. For example, Git Large File Storage objects, discussions, or packages are not included. For more information on what is included in migration archives, see About migrations between GitHub products with GitHub Enterprise Importer.
+Once you have generated an archive, you can move it to a location of your choice for safe-keeping.
+There is no supported, documented way to restore migration archives on GitHub, so these backups are only suitable for archiving purposes.
+Third-party backup tools
+A number of self-service tools exist that automate backups of repositories. Backup tools will download data from specific repositories and organize it within a new branch or directory.
+For more information about self-service backup tools, see the Backup Utilities category on GitHub Marketplace.
+Back to top
+Help and support
+Was this Doc helpful?
+Yes No
+Help us make GitHub Docs great!
+All Docs are open source. See something that's wrong or unclear? Submit a pull request.
+Make a contribution
+Still need help?
+Ask the GitHub communityContact supportExpert servicesBlog
+GitHub Inc. © 2026TermsPrivacyStatusPricing

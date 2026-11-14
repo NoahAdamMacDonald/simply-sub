@@ -1,0 +1,155 @@
+url: https://cursor.com/help/account-and-billing/billing
+method: fetch
+saved: 2026-11-14
+
+Billing and payments | Cursor Docs
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back Billing and payments
+Understand your billing cycle, renewals, payment methods, and invoices.
+On The X Subscription, your plan, payment method, invoices, and prepaid credit live at grok.com/dashboard/billing. See Managing The X Subscription. The cursor.com steps on this page apply to legacy Cursor plans.
+How does my billing cycle work?
+Your cycle starts on the date you subscribe. It renews monthly or yearly based on your plan.
+Individual plans renew on your signup date
+Teams plans renew on the team signup date
+Renewal dates stay the same when members are added or removed
+When does included usage reset?
+On The X Subscription, your included pool for Cursor models refreshes weekly, separate from your billing cycle. Prepaid credit doesn't reset with it; each top-up stays available until used or until it expires (currently 365 days after purchase)
+On legacy individual plans, included usage resets monthly with your billing cycle
+Legacy Teams plans include usage per paid seat each cycle, based on seat type (Standard or Premium)
+Usage beyond included amounts is paid from prepaid credit on The X Subscription, or appears as on-demand usage on legacy plans
+What can create charges before renewal?
+You can see charges between renewal dates when one of these events happens:
+A manual or automatic top-up adds prepaid credit (The X Subscription)
+On-demand usage is billed after included usage is consumed (legacy plans)
+Team seats are added mid-cycle and charged pro-rata
+Team seat removals can create billing adjustments or credits
+How do seats work on a Teams plan?
+Cursor bills teams per active paid seat, not pre-allocated seats. Seat price depends on the seat tier: Premium, Super, or Ultra on The X Subscription, or Standard or Premium on legacy Teams plans.
+Adding a member mid-cycle creates a pro-rated charge
+Removing a member who used credits keeps the seat occupied until the cycle ends
+Billing adjustments appear on a future invoice as credit when applicable
+How do I update my payment method?
+On The X Subscription:
+Go to grok.com/dashboard/billing and open Payment details to add a payment method, change your default, or remove one.
+Legacy plan billed on cursor.com:
+Go to cursor.com/dashboard/billing
+Click Manage in Stripe to open the Stripe billing portal
+Update your card in the Stripe billing portal
+The billing page does not show Manage in Stripe for an App Store plan or a plan bought in the Grok Bot Android app.
+Billed through the App Store:
+Apple manages the payment method. Update the card in your Apple ID subscriptions. See Subscribe from the iOS app.
+Billed in the Grok Bot Android app:
+Google Play manages the payment method. Manage the card in the Google Play app. See Subscribe from the Android app.
+On an App Store plan, or a plan bought in the Grok Bot Android app, on-demand usage uses a separate card on the web. Add or change it under Spending on cursor.com/dashboard. See On-demand usage for mobile subscriptions.
+How do I update billing details for invoices?
+For a plan billed on cursor.com, update your company name, address, and tax details in the Stripe billing portal. Changes apply to future invoices. An App Store receipt comes from Apple. A receipt for a plan bought in the Grok Bot Android app comes from Google Play. See Subscribe from the iOS app or Subscribe from the Android app.
+Where do I find invoices and receipts?
+On The X Subscription:
+Go to grok.com/dashboard/billing and open the Invoices tab. Subscription charges and top-ups are both listed, and you can download each one.
+Legacy plan billed on cursor.com:
+Go to cursor.com/dashboard/billing and click Manage in Stripe. In the Stripe portal, open any invoice to view or download the PDF. See Invoices for details.
+Billed through the App Store:
+Apple sends the receipt for the subscription. See Subscribe from the iOS app.
+Billed in the Grok Bot Android app:
+Google Play bills this subscription, and Google sends the receipt. See Subscribe from the Android app.
+On-demand usage on either plan is billed to the separate card on your dashboard, so those invoices are not store receipts. Open cursor.com/dashboard/billing and scroll to Invoices.
+What if I still need billing help?
+Contact support while signed in to your Cursor account and include invoice IDs, dates, and a short issue description.
+Related
+Invoices
+Subscribe from the iOS app
+Subscribe from the Android app
+Payment issues
+Payment completed but plan not updated
+Usage-based charges
+Pricing and plans
+Cancel your subscription
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+How does my billing cycle work?
+When does included usage reset?
+What can create charges before renewal?
+How do seats work on a Teams plan?
+How do I update my payment method?
+How do I update billing details for invoices?
+Where do I find invoices and receipts?
+What if I still need billing help?
+Related
+Skip to main content DocsAPILearnHelp
+Sign in
+Download
+← Back Billing and payments
+Understand your billing cycle, renewals, payment methods, and invoices.
+On The X Subscription, your plan, payment method, invoices, and prepaid credit live at grok.com/dashboard/billing. See Managing The X Subscription. The cursor.com steps on this page apply to legacy Cursor plans.
+How does my billing cycle work?
+Your cycle starts on the date you subscribe. It renews monthly or yearly based on your plan.
+Individual plans renew on your signup date
+Teams plans renew on the team signup date
+Renewal dates stay the same when members are added or removed
+When does included usage reset?
+On The X Subscription, your included pool for Cursor models refreshes weekly, separate from your billing cycle. Prepaid credit doesn't reset with it; each top-up stays available until used or until it expires (currently 365 days after purchase)
+On legacy individual plans, included usage resets monthly with your billing cycle
+Legacy Teams plans include usage per paid seat each cycle, based on seat type (Standard or Premium)
+Usage beyond included amounts is paid from prepaid credit on The X Subscription, or appears as on-demand usage on legacy plans
+What can create charges before renewal?
+You can see charges between renewal dates when one of these events happens:
+A manual or automatic top-up adds prepaid credit (The X Subscription)
+On-demand usage is billed after included usage is consumed (legacy plans)
+Team seats are added mid-cycle and charged pro-rata
+Team seat removals can create billing adjustments or credits
+How do seats work on a Teams plan?
+Cursor bills teams per active paid seat, not pre-allocated seats. Seat price depends on the seat tier: Premium, Super, or Ultra on The X Subscription, or Standard or Premium on legacy Teams plans.
+Adding a member mid-cycle creates a pro-rated charge
+Removing a member who used credits keeps the seat occupied until the cycle ends
+Billing adjustments appear on a future invoice as credit when applicable
+How do I update my payment method?
+On The X Subscription:
+Go to grok.com/dashboard/billing and open Payment details to add a payment method, change your default, or remove one.
+Legacy plan billed on cursor.com:
+Go to cursor.com/dashboard/billing
+Click Manage in Stripe to open the Stripe billing portal
+Update your card in the Stripe billing portal
+The billing page does not show Manage in Stripe for an App Store plan or a plan bought in the Grok Bot Android app.
+Billed through the App Store:
+Apple manages the payment method. Update the card in your Apple ID subscriptions. See Subscribe from the iOS app.
+Billed in the Grok Bot Android app:
+Google Play manages the payment method. Manage the card in the Google Play app. See Subscribe from the Android app.
+On an App Store plan, or a plan bought in the Grok Bot Android app, on-demand usage uses a separate card on the web. Add or change it under Spending on cursor.com/dashboard. See On-demand usage for mobile subscriptions.
+How do I update billing details for invoices?
+For a plan billed on cursor.com, update your company name, address, and tax details in the Stripe billing portal. Changes apply to future invoices. An App Store receipt comes from Apple. A receipt for a plan bought in the Grok Bot Android app comes from Google Play. See Subscribe from the iOS app or Subscribe from the Android app.
+Where do I find invoices and receipts?
+On The X Subscription:
+Go to grok.com/dashboard/billing and open the Invoices tab. Subscription charges and top-ups are both listed, and you can download each one.
+Legacy plan billed on cursor.com:
+Go to cursor.com/dashboard/billing and click Manage in Stripe. In the Stripe portal, open any invoice to view or download the PDF. See Invoices for details.
+Billed through the App Store:
+Apple sends the receipt for the subscription. See Subscribe from the iOS app.
+Billed in the Grok Bot Android app:
+Google Play bills this subscription, and Google sends the receipt. See Subscribe from the Android app.
+On-demand usage on either plan is billed to the separate card on your dashboard, so those invoices are not store receipts. Open cursor.com/dashboard/billing and scroll to Invoices.
+What if I still need billing help?
+Contact support while signed in to your Cursor account and include invoice IDs, dates, and a short issue description.
+Related
+Invoices
+Subscribe from the iOS app
+Subscribe from the Android app
+Payment issues
+Payment completed but plan not updated
+Usage-based charges
+Pricing and plans
+Cancel your subscription
+Was this article helpful?
+Yes No
+Status: Check system status| Contact Support
+How does my billing cycle work?
+When does included usage reset?
+What can create charges before renewal?
+How do seats work on a Teams plan?
+How do I update my payment method?
+How do I update billing details for invoices?
+Where do I find invoices and receipts?
+What if I still need billing help?
+Related
