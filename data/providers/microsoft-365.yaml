@@ -1,0 +1,1428 @@
+# Researched by hand on 2026-11-13 and 2026-11-14 (the full catalog run, AI batch 1), read with Edge from Canada unless
+# named, and through a US exit where said. The session's decision (the brand rule: one company, one set of terms, the
+# Microsoft Services Agreement): Microsoft's consumer subscriptions are one provider, Microsoft 365, with Copilot's free
+# tier and a Microsoft account's free apps as its free plan. Pages, each quoted where it's used:
+# Pricing (read 2026-11-13): each country's compare page (microsoft.com/<locale>/microsoft-365/buy/compare-all-microsoft-
+# 365-products: Personal, Family and Premium, each "Paid yearly" with "Or buy at" a monthly price), its OneDrive plans page
+# (/microsoft-365/onedrive/onedrive-plans-and-pricing: Basic, "Or buy at CAD $2.00 /month") and its Copilot plans page
+# (/copilot/pricing/individuals: Pro, "Monthly billing only."), for en-ca, en-us, en-gb, en-ie, en-au, en-nz, de-de, fr-fr,
+# nl-nl, es-es and it-it. Each locale's pages price in its own currency whoever reads them (CAD $, £, AU$, NZ$, €); the
+# US's bare $ was read again through a US exit (the same $99.99, $129.99, $199.99, $19.99 and $99.99, "English (United
+# States)" in its footer). The regular price is the struck-through one ("CAD $115.00 CAD $79.00/first year"): the first
+# year's or month's 30% off is a limited-time offer, and the "Try free for 1 month" a trial. Germany calls Personal
+# "Microsoft 365 Single", Spain "Personal", "Familia" and "Básico", France "Personnel", "Famille" and "Professionnel".
+# Tax: France's pages say "TTC" (all taxes included) after every price; no other locale's pages say whether tax is in.
+# Plans (2026-11-13): Personal, Family and Premium on the compare page; Basic (100 GB) on the OneDrive and Outlook pages;
+# Pro (5 TB, the highest AI usage) on the Copilot plans page and its own product page, and named in the compare page's FAQ
+# ("Microsoft 365 Personal, Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro are subscriptions"). Copilot
+# Pro is no longer sold: Microsoft's blog of 2025-10-01 ("we’ll no longer sell Copilot Pro—Copilot Pro subscribers can
+# switch to Microsoft 365 Premium") and its old store page (microsoft.com/en-ca/store/b/copilotpro) leads to Premium's.
+# Personal Classic and Family Classic are existing subscribers' plans (the switching article's table), not sold: left
+# out. Office Home 2024 is a one-time purchase: out. Student and military prices are offers: left out (notes.md).
+# Bundles: none. Its PC offers (a Windows PC with a year of Premium and Game Pass, ended 2026-09-30) are device
+# promotions, not subscription bundles.
+# Official resellers: none named as such. Its cancelling article says "If you purchased a Microsoft 365 subscription from
+# a third-party retailer such as Amazon or Harvey Norman, please contact them directly": retail product keys, not an
+# approval page (notes.md). App stores bill it (a way to pay, below).
+# Region checklist for CA and US, 2026-11-13: 1. each locale's path (/en-ca/, /en-us/), each priced in its own currency;
+# 2. its footer's locale picker (the same paths); 3. no page data names a currency (curl of en-us: "$99.99" only), so the
+# US was read through a US exit too; 4. the checkout wasn't opened; 5. its refund policy names Canada; 6. Edge and a plain
+# fetch; 7. no bill offered.
+# Not on the pages: the card networks (its payment article names "credit card, debit card" only); the countries it sells
+# in (no list read); which regions lack Defender ("Defender is not available in certain regions").
+
+id: microsoft-365
+name: Microsoft 365
+aliases: [Microsoft Copilot, Copilot, Office 365, OneDrive, Outlook.com]
+website: https://www.microsoft.com/microsoft-365
+category: software
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help article on cancelling (account.microsoft.com/services/microsoft365, then Cancel subscription).
+cancelUrl: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-a-microsoft-365-subscription
+sources:
+  { pricing: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products }
+# Ways to pay (M11.5), read 2026-11-14 in Microsoft's support article on the account it bills (Xbox Game Pass's page): a
+# credit or debit card, a bank account, PayPal, a mobile phone or Microsoft gift cards, though "Not all payment methods
+# are supported in all regions"; its mobile operator billing table lists Canada (Telus), France, Germany, Italy, the
+# Netherlands and the UK among the regions here. Its cancelling article adds Google Play and the Apple App Store. No page
+# names the card networks, so acceptedNetworks is left out.
+paymentMethods:
+  - methods: [card, bank-transfer, paypal, gift-card]
+    page: 'Add a payment method to your Microsoft account'
+    url: https://support.microsoft.com/en-us/accounts-billing/add-a-new-bank-or-credit-card-to-your-microsoft-account
+    quotes:
+      - 'You can add your credit card, debit card, bank account, PayPal account, or mobile phone as a new payment method.'
+      - 'To add a Microsoft gift card to your account, go to redeem.microsoft.com.'
+      - 'Not all payment methods are supported in all regions.'
+  - methods: [card, bank-transfer, paypal, gift-card, provider-billing]
+    regions: [CA, GB, DE, FR, IT, NL]
+    page: 'Add a payment method to your Microsoft account'
+    url: https://support.microsoft.com/en-us/accounts-billing/add-a-new-bank-or-credit-card-to-your-microsoft-account
+    quotes:
+      - 'You can add your credit card, debit card, bank account, PayPal account, or mobile phone as a new payment method.'
+      - 'To add a Microsoft gift card to your account, go to redeem.microsoft.com.'
+      - 'Not all payment methods are supported in all regions.'
+      - 'The Microsoft Store offers mobile operator billing as a payment method in various countries/regions.'
+  - methods: [app-store]
+    page: 'Cancel a Microsoft 365 subscription'
+    url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-a-microsoft-365-subscription
+    quotes:
+      - 'If you purchased a Microsoft 365 subscription from Google Play or the Apple App Store, contact their customer support for cancellation or refund.'
+# Owner (M11.2), read 2026-11-14: Microsoft's 2026 annual report, on its own site, names Microsoft 365 Consumer
+# subscriptions and Copilot among its products; its services agreement names Microsoft Corporation as the company you
+# contract with for consumer services (Canada's version); its investor FAQ names the listing. No page read names a
+# majority holder.
+owner:
+  name: Microsoft Corporation
+  website: https://www.microsoft.com
+  page:
+    name: Microsoft Annual Report 2026
+    url: https://www.microsoft.com/investor/reports/ar26/index.html
+  quotes:
+    - 'Microsoft 365 Consumer products and cloud services, including Microsoft 365 Consumer subscriptions, Office licensed on-premises, and other consumer services.'
+    - 'drive increased engagement with our services like Microsoft Edge, Bing, Copilot, Microsoft Teams, Microsoft 365 Consumer, XBOX Game Pass, and more.'
+  country:
+    code: US
+    page:
+      name: 'Microsoft Services Agreement'
+      url: https://www.microsoft.com/en-ca/servicesagreement
+    quotes:
+      - 'For all other free and paid consumer Services, you are contracting with Microsoft Corporation, One Microsoft Way, Redmond, WA 98052, U.S.A.'
+    lastVerified: 2026-11-14
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: MSFT }
+    page:
+      name: 'Investor relations FAQ'
+      url: https://www.microsoft.com/en-us/investor/faq
+    quotes:
+      - 'A. Microsoft common shares are traded on The Nasdaq Stock Market. The ticker symbol is MSFT.'
+    lastVerified: 2026-11-14
+  lastVerified: 2026-11-14
+
+# Renewal day (M11.5), read 2026-11-14: the Terms of Sale renew a subscription "at the end of the current service period",
+# and its renewal help says an early renewal extends the expiration date "by one month or one year"; neither names the
+# day in words core reads (notes.md has the same-date block).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.microsoft.com/en-ca/store/b/terms-of-sale
+    - https://support.microsoft.com/en-us/accounts-billing/subscriptions/problems-renewing-a-microsoft-365-subscription
+    - https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+  lastVerified: 2026-11-14
+
+# Perks (M11.6): each line of its plans that no feature describes, in their words. Usage levels are perks, never features
+# (the owner's choice of 2026-10-30): the compare and Copilot plans pages' "Higher usage than free", "Extensive" and
+# "Highest" for Personal and Family, Premium and Pro; "Preferred access to AI models during peak times" and "Use Copilot in
+# select apps with work files in a secure way" on every paid plan but Basic; and the Analyst agent ("an AI-powered
+# assistant for data analysis"), "Not available" on Personal and Family in its AI credits article.
+perks:
+  - id: higher-ai-usage
+    name: Higher AI usage than the free version
+  - id: extensive-ai-usage
+    name: Extensive AI usage
+  - id: highest-ai-usage
+    name: Highest AI usage
+  - id: priority-access
+    name: Preferred access to AI models during peak times
+  - id: work-files
+    name: Use Copilot in select apps with work files in a secure way
+  - id: analyst-agent
+    name: Analyst agent for data analysis
+
+# Features in depth, read 2026-11-13 and 2026-11-14 (the pages in each line):
+# - AI on the paid plans, from its AI credits article (support.microsoft.com/en-us/topic/68530f1a-…, "How AI usage works
+#   across Microsoft 365 subscriptions for individuals", last updated October 2026), whose table gives Personal, Family,
+#   Premium and Pro "Chat", "Deep reasoning", "Pages", "Audio Overview", "Voice", "Vision" and "Image gen", and Premium and
+#   Pro "Researcher", "Analyst" and "Cowork (in preview)*" ("*Currently only available in the US and Canada."). Voice:
+#   "Copilot Voice … Work or school and personal accounts", its data for "Personal, Family, Premium, and Pro accounts"
+#   (Get started with Copilot Voice). Projects: "Copilot Notebooks is also available for Microsoft 365 Personal, Family,
+#   Premium, and Pro subscribers." Deep research: "Researcher is currently available to Microsoft 365 Premium and Pro
+#   subscribers" ("Deep Research has been retired"). Uses a browser or computer and scheduled tasks: Cowork, "For
+#   browser-based tasks, Cowork interacts with websites in a human like way, such as clicking, scrolling, and typing." and
+#   "Run prompts on a schedule so recurring tasks happen automatically." (Get started with Microsoft Copilot Cowork for
+#   personal accounts (preview)). Office apps: "Word, Excel, PowerPoint, Outlook and OneNote desktop apps with Microsoft
+#   Copilot" (every paid card but Basic). Early access: "Microsoft 365 Pro, Premium, Personal, and Family subscribers can
+#   opt in to Frontier directly in supported web apps." (the Frontier program page). Audio: "Transform content into
+#   engaging listening experiences with AI-generated audio" (the compare table). No video: Copilot Create's table gives
+#   "Create a video" "No" for "Personal, Family, Premium, or Pro".
+# - AI on the free plan and Basic: "Yes. Microsoft offers a limited free version of Copilot subject to available capacity
+#   and limits." (the Copilot plans page's FAQ); the OneDrive table gives Basic "Free version only" for Copilot Chat and AI
+#   image generation; "AI features are not available in Microsoft 365 Basic." (the compare page) means the paid AI. The
+#   chat and chat history articles apply to "free Copilot Chat" too: "When you are signed in with a personal Microsoft
+#   account, Copilot draws on your own content and the web instead." and "Copilot Memory automatically collects key
+#   details from your previous chat conversations and remembers it for future conversations."; image generation:
+#   "Limited usage with a free Microsoft account" (the compare table). Voice "require[s] an eligible Microsoft
+#   subscription" and vision needs Personal, Family or Premium, so the free version has neither; no page gives it
+#   reasoning, projects or audio: left out.
+# - Every plan: chats on its servers: "Microsoft Copilot keeps your prior conversations with Copilot so you can revisit
+#   them or continue them at any time." (Copilot privacy controls). No page offers personal accounts another company's
+#   models (Claude in Researcher needs a work account's admin), connectors, an API or a coding agent (Cowork's skills and
+#   Code are work accounts'): left out.
+# - Office: Word, Excel, PowerPoint, OneNote, Forms ("Quickly create forms and polls") and "Access (PC only)" on the paid
+#   plans but Basic, which "Collaborate with others in real time, work offline"; the free account's "web and mobile
+#   versions of Word, Excel, PowerPoint, OneDrive, and Outlook" (free apps page), OneNote in the Outlook page's list, and
+#   "you can share a link to collaborate in real-time". Teams: "Join group calls and talk for up to 30 hours with up to
+#   300 people with Microsoft Teams." (the paid plans; 30 hours is 1,800 minutes). The free Teams' limits weren't read.
+# - Storage and email (the OneDrive and Outlook pages): free "15 GB of mailbox storage" and "5 GB of cloud storage";
+#   Basic "100 GB of mailbox storage" and "100 GB of secure cloud storage"; Personal "1 TB (1000 GB)"; Family and Premium
+#   "2 TB of shared, secure cloud storage", Pro "5 TB of shared, secure cloud storage". From 2026-10-08 new Family and
+#   Premium subscribers get 2 TB pooled, existing ones from their renewal on or after 2027-05-02 (Switch between Microsoft
+#   365 subscriptions), which is why the OneDrive card and the Outlook FAQ still say "up to 6 TB". One address each
+#   ("Get started with a free Outlook.com email today."); Outlook's calendar on every plan ("Outlook email and calendar on
+#   web, desktop, and mobile apps"). Ad free: "If you have a paid account, you do not receive ads." (Outlook FAQ) and "If
+#   you use Microsoft Copilot and don’t have a Microsoft 365 subscription, you might see advertising in Copilot." (Copilot
+#   privacy controls). Mailbox sizes are notes (the registry has no mailbox feature yet).
+# - Security (the Defender page): "professional grade, always-on antivirus and anti-phishing scans", "real-time
+#   monitoring", "Defender on MacOS includes antivirus protection. Defender on Android includes antivirus and
+#   anti-phishing."; on Windows "Antivirus and anti-phishing are provided by Windows Security". OneDrive's "ransomware
+#   detection and file recovery" ("files can be recovered for up to 30 days after malicious attacks"). Defender needs
+#   "A Microsoft 365 Personal, Family or Premium subscription" (Pro's page lists it too), so Basic and the free plan have
+#   none. No page states the kinds of scan or a device count for Defender: left out.
+# - Sharing: "Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro subscribers can share subscription
+#   benefits with up to five other people in their family group", and the AI is the owner's only.
+
+# General features, read 2026-11-14. App languages: Office's language packs ("Language Accessory Pack for Microsoft 365":
+# Arabic, Chinese, English, French, German, Italian, Japanese, Korean, Portuguese and Spanish "Full", Hindi "Partial").
+# Parental controls on every plan: "They can use tools like Microsoft Family Safety or settings on your device" to "Block
+# access to the Copilot app or Copilot via browser." (Copilot for young people) and Family Safety's "digital content
+# filtering, screen time limits" (privacy statement). No pause: its cancelling and switching articles offer cancelling,
+# switching or turning off recurring billing only.
+# Apps and sign-in: Windows, macOS, iPhone and iPad, Android and the web ("Works on PC, Mac, iPhone, iPad, and Android phones
+# and tablets"; the Copilot app on "Windows and Mac", the web and "iOS and Android"). A Microsoft account: a password,
+# passkeys ("Face, Fingerprint, PIN, or Security Key"), Microsoft Authenticator's approval or an authenticator app's codes,
+# and codes by email or text, which Microsoft is "phasing out" ("How to use two-step verification", "Create and save a
+# passkey"); Copilot alone also takes an Apple ID or a Google Account. Support: its pages promise "Ongoing support" and
+# route you through "Contact Microsoft Support" without naming channels, so support.channels is left out (Xbox Game Pass's
+# precedent).
+features:
+  platforms: [windows, macos, android, ios, web]
+  account.sign-in: [password, passkey, push-approval, security-key, totp, email-code, sms]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+
+plans:
+  - id: microsoft-365.free
+    name: Free
+    link: https://www.microsoft.com/en-ca/microsoft-365/free-productivity-apps
+    categories: [ai, software, storage, email, calendar]
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.memory: true
+      ai.image-generation: true
+      ai.chat-storage: cloud
+      office.apps: [documents, spreadsheets, presentations, notes]
+      collaboration.real-time: true
+      storage.cloud: 5
+      email.addresses: 1
+      calendar.included: true
+      account.parental-controls: true
+    notes: 'A free Microsoft account: the free version of Copilot (with ads and lower limits), web and mobile Word, Excel, PowerPoint and OneNote, Outlook.com with ads and 15 GB of mailbox storage, and 5 GB of OneDrive storage.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/free-productivity-apps
+
+  # Basic: cloud storage and ad-free Outlook, sold as storage (the OneDrive plans page) and email (the Outlook page); its
+  # Copilot is the free version every Microsoft account has, so it's not an AI plan.
+  - id: microsoft-365.basic
+    name: Basic
+    link: https://www.microsoft.com/en-ca/microsoft-365/onedrive/onedrive-plans-and-pricing
+    categories: [storage, email, calendar]
+    notIn: [ai]
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.memory: true
+      ai.image-generation: true
+      ai.chat-storage: cloud
+      office.apps: [documents, spreadsheets, presentations, notes]
+      collaboration.real-time: true
+      storage.cloud: 100
+      email.addresses: 1
+      calendar.included: true
+      ad-free: true
+      account.parental-controls: true
+    inferred:
+      office.apps:
+        reason: "Basic is a paid Microsoft account, and every Microsoft account has the free web and mobile Word, Excel, PowerPoint and OneNote; Basic's own cards list storage and email only."
+        page:
+          name: 'Free Microsoft 365 apps'
+          url: https://www.microsoft.com/en-ca/microsoft-365/free-productivity-apps
+        lastVerified: 2026-11-14
+    notes: '100 GB of OneDrive storage, ad-free Outlook with 100 GB of mailbox storage and its advanced security, for one person. No desktop apps, Defender or paid Copilot features.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: CA
+        currency: CAD
+        amount: 19
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: US
+        currency: USD
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: GB
+        currency: GBP
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: GB
+        currency: GBP
+        amount: 19.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: IE
+        currency: EUR
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: IE
+        currency: EUR
+        amount: 20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: AU
+        currency: AUD
+        amount: 3
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: AU
+        currency: AUD
+        amount: 29.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NZ
+        currency: NZD
+        amount: 3
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NZ
+        currency: NZD
+        amount: 29
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: DE
+        currency: EUR
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: DE
+        currency: EUR
+        amount: 20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: FR
+        currency: EUR
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '2,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: FR
+        currency: EUR
+        amount: 20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '20,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NL
+        currency: EUR
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NL
+        currency: EUR
+        amount: 20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: ES
+        currency: EUR
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: ES
+        currency: EUR
+        amount: 20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: IT
+        currency: EUR
+        amount: 2
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: IT
+        currency: EUR
+        amount: 20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/onedrive/onedrive-plans-and-pricing
+
+  - id: microsoft-365.personal
+    name: Personal
+    link: https://www.microsoft.com/en-ca/microsoft-365/p/microsoft-365-personal/cfq7ttc0k5bf
+    categories: [software, ai, storage, security, email, calendar]
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.chat-storage: cloud
+      office.apps: [documents, spreadsheets, presentations, notes, forms, databases]
+      office.offline: true
+      collaboration.real-time: true
+      video-calls.participants: 300
+      video-calls.length: 1800
+      storage.cloud: 1000
+      email.addresses: 1
+      calendar.included: true
+      ad-free: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.ransomware: [file-recovery]
+      account.parental-controls: true
+    featureLabels:
+      ai.early-access: Frontier preview features in Word, Excel and PowerPoint on the web
+      antivirus.included: Microsoft Defender (antivirus on Mac and Android; Windows Security on Windows)
+    perks: [higher-ai-usage, priority-access, work-files]
+    notes: 'For one person, signed in on up to 5 devices at once: the desktop apps with Copilot, 1 TB of OneDrive storage, ad-free Outlook with 100 GB of mailbox storage, and Microsoft Defender.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 11.5
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: CA
+        currency: CAD
+        amount: 115
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: GB
+        currency: GBP
+        amount: 8.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: GB
+        currency: GBP
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IE
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IE
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: AU
+        currency: AUD
+        amount: 16
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: AU
+        currency: AUD
+        amount: 159
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NZ
+        currency: NZD
+        amount: 17
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NZ
+        currency: NZD
+        amount: 179
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: DE
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: DE
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: FR
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '10,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: FR
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '99,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NL
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NL
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: ES
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: ES
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IT
+        currency: EUR
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IT
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products
+
+  - id: microsoft-365.family
+    name: Family
+    link: https://www.microsoft.com/en-ca/microsoft-365/p/microsoft-365-family/cfq7ttc0k5dm
+    categories: [software, ai, storage, security, email, calendar]
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.chat-storage: cloud
+      office.apps: [documents, spreadsheets, presentations, notes, forms, databases]
+      office.offline: true
+      collaboration.real-time: true
+      video-calls.participants: 300
+      video-calls.length: 1800
+      storage.cloud: 2000
+      email.addresses: 1
+      calendar.included: true
+      ad-free: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.ransomware: [file-recovery]
+      account.users: 6
+      account.parental-controls: true
+    featureLabels:
+      account.users: 1 to 6 people (AI for the subscription owner only)
+      storage.cloud: 2 TB shared
+      ai.early-access: Frontier preview features in Word, Excel and PowerPoint on the web
+      antivirus.included: Microsoft Defender (antivirus on Mac and Android; Windows Security on Windows)
+    perks: [higher-ai-usage, priority-access, work-files]
+    notes: "Personal for up to 6 people, each on up to 5 devices at once, with 2 TB of OneDrive storage shared between them. Copilot is the owner's only."
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 14.5
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: CA
+        currency: CAD
+        amount: 145
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: US
+        currency: USD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: GB
+        currency: GBP
+        amount: 10.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: GB
+        currency: GBP
+        amount: 104.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IE
+        currency: EUR
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IE
+        currency: EUR
+        amount: 129
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: AU
+        currency: AUD
+        amount: 18
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: AU
+        currency: AUD
+        amount: 179
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NZ
+        currency: NZD
+        amount: 23
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NZ
+        currency: NZD
+        amount: 229
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: DE
+        currency: EUR
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: DE
+        currency: EUR
+        amount: 129
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: FR
+        currency: EUR
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '13,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: FR
+        currency: EUR
+        amount: 129
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '129,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NL
+        currency: EUR
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NL
+        currency: EUR
+        amount: 129
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: ES
+        currency: EUR
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: ES
+        currency: EUR
+        amount: 129
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IT
+        currency: EUR
+        amount: 13
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IT
+        currency: EUR
+        amount: 129
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products
+
+  - id: microsoft-365.premium
+    name: Premium
+    link: https://www.microsoft.com/en-ca/microsoft-365/p/microsoft-365-premium/cfq7ttc11z3q
+    categories: [software, ai, storage, security, email, calendar]
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.scheduled-tasks: true
+      ai.chat-storage: cloud
+      office.apps: [documents, spreadsheets, presentations, notes, forms, databases]
+      office.offline: true
+      collaboration.real-time: true
+      video-calls.participants: 300
+      video-calls.length: 1800
+      storage.cloud: 2000
+      email.addresses: 1
+      calendar.included: true
+      ad-free: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.ransomware: [file-recovery]
+      account.users: 6
+      account.parental-controls: true
+    featureLabels:
+      account.users: 1 to 6 people (AI for the subscription owner only)
+      storage.cloud: 2 TB shared
+      ai.deep-research: Researcher agent
+      ai.computer-use: Cowork (preview, in the US and Canada only)
+      ai.scheduled-tasks: Scheduled prompts in Cowork (preview, in the US and Canada only)
+      ai.early-access: Frontier preview features in Word, Excel and PowerPoint on the web
+      antivirus.included: Microsoft Defender (antivirus on Mac and Android; Windows Security on Windows)
+    perks: [extensive-ai-usage, priority-access, work-files, analyst-agent]
+    notes: 'Family with extensive AI usage and the Researcher and Analyst agents, and Cowork in preview in the US and Canada, for the owner. It replaced Copilot Pro.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 27
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: CA
+        currency: CAD
+        amount: 270
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: US
+        currency: USD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: GB
+        currency: GBP
+        amount: 18.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: GB
+        currency: GBP
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IE
+        currency: EUR
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IE
+        currency: EUR
+        amount: 219
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: AU
+        currency: AUD
+        amount: 33
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: AU
+        currency: AUD
+        amount: 329
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NZ
+        currency: NZD
+        amount: 37
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NZ
+        currency: NZD
+        amount: 369
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: DE
+        currency: EUR
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: DE
+        currency: EUR
+        amount: 219
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: FR
+        currency: EUR
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '22,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: FR
+        currency: EUR
+        amount: 219
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '219,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/microsoft-365/onedrive/onedrive-plans-and-pricing
+      - region: NL
+        currency: EUR
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: NL
+        currency: EUR
+        amount: 219
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: ES
+        currency: EUR
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: ES
+        currency: EUR
+        amount: 219
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IT
+        currency: EUR
+        amount: 22
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products
+      - region: IT
+        currency: EUR
+        amount: 219
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/microsoft-365/buy/compare-all-microsoft-365-products
+
+  - id: microsoft-365.pro
+    name: Pro
+    link: https://www.microsoft.com/en-ca/microsoft-365/p/microsoft-365-pro/cfq7ttbzzcmc
+    categories: [software, ai, storage, security, email, calendar]
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.office-apps: true
+      ai.early-access: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.scheduled-tasks: true
+      ai.chat-storage: cloud
+      office.apps: [documents, spreadsheets, presentations, notes, forms, databases]
+      office.offline: true
+      collaboration.real-time: true
+      video-calls.participants: 300
+      video-calls.length: 1800
+      storage.cloud: 5000
+      email.addresses: 1
+      calendar.included: true
+      ad-free: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.ransomware: [file-recovery]
+      account.users: 6
+      account.parental-controls: true
+    featureLabels:
+      account.users: 1 to 6 people (AI for the subscription owner only)
+      storage.cloud: 5 TB shared
+      ai.deep-research: Researcher agent
+      ai.computer-use: Cowork (preview, in the US and Canada only)
+      ai.scheduled-tasks: Scheduled prompts in Cowork (preview, in the US and Canada only)
+      ai.early-access: Frontier preview features in Word, Excel and PowerPoint on the web
+      antivirus.included: Microsoft Defender (antivirus on Mac and Android; Windows Security on Windows)
+    perks: [highest-ai-usage, priority-access, work-files, analyst-agent]
+    notes: 'Premium with 5 TB of shared storage and the highest AI usage. Monthly billing only.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 135
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ca/copilot/pricing/individuals
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-us/copilot/pricing/individuals
+      - region: GB
+        currency: GBP
+        amount: 94.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-gb/copilot/pricing/individuals
+      - region: IE
+        currency: EUR
+        amount: 110
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-ie/copilot/pricing/individuals
+      - region: AU
+        currency: AUD
+        amount: 165
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-au/copilot/pricing/individuals
+      - region: NZ
+        currency: NZD
+        amount: 185
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/en-nz/copilot/pricing/individuals
+      - region: DE
+        currency: EUR
+        amount: 110
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/de-de/copilot/pricing/individuals
+      - region: FR
+        currency: EUR
+        amount: 110
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: '110,00 € TTC' }
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/fr-fr/copilot/pricing/individuals
+      - region: NL
+        currency: EUR
+        amount: 110
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/nl-nl/copilot/pricing/individuals
+      - region: ES
+        currency: EUR
+        amount: 110
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/es-es/copilot/pricing/individuals
+      - region: IT
+        currency: EUR
+        amount: 110
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.microsoft.com/it-it/copilot/pricing/individuals
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-14: Copilot "is covered by the Microsoft
+# Services Agreement and the Copilot Terms of Use" and Microsoft's privacy statement (shared documents
+# microsoft-services-agreement, with the Store Terms of Sale, and microsoft-privacy); the Copilot Terms of Use
+# (microsoft.com/microsoft-copilot/for-individuals/termsofuse, "Microsoft Copilot Supplemental Terms of Use", effective
+# August 18, 2026) include the services agreement's Code of Conduct (conduct, no topic's). Copilot's privacy articles for
+# individuals (privacy controls, activity history, Copilot for young people) and "Copilot in Microsoft 365 apps for home:
+# your data and privacy" add the AI topics. Not read: the Microsoft Consumer Health Data Privacy Policy (Copilot Health
+# only), the Payment Services Terms (Microsoft Wallet only), the Xbox Community Standards (Gaming Copilot only), and the
+# sign-up form's agreement line, which shows only after an email address is entered.
+policies:
+  shared: [microsoft-privacy, microsoft-services-agreement]
+  links:
+    - name: 'Copilot Terms of Use'
+      url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
+    - name: 'Microsoft Services Agreement'
+      url: https://www.microsoft.com/en-ca/servicesagreement
+    - name: 'Microsoft Store terms of sale'
+      url: https://www.microsoft.com/en-ca/store/b/terms-of-sale
+    - name: 'Copilot activity history'
+      url: https://support.microsoft.com/en-us/privacy/microsoft-copilot/activity-history
+    - name: 'Copilot for young people'
+      url: https://support.microsoft.com/en-us/privacy/microsoft-copilot/young-people
+    - name: 'Copilot in Microsoft 365 apps: your data and privacy'
+      url: https://support.microsoft.com/en-us/privacy/copilot-in-microsoft-365-apps-for-home-your-data-and-privacy
+    - name: 'Get started with Cowork'
+      url: https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-cowork
+    - name: Cancelling
+      url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-a-microsoft-365-subscription
+    - name: 'Refund policy'
+      url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+    - name: 'Cancel your free trial'
+      url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-your-free-trial-of-microsoft-365
+    - name: 'Switching plans'
+      url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/switch-between-microsoft-365-subscriptions
+    - name: 'Sharing your subscription'
+      url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/share-your-microsoft-365-subscription
+    - name: 'Renewing'
+      url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/problems-renewing-a-microsoft-365-subscription
+    - name: 'Plans and pricing'
+      url: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+    - name: 'Copilot plans'
+      url: https://www.microsoft.com/en-ca/copilot/pricing/individuals
+    - name: 'Copilot bug bounty'
+      url: https://www.microsoft.com/en-us/msrc/bounty-ai
+  ratings:
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online at any time in your Microsoft account, after a page that shows you cheaper plans to keep.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'You may cancel a Service at any time, with or without cause.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-a-microsoft-365-subscription
+          quote: 'This may include details of alternative subscriptions, which could be cheaper.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-a-microsoft-365-subscription
+          quote: 'Select Cancel subscription (it might say Upgrade or Cancel ).'
+      lastVerified: 2026-11-14
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get your money back if you cancel within 30 days of first buying it, and once per plan within 30 days of a renewal charge. Otherwise you keep it until the end of the time you paid for.'
+      sources:
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+          quote: 'In most cases, you may receive a refund within 30 days of your initial purchase or before your first recurring billing date (whichever is sooner)'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+          quote: 'This refund right is limited to one time per Microsoft account, per subscription product.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+          quote: 'Access to Microsoft 365 typically continues until the end of the current billing period if no refund is issued.'
+      lastVerified: 2026-11-14
+    - topic: billing.refunds
+      regions: [CA, FR]
+      tier: great
+      reason: 'In Canada and France you can cancel at any time and get back the part of your payment you did not use.'
+      sources:
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+          quote: 'In some countries/regions, Microsoft may offer a prorated refund when an eligible subscription is cancelled after billing, in line with local consumer protection rules.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
+          quote: 'To receive a prorated refund, cancel at any time.'
+      lastVerified: 2026-11-14
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its month free turns into a paid plan unless you cancel before it ends. It may ask for your payment details first, and it doesn’t promise to remind you.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/copilot/pricing/individuals
+          quote: 'Trial availability, duration, eligibility requirements, and whether payment information is required vary by offer and region.'
+        - url: https://www.microsoft.com/en-ca/store/b/terms-of-sale
+          quote: 'If you are taking part in any trial-period offer, you must cancel the service by the end of the trial period to avoid incurring new charges unless we notify you otherwise.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-your-free-trial-of-microsoft-365
+          quote: "You can cancel your Microsoft 365 trial within 30 days of signing up, and you won't be charged."
+      lastVerified: 2026-11-14
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say subscriptions renew on their own, but not that it reminds you first.'
+      pages:
+        - https://www.microsoft.com/en-ca/store/b/terms-of-sale
+        - https://support.microsoft.com/en-us/accounts-billing/subscriptions/cancel-a-microsoft-365-subscription
+        - https://support.microsoft.com/en-us/accounts-billing/subscriptions/problems-renewing-a-microsoft-365-subscription
+      lastVerified: 2026-11-14
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once, and the time you have left turns into days on the new plan, fewer when the new plan costs more. Moving down waits until your next renewal.'
+      sources:
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/switch-between-microsoft-365-subscriptions
+          quote: 'The remaining days on your current subscription will automatically convert and get added to your new subscription.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/switch-between-microsoft-365-subscriptions
+          quote: "Depending on the subscription you're moving to, the adjusted number of days added to your new subscription may result in less time being added than the amount of time remaining on your original subscription."
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/switch-between-microsoft-365-subscriptions
+          quote: 'Your existing subscription might not change immediately, but it will automatically change to the new plan when the plan renews.'
+      lastVerified: 2026-11-14
+    # AI training: Microsoft's privacy statement says only that it "may use your data to develop and train our AI models"
+    # and sends you to each product's notice; Copilot's say chats, answers and files don't train its foundation models.
+    - topic: privacy.ai-training
+      tier: good
+      reason: 'Its Copilot help says your chats, its answers and your files don’t train its main (foundation) AI models. Feedback you choose to send may be used to improve Copilot.'
+      sources:
+        - url: https://support.microsoft.com/en-us/privacy/microsoft-copilot/activity-history
+          quote: "Prompts, responses, and your file contents when using the Microsoft Copilot app aren't used to train foundation models."
+        - url: https://support.microsoft.com/en-us/privacy/copilot-in-microsoft-365-apps-for-home-your-data-and-privacy
+          quote: "Prompts, responses, and your file contents when using Copilot in Microsoft 365 apps aren't used to train foundation models."
+        - url: https://support.microsoft.com/en-us/privacy/microsoft-copilot/activity-history
+          quote: 'We may use customer feedback, which is optional, to improve Microsoft Copilot, just like we use customer feedback to improve other Microsoft 365 services and Microsoft 365 productivity apps.'
+      lastVerified: 2026-11-14
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'People at Microsoft may read your Copilot chats, to keep it safe but also to improve it, and no setting stops that. It tells you not to share anything you don’t want it to see.'
+      sources:
+        - url: https://support.microsoft.com/en-us/privacy/microsoft-copilot/young-people
+          quote: 'Humans may review your conversations in Copilot for safety, legal, product improvement, or troubleshooting.'
+        - url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
+          quote: 'Copilot may include both automated and manual (human) processing of data. You shouldn’t share any information with Copilot that you don’t want us to review.'
+      lastVerified: 2026-11-14
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'Microsoft doesn’t claim what Copilot makes for you, but it may use your chats and its answers to run and improve Copilot.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: "Microsoft doesn't claim ownership of any content you provide, post, input, or submit to, or receive from, the AI services (including feedback and suggestions)."
+        - url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
+          quote: 'We don’t own Your Content, but we may use Your Content to operate Copilot and improve it.'
+      lastVerified: 2026-11-14
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can cut off your Copilot, and maybe your other Microsoft services, whenever it decides, without warning. You can only ask it to look again.'
+      sources:
+        - url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
+          quote: 'Unless prohibited by law, we may limit, suspend, or permanently revoke your access to or use of Copilot (and potentially all other Services) in our sole discretion, at any time and without notice'
+        - url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
+          quote: 'If you feel your access has been restricted by mistake, you may ask us to reevaluate our decision by submitting a request using the Report a Concern form outlining what you think we got wrong and why.'
+      lastVerified: 2026-11-14
+    - topic: security.practices
+      tier: neutral
+      reason: 'It pays security experts who find problems in Copilot, but doesn’t say outside experts check its consumer services regularly.'
+      sources:
+        - url: https://www.microsoft.com/en-us/msrc/bounty-ai
+          quote: 'The Microsoft Copilot bounty program invites eligible security researchers to discover vulnerabilities in the new, innovative, Microsoft Copilot.'
+        - url: https://www.microsoft.com/en-us/msrc/bounty-ai
+          quote: 'Qualified submissions are eligible for bounty awards from $100 to $30,000 USD.'
+      lastVerified: 2026-11-14
+    - topic: service.account-sharing
+      tier: great
+      reason: 'On Family, Premium and Pro you can share with up to 5 people you invite to your family group, with no home checks. Copilot stays yours alone.'
+      sources:
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/share-your-microsoft-365-subscription
+          quote: 'Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro subscribers can share subscription benefits with up to five other people in their family group by sending an email or copying & sharing a link.'
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/share-your-microsoft-365-subscription
+          quote: 'Extended storage options and AI features like Copilot in Word, Excel, PowerPoint, and Outlook are only available to the subscription owner and cannot be shared with additional family group members.'
+      lastVerified: 2026-11-14
+    - topic: service.device-limits
+      tier: good
+      reason: 'Each person can be signed in on 5 devices at the same time, and it says so plainly.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+          quote: 'Each person can use on up to 5 devices simultaneously'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      plans: [microsoft-365.premium, microsoft-365.pro]
+      title: Cowork acts for you
+      tier: neutral
+      reason: 'Cowork can send email, book meetings and use websites for you. It asks before sensitive steps, but you are responsible for whatever it does.'
+      sources:
+        - url: https://support.microsoft.com/en-us/microsoft-365-copilot/get-started-with-cowork
+          quote: 'Copilot will ask for your approval or hand control back to you for sensitive actions. You are responsible for actions Copilot takes on your behalf.'
+        - url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
+          quote: 'When you request that Copilot take Actions on your behalf, you are solely responsible for those Actions and any results or consequences.'
+      lastVerified: 2026-11-14
