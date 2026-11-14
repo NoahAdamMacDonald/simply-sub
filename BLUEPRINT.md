@@ -681,6 +681,26 @@ renewalAnchor:
   lastVerified: 2026-11-02
 ```
 
+**Charged before the renewal** (`chargedBefore`, M11.21): a yearly renewal some providers charge days before its date,
+with `days` and `upTo: true` when the page says "up to", its quotes saying so (core's `namesChargedBefore`: the days,
+then before or prior to the subscription's end, expiry, anniversary or renewal). A charge before a subscription "ends"
+names the date you signed up too, a yearly term's end. Only yearly periods: the pages that say it speak of yearly
+terms, and Norton's bill monthly plans on the day. A new yearly item of its plans gets the days with no input
+(`chargeDaysBefore`, section 4.6), and its charges come that many days before each renewal, the earliest day for "up
+to", so a budget is never short (PROJECT-PLAN §3.1). The card says "The date you signed up, charged up to 35 days
+early".
+```yaml
+renewalAnchor:
+  kind: same-date
+  page: License and Services Agreement
+  url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+  quotes:
+    - 'Paid subscriptions will be automatically renewed at the end of their term'
+    - 'We’ll email you in advance to let you know that your subscription is due for renewal and will charge your payment type up to 35 days before the subscription is due to end.'
+  chargedBefore: { days: 35, upTo: true }
+  lastVerified: 2026-11-13
+```
+
 **Currencies beyond its price lists** (`currencies`, M11.5): entries like `paymentMethods`', each with the `codes` a
 page names (ISO 4217), the ways to pay that take them (`methods`, when not every one does), its `page`, `url` and
 `quotes` naming each code by its code, name or sign (`€`, `CA$`): Mullvad's cash by post in nine currencies. Left out
@@ -1057,12 +1077,13 @@ export interface ListItem {
   region?: string;                   // bought in another region than Settings.country (pickPrice's region)
   billing:
     | { mode: 'recurring'; interval: Interval; intervalCount: number;
-        anchorDate: string;          // a known charge date; every other date is counted from it
+        anchorDate: string;          // a known renewal date; every other date is counted from it
         billingDay?: 29 | 30 | 31;   // month and year intervals: the day it's billed on, when anchorDate is the
                                      // last day of a shorter month (Feb 28 for a plan billed on the 31st)
         startDate?: string;          // subscribed since (no charges before it)
         endDate?: string;            // planned cancellation (no charges from this date on)
-        autoRenew: boolean }         // false = charges still projected, marked "renew manually"
+        autoRenew: boolean;          // false = charges still projected, marked "renew manually"
+        chargeDaysBefore?: number }  // yearly only: each renewal charged this many days before it (M11.21)
     | { mode: 'limited'; windows: { start: string; end: string; repeatYearly: boolean }[];
         interval: Interval; intervalCount: number };  // e.g. Netflix Premium every Sep–Oct
   priceOverride?: { amount: number; currency: string;   // promos, first-term offers, grandfathered prices
@@ -1169,6 +1190,11 @@ Since M6.14 a rank changed in an item dialog is also written to the same provide
   `priceOverride.since` (M9.6): the first charge at that price, which `until` comes after; charges before it use the
   catalog price. Optimizations' currency change sets it to the item's next charge, so what's paid for keeps its price.
   An optional field, so stored items need no new Dexie version.
+- `chargeDaysBefore` (M11.21): a yearly renewal its provider charges before its date (`renewalAnchor.chargedBefore`,
+  section 4.3). The item dialog sets it from the catalog, so the user enters only the renewal, which stays the anchor;
+  "Wrong date?" takes the charge date and anchors the renewal that many days later. On the item rather than read from
+  the catalog, so the schedule needs no catalog and the days an item was saved with stay its own. An optional field,
+  so no new Dexie version.
 
 **Dexie schema** (`apps/web/src/app/core/storage/db.ts`, a plain `Dexie`: TypeScript gives up on Dexie's
 transaction types for a subclass). Dexie keeps only keys and indexes, not the records' shapes:
@@ -2063,7 +2089,8 @@ Validation fails if:
   `vpn.independent-audits` lacks `no-logs` (section 4.10)
 - a provider has no `owner` or `paymentMethods` (M11.2, M11.5), quotes them or its `currencies`, `renewalAnchor` or
   `sourceRepo` from a page off its own sites, its policies' or its owner's, or gives a way to pay, a currency or a
-  renewal day its quotes don't name (section 4.10); a provider whose paid plans renew by the month or year has no
+  renewal day or charge before it (`chargedBefore`, M11.21) its quotes don't name (section 4.10); a provider whose
+  paid plans renew by the month or year has no
   `renewalAnchor` (a warning for the 11 in core's `awaitingRenewalAnchor`, until M11.9); one that renews every 30 days
   prices a month by the month; `currencies` name a code that isn't real or a way to pay its `paymentMethods` don't
   list; a provider whose apps are open source (`software.open-source`) has no `sourceRepo`, or one has a `sourceRepo`
@@ -2561,8 +2588,9 @@ use canonical ids, and it maps provider wording through `aliases`. The output co
   and the billing currency
 - **ways to pay, currencies, the renewal day and source code** (M11.5, section 4.3): every way to pay a page names
   (`paymentMethods`: cash and crypto included), currencies it takes beyond its prices' (`currencies`), which day a
-  paid plan renews on from its terms or billing help (`renewalAnchor`, or not-stated with the billing pages read), and
-  its repository when a page says its code is open and shows the address (`sourceRepo`)
+  paid plan renews on from its terms or billing help (`renewalAnchor`, or not-stated with the billing pages read), with
+  how many days before it a yearly renewal is charged when they say (`chargedBefore`, M11.21), and its repository when
+  a page says its code is open and shows the address (`sourceRepo`)
 - an **evidence quote** for every price and feature (shown in the PR, so review is fast)
 - whether the prices **include tax** for every buyer ("Including VAT", "taxes included"), as `taxIncluded` with
   the page's words as its quote; without such wording, Canadian and US prices are taken as before tax (section 4.8)
@@ -2592,7 +2620,8 @@ cents per provider. Check current pricing. One run fills hundreds of providers.
   only those their checked quotes name; `availableIn` only with its words; `taxIncluded` only when its words are on the
   price's page; policy ratings only on the registry's topics and grades, a reason of 240 characters at most, one to
   three checked quotes. Since M11.5 ways to pay and currencies are only those their checked quotes name, one entry
-  for everywhere and one per region; a renewal day only when its quotes say it (`namesRenewalAnchor`); a repository
+  for everywhere and one per region; a renewal day only when its quotes say it (`namesRenewalAnchor`), and a charge
+  before it only as far as they do (`namesChargedBefore`, M11.21); a repository
   only when a page shows its address in its words, since the model sees no links (else it's added by hand). Workers
   AI's plans part reads the ways to pay, currencies and repository, and its policies part the renewal day, from the
   terms' passages around its words.

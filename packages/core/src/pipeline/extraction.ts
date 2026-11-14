@@ -10,6 +10,7 @@ import type {
   AcceptedNetworks,
   AddOn,
   CardNetwork,
+  ChargedBefore,
   CurrenciesEntry,
   FreeUse,
   PaymentMethod,
@@ -20,7 +21,13 @@ import type {
   RenewalAnchor,
   SourceRepo,
 } from '../catalog/provider';
-import { namesCurrency, namesRenewalAnchor, renewalAnchorKinds } from '../catalog/provider-facts';
+import {
+  maxChargedBeforeDays,
+  namesChargedBefore,
+  namesCurrency,
+  namesRenewalAnchor,
+  renewalAnchorKinds,
+} from '../catalog/provider-facts';
 import { isCatalogRegion } from '../catalog/regions';
 import type { Reseller, ResellerListing, ResellerOffer, ResellerPrice } from '../catalog/reseller';
 import type { IsoDate } from '../dates/iso-date';
@@ -206,6 +213,15 @@ const extractedAnswerSchema = z.object({
         .array(z.string())
         .default([])
         .describe('Its words saying which day it renews on, exactly. None with not-stated'),
+      chargedBefore: z
+        .object({
+          days: z.number().describe('How many days before the renewal date'),
+          upTo: z.boolean().optional().describe('The page says "up to" that many days'),
+        })
+        .optional()
+        .describe(
+          'A yearly renewal charged before its date ("15 days before your subscription ends"), quoted too. Left out when it is charged on the day',
+        ),
     })
     .optional()
     .describe('Which day a paid plan renews on, from its terms or billing help'),
@@ -1174,13 +1190,22 @@ function providerFacts(
     const page = anchor.page === undefined ? undefined : pages.get(anchor.page);
     const quotes = page ? quoted(subject, page.name, anchor.quotes).slice(0, 3) : [];
     const kind = renewalAnchorKinds.find((known) => known === anchor.kind);
-    if (page && kind && quotes.length > 0 && namesRenewalAnchor(quotes.join(' '), kind)) {
+    const text = quotes.join(' ');
+    // A charge before the renewal (M11.21), kept only as far as the quotes say it.
+    const asked = anchor.chargedBefore;
+    const early: ChargedBefore | undefined =
+      asked && Number.isInteger(asked.days) && asked.days >= 1 && asked.days <= maxChargedBeforeDays
+        ? { days: asked.days, ...(asked.upTo && { upTo: true as const }) }
+        : undefined;
+    const chargedBefore = early && namesChargedBefore(text, early) ? early : undefined;
+    if (page && kind && quotes.length > 0 && namesRenewalAnchor(text, kind, chargedBefore)) {
       offSite(subject, page.url);
       renewalAnchor = {
         kind,
         page: pageName(page),
         url: page.url,
         quotes,
+        ...(chargedBefore && { chargedBefore }),
         lastVerified: context.today,
       };
     } else {

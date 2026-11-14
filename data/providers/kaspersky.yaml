@@ -97,12 +97,15 @@ paymentMethods:
     url: https://support.kaspersky.com/us/faq/faq_sales_2checkout_ca
     quotes:
       - 'We accept payment by credit cards of Mastercard, Visa, American Express, Paypal.'
-# Renewal day (M11.5): its subscription terms charge "15 days before your subscription ends", a day core's renewal kinds
-# don't have, so not-stated (notes.md).
+# Renewal day (M11.5, M11.21): its plan pages' Auto-renewal renews "each term" and charges "15 days before your
+# subscription ends", the term's end being the date you signed up a year on: a new yearly item is charged 15 days early.
 renewalAnchor:
-  kind: not-stated
-  pages:
-    - https://www.kaspersky.ca/premium
+  kind: same-date
+  page: Kaspersky Premium
+  url: https://www.kaspersky.ca/premium
+  quotes:
+    - 'Your subscription will automatically renew each term until you cancel it. To ensure uninterrupted protection, we will attempt to charge your payment method 15 days before your subscription ends.'
+  chargedBefore: { days: 15 }
   lastVerified: 2026-11-13
 # Lab results (M11.2), read 2026-11-13: AV-TEST's newest Windows test of home-user products, July and August 2026 (report
 # 261411). AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).

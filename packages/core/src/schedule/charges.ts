@@ -8,7 +8,13 @@ import { samePeriod, type Period } from '../dates/period';
 import type { ListItem, PriceOverride } from '../user/list-item';
 import { switchedBilling } from '../user/reanchor';
 import type { PaidWith, ResolvedItem } from '../user/resolved';
-import { chargeDates, lastChargeDate, nextChargeDate, type DateRange } from './charge-dates';
+import {
+  chargeDates,
+  daysBefore,
+  lastChargeDate,
+  nextChargeDate,
+  type DateRange,
+} from './charge-dates';
 
 // An item's charges (PROJECT-PLAN §3.1): its charge dates (charge-dates.ts) priced, with sales tax. The calendar, every
 // total, the budget checks and the exports are built from them.
@@ -236,7 +242,8 @@ export function manualRenewal({ item, price }: Pick<Chargeable, 'item' | 'price'
  * An Ongoing item's anchor that's still to come is its next renewal, as the item dialog asks for it, so its own next
  * charge is on or after it: one counted back from it onto today is the payment just made (a plan subscribed to today,
  * renewing in a month), which totals count and the calendar shows, but which isn't "next". An add-on billed on a
- * period of its own still charges before it.
+ * period of its own still charges before it. A renewal charged early (M11.21) is next from its charge on, once that's
+ * today or later: one already charged isn't.
  */
 export function nextCharge(
   resolved: Chargeable,
@@ -253,8 +260,10 @@ export function nextCharge(
   if (resolved.overridePrice === undefined && prices.every((price) => price.amount === 0)) {
     return undefined;
   }
-  const renewal =
-    billing.mode === 'recurring' && billing.anchorDate > today ? billing.anchorDate : today;
+  // The anchor's own charge: its date, or days before it when it's charged early.
+  const charged =
+    billing.mode === 'recurring' ? addDays(billing.anchorDate, -daysBefore(billing)) : today;
+  const renewal = charged > today ? charged : today;
   const periods: { period: Period; from: IsoDate }[] = [
     { period: billing, from: renewal },
     ...resolved.addOns

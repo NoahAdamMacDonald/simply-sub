@@ -87,15 +87,16 @@ paymentMethods:
     page: Checkout
     url: https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1
     quotes: ['Credit or debit card']
-# Renewal day (M11.5): it charges "30 days before the subscription ends and annually thereafter", a month before the
-# date you signed up, which no kind in core names, so not-stated (notes.md).
+# Renewal day (M11.5, M11.21): Canada's checkout charges "30 days before the subscription ends and annually
+# thereafter", the date you signed up a year on: a new yearly item is charged 30 days early. Its licence says the same
+# ("30 days prior to the end of the subscription period").
 renewalAnchor:
-  kind: not-stated
-  pages:
-    [
-      https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1,
-      https://www.mcafee.com/en-ca/consumer-support/policy/legal.html,
-    ]
+  kind: same-date
+  page: Checkout
+  url: https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1
+  quotes:
+    - 'It will be automatically renewed and you will be charged 30 days before the subscription ends and annually thereafter at the renewal price'
+  chargedBefore: { days: 30 }
   lastVerified: 2026-11-13
 # Lab results (M11.2), read 2026-11-13: AV-TEST's newest Windows test of home-user products, Jul-Aug 2026 (its page for
 # McAfee Total Protection, report 261413): 6.0 of 6 for each.

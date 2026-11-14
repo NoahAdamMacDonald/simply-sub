@@ -1,4 +1,6 @@
 import {
+  addDays,
+  daysBefore,
   periodText,
   type Billing,
   type Charge,
@@ -29,7 +31,8 @@ export function billingText(billing: Billing): string {
 /**
  * When an item renews, from its next charge (P5's rows): "Renews Nov 12 · auto", "Renews Nov 3 · manual, then ends Mar
  * 1, 2027", or "Specific dates · next charge Sep 2". With no charge to come: "Ends Mar 1, 2027", "Ended Oct 1, 2026",
- * or "Specific dates · none to come".
+ * or "Specific dates · none to come". A renewal charged before its date (M11.21) says both: "Renews Mar 10, 2027,
+ * charged Feb 3 · auto".
  */
 export function renewalText(billing: Billing, next: Charge | undefined, today: IsoDate): string {
   if (billing.mode === 'limited') {
@@ -44,8 +47,14 @@ export function renewalText(billing: Billing, next: Charge | undefined, today: I
       : `Ends ${dateText(billing.endDate)}`;
   }
   const how = next.manual ? 'manual' : 'auto';
+  // The charge that buys it is on its own day.
+  const early = next.date === billing.startDate ? 0 : daysBefore(billing);
+  const renews =
+    early > 0
+      ? `Renews ${dateText(addDays(next.date, early))}, charged ${nearDateText(next.date, today)}`
+      : `Renews ${nearDateText(next.date, today)}`;
   return [
-    `Renews ${nearDateText(next.date, today)}`,
+    renews,
     billing.endDate === undefined ? how : `${how}, then ends ${dateText(billing.endDate)}`,
   ].join(' · ');
 }

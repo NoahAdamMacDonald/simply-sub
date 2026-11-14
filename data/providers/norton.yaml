@@ -164,15 +164,18 @@ paymentMethods:
     url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
     quotes:
       - 'If you purchased or are billed through a third party (such as an app store, service provider, retailer, or other reseller), different cancellation and refund terms may apply.'
-# Renewal day (M11.5): not stated. Its licence renews "at the end of their term" and charges "up to 35 days before the
-# subscription is due to end", its Terms of Sale "prior to your subscription’s expiration date", and its renewal FAQ
-# sends the renewal and billing dates by email: none names the day (notes.md has the wording).
+# Renewal day (M11.5, M11.21): its licence renews "at the end of their term", the date you signed up a year on, and
+# charges "up to 35 days before the subscription is due to end": a new yearly item is charged 35 days early, the
+# earliest it can be. Its plan pages bill monthly plans on the day ("billed annually (up to 35 days before renewal) or
+# monthly"), and its renewal FAQ emails the dates.
 renewalAnchor:
-  kind: not-stated
-  pages:
-    - https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
-    - https://ca.norton.com/terms-of-sale
-    - https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+  kind: same-date
+  page: License and Services Agreement
+  url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+  quotes:
+    - 'Paid subscriptions will be automatically renewed at the end of their term'
+    - 'We’ll email you in advance to let you know that your subscription is due for renewal and will charge your payment type up to 35 days before the subscription is due to end.'
+  chargedBefore: { days: 35, upTo: true }
   lastVerified: 2026-11-13
 # Lab results (M11.2), read 2026-11-13: AV-TEST's newest home-user Windows test, Jul-Aug 2026 (report 261415), of Norton
 # 360 26.6 and 26.7. AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml.

@@ -282,3 +282,64 @@ describe('lastChargeDate', () => {
     ).toBeUndefined();
   });
 });
+
+// A yearly renewal charged before its date (M11.21): the anchor is the renewal, each charged days before it.
+describe('charged before the renewal', () => {
+  const early = (anchorDate: string, days: number, extra: Partial<Billing> = {}): Billing =>
+    ({ ...every('year', 1, anchorDate), chargeDaysBefore: days, ...extra }) as Billing;
+
+  it('charges each renewal that many days before it, a day later when the days take in Feb 29', () => {
+    expect(chargeDates(early('2027-03-10', 35), { from: '2026-01-01', to: '2030-01-01' })).toEqual([
+      '2026-02-03',
+      '2027-02-03',
+      '2028-02-04',
+      '2029-02-03',
+    ]);
+  });
+
+  it('counts back from a month’s end and from Feb 29 as from any day', () => {
+    expect(chargeDates(early('2027-01-31', 15), year('2027-01-01'))).toEqual(['2027-01-16']);
+    expect(chargeDates(early('2028-02-29', 15), { from: '2028-01-01', to: '2030-01-01' })).toEqual([
+      '2028-02-14',
+      '2029-02-13',
+    ]);
+  });
+
+  it('puts a renewal early in the year in the year before when its charge is', () => {
+    const billing = early('2027-01-10', 35);
+    expect(chargeDates(billing, { from: '2026-12-01', to: '2027-01-01' })).toEqual(['2026-12-06']);
+    expect(chargeDates(billing, { from: '2027-01-01', to: '2027-12-01' })).toEqual([]);
+  });
+
+  it('charges the renewal it starts on that day, its purchase, and none before it started', () => {
+    const bought = early('2027-11-13', 35, { startDate: '2026-11-13' });
+    expect(chargeDates(bought, { from: '2026-11-01', to: '2028-01-01' })).toEqual([
+      '2026-11-13',
+      '2027-10-09',
+    ]);
+    // Added on Nov 13 with its next renewal on Nov 23: that renewal was charged on Oct 19, before it was added.
+    const renewing = early('2026-11-23', 35, { startDate: '2026-11-13' });
+    expect(chargeDates(renewing, { from: '2026-10-01', to: '2028-01-01' })).toEqual(['2027-10-19']);
+  });
+
+  it('charges no renewal on or after the end date, though its charge would be before it', () => {
+    const ending = early('2027-03-10', 35, { endDate: '2028-03-01' });
+    expect(chargeDates(ending, { from: '2027-01-01', to: '2029-01-01' })).toEqual(['2027-02-03']);
+    expect(lastChargeDate(ending)).toBe('2027-02-03');
+    expect(lastChargeDate(early('2027-03-10', 35, { endDate: '2028-03-11' }))).toBe('2028-02-04');
+  });
+
+  it('is the next charge from its charge date, and leaves an add-on on a period of its own on its day', () => {
+    const billing = early('2027-03-10', 35);
+    expect(nextChargeDate(billing, '2026-11-13')).toBe('2027-02-03');
+    expect(nextChargeDate(billing, '2027-02-03')).toBe('2027-02-03');
+    expect(nextChargeDate(billing, '2027-02-04')).toBe('2028-02-04');
+    expect(
+      chargeDates(
+        billing,
+        { from: '2027-01-01', to: '2027-04-01' },
+        { interval: 'month', intervalCount: 1 },
+      ),
+    ).toEqual(['2027-01-10', '2027-02-10', '2027-03-10']);
+  });
+});

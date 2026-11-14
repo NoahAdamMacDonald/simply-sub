@@ -171,6 +171,29 @@ describe('listItemSchema', () => {
     });
   });
 
+  describe('chargeDaysBefore (M11.21)', () => {
+    it('is accepted on a yearly item, under a year', () => {
+      expect(issues(listItemSchema, recurring({ interval: 'year', chargeDaysBefore: 35 }))).toEqual(
+        [],
+      );
+    });
+
+    it('is refused on another period, at a year or more, or not a whole number of days', () => {
+      expect(issues(listItemSchema, recurring({ interval: 'month', chargeDaysBefore: 5 }))).toEqual(
+        ['billing.chargeDaysBefore: chargeDaysBefore is only for yearly periods'],
+      );
+      expect(
+        issues(listItemSchema, recurring({ interval: 'year', chargeDaysBefore: 365 })),
+      ).toEqual(['billing.chargeDaysBefore: Must be less than a year']);
+      expect(issues(listItemSchema, recurring({ interval: 'year', chargeDaysBefore: 0 }))).toEqual([
+        'billing.chargeDaysBefore: Must be a whole number of at least 1',
+      ]);
+      expect(
+        issues(listItemSchema, recurring({ interval: 'year', chargeDaysBefore: 1.5 })),
+      ).toHaveLength(1);
+    });
+  });
+
   describe('dates', () => {
     it.each(['2025-01-31', '2024-12-01'])(
       'rejects an end date of %s, not after the start',

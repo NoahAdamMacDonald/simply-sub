@@ -48,6 +48,7 @@ import {
   cardChoices,
   cardNetworkNames,
   cardTitle,
+  chargedBeforeDays,
   defaultRenewal,
   draftItems,
   emptyWindow,
@@ -307,6 +308,8 @@ export class ItemDialog {
   });
   /** The day its provider renews on, when its pages say (M11.5): the suggested renewal follows it. */
   private readonly renewalAnchor = computed(() => renewalAnchorKind(this.provider()));
+  /** How many days before the renewal its provider charges a yearly one (M11.21): the item gets it, with no input. */
+  private readonly chargeDaysBefore = computed(() => chargedBeforeDays(this.provider()));
   /**
    * The billing day the provider's renewal day gives a new item, which then isn't asked (core's settledBillingDay):
    * undefined when the user says, as for an item being changed.
@@ -905,6 +908,7 @@ export class ItemDialog {
 
   /** What the form's item is made with: ranks are kept for `providedKeys`. */
   private context(providedKeys: readonly RankKey[]): ItemFormContext {
+    const early = this.chargeDaysBefore();
     return {
       ...this.rules(),
       autoRenew: this.autoRenewAvailable(),
@@ -913,6 +917,7 @@ export class ItemDialog {
       today: this.today(),
       ...(this.editing && { billingBefore: this.editing.billing }),
       ...(this.editing?.account && { accountBefore: this.editing.account }),
+      ...(early !== undefined && { chargeDaysBefore: early }),
     };
   }
 

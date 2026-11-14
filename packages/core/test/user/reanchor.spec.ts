@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chargeDates, reanchorIssue, reanchored, type Billing } from '../../src';
+import { chargeDates, reanchorIssue, reanchored, switchedBilling, type Billing } from '../../src';
 
 // "Wrong date?" (P4, P10, PROJECT-PLAN §3.1): the date given becomes the anchor, and every later date follows it.
 
@@ -57,5 +57,42 @@ describe('reanchorIssue', () => {
     expect(reanchorIssue({ ...billing, endDate: '2026-11-14' }, '2026-11-14', today)).toBe(
       'Pick a date before it ends',
     );
+  });
+});
+
+// A yearly renewal charged before its date (M11.21): the charge date given anchors the renewal it pays for.
+describe('charged before the renewal', () => {
+  const early: Recurring = {
+    mode: 'recurring',
+    interval: 'year',
+    intervalCount: 1,
+    anchorDate: '2027-03-10',
+    autoRenew: true,
+    chargeDaysBefore: 35,
+  };
+
+  it('anchors the renewal that many days after the charge, so the charge stays on the date given', () => {
+    const moved = reanchored(early, '2027-02-05');
+    expect(moved).toEqual({ ...early, anchorDate: '2027-03-12' });
+    expect(chargeDates(moved, { from: '2027-01-01', to: '2028-01-01' })).toEqual(['2027-02-05']);
+  });
+
+  it('keeps it on a yearly period it switches to, and drops it on another', () => {
+    expect(switchedBilling(early, { interval: 'year', intervalCount: 1 }, '2027-02-03')).toEqual(
+      early,
+    );
+    expect(switchedBilling(early, { interval: 'month', intervalCount: 1 }, '2027-02-03')).toEqual({
+      mode: 'recurring',
+      interval: 'month',
+      intervalCount: 1,
+      anchorDate: '2027-02-03',
+      autoRenew: true,
+    });
+  });
+
+  it('refuses a charge date whose renewal is on or after the end date', () => {
+    const ending = { ...early, endDate: '2027-03-10' };
+    expect(reanchorIssue(ending, '2027-02-02', '2026-11-13')).toBeUndefined();
+    expect(reanchorIssue(ending, '2027-02-03', '2026-11-13')).toBe('Pick a date before it ends');
   });
 });

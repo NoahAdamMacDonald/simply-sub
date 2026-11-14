@@ -27,7 +27,7 @@ import {
   planTitle,
   policyGradeCounts,
   quoteLink,
-  renewalAnchorNames,
+  renewalAnchorText,
   repositoryLabel,
   subdivisionIn,
   type AddRequest,
@@ -307,13 +307,16 @@ export class PlanDetails {
   });
   /** The user's country, for how an account's money is written (M11.10). */
   protected readonly countryCode = computed(() => this.settings.saved()?.country);
-  /** The day it renews on (M11.5), citing its page, or that its pages don't say. */
+  /**
+   * The day it renews on (M11.5), and how early a yearly renewal is charged (M11.21), citing its page, or that its
+   * pages don't say.
+   */
   protected readonly renewal = computed((): { text: string; cited?: CitedFact } | undefined => {
     const anchor = this.provider().renewalAnchor;
     if (!anchor) return undefined;
     if (anchor.kind === 'not-stated') return { text: 'Not stated: its pages don’t say' };
     return {
-      text: renewalAnchorNames[anchor.kind],
+      text: renewalAnchorText(anchor),
       cited: {
         page: anchor.page,
         href: quoteLink(anchor.url, anchor.quotes),
