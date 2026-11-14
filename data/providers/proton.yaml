@@ -43,8 +43,20 @@ owner:
 notes: >-
   One Proton account holds one paid plan. Every plan keeps the free tier of the Proton apps it doesn't upgrade.
 
-# Perks (M11.6): none. Proton Scribe, its writing assistant in Proton Mail, is ai.office-apps since M11.15
-# (data/redirects.yaml, the owner's choice of 2026-11-04).
+# Perks (M11.6): Lumo Plus's lines that no feature describes, in its words (proton.me/lumo/pricing, read 2026-11-13).
+# Proton Scribe, its writing assistant in Proton Mail, is ai.office-apps since M11.15 (data/redirects.yaml, the owner's
+# choice of 2026-11-04).
+perks:
+  - id: lumo-max-usage
+    name: More Max model usage
+  - id: lumo-messages
+    name: More messages & chat history
+  - id: lumo-image-generations
+    name: More image generations
+  - id: lumo-unlimited-projects
+    name: Unlimited Projects
+  - id: lumo-unlimited-custom-lumos
+    name: Unlimited Custom Lumos
 
 # VPN features, read 2026-10-25 on protonvpn.com. Free, Mail Plus, Drive Plus and Pass Plus have VPN Free; VPN Plus,
 # Unlimited, Duo and Family have VPN Plus (/pricing). Countries: 10 on Free and 140+ on Plus (/pricing; /free-vpn/
@@ -65,7 +77,7 @@ notes: >-
 # Drive and Lumo Free) but aren't what it's sold as.
 #
 # Lumo (ai.assistant), read 2026-11-02 (M11.3): every plan has Lumo's free version, and Lumo Plus is an add-on (its
-# own price list, https://proton.me/lumo/pricing, not stored yet). /support/proton-plans: Unlimited "You can also
+# own price list, https://proton.me/lumo/pricing, stored as proton.lumo-plus since 2026-11-13). /support/proton-plans: Unlimited "You can also
 # enjoy access to the free version of Proton Lumo, your private AI assistant"; Duo "Also includes the free version of
 # Proton Lumo"; and a "Proton Lumo Free" list under Free, Mail Plus and Family. /support/lumo-getting-started: "Yes,
 # you can use Lumo for free with guest access or signed into a Proton Account." Proton Scribe is an "Add-on with free
@@ -73,6 +85,42 @@ notes: >-
 # Lumo's own price list (proton.me/lumo/pricing, read 2026-11-03, M11.9's AI features): Free has "Limited image
 # generations", so every plan has image generation. Free names no coding agent, research, scheduled tasks, early
 # access or API credits, and neither does Plus.
+# The AI category's features (the owner's design, 2026-11-13), read 2026-11-13 with Edge from Canada on Lumo's pages
+# and help centre: Lumo Free's on every plan (/support/proton-plans lists "Proton Lumo Free" under Free, Mail Plus,
+# Unlimited, Duo and Family, and Visionary's "Proton Lumo Plus"), and Lumo Plus's the same.
+# - Web search: "you can turn on the web search feature to get the most up-to-date information" (Getting started with
+#   Lumo), and "Lumo pulls live results from across the web and cites its sources" (Introducing Lumo 2.0).
+# - Memory: "Memory is available to all Lumo users on both free and paid plans, but you’ll need a Proton Account to use
+#   this feature." (Lumo Memory).
+# - Projects: "Free users can have one Project at a time. Lumo Plus or Lumo Professional users can have unlimited
+#   Projects." (How to use Projects in Lumo).
+# - Reasoning: "Both reasoning modes are available to all Lumo users, and on both Lite and Max models." (Lumo models and
+#   reasoning modes).
+# - Models from several companies: "Lumo AI has three model types (Lumo 2.0 Lite, Lumo 2.0 Max, and Apertus 1.5)" and
+#   "All models are available to all Lumo users.", Apertus being "An independent, fully open large language model
+#   (LLM) developed by researchers at EPHL, ETH Zurich, and the Swiss National Supercomputing Centre (CSCS)." (there);
+#   "The models we’re using currently are Qwen 3.5, GLM 5.3, Image-Turbo, FireRed-Image-Edit-1.1, and Apertus 1.5."
+#   (Lumo privacy).
+# - Connects to: other apps ("Proton Drive is integrated into Lumo", How to use the Proton Drive integration in Lumo;
+#   Slack, "The Slack connector is part of Lumo Desktop (macOS, Windows and Linux).", Connect Slack to Lumo) and
+#   custom assistants ("Custom Lumos are available on both free and paid plans, but you’ll need to have a Proton
+#   Account.", Custom Lumos). Its Slack connector uses Slack's own server ("These are requested through Slack’s MCP
+#   (Model Context Protocol) server."), but no page lets you add an MCP server of your own, so no MCP.
+# - Chats kept on its servers, encrypted: "If you’re using Lumo with a Free or Plus plan, your chat histories are
+#   available to search and review later. They’re stored on your device and synced to Proton servers using
+#   zero-access encryption." (Lumo privacy).
+# - No voice conversations: "Dictation lets you speak to Lumo instead of typing. Your words are transcribed into text
+#   in real time in the chat window." (Dictation in Lumo), and it answers in text. No page offers a browser or
+#   computer agent, code completion, or music or voice generation.
+# Lumo Plus (proton.lumo-plus), read 2026-11-13 with Edge from Canada on proton.me/lumo/pricing, which sells it on its
+# own ("Lumo AI Plus", "Use Lumo AI Plus") in the four currencies Proton prices in, each "Billed at" the same every
+# period, none a first-term offer: "$12.99 every month" and "$119.88 every 12 months", "CA$16.24" and "CA$149.88",
+# "€12.99" and "€119.88", "CHF 12.99" and "CHF 119.88". Its lines that no feature describes are perks (above). It
+# keeps Proton Free's apps like the other single-product plans ("Proton Free gives you access to Proton Mail (and all
+# other Proton services) under one account.", /support/proton-plans). That article also sells it as an add-on ("For
+# more usage and features, you can add Lumo Plus to your plan as an add-on."), at a price only the account shows, so
+# no add-on is stored. Proton Visionary includes Lumo Plus, but it's "our exclusive plan for early supporters", and
+# proton.me/visionary's sign-up offers only Free, Mail Plus and Unlimited, so it isn't added.
 # Renewal day (M11.5), read 2026-11-03 (M11.9): its terms and its subscription and invoices articles say only that a plan
 # renews at the end of its billing period, with the date on the Subscription page.
 renewalAnchor:
@@ -130,6 +178,13 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -169,6 +224,13 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -262,6 +324,13 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -356,6 +425,13 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -455,6 +531,13 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
@@ -561,6 +644,114 @@ plans:
         lastVerified: 2026-10-23
         sourceUrl: https://proton.me/pricing
 
+  - id: proton.lumo-plus
+    name: Lumo Plus
+    link: https://proton.me/lumo/pricing
+    categories: [ai]
+    notIn: [vpn, passwords, storage, email, calendar]
+    features:
+      storage.cloud: 5
+      email.addresses: 1
+      email.aliases: 10
+      calendar.included: true
+      ai.assistant: true
+      ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 10
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, apps]
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-vault, role-permissions]
+    featureLabels:
+      email.aliases: Hide-my-email aliases
+    perks:
+      [
+        lumo-max-usage,
+        lumo-messages,
+        lumo-image-generations,
+        lumo-unlimited-projects,
+        lumo-unlimited-custom-lumos,
+      ]
+    notes: Lumo, Proton's AI assistant, with more usage. Proton's other plans can add it as an add-on.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 16.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: CAD
+        amount: 149.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: EUR
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+      - region: GLOBAL
+        currency: CHF
+        amount: 119.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://proton.me/lumo/pricing
+
   - id: proton.unlimited
     name: Proton Unlimited
     link: https://proton.me/pricing
@@ -574,6 +765,13 @@ plans:
       calendar.included: true
       ai.assistant: true
       ai.image-generation: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -704,6 +902,13 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.office-apps: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -833,6 +1038,13 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.office-apps: true
+      ai.web-search: true
+      ai.memory: true
+      ai.projects: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [connectors, custom-assistants]
+      ai.chat-storage: encrypted-cloud
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
