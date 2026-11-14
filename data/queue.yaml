@@ -307,6 +307,20 @@
   source: own
   status: done
   date: 2026-11-13
+- id: infuse
+  name: Infuse
+  website: https://firecore.com/infuse
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
+- id: stremio
+  name: Stremio
+  website: https://www.stremio.com
+  category: streaming
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

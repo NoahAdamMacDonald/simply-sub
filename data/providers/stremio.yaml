@@ -1,0 +1,382 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with Edge from Canada (stremio.com's home, plans,
+# features, downloads, community, terms, privacy, cookie, sign-up, log-in, cancel and payment pages), its plans page again
+# through a German and a US exit, and with a plain fetch (its help centre through its API, its blog, its security.txt and
+# Responsible Disclosure Policy, its translations repository on GitHub, and its Google Play listing). Pages, each quoted
+# where it's used:
+# What it is: a free media centre ("Stremio is a modern media center that gives you the freedom to watch everything you
+# want.", its home page's FAQ) for computers, phones, TVs and the web. It sells no films or shows and hosts none: "Sorry,
+# we provide no content ourselves, but the more Stremio addons you have installed, the more content you will be able to
+# find." (its home page), and "Stremio is not an IPTV provider and does not host, supply, or stream any movies, series, or
+# copyrighted material." (its plans page). What you can watch comes from add-ons: "Add-ons are essential to use Stremio.
+# Without them you will not be able to see any content in Stremio." "Official Add-ons are created and maintained by
+# Stremio", and "Most of the available Add-ons were created by community. Stremio doesn't control them" (How to
+# install/uninstall Add-ons); its terms call them "Community Addons", "developed by independent third-party developers".
+# Listed neutrally as a free media centre with a paid Supporter plan, by its own pages' words (notes.md).
+# Pricing: its plans page (stremio.com/plans; stremio.com/donate leads there): "Basic free Forever All Current Stremio
+# Features"; "Supporter" with a Monthly and an Annually tab, "$3.49 per month" and "$39.99 per year"; and "Lifetime
+# $199.99 Forever paid once". The same for every reader: the page's own script holds the two prices as fixed figures
+# (`u==="monthly"?"3.49":"39.99"`), and the page read through a German and a US exit showed the same "$3.49" and
+# "$39.99". No page names the currency (a bare "$"; its help centre, terms and blog don't price it): priced for
+# everywhere in US dollars, the only dollar one price list for every country can be, and flagged for the owner
+# (notes.md). Its checkout opens only after signing in ("You need to be signed in"), and was paused when read: "Payments
+# are temporarily unavailable" "Payments for Supporter plans are paused for a short while" (stremio.com/payment).
+# Not listed: Lifetime, a one-time purchase ("The Lifetime plan is a one-time payment with nothing to renew or cancel.",
+# the owner's rule for lifetime plans, as Plex Pass's and Emby Premiere's).
+# Region checklist, 2026-11-13: 1. its translated pages (/translation/fr/, /br/, /pt/) translate only; 2. a language
+# menu, no country or currency picker; 3. the page's script holds one price list, with no currency; 4. the plan picker up
+# to its log-in page (stremio.com/login?returnUrl=/payment?subscription=yearly), typing nothing; 5. its help centre has
+# no billing articles; 6. Edge from Canada and through a German and a US exit, and a plain fetch; 7. no bill offered.
+# Bundles: none. Official resellers: none; it sells Supporter only on its own site (not in its Google Play app, which
+# lists no in-app purchases).
+# Features, read 2026-11-13: video quality: "An integrated video player supporting most video formats, including 4K HDR
+# content, lets you enjoy the highest quality available." (its features page), so 4K and HDR. Streams: no number: its
+# apps play streams on each device, Guest mode works without an account, and Supporter "features unlock automatically on
+# every device where you are signed in", so unlimited (inferred), as Infuse's and Plex's. Ads: none now ("In the past, we
+# used to run non-intrusive display ads through various networks. Because of the poor quality, we stopped doing this.",
+# How Stremio Makes Money), though its terms keep the right to show "banners and other forms of advertising". What it
+# streams: nothing of its own (streaming.content: none), whatever add-ons bring. Your own files: "You may use the “Local
+# files” addon, by means of which, You can watch Your own local Streamable Content within Stremio." (its terms, 3.5) and
+# "Stremio can play local movies, videos and series." (Local content), so streaming.own-media (notes.md). Supporter adds
+# "Up to 6 user profiles", "Child-safe profiles & Catalogs" ("Manage addons and catalogs to control exactly what your
+# child profile can access."), a "Download manager" (its blog: "available on Desktop and Android Mobile only for now"; no
+# number of devices, so 1, inferred) and perks; Basic has no profiles and no downloads ("Available offline is an
+# upcoming feature", its home page's FAQ; caching isn't a download). No pause: Supporter is only cancelled (its plans
+# page).
+# Free use: Basic, its Free plan ("Access For Everyone").
+
+id: stremio
+name: Stremio
+website: https://www.stremio.com
+category: streaming
+spendCategory: streaming
+billingCurrency: { GLOBAL: USD }
+# Its cancel page, which asks you to sign in first ("You need to be signed in with a Stremio Supporter account to cancel
+# a subscription.").
+cancelUrl: https://www.stremio.com/cancel
+sources: { pricing: https://www.stremio.com/plans }
+notes: Stremio provides no films or shows itself; what you can watch comes from add-ons, most made by its community. Its paid Supporter tier ($3.49 a month, $39.99 a year, or $199.99 once) isn’t listed while its payments are paused.
+
+# Owner (M11.2), read 2026-11-13: no page of its own names its company in a sentence about who runs it: its terms say
+# only "the Stremio organization" and its privacy policy "Stremio". Its Responsible Disclosure Policy (stremio.com) puts
+# its "digital platforms (website, desktop or mobile applications)" under Smartcode OOD's consent; its GitHub
+# repositories' READMEs say "Copyright © 2017-2026 Smart Code OOD." (a copyright line only), and its Google Play listing,
+# which its home page links, names the developer "SMART CODE OOD" in Sofia, Bulgaria. Private: no shares listed. Where it
+# is: that listing's developer address (no page of stremio.com names a country; notes.md).
+owner:
+  name: 'Smart Code OOD'
+  page:
+    name: Responsible disclosure policy
+    url: https://www.stremio.com/security-policy.txt
+  quotes:
+    - 'If you have discovered a security vulnerability in one of our digital platforms (website, desktop or mobile applications), we appreciate your cooperation in disclosing it to us in a responsible manner.'
+    - 'Publicly disclosing the details of any identified or alleged vulnerability without express written consent from Smartcode OOD will deem the submission as non-compliant.'
+  country:
+    code: BG
+    page:
+      name: Stremio on Google Play
+      url: https://play.google.com/store/apps/details?id=com.stremio.one
+    quotes:
+      - 'SMART CODE OOD'
+      - '1606 Sofia'
+      - 'Bulgaria'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Supporter (stremio.com/plans: "$3.49 per month", "$39.99 per year", lifetime $199.99) is held back (the session's
+# decision, 2026-11-13): its payment page says "Payments are temporarily unavailable", and no page names its currency
+# or a way to pay. Add it when payments open again (its draft is kept locally).
+# Ways to pay (M11.5): no page names one. The checkout opens only after signing in, and was paused when read; the plans
+# page's script names two outside checkouts (Paddle and Whop) but no page says how you pay. So no paymentMethods
+# (notes.md).
+# Renewal day (M11.5): its plans page says "Monthly and yearly plans renew automatically" without naming the day; its
+# terms and help centre say nothing of billing.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://www.stremio.com/plans, https://www.stremio.com/tos]
+  lastVerified: 2026-11-13
+# Source code (M11.5): its home page's FAQ links its desktop app (github.com/stremio/stremio-shell) and its GitHub
+# organisation; its terms say "Stremio is released under the open-source free software GPL." Its apps are open
+# (stremio-web, stremio-core, the shells), but no page says its own servers' code is, so open-source apps.
+sourceRepo:
+  url: https://github.com/Stremio
+  page:
+    name: Stremio
+    url: https://www.stremio.com/
+  quotes:
+    - 'Is Stremio open-source?'
+    - 'Yes, you can check the following links: desktop app and GitHub organization.'
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: its downloads page: Desktop (Windows, macOS, Linux), Mobile ("Android",
+# and "Stremio for iOS (limited version)" through its web version, "Stremio for iOS (full version)" in "EUROPE, BRAZIL &
+# JAPAN" through AltStore PAL), TV ("Android TV", "Apple TV", "Samsung TV", "LG TV" and others), VR (Meta Quest, Pico)
+# and Web ("Stremio for Browser"). Sign-in: an email and a password ("Sign up with email"), "Login with Facebook" and
+# "Login with Apple" (its log-in page). Support: its help desk's tickets ("go to our helpdesk center and create new
+# ticket", I haven't found solution to my problem) and its communities (Reddit, GitHub issues: its community page). App
+# languages: its translations repository (github.com/Stremio/stremio-translations, "the repository the Stremio media
+# center uses for all translation strings", linked as "Translate Stremio" from its community page) lists each language;
+# of the registry's, the share of its sentences translated from English: French 93%, Italian 93%, Spanish 93%,
+# Portuguese 92% (Brazil 88%), German 74%, Arabic 73%, Japanese 68%, Chinese 63%, Korean 55%, Hindi 51% (Hindi isn't in
+# its README's list), counted 2026-11-13. Those at 85% or more are listed (notes.md).
+features:
+  platforms: [windows, macos, linux, android, ios, tv, web]
+  account.sign-in: [password, sso]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, it, pt]
+  software.open-source: open-clients
+
+plans:
+  - id: stremio.basic
+    name: Basic
+    link: https://www.stremio.com/downloads
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.concurrent-streams: unlimited
+      ad-free: true
+      streaming.content: []
+      streaming.own-media: true
+      account.parental-controls: false
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'Its apps play streams on each device, and Guest mode works without any account; no page states a number of streams at once.'
+        page:
+          name: Stremio
+          url: https://www.stremio.com/
+        lastVerified: 2026-11-13
+    notes: 'Free media centre for computers, Android phones, TVs and the web. Stremio provides no content itself: everything you watch comes from add-ons, a few made by Stremio and most by its community, which Stremio doesn’t control. Its help centre says: “We do not support use of any third-party add-ons which may enable copyright infringement.” It also plays your own video files.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.stremio.com/plans
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge: its General Terms and Conditions ("effective from 30
+# August 2020", the same at /tos and /gtc), its Privacy Policy ("effective as of 30 August 2020"), its Cookie Policy, its
+# sign-up page ("I accept the Terms & Conditions", "I accept the Privacy Policy", and a separate box for marketing), its
+# plans page's FAQ (its only words on billing), its help centre's privacy and account articles, its Responsible
+# Disclosure Policy (stremio.com/security-policy.txt, from its security.txt) and its Google Play listing's data safety
+# section. Its terms don't mention Supporter: no refund, price-change or renewal clause covers it. The YouTube official
+# add-on "is subject to external Terms and Conditions" (its terms, 10.4), and each community add-on is its developer's:
+# not read. Calibrated against Plex, Nebula and Emby.
+policies:
+  links:
+    - name: 'General terms and conditions'
+      url: https://www.stremio.com/tos
+    - name: 'Privacy policy'
+      url: https://www.stremio.com/privacy
+    - name: 'Cookie policy'
+      url: https://www.stremio.com/cookies
+    - name: 'Plans'
+      url: https://www.stremio.com/plans
+    - name: 'Stremio (home page)'
+      url: https://www.stremio.com/
+    - name: 'Sign up'
+      url: https://www.stremio.com/register
+    - name: 'How long does Stremio keep users’ personal data?'
+      url: https://stremio.zendesk.com/hc/en-us/articles/360004209972-How-long-does-Stremio-keep-users-personal-data
+    - name: 'How to install/uninstall add-ons'
+      url: https://stremio.zendesk.com/hc/en-us/articles/360021348391-How-to-install-uninstall-Add-ons
+    - name: 'Responsible disclosure policy'
+      url: https://www.stremio.com/security-policy.txt
+    - name: 'Stremio on Google Play'
+      url: https://play.google.com/store/apps/details?id=com.stremio.one
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use its website and apps, with outside analytics and error-tracking services, to improve them and its marketing. You can only refuse cookies, browser by browser.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'Analytical personal data is shared with partnering third-party service providers for the purposes of improving the performance, marketing efforts and quality of our services, conducting error-monitoring to help discover and prioritize errors in real-time:'
+        - url: https://www.stremio.com/cookies
+          quote: 'We use cookies to better understand how people use the Stremio website and Stremio apps.'
+        - url: https://www.stremio.com/cookies
+          quote: 'Ypou can manage your cookie preferences via your online browser and set your browser to refuse cookies, or delete certain cookies.'
+      action:
+        name: 'Its cookie policy'
+        url: https://www.stremio.com/cookies
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Facebook’s pixel and Google Analytics collect what you do on Stremio, and its ad partners use what it learns to promote Stremio. You can only refuse cookies, browser by browser.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'The only cookies we use are Google Analytics and Facebook Pixel which collect statistical information such as country of access and time spent on the Services.'
+        - url: https://www.stremio.com/cookies
+          quote: 'This information helps us, and the advertising services providers we use, better promote our services.'
+        - url: https://www.stremio.com/cookies
+          quote: 'Ypou can manage your cookie preferences via your online browser and set your browser to refuse cookies, or delete certain cookies.'
+      action:
+        name: 'Its cookie policy'
+        url: https://www.stremio.com/cookies
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Stremio’s apps show no ads, but after you visit its website it can show you its own ads on other sites. You can only refuse cookies, browser by browser.'
+      sources:
+        - url: https://www.stremio.com/cookies
+          quote: 'For example, if you visit Stremio website, you may later see an ad for Stremio when you visit a tech news site.'
+        - url: https://www.stremio.com/cookies
+          quote: 'Cookies also allow us to advertise to people who have previously visited certain pages of the Stremio website.'
+        - url: https://www.stremio.com/cookies
+          quote: 'Ypou can manage your cookie preferences via your online browser and set your browser to refuse cookies, or delete certain cookies.'
+      action:
+        name: 'Its cookie policy'
+        url: https://www.stremio.com/cookies
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether anything from Stremio trains AI.'
+      pages: [https://www.stremio.com/privacy, https://www.stremio.com/tos]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data while you use Stremio and for up to 3 years after you delete your account, then deletes it with its copies.'
+      sources:
+        - url: https://stremio.zendesk.com/hc/en-us/articles/360004209972-How-long-does-Stremio-keep-users-personal-data
+          quote: 'Your data is kept for as long as you are a user of Stremio, and may be kept for up to 3 years after you delete your account.'
+        - url: https://www.stremio.com/privacy
+          quote: 'Once the retention period lapses, We delete all personal data, together with any existing copies, unless the Union or Member State laws require storage of the personal data.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself at any time, from your account page on its website.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'Delete your account at any time.'
+        - url: https://www.stremio.com/privacy
+          quote: 'You may delete your account from the User Panel hosted at www.stremio.com.'
+        - url: https://play.google.com/store/apps/details?id=com.stremio.one
+          quote: 'You can request that data be deleted'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask its data protection officer by email for your data in a portable format; there’s no way to download it yourself.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'Request from us access to the personal data that we hold about you in a portable format.'
+        - url: https://www.stremio.com/privacy
+          quote: 'To exercise your rights you can always contact us by sending mail at dpo@stremio.com to our Data Protection Officer (DPO), or contact us at office@stremio.com.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://www.stremio.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It hands your data to authorities when the law requires it, but also whenever the law merely allows it, and doesn’t say it tells you.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: '(i) to comply with a legal requirement, judicial proceeding, court order, or legal process served on Stremio or its affiliates solely when required under the applicable law'
+        - url: https://www.stremio.com/privacy
+          quote: '(v) as otherwise required or permitted by law, including any contractual obligations of Stremio.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your data is stored in the European Economic Area, under European privacy law. If it’s moved outside, it promises measures to protect it, without naming them.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'We collect and store your personal data on the territory of the European Economic Area (EEA).'
+        - url: https://www.stremio.com/privacy
+          quote: 'We enforce any and all necessary measures to protect and guarantee the safety of the personal data if the latter is transferred in a country outside the EEA.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'An account needs only an email address and a password, and marketing emails are a separate box to tick. Guest mode needs no account at all.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'You provide us with your email address and password to create an account.'
+        - url: https://www.stremio.com/register
+          quote: 'I accept to receive marketing communications from Stremio'
+        - url: https://www.stremio.com/
+          quote: 'There is also a Guest mode at signup, which requires no data whatsoever: in this mode, no calls are made to our backend.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be an adult under your country’s law to use it, and it deletes the data of anyone younger it finds out about.'
+      sources:
+        - url: https://www.stremio.com/privacy
+          quote: 'Our services are not directed towards children and you may not use them if you have not reached full legal capacity in accordance with the legislation applicable for the corresponding country.'
+        - url: https://www.stremio.com/privacy
+          quote: 'We will delete all personal data of the above-mentioned persons for which we become aware that they do not have the necessary legal capacity.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'After a month of trying to agree, a dispute goes to the courts that can hear it, with no private referee (an arbitrator) and no ban on class actions. It doesn’t say which courts.'
+      sources:
+        - url: https://www.stremio.com/tos
+          quote: 'In case the parties fail to reach an agreement within one month of the occurrence of a dispute, the dispute should be referred for resolution to the competent courts.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time. New terms apply from the day it announces them on its sites and apps, and the current terms apply each time you use Stremio.'
+      sources:
+        - url: https://www.stremio.com/tos
+          quote: 'The Provider reserves its right to amend these GTC at any time. The new version of the GTC becomes effective from the day it is announced publicly on our Services unless stated otherwise.'
+        - url: https://www.stremio.com/tos
+          quote: 'Each time you use our Services, the current version of these GTC will apply.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can suspend you without warning when it thinks you may have broken its terms, the law or “rules of morality”, and can close your account and delete your library without notice. No refund is mentioned.'
+      sources:
+        - url: https://www.stremio.com/tos
+          quote: 'The Provider may in its sole discretion and without sending a warning or notice, to suspend the Users access to the Services, to certain functionalities or to the User Content, where the latter is or might be in conflict with these GTC and/or any applicable law, and/or any rules of morality and decency or any other peremptory standards.'
+        - url: https://www.stremio.com/tos
+          quote: "terminate the User's registration and to delete their Library and User Content without prior notice."
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'What its free and paid versions include is up to Stremio, and it says it owes you nothing if it changes, limits or ends its services.'
+      sources:
+        - url: https://www.stremio.com/tos
+          quote: "The scope of Services available to Registered Users and Users in Guest mode varies and is dependent only upon the Provider's sole discretion."
+        - url: https://www.stremio.com/tos
+          quote: 'The Provider is not liable to Users, including but not limited to CAD or to any third party for damages and/or lost profits incurred due to the use, availability, termination, suspension, modification or limitation of the Services'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://www.stremio.com/tos, https://www.stremio.com/privacy]
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: neutral
+      reason: 'It has a policy for reporting security flaws to it privately, and fixes the ones it confirms. It names no reward and doesn’t say outside experts audit it.'
+      sources:
+        - url: https://www.stremio.com/security-policy.txt
+          quote: 'If you have discovered a security vulnerability in one of our digital platforms (website, desktop or mobile applications), we appreciate your cooperation in disclosing it to us in a responsible manner.'
+        - url: https://www.stremio.com/security-policy.txt
+          quote: 'We will validate and fix confirmed vulnerabilities in accordance with our security and privacy policy.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Supporter’s profiles are made for everyone in your household. Its terms say not to give your password to anyone else or use someone else’s.'
+      sources:
+        - url: https://www.stremio.com/plans
+          quote: 'User Profiles For Everyone In Your Household'
+        - url: https://www.stremio.com/tos
+          quote: 'You agree neither to disclose your username and password to any third parties, nor to use the username or password of another Registered User.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: great
+      reason: 'It names no limit on devices: Supporter’s features work on every device where you sign in.'
+      sources:
+        - url: https://www.stremio.com/plans
+          quote: 'As soon as your support is active, the features unlock automatically on every device where you are signed in with the same Stremio account.'
+        - url: https://www.stremio.com/plans
+          quote: 'Yes. Your benefits are tied to your Stremio account, so signing in on desktop, web, mobile, or TV with the same account gives you the same features everywhere.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Most add-ons are other people’s
+      tier: neutral
+      reason: 'Everything you watch comes from add-ons. Most are made by its community, not Stremio, which doesn’t check or control them; you choose which ones to install.'
+      sources:
+        - url: https://stremio.zendesk.com/hc/en-us/articles/360021348391-How-to-install-uninstall-Add-ons
+          quote: 'Add-ons are essential to use Stremio. Without them you will not be able to see any content in Stremio.'
+        - url: https://stremio.zendesk.com/hc/en-us/articles/360021348391-How-to-install-uninstall-Add-ons
+          quote: "Most of the available Add-ons were created by community. Stremio doesn't control them so if you see that something is wrong with the content provided by community Add-on there is nothing we can do with this."
+        - url: https://www.stremio.com/tos
+          quote: 'The Provider is not liable for hosting, storing, developing, maintaining or monitoring the content available for the Users through the Community Addons.'
+      lastVerified: 2026-11-13
