@@ -84,13 +84,11 @@ paymentMethods:
     quotes:
       - 'The information in this section only applies to subscriptions purchased via Google Play Store .'
       - 'The information in this section only applies to subscriptions purchased via the App Store .'
-# Renewal day (M11.5): the anniversary of the subscription, charged up to 35 days before.
+# Renewal day (M11.5): the anniversary of the subscription, but charged "up to 35 days prior to the anniversary of your
+# subscription to Avast" (Subscription details), so no fixed day: not-stated, as Norton's (the review of 2026-11-13).
 renewalAnchor:
-  kind: same-date
-  page: 'Subscription details'
-  url: https://www.avast.com/en-ca/subscription-details
-  quotes:
-    - 'The fees will be charged to your stored payment details up to 35 days prior to the anniversary of your subscription to Avast.'
+  kind: not-stated
+  pages: [https://www.avast.com/en-ca/subscription-details]
   lastVerified: 2026-11-13
 # Lab results (M11.2), read 2026-11-13: AV-TEST's newest home-user Windows test, Jul-Aug 2026 (report 261402), of Free
 # Antivirus 26.6, whose protection Premium Security's app shares ("the award-winning protection from Avast Free
