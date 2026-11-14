@@ -1489,7 +1489,7 @@ policies:
           quote: 'Returning your purchase with ESET Canada is just a phone call away.'
       lastVerified: 2026-11-13
     - topic: billing.price-changes
-      tier: good
+      tier: great
       reason: 'It emails you before a price changes, and tells you about a yearly renewal 30 days ahead, so you can cancel first.'
       sources:
         - url: https://www.eset.com/ca/home-store/

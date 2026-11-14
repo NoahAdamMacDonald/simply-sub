@@ -27,10 +27,11 @@
 # Not drafted: Kaspersky VPN Secure Connection, Password Manager and Safe Kids sold alone, and its older Anti-Virus,
 # Internet Security and Total Security (updates only: "Still using our previous products plans?").
 
-# Coverage: kaspersky.* in US: Kaspersky stopped selling there in 2024 under a US government ruling: "In conformity with
-# the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its
-# anti-virus software and cybersecurity products in the United States ahead of July 20, 2024." (its statement of July 18,
-# 2024 on usa.kaspersky.com, read 2026-11-13 through a US exit). No official country list exists, so no availableIn.
+# Not sold in the US: Kaspersky stopped selling there in 2024 under a US government ruling ("In conformity with the
+# Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its
+# anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.", its statement of July 18,
+# 2024 on usa.kaspersky.com, read 2026-11-13 through a US exit), so each paid plan's notSoldIn names the US (M11.20).
+# No official country list exists, so no availableIn; the free Virus Removal Tool is priced for everywhere.
 # Coverage: kaspersky.standard in FR, NL, ES and IT: their Standard card is for 1 device, kaspersky.standard-1-device.
 # Coverage: kaspersky.standard-1-device in CA, AU, GB and DE: their Standard card is for 3 devices, kaspersky.standard.
 # Coverage: kaspersky.plus in FR, NL, ES and IT: their Plus card is for 1 device (3 in the Netherlands).
@@ -170,6 +171,12 @@ plans:
       antivirus.optimizer: true
       antivirus.activity-modes: true
       antivirus.network: [firewall]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: CA
         currency: CAD
@@ -219,6 +226,12 @@ plans:
       antivirus.optimizer: true
       antivirus.activity-modes: true
       antivirus.network: [firewall]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: FR
         currency: EUR
@@ -278,6 +291,12 @@ plans:
       vpn.no-logs-policy: true
       vpn.p2p: true
     perks: [hdd-health]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: CA
         currency: CAD
@@ -339,6 +358,12 @@ plans:
       vpn.no-logs-policy: true
       vpn.p2p: true
     perks: [hdd-health]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: NL
         currency: EUR
@@ -374,6 +399,12 @@ plans:
       vpn.no-logs-policy: true
       vpn.p2p: true
     perks: [hdd-health]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: FR
         currency: EUR
@@ -433,6 +464,12 @@ plans:
         expert-virus-removal,
         safe-kids,
       ]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: CA
         currency: CAD
@@ -486,6 +523,12 @@ plans:
         expert-virus-removal,
         safe-kids,
       ]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: GB
         currency: GBP
@@ -545,6 +588,12 @@ plans:
         expert-virus-removal,
         safe-kids,
       ]
+    notSoldIn:
+      - regions: [US]
+        url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
+        quotes:
+          - 'In conformity with the Final Determination by the U.S. Department of Commerce, Kaspersky announces it has stopped sales contracts of its anti-virus software and cybersecurity products in the United States ahead of July 20, 2024.'
+        lastVerified: 2026-11-13
     prices:
       - region: FR
         currency: EUR
@@ -725,8 +774,8 @@ policies:
           quote: 'Your initial subscription purchase can be fully refunded as well as the automatic payments for subscription renewal.'
       lastVerified: 2026-11-13
     - topic: billing.price-changes
-      tier: neutral
-      reason: 'It emails you the renewal price before it renews, but doesn’t say how long before.'
+      tier: great
+      reason: 'A new price applies only when you renew, and it emails you the renewal price before then, so you can cancel first.'
       sources:
         - url: https://www.kaspersky.ca/premium
           quote: 'Renewal price may differ from the introductory price and is subject to change. We will notify you of the renewal price for your subscription via email prior to the renewal date.'

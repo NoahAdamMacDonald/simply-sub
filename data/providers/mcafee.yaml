@@ -203,15 +203,7 @@ plans:
       security.file-shredder: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks: [tracker-remover, virus-protection-pledge]
     prices:
       - region: US
@@ -320,15 +312,7 @@ plans:
       security.file-shredder: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks: [tracker-remover, virus-protection-pledge]
     prices:
       - region: US
@@ -439,15 +423,7 @@ plans:
       security.file-shredder: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks: [tracker-remover, virus-protection-pledge]
     prices:
       - region: IE
@@ -485,15 +461,7 @@ plans:
       security.file-shredder: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks:
       [tracker-remover, virus-protection-pledge, online-account-cleanup, social-privacy-manager]
     prices:
@@ -589,15 +557,7 @@ plans:
       security.file-shredder: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks:
       [tracker-remover, virus-protection-pledge, online-account-cleanup, social-privacy-manager]
     prices:
@@ -629,15 +589,7 @@ plans:
       security.identity-restoration: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks:
       [
         tracker-remover,
@@ -732,15 +684,7 @@ plans:
       security.identity-restoration: true
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks:
       [
         tracker-remover,
@@ -835,15 +779,7 @@ plans:
       security.identity-theft-insurance: 1
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
-    inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
     perks:
       [
         tracker-remover,
@@ -942,15 +878,8 @@ plans:
       security.identity-theft-insurance: 1
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
     inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
@@ -999,15 +928,8 @@ plans:
       security.identity-theft-insurance: 1
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
     inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
@@ -1055,15 +977,8 @@ plans:
       security.identity-theft-insurance: 2
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
     inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
@@ -1114,15 +1029,8 @@ plans:
       security.identity-theft-insurance: 2
       vpn.included: true
       vpn.no-logs-policy: true
-      vpn.server-countries: 21
       vpn.unlimited-traffic: true
     inferred:
-      vpn.server-countries:
-        reason: 'Its VPN page says you can connect to “almost 50 different countries” and names 21 of them; no page gives the number, so the 21 it names.'
-        page:
-          name: McAfee VPN
-          url: https://www.mcafee.com/en-us/vpn.html
-        lastVerified: 2026-11-13
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
@@ -1284,8 +1192,8 @@ policies:
           quote: 'If you use our credit monitoring or credit lock Services, we may collect your name, address including country of residence, email address, phone number, date of birth, social security number'
       lastVerified: 2026-11-13
     - topic: billing.cancellation
-      tier: neutral
-      reason: 'You turn off renewal in your account online, but more than 30 days before your year ends, because it charges you a month early.'
+      tier: good
+      reason: 'You turn off renewal in your account online, any time. It charges a month early, so do it more than 30 days before your year ends.'
       sources:
         - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
           quote: 'Be sure to do this more than 30 days before your subscription term expires so your payment type isn’t charged for your next renewal.'
@@ -1316,8 +1224,8 @@ policies:
           quote: 'You may terminate your renewed subscription any time after renewal by contacting Customer Service and providing at least 30 days’ notice of your intent to terminate and we will provide a prorated refund in accordance with local law.'
       lastVerified: 2026-11-13
     - topic: billing.price-changes
-      tier: neutral
-      reason: 'It can raise the price after your first term; it says it tells you before the renewal price changes, without saying how long before.'
+      tier: great
+      reason: 'A new price applies only when you renew, and it tells you before the renewal price changes, so you can cancel first.'
       sources:
         - url: https://www.mcafee.com/en-ca/index.html
           quote: 'Pricing is subject to change. If the renewal price changes, we will notify you in advance so you always know what’s going on.'

@@ -1010,7 +1010,7 @@ policies:
           quote: '2A.6 If your subscription auto-renews, you may cancel that renewal no later than 30 days following such renewal date.'
       lastVerified: 2026-11-13
     - topic: billing.price-changes
-      tier: good
+      tier: great
       reason: 'You pay the price of the day when it renews, and it tells you that price up to 65 days before each yearly renewal, so you can cancel first.'
       sources:
         - url: https://www.avast.com/en-ca/subscription-details
@@ -1118,11 +1118,9 @@ policies:
           quote: 'by a natural person, or members of his household for personal, noncommercial purposes.'
       lastVerified: 2026-11-13
     - topic: service.device-limits
-      tier: great
-      reason: 'You can use it on as many devices as your plan covers, with no other limits stated.'
-      sources:
-        - url: https://www.avast.com/en-ca/eula
-          quote: 'You may use the Solution on, or to support, up to the agreed number (the “ Permitted Number of Devices ”)'
+      status: not-stated
+      reason: 'Its terms name no limit beyond the number of devices each plan covers.'
+      pages: [https://www.avast.com/en-ca/eula]
       lastVerified: 2026-11-13
     - topic: service.software-control
       tier: good

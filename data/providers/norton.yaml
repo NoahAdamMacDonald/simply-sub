@@ -41,15 +41,19 @@
 # Coverage: norton.360-deluxe-3-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's plan.
 # Coverage: norton.360-deluxe-canada in US, GB, IE, AU, NZ, DE, FR, NL, ES and IT: Canada's own plan.
 # Coverage: norton.360-deluxe-us in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: the US's own plan.
-# Coverage: norton.360-premium in CA, US, GB, AU and NZ: Canada sells its own (norton.360-premium-canada), Australia and
-# New Zealand a 5-device one, and the US's and UK's menus list no Premium.
+# Coverage: norton.360-premium in CA, GB, AU and NZ: Canada sells its own (norton.360-premium-canada), Australia and
+# New Zealand a 5-device one, and the UK's menu lists no Premium. The US's menu doesn't link it, but its own page sells
+# it ("Savings compared to the renewal price of $149.99/year.", us.norton.com/products/norton-360-premium, with 100 GB of
+# cloud backup there; the review of 2026-11-13).
 # Coverage: norton.360-premium-5-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's plan.
 # Coverage: norton.360-premium-canada in US, GB, IE, AU, NZ, DE, FR, NL, ES and IT: Canada's own plan.
 # Coverage: norton.360-advanced in CA, US, GB, IE, AU and NZ: the UK and Australia sell their own; Canada's, the US's,
 # Ireland's and New Zealand's menus list no Advanced (ca.norton.com/products/norton-360-advanced is a page not found).
 # Coverage: norton.360-advanced-uk in CA, US, IE, AU, NZ, DE, FR, NL, ES and IT: the UK's own plan.
 # Coverage: norton.360-advanced-au in CA, US, GB, IE, NZ, DE, FR, NL, ES and IT: Australia's own plan.
-# Coverage: norton.360-for-gamers in AU, DE, FR, NL, ES and IT: their menus don't list it.
+# Coverage: norton.360-for-gamers in AU, FR, NL, ES and IT: their menus don't list it, and their own pages show no price.
+# Germany's page sells it ("Ersparnis im Vergleich zum Verlängerungspreis von 99,99 €/Jahr.", the review of
+# 2026-11-13).
 # Coverage: norton.360-lifelock-select-plus, norton.360-lifelock-advantage and norton.360-lifelock-ultimate-plus in CA, GB,
 # IE, AU, NZ, DE, FR, NL, ES and IT: sold in the US only (its menu's "Norton 360 with LifeLock"; LifeLock's terms ask US
 # customers for a Social Security Number).
@@ -845,6 +849,14 @@ plans:
       antivirus.devices: 10
     notes: 'Security for 10 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 75 GB of Windows PC cloud backup.'
     prices:
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-premium
       - region: IE
         currency: EUR
         amount: 119.99
@@ -1241,6 +1253,14 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-13
         sourceUrl: https://ie.norton.com/products/norton-360-for-gamers
+      - region: DE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products/norton-360-for-gamers
       - region: NZ
         currency: NZD
         amount: 154.99
@@ -1503,7 +1523,7 @@ policies:
           quote: 'Subsequent monthly charges are not eligible for a refund.'
       lastVerified: 2026-11-13
     - topic: billing.price-changes
-      tier: good
+      tier: great
       reason: 'A new price applies when you renew. It emails you the next year’s price about 50 to 65 days before each yearly renewal, so you can cancel first.'
       sources:
         - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
@@ -1697,11 +1717,9 @@ policies:
           quote: 'Some of our software or services allow you to register your family members or employees or their devices.'
       lastVerified: 2026-11-13
     - topic: service.device-limits
-      tier: great
-      reason: 'You can use it on as many devices as your plan covers, with no other limits stated.'
-      sources:
-        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
-          quote: 'On the number of devices, for the number of users you chose when you made your purchase.'
+      status: not-stated
+      reason: 'Its terms name no limit beyond the number of devices each plan covers.'
+      pages: [https://ca.norton.com/legal/lsa?lsar=americas&lsal=en]
       lastVerified: 2026-11-13
     - topic: service.device-limits
       plans: [norton.360-lifelock-ultimate-plus]

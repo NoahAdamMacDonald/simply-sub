@@ -447,6 +447,19 @@ export const awaitingRequiredFeatures: ReadonlyMap<string, readonly string[]> = 
   ['avast.ultimate-mac', ['vpn.server-countries']],
   ['avast.ultimate-10-devices', ['vpn.server-countries']],
   ['avast.premium-vpn', ['vpn.server-countries']],
+  // McAfee names 21 of its VPN's "almost 50" countries, so the count waits (the review of 2026-11-13).
+  ['mcafee.total-protection-basic', ['vpn.server-countries']],
+  ['mcafee.total-protection-essential', ['vpn.server-countries']],
+  ['mcafee.total-protection', ['vpn.server-countries']],
+  ['mcafee.premium-individual', ['vpn.server-countries']],
+  ['mcafee.premium-family', ['vpn.server-countries']],
+  ['mcafee.advanced-individual', ['vpn.server-countries']],
+  ['mcafee.advanced-family', ['vpn.server-countries']],
+  ['mcafee.ultimate-individual', ['vpn.server-countries']],
+  ['mcafee.advanced-individual-us', ['vpn.server-countries']],
+  ['mcafee.advanced-family-us', ['vpn.server-countries']],
+  ['mcafee.ultimate-individual-us', ['vpn.server-countries']],
+  ['mcafee.ultimate-family-us', ['vpn.server-countries']],
 ]);
 
 /**
