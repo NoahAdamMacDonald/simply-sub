@@ -1,0 +1,502 @@
+# Researched by hand on 2026-11-13 and 2026-11-14 (the full catalog run, AI batch 1), read with Edge from Canada
+# (devin.ai/pricing, its sign-up page), devin.ai/pricing again through a US, a UK, a German and an Australian exit, and
+# with a plain fetch (windsurf.com's redirects, Cognition's legal pages, about page and blog, and Devin's documentation
+# as its Markdown copies). Pages, each quoted where it's used.
+# Windsurf and Devin (the owner's "Windsurf/DevanAI", notes.md): one provider. Windsurf is now Devin Desktop, sold on
+# Devin's plans: "We’re excited to announce Devin Desktop - the next generation of Windsurf." (Cognition's blog,
+# Introducing Devin Desktop); its terms speak of "Devin Desktop (fka Windsurf)"; windsurf.com, windsurf.com/editor and
+# codeium.com redirect to devin.ai/desktop, windsurf.com/pricing to devin.ai/pricing, and Windsurf's terms and privacy
+# links to Cognition's. One company (Cognition AI, Inc.) sells Devin Desktop, the Devin CLI and Devin's cloud agents on
+# the same plans, terms and account ("A daily and weekly usage quota that covers Devin sessions, Devin CLI, and Devin
+# Desktop", Self-serve plans), so by the brand rule it's one provider, named as it's sold now: Devin, found as Windsurf
+# too (aliases).
+# Pricing: devin.ai/pricing: "INDIVIDUAL PLANS" Free "$0", Pro "$20 PER MONTH", Max "$200 PER MONTH" (Teams, from $80 a
+# month plus seats, and Enterprise are business plans); its documentation's Self-serve plans: "Pro" "\$20/month", "Max"
+# "\$200/month". Monthly only: no page offers a yearly price (its quota article says only that existing annual Pro and
+# Teams subscribers keep their plans). No currency is named anywhere: the page shows a bare "$" from Canada and through
+# a US, a UK, a German and an Australian exit alike, and its data holds no currency; one price list for everywhere in
+# US dollars, the only dollar it can be (Stremio's precedent), flagged for the owner (notes.md). No page says the prices
+# include tax ("we may charge the Payment Method for any applicable fees listed for our Services and any applicable
+# tax", its terms). Not listed: grandfathered Windsurf prices ("Your price is grandfathered in at \$15/mo indefinitely",
+# Quota-Based Usage), which new buyers can't get; extra usage at API prices (usage-billed, out).
+# Region checklist, 2026-11-14: 1. devin.ai has no country or locale paths; 2. no country or currency picker; 3. the
+# pricing page's data names no currency; 4. checkout needs an account (app.devin.ai/settings/plans); 5. no help article
+# prices by country; 6. Edge from Canada and through a US, UK, German and Australian exit, all "$20" and "$200"; 7. no
+# bill offered. Sold in Canada: its sign-up page, read from Canada, asks consent to "processing outside Canada".
+# Bundles: none found. Official resellers: none: its pages sell Pro and Max only at app.devin.ai and name no shop. Its
+# "Use your ChatGPT plan" lets a ChatGPT subscription pay for GPT models' usage: a perk, not a bundle.
+# Free use: the Free plan ("The Free plan includes a light quota to code with agents, limited model availability,
+# unlimited inline edits, and unlimited Tab completions.", the pricing page's FAQ).
+
+id: devin
+name: Devin
+aliases: [windsurf, devin desktop, codeium, cognition]
+website: https://devin.ai
+# Cognition's site (its terms, privacy policy and about page) and Windsurf's old domain, which redirects here.
+domains: [cognition.com, windsurf.com]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its plans article's "Canceling your paid plan" (at app.devin.ai/settings/plans).
+cancelUrl: https://docs.devin.ai/desktop/accounts/usage
+sources: { pricing: https://devin.ai/pricing }
+notes: 'Formerly Windsurf: its editor is now Devin Desktop, sold with Devin’s cloud agents and CLI on the same plans by Cognition AI.'
+
+# Ways to pay (M11.5), read 2026-11-14 in its Plans and Usage article: cards, Apple Pay, Google Pay and Link (Stripe's
+# wallet: `other`); "Klarna is also offered at checkout in some regions." names no region, so it's left out. It names no
+# card networks ("all major credit and debit cards"), so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, apple-pay, google-pay, other]
+    page: Plans and Usage
+    url: https://docs.devin.ai/desktop/accounts/usage
+    quotes:
+      - 'We accept all major credit and debit cards, Apple Pay, Google Pay, and Link.'
+
+# Owner (M11.2), read 2026-11-14: Cognition's about page; its terms are with Cognition AI, Inc. ("Cognition AI, Inc.
+# (“Cognition,” “we,” “us,” or “our”)"), or Exafunction, Inc. for some former Windsurf users. Private: "We have raised
+# over $3.5B from Founders Fund, Lux Capital, 8VC, Bain Capital Ventures, and other leading investors." Where it is: its
+# address for notices in its terms ("Cognition’s headquarters are in San Francisco", its about page, names no state or
+# country, which core's namesCountry needs).
+owner:
+  name: 'Cognition AI, Inc.'
+  page:
+    name: About Cognition
+    url: https://cognition.com/about
+  quotes:
+    - 'Cognition operates Devin, the first autonomous software engineer.'
+  country:
+    code: US
+    page:
+      name: Platform terms of service
+      url: https://cognition.com/legal/platform-terms-of-service
+    quotes:
+      - 'Before initiating arbitration, a party must first send a written notice of the Dispute to the other party by certified U.S. Mail'
+      - "Cognition's address for Notice of Arbitration is: Cognition AI, Inc., 550 Third Street, San Francisco, CA 94107."
+    lastVerified: 2026-11-14
+  lastVerified: 2026-11-14
+
+# Renewal day (M11.5), read 2026-11-14: its terms start the term "on the first day the subscription is active" and renew
+# it "for successive periods of the same duration", which says the date you subscribed in words core's renewalWrittenAs
+# doesn't read yet (notes.md has the same-date block); its plans article names no billing date.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    [
+      https://cognition.com/legal/platform-terms-of-service,
+      https://docs.devin.ai/desktop/accounts/usage,
+    ]
+  lastVerified: 2026-11-14
+
+# Perks (M11.6), read 2026-11-14 on devin.ai/pricing (its cards and "Compare Plans"), each line no feature describes:
+# Pro's "Access to cloud agents (Devin Cloud)", "Free use of SWE-2", "Use your ChatGPT plan", the table's "DeepWiki",
+# "Ask Devin" and "Concurrent sessions limit" ("Up to 10" on Pro and Max), and Max's "Significantly higher quotas".
+perks:
+  - id: cloud-agents
+    name: Access to cloud agents (Devin Cloud)
+  - id: deepwiki
+    name: DeepWiki
+  - id: ask-devin
+    name: Ask Devin
+  - id: free-swe-2
+    name: Free use of SWE-2
+  - id: concurrent-sessions-10
+    name: Up to 10 concurrent sessions
+  - id: use-chatgpt-plan
+    name: Use your ChatGPT plan
+  - id: higher-quotas
+    name: Significantly higher quotas
+
+# Features, read 2026-11-14 (AI: the registry on feat/t12-ai-1), on every plan unless named:
+# - Coding agent and code completion: Free's "Light quota to code with agents" and "Unlimited Tab completions" (and on
+#   every plan in the table's "Tab" row); Devin Desktop's Cascade agent and Devin's cloud agents.
+# - Models from several companies on Pro and Max: "Increased quotas, including access to frontier models from OpenAI,
+#   Claude, Gemini, and SpaceXAI, plus leading open source models" and "Full model availability"; Free has "Limited
+#   model availability" ("SWE-2 Flash Medium is available on the Free plan. SWE-2 Flash High and Max require a paid
+#   plan.", AI Models).
+# - Scheduled tasks on Pro and Max: Automations start Devin sessions on "Recurring (cron-based) or one-time (run once)"
+#   schedules (Automations), and "Automations and Devin Review are available on self-serve plans" (Self-serve plans);
+#   they run Devin's cloud sessions, which Free doesn't include (the table's "Devin Cloud" rows).
+# - Connects to: code editors (Devin Desktop is one; plugins for JetBrains and others) and MCP servers ("Cascade has a
+#   variety of tools at its disposal, such as Search, Analyze, MCP, and the terminal"), and skills you make, on every
+#   plan; on Pro and Max also the command line ("Devin CLI"), other apps ("Slack, Linear, and MCP integrations", Pro) and
+#   the API (the table's "Devin API", drawn from the plan's quota).
+# - Not stated by any page read: web search, memory across chats, reasoning models, projects, voice conversations (its
+#   voice input only transcribes: "In its current form it can transcribe your speech to text."), image, video or audio
+#   generation, office apps, deep research, early access (the table's "Access to early feature releases and research
+#   previews" is Teams' and Enterprise's), where chats are kept. Its cloud agent's browser is a coding tool's own.
+# - Developer: "It uses the Open VSX Registry for extensions" (Recommended Extensions).
+# General features, read 2026-11-14: platforms: Devin Desktop for Mac, Windows and Linux (Install Devin Desktop) and
+# Devin's web app (app.devin.ai). Sign-in: its sign-up page's "Continue with GitHub", "Continue with ChatGPT", "Continue
+# with Google" and an email address, with a password ("Account Information Email address, password", its privacy
+# policy). Support: "please reach out to us at support" (devin.ai/support). No page lists app languages (its
+# documentation is translated, not the app), so none is listed. No pause (cancel only). No parental controls.
+features:
+  platforms: [windows, macos, linux, web]
+  account.sign-in: [password, sso]
+  support.channels: [email]
+
+plans:
+  - id: devin.free
+    name: Free
+    link: https://devin.ai/pricing
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.integrations: [mcp, ide, custom-assistants]
+      developer.extensions: [open-vsx]
+    notes: 'Devin Desktop (formerly Windsurf) with a light daily and weekly agent quota, SWE-2 Flash Medium as its model, and unlimited Tab completions and inline edits.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://devin.ai/pricing
+
+  - id: devin.pro
+    name: Pro
+    link: https://devin.ai/pricing
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.model-choice: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
+      developer.extensions: [open-vsx]
+    perks: [cloud-agents, deepwiki, ask-devin, free-swe-2, concurrent-sessions-10, use-chatgpt-plan]
+    notes: 'A daily and weekly usage quota shared by Devin Desktop, the Devin CLI and Devin’s cloud agents; usage past it is billed at API prices.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://devin.ai/pricing
+
+  - id: devin.max
+    name: Max
+    link: https://devin.ai/pricing
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.model-choice: true
+      ai.scheduled-tasks: true
+      ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
+      developer.extensions: [open-vsx]
+    perks:
+      [
+        cloud-agents,
+        deepwiki,
+        ask-devin,
+        free-swe-2,
+        concurrent-sessions-10,
+        use-chatgpt-plan,
+        higher-quotas,
+      ]
+    notes: 'Everything in Pro with a much larger weekly quota and no daily cap.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-14
+        sourceUrl: https://devin.ai/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-14 with a plain fetch and Edge: its Platform Terms of Service
+# (updated June 30, 2026; Exafunction's for some former Windsurf users), Privacy Policy, Privacy Choices page, the
+# sign-up page ("I agree to the Terms of Service", "I consent to the collection and use of my personal information as
+# described in the Privacy Policy, including processing outside Canada."), its plans and self-serve billing articles,
+# its Security page and vulnerability page. Read and holding nothing worse: the Acceptable Use Policy (included by its
+# terms, 2.6) and Website Terms of Use (the website's, not the service's). Not read: the Data Processing Addendum and
+# Enterprise Terms (business customers'). Its terms and privacy policy disagree on the minimum age (13 and 18), which no
+# topic for these categories grades. Calibrated against Claude and ChatGPT.
+policies:
+  links:
+    - name: 'Platform terms of service'
+      url: https://cognition.com/legal/platform-terms-of-service
+    - name: 'Privacy policy'
+      url: https://cognition.com/legal/privacy-policy
+    - name: 'Privacy choices'
+      url: https://cognition.com/privacy-choices
+    - name: 'Security'
+      url: https://cognition.com/legal/security
+    - name: 'Report a vulnerability'
+      url: https://cognition.com/report-vulnerability
+    - name: 'Plans and usage'
+      url: https://docs.devin.ai/desktop/accounts/usage
+    - name: 'Self-serve plans'
+      url: https://docs.devin.ai/admin/billing/self-serve
+    - name: 'Sign up'
+      url: https://app.devin.ai/signup
+  ratings:
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online whenever you like, and you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://docs.devin.ai/desktop/accounts/usage
+          quote: 'As a paid individual user, you can cancel your plan at any time'
+        - url: https://docs.devin.ai/desktop/accounts/usage
+          quote: "Upon canceling, you'll still have access to your plan's features until the end of the current billing period."
+      lastVerified: 2026-11-14
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back unless the law says so, except before you’ve used a new plan. You keep it until the end of the time you paid for.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Except as expressly provided in these Terms or where required by law, all payments are non-refundable.'
+        - url: https://docs.devin.ai/desktop/accounts/usage
+          quote: 'you can request a refund before using the subscription if you change your mind.'
+      lastVerified: 2026-11-14
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms and plans articles don’t say whether it tells you before raising the price.'
+      pages:
+        [
+          https://cognition.com/legal/platform-terms-of-service,
+          https://docs.devin.ai/admin/billing/self-serve,
+        ]
+      lastVerified: 2026-11-14
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It offers no free trial of its paid plans ("Free trials of paid plans are not currently offered"): the Free plan simply stays free.'
+      pages: [https://docs.devin.ai/desktop/accounts/usage]
+      lastVerified: 2026-11-14
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages: [https://cognition.com/legal/platform-terms-of-service]
+      lastVerified: 2026-11-14
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms charge the listed price and any tax, and don’t say whether anything else is added.'
+      pages:
+        [
+          https://cognition.com/legal/platform-terms-of-service,
+          https://docs.devin.ai/desktop/accounts/usage,
+        ]
+      lastVerified: 2026-11-14
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and plans articles don’t say what happens to time you’ve paid for when you switch plans.'
+      pages:
+        [
+          https://cognition.com/legal/platform-terms-of-service,
+          https://docs.devin.ai/admin/billing/self-serve,
+        ]
+      lastVerified: 2026-11-14
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Any dispute goes to a private referee in New York, not a court, and you give up class actions, with no way to opt out.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'THE DISPUTE WILL BE RESOLVED BY BINDING ARBITRATION RATHER THAN IN COURT.'
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'YOU AND COGNITION AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, COLLECTIVE, OR REPRESENTATIVE PROCEEDING.'
+      lastVerified: 2026-11-14
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It gives 30 days’ notice of big changes to its terms, but posting them on its website counts as notice, and using it afterwards means you agree.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'We will provide you with at least thirty (30) days written notice (including by posting the updates on our website) before any changes that we determine, in our sole discretion, materially impact your rights or obligations'
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Continued use of the Services constitutes acceptance of the updated terms.'
+      lastVerified: 2026-11-14
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your plan without notice if it thinks you broke its terms, with no refund; if it ends your plan for any other reason, it refunds the unused time.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'If we terminate your access to the subscription due to a violation of these Terms or the law, you will not be entitled to any refund.'
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'If we exercise this right and you purchased the subscription via our website, we will refund you, on a pro rata basis, the fees you paid for the remaining portion of your subscription after termination.'
+      lastVerified: 2026-11-14
+    - topic: legal.content-rights
+      tier: good
+      reason: 'What you give it stays yours, and it may use it only to run the service for you. (Training on it is graded under AI training.)'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'You own all right, title, and interest, including all intellectual property rights, in and to Customer Data, including Outputs to the fullest extent permitted by applicable law.'
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'to reproduce, distribute, modify, and otherwise use, display, and perform all acts with respect to the Customer Data as may be necessary for Cognition to provide the Services to you.'
+      lastVerified: 2026-11-14
+    - topic: legal.output-rights
+      tier: good
+      reason: 'The code and answers it makes for you are yours.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Cognition assigns to you all right, title, and interest in Output.'
+      lastVerified: 2026-11-14
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change the service as it sees fit, as any subscription can.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: "The Services are subject to modification and change, in Cognition's sole discretion."
+      lastVerified: 2026-11-14
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://cognition.com/legal/platform-terms-of-service]
+      lastVerified: 2026-11-14
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use it only for your own internal purposes, and may not copy it, take it apart, or use it to build a competing product or AI.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Cognition hereby grants you a non-exclusive, non-sublicensable, non-transferable right to access and use the Services and Documentation for your internal business purposes only'
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'use the Services to create or develop any competing products or services, including to train competing artificial intelligence models except as expressly approved by Cognition in writing'
+      lastVerified: 2026-11-14
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its websites and apps, and its ad partners track you on its websites. You can only turn off the ad tracking, browser by browser.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'We collect some of this information using cookies and similar technologies, and our advertising partners may collect information about your online activities over time and across different websites when you use our websites.'
+        - url: https://cognition.com/privacy-choices
+          quote: 'Manage how your data is used for advertising on cognition.com.'
+      action:
+        name: 'Its privacy choices'
+        url: https://cognition.com/privacy-choices
+      lastVerified: 2026-11-14
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives ad companies information about you to promote Devin, which US law may call selling. You can say no on its Privacy Choices page or with your browser’s privacy signal, browser by browser.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'We disclose, and in the past 12 months have disclosed, identifiers, commercial information, and internet or other electronic network activity information to advertising partners to promote our Services, which may be considered a “sale,” “sharing,” or “targeted advertising” under certain US state privacy laws.'
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'You can opt out on our Privacy Choices page or the “Your Privacy Choices” link on our websites.'
+      action:
+        name: 'Its privacy choices'
+        url: https://cognition.com/privacy-choices
+      lastVerified: 2026-11-14
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Devin shows no ads, but its websites load ad trackers (Google, Meta, LinkedIn, X and others) to show you its ads elsewhere. Turning them off works browser by browser.'
+      sources:
+        - url: https://cognition.com/privacy-choices
+          quote: 'Google Tag Manager and the advertising tags it loads (Google Ads, Meta, LinkedIn, X, Reddit, Bing, and similar)'
+        - url: https://cognition.com/privacy-choices
+          quote: 'If your browser sends a Global Privacy Control (GPC) signal, we automatically treat you as opted out.'
+      action:
+        name: 'Its privacy choices'
+        url: https://cognition.com/privacy-choices
+      lastVerified: 2026-11-14
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'On the Free plan, your code and prompts can train its AI, and you can’t say no: only paid plans can opt out.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Cognition may use Customer Data for model training purposes and to improve and enhance the Services. If you subscribe to a paid Service Tier, you may opt out of this use (“Opt-Out”).'
+      lastVerified: 2026-11-14
+    - topic: privacy.ai-training
+      plans: [devin.pro, devin.max]
+      tier: neutral
+      reason: 'Your code and prompts train its AI unless you opt out. Once you do, they’re used for nothing else, and its model providers keep none of it.'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Cognition may use Customer Data for model training purposes and to improve and enhance the Services. If you subscribe to a paid Service Tier, you may opt out of this use (“Opt-Out”).'
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'Following an Opt-Out election: (A) Customer Data will not be used for any other purpose, including training language models; and (B) Zero Data Retention will be enabled with our model providers.'
+      action:
+        name: 'Its terms on opting out'
+        url: https://cognition.com/legal/platform-terms-of-service
+      lastVerified: 2026-11-14
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Its systems check your content for abuse, and it may keep or look at flagged content for safety reviews or when the law requires. (Training on it is graded under AI training.)'
+      sources:
+        - url: https://cognition.com/legal/platform-terms-of-service
+          quote: 'ZDR does not preclude retention or disclosure of Customer Data (i) flagged on automated safety and abuse-detection classifiers; (ii) to perform safety, security, and AUP compliance review; or (iii) as compelled by applicable law or legal process.'
+      lastVerified: 2026-11-14
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information as long as it decides it needs it, and gives no time limits.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'We retain your personal information as needed to provide our Service to you, comply with legal obligations, or protect ours or others interests.'
+      lastVerified: 2026-11-14
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask it by email to delete your information, and it does, but it doesn’t say how quickly.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'In line with these considerations, we delete information that is no longer needed for the above purposes or when you request deletion of your information.'
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'You may submit a request to exercise these rights by contacting us at privacy@cognition.ai .'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://cognition.com/legal/privacy-policy
+      lastVerified: 2026-11-14
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your information in a common, machine-readable format, where the law gives you that right.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'You may also have the right to request that we provide certain personal information in a structured, commonly used, machine-readable format and make this available to you or a designated third party.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://cognition.com/legal/privacy-policy
+      lastVerified: 2026-11-14
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when it believes the law or the authorities require it. It doesn’t say it tells you, or publish how often.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'We may access, read, preserve, and disclose information when we believe it is reasonably necessary to comply with law, legal obligations, regulations, law enforcement, governmental, and other legal requests, court orders, or for disclosure to tax authorities'
+      lastVerified: 2026-11-14
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can be handled anywhere, including the US, the EU and the UK. For Europeans it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://cognition.com/legal/privacy-policy
+          quote: 'To facilitate our operations, Cognition, our third-party partners, and service providers may transfer, store, and process your personal information throughout the world, including the EU, UK and the US.'
+        - url: https://cognition.com/legal/privacy-policy
+          quote: "If you reside in the EEA, Switzerland, or the United Kingdom, we rely upon certain legal mechanisms to facilitate these transfers of your personal information, including in some cases the European Commission's Standard Contractual Clauses"
+      lastVerified: 2026-11-14
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address or a GitHub, ChatGPT or Google account. It doesn’t say whether an email alias is fine.'
+      sources:
+        - url: https://app.devin.ai/signup
+          quote: 'Continue with GitHub'
+        - url: https://app.devin.ai/signup
+          quote: 'Email address'
+      lastVerified: 2026-11-14
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors check its security every year (SOC 2 and ISO 27001), it pays for outside testing, and anyone can report a problem through its bug bounty. The reports aren’t published.'
+      sources:
+        - url: https://cognition.com/legal/security
+          quote: 'Licensor uses independent third-party auditors to assess the Licensor Security Program at least annually, as described in frameworks such as the SOC 2 Type II and ISO 27001 standards.'
+        - url: https://cognition.com/legal/security
+          quote: 'Licensor conducts third-party penetration tests at least annually and a bug bounty program.'
+        - url: https://cognition.com/report-vulnerability
+          quote: 'To report a security vulnerability, please visit https://hackerone.com/cognition .'
+      lastVerified: 2026-11-14
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Pro and Max are for one person: you can’t share them, even at home.'
+      sources:
+        - url: https://docs.devin.ai/admin/billing/self-serve
+          quote: 'plans are individual plans. They cannot be shared across multiple users.'
+      lastVerified: 2026-11-14
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything on your device.'
+      pages: [https://cognition.com/legal/platform-terms-of-service]
+      lastVerified: 2026-11-14
