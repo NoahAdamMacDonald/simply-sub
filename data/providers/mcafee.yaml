@@ -163,10 +163,29 @@ perks:
 # Firewall". McAfee+ adds "Personal info scans" (Premium) or "Personal info removal" (Advanced, Ultimate), and Advanced
 # and Ultimate "Identity restoration"; outside the US only Ultimate has "Identity Theft Coverage" ("covered for up to $1
 # million"), and in the US Advanced has "Up to $1M" and Ultimate "Up to $2M identity theft coverage", with "Credit
-# score, report, & monitoring". No page read today states scheduled scans, behaviour-based detection, ransomware file
-# recovery, a vulnerability scan or VPN protocols and kill switch, so they're left out (its older help pages describe
-# a past product). Its VPN page says it's "independently reviewed and audited" without saying what, so no
+# score, report, & monitoring". No page read states ransomware file recovery or VPN protocols and kill switch, so
+# they're left out. Its VPN page says it's "independently reviewed and audited" without saying what, so no
 # vpn.independent-audits.
+# Read again 2026-11-13 (a review found scans you start only and no behaviour-based detection) in its support centre
+# (mcafee.com/support/s/article/<id>, read in Edge), whose current articles outweigh the sales pages' silence
+# (Bitdefender's precedent; its old download.mcafee.com help pages stay unused):
+# - Scheduled scans: "This article covers the Windows app used by McAfee+, LiveSafe, and Total Protection." Its table:
+#   "Run a quick, full, or custom scan when you want." and Scheduled Scans "Checks your PC for threats on the schedule
+#   you set." (000001659); "Scheduled scans — run on a regular schedule, such as once a day or once a week." (000001589,
+#   for PC or Mac). It warns "The features in your app can vary by plan and region." but names no plan without them.
+# - Behaviour-based detection, inferred from an article about all its apps: "Our scanners use heuristic detection that
+#   can find malware even if the code is not an exact match. Heuristics compares the behavior of executable code found
+#   in files and apps, with those of known threats." (000001558).
+# - Wi-Fi check and vulnerability scan, from its phone app (every plan covers phones): Wi-Fi Scan is ticked for the free
+#   version, McAfee Basic Protection and McAfee+ Advanced, and "On iPhone, System Scan performs the same function by
+#   checking for missing updates and known vulnerabilities." (000001768); "Wi-Fi scan warns you if the Wi-Fi network
+#   that you are connected to is unsafe." (000001799).
+# - Scam protection unchanged (texts): its app table gives McAfee+ Advanced's Scam Detector as "✔ (text, email, video,
+#   QR)" and McAfee Basic Protection's as "✔ (text only)" (000001768), but its plan cards' data says "Scam Detector
+#   Text, email, and video scams" on some plans of each tier and "Automatic scam protection for texts" on others, so
+#   which plans scan email isn't clear (notes.md).
+# - Not added: Smart Scan's "PC performance scan for things slowing your computer down, such as junk files" is
+#   "available only with certain subscription plans" (000002838), so no speed-up tools.
 plans:
   # McAfee WebAdvisor: "McAfee® WebAdvisor FREE", "Search confidently and browse safely with our free WebAdvisor.", a
   # browser extension that warns of risky sites and downloads. No antivirus, so not a free plan of its suites.
@@ -193,11 +212,11 @@ plans:
     features:
       antivirus.devices: 1
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -205,6 +224,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks: [tracker-remover, virus-protection-pledge]
     prices:
       - region: US
@@ -302,11 +330,11 @@ plans:
     features:
       antivirus.devices: 5
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -314,6 +342,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks: [tracker-remover, virus-protection-pledge]
     prices:
       - region: US
@@ -413,11 +450,11 @@ plans:
     features:
       antivirus.devices: 10
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -425,6 +462,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks: [tracker-remover, virus-protection-pledge]
     prices:
       - region: IE
@@ -450,11 +496,11 @@ plans:
     features:
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -463,6 +509,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks:
       [tracker-remover, virus-protection-pledge, online-account-cleanup, social-privacy-manager]
     prices:
@@ -546,11 +601,11 @@ plans:
       account.users: 6
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -559,6 +614,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks:
       [tracker-remover, virus-protection-pledge, online-account-cleanup, social-privacy-manager]
     prices:
@@ -577,11 +641,11 @@ plans:
     features:
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -591,6 +655,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks:
       [
         tracker-remover,
@@ -672,11 +745,11 @@ plans:
       account.users: 6
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -686,6 +759,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks:
       [
         tracker-remover,
@@ -766,11 +848,11 @@ plans:
     features:
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.dark-web-monitoring: true
@@ -781,6 +863,15 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
+    inferred:
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
+        lastVerified: 2026-11-13
     perks:
       [
         tracker-remover,
@@ -864,11 +955,11 @@ plans:
     features:
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.credit-monitoring: 1
@@ -880,12 +971,20 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
     inferred:
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
           name: McAfee (US plans)
           url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
         lastVerified: 2026-11-13
     perks:
       [
@@ -914,11 +1013,11 @@ plans:
       account.users: 6
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.credit-monitoring: 1
@@ -930,12 +1029,20 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
     inferred:
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
           name: McAfee (US plans)
           url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
         lastVerified: 2026-11-13
     perks:
       [
@@ -963,11 +1070,11 @@ plans:
     features:
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.credit-monitoring: 1
@@ -979,12 +1086,20 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
     inferred:
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
           name: McAfee (US plans)
           url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
         lastVerified: 2026-11-13
     perks:
       [
@@ -1015,11 +1130,11 @@ plans:
       account.users: 6
       antivirus.devices: unlimited
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.ransomware: [blocking]
       antivirus.real-time: true
       antivirus.scam-protection: [sms]
-      antivirus.scans: [on-demand]
+      antivirus.scans: [on-demand, scheduled]
       antivirus.web-protection: true
       password-manager: true
       security.credit-monitoring: 1
@@ -1031,12 +1146,20 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      antivirus.behavioural: true
+      antivirus.vulnerability-scan: true
     inferred:
       security.credit-monitoring:
         reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
         page:
           name: McAfee (US plans)
           url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+      antivirus.behavioural:
+        reason: 'Its help says its scanners use heuristic detection, comparing the behaviour of code in files and apps with known threats, in an article about all its apps rather than these plans.'
+        page:
+          name: 'What is a zero-day threat or exploit?'
+          url: https://www.mcafee.com/support/s/article/000001558?language=en_US
         lastVerified: 2026-11-13
     perks:
       [

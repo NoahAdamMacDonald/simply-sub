@@ -249,8 +249,27 @@ perks:
 #   menus' "Safe Web" and the UK's plan pages). Scam Protection "Detects scams in texts and deepfake videos" with
 #   "AI-powered defense against scams online, in texts or deepfake videos"; Scam Protection Pro (Advanced and LifeLock)
 #   is "Comprehensive Scam Protection for your email, phone calls, SMS, and web browsing." Every 360 plan adds "SafeCam
-#   for PC" ("Alerts you to attempts to access your webcam"). No page read states behaviour-based detection, the kinds
-#   of scan, cryptomining, vulnerability scans, anti-spam, anti-theft or speed-up tools for these plans: left out.
+#   for PC" ("Alerts you to attempts to access your webcam"). No page read states cryptomining, anti-spam or anti-theft
+#   for these plans: left out.
+# - Read again 2026-11-13 (a review found the sales pages state no behaviour-based detection or kinds of scan): its
+#   support centre's Windows articles, written for "your Norton device security app", the app of every plan here
+#   (AntiVirus Plus is in its menus' "DEVICE SECURITY"), which outweigh the sales pages' silence (Bitdefender's
+#   precedent). Behaviour-based detection: "Behavioral Protection identifies emerging threats based on the behavior of
+#   applications." (v62460689). Scans: "you can manually run a Norton scan" (v1910793); custom scans run "on a
+#   schedule that you choose", and for its preset scans "you can only change the schedule and scan settings"
+#   (v20240108123204803); and "Startup Scan is an advanced feature that scans for known types of malware and removes
+#   threats before the operating system and other services boot up." (v20240108123104497): on-demand, scheduled and
+#   rescue. Vulnerability scan: "The Software Updater feature in your Norton protection is designed to keep your
+#   third-party programs up-to-date to help eliminate security vulnerabilities." (v138894743). Speed-up tools: its
+#   Performance dashboard's File Cleanup ("helps remove temporary and unused files from your computer"), Startup
+#   Manager and Optimize Disk (v59066932). Wi-Fi check: its phone and tablet app's "the Wi-Fi Security feature scans
+#   the Wi-Fi network for vulnerabilities and alerts you if it is not safe", for plans without a VPN too ("If you do
+#   not have VPN included in your Norton subscription", v126815646); not on Australia's PC-or-Mac AntiVirus Plus, whose
+#   only Wi-Fi check is Windows' Smart Scan ("The Smart Scan feature is not available in all countries.",
+#   v20240108122411183). Game, movie and work modes, inferred from an older article for "Your Norton product": "When
+#   you watch a movie, play games, or make a presentation, you run the application in the full-screen mode. Your
+#   Norton product detects the application that you run in the full-screen mode and automatically enables Silent
+#   Mode." (v23920774, last modified in 2024). Articles: support.norton.com/sp/en/us/home/current/solutions/<id>.
 # - Password Manager: "Create and store passwords, bank card info, and other online credentials for free* in our
 #   encrypted online vault." (its page): logins and cards.
 # - Norton VPN (ca.norton.com/products/norton-vpn and /feature/vpn-server-locations): "Kill Switch to help prevent
@@ -279,11 +298,23 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
       antivirus.devices: 1
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Antivirus for 1 PC, Mac, tablet or phone, with Scam Protection, a password manager and 2 GB of Windows PC cloud backup. No VPN. A 2-year first term (where sold) renews yearly at the same price.'
     prices:
       - region: CA
@@ -383,6 +414,18 @@ plans:
       password-manager.item-types: [login, credit-card]
       antivirus.devices: 1
       platforms: [windows, macos]
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: "Australia's AntiVirus Plus: antivirus for 1 PC or Mac, with Scam Protection, a password manager and 2 GB of Windows PC cloud backup. No VPN."
     prices:
       - region: AU
@@ -404,11 +447,23 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
       antivirus.devices: 3
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'The Netherlands: AntiVirus Plus for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager and 2 GB of Windows PC cloud backup. No VPN.'
     prices:
       - region: NL
@@ -430,7 +485,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -447,6 +502,18 @@ plans:
       vpn.independent-audits: [no-logs]
       security.webcam-protection: [webcam]
       antivirus.devices: 1
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Security for 1 PC, Mac, tablet or phone, with Scam Protection, a password manager, VPN, SafeCam for PC and 10 GB of Windows PC cloud backup.'
     prices:
       - region: CA
@@ -532,7 +599,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -549,6 +616,18 @@ plans:
       vpn.independent-audits: [no-logs]
       security.webcam-protection: [webcam]
       antivirus.devices: 3
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'The UK: security for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, SafeCam for PC and 10 GB of Windows PC cloud backup.'
     prices:
       - region: GB
@@ -570,7 +649,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -588,6 +667,18 @@ plans:
       security.webcam-protection: [webcam]
       security.dark-web-monitoring: true
       antivirus.devices: 3
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'The US: security for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Dark Web Monitoring, SafeCam for PC and 2 GB of Windows PC cloud backup.'
     prices:
       - region: US
@@ -609,7 +700,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -629,6 +720,18 @@ plans:
       account.parental-controls: true
       security.dark-web-monitoring: true
       antivirus.devices: 5
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 50 GB of Windows PC cloud backup.'
     prices:
       - region: GB
@@ -698,7 +801,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -718,6 +821,18 @@ plans:
       account.parental-controls: true
       security.dark-web-monitoring: true
       antivirus.devices: 3
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Australia and New Zealand: security for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 50 GB of Windows PC cloud backup.'
     prices:
       - region: AU
@@ -747,7 +862,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -767,6 +882,18 @@ plans:
       account.parental-controls: true
       security.data-exposure: [footprint]
       antivirus.devices: 5
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Canada: security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Privacy Monitor (finds your details on people-search sites), Parental Control, SafeCam for PC and 50 GB of Windows PC cloud backup.'
     prices:
       - region: CA
@@ -788,7 +915,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -809,6 +936,18 @@ plans:
       security.dark-web-monitoring: true
       security.data-exposure: [footprint]
       antivirus.devices: 5
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'The US: security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Dark Web Monitoring, Privacy Monitor, Parental Control, SafeCam for PC and 50 GB of Windows PC cloud backup.'
     prices:
       - region: US
@@ -830,7 +969,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -850,6 +989,18 @@ plans:
       account.parental-controls: true
       security.dark-web-monitoring: true
       antivirus.devices: 10
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Security for 10 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 75 GB of Windows PC cloud backup.'
     prices:
       - region: US
@@ -919,7 +1070,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -939,6 +1090,18 @@ plans:
       account.parental-controls: true
       security.dark-web-monitoring: true
       antivirus.devices: 5
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Australia and New Zealand: security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 100 GB of Windows PC cloud backup.'
     prices:
       - region: AU
@@ -968,7 +1131,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -988,6 +1151,18 @@ plans:
       account.parental-controls: true
       security.data-exposure: [footprint]
       antivirus.devices: 10
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     notes: 'Canada: security for 10 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Privacy Monitor, Parental Control, SafeCam for PC and 75 GB of Windows PC cloud backup.'
     prices:
       - region: CA
@@ -1010,7 +1185,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1031,8 +1206,20 @@ plans:
       security.dark-web-monitoring: true
       security.identity-restoration: true
       antivirus.devices: 10
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     perks: [stolen-wallet, social-media-monitoring]
     notes: 'Security for 10 PCs, Macs, tablets or phones, with Scam Protection Pro (email, calls, texts and websites), a password manager, VPN, Parental Control, Dark Web Monitoring, help restoring your identity, stolen wallet help, Social Media Monitoring and 200 GB of Windows PC cloud backup.'
     prices:
@@ -1088,7 +1275,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1110,6 +1297,11 @@ plans:
       security.identity-restoration: true
       antivirus.devices: 10
       security.credit-monitoring: 1
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
     perks: [stolen-wallet, social-media-monitoring, financial-monitoring]
@@ -1119,6 +1311,12 @@ plans:
         page:
           name: 'Norton 360 Advanced (UK)'
           url: https://uk.norton.com/products/norton-360-advanced
+        lastVerified: 2026-11-13
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
         lastVerified: 2026-11-13
     notes: 'The UK: everything in 360 Advanced, plus your credit report and score each month, credit alerts and Financial Monitoring.'
     prices:
@@ -1143,7 +1341,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1164,8 +1362,20 @@ plans:
       security.dark-web-monitoring: true
       security.identity-restoration: true
       antivirus.devices: 5
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     perks:
       [stolen-wallet, social-media-monitoring, financial-monitoring, identity-theft-insurance-au]
     notes: 'Australia: security for 5 PCs, Macs, tablets or phones, with Scam Protection Pro, a password manager, VPN, Parental Control, Dark Web Monitoring, identity restoration support, identity theft insurance, stolen wallet help, Social Media Monitoring, Financial Monitoring and 200 GB of Windows PC cloud backup.'
@@ -1192,7 +1402,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, sms]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1213,6 +1423,10 @@ plans:
       security.dark-web-monitoring: true
       antivirus.devices: 3
       antivirus.activity-modes: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
     perks: [game-optimizer]
     notes: 'Security for 3 PCs, Macs, tablets or phones, built for gaming: Game Optimizer and a full-screen mode that holds alerts, Dark Web Monitoring for gamer tags, VPN, Parental Control, a password manager and 50 GB of Windows PC cloud backup. 30 days free first, with a payment method.'
     prices:
@@ -1285,7 +1499,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1309,8 +1523,20 @@ plans:
       antivirus.devices: 10
       security.credit-monitoring: 1
       security.identity-theft-insurance: 1.05
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     perks: [stolen-wallet, ssn-alerts]
     notes: 'The US: everything in 360 Deluxe for 10 devices, with Scam Protection Pro and 250 GB of backup, plus LifeLock identity theft protection: alerts on your Social Security number and credit, one-bureau credit monitoring, US restoration specialists and up to $1,050,000 in coverage.'
     prices:
@@ -1336,7 +1562,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1360,8 +1586,20 @@ plans:
       antivirus.devices: 10
       security.credit-monitoring: 1
       security.identity-theft-insurance: 1.2
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     perks:
       [
         stolen-wallet,
@@ -1395,7 +1633,7 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
       password-manager.item-types: [login, credit-card]
@@ -1419,8 +1657,20 @@ plans:
       antivirus.devices: unlimited
       security.credit-monitoring: 3
       security.identity-theft-insurance: 3
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.optimizer: true
+      antivirus.activity-modes: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+    inferred:
+      antivirus.activity-modes:
+        reason: 'Its help article on Silent Mode, written for any Norton product and last changed in 2024, says it turns on by itself when you watch a movie, play games or present full screen, holding back alerts and background tasks.'
+        page:
+          name: 'Learn more about Silent Mode that turns on automatically'
+          url: https://support.norton.com/sp/en/us/home/current/solutions/v23920774
+        lastVerified: 2026-11-13
     perks:
       [
         stolen-wallet,
