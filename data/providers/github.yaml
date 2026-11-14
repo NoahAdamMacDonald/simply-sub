@@ -1,0 +1,795 @@
+# Researched by hand on 2026-11-13 (the AI category's batch 1), read with Edge from Canada and with a plain fetch of
+# GitHub Docs (docs.github.com serves every article whole). One provider for GitHub's individual plans, the session's
+# decision (one company, one set of terms): GitHub Free and GitHub Pro (personal accounts), and Copilot Free, Pro, Pro+
+# and Max. Team, Enterprise, Copilot Business, Copilot Enterprise and "Copilot access" are organizations' plans: out of
+# scope. Pages, each quoted where it's used:
+# Pricing: Copilot's plans page (github.com/features/copilot/plans: its cards, its comparison table and its FAQ, each FAQ
+# tab opened), GitHub's pricing page (github.com/pricing: Free, Team and Enterprise; GitHub Free's card is "The basics
+# for individuals and organizations"), and GitHub Docs: "Plans for GitHub Copilot" (its tables' ticks are icons, read
+# from their aria-labels), "Usage-based billing for individuals", "GitHub's plans", "GitHub Actions billing", "FAQ about
+# changes to GitHub's plans" and "How GitHub billing works".
+# One price for everyone, in US dollars: every page prices in "USD" ("$10 USD per month", "$4 USD per user/month"), and
+# Copilot's plans page read through a US, UK, German and Australian exit showed the same cards and prices as from
+# Canada. Its Copilot budgets are "set in US dollars", and its terms bill invoiced users "in U.S. Dollars". No page says
+# its prices include tax: "You are responsible for all fees, including taxes, associated with your use of the Service."
+# Copilot's periods: the plans pages price Pro, Pro+ and Max by the month only ("$10 USD per month", "$39 USD per
+# month.", "$100 USD per month"). Its yearly plans are legacy: "This article only applies to Copilot Pro and Copilot Pro+
+# subscribers on an existing annual plan who remained on legacy premium request-based billing after June 1, 2026." and
+# "When your annual plan ends, you'll be automatically downgraded to Copilot Free." (What changed with Copilot billing).
+# GitHub Pro: no pricing page lists it any more; the plans FAQ in its docs still says "GitHub Pro now has a reduced
+# monthly price of $4", the price stored. "Under "Upgrade summary", choose whether you want to pay monthly or yearly."
+# (Upgrading your account's plan) says Pro is sold by the year too, but no page shows the yearly price without
+# signing in: it isn't priced (see notes.md).
+# Region checklist for CA and US, 2026-11-13: 1. no country paths (its docs' languages translate, they don't price);
+# 2. no country or currency picker, the footer's "English" is the language; 3. Copilot's page data lists plans and
+# models, no country; 4. the checkout needs an account; 5. its billing docs ("Your additional usage budget is set in US
+# dollars"); 6. Edge from Canada, then through US, UK, German and Australian exits: the same USD prices; 7. no bill
+# offered.
+# Students, teachers and open-source maintainers: verified students get Copilot Student ("Available to verified
+# students. Get access to Copilot's features for free."), and verified teachers and maintainers of popular open-source
+# projects get Copilot Pro free ("There are two ways to qualify for free access to Copilot Pro"); students get GitHub Pro
+# with the Student Developer Pack ("GitHub will continue to offer GitHub Pro as part of its Student Developer Pack
+# benefits to all students."). Notes on the plans, not plans of their own (the session's decision).
+# Bundles: none for its personal plans. "GitHub Enterprise now includes access to GitHub Copilot" (github.com/pricing) is
+# a business plan. Official resellers: none for its personal plans: its Partner Program (github.com/partners) is for
+# businesses' "Services & Channel Partners", and its privacy statement's "Partners and Resellers: We cooperate with
+# third-parties that offer sales, consulting, support, and technical services for our Services." names no shop. Copilot
+# bought in GitHub Mobile is an in-app purchase (a way to pay, below).
+# Free use: GitHub Free and Copilot Free are plans (price 0).
+# Usage-billed extras are left out (the brief): AI credits beyond a plan's ("1 AI credit = $0.01 USD"), Actions and
+# Codespaces beyond the included amounts, Git LFS packs and the like.
+
+id: github
+name: GitHub
+aliases: [GitHub Copilot, Copilot]
+website: https://github.com
+category: developer
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Copilot's cancel article; GitHub Pro is cancelled by downgrading to Free ("Downgrading your account's plan",
+# docs.github.com/en/billing/how-tos/manage-plan-and-licenses/downgrade-plan).
+cancelUrl: https://docs.github.com/en/copilot/how-tos/manage-your-account/view-and-change-your-copilot-plan
+sources: { pricing: https://github.com/features/copilot/plans }
+# Ways to pay (M11.5), read 2026-11-13: a credit card or PayPal when upgrading on github.com, and an in-app purchase in
+# GitHub Mobile for Copilot. No page names the card networks (its docs say "credit card" and "Bank card"); "Prepaid
+# credit/debit cards are not accepted as a valid form of payment." (Supported payment methods for GitHub). An Azure
+# subscription, invoices and ACH are for organizations and enterprises ("Azure Subscription ID – Not available for
+# personal accounts").
+paymentMethods:
+  - methods: [card, paypal]
+    page: "Upgrading your account's plan"
+    url: https://docs.github.com/en/billing/how-tos/manage-plan-and-licenses/upgrade-plan
+    quotes:
+      - 'Under "Payment method", choose to pay with a credit card or PayPal.'
+  - methods: [app-store]
+    page: 'Plans & pricing (GitHub Copilot)'
+    url: https://github.com/features/copilot/plans
+    quotes:
+      - 'Users who purchase Copilot Pro, Pro+, or Max through GitHub Mobile in-app purchase (IAP) can’t buy additional AI credits through GitHub Mobile.'
+# Owner (M11.2), read 2026-11-13: Microsoft's blog on completing the purchase, and its Annual Report 2026, whose
+# Intelligent Cloud segment includes "GitHub cloud services" ("GitHub provides a collaboration platform for developers to
+# manage code and incorporate AI and agent-based tools across the software development lifecycle."). GitHub's terms are
+# with "GitHub, Inc." and say "For the avoidance of doubt, Microsoft is an Affiliate of GitHub."
+owner:
+  name: 'GitHub, Inc., owned by Microsoft Corporation'
+  website: https://www.microsoft.com
+  page:
+    name: 'Microsoft completes GitHub acquisition (Official Microsoft Blog)'
+    url: https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition/
+  quotes:
+    - 'Microsoft has completed its acquisition of GitHub'
+  country:
+    code: US
+    page:
+      name: 'Privacy statement'
+      url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+    quotes:
+      - 'GitHub, Inc. 88 Colin P. Kelly Jr. St. San Francisco, CA 94107 United States'
+    lastVerified: 2026-11-13
+  stock:
+    company: Microsoft Corporation
+    listings:
+      - { exchange: Nasdaq, symbol: MSFT }
+    page:
+      name: 'Microsoft Annual Report 2026'
+      url: https://www.microsoft.com/investor/reports/ar26/index.html
+    quotes:
+      - 'Our common stock is traded on the NASDAQ Stock Market under the symbol MSFT.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+
+# Renewal day (M11.5), read 2026-11-13 in "How GitHub billing works": the day you started paying, every month. Copilot's
+# billing article says the same ("your billing cycle will start on the day you sign up for Copilot", "and then on the
+# same days of subsequent months"). Copilot's included AI credits reset on the first of each month whatever the billing
+# date ("This reset date is fixed and does not change based on your subscription billing date."), a usage detail.
+renewalAnchor:
+  kind: same-date
+  page: How GitHub billing works
+  url: https://docs.github.com/en/billing/get-started/how-billing-works
+  quotes:
+    - 'For personal and organization accounts set up for credit card and PayPal payments, the billing date is typically the day you started a paid plan (not necessarily when the account was created).'
+    - 'For example, if you started a paid plan on the 15th of a month, you will be billed on the 15th of each subsequent month.'
+  lastVerified: 2026-11-13
+
+# Perks (M11.6): each line of its plans that no feature describes, with an id its plans list, named in their words.
+# Read 2026-11-13 on Copilot's plans page ("$15 monthly total credits for Pro", "Access to premium models, including
+# Opus", "Access to Copilot Fusion Standard, High, and Max", the table's "Audit logs" on Pro+ and Max) and in "GitHub's
+# plans" (Free's and Pro's Codespaces hours and Packages storage, Pro's "Advanced tools and insights in private
+# repositories"). Usage allowances are perks, never features (usage levels aren't comparable). Third-party agents:
+# Pro's card and the docs' table include them on Pro ("Third-party Agents (public preview)", ticked on Pro, Pro+ and
+# Max), the plans page's table only on Pro+ and Max ("Delegate tasks to third-party coding agents like Claude by
+# Anthropic and OpenAI Codex (Preview)"): the card and the docs decide (notes.md).
+perks:
+  - id: cloud-agent-code-review
+    name: Access to Copilot in the cloud and code review
+  - id: unlimited-completions
+    name: Unlimited code completion and next edit suggestions
+  - id: third-party-agents
+    name: Access to 3rd party agents (Claude Code and Codex)
+  - id: credits-15
+    name: $15 monthly total credits for Pro
+  - id: premium-models
+    name: Access to premium models, including Opus
+  - id: usage-4x-pro
+    name: 4x+ included usage than Pro
+  - id: credits-70
+    name: $70 monthly total credits for Pro+
+  - id: fusion-high-max
+    name: Access to Copilot Fusion Standard, High, and Max
+  - id: audit-logs
+    name: Audit logs
+  - id: usage-2-9x-pro-plus
+    name: 2.9x+ included usage than Pro+
+  - id: credits-200
+    name: $200 monthly total credits for Max
+  - id: codespaces-120-core-hours
+    name: 120 GitHub Codespaces core hours per month
+  - id: codespaces-180-core-hours
+    name: 180 GitHub Codespaces core hours per month
+  - id: packages-500-mb
+    name: 500 MB GitHub Packages storage
+  - id: packages-2-gb
+    name: 2 GB GitHub Packages storage
+  - id: private-repo-tools
+    name: Advanced tools and insights in private repositories
+
+# Developer features (GitHub Free and Pro), read 2026-11-13:
+# - CI minutes: Free's card on github.com/pricing, "2,000 CI/CD minutes/month" ("The basics for individuals and
+#   organizations"). Its docs now give a sum of money instead: "$12 USD of included compute usage per month" for Free and
+#   "$18 USD of included compute usage per month for eligible GitHub Actions and cloud sandbox usage" for Pro ("GitHub's
+#   plans"), and "As a guide, $300 USD covers 50,000 minutes on a standard Linux runner at $0.006 USD per minute."
+#   (GitHub Actions billing): $18 is 3,000 minutes, inferred, as Team's card says "3,000 CI/CD minutes/month" for the same
+#   $18. "Minutes are free for public repositories."
+# - Remote development: Codespaces on both ("120 GitHub Codespaces core hours per month", "180 GitHub Codespaces core hours
+#   per month"), with the Visual Studio Code Marketplace's extensions ("Codespaces allows you to load extensions from the
+#   Microsoft Visual Studio Marketplace", its additional product terms).
+# - Hosting: GitHub Pages, "a static site hosting service" with "your own custom domain", "available in public
+#   repositories with GitHub Free and GitHub Free for organizations, and in public and private repositories with GitHub
+#   Pro"; its limits: "Published GitHub Pages sites may be no larger than 1 GB." and "GitHub Pages sites have a soft
+#   bandwidth limit of 100 GB per month." (GitHub Pages limits). Pages makes both plans cloud plans too (hosting.type, the
+#   cloud category's required feature): see notes.md.
+# AI features (Copilot's plans), read 2026-11-13 on Copilot's plans page and in GitHub Docs, on every Copilot plan unless
+# named:
+# - Coding agent: "Agent mode use in VS Code, Visual Studio, JetBrains, Eclipse, and Xcode" and Copilot CLI's "Make and
+#   commit code changes locally or on GitHub", included on all four; Copilot in the cloud ("Assign work to Copilot and it
+#   creates a pull request") on the paid plans, a perk.
+# - Code completion: "Inline suggestions are real-time code suggestions with included models in IDEs and Next edit
+#   suggestions." ("Limited to 2000 completions per month on Copilot Free.").
+# - Deep research: "The /research slash command invokes a specialized research agent. It investigates a topic and produces
+#   a cited Markdown report. The agent can gather information from your local codebase, public and accessible private
+#   repositories across your organization, and the web." ("GitHub Copilot CLI is available with all Copilot plans.").
+# - Web search: "If you enable this setting, Copilot Chat will use Bing to search the internet for information related
+#   to a question." ("Copilot Pro, Copilot Pro+, Copilot Max, and Copilot Free").
+# - Projects: "Anyone with a Copilot license, including Copilot Free, can create and use Spaces." and the Copilot app's
+#   projects ("The GitHub Copilot app is available for all Copilot plans.").
+# - Scheduled tasks: the Copilot app's automations ("Automations let you save recurring agent tasks and run them on a
+#   schedule or on demand.", on all plans with the app; "Local automations , which run from your local environment."),
+#   and cloud automations on the paid plans ("Automations are available with the GitHub Copilot Pro, GitHub Copilot Pro+,
+#   GitHub Copilot Max, GitHub Copilot Business, and GitHub Copilot Enterprise plans.").
+# - Uses a computer for you: the Copilot app's computer use ("Copilot can interact with desktop applications on your
+#   behalf by reading accessible application content and visual context, clicking controls, entering and editing text,
+#   pressing keys, scrolling, dragging, and navigating workflows across applications."), "in public preview", for local
+#   sessions on macOS and Windows.
+# - Memory on the paid plans: Copilot Memory, "Available for all paid Copilot plans."
+# - Reasoning and models from several companies on the paid plans: Pro's "Model selection" and the docs' "A selection of
+#   models" (Anthropic's, OpenAI's, Google's, xAI's, Microsoft's and Moonshot AI's, its supported models table), and
+#   "Configurable reasoning levels : Controls the depth of the model's reasoning process before it generates a response."
+#   for the models picked. "On Copilot Free and Copilot Student plans, access to models is available through auto model
+#   selection only.", so Free picks no model and sets no reasoning.
+# - Early access on Max: "Priority access to new models and features".
+# - Connects to: MCP servers ("Integrates with MCP servers"), code editors and the command line on all four, custom
+#   agents ("Custom instructions and agents") on all four, and other apps through connectors on the paid plans ("you can
+#   access third-party services through GitHub connectors. Connectors are available to all your Copilot in the cloud
+#   sessions.", Copilot in the cloud "is available to users with a paid Copilot plan").
+# - Chats kept on its servers: "Chat data retention Data is retained for 28 days. Data is retained for the life of the
+#   account." (GitHub Actions-based and cloud sandbox sessions).
+# - None of these pages offers a voice conversation (Copilot CLI's voice input dictates a prompt: "Voice input lets you
+#   dictate prompts to Copilot CLI by speaking into your microphone instead of typing on the keyboard."), image, video,
+#   music or voice generation, office apps, or API credits (its AI credits pay for Copilot's own use).
+# General features, read 2026-11-13: GitHub Mobile "is available as an Android and iOS app", GitHub Desktop for "macOS
+# 12.0 or later" and "Windows 10 64-bit or later", the Copilot app for "macOS Linux Windows", and github.com. Sign-in
+# ("About authentication to GitHub", "About two-factor authentication"): a password or "Google or Apple - which are the
+# supported social login providers", passkeys, a TOTP app or a text message, security keys and GitHub Mobile. App
+# languages: "GitHub Mobile is available in the following languages." English, Spanish, Japanese, Brazilian Portuguese,
+# Simplified Chinese, Korean and German, the only list of app languages its pages give. Support: "If your account uses GitHub
+# Free, you can speak to GitHub users and staff on the GitHub Community discussions for most issues, and you can contact
+# GitHub Support to report account, security, and abuse issues.", and "We do not offer telephone support." No pause
+# (cancelling and downgrading only); no parental controls: "You must be age 13 or older."
+features:
+  platforms: [windows, macos, linux, android, ios, web]
+  account.sign-in: [password, passkey, totp, security-key, sms, push-approval, sso]
+  support.channels: [email, community]
+  languages.interface: [en, es, de, pt, ja, ko, zh]
+
+plans:
+  - id: github.free
+    name: Free
+    link: https://github.com/signup
+    categories: [developer, cloud]
+    features:
+      developer.ci-minutes: 2000
+      developer.remote-development: true
+      developer.extensions: [vs-code-marketplace]
+      hosting.type: [static]
+      hosting.custom-domain: true
+      hosting.bandwidth: 100
+      hosting.disk: 1
+    featureLabels:
+      developer.ci-minutes: '2,000 CI/CD minutes/month'
+      hosting.type: GitHub Pages in public repositories
+      hosting.bandwidth: soft bandwidth limit of 100 GB per month
+      hosting.disk: Published GitHub Pages sites may be no larger than 1 GB
+    perks: [codespaces-120-core-hours, packages-500-mb]
+    notes: 'Unlimited public and private repositories. Actions minutes are free in public repositories; private ones draw on $12 USD of included compute a month. 15 GB of Codespaces storage a month. Copilot Free is a plan of its own.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://github.com/pricing
+
+  - id: github.pro
+    name: Pro
+    link: https://docs.github.com/en/billing/how-tos/manage-plan-and-licenses/upgrade-plan
+    categories: [developer, cloud]
+    features:
+      developer.ci-minutes: 3000
+      developer.remote-development: true
+      developer.extensions: [vs-code-marketplace]
+      hosting.type: [static]
+      hosting.custom-domain: true
+      hosting.bandwidth: 100
+      hosting.disk: 1
+    featureLabels:
+      developer.ci-minutes: $18 USD of included compute usage per month
+      hosting.type: GitHub Pages in public and private repositories
+      hosting.bandwidth: soft bandwidth limit of 100 GB per month
+      hosting.disk: Published GitHub Pages sites may be no larger than 1 GB
+    inferred:
+      developer.ci-minutes:
+        reason: 'Pro includes $18 USD of Actions compute a month, and at $0.006 USD a minute on a standard Linux runner that is 3,000 minutes, the number GitHub Team’s card gives for the same $18.'
+        page:
+          name: GitHub Actions billing
+          url: https://docs.github.com/en/billing/concepts/product-billing/github-actions
+        lastVerified: 2026-11-13
+    perks: [codespaces-180-core-hours, packages-2-gb, private-repo-tools]
+    notes: 'Required and multiple reviewers, protected branches, code owners, wikis, GitHub Pages and insights in private repositories, and GitHub Support by email. 20 GB of Codespaces storage a month. Sold monthly or yearly; no page shows the yearly price without signing in. Free for students with the Student Developer Pack.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://docs.github.com/en/get-started/learning-about-github/faq-about-changes-to-githubs-plans
+
+  - id: github.copilot-free
+    name: Copilot Free
+    link: https://github.com/features/copilot/plans
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.deep-research: true
+      ai.web-search: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.computer-use: true
+      ai.integrations: [mcp, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+    featureLabels:
+      ai.code-completion: '2,000 completions per month'
+      ai.computer-use: Computer use in the Copilot app (public preview)
+      ai.scheduled-tasks: Local automations in the Copilot app
+    notes: 'Limited chat and agent use, and models by auto selection only (Claude Haiku 4.5, GPT-5 mini and more). Verified students get Copilot Student free instead, with unlimited completions.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://github.com/features/copilot/plans
+
+  - id: github.copilot-pro
+    name: Copilot Pro
+    link: https://github.com/features/copilot/plans
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.deep-research: true
+      ai.web-search: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.computer-use: true
+      ai.memory: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+    featureLabels:
+      ai.computer-use: Computer use in the Copilot app (public preview)
+    perks: [cloud-agent-code-review, unlimited-completions, third-party-agents, credits-15]
+    notes: '1,000 AI credits a month plus a 500-credit flex allotment; more at $0.01 USD a credit with a budget. Models include Claude Sonnet 5.5, GPT-6.1 Terra, Gemini 4 Hydrogen, Grok 4.7 and Kimi K3. Free for verified teachers and maintainers of popular open-source projects. Monthly only: annual plans bought before June 1, 2026 end in Copilot Free.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://github.com/features/copilot/plans
+
+  - id: github.copilot-pro-plus
+    name: Copilot Pro+
+    link: https://github.com/features/copilot/plans
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.deep-research: true
+      ai.web-search: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.computer-use: true
+      ai.memory: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+    featureLabels:
+      ai.computer-use: Computer use in the Copilot app (public preview)
+    perks:
+      [
+        cloud-agent-code-review,
+        unlimited-completions,
+        third-party-agents,
+        premium-models,
+        usage-4x-pro,
+        credits-70,
+        fusion-high-max,
+        audit-logs,
+      ]
+    notes: '3,900 AI credits a month plus a 3,100-credit flex allotment; more at $0.01 USD a credit with a budget. Adds Claude Opus 5.5, Claude Fable 5.2, GPT-6.1 Sol and Gemini 4 Carbon to Pro’s models. Monthly only: annual plans bought before June 1, 2026 end in Copilot Free.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 39
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://github.com/features/copilot/plans
+
+  - id: github.copilot-max
+    name: Copilot Max
+    link: https://github.com/features/copilot/plans
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.code-completion: true
+      ai.deep-research: true
+      ai.web-search: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.computer-use: true
+      ai.memory: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.early-access: true
+      ai.integrations: [mcp, connectors, ide, cli, custom-assistants]
+      ai.chat-storage: cloud
+    featureLabels:
+      ai.computer-use: Computer use in the Copilot app (public preview)
+      ai.early-access: Priority access to new models and features
+    perks:
+      [
+        cloud-agent-code-review,
+        unlimited-completions,
+        third-party-agents,
+        premium-models,
+        usage-2-9x-pro-plus,
+        credits-200,
+        fusion-high-max,
+        audit-logs,
+      ]
+    notes: '10,000 AI credits a month plus a 10,000-credit flex allotment; more at $0.01 USD a credit with a budget. The same models as Pro+.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 100
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://github.com/features/copilot/plans
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-13 and 2026-11-14 with a plain fetch of
+# GitHub Docs: its Terms of Service (effective April 27, 2026), whose Section J governs Copilot for individuals ("For all
+# other GitHub Copilot users, your use of GitHub Copilot is governed by Section J (AI Features) of the GitHub Terms of
+# Service", its Additional Product Terms), and which include its Privacy Statement, its Acceptable Use Policies and
+# Community Guidelines (conduct rules: enforcement graded under closing your account), and its Additional Product Terms
+# (Actions, Codespaces, Pages and Previews rules: the self-hosted runner's updates graded, the rest no topic's); the GitHub
+# Pre-release License Terms for preview features (computer use, third-party agents: "GitHub may change or discontinue
+# pre-release software at any time, for any reason, without notice to you.", the same grade as the terms'); the GitHub
+# Copilot CLI License (the CLI, which the Copilot app is built on; no licence of the app's own was found); its Cookies
+# page and its help articles on billing, cancelling, deletion, export, legal requests, appeals and support. Not read: the
+# sign-up form, which showed every reader (Edge headless and headed, a plain fetch) a bot check (its screenshot: Access
+# is temporarily restricted); the Data Protection Agreement and Generative AI Services Terms, which are organizations'.
+policies:
+  links:
+    - name: Terms of service
+      url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+    - name: Privacy statement
+      url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+    - name: Acceptable use policies
+      url: https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies
+    - name: Cookies
+      url: https://docs.github.com/en/site-policy/privacy-policies/github-cookies
+    - name: GitHub Copilot CLI License
+      url: https://github.com/github/copilot-cli/blob/main/LICENSE.md
+    - name: Copilot plans and pricing
+      url: https://github.com/features/copilot/plans
+    - name: Cancelling Copilot
+      url: https://docs.github.com/en/copilot/how-tos/manage-your-account/view-and-change-your-copilot-plan
+    - name: Changing your Copilot plan
+      url: https://docs.github.com/en/copilot/reference/copilot-billing/license-changes
+    - name: Changing your plan
+      url: https://docs.github.com/en/billing/concepts/impact-of-plan-changes
+    - name: Copilot billing for individuals
+      url: https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing
+    - name: How GitHub billing works
+      url: https://docs.github.com/en/billing/get-started/how-billing-works
+    - name: Exporting your data
+      url: https://docs.github.com/en/get-started/archiving-your-github-personal-account-and-public-repositories/requesting-an-archive-of-your-personal-accounts-data
+    - name: Backing up a repository
+      url: https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository
+    - name: Legal requests for user data
+      url: https://docs.github.com/en/site-policy/other-site-policies/guidelines-for-legal-requests-of-user-data
+    - name: Transparency Center
+      url: https://transparencycenter.github.com/
+    - name: About GitHub Support
+      url: https://docs.github.com/en/support/learning-about-github-support/about-github-support
+    - name: Compliance reports
+      url: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/accessing-compliance-reports-for-your-organization
+    - name: Coordinated disclosure of security vulnerabilities
+      url: https://docs.github.com/en/site-policy/security-policies/coordinated-disclosure-of-security-vulnerabilities
+    - name: Username policy
+      url: https://docs.github.com/en/site-policy/other-site-policies/github-username-policy
+    - name: Appeal and reinstatement
+      url: https://docs.github.com/en/site-policy/acceptable-use-policies/github-appeal-and-reinstatement
+    - name: Additional product terms
+      url: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features
+  ratings:
+    - topic: privacy.ai-training
+      tier: poor
+      reason: "Your Copilot prompts, answers and code train GitHub's and Microsoft's AI unless you opt out in your settings. What you post on GitHub, like public code, can train their AI with no way to opt out."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You also grant GitHub and its Affiliates a license to collect and use your Inputs and Outputs to develop, train and improve artificial intelligence and machine learning models and technologies including those that power AI Features, unless (a) you opt out through your account settings, or (b) your use of the Service is governed by a GitHub Customer Agreement or volume licensing agreement.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You grant GitHub and our Affiliates the right to store, host, archive, parse, display, and make copies of Your Content as necessary to provide, develop, and improve the Service, including by training AI Features, and for the purpose of training, developing, and improving artificial intelligence and machine learning models and technologies of our Affiliates.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'The opt-out right described in this section applies solely to the use of your Inputs and Outputs as described in this section, and does not apply to the license granted in Sections D.4-D.8 or to any Content that does not constitute Input or Output (including Content stored in public repositories).'
+      action:
+        name: 'How to turn off model training'
+        url: https://docs.github.com/en/copilot/how-tos/manage-your-account/manage-policies
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      tier: neutral
+      reason: "Its staff don't open your private repositories without your consent, except for security, its rules, support you asked for or the law, and its systems check content for abuse. (Training is graded under AI training.)"
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'GitHub considers the contents of private repositories to be confidential to you, as set forth in Section E.2, and GitHub personnel will not access private repository content without your consent except in the following circumstances:'
+        - url: https://docs.github.com/en/support/learning-about-github-support/about-github-support
+          quote: 'GitHub Support will never access your private repositories without your explicit consent.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'Safety and Security: To promote safety, integrity, and security across our Services, we process Personal Data, using both automated and, at times, manual techniques for abuse detection, prevention, and violations of terms of service.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use GitHub, like your device, what you do and when, to run and improve its products, AI included. You can only limit its optional cookies, browser by browser. (Training is graded under AI training.)'
+      sources:
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'Service Usage Information: We collect data about your interactions with the Services, such as IP address, device information, session details, date and time of requests, device type and ID, operating system and application version, information related to your contributions to repositories, and performance of specific features or Services.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'Product Development and Improvement: We use Personal Data to develop and improve our products, services, and technologies, including artificial intelligence and machine learning technologies.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'These choices are specific to the browser you are using.'
+      action:
+        name: 'Its privacy statement’s cookie choices'
+        url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares data with Microsoft, its owner, for marketing, ads and AI, and has shared some with ad networks and social networks. You can only say no browser by browser, with its "Do Not Share" link or a privacy signal.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'Affiliates: Personal Data may be shared with GitHub affiliates, including Microsoft, to facilitate customer service, marketing and advertising, order fulfillment, billing, technical support, legal and compliance obligations, product development and improvement (including training and improving artificial intelligence and machine learning technologies), and for other purposes described in their respective privacy statements.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'We shared each category to or with advertising networks, data analytics providers, and social networks.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'To opt out of the sharing of your personal information, you can click on the "Do Not Share My Personal Information" link on the footer of our Websites or use the Global Privacy Control ("GPC") if available.'
+      action:
+        name: 'How to opt out of sharing'
+        url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: "Its websites may let other companies' cookies collect data to pick ads for you, asking first only in some countries. You can refuse them, but only browser by browser."
+      sources:
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'We may also employ third-party Cookies to gather data for interest-based advertising. In some jurisdictions, we only use non-essential cookies after obtaining your consent.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'These choices are specific to the browser you are using.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-cookies
+          quote: 'You can change your preference about non-essential cookies at any time by following these instructions'
+      action:
+        name: 'How to turn off optional cookies'
+        url: https://docs.github.com/en/site-policy/privacy-policies/github-cookies
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data while your account is open and as long as it needs it. It deletes your profile and repositories within 90 days of closing your account, though some can stay in encrypted backups.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'We’ll retain your Personal Data as long as your account is active and as needed to fulfill contractual obligations, comply with legal requirements, resolve disputes, and enforce agreements.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'barring legal requirements, we will delete your full profile and the Content of your repositories within 90 days of cancellation or termination (though some information may remain in encrypted backups).'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: good
+      reason: "You can close your account yourself in your settings, and it deletes your profile and repositories within 90 days. What you added to others' repositories, or what they copied, stays."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You can cancel your Account at any time by going into your Settings in the global navigation bar at the top of the screen.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'barring legal requirements, we will delete your full profile and the Content of your repositories within 90 days of cancellation or termination (though some information may remain in encrypted backups).'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: "We will not delete Content that you have contributed to other Users' repositories or that other Users have forked."
+      action:
+        name: 'How to delete your account'
+        url: https://docs.github.com/en/account-and-profile/how-tos/account-management/deleting-your-personal-account
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your account’s data yourself from your settings as a tar.gz file, and copy each repository with its whole history using Git.'
+      sources:
+        - url: https://docs.github.com/en/get-started/archiving-your-github-personal-account-and-public-repositories/requesting-an-archive-of-your-personal-accounts-data
+          quote: "You can export your personal account's data through your account settings on GitHub or with the User Migration API."
+        - url: https://docs.github.com/en/get-started/archiving-your-github-personal-account-and-public-repositories/requesting-an-archive-of-your-personal-accounts-data
+          quote: 'When you request an export of your personal data through your account settings on GitHub, GitHub packages your personal data in a tar.gz file and sends you an email to your primary email address with a download link.'
+        - url: https://docs.github.com/en/repositories/archiving-a-github-repository/backing-up-a-repository
+          quote: 'You can take a backup of a Git repository, including the revision history, by performing a mirror clone with the Git CLI.'
+      action:
+        name: 'How to export your data'
+        url: https://docs.github.com/en/get-started/archiving-your-github-personal-account-and-public-repositories/requesting-an-archive-of-your-personal-accounts-data
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It hands over private data only with your consent or valid legal papers, tells you first unless the law forbids it, and publishes how many requests it gets.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/other-site-policies/guidelines-for-legal-requests-of-user-data
+          quote: 'It is our policy to disclose non-public user information in connection with a civil or criminal investigation only with user consent or upon receipt of a valid subpoena, civil investigative demand, court order, search warrant, or other similar valid legal process.'
+        - url: https://docs.github.com/en/site-policy/other-site-policies/guidelines-for-legal-requests-of-user-data
+          quote: 'We will notify affected users about any requests for their account information, unless prohibited from doing so by law or court order.'
+        - url: https://transparencycenter.github.com/
+          quote: 'being transparent about content moderation and disclosure of user information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: "Your data can be kept in the US and other countries where GitHub, its group or its suppliers work. Data from Europe is moved under the EU's and the US's recognised legal safeguards."
+      sources:
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'GitHub stores and processes Personal Data in a variety of locations, including your local region, the United States, and other countries where GitHub, its affiliates, subsidiaries, or subprocessors have operations.'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'GitHub also complies with the EU-U.S. Data Privacy Framework (EU-U.S. DPF), the UK Extension to the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework (Swiss-U.S. DPF) as set forth by the U.S. Department of Commerce.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you need an email address, a username and a password; your real name is optional. Paid plans also need billing details.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You must provide a valid email address in order to complete the signup process.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'Any other information requested, such as your real name, is optional'
+        - url: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+          quote: 'Account Data: We collect certain information when you open an account such as your GitHub handle, name, email address, password, payment information and transaction information.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel Copilot or downgrade GitHub Pro in your settings at any time, and keep what you paid for until the end of the billing period.'
+      sources:
+        - url: https://docs.github.com/en/copilot/how-tos/manage-your-account/view-and-change-your-copilot-plan
+          quote: 'You can cancel your Copilot plan at any time.'
+        - url: https://docs.github.com/en/copilot/how-tos/manage-your-account/view-and-change-your-copilot-plan
+          quote: 'You’ll retain access to your current features until your billing cycle ends.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'however, the service will remain active for the length of the paid billing period.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back, even for unused months, but you keep using it until the end of the period you paid for.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'For monthly or yearly payment plans, the Service is billed in advance on a monthly or yearly basis respectively and is non-refundable.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'There will be no refunds or credits for partial months of service, downgrade refunds, or refunds for months unused with an open Account; however, the service will remain active for the length of the paid billing period.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: great
+      reason: "Your price stays the same until the end of the term you paid for, and it gives at least 30 days' notice of a price rise, by email or on its website."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'If you agree to a subscription price, that will remain your price for the duration of the payment term; however, prices are subject to change at the end of a payment term.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'We will notify our Users of material changes to this Agreement, such as price increases, at least 30 days prior to the change taking effect by posting a notice on our Website or sending email to the primary email address specified in your GitHub account.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms and Copilot’s plans pages describe no free trial for its personal plans: the free plans simply stay free.'
+      pages:
+        - https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+        - https://github.com/features/copilot/plans
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say paid plans are billed in advance each month or year, but not that it reminds you before renewing.'
+      pages:
+        - https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+        - https://docs.github.com/en/billing/get-started/how-billing-works
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: neutral
+      reason: 'Using more than your plan includes, like extra Copilot credits or Actions time, is billed by use at listed rates. Use from your last days on a plan can be billed after you cancel.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'If you choose to use paid Service features beyond the quantity included in your plan, you pay for those Service features based on your actual usage in the preceding month.'
+        - url: https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing
+          quote: 'Your additional usage budget is set in US dollars, and your usage is shown in GitHub AI Credits.'
+        - url: https://docs.github.com/en/copilot/concepts/billing-and-usage/individuals/billing
+          quote: 'Usage from your final days on the plan might not appear on your last invoice, so you might receive a charge after you cancel.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'An upgrade starts at once and you pay only the difference; a downgrade starts at the end of the period you paid for.'
+      sources:
+        - url: https://docs.github.com/en/copilot/reference/copilot-billing/license-changes
+          quote: 'If you upgrade your plan (for example, from Copilot Pro to Copilot Pro+), the change is immediate'
+        - url: https://docs.github.com/en/copilot/reference/copilot-billing/license-changes
+          quote: 'You are charged the full price of the new plan, minus the amount you already paid for your current plan.'
+        - url: https://docs.github.com/en/billing/concepts/impact-of-plan-changes
+          quote: 'Downgrades and cancellations take effect only after the current billing cycle ends.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: "There's no arbitration: disputes go to the courts in San Francisco, California, the ones it chose."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You and GitHub agree to submit to the exclusive jurisdiction and venue of the courts located in the City and County of San Francisco, California.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It warns of big changes, like price rises, at least 30 days ahead, by email or just on its website. Smaller changes apply once posted, and using GitHub means you accept them.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'We will notify our Users of material changes to this Agreement, such as price increases, at least 30 days prior to the change taking effect by posting a notice on our Website or sending email to the primary email address specified in your GitHub account.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'For any other modifications, your continued use of the Website constitutes agreement to our revisions of these Terms of Service.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or close your account at any time, with or without a reason or notice, and its terms promise no refund. You can appeal its decision.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'GitHub has the right to suspend or terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'In order to treat everyone equally, no exceptions will be made.'
+        - url: https://docs.github.com/en/site-policy/acceptable-use-policies/github-appeal-and-reinstatement
+          quote: "If you'd like to seek Reinstatement or wish to Appeal an enforcement action on GitHub or npm, please fill out the applicable form:"
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'What you post stays yours, and its licence ends when you remove it, unless others copied it. But GitHub may hand that licence to any other person or company without asking you.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You own Your Content.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'These licenses end when you remove Your Content, unless other Users have forked it.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'in whole or in part, to any person or entity at any time with or without your consent, including the license grant in Section D.4.'
+      lastVerified: 2026-11-13
+    - topic: legal.output-rights
+      tier: good
+      reason: "GitHub doesn't claim what Copilot writes for you. It may look like other people's code, though, and checking whether you need their licence is up to you."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'GitHub does not claim ownership of your Input or Output.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'You are responsible for determining whether your use of Output requires a third-party license and for complying with any such license.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: "It can change or stop GitHub and Copilot at any time without notice and says it isn't liable for that. The extra Copilot use your plan includes can change over time."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'We reserve the right at any time and from time to time to modify or discontinue, temporarily or permanently, the Website (or any part of it) with or without notice.'
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'any modification, price change, suspension or discontinuance of the Service;'
+        - url: https://github.com/features/copilot/plans
+          quote: 'Variable additional usage on top of your base. Flex allotments may change over time.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'Usernames are for active use: an account kept unused just to hold on to its name can be removed or renamed without warning.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/other-site-policies/github-username-policy
+          quote: 'GitHub prohibits account name squatting, and account names may not be reserved or inactively held for future use.'
+        - url: https://docs.github.com/en/site-policy/other-site-policies/github-username-policy
+          quote: 'Accounts violating this name squatting policy may be removed or renamed without notice.'
+      lastVerified: 2026-11-14
+    - topic: legal.licence
+      tier: good
+      reason: 'You may install and run its apps, but not change or resell them, or copy GitHub’s service, without its permission.'
+      sources:
+        - url: https://github.com/github/copilot-cli/blob/main/LICENSE.md
+          quote: 'license to install and run copies of the GitHub Copilot CLI (the “Software”).'
+        - url: https://github.com/github/copilot-cli/blob/main/LICENSE.md
+          quote: 'This License does not grant you the right to: Modify, adapt, translate, or create derivative works of the Software;'
+        - url: https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies
+          quote: 'You will not reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service without our express written permission.'
+      lastVerified: 2026-11-14
+    - topic: service.software-control
+      tier: good
+      reason: "Its self-hosted runner software updates itself; you can turn that off, but it may still install critical security fixes. Its terms don't say its apps change anything else."
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-for-additional-products-and-features
+          quote: 'If you use self-hosted runners, you have the ability to turn off automatic updates but GitHub reserves the right to override your choice for critical security updates.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Your login is for one person only: you can’t share it with anyone, even at home.'
+      sources:
+        - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
+          quote: 'Your login may only be used by one person — i.e., a single login may not be shared by multiple people.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: good
+      reason: 'An outside certification (ISO 27001) covers its security, and it pays security researchers who report problems through its bug bounty.'
+      sources:
+        - url: https://docs.github.com/en/organizations/keeping-your-organization-secure/managing-security-settings-for-your-organization/accessing-compliance-reports-for-your-organization
+          quote: 'ISO/IEC 27001:2022 certification'
+        - url: https://docs.github.com/en/site-policy/security-policies/coordinated-disclosure-of-security-vulnerabilities
+          quote: 'Like several other large software companies, GitHub provides a bug bounty to better engage with security researchers.'
+      lastVerified: 2026-11-13
