@@ -69,7 +69,9 @@ sources: { pricing: https://www.kaspersky.ca/premium }
 # own strategic report on media.kaspersky.com (the newest on its site is for financial year 2020). The software's
 # rightholder is its Russian subsidiary: "Rightholder (owner of all rights, whether exclusive or otherwise, to the
 # Software) means AO Kaspersky Lab, a company incorporated according to the laws of the Russian Federation." (its EULA),
-# which is also its privacy policy's controller, in Moscow.
+# which is also its privacy policy's controller, in Moscow. Both are shown (the owner's choice, 2026-11-13): the holding
+# company as the owner, and the Russian rightholder in the provider's notes.
+notes: Its holding company is Kaspersky Labs Limited in the UK (its newest report on its site is from 2020). The software and your data are AO Kaspersky Lab's, a company in Russia (its licence and privacy policy).
 owner:
   name: Kaspersky Labs Limited
   page:
@@ -155,7 +157,33 @@ perks:
 # Wi-Fi for vulnerabilities"), "24/7 Remote IT Support", the expert checks and Safe Kids for a year. Its VPN page: "120+
 # server locations across 93 countries", WireGuard, "Split Tunneling"; Premium's page: "Ensure your online actions aren’t
 # logged" and "Torrent faster". No kill switch, multi-hop or audit stated. The other countries' cards list the same tiers;
-# their own comparison tables weren't read. No page read names scan kinds or behaviour-based detection.
+# their own comparison tables weren't read.
+# Read again 2026-11-13 (a review found the sales pages name no scan kinds or behaviour-based detection): the online
+# help of its Windows app (Kaspersky for Windows 21.18, July 2024, the newest edition its help centre serves) and of its
+# Android app (October 2024), whose plan tables tick each feature for Standard, Plus and Premium ("The following table
+# lists the application functionality available for each subscription plan."): every plan has System Watcher,
+# Emergency Recovery, Vulnerability Scan and Firewall, and on Android Where Is My Device, Safe Messaging and Unsecured
+# Wi-Fi detection. These support articles outweigh the sales pages' silence (Bitdefender's precedent).
+# - Behaviour-based detection: "System Watcher analyzes application activity and provides other Kaspersky components
+#   with the collected information about events." Its data "is used to track malicious and other activity of the
+#   application (including ransomware)" and to roll it back. No page says files ransomware encrypted come back, so
+#   file recovery isn't added (inferring it would mark the stated blocking inferred too).
+# - Scans: "Full Scan. Scans all areas of the computer.", with Quick, Selective and removable-drive scans; a scan
+#   schedule ("select a period, such as Daily"); and its rescue disk: "Kaspersky Rescue Disk is intended for emergency
+#   recovery of the operating system." ("Emergency Recovery" in the plan table).
+# - Vulnerability scan: "Application Vulnerability Scan. Scan the computer for vulnerabilities in applications that
+#   malware can exploit to infect your system."
+# - Wi-Fi check: its Firewall's "When you attempt to connect to a Wi-Fi network with the relevant vulnerability,
+#   Kaspersky application notifies you about it.", and Android's Unsecured Wi-Fi detection.
+# - Anti-theft (Android): "Get the location of the missing device, lock it and show a message on the screen of the
+#   locked device." and "Perform a factory reset on the device, including wiping the memory card."
+# - Scam protection in texts and chat apps: "Safe Messaging checks texts and instant messages you receive for phishing
+#   links." ("available in the Standard, Plus, and Premium subscription plans"). Its Call Filter only blocks the
+#   numbers you list ("The app filters calls by using a contact denylist that you create."), so no calls.
+# - Not changed: both help tables tick Smart Home Monitor for Plus too, but Canada's current comparison lists it on
+#   Premium only; the Windows table has no Anti-Spam row.
+# Articles: support.kaspersky.com/us/kaspersky-for-windows/21.18/ 152975 (plans), 68174, 82511, 202599, 96493, 70776
+# and 81791; support.kaspersky.com/us/kaspersky-for-android/ 141191 (plans), 71836 and 206459.
 plans:
   - id: kaspersky.standard
     name: 'Standard'
@@ -166,11 +194,15 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     notSoldIn:
       - regions: [US]
         url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
@@ -221,11 +253,15 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     notSoldIn:
       - regions: [US]
         url: https://usa.kaspersky.com/about/press-releases/kaspersky-statement-on-compliance-in-the-us-following-icts-final-determination
@@ -275,11 +311,11 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
@@ -290,6 +326,10 @@ plans:
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     perks: [hdd-health]
     notSoldIn:
       - regions: [US]
@@ -342,11 +382,11 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
@@ -357,6 +397,10 @@ plans:
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     perks: [hdd-health]
     notSoldIn:
       - regions: [US]
@@ -383,11 +427,11 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
@@ -398,6 +442,10 @@ plans:
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     perks: [hdd-health]
     notSoldIn:
       - regions: [US]
@@ -440,11 +488,11 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
@@ -455,6 +503,10 @@ plans:
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     perks:
       [
         hdd-health,
@@ -499,11 +551,11 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
@@ -514,6 +566,10 @@ plans:
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     perks:
       [
         hdd-health,
@@ -564,11 +620,11 @@ plans:
       antivirus.real-time: true
       antivirus.ransomware: [blocking]
       antivirus.web-protection: true
-      antivirus.scam-protection: [web]
+      antivirus.scam-protection: [web, sms, chat]
       antivirus.secure-browser: true
       antivirus.optimizer: true
       antivirus.activity-modes: true
-      antivirus.network: [firewall, home-network-scan]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
       antivirus.cryptomining: true
       security.dark-web-monitoring: true
       password-manager: true
@@ -579,6 +635,10 @@ plans:
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.vulnerability-scan: true
+      antivirus.anti-theft: [locate, lock, wipe]
     perks:
       [
         hdd-health,
