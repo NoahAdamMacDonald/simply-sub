@@ -69,7 +69,9 @@ sources: { pricing: https://www.kaspersky.ca/premium }
 # own strategic report on media.kaspersky.com (the newest on its site is for financial year 2020). The software's
 # rightholder is its Russian subsidiary: "Rightholder (owner of all rights, whether exclusive or otherwise, to the
 # Software) means AO Kaspersky Lab, a company incorporated according to the laws of the Russian Federation." (its EULA),
-# which is also its privacy policy's controller, in Moscow.
+# which is also its privacy policy's controller, in Moscow. Both are shown (the owner's choice, 2026-11-13): the holding
+# company as the owner, and the Russian rightholder in the provider's notes.
+notes: Its holding company is Kaspersky Labs Limited in the UK (its newest report on its site is from 2020). The software and your data are AO Kaspersky Lab's, a company in Russia (its licence and privacy policy).
 owner:
   name: Kaspersky Labs Limited
   page:
