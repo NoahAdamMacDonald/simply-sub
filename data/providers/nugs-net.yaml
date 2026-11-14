@@ -378,13 +378,13 @@ policies:
         url: https://www.nugs.net/privacy-policy.html
       lastVerified: 2026-11-13
     - topic: privacy.government-requests
-      tier: poor
-      reason: 'It may hand over what it holds about you to the police or a government that asks, not only under a court order, whenever it decides that’s necessary or appropriate.'
+      tier: neutral
+      reason: 'If it believes a crime has happened, it may hand over what it holds about you to follow the law, legal process or a government’s request. It doesn’t say it tells you.'
       sources:
         - url: https://www.nugs.net/terms.html
-          quote: "disclose any information or materials on or in the Service, including Your Content, in Company's possession in connection with your use of the Service, to (i) comply with applicable laws, legal process or governmental request"
-        - url: https://www.nugs.net/terms.html
-          quote: 'as Company in its sole discretion believes to be necessary or appropriate.'
+          quote: "If Company believes that criminal activity has occurred, Company reserves the right to, except to the extent prohibited by applicable law, disclose any information or materials on or in the Service, including Your Content, in Company's possession in connection with your use of the Service, to (i) comply with applicable laws, legal process or governmental request"
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'comply with applicable laws, lawful requests, and legal process, such as to respond to subpoenas, investigations or requests from government authorities;'
       lastVerified: 2026-11-13
     - topic: privacy.data-location
       tier: poor

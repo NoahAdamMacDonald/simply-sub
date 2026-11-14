@@ -542,7 +542,7 @@ policies:
           quote: 'Download Infuse 8 (free w/ optional in-app purchase)'
       lastVerified: 2026-11-13
     - topic: privacy.children
-      tier: good
+      tier: neutral
       reason: 'It isn’t meant for under-18s, and it removes children’s data it gets without a parent’s consent. Infuse has no ads, and parents can limit what children can see by rating and folder.'
       sources:
         - url: https://firecore.com/privacy

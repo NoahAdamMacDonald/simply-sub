@@ -201,8 +201,9 @@ perks:
 # - Phantom VPN Pro (avira.com/en/vpn-pro): "1400 servers in 36 countries around the world" with its list (Isle of Man
 #   among them; its help centre's list of "virtual locations" names 35, without it), "Unlimited data", "Kill switch
 #   (Windows Feature)", "P2P file sharing", "Avira has a no-log policy and doesn’t know what websites you visit" (no audit
-#   named). Its checkout sells it for "1 device / Yearly subscription". Protocols, split tunneling and multi-hop: no page
-#   read states them.
+#   named), "Get unlimited, secure traffic on all your devices", with no count: its checkout's "1 device / Yearly
+#   subscription" is the link's users=1 echoed back, so vpn.devices waits for a help article that states it. Protocols,
+#   split tunneling and multi-hop: no page read states them.
 plans:
   # Free Security (its page, en/free-security): antivirus, anti-ransomware, browser protection, a software updater, a
   # home network scan, a password manager, a shredder, speed-up tools and the free Phantom VPN (500 MB a month).
@@ -1065,7 +1066,8 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-13
         sourceUrl: https://www.avira.com/en/prime
-  # Phantom VPN Pro (its page, en/vpn-pro): monthly and annual plans, "1 device" at its checkout.
+  # Phantom VPN Pro (its page, en/vpn-pro): monthly and annual plans. No device count: its page says "on all your
+  # devices", and its checkout's "1 device" is only the link's users=1 echoed back.
   - id: avira.phantom-vpn-pro
     name: 'Phantom VPN Pro'
     link: https://www.avira.com/en/vpn-pro
@@ -1074,11 +1076,10 @@ plans:
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.server-countries: 36
-      vpn.devices: 1
       vpn.kill-switch: true
       vpn.p2p: true
       vpn.no-logs-policy: true
-    notes: 'An unlimited VPN for 1 device, with servers in 36 countries, a kill switch on Windows and P2P.'
+    notes: 'An unlimited VPN, with servers in 36 countries, a kill switch on Windows and P2P.'
     prices:
       - region: CA
         currency: CAD
@@ -1268,11 +1269,12 @@ plans:
 # Privacy Notice, which its Privacy Center follows ("we follow our group General Privacy Notice which includes
 # information broadly applicable across all Gen brands, services and products"), rated once as a shared document
 # (data/policies/gen-digital-privacy.yaml). The provider-wide ratings take the worse of the two regions' documents; the
-# European ones (the UK, Ireland and the euro countries) are rated for those regions where they're better. Read but
-# holding no topic of their own: its Right of Withdrawal page and the Americas Terms of Sale (they repeat the refund and
-# renewal terms). Not read: the 2021 licence's Section I (German, for Germany, Austria and Switzerland), Cleverbridge's
-# own Terms & Conditions (its checkout's reseller), the checkout's agreement line (seen, not opened) and the
-# Asia-Pacific Terms of Sale.
+# European ones (the UK, Ireland and the euro countries) are rated for those regions where they're better. The
+# Americas Terms of Sale hold the provider-wide grade for changes to the terms (§3: "effective immediately"); their
+# refund and renewal terms repeat the licence's. Read but holding no topic of its own: its Right of Withdrawal page (it
+# repeats the refund terms). Not read: the 2021 licence's Section I (German, for Germany, Austria and Switzerland),
+# Cleverbridge's own Terms & Conditions (its checkout's reseller), the checkout's agreement line (seen, not opened) and
+# the Asia-Pacific Terms of Sale.
 policies:
   shared: [gen-digital-privacy]
   links:
@@ -1282,6 +1284,8 @@ policies:
       url: https://www.avira.com/en/avira-license-services-agreement
     - name: 'Terms of Sale (Europe)'
       url: https://www.avira.com/en/avira-terms-of-sale
+    - name: 'Terms of Sale (Americas)'
+      url: https://www.avira.com/en/standard-terms-conditions-business-us
     - name: 'Cancellation and Refund Policy'
       url: https://www.avira.com/en/cancellation-and-refund-policy
     - name: 'Subscription details'
@@ -1349,8 +1353,8 @@ policies:
           quote: 'A price change will not affect an order that we have already accepted, except if you expressly agree otherwise. If the price for your subscription changes at renewal, we will send you a notification email in advance and you can cancel your subscription renewal or terminate your contract if you do not accept the price change.'
       lastVerified: 2026-11-13
     - topic: billing.free-trials
-      tier: neutral
-      reason: 'A trial needs a payment method and turns into a paid plan unless you cancel before it ends. It charges nothing during the trial.'
+      tier: poor
+      reason: 'A trial needs a payment method up front and turns into a paid plan unless you cancel before it ends. It charges nothing during the trial, but outside Europe and the UK no reminder is promised before it charges you.'
       sources:
         - url: https://www.avira.com/en/legal-terms
           quote: 'For trials, a payment method is required at sign-up and will be charged at the end of the trial period, unless cancelled first.'
@@ -1408,13 +1412,13 @@ policies:
           quote: 'is governed by the laws of the country you live in, and you can file legal disputes in the courts of that country.'
       lastVerified: 2026-11-13
     - topic: legal.terms-changes
-      tier: neutral
-      reason: 'It posts new terms on its website and will likely ask you to accept them. If you don’t agree, you can stop using it and may get a refund.'
+      tier: bad
+      reason: 'In the Americas its terms of sale can change at any time and take effect at once, without telling you, and using its web shop after that means you accept them.'
       sources:
-        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
-          quote: 'We will publish these revised Terms on our website, but will likely require you to accept the updated Terms.'
-        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
-          quote: 'If you do not agree with a modification to these Terms, you may stop using our Products and be eligible for a refund, as applicable.'
+        - url: https://www.avira.com/en/standard-terms-conditions-business-us
+          quote: 'Avira reserves the right to change, update, amend or modify these Terms and Conditions at any time. Such modification, updates and/or amendments will be effective immediately and incorporated into this Agreement.'
+        - url: https://www.avira.com/en/standard-terms-conditions-business-us
+          quote: 'Your continued use of our Web Shop will be deemed acceptance of the amended Terms and Conditions.'
       lastVerified: 2026-11-13
     - topic: legal.terms-changes
       regions: [GB, IE, DE, FR, NL, ES, IT]
@@ -1521,8 +1525,18 @@ policies:
         ]
       lastVerified: 2026-11-13
     - topic: service.software-control
+      tier: good
+      reason: 'Its apps may update themselves without asking, which its licence for the Americas and Asia-Pacific says, but it won’t change the features you paid for that way without your consent.'
+      sources:
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'For the purposes of ease-of-use and effective operation of our Products, you agree that particular Updates and/or Upgrades may be automatically installed with or without user interaction.'
+        - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
+          quote: 'We will not implement automatic installations which lead to a material change in the features of a Product for which you have purchased a license without your consent.'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      regions: [GB, IE, DE, FR, NL, ES, IT]
       tier: poor
-      reason: 'As it installs, it may remove or switch off other security apps on your device.'
+      reason: 'In Europe and the UK, as it installs, it may remove or switch off other security apps on your device.'
       sources:
         - url: https://www.avira.com/en/avira-license-services-agreement
           quote: 'During the installation process, the Software may uninstall or disable other similar security products/services, or features of such products/services, if such products/services or features are incompatible with the Software or for purposes of improving the overall functionality of the Software.'
@@ -1533,6 +1547,12 @@ policies:
       sources:
         - url: https://www.avira.com/en/end-user-license-agreement-terms-of-use-2021
           quote: 'you grant Avira a royalty-free, unrestricted, worldwide, perpetual, irrevocable, non-exclusive and fully sub-licensable right and license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, perform, display and otherwise fully exploit Your Content'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      status: not-stated
+      reason: 'In Europe and the UK its licence takes rights only over feedback and reviews you send, not over your password vault or anything else you store.'
+      pages: [https://www.avira.com/en/avira-license-services-agreement]
       lastVerified: 2026-11-13
     - topic: privacy.content-access
       tier: great

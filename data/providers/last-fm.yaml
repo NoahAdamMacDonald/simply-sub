@@ -25,10 +25,9 @@
 # site, so anywhere you see this play button it means you can hear full-length version of that track or album." (How do
 # I listen to music on Last.fm?), "Youtube playback is free for all users in all countries where available, however you
 # will need a Spotify Premium account to use Spotify as playback source." (Do I have to pay to listen to music on
-# Last.fm?). So its plans are in music, where its buyers look, and social for its profiles: "connect and engage with
-# other users" (its privacy policy), "Friends and neighbours" and "Every music profile is public" (What do I get for
-# signing up?). Audio quality has no honest value: the sound is YouTube's or Spotify's, which no Last.fm page states,
-# so it waits in awaitingRequiredFeatures (notes.md).
+# Last.fm?). So it's a social service (the decision at `category:`): "connect and engage with other users" (its privacy
+# policy), "Friends and neighbours" and "Every music profile is public" (What do I get for signing up?). It states no
+# audio quality, because it plays none: the sound is YouTube's or Spotify's.
 # Features: the Pro page's comparison table ("Last.month listening report", "Edit your scrobbles", "Change your
 # username", "Advanced stats", "Blasts from the Past", "Historical listening reports", "Advanced playlist templates",
 # "Exclusive display options", "Early access to new features", "30% discount on Last.fm merch", "Ad-free browsing",
@@ -434,15 +433,18 @@ policies:
         url: https://www.last.fm/legal/cookies
       lastVerified: 2026-11-13
     - topic: privacy.data-sharing
-      tier: bad
-      reason: 'It gives your email (coded) and what you do on Last.fm to Meta, Snap and X to show you ads there, and your details to partners who use them under their own policies. It offers no way to stop that, except to Californians.'
+      tier: poor
+      reason: 'It gives your email (coded) and what you do on Last.fm to Meta, Snap and X to show you ads there, and your details to partners for their own use. You can opt out only in part, device by device and browser by browser.'
       sources:
         - url: https://www.last.fm/legal/privacy
           quote: 'We share your personal information with social media companies such as Meta, Snap, X, etc. so that we can communicate with you or provide you with relevant advertising related to your interests on those platforms.'
         - url: https://www.last.fm/legal/privacy
           quote: 'These commercial partners use the information we provide to them as described in their privacy policies.'
         - url: https://www.last.fm/legal/privacy
-          quote: 'Opt-out of the "sale" or "sharing" of your personal information'
+          quote: 'Please note that your choice to opt-out is device-specific or browser-specific and you will need to manage your preferences for each device or browser you use.'
+      action:
+        name: Its Privacy Policy (interest-based advertising)
+        url: https://www.last.fm/legal/privacy
       lastVerified: 2026-11-13
     - topic: privacy.ads-tracking
       tier: poor
@@ -599,7 +601,7 @@ policies:
       lastVerified: 2026-11-13
     - topic: billing.fees
       tier: poor
-      reason: 'Its terms let it add transaction fees to the price without saying what they are. Outside the UK and Europe you pay in US dollars, so your bank may charge to convert.'
+      reason: 'Its terms let it add transaction fees to the price without saying what they are.'
       sources:
         - url: https://www.last.fm/legal/subscription
           quote: 'When you subscribe to Last.fm Pro and provide a Payment Method, you authorize us to charge your Payment Method the applicable subscription fee, along with any other taxes or transaction fees which may apply to your use of Last.fm Pro.'

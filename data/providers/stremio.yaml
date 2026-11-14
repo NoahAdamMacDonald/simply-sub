@@ -11,17 +11,18 @@
 # Without them you will not be able to see any content in Stremio." "Official Add-ons are created and maintained by
 # Stremio", and "Most of the available Add-ons were created by community. Stremio doesn't control them" (How to
 # install/uninstall Add-ons); its terms call them "Community Addons", "developed by independent third-party developers".
-# Listed neutrally as a free media centre with a paid Supporter plan, by its own pages' words (notes.md).
+# Listed neutrally as a free media centre, by its own pages' words (notes.md): only its free Basic plan, since its paid
+# Supporter tier is held back (the decision below the owner block).
 # Pricing: its plans page (stremio.com/plans; stremio.com/donate leads there): "Basic free Forever All Current Stremio
-# Features"; "Supporter" with a Monthly and an Annually tab, "$3.49 per month" and "$39.99 per year"; and "Lifetime
-# $199.99 Forever paid once". The same for every reader: the page's own script holds the two prices as fixed figures
-# (`u==="monthly"?"3.49":"39.99"`), and the page read through a German and a US exit showed the same "$3.49" and
-# "$39.99". No page names the currency (a bare "$"; its help centre, terms and blog don't price it): priced for
-# everywhere in US dollars, the only dollar one price list for every country can be, and flagged for the owner
-# (notes.md). Its checkout opens only after signing in ("You need to be signed in"), and was paused when read: "Payments
-# are temporarily unavailable" "Payments for Supporter plans are paused for a short while" (stremio.com/payment).
-# Not listed: Lifetime, a one-time purchase ("The Lifetime plan is a one-time payment with nothing to renew or cancel.",
-# the owner's rule for lifetime plans, as Plex Pass's and Emby Premiere's).
+# Features", the one plan listed; "Supporter" with a Monthly and an Annually tab, "$3.49 per month" and "$39.99 per
+# year"; and "Lifetime $199.99 Forever paid once". The same for every reader: the page's own script holds the two prices
+# as fixed figures (`u==="monthly"?"3.49":"39.99"`), and the page read through a German and a US exit showed the same
+# "$3.49" and "$39.99". No page names the currency (a bare "$"; its help centre, terms and blog don't price it). Its
+# checkout opens only after signing in ("You need to be signed in"), and was paused when read: "Payments are temporarily
+# unavailable" "Payments for Supporter plans are paused for a short while" (stremio.com/payment). So Supporter isn't
+# listed (its prices are in the provider's notes) until payments open again. Not listed either: Lifetime, a one-time
+# purchase ("The Lifetime plan is a one-time payment with nothing to renew or cancel.", the owner's rule for lifetime
+# plans, as Plex Pass's and Emby Premiere's).
 # Region checklist, 2026-11-13: 1. its translated pages (/translation/fr/, /br/, /pt/) translate only; 2. a language
 # menu, no country or currency picker; 3. the page's script holds one price list, with no currency; 4. the plan picker up
 # to its log-in page (stremio.com/login?returnUrl=/payment?subscription=yearly), typing nothing; 5. its help centre has
@@ -351,22 +352,18 @@ policies:
           quote: 'We will validate and fix confirmed vulnerabilities in accordance with our security and privacy policy.'
       lastVerified: 2026-11-13
     - topic: service.account-sharing
-      tier: good
-      reason: 'Supporter’s profiles are made for everyone in your household. Its terms say not to give your password to anyone else or use someone else’s.'
-      sources:
-        - url: https://www.stremio.com/plans
-          quote: 'User Profiles For Everyone In Your Household'
-        - url: https://www.stremio.com/tos
-          quote: 'You agree neither to disclose your username and password to any third parties, nor to use the username or password of another Registered User.'
+      status: not-stated
+      reason: 'No page says whether you may share the free app’s account with others. Its terms only say not to give your password to anyone, and anyone can install the app for free.'
+      pages: [https://www.stremio.com/tos, https://www.stremio.com/plans, https://www.stremio.com/]
       lastVerified: 2026-11-13
     - topic: service.device-limits
       tier: great
-      reason: 'It names no limit on devices: Supporter’s features work on every device where you sign in.'
+      reason: 'It names no limit on devices: sign in on each of your devices and carry on watching where you left off.'
       sources:
-        - url: https://www.stremio.com/plans
-          quote: 'As soon as your support is active, the features unlock automatically on every device where you are signed in with the same Stremio account.'
-        - url: https://www.stremio.com/plans
-          quote: 'Yes. Your benefits are tied to your Stremio account, so signing in on desktop, web, mobile, or TV with the same account gives you the same features everywhere.'
+        - url: https://www.stremio.com/
+          quote: 'Available for a wide range of platforms (incl. Windows, Mac, Linux, Android and more), Stremio will keep track of your progress across all your devices.'
+        - url: https://www.stremio.com/
+          quote: 'Just login and continue watching without having to configure the app again on each new device.'
       lastVerified: 2026-11-13
     - topic: other.notable
       title: Most add-ons are other people’s

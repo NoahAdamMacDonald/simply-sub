@@ -839,8 +839,8 @@ policies:
           quote: 'For annual subscriptions, we will notify you up to 65 days ahead of the anniversary of your subscription to remind you of the anniversary as well as the subscription fee that will be billed for the subsequent period.'
       lastVerified: 2026-11-13
     - topic: billing.free-trials
-      tier: neutral
-      reason: 'Its trials started in the app need a payment method and turn into a paid plan unless you cancel before they end. Its 30-day trial on a PC needs no card.'
+      tier: poor
+      reason: 'Its trials started in the app need a payment method up front and turn into a paid plan unless you cancel before they end, with no reminder promised. Its 30-day trial on a PC needs no card.'
       sources:
         - url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-antivirus-faq
           quote: 'A payment method is required to sign up for a free trial. When the trial ends, your paid subscription starts, unless cancelled before.'
