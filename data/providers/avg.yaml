@@ -1,0 +1,990 @@
+# Researched by hand on 2026-11-13 (M11.15, security batch 1), read from Canada with a plain fetch (each locale's store and
+# product pages, its legal pages, its support centre, Gen Digital's pages) and with Edge (Canada's store and product
+# pages, the UK's Internet Security page and store, to see the rendered prices). Pages, each quoted where it's used:
+# Pricing: each locale's store (avg.com/<locale>/store) and product pages (/internet-security, /ultimate, /secure-vpn,
+# /free-antivirus-download). Each locale's pages carry their own prices in the page's data, in its own country's
+# currency whoever reads them ("currency":"CAD" and "CAN$" for Canada, "USD" for the US, "GBP", "AUD", "NZD", "EUR"), and
+# its checkout links name the locale (checkout.avg.com/en-ca/...). Ireland has no locale of its own (/en-ie/ is the
+# Worldwide site, in US dollars): an Irish visitor is sent to "Europe (English)" (/en-eu/), read 2026-11-13 through an
+# Irish exit, so en-eu is Ireland's; the US's store read through a US exit showed en-us's prices. The regular price is
+# the one each card names ("Savings compared to renewal price CAN$89.99/year.", "It automatically renews at
+# £69.99/year unless cancelled."); the first year's is an offer. Every plan is yearly (its subscription details: "an
+# annual fee"); the VPN's 2- and 3-year cards are first terms ("billed at once for the first 2 years") that renew at
+# the yearly price ("Savings compared to renewal price CAN$119.99/year." on each), so only yearly is stored. No page says
+# its prices include tax.
+# The UK store's 1 PC and 1 Mac cards say "After the first year, it automatically renews every year at £89.99", the
+# 10-device price; the Internet Security page's own options say "It automatically renews at £69.99/year" for them, which
+# the page's data agrees with: £69.99 is stored (notes.md).
+# Region checklist for CA and US, 2026-11-13: 1. its locales (en-ca, fr-ca, en-us); 2. its country picker (the same);
+# 3. its pages' price data names the currency; 4. the checkout wasn't opened; 5. its subscription details and its
+# cancelling FAQ; 6. Edge and a plain fetch, the US through a US exit too; 7. no bill offered.
+# Not drafted (notes.md): AntiTrack, BreachGuard, TuneUp, Driver Updater, Secure Browser, Secure Identity (the US's, the
+# UK's, Australia's, New Zealand's and the euro countries' identity protection), Mobile Security's own plans and Premium
+# Tech Support.
+# Bundles: Ultimate is its own suite (a plan, includes-subscription). Official resellers: none named; its partner pages
+# (avg.com/en-ca/partners) are for businesses and affiliates, and app stores bill its mobile apps (partners, not
+# listed).
+# Free use: AntiVirus FREE (its plan below).
+
+id: avg
+name: AVG
+website: https://www.avg.com
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its support centre's "Canceling an AVG subscription - FAQs": "Click Unsubscribe under the subscription you want to
+# cancel." in your AVG Account.
+cancelUrl: https://support.avg.com/SupportArticleView?l=en&urlName=AVG-Unsubscribe-FAQ
+sources: { pricing: https://www.avg.com/en-ca/store }
+# Owner (M11.2), read 2026-11-13: AVG's own Profile page says it's part of Gen, and every avg.com page's footer is "©
+# 2026 Gen Digital Inc."; its licence is Gen Digital Inc.'s in the Americas ("a. North, Central, and South America Gen
+# Digital Inc.") and Avast Software s.r.o.'s in most of Europe. Gen's Who We Are page names its headquarters; its
+# country is the US, as Norton's and Avast's (notes.md). Shares: Gen's investor FAQs.
+owner:
+  name: Gen Digital Inc.
+  website: https://www.gendigital.com
+  page:
+    name: 'Profile'
+    url: https://www.avg.com/en-ca/profile
+  quotes:
+    - 'AVG is part of Gen™ - a global company with a family of trusted consumer brands.'
+    - '© 2026 Gen Digital Inc. All rights reserved.'
+  country:
+    code: US
+    page:
+      name: 'Who We Are (Gen)'
+      url: https://www.gendigital.com/us/en/who-we-are/
+    quotes:
+      - 'Our global workforce has dual headquarters in Prague, Czech Republic and Tempe, Arizona, USA.'
+    lastVerified: 2026-11-13
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: GEN }
+    page:
+      name: 'Investor FAQs (Gen)'
+      url: https://investor.gendigital.com/resources/investor-faqs/default.aspx
+    quotes:
+      - 'Gen’s ticker symbol is GEN.'
+      - 'Gen’s common stock is traded on the Nasdaq Global Select Market.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: its subscription details ("your bank card or PayPal account") and its cancelling
+# FAQ (subscriptions "purchased via Google Play Store" and "via the App Store"). No page read names the card networks.
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'Subscription details'
+    url: https://www.avg.com/en-ca/subscription-details
+    quotes:
+      - 'A subscription is the commitment from AVG to you, our customer, that we will continuously work to protect, optimise and connect you virtually in exchange for an annual fee that we bill to your bank card or PayPal account.'
+  - methods: [app-store]
+    page: 'Canceling an AVG subscription - FAQs'
+    url: https://support.avg.com/SupportArticleView?l=en&urlName=AVG-Unsubscribe-FAQ
+    quotes:
+      - 'The information in this section only applies to subscriptions purchased via Google Play Store .'
+      - 'The information in this section only applies to subscriptions purchased via the App Store .'
+# Renewal day (M11.5, M11.21): the anniversary of the subscription, charged "up to 35 days prior to the anniversary of
+# your subscription to AVG" (Subscription details; its cancelling FAQ: "Your billing date can be up to 35 days before the
+# start of the next subscription period"): a new yearly item is charged 35 days early, the earliest it can be.
+renewalAnchor:
+  kind: same-date
+  page: 'Subscription details'
+  url: https://www.avg.com/en-ca/subscription-details
+  quotes:
+    - 'The fees will be charged to your stored payment details up to 35 days prior to the anniversary of your subscription to AVG.'
+  chargedBefore: { days: 35, upTo: true }
+  lastVerified: 2026-11-13
+# Lab results (M11.2), read 2026-11-13: AV-TEST's newest home-user Windows test, Jul-Aug 2026 (report 261403), of AVG
+# AntiVirus Free 26.6 and 26.7, whose protection Internet Security adds to ("AVG Internet Security includes all of the
+# free features that are included in AVG AntiVirus Free", its support centre). AV-TEST's October 2026 page has no
+# results yet. AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml.
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/avg-antivirus-free-26.6--26.7-261403/
+    tested: AntiVirus Free 26.6 & 26.7, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/avg-antivirus-free-26.6--26.7-261403/
+    tested: AntiVirus Free 26.6 & 26.7, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/avg-antivirus-free-26.6--26.7-261403/
+    tested: AntiVirus Free 26.6 & 26.7, Windows 11
+
+# Categories (M11.3): an antivirus first (security); Ultimate and Secure VPN are VPN plans too. No plan has a password
+# manager (Internet Security's "Defend passwords from suspicious apps" guards the browser's own).
+# General features, read 2026-11-13: "Works on PC, Mac, Android, and iOS" (its VPN page) and each product page's system
+# requirements (Windows, macOS, Android, iOS). App languages: each product page's "Languages" lists the Windows app's
+# ("Chinese (simplified), Chinese (traditional), Czech, Danish, Dutch, English, French, German, Hungarian, Indonesian,
+# Italian, Japanese, Korean, Malay, Polish, Portuguese (Brazil), Portuguese (Portugal), Russian, Serbian, Slovak,
+# Spanish, and Turkish"), the Mac app's ("English only"), and Android's and iOS's, which add Arabic and Hindi; the
+# Windows app's, the main one, are stated (notes.md). Sign-in and support channels: no page read lists them.
+features:
+  platforms: [windows, macos, android, ios]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
+
+# Perks (M11.6): Internet Security's Windows shields no feature describes, in its support centre's words.
+perks:
+  - id: remote-access-shield
+    name: Remote Access Shield
+  - id: sensitive-data-shield
+    name: Sensitive Data Shield
+
+# Features in depth, read 2026-11-13 from its support centre's "AVG Internet Security and AVG AntiVirus - FAQs"
+# (support.avg.com, urlName=avg-antivirus-faq), which outweighs the sales pages' comparison tables (Bitdefender's
+# precedent):
+# - AntiVirus Free's "Core Shields": "File Shield : Scans programs and files saved on your PC for malicious threats in
+#   real-time", "Behavior Shield : Monitors all processes on your PC in real-time for suspicious behavior", "Web Shield"
+#   and "Email Shield"; "Rescue Disk is a feature that allows you to create a bootable version of the AVG AntiVirus
+#   scanner on a USB or CD" and its Boot-Time Scan article ("scans for known types of malware and removes threats before
+#   the operating system and other services boot up"); Smart Scan finds "Vulnerable software : Out-of-date software that
+#   hackers can use to access your system."; "Network Inspector scans your network for vulnerabilities"; "Ransomware
+#   Protection helps secure your personal photos, documents, and files"; "Hack Alerts continuously monitors the dark web
+#   and warns you if your login credentials have been leaked online"; "Do Not Disturb Mode works to silence unnecessary
+#   notifications while you run almost any application in fullscreen"; and the AVG Online Security extension, installed
+#   with Free and Internet Security, can "prevent websites from tracking you". No page read states scheduled scans for
+#   the home apps (help.avg.com's scheduling page is AVG Business's): left out.
+# - Internet Security's "Premium Features": Remote Access Shield, Browser Defense, "Webcam Protection , available in AVG
+#   Internet Security , helps prevent applications and malware from accessing your PC's webcam", Sensitive Data Shield,
+#   Fake Website Shield ("helps secure you against DNS (Domain Name System) hijacking") and "Data Shredder (previously
+#   File Shredder), available in AVG Internet Security"; its firewall ("the built-in firewall included in AVG Internet
+#   Security") and email scanning ("It scans your online mailboxes for suspicious emails"). Its page's comparison table
+#   marks the scam-website and firewall rows "No" for AntiVirus Free; the store's marks Free's Wi-Fi, fake-website and
+#   phishing rows "No" too, though Free's own page says "Our smart AI protects you against scam websites, viruses, and
+#   more" and its support article lists Web Shield as free: Free keeps web protection and scam websites, and no firewall
+#   or Wi-Fi check (notes.md).
+# - Internet Security (Multi-Device) "additionally includes AVG AntiVirus PRO for Android , AVG Internet Security for
+#   Mac , and AVG Mobile Security for iOS for use on up to 10 devices simultaneously"; the Android page: "Unlock alerts
+#   for SMS message-based scams , emails, or chat apps by upgrading to the premium version" (texts and chat apps).
+# - Mac (its own page, /internet-security-for-mac): real-time protection, ransomware protection, "Avoid fake, malicious,
+#   and scam websites", "Avoid phishing websites and emails", "We scan any network for weaknesses and vulnerabilities"
+#   and an email shield; no firewall, webcam or shredder named.
+# - Ultimate: "AVG Ultimate includes Internet Security, Secure VPN, TuneUp , and AntiTrack ." (its store), on up to 10
+#   devices; TuneUp's "Remove junk, fix errors, and improve device performance" (speed-up tools) and AntiTrack's "Stop
+#   third-party companies from seeing your online activity".
+# - Secure VPN (its page and support centre's "AVG Secure VPN - FAQs"): "Works on up to 10 devices simultaneously"; "When
+#   Kill Switch is enabled, your internet connection is automatically blocked if AVG Secure VPN unexpectedly
+#   disconnects"; split tunneling in its Android app ("Split Tunneling ensures that certain apps never connect to the
+#   internet via AVG VPN servers"); protocols OpenVPN, WireGuard, IPsec (Apple's; no registry value without a guess) and
+#   Mimic, "useful in countries with restrictions on VPN use, where OpenVPN may be blocked" (obfuscation: stealth);
+#   "AVG Secure VPN allows torrenting through our data center locations listed below" (P2P); "We do not log activities
+#   such as the websites you visit, what data is transferred, and which IP addresses are accessed." (no-logs; no audit
+#   named). Server countries: "more than 100 server locations" names no countries, and no AVG page read lists them, so
+#   vpn.server-countries waits (core's awaitingRequiredFeatures, notes.md). Unlimited traffic: no page says, so false
+#   (the rule for a required boolean no page states; Avast's precedent).
+plans:
+  # AntiVirus FREE (its page, en-ca/free-antivirus-download): "Download AVG AntiVirus Free for real-time protection
+  # against viruses, infected emails, scam websites, and more.", "Also available for Mac, Android, and iOS". Its features
+  # are the Windows app's; it has no VPN.
+  - id: avg.free-antivirus
+    name: 'AntiVirus FREE'
+    link: https://www.avg.com/en-ca/free-antivirus-download
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, rescue]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.network: [home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.activity-modes: true
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+    notes: 'Free: real-time antivirus with ransomware and web protection, a home network scan and alerts when your email’s passwords leak, on a Windows PC (free apps for Mac, Android and iPhone too).'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-ca/free-antivirus-download
+  # Internet Security for "1 PC" (its store card; "1 Windows PC", its page): everything in Free, plus a firewall, Wi-Fi
+  # alerts, Fake Website Shield, Email Guard, webcam protection, Data Shredder, Remote Access Shield and Sensitive Data
+  # Shield.
+  - id: avg.internet-security
+    name: 'Internet Security (1 PC)'
+    link: https://www.avg.com/en-ca/internet-security
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, rescue]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, email]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.activity-modes: true
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.webcam-protection: [webcam]
+      security.file-shredder: true
+      antivirus.devices: 1
+      platforms: [windows]
+    perks: [remote-access-shield, sensitive-data-shield]
+    notes: 'Antivirus for 1 Windows PC, with a firewall, scam website and email protection, Wi-Fi alerts, webcam protection, a file shredder and remote access protection.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-ca/internet-security
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-us/internet-security
+      - region: GB
+        currency: GBP
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-gb/internet-security
+      - region: IE
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-eu/internet-security
+      - region: AU
+        currency: AUD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-au/internet-security
+      - region: NZ
+        currency: NZD
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-nz/internet-security
+      - region: DE
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/de-de/internet-security
+      - region: FR
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/fr-fr/internet-security
+      - region: NL
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/nl-nl/internet-security
+      - region: ES
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/es-es/internet-security
+      - region: IT
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/it-it/internet-security
+  # Internet Security for "1 Mac" (its store card and Mac page).
+  - id: avg.internet-security-mac
+    name: 'Internet Security (1 Mac)'
+    link: https://www.avg.com/en-ca/internet-security-for-mac
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [on-demand]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, email]
+      antivirus.network: [wifi-check]
+      antivirus.devices: 1
+      platforms: [macos]
+    notes: 'Antivirus for 1 Mac, with ransomware, scam website, phishing email and Wi-Fi protection.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-ca/internet-security
+      - region: US
+        currency: USD
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-us/internet-security
+      - region: GB
+        currency: GBP
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-gb/internet-security
+      - region: IE
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-eu/internet-security
+      - region: AU
+        currency: AUD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-au/internet-security
+      - region: NZ
+        currency: NZD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-nz/internet-security
+      - region: DE
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/de-de/internet-security
+      - region: FR
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/fr-fr/internet-security
+      - region: NL
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/nl-nl/internet-security
+      - region: ES
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/es-es/internet-security
+      - region: IT
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/it-it/internet-security
+  # Internet Security for "10 Devices" (Multi-Device): the Windows app's features on PCs, and Android's premium scam
+  # alerts for texts and chat apps.
+  - id: avg.internet-security-10-devices
+    name: 'Internet Security, 10 devices'
+    link: https://www.avg.com/en-ca/internet-security
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, rescue]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.activity-modes: true
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.webcam-protection: [webcam]
+      security.file-shredder: true
+      antivirus.devices: 10
+    perks: [remote-access-shield, sensitive-data-shield]
+    notes: 'Internet Security on up to 10 PCs, Macs, phones or tablets, with scam alerts for texts and chat apps on Android.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-ca/internet-security
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-us/internet-security
+      - region: GB
+        currency: GBP
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-gb/internet-security
+      - region: IE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-eu/internet-security
+      - region: AU
+        currency: AUD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-au/internet-security
+      - region: NZ
+        currency: NZD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-nz/internet-security
+      - region: DE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/de-de/internet-security
+      - region: FR
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/fr-fr/internet-security
+      - region: NL
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/nl-nl/internet-security
+      - region: ES
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/es-es/internet-security
+      - region: IT
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/it-it/internet-security
+  # Ultimate, "10 devices" (its page): Internet Security (Multi-Device), Secure VPN, TuneUp and AntiTrack.
+  - id: avg.ultimate
+    name: 'Ultimate'
+    link: https://www.avg.com/en-ca/ultimate
+    categories: [security, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, rescue]
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.network: [firewall, wifi-check, home-network-scan]
+      antivirus.vulnerability-scan: true
+      antivirus.activity-modes: true
+      antivirus.optimizer: true
+      security.dark-web-monitoring: true
+      security.anti-tracker: true
+      security.webcam-protection: [webcam]
+      security.file-shredder: true
+      antivirus.devices: 10
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.devices: 10
+      vpn.protocols: [openvpn, wireguard, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      includes-subscription: [avg.internet-security-10-devices, avg.secure-vpn]
+    perks: [remote-access-shield, sensitive-data-shield]
+    notes: 'Internet Security on up to 10 devices, plus Secure VPN, TuneUp and AntiTrack.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-ca/ultimate
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-us/ultimate
+      - region: GB
+        currency: GBP
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-gb/ultimate
+      - region: IE
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-eu/ultimate
+      - region: AU
+        currency: AUD
+        amount: 179.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-au/ultimate
+      - region: NZ
+        currency: NZD
+        amount: 174.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-nz/ultimate
+      - region: DE
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/de-de/ultimate
+      - region: FR
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/fr-fr/ultimate
+      - region: NL
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/nl-nl/ultimate
+      - region: ES
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/es-es/ultimate
+      - region: IT
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/it-it/ultimate
+  # Secure VPN, "10 devices" (its store card and page).
+  - id: avg.secure-vpn
+    name: 'Secure VPN'
+    link: https://www.avg.com/en-ca/secure-vpn
+    categories: [vpn]
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.devices: 10
+      vpn.protocols: [openvpn, wireguard, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+    notes: 'A VPN for up to 10 devices, with a kill switch, split tunneling on Android and torrenting on some servers.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-ca/secure-vpn
+      - region: US
+        currency: USD
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-us/secure-vpn
+      - region: GB
+        currency: GBP
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-gb/secure-vpn
+      - region: IE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-eu/secure-vpn
+      - region: AU
+        currency: AUD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-au/secure-vpn
+      - region: NZ
+        currency: NZD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/en-nz/secure-vpn
+      - region: DE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/de-de/secure-vpn
+      - region: FR
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/fr-fr/secure-vpn
+      - region: NL
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/nl-nl/secure-vpn
+      - region: ES
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/es-es/secure-vpn
+      - region: IT
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.avg.com/it-it/secure-vpn
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch from Canada: its End User License Agreement
+# (avg.com/en-ca/eula, "Version 1.15 (Revised January 23, 2026)", the same text on its en-us, en-gb and en-eu pages), a
+# version of Avast's (Avast's 1.16 adds a 30-day period for free products, which AVG's lacks), so its grades match
+# Avast's; its subscription details and cancelling FAQ; its Product Privacy Notice ("This Policy was last updated in
+# August 26, 2026.") and VPN Policy ("Last updated: October 6, 2026"); and Gen's General Privacy Notice, which its
+# privacy centre follows ("we follow our group General Privacy Notice which includes information broadly applicable
+# across all Gen brands, services and products"), rated once as a shared document (data/policies/gen-digital-privacy.yaml).
+# Read but holding no topic: its Consent Policy and Cookie Notice. Not read: its Acceptable Use Policy (the EULA's link
+# names no page; /acceptable-use-policy is a page not found), the Distributor's terms of sale its EULA names, and the
+# checkout's agreement line (no checkout opened).
+policies:
+  shared: [gen-digital-privacy]
+  links:
+    - name: 'End User License Agreement'
+      url: https://www.avg.com/en-ca/eula
+    - name: 'Subscription details'
+      url: https://www.avg.com/en-ca/subscription-details
+    - name: 'Canceling an AVG subscription - FAQs'
+      url: https://support.avg.com/SupportArticleView?l=en&urlName=AVG-Unsubscribe-FAQ
+    - name: 'AVG Internet Security and AVG AntiVirus - FAQs'
+      url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-antivirus-faq
+    - name: 'AVG Secure VPN - FAQs'
+      url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-secure-vpn-faq
+    - name: 'Product Privacy Notice'
+      url: https://www.avg.com/en-ca/products-policy
+    - name: 'VPN Policy'
+      url: https://www.avg.com/en-ca/vpn-policy
+    - name: 'Report a security vulnerability (Gen)'
+      url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+    - name: 'Internet Security'
+      url: https://www.avg.com/en-ca/internet-security
+  ratings:
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can stop it renewing in your AVG Account online, and keep using it to the end of the time you paid for.'
+      sources:
+        - url: https://support.avg.com/SupportArticleView?l=en&urlName=AVG-Unsubscribe-FAQ
+          quote: 'Click Unsubscribe under the subscription you want to cancel.'
+        - url: https://support.avg.com/SupportArticleView?l=en&urlName=AVG-Unsubscribe-FAQ
+          quote: 'After you cancel an AVG subscription , you can continue to use your paid AVG products until the end of the current subscription period.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can get your money back within 30 days of buying it, and within 30 days of each yearly renewal.'
+      sources:
+        - url: https://www.avg.com/en-ca/subscription-details
+          quote: 'You can request a refund by contacting AVG Customer Support here within 30 days of your initial subscription or the anniversary of your subscription.'
+        - url: https://www.avg.com/en-ca/eula
+          quote: '2A.6 If your subscription auto-renews, you may cancel that renewal no later than 30 days following such renewal date.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: great
+      reason: 'You pay the price of the day when it renews, and it tells you that price up to 65 days before each yearly renewal, so you can cancel first.'
+      sources:
+        - url: https://www.avg.com/en-ca/subscription-details
+          quote: 'A fee for the next subscription period will be charged at the then current published price.'
+        - url: https://www.avg.com/en-ca/subscription-details
+          quote: 'For annual subscriptions, we will notify you up to 65 days ahead of the anniversary of your subscription to remind you of the anniversary as well as the subscription fee that will be billed for the subsequent period.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its trials started in the app need a payment method and turn into a paid plan unless you cancel before they end. Its 30-day trial on a PC needs no card.'
+      sources:
+        - url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-antivirus-faq
+          quote: 'A payment method is required to sign up for a free trial. When the trial ends, your paid subscription starts, unless cancelled before.'
+        - url: https://www.avg.com/en-ca/internet-security
+          quote: '(no credit card needed)'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you before each yearly renewal, with the price and the date it charges you.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: '2A.1 Your subscription will automatically renew, and for annual subscriptions you will be notified in advance of the renewal.'
+        - url: https://www.avg.com/en-ca/subscription-details
+          quote: 'For annual subscriptions, we will notify you up to 65 days ahead of the anniversary of your subscription to remind you of the anniversary as well as the subscription fee that will be billed for the subsequent period.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its licence and subscription details list no fees beyond the price.'
+      pages: [https://www.avg.com/en-ca/eula, https://www.avg.com/en-ca/subscription-details]
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its licence and subscription details don’t say what happens when you switch plans.'
+      pages: [https://www.avg.com/en-ca/eula, https://www.avg.com/en-ca/subscription-details]
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to a private referee (an arbitrator), one person at a time, with no group lawsuits, and its licence offers no way to opt out.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'If you and Vendor do not resolve any Dispute by informal negotiation, any other effort to resolve the Dispute will be conducted exclusively by binding arbitration'
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'ANY PROCEEDINGS TO RESOLVE OR LITIGATE ANY DISPUTE IN ANY FORUM WILL BE CONDUCTED SOLELY ON AN INDIVIDUAL BASIS.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: great
+      reason: 'It tells you before changing its licence, gives you 30 days, and if you say no it refunds the time you haven’t used.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'Vendor may amend this Agreement at any time by notice provided to you in accordance with this Agreement, and your continued use of any affected Solution at any point at least 30 days after the notice date will constitute your acceptance of the amendment of this Agreement.'
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'If you decline to accept the amended Agreement, Vendor may terminate your use of such affected Solution, in which case you may obtain a refund for the portion of the subscription fee you have paid for the unexpired or unused portion of the Subscription Period'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its licence it ends at once with no refund. It can also end it for any reason, but then refunds the time you haven’t used.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'which will result in forfeiture of any rights you may have to receive Updates or to obtain a refund for the portion of the subscription fee you have paid for the unexpired or unused portion of the Subscription Period.'
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'Vendor, by notice to you, may immediately terminate this Agreement for convenience at any time with respect to any particular Solution or all Solutions'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its updates can add or remove features, or replace an app entirely.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'Updates may include both additions to, and removal of, any particular features or functionality offered by a Solution or may replace it entirely'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: neutral
+      reason: 'Its apps are for you and your household’s personal, non-business use, and you may not take them apart unless the law lets you.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'by a natural person, or members of his household for personal, noncommercial purposes.'
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'except as expressly authorized by law: (i) reverse engineer, disassemble, decompile, translate, reconstruct, transform or extract any Solution or any portion of the Solution'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To use its VPN or a paid plan you make an AVG account with your email address, and give payment details. Its free antivirus needs no account.'
+      sources:
+        - url: https://www.avg.com/en-ca/vpn-policy
+          quote: 'When you create an account with us (note: this is necessary in order for you to use the VPN service), we will need some information about you.'
+        - url: https://www.avg.com/en-ca/vpn-policy
+          quote: 'To send you purchase receipts, communications, and occasional product news'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its email scanner keeps whole emails it finds suspicious to train its scam detection, and its staff may read them, unless you turn that off in each app’s privacy settings.'
+      sources:
+        - url: https://www.avg.com/en-ca/products-policy
+          quote: 'Unless you opt out, we store the whole email message (EML file with message metadata) we identified as suspected malicious to further analyze it and include it in our detection models.'
+        - url: https://www.avg.com/en-ca/products-policy
+          quote: 'Our human reviewers may check email messages in case it is needed to investigate the accuracy of our detections (esp. in case of false negatives or false positives).'
+      action:
+        name: 'How to choose what data you share with AVG'
+        url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-antivirus-faq
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Its apps keep how you use them for over 4 years, and your VPN account details for 2 years after your plan ends.'
+      sources:
+        - url: https://www.avg.com/en-ca/products-policy
+          quote: 'To better understand our users’ behavior (50 months)'
+        - url: https://www.avg.com/en-ca/vpn-policy
+          quote: 'Account data is stored for the lifetime of your product plus 2 years.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: neutral
+      reason: 'Gen, its owner, takes security bug reports and may pay a reward. No outside audit of AVG is named on the pages read.'
+      sources:
+        - url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+          quote: 'we welcome the responsible disclosure of potential security vulnerabilities and bugs or any other web or product-based security concerns to improve the online risk posture of Gen and all its associated brands.'
+        - url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+          quote: 'Please beware that not all submissions may be eligible for a reward/ bounty.'
+      lastVerified: 2026-11-13
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Its VPN doesn’t record the sites you visit, but it keeps when you connect and disconnect and how much data you use, and its Android antivirus collects the websites you visit.'
+      sources:
+        - url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-secure-vpn-faq
+          quote: 'AVG Secure VPN stores connection logs, which include information such as the time you connect and disconnect, the duration of the connection, and bandwidth usage.'
+        - url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-secure-vpn-faq
+          quote: 'We do not log activities such as the websites you visit, what data is transferred, and which IP addresses are accessed.'
+        - url: https://www.avg.com/en-ca/products-policy
+          quote: 'Information concerning URLs of websites visited (malicious and non-malicious) and referrers (previous page with link to malware-hosting site)'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You and the people you live with can use it, for personal use.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'by a natural person, or members of his household for personal, noncommercial purposes.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit beyond the number of devices each plan covers.'
+      pages: [https://www.avg.com/en-ca/eula]
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves without asking, which its licence says.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'Vendor, from time to time during the Subscription Period and without your separate permission or consent, may from time to time deploy an upgrade or update of, or replacement for, any Solution'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: 'A forever licence to what you share'
+      tier: poor
+      reason: 'Anything you publish or share through its apps comes with a licence forever, which can’t be taken back, though only to run its apps for you.'
+      sources:
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'You grant to each member of the Vendor Group, a non-exclusive, unrestricted, unconditional, unlimited, worldwide, irrevocable, perpetual, and royalty-free right and license to use, copy, record, distribute, reproduce, disclose, sell, resell, sublicense (through multiple levels)'
+        - url: https://www.avg.com/en-ca/eula
+          quote: 'solely for the purpose of providing the Solutions to you under this Agreement.'
+      lastVerified: 2026-11-13
