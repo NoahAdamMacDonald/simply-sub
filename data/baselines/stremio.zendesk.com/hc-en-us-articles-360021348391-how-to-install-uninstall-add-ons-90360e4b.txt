@@ -1,0 +1,127 @@
+url: https://stremio.zendesk.com/hc/en-us/articles/360021348391-How-to-install-uninstall-Add-ons
+method: fetch
+saved: 2026-11-13
+
+How to install/uninstall Add-ons – Stremio Help Center
+Submit ticket
+Sign in
+Stremio Help Center
+Getting Started with Stremio
+Getting Started
+Articles in this section
+How to install/uninstall Add-ons
+Getting Started with Stremio: A Quick Video Guide
+How to install/uninstall Add-ons
+Stremio Support
+November 11, 2026 21:08
+Updated
+Follow
+Add-ons are essential to use Stremio. Without them you will not be able to see any content in Stremio. Everything: movies, series and subtitles is provided by add-ons.
+Add-ons types
+Official Add-ons
+Official Add-ons are created and maintained by Stremio. Some of the official Add-ons are protected, that means it is not possible to uninstall them. They are providing core functionalities to the Stremio.
+Community Add-ons
+Stremio allows users to create their own Add-ons and publish them. Most of the available Add-ons were created by community. Stremio doesn't control them so if you see that something is wrong with the content provided by community Add-on there is nothing we can do with this.
+Installing add-ons
+You should know that you don't actually install any additional software on your computer. Add-ons are similar to the search engines they are web sites that Stremio uses to search for the content.
+Windows/Mac/Linux/Web
+It is very simple to install add-ons.
+1. Open the add-on menu by clicking puzzle icon in the top right corner.
+2. You can search for the Add-on using search bar or navigate through available Add-ons using menu on the left side.
+2. Simply click install or uninstall button next to the Add-on and it will be installed or uninstalled from your user account.
+Android
+1. To install Add-ons on your mobile phone. Open main menu by click three lines in the top left corner.
+2. Then click Add-ons from the end of the list. Add-ons menu will open.
+3. You can navigate through available Add-ons using pickers on the top of the Add-ons menu. Switch from Official to Community Add-ons using right picker.
+4. To install or uninstall Add-on simply click Install or Uninstall button next to each add-on
+Facebook
+Twitter
+LinkedIn
+11
+Was this article helpful?
+301 out of 530 found this helpful
+Have more questions? Submit a request
+Return to top
+Related articles
+Getting Started with Stremio: A Quick Video Guide
+Why Addon is not available
+How to watch on your TV
+No streams available information or No subtitles available
+How to Install Stremio on Amazon Fire Stick TV
+Comments
+11 comments
+Sort by
+Date
+Votes
+Georges Zaragozi
+June 19, 2020 06:39
+BJ je voudrais des modules en francais
+-2
+Comment actions
+Permalink
+Lanez -
+November 24, 2020 13:53
+Movies
+0
+Comment actions
+Permalink
+Petra Leopold
+April 18, 2021 03:37
+I have a problem, subtitles doesn't match with the episode I watch. For example I'm already on episode 10 but there are only subtitles for episode 1. What should I do to fix that?
+-1
+Comment actions
+Permalink
+Doug Wilcock
+July 12, 2021 23:01
+I have a Android projector which has android 4.4.4 every version I install returns a parse error apart from stremio version 0.30.6 but there are no streams and not many add ons to chose from unlike the newer version on my phone
+0
+Comment actions
+Permalink
+Manfred De Kock
+August 21, 2021 09:21
+i struggle to open stremio om my laptop with windows 10
+1
+Comment actions
+Permalink
+Darryl Price
+April 04, 2022 10:32
+the add-ons are not installing on stremo is there a time period before it show's on my PC
+0
+Comment actions
+Permalink
+Willy Peña Renteria
+July 27, 2022 22:22
+So i put all addons for tv series.. and doesnt work anyone please... check this.. is really important
+0
+Comment actions
+Permalink
+Amir Friedman
+August 23, 2022 07:18
+What about the Android TV version? How do I sync Addons?
+-1
+Comment actions
+Permalink
+Powerfader
+November 01, 2022 00:01
+Edited
+Don't know if this app is worth all the hassles so far. I will give it a rest for the day and re-evaluate whether I will keep or delete this app. Not real fond of the interface and trying to figure out addons, real-debrid, and external players has become too time consuming. Especially since there is a myriad of other apps that will do the same and more and better!
+Update: Still not too fond of this app. I have used a bit now and it is still confusing to navigate and add addons. I've tried adding Orion on my device and it never shows up!
+Most likely will be uninstalling this shortly!
+-1
+Comment actions
+Permalink
+Wassim El barghouti
+June 10, 2023 13:29
+Stremio is eigenlijk al en ik weet niet hoe moet ik eigenlijk mijn connecten bij tv mijn ADD ADDON?
+1
+Comment actions
+Permalink
+Andres Ortega roca
+June 24, 2023 22:12
+Hola me gusta
+0
+Comment actions
+Permalink
+Article is closed for comments.
+Stremio Help Center
+Powered by Zendesk

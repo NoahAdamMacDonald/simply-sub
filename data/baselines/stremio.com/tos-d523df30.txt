@@ -1,0 +1,258 @@
+url: https://www.stremio.com/tos
+method: fetch
+saved: 2026-11-13
+
+Stremio - Freedom to Stream
+HomeFeaturesAddon SDKBlogPlansDownloadsSupport EN
+General Terms and Conditions
+The present General Terms and Conditions are effective from 30 August 2020.
+These General Terms and Conditions cover the Stremio owned and operated websites located at www.strem.io and www.stremio.com and our
+platform provided by Stremio (the “Platform”), including our mobile applications (“Apps” or “App”), and any services
+offered by Stremio (collectively, the “Services”).
+1. Basic concepts
+For the purposes of these General Terms and Conditions (“GTC”) the terms below shall have the following meaning:
+1.1. "Provider" - is the operator of the Services, the Stremio organization.
+1.2. "Stremio" is the Provider's software product, which Users may access through the websites www.strem.io and www.stremio.com or might be downloaded directly including but not limited to
+from the app-stores for iOS and Android and the use of which requires installation. Stremio is a metadata catalogue
+and platform for streaming of official audio and video content, available to the public.
+1.3. "Addon" is a software product, which allows content to be uploaded, stored on and/or accessed through Stremio.
+The Addons add to Stremio metadata and grant access to Streamable Content, subtitles and other data. The “Official
+Addons” are developed by the Provider and are automatically accessible for the Users of Stremio, whereas “Community
+Addons” are developed by independent third-party developers through the use of an open-source SDK / protocol (https://github.com/Stremio/stremio-addon-sdk) and Users
+must manually install them. The Community Addons are accessible for manual installation once the independent
+developer publishes the Community Addon.
+1.4. "Library" is a functionality of Stremio, allowing Users to store and keep Content Information selected by them.
+For the avoidance of any doubt, the Library maintained by Registered Users in their profile represents their User
+Content and is a personal catalogue of Content Information of their choice.
+1.5. "User Content" is the Content Information which is selected, arranged and/or organized in the Library by each
+Registered User. The User Content does not include Streamable Content but only Content Information, arranged
+according to the preferences of the Registered User.
+1.6. "Streamable Content" is audio and visual content, available for streaming by using Stremio.
+1.7. "Information about the streamable content" or "Content Information" is information relating to certain
+audio-visual content, representing film, TV series, TV shows and other content, in the form of metadata relating to
+such audio-visual content, available through Stremio. For the avoidance of any doubt, the Content Information
+relating to the Streamable Content does not represent the content itself.
+1.8. "Database" is the compilation and arrangement of metadata relating to the Content Information, which is compiled
+by the Provider and it is the sole owner of all intellectual property rights that subsist in the Database.
+1.9. "User" means any natural person who acts in full legal capacity, who accesses the Services. Users can access in
+Guest mode or as Registered User.
+1.10. "Registered User" or “You” means any User who has successfully completed the registration procedure for the use
+of Stremio, thereby having created a profile with a unique username and password.
+2. General Provisions
+2.1. These GTC are binding for each User who accesses, uses or downloads Stremio in whatever means possible
+regardless of whether he/she becomes a Registered User or not. Any use of the Services by a User is carried out in
+strict compliance with and under the implementation of the GTC and the applicable law. If the User disagrees with
+any of the conditions mentioned here, he/she shall not use Stremio nor any of the Services offered.
+2.2. The Provider reserves its right to amend these GTC at any time. The new version of the GTC becomes effective
+from the day it is announced publicly on our Services unless stated otherwise. If Users do not agree to the changes
+in the GTC, they can contact the Provider at the following address [email protected] for further assistance. Each time you use our Services,
+the current version of these GTC will apply. These GTC are accessible within our Sites and App at https://www.stremio.com/tos. Accordingly, when you use any of our
+Services, you should check the date of these GTC (which appears at the top) and review any changes since you last
+reviewed the GTC.
+3. Registration
+3.1. The scope of Services available to Registered Users and Users in Guest mode varies and is dependent only upon
+the Provider's sole discretion. Through your profile You can, among other things, use various Services that are not
+available to Users in Guest mode, for example storing, arranging, selecting, deselecting and removing User Content
+from Your Library, updating and modifying personal data in your Profile or choosing to cancel your registration for
+Stremio.
+3.2. In order to complete a registration and create a profile, the User has to access the Websites and/or to download
+and install Stremio on his/her device and then fill in the electronic registration form thereof.
+3.2.1. In the electronic form the User has to fill in the appropriate fields relating to username, password and press
+the button "I understand and agree with the terms and conditions of Stremio".
+3.3. You assure that the data provided in the registration process is true, complete, accurate and not misleading and
+any content imported and/or shared from your Device is not infringing any intellectual property rights.
+3.4. You agree neither to disclose your username and password to any third parties, nor to use the username or
+password of another Registered User. You are solely responsible to protect the confidentiality of your password and
+username. The Provider and its employees assume no responsibility if your username or password is used by another
+User/s.
+3.5. You may use the “Local files” addon, by means of which, You can watch Your own local Streamable Content within
+Stremio. Your files, accessed by this function, will not be available to any other Users and will be stored solely
+on Your own Device
+4. Rights and Obligations of the Community Addon Developers (“CAD”)
+The Provider is not liable for hosting, storing, developing, maintaining or monitoring the content available
+for the Users through the Community Addons.
+4.1. Without the respective right holder's prior explicit written consent, Community Addon Developers (“CAD”) (also
+falling within the definition of Users) may not stream, copy, reproduce, distribute, transmit, broadcast, display,
+sell, license or otherwise commercially use Streamable Content, however excluding the content the rights pertaining
+to which they own. For the avoidance of any doubt, CAD are also Users within the meaning of the present Terms and
+Conditions are subject to the Users' obligations, prescribed herein.
+4.2. CAD may make Streamable Content and Content Information that is stored on their Devices, online or cloud hosting
+servers, etc. available through Stremio for other Users by development and provision of Community Addons. CAD are
+solely responsible for such content, for its legality and the consequences of its publication and its use on and
+through Stremio. CAD shall further comply with Section 7 of the present GTC - “Intellectual Property”.
+5. Rights and Obligations of Users
+Users on Stremio can be registered (including CAD) or not. Please bear in mind that the Provider cannot technically
+suspend access to guest mode accounts due to the fact they are not registered. However, all Users are requested to
+execute the below-mentioned rights and obligations in good faith.
+5.1. Users may access the Streamable Content and the Content Information available through Stremio provided they
+comply with the rights and obligations that arise for them in Section 7 of the present GTC - “Intellectual
+Property”.
+5.2. Users agree that the Provider reserves its right to update and/or delete the Content Information in its sole
+discretion according to the provisions of the present GTC.
+5.3. Users may access all Streamable Content and Content Information through Stremio, which access is allowed only
+for the purpose of using the Services on Stremio.
+5.4. Users undertake not to use Stremio for:
+5.4.1. monitoring, copying or extracting any information from Stremio, including its contents, graphic user interface
+or Database whether done mechanically or by automated means which is considered intellectual property of the
+Provider according to section 7 of the present GTC - “Intellectual Property”.
+5.4.2. any other purpose or in ways that are non-compliant with the relevant local legislation.
+5.5. Users may, at any time and in their sole discretion, terminate the use of the Services by canceling the use of
+Stremio, including by canceling their registration. Their contract with the Provider is deemed terminated as of the
+date of the registration cancellation and the Provider will terminate the access to the User's profile. Further,
+Users agree that the Provider has the right, but not the obligation to terminate their access to any and all Content
+Information and/or Streamable Content.
+6. Rights and obligations of the Provider
+6.1. The Provider shall take due care to enable normal use of the Services.
+6.2. The Provider does not guarantee that:
+6.2.1. the access to the Services will always be uninterrupted, unlimited and/or seamless.
+6.2.2. any data or content, including Content Information and User Content, is complete, accurate, true and without
+error. In this regard, the Provider shall not be liable in the event that the information contained in Stremio is
+not correct or accurate at any given time, and where as a result of such incorrect or inaccurate information third
+parties have suffered damages and/or lost profits.
+6.3. Users agree to take care of any technical equipment and Internet connectivity that may be necessary for access
+to the Services. The Provider shall not be responsible for any technical problems and malfunction, depriving the
+Users from the use of the granted Services, caused by the operation of their equipment (hardware or software
+problem, a problem with the Internet connection, etc.).
+6.4. The Provider may in its sole discretion and without sending a warning or notice, to suspend the Users access to
+the Services, to certain functionalities or to the User Content, where the latter is or might be in conflict with
+these GTC and/or any applicable law, and/or any rules of morality and decency or any other peremptory standards.
+6.5. The Provider is under no obligation to keep or restore User Content, Content Information or other information
+relating to Streamable Content, which either the User, another User or any third party (including the Provider), no
+matter why, have deleted.
+6.6. The Provider has the right to make certain non-personalized publications on Stremio and the Website, including
+in the Registered Users' profiles, such as hyperlinks, banners and other forms of advertising for products and
+services offered either by the Provider or by third parties, as well as hyperlinks and banner ads linking to
+websites outside the Provider's control. Users agree and acknowledge that the Provider is not responsible for the
+content, accuracy and legality of such websites, services or resources that are made available to Users in this way,
+and the content, accuracy and legality of the information contained in any Commercial Communications sent to and
+received by the Users.
+6.7. The Provider is not responsible for the Content Information which Registered Users have added to the Library.
+The content in the Library represents their personal choice.
+7. Intellectual Property
+Intellectual Property Rights and Obligations of CAD
+7.1. For the avoidance of any doubt, CAD represent and warrant to the Provider that they own all intellectual
+property rights or the rights to use the Streamable Content and to add Content Information to Stremio, and that they
+have obtained all necessary licenses, consents, permits and approvals for their reproduction and use in Stremio for
+the purpose of these GTC, including to make it available to any third parties on Stremio in a manner allowing them
+access to the content from a place and at a time individually chosen by them. In addition, they guarantee that they
+have obtained the consent of the copyright holders, if any, of Content Information and Streamable Content made
+available by them with respect to its use, distribution and reproduction through Stremio. CAD undertake neither to
+add to, nor to make available to Users Content Information or Streamable Content on Stremio in a way that is
+contrary to any applicable laws and legislations, these GTC, the Internet ethics and to any rules of morality.
+7.2. By adding Content Information and making accessible Streamable Audio-visual Content on Stremio, CAD agree and
+grant to all other Users, a non-exclusive right to use and access the content for non-commercial use by using the
+Services of Stremio, free of charge within the scope of their own license. CAD could impose territorial restrictions
+in the license at their own discretion. The right granted in the preceding paragraph shall last for the time period
+during which the said Content Information and/or Streamable Content remains available through Stremio for a
+reasonable time after its removal or deletion. In case CAD are no longer entitled to use the content as specified in
+this section 7.1, they undertake to cease the access of the Users to the Content Information and to the Streamable
+Content immediately after receiving a notice that they have been deprived from the rights in question.
+7.3. CAD retain their rights (intellectual property rights or rights to use) to their content upon making it
+available in Stremio.
+7.4. CAD agree that once they delete the Content Information or the Streamable Content previously made available on
+Stremio, Registered Users who have acquired access to it before the deletion may still have such access.
+Intellectual Property Rights and Obligations of the Users
+7.5. By using the Services hereunder Users have access to information about various contents which are subject to the
+copyright of third parties. Users acknowledge that their access to this information serves the sole purpose to use
+the granted Services in accordance with these GTC for personal, non-commercial use only and are granted no right to
+copy, store, reproduce, modify, adapt, and to attempt any of those acts to the content accessed and used, except
+when they share their activities on Stremio relating to a particular content or on social networks (such as
+Facebook, Google+, Twitter, e-mail, etc.).
+7.6. Users may, by means of the sharing function relating to the Internet or to social media networks (such as
+Facebook, Google+, Pinterest, Twitter, e-mail, etc.), share Content Information of their choice. When using this
+function, Users may not distribute Content Information or any content otherwise explored through the Services for
+any commercial purposes.
+7.7. Users agree that the Provider has no objective means and hence, no obligation to control the way in which they
+use the Content Information and/or the Streamable Content and bears no responsibility whatsoever for such use.
+Intellectual Property Rights and Obligations of the Provider
+7.8. The Provider is not responsible for the Content Information, nor for the Streamable Content, and their
+compliance with the applicable law and whether their availability and distribution in Stremio affects or may affect
+the rights of any third parties (including intellectual property rights, personal rights, other property rights,
+etc.). The Provider assumes no obligation to review, monitor, control or examine the Content Information, and/or the
+Streamable Content, for compliance with the applicable law and these GTC. The Provider is not responsible for any
+content or information that is stored, streamed, conveyed or published through Stremio. The Provider has no
+obligation to actively seek facts or circumstances, indicating illegal activity carried out by any of the Users or
+CAD through the use of the Services and resulting in any violations of the applicable laws or these GTC.
+7.9. However, if the Provider obtains knowledge of the unlawful nature of those data or of that User's activities,
+the Provider shall act expeditiously to remove or to disable access to the data concerned and/or to disable the
+access to a profile, terminate the User's registration and to delete their Library and User Content without prior
+notice. The Provider has the right to remove or restrict access to any Addons in its own discretion in case it has
+reason to believe that the said Addon infringes any intellectual property right without examining the circumstances
+in question. The Provider is not liable for any damages and/or lost profits resulting from the removal or the
+restriction of the access to any content or profile available through Stremio. Should the Provider consider that any
+data is contrary to the applicable legislation, these GTC or the rights and legitimate interests of third parties,
+the Provider will suspend, restrict or amend the Services provided to Users, and will notify the right holders and
+the competent authorities in case the User's behavior and/or use of the Services is likely to constitute a criminal
+or administrative offence, if the Provider reasonably believes that the behavior of the User violates any provisions
+of the applicable legislation, these GTC or the rights and legitimate interests of third parties.
+7.10. The websites and applications belong to and are operated by the Provider. Each component of the websites and
+applications and the layout itself, including but not limited to Database, logos, trademarks, domain names, etc.
+which appear in any way on the websites or applications, are protected by the current laws with subject intellectual
+property. Therefore, they belong strictly and solely to the Provider and the use of any component is subject to
+prior authorisation. None of the above-mentioned components included on the Website and Platform can be reproduced,
+copied, edited, transmitted, downloaded or distributed in any way without the prior written consent of the Provider.
+7.11. Section 7.10. above does not in any way exclude or interfere with the rights granted according to the present
+section. Stremio is released under the open-source free software GPL. Under this license other developers have the
+right to use, copy, modify and distribute the source code of Stremio for any purpose under the GNU General Public
+License as published by the Free Software Foundation. The license requires preservation of the copyright and license
+notice of the software. The Provider is not liable in any way for the diffusion and public access to the
+amended/modified by other developers source code files.
+8. Limitation of Provider's Liability
+8.1. The Provider is not responsible for the Content Information, the Streamable Audio-visual Content, as well as for
+the activities of the Users and/or the CAD in connection with the Services. Furthermore, the Provider is not
+responsible for any damages and/or lost profits caused to the Users, including but not limited to CAD upon access to
+or use of such content available through Stremio.
+8.2. The Provider is not liable for its failure to provide the Services due to circumstances beyond the Provider's
+control, including but not limited to cases of force majeure, fortuitous events, problems in the network, or
+circumstances arising out of problems with the Users' equipment and in case of unauthorized third party access or
+intervention to the functioning of Stremio.
+8.3. The Provider is not liable to Users, including but not limited to CAD or to any third party for damages and/or
+lost profits incurred due to the use, availability, termination, suspension, modification or limitation of the
+Services, deletion, modification, loss, inaccuracies or incompleteness of the information used or made available
+through Stremio.
+9. Indemnification
+9.1. The Provider shall not be liable for any direct or indirect damages and/or lost profits sustained by Users or
+any third parties as a consequence of the suspension, modification or limitation of the Services, the termination of
+the contract or the provision of information to or the execution of orders of the competent authorities when such
+are result of the compliance with the provisions of the applicable laws and/or the present GTC.
+9.2. Users, including but not limited to CAD, agree to fully indemnify the Provider and any third parties for any
+direct or indirect damage and/or lost profit sustained as a result of claims by and/or compensations paid to third
+parties in connection with content that Users, including but not limited to CAD have made available to third parties
+or made available through use of the Services in violation of the applicable laws, these GTC or rules of morality
+and decency, as well as in connection with any other violations of their obligations hereunder.
+9.3.The obligations of all parties under this section 9 will survive the validity of any registration and will
+continue to have effect after termination of each and every contract (i.e. the use of the Services) with the
+Provider and after potential future termination of the Services for the maximum time allowed under the applicable
+legislation.
+10. Other conditions
+10.1. If any provision of the GTC is declared void, invalid or unenforceable, the other provisions of the GTC and the
+rights and obligations of Users, Registered Users, CAD and the Provider arising therefrom, shall remain in full
+force and effect. Any provisions, declared void, contestable or unenforceable will be deemed not to have been part
+of these GTC and will be replaced by mandatory rules of law, practice and customs.
+10.2. Any disputes not addressed in these GTC, shall be resolved under the provisions of the applicable legislation.
+10.3. In case of disputes arising under the GTC, including disputes regarding their existence or non-existence,
+implementation, validity or termination, the parties will make all reasonable efforts to resolve them amicably
+through negotiations and mutual concessions. In case the parties fail to reach an agreement within one month of the
+occurrence of a dispute, the dispute should be referred for resolution to the competent courts.
+10.4. The YouTube official addon is subject to external Terms and Conditions, see YouTube Terms of Services for more information.
+Google Play Store4.1 44,800 reviews
+Vasilis SmyrniosSep 21, 2022Probably the best and most useful app to have in your device. It's one of the apps I use on a daily basis especially on my Android TV for many years now. Well-made with a strong community providing useful functionalities. Well done. Keep up the good work.
+Join the party now
+Get Stremio for Free
+Information provided by Company
+Technology
+Downloads
+Addon SDK
+Partners
+Community
+Community
+Fanart Gallery
+Blog
+Careers
+Contacts
+Help center
+Business inquiries
+Terms & conditions
+Privacy policy
+Copyright © 2026 Stremio
+Get Stremio Now

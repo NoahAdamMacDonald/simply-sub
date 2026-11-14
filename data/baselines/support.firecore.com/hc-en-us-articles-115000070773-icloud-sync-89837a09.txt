@@ -1,0 +1,75 @@
+url: https://support.firecore.com/hc/en-us/articles/115000070773-iCloud-Sync
+method: fetch
+saved: 2026-11-13
+
+iCloud Sync – Firecore Support
+Skip to main content
+Toggle navigation menu
+Home
+Community
+Submit a request
+Sign in
+Firecore Support
+Search
+iCloud Sync
+Updated
+October 18, 2026 13:51
+iCloud can be used to keep library details like lists, watched history, and ratings in sync between multiple devices.
+Requirements
+The latest version of Infuse installed on all devices (release notes)
+iCloud Sync enabled in Infuse > Settings > Sync
+Logged into the same iCloud ID on all devices
+iCloud Drive enabled on all devices (details here)
+Some free iCloud storage (details here)
+It's possible to login using separate Apple IDs for iCloud and App Store. To use iCloud Sync you will need to use the same Apple ID for iCloud on all devices. The App Store IDs can be different, if needed.
+What is Synced
+Free + Pro
+Saved networks shares (address, username, password, etc...)
+Saved Favorites
+Saved Home Screen layouts (Lists & Favorites)
+General settings (iOS backups only)
+Direct URLs added via ‘Add Files’ on iOS/macOS/visionOS
+Manual metadata matches (corrections for mismatched titles)
+File-specific playback settings (selected audio/subtitle track, zoom setting, etc...)
+Downloaded subtitles
+Custom playlists
+Custom collections
+Pro Only
+Up Next list (in-progress and recently added items)
+Watched history
+Playback position for in-progress items
+Ratings
+Plex and Emby Connect shares are not synced to iCloud and will need to be set up manually on each device. This is due to these services having unique device tracking.
+Encryption and Data Security
+Data stored in iCloud is secure and cannot be accessed by third parties. More information on the security of iCloud data can be found here.
+Removing iCloud Data
+Follow the steps below to remove the data synced to iCloud (iOS, macOS, or visionOS only).
+Navigate to System Settings > [your name] > iCloud > Storage
+Scroll down and locate the entry for Infuse
+Select the option to Delete Data From iCloud
+Share this article
+Was this article helpful?
+Yes
+No
+217 out of 410 found this helpful
+Have more questions? Submit a request
+Related articles
+Trakt Sync
+Media Server Sync
+Streaming From Cloud Services
+Streaming from Plex, Emby, and Jellyfin
+Quick Start Guide
+0">
+Home
+English (United States)
+Dansk
+Deutsch
+Español
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Русский
+简体中文
+繁體中文

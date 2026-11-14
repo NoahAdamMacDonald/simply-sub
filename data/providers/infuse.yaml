@@ -1,0 +1,683 @@
+# Researched by hand on 2026-11-13 (M11.15, streaming batch 8), read with a plain fetch from Canada (firecore.com's
+# Infuse, terms, privacy, contact and release-notes pages, its help centre through its API, and Apple's App Store page
+# for Infuse in each country's storefront) and with Edge (firecore.com/infuse and its account pages). Pages, each quoted
+# where it's used:
+# What it is: a video player app for Apple's devices ("Infuse is a versatile video player app available for iPhone, iPad,
+# Apple TV, Mac, and Vision.", What is Infuse?) that plays your own files from the device, a computer or NAS on your
+# network, Plex, Emby and Jellyfin servers and cloud drives. It sells no films or shows of its own.
+# Pricing: Infuse is free to download ("Infuse is free to download and packed with everything you need to enjoy your
+# media collection beautifully.", its Infuse page), with Infuse Pro sold only as an in-app purchase in Apple's App Store
+# ("Free app with optional Pro features (available via In-App Purchase)", Infuse for Enterprise): "Infuse Pro is available
+# as a subscription (Monthly or Yearly) or as a one-time purchase (Lifetime)." (Purchases and Family Sharing).
+# The US: its Infuse page prices Pro "$1.99 / month · $16.99 / year · $99.99 / lifetime", the same page for every reader
+# (no location pricing: server-rendered, the same text read from Canada), in a bare "$" its own page data names as US
+# dollars ("priceCurrency": "USD" in its SoftwareApplication data); the US App Store page agrees ("Infuse Pro - Monthly
+# $1.99", "Infuse Pro - Yearly $16.99"). So the US's prices cite Firecore's own page.
+# Every other country: no Firecore page prices them, so each is the App Store's page for the app in that country's
+# storefront (apps.apple.com/<country>/app/infuse/id1136220934, its In-App Purchases list), whose own data names the
+# storefront's currency ("priceCurrency":"CAD"…): Canada $2.29 and $22.99 (CAD); the UK £1.99 and £17.99; Ireland, Spain
+# and Italy €1.99 and €14.99; Germany, France and the Netherlands €1.99 and €19.99; Australia $2.99 and $24.99 (AUD); New
+# Zealand $3.99 and $22.99 (NZD). The list shows each subscription twice (two App Store products at the same price). Its
+# terms say "All amounts are in US Dollars.", but each storefront charges its own currency, which the App Store's pages
+# show. No page says the prices include tax (Apple's app pages say nothing of tax), so no taxIncluded.
+# Not listed: Infuse Pro Lifetime, a one-time purchase (US$99.99, CA$129.99, £99.99, €99.99, A$149.99, NZ$199.99: the
+# owner's rule for lifetime plans, as Plex Pass's and Emby Premiere's); the free "DTS Audio" and "Dolby Audio" in-app
+# items ($0.00); legacy owners' free year ("those with legacy versions of Infuse ... can receive a free year of Infuse Pro
+# when upgrading to Infuse 8", Upgrade to Infuse 8), a first term; and Infuse: Enterprise, "a traditional
+# (non-subscription) paid app" for organizations through Apple's Volume Purchase Program (business: out of scope).
+# Region checklist, 2026-11-13: 1. no locale paths on firecore.com (firecore.cn is its Chinese site; no hreflang); 2. no
+# picker; 3. its page's data names USD; 4. the checkout is the App Store's, in the app: not opened; 5. its help centre's
+# purchase articles name no prices; 6. a plain fetch and Edge for firecore.com, a plain fetch for each App Store
+# storefront's page (each in its own currency whoever reads it); 7. no bill offered.
+# Bundles: none. Official resellers: none; it's sold only in the App Store. Gifts: "While it’s not currently possible to
+# gift a subscription for App Store apps, you can give out an Apple credit to help friends and family buy it." (How Do I
+# Gift a Pro Subscription?): Apple's own gift card, App Store billing.
+# Features, read 2026-11-13: its Infuse page's free features ("Amazing features come standard.") and Pro's ("Go further
+# with Pro."), and its help centre. Video quality: free plays "4K (Ultra-HD) HDR and HDR10+ video" ("Silky-smooth playback
+# of 4K (Ultra-HD) HDR and HDR10+ video with efficient hardware decoding."), so 4K and HDR on both plans; Pro adds "Dolby
+# Vision and Atmos" ("Enjoy videos in all their high-fidelity glory with Dolby Vision (Profile 5 & 8) and Dolby Atmos
+# (E-AC3)."): audio.dolby-atmos on Pro, Dolby Vision a perk. Streams: no number: it plays your files in the app on each
+# device, with no Firecore account counting them, and Pro unlocks "on all devices", so unlimited (inferred), as Plex's,
+# Jellyfin's and Emby's. Ads: "No ads, no tracking, and no harvesting of library info…ever!" (its Infuse page). Downloads:
+# "Download videos directly from any network source so they are available in Infuse (iOS/macOS only) for offline playback."
+# (Downloading Files), not a Pro feature (its App Store description lists "Download videos from networked devices" among
+# the free extras), with no number of devices, so 1 (inferred). What it streams: nothing of its own (streaming.content:
+# none) and your own media (streaming.own-media; the trailers Pro streams are a perk). Profiles: it follows Apple TV's and
+# the Mac's own user profiles ("Infuse will integrate with Apple‘s multiple user account features", Multiple User
+# Profiles), with no number of its own, so streaming.profiles is left out. Parental controls on both: "Control the types
+# of content your little ones can access with easily configurable rating and folder controls." (its Infuse page), set
+# with a passcode ("Allowed Movie/TV Show ratings - Select the ratings for which no passcode is required", Settings
+# Overview). No pause: Pro is only cancelled in the App Store (its terms).
+# Free use: the free app, its Free plan.
+
+id: infuse
+name: Infuse
+website: https://firecore.com/infuse
+category: streaming
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+    GLOBAL: USD,
+  }
+# No cancel page or help article: its terms say where to cancel ("You may cancel your Subscription renewal through the
+# Subscriptions section of the App Store, or by contacting Apple.").
+cancelUrl: https://firecore.com/terms
+sources: { pricing: https://firecore.com/infuse }
+notes: Infuse Pro is also sold for life, paid once (US$99.99, CA$129.99, £99.99, €99.99, A$149.99, NZ$199.99), which isn’t listed. Infuse runs only on Apple’s devices and is sold only through the App Store.
+
+# Owner (M11.2), read 2026-11-13: its privacy policy names the company that runs Infuse; its terms are with "Firecore, LLC."
+# too, and every page's footer says "© 2026 Firecore, LLC.". Private: no shares listed. Where it is: its contact page's
+# address (its terms' contact section gives the same, and the App Store's EU trader details "Centennial Colorado 80122
+# United States").
+owner:
+  name: 'Firecore, LLC'
+  page:
+    name: Privacy policy
+    url: https://firecore.com/privacy
+  quotes:
+    - 'Firecore, LLC ("us", "we", or "our") operates the https://firecore.com website and the Infuse® application (the "Service").'
+  country:
+    code: US
+    page:
+      name: Contact
+      url: https://firecore.com/contact
+    quotes:
+      - '6834 S University Blvd Ste 430'
+      - 'Centennial, CO 80122'
+      - 'USA'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: Apple's App Store only (its terms; "Download Infuse 8 (free w/ optional in-app
+# purchase)", Purchases and Family Sharing; its privacy policy's one payment processor is "Apple Store Payments."). Apple
+# bills it, so no card networks of Firecore's.
+paymentMethods:
+  - methods: [app-store]
+    page: Terms of service
+    url: https://firecore.com/terms
+    quotes:
+      - 'You may cancel your Subscription renewal through the Subscriptions section of the App Store, or by contacting Apple. Firecore is not able to view or make adjustments to subscriptions set up through the App Store.'
+# Renewal day (M11.5): its terms renew Pro "At the end of each Billing Cycle", without naming the day, and its help centre
+# doesn't say either.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://firecore.com/terms
+    - https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "iPhone (iOS 18 and later)", "iPad (iPadOS 18 and later)", "Apple TV (tvOS
+# 18.5 and later)", "Mac (macOS 15 and later)" and "Vision (visionOS 26 and later)" (What is Infuse?); the registry has no
+# value for Vision. Sign-in: none: Infuse has no account of its own (Pro is bought with your Apple Account; firecore.com's
+# own log-in is for its website), so account.sign-in is left out. Support: a support ticket ("you can open a support
+# ticket and someone from our team will assist you. We work to respond to all emails as quickly as we can.") and its
+# forum ("There is also an active Community Forum", Troubleshooting and Getting Support). App languages: no Firecore page
+# lists them; the App Store page for the app lists its localizations ("English, Arabic, ... French, German, ... Hindi,
+# ... Italian, Japanese, Korean, ... Portuguese, ... Simplified Chinese, ... Spanish", 37 in all), which its release notes
+# bear out in part ("French (Canada) localization", "Added Hindi translation", "Added Spanish (Latin America)
+# translation", "Added Traditional Chinese (HK) translation"), so the registry's eleven (notes.md). Its code is closed
+# (no page says it's open), so software.open-source is left out; it's an app, not a server, so not self-hostable.
+features:
+  platforms: [ios, macos, tv]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+
+# Perks (M11.6): what Pro adds that no feature describes, in its Infuse page's words.
+perks:
+  - id: more-formats
+    name: Additional video formats
+  - id: lossless-audio
+    name: Lossless HD audio
+  - id: airplay-cast
+    name: AirPlay & Google Cast
+  - id: dolby-vision
+    name: Dolby Vision (Profile 5 & 8)
+  - id: trailers
+    name: Trailers
+  - id: library-sync
+    name: Advanced library sync
+  - id: cloud-streaming
+    name: Cloud streaming
+  - id: updates-for-life
+    name: Updates for life
+
+plans:
+  - id: infuse.free
+    name: Free
+    link: https://apps.apple.com/app/infuse/id1136220934
+    features:
+      video.quality: 4k
+      video.hdr: true
+      streaming.concurrent-streams: unlimited
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: []
+      streaming.own-media: true
+      account.parental-controls: true
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'Infuse plays your own files in the app on each device, free to download, with no Firecore account counting them; no page states a number of streams at once.'
+        page:
+          name: Infuse
+          url: https://firecore.com/infuse
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'You can download videos from your network sources to watch offline on iPhone, iPad and Mac, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Downloading Files
+          url: https://support.firecore.com/hc/en-us/articles/215091037-Downloading-Files
+        lastVerified: 2026-11-13
+    notes: 'Free video player for iPhone, iPad, Apple TV, Mac and Vision Pro. It plays your own videos from the device, a computer or NAS on your network, and Plex, Emby and Jellyfin servers, up to 4K HDR, with no ads. Infuse sells no films or shows: “DRM-protected movies & TV shows purchased from the iTunes store are not supported.”'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://firecore.com/infuse
+
+  - id: infuse.pro
+    name: Infuse Pro
+    link: https://apps.apple.com/app/infuse/id1136220934
+    features:
+      video.quality: 4k
+      video.hdr: true
+      audio.dolby-atmos: true
+      streaming.concurrent-streams: unlimited
+      ad-free: true
+      streaming.download-devices: 1
+      streaming.content: []
+      streaming.own-media: true
+      account.pause: false
+      account.parental-controls: true
+    inferred:
+      streaming.concurrent-streams:
+        reason: 'Pro unlocks the app on all your Apple devices, and each plays your own files with no Firecore account counting them; no page states a number of streams at once.'
+        page:
+          name: Upgrade to Infuse 8
+          url: https://support.firecore.com/hc/en-us/articles/360040108234-Upgrade-to-Infuse-8
+        lastVerified: 2026-11-13
+      streaming.download-devices:
+        reason: 'You can download videos from your network sources to watch offline on iPhone, iPad and Mac, without it saying on how many devices, so 1 is the least it can be.'
+        page:
+          name: Downloading Files
+          url: https://support.firecore.com/hc/en-us/articles/215091037-Downloading-Files
+        lastVerified: 2026-11-13
+    perks:
+      [
+        more-formats,
+        lossless-audio,
+        airplay-cast,
+        dolby-vision,
+        trailers,
+        library-sync,
+        cloud-streaming,
+        updates-for-life,
+      ]
+    notes: 'Everything in Free, plus more video formats, lossless HD audio, Dolby Vision and Atmos, AirPlay and Google Cast, trailers, cloud drives (Dropbox, Google Drive, OneDrive and more) and full iCloud sync of watched history and progress. Bought in the App Store; shared with your family through Family Sharing, or on up to 10 devices through Trakt. 7 days free to start. Also sold for life, paid once, which isn’t listed.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://firecore.com/infuse
+      - region: US
+        currency: USD
+        amount: 16.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://firecore.com/infuse
+      - region: CA
+        currency: CAD
+        amount: 2.29
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/ca/app/infuse/id1136220934
+      - region: CA
+        currency: CAD
+        amount: 22.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/ca/app/infuse/id1136220934
+      - region: GB
+        currency: GBP
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/gb/app/infuse/id1136220934
+      - region: GB
+        currency: GBP
+        amount: 17.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/gb/app/infuse/id1136220934
+      - region: IE
+        currency: EUR
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/ie/app/infuse/id1136220934
+      - region: IE
+        currency: EUR
+        amount: 14.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/ie/app/infuse/id1136220934
+      - region: DE
+        currency: EUR
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/de/app/infuse/id1136220934
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/de/app/infuse/id1136220934
+      - region: FR
+        currency: EUR
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/fr/app/infuse/id1136220934
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/fr/app/infuse/id1136220934
+      - region: NL
+        currency: EUR
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/nl/app/infuse/id1136220934
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/nl/app/infuse/id1136220934
+      - region: ES
+        currency: EUR
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/es/app/infuse/id1136220934
+      - region: ES
+        currency: EUR
+        amount: 14.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/es/app/infuse/id1136220934
+      - region: IT
+        currency: EUR
+        amount: 1.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/it/app/infuse/id1136220934
+      - region: IT
+        currency: EUR
+        amount: 14.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/it/app/infuse/id1136220934
+      - region: AU
+        currency: AUD
+        amount: 2.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/au/app/infuse/id1136220934
+      - region: AU
+        currency: AUD
+        amount: 24.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/au/app/infuse/id1136220934
+      - region: NZ
+        currency: NZD
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/nz/app/infuse/id1136220934
+      - region: NZ
+        currency: NZD
+        amount: 22.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://apps.apple.com/nz/app/infuse/id1136220934
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch: its Terms of Service ("Updated: March 18,
+# 2024", Firecore, LLC.'s, under Colorado law), its Privacy Policy ("Updated: May 22, 2026", for the website and the
+# Infuse app), its Infuse page, its help centre's purchase, sync, settings, profiles and security articles, and the
+# App Store page for Infuse (its description, Firecore's own words there, sends you to "firecore.com/terms-privacy for
+# full terms and privacy policy" and gives the 24-hour cancel deadline). Pro is bought only through the App Store, so
+# Apple's Media Services Terms apply to the purchase: the shared document apple-media-services (its header names the App
+# Store's subscriptions), and the worse of each topic's two grades shows. Not applied: Apple's own privacy policy, which
+# covers your Apple Account, not Infuse. There's no sign-up (no Infuse account), and no app licence of its own beyond its
+# terms (the App Store's standard licence is part of Apple's terms). Trakt, TMDB, OpenSubtitles and the media servers
+# and cloud drives it connects to are other companies' services with their own terms, not read. Calibrated against Plex,
+# Emby and Nebula.
+policies:
+  shared: [apple-media-services]
+  links:
+    - name: 'Terms of service'
+      url: https://firecore.com/terms
+    - name: 'Privacy policy'
+      url: https://firecore.com/privacy
+    - name: 'Infuse'
+      url: https://firecore.com/infuse
+    - name: 'Infuse on the App Store'
+      url: https://apps.apple.com/us/app/infuse/id1136220934
+    - name: 'Purchases and Family Sharing'
+      url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+    - name: 'Settings overview'
+      url: https://support.firecore.com/hc/en-us/articles/360015608854-Settings-Overview
+    - name: 'iCloud Sync'
+      url: https://support.firecore.com/hc/en-us/articles/115000070773-iCloud-Sync
+    - name: 'Reporting security issues'
+      url: https://support.firecore.com/hc/en-us/articles/15732551201943-Reporting-Security-Issues
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It collects how you use its website and app, to study and improve them. You can turn off the app’s crash reports in its settings, but the website’s tracking only by refusing cookies, browser by browser.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'To gather analysis or valuable information so that we can improve our Service'
+        - url: https://support.firecore.com/hc/en-us/articles/360015608854-Settings-Overview
+          quote: 'Share Crash Data - Allow Infuse to collect anonymous diagnostic and crash data (system info, video codecs, time used, etc...)'
+        - url: https://firecore.com/privacy
+          quote: 'You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.'
+      action:
+        name: 'Turn off Share Crash Data (settings)'
+        url: https://support.firecore.com/hc/en-us/articles/360015608854-Settings-Overview
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its website uses Google Analytics, and Google may use what it collects for its own ads. You can only refuse cookies or turn on Do Not Track, browser by browser.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'Google may use the collected data to contextualize and personalize the ads of its own advertising network.'
+        - url: https://firecore.com/privacy
+          quote: 'We support Do Not Track ("DNT").'
+        - url: https://firecore.com/privacy
+          quote: 'You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.'
+      action:
+        name: 'Its privacy policy'
+        url: https://firecore.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'Infuse shows no ads and doesn’t track what you watch for advertising.'
+      sources:
+        - url: https://firecore.com/infuse
+          quote: 'No ads, no tracking, and no harvesting of library info…ever! Your data is your own and we believe it should stay that way.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t say whether anything from Infuse trains AI.'
+      pages: [https://firecore.com/privacy, https://firecore.com/terms]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it needs it, and usage data usually for a shorter time, without naming any period.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'Firecore, LLC will retain your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy.'
+        - url: https://firecore.com/privacy
+          quote: 'Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of our Service, or we are legally obligated to retain this data for longer time periods.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'Infuse needs no account and avoids collecting personal data. Your library, watched history and settings stay on your devices and in your own iCloud, where you can delete them yourself.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'To the extent that our website and apps can provide their functionality without requiring your personal info, we will avoid collecting any personal data from you.'
+        - url: https://support.firecore.com/hc/en-us/articles/115000070773-iCloud-Sync
+          quote: 'Select the option to Delete Data From iCloud'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Outside the EEA, its privacy policy names no way to get a copy of your data. Infuse keeps your library on your own devices and iCloud.'
+      pages: [https://firecore.com/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      regions: [EU]
+      tier: neutral
+      reason: 'In the EEA, you can ask it for a copy of your data in a machine-readable form; there’s no way to get it yourself.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'The right to data portability. You have the right to be provided with a copy of the information we have on you in a structured, machine-readable and commonly used format.'
+        - url: https://firecore.com/privacy
+          quote: 'If you wish to be informed what Personal Data we hold about you and if you want it to be removed from our systems, please contact us.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://firecore.com/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'Besides what the law or a valid request requires, it may hand over your data when it believes that protects it from legal liability. It doesn’t say it tells you.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'Firecore, LLC may disclose your Personal Data in the good faith belief that such action is necessary to:'
+        - url: https://firecore.com/privacy
+          quote: 'To protect against legal liability'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your data goes to the United States and may be kept in other countries whose laws protect it less. It promises “adequate controls” without saying what they are.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'If you are located outside United States and choose to provide information to us, please note that we transfer the data, including Personal Data, to United States and process it there.'
+        - url: https://firecore.com/privacy
+          quote: 'Your information, including Personal Data, may be transferred to — and maintained on — computers located outside of your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from your jurisdiction.'
+        - url: https://firecore.com/privacy
+          quote: 'no transfer of your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of your data and other personal information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you download Infuse free, with no Firecore account, and buy Pro in the App Store with your Apple Account.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'To the extent that our website and apps can provide their functionality without requiring your personal info, we will avoid collecting any personal data from you.'
+        - url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+          quote: 'Download Infuse 8 (free w/ optional in-app purchase)'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'It isn’t meant for under-18s, and it removes children’s data it gets without a parent’s consent. Infuse has no ads, and parents can limit what children can see by rating and folder.'
+      sources:
+        - url: https://firecore.com/privacy
+          quote: 'Our Service does not address anyone under the age of 18 ("Children").'
+        - url: https://firecore.com/privacy
+          quote: 'If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.'
+        - url: https://firecore.com/infuse
+          quote: 'Control the types of content your little ones can access with easily configurable rating and folder controls.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel in the App Store’s subscriptions, not with Firecore, and at least 24 hours before your period ends, or it renews.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'You may cancel your Subscription renewal through the Subscriptions section of the App Store, or by contacting Apple.'
+        - url: https://apps.apple.com/us/app/infuse/id1136220934
+          quote: 'Your iTunes Account will be charged for the upcoming period unless you disable auto-renew or cancel your subscription in your Account Settings at least 24-hours prior to the end of the current period.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Firecore gives no money back; cancelling stops the next renewal, so Pro lasts to the end of the time you paid for. If you ask Apple for a refund, Firecore may tell Apple how much you used Infuse.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'All amounts paid are non-refundable.'
+        - url: https://firecore.com/terms
+          quote: 'You may cancel your Subscription renewal through the Subscriptions section of the App Store, or by contacting Apple.'
+        - url: https://firecore.com/privacy
+          quote: 'If we receive a refund request for an in-app purchase, we may provide Apple with information about the your in-app purchase activity.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only after the period you’ve paid for ends, and it tells you first so you can cancel before then.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'Any Subscription fee change will become effective at the end of the then-current Billing Cycle.'
+        - url: https://firecore.com/terms
+          quote: 'Firecore will provide you with reasonable prior notice of any change in Subscription fees to give you an opportunity to terminate your Subscription before such change becomes effective.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Pro starts with 7 free days. It may need your payment details, and it charges you on the trial’s last day unless you’ve cancelled; no reminder is promised.'
+      sources:
+        - url: https://firecore.com/infuse
+          quote: 'Free 7-day trial included. Cancel anytime.'
+        - url: https://firecore.com/terms
+          quote: 'You may be required to enter your billing information in order to sign up for the Free Trial.'
+        - url: https://firecore.com/terms
+          quote: 'On the last day of the Free Trial period, unless you canceled your Subscription, you will be automatically charged the applicable Subscription fees for the type of Subscription you have selected.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say Pro renews on its own at the end of each period, but not that it reminds you first.'
+      pages: [https://firecore.com/terms, https://apps.apple.com/us/app/infuse/id1136220934]
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: good
+      reason: 'You pay the price and any taxes. Your bank or card company may add its own fees, such as for converting currency.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'You further agree to be responsible for all taxes associated with the Service, along with any transaction fees and currency conversions added by your financial institution and intermediaries.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'Every dispute goes to one private referee (an arbitrator), in Denver, Colorado unless you both agree otherwise, and the decision is final, with no appeal. Its terms say nothing about class actions.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'shall be resolved by arbitration. Such arbitration shall be conducted by a single arbitrator.'
+        - url: https://firecore.com/terms
+          quote: 'Unless otherwise agreed to by the parties, arbitration shall be held in the City of Denver, Colorado, USA.'
+        - url: https://firecore.com/terms
+          quote: 'The decision arrived at by the arbitrator shall be final and binding and no appeal shall lie therefrom.'
+      action:
+        name: 'Its dispute clause (its terms)'
+        url: https://firecore.com/terms
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'For changes it calls material, it tries to give at least 30 days’ notice, without saying how. Using Infuse after a change takes effect means you accept it.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'If a revision is material we will make reasonable efforts to provide at least 30 days’ notice prior to any new terms taking effect.'
+        - url: https://firecore.com/terms
+          quote: 'What constitutes a material change will be determined at our sole discretion.'
+        - url: https://firecore.com/terms
+          quote: 'By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It closes an account only if you break its terms or put others at risk, and warns you first, giving you a chance to put it right. It doesn’t mention a refund.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'In the following circumstances we will provide notice to you prior to termination of your account: (a) you are in breach of these Terms; or (b) you are using our Services in a way that can cause or has caused a risk of harm or loss to either Firecore or other users.'
+        - url: https://firecore.com/terms
+          quote: 'If you remedy the issues that caused us to send the notice, to our satisfaction, then we will not terminate your access or license to our Services.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop Infuse or any of its features at any time without notice, and what you paid isn’t refunded.'
+      sources:
+        - url: https://firecore.com/terms
+          quote: 'Firecore reserves the right to modify or discontinue the Service or any feature or functionality thereof at any time without notice.'
+        - url: https://firecore.com/terms
+          quote: 'All amounts paid are non-refundable.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://firecore.com/terms]
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: neutral
+      reason: 'It invites people to report security flaws privately and rewards them, but doesn’t say outside experts audit its security.'
+      sources:
+        - url: https://support.firecore.com/hc/en-us/articles/15732551201943-Reporting-Security-Issues
+          quote: 'we warmly welcome individuals who discover potential security risks or data leaks to disclose them in a responsible way to our team.'
+        - url: https://support.firecore.com/hc/en-us/articles/15732551201943-Reporting-Security-Issues
+          quote: 'We are pleased to provide a complimentary lifetime subscription to Infuse Pro for all eligible reports.'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: great
+      reason: 'You can share Pro with your family through Apple’s Family Sharing, or on up to 10 devices by signing them in to the same Trakt account, even across countries.'
+      sources:
+        - url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+          quote: 'Family Sharing is supported for both in-app purchases and subscriptions.'
+        - url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+          quote: 'Alternative option for Family Sharing via Trakt (can be used between App Store regions)'
+        - url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+          quote: 'A single purchase can be shared with up to 10 devices'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: good
+      reason: 'Sharing Pro through Trakt works on up to 10 devices, and going over can turn sharing off for a while. It names no other limit.'
+      sources:
+        - url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+          quote: 'A single purchase can be shared with up to 10 devices'
+        - url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+          quote: 'If the device count exceeds 10 sharing may become disabled for a period of time'
+      lastVerified: 2026-11-13

@@ -1,0 +1,676 @@
+# Researched by hand on 2026-11-13 (M11.15, the music category, batch 8), read with Edge and a plain fetch from Canada,
+# its Pro page again through a US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exit,
+# and its support community (support.last.fm, its staff's FAQ topics) with a plain fetch. Pages, each quoted where it's
+# used:
+# Pricing: its Pro page (last.fm/pro) prices by where the visitor is: "$4.99 /month" and "$49.99 /year" read from Canada
+# (the page's data names the reader's country, data-country-code="CA") and through the US, Australian and New Zealand
+# exits; "£4.99" and "£49.99" through the UK's; "€4.99" and "€49.99" through Ireland's, Germany's, France's, the
+# Netherlands', Spain's and Italy's. Its staff say "Depending on your location, the price of Pro will be listed in either
+# USD, GBP, or EUR." (Currency change, its support community, 2025-07-07), so the bare "$" is US dollars, Canada's too
+# (Mixcloud's precedent). "Billed monthly" is "thirty-one (31) days from the date your Payment Method is charged" and the
+# year "one year from the date your Payment Method is charged" (its Subscription Terms), so the month is priced every 31
+# days. Its terms say "Unless otherwise stated, prices include VAT.", but no pricing page says so, so no taxIncluded.
+# Not listed: "fixed duration subscriptions" ("one-off payments", "depending on your jurisdiction"), which no page read
+# sells; promotional codes, first terms.
+# Region checklist, 2026-11-13: 1. no country paths (its language paths, /de/pro and others, only translate); 2. a
+# language menu, no country or currency picker; 3. the page's data names the country (data-country-code), not the
+# currency; 4. checkout not opened (Get Pro now asks you to log in); 5. its staff's "Currency change" answer; 6. Edge
+# and a plain fetch from Canada, Edge through each country's exit; 7. no bill offered.
+# Bundles and official resellers: none on its Pro pages or support community; Pro can't be given as a gift (members ask
+# for it: Idea: Allow the Gifting of Pro, 2026-05-06).
+# What it is: a record of what you play elsewhere ("scrobbling"), with stats, charts, recommendations, profiles,
+# friends and shouts. It streams nothing itself: "Last.fm discontinued its streaming service in 2014 and no longer hosts
+# music." and "we don't stream music from our servers any more." (Does Last.fm host music? Isn't it a streaming
+# site?). Its play buttons use other services: "We use Spotify and YouTube as the playback source for all music on the
+# site, so anywhere you see this play button it means you can hear full-length version of that track or album." (How do
+# I listen to music on Last.fm?), "Youtube playback is free for all users in all countries where available, however you
+# will need a Spotify Premium account to use Spotify as playback source." (Do I have to pay to listen to music on
+# Last.fm?). So it's a social service (the decision at `category:`): "connect and engage with other users" (its privacy
+# policy), "Friends and neighbours" and "Every music profile is public" (What do I get for signing up?). It states no
+# audio quality, because it plays none: the sound is YouTube's or Spotify's.
+# Features: the Pro page's comparison table ("Last.month listening report", "Edit your scrobbles", "Change your
+# username", "Advanced stats", "Blasts from the Past", "Historical listening reports", "Advanced playlist templates",
+# "Exclusive display options", "Early access to new features", "30% discount on Last.fm merch", "Ad-free browsing",
+# "Exclusive Pro badge"), each a perk but ad-free; ad-free browsing "Excludes ads on 3rd party video content from YouTube
+# etc." (the Pro page), and "subscribing to Last.fm Pro will not remove YouTube's adverts" (Do I have to pay...?); the
+# free site shows ads ("Don't want to see ads? Upgrade Now", its Features page). Its stations ("Tag stations and Similar
+# Artist radio", "Personalised Radio Stations") are made from songs, not a live broadcast: no live radio (Spotify's
+# precedent). No downloads to listen offline (its free music downloads are "a small selection of music files that were
+# offered for users to download for free by the artists"), it plays no files of yours, and no page read names lyrics or
+# a skip limit. No open protocol (social.protocol []).
+# Free use: the free account ("Join millions of users. All for free.", its about page; "Registering a Last.fm account is
+# free", What do I get for signing up?).
+
+id: last-fm
+name: Last.fm
+website: https://www.last.fm
+# Its support community, where its staff answer (LAST.HQ, LastfmSupport).
+domains: [support.last.fm]
+# Category (2026-11-13, the session's decision): Last.fm tracks what you listen to elsewhere and connects listeners;
+# it plays no music itself ("Last.fm discontinued its streaming service in 2014 and no longer hosts music"), its play
+# buttons using YouTube's or Spotify's players. So social, not music: no audio quality to state.
+category: social
+spendCategory: streaming
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: USD,
+    NZ: USD,
+    GLOBAL: USD,
+  }
+cancelUrl: https://support.last.fm/t/how-do-i-cancel-last-fm-pro/190
+sources: { pricing: https://www.last.fm/pro }
+
+# Owner (M11.2), read 2026-11-13: its privacy policy names Last.fm Limited, which runs it, and says it's UK-based (its
+# contact page: "Registered in: England & Wales", company number 4569646, 128 City Road, London). Paramount's until 2026:
+# "Last.fm is now operating as an independent company following a change in ownership." and "Is Last.fm being acquired
+# by another company? No. Last.fm is now operating independently." (Last.fm is now independent, its staff, 2026-05-27);
+# its three managers "came together as the management team to take Last.fm independent again" and "That’s who owns
+# Last.fm now. Us." (Who’s running Last.fm now?, 2026-06-04). A private company, so no shares are listed.
+owner:
+  name: Last.fm Limited
+  page:
+    name: Privacy Policy
+    url: https://www.last.fm/legal/privacy
+  quotes:
+    - 'Last.fm Limited, ("Last.fm", "we", "us", or "our"), operates the Last.fm website(s), including the mobile and desktop apps, API, and related online services (collectively, the "Last.fm Services").'
+  country:
+    code: GB
+    page:
+      name: Privacy Policy
+      url: https://www.last.fm/legal/privacy
+    quotes:
+      - 'Last.fm is a UK-based company, but operates globally.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: a card (its Subscription Terms; Stripe, its staff's "Stripe is the red
+# "Continue to payment" button") and PayPal (How do I cancel Last.fm Pro?). Its staff say "We accept all major credit and
+# debit cards" (Add payment methods for non-american users, 2025-06-12), naming no network, so acceptedNetworks is left
+# out. No app store bills it: its apps only scrobble and show stats.
+paymentMethods:
+  - methods: [card]
+    page: Subscription Terms
+    url: https://www.last.fm/legal/subscription
+    quotes:
+      - 'to charge the fixed upfront payment for a fixed duration or a recurring subscription fee (depending on your jurisdiction and/or your selection) to your credit or debit card or bank account (each, a “Payment Method”).'
+  - methods: [paypal]
+    page: How do I cancel Last.fm Pro?
+    url: https://support.last.fm/t/how-do-i-cancel-last-fm-pro/190
+    quotes:
+      - 'PayPal customers can also cancel their subscription from their PayPal account settings, as follows:'
+# Renewal day (M11.5): its Subscription Terms bill "starting on the day you subscribe to the Subscription Services", but
+# a month every 31 days ("The monthly subscription billing period is thirty-one (31) days from the date your Payment
+# Method is charged, and the annual subscription billing period is one year from the date your Payment Method is
+# charged."), which no kind of core's names: the month drifts a day or more each month, so not the date you signed up,
+# and not every 30 days (notes.md).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    [
+      https://www.last.fm/legal/subscription,
+      https://support.last.fm/t/how-do-i-update-my-payment-details/119637,
+    ]
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "Last.fm Desktop Scrobbler for Windows", "Not using Windows? Try the Mac
+# version", "Last.fm Android App", "Last.fm iOS App" (Track My Music) and the website. Sign-in: "Username or Email" and
+# "Password" (its login page); no other way is offered there, and its staff haven't added two-step sign-in (members ask
+# for it: Future 2FA or any other security measures). Its privacy policy mentions "when you log in via social platforms
+# like Google, Apple, or Facebook", which no sign-in page read offers, so it isn't listed. App languages: its language
+# menu (English, Deutsch, Español, Français, Italiano, 日本語, Polski, Português, Русский, Svenska, Türkçe, 简体中文; the
+# registry has no Polish, Russian, Swedish or Turkish). Support: "Please visit our help section for your support issues.
+# Don’t forget to check the FAQ and the support forums" (Contact Us) and, for Pro, "feel free to send us an email" (I’m
+# having trouble with my Last.fm Pro subscription). No pause (cancelling is the only way to stop, and promotional
+# subscriptions "cannot be stopped or paused") and no parental controls on its pages.
+features:
+  platforms: [web, windows, macos, android, ios]
+  account.sign-in: [password]
+  languages.interface: [en, de, es, fr, it, ja, pt, zh]
+  support.channels: [email, community]
+
+# Perks (M11.6): Pro's comparison table, in its words, but ad-free (a feature).
+perks:
+  - id: last-month-report
+    name: Last.month listening report
+  - id: edit-scrobbles
+    name: Edit your scrobbles
+  - id: change-username
+    name: Change your username
+  - id: advanced-stats
+    name: Advanced stats
+  - id: blasts-from-the-past
+    name: Blasts from the Past
+  - id: historical-reports
+    name: Historical listening reports
+  - id: playlist-templates
+    name: Advanced playlist templates
+  - id: display-options
+    name: Exclusive display options
+  - id: early-access
+    name: Early access to new features
+  - id: merch-discount
+    name: 30% discount on Last.fm merch
+  - id: pro-badge
+    name: Exclusive Pro badge
+
+plans:
+  - id: last-fm.free
+    name: Free
+    link: https://www.last.fm/about
+    features:
+      ad-free: false
+      music.on-demand: false
+      music.offline: false
+      music.own-library: false
+      music.live-radio: false
+      social.protocol: []
+    notes: With ads. Records what you play elsewhere, with weekly and yearly reports. Plays songs through YouTube's player, or Spotify's with Spotify Premium; Last.fm streams nothing itself.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/about
+  - id: last-fm.pro
+    name: Pro
+    link: https://www.last.fm/pro
+    features:
+      ad-free: true
+      music.on-demand: false
+      music.offline: false
+      music.own-library: false
+      music.live-radio: false
+      social.protocol: []
+    perks:
+      [
+        last-month-report,
+        edit-scrobbles,
+        change-username,
+        advanced-stats,
+        blasts-from-the-past,
+        historical-reports,
+        playlist-templates,
+        display-options,
+        early-access,
+        merch-discount,
+        pro-badge,
+      ]
+    notes: Its pages have no ads while you're logged in, but YouTube's player still shows YouTube's. A month is billed every 31 days.
+    prices:
+      - region: CA
+        currency: USD
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: CA
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: GB
+        currency: GBP
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: GB
+        currency: GBP
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: IE
+        currency: EUR
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: IE
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: DE
+        currency: EUR
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: DE
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: FR
+        currency: EUR
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: FR
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: NL
+        currency: EUR
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: NL
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: ES
+        currency: EUR
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: ES
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: IT
+        currency: EUR
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: IT
+        currency: EUR
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: AU
+        currency: USD
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: AU
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: NZ
+        currency: USD
+        amount: 4.99
+        interval: day
+        intervalCount: 31
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+      - region: NZ
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.last.fm/pro
+
+# Terms and policies (M11.15), read 2026-11-13 with a plain fetch (each page's own text): its Terms of Use (updated 14
+# September 2026, its acceptable use policy included), Privacy Policy (updated 26 May 2026), Cookies Policy (updated 15
+# October 2026), Subscription Terms (effective 26 February 2024, which Pro's buyers accept and which include the Terms
+# of Use and Privacy Policy), Community Guidelines (no topic beyond the terms' own), and its staff's support topics on
+# cancelling, paying, deleting your account and downloading your scrobbles. Its API Terms of Service are for developers,
+# not read. Not read: its sign-up form, which shows Edge (from Canada and through a US exit) a picture puzzle ("Enter the
+# characters seen in the image below"), and its checkout (it asks you to log in). Its site shows UK and European readers a
+# consent banner ("Do you consent to these personal data processing activities by us and our partners?", 1,747
+# partners) and North American readers none; its footer's "Do Not Sell My Personal Information" opens the same cookie
+# settings. No security page, security.txt or bug bounty found. Calibrated against Mixcloud's, Audiomack's and
+# Curiosity Stream's grades. Not rated: switching plans (one paid plan), its apps' licence and changes to your device (not
+# topics for music or social).
+policies:
+  links:
+    - name: Terms of Use
+      url: https://www.last.fm/legal/terms
+    - name: Privacy Policy
+      url: https://www.last.fm/legal/privacy
+    - name: Cookies Policy
+      url: https://www.last.fm/legal/cookies
+    - name: Subscription Terms
+      url: https://www.last.fm/legal/subscription
+    - name: Last.fm Pro
+      url: https://www.last.fm/pro
+    - name: How do I cancel Last.fm Pro?
+      url: https://support.last.fm/t/how-do-i-cancel-last-fm-pro/190
+    - name: How do I permanently delete my account?
+      url: https://support.last.fm/t/how-do-i-permanently-delete-my-account/163
+    - name: How can I download / backup my Last.fm scrobbling data?
+      url: https://support.last.fm/t/how-can-i-download-backup-my-last-fm-scrobbling-data/171
+    - name: Join (sign-up page)
+      url: https://www.last.fm/join
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records the pages you visit and your searches, uses tools that watch your mouse movements and clicks, and runs tests and research on your data. You can refuse only through cookie settings, browser by browser.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'From time to time, we use may third-party tools to help us look at mouse movements, clicks and the pages you visit to assess and improve site functionality, usability and security.'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We use all categories of personal information to analyse and understand how the Last.fm Services are operating.'
+        - url: https://www.last.fm/legal/cookies
+          quote: 'Your choices generally apply to the browser and device you are using.'
+      action:
+        name: Its Cookies Policy (managing cookies)
+        url: https://www.last.fm/legal/cookies
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your email (coded) and what you do on Last.fm to Meta, Snap and X to show you ads there, and your details to partners for their own use. You can opt out only in part, device by device and browser by browser.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We share your personal information with social media companies such as Meta, Snap, X, etc. so that we can communicate with you or provide you with relevant advertising related to your interests on those platforms.'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'These commercial partners use the information we provide to them as described in their privacy policies.'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'Please note that your choice to opt-out is device-specific or browser-specific and you will need to manage your preferences for each device or browser you use.'
+      action:
+        name: Its Privacy Policy (interest-based advertising)
+        url: https://www.last.fm/legal/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Without Pro you see ads, and ad companies follow what you do on Last.fm and other sites to pick them. In North America you can turn that off only in cookie settings or ad industry tools, browser by browser.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'Third-party ad providers (such as Google AdSense, YieldMo, Freestar, Pubmatic etc.) use cookies, pixels, tags, beacons or similar technologies to enable interest-based advertising across sites and apps (combining Last.fm data with your activity elsewhere).'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'Please note that your choice to opt-out is device-specific or browser-specific and you will need to manage your preferences for each device or browser you use.'
+      action:
+        name: Its Privacy Policy (interest-based advertising)
+        url: https://www.last.fm/legal/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      regions: [GB, EU]
+      tier: good
+      reason: 'In the UK and Europe its site asks first: it uses cookies for ads chosen from what you do only once you agree in its cookie settings.'
+      sources:
+        - url: https://www.last.fm/legal/cookies
+          quote: 'Except where a technology is strictly necessary or another applicable legal exception has been confirmed, we will not use it until you have made your choice through our cookie settings.'
+        - url: https://www.last.fm/legal/cookies
+          quote: 'measure advertising and, where you have agreed, provide advertising based on your interests.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy trains machine learning models to improve its own service, such as recommendations, but doesn’t say whether what you write trains AI used elsewhere.'
+      pages: [https://www.last.fm/legal/privacy, https://www.last.fm/legal/terms]
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      tier: poor
+      reason: 'Last.fm uses your messages and posts to run and personalise its service, and can watch, change or remove anything you post. Only people in the UK and Europe can object, by email.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We use registration information, profile information, payment information, as well as your scrobbles, messages and other online engagement to provide the Last.fm Services.'
+        - url: https://www.last.fm/legal/terms
+          quote: 'it has the right, in its sole discretion to monitor, modify, transmit over various networks, refuse, move, block access to or remove any of Your Upload Information.'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'Object to our use of your data when we rely on legitimate interests.'
+      action:
+        name: Its Privacy Policy (your rights)
+        url: https://www.last.fm/legal/privacy
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it thinks reasonably necessary, and your account while you use it. A deleted account can be restored for 14 days, then it’s gone for good.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We will retain your personal information for the time period reasonably necessary to achieve the purposes described in this privacy policy'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'For example, we retain your registration information for the duration of your relationship with us.'
+        - url: https://support.last.fm/t/how-do-i-permanently-delete-my-account/163
+          quote: 'Accounts that requested permanent deletion from May 2018 onwards can only be recovered within 14 days of requesting deletion by logging in. After this time they are permanently deleted from our database.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself in its settings, which deletes your listening history and everything with it.'
+      sources:
+        - url: https://support.last.fm/t/how-do-i-permanently-delete-my-account/163
+          quote: 'Should you wish to delete your account, you can do so by navigating to your Account Settings page.'
+        - url: https://support.last.fm/t/how-do-i-permanently-delete-my-account/163
+          quote: 'This will delete your Last.fm user account, all your listening data, and everything else that goes with it.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can take your whole listening history with you through its public API, in JSON or XML, after making a free API key, or with tools others built on it.'
+      sources:
+        - url: https://support.last.fm/t/how-can-i-download-backup-my-last-fm-scrobbling-data/171
+          quote: 'Your scrobbling data is made available through the Last.fm public API and is available in XML and JSON formats.'
+        - url: https://support.last.fm/t/how-can-i-download-backup-my-last-fm-scrobbling-data/171
+          quote: 'Please note that you will need to create an API key before you can use the Last.fm API.'
+      action:
+        name: How can I download / backup my scrobbling data?
+        url: https://support.last.fm/t/how-can-i-download-backup-my-last-fm-scrobbling-data/171
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your data to police, courts and governments when it thinks the law or legal process needs it, or to protect its rights or people’s safety. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We will share your information with our legal and tax advisors, insurers, law enforcement, judicial and other government bodies (including law enforcement (police) or regulators), and others when we think it is necessary to do so to comply with the law, the legal process, to obtain legal or other professional advice, to respond to legal claims, or to protect our rights or the property or personal safety of our users, employees, or the public.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'It’s based in the UK, and may move your data to the US and other countries, using standard contracts approved under UK and European law for the US.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We may transfer your personal information to a country (including the United States) that does not provide the same level of protection for your personal information.'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'For instance, we put in place standard contractual clauses approved under data protection laws in the United Kingdom, the EEA, Switzerland to facilitate transfers to the United States of America.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      status: not-stated
+      reason: 'Its sign-up form shows automated readers a picture puzzle, and its privacy policy lists what you may give without saying which of it signing up needs.'
+      pages: [https://www.last.fm/join, https://www.last.fm/legal/privacy]
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'You must be 16, or 13 in the US, to have an account, and it deletes children’s data it finds. It has no parental consent or kids’ settings.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We do not knowingly allow anyone under the age of 16 (or 13 in the United States) to create an account or submit personal information through the Last.fm Services.'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'we will delete it as soon as reasonably practicable'
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We do not offer verified parental consent mechanisms as our services are not child-directed.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it takes reasonable security measures, and names no outside check or way to report a security flaw.'
+      sources:
+        - url: https://www.last.fm/legal/privacy
+          quote: 'We have adopted commercially reasonable technical, administrative, and physical security measures designed to protect your personal information from loss, misuse, unauthorized access, and alteration.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel in your account settings, or in PayPal if you paid that way, but at least 24 hours before it renews. You keep Pro until the period ends.'
+      sources:
+        - url: https://www.last.fm/legal/subscription
+          quote: 'you cancel your subscription at least 24 hours before the end of such prior subscription period through your account settings at www.last.fm/settings/subscription'
+        - url: https://support.last.fm/t/how-do-i-cancel-last-fm-pro/190
+          quote: 'However, you will remain a Last.fm Pro member on the website and will have access to your Pro benefits until your subscription end date.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'No money back, even if you cancel early, but you keep Pro until the period you paid for ends.'
+      sources:
+        - url: https://www.last.fm/legal/subscription
+          quote: 'You will have continued access to Last.fm Pro for the remainder of your paid subscription period, but YOU WILL NOT RECEIVE A REFUND OF ANY FEES PAID.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can raise the price at any time after a notice, which may be just the new price on its Pro page. You can cancel if you don’t accept it.'
+      sources:
+        - url: https://www.last.fm/legal/subscription
+          quote: 'Last.fm reserves the right to change the subscription fee for Last.fm Pro at any time following notice to you (either through publication on www.last.fm/pro and/or by sending an email to the address you have registered for your account).'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'If you do not wish to accept a change to the subscription fee, you may cancel your subscription as described below.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: good
+      reason: 'A free or cheap promotional period turns into the full price unless you cancel first. For one longer than a week, it reminds you at least 7 days before; for a shorter one, only in the email you get when you sign up.'
+      sources:
+        - url: https://www.last.fm/legal/subscription
+          quote: 'If you do not cancel your Last.fm Pro subscription by the last day of your Promotional Period, you authorize us to begin your paying subscription and automatically charge your Payment Method'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'FOR PROMOTIONAL PERIODS GREATER THAN 7 DAYS, WE WILL NOTIFY YOU OF THE DATE THE PROMOTIONAL PERIOD ENDS IN BOTH THE ACKNOWLEDGMENT EMAIL NOTICE YOU RECEIVE AFTER SIGN UP AND AT LEAST 7 DAYS IN ADVANCE OF THE DATE THE PROMOTIONAL PERIOD ENDS.'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'IF YOUR PROMOTIONAL PERIOD IS 7 DAYS OR LESS, WE WILL NOTIFY YOU OF THE DATE THE PROMOTIONAL PERIOD ENDS IN THE ACKNOWLEDGMENT EMAIL NOTICE YOU RECEIVE AFTER SIGN UP.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its Subscription Terms say Pro renews on its own until you cancel, but not that it reminds you before it renews.'
+      pages: [https://www.last.fm/legal/subscription, https://www.last.fm/pro]
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: poor
+      reason: 'Its terms let it add transaction fees to the price without saying what they are.'
+      sources:
+        - url: https://www.last.fm/legal/subscription
+          quote: 'When you subscribe to Last.fm Pro and provide a Payment Method, you authorize us to charge your Payment Method the applicable subscription fee, along with any other taxes or transaction fees which may apply to your use of Last.fm Pro.'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'The amount charged to your Payment Method may vary from billing period to billing period due to changes in your subscription plan or applicable taxes or transaction fees.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Its terms follow English law and send disputes to no private referee, so they go to the courts.'
+      sources:
+        - url: https://www.last.fm/legal/terms
+          quote: 'These Terms of Use and the interpretation of these Terms of Use shall be governed by and construed in accordance with the laws of England.'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'These Subscription Terms and the interpretation of these Subscription Terms shall be governed by and construed in accordance with the laws of England.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'It can change its terms at any time without telling you, only posting them on its site. Using Last.fm afterwards means you accept them.'
+      sources:
+        - url: https://www.last.fm/legal/terms
+          quote: 'We reserve the right to add, delete, change or modify parts of these Terms of Use at our sole discretion and at any time without notice to you.'
+        - url: https://www.last.fm/legal/terms
+          quote: 'Your continued use of the Website constitutes your acceptance of the new Terms of Use.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can cut off your access at any time, at its own choice, without notice. If it ends Pro for a breach or a payment problem, you get no money back.'
+      sources:
+        - url: https://www.last.fm/legal/terms
+          quote: 'Last.fm reserves the right to restrict, suspend, deny or terminate access to all or part of the Website or any Service and to deny access to any person in its sole discretion without notice or liability of any kind.'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'If your subscription is terminated for any of the 3 reasons set out above, you will not be entitled to a refund.'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'Anything you post gives Last.fm and its partners a forever licence they can pass on or sell, for any purpose, ads included.'
+      sources:
+        - url: https://www.last.fm/legal/terms
+          quote: 'a non-exclusive, worldwide, perpetual, unrestricted, irrevocable, royalty-free and fully transferable, assignable and sub-licensable right and licence to use, reuse, modify, adapt, alter, display, archive, publish, sub-license, perform, copy, reproduce, disclose, transmit, communicate to the public, post, sell, translate, create derivative works of, distribute, make and export Your Upload Information'
+        - url: https://www.last.fm/legal/terms
+          quote: 'for any purposes whatsoever including, without limitation, for advertising, marketing, publicity and promotional purposes'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of Last.fm at any time without notice and says it owes you nothing for it. Only if Pro itself ends for good do you get back the unused part of what you paid.'
+      sources:
+        - url: https://www.last.fm/legal/terms
+          quote: 'We may also impose limits on certain features and/or restrict access to parts of or all of the Properties without notice or liability to you or any third party.'
+        - url: https://www.last.fm/legal/subscription
+          quote: 'If Last.fm cancels the Subscription Services due to no fault of yours and the Subscription Services do not resume, Last.fm will provide a Credit in the form of a pro rata refund of any pre-paid subscription fees for any period of time remaining in your current subscription period after the cancellation.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.last.fm/legal/terms, https://www.last.fm/legal/privacy]
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Billing mistakes must be reported in 60 days
+      tier: poor
+      reason: 'If you don’t tell Last.fm about a billing mistake within 60 days of it showing on your statement, you give up the right to dispute it.'
+      sources:
+        - url: https://www.last.fm/legal/subscription
+          quote: 'If there are any discrepancies in billing, you hereby waive your right to dispute such discrepancies if you do not notify Last.fm within sixty (60) days after they first appear on an account statement.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: No running down Last.fm on Last.fm
+      tier: poor
+      reason: 'Its rules forbid posting anything that disparages Last.fm or puts off its advertisers, and it decides what breaks them.'
+      sources:
+        - url: https://www.last.fm/legal/terms
+          quote: 'disparaging (including disparaging of Last.fm, its parent, subsidiaries or affiliates), anything that adversely affects Last.fm such as discouraging any person or entity from advertising with, linking to or supplying Last.fm'
+      lastVerified: 2026-11-13

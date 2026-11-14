@@ -1,0 +1,553 @@
+# Researched by hand on 2026-11-13 (M11.15, the music category, batch 8), read with a plain fetch and Edge from Canada,
+# its home page again through a US, UK, German and Australian exit, and its help centre (help.nugs.net, every article
+# its folders list and those its search finds) with a plain fetch. Pages, each quoted where it's used:
+# Pricing: its home page's plans ("nugs $14.99/month or $149.99/year after your 7-day free trial." and "nugs Hi-Res
+# $24.99/month or $249.99/year after your 7-day free trial"), whose plan data names the currency
+# ("currencyCode":"USD", "price":14.99, 149.99, 24.99 and 249.99) and the site one locale ("locale":"default"); its
+# help centre's "What is nugs and how much does it cost?" gives the same prices. The page shows the same "$14.99/month"
+# and "$24.99/month" read from Canada and through the US, UK, German and Australian exits: one price list in US dollars
+# for everyone, so GLOBAL. "Advertised prices for nugs.net products do not include applicable taxes." (Do listed prices
+# include taxes?), so no taxIncluded. Every plan starts with "a 7-day free trial for new subscribers", a trial.
+# Region checklist, 2026-11-13: 1. no country or locale paths; 2. no picker; 3. its plan data (USD, locale default); 4.
+# checkout not opened (get.nugs.net asks you to create an account first); 5. its tax articles; 6. a plain fetch and Edge
+# from Canada, Edge through four exits; 7. no bill offered. Where it's sold: "The vast majority of our streaming
+# catalog is available globally." and some Sony archive shows "are geo-blocked to the United States" (Why am I having a
+# problem streaming Videos with my subscription?); its terms say only "The Service may be accessed from countries
+# around the world", so no availableIn.
+# Not listed: Pay-Per-View livestreams ("Pay-per-views are not included with a subscription", bought one at a time),
+# downloads and CDs (one-time purchases), and SiriusXM Platinum's "nugs Platinum subscription", SiriusXM's own plan with
+# "streaming audio of soundboard masters from 5,000 live shows" (What is a SXM Platinum nugs subscription?): a partner's
+# plan, noted, not listed. Play Dead, "the first official Grateful Dead streaming app", is sold alone ("Standalone Play
+# Dead subscriptions are $9.99/month or $99.99/year.") and as an add-on to nugs plans (below); the standalone app isn't
+# listed (notes.md).
+# Bundles: the nugs x Play Dead bundle is nugs with the Play Dead add-on ("Play Dead is also available as an add-on to
+# nugs subscriptions for an extra $4.99/month or $49.99/year."), so an add-on, not a bundle file. Official resellers:
+# none; "it is not possible to "gift" streaming subscriptions directly at this time" (Can I gift a subscription?).
+# Features, read 2026-11-13: "nugs subscriptions are $14.99/month or $149.99/year for MP3 quality audio streaming and HD
+# video." and Hi-Res "with 4K video (when available), lossless 16-bit 44.1 kHz streaming audio , MQA & 360 Reality Audio
+# on select shows" (What is nugs and how much does it cost?); "Audio is optimized for mobile streaming and encoded as
+# HE-AAC 160kbps VBR stereo." and "Hi-Res subscriptions stream CD-quality 16-bit 44.1 kHz with MQA audio on compatible
+# devices" (What is the quality of the streaming files?), so standard and lossless (no sample rate above 48 kHz is named
+# for streaming; MQA's isn't given). 360 Reality Audio is Sony's spatial audio, not Dolby Atmos ("in the vein of the
+# cinema-focused Dolby Atmos", What is 360 Reality audio?): a perk. "You can access streaming content on any single
+# device at a time." (How many devices can I stream on?). "Quick sign-up. Ad-free. Cancel anytime." (its plan cards).
+# "Listen to full shows on demand" and "save shows for offline playback" for subscribers; "Non-subscribers can listen to
+# nugs.net radio for free, and stream cherry-picked full length concerts on demand. Featured shows rotate weekly." (What
+# is the nugs.net app?). Live: "exclusive livestreams" for subscribers and "Free Live Audio Streams" for anyone with an
+# account (How do I access Free Live Audio Streams?), and nugs.net radio, "a free 24/7 stream" (What's included with
+# the free nugs app vs. a subscription?). What it streams: concerts ("concert livestreams, on-demand concert video, and
+# high-quality streaming audio"), which no streaming.content value names (notes.md), so []. No page names lyrics or
+# your own files.
+# Free use: a free account (How do I create a free account?): nugs.net radio, weekly featured shows and Free Live Audio
+# Streams.
+
+id: nugs-net
+# Its brand is nugs ("©nugs", its pages' titles); nugs.net is its address and the name its terms use.
+name: nugs
+aliases: [nugs.net]
+website: https://www.nugs.net
+# Its help centre.
+domains: [help.nugs.net]
+category: music
+spendCategory: streaming
+billingCurrency: { GLOBAL: USD }
+cancelUrl: https://help.nugs.net/support/solutions/articles/6000261447
+sources: { pricing: https://www.nugs.net/ }
+
+# Owner (M11.2), read 2026-11-13: its terms name Nugs.net Enterprises, Inc., of Bala Cynwyd, Pennsylvania, which owns
+# the service; its privacy policy says it's headquartered in the United States. No page read names a parent or owners
+# (its terms and cookie policy mention only "its parents" and "its affiliates" in general), and it lists no shares.
+owner:
+  name: Nugs.net Enterprises, Inc.
+  page:
+    name: Terms of Use Agreement
+    url: https://www.nugs.net/terms.html
+  quotes:
+    - 'Welcome and thank you for your interest in Nugs.net Enterprises, Inc. ("Company", "we", "us" or "our").'
+    - 'We are the exclusive owner and proprietor of the Website and Service.'
+  country:
+    code: US
+    page:
+      name: Privacy Policy
+      url: https://www.nugs.net/privacy-policy.html
+    quotes:
+      - 'We are headquartered in the United States and may use service providers that operate in other countries.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: cards and PayPal (its help centre, an article of 2015 its terms of 2026 still
+# match: Stripe for "card acceptance" and "your credit card or other payment instrument (e.g., PayPal)"), and Apple's
+# and Google's in-app subscriptions ("If you subscribed in app using Apple or Google you have to use Apple/Google
+# Subscriptions", How do I cancel or manage my nugs subscription?, whose words core's app-store wording doesn't read, so
+# the gift article is quoted). Roku bills it too ("If you subscribed to nugs in app using Roku", How do I manage my nugs
+# subscription on Roku?), which no wording of core's reads either: not listed (notes.md).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://help.nugs.net/support/solutions/articles/6000055204
+    quotes:
+      - 'Visa, Mastercard, American Express, Discover or any payment method funded through PayPal.'
+paymentMethods:
+  - methods: [card, paypal]
+    page: Can I make a purchase with a check/debit card/cash/money order/traveler's check/livestock/barter of labor?
+    url: https://help.nugs.net/support/solutions/articles/6000055204
+    quotes:
+      - 'Visa, Mastercard, American Express, Discover or any payment method funded through PayPal.'
+  - methods: [app-store]
+    page: Can I gift a subscription?
+    url: https://help.nugs.net/support/solutions/articles/6000254126
+    quotes:
+      - 'The only way to gift a subscription is to purchase a gift card for Apple or Google Play or a Prepaid Credit Card and have your loved ones pay for their subscription using that.'
+# Renewal day (M11.5): its terms bill "at the start of the Subscription" and then "at regular intervals in accordance
+# with your elections at the time of purchase", naming no day; its help centre says nothing more.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.nugs.net/terms.html
+    - https://help.nugs.net/support/solutions/articles/6000276165
+    - https://help.nugs.net/support/solutions/articles/6000261447
+  lastVerified: 2026-11-13
+
+# General features, read 2026-11-13. Platforms: "available on iOS, Android, Roku, Android TV, FireTV, AppleTV, Sonos, and
+# BluOS" (its home page) and its desktop player in a browser (How do I access nugs on Mac or PC?). Sign-in: its sign-up
+# page's "SIGN UP WITH GOOGLE", "SIGN UP WITH FACEBOOK" and "SIGN UP WITH APPLE", or "your first and last name, a valid
+# email address and select your password" (How do I create a free account?); no page names two-step sign-in. App
+# languages: its site and help centre are in English only (no language picker; its terms are "drawn up in English").
+# Support: "opening a new support ticket" (Where do I go for help with nugs App or subscription?) and a live chat
+# "only enabled during Livestream" (Is help available during the livestreams?); its phone number is for privacy
+# requests. No pause (cancelling or switching plans only) and no parental controls on its pages.
+features:
+  platforms: [web, ios, android, tv]
+  account.sign-in: [password, sso]
+  languages.interface: [en]
+  support.channels: [email, chat]
+
+# Perks (M11.6): what its plan cards list that no feature describes, in their words.
+perks:
+  - id: exclusive-livestreams
+    name: Exclusive concert livestreams
+  - id: store-discount-15
+    name: 15% off purchases at nugs.net
+  - id: store-discount-20
+    name: 20% off at nugs.net
+  - id: 360-reality-audio
+    name: 360 Reality Audio on select shows
+
+addOns:
+  # The nugs x Play Dead bundle: Play Dead on a nugs plan bought directly on nugs.net ("you’ll need to subscribe
+  # directly through nugs.net (not via Apple, Google, or Play Dead)"; "limited time discounted nugs subscriptions are not
+  # eligible"), How do I get the discounted nugs + Play Dead bundle?.
+  - id: nugs-net.play-dead
+    name: Play Dead
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.nugs.net/support/solutions/articles/6000283977
+      - region: GLOBAL
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.nugs.net/support/solutions/articles/6000283977
+
+plans:
+  - id: nugs-net.free
+    name: Free
+    link: https://help.nugs.net/support/solutions/articles/6000267002
+    features:
+      ad-free: false
+      audio.quality: standard
+      music.on-demand: false
+      music.offline: false
+      music.live-radio: true
+    notes: nugs.net radio, a few featured concerts that change each week, and free live audio streams, with a free account. No page says whether it has ads.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://help.nugs.net/support/solutions/articles/6000055215
+  - id: nugs-net.nugs
+    name: nugs
+    link: https://get.nugs.net/checkout/nntrlmonthly1499
+    categories: [music, streaming]
+    features:
+      ad-free: true
+      audio.quality: standard
+      music.on-demand: true
+      music.offline: true
+      music.unlimited-skips: true
+      music.live-radio: true
+      video.quality: 720p
+      streaming.concurrent-streams: 1
+      streaming.content: []
+      streaming.own-media: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays full concerts on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: What is the nugs.net app?
+          url: https://help.nugs.net/support/solutions/articles/6000055215
+        lastVerified: 2026-11-13
+      video.quality:
+        reason: 'Its help centre says nugs streams “HD video” and its exclusive livestreams “in HD quality”, naming no resolution, so 720p (HD) is the least it can be.'
+        page:
+          name: What is nugs and how much does it cost?
+          url: https://help.nugs.net/support/solutions/articles/6000276165
+        lastVerified: 2026-11-13
+    perks: [exclusive-livestreams, store-discount-15]
+    addOnIds: [nugs-net.play-dead]
+    notes: Concert audio and video from 30,000+ shows, and subscriber-only livestreams once the 7-day trial ends. Pay-per-view livestreams cost extra.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nugs.net/
+      - region: GLOBAL
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nugs.net/
+  - id: nugs-net.hi-res
+    name: nugs Hi-Res
+    link: https://get.nugs.net/checkout/nntrlhqmonthly
+    categories: [music, streaming]
+    features:
+      ad-free: true
+      audio.quality: lossless
+      music.on-demand: true
+      music.offline: true
+      music.unlimited-skips: true
+      music.live-radio: true
+      video.quality: 4k
+      streaming.concurrent-streams: 1
+      streaming.content: []
+      streaming.own-media: false
+    inferred:
+      music.unlimited-skips:
+        reason: 'It plays full concerts on demand, offline too, and no page names a limit on skipping, so it is unlimited.'
+        page:
+          name: What is the nugs.net app?
+          url: https://help.nugs.net/support/solutions/articles/6000055215
+        lastVerified: 2026-11-13
+    perks: [exclusive-livestreams, store-discount-20, 360-reality-audio]
+    addOnIds: [nugs-net.play-dead]
+    notes: Everything in nugs, with 16-bit 44.1 kHz lossless audio, MQA on compatible devices, and 4K video when a show has it.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nugs.net/
+      - region: GLOBAL
+        currency: USD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.nugs.net/
+
+# Terms and policies (M11.15), read 2026-11-13 with a plain fetch: its Terms of Use Agreement and Privacy Policy (both of
+# June 12, 2026), its Cookie Policy (last updated August 5, 2025), its sign-up page (id.nugs.net, read in Edge: "By
+# creating an account, I confirm that I have read, understood, and agree to the Terms of Service and Privacy Policy";
+# nothing typed), and its help centre's articles on cancelling, refunds, deleting your account, devices, gifts and
+# free trials. Its returns page holds shipping and CD returns only. Not read: its checkout (it needs an account),
+# Stripe's privacy policy and terms (which its terms make you accept for payments), and Apple's, Google's and Roku's
+# terms for in-app purchases. No security page or security.txt (both answer "page not found"). Calibrated against
+# Mixcloud's, Audiomack's, Qobuz's and Last.fm's grades. Not rated: its apps' licence and changes to your device (not
+# topics for music or streaming).
+policies:
+  links:
+    - name: Terms of Use Agreement
+      url: https://www.nugs.net/terms.html
+    - name: Privacy Policy
+      url: https://www.nugs.net/privacy-policy.html
+    - name: Cookie Policy
+      url: https://www.nugs.net/privacy-cookie.html
+    - name: How do I cancel or manage my nugs subscription?
+      url: https://help.nugs.net/support/solutions/articles/6000261447
+    - name: How do I delete my account?
+      url: https://help.nugs.net/support/solutions/articles/6000245388
+    - name: How do I create a free account?
+      url: https://help.nugs.net/support/solutions/articles/6000267002
+    - name: Can I gift a subscription?
+      url: https://help.nugs.net/support/solutions/articles/6000254126
+    - name: How many devices can I stream on?
+      url: https://help.nugs.net/support/solutions/articles/6000274824
+    - name: How do I save audio for offline playback?
+      url: https://help.nugs.net/support/solutions/articles/6000255107
+    - name: Do listed prices include taxes?
+      url: https://help.nugs.net/support/solutions/articles/6000263901
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It studies how you use nugs with Google Analytics and Amplitude, to improve the service and the rest of its business. You can only limit that in your browser’s cookie settings, or with Do Not Track.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'We may use your personal information to analyze your usage of the Service, improve the Service, improve the rest of our business'
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'For example, we may use analytics solutions from Google Analytics and Amplitude for this purpose.'
+        - url: https://www.nugs.net/privacy-cookie.html
+          quote: 'Most web browsers allow you to manage cookies through the browser settings.'
+      action:
+        name: Its Cookie Policy (your choices)
+        url: https://www.nugs.net/privacy-cookie.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: bad
+      reason: 'It shares your details with ad companies to show you ads on other sites, and with partners whose products may interest you. Some US states’ laws call that selling; only their residents can ask it to stop.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'We may also share information about our users with these companies to facilitate interest-based advertising to those or similar users on other online platforms.'
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'Third parties with whom we partner, including parties with whom we co-sponsor events or promotions, with whom we jointly offer products or services, or whose products or services may be of interest to you.'
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'The State Privacy Laws may classify certain of our activities as “selling” or “sharing” your Personal Information.'
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its plans have no ads, but it tracks what you do, with Google, Meta, LinkedIn and Microsoft, to show you ads on other sites. You can limit that only in your browser, your phone’s settings or ad industry tools.'
+      sources:
+        - url: https://www.nugs.net/privacy-cookie.html
+          quote: 'Advertising Cookies may collect personal data over time and across different websites.'
+        - url: https://www.nugs.net/privacy-cookie.html
+          quote: 'Meta - We may use Meta’s services to place ads that we think may interest our users and potential users across Meta’s various websites, such as Facebook and Instagram.'
+        - url: https://www.nugs.net/privacy-cookie.html
+          quote: 'You can also access any settings offered by your mobile operating system to limit ad tracking.'
+      action:
+        name: Its Cookie Policy (your choices)
+        url: https://www.nugs.net/privacy-cookie.html
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy says it doesn’t use personal data to train large language models only in a note for Connecticut residents, and says nothing on AI for everyone else.'
+      pages: [https://www.nugs.net/privacy-policy.html, https://www.nugs.net/terms.html]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data while you have an account, and afterwards for as long as it may need it, with no time limits.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'For example, we will retain your personal information for as long as you have an account with us or keep using our services, and the length of time thereafter during which we may have a legitimate need to reference your personal information to address issues that may arise.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself in its app (Settings, Account, Delete Account), and it can’t be brought back.'
+      sources:
+        - url: https://help.nugs.net/support/solutions/articles/6000245388
+          quote: 'Once your account has been deleted it can no longer be restored - and all of the items in your Library will no longer be available to stream.'
+        - url: https://help.nugs.net/support/solutions/articles/6000245388
+          quote: '-Follow the prompts to complete your account deletion.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'It offers a copy of your data only to residents of some US states and people in the UK and Europe, as their laws require.'
+      pages: [https://www.nugs.net/privacy-policy.html]
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'In the UK and Europe you can ask it by email for a machine-readable copy of your data.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'Transfer a machine-readable copy of your personal information to you or a third party of your choice.'
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'You may submit these requests by email to privacy@nugs.net or our postal address provided above.'
+      action:
+        name: Its Privacy Policy (your rights in Europe)
+        url: https://www.nugs.net/privacy-policy.html
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'If it believes a crime has happened, it may hand over what it holds about you to follow the law, legal process or a government’s request. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: "If Company believes that criminal activity has occurred, Company reserves the right to, except to the extent prohibited by applicable law, disclose any information or materials on or in the Service, including Your Content, in Company's possession in connection with your use of the Service, to (i) comply with applicable laws, legal process or governmental request"
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'comply with applicable laws, lawful requests, and legal process, such as to respond to subpoenas, investigations or requests from government authorities;'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'It’s based in the US and may move your data to the US or other countries with weaker privacy laws, without saying how it’s protected, except for people in Europe.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'Your personal information may be transferred to the United States or other locations where privacy laws may not be as protective as those in your state, province, or country.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      regions: [GB, EU]
+      tier: neutral
+      reason: 'For people in the UK and Europe, data sent to the US is covered by approved standard contracts or other recognised safeguards.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'we may use specific appropriate safeguards, which are designed to give personal information effectively the same protection it has in Europe – for example, standard-form contracts approved by relevant authorise for this purpose'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs your first and last name, an email and a password, or a Google, Facebook or Apple account. A subscription needs a card.'
+      sources:
+        - url: https://help.nugs.net/support/solutions/articles/6000267002
+          quote: 'Enter your first and last name, a valid email address and select your password - or you can login using Facebook or Google.'
+        - url: https://help.nugs.net/support/solutions/articles/6000254126
+          quote: 'A valid credit card is needed to start a new subscription.'
+      lastVerified: 2026-11-13
+    - topic: privacy.children
+      tier: neutral
+      reason: 'It isn’t meant for anyone under 18, and it deletes a child’s data when the law requires it.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'The Service is not intended for use by anyone under 18 years of age.'
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'we will comply with applicable legal requirements to delete the information.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'It says only that it uses safeguards, and names no outside check or way to report a security flaw.'
+      sources:
+        - url: https://www.nugs.net/privacy-policy.html
+          quote: 'We employ technical, organizational and physical safeguards designed to protect the personal information we collect.'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel on its website under My Account, Manage Plan, at any time, and keep your plan until the period ends. If you subscribed through Apple or Google, you cancel there.'
+      sources:
+        - url: https://help.nugs.net/support/solutions/articles/6000261447
+          quote: 'Direct nugs subscribers can cancel on the Account page on nugs.net (login, then click Account>My Account in the top right corner of the page).'
+        - url: https://www.nugs.net/terms.html
+          quote: 'If you cancel your Subscription, you may use your Subscription until the end of your then-current Subscription term; your Subscription will not be renewed after your then-current term expires.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'No money back for the rest of a period when you cancel, but you keep your plan until it ends.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'However, you will not be eligible for a prorated refund of any portion of the Service Subscription Fee paid for the then-current Subscription period.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'you may use your Subscription until the end of your then-current Subscription term'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tries to email you before a price change hits your plan, without saying how long before, and you can cancel instead.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'If changes to the Subscription price occur that impact your Subscription, Company will use commercially reasonable efforts to notify you, such as by sending an email to the email address associated with your Account.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'If you do not agree with such changes, you may cancel your Subscription'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'The 7-day free trial needs a card and turns into a paid plan unless you cancel first, with no reminder promised. It refunds a charge you report as a mistake in writing.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'At the end of the trial or promotional period, your use of that Service will automatically roll into a paid Subscription at our then-current Service Subscription Fees'
+        - url: https://help.nugs.net/support/solutions/articles/6000254126
+          quote: 'A valid credit card is needed to start a new subscription.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'If you are inadvertently charged for a Subscription and provide us with written notice of the error, Company will have the charges reversed.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a plan renews on its own at the current price, but not that it reminds you first.'
+      pages:
+        [
+          https://www.nugs.net/terms.html,
+          https://help.nugs.net/support/solutions/articles/6000261447,
+        ]
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      tier: great
+      reason: 'It names no fees of its own beyond the price and sales tax. Your card company may add its own fee, which nugs doesn’t control.'
+      sources:
+        - url: https://help.nugs.net/support/solutions/articles/6000263901
+          quote: 'If sales tax applies it is listed separately on the purchase page and/or monthly/yearly invoice.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'Your card issuer may charge you an online handling fee or processing fee. We are not responsible for this.'
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Hi-Res starts at once and you pay the difference; moving down starts at your next renewal.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'If you choose to upgrade your Subscription in the middle of a Subscription period, such upgrade will take effect immediately and any incremental fees associated with such upgrade will be charged in accordance with this Agreement.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'If you choose to downgrade a Subscription, the downgrade will take effect as of the first day of the next renewal term.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to a private referee (arbitration), one person at a time, with no class actions. You can opt out only by emailing it within 30 days of first agreeing.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'EACH OF US MAY BRING CLAIMS AGAINST THE OTHER ONLY ON AN INDIVIDUAL BASIS AND NOT ON A CLASS, REPRESENTATIVE, OR COLLECTIVE BASIS'
+        - url: https://www.nugs.net/terms.html
+          quote: 'You have the right to opt out of the provisions of this Arbitration Agreement by sending written notice of your decision to opt out to: legal@nugs.net , within thirty (30) days after first becoming subject to this Arbitration Agreement.'
+      action:
+        name: Opt out of arbitration (its terms, 15.10)
+        url: https://www.nugs.net/terms.html
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It emails account holders about big changes, which start 30 days after posting unless the change says otherwise. If you don’t agree, you stop using nugs.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'If we make any material changes and you have registered an Account with us, we will also send an email with an updated copy of this Agreement to you at the email address associated with your Account.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'Unless otherwise stated in such update, any changes to this Agreement will be effective immediately for users without an Account and thirty (30) days after posting for users with an Account.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can close your account without a reason, but then with notice and money back for unused time. If it says you broke its terms, it can cut you off at once with no refund.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'Company reserves the right to terminate this Agreement or your access to the Service at any time without cause upon notice to you. In the event we exercise this termination right, we will refund you for any pre-paid portion of your unused Subscription.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'If you have materially breached any provision of this Agreement, or if Company is required to do so by law (e.g., where the provision of the Service is, or becomes, unlawful), Company has the right to, immediately and without notice, suspend or terminate any Service provided to you.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change the service, and what it streams, with or without telling you. Downloads you buy are yours to back up.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'Company may update the Service with or without notifying you.'
+        - url: https://www.nugs.net/terms.html
+          quote: 'you may (and are encouraged to) make backup copies of all digital downloads, for personal use.'
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.nugs.net/terms.html, https://www.nugs.net/privacy-policy.html]
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Your plan is for you alone: you may not share your account or password, and it sells no plans for more than one person.'
+      sources:
+        - url: https://www.nugs.net/terms.html
+          quote: 'You may not share your Account or password with anyone'
+        - url: https://help.nugs.net/support/solutions/articles/6000274824
+          quote: 'We do not offer multi-user subscriptions at this time.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its help says subscribers can save shows offline in its app, but not on how many devices or for how long.'
+      pages:
+        - https://help.nugs.net/support/solutions/articles/6000255107
+        - https://help.nugs.net/support/solutions/articles/6000274824
+      lastVerified: 2026-11-13

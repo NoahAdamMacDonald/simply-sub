@@ -1,0 +1,224 @@
+url: https://www.last.fm/legal/privacy
+method: fetch
+saved: 2026-11-13
+
+Privacy Policy | Last.fm
+Last.fm
+Search
+Search
+Search
+Toggle navigation
+Search
+Reset
+Search
+Upgrade to Pro
+Music
+Events
+Charts
+Log In
+Sign Up
+Upgrade to Pro
+Music
+Events
+Charts
+Log In
+Sign Up
+Privacy Policy
+Updated on: Tuesday 26 May 2026
+Last.fm Privacy Policy
+Introduction
+Last.fm Limited, ("Last.fm", "we", "us", or "our"), operates the Last.fm website(s), including the mobile and desktop apps, API, and related online services (collectively, the "Last.fm Services"). These platforms allow you to view and interact with the Last.fm Services, to track your music listening history (scrobbles), discover new artists, view charts, connect and engage with other users.
+We know how important it is to protect personal information. This Privacy Policy explains our practices - and your choices - on how we collect, use, and share your information when you interact with any of the Last.fm Services.
+By accessing and engaging with the Last.fm Services, including creating an account, logging in, scrobbling tracks, or otherwise using the Last.fm Services, you acknowledge that you have read, understood and agree to this Privacy Policy. This Privacy Policy applies to all users, including unregistered users who may have limited personal data automatically collected. If you do not agree to the terms of this Privacy Policy, please do not use our services. We may update this policy from time to time; for any significant changes, we may post a notice on our website(s), send you a message, email you (at the last email address you provided), or inform you by any other appropriate means.
+What Personal Information Do We Collect?
+Last.fm collects certain personal information to deliver our music-focused services to users:
+Information You Provide to Us Directly:
+When you register for an account, update your profile, or otherwise interact with our services, you voluntarily provide data such as: your full name or display name, email address, username, password, date of birth, profile photograph or avatar, biographical details, country or city, lists of loved tracks, custom playlists, shouts or comments, reviews, connections with other users, and entries for contests or promotions. If you submit support requests or sign-up for newsletters, we also receive those details. For paid features like Last.fm Pro subscriptions, payment information (such as billing address) is handled by secure third-party processors, such as Stripe or PayPal; we do not store full card numbers or bank details ourselves, however we retain purchase history details.
+Information We Collect Automatically:
+As you use the Last.fm Services, our servers and software may automatically log certain technical data, which may include: your IP address (which may indicate approximate location at city level), unique device identifiers, cookie ID, media access control (MAC) address and other unique identifiers and online activity data using device-based tracking technologies such as cookies, pixels, tags, beacons, scripts, and similar technologies, as well as operating system and browser type/version, screen resolution and orientation, preferred language settings, pages visited, search queries performed, and referral sources. From time to time, we use may third-party tools to help us look at mouse movements, clicks and the pages you visit to assess and improve site functionality, usability and security.
+Information Received from Third Parties:
+We may obtain data from external sources to enhance your experience, such as: profile details when you log in via social platforms like Google, Apple, or Facebook (only with your authorisation); track metadata (such as song title, artist, album, duration) from third party music services when you connect your third party music service account(s) to Last.fm for scrobbling; or pseudonymised device IDs and usage insights from advertising and analytics providers for performance measurement.
+Last.fm does not collect sensitive personal information, such as data revealing racial or ethnic origin, political opinions, religious beliefs, health conditions, biometric data, or sexual orientation. However, if you voluntarily include such information in your public profile or posts on Last.fm, it will be processed as user-generated content under your responsibility and viewable by others.
+How Do We Use Your Personal Information?
+We process your personal information to provide you with the Last.fm Services, as part of our agreement with you, or to maintain our relationship with you. We also process your personal information to analyse the Last.fm Services, to improve and personalise the Last.fm Services, to personalise advertising and marketing, to manage safety and security, or when we have a legal obligation or permission to do so.
+Providing You with the Last.fm Services
+We use registration information, profile information, payment information, as well as your scrobbles, messages and other online engagement to provide the Last.fm Services. These activities include the following:
+Creating and managing your account, subscription, and registration
+Authenticating your account or verifying your identity
+Providing you with the services that you request, customer support, and account updates
+Completing any transactions that you request
+Performing any of our contractual obligations to you
+Communicating with you and responding to your questions related to your account or subscription
+Providing personalised services by processing scrobbles and data to generate personalised experiences, including recommendations and charts
+Supporting on-platform features and interactions
+We also use registration information, information and content you post, your messages and feedback, information collected through social media, and information you provide when you interact with us to manage our relationship with you. These activities include the following:
+Managing social media interactions and user-generated content (such as posts or comments you submit on public platforms), enabling interactive features, and personalising the Last.fm Services and content
+Managing our audience relationships and events
+Managing our relationships with current or prospective partners, corporate customers and vendors and other business partner personnel
+Communicating with you and responding to your questions
+Analysing The Last.fm Services
+We use all categories of personal information to analyse and understand how the Last.fm Services are operating. These activities include the following:
+Auditing related to counting unique visitors, verifying how Last.fm Services are displayed, and compliance
+Determining and managing the effectiveness of our non-personalised advertising and marketing
+Performing data analytics, research and optimisation
+Learning more about our audiences
+Generating insights about our audiences and creating groups of similar audiences (segments)
+Performing accounting, auditing and other internal functions
+Recognising and understanding the preferences, interests, and demographic information of our audiences so that we can personalise your experience with the Last.fm Services
+We also use online activities and preferences, online identifiers, location data, and information from our partners and from other sources to analyse and understand how digital advertising is served on the Last.fm Services and third-party services. These activities include the following:
+Tracking ad impressions, verifying positioning and quality of ad impressions, and personalised advertising-related auditing compliance
+Determining and managing the effectiveness of our personalised advertising and marketing
+Improving the Last.fm Services
+We use all categories of personal information to improve the Last.fm Services. These activities include the following:
+Undertaking internal research for technological development and demonstration
+Undertaking activities to verify or maintain the quality or safety of our services and to improve, upgrade, or enhance them
+Performing A/B testing and/or surveys on existing or new features
+Train machine learning models to improve services, for example, better recommendations
+Debugging to identify and repair errors
+Marketing and Personalised Advertising
+We use your registration information, billing and payment information, online activities and preferences, online identifiers, location data, browser type, page views, device IDs, listening demographics, information provided by third parties, and derivative information to deliver and display and target personalised ads. These activities include the following:
+Recognising and understanding your preferences, interests, and demographic information so that we can personalise the ads, ecommerce and promotions we deliver to you (this may involve converting your information to hashed identifiers)
+Generating insights about our audiences and creating segments that we can use to help us deliver targeted and personalised ads to you
+Running personalised advertising and marketing campaigns for our own or third-party products and services, including by sending promotional messages and/or newsletters
+Managing Safety and Security
+We use all categories of personal information to manage safety and security on the Last.fm Services. These activities include the preventing fraud, spam, bots or breaches of our Terms of Use, illegal activity (alleged or otherwise), claims and other liabilities, and maintain backups for reliability.
+Legal Obligations and Permissions
+When necessary, we use all categories of personal information to comply with our legal obligations, including performing accounting and tax-related obligations, and responding to government and judicial/law enforcement requests. We also use your personal information to exercise our rights and remedies, defend ourselves against or respond to legal claims, and to comply with and enforce relevant industry standards, our terms, policies, and other rights.
+When and with Whom Do We Share Your Information?
+We share personal information within Last.fm (including its affiliates) and with some of our partners (including those supporting advertising based on your interests). We also share personal information with sponsors and other partners for events, giveaways, sweepstakes, and promotions. We share personal information as part of a corporate transactions, to comply with our legal obligations, and to protect ourselves.
+Service Providers
+We share your information with certain companies and individuals that provide us with services or who perform services on our behalf. These providers include business support services, customer support providers, web hosting providers, information technology providers, payment processors, event service providers, direct mail and email distribution service providers, partners supporting our contests, sweepstakes, giveaways and promotions, and analytics and market research services. These service providers are only permitted to use your personal information to help us offer the Last.fm Services to you and not for any other purpose. The types of personal information we share include all the types of personal information listed above.
+Commercial Partners
+We share your information with certain commercial partners involved in activities such as marketing or co-branded services or events. These commercial partners use the information we provide to them as described in their privacy policies.
+We may also share your information with sponsors, prize partners, and others that support us in events, contests, sweepstakes, giveaways, or promotions. For example, we may share your information with the prize partners to deliver prizes.
+The types of personal information that we share includes registration information, information you provide offline, information and content you post, information collected through social media, your messages and feedback, and information about how you use the Last.fm Services.
+Advertisers
+We share your information with our advertisers and other companies to help show ads that you might be interested in and to check how effective those ads are. This includes advertisers that want to advertise to you, agencies that help them do that, websites and apps that show ads, advertising technology partners that connect advertisers with places to show ads, and other companies that help us see how well our ads work (such as if you buy something after clicking an ad that tells us whether the ad worked), and identity partners. The types of personal information that we share includes online identifiers and information about what you like to do online, your preferences, as well as other details we learn about you. Sometimes we segment our consumers based on their interests and we share those groups with companies that will provide additional insights about that group. Third-party ad providers (such as Google AdSense, YieldMo, Freestar, Pubmatic etc.) use cookies, pixels, tags, beacons or similar technologies to enable interest-based advertising across sites and apps (combining Last.fm data with your activity elsewhere). This can be managed via the cookie banner or opt-outs (such as, youradchoices.com, optout.networkadvertising.org). For more information, please see the "Cookies and Other Tracking Technologies" section below.
+Social Media Companies
+We share your personal information with social media companies such as Meta, Snap, X, etc. so that we can communicate with you or provide you with relevant advertising related to your interests on those platforms. We use the custom audience services provided by these social media companies to help us both reach you or reach new audiences. The types of information we share includes online identifiers, email addresses (or hashed email addresses), and information about your online interactions on the Last.fm Services.
+Research and Development
+We may make available your information with research partners, including universities, academic institutions, as well as technology development, to help improve Last.fm, develop new features or offer new methods or applications to interact with Last.fm Services, and allow better insights, trends and understandings about how people use music and audio services. These partners may also use the information to conduct academic or statistical research and to help other data-driven services (for example, systems that improve recommendations, insights, search or moderation). Where possible, we use aggregated or de-identified information for these purposes, and we require our research partners to use your information only for these research and development activities and not for their own independent marketing or advertising. The types of personal information made available for research and development may include usage information, profile and listening data, and technical information.
+Legal Advisors, Law Enforcement and Others
+We will share your information with our legal and tax advisors, insurers, law enforcement, judicial and other government bodies (including law enforcement (police) or regulators), and others when we think it is necessary to do so to comply with the law, the legal process, to obtain legal or other professional advice, to respond to legal claims, or to protect our rights or the property or personal safety of our users, employees, or the public. The types of personal information we share include all the types of personal information listed above.
+Corporate Transactions
+We may share your information with a potential purchaser and their legal and financial advisors and others, as appropriate, as part of any actual or contemplated reorganisation, restructuring, merger or sale, or other transfer of assets involving our brands or as part of a joint venture or other strategic partnership. The types of personal information we share includes all the types of personal information listed above.
+International Data Transfers
+Last.fm is a UK-based company, but operates globally. We may transfer your personal information to a country (including the United States) that does not provide the same level of protection for your personal information. We may transfer your personal information to affiliates of Last.fm, carefully selected service providers, business partners and other third parties for the purposes described in this policy. When transfers occur to the US or other countries (e.g. to service providers), we look at the risks to your information and rely on safeguards, where applicable, to ensure your rights are protected. For instance, we put in place standard contractual clauses approved under data protection laws in the United Kingdom, the EEA, Switzerland to facilitate transfers to the United States of America.
+Children's Privacy
+Last.fm is intended for use by adults and is not directed to children. We do not knowingly allow anyone under the age of 16 (or 13 in the United States) to create an account or submit personal information through the Last.fm Services. If we learn that we have collected personal information from a child in breach of this policy or applicable law (including the US Children's Online Privacy Protection Act), we will delete it as soon as reasonably practicable. Parents or guardians who believe their child has provided information should contact dp3@last.fm for assistance and removal - please include the words "Data Request" in the subject line of the message (along with any other words you wish to include) to allow us to quickly identify the request and readily distinguish your message from spam. We do not offer verified parental consent mechanisms as our services are not child-directed.
+Retention
+We will retain your personal information for the time period reasonably necessary to achieve the purposes described in this privacy policy, or any other notice provided at the time of collection unless a longer retention period is required or permitted by applicable law.
+We determine how long to retain information based on the purposes for which it was collected, its sensitivity, our legal obligations, and the purposes set out in this privacy policy. For example, we retain your registration information for the duration of your relationship with us. Once our relationship ends, we may retain certain records (such as your email address and details about your transactions) for an additional period of time to comply with our legal obligations in certain jurisdictions and to prevent fraud.
+If you submit a request to exercise one of your privacy rights, we retain records of those requests so that we can comply with them (for example, so that we remember your request to opt-out of marketing messages) and so that we can demonstrate that we have complied. In each case, we determine how long to retain information based on how long it is needed to fulfil the purpose for which it was collected, whether we need to retain it for an additional window to comply with record-keeping obligations or to defend against legal claims or prevent fraud.
+Cookies And Other Tracking Technologies
+We may automatically receive certain information about you and your device using browser- or device-based tracking technologies (cookies, including strictly necessary, performance, targeting, advertising and social cookies), web beacons (pixels, tags), local storage, and similar technologies. These technologies allow us to ensure the Last.fm Services are functioning correctly, improve the Last.fm Services, provide and measure advertisements, and provide personalised content to you.
+You can manage how these tracking technologies are used by adjusting your device or browser settings and, in some countries, by selecting your preferences in a consent management solution. US users can opt-out through the Digital Advertising Alliance (youradchoices.com), Network Advertising Initiative (NAI), or device ad ID resets.
+Your Rights, Choices and Controls
+Providing you with control is core to our approach and most matters can be managed within your account settings or options on the Last.fm website. In addition, you can exercise the following rights at any time, and we respond within one month (extendable to three months for complex cases):
+For all users
+Access a copy of your personal data.
+Ask us to correct inaccurate or incomplete data.
+Ask us to delete your account and data
+Additional rights for EU/UK users (GDPR)
+Object to our use of your data when we rely on legitimate interests.
+Ask us to restrict how we use your data.
+Receive your data in a structured, machine-readable format.
+Withdraw consent at any time (this will not affect processing that has already happened).
+Complain to your local data protection authority, such as the UK Information Commissioner.
+Extra rights for California residents (CCPA/CPRA)
+Ask what personal information we collect, use and disclose (for the past 12 months).
+Ask us to delete your personal information.
+Ask us to correct inaccurate personal information.
+Opt-out of the "sale" or "sharing" of your personal information
+Be free from discrimination for exercising your rights.
+Please make requests by emailing dp3@last.fm. IMPORTANT: please include the words "Data Request" in the subject line of the message (along with any other words you wish to include) to allow us to quickly identify the request and readily distinguish your message from spam.
+Before responding to a request, we may need to ask for additional information and may send you an email to verify your identity and confirm that you submitted the request. We may also need additional information to verify that your authorised agent or representative has the authority to make a request on your behalf. We will respond to your request within the time period required under the law.
+Please note that while we will carefully assess every request we receive, your rights may differ depending on where you live and may be limited by local law.
+Opt-Out of Receiving Messages
+We may also use all categories of personal information to send transactional emails (e.g. password resets, welcome messages etc.) and service updates. From time to time, we may also deliver advertising and marketing campaigns for our own or third-party products and services or send optional messages or newsletters. Where you are an existing user and we have obtained your email address in the context of providing Last.fm Services, we may send you marketing about similar Last.fm products or features under the soft opt-in rules. To stop receiving marketing or promotional messages, please follow the 'unsubscribe' instructions in any marketing email you get from us or change your preferences in your account settings.
+Please note that even if you opt-out of receiving marketing or promotional messages, we may still send you important non-marketing messages about your account, the Last.fm Services you requested, or any purchases you make.
+Change Or Update The Information You Have Given Us
+If you have an account with Last.fm, you can correct or delete your information, or update your account settings by logging into your account and updating the information in your account.
+Managing Cookies and Other Tracking Technologies
+Consent management solution
+Depending on where you live, you can manage your preferences via our 'consent management solution' on the relevant mobile or online application. Please note that when you use these tools, you need to renew your choices each time you clear your cookies or use a new browser or device.
+Browser controls
+Although most browsers and devices accept cookies by default, their settings usually allow you to clear and decline cookies. Web browsers often store your preferences in a cookie. Blocking cookies may prevent the services from operating as expected and may also prevent storing your preferences and choices.
+Analytics' provider opt-outs
+To opt-out of certain tracking by analytics providers, you may visit Google Analytics (tools.google.com/dlpage/gaoptout) or Adobe Omniture (www.adobe.com/privacy/opt-out.html)
+Interest-based advertising
+We, our service providers, business partners, and other third parties may use interest-based advertising. This means that we may collect information about you when you use the Last.fm Services and on third-party services to help serve advertising relevant to your interests across your devices, browsers, and on and off the Last.fm Services. For more information on the choices that may be available to you to opt-out of receiving interest-based advertising, please visit:
+Digital Advertising Alliance (US) - https://optout.aboutads.info/
+Digital Advertising Alliance (Canada) - https://youradchoices.ca/en/tools
+Digital Advertising Alliance (Australia) - https://www.youronlinechoices.com.au/
+Digital Advertising Alliance (Europe) - https://www.youronlinechoices.com/
+You can also opt out of interest-based advertising with some of the third-party partners we use, such as Google (https://adssettings.google.com/authenticated). Please note that if you opt-out of interest-based advertising, some information will still be collected for other purposes, such as research, analytics, and internal operations. You will also continue to receive contextual advertisements, but they may be less relevant to your interests.
+On many mobile devices, you can manage interest-based advertising through your device's settings. These options can include resetting your device's advertising ID or selecting "Limit Ad Tracking" (for iOS devices) or "Opt-out of Ads Personalization" (for Android devices) in your device settings.
+Other connected devices (such as tablets, connected TVs, set top boxes, streaming devices, and gaming consoles) may also use an advertising ID or other methods to identify you or serve you interest-based advertising. In some cases, you can disable tracking by selecting options like "limit ad tracking" or disabling options like "interest-based advertising" in your connected device's settings. These options will vary by device, and we do not control the policies or practices of third parties providing these devices.
+Please note that your choice to opt-out is device-specific or browser-specific and you will need to manage your preferences for each device or browser you use.
+Data Security Practices
+We have adopted commercially reasonable technical, administrative, and physical security measures designed to protect your personal information from loss, misuse, unauthorized access, and alteration.
+Links to other sites
+The Last.fm Services may contain links to websites, apps or services operated by third parties. If you follow these links, your use of those third-party sites will be governed by the privacy policies and terms of those third parties, not ours. We do not control how those third parties collect or use your information, so we recommend that you read their privacy notices before using those sites or providing any personal information.
+Contact Information
+If you have any questions or concerns regarding this privacy policy or would like to contact the data protection officer, please send an email to: dp3@last.fm. IMPORTANT: please include the words "Data Request" in the subject line of the message (along with any other words you wish to include) to allow us to quickly identify the request and readily distinguish your message from spam.
+Company
+About Last.fm
+Contact Us
+Jobs
+Features
+Help
+Track My Music
+Community Support
+Community Guidelines
+Help
+Goodies
+Download Scrobbler
+Developer API
+Free Music Downloads
+Merchandise
+Account
+Sign Up
+Log In
+Subscribe
+Follow Us
+Facebook
+X
+Bluesky
+Instagram
+YouTube
+Englishcurrent language
+Deutsch
+Español
+Français
+Italiano
+日本語
+Polski
+Português
+Русский
+Svenska
+Türkçe
+简体中文
+Last.fm Limited © 2026. All rights reserved
+Terms of Use
+Privacy Policy
+Legal Policies
+Do Not Sell My Personal Information
+Last.fm Music
+Audioscrobbler
+API Calls
+Close
+Close
+Loading player…
+Previous
+Next
+Play
+Next
+Settings
+Open in Spotify Web Player
+Open on YouTube website
+Change playback source
+Scrobble from Spotify?
+Connect your Spotify account to your Last.fm account and scrobble everything you listen to, from any Spotify app on any device or platform.
+Connect to Spotify
+Dismiss
