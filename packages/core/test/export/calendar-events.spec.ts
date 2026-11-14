@@ -123,6 +123,30 @@ describe('calendarEvents', () => {
     expect(kids.description).toContain('Ends Feb 1, 2027');
   });
 
+  it('gives a renewal charged early (M11.21) an event per charge, saying which renewal it pays for', () => {
+    const early: ResolvedItem = {
+      ...mullvad,
+      item: {
+        ...mullvad.item,
+        billing: { ...(mullvad.item.billing as Recurring), autoRenew: true, chargeDaysBefore: 15 },
+      },
+    };
+    const [event, ...more] = calendarEvents(
+      [{ ...familyList, resolved: [early] }],
+      context,
+      format,
+    );
+    expect(more).toEqual([]);
+    expect(event).toEqual({
+      uid: `${mullvad.item.id}-2027-01-05-CAD@sub.simplely.ca`,
+      start: [2027, 1, 5],
+      end: [2027, 1, 6],
+      title: 'Mullvad VPN: ≈ $94.16',
+      description:
+        'Mullvad VPN\nList: Family\n≈ $94.16\nRenews automatically\nFor its renewal on Jan 20, 2027',
+    });
+  });
+
   it('starts another run where a price of the user’s own ends', () => {
     const own: ResolvedItem = {
       ...netflix,
@@ -179,6 +203,10 @@ describe('repeatRule', () => {
 
   it('has no rule for a monthly plan billed on the 29th or 30th, which February can’t follow', () => {
     expect(repeatRule(billing('2026-01-30'))).toBeUndefined();
+    // Nor for a yearly one charged before its renewal (M11.21), whose day can move in a leap year.
+    expect(
+      repeatRule(billing('2027-03-10', { interval: 'year', chargeDaysBefore: 35 })),
+    ).toBeUndefined();
     expect(repeatRule(billing('2027-01-29'))).toBeUndefined();
     expect(repeatRule(billing('2027-02-28', { billingDay: 30 }))).toBeUndefined();
   });

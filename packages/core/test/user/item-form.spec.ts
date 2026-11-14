@@ -747,6 +747,25 @@ describe('itemFromForm', () => {
     expect(fields.source).toEqual(source);
     expect(fields.billing).toMatchObject({ interval: 'week', intervalCount: 2 });
   });
+
+  // A yearly renewal charged before its date (M11.21): the provider's days, with no input.
+  it('charges a yearly item as many days before its renewal as its provider does, and no other', () => {
+    const early = { ...context, chargeDaysBefore: 35 };
+    const form = standardForm({ interval: 'year', anchorDate: '2027-10-26' });
+    const fields = itemFromForm(form, early);
+    expect(fields.billing).toEqual({
+      mode: 'recurring',
+      interval: 'year',
+      intervalCount: 1,
+      anchorDate: '2027-10-26',
+      startDate: today,
+      autoRenew: true,
+      chargeDaysBefore: 35,
+    });
+    expect(() => stored(fields)).not.toThrow();
+    expect(itemFromForm(standardForm(), early).billing).not.toHaveProperty('chargeDaysBefore');
+    expect(itemFromForm(form, context).billing).not.toHaveProperty('chargeDaysBefore');
+  });
 });
 
 describe('an account plan’s item (M11.11)', () => {

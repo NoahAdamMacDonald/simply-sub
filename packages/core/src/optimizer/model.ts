@@ -14,7 +14,7 @@ import type { DateRange } from '../schedule/charge-dates';
 import { itemCharges, type Chargeable } from '../schedule/charges';
 import { next12Range } from '../schedule/list-metrics';
 import type { TaxPlace } from '../tax/sales-tax-rate';
-import { keptBillingDay } from '../user/item-form';
+import { reperiodedBilling } from '../user/reanchor';
 import { itemTitle } from '../user/item-text';
 import type { ItemSource, ListItem } from '../user/list-item';
 import type { CardLoads } from '../rewards/card-limits';
@@ -946,18 +946,12 @@ function changedItem(
 
 type Recurring = Extract<ListItem['billing'], { mode: 'recurring' }>;
 
-/** Ongoing billing with a new period, anchored on `on`, keeping its billing day while it still applies. */
+/**
+ * Ongoing billing with a new period from its charge `on`, keeping its billing day while it still applies, and its
+ * early charge while it's still yearly (M11.21: its plans are the same provider's).
+ */
 export function reperiod(billing: Recurring, period: Period, on: IsoDate): Recurring {
-  const rest = { ...billing };
-  delete rest.billingDay;
-  const billingDay = keptBillingDay(on, period, billing.billingDay);
-  return {
-    ...rest,
-    interval: period.interval,
-    intervalCount: period.intervalCount,
-    anchorDate: on,
-    ...(billingDay !== undefined && { billingDay }),
-  };
+  return reperiodedBilling(billing, period, on);
 }
 
 /** The add-ons a plan allows, within its limit, each from the day it joined. */

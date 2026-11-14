@@ -366,6 +366,18 @@ describe('nextCharge', () => {
     expect(nextCharge(fresh, '2026-12-28', alberta)?.date).toBe('2026-12-28');
   });
 
+  it('is a future renewal’s early charge (M11.21), unless that has passed', () => {
+    const yearly = (anchorDate: string) =>
+      chargeable(
+        { interval: 'year', anchorDate, chargeDaysBefore: 35 },
+        { price: picked(119.99, { interval: 'year' }) },
+      );
+    // Renewing Mar 10, charged 35 days before: Feb 3.
+    expect(nextCharge(yearly('2027-03-10'), '2026-10-28', alberta)?.date).toBe('2027-02-03');
+    // Renewing Nov 20, charged Oct 16, before today: the next is the year after's.
+    expect(nextCharge(yearly('2026-11-20'), '2026-10-28', alberta)?.date).toBe('2027-10-16');
+  });
+
   it('is none for a free plan, or once the end date has passed', () => {
     expect(nextCharge(chargeable({}, { price: picked(0) }), '2026-10-28', ontario)).toBeUndefined();
     expect(

@@ -421,6 +421,11 @@ export interface ItemFormContext extends ItemFormRules {
   billingBefore?: Billing;
   /** Its account block before this change: a balance it keeps keeps its date. */
   accountBefore?: ItemAccount;
+  /**
+   * How many days before its renewal its provider charges a yearly renewal (M11.21, core's chargedBeforeDays): a
+   * yearly item gets it, so the user needn't find the charge date.
+   */
+  chargeDaysBefore?: number;
 }
 
 /**
@@ -428,7 +433,8 @@ export interface ItemFormContext extends ItemFormRules {
  * plan is saved as Ongoing with today as its anchor (P6), or the anchor it had, so opening and saving an item changes
  * nothing; it has no own price or card, since there's nothing to pay. Windows are saved in date order, a billing day
  * only while it applies, and ranks only for the keys the item provides. An item bought in Settings' country has no
- * region. An account plan's item keeps its balance and facts (accountFromForm); any other plan's, none.
+ * region. An account plan's item keeps its balance and facts (accountFromForm); any other plan's, none. A yearly item
+ * whose provider charges before the renewal is charged that many days early (M11.21), the next renewal still its anchor.
  */
 export function itemFromForm(form: ItemForm, context: ItemFormContext): ItemFields {
   const period: Period = { interval: form.interval, intervalCount: form.intervalCount };
@@ -678,6 +684,7 @@ function billing(form: ItemForm, period: Period, context: ItemFormContext): Bill
     return { mode: 'limited', windows, ...period };
   }
   const billingDay = keptBillingDay(form.anchorDate, period, form.billingDay || undefined);
+  const early = period.interval === 'year' ? context.chargeDaysBefore : undefined;
   return {
     mode: 'recurring',
     ...period,
@@ -685,6 +692,7 @@ function billing(form: ItemForm, period: Period, context: ItemFormContext): Bill
     ...(billingDay !== undefined && { billingDay }),
     ...ongoingDates(form),
     autoRenew: context.autoRenew && form.autoRenew,
+    ...(early !== undefined && { chargeDaysBefore: early }),
   };
 }
 

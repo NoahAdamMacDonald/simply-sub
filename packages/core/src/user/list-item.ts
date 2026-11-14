@@ -55,13 +55,16 @@ export const itemSourceSchema = z.discriminatedUnion('kind', [
 ]);
 export type ItemSource = z.infer<typeof itemSourceSchema>;
 
-/** Ongoing billing: charges fall on `anchorDate` plus or minus whole intervals (PROJECT-PLAN §3.1). */
+/**
+ * Ongoing billing: renewals fall on `anchorDate` plus or minus whole intervals, each charged on its day or
+ * `chargeDaysBefore` days before it (PROJECT-PLAN §3.1).
+ */
 const recurringBillingSchema = z
   .strictObject({
     mode: z.literal('recurring'),
     interval: intervalSchema,
     intervalCount: positiveCount,
-    /** A known charge date; every other date is counted from it. */
+    /** A known renewal date, its charge date unless it's charged before it; every other date is counted from it. */
     anchorDate: isoDateSchema,
     /** Month and year intervals: the day it's billed on, when anchorDate is a shorter month's last day. */
     billingDay: z.union([z.literal(29), z.literal(30), z.literal(31)]).optional(),
@@ -71,8 +74,24 @@ const recurringBillingSchema = z
     endDate: isoDateSchema.optional(),
     /** false: charges are still projected, marked "renew manually". */
     autoRenew: z.boolean(),
+    /**
+     * A yearly item charged this many days before each renewal (M11.21), its provider's `chargedBefore`: the anchor is
+     * still the renewal date. Under a year, so each charge comes after the renewal before it.
+     */
+    chargeDaysBefore: z
+      .int()
+      .positive('Must be a whole number of at least 1')
+      .max(364, 'Must be less than a year')
+      .optional(),
   })
   .superRefine((billing, ctx) => {
+    if (billing.chargeDaysBefore !== undefined && billing.interval !== 'year') {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'chargeDaysBefore is only for yearly periods',
+        path: ['chargeDaysBefore'],
+      });
+    }
     if (billing.billingDay !== undefined) {
       if (billing.interval !== 'month' && billing.interval !== 'year') {
         ctx.addIssue({

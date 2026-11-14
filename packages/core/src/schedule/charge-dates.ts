@@ -1,9 +1,11 @@
 import { addDays, addMonths, daysBetween, type IsoDate } from '../dates/iso-date';
-import { addPeriods, type Period } from '../dates/period';
+import { addPeriods, samePeriod, type Period } from '../dates/period';
 import type { Billing } from '../user/list-item';
 
 // When a list item is charged (PROJECT-PLAN §3.1), dates only: charges.ts prices them. Every date is counted from a
-// fixed point, the anchor or a window's start, never from the charge before it, so dates don't drift.
+// fixed point, the anchor or a window's start, never from the charge before it, so dates don't drift. A yearly item
+// whose provider charges before the renewal (M11.21) renews on those dates and is charged `chargeDaysBefore` days
+// before each.
 
 /** From `from`, up to but not including `to`. */
 export interface DateRange {
@@ -20,7 +22,9 @@ type Window = Limited['windows'][number];
  * it's billed on a period of its own (Disney+'s monthly extra member on a yearly plan).
  * - Ongoing: the anchor plus or minus whole periods, on or after `startDate` and before `endDate`. Months and years
  *   fall on the anchor's day, or `billingDay` when it has one, and on a shorter month's last day: Jan 31 gives Feb 28,
- *   Mar 31. Days and weeks are plain counts.
+ *   Mar 31. Days and weeks are plain counts. With `chargeDaysBefore`, a yearly item's renewals on those dates before
+ *   `endDate` are each charged that many days before, never before `startDate`; the one on `startDate` is its purchase,
+ *   charged that day.
  * - Specific dates: each window's start, then every period while the date is before the window's end. A window that
  *   repeats yearly is copied into each later year.
  */
@@ -45,7 +49,7 @@ export function nextChargeDate(
   period: Period = billing,
 ): IsoDate | undefined {
   if (billing.mode === 'recurring') {
-    return recurringDates(billing, { from: date, to: '9999-12-31' }, period, 1)[0];
+    return recurringDates(billing, { from: date, to: openEnd }, period, 1)[0];
   }
   // A window that repeats yearly comes round within a year; one that doesn't can be years away.
   const last = billing.windows.some((window) => window.repeatYearly)
@@ -60,13 +64,27 @@ export function nextChargeDate(
  */
 export function lastChargeDate(billing: Billing, period: Period = billing): IsoDate | undefined {
   if (billing.mode !== 'recurring' || billing.endDate === undefined) return undefined;
+  const from = addPeriods(billing.endDate, period, -1);
   const dates = recurringDates(
     billing,
-    { from: addPeriods(billing.endDate, period, -1), to: billing.endDate },
+    { from: addDays(from, -daysBefore(billing, period)), to: billing.endDate },
     period,
   );
   return dates.at(-1);
 }
+
+/**
+ * How many days before its renewal an ongoing item's charge comes, billed every `period` (M11.21): its
+ * `chargeDaysBefore` for its own yearly period, else none (a monthly add-on is charged on its day).
+ */
+export function daysBefore(billing: Recurring, period: Period = billing): number {
+  return period.interval === 'year' && samePeriod(period, billing)
+    ? (billing.chargeDaysBefore ?? 0)
+    : 0;
+}
+
+/** The end of a range with no end. */
+const openEnd = '9999-12-31';
 
 /** The ongoing dates in `range`, at most `limit` of them. */
 function recurringDates(
@@ -76,15 +94,25 @@ function recurringDates(
   limit = Infinity,
 ): IsoDate[] {
   const { anchorDate, startDate, endDate } = billing;
+  const early = daysBefore(billing, period);
+  // The renewals whose charges can be in the range: from its start (a charge is never after its renewal) to as many
+  // days after its end as they're charged early, from the start date and before the end date.
+  const until = early === 0 || range.to >= openEnd ? range.to : addDays(range.to, early);
   const from = startDate !== undefined && startDate > range.from ? startDate : range.from;
-  const to = endDate !== undefined && endDate < range.to ? endDate : range.to;
+  const to = endDate !== undefined && endDate < until ? endDate : until;
   const at = (k: number) => anchored(billing, period, k);
   // The first k on or after `from`: estimated, then stepped to the edge, since the dates only go up with k.
   let k = firstPeriod(anchorDate, from, period);
   while (at(k) < from) k++;
   while (at(k - 1) >= from) k--;
   const dates: IsoDate[] = [];
-  for (let date = at(k); date < to && dates.length < limit; date = at(++k)) dates.push(date);
+  for (let renewal = at(k); renewal < to && dates.length < limit; renewal = at(++k)) {
+    // The renewal it starts on is its purchase, paid that day; no charge comes before it started.
+    const date = early === 0 || renewal === startDate ? renewal : addDays(renewal, -early);
+    if (date >= range.from && date < range.to && (startDate === undefined || date >= startDate)) {
+      dates.push(date);
+    }
+  }
   return dates;
 }
 

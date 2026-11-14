@@ -1,6 +1,7 @@
 import { addDays, type IsoDate } from '../dates/iso-date';
 import type { IsoMonth } from '../dates/iso-month';
 import { samePeriod } from '../dates/period';
+import { daysBefore } from '../schedule/charge-dates';
 import { itemCharges, type Charge, type Charged } from '../schedule/charges';
 import { next12Range } from '../schedule/list-metrics';
 import type { Billing } from '../user/list-item';
@@ -13,8 +14,10 @@ import type { ExportContext, ExportList } from './export-tables';
 // on each month's last day: BYMONTHDAY=-1; an end date is UNTIL), so it goes on past the first year, and a calendar
 // shows it as long as it lasts. A price of the user's own that ends, or a plan's end, ends its run. The rules keep to
 // what Proton Calendar takes, which drops any other event (repeatRule). Specific dates, add-ons billed on a period of
-// their own and a monthly plan billed on the 29th or 30th stay an event per charge in the next 12 months, which no
-// such rule writes exactly. The app gives the events to the `ics` package, and the live calendar to POST /cal.
+// their own, a monthly plan billed on the 29th or 30th and a yearly one charged before its renewal (M11.21: 35 days
+// before Mar 10 is Feb 3, or Feb 4 in a leap year, and its purchase is on its own day) stay an event per charge in the
+// next 12 months, which no such rule writes exactly. The app gives the events to the `ics` package, and the live
+// calendar to POST /cal.
 
 /** How the app writes money and dates: core lays the files out, and the app formats what they say. */
 export interface ExportFormat {
@@ -207,12 +210,14 @@ function runsOf(charges: readonly Charge[], options: CalendarEventOptions): Char
  * can fall on. Only in the forms Proton Calendar takes (M10.2): one day of the month, and no BYSETPOS without a
  * weekday (its web client's getIsRruleSupported, read 2026-10-29), so a month's 31st is BYMONTHDAY=-1, its last day,
  * and a year's day its month's own (February's last for the 29th). A monthly plan billed on the 29th or 30th has no
- * such rule (February would need a second day), so undefined: its charges are events of their own.
+ * such rule (February would need a second day), and nor has a yearly one charged before its renewal (M11.21), so
+ * undefined: their charges are events of their own.
  */
 export function repeatRule(
   billing: Extract<Billing, { mode: 'recurring' }>,
   last?: IsoDate,
 ): string | undefined {
+  if (daysBefore(billing) > 0) return undefined;
   const [, month, day] = billing.anchorDate.split('-').map(Number);
   const dayOfMonth = billing.billingDay ?? day;
   const every = `INTERVAL=${billing.intervalCount}`;
@@ -309,6 +314,12 @@ function chargeEvent(
       : `${name}: ${amount}`;
   const what = options.titles === 'name' ? name : priced;
   const title = charge.manual ? `Renew ${what}` : what;
+  // A charge before its renewal (M11.21) says which renewal it pays for; the purchase is on its own day.
+  const { billing } = resolved.item;
+  const early =
+    billing.mode === 'recurring' && charge.date !== billing.startDate ? daysBefore(billing) : 0;
+  const renewal =
+    early > 0 ? [`For its renewal on ${format.date(addDays(charge.date, early))}`] : [];
   return {
     uid: `${charge.itemId}-${charge.date}-${currency}@${uidDomain}`,
     start: calendarDate(charge.date),
@@ -319,6 +330,7 @@ function chargeEvent(
       `List: ${listName}`,
       charge.tax > 0 ? `${amount}, with ${format.money(charge.tax, charge.currency)} tax` : amount,
       charge.manual ? 'Renew manually' : 'Renews automatically',
+      ...renewal,
       ...(until !== undefined ? [until] : []),
       ...(charge.ends && until === undefined ? ['Its last charge before it ends'] : []),
       ...(tags.length > 0 ? [`Tags: ${tags.join(', ')}`] : []),
