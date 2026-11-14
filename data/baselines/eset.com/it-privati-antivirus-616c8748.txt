@@ -1,0 +1,292 @@
+url: https://www.eset.com/it/privati/antivirus/
+method: browser
+saved: 2026-11-13
+
+Salta al contenuto
+Privati
+Aziende
+Rivenditori
+Protezione per Clienti Privati
+Scarica
+Perchè ESET?
+Perchè ESET?
+Oltre 30 anni di innovazione guidata dalla scienza.
+Scegli ESET
+Concentrati su ciò che conta – al resto pensiamo noi.
+Esplora la nostra tecnologia
+Chi siamo
+Blog
+Acquista
+Italia
+Area Personale
+ESET NOD32 Antivirus: La prima linea di difesa nella sicurezza informatica
+4.6
+1700+ recensioni
+Vedi tutte le recensioni
+ESET NOD32
+Antivirus
+Antivirus veloce e leggero per Windows e macOS.
+Ideale per la navigazione di base e l’uso della posta elettronica.
+5
+–
++
+DISPOSITIVI
+1
+–
++
+ANNO
+59,99€
+ACQUISTA ORA
+Cosa comprende
++Protezione smartphone e pagamenti
+ESET HOME SECURITY
+ESSENTIAL
+Soluzione all-in-one che protegge anche la navigazione, i pagamenti e il WiFi.
+Perfetto per chi fa acquisti online e per la generazione digitale.
+3
+–
++
+DISPOSITIVI
+1
+–
++
+ANNO
+Acquista 2/3 anni e risparmia!
+59,99€
+ACQUISTA ORA
+Cosa comprende
++ VPN & Crittografia
+ESET HOME SECURITY
+PREMIUM
+Rafforza la tua privacy con una connessione sicura e file sensibili criptati.
+La scelta migliore per utenti avanzati e attenti alla privacy.
+3
+–
++
+DISPOSITIVI
+1
+–
++
+ANNO
+Acquista 2/3 anni e risparmia!
+89,99€
+ACQUISTA ORA
+Cosa comprende
+Sei già cliente? Rinnova, fai l'upgrade, aggiungi dispositivi e altro ancora qui.
+Funzionalità che fanno la differenza
+0
+1
+2
+3
+4
+Antivirus e Antispyware basati sull'IA
+Protezione all'avanguardia per contrastare le minacce online e offline, bloccando il malware prima che possa diffondersi.
+Vantaggio: resta un passo avanti alle minacce grazie a una protezione intelligente in tempo reale.
+Protezione limitata per le interazioni con l'IA
+Anti-Phishing
+Machine Learning avanzato e rilevamento DNA
+Basso impatto sulle risorse di sistema e Modalità Giocatore
+PROVA GRATUITA DI 30 GIORNI
+Scopri tutte le funzionalità nel dettaglio.
+Qualità riconosciuta da test indipendenti e clienti
+Oltre 35 anni di innovazione nella cybersecurity
+ESET combina competenza umana e tecnologia basata sull'IA per contribuire a proteggere persone e aziende dalle truffe moderne e dalle minacce in continua evoluzione. Supportata da 11 centri globali di ricerca e sviluppo, la nostra soluzione di sicurezza proattiva e pluripremiata protegge oltre un miliardo di utenti Internet in tutto il mondo. ESET NOD32 Antivirus protegge il tuo dispositivo lavorando in modo discreto in background.
+Esplora tutte le funzionalità di ESET NOD32 Antivirus per piattaforma
+Windows
+Windows ARM
+macOS
+Sicurezza e Protezione dei dispositivi
+Antivirus e Antispyware
+Rilevamento delle minacce basato su AI
+Protezione intelligente per dispositivi con AI
+LiveGrid®
+Ransomware Shield ESSENTIAL
+Protezione Botnet ESSENTIAL
+Antifurto ESSENTIAL
+Parental Control ESSENTIAL
+ESET LiveGuard PREMIUM
+ESET Folder Guard PREMIUM
+Ransomware Remediation ULTIMATE
+Protezione della Privacy e dell’Identità
+Anti-Phishing
+Safe Banking ESSENTIAL
+Safe Browsing ESSENTIAL
+Protezione dello schermo del browser ESSENTIAL
+Protezione Webcam ESSENTIAL
+Monitoraggio Microfono ESSENTIAL
+Secure SearchESSENTIAL
+Pulizia del Browser ESSENTIAL
+Secure Data (Crittografia) PREMIUM
+VPN PREMIUM
+Website Settings Review ULTIMATE
+Metadata Cleanup ULTIMATE
+Identity Protection ULTIMATE
+Sicurezza AI
+Monitoraggio comportamentale dell’AI*
+Sicurezza degli agenti AI*
+Sicurezza delle conversazioni AI PREMIUM
+Protezione Smart Home
+ESET HOME: piattaforma completa di gestione della sicurezza
+Network Inspector ESSENTIAL
+Firewall ESSENTIAL
+Protezione dagli Attacchi di Rete ESSENTIAL
+VPN per Router ULTIMATE
+Ottimizzazione delle Prestazioni
+Scansione Multithread
+Modalità Giocatore
+Basso impatto sulle risorse di sistema
+Machine Learning Avanzato
+*Funzionalità di sicurezza basate sull'intelligenza artificiale (AI) di portata limitata, supportate dalle tecnologie multistrato già in uso presso ESET.
+Requisiti di sistema e documentazione
+Scarica per il tuo sistema operativo
+NOTA: Sei sicuro di voler scaricare e installare la protezione manualmente?
+Il portale web e l’app mobile ESET HOME sono inclusi gratuitamente con il tuo abbonamento e ti permettono di risparmiare tempo nella gestione della protezione su più dispositivi. Crea il tuo account.
+Download per Windows
+ESET NOD32 Antivirus
+Puoi scaricare e attivare ESET NOD32 Antivirus se hai già acquistato un abbonamento.
+DOWNLOAD PER WINDOWS
+Scarica il Live Installer che ti guiderà
+nell'installazione e attivazione
+Documentazione
+Online help guide
+Find more documentation
+Opzioni di download
+Download avanzato
+Download per macOS
+ESET Cyber Security
+Scarica ESET Cyber Security e attivalo con la chiave di licenza che ti viene inviata quando acquisti l'abbonamento.
+Configura download
+Operating system
+macOS 13 (Ventura), 14 (Sonoma), 15 (Sequoia), 26 (Tahoe), 27 (Golden Gate)
+SCARICA
+Nome file: eset_cybersecurity.dmg | Dimensioni file: 621 MB |
+Versione: 10.0.2100.0
+SHA2: 4d46454a09...
+Changelog
+Version 10.0.2100.0
+This version of application doesn't support macOS 12 or lower. If you are running macOS 12 or lower, please do not install this version.
+Added: Integration with ESET HOME
+Added: Parental Control
+Added: new macOS 27 Golden Gate support
+Improved: Redesigned Onboarding wizard to make product setup easier and more intuitive
+Fixed: 'Network Protocol Error' in Firefox caused by HTTPS scanner under special conditions
+Fixed: Issue causing Device Control rules to fail when device parameters contained leading whitespace
+Fixed: Large memory usage by ESET Network Extension
+Fixed: Security Issues reported in previous version of the application
+Fixed: Several stability and reliability issues
+Documentazione
+Online help guide
+Find more documentation
+Download per Windows on ARM
+Nota: su Microsoft® Windows® su ARM, alcune funzionalità potrebbero non essere supportate.
+Scopri di più.
+ESET NOD32 Antivirus
+Scarica ESET NOD32 Antivirus e attivalo con la chiave di licenza che ti viene inviata quando acquisti l'abbonamento.
+Configura download
+Operating system | Bit
+Windows 10, 11 (64-bit)
+SCARICA
+Nome file: eav_nt64.exe | Dimensioni file: 89 MB |
+Versione: 20.0.7.0
+SHA2: 600f10460b...
+Changelog
+Version 20.0.7.0
+New: ESET Security Gaming Edition
+New: Safe Banking & Browsing: Added support for Opera and Perplexity Comet
+New: Browser Privacy & Security: Added support for Copilot in AI Conversation Security (available in ESET Smart Security Premium, ESET Security Ultimate, ESET Small Business Security)
+New: Browser Screen Protection
+New: Added Web Control (available in ESET Small Business Security)
+New: Added Network Attack Protection (available in ESET Safe Server)
+Updated: Small GUI improvements (copyable elements in details, better alignment and others)
+Bugfixes & small improvements
+Documentazione
+Online help guide
+Find more documentation
+Utilizza ESET HOME, la piattaforma completa per la gestione della sicurezza, per sbloccare facilmente questi vantaggi:
+Panoramica dello stato di sicurezza della tua casa
+FAQs
+Come faccio a scaricare/installare ESET dopo l'acquisto?
+Posso proteggere il mio smartphone? Posso proteggere più sistemi operativi con l'abbonamento ESET?
+Posso provare ESET NOD32 Antivirus prima di acquistarlo?
+ESET NOD32 protegge da malware come il ransomware?
+Cosa apprezzano gli utenti di ESET?
+Qual è la differenza tra ESET NOD32 Antivirus e i nuovi piani?
+Come posso rinnovare o aggiungere dispositivi al mio abbonamento a NOD32 Antivirus?
+Oltre 35 anni di innovazione ti offrono una protezione antivirus intelligente di cui si fidano milioni di utenti. ESET NOD32 Antivirus è una soluzione di sicurezza veloce e leggera che ti aiuta a difenderti dalle truffe e dalle minacce informatiche di ultima generazione senza rallentare il dispositivo.
+Perché scegliere ESET NOD32 Antivirus?
+Rilevamento delle minacce basato sull'IA, supportato da oltre 35 anni di esperienza
+Gaming, streaming e navigazione senza interruzioni
+Blocca virus, malware, ransomware e attacchi di phishing
+Prova gratuita di 30 giorni con tutte le funzionalità incluse
+ACQUISTA ORA
+Scarica la prova gratuita
+Congratulazioni per essere arrivato fino in fondo!
+Ecco, goditi 30 giorni di prova gratuita
+OTTIENI 30 GIORNI DI PROTEZIONE GRATUITA
+Carta di credito non richiesta / Senza impegno
+Piccolo ufficio?
+Sei un professionista o hai un piccolo ufficio?
+Offriamo una protezione semplice ma potente, progettata pensando proprio ai professionisti e ai piccoli uffici.
+Proteggi i tuoi dispositivi di lavoro e personali. Salvaguarda la tua privacy, i tuoi dati, i tuoi server e altro ancora.
+ESPLORATE LE OPZIONI
+IT
+Per Privati
+ESET NOD32 Antivirus
+ESET ITALIA s.r.l.
+Via Campo Lodigiano, 3 Milano
+Contatti
+Italy (IT)
+Per privati
+Tutti i prodotti per privati
+Soluzioni di sicurezza ESET HOME per privati
+Soluzioni di sicurezza ESET SMALL BUSINESS per i piccoli uffici
+Soluzioni di sicurezza per Android
+NOD32 Antivirus
+Identity e Privacy Protection
+Online scanner
+Scansione virus
+ESET Link Checker
+ESET AI Skills Checker
+Compatibilità prodotti
+Perchè scegliere ESET
+Download per privati
+Scarica una prova gratuita
+Ho un abbonamento
+Per aziende
+Aziende di piccole e medie dimensioni
+Aziende di grandi dimensioni
+Servizi per aziende
+Guarda la demo
+Download per aziende
+Richiedi una prova gratuita
+Ho un abbonamento
+Soluzioni su misura
+Scanning Solutions
+Client Shield
+Threat Intelligence
+Advisory
+Industrial Security
+Managed Security
+Air-Gapped Solutions
+Partnership
+Diventa partner ESET
+Reseller Program
+Programma MSP
+Technology Alliance
+Supporto
+Sei già cliente?
+Servizio clienti
+Forum sulla Cybersicurezza
+Status servizi ESET
+Azienda ESET
+Chi siamo
+Rassegna stampa ESET
+Tecnologia ESET
+Blog ESET
+ContattiPolicy HubPrivacyGestisci i CookiesInformazioni legaliMappa del sitoCondizioni GeneraliSegnalateci le vulnerabilitàRichiedi la cancellazione dell’abbonamento
+© 1992 - 2026 ESET, spol. s r.o. - Tutti i diritti riservati, i marchi commerciali utilizzati sono marchi commerciali o marchi registrati di ESET, spol. s r.o. o ESET North America. Tutti gli altri nomi e marchi sono marchi registrati delle rispettive società. - ESET ITALIA s.r.l. P.IVA 10707640966
+Gestisci la scelta dei cookie e della privacy
+La Società e i relativi partner utilizzano i cookie per offrire all’utente un’esperienza online ottimizzata, analizzare il traffico sul proprio sito web e fornire annunci pubblicitari personalizzati. L’utente può accettare la raccolta di tutti i cookie facendo clic su “Accetta tutto e chiudi”, rifiutare tutti i cookie non essenziali scegliendo “Accetta solo cookie essenziali” o modificare le impostazioni relative ai cookie facendo clic su “Gestisci cookie”. L’utente ha anche il diritto di revocare il consenso ai cookie o di modificare le preferenze relative ai cookie in qualsiasi momento facendo clic sul collegamento “Gestisci cookie” presente nella nota a piè di pagina del sito web aziendale o nelle impostazioni dell’account (se disponibili). Per ulteriori informazioni, consultare la Politica aziendale sui cookie.
+ACCETTA TUTTO E CHIUDI
+ACCETTA SOLO COOKIE ESSENZIALI
+GESTISCI COOKIE

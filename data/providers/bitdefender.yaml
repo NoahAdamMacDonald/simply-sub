@@ -1,4 +1,11 @@
 # Drafted by the discovery pipeline on 2026-10-28 (BLUEPRINT §6.5) from these pages, each quoted where it's used.
+# Refreshed by hand on 2026-11-13 (the owner's lists of 2026-11-10 and 2026-11-13): every plan's features against the
+# registry's antivirus, security, password-manager, VPN and parental-control features (the new antivirus.real-time,
+# antivirus.behavioural and antivirus.scans among them), Antivirus Free from its own page, SecurePass's name, a search
+# of Bitdefender's own pages for SerialCart, Canada's and the US's prices and checkout, sign-in, owner and AV-TEST.
+# bitdefender.com is blocked by the owner's DNS filter, so its plan pages were read 2026-11-13 through a Canadian exit
+# and a US exit (prices, which its store script fills in), and with a plain fetch (curl), which gets each page's
+# feature lists for every platform; its support centre, terms and privacy policy were read with a plain fetch.
 # Pricing: https://www.bitdefender.com/en-ca/consumer/premium-security,
 # https://www.bitdefender.com/en-ca/consumer/total-security,
 # https://www.bitdefender.com/en-ca/consumer/ultimate-security,
@@ -9,13 +16,20 @@
 # https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions.
 # Privacy: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions.
 # Bundles: none found.
-# Official resellers: none named for its home plans (M11.9, read 2026-11-03). Its partner locator and partner pages
-# (bitdefender.com/en-us/partners/) are its business channel's, and its home users' terms speak of "its distributors or
-# resellers" without naming any.
+# Official resellers: none named for its home plans (M11.9, read 2026-11-03; searched again 2026-11-13). Its partner
+# locator (its "Find a Reseller" link, bitdefender.com/en-us/partners/partner-locator) lists business partners; its
+# home users' terms speak of "its distributors or resellers" without naming any. SerialCart, which says it's an
+# official reseller, is named on no Bitdefender page: not in its support centre's article index
+# (bitdefender.com/consumer/support/llms.txt), its sitemaps or the partner locator's 78 partners in Germany (read
+# 2026-11-13 through a German exit), and a web search of bitdefender.com finds no page naming it (only SerialCart's own
+# forum posts elsewhere). So it isn't listed (BLUEPRINT §4.9).
 # Not on the pages: Digital Identity Protection's 1-Month Plan: the page says CA$7.99 "for the first month" and not what
-# it renews at, so it isn't stored; Mobile Security for iOS and for Android: not read; the card networks it takes: no page read names them; disputes: its Canadian terms both require arbitration and name the
-# courts of Romania, so the topic is left for a person to read; official resellers: none named for its home plans; its
-# partners page is for business partners.
+# it renews at, so it isn't stored; the card networks it takes: no page read names them; disputes: its Canadian terms
+# both require arbitration and name the courts of Romania, so the topic is left for a person to read.
+# Sold but not in the catalog (2026-11-13): SecurePass on its own ("*Billed CA$29.99 for the first year.", no regular
+# price), Mobile Security for iOS and for Android (CA$29.99 each), and the US's Identity Theft Protection Standard and
+# Premium ($129.99 and $209.99 a year), each on its own page; Antivirus for Mac, Internet Security and Family Pack are in
+# its menu but weren't read.
 
 id: bitdefender
 name: Bitdefender
@@ -38,7 +52,10 @@ billingCurrency:
   }
 cancelUrl: https://www.bitdefender.com/consumer/support/answer/29081/
 sources: { pricing: https://www.bitdefender.com/en-ca/consumer/ }
-# Owner (M11.2), read 2026-11-02: its privacy policy names the company that runs it, a private company in Romania.
+# Owner (M11.2), read 2026-11-02 and again 2026-11-13: its privacy policy names the company that runs it, a private
+# company in Romania (an S.R.L., a Romanian limited liability company). No `stock`: no Bitdefender page names an
+# exchange or a ticker (its company page, bitdefender.com/en-us/company/, gives its headquarters, "Bucharest,
+# Romania", and no listing), so it's private, as the owner says.
 owner:
   name: Bitdefender S.R.L.
   page:
@@ -48,9 +65,12 @@ owner:
     - 'BITDEFENDER S.R.L. (hereafter mentioned as Bitdefender), with its official headquarters in 15A Sos. Orhideelor, Orhideea Towers Building, 10-12 floors, 6th District, Bucharest, Romania'
   country:
     code: RO
-  lastVerified: 2026-11-02
+  lastVerified: 2026-11-13
 # Ways to pay (M11.5), read 2026-11-03 (the owner's tasks) in its support centre's guide to buying, where 2026-11-02's
-# read was its privacy policy's payment processors: a card or PayPal. No page names the card networks.
+# read was its privacy policy's payment processors: a card or PayPal. No page names the card networks. Read again
+# 2026-11-13, in the same words. Its checkout (2Checkout, "the merchant of record for this transaction") charges
+# Canada in CA$ ("169.99 CA$") and the US in USD ("169.99 USD"), read that day through each country's exit up to
+# the email field. No Bitdefender page says what currency a renewal is charged in (see the Prices note below).
 paymentMethods:
   - methods: [card, paypal]
     page: 'How to buy and activate a subscription'
@@ -58,7 +78,9 @@ paymentMethods:
     quotes:
       - 'Then select a payment method (card, PayPal, etc.) and complete the order.'
 # Lab results (M11.2), read 2026-11-02: AV-TEST's latest Windows test of home-user products, Jul-Aug 2026 (its page
-# for it, report 261405). AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml.
+# for it, report 261405). AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml. Checked again
+# 2026-11-13: AV-TEST's Bitdefender page still lists August 2026 as its newest Windows test (October 2026's page has
+# no results yet), so these stay.
 ratings:
   - rater: av-test
     subject: antivirus-protection
@@ -79,21 +101,21 @@ ratings:
     url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/bitdefender-total-security-27.0-261405/
     tested: Total Security 27.0, Windows 11
 
-# Categories (M11.3): an antivirus first (security). Every paid plan but Premium VPN has its password manager,
-# SecurePass, as its support centre's articles list it, so it's in passwords too. "What is Bitdefender Antivirus
+# Categories (M11.3): an antivirus first (security). Every paid plan but Premium VPN and Digital Identity Protection has
+# its password manager, SecurePass, as its support centre's articles list it, so it's in passwords too. "What is Bitdefender Antivirus
 # Plus?" lists "SecurePass - A password manager that securely stores and autofills your login credentials", which
 # outweighs the sales page's older comparison table ("Password Manager no yes"). Premium and Ultimate Security have its
 # Premium VPN, unlimited, so they're VPN plans as well; Total Security and Antivirus Plus have only its Standard VPN,
 # "200 MB/day traffic", so they aren't (notIn).
 # Renewal day (M11.5), read 2026-11-03 (M11.9) in its subscription agreement for home users: each anniversary of the
-# purchase.
+# purchase. Read again 2026-11-13, in the same words.
 renewalAnchor:
   kind: same-date
   page: Subscription agreement
   url: https://www.bitdefender.com/en-ca/site/view/subscription-agreement-and-terms-of-services-for-home-user-solutions
   quotes:
     - "Your subscription will be automatically renewed prior to the expiration of the term and each anniversary thereafter for a fee at Bitdefender's then-current price and any applicable taxes, excluding promotional and discount pricing offered at the renewal time."
-  lastVerified: 2026-11-03
+  lastVerified: 2026-11-13
 
 # General features, read 2026-11-11: app languages from Bitdefender Central's list ("English, French, German, Spanish,
 # Italian, Portuguese ... Japanese, Korean ... Chinese (Traditional)", answer 113564) and its country picker ("France
@@ -101,13 +123,19 @@ renewalAnchor:
 # individual plans. It is exclusively available in family plans." (answer 94159). No pause: you can "cancel your
 # automatic renewal service at any time" or cancel (answer 29081).
 # Apps, sign-in and support (M11.9, the cross-category features), read 2026-11-03: Windows, macOS, Android and iOS on its
-# product and VPN pages ("Windows®, macOS®, Android™, iOS®"), but Antivirus Free, "Windows only"; Bitdefender Central's
-# password, with two-factor codes by email or an authenticator app and trusted devices (support answer 1581); chat or
-# phone once signed in, and its forum (bitdefender.com/site/Main/contactus).
+# product and VPN pages ("Windows®, macOS®, Android™, iOS®"), but Antivirus Free, "Windows only", and Digital Identity
+# Protection, "a web-based service"; Bitdefender Central's password, with two-factor codes by email or an authenticator
+# app and trusted devices (support answer 1581); chat or phone once signed in, and its forum
+# (bitdefender.com/site/Main/contactus).
+# Sign-in and support read again 2026-11-13 (the owner's item 7). Answer 1581 still offers "Email or Authenticator
+# app" codes and trusted devices ("You can sign in from trusted devices without using 2-Factor Authentication."), and
+# "How to Create a Bitdefender Central Account" (answer 118211) adds signing in with another account: "Or sign in
+# using Facebook, Google, Microsoft, or Apple." (sso). No support article mentions passkeys, security keys or text
+# message codes. Support around the clock: "you get 24/7 expert assistance for anything you need" (its product pages).
 features:
   platforms: [windows, macos, android, ios]
-  account.sign-in: [password, email-code, totp, trusted-device]
-  support.channels: [chat, phone, community]
+  account.sign-in: [password, email-code, totp, trusted-device, sso]
+  support.channels: [chat, phone, community, 24-7]
   languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
 
 # Perks (M11.6): the US Ultimate Security Plus plans' lines that no feature describes (M11.9), named in their words.
@@ -176,21 +204,66 @@ perks:
 # Italy, France and Spain states only its first month ("Billed A$12.99 for the first month", "Addebito €6.99 per il
 # primo mese"), as in Canada. Every yearly price stored for them is on its page.
 
-# SecurePass and the VPN in depth (M11.9, the owner's item 3), read 2026-11-03 in its support centre:
-# - SecurePass, every plan with it. Its FAQ (/consumer/support/answer/107798/): "To add an item like an account, credit
-#   card, identity or note", and "How do I use Bitdefender SecurePass as a 2FA app?" (scan a site's QR code into the
-#   vault); its security report flags "Breached passwords", "Weak passwords", "Old passwords (used for more than 6
-#   months)", "Duplicate passwords" and "Suspicious websites that could expose your login data"; a share link has
-#   "options like expiration dates, usage limits, and password protection", and Groups share "by setting specific rights
-#   (read, write, grant)". Its features table (/answer/109218/): sharing with other users, groups and links on every app.
-#   No passkeys, and no shared folders.
-# - Premium VPN, every plan with it (Total Security's and Antivirus Plus's Standard VPN, 200 MB a day, isn't sold as a
-#   VPN). Its Windows settings (/answer/131733/): "Internet Kill-Switch – Stops all Internet traffic if the VPN connection
-#   is briefly lost.", "Split tunneling – Select apps and websites to bypass the VPN", and auto-connect for "Peer-to-peer
-#   apps – Connect VPN when starting a peer-to-peer file sharing app."; its terms ban no P2P, so P2P is allowed
-#   (inferred). Its protocols "(e.g. Wireguard, OpenVPN, IKEv2)" (/answer/11311/), and "Double-hop" (/answer/96952/,
-#   which some protocols don't offer). No port forwarding, Tor or obfuscation on any of these pages, no published audit,
-#   and a Bitdefender account to sign up, so none of those.
+# Every plan's features, read again 2026-11-13 (the owner's items 1 to 4) against the registry's antivirus, security,
+# password-manager, VPN and parental-control features: each plan page's cards and its feature lists for Windows, macOS,
+# iOS and Android (a plain fetch holds all four), its "Compare" table, and the support centre's product articles ("What
+# is Bitdefender Total Security?", answer 121668; "What is Bitdefender Antivirus Plus?", 121630; "Antivirus Plus
+# Multiplatform", 108530), which outweigh a sales page's older comparison table.
+# - Real-time protection (antivirus.real-time), every plan with an antivirus: "Complete Real-Time Data Protection" on
+#   every plan page, "Bitdefender Shield, the real-time protection feature included in the Antivirus module, provides
+#   continuous protection against a wide range of malware threats by scanning all accessed files and e-mail messages."
+#   (answer 13450), and Antivirus Plus's "Real-time threat detection : Monitors and blocks malware in real time,
+#   preventing threats from affecting your system." (108530).
+# - Behaviour-based detection (antivirus.behavioural): "Advanced Threat Defense – Detects and prevents zero-day attacks
+#   by analyzing suspicious behavior in real-time." (121668, 121630), and each plan page's "Advanced Threat Defense ...
+#   uses a technique called behavioral detection to closely monitor active apps."
+# - Scans (antivirus.scans): scans you start, "You can also manually scan your PC at any time to make sure it’s safe."
+#   (121668, 121630); scheduled ones, "Schedule a System Scan or a Quick Scan ." (answer 2056, "available only on
+#   Windows"); and the rescue scan before Windows starts, each plan page's "Rescue Environment ... it reboots the computer
+#   in Rescue Environment for clean-up and restoration." (answer 29132, "available only on Windows 10 and later").
+# - Scam protection: Premium, Ultimate and Ultimate Security Plus have Scam Protection Pro ("Scam Protection Pro is
+#   Bitdefender’s all-in-one scam protection service", answer 103356: web, webmail "Email Protection", "SMS
+#   Protection", "Chat Protection : Monitors chats in popular messaging apps WhatsApp, Facebook Messenger, Telegram, and
+#   Discord for scams (Android only)"), and their Android lists add "Spam & Scam Call Blocking" (calls, added). Total
+#   Security's card: "Core protection against scams. Blocks phishing and fake shops in real time. It even recognizes
+#   emerging SMS or social media scams."; its Android list has "Spam & Scam Call Blocking"; and the Android app's Scam
+#   Protection "automatically detects link-based mobile attacks delivered through SMS, messaging apps, notifications"
+#   (answer 42907): web, texts, chat apps and calls, but not email ("Email Protection ... Available in premium plans.",
+#   121668). Antivirus Plus has the same card and Android Scam Protection, but no call blocking in its Android list.
+# - Network protection: "Wi-Fi Security Advisor" on every plan page's Windows list (it "analyzes how secure a wireless
+#   network is", answer 40620), so wifi-check is added to all; "Privacy Firewall" on Total Security and up, not on
+#   Antivirus Plus (its Compare table: "Privacy Firewall no").
+# - Anti-theft on Antivirus Plus (added): its Android list's "Anti-Theft ... remotely locate, lock, wipe or send a
+#   message to your device in case of loss or theft"; Total Security and up have it on Windows too (answer 32561:
+#   LOCATE, LOCK, WIPE).
+# - Ultimate's pages leave "Safe Online Banking" (Safepay) out of their Windows list, but its other pages say Ultimate
+#   has "Everything from Premium Security" (bitdefender.com/en-ca/consumer/ and /vpn), and Safepay is "built into
+#   Bitdefender’s Windows security solutions" (answer 2051), so secure-browser stays.
+# - SecurePass (the owner's item 4): its current name. "Bitdefender Password Manager ... reached End-of-Life (EOL) on
+#   June 15, 2026, and is no longer available." and "The service has been replaced by Bitdefender SecurePass" (answer
+#   109121); its page is "Bitdefender SecurePass – Secure Password Manager" and Total Security "Includes SecurePass". The
+#   plan cards still say "Password Manager" or "Password management", so the plans label the feature SecurePass
+#   (featureLabels). Its FAQ (answer 107798), read again, gives the same item types, report and sharing as before: "To
+#   add an item like an account, credit card, identity or note", "How do I use Bitdefender SecurePass as a 2FA app?", a
+#   security report of "Breached passwords", "Weak passwords", "Old passwords (used for more than 6 months)", "Duplicate
+#   passwords" and "Suspicious websites that could expose your login data", share links "with options like expiration
+#   dates, usage limits, and password protection", and Groups "by setting specific rights (read, write, grant)". No
+#   passkeys and no shared folders. Antivirus Plus keeps it: its support article lists "SecurePass – A password manager
+#   that securely stores and autofills your login credentials." though its sales page's Compare table says "Password
+#   Manager no".
+# - Premium VPN, every plan with it (Total Security's, Antivirus Plus's and Antivirus Free's Standard VPN, 200 MB a day,
+#   isn't sold as a VPN). Its Windows settings (/answer/131733/): "Internet Kill-Switch – Stops all Internet traffic if
+#   the VPN connection is briefly lost.", "Split tunneling – Select apps and websites to bypass the VPN", and auto-connect
+#   for "Peer-to-peer apps – Connect VPN when starting a peer-to-peer file sharing app."; its terms ban no P2P, so P2P
+#   is allowed (inferred). "Double-hop" (/answer/96952/). Read again 2026-11-13: its protocols article (answer 131796)
+#   adds obfuscation, "The Scramble switch adds obfuscation to OpenVPN traffic." (stealth, added); its FAQ (answer 7126)
+#   says "The server list includes 110 countries across the globe" (110, where the cards say "100+ countries" and the
+#   plans page an older "over 49 countries"), "Premium VPN can be used on a maximum of 10 devices at once", and in a
+#   suite "the VPN will inherit the device limit in that bundle", so 5 on the individual suites (Family's "5x" with 25
+#   devices and "no more than 10 devices connected at a time" is left out: per member or per family isn't said); and
+#   its no-log article (answer 116380) says "In 2025, the infrastructure used by Bitdefender VPN underwent an independent
+#   audit to verify our no-log policy." (vpn.independent-audits: no-logs, added; it names no auditor and links no
+#   report). No port forwarding or Tor on any of these pages, and a Bitdefender account to sign up, so none of those.
 plans:
   - id: bitdefender.total-security
     name: Total Security
@@ -201,13 +274,16 @@ plans:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 5
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -221,6 +297,8 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.included: true
+    featureLabels:
+      password-manager: SecurePass
     prices:
       - region: CA
         currency: CAD
@@ -230,7 +308,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/
       - region: GB
         currency: GBP
@@ -248,7 +326,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-29
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/
       - region: AU
         currency: AUD
@@ -328,7 +406,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/total-security
       - region: US
         currency: USD
@@ -336,7 +414,7 @@ plans:
         interval: year
         intervalCount: 2
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/total-security
       - region: GB
         currency: GBP
@@ -426,13 +504,16 @@ plans:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 5
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -446,17 +527,20 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.devices: 5
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     inferred:
       vpn.p2p:
         reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
@@ -473,7 +557,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
       - region: GB
         currency: GBP
@@ -491,7 +575,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-29
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/
       - region: AU
         currency: AUD
@@ -571,7 +655,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
       - region: US
         currency: USD
@@ -579,7 +663,7 @@ plans:
         interval: year
         intervalCount: 2
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/premium-security
       - region: GB
         currency: GBP
@@ -670,13 +754,16 @@ plans:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 25
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -692,17 +779,19 @@ plans:
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
       account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     inferred:
       vpn.p2p:
         reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
@@ -719,7 +808,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
       - region: CA
         currency: CAD
@@ -729,7 +818,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/premium-security
       - region: US
         currency: USD
@@ -737,7 +826,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/premium-security
       - region: US
         currency: USD
@@ -745,7 +834,7 @@ plans:
         interval: year
         intervalCount: 2
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/premium-security
       - region: GB
         currency: GBP
@@ -913,17 +1002,19 @@ plans:
     categories: [security, passwords, vpn]
     features:
       includes-subscription: [bitdefender.digital-identity-protection]
-      security.data-exposure: [footprint]
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 5
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -934,20 +1025,24 @@ plans:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.devices: 5
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     inferred:
       vpn.p2p:
         reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
@@ -964,7 +1059,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
       - region: GB
         currency: GBP
@@ -982,7 +1077,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-10-29
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/
       - region: AU
         currency: AUD
@@ -1062,7 +1157,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1070,7 +1165,7 @@ plans:
         interval: year
         intervalCount: 2
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: CA
         currency: CAD
@@ -1080,7 +1175,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1088,7 +1183,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: GB
         currency: GBP
@@ -1256,18 +1351,20 @@ plans:
     categories: [security, passwords, vpn]
     features:
       includes-subscription: [bitdefender.digital-identity-protection]
-      security.data-exposure: [footprint]
       account.users: 5
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 25
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -1279,21 +1376,24 @@ plans:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
       security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
       account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     inferred:
       vpn.p2p:
         reason: "No page says whether P2P is allowed. Its app connects the VPN when a peer-to-peer file sharing app starts, and its terms don't ban P2P, so it's taken as allowed."
@@ -1310,7 +1410,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
       - region: CA
         currency: CAD
@@ -1320,7 +1420,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
       - region: CA
         currency: CAD
@@ -1330,7 +1430,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1338,7 +1438,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1346,7 +1446,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1354,7 +1454,7 @@ plans:
         interval: year
         intervalCount: 2
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: GB
         currency: GBP
@@ -1596,26 +1696,25 @@ plans:
           quote: IVA inclusa.
         lastVerified: 2026-11-03
         sourceUrl: https://www.bitdefender.com/it-it/consumer/ultimate-security
-  # No antivirus (M11.4, antivirus.included is required in security), read 2026-11-02: its page describes a service
-  # that "continuously monitors your personal information and alerts you in real time in case of a data breach", and
-  # names Total Security as the device protection to buy beside it.
   - id: bitdefender.ultimate-security-plus-standard-individual
     name: Ultimate Security Plus Standard Individual
     link: https://www.bitdefender.com/en-us/consumer/ultimate-security
     categories: [security, passwords, vpn]
     features:
       includes-subscription: [bitdefender.digital-identity-protection]
-      security.data-exposure: [footprint]
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 5
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -1625,24 +1724,28 @@ plans:
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
+      security.credit-monitoring: 1
       security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
       security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.devices: 5
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
-      security.identity-restoration: true
-      security.credit-monitoring: 1
-      security.identity-theft-insurance: 1
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     perks: [stolen-wallet, ssn-tracker]
     inferred:
       vpn.p2p:
@@ -1658,7 +1761,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1666,7 +1769,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
   - id: bitdefender.ultimate-security-plus-extended-individual
     name: Ultimate Security Plus Extended Individual
@@ -1674,17 +1777,19 @@ plans:
     categories: [security, passwords, vpn]
     features:
       includes-subscription: [bitdefender.digital-identity-protection]
-      security.data-exposure: [footprint]
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 5
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -1694,24 +1799,28 @@ plans:
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
+      security.credit-monitoring: 3
       security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
       security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 2
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.devices: 5
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
-      security.identity-restoration: true
-      security.credit-monitoring: 3
-      security.identity-theft-insurance: 2
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     perks:
       [
         stolen-wallet,
@@ -1736,7 +1845,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1744,7 +1853,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
   - id: bitdefender.ultimate-security-plus-standard-family
     name: Ultimate Security Plus Standard Family
@@ -1752,18 +1861,20 @@ plans:
     categories: [security, passwords, vpn]
     features:
       includes-subscription: [bitdefender.digital-identity-protection]
-      security.data-exposure: [footprint]
       account.users: 5
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 25
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -1774,25 +1885,28 @@ plans:
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
+      security.credit-monitoring: 1
       security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
       security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
-      security.identity-restoration: true
-      security.credit-monitoring: 1
-      security.identity-theft-insurance: 1
       account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     perks: [stolen-wallet, ssn-tracker]
     inferred:
       vpn.p2p:
@@ -1808,7 +1922,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1816,7 +1930,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
   - id: bitdefender.ultimate-security-plus-extended-family
     name: Ultimate Security Plus Extended Family
@@ -1824,18 +1938,20 @@ plans:
     categories: [security, passwords, vpn]
     features:
       includes-subscription: [bitdefender.digital-identity-protection]
-      security.data-exposure: [footprint]
       account.users: 5
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 25
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web, email, sms, chat]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, email, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -1846,25 +1962,28 @@ plans:
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
       security.anti-tracker: true
+      security.credit-monitoring: 3
       security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
       security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 2
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
-      security.identity-restoration: true
-      security.credit-monitoring: 3
-      security.identity-theft-insurance: 2
       account.parental-controls: true
     featureLabels:
       antivirus.scam-protection: 'Scam Protection Pro'
+      password-manager: SecurePass
     perks:
       [
         stolen-wallet,
@@ -1889,7 +2008,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
       - region: US
         currency: USD
@@ -1897,12 +2016,19 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/ultimate-security
+  # No antivirus (M11.4, antivirus.included is required in security), read 2026-11-02: its page describes a service
+  # that "continuously monitors your personal information and alerts you in real time in case of a data breach", and
+  # names Total Security as the device protection to buy beside it.
+  # Read again 2026-11-13: its support centre calls it "a web-based service" (answer 32562) and its page says "Nothing
+  # to download, nothing to install.", so its platform is the web, not the apps' (platforms). Its 1-Month Plan still
+  # says only "Billed CA$7.99 for the first month", so no monthly price is stored.
   - id: bitdefender.digital-identity-protection
     name: Digital Identity Protection
     link: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
     features:
+      platforms: [web]
       antivirus.included: false
       security.dark-web-monitoring: true
       security.data-exposure: [footprint]
@@ -1915,7 +2041,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included
-        lastVerified: 2026-10-28
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/digital-identity-protection
       - region: GB
         currency: GBP
@@ -2003,7 +2129,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-03
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/digital-identity-protection
   # Read 2026-11-02 on its Canadian and US pages (renewal prices: the struck-through ones) and its support centre's
   # "What is Bitdefender Total Security?" and "What is Bitdefender Antivirus Plus?" (features on Windows, which the
@@ -2020,13 +2146,16 @@ plans:
       antivirus.activity-modes: true
       antivirus.anti-spam: true
       antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.cryptomining: true
       antivirus.devices: 25
       antivirus.included: true
-      antivirus.network: [firewall]
+      antivirus.network: [firewall, wifi-check]
       antivirus.optimizer: true
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, sms, chat, calls]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -2042,6 +2171,8 @@ plans:
       security.webcam-protection: [webcam, microphone]
       vpn.included: true
       account.parental-controls: true
+    featureLabels:
+      password-manager: SecurePass
     prices:
       - region: CA
         currency: CAD
@@ -2051,7 +2182,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/total-security
       - region: CA
         currency: CAD
@@ -2061,7 +2192,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/total-security
       - region: US
         currency: USD
@@ -2069,7 +2200,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/total-security
       - region: US
         currency: USD
@@ -2077,7 +2208,7 @@ plans:
         interval: year
         intervalCount: 2
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/total-security
       - region: GB
         currency: GBP
@@ -2246,10 +2377,15 @@ plans:
     notIn: [vpn]
     features:
       antivirus.activity-modes: true
+      antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.devices: 1
       antivirus.included: true
+      antivirus.network: [wifi-check]
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, sms, chat]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -2262,6 +2398,8 @@ plans:
       security.dark-web-monitoring: true
       security.file-shredder: true
       vpn.included: true
+    featureLabels:
+      password-manager: SecurePass
     prices:
       - region: CA
         currency: CAD
@@ -2271,7 +2409,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/antivirus
       - region: US
         currency: USD
@@ -2279,7 +2417,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/antivirus
       - region: GB
         currency: GBP
@@ -2368,10 +2506,15 @@ plans:
     notIn: [vpn]
     features:
       antivirus.activity-modes: true
+      antivirus.anti-theft: [locate, lock, wipe]
+      antivirus.behavioural: true
       antivirus.devices: 3
       antivirus.included: true
+      antivirus.network: [wifi-check]
       antivirus.ransomware: [blocking, file-recovery]
-      antivirus.scam-protection: [web]
+      antivirus.real-time: true
+      antivirus.scam-protection: [web, sms, chat]
+      antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.secure-browser: true
       antivirus.vulnerability-scan: true
       antivirus.web-protection: true
@@ -2384,6 +2527,8 @@ plans:
       security.dark-web-monitoring: true
       security.file-shredder: true
       vpn.included: true
+    featureLabels:
+      password-manager: SecurePass
     prices:
       - region: CA
         currency: CAD
@@ -2393,7 +2538,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/antivirus
       - region: US
         currency: USD
@@ -2401,7 +2546,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/antivirus
       - region: GB
         currency: GBP
@@ -2491,12 +2636,13 @@ plans:
       vpn.content-blocking: [ads, trackers]
       vpn.devices: 10
       vpn.included: true
+      vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
-      vpn.protocols: [wireguard, openvpn, ikev2]
-      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
     inferred:
@@ -2515,7 +2661,7 @@ plans:
         autoRenew: true
         taxIncluded:
           quote: Sales tax included.
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/vpn
       - region: US
         currency: USD
@@ -2523,7 +2669,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-us/consumer/vpn
       - region: GB
         currency: GBP
@@ -2608,19 +2754,33 @@ plans:
   # Antivirus Free (M11.9, the owner's item), read 2026-11-03 on its own pages (/en-us/ and /en-ca/consumer/free-antivirus,
   # in the same words): its comparison with Antivirus Plus gives it "Basic ransomware protection", and Antivirus Plus
   # "Ransomware remediation: blocks threats, automatically restores your files", so it blocks ransomware but recovers
-  # no files (support answer 2027, on its 2022 rebuild, names only "real-time malware protection and customizable
-  # scanning scheduling options"). Its FAQ: it "includes a basic version of Bitdefender VPN, which offers up to 200 MB of
-  # encrypted traffic per device, per day", so it isn't sold as a VPN (notIn), as Antivirus Plus isn't. It shields from
-  # "Phishing" and "Malicious Websites".
+  # no files. Its FAQ: it "includes a basic version of Bitdefender VPN, which offers up to 200 MB of encrypted traffic
+  # per device, per day", so it isn't sold as a VPN (notIn), as Antivirus Plus isn't. It shields from "Phishing" and
+  # "Malicious Websites".
+  # Read again 2026-11-13 (the owner's item 3), its page not being among the paid plans: "Download Bitdefender Free
+  # Antivirus for Windows and benefit from real time protection for your laptop or PC." (real-time); "Our advanced
+  # behavior-based detection catches even the vilest virus before it can wreak havoc." and its "Advanced Threat Defense"
+  # (behavioural); "With powerful scanning and removal tools, we'll hunt down existing viruses" and "customizable virus
+  # scans" (scans you start), with "customizable scanning scheduling options" (support answer 2027: scheduled). No rescue
+  # scan on its pages. Its comparison's "No anti-tracking measures", "No productivity & entertainment mode" and "No
+  # full-system analysis" (where Antivirus Plus "Scans your entire PC for outdated software and unsafe settings") are
+  # stated as false. It needs a Bitdefender account: "Simply download and install the product by creating a Bitdefender
+  # Central Account."
   - id: bitdefender.antivirus-free
     name: Antivirus Free
     link: https://www.bitdefender.com/en-ca/consumer/free-antivirus
     notIn: [vpn]
     features:
       platforms: [windows]
+      antivirus.activity-modes: false
+      antivirus.behavioural: true
       antivirus.included: true
       antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scans: [on-demand, scheduled]
+      antivirus.vulnerability-scan: false
       antivirus.web-protection: true
+      security.anti-tracker: false
       vpn.included: true
     prices:
       - region: GLOBAL
@@ -2629,7 +2789,7 @@ plans:
         interval: month
         intervalCount: 1
         autoRenew: true
-        lastVerified: 2026-11-02
+        lastVerified: 2026-11-13
         sourceUrl: https://www.bitdefender.com/en-ca/consumer/free-antivirus
 
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read that day: its subscription agreement is also its
@@ -2658,6 +2818,8 @@ policies:
       url: https://www.bitdefender.com/consumer/support/answer/29081/
     - name: 'Refunds and renewal terms (plans page)'
       url: https://www.bitdefender.com/en-ca/consumer/
+    - name: 'VPN no-log policy'
+      url: https://www.bitdefender.com/consumer/support/answer/116380/
   ratings:
     - topic: billing.cancellation
       tier: good
@@ -2898,13 +3060,15 @@ policies:
       lastVerified: 2026-11-02
     - topic: service.activity-logging
       tier: good
-      reason: 'Its VPN keeps no record of what you do or where you are, though IPVanish runs it for Bitdefender. No outside check of that is published.'
+      reason: 'Its VPN keeps no record of what you do or where you are, though IPVanish runs it for Bitdefender. It says an outside audit checked this in 2025, but not who did it.'
       sources:
         - url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
           quote: 'We do not store any details regarding your location or online activity nor do we share them with other entities.'
         - url: https://www.bitdefender.com/en-ca/site/view/legal-privacy-policy-for-home-users-solutions
           quote: "For this service, we use IPVanish as data processor who processes data on behalf of Bitdefender in accordance with Bitdefender's instructions and for the sole purpose of providing VPN services to users."
-      lastVerified: 2026-11-02
+        - url: https://www.bitdefender.com/consumer/support/answer/116380/
+          quote: 'In 2025, the infrastructure used by Bitdefender VPN underwent an independent audit to verify our no-log policy.'
+      lastVerified: 2026-11-13
     - topic: service.account-sharing
       tier: good
       reason: 'You can share it with the people you live with, and no one else. It describes no household checks, only that it can limit users it finds abusing it.'

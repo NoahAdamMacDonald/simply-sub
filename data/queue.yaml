@@ -300,6 +300,13 @@
   source: own
   status: done
   date: 2026-11-13
+- id: mcafee
+  name: McAfee
+  website: https://www.mcafee.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-13
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -513,14 +520,15 @@
   sitelinks: 53
   status: done
   date: 2026-11-04
-- id: avast-antivirus
+- id: avast
   name: Avast Antivirus
   website: https://www.avast.ua/free-antivirus-download
   category: security
   source: wikidata
   wikidata: Q1574
   sitelinks: 49
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: hbo-max
   name: HBO Max
   website: https://www.hbomax.com
@@ -680,14 +688,15 @@
   wikidata: Q868165
   sitelinks: 31
   status: queued
-- id: eset-nod32-antivirus
-  name: ESET NOD32 Antivirus
+- id: eset
+  name: ESET
   website: https://www.eset.com/us/home/antivirus
   category: security
   source: wikidata
   wikidata: Q1385867
   sitelinks: 30
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: avg-antivirus
   name: AVG AntiVirus
   website: https://www.avg.com
@@ -722,14 +731,16 @@
   wikidata: Q644330
   sitelinks: 27
   status: queued
-- id: kaspersky-anti-virus
-  name: Kaspersky Anti-Virus
+- id: kaspersky
+  name: Kaspersky
   website: https://www.kaspersky.com/anti-virus
   category: security
   source: wikidata
   wikidata: Q1043518
   sitelinks: 27
-  status: queued
+  status: done
+  date: 2026-11-13
+  note: "One provider for Kaspersky's plans (2026-11-13), with Kaspersky Internet Security's entry (Wikidata Q1588112) folded in"
 - id: malwarebytes
   name: Malwarebytes
   website: https://www.malwarebytes.com
@@ -737,7 +748,8 @@
   source: wikidata
   wikidata: Q1783235
   sitelinks: 27
-  status: queued
+  status: done
+  date: 2026-11-13
 - id: ubuntu-one
   name: Ubuntu One
   website: https://web.archive.org/web/20131231040314/https://one.ubuntu.com
@@ -791,14 +803,6 @@
   category: passwords
   source: wikidata
   wikidata: Q56319818
-  sitelinks: 26
-  status: queued
-- id: norton-antivirus
-  name: Norton AntiVirus
-  website: https://ca.norton.com
-  category: security
-  source: wikidata
-  wikidata: Q741128
   sitelinks: 26
   status: queued
 - id: playstation-now
@@ -1151,22 +1155,16 @@
   wikidata: Q383474
   sitelinks: 14
   status: queued
-- id: kaspersky-internet-security
-  name: Kaspersky Internet Security
-  website: https://www.kaspersky.com/kaspersky_internet_security
-  category: security
-  source: wikidata
-  wikidata: Q1588112
-  sitelinks: 14
-  status: queued
-- id: norton-360
+- id: norton
   name: Norton 360
   website: https://no.norton.com/360
   category: security
   source: wikidata
   wikidata: Q608921
   sitelinks: 14
-  status: queued
+  status: done
+  date: 2026-11-13
+  note: "One provider for Norton's plans (2026-11-13), with Norton AntiVirus's entry (Wikidata Q741128) folded in"
 - id: yandex-mail
   name: Yandex Mail
   website: https://mail.yandex.ru

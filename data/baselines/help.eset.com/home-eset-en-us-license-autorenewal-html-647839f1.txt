@@ -1,0 +1,48 @@
+url: https://help.eset.com/home_eset/en-US/license_autorenewal.html
+method: fetch
+saved: 2026-11-13
+
+Subscription Auto-Renewal | ESET HOME | ESET Online Help
+Search
+English
+ESET HOME
+Search help content
+Search
+Select the tab
+ESET HOME – Table of Contents
+Subscription Auto-Renewal
+Breadcrumbs
+ESET Online Help > ESET HOME > Working with ESET HOME > Subscriptions and subscription management > Subscription Auto-Renewal
+Copy current article URL
+Share via email
+This article (PDF)
+Whole documentation (PDF)
+Auto-renewal ensures that your ESET subscriptions and products are always up to date, providing continuous protection. Auto-renewal is automatically active unless you turn it off via the ESET eStore or contact your subscription distributor. If your subscription distributor offers an auto-renewal option, manage it by following the instructions below:
+Subscription renewal
+Renewal conditions may be different in your country. See the following ESET Knowledgebase article (this article may not be available in your language) for more detailed subscription renewal instructions.
+View or change your auto-renew settings
+1.Log in to your ESET HOME account.
+2.In the side menu, click Subscriptions.
+3.Choose a subscription, and click Open subscription.
+4.In the Subscription options, click Manage subscription, and you will be redirected to the ESET eStore to manage the auto-renewal.
+You must contact your subscription distributor to manage the auto-renewal settings for specific ESET subscriptions.
+Disable Auto-Renewal
+If you do not want your subscription to renew automatically after the current billing period, you can disable auto-renewal. Once disabled, the subscription remains active until the end of the current period and then expires automatically.
+See the following ESET Knowledgebase article (this article may not be available in your language) for more detailed instructions.
+Manage your Google Play subscription
+Follow the instructions below only when the Type is Subscription.
+1.Log in to your ESET HOME account.
+2.In the side menu, click Subscriptions.
+3.Choose a subscription, and click Open subscription.
+4.In the Subscription options, click Manage subscription, and ESET redirects you to Subscriptions in the Google Play store.
+˄˅
+Useful websites and additional resources
+View desktop site
+End of Life
+ESET Knowledgebase
+ESET Forum
+ESET Status Portal
+Regional support
+© 1992 - 2026 ESET, spol. s r.o. - All rights reserved.
+Manage cookies
+Cookie Policy

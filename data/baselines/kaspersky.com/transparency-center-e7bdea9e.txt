@@ -1,0 +1,401 @@
+url: https://www.kaspersky.com/transparency-center
+method: fetch
+saved: 2026-11-13
+
+Kaspersky Transparency Center | Kaspersky | Kaspersky Skip to main content go to homepage
+Your DataAnswersThe First Center
+KASPERSKY GLOBAL TRANSPARENCY INITIATIVE
+Today, transparency is a vital element in the digital world we all rely on. Kaspersky Global Transparency Initiative includes a number of actionable and concrete measures to engage with the wider cybersecurity community and stakeholders in validating and verifying the trustworthiness of its products, internal processes and business operations.
+Learn more about our Transparency
+VISIT TRANSPARENCY CENTER
+DATA, INDEPENDENT REVIEWS AND MORE...
+Within the framework of our Global Transparency Initiative we have relocated our cyberthreat-related data storage and processing for a number of regions to Switzerland. We have also opened our first Transparency Center in the country.
+User Data
+Threat-related data received from users of Kaspersky products in Europe, North and Latin America, the Middle East, and also several countries in Asia-Pacific is processed and stored on Swiss servers.
+Transparency Center
+A facility for trusted partners and government stakeholders to review the company's code, software updates and threat detection rules. The company opened Transparency Centers in Bogotá (Colombia), Istanbul (Turkey), Kigali (Rwanda), Kuala Lumpur (Malaysia), Madrid (Spain), Riyadh (Saudi Arabia), Rome (Italy), São Paulo (Brazil), Seoul (South Korea), Singapore, Tokyo (Japan), Utrecht (the Netherlands), and Zurich (Switzerland).
+Independent review
+Third-party assessment of internal processes to verify the integrity of Kaspersky solutions and processes: • SOC 2 audit, conducted by an independent accounting firm;
+• ISO 27001 certification for data security systems.
+Why did we choose Switzerland for cyberthreat-related data storage and processing?
+- Long and famous history of neutrality, similar to our policy for the detection of malware: we detect and remediate any malware attack
+- Robust approach to data protection legislation
+TRANSPARENCY CENTERS
+Transparency Centers serve as facilities for trusted partners to access reviews of the company’s code, software updates and threat detection rules, along with other activities. Through them, we provide governments and partners with information on our products and their security, including essential and important technical documentation, for external evaluation in a secure environment. They also serve as a briefing center where trusted stakeholders can learn more about the company’s portfolio, engineering and data processing practices.
+Kaspersky Transparency Centers are operating in Bogotá, Istanbul, Kigali, Kuala Lumpur, Madrid, Riyadh, Rome, São Paulo, Seoul, Singapore, Tokyo, Utrecht, and Zurich.
+At Kaspersky’s Transparency Centers, the company provides the opportunity to compile its software from the source code and compare it with the publicly available one.
+No other cybersecurity provider has done anything as far reaching as this. In opening its Transparency Centers, Kaspersky makes a significant step towards becoming completely transparent about its protection technologies, infrastructure and data processing practices.
+The Transparency Centers’ services are also available for remote access. To request access to the Transparency Center, please contact TransparencyCenter@kaspersky.com or visit the website.
+Access policy
+The security and protection of our customers is our top priority; therefore, we follow the strictest access-policy practices and reserve the right to turn down a request if it could potentially cause a security breach.
+The Transparency Center welcomes:
+State agencies and regulators responsible for national cybersecurity and the protection of information systems (decreed as such by the respective local legislation);
+Prospective and existing enterprise partners and customers of Kaspersky anywhere in the world.
+Academia, media and information security community experts are being considered as potential invitees to the Transparency Center in the future
+Under no circumstances whatsoever will Kaspersky provide intelligence or law enforcement agencies that have a mandate and/or capability for cyber-offensive operations with access to the Transparency Center. The security information and infrastructure in the Transparency Center are provided by Kaspersky strictly for consultation purposes only. Any actions to modify the company’s source code, software updates, or threat detection rules are forbidden and will be prevented by the TC Steering team; any abuse will be reported to the local law enforcement agency.
+INDEPENDENT AUDIT
+Kaspersky continuously undertakes third-party assessments to verify the integrity of its solutions and processes. The company has successfully completed the Service Organization Control for Service Organizations (SOC 2) Type 2 audit, conducted by an independent accounting firm.
+The final report confirms that the development and release of Kaspersky’s threat detection rules databases (AV databases) are protected from unauthorized changes by strong security controls. To learn more and to request the Kaspersky SOC 2 Type 2 Report, please visit the website.
+Kaspersky has also attained
+ISO27001 certification
+for its data services.
+THE NEXT LEVEL OF DATA PROTECTION!
+While Kaspersky’s current data protection practices are implemented in accordance with the highest industry standards and provide an extremely high level of security for any information processed by the company’s products and services, the company continuously improves its procedures for the protection of its customers’ data.
+Malicious and suspicious files voluntarily shared by users of Kaspersky products in Europe, North and Latin America, the Middle East, and also several countries in Asia-Pacific are processed and stored in a data center in Zurich. This provides a world-class facility in compliance with industry standards to ensure the highest levels of security.
+In addition, it has been certified that Kaspersky applies a management system in line with the ISO/IEC 27001:2022 standard in the delivery of malicious and suspicious files using Kaspersky Security Network (KSN) infrastructure, as well as safe storage and access to these files in the company’s Distributed File System (KLDFS). Recently, Kaspersky’s data services have been re-certified with extended scope, with data services for both cyberthreat-related data and statistics now being covered by the certification. This includes the company’s data centers in Germany, Singapore, China, Brazil, and Russia. Learn more here.
+* Australia, New Zealand, Japan, Bangladesh, Brunei, Cambodia, India, Indonesia, South Korea, Laos, Malaysia, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand and Vietnam.
+TRANSPARENCY REPORT
+Kaspersky publicly shares its approach in responding to requests from global government and law enforcement agencies for two categories: user data and technical expertise. We also disclose information about the number of such requests by country.
+Law enforcement and government requests reports:
+• Download Law enforcement and government requests report for 2020 and H1 2021.
+• Download Law enforcement and government requests report for H2 2021.
+• Download Law Enforcement and government requests report for H1 2022.
+• Download Law Enforcement and government requests report for H2 2022.
+• Download Law Enforcement and government requests report for H1 2023.
+• Download Law enforcement and government requests report for H2 2023.
+• Download Law enforcement and government requests report for H1 2024.
+• Download Law enforcement and government requests report for H2 2024.
+• Download Law enforcement and government requests report for H1 2025.
+• Download Law enforcement and government requests report for H2 2025.
+• Download Law enforcement and government requests report for H1 2026.
+Reports with requests received from users:
+• Download the latest information about requests received from users for 2020 and H1 2021.
+• Download the latest information about requests received from users for H2 2021.
+• Download the latest information about requests received from users for H1 2022.
+• Download the latest information about requests received from users for H2 2022.
+• Download the latest information about requests received from users for H1 2023.
+• Download the latest information about requests received from users for H2 2023.
+• Download the latest information about requests received from users for H1 2024.
+• Download the latest information about requests received from users for H2 2024.
+• Download the latest information about requests received from users for H1 2025.
+• Download the latest information about requests received from users for H2 2025.
+• Download the latest information about requests received from users for H1 2026.
+LATEST NEWS ON THE GLOBAL TRANSPARENCY INITIATIVE
+To keep you up-to-date with news on the relocation to Switzerland and the other activities that form part of our Global Transparency Initiative, we’ll be posting regular updates and progress reports in this section.
+Update September 2026
+Kaspersky once again successfully completes SOC 2 Type II audit
+Reinforcing a track record of verifiable transparency, Kaspersky has once again successfully completed the Service Organization Control for Service Organizations (SOC 2) Type II audit. Covering the period from August 2025 to July 2026, the assessment confirmed the integrity and security of the company's antivirus database development and release processes, along with the effectiveness of safeguards against unauthorized changes.
+A full audit report is available upon request.
+Release of Transparency Report for H1 2026
+Kaspersky has published its latest Transparency Report covering the first half of 2026, reaffirming its commitment to openly share information about requests received from governments, law enforcement agencies (LEAs) and users.
+During the reporting period, the company processed 64 requests from governments and LEAs across five countries — Brazil, France, India, Russia, and South Korea. The overwhelming majority — 63 requests — concerned non-personal technical information. All requests met legal verification criteria and were approved.
+Additionally, between January and June 2026, Kaspersky received 325 requests from individuals with various data-related questions, including where and how their data is stored, as well as requests for its access or removal.
+Update February 2026
+Release of Transparency Report for H2 2025
+As part of its ongoing commitment to transparency, Kaspersky discloses figures on data inquiries from governments and law enforcement agencies (LEAs), as well as from its users. The latest report uncovered the requests received during the second half of 2025:
+Over the reporting period, Kaspersky got 34 requests from governments and LEAs from three countries, with all of them concerning the provision of technical information or expertise. All the requests successfully met legal verification criteria and were approved.
+Between July and December 2025, the company received 432 requests from individuals related to the data stored. These included inquiries about where and how their data is stored, as well as requests for access, deletion, or other datasubject rights.
+Update January 2026
+Kaspersky leads in independent transparency and accountability assessment of cybersecurity vendors
+An independent study commissioned by the Tyrol Chamber of Commerce and conducted by MCI | The Entrepreneurial School® and AV-Comparatives showcases Kaspersky’s industry leadership in transparency and accountability.
+Among 14 global cybersecurity vendors evaluated, Kaspersky achieved the highest score across the evaluation criteria, meeting or exceeding industry benchmarks in 57 out of 60 categories. Kaspersky emerged to be one of the few vendors offering features like SBOM and source code reviews, regular transparency reports, and granular update controls.
+The study also reflects a broader industry shift toward accountability-driven cybersecurity governance. The full report can be found here.
+Update November 2025
+Kaspersky reinforced its security credentials by re-certifying its information security management system (ISMS) against ISO/IEC 27001:2022, the world's most widely used information security standard. The certification, valid for our data centers in Zurich, Frankfurt, Toronto, and Moscow, proved that the delivery mechanisms for malicious and suspicious files using the Kaspersky Security Network infrastructure as well as their safe storage, are in line with the standard. The document can be requested on the Kaspersky website.
+Update October 2025
+Kaspersky renewed the Service Organization Control for Service Organizations (SOC 2) Type II audit. The assessment focused on the integrity and security of the company’s antivirus database development and release processes and confirmed the reliability of existing safeguards against unauthorized alterations. A full audit report is available upon request.
+Update September 2025
+Release of Transparency report for H1 2025
+During the first half of 2025, Kaspersky received a total of 42 requests from governments and law enforcement agencies from two countries - Russia and Brazil. All the requests received during the period were for non-personal technical information. As many as 10% of the requests were rejected due to an absence of data or because they didn't meet legal verification requirements.
+As part of its ongoing commitment to transparency, Kaspersky also discloses figures on data inquiries from its users. Between January and June 2025, the company received 407 requests from individuals seeking clarity on personal data matters, including details on what and where their data is stored and requests for its provision or removal.
+Update February 2025
+Release of Transparency report for H2 2024.
+The latest report uncovered data on the requests in two categories — user data and technical expertise — received during the second half of 2024. During the second half of 2024, Kaspersky received 49 requests from governments and law enforcement agencies (LEAs) from four countries. At least 24% of those were rejected due to an absence of data or to not meeting legal verification requirements. All the requests received during the second half of 2024 were for technical expertise.
+At the same time, the number of user requests for details on what and where user data is stored and its provision or removal reached 502 in H2 2024.
+Update November 2024
+The Transparency Center in Bogotá is the second center in the LatAm region. With the assistance of Kaspersky’s experts, visitors of the new Transparency Center can review the company’s secure software development documentation, source code of the company’s key product portfolio, as well as all the versions of software updates and threat detection rules.
+To visit a center, please submit a request.
+Kaspersky renews SOC 2 audit, reinforcing customer trust and data security. Kaspersky has been continuously providing assurances of the integrity of its solutions through regular third-party assessments, including SOC 2 audits, which the company has been undergoing since 2019.
+Update September 2024
+The Transparency Center in Seoul is the fourth center in the APAC region.
+The Center will serve as a facility where independent experts, including customers and business partners, can review and verify Kaspersky’s source code, software updates, and internal processes.
+To visit a center, please submit a request.
+Release of Transparency report for H1 2024
+The company recently released the new “Law Enforcement and Government Requests” and “User Requests” reports for the first half of 2024. Kaspersky received 61 requests from government and law enforcement agencies (LEAs) from 9 countries. In comparison to the same period of 2023, the company received on 10,3 percent requests fewer. The company received 494 users requests totally, 445 of them were requests for removal of user's personal information, 29 were about provisioning of a user's stored information, and 20 were requests to find out what information is stored and where.
+Update July 2024
+The Kaspersky Transparency Center in Woburn (the United States) has been closed. Kaspersky encompasses a total of 11 Transparency Centers located across Europe, APAC, Latin America, Africa, and the Middle East.
+To visit a center, please submit a request.
+Update April 2024
+The First Kaspersky Transparency Center has been opened in Turkey.
+This Center will serve as a facility for the company’s partners, and customers, as well as regulators in the field of cybersecurity, to review the source code of all Kaspersky on-premise products, software updates and threat detection rules.
+With the opening of a facility Turkey, Kaspersky expanded its network to encompass a total of 12 Transparency Centers located across Europe, APAC, North and Latin America, Africa and the Middle East.
+To visit a center, please submit a request.
+Update November 2023
+The First Kaspersky Transparency Center in the African region has been opened in Rwanda.
+The new center in Kigali offers its visitors a comprehensive overview of Kaspersky's engineering and data processing practices, products and services together with a live demonstration of a source code review.
+With the opening of a facility in the region, Kaspersky expanded its network to encompass a total of 11 Transparency Centers located across Europe, APAC, North and Latin America, Africa and the Middle East.
+To visit a center, please submit a request.
+Update October 2023
+Kaspersky presents the principles of ethical use of AI/ML in the cybersecurity industry
+To reinforce its commitment to a transparent and responsible approach to the development of technology, Kaspersky sets the ethical principles for the development and use of AI/ML in cybersecurity.
+According to Kaspersky, the seamless development and use of AI/ML should take into consideration the following six principles: transparency, safety, human control, privacy, commitment to cybersecurity purposes, and openness to a dialogue.
+The proposal was presented at the UN Internet Governance Forum held in Japan from 8 ─12 October, 2023. Kaspersky is also inviting other cybersecurity companies to join and follow these guidelines.
+Update September 2023
+Kaspersky has opened its first Transparency Center in the Middle East with a new facility in the Kingdom of Saudi Arabia.
+The center in Riyadh offers services ranging from an overview of the company’s transparency practices to the company’s source code review. All of Kaspersky on-premise solutions can be reviewed in the center.
+With the opening of the new facility in the Kingdom of Saudi Arabia, Kaspersky now operates a network of 10 Transparency Centers, located in Europe, APAC, Middle East, North and Latin America.
+To visit a center, please submit a request.
+Update June 2023
+⚬ Kaspersky has passed the comprehensive Service Organization Control for Service Organizations (SOC 2) Type 2 audit. The company has been continuously and successfully passing SOC 2 audits since 2019. Following previous audits for Type 1, Kaspersky has passed the assessment for Type 2, analyzing the company’s controls over a six-month period. The audit was carried out by a team of accountants from an independent service auditor. As a result of the audit, it was concluded that Kaspersky’s internal controls to ensure regular automated antivirus database updates are effective, while the process of the development and implementation of antivirus databases is protected from tampering. The full report can be provided to our customers upon request.
+⚬ Kaspersky has announced its plans to further expand the Global Transparency Initiative by growing its network of Transparency Centers worldwide and broadening source code review options. By mid-2024, Kaspersky plans to expand its network of Transparency Centers in the Middle East, Africa and the Asia-Pacific region, and will open at least three facilities, which will serve as briefing centers for the company’s stakeholders to find out more about Kaspersky’s internal engineering and data management practices.
+In addition, Kaspersky has decided to expand the scope of the source code review offering at its Transparency Centers. Previously, Kaspersky offered for review only the source code of its flagship consumer and enterprise products, but starting from July 2023, the company is removing limitations in this regard and making the source code of all of its on-premise solutions available for our enterprise customers and partners.
+Update March 2023
+Release of Transparency report for H2 2022.
+The latest report uncovered data on the requests in two categories — user data and technical expertise — received during the second half of 2022. During the second half of 2022, Kaspersky received 37 requests from governments and law enforcement agencies (LEAs) from six countries. At least 35% of those were rejected due to an absence of data or to not meeting legal verification requirements. In total, 89% of the requests received during the second half of the last year were for technical expertise.
+At the same time, the number of user requests for details on what and where user data is stored and its provision or removal reached 6,312 in H2 2022.
+Update September 2022
+New Transparency Centers in Italy and the Netherlands
+Kaspersky opens two new Transparency Centers — in Italy and the Netherlands. The centers operate within a new format, providing customers and partners only with the blue piste review option, the most sought-after option with Transparency Center visitors since the opening of the first facility in 2018. Operating in the company’s offices, centers in Rome and Utrecht, open for Kaspersky partners, customers, and government cybersecurity authorities, provide visitors exclusively with an overview of Kaspersky’s engineering and data management practices. In addition, as part of the visit, the center guests will be met by a team of Kaspersky experts, who will answer any questions regarding the functioning of Kaspersky’s solutions.
+New edition of Transparency report
+The fresh report covered the first six months of 2022. During the first half of 2022, Kaspersky received a total of 89 requests from governments and law enforcement agencies from eight countries (Brazil, China, Italy, Japan, Jordan, Russia, Singapore, and South Korea). The overwhelming majority — 89% — of requests received were for non-personal technical information, i.e. information that could be helpful for cybercrime investigations — indicators of compromise (IoCs), information about modus operandi of cyberattackers, output of malware reverse engineering and other results of cyber forensic analysis. As many as 11% of requests asked for user data, with all of them having been rejected.
+In addition, as part of its Transparency report, Kaspersky has made public information about requests received from users for personal data related purposes — details on where a user’s data is stored, provision or removal of personal information. Kaspersky received 3,285 such requests in the first six months of 2022.
+Update June 2022
+Kaspersky opens three new Transparency Centers — in the United States, Japan and Singapore. The newly opened facilities will welcome the company’s enterprise partners and customers, including state
+agencies and regulators, responsible for cybersecurity. Two additional centers in APAC will ensure the company’s greater proximity to stakeholders in the region, while the center in Woburn will serve as the new venue for the company’s North American
+Transparency Center, which used to be located in New Brunswick, Canada.
+With the assistance of Kaspersky’s experts, visitors of Transparency Centers can review the company’s secure software development documentation, source code of the company’s key product portfolio, as well as all the versions of our software updates and threat detection rules. Beyond that, Transparency Centers guests can rebuild the source code to make sure that it corresponds to the publicly available modules.
+At its Transparency Centers, Kaspersky also provides the Software Bill of Materials (SBOM) and results of third-party security audits (such as the
+SOC 2 audit report
+and
+ISO 27001 assessment report
+) for further analysis.
+Update May 2022
+Kaspersky has successfully renewed a Service Organization Control for Service Organizations (SOC 2) Type 1 audit, which the company first completed in 2019. The independent assessment has been carried out by an international Big Four accounting firm and confirmed that the development and release process of Kaspersky’s antivirus bases are protected against unauthorized changes by security controls. The scope of the 2022 audit has been expanded compared to the 2019 assessment, as Kaspersky has since introduced new security tools and controls. The full report can be provided to our customers upon request.
+Update April 2022
+⚬ Kaspersky has expanded the scope of its cyberthreat-related data relocation, which now covers users in Latin America and the Middle East.
+Completed in March, the effort ensured that malicious and suspicious files received from users in Latin America and the Middle East were stored and processed in data-centers in Zurich, Switzerland. The user data processing and storage relocation was also finalized for the entire North America. Prior to that, the relocation of such data storage had been completed for Europe, the United States, Canada, and a
+number of Asia-Pacific countries
+.
+⚬ The company’s data services were again successfully certified against the ISO 27001* international standard.
+In addition to the audit passed in 2020, the scope of the certification conducted by TUV Austria was even extended and covered not only the company’s data system for processing cyberthreat-related files, but also Kaspersky’s data system for processing statistics. The document can be found in the
+TÜV AUSTRIA Certificate Directory
+and is also publicly available on the Kaspersky website
+here
+.
+⚬ Release of Transparency report for H2 2021.
+The latest report uncovered data on the requests in two categories — user data and technical expertise — received during the second half of 2021. During the second half of 2021, Kaspersky received 109 requests from governments and law enforcement agencies (LEAs) from 12 countries. At least 36% of those were rejected due to an absence of data or to not meeting legal verification requirements. In total, 92 of the requests received during the second half of the last year were for technical expertise.
+In total, throughout 2021, Kaspersky received 214 requests, (compared to 160 requests in 2020), from governments and LEAs from 17 countries. A total of 181 of those were for technical expertise (compared to 132 in 2020). At the same time, the number of user requests for details on what and where user data is stored and its provision or removal increased, reaching 2,252 in total.
+⚬
+Cyber Capacity Building Program (CCBP)
+available online
+Kaspersky has launched the digital version of the “Cyber Capacity Building Program” that aims to help organizations worldwide develop practical tools and knowledge for security assessments. The online training, available for an even greater audience, will ensure that more organizations and individuals will have a chance to boost their cyber-resilience by learning how to properly carry out product security evaluations to protect themselves against ICT supply chain risks.
+Update March 2022
+Kaspersky’s Transparency Center in New Brunswick, Canada, temporarily ceased operations, after CyberNB, which hosted the Center in its cybersecurity ecosystem, shut down as it wasn’t able to meet its financial obligations. While we are looking for a new place for our Transparency Center, we invite our partners and customers in North America to take a virtual visit to our Transparency Center with full access to its services or request access to other Transparency Centers in Zurich, Madrid, São Paulo or Kuala Lumpur. To request a remote or physical access to Kaspersky Transparency Centers, please follow this
+link
+.
+Update October 2021
+Committed to greater transparency, Kaspersky has publicly shared information on requests received from government and law enforcement agencies, and users for data and technical expertise in 2020 and H1 2021. The company has issued its first Transparency Report, including Law enforcement and government requests report, as well as User data request report, to help its users understand how the company responds to such requests and its approach to users’ data security and privacy.
+Update November 2020
+⚬ The relocation of data processing and data storage, announced in November 2018, has been fully completed.
+In addition to Europe, the United States and Canada, Kaspersky has also relocated data storage and processing for a number of Asia-Pacific countries. The list of Asia-Pacific countries which have become the part of the GTI relocation plans includes Australia, New Zealand, Japan, Bangladesh, Brunei, Cambodia, India, Indonesia, South Korea, Laos, Malaysia, Nepal, Pakistan, Philippines, Singapore, Sri Lanka, Thailand and Vietnam.
+The customer threat-related data shared by users who are based in these locations is now processed in two data centers in Zurich, Switzerland, and includes suspicious or previously unknown malicious files that the company’s products send to the Kaspersky Security Network (KSN) for automated malware analysis.
+⚬ Kaspersky announces the opening of its North American Transparency Center in partnership with the CyberNB Association in New Brunswick, Canada.
+The facility will start operating in early 2021 and become the company’s fifth location where Kaspersky partners will be provided with the opportunity to review its source code and to learn more about engineering and data-processing practices, as well as its product portfolio. The CyberNB Association is a non-profit organization, based in Fredericton, New Brunswick, Canada, that takes an ecosystem approach to improving cybersecurity outcomes through engagement and collaboration with private sector, government, academia, knowledge and skills-building, and talent acquisition and workforce development stakeholders.
+Earlier in 2020, Transparency Centers in São Paulo and Kuala Lumpur became fully operational. Kaspersky has also relaunched its first Transparency Center in Zurich that has been relocated to the Interxion data center. Moving forward, the company will provide unique access to its customers and trusted partners to experience data security controls and to directly access the company’s data management practices for external review and examination.
+Given the challenging travel and visitor restrictions, customers and partners now also have an opportunity to review the source code remotely. To request remote access to Kaspersky Transparency Centers, please follow this
+link
+.
+⚬ The Cyber Capacity Building Program, announced in May 2020,
+has been successfully launched alongside Vietnam’s Authority of Information Security (AI), which includes the country’s national CERT and National Cyber Security Centre (NCSC). The Program has been extended to now include an additional section on code fuzzing, conducted together with Kaspersky’s ICS CERT Team. In 2021, the Program will be available to business partners and other companies to enhance their readiness as well as to gauge the resilience of their systems and networks against supply chain risks. To request access, please follow
+this
+.
+⚬ Product scope for Kaspersky’s Bug Bounty Program has been extended to include Kaspersky VPN.
+Researchers can now submit vulnerability reports relating to Kaspersky VPN, including third-party software modules that are a part of the VPN solution. Overall, since March 2018, 76 bugs have been resolved, and 37 reports rewarded with total bounties equating to $57,750.
+Update May 2020
+⚬ Kaspersky developed a Cyber Capacity Building Program
+which includes dedicated training on product security evaluation. Available in online and offline formats, it is designed to help companies, government organizations and academia develop practical tools and knowledge for security assessments. The training will provide an introduction to product security evaluation and threat modeling, as well as source code review and vulnerability management. Taking part in the program will be free of charge, with a pilot project to be launched first for government organizations and academia in Q3, 2020. Later this year the training will be available for business organizations. Interested parties can learn more and request information here.
+⚬
+Kaspersky has enabled remote access to Transparency Center services,
+by providing a ‘blue-piste’ assessment option – to become acquainted with both the company’s engineering practices and unparalleled data protection standards. Kaspersky’s security experts are ready to answer any questions regarding the company’s data processing practices and the functioning of its solutions, as well as provide a live demonstration of a source-code review. To request a remote blue-piste assessment option, please visit the
+website
+.
+⚬ As one of the pioneers in the industry, Kaspersky published
+its ethical principles for Responsible Vulnerability Disclosure (RVD)
+, for greater transparency and efficiency in vulnerability handling and mitigating harm and risks to users. These principles are based on the company’s vast cybersecurity experience and have been aligned with guidelines provided by
+FIRST
+.
+⚬ Kaspersky has been continuously working on its Bug Bounty Program. Since March 2018, the company has been notified of 66 bugs. In total, 26 of those reported were rewarded with combined bounties totaling $49,250.
+⚬ Earlier this year the Paris Call officially launched its new website.
+Kaspersky has been among the early supporters of its nine principles for keeping cyberspace secure, open and cooperative. Kaspersky’s Global Transparency Initiative is listed as a particular example of the sixth principle implementation, by promoting higher transparency and accountability in cybersecurity
+⚬
+Kaspersky’s Global Transparency Initiative
+has also been featured as an example of best practice for greater transparency and trust in a number of international documents, such as the UN Institute for Disarmament Research (UNIDIR) report on supply-chain security, and the
+Industrial Internet Consortium’s (IIC) best practices for trustworthy software development
+.
+Update November 2019
+⚬
+Kaspersky relocates data from its U.S. and Canadian customers to Switzerland.
+This follows the relocation of data processing for the company’s European users. The data is shared voluntarily with the
+Kaspersky Security Network
+(KSN) – an advanced, cloud-based system that automatically processes cyberthreat-related data, and includes suspicious or previously unknown malicious files that the company’s products send to KSN for automated malware analysis. Kaspersky plans to finalize the relocation by the end of 2020.
+⚬
+Kaspersky to open a Transparency Center in São Paulo, Brazil,
+that will serve as a dedicated security facility for trusted partners in Latin America, to review the company’s source code, as well as learn more about engineering and data-processing practices and the company’s product portfolio. Earlier this year, the company opened one more European Transparency Center in Madrid and announced the opening of its APAC Transparency Center in Malaysia. At all of Kaspersky’s Transparency Centers, the company provides the opportunity to compile the company’s software from its source code and compare it with the publicly available one. This move assures an unprecedented level of confidence in Kaspersky’s products, allowing them to run a compilation process with the assistance of the company’s experts.
+Update July 2019
+⚬
+Kaspersky has successfully completed the
+Service Organization Control for Service Organizations (SOC 2) Type 1 audit
+. The final report, issued by one of the Big Four accounting firms, confirms that the development and release of Kaspersky’s threat detection rules databases (AV databases), created and distributed for company’s products operating on Windows and Unix Servers, are protected from unauthorized changes by strong security controls. Kaspersky can disclose the principal information about its abovementioned commitments and requirements in the SOC 2 Type 1 report
+upon request
+.
+⚬ Kaspersky has been working continuously on the development of its
+Bug Bounty Program
+. Recently the company paid a $23,000 bounty – the biggest reward in the history of the program to date – to researchers from the Imaginary team for the discovery of a security issue in Kaspersky that could potentially allow third-parties to remotely execute arbitrary code on a user's PC with system privileges. The bug was promptly fixed. Kaspersky thanks the Imaginary team for the report and their assistance in improving the company’s products. Since March 2018, we resolved 66 bugs reported by security researchers through the program, with bounty rewards totaling almost $45,000.
+⚬
+Safe Harbor for vulnerability researchers:
+The company now supports the
+Disclose.io
+framework which provides Safe Harbor for vulnerability researchers concerned about negative legal consequences of their discoveries. Kaspersky understands that external experts provide valuable assistance by finding and reporting vulnerabilities in its products and is ready to provide additional guarantees for fair treatment of vulnerability reports.
+⚬
+Transparency Center in Madrid
+has officially been open to Kaspersky’s customers and partners, as well as government stakeholders, since June. As is the case at the Zurich facility, the company offers source-code reviews and tailored security briefings on the company’s data processing practices and functioning of its products.
+⚬
+Threat intelligence support for law enforcement agencies:
+Kaspersky, the first among cybersecurity vendors, announced an advanced free service for Law Enforcement Agencies (LEAs). A unique and tailored approach developed to maximize their efforts in tackling borderless cybercrime, it consists of three components: Threat Intelligence Reporting, Threat Data Feeds and an Automated Security Awareness Platform (Kaspersky
+ASAP
+).
+Update April 2019
+⚬
+Kaspersky opens
+Transparency Center in Madrid
+. In addition to a similar center in Zurich, opened in 2018, it will serve as a trusted facility for the company’s partners and government stakeholders. They will be able to come and check the company’s product source code and learn about Kaspersky’s engineering and data processing practices, as well as the company’s portfolio. The center will be open to visitors from June. Previously announced plans for Transparency Centers to be open in Asia and North America by 2020 are still ongoing.
+⚬
+Transparency Center review system developed
+. This offers multiple review options according to the area of interest – from a general non-technical overview of the company’s engineering practices and data protection standards, through to the deepest and most comprehensive review of the critical parts of the company’s source code. More information about the available options can be found on the Transparency Centers
+website
+.
+⚬ Kaspersky publishes results of a voluntary
+third-party legal assessment
+, aimed at providing independent evaluation of the company’s obligations to Russian legislation. The analysis was conducted by prominent legal expert, Dr. Kaj Hober – Professor of International Investment and Trade Law at Uppsala University in Sweden and expert on the Russian legal system – and covers three Russian laws related to data processing and storage. These were widely reported as the ones Kaspersky was obliged to comply with, being a Russian-based company. Results of the analysis are freely available online.
+⚬
+Bug Bounty program
+was improved by extending the scope of products for review. Security researchers can now investigate Kaspersky Password Manager and Kaspersky Endpoint Security for Linux, among others. Within a year of the extension being announced, we resolved more than 50 bugs reported by security researchers through the program, with bounty rewards totaling more than $17,000.
+Update November 2018
+First Transparency Center opens and data processing for European users in Zurich begins, plus news of an independent engineering audit and a thriving bug bounty program
+On November 13, 2018, malicious and suspicious files shared voluntarily with Kaspersky by users of the company’s products in Europe started to
+be processed in two data centers in Zurich
+. The data, which includes suspicious or previously unknown malicious files and corresponding meta-data that the company’s products send to
+Kaspersky Security Network
+(KSN) for automated malware analysis, is being processed in data centers that provide world-class facilities in compliance with industry standards to ensure the highest levels of security.
+The move reflects Kaspersky’s determination to assure the integrity and trustworthiness of its products. It is accompanied by the opening of the company’s first Transparency Center, also in Zurich. Through the
+Transparency Center
+, Kaspersky will provide governments and partners with information on its products and their security, including essential and important technical documentation, for external evaluation in a secure environment.
+Other activities in progress include the engagement of a Big Four professional services firm to
+audit the company's engineering practices
+around the creation and distribution of threat detection rule databases, with the aim of independently confirming their accordance with the highest industry security practices.
+Alongside this, Kaspersky continues to support an active
+bug bounty program
+. Within one year, it has resolved more than 50 bugs reported by security researchers, of which several were especially valuable.
+Update August 2018
+⚬ Kaspersky has signed contracts with two leading data center providers in Zurich, Interxion and NTS, for world-class facilities where, from late 2018, we will start to securely store and process data shared by users of Kaspersky products in Europe. Other countries, including the U.S., Canada, Australia, Japan, South Korea and Singapore, will follow. Full relocation for European countries is expected to be finalized by the fourth quarter of 2019. For more information, see here:
+www.kaspersky.com/blog/transparency-status-updates
+⚬ Kaspersky’s first Transparency Center, also located in Zurich, will achieve initial operating capability by the end of 2018. The center will eventually provide responsible stakeholders with full visibility of the source code of our products and software updates.
+⚬ The other pillars of our new plans, such as the relocation of software code assembly, including products, product updates and threat detection rule databases (AV databases), and the appointment of an independent, third-party to manage and review everything, will take place during the second phase of the project, after 2018.
+OUR ANSWERS TO YOUR QUESTIONS
+Why is it important?
+Supply chain issues and ‘balkanization’ are major challenges for the security of today’s ultra-connected global landscape. To overcome them, the world needs trust and transparency in cybersecurity. We believe that companies will need to increase transparency in their products and business operations in order to earn and maintain trust. Our new measures demonstrate our approach for achieving that: through tangible, practical steps implemented within the overall framework of our Global Transparency Initiative
+What is Kaspersky Global Transparency Initiative?
+Kaspersky’s Global Transparency Initiative (GTI) is a reaffirmation of the company’s commitment to earning and maintaining the trust of its most important stakeholders: its customers. It includes a number of actionable and concrete measures to involve external independent cyber security experts and others in validating and verifying the trustworthiness of the company’s products, its internal processes and business operations, and to introduce additional accountability mechanisms by which the company can further demonstrate that it addresses any security issues promptly and thoroughly.
+In the context of GTI, the storage and processing of cyberthreat-related data, shared voluntarily with the Kaspersky Security Network by users of Kaspersky products, has been relocated from Russia to Switzerland.
+We have also opened Transparency Centers across the globe which serve as facilities for trusted partners and government stakeholders to review the company’s code, software updates, and threat detection rules; as well as a briefing center to learn more about Kaspersky’s engineering and data processing practices. Our Transparency Centers are open in Bogotá (Colombia), Istanbul (Turkey), Kigali (Rwanda), Kuala Lumpur (Malaysia), Madrid (Spain), Riyadh (Saudi Arabia), Rome (Italy), São Paulo (Brazil), Seoul (South Korea), Singapore, Tokyo (Japan), Utrecht (the Netherlands), and Zurich (Switzerland).
+Why did you decide to relocate infrastructure?
+The relocation reflects our willingness to address customer concerns by, firstly, moving some of our data storage and processing to a neutral region while maintaining our high global standards of data security and integrity.
+This move further demonstrates our enduring commitment to assuring the integrity and trustworthiness of Kaspersky solutions in the service of our customers, and to addressing any concerns outlined by regulators.
+Why is data from some countries not moved to Switzerland, but will be processed in Russia? Based on what principle did you divide the countries for the relocation of data processing?
+A decision about the relocation of data processing for each country is based on market specifics, customer demands and local regulation. The company has moved processing of cyberthreat-related data and its storage for our customers in Europe, North and Latin America, the Middle East, and also several countries in Asia-Pacific.
+How will the relocation affect the data of other users?
+There is no difference between Switzerland and Russia in terms of data processing. In both regions we adhere to our fundamental principle of respecting and protecting people’s privacy, and we will use a uniform approach to processing users’ data, with strict policies applied.
+What will be available for independent review and assessment in the Transparency Center?
+Trusted partners will have access to the company’s code, software updates and threat detection rules, among other things.
+The Transparency Center’s functions include:
+- Access to secure software development documentation
+- Access to the source code of any publically released product
+- Access to threat detection rule databases
+- Access to the source code of cloud services responsible for receiving and storing the data of Kaspersky customers
+- Access to software tools used for the creation of a product (the build scripts), threat detection rule databases and cloud services
+We provide three options to government stakeholders and enterprise customers for independent assessment of Kaspersky products. Given the challenging travel and visitor restrictions, customers and partners now also have an opportunity to review the source code remotely. Learn more
+here
+.
+Who is able to review?
+Transparency Centers are open for inspections by trusted partners and government stakeholders. Please refer to our Access policy for more information.
+What is a SOC 2 Type 2 report?
+A SOC 2 Type 2 report is designed to meet the needs of existing or potential customers who need assurance about the design and implementation of controls at a service organization. It covers controls that are relevant to the security, availability, or processing integrity of the system used by the service organization to process customers’ information, or the confidentiality or privacy of that information.
+What are further steps to be taken in the framework of Global Transparency Initiative?
+We will continue to work with the community to prioritize transparency and accountability, and to enhance the security of modern software products, to further build consumer trust. Our core belief is that through collaborative multi-stakeholder efforts we are able to enhance confidence and trust in technology. More
+information about our transparency principles is available here
+.
+How do you work with national law enforcement agencies?
+Kaspersky works with national, regional or international law enforcement organizations, such as INTERPOL, in the best interests of international cybersecurity, providing technical consultations or expert analysis of malicious programs to support cybercrime investigations and in accordance with applicable laws. We share our expertise, knowledge, technical findings and technical analysis of malicious programs during cybercrime investigations.
+How do you then handle requests from LEAs in regards to the user data?
+All incoming requests go through a mandatory legal verification – this is our by-default rule to protect our users, ensure their security and privacy, and ensure Kaspersky’s compliance with applicable laws and procedures. Requests should be:
+- legally justified;
+- issued in accordance with applicable laws and legal procedures;
+- valid with the principles above;
+- technically feasible; and
+- their implementation should not affect the security or privacy of Kaspersky’s users, or the integrity of Kaspersky’s products and services.
+If requests fail to meet the five criteria, then we proceed further to reject or challenge the request or ask for additional clarifications. Where allowed by law, we will give prior notice to users whose data is requested. All requests are logged, and information about them is made public here
+Home Solutions
+Kaspersky Standard
+Kaspersky Plus
+Kaspersky Premium
+Kaspersky Safe Kids
+Kaspersky VPN
+Kaspersky Password Manager
+All Solutions
+Device Specific Solutions
+Android Antivirus
+Mac Antivirus
+Mobile Security
+Windows Antivirus
+Linux Antivirus
+VPN for Windows
+VPN for Android
+VPN for iPhone
+VPN for Mac
+Small & Medium Business
+Kaspersky Small Office Security
+Kaspersky Next EDR Foundations
+Kaspersky Next EDR Optimum
+Kaspersky Next XDR Optimum
+Kaspersky Next MXDR Optimum
+All Products
+Enterprise Solutions
+Kaspersky Next
+Cybersecurity Services
+Kaspersky MDR
+Kaspersky Next XDR Expert
+Kaspersky Threat Intelligence
+Hybrid Cloud Security
+All Solutions
+© 2026 AO Kaspersky Lab
+Privacy Policy
+Anti-Corruption Policy
+License Agreement B2C
+License Agreement B2B
+Cancel subscription
+Contact Us
+About Us
+Partners
+Blog
+Resource Center
+Press Releases
+Sitemap
+Careers
+Unsubscribe from Push Notifications
+Global
+Americas
+América LatinaBrasilUnited StatesCanada - EnglishCanada - Français
+Africa
+Afrique FrancophoneMarocSouth AfricaTunisie
+Middle East
+Middle East (English)الشرق الأوسط (Arabic)
+Western Europe
+Belgique & LuxembourgDanmarkDeutschland & SchweizEspañaFranceItalia & SvizzeraNederlandNorgeÖsterreichPortugalSverigeSuomiUnited Kingdom
+Eastern Europe
+Česká republikaMagyarországPolskaRomâniaSrbijaTürkiyeΕλλάδα (Greece)България (Bulgaria)Қазақстан - Русский (Kazakhstan - Russian)Қазақстан - Қазақша (Kazakhstan - Kazakh)Россия и Белару́сь (Russia & Belarus)Україна (Ukraine)
+Asia & Pacific
+AustraliaIndiaIndonesia (Bahasa)Malaysia - EnglishMalaysia - Bahasa MelayuNew ZealandViệt Namไทย (Thailand)한국 (Korea)中国 (China)香港特別行政區 (Hong Kong SAR)台灣 (Taiwan)日本語 (Japan)
+For all other countries
+Global Website
+We use cookies to make your experience of our websites better. By using and further navigating this website you accept this. Detailed information about the use of cookies on this website is available by clicking on more information.
+Accept and Close

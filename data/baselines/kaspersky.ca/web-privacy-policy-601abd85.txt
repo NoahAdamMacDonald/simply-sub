@@ -1,0 +1,237 @@
+url: https://www.kaspersky.ca/web-privacy-policy
+method: fetch
+saved: 2026-11-13
+
+Web Privacy Policy | Kaspersky Skip to main content
+go to homepage
+English
+Kaspersky Privacy Policy for Websites and Webservices
+Last updated: 06/27/2025.
+DATA CONTROLLER INFORMATION
+This privacy policy applies to AO Kaspersky Lab, located at bldg. 2, 39A, Leningradskoe Shosse, Moscow, 125212, Russian Federation or the respective affiliate(s), which is/are directly stated in a consent which refers to the present Privacy Policy ("Kaspersky", "Company" or "we"). It does not apply to Kaspersky websites that do not display or link to this Privacy Policy or that have their own Privacy Policy. It also does not apply to Kaspersky's services and products unless they are linking to this Privacy Policy.
+In this Privacy Policy we inform you about the processing and the privacy of your personal data when using our websites or webservices. As a security expert company, data privacy and data security are very important to us. Therefore, we are committed to respecting and protecting your privacy and to handling your personal data confidentially.
+If you have any questions or comments regarding the processing of your personal data and Kaspersky's privacy practices or if you would like us to update information or preferences you provided to us, please contact our data protection officer at https://support.kaspersky.com/general/privacy or directly by post or email: Kaspersky Labs GmbH, Schloßlände 26, 85049 Ingolstadt, Germany, dpo@kaspersky.com.
+You can also contact Kaspersky’s EU/Swiss/UK representative: Kaspersky Labs GmbH, Schloßlände 26, 85049 Ingolstadt, Germany.
+If you are a data subject located in mainland China, you can contact Kaspersky China’s Data Protection Officer: dpo@kaspersky.com.
+GENERAL INFORMATION
+For the process of retrieving your requested information from our websites or webservices, our servers store certain data needed for service delivery and/or for statistical or security purposes in anonymized or pseudonymized form (pseudonymized form means data is collected under a pseudonym, i.e. a unique random alphanumeric string generated internally in order to identify each data record). In this context, general information is processed, such as your domain name or browser type. These data do not enable us to draw conclusions regarding your identity. These anonymized or pseudonymized data are deleted promptly after their statistical evaluation.
+We do not process any "Special Categories of Personal Data" about you (this includes details about your race or ethnicity, religious or philosophical beliefs, sex life, sexual orientation, political opinions, trade union membership, information about your health and genetic and biometric data for the purpose of uniquely identifying you), unless otherwise required by the local applicable laws on the definition and processing of "Special Categories of Personal Data".
+Notice for California Consumers. If you are looking for CCPA-specific information, check out our CCPA Privacy Notice as well, which is incorporated into this Privacy Policy.
+LOCAL REQUIREMENTS
+To extent required by the applicable local law, the processing of your personal data in certain scenarios must comply with the applicable local law requirements, including but not limited to separate consent and data protection impact assessment, retention period, legal basis and other local applicable requirements.
+AUTOMATED DECISION MAKING
+We do not use automated decision making at our Websites and Services.
+WHAT PERSONAL DATA DO WE PROCESS AND HOW DO WE USE IT
+Visit to our websites or webservices
+Description of Service
+Display of service
+For providing a website or our webservices, we collect and process personal data that your internet browser automatically transmits to us, which is date and time of the retrieval of one of our websites or webservices, your browser type and browser settings and your IP address.
+Our legal basis for processing your personal data is safeguarding our legitimate interests which lie in providing an access to our websites or webservices and ensuring the technical functionality of the website or webservices.
+Logfiles
+During your use of our websites or webservices we may process your IP address, network provider, browser type, visited domain names, and other information about your client environment (such as model of your device, operating system, screen resolution, etc.).
+Purpose of this processing is the improvement of security and availability of our websites or webservices.
+Legal basis for processing your personal data is safeguarding our legitimate interests which lie in the aforementioned purposes.
+Web Analysis
+We may also process information about which Kaspersky websites and webservices you use and how you use them, the web page you were visiting immediately prior to visiting our website or webservices, pages of our website or webservices that you visited, the time spent on those pages or services, information you searched for on our website or webservices, access times and dates, and other statistics.
+Purpose of this processing is the production of traffic statistics for the Kaspersky's websites or webservices.
+Legal basis for processing data is your consent. You can withdraw your consent anytime with effect for the future by clicking the link you will find at the bottom of each page of websites.
+Cookies
+Cookie files are files or fragments of information that may be stored on your computer or other Internet-compatible end user devices (for example, smartphones and tablets) when you visit our websites or use our webservices. This information frequently consists of alphanumeric strings that uniquely identify your computer or end user device, but they may also contain other information.
+On our websites or webservices we use different types of "cookies" (small text files that are placed on your device):
+A list of the cookies we use, descriptions of the purposes of the cookies and further information on the respective cookies are given in the cookie center on the specific websites of our company or in the relevant consents or agreements.
+How long do we keep your personal data
+The data we process for the delivering of the service is deleted directly after delivery by the web server.
+Logfiles are deleted no later than 1 year after creation.
+Data which we process for the purpose of web analysis is deleted 1 year after creation.
+The deletion period of the cookies is given in the cookie center on the specific websites of our company or in the relevant consents or agreements.
+Email Tracking Technologies (Pixels)
+Description of Service When we send you electronic communications or newsletters, we may collect and process personal data using embedded tracking technologies known as tracking pixels or web beacons (1x1 transparent image files). When an email containing a tracking pixel is opened, your email client or internet browser requests the image file from our remote server, automatically transmitting data such as the date and time the email was retrieved, your email client type, your browser settings, your operating system, device model, and your IP address.
+Purpose & Legal Basis We process this information to evaluate message deliverability, analyze email campaign performance (such as open rates), measure user engagement with our content, and tailor future electronic communications to better match your interests.
+The legal basis for processing your personal data for these web analysis and performance measurement purposes is your consent. You can withdraw your consent at any time with effect for the future by clicking the "Manage Tracking Preferences" link located in the footer of every marketing email we send you, or by configuring your email software settings to block the automatic downloading of remote images.
+We may also process functional email tracking markers strictly necessary to ensure the technical deliverability, security, and integrity of our electronic communications (such as verifying system delivery or detecting security threats and spam). Our legal basis for processing this technical data is safeguarding our legitimate interests, which lie in ensuring the security and technical functionality of our communications.
+How long do we keep your personal data Personal data processed solely for the delivery and security verification of emails is deleted directly after delivery or within logfiles no later than 1 year after creation. Data processed for the purpose of email performance analysis and engagement tracking is deleted 1 year after creation, or upon the withdrawal of your consent.
+KasperskyAccount
+Description of Service
+Kaspersky Account is a service that provides end-to-end authentication across websites, Kaspersky products and third party services, as well as the ability to manage single account settings for Kaspersky users.
+Account registration. In order to create Kaspersky Account and have access to all of its functions, you will need to provide us with your email address (which will be your user name) and a password. You can also log in with an external account (Facebook, Apple account, etc.), thus providing us with the email address of your external account. In case of using a two-factor authentication, we will also process your phone number.
+Account Settings.You can view, update, correct your account information and password, set up a two-step verification via phone or app for authentication, and, also, delete your account at any time.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+How long do we keep your personal data
+Data is deleted no later than 6 (six) calendar months after the account is deleted.
+If the account remains inactive for a period of 5 (five) years, it will be automatically completely deleted from our system.
+My Kaspersky and its customizations (hereinafter referred to as the "Service")
+Description of Service
+Account registration. We will only process and use this data in order to provide you the Service, unless it is allowed by applicable law or you expressly consent to a processing or use for other purposes (for example to receive useful news on Kaspersky products and services via email). You may also need to provide us your mobile phone number for the purpose of additional protection of your account from unauthorized access. We will only use your mobile phone number to send you authorization security codes.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Account Settings and purchases. You may review, update or correct your account data, password, and preferences or even delete your account at any time using the "Account Settings" function.
+Additionally, you will be able to review your purchase history from our web store provider. In Account Settings, you are also able to link a bank card for easy purchases of additional Kaspersky products and services. If you activate this option, our web store provider will attach your bank card data with your account and keep it for future orders. Kaspersky will establish a special link to your web store provider account and will place orders on your behalf whenever they are performed by you. Our web store provider also gives us the information about expiration date of your bank card and the last 4 or first 6 symbols of your bank card number or masked SEPA IBAN. However, we will have no access to other data of your credit card stored by our web store provider. The linkage to your account will only be established technically by an internal User ID and password combination. These credentials will not grant us access to your bank card or other personal data stored by our web store provider. The internal User ID is used for triggering orders from you made through the web store.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+For the purposes of purchasing Kaspersky products and services your data may be transferred to one of our e-comm providers. In this case your data will be processed according to the terms of Privacy Policies of e-comm providers:
+Nexway (Privacy Policy here: https://nexway.com/legal-notice-privacy/)
+AI Marche (Privacy Policy here: https://legal.ai-marche.fr/privacy-policy-en)
+Devices. After registration, you will be able to manage all of your devices you secure using Kaspersky products. You can, for example, secure lost or stolen devices, easily check the status of Kaspersky products on each device or fix existing problems. To do that, you need to connect these devices using the "Devices" function. In that case, a link between your account and the devices you connect will necessarily be established. This will, of course, only be used for the purpose of providing you with the "Devices" function, unless it is allowed by applicable law or you expressly opt in to use it for other purposes.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Licenses. You can manage all of your Kaspersky product licenses using the "Licenses" function by adding your valid activation code(s) for each product and connect it to the device it is used on. You can also choose to be reminded of expiring licenses automatically or use the auto-renewal function. Reminders will only be sent to you by email if you expressly requested it.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Support. If you request support from our Customer Service using support services, we will ask you for information needed to enable us to provide you with such support, such as your registration/ license number, the last 4 or first 6 symbols of your bank card number or masked SEPA IBAN used for purchasing the license, email address, and information about the product your problem relates to, your computer hardware, software and the nature of the problem you are experiencing. Furthermore, it may be helpful or even necessary for this purpose to send us files you are experiencing problems with via the "Upload" function. These may also contain personal data, such as user specific or otherwise personally identifiable file names, meta data or contents. It is, of course, always your choice whether you want to upload files or not. In case you do, please refer to our Regulation on Data Provisioning linked to the upload service and accept it at first.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Receive marketing offers. We collect your email address, user account details, licence details, subscription details and any agreements you have accepted so that we can notify you of personalised special offers, reviews, surveys, remind you of incomplete orders and keep you up to date with news and events. We will only process and use this information if you have expressly consented to its use for marketing purposes.
+The purpose of such data processing is to inform you of personalised special offers, reviews, surveys, to remind you of pending orders, to send you the latest news and events.
+The legal basis for data processing is your consent. You may withdraw your consent at any time by updating your account preferences or by following the unsubscribe link in the emails.
+How long do we keep your personal data
+Data is deleted no later than 1 (one) calendar month after the account is deleted.
+Kaspersky Business-To-Business Portals (including Kaspersky Business Hub, Kaspersky Endpoint Security Cloud, Kaspersky Security Center Cloud Console,Kaspersky Security for Microsoft Office 365, Kaspersky Next)
+Description
+Account registration. If you need to use Kaspersky Business-To-Business (B2B) products and have access to the Kaspersky products used by your company, you need to create a corporate account. To do this, you need to enter your email address (which will be used as your username) and a password. We will only process and use this data to provide you with Kaspersky B2B Portals functionality and the products used in Kaspersky B2B Portals. This data will only be processed and used for other purposes if you give your explicit consent (for example, to receive the latest news about Kaspersky products and services by email, or to be contacted about your Kaspersky product reviews). You can also provide your mobile phone number to further protect your account from unauthorized access, as well as a security question to regain access to your account if you forget your password. We will only use your mobile phone number to send security codes during your authorization.
+Purpose and lawful basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Licenses. You can manage licenses for Kaspersky products that are available to you on Kaspersky B2B Portals. To do this, you must add valid activation codes for each product that your company uses. We can send you an automatic license expiration reminder by email.
+Access to managing certain licenses and using specific instances of our products depends on your access rights that are configured in the products.
+We use the country that you specify when you register your account to provide the online license purchasing feature. Online sales of licenses are carried out by the online shop service provider.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Support. When you contact Customer Service by using our support services, we will ask for the necessary information to provide you with support (for example, your license number, email address, information about the product that caused the problem, information about computer hardware and software, and a description of the problem). These files may also contain personal data, such as user or identifiable file names, metadata, or file content. You may send these files at your sole discretion.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+How long do we keep your personal data
+Your personal account information will be deleted no later than 1 (one) calendar month after the account is deleted. Backups of data are stored for no more than 1 (one) month from the moment when they are created.
+Kaspersky CompanyAccount
+Description of Service
+Account registration. To use Kaspersky CompanyAccount and access all of its features, you must create:
+personal account;
+an account for your company, unless your coworkers have done this previously.
+This will require that you provide your corporate email address (which will be your username), password, first and last name, company name and country, and your company's license to use Kaspersky applications. We will process and use this data solely for the purpose of providing you with Kaspersky CompanyAccount services and Customer Service, unless you explicitly choose to have it processed and used for other purposes. After registration your personal account will be linked to your company's account. If your company's account was previously created, then your registration information (first and last name and corporate email address) will be sent to the Kaspersky CompanyAccount Administrator from your company. The company employee who first registers the company and a personal account is typically designated as the Administrator.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Account settings. You can at any time view, update, correct your account information and password, or delete your account on the "My account" tab.
+Your company's Kaspersky CompanyAccount Administrator will also be able to change your account settings and reset your password. If you are your company's Kaspersky CompanyAccount Administrator, then you have the ability to edit personal accounts for all of your colleagues and block the entire company's account (employees' personal accounts will remain in the system).
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Licenses. You can add and view your company's licenses to Kaspersky products on the "Licenses" tab of your Kaspersky CompanyAccount (activation codes or key files for each product). The license provided during registration will be added automatically to your company's Kaspersky CompanyAccount. Key files are not physically stored on Kaspersky CompanyAccount. The system only stores a record about your company's license. Every company employee with a personal account linked to your company's Kaspersky CompanyAccount has access to the list of licenses. Your Kaspersky CompanyAccount Administrator can remove your company's licenses by deleting them from the list.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Contracts. If your company purchases additional Customer Service services, then after the purchase has been recorded you will be able to view the list of purchases services on the "Agreements" tab. The list of contracts will be available to those company employees who were designated as authorized to use the paid service at the time of purchase. These people will automatically receive notifications about the expiration of the contract.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Customer Service requests. If you contact Customer Service for support through Kaspersky CompanyAccount, we may ask you to submit information we may require for providing assistance to you. For example, this may include information about the product associated with your request, computer hardware, your company's network, software, and the nature of the problem you've encountered. Moreover, it may be helpful or even necessary for you to send us the files you are having trouble with or files that define the configuration of your computer or network. You can do this by using the "Attach files" option in the request form. These files may contain user-specific or otherwise personally-identifiable file names, metadata, or content. It is always your choice whether to upload these files. If you would like to upload files, please first view and accept our Regulation on data provisioning on the file upload page. In order to choose the correct Customer Service department for your request, we will use information about your company's licenses, country, and possibly the interface language selected in your Kaspersky CompanyAccount. In addition, Kaspersky Customer Service may ask you to furnish your corporate phone number while proceeding your request to provide Premium Support Service (or Standard Support Service if necessary). Your colleagues may have access to your requests if your Kaspersky CompanyAccount Administrator manually changes the corresponding settings (the Administrator can view requests automatically).
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+How long do we keep your personal data
+You can delete your account at any time in the Account settings or by submitting a request to our Customer Service. Once your account has been deleted, your personal data will be held in Kaspersky's database until the retention period has expired, but you will no longer be able to access the Kaspersky CompanyAccount website using the deleted account.
+Kaspersky Partner Portal and Kaspersky Order Management System
+Description of Service
+We may request personal data when you place an order, register a product, request a service, answer a survey, enter a contest, and when you correspond with us or engage in other activities on our website.
+You make all decisions regarding whether or not to proceed with any activity that requests personal data. However, please note that if you do not wish to provide the requested data, you may not be able to complete the transaction.
+We use personal data for the following purposes:
+to provide you with information about virus alerts, product upgrades, new products, services, newsletters, informative emails, and research on future product ideas or improvements;
+to assist us in creating content that is relevant to you;
+to provide you with special Kaspersky-specific offers that may be of interest to you;
+to assist us in creating better products and services to meet your needs;
+to help you quickly find software, services or product information important to you.
+Our legal basis for processing your personal data is safeguarding our legitimate interests which lie in the pursuit of the aforementioned purposes.
+Furthermore, we process your personal data for the purpose to allow you to purchase and download products, obtain access to services, or otherwise engage in activities you select.
+In these cases our legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+How long do we keep your personal data
+Personal data stored all the time you use the service and will be deleted after your first request.
+GSI Parser
+Description of Service
+The Service allows you to check and fix PC compatibility issues between Kaspersky products and other software. Therefore, you can provide us with the report file for analysis by uploading it to the Website. Data are transmitted to Kaspersky via secure connections. The data provided will be protected in accordance with the requirements imposed by law and the requirements set out in the "Kaspersky Privacy Policy for Websites and Webservices".
+You must create an account in order to use the service. To create your account, enter your email address and set a password.
+You can change your email address or password or permanently remove the account in the Manage Your Account section.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+How long do we keep your personal data
+The uploaded object will be stored on Kaspersky's systems for no longer than 90 days, after which it will be deleted and cannot be restored.
+Other websites and forms
+Description of Service
+Premium Content. In order to access various content elements, such as Whitepapers, Videos, register for events or reach dedicated marketing material, we will ask for your first name, last name, email and phone number as mandatory personal data to provide you with this premium content.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party or in order to take steps at your request prior to entering into a contract.
+Free trials. If you want to test our products, we will also ask for your first name, last name, phone number and email address. This data will be used for sending out the activation code and to remind you of the end of the trial period. Up to 14 days after the end of the trial period you may receive a final reminder and an offer to purchase a full license.
+Purpose and legal basis for processing your personal data is the performance of a contract to which you are a party you or in order to take steps at your request prior to entering into a contract.
+Newsletters, Free Product Updates and Special Offers. If you have signed up for it and provided us your email address and, in some cases, your name and last name we will use these data for the purpose to provide you with additional information on products and services free product updates and special offers which might be of interest to you.
+Legal basis for processing your personal data is your consent. You can withdraw your consent anytime with effect for the future by clicking the unsubscribe link you will find in every email or contacting us by email.
+Contact Forms. If you want to contact us by using our contact and support forms, you will be asked to provide your contact information (entry fields marked "*"), which we will exclusively process or use as far as necessary for the purpose to get in contact with you and provide you with the information you desire. You are free to provide additional information (through the fields not marked "*"), which we will of course process in line with all applicable data protection requirements as well. This data will be forwarded to the Kaspersky regional teams responsible for your location. The Kaspersky regional teams will use the data in order to get in contact with you.
+Our legal basis for processing your personal data is safeguarding our legitimate interests which lie in the pursuit of the aforementioned purposes.
+Customer Satisfaction Surveys for Customer Service users. Kaspersky holds surveys for Customer Service users with the purpose of improving the quality of customer service. In order to conduct the Customer Satisfaction Surveys we receive the following data:
+Your email address and/or your corporate telephone number, which will allow us to identify you as a user in our database and link your opinion within the survey with your contacts and history of requests sent to our Customer Service Team.
+The rate you gave to our Customer Service Team and recommendations that will be used for improving the quality of services provided by Kaspersky Customer Service.
+Our legal basis for processing your personal data is safeguarding our legitimate interests which lie in the improvement of our services.
+How long do we keep your personal data
+We delete your personal data if it is no longer required for the purposes we are pursuing, the storage period specified in the consent has expired, or you have withdrawn the consent and there is no other legal basis. If the latter applies, we delete the data after the other legal basis no longer applies.
+You can configure your browser settings in a way that cookies are blocked or your system informs you whenever a website wants to set a cookie. However, please be aware that the blocking of cookies may have the effect that you will not be able to use all our website functions any more.
+RECIPIENTS OF PERSONAL DATA
+Our websites and webservices are principally designed in a way that limits the processing of personal data to a minimum extent necessary for achieving the processing purposes. Within Kaspersky, only those persons have access to your personal data, who absolutely need such access to fulfil their functions or tasks.
+We will only share your personal data with external recipients if there is a legal justification for doing so or you have consented to it. External recipients can be:
+Processors: Service providers which we use for the provision of certain services e.g. vendors. As far as such external service providers need to have access to personal data, we ensure that any such access is limited to the extent necessary for the provision of the respective service. Furthermore, such external service providers of course have to submit themselves to comply with all applicable data protection regulations.
+Public bodies: Authorities and state institutions, such as public prosecutors’ offices, courts or tax authorities, to which we may have to transmit personal data in individual cases.
+Private bodies: Private bodies to which we transfer your personal data on the basis of a legal provision or your consent.
+WHERE WE PROCESS PERSONAL DATA / THIRD COUNTRY TRANSFERS
+The personal data provided by users to Kaspersky can be processed in countries outside the European Union (EU) or the European Economic Area (EEA) and can include the following: United Kingdom, Switzerland, Canada, Singapore, Russia, Japan, USA, Mexico, China, Azerbaijan, Turkey, Brazil, Kazakhstan.
+Kaspersky has taken appropriate security measures to protect your personal data in accordance with security and privacy best practices, including, utilizing the European Commission's Standard Contractual Clauses for transfers of personal data between its group companies, which requires all group companies to protect personal data being processed from the European Economic Area to an equivalent standard to that required under European Union data protection law. Where we share your personal data with a third party service provider outside of the European Economic Area and Switzerland, we ensure prior to the transfer that, outside of exceptional cases permitted by statutory law, the recipient either possesses an appropriate level of data protection or appropriate safeguards exist. You can obtain a copy of the appropriate safeguards by contacting us at click here.
+To the extent required by the local applicable laws, we will choose a cross-border data transfer mechanism in line with the applicable requirements of the local applicable laws and satisfy the conditions and complete the relevant procedures or adopt the protection measures required for the cross-border data transfer.
+YOUR DATA SUBJECT RIGHTS AND HOW TO EXERCISE THEM
+Also, we inform that you have certain rights regarding your personal data we process:
+Right to be informed. You have the right to be provided with clear, transparent and easily understandable information about how we use your personal data, and your rights.
+Right of access. You have the right to request confirmation as to whether or not we are processing your personal data; if this is the case, you have a right of access to such processing
+Right to rectification. You have the right to request the rectification of inaccurate personal data that we process about you. Furthermore, you may demand that incomplete data will be completed.
+Right to erasure (Right to be forgotten). In certain cases you are entitled to obtain from us the erasure of your personal data.
+Right to restriction of processing. In certain cases you are entitled to obtain from us restriction of the processing your personal data, for example if you contest the accuracy of the personal data or the processing is unlawful and you oppose the erasure of the personal data and requests the restriction of their use instead.
+Right to data portability. If you have made the data available to us based on a contract or consent, you are entitled to request the transfer of your personal data. We will provide to you, or a third party you have chosen, your personal data in a structured, commonly used, machine-readable format.
+Right to object on a case-by-case basis You have the right to object at any time, on grounds relating to your particular situation, to the processing of your personal data based on our legitimate interests (Art. 6 (1) f) GDPR); including profiling based on these provisions. We will then no longer process such personal data for those purposes, unless we can demonstrate compelling legitimate grounds for the processing which override your interests, rights and freedoms, or the processing is necessary for the establishment of, exercise of, or defence against any legal claims.
+Objection to data processing for the purpose of direct marketing
+To the extent we process your personal data for the purpose of direct marketing you have the right to object at any time to the processing of personal data concerning you for these purposes. If you object to the processing for direct marketing purposes, we will no longer process your personal data for these purposes.
+Right to withdraw your consent. You have the right to withdraw your consent to the processing of your personal data. Your withdrawal of consent shall not affect the validity of any activity processing of your personal data already carried out before the withdrawal of your consent.
+Right to complain. If you believe that the processing of the personal data concerning you is illegal, you have the right to lodge a complaint with a supervisory authority, in particular in the member state of your habitual residence, your workplace, or at the location of the alleged breach.
+To the extent otherwise required by the local applicable laws, the local legal requirements will apply.
+If you wish to exercise these rights, you may at any time directly contact us.
+Home Solutions
+Kaspersky Standard
+Kaspersky Plus
+Kaspersky Premium
+Kaspersky Safe Kids
+Kaspersky VPN
+Kaspersky Password Manager
+All Solutions
+Device Specific Solutions
+Android Antivirus
+Mac Antivirus
+Mobile Security
+Windows Antivirus
+VPN for Windows
+VPN for Android
+VPN for iPhone
+VPN for Mac
+Business Solutions
+Kaspersky Small Office Security
+Kaspersky Endpoint Security Cloud
+Kaspersky Endpoint Security for Business
+Kaspersky Next EDR Foundations
+Kaspersky Next EDR Optimum
+Kaspersky Next XDR Optimum
+Kaspersky Next MXDR Optimum
+Kaspersky Security Center
+Enterprise Solutions
+All Solutions
+About Kaspersky
+About company
+Contacts
+© 2026 AO Kaspersky Lab
+Privacy Policy
+Cookies
+Anti-Corruption Policy
+Licence Agreement B2C
+Licence Agreement B2B
+Cancel subscription
+Contact Us
+About Us
+Partners
+Blog
+Resource Center
+Press Releases
+Careers
+Canada
+Americas
+América LatinaBrasilUnited StatesCanada - EnglishCanada - Français
+Africa
+Afrique FrancophoneMarocSouth AfricaTunisie
+Middle East
+Middle East (English)الشرق الأوسط (Arabic)
+Western Europe
+Belgique & LuxembourgDanmarkDeutschland & SchweizEspañaFranceItalia & SvizzeraNederlandNorgeÖsterreichPortugalSverigeSuomiUnited Kingdom
+Eastern Europe
+Česká republikaMagyarországPolskaRomâniaSrbijaTürkiyeΕλλάδα (Greece)България (Bulgaria)Қазақстан - Русский (Kazakhstan - Russian)Қазақстан - Қазақша (Kazakhstan - Kazakh)Россия и Белару́сь (Russia & Belarus)Україна (Ukraine)
+Asia & Pacific
+AustraliaIndiaIndonesia (Bahasa)Malaysia - EnglishMalaysia - Bahasa MelayuNew ZealandViệt Namไทย (Thailand)한국 (Korea)中国 (China)香港特別行政區 (Hong Kong SAR)台灣 (Taiwan)日本語 (Japan)
+For all other countries
+Global Website

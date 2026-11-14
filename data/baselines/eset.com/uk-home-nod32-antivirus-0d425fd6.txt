@@ -1,0 +1,308 @@
+url: https://www.eset.com/uk/home/nod32-antivirus/
+method: browser
+saved: 2026-11-13
+
+Skip to Content
+For Home
+For Business
+For Partners
+Protection for home
+Download
+Why ESET?
+Why ESET?
+Over 30 years of science-driven innovation.
+Choose ESET
+Focus on what matters—leave the rest to us.
+Explore our technology
+About
+Blog
+Shop
+UNITED KINGDOM
+Customer zone
+ESET NOD32 Antivirus
+Secure your home laptops and desktops with award-winning antivirus
+ESET NOD32
+Antivirus
+Fast and light antivirus for Windows and macOS.
+Best for basic browsing and email activities.
+1
+–
++
+DEVICE
+1
+–
++
+YEAR
+£24.98
+BUY NOW
+DOWNLOAD
+What's inside
++ Smartphone & Payments protection
+ESET HOME SECURITY
+ESSENTIAL
+All-in-one solution protecting also your browsing, payments and WiFi.
+Best for online shoppers, the digital generation.
+1
+–
++
+DEVICE
+1
+–
++
+YEAR
+30% OFF
+£34.99£24.49
+BUY NOW
+What's inside
++ VPN & AI Conversation Security
+ESET HOME SECURITY
+PREMIUM
+Enhance your privacy with secure connection and encrypted sensitive files.
+Best for privacy-focused internet users.
+1
+–
++
+DEVICE
+1
+–
++
+YEAR
+30% OFF
+£64.99£45.49
+BUY NOW
+What's inside
+Renews at the regular price. No hidden costs. 30 day money-back guarantee.
+Features that make a difference
+0
+1
+2
+3
+4
+AI-powered Antivirus and Antispyware
+Modern protection to fight online and offline threats, stopping malware before it spreads.
+Benefit: Stay ahead of threats with real-time, intelligent protection.
+Limited AI interaction security
+Anti-Phishing
+Advanced Machine Learning and DNA Detections
+Lightweight performance and Gamer Mode
+TRY BEFORE YOU BUY - 30 DAYS FOR FREE
+Explore all features in detail
+Recognised quality by independent tests and customers
+35+ years of cybersecurity innovation
+ESET combines human expertise with AI-powered technology to help protect people and businesses from modern scams and evolving threats. Backed by 11 global R&D centres, our proactive, award-winning protection secures over one billion internet users worldwide. ESET NOD32 Antivirus keeps your device safe while running quietly in the background.
+Explore all features of ESET NOD32 Antivirus by platform
+Windows
+Windows ARM
+macOS
+Security & Device protection
+Antivirus & Antispyware
+AI-powered threat detection
+Smarter protection for AI-powered computers
+LiveGrid®
+Ransomware Shield ESSENTIAL
+Botnet Protection ESSENTIAL
+Anti-Theft ESSENTIAL
+Parental Control ESSENTIAL
+ESET LiveGuard PREMIUM
+ESET Folder Guard PREMIUM
+Ransomware Remediation ULTIMATE
+Privacy & Identity protection
+Anti-Phishing
+Safe Banking ESSENTIAL
+Safe Browsing ESSENTIAL
+Browser Screen Protection ESSENTIAL
+Webcam Protection ESSENTIAL
+Microphone Monitor ESSENTIAL
+Secure SearchESSENTIAL
+Browser Cleanup ESSENTIAL
+Secure Data (Encryption) PREMIUM
+VPN PREMIUM
+Website Settings Review ULTIMATE
+Metadata Cleanup ULTIMATE
+Identity Protection ULTIMATE
+AI security
+AI Behavioural Monitoring*
+AI Agent Security*
+AI Conversation Security PREMIUM
+Smart home protection
+ESET HOME complete security management platform
+Network Inspector ESSENTIAL
+Firewall ESSENTIAL
+Network Attack Protection ESSENTIAL
+VPN for Router ULTIMATE
+Performance optimisation
+Multithread Scanning
+Gamer Mode
+Small System Footprint
+Advanced Machine Learning
+*Limited-scope AI security capabilities powered by ESET’s existing multilayered technologies.
+Explore ESET HOME Security plans
+System requirements & documentation for ESET NOD32 Antivirus
+Download for your operating system
+NOTE: Are you sure you want to download and install your protection manually?
+The ESET HOME web portal and mobile app are included for free with your subscription and save time when managing protection across multiple devices. Create your account.
+Download for Windows
+ESET NOD32 Antivirus
+Download ESET NOD32 Antivirus that can be activated with a purchased subscription.
+DOWNLOAD FOR WINDOWS
+Downloads Live Installer that will guide
+you through installation and activation
+Documentation
+Online help guide
+Find more documentation
+Download options
+Advanced download
+Download for macOS
+ESET Cyber Security
+Download ESET Cyber Security and activate it with a purchased subscription.
+Configure download
+Operating system
+macOS 13 (Ventura), 14 (Sonoma), 15 (Sequoia), 26 (Tahoe), 27 (Golden Gate)
+DOWNLOAD
+Filename: eset_cybersecurity.dmg | File size: 621 MB |
+Version: 10.0.2100.0
+SHA2: 4d46454a09...
+Changelog
+Version 10.0.2100.0
+This version of application doesn't support macOS 12 or lower. If you are running macOS 12 or lower, please do not install this version.
+Added: Integration with ESET HOME
+Added: Parental Control
+Added: new macOS 27 Golden Gate support
+Improved: Redesigned Onboarding wizard to make product setup easier and more intuitive
+Fixed: 'Network Protocol Error' in Firefox caused by HTTPS scanner under special conditions
+Fixed: Issue causing Device Control rules to fail when device parameters contained leading whitespace
+Fixed: Large memory usage by ESET Network Extension
+Fixed: Security Issues reported in previous version of the application
+Fixed: Several stability and reliability issues
+Documentation
+Online help guide
+Find more documentation
+Download for Windows on ARM
+Please note that for Microsoft® Windows® on ARM, some features and functionalities are not supported.
+Read more.
+ESET NOD32 Antivirus
+Download ESET NOD32 Antivirus and activate it with a purchased subscription.
+Configure download
+Operating system | Bit
+Windows 10, 11 (64-bit)
+DOWNLOAD
+Filename: eav_nt64.exe | File size: 89 MB |
+Version: 20.0.7.0
+SHA2: 600f10460b...
+Changelog
+Version 20.0.7.0
+New: ESET Security Gaming Edition
+New: Safe Banking & Browsing: Added support for Opera and Perplexity Comet
+New: Browser Privacy & Security: Added support for Copilot in AI Conversation Security (available in ESET Smart Security Premium, ESET Security Ultimate, ESET Small Business Security)
+New: Browser Screen Protection
+New: Added Web Control (available in ESET Small Business Security)
+New: Added Network Attack Protection (available in ESET Safe Server)
+Updated: Small GUI improvements (copyable elements in details, better alignment and others)
+Bugfixes & small improvements
+Documentation
+Online help guide
+Find more documentation
+Use ESET HOME, the complete security management platform, to effortlessly unlock the following benefits:
+Security status overview of your home
+Frequently Asked Questions
+What is ESET NOD32 Antivirus?
+Why ESET NOD32 Antivirus?
+Which devices and operating systems are compatible with NOD32 Antivirus?
+How do I download/install ESET NOD32 Antivirus after purchase?
+Can NOD32 Antivirus run alongside other security software?
+Does ESET NOD32 protect against malware like ransomware?
+What’s the difference between ESET NOD32 Antivirus and the new plans?
+How does NOD32 Antivirus impact system performance?
+Can I try ESET NOD32 before buying?
+What’s the difference between ESET NOD32 Antivirus and ESET HOME Security plans?
+How do I renew or add more devices to my ESET NOD32 subscription?
+How do I cancel my automatic renewal?
+35+ years of innovation bring you intelligent antivirus protection trusted by millions. With ESET NOD32 Antivirus, you get fast, lightweight security that helps protect against modern scams and threats without slowing you down.
+Why choose ESET NOD32 Antivirus?
+AI-powered threat detection backed by 35+ years of expertise
+Uninterrupted gaming, streaming, and browsing
+Blocks viruses, malware, ransomware, and phishing attacks
+Free 30-day trial with full features
+BUY NOW
+Download free trial
+Small office?
+Looking to protect your small office?
+We offer simple yet powerful protection, designed with the small office in mind.
+Secure your work and personal devices. Safeguard your privacy, data, servers and more.
+EXPLORE YOUR OPTIONS
+UK
+For Home
+ESET NOD32 Antivirus
+ESET UK
+Third Floor, Ocean 80
+80 Holdenhurst Road
+Bournemouth
+BH8 8AQ
+Phone: 01202 405 405
+Business hours:
+Mon - Fri / 08:30 - 17:30
+More info
+United Kingdom (EN)
+For home
+All solutions for home
+ESET HOME Security plans
+Small office security
+Android Security
+NOD32 Antivirus
+Identity & Privacy Protection
+Online virus scanner
+Virus scan
+Link checker
+Subscription flexibility
+Why ESET
+Downloads for home
+Download free trial
+I have a subscription
+For business
+Small & Medium business security
+Enterprise security
+Services for business
+Watch demo
+Customer stories
+Downloads for business
+Request business trial
+I have a subscription
+Partnership
+Partner with ESET
+Reseller Program
+MSP Program
+Technology Alliance
+Online Affiliates
+Find a Partner
+Refer a Friend
+Support
+Existing customers
+Support for home
+Support for business
+Security Forum
+Renew your subscription
+ESET Status Portal
+About ESET
+About us
+Newsroom
+Technology
+ESET Blog
+Careers
+Helpful Info
+What is antivirus software?
+Types of Threats
+Security Top Tips
+Modern Parenting
+Working From Home
+ContactPolicy HubManage CookiesAboutBlogReport vulnerabilitiesSitemap
+© 1992 - 2026 ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET United Kingdom. All other names and brands are registered trademarks of their respective companies.
+EULA•
+Privacy
+•
+Anti-Bribery Policy
+•
+Legal Information
+Your account, your cookies choice
+We and our partners use cookies and other technologies to give you the best optimized online experience, analyze our website traffic, and serve you with personalized ads. You can agree to the collection of all cookies by clicking "Accept all and close" or adjust your cookie settings by clicking "Manage cookies". You also have the right to withdraw your consent or change your cookie preferences anytime by clicking on "Manage cookies" link available at our website footer. For more information, see our Cookie Policy and Privacy Policy.
+ACCEPT ALL AND CLOSE
+MANAGE COOKIES

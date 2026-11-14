@@ -1,0 +1,124 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Gen Digital's General Privacy Notice, "information broadly
+# applicable across all our brands and products", which Norton's and Avast's privacy centres both send you to ("we
+# follow our group General Privacy Notice which includes information broadly applicable across all Gen brands, services
+# and products", ca.norton.com/privacy and avast.com/en-ca/privacy-policy). Its brand icons link Norton, Avast, LifeLock,
+# MoneyLion and Engine, and its brand privacy centres Norton's, Avast's, AVG's (avg.com/privacy), Avira's
+# (avira.com/en/privacy-policy/homepage), CCleaner's and ReputationDefender's: AVG and Avira can name it in their
+# policies' shared too, after checking that their privacy pages send you here. Rated once here (Norton and Avast first);
+# each brand rates its own Products Privacy Notice beside it (retention periods, AI, its VPN).
+# Read 2026-11-13 with a plain fetch from Canada ("Last Updated: March 6, 2026"), privacy.gendigital.com/en/, where
+# ca.norton.com/privacy/general-privacy-notice and avast.com's "General Privacy Notice" links lead.
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: gen-digital-privacy
+name: Gen Digital's General Privacy Notice
+links:
+  - name: 'General Privacy Notice'
+    url: https://privacy.gendigital.com/en/
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It studies how you use its apps and what happens on your device to improve them and build new ones. You can only object by asking, under privacy law.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We analyze information about how you use our Services, and what is happening on your device to innovate and improve our Services and to keep them up-to-date, safe and free of errors.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'In any case, you have the right to object, on grounds relating to your particular situation, to those processing operations.'
+    action:
+      name: 'How to use your privacy rights'
+      url: https://privacy.gendigital.com/en/
+    lastVerified: 2026-11-13
+  - topic: privacy.data-sharing
+    tier: poor
+    reason: 'It shares data with ad partners and social networks to show you its ads elsewhere. You can opt out only through each browser’s cookie settings or a privacy signal.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We do not “sell” your personal data (noting that a “sale” need not involve payment for money, but only receipt of something of value in exchange for personal data), but we do share your personal data for the purposes of cross-contextual behavioral advertising through our use of certain cookies and tracking technologies.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We may also share data and cooperate with partners such as social media providers who, if allowed in accordance with laws, can use information related to you to help us build more relevant “lookalike” audiences to target on various platforms.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'For information on how to adjust your cookie settings to opt-out of sharing, click here .'
+    action:
+      name: 'How to opt out of sharing'
+      url: https://privacy.gendigital.com/en/
+    lastVerified: 2026-11-13
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It builds a profile of what you like to show you its ads, on its own sites and others. Turning that off is a cookie setting in each browser.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We use data to serve you with relevant advertising and content, both on our properties and on third-party properties.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We may use your data to draw inferences to build a user profile reﬂecting your preferences, characteristics, or behavior'
+    action:
+      name: 'How to opt out of sharing'
+      url: https://privacy.gendigital.com/en/
+    lastVerified: 2026-11-13
+  - topic: privacy.ai-training
+    status: not-stated
+    reason: 'Its general privacy notice doesn’t say whether what you write or upload trains AI. Each brand’s product notice says more.'
+    pages: [https://privacy.gendigital.com/en/]
+    lastVerified: 2026-11-13
+  - topic: privacy.data-retention
+    tier: bad
+    reason: 'It keeps your data as long as it needs it, and even after you ask it to delete something it may keep it for its own analytics or any reason it thinks fair.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We keep your personal data as long as we need it to provide you with our Services, to comply with legal obligations and to protect our or other’s legitimate interests .'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'while any changes will be reflected in active user databases within a reasonable and legally permissible period of time following a request, we may retain personal data for backups, archiving, prevention of fraud and abuse, analytics, satisfaction of legal obligations, or where we otherwise reasonably believe that we have a legitimate reason to do so, to the extent permitted by applicable law.'
+    lastVerified: 2026-11-13
+  - topic: privacy.data-deletion
+    tier: good
+    reason: 'You can ask it to delete your data, through the privacy page of the brand you use, and it acts within the time the law sets, usually 30 to 45 days.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'You can request we delete your personal data.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We will action your request within timeframes prescribed by applicable laws (typically 30-45 days)..'
+    action:
+      name: 'How to use your privacy rights'
+      url: https://privacy.gendigital.com/en/
+    lastVerified: 2026-11-13
+  - topic: privacy.data-portability
+    tier: neutral
+    reason: 'You can ask for a copy of your data in a form other apps can read, where privacy law gives you that right.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'You may have the right to obtain a machine-readable and portable copy of your personal data subject to conditions stipulated in relevant privacy laws.'
+    action:
+      name: 'How to use your privacy rights'
+      url: https://privacy.gendigital.com/en/
+    lastVerified: 2026-11-13
+  - topic: privacy.government-requests
+    tier: neutral
+    reason: 'It gives your data to authorities when a court order or other legal process asks. It doesn’t say it tells you, and this notice names no transparency report.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'In response to a subpoena, warrant, or other legal process issued by a court or other public authority of competent jurisdiction;'
+    lastVerified: 2026-11-13
+  - topic: privacy.data-location
+    tier: neutral
+    reason: 'Your data can be kept in any country where it works, Europe, the US and Malaysia among them, under the EU’s standard contracts and the EU-US privacy framework.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'Data may be located in any country where we offer our products or have offices, infrastructure or data centers, including Europe, the United States, and Malaysia.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'Transfers of your personal data between Gen Digital subsidiaries and affiliates are effectuated pursuant to our intra-group data transfer agreement, which includes EU Commission-approved standard contractual clauses (SCCs).'
+    lastVerified: 2026-11-13
+  - topic: legal.inactivity
+    tier: poor
+    reason: 'It removes accounts that sit unused, but doesn’t say after how long or whether it warns you first.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'We have processes in place to remove dormant and inactive accounts.'
+    lastVerified: 2026-11-13
+  - topic: other.notable
+    title: 'Prices set from your data'
+    tier: poor
+    reason: 'It looks at what you use and what you have paid to choose which discounts and prices to show you, so two people may be offered different prices. No setting turns that off.'
+    sources:
+      - url: https://privacy.gendigital.com/en/
+        quote: 'Where possible we try to provide you with personalized discounts on our Services.'
+      - url: https://privacy.gendigital.com/en/
+        quote: 'Payment Data (information related to your purchase history, product prices) to provide you with a compelling set of products at pricing that meets your needs.'
+    lastVerified: 2026-11-13

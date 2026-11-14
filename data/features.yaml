@@ -544,15 +544,37 @@
   aliases: [data shredder, secure delete]
 
 # `antivirus.included` is a group: ranking it means "I want an antivirus at all", and its children are what antivirus
-# suites are compared on (Bitdefender, Norton, Kaspersky, ESET, 2026-11-02). Behaviour-based detection ("Advanced
-# Threat Defense") is part of every real-time antivirus, so it's the group itself, not a child.
+# suites are compared on (Bitdefender, Norton, Kaspersky, ESET, 2026-11-02). Real-time protection, behaviour-based
+# detection and the kinds of scan became children of their own (the owner's design, 2026-11-13): free scanners and
+# on-demand cleaners (Malwarebytes Free, ClamAV) scan without them, so they tell plans apart.
 - id: antivirus.included
   name: Antivirus
   category: security
   type: boolean
-  aliases: [real-time protection, anti-malware, malware protection, advanced threat defense]
+  aliases: [anti-malware, malware protection]
   headline: true
   requiredIn: [security]
+- id: antivirus.real-time
+  parent: antivirus.included
+  name: Real-time protection
+  category: security
+  type: boolean
+  aliases: [real-time protection, on-access scanning, always-on protection]
+- id: antivirus.behavioural
+  parent: antivirus.included
+  name: Behaviour-based detection
+  category: security
+  type: boolean
+  aliases: [behavior monitoring, heuristics, advanced threat defense]
+- id: antivirus.scans
+  parent: antivirus.included
+  name: Scans
+  category: security
+  type: set
+  values:
+    - { id: on-demand, name: Scans you start, aliases: [manual scan, quick scan, full scan] }
+    - { id: scheduled, name: Scheduled scans }
+    - { id: rescue, name: Boot-time or rescue scans, aliases: [rescue mode, boot scan] }
 - id: antivirus.devices
   parent: antivirus.included
   name: Devices protected

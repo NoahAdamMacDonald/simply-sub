@@ -1,0 +1,1766 @@
+# Researched by hand on 2026-11-13 (M11.15, security batch 1), read with Edge from Canada: each country's own Norton site
+# (ca., us., uk., ie., au., nz., de., fr., nl., es. and it.norton.com), whose pages price in their own currency whoever
+# reads them (the US's products page read again through a US exit showed the same prices and "US" in its country
+# picker); its support centre, its legal pages and Gen Digital's privacy and investor pages with a plain fetch. Pages,
+# each quoted where it's used:
+# Pricing: each country's products page (norton.com/products) and plan pages (/products/norton-360-standard, -deluxe,
+# -premium, -advanced, -for-gamers, -antivirus-plus, -lifelock-select, -lifelock-advantage, -lifelock-ultimate-plus).
+# The regular price is the struck-through one ("C$59.99" over "C$29.99 first yr.") or the one the card names ("Savings
+# compared to the renewal price of $94.99/year.", "Automatically renews at £ 69.99/year, unless the renewal is
+# cancelled."); the first year's is an offer. The "2 Years" tabs are a first term only ("£ 74.99 first 2 yrs ...
+# Automatically renews at £ 69.99/year"), so only yearly prices are stored. Monthly billing: only the US's 360 for
+# Gamers shows a regular monthly price; the LifeLock Monthly tabs show only a first year's ("$24.99 /mo. first yr.").
+# No page says its prices include tax: Canada's say "Plus applicable sales tax.", and the Terms of Sale "Exclusive of
+# VAT and/or any other applicable taxes unless by law they must be added to the price payable."
+# What each country sells: its menu ("ALL-IN-ONE-PLANS", "DEVICE SECURITY") and its cards, which differ by country in
+# devices, backup and identity features, so a plan whose features differ is a plan of its own (Disney+'s and BritBox's
+# precedent): 21 plans. Plan pages a country's menu doesn't link (us.norton.com/products/norton-360-premium,
+# de.norton.com/products/norton-360-for-gamers, au.norton.com/products/norton-360-for-gamers) aren't sold there now and
+# aren't priced (Acorn TV's precedent for unlinked pages). Cloud Backup (2 GB to 500 GB, "only available on Windows")
+# varies by country with no other difference, so it's in each plan's notes, not storage.cloud (see notes.md).
+# Region checklist for CA and US, 2026-11-13: 1. each country's own subdomain (ca., us.); 2. its country picker (the same
+# subdomains); 3. its pages name the currency (C$) or the country ("US" in its picker; read through a US exit too); 4.
+# the checkout wasn't opened; 5. its help centre's payment and renewal articles; 6. Edge and a plain fetch; 7. no bill
+# offered.
+# Not drafted (see notes.md): Norton VPN Standard, Plus and Ultimate (its own VPN plans; prices saved), Mobile Security
+# for Android and iOS, AntiTrack, Privacy Monitor Assistant, Norton Family, Utilities Ultimate, Driver Updater, Ultimate
+# Help Desk, Computer Tune Up, Identity Advisor Plus, Small Business and the free Private Browser.
+# Bundles: none sold on its pages. Official resellers: none named; its partner pages ("Make it rewarding to sell
+# award-winning Norton products and services", gendigital.com) are for retailers and service providers, and its terms
+# speak of "our authorized resellers" without naming any. App stores bill its mobile apps: partners, not listed.
+# Free use: Norton Password Manager is free (its plan below); Genie, Safe Web and Private Browser are free tools too.
+
+# Coverage: norton.antivirus-plus in AU: Australia sells its own, norton.antivirus-plus-pc-mac ("1 PC or Mac").
+# Coverage: norton.antivirus-plus-pc-mac in CA, US, GB, IE, NZ, DE, FR, NL, ES and IT: Australia's own plan.
+# Coverage: norton.antivirus-plus-3-devices in CA, US, GB, IE, AU, NZ, DE, FR, ES and IT: the Netherlands' own plan.
+# Coverage: norton.360-standard in US and GB: theirs cover 3 devices (norton.360-standard-us, norton.360-standard-3-devices).
+# Coverage: norton.360-standard-3-devices in CA, US, IE, AU, NZ, DE, FR, NL, ES and IT: the UK's own plan.
+# Coverage: norton.360-standard-us in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: the US's own plan.
+# Coverage: norton.360-deluxe in CA, US, AU and NZ: Canada and the US sell their own (norton.360-deluxe-canada,
+# norton.360-deluxe-us), and Australia and New Zealand a 3-device one (norton.360-deluxe-3-devices).
+# Coverage: norton.360-deluxe-3-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's plan.
+# Coverage: norton.360-deluxe-canada in US, GB, IE, AU, NZ, DE, FR, NL, ES and IT: Canada's own plan.
+# Coverage: norton.360-deluxe-us in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: the US's own plan.
+# Coverage: norton.360-premium in CA, GB, AU and NZ: Canada sells its own (norton.360-premium-canada), Australia and
+# New Zealand a 5-device one, and the UK's menu lists no Premium. The US's menu doesn't link it, but its own page sells
+# it ("Savings compared to the renewal price of $149.99/year.", us.norton.com/products/norton-360-premium, with 100 GB of
+# cloud backup there; the review of 2026-11-13).
+# Coverage: norton.360-premium-5-devices in CA, US, GB, IE, DE, FR, NL, ES and IT: Australia's and New Zealand's plan.
+# Coverage: norton.360-premium-canada in US, GB, IE, AU, NZ, DE, FR, NL, ES and IT: Canada's own plan.
+# Coverage: norton.360-advanced in CA, US, GB, IE, AU and NZ: the UK and Australia sell their own; Canada's, the US's,
+# Ireland's and New Zealand's menus list no Advanced (ca.norton.com/products/norton-360-advanced is a page not found).
+# Coverage: norton.360-advanced-uk in CA, US, IE, AU, NZ, DE, FR, NL, ES and IT: the UK's own plan.
+# Coverage: norton.360-advanced-au in CA, US, GB, IE, NZ, DE, FR, NL, ES and IT: Australia's own plan.
+# Coverage: norton.360-for-gamers in AU, FR, NL, ES and IT: their menus don't list it, and their own pages show no price.
+# Germany's page sells it ("Ersparnis im Vergleich zum Verlängerungspreis von 99,99 €/Jahr.", the review of
+# 2026-11-13).
+# Coverage: norton.360-lifelock-select-plus, norton.360-lifelock-advantage and norton.360-lifelock-ultimate-plus in CA, GB,
+# IE, AU, NZ, DE, FR, NL, ES and IT: sold in the US only (its menu's "Norton 360 with LifeLock"; LifeLock's terms ask US
+# customers for a Social Security Number).
+
+id: norton
+name: Norton
+website: https://www.norton.com
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its Cancellation and Refund Policy, where norton.com/return-policy (the plans pages' link) leads.
+cancelUrl: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+sources: { pricing: https://ca.norton.com/products }
+# Owner (M11.2), read 2026-11-13: Norton is Gen Digital's brand ("Norton is part of Gen – a global company with a family of
+# trusted brands.", every Norton page's footer); Gen's Who We Are page names it and its dual headquarters. Gen Digital
+# Inc. licenses the software ("The software and services are licensed to you by Gen Digital Inc.", its licence) and is a
+# Delaware company (its Terms of Sale, under its old name NortonLifeLock Inc.); its country is the US, where it's
+# incorporated and listed, though it has a second headquarters in Prague (notes.md). Shares: its investor FAQs. No page
+# read names a majority holder.
+owner:
+  name: Gen Digital Inc.
+  website: https://www.gendigital.com
+  page:
+    name: 'Who We Are (Gen)'
+    url: https://www.gendigital.com/us/en/who-we-are/
+  quotes:
+    - 'Gen is a global leader dedicated to powering Digital Freedom through its trusted consumer brands — including Norton, Avast, LifeLock, and MoneyLion.'
+    - 'Our global workforce has dual headquarters in Prague, Czech Republic and Tempe, Arizona, USA.'
+  country:
+    code: US
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: GEN }
+    page:
+      name: 'Investor FAQs (Gen)'
+      url: https://investor.gendigital.com/resources/investor-faqs/default.aspx
+    quotes:
+      - 'Gen’s ticker symbol is GEN.'
+      - 'Gen’s common stock is traded on the Nasdaq Global Select Market.'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay and card networks (M11.5), read 2026-11-13 in its help centre's "FAQ: Norton subscription and renewal",
+# whose "Accepted payment methods" list each network and wallet with the countries that take it: American Express,
+# Mastercard, PayPal and Visa in every research country; Direct Debit in Ireland and the euro countries; Google Pay and
+# Apple Pay in the US only. Its Cancellation and Refund Policy names app stores, retailers and resellers that bill it.
+# Its "Online Banking or Wire Transfer" article ("for a variety of countries and currencies") names no country: not
+# listed.
+acceptedNetworks:
+  CA: &networks
+    networks: [visa, mastercard, amex]
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+    quotes:
+      - 'American Express: Australia, Austria, Belgium, Brazil, Canada, Finland, France, Germany, Greece, Hungary, India, Ireland, Israel, Italy, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Singapore, Spain, Sweden, Switzerland, United Arab Emirates, United Kingdom, United States.'
+      - 'Mastercard: Argentina, Australia, Austria, Belgium, Brazil, Canada, Chile, Colombia, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, India, Ireland, Israel, Italy, Malaysia, Mexico, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, South Africa, Spain, Sweden, Switzerland, Türkiye, United Arab Emirates, United Kingdom, United States.'
+      - 'Visa: Argentina, Australia, Austria, Belgium, Brazil, Canada, Chile, Colombia, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, India, Ireland, Israel, Italy, Malaysia, Mexico, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, South Africa, Spain, Sweden, Switzerland, Türkiye, United Arab Emirates, United Kingdom, United States.'
+  US: *networks
+  GB: *networks
+  IE: *networks
+  AU: *networks
+  NZ: *networks
+  DE: *networks
+  FR: *networks
+  NL: *networks
+  ES: *networks
+  IT: *networks
+paymentMethods:
+  - methods: [card, paypal]
+    regions: [CA, GB, AU, NZ]
+    page: 'FAQ: Norton subscription and renewal'
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+    quotes:
+      - 'Visa: Argentina, Australia, Austria, Belgium, Brazil, Canada, Chile, Colombia, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, India, Ireland, Israel, Italy, Malaysia, Mexico, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, South Africa, Spain, Sweden, Switzerland, Türkiye, United Arab Emirates, United Kingdom, United States.'
+      - 'PayPal: Australia, Austria, Belgium, Canada, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, Ireland, Israel, Italy, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, Spain, Sweden, Switzerland, United Arab Emirates, United Kingdom, United States.'
+  - methods: [card, paypal, google-pay, apple-pay]
+    regions: [US]
+    page: 'FAQ: Norton subscription and renewal'
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+    quotes:
+      - 'Visa: Argentina, Australia, Austria, Belgium, Brazil, Canada, Chile, Colombia, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, India, Ireland, Israel, Italy, Malaysia, Mexico, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, South Africa, Spain, Sweden, Switzerland, Türkiye, United Arab Emirates, United Kingdom, United States.'
+      - 'PayPal: Australia, Austria, Belgium, Canada, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, Ireland, Israel, Italy, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, Spain, Sweden, Switzerland, United Arab Emirates, United Kingdom, United States.'
+      - 'Google Pay: United States.'
+      - 'Apple Pay: United States.'
+  - methods: [card, paypal, bank-transfer]
+    regions: [IE, DE, FR, NL, ES, IT]
+    page: 'FAQ: Norton subscription and renewal'
+    url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+    quotes:
+      - 'Visa: Argentina, Australia, Austria, Belgium, Brazil, Canada, Chile, Colombia, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, India, Ireland, Israel, Italy, Malaysia, Mexico, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, South Africa, Spain, Sweden, Switzerland, Türkiye, United Arab Emirates, United Kingdom, United States.'
+      - 'PayPal: Australia, Austria, Belgium, Canada, Czech Republic, Denmark, Finland, France, Germany, Greece, Hungary, Ireland, Israel, Italy, The Netherlands, New Zealand, Norway, Portugal, Puerto Rico, Romania, Russia, Singapore, Spain, Sweden, Switzerland, United Arab Emirates, United Kingdom, United States.'
+      - 'Direct Debit: Austria, Belgium, Finland, France, Germany, Ireland, Italy, The Netherlands, Portugal, Spain.'
+  - methods: [app-store]
+    regions: [CA, US, GB, IE, AU, NZ, DE, FR, NL, ES, IT]
+    page: 'Norton Cancellation and Refund Policy'
+    url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+    quotes:
+      - 'If you purchased or are billed through a third party (such as an app store, service provider, retailer, or other reseller), different cancellation and refund terms may apply.'
+# Renewal day (M11.5): not stated. Its licence renews "at the end of their term" and charges "up to 35 days before the
+# subscription is due to end", its Terms of Sale "prior to your subscription’s expiration date", and its renewal FAQ
+# sends the renewal and billing dates by email: none names the day (notes.md has the wording).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+    - https://ca.norton.com/terms-of-sale
+    - https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+  lastVerified: 2026-11-13
+# Lab results (M11.2), read 2026-11-13: AV-TEST's newest home-user Windows test, Jul-Aug 2026 (report 261415), of Norton
+# 360 26.6 and 26.7. AV-Comparatives' and SE Labs' results aren't listed: see data/raters.yaml.
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/norton-norton-360-26.6--26.7-261415/
+    tested: Norton 360 26.6 & 26.7, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/norton-norton-360-26.6--26.7-261415/
+    tested: Norton 360 26.6 & 26.7, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/norton-norton-360-26.6--26.7-261415/
+    tested: Norton 360 26.6 & 26.7, Windows 11
+
+# Categories (M11.3): an antivirus first (security). Every paid plan has Norton Password Manager ("Password Manager" on
+# every card), so it's in passwords too; every 360 plan has Norton VPN ("VPN"), so it's a VPN plan as well. AntiVirus
+# Plus has no VPN.
+# General features, read 2026-11-13. Platforms: "Windows® | macOS® | Android™ | iOS®" (its plan pages) and its browser
+# extensions ("Google Chrome", "Microsoft Edge for Windows", "Mozilla Firefox", its system requirements); its VPN also
+# runs on "Google TV and Apple TV" for multi-device plans. Sign-in: a Norton account's password, with two-factor codes
+# from "mobile authenticator app , security key , or mobile phone number" (support article v100023155). Support: "If you
+# need help, call or chat with us." (its renewal FAQ), "24/7 Support is available in English only." (Canada's products
+# page) and its community forum (community.norton.com, every page's menu). App languages: not stated on a page that
+# lists them (its licence's language list is the licence's), so left out.
+features:
+  platforms: [windows, macos, android, ios, browser-extension]
+  account.sign-in: [password, totp, security-key, sms]
+  support.channels: [chat, phone, community, 24-7]
+
+# Perks (M11.6): identity and gaming lines no feature describes, named in its cards' words.
+perks:
+  - id: stolen-wallet
+    name: Stolen Wallet Protection
+  - id: social-media-monitoring
+    name: Social Media Monitoring
+  - id: financial-monitoring
+    name: Financial Monitoring
+  - id: identity-theft-insurance-au
+    name: Identity Theft Insurance
+  - id: ssn-alerts
+    name: Identity & Social Security Number Alerts
+  - id: bank-card-alerts
+    name: Bank & Credit Card Activity Alerts
+  - id: credit-file-lock
+    name: TransUnion Credit File Lock
+  - id: phone-takeover
+    name: Phone Takeover Monitoring
+  - id: crime-alerts
+    name: Alerts on Crimes Committed in Your Name
+  - id: bnpl-alerts
+    name: Buy Now Pay Later Alerts
+  - id: investment-alerts
+    name: 401(k) & Investment Account Alerts
+  - id: home-title-monitoring
+    name: Home Title Monitoring
+  - id: game-optimizer
+    name: Game Optimizer
+
+# Features in depth, read 2026-11-13:
+# - Antivirus: "Real-time Threat Protection for your Device", "Smart Firewall for PC or Firewall for Mac" (every plan
+#   page, AntiVirus Plus's too), "Antivirus, malware, ransomware, and hacking protection" (every card), Safe Web (its
+#   menus' "Safe Web" and the UK's plan pages). Scam Protection "Detects scams in texts and deepfake videos" with
+#   "AI-powered defense against scams online, in texts or deepfake videos"; Scam Protection Pro (Advanced and LifeLock)
+#   is "Comprehensive Scam Protection for your email, phone calls, SMS, and web browsing." Every 360 plan adds "SafeCam
+#   for PC" ("Alerts you to attempts to access your webcam"). No page read states behaviour-based detection, the kinds
+#   of scan, cryptomining, vulnerability scans, anti-spam, anti-theft or speed-up tools for these plans: left out.
+# - Password Manager: "Create and store passwords, bank card info, and other online credentials for free* in our
+#   encrypted online vault." (its page): logins and cards.
+# - Norton VPN (ca.norton.com/products/norton-vpn and /feature/vpn-server-locations): "Kill Switch to help prevent
+#   privacy exposure", "IP Rotation and Double VPN for extra privacy", "Ad Blocker" and "Tracker Blocker", "A third-party
+#   audit by VerSprite has verified that we don’t track, log, or save your online activities.", protocols "WireGuard,
+#   OpenVPN, IPSec, and our proprietary Mimic" (IPSec and Mimic have no registry value that fits without a guess), and
+#   its server list's "P2P Optimized" column; split tunneling in its help centre ("lets you exclude some of your apps from
+#   the VPN channel"). Server countries: its list names 100 or so countries and territories, and the page says "Support
+#   for over 100 countries": 100. Unlimited traffic: no page says so; its licence forbids "excessive bandwidth
+#   consumption" without a figure, so false (the rule for a required boolean no page states), and notes.md asks.
+# - Parental Control: "setting screen-time, limits and blocking unsuitable sites, plus locate your child’s device" (the
+#   VPN page's), on Deluxe and up and on 360 for Gamers.
+# - Dark Web Monitoring and Privacy Monitor as each country's cards list them; Privacy Monitor finds your details on
+#   people-search sites (its licence's "request removal of your personal information from Third-Party Sites" is
+#   Privacy Monitor Assistant's, not drafted).
+plans:
+  # AntiVirus Plus: "1 PC, Mac, tablet, or phone" with Scam Protection, "Antivirus, malware, ransomware,
+  # and hacking protection", Password Manager and 2 GB Cloud Backup, and no VPN (each country's cards). The US page
+  # also offers it for "5 devices", whose price the reader couldn't show (its toggle didn't respond): not stored.
+  - id: norton.antivirus-plus
+    name: AntiVirus Plus
+    link: https://ca.norton.com/products/norton-360-antivirus-plus
+    categories: [security, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      antivirus.devices: 1
+    notes: 'Antivirus for 1 PC, Mac, tablet or phone, with Scam Protection, a password manager and 2 GB of Windows PC cloud backup. No VPN. A 2-year first term (where sold) renews yearly at the same price.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.norton.com/products
+      - region: US
+        currency: USD
+        amount: 59.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-antivirus-plus
+      - region: GB
+        currency: GBP
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://uk.norton.com/products
+      - region: IE
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ie.norton.com/products
+      - region: NZ
+        currency: NZD
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nz.norton.com/products
+      - region: DE
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products
+      - region: FR
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://fr.norton.com/products
+      - region: NL
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nl.norton.com/products/norton-360-antivirus-plus
+      - region: ES
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://es.norton.com/products
+      - region: IT
+        currency: EUR
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://it.norton.com/products
+  # Australia's AntiVirus Plus covers "1 PC or Mac" (its card and its own page), not a phone or tablet: a plan of
+  # its own.
+  - id: norton.antivirus-plus-pc-mac
+    name: AntiVirus Plus (PC or Mac)
+    link: https://au.norton.com/products/norton-360-antivirus-plus
+    categories: [security, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      antivirus.devices: 1
+      platforms: [windows, macos]
+    notes: "Australia's AntiVirus Plus: antivirus for 1 PC or Mac, with Scam Protection, a password manager and 2 GB of Windows PC cloud backup. No VPN."
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 75.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://au.norton.com/products
+  # The Netherlands' card sells AntiVirus Plus for "3 pc's, Macs, tablets of telefoons" ("3 apparaten"), beside the
+  # 1-device one on its AntiVirus Plus page.
+  - id: norton.antivirus-plus-3-devices
+    name: AntiVirus Plus, 3 devices
+    link: https://nl.norton.com/products/norton-antivirus-plus-three-devices
+    categories: [security, passwords]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      antivirus.devices: 3
+    notes: 'The Netherlands: AntiVirus Plus for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager and 2 GB of Windows PC cloud backup. No VPN.'
+    prices:
+      - region: NL
+        currency: EUR
+        amount: 44.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nl.norton.com/products
+  # 360 Standard: "1 PC, Mac, tablet, or phone", 10 GB Cloud Backup and VPN (Canada, Ireland, Australia, New
+  # Zealand and the euro countries' cards); the UK's and the US's cover 3 devices (their own plans, below).
+  - id: norton.360-standard
+    name: 360 Standard
+    link: https://ca.norton.com/products/norton-360-standard
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      antivirus.devices: 1
+    notes: 'Security for 1 PC, Mac, tablet or phone, with Scam Protection, a password manager, VPN, SafeCam for PC and 10 GB of Windows PC cloud backup.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.norton.com/products
+      - region: IE
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ie.norton.com/products
+      - region: AU
+        currency: AUD
+        amount: 104.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://au.norton.com/products
+      - region: NZ
+        currency: NZD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nz.norton.com/products
+      - region: DE
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products
+      - region: FR
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://fr.norton.com/products
+      - region: NL
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nl.norton.com/products
+      - region: ES
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://es.norton.com/products
+      - region: IT
+        currency: EUR
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://it.norton.com/products
+  # The UK's 360 Standard: "3 PCs, Mac, tablets, or phones", 10 GB Cloud Backup and VPN, no Dark Web Monitoring
+  # (its card; its page calls it "Norton 360 Standard 3 Devices").
+  - id: norton.360-standard-3-devices
+    name: 360 Standard, 3 devices
+    link: https://uk.norton.com/products/norton-360-standard
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      antivirus.devices: 3
+    notes: 'The UK: security for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, SafeCam for PC and 10 GB of Windows PC cloud backup.'
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://uk.norton.com/products
+  # The US's 360 Standard: "3 PCs, Mac, tablets, or phones", 2 GB Cloud Backup, VPN and Dark Web Monitoring (its
+  # card).
+  - id: norton.360-standard-us
+    name: 360 Standard (US)
+    link: https://us.norton.com/products/norton-360-standard
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      security.dark-web-monitoring: true
+      antivirus.devices: 3
+    notes: 'The US: security for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Dark Web Monitoring, SafeCam for PC and 2 GB of Windows PC cloud backup.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products
+  # 360 Deluxe: "5 PCs, Mac, tablets, or phones", 50 GB Cloud Backup, VPN, Parental Control and Dark Web Monitoring
+  # (the UK's, Ireland's and the euro countries' cards).
+  - id: norton.360-deluxe
+    name: 360 Deluxe
+    link: https://uk.norton.com/products/norton-360-deluxe
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 5
+    notes: 'Security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 50 GB of Windows PC cloud backup.'
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://uk.norton.com/products
+      - region: IE
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ie.norton.com/products
+      - region: DE
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products
+      - region: FR
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://fr.norton.com/products
+      - region: NL
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nl.norton.com/products
+      - region: ES
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://es.norton.com/products
+      - region: IT
+        currency: EUR
+        amount: 109.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://it.norton.com/products
+  # Australia's and New Zealand's 360 Deluxe: "3 PCs, Mac, tablets, or phones" (their cards), with 50 GB Cloud
+  # Backup, VPN, Dark Web Monitoring and Parental Control.
+  - id: norton.360-deluxe-3-devices
+    name: 360 Deluxe, 3 devices
+    link: https://au.norton.com/products/norton-360-deluxe
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 3
+    notes: 'Australia and New Zealand: security for 3 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 50 GB of Windows PC cloud backup.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://au.norton.com/products
+      - region: NZ
+        currency: NZD
+        amount: 154.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nz.norton.com/products
+  # Canada's 360 Deluxe: "5 PCs, Macs, tablets, or phones", 50 GB Cloud Backup, VPN, Privacy Monitor and Parental
+  # Control; Canada's pages name no Dark Web Monitoring on any plan.
+  - id: norton.360-deluxe-canada
+    name: 360 Deluxe (Canada)
+    link: https://ca.norton.com/products/norton-360-deluxe
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.data-exposure: [footprint]
+      antivirus.devices: 5
+    notes: 'Canada: security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Privacy Monitor (finds your details on people-search sites), Parental Control, SafeCam for PC and 50 GB of Windows PC cloud backup.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 124.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.norton.com/products
+  # The US's 360 Deluxe: "5 PCs, Mac, tablets, or phones", 50 GB Cloud Backup, VPN, Dark Web Monitoring, Privacy
+  # Monitor and Parental Control (its card).
+  - id: norton.360-deluxe-us
+    name: 360 Deluxe (US)
+    link: https://us.norton.com/products/norton-360-deluxe
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
+      antivirus.devices: 5
+    notes: 'The US: security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Dark Web Monitoring, Privacy Monitor, Parental Control, SafeCam for PC and 50 GB of Windows PC cloud backup.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 124.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products
+  # 360 Premium: "10 PCs, Macs, tablets, or phones", 75 GB Cloud Backup, VPN, Dark Web Monitoring and Parental
+  # Control (Ireland's card; each euro country's Premium page, listed in its menu).
+  - id: norton.360-premium
+    name: 360 Premium
+    link: https://ie.norton.com/products/norton-360-premium
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 10
+    notes: 'Security for 10 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 75 GB of Windows PC cloud backup.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-premium
+      - region: IE
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ie.norton.com/products
+      - region: DE
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products/norton-360-premium
+      - region: FR
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://fr.norton.com/products/norton-360-premium
+      - region: NL
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nl.norton.com/products/norton-360-premium
+      - region: ES
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://es.norton.com/products/norton-360-premium
+      - region: IT
+        currency: EUR
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://it.norton.com/products/norton-360-premium
+  # Australia's and New Zealand's 360 Premium: "5 PCs, Mac, tablets, or phones" and 100 GB Cloud Backup, with VPN,
+  # Dark Web Monitoring and Parental Control (their cards).
+  - id: norton.360-premium-5-devices
+    name: 360 Premium, 5 devices
+    link: https://au.norton.com/products/norton-360-premium
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 5
+    notes: 'Australia and New Zealand: security for 5 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Parental Control, Dark Web Monitoring, SafeCam for PC and 100 GB of Windows PC cloud backup.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 194.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://au.norton.com/products
+      - region: NZ
+        currency: NZD
+        amount: 204.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nz.norton.com/products
+  # Canada's 360 Premium: "10 PCs, Macs, tablets, or phones", 75 GB Cloud Backup, VPN, Privacy Monitor and Parental
+  # Control.
+  - id: norton.360-premium-canada
+    name: 360 Premium (Canada)
+    link: https://ca.norton.com/products/norton-360-premium
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.data-exposure: [footprint]
+      antivirus.devices: 10
+    notes: 'Canada: security for 10 PCs, Macs, tablets or phones, with Scam Protection, a password manager, VPN, Privacy Monitor, Parental Control, SafeCam for PC and 75 GB of Windows PC cloud backup.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.norton.com/products
+  # 360 Advanced in the euro countries: "10 PCs, Mac, Tablets oder Smartphones", Scam Protection Pro ("Betrugsschutz
+  # Pro"), 200 GB Cloud Backup, VPN, Parental Control, Dark Web Monitoring, identity restoration support
+  # ("Unterstützung bei der Identitätswiederherstellung"), stolen wallet assistance and Social Media Monitoring.
+  - id: norton.360-advanced
+    name: 360 Advanced
+    link: https://de.norton.com/products/norton-360-advanced
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.identity-restoration: true
+      antivirus.devices: 10
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks: [stolen-wallet, social-media-monitoring]
+    notes: 'Security for 10 PCs, Macs, tablets or phones, with Scam Protection Pro (email, calls, texts and websites), a password manager, VPN, Parental Control, Dark Web Monitoring, help restoring your identity, stolen wallet help, Social Media Monitoring and 200 GB of Windows PC cloud backup.'
+    prices:
+      - region: DE
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products
+      - region: FR
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://fr.norton.com/products
+      - region: NL
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nl.norton.com/products
+      - region: ES
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://es.norton.com/products
+      - region: IT
+        currency: EUR
+        amount: 139.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://it.norton.com/products
+  # The UK's 360 Advanced adds "Credit Report and Score", "Credit Alerts" and "Financial Monitoring" (its card):
+  # "With Norton 360 Advanced, you get monthly access to your Credit Report & Score18 and you can monitor any major
+  # changes to your credit report with Credit Alerts18" (its page).
+  - id: norton.360-advanced-uk
+    name: 360 Advanced (UK)
+    link: https://uk.norton.com/products/norton-360-advanced
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.identity-restoration: true
+      antivirus.devices: 10
+      security.credit-monitoring: 1
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks: [stolen-wallet, social-media-monitoring, financial-monitoring]
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its card lists Credit Report and Score and Credit Alerts, and its page offers monthly access to your Credit Report & Score with Credit Alerts on changes: one credit report, so one bureau.'
+        page:
+          name: 'Norton 360 Advanced (UK)'
+          url: https://uk.norton.com/products/norton-360-advanced
+        lastVerified: 2026-11-13
+    notes: 'The UK: everything in 360 Advanced, plus your credit report and score each month, credit alerts and Financial Monitoring.'
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://uk.norton.com/products
+  # Australia's 360 Advanced (its menu and page): "5 PCs, Mac, tablets, or phones", 200 GB Cloud Backup, Identity
+  # Restoration Support, "Identity Theft Insurance19", Stolen Wallet Assist, Social Media Monitoring and "NEW!
+  # Financial Monitoring". Its insurance names no amount on the card, so it's a perk, not
+  # security.identity-theft-insurance (a sum in US dollars).
+  - id: norton.360-advanced-au
+    name: 360 Advanced (Australia)
+    link: https://au.norton.com/products/norton-360-advanced
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.identity-restoration: true
+      antivirus.devices: 5
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks:
+      [stolen-wallet, social-media-monitoring, financial-monitoring, identity-theft-insurance-au]
+    notes: 'Australia: security for 5 PCs, Macs, tablets or phones, with Scam Protection Pro, a password manager, VPN, Parental Control, Dark Web Monitoring, identity restoration support, identity theft insurance, stolen wallet help, Social Media Monitoring, Financial Monitoring and 200 GB of Windows PC cloud backup.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 259.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://au.norton.com/products/norton-360-advanced
+  # 360 for Gamers (in the menus of Canada, the US, the UK, Ireland and New Zealand): "protection for up to 3 PCs, Mac®,
+  # smartphones or tablets", "Dark Web Monitoring for gamer tags and personal information", Game Optimizer,
+  # "Full-Screen Detection Mode", 50 GB Cloud Backup, Parental Control, VPN, PC SafeCam, Smart Firewall and Password
+  # Manager. Its pages start with a 30-day trial ("Payment method required."); the US's Monthly tab: "$9.99" struck
+  # through, "$7.99 /mo. first yr.", so $9.99 a month.
+  - id: norton.360-for-gamers
+    name: 360 for Gamers
+    link: https://ca.norton.com/products/norton-360-for-gamers
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, sms]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      antivirus.devices: 3
+      antivirus.activity-modes: true
+    perks: [game-optimizer]
+    notes: 'Security for 3 PCs, Macs, tablets or phones, built for gaming: Game Optimizer and a full-screen mode that holds alerts, Dark Web Monitoring for gamer tags, VPN, Parental Control, a password manager and 50 GB of Windows PC cloud backup. 30 days free first, with a payment method.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.norton.com/products/norton-360-for-gamers
+      - region: US
+        currency: USD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-for-gamers
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-for-gamers
+      - region: GB
+        currency: GBP
+        amount: 84.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://uk.norton.com/products/norton-360-for-gamers
+      - region: IE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ie.norton.com/products/norton-360-for-gamers
+      - region: DE
+        currency: EUR
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://de.norton.com/products/norton-360-for-gamers
+      - region: NZ
+        currency: NZD
+        amount: 154.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://nz.norton.com/products/norton-360-for-gamers
+  # 360 with LifeLock Select Plus (its card): "10 PCs, Mac, tablets, or phones", Scam Protection Pro, 250 GB Cloud
+  # Backup, VPN, Dark Web Monitoring, Privacy Monitor, Parental Control, "Stolen Wallet Protection", "Social Security &
+  # Credit Alerts", "Credit Monitoring Coverage: One bureau3" and "Up to $1,050,000 coverage" (up to $1 million for
+  # lawyers and experts, $25,000 in stolen funds and $25,000 in personal expenses).
+  - id: norton.360-lifelock-select-plus
+    name: 360 with LifeLock Select Plus
+    link: https://us.norton.com/products/norton-360-lifelock-select
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
+      security.identity-restoration: true
+      antivirus.devices: 10
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 1.05
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks: [stolen-wallet, ssn-alerts]
+    notes: 'The US: everything in 360 Deluxe for 10 devices, with Scam Protection Pro and 250 GB of backup, plus LifeLock identity theft protection: alerts on your Social Security number and credit, one-bureau credit monitoring, US restoration specialists and up to $1,050,000 in coverage.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 189.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products
+  # 360 with LifeLock Advantage (its card): everything in Select Plus, "Up to $1,200,000 coverage" (up to $100,000 in
+  # stolen funds and in personal expenses), "Identity Lock for each adult: TransUnion Credit File Lock", "Phone Takeover
+  # Monitoring", "Alerts on Crimes Committed in Your Name", "Buy Now Pay Later Alerts", and "Bank & Credit Card
+  # Activity Alerts" (its page). Its Monthly tab shows only "$24.99 /mo. first yr.", no regular monthly price: not
+  # stored.
+  - id: norton.360-lifelock-advantage
+    name: 360 with LifeLock Advantage
+    link: https://us.norton.com/products/norton-360-lifelock-advantage
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
+      security.identity-restoration: true
+      antivirus.devices: 10
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 1.2
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks:
+      [
+        stolen-wallet,
+        ssn-alerts,
+        bank-card-alerts,
+        credit-file-lock,
+        phone-takeover,
+        crime-alerts,
+        bnpl-alerts,
+      ]
+    notes: 'The US: everything in Select Plus, plus bank and credit card activity alerts, a TransUnion credit file lock, phone takeover monitoring, alerts on crimes in your name and buy-now-pay-later alerts, with up to $1.2 million in coverage.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 259.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-lifelock-advantage
+  # 360 with LifeLock Ultimate Plus (its card): "Unlimited PCs, Mac, tablets, or phones*", 500 GB Cloud Backup, "Credit
+  # Monitoring Coverage for each adult: Three bureaus3", "401(k) & Investment Account Alerts for each adult", "Home
+  # Title Monitoring", "Social Media Monitoring for each adult" and "Up to $3,000,000 coverage". Its Monthly tab
+  # shows only "$34.99 /mo. first yr.": not stored.
+  - id: norton.360-lifelock-ultimate-plus
+    name: 360 with LifeLock Ultimate Plus
+    link: https://us.norton.com/products/norton-360-lifelock-ultimate-plus
+    categories: [security, passwords, vpn]
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      vpn.included: true
+      vpn.unlimited-traffic: false
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      security.webcam-protection: [webcam]
+      parental-control: [content-filtering, screen-time, location]
+      account.parental-controls: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
+      security.identity-restoration: true
+      antivirus.devices: unlimited
+      security.credit-monitoring: 3
+      security.identity-theft-insurance: 3
+    featureLabels:
+      antivirus.scam-protection: 'Scam Protection Pro'
+    perks:
+      [
+        stolen-wallet,
+        ssn-alerts,
+        bank-card-alerts,
+        credit-file-lock,
+        phone-takeover,
+        crime-alerts,
+        bnpl-alerts,
+        investment-alerts,
+        home-title-monitoring,
+        social-media-monitoring,
+      ]
+    notes: 'The US: everything in Advantage for unlimited devices, with 500 GB of backup, three-bureau credit monitoring, 401(k) and investment alerts, home title monitoring and Social Media Monitoring, and up to $3 million in coverage.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 364.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://us.norton.com/products/norton-360-lifelock-ultimate-plus
+  # Norton Password Manager, free ("It's safe, secure, and FREE.", each country's products page); its privacy notice
+  # lists "browser extensions for all major browsers", "mobile apps for Android and iOS" and "a web application".
+  - id: norton.password-manager
+    name: Password Manager
+    link: https://ca.norton.com/feature/password-manager
+    categories: [passwords]
+    features:
+      password-manager: true
+      password-manager.item-types: [login, credit-card]
+      platforms: [web, browser-extension, android, ios]
+    notes: 'Free: a password manager for your logins and cards, as a browser extension, a web app and Android and iPhone apps.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://ca.norton.com/products
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 with a plain fetch and Edge from Canada. Every agreement a user
+# accepts: its plans pages' "subscription contracts ... are subject to our Terms of Sale and License & Services Agreement"
+# (norton.com/terms-of-sale, a PDF "Effective Date: June 2020" still in NortonLifeLock's name, and norton.com/legal/lsa,
+# Gen Digital's License and Services Agreement, "GEN_LSA_November_2026_AMS EN", with LifeLock's terms as its Addendum 1),
+# its Cancellation and Refund Policy (norton.com/return-policy) and Gen's General Privacy Notice, rated once as a shared
+# document (data/policies/gen-digital-privacy.yaml, drafted in .pipeline/norton/draft/policies/), with Norton's own
+# Products Privacy Notice rated here. The licence is Gen's, but its product terms are Norton's and LifeLock's; Avast uses
+# its own EULA, so it isn't shared (notes.md). The LSA read is the Americas' (ca.norton.com, "If you live in the United
+# States ... binding arbitration"); Europe's and Asia-Pacific's versions (its region picker) weren't read. Not read: the
+# checkout's agreement line (no checkout opened), LifeLock's Stolen Identity Event Insurance terms, the Norton Virus
+# Protection Promise terms, and the third-party terms its LSA mentions (OpenAI's for Private Browser's Smart Chat, not
+# drafted).
+policies:
+  shared: [gen-digital-privacy]
+  links:
+    - name: 'License and Services Agreement'
+      url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+    - name: 'Terms of Sale'
+      url: https://ca.norton.com/terms-of-sale
+    - name: 'Cancellation and Refund Policy'
+      url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+    - name: 'FAQ: Norton subscription and renewal'
+      url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+    - name: 'Products Privacy Notice'
+      url: https://ca.norton.com/privacy/products-privacy-notice
+    - name: 'Password Manager'
+      url: https://ca.norton.com/feature/password-manager
+    - name: 'Report a security vulnerability (Gen)'
+      url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+    - name: 'Plans and subscription details (Canada)'
+      url: https://ca.norton.com/products
+  ratings:
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can stop it renewing in your Norton account, or by chat, at any time, and keep your protection to the end of the time you paid for.'
+      sources:
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+          quote: "To cancel your subscription, sign in to your account and visit the My Subscriptions tab, or we'd be happy to chat about it."
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+          quote: 'However, your protection will continue through the end of your current paid term.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: good
+      reason: 'Paid yearly, you can get all your money back within 60 days of buying it, and again within 60 days of each yearly renewal.'
+      sources:
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+          quote: 'Under our 60-day Money Back Guarantee, the purchase of an annual subscription is eligible for a full refund, if requested within 60 days of the date of purchase.'
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+          quote: 'Each subsequent annual charge is also eligible for a full refund if requested within 60 days of being charged.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      plans: [norton.360-for-gamers]
+      tier: neutral
+      reason: 'Paid monthly (in the US), you get your money back only within 14 days of first buying it, not after a monthly renewal. Paid yearly, the 60-day refund applies.'
+      sources:
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+          quote: 'The purchase of a monthly subscription is eligible for a full refund if requested within 14 days of the date of purchase.'
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/kb20100113164023EN
+          quote: 'Subsequent monthly charges are not eligible for a refund.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price applies when you renew. It emails you the next year’s price about 50 to 65 days before each yearly renewal, so you can cancel first.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'The amount charged will be the price of the software or services at the time of renewal, which might be different than the amount you originally paid.'
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+          quote: 'We send a notification email before each upcoming annual renewal (usually about 50-65 days ahead), so that you are not caught off-guard.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A free trial needs a payment method and turns into a paid plan unless you cancel before it ends.'
+      sources:
+        - url: https://ca.norton.com/products
+          quote: 'For trials, a payment method is required at sign-up and will be charged at the end of the trial period, unless cancelled first.'
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you about 50 to 65 days before each yearly renewal, with the price. Monthly plans get no reminder each month.'
+      sources:
+        - url: https://support.norton.com/sp/en/us/home/current/solutions/v117675374
+          quote: 'We send a notification email before each upcoming annual renewal (usually about 50-65 days ahead), so that you are not caught off-guard.'
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'We’ll email you in advance to let you know that your subscription is due for renewal and will charge your payment type up to 35 days before the subscription is due to end.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price and taxes.'
+      pages:
+        [https://ca.norton.com/terms-of-sale, https://ca.norton.com/legal/lsa?lsar=americas&lsal=en]
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms don’t say what happens to what you’ve paid when you switch plans.'
+      pages:
+        [https://ca.norton.com/terms-of-sale, https://ca.norton.com/legal/lsa?lsar=americas&lsal=en]
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US, its licence only says it prefers a private referee (an arbitrator), without requiring one, so disputes can go to court.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'Where Customer Service can’t resolve the issue, we prefer to use arbitration to try and resolve our differences.'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [US]
+      tier: bad
+      reason: 'In the US, disputes go to a private referee (an arbitrator) or small claims court, one person at a time, with no group lawsuits, and you can’t opt out.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'a. We both agree that any dispute arising out of or relating to the software and services ( claim ) will be determined by binding arbitration or small claims court, instead of in courts of general jurisdiction.'
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'WE BOTH AGREE THAT WE EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.'
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'It can change its licence without telling you, and using its apps means you accept the change.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'We can change or update the agreement without any need to notify you. Your continued use of the products or services means that you agree to the changes or updates.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its terms, it ends your service and may close your account. It doesn’t promise a refund.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'If you violate this agreement or any of the additional terms and conditions that apply, we’ll have to suspend or end your use of the software or service.'
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'When we end it, we may also close your account.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      plans:
+        [
+          norton.360-standard,
+          norton.360-standard-3-devices,
+          norton.360-standard-us,
+          norton.360-deluxe,
+          norton.360-deluxe-3-devices,
+          norton.360-deluxe-canada,
+          norton.360-deluxe-us,
+          norton.360-premium,
+          norton.360-premium-5-devices,
+          norton.360-premium-canada,
+          norton.360-advanced,
+          norton.360-advanced-uk,
+          norton.360-advanced-au,
+          norton.360-for-gamers,
+          norton.360-lifelock-select-plus,
+          norton.360-lifelock-advantage,
+          norton.360-lifelock-ultimate-plus,
+        ]
+      tier: poor
+      reason: 'On plans with its VPN, it can cut off or close your account at any time if it only thinks you’re abusing the VPN.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'If we think you are abusing the service, we may suspend, limit, or terminate your account at any time.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can drop apps or features, and then you may not be able to renew.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'From time to time, we may discontinue or remove certain software, services or particular features of the software or services.'
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps are for home use only, and its licence forbids taking them apart to see how they work, with no exception for what the law allows.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'try to figure out the source code, including by reverse engineering or decompiling the software or services;'
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'Consumer products can only be used for consumer, household and non-commercial purposes.'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      status: not-stated
+      reason: 'Its licence takes no rights over your passwords or backed-up files, only over feedback you send.'
+      pages: [https://ca.norton.com/legal/lsa?lsar=americas&lsal=en]
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your password vault is encrypted, and Norton says only you can open it.'
+      sources:
+        - url: https://ca.norton.com/feature/password-manager
+          quote: 'Password Manager ensures that only you can access your passwords and other important online credentials quickly and securely.'
+        - url: https://ca.norton.com/feature/password-manager
+          quote: 'Your data is encrypted and stored more securely in your online vault, which makes it extremely difficult for cybercriminals to access it.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You make a Norton account with an email address, and give payment details for a paid plan.'
+      sources:
+        - url: https://ca.norton.com/terms-of-sale
+          quote: 'If you are a new customer, you will be asked to create an account and include a valid email address.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      plans:
+        [
+          norton.360-lifelock-select-plus,
+          norton.360-lifelock-advantage,
+          norton.360-lifelock-ultimate-plus,
+        ]
+      tier: bad
+      reason: 'Its LifeLock identity protection needs your Social Security number.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'U.S. customers agree to provide a valid and accurate Social Security Number;'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Its security apps keep the web addresses you visit for 3 years and how you use them for over 4, and it doesn’t say it deletes them when you leave.'
+      sources:
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'URLs/Websites visited by you or detected by our service and associated metadata (36 months).'
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'Events and product usage such as number and result of scans, detections, error logs and screen flows (50 months).'
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you ask Norton Genie, its AI assistant, is kept 30 days and used to improve its future answers, and nothing says you can turn that off.'
+      sources:
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'User conversations. Questions or anything you submit to the app (30 days).'
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'Service Data : This data is processed for effective functioning of the product and for the purpose of responding to the questions or other inputs and for improving the quality of future conversations.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: good
+      reason: 'An outside firm, VerSprite, has checked its VPN’s no-logs promise more than once, and Gen takes security bug reports and may pay a reward.'
+      sources:
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'Our VPN no-logs policy has been repeatedly independently verified by Versprite.'
+        - url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+          quote: 'we welcome the responsible disclosure of potential security vulnerabilities and bugs or any other web or product-based security concerns to improve the online risk posture of Gen and all its associated brands.'
+        - url: https://www.gendigital.com/ca/en/contact-us/report-a-potential-security-vulnerability/
+          quote: 'Please beware that not all submissions may be eligible for a reward/ bounty.'
+      lastVerified: 2026-11-13
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Its VPN keeps no record of the sites you visit, as an outside audit checked, but its security apps keep the web addresses you visit for 3 years.'
+      sources:
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'Our VPN no-logs policy has been repeatedly independently verified by Versprite.'
+        - url: https://ca.norton.com/privacy/products-privacy-notice
+          quote: 'URLs/Websites visited by you or detected by our service and associated metadata (36 months).'
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can use it for your household, and some apps let you add your family members.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'Consumer products can only be used for consumer, household and non-commercial purposes.'
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'Some of our software or services allow you to register your family members or employees or their devices.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit beyond the number of devices each plan covers.'
+      pages: [https://ca.norton.com/legal/lsa?lsar=americas&lsal=en]
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      plans: [norton.360-lifelock-ultimate-plus]
+      tier: good
+      reason: 'Its unlimited plan covers only your household’s own devices, for personal use.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'Unlimited plans cover only household devices that you own for personal, non-commercial use.'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves in the background, which its licence says you agree to.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'To make sure you can use new features we develop, you agree to let us install updates in the background while you do other things.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: 'A VPN data limit it doesn’t define'
+      plans:
+        [
+          norton.360-standard,
+          norton.360-standard-3-devices,
+          norton.360-standard-us,
+          norton.360-deluxe,
+          norton.360-deluxe-3-devices,
+          norton.360-deluxe-canada,
+          norton.360-deluxe-us,
+          norton.360-premium,
+          norton.360-premium-5-devices,
+          norton.360-premium-canada,
+          norton.360-advanced,
+          norton.360-advanced-uk,
+          norton.360-advanced-au,
+          norton.360-for-gamers,
+          norton.360-lifelock-select-plus,
+          norton.360-lifelock-advantage,
+          norton.360-lifelock-ultimate-plus,
+        ]
+      tier: poor
+      reason: 'Its VPN names no data cap, but using “excessive” data counts as abuse, which it doesn’t define and can end your account for.'
+      sources:
+        - url: https://ca.norton.com/legal/lsa?lsar=americas&lsal=en
+          quote: 'You may not abuse the VPN Service (including but not limited to excessive bandwidth consumption) or use it for unlawful activities.'
+      lastVerified: 2026-11-13

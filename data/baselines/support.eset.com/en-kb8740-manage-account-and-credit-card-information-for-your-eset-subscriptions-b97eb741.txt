@@ -1,0 +1,91 @@
+url: https://support.eset.com/en/kb8740-manage-account-and-credit-card-information-for-your-eset-subscriptions
+method: fetch
+saved: 2026-11-13
+
+[KB8740] Update credit card and contact information for your ESET subscriptions in ESET eStore
+Apps and Tools
+Application Agnostic
+ESET eStore
+KB8740
+[KB8740] Update credit card and contact information for your ESET subscriptions in ESET eStore
+Issue
+ESET eStore Account verification
+Update your ESET eStore credit card information
+Update your ESET eStore contact information
+Solution
+Before you proceed
+Your ESET eStore account needs to be verified to manage certain settings in the eStore, such as updating payment information and contact details or enabling/disabling Auto-renewal.
+To log in to ESET eStore as a verified user, log in to eStore using your Activation key.
+See the Account verification section below for more information.
+ESET eStore account verification
+If you use your Public ID (XXX-XXX-XXX) to access your ESET eStore account, only certain actions are available, and you will need to verify your email address. For full access to your ESET eStore account, log in using your 20-digit Activation key (XXXX-XXXX-XXXX-XXXX).
+This procedure shows how to log in to an ESET eStore via Public ID.
+Log in to ESET eStore account using your Public ID (XXX-XXX-XXX).
+Click Verify with your email for the email verification.
+Alternatively, click login with your subscription keys, type or paste in your Activation key, and click Log in now.
+No access to the email
+If you are unable to access your original email or your email address has changed, contact ESET Technical Support.
+Click Verify. The authentication email will be sent to your email address used for your original purchase.
+Open the email and click the ESET eStore verification button. You will be redirected to ESET eStore as a verified user.
+Update your ESET eStore credit card information
+Log in to your ESET eStore account using your Activation key (XXXX-XXXX-XXXX-XXXX-XXXX) or Public ID (XXX-XXX-XXX).
+Ensure that you are logged in to your ESET eStore account as a verified user. You cannot update credit card information without verification.
+Click Edit in the Payment details section.
+In the Change payment method section, you can change the payment method. Select Credit/debit card and click Edit to change the credit card information.
+In the Card Details section, type the credit card details into the respective fields and click Confirm.
+You will be notified when auto-renewal is enabled. Click OK.
+Next to the Billing in the Payment details, you can see a notification that the update of your payment details is being processed.
+When you log in to ESET eStore next time, you can see the updated credit card information.
+Update ESET eStore contact information
+Log in to your ESET eStore account using your Activation key (XXXX-XXXX-XXXX-XXXX-XXXX) or Public ID (XXX-XXX-XXX).
+Ensure that you are logged in to your ESET eStore account as a verified user. You cannot update contact details without verification.
+Click Edit contact details next to Contact details.
+Edit your contact information and click Save.
+English
+Bahasa Indonesia
+Česky
+Dansk
+Deutsch
+Eesti
+Español
+Français
+Italiano
+Latviešu
+Lietuvių
+Magyar
+Nederlands
+Norsk (bokmål)
+Polski
+Português
+Română
+Slovenščina
+Slovenský
+Suomi
+Svenska
+Türkçe
+Ελληνικά Greek
+Български Bulgarian
+Русский Russian
+Українська мова
+日本語 Japanese
+简体字 simplified Chinese
+한국어 Korean
+Last Updated: Oct 19, 2026
+Related articles:
+Manage auto-renewal settings for your ESET subscriptions
+Additional resources
+User guides
+ESET Forum
+YouTube videos
+ESET Support News
+ESET Customer Advisories
+ESET Status Portal
+ESET Technical Support
+Existing customer?
+Contact
+Privacy
+Legal information
+Report vulnerabilities
+Sitemap
+Manage cookies
+© 1992 - 2026 ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET North America. All other names and brands are registered trademarks of their respective companies.

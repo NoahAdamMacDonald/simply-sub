@@ -1,0 +1,1361 @@
+# Researched by hand on 2026-11-13 (M11.15, security batch 1), read with Edge: each country's plan page from Canada and
+# through that country's exit (mcafee.com answered "Access Denied" after a few reads from one address, so later pages
+# were read through a fresh exit each). Pages, each quoted where it's used:
+# Pricing: each country's own plan page (mcafee.com/en-ca/index.html, /en-gb/, /en-ie/, /en-au/, /en-nz/, /de-de/,
+# /fr-fr/, /nl-nl/, /es-es/, /it-it/; the US's at mcafee.com) prices in that country's currency whoever reads it: its page
+# data names the culture and currency ("countryCode":"CA","currencyCode":"CAD") and each offer's first-term price and
+# renewal ("arPrice":"C$129.99"), and each card shows both ("C$44.99*" and "C$129.99 Save C$85.00"). "Unless otherwise
+# stated, if a savings amount is shown, it describes the difference between the first term and renewal term
+# subscription prices", so the struck price is the renewal one, stored. The checkout says the same ("at the renewal
+# price (currently C$129.99/yr)"). Every plan is sold by the year; the US's two-year first terms of Premium, Advanced and
+# Ultimate renew "on an annual basis" at the yearly price, so they're offers, not periods. Tax: Canada's checkout says
+# "Tax Not yet included"; no country's card says its price includes tax.
+# Plans by country: Total Protection Basic (1 device) and Essential (5 devices) everywhere; Total Protection for 10
+# devices in Ireland and New Zealand only, where no McAfee+ plan is sold; McAfee+ Premium, Advanced and Ultimate
+# (unlimited devices, 1 user) and Advanced Family (6 family members) in Canada, the UK, Australia and the euro countries;
+# in the US also Premium Family and Ultimate Family.
+# Region checklist for CA and US, 2026-11-13: 1. each country's path (/en-ca/, the US's root); 2. its footer's country
+# picker ("Canada / English"); 3. its page data names the country and currency; 4. the checkout's first step, up to the
+# email field ("Credit or debit card"); 5. its refund article; 6. Edge from Canada and through Canadian and US exits;
+# 7. no bill offered.
+# Not listed: Mobile Security (sold in its apps through the app stores; its page shows no price), PC Optimizer (a tune-up
+# tool, not read) and the business plans. Monthly billing: the US's offer details mention it ("or monthly, based on
+# your selection") but no card read sells it.
+# Bundles: none found. Official resellers: none named; retail cards ("Activate Retail Card") are sold in shops it doesn't
+# name. Free use: WebAdvisor, its free plan.
+
+# Coverage: mcafee.premium-individual, mcafee.advanced-individual, mcafee.advanced-family and
+# mcafee.ultimate-individual in IE and NZ: their plan pages sell only Total Protection (Basic, Essential and 10 devices).
+
+# Coverage: mcafee.premium-family, mcafee.advanced-individual-us, mcafee.advanced-family-us,
+# mcafee.ultimate-individual-us and mcafee.ultimate-family-us in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: the US's
+# plans; the others' plan pages sell their own McAfee+ plans (and no Premium or Ultimate Family).
+
+# Coverage: mcafee.advanced-individual, mcafee.advanced-family and mcafee.ultimate-individual in US: the US sells its own
+# versions, with identity theft coverage and credit monitoring (mcafee.*-us).
+
+# Coverage: mcafee.total-protection in CA, US, GB, AU, DE, FR, NL, ES and IT: their plan pages sell Basic, Essential and
+# McAfee+ instead.
+
+id: mcafee
+name: McAfee
+website: https://www.mcafee.com
+category: security
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its licence agreement's "How do I turn off automatic renewal?" (no cancelling help article was read).
+cancelUrl: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+sources: { pricing: https://www.mcafee.com/en-ca/index.html }
+# Owner (M11.2), read 2026-11-13: its own press release (linked from its investors page) on the investor group led by
+# Advent International and Permira buying it in 2022, after which it is private. Its licence agreement names McAfee, LLC
+# (Delaware, San Jose) as the company that licenses it in the US.
+owner:
+  name: McAfee, LLC (owned by an investor group led by Advent International and Permira)
+  page:
+    name: Press release (acquisition)
+    url: https://www.mcafee.com/en-us/newsroom/press-releases/press-release.html?news_id=246b0dad-b4ee-442b-bd1a-22be31392038
+  quotes:
+    - 'today announced the completion of its acquisition by an investor group led by Advent International Corporation (“Advent”) and funds advised by Permira'
+    - 'As a result of the transaction, McAfee is no longer a publicly traded company.'
+  country:
+    code: US
+    page:
+      name: Licence agreement
+      url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+    quotes:
+      - 'McAfee, LLC, a Delaware limited liability company, with offices located at 6220 America Center Drive, San Jose, California 95002, USA'
+    lastVerified: 2026-11-13
+  lastVerified: 2026-11-13
+# Ways to pay (M11.5), read 2026-11-13: Canada's checkout offers "Credit or debit card"; no page read names the card
+# networks, PayPal or other ways (its licence speaks of "credit or debit card or other payment type").
+paymentMethods:
+  - methods: [card]
+    page: Checkout
+    url: https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1
+    quotes: ['Credit or debit card']
+# Renewal day (M11.5): it charges "30 days before the subscription ends and annually thereafter", a month before the
+# date you signed up, which no kind in core names, so not-stated (notes.md).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    [
+      https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1,
+      https://www.mcafee.com/en-ca/consumer-support/policy/legal.html,
+    ]
+  lastVerified: 2026-11-13
+# Lab results (M11.2), read 2026-11-13: AV-TEST's newest Windows test of home-user products, Jul-Aug 2026 (its page for
+# McAfee Total Protection, report 261413): 6.0 of 6 for each.
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/mcafee-total-protection-1.39-261413/
+    tested: Total Protection 1.39, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/mcafee-total-protection-1.39-261413/
+    tested: Total Protection 1.39, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/mcafee-total-protection-1.39-261413/
+    tested: Total Protection 1.39, Windows 11
+
+# General features, read 2026-11-13. Platforms: "Windows® | macOS® | Android™ | iOS® | ChromeOS™" (its VPN page) and the
+# WebAdvisor extension (Chrome, Edge and Firefox, its Scam Detector article). Support: "contacting McAfee Customer
+# Service by phone or chat" (its refund policy) and "24/7 Customer Assistance". App languages: its site's language
+# versions (its country picker's paths: English, French, German, Spanish, Italian, Portuguese, Dutch, Japanese, Korean,
+# Chinese and more). Sign-in methods: not read. No pause; parental controls aren't on any plan card read.
+features:
+  platforms: [windows, macos, android, ios, browser-extension]
+  support.channels: [chat, phone, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
+
+# Perks (M11.6): plan-card lines no feature describes, in the cards' words.
+perks:
+  - id: tracker-remover
+    name: Tracker Remover
+  - id: virus-protection-pledge
+    name: Virus Protection Pledge
+  - id: online-account-cleanup
+    name: Online account scans
+  - id: social-privacy-manager
+    name: Social Privacy Manager
+  - id: lost-wallet
+    name: Lost Wallet Support
+  - id: ransomware-coverage
+    name: $25K Ransomware coverage
+  - id: bank-monitoring
+    name: Bank & credit card transaction monitoring
+  - id: credit-lock
+    name: Credit Lock & Security Freeze
+  - id: investment-monitoring
+    name: 401(k), investment, and loan transaction monitoring
+  - id: mcafee-assist
+    name: McAfee Assist protection setup
+
+# Features, read 2026-11-13 from each country's plan cards (each card's ticks are in the page's own data) and its product
+# pages: every plan has "McAfee's scam protection" ("Automatic scam protection for texts and on-demand scans for QR
+# codes"; the US's cards say "Scam Detector Text, email, and video scams"), "Antivirus" ("Automatic, real-time
+# protection", "defend against viruses, online threats, and ransomware", "scan for viruses and quarantine/remove them":
+# the US Total Protection page), "Secure VPN" ("McAfee unlimited VPN", its Mobile Security page; "We don't log or track
+# what you do online", "almost 50 different countries", its VPN page), "Identity Monitoring" ("We scan up to 60 unique
+# types of personal information on the dark web"), "Web protection", "Password manager", "File shredder" and "Advanced
+# Firewall". McAfee+ adds "Personal info scans" (Premium) or "Personal info removal" (Advanced, Ultimate), and Advanced
+# and Ultimate "Identity restoration"; outside the US only Ultimate has "Identity Theft Coverage" ("covered for up to $1
+# million"), and in the US Advanced has "Up to $1M" and Ultimate "Up to $2M identity theft coverage", with "Credit
+# score, report, & monitoring". No page read today states scheduled scans, behaviour-based detection, ransomware file
+# recovery, a vulnerability scan or VPN protocols and kill switch, so they're left out (its older help pages describe
+# a past product). Its VPN page says it's "independently reviewed and audited" without saying what, so no
+# vpn.independent-audits.
+plans:
+  # McAfee WebAdvisor: "McAfee® WebAdvisor FREE", "Search confidently and browse safely with our free WebAdvisor.", a
+  # browser extension that warns of risky sites and downloads. No antivirus, so not a free plan of its suites.
+  - id: mcafee.webadvisor
+    name: WebAdvisor (free)
+    link: https://www.mcafee.com/en-ca/safe-browser/mcafee-webadvisor.html
+    features:
+      antivirus.included: false
+      platforms: [browser-extension]
+    notes: 'A free browser extension: site safety ratings and warnings about risky links and downloads.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/safe-browser/mcafee-webadvisor.html
+  - id: mcafee.total-protection-basic
+    name: Total Protection Basic
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: 1
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks: [tracker-remover, virus-protection-pledge]
+    prices:
+      - region: US
+        currency: USD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+      - region: CA
+        currency: CAD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/index.html
+      - region: GB
+        currency: GBP
+        amount: 79.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-gb/index.html
+      - region: IE
+        currency: EUR
+        amount: 86.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ie/index.html
+      - region: AU
+        currency: AUD
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-au/index.html
+      - region: NZ
+        currency: NZD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-nz/index.html
+      - region: DE
+        currency: EUR
+        amount: 86.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/de-de/index.html
+      - region: FR
+        currency: EUR
+        amount: 86.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/fr-fr/index.html
+      - region: NL
+        currency: EUR
+        amount: 86.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/nl-nl/index.html
+      - region: ES
+        currency: EUR
+        amount: 86.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/es-es/index.html
+      - region: IT
+        currency: EUR
+        amount: 86.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/it-it/index.html
+  - id: mcafee.total-protection-essential
+    name: Total Protection Essential
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: 5
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks: [tracker-remover, virus-protection-pledge]
+    prices:
+      - region: US
+        currency: USD
+        amount: 119.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+      - region: CA
+        currency: CAD
+        amount: 129.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/index.html
+      - region: GB
+        currency: GBP
+        amount: 95.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-gb/index.html
+      - region: IE
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ie/index.html
+      - region: AU
+        currency: AUD
+        amount: 169.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-au/index.html
+      - region: NZ
+        currency: NZD
+        amount: 154.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-nz/index.html
+      - region: DE
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/de-de/index.html
+      - region: FR
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/fr-fr/index.html
+      - region: NL
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/nl-nl/index.html
+      - region: ES
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/es-es/index.html
+      - region: IT
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/it-it/index.html
+  # Ireland's and New Zealand's plan pages sell "McAfee® Total Protection™ | 10 Devices" beside Basic and Essential,
+  # and no McAfee+ plan.
+  - id: mcafee.total-protection
+    name: Total Protection (10 devices)
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: 10
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.file-shredder: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks: [tracker-remover, virus-protection-pledge]
+    prices:
+      - region: IE
+        currency: EUR
+        amount: 129.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ie/index.html
+      - region: NZ
+        currency: NZD
+        amount: 184.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-nz/index.html
+  - id: mcafee.premium-individual
+    name: McAfee+ Premium Individual
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
+      security.file-shredder: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks:
+      [tracker-remover, virus-protection-pledge, online-account-cleanup, social-privacy-manager]
+    prices:
+      - region: US
+        currency: USD
+        amount: 149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+      - region: CA
+        currency: CAD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/index.html
+      - region: GB
+        currency: GBP
+        amount: 114.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-gb/index.html
+      - region: AU
+        currency: AUD
+        amount: 204.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-au/index.html
+      - region: DE
+        currency: EUR
+        amount: 129.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/de-de/index.html
+      - region: FR
+        currency: EUR
+        amount: 129.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/fr-fr/index.html
+      - region: NL
+        currency: EUR
+        amount: 129.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/nl-nl/index.html
+      - region: ES
+        currency: EUR
+        amount: 129.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/es-es/index.html
+      - region: IT
+        currency: EUR
+        amount: 129.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/it-it/index.html
+  - id: mcafee.premium-family
+    name: McAfee+ Premium Family
+    link: https://www.mcafee.com/
+    categories: [security, vpn, passwords]
+    features:
+      account.users: 6
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint]
+      security.file-shredder: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks:
+      [tracker-remover, virus-protection-pledge, online-account-cleanup, social-privacy-manager]
+    prices:
+      - region: US
+        currency: USD
+        amount: 169.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+  - id: mcafee.advanced-individual
+    name: McAfee+ Advanced Individual
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/index.html
+      - region: GB
+        currency: GBP
+        amount: 159.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-gb/index.html
+      - region: AU
+        currency: AUD
+        amount: 279.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-au/index.html
+      - region: DE
+        currency: EUR
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/de-de/index.html
+      - region: FR
+        currency: EUR
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/fr-fr/index.html
+      - region: NL
+        currency: EUR
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/nl-nl/index.html
+      - region: ES
+        currency: EUR
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/es-es/index.html
+      - region: IT
+        currency: EUR
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/it-it/index.html
+  - id: mcafee.advanced-family
+    name: McAfee+ Advanced Family
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      account.users: 6
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 269.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/index.html
+      - region: GB
+        currency: GBP
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-gb/index.html
+      - region: AU
+        currency: AUD
+        amount: 419.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-au/index.html
+      - region: DE
+        currency: EUR
+        amount: 169.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/de-de/index.html
+      - region: FR
+        currency: EUR
+        amount: 169.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/fr-fr/index.html
+      - region: NL
+        currency: EUR
+        amount: 169.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/nl-nl/index.html
+      - region: ES
+        currency: EUR
+        amount: 169.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/es-es/index.html
+      - region: IT
+        currency: EUR
+        amount: 169.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/it-it/index.html
+  - id: mcafee.ultimate-individual
+    name: McAfee+ Ultimate Individual
+    link: https://www.mcafee.com/en-ca/index.html
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+        ransomware-coverage,
+      ]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 279.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-ca/index.html
+      - region: GB
+        currency: GBP
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-gb/index.html
+      - region: AU
+        currency: AUD
+        amount: 399.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/en-au/index.html
+      - region: DE
+        currency: EUR
+        amount: 189.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/de-de/index.html
+      - region: FR
+        currency: EUR
+        amount: 189.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/fr-fr/index.html
+      - region: NL
+        currency: EUR
+        amount: 189.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/nl-nl/index.html
+      - region: ES
+        currency: EUR
+        amount: 189.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/es-es/index.html
+      - region: IT
+        currency: EUR
+        amount: 189.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/it-it/index.html
+  # The US's McAfee+ Advanced and Ultimate add identity theft coverage and credit monitoring that other countries'
+  # plans of the same names lack (Disney+'s and Bitdefender's precedent: plans of their own).
+  - id: mcafee.advanced-individual-us
+    name: McAfee+ Advanced Individual (US)
+    link: https://www.mcafee.com/
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.credit-monitoring: 1
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
+        page:
+          name: McAfee (US plans)
+          url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+        bank-monitoring,
+        credit-lock,
+      ]
+    prices:
+      - region: US
+        currency: USD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+  - id: mcafee.advanced-family-us
+    name: McAfee+ Advanced Family (US)
+    link: https://www.mcafee.com/
+    categories: [security, vpn, passwords]
+    features:
+      account.users: 6
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.credit-monitoring: 1
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 1
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
+        page:
+          name: McAfee (US plans)
+          url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+        bank-monitoring,
+        credit-lock,
+      ]
+    prices:
+      - region: US
+        currency: USD
+        amount: 269.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+  - id: mcafee.ultimate-individual-us
+    name: McAfee+ Ultimate Individual (US)
+    link: https://www.mcafee.com/
+    categories: [security, vpn, passwords]
+    features:
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.credit-monitoring: 1
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 2
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
+        page:
+          name: McAfee (US plans)
+          url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+        bank-monitoring,
+        credit-lock,
+        investment-monitoring,
+        mcafee-assist,
+      ]
+    prices:
+      - region: US
+        currency: USD
+        amount: 279.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+  - id: mcafee.ultimate-family-us
+    name: McAfee+ Ultimate Family (US)
+    link: https://www.mcafee.com/
+    categories: [security, vpn, passwords]
+    features:
+      account.users: 6
+      antivirus.devices: unlimited
+      antivirus.included: true
+      antivirus.network: [firewall]
+      antivirus.ransomware: [blocking]
+      antivirus.real-time: true
+      antivirus.scam-protection: [sms]
+      antivirus.scans: [on-demand]
+      antivirus.web-protection: true
+      password-manager: true
+      security.credit-monitoring: 1
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      security.file-shredder: true
+      security.identity-restoration: true
+      security.identity-theft-insurance: 2
+      vpn.included: true
+      vpn.no-logs-policy: true
+      vpn.unlimited-traffic: true
+    inferred:
+      security.credit-monitoring:
+        reason: 'Its US plan card lists “Credit score, report, & monitoring” without saying how many credit bureaus, so at least one.'
+        page:
+          name: McAfee (US plans)
+          url: https://www.mcafee.com/
+        lastVerified: 2026-11-13
+    perks:
+      [
+        tracker-remover,
+        virus-protection-pledge,
+        online-account-cleanup,
+        social-privacy-manager,
+        lost-wallet,
+        bank-monitoring,
+        credit-lock,
+        investment-monitoring,
+        mcafee-assist,
+      ]
+    prices:
+      - region: US
+        currency: USD
+        amount: 424.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-13
+        sourceUrl: https://www.mcafee.com/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-13 in Edge: its Privacy & Legal Terms page (Canada's, one page holding
+# its Privacy Notice, last updated January 2026, and its License Agreement, last updated March 30, 2026, which the
+# checkout's "By clicking "Buy Now", you accept the License Agreement, Auto-Renewal Policy and Privacy Notice." names),
+# its refund policy article, the offer details on its plan, VPN and checkout pages. Not read: its Product Terms of
+# Service and Identity Protection Terms of Service tabs beyond what the licence quotes, its Website Terms of Service
+# (the website's, read in passing: California law), its Cookie Notice, and a vulnerability disclosure or audit page (none
+# found from its legal or support pages). No shared document applies.
+policies:
+  links:
+    - name: Privacy notice and licence agreement
+      url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+    - name: Refund policy
+      url: https://www.mcafee.com/support/s/article/000001679-refund?language=en_US
+    - name: Checkout (renewal terms)
+      url: https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1
+    - name: Offer details (plans page)
+      url: https://www.mcafee.com/en-ca/index.html
+    - name: McAfee VPN (US offer details)
+      url: https://www.mcafee.com/en-us/vpn.html
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what it collects, with AI too, to improve its services. You can turn off its antivirus’s automatic threat reports, but not the rest.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'The AI features use the information we collect to improve the Services we provide to you, or to improve the support we provide to you in connection with our services.'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You can turn off this automatic reporting from your antivirus protection in your product.'
+      action:
+        name: 'Privacy notice: your choices'
+        url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your data with ad and analytics companies to promote its products. To stop it, you fill in a request form.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We may share your Personal Information with third-party advertising and analytics partners.'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You may opt out of targeted advertising by completing our Individual Data Request form'
+      action:
+        name: 'Individual data requests'
+        url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+      lastVerified: 2026-11-13
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Ad companies track what you do on its site and in some of its services to target ads at you. You can opt out with a form or the ad industry’s pages.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We also work with third-party advertising companies to display or deliver ads to you while you are on our Site or using some Services.'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You may opt out of targeted advertising by completing our Individual Data Request form'
+      action:
+        name: 'Individual data requests'
+        url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+      lastVerified: 2026-11-13
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'It says it uses AI and the data it collects to improve its services, but not whether your messages or files train AI models.'
+      pages: [https://www.mcafee.com/en-ca/consumer-support/policy/legal.html]
+      lastVerified: 2026-11-13
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Its password manager is locked with your master password, which McAfee never has, so it can’t read what you store there.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We never have a copy of your master password or your encryption keys, so you’re responsible for keeping them safe.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as you’re a customer or it needs it, with few set times; it keeps your last card up to 12 months.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We will keep your Personal Information for the minimum period necessary for the purposes set out in this Notice'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'McAfee will keep the last payment method used for up to 12 months to resolve any outstanding settlements.'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete some data in its products or ask it to delete your data with its request form; it gives no time for doing it.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'To exercise your rights to access, correct, or delete your data, you may be able to do so by using our product features:'
+      action:
+        name: 'Individual data requests'
+        url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+      lastVerified: 2026-11-13
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your data, in electronic form where it can.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'obtaining access to or a copy of your Personal Information, including in electronic form where we are able to do so'
+      action:
+        name: 'Individual data requests'
+        url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+      lastVerified: 2026-11-13
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may hand your data to police and government whenever it believes that’s “appropriate”, not only when the law requires.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We may access, preserve, and disclose any information we store associated with you to external parties if we, in good faith, believe doing so is required or appropriate to prevent physical, financial, or other harm, injury, or loss, including to protect against fraud or credit risk; comply with law enforcement, national security requests'
+      lastVerified: 2026-11-13
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can go to the US and other countries with weaker privacy laws; for Europe and the UK it uses the EU’s standard contracts.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'our use of contracts that incorporate the Standard Contractual Clauses and other legal and technical safeguards issued by regulators or other relevant bodies to provide adequate protection in accordance with UK, EU and Swiss law and applicable regulations; and'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'An account needs your name, email address and a username; paying needs a card.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We may collect Personal Information when you create an account, such as name, email address, username, and what country or state you are located in.'
+      lastVerified: 2026-11-13
+    - topic: privacy.sign-up-data
+      plans:
+        [
+          mcafee.advanced-individual-us,
+          mcafee.advanced-family-us,
+          mcafee.ultimate-individual-us,
+          mcafee.ultimate-family-us,
+        ]
+      tier: bad
+      reason: 'The US plans’ credit monitoring needs your date of birth and Social Security number.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'If you use our credit monitoring or credit lock Services, we may collect your name, address including country of residence, email address, phone number, date of birth, social security number'
+      lastVerified: 2026-11-13
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You turn off renewal in your account online, any time. It charges a month early, so do it more than 30 days before your year ends.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'Be sure to do this more than 30 days before your subscription term expires so your payment type isn’t charged for your next renewal.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      tier: good
+      reason: 'You get all your money back if you ask within 30 days of buying, or within 60 days of a yearly renewal, by phone or chat.'
+      sources:
+        - url: https://www.mcafee.com/support/s/article/000001679-refund?language=en_US
+          quote: 'Annual subscribers to a McAfee software product who make a request within 30 days of a product purchase are eligible for a refund.'
+        - url: https://www.mcafee.com/support/s/article/000001679-refund?language=en_US
+          quote: 'If your annual subscription has been automatically renewed, McAfee will refund the most recent renewal charge in full if your request is made within 60 days of being charged.'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      regions: [DE]
+      tier: great
+      reason: 'In Germany, after the first year you can cancel at any time and get back what you prepaid for the time left.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'McAfee will refund you any renewal prepaid fees on a pro-rata basis'
+      lastVerified: 2026-11-13
+    - topic: billing.refunds
+      regions: [NL]
+      tier: great
+      reason: 'In the Netherlands, after a renewal you can end it with 30 days’ notice to customer service and get back the time left.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You may terminate your renewed subscription any time after renewal by contacting Customer Service and providing at least 30 days’ notice of your intent to terminate and we will provide a prorated refund in accordance with local law.'
+      lastVerified: 2026-11-13
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price applies only when you renew, and it tells you before the renewal price changes, so you can cancel first.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/index.html
+          quote: 'Pricing is subject to change. If the renewal price changes, we will notify you in advance so you always know what’s going on.'
+      lastVerified: 2026-11-13
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A free trial needs your card and turns into a paid plan at its end unless you cancel before then.'
+      sources:
+        - url: https://www.mcafee.com/en-us/vpn.html
+          quote: "Free Trials: You'll need to provide payment details at sign-up, and you'll be charged at the end of the trial period unless you cancel beforehand."
+      lastVerified: 2026-11-13
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you 30 days before it charges you for each yearly renewal.'
+      sources:
+        - url: https://www.mcafee.com/consumer/en-ca/ipz/checkout/2web/payment.html?moguid=bda8c67f-6d2a-430b-95c1-e11c5bda21da&culture=en-ca&affid=0&ccoe=direct&ccoel2=store&term=-1
+          quote: 'We will remind you 30 days before you are charged.'
+      lastVerified: 2026-11-13
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its licence and checkout name no fees beyond the price and taxes.'
+      pages: [https://www.mcafee.com/en-ca/consumer-support/policy/legal.html]
+      lastVerified: 2026-11-13
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its licence doesn’t say what happens to what you’ve paid when you switch plans.'
+      pages: [https://www.mcafee.com/en-ca/consumer-support/policy/legal.html]
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US there’s no arbitration: your country’s law applies (Ontario’s in Canada), and its terms name no court, so your own courts hear disputes.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'the laws of the Province of Ontario, Canada, if you acquired the software and services in Canada;'
+      lastVerified: 2026-11-13
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: 'In the US, disputes go to a private referee (an arbitrator) and you can’t join a group lawsuit, unless you mail it an opt-out within 30 days.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You and we agree that no class action or other collective, consolidated, or representative action may be pursued by arbitration, in court or in any other action or proceeding.'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You can choose to reject this arbitration contract by sending us a written opt-out notice'
+      action:
+        name: 'Arbitration opt-out (licence agreement)'
+        url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+      lastVerified: 2026-11-13
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts new terms on its website; they bind you when you next renew, so you can leave by not renewing.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'Sometimes we make changes to these terms and post them to our website. If you don’t agree to any of the changes you can end your subscription by not renewing, as outlined above, and uninstalling the software.'
+      lastVerified: 2026-11-13
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its terms, it suspends or ends your subscription and may close your account; it says nothing of a refund.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'If you violate this agreement or any of the additional terms and conditions that apply, we’ll have to suspend or end your use of the software or service.'
+      lastVerified: 2026-11-13
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can remove features or stop a product during your subscription.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'From time to time, we may discontinue or remove certain software, services or particular features of the software or services.'
+      lastVerified: 2026-11-13
+    - topic: legal.content-rights
+      status: not-stated
+      reason: 'Its licence takes no rights over what you store in its password manager or apps; it only says it deletes your stored content after you uninstall.'
+      pages: [https://www.mcafee.com/en-ca/consumer-support/policy/legal.html]
+      lastVerified: 2026-11-13
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its licence and privacy notice don’t say it closes accounts you haven’t used.'
+      pages: [https://www.mcafee.com/en-ca/consumer-support/policy/legal.html]
+      lastVerified: 2026-11-13
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its licence is for you alone, and it forbids taking its apps apart without the exception the law gives.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'try to figure out the source code, including by reverse engineering or decompiling the software or services;'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'You get a license for the software and services you’ve subscribed to that belongs to you—and only you.'
+      lastVerified: 2026-11-13
+    - topic: security.practices
+      tier: poor
+      reason: 'Its privacy notice only says it takes steps to keep your data safe. No page read names outside security checks or a way to report a flaw.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'We take steps to help ensure that your information is treated securely and in accordance with this Privacy Notice.'
+      lastVerified: 2026-11-13
+    - topic: service.activity-logging
+      tier: good
+      reason: 'It says its VPN doesn’t log what you do online. It names no outside check of that.'
+      sources:
+        - url: https://www.mcafee.com/en-us/vpn.html
+          quote: "We don't log or track what you do online, so your online activity remains private."
+      lastVerified: 2026-11-13
+    - topic: service.account-sharing
+      tier: good
+      reason: 'An individual plan is for you alone; a Family plan covers up to six family members, on devices they own. It describes no checks, but can stop abuse.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'Unlimited device plans cover only devices that each licensed user owns for their personal, non-commercial use, though we reserve the right to stop abuse.'
+      lastVerified: 2026-11-13
+    - topic: service.device-limits
+      tier: bad
+      reason: 'Its VPN has a “fair use” limit it doesn’t spell out, and it can suspend your VPN if you go over it.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'you must not do anything that imposes or may impose an unreasonable or disproportionately large load on our infrastructure.'
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'If you breach this fair use policy, we may suspend your use of the VPN function without liability to you.'
+      lastVerified: 2026-11-13
+    - topic: service.software-control
+      tier: good
+      reason: 'It installs updates to its own apps in the background; its terms describe no other changes to your device.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/consumer-support/policy/legal.html
+          quote: 'To make sure you can use new features we develop, you agree to let us install updates in the background while you do other things.'
+      lastVerified: 2026-11-13
+    - topic: other.notable
+      title: Some protection only with auto-renewal
+      tier: poor
+      reason: 'Its Virus Protection Pledge (a refund if it can’t remove a virus) and other free extras stop if you turn off automatic renewal.'
+      sources:
+        - url: https://www.mcafee.com/en-ca/index.html
+          quote: 'Turning off auto-renewal terminates your eligibility for these additional benefits.'
+      lastVerified: 2026-11-13

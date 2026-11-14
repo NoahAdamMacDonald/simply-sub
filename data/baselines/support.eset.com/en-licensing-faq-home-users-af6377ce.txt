@@ -1,0 +1,241 @@
+url: https://support.eset.com/en/licensing-faq-home-users
+method: fetch
+saved: 2026-11-13
+
+[KB2393] Subscription FAQ (home and small office users)
+Apps and Tools
+Application Agnostic
+ESET eStore
+KB2393
+[KB2393] Subscription FAQ (home and small office users)
+Solution
+Related solution: Business users
+How do I purchase a subscription for my ESET applications?
+Visit the ESET eStore.
+How large a subscription do I need to purchase?
+Subscriptions consist of seats. Each seat protects one operating system on one device. For example, if multiple people in your household use a computer with a single operating system (for example, a single Windows operating system), you will need a subscription with at least one seat.
+How many devices can I protect with one subscription?
+Subscriptions consist of seats. Each seat protects one operating system on one device. ESET HOME Security Essential, ESET HOME Security Premium, ESET HOME Security Ultimate tiers and ESET Small Business Security subscription come with multiple seats depending on your location and reseller.
+ESET HOME Security subscription tiers
+Application
+Subscription
+Platform
+ESET HOME Security Essential
+ESET HOME Security Premium
+ESET HOME Security Ultimate
+ESET Security Ultimate
+✕
+✕
+✔
+Windows
+ESET Smart Security Premium
+✕
+✔
+✔
+Windows
+ESET Internet Security
+✔
+✔
+✔
+Windows
+ESET NOD32 Antivirus
+✔
+✔
+✔
+Windows
+ESET Cyber Security
+✔
+✔
+✔
+macOS
+ESET Mobile Security for Android
+✔
+✔
+✔
+Android
+ESET Mobile Security for iOS
+✔
+✔
+✔
+iOS
+ESET Smart TV Security
+✔
+✔
+✔
+Android TV
+ESET Password Manager*
+✕
+✔
+✔
+Windows, macOS, Android, iOS
+ESET VPN
+✕
+✔
+✔
+Windows, macOS, Android, iOS
+ESET Identity Protection
+✕
+✕
+✔
+Windows, macOS, Android, iOS
+* ESET Password Manager End of Life information
+ESET Small Business Security subscription
+Application
+Platform
+ESET Small Business Security
+Windows
+ESET Safe Server
+Windows Server
+ESET Cyber Security
+macOS
+ESET Mobile Security for Android
+Android
+ESET Smart TV Security
+Android TV
+ESET Password Manager*
+Windows, macOS, Android, iOS
+ESET VPN
+Windows, macOS, Android, iOS
+* ESET Password Manager End of Life information
+If you want to protect only one device, you can purchase a subscription for one of the basic single-home security applications:
+Single ESET home applications
+Subscription
+Products you can activate
+Platform
+ESET NOD32 Antivirus
+ESET NOD32 Antivirus
+Windows
+ESET Cyber Security
+macOS
+ESET Mobile Security for Android
+ESET Mobile Security for Android
+Android
+ESET Smart TV Security
+Android TV
+ESET Smart TV Security
+ESET Smart TV Security
+Android TV
+Do I need to use a seat to reinstall my ESET application?
+No, you can reinstall your ESET application for troubleshooting purposes anytime. You are only required to purchase additional seats if you plan to have ESET applications installed and activated on more devices than your subscription covers at any given time.
+How can I turn off auto-renewal?
+View the steps on how to turn off the auto-renew.
+I bought a new computer/re-formatted my current computer. Do I need to purchase another subscription?
+No, but if you did not uninstall your ESET application before the re-formatting or uninstall the ESET application from your old computer, you may need to remove these devices from your subscription manually via ESET HOME platform to free up the seats.
+I want to use more than one ESET application. Do I need to purchase a subscription for each one?
+You can install as many applications as there are seats in your subscription.
+I use a dual-boot computer with two separate operating systems. How many subscriptions or seats do I need?
+Each operating system counts as one device, so you need a separate seat from your subscription for each operating system. If you have a subscription with only one seat, you need to expand your subscription or purchase another via the ESET eStore.
+If multiple operating systems are running simultaneously using virtual machine software such as VMWare, Citrix or Parallels, how many seats do I need?
+A single seat lets home users install the standard home application on one physical machine. Each virtual endpoint counts as a physical endpoint (one seat per virtual machine is required).
+Where can I find my Activation Key?
+When you purchase a subscription for an ESET application, you receive an email from ESET containing your ESET-issued Activation key. This email is delivered to the email address used at the time of purchase. The Activation key represents a unique string in the format XXXX-XXXX-XXXX-XXXX-XXXX, which is used for the identification of the subscription owner and activation of the subscription, as well as the subscription credentials. I never received the subscription email containing my Activation key.
+Someone else set up my ESET application. How do I transfer the subscription to my name?
+To transfer account information to another name, the person who originally registered the account needs to call or email ESET Technical Support with the following information: the name, email address, or street address of the original account holder and the new name, address, or email account that the subscription is to be updated with. Be sure to contact ESET Technical Support using the email address associated with the account.
+My email address changed. What do I do?
+You must update ESET Technical Support with the new email address, or you can change your email address in your ESET HOME account.
+Do I need to renew my subscription?
+There are two types of ESET subscriptions:
+Auto-renewal subscriptions renew automatically until you cancel your subscription.
+Manual-renewal subscription needs to be manually renewed before expiration. Otherwise, you will lose protection after the subscription expires.
+How do I renew my subscription?
+Visit the renewals page.
+See more information on renewal pricing.
+Can I extend (renew) my manual-renewal subscription before the expiration date?
+ESET does not currently offer a subscription extension program. Visit the ESET eStore or contact your local ESET partner for more details.
+North American customers: You may renew any time after your purchase and up to 365 days after your subscription expires. If you decide to renew before your expiration date, your new expiration will not take effect until your original expiration date passes.
+How to increase my device limit on my current subscription?
+For instructions on how to enlarge your ESET subscription, visit Subscription pricing and payment.
+I just renewed, but why is my old expiration date still displayed in the program?
+Users may experience a brief delay before the expiration date is updated and program updates are downloaded. Your virus protection will remain active, and your computer will be secure. If you renew before your expiration date, your new expiration date will not take effect until your original expiration date passes. If more than 24 hours pass and the subscription is still showing as not updated, activate your application again with your Activation key.
+How do I add, subtract, or combine my previous subscriptions before renewing?
+Contact your local ESET partner for more details. Our Sales Support team will be happy to assist you. Subscription modifications are allowed within 30 days of your initial purchase or 90 days of your renewal date. Use our contact page for further assistance.
+I downloaded the 32-bit version, but my computer requires the 64-bit version. Can I re-download my application?
+Yes, you can re-download as many times as necessary. We recommend that you download ESET applications from the ESET HOME portal. This way, you download the ESET application already activated and with the correct version for your device. Also, note that 32-bit version of ESET applications is not supported on Windows 11.
+Determine which version your computer requires.
+Download your application.
+I installed the wrong application or version. What should I do?
+Change your ESET Windows home application
+Uninstall or reinstall ESET home or small office applications for Windows
+Uninstall ESET Cyber Security and then reinstall ESET Cyber Security
+I purchased a subscription for more devices. How many seats do I have left?
+You can view and manage your subscriptions after you log into an ESET HOME online account. Our update servers will only notify you when you attempt to update more devices than you have been allotted (you will get an error while updating).
+What is ESET HOME?
+ESET HOME is a service that enables you to download, activate, and manage your ESET subscriptions and protection of your devices from one location. Visit the ESET HOME Online Help for detailed instructions.
+What do I do if I receive the notification "Activation failed – Overused subscription"?
+Troubleshoot the Overused subscription notification.
+Can I use the same subscription to change to a different ESET Windows/macOS home application with additional features?
+Yes. If the ESET Windows/macOS home application subscription qualifies for an application with more features, "Your subscription allows you to install an application with more features" will be displayed after installation. The user can accept the application change or stay on the current application. The user can also change to a application with more features at any time.
+My subscription has been suspended. What does it mean?
+If you receive a "Your subscription is suspended" alert in your ESET Windows/macOS home application, your application will stop receiving updates. Resolve the Subscription suspended notification via payment details update. Contact your reseller if you are not connected to the ESET HOME portal.
+Do I need to have free seats to install ESET Password Manager?
+No, installing ESET Password Manager does not consume seats. Each user needs to have a separate Password Store. The number of Password Store accounts you can create in ESET Password Manager equals the number of seats issued to your ESET subscription. Visit the ESET Password Manager getting started guide for more information.
+ESET Password Manager is discontinuing
+ESET will discontinue Password Manager. The End of Sales date was October 21, 2025. After this date, customers cannot purchase a new subscription with ESET Password Manager, and there will be no replacement app from ESET.
+The End of Life date for ESET Password Manager is October 18, 2027. After this date, Password Manager will stop working, and all data will be deleted.
+For more information, see the ESET End of Life announcement.
+To keep your data, export your saved passwords and import them into another password manager of your choice.
+Do I need to have free seats to install ESET VPN?
+No, installing ESET VPN does not consume seats. Each user needs to have a separate profile. The number of VPN profiles you can create equals the number of seats issued to your ESET subscription. See Virtual Private Networks (VPNs)—What are they and does ESET offer one? for more information.
+Do I need an ESET HOME account to manage my subscription?
+Yes, an ESET HOME account is mandatory for all subscriptions purchased after November 15, 2023.
+I want to add ESET VPN to my subscription. How do I do it?
+Currently, you cannot purchase ESET VPN as a standalone application, as it is an exclusive feature included in ESET HOME Security Ultimate, ESET HOME Security Premium, and ESET Small Business Security subscriptions. To use ESET VPN, you need to upgrade to an ESET subscription that includes ESET VPN. If you want to add a VPN for only one device, we recommend purchasing an ESET HOME Security Premium subscription (one seat) for that device.
+I want to upgrade only one device to ESET HOME Security Ultimate. Is that possible?
+It is not possible to purchase ESET HOME Security Ultimate for only one device. The minimum number of seats for the ESET HOME Security Ultimate is 5. Read more about ESET subscription upgrades.
+I upgraded my ESET subscription to a higher one. Will my applications be automatically updated, or do I need to take action?
+Your current ESET applications will display a notification about the subscription upgrade. Click Restart the application to upgrade (recommended). Your ESET application will restart (this will not restart your device), and the application with the most security features will be installed. You can change your ESET application anytime after the upgrade. Read more about ESET subscription upgrades.
+I want to add Identity Protection to my subscription. How do I do it?
+Currently, you cannot purchase ESET Identity Protection as a standalone application, as it is an exclusive feature that is included in ESET HOME Security Ultimate subscription. To use ESET Identity Protection, you need to upgrade to ESET HOME Security Ultimate subscription. Read more about ESET HOME Security Ultimate tier availability.
+I want to upgrade my ESET subscription to a higher one, but my current subscription is valid for several more months. Can I do it? Is the payment pro-rated? What will be the validity of my new subscription?
+When you upgrade your ESET HOME Security subscription, the cost is prorated, charging you only for the remaining period at the new plan's rate. The price adjusts based on your current subscription's remaining time and the new plan's cost. The new subscription starts immediately after the upgrade and lasts for its full duration. Read more about ESET subscription upgrades.
+Where can I download an invoice for my ESET subscription?
+Your ESET subscription invoice is in the email you received from ESET after your purchase. If you cannot locate your invoice, contact ESET Sales Support. Note that subscription invoices are not stored or generated in the ESET eStore or ESET HOME.
+English
+Bahasa Indonesia
+Česky
+Dansk
+Deutsch
+Eesti
+Español
+Français
+Italiano
+Latviešu
+Lietuvių
+Magyar
+Nederlands
+Norsk (bokmål)
+Polski
+Português
+Română
+Slovenščina
+Slovenský
+Suomi
+Svenska
+Türkçe
+Ελληνικά Greek
+Български Bulgarian
+Русский Russian
+Українська мова
+日本語 Japanese
+简体字 simplified Chinese
+한국어 Korean
+Last Updated: Nov 3, 2026
+Related articles:
+ESET PROTECT protection tiers
+Subscription FAQ (business users)
+Additional resources
+User guides
+ESET Forum
+YouTube videos
+ESET Support News
+ESET Customer Advisories
+ESET Status Portal
+ESET Technical Support
+Existing customer?
+Contact
+Privacy
+Legal information
+Report vulnerabilities
+Sitemap
+Manage cookies
+© 1992 - 2026 ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET North America. All other names and brands are registered trademarks of their respective companies.

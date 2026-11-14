@@ -1,0 +1,110 @@
+url: https://support.eset.com/en/kb6205-manage-auto-pay-settings-for-your-eset-licenses-us-and-canada-customers-only
+method: fetch
+saved: 2026-11-13
+
+[KB6205] Manage auto-renewal settings for your ESET subscriptions
+Apps and Tools
+Application Agnostic
+ESET eStore
+KB6205
+[KB6205] Manage auto-renewal settings for your ESET subscriptions
+Issue
+Activate auto-renewal
+Disable auto-renewal
+FAQ
+eStore link by country
+Solution
+Subscription distributor
+For specific ESET subscriptions, you must contact your subscription distributor to manage the auto-renewal settings.
+Activate auto-renewal
+Auto-renewal is activated by default on recently purchased subscriptions from the ESET eStore. To view or change auto-renewal settings for your subscriptions, verify your email address on the ESET eStore.
+Disable auto-renewal
+Log in to the ESET eStore using your Activation Key or Public ID.
+Click Subscription Management in the top left corner of the web page.
+Click Verify with your email. You cannot turn off the Auto-renewal without verification.
+Click Send. The authentication link will be sent to your email address.
+Open the verification email and click Verify email.
+On the eStore web page in the Payment details section, click the toggle next to Auto-renewal to disable the feature.
+The auto-renewal dialog window will notify you about the action. Select the check box next to Do not renewal my subscription automatically. I would prefer to renew my subscription manually when it expires and click Save Settings.
+Click OK to confirm the opt-out of auto-renewal.
+FAQ
+What is auto-renewal?
+ESET auto-renewal ensures your ESET subscriptions and applications are always up to date, providing year-round protection. We handle the billing and renewal for you using auto-renewal.
+At the end of your subscription period, your subscription will automatically be renewed using the payment details currently on file and standard subscription pricing
+We will inform you about auto-renewal 30 days before your renewal date (for annual subscriptions)
+Following your successful auto-renewal, we will email you the transaction details and invoice
+Auto-renewal is continuous unless disabled via the ESET eStore
+What is the auto-renewal agreement?
+The auto-renewal agreement is available on screen in the ESET eStore as you complete your purchase.
+Will I receive a notification before ESET renews my subscription?
+Yes. Before your security subscription expires, ESET will email you that your subscription will be automatically renewed using the auto-renewal details we have on file.
+How do I update my eStore credit card information?
+Update your eStore credit card information.
+How do I update my eStore account information?
+Update your eStore account information.
+How do I manage auto-renewal settings in ESET HOME?
+For details on how to manage auto-renewal settings in ESET HOME, view the Online Help topic.
+Are there additional support resources?
+See the ESET Subscription FAQ for additional questions about ESET application subscriptions. Need further assistance? Contact ESET Technical Support.
+eStore link by country
+Click the appropriate country link to log in and manage your ESET subscription settings for your country.
+United States
+Canada
+United Kingdom
+Australia
+Switzerland
+Singapore
+Norway
+Denmark
+Sweden
+Finland
+English
+Bahasa Indonesia
+Česky
+Dansk
+Deutsch
+Eesti
+Español
+Français
+Italiano
+Latviešu
+Lietuvių
+Magyar
+Nederlands
+Norsk (bokmål)
+Polski
+Português
+Română
+Slovenščina
+Slovenský
+Suomi
+Svenska
+Türkçe
+Ελληνικά Greek
+Български Bulgarian
+Русский Russian
+Українська мова
+日本語 Japanese
+简体字 simplified Chinese
+한국어 Korean
+Last Updated: Oct 18, 2026
+Related articles:
+What to do after renewing your subscription for your ESET Windows home or small office product
+Renew your ESET subscription
+Update credit card and contact information for your ESET subscriptions in ESET eStore
+Additional resources
+User guides
+ESET Forum
+YouTube videos
+ESET Support News
+ESET Customer Advisories
+ESET Status Portal
+ESET Technical Support
+Existing customer?
+Contact
+Privacy
+Legal information
+Report vulnerabilities
+Sitemap
+Manage cookies
+© 1992 - 2026 ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET North America. All other names and brands are registered trademarks of their respective companies.
