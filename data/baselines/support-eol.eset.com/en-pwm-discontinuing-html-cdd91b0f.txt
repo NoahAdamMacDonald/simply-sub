@@ -1,0 +1,52 @@
+url: https://support-eol.eset.com/en/pwm_discontinuing.html
+method: fetch
+saved: 2026-11-13
+
+ESET Password Manager is discontinuing | ESET End of Life
+For home
+For business
+Support
+Free download
+Language:
+en
+ESET End of Life > Applications to be terminated > ESET Password Manager is discontinuing
+ESET Password Manager is discontinuing
+ESET is discontinuing Password Manager. On October 21, 2025, ESET stopped selling Password Manager. After October 21, 2025, you cannot purchase a new subscription that includes Password Manager. ESET will not release a replacement app.
+The End of Life date for Password Manager is October 18, 2027. After this date, Password Manager will stop working and all data will be deleted.
+After October 18, 2027, you cannot log in to Password Manager or open your data. The app will no longer be available on mobile apps and extensions stores.
+What you must do
+1.Log in to ESET HOME.
+2.In the Subscriptions, find the subscription that includes Password Manager.
+3.Find your last day to use Password Manager.
+4.Before your last usage date, export ESET Password Manager passwords.
+How Your Subscription is Affected
+If you activated Password Manager, you can use it until your current subscription period ends. Any changes to the subscription after October 21, 2025—such as upgrading, downgrading, enlarging, or downsizing—will prevent new Password Manager activations.
+If you activated your subscription after October 21, 2025, your subscription does not include Password Manager, and Password Manager is not visible in ESET applications or ESET HOME.
+Details for Annual Subscription Customers
+If you activated your annual subscription before October 21, 2025, you can activate and use Password Manager until the end of your current subscription period.
+If your annual subscription renews after the End of Sale date (October 21, 2025), Password Manager will not be included in the renewal. You will retain access only until your current subscription expiration date, plus a 14-day grace period to export your data. After that, the feature will be removed.
+If your first annual subscription renewal occurs after the End of Life date, October 18, 2027, Password Manager will remain available until October 18, 2027.
+Details for Monthly Subscription Customers
+Users with a monthly auto-renewal subscription had access to Password Manager until December 5, 2025.
+Last updated: October 21, 2026
+Additional resources
+User Guides
+ESET Forum
+YouTube videos
+Need further assistance?
+Contact ESET Technical Support
+More Information
+Support News
+Customer Advisories
+Contact
+Report Vulnerabilities
+Cookie Policy
+Manage cookies
+Sitemap
+© ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET North America. All other names and brands are registered trademarks of their respective companies.
+Contact
+Report Vulnerabilities
+Cookie Policy
+Manage cookies
+Sitemap
+© ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET North America. All other names and brands are registered trademarks of their respective companies.

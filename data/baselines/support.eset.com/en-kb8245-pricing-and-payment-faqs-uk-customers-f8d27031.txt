@@ -1,0 +1,94 @@
+url: https://support.eset.com/en/kb8245-pricing-and-payment-faqs-uk-customers
+method: fetch
+saved: 2026-11-13
+
+[KB8245] Subscription pricing and payment (UK customers)
+Apps and Tools
+Application Agnostic
+ESET eStore
+KB8245
+[KB8245] Subscription pricing and payment (UK customers)
+Issue
+How do I renew my subscription?
+What is an automatic renewal (auto-renewal)?
+How do I cancel the auto-renewal of my subscription?
+I want to protect additional devices through my subscription
+Email verification and subscription key login – why is this needed?
+How do I update my contact or payment details?
+What is 3D Secure and why is it required?
+Solution
+UK customers
+This Knowledgebase article is primarily intended for UK customers. Some links may lead to UK-specific websites that might not be accessible in your country.
+However, the described procedures generally apply to all customers. Some options may vary depending on your country or subscription type.
+How do I renew my subscription?
+Follow these instructions to renew your ESET subscription.
+What is an automatic renewal (auto-renewal)?
+ESET auto-renewal ensures that your ESET subscriptions and applications are always up to date, providing continuous, year-round protection. ESET handles the billing and renewal for you using auto-renew, and you will be entitled to special renewal pricing.
+By enabling auto-renewal, you agree that at the end of your subscription period, ESET will automatically renew your subscription using the payment details currently on file. See the auto-renewal policy for the UK for more details.
+ESET will inform you about the upcoming auto-renewal and the renewal prices 30 days before your renewal date (for annual subscriptions). After your subscription automatically renews, ESET will email you the transaction details.
+See how to manage auto-renewal settings for your ESET subscriptions.
+How do I cancel the auto-renewal of my subscription
+Follow these instructions on how to cancel the auto-renewal of your ESET subscription.
+I want to protect additional devices with my subscription
+If you are a customer of ESET consumer solutions, you can manage your subscriptions and devices in ESET HOME. See the detailed instructions about using ESET HOME.
+Follow these steps to purchase additional devices for your subscriptions:
+Log in to ESET eStore account using your Activation key (XXXX-XXXX-XXXX-XXXX-XXXX) or Public ID (XXX-XXX-XXX).
+In the Subscription details section, click Enlarge to add additional devices. The original expiration date will not be changed.|
+Adjust the number of devices you would like to cover. ESET eStore will maintain the same expiry date and calculate the prorated price for your extra devices. Click Update now or Upgrade now.
+Click Proceed to checkout and complete your purchase. Your subscription is automatically enlarged and updated, and no changes are required to existing computers.
+Log in to your ESET HOME account, download your ESET security applications and install it on the new computers.
+If these options are not present in your account, it is likely that your subscription has already expired. If this is the case, we recommend purchasing a new subscription or contacting ESET Support.
+Email verification and subscription key login – why is it needed?
+If you use your Public ID (XXX-XXX-XXX) to access your ESET eStore account, only certain actions are available and you will need to verify your email address.
+For full access to your ESET eStore account, log in using your 20-digit Activation key (XXXX-XXXX-XXXX-XXXX).
+See how to log into the ESET eStore account as a verified user.
+How do I update my contact or payment details?
+Follow the instructions on how to manage account and credit card information for your ESET subscriptions.
+What is 3D Secure and why is it required?
+3D Secure/3D Secure 2 is an extra layer of payment protection on the ESET eStore. If your card issuer supports 3DS, you will be asked to complete an extra authentication step with your card issuer when making an online payment.
+Typically, you will be redirected to your bank’s website or a mobile application where you type in a password or a code sent to your mobile phone to verify the payment. This helps protect you from fraud and makes payments more secure.
+English
+Bahasa Indonesia
+Česky
+Dansk
+Deutsch
+Eesti
+Español
+Français
+Italiano
+Latviešu
+Lietuvių
+Magyar
+Nederlands
+Norsk (bokmål)
+Polski
+Português
+Română
+Slovenščina
+Suomi
+Svenska
+Türkçe
+Ελληνικά Greek
+Български Bulgarian
+Русский Russian
+Українська мова
+日本語 Japanese
+简体字 simplified Chinese
+한국어 Korean
+Last Updated: Nov 10, 2026
+Additional resources
+User guides
+ESET Forum
+YouTube videos
+ESET Support News
+ESET Customer Advisories
+ESET Status Portal
+ESET Technical Support
+Existing customer?
+Contact
+Privacy
+Legal information
+Report vulnerabilities
+Sitemap
+Manage cookies
+© 1992 - 2026 ESET, spol. s r.o. - All rights reserved. Trademarks used therein are trademarks or registered trademarks of ESET, spol. s r.o. or ESET North America. All other names and brands are registered trademarks of their respective companies.
