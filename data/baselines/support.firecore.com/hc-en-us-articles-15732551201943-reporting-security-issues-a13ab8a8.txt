@@ -1,0 +1,76 @@
+url: https://support.firecore.com/hc/en-us/articles/15732551201943-Reporting-Security-Issues
+method: fetch
+saved: 2026-11-13
+
+Reporting Security Issues – Firecore Support
+Skip to main content
+Toggle navigation menu
+Home
+Community
+Submit a request
+Sign in
+Firecore Support
+Search
+Reporting Security Issues
+Updated
+May 06, 2026 14:02
+Bug Bounty Policy
+At Firecore, we prioritize maintaining a high level of security in all of our products. In order to enhance their overall security, we warmly welcome individuals who discover potential security risks or data leaks to disclose them in a responsible way to our team.
+When reporting issues, please following the guidelines below.
+Access and expose only your own data
+If unintended access or exposure of other data occurs, promptly report it to us. Do not attempt further exploitation at this point
+Avoid tools and techniques that might degrade service quality for other users
+Keep vulnerabilities strictly confidential and disclose them solely to Firecore
+Areas of Interest
+While we value each and every submission, many submissions tend to be trivial and have minimal impact on the security of Firecore's services and our users. However, we are particularly interested in the following:
+Remote code execution in our client applications or cloud infrastructure
+Privilege escalation attacks against our cloud infrastructure
+Authentication attacks
+Cross-site scripting (XSS)
+Cross-site request forgery (CSRF/XSRF)
+Please be aware that the rewards program does not cover the following types of submissions:
+Denial of Service vulnerabilities (DoS)
+Inadequate handling of cookies
+Security flaws discovered in third-party websites and software that are used by Firecore services
+Attempts to send malicious files or links to other individuals
+Instances of spam, phishing, or the utilization of social engineering tactics
+Reproducibility
+In order to qualify for any kind of reward, our engineers have to be able to reproduce the problem. So, please be explicit in your report, as doing so will save time for all parties involved.
+Rewards
+We are thankful to those who responsibly disclose any exploits or vulnerabilities in accordance with the aforementioned guidelines, as their assistance helps us enhance the security of our customers' data.
+It should be noted that our reward program is discretionary and Firecore reserves the right to alter or terminate the policy as deemed necessary.
+Please note that rewards will only be granted for unknown vulnerabilities; issues already known, either through internal assessment or external reports, will not be eligible for compensation.
+We are pleased to provide a complimentary lifetime subscription to Infuse Pro for all eligible reports. In the event that you are already a licensed user of Infuse Pro, or if you do not use Infuse, we will offer you the corresponding cash equivalent.
+How to Submit Your Report
+To report a potential security issue to Firecore, please follow these steps:
+Send us a secure message
+Ensure that your report includes essential information, such as the platform, app version, required exploit conditions, a description supported by proof of concept or exploit code, the potential impact if exploited, and any relevant attachments.
+Please refrain from contacting individual employees directly
+Only submissions made through the designated form will be eligible for rewards
+If we have any questions related to the report, we’ll be sure to let you know. We appreciate your assistance in improving the overall security of our service.
+Share this article
+Was this article helpful?
+Yes
+No
+3 out of 5 found this helpful
+Have more questions? Submit a request
+Related articles
+API for Third-Party Apps & Services
+Connection Info for Emby, Jellyfin, and Plex
+Purchases and Family Sharing
+Upgrade to Infuse 8
+Submitting Diagnostic Logs
+0">
+Home
+English (United States)
+Dansk
+Deutsch
+Español
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Русский
+简体中文
+繁體中文

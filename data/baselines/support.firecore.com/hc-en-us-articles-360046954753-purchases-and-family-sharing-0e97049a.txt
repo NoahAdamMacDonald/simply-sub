@@ -1,0 +1,77 @@
+url: https://support.firecore.com/hc/en-us/articles/360046954753-Purchases-and-Family-Sharing
+method: browser
+saved: 2026-11-13
+
+Skip to main content
+Home
+Community
+Submit a request
+Sign in
+Infuse
+Search
+Purchases and Family Sharing
+Updated 6 months ago
+In this article
+Family Sharing
+Upgrading From Older Versions
+Infuse Pro is available as a subscription (Monthly or Yearly) or as a one-time purchase (Lifetime). All future updates (even major releases like v9, v10. v42, etc…) are included with all in-app purchase options.
+Download Infuse 8 (free w/ optional in-app purchase)
+Family Sharing
+Family Sharing is supported for both in-app purchases and subscriptions. Learn more about Family Sharing
+Tips for Family Sharing
+Accounts must be in the same App Store region
+Family members have been added to Family Sharing with Purchase Sharing enabled (Note: Both the account sharing the purchase and the account using the purchase need to activate Purchase Sharing)
+For subscriptions, ensure sharing has been enabled in the Infuse subscription page (App Store > Subscriptions > Infuse)
+Tap the Restore button on the purchase prompt (if it appears)
+In some cases it may be necessary to delete and re-download the app from the main family member’s list of Purchased apps in the App Store.
+Alternative option for Family Sharing via Trakt (can be used between App Store regions)
+Log into Trakt on the purchaser’s device in Infuse’s Settings menu (Note: On iOS/macOS, look for the orange Trakt icon in the upper right corner of the Settings menu).
+Log into the same Trakt account on other devices
+Notes for Trakt sharing
+A single purchase can be shared with up to 10 devices
+At least one device must remain logged in to the App Store account which was originally used to purchase the Pro license
+If the device count exceeds 10 sharing may become disabled for a period of time
+Upgrading From Older Versions
+Legacy users are eligible for special pricing when upgrading. Learn more
+Share this article
+Was this article helpful?
+Yes
+No
+146 out of 390 found this helpful
+Have more questions? Submit a request
+Related articles
+Upgrade to Infuse 8
+How Do I Gift a Pro Subscription?
+What is Infuse?
+Streaming from Plex, Emby, and Jellyfin
+Trakt Sync
+Recently viewed articles
+Settings Overview
+Reporting Security Issues
+iCloud Sync
+Infuse
+Getting Started
+What is Infuse?
+Quick Start Guide
+Purchases and Family Sharing
+Upgrade to Infuse 8
+Restoring Pro Subscriptions
+Settings Overview
+Installing and Updating Infuse
+How Do I Gift a Pro Subscription?
+Infuse for Enterprise
+Streaming & Network
+Metadata & Artwork
+Using the Library
+Keeping Things in Sync
+Local Videos
+Playing Videos
+For Developers
+Troubleshooting
+Legacy
+Didn't find what you need?
+Our friendly customer support team is here to help.
+Submit a request
+Home
+English (United States)
+Return to top

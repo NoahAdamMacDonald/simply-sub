@@ -1,0 +1,273 @@
+url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-antivirus-faq
+method: browser
+saved: 2026-11-13
+
+Home Support
+Log in to AVG Account
+< Back
+AVG Internet Security and AVG AntiVirus - FAQs
+Applies to AVG Internet Security, AVG AntiVirus
+show details
+Products:
+AVG Internet Security
+AVG AntiVirus
+Operating systems:
+Windows and macOS
+EXPAND ALL
+NOTE:This article applies to AVG Internet Security and AVG AntiVirus for Windows and Mac. To learn about AVG AntiVirus for Android, refer to the following article: AVG AntiVirus for Android - FAQs.
+Your device:
+WINDOWS PC
+MAC
+General
+What is AVG AntiVirus Free?
+AVG AntiVirus Free is a security application that helps protect your devices from viruses, malware, phishing, and other threats.
+AVG AntiVirus Free includes the free features listed below.
+What is AVG Internet Security?
+AVG Internet Security is an application that helps protect your devices from viruses, malware, phishing, and other threats. It scans your online mailboxes for suspicious emails, as well as control which IP addresses can remotely access your PC and helps block all other connection attempts.
+AVG Internet Security includes all of the free features that are included in AVG AntiVirus Free, as well as the premium features listed below.
+NOTE:AVG Secure VPN and AVG TuneUp appear in the AVG Internet Security app but require separate, paid subscriptions.
+What is AVG Internet Security (Multi-Device)?
+AVG Internet Security (Multi-Device) comes with all the features included in AVG Internet Security (single-device), and additionally includes AVG AntiVirus PRO for Android, AVG Internet Security for Mac, and AVG Mobile Security for iOS for use on up to 10 devices simultaneously.
+Does my PC's performance slow down during an AVG scan?
+AVG AntiVirus Free comes with several predefined scans as well as the option to create your own custom scans. Generally, running a scan does not noticeably affect system performance. However, performance may be affected somewhat depending on your system configurations, especially if you execute multiple scans simultaneously.
+Download and Installation
+What are the system requirements for AVG Internet Security and AVG AntiVirus?
+For detailed information on system requirements for AVG Internet Security and AVG Free AntiVirus, refer to the following article: System requirements for AVG applications.
+IMPORTANT:AVG Antivirus is not supported (is not compatible, cannot be installed, and will not run) on DOS, Microsoft Windows editions earlier than Windows 7, Microsoft Windows Server operating systems, or any others not specified as supported.
+How do I download and install AVG Internet Security or AVG AntiVirus?
+Download your AVG Antivirus app using the direct links below:
+AVG Internet Security | AVG AntiVirus Free
+For detailed installation instructions, refer to the relevant article below:
+AVG Internet Security | AVG AntiVirus Free
+How do I update my AVG Antivirus application to the latest version?
+For detailed instructions to update AVG Antivirus to the latest application version, refer to the following article:
+Updating AVG Antivirus
+Subscription and Activation
+How do I activate AVG Internet Security or AVG AntiVirus Free?
+For detailed instructions to activate AVG Internet Security, refer to the following article:
+Activating AVG Internet Security
+AVG AntiVirus Free automatically activates after installation. However, after 12 months, the application may prompt you to renew the activation. To continue using AVG AntiVirus Free, refer to the following article for instructions:
+Activating AVG AntiVirus Free on Windows
+What should I do if activation is unsuccessful?
+If you experience activation issues using an activation code:
+Ensure you have correctly entered your activation code, including hyphens.
+Use our webform or your AVG Account to retrieve a copy of your activation code, then try activating the app again.
+If you experience activation issues using your AVG Account:
+Ensure that you are entering the credentials for the AVG Account that is linked to your AVG Internet Security subscription. To verify this, sign in to your AVG Account in your web browser and click the Subscriptions tile to see a list of the linked subscriptions.
+In some cases, subscription synchronization may take up to 24 hours after purchase. If your subscription is still not active after this time, refer to the following article:
+Troubleshooting activation issues in AVG applications
+If the issue persists, contact AVG Support.
+Where do I find my activation codes?
+You can always find your current activation codes in your AVG Account. For more information, refer to the following article:
+Retrieving an activation code from your AVG Account
+Can I transfer a subscription to another device?
+Yes. You can activate an AVG Internet Security (Multi-Device) subscription on up to 10 devices simultaneously on Windows, Mac, Android, and iOS.
+You can activate an AVG Internet Security (Single-Device) subscription on one device at a time, and transfer this subscription to another device on the same platform. For detailed instructions, refer to the following article:
+Transferring an AVG subscription to another device
+Check your AVG Account or an order confirmation email to confirm which subscription type you purchased.
+Can I use my subscription on multiple devices?
+An AVG Internet Security (Single-Device) subscription provides protection on one device. The following AVG Internet Security (Single-Device) subscriptions are available:
+AVG Internet Security (for PC)
+AVG Internet Security (for Mac)
+AVG AntiVirus Pro (for Android)
+AVG Mobile Security Pro (for iOS)
+An AVG Internet Security (Multi-Device) subscription protects up to 10 devices on Windows, Mac, Android, and iOS, and allows you to freely transfer your subscription from one device or platform to another.
+How do I activate AVG Internet Security (Multi-Device) on another platform?
+For detailed instructions, refer to the following articles:
+Activating AVG Internet Security on Windows and Mac
+Activating AVG AntiVirus Pro on Android
+Activating AVG Mobile Security Pro on iOS
+How do I know when my subscription expires?
+Open AVG Internet Security and go to ☰ Menu ▸ My Subscription. The duration of your subscription is listed under My subscriptions.
+How can I cancel the renewal for my subscription?
+For information about canceling an AVG subscription, refer to the following article:
+Canceling an AVG subscription - FAQs
+How do I request a refund?
+For more information about the AVG refund policy and for instructions on how to request a refund, refer to the following article:
+Requesting a refund for an AVG subscription
+Free Features
+What is Smart Scan?
+Smart Scan is a comprehensive scan that detects the following:
+Viruses: Files containing malicious code that may impact the security and performance of your PC.
+Vulnerable software: Out-of-date software that hackers can use to access your system.
+Bad browser add-ons: Browser extensions that are usually installed without your knowledge and affect the performance of your system.
+Poor search engines: Default search providers that may offer poor search results or endanger your privacy.
+Network issues: Vulnerabilities in your network that may lead to attacks on your router and network devices.
+Performance issues: Items such as junk files, unnecessary applications, or settings issues that may interfere with the operation of your PC.
+For more information, refer to the following article:
+Running a Smart Scan in AVG AntiVirus
+What are Core Shields?
+Core Shields are the main protection components in AVG Antivirus. By default, all Core Shields are enabled to provide optimal protection. The Core Shields are comprised of the following shields:
+File Shield: Scans programs and files saved on your PC for malicious threats in real-time before allowing them to be opened, run, modified, or saved. If malware is detected, File Shield prevents the program or file from infecting your PC.
+Behavior Shield: Monitors all processes on your PC in real-time for suspicious behavior that may indicate the presence of malicious code. Behavior Shield works by detecting and blocking suspicious files based on their similarity to other known threats, even if the files are not yet added to the virus definitions database.
+Web Shield: Scans data that is transferred when you browse the internet in real-time to prevent malware, such as malicious scripts, from being downloaded and run on your PC.
+Email Shield: Scans your incoming and outgoing email messages in real-time for malicious content such as viruses. Scanning applies only to messages sent or received using a mail management software (email clients, such as Microsoft Outlook or Mozilla Thunderbird). If you access your web-based email account via an internet browser, your PC is protected by other AVG shields.
+What is Quarantine?
+Quarantine is an isolated space where you can safely store potentially dangerous files, or send them to the AVG Threat Labs for analysis. Files in Quarantine cannot run or access your system and data, so any malicious code contained within a file should be unable to harm your PC.
+For more information, refer to the following article:
+Quarantine - Getting Started
+What is CyberCapture?
+CyberCapture is a feature that detects and analyzes rare, suspicious files. If you attempt to run such a file, CyberCapture locks the file from your PC and sends it to the AVG Threat Lab where it is analyzed in a safe, virtual environment.
+For more information, refer to the following articles:
+CyberCapture - FAQs
+Managing CyberCapture in AVG AntiVirus
+What is Rescue Disk?
+Rescue Disk is a feature that allows you to create a bootable version of the AVG AntiVirus scanner on a USB or CD.
+For more information, refer to the following article:
+Scanning your PC for viruses using Rescue Disk in AVG AntiVirus
+What is Network Inspector?
+Network Inspector scans your network for vulnerabilities and identifies potential security issues that may leave you vulnerable to threats. This feature checks the status of your network, devices connected to the network, and router settings. Network Inspector helps you secure your network to prevent attackers from accessing it and misusing your personal data.
+For more information, refer to the following articles:
+Network Inspector - FAQs
+Network Inspector - Getting Started
+What is Ransomware Protection?
+Ransomware Protection helps secure your personal photos, documents, and files from being modified, deleted, or encrypted by ransomware attacks. This feature is designed to scan for and automatically secure folders which may contain personal data.
+For more information about Ransomware Protection, refer to the following articles:
+Ransomware Protection - Getting Started
+Ransomware Protection - FAQs
+What is Enhanced Firewall?
+Enhanced Firewall monitors all network traffic between your PC and the outside world to protect you from unauthorized communication and intrusions. Enhanced Firewall helps prevent sensitive data from leaving your PC and helps block attempted intrusions by hackers. You can also set the application rules to control network and internet communication for specific software applications.
+For more information about Enhanced Firewall, refer to the following articles:
+AVG Enhanced Firewall - Getting Started
+AVG Enhanced Firewall - FAQs
+What is Hack Alerts?
+Hack Alerts continuously monitors the dark web and warns you if your login credentials have been leaked online. The dark web is a more private part of the internet that can only be accessed with an anonymizing network like the Tor browser. The privacy offered by the dark web makes it the ideal environment for criminals to illegally buy and sell leaked personal information.
+To start using Hack Alerts:
+Open AVG Antivirus and select Web & Email.
+Click Open on the Hack Alerts tile.
+Click Protect my accounts.
+Enter your AVG Account credentials and click Continue.
+TIP:An AVG Account was created using the email address that you provided during the subscription purchase. To sign into your AVG Account for the first time, refer to the following article: Activating an AVG Account.
+AVG is now monitoring for leaks involving online accounts that are linked with the email address you provided.
+What is Do Not Disturb Mode?
+Do Not Disturb Mode works to silence unnecessary notifications while you run almost any application in fullscreen. Each time you open an application in fullscreen, Do Not Disturb Mode automatically detects it and adds it to a list of applications. When you run applications from this list of entries, Do Not Disturb Mode automatically launches to silence notifications from Windows, AVG, and other applications. In the Do Not Disturb Mode applications list, you can also click the … More options (three dots) next to any application and tick the Maximize performance box, which allows the application to run at highest priority and boost the performance of your PC.
+For more information about Do Not Disturb Mode, refer to the following articles:
+Do Not Disturb Mode - Getting Started
+Do Not Disturb Mode - FAQs
+What is the AVG Online Security browser extension?
+The AVG Online Security browser extension helps protect your privacy when browsing the internet. Many websites use tracking systems to monitor visitor behavior, so they can obtain statistics and other data for marketing purposes. The AVG Online Security browser extension enables you to see details about the tracking systems used by the websites you visit, and prevent websites from tracking you.
+After installing AVG Internet Security or AVG AntiVirus Free, you need to manually enable AVG Online Security in your web browser(s). Go to ☰ Menu ▸ Browser Extensions, then click Install next to your preferred web browser and follow the on-screen instructions on how to enable the browser extension.
+For more information about enabling and using AVG Online Security, refer to the following article:
+AVG Online Security - Getting Started
+Premium Features
+What is Remote Access Shield?
+Remote Access Shield, available in AVG Internet Security, allows you to control which IP addresses are allowed to connect remotely to your PC, and block all unauthorized connection attempts.
+By default, Remote Access Shield is designed to block the following connections:
+Connections from high-risk IP addresses.
+Connections that attempt to use known vulnerabilities in Microsoft's Remote Desktop Protocol, such as BlueKeep.
+Brute-force attacks that work by repeatedly trying to log in to your system with commonly used or stolen login credentials.
+You receive a notification from AVG each time Remote Access Shield blocks a connection attempt.
+We recommend keeping Remote Access Shield enabled at all times. To ensure Remote Access Shield is enabled, click the Hacker Attacks tile on the main application screen, then click Open above Remote Access Shield and ensure the slider is green (ON).
+For more information about Remote Access Shield, refer to the following article:
+Remote Access Shield - FAQs
+What is Browser Defense?
+Browser Defense, available in AVG Internet Security, helps secure your passwords and cookies stored in your web browsers. If left unprotected, passwords stored in web browsers may be vulnerable to malware and theft by unwanted applications. Browser Defense allows you to choose which apps have access to your saved passwords. Browser Defense also blocks access to browser cookies to protect your personal and sensitive data.
+For more information, refer to the following articles:
+AVG Internet Security Browser Defense - FAQs
+AVG Internet Security Browser Defense - Getting Started
+What is Webcam Protection?
+Webcam Protection, available in AVG Internet Security, helps prevent applications and malware from accessing your PC's webcam without your consent. With Webcam Protection enabled, untrusted applications should not be able to capture images or videos, nor compromise your privacy by sending the content outside of your PC.
+For more information about Webcam Protection, refer to the following articles:
+Webcam Protection - Getting Started
+Webcam Protection - FAQs
+What is Sensitive Data Shield?
+Sensitive Data Shield, available in AVG Internet Security, scans and helps protect your sensitive personal documents against unauthorized access and malware. The files considered sensitive contain your personal information that, if revealed, can compromise your privacy and identity. Sensitive Data Shield controls which applications and users have access to your files to secure your private data.
+For more information about Sensitive Data Shield, refer to the following article:
+Sensitive Data Shield - Getting Started
+Sensitive Data Shield - FAQs
+What is Fake Website Shield?
+Fake Website Shield, available in AVG Internet Security, helps secure you against DNS (Domain Name System) hijacking, which is when a malicious program redirects you from an authentic URL to an inauthentic website to acquire sensitive information, such as usernames, passwords, and credit card details.
+Every time you enter a URL into the address bar of your browser, this URL is translated to the IP address (Internet Protocol address) of the web server where the web page that you want to access is stored. Fake Website Shield provides an encrypted connection between your web browser and AVG's own DNS server to help ensure that the displayed website is the authentic one.
+For more information about Fake Website Shield, refer to the following article:
+Fake Website Shield - FAQs
+What is Data Shredder?
+Data Shredder (previously File Shredder), available in AVG Internet Security, allows you to irreversibly erase your files or whole drives, which minimizes ways for anyone to restore and misuse your data.
+When you erase a hard drive, or delete a file using standard tools, only a reference to its data is removed from the file system. Simply deleting sensitive files, such as user data or licensed software, may not be safe, as there are tools capable of restoring deleted files. Data Shredder overwrites files with meaningless data multiple times before deleting them, which prevents data from being recovered. Data Shredder is especially useful when selling/donating your computer or hard drive.
+For more information about Data Shredder, refer to the following article:
+Data Shredder - Getting Started
+Settings
+What is Passive Mode?
+Passive Mode disables all active protection, such as shields and Enhanced Firewall, so that you can use more than one antivirus application at a time without interfering with the performance of your PC or the reliability of antivirus detections. In Passive Mode, AVG Internet Security and AVG AntiVirus Free receive all virus definition and application updates, which allows you to manually run scans to check for issues on your PC. However, AVG does not provide active protection.
+IMPORTANT:If you want AVG to actively protect you from malware and other security threats, ensure that Passive Mode is not turned on and the following conditions are met:
+All third-party antivirus programs are uninstalled.
+The main screen of AVG indicates This computer is protected.
+For detailed instructions, refer to the following article:
+Using Passive Mode in AVG AntiVirus
+Can I exclude files, folders, or websites from being scanned?
+Yes. You can exclude specific files, folders, or websites from being scanned by all AVG shields and scans. To set an exclusion:
+Go to ☰ Menu ▸ Settings ▸ General ▸ Exceptions.
+Click Add exception.
+Type a file path, folder path, or URL, then click Add exception. Alternatively, click Browse, then select a file or folder path, and click OK.
+Your specified file, folder, or website is now listed on the Exceptions screen. To remove an exception, hover your mouse over the listed exception, then click the trash can icon that appears on the right.
+For more information, refer to the following article:
+Excluding certain files or websites from scanning in AVG AntiVirus
+How can I update Virus definitions?
+AVG uses a database of known virus definitions to identify malware and other threats on your PC, so it is important to ensure virus definitions are regularly updated.
+By default, AVG updates virus definitions automatically. However, AVG cannot perform the update if you are offline. To manually check for available updates, click the refresh icon above Last updated in the bottom-left corner of the main application screen.
+How can I specify what to do with detected threats?
+Any threats detected during a scan are sent to Quarantine by default. After running a scan, you can access Quarantine from the results page. Quarantine is an isolated space where potentially dangerous files are safely stored. From Quarantine, you can also perform specific actions, such as sending suspicious files to AVG Threat Labs for analysis.
+How can I control which data I share with AVG?
+To change your personal privacy settings, follow these steps:
+Go to ☰ Menu ▸ Settings.
+Select General ▸ Personal Privacy in the left panel.
+Untick the boxes next to the privacy settings according to your preferences.
+For more information, refer to the following article:
+Managing privacy settings in AVG apps
+Troubleshooting
+How can I uninstall AVG Internet Security or AVG AntiVirus?
+For detailed instructions to uninstall your AVG Antivirus application, refer to the relevant article below according to the app:
+AVG Internet Security | AVG AntiVirus
+Can I turn off the Microsoft Windows Firewall when using the Firewall in AVG Internet Security?
+Yes. Microsoft Windows Firewall is not necessary when using the built-in firewall included in AVG Internet Security. AVG Enhanced Firewall monitors all communication between your PC and outside networks and blocks unauthorized communication. It is highly recommended to keep all AVG protection components enabled at all times for reliable PC protection.
+How can I send file logs to AVG Support about an issue?
+You can use the AVG SysInfo Tool to send file logs to AVG Support for troubleshooting common issues.
+Go to ☰ Menu ▸ Settings ▸ General ▸ Troubleshooting and click Send logs.
+For detailed steps, refer to the following article:
+Submitting a support file using AVG SysInfo
+Was this article helpful?
+Yes No
+Still looking for answers ?
+Visit our AVG Support Community or contact us here:
+Get More Help
+Struggling with non-AVG technology? We can fix that, too!
+About AVG
+Profile
+Media Center
+Policies
+Reseller Locator
+Contact Us
+Home Products
+Downloads
+Beta Downloads
+Antivirus Software
+Mobile Security
+PC Performance
+Free Mac Apps
+Virus Scanning & Malware Removal
+Free Antivirus Download
+Customer Area
+Renew or Upgrade
+Register your License
+Service activation
+Home products
+Security & Performance Tips
+Partners & Business
+Business Antivirus Software
+Partners & Resellers
+Reseller Center
+AVG CloudCare™
+AVG Managed Workplace
+Centrify Identity Service
+Partner Support
+Business Support
+Affiliates
+Connect with AVG
+Facebook
+Twitter
+Youtube
+LinkedIn
+English
+Log in to AVG Account
+Privacy | Cookies | All third party trademarks are the property of their respective owners.
+© 2026 Gen Digital Inc. All rights reserved.
+Feedback

@@ -1,0 +1,107 @@
+url: https://www.stremio.com/privacy
+method: browser
+saved: 2026-11-13
+
+HomeFeaturesAddon SDKBlogPlansDownloadsSupportLogin
+EN
+PRIVACY POLICY
+The present Privacy Policy is effective as of 30 August 2020
+1. Introduction
+At Stremio (“Stremio”, “we”, “us” or “our”) we take your privacy and the security of your information very seriously.
+This Privacy Policy (“Policy”) covers the Stremio owned and operated sites located at www.strem.io and www.stremio.com (the “Sites”) and our platform provided by Stremio (the “Platform”), including our mobile applications (“Apps” or “App”), and any services offered by Stremio (collectively, the “Services”). This Privacy Policy is available at www.stremio.com and governs your access to the Services. Unless otherwise defined herein, capitalized terms shall have the meaning assigned to such terms in the General Terms and Conditions.
+If you have any questions regarding this Policy please contact us at office@stremio.com. You can also contact our Data Protection Officer at dpo@stremio.com.
+The Policy describes the types of information we gather from Service Users, including people using our Services and from individual users (“you” or “users”) interacting with the Services, and how we use, transfer, and secure such information. By using any of the Services, you agree to be bound by this Policy. This Policy does not govern information we receive from third parties who are not Service Users. If you do not agree to the terms of this Policy, please do not use any of our Services. The new version of the Privacy Policy becomes effective from the day it is announced publicly on our Services unless stated otherwise. Each time you use our Services, the current version of this Policy will apply. This Policy is accessible within our Sites and App at Privacy Policy and available at www.stremio.com/privacy. Accordingly, when you use any of our Services, you should check the date of this Policy (which appears at the top) and review any changes since you last reviewed the Policy.
+2. Terms
+For the purposes of this Privacy Policy, the terms related to personal data used within the present document have the meanings arranged in the General Data Protection Regulation (EC) 2016/679. Any other relevant definition is coordinated with the Terms of Use, applicable for our Services.
+3. Types of Data We Collect, methods of collection
+IMPORTANT: We do not collect any history or logs of what addons/sources you use for streaming! Furthermore, if you login as a Guest User, no personal data is collected whatsoever.
+Users directly provide Us with most of the data that We collect and process.
+Data provided by you:
+Stremio collects data in order to create an account and provide access to our Services, including our Site, Platform and App. You provide us with your email address and password to create an account. These are all stored in order to create your account and provide you with the necessary access. Your email is used for account recovery purposes as well as for contacting support. Your username is your email address. Your password is stored in a secure, cryptographically hashed state.
+Log information:
+When you use our Services, some data is automatically collected. Such data could include your computer's Internet Protocol (“IP”) address, operating system, type and language, device identifier numbers, and the time and date of your use. The log information is collected to provide a stable, secure and pleasant experience for users on the Services and to ensure the performance, correctness, security and reliability of our Services.
+Customer support Data:
+Users may contact us with the purpose of providing technical support. Users may provide name, email address, further contact details and any other additional information which the user decides to disclose to us for customer support.
+Analytics data:
+Analytical data is collected in an anonymized manner and aggregated in order to improve the performance, marketing efforts and quality of our services.
+We may obtain information from other sources:
+Data collected by Third Parties:
+We may obtain information from other sources. For example, when you use your account through a social network such as Facebook and their Facebook Login feature, we will obtain access to certain information including your name, profile picture and email in accordance with the authorization procedures determined by said source.
+Other similar sources may include Google and iTunes Store in accordance with their authorization procedures. From Google and iTunes Store we collect indirect identificators such as type and version of the operational system used, time of installation of the Services, country, etc. A single indirect identificator cannot be used to identify a User but combined with other indirect identificators it may be possible to identify a User.
+All of the third party solutions we use adhere to the latest data protection laws and best practices.
+We use the personal data only for the purposes mentioned above. In case We intend to use Your personal data for a purpose other than the initial one, We shall provide the data subjects with information prior to the actions regarding the new purpose, the legal basis and the retention period.
+4. Storage and deletion of personal data
+We collect and store your personal data on the territory of the European Economic Area (EEA). We enforce any and all necessary measures to protect and guarantee the safety of the personal data if the latter is transferred in a country outside the EEA.
+Once the retention period lapses, We delete all personal data, together with any existing copies, unless the Union or Member State laws require storage of the personal data. We may hold your data for extended periods of time for the purpose of complying with legal requirements, legal requests, conducted investigations, or investigations of possible violations of our terms and policies or otherwise to prevent harm.
+We take all necessary technical and organizational measures for the proper deletion of your personal data. The personal data is deleted according to our retention schedule and technical mechanisms available from all production information systems and all backup systems.
+5. Cookies
+Cookies are small pieces of data under the form of text files, which are stored on your device. They allow recognition of the browser and storage of certain information.
+The only cookies we use are Google Analytics and Facebook Pixel which collect statistical information such as country of access and time spent on the Services. They are collected for statistical purposes, to improve the performance, marketing efforts and quality of our services.
+6. Your rights and how you can exercise them
+You have the right to:
+Request from us access to the personal data that we hold about you in a portable format.
+Withdraw your consent when it is the legal basis for collection of data.
+Request from us correction of any collected personal data. The information may include only the subject of your personal data collection.
+Receive a copy of your personal data in electronic format.
+“The right to be forgotten”- you have the right to request the deletion of your personal data at any time (the right is not absolute).
+Receive information from Us about Our activities in connection to your personal data, including the purposes of collection and storage, the period of time for storage, the methods of collecting, the presence of automated processing, etc.
+Delete your account at any time.
+Receive your data and transfer them to another controller.
+You have the right to lodge a complaint with a supervisory authority, in particular in the Member State of your habitual residence, place of work or place of the alleged infringement if you consider that there is personal data breach.
+To exercise your rights you can always contact us by sending mail at dpo@stremio.com to our Data Protection Officer (DPO), or contact us at office@stremio.com.
+For managing your account information, you can use the profile settings feature in our services. You may delete your account from the User Panel hosted at www.stremio.com.
+7. Sharing of Personal Information with Third Parties
+IMPORTANT: We do not collect any history or logs of what addons/sources you use for streaming! Furthermore, if you login as a Guest User, no personal data will be collected whatsoever.
+We do not sell, trade or otherwise share Personal Information with third parties for the marketing purposes of the third party.
+We may transfer Personal Information to third party service providers (see list below) for providing the Services. These third party service providers are not authorized to retain, share, store or use the Personal Information for any purposes other than to provide the services they have been hired to provide.
+Analytical personal data is shared with partnering third-party service providers for the purposes of improving the performance, marketing efforts and quality of our services, conducting error-monitoring to help discover and prioritize errors in real-time:
+Google Analytics
+BigQuery
+Sentry
+YouTube
+Due to the use of these third-party services, users should also be aware of the Google Privacy Policy and Sentry Privacy Policy.
+We may elect to transfer your Personal Information to third parties under special circumstances to: (i) to comply with a legal requirement, judicial proceeding, court order, or legal process served on Stremio or its affiliates solely when required under the applicable law, (ii) to investigate a possible crime, such as fraud or identity theft; (iii) in connection with the sale, purchase, merger, reorganization, liquidation or dissolution of Stremio; (iv) when we believe it is necessary to protect the rights, property, or safety of Stremio or other persons, or (v) as otherwise required or permitted by law, including any contractual obligations of Stremio.
+8. Children and Privacy
+Our services are not directed towards children and you may not use them if you have not reached full legal capacity in accordance with the legislation applicable for the corresponding country.
+We do not knowingly collect, target or allow the use of our services to persons under the age of full legal capacity.
+If you are under the age of full legal capacity, please do not use our services and do not send us any personal data. If you believe that we might have any data from or about a person under the age of full legal capacity, please contact us.
+We will delete all personal data of the above-mentioned persons for which we become aware that they do not have the necessary legal capacity.
+We shall not be held liable in case a person provides incorrect and false data for the completed years.
+9. Security and breach measures
+We undertake all necessary technological, organizational and technical measures to protect your personal data.
+We implement measures such as pseudonymisation and encryption of personal data in order to ensure a level of security which is appropriate to the risk. Some information is stored in such a form that could not be used to identify you directly. Your password is stored in a secure, cryptographically hashed state. Your personal data is stored on protected servers. Our Services have SSL certificates which represent Internet security protocols - they provide additional guarantee for the safe use of our Services.The servers and the access to your personal data is strictly controlled and limited solely to a limited number of people.
+In case of personal data breach, We will undertake every possible action in an appropriate and timely manner, to avoid any material or non-material damage to the data subjects. Breaches in the security may include identity theft, identity fraud, limitation of rights, unauthorised access to your account, loss of confidentiality of personal data, etc. We have undertaken measures to ensure the ability to restore the availability and access to personal data in a timely manner in the event of physical or technical incident. As soon as the controller becomes aware of the breach, Users and the competent authorities will be notified immediately. You may be asked to follow certain instructions for prevention of breaches including but not limited to password or username change.
+Stremio uses Google services (Google Analytics, BigQuery, YouTube), as such, the Google Security Settings should also be taken into consideration.
+10. Account Deletion
+In order to delete your Stremio account you must:
+Log in to the User Dashboard
+Scroll down to the "Delete Account" section
+Press the "DELETE ACCOUNT" button (this action cannot be undone)
+11. Supervisory authority
+If you have any questions regarding the present Policy, please connect to us through the following email addresses: office@stremio.com or dpo@stremio.com
+Google Play Store
+4.1
+44,800 reviews
+Vasilis Smyrnios
+Sep 21, 2022
+Probably the best and most useful app to have in your device. It's one of the apps I use on a daily basis especially on my Android TV for many years now. Well-made with a strong community providing useful functionalities. Well done. Keep up the good work.
+Join the party now
+Get Stremio for Free
+Information provided by
+COMPANY
+Technology
+Downloads
+Addon SDK
+Partners
+COMMUNITY
+Community
+Fanart Gallery
+Blog
+Careers
+CONTACTS
+Help center
+Business inquiries
+Terms & conditions
+Privacy policy
+This website uses cookies to ensure you get the best experience on our website. Learn more
+Got it!

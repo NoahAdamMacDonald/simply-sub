@@ -1,0 +1,138 @@
+url: https://firecore.com/infuse
+method: browser
+saved: 2026-11-13
+
+Skip to main content
+Main navigation
+Features
+Support
+Blog
+Contact
+Log in
+A player that plays it all.
+Infuse elegantly bridges the gap between your media collection and every Apple device you own. Stunning organization, effortless streaming, and playback that just works.
+LIBRARY
+Your media, beautifully organized.
+Infuse automatically fetches rich metadata, artwork, cast info, ratings, and trailers for every item in your library — from any source. Whether you're browsing locally stored files, a NAS on your network, or a cloud drive, everything looks like it belongs in the App Store.
+Powered by TMDB, Infuse keeps your library up to date with fresh posters and episode artwork as soon as new seasons air. Filter by genre, rating, resolution, or watched status. Pin favorites. Build custom collections and playlists.
+PLAYBACK
+Silky smooth. Every format. Every time.
+Infuse handles formats other players choke on — MKV, MP4, ISO, VIDEO_TS, BDMV — without transcoding. Hardware-accelerated decoding on Apple Silicon means you get butter-smooth 4K HDR playback while barely touching the battery.
+Full Dolby Vision (Profile 5 & 8), HDR10, HDR10+, and HLG support on compatible hardware. Dolby Atmos (E-AC3) passthrough available when connected to a compatible receiver. Intelligent buffering keeps playback smooth even on slower connections.
+STREAMING
+Stream from anywhere. No server required.
+Connect to a Mac, PC, or NAS over SMB, NFS, FTP, WebDAV, or media server like Emby, Jellyfin, and Plex. Or go cloud — Infuse connects directly to Dropbox, Google Drive, OneDrive, Box, and more without downloading a single file.
+Infuse Pro adds native iCloud syncing, keeping your entire library, watched statuses, and in-progress queue all in sync. One app, every source.
+“
+Looks great, plays anything you throw at it…surprisingly powerful.
+LIFEHACKER
+Amazing features come standard.
+Infuse is free to download and packed with everything you need to enjoy your media collection beautifully.
+Play everything
+Go beyond iTunes and avoid wasting hours converting or transcoding files. Infuse's powerful playback engine supports just about every video format you'll ever come across.
+Stream from anywhere
+Browse and play videos stored on a Mac, PC, NAS, media servers like Plex, Emby, Jellyfin, or cloud services like Dropbox, Google Drive, and OneDrive.
+Get organized, automagically
+Automatically download metadata and artwork for movies and TV shows in seconds, and everything will be smartly organized into categories.
+Keep it all in sync
+Use iCloud to keep metadata, library settings, and server connections in sync between all your devices.
+High-performance playback
+Silky-smooth playback of 4K (Ultra-HD) HDR and HDR10+ video with efficient hardware decoding.
+Super-easy subtitles
+Bring your own, or add subtitles in seconds with free, one-tap downloads from OpenSubtitles.
+Drag and drop transfers
+Use AirDrop, iTunes, FTP, or a plain ol' web browser to transfer videos in a snap. No cables required.
+Sync up with Trakt
+Connect with Trakt to keep tabs on what you've watched by scrobbling play history and ratings to your account.
+Skip intros & credits
+NEW
+Automatically skip intros and credits for movies and TV shows — powered by IntroDB.app and TheIntroDB.org.
+Custom collections & playlists
+Create collections and playlists of your movies, TV shows, and home videos in a snap. Shuffle and loop as you please.
+Videos on the go
+Stream from AirStash®, SanDisk® Connect, and other Wi-Fi travel drives to play content no matter where you are.
+AI video upscaling
+Advanced video upscaling allows lower resolution videos to look amazing, even on the largest screens.
+Plex, Emby, and Jellyfin
+Connect with Plex, Emby, and Jellyfin to play videos and keep your watched history and ratings in sync.
+Parental controls
+Control the types of content your little ones can access with easily configurable rating and folder controls.
+Private by design
+No ads, no tracking, and no harvesting of library info…ever! Your data is your own and we believe it should stay that way.
+Go further with Pro.
+Unlock the full Infuse experience. From 4K Dolby Vision to lossless audio and unlimited sources — Pro takes everything to the next level.
+$1.99 / month · $16.99 / year · $99.99 / lifetime
+Additional video formats
+Enjoy even more video formats and save yourself from hours and hours of file conversions.
+Lossless HD audio
+Experience studio-quality sound with support for lossless 24-bit HD audio in stunning detail.
+AirPlay & Google Cast
+Stream videos to the big screen with surround sound and subtitles via AirPlay and Google Cast.
+Dolby Vision and Atmos
+Enjoy videos in all their high-fidelity glory with Dolby Vision (Profile 5 & 8) and Dolby Atmos (E-AC3).
+Trailers
+Stream high-quality video trailers for movies and TV shows seamlessly from within the app.
+Advanced library sync
+Keep libraries, playback progress, and watched history in sync with other devices using iCloud.
+Cloud streaming
+Connect to Dropbox, Google Drive, OneDrive, Box, pCloud, Yandex.Disk, MEGA, Aliyun Drive, and more.
+Updates for life
+Get access to all future updates — even major releases like v9, v10, and beyond — with a subscription to Infuse Pro.
+Get Infuse Pro
+Free 7-day trial included. Cancel anytime.
+Technical Specifications
+Video Formats 3GP, ASF, AV1, AVI, BDMV, DivX, DVDMEDIA, DVR-MS, FLV, H.264 (AVC), H.265 (HEVC), H.266 (VVC), ISO/IMG, M4V, MKV, MOV, MP4, MPEG-1/MPEG-2, MTS/M2TS, MXF, OGM, OGV, RMVB, STRM, STRMLNK, TS, VC-1, VIDEO_TS, VOB, VP8, VP9, WebM, WMV, WTV
+Audio Formats AAC, AIFF, Dolby Digital (AC3), Dolby Digital Plus (E-AC3), Dolby TrueHD, DTS, DTS-HD MA, FLAC, MP3, Ogg, PCM, TTA, WAV, WMA
+Subtitles DVB, DVDSub, MicroDVD, MPL2, PGS, SMI, SRT, SSA/ASS, SUB, SUP, Timed Text, TMP, TXT, VobSub, VTT, XSUB
+Network Protocols SMB, NFS, FTP, FTPES, FTPS, SFTP, HTTP/HTTPS, UPnP/DLNA, WebDAV
+Media Servers Emby, Jellyfin, Plex
+Cloud Services Dropbox, Google Drive, OneDrive, Box, pCloud, Yandex.Disk, MEGA, Aliyun Drive, 123 Drive, 115 Drive, Baidu NetDisk, GuangYaPan
+Requirements iOS 18+, iPadOS 18+, tvOS 18.5+, macOS 15+, visionOS 26+
+★★★★★
+Loved around the world.
+See what people are saying on the App Store.
+★★★★★
+Movie collector/lover:
+Amazing app, upgraded to the pro version and worth every penny!
+5 months ago by ilc309
+★★★★★
+Best App
+This is the best app for this kind of function. However, don't expect to find Dolby or DTS on Apple TV (only Dolby Atmos). In any case, it's…
+1 month ago by Spins Man.
+★★★★☆
+TMDB metadata
+Please add option or toggle to include metadata of movies with Adult Status.
+5 months ago by TMDB-User
+★★★★☆
+For me the best!
+The player is excellent, and I have no complaints about its performance or design. Everything is top-notch. I use it mainly for viewing direct…
+4 days ago by Serg7700
+★★★★★
+The best app there is
+It’s must’ve been decades since I felt compelled to leave a review on the App Store. But this is one app that I have to make an exception for.…
+1 month ago by stealthm0de
+★★★★★
+Incredibly useful
+It's really useful; it would be even better if the gesture controls could be customized.
+2 months ago by 绝世大猛
+Ready to press play?
+Join the global community of users who have transformed their media experience with Infuse.
+About Firecore
+We make Infuse — an elegant video player for iPhone, iPad, Apple TV, Mac, and Vision. Infuse is built on modern technologies specifically for Apple products, and is the most powerful video player for your favorite devices.
+Infuse
+Features
+Releases
+Guides
+Press Kit
+Developers
+Resources
+Blog
+Forum
+Status
+Account
+Contact
+Subscribe
+Get the latest updates delivered to your inbox.
+Subscribe
+© 2026 Firecore, LLC. All rights reserved.
+Privacy · Terms · 简体中文

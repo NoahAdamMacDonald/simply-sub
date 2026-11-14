@@ -1,0 +1,190 @@
+url: https://support.avg.com/SupportArticleView?l=en&urlName=avg-secure-vpn-faq
+method: browser
+saved: 2026-11-13
+
+Home Support
+Log in to AVG Account
+< Back
+AVG Secure VPN - FAQs
+Applies to AVG Secure VPN
+show details
+Products:
+AVG Secure VPN
+Operating systems:
+Windows, macOS, Android, and iOS
+EXPAND ALL
+Your device:
+WINDOWS PC
+MAC
+ANDROID
+IPHONE/IPAD
+General
+What is a VPN?
+A Virtual Private Network (VPN) protects the data you upload and download by functioning as a private tunnel through the internet. It effectively anonymizes your internet activity and secures your connection when using public Wi-Fi, such as in cafes or airports.
+What is AVG Secure VPN?
+AVG Secure VPN is an application that allows you to connect to the internet via secure AVG VPN servers using an encrypted tunnel to protect your online activity from eavesdropping. AVG Secure VPN can be used any time you want to connect to the internet with extra security and privacy. This is especially recommended when you are connected to a public or unsecured wireless network.
+AVG Secure VPN mainly offers:
+Protection: When many people connect to the same public network, attackers can capture sensitive data, such as logins and passwords. The encrypted VPN connection provides efficient protection against these types of attacks.
+Anonymization: With broadband connections, many people have fixed IP addresses that can be tracked when browsing sensitive sites. With a VPN connection, the browsing session is effectively anonymized - the IP address the remote server sees is the address of the VPN server, not the user.
+Unrestricted access to the internet: When connected to a VPN server in another location, you gain access to content that may be restricted in your location. This allows you to browse freely, even from countries with web censorship.
+What's the difference between AVG Secure VPN and the VPN feature in AVG Secure Browser PRO?
+If you use both AVG Secure VPN and AVG Secure Browser PRO, you only need to enable one VPN at a time to ensure protection. Refer to the app comparison below:
+AVG Secure VPN: Includes full traffic protection, multiple secure protocols, additional VPN locations, a Kill-Switch, Auto-Connect, local device access, and private network exclusion.
+AVG Secure Browser PRO: Protects only traffic from the browser and includes the option to connect/disconnect the VPN, 30 VPN locations, a Kill-Switch, and Auto-Connect.
+Download and Installation
+What are the system requirements for AVG Secure VPN?
+For AVG Secure VPN system requirements, refer to the following article:
+System requirements for AVG applications
+How can I download and install AVG Secure VPN?
+For detailed installation instructions, refer to the following article:
+Installing AVG Secure VPN
+Can I use AVG Secure VPN without installing AVG AntiVirus?
+Yes. AVG Secure VPN is a standalone application. You do not need AVG AntiVirus Free or AVG Internet Security installed on your PC to use AVG Secure VPN.
+Is AVG Secure VPN included when I purchase AVG Internet Security?
+No. AVG Secure VPN requires a separate subscription to use. You cannot use an AVG Internet Security subscription to activate AVG Secure VPN.
+You can purchase a separate AVG Secure VPN subscription via the official AVG website. Alternatively, you can purchase an AVG subscription bundle that is valid for multiple products (such as AVG Ultimate).
+Subscription and Activation
+How do I activate an AVG Secure VPN subscription?
+For detailed activation instructions, refer to the following article:
+Activating an AVG Secure VPN subscription
+Can I use my AVG Secure VPN subscription on multiple devices?
+When you purchase an AVG Secure VPN (Multi-Device) subscription, you can activate your subscription on up to 10 devices simultaneously. You can transfer your subscription freely between devices and platforms.
+IMPORTANT:New AVG Secure VPN (Multi-Device) subscriptions purchased from the start of April 2021 are valid for 10 devices. If you purchased your AVG Secure VPN (Multi-Device) subscription before April 2021, it is valid for 5 devices during the current subscription period. When your subscription renews, it will upgrade to 10 devices.
+To check which subscription you purchased, check the order confirmation email, or your AVG Account that is linked to the email address you provided at checkout.
+How can I cancel my subscription?
+For information about canceling an AVG subscription, refer to the following article:
+Canceling an AVG subscription - FAQs
+How can I transfer my AVG Secure VPN subscription to another device?
+You can use AVG Secure VPN on the number of devices specified during purchase. If you have reached the device limit for your subscription, you can uninstall or deactivate AVG Secure VPN on a current device before installing and activating the application on a new device.
+For detailed instructions, refer to the following article:
+Transfer an AVG subscription to another device
+What should I do if activation is unsuccessful?
+Ensure that your subscription is valid for AVG Secure VPN. You cannot use an AVG Internet Security subscription to activate AVG Secure VPN.
+If activation is unsuccessful, refer to the following article for advice:
+Troubleshooting activation issues in AVG products
+Settings and Usage
+How do I start using AVG Secure VPN?
+To learn how to start using AVG Secure VPN, refer to the following article:
+AVG Secure VPN for Windows and Mac - Getting Started
+How do I know that the VPN is active and working?
+After you enable AVG Secure VPN by clicking the red OFF slider on the main application screen so that it changes to green ON, AVG Secure VPN displays the text Your online privacy is protected.
+How do I adjust AVG Secure VPN settings?
+Open AVG Secure VPN and go to ☰ Menu ▸ Settings.
+Select from the following options in the left panel:
+General: Manage notifications and startup preferences and change the language of the AVG Secure VPN user interface.
+VPN Mode: Configure how to turn on your VPN in this option.
+Advanced Settings: Configure how to activate Kill Switch, Enable local devices and VPN protocols.
+Can I ensure AVG Secure VPN enables automatically when I connect to an unsecured Wi-Fi network?
+Yes. For detailed instructions, refer to the following article:
+Enabling auto-connect in AVG Secure VPN
+What is Kill Switch?
+When Kill Switch is enabled, your internet connection is automatically blocked if AVG Secure VPN unexpectedly disconnects. This ensures that your real location is not exposed.
+How do I check which version of AVG Secure VPN I have?
+Open AVG Secure VPN and go to ☰ Menu ▸ About.
+The application version number is listed under Version.
+Connection
+Can I use AVG Secure VPN with any type of internet connection?
+Yes. AVG Secure VPN connects over any wired or wireless internet connection.
+How do I connect to a different VPN server location?
+Open AVG Secure VPN, then click Change location on the main application screen.
+Select a location from the list.
+AVG Secure VPN automatically connects to the new location you selected.
+What kind of encryption does AVG Secure VPN use?
+AVG Secure VPN uses the AES 256 bit encryption key, which is bank grade encryption. It also uses Open SSL and certificate authentication.
+What ports does AVG Secure VPN run on?
+AVG Secure VPN for Windows starts primarily with port 553 UDP and then runs on one of the ports in the range of 50 to 32767 TCP.
+Can I change the VPN protocol that AVG Secure VPN uses?
+Advanced users can customize the VPN protocol settings via ☰ Menu ▸ Settings ▸ Advanced Settings. The following options are available under VPN protocols:
+Automatic (recommended): Where possible, AVG Secure VPN connects using the OpenVPN protocol. If connection via OpenVPN fails, the application automatically switches to the Mimic protocol.
+WireGuard: AVG Secure VPN always connects using WireGuard.
+Mimic: AVG Secure VPN always connects using the Mimic protocol. This is useful in countries with restrictions on VPN use, where OpenVPN may be blocked.
+OpenVPN: AVG Secure VPN always connects using the OpenVPN protocol.
+Does AVG Secure VPN allow torrenting?
+Yes. AVG Secure VPN allows torrenting through our data center locations listed below:
+Prague, Czech Republic
+Frankfurt, Germany
+Amsterdam, Netherlands
+New York City, New York
+Miami, Florida
+Seattle, Washington
+London, United Kingdom
+Paris, France
+Troubleshooting
+How can I uninstall AVG Secure VPN?
+For detailed uninstallation instructions, refer to the following article:
+Uninstalling AVG Secure VPN
+NOTE:Removing AVG Secure VPN from your device does not automatically cancel your subscription. For information about canceling an AVG subscription, refer to the following article: Canceling an AVG subscription - FAQs
+What should I do if AVG Secure VPN is unable to establish a connection?
+If AVG Secure VPN is unable to establish a connection, try the following troubleshooting steps:
+Check that your internet connection works when AVG Secure VPN is disconnected. If your internet connection isn't working, check your network configuration.
+Select a different AVG server location.
+Disconnect other VPN services that may be running on your PC. If you are connected to another VPN, it is likely that AVG Secure VPN won't work properly.
+Restart your PC and try connecting to AVG Secure VPN again.
+Check the configuration of your firewall. Firewall configurations vary according to the vendor/manufacturer. Consult the related documentation for information about running a VPN.
+Confirm that your subscription is active. Open AVG Secure VPN, and go to ☰ Menu ▸ My subscriptions. Ensure Active appears next to AVG Secure VPN.
+If AVG Secure VPN is still unable to establish a connection, try to uninstall and reinstall the application. For detailed instructions, refer to the following articles:
+Uninstalling AVG Secure VPN
+Installing AVG Secure VPN
+How can I report an issue to AVG Support?
+We offer many self-help articles on AVG Support pages. However, some issues may require deeper investigation by AVG Support.
+If you experience issues with AVG Secure VPN, you can you can contact AVG Support. Our support agents will help you resolve your issues.
+What if I have a different issue?
+For information about other issues you may experience while using AVG Secure VPN, including common error messages, refer to the following article:
+Troubleshooting common issues with AVG Secure VPN
+Other
+When is the regularly scheduled maintenance?
+Regular maintenance occurs every Saturday at 6PM EST (GMT/UTC -5), or 6PM EDT (GMT/UTC -4) during daylight saving time, and lasts for 1 hour. Your service is not typically affected by this maintenance.
+Why is AVG Secure VPN a paid product when other VPN services are free?
+To support the continued development of AVG Secure VPN and give you access to the best VPN technology, AVG Secure VPN is a paid product.
+Many free VPN services sell your data to third parties, place ads and videos into your browser, and slow down your internet connection.
+AVG Secure VPN never compromises user experience or privacy. We do not share or sell your data to third parties, nor do we monitor your internet activity. AVG Secure VPN does not interfere with your internet connection and does not contain third-party ads.
+Does AVG Secure VPN log user information?
+AVG Secure VPN stores connection logs, which include information such as the time you connect and disconnect, the duration of the connection, and bandwidth usage. This information is used for diagnostic purposes and to help prevent abuse of the VPN connection.
+We do not log activities such as the websites you visit, what data is transferred, and which IP addresses are accessed. For more information, refer to the AVG Privacy Policy.
+Was this article helpful?
+Yes No
+Still looking for answers ?
+Visit our AVG Support Community or contact us here:
+Get More Help
+Struggling with non-AVG technology? We can fix that, too!
+About AVG
+Profile
+Media Center
+Policies
+Reseller Locator
+Contact Us
+Home Products
+Downloads
+Beta Downloads
+Antivirus Software
+Mobile Security
+PC Performance
+Free Mac Apps
+Virus Scanning & Malware Removal
+Free Antivirus Download
+Customer Area
+Renew or Upgrade
+Register your License
+Service activation
+Home products
+Security & Performance Tips
+Partners & Business
+Business Antivirus Software
+Partners & Resellers
+Reseller Center
+AVG CloudCare™
+AVG Managed Workplace
+Centrify Identity Service
+Partner Support
+Business Support
+Affiliates
+Connect with AVG
+Facebook
+Twitter
+Youtube
+LinkedIn
+English
+Log in to AVG Account
+Privacy | Cookies | All third party trademarks are the property of their respective owners.
+© 2026 Gen Digital Inc. All rights reserved.
+Feedback

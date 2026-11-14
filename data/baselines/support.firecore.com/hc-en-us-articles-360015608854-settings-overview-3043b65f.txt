@@ -1,0 +1,135 @@
+url: https://support.firecore.com/hc/en-us/articles/360015608854-Settings-Overview
+method: fetch
+saved: 2026-11-13
+
+Settings Overview – Firecore Support
+Skip to main content
+Toggle navigation menu
+Home
+Community
+Submit a request
+Sign in
+Firecore Support
+Search
+Settings Overview
+Updated
+November 02, 2026 18:55
+Infuse includes many adjustable options which can be adjusted for many specific use cases. Below is an overview of what each setting does.
+General
+Show Apple ‘TV’ Library (iOS only) - Access synced videos from the ‘TV’ app
+Show Filenames - Display full filenames instead of titles
+File Management - Allow remote videos to be deleted
+List View (Apple TV only) - Switch from grid to list view
+Sort Order - Adjust the default sort order for browsing files
+Show Poster Titles - Display video titles below posters in grid view
+Appearance - Toggle light/dark mode (On Apple TV, this is set in the tvOS Settings > General > Appearance menu)
+App Icon - Toggle light/dark app icon
+Download Subtitles (iOS/macOS/visionOS only) - Automatically download subtitles for local (synced) content
+Cellular Sync & Download (iOS only) - Allow for automatic library sync and file downloads while using cellular data
+Up Next List - Adjust which sections are visible in the main Up Next List on the home screen
+Watched Indicators - Show watched icon overlay in grid view
+Picks of the Day - Enable/disable the Picks of the Day feature
+Hide Spoilers - Blur descriptions and thumbnails of unwatched TV episodes
+Share Crash Data - Allow Infuse to collect anonymous diagnostic and crash data (system info, video codecs, time used, etc...)
+Auto-Select Next - Automatically highlight the next TV episode after finishing a previous item
+Sync
+Trakt - Log in and adjust Trakt settings (more info)
+iCloud Sync - Allow library details to sync via iCloud (more info)
+Metadata & Artwork
+Metadata Fetching - Fetch metadata and artwork from TMDB
+Prefer Embedded Artwork - Scan for artwork embedded inside your videos
+Prefer Local Artwork - Scan for local artwork files stored near your videos
+Prefer Local Metadata - Scan for local metadata files (NFO & XML) stored near your videos
+Show Logos - Display logos for movies and TV shows
+Show External Ratings - Display movie and TV show ratings from external sources (EG TMDB, Metacritic, Trakt, etc...)
+Rating Sources - Choose which ratings are enabled and set a preferred order
+Library Cache - Shows how much local space is used for metadata/artwork - tap to clear.
+Collections & Groups
+Group Movies Into Collections - Show collections instead of individual movies while browsing movie categories
+Group TV Shows Into Collections - Show collections instead of individual series while browsing TV show categories
+TMDB Collections - Group movies sequels into collections based on info from TMDB
+Custom Collections - Show custom collections you have created
+Details View - With this enabled, selecting a collection's poster will take you to the details page. Disable to browse collections in a grid view
+Smart Groups - Automatically group multiple copies of a movie (different cuts, resolutions, duplicates, etc...) into a single item
+Select Version - Default version selection when opening a Smart Group
+Playback
+Subtitles - Display subtitles by default, if present.
+Gesture Control (iOS only) - Use gestures during playback (more info)
+Continuous Playback - Automatically play the next video
+Resume Playback - Choose what happens when resuming videos
+Skip Mode - Adjust the edge-tap behavior (Apple TV) or playback overlay buttons (iOS).
+Time - Skip between time increments within a video (time can be customized)
+Chapters - Skip between chapters within a video
+Videos - Skip between previous or next video files
+Forward Skip - Set time in seconds for forward skip action (only applies when when ‘Playback Controls’ option is set to ‘Time’)
+Backward Skip - Set time in seconds for backward skip action (only applies when when ‘Playback Controls’ option is set to ‘Time’)
+Background Playback (iPhone/iPad only) - Allow videos to play audio-only in the background while using other apps
+Landscape Lock (iPhone only) - Lock playback to landscape mode at all times
+Streaming Cache
+Auto - Efficient read-ahead cache using memory and available disk space
+Limited - Efficient read-ahead cache using memory and limited disk space (for cases where lower initial bandwidth is desired)
+Memory Only - Efficient read-ahead cache using memory only
+Legacy - Traditional memory-based caching without any read-ahead capabilities
+Playback Speed - Adjust default playback speed (playback speed can also be adjusted during playback)
+Black out other monitors while in full screen (macOS only) - Allows content on other monitors to be hidden while watching videos in Infuse
+AI Upscaling - Advanced AI upscaling features for a clear, crisp picture
+Auto - On for videos under 50fps
+Enabled - On for all videos (under 70fps)
+Disabled - Off for all videos
+Dolby Vision (applies to Profile 8 only)
+On - Enable Dolby Vision playback
+Off - Disable Dolby Vision playback and play Dolby Vision files in HDR (recommended for TV models which do not support Dolby Vision)
+Skip Intros & Credits
+On - Display a button to manually skip intros and credits
+Auto (Delay) - Automatically skip intros and credits, with a 3 second delay
+Auto (Instant) - Automatically skip intros and credits, without any delay
+Off - Disables all skipping features
+Live Previews - Live previews are images displayed when seeking through a video
+Audio
+5.1 Audio over HDMI (iOS only) - Allow for 5.1 passthrough when using HDMI adapters
+5.1 Audio over AirPlay (iOS only) - Allow for 5.1 passthrough when using AirPlay (Dolby AC3 only)
+Volume Boost - Provide boost for audio volume, up to 300% (this can also be enabled on a per-video basis through the Playback Menu while a video is playing)
+Downmix Volume - Original/Normalized. Use Normalized if you are experiencing static or crackling audio in louder scenes
+LFE in Stereo Downmix - Include the LFE (subwoofer) channel in the 2.0 stereo mix, for extra low end audio
+Language
+Audio - Set a preferred language for audio tracks
+Subtitles - Set a preferred language for subtitle tracks
+Metadata - Set a preferred language for textual metadata
+Artwork - Set a preferred language for artwork
+Selecting ‘Auto’ will cause Infuse to use the current language settings from your device, and automatically select any tracks which may be tagged with the ‘default’ tag. To avoid using the default tag, you can switch from Auto to your preferred language.
+Selecting ‘Original’ will cause metadata and artwork to be fetched in the language of the original release. For example, titles released in France would appear in French, US would appear in English, and Japan would appear in Japanese. This will override the language settings on your device.
+Parental Controls
+Restrictions - Enable Parental Controls
+Use Face/Touch ID (iOS/macOS/visionOS only) - Enable Face/Touch ID
+Change Passcode - Set a new passcode
+App Lock (iOS/macOS/visionOS only) - Require a passcode to open Infuse
+Search Lock - Require a passcode to use Search features
+Disable Files App (iOS only) - Prevent files from being accessible via the iOS ‘Files’ app
+Allowed Movie/TV Show ratings - Select the ratings for which no passcode is required
+Require PIN - Adjust how often a PIN code must be entered
+Share this article
+Was this article helpful?
+Yes
+No
+210 out of 334 found this helpful
+Have more questions? Submit a request
+Related articles
+Playback Controls
+Streaming From a Mac, PC, or NAS
+Quick Start Guide
+Streaming from Plex, Emby, and Jellyfin
+Trakt Sync
+0">
+Home
+English (United States)
+Dansk
+Deutsch
+Español
+Français
+Italiano
+日本語
+한국어
+Nederlands
+Русский
+简体中文
+繁體中文

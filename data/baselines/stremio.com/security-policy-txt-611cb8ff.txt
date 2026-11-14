@@ -1,0 +1,42 @@
+url: https://www.stremio.com/security-policy.txt
+method: fetch
+saved: 2026-11-13
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+Responsible Disclosure Policy
+At Stremio we care deeply about maintaining the trust and confidence of our users. We take security extremely seriously, and we respect the work of the researchers & professionals in the security community to assist in keeping our users' data secure.
+If you have discovered a security vulnerability in one of our digital platforms (website, desktop or mobile applications), we appreciate your cooperation in disclosing it to us in a responsible manner. We will validate and fix confirmed vulnerabilities in accordance with our security and privacy policy.
+REPORTING
+Security researchers should exclusively use the information at the bottom of this page[1] to contact us and report the details of any suspected vulnerability in a confidential manner, and not any other channel of communication.
+NONCOMPLIANCE
+Publicly disclosing the details of any identified or alleged vulnerability without express written consent from Smartcode OOD will deem the submission as non-compliant. In addition, to remain compliant you are prohibited from
+- accessing or modifying data residing in an account that does not belong to you
+- accessing or downloading data beyond the minimum required to demonstrate a vulnerability. This should not exceed 1-2 records if at all necessary
+- any attempt to execute actions that degrade the performance or disrupt the availability of our digital assets, incl. executing or attempting to execute any "Denial of Service" attacks
+- posting, transmitting, uploading, linking to, sending, or storing any malicious software
+- sending of unsolicited or unauthorized junk mail, SMS, spam, or other forms of duplicative or unsolicited messages
+- making any changes in the system configurations, files, or data
+- introducing a backdoor in any digital asset
+- conducting non-technical attacks such as social engineering or phishing
+[1] -
+Contact: mailto:security@stremio.com
+Encryption: https://keybase.io/ivogeorgiev/pgp_keys.asc
+Encryption: https://keybase.io/shteryana/pgp_keys.asc
+Canonical: https://www.stremio.com/.well-known/security.txt
+Policy: https://www.stremio.com/security-policy.txt
+-----BEGIN PGP SIGNATURE-----
+iQIzBAEBCgAdFiEEPJ/jrtuQrEGaqrYI4bpJ06zuvQMFAl0wQxYACgkQ4bpJ06zu
+vQMQDA//bUhU4e0HkJrt6x9j0BxwckP7ChW56OQ0E+BX3+tI7B8kAVbSjiVje64O
+mFQm/nC0+jAJn0T0nEV0YTxbzqCCipXbchvNfW0f9mUPBmfscfGdhB/Ks45wkDLC
+xCkYr6qm0Jb4mv0MsfJGvGL8QGONBftkoPLpcyIgw1fuei0Wq82Rtr8eSFHVSI7S
+H+LYWGHUto2rgyZPjwhdPSWpRZ4l6c6AkWjcAbJ4vrJLiMLXvZlVm3ARLwzlKOyB
+NV1HtqUn84z024W+Nwe16fiakLrXJaSdEmfGJ8pdRmvQDvZ78bSh6VJfKd4XeyoU
++493cZ9Cqp7tx9CzjOEHPh0rAFtPYUFj2wq18oqR/DfRLljlCqtEm8QMDy+PLu8i
+MHS6Rf4L558Kw1W7eB3wJUJKHUBwabU/adJYU0xgGTUdM6VcMYy3pi7KTVs7HuaZ
+KnEaV/Ry0d39kTVU0ODypL5Y0KA5+GSlHy+aGneH3PYSutJhxgBechu2VeiBDUWp
+fUGp+VACK8poMIYIltOBcWKSRiv+nBZDI4CzdoIMdosQnII4Q2oIFPb5jtYGi/i8
+aYxvnsIUNUAkw8SxxLip5+SSlrW+vPUJEw9EG1MJMNzXHYgiwpBK/2zoGxmwOq6n
+2DCd/BYqW1RGJ0NyMZEHdllsAhFBzP971TPa7wrku3EWFKtpXYc=
+=whcW
+-----END PGP SIGNATURE-----
