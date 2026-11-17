@@ -1,0 +1,1575 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada (poe.com's plans,
+# Explore, legal and download pages, the sign-in page) and through country exits (the plans page), with a plain fetch
+# for its help centre and Quora's (their Zendesk API: help.poe.com's HTML answers a plain fetch with Cloudflare's
+# challenge) and for Apple's App Store pages. Pages, each quoted where it's used:
+# Pricing: poe.com/subscription_plans, "Subscription plans", which reads signed out: five cards named by their points
+# ("10 thousand points/day", "660 thousand points/month", "1.65 million points/month", "3.3 million points/month", "8.25
+# million points/month"), "Billed yearly" ("SAVE 17%") and "Billed monthly", and "By subscribing, you are enrolling in
+# automatic payments (plus tax, where applicable)." The page prices by where the visitor is, whatever its footer says
+# ("Prices shown in US dollars. Your final price may vary based on regional taxes and currency conversion."), so each
+# region was read 2026-11-17 through that country's exit and kept only in its own currency: the US "$4.99/month" (its
+# bare $ is US dollars: the same page writes "CA$", "A$" and "NZ$" for the others), Canada "CA$6.24/month", the UK
+# "£4.99/month", Ireland, Germany, France, the Netherlands, Spain and Italy "€5.74/month", Australia "A$7.49/month" and
+# New Zealand "NZ$9.99/month", and each card's yearly price ("CA$62.49/year"). Some exits were placed in another
+# country (a German one got Brazilian reals, an Australian one and this machine the US's "$4.99/month"): those reads
+# weren't used. No page says a price includes tax ("plus tax, where applicable").
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang on the plans page; 2. no country or currency
+# picker; 3. the page's own data (`monthlyCost`, `yearlyCost`) holds the same strings as its text, with no country; 4.
+# the checkout (Stripe) needs an account: "Get started" asks you to sign in; 5. its help centre has no prices article;
+# 6. Edge from this machine got the US's "$4.99/month", a Canadian exit "CA$6.24/month": Canada's prices are the exit's;
+# 7. no bill offered.
+# Its apps sell two of these plans through Apple ("Poe Monthly Subscription - Basic $6.99", "Poe Monthly Subscription -
+# Plus $24.99", "Poe Annual Subscription - Basic $69.99", "Poe Annual Subscription - Plus $249.99" on the Canadian App
+# Store page): app store prices, a way to pay, not listed (notes.md). "The most diverse subscription options are on
+# Poe’s website." (Poe Purchases FAQs).
+# Not listed: add-on points ("Add-on points are usable for one year, and are not refundable, transferable, or redeemable
+# for cash."), bought by subscribers as they go ("starting at $30 per 1M points"): usage-billed, out, as the API's.
+# Bundles: none on its pages. Official resellers: none; no page names a shop that sells it.
+
+# Coverage: poe.* in AL, AM, AT, BS, BH, BB, BY, BE, BA, BR, BG, KH, CM, CL, CO, HR, CY, CZ, DK, EG, EE, FI, GE, GH,
+# GR, HK, HU, IS, IN, JP, KZ, KR, KG, LV, LT, LU, MO, MY, MT, MX, MD, NG, NO, OM, PL, PT, PR, RO, SA, RS, SG, SK, SI,
+# ZA, SE, CH, TW, TJ, TH, TR, UG, UA, AE, UZ, VN and ZW: sold there (its help centre's country list), but outside the
+# catalog's research regions, so not read.
+
+id: poe
+name: Poe
+website: https://poe.com
+domains: [help.poe.com]
+category: ai
+spendCategory: software
+billingCurrency:
+  {
+    GLOBAL: USD,
+    US: USD,
+    CA: CAD,
+    GB: GBP,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    AU: AUD,
+    NZ: NZD,
+  }
+# Where it sells (its help centre's "What countries have subscriptions available?", read 2026-11-17: "We currently offer
+# subscriptions to Poe in the following countries and platforms:", a table of each country's Poe.com Website, Apple's
+# App Store and Google's Play Store): every country the table lists for any of the three. Kosovo, which has no ISO code,
+# is left out.
+availableIn:
+  [
+    AL,
+    AM,
+    AU,
+    AT,
+    BS,
+    BH,
+    BB,
+    BY,
+    BE,
+    BA,
+    BR,
+    BG,
+    KH,
+    CM,
+    CA,
+    CL,
+    CO,
+    HR,
+    CY,
+    CZ,
+    DK,
+    EG,
+    EE,
+    FI,
+    FR,
+    GE,
+    DE,
+    GH,
+    GR,
+    HK,
+    HU,
+    IS,
+    IN,
+    IE,
+    IT,
+    JP,
+    KZ,
+    KR,
+    KG,
+    LV,
+    LT,
+    LU,
+    MO,
+    MY,
+    MT,
+    MX,
+    MD,
+    NL,
+    NZ,
+    NG,
+    NO,
+    OM,
+    PL,
+    PT,
+    PR,
+    RO,
+    SA,
+    RS,
+    SG,
+    SK,
+    SI,
+    ZA,
+    ES,
+    SE,
+    CH,
+    TW,
+    TJ,
+    TH,
+    TR,
+    UG,
+    UA,
+    AE,
+    GB,
+    US,
+    UZ,
+    VN,
+    ZW,
+  ]
+# Its help centre's cancelling answer (Poe Purchases FAQs, "How do I cancel my subscription?"), for the web, iOS and
+# Android.
+cancelUrl: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+sources: { pricing: https://poe.com/subscription_plans }
+
+# Ways to pay (M11.5), read 2026-11-17 in its Terms of Sale: a debit or credit card (Stripe, on the web: "you will be
+# redirected to our 3rd party payment processor, Stripe", Poe Purchases FAQs), Apple's and Google's billing in its apps,
+# and PayPal. No page names the card networks, so no acceptedNetworks ("Accepted payment methods may vary based on your
+# location.").
+paymentMethods:
+  - methods: [card]
+    page: 'Terms of Sale'
+    url: https://poe.com/pages/terms-of-sale
+    quotes:
+      - 'In order to make a Purchase or Subscribe, you must provide account information for at least one valid debit or credit card or other payment method through or to the Quora Platform or its payment service providers.'
+  - methods: [app-store, paypal]
+    page: 'Terms of Sale'
+    url: https://poe.com/pages/terms-of-sale
+    quotes:
+      - 'Subscriptions and other purchases through a third party (e.g., Google Play, iOS or PayPal) are managed directly by the applicable third party.'
+
+# Owner (M11.2), read 2026-11-17: its terms name the company that provides Poe, with its California address. Quora is
+# private: no page names a listing.
+owner:
+  name: 'Quora, Inc.'
+  page:
+    name: Terms of service
+    url: https://poe.com/pages/tos
+  quotes:
+    - 'Poe is provided by Quora, Inc., located at 444 Castro Street, Suite 1210, Mountain View, California 94041.'
+  country:
+    code: US
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17 in its Terms of Sale: billed on the date you signed up, a shorter month's last day
+# when it has no such date.
+renewalAnchor:
+  kind: same-date
+  page: Terms of Sale
+  url: https://poe.com/pages/terms-of-sale
+  quotes:
+    - 'You acknowledge that billing for a particular Subscription may not occur on the same date of each month if your subscription began on a date not contained in a given month (for example, if you sign up for a monthly subscription on August 31st, you will be billed next on September 30th, etc.) or due to Free Trials, Promotions, or changes to your payment method.'
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its plans page: what every paid plan adds ("All Poe subscription plans allow you
+# to:" "Send and receive far more messages", "Unlock each bot's maximum input size and chat history"), and each card's
+# points, the one thing that differs between them (usage levels: perks, never features).
+perks:
+  - id: more-messages
+    name: Send and receive far more messages
+  - id: max-input
+    name: Unlock each bot's maximum input size and chat history
+  - id: points-10k-daily
+    name: 10 thousand points/day
+  - id: points-660k
+    name: 660 thousand points/month
+  - id: points-1-65m
+    name: 1.65 million points/month
+  - id: points-3-3m
+    name: 3.3 million points/month
+  - id: points-8-25m
+    name: 8.25 million points/month
+
+# AI features (the AI category's registry), read 2026-11-17 in its help centre, its plans page and its Explore page
+# (poe.com/explore, each category's official bots):
+# - Models from several companies, on every plan: "State-of-the-art general purpose bots from OpenAI, Anthropic's Claude,
+#   Google's Gemini, Meta's Llama , and many more bots from leading AI organizations." and "Each user has a pool of points
+#   that flexibly work with every bot on Poe." (Poe FAQs); "Non-paying users receive points daily, which reset at the
+#   end of each 24-hour period." Subscribers "also gain access to the most cutting-edge bots on Poe".
+# - Web search and image generation on every plan: its default Assistant can "ask for real-time information, create
+#   images, and more", for subscribers and non-subscribers alike ("For non-subscribers: - General queries: @GPT-6-Luna -
+#   Image generation: @Nano-Banana-2"), and the Search category's official bots (Perplexity-Sonar, Exa-Search).
+# - Memory on every plan: "Memory helps bots get to know you over time" and "It's off by default. You can turn it on in
+#   **Settings → Memory**" (Poe FAQs), with no plan named.
+# - Custom assistants on every plan: "Prompt bots allow you to create a chatbot on top of GPT-3.5-Turbo or Claude-instant
+#   by providing plain-text instructions that the bot will stick to during conversation with users." (Poe FAQs).
+# - On the paid plans, what the free plan's pages don't give it: video and audio ("Generate more images, video, and
+#   audio with state-of-the-art bots from Runway, Google DeepMind, Luma AI, Pika, Hailuo AI, ElevenLabs, Ideogram, Black
+#   Forest Labs, Cartesia, and more.", Poe Purchases FAQs; "Audio and music generating models", Poe FAQs; the Audio
+#   category's ElevenLabs-Music-v2 and Lyria 3), reasoning ("Enjoy exclusive access to bots like o3-mini-high"; the
+#   Official bots' "adjustable reasoning effort" and "Adaptive thinking is always on"), deep research (the Search
+#   category's official "GPT Researcher is an agent that conducts deep research on any topic and generates a
+#   comprehensive report with citations.") and the API ("To call paid models (models with a points cost greater than
+#   0) via the API, the API key owner must have an active Poe subscription or add-on points. Free users do not have
+#   access to paid models through the API.", its developer guide; "Compute points are deducted directly from the
+#   account associated with the API key."): its points pay for API use, as monthly API credits do (notes.md). No page
+#   says which of these bots the free plan's daily points reach, so the free plan lists none of them.
+# - Chats kept on its servers: "Your chats and personal data associated with your account are deleted from Poe’s
+#   systems" when you delete them (Privacy center); "Temporary chat messages are permanently deleted within 24 hours of
+#   creation." (Poe FAQs).
+# - None of its pages offers a voice mode (its gpt-audio bots answer audio files in speech: notes.md), projects, a coding
+#   agent, code completion in an editor, a browser agent, scheduled tasks, early access or office apps.
+# General features, read 2026-11-17: apps for "iOS", "Android", "MacOS" and "Windows" (Get Poe) and the web. Sign-in:
+# "Continue with Google", "Continue with Apple", an email address or "Use phone" (its sign-in page; "You can log into
+# your Poe account using third party applications (e.g., Google and Apple).", its privacy policy); no page says how the
+# email or phone sign-in works, so only `sso`. App languages: "Poe's user interface is currently available in English,
+# Japanese, Chinese - Simplified, Chinese - Traditional, Korean, Spanish, Portuguese, French, Italian and German." (Poe
+# FAQs). Support: its help centre's request form ("you may contact us here"). No pause and no parental controls: its
+# terms, Terms of Sale and help centre offer neither (a minor's "parent or legal guardian must consent to these Terms").
+features:
+  platforms: [windows, macos, android, ios, web]
+  account.sign-in: [sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
+  support.channels: [email]
+
+plans:
+  - id: poe.free
+    name: Free
+    link: https://poe.com/
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.model-choice: true
+      ai.memory: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+    notes: 'Points every day for any bot, which reset each day and don’t roll over; subscribers get far more, and the newest bots.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://help.poe.com/hc/en-us/articles/19944206309524-Poe-FAQs
+
+  - id: poe.points-10k-daily
+    name: 10 thousand points/day
+    link: https://poe.com/subscription_plans
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.memory: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: cloud
+    perks: [more-messages, max-input, points-10k-daily]
+    notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 6.24
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 62.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 49.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 5.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 57.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 5.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 57.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 5.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 57.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 5.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 57.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 5.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 57.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 5.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 57.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 7.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 99.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+
+  - id: poe.points-660k
+    name: 660 thousand points/month
+    link: https://poe.com/subscription_plans
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.memory: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: cloud
+    perks: [more-messages, max-input, points-660k]
+    notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: US
+        currency: USD
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 24.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 199.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 229.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 299.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 39.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 399.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+
+  - id: poe.points-1-65m
+    name: 1.65 million points/month
+    link: https://poe.com/subscription_plans
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.memory: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: cloud
+    perks: [more-messages, max-input, points-1-65m]
+    notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 49.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: US
+        currency: USD
+        amount: 499.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 62.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 624.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 49.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 499.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 57.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 574.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 57.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 574.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 57.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 574.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 57.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 574.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 57.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 574.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 57.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 574.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 74.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 749.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 999.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+
+  - id: poe.points-3-3m
+    name: 3.3 million points/month
+    link: https://poe.com/subscription_plans
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.memory: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: cloud
+    perks: [more-messages, max-input, points-3-3m]
+    notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: US
+        currency: USD
+        amount: 999.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 124.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 1249.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 99.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 999.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 114.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 1149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 114.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 1149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 114.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 1149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 114.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 1149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 114.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 1149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 114.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 1149.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 149.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 1499.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 199.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 1999.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+
+  - id: poe.points-8-25m
+    name: 8.25 million points/month
+    link: https://poe.com/subscription_plans
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.deep-research: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.memory: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: cloud
+    perks: [more-messages, max-input, points-8-25m]
+    notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 249.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: US
+        currency: USD
+        amount: 2499.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 312.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: CA
+        currency: CAD
+        amount: 3124.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 249.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: GB
+        currency: GBP
+        amount: 2499.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 287.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IE
+        currency: EUR
+        amount: 2874.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 287.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: DE
+        currency: EUR
+        amount: 2874.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 287.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: FR
+        currency: EUR
+        amount: 2874.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 287.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NL
+        currency: EUR
+        amount: 2874.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 287.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: ES
+        currency: EUR
+        amount: 2874.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 287.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: IT
+        currency: EUR
+        amount: 2874.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 374.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: AU
+        currency: AUD
+        amount: 3749.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 499.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+      - region: NZ
+        currency: NZD
+        amount: 4999.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://poe.com/subscription_plans
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: the Poe Terms of Service
+# (updated Nov 16, 2026), which include the Poe Privacy Policy, the Poe and Joiner Acceptable Use Policy (the conduct it
+# forbids: no topic worse than the terms') and, for purchases, the Terms of Sale; the Privacy center; its help centre's
+# FAQs; and Quora's help centre's privacy, deletion, export and refund articles (Quora's Subscriptions Refund Policy,
+# which the Terms of Sale name). The sign-in page's line: "By continuing, you are agreeing to Poe's Terms of Service and
+# Privacy Policy." Not read: the Quora Platform Terms of Service and the Quora Privacy Policy (quora.com/about/tos and
+# /about/privacy, which both include): quora.com shows Edge, the Mullvad Browser and a US exit Cloudflare's security check,
+# and the Internet Archive refused this machine. The Earnings terms are for bot creators paid by
+# Poe (no topic for subscribers). Each bot's maker's policies (OpenAI's, Anthropic's, Google's) apply to its bots; not
+# rated here.
+policies:
+  links:
+    - name: Terms of service
+      url: https://poe.com/pages/tos
+    - name: Terms of sale
+      url: https://poe.com/pages/terms-of-sale
+    - name: Privacy policy
+      url: https://poe.com/pages/privacy
+    - name: Privacy center
+      url: https://poe.com/pages/privacy-center
+    - name: Poe FAQs
+      url: https://help.poe.com/hc/en-us/articles/19944206309524-Poe-FAQs
+    - name: Purchases FAQs
+      url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+    - name: Quora's refund policy
+      url: https://help.quora.com/hc/en-us/articles/4404208557588-Subscriptions-Refund-Policy
+    - name: Quora's opt-out choices
+      url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+    - name: Quora on selling data
+      url: https://help.quora.com/hc/en-us/articles/360000845146--Does-Quora-ever-sell-my-personal-data-to-third-parties-for-marketing
+    - name: Quora's data copies
+      url: https://help.quora.com/hc/en-us/articles/360000839503-Can-I-get-a-copy-of-my-data
+    - name: Quora's government requests
+      url: https://help.quora.com/hc/en-us/articles/360034733912-Will-Quora-notify-users-about-requests-for-user-data-from-governmental-entities-including-law-enforcement
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel in your settings at any time, but must do it by the day before it renews, or you pay for the next period. You keep your plan until the period ends.'
+      sources:
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'You may cancel a Subscription, including Free Trials, through your account settings at any time.'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'YOU MUST CANCEL YOUR SUBSCRIPTION ON THE DAY BEFORE YOUR NEXT RECURRING BILLING DATE TO AVOID BEING CHARGED FOR THE NEXT BILLING PERIOD.'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'If you cancel, you will still have access to your Subscription through the end of the current billing period, unless you subscribed through a free trial or promotion.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments are not refunded, except when Quora charged you by mistake or a technical fault of its own stopped you using it, and only within 30 days. You keep your plan to the end of the period.'
+      sources:
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'All Subscription fees, amounts paid for Purchases, or other final charges are non-refundable, other than as set forth in our Refund Policy or as determined by Quora.'
+        - url: https://help.quora.com/hc/en-us/articles/4404208557588-Subscriptions-Refund-Policy
+          quote: 'If you have an issue with your subscription on Quora because of technical issues, payment errors, or a Space owner has deleted or disabled their account or Space, we will refund your subscription payment, subject to the following guidelines.'
+        - url: https://help.quora.com/hc/en-us/articles/4404208557588-Subscriptions-Refund-Policy
+          quote: 'We cannot grant you a refund for any charges that are more than 30 days old.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before a new price applies at your next renewal, without saying how long before, and you can cancel first.'
+      sources:
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'We will give you advance notice of any price change prior to the next billing date, but we will not be able to notify you of any changes in applicable taxes or fees.'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'If you do not wish to accept a price change, you may cancel your subscription in accordance with the instructions below.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'When it offers a free trial, the trial turns into a paid plan unless you cancel before it ends, which you can do at any time.'
+      sources:
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'Unless you cancel your Subscription prior to its end, we will begin charging your payment method after the Free Trial for the applicable monthly or annual recurring Subscription fees selected by you as described in Section 2.1 above.'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'You can cancel your Free Trial or Subscription at any time as described in Section 2.4 below.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its Terms of Sale say your plan renews on its own at the then-current price, but not that it reminds you first.'
+      pages:
+        - https://poe.com/pages/terms-of-sale
+        - https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its Terms of Sale list no fees beyond the price and taxes; they only warn that your bank may charge its own currency fees.'
+      pages:
+        - https://poe.com/pages/terms-of-sale
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its help centre explains how to upgrade, but not whether what you already paid counts toward the new plan or when a downgrade starts.'
+      pages:
+        - https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+        - https://poe.com/pages/terms-of-sale
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US and Canada, disputes go to courts in Santa Clara County, California, which it chose. In Europe, the UK and Switzerland you keep your own courts.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'If you are not a user in the European Economic Area, the United Kingdom, or Switzerland, to the extent the arbitration provisions do not apply or you have validly opted out, any litigation between you and Quora must be filed exclusively in state or federal courts located in Santa Clara County, California, except eligible small claims actions may be brought in the county where you reside.'
+        - url: https://poe.com/pages/tos
+          quote: 'If you are a user in the European Economic Area, the United Kingdom, or Switzerland, this Section does not deprive you of rights or protections under the law of your country of residence or access to courts in that country.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      regions: [US, CA]
+      tier: poor
+      reason: "In the US and Canada, disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by emailing within 30 days of signing up."
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'IF YOU ARE IN THE UNITED STATES OR CANADA, YOU AGREE THAT DISPUTES BETWEEN YOU AND QUORA WILL BE RESOLVED BY BINDING, INDIVIDUAL ARBITRATION AND YOU WAIVE YOUR RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION.'
+        - url: https://poe.com/pages/tos
+          quote: 'You may opt out of Sections 9.2 through 9.6 by sending written notice to arbitration.optout@quora.com within thirty (30) days after first registering to use Poe.'
+      action:
+        name: 'How to opt out of arbitration (section 9.9)'
+        url: https://poe.com/pages/tos
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes (by email, for its Terms of Sale), without saying how long before, and using Poe afterwards means you accept them. You can leave instead.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'If we make material changes, we will provide notice as required by applicable law. Your continued use of Poe after an amendment becomes effective constitutes acceptance of the amended Terms.'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'Unless otherwise required by law, if we amend material terms to these Terms of Sale, we will notify you via the email address provided by you in your account to give you an opportunity to review any material changes to these terms before they go into effect.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account for any reason it decides, warning you only "where appropriate", and a closed subscription ends at once with no refund.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'or for another reason in our discretion. Where appropriate, we may provide notice before termination.'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'If Quora terminates your Subscription, your cancellation will be effective immediately, and you will not be able to access Subscription Content.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'You keep what you post, but give Quora a broad licence it can pass on, to run, improve and promote Poe, which lasts as long as it says it needs it, not until you delete it.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'you grant Quora and its affiliates a worldwide, non-exclusive, royalty-free, fully paid-up, transferable, sublicensable license to host, store, use, reproduce, process, adapt, modify, create derivative works from, publish, transmit, display, distribute, translate, communicate, and otherwise make available Your Content and Your Creations as reasonably necessary to operate, provide, secure, moderate, improve, develop, and promote Poe'
+        - url: https://poe.com/pages/tos
+          quote: 'The license in Section 4.5 continues for so long as reasonably necessary for the purposes described above, including for content that has been shared with others, incorporated into an ongoing interaction, retained for security or legal purposes, or distributed outside Poe at your direction.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'You own the answers the bots give you, but the same broad licence lets Quora use them too.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'As between you and Quora, you retain ownership of Your Content and Your Creations, subject to the rights and licenses granted in these Terms and any rights of third parties in underlying materials, tools, models, or outputs.'
+        - url: https://poe.com/pages/tos
+          quote: 'together with Bot-Generated Content you receive, is collectively "Your Content."'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can add, remove or change bots, usage limits and paid plans at any time, and takes no responsibility for what that costs you.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'WE MAY, WITHOUT LIABILITY TO YOU, ADD, REMOVE, SUSPEND, OR CHANGE BOTS, GAMES, EXPERIENCES, JOINER FEATURES, CONTENT, USAGE LIMITS, OR OTHER POE FEATURES AT ANY TIME'
+        - url: https://poe.com/pages/terms-of-sale
+          quote: 'QUORA RESERVES THE RIGHT TO MODIFY, SUSPEND OR DISCONTINUE PAID SERVICES OR CONTENT, SUBSCRIPTIONS, ANY SUBSCRIPTION SERVICES, SUBSCRIPTION CONTENT, OR PARTICIPATING CREATORS AT ANY TIME AND DISCLAIMS ANY LIABILITY TO YOU FOR SUCH CHANGES.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It can close an account that has not been used for "an extended period", without saying how long, and unused points end with the account.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'your account has been inactive for an extended period as described in our then-current account practices'
+        - url: https://poe.com/pages/tos
+          quote: 'Points may be used only as permitted on Poe, have no cash value, are non-transferable and non-refundable except where required by law, and terminate when your Poe account terminates.'
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You get a personal right to use Poe and its apps, and may not take them apart unless the law lets you.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'Subject to your compliance with these Terms, we grant you a personal, limited, revocable, non-exclusive, non-transferable, and non-sublicensable right to access and use Poe and the bots, games, and experiences made available to you through Poe.'
+        - url: https://poe.com/pages/tos
+          quote: 'reverse assemble, reverse compile, decompile, translate, or otherwise attempt to discover source code or non-public underlying components of Poe, AI Models, bots, games, or related technologies, except to the extent such restriction is prohibited by law;'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://poe.com/pages/tos]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: great
+      reason: 'You may not share your password, but a subscriber can invite anyone (family, friends or a team) to use the plan’s points from their own accounts, up to a limit.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'The shared subscription will enable a subscriber to invite a limited number of registered Poe account holders (each a “group member”) to use the subscriber’s points.'
+        - url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+          quote: 'Copy the invitation link and send it to whoever you want to join your subscription.'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms, privacy pages and help centre name no audit, certification or way to report a security problem.'
+      pages:
+        - https://poe.com/pages/tos
+        - https://poe.com/pages/privacy
+        - https://poe.com/pages/privacy-center
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It collects device details for analytics and uses what you do to personalise Poe. The only opt-out offered, for tracking pixels, works browser by browser unless you are signed in.'
+      sources:
+        - url: https://poe.com/pages/privacy
+          quote: 'We collect your device type and operating system details for analytics and to troubleshoot product issues.'
+        - url: https://poe.com/pages/privacy
+          quote: 'We may use your interactions on Poe to provide you a personalized experience, such as recommending other bots or apps to explore or topics to discuss.'
+        - url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+          quote: 'This setting is tied to your cookies, and, unless you are logged in to the Quora Platform, will only be effective on the browser for which you have performed the opt-out.'
+      action:
+        name: 'Quora’s opt-out choices'
+        url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your name or contacts, but your chats go to the AI companies behind each bot, which may use them to improve their own services, and it shares a scrambled email with ad partners.'
+      sources:
+        - url: https://poe.com/pages/privacy
+          quote: 'Our third party AI model providers and third party developers may receive details about your interactions with bots and apps on Poe (including the contents of your chats and photos or documents you upload) to provide and generally improve their services, which they may process in their legitimate business interests, or based on the settings in your Poe account.'
+        - url: https://poe.com/pages/privacy
+          quote: 'We may share your hashed email with our ad platform partners for our advertising activities, such as for programmatic ads and paid acquisition campaigns.'
+        - url: https://help.quora.com/hc/en-us/articles/360000845146--Does-Quora-ever-sell-my-personal-data-to-third-parties-for-marketing
+          quote: 'Quora does not sell your personal data – such as your name and contact information – to third parties to use for their own marketing purposes.'
+      action:
+        name: 'Quora’s opt-out choices'
+        url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Poe shows no ads, but tracks how you respond to its own ads elsewhere, and Quora tailors ads to your interests. Its opt-out works browser by browser unless you are signed in.'
+      sources:
+        - url: https://poe.com/pages/privacy
+          quote: 'We collect information about you when you interact with Poe ads to measure the effectiveness of our ad campaigns.'
+        - url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+          quote: 'The Quora Platform seeks to tailor content and advertising to your specific interests.'
+        - url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+          quote: 'This setting is tied to your cookies, and, unless you are logged in to the Quora Platform, will only be effective on the browser for which you have performed the opt-out.'
+      action:
+        name: 'Quora’s opt-out choices'
+        url: https://help.quora.com/hc/en-us/articles/360000839683-What-opt-out-choices-do-I-have
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: good
+      reason: 'Poe’s own bots and the big AI companies’ models don’t train on your chats. Only bots made by other developers, marked with a half-shaded shield, may, so it happens only if you pick one.'
+      sources:
+        - url: https://poe.com/pages/privacy-center
+          quote: 'Official Poe bots and user-created prompt bots using Open AI, Anthropic, Google, and Meta’s AI models do not train on your chats and cannot access your chats for anything other than to produce the requested LLM response'
+        - url: https://poe.com/pages/privacy-center
+          quote: 'Third-party developer bots and apps can use your chats to train their AI models – even then, they don’t have access to the personal data associated with your Poe account unless you interact with other users in a group chat.'
+        - url: https://poe.com/pages/privacy-center
+          quote: 'Your interactions with the bot or app may be used for training purposes.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: poor
+      reason: 'Your chats go to the AI company behind each bot. Bots made by other developers may let them read and keep your chats to train their own AI. You avoid that by not using those bots.'
+      sources:
+        - url: https://poe.com/pages/privacy-center
+          quote: 'Your interactions with bots and apps are only visible to you and the model provider, unless you share them, interact with other users in group chats, use Poe’s memory feature, or interact with half shield bots or apps (see below), in which case the developers who created those bots or apps may be able to see them.'
+        - url: https://poe.com/pages/privacy
+          quote: 'Developers that create bots and apps on Poe using APIs may view and store your chats on their servers to train their models.'
+      action:
+        name: 'Its privacy shield, explained'
+        url: https://poe.com/pages/privacy-center
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps chats until you delete them. Temporary chats go within a day, but each AI company keeps your chats on its own schedule (30 days for some), and Memory may keep what you deleted.'
+      sources:
+        - url: https://help.poe.com/hc/en-us/articles/19944206309524-Poe-FAQs
+          quote: 'Temporary chat messages are permanently deleted within 24 hours of creation.'
+        - url: https://poe.com/pages/privacy-center
+          quote: 'Each provider sets their own retention schedule (e.g. OpenAI and Anthropic retain your chats for 30 days).'
+        - url: https://poe.com/pages/privacy-center
+          quote: 'If you use Poe’s memory feature, data you delete from a chat may persist in the background summaries generated from your Poe history.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your chats and your account yourself in settings. The account is deleted after 14 days unless you sign in again.'
+      sources:
+        - url: https://help.poe.com/hc/en-us/articles/19944206309524-Poe-FAQs
+          quote: 'Once you confirm the deletion of your account, the account will be deactivated immediately and the deletion process will begin. If you login during the next 14 days, the account will be reactivated and deletion will be canceled.'
+        - url: https://poe.com/pages/privacy-center
+          quote: 'Your chats and personal data associated with your account are deleted from Poe’s systems and will not be used for any other purpose.'
+      action:
+        name: 'How to delete your Poe account'
+        url: https://help.poe.com/hc/en-us/articles/19944206309524-Poe-FAQs
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask Quora by email or its contact form for a copy of your data, which usually arrives within 72 hours; there is no download button.'
+      sources:
+        - url: https://help.quora.com/hc/en-us/articles/360000839503-Can-I-get-a-copy-of-my-data
+          quote: 'Quora will send an archive of your content and personal data to your account’s primary email address on request.'
+        - url: https://help.quora.com/hc/en-us/articles/360000839503-Can-I-get-a-copy-of-my-data
+          quote: 'Please note that you will typically receive the archive within 72 hours of our team confirming that we have received your data request.'
+      action:
+        name: 'How to ask for a copy of your data'
+        url: https://help.quora.com/hc/en-us/articles/360000839503-Can-I-get-a-copy-of-my-data
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'Police need a subpoena, court order or warrant, and Quora tries to tell you first unless the law forbids it. No transparency report was found.'
+      sources:
+        - url: https://help.quora.com/hc/en-us/articles/360034733912-Will-Quora-notify-users-about-requests-for-user-data-from-governmental-entities-including-law-enforcement
+          quote: 'Quora requires governmental entities to provide it with a legally valid request—such as a subpoena, court order, or warrant—before providing private user information.'
+        - url: https://help.quora.com/hc/en-us/articles/360034733912-Will-Quora-notify-users-about-requests-for-user-data-from-governmental-entities-including-law-enforcement
+          quote: 'Yes, Quora will endeavor to provide the affected user with notice about the request via email, assuming it is not prohibited from doing so by law or if an emergency exists.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Poe is run from the US and sends your chats to many AI companies. The pages read don’t say where your data is kept or how it is protected when it leaves your country.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'Poe is controlled and operated from the United States.'
+        - url: https://poe.com/pages/privacy-center
+          quote: 'We share the contents of your chats with AI model providers that power the bots and apps on Poe (including OpenAI, Anthropic, Google, and Meta), and with third-party developers if you interact with half shield bots or apps.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address, a phone number, or a Google or Apple account. Depending on where you live it may also ask your date of birth.'
+      sources:
+        - url: https://poe.com/pages/privacy
+          quote: 'We collect your email address and/or phone number to create an account and verify your identity.'
+        - url: https://poe.com/pages/privacy
+          quote: 'Depending on your location we may also ask you to provide your date of birth to verify your age.'
+      lastVerified: 2026-11-17
