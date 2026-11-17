@@ -10,6 +10,12 @@
 # is still here word for word, so those grades carry over. Its Xbox-only clauses (the Xbox content licence, Xbox software
 # updates) stay in Xbox Game Pass's file. Added from this agreement on 2026-11-14: its general content licence, software
 # updates and price changes, and Outlook.com's and OneDrive's own one-year inactivity rule.
+# Disputes re-read 2026-11-17 with a plain fetch from Canada (each country's page served its own version): the UK's,
+# Ireland's, Germany's, France's, the Netherlands', Spain's and Italy's (the same section 10 in each language: Microsoft
+# Ireland, Irish law, and the courts of the country where you live or, if you choose, Ireland's), and Australia's and New
+# Zealand's (section 10.d, "Asia or the South Pacific": arbitration in Singapore under SIAC's rules, with nothing on class
+# actions, as Canada's copy has it too). The US's arbitration is rated for the US only; elsewhere the provider-wide
+# rating is the worst of the rest, 10.d's arbitration (Japan, Korea, Taiwan, Brazil and the Americas name courts).
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
 id: microsoft-services-agreement
 name: Microsoft Services Agreement
@@ -18,6 +24,10 @@ links:
     url: https://www.microsoft.com/en-ca/servicesagreement
   - name: 'Microsoft Services Agreement (US)'
     url: https://www.microsoft.com/en-us/servicesagreement
+  - name: 'Microsoft Services Agreement (UK)'
+    url: https://www.microsoft.com/en-gb/servicesagreement
+  - name: 'Microsoft Services Agreement (Australia)'
+    url: https://www.microsoft.com/en-au/servicesagreement
   - name: 'Microsoft Store terms of sale'
     url: https://www.microsoft.com/en-ca/store/b/terms-of-sale
 ratings:
@@ -50,6 +60,21 @@ ratings:
         quote: 'Your bank might charge you additional fees for conversion or processing services when you use a credit or debit card.'
     lastVerified: 2026-11-14
   - topic: legal.disputes
+    tier: neutral
+    reason: 'In Australia, New Zealand and much of Asia, a private referee (an arbitrator) in Singapore settles disputes instead of a court, and the decision is final. Its terms say nothing about class actions.'
+    sources:
+      - url: https://www.microsoft.com/en-au/servicesagreement
+        quote: 'Asia or the South Pacific, unless your country is specifically called out below.'
+      - url: https://www.microsoft.com/en-au/servicesagreement
+        quote: 'Any dispute arising out of or in connection with these Terms or the Services besides Skype, including any question regarding their existence, validity or termination, will be referred to and finally resolved by arbitration in Singapore in accordance with the Arbitration Rules of the Singapore International Arbitration Centre (SIAC), which rules are deemed to be incorporated by reference into this clause.'
+      - url: https://www.microsoft.com/en-au/servicesagreement
+        quote: 'The decision of the arbitrator will be final, binding and incontestable, and it may be used as a basis for judgement in any country or region.'
+    action:
+      name: 'Its disputes clause (section 10.d)'
+      url: https://www.microsoft.com/en-au/servicesagreement
+    lastVerified: 2026-11-17
+  - topic: legal.disputes
+    regions: [US]
     tier: bad
     reason: "In the US, a private referee (an arbitrator) decides disagreements instead of a court, you can't join a group lawsuit, and there's no way to opt out. Only small claims court stays open."
     sources:
@@ -69,6 +94,16 @@ ratings:
       - url: https://www.microsoft.com/en-ca/servicesagreement
         quote: 'You and we irrevocably consent to the exclusive jurisdiction and venue of the courts in Ontario for all disputes arising out of or relating to these Terms'
     lastVerified: 2026-11-14
+  - topic: legal.disputes
+    regions: [GB, IE, DE, FR, NL, ES, IT]
+    tier: great
+    reason: 'In the EU and the UK, disputes go to the courts where you live (or Ireland’s, if you choose), and it names no arbitration or class action ban.'
+    sources:
+      - url: https://www.microsoft.com/en-gb/servicesagreement
+        quote: 'If you live in (or, if you are a business, your principal place of business is in) the European Union, Iceland, Liechtenstein, Norway, Switzerland or the United Kingdom, and you are using cost-free or paid Services, you are contracting with Microsoft Ireland Operations Limited'
+      - url: https://www.microsoft.com/en-gb/servicesagreement
+        quote: 'With respect to jurisdiction, you and Microsoft agree to choose the courts of the country to which we direct your Services where you have your habitual residence (or, if a business, where your principal place of business is located) for all disputes arising out of or relating to these Terms, or in the alternative, you may choose the responsible court in Ireland.'
+    lastVerified: 2026-11-17
   - topic: legal.terms-changes
     tier: neutral
     reason: 'It can change its terms whenever it likes and says it will tell you, but not how far ahead. If you keep using it after that, you have agreed.'

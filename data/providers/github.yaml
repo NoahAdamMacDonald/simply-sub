@@ -720,16 +720,16 @@ policies:
           quote: "If you'd like to seek Reinstatement or wish to Appeal an enforcement action on GitHub or npm, please fill out the applicable form:"
       lastVerified: 2026-11-13
     - topic: legal.content-rights
-      tier: bad
-      reason: 'What you post stays yours, and its licence ends when you remove it, unless others copied it. But GitHub may hand that licence to any other person or company without asking you.'
+      tier: good
+      reason: 'What you post stays yours. GitHub may copy and show it only to run and improve its service, and that right ends when you remove it, unless others copied it.'
       sources:
         - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
           quote: 'You own Your Content.'
         - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
-          quote: 'These licenses end when you remove Your Content, unless other Users have forked it.'
+          quote: 'make copies of Your Content as necessary to provide, develop, and improve the Service'
         - url: https://docs.github.com/en/site-policy/github-terms/github-terms-of-service
-          quote: 'in whole or in part, to any person or entity at any time with or without your consent, including the license grant in Section D.4.'
-      lastVerified: 2026-11-13
+          quote: 'These licenses end when you remove Your Content, unless other Users have forked it.'
+      lastVerified: 2026-11-17
     - topic: legal.output-rights
       tier: good
       reason: "GitHub doesn't claim what Copilot writes for you. It may look like other people's code, though, and checking whether you need their licence is up to you."

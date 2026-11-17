@@ -120,7 +120,17 @@ perks:
 #   variety of tools at its disposal, such as Search, Analyze, MCP, and the terminal"), and skills you make, on every
 #   plan; on Pro and Max also the command line ("Devin CLI"), other apps ("Slack, Linear, and MCP integrations", Pro) and
 #   the API (the table's "Devin API", drawn from the plan's quota).
-# - Not stated by any page read: web search, memory across chats, reasoning models, projects, voice conversations (its
+# - Web search on every plan, and memory across chats on Pro and Max, read 2026-11-17 in its docs: Devin Local, "the
+#   primary local agent for Devin Desktop", is "our next-generation agent harness shared with Devin CLI" (Devin Local),
+#   whose team settings say "Allow the Devin CLI agent to perform web searches on the open Internet." and "This tool is
+#   disabled by default for enterprise teams." (Devin CLI Team Settings); the JetBrains plugin's Cascade too: "Cascade
+#   will perform a web search and provide the results to the user." (Web and Docs Search in Windsurf Plugins). Memory is
+#   Devin Cloud's (Pro and Max, the table's "Devin Cloud" rows): "Memory lets Devin carry what it learns from working
+#   with you into future sessions" and "Memory is on by default." (Devin Memory and Dreaming). Not on Free: Devin
+#   Desktop's agent has none ("Devin Local replaces memories and workflows with rules and skills", Devin Desktop FAQ),
+#   and only the legacy JetBrains plugin's Cascade keeps them ("Cascade can automatically generate and store memories",
+#   Memories & Rules), a plugin "in maintenance mode" (the FAQ).
+# - Not stated by any page read: reasoning models, projects, voice conversations (its
 #   voice input only transcribes: "In its current form it can transcribe your speech to text."), image, video or audio
 #   generation, office apps, deep research, early access (the table's "Access to early feature releases and research
 #   previews" is Teams' and Enterprise's), where chats are kept. Its cloud agent's browser is a coding tool's own.
@@ -144,6 +154,7 @@ plans:
       ai.assistant: true
       ai.coding-agent: true
       ai.code-completion: true
+      ai.web-search: true
       ai.integrations: [mcp, ide, custom-assistants]
       developer.extensions: [open-vsx]
     notes: 'Devin Desktop (formerly Windsurf) with a light daily and weekly agent quota, SWE-2 Flash Medium as its model, and unlimited Tab completions and inline edits.'
@@ -167,6 +178,8 @@ plans:
       ai.code-completion: true
       ai.model-choice: true
       ai.scheduled-tasks: true
+      ai.web-search: true
+      ai.memory: true
       ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
       developer.extensions: [open-vsx]
     perks: [cloud-agents, deepwiki, ask-devin, free-swe-2, concurrent-sessions-10, use-chatgpt-plan]
@@ -191,6 +204,8 @@ plans:
       ai.code-completion: true
       ai.model-choice: true
       ai.scheduled-tasks: true
+      ai.web-search: true
+      ai.memory: true
       ai.integrations: [mcp, connectors, api, ide, cli, custom-assistants]
       developer.extensions: [open-vsx]
     perks:

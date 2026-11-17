@@ -1283,6 +1283,8 @@ policies:
       url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/problems-renewing-a-microsoft-365-subscription
     - name: 'Plans and pricing'
       url: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+    - name: 'Free apps'
+      url: https://www.microsoft.com/en-ca/microsoft-365/free-productivity-apps
     - name: 'Copilot plans'
       url: https://www.microsoft.com/en-ca/copilot/pricing/individuals
     - name: 'Copilot bug bounty'
@@ -1400,6 +1402,18 @@ policies:
           quote: 'Qualified submissions are eligible for bounty awards from $100 to $30,000 USD.'
       lastVerified: 2026-11-14
     - topic: service.account-sharing
+      tier: bad
+      reason: 'Free, Basic and Personal are for one person: you can’t share them with anyone, even at home.'
+      sources:
+        - url: https://support.microsoft.com/en-us/accounts-billing/subscriptions/share-your-microsoft-365-subscription
+          quote: 'Sharing is not available in Microsoft 365 Basic or Microsoft 365 Personal subscriptions.'
+        - url: https://www.microsoft.com/en-ca/microsoft-365/buy/compare-all-microsoft-365-products
+          quote: 'Microsoft 365 Personal is for one person.'
+        - url: https://www.microsoft.com/en-ca/microsoft-365/free-productivity-apps
+          quote: 'A free Microsoft account for one person includes 5 GB of cloud storage, ad-supported email, and apps you can access across the web and mobile devices.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      plans: [microsoft-365.family, microsoft-365.premium, microsoft-365.pro]
       tier: great
       reason: 'On Family, Premium and Pro you can share with up to 5 people you invite to your family group, with no home checks. Copilot stays yours alone.'
       sources:

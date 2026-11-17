@@ -150,13 +150,14 @@ perks:
 #   Android." (Generating Videos with Perplexity).
 # - Voice on Pro and Max: "Voice mode is available to Pro and Max subscribers." (How to use voice mode on the web and Mac
 #   app). The iOS voice assistant article names no plan, so Free's voice isn't stated (notes.md).
-# - Uses a browser or computer for you, coding agent and scheduled tasks on Pro and Max: Computer "browses the web,
+# - Uses a browser or computer for you and scheduled tasks on Pro and Max: Computer "browses the web,
 #   writes code, connects to your apps" ("Computer = an agent with tools. You ask, it actually does things — writes
 #   docs, builds slides, sends emails, browses the web, writes code, connects to your apps, and chains multi-step
 #   workflows together.") and "Computer is available on paid plans" (What is Computer?); its Automations run "on a
 #   schedule you set" and "Automations in Computer are available wherever Computer is available." (Automations in
 #   Computer); the table's "Browser Agent (Comet Assistant) Queries" "No" on Free. Free accounts' one-time "free Computer
-#   turns" ("Some free accounts") are a trial, not Free's.
+#   turns" ("Some free accounts") are a trial, not Free's. Not a coding agent (review of 2026-11-17): Computer is a
+#   general agent that also writes code, as Microsoft 365's Cowork is, and every coding agent counted is a coding tool.
 # - Early access on Max: "Early access to the newest products: Try the latest features and products before they’re
 #   available to everyone else." (Which Perplexity Subscription Plan is right for you?) and the Max card's "Priority
 #   access to new features". Pro's article lists "Exclusive Pro Perks, including early releases", but its card and the
@@ -223,13 +224,12 @@ plans:
       ai.video-generation: true
       ai.voice: true
       ai.computer-use: true
-      ai.coding-agent: true
       ai.scheduled-tasks: true
       ai.integrations: [mcp, connectors, custom-assistants]
       ai.chat-storage: cloud
       support.channels: [email, chat, community]
     perks: [more-usage, priority-support]
-    notes: 'Models from OpenAI, Google, Anthropic, xAI and others in Search (GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5, Grok 4.7, Kimi K3). Computer runs on credits bought separately; Pro includes no monthly credits.'
+    notes: 'Models from OpenAI, Google, Anthropic, xAI and others in Search (GPT-6.1 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5, Grok 4.7, Kimi K3). Computer comes with a weekly allowance (“Paid Consumer Pro plans also include a weekly amount of Computer usage”); past it, it runs on credits bought separately, with no monthly credits.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -263,7 +263,6 @@ plans:
       ai.video-generation: true
       ai.voice: true
       ai.computer-use: true
-      ai.coding-agent: true
       ai.scheduled-tasks: true
       ai.early-access: true
       ai.integrations: [mcp, connectors, custom-assistants]
