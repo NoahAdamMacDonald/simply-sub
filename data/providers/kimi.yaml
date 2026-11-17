@@ -1,0 +1,718 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada: kimi.ai's home page,
+# menus and log-in dialog, its pricing page (with the plan data the page loads) and help centre (kimi.ai/help: every
+# article of Getting Started, Features, Agent Mode, Kimi Work, Plugins & Skills, Kimi Browser Extension, Deep
+# Research, Membership and FAQ, and the Kimi Code and Kimi Claw overviews), its Terms of Service and Privacy Policy, and
+# moonshot.ai's home and about pages; the pricing page again through US, UK and German exits. kimi.com, the address
+# this task named, is Kimi for mainland China: its log-in dialog says "If you use Log in with Google, visit kimi.ai",
+# kimi.ai's says "In mainland China, visit kimi.com", and kimi.ai's terms "apply to users located outside the mainland of
+# the People's Republic of China. Users located within the mainland of the People's Republic of China should visit
+# kimi.com and review the applicable terms of service." So this file is kimi.ai's, with kimi.com in its domains
+# (kimi.com's own pages, read too, are saved under pages/ but not used for facts; notes.md).
+# Pricing: kimi.ai/membership/pricing (Plus's "Billed monthly" $19 and "Billed annually $180") and its Pricing details article:
+# "The current international plans are Plus, Pro, Max, and Ultra.", "prices are in USD", "Plus	$19/month	$180/year".
+# The page's own data names "currency":"USD" and "useRegion":"REGION_OVERSEA" for every plan, the same from Canada and
+# through US, UK and German exits: one US-dollar price list for everyone outside mainland China (GLOBAL USD). Its terms:
+# "Tax-inclusive or tax-exclusive pricing will be indicated at the point of purchase.", which needs an account, so no
+# price is marked tax-included.
+# Region checklist, 2026-11-17: 1. no country paths (kimi.ai everywhere outside mainland China); 2. a language picker
+# only (16 languages, the same prices); 3. the page's data names USD and REGION_OVERSEA, no country; 4. checkout needs an
+# account (the log-in dialog: a phone number or "Continue with Google"); 5. the help centre's pricing articles, in USD;
+# 6. Edge from Canada and through US, UK and German exits, all the same US-dollar list; 7. no bill offered.
+# Its individual plans: Free, Plus, Pro, Max and Ultra (Business and the API's pay-as-you-go Open Platform are out).
+# "Moderato, Allegretto, Allegro, and Vivace are legacy plans": no longer sold, so not listed (notes.md).
+# Bundles: none found. Official resellers: none (its pages name no shop; its "Redeem" button takes gift codes from a
+# Kimi membership a friend gave, "Gift your friend a Kimi Membership").
+
+id: kimi
+name: Kimi
+website: https://www.kimi.ai
+domains: [kimi.com, moonshot.ai]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+cancelUrl: https://www.kimi.ai/help/membership/membership-cancel-subscription
+sources: { pricing: https://www.kimi.ai/membership/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: a card or Apple's and Google's billing (Payment issues), and Apple Pay or Google
+# Pay through its payment processors (its privacy policy; Stripe, which it also names, is a processor, not a way to pay).
+# No page names the card networks.
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Payment issues'
+    url: https://www.kimi.ai/help/membership/membership-payment-issues
+    quotes:
+      - 'Review payment authorizations — Check your Apple ID, Google Play, or card settings for recurring Kimi charges'
+  - methods: [apple-pay, google-pay]
+    page: 'Privacy policy'
+    url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+    quotes:
+      - 'We use authorized third-party payment processors (such as Stripe, Apple Pay, or Google Pay) to process payments securely.'
+
+# Owner (M11.2), read 2026-11-17: its help centre says "Kimi is an AI assistant developed by Moonshot AI", and its terms
+# name the company that is "Moonshot AI" for users outside mainland China, in Singapore. Mainland China's Kimi
+# (kimi.com) is Beijing Moonshot Technology Co., Ltd.'s, and moonshot.ai's about page gives Moonshot AI's address in
+# Beijing; no page says how the Singapore company and the Beijing one are related (notes.md). Private: no page names a
+# listing.
+owner:
+  name: 'NOVASCENT PRIVATE LIMITED (Moonshot AI)'
+  page:
+    name: Terms of service
+    url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+  quotes:
+    - 'These Terms of Service ("Terms") form a legally binding agreement between you ("you" or "your") and NOVASCENT PRIVATE LIMITED, a company registered in Singapore ("Moonshot AI," "we," "us," or "our").'
+  country:
+    code: SG
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its credits follow the billing cycle and refresh on the date you subscribed
+# ("Credit update & usage rules"), which core reads as same-date (its "anniversary"). Its terms say only that a
+# subscription "will automatically renew for successive periods of the same length" (notes.md).
+renewalAnchor:
+  kind: same-date
+  page: Credit update & usage rules
+  url: https://www.kimi.ai/help/membership/update-rules
+  quotes:
+    - 'Cycle-based — Credits refresh on your subscription anniversary date, not the calendar month'
+    - 'Wait for your credits to refresh at the next billing cycle'
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on the pricing page's cards and its "Find the right plan for you" table (its ticks are
+# images: read from the screenshot): usage levels and the research-preview extras no feature describes.
+perks:
+  - id: more-agent-credits
+    name: More agent credits
+  - id: agent-credits-2x
+    name: 2x agent credits
+  - id: agent-credits-5x
+    name: 5x agent credits
+  - id: agent-credits-10x
+    name: 10x agent credits
+  - id: priority-queue
+    name: Agent priority queue
+  - id: concurrent-tasks-2
+    name: 2 agent tasks at once
+  - id: concurrent-tasks-4
+    name: 4 agent tasks at once
+  - id: k3-1-pro-highspeed
+    name: Access to K3.1 Pro Highspeed
+  - id: long-context
+    name: Up to 1M tokens of context for ultra-long conversations
+  - id: agent-swarm
+    name: 'Swarm: multiple agents, multiplied productivity'
+  - id: goal-mode
+    name: Goal mode, where agents autonomously work until completion
+  - id: kimi-claw
+    name: Deploy your Kimi Claw in one click
+  - id: premium-plugins
+    name: Premium plugins
+  - id: websites-with-database
+    name: Build and publish websites with database support
+  - id: dream-memory
+    name: Dream Memory
+  - id: self-evolving-skill
+    name: Self-evolving skill
+
+# AI features (the AI category's registry), read 2026-11-17 in kimi.ai's pricing page and help centre, on every plan
+# unless named:
+# - Web search, reasoning and voice: "Kimi is an AI assistant developed by Moonshot AI, with built-in web search, deep
+#   thinking, multimodal reasoning, and ultra-long context conversations." and "Highlights: Photo problem-solving, voice
+#   calls, translation, writing assistance" (Kimi overview).
+# - Memory: "Memory: When enabled, Kimi can refer to Memory Space and past chats for relevant questions." (Kimi
+#   overview); Dream Memory, the paid plans' research preview, is a perk.
+# - Projects and scheduled tasks: the table's "Projects" (Free "2 projects", paid 20 or 100) and "Scheduled task" (Free
+#   "2 tasks", paid 10 to 25).
+# - Deep research: on the paid cards ("Deep Research"); Free's is inferred: "To check remaining credits, hover over the
+#   Deep Research mode button to view your current free and paid remaining credits." (Deep Research FAQ).
+# - Uses a browser or computer for you: its browser extension ("sign in with your Kimi account to chat directly and let
+#   Kimi operate the current page for you", Kimi Browser Extension Introduction) and Kimi Work's computer use ("In Kimi
+#   Work, with Kimi Computer Use, Kimi can click, type, scroll, drag, and read an app’s interface content or screenshots
+#   on your desktop for you", What can Kimi do?), which no page limits to a plan.
+# - Coding agent on the paid plans: "All current international plans — Plus, Pro, Max, and Ultra — include Kimi Code."
+#   (Kimi Code membership benefits); the table's "Kimi Code" is ✗ on Free.
+# - Image, video and music or voice generation on the paid plans: "Kimi can generate images, videos, and audio through
+#   creative design plugins." (What can Kimi do?), and the table's "Plugins" row is ✗ on Free (notes.md).
+# - Early access on the paid plans: "Upgrade to Kimi Membership to unlock faster models, higher concurrency, and more
+#   powerful research preview capabilities" (pricing page, each paid card's "Research preview" list) and Kimi Code's
+#   "Early access to experimental features".
+# - Connects to: on every plan, its browser extension (Chrome and Edge); on the paid plans, plugins with MCP servers and
+#   other apps ("The Kimi web experience currently supports MCP and Skills in plugins."; Kimi Work's "Use external apps
+#   and services within Kimi, such as Canva, Notion, and WPS"), Kimi Code in VS Code and the command line, an API key
+#   for other tools within the plan's quota ("Subscribers can also obtain an API Key to integrate Kimi Code's model
+#   capabilities into third-party development tools and platforms.", its billing "Membership subscription,
+#   monthly/annual payment, with rate limiting"), and plugins you build yourself ("In Kimi Work, you can use the
+#   built-in Plugin Builder skill to turn a one-sentence idea, an external plugin repository, or any webpage into a
+#   plugin of your own.").
+# - Chats kept on its servers: "Memory is saved to your account." and chat history synced to your account.
+# - None of these pages offers code completion as you type (Kimi Code's VS Code extension is a chat panel), Kimi's
+#   assistant inside email or office apps (its plugins bring apps into Kimi), monthly API credits, or other companies'
+#   models (K2.6, K3 and K3.1 Pro are its own).
+# General features, read 2026-11-17: the web, iOS and Android ("Download the Kimi app for iOS, Android, or HarmonyOS."),
+# its desktop client for Mac and Windows ("available in the "Work" mode of the Kimi desktop client (Mac / Windows)") and
+# its browser extension ("Currently supports Chrome and Edge."). Sign-in: "on kimi.ai (overseas), accounts sign in with
+# Google or phone" (Device Management), a phone number with a text code. App languages: kimi.ai's language menu
+# (English, العربية, 简体中文, 繁體中文, Français, Deutsch, Bahasa Indonesia, Italiano, 日本語, 한국어, Português (Brasil),
+# Русский, Español (Latinoamérica), ไทย, Türkçe, Tiếng Việt). Support: support@moonshot.ai and membership@moonshot.ai,
+# "Human support (WeCom)" through its WeChat account, and its Discord and Reddit communities (How do I contact Kimi
+# Support?). Parental controls on every plan: "Minor Mode (shown as Guardian Mode in the setup dialog) is a management
+# tool for guardians." and "Guardian control: a guardian passcode is required to turn it on or off" (Minor Mode). No
+# pause: cancelling is the only option its Cancel subscription article offers.
+features:
+  platforms: [web, ios, android, windows, macos, browser-extension]
+  account.sign-in: [sms, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+  support.channels: [email, chat, community]
+
+plans:
+  - id: kimi.free
+    name: Free
+    link: https://www.kimi.ai/membership/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.integrations: [browser-extension]
+      ai.chat-storage: cloud
+      account.parental-controls: true
+    inferred:
+      ai.deep-research:
+        reason: 'Its Deep Research FAQ shows each account its “free and paid remaining credits”, so free accounts get some Deep Research, though the plan cards list it only on paid plans.'
+        page:
+          name: Deep Research FAQ
+          url: https://www.kimi.ai/help/deep-research/deep-research-faq
+        lastVerified: 2026-11-17
+    notes: 'Kimi’s own models (K2.6, K3) with web search, deep thinking, voice calls and memory; one agent task at a time, 2 projects and 2 scheduled tasks. No Kimi Code or plugins.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/membership/pricing
+
+  - id: kimi.plus
+    name: Plus
+    link: https://www.kimi.ai/membership/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.coding-agent: true
+      ai.early-access: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
+      account.parental-controls: true
+    perks:
+      [
+        more-agent-credits,
+        priority-queue,
+        concurrent-tasks-2,
+        agent-swarm,
+        premium-plugins,
+        websites-with-database,
+        dream-memory,
+        self-evolving-skill,
+      ]
+    notes: 'K3 and Kimi Code, with agent credits shared across chat, agents, Deep Research, slides, documents and coding, refreshed monthly. 20 projects and 10 scheduled tasks.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 19
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 180
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+
+  - id: kimi.pro
+    name: Pro
+    link: https://www.kimi.ai/membership/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.coding-agent: true
+      ai.early-access: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
+      account.parental-controls: true
+    perks:
+      [
+        agent-credits-2x,
+        priority-queue,
+        concurrent-tasks-2,
+        k3-1-pro-highspeed,
+        agent-swarm,
+        goal-mode,
+        kimi-claw,
+        premium-plugins,
+        websites-with-database,
+        dream-memory,
+        self-evolving-skill,
+      ]
+    notes: 'Adds K3.1 Pro Highspeed, Goal mode and a Kimi Claw of your own (a cloud agent you can reach from Feishu, WeChat and other chat apps). 20 projects and 15 scheduled tasks.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 39
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 372
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+
+  - id: kimi.max
+    name: Max
+    link: https://www.kimi.ai/membership/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.coding-agent: true
+      ai.early-access: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
+      account.parental-controls: true
+    perks:
+      [
+        agent-credits-5x,
+        priority-queue,
+        concurrent-tasks-4,
+        k3-1-pro-highspeed,
+        long-context,
+        agent-swarm,
+        goal-mode,
+        kimi-claw,
+        premium-plugins,
+        websites-with-database,
+        dream-memory,
+        self-evolving-skill,
+      ]
+    notes: '100 projects with 50GB of storage, 20 scheduled tasks, and K3’s 1M-token context.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 948
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+
+  - id: kimi.ultra
+    name: Ultra
+    link: https://www.kimi.ai/membership/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.deep-research: true
+      ai.computer-use: true
+      ai.coding-agent: true
+      ai.early-access: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.chat-storage: cloud
+      account.parental-controls: true
+    perks:
+      [
+        agent-credits-10x,
+        priority-queue,
+        concurrent-tasks-4,
+        k3-1-pro-highspeed,
+        long-context,
+        agent-swarm,
+        goal-mode,
+        kimi-claw,
+        premium-plugins,
+        websites-with-database,
+        dream-memory,
+        self-evolving-skill,
+      ]
+    notes: 'Twice Max’s agent credits and 25 scheduled tasks; 100 projects with 50GB of storage.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 199
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 1908
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.kimi.ai/help/membership/membership-pricing
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: the log-in dialog's "I agree
+# to Terms of Service and Privacy Policy" and the pricing page's "By paying, you agree to the Terms of Service and
+# Privacy Policy", both kimi.ai's (NOVASCENT PRIVATE LIMITED's) and both "apply to users located outside the mainland of
+# the People's Republic of China". The privacy policy's US disclosures are part of it. The help centre's membership,
+# account, memory, minor mode and deletion articles were read for billing, deletion and controls. Not rated: kimi.com's
+# own Terms of Services, Privacy Policy and Paid Services Agreement (Beijing Moonshot Technology Co., Ltd.'s, for
+# mainland China, saved under pages/); Kimi Claw's own privacy policy (a Pro and higher extra, not read); the Kimi Code
+# Extra Usage Agreement (optional usage billing, not read).
+policies:
+  links:
+    - name: Terms of service
+      url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+    - name: Privacy policy
+      url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+    - name: Cancel subscription
+      url: https://www.kimi.ai/help/membership/membership-cancel-subscription
+    - name: Plan changes
+      url: https://www.kimi.ai/help/membership/membership-upgrade-downgrade
+    - name: Account deletion
+      url: https://www.kimi.ai/help/others/account-deletion
+    - name: Memory tips
+      url: https://www.kimi.ai/help/features/memory-tips
+    - name: Signing in
+      url: https://www.kimi.ai/help/others/device-management
+    - name: Changing your phone number
+      url: https://www.kimi.ai/help/others/phone-profile
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online whenever you like, but at least a day before it renews, or you pay for the next period. You keep it until the end of the time you paid for.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'To avoid being charged for the next billing period, you must cancel at least 24 hours before the applicable renewal date, or earlier if required by the applicable Platform Provider.'
+        - url: https://www.kimi.ai/help/membership/membership-cancel-subscription
+          quote: 'You can cancel auto-renewal at any time. After cancellation, your membership benefits remain active until the end of the current billing cycle.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back, even for a year paid up front, but you keep using it until the end of the time you paid for.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Unless required by applicable law or expressly stated otherwise in these Terms, all payments are final and non-refundable, including fees paid for annual or other prepaid Subscription (as defined below) terms.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'If you cancel your Subscription, your access will remain active until the end of the then-current paid period, but you will not receive a refund or credit for any unused portion of that period.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price never applies to time you’ve already paid for, and it tells you at least 30 days before a price goes up, so you can cancel first.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'No price increase will apply during your then-current Subscription term. If a price increase applies to your Subscription, we will provide at least 30 days’ prior notice.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'You may cancel your Subscription before the end of your then-current term to avoid charges at the new price.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A free trial turns into a paid plan on its own unless you cancel before it ends, which you can do at any time, though you may lose access at once.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Unless otherwise stated at the time of sign-up, your free trial will automatically convert to a paid Subscription at the end of the trial period'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'To avoid charges, you must cancel your free trial prior to the end of your free trial period. If you cancel during a free trial, your access may end immediately.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It tells you about renewing when you buy, and reminds you before a renewal only where a law makes it.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'If you subscribe to a plan with automatic renewal, we will clearly notify you of the renewal terms at the time of purchase and, where required by law, again before renewal.'
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: neutral
+      reason: 'New features may cost extra, and a new or higher fee applies only after it tells you. Extra usage beyond your plan is an optional pack you buy.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'We may introduce new features or Services that are subject to separate or additional fees, and we may modify the fees for existing Services from time to time.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Any new or increased fees will apply only after we provide notice and, where required, obtain your acceptance.'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once and refunds the unused part of your old plan. To move down, you cancel and choose the cheaper plan when your paid time ends.'
+      sources:
+        - url: https://www.kimi.ai/help/membership/membership-upgrade-downgrade
+          quote: 'Upgrades will be prorated and any unused portion of your current plan will be refunded.'
+        - url: https://www.kimi.ai/help/membership/membership-upgrade-downgrade
+          quote: "Downgrades can't be applied mid-cycle."
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to a private referee (arbitration) in Singapore, not a court, you can’t join a class action, and there’s no way to opt out.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'it shall be submitted to and finally resolved by arbitration administered by the Singapore International Arbitration Centre (“SIAC”) in accordance with the SIAC Arbitration Rules then in force'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'To the maximum extent permitted by applicable law, you and Moonshot AI agree that any dispute will be resolved only on an individual basis and not as part of any class, collective, consolidated, coordinated, or representative action or proceeding.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms by posting them, telling you more only where a law makes it, and if you keep using Kimi you’ve agreed to them.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'When we do, we will post the updated version with the effective date on this page and, where required by applicable law, provide additional notice.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Unless otherwise stated, updated Terms will become effective when posted. Your continued use of the Services after the updated Terms become effective constitutes your acceptance of the updated Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend or close your account, with or without warning, if it believes you broke its terms or put others at risk, and gives no refund. You can appeal by email.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'We may suspend, restrict, or terminate your access to the Services, with or without notice, if we reasonably believe that: (a) you have violated these Terms; (b) you have engaged in fraudulent, abusive, harmful, or unlawful activity; (c) your use of the Services creates risk to Moonshot AI, the Services, other users, or third parties; or (d) suspension, restriction, or termination is necessary to comply with applicable law, regulation, legal process, or governmental request.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Unless required by applicable law or expressly stated otherwise in these Terms, all payments are final and non-refundable'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'What you type stays yours, but it takes a broad licence to use it to run Kimi, review its quality and study how it’s used. (Training on it is graded under AI training.)'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'As between you and us, and to the extent permitted by applicable law, you retain ownership of your Input and own the Output.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'You grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, process, and disclose your Content as necessary to (i) for the operations of the Services, safety and quality review of the Services, and internal analytics'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What Kimi makes for you is yours, though others may get similar answers.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'We hereby assign to you all of our right, title, and interest, if any, in and to the Output.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Due to the nature of the Services and artificial intelligence generally, the Output may be similar or identical to content generated for other users of the Services.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: good
+      reason: 'It can change or stop features, but if a change takes away much of what your current plan pays for, it offers something as good, money back for that part, or a way out with a refund.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'If any such change has a material adverse effect on the core benefits of a Subscription that you have already purchased and that remains within its then-current term, we will offer substitute benefits of equal or greater value, reasonable compensation for the affected portion, or the ability to cancel and receive a pro rata refund or service credit for the affected portion as specified in the applicable notice.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.kimi.ai/user/agreement/modelUse?version=v2
+        - https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use Kimi under a licence it can take back, and may not take it apart or look for its code, with no exception for what the law allows.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'we grant you a limited, non-exclusive, non-transferable, non-sublicensable, revocable right to access and use the Services for your personal or internal business purposes'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'reverse engineer, decompile, disassemble, translate, or otherwise attempt to discover or derive the source code, underlying models, algorithms, system architecture, or proprietary components of the Services;'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use it, your device, and even your clipboard where your settings allow, to study and improve Kimi. You can only limit some of it, device by device and browser by browser.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'We analyze usage data and user interactions to better understand how our Services are used, identify problems, and develop new features or products.'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Clipboard data (if applicable and permitted by your settings)'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Depending on the third-party tool or feature you use, you may not be able to block all automatic data collection technologies or you may need to update your preferences on multiple devices or browsers.'
+      action:
+        name: 'Its privacy policy’s choices'
+        url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your data to ad networks for targeted ads, which some US laws call a sale. You can only say no browser by browser and device by device, or through ad-industry opt-out programs.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Our disclosure of personal information to Ad Networks and Advertising Partners qualifies as the sale of personal information or the sharing or processing of personal information for the purpose of displaying advertisements that are selected based on personal information obtained or inferred over time from an individual’s activities across businesses or distinctly-branded websites, applications, or other services'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Please note this opt-out tool is website, device, and browser specific, so you will need to change your preferences on each device and browser you use to interact with the specific website you are visiting.'
+      action:
+        name: 'Its privacy policy’s choices'
+        url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It tracks you across other sites and apps to show you ads picked for you. Turning that off means using your device’s settings or ad-industry opt-out programs, one at a time.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'We engage third parties to help us facilitate targeted advertising designed to show you personalized ads based on predictions of your preferences and interests developed using personal information we maintain and personal information our third-party partners obtain from your activity over time and across nonaffiliated websites and other services.'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'We may share a common account identifier (such as a hashed email address or user ID) with our third-party advertising partners to help link the personal information we and our third-party partners collect to the same person'
+      action:
+        name: 'Its privacy policy’s choices'
+        url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you write and upload trains its AI unless you email it to stop. Even then, what it already trained on stays in its models.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: '(iii) subject to your training opt-out below, use Content to train, evaluate, and improve the Services.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'You can opt out of allowing your Content to be used to train the Services by contacting us at membership@moonshot.ai.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'Opt-out applies prospectively only and does not require us to delete or remove Content already used in prior training cycles.'
+      action:
+        name: 'How to opt out of training (its terms)'
+        url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'It may use what you send for quality reviews and its own analysis, as well as to run Kimi, and no setting stops that. (Training is graded under AI training.)'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'You grant us a non-exclusive, worldwide, royalty-free license to use, reproduce, process, and disclose your Content as necessary to (i) for the operations of the Services, safety and quality review of the Services, and internal analytics'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it, and your voiceprint at most 3 years after you last use Kimi. When you delete your account it deletes or anonymizes the rest, unless a law or a dispute needs it.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'We will permanently destroy voiceprint data when the initial purpose for collecting or obtaining such data has been satisfied, or within 3 years of your last interaction with us, whichever occurs first.'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'If you request account deletion, we will delete or anonymize your personal information unless retention is required to comply with legal obligations or to resolve disputes.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask to delete your account in its app’s settings, and once that’s approved your chats, files and memories are deleted. It doesn’t say how long that takes.'
+      sources:
+        - url: https://www.kimi.ai/help/others/account-deletion
+          quote: 'In the app: Settings → Account Security → Delete Account, then submit the deletion request.'
+        - url: https://www.kimi.ai/help/others/account-deletion
+          quote: 'Once your account deletion is approved, your conversation history, uploaded files, Memory Space data, and other content enter the deletion workflow and will no longer be associated with your account.'
+      action:
+        name: 'How to delete your account'
+        url: https://www.kimi.ai/help/others/account-deletion
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: poor
+      reason: 'You can export the memories it keeps about you yourself, but its pages offer no copy of your chats; for anything else you email it.'
+      sources:
+        - url: https://www.kimi.ai/help/features/memory-tips
+          quote: 'Review saved information in Memory Space, correct outdated details, delete memories you no longer need, or export a copy.'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'If you have any questions about reviewing, modifying, or deleting your personal information, you can contact us directly at membership@moonshot.ai.'
+      action:
+        name: 'How to export your memories'
+        url: https://www.kimi.ai/help/features/memory-tips
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may hand your data to authorities when the law or an official request calls for it, and also to protect itself from legal liability, and may report you to the police. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Comply with legal obligations or lawful requests by public authorities, courts, or regulators (based on applicable legal standards, including international ones);'
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Respond to legal claims or protect ourselves from legal liability.'
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'reporting conduct to law enforcement, regulators, or other authorities where appropriate'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information may be stored in other countries, which its policy doesn’t name, with safeguards it doesn’t describe.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'Your information may be transferred to and stored on servers located outside of your country of residence. Where international data transfers occur, we take appropriate safeguards to protect your personal information in accordance with applicable data protection laws.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with a Google account, or with a mobile phone number that can get text codes (no internet or landline numbers).'
+      sources:
+        - url: https://www.kimi.ai/help/others/device-management
+          quote: 'on kimi.ai (overseas), accounts sign in with Google or phone'
+        - url: https://www.kimi.ai/help/others/phone-profile
+          quote: "Note: Currently, only supported regions' phone numbers and email addresses are accepted. VoIP numbers and landlines are not supported."
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says it takes reasonable security measures; it names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/userPrivacy?version=v2
+          quote: 'We will endeavor to avoid collecting irrelevant user information and will take reasonable technical and organizational measures designed to protect your personal information.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'You may not share your account credentials or make your account available to anyone else.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://www.kimi.ai/user/agreement/modelUse?version=v2]
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: 'A year to bring a claim'
+      tier: bad
+      reason: 'Any claim against it has to be filed within one year, or sooner if the law allows, or you lose it for good.'
+      sources:
+        - url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+          quote: 'YOU AGREE THAT ANY CLAIM, ACTION, OR PROCEEDING ARISING OUT OF OR RELATED TO THESE TERMS MUST BE FILED WITHIN ONE (1) YEAR THE SHORTER OF (A) AFTER THE EVENT OR FACTS GIVING RISE TO THE CLAIM OCCURRED OR (B) THE SHORTEST STATUTE OF LIMITATIONS PERMITTED BY APPLICABLE LAW.'
+      lastVerified: 2026-11-17
