@@ -1,0 +1,87 @@
+url: https://help.mistral.ai/en/articles/392902-how-can-i-manage-my-subscription-on-mobile-ios-and-android
+method: fetch
+saved: 2026-11-17
+
+How can I manage my subscription on mobile (iOS and Android)? | Mistral Help Center Copyright (c) 2023, Intercom, Inc. (legal@intercom.io) with Reserved Font Name "Inter".
+This Font Software is licensed under the SIL Open Font License, Version 1.1.Skip to main content
+English Français Italiano English
+Search⌘K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+About our Models
+All Collections Help and Troubleshooting How can I manage my subscription on mobile (iOS and Android)? How can I manage my subscription on mobile (iOS and Android)?
+August 12, 2026
+Whether you’re using the app for iOS or Android, you can manage or cancel your subscription directly in the application.
+How to manage and cancel your subscription
+1. Open the settings menu
+In the app:
+Tap the menu icon at the very-top left of the app to reveal the panel.
+Tap on your Organization name at the bottom of the screen.
+The Settings menu opens.
+2. Go to your subscription details
+In the Settings menu:
+Locate the Subscription option under the Account section.
+If you're subscribed to a Pro plan, click on it to view your subscription details.
+🔑 Mobile subscription management is available only for Pro plans purchased in the mobile app. If you purchased Pro on the web, or if you have a Team plan or higher, manage your subscription from the web instead.
+​
+If your Pro plan is bundled with your mobile plan or billed by your mobile carrier, the subscription is managed by the carrier: use your carrier’s support process.
+💡 Alternatively, you can view your subscription directly in your device’s subscription center, as explained below ⬇️.
+3. Manage or cancel your Pro subscription
+On the subscription details screen:
+Tap Manage subscription to open your device’s subscription management center.
+You will be redirected to your provider's store where you can:
+iOS (App Store):
+View your subscription details, including price and next billing date
+Switch between the Monthly and Yearly plans by tapping See All Plans and selecting your plan
+Cancel your subscription by tapping Cancel Subscription
+Android (Google Play):
+View your subscription details
+Manage your payment method
+Cancel your subscription by tapping Cancel Subscription at the bottom of the screen
+📌 These store-management steps are provided for guidance only. Apple and Google may update their interfaces or processes at any time, and Mistral may not be notified of those changes.
+FAQ
+What happens if I cancel my subscription?
+Canceling your subscription immediately stops automatic renewal of your Pro plan.
+You’ll keep access until the end of your current billing period (monthly or yearly), then revert to Free mode.
+If you want to reactivate before the end of your billing period, you can resubscribe. You won’t be charged again until the next cycle.
+If you cancel during the 14-day trial period, you may be eligible for a refund. For all refund scenarios (web, App Store, Google Play, carrier, Education plan), see refund policy.
+What is the refund policy for mobile subscriptions?
+To request a refund, contact the store where you purchased your subscription (Apple support or Google Play support) and follow their process.
+Refund requests sent directly to our support team cannot be processed for App Store or Google Play purchases.
+Subscribed through a mobile carrier? Free Mobile subscriptions are managed from your Free Mobile customer account. Orange / NJU offers include 6 months free and end automatically after the offer period. Mistral cannot refund carrier-managed subscriptions directly.
+For all refund scenarios (web, App Store, Google Play, carrier, Education plan), see refund policy.
+I can’t find my subscription in the store. What should I do?
+If you don’t see your subscription, you may be signed in with a different Apple or Google account than the one used for purchase.
+Switch to the correct account if possible. You can identify which account was used by checking your original purchase receipt email.
+If you still can’t find it, contact support.
+The app says I’m not Pro, but the store shows I’m subscribed. What should I do?
+If you purchased the subscription on Android, first check whether Google Play is waiting for you to confirm the purchase. Open Google Play, go to Payments & subscriptions > Subscriptions, then tap Open the app.
+Until this Google Play confirmation is completed, Pro may not be linked to your Mistral account. If you do not confirm within 3 days, Google cancels and refunds the subscription.
+If the purchase is already confirmed, this can happen when the subscription is linked to a different email address than the one currently signed in.
+Pro plan purchases are tied to the email address used at purchase. Check which account received the confirmation and sign in with that email.
+If you subscribed through Google Play, your purchase might still need confirmation. Open Google Play, go to Payments & subscriptions > Subscriptions, select your Pro subscription, then tap Open to open the app from that page.
+Until you complete this step, Pro is not applied to your account. If the purchase is not confirmed within 3 days, Google Play cancels it and refunds the payment.
+If you can’t find it, contact our support team with your order number from Apple or Google.
+How do I locate my subscription in the App Store or Google Play?
+You can access your subscription directly in the store. Follow the official tutorials below:
+From the App Store → Settings > Subscriptions.
+From Google Play → Payments & subscriptions > Subscriptions.
+Did this answer your question? Disappointed Reaction Neutral Reaction Smiley Reaction
+Related Articles
+How do I contact support?
+Can I activate Zero Data Retention (ZDR)?
+How can I subscribe to Pro on mobile?
+How can I upgrade or cancel my subscription?
+Refund policy: eligibility, timing, and how it works
+On this page
+How to manage and cancel your subscription
+1. Open the settings menu
+2. Go to your subscription details
+3. Manage or cancel your Pro subscription
+FAQ
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

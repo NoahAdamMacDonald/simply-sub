@@ -1,0 +1,87 @@
+url: https://opencode.ai/product
+method: browser
+saved: 2026-11-17
+
+Skip to content
+[]
+Docs
+[]
+Product
+[]
+Data
+[]
+Console
+[]
+Models
+[]
+Subscriptions
+[]
+Enterprise
+Product
+One agent, every surface. Start a session on your desktop, steer it from your phone, pick it up in the terminal or drive it from your own code.
+Products
+Desktop
+Sessions, tabs, diffs, built-in browser, and extensions on macOS, Windows and Linux.
+Download for Windows
+Terminal
+A fast terminal UI that works in any shell, editor or remote server.
+Install
+Mobile
+Start, steer and approve sessions from your phone, wherever you are.
+Download
+SDK
+Drive OpenCode from your own scripts, CI jobs and tools.
+Read docs
+More products
+Browse
+Let agents use your real browser.
+Learn more
+Hex
+On-device voice dictation for any app.
+Learn more
+(opens in a new tab)
+OpenTunnel
+Public HTTPS URLs for local apps.
+Learn more
+(opens in a new tab)
+OpenTUI
+A library for terminal user interfaces.
+Learn more
+(opens in a new tab)
+FAQ
+What is OpenCode?
+OpenCode is an open source agent that helps you write and run code with any AI model. It's available as a desktop app, a terminal interface, a mobile app and an SDK.
+How do I use OpenCode?
+Do I need extra AI subscriptions to use OpenCode?
+Not necessarily. OpenCode comes with a set of free models that you can use without creating an account. You can even connect your local models. OpenCode also works with all popular providers, including OpenAI, Anthropic and xAI. OpenCode Models give you access to popular coding models that we've tested and benchmarked for coding agents.
+Can I use my existing AI subscriptions with OpenCode?
+Can I only use OpenCode in the terminal?
+No. OpenCode is also available as a desktop app and a mobile app, and the SDK lets you control it from your own code.
+How much does OpenCode cost?
+What about data and privacy?
+Your data and information is only stored when you use our free models. Learn more about our models.
+Is OpenCode open source?
+[
+]
+Community
+(opens in a new tab)
+[
+]
+Changelog
+[
+]
+Press
+[
+]
+Brand
+[
+]
+Legal
+[
+]
+English
+Status:
+Normal
+(opens in a new tab)
+©2026 Anomaly
+Drag a letter to move it. With the keyboard, press Space to pick up a letter, the arrow keys to move it and Space to drop it, or Alt and an arrow key to move it at once.

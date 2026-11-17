@@ -1,0 +1,232 @@
+url: https://mistral.ai/pricing/
+method: browser
+saved: 2026-11-17
+
+Skip to content
+Research
+Sovereign AI
+Cloud
+Customers
+Company
+Get in touch
+Start building
+Why Sovereign AI
+Products
+Method
+Sovereign AI in practice
+Inference
+Compute
+Energy & utilities
+Manufacturing
+Financial services
+Public sector
+Cybersecurity
+All customers
+Blog
+Docs
+About us
+Careers
+Research
+Sovereign AI
+Cloud
+Customers
+Company
+Get in touch
+Start building
+Pricing
+Pricing
+USD ($)
+EUR (€)
+France
+Austria
+Belgium
+Bulgaria
+Croatia
+Cyprus
+Czech Republic
+Denmark
+Estonia
+Finland
+France
+Germany
+Greece
+Hungary
+Ireland
+Italy
+Latvia
+Lithuania
+Luxembourg
+Malta
+Netherlands
+Poland
+Portugal
+Romania
+Slovakia
+Slovenia
+Spain
+Sweden
+United Kingdom
+Free
+Your personal AI agent for everyday tasks.
+Test out Vibe’s capabilities.
+Access on web and mobile.
+Limited messages and web searches.
+Limited coding sessions.
+Basic image generation and editing.
+100+ connectors.
+Start Free
+Popular
+Pro
+Education plan
+Full access to Vibe for all-day coding and long-running tasks.
+$14.99
+/mo
+Excluding taxes
+I'm a student
+More access and usage.
+More messages and web searches.
+Faster responses.
+All-day coding in the CLI, IDE, or on web.
+Generate spreadsheets and slides.
+Better image generation and editing.
+$25.5 /mo in API credits.
+Chat and email support.
+More access and usage.
+More messages and web searches.
+Get more complex tasks done.
+All-day coding in the CLI, IDE, or on web.
+More image generations.
+$15 /mo in API credits.
+Chat and email support.
+Get Pro
+Team
+Secure, collaborative workspace for teams building with AI.
+$24.99
+/user/mo
+Excluding taxes
+Even higher limits.
+Even faster responses.
+Up to 30GB of storage /user.
+Domain name verification.
+Data export.
+$50
+/mo
+Users
+Get Team
+Enterprise
+Private deployments powered by custom models, UI, and tools.
+Custom models.
+Custom agents.
+Custom workflows.
+Audit logs.
+SAML SSO.
+White label.
+Contact Sales
+Free
+Start Free
+Pro
+Get Pro
+Team
+Get Team
+Enterprise
+Contact Sales
+Interfaces.
+Vibe on web
+Vibe CLI
+Vibe for IDE
+Vibe on mobile (iOS and Android)
+Features and tools.
+Messages
+Up to 6x free
+Up to 6x free
+Voice mode
+Skills
+Web searches
+Up to 5x free
+Up to 5x free
+Libraries and document upload
+Limited
+Up to 15GB
+Up to 30GB / user
+Task scheduling
+Up to 5
+Unlimited
+Unlimited
+Spreadsheets
+Slides
+Workflows
+Connectors (beta)
+Custom MCP connectors (beta)
+Canvas
+Project folders
+Up to 1,000
+Up to 1,000
+Image generation
+Up to 40x free
+Up to 40x free
+Verified news
+Coding features.
+Use Vibe in the CLI, IDE, and remotely.
+Connectors
+Hooks
+Remote coding agents
+Teleport
+Remote agent observability
+Domain name verification
+Team and enterprise features.
+Knowledge connectors
+Custom deployments
+Admin API
+Data export
+Audit logs
+SAML SSO
+White label
+Usage and data.
+Extend usage with PAYG credits
+Model training
+Opt-out
+Opt-out
+Opt-out
+Customer service.
+Help center
+Chat and email support
+Frequently asked questions.
+Does Mistral have a free plan?
+Yes, Mistral’s Free plan provides limited access to Vibe, including our latest models, chat, search, creation, and Vibe for code for agentic coding in your terminal. On the Free plan, you also get access to Mistral Studio.
+Which model should I use?
+For most tasks and coding: Mistral Medium. For document AI: OCR. For audio and speech intelligence: Voxtral. For cost-sensitive projects: Mistral Small. See the Models overview for more information.
+How is API pricing calculated?
+Most models are priced per million tokens, with both input (your prompts) and output (responses) counted separately. For example, Mistral Large costs $0.5 /M tokens in and $1.5 /M tokens out. Batch processing, for high-volume work, reduces the price by 50%, and cached input tokens reduce input cost by up to 90% for repeated prompts. A few APIs are priced differently: OCR is per 1,000 pages, speech models are per minute, and tool APIs are priced per call.
+How can I track my API usage and spending?
+The Mistral Studio dashboard offers detailed tracking of API usage, including metrics for calls, endpoints, and user activity. It breaks down costs for services like completion, OCR, and fine-tuning, helping you monitor and optimize API consumption efficiently.
+What’s the difference between Mistral Free and Pro plans?
+The Free plan is ideal for getting started with the Vibe or Studio. Mistral Pro offers higher limits across chat plus full access to coding with Mistral Vibe. You get more messages and web searches, more extended thinking and deep research reports, expanded Mistral Vibe capacity, and chat and email support.
+Does Mistral Vibe have any usage limits?
+Pro has higher ceilings compared to Free (e.g. up to 40x more image generations). Team and Enterprise plans have even higher allowances on certain features. For example, Flash answers: 200 / day on Team vs. 150 / day on Pro.
+Can I self-host Mistral’s models?
+Yes, you can self-host our models anywhere. Open-weight models (e.g., Mistral 7B) are Apache 2.0 licensed for research/individual use; while commercial deployments require a Mistral license with separate terms for derivatives and production use.
+Are there discounts for students?
+Verified students can get Mistral Pro for $5.99 / month (normally $14.99).
+Do you offer enterprise solutions and support?
+Yes, the Mistral Enterprise plan includes custom SLAs, dedicated support, and private deployments. Contact us for more details.
+Build with us
+Customers
+Partners
+Brand
+Pricing
+Dive deeper
+Coding
+Document intelligence
+Speech
+Applied AI services
+All use cases
+Company
+Terms of Service
+Privacy Policy
+Privacy choices
+Data processing agreement
+Trust Center
+Legal notice
+Get Mistral Vibe
+Mistral AI © 2026
+English

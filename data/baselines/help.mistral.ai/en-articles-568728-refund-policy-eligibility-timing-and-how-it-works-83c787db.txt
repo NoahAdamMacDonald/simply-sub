@@ -1,0 +1,60 @@
+url: https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
+method: fetch
+saved: 2026-11-17
+
+Refund policy: eligibility, timing, and how it works | Mistral Help Center Copyright (c) 2023, Intercom, Inc. (legal@intercom.io) with Reserved Font Name "Inter".
+This Font Software is licensed under the SIL Open Font License, Version 1.1.Skip to main content
+English Français Italiano English
+Search⌘K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+About our Models
+All Collections Help and Troubleshooting Refund policy: eligibility, timing, and how it works Refund policy: eligibility, timing, and how it works
+Learn when refunds are available for subscriptions and API credits, and how to request one.
+August 12, 2026
+Want to request a refund after cancelling your subscription? Refund conditions apply and depend on where you originally subscribed, the type of purchase, and when you make the request.
+I subscribed on the Mistral website
+Web subscriptions are billed directly by Mistral. You can get a refund only if you cancel within the legal withdrawal window: 14 days from your initial purchase.
+If you cancel within this window from the Admin panel, cancellation is immediate and your refund is processed automatically.
+After the 14-day window, cancelling your subscription does not trigger a refund. Your plan stays active until the end of the current billing period, then returns to Free mode.
+🚨 The 14-day withdrawal window applies only to initial purchases, not to renewals.
+🔎 Need the cancellation steps? See How can I upgrade or cancel my subscription?
+I subscribed via the iOS or Android app
+If you subscribed through the Apple App Store or Google Play, refunds are handled by the store, not by Mistral.
+App Store (iOS): request a refund via Apple support.
+Google Play (Android): request a refund via Google Play support.
+🚨 Our support team can’t process refunds for App Store or Google Play purchases.
+🔎 Need to manage or cancel a mobile subscription? See How can I manage my mobile subscription?
+I subscribed via a mobile carrier (Free Mobile, Orange, NJU)
+If your Pro plan is bundled with your mobile plan or billed by your phone carrier, the subscription is managed by the carrier.
+Free Mobile: manage cancellation and refund requests from your Free Mobile customer account.
+Orange / NJU: the offer includes 6 months free, so there is no payment to refund during the free period. The subscription ends automatically at the end of the offer.
+🚨 For carrier-managed subscriptions, Mistral can’t change the subscription or issue the refund directly. Use your carrier’s support process.
+FAQ
+I was charged twice or charged unexpectedly. What should I do?
+If you see two charges for the same subscription, overlapping billing periods after a plan change, or a charge you don’t recognize, contact our support team with:
+the invoice or receipt numbers,
+the email used at purchase,
+the payment channel (web, App Store, Google Play, carrier),
+a short explanation of the issue.
+Can I get a refund for API credits or wallet balance?
+Prepaid API credits are separate from subscriptions. If you added credits by mistake, were charged more than once, or have unused credits, contact our support team with your organization ID and the receipt number so we can review your case.
+Credit refund eligibility is reviewed case by case by our support team.
+How long do refunds take?
+Refunds are sent back to the original payment method. They typically appear within 5-10 business days, depending on your bank or payment provider.
+Did this answer your question? Disappointed Reaction Neutral Reaction Smiley Reaction
+Related Articles
+How can I manage my subscription on mobile (iOS and Android)?
+How can I subscribe to Pro on mobile?
+How can I upgrade or cancel my subscription?
+On this page
+I subscribed on the Mistral website
+I subscribed via the iOS or Android app
+I subscribed via a mobile carrier (Free Mobile, Orange, NJU)
+FAQ
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

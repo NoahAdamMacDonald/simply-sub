@@ -1,0 +1,15 @@
+url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-deletion
+method: browser
+saved: 2026-11-17
+
+Help Center
+Login Issues
+User Guide
+Chat Issues
+API
+Send feedback
+User Guide
+Deleting Account
+Go to 「Settings」 --> 「Account settings」 --> 「Delete Account」.
+After deletion, all chat history in the current account will be permanently deleted. Any unused balance in your developer account will be forfeited upon deletion. Please proceed with caution.
+If you cannot find this option, please upgrade your App to the latest version.

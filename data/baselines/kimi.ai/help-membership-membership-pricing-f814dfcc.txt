@@ -1,0 +1,143 @@
+url: https://www.kimi.ai/help/membership/membership-pricing
+method: fetch
+saved: 2026-11-17
+
+ProductsProducts Products
+Kimi Kimi Work Kimi Code Kimi Browser Extension Downloads
+All products
+Features
+BuildAI app & website builder SlidesAI presentation maker DocsAI document agent SheetsAI spreadsheet agent Deep ResearchAI research agent
+All features
+APIAPI
+Use CasesUse Cases Featured use cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchConduct market researchCreate resumesCreate brochures
+All use cases
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generator
+All capabilities
+Showcases
+WebsitesAgent SwarmDeep ResearchSlidesSheetsDocsDesign
+All showcases
+BusinessBusiness Kimi BusinessBusiness plansContact sales
+ResearchResearch Kimi K3.1 ProKimi K3PerceptionBenchKimi K2.6Agent SwarmWorldVQAKimi K2.5Kimi Vendor VerifierKimi K2 ThinkingKimi K2
+All research
+ResourcesResources Support & docs
+Help centerKimi Code docs
+Academy
+Kimi Work 101Kimi Code 101
+All tutorials
+Articles
+AI agents explainedMulti-agent systemsParallel agentsWhat is vibe codingBuild a landing pageCreate a posterWrite a business proposal
+All articles
+PricingPricing
+DownloadDownload
+Download
+Download Try Kimi
+Getting Started
+Features
+Agent Mode
+Kimi Work
+Plugins & Skills
+Kimi Browser Extension
+Slides
+Docs & Sheets
+Deep Research
+Build
+3D Make
+Membership Membership plans overview
+Credit update & usage rules
+Pricing details
+Account & credit query
+Plan changes
+Extra Usage: pay-as-you-go top-ups
+Cancel subscription
+Payment issues
+Invoices
+Contact us
+Kimi Code
+Kimi API
+Kimi Business
+Kimi Claw
+Kimi Bulletin
+FAQ
+Help Center Membership Pricing details
+Pricing details
+The current international plans are Plus, Pro, Max, and Ultra. The tables below describe new plans; see the legacy-plan section for existing subscriptions. Check the membership pricing page for current prices, full benefits, and purchase eligibility.
+Monthly and annual pricing
+International membership pricing with annual billing, captured on October 19, 2026. The screenshot shows the Chinese interface; prices are in USD. The large prices are monthly equivalents; annual totals are billed upfront.
+Plan Monthly billing Annual total Monthly equivalent with annual billing
+Plus $19/month $180/year $15/month
+Pro $39/month $372/year $31/month
+Max $99/month $948/year $79/month
+Ultra $199/month $1,908/year $159/month
+Annual billing is charged as one annual total. The monthly equivalent is for comparison and is not billed monthly. Save up to $480/year with annual billing. (Ultra: USD 199 × 12 − USD 1908 = USD 480.)
+Choosing a plan
+Plus: Coding with Kimi Code, research, office tasks, and Agent Swarm.
+Pro: More credits, Goal Mode, and a dedicated Kimi Claw.
+Max: More credits and higher Agent task concurrency for intensive use.
+Ultra: provides 10× Agent credits, twice the 5× offered by Max. Both plans support up to 4 parallel Agent tasks, 100 projects, and 50GB of project storage. Ultra supports 25 scheduled tasks and 25 widget tasks, compared with 20 of each on Max.
+See Membership plans overview for a full comparison.
+What happens to legacy plans?
+Moderato, Allegretto, Allegro, and Vivace are legacy plans. Existing subscribers keep their plan names, benefit rules, and auto-renewal arrangements. They can continue using and renewing their plan, or upgrade through the options shown on the subscription page. Switching to a new plan is optional.
+Legacy plans retain both a rolling 5-hour Kimi Code limit and a weekly limit. New plans with Kimi Code access retain the rolling 5-hour limit and have no weekly limit. Both use the monthly shared credit pool. All four new international plans include Kimi Code. Existing international legacy plans retain Kimi Code access.
+See the official Kimi Code membership guide for details.
+Credit allocation
+Membership features share a monthly credit pool, metered by actual usage. Using up credits on one feature affects the others. Both monthly and annual subscriptions refresh credits monthly, with no rollover.
+New plans with Kimi Code access (Plus and higher) have a rolling 5-hour usage limit and no weekly limit. Legacy plans retain both rolling 5-hour and weekly limits. These are usage limits, not a cap of five hours of use per week, and apply only to Kimi Code. Exhausting the monthly shared credit pool also affects Kimi Code.
+See Credit update and usage rules.
+Credit FAQ
+How do I check my credit usage?
+Web: Click your avatar in the lower-left corner → Settings → Subscription
+App: Me → Membership Plan → Subscription
+You can view your current credit balance as a percentage, the next refresh time, and your most recent 1,000 usage records, including usage time, feature, and consumption percentage.
+Usage details may have a brief delay. Please refer to the current credit display.
+What if I use up my credits?
+Tasks already in progress can be completed normally. New tasks will show an insufficient credit prompt. You can:
+Wait for credits to refresh automatically each month; for a Kimi Code usage limit, check the console for the reset time (weekly limits apply only to legacy plans)
+Upgrade to a higher-tier membership plan for more credits
+Purchase an Extra Usage pack: once enabled, you pay as you go and don't need to wait for credits to refresh
+Join official campaigns to receive bonus credits
+Can I use all my credits on one feature?
+Yes. All membership features share a single credit pool, and you can allocate it as you like. Keep in mind that if one feature uses up all the credits, it will affect the other features too. New plans with Kimi Code access (Plus and higher) have a rolling 5-hour usage limit and no weekly limit. Legacy plans retain both rolling 5-hour and weekly limits. These are usage limits, not a cap of five hours of use per week, and apply only to Kimi Code. Exhausting the monthly shared credit pool also affects Kimi Code.
+What is the “Claw-云主机” 0.6% charge deducted every day at 4 PM?
+This is the sandbox running cost of your Kimi Claw cloud host. Kimi Claw is an OpenClaw deployment in the cloud: every time you invoke Claw, the system starts an isolated cloud sandbox to execute code, operate the browser, or call tools. Sandboxes are not “free standby”—they are billed continuously by runtime and resource consumption. Even when you are not actively running tasks, a deployed cloud host retains its runtime environment and data, so about 0.6% of your membership credits is deducted each day, settled at 4:00 PM.
+If you do not plan to use Kimi Claw for a while, save important files such as memory, soul, and workspace files locally first, then delete the cloud host; no further charges apply after deletion, and you can redeploy anytime.
+What is the “Agent Website - Cloud Service” 0.08% charge?
+This is the cloud service fee for a website you published with Agent. A published website continuously occupies cloud resources to stay online and accessible, so about 0.08% of your membership credits is deducted. If you no longer need the website online, click “Unpublish” to stop the charges.
+Was this article helpful?
+Yes No
+PreviousCredit update & usage rulesNext Account & credit query
+Monthly and annual pricing
+Choosing a plan
+What happens to legacy plans?
+Credit allocation
+Credit FAQ How do I check my credit usage?
+What if I use up my credits?
+Can I use all my credits on one feature?
+What is the “Claw-云主机” 0.6% charge deducted every day at 4 PM?
+What is the “Agent Website - Cloud Service” 0.08% charge?
+System
+English
+Products
+KimiKimi WorkKimi CodeKimi Browser ExtensionKimi PlatformDownloadsAll products
+Pricing
+IndividualBusinessAPI
+Business
+Kimi BusinessContact sales
+Features
+BuildSlidesDocsSheetsDeep ResearchAll features
+Research
+Kimi K3.1 Pro tech blogKimi K3 tech blogKimi K2.6 tech blogKimi K2.5 tech blogPerceptionBenchAgent SwarmWorldVQAAll research
+Use Cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchCreate brochuresShowcasesAll use cases
+Academy
+Kimi Work 101Kimi Code 101All tutorials
+Support & docs
+Help centerKimi Code docs
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generatorAll capabilities
+Resources
+Help centerAI agents explainedMulti-agent systemsWhat is vibe codingBuild a landing pageCreate a posterAll articles
+Company
+About usMoonshot AIBrand guidelinesCareersTerms of ServicePrivacy PolicyTrust & Safety
+Pricing details - Kimi Help Center

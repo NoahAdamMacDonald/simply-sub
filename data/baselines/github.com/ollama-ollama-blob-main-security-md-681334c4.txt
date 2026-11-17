@@ -1,0 +1,133 @@
+url: https://github.com/ollama/ollama/blob/main/SECURITY.md
+method: fetch
+saved: 2026-11-17
+
+ollama/SECURITY.md at main · ollama/ollama · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+ollama
+ollama
+Repository navigation
+Code
+Issues2.6k ( 2.6k )
+Pull requests2k ( 2k )
+Actions
+Security and quality
+Insights
+More items
+Files Expand file tree
+main
+Breadcrumbs
+ollama
+/ SECURITY.md
+Copy path
+Blame
+More file actions
+Blame
+More file actions
+Latest commit
+History
+History
+History
+25 lines (16 loc) · 1.05 KB
+main
+Breadcrumbs
+ollama
+/ SECURITY.md
+Copy path
+Top
+File metadata and controls
+Preview
+Code
+Blame
+25 lines (16 loc) · 1.05 KB
+Raw
+Copy raw file
+Download raw file
+Outline Edit and raw actions
+Security
+The Ollama maintainer team takes security seriously and will actively work to resolve security issues.
+Reporting a vulnerability
+If you discover a security vulnerability, please do not open a public issue. Instead, please create a vulnerability report on Github advisories. We ask that you give us sufficient time to investigate and address the vulnerability before disclosing it publicly.
+Please include the following details in your report:
+A description of the vulnerability
+Steps to reproduce the issue
+Your assessment of the potential impact
+Any possible mitigations
+Security best practices
+While the maintainer team does its best to secure Ollama, users are encouraged to implement their own security best practices, such as:
+Regularly updating to the latest version of Ollama
+Securing access to hosted instances of Ollama
+Monitoring systems for unusual activity
+Contact
+For any other questions or concerns related to security, please contact us at hello@ollama.com
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

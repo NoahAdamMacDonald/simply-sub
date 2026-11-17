@@ -1,0 +1,60 @@
+url: https://support.character.ai/hc/en-us/articles/21704914723995-Safety-Center
+method: fetch
+saved: 2026-11-17
+
+Safety Center – C.AI Help Center
+Skip to main content
+C.AI Help Center Help Center home page
+Submit a ticket
+Sign in
+C.AI Help Center
+Safety Center
+Our Approach to Safety
+Safety Center
+character.ai
+Updated October 30, 2025 03:41
+What is Character.AI
+Character.AI is an interactive entertainment platform that allows you to write your own stories, roleplay with original Characters, and immerse yourself in new worlds. To create an account, you can sign up on the web or mobile using an email address and birthday. Users must be at least 13 years old (at least 16 years old in Europe). Once you’ve filled in your profile information, you are able to explore a universe of Characters ready to chat. You can cast yourself as the hero of an epic space adventure, have a debate with Socrates, or help NYC Cat finally catch that rat.
+How We Prioritize Teen Safety
+Millions of people visit Character.AI every month, using our technology as a tool to supercharge their creativity and imagination. Our goal is to provide a space that is both engaging and safe for our community.
+That’s why we’ve rolled out a suite of new safety features across nearly every aspect of our platform, designed especially with teens in mind. This suite of changes results in a different experience for teens from what is available to adults — with specific safety features that place more conservative limits on responses from the model.
+Some of the major differences include:
+Model: The Character.AI experience begins with the Large Language Model that powers so many of our user and Character interactions. Conversations with Characters are driven by a proprietary model that we continuously update and refine. For users under 18, we serve a version of the model that is designed to further reduce the likelihood of users encountering, or prompting the model to return, sensitive or suggestive content. This initiative — combined with the other techniques described below — combine to produce two distinct user experiences on the Character.AI platform: one for teens and one for adults.
+Model Outputs: A “classifier” is a method of distilling a content policy into a form used to identify potential policy violations. We employ classifiers to help us enforce our content policies and filter out sensitive content from the model’s responses. The under-18 model has additional and more conservative classifiers than the model for our adult users.
+User Inputs: While much of our focus is on the model's output, we also have controls to user inputs that seek to apply our content policies to conversations on Character.AI.This is critical because inappropriate user inputs are often what leads a language model to generate inappropriate outputs. For example, if we detect that a user has submitted content that violates our Terms of Service or Community Guidelines, that content will be blocked from the user’s conversation with the Character. We also have a process in place to suspend teens from accessing Character.AI if they repeatedly try to input prompts into the platform that violate our content policies.
+Characters: While hundreds of millions of user-created Characters exist on the platform, teen users are only able to access a narrower set of searchable Characters. Filters have been applied to this set to seek to remove Characters related to sensitive or mature topics. In addition, if Characters related to those sensitive or mature topics are reported to us, we will block them from teen users.
+Policies and Community Guidelines
+We want Character.AI to be a positive and collaborative community, so we require everyone to adhere to our Terms of Service and Community Guidelines. This means that our policies don’t permit you to create or share anything that is hateful or harassing, that seeks to harm yourself or others, that seeks to exploit minors, that is illegal, obscene or graphic, or that infringes someone else’s Intellectual Property. You can find additional details on our policies here.
+Content Moderation
+Automated Tools
+We use proprietary tools that seek to block certain violating content before it can ever be posted. Like other solutions in this space, these tools are evolving quickly and we will continue to improve them over time.
+Moderation
+Our Trust & Safety team works around the clock, focused on taking appropriate action on flagged and reported content. We are building out a Trust & Safety team that includes internal personnel as well as contracted moderators, as is standard in the industry. And we are arming them with the technical tools necessary to keep Character.AI a positive experience.
+DMCA
+We respect the intellectual property of others, and we ask our users to do the same. To put that policy to practice, we have a robust Digital Millennium Copyright Act (DMCA) takedown protocol for copyright infringement. That protocol is described in detail in our Terms of Service, linked above. If you believe your work has been copied in a way that constitutes copyright infringement, please let us know and we commit to take prompt action.
+If you see something that you believe violates our policies/guidelines, please report it to us so it can be reviewed by our moderation teams as quickly as possible.
+Was this article helpful?
+Yes
+No
+690 out of 1111 found this helpful
+Share via:
+Articles in this section:
+How do I block another user?
+EU Digital Services Act
+Online Safety for Australian Users
+Safety Center
+More articles
+Get the help you need to make the most of Character.ai. Browse guides, troubleshoot issues, and reach out anytime.
+Product
+Download for iOS
+Download for Android
+Web app
+Status
+Company
+About
+Careers
+Blog
+Terms
+Community
+Discord
+Reddit

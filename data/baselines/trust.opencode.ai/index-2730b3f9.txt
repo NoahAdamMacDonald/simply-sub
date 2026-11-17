@@ -1,0 +1,66 @@
+url: https://trust.opencode.ai
+method: fetch
+saved: 2026-11-17
+
+Anomaly Innovations, Inc - Security Trust Center
+Verifiedanoma.ly
+Anomaly Innovations, Inc Trust Center
+Compliance and Security Overview
+Security Questionnaire Request Access
+This Trust Center provides transparent visibility into Anomaly Innovations, Inc 's security, compliance, governance, and trust documentation, giving your procurement and security teams everything they need in one place.
+3 Policies Questionnaire available anoma.ly
+Overview Security Controls Subprocessors Documents
+Compliance
+All active
+Powered by Comp AI
+SOC 2 Type 2
+Compliant
+SOC 2 Type 1
+Compliant
+2
+Frameworks
+3
+Policies
+4
+Subprocessors
+6
+Documents
+Our Mission
+Anomaly Innovations, Inc positions its mission around building open-source developer tools and an on-device AI coding agent, with an emphasis on open-source product development and empowering end users through local-first execution. It envisions expanding its suite of open-source projects, including OpenCode, SST, and related tools, to advance developer productivity and deliver AI coding capabilities that run entirely on user devices.
+3 Policies
+Internal policies that govern how we operate and protect customer data.
+Incident Response & Breach Notification
+Information Security & Privacy Governance
+Risk Management
+35 Controls
+Safeguards continuously monitored across our infrastructure and processes.
+View all
+Acceptable Use
+Access Rights
+Asset Inventory
+Change management
+Configuration & Patch Management
+Credential Management
+Data Privacy
+Data Retention & Destruction
+4 Subprocessors
+Third parties that process data on our behalf under strict contractual safeguards.
+Amazon Web Services
+A comprehensive cloud platform offering over 200 fully featured services from data centers globally.
+GitHub
+A platform for version control and collaboration, allowing developers to work together on projects.
+Google Workspace
+A suite of cloud computing, productivity and collaboration tools.
+Slack
+A messaging app for businesses that connects people to the information they need.
+6 Documents
+Reports, DPAs, and security artifacts.
+View all
+Anomaly Pentest Report Executive Summary.pdf
+NDA
+Anomaly SOC 2 Type 2.pdf
+NDA
+OpenCode Data Processing Agreement.docx
+NDA
+OpenCode Data Processing Agreement.pdf
+NDA

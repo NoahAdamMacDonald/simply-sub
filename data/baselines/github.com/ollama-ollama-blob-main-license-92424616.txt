@@ -1,0 +1,154 @@
+url: https://github.com/ollama/ollama/blob/main/LICENSE
+method: fetch
+saved: 2026-11-17
+
+ollama/LICENSE at main · ollama/ollama · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+ollama
+ollama
+Repository navigation
+Code
+Issues2.6k ( 2.6k )
+Pull requests2k ( 2k )
+Actions
+Security and quality
+Insights
+More items
+Files Expand file tree
+main
+Breadcrumbs
+ollama
+/ LICENSE
+Copy path
+Blame
+More file actions
+Blame
+More file actions
+Latest commit
+History
+History
+History
+21 lines (17 loc) · 1.03 KB
+main
+Breadcrumbs
+ollama
+/ LICENSE
+Copy path
+Top
+File metadata and controls
+Code
+Blame
+21 lines (17 loc) · 1.03 KB
+Raw
+Copy raw file
+Download raw file
+Open symbols panel Edit and raw actions
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+MIT License
+Copyright (c) Ollama
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

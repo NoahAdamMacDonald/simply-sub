@@ -1,0 +1,43 @@
+url: https://ollama.com/blog/new-app
+method: fetch
+saved: 2026-11-17
+
+Ollama's new app · Ollama Blog
+GitHub
+187.4K
+Download
+Models
+Docs
+Pricing
+Sign in
+Download
+Models
+Docs
+Pricing
+Sign in
+Ollama's new app
+July 30, 2025
+Ollama’s new app is now available for macOS and Windows.
+An easier way to chat with models
+Ollama’s macOS and Windows now include a way to download and chat with models.
+Chat with files
+Ollama’s new app supports file drag and drop, making it easier to reason with text or PDFs.
+For processing large documents, Ollama’s context length can be increased in the settings. Note: this will require more memory.
+Multimodal support
+Building on Ollama’s new multimodal engine, images can be sent to models that support them, such as Google DeepMind’s Gemma 3 model.
+Documentation writing
+Code files can be processed by models for understanding.
+Get started
+Download Ollama’s new app today on macOS and Windows.
+For pure CLI versions of Ollama, standalone downloads are available on Ollama’s GitHub releases page.
+© 2026 Ollama
+Blog
+Docs
+GitHub
+Discord
+X (Twitter)
+Support
+Meetups
+Careers
+Privacy
+Terms

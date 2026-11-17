@@ -1,0 +1,186 @@
+url: https://opencode.ai/go
+method: fetch
+saved: 2026-11-17
+
+Go | OpenCode Console
+Skip to content
+Console
+Models Subscriptions Teams Enterprise Sign inGet started
+Sign inGet started
+Low-cost models
+for everyone
+Go is a subscription that gives you and your team access to the best open-weight models with generous usage limits at a low-cost fixed monthly price.
+Works in OpenCode, Claude Code, Codex and Pi
+Top up credit if needed
+Cancel any time
+Individuals Teams
+Go
+$10per month
+Curated, affordable models
+Tested for agentic coding
+Generous limits and reliable access
+Subscribe to Go
+Go Plus
+$40per month
+Everything included in Go
+Higher limits and fewer interruptions
+Built for larger, demanding projects
+Subscribe to Go Plus
+Included models
+Go·Go Plus· 32 models
+Limits Pricing Privacy API
+Model Relative request allowances Est. requests / 5 hr Monthly limit
+Kimi K3
+98392
+Go: 98; Go Plus: 392 $15$60
+Go: $15; Go Plus: $60
+Kimi K3.1 Pro
+147588
+Go: 147; Go Plus: 588 $15$60
+Go: $15; Go Plus: $60
+Qwen3.8 Max
+162647
+Go: 162; Go Plus: 647 $15$60
+Go: $15; Go Plus: $60
+Grok 4.7
+169676
+Go: 169; Go Plus: 676 $15$60
+Go: $15; Go Plus: $60
+GLM-5.3
+1981,580
+Go: 198; Go Plus: 1,580 $15$120
+Go: $15; Go Plus: $120
+Step 5 Preview
+4261,700
+Go: 426; Go Plus: 1,700 $15$60
+Go: $15; Go Plus: $60
+Qwen4 Max New
+4631,850
+Go: 463; Go Plus: 1,850 $15$60
+Go: $15; Go Plus: $60
+Gemini 4 Argon
+5662,260
+Go: 566; Go Plus: 2,260 $30$120
+Go: $30; Go Plus: $120
+GLM-5.2
+7922,370
+Go: 792; Go Plus: 2,370 $60$180
+Go: $60; Go Plus: $180
+Kimi K2.7 Code
+9942,980
+Go: 994; Go Plus: 2,980 $60$180
+Go: $60; Go Plus: $180
+DeepSeek V4 Pro
+1,0404,180
+Go: 1,040; Go Plus: 4,180 $15$60
+Go: $15; Go Plus: $60
+Hy4 preview
+1,3505,410
+Go: 1,350; Go Plus: 5,410 $30$120
+Go: $30; Go Plus: $120
+GPT-5.6 Luna
+2,0508,200
+Go: 2,050; Go Plus: 8,200 $15$60
+Go: $15; Go Plus: $60
+Hy4 New
+2,71010,800
+Go: 2,710; Go Plus: 10,800 $60$240
+Go: $60; Go Plus: $240
+MiniMax-M3
+3,2109,620
+Go: 3,210; Go Plus: 9,620 $60$180
+Go: $60; Go Plus: $180
+MiMo-V2.6-Pro
+3,26013,000
+Go: 3,260; Go Plus: 13,000 $15$60
+Go: $15; Go Plus: $60
+Claude Haiku 5.5
+3,85015,400
+Go: 3,850; Go Plus: 15,400 $15$60
+Go: $15; Go Plus: $60
+MiniMax M3.1 Flash
+3,88015,500
+Go: 3,880; Go Plus: 15,500 $20$80
+Go: $20; Go Plus: $80
+GPT-6 Luna
+4,23016,900
+Go: 4,230; Go Plus: 16,900 $15$60
+Go: $15; Go Plus: $60
+Hy3
+4,30017,200
+Go: 4,300; Go Plus: 17,200 $60$240
+Go: $60; Go Plus: $240
+Qwen3.7 Plus
+4,31012,900
+Go: 4,310; Go Plus: 12,900 $60$180
+Go: $60; Go Plus: $180
+Qwen3.8 Flash
+5,40016,200
+Go: 5,400; Go Plus: 16,200 $30$90
+Go: $30; Go Plus: $90
+GLM-5.3-Flash
+6,32018,900
+Go: 6,320; Go Plus: 18,900 $60$180
+Go: $60; Go Plus: $180
+LongCat-2.0
+11,40045,700
+Go: 11,400; Go Plus: 45,700 $60$240
+Go: $60; Go Plus: $240
+MiMo-V2.6-Flash
+30,10060,200
+Go: 30,100; Go Plus: 60,200 $60$120
+Go: $60; Go Plus: $120
+DeepSeek V4.1 Flash 1017
+43,30086,700
+Go: 43,300; Go Plus: 86,700 $100$200
+Go: $100; Go Plus: $200
+Muse Spark 1.2 Contributor Limited regions
+45,30090,600
+Go: 45,300; Go Plus: 90,600 $60$120
+Go: $60; Go Plus: $120
+Muse Spark 1.3 Contributor Limited regions
+45,30090,600
+Go: 45,300; Go Plus: 90,600 $60$120
+Go: $60; Go Plus: $120
+Beam Free Limited regions · Limited time
+∞∞
+Go: ∞; Go Plus: ∞ ∞∞
+Go: ∞; Go Plus: ∞
+Hy4 flash Free New Limited time
+∞∞
+Go: ∞; Go Plus: ∞ ∞∞
+Go: ∞; Go Plus: ∞
+Iceman Contributor Free Limited time
+∞∞
+Go: ∞; Go Plus: ∞ ∞∞
+Go: ∞; Go Plus: ∞
+LongCat 2.5 Free Limited time
+∞∞
+Go: ∞; Go Plus: ∞ ∞∞
+Go: ∞; Go Plus: ∞
+100 1K 10K 100K
+View all 32 models
+Frequently asked questions
+Quick answers
+What is the difference between free models and Go?
+Free models have a daily request limit. Go includes open-weight models with much higher allowances, counted over five-hour, weekly and monthly windows, and allowances vary by model. When you reach a Go limit, you can keep using the free models.
+What about data and privacy?
+Training and retention terms vary by model. By default, Go blocks paid endpoints that train on your requests, and an owner or admin can change that in Settings › Privacy. See the privacy details for each model.
+Can I top up credit?
+Yes. Add credit to your balance and turn on Extra Usage on the Go page. Once you reach your Go limits, requests use your credit instead of stopping. Go Teams starts with Extra Usage on.
+Can I cancel?
+Yes. An owner or admin can cancel any time from the Go page. Your plan stays active until the end of the period you paid for.
+Can I use Go with other coding agents?
+Yes. Go works with OpenCode and other coding agents that send typical coding-agent traffic, identify themselves with their own user agent and send a session ID. Claude Code, Codex, Hermes and Pi have been validated. Apps that don't send a session ID can't use Go models. They can use pay-as-you-go models, paid from your balance. See the client setup requirements.
+Can I get a refund?
+You may qualify if you ask within 14 days of the charge and have used almost none of that period's allowance. Contact us to request a refund.
+Start your subscription
+Plans start at $10 a month, with generous limits on the best open-weight models from day one. Cancel any time.
+Get started
+Everything you need to work with AI, in one place. Leading models, simple subscriptions, and team controls like budgets, policies, and SSO.
+Product
+Models Go Teams Enterprise Changelog OpenCodeConsole docs Legal
+Terms of servicePrivacy policy Connect
+Contact us Support CommunityXGitHubYouTube
+©2026 Anomaly. All rights reserved
+System status

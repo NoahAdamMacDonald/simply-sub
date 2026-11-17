@@ -1,0 +1,59 @@
+url: https://ollama.com/support
+method: fetch
+saved: 2026-11-17
+
+Support · Ollama
+GitHub
+187.4K
+Download
+Models
+Docs
+Pricing
+Sign in
+Download
+Models
+Docs
+Pricing
+Sign in
+Support
+Reach us by email
+Email us at support@ollama.com for help with:
+Billing, such as cancellations, refunds, plan versions, and invoices
+Technical problems
+Account access issues
+Questions about usage
+Product feedback
+Unrecognized charges
+Questions about our privacy policy, terms, or enterprise contracts
+Reporting a technical problem
+Please include the following so we can investigate:
+The affected model
+The affected harness or tool, if applicable
+The error code, if you saw one (such as 400, 429, or 500), or a description of the bug
+The approximate time the problem occurred
+Tips for a faster reply
+Email from the account associated with your plan. We need your email address or username to look up your account information. If you can't access that email anymore, please include your old email or username in the body of your message.
+Describe the problem in the body of your email. We sometimes have trouble with attachments or forwarded information. If you include attachments, such as screenshots or invoices, please use PNG or PDF format.
+GitHub issues and contributions
+Open an issue or pull request on GitHub for:
+New feature requests
+Community integrations
+Documentation updates
+Bug reports and bug fixes
+Join the community
+For beginner guides, tips, and general community discussion, find us on
+Reddit,
+Discord,
+X (Twitter), and
+GitHub.
+© 2026 Ollama
+Blog
+Docs
+GitHub
+Discord
+X (Twitter)
+Support
+Meetups
+Careers
+Privacy
+Terms

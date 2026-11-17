@@ -1,0 +1,367 @@
+url: https://openrouter.ai/pricing
+method: browser
+saved: 2026-11-17
+
+Skip to content
+Search
+⌘
+K
+Models
+Rankings
+Ori
+Docs
+Chat
+Pricing
+Talk to sales
+Sign in
+Sign up
+OPENROUTER PRICING
+Pricing
+Plans for indie hackers, AI native startups, growing teams, and enterprises
+Get started
+Talk to sales
+Free Standard
+Pay-as-you-go
+Business
+Pay-as-you-go
+Enterprise
+Get started for free Get started Upgrade to Business Contact sales
+Platform fees
+Free
+N/A
+Standard
+5.5%
+Business
+8%
+Enterprise
+Fee discounts available
+Models
+Explore all models →
+Free
+25+ free models
+Standard
+600+ models
+Business
+600+ models
+Enterprise
+600+ models
+Providers
+Explore all models →
+Free
+4 free providers
+Standard
+80+ providers
+Business
+80+ providers
+Enterprise
+80+ providers
+Chat and API Access
+Try chat now →
+Free
+Yes
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Activity logs & export
+Free
+Yes
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Auto-routing, preferred vendor selections
+Learn more →
+Free
+No
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Budgets & Spend Controls
+Free
+No
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Advanced notifications
+Learn more →
+Free
+No
+Standard
+No
+Business
+Yes
+Enterprise
+Yes
+Prompt Caching
+Learn more →
+Free
+No
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Management API key
+Learn more →
+Free
+No
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Admin Controls
+Enterprise features →
+Free
+No
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+Data Policy-Based Routing
+Model & provider policies
+Free
+No
+Standard
+Yes
+Business
+Yes
+Enterprise
+Yes
+EU in-region routing
+Learn more →
+Free
+No
+Standard
+No
+Business
+Yes
+Enterprise
+Yes
+US in-region routing
+Learn more →
+Free
+No
+Standard
+No
+Business
+Yes
+Enterprise
+Yes
+Workload Identity Federation
+Learn more →
+Free
+No
+Standard
+No
+Business
+Yes
+Enterprise
+Yes
+Private Endpoints
+Learn more →
+Free
+No
+Standard
+No
+Business
+No
+Enterprise
+Add on
+Workspace limit
+Learn more →
+Free
+5
+Standard
+5
+Business
+1,000
+Enterprise
+Custom
+DPA
+Free
+Via Terms of Service
+Standard
+Via Terms of Service
+Business
+Via Terms of Service, signed copy on request
+Enterprise
+Customizations available
+Managed Policy Enforcement
+Free
+No
+Standard
+No
+Business
+No
+Enterprise
+Yes
+SSO/SAML
+Free
+No
+Standard
+No
+Business
+No
+Enterprise
+Yes
+Contractual SLAs
+Free
+No
+Standard
+No
+Business
+No
+Enterprise
+Yes
+Payment options
+Free
+No
+Standard
+Credit card, crypto & more
+Business
+Credit card, crypto & more
+Enterprise
+Invoicing options
+BYOK Limits
+Learn more →
+Free
+No
+Standard
+$25,000 of list price inference / month with no fees, 5% fee after
+Business
+$25,000 of list price inference / month with no fees, 5% fee after
+Enterprise
+Custom
+Rate limits
+Free
+50 requests/day
+Standard
+Passthrough from the provider(s)
+Business
+Passthrough from the provider(s)
+Enterprise
+Higher allowances available
+Support
+Free
+Community support
+Standard
+Email support
+Business
+Email support
+Enterprise
+Dedicated support team
+Frequently Asked Questions
+Billing and Pricing
+How are tokens billed?
+Input and output tokens are billed per model at posted rates.
+Do you mark up provider pricing?
+How is billing structured for Standard, Business, Enterprise and BYOK?
+Standard and Business: you buy credits, manually or with auto top-up, and each request deducts its cost from your balance. The only billing difference between the two is the fee on credit purchases, 5.5% on Standard and 8% on Business.
+Enterprise: pricing is set by contract and based on volume, prepaid credits and annual commitments, with invoicing.
+BYOK: the provider bills you for inference directly. Standard and Business include $25,000 of list-price inference per month through BYOK with no OpenRouter fee; Enterprise allowances are custom. Above the allowance, OpenRouter charges 5% of what the same request would cost at list price on OpenRouter, deducted from your credits.
+Are failed or fallback attempts billed?
+Do you offer volume discounts or annual plans?
+We offer discounted OpenRouter fees in our enterprise plan. We do not discount inference.
+Are streaming responses billed differently?
+What payment methods do you accept?
+Standard and Business: credit and debit cards, AliPay, and crypto (USDC). Enterprise: invoicing and purchase orders through sales.
+Are taxes (VAT/GST) included in prices?
+Is there a minimum spend or lock-in on Standard?
+No. Standard and Business have no minimums and no lock-in. You pay only for what you use.
+What does the Business plan fee apply to?
+Do I need to talk to sales to upgrade to Business?
+No. Upgrade from the settings of the account or organization you want on Business. There is no contract, no minimum spend, and no sales conversation. You can downgrade 30 days after the upgrade, from the same place.
+Usage and Rate Limits
+Do you enforce rate limits?
+Can I separate environments (dev/staging/production)?
+Yes. Workspaces give each environment its own keys, limits and activity: 5 workspaces on Free and Standard, 1,000 on Business. Within a workspace, each API key can carry its own credit cap.
+Do you enforce platform rate limits?
+Routing and Latency
+Can I make sure to send API requests in specific regions?
+Yes. In-region routing is included on Business and Enterprise plans. Send requests to eu.openrouter.ai to keep inference with providers in the EU, or to us.openrouter.ai to keep it in the US. Upgrade to Business from your settings; for Enterprise, contact sales.
+Does routing affect latency?
+What happens if a model is deprecated or pricing changes?
+If a model is deprecated, you will receive a 404 when you request it, with an error message like "no endpoints for this model found."
+If the pricing changes, we will continue to route to the model and it will serve your requests. But, you will be charged at the new rate and your credits will deduct accordingly. This will be reflected in your billing.
+Can I pin specific model versions?
+Privacy and Security
+Do you train on customer data?
+No. We do not train on your data. Provider-side retention can be disabled for the account or per request, and Zero Data Retention routing is available on every plan.
+Do you support SSO?
+Models and Features
+How do I migrate from OpenAI/Anthropic?
+Our API is OpenAI‑compatible. Update the base URL and model names; see Quickstart.
+Do you support function calling/tools?
+Reliability and Uptime
+What happens if a provider is down or a model errors?
+Routing/fallback can automatically try alternative models, and an attempt that errors is not charged for its model tokens under Zero Completion Insurance.
+Where can I check uptime and incidents?
+Support
+What does the Enterprise dedicated support team include?
+Enterprise accounts get a support SLA with committed response times, a dedicated Slack channel with the OpenRouter team, a customer success manager who owns the account, and a forward-deployed engineer for integration, routing and rollout work. Standard and Business use email support, and every plan can use the community Discord.
+Ready to get started?
+Join thousands of developers building with OpenRouter
+Sign up for free
+Contact sales
+Footer
+© 2026 OpenRouter, Inc
+Product
+Chat
+Ori
+Labs
+Pricing
+Business
+Enterprise
+Explore
+Rankings
+Models
+Apps
+Providers
+Benchmarks
+Tools
+Discover
+Works With OR
+Company
+About
+Blog
+Customers
+Careers
+Hiring
+Privacy
+Terms of Service
+Trust Center
+Support
+Data
+Brand
+Developer
+Documentation
+API Reference
+Developer Platform
+Status
+AI Site Map
+Connect
+Discord
+GitHub
+LinkedIn
+X
+YouTube
+Join the OpenRouter newsletter
+Model usage data, product updates, and research reports. One email each week.
+Subscribe
+By subscribing you agree to receive the OpenRouter newsletter: model usage data, product updates, and research reports, about one email a week. Unsubscribe anytime via the link in every email. See our Privacy Policy.

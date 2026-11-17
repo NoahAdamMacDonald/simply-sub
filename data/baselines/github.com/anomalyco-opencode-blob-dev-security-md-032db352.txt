@@ -1,0 +1,150 @@
+url: https://github.com/anomalyco/opencode/blob/dev/SECURITY.md
+method: fetch
+saved: 2026-11-17
+
+opencode/SECURITY.md at dev · anomalyco/opencode · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+anomalyco
+opencode
+Repository navigation
+Code
+Issues2.7k ( 2.7k )
+Pull requests1.4k ( 1.4k )
+Actions
+Projects
+Security and quality3 ( 3 )
+Insights
+More items
+Files Expand file tree
+dev
+Breadcrumbs
+opencode
+/ SECURITY.md
+Copy path
+Blame
+More file actions
+Blame
+More file actions
+Latest commit
+History
+History
+History
+47 lines (28 loc) · 2.6 KB
+dev
+Breadcrumbs
+opencode
+/ SECURITY.md
+Copy path
+Top
+File metadata and controls
+Preview
+Code
+Blame
+47 lines (28 loc) · 2.6 KB
+Raw
+Copy raw file
+Download raw file
+Outline Edit and raw actions
+Security
+IMPORTANT
+We do not accept AI generated security reports. We receive a large number of
+these and we absolutely do not have the resources to review them all. If you
+submit one that will be an automatic ban from the project.
+Threat Model
+Overview
+OpenCode is an AI-powered coding assistant that runs locally on your machine. It provides an agent system with access to powerful tools including shell execution, file operations, and web access.
+No Sandbox
+OpenCode does not sandbox the agent. The permission system exists as a UX feature to help users stay aware of what actions the agent is taking - it prompts for confirmation before executing commands, writing files, etc. However, it is not designed to provide security isolation.
+If you need true isolation, run OpenCode inside a Docker container or VM.
+Server Mode
+Server mode is opt-in only. When enabled, set OPENCODE_SERVER_PASSWORD to require HTTP Basic Auth. Without this, the server runs unauthenticated (with a warning). It is the end user's responsibility to secure the server - any functionality it provides is not a vulnerability.
+Out of Scope
+Category
+Rationale
+Server access when opted-in
+If you enable server mode, API access is expected behavior
+Sandbox escapes
+The permission system is not a sandbox (see above)
+LLM provider data handling
+Data sent to your configured LLM provider is governed by their policies
+MCP server behavior
+External MCP servers you configure are outside our trust boundary
+Malicious config files
+Users control their own config; modifying it is not an attack vector
+Reporting Security Issues
+We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
+To report a security issue, please use the GitHub Security Advisory "Report a Vulnerability" tab.
+The team will send a response indicating the next steps in handling your report. After the initial reply to your report, the security team will keep you informed of the progress towards a fix and full announcement, and may ask for additional information or guidance.
+Escalation
+If you do not receive an acknowledgement of your report within 6 business days, you may send an email to security@anoma.ly
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

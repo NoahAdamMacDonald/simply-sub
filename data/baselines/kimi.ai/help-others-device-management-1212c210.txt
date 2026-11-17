@@ -1,0 +1,113 @@
+url: https://www.kimi.ai/help/others/device-management
+method: fetch
+saved: 2026-11-17
+
+ProductsProducts Products
+Kimi Kimi Work Kimi Code Kimi Browser Extension Downloads
+All products
+Features
+BuildAI app & website builder SlidesAI presentation maker DocsAI document agent SheetsAI spreadsheet agent Deep ResearchAI research agent
+All features
+APIAPI
+Use CasesUse Cases Featured use cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchConduct market researchCreate resumesCreate brochures
+All use cases
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generator
+All capabilities
+Showcases
+WebsitesAgent SwarmDeep ResearchSlidesSheetsDocsDesign
+All showcases
+BusinessBusiness Kimi BusinessBusiness plansContact sales
+ResearchResearch Kimi K3.1 ProKimi K3PerceptionBenchKimi K2.6Agent SwarmWorldVQAKimi K2.5Kimi Vendor VerifierKimi K2 ThinkingKimi K2
+All research
+ResourcesResources Support & docs
+Help centerKimi Code docs
+Academy
+Kimi Work 101Kimi Code 101
+All tutorials
+Articles
+AI agents explainedMulti-agent systemsParallel agentsWhat is vibe codingBuild a landing pageCreate a posterWrite a business proposal
+All articles
+PricingPricing
+DownloadDownload
+Download
+Download Try Kimi
+Getting Started
+Features
+Agent Mode
+Kimi Work
+Plugins & Skills
+Kimi Browser Extension
+Slides
+Docs & Sheets
+Deep Research
+Build
+3D Make
+Membership
+Kimi Code
+Kimi API
+Kimi Business
+Kimi Claw
+Kimi Bulletin
+FAQ How do I contact Kimi Support?
+What can Kimi do?
+Kimi chat common issues
+What’s the difference between Kimi, Kimi Work, Kimi Code, and Kimi Claw? Which one should I use?
+How to choose: K2.6 / K3 / K3 Cluster, thinking intensity, and Agent
+Account & profile settings
+Minor Mode
+Account suspension & appeals
+Account deletion & data removal
+Device Management
+Help Center FAQ Device Management
+Device Management
+Kimi supports signing in to the same account on multiple devices. With Device Management, you can see which devices your account is currently signed in on and remove devices you no longer use or don't recognize.
+Where to find it?
+Web: click your avatar in the bottom-left corner → Settings → Account & Security → Device Management.
+App: Me → Settings → Account Security → Manage Devices.
+Sign-in and binding options depend on your region: on kimi.ai (overseas), accounts sign in with Google or phone; on kimi.com (mainland China), accounts sign in with phone or WeChat. The screenshots below show both.
+About the device list
+Devices are sorted by most recent activity first. Each device card shows:
+Device type icon: phone / PC / Web
+Device name: e.g. "iPhone 16 Pro Max" or "MacBook Pro"; if the model can't be identified, the raw system string is shown
+Sign-in location: the city resolved from the sign-in IP; shown as "Unknown" if resolution fails
+Last active time: the current device always shows "Just now"; other devices show the exact time
+In addition:
+Your current device is pinned to the top with a This Device badge
+The list only shows devices active within the past year; devices inactive for over a year are no longer shown
+How to remove a device?
+In the device list, click Remove next to the device.
+Confirm in the dialog. The device will be signed out of your Kimi account.
+If you notice an unfamiliar device, remove it and change your account password promptly. When there are more than 3 devices other than this one, a Remove All button appears at the bottom of the page, which signs out all devices except the current one.
+Was this article helpful?
+Yes No
+PreviousAccount deletion & data removalNext Last post
+Where to find it?
+About the device list
+How to remove a device?
+System
+English
+Products
+KimiKimi WorkKimi CodeKimi Browser ExtensionKimi PlatformDownloadsAll products
+Pricing
+IndividualBusinessAPI
+Business
+Kimi BusinessContact sales
+Features
+BuildSlidesDocsSheetsDeep ResearchAll features
+Research
+Kimi K3.1 Pro tech blogKimi K3 tech blogKimi K2.6 tech blogKimi K2.5 tech blogPerceptionBenchAgent SwarmWorldVQAAll research
+Use Cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchCreate brochuresShowcasesAll use cases
+Academy
+Kimi Work 101Kimi Code 101All tutorials
+Support & docs
+Help centerKimi Code docs
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generatorAll capabilities
+Resources
+Help centerAI agents explainedMulti-agent systemsWhat is vibe codingBuild a landing pageCreate a posterAll articles
+Company
+About usMoonshot AIBrand guidelinesCareersTerms of ServicePrivacy PolicyTrust & Safety
+Kimi Device Management Guide - Kimi Help Center

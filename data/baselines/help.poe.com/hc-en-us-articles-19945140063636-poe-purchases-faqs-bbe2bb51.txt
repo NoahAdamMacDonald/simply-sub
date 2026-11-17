@@ -1,0 +1,413 @@
+url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+method: fetch
+saved: 2026-11-17
+
+Poe Purchases FAQs – Help Center
+Skip to main content
+Report a bug
+Contact Us
+Poe.com
+Report a bug
+Contact Us
+Back to Poe
+Help Center
+Purchases
+FAQs
+Poe Purchases FAQs
+June 18, 2026 15:26
+Updated
+What are the benefits of subscribing to Poe?
+As a Poe subscriber, you can:
+Enjoy exclusive access to bots like o3-mini-high, Runway, Dream-Machine, Pika, and many more.
+Send far more messages than free users.
+Generate more images, video, and audio with state-of-the-art bots from Runway, Google DeepMind, Luma AI, Pika, Hailuo AI, ElevenLabs, Ideogram, Black Forest Labs, Cartesia, and more.
+Unlock full context length for each bot - up to 2M tokens (equivalent to 1,400,000 words).
+Manage one simple subscription, instead of managing multiple subscriptions or multiple API keys.
+Subscriptions also come with compute points. Depending on the specific subscription plan, these points are granted on a regular basis (daily and/or monthly) from when you purchased your Poe Subscription. Unused points do not roll over, unless specified. You can check your plan details and remaining points at any time by visiting the 'Settings' page. Learn more about points in the Poe FAQs page.
+How do I subscribe to Poe?
+If you want to start enjoying the subscription benefits of Poe, you can sign up for a monthly or annual subscription.
+On web:
+After signing in, click on “Get more points” on the left sidebar. Select your preferred plan. Read ‘What’s included?’ for additional details.
+Once you make your selection, you will be redirected to our 3rd party payment processor, Stripe, in order to add your payment information and complete the subscription process.
+You can manage your subscription at any time by visiting “Settings“.
+On iOS:
+After signing in, tap on the hamburger icon on the top left of the screen to open the app sidebar, then tap on “Subscribe”. Choose your preferred plan. Tap on “Subscribe to Poe”.
+You might be asked to sign in with your Apple ID in order to complete the subscription process.
+You can manage your subscription at any time by visiting “Settings” in the Poe app.
+On Android:
+After signing in, tap on the hamburger icon on the top left of the screen to open the app sidebar, then tap on “Subscribe”. Choose your preferred plan. Tap on “Subscribe to Poe”.
+You might be asked to sign in with your Google account in order to complete the subscription process.
+You can manage your subscription at any time by visiting “Settings” in the Poe app.
+How do I upgrade my subscription?
+You can upgrade your existing subscription to get even more value:
+On web, click on “Get more points” on the left sidebar. On iOS or Android, tap on the hamburger icon on the top left of the screen, then tap on “Upgrade”.
+Select your preferred plan, and proceed.
+On web, you will be redirected to our third-party payment processor to provide your payment information and complete the upgrade process. On iOS you might be asked to first sign in with your Apple ID. On Android, you might be asked to sign in with your Google account.
+Upgrade or manage your subscription at any time in Poe by visiting “Settings”.
+Why can't I upgrade my subscription?
+If you are already a subscriber, there are two primary reasons you can’t upgrade.
+First, you can only upgrade if a larger or longer subscription plan exists on your platform. Poe has subscription options in the Apple store, Google Play store, and Poe website. The most diverse subscription options are on Poe’s website.
+Second, you can only upgrade on the platform where you bought your active subscription. If you subscribed on the iOS or Android app, your subscription is managed through either Apple or Google only. If you subscribed on Poe’s website, you can only manage your subscription on the Poe website. To upgrade on a different platform than where you purchased your current subscription, you'll need to cancel your current subscription where you purchased it (e.g. in Poe’s phone App) and resubscribe on a new platform (e.g. Poe’s website).
+To upgrade on the same platform:
+Open ‘Settings’ in Poe.
+In the ‘Subscription’ section, click the “Upgrade” button. If you do not see an “Upgrade” button:
+If it says you are subscribed on a different platform, go to that platform and repeat these steps
+Otherwise, you are on the right platform but no further upgrades are available on this platform
+Follow the prompts to complete your upgrade.
+To upgrade on a different platform:
+Cancel your current subscription
+Open ‘Settings’ in Poe.
+Click on ‘Manage your subscription’. Keep clicking cancel and follow the prompts until you see confirmation that the subscription is cancelled. If you do not see the ‘Manage your subscription’ option, it will say what platform you need to go to. Go there and repeat these steps.
+Return to ‘Settings’ and confirm that the ‘Subscription’ section says your subscription is cancelled and that benefits will terminate at the end of this billing cycle.
+Re-subscribe on the platform of your choice
+Open ‘Settings’ in the Poe website, Poe iOS app, or Poe Android app.
+Click “Subscribe to Poe”
+Follow the prompts until you see confirmation that you have subscribed.
+Return to ‘Settings’ and confirm that the ‘Subscription’ section says the subscription you just purchased.
+Enjoy your upgraded subscription We want your upgrades to be smooth. If you upgrade on the Poe.com website after canceling on an App but before your subscription benefits expire, we will automatically calculate and refund remaining points. Subscriptions already refunded by Apple or Google do not count as remaining.
+During all of this, rest assured you will maintain subscription access until the end of your current billing period, even after cancellation. Also, your account data, including chat history and settings, will remain intact.
+How do I purchase additional access?
+For API users or those needing extra points for a one time project, rather than upgrading a subscriber can purchase add-on points. Add-on points are usable for one year, and are not refundable, transferable, or redeemable for cash.
+To purchase add-on points, navigate to the 'Poe API Key' page, click 'Buy add-on points,' and complete the purchase flow via Stripe.
+You can view your add-on point balance on the 'Settings' page and 'Poe API Key' page. Click on 'Available points' to see your breakdown of 'Plan points' and 'Add-on points.'
+How can I share my subscription with friends, family or team members?
+Go to Settings on poe.com. Click “Invite members.” Copy the invitation link and send it to whoever you want to join your subscription. The recipient must follow this link and accept the invitation to join your subscription. You can reset this invitation link at any time.
+Can I limit the number of points that a member of my shared subscription uses?
+All members of your shared subscription will be able to equally use your points. If you wish to limit a members’ point usage, you will need to remove them from your shared subscription.
+How do I remove members from my shared subscription?
+Go to Settings on poe.com. Click “View members.” Click the overflow menu of the member you wish to remove. Click “Remove member.” Confirm your selection. The user will be immediately removed from your subscription and access to your points will be immediately revoked.
+How does Poe compare to paying for alternatives?
+Poe offers significant savings compared to individually subscribing to AI providers or using their APIs.
+Individual Subscriptions vs Poe
+Poe offers access to all major models and more starting at $4.99/month. You get flexible daily or monthly compute points to use across different models. If you need more points, simply purchase more.
+Every major AI company (i.e. OpenAI, Anthropic, Google Gemini, etc.) offers a $20/month subscription that only covers their own models. These providers enforce usage limitations either per hour(s), per day, or at undisclosed rates.
+Direct API Costs vs Poe
+Poe offers API access (details here) to its many bots, including the major models. Subscribers can buy add-on points starting at $30 per 1M points, with no transaction fees. Rate cards for each bot make it easy to compare to other providers. Poe's rates are extremely competitive.
+Major AI companies also offer APIs to directly access their models, charging based on how many tokens are processed. Some charge extra 'payment processing fees'. You will save on Poe compared to equivalent direct API usage, given current rates. Check out the rate cards for some of the top models (such as GPT-5 and Claude-Sonnet-4) to see how you can save using Poe.
+To optimize your points usage:
+Clear context or start a new chat when switching topics
+Write short prompts that are specific about the desired content and length of the response
+Choose the appropriate model for your needs
+Monitor your compute point usage through the message info feature and the points history page
+How do I cancel my subscription?
+You may cancel you Subscription through your Poe account settings at any time. The cancellation will take effect at the end of the current billing cycle (“Cancellation Effective Date”). You are responsible for all subscription fees (plus any applicable taxes or charges) incurred before your Cancellation Effective Date. You will have access to your subscription benefits until that date.
+If you subscribed via Poe web, you can cancel it from your “Settings” page.
+If you subscribed via Apple store (iOS app), you can cancel your subscription by following these steps:
+Go to the “Settings” app on your iOS device
+Tap on your name
+Tap on “Subscriptions”
+Locate your Poe subscription and open it
+Scroll down and tap on the “Cancel Subscription” button
+If you subscribed via Google store (Android app), you can cancel your subscription by following these steps:
+Go to the “Play Store” app on your Android device
+Tap on your profile icon on the top right
+Tap on “Payments & subscriptions”
+Tap on “Subscriptions”
+Locate your Poe app subscription and open it
+Tap on “Cancel subscription” at the bottom and choose a reason
+Confirm my tapping the “Cancel subscription” button
+How do I request a refund?
+Other than what is set forth in our Refund Policy or is determined by Quora, Poe subscription fees and other final charges are non-refundable.
+If you subscribed via a web browser and you are eligible for a refund according to our Refund Policy, you may contact us here to request it. Make sure you provide the email address associated with the subscription when you fill out the form.
+If you subscribed via Apple or Google Play, please contact them to understand their refund policies. You can also read their documentation on refund requests:
+Apple App Store: https://support.apple.com/en-us/HT204084
+Google Play Store: https://support.google.com/googleplay/answer/2479637?hl=en
+What countries have subscriptions available?
+We currently offer subscriptions to Poe in the following countries and platforms:
+Region
+Poe.com Website
+Apple's App Store
+Google's Play Store
+Albania
+Yes
+Yes
+Armenia
+Yes
+Australia
+Yes
+Yes
+Yes
+Austria
+Yes
+Yes
+Yes
+Bahamas (The)
+Yes
+Bahrain
+Yes
+Yes
+Barbados
+Yes
+Belarus
+Yes
+Yes
+Belgium
+Yes
+Yes
+Yes
+Bosnia and Herzegovina
+Yes
+Brazil
+Yes
+Yes
+Yes
+Bulgaria
+Yes
+Yes
+Yes
+Cambodia
+Yes
+Yes
+Cameroon
+Yes
+Yes
+Canada
+Yes
+Yes
+Yes
+Chile
+Yes
+Yes
+Colombia
+Yes
+Yes
+Croatia
+Yes
+Yes
+Yes
+Cyprus
+Yes
+Yes
+Yes
+Czechia
+Yes
+Yes
+Yes
+Denmark
+Yes
+Yes
+Yes
+Egypt
+Yes
+Yes
+Yes
+Estonia
+Yes
+Yes
+Yes
+Finland
+Yes
+Yes
+Yes
+France
+Yes
+Yes
+Yes
+Georgia
+Yes
+Yes
+Germany
+Yes
+Yes
+Yes
+Ghana
+Yes
+Yes
+Greece
+Yes
+Yes
+Yes
+Hong Kong
+Yes
+Yes
+Yes
+Hungary
+Yes
+Yes
+Yes
+Iceland
+Yes
+Yes
+Yes
+India
+Yes
+Yes
+Yes
+Ireland
+Yes
+Yes
+Yes
+Italy
+Yes
+Yes
+Yes
+Japan
+Yes
+Yes
+Yes
+Kazakhstan
+Yes
+Yes
+Korea
+Yes
+Yes
+Yes
+Kosovo
+Yes
+Kyrgyz Republic
+Yes
+Latvia
+Yes
+Yes
+Yes
+Lithuania
+Yes
+Yes
+Yes
+Luxembourg
+Yes
+Yes
+Yes
+Macao
+Yes
+Yes
+Yes
+Malaysia
+Yes
+Yes
+Malta
+Yes
+Yes
+Mexico
+Yes
+Yes
+Yes
+Moldova
+Yes
+Yes
+Netherlands
+Yes
+Yes
+Yes
+New Zealand
+Yes
+Yes
+Yes
+Nigeria
+Yes
+Yes
+Norway
+Yes
+Yes
+Yes
+Oman
+Yes
+Yes
+Poland
+Yes
+Yes
+Yes
+Portugal
+Yes
+Yes
+Yes
+Puerto Rico
+Yes
+Yes
+Romania
+Yes
+Yes
+Yes
+Saudi Arabia
+Yes
+Yes
+Yes
+Serbia
+Yes
+Yes
+Singapore
+Yes
+Yes
+Yes
+Slovak Republic
+Yes
+Yes
+Yes
+Slovenia
+Yes
+Yes
+Yes
+South Africa
+Yes
+Yes
+Yes
+Spain
+Yes
+Yes
+Yes
+Sweden
+Yes
+Yes
+Yes
+Switzerland
+Yes
+Yes
+Taiwan
+Yes
+Yes
+Yes
+Tajikistan
+Yes
+Thailand
+Yes
+Yes
+Turkey
+Yes
+Yes
+Uganda
+Yes
+Ukraine
+Yes
+Yes
+United Arab Emirates
+Yes
+Yes
+Yes
+United Kingdom
+Yes
+Yes
+Yes
+United States
+Yes
+Yes
+Yes
+Uzbekistan
+Yes
+Yes
+Vietnam
+Yes
+Yes
+Yes
+Zimbabwe
+Yes
+What is creator monetization?
+The creator monetization program pays Poe bot creators for engaging users with their bots. You can set a price per message users send to a bot. For developers, there are also APIs for monetizing based on your specific bot implementation. To learn more, see the creator monetization FAQ.
+Have more questions? Submit a request
+Return to top
+About Poe
+Usage Guidelines
+Terms of Service
+Privacy Policy
+Subscriber Terms
+Earnings Terms of Service
+Quora Inc. © 2023
+English (United States)
+Deutsch
+Español
+Français
+Italiano
+日本語
+한국어
+Português
+简体中文
+繁體中文

@@ -1,0 +1,17 @@
+url: https://opencode.ai/console/signup
+method: browser
+saved: 2026-11-17
+
+Sign up to OpenCode Console
+Continue with Google
+Continue with GitHub
+Or continue with
+Email address
+Password
+Show
+At least 10 characters
+One uppercase letter, number, or symbol
+Create Account
+By signing up, you agree to our Terms and DPA.
+Already have an account?
+Sign in

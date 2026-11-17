@@ -1,0 +1,14 @@
+url: https://chat.qwen.ai/auth?mode=register
+method: browser
+saved: 2026-11-17
+
+Sign up with verification code
+Enter an email address that can receive verification codes
+Continue
+Already have an account?
+Log in
+or
+Continue with Google
+Continue with GitHub
+Continue with Apple
+By continuing, you agree to our Terms of Service and Privacy Policy.

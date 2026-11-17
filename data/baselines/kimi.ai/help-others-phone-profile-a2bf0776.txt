@@ -1,0 +1,118 @@
+url: https://www.kimi.ai/help/others/phone-profile
+method: fetch
+saved: 2026-11-17
+
+Account & profile settings - Kimi Help Center
+ProductsProducts Products
+Kimi Kimi Work Kimi Code Kimi Browser Extension Downloads
+All products
+Features
+BuildAI app & website builder SlidesAI presentation maker DocsAI document agent SheetsAI spreadsheet agent Deep ResearchAI research agent
+All features
+APIAPI
+Use CasesUse Cases Featured use cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchConduct market researchCreate resumesCreate brochures
+All use cases
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generator
+All capabilities
+Showcases
+WebsitesAgent SwarmDeep ResearchSlidesSheetsDocsDesign
+All showcases
+BusinessBusiness Kimi BusinessBusiness plansContact sales
+ResearchResearch Kimi K3.1 ProKimi K3PerceptionBenchKimi K2.6Agent SwarmWorldVQAKimi K2.5Kimi Vendor VerifierKimi K2 ThinkingKimi K2
+All research
+ResourcesResources Support & docs
+Help centerKimi Code docs
+Academy
+Kimi Work 101Kimi Code 101
+All tutorials
+Articles
+AI agents explainedMulti-agent systemsParallel agentsWhat is vibe codingBuild a landing pageCreate a posterWrite a business proposal
+All articles
+PricingPricing
+DownloadDownload
+Download
+Download Try Kimi
+Getting Started
+Features
+Agent Mode
+Kimi Work
+Plugins & Skills
+Kimi Browser Extension
+Slides
+Docs & Sheets
+Deep Research
+Build
+3D Make
+Membership
+Kimi Code
+Kimi API
+Kimi Business
+Kimi Claw
+Kimi Bulletin
+FAQ How do I contact Kimi Support?
+What can Kimi do?
+Kimi chat common issues
+What’s the difference between Kimi, Kimi Work, Kimi Code, and Kimi Claw? Which one should I use?
+How to choose: K2.6 / K3 / K3 Cluster, thinking intensity, and Agent
+Account & profile settings
+Minor Mode
+Account suspension & appeals
+Account deletion & data removal
+Device Management
+Help Center FAQ Account & profile settings
+Account & profile settings
+How do I change my linked phone number?
+In the Kimi App, open Settings → Account Security, then select your linked phone number to start the change.
+Request and enter the SMS verification code sent to your current phone number.
+Enter your new phone number and country code, then request an SMS verification code.
+Enter the code sent to your new number to complete the change.
+Both numbers must be able to receive SMS verification codes. Each code is valid for 5 minutes. Overseas accounts cannot switch to a +86 number, and the new number must not already be linked to another Kimi account.
+Can I change my linked email or sign-in method?
+The Kimi App currently does not offer a self-service option to change your linked email. If you need help with your linked email or sign-in method, please email [email protected].
+A linked Google account cannot be unlinked or replaced.
+Lost access to your original sign-in method?
+Please email [email protected] for help. Our team will review your request and may ask for information to verify account ownership.
+Not receiving a verification code?
+Try the following troubleshooting steps:
+Confirm that the email address or phone number you entered is correct.
+The verification code may take a few minutes to arrive — please be patient.
+If it hasn't arrived after 5 minutes, click "Resend" to request a new code.
+Note: Currently, only supported regions' phone numbers and email addresses are accepted. VoIP numbers and landlines are not supported.
+How do I edit my profile and avatar?
+Navigate to:
+Kimi App → Profile → Settings → Personal Info → Edit name, bio, or avatar → Save
+Note: Your avatar and display name can be changed up to 10 times within a 30-day period. Please plan your changes accordingly.
+Was this article helpful?
+Yes No
+PreviousHow to choose: K2.6 / K3 / K3 Cluster, thinking intensity, and AgentNext Minor Mode
+How do I change my linked phone number?
+Can I change my linked email or sign-in method?
+Lost access to your original sign-in method?
+Not receiving a verification code?
+How do I edit my profile and avatar?
+System
+English
+Products
+KimiKimi WorkKimi CodeKimi Browser ExtensionKimi PlatformDownloadsAll products
+Pricing
+IndividualBusinessAPI
+Business
+Kimi BusinessContact sales
+Features
+BuildSlidesDocsSheetsDeep ResearchAll features
+Research
+Kimi K3.1 Pro tech blogKimi K3 tech blogKimi K2.6 tech blogKimi K2.5 tech blogPerceptionBenchAgent SwarmWorldVQAAll research
+Use Cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchCreate brochuresShowcasesAll use cases
+Academy
+Kimi Work 101Kimi Code 101All tutorials
+Support & docs
+Help centerKimi Code docs
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generatorAll capabilities
+Resources
+Help centerAI agents explainedMulti-agent systemsWhat is vibe codingBuild a landing pageCreate a posterAll articles
+Company
+About usMoonshot AIBrand guidelinesCareersTerms of ServicePrivacy PolicyTrust & Safety

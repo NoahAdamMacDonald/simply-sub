@@ -1,0 +1,242 @@
+url: https://opencode.ai/docs/console/go/
+method: fetch
+saved: 2026-11-17
+
+Go | OpenCode Skip to content Console docs Console docs OpenCode docs V2(latest) V1
+CLI docsBuild docsAPI docsConsole docs
+Console docs Console docs OpenCode docs V2(latest) V1
+CLI docsBuild docsAPI docsConsole docs
+[]Go []Intro
+[]Models
+[]Providers
+[]Web search
+[]Go
+Workspace []Basics
+[]Members
+[]SSO
+[]SCIM
+[]Budgets
+[]Billing
+API []Overview
+[]Inference
+[]Providers
+Harnesses []Overview
+[]Claude Code
+[]Codex
+[]Hermes
+[]Pi
+[]Raycast
+How it works How it works
+Enable restricted models
+Pay with credit
+Where can I use it?
+Validated clients
+Known problematic clients
+Usage limits
+Estimated requests
+Usage beyond limits
+Why some models have lower usage
+Endpoints
+Models
+Privacy
+Background
+Goals
+Go
+OpenCode Go gives you reliable access to popular open coding models, with three monthly plans:
+Plan Price Included usage
+Go $10/month Lower-cost access to the models below
+Go Plus $40/month Higher usage limits across the models below
+Go Teams $20/member/month, 2-member minimum Every member gets their own limits, $5/month higher than Go on every model
+Go works like any other provider in OpenCode. You subscribe to OpenCode Go and get your API key. It’s completely optional and you don’t need it to use OpenCode.
+The service is designed primarily for international users and provides stable global access.
+How it works
+Sign in to the OpenCode Console, subscribe to Go, Go Plus, or Go Teams, add your billing details, and copy your API key.
+Run /connect in the TUI, select OpenCode Go, and paste your API key.
+CopyCopiedFailed
+/connect
+Run /models to select a model available through Go.
+CopyCopiedFailed
+/models
+Note Go and Go Plus cover the member who subscribes and the workspace’s API keys. Other members you invite use free models
+or the workspace balance. Either can upgrade to Go Teams at any time, with the unused part of the month’s allowance
+credited. Go Teams covers every member of the workspace at $20 per member per month, with a 2-member minimum
+($40/month). The second seat covers the next member who joins at no extra charge; after that, a member who joins
+mid-period is charged $20 and gets a full monthly allowance. Service accounts are not covered by Go Teams.
+See the current list of models. It may change as we test and add new ones.
+Enable restricted models
+Workspace privacy settings apply to Go. By default, paid endpoints that train on request data are blocked, and
+allowed regions are Europe & United States. Workspaces without saved privacy settings also allow Global
+for requests from China.
+In Settings › Privacy, an owner or admin can enable:
+DeepSeek V4.1 Flash and V4 Pro: select Global under Regions.
+LongCat 2.5 Free: select Global under Regions.
+Muse Spark 1.3 Contributor and Muse Spark 1.2 Contributor: turn on Allow paid endpoints that train on request data.
+See Privacy for each model’s training and retention terms.
+Pay with credit
+Owners and admins can pay for Go, including renewals and upgrades, from the workspace’s credit. Choose Credit as
+the payment method when you subscribe, or later in Manage subscription. This is separate from
+Extra Usage, which pays for usage past your limits.
+The full price comes from your credit balance. If the balance is short, you can add credit first.
+Renewals take the price from your credit when the period ends. If there isn’t enough, Go stays active while the
+renewal retries 1, 3, and 7 days after the period ends, and again as soon as enough credit is added. If the last
+retry fails, Go ends.
+Workspaces on invoiced billing can’t pay for Go with credit.
+A refund of a Go payment made with credit goes back to your credit and ends that Go period.
+Where can I use it?
+OpenCode Go is designed for OpenCode and other coding agents
+that produce similar types of requests. Traffic is monitored for abuse that
+degrades the experience for other users.
+Your client should:
+Send typical coding agent traffic
+Identify itself with its own user agent, such as my-coding-agent/1.0, rather
+than a generic SDK or HTTP-library name.
+Send a stable session ID in x-opencode-session for each conversation so we can optimize routing and
+prompt caching.
+See Harnesses to set up Go in Claude Code, Codex, Hermes, Pi, and Raycast.
+Validated clients
+Besides OpenCode, the following clients have been validated to work properly
+with OpenCode Go, although we do not guarantee that they will continue to work in the future.
+Client Session support
+Hermes Update to v0.21.6 or later, which sends the header on main and auxiliary OpenCode requests (PR #101864).
+Claude Code Go recognizes its native session header. No custom-header wrapper is needed.
+Codex Go recognizes its native session header. Some versions and proxy setups still omit it; preserve the session header when forwarding requests.
+ZCode Go recognizes its native session header. Our request for x-opencode-session remains open, but it is no longer necessary to send that specific header.
+Pi Current builds send session information for OpenCode. Update older installations.
+jcode Update to v0.81.6 or later, which includes the session-header fix.
+Kilo Code CLI Builds containing PR #13752 restore OpenCode session headers. This fix covers the CLI, not the VS Code extension. See issue #13723.
+Known problematic clients
+These clients have missing or incomplete session support in the versions we
+investigated. The linked reports track fixes and workarounds.
+Client Status and tracking
+DeepSeek Harness Session information arrives on some model paths, but is missing on others. We recognize its native header; the remaining work is to send it across all adapters. Discussion #5495.
+GitHub Copilot Chat Automatic session-header support is requested in VS Code issue #334186.
+Kimi Code The session-header request in issue #3506 was closed as not planned.
+MiMo Code Issue #2317 is closed, and PR #2327 was closed without merging.
+Usage limits
+The paid models you use on Go share one allowance. On Go Teams, each member has their own allowance across models.
+The 5-hour limit is 20% of your monthly allowance. The window starts when you first use your allowance and lasts five hours.
+The weekly limit is 50% of your monthly allowance. It resets on Monday at 00:00 UTC.
+Your monthly allowance resets when a new paid period starts.
+Switching models draws from the same allowance. If you reach a limit, you can use a free model or turn on
+Extra Usage to use your Console credits until you have allowance available again.
+Each model’s monthly limit shows how much usage your plan covers if you use only that model over the month.
+For example, $1.50 of usage on a model with a $15 limit uses 10% of your monthly allowance. So does $6 on a model
+with a $60 limit. Go responses report how much each request counted in opencode.allowance.
+Token prices are per 1M tokens and are the same for Go, Go Plus, and Go Teams.
+Beam Free: Free for a limited time. Not available in Angola, Belarus, Cambodia, China (including Hong Kong and Macau), Cuba, the Democratic Republic of the Congo, Equatorial Guinea, Iran, Iraq, Laos, Libya, Nigeria, North Korea, Russia, Syria, Turkmenistan, Uzbekistan, Venezuela, or the Crimea, Donetsk, and Luhansk regions of Ukraine.
+Gemini 4 Argon: The 50% discount applies through November 30, 2026.
+Estimated requests
+Console’s Go page estimates requests per 5 hours for each model, based on
+typical Go usage patterns. Actual usage varies.
+You can track your current usage in the console.
+Tip If you reach the usage limit, you can continue using the free models.
+Usage limits may change as we learn from early usage and feedback.
+Usage beyond limits
+If you also have credits in your Console balance, you can turn on Extra Usage on the
+Go page. When enabled, Go will fall back to your pay-as-you-go balance
+after you’ve reached your usage limits instead of blocking requests.
+Go Teams starts with Extra Usage on, and you can turn it off or on again on the Go page.
+Why some models have lower usage
+With Go, the included monthly usage varies by model.
+For most models, we make this work through bulk discounts and reserved GPU capacity. We then pass those savings on to you as higher monthly usage.
+For some models, we haven’t had the opportunity to negotiate a discount or host them at a lower cost, either because the model is new or because their public pricing is already discounted.
+For these models, you still get a little more than if you paid the model providers directly; this is why their included monthly usage is lower.
+Endpoints
+You can also access Go models through the API at https://opencode.ai/inference/go. See each model’s
+ID, path and AI SDK package. Each model is listed with its native API, but every
+text model also works through the other APIs, which Console translates. See
+Base URLs for the full set.
+These AI SDK packages are for applications calling Go directly. To use Go in OpenCode, connect with /connect and set
+the model using the format opencode-go/<model-id>:
+opencode.jsonc CopyCopiedFailed
+{
+"$schema": "https://opencode.ai/config.json",
+"model": "opencode-go/kimi-k3",
+}
+Models
+Fetch the full list of available models and their metadata from the models endpoint:
+Terminal CopyCopiedFailed
+curl https://opencode.ai/inference/go/v1/models
+Privacy
+See whether each model trains on your data.
+Model Data retention
+Grok 4.7 30 days
+GPT 6 Luna 30 days
+GPT 5.6 Luna 30 days
+Claude Haiku 5.5 30 days
+Gemini 4 Argon 0 days
+GLM-5.3-Flash 0 days
+GLM-5.3 0 days
+GLM-5.2 0 days
+Kimi K3.1 Pro 0 days
+Kimi K3 0 days
+Kimi K2.7 Code 0 days
+LongCat-2.0 0 days
+MiMo-V2.6-Pro 0 days
+MiMo-V2.6-Flash 0 days
+Qwen4 Max 0 days
+Qwen3.8 Max 0 days
+Qwen3.8 Flash 0 days
+Qwen3.7 Plus 0 days
+MiniMax M3.1 Flash 0 days
+MiniMax M3 0 days
+Muse Spark 1.3 Contributor Not ZDR
+Muse Spark 1.2 Contributor Not ZDR
+DeepSeek V4.1 Flash 0 days*
+DeepSeek V4 Pro 0 days*
+Hy4 0 days
+Hy4 preview 0 days
+Hy3 0 days
+Step 5 Preview 0 days
+Beam Free 30 days
+Iceman Contributor Free Not ZDR
+LongCat 2.5 Free 0 days
+Hy4 flash Free 0 days
+Grok 4.7: ZDR disables important API features that depend on stored data, including the stateful Responses API, Files and Collections, and the Batch API. Learn more.
+GPT 6 Luna / GPT 5.6 Luna: Abuse monitoring logs are generated for all API feature usage and retained for up to 30 days. Learn more.
+Claude Haiku 5.5: Requests are retained for 30 days in accordance with Anthropic’s Data Policies.
+Muse Spark 1.3 Contributor: Heavily discounted token pricing in exchange for permission to use your prompts and completions to train future Meta models. Availability is limited to regions permitted by Meta’s Geographic Use Policy. Learn more.
+Muse Spark 1.2 Contributor: Heavily discounted token pricing in exchange for permission to use your prompts and completions to train future Meta models. Availability is limited to regions permitted by Meta’s Geographic Use Policy. Learn more.
+Iceman Contributor Free: Free for a limited time in exchange for permission to use your prompts and completions to improve the model.
+LongCat 2.5 Free: Hosted in China. Requires Global regions in your workspace privacy settings.
+DeepSeek: ZDR agreement is renewed monthly. The current agreement is valid through November 30, 2026.
+Background
+Open models have gotten really good. They now reach performance close to proprietary models for coding tasks. Because many providers can serve them competitively, they are usually far cheaper.
+However, getting reliable, low latency access to them can be difficult. Providers vary in quality and availability.
+Tip We tested a select group of models and providers that work well with OpenCode.
+To fix this, we did a couple of things:
+We tested a select group of open models and talked to their teams about how to best run them.
+We worked with a few providers to make sure these were being served correctly.
+We benchmarked the combination of the model/provider and came up with a list that we feel good recommending.
+Go, Go Plus, and Go Teams all provide access to these models; choose the plan that fits how much you use them, or Go
+Teams to cover your whole team.
+Goals
+We created OpenCode Go to:
+Make AI coding accessible to more people with a low cost subscription.
+Provide reliable access to the best open coding models.
+Curate models that are tested and benchmarked for coding agent use.
+Have no lock-in by allowing you to use any other provider with OpenCode as well.
+Previous Web searchNext Basics Edit this page on GitHub (opens in a new tab) Copy as MarkdownCopiedFailedCopy page as Markdown
+Search⌘K Contents How it works
+Enable restricted models
+Pay with credit
+Where can I use it?
+Validated clients
+Known problematic clients
+Usage limits
+Estimated requests
+Usage beyond limits
+Why some models have lower usage
+Endpoints
+Models
+Privacy
+Background
+Goals
+[]Community (opens in a new tab)
+[]Changelog
+[]Press
+[]Brand
+[]Legal
+Status: Status unavailableStatus (opens in a new tab)
+©2026 Anomaly
+EscClose searchCancel

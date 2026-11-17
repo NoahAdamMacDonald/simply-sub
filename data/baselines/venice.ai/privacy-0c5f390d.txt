@@ -1,0 +1,146 @@
+url: https://venice.ai/privacy
+method: browser
+saved: 2026-11-17
+
+Ask anything...
+About
+Features
+Token
+VVV
+DIEM
+Pricing
+Resources
+API + Docs
+FAQs
+Privacy
+Blog
+Media
+Careers
+Brand Kit
+Changelog
+Download
+Status Page
+Store
+Log in
+Privacy in Venice
+Every Venice user gets anonymous and private AI by default. Pro users unlock hardware-verified and end-to-end encrypted inference for the strongest possible protection.
+Upgrade to Pro
+Learn more
+PRIVACY ARCHITECTURE
+The Venice proxy is at the core of every privacy mode
+Every AI interaction on Venice passes through the same proxy architecture. Your conversation history stays on your device. Requests are relayed through the proxy without being stored. The four privacy modes build on top of this foundation, adding progressively stronger protections at the GPU layer.
+VENICE PROXY
+FOUR PRIVACY MODES
+Every model on Venice falls into one of four privacy categories. Each comes with different protections and trade-offs.
+Anonymous
+Venice proxies your request to leading frontier model providers. Your identity is obscured from the provider, but you should assume the provider is storing your content.
++
+Access to leading frontier models (GPT, Claude, Gemini)
+−
+Provider sees and likely saves your prompt
+Private
+DEFAULT
+Inference runs on Venice-controlled GPUs or zero-data-retention partner infrastructure. Privacy is enforced by contractual commitments — no prompt or response is stored.
++
+No data retention, wide model selection (including Grok)
+−
+Trust-based — relies on Venice and partners honoring contracts
+TEE
+PRO
+Trusted Execution Environment. Inference runs inside a hardware-isolated enclave operated by external TEE partners (NEAR AI Cloud and Phala Network). GPU providers cannot access your prompts. Verified by remote attestation.
++
+Hardware-verified privacy, GPU operator cannot see prompts
+−
+Responses may be slower; fewer models available
+E2EE
+PRO
+End-to-End Encrypted. Your prompt is encrypted on your device, remains encrypted through Venice, and is only decrypted inside a verified TEE. Verifiably and entirely private from all parties.
++
+Strongest privacy — no one (including Venice) can see your data
+−
+No web search or memory; responses may be slower
+FOUR PRIVACY MODES
+Choose your privacy for every conversation
+Every AI model on Venice falls into one of four privacy modes. Switch between them based on what matters most — model selection, speed, or verifiable encryption.
+SELECT A PRIVACY MODE TO SEE HOW IT PROTECTS YOU
+Anonymous
+Identity obscured from provider
+Private
+DEFAULT
+Zero data retention, contract-enforced
+TEE
+PRO
+Hardware-isolated GPU processing
+E2EE
+PRO
+Encrypted end-to-end, fully verifiable
+YOUR DEVICE
+VERIFIED
+Local storage only
+Your conversation history stays on your device. Venice never stores it on its servers.
+VENICE PROXY
+POLICY
+Secure relay via Venice
+Your request passes through Venice's proxy over standard SSL/TLS and is relayed without being stored.
+GPU PROCESSING
+PROVIDER
+Provider policies apply
+The model provider processes your prompt under its own retention and privacy policies. Venice does not control this layer.
+FAQ
+Venice Privacy FAQ
+Answers about Venice's privacy philosophy, proxy architecture, trust assumptions, data collection, TEE, E2EE, attestation, model availability, and providers.
+PHILOSOPHY
+What is Venice's privacy philosophy?
+ARCHITECTURE
+How does the Venice proxy work?
+TRUST
+What are the trust assumptions in proxy-based modes?
+TRANSPARENCY
+What does Venice store?
+MODE
+What is TEE?
+MODE
+What is E2EE?
+MODELS
+Which models are TEE and E2EE?
+VERIFICATION
+What is attestation and how does it work?
+PRODUCT
+What features are limited in E2EE mode?
+PROVIDERS
+Who are the TEE & E2EE model providers?
+Both TEE and E2EE models are operated by two external partners: NEAR AI Cloud and Phala Network. Venice does not run TEE or E2EE infrastructure itself. See their documentation below.
+NEAR AI CLOUD
+DOCUMENTATION
+E2EE implementation
+Whitepaper
+Private inference architecture
+Attestation verification
+PHALA NETWORK
+DOCUMENTATION
+dstack architecture
+Whitepaper
+Trust Center (attestation validation)
+VENICE PRO
+TEE and E2EE are Pro features
+Anonymous and Private modes are available to all users. TEE and E2EE models require a Venice Pro subscription. Upgrade to access hardware-verified and end-to-end encrypted inference.
+Upgrade to Pro
+Try Venice free
+Private, unrestricted AI for everyone.
+PRODUCT
+About
+Features
+Pricing
+Blog
+DEVELOPERS
+Venice API
+Media API
+API Docs
+Guides
+API Reference
+Status
+LEGAL
+Privacy Policy
+Terms of Service
+Contact
+© 2026 Venice AI. All rights reserved.
