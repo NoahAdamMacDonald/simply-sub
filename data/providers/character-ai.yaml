@@ -1,0 +1,552 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1). character.ai shows this machine's Edge and the
+# Mullvad Browser Cloudflare's security check, so its pages were read 2026-11-17 through a US exit (its subscribe page
+# through each research country's exit too); its help centre through its Zendesk API (a plain fetch of its HTML gets
+# the same check), its blog and Apple's App Store pages with a plain fetch. Pages, each quoted where it's used:
+# What it is: "Character.AI empowers people to connect, learn, and tell stories through interactive entertainment."
+# (About), with a Feed, followers and shared Characters ("Be a part of an expansive community."), so its plans are in
+# `social` too (notes.md).
+# Pricing: character.ai/subscribe, which reads signed out: tabs for "(c.ai) lite" and "(c.ai+)", each with its own
+# periods ("Weekly" and "Monthly" for lite, "Monthly" and "Yearly" for c.ai+): "$4.99 per month", "$2.49 per week",
+# "$9.99 per month" and "$94.99 per year" ("$119.88" struck through, twelve monthly payments), each "Subscription
+# auto-renews". The same prices, in a bare "$", through exits in Canada, the US, the UK, Ireland, Germany, France, the
+# Netherlands, Spain, Italy, Australia and New Zealand; the page's own product data names US dollars ("priceCurrency":
+# "USD", read through a Canadian exit) and its blog says "(c.ai) lite lets you do that at $4.99 USD/month or $2.49
+# USD/week, with pricing varying by region." So one US-dollar list for everyone on the web (GLOBAL), as Perplexity's.
+# "We price by region so (c.ai) lite is affordable in local markets. The price shown to you at checkout is the price
+# you'll pay." ((c.ai) lite FAQ): the checkout needs an account, so a local web price can't be read. Its apps' prices
+# are Apple's and Google's, by storefront ("Character.AI+ $12.99" and "$129.99" on the Canadian App Store page): a way
+# to pay, not listed (notes.md). No page says a price includes tax ("we’ll charge tax when required", its terms).
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. no picker; 3. the page's product data names
+# USD ("Character.AI Plus (Annual)", 94.99); 4. the checkout asks you to sign in; 5. its help centre has no prices
+# article; 6. a Canadian exit (this machine is refused): the same "$" prices; 7. no bill offered.
+# Not listed: Charms, its virtual currency ("Charms are our in-app virtual currency that you can use to unlock access to
+# special features.", Charms FAQ), sold in packs: one-time purchases, not a subscription.
+# Bundles: none on its pages. Official resellers: none; no page names a shop that sells it.
+# Chapter 11: "Today, we’re sharing that Character.ai has initiated a voluntary Chapter 11 bankruptcy process to
+# facilitate a court-supervised sale of the company." (its blog, Oct 12, 2026), with a sale hearing on December 3 and 4,
+# 2026 and Disney as the stalking-horse buyer of some assets (its Transaction Notice): the owner may change (notes.md).
+
+id: character-ai
+name: Character.AI
+aliases: [c.ai, character ai]
+website: https://character.ai
+domains: [support.character.ai, blog.character.ai]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help centre's cancelling article, for the web and the app stores.
+cancelUrl: https://support.character.ai/hc/en-us/articles/17399592326555-How-do-I-manage-or-cancel-my-c-ai-subscription
+sources: { pricing: https://character.ai/subscribe }
+
+# Ways to pay (M11.5), read 2026-11-17: its apps bill through Apple and Google (its terms). On the web, "payments
+# processed by Stripe" ((c.ai) lite FAQ) names no way to pay, so no card entry and no acceptedNetworks.
+paymentMethods:
+  - methods: [app-store]
+    page: 'Terms of Service'
+    url: https://character.ai/tos
+    quotes:
+      - "If you purchased your subscription from an mobile app store, you'll need to cancel your subscription and submit a request for a refund through the Apple App Store or Google Play using the links below:"
+
+# Owner (M11.2), read 2026-11-17 on its About page: the company that operates it, in Delaware. Private: no page names a
+# listing.
+owner:
+  name: 'Character Technologies, Inc.'
+  page:
+    name: About Character.AI
+    url: https://character.ai/about
+  quotes:
+    - 'This site is operated by Character Technologies Inc. dba Character.ai, registered in the Delaware Department of State, Division of Corporations Commercial Register under registration number 6360997.'
+  country:
+    code: US
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms charge "on each agreed-upon periodic renewal until you cancel", and its
+# help centre says nothing more: no day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://character.ai/tos
+    - https://support.character.ai/hc/en-us/articles/17399592326555-How-do-I-manage-or-cancel-my-c-ai-subscription
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its subscribe page ("All the good stuff", each plan's card) and the (c.ai) lite FAQ:
+# "(c.ai) lite gives you a daily amount of premium chat style messages with fewer ads, and better memory. (c.ai+) gives
+# you unlimited premium chat style chats, zero ads, the full memory suite, chat customization, early access to new
+# features, and bonus Charms with every pack purchase."; "(c.ai) lite includes 30 memory pins (up from 15 on free), a
+# detailed usage view, and chat customization."
+perks:
+  - id: premium-styles-daily
+    name: Try top models daily
+  - id: premium-styles-unlimited
+    name: Unlimited top models
+  - id: better-memory
+    name: Better memory
+  - id: best-memory
+    name: Best memory
+  - id: chat-customization
+    name: Chat customization
+  - id: less-slow-mode
+    name: Less slow mode when things get busy
+  - id: bonus-charms
+    name: Bonus Charms with every pack purchase
+
+# AI features (the AI category's registry), read 2026-11-17 in its help centre, its About page and its subscribe page:
+# - Voice on every plan: "Through Character Calls, users can now have seamless two way conversations and talk with
+#   Characters in the same way one would have a phone call." and "Character Calls is now available on web for all
+#   users." (Character Calls & Voice FAQ).
+# - Music and voice generation on every plan: Character Voice's "A creative AI tool where users can create their own
+#   Voices by uploading an audio sample." and "Character Voice is available to all users, free of charge."
+# - Image and video generation on every plan: "Your past images and videos are saved, and you keep creating more with
+#   your Characters using Imagine Chat." and "Continue creating Characters, scenes, videos, and voices." (Important
+#   Changes for Teens, for every under-18 user, all on the free plan's tools: "Many of our tools like AvatarFX and
+#   Imagine Chat, are still available to under-18 users."); Charms buy "Imagine additional chat images or chats."
+# - Memory on every plan: the subscribe page's "Memory" row ("Basic", "Better", "Best") and "Pins" ("15", "30", "30").
+# - Custom assistants on every plan: Characters you create ("When you create an automated AI character ("Character")
+#   using the Services in accordance with these Terms, then as between you and Character.AI, you own all rights in that
+#   Character.", its terms).
+# - Early access on c.ai+: "early access to new features" (the (c.ai) lite FAQ's list for c.ai+); lite's "Feature
+#   access" row says "Some new", c.ai+'s "Priority".
+# - Chats kept on its servers: "Your past chats are saved"; "Identifiers and Your content you submit for as long as your
+#   account remains active." (Regional Privacy Disclosures).
+# - None of its pages offers web search, reasoning models, projects, a choice of other companies' models (it serves its
+#   own "Chat Styles", PipSqueak 3, DeepSqueak and the like), a coding agent, a browser agent, scheduled tasks, an API
+#   ("We don't currently have an API.", Is there an API?) or office apps.
+# Ads (ad free, required in social): the subscribe page's "Ads" row, "Full" on Free, "Less" on lite, "None" on c.ai+
+# ("No ads"). Open protocol (required in social): none; its pages name no federation.
+# General features, read 2026-11-17: the web and its apps ("Character.AI mobile app is now available for download on iOS
+# and Android!"). Sign-in: "Continue with Google", "Continue with Apple" and an "Email Verification Link (a passwordless
+# "magic link" sent directly to your inbox)" (Does Character.AI use passwords?). App languages: its App Store page's
+# list ("English, Bulgarian, Croatian, Czech, Dutch, Finnish, French, German, Greek, Hindi, Hungarian, Indonesian,
+# Italian, Japanese, Korean, Lithuanian, Polish, Portuguese, Romanian, Russian, Simplified Chinese, Spanish, Swedish,
+# Thai, Traditional Chinese, Turkish, Ukrainian, Vietnamese"), the registry's values among them; no page of its own
+# lists them. Support: its help centre's request form. No pause. Parental controls: none: its Parental Insights is a
+# weekly report a teen chooses to share ("The new Parental Insights feature provides parents and guardians access to a
+# summary of their teen’s activity on the platform."; "This does not include a user’s chat content."), not a limit a
+# parent sets; the under-18 experience is set by age ("Users verified as under 18 are placed in the Under-18
+# experience, which includes reading mode.", What is Reading Mode?) (notes.md).
+features:
+  platforms: [android, ios, web]
+  account.sign-in: [email-code, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi]
+  support.channels: [email]
+
+plans:
+  - id: character-ai.free
+    name: Free
+    link: https://character.ai/
+    categories: [ai, social]
+    features:
+      ai.assistant: true
+      ai.voice: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.memory: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+      ad-free: false
+      social.protocol: []
+    notes: 'Unlimited messages on its standard chat styles (PipSqueak 3, ShortSqueak), with ads and slow mode when busy.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://support.character.ai/hc/en-us/articles/14997389547931-What-is-Character-AI
+
+  - id: character-ai.lite
+    name: (c.ai) lite
+    link: https://character.ai/subscribe
+    categories: [ai, social]
+    features:
+      ai.assistant: true
+      ai.voice: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.memory: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+      ad-free: false
+      social.protocol: []
+    perks: [premium-styles-daily, better-memory, chat-customization, less-slow-mode]
+    notes: 'A daily allowance of premium chat styles (DeepSqueak, LongSqueak), fewer ads and 30 memory pins.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 2.49
+        interval: week
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://character.ai/subscribe
+      - region: GLOBAL
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://character.ai/subscribe
+
+  - id: character-ai.plus
+    name: c.ai+
+    link: https://character.ai/subscribe
+    categories: [ai, social]
+    features:
+      ai.assistant: true
+      ai.voice: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.memory: true
+      ai.early-access: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+      ad-free: true
+      social.protocol: []
+    perks: [premium-styles-unlimited, best-memory, chat-customization, bonus-charms]
+    notes: 'Unlimited premium chat styles (DeepSqueak, LongSqueak), no ads, no slow mode and advanced Lorebooks.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://character.ai/subscribe
+      - region: GLOBAL
+        currency: USD
+        amount: 94.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://character.ai/subscribe
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 through a US exit: its Terms of Service
+# (last updated August 27, 2025), which include its Community Guidelines (the conduct it forbids: no topic worse than
+# the terms'); its Privacy Policy (effective July 1, 2026) with its Regional Privacy Disclosures and Cookie Policy; the
+# Charms Terms of Use (its virtual currency: no topic worse than the terms'); its Safety Center pages; its help centre's
+# billing, deletion, export, training and age-assurance articles; and its blog's Chapter 11 posts. The sign-up page's
+# line: "By continuing, you agree with the Terms and Privacy Policy". Not read: the "Your Privacy Choices" page the
+# Regional Privacy Disclosures send US residents to (no link in the text read).
+policies:
+  links:
+    - name: Terms of service
+      url: https://character.ai/tos
+    - name: Privacy policy
+      url: https://character.ai/privacy
+    - name: Regional privacy disclosures
+      url: https://character.ai/regional
+    - name: Cancelling
+      url: https://support.character.ai/hc/en-us/articles/17399592326555-How-do-I-manage-or-cancel-my-c-ai-subscription
+    - name: (c.ai) lite FAQ
+      url: https://support.character.ai/hc/en-us/articles/55388952900379--c-ai-lite-FAQ
+    - name: Model training settings
+      url: https://support.character.ai/hc/en-us/articles/42788047758747-How-do-I-manage-update-my-model-training-settings
+    - name: Exporting your data
+      url: https://support.character.ai/hc/en-us/articles/30299431702555-How-do-I-export-all-my-data-How-can-I-export-my-chats
+    - name: Safety Center
+      url: https://support.character.ai/hc/en-us/articles/21704914723995-Safety-Center
+    - name: Age assurance data
+      url: https://support.character.ai/hc/en-us/articles/51452660164379-What-happens-to-my-data-during-age-assurance
+    - name: Verifying your age
+      url: https://support.character.ai/hc/en-us/articles/43665577363739-How-do-I-verify-my-age
+    - name: Chapter 11 update
+      url: https://blog.character.ai/an-update-on-character-ai/
+  ratings:
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel at any time, in your app store or through a link it emails you to its customer portal, and you keep your plan until the period ends.'
+      sources:
+        - url: https://support.character.ai/hc/en-us/articles/17399592326555-How-do-I-manage-or-cancel-my-c-ai-subscription
+          quote: 'A secure link to your customer portal will be sent to the provided email address.'
+        - url: https://support.character.ai/hc/en-us/articles/55388952900379--c-ai-lite-FAQ
+          quote: 'Either way, your plan stays active through the end of your current billing period.'
+      lastVerified: 2026-11-17
+    - topic: billing.cancellation
+      plans: [character-ai.lite]
+      tier: poor
+      reason: 'If you bought (c.ai) lite on the web, you cancel by sending a request to its support team. In the app, you cancel in your app store.'
+      sources:
+        - url: https://support.character.ai/hc/en-us/articles/55388952900379--c-ai-lite-FAQ
+          quote: 'If you subscribed on the web (payments processed by Stripe), submit a request through our support page and select the "Payments and purchases" option'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments are not refunded unless the law requires it, but you keep your plan to the end of the period you paid for.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'Payments are non-refundable, except where required by law.'
+        - url: https://support.character.ai/hc/en-us/articles/55388952900379--c-ai-lite-FAQ
+          quote: 'Either way, your plan stays active through the end of your current billing period.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you at least 30 days before a price rise, which starts only at your next renewal, so you can cancel first.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'If we increase our subscription prices, we will give you at least 30 days’ notice and any price increase will take effect on your next renewal so that you can cancel if you do not agree to the price increase.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms and help centre don’t mention a free trial.'
+      pages:
+        - https://character.ai/tos
+        - https://support.character.ai/hc/en-us/articles/55388952900379--c-ai-lite-FAQ
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say it charges you at each renewal until you cancel, but not that it reminds you first.'
+      pages: [https://character.ai/tos]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price and taxes.'
+      pages: [https://character.ai/tos]
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its help centre says you can move from lite to c.ai+ through your app store, but not whether what you paid counts toward it.'
+      pages:
+        - https://support.character.ai/hc/en-us/articles/55388952900379--c-ai-lite-FAQ
+        - https://character.ai/tos
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by emailing within 30 days of agreeing to its terms."
+      sources:
+        - url: https://character.ai/tos
+          quote: 'By agreeing to these Terms, you agree to resolve all disputes with us through binding individual arbitration.'
+        - url: https://character.ai/tos
+          quote: 'If you do not want to be bound by the Arbitration Agreement, you must notify Character.AI in writing by email to arbitration@character.ai within 30 days of the date you first agree to the Terms, stating that you do not want to resolve disputes with Character.AI by arbitration.'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://character.ai/tos
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts new terms on its page, and big changes start 30 days later, so you can leave first. It doesn’t promise to tell you directly.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'If we do this, we will post the changes on this page and will indicate at the top of this page the date these terms were last revised. Material changes will become effective no earlier than 30 days after they are posted, except that changes addressing new functions of the Services or changes made for legal reasons will be effective immediately.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or close your account for any reason, without warning, and delete everything in it.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'You agree that Character.AI, in its sole discretion, may suspend or terminate your account (or any part thereof) or use of the Services and remove and discard any content within the Services, for any reason, including, without limitation, for lack of use or if Character.AI believes that you have violated or acted inconsistently with the letter or spirit of these Terms.'
+        - url: https://character.ai/tos
+          quote: 'You agree that any termination of your access to the Services under any provision of these Terms may be effected without prior notice'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'You keep what you post, but give it a licence forever, which it can sell and pass on to companies it works with, and which lasts after your account closes.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'You grant Character.AI, to the fullest extent permitted under the law, a nonexclusive, worldwide, royalty-free, fully paid up, transferable, sublicensable, perpetual, irrevocable license to copy, display, upload, perform, distribute, transmit, make available, store, modify, exploit, commercialize and otherwise use the content for any Character.AI-related purpose'
+        - url: https://character.ai/tos
+          quote: 'You agree that these rights and licenses also include a right for Character.AI to make the content available to, and pass these rights along to, others with whom we have contractual relationships'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: poor
+      reason: 'You own what the Characters write for you, but it keeps a licence forever to use and sell it for any purpose.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'then as between you and Character.AI, you own that Generated Content.'
+        - url: https://character.ai/tos
+          quote: 'perpetual, irrevocable license to copy, display, upload, perform, distribute, transmit, make available, store, access, modify, exploit, commercialize and otherwise use the Character and all Generated Content for any purpose'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change paid features or stop the service at any time without notice, and takes no responsibility for it.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'Please note the features and functionality of our paid Services are often dynamic and may be subject to change at any time without prior notice.'
+        - url: https://character.ai/tos
+          quote: 'Character.AI may also in its sole discretion and at any time discontinue providing the Services, or any part thereof, with or without notice.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It can close accounts that are not used for "an extended period", without saying how long or promising a warning.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'You acknowledge that Character.AI reserves the right to terminate accounts that are inactive for an extended period of time.'
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its terms forbid taking its apps apart without the usual “unless the law allows it”, and any use they don’t name is forbidden.'
+      sources:
+        - url: https://character.ai/tos
+          quote: '(ix) reverse engineer, disassemble, decompile, decode, adapt, or otherwise attempt to derive or gain access to any Services source code, in whole or in part (unless a portion of code within the Services is released as open source and the open source license governing such code expressly permits reverse engineering, copying or other modification).'
+        - url: https://character.ai/tos
+          quote: 'Any use of the Services or content on the Services other than as specifically authorized herein is strictly prohibited.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://character.ai/tos]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for your password and account, but don’t say whether you may share it.'
+      pages: [https://character.ai/tos]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms, privacy pages and help centre name no audit, certification or way to report a security problem.'
+      pages:
+        - https://character.ai/tos
+        - https://character.ai/privacy
+        - https://support.character.ai/hc/en-us/articles/21704914723995-Safety-Center
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It and its analytics partners track how you use it, and draw conclusions about your interests. You can only manage cookies, browser by browser and where your laws allow.'
+      sources:
+        - url: https://character.ai/privacy
+          quote: 'Generate and analyze inferences about use of the Services, such as your preferences and interests and trends about our Services'
+        - url: https://character.ai/privacy
+          quote: 'Depending on where you live and the options available on your device or browser, you may have the ability to manage the cookies in use.'
+      action:
+        name: 'Its cookie policy'
+        url: https://character.ai/cookies
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives your data to advertising companies for targeted ads, which US law counts as selling it. You can say no only where your laws give you that right, or through cookie settings.'
+      sources:
+        - url: https://character.ai/privacy
+          quote: 'We may disclose personal information to advertising and analytics providers in connection with the provision of tailored advertising'
+        - url: https://character.ai/regional
+          quote: 'While these disclosures may be considered sales under certain state laws, we do not sell personal information for monetary consideration, and Character.AI is not a data broker.'
+      action:
+        name: 'Its cookie policy'
+        url: https://character.ai/cookies
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The free plan and lite show ads, and it tracks you to tailor them. You can only turn tracking down through cookie settings or where your laws allow.'
+      sources:
+        - url: https://character.ai/privacy
+          quote: 'Provide advertising and recruit new users, including provision of tailored advertising;'
+        - url: https://character.ai/privacy
+          quote: 'Depending on where you live and the options available on your device or browser, you may have the ability to manage the cookies in use.'
+      action:
+        name: 'Its cookie policy'
+        url: https://character.ai/cookies
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you write to Characters trains its AI. Only people in Europe and the UK can turn that off.'
+      sources:
+        - url: https://support.character.ai/hc/en-us/articles/42788047758747-How-do-I-manage-update-my-model-training-settings
+          quote: 'As we explain in our Privacy Policy, we retain certain data that you share with us to help train and improve our AI models.'
+        - url: https://support.character.ai/hc/en-us/articles/42788047758747-How-do-I-manage-update-my-model-training-settings
+          quote: 'If you are in the European Economic Area (“EEA”) or the United Kingdom (“UK”), and you would like to opt out of us using your chat content to train our generative AI models, you can follow the steps below.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      regions: [EU, GB]
+      tier: neutral
+      reason: 'What you write trains its AI unless you turn off “Improve the Model for Everyone” in settings, which applies to what you send afterwards.'
+      sources:
+        - url: https://support.character.ai/hc/en-us/articles/42788047758747-How-do-I-manage-update-my-model-training-settings
+          quote: 'Once you opt out, new content will not be used to train our generative AI models.'
+      action:
+        name: 'How to turn off model training'
+        url: https://support.character.ai/hc/en-us/articles/42788047758747-How-do-I-manage-update-my-model-training-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'It may read, review and change your content at any time and for any reason, including to develop its service, and you can’t turn that off.'
+      sources:
+        - url: https://character.ai/tos
+          quote: 'While we’re not required to do so, we may access, review, screen, edit, modify and delete your content at any time and for any reason, including to provide and develop the Services or if we think the content violates these Terms or any applicable laws.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your chats while your account is open and deletes them when you delete it, but keeps other data as long as it needs, and a popular Character you made can stay.'
+      sources:
+        - url: https://character.ai/regional
+          quote: 'Following deletion of your account, all chats and activity associated with your account will be deleted, unless continued retention is required for legal, security or dispute-resolution purposes;'
+        - url: https://character.ai/privacy
+          quote: 'We keep your information for the time necessary for the purposes for which it is processed or as otherwise described at the time the information is collected, unless a shorter retention period is required by law.'
+        - url: https://character.ai/privacy
+          quote: 'If a Character you create has been made available to other users, then we reserve the right to preserve that Character’s characteristics and to keep that Character active on the Services, even if you otherwise delete your data and your account.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in its settings, and your chats are deleted with it, except what it must keep for legal or security reasons.'
+      sources:
+        - url: https://character.ai/privacy
+          quote: 'You may delete your account through your account profile page.'
+        - url: https://character.ai/regional
+          quote: 'Following deletion of your account, all chats and activity associated with your account will be deleted, unless continued retention is required for legal, security or dispute-resolution purposes;'
+      action:
+        name: 'How to delete your account'
+        url: https://support.character.ai/hc/en-us/articles/15063461160475-How-do-I-delete-my-account
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can export your data and chats yourself in its settings, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://support.character.ai/hc/en-us/articles/30299431702555-How-do-I-export-all-my-data-How-can-I-export-my-chats
+          quote: 'If you would like to export your data please go to your profile settings and follow the steps below for Web and Mobile App:'
+      action:
+        name: 'How to export your data'
+        url: https://support.character.ai/hc/en-us/articles/30299431702555-How-do-I-export-all-my-data-How-can-I-export-my-chats
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your data to the police or courts when it believes the law or legal process requires it, and doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://character.ai/privacy
+          quote: 'We may disclose certain information if we believe in good faith that doing so is necessary or appropriate to comply with any law enforcement, legal, or regulatory process, such as to respond to a warrant, subpoena, court order, or other applicable laws and regulations.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept in the US and other countries. For Europe and the UK it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://character.ai/regional
+          quote: 'As our Services are global, your information is stored and processed in the U.S. and other countries outside your country of residence, where data protection laws differ from those applicable in your country.'
+        - url: https://character.ai/regional
+          quote: 'For transfers to other countries that are not covered by an adequacy decision, we rely on appropriate safeguards, including the European Commission’s Standard Contractual Clauses ( as amended from time to time)'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: bad
+      reason: 'You sign up with an email address and your birthday, and most people are then asked for a selfie (or an ID if that fails) to check their age. A partner handles it and deletes it within 7 days.'
+      sources:
+        - url: https://support.character.ai/hc/en-us/articles/21704914723995-Safety-Center
+          quote: 'To create an account, you can sign up on the web or mobile using an email address and birthday.'
+        - url: https://support.character.ai/hc/en-us/articles/43665577363739-How-do-I-verify-my-age
+          quote: 'The age assurance pop-up should show up for most users; just click the link when you see it.'
+        - url: https://support.character.ai/hc/en-us/articles/51452660164379-What-happens-to-my-data-during-age-assurance
+          quote: 'Most users will only need to complete a selfie — no ID required. A government-issued ID is only requested as a final step if Persona is unable to confirm your age from the selfie alone.'
+      lastVerified: 2026-11-17
+    - topic: privacy.children
+      tier: bad
+      reason: 'Teens from 13 (16 in Europe) can use it, and in some places it may show them targeted ads. Parents can get a weekly activity summary if the teen invites them.'
+      sources:
+        - url: https://character.ai/regional
+          quote: 'In some jurisdictions, we may provide targeted advertising to minors over the age of 13, which may include disclosures to third parties that are considered “sales” in some jurisdictions.'
+        - url: https://support.character.ai/hc/en-us/articles/21704914723995-Safety-Center
+          quote: 'Users must be at least 13 years old (at least 16 years old in Europe).'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: In bankruptcy and up for sale
+      tier: poor
+      reason: 'The company is in a US bankruptcy process to sell itself. If no buyer keeps it running, the service will be shut down; it says subscribers will be told first.'
+      sources:
+        - url: https://blog.character.ai/an-update-on-character-ai/
+          quote: 'Today, we’re sharing that Character.ai has initiated a voluntary Chapter 11 bankruptcy process to facilitate a court-supervised sale of the company.'
+        - url: https://blog.character.ai/an-update-on-character-ai/
+          quote: 'If such a bid is unavailable, however, the platform will be wound down.'
+        - url: https://blog.character.ai/an-update-on-character-ai/
+          quote: 'If the service changes in a way that affects paid features, we intend to notify subscribers in advance.'
+      lastVerified: 2026-11-17
