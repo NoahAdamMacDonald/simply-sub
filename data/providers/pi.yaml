@@ -1,0 +1,299 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada (pi.ai, which opens a
+# chat without signing in, its help panel, hey.pi.ai, Inflection AI's About page, terms, privacy policy, cookie policy
+# and model training notice) and with a plain fetch (its Intercom help centre, help.pi.ai, every article its sitemap
+# lists, and Apple's App Store pages). Pages, each quoted where it's used:
+# Still offered: pi.ai answers "Hey, I'm Pi — your personal AI." and "Sign up for free", with "Log in to save your chat
+# history past 60 days."; hey.pi.ai: "Meet Pi. Your personal intelligence partner" and "find Pi on the App Store and
+# Google Play".
+# Pricing: free only. No page sells a paid tier: its terms name no fees or subscriptions, its help centre's 34 articles
+# none, and its App Store page says "Free" with no in-app purchases listed (the US and Canadian storefronts). A free plan
+# priced 0 everywhere (GLOBAL).
+# Ways to pay: none (nothing is sold), so no paymentMethods and no renewal day.
+# Bundles: none. Official resellers: none.
+
+id: pi
+name: Pi
+aliases: [pi.ai, heypi, inflection pi]
+website: https://pi.ai
+domains: [hey.pi.ai, help.pi.ai, inflection.ai]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Nothing to cancel: its help centre's article on deleting your account and all your data.
+cancelUrl: https://help.pi.ai/en/articles/13147175-how-do-i-delete-my-pi-account-and-all-my-data
+sources: { pricing: https://pi.ai/ }
+
+# Owner (M11.2), read 2026-11-17: Inflection AI's own About page on Pi, with Inflection AI, Inc. named in its terms and its
+# San Francisco address there. Private: no page names a listing.
+owner:
+  name: 'Inflection AI, Inc.'
+  website: https://inflection.ai
+  page:
+    name: About Inflection AI
+    url: https://inflection.ai/about
+  quotes:
+    - "Inflection AI pioneered Personal Intelligence with Pi, the world's first Personal Intelligence partner, built to help people navigate their lives."
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://inflection.ai/terms-of-service
+    quotes:
+      - 'You must send any Claimant Notice to Inflection AI by certified mail, addressed to Inflection AI, Inc., Attn: Legal Department, 455 Market St Ste 1940 PMB 417705, San Francisco, California 94105-2448 US or by email to techsupport@inflection.ai.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# AI features (the AI category's registry), read 2026-11-17 in its help centre:
+# - Voice: "Love to chat by voice? Let’s get you set up—here’s how to turn on voice input and hear Pi clearly on any
+#   device:" (How do I use voice to talk with Pi?); hey.pi.ai's "Skip the typing. Say what’s on your mind and Pi
+#   listens."
+# - Memory: "Pi focuses on remembering things that are lastingly true about you" and "You can add, delete, and update
+#   Pi's memories by going to Settings > Account > Manage Memories." (Pi’s memory).
+# - Chats kept on its servers: "Log in to save your chat history past 60 days." (pi.ai); its chat history download.
+# - Not offered: images ("Right now, Pi doesn’t support generating, uploading, or editing images"), a choice of model
+#   ("Right now, you can’t pick or switch the model—Pi runs on the Inflection-2 model by default, and that’s the only
+#   option available."), and none of its pages offers web search, projects, reasoning models, an agent, scheduled tasks
+#   (its reminders and Daily Brief aren't tasks it runs for you), an API, music or voice generation or office apps.
+# General features, read 2026-11-17: the web and its apps ("find Pi on the App Store and Google Play", hey.pi.ai).
+# Sign-in: a password ("try resetting your password", I can’t sign in), codes by text message ("this may prevent us from
+# sending one-time codes to your phone", its terms) and another account ("if you create or log into your account
+# through a third-party platform (such as Google, Facebook, or Apple)", its privacy policy). App languages: its
+# App Store page lists "English" only, and no page of its own lists any ("Just start typing in it—Pi will switch and
+# respond in kind!" is the chat, not the app), so none. Support: its help centre's "Request support" form. No pause
+# (nothing to pause) and no parental controls: "Pi is only for users aged 18 and up".
+features:
+  platforms: [android, ios, web]
+  account.sign-in: [password, sms, sso]
+  support.channels: [email]
+
+plans:
+  - id: pi.free
+    name: Free
+    link: https://pi.ai/
+    features:
+      ai.assistant: true
+      ai.voice: true
+      ai.memory: true
+      ai.chat-storage: cloud
+    notes: 'Free to use, on Inflection AI’s own model; without an account your chats are kept for 60 days.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pi.ai/
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: Inflection AI's Terms of
+# Service (last updated December 22, 2025), which include its Acceptable Use rules (in the terms); its Privacy Policy
+# (last updated August 11, 2026; pi.ai/privacy shows the same text); its Cookie Policy; its Model Training Notice (data
+# from outside its products: no topic); and its help centre's privacy, deletion and export articles. pi.ai's line: "By
+# using Pi, you agree to our Terms and Privacy Policy." Not read: its Transparency & Content Moderation, Crisis Prevention
+# and EU Digital Services Act notices (reports and contacts, no user terms). Billing topics don't apply: nothing is sold.
+policies:
+  links:
+    - name: Terms of service
+      url: https://inflection.ai/terms-of-service
+    - name: Privacy policy
+      url: https://inflection.ai/privacy-policy
+    - name: Cookie policy
+      url: https://inflection.ai/cookie-policy
+    - name: Exporting your chats
+      url: https://help.pi.ai/en/articles/12988158-export-and-share-chat-history-safely-with-limits-and-tips
+  ratings:
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by emailing within 30 days of accepting its terms."
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'BY AGREEING TO THESE TERMS, YOU AND INFLECTION AI AGREE TO RESOLVE MOST DISPUTES SOLELY ON AN INDIVIDUAL BASIS AND NOT AS A CLASS ARBITRATION, CLASS ACTION, ANY OTHER KIND OF REPRESENTATIVE PROCEEDING, OR BY JURY TRIAL.'
+        - url: https://inflection.ai/terms-of-service
+          quote: 'You have the right to opt out of binding arbitration within 30 days of the date you first accepted a version of these Terms by emailing techsupport@inflection.ai.'
+      action:
+        name: 'How to opt out of arbitration (section 13.10)'
+        url: https://inflection.ai/terms-of-service
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them on its page, and they apply at once; using Pi afterwards means you accept them.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'We will provide notice of these changes by updating this page with the revised Terms and updating the “Last Updated” date above.'
+        - url: https://inflection.ai/terms-of-service
+          quote: 'Unless we say otherwise in our notice, the amended Terms will be effective immediately, and your continued use of any of our Services after such an amendment to the Terms shall be considered an acceptance of all changes to the Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close or suspend your account at any time and for any reason it decides, with no promise of a warning.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'Inflection AI is free to terminate or suspend access to your use of our Services at any time and for any reason at our discretion.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'You own what you write and what Pi answers, but give Inflection a licence that never ends, which it can pass on and which lasts after you leave.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'You grant to Inflection AI a royalty-free, perpetual, irrevocable, sublicensable (through multiple tiers), and worldwide license to the Content for the following limited purposes:'
+        - url: https://inflection.ai/terms-of-service
+          quote: 'The license you grant Inflection AI to use Content survives such termination; however, your license to use our Services terminates with these Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'You own what Pi writes for you, but the same licence lets Inflection use it too.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'As between you and Inflection AI, you own your Inputs and Outputs (collectively, your “Content”).'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Pi is free, and Inflection can change or stop it at any time, with or without telling you.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'Inflection AI may, with or without notice to you, augment, modify, discontinue, or suspend our Services, in part or in whole, at any time.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms say nothing about closing accounts that aren’t used.'
+      pages: [https://inflection.ai/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its terms forbid taking Pi apart with no “unless the law allows it”, and forbid using it to build anything that competes with Inflection.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'You may not use or attempt to use our Services to reverse engineer, decompile, or otherwise attempt to obtain the underlying models, algorithms, or source code of the Services.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://inflection.ai/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You may not let anyone else use your account.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'Be responsible for the security of your account and not share or permit others to use your account credentials.'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      status: not-stated
+      reason: 'Its terms, privacy policy and help centre name no audit, certification or bug bounty; its help centre only asks you to report problems to support.'
+      pages:
+        - https://inflection.ai/terms-of-service
+        - https://inflection.ai/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records your device, location area and what you do, and may guess your mood from what you say. You can turn off mood guessing from your voice, and cookies browser by browser.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We may use your inputs to make inferences about your emotional state, tone, sentiments, or other characteristics. You may opt out of using voice to infer emotions in your Account settings page.'
+        - url: https://inflection.ai/cookie-policy
+          quote: 'Please remember that because opt-out mechanisms are specific to the device or browser on which they are exercised, you may need to opt out on each browser and device that you use.'
+      action:
+        name: 'Its cookie policy'
+        url: https://inflection.ai/cookie-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It says it doesn’t sell or share your data for targeted ads, and gives it only to companies that work for it, the law and a buyer of the company.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We do not engage in “sales” or “sharing” of personal information or process personal information for “targeted advertising” purposes as those terms are defined by U.S. state privacy laws.'
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We make personal information available to our vendors, service providers, contractors and consultants who perform services on our behalf'
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Pi shows no ads, but Inflection’s sites use cookies to run ads, and you can only turn them off browser by browser.'
+      sources:
+        - url: https://inflection.ai/cookie-policy
+          quote: 'We use cookies to personalize content, run ads, and analyze traffic.'
+        - url: https://inflection.ai/cookie-policy
+          quote: 'Please remember that because opt-out mechanisms are specific to the device or browser on which they are exercised, you may need to opt out on each browser and device that you use.'
+      action:
+        name: 'Its cookie policy'
+        url: https://inflection.ai/cookie-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you say trains its AI unless you turn that off in settings. Its licence to train never ends, and it keeps Pi’s answers forever even after you delete them.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'Provide, maintain, and improve the Services, including to develop and train our AI models / large language models that power our Services. You may opt out of model training in your Account settings page;'
+        - url: https://inflection.ai/terms-of-service
+          quote: 'including by using Content to train and improve models used by our Services and other generative or other AI models'
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We retain outputs indefinitely for the limited purposes described in Section 4 of our Terms of Service.'
+      action:
+        name: 'Your data and privacy choices'
+        url: https://help.pi.ai/en/articles/13147185-how-is-my-data-used-and-how-can-i-control-my-privacy-and-tracking
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say whether its staff read your chats, beyond using them for safety and to improve Pi.'
+      pages:
+        - https://inflection.ai/terms-of-service
+        - https://inflection.ai/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: bad
+      reason: 'It deletes what you wrote within 15 days of deleting it, but keeps Pi’s answers forever.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'For users of Pi, we generally retain inputs for at most 15 days after user deletion.'
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We retain outputs indefinitely for the limited purposes described in Section 4 of our Terms of Service.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You can delete your account yourself in settings, or by typing “!delete” in the chat, but Pi’s answers are kept forever.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'Users of Pi may delete their information at any time within the Service by either (1) navigating to their profile page within the Service, selecting Account, and clicking on the “Delete my account” button; or (2) typing “!delete” within the chat.'
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We retain outputs indefinitely for the limited purposes described in Section 4 of our Terms of Service.'
+      action:
+        name: 'How to delete your account'
+        url: https://help.pi.ai/en/articles/13147175-how-do-i-delete-my-pi-account-and-all-my-data
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your whole chat history yourself, as a JSON file that other apps can read.'
+      sources:
+        - url: https://help.pi.ai/en/articles/12988158-export-and-share-chat-history-safely-with-limits-and-tips
+          quote: 'Click on Download Chat history link to initiate the full chat retrieval.'
+        - url: https://help.pi.ai/en/articles/12988158-export-and-share-chat-history-safely-with-limits-and-tips
+          quote: 'Once packaged, click on download link and a file named <pi-user-history.json> will be in your Download folder'
+      action:
+        name: 'How to download your chat history'
+        url: https://help.pi.ai/en/articles/12988158-export-and-share-chat-history-safely-with-limits-and-tips
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It gives your data to authorities when it believes the law or legal process requires it, and doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'We disclose personal information in response to a request for information if we believe that disclosure is in accordance with, or required by, any applicable law, regulation, or legal process, including lawful requests by public authorities to meet national security or law enforcement requirements.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept in the US and other countries. For Europe it uses legal safeguards such as contracts when data leaves.'
+      sources:
+        - url: https://inflection.ai/privacy-policy
+          quote: 'Inflection AI is based in the United States, and we and our service providers process and store personal information on servers located in the United States and other countries.'
+        - url: https://inflection.ai/privacy-policy
+          quote: 'Whenever we make restricted international transfers of personal information, we take steps to ensure that your personal information receives an adequate level of protection (by putting in place appropriate safeguards, such as contractual clauses)'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'To make an account you give your name and a phone number you control. You can chat without an account, but those chats go after 60 days.'
+      sources:
+        - url: https://inflection.ai/terms-of-service
+          quote: 'You register for our Services by providing us with your name, phone number, and other requested information.'
+        - url: https://inflection.ai/terms-of-service
+          quote: 'You may not use a phone number that you do not control, and you may not attempt to impersonate another person in registration.'
+      lastVerified: 2026-11-17

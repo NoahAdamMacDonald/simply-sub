@@ -405,6 +405,34 @@
   source: own
   status: done
   date: 2026-11-17
+- id: poe
+  name: Poe
+  website: https://poe.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: character-ai
+  name: Character.AI
+  website: https://character.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: venice
+  name: Venice
+  website: https://venice.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: pi
+  name: Pi
+  website: https://pi.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
