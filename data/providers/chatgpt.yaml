@@ -23,7 +23,8 @@
 
 # Coverage: chatgpt.pro-200 and chatgpt.pro-500 aren't priced in CA, GB, AU, NZ, IE, DE, FR, NL, ES or IT: the pricing
 # page shows only Pro 100's local price ("From CA$136"), and the other tiers' local prices only after signing in. Their
-# US prices are the Pro article's.
+# US prices are the Pro article's. Each country's page names both tiers in its "Monthly API credits" row, so they
+# have `soldIn` there (M11.20); those amounts are API credits, not the plans' prices.
 
 id: chatgpt
 name: ChatGPT
@@ -151,18 +152,23 @@ perks:
 #   extension support MCP servers and share MCP configuration for the same Codex host.", its MCP docs); other apps
 #   through plugins (the table's "Plugins" and "Discover & use Plugins" rows; "Connected apps that link external
 #   accounts, information, and actions.", Plugins in ChatGPT); its Chrome extension ("You can also use the ChatGPT
-#   browser extension with ChatGPT on the web.", which names no plan); skills (the table's "Skills" row); and, on
-#   Pro, the API through its "Monthly API credits".
+#   browser extension with ChatGPT on the web.", which names no plan); and, on Pro, the API through its "Monthly API
+#   credits". Not custom assistants (review of 2026-11-17): the table's "Skills" row ticks every plan, but no page
+#   says a personal plan can make one ("Skills are available to eligible ChatGPT Business, Enterprise, Healthcare,
+#   and Edu users"; "New GPT creation and publishing are not available on personal ChatGPT accounts, including Free,
+#   Go, Plus, and Pro.", below). Plugins in ChatGPT says "You can create a plugin with an app hosted on ChatGPT
+#   Sites on any ChatGPT plan.", a connected app, which `connectors` already counts.
 # - Chats kept on its servers: "Deleted chats are removed from your account view immediately and scheduled for
 #   permanent deletion within 30 days" (Deleting and archiving chats in ChatGPT), and the table's "Chat history" row.
 # - None of these pages offers code completion as you type (Codex starts "a chat with the context already open in your
 #   editor", its IDE docs), music or voice generation, or another company's models (the table's are GPT models).
-# - Pages that disagree, the table deciding as the newer per-plan list: "Skills are available to eligible ChatGPT
-#   Business, Enterprise, Healthcare, and Edu users" (Skills in ChatGPT, "Updated: 25 days ago") and "New GPT creation
-#   and publishing are not available on personal ChatGPT accounts, including Free, Go, Plus, and Pro." (GPTs in
-#   ChatGPT), against the table's Skills ticks on all four. "Custom MCP server connections and full MCP support are
-#   available for ChatGPT Business and Enterprise/Edu customers on ChatGPT web." (Connecting custom MCP servers in
-#   ChatGPT) is the web app's; Codex's clients connect them on every plan.
+# - Pages that disagree: "Skills are available to eligible ChatGPT Business, Enterprise, Healthcare, and Edu users"
+#   (Skills in ChatGPT, "Updated: 25 days ago") and "New GPT creation and publishing are not available on personal
+#   ChatGPT accounts, including Free, Go, Plus, and Pro." (GPTs in ChatGPT), against the table's Skills ticks on all
+#   four: the tick may mean using skills, so the articles that speak of making them decide (no custom assistants).
+#   "Custom MCP server connections and full MCP support are available for ChatGPT Business and Enterprise/Edu
+#   customers on ChatGPT web." (Connecting custom MCP servers in ChatGPT) is the web app's; Codex's clients connect
+#   them on every plan.
 # Apps and sign-in, read 2026-11-04: the table's "Access on web, iOS, Android" and "Code edits on macOS", and the
 # download page's Windows app and Chrome extension; a password, or Google, Microsoft or Apple ("Changing your account
 # sign-in method"). Support: "contact OpenAI Support using the chat widget in the Help Center" (its billing article).
@@ -188,7 +194,7 @@ plans:
       ai.projects: true
       ai.reasoning: true
       ai.computer-use: true
-      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension]
       ai.chat-storage: cloud
       account.parental-controls: true
     prices:
@@ -217,7 +223,7 @@ plans:
       ai.projects: true
       ai.reasoning: true
       ai.computer-use: true
-      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension]
       ai.chat-storage: cloud
       account.parental-controls: true
     prices:
@@ -327,7 +333,7 @@ plans:
       ai.projects: true
       ai.reasoning: true
       ai.computer-use: true
-      ai.integrations: [mcp, connectors, ide, cli, browser-extension, custom-assistants]
+      ai.integrations: [mcp, connectors, ide, cli, browser-extension]
       ai.chat-storage: cloud
       account.parental-controls: true
     prices:
@@ -438,7 +444,7 @@ plans:
       ai.projects: true
       ai.reasoning: true
       ai.computer-use: true
-      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension]
       ai.chat-storage: cloud
       account.parental-controls: true
     featureLabels:
@@ -552,12 +558,40 @@ plans:
       ai.projects: true
       ai.reasoning: true
       ai.computer-use: true
-      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension]
       ai.chat-storage: cloud
       account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$200 in the US
     perks: [dot-agent, usage-more-than-pro-100]
+    # Sold in each country whose pricing page names it in its "Monthly API credits" row (read from Canada on
+    # 2026-11-13, through each other country's exit on 2026-11-04), which only signing in prices: the Coverage note.
+    soldIn:
+      - regions: [CA]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - 'CA$136 with Pro 100, CA$250 with Pro 200, or CA$680 with Pro 500.'
+        lastVerified: 2026-11-13
+      - regions: [GB]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - '£89 with Pro 100, £200 with Pro 200, or £445 with Pro 500.'
+        lastVerified: 2026-11-04
+      - regions: [AU]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - 'A$155 with Pro 100, A$300 with Pro 200, or A$770 with Pro 500.'
+        lastVerified: 2026-11-04
+      - regions: [NZ]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - 'NZ$190 with Pro 100, NZ$400 with Pro 200, or NZ$950 with Pro 500.'
+        lastVerified: 2026-11-04
+      - regions: [IE, DE, FR, NL, ES, IT]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - '€103 with Pro 100, €229 with Pro 200, or €510 with Pro 500.'
+        lastVerified: 2026-11-04
     prices:
       - region: US
         currency: USD
@@ -586,12 +620,40 @@ plans:
       ai.projects: true
       ai.reasoning: true
       ai.computer-use: true
-      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension, custom-assistants]
+      ai.integrations: [mcp, connectors, api, ide, cli, browser-extension]
       ai.chat-storage: cloud
       account.parental-controls: true
     featureLabels:
       ai.api-credits: Monthly API credits, US$500 in the US
     perks: [dot-agent, usage-highest, ultrafast]
+    # Sold in each country whose pricing page names it in its "Monthly API credits" row (read from Canada on
+    # 2026-11-13, through each other country's exit on 2026-11-04), which only signing in prices: the Coverage note.
+    soldIn:
+      - regions: [CA]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - 'CA$136 with Pro 100, CA$250 with Pro 200, or CA$680 with Pro 500.'
+        lastVerified: 2026-11-13
+      - regions: [GB]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - '£89 with Pro 100, £200 with Pro 200, or £445 with Pro 500.'
+        lastVerified: 2026-11-04
+      - regions: [AU]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - 'A$155 with Pro 100, A$300 with Pro 200, or A$770 with Pro 500.'
+        lastVerified: 2026-11-04
+      - regions: [NZ]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - 'NZ$190 with Pro 100, NZ$400 with Pro 200, or NZ$950 with Pro 500.'
+        lastVerified: 2026-11-04
+      - regions: [IE, DE, FR, NL, ES, IT]
+        url: https://chatgpt.com/pricing/
+        quotes:
+          - '€103 with Pro 100, €229 with Pro 200, or €510 with Pro 500.'
+        lastVerified: 2026-11-04
     prices:
       - region: US
         currency: USD

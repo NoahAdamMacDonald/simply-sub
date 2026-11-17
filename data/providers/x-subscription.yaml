@@ -14,16 +14,17 @@
 # (Bundled Subscription Terms); "Subscriptions are only sold directly through X Subscription Corp." (cursor.com/pricing's
 # FAQ); "If you subscribed to The X Subscription on X, cancel it in X." (SpaceXSI docs, Cancel your subscription). By the
 # brand rule (one company, the same terms and account: one provider) it's one provider, named after what's sold, as
-# Google AI is: X Subscription, found as Cursor, Grok and X Premium too (aliases). The id isn't published yet: renaming
-# it to `cursor` is a search and replace if the owner prefers (notes.md).
+# Google AI is: X Subscription, found as Cursor, Grok and X Premium too (aliases). Its id and its plans' ids are
+# published (#205): renaming one now needs an entry in data/redirects.yaml.
 # Pricing: cursor.com/pricing (Free $0, Plus $8, Premium $30, Super $100 a month; Ultra $200 in its comparison table),
 # the same on x.ai/pricing, and Cursor's Pricing and plans article: "Annual billing is $80/yr for Plus, $300/yr for
 # Premium, $1,000/yr for Super, and $2,000/yr for Ultra. Prices exclude tax." The SpaceXSI docs' Pricing (docs.x.ai/
 # x-subscription/pricing) gives the same table ("$80/yr ($7/mo)", "$300/yr ($25/mo)", "$1000/yr ($84/mo)", "$2000/yr
-# ($167/mo)"). One price list for everywhere, in US dollars: the page shows a bare "$" from Canada and through a US, a UK
-# and a German exit alike, and its own data names the currency ("priceCurrency":"USD" for Plus, Premium, Super and Ultra,
-# the page's structured data); its terms charge "foreign exchange fees, and currency fluctuations" on top. None is an
-# offer; no page says they include tax ("Prices shown do not include applicable taxes or fees (e.g. VAT).").
+# ($167/mo)"). cursor.com and x.ai/pricing show US dollars wherever you are: the page shows a bare "$" from Canada and
+# through a US, a UK and a German exit alike, and its own data names the currency ("priceCurrency":"USD" for Plus,
+# Premium, Super and Ultra, the page's structured data); grok.com/plans shows each country its own price (Prices by
+# country, below). None is an offer; no page says they include tax ("Prices shown do not include applicable taxes or
+# fees (e.g. VAT).").
 # Region checklist, 2026-11-13: 1. cursor.com has language versions only (hreflang de, es, fr, hi, ja, ko, pt-BR, zh),
 # no country paths; 2. no country or currency picker; 3. the page's structured data names USD for every plan; 4. checkout
 # needs an account (its "Get Plus" buttons lead to cursor.com/api/auth/checkoutDeepControl); 5. no help article prices
@@ -1244,7 +1245,7 @@ policies:
       lastVerified: 2026-11-13
     - topic: billing.fees
       tier: poor
-      reason: 'You pay any card, bank and currency exchange fees on top of the price, and it charges in US dollars.'
+      reason: 'You pay any card, bank and currency exchange fees on top of the price.'
       sources:
         - url: https://x.ai/legal/bundled-subscription-terms
           quote: 'to pay the price listed for the Paid Service, along with any additional amounts relating to applicable taxes, credit card fees, bank fees, foreign transaction fees, foreign exchange fees, and currency fluctuations'
@@ -1385,8 +1386,8 @@ policies:
         - url: https://cursor.com/en-US/data-use
           quote: 'If you choose to turn off “Privacy Mode”: we may use and store codebase data, prompts, editor actions, code snippets, and other code data and actions to improve our AI features and train our models.'
       action:
-        name: 'How to turn on Privacy Mode'
-        url: https://cursor.com/help/security-and-privacy/privacy
+        name: 'How to stop Grok training on your chats'
+        url: https://x.ai/legal/faq
       lastVerified: 2026-11-13
     - topic: privacy.content-access
       tier: bad
