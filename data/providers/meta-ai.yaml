@@ -1,0 +1,458 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada: meta.ai, the Meta AI
+# assistant page (ai.meta.com/meta-ai/assistant, which ai.meta.com/get-meta-ai redirects to), the Meta One plans page
+# (meta.com/meta-one-plans, with its FAQ's answers opened one at a time) and its language versions (en-gb, de-de, fr-fr,
+# es-es, it-it, nl-nl, es-la), the Meta Help Center's Meta AI, Meta One and subscription articles, Meta's newsroom post
+# "Introducing Meta One" (about.fb.com, read with a plain fetch: Edge couldn't reach it), Meta's legal pages on
+# facebook.com (Meta AIs Terms of Service, Meta Subscription Terms of Service, the Commercial Terms and Community Payments
+# Terms they include, the Meta Terms of Service, the Privacy Policy with its printable version, the US Regional Privacy
+# Notice and the generative AI page), bugbounty.meta.com and Meta's investor pages. A plain fetch gets HTTP 400 from
+# meta.com and facebook.com; Edge reads them with no bot check. Pages, each quoted where it's used.
+# What it sells: Meta AI is free ("Meta AI is free to use for everyday use.", the assistant page). Its paid tiers are Meta
+# One's personal bundle plans, which add AI usage across Meta AI, Instagram, Facebook and WhatsApp and include Instagram
+# Plus, Facebook Plus and WhatsApp Plus: "Meta One Core" "$7.99/month" ("Express yourself in new ways. More AI usage.")
+# and "Meta One Premium" "$19.99/month" ("Expanded AI usage. Even more video creation."), the Meta One plans page;
+# "Core ($7.99/mo)" and "Premium ($19.99/mo)" in the newsroom post. The single product plans (Instagram Plus
+# "$3.99/month", WhatsApp Plus "$2.99/month", Facebook Plus "$3.99/month") add no AI usage: the social category's, later.
+# Meta One's creator and business plans (Essential, Advanced, Expert, Max) are business plans: out. Muse ("Muse by Meta is
+# your personal AI agent", its own app, site, subscriptions and terms: Power "$20/month" and Maximum "$100/month", About
+# Muse subscriptions) is a provider of its own, not listed here (notes.md).
+# Pricing and currency: the Meta One plans page shows one price list in every language: "$7.99/month" in English (US),
+# "7,99 USD/Monat" in German, "7,99 USD al mes" in Spanish, "7,99 USD/mese" in Italian; its FAQ says "Pricing varies by
+# country and plan." and its cards "Features, plans, availability and pricing may vary by region, app and account.
+# Subscribe using your mobile app." So the list is the US's (its English page is English (US), its newsroom post the
+# US's), stored for the US only; other countries' prices show only in the app at checkout ("Device: You can only
+# subscribe through a supported Meta mobile app (iPhone or Android).", Subscribe to Meta One). Monthly only ("Your
+# subscription from Meta renews automatically each month unless you cancel your subscription.", Billing and payments).
+# No page says the prices include tax ("any applicable national, state, or local sales or use taxes", the Subscription
+# Terms).
+# Region checklist, 2026-11-17: 1. meta.com/meta-one-plans has language versions (hreflang: en, en-gb, de, es, es-us, fr,
+# it, nl and others), each the same US-dollar list (en-gb shows "$7.99/month" beside one "£3.99/month" for Facebook
+# Plus); no country paths (/ca/, /au/, /gb/ are pages not found); 2. no country or currency picker; 3. the page's data
+# holds only the Meta Store's gift-card currencies, no Meta One prices; 4. checkout is in the mobile apps only (App
+# Store or Google Play), not opened; 5. no help article prices by country ("Pricing varies by country and plan."); 6.
+# Edge from Canada; a plain fetch is refused (400); the App Store's Meta AI pages (apps.apple.com/<country>/app/meta-ai/
+# id1558240027, read with a plain fetch and Edge for 11 countries) list no in-app purchases; 7. no bill offered.
+# Bundles: Meta One Core and Premium are Meta's own all-in-one plans (suite plans); no partner sells a Meta AI bundle.
+# Official resellers: none: Meta One is sold only in Meta's apps (and Accounts Center), billed by Apple, Google or Meta Pay.
+# Free use: the free plan below.
+
+# Coverage: meta-ai.core and meta-ai.premium aren't priced in CA yet: Meta's pages give one US-dollar list ("Pricing
+# varies by country and plan.", meta.com/meta-one-plans, read 2026-11-17), and a Canadian price shows only in the mobile
+# app at checkout. Meta One is sold "globally" ("Meta One is becoming available globally through supported Meta apps on
+# mobile devices (iPhone or Android) and on the web.", About Meta One Premium plans), with no country list.
+
+id: meta-ai
+name: Meta AI
+aliases: [meta one, meta one core, meta one premium]
+website: https://www.meta.ai
+# Meta's help centre and Meta One pages (meta.com, which ai.meta.com and bugbounty.meta.com are under) and its investor
+# relations site (investor.atmeta.com). Not facebook.com, where its legal pages are: that's Facebook's own site (a queued
+# provider of its own), so policies there are linked as the site its quoted policies are on.
+domains: [meta.com, atmeta.com]
+category: ai
+spendCategory: software
+billingCurrency: { US: USD, GLOBAL: USD }
+# Its help centre's Cancel your Meta One subscription (the Meta AI app, Facebook, Instagram, WhatsApp and the app stores).
+cancelUrl: https://www.meta.com/help/subscriptions/1314531497228585/
+sources: { pricing: https://www.meta.com/meta-one-plans/ }
+
+# Ways to pay (M11.5), read 2026-11-17: Meta One is bought in Meta's mobile apps through Apple's or Google's billing
+# (Subscribe to Meta One), and Meta's billing article for all its subscriptions adds Accounts Center's Meta Pay with a
+# credit card or PayPal. No page names the card networks Meta Pay takes, so no acceptedNetworks ("a credit card" names
+# none).
+paymentMethods:
+  - methods: [app-store]
+    page: 'Subscribe to Meta One'
+    url: https://www.meta.com/help/subscriptions/1275481294766689/
+    quotes:
+      - 'In-app purchase: Payments are processed through the Apple App Store or Google Play Store, depending on your device.'
+  - methods: [card, paypal]
+    page: 'Billing and payments for subscriptions from Meta'
+    url: https://www.meta.com/help/subscriptions/2534285893740819/
+    quotes:
+      - 'Accounts Center: You can use a credit card or PayPal for Meta Pay.'
+
+# Owner (M11.2), read 2026-11-17: the Meta AIs Terms of Service are an agreement with Meta Platforms, Inc.; its investor
+# relations site's press release gives its listing ("Meta Platforms, Inc. (Nasdaq: META)"). Its Class B shares' voting
+# majority wasn't read from a current annual report or proxy, so no majorityHolder (notes.md). Country: the Community
+# Payments Terms (which the Meta Subscription Terms include for web purchases) give Meta's postal address in California.
+owner:
+  name: 'Meta Platforms, Inc.'
+  website: https://investor.atmeta.com
+  page:
+    name: 'Meta AIs Terms of Service'
+    url: https://www.facebook.com/legal/ai-terms
+  quotes:
+    - 'These terms are a legally binding agreement between you and Meta Platforms, Inc.'
+  country:
+    code: US
+    page:
+      name: 'Community Payments Terms'
+      url: https://www.facebook.com/payments_terms
+    quotes:
+      - 'you must send notices to us relating to payments through the Meta Products and these Payments Terms by postal mail to: Meta, Attn: Legal Department, 1 Meta Way, Menlo Park, California, 94025.'
+    lastVerified: 2026-11-17
+  stock:
+    listings:
+      - { exchange: Nasdaq, symbol: META }
+    page:
+      name: 'Investor relations press release'
+      url: https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Pricing-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx
+    quotes:
+      - 'Meta Platforms, Inc. (Nasdaq: META)'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: Meta's billing article for all its subscriptions, and the Meta Subscription
+# Terms' "Renewal Date" (the calendar day of your Subscription Date, the month's last day when it has none).
+renewalAnchor:
+  kind: same-date
+  page: 'Billing and payments for subscriptions from Meta'
+  url: https://www.meta.com/help/subscriptions/2534285893740819/
+  quotes:
+    - "You're charged on the same date each month as your original purchase date."
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on the Meta One plans page: AI usage levels (not comparable, so perks: "Meta One plans
+# such as Meta One Core and Meta One Premium offer more usage than free for advanced AI features", Manage AI usage for
+# your Meta One plan), and the three single product plans each bundle includes ("Get access to a bundle of Instagram
+# Plus, Facebook Plus and WhatsApp Plus at a discounted price compared to subscribing separately.", About Meta One Premium
+# plans), listed by the card's headings.
+perks:
+  - id: more-ai-usage
+    name: More AI usage
+  - id: expanded-ai-usage
+    name: Expanded AI usage
+  - id: instagram-plus
+    name: Instagram Plus
+  - id: facebook-plus
+    name: Facebook Plus
+  - id: whatsapp-plus
+    name: WhatsApp Plus
+
+# AI features (the AI category's registry), read 2026-11-17, the same on every plan (the paid plans add usage only: "Meta
+# AI will still be free for everyday use — Core and Premium are for people who want even more creative freedom from our
+# AI tools.", the newsroom post):
+# - Web search: "integrated with real-time web information" (the assistant page's FAQ); "Meta may share certain
+#   information with select partners, like search engines, to provide you with the most relevant information" (its AI
+#   terms).
+# - Reasoning: "Use Instant for fast answers, or switch to Thinking to tackle complex questions with advanced reasoning."
+# - Voice: "Talk to Meta AI throughout your day with a faster, conversational voice mode that supports 13 languages."
+# - Deep research: "Get in-depth reports on any topic in minutes. Meta AI builds research plans, searches across sources,
+#   and drafts structured reports with citations."
+# - Scheduled tasks: "Smarter answers, scheduled tasks, and new ways to shop and discover." and "Connect your email and
+#   calendar to get personalized daily briefings and more." (the assistant page; no article describes them yet, notes.md).
+# - Image and video generation: "Generate an image with Meta AI" and "Generate a video with Meta AI" (Generate images and
+#   videos using Meta AI and Vibes), free ("Meta AI is free for everyone. In select plans, Meta One offers additional
+#   access to certain AI features like Meta Business Agent and image and video generation", the plans page's FAQ).
+# - Connects to your other apps: "You can manage connections across your accounts to third party apps, like calendars,
+#   emails and others, in Accounts Center." (Use and manage third party app connections in Meta AI).
+# - Chats kept on Meta's servers: "Find your previous prompts, images and videos on Meta AI" and "Delete all chats and
+#   media" (its help centre); its Incognito Chats ("Messages are processed in a secure environment that no one, including
+#   Meta, can access.") are a temporary option, not where chats are kept.
+# - Not stated by any page read: memory across chats (its memory article, meta.com/help/artificial-intelligence/
+#   1152856459900216, now redirects to the help centre's home, notes.md), projects, models from other companies, coding
+#   agent or code
+#   completion ("assist with coding" is a chat answer), computer use (the Mac app reads a window you point it at), music
+#   or voice generation (a video's lip sync and voiceover are part of its video generation), office apps, early access,
+#   API credits.
+# General features, read 2026-11-17: apps: "You can access Meta AI at meta.ai on the web, by downloading the Meta AI
+# mobile app on iOS or Android, installing the desktop app on Mac" (the assistant page's FAQ; the Mac app "Download for
+# Mac (Beta)"). Sign-in: "You must log into www.meta.ai with your Meta, Facebook or Instagram account" (Create text
+# documents with Meta AI) and a password ("If you forget your password, you'll need an updated phone number or email
+# address to reset it.", How Meta uses the email address or mobile phone number). Its two-factor methods aren't named on
+# a page read. No support channel, pause, parental controls or app languages stated for Meta AI (notes.md).
+features:
+  platforms: [web, ios, android, macos]
+  account.sign-in: [password, sso]
+
+plans:
+  - id: meta-ai.free
+    name: Free
+    link: https://www.meta.ai
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.deep-research: true
+      ai.scheduled-tasks: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.integrations: [connectors]
+      ai.chat-storage: cloud
+    notes: 'Free for everyday use, with daily limits on its most compute-intensive features (image and video generation). Powered by Meta’s Muse Spark model.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ai.meta.com/meta-ai/assistant/
+
+  - id: meta-ai.core
+    name: Meta One Core
+    link: https://www.meta.com/meta-one-plans/
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.deep-research: true
+      ai.scheduled-tasks: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.integrations: [connectors]
+      ai.chat-storage: cloud
+    perks: [more-ai-usage, instagram-plus, facebook-plus, whatsapp-plus]
+    notes: 'More monthly AI usage for image and video generation and editing across Meta AI, Instagram, Facebook and WhatsApp, plus Instagram Plus, Facebook Plus and WhatsApp Plus. Bought in Meta’s mobile apps.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 7.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.meta.com/meta-one-plans/
+
+  - id: meta-ai.premium
+    name: Meta One Premium
+    link: https://www.meta.com/meta-one-plans/
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.voice: true
+      ai.deep-research: true
+      ai.scheduled-tasks: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.integrations: [connectors]
+      ai.chat-storage: cloud
+    perks: [expanded-ai-usage, instagram-plus, facebook-plus, whatsapp-plus]
+    notes: 'Everything in Meta One Core, with the most monthly AI usage for image and video generation. Bought in Meta’s mobile apps.'
+    prices:
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.meta.com/meta-one-plans/
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: the Meta AIs Terms of
+# Service (Canada's and the US's version; the UK, Brazil and the European Region have their own, not read), which bind
+# you to the Meta Terms of Service and the Privacy Policy (shared: meta-terms, meta-privacy); the Meta Subscription Terms
+# of Service for Meta One, which include the Commercial Terms' disputes clause ("You expressly agree to the Disputes
+# provisions in the Commercial Terms incorporated herein") and the Community Payments Terms for web purchases (Meta Pay:
+# no topic worse than these); and the help centre's Meta One, billing, cancelling, AI usage, export and deletion
+# articles. Not read: the sign-up form (meta.ai's "Log in" leads to a Meta account sign-in), the Supplemental Meta
+# Platforms Technologies Terms (Meta accounts), the Instagram Terms of Use and WhatsApp's terms (each app's own, for the
+# Plus benefits), and the EU, UK and Brazil AI terms.
+policies:
+  shared: [meta-terms, meta-privacy]
+  links:
+    - name: 'Meta AIs terms of service'
+      url: https://www.facebook.com/legal/ai-terms
+    - name: 'Meta Subscription terms of service'
+      url: https://www.facebook.com/legal/meta_subs_terms
+    - name: 'Commercial terms'
+      url: https://www.facebook.com/legal/commercial_terms
+    - name: 'Cancelling Meta One'
+      url: https://www.meta.com/help/subscriptions/1314531497228585/
+    - name: 'Billing and payments'
+      url: https://www.meta.com/help/subscriptions/2534285893740819/
+    - name: 'Managing Meta One'
+      url: https://www.meta.com/help/subscriptions/4515570262058351/
+    - name: 'Meta terms of service'
+      url: https://www.facebook.com/terms/
+    - name: 'Starting a chat with Meta AI'
+      url: https://www.meta.com/help/artificial-intelligence/943942350800511/
+    - name: 'How Meta uses information for generative AI'
+      url: https://www.facebook.com/privacy/genai/
+    - name: 'Deleting your Meta AI chats'
+      url: https://www.meta.com/help/artificial-intelligence/2457110494637611/
+    - name: 'Exporting your Meta AI information'
+      url: https://www.meta.com/help/artificial-intelligence/1314808549771571/
+    - name: 'Meta One AI usage'
+      url: https://www.meta.com/help/artificial-intelligence/1831790234178989/
+    - name: 'Meta One plans'
+      url: https://www.meta.com/meta-one-plans/
+    - name: 'Meta Bug Bounty'
+      url: https://bugbounty.meta.com/
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel Meta One in your account settings at any time before it renews, and you keep its benefits until the end of the month you paid for.'
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'you may cancel your Meta Subscription at any time prior to each Renewal Date by selecting the “Cancel subscription” option under your “Manage Subscription” settings in Account Center'
+        - url: https://www.meta.com/help/subscriptions/1314531497228585/
+          quote: 'When you cancel Meta One, you keep access to your subscription benefits until the end of your current billing cycle.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: "You don't get money back, unless a law says so, but you keep the benefits until the end of the month you paid for."
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'Except as required by law, all purchases are non-refundable.'
+        - url: https://www.meta.com/help/subscriptions/1314531497228585/
+          quote: 'When you cancel Meta One, you keep access to your subscription benefits until the end of your current billing cycle.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: good
+      reason: 'It tells you at least 30 days before raising the price, so you can cancel before the new price starts.'
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'We will give you at least 30 days’ notice of any price increases.'
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'If you do not want to continue your Meta Subscriptions at the new price, you can cancel your subscription before the start of the next subscription period.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A starting offer turns into the monthly price unless you cancel before it ends. You can cancel at any time.'
+      sources:
+        - url: https://www.meta.com/help/subscriptions/1314531497228585/
+          quote: "If you don't cancel before the promotion ends, your subscription automatically renews at the monthly fee, unless prohibited by law."
+        - url: https://www.meta.com/help/subscriptions/1314531497228585/
+          quote: 'You can cancel your subscription at any time.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its subscription terms and help say Meta One renews on its own each month, but not that it reminds you first.'
+      pages:
+        - https://www.facebook.com/legal/meta_subs_terms
+        - https://www.meta.com/help/subscriptions/2534285893740819/
+        - https://www.meta.com/help/subscriptions/1314531497228585/
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: poor
+      reason: 'Besides the price and taxes, its terms make you pay any fees other companies charge, including app store fees, without saying what they are.'
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'You are responsible for all third party fees (including IAP fees)'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its help says you can change your Meta One plan in your settings, but not when the change starts or whether what you paid counts toward it.'
+      pages:
+        - https://www.meta.com/meta-one-plans/
+        - https://www.meta.com/help/subscriptions/4515570262058351/
+        - https://www.facebook.com/legal/meta_subs_terms
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      plans: [meta-ai.core, meta-ai.premium]
+      tier: good
+      reason: 'Outside the US, a dispute over Meta One goes to a court in California, the one Meta chose, not to a private referee.'
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'Disputes provisions in the Commercial Terms incorporated herein'
+        - url: https://www.facebook.com/legal/commercial_terms
+          quote: 'Any Commercial Claim between you and Meta Platforms, Inc. must be resolved exclusively in the U.S. District Court for the Northern District of California or a state court located in San Mateo County'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      plans: [meta-ai.core, meta-ai.premium]
+      regions: [US]
+      tier: bad
+      reason: "In the US, a dispute over Meta One goes to a private referee (arbitration), not a court, and you can't join a class action. Its terms offer no way out."
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'which may include without limitation mandatory arbitration and waiver of your ability to bring class actions'
+        - url: https://www.facebook.com/legal/commercial_terms
+          quote: 'if you reside in the United States or your business is located in the United States, these Commercial Terms require the resolution of most disputes between you and us by binding arbitration on an individual basis; class actions and jury trials are not permitted.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes to its AI terms by email or in the app before they start, without saying how long before. Using Meta AI after that means you accept them.'
+      sources:
+        - url: https://www.facebook.com/legal/ai-terms
+          quote: 'Unless otherwise required by law, we will notify you (for example through email or in-app notification) of any material changes to these Terms and give you an opportunity to review them before they go into effect.'
+        - url: https://www.facebook.com/legal/ai-terms
+          quote: 'Once any updated Terms are in effect you will be bound by them if you continue to use our AIs.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      plans: [meta-ai.core, meta-ai.premium]
+      tier: bad
+      reason: 'Meta can take away what Meta One gives you at any time and for any reason, even without warning, and says it owes you nothing for it.'
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'Access to Benefits may be disabled or canceled at any time and for any reason'
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'To the extent permitted by applicable law, Meta reserves the right to suspend or cancel access to your Meta Subscription without notice'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'Meta can change or remove what Meta One includes whenever it decides, and says it owes you nothing when it does.'
+      sources:
+        - url: https://www.facebook.com/legal/meta_subs_terms
+          quote: 'In no event will Meta or a Meta Affiliate be liable for terminating or suspending your use of Meta Subscriptions, for the discontinuation of Meta Subscriptions, for the modification, removal or disabling access to any feature or other aspect of the Benefits'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: poor
+      reason: 'Its AI terms say what you type stays yours, but never that you own what Meta AI makes. Meta uses both to run and improve its services, and people may review them.'
+      sources:
+        - url: https://www.facebook.com/legal/ai-terms
+          quote: 'you retain all right, title, and interest – including any intellectual property rights – that you have in and to your Prompts'
+        - url: https://www.facebook.com/legal/ai-terms
+          quote: 'Meta uses Content and related information as described in the Meta Terms of Service and Meta Privacy Policy, and may do so through automated or manual (i.e. human) review and through third-party vendors in some instances'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: "You may not let anyone else use your account, and Meta One's AI usage can't be shared with another account."
+      sources:
+        - url: https://www.facebook.com/terms/
+          quote: 'Not share your password, give access to your Facebook account to others, or transfer your account to anyone else (without our permission).'
+        - url: https://www.meta.com/help/artificial-intelligence/1831790234178989/
+          quote: "Usage is non-transferable, has no cash value, and cannot be resold or gifted. You can't share or transfer usage to another account."
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: neutral
+      reason: 'It pays outside experts who find and report security problems in Meta AI. No page read says an independent audit checks it.'
+      sources:
+        - url: https://bugbounty.meta.com/
+          quote: 'To be eligible for a bounty, you can report a security bug in one or more of the following Meta technologies:'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you say to Meta AI is used to train and improve its AI, and no page offers a way to turn that off.'
+      sources:
+        - url: https://www.meta.com/help/artificial-intelligence/943942350800511/
+          quote: 'Meta uses your interactions with AIs to improve AI at Meta.'
+        - url: https://www.facebook.com/privacy/genai/
+          quote: 'Information shared on Meta Products including things like posts or photos and their captions, and your interactions with features that are part of AI at Meta'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'Meta, its computers and sometimes its people may read your chats with Meta AI, and uses them for its own purposes. No page offers a way to stop it, except its separate private chats.'
+      sources:
+        - url: https://www.facebook.com/legal/ai-terms
+          quote: 'In some cases, Meta will review your interactions with AIs, including the content of your conversations with or messages to AIs, and this review may be automated or manual (human).'
+        - url: https://www.meta.com/help/artificial-intelligence/943942350800511/
+          quote: 'Meta uses your interactions with AIs to improve AI at Meta.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You can delete all your Meta AI chats in its settings, but Meta warns that deleting chats or even your account may not delete its own copy.'
+      sources:
+        - url: https://www.meta.com/help/artificial-intelligence/2457110494637611/
+          quote: 'Tap Delete all chats and media > Delete all.'
+        - url: https://www.facebook.com/legal/ai-terms
+          quote: 'Depending on how you use AIs, deleting individual messages, entire threads, or even your account may not delete our copy of your personal information'
+      action:
+        name: 'How to delete your Meta AI chats'
+        url: https://www.meta.com/help/artificial-intelligence/2457110494637611/
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download a copy of your Meta AI information yourself, as HTML or JSON files other apps can read.'
+      sources:
+        - url: https://www.meta.com/help/artificial-intelligence/1314808549771571/
+          quote: 'If you want a copy of your information from your Meta AI account, you can request an export of your information in a machine readable HTML or JSON format.'
+      action:
+        name: 'How to export your Meta AI information'
+        url: https://www.meta.com/help/artificial-intelligence/1314808549771571/
+      lastVerified: 2026-11-17
