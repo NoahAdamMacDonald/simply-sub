@@ -361,7 +361,12 @@ plans:
 # (arbitration with an opt-out, no targeted ads) and Ubisoft's privacy policy (self-serve deletion) aren't, so they're
 # not quoted. EA's terms of sale, for buying from EA itself, and the community rules the games' terms name, weren't
 # read. The Microsoft account sign-up's agreement line shows only after an email address is entered: not read.
+# Shared (2026-11-17): Microsoft's privacy statement and services agreement are rated once (microsoft-privacy,
+# microsoft-services-agreement, with Microsoft 365), from this file's own ratings of them; the ones that were word for
+# word the same moved there. Xbox's own stay: its game data, AI training, content rights, account closure, the Game
+# Pass catalogue, console updates, billing and the plan-specific benefits.
 policies:
+  shared: [microsoft-privacy, microsoft-services-agreement]
   links:
     - name: Cancelling
       url: https://support.xbox.com/en-CA/help/subscriptions-billing/manage-subscriptions/cancel-recurring-billing-or-subscription
@@ -373,8 +378,6 @@ policies:
       url: https://www.microsoft.com/en-ca/privacy/privacystatement
     - name: 'Microsoft Services Agreement'
       url: https://www.microsoft.com/en-ca/servicesagreement
-    - name: 'Microsoft Services Agreement (US)'
-      url: https://www.microsoft.com/en-us/servicesagreement
     - name: 'Microsoft Store terms of sale'
       url: https://www.microsoft.com/en-ca/storedocs/terms-of-sale
     - name: 'Xbox bug bounty'
@@ -428,101 +431,12 @@ policies:
         name: 'Your Microsoft privacy dashboard'
         url: https://account.microsoft.com/privacy
       lastVerified: 2026-11-02
-    - topic: privacy.data-sharing
-      tier: neutral
-      reason: 'It shares some of your information with ad partners for ads chosen for you. You can turn that off once in your account, for every device you sign in on.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'We also disclose personal data for digital advertising purposes.'
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'When you’re logged into your Microsoft account, your opt out choice will be associated with your account and applied across devices whenever you are signed in.'
-      action:
-        name: 'Turn off ad sharing in your ad settings'
-        url: https://account.microsoft.com/privacy/ad-settings
-      lastVerified: 2026-11-02
-    - topic: privacy.ads-tracking
-      tier: neutral
-      reason: 'It picks ads for you from what it knows about you over time, unless you turn that off in your Microsoft account.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'Ads may be shown based on your current interactions with us, as well as personalised using information about you over time.'
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'You can opt out of receiving personalised ads through our personalised ads and offers page'
-      action:
-        name: 'Turn off personalised ads'
-        url: https://account.microsoft.com/privacy/ad-settings
-      lastVerified: 2026-11-02
     - topic: privacy.ai-training
       tier: bad
       reason: 'It says it may use your data to build and train its AI, and its privacy statement names no way to say no.'
       sources:
         - url: https://www.microsoft.com/en-ca/privacy/privacystatement
           quote: 'As part of our efforts to improve and develop our products, we may use your data to develop and train our AI models.'
-      lastVerified: 2026-11-02
-    - topic: privacy.data-retention
-      tier: poor
-      reason: 'It keeps your information as long as it decides it needs it, and says how long varies a lot, with no limits stated.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'Because these needs can vary for different data types and the context of our interactions with you or your use of our products, actual retention periods can vary significantly.'
-      lastVerified: 2026-11-02
-    - topic: privacy.data-deletion
-      tier: good
-      reason: 'You can close your Microsoft account yourself. After a 30 or 60 day wait, in case you change your mind, it deletes your data and content.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'When you ask us to close your Microsoft account, you can choose to put it in a suspended state for either 30 or 60 days just in case you change your mind.'
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'Second, we’ll delete Data or Your Content associated with your Microsoft account or will otherwise disassociate it from you and your Microsoft account'
-      action:
-        name: 'Close your Microsoft account'
-        url: https://go.microsoft.com/fwlink/p/?linkid=618278
-      lastVerified: 2026-11-02
-    - topic: privacy.data-portability
-      tier: neutral
-      reason: 'You can see and manage your data in its privacy dashboard, or ask Microsoft for it.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'You can control your personal data that Microsoft has obtained and exercise your data protection rights by contacting Microsoft or using various tools we provide, such as the Microsoft privacy dashboard .'
-      action:
-        name: 'Your Microsoft privacy dashboard'
-        url: https://account.microsoft.com/privacy
-      lastVerified: 2026-11-02
-    - topic: privacy.government-requests
-      tier: neutral
-      reason: 'It hands over data when the law or a valid court order asks, and publishes a report on those requests.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'Comply with applicable law or respond to valid legal process, including from law enforcement or other government agencies.'
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'For more information about data we disclose in response to requests from law enforcement and other government agencies, please see our Law Enforcement Requests Report .'
-      lastVerified: 2026-11-02
-    - topic: privacy.data-location
-      tier: neutral
-      reason: 'Your information can go to other countries with weaker privacy laws, under the EU’s standard legal safeguards.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'We transfer personal data from the country of origin to other countries, including those that may not offer the same level of data protection as determined by the European Commission or your local data protection authority.'
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'In such cases, we implement legal safeguards-such as standard contractual clauses approved by the European Commission – to help protect your rights and ensure your data remains protected.'
-      lastVerified: 2026-11-02
-    - topic: privacy.sign-up-data
-      tier: neutral
-      reason: 'You sign up with a Microsoft account. In some places you may have to prove your age or who you are, where the law asks.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'Depending on your jurisdiction, you may need to verify your age or identity to access some services or features.'
-      lastVerified: 2026-11-02
-    - topic: privacy.children
-      tier: great
-      reason: 'Children need a parent’s OK, give only what’s needed, and never get ads picked for them. Parents get controls for screen time and spending.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'We will not knowingly ask children under the age of consent to provide more data than is necessary to provide the product.'
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'As mentioned in the Advertising section, we do not deliver personalised advertising to children whose birthdate in their Microsoft account identifies them as under 18 years of age.'
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'Microsoft Family Safety can help parents and guardians through tools such as digital content filtering, screen time limits, spending for Microsoft and XBOX stores'
       lastVerified: 2026-11-02
     - topic: billing.cancellation
       tier: good
@@ -554,46 +468,12 @@ policies:
           https://www.microsoft.com/en-ca/storedocs/terms-of-sale,
         ]
       lastVerified: 2026-11-02
-    - topic: billing.fees
-      tier: good
-      reason: 'The price is all Microsoft charges, plus tax. Your bank may add its own fee if it converts the currency.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/storedocs/terms-of-sale
-          quote: 'Your bank might charge you additional fees for conversion or processing services when you use a credit'
-      lastVerified: 2026-11-02
     - topic: billing.plan-changes
       tier: good
       reason: 'Moving up to Ultimate happens at once and turns the time you have left into Ultimate time, but you can’t switch that time back.'
       sources:
         - url: https://www.xbox.com/en-US/legal/subscription-terms
           quote: 'Purchase of XBOX Game Pass Ultimate automatically (a) upgrades your existing XBOX Game Pass (Essential, Premium, PC, Console) and/or EA Play membership(s) to XBOX Game Pass Ultimate at the current conversion ratio'
-      lastVerified: 2026-11-02
-    - topic: legal.disputes
-      tier: bad
-      reason: "In the US, a private referee (an arbitrator) decides disagreements instead of a court, you can't join a group lawsuit, and there's no way to opt out. Only small claims court stays open."
-      sources:
-        - url: https://www.microsoft.com/en-us/servicesagreement
-          quote: 'The Microsoft Services Agreement contains binding arbitration and class action waiver terms that apply to U.S. residents.'
-        - url: https://www.microsoft.com/en-us/servicesagreement
-          quote: 'You and we agree to submit disputes to a neutral arbitrator and not to sue in court in front of a judge or jury, except in small claims court.'
-      action:
-        name: 'Its arbitration terms (section 15)'
-        url: https://www.microsoft.com/en-us/servicesagreement
-      lastVerified: 2026-11-03
-    - topic: legal.disputes
-      regions: [CA]
-      tier: good
-      reason: 'In Canada, your province’s laws apply and disputes go to the courts in Ontario, with no private referee.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'You and we irrevocably consent to the exclusive jurisdiction and venue of the courts in Ontario for all disputes arising out of or relating to these Terms'
-      lastVerified: 2026-11-02
-    - topic: legal.terms-changes
-      tier: neutral
-      reason: 'It can change its terms whenever it likes and says it will tell you, but not how far ahead.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'We may change these Terms at any time, and we’ll tell you when we do.'
       lastVerified: 2026-11-02
     - topic: legal.account-closure
       tier: neutral
@@ -621,15 +501,6 @@ policies:
           quote: 'if a game leaves the catalog you must buy the game separately'
         - url: https://www.ea.com/ea-play/terms
           quote: 'When your EA Play subscription or any trial ends, you will no longer have access to the membership benefits, including Play List titles, game upgrades, or in-game purchases made in a Play List title, unless you separately have access to that Play List title for the applicable Platform.'
-      lastVerified: 2026-11-03
-    - topic: legal.inactivity
-      tier: bad
-      reason: 'If you don’t sign in to your Microsoft account for two years, it closes it, without promising a warning first, and you may lose the games and apps you bought.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'This means you must sign in at least once in a two-year period to keep your Microsoft account, and associated Services (unless specified otherwise), active'
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'Third, you may lose access to products you’ve acquired.'
       lastVerified: 2026-11-03
     - topic: security.practices
       tier: neutral
@@ -711,15 +582,6 @@ policies:
           quote: 'Ubisoft+ Classics subject to terms: Ubisoft+ Subscription Terms'
         - url: https://www.ubisoft.com/legal/documents/eula/en-CA
           quote: 'You and UBISOFT (or its licensors) may terminate this EULA, at any time, for any reason.'
-      lastVerified: 2026-11-03
-    - topic: legal.licence
-      tier: poor
-      reason: 'You may use its apps on one device each, by one person at a time. For games and apps from its store, Microsoft can change the rules for using them at any time.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: 'we grant you the right to install and use one copy of the software per device on a worldwide basis for use by only one person at a time as part of your use of the Services.'
-        - url: https://www.microsoft.com/en-ca/servicesagreement
-          quote: "Microsoft reserves the right to modify Microsoft's Usage Rules"
       lastVerified: 2026-11-03
     - topic: service.software-control
       tier: poor
