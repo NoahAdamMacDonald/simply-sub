@@ -384,6 +384,27 @@
   source: own
   status: done
   date: 2026-11-17
+- id: deepseek
+  name: DeepSeek
+  website: https://chat.deepseek.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: kimi
+  name: Kimi
+  website: https://www.kimi.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: qwen
+  name: Qwen
+  website: https://chat.qwen.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
