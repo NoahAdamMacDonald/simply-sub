@@ -1,4 +1,4 @@
-# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada: meta.ai, the Meta AI
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada: meta.ai, the Meta AI
 # assistant page (ai.meta.com/meta-ai/assistant, which ai.meta.com/get-meta-ai redirects to), the Meta One plans page
 # (meta.com/meta-one-plans, with its FAQ's answers opened one at a time) and its language versions (en-gb, de-de, fr-fr,
 # es-es, it-it, nl-nl, es-la), the Meta Help Center's Meta AI, Meta One and subscription articles, Meta's newsroom post
@@ -36,10 +36,11 @@
 # Official resellers: none: Meta One is sold only in Meta's apps (and Accounts Center), billed by Apple, Google or Meta Pay.
 # Free use: the free plan below.
 
-# Coverage: meta-ai.core and meta-ai.premium aren't priced in CA yet: Meta's pages give one US-dollar list ("Pricing
-# varies by country and plan.", meta.com/meta-one-plans, read 2026-11-17), and a Canadian price shows only in the mobile
-# app at checkout. Meta One is sold "globally" ("Meta One is becoming available globally through supported Meta apps on
-# mobile devices (iPhone or Android) and on the web.", About Meta One Premium plans), with no country list.
+# Coverage: meta-ai.core and meta-ai.premium are sold in CA (their soldIn: "Meta One is becoming available globally
+# through supported Meta apps on mobile devices (iPhone or Android) and on the web.", About Meta One Premium plans, with
+# no country list) but aren't priced there yet: Meta's pages give one US-dollar list ("Pricing varies by country and
+# plan.", meta.com/meta-one-plans, read 2026-11-17), and a Canadian price shows only in the mobile app at checkout. So
+# Canada sees the US price, converted.
 
 id: meta-ai
 name: Meta AI
@@ -208,6 +209,12 @@ plans:
       ai.chat-storage: cloud
     perks: [more-ai-usage, instagram-plus, facebook-plus, whatsapp-plus]
     notes: 'More monthly AI usage for image and video generation and editing across Meta AI, Instagram, Facebook and WhatsApp, plus Instagram Plus, Facebook Plus and WhatsApp Plus. Bought in Meta’s mobile apps.'
+    soldIn:
+      - regions: [CA]
+        url: https://www.meta.com/help/subscriptions/960854640235758/
+        quotes:
+          - 'Meta One is becoming available globally through supported Meta apps on mobile devices (iPhone or Android).'
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD
@@ -234,6 +241,12 @@ plans:
       ai.chat-storage: cloud
     perks: [expanded-ai-usage, instagram-plus, facebook-plus, whatsapp-plus]
     notes: 'Everything in Meta One Core, with the most monthly AI usage for image and video generation. Bought in Meta’s mobile apps.'
+    soldIn:
+      - regions: [CA]
+        url: https://www.meta.com/help/artificial-intelligence/1864308977565149/
+        quotes:
+          - 'Meta One is becoming available globally through supported Meta apps on mobile devices (iPhone or Android) and on the web.'
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD

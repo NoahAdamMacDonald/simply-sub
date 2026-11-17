@@ -1,4 +1,4 @@
-# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada (venice.ai's pricing
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada (venice.ai's pricing
 # page in its Monthly and Yearly views, its comparison table from the screenshot, its privacy page with each FAQ answer
 # opened, its FAQs with each answer opened, About, sign-up and download pages, Terms of Service and Privacy Policy) and
 # a plain fetch of the pricing page's HTML for its own pricing data. Pages, each quoted where it's used:
@@ -131,14 +131,16 @@ perks:
 #   download page) names no computer use.
 # General features, read 2026-11-17: the web (installable "as a PWA") and its apps ("Venice is available on Android and
 # iOS.", FAQs; "Available for iPhone, iPad, and Android.", download page). Sign-in: an email address and password (its
-# sign-up page), "two-factor authentication (2FA)" (FAQs), a third-party account ("If you sign up for the Service using a
-# third-party account (such as Apple, Google, or Discord)", its privacy policy) or a crypto wallet (no registry value).
+# sign-up page), a third-party account ("If you sign up for the Service using a third-party account (such as Apple,
+# Google, or Discord)", its privacy policy) or a crypto wallet (no registry value). Its FAQs offer "two-factor
+# authentication (2FA)" but no saved page says what kind of second factor (an authenticator app, email or a text), so
+# no two-factor value.
 # App languages: "The Venice interface is also available in multiple languages." (FAQs) names none, so none. Support:
 # "What is the official support email?" (support@venice.ai, its terms). No pause and no parental controls: its terms and
 # FAQs offer neither (minors need "a parent or guardian’s consent", and Pro can turn the Mature Filter off).
 features:
   platforms: [android, ios, web]
-  account.sign-in: [password, totp, sso]
+  account.sign-in: [password, sso]
   support.channels: [email]
 
 plans:

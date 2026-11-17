@@ -4,7 +4,7 @@
 # page on how Meta uses information for generative AI. Each provider names it in its policies' shared and adds ratings
 # from its own notices (Meta AI's: the Meta AIs Terms of Service and its help centre). WhatsApp has a privacy policy of
 # its own.
-# Read 2026-11-17 (the full catalog run, AI batch 1) with Edge from Canada: "Effective July 23, 2026".
+# Read 2026-11-17 (the full catalog run, AI batch 2) with Edge from Canada: "Effective July 23, 2026".
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
 id: meta-privacy
 name: Meta's Privacy Policy

@@ -1,4 +1,4 @@
-# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada (mistral.ai/pricing with
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada (mistral.ai/pricing with
 # its USD and EUR tabs and each country of its EUR picker, its comparison table's ticks read from the page's own icons,
 # the French version mistral.ai/fr/pricing, chat.mistral.ai's sign-in page, Vibe's documentation on docs.mistral.ai, the
 # Legal Center on legal.mistral.ai), mistral.ai/pricing again through a US, a UK and an Australian exit, and with a plain
@@ -284,8 +284,6 @@ policies:
       url: https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
     - name: 'Opting out of training'
       url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
-    - name: 'Training on your data'
-      url: https://help.mistral.ai/en/articles/347617-do-you-use-my-user-data-to-train-your-artificial-intelligence-models
     - name: 'Who can see your conversations'
       url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
     - name: 'Selling or sharing data'
@@ -496,16 +494,15 @@ policies:
         url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
       lastVerified: 2026-11-17
     - topic: privacy.content-access
-      tier: poor
-      reason: 'Your chats train its AI unless you turn that off, and its staff can read chats you report to improve Vibe.'
+      tier: neutral
+      reason: 'Its staff see a chat only when you report it to support, share its link or send feedback on it. (Training on your chats is graded under AI training.)'
       sources:
-        - url: https://help.mistral.ai/en/articles/347617-do-you-use-my-user-data-to-train-your-artificial-intelligence-models
-          quote: 'Input and output data are used by default to train our artificial intelligence models, unless you opt out of training at any time.'
+        - url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+          quote: 'People other than yourself may occasionally view your conversations, in the limited number of specific situations described below:'
         - url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
           quote: 'you grant a limited number of authorized and competent Mistral team members the right to access the reported content to improve the Services.'
-      action:
-        name: 'How to turn off AI training'
-        url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
+        - url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+          quote: 'When you send us feedback, we will use your rating ("thumbs up" or "thumbs down") but also bits of your conversation (the input and output related to your rating).'
       lastVerified: 2026-11-17
     - topic: privacy.data-retention
       tier: neutral

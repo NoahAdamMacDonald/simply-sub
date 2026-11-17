@@ -4,7 +4,7 @@
 # other Meta Products it covers. Each provider names it in its policies' shared and adds ratings from its own terms (Meta
 # AI's: the Meta AIs Terms of Service and the Meta Subscription Terms of Service). Instagram and WhatsApp have terms of
 # their own.
-# Read 2026-11-17 (the full catalog run, AI batch 1) with Edge from Canada: "Effective December 10, 2025". Its disputes
+# Read 2026-11-17 (the full catalog run, AI batch 2) with Edge from Canada: "Effective December 10, 2025". Its disputes
 # clause sends a consumer's claims to the courts of the country they live in; whether its US version says the same wasn't
 # read through a US exit (notes.md).
 # Shapes: packages/core/src/catalog/policy.ts (policySetSchema).

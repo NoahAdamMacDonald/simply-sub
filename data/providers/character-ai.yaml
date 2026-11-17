@@ -1,4 +1,4 @@
-# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1). character.ai shows this machine's Edge and the
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2). character.ai shows this machine's Edge and the
 # Mullvad Browser Cloudflare's security check, so its pages were read 2026-11-17 through a US exit (its subscribe page
 # through each research country's exit too); its help centre through its Zendesk API (a plain fetch of its HTML gets
 # the same check), its blog and Apple's App Store pages with a plain fetch. Pages, each quoted where it's used:
@@ -453,8 +453,8 @@ policies:
       lastVerified: 2026-11-17
     - topic: privacy.ai-training
       regions: [EU, GB]
-      tier: neutral
-      reason: 'What you write trains its AI unless you turn off “Improve the Model for Everyone” in settings, which applies to what you send afterwards.'
+      tier: poor
+      reason: 'What you write trains its AI unless you turn off “Improve the Model for Everyone” in settings, which stops it for new content only: what you wrote before can still train it.'
       sources:
         - url: https://support.character.ai/hc/en-us/articles/42788047758747-How-do-I-manage-update-my-model-training-settings
           quote: 'Once you opt out, new content will not be used to train our generative AI models.'

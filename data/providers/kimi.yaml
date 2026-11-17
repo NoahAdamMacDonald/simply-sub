@@ -1,4 +1,4 @@
-# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada: kimi.ai's home page,
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada: kimi.ai's home page,
 # menus and log-in dialog, its pricing page (with the plan data the page loads) and help centre (kimi.ai/help: every
 # article of Getting Started, Features, Agent Mode, Kimi Work, Plugins & Skills, Kimi Browser Extension, Deep
 # Research, Membership and FAQ, and the Kimi Code and Kimi Claw overviews), its Terms of Service and Privacy Policy, and
@@ -48,25 +48,40 @@ paymentMethods:
     quotes:
       - 'We use authorized third-party payment processors (such as Stripe, Apple Pay, or Google Pay) to process payments securely.'
 
-# Owner (M11.2), read 2026-11-17: its help centre says "Kimi is an AI assistant developed by Moonshot AI", and its terms
-# name the company that is "Moonshot AI" for users outside mainland China, in Singapore. Mainland China's Kimi
-# (kimi.com) is Beijing Moonshot Technology Co., Ltd.'s, and moonshot.ai's about page gives Moonshot AI's address in
-# Beijing; no page says how the Singapore company and the Beijing one are related (notes.md). Private: no page names a
-# listing.
+# Owner (M11.2), read 2026-11-17: its help centre says Kimi is "developed by Moonshot AI", and moonshot.ai's about page
+# (its menu and history are Kimi's: "Kimi is born") gives Moonshot AI's address in Beijing ("76 Zhichun Road, Haidian
+# District, Beijing"). Its country is quoted from kimi.com's terms, mainland China's Kimi, whose "Moonshot AI" is
+# Beijing Moonshot Technology Co., Ltd. at the same address (the about page names no country). Its kimi.ai terms are
+# with NOVASCENT PRIVATE LIMITED, a company in Singapore that calls itself "Moonshot AI", for users outside mainland
+# China; no page says how the two companies are related (notes.md). As for Kaspersky, the parent is the owner and the
+# contracting company is in the notes. Private: no page names a listing.
+notes: Its terms are with NOVASCENT PRIVATE LIMITED, a company registered in Singapore that calls itself Moonshot AI, for users outside mainland China.
 owner:
-  name: 'NOVASCENT PRIVATE LIMITED (Moonshot AI)'
+  name: 'Moonshot AI'
+  website: https://www.moonshot.ai
   page:
-    name: Terms of service
-    url: https://www.kimi.ai/user/agreement/modelUse?version=v2
+    name: Kimi overview
+    url: https://www.kimi.ai/help/getting-started/overview
   quotes:
-    - 'These Terms of Service ("Terms") form a legally binding agreement between you ("you" or "your") and NOVASCENT PRIVATE LIMITED, a company registered in Singapore ("Moonshot AI," "we," "us," or "our").'
+    - 'Kimi is an AI assistant developed by Moonshot AI, with built-in web search, deep thinking, multimodal reasoning, and ultra-long context conversations.'
   country:
-    code: SG
+    code: CN
+    page:
+      name: Kimi Terms of Service (mainland China)
+      url: https://www.kimi.com/user/agreement/en/modelUse?version=v2
+    quotes:
+      - 'Kimi products and services are provided by Beijing Moonshot Technology Co., Ltd. and its affiliates ("Moonshot AI," "we," "us," or "our")'
+      - "These Terms of Service apply to users located within the mainland of the People's Republic of China."
+      - 'Office Address: 13th Floor, Building 1, JD Technology Tower, No. 76 Zhichun Road, Haidian District, Beijing'
+    lastVerified: 2026-11-17
   lastVerified: 2026-11-17
 
 # Renewal day (M11.5), read 2026-11-17: its credits follow the billing cycle and refresh on the date you subscribed
-# ("Credit update & usage rules"), which core reads as same-date (its "anniversary"). Its terms say only that a
-# subscription "will automatically renew for successive periods of the same length" (notes.md).
+# ("Credit update & usage rules"), which core reads as same-date (its "anniversary"). The two are one date because
+# credits reset when you're billed: "Monthly refresh — Credits reset at the start of each billing cycle."
+# (Membership plans overview). Ollama's credit reset, by contrast, is monthly on annual plans too, so it isn't the
+# charge's day. Its terms say only that a subscription "will automatically renew for successive periods of the same
+# length" (notes.md).
 renewalAnchor:
   kind: same-date
   page: Credit update & usage rules

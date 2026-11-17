@@ -1,4 +1,4 @@
-# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada (poe.com's plans,
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada (poe.com's plans,
 # Explore, legal and download pages, the sign-in page) and through country exits (the plans page), with a plain fetch
 # for its help centre and Quora's (their Zendesk API: help.poe.com's HTML answers a plain fetch with Cloudflare's
 # challenge) and for Apple's App Store pages. Pages, each quoted where it's used:
@@ -26,10 +26,11 @@
 # for cash."), bought by subscribers as they go ("starting at $30 per 1M points"): usage-billed, out, as the API's.
 # Bundles: none on its pages. Official resellers: none; no page names a shop that sells it.
 
-# Coverage: poe.* in AL, AM, AT, BS, BH, BB, BY, BE, BA, BR, BG, KH, CM, CL, CO, HR, CY, CZ, DK, EG, EE, FI, GE, GH,
-# GR, HK, HU, IS, IN, JP, KZ, KR, KG, LV, LT, LU, MO, MY, MT, MX, MD, NG, NO, OM, PL, PT, PR, RO, SA, RS, SG, SK, SI,
-# ZA, SE, CH, TW, TJ, TH, TR, UG, UA, AE, UZ, VN and ZW: sold there (its help centre's country list), but outside the
-# catalog's research regions, so not read.
+# Coverage: poe.* in AT, BE, BR, BG, CO, HR, CY, CZ, DK, EG, EE, FI, GR, HK, HU, IS, IN, JP, KR, LV, LT, LU, MO, MX,
+# NO, PL, PT, RO, SA, SG, SK, SI, ZA, SE, CH, TW, AE, VN, and poe.points-10k-daily and poe.points-660k in AL, AM, BS,
+# BH, BB, BY, BA, KH, CM, CL, GE, GH, KZ, KG, MY, MT, MD, NG, OM, PR, RS, TJ, TH, TR, UG, UA, UZ, ZW: sold there (each
+# plan's soldIn, from its help centre's country table), but outside the catalog's research regions, so not priced.
+# They read offered at a fallback price there; the free plan is offered everywhere.
 
 id: poe
 name: Poe
@@ -52,90 +53,6 @@ billingCurrency:
     AU: AUD,
     NZ: NZD,
   }
-# Where it sells (its help centre's "What countries have subscriptions available?", read 2026-11-17: "We currently offer
-# subscriptions to Poe in the following countries and platforms:", a table of each country's Poe.com Website, Apple's
-# App Store and Google's Play Store): every country the table lists for any of the three. Kosovo, which has no ISO code,
-# is left out.
-availableIn:
-  [
-    AL,
-    AM,
-    AU,
-    AT,
-    BS,
-    BH,
-    BB,
-    BY,
-    BE,
-    BA,
-    BR,
-    BG,
-    KH,
-    CM,
-    CA,
-    CL,
-    CO,
-    HR,
-    CY,
-    CZ,
-    DK,
-    EG,
-    EE,
-    FI,
-    FR,
-    GE,
-    DE,
-    GH,
-    GR,
-    HK,
-    HU,
-    IS,
-    IN,
-    IE,
-    IT,
-    JP,
-    KZ,
-    KR,
-    KG,
-    LV,
-    LT,
-    LU,
-    MO,
-    MY,
-    MT,
-    MX,
-    MD,
-    NL,
-    NZ,
-    NG,
-    NO,
-    OM,
-    PL,
-    PT,
-    PR,
-    RO,
-    SA,
-    RS,
-    SG,
-    SK,
-    SI,
-    ZA,
-    ES,
-    SE,
-    CH,
-    TW,
-    TJ,
-    TH,
-    TR,
-    UG,
-    UA,
-    AE,
-    GB,
-    US,
-    UZ,
-    VN,
-    ZW,
-  ]
 # Its help centre's cancelling answer (Poe Purchases FAQs, "How do I cancel my subscription?"), for the web, iOS and
 # Android.
 cancelUrl: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
@@ -282,6 +199,84 @@ plans:
       ai.chat-storage: cloud
     perks: [more-messages, max-input, points-10k-daily]
     notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    # Sold in each country its help centre's table ("What countries have subscriptions available?", read 2026-11-17)
+    # lists for its website, beyond the eleven priced here, and each it lists for Apple's App Store or
+    # Google Play only: its apps sell this tier ("Poe Monthly Subscription - Basic", Apple's App Store).
+    soldIn:
+      - regions:
+          [
+            AT,
+            BE,
+            BR,
+            BG,
+            CO,
+            HR,
+            CY,
+            CZ,
+            DK,
+            EG,
+            EE,
+            FI,
+            GR,
+            HK,
+            HU,
+            IS,
+            IN,
+            JP,
+            KR,
+            LV,
+            LT,
+            LU,
+            MO,
+            MX,
+            NO,
+            PL,
+            PT,
+            RO,
+            SA,
+            SG,
+            SK,
+            SI,
+            ZA,
+            SE,
+            CH,
+            TW,
+            AE,
+            VN,
+            AL,
+            AM,
+            BS,
+            BH,
+            BB,
+            BY,
+            BA,
+            KH,
+            CM,
+            CL,
+            GE,
+            GH,
+            KZ,
+            KG,
+            MY,
+            MT,
+            MD,
+            NG,
+            OM,
+            PR,
+            RS,
+            TJ,
+            TH,
+            TR,
+            UG,
+            UA,
+            UZ,
+            ZW,
+          ]
+        url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+        quotes:
+          - 'We currently offer subscriptions to Poe in the following countries and platforms:'
+          - "| Region | Poe.com Website | Apple's App Store | Google's Play Store"
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD
@@ -478,6 +473,84 @@ plans:
       ai.chat-storage: cloud
     perks: [more-messages, max-input, points-660k]
     notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    # Sold in each country its help centre's table ("What countries have subscriptions available?", read 2026-11-17)
+    # lists for its website, beyond the eleven priced here, and each it lists for Apple's App Store or
+    # Google Play only: its apps sell this tier ("Poe Monthly Subscription - Plus", Apple's App Store).
+    soldIn:
+      - regions:
+          [
+            AT,
+            BE,
+            BR,
+            BG,
+            CO,
+            HR,
+            CY,
+            CZ,
+            DK,
+            EG,
+            EE,
+            FI,
+            GR,
+            HK,
+            HU,
+            IS,
+            IN,
+            JP,
+            KR,
+            LV,
+            LT,
+            LU,
+            MO,
+            MX,
+            NO,
+            PL,
+            PT,
+            RO,
+            SA,
+            SG,
+            SK,
+            SI,
+            ZA,
+            SE,
+            CH,
+            TW,
+            AE,
+            VN,
+            AL,
+            AM,
+            BS,
+            BH,
+            BB,
+            BY,
+            BA,
+            KH,
+            CM,
+            CL,
+            GE,
+            GH,
+            KZ,
+            KG,
+            MY,
+            MT,
+            MD,
+            NG,
+            OM,
+            PR,
+            RS,
+            TJ,
+            TH,
+            TR,
+            UG,
+            UA,
+            UZ,
+            ZW,
+          ]
+        url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+        quotes:
+          - 'We currently offer subscriptions to Poe in the following countries and platforms:'
+          - "| Region | Poe.com Website | Apple's App Store | Google's Play Store"
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD
@@ -674,6 +747,56 @@ plans:
       ai.chat-storage: cloud
     perks: [more-messages, max-input, points-1-65m]
     notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    # Sold in each country its help centre's table ("What countries have subscriptions available?", read 2026-11-17)
+    # lists for its website, beyond the eleven priced here. Countries it lists for Apple's App Store or Google Play
+    # only aren't named: its apps sell only the first two tiers.
+    soldIn:
+      - regions:
+          [
+            AT,
+            BE,
+            BR,
+            BG,
+            CO,
+            HR,
+            CY,
+            CZ,
+            DK,
+            EG,
+            EE,
+            FI,
+            GR,
+            HK,
+            HU,
+            IS,
+            IN,
+            JP,
+            KR,
+            LV,
+            LT,
+            LU,
+            MO,
+            MX,
+            NO,
+            PL,
+            PT,
+            RO,
+            SA,
+            SG,
+            SK,
+            SI,
+            ZA,
+            SE,
+            CH,
+            TW,
+            AE,
+            VN,
+          ]
+        url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+        quotes:
+          - 'We currently offer subscriptions to Poe in the following countries and platforms:'
+          - "| Region | Poe.com Website | Apple's App Store | Google's Play Store"
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD
@@ -870,6 +993,56 @@ plans:
       ai.chat-storage: cloud
     perks: [more-messages, max-input, points-3-3m]
     notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    # Sold in each country its help centre's table ("What countries have subscriptions available?", read 2026-11-17)
+    # lists for its website, beyond the eleven priced here. Countries it lists for Apple's App Store or Google Play
+    # only aren't named: its apps sell only the first two tiers.
+    soldIn:
+      - regions:
+          [
+            AT,
+            BE,
+            BR,
+            BG,
+            CO,
+            HR,
+            CY,
+            CZ,
+            DK,
+            EG,
+            EE,
+            FI,
+            GR,
+            HK,
+            HU,
+            IS,
+            IN,
+            JP,
+            KR,
+            LV,
+            LT,
+            LU,
+            MO,
+            MX,
+            NO,
+            PL,
+            PT,
+            RO,
+            SA,
+            SG,
+            SK,
+            SI,
+            ZA,
+            SE,
+            CH,
+            TW,
+            AE,
+            VN,
+          ]
+        url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+        quotes:
+          - 'We currently offer subscriptions to Poe in the following countries and platforms:'
+          - "| Region | Poe.com Website | Apple's App Store | Google's Play Store"
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD
@@ -1066,6 +1239,56 @@ plans:
       ai.chat-storage: cloud
     perks: [more-messages, max-input, points-8-25m]
     notes: 'Its plans page names GPT-5.5, Claude-Opus-4.7, Gemini-3.5-Flash, Nano-Banana-Pro and Veo-3.1; its Explore page lists newer ones (GPT-6-Astra, Claude-Opus-5.5, Gemini-4-Carbon, Grok-4.7). Points are spent per message at each bot’s rate and don’t roll over.'
+    # Sold in each country its help centre's table ("What countries have subscriptions available?", read 2026-11-17)
+    # lists for its website, beyond the eleven priced here. Countries it lists for Apple's App Store or Google Play
+    # only aren't named: its apps sell only the first two tiers.
+    soldIn:
+      - regions:
+          [
+            AT,
+            BE,
+            BR,
+            BG,
+            CO,
+            HR,
+            CY,
+            CZ,
+            DK,
+            EG,
+            EE,
+            FI,
+            GR,
+            HK,
+            HU,
+            IS,
+            IN,
+            JP,
+            KR,
+            LV,
+            LT,
+            LU,
+            MO,
+            MX,
+            NO,
+            PL,
+            PT,
+            RO,
+            SA,
+            SG,
+            SK,
+            SI,
+            ZA,
+            SE,
+            CH,
+            TW,
+            AE,
+            VN,
+          ]
+        url: https://help.poe.com/hc/en-us/articles/19945140063636-Poe-Purchases-FAQs
+        quotes:
+          - 'We currently offer subscriptions to Poe in the following countries and platforms:'
+          - "| Region | Poe.com Website | Apple's App Store | Google's Play Store"
+        lastVerified: 2026-11-17
     prices:
       - region: US
         currency: USD
@@ -1430,8 +1653,17 @@ policies:
       pages: [https://poe.com/pages/tos]
       lastVerified: 2026-11-17
     - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account or your password with anyone, even at home.'
+      sources:
+        - url: https://poe.com/pages/tos
+          quote: 'You may not share your password or permit another person to access your account in violation of these Terms.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      plans:
+        [poe.points-10k-daily, poe.points-660k, poe.points-1-65m, poe.points-3-3m, poe.points-8-25m]
       tier: great
-      reason: 'You may not share your password, but a subscriber can invite anyone (family, friends or a team) to use the plan’s points from their own accounts, up to a limit.'
+      reason: 'Some subscriptions let the subscriber invite anyone (family, friends or a team) to use the plan’s points from their own accounts, up to a limit. You still may not share your password.'
       sources:
         - url: https://poe.com/pages/tos
           quote: 'The shared subscription will enable a subscriber to invite a limited number of registered Poe account holders (each a “group member”) to use the subscriber’s points.'
