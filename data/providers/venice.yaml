@@ -1,0 +1,584 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 1), read with Edge from Canada (venice.ai's pricing
+# page in its Monthly and Yearly views, its comparison table from the screenshot, its privacy page with each FAQ answer
+# opened, its FAQs with each answer opened, About, sign-up and download pages, Terms of Service and Privacy Policy) and
+# a plain fetch of the pricing page's HTML for its own pricing data. Pages, each quoted where it's used:
+# Pricing: venice.ai/pricing: Free "$0", Pro "$18" "/mo" or "$180" "/yr", Pro Plus "$68" or "$735", Max "$200" or
+# "$2,160" ("Save $36", "Save $81", "Save $240" against twelve months). The page's own pricing data names the currency
+# for everyone ("currency":"USD", "monthlyPriceUsd":18, "yearlyPriceUsd":180), and its terms say "all fees are
+# denominated in U.S. Dollars": one US-dollar price list, GLOBAL. No page says a price includes tax ("including all
+# applicable taxes", its terms).
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. no country or currency picker; 3. the page's
+# pricing data names USD and no country; 4. checkout needs an account; 5. no prices or tax article; 6. Edge and a plain
+# fetch from Canada; 7. no bill offered.
+# Not listed: credits bought as you go ("Credits can be purchased with USD or USDC.", Can I pay with crypto?) and the
+# API's "Pay as you go at published model rates": usage-billed, out; the VVV and DIEM tokens (staking, not a plan).
+# Where it's sold: its terms say "The Service is intended for visitors located within the United States. We make no
+# representation that the Service is appropriate or available for use outside of the United States.", a disclaimer
+# rather than a list (its privacy policy has a section for users in Europe): no availableIn (notes.md).
+# Bundles: none on its pages. Official resellers: none; no page names a shop that sells it.
+
+id: venice
+name: Venice
+aliases: [venice.ai, venice ai]
+website: https://venice.ai
+domains: [docs.venice.ai]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its terms' cancelling steps ("clicking on your username, clicking “Manage Plan,” and selecting “Cancel subscription.”")
+# and its FAQ's "How do I cancel my subscription?", which point to venice.ai/subscription (signed in).
+cancelUrl: https://venice.ai/faqs
+sources: { pricing: https://venice.ai/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: a card through Stripe (its privacy FAQ), Bitcoin for yearly plans (its FAQs;
+# the yearly cards' "PAY WITH CRYPTO", "PAY WITH BITCOIN" and "PAY VIA COINBASE"), and Apple's and Google's billing in
+# its apps (its terms). No page names the card networks, so no acceptedNetworks.
+paymentMethods:
+  - methods: [card]
+    page: 'Privacy in Venice (What does Venice store?)'
+    url: https://venice.ai/privacy
+    quotes:
+      - 'Pro account users: credit card info goes only to Stripe (Venice never receives it).'
+  - methods: [crypto]
+    page: 'Venice FAQs (Can I pay with crypto?)'
+    url: https://venice.ai/faqs
+    quotes:
+      - 'For subscriptions, BTC is accepted through BTCPay for yearly plans.'
+  - methods: [app-store]
+    page: 'Terms of Service'
+    url: https://venice.ai/legal/tos
+    quotes:
+      - 'If you purchased your Subscription Service through an authorized third-party channel partner like the Apple App Store or Google Play, your subscription may be managed directly by the applicable third-party'
+
+# Owner (M11.2), read 2026-11-17: its terms name Venice.ai, in Sheridan, Wyoming, as the company that offers it; no page
+# names another company behind it or a listing.
+owner:
+  name: 'Venice.ai'
+  page:
+    name: Terms of service
+    url: https://venice.ai/legal/tos
+  quotes:
+    - 'The Service is offered by Venice.ai, located at 1309 Coffeen Ave, Ste 14343, Sheridan, WY 82801.'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://venice.ai/legal/tos
+    quotes:
+      - 'We operate the Service from our offices in Wyoming, and we make no representation that Materials included in the Service are appropriate or available for use in other locations.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17 in its terms: "The “Subscription Billing Date” is the date when you purchase your
+# first subscription to the Service." and "Your account will be charged automatically on the Subscription Billing Date
+# and thereafter on the renewal date of your Subscription Service": the date you subscribed.
+renewalAnchor:
+  kind: same-date
+  page: Terms of Service
+  url: https://venice.ai/legal/tos
+  quotes:
+    - 'The “Subscription Billing Date” is the date when you purchase your first subscription to the Service.'
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table: usage (perks, never features) and credits.
+perks:
+  - id: unlimited-text
+    name: Unlimited text prompts and 1,000 images per day
+  - id: higher-image-limits
+    name: Higher image generation limits on Venice Pro models
+  - id: highest-image-limits
+    name: Highest image generation limits on Venice Pro models
+  - id: credits-100
+    name: 100 credits / month for video, music, premium models, and API
+  - id: credits-7500
+    name: 7,500 credits / month for video, music, frontier image generation, LLMs, and API
+  - id: credits-22500
+    name: 22,500 credits / month for video, music, frontier image generation, frontier LLMs, and API
+  - id: credit-banking-2
+    name: 2-month credit banking - unused credits roll forward
+  - id: credit-banking-3
+    name: 3-month credit banking
+  - id: image-tools
+    name: 'Image superpowers: upscale, remove backgrounds, create variants, and more'
+  - id: encrypted-backup
+    name: Encrypted chat backup and restore
+  - id: tee-e2ee
+    name: TEE and E2EE private inference
+
+# AI features (the AI category's registry), read 2026-11-17 in its pricing cards, its "Compare Features" table (its
+# ticks are images: read from the screenshot), its FAQs and its privacy page:
+# - Web search on every plan: the table's "Web search" row ticks Free, Pro, Plus and Max; "When Web Search is enabled,
+#   Venice can use supported search providers to retrieve up-to-date results and use them in its response." (FAQs).
+# - Image generation on every plan: Free's "15 image prompts per day"; the table's "Image prompts" row.
+# - Memory on every plan: "Venice uses a privacy-preserving memory system that stores memories locally in your browser
+#   instead of on Venice servers." (FAQs), with no plan named.
+# - Chats kept only on your device, on every plan: "Your conversation history stays on your device. Venice never stores
+#   it on its servers." (Privacy in Venice); the table's "Conversation history (local)" and "Local-only conversation
+#   storage" rows tick every plan. Pro's backups are encrypted with "a password that only you control" before they
+#   are uploaded ("Backups expire after 90 days."): still `on-device`, the chats themselves.
+# - On the paid plans: models from several companies ("All Pro models access"; its models include xAI's Grok 4.7, Kimi
+#   K3, DeepSeek and Qwen, About; the frontier models "(GPT, Claude, Gemini)" in Anonymous mode, Privacy in Venice),
+#   video and music ("Generate video, music, and use frontier image and text models with credits"), voice (the table's
+#   "Text to speech" row; "To enable Voice Mode, open the settings menu from the prompt bar while using a text model.",
+#   FAQs; "Ask by voice or text.", its download page), custom assistants ("Create and share custom characters"; the
+#   table's "Character creation" and "Custom system prompts" rows), and the API with monthly credits that pay for it
+#   ("100 credits / month for video, music, premium models, and API"; the table's "API access" row, which Free lacks:
+#   Free's card says "API Access (pay with credits)", credits it doesn't include, notes.md). Reasoning on the paid
+#   plans is inferred: its models include one marked "TEXT · REASONING" (Kimi K3), and no page says which plan has it.
+# - Early access on Max: the table's "Early access to new models" row ticks Max only.
+# - None of its pages offers projects, a coding agent, a browser agent, scheduled tasks, code completion in an editor or
+#   office apps. Its "Agentic chat" ("Give Venice a goal. It can search, reason, and create across multiple steps.",
+#   download page) names no computer use.
+# General features, read 2026-11-17: the web (installable "as a PWA") and its apps ("Venice is available on Android and
+# iOS.", FAQs; "Available for iPhone, iPad, and Android.", download page). Sign-in: an email address and password (its
+# sign-up page), "two-factor authentication (2FA)" (FAQs), a third-party account ("If you sign up for the Service using a
+# third-party account (such as Apple, Google, or Discord)", its privacy policy) or a crypto wallet (no registry value).
+# App languages: "The Venice interface is also available in multiple languages." (FAQs) names none, so none. Support:
+# "What is the official support email?" (support@venice.ai, its terms). No pause and no parental controls: its terms and
+# FAQs offer neither (minors need "a parent or guardian’s consent", and Pro can turn the Mature Filter off).
+features:
+  platforms: [android, ios, web]
+  account.sign-in: [password, totp, sso]
+  support.channels: [email]
+
+plans:
+  - id: venice.free
+    name: Free
+    link: https://venice.ai/sign-up
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.memory: true
+      ai.chat-storage: on-device
+    notes: '10 text prompts and 15 image prompts a day on its base models; you can also use it without an account.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+
+  - id: venice.pro
+    name: Pro
+    link: https://venice.ai/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.voice: true
+      ai.memory: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: on-device
+    inferred:
+      ai.reasoning:
+        reason: 'Its About page lists a model marked “TEXT · REASONING” (Kimi K3) among its models, and Pro has “All Pro models access”; no page says which plan has it.'
+        page:
+          name: About Venice
+          url: https://venice.ai/about
+        lastVerified: 2026-11-17
+    perks: [unlimited-text, credits-100, image-tools, encrypted-backup, tee-e2ee]
+    notes: 'Unlimited text prompts and 1,000 images a day, 100 credits a month (100 credits = $1) for video, music, premium models and the API, and its TEE and end-to-end encrypted models.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 18
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 180
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+
+  - id: venice.pro-plus
+    name: Pro Plus
+    link: https://venice.ai/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.voice: true
+      ai.memory: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: on-device
+    inferred:
+      ai.reasoning:
+        reason: 'Its About page lists a model marked “TEXT · REASONING” (Kimi K3) among its models, and Pro Plus has everything in Pro; no page says which plan has it.'
+        page:
+          name: About Venice
+          url: https://venice.ai/about
+        lastVerified: 2026-11-17
+    perks:
+      [
+        unlimited-text,
+        higher-image-limits,
+        credits-7500,
+        credit-banking-2,
+        image-tools,
+        encrypted-backup,
+        tee-e2ee,
+      ]
+    notes: 'Everything in Pro, with 7,500 credits a month ($75 of API use) that roll forward for two months.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 68
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 735
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+
+  - id: venice.max
+    name: Max
+    link: https://venice.ai/pricing
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.audio-generation: true
+      ai.voice: true
+      ai.memory: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.early-access: true
+      ai.api-credits: true
+      ai.integrations: [api, custom-assistants]
+      ai.chat-storage: on-device
+    inferred:
+      ai.reasoning:
+        reason: 'Its About page lists a model marked “TEXT · REASONING” (Kimi K3) among its models, and Max has everything in Plus; no page says which plan has it.'
+        page:
+          name: About Venice
+          url: https://venice.ai/about
+        lastVerified: 2026-11-17
+    perks:
+      [
+        unlimited-text,
+        highest-image-limits,
+        credits-22500,
+        credit-banking-3,
+        image-tools,
+        encrypted-backup,
+        tee-e2ee,
+      ]
+    notes: 'Everything in Pro Plus, with 22,500 credits a month ($225 of API use) that roll forward for three months.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 200
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 2160
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://venice.ai/pricing
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: its Terms of Service (last
+# updated June 8, 2026), which include its Privacy Policy and, for API users, its API documentation; its privacy page
+# and its FAQs, each answer opened. The terms' Notice Regarding Apple applies to its iOS app only (no topic). Not read:
+# the third-party model providers' policies the terms name (venice.ai/models), and the sign-up form's agreement line,
+# which its sign-up page doesn't show before an email is entered.
+policies:
+  links:
+    - name: Terms of service
+      url: https://venice.ai/legal/tos
+    - name: Privacy policy
+      url: https://venice.ai/legal/privacy-policy
+    - name: Privacy in Venice
+      url: https://venice.ai/privacy
+    - name: Venice FAQs
+      url: https://venice.ai/faqs
+    - name: Pricing
+      url: https://venice.ai/pricing
+    - name: Sign-up page
+      url: https://venice.ai/sign-up
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel in a couple of clicks from your plan settings at any time, and you keep your plan until the period you paid for ends.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'If you purchased your Subscription directly from us, you may cancel your subscription at any time by clicking on your username, clicking “Manage Plan,” and selecting “Cancel subscription.”'
+        - url: https://venice.ai/faqs
+          quote: 'If you cancel, your access will remain active until the end of your current billing period.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments are generally not refunded, but you keep your plan to the end of the period you paid for.'
+      sources:
+        - url: https://venice.ai/faqs
+          quote: 'Venice subscriptions are generally non-refundable once payment has been processed.'
+        - url: https://venice.ai/faqs
+          quote: 'If you do not want your subscription to renew, you can cancel it before the next billing cycle and your access will remain active through the end of your current paid period.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before a new price applies, without saying how long before.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'Venice.ai may change the fees for any feature of the Service, including additional fees or charges, if Venice.ai gives you advance notice of changes before they apply.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its terms, pricing page and FAQs don’t mention a free trial.'
+      pages:
+        - https://venice.ai/legal/tos
+        - https://venice.ai/pricing
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own for the same period, but not that it reminds you first.'
+      pages: [https://venice.ai/legal/tos]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: neutral
+      reason: 'There are no fees beyond the price, except that an account that doesn’t pay can be charged collection and chargeback fees, with no amounts stated.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'In addition to the amount due for the Service, a delinquent account will be charged with fees or charges that are incidental to any chargeback or collection of any unpaid amount, including collection fees.'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and FAQs don’t say what happens to what you paid when you move to another plan, only that your credits stay if you go back to free.'
+      pages:
+        - https://venice.ai/legal/tos
+        - https://venice.ai/faqs
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by mailing a letter within 30 days of agreeing to its terms."
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'YOU UNDERSTAND AND AGREE THAT, BY ENTERING INTO THESE TERMS, YOU AND VENICE.AI ARE EACH WAIVING THE RIGHT TO A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION.'
+        - url: https://venice.ai/legal/tos
+          quote: 'If you do not wish to resolve disputes by binding arbitration, you may opt out of the provisions of this Section 19 (Dispute Resolution and Arbitration) within 30 days after the date that you agree to these Terms by sending a letter to Venice.ai, Attention: Legal Department – Arbitration Opt-Out, 1309 Coffeen Ave, Ste 14343, Sheridan, WY 82801'
+      action:
+        name: 'How to opt out of arbitration (section 19.3)'
+        url: https://venice.ai/legal/tos
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'Big changes to its terms start 30 days after it posts them or tells you, so you can leave first; smaller ones apply at once.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'Revisions will be effective immediately except that, for existing users, material revisions will be effective 30 days after posting or notice to you of the revisions unless otherwise stated.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time for any reason or none, with or without warning.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'In addition, Venice.ai may, at its sole discretion, terminate these Terms or your account on the Service, or suspend or terminate your access to the Service, at any time for any reason or no reason, with or without notice, and without any liability to you arising from such termination.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'You keep what you write and make, but give Venice a licence that never ends and that it can pass on.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'By Submitting User Content to or via the Service, you grant Venice.ai a worldwide, non-exclusive, irrevocable, perpetual, royalty-free, fully paid right and license (with the right to sublicense through multiple tiers)'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'What it makes for you counts as your content, which you keep, but the same licence lets Venice use it too.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'Based upon your Input, the Service may return outputs to you (and together with the Input, “User Content”). You retain any copyright and other proprietary rights that you may hold in the User Content, subject to the licenses granted in these Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or drop any part of the service, paid features included, at any time without notice, and takes no responsibility for it.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'Venice.ai will have no liability for any change to the Service, including any paid-for functionalities of the Service except to the extent required by applicable law, or any suspension or termination of your access to or use of the Service.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms say nothing about closing accounts that aren’t used.'
+      pages: [https://venice.ai/legal/tos]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use Venice and its apps for personal, non-commercial use only, and may not copy or change them unless the law lets you.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'Subject to your complete and ongoing compliance with these Terms, Venice.ai grants you, solely for your personal, non-commercial use, a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to:'
+        - url: https://venice.ai/legal/tos
+          quote: 'Except and solely to the extent such a restriction is impermissible under applicable law, you may not: reproduce, distribute, publicly display, publicly perform, or create derivative works of the Service; make modifications to the Service; or interfere with or circumvent any feature of the Service, including any security or access control mechanism.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://venice.ai/legal/tos]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for your account and password, but don’t say whether you may share it.'
+      pages: [https://venice.ai/legal/tos]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: neutral
+      reason: 'It runs a bug bounty for people who find security problems. Its TEE and end-to-end encrypted models prove their privacy with checkable certificates, but no audit of Venice itself is named.'
+      sources:
+        - url: https://venice.ai/faqs
+          quote: 'Please submit security vulnerabilities through the Venice Bug Bounty Program.'
+        - url: https://venice.ai/privacy
+          quote: 'Remote attestation produces a cryptographic certificate proving the model runs inside a genuine enclave — you can validate it independently outside Venice.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'It never stores your chats, but it does record what you do (sign-ins, new chats, deletions) and uses analytics such as Google Analytics, with no way stated to turn that off.'
+      sources:
+        - url: https://venice.ai/privacy
+          quote: 'All accounts: product event logs (sign-ins, chat creation, etc.) that record actions, not content. Venice does not know what you said or what a deleted chat contained.'
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'We use analytics services, such as Google Analytics, to collect and process certain analytics data.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: bad
+      reason: 'It lets analytics and advertising partners use cookies and similar tools to follow what you do across other services, and gives no way to say no.'
+      sources:
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'Our third-party partners, such as analytics, advertising, and security partners, may also use these technologies to collect information about your online activities over time and across different services.'
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'We may disclose any information we receive to our current or future affiliates for any of the purposes described in this Privacy Policy.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: bad
+      reason: 'Venice shows no ads, but uses your data for its own marketing and advertising, with no way stated to turn that off.'
+      sources:
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'For marketing and advertising purposes, such as developing and providing promotional and advertising materials that may be relevant, valuable or otherwise of interest to you;'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It promises never to train AI on what you write or make, and requires the AI companies it uses not to either.'
+      sources:
+        - url: https://venice.ai/legal/tos
+          quote: 'Notwithstanding anything to the contrary, Venice.ai agrees that it shall not use, and shall require that third-party large language model providers (“Third-Party LLM Providers”) do not use, any User Content to train any machine learning, deep learning, or statistical learning algorithms, LLMs, neural networks, or models.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Your chats stay on your device, encrypted. By default the AI servers read your messages only to answer and don’t keep them; in Anonymous mode the other AI company may keep them.'
+      sources:
+        - url: https://venice.ai/privacy
+          quote: 'Prompts, responses, generated images, and document uploads are never saved on Venice infrastructure — they stay encrypted on your device.'
+        - url: https://venice.ai/privacy
+          quote: 'Inference runs on Venice-controlled GPUs or zero-data-retention partner infrastructure. Privacy is enforced by contractual commitments — no prompt or response is stored.'
+        - url: https://venice.ai/privacy
+          quote: 'Venice proxies your request to leading frontier model providers. Your identity is obscured from the provider, but you should assume the provider is storing your content.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      plans: [venice.pro, venice.pro-plus, venice.max]
+      tier: good
+      reason: 'On paid plans you can choose end-to-end encrypted models, which nobody, Venice included, can read.'
+      sources:
+        - url: https://venice.ai/privacy
+          quote: 'Your prompt is encrypted on your device, remains encrypted through Venice, and is only decrypted inside a verified TEE. Verifiably and entirely private from all parties.'
+        - url: https://venice.ai/privacy
+          quote: 'Anonymous and Private modes are available to all users. TEE and E2EE models require a Venice Pro subscription.'
+      action:
+        name: 'Its privacy modes, explained'
+        url: https://venice.ai/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps no chats, but keeps your account data as long as it needs it. Shared chats last 14 days, backups 90 days, and videos until you download them.'
+      sources:
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'To the extent required by applicable law, we take measures to delete your personal data or keep it in a form that does not permit identifying you when your personal data is no longer necessary for the purposes for which we process it unless we are required by law to keep your personal data for a longer period.'
+        - url: https://venice.ai/privacy
+          quote: 'Shared chats: encrypted in your browser, stored on Venice servers for 14 days. Decryption keys exist only in the URL — Venice cannot read them.'
+        - url: https://venice.ai/faqs
+          quote: 'Backups expire after 90 days.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'It keeps almost nothing: your chats are on your device, where you clear them, and you can delete your account yourself in settings.'
+      sources:
+        - url: https://venice.ai/faqs
+          quote: 'You can delete your account from your account settings.'
+        - url: https://venice.ai/privacy
+          quote: 'Clear your data and those conversations are gone forever.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'Your chats are on your device, and you can download them or make an encrypted backup yourself, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://venice.ai/privacy
+          quote: 'Venice provides download features if you want to save them.'
+      action:
+        name: 'Its privacy page'
+        url: https://venice.ai/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It may hand over data for law enforcement requests and court orders, but it keeps no chats to hand over. It doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'Comply with law enforcement requests and legal process, such as a court order or subpoena;'
+        - url: https://venice.ai/privacy
+          quote: "Our privacy philosophy is simple: you don't have to protect what you do not have."
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your account data is kept in the US. For Europe it uses legal safeguards such as contracts when data leaves.'
+      sources:
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'The Service is hosted in the United States (“U.S.”).'
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'If you are located in Europe, we will comply with applicable European data protection laws when transferring your personal data outside Europe.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You can use it without an account, or sign up with a crypto wallet and no email at all; otherwise an email and a password.'
+      sources:
+        - url: https://venice.ai/legal/privacy-policy
+          quote: 'If you create a free account with a web3 crypto wallet, we don’t require email (unless you choose to provide it), and we instead record your public key (wallet address) for future verification.'
+        - url: https://venice.ai/sign-up
+          quote: 'Or try Venice without an account.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Pay in Bitcoin
+      tier: good
+      reason: 'You can pay for a yearly plan in Bitcoin, so your card details needn’t be linked to your account.'
+      sources:
+        - url: https://venice.ai/faqs
+          quote: 'For subscriptions, BTC is accepted through BTCPay for yearly plans.'
+      lastVerified: 2026-11-17
