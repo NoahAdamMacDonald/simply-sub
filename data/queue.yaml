@@ -370,6 +370,20 @@
   source: own
   status: done
   date: 2026-11-17
+- id: meta-ai
+  name: Meta AI
+  website: https://www.meta.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: mistral
+  name: Mistral Vibe
+  website: https://mistral.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
