@@ -349,6 +349,27 @@
   source: own
   status: done
   date: 2026-11-14
+- id: ollama
+  name: Ollama
+  website: https://ollama.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: openrouter
+  name: OpenRouter
+  website: https://openrouter.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
+- id: opencode
+  name: OpenCode
+  website: https://opencode.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-17
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
