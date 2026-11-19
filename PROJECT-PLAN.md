@@ -2288,6 +2288,11 @@ in every D1 `json` column search parses.
     with every VPN plan's value; NordVPN (`nordvpn`, its third plan by country), Surfshark (`surfshark`), ExpressVPN
     (`expressvpn`), Windscribe (`windscribe`, Build a Plan at its minimum), IVPN (`ivpn`), AirVPN (`airvpn`, not sold
     in Italy), Obscura (`obscura`) and Tailscale (`tailscale`, a mesh network).
+  - **VPN, batch 2** (2026-11-19): Private Internet Access (`private-internet-access`) and CyberGhost (`cyberghost`),
+    Kape's with documents of their own; TunnelBear (`tunnelbear`), Hotspot Shield (`hotspot-shield`), Mozilla VPN
+    (`mozilla-vpn`, sold in the 57 countries its terms list), Cloudflare (`cloudflare`: its free 1.1.1.1 resolver, WARP
+    and WARP+), PureVPN (`purevpn`) and hide.me (`hide-me`). Atlas VPN closed in 2024 and Mullvad's public DNS on
+    2026-11-02.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)

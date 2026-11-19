@@ -1,0 +1,491 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada and with a plain fetch
+# (curl) of the same site, which tunnelbear.com and its help centre (help.tunnelbear.com, Zendesk: all 125 English
+# articles through its API) serve whole: its pricing page, checkout (tunnelbear.com/account/checkout, opened to the
+# payment form and typing nothing, each period's view), auto-renew policy, terms of service, privacy policy, features,
+# about, Teams, download, gift and notices pages, its blog's audit posts and its December 2025 post on the free plan, and
+# Cure53's 2023 report (a PDF its blog links); the pricing page and checkout again through US, UK, Irish, Australian, New
+# Zealand, German, French, Dutch, Spanish, Italian and Canadian exits, which showed the same prices.
+# Pricing: one US-dollar price list for everyone ("All pricing shown in USD", the pricing page; "If you purchase a
+# subscription via our website, you will be charged in US dollars.", What currency will I be charged in?), so GLOBAL USD.
+# The checkout's views: "$10.99 billed every month", "$69.99 billed every 12 months" and "$120.00 billed once" (3
+# Years). The monthly and yearly views renew at the same price ("automatically renews monthly unless canceled", "for
+# each renewal term at $ 10.99 USD"; "for each renewal term at $ 69.99 USD"); the 3-year view has no renewal line, and its help centre says "If you purchased a two-year or
+# three-year plan, you do not have to cancel a subscription. These are non-recurring plans and will not automatically
+# renew." (How do I cancel my subscription?), so it's stored as a prepaid term (autoRenew: false). No two-year plan is
+# sold now. No page says the prices include tax, and no checkout view shows a tax line.
+# Region checklist for CA and US, 2026-11-19: 1. no country paths or hreflang links (one English site); 2. no country or
+# currency picker (the checkout's Country menu is the card's billing address); 3. the page names "USD" ("All pricing
+# shown in USD", "$ 69.99 USD"); 4. the checkout, up to the card form, the same in every country read; 5. its help
+# centre's currency article (US dollars for everyone buying on the website); 6. Edge from Canada and through each
+# country's exit, and a plain fetch; 7. no bill offered.
+# Plans: Free (2 GB a month) and Unlimited (monthly, yearly, 3 years). Teams ("For businesses securing 2+ users",
+# "$5.75/user per month") is a business plan, out of scope. Gift of the Bear ("One year of unlimited TunnelBear:
+# $69.99", gift page; "Gifted subscriptions do not renew") is the yearly plan bought for someone else: notes only.
+# TunnelBear Blocker (its footer's "Blocker") is a separate browser ad blocker, not a VPN plan: not listed.
+# Bundles: none (its pages sell no bundle; McAfee, its owner, sells its own VPN, not TunnelBear). Official resellers:
+# none named (its affiliate programme pays referrers, and its refund article mentions "other third-party resellers"
+# without naming one). App stores bill its plans (partners, not listed). Free use: the Free plan.
+
+id: tunnelbear
+name: TunnelBear
+aliases: [tunnel bear, tunnelbear vpn]
+website: https://www.tunnelbear.com
+category: vpn
+spendCategory: software
+# Accepted cards: its pages name no network in words. The pricing page's card logos (Mastercard, Visa, American Express
+# and a jar of honey) name Visa, Mastercard and American Express only in the image's alt text, which isn't the page's
+# visible text, so no acceptedNetworks (notes.md).
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling, for subscriptions bought on its website and through the app stores.
+cancelUrl: https://help.tunnelbear.com/hc/en-us/articles/360007372431-How-do-I-cancel-my-subscription
+sources: { pricing: https://www.tunnelbear.com/pricing }
+# Ways to pay (M11.5), read 2026-11-19: a credit card on its website, or Apple's and Google's app stores (What payment
+# platforms do you offer?). PayPal ended: "While at one time we provided PayPal as a payment option for our customers,
+# we no longer do." (Do you accept PayPal?). The checkout shows only a card form.
+paymentMethods:
+  - methods: [card]
+    page: 'What payment platforms do you offer?'
+    url: https://help.tunnelbear.com/hc/en-us/articles/360059783972-What-payment-platforms-do-you-offer
+    quotes:
+      - "If you'd like to pay with a credit card, you can purchase a subscription on our website"
+  - methods: [app-store]
+    page: 'What payment platforms do you offer?'
+    url: https://help.tunnelbear.com/hc/en-us/articles/360059783972-What-payment-platforms-do-you-offer
+    quotes:
+      - 'you can purchase a TunnelBear subscription through the iOS App Store'
+      - 'you can purchase a subscription through the Google Play Store'
+# Renewal day (M11.5), read 2026-11-19: its terms and auto-renew policy charge "On your billing date" ("On your billing
+# date, we'll use the payment method attached to your account to charge you the full price of your subscription"), and
+# its help centre has no billing-date article, so the day isn't stated (notes.md has the block if core learns "billing
+# date").
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.tunnelbear.com/autorenew-policy
+    - https://www.tunnelbear.com/terms-of-service
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its Teams page says McAfee bought it, and its terms and footer name TunnelBear LLC
+# ("©2026 TunnelBear LLC.", "Grizzly regards from Toronto, Canada"). Cure53's 2023 report says the audit "was requested
+# by McAfee ULC". McAfee is private (owned by an investor group led by Advent International and Permira since 2022,
+# data/providers/mcafee.yaml), so no stock. Country: TunnelBear's own, in Toronto, from its footer (the pricing page's).
+owner:
+  name: 'TunnelBear LLC, owned by McAfee'
+  page:
+    name: 'TunnelBear for Teams'
+    url: https://www.tunnelbear.com/teams
+  quotes:
+    - "We're a passionate Toronto-based team that was acquired by McAfee in 2018."
+  country:
+    code: CA
+    page:
+      name: 'Pricing'
+      url: https://www.tunnelbear.com/pricing
+    quotes:
+      - 'Grizzly regards from Toronto, Canada'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  One price list in US dollars everywhere, plus sales tax. Free is 2 GB a month with no country choice; Unlimited adds
+  unlimited data, every country and split tunnelling. Its 3-year plan is paid once and doesn't renew. Every plan
+  connects unlimited devices of your own.
+
+# General features, read 2026-11-19:
+# - Platforms: "You can use TunnelBear to secure your internet connection on Windows , macOS , Android and iOS devices.
+#   We also have a browser extension for Chrome , Firefox , and Edge browsers." Linux has only "limited support" (no
+#   app), and "TunnelBear is not supported for Kindle/eReaders, Windows mobile devices, Apple/Android TV, or gaming
+#   systems." (What devices will TunnelBear work on?).
+# - Sign-in: an email and password, with "app authentication and email authentication" for two-factor sign-in (2FA:
+#   Secure your account with Two-Factor Authentication).
+# - Support: its support form for signed-in users and support@tunnelbear.com (help articles); Unlimited's card lists
+#   "Priority customer support" and its gift page "Priority 24/7 support", so round-the-clock support is Unlimited's.
+# - App languages: no page lists them (its website is English only; its help centre is in English and Spanish), so left
+#   out (notes.md).
+# - No pause, and no parental controls, on any page read. Closed source: its notices page lists the open-source
+#   libraries its apps use; no page says its apps are open, so no software.open-source.
+features:
+  platforms: [windows, macos, android, ios, browser-extension]
+  account.sign-in: [password, totp, email-code]
+  support.channels: [email]
+
+# Perks (M11.6): Unlimited's card lines no feature describes, in its words.
+perks:
+  - id: priority-support
+    name: Priority customer support
+  - id: city-level-servers
+    name: City-level server selection
+
+# VPN features, read 2026-11-19, on every plan unless named:
+# - Devices: "There is no limit on the number of devices you can use with TunnelBear." (pricing FAQ) and "you can be
+#   actively connected to TunnelBear on an unlimited number of devices at any given time" (How many connections can I
+#   make?), for every account (its December 2025 post doesn't take it from Free).
+# - Data: Free "2GB of secure browsing" (pricing), "2GB of data per month" that "resets on the monthly anniversary of
+#   your account creation" (What is the difference between a free and paid TunnelBear account?), 10 GB in censored
+#   countries (its Bandwidth Program); Unlimited "Unlimited secure browsing", "Unlimited data". Its older "When does my
+#   monthly data reset?" still says 500MB, and its checkout FAQ "500 MB of data per month": its 2 GB announcement
+#   (We're increasing our free data limit!) and the pricing page win.
+# - Countries: "Browse 46+ countries" over a list of 47 (/features), "47 countries worldwide" (the checkout), and the
+#   same 47 in Where can I tunnel to and from?. Free has no country choice: "Paid subscribers will retain exclusive
+#   access to: SplitBear (website/app split tunneling) Country selection" (Important Changes to TunnelBear Free User
+#   Accounts, 3 December 2025), and its download page: "Pick a country* or select Fastest" with "* Feature available on
+#   TunnelBear Unlimited plans."; Fastest "connecting you to the location that is closest to you": one country, inferred.
+# - Protocols: "WireGuard, OpenVPN, and IKEv2" (VPN Protocol: Choosing how you connect); obfuscation: GhostBear "makes
+#   your encrypted data less detectable to governments, businesses, and ISPs" (Windows, macOS v4 and Android), on Free
+#   too ("Keep connections secure with features like VigilantBear and GhostBear").
+# - Kill switch: VigilantBear, "TunnelBear will block all unsecured traffic until it’s safely reconnected" (/features),
+#   on Free too. Split tunnelling: SplitBear, Unlimited only (above).
+# - P2P: "Peer-to-Peer (P2P) friendly servers that allow you to share files securely and privately." (/features), on
+#   Unlimited; its file-sharing article suggests picking a country, which Free can't, so Free leaves it out.
+# - No-logs policy: "TunnelBear does NOT log any activity of customers connected to our service. Period." (/features);
+#   its privacy policy lists what it keeps (below, service.activity-logging).
+# - Audits: Cure53's yearly white-box audits since 2016 of its apps, VPN infrastructure, backend and website ("going
+#   through each of the TunnelBear applications, website, VPN infrastructure, backend", 14 February 2024; the 2024 audit,
+#   "44 working days throughout the months of October and November", covered "TunnelBear applications" and "Backend
+#   systems and server configurations", 24 November 2025; Cure53's 2023 report: "WP1: White-box tests against
+#   TunnelBear client apps", "WP2: White-box tests against TunnelBear VPN infrastructure"): servers and apps. No audit
+#   tested the no-logs claim: they're penetration tests (notes.md).
+# - RAM-only servers: no page read mentions them, so false. Connects your own devices: no page offers it, so false.
+# - No multi-hop, Tor, port forwarding or content blocking on any page read; "TunnelBear does not offer a static IP".
+#   Sign-up needs an email address, so not anonymous.
+plans:
+  - id: tunnelbear.free
+    name: Free
+    link: https://www.tunnelbear.com/pricing
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: false
+      vpn.data-allowance: 2
+      vpn.server-countries: 1
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: false
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [servers, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      ad-free: true
+    inferred:
+      vpn.server-countries:
+        reason: 'Free has no country choice: its only tunnel is Fastest, which connects you to the location closest to you, so one country.'
+        page:
+          name: 'Fastest Tunnel: Have the quickest connection possible'
+          url: https://help.tunnelbear.com/hc/en-us/articles/360006976152-Fastest-Tunnel-Have-the-quickest-connection-possible
+        lastVerified: 2026-11-19
+    notes: >-
+      2 GB a month, reset on the day of the month you signed up (10 GB in countries its Bandwidth Program covers). No
+      country or city choice and no split tunnelling since December 2025: it connects to the nearest location. No ads.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.tunnelbear.com/pricing
+
+  - id: tunnelbear.unlimited
+    name: Unlimited
+    link: https://www.tunnelbear.com/account/checkout
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 47
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [servers, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      ad-free: true
+      support.channels: [email, 24-7]
+    perks: [priority-support, city-level-servers]
+    notes: >-
+      The 3-year plan is paid once ($120) and doesn't renew. City servers in the US and Canada. A year can also be
+      given as a gift ($69.99), which doesn't renew.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.tunnelbear.com/account/checkout
+      - region: GLOBAL
+        currency: USD
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.tunnelbear.com/account/checkout
+      - region: GLOBAL
+        currency: USD
+        amount: 120
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.tunnelbear.com/account/checkout
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its own terms of service (last revised December 5, 2025),
+# privacy policy (May 11, 2026), auto-renew policy (December 5, 2025), and its help articles on cancelling, refunds,
+# deleting an account, personal data, logs and trust; its blog's audit posts. McAfee's documents don't apply: TunnelBear's
+# terms and privacy policy are TunnelBear LLC's own and name no McAfee policy, and data/policies has no McAfee document.
+# Every agreement a user accepts (the owner's rule, 2026-11-03): the download page says "By downloading TunnelBear , you
+# agree to the Terms of Service and Privacy Policy ."; the checkout's "I have read and accept TunnelBear's Auto-renew
+# Policy" and "By clicking Buy Now, you accept the Terms Service and Privacy Policy."; the terms include the privacy
+# policy by reference and hold its apps' licence (section 2). Its notices page (open-source attributions) holds no
+# topic. Its Privacy Center (tunnelbear.com/account/privacy) needs signing in, so it wasn't read.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://www.tunnelbear.com/terms-of-service
+    - name: 'Privacy policy'
+      url: https://www.tunnelbear.com/privacy-policy
+    - name: 'Auto-renew policy'
+      url: https://www.tunnelbear.com/autorenew-policy
+    - name: 'How do I cancel my subscription?'
+      url: https://help.tunnelbear.com/hc/en-us/articles/360007372431-How-do-I-cancel-my-subscription
+    - name: 'How do I delete my account?'
+      url: https://help.tunnelbear.com/hc/en-us/articles/360007083371-How-do-I-delete-my-account
+    - name: 'How do I view, change or delete my personal information?'
+      url: https://help.tunnelbear.com/hc/en-us/articles/360006798512-How-do-I-view-change-or-delete-my-personal-information-from-TunnelBear
+    - name: 'Why do I need an email address?'
+      url: https://help.tunnelbear.com/hc/en-us/articles/360059027051-Why-do-I-need-an-email-address-to-use-TunnelBear
+    - name: 'Checkout'
+      url: https://www.tunnelbear.com/account/checkout
+    - name: 'TunnelBear completes 8th annual independent security audit'
+      url: https://www.tunnelbear.com/blog/tunnelbear-completes-8th-annual-independent-security-audit/
+    - name: 'How many connections can I make?'
+      url: https://help.tunnelbear.com/hc/en-us/articles/360007082411-How-many-connections-can-I-make
+    - name: 'Important changes to free accounts'
+      url: https://www.tunnelbear.com/blog/important-changes-to-tunnelbear-free-user-accounts/
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'Its apps send crash reports and details about your device, and it keeps your system and app version for product planning. Its pages offer no way to switch these off.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'User support, troubleshooting and product planning'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'Identifying and resolving app stability issues'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'Understanding how the app performs on different devices'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It never sells your data, and gives it only to companies that help run the service. Google’s and Microsoft’s ad cookies on its website come only if you accept them.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'TunnelBear will NOT sell or trade Personal Data for commercial purposes.'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'Except as described below, TunnelBear will NOT disclose any Personal Data to other commercial parties under any circumstance:'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'With your consent, we’ll also use anonymized analytics and marketing cookies to improve your experience.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'No ads in its apps, free plan included. Its website uses marketing cookies only if you agree to them.'
+      sources:
+        - url: https://www.tunnelbear.com/blog/important-changes-to-tunnelbear-free-user-accounts/
+          quote: 'We’re proud to be one of the few VPNs that still offers a truly free option without ads'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'With your consent, we’ll also use anonymized analytics and marketing cookies to improve your experience.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy policy and terms don't mention AI."
+      pages:
+        [https://www.tunnelbear.com/privacy-policy, https://www.tunnelbear.com/terms-of-service]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'Your monthly data count resets each month, and your account data is deleted 30 days after you cancel or when you ask. Other data stays as long as it says it needs it.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'Unless legally required to keep it, we will delete your account data on the earlier of 1) 30 days after you cancel your subscription or 2) when you request deletion through our privacy center'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'We also ensure that no historical record is kept by resetting the total monthly usage value to 0 at the end of each month.'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'We store your Personal Data only as long as is necessary for the purposes for which it is collected'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself at any time, unless paid time is left, when its support does it. Every trace is gone within 30 days.'
+      sources:
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360007083371-How-do-I-delete-my-account
+          quote: "If you're no longer happy with your Bear, you can delete your account at any time"
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360007083371-How-do-I-delete-my-account
+          quote: 'If you have any unlimited tunneling time remaining on your account, you will not be able to delete it. Our Support Bears can help in this case.'
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360007083371-How-do-I-delete-my-account
+          quote: 'Note: While an account deletion will occur immediately, it may take up to 30 days to remove all traces of the account from our servers.'
+      action:
+        name: 'How to delete your account'
+        url: https://help.tunnelbear.com/hc/en-us/articles/360007083371-How-do-I-delete-my-account
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data from the privacy page of your account. It doesn’t say in what form.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: "Visit TunnelBear's privacy center to request access to, receive (port), seek rectification, or request erasure of Personal Data held about you by TunnelBear."
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360006798512-How-do-I-view-change-or-delete-my-personal-information-from-TunnelBear
+          quote: 'click on the Privacy tab and follow the prompts.'
+      action:
+        name: 'How to see or download your data'
+        url: https://help.tunnelbear.com/hc/en-us/articles/360006798512-How-do-I-view-change-or-delete-my-personal-information-from-TunnelBear
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands data over only for a valid court order or warrant, and keeps no IP addresses or browsing to give. It doesn’t say it tells you, and publishes no count of requests.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'In the event TunnelBear is served with a valid subpoena, warrant or other legal document and applicable law requires TunnelBear to comply, the extent of disclosure is limited to the Personal Data listed within this Privacy Notice.'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: "TunnelBear does NOT store users' originating IP addresses when connected to our service and thus cannot identify users when provided IP addresses of our servers."
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your data is kept in Canada. Card payment companies, some hosting and website analytics companies it uses may keep data in other countries.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: "TunnelBear does not store Personal Data outside of Canada's physical borders."
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'We will not transfer your personal data to any third-party service providers outside of Canada other than infrastructure service providers and certain web marketing analytics services.'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: "Credit card processors may store Personal Data associated with financial transactions outside of Canada's borders."
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password. Paying by card asks for the name on the card and your address.'
+      sources:
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360059027051-Why-do-I-need-an-email-address-to-use-TunnelBear
+          quote: 'To create a TunnelBear account, we require that you have an active email address.'
+        - url: https://www.tunnelbear.com/account/checkout
+          quote: 'Name on Card'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel online in your account in a few clicks, and keep unlimited data until the time you paid for ends.'
+      sources:
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360007372431-How-do-I-cancel-my-subscription
+          quote: 'Click "cancel" and run through the steps.'
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360007372431-How-do-I-cancel-my-subscription
+          quote: "After cancelling your subscription, you'll still have access to your unlimited data until the end of your subscription period."
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'A yearly plan bought on its website can be refunded within 30 days, the first year only. Monthly plans and app-store purchases get no refund unless it decides case by case.'
+      sources:
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: "If you're unhappy with your annual TunnelBear subscription for any reason after purchase, you are entitled to a full refund."
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'This guarantee only applies to the first year of annual subscriptions purchased directly from'
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'Monthly subscriptions, TunnelBear for Teams, and purchases made through iOS or Google Play are not eligible for refunds under this guarantee.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: "Its terms and auto-renew policy don't say whether it warns you before a price goes up."
+      pages:
+        [https://www.tunnelbear.com/terms-of-service, https://www.tunnelbear.com/autorenew-policy]
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Its "free trial" is the Free plan, which never turns into a paid one. Paid plans start when you pay.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'A yearly plan gets a reminder email 30 days before it renews. Monthly plans renew with no reminder.'
+      sources:
+        - url: https://www.tunnelbear.com/autorenew-policy
+          quote: 'Don’t worry though, if you are on an annual plan, you’ll receive a subscription renewal reminder email 30 days before your billing date.'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms list no fees beyond the price. Your bank may add its own fees for paying in US dollars.'
+      pages:
+        [https://www.tunnelbear.com/terms-of-service, https://www.tunnelbear.com/autorenew-policy]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-stated
+      reason: "Its terms don't name a court or a private referee for disputes."
+      pages: [https://www.tunnelbear.com/terms-of-service]
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time. For a big change it only posts a notice on its website, and using it afterwards counts as saying yes.'
+      sources:
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'If the alterations constitute a material change, TunnelBear will notify you by posting an announcement on the TunnelBear website.'
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'Using our Services following notification of a material change to this Agreement shall constitute your acceptance of the Agreement as modified.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can stop or suspend your account at any time, for any reason or none, with or without warning, and its terms promise no refund.'
+      sources:
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'You agree that TunnelBear, for any or no reason, and without penalty, may discontinue in whole or in part, cancel or suspend your use of the Service at any time, with or without notice.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change the service, add usage limits or block some uses whenever it decides. It took country choice and split tunnelling away from free accounts in December 2025.'
+      sources:
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'TunnelBear may change the Services, impose usage or service limits, suspend service, or block certain kinds of usage at our sole discretion.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its terms and privacy policy don't say it closes accounts that go unused."
+      pages:
+        [https://www.tunnelbear.com/terms-of-service, https://www.tunnelbear.com/privacy-policy]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use it only for yourself and your own personal purposes, and must not give your account to anyone else.'
+      sources:
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'TunnelBear grants you a non-exclusive, non-transferable right to use the service, solely for your own personal purposes.'
+        - url: https://www.tunnelbear.com/terms-of-service
+          quote: 'You promise not to give your TunnelBear account to someone else.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'An outside security firm has checked its apps and servers every year since 2016 and it published the reports. Its pages give no way to report a security bug.'
+      sources:
+        - url: https://www.tunnelbear.com/blog/tunnelbear-completes-8th-annual-independent-security-audit/
+          quote: 'Every year since, we’ve backed that promise with a full, independent security audit - covering our apps, infrastructure, and services from maw to paw.'
+        - url: https://www.tunnelbear.com/blog/tunnelbear-completes-8th-annual-independent-security-audit/
+          quote: 'As always, Cure53 performed a white-box assessment - meaning they had full access to our source code, configurations, and internal documentation.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: neutral
+      reason: 'It keeps no IP addresses, sites or DNS lookups, but counts your data each month and keeps the country and city you connect from. No audit has tested this.'
+      sources:
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'IP addresses upon service connection'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'Mapping performance events to originating countries, analyzing regional censorship tactics, preventing abuse during sign-up and authentication'
+        - url: https://www.tunnelbear.com/privacy-policy
+          quote: 'We decided that collecting the overall amount of data used by a specific user, for the current month, was the correct balance.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: great
+      reason: 'There’s no limit on the number of devices, and you can be connected on all of them at once.'
+      sources:
+        - url: https://help.tunnelbear.com/hc/en-us/articles/360007082411-How-many-connections-can-I-make
+          quote: 'This means that you can be actively connected to TunnelBear on an unlimited number of devices at any given time.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: "Its terms and help articles don't say whether its apps update themselves or change your settings."
+      pages:
+        [https://www.tunnelbear.com/terms-of-service, https://www.tunnelbear.com/privacy-policy]
+      lastVerified: 2026-11-19

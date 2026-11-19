@@ -1,0 +1,168 @@
+url: https://developers.cloudflare.com/1.1.1.1/
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Documentation Index
+Fetch the complete documentation index at: https://developers.cloudflare.com/1.1.1.1/llms.txt
+Use this file to discover all available pages before exploring further.
+DOCS
+Directory
+API
+SDKs
+Changelog
+Search
+Ctrl
+K
+Log in
+Home
+/
+1.1.1.1 (DNS Resolver)
+1.1.1.1 (DNS Resolver)
+Last updated
+Apr 30, 2026
+|
+Copy as Markdown
+|
+View as Markdown
+|
+Agent setup
+Speed up your online experience with Cloudflare's public DNS resolver.
+Available on all plans
+1.1.1.1 is Cloudflare's public DNS resolver ↗︎. When you type a domain name like cloudflare.com into your browser, a DNS resolver translates that name into an IP address (for example, 104.16.123.96) so your device knows which server to contact.
+Most people use the DNS resolver assigned by their Internet Service Provider (ISP). Switching to 1.1.1.1 gives you a faster, more private alternative. Unlike most DNS resolvers, 1.1.1.1 does not sell user data to advertisers.
+1.1.1.1 has been measured as the fastest public DNS resolver ↗︎. It runs on Cloudflare's network in hundreds of cities worldwide ↗︎ and has access to the addresses of millions of domains on the same servers it runs on.
+1.1.1.1 is free. Setting it up takes minutes and does not require any special software.
+Features
+1.1.1.1 for Families
+1.1.1.1 for Families adds protection against malware and adult content on top of the standard resolver.
+Use 1.1.1.1 for Families
+Encrypted DNS
+1.1.1.1 supports DNS over HTTPS (DoH) and DNS over TLS (DoT) to encrypt your DNS queries and prevent eavesdropping. You can also access 1.1.1.1 as a Tor hidden service.
+Use Encrypted DNS
+Related products
+WARP Client
+Encrypt all traffic from your device, not only DNS queries.
+DNS
+Cloudflare's global DNS platform provides speed and resilience. DNS customers also benefit from free DNSSEC, and protection against route leaks and hijacking.
+Cloudflare Spectrum
+Secure and accelerate your TCP or UDP based applications.
+Next
+IP addresses
+On this page
+Overview
+Features
+Related products
+WAS THIS HELPFUL?
+Yes
+No
+Edit page
+Report issue
+1.1.1.1 (DNS Resolver)
+/
+Overview
+IP addresses
+Set up
+General
+Android
+Azure
+Gaming consoles
+Google Cloud
+iOS
+Linux
+macOS
+Router
+Windows
+Encryption
+Overview
+DNS over TLS
+DNS over HTTPS
+About DoH
+Make API requests to 1.1.1.1
+Overview
+DNS Wireformat
+Using JSON
+Configure DoH on your browser
+Connect to 1.1.1.1 using DoH clients
+Oblivious DoH
+DNSKEY
+Upstream resolution
+Infrastructure
+Network operators
+Support for IPv6-only networks
+Extended DNS error codes
+SLA and support
+Other ways to use 1.1.1.1
+DNS in Google Sheets
+DNS over Discord
+DNS over Tor
+Privacy
+Overview
+1.1.1.1 Public DNS Resolver
+Cloudflare Resolver for Firefox
+Verify connection
+Troubleshooting
+Terms of use
+FAQ
+Changelog
+Agent resources
+Agent setup ↗︎
+Cloudflare Skills ↗︎
+Code Mode MCP Server ↗︎
+Domain-specific MCP Servers ↗︎
+MCP
+1.1.1.1 llms.txt ↗︎
+1.1.1.1 llms-full.txt ↗︎
+Cloudflare Docs llms.txt ↗︎
+Cloudflare Docs llms-full.txt ↗︎
+Getting started
+Plans
+Contact sales
+Partners
+Find a partner
+Startups
+Under attack?
+Domain name search
+Company
+About
+Careers
+Investors
+Press
+Press kit
+Global network
+Public interest
+Project Galileo
+Athenian Project
+Cloudflare for Campaigns
+Project Fairshot
+Impact/ESG
+Compliance
+Compliance resources
+Trust Hub
+Data Protection
+Responsible AI
+Transparency report
+Report abuse
+Resources
+App innovation report
+Cloudflare Radar
+Case studies
+Status
+Support
+Events
+Blog
+Developers
+Documentation
+Learning center
+Community
+Solutions
+SSE and SASE platform
+Cloudflare AI Cloud
+AI Security
+Frontend Development Platform
+Multi-Tenant Platform Development
+Web Security Platform
+© 2026 Cloudflare, Inc.
+Privacy policy| Report security issues| Terms of use| Trademark
+|
+Cookie Preferences

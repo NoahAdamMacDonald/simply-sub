@@ -1,0 +1,187 @@
+url: https://www.purevpn.com/blog/security-advisory-linux-client-ipv6-leak-firewall-rule-reset/
+method: fetch
+saved: 2026-11-19
+
+PureVPN Security Advisory: Linux Client – IPv6 Leak & Firewall Rule Reset
+Features
+VPN Deals
+Why PureVPN
+Server Locations
+USA VPN
+UK VPN
+Canada VPN
+Australia VPN
+Download VPN
+My Account
+Members Login
+Support Center
+English
+Get PureVPN
+ALL
+Digital Security
+Entertainment
+News
+Sports
+How to Watch
+PureVPN Security Advisory: Linux Client – IPv6 Leak & Firewall Rule Reset
+By PureVPN
+September 19, 2025
+2 Mins Read
+PureVPN PureVPN News PureVPN Security Advisory: Linux Client – IPv6 Leak & Firewall Rule Reset
+We were recently alerted to two issues in our Linux clients. We want to be transparent by explaining what’s happening, what you can do right now, and how we’re fixing it.
+Summary (TL;DR)
+We have validated two issues in our Linux clients (GUI v2.10.0 and CLI v2.0.1):
+IPv6 traffic may leak after suspend or WiFi toggles while the app still shows as connected.
+Local firewall rules may be reset on connect and not restored on disconnect.
+Scope: These issues are limited to Linux clients. They were tested and reproduced on Ubuntu 24.04.3 LTS / kernel 6.8 with iptables-nft backend (per researcher’s report).
+Other platforms (Windows, macOS, Android, iOS) are not affected.
+Workarounds are available now (disabling IPv6 and reapplying firewall rules) until a patch is released. A fixed client is targeted for release by mid-October.
+Impact
+IPv6 traffic leakage: In certain network scenarios (such as suspend/resume or WiFi toggling), IPv6 traffic may temporarily bypass the VPN tunnel. This could expose a user’s real IPv6 address to IPv6-enabled services (e.g., websites, email).
+Firewall rules not restored: When the client connects, it replaces existing iptables rules (including those set by UFW, Docker, or custom configurations). After disconnect, these original rules are not automatically restored, which may leave the device with fewer protections than the user had in place before connecting to the VPN.
+Workarounds (Until Patch Release)
+To stay protected until the update is available, Linux users can:
+Disable IPv6 on Linux using this step-by-step guide.
+Reapply firewall rules after disconnecting from PureVPN.
+Use IPv4-only connections where possible until the patched client is released.
+Resolution Timeline
+Fix in progress: Our engineers are addressing both IPv6 handling and firewall state management.
+Target release: Updated Linux clients will be rolled out by mid-October.
+Status updates: This advisory will be updated if the timeline changes.
+What’s Changing
+IPv6 kill switch logic: Hardened to ensure IPv6 traffic is blocked during suspend/resume and WiFi events.
+Firewall state handling: Client will snapshot and restore firewall rules on connect/disconnect instead of overwriting defaults.
+Disclosure process: We are formalizing a vulnerability disclosure workflow with a 24-hour acknowledgment SLA and a dedicated intake path (security@purevpn.com + security.txt).
+Acknowledgment
+We thank Andreas (anagogistis.com) for their contribution and for responsibly disclosing this issue with detailed reproduction steps. Collaborations like these help us improve and protect all users better.
+While this issue is limited to Linux clients, we recognize the seriousness of IPv6 leaks and firewall handling. We are moving quickly to release a fix and reinforcing our internal processes to ensure faster acknowledgments and fixes in the future.
+If you have questions or discover any potential vulnerabilities, please reach out to us at security@purevpn.com.
+Topics :
+purevpn
+PureVPN
+September 19, 2025
+1 year ago
+facebook
+twitter
+instagram
+PureVPN is a leading VPN service provider that excels in providing easy solutions for online privacy and security. With 6000+ servers in 65+ countries, It helps consumers and businesses in keeping their online identity secured.
+Join 600k+ Newsletter Subscribers
+Get the latest updates on privacy, plus expert tips, and security guides to up your digital protection game.
+Please Provide a valid email
+Submit
+Check Email Exposure
+See if your email address has been exposed in known data breaches or dark web leaks.
+Please provide a valid email
+Scan Now
+Related Posts
+Best Beijing VPN: Avoid Online Censorship
+5 To-Be-Banned Apps in the USA - Updated 2026
+Can Ethernet Be Hacked?
+Can My School See What I Do on My Phone at Home?
+How to Use a VPN for Home Security Cameras
+Related Stories
+How to Use a VPN in China in 2026
+Posted on November 17, 2026
+How to Set Up Parental Controls on iPhone for Better Privacy With an iOS VPN
+Posted on November 6, 2026
+Is It Safe to Use an iOS VPN for Mobile Banking?
+Posted on November 4, 2026
+Have Your Say!!
+Click here to cancel reply.
+TRUSTED BY
+5 million+ satisfied users
+One Click Software
+No Log Policy
+PureVPN Apps
+Mac VPN
+Windows VPN
+Linux VPN
+iPhone VPN
+Huawei VPN
+Android VPN
+VPN Chrome Extension
+VPN Firefox Extension
+VPN Edge Extension
+Android TV VPN
+Firestick TV VPN
+Apple TV VPN
+Routers VPN
+Programs
+VPN Affiliate Program
+Student Discount
+Family Plan
+PureVPN
+What is a VPN?
+Benefits
+Trust Center
+Blog
+VPN Add-ons
+Dedicated IP VPN
+Port Forwarding
+Dedicated Server
+Residential Proxy
+Tools
+What is My IP
+IPv6 Leak Test
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Password Sharer
+Password Strength Checker
+About PureVPN
+Pricing
+Features
+About Us
+PureVPN Reviews
+Information
+Privacy Policy
+Refund Policy
+Terms of Service
+Press Room
+Help
+Support Center
+VPN Setup Guides
+Contact Us
+VPN For Business
+VPN for Teams
+Developers (API)
+White Label VPN
+White Label Password Manager
+VPN Resellers Program
+Beyond VPN
+Password Manager
+Digital Privacy Protection
+Servers
+USA
+UK
+UAE
+Australia
+Mexico
+Canada
+Turkey
+Germany
+France
+Spain
+South Africa
+Singapore
+Japan
+BVI
+Italy
+Kuwait
+Follow Us
+Facebook
+X
+Instagram
+Youtube
+Reddit
+TikTok
+Discord
+LinkedIn
+Download
+© 2007 - 2026 PureVPN All Rights Reserved
+PureVPN, brand of GZ Systems Limited Intershore Chambers P.O Box 4342, Road Town, Tortola, British Virgin Islands Company Registration No: 2039934
+Privacy Policy
+Refund Policy
+Affiliate Policy
+Terms of Usage
+Sitemap

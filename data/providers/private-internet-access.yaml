@@ -1,0 +1,997 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1). Pricing: privateinternetaccess.com/buy-vpn-online
+# (its order page; /pricing is a page not found), which prices by where the visitor is, read 2026-11-19 with Edge from
+# Canada and through a US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exit; and its
+# checkout (checkout.privateinternetaccess.com/order, opened from each card's "Select Plan" to the card form, typing
+# nothing) through each of those exits, every period for Canada, the US, the UK, Germany, Australia and New Zealand and
+# the monthly one for Ireland, France, the Netherlands, Spain and Italy. Each order page names its currency ("All amounts
+# are shown in USD." in Canada, the US and New Zealand, "... in GBP.", "... in EUR.", "... in AUD."), and each checkout
+# its country (Canada with Quebec, United Kingdom...) and the currency in its address (cur=usd, gbp, eur, aud). Its terms,
+# privacy policy, feature pages and Kape's pages with a plain fetch from Canada; its help centre through its Zendesk API
+# (helpdesk.privateinternetaccess.com, whose pages answer a plain fetch with 403); its cookie panel's words in Edge.
+# Regular prices: each card's own renewal line ("Autorenews at $11.95 monthly", "Billed at $47.88 first year and then
+# autorenews annually at $47.88", "Autorenews at $75.60 every 3 years") and the checkout's Automatic Renewal Terms, which
+# repeat them ("Your subscription plan will automatically renew every 3 years starting on Mar 19, 2030 at the rate of
+# $75.60"). The 3-year card's first term is 3 years and 4 months (a Black Friday offer, "3 Years + 4 Months EXTRA"); its
+# renewal every 3 years is stored. Its help article also lists 6-month and 2-year subscriptions ("Plans and special
+# offers may vary"), which no order page read sells: not stored.
+# Tax: the checkout's renewal terms say "(vat/tax included)" for Canada (read with Quebec), the UK, the euro countries,
+# Australia and New Zealand, and "+ vat/tax" for the US, so those prices carry taxIncluded and the US's don't (notes.md).
+# Region checklist for CA and US, 2026-11-19: 1. its language paths (/fr/, /de/...) change only the language; 2. no
+# country or currency picker; 3. the order page's data names the currency ("custom_currency":"USD"); 4. the checkout names
+# the country and adds "+ vat/tax" in the US; 5. its help centre's subscriptions article ("All PIA plans are priced in
+# USD"); 6. Edge, and a plain fetch; 7. no bill offered.
+# Bundles: none sold. Official resellers: none named. Its "Become a Partner" page (/reseller-program) seeks partners and
+# names a distribution deal ("PIA's VPN solution is now available to 3 Hong Kong's 3-million customers"), a carrier that
+# bundles it (a partner, not listed). App stores (Apple, Google Play, Amazon) bill it: partners, not listed.
+# Free use: none ("Can I try PIA for free? PIA is a premium VPN solution", its order page's FAQ); its terms' free trials
+# are the app stores' and turn into paid plans.
+
+id: private-internet-access
+name: Private Internet Access
+aliases: [pia, pia vpn, private internet access vpn]
+website: https://www.privateinternetaccess.com
+category: vpn
+spendCategory: software
+# Each order page and checkout names its currency, read 2026-11-19 through each country's exit. Its help article says
+# "All PIA plans are priced in USD. If you are paying in a different currency, the amount you will be charged is
+# automatically converted from USD into your local currency", but the checkouts charge set amounts in pounds, euros and
+# Australian dollars (£9.99, not a conversion of $11.95), so the checkouts are taken (notes.md).
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+# Its help article on cancelling (the terms' own steps: "log in to your account, click on "subscriptions" and follow the
+# prompts to turn off auto-renewal").
+cancelUrl: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46565550505627-How-Do-I-Cancel-My-Subscription
+sources: { pricing: https://www.privateinternetaccess.com/buy-vpn-online }
+# Owner (M11.2), read 2026-11-19: PIA is run by PIA Private Internet Access, Inc. of Denver ("This privacy policy ...
+# explains the privacy practices of PIA Private Internet Access, Inc."; "Private Internet Access is based in the United
+# States", its About page), which names no owner. Kape's About us lists "December 2019 Acquisition of PIA" and its brands
+# page lists "Private Internet Access" among "Our top brands"; PIA's own post of 2019 ("The continually evolving fight for
+# freedom") speaks of "the upcoming merger acquisition with Kape Technologies". Kape is headquartered in London. No stock:
+# Kape's About us lists "Kape delists from LSE" in May 2023 (as expressvpn.yaml).
+owner:
+  name: Kape Technologies PLC
+  website: https://www.kape.com
+  page:
+    name: 'About us (Kape Technologies)'
+    url: https://www.kape.com/about-us
+  quotes:
+    - 'Acquisition of PIA'
+  country:
+    code: GB
+    page:
+      name: 'About us (Kape Technologies)'
+      url: https://www.kape.com/about-us
+    quotes:
+      - 'Kape is a global company headquartered in London, United Kingdom.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+# Ways to pay (M11.5), read 2026-11-19 in its help article: cards, Apple Pay, Google Pay, PayPal and Amazon Pay
+# ("specific locations only": the UK checkout showed no Amazon Pay) renew; iDEAL and Qiwi through Paymentwall (a bank
+# transfer and other), gift cards and prepaid cards are one-time; Google Play and the App Store bill it too. No crypto:
+# "Private Internet Access (PIA) no longer accepts cryptocurrency payments." (Will My Subscription Renew Automatically?),
+# though its privacy policy still describes crypto payments: the newer help article wins. Accepted cards: the same
+# article names Visa, Mastercard, American Express and Discover for every buyer, and the checkout shows their logos.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46701550179995-What-Payment-Methods-Do-You-Accept
+    quotes:
+      - 'Credit card (Visa, Mastercard, American Express, and Discover)'
+paymentMethods:
+  - methods: [card, apple-pay, google-pay, paypal, bank-transfer, gift-card, app-store, other]
+    page: 'What Payment Methods Do You Accept?'
+    url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46701550179995-What-Payment-Methods-Do-You-Accept
+    quotes:
+      - 'You may purchase a subscription via our website here, through Google Play on Android, or through the App Store on iOS.'
+      - 'Credit card (Visa, Mastercard, American Express, and Discover)'
+      - 'Apple Pay'
+      - 'Google Pay'
+      - 'PayPal'
+      - 'Amazon Pay (specific locations only)'
+      - 'Digital wallets such as iDEAL and Qiwi (via Paymentwall)'
+      - 'Gift cards'
+# Renewal day (M11.5), read 2026-11-19: its terms charge the day you sign up and renew "at the end of the current
+# subscription"; the checkouts, read on 19 November, renew "every month starting on Dec 19, 2026", "every year starting on
+# Nov 19, 2027" and "every 3 years starting on Mar 19, 2030" (a first term of 40 months).
+renewalAnchor:
+  kind: same-date
+  page: 'Terms of Service'
+  url: https://www.privateinternetaccess.com/terms-of-service
+  quotes:
+    - 'Payments will be charged on the day you sign up for Services and will cover use of that service for the service level plan selected at sign up.'
+  lastVerified: 2026-11-19
+notes: >-
+  Its terms are with PIA Private Internet Access, Inc., a US company in Denver, part of Kape Technologies. Prices include
+  tax everywhere but the US, where its checkout adds it.
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-19: none. Its order page's FAQ: "Can I try PIA for free? PIA is
+# a premium VPN solution, but you can try it absolutely risk-free with our 30-day money-back guarantee on any purchase."
+freeUse:
+  kind: none
+  pages:
+    - https://www.privateinternetaccess.com/buy-vpn-online
+    - https://www.privateinternetaccess.com/terms-of-service
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19:
+# - Platforms: "Install on Windows, macOS, Linux, Android, iOS, and more" (/download), its browser extension for "Chrome
+#   , Edge, or Firefo x" (/download, its text split by links), and "apps for Android TV, Fire TV, and Apple TV" (/smart-tvs).
+# - Sign-in: a password, with two-factor codes from an app ("2FA codes are sent via a mobile authentication app", How Do I
+#   Enable and Use Two-Factor Authentication?).
+# - Support: "Contact our team 24/7 via email or chat in English, French, German, and Romanian." (its order page).
+# - App languages: its sites' language menu (EN, Deutsch, Español, Français, Italiano, Português, العربية, 日本語,
+#   简体中文, 한국어 and others the registry lacks, such as Nederlands, Polski and Svenska; no Hindi).
+# - Open source: its apps ("We publish the code for all our VPN apps in our GitHub repository", /vpn-features/open-source-
+#   vpn, which links github.com/pia-foss), not its servers, so open-clients.
+# - No pause; no parental controls (its MACE blocker is a setting you turn on yourself).
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password, totp]
+  support.channels: [email, chat, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/pia-foss
+  page:
+    name: 'Open-Source VPN'
+    url: https://www.privateinternetaccess.com/vpn-features/open-source-vpn
+  quotes:
+    - 'We publish the code for all our VPN apps in our GitHub repository'
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19 on its feature pages and help centre:
+# - Devices: "Private Internet Access (PIA) allows an unlimited number of simultaneous connections on a single
+#   subscription." (help centre); its terms let it limit "abuse of the ability to connect unlimited simultaneous devices
+#   (such as through resale, non-personal use ...)".
+# - Traffic: "PIA VPN doesn’t place any VPN bandwidth or data caps on your connection." (/vpn-features), so its monthly
+#   VPN data is unlimited.
+# - Countries: "With 180 locations in 113 countries" (/vpn-features).
+# - Protocols: "Choose between WireGuard and OpenVPN" (/vpn-features; its iOS app "supports two: WireGuard and OpenVPN").
+#   Its server list's data has an "IKEv2/IPSec" column, but no app offers it, so ikev2 is left out. Obfuscation: "Add a
+#   layer of SSL encryption to your data to make it look like regular web traffic" (/vpn-features), and Multi-Hop's
+#   Shadowsocks "designed to disguise VPN traffic as regular internet traffic".
+# - Kill switch ("Our Advanced Kill Switch blocks internet traffic whenever the VPN isn’t connected"); split tunnelling
+#   ("PIA’s split tunneling works on Windows, macOS 11 and later, Linux, and Android", not iOS).
+# - Multi-hop: its "Multi-Hop (Double VPN)" routes "through an additional proxy server before sending it to a PIA VPN
+#   server" (Understanding the Multi-Hop Feature): a proxy, not a second VPN server, under its own name (notes.md).
+# - Content blocking: MACE, "Block requests to known advertising, tracking, and malicious domains using our domain name
+#   system (DNS) filtering on supported apps." (ads, trackers, malware).
+# - P2P ("PIA VPN supports P2P connections on every server") and port forwarding ("Activate port forwarding on selected
+#   servers").
+# - No-logs policy and audits: "PIA’s No-Logs policy has undergone three independent assessments by Deloitte in 2022,
+#   2024, and 2025. Audits under the International Standard on Assurance Engagements (ISAE) 3000 (Revised) confirmed our
+#   networks and operational processes align with our privacy commitments." (/vpn-features/no-logs-vpn): no-logs. No
+#   page read names an audit of its apps or a security test of its servers (its apps are open source and in a disclosure
+#   programme with YesWeHack).
+# - RAM-only servers: "We only use RAM-only servers and never write anything to hard drives." (/vpn-features/no-logs-vpn).
+# - Connects your own devices: no page offers it, so vpn.mesh is false.
+# - Identity Guard: "It monitors up to two of your email addresses against known leak databases and notifies you as soon
+#   as an address appears in a breach." and "This feature comes with your PIA subscription" (What Is Identity Guard?).
+# - Not anonymous: "We need two things to sign you up for a subscription: 1) an email address, and 2) payment." (its
+#   privacy policy); crypto, its anonymous way to pay, has ended.
+# - Speeds (notes only): "PIA’s high-speed 10-Gbps server network" (/vpn-features).
+plans:
+  - id: private-internet-access.vpn
+    name: PIA VPN
+    link: https://www.privateinternetaccess.com/buy-vpn-online
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 113
+      vpn.protocols: [wireguard, openvpn, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.port-forwarding: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+    featureLabels:
+      security.dark-web-monitoring: Identity Guard
+    addOnIds: [private-internet-access.dedicated-ip, private-internet-access.antivirus]
+    notes: 'Unlimited devices at once, servers in 113 countries ("high-speed 10-Gbps server network"), the MACE ad and malware blocker and Identity Guard email breach alerts. The 1-year and 3-year plans add PIA Cleaner for Mac at no charge. The 3-year deal is a first term of 3 years and 4 months that renews every 3 years.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 11.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $11.95 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: CA
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $47.88 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: CA
+        currency: USD
+        amount: 75.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $75.60 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: US
+        currency: USD
+        amount: 11.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: US
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: US
+        currency: USD
+        amount: 75.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: GB
+        currency: GBP
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of £9.99 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=gbp&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: GB
+        currency: GBP
+        amount: 35.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of £35.88 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=gbp&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: GB
+        currency: GBP
+        amount: 63.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of £63.60 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=gbp&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IE
+        currency: EUR
+        amount: 11.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 11,69 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IE
+        currency: EUR
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 41,88 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IE
+        currency: EUR
+        amount: 67.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 67,60 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: AU
+        currency: AUD
+        amount: 19.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $19.79 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=aud&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: AU
+        currency: AUD
+        amount: 71.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $71.88 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=aud&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: AU
+        currency: AUD
+        amount: 107.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $107.60 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=aud&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NZ
+        currency: USD
+        amount: 11.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $11.95 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NZ
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $47.88 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NZ
+        currency: USD
+        amount: 75.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of $75.60 (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: DE
+        currency: EUR
+        amount: 11.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 11,69 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: DE
+        currency: EUR
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 41,88 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: DE
+        currency: EUR
+        amount: 67.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 67,60 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: FR
+        currency: EUR
+        amount: 11.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 11,69 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: FR
+        currency: EUR
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 41,88 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: FR
+        currency: EUR
+        amount: 67.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 67,60 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NL
+        currency: EUR
+        amount: 11.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 11,69 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NL
+        currency: EUR
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 41,88 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NL
+        currency: EUR
+        amount: 67.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 67,60 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: ES
+        currency: EUR
+        amount: 11.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 11,69 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: ES
+        currency: EUR
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 41,88 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: ES
+        currency: EUR
+        amount: 67.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 67,60 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IT
+        currency: EUR
+        amount: 11.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 11,69 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IT
+        currency: EUR
+        amount: 41.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 41,88 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s7a7b6fk5sf22xh6sb7nqw&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IT
+        currency: EUR
+        amount: 67.60
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        taxIncluded: { quote: 'at the rate of 67,60 € (vat/tax included)' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m6e12frye4ar0952m528p0wn&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+
+# Add-ons, read 2026-11-19 on each country's monthly checkout ("These add-ons can be selected under your order’s details
+# on the checkout page.", its order page): a Dedicated IP ("PIA’s Dedicated IP costs an extra $5/month on top of your VPN
+# subscription", /vpn-features/dedicated-ip-vpn) and Antivirus for Windows. Their monthly prices only: the yearly and
+# 3-year checkouts bill them for the term at a discount ("Billed $90.00", "$2.50 /mo" with the 3-year plan) and state no
+# renewal price for them. The checkout's "(vat/tax included)" is said of the VPN plan's rate, so these carry no
+# taxIncluded (notes.md).
+addOns:
+  # A static IP address only you use ("See all 26 locations", the checkout); not for subscriptions bought in the App
+  # Store or Google Play ("you cannot add a dedicated IP to your subscription", What Subscriptions Are Available?).
+  - id: private-internet-access.dedicated-ip
+    name: Dedicated IP
+    prices:
+      - region: CA
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: US
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: GB
+        currency: GBP
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=gbp&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IE
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: AU
+        currency: AUD
+        amount: 7.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=aud&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NZ
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: DE
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: FR
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NL
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: ES
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IT
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+  # "Antivirus helps protect your Windows device against malware and other threats." (What Subscriptions Are Available?)
+  - id: private-internet-access.antivirus
+    name: Antivirus by PIA
+    prices:
+      - region: CA
+        currency: USD
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: US
+        currency: USD
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: GB
+        currency: GBP
+        amount: 3.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=gbp&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IE
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: AU
+        currency: AUD
+        amount: 5.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=aud&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NZ
+        currency: USD
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=usd&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: DE
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: FR
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: NL
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: ES
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+      - region: IT
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://checkout.privateinternetaccess.com/order?offer_id=pp_01m3s79a9sfk5bqserxqanpcf3&cur=eur&pricing_table_id=pt_01m3y7kcmxe4e86n4pak3yr5wj
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch from Canada (its cookie panel in Edge, whose
+# words sit in a shadow root that a page's text leaves out). Every agreement a user accepts: the checkout's line ("By
+# clicking "Subscribe with Credit/Debit Card" below, I agree to the Terms of Service — including the dispute resolution
+# clause which requires binding arbitration - the Privacy Policy; the Cancellation Policy; and the Automatic Renewal Terms
+# set forth below."), whose Cancellation Policy is the terms' "Fees, Auto-Renewal & Cancellation" (its link goes to
+# /terms-of-service#fees); the terms' DMCA policy (/dmca-policy: copyright notices, no topic) and Export Control Policy
+# (/export-control-policy: the sanctioned places it can't serve, no topic). Its apps have no licence of their own: they're
+# open source, and the terms' "License" covers the service. The privacy policy's "Cookie Policy" has no page (/cookie-policy
+# is not found); its cookie panel ("Cookie Preferences" in every page's footer) says what its cookies do. Not read:
+# Deloitte's reports (no page links them), the third parties' own policies (Deskpro, Stripe, PayPal, BitPay, Amazon Pay).
+# Kape Technologies shares no policy with PIA: its privacy policy covers only PIA Private Internet Access, Inc.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.privateinternetaccess.com/terms-of-service
+    - name: 'Privacy Policy'
+      url: https://www.privateinternetaccess.com/privacy-policy
+    - name: 'Open-Source VPN'
+      url: https://www.privateinternetaccess.com/vpn-features/open-source-vpn
+    - name: 'No-Logs VPN'
+      url: https://www.privateinternetaccess.com/vpn-features/no-logs-vpn
+    - name: 'Transparency Report'
+      url: https://www.privateinternetaccess.com/transparency-report
+    - name: 'Vulnerability Disclosure Program'
+      url: https://www.privateinternetaccess.com/vulnerability-disclosure-program
+    - name: 'About Us'
+      url: https://www.privateinternetaccess.com/about-us
+    - name: 'Delete Your PIA Account and All Associated Data'
+      url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46775136551067-Delete-Your-PIA-Account-and-All-Associated-Data
+    - name: 'Will My Subscription Renew Automatically?'
+      url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46565891602715-Will-My-Subscription-Renew-Automatically
+    - name: 'How many devices can I use simultaneously?'
+      url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46610823773851-How-many-devices-can-I-use-simultaneously-while-connected-to-the-VPN-service
+    - name: 'Order page'
+      url: https://www.privateinternetaccess.com/buy-vpn-online
+    - name: 'Where Can I Find the Most Recent Update of the PIA App?'
+      url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46770164720539-Where-Can-I-Find-the-Most-Recent-Update-of-the-PIA-App
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send connection reports only if you choose to. But its website’s analytics cookies are on until you turn them off, in each browser’s cookie preferences.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'From VPN Users Who Opt-in & Willingly Send Reports:'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'Analytics These technologies enable us to analyse the use of the website in order to measure and improve performance.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'By accessing our website, the following cookies will be installed. If you do not accept, you may set your preferences below.'
+      action:
+        name: 'Cookie Preferences, in its website’s footer'
+        url: https://www.privateinternetaccess.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It says it never sells your data, but its website lets advertisers’ cookies in as soon as you visit. You can only turn them off in each browser’s cookie settings.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'We will never sell information to any third parties.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'These technologies are used by advertisers to serve ads that are relevant to your interests.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'By accessing our website, the following cookies will be installed.'
+      action:
+        name: 'Cookie Preferences, in its website’s footer'
+        url: https://www.privateinternetaccess.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website sets ad cookies that show you ads based on your interests unless you say no, and you have to say no in each browser.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'These technologies are used by advertisers to serve ads that are relevant to your interests.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'If you do not accept, you may set your preferences below.'
+      action:
+        name: 'Cookie Preferences, in its website’s footer'
+        url: https://www.privateinternetaccess.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'It has no AI features, and its terms and privacy policy don’t mention training AI models.'
+      pages:
+        [
+          https://www.privateinternetaccess.com/privacy-policy,
+          https://www.privateinternetaccess.com/terms-of-service,
+        ]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your account details as long as it needs them to run the service and meet its legal duties, and names no time limit.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'Please note that unless you instruct us otherwise, we retain the information we collect for as long as needed to provide our Service, as well as to comply with our legal obligations, resolve disputes, and enforce our agreements.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can email its privacy officer or ask support to delete your account and data. It doesn’t say how soon, and warns it can take a while.'
+      sources:
+        - url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46775136551067-Delete-Your-PIA-Account-and-All-Associated-Data
+          quote: 'To delete your PIA account, you need to submit a ticket to the Customer Support team.'
+        - url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46775136551067-Delete-Your-PIA-Account-and-All-Associated-Data
+          quote: 'To request the deletion of all of your data, you can send an email to dpo@privateinternetaccess.com.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'the process of locating and deleting your data may take a sizable amount of time and effort'
+      action:
+        name: 'How to delete your account and data'
+        url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46775136551067-Delete-Your-PIA-Account-and-All-Associated-Data
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask its privacy officer for a copy of your data. There’s no download button, and it holds little beyond your email and payments.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: '(f) the right to data portability.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'To exercise your rights through your account please contact our DPO at:'
+      action:
+        name: 'Contact its privacy officer'
+        url: https://www.privateinternetaccess.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: great
+      reason: 'It answers only valid court orders and pushes back on overly broad ones, tells you when it can, publishes its requests every quarter, and keeps no logs to hand over.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'For invalid or overly broad subpoenas, we will first question and attempt to narrow the scope of any subject matter sought.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'Moreover, when it is possible and a valid option, we will provide the user an opportunity to object to any requested disclosures.'
+        - url: https://www.privateinternetaccess.com/transparency-report
+          quote: 'As part of our commitment to transparency, we provide a quarterly report containing details about recent requests made to our legal department.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept mainly in the United States, and it asks you first before moving it anywhere else.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'We collect information globally, and we primarily store that information in the United States.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'If we transfer the storage of your Personal Data from the United States, we will request your consent.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address and a way to pay. In the US it also keeps your state and zip code for sales tax.'
+      sources:
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'We need two things to sign you up for a subscription: 1) an email address, and 2) payment.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'State or territory and zip code for tax analysis.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can turn off renewal in your account at any time, and keep using it until the end of the time you paid for.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'To cancel, log in to your account, click on "subscriptions" and follow the prompts to turn off auto-renewal.'
+        - url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46565891602715-Will-My-Subscription-Renew-Automatically
+          quote: 'Your account will remain active for the remainder of the time that you have already paid for, then will be canceled at the end of the paid time.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get all your money back if you ask within 30 days of first buying. Renewals aren’t covered, and someone refunded who buys again within 3 months gets no refund.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'If you are less than 100% satisfied with the Services, we will gladly refund your payment if the refund is requested within thirty (30) days from the date of the initial purchase.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'You understand that if you purchase a new account within three (3) months of being issued a refund on a previous account purchase, you will not be eligible for a refund on that new account, even if you request one during or after the (30) day period.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you before a price goes up, and a new price starts only at your next renewal, never during time you’ve paid for.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'PIA reserves the right to change the fees at any time and at its discretion, with advanced Notice to the subscriber.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'Any fee changes will apply on any subsequent automatic renewal, and will not apply to your then-current term.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its app-store trials turn into a paid plan unless you cancel at least 24 hours before they end. Try a second trial and you’re charged a full year at once.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'If you decide to unsubscribe from a Paid Subscription before we start charging your payment method, you must cancel the subscription at least 24 hours before the free trial ends.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'If You attempt to sign up for more than one free trial, you will be immediately charged with the standard yearly Subscription Fee.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its plans renew by themselves, and its terms and help centre don’t say it reminds you before they do.'
+      pages:
+        [
+          https://www.privateinternetaccess.com/terms-of-service,
+          https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46565891602715-Will-My-Subscription-Renew-Automatically,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and order page name no fees beyond the price and, in the US, sales tax.'
+      pages:
+        [
+          https://www.privateinternetaccess.com/terms-of-service,
+          https://www.privateinternetaccess.com/buy-vpn-online,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Wherever you live, a dispute goes to a private referee (arbitration) in the US, not a court, and you can’t join a class action. You can opt out only by email within 30 days.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'You agree that any dispute or claim of any kind whatsoever between you and PIA, regardless of when the dispute or claim arose or has arisen, will be decided by a binding arbitration administered by the American Arbitration Association'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'YOU AND PIA MAY NOT BRING CLAIMS AGAINST THE OTHER AS A PLAINTIFF OR CLASS MEMBER IN ANY CLASS OR REPRESENTATIVE ACTION.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'You may opt out of the Agreement to Arbitrate within 30 days after your first use of the Services or availability of this Agreement to Arbitrate, whichever is later, by sending written notice of your decision to opt out to'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://www.privateinternetaccess.com/terms-of-service
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you ahead of big changes, perhaps only on its website, without saying how far ahead. Small changes start as soon as they’re posted.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'If the proposed amendments include material alterations that affect your rights or obligations under this Agreement, PIA shall notify you in advance of the changes by reasonable means, which may include notification through the Site or via email.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'Non-material changes to the Agreement shall take effect upon publication of the amendments to the Site.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time without warning, for reasons it doesn’t have to give. If you break its rules, you lose the time you paid for.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'PIA reserves the right to close your account at any given time without any given notice.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'Immediate, temporary, or permanent revocation of your PIA account with no refund;'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can limit or end its service whenever it decides. If it shuts down, it gives 30 days’ notice but refunds none of the time you paid for.'
+      sources:
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'Additionally, we may impose usage limits to the Services, suspend or block services, or cancel any and all Services at our sole discretion at any time.'
+        - url: https://www.privateinternetaccess.com/terms-of-service
+          quote: 'Subscribers will not be eligible for a pro-rated, partial, or complete refund in the event of a shut down.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        [
+          https://www.privateinternetaccess.com/terms-of-service,
+          https://www.privateinternetaccess.com/privacy-policy,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source: anyone can read their code on GitHub.'
+      sources:
+        - url: https://www.privateinternetaccess.com/vpn-features/open-source-vpn
+          quote: 'We publish the code for all our VPN apps in our GitHub repository'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Deloitte has checked its no-logs promise three times, and it rewards people who report security bugs, through a programme with YesWeHack. It doesn’t publish past security problems.'
+      sources:
+        - url: https://www.privateinternetaccess.com/vpn-features/no-logs-vpn
+          quote: 'PIA’s No-Logs policy has undergone three independent assessments by Deloitte in 2022, 2024, and 2025.'
+        - url: https://www.privateinternetaccess.com/vulnerability-disclosure-program
+          quote: "We have a proven track record of protecting online privacy, and now we're moving forward with a Vulnerability Disclosure Program in collaboration with YesWeHack."
+        - url: https://www.privateinternetaccess.com/about-us
+          quote: 'PIA offers a whitehat security reward program for security researchers who identify and notify us about vulnerabilities in any of the software that PIA uses.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: great
+      reason: 'It keeps no record of what you do or when you connect, its servers run from memory only, and Deloitte checked that in 2022, 2024 and 2025. Courts asked twice and it had nothing to give.'
+      sources:
+        - url: https://www.privateinternetaccess.com/vpn-features/no-logs-vpn
+          quote: 'Audits under the International Standard on Assurance Engagements (ISAE) 3000 (Revised) confirmed our networks and operational processes align with our privacy commitments.'
+        - url: https://www.privateinternetaccess.com/vpn-features/no-logs-vpn
+          quote: 'We only use RAM-only servers and never write anything to hard drives.'
+        - url: https://www.privateinternetaccess.com/vpn-features/no-logs-vpn
+          quote: 'PIA’s No-Logs policy was tested during US court proceedings in 2016 and 2017.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: great
+      reason: 'There’s no limit on how many devices you use at once.'
+      sources:
+        - url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46610823773851-How-many-devices-can-I-use-simultaneously-while-connected-to-the-VPN-service
+          quote: 'Private Internet Access (PIA) allows an unlimited number of simultaneous connections on a single subscription.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its help centre points you to its download pages for new versions, and its pages don’t say whether its apps update themselves.'
+      pages:
+        [
+          https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46770164720539-Where-Can-I-Find-the-Most-Recent-Update-of-the-PIA-App,
+          https://www.privateinternetaccess.com/terms-of-service,
+        ]
+      lastVerified: 2026-11-19

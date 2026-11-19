@@ -1,0 +1,991 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1). Pricing: cyberghostvpn.com/buy (which opens
+# /buy/cyberghost-vpn-3), which prices by where the visitor is, and its checkout pages (/buy-checkout/cyberghost-vpn-1,
+# -2 and -3, one per period, opened to the card form, typing nothing), read 2026-11-19 with Edge from Canada and through a
+# US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exit. Each page names its currency
+# ("*All amounts shown are in US Dollars." in Canada, the US and New Zealand, "... in British Pounds Sterling.", "... in
+# Euros.", "... in Australian Dollars."), and the page's data names the visitor's country ("cfCountry" : "CA", with
+# currency USD, from Canada). Its terms, privacy policy, cookie policy, feature pages and Kape's pages with a plain fetch
+# from Canada; its help centre through its Zendesk API (support.cyberghostvpn.com); its cookie banner's words in Edge.
+# Regular prices: each checkout's Automatic Renewal Terms ("Your subscription will automatically renew every month
+# starting on 19 December 2026 at the rate of $12.99/month + vat/tax", "every 6 months ... at the rate of $41.94/6 months
+# + vat/tax", "every year starting on 19 March 2029 at the rate of $55.72/year + vat/tax"), the same as the cards'
+# ("Autorenews at $12.99 monthly", "Autorenews at $41.94 every 6 months", "Billed $55.72 for first 2 years, then
+# autorenews at $55.72 annually"). The 2-year card is a first term of 2 years and 4 months (a Black Friday offer) that
+# renews yearly ("Longer-term offers are priced at an introductory rate for the initial period and renew annually at the
+# standard rate thereafter.", How do CyberGhost’s Plans and Offers Work?), so its yearly renewal is stored and no 2-year
+# price (Proton VPN's and NordVPN's precedent); no 1-year plan is sold. No price includes tax: "Taxes may apply based on
+# your jurisdiction." (every page) and "+ vat/tax" on every checkout, the euro countries' too.
+# Region checklist for CA and US, 2026-11-19: 1. its language paths (/fr/, /de/...) change only the language; 2. no
+# country or currency picker; 3. the page's data names the country and currency (CA, USD); 4. the checkout names the
+# country (Canada) and adds "+ vat/tax"; 5. its help centre's payment methods by country; 6. Edge, and a plain fetch; 7.
+# no bill offered.
+# Bundles: none sold. Official resellers: none named. Its terms and help centre mention activation keys "from physical
+# gift cards or promotional events" and "a third-party seller" without naming a shop; its Partnerships page seeks
+# business partners. App stores (Apple, Google Play, Amazon Appstore) bill it: partners, not listed.
+# Free use: none. A 24-hour desktop trial ("Start a 24-hour desktop trial without using your card") ends without
+# charging, and the phone apps' 3-day and 7-day trials turn into paid plans: trials, not free plans.
+
+id: cyberghost
+name: CyberGhost VPN
+aliases: [cyberghost, cyber ghost, cyberghost vpn]
+website: https://www.cyberghostvpn.com
+category: vpn
+spendCategory: software
+# Each country's pages and checkouts name the currency, read 2026-11-19 through each country's exit.
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+# Its help article on cancelling, for the website and the app stores.
+cancelUrl: https://support.cyberghostvpn.com/hc/en-us/articles/360017373799-How-Can-I-Cancel-My-Subscription
+sources: { pricing: https://www.cyberghostvpn.com/buy }
+# Owner (M11.2), read 2026-11-19: CyberGhost is run by CyberGhost S.R.L. of Bucharest ("These Services are owned and
+# operated by CyberGhost S.R.L", its privacy policy, "registered in Romania"), whose "ultimate holding company" is Kape
+# Technologies PLC (the same policy). Kape's About us lists "March 2017 Acquisition of CyberGhost", and its brands page
+# "CyberGhost is a Romania-based VPN service provider". Kape is headquartered in London. No stock: Kape's About us lists
+# "Kape delists from LSE" in May 2023 (as expressvpn.yaml). Its blog's footer says "© 2026 CyberGhost S.A." while its
+# other pages say S.R.L.: the policy's S.R.L. is taken.
+owner:
+  name: Kape Technologies PLC
+  website: https://www.kape.com
+  page:
+    name: 'Privacy Policy (CyberGhost)'
+    url: https://www.cyberghostvpn.com/privacypolicy
+  quotes:
+    - 'our ultimate holding company, KAPE TECHNOLOGIES PLC, and all its subsidiaries'
+  country:
+    code: GB
+    page:
+      name: 'About us (Kape Technologies)'
+      url: https://www.kape.com/about-us
+    quotes:
+      - 'Kape is a global company headquartered in London, United Kingdom.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+# Ways to pay (M11.5), read 2026-11-19: its help article "Payment Possibilities, Sorted by Country" lists each country's
+# (Canada, the UK, Ireland, Australia, New Zealand, France, Spain and Italy: "PayPal, VISA, MasterCard, American Express,
+# Discover, Diners Club, JCB, Apple/Google Pay"; the US adds Amazon Pay, Germany SEPA Direct Debit and the Netherlands
+# iDeal). Its "Apple/Google Pay" doesn't name Apple Pay in core's words, so Apple Pay is quoted from its payment help
+# ("If you’re paying with Apple Pay"). App stores (its terms) and gift cards (Who Handles Your Subscription?). Each of the
+# US's, Germany's and the Netherlands' entries lists all its ways, since a region's own entries replace everywhere's. No
+# crypto: no country's list has it, though its privacy policy still offers "bitcoin" (older wording: the list wins).
+# Accepted cards: the country list names the same networks for every research country and for "Other Countries" (Diners
+# Club is other); only Russia's differs ("UnionPay, Apple/Google Pay"), outside the catalog's regions.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover, jcb, other]
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734499-Payment-Possibilities-Sorted-by-Country
+    quotes:
+      - 'Other Countries: PayPal, VISA, MasterCard, American Express, Discover, Diners Club, JCB'
+paymentMethods:
+  - methods: [card, paypal, google-pay, apple-pay]
+    page: 'Why am I not able to make a payment?'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734659-Why-am-I-not-able-to-make-a-payment
+    quotes:
+      - 'If you’ve tried to pay with a credit card but your account still isn’t active, there are a few common causes for this:'
+      - 'If paying by PayPal, make sure to add a debit or credit card to your PayPal account in order to complete the purchase.'
+      - "If you're paying with Google Pay, make sure the payment card linked to your Google account is valid, has sufficient funds, and hasn't expired."
+      - 'If you’re paying with Apple Pay, make sure the card added to your Apple Wallet is active and has sufficient funds.'
+  - methods: [app-store]
+    page: 'Terms and Conditions'
+    url: https://www.cyberghostvpn.com/terms
+    quotes:
+      - 'Note: If you purchased a CyberGhost VPN subscription via the Amazon, App Store (iTunes), or Google Play Store, the Money Back Guarantee does not apply'
+  - methods: [gift-card]
+    page: 'Who Handles Your Subscription?'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/213834889-Who-Handles-Your-Subscription
+    quotes:
+      - 'If you purchased a CyberGhost VPN subscription through a physical gift card or a third-party seller, you will need to contact the seller for their respective refund policy.'
+  - methods: [card, paypal, google-pay, other]
+    regions: [US]
+    page: 'Payment Possibilities, Sorted by Country'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734499-Payment-Possibilities-Sorted-by-Country
+    quotes:
+      - 'United States: PayPal, VISA, MasterCard, American Express, Discover, Diners Club, JCB, Amazon Pay, Apple/Google Pay'
+  - methods: [card, paypal, google-pay, bank-transfer]
+    regions: [DE]
+    page: 'Payment Possibilities, Sorted by Country'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734499-Payment-Possibilities-Sorted-by-Country
+    quotes:
+      - 'Germany: PayPal, VISA, MasterCard, American Express, Discover, Diners Club, JCB, SEPA Direct Debit, Apple/Google Pay'
+  - methods: [card, paypal, google-pay, bank-transfer]
+    regions: [NL]
+    page: 'Payment Possibilities, Sorted by Country'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734499-Payment-Possibilities-Sorted-by-Country
+    quotes:
+      - 'Netherlands: iDeal, PayPal, VISA, MasterCard, American Express, Discover, Diners Club, JCB, Apple/Google Pay'
+  - methods: [apple-pay]
+    regions: [US, DE, NL]
+    page: 'Why am I not able to make a payment?'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734659-Why-am-I-not-able-to-make-a-payment
+    quotes:
+      - 'If you’re paying with Apple Pay, make sure the card added to your Apple Wallet is active and has sufficient funds.'
+  - methods: [app-store]
+    regions: [US, DE, NL]
+    page: 'Terms and Conditions'
+    url: https://www.cyberghostvpn.com/terms
+    quotes:
+      - 'Note: If you purchased a CyberGhost VPN subscription via the Amazon, App Store (iTunes), or Google Play Store, the Money Back Guarantee does not apply'
+  - methods: [gift-card]
+    regions: [US, DE, NL]
+    page: 'Who Handles Your Subscription?'
+    url: https://support.cyberghostvpn.com/hc/en-us/articles/213834889-Who-Handles-Your-Subscription
+    quotes:
+      - 'If you purchased a CyberGhost VPN subscription through a physical gift card or a third-party seller, you will need to contact the seller for their respective refund policy.'
+# Renewal day (M11.5), read 2026-11-19: not stated in words core reads. Its terms renew "at the completion of the billing
+# term" and its help article "at the end of each billing period"; its checkouts, read on 19 November, renew "every month
+# starting on 19 December 2026", "every 6 months starting on 19 May 2027" and "every year starting on 19 March 2029" (a
+# first term of 28 months): the date you signed up (notes.md has the same-date block for core).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.cyberghostvpn.com/terms
+    - https://support.cyberghostvpn.com/hc/en-us/articles/213849009-How-do-CyberGhost-s-Plans-and-Offers-Work
+    - https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+  lastVerified: 2026-11-19
+notes: >-
+  Its terms are with CyberGhost S.R.L., a company in Romania, part of Kape Technologies. Prices are in US dollars in
+  Canada and New Zealand, plus tax everywhere. The 2-year deal is a first term that renews yearly.
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-19: none. Its trials ("Start a 24-hour desktop trial without
+# using your card", "Get a 3-day trial for Android and a 7-day trial for iOS*") give the paid service for a short time.
+freeUse:
+  kind: none
+  pages:
+    - https://www.cyberghostvpn.com/vpn-free-trial
+    - https://www.cyberghostvpn.com/buy
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19:
+# - Platforms: "CyberGhost VPN has apps for popular operating systems, such as Windows, Android, macOS, iOS, and even some
+#   Linux distros. It also supports some Smart TVs, like the Android TV and Google TV, and streaming devices like the
+#   Amazon Fire TV Stick." (/features), and its download menu's Apple TV, Chrome and Firefox extensions and routers.
+# - Sign-in: an email address and password (its sign-up and account articles); no page offers two-factor codes or
+#   passkeys.
+# - Support: "24/7 live Customer Support service" (/features) by chat, and email ("via e-mail: support@cyberghost.ro",
+#   every help article).
+# - App languages: its sites' language menu (English, Deutsch, Español, Français, Italiano, Português, 日本語, 简体中文,
+#   한국어 and others the registry lacks, such as Nederlands, Polski and Română; no Arabic or Hindi).
+# - Closed source: no page publishes its apps' code, and its terms forbid taking them apart.
+# - No pause; no parental controls (its Content Blocker is a setting you turn on yourself).
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password]
+  support.channels: [chat, email, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
+  software.open-source: proprietary
+
+# Perks (M11.6): "Mac Cleaner that scans and removes junk files to free up storage on macOS", in every plan (How do
+# CyberGhost’s Plans and Offers Work?).
+perks:
+  - id: mac-cleaner
+    name: Mac Cleaner
+
+# VPN features, read 2026-11-19 on its feature pages and help centre:
+# - Devices: "With a single CyberGhost subscription, you can connect to the VPN on up to 7 different devices at the same
+#   time, regardless of platform." (How Many Devices Can I Use at the Same Time?).
+# - Traffic: "Unlimited bandwidth and traffic" (/features), so its monthly VPN data is unlimited.
+# - Countries: "Choose from 120+ locations across 100 countries" (/features; "VPN servers in 100 countries worldwide").
+# - Protocols: "Switch between OpenVPN, WireGuard®, and IKEv2 depending on what you need." (/features). No page offers
+#   obfuscation, so no stealth.
+# - Kill switch ("Shut down your connection to stop traffic from going through if the VPN tunnel fails."); split
+#   tunnelling ("Choose apps or sites that don’t work well with VPNs to redirect them outside the VPN tunnel.").
+# - Content blocking: "Block connections to domains associated with ads, trackers, and malware." (/features).
+# - P2P: its "P2P-optimized servers" ("For torrenting", How to Use CyberGhost VPN’s P2P-Optimized Servers on Windows). No
+#   port forwarding: "CyberGhost doesn’t support port forwarding." (Why Are My P2P Download Rates So Low?). No page offers
+#   multi-hop or Tor over VPN.
+# - No-logs policy and audits: "Deloitte concluded our VPN servers comply with our no-logs policy." (/features/no-logs-
+#   vpn), and its post "Third Deloitte Romania Audit Verifies Our Commitment to Privacy" (Last updated: Feb 24, 2026):
+#   "Our first assessment by Deloitte Audit Romania took place in 2022 , followed by a second in 2024 ." and "The 2025
+#   Deloitte assurance report" (ISAE 3000, "to verify that our systems functioned as described and provided technical
+#   protections against activity logging"): no-logs. Deloitte's report sits behind a disclaimer to accept
+#   (/deloitte-privacy-policy), which wasn't accepted. No page names an audit of its apps or a security test of its
+#   servers.
+# - RAM-only servers: "CyberGhost VPN uses RAM-only servers that wipe all data every time they reboot." (/features/no-
+#   logs-vpn).
+# - Connects your own devices: no page offers it, so vpn.mesh is false.
+# - Identity Guard: "CyberGhost Identity Guard automatically alerts you if your email address is revealed in a data
+#   breach", in every plan ("Identity Guard that monitors your email address for data breach exposure", the plans
+#   article; "Email leak monitoring" in the order page's "See What’s Included in All Plans"). The order page also says
+#   multi-year plans include "CyberGhost ID Guard & CyberGhost Privacy Guard at no extra cost": Privacy Guard (a Windows
+#   privacy-settings tool) is in the plan's notes, since a feature can't be held for some periods only (notes.md).
+# - Not anonymous: an email is "required for account activation" (its checkout).
+# - Speeds (notes only): "10-Gbps server infrastructure" (/features).
+plans:
+  - id: cyberghost.vpn
+    name: CyberGhost VPN
+    link: https://www.cyberghostvpn.com/buy
+    features:
+      vpn.included: true
+      vpn.devices: 7
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.port-forwarding: false
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+    featureLabels:
+      security.dark-web-monitoring: Identity Guard
+    perks: [mac-cleaner]
+    addOnIds: [cyberghost.security-suite, cyberghost.dedicated-ip]
+    notes: 'Up to 7 devices at once, servers in 100 countries ("10-Gbps server infrastructure"), its Content Blocker for ads, trackers and malware, and Identity Guard email breach alerts. The 2-year deal is a first term of 2 years and 4 months that renews yearly, and adds Privacy Guard for Windows.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: CA
+        currency: USD
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: CA
+        currency: USD
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: US
+        currency: USD
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: US
+        currency: USD
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: GB
+        currency: GBP
+        amount: 10.89
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: GB
+        currency: GBP
+        amount: 37.14
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: GB
+        currency: GBP
+        amount: 50.12
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: IE
+        currency: EUR
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: IE
+        currency: EUR
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: AU
+        currency: AUD
+        amount: 18.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: AU
+        currency: AUD
+        amount: 65.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: AU
+        currency: AUD
+        amount: 83.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: NZ
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: NZ
+        currency: USD
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: NZ
+        currency: USD
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: DE
+        currency: EUR
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: DE
+        currency: EUR
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: FR
+        currency: EUR
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: FR
+        currency: EUR
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: NL
+        currency: EUR
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: NL
+        currency: EUR
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: ES
+        currency: EUR
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: ES
+        currency: EUR
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: IT
+        currency: EUR
+        amount: 41.94
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-2
+      - region: IT
+        currency: EUR
+        amount: 55.72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-3
+
+# Add-ons, read 2026-11-19 on each country's monthly checkout ("The following are available as optional add-ons at an
+# additional cost: Dedicated IP ... Security Suite (Windows only): Antivirus and security updater", the plans article).
+# Their monthly prices only, the order page's struck-through regular ones ("$4.50 /mo" and "$5.00 /mo", beside the 2-year
+# deal's "$1.00" and "$2.50"); no page states their renewal for longer periods.
+addOns:
+  - id: cyberghost.security-suite
+    name: CyberGhost Security Suite for Windows
+    prices:
+      - region: CA
+        currency: USD
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: US
+        currency: USD
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: GB
+        currency: GBP
+        amount: 3.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: IE
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: AU
+        currency: AUD
+        amount: 6.75
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: NZ
+        currency: USD
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: DE
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: FR
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: NL
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: ES
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: IT
+        currency: EUR
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+  - id: cyberghost.dedicated-ip
+    name: Dedicated IP
+    prices:
+      - region: CA
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: US
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: GB
+        currency: GBP
+        amount: 4.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: IE
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: AU
+        currency: AUD
+        amount: 7.50
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: NZ
+        currency: USD
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: DE
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: FR
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: NL
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: ES
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+      - region: IT
+        currency: EUR
+        amount: 5.00
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.cyberghostvpn.com/buy-checkout/cyberghost-vpn-1
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch from Canada (its cookie banner in Edge, whose
+# words sit in a shadow root that a page's text leaves out). Every agreement a user accepts: the checkout's line ("By
+# clicking "Subscribe" below, I agree to the Terms and Conditions—including the dispute resolution clause which requires
+# binding arbitration for U.S. residents; the Privacy Policy, the Cancellation Policy, and the Automatic Renewal Terms set
+# forth below."), whose Cancellation Policy is the terms' "Cancellation and Refunds"; the privacy policy's Cookie Policy
+# (/cookiepolicy). Its terms are its apps' licence ("2. License"). Its privacy policy's US line ("If you are residing in
+# the US the following terms apply: Privacy Policy") links the same page. Read and giving no other grade: the Refer a
+# friend terms (/ref-terms: credits for referrals, no topic). Not read: Deloitte's report (behind a disclaimer to accept),
+# the payment companies' and analytics companies' own policies. Kape Technologies shares no policy with CyberGhost: its
+# privacy policy is CyberGhost S.R.L.'s own.
+policies:
+  links:
+    - name: 'Terms and Conditions'
+      url: https://www.cyberghostvpn.com/terms
+    - name: 'Privacy Policy'
+      url: https://www.cyberghostvpn.com/privacypolicy
+    - name: 'Cookie Policy'
+      url: https://www.cyberghostvpn.com/cookiepolicy
+    - name: 'No-Logs VPN'
+      url: https://www.cyberghostvpn.com/features/no-logs-vpn
+    - name: 'Third Deloitte Romania audit'
+      url: https://www.cyberghostvpn.com/privacyhub/privacy-audit-2025/
+    - name: 'Transparency Report'
+      url: https://www.cyberghostvpn.com/transparency-report
+    - name: 'Vulnerability Disclosure Program'
+      url: https://www.cyberghostvpn.com/vulnerability-disclosure-program
+    - name: 'VPN Free Trial'
+      url: https://www.cyberghostvpn.com/vpn-free-trial
+    - name: 'How Can I Delete My CyberGhost VPN Account?'
+      url: https://support.cyberghostvpn.com/hc/en-us/articles/360017378259-How-Can-I-Delete-My-CyberGhost-VPN-Account
+    - name: 'How Can I Cancel My Subscription?'
+      url: https://support.cyberghostvpn.com/hc/en-us/articles/360017373799-How-Can-I-Cancel-My-Subscription
+    - name: 'CyberGhost VPN’s Refund Policy'
+      url: https://support.cyberghostvpn.com/hc/en-us/articles/213834369-CyberGhost-VPN-s-Refund-Policy
+    - name: 'Any additional payments or hidden costs?'
+      url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734599-Any-additional-payments-or-hidden-costs
+    - name: 'How Many Devices Can I Use at the Same Time?'
+      url: https://support.cyberghostvpn.com/hc/en-us/articles/214371165-How-Many-Devices-Can-I-Use-at-the-Same-Time-with-One-Account-or-Subscription
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Besides what it needs, it collects details about your device, such as its advertising ID, and how you use its site and apps, for analytics. To opt out you have to email support.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'Through such exchange we receive Non-personal Data including without limitation, data relating to the browser you are using, mobile/desktop device, general properties and metadata, OS version, preferred language, the date and time of your visit, battery charge, screen resolution, Google Advertising ID, Gyro-sensor data, screen size, Connectivity (WLAN), Mobile service provider, the referring website and your preferences in our Websites during your visit.'
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'We use this information for internal monitoring, analytics and improvement of our services in the way described in this Policy.'
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'in the event, you wish to opt out from the data collection or you are not able to exercise your rights through your account please contact us at: support@cyberghost.ro'
+      action:
+        name: 'How to contact it to opt out'
+        url: https://www.cyberghostvpn.com/privacypolicy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It lets other companies track what you do on its website, including advertisers’ cookies. You can stop it only with your browser’s Do Not Track setting or its cookie choices, browser by browser.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: "It's also important to note that we allow third-party behavioral tracking"
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'These technologies are used by advertisers to serve ads that are relevant to your interests.'
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'We honor Do Not Track signals and Do Not Track, plant cookies, or use advertising when a Do Not Track (DNT) browser mechanism is in place.'
+      action:
+        name: 'Cookie Preferences, in its website’s footer'
+        url: https://www.cyberghostvpn.com/cookiepolicy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website uses cookies for marketing that show you ads based on your interests unless you change your cookie choices, browser by browser, or turn on Do Not Track.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'We use cookies and other third-party tools for analytics and marketing, as per our Privacy Policy and Cookie Policy.'
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'Any customization applies going forward.'
+        - url: https://www.cyberghostvpn.com/cookiepolicy
+          quote: 'You can prevent the setting of cookies by adjusting the settings on your browser (see your browser Help for additional information).'
+      action:
+        name: 'Cookie Preferences, in its website’s footer'
+        url: https://www.cyberghostvpn.com/cookiepolicy
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'It has no AI features, and its terms and privacy policy don’t mention training AI models.'
+      pages: [https://www.cyberghostvpn.com/privacypolicy, https://www.cyberghostvpn.com/terms]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps what it collects as long as it needs it to run the service and meet its legal duties, and names no time limit.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'Please note that unless you instruct us otherwise we retain the information we collect for as long as needed to provide the Service and to comply with our legal obligations, resolve disputes and enforce our agreements.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself in its settings at any time. After that it no longer has personal details it can tie to you.'
+      sources:
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/360017378259-How-Can-I-Delete-My-CyberGhost-VPN-Account
+          quote: 'Click Delete my account.'
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/360017378259-How-Can-I-Delete-My-CyberGhost-VPN-Account
+          quote: 'We will no longer have access to identifiable personal information associated with your account.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data with its request form or by email. There’s no download button.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'To facilitate the exercise of this right, we have prepared a specialised form that you can complete when making the request, to expedite our response time.'
+      action:
+        name: 'How to ask for your data'
+        url: https://www.cyberghostvpn.com/privacypolicy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It hands data over when the law or a court order makes it, publishes the requests it gets every quarter, and keeps no logs to give. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'We also reserve the right to disclose your Personal Data as required by law and when we believe that disclosure is necessary to protect our rights and/or comply with a judicial proceeding, court order, or legal process served on our Web site.'
+        - url: https://www.cyberghostvpn.com/transparency-report
+          quote: 'Our quarterly reports show every legal request we receive for user data, along with exactly how we handled them.'
+        - url: https://www.cyberghostvpn.com/transparency-report
+          quote: 'Thanks to our strict no-logs policy, we have no user data to hand over, no browsing history, no traffic logs, no IP assignments, and no connection timestamps.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'It doesn’t say where your account data is kept. Within its group, it passes data only to companies in the EU or places with equal privacy law.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'our ultimate holding company, KAPE TECHNOLOGIES PLC, and all its subsidiaries, in so far as they are located in the EU or another jurisdiction offering equivalent data protection standards'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address and payment details, and its policy says it may ask for your name and address too.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'When registering through our Website you will be requested to provide your name, address, e-mail address, username and payment information which you submit to us voluntarily when you order or subscribe for our Services, as well as when you fill out any of the contact forms on the Website.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can turn off renewal in your account in a few clicks, and keep using it until the end of the time you paid for.'
+      sources:
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/360017373799-How-Can-I-Cancel-My-Subscription
+          quote: 'This means you have successfully cancelled your CyberGhost VPN subscription and can keep using it until the end of your paid subscription period.'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'You may discontinue automatic renewal at any time.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get all your money back if you ask within 14 days of buying a monthly plan, or 45 days for 6 months or longer. It doesn’t say renewals are covered; after that, you keep access but get nothing back.'
+      sources:
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/213834369-CyberGhost-VPN-s-Refund-Policy
+          quote: 'For 1-month subscriptions, we offer a 14-day money-back guarantee.'
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/213834369-CyberGhost-VPN-s-Refund-Policy
+          quote: 'For subscriptions of 6 months or longer, we offer a 45-day money-back guarantee.'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'In case you terminate your subscription at any time after the expiration of the respective Money-back guarantee period, you will not receive any refund but will retain access for the purchased period'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'A new price starts only at your next renewal, never during time you’ve paid for. Its notice of it may be only a post on its website, and it doesn’t say how far ahead.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'CyberGhost reserves the right to amend subscription fees or institute new fees at any time upon reasonable advance notice posted on the Site or sent via email.'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'Any changes to the pricing shall not affect your existing subscription and will become effective upon subscription renewal.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its computer trial needs no card and just ends. Its phone trials need a way to pay and turn into a paid plan unless you cancel during the trial, with no reminder promised.'
+      sources:
+        - url: https://www.cyberghostvpn.com/vpn-free-trial
+          quote: 'Start a 24-hour desktop trial without using your card'
+        - url: https://www.cyberghostvpn.com/vpn-free-trial
+          quote: '* Mobile trials require a payment method. You won’t be charged for the subscription until the trial ends.'
+        - url: https://www.cyberghostvpn.com/vpn-free-trial
+          quote: 'Cancel the iOS or Android free trial during the initial period to avoid charges.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its plans renew by themselves, and its terms and help centre don’t say it reminds you before they do.'
+      pages:
+        [
+          https://www.cyberghostvpn.com/terms,
+          https://support.cyberghostvpn.com/hc/en-us/articles/360017373799-How-Can-I-Cancel-My-Subscription,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: great
+      reason: 'It says there are no extra payments or hidden costs beyond the price.'
+      sources:
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/360013734599-Any-additional-payments-or-hidden-costs
+          quote: 'Neither one nor the other !'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US, a dispute goes to the courts of London, not to a private referee.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'If you are not a resident of the United States, you agree that any dispute or claim arising out of or in connection with these Terms or the Products shall be subject to the exclusive jurisdiction of the courts of London, UK, and you hereby submit to the personal jurisdiction of such courts.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: 'In the US a dispute goes to a private referee (arbitration), not a court, and you can’t join a class action. You can opt out only in writing within 30 days of first using it.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'You agree that any dispute or claim of any kind whatsoever between you and CyberGhost, regardless of when the dispute or claim arose or has arisen, will be decided by a binding arbitration administered by the American Arbitration Association'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'YOU AND CYBERGHOST MAY NOT BRING CLAIMS AGAINST THE OTHER AS A PLAINTIFF OR CLASS MEMBER IN ANY CLASS OR REPRESENTATIVE ACTION.'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'You may opt out of the Agreement to Arbitrate within 30 days after your first use of the Products or availability of this Agreement to Arbitrate, whichever is later, by sending written notice of your decision to opt out to:'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://www.cyberghostvpn.com/terms
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It only posts new terms on its website or tells you some other way it chooses, and using it afterwards means you accept them.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'Notification on material changes to the Terms will be provided through an update to the Site or other prominent manner.'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'Your use of the content or Products following the changes to these Terms constitutes your acceptance of the changed Terms.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its rules, it can cut off your access without refunding the time you paid for.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'Furthermore, CyberGhost reserves the right, in case of breach of this Agreement, to, inter alia, restrict or suspend, in whole or in part, the access to CyberGhost Products without awarding a refund for services already paid for, as well as to initiate legal actions.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add or remove features whenever it decides, as a subscription can.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'From time to time, CyberGhost at its absolute discretion, can modify CyberGhost Products, for example by adding or removing certain functions of VPN servers or by updating the software.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://www.cyberghostvpn.com/terms, https://www.cyberghostvpn.com/privacypolicy]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'You get a licence to use its apps that it can take back, and its terms forbid taking them apart (reverse engineering) or changing them, without saying where the law allows it.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'CyberGhost hereby grants you a personal, non-exclusive, non- transferrable, limited and revocable license to use the CyberGhost Products solely in accordance with the terms of this Use Agreement.'
+        - url: https://www.cyberghostvpn.com/terms
+          quote: '(A) reverse engineer, disassemble, decompile, translate, reconstruct, transform or extract any portion of the CyberGhost Products'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Deloitte has checked its no-logs promise three times, it holds ISO 27001 security certification, and it runs a bug-report programme with YesWeHack. It doesn’t publish past security problems.'
+      sources:
+        - url: https://www.cyberghostvpn.com/privacyhub/privacy-audit-2025/
+          quote: 'Our first assessment by Deloitte Audit Romania took place in 2022 , followed by a second in 2024 .'
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: 'In March 2012, CyberGhost had successfully passed an audit and verification conducted by QSCert for the implemented Information Safety Management System (ISMS) according to the international industrial standards ISO27001 and ISO9001.'
+        - url: https://www.cyberghostvpn.com/vulnerability-disclosure-program
+          quote: "We're committed to creating the best security tools, so we've launched a Vulnerability Disclosure Program in collaboration with YesWeHack."
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: great
+      reason: 'It keeps no record of what you do or when you connect, its servers run from memory only, and Deloitte found its servers keep to that, most recently in 2025.'
+      sources:
+        - url: https://www.cyberghostvpn.com/features/no-logs-vpn
+          quote: 'Deloitte concluded our VPN servers comply with our no-logs policy.'
+        - url: https://www.cyberghostvpn.com/features/no-logs-vpn
+          quote: 'CyberGhost VPN uses RAM-only servers that wipe all data every time they reboot.'
+        - url: https://www.cyberghostvpn.com/privacypolicy
+          quote: "More than this, when using the CyberGhost VPN, we are NOT storing connection logs, meaning that we DON'T have any logs tied to your IP address, connection timestamp or session duration."
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: great
+      reason: 'You can install it on any number of devices; only 7 can be connected at once.'
+      sources:
+        - url: https://support.cyberghostvpn.com/hc/en-us/articles/214371165-How-Many-Devices-Can-I-Use-at-the-Same-Time-with-One-Account-or-Subscription
+          quote: 'You can install CyberGhost VPN on any number of devices, but only 7 devices can be connected to the VPN at once.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps download and install their own updates, as its terms say. Nothing says they change anything else unless you use its Windows tools yourself.'
+      sources:
+        - url: https://www.cyberghostvpn.com/terms
+          quote: 'In order to enhance and further develop the CyberGhost Products we may automatically download and install updates and upgrades from time to time.'
+      lastVerified: 2026-11-19

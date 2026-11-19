@@ -1,0 +1,580 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada and with a plain fetch
+# (curl) of hotspotshield.com, its legal site (legal.hotspotshield.com), 286 of its help centre's 288 English articles
+# (support.hotspotshield.com, from its sitemap) and Aon's audit summary (a PDF on hotspotshield.com); its checkouts
+# (secure.hotspotshield.com, opened to the payment form and typing nothing) from Canada and through US, Dutch and
+# Canadian exits. Pricing: its plan page (hotspotshield.com/select-plan/) shows the same "$" prices to everyone
+# ("$29/year" for the first year, "Auto-renews at $95.99/year"; "$1.99/mo", "Auto-renews monthly at $12.99/mo."), so
+# it names no country. Its two checkouts price by where the visitor is and name the country and currency in their own
+# data: the monthly one (secure.hotspotshield.com/) "renew monthly at $13.99" with "country":"CA","currency":"CAD" from
+# Canada, and "renew monthly at €9,99" with "country":"NL","currency":"EUR" through a Dutch exit; the yearly one
+# (/vpn-offer/special) "renew annually at $95.99" in US dollars both from Canada ("country":"CA","currency":"USD") and
+# through a US exit ("country":"US"). The first term ($29 a year, $1.99 a month) is an introductory offer ("I agree to
+# pay $29.00 today for the first year of my subscription, and agree that I am enrolling in an autorenewing subscription
+# that will renew annually at $95.99"), so the renewal prices are stored. Its terms say fees are "identified, in U.S.
+# dollars" (notes.md). No page says the prices include tax ("plus any applicable taxes and fees", its terms).
+# Other countries: the checkouts answered most exits with Cloudflare's check that asks a person to tick a box, which needs a
+# person, so the UK, Ireland, Australia, New Zealand, Germany, France, Spain and Italy, and the Dutch yearly price, stay
+# unread (the Coverage notes below).
+# Region checklist for CA and US, 2026-11-19: 1. no country paths (its language versions, /de/, /fr/…, have no plan
+# page); 2. no country or currency picker; 3. the plan page's data has no prices (its currency.js holds an older price
+# list: $12.99 a month, $95.88 a year); 4. the checkouts' own data names the country and currency (above); 5. its help
+# centre: "The subscriptions available to a user and what's available in the subscription will differ from country to
+# country."; 6. Edge from Canada and through US and Canadian exits, and a plain fetch (Cloudflare refuses curl on the
+# checkouts); 7. no bill offered.
+# Plans: Basic (free, with ads) and Premium (monthly, yearly). Premium Family isn't sold now: the plan page shows only
+# Basic and Premium, and its "Select Premium Family" link (order.hotspotshield.com/family), left in the page's hidden
+# older layouts, goes to the individual yearly checkout. Multi-year plans aren't sold. Business VPN is out of scope.
+# Bundles: none sold (its 1Password and Robo Shield extras were removed: "we made the decision to remove these features
+# from Hotspot Shield"). Official resellers: its terms allow "authorized resellers" but no page names one; app stores
+# bill its plans (partners, not listed).
+
+# Coverage: hotspot-shield.premium in GB, IE, AU, NZ, DE, FR, ES and IT: its checkouts price by country, and through
+# those countries' exits they showed Cloudflare's check that asks a person to tick a box, which needs a person (read 2026-11-19);
+# its plan page shows only US-dollar prices that name no country.
+# Coverage: hotspot-shield.premium in NL: its yearly checkout (/vpn-offer/special) showed the same check through Dutch
+# exits; only the monthly price (€9,99) was read.
+
+id: hotspot-shield
+name: Hotspot Shield
+aliases: [hotspot shield vpn, hss, hotspotshield]
+website: https://www.hotspotshield.com
+category: vpn
+spendCategory: software
+# The checkouts' own data: Canada's monthly checkout in CAD (its yearly offer charges USD), the US's in USD, the
+# Netherlands' in EUR. No page names the card networks (the checkout's card form has no logos or words for them).
+billingCurrency: { CA: CAD, US: USD, NL: EUR, GLOBAL: USD }
+# Its help article on cancelling: the account dashboard for website purchases, and Apple's or Google's for theirs.
+cancelUrl: https://support.hotspotshield.com/en/payments-subscriptions/manage-your-subscription/how-do-i-cancel-my-hotspot-shield-subscription
+sources: { pricing: https://www.hotspotshield.com/select-plan/ }
+# Ways to pay (M11.5), read 2026-11-19: the checkout's "Credit / Debit Card", PayPal (its help article), and Google Play
+# and the App Store in its apps (What are the benefits of a Premium subscription?). The checkout's data also lists Apple
+# Pay and Google Pay buttons, which its words don't name, so they're left out (notes.md). Codes ("How do I redeem a
+# code?") aren't said to be gift cards.
+paymentMethods:
+  - methods: [card]
+    page: Checkout
+    url: https://secure.hotspotshield.com/
+    quotes:
+      - 'Credit / Debit Card'
+  - methods: [paypal]
+    page: 'How do I get a Premium subscription using PayPal?'
+    url: https://support.hotspotshield.com/en/payments-subscriptions/purchase-and-activate-premium-subscription/how-do-i-get-a-premium-subscription-using-paypal
+    quotes:
+      - 'Choose Paypal as your payment method'
+  - methods: [app-store]
+    page: 'What are the benefits of a Premium subscription?'
+    url: https://support.hotspotshield.com/en/payments-subscriptions/purchase-and-activate-premium-subscription/what-are-the-benefits-of-a-premium-subscription
+    quotes:
+      - 'To purchase from the Hotspot Shield Android app (Google Play)'
+      - 'To purchase from the Hotspot Shield iOS app (iTunes)'
+# Renewal day (M11.5), read 2026-11-19 in its help article on automatic renewal. In Quebec a yearly plan continues month
+# to month after its first year (its terms' section 2.11).
+renewalAnchor:
+  kind: same-date
+  page: 'How does automatic renewal of Premium subscriptions work?'
+  url: https://support.hotspotshield.com/en/payments-subscriptions/manage-your-subscription/how-does-automatic-renewal-of-premium-subscriptions-work
+  quotes:
+    - 'Most subscriptions are set to renew automatically every month, or year depending on the subscription length, on the same date.'
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its terms name Anchorfree, LLC of Boston ("or Pango Gmbh, depending on where you make
+# your purchase"), and its privacy policy (October 31, 2024) says "Hotspot Shield is provided by Anchorfree, LLC or Pango
+# GmbH, and a part of the Pango Group". Pango Group is now Point Wild: its privacy policy defines "Point Wild Holdings,
+# Inc. f/k/a Pango Group, Inc." and names Hotspot Shield among its free VPN products, and its story page says "Pango
+# Group merges with Total Security, a global leader in the field of cybersecurity, and combined company rebrands to Point
+# Wild." Aura, whose domain hosts Hotspot Shield's account site (hotspotshield.aura.com), says "Aura splits into two
+# world-class online safety companies: Aura & Point Wild (formerly known as Pango)" (its about page). Point Wild is
+# private, so no stock.
+owner:
+  name: 'Anchorfree, LLC, part of Point Wild (formerly Pango Group)'
+  website: https://www.pointwild.com
+  page:
+    name: 'Privacy Policy (Point Wild)'
+    url: https://www.pointwild.com/legal/privacy-policy/
+  quotes:
+    - '“Point Wild” means and refers to Point Wild Holdings, Inc. f/k/a Pango Group, Inc. or Pango Group, and our affiliate entities'
+    - 'For users of our free VPN products, namely Hotspot Shield, BetterNet and VPN360, we may serve ads through the use of third party advertising services indicated below.'
+    - 'Point Wild (including Anchorfree LLC, Betternet LLC, TouchVPN LLC, and VPN Proxy Pro, LLC) complies with the EU-U.S. Data Privacy Framework'
+  country:
+    code: US
+    page:
+      name: 'Terms of service'
+      url: https://legal.hotspotshield.com/documents/terms_of_service
+    quotes:
+      - 'Anchorfree, LLC, with offices at Office 250 Northern Ave, 3rd Floor, Boston, MA 02210, United States'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  Prices follow your country at checkout: Canada's monthly plan is in Canadian dollars but its yearly plan in US
+  dollars. The first month or year is a discount; the prices here are what it renews at. Basic is free with ads, one
+  device and one US location; Premium adds 10 devices and every location.
+
+# General features, read 2026-11-19:
+# - Platforms: Windows, Mac, iOS, Android and Android TV (How many devices can be connected…: "Android TV running
+#   Android OS 5.0 or later"), its Chrome extension and Firefox add-on; "Current unsupported devices" include Linux,
+#   routers and TVs that aren't Android TV. Basic's plan column: "Windows, Mac, iOS, Android, Chrome" (no Smart TV).
+# - Sign-in: an email and password (its sign-in articles: "Fill out the form with your credentials to sign in"); its
+#   checkout's markup also has a hidden magic-link sign-in that isn't on any page's text, so left out.
+# - Support: Premium's "24/7 personal support via chat or email" (What are the benefits of a Premium subscription?);
+#   Basic's "Support centre only" (the plan page), so Basic has no support channel.
+# - App languages: its website's language menu (English, Deutsch, Français, Русский, العربية, فارسی, Türkçe, Việt ngữ,
+#   中文, 日本語, 한국어, Português, Español; Russian, Persian, Turkish and Vietnamese have no registry value), and its
+#   Windows app's "Language: Here you can set the language the Hotspot Shield app will use."
+# - Closed source: its terms' licence forbids trying to "discover any source code"; no page says its apps are open.
+# - No pause, and no parental controls, on any page read.
+features:
+  platforms: [windows, macos, android, ios, browser-extension, tv]
+  account.sign-in: [password]
+  support.channels: [chat, email, 24-7]
+  languages.interface: [en, de, fr, ar, zh, ja, ko, pt, es]
+  software.open-source: proprietary
+
+# Perks (M11.6): Premium's plan-page lines no feature describes, in its words.
+perks:
+  - id: streaming-mode
+    name: Streaming mode
+  - id: gaming-mode
+    name: Gaming mode
+
+# VPN features, read 2026-11-19, on both plans unless named:
+# - Devices: "Free users can only link one (1) device to their account." and "Premium users can add up to ten (10)
+#   devices to their Premium account simultaneously." (How many devices can be connected to Hotspot Shield VPN
+#   simultaneously?).
+# - Data: Premium "Unlimited data bandwidth for streaming HD videos" (its Premium benefits article). Basic: its help
+#   article "When in Basic Mode, you only have access to one device and you cannot choose your Virtual Location. You also
+#   have a 500 MB/day data limit" (What exactly is the Basic version, updated two months ago), its free VPN page's Basic
+#   card (Unlimited bandwidth crossed out, an image) and its server locations page ("500 MB daily"); its plan page's table
+#   says "Unlimited" for both, which they outweigh (notes.md). 500 MB a day is 15 GB in a 30-day month, inferred.
+# - Countries: Premium's server locations page, "1,800+ servers in 80+ countries", lists 85 countries (India "via
+#   Singapore"); its plan page counts "125+ virtual locations" and its checkout "115+ Location Options", which include
+#   cities. Basic: "Hotspot Shield free VPN users by default only have access to one VPN server (United States)." (the
+#   same page), and the plan page's "Virtual locations 1"; one help article lists five free locations in three countries
+#   ("Auto", "Los Angeles", "New York", "Singapore", "United Kingdom"), which two pages and the plan page outweigh.
+# - Protocols: "Hydra", "IKEv2 (IPSec)" and "WireGuard" (Hotspot Shield App Features and Settings); Hydra, its own,
+#   has no registry value; obfuscation from the plan page's "Traffic Obfuscations" (both plans) and Hydra "difficult for
+#   censors to block" (Which VPN protocol should I choose?). The plan page's "Hydra IPSec and Open VPN protocols" row
+#   names OpenVPN, which no app's settings list, so it's left out.
+# - Kill switch and split tunnelling: "Internet kill switch" and "Split tunneling" ticked for Basic and Premium (the free
+#   VPN page's cards; the app settings article: "Kill switch", "Split Tunneling"). The plan page's "Tor over VPN"
+#   row (ticked for both) is left out: no features page or help article mentions Tor, and the same table is stale
+#   elsewhere (Basic's data, the OpenVPN row). Blocking: "Anti-phishing protection", ticked for both (malware).
+# - P2P: Hydra "optimizes the connection based on your requirements — be it for gaming, streaming, downloading, P2P, or
+#   browsing" (server locations page), Premium's every location; its terms don't forbid P2P.
+# - No-logs policy: "we do not log or otherwise record IP addresses, device identifiers, or any other form of identifier
+#   in combination with your VPN browsing activity" (VPN Products Privacy Notice). Audit: Aon's "Technical Security
+#   Review of VPN Solution", August 25th, 2023, of "both free and paid tiers", "to validate adherence to the relevant data
+#   security and privacy claims (strictly as it relates to collection of information and logging)": no-logs only.
+# - RAM-only servers: no; its notice speaks of a seized server's disks ("succeeds in breaking disk encryption on those
+#   servers"). Connects your own devices: no page offers it. No port forwarding or multi-hop on any page read. Basic
+#   needs no account ("we do not require users to register an account to use some of our products"), Premium an email.
+plans:
+  - id: hotspot-shield.basic
+    name: Basic
+    link: https://www.hotspotshield.com/free-vpn/
+    features:
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: false
+      vpn.data-allowance: 15
+      vpn.server-countries: 1
+      vpn.protocols: [wireguard, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [malware]
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      ad-free: false
+      platforms: [windows, macos, android, ios, browser-extension]
+      support.channels: []
+    inferred:
+      vpn.data-allowance:
+        reason: 'Basic is limited to 500 MB a day, which is 15 GB in a 30-day month.'
+        page:
+          name: 'What exactly is the Basic version of Hotspot Shield?'
+          url: https://support.hotspotshield.com/en/troubleshoot-issues/premium-experience-issues/what-exactly-is-the-basic-version-of-hotspot-shield
+        lastVerified: 2026-11-19
+    notes: >-
+      Free with ads: one device, one US location you can't change, and 500 MB a day (on phones, watching an ad gives more).
+      Slower than Premium. Support is the help centre only.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.hotspotshield.com/select-plan/
+
+  - id: hotspot-shield.premium
+    name: Premium
+    link: https://www.hotspotshield.com/select-plan/
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 85
+      vpn.protocols: [wireguard, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [malware]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      ad-free: true
+    perks: [streaming-mode, gaming-mode]
+    notes: >-
+      The first year is $29 and the first month $1.99 (US dollars on its plan page); it then renews at the prices here.
+      A 45-day money-back guarantee on website purchases. In Quebec a yearly plan continues month to month after a year.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 13.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://secure.hotspotshield.com/
+      - region: CA
+        currency: USD
+        amount: 95.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://secure.hotspotshield.com/vpn-offer/special
+      # The US's monthly price is the plan page's (and its free VPN page's) "Auto-renews monthly at $12.99/mo": its
+      # monthly checkout showed the bot check through US exits. The page's "$" names no country, but its yearly
+      # "$95.99" is the US checkout's USD price, and its terms bill "in U.S. dollars" (notes.md).
+      - region: US
+        currency: USD
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.hotspotshield.com/free-vpn/
+      - region: US
+        currency: USD
+        amount: 95.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://secure.hotspotshield.com/vpn-offer/special
+      - region: NL
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://secure.hotspotshield.com/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its terms of service ("Last Updated October 31, 2024"), privacy
+# policy (October 31, 2024) and VPN Products Privacy Notice (September 29, 2022), which "prevails" where they differ, its
+# cookie policy, privacy choices and DMCA pages (no topic), and its help articles on cancelling, renewal, devices and the
+# Basic plan; Aon's audit summary. Every agreement a user accepts (the owner's rule, 2026-11-03): the checkout's "I agree
+# to the Hotspot Shield Terms of Service and Privacy Policy"; the terms include the privacy policy by reference and hold
+# its apps' licence (Part 4); the privacy policy points to the VPN notice. Its plan page also links Point Wild's and
+# Aura's privacy policies from older layouts; Point Wild's (December 8, 2025) has the same VPN and ad clauses, and Aura's
+# doesn't name Hotspot Shield, so neither is rated (notes.md). Its account site (hotspotshield.aura.com) blocked this
+# machine.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://legal.hotspotshield.com/documents/terms_of_service
+    - name: 'Privacy policy'
+      url: https://legal.hotspotshield.com/documents/privacy_policy
+    - name: 'VPN Products Privacy Notice'
+      url: https://www.hotspotshield.com/privacy-policy/vpn/
+    - name: 'Your privacy choices'
+      url: https://legal.hotspotshield.com/documents/privacy_choices
+    - name: 'How do I cancel my Hotspot Shield subscription?'
+      url: https://support.hotspotshield.com/en/payments-subscriptions/manage-your-subscription/how-do-i-cancel-my-hotspot-shield-subscription
+    - name: 'How many devices can be connected?'
+      url: https://support.hotspotshield.com/en/manage-account-devices/add-or-remove-devices-on-your-account/how-many-devices-can-be-connected-to-hotspot-shield-vpn-simultaneously
+    - name: 'Checkout'
+      url: https://secure.hotspotshield.com/
+    - name: 'Checkout (yearly)'
+      url: https://secure.hotspotshield.com/vpn-offer/special
+    - name: 'Free VPN'
+      url: https://www.hotspotshield.com/free-vpn/
+    - name: 'Why am I still getting ads or a bandwidth limit?'
+      url: https://support.hotspotshield.com/en/payments-subscriptions/issues-with-premium-subscriptions/why-am-i-still-getting-ads-bandwidth-limit-when-i-paid-for-premium
+    - name: 'Independent security audit'
+      url: https://www.hotspotshield.com/security-audit/
+    - name: 'Audit summary report (Aon)'
+      url: https://www.hotspotshield.com/reports/Pango_HotSpot%20Shield_VPN_Privacy_Policy_Review_Summary_Report.pdf
+    - name: 'Why did you remove 1Password and RoboShield?'
+      url: https://support.hotspotshield.com/en/general/announcements/why-did-you-guys-remove-1password-and-roboshield-from-hotspot-shield
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'It records how you use its apps and site, your device details and how long you’re connected, tied to an ID for your device, partly for analytics and marketing. Its pages offer no way to say no.'
+      sources:
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'device hashes, which are used to identify devices and associate them with other data we collect (such as for measuring bandwidth use, providing support, understanding how you interact with our VPN, and other analytics and marketing purposes).'
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'Usage information. We collect information about how you interact with our Services, including when you visit and use our websites or apps, including which UltraAV web pages or app features are used, and when and for how long you use our Services.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Ad companies in its free app and on its website get your advertising ID, IP address and device details, which US law can count as selling. You opt out with each ad company, or browser by browser.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'However, as the CCPA defines ‘sell’ broadly, some of the advertising services that support our website, marketing efforts, and mobile applications use third party advertising services that may be deemed a ‘sale’ under California law.'
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'Device or mobile advertising identifiers (controlled by your mobile operating system)'
+        - url: https://legal.hotspotshield.com/documents/privacy_choices
+          quote: 'If you adjust your cookie preferences using our Privacy Preference tool, your preferences will apply only on this website.'
+      action:
+        name: 'Your privacy choices'
+        url: https://legal.hotspotshield.com/documents/privacy_choices
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The free app shows ads, some chosen from your advertising ID or IP address. Turning that off is done with each ad company or its website’s cookie choices, and you still see ads.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'As some of the ads may be personalized based on your mobile advertising identifier or IP address, you may see an AdChoices icon on an ad.'
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'If you opt out from personalized advertising, you may still see non-personalized ads.'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If you choose to use a Paid Service, we will not deliver any Advertisements to you.'
+      action:
+        name: 'Your privacy choices'
+        url: https://legal.hotspotshield.com/documents/privacy_choices
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its terms and privacy policy don't say whether what you do trains AI."
+      pages:
+        [
+          https://legal.hotspotshield.com/documents/privacy_policy,
+          https://legal.hotspotshield.com/documents/terms_of_service,
+        ]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Your IP address is deleted when you disconnect, but your other data stays as long as it says it needs it, with no time given.'
+      sources:
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'When you initiate a VPN connection, we collect your device IP address, immediately encrypt it, and delete it at the end of your VPN session.'
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'We generally retain your personal information for as long as is needed to provide the Services to you, or for as long as you have an account or subscription with us.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You ask it by email to delete your data, and it works with you to do it. It gives no time for it.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'Please contact us to request that we delete personal information we have about you, or to correct inaccurate personal information we have about you.'
+      action:
+        name: 'How to ask for your data to be deleted'
+        url: https://legal.hotspotshield.com/documents/privacy_policy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data, which it sends in a form you can use elsewhere.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'You may also request access to your information, and we will provide the relevant information to you in a portable and readily usable format.'
+      action:
+        name: 'How to ask for a copy of your data'
+        url: https://legal.hotspotshield.com/documents/privacy_policy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It hands data over only for valid legal requests and challenges overbroad ones, publishes a yearly transparency report, and keeps no record of what you browse to give.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'If we share your information for these purposes, we limit the information shared to what is legally necessary, and challenge information requests that we believe are unlawful, overbroad, or otherwise invalid.'
+        - url: https://www.hotspotshield.com/free-vpn/
+          quote: 'In fact, we are one of the only VPN services to produce an annual Transparency Report to prove it.'
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'This means that we are not able to share your VPN browsing activity with anyone – whether it’s an ad network or government agency – because we simply don’t store that information.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can go to the US and other countries. It protects transfers from Europe with the EU-US Data Privacy Framework.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'For example, personal data collected within the U.K., Switzerland or the European Economic Area (EEA) may be transferred and processed in the United States for purposes described in this policy.'
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'In addition, Pango Group (including Anchorfree LLC) complies with the EU-U.S. Data Privacy Framework (“EU-U.S. DPF”)'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Premium needs an email address, a password and your card or PayPal. The free app needs no account at all.'
+      sources:
+        - url: https://secure.hotspotshield.com/
+          quote: 'Email Address'
+        - url: https://secure.hotspotshield.com/
+          quote: 'Name on Card'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      plans: [hotspot-shield.basic]
+      tier: great
+      reason: 'The free app works without an account, so you give it no name or email.'
+      sources:
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'We use device hashes because we do not require users to register an account to use some of our products and need a way to distinguish between different users and carry out the activities above.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You cancel online in your account, giving a reason, or by email. You must do it at least a day before it renews, and you keep Premium until the paid time ends.'
+      sources:
+        - url: https://secure.hotspotshield.com/
+          quote: 'I understand I can cancel via my online account portal at any time, but must cancel at least one day before my next renewal to avoid being charged.'
+        - url: https://support.hotspotshield.com/en/payments-subscriptions/manage-your-subscription/how-do-i-cancel-my-hotspot-shield-subscription
+          quote: 'Please note that once you have canceled your Premium auto-renewal, your account will stay active until the current subscription expires.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'A purchase on its website can be refunded in full within the first 45 days. After that, payments aren’t refunded.'
+      sources:
+        - url: https://secure.hotspotshield.com/
+          quote: 'By purchasing directly from our website, you are eligible for a full refund within your first 45 days of service.'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If you purchased from Us, all amounts paid are non-refundable, except as otherwise stated in these Terms or required by applicable law.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you at least 30 days before a price goes up, and the new price starts only with your next billing period.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We may change the fees that We charge for the Services at any time, at Our sole discretion, provided that We will give you at least thirty (30) days of prior notice of such changes.'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'Unless otherwise specified in such notice to you, any changes to the Subscription Fees will take effect as of the Billing Cycle immediately following Our notice to you.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: good
+      reason: 'A free trial or a cheap first month or year turns into the full price unless you cancel, but it tells you the fee before charging after a trial.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'Before charging you at the end of your Free Trial period, We will notify you of the applicable fees.'
+        - url: https://secure.hotspotshield.com/vpn-offer/special
+          quote: 'By checking this box, I agree to pay $29.00 today for the first year of my subscription, and agree that I am enrolling in an autorenewing subscription that will renew annually at $95.99, until I cancel.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you before every renewal, with the renewal price, though it doesn’t say how long before.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We will email you in advance to let you know your Subscription is due for renewal and provide the applicable Renewal Price in your account dashboard.'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: good
+      reason: 'You pay the price and any taxes. Your bank or the payment company may add its own fees, such as for converting currency.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'You further agree to be responsible for any applicable state, federal or other taxes that may be associated with the Services, including sales taxes, along with any transaction fees and currency conversions added by your financial institution and intermediaries.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to a private referee (arbitration), not a court, and you can’t join a class action. You can opt out only where a law gives you that right, by post within 30 days.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If you are a United States based customer or a customer in a jurisdiction where binding arbitration is permitted under applicable law, then you agree any complaint or dispute not informally resolved with Us (including Our service providers, affiliated entities, or Indemnified Parties) shall be resolved through binding arbitration'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'You and Us agree that the U.S. Federal Arbitration Act governs the interpretation and enforcement of these Terms, and that you and Us are each waiving the right to a trial by jury and the right to participate in a class action.'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'if you are a customer who resides in a jurisdiction where you have a legal right to opt out of arbitration in accordance with laws applicable to you – you may exercise your legal right to opt out.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      regions: [EU]
+      tier: good
+      reason: 'In the EU, where the law lets consumers go to their own courts, those local rules apply instead.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If you reside in a country (including countries of the European Union) where laws provide consumers the right to bring disputes in their local courts, then, in such cases, mandatory provisions of the local laws of your country of residence shall apply.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It can change its terms by posting them. For big changes it tries to warn you first by email or in the app, and in Canada it emails 30 days ahead where the law requires.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If a revision materially alters your rights, as determined by Us in its sole discretion, We will use reasonable efforts to notify you in advance of the change becoming effective, which may include sending a notification to the email address(es) associated with your account or displaying a pop-up or banner within the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your access at any time, for any reason, without warning. A refund is up to it, and none for a broken rule.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We may terminate your use of the Services or discontinue providing access to the Services at any time and for any reason'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'All refunds are issued at Our sole discretion and any refund request may be denied for any or no reason.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'Updates can remove features, and it owes you none of them. It took the 1Password and Robo Shield extras away from Premium.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'Updates may also modify or delete certain features, functionality, tools, or content in their entirety.'
+        - url: https://support.hotspotshield.com/en/general/announcements/why-did-you-guys-remove-1password-and-roboshield-from-hotspot-shield
+          quote: 'After pulling recent market data and developing our new brand strategies, we made the decision to remove these features from Hotspot Shield.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its terms and privacy policy don't say it closes accounts that go unused."
+      pages:
+        [
+          https://legal.hotspotshield.com/documents/terms_of_service,
+          https://legal.hotspotshield.com/documents/privacy_policy,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps are for your personal, non-commercial use, and the licence can be taken back.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We agree to grant you, as an individual consumer, a limited, revocable, nonexclusive, personal, non-transferable and non-assignable, term-limited license to install and use the Software and to access the Services'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'An outside firm, Aon, checked in 2023 that it doesn’t log what you browse, and it publishes the summary. Its pages give no way to report a security bug.'
+      sources:
+        - url: https://www.hotspotshield.com/security-audit/
+          quote: "We've recently commissioned an independent security audit for our Hotspot Shield VPN, underscoring our commitment to user trust."
+        - url: https://www.hotspotshield.com/reports/Pango_HotSpot%20Shield_VPN_Privacy_Policy_Review_Summary_Report.pdf
+          quote: 'Aon was unable to identify any indication that users’ browsing activity may be correlated or identified'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'It records how long you stay connected and how much data you use, tied to an ID for your device, and the sites visited without saying who visited them. An audit found no browsing tied to users.'
+      sources:
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'the duration of VPN sessions and the bandwidth consumed. We do this to monitor, support and optimize our VPN services, as well as enforce free app usage limits.'
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'While we log what domain names that users visit (but not full URLs), we do not log them in combination with anything that identifies an individual or device.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Premium works on 10 linked devices; to add another you must unlink one. Basic works on one device.'
+      sources:
+        - url: https://support.hotspotshield.com/en/manage-account-devices/add-or-remove-devices-on-your-account/how-many-devices-can-be-connected-to-hotspot-shield-vpn-simultaneously
+          quote: 'Premium users can add up to ten (10) devices to their Premium account simultaneously.'
+        - url: https://support.hotspotshield.com/en/payments-subscriptions/issues-with-premium-subscriptions/why-am-i-still-getting-ads-bandwidth-limit-when-i-paid-for-premium
+          quote: 'To add a new device, you need to remove a device from your Premium account.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its phone apps may update themselves, as your phone’s settings allow. Its pages mention no other changes to your device.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'For the mobile app, depending on your mobile device settings, when your mobile device is connected to the internet either: (a) the Updates will automatically download and install; or (b) you may receive notice of or be prompted to download and install available Updates.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Free plan cut off for ad blockers
+      tier: poor
+      reason: 'It may stop free users who block its ads from using the free plan.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We reserve the right to prevent your access to the Service or continued use thereof if you violate this Agreement, engage in fraud or copyright infringement, or employ an ad-blocking product'
+      lastVerified: 2026-11-19

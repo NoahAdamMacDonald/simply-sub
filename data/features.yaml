@@ -1274,8 +1274,8 @@
     - { id: 10000+, name: '10,000 or more queries', min: 10000 }
   aliases: [search api, api access]
 # DNS resolvers and filters: NextDNS, Control D, AdGuard DNS, Quad9, Cloudflare's 1.1.1.1, Google Public DNS, CIRA
-# Canadian Shield, Mullvad DNS. Parental controls are parental-control's; logging is a policy topic. A resolver with no
-# query limit is unlimited.
+# Canadian Shield (Mullvad's public DNS closed on 2026-11-02). Parental controls are parental-control's; logging is a
+# policy topic. A resolver with no query limit is unlimited.
 - id: dns.protocols
   name: Encrypted DNS
   category: web

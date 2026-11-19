@@ -538,6 +538,55 @@
   source: own
   status: done
   date: 2026-11-19
+- id: private-internet-access
+  name: Private Internet Access
+  website: https://www.privateinternetaccess.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: cyberghost
+  name: CyberGhost
+  website: https://www.cyberghostvpn.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: tunnelbear
+  name: TunnelBear
+  website: https://www.tunnelbear.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: hotspot-shield
+  name: Hotspot Shield
+  website: https://www.hotspotshield.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: mozilla-vpn
+  name: Mozilla VPN
+  website: https://www.mozilla.org/products/vpn/
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: purevpn
+  name: PureVPN
+  website: https://www.purevpn.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: hide-me
+  name: hide.me
+  website: https://hide.me
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -3294,14 +3343,16 @@
   status: out-of-scope
   date: 2026-11-14
   note: 'A browser whose only site is its source repository on GitHub, no longer developed: no subscription to list (2026-11-14)'
-- id: 1-1-1-1
-  name: 1.1.1.1
+- id: cloudflare
+  name: Cloudflare
   website: https://one.one.one.one
   category: dns
   source: wikidata
   wikidata: Q52556170
   sitelinks: 18
-  status: queued
+  status: done
+  date: 2026-11-19
+  note: "Wikidata's 1.1.1.1, added as cloudflare (2026-11-19): one provider for its free resolver and WARP"
 - id: pixelfed
   name: Pixelfed
   website: https://pixelfed.org

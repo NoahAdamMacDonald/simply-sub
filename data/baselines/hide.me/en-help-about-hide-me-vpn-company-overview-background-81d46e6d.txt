@@ -1,0 +1,234 @@
+url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
+method: fetch
+saved: 2026-11-19
+
+About hide.me VPN Company | Privacy-First VPN Since 2012 | hide.me
+Why hide.me? Benefits Why VPN? Privacy VPN Protocols
+Benefits
+Browse Securely
+Bypass Censorship
+Encrypted Connection
+Hide IP Address
+Why VPN?
+Gaming VPN
+VPN for travel
+VPN for journalists
+VPN for YouTube
+VPN for instant messengers
+VPN for Tinder
+VPN for Instagram
+Privacy
+No Logs
+IP Leak Protection
+IPv6 Support
+SmartGuard
+VPN Protocols
+Bolt - Fast Proxy
+Port Forwarding
+Multihop
+Split Tunneling
+StealthGuard
+WireGuard
+VPN Apps Desktop Mobile TV Browsers Routers Tools & tests
+Desktop
+Windows
+macOS
+Linux
+Mobile
+Android
+iPhone / iPad
+Volla OS
+Freifon
+Ubuntu Touch
+LineageOS
+GrapheneOS
+TV
+Apple TV
+Android TV
+Amazon Fire TV
+Browsers
+Chrome
+Firefox
+Edge
+Routers
+Overview
+GL.iNet
+Asus
+MikroTik
+FRITZ!Box
+Tools & tests
+Free Proxy
+Password Generator
+DNS Leak Test
+What is My IP?
+WebRTC Leak Test
+Servers
+Pricing
+Help
+Blog
+Language : English Deutsch
+English
+Español
+Français
+Italiano
+Nederlands
+Português
+日本語
+LoginGet Hide.me
+Knowledge Base
+Categories Fix a problem About hide.me
+Getting Started
+Troubleshooting
+Account & Billing
+Apps & Devices
+Features & Settings
+Servers & Locations
+Security & Privacy
+Setup Guides Windows
+Android
+iOS
+macOS
+Linux
+Routers
+Knowledge Base
+Fix a problem
+About hide.me
+About hide.me VPN - Company Overview & Background
+About hide.me VPN - Company Overview & Background
+Last modified: March 4, 2026
+Table of Contents
+About hide.me VPN Company
+Company Overview
+Independent Jurisdiction Outside Surveillance Alliances
+Strict No-Logs Policy
+Privacy-First Infrastructure
+Security Record – Never Breached
+Transparency & Accountability
+No Trackers or Hidden Data Collection
+Commitment to Open Source
+Accessibility & Internet Freedom
+A Reputation Built Since 2012
+Proud Member of The VPN Trust Initiative (VTI):
+About hide.me VPN Company
+hide.me VPN is a privacy-focused VPN service founded in 2012 with the goal of providing secure, unrestricted internet access for users worldwide.
+The service is operated by eVenture Ltd., a Malaysia-based company dedicated to online privacy, security, and digital freedom.
+Since its founding, hide.me VPN has grown into a globally trusted VPN provider with millions of users who rely on it to protect their online activities and bypass internet restrictions.
+Company Overview
+Service: hide.me VPN
+Parent Company: eVenture Ltd.
+Founded: 2012
+Headquarters: Malaysia
+Jurisdiction: Outside 5/9/14-Eyes surveillance alliances
+Operating from Malaysia allows hide.me VPN to maintain strong privacy protections and operate independently from international surveillance agreements.
+Independent Jurisdiction Outside Surveillance Alliances
+hide.me VPN operates under Malaysian jurisdiction, which is not part of the 5-Eyes, 9-Eyes, or 14-Eyes intelligence alliances.
+This means the company is not subject to international intelligence-sharing obligations that could compromise user privacy.
+Additionally, Malaysia does not impose mandatory data retention requirements on VPN providers. This allows hide.me VPN to operate with a strict no-logs policy and without legal pressure to store user activity.
+Strict No-Logs Policy
+Privacy is the foundation of the hide.me VPN company philosophy.
+hide.me follows a strict no-logs architecture, meaning the company does not record:
+Browsing activity
+Connection timestamps
+User IP addresses
+Traffic or bandwidth usage
+Because no identifiable activity logs are stored, user browsing behavior remains private and cannot be reconstructed later.
+Privacy-First Infrastructure
+hide.me prioritizes technical privacy protections alongside policy commitments.
+Key privacy measures include:
+RAM-only servers that do not store data on physical disks
+Infrastructure designed to avoid persistent logging
+Security-focused system architecture
+RAM-only technology ensures that all server data is automatically wiped whenever a server restarts, further strengthening user privacy.
+Since launching in 2012, hide.me VPN has never handed out user data, reinforcing its commitment to privacy-first operations.
+Security Record - Never Breached
+A strong security history is essential for any privacy service.
+Since its founding, hide.me VPN has:
+Never experienced a data breach
+Never exposed user data
+Maintained secure infrastructure across its global network
+Security remains the company’s top priority, with ongoing improvements to server infrastructure, encryption standards, and application security.
+Transparency & Accountability
+Transparency is a core principle of hide.me VPN operations.
+The company publishes yearly transparency reports that outline:
+Government requests for user data
+Legal inquiries
+Compliance actions
+Because hide.me operates a strict no-logs policy, these reports consistently demonstrate that the company has no identifiable user activity data to provide.
+hide.me also supports independent verification of its policies through no-logs audits (1st) (2nd), helping reinforce trust in its privacy commitments.
+No Trackers or Hidden Data Collection
+hide.me takes a strong stance against invasive tracking technologies.
+The company ensures that:
+VPN apps do not contain third-party trackers
+The hide.me website avoids intrusive tracking systems
+User privacy is respected across the entire platform
+This approach ensures that privacy protections extend beyond the VPN connection itself.
+Commitment to Open Source
+hide.me actively contributes to the open-source ecosystem.
+Key initiatives include:
+An open-source Linux VPN client
+Contributions to open-source software development
+No restrictions on how users run or configure VPN clients
+Supporting open source allows the community to review code, verify security practices, and contribute improvements to the software.
+Accessibility & Internet Freedom
+hide.me believes that internet privacy should be accessible to everyone.
+The company promotes digital freedom through:
+Basic VPN features available for free users
+Tools designed to bypass internet censorship and restrictions
+Simple apps that prioritize usability and performance
+hide.me also focuses on delivering high-speed connections so users can enjoy secure browsing without sacrificing performance.
+A Reputation Built Since 2012
+Over more than a decade of operation, hide.me VPN has built a reputation based on:
+Strong privacy protection
+Transparent company practices
+Secure infrastructure
+Reliable global service
+By combining privacy-first policies with modern VPN technology, hide.me continues to provide users with a secure and unrestricted internet experience.
+Proud Member of The VPN Trust Initiative (VTI):
+Hide.me is actively accredited under the VTI Trust Seal program, certifying that they meet and maintain the standards outlined in the VPN Trust Initiative Principles.
+We love bringing you this content and hope it helps keep you safe and secure online. Feel free to share it with your friends, too.
+Here at hide.me we are all about internet freedom, and we are happy to be in a position to bring that to everyone. That is why we give you a 30-day money-back guarantee on our Premium plan. No questions asked and no logs recorded.
+Get hide.me VPN
+If you have any questions, please feel to contact our 24/7 support team either at support@hide.me or via live chat.
+Share it on:
+Related Articles
+Why Trust hide.me VPN? Security, Transparency & Independence
+How to Fix “JSON Deserialization Returned Null” Error in hide.me Windows App
+How to Restore 2FA Credentials
+Need help?Chat with us now! The honest VPN. Independently audited, no logs, based outside the 14 Eyes since 2012.
+Products
+VPN for Windows
+VPN for macOS
+VPN for Android
+VPN for iPhone / iPad
+VPN for Linux
+VPN for Amazon Fire TV
+VPN for Chrome
+VPN for Firefox
+VPN for Edge
+Free VPN
+Free Proxy
+Learn more
+What is a VPN?
+Hide IP Address
+Our VPN Protocols
+Bolt - Fast Proxy
+Multihop
+Tools
+DNS Leak Test
+Password Generator
+WebRTC Leak Test
+What is My IP?
+VPN Setup Guide
+About
+Blog
+Community
+Our Mission
+Press
+Privacy Policy
+Terms of Service
+VPN Reviews
+Partners
+Affiliates
+Business
+Reseller
+© 2026 eVenture Ltd. All Rights Reserved.

@@ -1,0 +1,103 @@
+url: https://www.hotspotshield.com/privacy-policy/vpn/
+method: fetch
+saved: 2026-11-19
+
+VPN Products Privacy Notice
+What is a VPN Pricing Products Support Account Get Hotspot Shield Get Hotspot Shield
+What is a VPN
+Pricing
+Products
+Support
+Sign in
+English Deutsch Français Русский العربية فارسی Türkçe Việt ngữ 中文 日本語 한국어 Português Español
+VPN Products Privacy Notice
+Effective date: September 29, 2022
+1. Key Assurances
+2. What Information We Do and Don’t Collect Regarding VPN Usage
+3. Use of Advertising Services With Free VPN Products
+4. How We Use IP Addresses
+5. VPN Security
+This notice applies to the following VPN products: Hotspot Shield, Betternet, VPN360 and Ultra VPN. It should be read in conjunction with the Pango Privacy Policy and it describes data processing practices that may vary from our general Privacy Policy. Where there is an inconsistency between the general Privacy Policy and this notice, this notice prevails.
+For ease of reference, in this product privacy notice we use the term “VPN browsing activity” to refer to online activities you conduct via VPN connections initiated with our VPN products. This includes what you are browsing, viewing, or doing online or apps you access on your mobile device via the VPN connection.
+Key Assurances
+Pango does not record your VPN browsing activities in any way that can be associated back to you. When you use a VPN connection, we do not store any information that identifies what you browse, view, or do online via that VPN connection. While we log what domain names that users visit (but not full URLs), we do not log them in combination with anything that identifies an individual or device.
+Data over our VPN connections is encrypted and Pango does not inspect or record the contents of what you are browsing, viewing, or doing through them (unless, of course, you are using the VPN connection to communicate with Pango). For your protection, we may block access to certain resources that are known to be malicious.
+What information we do and don’t collect regarding VPN usage
+When you are engaged in a VPN session, we do not log or otherwise record IP addresses, device identifiers, or any other form of identifier in combination with your VPN browsing activity. Simply put, this means that our VPN products do not store any information about what any specific user browsed or accessed through a VPN connection. However, please review “How we use IP Addresses” below.
+When you initiate a VPN connection, we collect your device IP address, immediately encrypt it, and delete it at the end of your VPN session. The IP address is not associated with your VPN browsing activity. This means that we are not able to share your VPN browsing activity with anyone – whether it’s an ad network or government agency – because we simply don’t store that information. However, please see below about how we may use IP addresses to improve our products or for other internal business purposes.
+When you access a site through a VPN connection, your IP address appears to that site as the IP address of one of our VPN servers (what we call a “public” IP address). Because those public IP addresses are used by multiple users and we do not record the actual IP addresses of users who use those public IP addresses, we are not able to connect activity originating from a public IP address to activity conducted by any individual user.
+Our VPN products log:
+the duration of VPN sessions and the bandwidth consumed. We do this to monitor, support and optimize our VPN services, as well as enforce free app usage limits.
+the domains that have been accessed by our users, but on an anonymized basis such that we do not know which user accessed which domain, nor the full URL that would indicate which web pages were visited. We also aggregate this domain information on an approximately monthly basis. We do this to monitor, support and optimize our VPN services.
+device hashes, which are used to identify devices and associate them with other data we collect (such as for measuring bandwidth use, providing support, understanding how you interact with our VPN, and other analytics and marketing purposes). Device hashes are not linked to VPN browsing activity. We use device hashes because we do not require users to register an account to use some of our products and need a way to distinguish between different users and carry out the activities above.
+Use of Advertising Services With Free VPN Products
+For users of our free VPN products, namely Hotspot Shield, Betternet and VPN360, we may serve ads through the use of third party advertising services indicated below. As previously noted, neither Pango nor any third party advertising service has access to the VPN browsing information, such as the websites you visit or apps you use while in a VPN session. However, as with any online advertising service, the entities will have access to the information associated with the ad delivery such as which website or app the ad was delivered to, and the device-specific information listed below. Although the money we make from displaying these ads offsets only part of the costs of making these apps and services available for free, we provide free apps because we believe it’s important that everyone has the opportunity, regardless of their situation, to have secure and private access to the internet.In order to display ads in our apps, we may utilize third party software development kits (SDKs), which consists of software code provided by a third party and embedded into our apps. These SDKs may collect the following information from your device or use;
+Device or mobile advertising identifiers (controlled by your mobile operating system)
+Internet Protocol (IP) Address, which may reveal your approximate geographic location as determined by your carrier or ISP. However, when using the VPN service, this may replace your actual location with an alternative geographic location.
+Device-specific information such as make, model, OS version, language, time zone and other information.
+The name of the app or website serving the ad.
+As some of the ads may be personalized based on your mobile advertising identifier or IP address, you may see an AdChoices icon on an ad. You can click this icon to learn more about the ad network that provided the ad, its privacy policy, and your choices regarding opting out from any personalized advertising. If you opt out from personalized advertising, you may still see non-personalized ads. While we request you not to use ad blockers to prevent the display of ads because that is how we support our free services, our services are able to continue functioning if you do use ad blockers.
+We use the following advertising services to provide ads with our free VPN products:
+Company Privacy Policy or Opt-Out
+Unity Ads https://unity.com/legal/privacy-policy
+Ironsource https://developers.is.com/ironsource-mobile/air/ironsource-mobile-privacy-policy/
+Digital Turbine (f/k/a Adcolony) https://www.adcolony.com/privacy-policy/
+InMobi https://www.inmobi.com/page/opt-out/
+In addition, you may opt-out of interest-based mobile advertising by utilizing the Digital Advertising Alliance (DAA) AppChoices app.
+How we use IP Addresses
+As written above, we do not log or otherwise record IP addresses in connection with your VPN browsing activity. In the interest of transparency, we do collect and use IP addresses in these other contexts:
+protecting against fraud in connection with financial transactions with us
+deriving non-identifiable items of information, such as your approximate geographic location and information about your internet service provider or carrier (we use this information to provide a better user experience, such as by connecting you with VPN servers nearer to you and by analyzing the connection quality with different internet service providers)
+enabling us to attribute our advertisements and service features to actions taken in response to such advertisements and service features
+VPN Security
+Our VPN servers are hosted with infrastructure providers that do not require us to collect any information about what our users are doing via a VPN connection. If any such provider were to require us to collect such information, we would stop doing business with them and find an alternative provider.
+Even if a government agency physically seizes one of our VPN servers and succeeds in breaking disk encryption on those servers, they would not find any logs or information that would reveal what any individual user was browsing, viewing, or doing online via a VPN connection.
+Download Hotspot Shield VPN. It’s Free!
+Join over 650 million users already enjoying absolute Internet Freedom around the world by downloading Hotspot Shield VPN.
+Get Hotspot Shield
+Products
+Free VPN Download
+VPN for Windows PC
+VPN for Mac
+VPN for iOS
+VPN for Android
+VPN for Chrome
+VPN for TV
+VPN Info
+VPN Blog
+What is a VPN
+Netflix VPN
+TikTok VPN
+WeChat VPN
+VPN for Privacy
+VPN for Streaming
+VPN for Gaming
+VPN Resources
+VPN Benefits
+Other Resources
+What is my IP
+How IP works
+How Hackers Use IP
+Change My IP
+Hide My IP
+Glossary
+Free Proxy
+About Hotspot Shield
+VPN Plans & Pricing
+Fastest VPN
+Virtual Locations
+Awards & Reviews
+Security Audit
+Site Map
+Help
+Support Center
+Contact Us
+Affiliates
+Business VPN
+Legal
+Terms and Policies
+Privacy Policy
+Your Privacy Choices
+To ensure uninterrupted access after your subscription ends, you agree that your subscription will renew for another term using the payment method provided. You may turn off auto-renewal at any time by logging into your account.
+Do not sell my personal information English ▾ Deutsch Français Русский العربية فارسی Türkçe Việt ngữ 中文 日本語 한국어 Português Español
+© 2026 Anchorfree, LLC

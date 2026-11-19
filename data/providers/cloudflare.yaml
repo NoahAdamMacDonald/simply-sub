@@ -1,0 +1,649 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), with a plain fetch from Canada unless named:
+# the 1.1.1.1 app's site (one.one.one.one and its FAQ), Cloudflare's WARP client docs (overview, WARP modes, setup,
+# privacy, FAQ, legal) and 1.1.1.1 resolver docs (FAQ, encryption, setup and 1.1.1.1 for Families, privacy commitments,
+# terms of use), the WARP blog posts of 2019 (1111-warp-better-vpn, announcing-warp-plus), its Application Terms of
+# Service and Application Privacy Policy, its Privacy Policy, Website and Online Services Terms of Use, disclosure page,
+# abuse page, investor relations home (cloudflare.net), and, with Edge, its compliance resources and transparency report
+# pages; and Apple's App Store page for the 1.1.1.1 app in each research country's storefront.
+# One provider for Cloudflare's consumer services: 1.1.1.1 with WARP (free), WARP+ Unlimited (paid) and the 1.1.1.1
+# public DNS resolver with 1.1.1.1 for Families (free). Its hosting plans (Free, Workers Paid) are the developer and
+# hosting category's, for a later batch. Not drafted: Cloudflare One / Zero Trust ("The enterprise version of WARP
+# allows organizations to apply security policies to corporate devices.", WARP docs), which is for organizations
+# (business: out of scope).
+# What WARP is, in its own words: "WARP does not provide anonymity, and it is not designed to prevent servers you
+# communicate with from identifying you. WARP also does not allow you to pretend to be accessing the Internet from a
+# different country." (WARP modes), and "Although the Application will need to install a VPN profile on your device and
+# operates similarly to a VPN product or service, the Application is not designed to hide your identity from the
+# Internet properties you access from your device." (Application Terms of Service). It does replace your IP address:
+# "No. 1.1.1.1 + WARP replaces your original IP address with a Cloudflare IP that consistently and accurately represents
+# your approximate location." (FAQ, "Does WARP reveal my IP address to websites I visit?").
+# WARP+ prices: no Cloudflare page prices it ("Select Settings > Upgrade to WARP+ . A dialog will appear with the
+# subscription price.", WARP modes; "The fee for WARP+ varies by region", announcing-warp-plus), and it's sold only in
+# the app stores ("WARP+ Unlimited is a paid, monthly subscription that can be purchased via the Apple App Store or
+# Google Play Store."). So its prices are Apple's App Store pages for the 1.1.1.1 app, one per storefront
+# (apps.apple.com/<country>/app/1-1-1-1-faster-internet/id1423538627, its In-App Purchases list: "WARP+ UNLIMITED"),
+# whose own data names the storefront's currency ("priceCurrency": CAD, USD, GBP, EUR, AUD, NZD): Canada $6.99, the US
+# $4.99, the UK £3.99, Ireland €3.99, Australia $4.99, New Zealand $6.99, Germany, France, Spain and Italy 3,99 € and
+# the Netherlands € 3,99 (Infuse's precedent for App Store prices). Monthly, from its docs. Google Play's listing shows
+# no price. Apple's pages say nothing of tax, so no price is tax-included.
+# Region checklist for CA and US, 2026-11-19: 1. one.one.one.one has language versions, no country pages; 2. no country
+# or currency picker; 3. no Cloudflare page holds a WARP+ price; the App Store pages' data names each storefront's
+# currency; 4. the checkout is in the app, through the app store: not opened; 5. its docs name no prices; 6. a plain
+# fetch of each App Store storefront (the storefront, not the reader's address, sets the price); 7. no bill offered.
+# Free use: WARP and the 1.1.1.1 resolver are free plans. Bundles: none. Official resellers: none; Apple and Google bill
+# WARP+ (a way to pay). Partners: APNIC (1.1.1.1's research partner) and the ISPs that offer 1.1.1.1 aren't sellers.
+
+id: cloudflare
+name: Cloudflare
+aliases: [1.1.1.1, cloudflare warp, warp, warp+, 1.1.1.1 with warp, 1.1.1.1 for families]
+website: https://www.cloudflare.com
+# The 1.1.1.1 app's site and its investor relations site.
+domains: [one.one.one.one, cloudflare.net]
+category: vpn
+spendCategory: software
+# Each App Store storefront's currency, from its page's data; the free plans' price is in US dollars.
+billingCurrency:
+  {
+    GLOBAL: USD,
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: NZD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+# WARP+ is cancelled in the app store it was bought in: its Application Terms of Service, 8.3 Cancellation, give the
+# steps for Apple and Google.
+cancelUrl: https://www.cloudflare.com/application/terms/
+sources: { pricing: https://developers.cloudflare.com/warp-client/warp-modes/ }
+
+# Ways to pay (M11.5), read 2026-11-19: only the app stores ("All payments are handled by the Apple/Google app store",
+# WARP modes; its terms: "Certain features require a subscription via Apple App Store or Google Play Store").
+paymentMethods:
+  - methods: [app-store]
+    page: 'WARP modes'
+    url: https://developers.cloudflare.com/warp-client/warp-modes/
+    quotes:
+      - 'WARP+ Unlimited is a paid, monthly subscription that can be purchased via the Apple App Store or Google Play Store.'
+
+# Renewal day (M11.5), read 2026-11-19 in its Application Terms of Service (8.1 Recurring Billing, 7 Subscription
+# Terms).
+renewalAnchor:
+  kind: same-date
+  page: 'Application Terms of Service'
+  url: https://www.cloudflare.com/application/terms/
+  quotes:
+    - 'Your Payment Method for the Paid Application Services will be billed on the day that you sign up for such Paid Application Services, regardless of whether you have fully configured the Paid Application Services as of that date.'
+    - 'All of your subscriptions to Paid Application Services will automatically renew for periods equal to your initial Subscription Term'
+  lastVerified: 2026-11-19
+
+# Owner (M11.2), read 2026-11-19: a public company, its own owner, from its investor relations site's corporate
+# overview, which names its listing. No majority holder: no page read names one (its proxy statement wasn't read,
+# notes.md). Country: its Application Privacy Policy.
+owner:
+  name: Cloudflare, Inc.
+  page:
+    name: Investor Relations (corporate overview)
+    url: https://cloudflare.net/
+  quotes:
+    - 'Cloudflare, Inc. (NYSE: NET) is on a mission to help build a better Internet.'
+  country:
+    code: US
+    page:
+      name: Application Privacy Policy
+      url: https://www.cloudflare.com/application/privacypolicy/
+    quotes:
+      - 'Cloudflare is a U.S. based, global company.'
+    lastVerified: 2026-11-19
+  stock:
+    listings:
+      - { exchange: NYSE, symbol: NET }
+  lastVerified: 2026-11-19
+notes: >-
+  WARP encrypts your device's traffic to Cloudflare's network and swaps your IP address for a Cloudflare one in your own
+  country. It isn't built for anonymity or for appearing in another country. 1.1.1.1 is its free public DNS resolver.
+  No account is needed; WARP+ is bought in the app, through Apple's or Google's store.
+
+# General features, read 2026-11-19:
+# - Platforms: WARP's setup page lists Android, iOS, Linux, macOS and Windows; the resolver works on any device set to
+#   use it.
+# - Sign-in: none; the app makes a random ID ("Cloudflare uses a random identifier generated when you install the app",
+#   WARP privacy), so account.sign-in is left out (Mullvad's precedent).
+# - App languages: one.one.one.one's language menu ("English", "Deutsch", "Español", "Français", "Italiano",
+#   "Português", "العربية", "日本語", "한국어", "简体中文", "繁體中文" among nineteen; no Hindi).
+# - Support: in-app feedback and bug reports ("go to the app menu and tap on ‘Help’ to send your feedback",
+#   one.one.one.one FAQ; its privacy policy: "We require your email address when you provide feedback and bug reports.")
+#   and its community ("refer to the community page", WARP FAQ).
+# - Closed source: its app is "licensed, not sold" and may not be decompiled (Application Terms of Service).
+# - No pause: WARP+ is cancelled in the app store. No parental controls: 1.1.1.1 for Families is a DNS setting you
+#   choose for your own device or network, with no lock.
+features:
+  platforms: [windows, macos, linux, ios, android]
+  languages.interface: [en, de, es, fr, it, pt, ar, ja, ko, zh]
+  support.channels: [email, community]
+  software.open-source: proprietary
+
+# Perks (M11.6): WARP+'s line no feature describes.
+perks:
+  - id: larger-network
+    name: Access to a larger network of Cloudflare data centers
+
+# Categories (M11.3): WARP and WARP+ are VPNs (vpn); the 1.1.1.1 resolver is a DNS service (dns), a plan of its own.
+# VPN features, read 2026-11-19:
+# - Unlimited traffic: free WARP "is free without bandwidth caps or limitations", and "The unlimited version of WARP+ is
+#   available for a monthly subscription fee." (announcing-warp-plus, 2019), so both are unlimited.
+# - Server countries: 1, inferred (below). WARP has no server picker: "we see your IP address and use it to assign you a
+#   Cloudflare IP address corresponding to the country in which you are connecting from" (Application Privacy Policy),
+#   and "WARP also does not allow you to pretend to be accessing the Internet from a different country." (WARP modes).
+#   Cloudflare's network spans many countries, but you appear only in your own (notes.md).
+# - Devices: WARP+ "You can use your license key on up to five devices." (WARP modes). Free WARP's isn't stated.
+# - Protocols: MASQUE ("The WARP application uses MASQUE ↗︎ to encrypt and send traffic", WARP modes), which the
+#   registry has no value for; its 2019 posts' WireGuard is no longer what its docs name. Left out (notes.md).
+# - Content blocking: the app's 1.1.1.1 for Families DNS setting ("when you enable 1.1.1.1 for Families option from the
+#   DNS settings inside the app", its App Store description), which blocks "malware, phishing, or (optionally) adult
+#   content" (1.1.1.1 setup).
+# - No-logs policy: false. It promises "We do not retain a link between the IP address you use to access the Internet
+#   via our Application and the websites you visit.", but keeps pseudonymized "Request data (Source IP, Source Port,
+#   Destination IP)" among its Operational Data "for no longer than two years after your last use" and tracks "the
+#   aggregate amount of traffic by website and by region" (WARP privacy): limited logging, not a no-logs policy.
+# - Audits: none of WARP on any page read; the Big Four firm's examination covers the 1.1.1.1 resolver (below).
+# - Anonymous signup: "We do not collect your name, phone number, or credit card information" (Application Privacy
+#   Policy); the app needs no account or email.
+# - The VPN batch's new features: no page says its servers run from memory only (vpn.ram-only-servers false); the
+#   consumer app doesn't connect your own devices to each other (vpn.mesh false; that's Cloudflare One's, for
+#   organizations).
+# - No page read offers a kill switch, split tunnelling (its desktop "Local proxy" mode sends only the apps you
+#   configure through WARP, which isn't excluding apps from the tunnel), multi-hop, port forwarding, Tor or a P2P
+#   policy.
+# Speeds: none stated as a figure ("WARP, however, is built to trade some throughput for enhanced privacy", FAQ).
+# DNS features (the 1.1.1.1 resolver), read 2026-11-19: DoT, DoH and Oblivious DoH ("1.1.1.1 supports three encryption
+# standards", encryption page; no DNS over QUIC); 1.1.1.1 for Families blocks malware (1.1.1.2) or malware and adult
+# content (1.1.1.3); no query limit on any page (unlimited, the registry's rule); "1.1.1.1 is a DNSSEC-validating
+# resolver." (FAQ); no query log for users (its own logs are deleted within 25 hours).
+plans:
+  - id: cloudflare.warp
+    name: 1.1.1.1 with WARP
+    link: https://one.one.one.one/
+    features:
+      vpn.included: true
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 1
+      vpn.content-blocking: [malware, adult-content]
+      vpn.no-logs-policy: false
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      vpn.server-countries:
+        reason: 'There’s no server picker: Cloudflare gives you an IP address “corresponding to the country in which you are connecting from”, and WARP “does not allow you to pretend to be accessing the Internet from a different country”.'
+        page:
+          name: Application Privacy Policy
+          url: https://www.cloudflare.com/application/privacypolicy/
+        lastVerified: 2026-11-19
+    notes: 'Free, with no account. Encrypts your traffic to Cloudflare’s nearest data center and gives you a Cloudflare IP address in your own country; it doesn’t hide who you are or let you appear in another country.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://one.one.one.one/
+  - id: cloudflare.warp-plus
+    name: WARP+ Unlimited
+    link: https://developers.cloudflare.com/warp-client/warp-modes/
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 1
+      vpn.content-blocking: [malware, adult-content]
+      vpn.no-logs-policy: false
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      vpn.server-countries:
+        reason: 'There’s no server picker: Cloudflare gives you an IP address “corresponding to the country in which you are connecting from”, and WARP “does not allow you to pretend to be accessing the Internet from a different country”.'
+        page:
+          name: Application Privacy Policy
+          url: https://www.cloudflare.com/application/privacypolicy/
+        lastVerified: 2026-11-19
+    perks: [larger-network]
+    notes: 'WARP on a larger network of Cloudflare data centers, on up to 5 devices with one licence key. Sold only in the 1.1.1.1 app, through Apple’s and Google’s stores.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/ca/app/1-1-1-1-faster-internet/id1423538627
+      - region: US
+        currency: USD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/us/app/1-1-1-1-faster-internet/id1423538627
+      - region: GB
+        currency: GBP
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/gb/app/1-1-1-1-faster-internet/id1423538627
+      - region: IE
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/ie/app/1-1-1-1-faster-internet/id1423538627
+      - region: AU
+        currency: AUD
+        amount: 4.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/au/app/1-1-1-1-faster-internet/id1423538627
+      - region: NZ
+        currency: NZD
+        amount: 6.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/nz/app/1-1-1-1-faster-internet/id1423538627
+      - region: DE
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/de/app/1-1-1-1-faster-internet/id1423538627
+      - region: FR
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/fr/app/1-1-1-1-faster-internet/id1423538627
+      - region: NL
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/nl/app/1-1-1-1-faster-internet/id1423538627
+      - region: ES
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/es/app/1-1-1-1-faster-internet/id1423538627
+      - region: IT
+        currency: EUR
+        amount: 3.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://apps.apple.com/it/app/1-1-1-1-faster-internet/id1423538627
+  - id: cloudflare.dns
+    name: 1.1.1.1 public DNS resolver
+    link: https://developers.cloudflare.com/1.1.1.1/setup/
+    categories: [dns]
+    features:
+      dns.protocols: [doh, dot]
+      dns.filtering: [malware, adult]
+      dns.queries: unlimited
+      dns.query-log: false
+      dns.dnssec: true
+      account.pause: false
+      account.parental-controls: false
+    notes: '1.1.1.1 and 1.0.0.1; 1.1.1.2 blocks malware, and 1.1.1.3 malware and adult content (1.1.1.1 for Families). Encrypted with DNS over HTTPS or over TLS. Free, with no account.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://developers.cloudflare.com/1.1.1.1/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19. Every agreement a user accepts (the owner's rule, 2026-11-03):
+# the app's Application Terms of Service ("By downloading, installing, accessing, or using the Application you agree to
+# be bound by this Agreement"), which are its licence too (2. Scope of License) and include the Application Privacy
+# Policy and the app stores' own terms (not rated: Apple's and Google's); the 1.1.1.1 resolver's ("By using 1.1.1.1
+# Public DNS Resolver or 1.1.1.1 for Families, you agree to the Cloudflare Website and Online Services Terms of Use"),
+# which include its Privacy Policy, and the resolver's privacy commitments. Also read: the WARP privacy and FAQ docs,
+# its compliance resources (ISO 27001, SOC 2 Type II, and the 1.1.1.1 resolver's privacy examination by "a Big Four
+# accounting firm"), its disclosure page (HackerOne), its transparency report and its abuse approach page. The
+# examination's report itself wasn't opened. No shared document applies. Billing topics: one paid plan, so switching
+# plans doesn't apply. Not applicable (vpn and dns aren't in their categories): who can read your content, rights over
+# your content, children, account sharing.
+policies:
+  links:
+    - name: 'Application Terms of Service'
+      url: https://www.cloudflare.com/application/terms/
+    - name: 'Application Privacy Policy'
+      url: https://www.cloudflare.com/application/privacypolicy/
+    - name: 'Privacy Policy'
+      url: https://www.cloudflare.com/privacypolicy/
+    - name: 'Website and Online Services Terms of Use'
+      url: https://www.cloudflare.com/website-terms/
+    - name: '1.1.1.1 Public DNS Resolver privacy commitments'
+      url: https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/
+    - name: 'WARP privacy'
+      url: https://developers.cloudflare.com/warp-client/privacy/
+    - name: 'WARP modes'
+      url: https://developers.cloudflare.com/warp-client/warp-modes/
+    - name: 'Certifications and compliance resources'
+      url: https://www.cloudflare.com/trust-hub/compliance-resources/
+    - name: 'Report security issues'
+      url: https://www.cloudflare.com/disclosure/
+    - name: 'Transparency report'
+      url: https://www.cloudflare.com/transparency/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'The app collects how much data you use, your connection speed and your device details to improve itself. You can turn off only its network reports, in the app.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We track the services you have enabled and the amount of data you have transferred via the Application. We also use performance data to understand how the Application impacts your Internet connection and to improve our Application.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We use information regarding your device, such as device model and operating system, for troubleshooting and to improve our Application.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'You may disable the reporting of anonymized network information in the Application.'
+      action:
+        name: 'Turning off network reports (its app privacy policy)'
+        url: https://www.cloudflare.com/application/privacypolicy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'The app and 1.1.1.1 don’t sell or share your data. But Cloudflare’s websites pass your browsing to ad partners, which US law may count as selling. You opt out through a link in each browser, or by email.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We will not sell or rent your personal information to anyone.'
+        - url: https://www.cloudflare.com/privacypolicy/
+          quote: 'Like many companies, however, we use services that help deliver interest-based ads to you and may transfer Personal Information to business partners for their use.'
+        - url: https://www.cloudflare.com/privacypolicy/
+          quote: 'In addition, we may also provide these marketing and advertising partners with your email address or other limited account information. You may opt out of such sharing by emailing us at sar@cloudflare.com.'
+      action:
+        name: 'Your privacy choices (its privacy policy)'
+        url: https://www.cloudflare.com/privacypolicy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'WARP and 1.1.1.1 show no ads and never target ads from what you look up. But Cloudflare’s websites use cookies to show you its ads on other sites; you can turn them off only in each browser’s cookie choices.'
+      sources:
+        - url: https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/
+          quote: "Cloudflare will not sell or share Public Resolver users' personal data with third parties or use personal data from the Public Resolver to target any user with advertisements."
+        - url: https://www.cloudflare.com/privacypolicy/
+          quote: 'We may also use cookies and similar technologies to provide you advertising on third-party sites based upon your browsing activities and interests.'
+      action:
+        name: 'Cookie choices (its privacy policy)'
+        url: https://www.cloudflare.com/privacypolicy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policies don’t mention training AI on what you do.'
+      pages:
+        [
+          https://www.cloudflare.com/application/privacypolicy/,
+          https://www.cloudflare.com/privacypolicy/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps app data as long as it needs to, up to two years after you last use it. Most DNS data goes after 24 hours, and feedback emails after 6 months.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'Your Account Data and Operational Data will be stored for no longer than two years after your last use of the Application.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'The DNS query data that we retain does not contain your IP addresses or personal information, and the bulk of the data is only stored for 24 hours.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'Your email address will be deleted 6 months from the date of collection.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'It holds almost nothing that names you. You can email it to delete what it has, and it answers within 30 days.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'You will have the right to access, correct, update, export, or delete your limited personal information that we retain. You may email us at SAR@cloudflare.com with any such subject access requests (“ SAR ”), and we will respond within thirty (30) days.'
+      action:
+        name: 'How to ask for deletion (its app privacy policy)'
+        url: https://www.cloudflare.com/application/privacypolicy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can email it to ask for a copy of what it keeps, and it answers within 30 days, though it keeps little that names you.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'You will have the right to access, correct, update, export, or delete your limited personal information that we retain. You may email us at SAR@cloudflare.com with any such subject access requests (“ SAR ”), and we will respond within thirty (30) days.'
+      action:
+        name: 'How to ask for your data (its app privacy policy)'
+        url: https://www.cloudflare.com/application/privacypolicy/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It hands over data only for subpoenas, court orders or other legal process, or an emergency, and reports requests twice a year. It keeps no link between your IP address and the sites you visit. It doesn’t say it tells you.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'When we are required to disclose personal information to respond to subpoenas, court orders, or legal process; or in the case of an emergency to protect any person from the danger of death or serious physical injury'
+        - url: https://www.cloudflare.com/transparency/
+          quote: 'Cloudflare publishes semi-annual updates to our Transparency Report on requests to disclose customer information or to take action against content on websites using our services.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We do not retain a link between the IP address you use to access the Internet via our Application and the websites you visit.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept mostly in the US and the European Economic Area, and may be reached from other countries, under the EU–US Data Privacy Framework and standard contract rules.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We primarily store your information in the United States and the European Economic Area.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'Should these certifications lapse or become otherwise invalidated, Cloudflare relies on the standard contractual clauses, including supplementary measures as necessary for transfers to the United States.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no account to make: the app uses a random number, and Cloudflare never gets your name, phone number or card details. Only sending feedback asks for your email.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We do not collect your name, phone number, or credit card information (or records of any payments collected by the applicable App Store).'
+        - url: https://developers.cloudflare.com/warp-client/privacy/
+          quote: 'Cloudflare uses a random identifier generated when you install the app to give you referral bonuses for referring the app to others.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel WARP+ in your Apple or Google account at any time, and keep it until the end of the month you paid for.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'If you do not want your subscription to renew automatically, or if you want to change or terminate your subscription, you must log in to your App Store account and follow the instructions to manage or cancel your subscription'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'If you cancel a subscription, you may continue to use the canceled service until the end of your then-current subscription term.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Cloudflare gives no money back for the rest of a month you cancel in, but you keep WARP+ until it ends. Any refund is up to Apple or Google.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'SUBSCRIPTION FEES ARE SUBJECT TO THE APP STORE REFUND POLICIES AND ARE ISSUED SOLELY AT THE DISCRETION OF THE APP STORE. YOU WILL BE BILLED IN FULL FOR THE SUBSCRIPTION TERM IN WHICH YOU CANCEL AND NO REFUNDS WILL BE PROVIDED FOR THE UNUSED PORTION OF SUCH SUBSCRIPTION TERM.'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'If you cancel a subscription, you may continue to use the canceled service until the end of your then-current subscription term.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you at least 30 days before a price rise, and the new price starts only with the next billing period after that, so you can cancel first.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'We reserve the right to change the subscription fees that we charge for the Paid Application Services, at any time in our sole discretion, provided that we give you at least thirty (30) days’ prior notice of such changes. Unless otherwise specified in such notice to you, any changes to the subscription fees will take effect in the billing period immediately following our notice to you.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'WARP+ has no free trial on its pages; free WARP is free for good.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say WARP+ renews on its own unless you cancel in the app store, but not that it reminds you first.'
+      pages: [https://www.cloudflare.com/application/terms/]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms say nothing about fees beyond the price.'
+      pages: [https://www.cloudflare.com/application/terms/]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: bad
+      reason: 'For the app, a private referee (an arbitrator) settles disputes, not a court, and you can’t join a group lawsuit. Its terms give no way to opt out.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'THE AGREEMENT CONTAINS PROVISIONS REQUIRING THAT YOU AGREE TO THE USE OF ARBITRATION TO RESOLVE ANY DISPUTES ARISING UNDER THE AGREEMENT RATHER THAN A JURY TRIAL OR ANY OTHER COURT PROCEEDINGS, AND TO WAIVE YOUR PARTICIPATION IN CLASS ACTION OF ANY KIND AGAINST CLOUDFLARE.'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'YOU AND CLOUDFLARE AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      plans: [cloudflare.dns]
+      tier: good
+      reason: 'For the 1.1.1.1 resolver, its website terms have no private referee: disputes go to the courts in San Francisco, which it chose.'
+      sources:
+        - url: https://www.cloudflare.com/website-terms/
+          quote: 'To the extent that any lawsuit or court proceeding is permitted hereunder, you and Cloudflare agree to submit to the personal and exclusive jurisdiction of the state and federal courts located within San Francisco County, California for the purpose of litigating all such disputes.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'For the 1.1.1.1 resolver, it can change its terms by posting them on its website, and they apply the same day.'
+      sources:
+        - url: https://www.cloudflare.com/website-terms/
+          quote: 'Unless otherwise specified, any modifications to the Terms will take effect the day they are posted to this Website.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      plans: [cloudflare.warp, cloudflare.warp-plus]
+      tier: neutral
+      reason: 'For the app, it tries to tell you about changes that matter to your rights, with no set notice time, and they start at your next renewal; if you don’t agree, you stop renewing.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'If a revision materially alters your rights we will use reasonable efforts to make such information available to you.'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'Unless otherwise specified, any modifications to this Agreement will take effect at the start of Subscription Term following the notice. If you do not agree with the revised terms, your sole and exclusive remedy will be not to renew your Subscription.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can end your use of the app at any time, at its own choice and without warning, and its terms give no refund.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'Except as otherwise required by applicable law or regulation, Cloudflare, at any time in its sole discretion and without prior notice, may (i) terminate your use and license of the Application'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'NO REFUNDS WILL BE PROVIDED FOR THE UNUSED PORTION OF SUCH SUBSCRIPTION TERM'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can cut back, suspend or stop the app’s services whenever it likes, and its terms give no refund for what you paid.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: '(ii) expand, reduce, or suspend your use of the Application, (iii) update, revise, or modify the Application, or (iv) discontinue support for the Application.'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'Cloudflare may impose usage or service limits, suspend service, or block certain kinds of usage at our sole discretion.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes or deletes unused installs; its privacy policy keeps app data up to two years after you last use it.'
+      pages:
+        [
+          https://www.cloudflare.com/application/terms/,
+          https://www.cloudflare.com/application/privacypolicy/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use its app on your own devices under a licence it can take back, and you may not take its code apart.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'You are granted a non-exclusive, personal, revocable, non-transferable license to use the Application on the device for which it is provided and that you own or control'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'not to modify, decompile, reverse engineer, or create derivative works of the Application'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'It holds ISO 27001 and SOC 2 certificates, a big accounting firm checked that 1.1.1.1 keeps its privacy promises and the report is public, and it pays people who find security bugs.'
+      sources:
+        - url: https://www.cloudflare.com/trust-hub/compliance-resources/
+          quote: 'Cloudflare conducted a first-of-its-kind privacy examination by a Big Four accounting firm to determine whether the 1.1.1.1 resolver was effectively configured to meet Cloudflare’s privacy commitments.'
+        - url: https://www.cloudflare.com/trust-hub/compliance-resources/
+          quote: 'Certification to attest to Security, Confidentiality, and Availability controls in place in accordance to the AICPA Trust Service Criteria.'
+        - url: https://www.cloudflare.com/disclosure/
+          quote: 'If you have discovered a vulnerability in Cloudflare or another serious security or privacy issue, please submit it to our bounty program hosted by HackerOne.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'WARP doesn’t keep a link between your IP address and the sites you visit, but it keeps connection data, including your IP address under a pseudonym, for up to two years after you last use it.'
+      sources:
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'We do not retain a link between the IP address you use to access the Internet via our Application and the websites you visit.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'Your Account Data and Operational Data are pseudonymized.'
+        - url: https://www.cloudflare.com/application/privacypolicy/
+          quote: 'Your Account Data and Operational Data will be stored for no longer than two years after your last use of the Application.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      plans: [cloudflare.dns]
+      tier: neutral
+      reason: 'The 1.1.1.1 resolver never stores your full IP address and deletes its query logs within 25 hours. Experts from a big accounting firm checked that it keeps these promises.'
+      sources:
+        - url: https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/
+          quote: 'Cloudflare will anonymize source IP addresses via IP truncation methods (last octet for IPv4 and last 80 bits for IPv6). Cloudflare will delete the truncated IP address within 25 hours.'
+        - url: https://developers.cloudflare.com/1.1.1.1/privacy/public-dns-resolver/
+          quote: 'Cloudflare will retain only the limited transaction and debug log data ("Public Resolver Logs") set forth below, for the legitimate operation of our Public Resolver and research purposes, and Cloudflare will delete the Public Resolver Logs within 25 hours.'
+        - url: https://www.cloudflare.com/trust-hub/compliance-resources/
+          quote: 'Cloudflare conducted a first-of-its-kind privacy examination by a Big Four accounting firm to determine whether the 1.1.1.1 resolver was effectively configured to meet Cloudflare’s privacy commitments.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and docs name no limit beyond WARP+’s 5 devices, which its plan shows.'
+      pages:
+        [
+          https://www.cloudflare.com/application/terms/,
+          https://developers.cloudflare.com/warp-client/warp-modes/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'It may make you update the app at any time; its terms say nothing of changing anything else on your device.'
+      sources:
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'Cloudflare may require you to update your version of the Application at any time.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Not built to hide who you are
+      tier: poor
+      reason: 'WARP encrypts your connection and swaps your IP address, but Cloudflare says it isn’t for staying anonymous and can’t make you appear in another country.'
+      sources:
+        - url: https://developers.cloudflare.com/warp-client/warp-modes/
+          quote: 'WARP does not provide anonymity, and it is not designed to prevent servers you communicate with from identifying you. WARP also does not allow you to pretend to be accessing the Internet from a different country.'
+        - url: https://www.cloudflare.com/application/terms/
+          quote: 'Although the Application will need to install a VPN profile on your device and operates similarly to a VPN product or service, the Application is not designed to hide your identity from the Internet properties you access from your device.'
+      lastVerified: 2026-11-19
