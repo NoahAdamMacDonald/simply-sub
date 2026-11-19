@@ -113,6 +113,11 @@ freeUse:
 # security audits. Not an audit, but the same fact: in April 2023 Swedish police with a search warrant left without
 # customer data, since "such customer data did not exist"
 # (/en/blog/mullvad-vpn-was-subject-to-a-search-warrant-customer-data-not-compromised).
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: unlimited data (the data transfer limits went in 2010, "get rid of
+# the data transfer limits altogether", /en/blog/unlimited-traffic-volume); RAM-only servers ("All of our VPN servers
+# run from RAM, with no persistent storage.", /en/help/server-list); and no page read (/en/vpn, /en/pricing, the server
+# list) offers connecting your own devices to each other, so vpn.mesh is false.
 plans:
   - id: mullvad.vpn
     name: Mullvad VPN
@@ -121,6 +126,7 @@ plans:
       vpn.included: true
       vpn.devices: 5
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 50
       vpn.protocols: [wireguard, stealth]
       vpn.kill-switch: true
@@ -131,6 +137,8 @@ plans:
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, servers, apps]
       vpn.anonymous-signup: true
+      vpn.ram-only-servers: true
+      vpn.mesh: false
     inferred:
       vpn.p2p:
         reason: 'No page states a P2P policy. Its terms block only ports 25, 137, 138, 139 and 445, so P2P is taken as allowed.'

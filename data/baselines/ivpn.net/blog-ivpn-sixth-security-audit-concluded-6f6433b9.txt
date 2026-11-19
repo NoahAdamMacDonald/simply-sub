@@ -1,0 +1,106 @@
+url: https://www.ivpn.net/blog/ivpn-sixth-security-audit-concluded/
+method: fetch
+saved: 2026-11-19
+
+IVPN web infrastructure security audit concluded
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+IVPN Blog>IVPN News>IVPN web infrastructure security audit concluded
+IVPN web infrastructure security audit concluded
+IVPN News
+By Nick Pestell |
+Posted on April 11, 2024
+We’re pleased to announce that a sixth annual independent security audit has concluded. The assessment focused on Web UI, backend components, API endpoints, underlying web servers, and web infrastructure.
+We’d like to share two key excerpts from the report:
+“The IVPN Customer website and underlying servers presented a substantially secure posture during the assessment. This is reflected in the limited findings identified within this report, consisting solely of two Low-severity vulnerabilities and two general weaknesses. The successful mitigation of a wide range of common web application risks is a testament to the effectiveness of the security measures implemented by the project overseers.”
+“To finalize, Cure53 is undeniably impressed with the overall security posture of the IVPN Customer website and its underlying infrastructure. The codebase exhibits assured standards of quality, while the implemented architecture and frameworks demonstrate a strong foundation in secure design principles.”
+Audit results
+The Cure53 team conducted the audit over 8 days in March 2024. The audit was divided into three work packages:
+White-box pentests & code audits against IVPN Customer website UI
+White-box pentests & code audits against IVPN Customer website API
+Gray-box pentests & scans against related IVPN web-servers & infrastructure
+A white-box approach was used whereby the auditors had access to our public and private Github code repositories and a dedicated test environment. No access to production servers or infrastructure was granted to members of the Cure53 team.
+A total of two vulnerabilities (low severity) and two general issues (info level) were identified. All vulnerabilities have been remediated.
+We have made the Cure53 report available for those interested in the details. For transparency we decided to publish the full report with only potentially sensitive information redacted (e.g. internal hostnames).
+Commitments going forward
+We believe that extensive regular audits are necessary to ensure our customer’s security and continued trust. We continue to commit to an annual security audit where we will focus on those parts of our infrastructure and apps that we believe to be the most critical.
+IVPN Team
+Audit
+Apps
+Transparency
+We invite you to discuss this post in our Reddit community or on Twitter. You can also send your feedback to blog@ivpn.net.
+Featured posts
+IVPN News
+Unlinked Access security audit concluded
+By Viktor Vecsei
+By Juraj Hilje
+IVPN News
+A security incident on our Bitcoin payment server
+By IVPN Staff
+IVPN News
+Annual security audit scheduled for 2026
+By Nick Pestell
+Related posts
+IVPN News
+Unlinked Access security audit concluded
+Posted on November 9, 2026 by
+Viktor Vecsei
+Juraj Hilje
+We’re pleased to announce that our eighth annual independent security audit has concluded. The assessment focused on Unlinked Access, the system that lets IVPN Plus and Pro Suite accounts access Mailx, modDNS and Portmaster without passing IVPN account identifiers to those services.
+IVPN News
+A security incident on our Bitcoin payment server
+Posted on August 11, 2026 by
+IVPN Staff
+Summary: on 7 August a critical vulnerability was disclosed in BTCPay Server, the open-source software we self-host to accept Bitcoin payments. It was being exploited before disclosure, and we were among the merchants hit: an attacker extracted our Lightning node credentials and transferred out our operating funds.
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

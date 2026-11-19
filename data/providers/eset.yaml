@@ -163,6 +163,10 @@ perks:
 #   with Kill Switch", "Split Tunneling", "No Logs Policy". No published VPN audit, P2P, multi-hop or port forwarding.
 # - Ultimate adds Ransomware Remediation ("restore everything in moments"), Identity Protection ("dark web monitoring"),
 #   Metadata Cleanup, Website Settings Review, VPN for Router and "server locations in over 70 countries".
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: unlimited ("VPN within ESET HOME Security Premium and ESET HOME
+# Security Ultimate", "Unlimited bandwidth", "No data limits", eset.com/ca/home/eset-vpn/). That page mentions no
+# RAM-only servers or way to connect your own devices to each other, so both are false.
 plans:
   - id: eset.essential
     name: HOME Security Essential
@@ -416,12 +420,15 @@ plans:
       security.webcam-protection: [webcam, microphone]
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.devices: 3
       vpn.server-countries: 40
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     perks: [secure-data, liveguard, ai-chats]
     featureLabels:
       antivirus.secure-browser: 'Safe Banking & Browsing'
@@ -657,12 +664,15 @@ plans:
       security.webcam-protection: [webcam, microphone]
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.devices: 10
       vpn.server-countries: 70
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     perks: [secure-data, liveguard, ai-chats, vpn-router, metadata-cleanup]
     featureLabels:
       antivirus.secure-browser: 'Safe Banking & Browsing'
@@ -877,12 +887,15 @@ plans:
       security.webcam-protection: [webcam, microphone]
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.devices: 10
       vpn.server-countries: 70
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     perks:
       [secure-data, liveguard, ai-chats, vpn-router, metadata-cleanup, ssn-tracking, lost-wallet]
     featureLabels:

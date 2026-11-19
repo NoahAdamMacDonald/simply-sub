@@ -66,6 +66,13 @@ perks:
 # P2P, Secure Core and the NetShield blocker of ads, trackers and malware (/pricing, /free-vpn/free-vs-paid).
 # A no-logs policy on every plan (/pricing). Yearly no-logs audits and app audits (/blog/no-logs-audit, /blog/is-protonvpn-trustworthy). Signup may ask for an
 # email or phone number (proton.me/support/human-verification), so it isn't anonymous.
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: unlimited data on every plan, VPN Free ("Unlimited data",
+# /support/proton-vpn-plans; "Has no data or speed limits", /free-vpn) and VPN Plus ("torrent with fast download speeds
+# and unlimited bandwidth", /pricing). No RAM-only servers: "Why Proton VPN doesn’t use RAM-only VPN servers"
+# (/blog/ram-only-servers, July 2024): "At Proton VPN, we’ve opted to emphasize different operational advantages by
+# using hard disks with full-disk encryption." No page read (/pricing, /free-vpn, the plans article) offers connecting
+# your own devices to each other, so vpn.mesh is false.
 #
 # Unlimited, Duo and Family are suite plans: they state their own features, and includes-subscription lists the
 # plans they replace (BLUEPRINT §4.4). Prices are the regular ones, not first-term offers. Proton sells every paid
@@ -188,11 +195,14 @@ plans:
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
@@ -234,11 +244,14 @@ plans:
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
@@ -334,11 +347,14 @@ plans:
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
@@ -435,6 +451,7 @@ plans:
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 140
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
@@ -446,6 +463,8 @@ plans:
       vpn.tor: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
@@ -541,11 +560,14 @@ plans:
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types:
         [
@@ -666,11 +688,14 @@ plans:
       vpn.included: true
       vpn.devices: 1
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 10
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
@@ -775,6 +800,7 @@ plans:
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 140
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
@@ -786,6 +812,8 @@ plans:
       vpn.tor: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types:
         [
@@ -912,6 +940,7 @@ plans:
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 140
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
@@ -923,6 +952,8 @@ plans:
       vpn.tor: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types:
         [
@@ -1048,6 +1079,7 @@ plans:
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 140
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
@@ -1059,6 +1091,8 @@ plans:
       vpn.tor: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs, apps]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       password-manager: true
       password-manager.item-types:
         [

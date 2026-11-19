@@ -1,0 +1,267 @@
+url: https://nordvpn.com/blog/cure53-latest-security-assessment/
+method: fetch
+saved: 2026-11-19
+
+Cure53 audited NordVPN apps and systems in 2025 | NordVPN Your IP: Unknown
+·
+Your ISP: Unknown
+·
+Your Status: Unknown
+Skip to main content
+Pricing
+Features
+Why NordVPN?
+What is a VPN?
+VPN Servers
+High-Speed VPN
+Money-Back Guarantee
+No User Tracking
+Features
+Next-gen antivirus New
+Dedicated IP
+Dark Web Monitor
+Call and message protection New
+Multiple Devices
+Meshnet
+All Features
+Download VPN
+Desktop
+Windows
+macOS
+Linux
+Mobile
+Android
+iOS
+Extensions
+Chrome
+Firefox
+Edge
+All Apps
+Learn
+Learn
+Blog
+Cybersecurity Hub
+Research Lab
+About NordVPN
+Ask an expert
+For Business opens in a new tab
+Secure your business against advanced cyber threats
+Go to Business VPN
+opens in a new tab See NordLayer Pricing
+opens in a new tab
+All-in-one AI platform for business
+opens in a new tab
+Business password solutions
+opens in a new tab
+Log In opens in a new tab
+Support Center opens in a new tab
+Products
+Online security and privacy
+An eSIM data service opens in a new tab
+Network security platform for business opens in a new tab
+Secure password manager opens in a new tab
+Identity theft protection opens in a new tab
+Encrypted cloud storage opens in a new tab
+Bahasa Indonesia Dansk Deutsch English Español Español Latinoamericano Français Italiano Lietuvių Nederlands Norsk Polski Português Português Brasileiro Suomi Svenska Türkçe Русский Українська עברית‏ ‪한국어‬ ‫العربية 日本語 简体中文 繁體中文 (台灣) 繁體中文 (香港)
+Get NordVPN
+Toggle sidebar
+Close
+Pricing
+Features
+Features Close
+Why NordVPN?
+What is a VPN?
+VPN Servers
+High-Speed VPN
+Money-Back Guarantee
+No User Tracking
+Features
+All Features
+Next-gen antivirus New
+Dedicated IP
+Dark Web Monitor
+Call and message protection New
+Multiple Devices
+Meshnet
+Download VPN
+Download VPN Close
+All Apps
+Desktop
+Windows
+macOS
+Linux
+Mobile
+Android
+iOS
+Extensions
+Chrome
+Firefox
+Edge
+Learn
+Learn Close
+Blog
+Cybersecurity Hub
+Research Lab
+About NordVPN
+Ask an expert
+For Business
+For Business Close
+Secure your business against advanced cyber threats
+Go to Business VPN
+opens in a new tab See NordLayer Pricing
+opens in a new tab
+All-in-one AI platform for business
+opens in a new tab
+Business password solutions
+opens in a new tab
+Products
+Products Close
+NordVPN
+Saily
+opens in a new tab
+NordLayer
+opens in a new tab
+NordPass
+opens in a new tab
+Coveron
+opens in a new tab
+NordLocker
+opens in a new tab Get NordVPN
+Log In opens in a new tab
+Support Center opens in a new tab
+Bahasa Indonesia Dansk Deutsch English Español Español Latinoamericano Français Italiano Lietuvių Nederlands Norsk Polski Português Português Brasileiro Suomi Svenska Türkçe Русский Українська עברית‏ ‪한국어‬ ‫العربية 日本語 简体中文 繁體中文 (台灣) 繁體中文 (香港) English
+Get NordVPN
+*>*>*:nth-child(1_of_:not(script):not(style))_.compensate-height]:block">
+Connection
+Cybersecurity
+How-To
+Laws & regulations
+NordVPN expertise
+Show all categories
+Hide all categories
+Connection
+DNS Firewall Internet speed Proxy VPN
+Cybersecurity
+Attacks & breaches Hacking Malware Phishing Vulnerabilities
+How-To
+Disable accounts Limit tracking Unblock Uninstall apps
+Laws & regulations
+Internet regulation Surveillance
+NordVPN expertise
+Engineering Interviews News Research Social responsibility
+Safe behavior
+Anonymity Home security Online habits Online threats Sensitive data
+Service updates
+App updates New features
+Tools
+Apps Comparisons Software
+Blog Service updates
+Cure53 has assessed NordVPN’s security once again
+Security is built into everything we create at NordVPN. To keep every part of our service strong, we invited Cure53, an independent cybersecurity audit firm, to run another large-scale security assessment of our product, services, and infrastructure. Its work highlighted what we are doing well and where we should improve. Our teams have already acted on the findings.
+Dominykas Krimisieras
+December 10, 2025
+5 min read
+Summarise with AI
+ChatGPT
+opens in a new tab
+Claude
+opens in a new tab
+Gemini
+opens in a new tab
+Perplexity
+opens in a new tab
+Grok
+opens in a new tab
+What Cure53 tested
+In 2025, NordVPN commissioned Cure53 to conduct a broad security assessment covering both our applications and our infrastructure. Cure53 is a Germany-based penetration testing firm with more than 15 years of software testing experience.
+The auditors ran a series of white-box and gray-box penetration tests (pentests) and conducted extensive source code reviews. Nineteen senior testers worked closely with our engineers and were granted full access to all materials required for testing. The assessment took place in May, June, and October 2025 and spanned several dozen working days across the project.
+The scope touched many different NordVPN components, including:
+Android, iOS, Windows, macOS, and Linux applications.
+Browser extensions for Chrome, Edge, and Firefox.
+Scam and phishing protection components, including malware scanning and network filtering.
+NordAccount authentication and MFA flows.
+Core APIs for the VPN, Meshnet, account services, and scam and phishing protection.
+VPN servers and supporting infrastructure.
+Containerized services, authentication logic, and internal access controls inside the server environment.
+What the Cure53 audit found
+Despite the relatively broad scope of the audit, Cure53 found no critical vulnerabilities across any part of the assessment. And while the auditors did flag several items as of high severity and requiring attention, all of the identified issues have already been fixed, and each item has been verified by Cure53 to be functioning as expected. The remaining findings ranged from medium to informational (lower-impact matters that do not threaten user security but help us tighten internal protections). They were typical for a security review of this scale. Alongside these findings, the auditors highlighted a few areas where the service performed especially well.
+Secure client applications
+The audit revealed that our applications follow strong security practices across all major platforms. On mobile, the Android and iOS apps implement strict security practices, including secure data storage, controlled WebView usage, biometric protections, and device binding. On desktop, the auditors noted secure IPC design, robust firewall logic, and proper validation of deep links and file operations.
+Strong authentication and account protection
+The NordAccount system also stood up well to Cure53’s testing, showing secure token handling, consistent input validation, and the correct use of industry standards such as PKCE. The auditors confirmed that session isolation and state validation helped prevent common authentication bypass attempts.
+Well-structured and reliable APIs
+Backend APIs showed strong access control enforcement, thorough sanitization, and safe handling of sensitive actions. Core components, including referral systems, subscription flows, and Meshnet APIs, worked as intended under detailed testing.
+Robust scam and phishing protection logic
+Cure53 reviewed the malware detection components and found that hash-based and machine-learning approaches were implemented safely. The auditors did not identify bypass methods for scanning engines or traffic filtering mechanisms.
+Secure and resilient infrastructure
+When Cure53 inspected our server environment, they confirmed that our VPN servers are properly hardened and employ restrictive firewall rules and strong container isolation. The auditors concluded that NordVPN’s overall hardening strategy forms a strong foundation for server security.
+How NordVPN responded
+Once Cure53 delivered its findings, our engineers began improving the service right away. The issues flagged as most urgent were addressed first, and Cure53 later confirmed that the corrective work functioned as intended. The remaining items were either resolved or reviewed with the auditors to make sure the safeguards we already had in place remained appropriate.
+Some findings were known limitations or accepted risks — situations where changing a component would create new complications without improving security. In these cases, we worked with Cure53 to validate that the existing protections remain sufficient.
+Both of the full assessment reports are available to NordVPN users through their accounts or via the links below:
+App security assessment report
+Infrastructure security assessment report Keeping NordVPN secure
+Security is an area that requires ongoing effort, and regular reviews such as this one help us identify potential issues early and prevent new cyber threats from taking hold. That is why we will continue to invest in strengthening NordVPN by running independent security audits and refining our infrastructure wherever possible.
+Security work never ends, and each new assessment helps us make the service even safer. The latest Cure53 test results show that NordVPN’s applications and systems remain well-protected, and we will continue to improve them for the benefit of all users who rely on our service. We would also like to thank the entire Cure53 team for its thorough work and cooperation throughout this assessment. Their expertise supports our commitment to keeping NordVPN secure.
+Online security starts with a click.
+Stay safe with the world’s leading VPN
+Get NordVPN What is a VPN?
+Please note that the assessment covered in this article was conducted on a NordVPN feature formerly known as Threat Protection. The feature is now called scam and phishing protection. Its capabilities remain unchanged.
+You deserve to feel safe online
+Stop stacking security tools and switch to one app built for modern digital protection.
+Get NordVPN
+Also available in:
+Deutsch , Español Latinoamericano , Español , Français , Italiano , 日本語 , Português , Svenska , 繁體中文 (香港) , 繁體中文 (台灣) .
+opens in a new tab opens in a new tab opens in a new tab opens in a new tab opens in a new tab
+Dominykas Krimisieras
+Dominykas Krimisieras writes for NordVPN about the parts of online life most people ignore. In his work, he wants to make cybersecurity simple enough to understand — and practical enough to act on.
+Trending articles
+How-To
+November 18
+16 min read
+How to get a Hong Kong IP address in 2026
+How-To
+November 17
+9 min read
+ChatGPT unblocked: How to access ChatGPT securely
+Service updates
+November 17
+15 min read
+NordVPN for iOS: Release notes
+Follow us
+opens in a new tab opens in a new tab opens in a new tab opens in a new tab opens in a new tab
+opens in a new tab
+opens in a new tab
+NordVPN
+About us Careers opens in a new tab Money-back guarantee VPN routers Reviews Student and employee discount Where to buy Refer a friend Research lab
+Engage
+What is a VPN? IP lookup What is my IP? Cybersecurity glossary Cybersecurity hub Social responsibility Trust center Press area Become a partner
+Help
+Support center Privacy policy opens in a new tab Cookie preferences Terms of service opens in a new tab Accessibility statement Contact us Ask an expert
+Discover
+Nord Security opens in a new tab NordLayer opens in a new tab NordPass opens in a new tab NordLocker opens in a new tab Coveron opens in a new tab Saily opens in a new tab nexos.ai opens in a new tab
+NordVPN
+About us Careers opens in a new tab Money-back guarantee VPN routers Reviews Student and employee discount Where to buy Refer a friend Research lab
+Engage
+What is a VPN? IP lookup What is my IP? Cybersecurity glossary Cybersecurity hub Social responsibility Trust center Press area Become a partner
+Help
+Support center Privacy policy opens in a new tab Cookie preferences Terms of service opens in a new tab Accessibility statement Contact us Ask an expert
+Discover
+Nord Security opens in a new tab NordLayer opens in a new tab NordPass opens in a new tab NordLocker opens in a new tab Coveron opens in a new tab Saily opens in a new tab nexos.ai opens in a new tab
+Available VPN apps
+Windows macOS Linux Android iOS Chrome Firefox Edge Android TV Apple TV
+Available VPN apps
+svg]:hover:text-accent left-0 border-r-md sr-only bg-inverse-primary text-secondary-on-color [&>svg]:hover:text-disabled! [&>svg]:active:text-neutral-500! border-tertiary cursor-not-allowed" aria-disabled="true" tabIndex="-1"> Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Android TV
+Apple TV
+svg]:hover:text-accent right-0 border-l-md sr-only bg-inverse-primary text-secondary-on-color [&>svg]:hover:text-disabled! [&>svg]:active:text-neutral-500! border-tertiary cursor-not-allowed" aria-disabled="true" tabIndex="-1">
+© 2026 Nord Security. All rights reserved
+Bahasa Indonesia Dansk Deutsch English Español Español Latinoamericano Français Italiano Lietuvių Nederlands Norsk Polski Português Português Brasileiro Suomi Svenska Türkçe Русский Українська עברית‏ ‪한국어‬ ‫العربية 日本語 简体中文 繁體中文 (台灣) 繁體中文 (香港) English
+© 2026 Nord Security. All rights reserved

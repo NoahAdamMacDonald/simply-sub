@@ -1,0 +1,124 @@
+url: https://windscribe.com/features/no-identifying-logs
+method: fetch
+saved: 2026-11-19
+
+No-Logs VPN: Court-Tested, Server-Seized | Windscribe
+Skip to main content The Windscribe Fuchsia Friday & Cyber Monday Sale is here! Get Pro for $29/year. Ends Nov 30th
+FeaturesPlansDownload Resources
+Log InMy Account Get WindscribeUpgrade
+No Identifying Logs. Ever.
+Most VPNs ask you to trust their no-logs claims. Ours got tested by real authorities, three times, three countries. Not simulated.
+Court-tested, server-seized. Still no logs.
+Get Windscribe
+Server Seized
+February 2026 — Dutch authorities physically took our server. Found nothing. RAM-only.
+Court Dismissed
+April 2025 — Co-founder criminally charged via INTERPOL. Case dismissed. Zero data to hand over.
+Full Disclosure
+July 2021 — Servers seized. We told on ourselves publicly. Then rebuilt everything.
+What "No Identifying Logs" Actually Means
+We're going to be specific. Not vague. Not lawyered. Here's exactly what we store and what we don't, so you can make an informed decision.
+Never Stored: We do not keep this. Period.
+Your browsing history or DNS queries
+Your real IP address
+The VPN IP address assigned to you
+Connection timestamps
+Session duration or per-session bandwidth
+Any content of your encrypted traffic
+Operational Minimums: The tiny amount we need to run the service
+When you last used Windscribe (date only, not time)
+Total bandwidth used in the last 30 days
+Which app versions you've activated
+These three data points cannot identify who you are, where you went online, or what you did. They exist to enforce free plan limits and troubleshoot app issues.
+Battle-Tested: Three Times They Came for the Data
+Three countries. Three different attack vectors. Three times the answer was the same: there is no data. This isn't a policy. It's a track record.
+February 2026
+Netherlands: They took the server
+Dutch authorities physically seized a Windscribe VPN server from a data center rack, without a warrant or prior request. What they found: a stock Ubuntu install running entirely in RAM — no hard drives, no logs, no user data.
+"We get a handful of law enforcement requests every month. And each time we tell them we have no logs. This time they didn't ask, they just snatched the server from the rack to look for the logs themselves. Unfortunately for them, there's still no logs lol." — Windscribe
+Sources: PCMag, TechRadar, Tom's Guide, CNET, CyberInsider, Tom's Hardware
+April 2025
+Greece: The co-founder was criminally charged
+A Windscribe server in Finland was allegedly used to breach a Greek system. Greek authorities, with INTERPOL assistance, charged co-founder Yegor Sak personally with "illegal access to information system." Two-year legal battle across three countries. Case dismissed April 11, 2025 because Windscribe had zero user data to provide.
+"As we do not log user activity, we cannot hand over what we do not have." — Yegor Sak, Windscribe Co-Founder
+Sources: Bruce Schneier, Tom's Guide, TechRadar, Techdirt, CyberInsider
+July 2021
+Ukraine: The one where we told on ourselves
+Two Windscribe servers were seized by Ukrainian authorities. No user data was compromised because no logs existed, but an OpenVPN CA key was exposed since servers weren't encrypted at rest. Windscribe published a full technical breakdown and used it as the catalyst for Operation FreshScribe — a complete infrastructure overhaul to RAM-only servers. That overhaul is what made the 2026 Dutch seizure a non-event.
+Sources: TechRadar, AIN.UA, Reddit
+Audits are snapshots. Court cases are stress tests.
+Other VPNs lead with audit counts. We lead with what happened when the authorities actually showed up. Audits are controlled. Prosecutions and server seizures are not.
+Our Transparency Stack
+You shouldn't trust any VPN at face value. Here are four independent ways to verify our claims yourself.
+Layer 01 — Fully open-source clients
+Desktop apps (Windows, Mac, Linux), Android app, and browser extension are all on GitHub. Inspect the code. Verify our claims. Build it yourself if you want.
+Browse source code on GitHub →
+Layer 02 — Live transparency report
+Real-time feed showing every DMCA and law enforcement request we receive. Every single response: "Can't help you." Not a static annual PDF. A live, always-updated counter.
+View transparency report →
+Layer 03 — Third-party security audits
+PacketLabs audited our full FreshScribe server infrastructure (June 2024): 20 repositories, ~80,000 lines of code, external + internal penetration testing. Found no intentional subversions of our no-logs policy. Leviathan Security Group audited desktop apps (2021) and mobile apps (2022).
+Check out our audit reports →
+Layer 04 — Public employee handbook
+We publish our internal employee handbook publicly because transparency should show up in how we operate, not just in what we sell.
+Read the handbook →
+The WeVPN rescue
+When WeVPN shut down, we comped every WeVPN user with free Windscribe service for the remainder of their subscription. Not an acquisition. A gesture of good will. This is what a company does when its values are real, not performative.
+Anonymous From Sign-Up
+No-logs means nothing if the company knows who you are from the moment you sign up. We designed the entire flow so we don't have to know.
+What they know about you
+Windscribe
+NordVPN
+ExpressVPN
+Surfshark
+Sign up without email?
+Anonymous hash login?
+Accept cash and crypto?
+Impossible to link account to a human?
+This is why the Greek court case ended the way it did.
+Even with INTERPOL involved, Windscribe couldn't connect a server IP to a specific human being. Not because of policy. Because of architecture.
+RAM-Only Servers: Operation FreshScribe
+Our no-logs policy isn't enforced by a promise. It's enforced by physics. RAM cannot retain data without power.
+Traditional Server — Data can survive when the power is switched off
+Hard drive stores data persistently. Power off? Data remains. Seized? Data recoverable.
+FreshScribe RAM-Only — Data disappears when power does
+Everything runs in volatile memory. Power off? Data gone. Seized? Stock Ubuntu install.
+The Arc: Failure → Rebuild → Vindication.
+The 2021 Ukraine incident exposed a weakness. We disclosed it publicly, overhauled our entire infrastructure to RAM-only, and five years later, when Dutch authorities physically seized a server, they found nothing on it.
+Canada, Five Eyes, and Why It Doesn't Matter
+Canadian jurisdiction gets brought up a lot. Here's the part that matters. The common objection: "Windscribe is based in Canada. Canada is a Five Eyes country. Isn't that a dealbreaker?"
+Canadian law does not mandate that VPN providers store user data or maintain logs. This is a critical legal distinction.
+Five Eyes means intelligence agencies can share data between countries. It does not mean VPN companies are required to collect data for them to share.
+If there are no logs, there is nothing to share. Jurisdiction matters when a provider has data. When a provider has zero data, the question is academic.
+Greek authorities with INTERPOL backing could not extract data from a Canadian VPN company. Because the data did not exist.
+"If we can't uphold our privacy policy while based in Canada, we will not be based in Canada."
+— Yegor Sak, Windscribe (Reddit AMA)
+Your Browsing
+is Your Business
+Windscribe's no-logs policy isn't a marketing claim. It's a track record built across courtrooms, server seizures, and radical transparency.
+Get Windscribe
+Frequently Asked Questions About No-Log VPNs
+Does Windscribe keep any logs at all?
+We store three non-identifying data points: when you last used Windscribe (date only), total bandwidth in the last 30 days, and which app versions you've activated. We do not store your IP, browsing history, DNS queries, timestamps, or any traffic content.
+Has Windscribe's no-logs policy been proven in court?
+Yes. In April 2025, our co-founder was personally charged in a Greek court after a Windscribe server was allegedly used in a cybercrime. INTERPOL was involved. The case was dismissed because we had zero user data to provide.
+Has Windscribe been independently audited?
+Yes. PacketLabs audited our full server infrastructure in June 2024, reviewing 20 repositories and ~80,000 lines of code. Leviathan Security Group audited our desktop apps (2021) and mobile apps (2022). All reports are publicly available.
+Why is Windscribe based in Canada (a Five Eyes country)?
+Canadian law does not require VPN providers to store logs. Five Eyes enables data sharing between agencies, but if there is no data to share, the point is moot. The Greek court case proved this empirically.
+Is Windscribe's code open source?
+Yes. Desktop apps, Android app, and browser extension are all open source on GitHub. You can inspect the code yourself to verify our claims.
+Do I need an email to sign up?
+No. You can create an account with just a username and password. Combined with cryptocurrency payment, you can use Windscribe with zero identity information tied to your account.
+What are RAM-only servers?
+RAM-only (diskless) servers run entirely in volatile memory. When power is cut, all data is erased permanently. Windscribe's entire infrastructure runs on RAM-only servers. This was proven in February 2026 when Dutch authorities physically seized a server and found nothing.
+What happens if authorities request my data?
+We tell them we can't help. Every single law enforcement and DMCA request has gotten the same answer. Our live transparency report tracks every request in real time.
+Windscribe
+DownloadChangelogPricingBuy MerchSupportFeaturesOpen SourceEthics & PhilosophyFree DNSWhite Label VPNVPN ServersResellers & DistributorsRefer a Friend
+Apps
+VPN for WindowsVPN for AndroidVPN for MacVPN for LinuxVPN for ChromeVPN for FireTVVPN for FirefoxVPN for Apple TVVPN for MS EdgeVPN for HuaweiVPN for iPhoneVPN for RoutersVPN for AgentsWindscribe F-Droid
+Company
+About UsPrivacyTermsVDPJobsBlogInfoGang
+© 2069 Windscribe Limited
+Switch Language : English

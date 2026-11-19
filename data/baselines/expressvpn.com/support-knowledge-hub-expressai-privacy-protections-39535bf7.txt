@@ -1,0 +1,212 @@
+url: https://www.expressvpn.com/support/knowledge-hub/expressai-privacy-protections/
+method: fetch
+saved: 2026-11-19
+
+How Does ExpressAI Protect My Privacy? Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started menu opener
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+Home Home » How does ExpressAI protect my privacy?
+Knowledge Hub
+How does ExpressAI protect my privacy?
+Search the Support Center
+Last updated: June 1, 2026
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+ExpressAI is built on confidential computing enclaves. These are secure, isolated environments that process your data with end-to-end encryption. This means your prompts, files, and conversations can never be accessed by others or used for training.
+Confidential computing is a hardware-based security technology that creates a sealed execution environment called an enclave. Only the enclave can access the data being processed, preventing cloud providers, attackers, or even ExpressVPN employees from viewing it.
+Most AI services store some portion of prompts or conversations on their servers and may use them for training or quality improvement. ExpressAI ensures all information is end-to-end encrypted and never used to train models. Every interaction happens inside verifiable, encrypted enclaves that even ExpressVPN cannot access.
+Beyond our secure backend architecture, ExpressAI gives you direct control over your privacy with built-in tools:
+Zero-access chat history: Saved chats and uploaded files are secured with a user-generated primary password that ExpressVPN cannot see or reset.
+Ghost mode: Users can configure conversations to automatically expire and delete themselves.
+Private web search: The AI can fetch real-time internet data without compromising your identity or exposing your queries to trackers.
+ExpressAI has been independently audited by Cure53, a leading cybersecurity firm known for its rigorous security assessments. You can read the full audit report here.
+To learn more, read ExpressAI’s privacy policy.
+Need help? Contact the ExpressAI Support Team for immediate assistance.
+Back to top
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Close Choose language
+Live chat
+Need help? Chat with us!
+Online

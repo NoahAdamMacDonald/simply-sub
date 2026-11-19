@@ -1,0 +1,407 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with a plain fetch (curl), which airvpn.org
+# serves whole, and with Edge from Canada for its plans and sign-up pages: its home, Access Plans (buy), specs, servers
+# (status), mission, about us, terms of service, privacy notice, security policy and sign-up pages, and 15 FAQ answers
+# (airvpn.org/faq/<name>/); the Access Plans page again through a US exit.
+# Pricing: airvpn.org/buy ("Three days 2 €", "One month 7 €", "Three months 15 €", "Six months 29 €", "One year 49 €",
+# "Two years 79 €", "Three years 99 €"), the same in euros from Canada and through a US exit: one euro price list for
+# everyone (GLOBAL EUR). Its Black Friday coupon ("Applied coupons: BLACKFRIDAY2026") shows lower prices for six months to
+# three years (18.85 € to 64.35 €): a sale, not stored. No page says the prices include VAT.
+# Every period is prepaid time that expires ("before the natural expiration date", its terms) and doesn't renew by
+# itself, so autoRenew is false (Mullvad's precedent, the brief's rule); the 3 days are `day` × 3.
+# Region checklist for CA and US, 2026-11-19: 1. no country paths (one English site); 2. no country or currency picker;
+# 3. the page names "€" beside every price; 4. the checkout needs an account ("You need an account to buy a plan"), so it
+# wasn't opened; 5. no help article on prices by country; 6. Edge and a plain fetch from Canada, and Edge through a US
+# exit: the same; 7. no bill offered.
+# Where it's sold: everywhere but Italy, where its company is: "You are not allowed to use the service if you are a
+# resident of Italy." (terms), and its sign-up form's box, "I hereby declare under my sole responsibility that I am not
+# resident in Italy." So the plan's notSoldIn names IT; no page lists the countries it sells in, so no availableIn.
+# Its individual plans: one, "Every plan includes all AirVPN features.", in seven periods. Bundles: none. Official
+# resellers: none named on its pages; its gift vouchers ("Buy a credit coupon", "Buy a plan coupon") are its own.
+# Free use: none (its plans page sells only paid time; AirVPN was free only in 2010, its about page says).
+
+id: airvpn
+name: AirVPN
+website: https://airvpn.org
+category: vpn
+spendCategory: software
+# Accepted cards, read 2026-11-19: its home page says "Credit Cards" and names no network, so no acceptedNetworks.
+billingCurrency: { GLOBAL: EUR }
+# Nothing renews, so there's nothing to cancel: its terms are where a refund of a payment is asked for ("REIMBURSEMENTS",
+# point 9), as Mullvad's refunds guide is its cancel link.
+cancelUrl: https://airvpn.org/tos/
+sources: { pricing: https://airvpn.org/buy/ }
+
+# Ways to pay (M11.5), read 2026-11-19: its home page's "See plans & payment options" names PayPal, credit cards, Amazon
+# Pay (other) and five cryptocurrencies; its Access Plans page, read without an account, lists only "Cryptocurrencies"
+# ("Accepted directly through no intermediaries") and its gift vouchers. Both entries are kept (notes.md).
+paymentMethods:
+  - methods: [paypal, card, other, crypto]
+    page: 'AirVPN home'
+    url: https://airvpn.org/
+    quotes:
+      - PayPal Credit Cards Amazon Pay
+      - Bitcoin Litecoin Bitcoin Cash Doge Monero
+  - methods: [crypto, gift-card]
+    page: 'Access Plans'
+    url: https://airvpn.org/buy/
+    quotes:
+      - Cryptocurrencies
+      - Gift voucher
+# No renewalAnchor: it's prepaid, so nothing renews.
+# Owner (M11.2), read 2026-11-19: its terms name the business that runs it, a sole proprietorship in Perugia, Italy (its
+# privacy notice's "Air di Paolo Brini"; its about page's "a dedicated company (Air)"). Private: no listing.
+owner:
+  name: AirVPN di Paolo Brini
+  page:
+    name: Terms of service
+    url: https://airvpn.org/tos/
+  quotes:
+    - AirVPN is operated by AirVPN di Paolo Brini - Via Sagittario 4 - Perugia (ITALY) - REA PG - 279011.
+  country:
+    code: IT
+  lastVerified: 2026-11-19
+notes: >-
+  Prepaid in euros: you buy a set time (3 days to 3 years) that ends by itself, and nothing renews. Not for residents of
+  Italy. No personal details needed: a real email address is optional. Cryptocurrency is paid to it directly, with no
+  processor in between.
+
+# General features, read 2026-11-19: its Eddie app for "Windows, macOS, Linux, Android" (home page; "The AirVPN
+# applications for Windows, macOS, GNU/Linux and Android", security policy), and no iOS app ("Why do you not develop
+# software for iOS?"; its WireGuard and OpenVPN configurations work in other apps); sign-up and sign-in with a password
+# (its sign-up form); support tickets ("write a support ticket", specs) and its forums; its site in English only. Open
+# source: "AirVPN software is free and open source." and "All of our software is released under GPLv3" (home), with
+# Eddie's code on GitHub; its servers' code isn't published, so open-source apps. No pause or parental controls: its time
+# is prepaid, and its block lists are your own choice.
+features:
+  platforms: [windows, macos, linux, android]
+  account.sign-in: [password]
+  support.channels: [email, community]
+  software.open-source: open-clients
+  languages.interface: [en]
+sourceRepo:
+  url: https://github.com/AirVPN/Eddie
+  page:
+    name: Security policy
+    url: https://airvpn.org/security_policy/
+  quotes:
+    - 'Eddie, the AirVPN client for Windows, macOS and GNU/Linux, is released under the GPLv3 license, and its source code is available on GitHub: https://github.com/AirVPN/Eddie .'
+  lastVerified: 2026-11-19
+
+freeUse:
+  kind: none
+  pages: [https://airvpn.org/buy/, https://airvpn.org/faq/]
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19 on its home, specs, servers and FAQ pages:
+# - Devices: "Five simultaneous connections per account." (home). Data: "No, there are no traffic limits." (Are there
+#   traffic limits for an account?), so unlimited.
+# - Countries: its servers page lists 23 (Austria, Belgium, Brazil, Bulgaria, Canada, Czech Republic, Estonia, Germany,
+#   Ireland, Japan, Latvia, Netherlands, New Zealand, Norway, Romania, Serbia, Singapore, Spain, Sweden, Switzerland,
+#   Taiwan, United Kingdom, United States); its about page's "35 datacenters across 19 countries" is older.
+# - Protocols: OpenVPN and WireGuard ("AirVPN uses OpenVPN and WireGuard", terms), and "Additional connection types,
+#   supported by every Air VPN server, for ISPs or countries disrupting OpenVPN, are OpenVPN over SSH, SSL or Tor"
+#   (stealth). No IKEv2.
+# - Kill switch: Eddie's Network Lock option, which How can I prevent traffic leaks names ("In this case, you don't need
+#   any instruction for any firewall.").
+# - Blocking: "Optional block lists protecting you from ads, adware, trackers and malicious sources." (home).
+# - P2P: "Yes, p2p is allowed, as well as any other protocol." Port forwarding: "You can forward up to 5 ports
+#   simultaneously."
+# - No-logs: "No, we don't keep logs of that kind." (Do you keep session logs ...?) and its privacy notice. No independent
+#   audit of its own on any page (its mission page lists OpenVPN's 2017 audit, which it helped fund), so no
+#   vpn.independent-audits.
+# - Anonymous sign-up: "No personal information required. When you open an account , you are not forced to enter any
+#   personal data, not even a real e-mail address." (home).
+# - Not stated, so not listed: split tunnelling, multi-hop (its rules that "perform internally a double-hop for specific
+#   websites / IP ranges" are for its anti-geo-blocking routing, not one you pick) and Tor servers ("OpenVPN over Tor"
+#   runs the VPN through Tor, the other way round). No RAM-only servers: its pages say connection data is "handled by
+#   automatic systems only in RAM", not that its servers have no disks. No mesh.
+plans:
+  - id: airvpn.vpn
+    name: AirVPN
+    link: https://airvpn.org/buy/
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 23
+      vpn.protocols: [wireguard, openvpn, stealth]
+      vpn.kill-switch: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.port-forwarding: true
+      vpn.no-logs-policy: true
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    notSoldIn:
+      - regions: [IT]
+        url: https://airvpn.org/tos/
+        quotes:
+          - You are not allowed to use the service if you are a resident of Italy.
+        lastVerified: 2026-11-19
+    prices:
+      - region: GLOBAL
+        currency: EUR
+        amount: 2
+        interval: day
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+      - region: GLOBAL
+        currency: EUR
+        amount: 7
+        interval: month
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+      - region: GLOBAL
+        currency: EUR
+        amount: 15
+        interval: month
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+      - region: GLOBAL
+        currency: EUR
+        amount: 29
+        interval: month
+        intervalCount: 6
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+      - region: GLOBAL
+        currency: EUR
+        amount: 49
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+      - region: GLOBAL
+        currency: EUR
+        amount: 79
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+      - region: GLOBAL
+        currency: EUR
+        amount: 99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://airvpn.org/buy/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its terms of service, privacy notice, security policy (its
+# vulnerability disclosure policy and bug bounty), sign-up form, home page and FAQ answers on logs and WireGuard. Every
+# agreement a user accepts (the owner's rule, 2026-11-03): the sign-up form's box, "I agree to the Terms of Use and
+# Privacy Policy, and I hereby declare under my sole responsibility that I am not resident in Italy."; the terms include
+# nothing else by reference; its apps' licence is the GPLv3 (security policy). Neither the terms nor the privacy notice
+# shows a date ("Created: ... , last update: ...").
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://airvpn.org/tos/
+    - name: 'Privacy notice'
+      url: https://airvpn.org/privacy/
+    - name: 'Security policy'
+      url: https://airvpn.org/security_policy/
+    - name: 'Sign up'
+      url: https://airvpn.org/register/
+    - name: 'Do you keep session logs?'
+      url: https://airvpn.org/faq/logs/
+    - name: 'Does WireGuard pose privacy issues?'
+      url: https://airvpn.org/faq/wireguard/
+    - name: 'Access plans'
+      url: https://airvpn.org/buy/
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: 'It collects nothing personal: its servers and apps gather no personal data, and its website’s cookies only make the site work.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'Air servers and software procedures in general do not acquire personal data.'
+        - url: https://airvpn.org/privacy/
+          quote: 'Cookies are specifically meant for technical functioning.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It never passes your email address, or anything else you enter, to another company.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'Air will not treat this address to profile the user or disclose his/her identity, and will not transmit it to any third party.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads, and it never uses cookies to track you or build a profile of you.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'Under no circumstance does Air use cookies to track and/or profile users.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy notice and terms don't mention AI. It keeps almost nothing about you."
+      pages: [https://airvpn.org/privacy/, https://airvpn.org/tos/]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Connection details stay only in memory, only while needed (your real IP address leaves a WireGuard server 180 seconds after you stop), but it gives no time limit for your account data.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'only in RAM and only for the time being necessary to provide the service.'
+        - url: https://airvpn.org/faq/wireguard/
+          quote: 'In AirVPN servers, if no handshake has occurred within 180 seconds, the peer is removed and reapplied.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can have your data deleted by asking in an email, but it doesn’t say how soon.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'Users have the right to ask for information about their data and to ask for deletion of any data pertaining to them with a simple written request by e-mail to: info (at) airvpn (dot) org.'
+      action:
+        name: How to ask for your data to be deleted
+        url: https://airvpn.org/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: "Its privacy notice lets you ask about your data, but doesn't say you can get a copy to take elsewhere."
+      pages: [https://airvpn.org/privacy/]
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It answers only to EU law, and keeps little to hand over, but it doesn’t say it tells you or publish how many requests it gets.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'Anyway, in case of jurisdictional conflicts, Air will not recognize extra-UE competence and will respond only to European Union laws.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Its servers are under EU privacy law, and those outside the EU must protect your data at least as well.'
+      sources:
+        - url: https://airvpn.org/privacy/
+          quote: 'Servers located outside the European Union will treat users data with the same (or higher) level of privacy and data protection, never with a lower level of privacy and data protection.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You pick a name and password; the email field can be anything, it doesn’t need to be real.'
+      sources:
+        - url: https://airvpn.org/register/
+          quote: 'Real e-mail address is NOT mandatory, you can enter a random string.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: "There's nothing to cancel: you pay ahead for the time you want, and you can simply stop using it."
+      sources:
+        - url: https://airvpn.org/tos/
+          quote: 'You may terminate this Agreement at any time by discontinuing use of all parts of the Service.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can get all your money back within 30 business days of any payment, without saying why, by writing to it, unless you’ve used it for more than 30 days.'
+      sources:
+        - url: https://airvpn.org/tos/
+          quote: 'In case you are not satisfied with the commercial Service, once you have subscribed you have the right to obtain a full reimbursement, provided that your request is sent within 30 business days since the subscription payment.'
+        - url: https://airvpn.org/tos/
+          quote: 'You have the right to request a reimbursement without giving explanations.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'You pay ahead for a set time that simply ends, and nothing renews by itself, so a new price only applies if you choose to buy more.'
+      sources:
+        - url: https://airvpn.org/tos/
+          quote: 'You agree that no reimbursement from AirVPN is due if you decide to terminate the Service before the natural expiration date, except under the cases in point 9.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial: its shortest plan is 3 paid days.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: great
+      reason: "It doesn't renew on its own: your time just runs out, and you pay again only if you want to."
+      sources:
+        - url: https://airvpn.org/tos/
+          quote: 'You agree that no reimbursement from AirVPN is due if you decide to terminate the Service before the natural expiration date, except under the cases in point 9.'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms name no fees beyond the price.'
+      pages: [https://airvpn.org/tos/]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disagreements go to the courts in Italy or the EU’s court, not to a private referee, but not to a court where you live.'
+      sources:
+        - url: https://airvpn.org/tos/
+          quote: 'This Agreement will be governed by and construed in accordance with the Regulation 593/2008 of the European Parliament and of the Council of the European Union and under the jurisdiction of the European Court of Justice and the courts in Italy.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-stated
+      reason: "Its terms don't say how it changes them or whether it tells you."
+      pages: [https://airvpn.org/tos/]
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its rules on use, it can end your service, and its terms promise no refund.'
+      sources:
+        - url: https://airvpn.org/tos/
+          quote: 'You agree that AirVPN operators, in their sole discretion, for any violation of the Terms of Service point 4), and without penalty, may terminate your use of the Service at any time.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      status: not-stated
+      reason: "Its terms don't say whether it can change or remove features."
+      pages: [https://airvpn.org/tos/]
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its terms and privacy notice don't say it closes accounts you haven't used."
+      pages: [https://airvpn.org/tos/, https://airvpn.org/privacy/]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source under the GPLv3: anyone can read, change and share their code.'
+      sources:
+        - url: https://airvpn.org/security_policy/
+          quote: 'AirVPN software is free and open source.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'You can report security bugs and get a reward for serious ones, but no outside firm has checked its service that its pages show.'
+      sources:
+        - url: https://airvpn.org/security_policy/
+          quote: 'Responsible Disclosure : please report every vulnerability to security@airvpn.org .'
+        - url: https://airvpn.org/security_policy/
+          quote: 'very high risk vulnerability, 250 EUR'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: good
+      reason: 'It says it keeps no record of what you do, your traffic or your IP address, but no outside auditor has checked.'
+      sources:
+        - url: https://airvpn.org/faq/logs/
+          quote: "No, we don't keep logs of that kind."
+        - url: https://airvpn.org/privacy/
+          quote: 'Activity traffic and/or traffic content and/or IP addresses of the customers or users are not inspected, logged or stored into any mass storage device.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its pages name no limit beyond the number of connections at once, which its plan shows.'
+      pages: [https://airvpn.org/tos/]
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: "Its pages don't say whether its apps update themselves."
+      pages: [https://airvpn.org/tos/, https://airvpn.org/security_policy/]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Crypto paid straight to it
+      tier: great
+      reason: 'Cryptocurrency payments go straight to it, with no payment company in between that could see who paid.'
+      sources:
+        - url: https://airvpn.org/buy/
+          quote: 'Accepted directly through no intermediaries'
+      lastVerified: 2026-11-19

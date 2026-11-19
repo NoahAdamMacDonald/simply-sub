@@ -1,0 +1,209 @@
+url: https://surfshark.com/trust-center
+method: fetch
+saved: 2026-11-19
+
+Welcome to Surfshark’s trust center!
+Skip to content
+Hurry up! Grab our Black Friday deal here
+Products Surfshark VPN Privacy from online tracking & data collecting with a secure connection.
+What is a VPN?
+VPN features
+VPN servers
+Dedicated IP
+Surfshark Antivirus Lightweight yet powerful security to protect your devices from harm.
+Surfshark Alert Detection of data breaches that involve your personal information.
+Alternative ID A tool that creates a brand-new online identity, email, & number for you.
+OTHER PRODUCTS
+Incogni
+HeyPolo
+Saily
+Pricing
+Download
+Resources About us
+Blog
+Research
+Help Center
+VPN for Teams
+Language ∙ English Deutsch
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português
+Suomi
+Türkçe
+Русский
+Українська
+한국어
+简体中文
+香港繁體
+台灣繁體
+日本語
+My account
+Get Surfshark
+Surfshark’s trust center
+Here, you’ll learn how we maintain the highest security standards for all our services:
+Security Technology Audits Transparency
+Security
+Your security and privacy are our top priority. Find out how Surfshark keeps its products and processes safe with thorough testing and strong protective measures.
+The safest protocols
+Surfshark offers only the safest protocols, including WireGuard, OpenVPN, and IKEv2 VPN, as well as our in-house build protocol Dausos.
+Industry-leading encryption
+We use the VPN standard AES-256-GCM encryption, as well as ChaCha20 for WireGuard, and AEGIS-256X2 for Dausos.
+Third-party bug bounty
+We run a third-party bug bounty and collaborate with reliable companies to identify even the most minor security flaws in our software.
+Penetration tests
+We regularly run system penetration tests to identify vulnerabilities and evaluate our software, ensuring thorough checks and accurate improvements.
+Safe design and development
+By using static application security testing (SAST) * and other methods to identify security gaps, we can effectively eliminate potential dangers.
+IT security monitoring
+Surfshark monitors its IT systems around the clock for any harmful activity and potential attacks. This monitoring is fully automated and runs 24/7.
+Automated app patching
+Surfshark uses automated, unattended upgrades to always keep our production environment up to date with the latest software requirements.
+Latest threat insights
+Our automated system keeps us up to date on the latest global threats, knowledge, evaluations, and threat actors so that we can be prepared.
+Secure encrypted logins
+Surfshark's user logins are encrypted to ensure maximum security. Even if a server data breach were to happen, the login information remains protected.
+No user activity collection
+We have a strict no-logs VPN policy, meaning we do not track or store any user activity. Frequent third-party audits back this.
+Privacy-focused jurisdiction
+Surfshark is based in the Netherlands. The laws of the Netherlands do not establish any obligation to log or retain user data.
+GDPR compliance
+Since we're based in an EU country, we comply with the General Data Protection Regulation (GDPR) ** for all our customers, regardless of their location.
+Load more
+Process security
+Only approved access Surfshark uses a privileged access management (PAM) * system to ensure only approved staff get the necessary access, and detailed audits track all employee activities.
+Minimal data access We follow the principle of least privilege (PoLP) **, meaning staff access only the tools and systems needed for their jobs. Customer support operates with minimal access.
+Background checks Surfshark performs background checks on new employees to verify their credibility and reduce internal threats, ensuring a secure work environment.
+Technology
+In addition to advanced security, we boost user privacy with advanced technology. Learn more about our servers and innovative features.
+Servers
+100% RAM-only servers
+We are among the first VPN providers to upgrade our servers to RAM-only infrastructure, meaning that all data is wiped with every server reboot.
+Automatic rebuilds
+Most of our VPN servers are destroyed and rebuilt regularly. This way, we ensure strong security and reduce vulnerabilities for our systems.
+At least 10Gbps speeds
+All of our servers are equipped with 10Gbps ports, and in the high-traffic area, we offer up to 100Gbps servers to future-proof our service and manage even the heaviest loads.
+4500+ servers worldwide
+We have 4500+ servers across 100 countries. The more high-quality servers a VPN offers, the faster and less crowded the server connection is.
+Innovation
+Everlink
+Industry-first self-healing VPN server infrastructure that revives your VPN connection without disconnecting you from the VPN service, offering better IP address protection.
+FastTrack
+A unique multi-server routing system that connects users to a network of servers, continuously evaluating routes in real-time to offer the most optimal connection.
+Post-quantum protection
+Replacement for traditional encryption methods with new, quantum computer-resistant, and more future-proof algorithms built on entirely different types of math.
+Dausos protocol
+A user-focused connection protocol we built entirely from scratch, prioritizing security and performance. It offers faster connections and a more efficient utilization of server and device resources.
+Rotating IP
+A feature that changes your IP address every 5-10 minutes without dropping the VPN connection, adding an extra layer of protection to your connection.
+Multi IP
+A feature that routes your internet traffic through a different IP address for every new session or website you visit, ensuring an even higher level of privacy and security.
+Load More
+A milestone in innovation: our 20th patent granted
+We were granted 20+ patents for our inventions, methods, and ideas.
+Check them
+Audits
+We're not only talking about our security and privacy. We have third-party sources to back it up. Check out our external audits and certifications.
+No-logs assurance reports
+Deloitte, one of the Big Four auditing firms, confirmed that we adhere to the commitments made in our no-logs policy. The full report is available in our users' Surfshark account. You can also read more about it here.
+Deloitte report 2025 Deloitte report 2023
+Security and infrastructure assessments
+2026 — Cure53 carried out an independent audit of our infrastructure and new protocol Dausos, reporting a stable and resilient platform.
+Full report here
+2025 — we completed an infrastructure audit by SecuRing. It verified that our network infrastructure is protected against unauthorized access and business disruption, resilient against real-world attacks, and aligned with the highest security standards.
+Full report here
+2025 - SecuRing conducted a security assessment. Our web, desktop, mobile applications, and browser plugins demonstrated strong protection against real-world attack scenarios.
+Full report here
+2021 — Cure53, a German company, thoroughly studied our infrastructure and found no significant concerns.
+Full report here
+2018 — audit by Cure53 revealed that our browser extensions stand out for their robust security. The study confirms that our internal security measures successfully reduce security risks.
+Full report here
+Certifications
+Surfshark’s Android app regularly passes the independent Mobile App Security Assessment (MASA), which confirms it consistently meets globally recognized security standards.
+Find full results here
+Surfshark Antivirus has been certified by an independent German IT security organization, AV-Test, and scored 6/6 for reliable protection, 4.5/6 for performance, and 6/6 for usability.
+Find full results here
+Surfshark has a VPN trust seal awarded for following VPN Trust Initiative principles that cover high standards for security, advertising practices, privacy, disclosure and transparency, and social responsibility.
+Transparency
+For an in-depth look into our transparency and day-to-day life, check out our reports and yearly summaries.
+Transparency report
+As a cybersecurity company, we uphold the highest standards, with transparency being a key priority. Our Transparency Report details the types and numbers of user data requests we receive, updated quarterly.
+DSA transparency report
+In line with our commitment to the Digital Services Act (DSA), we’ve released our DSA Transparency Report. It showcases our efforts to comply with the DSA and to provide a responsible and secure service.
+Beta testers program
+Reflecting our commitment to accountability and peer review, we’ve established a dedicated community for Beta testers. It showcases our latest technical developments in their early stages, ensuring our tools are tested by our most active users for maximum transparency.
+Explore the summaries of our years
+Read more
+Read more
+Read more
+Supporting internet for all
+We proactively support the works of non-profit organizations that advocate for safeguarding online freedom and transparency.
+We co-developed the world’s first official VPN security standard, replacing vague marketing claims with mandatory safety requirements. Working alongside ETSI and industry experts, we helped define strict rules for no-logs policies, secure encryption, and automated protection. This ensures that security is no longer just a promise, but a verified reality for every VPN sold in Europe.
+Watch video
+Journalists and media organizations face a range of threats in the online space. Strong cybersecurity tools are essential to ensuring journalists around the world can do their work freely and safely, which is why IPI values Surfshark as a partner in supporting press freedom and digital safety for journalists globally.
+Surfshark’s support allowed us to provide 100 pro bono Surfshark One vouchers to members of our Global Tech Hub network. This helps journalists and media workers operating in challenging environments protect their devices and networks with one simple tool, strengthening their digital security and access to reliable information.
+“We are proud to work alongside Surfshark on the VPN Trust Initiative (VTI), collaborating on important issues that enhance transparency, accountability, and trust within the VPN industry. Together, we are helping shape a safer and more secure online environment.”
+Frequently asked questions
+What certifications does Surfshark have?
+Surfshark holds a MASA certificate, awarded in December 2023 and January 2025 after passing a security audit, and has earned an Independent Review badge on the Google Play Store. Surfshark also has a VPN trust seal awarded for following VPN Trust Initiative principles. In addition, Surfshark Antivirus has been certified by an independent German IT security organization, AV-Test.
+Surfshark has undergone multiple independent audits to validate its security practices and no-logs policy, including a recent infrastructure security audit by SecuRing completed in December 2025, which confirmed the network's resilience against attacks and found no critical vulnerabilities. Audits by Deloitte in 2023 and 2025 have also verified Surfshark's adherence to its no-logs policy, assuring users that their online activity is not monitored or stored.
+Is Surfshark a no-logs VPN?
+Yes. Surfshark does not keep any logs of user activity, including IP addresses, browsing history, session information, used bandwidth, connection timestamps, network traffic, or other types of data.
+Does Surfshark use RAM-only VPN servers?
+Yes, Surfshark uses 100% RAM-only servers, rather than hard drives. This provides significant security and privacy benefits. Since RAM requires power to retain data, all information stored on the servers is automatically wiped every time a server is rebooted or powered down.
+This makes it technically impossible for any user data to be stored long-term or retrieved after the fact, even if a server were physically seized.
+RAM-only servers also ensure that the entire server network runs the latest software, as fresh configurations are loaded with each reboot.
+Products
+Surfshark VPN
+Alternative ID
+Surfshark Alert
+Surfshark Antivirus
+Pricing
+Other products
+Incogni
+Ironwall
+Saily
+HeyPolo
+Surfshark VPN
+What is a VPN?
+VPN features
+VPN use cases
+VPN servers
+Dedicated IP
+Reviews
+VPN download
+VPN free trial
+Solution
+VPN for teams
+Resources
+About us
+Media center
+Trust center
+Career
+Blog
+Transparency report
+Contact us
+Programs
+Affiliate
+YouTube creators
+Student discount
+Graduate discount
+Referral program
+Tools
+DNS
+What is my IP?
+IP address lookup
+DNS leak test
+WebRTC leak test
+Data leak checker
+Support
+Help center
+Setup guides
+Android iOS Chrome Windows macOS Firefox Fire TV Apple TV Edge Linux
+English Deutsch Español Français Italiano Nederlands Polski Português Suomi Türkçe Русский Українська 한국어 简体中文 香港繁體 台灣繁體 日本語
+© 2026 Surfshark. All rights reserved.
+Surfshark B.V., KvK number: 81967985, address: Kabelweg 57, 1014BA Amsterdam, the Netherlands, VAT number NL862287339B01
+•Cookie policy
+• Privacy policy•Terms of service

@@ -1,0 +1,87 @@
+url: https://obscura.com/blog/obscuras-first-audit/
+method: fetch
+saved: 2026-11-19
+
+Obscura's First Independent Audit by Cure53 | Obscura
+Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Dec 16, 2025 Obscura's First Independent Audit by Cure53
+TL;DR
+Cure53 audited Obscura’s macOS app, network extension, and protocol and found no major vulnerabilities
+The few issues discovered were low‑impact bugs that have since been fixed
+The audit report is available to read
+Why Security Audits Matter
+Software exploits have plagued the tech industry for decades—operating systems, browsers, and apps have all shipped with vulnerabilities. VPNs are no exception, and they face a unique challenge: they’re specifically trusted to protect your privacy. A single exploit doesn’t just compromise the app, it exposes the exact traffic you’re trying to protect.
+While avoiding bugs entirely is near-impossible for large projects, we aim to further minimize risk where we can. To that end, we’ve built Obscura in memory-safe languages and have a unique two-party architecture that protects your internet traffic even in cases of server compromise.
+With this independent audit, we’re going further. We believe real security comes from actively hunting for vulnerabilities in our code: attacking software the way a hacker would.
+The Audit
+We brought in Cure53, the security researchers who’ve stress-tested Mullvad VPN, Bitwarden and Proton, to audit our macOS app, network extension and protocol. Their verdict:
+Obscura is a well-engineered privacy solution with no major security vulnerabilities within its defined threat model. Cure53 is happy to report that the findings of this OBS-01 project only represent opportunities to further strengthen the already robust security posture.
+There were zero major vulnerabilities found. The remaining lower-severity vulnerabilities have since been fixed, with the worst-case scenario being the app crashing or freezing—never data leakage. 1 2
+Built for Security
+As an application that processes untrusted packets across the internet, it was critical for Obscura to be fundamentally security-focused. To that end, we chose to use memory-safe, statically typed languages to minimize memory vulnerabilities. Cure53 noticed:
+The Obscura stack boasts sophisticated engineering across its TypeScript frontend, Rust backend, and Swift macOS network extension components. The Obscura complex is characterized by an observably consistent high code quality and appropriate use of each language’s safety features.
+We pride ourselves on being the first VPN to go beyond a “no-logs” policy. Our 2-Party Relay design makes it cryptographically impossible for us to log your internet activity. Cure53 agrees:
+The novel 2-party relay system effectively eliminates traditional VPN trust requirements while maintaining strong security boundaries between user identity and browsing activity, representing a significant architectural achievement.
+Similarly, the innovative merging of WireGuard and QUIC protocols into a singular stack is clean and impressive, showcasing strong software engineering skills with well-segmented, idiomatic Rust implementation.
+The design of Obscura’s protocol, as described in our first blog post, was built to ensure that no single party can correlate a user with their traffic on the network, giving users peace of mind that no one - not even us - can see your internet activity..
+Security Through Transparency
+At Obscura, we believe that security and privacy should be built on code, cryptography, and architecture open to scrutiny, not just policies and marketing claims.
+We take your trust seriously, and want to empower you to live the adage “Don’t trust – verify”. This is why, we made our app’s source code available on GitHub when we launched.
+This audit from Cure53 is another step toward building that trust with you. We’ll continue commissioning regular audits, fixing vulnerabilities, and publishing the results to prove that Obscura is worthy of your trust and support.
+You can read the full Cure53 report.
+Footnotes
+Message lengths are now validated and don’t allocate vectors larger than 65kB (GitHub commit) ↩
+We now limit the number of relays the app attempts to establish a connection with to 100 (GitHub commit) ↩
+Thanks to Carl Dong, Florian Uekermann, and gnukeith for reading
+drafts of this.
+Want to keep the conversation going?
+Join our Discord.
+For comments or suggestions, reach out to
+support@obscura.net.
+Authors
+David Collini
+Subscribe to the blog
+Subscribe via email or RSS, or just follow us on X.
+Email address
+Subscribe to Everything
+Announcements
+Tech
+Subscribe via email
+Or
+Copy RSS Feed URL
+support@obscura.net
+“We must defend our own privacy if we expect to have any. We must come
+together and create systems which allow anonymous transactions to take
+place.”
+— Eric Hughes,
+A Cypherpunk’s Manifesto (1993)
+Jump To
+Next-Gen Privacy
+How Obscura Works
+Superior Obfuscation
+FAQ
+Resources
+Service Status
+Blog
+Legal
+Careers
+Source Code (GitHub)
+Cursed Knowledge
+Download for macOS
+Community
+Circle of Trust
+Discord
+Matrix Bridge
+Twitter / X
+Mastodon
+Nostr (on Primal)
+© 2026 Sovereign Engineering Inc. All rights reserved.
+WireGuard is a registered trademark of Jason A. Donenfeld.

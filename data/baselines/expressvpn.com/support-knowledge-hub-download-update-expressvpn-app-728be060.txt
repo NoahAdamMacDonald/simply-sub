@@ -1,0 +1,287 @@
+url: https://www.expressvpn.com/support/knowledge-hub/download-update-expressvpn-app/
+method: fetch
+saved: 2026-11-19
+
+How to Update the ExpressVPN App | ExpressVPN Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started menu opener
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+Home Home » How to download and update the ExpressVPN app
+Knowledge Hub
+How to download and update the ExpressVPN app
+Search the Support Center
+Last updated: October 25, 2026
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+This guide will show you how to update to the latest version of ExpressVPN. Regular updates ensure the app on your device has the latest functionality and security upgrades.
+Note: There is no need to uninstall the app before updating it on your device.
+I want to update the ExpressVPN app on:
+Windows
+Mac
+Linux
+iOS
+Android
+Router
+Browser extension
+Update the ExpressVPN app on Windows or Mac
+The ExpressVPN app for Mac and Windows includes an auto-update feature. To check if it’s enabled, click Profile and, under Settings, scroll to find the Enable Auto-update toggle.
+When an app update is available to you, you will see a banner at the top of the app screen. Follow these steps to update the app:
+Click Update Now or Download Now.
+On the ExpressVPN website, click Download on the right.
+Follow the instructions.
+If you do not see a banner that prompts you to update the app, you are already using the latest app version available to you. If you want to make sure you are using the latest version available to you, you can download the app on the website:
+ExpressVPN for Windows
+ExpressVPN for Mac
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Update the ExpressVPN app on iOS
+By default, the app will automatically update to the latest version available to you.
+You can also manually check to see if an update is available to you:
+Open the App Store.
+Search for ExpressVPN.
+If an update is available to you, you will see the Update button. Tap Update.
+If you are unable to update the app:
+Refer to the Apple support article, or
+Check if you are using the same Apple ID that you previously used to download ExpressVPN. To update any iOS app, you must use the same Apple ID that you previously used to update the app.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Update the ExpressVPN app on Android
+If you previously downloaded ExpressVPN via the Google Play Store or an equivalent app store on your device, it will automatically update to the latest version available to you by default.
+You can also manually check to see if an update is available to you:
+Open the app store on your device.
+Search for ExpressVPN.
+If an update is available to you, you will see the Update button. Tap Update.
+If you previously installed ExpressVPN using the APK file, you will have to update it manually by installing the latest version of the APK available:
+On mobile
+Visit the VPN setup page in your ExpressVPN+ portal.
+Tap Set up more devices.
+Tap Download APK.
+On desktop
+Visit the VPN setup page in your ExpressVPN+ portal.
+Under Operating systems, select Android.
+Select Download APK.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Update the ExpressVPN app on Linux
+The ExpressVPN GUI app for Linux includes an auto-update feature that is enabled by default. To access this feature, click the Profile icon and scroll to find the Enable auto-update toggle.
+If auto-update is disabled and an app update is available, you will see one of the following:
+A text notification whenever you enter any ExpressVPN command in the terminal.
+A system notification in your graphical desktop environment.
+A banner notification if you have installed the ExpressVPN browser extension for Chrome or Firefox.
+To update the app via CLI on Ubuntu, Debian, Fedora, Arch, Raspberry Pi, and Linux Mint:
+Follow the instructions provided by the “expressvpn status” command to update the app via your package manager or download the latest app version manually.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Update Aircove or ExpressVPN on your router
+AircoveOS and ExpressVPN for routers (on Aircove and Aircove GO) automatically update daily at 4 a.m. local time (if an update is available).
+Note: Aircove routers are no longer available for purchase. Aircove will continue to receive security updates based on our published timelines, and existing users will continue to receive customer support. For more details about Aircove support, security, updates, and the latest home-router offering from ExpressVPN and GL.iNet, visit our Aircove FAQ.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Update the ExpressVPN browser extension
+The ExpressVPN browser extension will automatically update when an update is available.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Related Articles
+How to use the VPN Pause function on iOS and Android
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Close Choose language
+Dansk
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Norsk
+Polski
+Português
+Suomi
+Svenska
+Türkçe
+Русский
+ภาษาไทย
+한국어
+日本語
+Live chat
+Need help? Chat with us!
+Online

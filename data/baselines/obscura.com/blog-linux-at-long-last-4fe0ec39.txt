@@ -1,0 +1,80 @@
+url: https://obscura.com/blog/linux-at-long-last/
+method: fetch
+saved: 2026-11-19
+
+Linux at Long Last + GPLv3 | Obscura
+Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Sep 22, 2026 Linux at Long Last + GPLv3
+TL;DR
+Obscura VPN is now available on Linux
+Get 25% off your first year with promo code LINUX26
+Official packages for: Debian, Ubuntu, Fedora, Arch and their derivatives
+Obscura is now licensed under GPLv3
+Download for Linux
+Today, Obscura finally comes to Linux.
+Obscura’s code has been public since day one, and we believe the future of an open and private internet starts with open source.
+We’re releasing the Obscura Linux app with a full graphical interface alongside an experimental command-line interface.
+Launch Offer: 25% Off for All Users
+Penguins of the world, rejoice, as part of our launch we’re giving everyone 25% off their first year (for a limited time). Use promo code LINUX26 at checkout to claim your discount.
+Supported Distros
+We’re offering official packages for the following Linux distros:
+Debian, Ubuntu, Linux Mint, and other derivatives
+Fedora, RHEL, Silverblue, and other derivatives
+Arch Linux, CachyOS, Omarchy, and other derivatives
+If your distro is based on any of these, you’re covered.
+Don’t see your favorite distro here? Tweet us at @obscuravpn or email support@obscura.net to let us know which distro we should support next.
+Obscura is Now Licensed Under GPLv3
+We’re relicensing from the PolyForm Noncommercial License 1.0.0 to the GNU General Public License v3.0 furthering our commitment to Open Source software.
+Thanks to Rowan Comish, John Meza and Carl Dong for reading
+drafts of this.
+Want to keep the conversation going?
+Join our Discord.
+For comments or suggestions, reach out to
+support@obscura.net.
+Authors
+David Collini
+Subscribe to the blog
+Subscribe via email or RSS, or just follow us on X.
+Email address
+Subscribe to Everything
+Announcements
+Tech
+Subscribe via email
+Or
+Copy RSS Feed URL
+support@obscura.net
+“We must defend our own privacy if we expect to have any. We must come
+together and create systems which allow anonymous transactions to take
+place.”
+— Eric Hughes,
+A Cypherpunk’s Manifesto (1993)
+Jump To
+Next-Gen Privacy
+How Obscura Works
+Superior Obfuscation
+FAQ
+Resources
+Service Status
+Blog
+Legal
+Careers
+Source Code (GitHub)
+Cursed Knowledge
+Download for macOS
+Community
+Circle of Trust
+Discord
+Matrix Bridge
+Twitter / X
+Mastodon
+Nostr (on Primal)
+© 2026 Sovereign Engineering Inc. All rights reserved.
+WireGuard is a registered trademark of Jason A. Donenfeld.

@@ -1,0 +1,76 @@
+url: https://my.nordaccount.com/legal/terms-of-service/nordvpn/
+method: browser
+saved: 2026-11-19
+
+Skip to main content
+Terms of service
+General
+Subscription Terms
+NordVPN
+NordPass
+NordLocker
+HangUp
+NordLabs
+Privacy Policy
+General
+NordVPN
+NordPass
+NordLocker
+HangUp
+NordLabs
+NordBot
+Cookie policy
+Reports
+DSA Transparency Report
+NordVPN Additional Terms
+Last updated: June 9, 2026
+Your use of NordVPN Services (i.e., (i) NordVPN as VPN Service and (ii) any of its additional features (“Additional Features”)) is subject to the General Terms and these NordVPN Additional Terms. If there is any conflict or inconsistency between clauses in the General Terms and the NordVPN Additional Terms, the NordVPN Additional Terms will govern and apply.
+Capitalized terms not defined here have the same meaning as defined in the General Terms.
+1. NORDVPN SERVICES
+NordVPN is a transitory digital network communications service, which enhances internet security and privacy (“NordVPN as VPN Service”). The NordVPN Software for any platform supported by NordVPN can be downloaded free of charge. Users will have to purchase a paid Subscription from Nord to connect to the NordVPN Services, except in the case of a limited free trial or certain coupon offers.
+Nord guarantees a 99.9% NordVPN as VPN Service uptime.
+From time to time, Nord may, at its sole discretion, include new and/or update Additional Features to the NordVPN Services. Please read more about Additional Features in the NordVPN's Privacy Notice (additional terms).
+NordVPN as VPN Service allows a maximum of ten simultaneous connections per Account. That includes proxy connections, and each of them counts as a separate slot.
+Current information about the functioning of NordVPN Services, subscription plans, and pricing can be found at nordvpn.com
+(opens in a new tab)
+.
+Please note that some routers and firmware may not support or provide the best possible performance of VPN services. Before purchasing NordVPN Services, please check our list of unsupported routers
+(opens in a new tab)
+.
+2. NO-LOGS POLICY
+We understand that the essence of a virtual private network is to be private and that persons have many good reasons to safeguard their privacy and the privacy of their data. Accordingly, Nord guarantees a strict no-logs policy for NordVPN Services, meaning that the NordVPN Services are provided by an automated process, and your activities while using them are not monitored, recorded, logged, stored, or passed to any third party.
+Please note that if you use a dedicated IP address (a unique internet protocol address assigned exclusively to you), it will encrypt your internet traffic and hide your real IP address and virtual location. However, since it's tied to your email address, certain online activities can be traced back to your account information.
+3. YOUR CONDUCT
+NordVPN Services shall not be used for any criminal, illicit, illegal and fraudulent acts, and you accept and agree not to violate any laws applicable to you. It is your responsibility to know and comprehend any and all relevant laws related to any jurisdiction or venue that concerns you, your actions, and your use of NordVPN Services.
+As a reminder, your use of and access to NordVPN Services is also subject to the General Terms, including its provisions on Prohibited and Restricted Uses. We reserve the right, at any time, in our sole discretion, with or without notice, to suspend and/or terminate the Accounts and/or NordVPN Services to any users who violate any applicable laws or these Terms, whether repeated violation or a single instance. It means that we may, among other things, terminate NordVPN Accounts and/or NordVPN Services of users who may be repeat infringers in appropriate circumstances. The foregoing does not limit other rights or remedies available to us hereunder, at law or in equity.
+4. CALL AND MESSAGE PROTECTION FEATURE
+When enabled on your mobile device, this feature helps you to identify whether an incoming phone call or SMS message may fall into certain categories (such as potential scam or other types), based on the caller’s or sender’s phone number reputation or other signals (if available).
+The information displayed about callers’ phone numbers or message text is for general informational purposes only and should not be considered definitive or solely relied upon for making decisions on how to handle a call or proceed with received message. Reputation information may be inaccurate, incomplete, or outdated. We make no warranties regarding the accuracy, reliability, or completeness of the reputation information, which may be sourced from third-party providers. Availability of this feature may vary depending on your region, device, Subscription, or other technical or commercial factors.
+5. TRANSACTION MONITORING FEATURE
+Transaction Monitoring is a security alerting feature that helps you identify potentially suspicious or unusual activity in your linked bank or credit card accounts. Transaction Monitoring is not a financial service, investment service, or payment service. This feature does not provide financial advice, initiate or process payments, manage funds, or make any decisions regarding your accounts. Any alerts generated by this feature are informational only and should not be construed as financial guidance. You remain solely responsible for all decisions made in relation to your bank or credit card accounts.
+To use Transaction Monitoring, you must authorize Nord to connect to your bank or credit card account through a third-party banking API provider. Transaction monitoring relies on data supplied by your bank and third-party banking API providers. While Nord presents this information as received, accuracy and availability may vary and are determined by those sources.
+6. CONTACT REGARDING ALLEGATIONS OF ABUSE
+We do not facilitate or induce any illegal activities while using NordVPN. However, due to the nature of our NordVPN Services, there may be cases where we are unable to identify our users' abusive behavior. Therefore, we mainly rely upon third-party complaints of wrongdoing and on such basis conduct internal investigations in appropriate circumstances.
+Please direct any complaints of abuses of our Terms in respect to NordVPN as VPN Service to us by email at abuse@nordvpn.com.
+For copyright complaints, please recognize that NordVPN as VPN Service is not social media or other hosting services, an information location tool, or caching services. Therefore, we are unable to act on notifications of claimed infringement designed for other services under subsections (b), (c), and (d) of Section 512 of the U.S. Copyright Act, Articles 5 and 6 of the Digital Services Act (“DSA”), or other analogous provisions of the laws of other countries.
+7. CONTACTS REGARDING NORDVPN SERVICES
+Users
+Nord has designated a single point of contact (please direct requests to dsa@nordvpn.com) for NordVPN users for the purposes of the DSA.
+Authorities
+Nord has designated a single point of contact (please direct requests to dsa@nordvpn.com) for EU Member States' authorities to contact us in relation to NordVPN for the purposes of the DSA.
+Please ensure all requests meet the requirements of the DSA and are made in English (or, at a minimum, an English translation is provided).
+Nord's legal representative for purposes of the DSA is:
+NordSec B.V.,
+Fred. Roeskestraat 115,
+1076 EE Amsterdam,
+The Netherlands
++31 625442171
+dsa@nordsec.com
+If you have other questions or concerns regarding these NordVPN Additional Terms and/or NordVPN Services, please contact us at support@nordvpn.com.
+English
+Support center
+Terms of service
+(opens in a new tab)
+Privacy policy
+(opens in a new tab)
+© 2026 Nord Security. All rights reserved.

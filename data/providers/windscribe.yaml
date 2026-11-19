@@ -1,0 +1,663 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada and with a plain
+# fetch (curl) of the same pages, which windscribe.com serves whole: its upgrade (pricing) page, with the Build a Plan
+# location picker its HTML holds, its features pages (/features and /features/<name>), its static IPs page, 74 help
+# articles (windscribe.com/knowledge-base/articles/...), its terms of use, privacy policy, EULA, open-source
+# attributions, transparency report, warrant canary, vulnerability disclosure policy, resellers, ethics, about and
+# download pages, three blog posts (FreshScribe, the Greek court case, logging explained) and Packetlabs' audit report
+# (a PDF its help article links on Google Drive); the upgrade page again through US, UK, German and Australian exits.
+# Pricing: windscribe.com/upgrade ("Billed $9.00 USD every month", "Billed $69 USD every 12 months", "Billed $1.00 per
+# location, per month"), the same in US dollars from Canada and through each exit: one US-dollar price list for
+# everyone (GLOBAL USD). No page says the prices include tax.
+# Region checklist for CA and US, 2026-11-19: 1. no country paths (one site, 18 language versions, the same prices); 2.
+# a language picker only; 3. the page names "USD" beside every price; 4. the checkout needs an account (the Build button
+# opens the sign-up form), so it wasn't opened; 5. the help centre's "How much does it cost to use Windscribe?" gives
+# the same US-dollar prices; 6. Edge and a plain fetch from Canada, and Edge through US, UK, German and Australian exits:
+# all the same; 7. no bill offered.
+# Its individual plans: Free, Pro (monthly, yearly) and Build a Plan. ScribeForce (teams of 5 or more, "$5 per month
+# per account") is a team plan, out of scope. Lifetime Pro is no longer sold ("as of about 2019 we are no longer selling
+# these plans"). Static IPs and Build a Plan's unlimited data are add-ons.
+# Build a Plan: one plan, "$1/location/mo, $3 min" (Free vs. Paid table). Its amount is the least anyone pays, the $3
+# minimum ("Each one is $1 per month and adds 10GB on top of your allowed monthly bandwidth. $3 minimum.", the upgrade
+# page's picker), with 3 locations' features (the review of 2026-11-19); the $1 a location, the 7-location maximum and
+# the $1 "Unlimited Data + R.O.B.E.R.T" add-on are in its notes and add-ons (notes.md).
+# Bundles: none (its Control D managed DNS is another company's product it links, and ScribeForce is for teams).
+# Official resellers: its Official Resellers & Distributors page names one, MySecure Space GmbH, which "Also operates
+# as" SerialCart.com and SerialCart.de (partner since November 2026): its offer is below. App stores (Apple, Google
+# Play, Amazon) bill its apps' plans: partners, not listed.
+# Sale (not stored): the Fuchsia Friday & Cyber Monday sale, "Get Pro for $29/year. Ends Nov 30th", which renews at
+# that price for those who buy it; "Our annual plan is normally $69" (its sale page).
+
+id: windscribe
+name: Windscribe
+aliases: [windscribe vpn]
+website: https://windscribe.com
+category: vpn
+spendCategory: software
+# Accepted cards, read 2026-11-19 in its help article on payment options, which lists "Visa", "Mastercard" and
+# "American Express" for every buyer. Mastercard is left out: "As of December 8th, 2022, Mastercard has been declining
+# all payments made to us for an unknown reason." (Unable to pay/renew with Mastercard, updated Oct 20, 2025).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, amex]
+    url: https://windscribe.com/knowledge-base/articles/what-type-of-payment-options-do-you-accept
+    quotes:
+      - Visa
+      - American Express
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling: Subscriptions under Billing in My Account, or the app store that billed it.
+cancelUrl: https://windscribe.com/knowledge-base/articles/how-to-cancel-a-paid-subscription
+sources: { pricing: https://windscribe.com/upgrade }
+
+# Ways to pay (M11.5), read 2026-11-19: its payment options article (cryptocurrency, PayPal, Visa, Mastercard, American
+# Express, Paymentwall's local methods, and Apple, Google Play and Amazon billing on their devices), cash by post (1 year
+# of Pro only) and its gift cards' voucher codes. Paymentwall, a processor offering "payment methods that are local to
+# your country/region", is `other`.
+paymentMethods:
+  - methods: [crypto, paypal, card, other, apple-pay, app-store]
+    page: 'What type of payment options do you accept?'
+    url: https://windscribe.com/knowledge-base/articles/what-type-of-payment-options-do-you-accept
+    quotes:
+      - Cryptocurrency
+      - PayPal
+      - Visa
+      - Paymentwall (Local Currencies)
+      - Apple Pay, Google Play, and Amazon payments are also available on matching devices
+  - methods: [cash]
+    page: 'Can I pay for Windscribe with cash?'
+    url: https://windscribe.com/knowledge-base/articles/can-i-pay-for-windscribe-with-cash
+    quotes:
+      - 'Yes. If you really want to, you can pay for Windscribe by mailing us cash.'
+  - methods: [gift-card]
+    page: 'How Do I Redeem a Windscribe Gift Card?'
+    url: https://windscribe.com/knowledge-base/articles/how-to-redeem-windscribe-gift-card
+    quotes:
+      - Redeeming your Windscribe Gift Card is simple!
+# Currencies (M11.5), read 2026-11-19: cash by post in nine currencies (its list also names "Zimbabwean dollars", a joke
+# with no ISO code in use, left out), for "1 year of Pro only" at "$69 USD".
+currencies:
+  - codes: [USD, CAD, EUR, GBP, CHF, AUD, NZD, SEK, NOK]
+    methods: [cash]
+    page: 'Can I pay for Windscribe with cash?'
+    url: https://windscribe.com/knowledge-base/articles/can-i-pay-for-windscribe-with-cash
+    quotes:
+      - '• USD • CAD • EUR • GBP • CHF • AUD • NZD • SEK • NOK'
+# Renewal day (M11.5), read 2026-11-19: a plan renews on the day of the month you paid ("Garry starts a monthly
+# subscription on Oct 5 - Starts on Oct 5 - Renews on Nov 5", My paid plan is ending soon). Paused subscriptions move
+# their renewal date by the pause (How To Pause and Unpause a Subscription).
+renewalAnchor:
+  kind: same-date
+  page: 'My paid plan is ending soon, can I renew it earlier/now?'
+  url: https://windscribe.com/knowledge-base/articles/my-paid-plan-is-ending-soon-can-i-renew-it-earliernow
+  quotes:
+    - 'This will move your billing date forward by 4 days, as it will be the same day of the month as when you made your most recent payment.'
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its terms name Windscribe Limited, registered in Ontario, Canada. Private: "100% of the
+# equity is owned by the three founders (Yegor Sak, Alex Paguis and Mark Ulicki) and Windscribe employees." (Who owns
+# Windscribe?), and its about page says "we’re self-funded". No listing, so no stock.
+owner:
+  name: Windscribe Limited
+  page:
+    name: Terms of use
+    url: https://windscribe.com/terms
+  quotes:
+    - 'those of Windscribe Limited., the owner of Windscribe, a company registered in the province of Ontario, Canada'
+  country:
+    code: CA
+  lastVerified: 2026-11-19
+notes: >-
+  One price list in US dollars everywhere. Free needs no email or card; Build a Plan is a dollar a month for each
+  location you pick (at least $3), and Pro unlocks every location. Every plan connects unlimited devices of your own.
+  Its Black Friday sale ($29 a year for Pro, until November 30) renews at the sale price for those who buy it.
+
+# General features, read 2026-11-19: apps for Windows, macOS, Linux, Android, iOS, the browser (Chrome, Firefox, Edge)
+# and TV (its download page's Windows, MacOS, Linux, Android, iOS, Browser and TV tabs; Fire TV, Android TV and Apple TV
+# in its footer); a username and password, with authenticator app codes ("With a TOTP (Time-based One-time Password)
+# supporting 2FA application", How do I enable 2 Factor Authentication); support tickets ("A support ticket for refund
+# requests or help with any issues can be submitted here") and its subreddit and Discord (Get in touch), and a chatbot,
+# Garry, "available 24/7" (a bot, so not live chat or round-the-clock support); app languages from its language picker
+# (عرب, 中文, Nederlands, English, Français, Deutsche, हिंदी, Italiano, Português, Русский, Svenska, Español, Türk, 日本語,
+# Indonesia, 한국어, Tiếng Việt, ไทย). Open source: "All our apps are open-source, so you can see how everything works, no
+# smoke and mirrors." (About), its footer's "Open Source" linking github.com/windscribe; its servers' code isn't
+# published, so open-source apps. Pause on the paid plans: "Any Pro, Custom Build-A-Plan, Static IP, or ScribeForce
+# subscription paid directly on our site by credit card (via Stripe) can be paused" for 1, 3, 6 or 12 months. No
+# parental controls: R.O.B.E.R.T.'s porn and gambling lists are switches you set for yourself.
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password, totp]
+  support.channels: [email, community]
+  software.open-source: open-clients
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+sourceRepo:
+  url: https://github.com/Windscribe
+  page:
+    name: About
+    url: https://windscribe.com/about
+  quotes:
+    - 'All our apps are open-source, so you can see how everything works, no smoke and mirrors.'
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19, on every plan unless named:
+# - Devices: "No device or connection limits" (Unlimited Devices), for free accounts too ("Free accounts get the same
+#   unlimited connection policy as Pro"), so `unlimited`; heavy use (dozens of devices) can get an account banned.
+# - Countries: Pro "69+ countries, 135+ cities" (Free vs. Paid table; "Currently we offer servers in 69 different
+#   countries worldwide, 10 of which are accessible to Free users", How many servers); Free's 10 (United States, Canada,
+#   United Kingdom, Hong Kong, France, Germany, Netherlands, Switzerland, Norway, Romania). Build a Plan: "Pick up to 7"
+#   locations, each a country in its picker ("United States 52 Pro Data Centers"), on top of the free locations ("This
+#   includes all the Pro locations in your bundle as well as all the Free locations you already have access to."): its
+#   price is the $3 minimum's 3 locations, so 13 countries (inferred), 17 with the most it sells.
+# - Data (the registry's rule of 2026-11-19: `unlimited` where its pages say so): Free "10 GB/mo (2 GB no email)" (10 GB
+#   with a confirmed email address, which comes with 1-2 promo emails a month); Build a Plan "10 GB per location bought",
+#   "on top of your allowed monthly bandwidth", so 3 locations' 40 GB (inferred; its help article's example: "three
+#   locations and has used 15GB of his 40GB"), unlimited with the add-on; Pro
+#   "Unlimited". Never throttled ("Never" on every plan).
+# - Protocols: "IKEv2", "WireGuard", "OpenVPN (UDP)", "OpenVPN (TCP)", "Stealth" (OpenVPN in a TLS tunnel) and
+#   "WStunnel" (OpenVPN in a WebSocket), the last two for blocked networks (stealth); "All 6 protocols, 20+ ports" on
+#   every plan.
+# - Kill switch: its Firewall, "Blocks all connectivity outside the VPN tunnel to eliminate all types of leaks", and the
+#   table's "Firewall (leak protection)" on every plan; split tunnelling the same ("Split tunneling" ticked on all three).
+# - Multi-hop: Double Hop, "Proxy your connection through any 2 locations on the Windscribe network" (the desktop app and
+#   the browser extension together). Its terms: "The free version is functionally similar to the paid plan, differing
+#   only in bandwidth limits and location availability".
+# - Blocking (R.O.B.E.R.T.): Free "Malware & Ads", Build a Plan (with its add-on) and Pro "All": Malware, Ad+Trackers,
+#   Social Networks, Porn, Gambling, Fake News + Clickbait, Competitors and Crypto lists. Build a Plan without the add-on
+#   keeps Free's.
+# - P2P: "We do not prohibit Pro users from using our VPN for Peer-to-Peer (P2P) traffic, but P2P is disabled on our free
+#   servers at this time." and "(for Build-a-Plan, P2P will work only on the servers you pay for)".
+# - Port forwarding: Pro's ephemeral ports ("Build-A-Plan users do not have access to Ephemeral Port Forwarding"), and
+#   static IPs' permanent ones (an add-on).
+# - No-logs and audits: its privacy policy ("Historical record of VPN sessions", "Source IP" and "Sites you visited" are
+#   "NOT stored"); Packetlabs' 2024 audit of its server stack ("Validation of the no-log policy to ensure end user
+#   anonymity." was one of its two aims; its retest of June 24, 2024 found every logging issue remediated), Leviathan
+#   Security Group's audits of its desktop app (September 2021) and its Android and iOS apps (March 2022) (Has Windscribe
+#   been audited?): no-logs, servers and apps.
+# - Anonymous sign-up: "We only require a username and password when you signup to our service." (privacy policy).
+# - RAM-only servers: "All Windscribe physical servers use RAM-only (diskless) tech ." (Physical Servers) and
+#   "Windscribe's entire infrastructure runs on RAM-only servers." (No Identifying Logs).
+# - No mesh: none of its pages offers connecting your own devices to each other. No Tor servers: its Tor article is
+#   about running the Tor Browser while connected. Static IPs are shared ("we offer static IPs instead where multiple
+#   users are assigned the same IP"), never dedicated; the registry has no dedicated-IP feature (notes.md).
+plans:
+  - id: windscribe.free
+    name: Free
+    link: https://windscribe.com/signup
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: false
+      vpn.data-allowance: 10
+      vpn.server-countries: 10
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+    notes: >-
+      10 GB a month once you add and confirm an email address (which gets one or two promotional emails a month), 2 GB
+      without one. Locations in 10 countries, on shared free servers; P2P is off on them. More data for posting about it
+      on X (5 GB) or referring friends (1 GB each).
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/features/use-for-free
+
+  - id: windscribe.build-a-plan
+    name: Build a Plan
+    link: https://windscribe.com/upgrade
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: false
+      vpn.data-allowance: 40
+      vpn.server-countries: 13
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      account.pause: true
+    inferred:
+      vpn.server-countries:
+        reason: 'Its $3 minimum buys 3 locations, each a country in its picker, which join the 10 free countries you keep: 13 countries, and up to 17 with 7 locations.'
+        page:
+          name: 'Does Build-a-Plan unlimited data apply to all locations?'
+          url: https://windscribe.com/knowledge-base/articles/does-build-a-plan-unlimited-data-apply-to-all-locations
+        lastVerified: 2026-11-19
+      vpn.data-allowance:
+        reason: 'Its $3 minimum buys 3 locations, and its help article’s example of a plan with 3 locations has 40 GB a month (10 GB for each, on top of the free 10 GB), unless you add unlimited data.'
+        page:
+          name: 'How do changes to my Build-a-Plan affect my data?'
+          url: https://windscribe.com/knowledge-base/articles/how-do-changes-to-my-build-a-plan-affect-my-data
+        lastVerified: 2026-11-19
+    notes: >-
+      Priced at its $3 minimum, 3 Pro locations (each a country you pick). Each location is $1 a month, up to 7
+      ($7), and adds 10 GB a month to the free plan's data, or add Unlimited Data + R.O.B.E.R.T. for $1 a month
+      (unlimited data on every location you can use, and all of R.O.B.E.R.T.'s block lists). The free countries stay.
+      No port forwarding. Edits are refunded for the unused days and billed afresh, twice in 30 days at most.
+    addOnIds:
+      [windscribe.unlimited-data, windscribe.static-ip-datacenter, windscribe.static-ip-residential]
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 3
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/upgrade
+
+  - id: windscribe.pro
+    name: Pro
+    link: https://windscribe.com/upgrade
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 69
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content, gambling, social-media]
+      vpn.p2p: true
+      vpn.port-forwarding: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      account.pause: true
+    addOnIds: [windscribe.static-ip-datacenter, windscribe.static-ip-residential]
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 9
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/upgrade
+      - region: GLOBAL
+        currency: USD
+        amount: 69
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/upgrade
+
+# Add-ons, read 2026-11-19: Build a Plan's "Unlimited Data + R.O.B.E.R.T" ("You can also get Unlimited Data and full
+# access to R.O.B.E.R.T. for $1 as well.", How much does it cost), and static IPs, "Datacenter Billed $24.00 USD every
+# year" and "Residential Billed $96.00 USD every year" (/staticips), yearly only ("They are a 1 year purchase in addition
+# to your Pro subscription, and are not available on a monthly basis."), for Pro or Build a Plan with unlimited data
+# ("Static IPs require unlimited data or Pro"). Each static IP is shared by a few users and has permanent port forwards.
+addOns:
+  - id: windscribe.unlimited-data
+    name: Unlimited Data + R.O.B.E.R.T.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 1
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/knowledge-base/articles/how-much-does-it-cost-to-use-windscribe
+  - id: windscribe.static-ip-datacenter
+    name: Static IP (datacenter)
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 24
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/staticips
+  - id: windscribe.static-ip-residential
+    name: Static IP (residential)
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 96
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://windscribe.com/staticips
+
+# Resellers, read 2026-11-19 (BLUEPRINT §4.9): windscribe.com/resellers names MySecure Space GmbH, operating as
+# SerialCart.com and SerialCart.de ("The companies below are official Windscribe Pro resellers."). SerialCart's
+# Windscribe VPN Pro page (serialcart.com/buy/windscribe-vpn) sells voucher codes for "Unlimited Devices, 1 Year" and
+# "Unlimited Devices, 2 Years", whose regular prices are in the page's variation data (51 € and 100.84 €, "excl. VAT";
+# its "Limited Offer" of 39.99 € and 67.22 € is a sale, not stored). Its prices are in euros from Canada (Mullvad's
+# SerialCart prices were in US dollars in October: notes.md).
+resellers:
+  - reseller: serialcart
+    approvedBy:
+      url: https://windscribe.com/resellers
+      quotes: ['SerialCart.com, SerialCart.de']
+    offers:
+      - plan: windscribe.pro
+        notes: Voucher codes by email, for new or existing Windscribe accounts.
+        prices:
+          - region: GLOBAL
+            currency: EUR
+            amount: 51
+            interval: year
+            intervalCount: 1
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-11-19
+            sourceUrl: https://serialcart.com/buy/windscribe-vpn
+          - region: GLOBAL
+            currency: EUR
+            amount: 100.84
+            interval: year
+            intervalCount: 2
+            autoRenew: false
+            taxExcluded: { quote: excl. VAT }
+            lastVerified: 2026-11-19
+            sourceUrl: https://serialcart.com/buy/windscribe-vpn
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its terms of use (updated August 5 2026), privacy policy
+# (updated July 30 2024), EULA (updated January 4th 2018), the help articles on refunds, cancelling, deleting an account,
+# selling data, free accounts' logs, debug logs, audits, devices and promo emails, its Free plan, No Identifying Logs
+# and Unlimited Devices pages, transparency report, warrant canary, vulnerability disclosure policy and ethics page.
+# Every agreement a user accepts (the owner's rule, 2026-11-03): the sign-up form says "By creating an account, you
+# agree to our Terms & Conditions and Privacy Policy"; the terms include nothing by reference; its apps' EULA is on
+# windscribe.com/terms/eula (rated below), and its open-source attributions (/terms/oss) list the GPL software its apps
+# use (no topic). Its Android app's own privacy page (/privacy/android) wasn't needed for any topic.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://windscribe.com/terms
+    - name: 'Privacy policy'
+      url: https://windscribe.com/privacy
+    - name: 'EULA'
+      url: https://windscribe.com/terms/eula
+    - name: 'About'
+      url: https://windscribe.com/about
+    - name: 'Does Windscribe sell or share my data?'
+      url: https://windscribe.com/knowledge-base/articles/does-windscribe-sell-or-share-my-data
+    - name: 'Does the debug log contain personal info?'
+      url: https://windscribe.com/knowledge-base/articles/does-the-debug-log-contain-personal-identifiable-info
+    - name: 'Ethics and philosophy'
+      url: https://windscribe.com/ethics
+    - name: 'How to delete your account'
+      url: https://windscribe.com/knowledge-base/articles/how-to-delete-your-windscribe-account
+    - name: 'Transparency report'
+      url: https://windscribe.com/transparency
+    - name: 'Can Windscribe be trusted?'
+      url: https://windscribe.com/knowledge-base/articles/can-windscribe-be-trusted
+    - name: 'How to cancel a paid subscription'
+      url: https://windscribe.com/knowledge-base/articles/how-to-cancel-a-paid-subscription
+    - name: 'Does my subscription automatically renew?'
+      url: https://windscribe.com/knowledge-base/articles/does-my-windscribe-subscription-automatically-renew
+    - name: 'How can I edit my custom plan?'
+      url: https://windscribe.com/knowledge-base/articles/how-can-i-edit-my-custom-plan
+    - name: 'Upgrade'
+      url: https://windscribe.com/upgrade
+    - name: 'Vulnerability disclosure policy'
+      url: https://windscribe.com/vdp
+    - name: 'Has Windscribe been audited?'
+      url: https://windscribe.com/knowledge-base/articles/has-windscribe-been-audited
+    - name: 'No identifying logs'
+      url: https://windscribe.com/features/no-identifying-logs
+    - name: 'Unlimited devices'
+      url: https://windscribe.com/features/unlimited-devices
+    - name: 'Why do I need to subscribe to promo emails to get 10GB?'
+      url: https://windscribe.com/knowledge-base/articles/why-do-i-need-to-subscribe-to-promo-emails-to-get-10gb
+    - name: 'Can I pay with cash?'
+      url: https://windscribe.com/knowledge-base/articles/can-i-pay-for-windscribe-with-cash
+    - name: 'Update channels'
+      url: https://windscribe.com/features/update-channels
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'It measures visits to its own website with its own counting tool, and its phone apps send crash reports by themselves. Its pages offer no way to switch either off.'
+      sources:
+        - url: https://windscribe.com/privacy
+          quote: 'We use open source Piwik web analytics platform to measure usage on our website, which is hosted on our servers.'
+        - url: https://windscribe.com/knowledge-base/articles/does-the-debug-log-contain-personal-identifiable-info
+          quote: 'The only exception to this is with app crash logs on mobile devices.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It never sells or shares your data: what it holds about your account stays with it.'
+      sources:
+        - url: https://windscribe.com/knowledge-base/articles/does-windscribe-sell-or-share-my-data
+          quote: 'all your account data stays entirely within the confines of Windscribe.'
+        - url: https://windscribe.com/knowledge-base/articles/does-windscribe-sell-or-share-my-data
+          quote: 'We will never share your data or sell any of it to make a quick buck.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads, and its website has no outside trackers or analytics from other companies.'
+      sources:
+        - url: https://windscribe.com/ethics
+          quote: 'The Windscribe website does not contain any 3rd party analytics, tracking pixels, A/B test platforms, or social widgets.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy policy and terms don't mention AI. It keeps very little about you."
+      pages: [https://windscribe.com/privacy, https://windscribe.com/terms]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Payment numbers go after 30 days and your data use is a 30-day count, but if you just stop using it, your username, password and email stay until it clears out old accounts, with no stated time.'
+      sources:
+        - url: https://windscribe.com/privacy
+          quote: 'we store the transaction ID of your payment for a period of 30 days for fraud prevention purposes.'
+        - url: https://windscribe.com/privacy
+          quote: 'If for some strange reason you decide not to use our service anymore, the only piece of information that will remain is your username, password and email address (if you provided it).'
+        - url: https://windscribe.com/privacy
+          quote: 'We periodically prune inactive accounts.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself, at any time, in a few clicks on its website.'
+      sources:
+        - url: https://windscribe.com/privacy
+          quote: 'You can delete your account at any time in the "My Account" section.'
+        - url: https://windscribe.com/knowledge-base/articles/how-to-delete-your-windscribe-account
+          quote: 'Deleting your Windscribe account can be done with just a few clicks on the Account tab of your My Account page here: https://windscribe.com/myaccount/account'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: "Its privacy policy and help articles don't say you can get a copy of your data."
+      pages: [https://windscribe.com/privacy, https://windscribe.com/terms]
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It keeps a live public count of police and copyright requests, and has handed data over for none of them, because it keeps nothing useful. It doesn’t say it tells you, or what papers it needs.'
+      sources:
+        - url: https://windscribe.com/transparency
+          quote: 'Exactly zero requests were complied with due to lack of relevant data.'
+        - url: https://windscribe.com/knowledge-base/articles/can-windscribe-be-trusted
+          quote: 'we cannot share data we do not have.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      status: not-stated
+      reason: "It's a Canadian company that runs its own software on its own or leased machines, but its pages don't say where your account data is kept."
+      pages: [https://windscribe.com/privacy, https://windscribe.com/ethics]
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You sign up with a username and password you make up. An email address is optional.'
+      sources:
+        - url: https://windscribe.com/privacy
+          quote: 'We only require a username and password when you signup to our service.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel online at any time from your account, after a page asking why and maybe a special offer. You keep what you paid for until it ends.'
+      sources:
+        - url: https://windscribe.com/knowledge-base/articles/how-to-cancel-a-paid-subscription
+          quote: 'If a special offer appears, select No Thanks, Cancel to go on.'
+        - url: https://windscribe.com/knowledge-base/articles/does-my-windscribe-subscription-automatically-renew
+          quote: 'You can still use the Windscribe plan for the remainder of that billing period.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get your first payment back within 7 days if you used less than 10 GB and support can’t fix your problem. Renewals are never refunded.'
+      sources:
+        - url: https://windscribe.com/terms
+          quote: 'Refund requests must be made within 7 business days of your subscription start date and while your usage remains below 10 GB.'
+        - url: https://windscribe.com/terms
+          quote: 'Refunds apply only to the initial payment and do not include subsequent renewals.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: "Its terms and help articles don't say whether it warns you before a price goes up."
+      pages:
+        [
+          https://windscribe.com/terms,
+          https://windscribe.com/knowledge-base/articles/does-my-windscribe-subscription-automatically-renew,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial: it has a free plan instead, and paid plans start when you pay.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: "Its plans renew on their own, and its pages don't say it reminds you first. Without an email address it has no way to."
+      pages:
+        [
+          https://windscribe.com/terms,
+          https://windscribe.com/knowledge-base/articles/does-my-windscribe-subscription-automatically-renew,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms give no fees beyond the price.'
+      pages: [https://windscribe.com/terms]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'You can change your Build a Plan at any time: it refunds the days you didn’t use and charges the new plan from that day. You can do this twice in 30 days.'
+      sources:
+        - url: https://windscribe.com/knowledge-base/articles/how-can-i-edit-my-custom-plan
+          quote: "When you make a payment after editing your plan, you will be refunded for the days you didn't use on your old one and the plan will be cancelled."
+        - url: https://windscribe.com/upgrade
+          quote: 'You may only make changes twice in a 30 day period.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disagreements go to the regular courts in Toronto, Canada, not to a private referee, but you have to bring them there.'
+      sources:
+        - url: https://windscribe.com/terms
+          quote: 'These disputes will be resolved exclusively in the courts in Toronto, Ontario, Canada and you consent to personal jurisdiction in those courts.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms just by posting new ones, and if you keep using it, that counts as saying yes.'
+      sources:
+        - url: https://windscribe.com/terms
+          quote: 'Windscribe reserves the right to modify these Terms of Use at any time upon posting.'
+        - url: https://windscribe.com/terms
+          quote: 'By continuing to use this Site and related services after any changes are posted, you are signifying your acceptance of the revised terms and conditions, regardless of whether you have reviewed them.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close or limit your account at any time, for any reason, with or without warning, and its terms promise no refund.'
+      sources:
+        - url: https://windscribe.com/terms
+          quote: 'Windscribe reserves the right to terminate, suspend, or otherwise restrict your access to this Service, or any associated tool or services, with or without notice at any time for any reason whatsoever'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of the service at any time, even without warning, and says it owes you nothing for it.'
+      sources:
+        - url: https://windscribe.com/terms
+          quote: 'In addition, Windscribe reserves the right to modify or discontinue this Service or any portion hereof at any time with or without notice.'
+        - url: https://windscribe.com/terms
+          quote: 'Windscribe shall not be liable to you or any third party for any such termination, suspension, restriction, modification, or discontinuance.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It deletes accounts nobody has used for a while, but doesn’t say after how long or that it warns you.'
+      sources:
+        - url: https://windscribe.com/privacy
+          quote: 'We periodically prune inactive accounts.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps’ code is public, but its app licence, from 2018, still says you may not change, take apart or copy them, and one copy is for one person.'
+      sources:
+        - url: https://windscribe.com/terms/eula
+          quote: 'You shall not, and shall not attempt to, modify, reverse engineer, disassemble or decompile Windscribe VPN.'
+        - url: https://windscribe.com/terms/eula
+          quote: 'Each licensed copy of Windscribe VPN may be used on one single computer location by one user, unless otherwise specified.'
+        - url: https://windscribe.com/about
+          quote: 'All our apps are open-source, so you can see how everything works, no smoke and mirrors.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: great
+      reason: 'Outside security firms have checked its apps and servers and it publishes their reports. It pays rewards for security bugs, and it publicly told users when servers were seized in 2021.'
+      sources:
+        - url: https://windscribe.com/knowledge-base/articles/has-windscribe-been-audited
+          quote: 'Yes, Windscribe has not only open-sourced our applications on Github , but has undergone several audits over the years for our applications and server software.'
+        - url: https://windscribe.com/vdp
+          quote: "Historically, we've paid out anywhere between $100 and $5000 for disclosed vulnerabilities."
+        - url: https://windscribe.com/features/no-identifying-logs
+          quote: 'July 2021 — Servers seized. We told on ourselves publicly. Then rebuilt everything.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: neutral
+      reason: 'It keeps no record of the sites you visit or your IP address, but keeps the date you last used it and your data use over 30 days, to run its limits.'
+      sources:
+        - url: https://windscribe.com/features/no-identifying-logs
+          quote: 'When you last used Windscribe (date only, not time)'
+        - url: https://windscribe.com/features/no-identifying-logs
+          quote: 'Total bandwidth used in the last 30 days'
+        - url: https://windscribe.com/privacy
+          quote: "We are firm believer that one's browsing history should be taken to one's grave."
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: good
+      reason: 'There’s no set number of devices for your own use. Only plain abuse, like dozens of connections at once, gets an account banned, and it warns you first.'
+      sources:
+        - url: https://windscribe.com/features/unlimited-devices
+          quote: 'As many as you reasonably need.'
+        - url: https://windscribe.com/features/unlimited-devices
+          quote: "Nothing dramatic. If something looks unusual, you'll get a heads-up."
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: "Its pages describe update channels for its desktop apps, but don't say whether apps update themselves."
+      pages: [https://windscribe.com/features/update-channels, https://windscribe.com/terms/eula]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Pay with cash in the mail
+      tier: great
+      reason: 'You can pay for a year of Pro by mailing cash, so you never have to give it your name or a card.'
+      sources:
+        - url: https://windscribe.com/knowledge-base/articles/can-i-pay-for-windscribe-with-cash
+          quote: 'Yes. If you really want to, you can pay for Windscribe by mailing us cash.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Free data for marketing emails
+      tier: neutral
+      reason: 'The free plan gives 10 GB a month only if you accept one or two promotional emails a month. Unsubscribing drops you to 2 GB.'
+      sources:
+        - url: https://windscribe.com/knowledge-base/articles/why-do-i-need-to-subscribe-to-promo-emails-to-get-10gb
+          quote: 'Part of the deal to get the 10GB of free monthly VPN bandwidth is that you at least let us advertise to you in the form of one or two promo emails per month.'
+      lastVerified: 2026-11-19

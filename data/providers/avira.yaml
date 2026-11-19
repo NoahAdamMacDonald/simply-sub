@@ -204,6 +204,13 @@ perks:
 #   named), "Get unlimited, secure traffic on all your devices", with no count: its checkout's "1 device / Yearly
 #   subscription" is the link's users=1 echoed back, so vpn.devices waits for a help article that states it. Protocols,
 #   split tunneling and multi-hop: no page read states them.
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: Prime's and Phantom VPN Pro's data is unlimited ("VPN with
+# unlimited data", en/prime; "Unlimited data for more secure and anonymous browsing", en/vpn-pro). Free Security's is
+# 0.5 GB ("VPN with 500 MB data/month", en/free-security), and Antivirus Pro's, which "also includes Avira Phantom VPN"
+# (en/antivirus-pro), is the free version's: "With the free versions of Avira Phantom VPN, you are restricted to 500
+# MB/month of data, or 1 GB/month if you register" (en/vpn-pro), so 0.5 too (1 GB once registered: notes.md). No page
+# read mentions RAM-only servers or a way to connect your own devices to each other, so both are false.
 plans:
   # Free Security (its page, en/free-security): antivirus, anti-ransomware, browser protection, a software updater, a
   # home network scan, a password manager, a shredder, speed-up tools and the free Phantom VPN (500 MB a month).
@@ -228,6 +235,9 @@ plans:
       password-manager: true
       password-manager.item-types: [login]
       vpn.included: true
+      vpn.data-allowance: 0.5
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     notes: 'Free: real-time antivirus with ransomware and phishing protection, a software updater, a password manager, a file shredder, speed-up tools and a VPN with 500 MB a month (1 GB if you register).'
     prices:
       - region: GLOBAL
@@ -260,6 +270,9 @@ plans:
       password-manager: true
       password-manager.item-types: [login]
       vpn.included: true
+      vpn.data-allowance: 0.5
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.devices: 1
       platforms: [windows, macos]
     notes: 'Antivirus for 1 Windows PC or Mac, with a firewall on Windows, scheduled scans, phishing protection and the free VPN (500 MB a month).'
@@ -670,10 +683,13 @@ plans:
       password-manager.health: [breached, weak, reused]
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 36
       vpn.kill-switch: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.devices: 5
       includes-subscription: [avira.internet-security, avira.phantom-vpn-pro]
     perks: [safe-shopping, vip-support]
@@ -881,10 +897,13 @@ plans:
       password-manager.health: [breached, weak, reused]
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 36
       vpn.kill-switch: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.devices: 25
       includes-subscription: [avira.internet-security, avira.phantom-vpn-pro]
     perks: [safe-shopping, vip-support]
@@ -1075,10 +1094,13 @@ plans:
     features:
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 36
       vpn.kill-switch: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     notes: 'An unlimited VPN, with servers in 36 countries, a kill switch on Windows and P2P.'
     prices:
       - region: CA

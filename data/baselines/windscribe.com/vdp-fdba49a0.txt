@@ -1,0 +1,53 @@
+url: https://windscribe.com/vdp
+method: fetch
+saved: 2026-11-19
+
+Vulnerability Disclosure Policy | Windscribe
+Skip to main content The Windscribe Fuchsia Friday & Cyber Monday Sale is here! Get Pro for $29/year. Ends Nov 30th
+FeaturesPlansDownload Resources
+Log InMy Account Get WindscribeUpgrade
+Vulnerability Disclosure Policy
+Updated: December 3 2021
+Found a vulnerability? Let us know so we can fix it.
+Introduction
+We're committed to writing flawless bug-free code, however as any software engineer will understand, this is not possible in most circumstances. This is why this Vulnerability Disclosure Program exists. The following document outlines our program guidelines, what you should test and what kind of tests you should avoid. It also mentions how to report issues and the rewards for doing so.
+Guidelines
+The rules are simple:
+Notify us as soon as possible after you discover a real or potential security issue.
+Make every effort to avoid privacy violations, degradation of user experience, disruption to production systems, and destruction or manipulation of data.
+Only use exploits to the extent necessary to confirm a vulnerability’s presence.
+Provide us a reasonable amount of time to resolve the issue before you disclose it publicly.
+Do not submit a high volume of low-quality reports.
+Scope
+The scope of this program includes the following:
+Website - windscribe.com
+API - api.windscribe.com
+VPN endpoints
+Windows app
+MacOS app
+Android app
+iOS app
+Chrome extension
+Firefox extension
+Things to Avoid
+While bug hunting, please avoid the following:
+DDoSing our infrastructure
+Brute forcing
+Social engineering
+Exfiltrate large amounts of data
+Our Response
+After submitting a report you can expect to hear from us within 48 hrs, but usually a lot less. We will attempt to replicate the issue, and deploy a fix as soon as possible. In most cases this will happen pretty quickly, but in cases of application level vulnerabilities that require an update, it may take longer. This should go without saying, but we'll say it anyway: We won't sue you if you disclose issues to us.
+Bug Bounty
+If your report is verified and deemed to be an issue, you are eligible for compensation for your efforts. The actual amount solely depends on the severity of the issue as determined by us. Historically, we've paid out anywhere between $100 and $5000 for disclosed vulnerabilities.
+Reporting
+To disclose an issue, please email us at security (AT) windscribe.com. You can find our PGP key here. Please be as descriptive as possible and provide exact steps to reproduce the problem.
+Vulnerability Disclosure
+In the event of a critical issue being discovered that has a wide impact, we will notify all affected users via 4 channels of communication: notifications inside our apps, email (if email was provided during signup), Twitter and Reddit. A full breakdown of the issue and the solution will be posted in our blog. Example voluntary disclosure.
+Windscribe
+DownloadChangelogPricingBuy MerchSupportFeaturesOpen SourceEthics & PhilosophyFree DNSWhite Label VPNVPN ServersResellers & DistributorsRefer a Friend
+Apps
+VPN for WindowsVPN for AndroidVPN for MacVPN for LinuxVPN for ChromeVPN for FireTVVPN for FirefoxVPN for Apple TVVPN for MS EdgeVPN for HuaweiVPN for iPhoneVPN for RoutersVPN for AgentsWindscribe F-Droid
+Company
+About UsPrivacyTermsVDPJobsBlogInfoGang
+© 2069 Windscribe Limited
+Switch Language : English

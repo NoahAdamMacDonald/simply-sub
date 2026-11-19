@@ -1,0 +1,84 @@
+url: https://www.ivpn.net/en/refunds/
+method: fetch
+saved: 2026-11-19
+
+IVPN Refund Policy and Process
+Предупреждение: подключение и стабильная работа VPN в России не гарантируется из-за действующих ограничений. Рекомендуем сначала протестировать сервис с недельным тарифом.
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Refunds
+IVPN strives to meet the expectations of all users and offers unlimited support to help users with any problems they may face.
+If you are unsatisfied for any reason, you can request a full refund within 30 days of your payment. This full refund offer is available once per account and per customer.
+Below is the information you need to email for each payment method:
+Credit Card
+Your IVPN Account safe reference (XXXXXXXX) or the IVPN Account ID (i-XXXX-XXXX-XXXX / ivpnXXXXXXXX).
+If you do not remember your account details, provide us with the first 6 digits of the card number, the last 4 digits of the card number, the date of the payment, and the amount paid.
+PayPal
+Your IVPN Account safe reference (XXXXXXXX) or the IVPN Account ID (i-XXXX-XXXX-XXXX / ivpnXXXXXXXX).
+If you do not remember your account details, provide us with your PayPal account email address and the transaction ID associated with the purchase.
+Bitcoin and Monero
+Your IVPN Account safe reference (XXXXXXXX) or the IVPN Account ID (i-XXXX-XXXX-XXXX / ivpnXXXXXXXX).
+Your Bitcoin / Monero wallet address to receive the refund.
+If you do not remember your account details, provide us with the transaction ID for your Bitcoin or Monero payment, the payment date, and the amount paid.
+Please note: IVPN Light purchases are non-refundable.
+Android In-App Purchase
+Your IVPN Account safe reference (XXXXXXXX) or the IVPN Account ID (i-XXXX-XXXX-XXXX / ivpnXXXXXXXX).
+Google Play Store transaction ID that starts with GPA..
+iOS In-App Purchase
+App Store purchases are refunded by Apple. Details on how to submit the refund claim to Apple can be found here.
+Cash and Vouchers
+Cash and Voucher payments are non-refundable.
+Please note: We do not offer prorated refunds.
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Versión española
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

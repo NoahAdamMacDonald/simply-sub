@@ -1,0 +1,108 @@
+url: https://windscribe.com/staticips
+method: browser
+saved: 2026-11-19
+
+Features
+Pricing
+Support
+Download
+Log In
+Static IP
+Port Forwarding
+Access network services remotely with up to 10 ports per device
+Avoid Blacklists
+Static IPs are less likely to end up on your ISPs blacklist
+Access Control
+Restrict access to resources for greater security
+Share with Team
+Static IPs can be shared by all members of your ScribeForce
+Static IPs require unlimited data or Pro Upgrade
+Datacenter
+Billed $24.00 USD every year
+$2.00
+per month
+Select IP Location
+Select Payment Method
+Credit Card
+PayPal
+Cryptocurrency
+Local Payments
+Renews automatically. Cancel anytime.
+Continue
+Back
+Residential
+Billed $96.00 USD every year
+$8.00
+per month
+Uses a residential connection to bypass blocking and restrictions. P2P (torrent) traffic is prohibited.
+Select IP Location
+Select Payment Method
+Credit Card
+PayPal
+Cryptocurrency
+Local Payments
+Renews automatically. Cancel anytime.
+Continue
+Back
+Static IP Locations
+Location Data center Residential
+Atlanta
+Amsterdam
+Chicago
+Dallas
+Frankfurt
+Los Angeles
+London
+Paris
+San Jose
+Toronto
+Washington DC
+Zurich
+Singapore
+Tokyo
+Are these IPs dedicated?
+We do not offer dedicated IPs for privacy reasons. If we receive a request for subscriber information and a dedicated IP address is used, legally we cannot say we don’t know who the user is, since the IP belongs to a single Windscribe account. In order to avoid these potential privacy violations, we allocate a single IP address to a handful of customers, so your activity can still be “lost in the crowd”.
+Static vs Dynamic IPs
+Features Dynamic IP Static IP (Datacenter) Static IP (Residential)
+Privacy
+Port-Forwarding
+Reduced Blacklisting
+Avoid all blocking
+NOTE: Currently not supported in the browser extensions
+Windscribe
+Download
+Pricing
+Get Support
+Features
+Refer a Friend
+Ethics & Philosophy
+Changelog
+Buy Merch
+Status
+Open Source
+Free DNS
+Apps
+VPN for Windows
+VPN for Mac
+VPN for Linux
+VPN for iPhone
+VPN for Android
+VPN for Chrome
+VPN for Firefox
+VPN for MS Edge
+VPN for FireTV
+VPN for Huawei
+Windscribe F-Droid
+Company
+About Us
+Privacy
+Terms
+VDP
+Jobs
+Blog
+Youtube
+Reddit
+Twitter
+Discord
+Telegram
+© 2069 Windscribe Limited

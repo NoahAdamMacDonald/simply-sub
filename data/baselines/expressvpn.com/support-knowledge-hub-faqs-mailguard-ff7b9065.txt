@@ -1,0 +1,268 @@
+url: https://www.expressvpn.com/support/knowledge-hub/faqs-mailguard/
+method: fetch
+saved: 2026-11-19
+
+ExpressMailGuard FAQs Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started menu opener
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+Home Home » ExpressMailGuard FAQs
+Knowledge Hub
+ExpressMailGuard FAQs
+Search the Support Center
+Last updated: October 7, 2026
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+This page answers common questions about ExpressMailGuard.
+Jump to…
+General information
+What is ExpressMailGuard?
+How does ExpressMailGuard work?
+How do I get ExpressMailGuard?
+How do I set up and access ExpressMailGuard?
+Does ExpressMailGuard store my emails?
+Usage and limits
+Can I use ExpressMailGuard without an ExpressVPN subscription?
+Can I still use ExpressMailGuard if I cancel my ExpressVPN subscription?
+Is there a limit to how many aliases I can create?
+Troubleshooting
+Why can’t I receive large email attachments?
+ExpressMailGuard is not working
+I verified my email with a “+” in it, but replies don’t work. Why?
+General information
+What is ExpressMailGuard?
+ExpressMailGuard is an email aliasing and inbox protection service that allows you to create disposable email addresses—known as aliases—to control how messages are forwarded, and instantly stop spam or abuse-without exposing your real email address.
+Back to top
+How does ExpressMailGuard work?
+ExpressMailGuard works alongside the inbox you already use. It works with any email provider and any device, because it forwards mail to wherever you want it to land. When a site asks for your email, you give it an alias. That alias becomes the only address the service interacts with.
+When someone emails that alias, ExpressMailGuard receives the message and passes it through its secure relay layer. This layer acts as a privacy shield. It strips away the direct link to your identity before forwarding the message to your personal inbox.
+Back to top
+How do I get ExpressMailGuard?
+ExpressMailGuard is available as part of ExpressVPN’s tiered plans and stays active for as long as your VPN subscription stays active.
+Check your ExpressVPN account for details based on your specific plan.
+Back to top
+How do I set up and access ExpressMailGuard?
+To learn how to set up and access ExpressMailGuard, check out our getting started guide.
+Back to top
+Does ExpressMailGuard store my emails?
+Once a message is successfully delivered to your destination inbox, it is immediately deleted from our system.
+However, you can enable ExpressMailGuard to temporarily store failed delivery attempts. Doing so ensures that emails are not lost if they are rejected by your recipients, as they can be downloaded from the Failed Deliveries page. Failed deliveries are automatically deleted after 7 days.
+Back to top
+Usage and limits
+With ExpressMailGuard, you have different bandwidth limits depending on your ExpressVPN subscription plan:
+ExpressVPN Basic: 10MB/month
+ExpressVPN Advanced: 100MB/month
+ExpressVPN Pro: Unlimited
+Your bandwidth limit resets at the end of each calendar month, on transitioning to a new month.
+Back to top
+Can I use ExpressMailGuard without an ExpressVPN subscription?
+An ExpressVPN subscription is required in order to sign in to and use ExpressMailGuard.
+Back to top
+Can I still use ExpressMailGuard if I cancel my ExpressVPN subscription?
+No. You will no longer be able to access ExpressMailGuard if you cancel your ExpressVPN subscription or your subscription expires.
+Back to top
+Is there a limit to how many aliases I can create?
+You can create an unlimited number of Dedicated Subdomain Aliases.
+However, depending on your ExpressVPN subscription tier, there are limitations to the number of Shared Domain Aliases you can create:
+ExpressVPN Basic: 10
+ExpressVPN Advanced: 50
+ExpressVPN Pro: Unlimited
+Back to top
+Troubleshooting
+Why can’t I receive large email attachments?
+Emails forwarded through ExpressMailGuard currently support attachments up to 10 MB. Emails with larger attachments may fail to deliver due to email infrastructure limitations.
+Back to top
+ExpressMailGuard is not working
+If you are having issues with ExpressMailGuard, contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+I verified my email with a “+” in it, but replies don’t work. Why?
+Some email providers (like Gmail) treat “+” addresses as aliases of your main email address.
+Even if the “+” address is verified, replies are sent from your main email.
+To reply successfully, your main email address must also be verified in ExpressMailGuard.
+Back to top
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Close Choose language
+Live chat
+Need help? Chat with us!
+Online

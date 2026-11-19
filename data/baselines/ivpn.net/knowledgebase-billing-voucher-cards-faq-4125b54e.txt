@@ -1,0 +1,107 @@
+url: https://www.ivpn.net/knowledgebase/billing/voucher-cards-faq/
+method: fetch
+saved: 2026-11-19
+
+Voucher cards FAQ - IVPN Help
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Help Center
+General
+Troubleshooting
+Billing
+Passwords
+Privacy
+Windows
+macOS
+GNU/Linux
+iOS
+Android
+Routers
+Media Players
+Voucher cards FAQ
+Voucher payment method is only available for accounts that were created after November 2020 (Account ID format: i-XXXX-XXXX-XXXX). If you wish to use vouchers and have an IVPN account created before this date (Account ID format: ivpnXXXXXXXX), contact our customer service to help you make the switch or generate a new account.
+Where can I purchase an IVPN voucher?
+Physical voucher cards are currently available on Amazon US and ProxyStore DE. Digital vouchers can be purchased in the ProxyStore Onlineshop. We plan to introduce it to other vendors and countries in the future.
+How do I redeem the voucher?
+One physical voucher card can be redeemed for either 2 years of IVPN Standard or 1 year of IVPN Pro. It can be used for activating a newly generated account as well as extending the duration of an existing one.
+New accounts:
+Select the preferred plan and generate your IVPN Account ID here
+Click on the Add more time - “Have a voucher code? Redeem it here” link
+Enter the voucher code and press Add Time
+Existing accounts:
+Log into your Client Area
+Click on the Add more time - “Have a voucher code? Redeem it here” link
+Enter the voucher code and press Add Time
+The voucher redeem page says the code is invalid or has already been used.
+Reach out to our support team including the voucher code in your message and we will look into this.
+I have lost my Account ID. Can you help me recover it?
+Send us a message including your voucher code and we will look up your Account ID.
+Please note: Voucher codes are stored in our system only for 30 days after use. Account recovery is not possible after this period.
+Can I get a refund for my voucher purchase?
+Voucher purchases are non-refundable.
+There are shipping issues with my order / I received a damaged card
+Unfortunately, we are unable to help with these types of issues. For assistance, please contact the vendor you have purchased the voucher from.
+Related Articles
+How can I cancel my IVPN subscription?
+Paid with PayPal using eCheck but IVPN account is still in Pending/Suspended state. Why?
+I paid with PayPal but my account is still pending. Why?
+I paid with Bitcoin but the invoice is still unpaid. Why?
+How can I delete my IVPN account?
+Still have questions?
+Get in touch and we'll get back to you in a few hours.
+Contact support
+Interested in privacy?
+Read our latest privacy news and keep up-to-date on IVPN services.
+Visit IVPN Blog
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

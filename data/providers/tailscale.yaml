@@ -1,0 +1,445 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada (tailscale.com's
+# pricing page, its open-source page and the sign-up page) and with a plain fetch (curl) for the rest: its pricing
+# page's FAQ, Mullvad page, legal hub, terms of service, privacy policy, special terms (the Mullvad VPN Service), security
+# page, company page, and its docs on Mullvad exit nodes, exit nodes, billing, plans and legacy plans, downgrading,
+# deleting a tailnet, logging, client updates, identity providers, passkeys, installing, support options and what
+# Tailscale is; the pricing page again through a UK exit (the same "$0", "$8", "$18" and "$5").
+# Pricing: tailscale.com/pricing. Personal is "$0 FREE FOREVER", "For individuals who want to securely connect devices,
+# servers, or software", "Up to 6 users" and "Unlimited user devices", and the only individual plan sold: Standard
+# ("For teams adopting the Tailscale platform", $8 per user a month), Premium ($18) and Enterprise are team and business
+# plans, out of scope (notes.md). "Personal users have access to the free tier plan for non-commercial use, which will
+# be free forever." Personal Plus is a legacy plan no longer sold ("Current Personal Plus users will be able to keep
+# their plans as is or switch to the free Personal Plan"), so it isn't listed (Kimi's precedent for legacy plans), and
+# neither is the former Personal Pro, which "we will migrate ... to the new Personal plan".
+# The Mullvad add-on: "$5 PER MONTH FOR EVERY 5 DEVICES" (pricing), "$5 a month for 5 devices, with easy automated
+# recurring billing via Tailscale" (/mullvad). Personal can buy it "on either a monthly or annual basis" (Mullvad exit
+# nodes), but no page shows the annual price (the checkout is in the admin console, behind an account), so only the
+# monthly one is stored. Its terms: "all invoices are issued in United States dollars" and "Any applicable Taxes will be
+# set forth separately from Fees on invoices" ("Tailscale collects applicable US and Canadian taxes on each invoice",
+# Modify billing), so no price is tax-included.
+# Region checklist for CA and US, 2026-11-19: 1. no country paths or hreflang (tailscale.com in English only); 2. no
+# country or currency picker; 3. the page's prices are in its static HTML, the same from Canada and through a UK exit,
+# and its terms name US dollars; 4. checkout is in the admin console, behind an account: not opened; 5. its billing docs
+# name only US and Canadian taxes; 6. Edge, a plain fetch and a UK exit; 7. no bill offered.
+# Bundles: none. Official resellers: none; AWS and Azure Marketplaces sell its business plans ("Cloud Marketplaces"), not
+# Personal, and bill for it rather than resell it: partners, not listed. Mullvad runs the add-on's exit servers ("Tailscale
+# has partnered with Mullvad"); Mullvad's own resellers page names Tailscale as a partner, not a reseller.
+
+id: tailscale
+name: Tailscale
+website: https://tailscale.com
+category: vpn
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its Mullvad exit nodes doc's "Remove the Mullvad add-on" (Billing page > Manage add-ons), the only paid item here.
+cancelUrl: https://tailscale.com/docs/features/exit-nodes/mullvad-exit-nodes
+sources: { pricing: https://tailscale.com/pricing }
+
+# Ways to pay (M11.5), read 2026-11-19: a card (its terms, 3.1 Fees). Its security page says "Tailscale does not store
+# credit card information, and instead uses Stripe to securely process transactions." No page names the card networks.
+# The AWS and Azure Marketplaces bill its business plans only (pricing page, "Cloud Marketplaces").
+paymentMethods:
+  - methods: [card]
+    page: Terms of service
+    url: https://tailscale.com/terms
+    quotes:
+      - 'Unless explicitly indicated otherwise in these Terms, our Documentation or at the time of “check-out”, all payments will be made by credit card.'
+
+# Owner (M11.2), read 2026-11-19: its terms' Schedule A names two companies. Tailscale Inc., "a Canadian business
+# corporation" in Toronto, runs it for accounts opened by 2 September 2024 and owns the trademark ("Tailscale is a
+# registered trademark of Tailscale Inc.", every page's footer, with "© 2026 Tailscale Inc."); accounts opened since 3
+# September 2024 are with "Tailscale US Inc., a Delaware corporation with registered address at 447 Sutter St Ste 405
+# #543, San Francisco, CA 94108, USA". No page says how the two are related; Tailscale Inc., the brand's owner, is the
+# owner here and the US company is in the notes (Kimi's precedent: the parent as owner, the contracting company in the
+# notes), notes.md. Its company page names its board and investors (Accel, Insight Partners, CRV...) and no stock
+# listing: private, no stock.
+owner:
+  name: Tailscale Inc.
+  page:
+    name: Terms of service
+    url: https://tailscale.com/terms
+  quotes:
+    - 'Tailscale Inc., a Canadian business corporation with registered address at 100 King Street West, Suite 6200, Toronto, ON M5X 1B8, Canada'
+    - 'Tailscale is a registered trademark of Tailscale Inc.'
+  country:
+    code: CA
+  lastVerified: 2026-11-19
+notes: >-
+  Connects your own devices to each other wherever they are. It hides your internet traffic only through an exit node:
+  one of your own devices, or Mullvad's servers with its add-on. Accounts opened since 3 September 2024 are with Tailscale
+  US Inc., a Delaware corporation in San Francisco.
+
+# No renewalAnchor: its only plan is free. The Mullvad add-on is billed monthly with no day stated ("Your monthly bill
+# automatically updates as you add or remove devices.").
+
+# General features, read 2026-11-19. Apps: "This is available for many platforms including macOS, Windows, Linux, iOS,
+# and Android" (security page), the download page's macOS, iOS, Windows, Linux and Android, and Install on an Apple TV
+# and on Amazon Fire devices (Install Tailscale on any device): tv. Sign-in: no password of its own ("Tailscale does not
+# support sign-up with email addresses. By design, Tailscale is not an identity provider—there are no Tailscale
+# passwords."), but Apple, Google, GitHub, Microsoft, Okta, OneLogin or any OIDC provider (sso), and "Passkeys are
+# available for all plans" (passkey). App languages: English only: tailscale.com has no other language version (its
+# sitemap's 1,300 pages are all English). Support: "We offer email support in English for all customers between 9am-6pm
+# Eastern Time, Monday through Friday." (Support options), and its Discord and Reddit communities (every page's footer).
+# Open source: "The client, which runs on each of a user’s devices, is mostly open source." Its daemon is open source on
+# every platform and the whole app on Linux and Android, but the Windows, macOS and iOS apps' interfaces and its
+# coordination server are closed ("A closed source coordination server."), so open-clients is the nearest value
+# (notes.md).
+features:
+  platforms: [windows, macos, linux, ios, android, tv]
+  account.sign-in: [sso, passkey]
+  languages.interface: [en]
+  support.channels: [email, community]
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/tailscale/tailscale
+  page:
+    name: Open source
+    url: https://tailscale.com/opensource
+  quotes:
+    - 'The client, which runs on each of a user’s devices, is mostly open source.'
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19 (Personal; the comparison table's ticks are the same check-mark icon in the page's HTML
+# for every plan on "Secure peer-to-peer connections", "Subnet routers & exit nodes" and "Split tunneling & MagicDNS"):
+# - What it is: "Tailscale creates a peer-to-peer mesh network (known as a tailnet). However, you can still use Tailscale
+#   like a traditional VPN by routing all traffic through an exit node." (What is Tailscale?), so vpn.mesh.
+# - Devices: "Unlimited user devices" (pricing), "User devices are free and unlimited."
+# - Server countries: 0. Tailscale runs no exit servers of its own: "they’re your exit nodes, not
+#   ours" (security page); its DERP relay servers only relay encrypted traffic between your devices. Mullvad's servers
+#   are exit nodes only with the paid add-on, which an add-on can't state as a feature (notes.md).
+# - Protocols: WireGuard ("Tailscale is built on top of WireGuard®"). No obfuscation, OpenVPN or IKEv2 on any page.
+# - Split tunnelling: the comparison table's "Split tunneling & MagicDNS", and Android's app-based split tunnelling.
+# - No-logs: false. It logs connections between your devices: "This includes real-time events for open and close events
+#   for every inter-machine connection (TCP or UDP) on your network." (Logging overview), and its privacy policy collects
+#   "logs describing connections and containing statistics about data sent to and from other devices"; app logs can be
+#   turned off per device, its server's can't ("You cannot limit coordination server logs.").
+# - Independent audits: "Tailscale works with Latacora to conduct security audits and ongoing analysis of our
+#   application security, network security, and corporate security." and "Tailscale has completed a SOC 2 Type II
+#   certification." (security page): apps and servers. Neither report is published ("Security audits are available on
+#   request"; the SOC 2 report needs an NDA), and no audit tested a no-logs claim (it makes none).
+# - Anonymous signup: false ("Tailscale doesn't support anonymous tailnets", Mullvad exit nodes).
+# - Unlimited traffic: inferred (below); no page names a data limit.
+# - No page offers a kill switch, multi-hop, DNS content blocking, a P2P policy, port forwarding, Tor over VPN or
+#   RAM-only servers (vpn.ram-only-servers false). Data allowance: unlimited, inferred (below).
+# Speeds: no page states one.
+plans:
+  - id: tailscale.personal
+    name: Personal
+    link: https://tailscale.com/pricing
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 0
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.no-logs-policy: false
+      vpn.independent-audits: [apps, servers]
+      vpn.anonymous-signup: false
+      vpn.ram-only-servers: false
+      vpn.mesh: true
+      account.users: 6
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      vpn.unlimited-traffic:
+        reason: 'No page names a data limit. Your traffic goes directly between your own devices, which Tailscale says it doesn’t pay for: “we don’t see your packets and don’t have to pay for them”.'
+        page:
+          name: About Tailscale
+          url: https://tailscale.com/company
+        lastVerified: 2026-11-19
+      vpn.data-allowance:
+        reason: 'No page names a data limit. Your traffic goes directly between your own devices, which Tailscale says it doesn’t pay for: “we don’t see your packets and don’t have to pay for them”.'
+        page:
+          name: About Tailscale
+          url: https://tailscale.com/company
+        lastVerified: 2026-11-19
+    notes: 'Free for personal, non-commercial use: up to 6 users and unlimited devices, joined in one private network. Any of your devices can be an exit node; Mullvad’s servers are an add-on.'
+    addOnIds: [tailscale.mullvad]
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://tailscale.com/pricing
+
+# The Mullvad VPN add-on: Mullvad's servers as exit nodes, 5 devices per licence ("Each Mullvad license will allow up to
+# five devices."), billed by Tailscale. Its yearly price isn't on any page read (above).
+addOns:
+  - id: tailscale.mullvad
+    name: Mullvad VPN add-on (5 devices)
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 5
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://tailscale.com/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19. Every agreement a user accepts (the owner's rule, 2026-11-03):
+# the sign-up page's "By clicking the buttons below, you acknowledge that you have read, understood, and agree to
+# Tailscale’s Terms of Service and Privacy Policy."; its terms, which include its Documentation, its Acceptable Use
+# Policy and its Special Terms (the Mullvad VPN Service's: "Tailscale is not responsible or liable for the Mullvad VPN
+# Service", no topic beyond the notable below); its privacy policy ("If you are an individual using the Services for
+# personal or household purposes, then our Privacy Policy applies."). The terms are its apps' licence too (2.1). Its DPA,
+# SLA, PAM and Aperture terms are for business customers and weren't rated. Its Acceptable Use Policy wasn't read.
+# Billing topics don't apply: its only plan is free (the add-on isn't a plan). Not applicable (vpn isn't in their
+# categories): who can read your content, rights over your content, children, account sharing.
+policies:
+  links:
+    - name: Terms of service
+      url: https://tailscale.com/terms
+    - name: Privacy policy
+      url: https://tailscale.com/privacy-policy
+    - name: Security
+      url: https://tailscale.com/security
+    - name: Logging overview
+      url: https://tailscale.com/docs/features/logging
+    - name: Delete your tailnet
+      url: https://tailscale.com/docs/account/delete-tailnet
+    - name: Mullvad exit nodes
+      url: https://tailscale.com/docs/features/exit-nodes/mullvad-exit-nodes
+    - name: Update Tailscale
+      url: https://tailscale.com/docs/features/client/update
+    - name: Supported SSO identity providers
+      url: https://tailscale.com/docs/integrations/identity
+    - name: Sign up
+      url: https://login.tailscale.com/start
+    - name: Pricing
+      url: https://tailscale.com/pricing
+    - name: Open source
+      url: https://tailscale.com/opensource
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send it logs of how your devices connect, which it also uses to study and improve the service. You can turn the app logs off only device by device, and not its server’s logs at all.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'Analytics and product development: Engage in analysis and research regarding use of the Services, and improve our Services'
+        - url: https://tailscale.com/docs/features/logging
+          quote: 'You opt out of client logging on each device individually, using the --no-logs-no-support flag for the tailscaled daemon or the equivalent TS_NO_LOGS_NO_SUPPORT environment variable.'
+        - url: https://tailscale.com/security
+          quote: 'You cannot limit coordination server logs.'
+      action:
+        name: 'How to turn off client logging'
+        url: https://tailscale.com/docs/features/logging
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its website passes your details to advertising and analytics companies, which US law may count as selling them. You can say no only browser by browser, or by email.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'Our use of certain third-party providers, which are described more fully in the “Site Analytics and Advertising” section above, may result in the disclosure of online identifiers (ex: cookie data, IP addresses, device identifiers, and usage information) in a way that may be considered a “sale” or "sharing" under the CCPA.'
+        - url: https://tailscale.com/privacy-policy
+          quote: "To opt out of any such disclosures made through the use of cookies/pixels, please click on the 'Your Privacy Choices' link on the footer of Site for the particular Services you use."
+      action:
+        name: 'Your privacy choices (its privacy policy)'
+        url: https://tailscale.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website lets ad networks such as Google track your browser to show you ads elsewhere. You can opt out only browser by browser, through ad-industry programs.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'In using the Site, we allow select third party advertising technology partners to place cookies or other tracking technologies on the browser of your device to collect information about you as discussed above.'
+        - url: https://tailscale.com/privacy-policy
+          quote: 'Please note that if you use these mechanisms, you may still see advertising on the Internet, but it will not be tailored to you based on your online behavior over time.'
+      action:
+        name: 'How to manage cookies (its cookie notice)'
+        url: https://tailscale.com/cookie-notice
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: good
+      reason: 'It won’t train AI on your data unless you agree to it, and then only to serve you.'
+      sources:
+        - url: https://tailscale.com/terms
+          quote: "Tailscale will not use, and will not allow third parties to use, Customer Data, Customer AI Content, or PAM Data to train generative artificial intelligence models, large language models, or other foundation models, except where such processing is performed solely for Customer's benefit in connection with the Services and with Customer's prior consent."
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it. Settings-change logs are kept 90 days, and after you delete your network, leftover logs and backups generally clear within 60 days.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'We keep your information for no longer than necessary for the purposes for which it is processed.'
+        - url: https://tailscale.com/docs/features/logging
+          quote: 'Configuration audit logs are enabled by default for all tailnets, and are available for the most recent 90 days.'
+        - url: https://tailscale.com/docs/account/delete-tailnet
+          quote: 'Some data may still exist in temporary storage, such as diagnostic logs and backups, and will generally rotate out automatically within 60 days.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You delete your network and all its data yourself, from its admin console, whenever you like.'
+      sources:
+        - url: https://tailscale.com/docs/account/delete-tailnet
+          quote: "If you decide you don't want to continue using your tailnet (Tailscale network), you can delete it from the General settings page of the admin console."
+        - url: https://tailscale.com/docs/account/delete-tailnet
+          quote: "When you delete your tailnet, we will permanently delete all node and user data and metadata for your tailnet from our coordination server's database."
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can email it to ask for a copy of what it holds about you, and it answers within the time the law sets.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'provide access to and/or a copy of certain information we hold about you'
+        - url: https://tailscale.com/privacy-policy
+          quote: 'We will consider all requests and provide our response within the time period stated by applicable law and as otherwise required by applicable law.'
+      action:
+        name: 'How to ask for your data (its privacy policy)'
+        url: https://tailscale.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'Police need a warrant, court order or subpoena, and it means to tell you before it hands anything over unless the law forbids it. It publishes no count of requests, and it keeps records of your devices’ connections.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'Canadian law generally requires lawful authority by means of a warrant issued by a judge to compel the disclosure of User information.'
+        - url: https://tailscale.com/privacy-policy
+          quote: 'Tailscale’s policy is to notify Customers of law enforcement requests for their information, which includes a copy of the request, prior to disclosure, so that they may have an opportunity to challenge such request'
+        - url: https://tailscale.com/security
+          quote: 'We do receive metadata about which of your private nodes connect to which other private nodes, including public IP addresses.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept in Canada, Germany, the US and the UK, and maybe elsewhere. Data leaving Europe for the US goes under the EU’s standard contract rules.'
+      sources:
+        - url: https://tailscale.com/privacy-policy
+          quote: 'Your information is maintained and processed by us and our third-party service providers in Canada, Germany, the United States and the United Kingdom, and may also be maintained, processed, and stored in other jurisdictions that may have different data protection laws than those in your country of residence.'
+        - url: https://tailscale.com/privacy-policy
+          quote: 'For example, for transfers from the EU/EEA, UK and Switzerland to the US, we rely on standard contractual clauses as set forth in our Data Processing Addendum with Customers.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up through another account, such as Google, Microsoft, GitHub or Apple, so it gets your email address from them. There’s no anonymous sign-up.'
+      sources:
+        - url: https://login.tailscale.com/start
+          quote: 'Sign up with your identity provider'
+        - url: https://tailscale.com/docs/integrations/identity
+          quote: 'Tailscale does not support sign-up with email addresses.'
+        - url: https://tailscale.com/docs/features/exit-nodes/mullvad-exit-nodes
+          quote: 'All Tailscale users are connected to an email address or GitHub account.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes, not a court, and you can’t join a group lawsuit. You can opt out only by writing within 30 days of agreeing. Quebec’s law doesn’t allow this for people there.'
+      sources:
+        - url: https://tailscale.com/terms
+          quote: 'the parties expressly waive their right to file a class action or seek relief on a class basis'
+        - url: https://tailscale.com/terms
+          quote: 'The notice must be sent within 30 days of the effective date of the Agreement, otherwise you shall be bound to arbitrate disputes in accordance with the terms of those paragraphs.'
+        - url: https://tailscale.com/terms
+          quote: 'Some jurisdictions, including the Province of Quebec, do not allow binding arbitration or the disclaimer of class action rights.'
+      action:
+        name: 'How to opt out of arbitration (its terms)'
+        url: https://tailscale.com/terms
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tries to tell you about big changes to its terms, by email or in your account, but names no lead time. If you don’t agree, you can close your account.'
+      sources:
+        - url: https://tailscale.com/terms
+          quote: 'We will use reasonable efforts to notify you of material changes through communications via Customer’s account, email or other means, and Customer may be required to click to accept or otherwise agree to the updated terms.'
+        - url: https://tailscale.com/terms
+          quote: 'If you do not agree to the updated terms, you may close your account as set forth in Section 4.2 above.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It can end your account only if you break its terms and don’t fix it within 30 days of its written notice, or if the law makes it. If it ends it for a breach, you get no refund.'
+      sources:
+        - url: https://tailscale.com/terms
+          quote: 'the other party materially breaches the Agreement and fails to correct the breach within thirty (30) days following written notice specifying the breach'
+        - url: https://tailscale.com/terms
+          quote: 'If Tailscale terminates for cause, Customer will not be eligible for a refund and will remain liable for all Fees outstanding as of the effective date of termination'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change its plans and prices whenever it likes, though it promises not to cut what the service does by much during a paid term.'
+      sources:
+        - url: https://tailscale.com/terms
+          quote: 'We reserve the right to modify our Plans and any applicable service fees at any time.'
+        - url: https://tailscale.com/terms
+          quote: 'Tailscale will not materially decrease the overall functionality of the Tailscale Solution during each subscription term'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://tailscale.com/terms, https://tailscale.com/privacy-policy]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use its apps under a licence it can take back, and its terms forbid benchmarking it or taking its software apart, though much of the apps’ code is open source.'
+      sources:
+        - url: https://tailscale.com/terms
+          quote: 'This includes a limited, revocable, worldwide, non-exclusive and non-transferable license to download and use the Client Software on Client Endpoints in connection with your use of the Tailscale Solution.'
+        - url: https://tailscale.com/terms
+          quote: 'access or use the Services for benchmarking or competitive analysis'
+        - url: https://tailscale.com/opensource
+          quote: 'The client, which runs on each of a user’s devices, is mostly open source.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors check its security, and it holds a SOC 2 certificate, but you must ask for the reports. You can report security bugs by email, and it publishes security bulletins, but pays no reward for finding one.'
+      sources:
+        - url: https://tailscale.com/security
+          quote: 'Tailscale has completed a SOC 2 Type II certification.'
+        - url: https://tailscale.com/security
+          quote: 'Get in touch with our security team at security@tailscale.com to disclose any security vulnerabilities.'
+        - url: https://tailscale.com/security
+          quote: 'Tailscale does not have a bounty program.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'It logs every connection between your devices, with their internet addresses. You can stop its apps’ logs device by device, but not its server’s.'
+      sources:
+        - url: https://tailscale.com/docs/features/logging
+          quote: 'This includes real-time events for open and close events for every inter-machine connection (TCP or UDP) on your network.'
+        - url: https://tailscale.com/security
+          quote: 'We do receive metadata about which of your private nodes connect to which other private nodes, including public IP addresses.'
+        - url: https://tailscale.com/security
+          quote: 'You cannot limit coordination server logs.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: good
+      reason: 'You can add as many of your own devices as you like. Servers and shared devices set up as tagged resources are limited to 50, and more cost extra.'
+      sources:
+        - url: https://tailscale.com/pricing
+          quote: 'Unlimited user devices'
+        - url: https://tailscale.com/pricing
+          quote: '50 tagged resources included; add more for $1/month each.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves by default on new networks, and you can turn that off on any device at any time.'
+      sources:
+        - url: https://tailscale.com/docs/features/client/update
+          quote: 'All newly created tailnets have auto-updates enabled by default in the Device management page of the admin console.'
+        - url: https://tailscale.com/docs/features/client/update
+          quote: 'Auto-updates are optional, and individual devices can be opted in or out of them anytime.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: It can’t read your traffic
+      tier: great
+      reason: 'Your devices talk to each other directly, encrypted, and Tailscale can’t look inside. It never sees what you do on the internet.'
+      sources:
+        - url: https://tailscale.com/security
+          quote: 'Tailscale does not (and cannot) inspect your traffic.'
+        - url: https://tailscale.com/security
+          quote: 'We never see information about your public Internet traffic.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Its Mullvad exits are tied to your account
+      tier: poor
+      reason: 'With its Mullvad add-on, Tailscale knows which Mullvad account is yours and, from its logs, which Mullvad servers you use, unless you turn its logs off on that device.'
+      sources:
+        - url: https://tailscale.com/docs/features/exit-nodes/mullvad-exit-nodes
+          quote: 'Tailscale knows which Mullvad accounts belong to which Tailscale users.'
+        - url: https://tailscale.com/docs/features/exit-nodes/mullvad-exit-nodes
+          quote: 'Tailscale can identify which users are connecting to which Mullvad servers using logs.'
+        - url: https://tailscale.com/docs/features/exit-nodes/mullvad-exit-nodes
+          quote: 'Tailscale does not have visibility into which Mullvad exit node that device uses.'
+      lastVerified: 2026-11-19

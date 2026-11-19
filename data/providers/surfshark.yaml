@@ -1,0 +1,1367 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada: surfshark.com's
+# pricing page (its 24-month, 12-month and 1-month views, its plan comparison, whose ticks are each cell's label, "Ad
+# blocker - Included in Starter plan", and its FAQ), its "Billing Practices, Currency Policy & Renewal Prices" page
+# (surfshark.com/terms-of-service/pricing, where the pricing page's "renewal price." link leads), its terms of service,
+# privacy policy, cookie policy, about page, trust center, servers page and its post on port forwarding; its help
+# centre's articles through its Zendesk API (support.surfshark.com). The renewal price page and the pricing page again on
+# 2026-11-19 through US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exits (each exit's
+# country confirmed, each page in the country's currency: $, £, €, A$, NZ$).
+# Pricing: the renewal price page lists each plan's regular price by period, "listed according to your current
+# location/IP address (before taxes)", and "All subscription plans renew automatically at the full price"; the pricing
+# page's 12- and 24-month cards are first-term offers ("CA$91.53 for the first 27 months (VAT may apply).") and its 1-month
+# cards the renewal page's monthly prices ("$18.95 /mo. Billed monthly"). A 2-year plan "renews for 1-year term" at the
+# yearly price, so no 2-year price is stored. No price includes tax: "Renewal prices (before taxes)" and "Any fees charged
+# by Surfshark are exclusive of taxes." (its terms).
+# Plans: Starter, One and One+, the same in every country read ("Surfshark offers the following plans: Surfshark Starter
+# Surfshark One Surfshark One+", What are Surfshark subscription plan options?). One+'s identity theft coverage is for US
+# residents only ("Available for US residents, except for New York State."), so it's in One+'s notes, not a feature.
+# New Zealand: its pages show NZ$ prices (Starter NZ$32.99 a month and NZ$143.69 a year, One NZ$34.69 and NZ$180.06,
+# One+ NZ$39.79 and NZ$216.44), but its currency policy charges New Zealand in US dollars converted from them ("USD:
+# United States and the rest of the world (not listed above).", and "If your billing currency is different (as per the
+# policy above), these amounts will be converted."). The catalog can't hold a price in NZD charged in USD
+# (billingCurrency needs a price in the charged currency), so New Zealand is left unpriced (Coverage, notes.md).
+# Region checklist for CA and US, 2026-11-19: 1. no locale paths for prices (its language paths, /de/ and the others,
+# change the language only); 2. no country or currency picker; 3. the renewal page names the currency (CA$, and the US's
+# $ read through a US exit, "USD: United States" in its currency policy); 4. checkout not opened; 5. its currency policy
+# ("CAD: Canada"); 6. Edge, and a plain fetch; 7. no bill offered.
+# Bundles: none. Official resellers: none named as shops. Its terms name "Paddle, Google Play, or Cleverbridge" as
+# resellers whose sales it refunds (payment companies and an app store that bill for it: partners, not listed).
+# Free use: none; a 7-day free trial on 12- and 24-month plans turns into the paid plan.
+
+# Coverage: surfshark.* in NZ: its pages price New Zealand in NZ$ but charge it in US dollars converted from them (its
+# currency policy, read 2026-11-19 through a New Zealand exit), so no price in the charged currency is known.
+
+id: surfshark
+name: Surfshark
+aliases: [surfshark vpn, surfshark one]
+website: https://surfshark.com
+category: vpn
+spendCategory: software
+# Its currency policy, read 2026-11-19: "GBP: United Kingdom", "EUR: European Economic Area (EEA)", "CAD: Canada",
+# "AUD: Australia" and "USD: United States and the rest of the world (not listed above)." (New Zealand among them).
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+cancelUrl: https://support.surfshark.com/hc/en-us/articles/360003069694-How-to-cancel-auto-renewal-for-your-Surfshark-subscription
+sources: { pricing: https://surfshark.com/pricing }
+# Ways to pay (M11.5), read 2026-11-19: its help article lists cards, PayPal, Google Pay, Apple Pay and crypto; app
+# stores from its plans article. Accepted cards: none named in words. The pricing page's footer shows Mastercard, Visa,
+# Amex and Discover logos only (image titles), and its "Why am I unable to make a payment?" names Visa and Mastercard
+# only for prepaid cards ("we do not accept gift cards or prepaid cards, except for Visa or Mastercard prepaid cards"),
+# so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal, google-pay, apple-pay, crypto]
+    page: 'What payment options do you offer?'
+    url: https://support.surfshark.com/hc/en-us/articles/360003069034-What-payment-options-do-you-offer
+    quotes:
+      - 'Credit and debit cards'
+      - 'PayPal'
+      - 'Google Pay'
+      - 'Apple Pay'
+      - 'Cryptocurrency (cannot be used on mobile devices)'
+  - methods: [app-store]
+    page: 'What are Surfshark subscription plan options?'
+    url: https://support.surfshark.com/hc/en-us/articles/8958891462418-What-are-Surfshark-subscription-plan-options
+    quotes:
+      - 'You can buy plans directly on the App Store or Google Play Store if you are using an Android or an iOS device.'
+# Renewal day (M11.5), read 2026-11-19: not stated. Its terms renew "at the end of each service period", and its renewal
+# page emails "30 days before the ending date"; its subscription article shows "Your expiration date" in the account,
+# with no day named.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://surfshark.com/terms-of-service
+    - https://surfshark.com/terms-of-service/pricing
+    - https://support.surfshark.com/hc/en-us/articles/17673853278226-Manage-your-subscription
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its terms name Surfshark B.V. in the Netherlands, and its about page says "In 2022,
+# Surfshark and Nord Security merged under one holding company to form a cybersecurity powerhouse while operating
+# independently." No page names that holding company, so the company that runs it is the owner and the merger is in the
+# provider's notes (notes.md). Private: no page names a listing.
+notes: Surfshark and Nord Security (NordVPN's owner) merged under one holding company in 2022 and run independently.
+owner:
+  name: Surfshark B.V.
+  page:
+    name: Terms of Service
+    url: https://surfshark.com/terms-of-service
+  quotes:
+    - 'Your contract is concluded with Surfshark B.V., a company established in the Netherlands.'
+  country:
+    code: NL
+  lastVerified: 2026-11-19
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-19: none. Its free trial ("Does Surfshark offer a free trial?")
+# turns into a 12- or 24-month plan; its terms' "Only some of our Services are free of charge." are its free web tools
+# (the data leak checker in its privacy policy), not a plan.
+freeUse:
+  kind: none
+  pages:
+    - https://surfshark.com/pricing
+    - https://support.surfshark.com/hc/en-us/articles/360026123554-Does-Surfshark-offer-a-free-trial
+    - https://surfshark.com/terms-of-service
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: "Surfshark is compatible with the newest Windows, macOS, Linux, Android,
+# iOS, Android TV, AppleTV, and FireTV devices." and "We also have browser extensions for Chrome, Firefox, and Edge." (the
+# pricing page's FAQ). Sign-in: an email and password, 2FA "via an authentication application" or "with your email
+# address" (How to enable 2FA on your Surfshark account), or Google or Apple (How to create a Surfshark account with Google
+# or Apple). Support: "Surfshark offers 24/7 customer support via live chat and email" ("Surfshark does not offer phone
+# support."). App languages: surfshark.com's language menu (English, Deutsch, Español, Français, Italiano, Nederlands,
+# Polski, Português, Suomi, Türkçe, Русский, Українська, 한국어, 简体中文, 香港繁體, 台灣繁體, 日本語). Closed source: no
+# page offers its code. No pause; no parental controls (its web content blocker is a filter you set for yourself).
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password, totp, email-code, sso]
+  support.channels: [email, chat, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh]
+
+# Perks (M11.6): the comparison's lines no feature describes, in its words.
+perks:
+  - id: alternative-id
+    name: Alternative ID
+  - id: rotating-ip
+    name: Rotating IP
+  - id: cookie-popup-blocker
+    name: Cookie pop-up blocker
+  - id: surfshark-search
+    name: Surfshark Search
+
+# VPN features, read 2026-11-19, the same on every plan (the comparison's "Fast and secure VPN", "Unlimited devices",
+# "Ad blocker", "Bypasser (split tunneling)", "Rotating IP" and "Dynamic MultiHop (double VPN)" are "Included in" all
+# three):
+# - Devices: "Surfshark Starter, One, and One+ allow an unlimited number of devices to connect simultaneously under a
+#   single subscription." (How many devices can I use with Surfshark simultaneously?). Its terms keep a fair-use limit
+#   it doesn't state (a Notable rating below).
+# - Traffic: "Surfshark does not apply any speed, data, or bandwidth limitations, although VPN encryption can cause up to
+#   20-30% decrease in speeds." (its FAQ article), so its monthly VPN data is unlimited.
+# - Countries: "We have 4500+ servers across 100 countries." (its trust center; the pricing page's "4500+ servers in 100
+#   countries").
+# - Protocols: "WireGuard, OpenVPN, and IKEv2 VPN, as well as our in-house build protocol Dausos" (trust center; Dausos
+#   has no registry value and runs only on macOS); obfuscation: "while using this protocol on Surfshark, you are using
+#   obfuscated servers" (OpenVPN, What protocols can I use with Surfshark?) and NoBorders (stealth).
+# - Kill switch on Windows, macOS, Android, iOS and Linux (How to use Kill Switch); MultiHop, "a feature often called
+#   Double VPN"; P2P: its servers page lists P2P servers by country ("P2P" beside each country). Its Tor article only
+#   says the Tor Browser works while connected, so no Tor over VPN. "Surfshark VPN does not support port forwarding"
+#   (its blog's port forwarding post). No page offers connecting your own devices to each other, so vpn.mesh is false.
+# - Content blocking: CleanWeb, "included in every single one of our subscription packages", "blocks ads and malicious
+#   websites. With CleanWeb enabled, the browser will show fewer ads, and fewer trackers will work." (ads, trackers,
+#   malware); One and One+ add the "web content blocker", which blocks "Adult, drug (including tobacco), gambling, hate,
+#   profanity, and weapon websites" (adult content, gambling).
+# - No-logs policy and audits (its trust center): Deloitte's no-logs assurance reports of 2023 and 2025 (no-logs);
+#   "2026 — Cure53 carried out an independent audit of our infrastructure and new protocol Dausos" and SecuRing's 2025
+#   infrastructure audit (servers); "2025 - SecuRing conducted a security assessment. Our web, desktop, mobile
+#   applications, and browser plugins demonstrated strong protection" (apps).
+# - RAM-only servers: "Yes, Surfshark uses 100% RAM-only servers, rather than hard drives." (its trust center).
+# - Not anonymous: an account needs "an e-mail address and password" (its terms) or a Google or Apple account.
+# - Speeds (notes only, its own claims): "All of our servers are equipped with 10Gbps ports, and in the high-traffic
+#   area, we offer up to 100Gbps servers" (trust center).
+# One and One+'s security features (the comparison): Antivirus ("Scheduled scans", "Webcam protection", "Real-time
+# protection"; "Surfshark Antivirus service allows a maximum of five simultaneous connections per account.", its terms),
+# Scam protection ("Scam text protection", "Email scam checker", "Web content blocker"; "Scam call protection" is "COMING
+# SOON"), and Alert ("Personal data leak alerts", "Credit card leak alerts", "ID leak alerts"). One+ adds Incogni ("Data
+# removal from company databases", "Data removal from people search sites"). Categories (M11.3): Starter is a VPN; One
+# and One+ are also an antivirus (security).
+plans:
+  - id: surfshark.starter
+    name: Starter
+    link: https://surfshark.com/pricing
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+    perks: [alternative-id, rotating-ip, cookie-popup-blocker]
+    notes: 'The VPN on unlimited devices, with an ad blocker and Alternative ID, which makes up masked emails and personal details to sign up with.'
+    addOnIds: [surfshark.dedicated-ip, surfshark.alternative-number]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 25.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: CA
+        currency: CAD
+        amount: 113.19
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 79.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 13.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 60.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 71.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 26.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 117.81
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 71.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 71.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 71.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 71.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 18.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 71.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+  - id: surfshark.one
+    name: One
+    link: https://surfshark.com/pricing
+    categories: [vpn, security]
+    features: &one
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content, gambling]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [scheduled]
+      antivirus.devices: 5
+      antivirus.scam-protection: [web, email, sms]
+      security.webcam-protection: [webcam]
+      security.dark-web-monitoring: true
+    perks: [alternative-id, rotating-ip, cookie-popup-blocker, surfshark-search]
+    notes: 'Starter plus Surfshark Antivirus on up to 5 devices, scam protection for texts, emails and websites, Alert for data leaks, and Surfshark Search.'
+    addOnIds: [surfshark.dedicated-ip, surfshark.alternative-number]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 27.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: CA
+        currency: CAD
+        amount: 141.85
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 99.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 14.59
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 75.29
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 90.21
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 28.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 147.63
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 90.21
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 90.21
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 90.21
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 90.21
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 90.21
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+  - id: surfshark.one-plus
+    name: One+
+    link: https://surfshark.com/pricing
+    categories: [vpn, security]
+    features:
+      vpn.included: true
+      vpn.devices: unlimited
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 100
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content, gambling]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [scheduled]
+      antivirus.devices: 5
+      antivirus.scam-protection: [web, email, sms]
+      security.webcam-protection: [webcam]
+      security.dark-web-monitoring: true
+      security.data-exposure: [removal]
+    perks: [alternative-id, rotating-ip, cookie-popup-blocker, surfshark-search]
+    notes: 'One plus Incogni, which asks data brokers and people search sites to remove your data. US residents (except in New York State) also get identity theft coverage up to $1M.'
+    addOnIds: [surfshark.dedicated-ip, surfshark.alternative-number]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 31.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: CA
+        currency: CAD
+        amount: 170.50
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 119.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 16.69
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 90.50
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 108.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 32.19
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 177.46
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 108.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 108.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 108.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 108.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 22.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 108.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+
+# Add-ons, from the renewal price page ("Renewal prices (before taxes) for Surfshark add-ons", by month and year; "The
+# renewal price for Surfshark add-ons is calculated based on the renewal duration of your latest subscription."): a
+# Dedicated IP ("Dedicated IP is not included in Surfshark bundles and needs to be purchased separately. Only 1 Dedicated
+# IP can be purchased per account.") and Alternative Number ("You can upgrade any subscription plan with Alternative
+# Number to get a virtual phone number service."). Its Incogni and Surfshark One add-ons (upgrades to what One and One+
+# already sell) aren't drafted (notes.md).
+addOns:
+  - id: surfshark.dedicated-ip
+    name: Dedicated IP
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 5.37
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: CA
+        currency: CAD
+        amount: 64.44
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 3.75
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 45.00
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 2.85
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 34.20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 3.42
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 41.04
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 5.59
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 67.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 3.42
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 41.04
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 3.42
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 41.04
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 3.42
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 41.04
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 3.42
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 41.04
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 3.42
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 41.04
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+  - id: surfshark.alternative-number
+    name: Alternative Number
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 3.28
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: CA
+        currency: CAD
+        amount: 39.36
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 2.29
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: US
+        currency: USD
+        amount: 27.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 1.74
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: GB
+        currency: GBP
+        amount: 20.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 2.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IE
+        currency: EUR
+        amount: 25.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 3.41
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: AU
+        currency: AUD
+        amount: 40.92
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 2.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: DE
+        currency: EUR
+        amount: 25.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 2.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: FR
+        currency: EUR
+        amount: 25.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 2.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: NL
+        currency: EUR
+        amount: 25.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 2.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: ES
+        currency: EUR
+        amount: 25.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 2.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+      - region: IT
+        currency: EUR
+        amount: 25.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://surfshark.com/terms-of-service/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its terms of service (which are its apps' licence, section 6),
+# privacy policy (whole, its tables included), cookie policy, renewal price page, trust center and help articles
+# (cancelling, refunds, deleting an account, free trial, fees, sharing). Its terms include no other document by name
+# beyond the privacy policy ("Together, these two documents create a single, legally binding agreement"). They're
+# Surfshark B.V.'s own, not Nord Security's, so nothing is shared with NordVPN. Incogni's terms (One+'s third-party
+# service) weren't read (notes.md).
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://surfshark.com/terms-of-service
+    - name: 'Privacy Policy'
+      url: https://surfshark.com/privacy
+    - name: 'Billing Practices, Currency Policy & Renewal Prices'
+      url: https://surfshark.com/terms-of-service/pricing
+    - name: 'Trust Center'
+      url: https://surfshark.com/trust-center
+    - name: 'How to cancel auto-renewal'
+      url: https://support.surfshark.com/hc/en-us/articles/360003069694-How-to-cancel-auto-renewal-for-your-Surfshark-subscription
+    - name: 'Manage your subscription'
+      url: https://support.surfshark.com/hc/en-us/articles/17673853278226-Manage-your-subscription
+    - name: 'How to delete my Surfshark account'
+      url: https://support.surfshark.com/hc/en-us/articles/11271665782034-How-to-delete-my-Surfshark-account
+    - name: 'Does Surfshark offer a free trial?'
+      url: https://support.surfshark.com/hc/en-us/articles/360026123554-Does-Surfshark-offer-a-free-trial
+    - name: 'Are there any additional payments or hidden costs?'
+      url: https://support.surfshark.com/hc/en-us/articles/360003069594-Are-there-any-additional-payments-or-hidden-costs
+    - name: 'How many devices can I use with Surfshark simultaneously?'
+      url: https://support.surfshark.com/hc/en-us/articles/360003069434-How-many-devices-can-I-use-with-Surfshark-simultaneously
+  ratings:
+    - topic: privacy.data-collection
+      tier: good
+      reason: 'It collects crash reports and app diagnostics only if you agree, and uses everything else only in a form that can’t be tied to you.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'Legal basis for such processing is your consent.'
+        - url: https://surfshark.com/privacy
+          quote: 'We will access this information only if you provide a separate consent for that.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It never sells your data. It shares it with its own group companies to run the service, and with ad partners only if you agree.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'we do not sell, rent, lease, or trade your personal data with anyone, nor do we plan to do so in the future.'
+        - url: https://surfshark.com/privacy
+          quote: 'We share data with our group companies to support our daily operations and ensure Surfshark can continue providing you with Services.'
+        - url: https://surfshark.com/privacy
+          quote: 'Legal basis for the processing of personal data is your consent to deliver relevant ads and promotional messages to you, and to attribute sales.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'Its website tracks what you do there for ads only if you say yes to its cookies.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: "When you use our Website, we automatically collect information about your activity through technologies like cookies if you've given us permission."
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It says it doesn’t use any of your data to train its AI models.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'Please note that we respect your privacy and do not access any of your private content or use any of your data to train our AI models.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your account data while you subscribe and for 2 years after you last log in, support chats for up to 6 years, and the rest as long as it needs.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'We keep your personal data for as long as your subscription is active and for 2 years after the last login.'
+        - url: https://surfshark.com/privacy
+          quote: 'We will keep personal data related to customer support communications for up to 6 years following the receipt of your message.'
+        - url: https://surfshark.com/privacy
+          quote: 'we retain your personal data until it is no longer necessary for the reasons we initially collected it for'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'To delete your data or your account, you ask by email or live chat. It doesn’t say how long it takes.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'We respect GDPR, CCPA, and other privacy legislation, and you can ask us to delete your personal data or implement other rights by emailing us at'
+        - url: https://support.surfshark.com/hc/en-us/articles/11271665782034-How-to-delete-my-Surfshark-account
+          quote: 'To delete your Surfshark account, contact our customer success team via Live Chat and let them know you wish to have your account deleted.'
+      action:
+        name: 'How to delete your account'
+        url: https://support.surfshark.com/hc/en-us/articles/11271665782034-How-to-delete-my-Surfshark-account
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your data in a common file format by contacting it. There is no download button.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'You can access your personal data or receive a copy of it by contacting us.'
+        - url: https://surfshark.com/privacy
+          quote: 'You can ask us to provide you with a copy of your personal data in a structured, commonly used, and machine-readable format'
+      action:
+        name: 'How to ask for your data'
+        url: https://surfshark.com/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It gives police data only when the law makes it, keeps no record of what you do online, and lists any requests on its transparency report.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'We only disclose personal data to law enforcement authorities or courts of competent jurisdiction when we are asked and legally obliged to do so'
+        - url: https://surfshark.com/privacy
+          quote: 'Transparency report page will display if we’re ever asked to do so'
+        - url: https://surfshark.com/trust-center
+          quote: 'Surfshark is based in the Netherlands. The laws of the Netherlands do not establish any obligation to log or retain user data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be kept in any country where it or its suppliers work, such as the US, under the EU’s standard contract terms.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'Your data, as specified in this Privacy Policy, may be stored and processed in any country where we have facilities or in which we engage service providers.'
+        - url: https://surfshark.com/privacy
+          quote: 'Please note that we use Standard Contractual Clauses approved by the European Commission'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address and a password, or use your Google or Apple account, and a way to pay.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'You may be asked to provide an e-mail address and password.'
+        - url: https://support.surfshark.com/hc/en-us/articles/360026123554-Does-Surfshark-offer-a-free-trial
+          quote: 'Enter the email address for your Surfshark account, continue with Google/Apple, or log in to an already existing account'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can turn off renewal in your Surfshark account at any time, and keep using it to the end of the time you paid for.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'If you purchased the Services directly from us you can cancel your automatic payments (i.e., turn off auto-renewals for the upcoming Service period) at any time from your Surfshark account.'
+        - url: https://support.surfshark.com/hc/en-us/articles/360003069694-How-to-cancel-auto-renewal-for-your-Surfshark-subscription
+          quote: 'The subscription will remain active until the end of the current billing period.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get all your money back within 30 days of your first purchase only. Renewals are never refunded.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'we guarantee you a right to claim a refund within 30 days following your initial purchase of our Services.'
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Please note that for all subscription plans, the 30-day money-back guarantee applies only to the initial purchase; all recurring payments are non-refundable.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before it raises the price, but doesn’t say how long before. Keeping on using it means you accept the new price.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Surfshark may change the price for the subscriptions, including recurring subscription fees, or other subscription terms from time to time and will communicate any price or other changes to you in advance.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its 7-day free trial turns into a paid plan unless you cancel, which you can do at any time in your account.'
+      sources:
+        - url: https://support.surfshark.com/hc/en-us/articles/360026123554-Does-Surfshark-offer-a-free-trial
+          quote: 'Once the trial ends, your payment is charged, and you can still request a full refund within 30 days.'
+        - url: https://support.surfshark.com/hc/en-us/articles/360026123554-Does-Surfshark-offer-a-free-trial
+          quote: 'You can cancel your free trial anytime in your Surfshark account'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you 30 days before a plan longer than a month renews. Monthly plans get no reminder.'
+      sources:
+        - url: https://surfshark.com/terms-of-service/pricing
+          quote: 'We will inform you about your upcoming subscription renewal via email 30 days before the ending date (excluding 1-month plans).'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: great
+      reason: 'Beyond the price, it adds only the taxes the law requires.'
+      sources:
+        - url: https://support.surfshark.com/hc/en-us/articles/360003069594-Are-there-any-additional-payments-or-hidden-costs
+          quote: 'We may calculate and add taxes or duties, including, but not limited to, VAT, GST, and other taxes or fees under laws applicable to you at the time of purchase.'
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help articles don’t say what happens when you move to another plan.'
+      pages:
+        [
+          https://surfshark.com/terms-of-service,
+          https://support.surfshark.com/hc/en-us/articles/17673853278226-Manage-your-subscription,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'A dispute goes to the courts of the British Virgin Islands, not a private referee, unless your country’s law gives you your own courts.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'You hereby agree that the judicial proceeding to resolve claims relating to the Terms of Service will be brought in the courts of British Virgin Islands, unless the laws of your country of residence have mandatory provisions that apply to the dispute that cannot be overridden by the contractual choice of law.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It only posts a notice on its website when it changes its terms. If you don’t like them, your only choice is to stop using it.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'We will post a notice on the Surfshark Site any time these Terms of Service have been amended or updated.'
+        - url: https://surfshark.com/terms-of-service
+          quote: 'if at any time you find these Terms of Service unacceptable, you must immediately leave the Surfshark Site and cease all use of our Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time, and cut you off without warning if it decides you broke its rules, with no refund.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'We reserve the right to terminate your account at any time.'
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Surfshark may deem your usage in violation of these Terms and terminate your account or limit and/or suspend the provision of the Services without notice.'
+        - url: https://surfshark.com/terms-of-service
+          quote: 'We reserve the right not to issue refund in the event of a breach of these Terms.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop its services at any time without telling you, and says it owes you nothing if it does.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Our Services may be updated, modified, suspended or interrupted at any time without any notice or liability.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://surfshark.com/terms-of-service, https://surfshark.com/privacy]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use its apps only as its terms allow, and you may not take them apart to see how they work, even where the law would let you.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Transfer or use the Services except as expressly authorized under these Terms of Service or by Surfshark, copy, disassemble, reverse engineer or decompile, modify or alter any part of the Services.'
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Subject to these Terms we grant you a limited, revocable, non-exclusive, personal, non-transferable, non-sublicensable, non-assignable, fixed-term license (the “License”) to download, install and use a copy of the Software on a compatible device that you own or control.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside experts check its servers, apps and no-logs promise again and again, and it runs a bug bounty with outside companies.'
+      sources:
+        - url: https://surfshark.com/trust-center
+          quote: '2026 — Cure53 carried out an independent audit of our infrastructure and new protocol Dausos, reporting a stable and resilient platform.'
+        - url: https://surfshark.com/trust-center
+          quote: '2025 - SecuRing conducted a security assessment. Our web, desktop, mobile applications, and browser plugins demonstrated strong protection against real-world attack scenarios.'
+        - url: https://surfshark.com/trust-center
+          quote: 'and collaborate with reliable companies to identify even the most minor security flaws in our software.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: great
+      reason: 'It keeps no record of what you do online. Your IP address and connection times are wiped 15 minutes after you disconnect, and Deloitte checked this in 2023 and 2025.'
+      sources:
+        - url: https://surfshark.com/privacy
+          quote: 'We do not collect any information about what you do online (i.e., we do not collect your visited IP addresses, browsing history, session information, connection time stamps, used bandwidth, network traffic or any other similar information).'
+        - url: https://surfshark.com/privacy
+          quote: 'However, this information is automatically deleted within 15 minutes after your session ends.'
+        - url: https://surfshark.com/trust-center
+          quote: 'Deloitte, one of the Big Four auditing firms, confirmed that we adhere to the commitments made in our no-logs policy.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit on registering devices or downloads beyond how many devices can connect, which its plans show.'
+      pages: [https://surfshark.com/terms-of-service]
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms say how long it updates its apps, but not whether they update themselves or change other settings.'
+      pages: [https://surfshark.com/terms-of-service]
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: good
+      reason: 'You can share your account with your family, who log in with your details, and it doesn’t check who they are.'
+      sources:
+        - url: https://support.surfshark.com/hc/en-us/articles/360003069434-How-many-devices-can-I-use-with-Surfshark-simultaneously
+          quote: 'Yes, you can share a Surfshark subscription with your family.'
+        - url: https://support.surfshark.com/hc/en-us/articles/360003069434-How-many-devices-can-I-use-with-Surfshark-simultaneously
+          quote: 'You can share your account details with family members so they can also log in and use the VPN.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Unlimited devices, with a hidden limit
+      tier: poor
+      reason: 'It sells unlimited devices, but keeps the right to limit a number of devices it calls too many, without saying what that number is.'
+      sources:
+        - url: https://surfshark.com/terms-of-service
+          quote: 'Under the Fair Usage Policy, we reserve the right to enable limits of an immoderate number of simultaneously connected devices in our network maintenance system in order to make sure that none of our users are affected by potentially deteriorated quality of the Services.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Renewal prices may be tested on you
+      tier: poor
+      reason: 'It may try different renewal prices on different people to see how they react, so the price you renew at can differ from its list.'
+      sources:
+        - url: https://surfshark.com/terms-of-service/pricing
+          quote: 'Surfshark reserves the right to conduct A/B price testing (“Testing“) as part of its business operations.'
+        - url: https://surfshark.com/terms-of-service/pricing
+          quote: 'The displayed renewal prices may be subject to Testing.'
+      lastVerified: 2026-11-19

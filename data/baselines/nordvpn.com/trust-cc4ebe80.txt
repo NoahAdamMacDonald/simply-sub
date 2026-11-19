@@ -1,0 +1,269 @@
+url: https://nordvpn.com/trust/
+method: fetch
+saved: 2026-11-19
+
+NordVPN Trust Center | NordVPN Your IP: Unknown
+·
+Your ISP: Unknown
+·
+Your Status: Unknown
+Skip to main content
+Pricing
+Features
+Why NordVPN?
+What is a VPN?
+VPN Servers
+High-Speed VPN
+Money-Back Guarantee
+No User Tracking
+Features
+Next-gen antivirus New
+Dedicated IP
+Dark Web Monitor
+Call and message protection New
+Multiple Devices
+Meshnet
+All Features
+Download VPN
+Desktop
+Windows
+macOS
+Linux
+Mobile
+Android
+iOS
+Extensions
+Chrome
+Firefox
+Edge
+All Apps
+Learn
+Learn
+Blog
+Cybersecurity Hub
+Research Lab
+About NordVPN
+Ask an expert
+For Business opens in a new tab
+Secure your business against advanced cyber threats
+Go to Business VPN
+opens in a new tab See NordLayer Pricing
+opens in a new tab
+All-in-one AI platform for business
+opens in a new tab
+Business password solutions
+opens in a new tab
+Log In opens in a new tab
+Support Center opens in a new tab
+Products
+Online security and privacy
+An eSIM data service opens in a new tab
+Network security platform for business opens in a new tab
+Secure password manager opens in a new tab
+Identity theft protection opens in a new tab
+Encrypted cloud storage opens in a new tab
+Bahasa Indonesia Dansk Deutsch English Español Español Latinoamericano Français Italiano Lietuvių Nederlands Norsk Polski Português Português Brasileiro Suomi Svenska Türkçe Русский Українська עברית‏ ‪한국어‬ ‫العربية 日本語 简体中文 繁體中文 (台灣) 繁體中文 (香港)
+Get NordVPN
+Toggle sidebar
+Close
+Pricing
+Features
+Features Close
+Why NordVPN?
+What is a VPN?
+VPN Servers
+High-Speed VPN
+Money-Back Guarantee
+No User Tracking
+Features
+All Features
+Next-gen antivirus New
+Dedicated IP
+Dark Web Monitor
+Call and message protection New
+Multiple Devices
+Meshnet
+Download VPN
+Download VPN Close
+All Apps
+Desktop
+Windows
+macOS
+Linux
+Mobile
+Android
+iOS
+Extensions
+Chrome
+Firefox
+Edge
+Learn
+Learn Close
+Blog
+Cybersecurity Hub
+Research Lab
+About NordVPN
+Ask an expert
+For Business
+For Business Close
+Secure your business against advanced cyber threats
+Go to Business VPN
+opens in a new tab See NordLayer Pricing
+opens in a new tab
+All-in-one AI platform for business
+opens in a new tab
+Business password solutions
+opens in a new tab
+Products
+Products Close
+NordVPN
+Saily
+opens in a new tab
+NordLayer
+opens in a new tab
+NordPass
+opens in a new tab
+Coveron
+opens in a new tab
+NordLocker
+opens in a new tab Get NordVPN
+Log In opens in a new tab
+Support Center opens in a new tab
+Bahasa Indonesia Dansk Deutsch English Español Español Latinoamericano Français Italiano Lietuvių Nederlands Norsk Polski Português Português Brasileiro Suomi Svenska Türkçe Русский Українська עברית‏ ‪한국어‬ ‫العربية 日本語 简体中文 繁體中文 (台灣) 繁體中文 (香港) English
+Get NordVPN
+*>*>*:nth-child(1_of_:not(script):not(style))_.compensate-height]:block">
+Cybersecurity that you can count on
+NordVPN Trust Center
+We strive to make the internet what it was always meant to be — free from threats, censorship, and surveillance.
+Security and privacy
+Transparency
+Innovation
+Notable initiatives
+Commitment to social responsibility
+Security and privacy
+We put serious effort into our security systems so users can trust our VPN service with their data.
+6,400+ servers covering 224 locations
+With over 6,400 servers across 224 locations, NordVPN makes browsing, gaming, and streaming smooth and secure. To add a layer of privacy to your online activity, we offer specialized servers for tasks like Double VPN or Onion Over VPN.
+RAM-only servers
+NordVPN servers don’t rely on traditional hard drives. Instead, all server data is stored in RAM modules, or volatile memory, which means that the moment the server is powered off, the data is instantly wiped.
+Colocated servers
+A big chunk of our VPN servers is owned, maintained, and managed by our in-house team of experts. Server ownership gives us additional control over infrastructure configurations and security. Together with our partner-hosted servers, each managed under the same strict security requirements, this unified approach helps us minimize the potential attack surface and better protect our users’ data.
+10 Gbps server speed
+While old 1 Gbps servers got the job done at first, with so many people relying on NordVPN for a secure connection, it was time to level up — and we did. We’ve upgraded all our servers to 10 Gbps, leaving the old 1 Gbps servers behind to provide faster browsing speeds and better performance for everyone.
+Encrypted server boot processes
+NordVPN’s encrypted server boot process ensures that only verified and authorized software runs on our servers. The server is granted network access to finish booting up only if it matches specific security parameters. If something doesn’t match, the server simply cannot connect to the network, keeping the infrastructure safe from potential risks.
+Private DNS
+When using our default settings, we handle your DNS queries directly, keeping them within the secure VPN tunnel. This means faster DNS resolutions, lower latencies, and better privacy. Because we use our own private resolvers, we protect your data from DNS-related leaks, cache poisoning, and hijacking so they can browse worry free.
+Application and software security
+We build security in from the start.
+A VPN with post-quantum encryption
+NordVPN uses post-quantum encryption to withstand increasing decryption capabilities introduced by quantum computers. Right now, regular VPN encryption is strong enough to protect users’ online traffic. But with quantum computing advancing quickly, that might not last forever. That’s why we’ve built a quantum-resistant VPN — to keep cybersecurity ready for whatever comes next.
+Rock-solid API security
+At NordVPN, both our internal and external APIs are designed with security as a top priority.
+We use strong user authentication, encrypt data in transit, validate all inputs, have regular security assessments, and constantly monitor for potential threats.
+Secure Software Development Lifecycle (SSDLC)
+Our processes strictly follow security standards covered by SSDLC at every stage of software development, from planning to deployment. It helps make sure our products are secure from the get-go, reduce bugs, and minimize the chances of any security breaches or attacks.
+Explore key areas of SSDLC
+A full lifecycle approach.
+Security is integrated throughout the entire development process, not just added at the end. This means when users get a new feature or app update, it's already been designed with their privacy and security in mind, not patched up later.
+Comprehensive threat analysis.
+We assess all the risks — how sensitive the data is, how it’s managed, and what could happen in case of a data breach. Before handling user data, we map out every possible way it could be compromised and build defenses accordingly.
+Regular code review.
+We constantly review and fix code using the best security practices to keep the infrastructure safe. This catches vulnerabilities before attackers can exploit them, minimizing the risk of security breaches, data leaks, or app bugs that could expose user information.
+Rigorous security testing.
+We test our systems thoroughly to catch any issues before they become a problem. Every new feature or update is stress tested before reaching users’ devices. This results in fewer bugs and more stable connections.
+Explore key areas of SSDLC ⁠
+Operational security
+Our practices and processes help us protect systems, data, and workflows in the day-to-day operations.
+Multi-cloud security
+At NordVPN, we use multiple cloud-service providers, so we need security solutions that can protect all of them consistently and ensure our users’ data is safe. That’s where cloud-native application protection platform (CNAPP) tools come into play. We use them to manage cloud applications throughout their entire lifecycle. As a result, our users get a more secure, reliable, and faster VPN service.
+Bug bounty
+Cybersecurity is a never-ending process. That’s why we’ve expanded our pentesting efforts to include the entire cybersecurity community. Security researchers, industry professionals, and anyone interested in the quality and security of NordVPN’s services can earn generous rewards for uncovering potential vulnerabilities opens in a new tab in our network. It doesn’t matter how big or small they are — what’s important is their potential impact on our service.
+Incident management
+We’re well prepared for security threats to our systems or customer data. When potential threats are detected, we follow a proven three-step process: Immediately contain and isolate affected systems within hours, completely eliminate the threat source while notifying impacted users, then restore systems safely and analyze what happened to prevent future incidents. Every security event is logged, classified by severity, and handled by specialists who prioritize your data security above all else.
+Employee awareness
+At NordVPN, every employee goes through security, privacy, and compliance training during onboarding, with regular refresher courses to stay sharp. Through continuous training, consistent updates, and open communication, we keep everyone informed about emerging threats.
+We also run regular attack simulations to prepare our teams for real-world scenarios that help them spot and respond to potential threats. On top of that, NordVPN’s Security Champions Program empowers our tech teams to lead by example, while the Cyber Academy gives everyone the chance to dive deeper into cybersecurity. These practices combined help us keep our systems and customer data locked up tight.
+Transparency
+We believe that staying open and transparent keeps us closer to our customers.
+Audits and tests
+We’re very proud that NordVPN was the first VPN to have its no-logs policy verified independently in 2018 — a practice that has since been adopted by the rest of the VPN industry. We’ve had our no-logs claims verified four more times after that.
+To maintain NordVPN users’ trust in our VPN and confirm our alignment with top industry standards, we routinely undergo external assessments and testing of our app security and anti-malware features.
+Open source software components
+Our NordVPN Linux app is built on openness and community collaboration. Alongside the Linux app CLI, which has been open source for several years, the Linux app GUI source code is also available for everyone to view, build, and customize.
+By embracing community contributions, we strengthen security, transparency, and user trust through collaborative development.
+Transparency reports
+We release quarterly transparency reports, which provide regular updates on government inquiries and DMCA requests we receive. All because our users deserve to know exactly how we’re protecting their privacy.
+Innovation
+Every day, we push security to new heights. We innovate, create, and stay ahead of the latest tech to make sure our systems are always ready to protect our users’ sensitive data.
+NordLynx and NordWhisper
+NordLynx and NordWhisper
+Pushing the boundaries of innovation, we do our best to make your online experience more secure and private. That’s why we built NordLynx, a next-gen VPN protocol powered by the super-fast WireGuard® technology. It’s crafted to give our users lightning-fast speeds and strong security, so they can stream, browse, and game without worry.
+And we didn’t stop there. NordWhisper is another custom VPN protocol that provides secure, encrypted access to the internet, even when other protocols like OpenVPN or WireGuard can’t get through due to VPN-specific restrictions.
+Next-gen antivirus
+Next-gen antivirus
+Scams, fraud, malware, and dangerous ads are a lot to deal with when all someone wants is to use the internet in peace. That’s why we equipped the NordVPN app with a next-gen antivirus that makes browsing more secure and enjoyable. It works around the clock to shield our customers from phishing attacks and fake websites hosting malware, block malware-infected downloads, and even get rid of annoying ads.
+Patents
+Patents
+Nord Security has been granted more than 396 patents in the US. It’s something we’re really proud of because it highlights our role as one of Europe’s leaders in consumer cybersecurity. And it’s not just about VPNs — we’re also exploring next-generation encryption, AI-driven threat detection, and network traffic optimization.
+NordLabs
+NordLabs
+NordLabs is a platform where our engineers, developers, and the entire cybersecurity community come together to experiment with cutting-edge technology. This playground welcomes anyone interested in exploring AI, machine learning, and the next big advancements in cybertech. NordLabs helps shape the future of digital security and creates smarter, more innovative tools to keep the digital space safe..
+Notable initiatives
+We also take part in shaping cybersecurity regulations.
+VPN Trust Initiative
+Together with the members of the Internet Infrastructure Coalition (i2Coalition), NordVPN co-founded the VPN Trust Initiative (VTI), a program that shapes the rules for transparent and privacy-focused VPNs.
+Together, we launched the VPN Trust Seal accreditation, which is basically a gold star for VPNs that proves they meet the highest standards in security, privacy, transparency, and social responsibility.
+Why does this matter? Because as the VPN industry grows, trust is more important than ever. Everyone deserves a secure and open internet, backed by providers who actually do what they say. And we’re here to help set that standard.
+AMTSO partnership
+We are a proud member of the Anti-Malware Testing Standards Organization (AMTSO), a global non-profit that sets the gold standard for cybersecurity testing. By joining AMTSO, we’re making sure our security solutions don’t just talk the talk — they’re tested, proven, and ready for the real online world.
+Cybersecurity Research Lab
+The Cybersecurity Research Lab empowers people to take control of their online privacy, access to information, and personal data. With tools, resources, and in-depth research, we help users understand why cybersecurity matters and how to navigate online threats. The more we know, the less power attackers have over us.
+ETSI partnership
+We are a proud official member of ETSI, the European authority that sets globally recognized standards for information and communications technologies. Since 22 March, we've been contributing alongside Google, Palo Alto Networks, Airbus, and many others to the harmonized standards addressing the EU Cyber Resilience Act (CRA) for important products — VPNs, password managers, browsers, anti-virus. By helping shape these standards, we're not only future-proofing our own solutions but also helping the whole industry get ready for the CRA before it takes effect in December 2027.
+Further information on our contribution and partnership with ETSI can be found on our blog.
+Commitment to social responsibility
+At NordVPN, we are eager to make a positive impact on the digital world and beyond. We strongly advocate for online freedom by making it accessible to those who need it most.
+VPN for nonprofits
+At Nord VPN, we believe a safe, accessible internet is a fundamental right. In 2025, our nonprofit program donated 5,521 NordVPN accounts to over 360+ organizations worldwide. By equipping journalists, human rights defenders, and educators across 68 countries with the tools to communicate privately and safely, we are proud to support the vital work that shapes our world.
+Emergency VPNs
+We firmly believe that what someone does online is their own business — no one else’s. Yet so many people around the world live under heavy online censorship and surveillance. That’s why we created our emergency VPN program, donating subscriptions to those facing heavy restrictions so they can securely access the internet when it matters most.
+Empowering through knowledge
+Beyond donations, we equip vulnerable groups like nonprofits and journalists with in-depth cybersecurity training. On a larger scale, we share our expertise at global events like RightsCon and the World Economic Forum — empowering communities to stay secure and thrive online.
+Follow us
+opens in a new tab opens in a new tab opens in a new tab opens in a new tab opens in a new tab
+opens in a new tab
+opens in a new tab
+NordVPN
+About us Careers opens in a new tab Money-back guarantee VPN routers Reviews Student and employee discount Where to buy Refer a friend Research lab
+Engage
+What is a VPN? IP lookup What is my IP? Cybersecurity glossary Cybersecurity hub Social responsibility Trust center Press area Become a partner
+Help
+Support center Privacy policy opens in a new tab Cookie preferences Terms of service opens in a new tab Accessibility statement Contact us Ask an expert
+Discover
+Nord Security opens in a new tab NordLayer opens in a new tab NordPass opens in a new tab NordLocker opens in a new tab Coveron opens in a new tab Saily opens in a new tab nexos.ai opens in a new tab
+NordVPN
+About us Careers opens in a new tab Money-back guarantee VPN routers Reviews Student and employee discount Where to buy Refer a friend Research lab
+Engage
+What is a VPN? IP lookup What is my IP? Cybersecurity glossary Cybersecurity hub Social responsibility Trust center Press area Become a partner
+Help
+Support center Privacy policy opens in a new tab Cookie preferences Terms of service opens in a new tab Accessibility statement Contact us Ask an expert
+Discover
+Nord Security opens in a new tab NordLayer opens in a new tab NordPass opens in a new tab NordLocker opens in a new tab Coveron opens in a new tab Saily opens in a new tab nexos.ai opens in a new tab
+Available VPN apps
+Windows macOS Linux Android iOS Chrome Firefox Edge Android TV Apple TV
+Available VPN apps
+svg]:hover:text-accent left-0 border-r-md sr-only bg-inverse-primary text-secondary-on-color [&>svg]:hover:text-disabled! [&>svg]:active:text-neutral-500! border-tertiary cursor-not-allowed" aria-disabled="true" tabIndex="-1"> Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Android TV
+Apple TV
+svg]:hover:text-accent right-0 border-l-md sr-only bg-inverse-primary text-secondary-on-color [&>svg]:hover:text-disabled! [&>svg]:active:text-neutral-500! border-tertiary cursor-not-allowed" aria-disabled="true" tabIndex="-1">
+© 2026 Nord Security. All rights reserved
+Bahasa Indonesia Dansk Deutsch English Español Español Latinoamericano Français Italiano Lietuvių Nederlands Norsk Polski Português Português Brasileiro Suomi Svenska Türkçe Русский Українська עברית‏ ‪한국어‬ ‫العربية 日本語 简体中文 繁體中文 (台灣) 繁體中文 (香港) English
+© 2026 Nord Security. All rights reserved

@@ -1,0 +1,430 @@
+url: https://www.expressvpn.com/trust
+method: fetch
+saved: 2026-11-19
+
+ExpressVPN Trust Center
+Black Friday is live! Get up to 80% off the best VPN now.
+BLACK FRIDAY · ENDS SOON! Get up to 80% off
+Claim Offer
+Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+English
+Get Started
+menu opener
+Trust
+ExpressVPN Trust Center
+ExpressVPN is, first and foremost, a privacy company. Our users trust us to protect their privacy with an industry-leading combination of hardware, software, and human ingenuity. Here is a look at how we work to earn that trust.
+Security at ExpressVPN: Our 4 key strategies
+Innovation
+Operational governance (ISO)
+Independent security audits
+Transparency report
+Bug bounty
+Industry leadership
+Notable privacy initiatives
+Security at ExpressVPN: Our 4 key strategies
+Innovation
+Operational governance (ISO)
+Independent security audits
+Transparency report
+Bug bounty
+Industry leadership
+Notable privacy initiatives
+Security at ExpressVPN: Our 4 key strategies
+Learn how we do cybersecurity to keep our systems and users protected.
+1. Make systems difficult to compromise
+Build verification system
+The ExpressVPN software is guarded, from creation to software delivery, against contamination with malicious code, due to an in-house build verification system that has been independently reviewed.
+Hardware security devices
+We use public-private key pairs for a variety of security purposes, such as two-factor authentication, signing Git commits, and connecting to a server via SSH. We mitigate the risk of our private keys being stolen by keeping them on hardware security devices. This means that even if our workstations are compromised, an attacker cannot steal our private keys.
+These devices are secured with strong passphrases and are configured to "brick" themselves after multiple failed attempts to unlock them. The devices require a physical touch to operate, meaning that malware cannot steal the keys without a human being involved.
+Code review
+All production code requires at least one other human to act as a reviewer. This makes it much more difficult to add malicious code, either from insider threat or if an employee’s workstation is compromised.
+Hardened secure shell (SSH)
+We use SSH as a secure way to gain remote access to our critical servers. These SSH servers are configured to only use a set of highly secure ciphers, key exchange algorithms, and MACs. We also don’t allow connecting as root, and authentication can only occur using strong SSH keys—no passwords allowed. We use intermediate SSH bastion hosts to segregate production infrastructure from the open internet. These machines only accept traffic from addresses on an IP whitelist.
+All of this configuration is defined in code, so it is peer reviewed and reproducible.
+Rapid patching
+For production machines, software dependencies are updated automatically via unattended upgrades.
+2. Minimize potential damages
+Embracing zero trust
+To mitigate the threat of stolen keys being used to impersonate a VPN server, we require the ExpressVPN application to check in with our API servers to receive updated configuration settings. Our applications authenticate the servers they are connecting to by validating the private Certificate Authority (CA) signature and common name ensuring that an attacker cannot impersonate us.
+Employing zero-knowledge encryption
+When you use ExpressVPN, your data is protected by advanced mathematics in AES-256, the same encryption standard adopted by the U.S. government and trusted by security experts worldwide to protect classified information.
+When you use ExpressVPN’s password manager (ExpressKeys), your sensitive data is protected by zero-knowledge encryption so that no one—not even us—can decrypt the information stored in ExpressKeys. All information is only ever decrypted on a user’s device, and can only be decrypted using encryption keys generated by the user’s primary password—which only they know.
+To ensure ExpressVPN’s dedicated IP (DIP) solution maintains robust technical security and privacy, we use zero-knowledge IP allocation and blinded tokens to prevent ExpressVPN administrators from ever identifying a user from their dedicated IP address.
+Secure design
+Security and privacy threat modeling is incorporated into the design phase of any system. We use the MITRE ATT&CK framework to identify threats that can exist in our designs, consider ways to remove them, and apply sufficient measures to minimize potential risks.
+Principle of least privilege
+All our users, services, and operations follow the least-privilege model. Our employees are authorized access to only the services and production systems necessary for their roles. Our customer-support agents work under two environments, an untrusted one for general web browsing activities and a restrictive one for accessing sensitive systems. These measures minimize the impact and thwart the goals of the attackers should they manage to take over any of our accounts.
+3. Minimize the time of compromise
+Security monitoring
+We continuously monitor our internal services and infrastructure for any anomalous or unauthorized activity. Our 24/7 on-call security team performs real-time monitoring and triaging of security alerts.
+Automatic rebuilds
+Many of our systems are automatically destroyed and rebuilt several times per week, if not on a daily basis. This limits the potential length of time that an attacker lurks within our systems.
+4. Validate our security controls
+Internal validation: Penetration tests
+We perform regular penetration tests to evaluate our systems and software to identify vulnerabilities and weaknesses. Our testers have full access to the source code and employ a combination of automated and manual testing to ensure a thorough evaluation of our services and products.
+External validation: Security audits by third parties
+We engage independent auditors to review the security of our services and software. These engagements serve as validation that our internal controls are effective in mitigating security vulnerabilities, while offering customers documentation on the accuracy of the security claims we make about our products.
+See the full list of audit reports
+Innovation
+As we strive to meet and exceed industry security standards, we are also constantly innovating in a relentless pursuit of new ways to safeguard our products and our users’ privacy. Here we highlight two groundbreaking technologies built by ExpressVPN.
+Lightway: Our protocol offering a superior VPN experience
+Lightway is a VPN protocol built by ExpressVPN. A VPN protocol is the method by which a device connects to a VPN server. Most providers use the same off-the-shelf protocols, but we set out to create one with superior performance, making users’ VPN experience not only speedier and more reliable, but also more secure.
+Lightway uses wolfSSL, whose well-established cryptography library has been extensively vetted by third parties, including against the FIPS 140-2 standard.
+Lightway also preserves perfect forward secrecy, with dynamic encryption keys that are regularly purged and regenerated.
+The core library of Lightway has been open-sourced, ensuring that it can be transparently and widely assessed for security.
+Lightway includes post-quantum support, protecting users against attackers with access to both classical and quantum computers. ExpressVPN is one of the first VPN providers to deploy post-quantum protection, helping users remain secure in the face of quantum computing advancements.
+For even faster speeds, we’ve created Lightway Turbo, which uses multi-lane tunneling to send more data simultaneously (currently available in our app for Windows, with other platforms in the works).
+Learn more about Lightway, and read our dev blog for technical insights from ExpressVPN software developers on how Lightway works and what makes it better than the rest.
+TrustedServer: All data wiped with every reboot
+TrustedServer is VPN server technology we created that delivers greater security to our users.
+It runs only on volatile memory, or RAM. The operating system and apps never write to hard drives, which retain all data until they are erased or written over. Since RAM requires power to store data, all information on a server is wiped every time it is powered off and on again—stopping both data and potential intruders from persisting on the machine.
+It increases consistency. With TrustedServer, every one of ExpressVPN’s servers runs the most up-to-date software, rather than each server receiving an update at different times as needed. That means ExpressVPN knows exactly what’s running on each and every server—minimizing the risk of vulnerabilities or misconfiguration and dramatically improving VPN security.
+TrustedServer technology has been audited by PwC.
+Want a more detailed look at the many ways TrustedServer protects users? Read our deep dive into the tech, written by the engineer who designed the system.
+ExpressKeys: A dedicated, zero-knowledge password manager
+ExpressKeys is a standalone password manager that gives your credentials their own secure home, separate from your VPN connection. Formerly known as ExpressVPN Keys, it is now available as a dedicated app for iOS and Android, providing a focused environment for generating, storing, and protecting logins.
+Just like our VPN, ExpressKeys is secure by design. It utilizes zero-knowledge encryption, which means your passwords are encrypted on your device before they ever reach our servers. We have no technical ability to decrypt or view the information you store; you’re the only one with the keys to your vault.
+ExpressKeys includes a built-in two-factor authenticator (2FA), proactive breach monitoring, and seamless syncing across mobile devices and browser extensions. It's included at no extra cost with Advanced, Express Pro, and legacy subscriptions. You can also subscribe directly through the ExpressKeys app for Android, iOS, or macOS.
+ExpressVPN’s dedicated IP: A static IP address with unmatched privacy
+ExpressVPN’s dedicated IP service assigns a unique IP address exclusively to a single user, providing a consistent online identity while preserving privacy.
+Traditionally with a VPN, many users share the same IP address, which is a key element of the VPN’s anonymization process. With a dedicated IP that is assigned to a single user, special measures need to be taken to ensure anonymity.
+While solutions today present security and privacy vulnerabilities that potentially expose a user’s true IP address, we’ve taken extra precautions to maintain our users’ anonymity.
+We use a blind token-based system to decouple payment details from the IP we assign to a user. This ensures that we can never trace a dedicated IP back to the user.
+Operational governance (ISO)
+Trust requires a rigorous architectural foundation. In 2025, ExpressVPN and the Kape Group secured a suite of internationally recognized certifications to ensure that security and privacy are engineered into our daily operations, from how we manage risk to how we support our users.
+ISO/IEC 27001 (Information Security Management): Validates our systemic approach to managing information security risks across people and technology.
+ISO 9001 (Quality Management): Ensures consistent excellence and continual improvement in our service delivery.
+ISO 18295-1 & 18295-2 (Customer Contact): Certifies that our support teams operate with strict oversight and customer-first controls.
+See how we’re raising the bar with our 2026 security roadmap.
+Independent security audits
+We’re committed to commissioning in-depth third-party audits of our products with great frequency. Here is a comprehensive list of our external audits, ordered chronologically:
+A security audit by Cure53 of ExpressMailGuard (May 2026)
+A Cure53 security audit of Identity Defender (May 2026)
+A security audit by Cure53 of EventVPN (April 2026)
+Cure53's security and architecture review of ExpressKeys (March 2026)
+A security audit by Cure53 of ExpressAI (March 2026)
+The third KPMG security audit of our privacy commitments (June 2025)
+The second security audit by Cure53 of our Aircove routers (November 2024)
+The fourth audit of our VPN protocol Lightway by Cure53 (October 2024)
+The third audit of our VPN protocol Lightway by Praetorian (September 2024)
+A second audit by Cure53 of the ExpressVPN browser extension (June 2024)
+A Windows app audit to confirm remediation of a DNS issue related to split tunneling (April 2024)
+An audit by KPMG to assess our privacy policy claims (December 2023)
+The second audit of our VPN protocol Lightway by Cure53 (November 2022)
+An audit by Cure53 of the ExpressKeys browser extension (October 2022)
+An audit by Cure53 of the ExpressVPN browser extension (October 2022)
+An audit by KPMG of our no-logs policy (September 2022)
+A security audit by Cure53 of our app for iOS (September 2022)
+A security audit by Cure53 of our app for Android (August 2022)
+An audit by Cure53 of our Linux app (August 2022)
+An audit by Cure53 of our macOS app (July 2022)
+A security audit by Cure53 of our Aircove router (July 2022)
+A security audit by Cure53 of TrustedServer, our in-house VPN server technology (May 2022)
+An audit by F-Secure of our Windows v12 app (April 2022)
+A security audit by F-Secure of our Windows v10 app (March 2022)
+A security audit by Cure53 of our VPN protocol Lightway (August 2021)
+An audit by PwC Switzerland on our build verification process (June 2020)
+An audit by PwC Switzerland of our privacy policy compliance and our in-house technology TrustedServer (June 2019)
+A security audit by Cure53 of our browser extension (November 2018)
+Transparency report
+Our biannual transparency reports provide information on user-data requests received by our legal department.
+While we regularly receive such requests, our no-logs policy ensures we never have anything to share. We do not and never will keep logs of your online activities or personal information, including your browsing history, traffic destination or metadata, DNS queries, or any IP addresses you are assigned when you connect to our VPN.
+We can never provide this customer data because it simply does not exist. By publishing this additional information on the requests that we receive, we aim to provide even more transparency into how we protect our users.
+Requests for user data
+Date range: January - June 2026
+Type
+Requests received
+Government, law enforcement, and civil requests
+137
+DMCA requests
+1,361,382
+Warrants from any government institution
+3
+Date range: July - December 2025
+Type
+Requests received
+Government, law enforcement, and civil requests
+155
+DMCA requests
+1,382,986
+Warrants from any government institution
+3
+Date range: January - June 2025
+Type
+Requests received
+Government, law enforcement, and civil requests
+374
+DMCA requests
+1,063,598
+Warrants from any government institution
+0
+From this cycle forward, gag orders and National Security Letters are included in the broader government and civil category. None of the requests resulted in the disclosure of user-related data.
+Date range: July - December 2024
+Type
+Requests received
+Government, law enforcement, and civil requests
+163
+DMCA requests
+807,788
+Warrants from any government institution
+1
+Gag orders
+0
+National Security Letters
+0
+None of the requests resulted in the disclosure of user-related data.
+Date range: January - June 2024
+Type
+Requests received
+Government, law enforcement, and civil requests
+170
+DMCA requests
+259,561
+Warrants from any government institution
+2
+Gag orders
+0
+National Security Letters
+0
+None of the requests resulted in the disclosure of user-related data.
+Bug bounty
+Through our bug bounty program, we invite security researchers to test our systems and receive financial rewards for any problems they find. This program gives us access to a large number of testers who regularly assess our infrastructure and applications for security issues. These findings are then validated and remediated, ensuring our products are as secure as possible.
+The scope of our program includes vulnerabilities in our VPN servers, our apps and browser extensions, our website, and more. To individuals who report bugs, we provide full safe harbor conforming to global best practices in the security-research space.
+Our bug bounty program is managed by YesWeHack. Follow this link to find out more or report a bug.
+Industry leadership
+While we set rigorous standards for ourselves, we also believe that our work of building a more private and secure internet can’t stop there—that’s why we collaborate with the entire VPN industry to raise standards and better protect users.
+We co-founded and chair the VPN Trust Initiative (VTI) together with the Internet Infrastructure Coalition (i2Coalition) and several other major industry players. In addition to its ongoing awareness and advocacy work, the group has launched the VTI Principles—shared guidelines for responsible VPN providers in the areas of security, privacy, transparency, and more. This builds on ExpressVPN’s previous transparency initiative work in partnership with the Center for Democracy and Technology.
+Lightway is another example of technology that we've built from the ground up, and we hope that by open-sourcing it, it will have a positive influence on the VPN industry as a whole.
+Notable privacy initiatives
+Find out more about how we protect our users’ privacy.
+ioXT certified
+ExpressVPN has become one of the few VPN apps to be certified by the ioXt Alliance for security standards, empowering consumers to use our services with greater confidence.
+Advanced protection
+Our app includes Advanced Protection, a suite of safety tools that blocks ads, trackers, harmful sites, and supports family-friendly content controls.
+Digital Security Lab
+We launched the Digital Security Lab to delve deep into real-world privacy issues. See its leak-testing tools, which help to validate the security of your VPN.
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More
+Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+PROUD TO HAVE PARTNERED WITH THE BIGGEST NAMES IN SPORTS
+Official Digital Privacy Partner
+Official Digital Privacy Partner
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Choose language
+Español
+Deutsch
+Français
+العربية
+Български
+Čeština
+Dansk
+Ελληνικά
+Suomi
+עברית
+Hrvatski
+Magyar
+Indonesia
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Română
+Русский
+Svenska
+ไทย
+Türkçe
+Українська
+Tiếng Việt
+Srpski
+English (UAE)
+Need help? Chat with us!
+Live Chat
+Online
+English
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+This content is not available in your region
+To continue, please visit our dedicated website for the United Arab Emirates.
+ExpressVPN for UAE

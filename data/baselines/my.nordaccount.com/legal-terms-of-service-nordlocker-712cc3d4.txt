@@ -1,0 +1,115 @@
+url: https://my.nordaccount.com/legal/terms-of-service/nordlocker/
+method: browser
+saved: 2026-11-19
+
+Skip to main content
+Terms of service
+General
+Subscription Terms
+NordVPN
+NordPass
+NordLocker
+HangUp
+NordLabs
+Privacy Policy
+General
+NordVPN
+NordPass
+NordLocker
+HangUp
+NordLabs
+NordBot
+Cookie policy
+Reports
+DSA Transparency Report
+NordLocker Additional Terms
+Last updated: May 3, 2026
+Your use of NordLocker Services is subject to the General Terms and these NordLocker Additional Terms. If there is any conflict or inconsistency between clauses in the General Terms and the NordLocker Additional Terms, the NordLocker Additional Terms will govern and apply.
+Capitalized terms not defined here have the same meaning as defined in the General Terms.
+1. NORDLOCKER SERVICES
+NordLocker encrypts your files (“Your Content”) to protect them from hacking, snooping, data breaches, or other cyber threats. Your Content can only be accessed with your Cloud Password (“Cloud Password”).
+NordLocker allows you to organise Your Content flexibly. You may store files at any level of your file structure - directly at the root level or within folders - and you may move files and folders freely across your file structure. NordLocker cloud storage operates by synchronizing Your Content across your chosen devices.
+Current information about the functioning of NordLocker Services, subscription plans, and pricing can be found at nordlocker.com
+(opens in a new tab)
+.
+2. SERVICE FEES
+The NordLocker Software for any platform supported by NordLocker can be downloaded free of charge. Nord provides the NordLocker Services for free (“Free Version”) and on a payment basis (“Premium Version”). The Free Version gives 3 GB of encrypted cloud storage. The Premium Version is paid and provided on a Subscription basis. You choose the Subscription period and payment method when you purchase it. Please review the Subscription Terms for more information.
+3. FILE AND FOLDER SHARING
+NordLocker offers features for sharing your files and folders via a generated link (“Link”). Upon creation of a Link, a security code required to access and decrypt your file(s) or folder(s), as well as a Link expiration date, are automatically generated (“Security Code” and “Link Expiration Date”). You may modify these settings by disabling the Security Code or selecting a different Link Expiration Date. In addition, NordLocker allows you to share file(s) or folder(s) directly with other NordLocker users via email (“Sharing via Email”).
+For file and/or folder sharing, you can share selected files and/or folders containing Your Content with other NordLocker users or recipients via a Link or Sharing Via Email. Sharing Via Email is available in Viewer and Editor roles. Users on your sharing list (“List”) with the Viewer role can access, view, and download Your Content but cannot make changes or upload new files. Users with the Editor role can download, delete, edit file names and content, and add new files, but cannot rename, re-share, or delete the file and/or folder, nor generate file and/or folder sharing Links or Request Files Links. Access permissions apply at the level of the shared folder and cascades down to sub-folder(s) and files within the shared folder. It does not extend to other parts of your file structure.
+You are solely responsible for distributing the Link and Security Code. Nord does not control the use of your generated Link, and recipients may redistribute it to others. It is your choice to share the Link. You can remove a user from the List (or leave the List if a file and/or folder is being shared with you) at any time. By using these sharing features, you acknowledge that Nord does not control your actions or those of users included in the List. Users with the Link/Security Code may access, view, and download Your Content without restrictions or compensation to you. Nord assumes no liability for your actions regarding file and/or folder sharing, Sharing Via Email, the List, Link, Security Code, and/or Your Content.
+4. REQUEST FILES
+Request files feature allows you to request Content uploads to your designated location in your file structure by others via the Request Files link (“Request Files Link”). Nord does not control the use of your generated Link and/or Content uploaded to your files structure. We do not monitor content being stored and/or being uploaded to your files structure and/or otherwise prevent the possibility of malicious, illegal or otherwise harmful content being uploaded to your vaults. You are solely responsible for distributing the Link and the Security Code to the Request Files recipient and it is solely your responsibility to share the Link and Security Code. Nord does not and will not assume any liability for your actions with the Link, Security Code and/or Content being uploaded to your files structure via Request Files Link.
+5. FILE, FOLDER SHARING, REQUEST FILES LINK
+Your Content distributed or received via file and/or folder sharing Link or Request Files Link will be valid for a limited period of time (default or chosen by you) after which the ability to preview, download and/or receive Content expires. NordLocker will not inform you when and by whom Your Content has been previewed, downloaded and/or uploaded. Also, you can delete your generated Link at any time, thus removing any access to that Link.
+After the expiry of the Link, Your Content will no longer be available to others to preview, download and/or upload and you may need to generate a new Link to share or receive Your Content.
+6. CLOUD PASSWORD
+NORD DOES NOT STORE OR HAVE ACCESS TO YOUR CLOUD PASSWORD OR CLOUD RECOVERY KEY, AND IF THEY ARE LOST, NORD CANNOT UNLOCK YOUR NORDLOCKER SERVICES ACCOUNT AND RETRIEVE YOUR CONTENT.
+Cloud Password. You hereby understand that upon using the NordLocker Services, you will be required to create a Cloud Password. The Cloud Password will be used by you and only you. Nord has no knowledge of your Cloud Password and will not ask or be permitted to ask for your Cloud Password.
+Confidentiality. You agree to not issue your Cloud Password to any third parties and shall not, under any circumstances, issue your Cloud Password to any customer support representative of Nord in the event you contact Nord for any assistance. Nord shall not be responsible for the actions of any individuals who misuse or misappropriate your Account information or any other of your items using your Cloud Password or the information stored in NordLocker application.
+No Recovery. Please remember your Cloud Password. If you forget or lose your Cloud Password, you can reset the Cloud Password with the Cloud Recovery Key (i.e., special recovery code that was first generated for you during the sign-up process) and vice versa. However, if you have forgotten your Cloud Password and lost the Cloud Recovery Key, you will lose access to Your Content. Due to the encrypted nature of the NordLocker Services, you acknowledge that Nord has no ability or obligation to recover Your Content.
+7. SECURITY
+We develop and deploy advanced security measures to protect the NordLocker Services and Your Content. However, we cannot and do not guarantee that Your Content will be 100% protected as no technology is completely bulletproof. While NordLocker Services are designed to be as secure as possible, without prejudice to the provisions of the General Terms, we cannot guarantee the security of Your Content, and we explicitly do not claim that it is immune to attack or other unlawful actions of third parties.
+8. YOUR CONTENT AND CONDUCT
+We do not claim ownership of Your Content. Your Content remains yours and you are fully liable for it and its use on or through NordLocker Services.
+You also represent and warrant that for the duration of the Terms, you have (and will have) all the rights, permissions, consents, and clearances necessary for Your Content to be uploaded, stored, accessed, and/or otherwise exploited on or through NordLocker Services and that the collection, retention, and/or other exploitation of Your Content will not violate any applicable law, including rights of others. Nord does not own, control, verify, pay for, endorse, or otherwise assume any liability for Your Content and cannot be held accountable for Your Content or the material others upload, store, and/or access using NordLocker Services.
+We respect the law and require the same from all our users. Therefore, you cannot use NordLocker Services to violate applicable law, including infringing copyright or other rights of third parties. This means that you shall not upload, store, share, access, and/or otherwise exploit on or through NordLocker Services content that is either itself illegal or is deemed to be illegal by virtue of its relation to illegal activities (“Illegal Content”). Examples of Illegal Content include terrorism, child sexual exploitation and abuse, high-impact violence, sexual exploitation of adults, encouraging suicide, threats to kill, non-consensual sharing of intimate images, and others.
+As a reminder, your use of and access to NordLocker Services is also subject to the General Terms, including its provisions on Prohibited and Restricted Use.
+9. NOTICE AND ACTION MECHANISM FOR ALLEGED ILLEGAL CONTENT
+We respect the law and require the same from all our users. Therefore, you cannot use NordLocker Services to violate applicable law, including infringe copyright or other rights of third parties. This means that you shall not upload, store, share, access, and/or otherwise exploit on or through NordLocker Services content that is either itself illegal or is rendered to be illegal in a view that it relates to illegal activities (“Illegal Content”).
+Notices
+In case any individual or entity (“Notifier”) considers that you are exploiting Illegal Content on or through NordLocker Services (e.g., allegedly infringing the Notifier's copyright or other rights), the Notifier may reach out to you directly, if possible.
+Alternatively, the Notifier may submit a notice (“Notice”) to us via dsa@nordlocker.com (for EU related notices) or to a designated agent (for all other notices) via email address abuse@nordsec.com or registered mail via address below:
+“Nord Security Abuse Team”
+nordvpn S.A.
+PH F&F TOWER, 50th Street & 56th Street
+Suite #32-D, Floor 32
+Panama City, Republic of Panama
+Encrypted nature of NordLocker Services
+The Notifier shall bear in mind the encrypted nature of NordLocker Services. Only encrypted content is stored on or through our Services meaning that we cannot access, review and/or evaluate the allegedly Illegal Content unless we are provided with a valid Link and a corresponding Security Code.
+In other words, due to end-to-end (E2E) encryption of our Services, we may be unable to access, review and/or evaluate the allegedly Illegal Content even upon receipt of the Notice. Therefore, the Notifier shall provide us with sufficient evidence pertaining to the allegedly Illegal Content, including a valid Link and a Security Code, for us to be able to access, review and evaluate the allegedly Illegal Content concerned.
+NordLocker will only process the Notice if it meets the requirements set herein below.
+Requirements for the Notice
+To be valid the Notice shall contain the following information:
+a sufficiently substantiated explanation of the reasons why the Notifier alleges the Illegal Content to be violating applicable law;
+identification of the copyright-protected work allegedly infringed (or, for multiple works, a representative list), if the Illegal Content allegedly infringes copyright of the Notifier;
+a clear indication of the exact electronic location of the allegedly Illegal Content (e.g., such as the exact valid Link or Links), the Security Code, and, where necessary, additional information;
+contact information (at least, full name, physical address, and email address) of the Notifier and its authorized representative, if applicable;
+a statement by the Notifier (or its authorized representative) that the Notifier has a good-faith belief that the use of the allegedly Illegal Content in the manner complained of is not authorized by the Notifier, its authorized representative, or the law;
+a statement by the Notifier that the information and allegations contained in the Notice are accurate and, under penalty of perjury, that the Notifier (or its authorized representative) is authorized to act;
+the physical or electronic signature of the Notifier (or its authorized representative).
+The Notifier's personal data and other information will be processed in accordance with our Privacy Policy.
+Procedure for handling the Notice
+Upon receipt of the Notice, we will review it to make sure that it meets the above mentioned requirements and includes all the necessary information to comply with the applicable laws. In case some information and/or details were missing, we may require the Notifier to provide them prior to processing the Notice.
+Once we verify that the Notice is valid, we will process it and expeditiously take whatever action we deem appropriate, necessary and feasible. Thereafter, we will inform the Notifier and the affected user.
+We reserve the right, at any time and in our sole discretion, with or without notice, without liability towards the Notifier, you and/or any third party, to impose any restrictions with respect to Your Content should it violate applicable law and/or our Terms, whether repeatedly or on a single instance. It means that, among other things, we may:
+(i) suspend or terminate the provision of NordLocker Service to you in whole or in part;
+(ii) suspend or terminate the Account regardless of whether you are a repeat infringer or not in appropriate circumstances.
+The foregoing does not limit other rights or remedies available to us hereunder, at law or in equity.
+10. DATA PORTABILITY AND SWITCHING
+In accordance with the EU Data Act (Regulation (EU) 2023/2854), if you are located in the European Union, you have the right to switch to a different provider of data processing services or to port your exportable data to an on-premises ICT infrastructure. The following terms apply to such requests:
+Notice Period. You may initiate the switching process by contacting us at support@nordlocker.com with a written request. The switching process will commence after a maximum notice period of two (2) calendar months from the date we receive your request.
+Transitional Period. Following the notice period, a transitional period of up to thirty (30) calendar days will apply to facilitate the switching process. During this period we will continue to provide the NordLocker Services and we will provide reasonable assistance to you or any third party authorised by you to complete the switching process. This period may be extended where technically necessary, in which case we will notify you within 14 working days of your request and provide a justified alternative period not exceeding seven (7) months. You may also extend the transitional period once, for a period you consider appropriate for your own purposes.
+Portable data. Your exportable data consists of all files, folders, and file structure metadata stored in your NordLocker cloud storage account that were generated directly by you (“Exportable Data”). Due to the end-to-end encrypted nature of NordLocker Services, Exportable Data will be provided in encrypted form in a structured, machine-readable format. Decryption of the exported data requires your Cloud Password or Cloud Recovery Key, which only you hold. Nord does not hold decryption keys and is therefore unable to provide or restore access to decrypted content. Internal service configuration data and operational metadata specific to the functioning of Nord's infrastructure are not included in Exportable Data.
+Data Retrieval. For a period of thirty (30) calendar days following the end of the transitional period, you will have the ability to retrieve your Exportable Data from NordLocker cloud storage.
+Erasure of Data. Following the expiry of the retrieval period, we will ensure the full erasure of your Exportable Data remaining on our infrastructure, unless EU or national law requires otherwise.
+Termination upon Switching. This agreement will be considered terminated upon the successful completion of the switching process or, if you choose not to switch but to erase your data, at the end of the maximum notice period. If you are using paid NordLocker Services, this will result in the cancellation of your Subscription. You will not be refunded for the unused part of the ongoing Service period. Please review the Subscription Terms for more information.
+11. SUSPENSION AND TERMINATION
+Suspension and Termination by Nord. We may suspend or terminate your NordLocker Account and/or NordLocker Services in accordance with the General Terms. Upon suspension or termination of your NordLocker Account and/or NordLocker Services, you will no longer have access to Your Content, unless you export it in advance.
+Termination by You. If you decide to delete your NordLocker Account, you will lose all of Your Content, unless you export it in advance.
+In order to delete your NordLocker Account, please contact our customer support team.
+12. CONTACTS REGARDING NORDLOCKER SERVICES
+For users
+Nord has designated a single point of contact (please direct requests to dsa@nordlocker.com) for NordLocker users for the purposes of the Digital Services Act (“DSA”).
+For notices of alleged illegal content, please see Section 9 “Notice and Action Mechanism for Alleged Illegal Content” above.
+For authorities
+Nord has designated a single point of contact (please direct requests to dsa@nordlocker.com) for EU Member States' authorities to contact us for the purposes of the DSA.
+Please ensure that all requests meet the requirements of the DSA and are made in English (or, at a minimum, an English translation is provided).
+If you have other questions or concerns regarding these NordLocker Additional Terms and/or NordLocker Services, please contact us at support@nordlocker.com.
+English
+Support center
+Terms of service
+(opens in a new tab)
+Privacy policy
+(opens in a new tab)
+© 2026 Nord Security. All rights reserved.

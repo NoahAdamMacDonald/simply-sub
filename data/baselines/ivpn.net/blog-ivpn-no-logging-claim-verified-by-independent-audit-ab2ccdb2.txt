@@ -1,0 +1,113 @@
+url: https://www.ivpn.net/blog/ivpn-no-logging-claim-verified-by-independent-audit/
+method: fetch
+saved: 2026-11-19
+
+IVPN no-logging claim verified by independent audit
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+IVPN Blog>IVPN News>IVPN no-logging claim verified by independent audit
+IVPN no-logging claim verified by independent audit
+IVPN News
+By Nick Pestell |
+Posted on March 21, 2019
+From the start of IVPN, almost 10 years ago, we engineered our systems to not log any data that could be tied to an individual user account. Until now our customers had no way to verify this but today we’re proud to announce the results of an independent audit conducted by Cure53.
+Below is an excerpt from the conclusion (Download the full unredacted report from Cure53’s website)
+“To conclude this Cure53 audit and verification of the IVPN privacy-related claims yielded very positive results. The outcomes of this March 2019 audit, paired with fluent communications as well as the general handling of every aspect discussed during the assessment, attest to the considerable dedication to privacy matters at the IVPN project. Based on the findings, it is safe to say that all of the IVPN’s privacy statements could be verified as truthful within the defined scope. The requirements for both general security claims to be considered appropriate were successfully well met for all VPN gateways.”
+The scope of the audit was to verify the no-logging claims made in our privacy policy and included all IVPN systems that are involved in serving a customers VPN connection, including the VPN gateway servers and authentication servers. A total of 3 auditors spent 7 days performing the audit during March 2019.
+When we setup IVPN and configured the our systems not to log, it required a lot more than directing logs to the null device. We have a complex configuration of scripts that set up and tear down dynamic configurations for port forwarding, multi-hop etc. These scripts communicate and store state information without persisting any data to disk, one of many design decisions we’ve made as a security-focused company.
+Cure53 was able to identify only one issue which they classified as ’low’ impact and which they said “does not negatively impact this conclusion”. The issue was that our DNS servers temporarily cache their responses to improve performance however none of this data is related to a customer IP address or user account in any way and is only stored temporarily until the cache timeout. This means that if an adversary had access to a DNS server they could see what domains had been recently resolved but not which customer IP had sent the request. Regardless we decided to disable the caching so this issue has been fully mitigated.
+We expect this report to provide another strong signal that we take our customers privacy and security very seriously and are dedicated to being as transparent as possible. If you have any questions relating to this audit please do not hesitate to contact us.
+Audit
+Security
+We invite you to discuss this post in our Reddit community or on Twitter. You can also send your feedback to blog@ivpn.net.
+5 Comments
+Liz_siz
+03.08.2019
+Bravo, excellent idea
+Adilalhawa
+09.08.2019
+Hello world
+yizakqsdux
+09.12.2019
+I diverse these this prepackaged (fit the most part)
+Anonymous
+10.12.2019
+Well done on passing the audit! Although it should be noted that this audit did not investigate all of your systems. Basically, this audit only covers yours servers. It doesn’t cover your client software (ie apps) nor your other systems, such as customer support and billing. Do you have any plans to have those audited?
+Viktor Vecsei
+10.12.2019
+Thanks for your comment! A comprehensive audit is under way right now. Please see more here: https://www.ivpn.net/blog/ivpn-to-undergo-extensive-security-audit/
+Featured posts
+IVPN News
+Unlinked Access security audit concluded
+By Viktor Vecsei
+By Juraj Hilje
+IVPN News
+A security incident on our Bitcoin payment server
+By IVPN Staff
+IVPN News
+Annual security audit scheduled for 2026
+By Nick Pestell
+Related posts
+IVPN News
+Unlinked Access security audit concluded
+Posted on November 9, 2026 by
+Viktor Vecsei
+Juraj Hilje
+We’re pleased to announce that our eighth annual independent security audit has concluded. The assessment focused on Unlinked Access, the system that lets IVPN Plus and Pro Suite accounts access Mailx, modDNS and Portmaster without passing IVPN account identifiers to those services.
+IVPN News
+A security incident on our Bitcoin payment server
+Posted on August 11, 2026 by
+IVPN Staff
+Summary: on 7 August a critical vulnerability was disclosed in BTCPay Server, the open-source software we self-host to accept Bitcoin payments. It was being exploited before disclosure, and we were among the merchants hit: an attacker extracted our Lightning node credentials and transferred out our operating funds.
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

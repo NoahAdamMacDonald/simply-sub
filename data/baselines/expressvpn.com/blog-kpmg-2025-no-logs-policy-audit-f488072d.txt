@@ -1,0 +1,342 @@
+url: https://www.expressvpn.com/blog/kpmg-2025-no-logs-policy-audit/
+method: fetch
+saved: 2026-11-19
+
+ExpressVPN’s 3rd KPMG Security Audit of No-Logs Policy
+Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started
+menu opener
+Blog
+ExpressVPN news
+ExpressVPN’s 3rd KPMG Security Audit of No-Logs Policy
+3rd KPMG audit supports ExpressVPN's privacy commitments
+ExpressVPN news
+25.06.2025
+2 mins
+Written by
+ExpressVPN
+In the world of digital privacy, trust is greatly strengthened with third-party assurance. At ExpressVPN, we've long been committed to rigorous independent audits to test that our services operate as we claim. Today, we're excited to announce the completion of our second assessment by KPMG LLP, which examined ExpressVPN’s TrustedServer system and privacy policy claims as of 28 February 2025.
+To provide the highest level of privacy to users, our VPN service is built in accordance with our strict no-logs policy, which ensures users that our technology is engineered so that activity logs and connection logs are never retained. KPMG's latest report examined our TrustedServer technology to assess our claim that its design effectively prevents the collection of such logs.
+The engagement was conducted under the globally recognized International Standard on Assurance Engagements (ISAE) (UK) 3000 Type 1.
+Following testing of ExpressVPN's TrustedServer architecture and privacy controls, KPMG provided reasonable assurance that our systems functioned as designed, with no identified issues regarding our technical safeguards against activity logging.
+The full assessment report is available for all; you simply need to first acknowledge KPMG's terms and conditions to access it.
+"Independent assurance isn't just a checkbox for us—it's fundamental in our efforts towards trust and transparency," said Aaron Engel, Chief Information Security Officer at ExpressVPN. "Having KPMG evaluate our technologies and assess our privacy protections again demonstrates our unwavering commitment to maintaining the highest standards of user privacy protection."
+This latest assessment represents another milestone in our continuous efforts to validate our privacy promises. We believe that regular independent audits are essential for maintaining user trust in an increasingly complex digital landscape.
+"By subjecting our systems to rigorous third-party scrutiny, we're not just verifying our current protections—we're establishing a standard for accountability that we hope will raise the bar across the entire VPN industry," adds Engel.
+With 23 third-party audits published to date, ExpressVPN continues to lead the industry with one of the most comprehensive independent verification initiatives. Our commitment to transparency follows increasingly rigorous standards, exemplified by the recent commissioning of not one but two security assessments of our Lightway protocol following its complete rewrite in the modern coding language Rust.
+In addition to audits, we've also published detailed white papers documenting the engineering design behind products including our Keys password manager and dedicated IP service. You can find the latest update to our biannual transparency report here, which displays the number of requests for user data our legal department receives, for which we have no records to provide.
+These audits represent just one facet of our multidimensional approach to earning and maintaining user trust. At ExpressVPN, we are constantly researching, developing, and implementing advanced technological solutions that push the boundaries of privacy protection and security. As threats to online privacy continue to evolve, so too will our commitment to serving our customers with transparency and industry-leading protection.
+Explore the web with greater privacy
+Get ExpressVPN
+Sign up today to enjoy our latest offers
+ExpressVPN
+ExpressVPN is dedicated to your online security and privacy. Posts from this account will focus on company news or significant privacy and security stories.
+0
+Explore the web with greater privacy
+Get ExpressVPN
+Sign up today to enjoy our latest offers
+RELATED POST
+FEATURED POST
+ExpressVPN is now available on Fire TV devices running Vega OS
+Sonja Raath
+26.08.2026
+1 mins
+ExpressVPN Transparency Report: January–June 2026
+Sonja Raath
+06.08.2026
+5 mins
+ExpressVPN+ makes managing your privacy and security simpler—now with passkey sign-in
+Sonja Raath
+21.07.2026
+3 mins
+Child online safety shouldn’t come at the cost of privacy
+Sonja Raath
+13.07.2026
+5 mins
+ExpressVPN expands to 214 VPN server locations
+Sonja Raath
+07.07.2026
+4 mins
+ExpressVPN’s Apple TV app just got easier to use
+Sonja Raath
+03.06.2026
+2 mins
+Why scams can be harder to spot when you’re new at work
+Sonja Raath
+04.09.2026
+6 mins
+Access that keeps up as your team grows: SCIM and Dedicated IP for Teams
+ExpressVPN
+04.09.2026
+4 mins
+How to create a family privacy policy for sharenting and online life
+Sonja Raath
+18.08.2026
+10 mins
+ExpressVPN and Currensea launch travel partnership as research reveals a public Wi-Fi trust gap
+Sonja Raath
+05.08.2026
+8 mins
+Cybersecurity guide for expats: Everything you need to know before settling abroad
+ExpressVPN
+03.08.2026
+10 mins
+ExpressVPN enters the arena with LEC, VCT EMEA and Americas, G2 Esports, and Method—and we're bringing drops and discounts
+Marnie Spicer
+12.03.2026
+3 mins
+RELATED POST
+MORE FROM THE AUTHOR
+ExpressVPN is now available on Fire TV devices running Vega OS
+Sonja Raath
+26.08.2026
+1 mins
+ExpressVPN Transparency Report: January–June 2026
+Sonja Raath
+06.08.2026
+5 mins
+ExpressVPN+ makes managing your privacy and security simpler—now with passkey sign-in
+Sonja Raath
+21.07.2026
+3 mins
+Child online safety shouldn’t come at the cost of privacy
+Sonja Raath
+13.07.2026
+5 mins
+ExpressVPN expands to 214 VPN server locations
+Sonja Raath
+07.07.2026
+4 mins
+ExpressVPN’s Apple TV app just got easier to use
+Sonja Raath
+03.06.2026
+2 mins
+Access that keeps up as your team grows: SCIM and Dedicated IP for Teams
+ExpressVPN
+04.09.2026
+4 mins
+Cybersecurity guide for expats: Everything you need to know before settling abroad
+ExpressVPN
+03.08.2026
+10 mins
+Survey: 65% of UK parents worry about online strangers. Just 10% worry about VPN misuse.
+ExpressVPN
+16.07.2026
+10 mins
+A 22-year-old AI creator made an ExpressVPN ad. Now it’s going to Times Square
+ExpressVPN
+13.07.2026
+5 mins
+ExpressVPN brings passkeys and secure sharing to ExpressKeys, as new audit clears the app
+ExpressVPN
+02.07.2026
+5 mins
+Survey: 1 in 5 football fans admit to sharing passwords - putting their accounts at risk
+ExpressVPN
+23.06.2026
+15 mins
+ExpressVPN Named Official Supporter of the FIFA World Cup 2026™, Helping Fans Stay Safe Online Wherever They Watch
+ExpressVPN
+10.06.2026
+3 mins
+Survey: The 2026 World Cup Wi-Fi trap—how a familiar venue name fools 7 in 10 football fans
+ExpressVPN
+09.06.2026
+12 mins
+ExpressVPN is proudly supporting
+Subscribe to the blog newsletter
+Get the latest in privacy news, tips, tricks, and security guides to level-up your digital security.
+Submit
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More
+Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+PROUD TO HAVE PARTNERED WITH THE BIGGEST NAMES IN SPORTS
+Official Digital Privacy Partner
+Official Digital Privacy Partner
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Need help? Chat with us!
+Live Chat
+Online
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+This content is not available in your region
+To continue, please visit our dedicated website for the United Arab Emirates.
+ExpressVPN for UAE

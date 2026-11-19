@@ -1,0 +1,86 @@
+url: https://obscura.com/knowledge/debug-bundles/
+method: fetch
+saved: 2026-11-19
+
+What is a Debug Bundle | Obscura
+Skip to content Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Search CtrlK Cancel
+How To Bypass Reddit "Network Security" Block
+How to Delete an Obscura Account
+DNS Options in Obscura
+Downloading Obscura
+Obscura's VPN Kill Switch
+Managing Devices
+Managing Payments
+Referring a Friend to Obscura
+Set Network Priority in macOS
+Using Obscura via WireGuard
+Troubleshooting Strict Leak Protection Bugs
+Troubleshooting Connection Issues
+Troubleshooting DNS Issues
+Our Architecture What is a Debug Bundle
+Relay Nodes & Exit Nodes
+Mitigating Attacks Protecting Against TunnelVision
+On this page Overview
+What Is a Debug Bundle?
+Generate a Debug Bundle
+What’s Included
+What’s Not Included
+How To Inspect Debug Bundles
+On this page
+Overview
+What Is a Debug Bundle?
+Generate a Debug Bundle
+What’s Included
+What’s Not Included
+How To Inspect Debug Bundles
+What is a Debug Bundle
+Last updated: Sep 16, 2026
+What Is a Debug Bundle?
+Section titled “What Is a Debug Bundle?”
+A debug bundle is a ZIP file you can generate from the Obscura app to help us diagnose connection issues, bugs, or other problems.
+It collects diagnostic information about your device, network environment, and the Obscura app’s state into a single file you can share with our support team. It does not contain your internet traffic or browsing history.
+Debug bundles are never created or sent automatically. You choose when to generate one and who sees it. Since bundles contain information about your device and networking environment, we recommend not sharing them with third parties.
+Generate a Debug Bundle
+Section titled “Generate a Debug Bundle”
+Open the Obscura App
+Select the About tab on mobile or the Help tab on Desktop
+Click the Orange Create Debug Bundle button
+The file is saved locally and you choose how to share it
+Note
+If you’re reporting an issue with Obscura, describe the error you saw in the feedback box when prompted and you can send the debug bundle to support@obscura.net
+What’s Included
+Section titled “What’s Included”
+App configuration (e.g. DNS settings, tunnel state, enabled features)
+Network connectivity test results (DNS lookups, pings, HTTP checks)
+System information (OS version, device model, hardware details)
+Relevant logs
+Your description of the issue (if you entered one)
+What’s Not Included
+Section titled “What’s Not Included”
+Debug bundles are designed to only include data for debugging issues with Obscura. The following are never included:
+Your internet traffic
+Your browsing history
+Your personal files
+How To Inspect Debug Bundles
+Section titled “How To Inspect Debug Bundles”
+Debug bundles are zip files containing plain text files and compressed logs that are designed to be easy to inspect. If you want to take a look for yourself, you can open a bundle and remove anything you’d rather not send. When you unzip the bundle, you’ll find files like:
+info.json - app version, OS version, device model, processor, RAM, thermal state, and uptime
+ne-debug-info.json - app configuration snapshot (cached exits/relays, DNS settings, tunnel state, enabled features)
+system-log.json - filtered system logs (kernel messages, network extension subsystem)
+dig-*.txt, ping-*.txt, http-*.txt - DNS lookups, ping results, and HTTP connectivity tests to public servers and the Obscura API
+ifconfig-*.txt, netstat-*.txt - network interface and routing information
+ne-tunnel-provider-manager.json - VPN connection status, routing method, and on-demand rules
+Note
+This list is non-exhaustive and the exact contents vary per platform. Our code
+for generating debug bundles is publicly available.
+If you have any questions, reach out to
+support@obscura.net.

@@ -1,0 +1,312 @@
+url: https://windscribe.com/upgrade
+method: fetch
+saved: 2026-11-19
+
+Buy VPN with Crypto, PayPal, or Credit Card - Windscribe
+Features
+Pricing
+Support
+Download
+Log In
+Sign Up
+Sign Up
+Language
+عرب
+中文
+Nederlands
+English
+Français
+Deutsche
+हिंदी
+Italiano
+Português
+Русский
+Svenska
+Español
+Türk
+日本語
+Indonesia
+한국어
+Tiếng Việt
+ไทย
+Unlimited Privacy is just a few clicks away with Windscribe Pro
+Unlimited Data
+Infinite Protection
+Unlock All Locations
+Over 69 Countries and 112 Cities
+Config Generator
+OpenVPN, IKEv2, WireGuard
+R.O.B.E.R.T
+Blocks Ads, Trackers and Malware
+Monthly Plan
+Billed $9.00 USD every month
+$9.00
+per month
+Buy Now
+Select Payment Method
+Credit Card
+PayPal
+Cryptocurrency
+Local Payments
+Renews automatically. Cancel anytime.
+Continue
+Back
+COOL BADGE
+Yearly Plan
+Billed $69 USD every 12 months
+$5.75
+per month
+Buy Now
+Most Popular
+Select Payment Method
+Credit Card
+PayPal
+Cryptocurrency
+Local Payments
+Renews automatically. Cancel anytime.
+Continue
+Back
+Best Price
+Build A Plan
+Billed $1.00 per location, per month
+$0.00
+per month
+800){
+new SimpleBar(document.getElementById('bap-locs'));
+sb_init = true;
+}
+return false;
+}
+$('#credit-gift').click();
+$('.renew_no.gift').removeClass('selected');
+$('.renew_yes.gift').addClass('selected');
+subscription = true;
+selected_plan = 'bap';
+$('.flip-container.monthly').removeClass('hover');
+$('.flip-container.yearly').removeClass('hover');
+$('.flip-container.giftly').addClass('hover');
+return false;
+">Build
+Edit
+Select Payment Method
+Credit Card
+PayPal
+Cryptocurrency
+Local Payments
+Renews automatically. Cancel anytime.
+Continue
+Back
+*Account sharing is prohibited
+Have a promo code?
+Submit
+Buy as a Gift
+Learn More
+Managed DNS
+Get Control D
+Need a Static IP?
+Learn More
+Need Team Accounts?
+Learn More
+Buy with Cash
+Learn More
+How We're Different
+Learn More
+Accepted Payment Options
+Available for all your devices, Desktop to Smartphones
+Our Server Locations
+Location
+Free
+Pro
+United States
+Canada
+United Kingdom
+Hong Kong
+France
+Germany
+Netherlands
+Switzerland
+Norway
+Romania
+Turkey
+Italy
+Spain
+Sweden
+Ireland
+Denmark
+Poland
+Austria
+Czech Republic
+Hungary
+Finland
+Bulgaria
+Belgium
+Latvia
+Lithuania
+Portugal
+Slovakia
+Moldova
+Croatia
+Greece
+Estonia
+Albania
+Serbia
+Bosnia and Herz.
+Cyprus
+North Macedonia
+Iceland
+Ukraine
+India
+Russia
+Israel
+South Africa
+Argentina
+Brazil
+Colombia
+Mexico
+Panama
+Peru
+Chile
+Australia
+New Zealand
+Japan
+Singapore
+South Korea
+Taiwan
+Malaysia
+Vietnam
+Thailand
+Indonesia
+Philippines
+Cambodia
+Ecuador
+Kenya
+Ghana
+Fake Antarctica
+To receive your free gift, you must have an email address on your account.
+Add Email
+No Thanks
+Close
+Close
+Pay $25
+Payment successful
+Thanks for trying Stripe Elements. No money was charged, but we generated a token: tok_189gMN2eZvKYlo2CwTBv9KKh
+Close
+Choose Pro Location(s)
+Each one is $1 per month and adds 10GB on top of your allowed monthly bandwidth. $3 minimum.
+You can select a maximum of 7 locations. If you want more, its cheaper to get our monthly Pro plan.
+United States52 Pro Data Centers
+Canada10 Pro Data Centers
+Austria2 Pro Data Centers
+Belgium2 Pro Data Centers
+Bulgaria2 Pro Data Centers
+Croatia1 Pro Data Centers
+Cyprus2 Pro Data Centers
+Czech Republic2 Pro Data Centers
+Denmark2 Pro Data Centers
+Estonia1 Pro Data Centers
+Finland2 Pro Data Centers
+France4 Pro Data Centers
+Germany3 Pro Data Centers
+Greece1 Pro Data Centers
+Hungary2 Pro Data Centers
+Iceland2 Pro Data Centers
+Ireland2 Pro Data Centers
+Israel2 Pro Data Centers
+Italy3 Pro Data Centers
+Latvia2 Pro Data Centers
+Lithuania1 Pro Data Centers
+Luxembourg1 Pro Data Centers
+Moldova1 Pro Data Centers
+Netherlands3 Pro Data Centers
+North Macedonia2 Pro Data Centers
+Norway2 Pro Data Centers
+Poland3 Pro Data Centers
+Portugal1 Pro Data Centers
+Romania2 Pro Data Centers
+Slovakia1 Pro Data Centers
+Spain3 Pro Data Centers
+Sweden4 Pro Data Centers
+Switzerland3 Pro Data Centers
+United Kingdom6 Pro Data Centers
+Albania2 Pro Data Centers
+Bosnia2 Pro Data Centers
+Georgia1 Pro Data Centers
+India3 Pro Data Centers
+Kenya1 Pro Data Centers
+Nigeria1 Pro Data Centers
+Russia1 Pro Data Centers
+Serbia1 Pro Data Centers
+Slovenia1 Pro Data Centers
+South Africa3 Pro Data Centers
+Turkey1 Pro Data Centers
+Ukraine1 Pro Data Centers
+Australia10 Pro Data Centers
+New Zealand2 Pro Data Centers
+Hong Kong2 Pro Data Centers
+Indonesia5 Pro Data Centers
+Japan2 Pro Data Centers
+Malaysia1 Pro Data Centers
+Philippines1 Pro Data Centers
+Singapore3 Pro Data Centers
+South Korea2 Pro Data Centers
+Taiwan1 Pro Data Centers
+Thailand3 Pro Data Centers
+United Arab Emirates1 Pro Data Centers
+Vietnam3 Pro Data Centers
+Argentina2 Pro Data Centers
+Brazil2 Pro Data Centers
+Chile1 Pro Data Centers
+Colombia1 Pro Data Centers
+Ecuador1 Pro Data Centers
+El Salvador1 Pro Data Centers
+Guatemala1 Pro Data Centers
+Mexico1 Pro Data Centers
+Panama1 Pro Data Centers
+Paraguay1 Pro Data Centers
+Peru1 Pro Data Centers
+Uruguay1 Pro Data Centers
+Fake Antarctica1 Pro Data Centers
+0 GB/Month
+0 Location(s)
+?
+Unlimited Data + R.O.B.E.R.T
+Your old subscription will be cancelled and a partial refund will be applied for the unused days. You may only make changes twice in a 30 day period.
+Close
+Finishing payment
+Windscribe
+Download
+Pricing
+Get Support
+Features
+Refer a Friend
+Ethics & Philosophy
+Changelog
+Buy Merch
+Status
+Open Source
+Free DNS
+Apps
+VPN for Windows
+VPN for Mac
+VPN for Linux
+VPN for iPhone
+VPN for Android
+VPN for Chrome
+VPN for Firefox
+VPN for MS Edge
+VPN for FireTV
+VPN for Huawei
+Windscribe F-Droid
+Company
+About Us
+Privacy
+Terms
+VDP
+Jobs
+Blog
+Youtube
+Reddit
+Twitter
+Discord
+Telegram
+© 2069 Windscribe Limited

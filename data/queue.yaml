@@ -489,6 +489,55 @@
   source: own
   status: done
   date: 2026-11-19
+- id: obscura
+  name: Obscura
+  website: https://obscura.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: tailscale
+  name: Tailscale
+  website: https://tailscale.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: expressvpn
+  name: ExpressVPN
+  website: https://www.expressvpn.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: windscribe
+  name: Windscribe
+  website: https://windscribe.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: ivpn
+  name: IVPN
+  website: https://www.ivpn.net
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: airvpn
+  name: AirVPN
+  website: https://airvpn.org
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: surfshark
+  name: Surfshark
+  website: https://surfshark.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -856,7 +905,8 @@
   source: wikidata
   wikidata: Q48816099
   sitelinks: 32
-  status: queued
+  status: done
+  date: 2026-11-19
 - id: tidal
   name: Tidal
   website: https://www.tidal.com

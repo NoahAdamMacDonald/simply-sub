@@ -1,0 +1,238 @@
+url: https://support.nordvpn.com/hc/en-us/articles/19685782821265-What-payment-methods-does-NordVPN-accept
+method: fetch
+saved: 2026-11-19
+
+What payment methods does NordVPN accept – Live Chat, VPN Setup, Troubleshooting | NordVPN Customer Support
+Skip to main content
+Support center
+Categories
+Explore topics
+Explore topics
+Log in
+Toggle sidebar
+Close
+Categories
+Categories Close
+Explore topics
+Log in
+Table of Contents
+Close
+Home
+Billing and subscriptions
+How to purchase a NordVPN subscription
+What payment methods does NordVPN accept
+You can pay with a credit card, cryptocurrency, PayPal, Sofort (Klarna), bank or local bank transfers, prepaid (debit) card, and many other payment methods. You can also make a payment through the Amazon App Store, Apple Pay, Google Pay, the Apple App Store, or Google Play.
+NOTE: Some payment methods are not available in certain regions.
+If you want to pay in cash, you can purchase a NordVPN subscription in a retail store.
+Once you’ve checked out NordVPN’s plans and prices, you can find out which payment methods are available to you at the checkout page.
+Also available in:
+Still having issues?
+Live chat
+Contact our support to solve an issue live.
+Chat with support
+Email form
+Fill out an email form so we can help you with an issue.
+Email us
+Email us
+Our Support team will get back to you within 24 hours. We’ll reply to the email address you provide.
+Attach a file (Optional)
+Supported formats: JPEG, PNG.
+We couldn’t process your form. Please try again or come back later.
+By clicking “Submit”, you agree to our Terms of Service and acknowledge our Privacy Policy.
+Submit
+Thank you! We've got your message and will get back to you within 24 hours.
+By clicking “Chat with support”, you agree to our Terms of Service and acknowledge our Privacy Policy.
+Chat functionality relies on cookies. By starting the chat, you agree to their use. Learn more in our
+Cookie Policy.
+Related articles
+Does NordVPN accept prepaid cards
+How to cancel auto-renewal for your NordVPN subscription
+I can't make a payment
+How much will I need to pay upon renewal?
+Does NordVPN charge all at once?
+Thank you for your feedback!
+Yes
+No
+Table of Contents
+Show all
+Close
+Was this article helpful?
+Thank you for your feedback!
+Yes
+No
+{
+"chatTitle": "NordVPN Support",
+"chatCustomText": {
+"actionPaymentCompleted": "Payment Completed",
+"actionPaymentError": "An error occurred while processing the card. Please try again or use a different card.",
+"actionPostbackError": "An error occurred while processing your action. Please try again.",
+"clickToRetry": "Message not delivered. Click to retry.",
+"clickToRetryForm": "Form not submitted. Click anywhere on the form to retry.",
+"connectNotificationText": "Sync your conversation and continue messaging us through your favorite app.",
+"connectNotificationSingleText": "Be notified when you get a reply.",
+"conversationListHeaderText": "My conversations",
+"conversationListRelativeTimeJustNow": "Just now",
+"conversationListRelativeTimeMinute": "1 minute ago",
+"conversationListRelativeTimeMinutes": "{value} minutes ago",
+"conversationListRelativeTimeHour": "1 hour ago",
+"conversationListRelativeTimeHours": "{value} hours ago",
+"conversationListRelativeTimeYesterday": "Yesterday",
+"conversationListTimestampFormat": "MM/DD/YY",
+"conversationListPreviewAnonymousText": "Someone",
+"conversationListPreviewCarouselText": "{user} sent a message",
+"conversationListPreviewFileText": "{user} sent a file",
+"conversationListPreviewFormText": "{user} sent a form",
+"conversationListPreviewFormResponseText": "{user} filled a form",
+"conversationListPreviewImageText": "{user} sent an image",
+"conversationListPreviewLocationRequestText": "{user} sent a location request",
+"conversationListPreviewUserText": "You",
+"conversationTimestampHeaderFormat": "MMMM D, h:mm A",
+"couldNotConnect": "Offline. You will not receive messages.",
+"couldNotConnectRetry": "Reconnecting...",
+"couldNotConnectRetrySuccess": "You're back online!",
+"couldNotLoadConversations": "Couldn't load conversations.",
+"emailChangeAddress": "Change my email",
+"emailDescription": "To be notified by email when you get a reply, enter your email address.",
+"emailFieldLabel": "Email",
+"emailFieldPlaceholder": "Your email address",
+"emailFormButton": "Submit",
+"emailLinkingErrorMessage": "Please submit a valid email address.",
+"errorPrefix": "Error:",
+"fetchHistory": "Load more",
+"fetchingHistory": "Retrieving history...",
+"fileTooLargeError": "Max file size limit exceeded ({size})",
+"fileTypeError": "Unsupported file type.",
+"formErrorEntryRequired": "This entry is required",
+"formErrorInvalidEmail": "Email is invalid",
+"formErrorNoLongerThan": "Must contain no more than ({characters}) characters",
+"formErrorNoShorterThan": "Must contain at least ({characters}) characters",
+"formErrorUnknown": "This doesn't look quite right",
+"formFieldSelectPlaceholderFallback": "Choose one...",
+"frontendEmailChannelDescription": "To talk to us using email just send a message to our email address and we'll reply shortly:",
+"headerText": "How can we help?",
+"imageClickToReload": "Click to reload image.",
+"imageClickToView": "Click to view {size} image.",
+"imagePreviewNotAvailable": "Preview not available.",
+"inputPlaceholder": "Type a message...",
+"inputPlaceholderBlocked": "Complete the form above...",
+"introAppText": "Message us below or from your favorite app.",
+"lineChannelDescription": "To talk to us using LINE, scan this QR code using the LINE app and send us a message.",
+"linkError": "An error occurred when attempting to generate a link for this channel. Please try again.",
+"linkChannelPageHeader": "Sync your conversation",
+"locationNotSupported": "Your browser does not support location services or it's been disabled. Please type your location instead.",
+"locationSecurityRestriction": "This website cannot access your location. Please type your location instead.",
+"locationSendingFailed": "Could not send location",
+"locationServicesDenied": "This website cannot access your location. Allow access in your settings or type your location instead.",
+"messageError": "An error occured while sending your message. Please try again.",
+"messageIndicatorTitlePlural": "({count}) New messages",
+"messageIndicatorTitleSingular": "({count}) New message",
+"messageRelativeTimeDay": "{value}d ago",
+"messageRelativeTimeHour": "{value}h ago",
+"messageRelativeTimeJustNow": "Just now",
+"messageRelativeTimeMinute": "{value}m ago",
+"messageTimestampFormat": "h:mm A",
+"messageDelivered": "Delivered",
+"messageSeen": "Seen",
+"messageSending": "Sending...",
+"messageTooLongError": "Max message size limit exceeded ({size}).",
+"messengerChannelDescription": "Connect your Facebook Messenger account to be notified when you get a reply and continue the conversation on Facebook Messenger.",
+"newConversationButtonText": "New Conversation",
+"notificationSettingsChannelsDescription": "Sync this conversation by connecting to your favorite messaging app to continue the conversation your way.",
+"notificationSettingsChannelsTitle": "Other Channels",
+"notificationSettingsConnected": "Connected",
+"notificationSettingsConnectedAs": "Connected as {username}",
+"prechatCaptureGreetingText": "Hi there 👋\nTo start off, we'd like to know a little bit more about you:",
+"prechatCaptureNameLabel": "Your name",
+"prechatCaptureNamePlaceholder": "Type your name...",
+"prechatCaptureEmailLabel": "Email",
+"prechatCaptureEmailPlaceholder": "name@company.com",
+"prechatCaptureConfirmationText": "Hi there! I’m NordVPN's AI assistant. How can I help you today?",
+"prechatCaptureMailgunLinkingConfirmation": "You'll be notified here and by email at {email} once we reply.",
+"sendButtonText": "Send",
+"settingsHeaderText": "Settings",
+"shareLocation": "Location",
+"smsBadRequestError": "We were unable to communicate with this number. Try again or use a different one.",
+"smsCancel": "Cancel",
+"smsChangeNumber": "Change my number",
+"smsChannelDescription": "Connect your SMS number to be notified when you get a reply and continue the conversation over SMS.",
+"smsChannelPendingDescription": "Check your messages at {number} to confirm your phone number.",
+"smsContinue": "Send",
+"smsInvalidNumberError": "Please submit a valid phone number.",
+"smsLinkCancelled": "Link to {appUserNumber} was cancelled.",
+"smsLinkPending": "Pending",
+"smsPingChannelError": "There was an error sending a message to your number.",
+"smsSendText": "Send me a text",
+"smsStartTexting": "Start Texting",
+"smsTooManyRequestsError": "A connection for that number was requested recently. Please try again in {minutes} minutes.",
+"smsTooManyRequestsOneMinuteError": "A connection for that number was requested recently. Please try again in 1 minute.",
+"smsUnhandledError": "Something went wrong. Please try again.",
+"syncConversation": "Sync conversation",
+"tapToRetry": "Message not delivered. Tap to retry.",
+"tapToRetryForm": "Form not submitted. Tap anywhere on the form to retry.",
+"telegramChannelDescription": "Connect your Telegram account to be notified when you get a reply and continue the conversation on Telegram",
+"unsupportedMessageType": "Unsupported message type.",
+"unsupportedActionType": "Unsupported action type.",
+"uploadDocument": "File",
+"uploadInvalidError": "Invalid file.",
+"uploadPhoto": "Image",
+"uploadVirusError": "A virus was detected in your file and it has been rejected",
+"viberChannelDescription": "Connect your Viber account to be notified when you get a reply and continue the conversation on Viber. To get started, scan the QR code using the Viber app.",
+"viberChannelDescriptionMobile": "Connect your Viber account to be notified when you get a reply and continue the conversation on Viber. To get started, install the Viber app and tap Connect.",
+"viberQRCodeError": "An error occurred while fetching your Viber QR code. Please try again.",
+"wechatChannelDescription": "Connect your WeChat account to be notified when you get a reply and continue the conversation on WeChat. To get started, scan this QR code using the WeChat app.",
+"wechatChannelDescriptionMobile": "Connect your WeChat account to be notified when you get a reply and continue the conversation on WeChat. To get started, save this QR code image and upload it QR code scanner.",
+"wechatQRCodeError": "An error occurred while fetching your WeChat QR code. Please try again.",
+"whatsappChannelDescriptionDesktop": "Sync your account to WhatsApp by scanning the QR code or clicking the link below.\nThen",
+"whatsappChannelDescriptionMobile": "Sync your account to WhatsApp by clicking the link below.\nThen",
+"whatsappLinkingError": "An error occurred while fetching your WhatsApp linking information. Please try again."
+},
+"chatCustomScreenReaderAnnouncement": {
+"supportTyping": "{author} is typing",
+"supportSays": "{author} says:",
+"sentImage": "{author} sent an image",
+"sentFile": "{author} sent a file",
+"sentCarousel": "{author} sent a carousel",
+"sentLocation": "{author} sent a location"
+}
+}
+Follow us
+NordVPN
+About UsCareersVPN Free TrialVPN RoutersReviewsStudent & Employee DiscountWhere to buyRefer a FriendResearch Lab
+Engage
+What Is a VPN?IP LookupWhat Is My IP?Cybersecurity GlossaryCybersecurity HubSocial ResponsibilityTrust centerPress AreaBecome a Partner
+Help
+Support CenterPrivacy Policy Cookie Preferences Terms of ServiceContact Us
+Discover
+Nord SecurityNordLayerNordPassNordLockerNordStellarCoveronSaily
+NordVPN
+About UsCareersVPN Free TrialVPN RoutersReviewsStudent & Employee DiscountWhere to buyRefer a FriendResearch Lab
+Engage
+What Is a VPN?IP LookupWhat Is My IP?Cybersecurity GlossaryCybersecurity HubSocial ResponsibilityTrust centerPress AreaBecome a Partner
+Help
+Support CenterPrivacy Policy Cookie Preferences Terms of ServiceContact Us
+Discover
+Nord SecurityNordLayerNordPassNordLockerNordStellarCoveronSaily
+VPN APPS
+Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Android TV
+Apple TV
+VPN APPS
+Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Android TV
+Apple TV
+© 2026 Nord Security. All rights reserved
+Dansk Deutsch English Español Français Italiano Nederlands Norsk Polski Português Brasileiro Svenska ‪한국어‬ 日本語 繁體中文 Dansk

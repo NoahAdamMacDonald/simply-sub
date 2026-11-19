@@ -1,0 +1,111 @@
+url: https://www.ivpn.net/en/transparency-report/
+method: fetch
+saved: 2026-11-19
+
+IVPN Transparency report
+Предупреждение: подключение и стабильная работа VPN в России не гарантируется из-за действующих ограничений. Рекомендуем сначала протестировать сервис с недельным тарифом.
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Transparency Report
+The table below shows the number of valid legal requests received from government or law enforcement agencies.
+For more information about how requests are processed please see the legal process guidelines for law enforcement.
+# Requests received
+# Valid requests received
+# Valid requests received where data was provided
+2026
+9
+0
+0
+2025
+12
+0
+0
+2024
+12
+1
+0
+2023
+2
+0
+0
+2022
+0
+0
+0
+2021
+1
+1
+0
+2020
+0
+0
+0
+2019
+1
+1
+0
+2018
+1
+0
+0
+2017
+1
+0
+0
+2016
+0
+0
+0
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Versión española
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

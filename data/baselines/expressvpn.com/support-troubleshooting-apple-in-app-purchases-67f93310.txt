@@ -1,0 +1,312 @@
+url: https://www.expressvpn.com/support/troubleshooting/apple-in-app-purchases/
+method: fetch
+saved: 2026-11-19
+
+About Apple In-App Purchases | ExpressVPN Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started menu opener
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+Home Home » About Apple in-app purchases for ExpressVPN
+Troubleshooting
+About Apple in-app purchases for ExpressVPN
+Search the Support Center
+Last updated: October 21, 2026
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+This guide will explain how Apple in-app subscriptions work, list the free trial terms and conditions, and explain how to cancel your subscription and update your payment details.
+Note: The following applies to subscriptions initiated under iOS and macOS in-app purchases, including subscriptions purchased through the ExpressVPN, ExpressKeys, or Identity Defender (U.S. only) apps. If you purchased your subscription from the ExpressVPN website, you can refer to these instructions.
+If you want to use the free trial but ExpressVPN is not available in your country, you will have to change your App Store’s location and use a payment method associated with the new location.
+Jump to…
+General details about in-app subscriptions
+Free trial terms and conditions
+How to change subscription plans
+How to cancel your free trial or subscription
+How to update your billing information or payment methods
+How to resolve payment issues
+How to resubscribe to an App Store subscription after canceling it
+Refunds
+General details about in-app subscriptions
+To use the free trial or purchase a subscription within the app, you will need to have iOS 15 or macOS 14 or above and an active payment method. Learn how to update iOS or macOS on your device.
+You will be billed by the App Store, not by ExpressVPN, every week, month, or year, depending on the plan. A free trial or paid subscription purchased from the App Store:
+Gives you full access to your subscription on all devices where that subscription and product are available (not just iOS or macOS). For example, with an ExpressVPN subscription purchased in the App Store, you can also install and use ExpressVPN on your other devices.
+Does not give you access to the refer-a-friend rewards program.
+Does not give you access to the 30-day money-back guarantee. Refunds may still be available but solely through and at the discretion of Apple Support.
+Is billed by the App Store in your local currency.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Free trial terms and conditions
+At the end of the free trial, you will be billed by the App Store for the cost of the monthly or yearly plan, depending on your choice. If you no longer want to subscribe to ExpressVPN or ExpressKeys, cancel the free trial at least 24 hours before the expiry date.
+Once your subscription has begun, you will be billed automatically every month or 12 months. This continues unless the subscription is canceled at least 24 hours before the end of the billing period.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to change subscription plans
+You can change the duration of your subscription through the App Store only if you purchased the subscription via the App Store.
+For example, if you want to upgrade from a one-month subscription to a 12-month subscription via the App Store, you must have purchased the one-month subscription from the App Store.
+To change your subscription duration on iOS:
+Sign into the App Store account you used to get your free trial or subscription.
+Tap your profile icon, and select Subscriptions.
+Select ExpressVPN, ExpressKeys, or Identity Defender (depending on where you purchased your subscription).
+Click See All Plans and select the subscription plan you want.
+Confirm your new subscription terms.
+To change your subscription duration on macOS:
+Sign into the App Store account you used to get your free trial or subscription.
+Click your account name in the left sidebar, then select Account Settings.
+Select Purchase History.
+Select ExpressKeys, then locate Manage Subscriptions and select View.
+Click See All Plans and select the subscription plan you want.
+Confirm your new subscription terms.
+Your new subscription plan will begin at the end of your current billing period. For more information, you can find your App Store subscription dates.
+Note: Changing to a different ExpressVPN subscription tier is only available for subscriptions purchased through the ExpressVPN website. If you want to upgrade or downgrade your tier, you’ll need to cancel your current in-app purchase subscription or wait for it to end. Once your subscription has ended, you can purchase a new subscription through the ExpressVPN website.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to cancel your free trial or subscription
+You can cancel your free trial or subscription through the App Store only if you initially signed up for the free trial or subscription through the App Store. (Similarly, you can cancel your subscription on the ExpressVPN website only if you purchased the subscription through the website.)
+To avoid charges, cancel at least 24 hours before the end of the free trial or the next billing date. Otherwise, your account will be automatically billed based on your selected plan.
+To cancel your free trial or subscription on iOS:
+Sign into the App Store account you used to get your free trial or subscription.
+Tap your profile icon, and select Subscriptions.
+Select ExpressVPN, ExpressKeys, or Identity Defender.
+Select Cancel Trial or Cancel Subscription.
+Select Confirm.
+To cancel your free trial or subscription on macOS:
+Sign into the App Store account you used to get your free trial or subscription.
+Click your account name in the left sidebar, then select Account Settings.
+Select Purchase History.
+Select ExpressKeys, then locate Manage Subscriptions and select View.
+Select Cancel Subscription.
+Select Cancel Subscription again to confirm.
+After you cancel, you can continue to use your subscription until the expiry date.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to update your billing information or payment methods
+I want to be billed through the App Store but via a different payment method
+See instructions on changing your Apple ID payment information.
+I want to be billed directly, not through the App Store (credit card, PayPal, etc.)
+If you have a subscription currently billed by the App Store and want to be billed by ExpressVPN instead:
+Cancel your subscription in the App Store at least 24 hours before your next billing date (which can be found in the ExpressVPN, ExpressKeys, and Identity Defender apps). After you cancel, you can continue to use your subscription until the expiry date.
+When your subscription is about to expire, go to https://portal.expressvpn.com/ and renew your ExpressVPN subscription. You will be able to select the payment method of your choice (e.g., credit card, PayPal, etc.)
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to resolve payment issues
+If the App Store is unable to process your payment, you will see a “Payment Failed” screen. Follow these instructions to update your payment method.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to resubscribe to an App Store subscription after canceling it
+If you have canceled a free trial or subscription from the App Store but changed your mind, you can still resubscribe. The steps below work below or after the subscription expiry date.
+In a browser, visit your Apple Account subscriptions page. Log in with your Apple Account credentials if prompted.
+Select the app you want to resubscribe to.
+Click See All Plans and select the subscription plan you want.
+Confirm your new subscription terms.
+If your subscription was still active (hadn’t yet expired), your new subscription will begin at the expiry date of your canceled subscription.
+If your subscription had expired, your new subscription will begin immediately.
+Within a few minutes, your subscription status will update on your ExpressVPN app.
+Note: You can also choose to be billed by ExpressVPN, not the App Store.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Refunds
+Users whose subscriptions are billed as an in-app purchase through the Apple App Store do not have access to ExpressVPN’s 30-day money-back guarantee, including for new first-time subscriptions. Instead, users can request refunds through the App Store, which are issued solely at the discretion of Apple Support.
+Note: Refund eligibility depends on the terms in effect when you purchased, which may vary by plan, purchase method, or promotion. Any applicable promo terms appear at checkout. Visit the ExpressVPN+ portal to review your purchase or check refund eligibility.
+For any other questions, contact the ExpressVPN Support Team.
+Back to top
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Close Choose language
+Dansk
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Norsk
+Polski
+Português
+Suomi
+Svenska
+Türkçe
+Русский
+ภาษาไทย
+한국어
+日本語
+Live chat
+Need help? Chat with us!
+Online

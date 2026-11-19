@@ -1,0 +1,1381 @@
+# Researched by hand on 2026-11-19 (M11.15, VPN batch 1). Pricing: expressvpn.com/pricing, which prices by where the
+# visitor is, read 2026-11-19 through a Canadian, US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish
+# and Italian exit, each with its "1-month plans", "12-month plans" and "2-year plans" views (the page's plan-length
+# menu). Canada, the US, Australia and New Zealand are priced in US dollars ("All amounts shown are in USD.", the US's
+# in a bare "$", the others' "USD$"), the UK in pounds and the euro countries in euros ("All amounts shown are in GBP."
+# and "... in EUR."). The page's own data names the currency (order-currency USD, GBP, EUR), and its checkout, opened to
+# the payment form and typing nothing, named the country: "Country: Canada, BC" with "USD$14.99" (and "Canada, QC" with
+# "USD$99.95/year"), "United States, CA", "United Kingdom" and "Netherlands". Read with Edge; the support centre, terms,
+# privacy policy, cookie policy and feature pages with a plain fetch from Canada; ExpressAI's own terms in Edge.
+# Regular prices: each card's "Autorenews at USD$14.99 monthly." and "Then autorenews at USD$99.95 annually.". The
+# 12-month cards' first term ("Billed USD$224.85 USD$74.85 for the first 15 Months.") and the 2-year cards ("2 Years + 4
+# Months ... Then autorenews at USD$99.95 annually.") are offers: its help centre calls them "2-year introductory offers
+# that renew annually", so only monthly and yearly prices are stored (Proton VPN's 2-year precedent). No price includes
+# tax: "Sales tax applied at checkout where applicable." (every view), and the checkouts add it ("Sales tax/VAT 12%" in
+# British Columbia, "20%" in the UK, "21%" in the Netherlands).
+# Plans: three tiers, Basic, Advanced and Express Pro ("ExpressVPN offers three subscription tiers: Basic, Advanced, and
+# Express Pro.", What subscriptions are available?). In the US, Advanced and Express Pro add Identity Defender
+# ("Identity Defender is currently only available to Advanced and Express Pro users in the U.S."), so the US's are plans
+# of their own (Norton's precedent for plans whose features differ by country): expressvpn.advanced-us and
+# expressvpn.pro-us. The US's monthly Advanced card lists "Identity Defender" too, which the help centre's tier article
+# (2026-10-30) says only the 12-month and 2-year Advanced have: the live cards win (notes.md).
+# Region checklist for CA and US, 2026-11-19: 1. its hreflang links name languages only (en, de, fr, en-AE…), and the
+# pricing page has none; 2. no country or currency picker on the pricing page; 3. its page data names the order currency
+# (USD) but not the country; 4. the checkout names the country ("Canada, BC", "United States, CA"); 5. its help centre
+# has no prices-by-country article; 6. Edge through each country's exit, and a plain fetch; 7. no bill offered.
+# Not drafted: ExpressVPN for Teams (business, "5 license minimum applies."), Aircove and Fortify routers (hardware),
+# standalone ExpressKeys ("Standalone ExpressKeys subscriptions include a free trial", sold only in its apps, with no
+# web price), and EventVPN (its own brand and site, eventvpn.com, free with ads and paid through the App Store: a
+# provider of its own for a later batch). The Dedicated IP add-on for Basic and Advanced is offered only during checkout
+# ("During checkout, if you are purchasing an Advanced or Basic tier, you will see an option to add a dedicated IP"),
+# and the checkouts opened showed no price for it: not stored (notes.md has the page data's prices).
+# Bundles: none sold. Official resellers: its gift card FAQ names "authorized partner merchants, including Amazon and
+# Walmart" for gift cards, but Walmart's listings describe the old single plan ("Connect up to 8 devices at once",
+# "Lightning-quick servers in 105 countries") and no listing names a tier, so no offer maps to a plan (notes.md). App
+# stores bill its plans (partners, not listed).
+# Free use: none ("Is ExpressVPN free? No. ExpressVPN is a premium VPN service", its FAQ).
+
+# Coverage: expressvpn.advanced and expressvpn.pro in US: the US sells its own (expressvpn.advanced-us,
+# expressvpn.pro-us), with Identity Defender ("Identity Defender is currently only available to Advanced and Express Pro
+# users in the U.S.", support article What is ExpressVPN Identity Defender?, read 2026-11-19).
+# Coverage: expressvpn.advanced-us and expressvpn.pro-us in CA, GB, IE, AU, NZ, DE, FR, NL, ES and IT: the US's own
+# plans; those countries sell expressvpn.advanced and expressvpn.pro.
+
+id: expressvpn
+name: ExpressVPN
+aliases: [express vpn, expressvpn keys, expresskeys]
+website: https://www.expressvpn.com
+category: vpn
+spendCategory: software
+# Each country's pricing page names its currency (USD in Canada, the US, Australia and New Zealand, GBP in the UK, EUR
+# in the euro countries), and the checkouts read agree (Canada, the US, the UK, the Netherlands). Others weren't read.
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: USD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+# Its help article on cancelling, for subscriptions bought on its website and through the app stores.
+cancelUrl: https://www.expressvpn.com/support/manage-account/cancel-expressvpn-subscription/
+sources: { pricing: https://www.expressvpn.com/pricing }
+# Owner (M11.2), read 2026-11-19: ExpressVPN is run by Express Technologies Ltd. of the British Virgin Islands ("Express
+# Technologies Ltd. operates under BVI jurisdiction", its privacy policy), whose "ultimate holding company" is "Kape
+# Technologies PLC (UK)" (its privacy policy's words, which give the name). Its press page says when it joined Kape, and
+# Kape's own site where it's based. No stock: Kape's About us lists "Kape delists from LSE" in May 2023. Kape's brands
+# (kape.com/our-brands): ExpressVPN, Private Internet Access, CyberGhost, Intego and Webselenese.
+owner:
+  name: Kape Technologies PLC
+  website: https://www.kape.com
+  page:
+    name: 'Press (ExpressVPN)'
+    url: https://www.expressvpn.com/press
+  quotes:
+    - 'ExpressVPN has been part of Kape Technologies since 2021.'
+    - 'Founded in 2009 and based in the British Virgin Islands, we joined the Kape Technologies family of brands in 2021'
+  country:
+    code: GB
+    page:
+      name: 'Kape Technologies'
+      url: https://www.kape.com/
+    quotes:
+      - 'Kape is a global company headquartered in London, United Kingdom.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+# Ways to pay (M11.5), read 2026-11-19: its payment methods article (cards, PayPal, Apple Pay, Google Pay), its renewal
+# article (Apple's and Google Play's in-app purchases) and its terms (gift cards, "redemption codes"). Cryptocurrency
+# ended: "ExpressVPN no longer supports cryptocurrencies (including via BitPay) as a payment method." (Renew your
+# ExpressVPN subscription), though its privacy policy still says Bitcoin "may also be available": the help article wins.
+# The Dutch checkout also shows an iDEAL | Wero button, only as an image ("Pay with iDEAL | Wero" is its label, not its
+# text), so it isn't listed. Accepted cards: no page names a network (its article says "credit card ... and debit
+# cards", and the checkout shows a card form without logos), so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal, apple-pay, google-pay]
+    page: 'What payment methods does ExpressVPN accept?'
+    url: https://www.expressvpn.com/support/manage-account/what-payment-methods-does-expressvpn-accept/
+    quotes:
+      - 'You can pay for an ExpressVPN subscription via credit card, direct credit card payment methods (such as PayPal, Apple Pay, and Google Pay), and debit cards.'
+  - methods: [app-store]
+    page: 'Renew your ExpressVPN subscription'
+    url: https://www.expressvpn.com/support/manage-account/renew-expressvpn-account/
+    quotes:
+      - 'Subscriptions purchased with certain payment methods, such as credit card, PayPal, Apple Pay, Google Pay, Apple in-app purchases, and Google Play in-app purchases, will automatically renew by default.'
+  - methods: [gift-card]
+    page: 'Terms of Service'
+    url: https://www.expressvpn.com/tos
+    quotes:
+      - 'The Money-Back Guarantee does not apply to renewal purchases or subscriptions purchased using redemption codes (e.g., gift cards).'
+# Renewal day (M11.5), read 2026-11-19 in its tier article; the checkouts agree ("renew on a monthly basis starting on
+# Dec 19, 2026", read on 19 November).
+renewalAnchor:
+  kind: same-date
+  page: 'What subscriptions are available with ExpressVPN?'
+  url: https://www.expressvpn.com/support/manage-account/available-subscriptions/
+  quotes:
+    - 'Monthly plans renew automatically on the same date each month.'
+    - 'The yearly subscription is automatically renewed on the same date once per year.'
+  lastVerified: 2026-11-19
+notes: >-
+  One subscription covers the VPN, ExpressMailGuard's email aliases and ExpressAI, its private AI assistant; Advanced and
+  Express Pro add ExpressKeys, its password manager, and in the US Identity Defender. Prices are in US dollars in Canada,
+  Australia and New Zealand, plus sales tax. The 2-year deal is a first term that renews yearly.
+
+# Free use (2026-11-09, the owner's item), read 2026-11-19: none. Its FAQ: "No. ExpressVPN is a premium VPN service,
+# although a 3- day risk- free trial is available for certain mobile devices." Its pricing page sells only paid tiers.
+freeUse:
+  kind: none
+  pages:
+    - https://www.expressvpn.com/support/knowledge-hub/frequently-asked-questions/
+    - https://www.expressvpn.com/pricing
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19:
+# - Platforms: "It develops apps for all major platforms, including Windows, Mac, Linux, iOS, Android, Apple TV, and
+#   smart TVs." (its About page for AI tools, /llm-info), its download menu's Fire Stick, Android TV, routers and
+#   Chrome, Firefox and Edge extensions, and ExpressAI in any browser ("You can use ExpressAI on any device that
+#   supports a web browser").
+# - Sign-in: a password ("When you create your account, you are required to create a strong password"), codes by email
+#   ("sign-in attempts are also verified with codes sent to your email address", Is my account secure?) and passkeys
+#   ("Your ExpressVPN+ portal supports passkeys", How to set up passkeys). No authenticator-app or text-message codes.
+# - Support: live chat and email around the clock ("24/7 customer support via live chat and email",
+#   /features/dedicated-ip).
+# - App languages: its footer's language menu (English, "Español", "Deutsch", "Français", "العربية", "Italiano", "日本語",
+#   "한국어", "Português" and others the registry lacks, such as Dutch, Polish and Swedish; no Chinese or Hindi).
+# - Closed source: only its Lightway protocol's core library is open ("The core library of Lightway has been
+#   open-sourced", its Trust Center), not its apps or servers, so no sourceRepo.
+# - No pause: Google Play's own pause ("Google Play Store subscriptions can be paused or canceled", How to upgrade or
+#   downgrade) is the app store's, not ExpressVPN's. No parental controls: its adult-site blocker is a toggle on the
+#   device ("enable Block adult sites and connect to the VPN", /features/parental-controls), a filter you set for
+#   yourself.
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension, tv]
+  account.sign-in: [password, passkey, email-code]
+  support.channels: [chat, email, 24-7]
+  languages.interface: [en, es, de, fr, ar, it, ja, ko, pt]
+  software.open-source: proprietary
+
+# Perks (M11.6): lines no feature describes, in its cards' and comparison table's words. ExpressAI's daily credits
+# differ by tier (usage levels are perks, the owner's choice of 2026-10-30); Identity Defender's US alerts follow its
+# tier article's comparison ("What's the difference between each tier?").
+perks:
+  - id: dedicated-ip
+    name: Dedicated IP included
+  - id: expressai-100-credits
+    name: 100 credits/day for private AI chats
+  - id: expressai-500-credits
+    name: 500 credits/day for private AI chats
+  - id: ssn-monitoring
+    name: SSN monitoring
+  - id: change-of-address-alerts
+    name: Change of address alerts
+  - id: home-title-monitoring
+    name: Home title monitoring
+  - id: auto-title-monitoring
+    name: Auto title monitoring
+  - id: court-record-monitoring
+    name: Court record monitoring
+  - id: neighborhood-watch
+    name: Neighborhood watch
+  - id: retirement-account-monitoring
+    name: 401k monitoring
+  - id: caller-identification
+    name: Caller Identification
+
+# Categories (M11.3): a VPN first. Every tier includes ExpressAI ("Each tier includes ExpressVPN, the ExpressMailGuard
+# email relay service, and ExpressAI, a privacy-first AI workspace."), so every plan is in ai too; Advanced and Express
+# Pro include ExpressKeys ("Included with Advanced and Express Pro."), so they're in passwords. ExpressMailGuard
+# forwards mail to your own inbox from aliases and has no mailbox (no email.addresses), so no plan is an email plan.
+# VPN features, read 2026-11-19, the same on every tier but its device count:
+# - Devices: "Basic : 10 devices at the same time.", "Advanced : 12 ..." and "Express Pro : 14 ..." (How many devices
+#   can I connect?).
+# - Unlimited traffic, so its monthly VPN data is unlimited: "ExpressVPN never caps your bandwidth or throttles your
+#   connection for consuming large amounts of data" (/features), and "Although we provide unlimited data transfer" (its
+#   privacy policy).
+# - Server countries: "Servers in 113 countries" (every page; /vpn-server's list). Some are virtual ("our India servers
+#   are geo-located in Singapore and the UK").
+# - Protocols: "ExpressVPN supports various protocols, including Lightway , WireGuard , OpenVPN (UDP and TCP) , and
+#   IKEv2" (/vpn-server); Lightway, its own, has no registry value. Obfuscation: "Automatic obfuscation on every server"
+#   (/features).
+# - Kill switch: "ExpressVPN’s Internet Kill Switch blocks IPv4, IPv6, and DNS traffic outside the encrypted tunnel on
+#   Windows, Mac, Linux, iOS, and Android devices" (/features/network-lock). Split tunnelling: "ExpressVPN supports
+#   split tunneling across multiple platforms, including iOS" (/features/split-tunneling).
+# - Content blocking: "Block ads, trackers, malicious sites, and adult sites" (every card's Advanced Protection).
+# - P2P: inferred from its home page (below). No page read (/features, /vpn-server, the tier article) offers multi-hop,
+#   Tor over VPN, port forwarding (only its routers' own port forwarding for your home network) or connecting your own
+#   devices to each other, so vpn.mesh is false.
+# - No-logs policy: "We do not collect logs of your online activity while you are connected to our Services" and "We
+#   also never store connection logs" (its privacy policy).
+# - Audits (its Trust Center's list): "The third KPMG security audit of our privacy commitments (June 2025)", whose post
+#   says KPMG "examined ExpressVPN’s TrustedServer system and privacy policy claims as of 28 February 2025" and gave
+#   "reasonable assurance that our systems functioned as designed, with no identified issues regarding our technical
+#   safeguards against activity logging" (no-logs; KPMG's report sits behind its terms, which weren't accepted); "A
+#   security audit by Cure53 of TrustedServer, our in-house VPN server technology (May 2022)" (servers; Cure53's report,
+#   "Pentest-Report ExpressVPN TrustedServer 04.-05.2022", read); Cure53's of its iOS, Android, macOS and Linux apps
+#   (2022) and browser extension (June 2024), and F-Secure's of its Windows app (2022) (apps).
+# - RAM-only servers: "All data wiped with every reboot, as VPN servers run on RAM only" (/features/trustedserver).
+# - Not anonymous: its checkout asks for an email address ("Create an account or sign in to subscribe").
+# ExpressKeys (Advanced and Express Pro), read 2026-11-19 in What is ExpressKeys?: "Logins and passwords", "Credit and
+# debit card details", "Secure notes" and "Two-factor authentication (2FA) codes", passkeys (the comparison table's
+# "Passkeys", and How to manage passkeys in ExpressKeys); "Password health: Identify weak, reused, or exposed passwords,
+# accounts without 2FA, and insecure URLs."; sharing by link "available to anyone with the link or only invited people",
+# with "Link expires after" and "Can only be viewed once" (How to share items in ExpressKeys).
+# ExpressMailGuard: "You can create an unlimited number of Dedicated Subdomain Aliases." (its FAQs), on every tier;
+# custom domains "1" on Advanced and "20" on Express Pro (the comparison table's "Use your own Domains").
+# ExpressAI: web search on every tier ("Web search" ticked for all three); "Access to 6 models" on Express Pro only,
+# among them other companies' ("advanced models like GPT OSS and DeepSeek R1"); chats saved "with zero-access,
+# end-to-end encryption" (How to save your encrypted chats). Its personalization (a nickname, occupation, custom
+# instructions) isn't memory across chats.
+# Identity Defender (the US's Advanced and Express Pro), read 2026-11-19 in What is ExpressVPN Identity Defender? and
+# the tier article's comparison: dark web monitoring, "Data Removal searches data broker and people-search sites for
+# your personal information and automatically sends removal requests on your behalf", "Credit Scanner" with "a monthly
+# credit report" (no page names the credit bureaus: inferred, below), and "eligible U.S. subscribers on the Advanced
+# plan can receive up to $3 million* in coverage, while eligible U.S. subscribers on the Express Pro plan can receive up
+# to $5 million.*", underwritten by American Bankers Insurance Company of Florida.
+plans:
+  - id: expressvpn.basic
+    name: Basic
+    link: https://www.expressvpn.com/pricing
+    categories: [vpn, ai]
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 113
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      email.aliases: unlimited
+      ai.assistant: true
+      ai.web-search: true
+      ai.chat-storage: encrypted-cloud
+    featureLabels:
+      email.aliases: ExpressMailGuard aliases
+      ai.assistant: ExpressAI
+    inferred:
+      vpn.p2p:
+        reason: 'No page states a P2P policy. Its home page names file sharing as a use ("P2P file sharing usually means that strangers can see your IP address", which a VPN keeps private), and its terms forbid only downloads that break copyright.'
+        page:
+          name: ExpressVPN
+          url: https://www.expressvpn.com/
+        lastVerified: 2026-11-19
+    notes: 'Up to 10 devices at once, servers in 113 countries ("High-speed VPN (up to 40Gbps)"), and blocking of ads, trackers, malicious and adult sites. Includes ExpressMailGuard (10 shared aliases, 10 MB of mail a month) and ExpressAI (50 credits a day, 1 model). A dedicated IP is an add-on at checkout. The 2-year deal is a 28-month first term that then renews yearly.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: CA
+        currency: USD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: US
+        currency: USD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 10.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 69.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: AU
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: AU
+        currency: USD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 99.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 79.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+  - id: expressvpn.advanced
+    name: Advanced
+    link: https://www.expressvpn.com/pricing
+    categories: [vpn, passwords, ai]
+    features:
+      vpn.included: true
+      vpn.devices: 12
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 113
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      email.aliases: unlimited
+      email.custom-domains: 1
+      ai.assistant: true
+      ai.web-search: true
+      ai.chat-storage: encrypted-cloud
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+    featureLabels:
+      email.aliases: ExpressMailGuard aliases
+      ai.assistant: ExpressAI
+      password-manager: ExpressKeys
+    inferred:
+      vpn.p2p:
+        reason: 'No page states a P2P policy. Its home page names file sharing as a use ("P2P file sharing usually means that strangers can see your IP address", which a VPN keeps private), and its terms forbid only downloads that break copyright.'
+        page:
+          name: ExpressVPN
+          url: https://www.expressvpn.com/
+        lastVerified: 2026-11-19
+    perks: [expressai-100-credits]
+    notes: 'Basic with 12 devices at once, ExpressKeys (its password manager, with 5 GB of file attachments and a 2FA authenticator), more of ExpressMailGuard (50 shared aliases, 100 MB of mail a month, 1 custom domain) and ExpressAI (100 credits a day). The 12-month and 2-year deals add a one-time holiday.com eSIM (3 GB for 3 days). A dedicated IP is an add-on.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: CA
+        currency: USD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 12.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 89.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: AU
+        currency: USD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: AU
+        currency: USD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 109.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+  - id: expressvpn.pro
+    name: Express Pro
+    link: https://www.expressvpn.com/pricing
+    categories: [vpn, passwords, ai]
+    features:
+      vpn.included: true
+      vpn.devices: 14
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 113
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      email.aliases: unlimited
+      email.custom-domains: 20
+      ai.assistant: true
+      ai.web-search: true
+      ai.chat-storage: encrypted-cloud
+      ai.model-choice: true
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+    featureLabels:
+      email.aliases: ExpressMailGuard aliases
+      ai.assistant: ExpressAI
+      password-manager: ExpressKeys
+    inferred:
+      vpn.p2p:
+        reason: 'No page states a P2P policy. Its home page names file sharing as a use ("P2P file sharing usually means that strangers can see your IP address", which a VPN keeps private), and its terms forbid only downloads that break copyright.'
+        page:
+          name: ExpressVPN
+          url: https://www.expressvpn.com/
+        lastVerified: 2026-11-19
+    perks: [dedicated-ip, expressai-500-credits]
+    notes: 'Advanced with 14 devices at once, a dedicated IP, 10 GB of ExpressKeys attachments, unlimited ExpressMailGuard (20 custom domains) and ExpressAI with 500 credits a day and 6 models. The 12-month and 2-year deals add a one-time holiday.com eSIM (3 GB for 5 days).'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: CA
+        currency: USD
+        amount: 199.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 149.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: AU
+        currency: USD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: AU
+        currency: USD
+        amount: 199.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 199.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 179.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+  - id: expressvpn.advanced-us
+    name: Advanced (US)
+    link: https://www.expressvpn.com/pricing
+    categories: [vpn, passwords, ai]
+    features:
+      vpn.included: true
+      vpn.devices: 12
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 113
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      email.aliases: unlimited
+      email.custom-domains: 1
+      ai.assistant: true
+      ai.web-search: true
+      ai.chat-storage: encrypted-cloud
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+      security.dark-web-monitoring: true
+      security.data-exposure: [removal]
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 3
+    featureLabels:
+      email.aliases: ExpressMailGuard aliases
+      ai.assistant: ExpressAI
+      password-manager: ExpressKeys
+    inferred:
+      vpn.p2p:
+        reason: 'No page states a P2P policy. Its home page names file sharing as a use ("P2P file sharing usually means that strangers can see your IP address", which a VPN keeps private), and its terms forbid only downloads that break copyright.'
+        page:
+          name: ExpressVPN
+          url: https://www.expressvpn.com/
+        lastVerified: 2026-11-19
+      security.credit-monitoring:
+        reason: 'Its Credit Scanner watches your credit and sends a monthly credit report, but no page names the credit bureaus it reads, so one is assumed.'
+        page:
+          name: 'What is ExpressVPN Identity Defender?'
+          url: https://www.expressvpn.com/support/knowledge-hub/what-is-identity-defender/
+        lastVerified: 2026-11-19
+    perks: [expressai-100-credits, ssn-monitoring, change-of-address-alerts]
+    notes: 'Advanced as sold in the US, with Identity Defender: "5 ID alerts, automated data removal, and up to $3 million in identity theft insurance" (underwritten by American Bankers Insurance Company of Florida), in its iOS and Android apps. The 12-month and 2-year deals add a one-time holiday.com eSIM (3 GB for 3 days).'
+    prices:
+      - region: US
+        currency: USD
+        amount: 16.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: US
+        currency: USD
+        amount: 119.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+  - id: expressvpn.pro-us
+    name: Express Pro (US)
+    link: https://www.expressvpn.com/pricing
+    categories: [vpn, passwords, ai]
+    features:
+      vpn.included: true
+      vpn.devices: 14
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 113
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+      email.aliases: unlimited
+      email.custom-domains: 20
+      ai.assistant: true
+      ai.web-search: true
+      ai.chat-storage: encrypted-cloud
+      ai.model-choice: true
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, secure-note, totp]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing: [share-to-user, share-link, link-expiry, link-view-limit]
+      security.dark-web-monitoring: true
+      security.data-exposure: [removal]
+      security.credit-monitoring: 1
+      security.identity-theft-insurance: 5
+    featureLabels:
+      email.aliases: ExpressMailGuard aliases
+      ai.assistant: ExpressAI
+      password-manager: ExpressKeys
+    inferred:
+      vpn.p2p:
+        reason: 'No page states a P2P policy. Its home page names file sharing as a use ("P2P file sharing usually means that strangers can see your IP address", which a VPN keeps private), and its terms forbid only downloads that break copyright.'
+        page:
+          name: ExpressVPN
+          url: https://www.expressvpn.com/
+        lastVerified: 2026-11-19
+      security.credit-monitoring:
+        reason: 'Its Credit Scanner watches your credit and sends a monthly credit report, but no page names the credit bureaus it reads, so one is assumed.'
+        page:
+          name: 'What is ExpressVPN Identity Defender?'
+          url: https://www.expressvpn.com/support/knowledge-hub/what-is-identity-defender/
+        lastVerified: 2026-11-19
+    perks:
+      [
+        dedicated-ip,
+        expressai-500-credits,
+        ssn-monitoring,
+        change-of-address-alerts,
+        home-title-monitoring,
+        auto-title-monitoring,
+        court-record-monitoring,
+        neighborhood-watch,
+        retirement-account-monitoring,
+        caller-identification,
+      ]
+    notes: 'Express Pro as sold in the US, with Identity Defender: "11 ID alerts, automated data removal, and up to $5 million in identity theft insurance" (underwritten by American Bankers Insurance Company of Florida), and Caller Identification, in its iOS and Android apps. The 12-month and 2-year deals add a one-time holiday.com eSIM (3 GB for 5 days).'
+    prices:
+      - region: US
+        currency: USD
+        amount: 22.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+      - region: US
+        currency: USD
+        amount: 199.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.expressvpn.com/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch from Canada (ExpressAI's terms in Edge).
+# Every agreement a user accepts: the checkout's line ("By clicking a payment method below, I agree to the Terms of
+# Service — including the dispute resolution clause which requires binding arbitration for U.S. residents; the Privacy
+# Policy; the Cancellation Policy"), whose Cancellation Policy is the terms' section 4; the terms' Acceptable Use Policy
+# (its section 7) and Export Control Policy (/tos/export-control-policy: the sanctioned countries it can't serve, no
+# topic); its Cookie Policy (the privacy policy's "Cookie Policy" link); ExpressAI's Terms and Conditions and Privacy
+# Policy (app.expressai.com/terms and /privacy, the latter also at /expressai-privacy-policy: the same grades as the
+# main policy, training aside); and, for the US plans, the Identity Defender Privacy Policy
+# (/privacy-policy-identity-defender: its ad cookies and opt-outs grade as the main ones; its data "will be stored in
+# the United States"). The apps have no licence of their own: the terms' section 8 is it. Not read: KPMG's and PwC's
+# audit reports (each behind its auditor's terms), holiday.com's eSIM terms (a partner's, "governed by their own
+# applicable terms") and Array's Identity Defender terms (none linked). Kape Technologies shares no policy with
+# ExpressVPN: its own privacy policy covers only kape.com, and CyberGhost's (CyberGhost S.R.L.) and Private Internet
+# Access's (PIA Private Internet Access, Inc.) are each brand's own.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.expressvpn.com/tos
+    - name: 'Privacy Policy'
+      url: https://www.expressvpn.com/privacy-policy
+    - name: 'Cookie Policy'
+      url: https://www.expressvpn.com/cookie-policy
+    - name: 'Terms and Conditions for ExpressAI'
+      url: https://app.expressai.com/terms
+    - name: 'How does ExpressAI protect my privacy?'
+      url: https://www.expressvpn.com/support/knowledge-hub/expressai-privacy-protections/
+    - name: 'How to save your encrypted chats (ExpressAI)'
+      url: https://www.expressvpn.com/support/knowledge-hub/expressai-save-chats/
+    - name: 'ExpressMailGuard FAQs'
+      url: https://www.expressvpn.com/support/knowledge-hub/faqs-mailguard/
+    - name: 'How to export data stored in ExpressKeys'
+      url: https://www.expressvpn.com/support/knowledge-hub/how-to-export-data-stored-in-expresskeys/
+    - name: 'What is ExpressKeys?'
+      url: https://www.expressvpn.com/support/knowledge-hub/what-is-expresskeys/
+    - name: 'Frequently asked questions'
+      url: https://www.expressvpn.com/support/knowledge-hub/frequently-asked-questions/
+    - name: 'Apple App Store in-app purchases'
+      url: https://www.expressvpn.com/support/troubleshooting/apple-in-app-purchases/
+    - name: 'How to cancel your ExpressVPN subscription'
+      url: https://www.expressvpn.com/support/manage-account/cancel-expressvpn-subscription/
+    - name: 'How to upgrade or downgrade your ExpressVPN subscription'
+      url: https://www.expressvpn.com/support/manage-account/upgrade-downgrade-subscription/
+    - name: 'How many devices can I connect?'
+      url: https://www.expressvpn.com/support/knowledge-hub/simultaneous-connections/
+    - name: 'Use on multiple devices'
+      url: https://www.expressvpn.com/features/how-many-devices-can-i-connect
+    - name: 'How to download and update the ExpressVPN app'
+      url: https://www.expressvpn.com/support/knowledge-hub/download-update-expressvpn-app/
+    - name: 'Trust Center'
+      url: https://www.expressvpn.com/trust
+    - name: "KPMG's 2025 no-logs audit"
+      url: https://www.expressvpn.com/blog/kpmg-2025-no-logs-policy-audit/
+    - name: 'Plans and pricing'
+      url: https://www.expressvpn.com/pricing
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send crash reports and diagnostics only if you agree. But outside Europe and the UK its website’s analytics cookies, which count the pages you visit, are on until you turn them off, in each browser’s cookie choices.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Upon activation of any of our Apps, you will be asked if you would like to share App Diagnostics Data with ExpressVPN.'
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'These help us understand how visitors interact with the Site by collecting information on a statistical basis — for example, which pages are visited and how the Site performs — so that we can measure and improve it. They are not strictly necessary and, in the EU and UK, are set only with your consent.'
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'In the United States we operate, for non-essential Cookies, on a notice-and-opt-out basis rather than a prior-consent basis'
+      action:
+        name: 'How to change your cookie choices'
+        url: https://www.expressvpn.com/cookie-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your data, but it matches your email or device ID with ad companies to show you its ads. You can opt out in its app’s privacy settings, and on its website only through each browser’s cookie choices.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'This includes matching identifiers from our systems with advertising partners to show you ExpressVPN ads during or after your subscription.'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'we do not sell or lease your Personal Data to third parties'
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'You may opt out of such activity by selecting "Do Not Sell or Share My Personal Information" (or the equivalent link) on the Site, or by adjusting your choices in our Cookie Preferences centre.'
+      action:
+        name: 'How to change your cookie choices'
+        url: https://www.expressvpn.com/cookie-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website’s ad cookies build a profile of your interests to show you its ads. Outside Europe and the UK they’re on until you turn them off, which you do in each browser’s cookie choices.'
+      sources:
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'These are used to deliver advertising relevant to you, to measure the effectiveness of advertising and marketing campaigns, to support affiliate and referral partners, and to build a profile of your interests.'
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'In the United States we operate, for non-essential Cookies, on a notice-and-opt-out basis rather than a prior-consent basis, except where opt-in consent is required (including for the personal information of consumers under 16, whose information we do not knowingly sell or share).'
+      action:
+        name: 'How to change your cookie choices'
+        url: https://www.expressvpn.com/cookie-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      regions: [EU, GB]
+      tier: good
+      reason: 'In Europe and the UK its ad cookies stay off unless you agree to them, and you can change your mind at any time.'
+      sources:
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'If you access the Site from the EU or the UK, we set non-essential Cookies (functional, analytics and performance, and marketing and advertising) only with your prior consent, obtained through a clear affirmative action.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'What you type or upload to ExpressAI is never used to train AI models.'
+      sources:
+        - url: https://www.expressvpn.com/support/knowledge-hub/expressai-privacy-protections/
+          quote: 'ExpressAI ensures all information is end-to-end encrypted and never used to train models.'
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your passwords and saved AI chats are locked with a key only you hold, so ExpressVPN can’t read them. Emails it forwards to you are deleted once delivered.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Keys Data stored in ExpressKeys is secured with zero-knowledge encryption.'
+        - url: https://www.expressvpn.com/support/knowledge-hub/expressai-save-chats/
+          quote: 'Your history is protected with zero-access, end-to-end encryption, ensuring only you—not ExpressVPN, not cloud providers—can decrypt or view it.'
+        - url: https://www.expressvpn.com/support/knowledge-hub/faqs-mailguard/
+          quote: 'Once a message is successfully delivered to your destination inbox, it is immediately deleted from our system.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your account details as long as it has a reason to, and emails about your payments and renewals for 10 years. Failed emails are deleted after 7 days.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'is retained for a limited period in accordance with applicable data protection law (for as long as we have your consent or a legitimate reason for holding such data)'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'We retain the data associated with these communications for a period of ten (10) years in compliance with applicable statutes of limitations for commercial claims to ensure compliance with legal requirements and to protect our legitimate interests.'
+        - url: https://www.expressvpn.com/support/knowledge-hub/faqs-mailguard/
+          quote: 'Failed deliveries are automatically deleted after 7 days.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can email its privacy officer to have your data deleted. It doesn’t say how soon, and it keeps the records the law requires.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'You may request to have your data deleted by sending a valid deletion request to our DPO.'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Please note that if you request the deletion of your Personal Data, we will maintain records necessary for legal compliance, and you will no longer be able to use the Services.'
+      action:
+        name: 'How to ask for your data to be deleted'
+        url: https://www.expressvpn.com/privacy-policy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your saved passwords yourself as a CSV file, which other password managers can read. For a copy of your account data, you have to ask.'
+      sources:
+        - url: https://www.expressvpn.com/support/knowledge-hub/how-to-export-data-stored-in-expresskeys/
+          quote: 'In the ExpressKeys browser extensions, you can choose whether you want to download your data in an encrypted ZIP file or as a plain CSV file.'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'You have the right to request and receive your personal data in a commonly used format (data portability).'
+      action:
+        name: 'How to export your ExpressKeys data'
+        url: https://www.expressvpn.com/support/knowledge-hub/how-to-export-data-stored-in-expresskeys/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'Requests for data must follow the laws of the British Virgin Islands, it reports how many it gets twice a year, and it keeps no activity logs to hand over. It doesn’t say it tells you about a request.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Consequently, any demand via legal means for Personal Data (or other types of data) is subject to BVI jurisdiction and laws.'
+        - url: https://www.expressvpn.com/trust
+          quote: 'Our biannual transparency reports provide information on user-data requests received by our legal department.'
+        - url: https://www.expressvpn.com/trust
+          quote: 'We can never provide this customer data because it simply does not exist.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'It doesn’t say which country your account data is kept in. When data leaves Europe or the UK, it uses the EU’s standard contract terms or other legal safeguards.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Where Personal Data is transferred internationally, we ensure that appropriate safeguards are in place, including the use of standard contractual clauses approved by the European Commission or the UK Secretary of State, reliance on adequacy decisions, or other lawful transfer mechanisms under applicable data protection law.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address and payment details, which can include your name and billing address. It doesn’t ask for a phone number.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'We require Personal Data, such as an email address and payment information, so that we can provide you with our Services, email you, collect payments and corresponding taxes, prevent fraud, respond to support queries, and share relevant information about your Account and/or the Services.'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Specific Personal Data collected will depend on the payment method you choose and may include information such as name, billing country, billing address, and/or credit card number.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can turn off renewal on its website in a few clicks, and keep using it until the end of the time you paid for.'
+      sources:
+        - url: https://www.expressvpn.com/support/manage-account/cancel-expressvpn-subscription/
+          quote: 'Click Cancel subscription below Automatic renewal and follow the prompts.'
+        - url: https://www.expressvpn.com/support/manage-account/cancel-expressvpn-subscription/
+          quote: 'You can still use ExpressVPN until the last day of your current subscription cycle.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'New customers get all their money back if they ask within 30 days of first buying. Renewals aren’t covered, and a refund of a payment in euros or pounds is sent in US dollars, so the amount may differ.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'You may cancel your Account for any reason within thirty (30) calendar days of your initial purchase and, upon request as described below, you will receive a full refund of the amount you paid (“Money-Back Guarantee”).'
+        - url: https://www.expressvpn.com/tos
+          quote: 'The Money-Back Guarantee does not apply to renewal purchases or subscriptions purchased using redemption codes (e.g., gift cards).'
+        - url: https://www.expressvpn.com/tos
+          quote: 'For non-crypto purchases, any refunds are sent in USD; thus, for non-USD purchases, the refund amount could differ from the amount originally paid in local currency (due to changes in foreign exchange rate and/or processing charges linked to your method of payment).'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price only starts at your next renewal, never during time you’ve paid for, and it tells you ahead of time, so you can cancel first.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'ExpressVPN reserves the right to amend subscription fees or institute new fees at any time upon reasonable advance notice.'
+        - url: https://www.expressvpn.com/tos
+          quote: 'Any changes to the pricing will not affect the Subscriber’s current subscription period and will become effective upon subscription renewal.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 3-day trial in the phone apps needs a way to pay, and the app store charges you when it ends unless you cancel at least 24 hours before. It doesn’t promise a reminder.'
+      sources:
+        - url: https://www.expressvpn.com/support/knowledge-hub/frequently-asked-questions/
+          quote: 'No. ExpressVPN is a premium VPN service, although a 3- day risk- free trial is available for certain mobile devices.'
+        - url: https://www.expressvpn.com/support/troubleshooting/apple-in-app-purchases/
+          quote: 'To use the free trial or purchase a subscription within the app, you will need to have iOS 15 or macOS 14 or above and an active payment method.'
+        - url: https://www.expressvpn.com/support/troubleshooting/apple-in-app-purchases/
+          quote: 'If you no longer want to subscribe to ExpressVPN or ExpressKeys, cancel the free trial at least 24 hours before the expiry date.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: neutral
+      reason: 'Its plans renew by themselves. Its privacy policy says it may send renewal notices, but no page promises a reminder before each renewal or says how early.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'We may send you limited transactional communications related to your account and transactions with us.'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'These communications include, but are not limited to, order confirmations, renewal notifications, and price increase notices.'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and pricing page name no fees beyond the price and sales tax.'
+      pages: [https://www.expressvpn.com/tos, https://www.expressvpn.com/pricing]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once, with credit for the time you have left. Moving down usually starts at your next renewal, and you keep your plan until then.'
+      sources:
+        - url: https://www.expressvpn.com/support/manage-account/upgrade-downgrade-subscription/
+          quote: 'You will be charged for the new subscription immediately, with a prorated credit applied for the remaining value of your current subscription.'
+        - url: https://www.expressvpn.com/support/manage-account/upgrade-downgrade-subscription/
+          quote: 'Your new plan will be charged and a new billing cycle will begin at the next renewal date.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Outside the US, a dispute goes to the courts of the British Virgin Islands, where it’s based, not to a private referee.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'If you are not a resident of the United States, you agree that any dispute or claim arising out of or in connection with the Terms, the Agreement, or the Services shall be subject to the exclusive jurisdiction of the courts of the British Virgin Islands, and you hereby submit to the personal jurisdiction of such courts.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      regions: [US]
+      tier: poor
+      reason: 'In the US a dispute goes to a private referee (arbitration), not a court, and you can’t join a class action. You can opt out only in writing within 30 days of first using it.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'You agree that any dispute or claim of any kind whatsoever between you and ExpressVPN, regardless of when the dispute or claim arose or has arisen, will be decided by a binding arbitration administered by the American Arbitration Association'
+        - url: https://www.expressvpn.com/tos
+          quote: 'YOU AND EXPRESSVPN MAY NOT BRING CLAIMS AGAINST THE OTHER AS A PLAINTIFF OR CLASS MEMBER IN ANY CLASS OR REPRESENTATIVE ACTION.'
+        - url: https://www.expressvpn.com/tos
+          quote: 'You may opt out of the Agreement to Arbitrate within 30 days after your first use of the Service or availability of this Agreement to Arbitrate, whichever is later, by sending written notice of your decision to opt out'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://www.expressvpn.com/tos
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It emails you about big changes to its terms, but doesn’t say how far ahead, and a change can start as soon as it’s posted.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'Notification on any material changes to the Terms will be provided to Subscribers through an email message sent to the email address you provide to us at sign up.'
+        - url: https://www.expressvpn.com/tos
+          quote: 'Unless otherwise stated, each update of the Terms comes into force as of the moment the amended Terms are published on the Site.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can close your account if it decides on its own that you misused it, or to protect itself, without a refund of time you paid for, and it doesn’t promise to warn you first.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'You agree that ExpressVPN may restrict access to any part of the Services, terminate your Account, or take any other legal measure provided by law, without providing a refund for Services already paid, if we believe at our absolute discretion that you have misused the Services.'
+        - url: https://www.expressvpn.com/tos
+          quote: 'We may impose usage or Service limits, suspend Services, terminate Accounts, or block certain kinds of usage at our sole discretion to protect ExpressVPN, Subscribers, or the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'It takes no rights over what you store or write: your password vault is yours, and you keep your rights in what you type into ExpressAI.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'Your Keys Data is your property.'
+        - url: https://app.expressai.com/terms
+          quote: 'You retain any rights you may have in the inputs you submit to the Service.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add or remove features, and says it will tell you ahead of big changes where it can.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'We reserve the right to modify the Services, including by adding and removing features, as part of our ongoing commitment to update and improve the Services for all users.'
+        - url: https://www.expressvpn.com/tos
+          quote: 'To the extent practicable, we will notify users in advance of any material changes to the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used. Only a dedicated IP address may be swapped for a new one after a month or two unused.'
+      pages: [https://www.expressvpn.com/tos]
+      lastVerified: 2026-11-19
+    - topic: legal.output-rights
+      tier: good
+      reason: 'It claims no ownership of what ExpressAI writes for you, though someone else may get a similar answer.'
+      sources:
+        - url: https://app.expressai.com/terms
+          quote: 'Subject to applicable law, ExpressVPN does not claim ownership of user inputs or AI-generated outputs.'
+        - url: https://app.expressai.com/terms
+          quote: 'You acknowledge and agree that AI-generated outputs may not be unique, may resemble content generated for other users, and do not constitute original or proprietary works attributable solely to you.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'You get a licence to use its apps that it can take back at any time, and its terms forbid taking the apps apart (reverse engineering) without saying where the law allows it.'
+      sources:
+        - url: https://www.expressvpn.com/tos
+          quote: 'Subject to your compliance with these Terms, ExpressVPN grants to you a worldwide, non-exclusive, non-sublicensable, fully revocable, and limited license to download and use the Services.'
+        - url: https://www.expressvpn.com/tos
+          quote: 'Modifying, distributing to unauthorized parties, reverse engineering, or otherwise using the Services in any way not expressly authorized by ExpressVPN in these Terms is strictly prohibited.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: great
+      reason: 'Outside firms such as Cure53 and KPMG check its apps, servers and no-logs promise often, and it posts their reports. It pays people who find security bugs, and publishes the problems it fixed.'
+      sources:
+        - url: https://www.expressvpn.com/trust
+          quote: 'We’re committed to commissioning in-depth third-party audits of our products with great frequency.'
+        - url: https://www.expressvpn.com/trust
+          quote: 'Through our bug bounty program, we invite security researchers to test our systems and receive financial rewards for any problems they find.'
+        - url: https://www.expressvpn.com/trust
+          quote: 'A Windows app audit to confirm remediation of a DNS issue related to split tunneling (April 2024)'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: neutral
+      reason: 'For each user it notes which days you connected (not the time), to which VPN location, from which country and internet provider (not your IP address), and how much data you used. KPMG checked its no-logs safeguards in 2025.'
+      sources:
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'As you use the App, we collect information about whether you have successfully established a VPN connection on a particular day (but not a specific time of the day), to which VPN location (but not your assigned outgoing IP address), and from which country/ISP (but not your source IP address).'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'We collect information regarding the total sum of data transferred by a given user.'
+        - url: https://www.expressvpn.com/blog/kpmg-2025-no-logs-policy-audit/
+          quote: 'KPMG provided reasonable assurance that our systems functioned as designed, with no identified issues regarding our technical safeguards against activity logging'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: good
+      reason: 'One subscription covers up to 10, 12 or 14 devices at once, and it says you can use them across your household.'
+      sources:
+        - url: https://www.expressvpn.com/features/how-many-devices-can-i-connect
+          quote: 'One ExpressVPN subscription covers up to 14 active devices, making it easy to share protection with your whole household.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: great
+      reason: 'There’s no limit beyond how many devices connect at once: disconnect one to use another. Its password vault syncs to any number of devices.'
+      sources:
+        - url: https://www.expressvpn.com/support/knowledge-hub/simultaneous-connections/
+          quote: 'If you have reached the connection limit and want to connect on another device, disconnect a connected device.'
+        - url: https://www.expressvpn.com/support/knowledge-hub/what-is-expresskeys/
+          quote: 'Multi-device sync: Access your vault on an unlimited number of devices.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its Windows and Mac apps update themselves, with a setting to switch that off.'
+      sources:
+        - url: https://www.expressvpn.com/support/knowledge-hub/download-update-expressvpn-app/
+          quote: 'The ExpressVPN app for Mac and Windows includes an auto-update feature.'
+        - url: https://www.expressvpn.com/support/knowledge-hub/download-update-expressvpn-app/
+          quote: 'To check if it’s enabled, click Profile and, under Settings, scroll to find the Enable Auto-update toggle.'
+      lastVerified: 2026-11-19

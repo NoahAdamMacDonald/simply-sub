@@ -329,6 +329,38 @@
   category: vpn
   type: boolean
   aliases: [no email signup, account number]
+# The VPN category's added comparison (the owner's design, 2026-11-13), filled 2026-11-19 for every plan with a VPN
+# from its provider's own pages.
+# - Monthly VPN data: the most a plan's VPN carries in a month before it stops or slows down, in GB of 1,000 MB, as its
+#   pages give it: `unlimited` where they say there's no limit (every plan with vpn.unlimited-traffic); a daily limit
+#   times 30 days (Bitdefender's 200 MB a day is 6, inferred); data after which the VPN slows down counts (Malwarebytes'
+#   10 GB). A plan whose pages give no figure (a limit unnamed, or nothing said) leaves it out.
+# - RAM-only servers: its provider says its VPN servers run from memory with no disks (Mullvad's "run from RAM",
+#   Malwarebytes' "diskless servers"), all of them; full-disk encryption isn't it.
+# - Connects your own devices: the VPN links your own devices to each other directly (meshnet, a tailnet), not a router
+#   that puts a home network on the VPN or one device sharing its connection.
+- id: vpn.data-allowance
+  parent: vpn.included
+  name: Monthly VPN data
+  category: vpn
+  type: number
+  unit: GB a month
+  tiers:
+    - { id: 2+, name: 2 GB or more, min: 2 }
+    - { id: 10+, name: 10 GB or more, min: 10 }
+  aliases: [data limit, traffic limit]
+- id: vpn.ram-only-servers
+  parent: vpn.included
+  name: RAM-only servers
+  category: vpn
+  type: boolean
+  aliases: [diskless servers, trustedserver]
+- id: vpn.mesh
+  parent: vpn.included
+  name: Connects your own devices
+  category: vpn
+  type: boolean
+  aliases: [mesh network, meshnet, tailnet]
 
 # ── Storage ────────────────────────────────────────────────────────────────────
 - id: storage.cloud
