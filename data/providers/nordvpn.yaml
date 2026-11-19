@@ -231,6 +231,25 @@ perks:
 # "Cross-platform password manager" (NordPass), "1 TB of encrypted cloud storage" (NordLocker) and "Dark Web Monitor
 # Pro™"; every plan has "Dark Web Monitor™" ("Monitor up to 5 emails"). Categories (M11.3): Basic is a VPN; Complete and
 # up are also an antivirus (security), a password manager (passwords) and cloud storage (storage).
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada (nordvpn.com/pricing) and in NordPass's help centre, for Complete
+# and up's NordPass and NordLocker:
+# - NordPass imports other managers' files ("LastPass: CSV", "Keeper: CSV, JSON", "Bitwarden: CSV, JSON" and more;
+#   KeePass's as "CSV, XML", not .kdbx) and, on iOS, by the Credential Exchange ("For apps that don’t support CXP, use
+#   the NordPass browser extension to import a CSV file."), How to import passwords to NordPass. It exports "the .CSV
+#   file" (How to export passwords from NordPass?).
+# - Offline: "you can still access your items with Offline Mode even if you are not connected to a network" (How to use
+#   Offline Mode).
+# - Emergency access and the authenticator, inferred: they're Premium's ("The Premium version also offers additional
+#   security features, such as:" "Authenticator" and "Emergency Access", Premium vs Free version of NordPass), and the
+#   plans' password manager "Syncs and backs up passwords across all your devices automatically." (the pricing page's
+#   comparison), where "NordPass Free: This version only allows users to have one active session on one device." No page
+#   names the NordPass plan included (notes.md). Its authenticator takes a code or a QR code ("Alternatively, if you are
+#   using a mobile application, tap the “Scan QR code” button", How to use NordPass Authenticator); no export of the
+#   codes is named.
+# - End-to-end: NordPass ("With zero-knowledge architecture, you're the only one who can see what's in your vault", What
+#   is a zero-knowledge architecture?) and NordLocker ("Secures all types of files with end-to-end encryption and keeps
+#   them handy in a private, zero-knowledge cloud.", the pricing page).
 plans:
   - id: nordvpn.basic
     name: Basic
@@ -453,8 +472,28 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [files, passwords]
       storage.cloud: 1000
       security.dark-web-monitoring: true
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     notes: 'The VPN with a next-gen antivirus (desktop only), scam protection for email, calls and texts, a password manager, 1 TB of encrypted cloud storage and Dark Web Monitor Pro. In the US it also monitors your bank and card transactions.'
     addOnIds: [nordvpn.dedicated-ip]
     prices:
@@ -655,9 +694,29 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [files, passwords]
       storage.cloud: 1000
       security.dark-web-monitoring: true
       security.data-exposure: [removal]
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     notes: 'Complete plus Incogni Standard, which asks data brokers and people search sites to remove your personal data.'
     addOnIds: [nordvpn.dedicated-ip]
     prices:
@@ -739,11 +798,31 @@ plans:
       antivirus.vulnerability-scan: true
       antivirus.scam-protection: [web, email, sms, calls]
       password-manager: true
+      password-manager.import: [csv, json, cxf, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [files, passwords]
       storage.cloud: 1000
       security.dark-web-monitoring: true
       security.identity-theft-insurance: 1
       security.credit-monitoring: 1
       security.identity-restoration: true
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     perks:
       [
         credit-freeze-assistance,
@@ -778,6 +857,19 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features: *complete
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     perks: [dedicated-ip, cyber-insurance]
     notes: 'Complete plus a dedicated IP address and cyber insurance for scam losses and identity theft recovery (up to £5,000 in the UK).'
     prices:
@@ -851,6 +943,19 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features: *complete
+    inferred:
+      authenticator.included:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has the Authenticator.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
+      password-manager.emergency-access:
+        reason: 'No page names the NordPass plan included. Its comparison says the password manager syncs across all your devices, which NordPass Free doesn’t (one active session on one device), so it’s taken to be NordPass Premium, which has Emergency Access.'
+        page:
+          name: 'NordVPN pricing'
+          url: https://nordvpn.com/pricing/
+        lastVerified: 2026-11-19
     perks: [dedicated-ip]
     notes: 'Complete plus a dedicated IP address.'
     prices:

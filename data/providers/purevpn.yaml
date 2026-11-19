@@ -176,6 +176,15 @@ perks:
 # Credit Cards, Bank Accounts, Crypto Wallets, WiFi Passwords, Passports, Secure Notes" and "Check your passwords for
 # strength and vulnerability" (weak), with a "breach scanner that tells you if your passwords are exposed" (the pricing
 # page's Max section: breached). No page describes sharing. Categories (M11.3): Plus and Max are also password managers.
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada, for its password manager on Plus and Max:
+# - Imports a CSV file ("Open PureVPN Password Manager, upload your CSV file, and your credentials will be encrypted and
+#   organized in your vault."), a browser's ("Most browsers allow you to export saved passwords as a CSV file."), on its
+#   blog (How to Save All Your Passwords in One Place), whose table also gives "Offline mode Yes" and "Import/export
+#   Supported": no page names the export's format, so password-manager.export is left out (notes.md).
+# - No emergency access and no authenticator on its password manager page (/password-manager) or that blog post.
+# - End-to-end: "Zero-Knowledge Architecture" ("Your data stays private – only you can access your passwords. We can’t
+#   see or retrieve any of your stored information.", /password-manager).
 plans:
   - id: purevpn.standard
     name: Standard
@@ -239,6 +248,11 @@ plans:
       password-manager.item-types:
         [login, credit-card, bank-account, crypto-wallet, wifi, passport, secure-note]
       password-manager.health: [weak, breached]
+      password-manager.import: [csv, other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
     notes: 'Standard with its password manager (Android, iOS, Windows, macOS and the web). The 2-year and 5-year deals renew at $69.95 a year, as the 1-year plan does.'
     prices:
       - region: GLOBAL
@@ -283,6 +297,11 @@ plans:
       password-manager.item-types:
         [login, credit-card, bank-account, crypto-wallet, wifi, passport, secure-note]
       password-manager.health: [weak, breached]
+      password-manager.import: [csv, other-managers]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
     perks: [esim]
     notes: 'Plus with Data Removal (requests to data brokers on your behalf) and fuller dark web monitoring (phone, card, passport and ID numbers, with breach details), and eSIM data from Truely. The 2-year and 5-year deals renew at $84.95 a year.'
     prices:

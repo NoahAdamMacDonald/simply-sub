@@ -227,6 +227,11 @@ features:
   support.channels: [email, community]
   languages.interface: [en, fr, es, de, pt, ja, ko, zh, hi]
 
+# End-to-end encryption (the owner's design, categories.md), read 2026-11-19 with Edge from Canada in X's help centre
+# (About Chat): X's Chat is its "encrypted direct messaging feature, using end-to-end encryption to keep messages
+# secure", for every X account (who can reach you depends on follows and earlier chats, not on the plan), so every plan
+# has messages. Its limits: "Message requests are unencrypted until the user accepts the request", and "this
+# implementation is not “forward secure.”"
 plans:
   - id: x-subscription.free
     name: Free
@@ -249,6 +254,7 @@ plans:
       developer.extensions: [open-vsx, own]
       social.protocol: []
       ad-free: false
+      encryption.end-to-end: [messages]
     inferred:
       ai.projects:
         reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a paid plan."
@@ -290,6 +296,7 @@ plans:
       social.verification: true
       social.edit-posts: true
       ad-free: false
+      encryption.end-to-end: [messages]
     inferred:
       ai.projects:
         reason: "Grok's FAQ names Projects as one of grok.com's features, and no page limits it to a plan."
@@ -503,6 +510,7 @@ plans:
       social.verification: true
       social.edit-posts: true
       ad-free: false
+      encryption.end-to-end: [messages]
     featureLabels:
       ai.model-choice: Third-party models in Cursor at API list price, billed separately
     inferred:
@@ -728,6 +736,7 @@ plans:
       social.verification: true
       social.edit-posts: true
       ad-free: false
+      encryption.end-to-end: [messages]
     featureLabels:
       ai.model-choice: Third-party models in Cursor at API list price, billed separately
     inferred:
@@ -955,6 +964,7 @@ plans:
       social.verification: true
       social.edit-posts: true
       ad-free: false
+      encryption.end-to-end: [messages]
     featureLabels:
       ai.model-choice: Third-party models in Cursor at API list price, billed separately
     inferred:

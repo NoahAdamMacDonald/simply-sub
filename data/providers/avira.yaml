@@ -211,6 +211,18 @@ perks:
 # (en/antivirus-pro), is the free version's: "With the free versions of Avira Phantom VPN, you are restricted to 500
 # MB/month of data, or 1 GB/month if you register" (en/vpn-pro), so 0.5 too (1 GB once registered: notes.md). No page
 # read mentions RAM-only servers or a way to connect your own devices to each other, so both are false.
+# The password and authenticator features added 2026-11-19 (the owner's design, categories.md), read that day with Edge
+# from Canada (avira.com/en/password-manager) and in its help centre, for its password manager on every plan with it:
+# - "Avira Password Manager lets you import or export data from or to other password manager apps." and "The data is
+#   exported as a CSV file and is unencrypted." (Export or import data from Avira Password Manager); "Export your
+#   passwords into a CSV file from any password manager or browser and import them on Avira Password Manager." (its
+#   page). No emergency access or offline vault on the pages read (its page; Versions of Avira Password Manager).
+# - Authenticator: "Includes mobile authenticator" ("use Password Manager to securely generate codes to protect your
+#   online accounts", its page). No page says how codes are added: a QR code or setup key is inferred; no export of them
+#   is named.
+# - No end-to-end encryption in its words: "All passwords and data are encrypted on the user's side before they are sent
+#   to Avira‘s servers." (Avira Passwort Manager provides highest security), but no page says end-to-end or
+#   zero-knowledge, so it's left out (notes.md).
 plans:
   # Free Security (its page, en/free-security): antivirus, anti-ransomware, browser protection, a software updater, a
   # home network scan, a password manager, a shredder, speed-up tools and the free Phantom VPN (500 MB a month).
@@ -234,10 +246,23 @@ plans:
       security.file-shredder: true
       password-manager: true
       password-manager.item-types: [login]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.data-allowance: 0.5
       vpn.ram-only-servers: false
       vpn.mesh: false
+    inferred:
+      authenticator.import:
+        reason: 'No page says how codes are added. Its mobile authenticator makes the codes for other sites’ two-factor sign-in, which sites hand over as a QR code or a setup key.'
+        page:
+          name: 'Avira Password Manager'
+          url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
     notes: 'Free: real-time antivirus with ransomware and phishing protection, a software updater, a password manager, a file shredder, speed-up tools and a VPN with 500 MB a month (1 GB if you register).'
     prices:
       - region: GLOBAL
@@ -269,12 +294,25 @@ plans:
       security.file-shredder: true
       password-manager: true
       password-manager.item-types: [login]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.data-allowance: 0.5
       vpn.ram-only-servers: false
       vpn.mesh: false
       antivirus.devices: 1
       platforms: [windows, macos]
+    inferred:
+      authenticator.import:
+        reason: 'No page says how codes are added. Its mobile authenticator makes the codes for other sites’ two-factor sign-in, which sites hand over as a QR code or a setup key.'
+        page:
+          name: 'Avira Password Manager'
+          url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
     notes: 'Antivirus for 1 Windows PC or Mac, with a firewall on Windows, scheduled scans, phishing protection and the free VPN (500 MB a month).'
     prices:
       - region: CA
@@ -476,8 +514,21 @@ plans:
       password-manager: true
       password-manager.item-types: [login]
       password-manager.health: [breached, weak, reused]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       antivirus.devices: 1
       platforms: [windows]
+    inferred:
+      authenticator.import:
+        reason: 'No page says how codes are added. Its mobile authenticator makes the codes for other sites’ two-factor sign-in, which sites hand over as a QR code or a setup key.'
+        page:
+          name: 'Avira Password Manager'
+          url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
     notes: 'Antivirus Pro for 1 Windows PC, plus Password Manager Pro with breach and weak-password alerts, automatic software and driver updates, and alerts when your data leaks.'
     prices:
       - region: CA
@@ -681,6 +732,12 @@ plans:
       password-manager: true
       password-manager.item-types: [login]
       password-manager.health: [breached, weak, reused]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -692,6 +749,13 @@ plans:
       vpn.mesh: false
       antivirus.devices: 5
       includes-subscription: [avira.internet-security, avira.phantom-vpn-pro]
+    inferred:
+      authenticator.import:
+        reason: 'No page says how codes are added. Its mobile authenticator makes the codes for other sites’ two-factor sign-in, which sites hand over as a QR code or a setup key.'
+        page:
+          name: 'Avira Password Manager'
+          url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
     perks: [safe-shopping, vip-support]
     notes: 'Every Avira app on up to 5 PCs, Macs, phones or tablets: Internet Security, the unlimited Phantom VPN Pro, System Speedup Pro and the premium mobile apps.'
     prices:
@@ -895,6 +959,12 @@ plans:
       password-manager: true
       password-manager.item-types: [login]
       password-manager.health: [breached, weak, reused]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -906,6 +976,13 @@ plans:
       vpn.mesh: false
       antivirus.devices: 25
       includes-subscription: [avira.internet-security, avira.phantom-vpn-pro]
+    inferred:
+      authenticator.import:
+        reason: 'No page says how codes are added. Its mobile authenticator makes the codes for other sites’ two-factor sign-in, which sites hand over as a QR code or a setup key.'
+        page:
+          name: 'Avira Password Manager'
+          url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
     perks: [safe-shopping, vip-support]
     notes: 'Prime on up to 25 devices.'
     prices:
