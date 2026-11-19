@@ -1,0 +1,739 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1). vpn.mozilla.org redirects to
+# www.mozilla.org/products/vpn/, whose pricing block prices by where the visitor is: read with Edge and a plain fetch
+# from Canada (en-CA, "US$9.99/month + tax", the page's data "data-country-code="CA"" and "'currency' : 'USD'"), and
+# with Edge (the page) and a plain fetch (its data) through a US, UK, Irish, Australian, New Zealand, German, French,
+# Dutch, Spanish and Italian exit (en-US, or en-GB where its US-dollar prices read "US$"). Each country's data names the
+# country (data-country-code) and the currency: USD in the US, Canada, the UK and New Zealand, EUR in the euro
+# countries. Australia's block shows A$ prices with "Sign up for a Mozilla VPN subscription on your mobile device" and
+# app store links instead of the web checkout: Australians buy it in Apple's and Google's stores. Its features, download
+# page, terms and privacy notices with a plain fetch from Canada.
+# Regular prices: each country's Monthly card ("US$9.99/month + tax") and Annual card ("US$4.99/month + tax", "Save
+# 50%", "US$59.88 total + tax"). The yearly price is the plan's own, not a first-term offer: no page says the first
+# year renews at another price, and the page's data gives the yearly plan's "discount" as 60.00, the saving on twelve
+# months (12 × 9.99 = 119.88). The checkout's "renews at" line couldn't be read: payments.firefox.com hands off to
+# accounts.firefox.com, which showed a CAPTCHA (not solved), notes.md. Canada's and the US's cards say "+ tax"; the
+# other countries' cards say nothing of tax, so no price is tax-included.
+# Where it's sold: its terms' list, below (availableIn).
+# Region checklist for CA and US, 2026-11-19: 1. hreflang links name languages (en-CA, en-US, en-GB...), and a locale
+# doesn't change the price ("?geo=" didn't either); 2. no country or currency picker; 3. its pricing data names the
+# country and currency (data-country-code="CA", 'currency' : 'USD'); 4. the checkout hands off to a sign-in page behind
+# a CAPTCHA: not opened further; 5. its help centre (support.mozilla.org) showed a CAPTCHA to Edge, a plain fetch and
+# Mullvad Browser, and the Internet Archive answered 429; 6. Edge, a plain fetch, and each country's exit; 7. no bill
+# offered.
+# Bundles: Firefox Relay's premium page sells "Limited-time only: Relay Premium + Mozilla VPN for $6.99/month" ($83.88
+# billed yearly): a limited-time deal with Firefox Relay, which isn't in the catalog yet, so it waits (notes.md).
+# Mozilla Monitor is free now ("We offer Mozilla Monitor as a free service", its terms). Official resellers: none; no
+# page names a shop. Partners, not listed: Mullvad runs its servers ("Mozilla VPN is a Virtual Private Network in
+# partnership with Mullvad"), and Apple's App Store and Google Play bill it in the apps (a way to pay).
+# Free use: none ("We only offer Mozilla VPN as a paid subscription service.", its terms).
+
+# Coverage: mozilla-vpn.* in AT, BD, BE, BR, BG, CL, CO, HR, CY, CZ, DK, EG, EE, FI, GR, HU, IN, ID, KE, LV, LT, LU,
+# MY, MT, MX, MA, NG, NO, PL, PT, RO, SA, SN, SK, SI, SG, ZA, KR, SE, CH, TW, TH, TR, UG, UA and VN: sold there (its
+# terms' list), but only the research regions (CA, US, GB, IE, AU, NZ, DE, FR, NL, ES, IT) were read, each through its
+# own country's exit, since the page prices by where the visitor is (read 2026-11-19).
+
+id: mozilla-vpn
+name: Mozilla VPN
+aliases: [firefox vpn, mozilla vpn]
+website: https://vpn.mozilla.org
+# vpn.mozilla.org redirects to www.mozilla.org/products/vpn/, and its terms, privacy notices, help centre and blog are
+# on mozilla.org's subdomains.
+domains: [mozilla.org]
+category: vpn
+spendCategory: software
+# "You must be in a country where the Service is available to download Mozilla VPN and use the Service. Currently, the
+# Service is available in Australia, Austria, Bangladesh, Belgium, Brazil, Bulgaria, Canada, Chile, Colombia, Croatia,
+# Cyprus, Czech Republic, Denmark, Egypt, Estonia, Finland, France, Germany, Greece, Hungary, India, Indonesia, Ireland,
+# Italy, Kenya, Latvia, Lithuania, Luxembourg, Malaysia, Malta, Mexico, Morocco, the Netherlands, New Zealand, Nigeria,
+# Norway, Poland, Portugal, Romania, Saudi Arabia, Senegal, Slovakia, Slovenia, Singapore, South Africa, South Korea,
+# Spain, Sweden, Switzerland, Taiwan, Thailand, Türkiye, Uganda, Ukraine, the United Kingdom, the United States, and
+# Vietnam." (Mozilla Subscription Services terms, effective September 16, 2026, read 2026-11-19.) Its help centre's
+# country article, which marks some countries mobile-only, couldn't be read (a CAPTCHA, notes.md).
+availableIn:
+  [
+    AU,
+    AT,
+    BD,
+    BE,
+    BR,
+    BG,
+    CA,
+    CL,
+    CO,
+    HR,
+    CY,
+    CZ,
+    DK,
+    EG,
+    EE,
+    FI,
+    FR,
+    DE,
+    GR,
+    HU,
+    IN,
+    ID,
+    IE,
+    IT,
+    KE,
+    LV,
+    LT,
+    LU,
+    MY,
+    MT,
+    MX,
+    MA,
+    NL,
+    NZ,
+    NG,
+    NO,
+    PL,
+    PT,
+    RO,
+    SA,
+    SN,
+    SK,
+    SI,
+    SG,
+    ZA,
+    KR,
+    ES,
+    SE,
+    CH,
+    TW,
+    TH,
+    TR,
+    UG,
+    UA,
+    GB,
+    US,
+    VN,
+  ]
+# Each country's pricing data names its currency: US dollars in Canada, the US, the UK and New Zealand, euros in the
+# euro countries read, Australian dollars in Australia (the app stores' price there).
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: USD,
+    NZ: USD,
+    AU: AUD,
+    IE: EUR,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+  }
+# Its terms say how to cancel ("going to the Subscriptions & Payments section of your Mozilla account and clicking
+# “Cancel.”"); the help centre's cancel article couldn't be read (a CAPTCHA).
+cancelUrl: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+sources: { pricing: https://www.mozilla.org/products/vpn/ }
+
+# Ways to pay (M11.5), read 2026-11-19: its subscription privacy notice names "Stripe, Apple, PayPal, or Google Pay"
+# (Stripe is a processor, and "Apple" doesn't say whether it means Apple Pay or the App Store), and its terms Apple's
+# and Google's in-app purchases. No page read names a card or its networks (the checkout and the help centre's payment
+# article are behind a CAPTCHA), so no card and no acceptedNetworks (notes.md).
+paymentMethods:
+  - methods: [paypal, google-pay]
+    page: 'Mozilla Subscription Services Privacy Notice'
+    url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+    quotes:
+      - 'When you subscribe to services that require a paid subscription, you will send payment through one of our third-party payment providers: Stripe, Apple, PayPal, or Google Pay.'
+  - methods: [app-store]
+    page: 'Mozilla Subscription Services Terms of Service'
+    url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+    quotes:
+      - 'Purchasing through Apple or Google App Stores. If you purchased your subscription through in-app purchase from the Apple App Store or the Google Play Store, your payment is subject to the terms and conditions of the applicable app store.'
+
+# Renewal day (M11.5), read 2026-11-19: its terms say only "Your plan renews automatically at the end of each term", no
+# day; its help centre's billing articles couldn't be read (a CAPTCHA).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+  lastVerified: 2026-11-19
+
+# Owner (M11.2), read 2026-11-19: its terms name Mozilla Corporation as the company that offers it, and Mozilla's
+# governance page says whose it is: "The Mozilla Corporation , a wholly owned subsidiary of the Mozilla Foundation"
+# (/about/governance/organizations/), a non-profit ("the non-profit Mozilla Foundation"). Not listed: no stock. Country:
+# its Mozilla accounts privacy notice.
+owner:
+  name: Mozilla Corporation
+  page:
+    name: Mozilla Subscription Services Terms of Service
+    url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+  quotes:
+    - 'Mozilla Corporation offers various services to improve your privacy and security online, including Mozilla VPN and Firefox Relay (the “Services”).'
+  country:
+    code: US
+    page:
+      name: Mozilla Accounts Privacy Notice
+      url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+    quotes:
+      - 'Mozilla Corporation (and our servers) are based in the United States.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  Runs on Mullvad's servers: Mozilla sells it and runs the apps and accounts, and Mullvad carries the traffic. You
+  need a Mozilla account. Prices are in US dollars in Canada, the UK and New Zealand, plus sales tax in Canada and the
+  US; in Australia it's sold only in the app stores.
+
+# General features, read 2026-11-19:
+# - Platforms: "Supported on Windows, macOS, Android, iOS and Linux operating systems." (features page), and the
+#   download page's "Install Firefox extension" ("Windows 10/11 (64-bit only)"): browser-extension.
+# - Sign-in: a Mozilla account with a password ("During registration, you will be asked to set a password.", Mozilla
+#   Accounts Terms of Service). No page read names its two-step sign-in (the help centre's articles are behind a
+#   CAPTCHA), so only password.
+# - App languages: the product page's language versions and picker (English, Français, Español, Deutsch, Italiano,
+#   Português, 日本語, 한국어, 中文, हिन्दी, عربي among some sixty).
+# - Support: "Plus 24/7 customer support." (features page) and "Please visit our forums for general support help."
+#   (its privacy notice): community and around the clock; no page read names email or chat.
+# - Open source: "Mozilla VPN is made with open-source code, meaning that all the code is publicly accessible."
+#   (features page), linking github.com/mozilla-mobile/mozilla-vpn-client, and its terms: "The Mozilla VPN software is
+#   made available to you under the terms of various open source licenses, including the Mozilla Public License." Its
+#   servers are Mullvad's, whose server code isn't published, so open-clients (Mullvad's precedent).
+# - No pause: its terms offer only cancelling. No parental controls: its ad and malware blocking is a setting you
+#   choose.
+features:
+  platforms: [windows, macos, linux, ios, android, browser-extension]
+  account.sign-in: [password]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+  support.channels: [community, 24-7]
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/mozilla-mobile/mozilla-vpn-client
+  page:
+    name: Features - Mozilla VPN
+    url: https://www.mozilla.org/en-CA/products/vpn/features/
+  quotes:
+    - 'Mozilla VPN is made with open-source code, meaning that all the code is publicly accessible.'
+  lastVerified: 2026-11-19
+
+# Perks (M11.6): lines on its features page no feature describes.
+perks:
+  - id: firefox-site-settings
+    name: Website-specific VPN settings in Firefox (Windows)
+  - id: custom-dns
+    name: Support for custom DNS
+
+# Free use: none (its terms: "We only offer Mozilla VPN as a paid subscription service."). A 30-day money-back
+# guarantee for first-time subscribers isn't free use.
+freeUse:
+  kind: none
+  pages:
+    - https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+    - https://www.mozilla.org/en-CA/products/vpn/
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19 on its features page unless named:
+# - Mullvad's servers: "Mozilla VPN is a Virtual Private Network in partnership with Mullvad . It keeps your internet
+#   traffic private from your internet service provider by encrypting and routing it through our partner’s networks
+#   instead." (its terms); the features page's "See our list of servers." links mullvad.net/servers/.
+# - Devices: "Device Limit. When your subscription is active, you can connect up to 5 devices to Mozilla VPN." (terms).
+# - Unlimited traffic: "No bandwidth restrictions or throttling" and "Including no data cap or speed limit.", so its
+#   monthly VPN data is unlimited.
+# - Server countries: "More than 500 servers in 30+ countries": 30, the figure it gives (its server-list link is
+#   Mullvad's list of every Mullvad server, not Mozilla VPN's, notes.md).
+# - Protocols: "Mozilla VPN uses Wireguard ™, one of the most performant VPN protocols." No other protocol or
+#   obfuscation on any page read.
+# - Split tunnelling: "Easily exclude apps from VPN protection ... Available in Windows, Android and Linux devices."
+# - Multi-hop: "Our multi-hop feature gives you an extra security boost."
+# - Content blocking: "Mozilla VPN helps you automatically block ads and ad trackers from seeing your online
+#   activity." and "Mozilla VPN prevents you from downloading malware from known unsafe sources."
+# - No-logs: "We never log, track or share your network data", and "No logs of your network activity are maintained by
+#   either Mozilla nor our partner Mullvad when you’re using the Mozilla VPN service in any circumstance." (privacy
+#   notice). Its server logs keep your IP address for 90 days (privacy notice): service.activity-logging grades that.
+# - Audits: apps only. Cure53's "Pentest-Report Mozilla VPN Apps & Clients 03.2021" (the report its features page
+#   links, read with pdftotext) tested the macOS, Linux, Windows, iOS and Android apps, as did its first review in
+#   August 2020; no audit of Mozilla's servers or of the no-logs promise. Mullvad's audits are Mullvad's.
+# - Not anonymous: "These services require a Mozilla account, which sends Mozilla your email address, locale, and IP
+#   address." (privacy notice).
+# - The VPN batch's new features: no Mozilla page says its servers run from memory only (Mullvad's own pages do, but
+#   they're Mullvad's), so vpn.ram-only-servers is false; nothing connects your own devices to each other (vpn.mesh
+#   false).
+# - No page read offers a kill switch, port forwarding, Tor over VPN or a P2P policy, so they're left out.
+# Speeds: "Fast network speeds even while gaming" (features page), no figure.
+plans:
+  - id: mozilla-vpn.vpn
+    name: Mozilla VPN
+    link: https://www.mozilla.org/products/vpn/
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 30
+      vpn.protocols: [wireguard]
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [apps]
+      vpn.anonymous-signup: false
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      account.pause: false
+      account.parental-controls: false
+    perks: [firefox-site-settings, custom-dns]
+    notes: '5 devices on Mullvad’s servers in more than 30 countries. The yearly plan costs half the monthly price over a year. In Australia you subscribe in its mobile app.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-CA/products/vpn/
+      - region: CA
+        currency: USD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-CA/products/vpn/
+      - region: US
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: US
+        currency: USD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: GB
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-GB/products/vpn/
+      - region: GB
+        currency: USD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-GB/products/vpn/
+      - region: NZ
+        currency: USD
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-GB/products/vpn/
+      - region: NZ
+        currency: USD
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-GB/products/vpn/
+      - region: AU
+        currency: AUD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-GB/products/vpn/
+      - region: AU
+        currency: AUD
+        amount: 89.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-GB/products/vpn/
+      - region: IE
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: IE
+        currency: EUR
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: DE
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: DE
+        currency: EUR
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: FR
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: FR
+        currency: EUR
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: NL
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: NL
+        currency: EUR
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: ES
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: ES
+        currency: EUR
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: IT
+        currency: EUR
+        amount: 9.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+      - region: IT
+        currency: EUR
+        amount: 59.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.mozilla.org/en-US/products/vpn/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch. Every agreement a user accepts (the owner's
+# rule, 2026-11-03): the Mozilla Subscription Services Terms of Service (Mozilla VPN's, with its licence: "The Mozilla
+# VPN software is made available to you under the terms of various open source licenses"), which include Mozilla's
+# Acceptable Use Policy ("you also agree that your use of the Services will comply with Mozilla’s Acceptable Use
+# Policy", read: rules of use, no topic) and need a Mozilla account, under the Mozilla Accounts Terms of Service and
+# Privacy Notice; the Mozilla Subscription Services Privacy Notice, which adheres to the Mozilla Privacy Policy ("We
+# also adhere to the Mozilla Privacy Policy"); and the Websites, Communications & Cookies Privacy Notice for its pages.
+# Also read: its features page, Cure53's audit (the Mozilla blog's post, the security blog's post and the report),
+# Mozilla's security advisories, its bug bounty pages (the client bounty names Firefox's apps, the web bounty's eligible
+# sites name no VPN site), its transparency page and governance page. Not read: the sign-up form and checkout
+# (accounts.firefox.com showed a CAPTCHA) and its help centre (support.mozilla.org showed a CAPTCHA to Edge, a plain
+# fetch and Mullvad Browser; the Internet Archive answered 429), notes.md. No shared document applies (data/policies/
+# has none of Mozilla's); Mozilla's privacy policy and accounts documents would be one when Firefox or Relay joins.
+# Billing topics: one paid plan, so switching plans doesn't apply. Not applicable (vpn isn't in their categories): who
+# can read your content, rights over your content, children, account sharing.
+policies:
+  links:
+    - name: 'Mozilla Subscription Services Terms of Service'
+      url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+    - name: 'Mozilla Subscription Services Privacy Notice'
+      url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+    - name: 'Mozilla Privacy Policy'
+      url: https://www.mozilla.org/en-CA/privacy/
+    - name: 'Mozilla Accounts Terms of Service'
+      url: https://www.mozilla.org/en-CA/about/legal/terms/services/
+    - name: 'Mozilla Accounts Privacy Notice'
+      url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+    - name: 'Websites, Communications & Cookies Privacy Notice'
+      url: https://www.mozilla.org/en-CA/privacy/websites/
+    - name: 'Mozilla VPN product page'
+      url: https://www.mozilla.org/en-CA/products/vpn/
+    - name: 'Features - Mozilla VPN'
+      url: https://www.mozilla.org/en-CA/products/vpn/features/
+    - name: 'Mozilla VPN Security Audit (Mozilla Security Blog)'
+      url: https://blog.mozilla.org/security/2021/08/31/mozilla-vpn-security-audit/
+    - name: 'Mozilla Foundation Security Advisories'
+      url: https://www.mozilla.org/en-CA/security/advisories/
+    - name: 'Transparency'
+      url: https://www.mozilla.org/en-CA/about/policy/transparency/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Usage data from the VPN app is off unless you turn it on. But the app always sends its version and your device details to improve the service, and only your Mozilla account’s data collection has a setting to turn off.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'Interaction data collection is disabled by default.'
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'For VPN, Mozilla also receives information about the installed version of your Mozilla VPN client software, and the devices they are installed on, including their operating systems and hardware configuration. We use technical data to improve performance and stability for our users, and to measure the services’ performance.'
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'You can update your Mozilla accounts data collection settings at any time.'
+      action:
+        name: 'Your Mozilla account’s data settings'
+        url: https://support.mozilla.org/kb/firefox-accounts-managing-account-data
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'To see which of its ads work, it sends which ad you came from and your device details to Adjust, a marketing company, though not your IP address. Its privacy notice gives no way to turn this off.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'In addition, to help understand the effectiveness of our marketing campaigns, Mozilla may receive your IP address in addition to campaign data and referral data like what ad campaigns you engaged with and your operating system, device type, device identifiers, and operating system version.'
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'Mozilla shares this with Adjust, but we do not share or store your IP address.'
+      action:
+        name: 'Your privacy rights (its privacy notice)'
+        url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'No ads in the VPN. Its websites ask before setting any cookies beyond the ones they need, and Mozilla says it doesn’t follow you across other sites to target ads.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/products/vpn/
+          quote: 'In addition to Cookies necessary for this site to function, we’d like your permission to set some additional Cookies to better understand your browsing needs and improve your experience.'
+        - url: https://www.mozilla.org/en-CA/privacy/websites/
+          quote: 'Mozilla does not track users across third-party websites to provide targeted advertising.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy notices and privacy policy don’t mention AI training.'
+      pages:
+        [
+          https://www.mozilla.org/en-CA/privacy/subscription-services/,
+          https://www.mozilla.org/en-CA/privacy/mozilla-accounts/,
+          https://www.mozilla.org/en-CA/privacy/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it. Your IP address stays in its server logs for 90 days, and usage data generally up to 25 months.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'Across the services, your IP address is temporarily collected as part of our server logs for 90 days.'
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'We only retain your personal data for as long as necessary to fulfill the purposes outlined in this Privacy Notice.'
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'With regard to the technical, settings and interaction data we collect, we generally maintain this data for up to 25 months'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your Mozilla account yourself, or ask through its privacy portal to have your data deleted, but it doesn’t say how quickly that happens.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/services/
+          quote: 'You can choose to end them at any time for any reason by deleting your Mozilla account, discontinuing your use of the Services, and if applicable, unsubscribing from our emails.'
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'Have personal data we hold about you deleted (in certain circumstances)'
+      action:
+        name: 'How to ask for deletion (its privacy notice)'
+        url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask through its privacy portal for a copy of your data, which it answers as data protection laws require.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'Request portability of your data'
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'We respond to all requests we receive from individuals wishing to exercise their data protection rights in accordance with applicable data protection laws'
+      action:
+        name: 'How to ask for your data (its privacy notice)'
+        url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: great
+      reason: 'It hands data over only when the law requires it, tells you first unless a law forbids it, and publishes a report on requests twice a year. Neither it nor Mullvad keeps logs of what you do on the VPN.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/
+          quote: "We'll notify you when we're asked to hand over your personal information in this way unless we're legally prohibited from doing so. When we receive requests like this, we'll only release your personal information if we have a good faith belief that the law requires us to do so."
+        - url: https://www.mozilla.org/en-CA/about/policy/transparency/
+          quote: 'With this transparency in mind, we publish bi-annual transparency reports.'
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'No logs of your network activity are maintained by either Mozilla nor our partner Mullvad when you’re using the Mozilla VPN service in any circumstance.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Mozilla and its servers are in the US, and your data may go to other countries too, under safeguards such as the EU’s standard contract rules.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'Mozilla Corporation (and our servers) are based in the United States.'
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'Whenever data is transferred across international borders, we ensure we have appropriate mechanisms in place (such as standard contractual clauses approved by the European Commission and other relevant authorities) to protect your personal data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You need a Mozilla account with an email address and a password, and paying gives it your billing address and your card’s last four digits.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'These services require a Mozilla account, which sends Mozilla your email address, locale, and IP address.'
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'Mozilla receives a record of your account (including your billing address and the last four digits of your payment method) and the status of your account’s subscription.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel at any time, from your Mozilla account or a link in its emails, and keep using it until the end of the period you paid for.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'You can do this by clicking the “Cancel Subscription” link in any email that we send you about the Services or by going to the Subscriptions & Payments section of your Mozilla account and clicking “Cancel.”'
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'If you choose to cancel, auto-renewal will stop, we will not charge you for any future payment periods, and you will lose access to the Services at the end of the current billing cycle.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'The first time you subscribe on its website, you can get your money back if you cancel within 30 days. After that, or when you renew, there’s no refund, but you keep it until the period ends.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'The first time you subscribe to the Services through Mozilla’s website, if you cancel your account within the first 30 days, you may request a refund and Mozilla will refund your first subscription term. This offer only applies the first time you subscribe.'
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'you will lose access to the Services at the end of the current billing cycle'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms don’t say whether it tells you before raising the price.'
+      pages: [https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/]
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Its pages offer no free trial, only a 30-day money-back guarantee the first time you subscribe.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say the plan renews on its own at the end of each term, but not that it reminds you first.'
+      pages: [https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms say nothing about fees beyond the price.'
+      pages: [https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'There’s no private referee (arbitration): a dispute goes to court under California law, and it keeps any rights your own country’s laws give you.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'Choice of Law. California law applies to this contract, except for California’s conflict of law.'
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'You may have other rights under your own country’s laws. Nothing in these Terms of Service is intended to affect those rights, if they apply.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms by posting new ones on its site, and using the VPN after that means you accept them.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'We will post the updated Terms online. We will take your continued use of the Services as acceptance of such changes.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can end your access for any reason. Without a specific cause, you keep it until the period ends or get this month refunded; if it thinks you broke its rules, it can cut you off at once.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'Mozilla can suspend or end anyone’s access to the Services at any time for any reason, including if Mozilla decides to end the Services.'
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'If we terminate your access to the Services without specific cause, you will continue to have access to the Service for the current billing period or we will refund the current month.'
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'However, we reserve the right to terminate your use of the Service immediately if we reasonably believe you have violated the Conditions of Use, or have otherwise violated these Terms.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It may end the service at any time; if it does, you keep it until the period ends or get this month back.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'Mozilla can suspend or end anyone’s access to the Services at any time for any reason, including if Mozilla decides to end the Services.'
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'If we terminate your access to the Services without specific cause, you will continue to have access to the Service for the current billing period or we will refund the current month.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: neutral
+      reason: 'It deletes Mozilla accounts nobody has signed in to for more than two years, and tries to remind you first.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/mozilla-accounts/
+          quote: 'You should note that Mozilla periodically deletes accounts that have not been signed in for more than two years (we’ll use reasonable efforts to send you a reminder prior to taking this action).'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source, under the Mozilla Public License and others: anyone can read, change and share their code.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'The Mozilla VPN software is made available to you under the terms of various open source licenses, including the Mozilla Public License.'
+        - url: https://www.mozilla.org/en-CA/products/vpn/features/
+          quote: 'Mozilla VPN is made with open-source code, meaning that all the code is publicly accessible.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Security experts at Cure53 checked its apps and Mozilla published their report, and it posts the security fixes it makes to its VPN apps. No page read says its bug bounty pays for VPN bugs.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/products/vpn/features/
+          quote: 'We’ve been audited by Cure53, a leading cybersecurity auditing firm.'
+        - url: https://blog.mozilla.org/security/2021/08/31/mozilla-vpn-security-audit/
+          quote: 'To provide transparency into our ongoing efforts to protect your privacy and security on the Internet, we are releasing a security audit of Mozilla VPN that Cure53 conducted earlier this year.'
+        - url: https://www.mozilla.org/en-CA/security/advisories/
+          quote: 'MFSA 2025-48 Security Issue fixed in Mozilla VPN for macOS v2.28.0'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: poor
+      reason: 'Neither Mozilla nor Mullvad keeps logs of what you do on the VPN. But Mozilla keeps your IP address in its server logs for 90 days when you sign up and use it, and no outside audit has checked its no-logs promise.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'No logs of your network activity are maintained by either Mozilla nor our partner Mullvad when you’re using the Mozilla VPN service in any circumstance.'
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'Mozilla receives your IP address when you sign up for and use the service(s) and it is collected as part of our servers logs for 90 days'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit beyond the 5 devices its plan shows.'
+      pages: [https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/]
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms and pages read don’t say how its apps update or what they change on your device.'
+      pages:
+        [
+          https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/,
+          https://www.mozilla.org/en-CA/products/vpn/features/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Runs on Mullvad’s servers
+      tier: good
+      reason: 'Mozilla sells it, but your traffic goes through Mullvad’s VPN servers, and both companies say they keep no logs of what you do.'
+      sources:
+        - url: https://www.mozilla.org/en-CA/about/legal/terms/subscription-services/
+          quote: 'It keeps your internet traffic private from your internet service provider by encrypting and routing it through our partner’s networks instead.'
+        - url: https://www.mozilla.org/en-CA/privacy/subscription-services/
+          quote: 'When you activate Mozilla VPN, it will encrypt your internet traffic and send it to Mullvad.'
+      lastVerified: 2026-11-19
