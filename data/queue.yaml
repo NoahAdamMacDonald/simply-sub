@@ -531,6 +531,13 @@
   source: own
   status: done
   date: 2026-11-19
+- id: surfshark
+  name: Surfshark
+  website: https://surfshark.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -898,7 +905,8 @@
   source: wikidata
   wikidata: Q48816099
   sitelinks: 32
-  status: queued
+  status: done
+  date: 2026-11-19
 - id: tidal
   name: Tidal
   website: https://www.tidal.com
