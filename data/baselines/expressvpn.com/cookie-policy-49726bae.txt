@@ -1,0 +1,463 @@
+url: https://www.expressvpn.com/cookie-policy
+method: fetch
+saved: 2026-11-19
+
+ExpressVPN Cookie Policy
+Black Friday is live! Get up to 80% off the best VPN now.
+BLACK FRIDAY · ENDS SOON! Get up to 80% off
+Claim Offer
+Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+English
+Get Started
+menu opener
+Cookie-policy
+ExpressVPN Cookie Policy
+Last updated: October 2, 2026
+This Cookie Policy explains how Express Technologies Ltd. ("ExpressVPN", "we", "us" or "our") uses cookies and similar technologies when you visit our websites, including www.expressvpn.com and related domains (the "Site"), and how you can exercise your choices. This Cookie Policy should be read together with our Privacy Policy, which forms part of the same framework and explains how we handle your Personal Data more generally. Capitalised terms not defined here have the meaning given to them in the Privacy Policy.
+1. About This Policy
+This Cookie Policy describes the categories of cookies and similar technologies we use, the purposes for which we use them, the third parties that may set them, how long they last, and the legal basis on which we rely.
+We are responsible for the personal data collected through cookies on the Site. ExpressVPN's registered place of business is in the British Virgin Islands. Where you access the Site from the European Union, the United Kingdom or the United States, the additional region-specific terms in clause 8 (Regional Provisions) apply to you.
+Because the cookies and similar technologies deployed on the Site change over time as we update and improve it, the specific providers listed in this Cookie Policy may vary. We maintain an up-to-date list, together with granular controls, in our Cookie Preferences centre, accessible at any time from the link at the foot of most pages on the Site.
+2. What Are Cookies and Similar Technologies?
+Cookies are small text files placed on your computer or device when you visit a website. They allow the website to recognise your device, remember your actions and preferences over time, and improve your experience.
+In this Cookie Policy, "Cookies" refers to cookies and to other similar technologies that store or access information on your device, including pixels, tags, software development kits (SDKs), local storage and device or browser fingerprinting techniques.
+Cookies may be:
+2.1. session cookies, which are temporary and expire when you close your browser; or
+2.2. persistent cookies, which remain on your device until they expire or you delete them.
+Cookies may be set by us ("first-party Cookies") or by third parties that provide services to us or through the Site ("third-party Cookies"). Where a third party sets a Cookie, that third party's own privacy policy governs its use of the information it collects.
+3. The Categories of Cookies We Use
+We group Cookies into four categories according to their purpose. The category of a Cookie is determined by what it does, not by who sets it: a first-party Cookie is not automatically "strictly necessary", and a third-party Cookie may be strictly necessary where it delivers a function you have requested (such as fraud prevention on payment).
+3.1 Strictly necessary Cookies. These are essential to provide the Site and the services you actively request, including account log-in and session management, load balancing and content delivery, network security, and the prevention of payment fraud. They also include the Cookie that records your own Cookie preferences. Because the Site cannot function properly without them, they are not subject to consent and cannot be switched off through our Cookie Preferences centre.
+3.2 Functional Cookies. These enable enhanced functionality and personalisation, such as remembering your language and display preferences, embedding video and maps, supporting live chat and support tools, and diagnostic features. They are not strictly necessary and, in the EU and UK, are set only with your consent.
+3.3 Analytics and performance Cookies. These help us understand how visitors interact with the Site by collecting information on a statistical basis — for example, which pages are visited and how the Site performs — so that we can measure and improve it. They are not strictly necessary and, in the EU and UK, are set only with your consent.
+3.4 Marketing and advertising Cookies. These are used to deliver advertising relevant to you, to measure the effectiveness of advertising and marketing campaigns, to support affiliate and referral partners, and to build a profile of your interests. They are not strictly necessary; in the EU and UK they are set only with your consent, and in the United States they may involve "sale" or "sharing" of personal information or processing for targeted advertising, which you may opt out of as described in clause 8.
+4. Cookies We Use, by Category
+The tables below list the principal providers whose Cookies may be set on the Site, grouped by category. Cookie names and exact retention periods are maintained and kept current in our Cookie Preferences centre;
+STRICTLY NECESSARY COOKIES
+Provider / service
+Purpose
+Party
+ExpressVPN (Site, checkout, account portal, service infrastructure)
+Deliver the Site, log-in, session management and the unblocking/streaming service you request
+First party
+Usercentrics Consent Management Platform
+Store and give effect to your Cookie preferences
+Third party
+Forter
+Fraud prevention and device-risk assessment
+Third party
+Riskified
+Fraud prevention
+Third party
+Trustev (TransUnion)
+Fraud prevention and device identification
+Third party
+ThreatMetrix (LexisNexis)
+Device-fingerprint fraud prevention
+Third party
+iovation (LexisNexis)
+Device-fingerprint fraud prevention
+Third party
+Braintree / PayPal
+Payment processing
+Third party
+Chargebee
+Subscription billing and payment
+Third party
+Pay.com
+Payment processing
+Third party
+Apple Pay
+Payment method
+Third party
+Google Pay
+Payment method
+Third party
+Visa Click to Pay
+Payment method
+Third party
+Mastercard Click to Pay
+Payment method
+Third party
+Kape Renue (hosted payment fields)
+Secure hosted card-entry fields
+First party
+Cloudflare
+Traffic management, security and bot mitigation
+Third party
+Amazon CloudFront
+Content delivery network
+Third party
+Google gstatic
+Static content delivery
+Third party
+JSDelivr
+Content delivery network
+Third party
+Google CSP reporting
+Content Security Policy reporting (security)
+Third party
+FUNCTIONAL COOKIES
+Provider / service
+Purpose
+Party
+Google Fonts / Adobe Fonts
+Correct display of text
+Third party
+YouTube
+Embedded video playback
+Third party
+Vzaar
+Video hosting and playback
+Third party
+OpenStreetMap
+Display of maps
+Third party
+Zendesk
+Support tickets and correspondence
+Third party
+Trustpilot
+Reviews and ratings
+Third party
+Sentry
+Error tracking and reporting
+Third party
+Gravatar
+Display of avatars
+Third party
+Visual Website Optimizer (VWO)
+Testing and optimisation of Site content
+Third party
+LaunchDarkly
+Feature-flag and configuration management
+Third party
+Google Translate
+On-Site translation
+Third party
+Imgix
+First-party image delivery
+First party
+ExpressVPN DNS / IP leak-test tools
+Diagnostic tools you may run
+First party
+Array
+Embedded identity/credit-monitoring feature
+Third party
+ANALYTICS AND PERFORMANCE COOKIES
+Provider / service
+Purpose
+Party
+Google Analytics
+Website usage analytics and performance measurement
+Third party
+Microsoft Clarity
+Session analytics, heatmaps and usability
+Third party
+Mixpanel
+Product and usage analytics
+Third party
+RudderStack (including kape.dataplane)
+Customer-data-platform / behavioural event analytics
+First party
+Twitter (X) Analytics
+Usage analytics
+Third party
+MARKETING AND ADVERTISING COOKIES
+Provider / service
+Purpose
+Party
+Google Ads / DoubleClick / Google Syndication
+Advertising, remarketing and measurement
+Third party
+Meta (Facebook) Pixel and Social Plugins
+Advertising and measurement
+Third party
+Microsoft Advertising (remarketing)
+Advertising and remarketing
+Third party
+Twitter (X) Advertising
+Advertising and measurement
+Third party
+Taboola
+Content recommendation and advertising
+Third party
+Reddit Advertising
+Advertising and measurement
+Third party
+OpenAI
+Advertising and measurement
+Third party
+Teads
+Advertising
+Third party
+RTB House
+Programmatic advertising and remarketing
+Third party
+LiveIntent
+Advertising and audience measurement
+Third party
+AppLovin
+Mobile advertising
+Third party
+Rokt
+Ecommerce marketing and advertising
+Third party
+HubSpot
+Marketing automation
+Third party
+Kape affiliate tracking
+First-party affiliate and campaign attribution
+First party
+Honey (PayPal), Karma, ShopBack, RetailMeNot, MaxBounty
+Affiliate, coupon and referral marketing
+Third party
+5. Legal Basis for Using Cookies
+We place strictly necessary Cookies on the basis that they are essential to provide the Site and the services you request; in the EU and UK, these are exempt from the consent requirement, and we rely on our legitimate interests for any associated processing of personal data.
+For all other Cookies (functional, analytics and performance, and marketing and advertising), in the EU and UK we set them where you have given your consent through our Cookie banner or Cookie Preferences centre or for non-marketing cookies in the case we have Legitimate Interests. Where these Cookies process personal data, consent is also our legal basis under applicable data protection law.
+You may withdraw your consent, or change your preferences, at any time as described in clause 8, with the same ease as you gave it. Withdrawing consent does not affect the lawfulness of processing carried out before withdrawal.
+6. How to Control Cookies
+When you first visit the Site, our Cookie banner invites you to accept or reject non-essential Cookies. You may accept all, reject all non-essential Cookies, or make granular choices by category and by provider.
+You can change your choices at any time by selecting "Cookie Preferences" from the menu at the foot of most pages on the Site.
+Most browsers allow you to refuse or delete Cookies through their settings. If you disable Cookies, some parts of the Site may not function as intended. Strictly necessary Cookies cannot be disabled through our Cookie Preferences centre because the Site cannot operate without them.
+For advertising Cookies, you may also opt out through industry mechanisms, including the Network Advertising Initiative opt-out page, the Digital Advertising Alliance, and, in the EU, Your Online Choices. You may opt out of Google Analytics via the Google Analytics Opt-out Browser Add-on.
+7. Cookies That Are Not Set by Us
+Some information-storage or access requests detected on the Site may originate from browser extensions, add-ons or device software installed by you or by your device manufacturer, rather than from Cookies we set. We do not control these technologies, and they are not covered by this Cookie Policy. If you wish to manage them, please use your browser or device settings.
+8. Regional Provisions (EU & UK / United States)
+EUROPEAN UNION AND UNITED KINGDOM
+If you access the Site from the EU or the UK, we set non-essential Cookies (functional, analytics and performance, and marketing and advertising) only with your prior consent, obtained through a clear affirmative action. Consent is not bundled, is as easy to refuse as to give, and may be withdrawn at any time. We may also set functional and analytics cookies on the basis of Legitimate Interests following an impact assessment.
+Analytics and performance Cookies are treated as requiring consent. Where we rely in the UK on the limited "statistical purposes" exemption for low-impact analytics or in the EU on legitimate interests, we do so only where such Cookies are used solely to measure and improve the Site, you are given clear information and a simple means to object, and the data is not shared with third parties for their own purposes or used for advertising.
+We provide, in this Cookie Policy and in our Cookie Preferences centre, the identity of the parties setting Cookies, the purpose of each category, the duration of Cookies, and information about third-party recipients, so that you can make an informed choice.
+You have the rights described in our Privacy Policy in respect of personal data collected through Cookies, including the rights of access, rectification, erasure, restriction and objection, and the right to lodge a complaint with your supervisory authority.
+UNITED STATES
+If you access the Site from a U.S. state with a comprehensive privacy law, the following applies in addition to the rest of this Cookie Policy. In the United States we operate, for non-essential Cookies, on a notice-and-opt-out basis rather than a prior-consent basis, except where opt-in consent is required (including for the personal information of consumers under 16, whose information we do not knowingly sell or share).
+Certain marketing and advertising Cookies may involve the "sale" or "sharing" of personal information, or "targeted advertising" / "cross-context behavioural advertising", as those terms are defined under applicable state laws. You may opt out of such activity by selecting "Do Not Sell or Share My Personal Information" (or the equivalent link) on the Site, or by adjusting your choices in our Cookie Preferences centre.
+We recognise and honour the Global Privacy Control (GPC) signal as a valid request to opt out of the sale or sharing of personal information for the browser or device from which it is sent, and we display whether we have processed an opt-out preference signal where required.
+We do not use or disclose sensitive personal information for purposes that require a right to limit beyond those you have been offered, and we do not sell or share the personal information of consumers we know to be under 16 without opt-in consent. Depending on your state of residence, you may also have rights to access, correct, delete and obtain a portable copy of your personal information, and to be free from discrimination for exercising these rights; these are described in our Privacy Policy.
+Under California Civil Code Section 1798.83 (the "Shine the Light" law), California residents may request information about disclosures of personal data to third parties for their direct marketing purposes. We do not disclose personal data to third parties for their direct marketing.
+9. Changes to This Cookie Policy
+We may update this Cookie Policy from time to time to reflect changes in the Cookies we use or for legal, regulatory or operational reasons. We will post the updated version on the Site and revise the "Last updated" date above. Where required by law, we will notify you of material changes and, where applicable, seek your renewed consent.
+10. How to Contact Us
+If you have any questions about this Cookie Policy or our use of Cookies, or if you wish to exercise your rights, please contact our Data Protection Officer at dpo@expressvpn.com
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More
+Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+PROUD TO HAVE PARTNERED WITH THE BIGGEST NAMES IN SPORTS
+Official Digital Privacy Partner
+Official Digital Privacy Partner
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Choose language
+Español
+Deutsch
+Français
+العربية
+Български
+Čeština
+Dansk
+Ελληνικά
+Suomi
+עברית
+Hrvatski
+Magyar
+Indonesia
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Română
+Русский
+Svenska
+ไทย
+Türkçe
+Українська
+Tiếng Việt
+Srpski
+Need help? Chat with us!
+Live Chat
+Online
+English
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+This content is not available in your region
+To continue, please visit our dedicated website for the United Arab Emirates.
+ExpressVPN for UAE

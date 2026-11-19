@@ -1,0 +1,257 @@
+url: https://www.expressvpn.com/support/manage-account/upgrade-downgrade-subscription/
+method: fetch
+saved: 2026-11-19
+
+How to upgrade or downgrade your ExpressVPN subscription Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started menu opener
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+Home Home » How to upgrade or downgrade your ExpressVPN subscription
+Manage Your Account
+How to upgrade or downgrade your ExpressVPN subscription
+Search the Support Center
+Last updated: October 30, 2026
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+This guide explains how to upgrade or downgrade your ExpressVPN subscription from the ExpressVPN+ dashboard. This guide applies to subscriptions purchased from the ExpressVPN website.
+Note: If you purchased your subscription via the Apple App Store, you can only change the duration of your existing subscription; you won’t be able to upgrade or downgrade your ExpressVPN subscription tier. Google Play Store subscriptions can be paused or canceled, but not upgraded or downgraded. For more information, visit our guides to iOS App Store purchases and Google Play Store subscriptions.
+Jump to…
+What happens after changing your subscription?
+How to upgrade your ExpressVPN subscription
+How to downgrade your ExpressVPN subscription
+Which ExpressVPN products are included in your subscription?
+What happens after changing your ExpressVPN subscription tier?
+ExpressVPN offers three tiers of subscriptions: Basic, Advanced, and Express Pro. You can learn more about what each tier includes in our guide to available subscriptions.
+Depending on the tier you change to, you may gain or lose access to certain products and features. For example, downgrading from the Express Pro plan to the Basic plan removes access to products such as ExpressKeys and Identity Defender (available for U.S. users only). Downgrading can also limit how you can use a product or feature, such as ExpressMailGuard or ExpressAI.
+Will I be charged immediately when changing my subscription?
+Whether you are charged immediately depends on the value of the remaining time on your current subscription and the price of the new plan you select.
+If the remaining value of your current subscription exceeds the cost of the new plan:
+You will not be charged immediately.
+Your current subscription will remain active until its expiry date.
+You will retain access to the features included with your current tier until the expiry date.
+Your new plan will be charged and a new billing cycle will begin at the next renewal date.
+If the remaining value of your current subscription is less than the cost of the new plan:
+You will be charged for the new subscription immediately, with a prorated credit applied for the remaining value of your current subscription.
+Your subscription will change immediately.
+You will gain access to the features of the new tier immediately.
+Your new billing cycle will begin immediately.
+Note: In some cases, selecting a lower-tier plan or shorter subscription term may still result in an immediate charge if the remaining value of your current subscription is lower than the price of the new plan.
+You will always see whether charges apply before confirming the change during checkout.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to upgrade your ExpressVPN subscription
+Log into your ExpressVPN+ dashboard. Under Account, select Upgrade Plans.
+Review the available subscriptions and included features. To see all available options, click the View 12-month plans option at the bottom of the page. You can then use the tabs to filter different subscriptions, for example, by 12 months or 1 month.
+Once you select the option you would like to upgrade to, you will be taken to the checkout page. Choose your payment method, enter your payment details, and click Subscribe with [payment method] to upgrade your subscription.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+How to downgrade your ExpressVPN subscription plan
+Note: Downgrading your subscription may remove or limit access to certain ExpressVPN products, such as ExpressKeys, ExpressAI, and Identity Defender (available for U.S. users only).
+Log into your ExpressVPN+ dashboard. Under Account, select Upgrade Plans and click the View 12-month plan options at the bottom of the page.
+Review the available subscription plans and included features. You can use the tabs to filter different subscriptions, for example, by 12 months or 1 month.
+Select the plan you would like to downgrade to.
+Choose your payment method, enter your payment details, and click Subscribe with [payment method] to downgrade your subscription.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Which ExpressVPN products are included in your subscription plan?
+Note: After changing your subscription, return to your ExpressVPN+ dashboard to see which apps and services are included with your subscription, access setup instructions, and manage your account.
+Depending on your plan and region, your subscription may include access to the following:
+ExpressKeys: A password manager that helps you securely store, manage, and autofill passwords across your devices. To get started, see the setup guides for iOS, Android, and Chrome (browser extension).
+Identity Defender (U.S. only): An identity protection service that includes features such as identity alerts, credit monitoring, and data broker removal. To get started, see how to set up Identity Defender.
+ExpressAI: Private AI tools and assistant features available through your ExpressVPN+ dashboard. To get started, see how to access ExpressAI.
+ExpressMailGuard: A private email forwarding service that helps reduce spam and protect your inbox by generating email aliases. Read the getting started guide for ExpressMailGuard to set it up.
+holiday.com eSIM: A travel eSIM service for mobile data abroad. Learn more in our holiday.com eSIM FAQs.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Related Articles
+What is ExpressVPN’s refund policy?
+Can I still use ExpressKeys after my subscription expires?
+Renew your ExpressVPN subscription
+What subscriptions are available?
+Using multiple subscriptions with the same account
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Close Choose language
+Live chat
+Need help? Chat with us!
+Online

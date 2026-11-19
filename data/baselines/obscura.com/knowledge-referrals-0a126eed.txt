@@ -1,0 +1,53 @@
+url: https://obscura.com/knowledge/referrals/
+method: fetch
+saved: 2026-11-19
+
+Referring a Friend to Obscura | Obscura
+Skip to content Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Search CtrlK Cancel
+How To Bypass Reddit "Network Security" Block
+How to Delete an Obscura Account
+DNS Options in Obscura
+Downloading Obscura
+Obscura's VPN Kill Switch
+Managing Devices
+Managing Payments
+Referring a Friend to Obscura
+Set Network Priority in macOS
+Using Obscura via WireGuard
+Troubleshooting Strict Leak Protection Bugs
+Troubleshooting Connection Issues
+Troubleshooting DNS Issues
+Our Architecture What is a Debug Bundle
+Relay Nodes & Exit Nodes
+Mitigating Attacks Protecting Against TunnelVision
+On this page Overview
+Referral Link Privacy
+How to Use Referrals
+On this page
+Overview
+Referral Link Privacy
+How to Use Referrals
+Referring a Friend to Obscura
+Last updated: Dec 23, 2025
+If you share an Obscura referral link with a friend, then you both earn a free month of Obscura!
+Referral Link Privacy
+Section titled “Referral Link Privacy”
+Each referral link includes a random identifier that you can regenerate to prevent correlation to a previous link. Previously generated links stay active, allowing you to share different links in separate contexts at the same time.
+One month after the free months are given, we automatically delete the association between the new account and the referrer.
+How to Use Referrals
+Section titled “How to Use Referrals”
+Open the Referrals Page in your Obscura user portal
+Click the Copy to clipboard button under the referral link
+Share the link with your friend
+Your friend opens the link
+They save their account number and log in
+Once your friend pays for Obscura, you both automatically earn a free month

@@ -1,0 +1,88 @@
+url: https://www.ivpn.net/knowledgebase/general/how-many-devices-or-simultaneous-connections-can-i-have-to-ivpn/
+method: fetch
+saved: 2026-11-19
+
+How many devices or simultaneous connections can I have to IVPN? - IVPN Help
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Help Center
+General
+Troubleshooting
+Billing
+Passwords
+Privacy
+Windows
+macOS
+GNU/Linux
+iOS
+Android
+Routers
+Media Players
+How many devices or simultaneous connections can I have to IVPN?
+You can install the IVPN App on as many devices as you require and, by default, a single subscription allows 5 devices with an IVPN Standard or IVPN Plus plan, or 10 devices with an IVPN Pro Suite plan. Please note that each time you log in to our IVPN App, this counts as adding one device. Each time you log out of the app, this counts as removing one device. Whether our app is connected or not and powered on or not, simply logging in is enough to occupy one of the device slots.
+Our terms of service do not permit the sharing of accounts with another person (including within a single household etc). You may wish to investigate the use of a VPN router for household access to allow many devices to share a single connection, though this does require some technical expertise to set up. See our DD-WRT router page for more info.
+Our intention with this policy is to prevent large-scale abuse (sharing of credentials) and ensure fair access for all customers considering that VPN bandwidth is a shared limited resource.
+Related Articles
+How do we react when requested by an authority for information relating to a customer?
+Firewall Exceptions
+Does IVPN protect SSH connections?
+What are TCP connections?
+Is using L2TP/IPSec with a public pre-shared key secure?
+Still have questions?
+Get in touch and we'll get back to you in a few hours.
+Contact support
+Interested in privacy?
+Read our latest privacy news and keep up-to-date on IVPN services.
+Visit IVPN Blog
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

@@ -1,0 +1,246 @@
+url: https://obscura.com/pricing/
+method: fetch
+saved: 2026-11-19
+
+Pricing | Obscura VPN | Obscura
+Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Your privacy matters
+No logs by design. Stealth protocol for performance. Browse,
+stream, and game without worrying about your VPN.
+$ 8.00/ month
+What you get
+Secure and fast two-party connection everywhere you go
+5 simultaneous connections, unlimited devices
+Connections to 33+ countries
+Built-in ad, malware, and tracker blocking
+Advanced customization (WireGuard, DNS blocking, kill switch, packet padding)
+Renew automatically with your credit card or top up as you go with credit card, Lightning, or Monero
+Get Obscura VPN
+Available on your devices
+iOS
+Available macOS
+Available Android
+Available Windows
+Available WireGuard
+Available Linux
+Available
+Join the waitlist for other platforms
+It’s simple:
+We can’t leak what we don’t have.
+Logs? Not possible.
+Obscura VPN doesn’t log your IP address
+and
+can’t see your internet traffic, ever. It’s impossible
+by design.
+Emails? Not necessary.
+Log in with just a randomized account number. No names,
+no emails, no phone numbers necessary.
+Credit card info? Not required.
+Easily pay using Bitcoin’s Lightning Network for better privacy,
+instant payments, and lower transaction fees. We also accept Monero.
+FAQs
+Questions?
+We’re here to help.
+Here are the most common questions we’re asked, but if we haven’t
+covered yours, don’t hesitate to reach out via one of our handles.
+Show All
+Hide All
+What makes Obscura different from existing VPNs?
+div]:min-h-0 astro-oqjbs5yv"> Unlike VPNs with a “no-logs” policy, Obscura is provably private by design.
+Even “no-logs” VPNs see both your identity and your internet activity, meaning you have to blindly trust their pinky-promise for privacy. This is exactly why some privacy-conscious folks will tell you not to use a VPN at all.
+Obscura is different – we never see your decrypted internet packets. It’s simply impossible for us to log your internet activity, even if we were compelled to, or if our servers were compromised. You can even verify this yourself.
+Obscura’s stealth protocol is much harder to block.
+Our unique stealth protocol is designed to blend in with regular internet traffic. It does so by leveraging QUIC – the same technology that powers HTTP/3 – making it far harder for censors or network filters to detect or block.
+Want more technical details? See here.
+What user data can Obscura see?
+div]:min-h-0 astro-oqjbs5yv"> Obscura only sees your connecting IP address and necessary payment info – never your actual internet traffic.
+We physically can’t decrypt your internet traffic (see how) and never log your connecting IP address.
+For even more privacy, we actively support privacy-friendly payment methods like Bitcoin over Lightning and Monero. Learn more about accepted payment methods here.
+How do I know Obscura does what it claims?
+div]:min-h-0 astro-oqjbs5yv"> I like the way you think! 😎
+Don’t trust — verify. Our app’s entire source code is on GitHub for you to verify that we do what we say.
+We also plan to provide reproducible builds of our app, meaning anyone can confirm that the app you download matches the code we publish.
+Additionally, our app displays your current exit hop’s WireGuard public key on its “Location” page. You can check this key against what Mullvad publishes here to ensure that you’re connected via a genuine Mullvad exit hop!
+How much does Obscura cost, what payment methods are accepted?
+div]:min-h-0 astro-oqjbs5yv"> Obscura is just $8/month.
+You can top-up your account using:
+Credit Card (via Stripe)
+Bitcoin over Lightning (for more privacy)
+Monero (for more privacy)
+For convenient renewals, you can also subscribe with your Credit Card (via Stripe). Note that Stripe may need your email for subscriptions, but Obscura never stores it.
+How many devices can I use Obscura on?
+div]:min-h-0 astro-oqjbs5yv"> Each Obscura account has 5 simultaneous connection slots. This is different from ”5 devices”.
+If you’re connecting with our Obscura app…
+You can log in on as many devices as you’d like.
+A device only uses 1 slot while it is actively connected (see the “Connection” tab in the app).
+If you’re connecting with our WireGuard configs…
+Each config reserves 1 slot as long as it exists on your account, even when the device is not connected.
+To free a slot, delete the config from your account here.
+Examples
+Only using our Obscura app: Unlimited sign-ins; up to 5 devices connected at the same time.
+Only using WireGuard configs: You can keep up to 5 configs total (i.e., 5 devices).
+A Mix: If you have 1 WireGuard config on your account, it uses 1 of 5 slots, leaving 4 slots open for the Obscura app to connect from any signed-in devices.
+How does Obscura differ from my VPN’s multihop option?
+div]:min-h-0 astro-oqjbs5yv"> With a typical multihop VPN, the same provider controls every hop—so they can still link your identity to your traffic.
+Obscura solves this by using a fully-independent exit hop (currently Mullvad). Ensuring that our servers never see your actual traffic, and the exit hop never sees your identity.
+How does Obscura compare to Tor?
+div]:min-h-0 astro-oqjbs5yv"> We have immense respect for the Tor project (and encourage you to support it), but its volunteer-run network can be slow and susceptible to DDoS issues, making it infeasible for everyday use.
+Obscura uses two dedicated, high-performance hops for maximum speed and reliability – meaning you get many of Tor’s privacy benefits without sacrificing everyday usability.
+What server locations are available?
+div]:min-h-0 astro-oqjbs5yv"> We’re always working to add more exit locations. We currently have the following:
+North America
+Toronto, Canada 🇨🇦
+Vancouver, Canada 🇨🇦
+United States 🇺🇸
+Ashburn, VA
+Chicago, IL
+Dallas, TX
+Denver, CO
+Los Angeles, CA
+Miami, FL
+New York, NY
+San Jose, CA
+Seattle, WA
+Latin America
+São Paulo, Brazil 🇧🇷
+Santiago, Chile 🇨🇱
+Bogotá, Colombia 🇨🇴
+Querétaro, Mexico 🇲🇽
+Europe
+Tirana, Albania 🇦🇱
+Prague, Czech Republic 🇨🇿
+Copenhagen, Denmark 🇩🇰
+Helsinki, Finland 🇫🇮
+Paris, France 🇫🇷
+Frankfurt, Germany 🇩🇪
+Milan, Italy 🇮🇹
+Palermo, Italy 🇮🇹
+Amsterdam, Netherlands 🇳🇱
+Oslo, Norway 🇳🇴
+Stavanger, Norway 🇳🇴
+Warsaw, Poland 🇵🇱
+Madrid, Spain 🇪🇸
+Gothenburg, Sweden 🇸🇪
+Malmö, Sweden 🇸🇪
+Stockholm, Sweden 🇸🇪
+Zurich, Switzerland 🇨🇭
+Kyiv, Ukraine 🇺🇦
+London, United Kingdom 🇬🇧
+Asia
+Hong Kong 🇭🇰
+Tokyo, Japan 🇯🇵
+Singapore 🇸🇬
+Istanbul, Turkey 🇹🇷
+Africa
+Johannesburg, South Africa 🇿🇦
+Oceania
+Auckland, New Zealand 🇳🇿
+Sydney, Australia 🇦🇺
+What relay servers does Obscura offer?
+div]:min-h-0 astro-oqjbs5yv"> We will continue to add more relay (first-hop) servers to Obscura. Currently we have the following:
+North America
+United States 🇺🇸
+Atlanta, GA
+Chicago, IL
+Dallas, TX
+Denver, CO
+Los Angeles, CA
+Miami, FL
+New York, NY
+San Jose, CA
+Seattle, WA
+Washington D.C.
+Latin America
+Querétaro, Mexico 🇲🇽
+Santiago, Chile 🇨🇱
+São Paulo, Brazil 🇧🇷
+Europe
+Amsterdam, Netherlands 🇳🇱
+Berlin, Germany 🇩🇪
+Frankfurt, Germany 🇩🇪
+London, United Kingdom 🇬🇧
+Madrid, Spain 🇪🇸
+Stockholm, Sweden 🇸🇪
+Warsaw, Poland 🇵🇱
+Asia
+Hong Kong 🇭🇰
+Osaka, Japan 🇯🇵
+Tokyo, Japan 🇯🇵
+Singapore 🇸🇬
+Africa
+Johannesburg, South Africa 🇿🇦
+Oceania
+Melbourne, Australia 🇦🇺
+Perth, Australia 🇦🇺
+Sydney, Australia 🇦🇺
+How does the macOS app work? Does it have kernel-level access?
+div]:min-h-0 astro-oqjbs5yv"> Our macOS app installs a Network Extension, which is a fully
+sandboxed process with no kernel-level access to your system.
+You can verify this by looking at our source code.
+Give me the technical details!
+div]:min-h-0 astro-oqjbs5yv"> Obscura’s servers relay the WireGuard tunnel between your device and Mullvad’s servers. Essentially, WireGuard-over-QUIC.
+This looks something like:
+<user> --> Obscura Server --> Mullvad Server --> <internet>
+--> Obscura Server --> Mullvad Server --> ">
+This ensures that no single party has the information to leak or correlate your traffic and your identity, since:
+Obscura’s servers are unable to decrypt the WireGuard packets it relays, since they are encrypted to a Mullvad server’s WireGuard pubkey.
+Mullvad’s servers never see your connecting IP since Obscura’s servers are effectively doing NAT.
+Your device connects to Obscura’s servers over QUIC, meaning:
+Obscura connections are harder to detect or block since they look like regular internet traffic (HTTP/3 uses QUIC for transport).
+Obscura avoids the TCP-over-TCP meltdown problem since we use QUIC’s unreliable datagram extension.
+Still curious? Read our blog post on Obscura’s design.
+Can I generate a WireGuard configuration to use Obscura?
+div]:min-h-0 astro-oqjbs5yv"> Yes you can! Obscura’s WireGuard compatibility mode generates configurations that work on any WireGuard-compatible platforms, including:
+iOS
+Android
+Windows
+Linux
+Various router OSes
+To get started:
+Download the WireGuard app for your platform here
+Generate a WireGuard configuration for your account here
+Add the generated WireGuard configuration to your WireGuard app (or scan the QR code)
+Connect 🎉
+For a more in-depth guide, see our Using Obscura via WireGuard article.
+Note that since this uses the original WireGuard protocol, you won’t benefit from Obscura’s QUIC-based obfuscation for outsmarting internet censorship. However, your connection still benefits from improved privacy with our Two-Party Relay architecture.
+How do I download Obscura?
+div]:min-h-0 astro-oqjbs5yv"> Download Obscura for iOS, macOS, Android, Windows, or Linux from the platform’s download page.
+For Windows, choose the x64 installer for most computers or the ARM64 installer for a Windows on ARM device.
+For Linux, choose your distribution to see its requirements and terminal installation commands. Packages are available for x64 computers.
+If we don’t have a native app for your platform yet, you can still use Obscura with a WireGuard configuration.
+support@obscura.net
+“We must defend our own privacy if we expect to have any. We must come
+together and create systems which allow anonymous transactions to take
+place.”
+— Eric Hughes,
+A Cypherpunk’s Manifesto (1993)
+Jump To
+Next-Gen Privacy
+How Obscura Works
+Superior Obfuscation
+FAQ
+Resources
+Service Status
+Blog
+Legal
+Careers
+Source Code (GitHub)
+Cursed Knowledge
+Download for macOS
+Community
+Circle of Trust
+Discord
+Matrix Bridge
+Twitter / X
+Mastodon
+Nostr (on Primal)
+© 2026 Sovereign Engineering Inc. All rights reserved.
+WireGuard is a registered trademark of Jason A. Donenfeld.

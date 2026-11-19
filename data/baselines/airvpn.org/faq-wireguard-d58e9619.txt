@@ -1,0 +1,98 @@
+url: https://airvpn.org/faq/wireguard/
+method: fetch
+saved: 2026-11-19
+
+Does WireGuard pose privacy issues? - AirVPN
+Jump to content
+FAQ
+Not connected, Your IP: 146.70.198.159
+Online: 49581 users - 612070 Mbit/s total BW
+Your IP: 146.70.198.159
+Guest access
+Existing user? Sign In
+Sign In
+Remember me
+Not recommended on shared computers
+Sign in anonymously
+Sign In
+Forgot your password?
+Sign Up
+Contact Us
+Search In
+Everywhere
+More options...
+Find results that contain...
+Any of my search term words
+All of my search term words
+Find results in...
+Content titles and body
+Content titles only
+Home
+Overview
+Mission
+Specs
+FAQ
+Terms Of Service
+Privacy
+About us
+More
+Buy
+Download
+Servers
+Community
+Forums
+All Activity
+Leaderboard
+More
+Client Area
+More
+More
+All Activity
+Home
+FAQ
+Does WireGuard pose privacy issues?
+Does WireGuard pose privacy issues?
+It is known that while WireGuard may offer advantages in terms of performance, by design it is not ideal for privacy, because it doesn't allocate VPN IP Addresses (10.*) dynamically like OpenVPN does; instead WireGuard requires fixed ones in .conf files deployed on devices.
+Some of our competitors, in order to circumvent the issue, adopted solutions which break compatibility with official WireGuard applications (which can be and are peer-reviewed more extensively), thus those solutions work only if customers use a proprietary application.
+Interoperability between open-source applications and our service is still a main objective for us.
+Our clients can renew their keys whenever they want, forcing a new, random IP address reassignment (remember: any .conf file generated with the Config Generator must be downloaded again after each renewal).
+And, of course, users who can't accept the issue are free to stay with OpenVPN.
+Another privacy concern is that WireGuard stores users' real IP addresses on the VPN server indefinitely.
+During a VPN session, it's inevitable that our servers know the user's real IP address (to redirect traffic), this happens also with OpenVPN.
+The different issue here is that WireGuard keeps this data even if the session is closed.
+In AirVPN servers, if no handshake has occurred within 180 seconds, the peer is removed and reapplied. Doing so removes the real IP address from server memory.
+Created: ..., last update: ...
+AirVPN Announcements
+AirVPN Forums
+All Activity
+Home
+FAQ
+Does WireGuard pose privacy issues?
+Terms of ServicePrivacy NoticeAbout us Tor: airvpn… .onion
+AirVPN | VAT ID IT03297800546 | REA PG - 279011 | CMS by IPS
+You are not allowed to access AirVPN services if you are a resident of Italy
+×
+Existing user? Sign In
+Sign Up
+Home
+Back
+Home
+Overview
+Mission
+Specs
+FAQ
+Terms Of Service
+Privacy
+About us
+Buy
+Download
+Servers
+Community
+Back
+Community
+Forums
+All Activity
+Leaderboard
+Client Area
+×
+Create New...

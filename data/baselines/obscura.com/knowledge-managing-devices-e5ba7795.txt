@@ -1,0 +1,73 @@
+url: https://obscura.com/knowledge/managing-devices/
+method: fetch
+saved: 2026-11-19
+
+Managing Devices | Obscura
+Skip to content Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Search CtrlK Cancel
+How To Bypass Reddit "Network Security" Block
+How to Delete an Obscura Account
+DNS Options in Obscura
+Downloading Obscura
+Obscura's VPN Kill Switch
+Managing Devices
+Managing Payments
+Referring a Friend to Obscura
+Set Network Priority in macOS
+Using Obscura via WireGuard
+Troubleshooting Strict Leak Protection Bugs
+Troubleshooting Connection Issues
+Troubleshooting DNS Issues
+Our Architecture What is a Debug Bundle
+Relay Nodes & Exit Nodes
+Mitigating Attacks Protecting Against TunnelVision
+On this page Overview
+How It Works with the Obscura App
+How It Works with WireGuard
+Mixing the App and WireGuard
+Tips for Managing Your Slots
+On this page
+Overview
+How It Works with the Obscura App
+How It Works with WireGuard
+Mixing the App and WireGuard
+Tips for Managing Your Slots
+Managing Devices
+Last updated: Apr 21, 2026
+Obscura gives you 5 simultaneous connection slots per account. This isn’t a device limit, you can install Obscura on as many devices as you want. The limit is on how many devices can be actively connected to Obscura at the same time.
+How It Works with the Obscura App
+Section titled “How It Works with the Obscura App”
+When you use the Obscura app, your device only uses a slot while it’s actively connected. The moment you disconnect, that slot is freed up for another device. If all 5 slots are in use and you want to connect another device, just disconnect one first.
+How It Works with WireGuard
+Section titled “How It Works with WireGuard”
+WireGuard configs work differently. Each config you create permanently reserves one of your 5 slots, even when the device using it isn’t connected.
+This is because WireGuard doesn’t have an explicit connect/disconnect process. We reserve the slot for as long as the config exists. This guarantees your device can always reconnect instantly without competing for an available slot.
+Here’s what that means in practice:
+1 WireGuard config = 1 slot used at all times, leaving 4 for the Obscura app
+2 WireGuard configs = 2 slots used, leaving 3 for the app
+5 WireGuard configs = all slots used, you will not be able to connect with the app
+To free a slot, you need to delete the WireGuard config from your account. You can do this from the Manage WireGuard configs page in your account.
+Note
+Once you delete a WireGuard config, you’ll need to generate and set up a new
+one if you want to use WireGuard on that device again.
+Mixing the App and WireGuard
+Section titled “Mixing the App and WireGuard”
+Setup Slots Used Available for App
+App only 0 (until connected) Up to 5 simultaneous
+1 WireGuard config 1 (always) Up to 4 simultaneous
+2 WireGuard configs 2 (always) Up to 3 simultaneous
+5 WireGuard configs 5 (always) None
+Tips for Managing Your Slots
+Section titled “Tips for Managing Your Slots”
+Prefer the Obscura app when possible. It’s more slot-efficient since it only uses a slot while connected.
+Use WireGuard for always-on devices like routers, servers, or headless machines where you can’t run the app.
+Clean up old configs you’re not using. Forgotten WireGuard configs silently eat slots. Check your account page periodically.
+No need to log out of the Obscura app on devices you’re not using. It won’t consume a slot until you actively connect.

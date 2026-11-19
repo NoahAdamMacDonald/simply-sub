@@ -1,0 +1,35 @@
+url: https://windscribe.com/knowledge-base/articles/has-windscribe-been-audited
+method: fetch
+saved: 2026-11-19
+
+Has Windscribe been audited? | Windscribe
+Skip to main content The Windscribe Fuchsia Friday & Cyber Monday Sale is here! Get Pro for $29/year. Ends Nov 30th
+FeaturesPlansDownload Resources
+Log InMy Account Get WindscribeUpgrade
+Has Windscribe been audited?
+Winder S
+Oct 17, 2025
+Help
+Yes, Windscribe has not only open-sourced our applications on Github, but has undergone several audits over the years for our applications and server software.
+Server Stack (FreshScribe)
+For the last several years, we’ve been working on a very large revamp of our VPN stack code-named “FreshScribe”. This new architecture provides several advantages to the reliability of our platform, while also serving as the foundation for quick and flexible updates to the stack with new components as we build out more valuable features. You can read the full breakdown of FreshScribe on our blog here.
+FreshScribe has been audited by Packetlabs in June 2024 with a very positive outcome. The full Packetlabs audit can be read here.
+Desktop App
+The Windscribe desktop application was audited in September 2021 by Leviathan Security Group. All raised issues were addressed and fixed. The full audit results of the desktop app can be found by downloading the PDF on our Github page here: https://github.com/Windscribe/Desktop-App/wiki/Code-Audit-Report
+Android & iOS App
+The Windscribe Android and iOS apps have also undergone an audit by Leviathan Security Group in March 2022. All issues that were found were addressed and fixed. The full PDF report can be found in the Android repo of our Github page here: https://github.com/Windscribe/Android-App/wiki/Code-Audit-Report
+For a real world look at our privacy stance, see the Greek court case and what it revealed about the data we keep: Windscribe Greek court case
+Get in touch
+r/Windscribe
+Find solutions, discuss ideas and share your feelings on our subreddit.
+Discord
+Join the discussion with our active community and make real friends!
+Contact Support Feeling completely lost? Contact Support.
+Windscribe
+DownloadChangelogPricingBuy MerchSupportFeaturesOpen SourceEthics & PhilosophyFree DNSWhite Label VPNVPN ServersResellers & DistributorsRefer a Friend
+Apps
+VPN for WindowsVPN for AndroidVPN for MacVPN for LinuxVPN for ChromeVPN for FireTVVPN for FirefoxVPN for Apple TVVPN for MS EdgeVPN for HuaweiVPN for iPhoneVPN for RoutersVPN for AgentsWindscribe F-Droid
+Company
+About UsPrivacyTermsVDPJobsBlogInfoGang
+© 2069 Windscribe Limited
+Switch Language : English

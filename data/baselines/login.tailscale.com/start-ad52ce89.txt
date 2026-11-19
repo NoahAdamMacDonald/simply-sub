@@ -1,0 +1,20 @@
+url: https://login.tailscale.com/start
+method: fetch
+saved: 2026-11-19
+
+Tailscale
+Sign up with your identity provider
+You’ll use this provider to log in to your network (more)
+By clicking the buttons below, you acknowledge that you have read,
+understood, and agree to Tailscale’s
+Terms of Service
+and
+Privacy Policy.
+Sign up with Google
+Sign up with Microsoft
+Sign up with GitHub
+Sign up with Apple
+Sign up with OIDC
+Need another provider?
+Contact our team
+to request a trial.

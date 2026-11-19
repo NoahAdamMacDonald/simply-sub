@@ -1,0 +1,257 @@
+url: https://support.nordvpn.com/hc/en-us/articles/19744837091217-Does-NordVPN-have-a-free-trial
+method: fetch
+saved: 2026-11-19
+
+Does NordVPN have a free trial? – Live Chat, VPN Setup, Troubleshooting | NordVPN Customer Support
+Skip to main content
+Support center
+Categories
+Explore topics
+Explore topics
+Log in
+Toggle sidebar
+Close
+Categories
+Categories Close
+Explore topics
+Log in
+Table of Contents
+Close
+Home
+Billing and subscriptions
+How to purchase a NordVPN subscription
+Does NordVPN have a free trial?
+Yes - NordVPN offers a free 7-day VPN trial so you can explore every feature of your chosen plan before paying anything. The trial is currently available only in these countries: France, the United States, Canada, Australia, the United Kingdom, Japan, the Netherlands, Germany, Denmark, Finland, Norway, Sweden, Spain, Italy, and Poland. This article explains who qualifies for the free trial, how to start it, what it includes, and how to cancel before your paid subscription begins. It also covers the separate Android (Google Play) trial and the 30-day money-back guarantee.
+Before you start
+The 7-day free trial is available only to new NordVPN users (no prior NordVPN subscription).
+It applies to 1-year and 2-year [Prime / Ultimate Max / Ultra / Complete Max] plans.
+It is available only in these countries: France, the United States, Canada, Australia, the United Kingdom, Japan, the Netherlands, Germany, Denmark, Finland, Norway, Sweden, Spain, Italy, and Poland.
+You must use an accepted payment method: credit card or PayPal. Other methods (Google Pay, Union Pay, Sofort, cryptocurrencies) will grey out the free-trial option.
+You won’t pay anything during the trial, but you must cancel before the 7-day period ends if you don’t want to continue with a paid subscription.
+NOTE: Unless you cancel before the 7-day trial ends, your chosen plan will begin automatically, and you’ll pay the price shown when you started the trial.
+Here's what to do
+Start your free trial
+Select a plan. Pick a 1-year or 2-year plan and enter your payment details (credit card or PayPal). You won’t pay anything before the trial period ends.
+Download the NordVPN app. Get the NordVPN app for your device. You'll have full access to all features and VPN servers included in the subscription of your choice.
+Use NordVPN free for 7 days. Enjoy the trial. If you decide not to subscribe, cancel your trial before it ends.
+Cancel before you're charged
+You can cancel your free trial anytime before it ends. Here's how:
+Log in to your Nord Account.
+Click "Billing" in the left-hand menu.
+Under "Subscriptions," click "Cancel" next to "Free trial."
+Additional tips
+One trial per customer. The free trial is available only once to first-time customers with a new Nord Account.
+Android (Google Play) trial: A separate 3-day free trial is available to first-time Android users who download the app from Google Play (one per customer). Google Play manages it under its Terms of Service. Cancel it through Google Play and direct any questions to them. It is not available in Bangladesh, India, South Korea, or Sri Lanka.
+30-day money-back guarantee (separate from the trial): First-time customers can request a refund within 30 days of purchase by contacting customer support. If you downloaded NordVPN from Apple's App Store, contact Apple support for the refund.
+After the trial: If you don't cancel within 7 days, your plan begins at the price shown when you started the trial. Before the subscription begins, NordVPN emails you a reminder of the price and conditions.
+Also available in:
+Still having issues?
+Live chat
+Contact our support to solve an issue live.
+Chat with support
+Email form
+Fill out an email form so we can help you with an issue.
+Email us
+Email us
+Our Support team will get back to you within 24 hours. We’ll reply to the email address you provide.
+Attach a file (Optional)
+Supported formats: JPEG, PNG.
+We couldn’t process your form. Please try again or come back later.
+By clicking “Submit”, you agree to our Terms of Service and acknowledge our Privacy Policy.
+Submit
+Thank you! We've got your message and will get back to you within 24 hours.
+By clicking “Chat with support”, you agree to our Terms of Service and acknowledge our Privacy Policy.
+Chat functionality relies on cookies. By starting the chat, you agree to their use. Learn more in our
+Cookie Policy.
+Related articles
+What is your refund policy?
+How to reach NordVPN customer support?
+How to cancel auto-renewal for your NordVPN subscription
+How much will I need to pay upon renewal?
+What is a Nord Account, and how do you use it?
+Thank you for your feedback!
+Yes
+No
+Table of Contents
+Show all
+Close
+Was this article helpful?
+Thank you for your feedback!
+Yes
+No
+{
+"chatTitle": "NordVPN Support",
+"chatCustomText": {
+"actionPaymentCompleted": "Payment Completed",
+"actionPaymentError": "An error occurred while processing the card. Please try again or use a different card.",
+"actionPostbackError": "An error occurred while processing your action. Please try again.",
+"clickToRetry": "Message not delivered. Click to retry.",
+"clickToRetryForm": "Form not submitted. Click anywhere on the form to retry.",
+"connectNotificationText": "Sync your conversation and continue messaging us through your favorite app.",
+"connectNotificationSingleText": "Be notified when you get a reply.",
+"conversationListHeaderText": "My conversations",
+"conversationListRelativeTimeJustNow": "Just now",
+"conversationListRelativeTimeMinute": "1 minute ago",
+"conversationListRelativeTimeMinutes": "{value} minutes ago",
+"conversationListRelativeTimeHour": "1 hour ago",
+"conversationListRelativeTimeHours": "{value} hours ago",
+"conversationListRelativeTimeYesterday": "Yesterday",
+"conversationListTimestampFormat": "MM/DD/YY",
+"conversationListPreviewAnonymousText": "Someone",
+"conversationListPreviewCarouselText": "{user} sent a message",
+"conversationListPreviewFileText": "{user} sent a file",
+"conversationListPreviewFormText": "{user} sent a form",
+"conversationListPreviewFormResponseText": "{user} filled a form",
+"conversationListPreviewImageText": "{user} sent an image",
+"conversationListPreviewLocationRequestText": "{user} sent a location request",
+"conversationListPreviewUserText": "You",
+"conversationTimestampHeaderFormat": "MMMM D, h:mm A",
+"couldNotConnect": "Offline. You will not receive messages.",
+"couldNotConnectRetry": "Reconnecting...",
+"couldNotConnectRetrySuccess": "You're back online!",
+"couldNotLoadConversations": "Couldn't load conversations.",
+"emailChangeAddress": "Change my email",
+"emailDescription": "To be notified by email when you get a reply, enter your email address.",
+"emailFieldLabel": "Email",
+"emailFieldPlaceholder": "Your email address",
+"emailFormButton": "Submit",
+"emailLinkingErrorMessage": "Please submit a valid email address.",
+"errorPrefix": "Error:",
+"fetchHistory": "Load more",
+"fetchingHistory": "Retrieving history...",
+"fileTooLargeError": "Max file size limit exceeded ({size})",
+"fileTypeError": "Unsupported file type.",
+"formErrorEntryRequired": "This entry is required",
+"formErrorInvalidEmail": "Email is invalid",
+"formErrorNoLongerThan": "Must contain no more than ({characters}) characters",
+"formErrorNoShorterThan": "Must contain at least ({characters}) characters",
+"formErrorUnknown": "This doesn't look quite right",
+"formFieldSelectPlaceholderFallback": "Choose one...",
+"frontendEmailChannelDescription": "To talk to us using email just send a message to our email address and we'll reply shortly:",
+"headerText": "How can we help?",
+"imageClickToReload": "Click to reload image.",
+"imageClickToView": "Click to view {size} image.",
+"imagePreviewNotAvailable": "Preview not available.",
+"inputPlaceholder": "Type a message...",
+"inputPlaceholderBlocked": "Complete the form above...",
+"introAppText": "Message us below or from your favorite app.",
+"lineChannelDescription": "To talk to us using LINE, scan this QR code using the LINE app and send us a message.",
+"linkError": "An error occurred when attempting to generate a link for this channel. Please try again.",
+"linkChannelPageHeader": "Sync your conversation",
+"locationNotSupported": "Your browser does not support location services or it's been disabled. Please type your location instead.",
+"locationSecurityRestriction": "This website cannot access your location. Please type your location instead.",
+"locationSendingFailed": "Could not send location",
+"locationServicesDenied": "This website cannot access your location. Allow access in your settings or type your location instead.",
+"messageError": "An error occured while sending your message. Please try again.",
+"messageIndicatorTitlePlural": "({count}) New messages",
+"messageIndicatorTitleSingular": "({count}) New message",
+"messageRelativeTimeDay": "{value}d ago",
+"messageRelativeTimeHour": "{value}h ago",
+"messageRelativeTimeJustNow": "Just now",
+"messageRelativeTimeMinute": "{value}m ago",
+"messageTimestampFormat": "h:mm A",
+"messageDelivered": "Delivered",
+"messageSeen": "Seen",
+"messageSending": "Sending...",
+"messageTooLongError": "Max message size limit exceeded ({size}).",
+"messengerChannelDescription": "Connect your Facebook Messenger account to be notified when you get a reply and continue the conversation on Facebook Messenger.",
+"newConversationButtonText": "New Conversation",
+"notificationSettingsChannelsDescription": "Sync this conversation by connecting to your favorite messaging app to continue the conversation your way.",
+"notificationSettingsChannelsTitle": "Other Channels",
+"notificationSettingsConnected": "Connected",
+"notificationSettingsConnectedAs": "Connected as {username}",
+"prechatCaptureGreetingText": "Hi there 👋\nTo start off, we'd like to know a little bit more about you:",
+"prechatCaptureNameLabel": "Your name",
+"prechatCaptureNamePlaceholder": "Type your name...",
+"prechatCaptureEmailLabel": "Email",
+"prechatCaptureEmailPlaceholder": "name@company.com",
+"prechatCaptureConfirmationText": "Hi there! I’m NordVPN's AI assistant. How can I help you today?",
+"prechatCaptureMailgunLinkingConfirmation": "You'll be notified here and by email at {email} once we reply.",
+"sendButtonText": "Send",
+"settingsHeaderText": "Settings",
+"shareLocation": "Location",
+"smsBadRequestError": "We were unable to communicate with this number. Try again or use a different one.",
+"smsCancel": "Cancel",
+"smsChangeNumber": "Change my number",
+"smsChannelDescription": "Connect your SMS number to be notified when you get a reply and continue the conversation over SMS.",
+"smsChannelPendingDescription": "Check your messages at {number} to confirm your phone number.",
+"smsContinue": "Send",
+"smsInvalidNumberError": "Please submit a valid phone number.",
+"smsLinkCancelled": "Link to {appUserNumber} was cancelled.",
+"smsLinkPending": "Pending",
+"smsPingChannelError": "There was an error sending a message to your number.",
+"smsSendText": "Send me a text",
+"smsStartTexting": "Start Texting",
+"smsTooManyRequestsError": "A connection for that number was requested recently. Please try again in {minutes} minutes.",
+"smsTooManyRequestsOneMinuteError": "A connection for that number was requested recently. Please try again in 1 minute.",
+"smsUnhandledError": "Something went wrong. Please try again.",
+"syncConversation": "Sync conversation",
+"tapToRetry": "Message not delivered. Tap to retry.",
+"tapToRetryForm": "Form not submitted. Tap anywhere on the form to retry.",
+"telegramChannelDescription": "Connect your Telegram account to be notified when you get a reply and continue the conversation on Telegram",
+"unsupportedMessageType": "Unsupported message type.",
+"unsupportedActionType": "Unsupported action type.",
+"uploadDocument": "File",
+"uploadInvalidError": "Invalid file.",
+"uploadPhoto": "Image",
+"uploadVirusError": "A virus was detected in your file and it has been rejected",
+"viberChannelDescription": "Connect your Viber account to be notified when you get a reply and continue the conversation on Viber. To get started, scan the QR code using the Viber app.",
+"viberChannelDescriptionMobile": "Connect your Viber account to be notified when you get a reply and continue the conversation on Viber. To get started, install the Viber app and tap Connect.",
+"viberQRCodeError": "An error occurred while fetching your Viber QR code. Please try again.",
+"wechatChannelDescription": "Connect your WeChat account to be notified when you get a reply and continue the conversation on WeChat. To get started, scan this QR code using the WeChat app.",
+"wechatChannelDescriptionMobile": "Connect your WeChat account to be notified when you get a reply and continue the conversation on WeChat. To get started, save this QR code image and upload it QR code scanner.",
+"wechatQRCodeError": "An error occurred while fetching your WeChat QR code. Please try again.",
+"whatsappChannelDescriptionDesktop": "Sync your account to WhatsApp by scanning the QR code or clicking the link below.\nThen",
+"whatsappChannelDescriptionMobile": "Sync your account to WhatsApp by clicking the link below.\nThen",
+"whatsappLinkingError": "An error occurred while fetching your WhatsApp linking information. Please try again."
+},
+"chatCustomScreenReaderAnnouncement": {
+"supportTyping": "{author} is typing",
+"supportSays": "{author} says:",
+"sentImage": "{author} sent an image",
+"sentFile": "{author} sent a file",
+"sentCarousel": "{author} sent a carousel",
+"sentLocation": "{author} sent a location"
+}
+}
+Follow us
+NordVPN
+About UsCareersVPN Free TrialVPN RoutersReviewsStudent & Employee DiscountWhere to buyRefer a FriendResearch Lab
+Engage
+What Is a VPN?IP LookupWhat Is My IP?Cybersecurity GlossaryCybersecurity HubSocial ResponsibilityTrust centerPress AreaBecome a Partner
+Help
+Support CenterPrivacy Policy Cookie Preferences Terms of ServiceContact Us
+Discover
+Nord SecurityNordLayerNordPassNordLockerNordStellarCoveronSaily
+NordVPN
+About UsCareersVPN Free TrialVPN RoutersReviewsStudent & Employee DiscountWhere to buyRefer a FriendResearch Lab
+Engage
+What Is a VPN?IP LookupWhat Is My IP?Cybersecurity GlossaryCybersecurity HubSocial ResponsibilityTrust centerPress AreaBecome a Partner
+Help
+Support CenterPrivacy Policy Cookie Preferences Terms of ServiceContact Us
+Discover
+Nord SecurityNordLayerNordPassNordLockerNordStellarCoveronSaily
+VPN APPS
+Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Android TV
+Apple TV
+VPN APPS
+Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Android TV
+Apple TV
+© 2026 Nord Security. All rights reserved
+Dansk Deutsch English Español Français Italiano Nederlands Norsk Polski Português Brasileiro Svenska ‪한국어‬ 日本語 繁體中文 Dansk

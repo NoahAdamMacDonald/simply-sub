@@ -1,0 +1,411 @@
+url: https://www.expressvpn.com/privacy-policy
+method: fetch
+saved: 2026-11-19
+
+ExpressVPN Privacy Policy
+Black Friday is live! Get up to 80% off the best VPN now.
+BLACK FRIDAY · ENDS SOON! Get up to 80% off
+Claim Offer
+Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+English
+Get Started
+menu opener
+Privacy Policy
+ExpressVPN Privacy Policy
+ExpressVPN is committed to protecting your privacy
+Last updated: October 2, 2026
+We want you to understand what information (including Personal Data) we collect in connection with your use of our Services and/or access to our Site; for what purpose such information is collected; how we collect, use, and store such information; to whom it may be disclosed; and how you can exercise your rights and access your information, verify its accuracy, correct it, and/or have it erased. Equally, we want you to know what information we do not collect under any circumstances. This policy does not cover or refer to data collected in holiday.com; please refer to the said website’s Privacy Policy to review the data practices for holiday.com services.
+In addition, this Privacy Policy outlines what security measures we take to safeguard your information and who you can contact if you have any queries or complaints about the contents of this Privacy Policy.
+Our guiding principle toward data collection is to collect only the minimal data required to operate world-class Services at scale. We designed our systems (and strive to constantly improve them) to not have sensitive data about our customers. We cannot disclose, misuse, or abuse, even when compelled, data that we do not possess. We do not collect logs of your online activity while you are connected to our Services, including no logging of browsing history, traffic destination, data content, or DNS queries. We also never store connection logs, meaning no logs of your IP address, your outgoing VPN IP address, connection timestamp, or session duration.
+This Privacy Policy must be read in conjunction with the ExpressVPN Terms of Service (the "Terms"). Together, they form a legally binding agreement between you and ExpressVPN, so please read them carefully. Unless otherwise stated, the capitalized terms in this Privacy Policy shall have the same meaning given to them in the Terms.
+ExpressVPN’s core mission is to keep your information private. In service of this mission, ExpressVPN’s headquarters and registered place of business is in the British Virgin Islands (BVI). Express Technologies Ltd. operates under BVI jurisdiction, in accordance with BVI laws.
+Learn more about KPMG’s recent independent audit of our privacy policy and the privacy protections of our server technology.
+Table of Contents
+General Information
+Personal Data
+How We Protect and Retain Your Personal Data
+How We Safeguard Your Personal Data With Relation to Service Providers
+Keys Data
+Usage Statistics Data and App Diagnostic Data
+MediaStreamer Data
+How We Protect and Retain Information Related to Email, Live Chat, and Feedback Forms
+Non-Personal Data we collect
+Interactions With Third-Party Products
+Users in the European Union and the United Kingdom
+Your Privacy Rights
+Users in California
+Users in Other US States
+Use by Children
+Changes to This Privacy Policy
+How to Contact ExpressVPN
+General Information
+ExpressVPN may collect eight (8) types of data depending on your use of the Services, as follows. You can find detailed information about each of them in the specific sections below. If you are just visiting our Site, please refer to the ‘Cookies and Third-Party Analytics’ section below.
+What data do we collect?
+(i) Personal data submitted in association with your Account ("Personal Data")
+Personal Data means any information relating to an identified or identifiable natural person who can be identified, directly or indirectly, by reference to an identifier such as a name, an identification number, location data, an online identifier, or one or more factors specific to that person. Personal Data is collected for the purpose of providing you with our Services, including preventing fraudulent signups or account hijacking, and may include the name, email address, and payment information that you submit to us when you create or update your Account. We are using Forter in order to help us prevent online fraud. You can read about the ways by which Forter may use and process your personal information in this address https://www.forter.com/privacy-policy.
+(ii) Aggregate Apps and VPN connection summary statistics ("Usage Statistics Data")
+A minimal amount of Usage Statistics Data is collected in order to maintain excellent customer support and quality of service. This type of data does not include information about users’ browsing and internet activity, including while connected to the VPN—we do not collect (and therefore do not use, disclose, or store) data about the content or destinations of VPN traffic, DNS queries, or user IP addresses.
+(iii) Data added to ExpressKeys ("Keys Data") (applicable only to ExpressKeys users)
+Keys Data refers to all the data stored within the ExpressKeys associated with your Account, which may include user logins and passwords to your services and accounts, as well as other types of data you choose to store. Keys Data is encrypted the moment you add it to ExpressKeys, and we are not capable of viewing, decrypting, or accessing Keys Data under any circumstance (even if you want us to). You may add, modify, and delete your Keys Data at any time by accessing your ExpressKeys dashboard.
+(iv) Anonymous App diagnostics, including crash reports ("App Diagnostic Data") (optional)
+App Diagnostic Data, which includes crash reports, usability diagnostics, and VPN connection diagnostics, is anonymized data that cannot be tied back to individual users. This feature is similar to a "send bug report" option. App Diagnostic Data is not shared by default. You must opt in, such as through the settings menu of your Apps, to send App Diagnostic Data to us.
+(v) IP addresses authorized to use MediaStreamer Services ("MediaStreamer Data") (applicable only to MediaStreamer users)
+Separately from VPN services, we also provide our optional MediaStreamer service for devices that do not support VPNs (e.g., Roku). Users who opt in to using MediaStreamer can choose to register specific IP addresses that should be authorized to use the service. These IP addresses are only used by ExpressVPN to provide the optional MediaStreamer service and not for any other purpose.
+(vi) Data for marketing purposes
+We collect a limited amount of data to help us understand the use of our App and marketing campaigns and facilitate our marketing efforts. This data cannot be linked to the online activity of any particular person.
+(vii) Identity Defender data
+Identity Defender data refers to personal data you voluntarily submit if you subscribe to and use our Identity Defender products (including Credit Scanner). When you are subscribing to and using our Identity Defender products, you voluntarily supply personal data necessary for us to provide you the Identity Defender services. Identity Defender products are separate from our VPN Services, and there is NEVER an association between the data collected for the VPN Services and your Identity Defender data. Identity Defender data is subject to a separate Identity Defender Privacy Policy.
+(viii) Information We Collect through Cookies
+We also automatically collect certain information about your interaction with the Services ("Usage Data"). To do this, we may use cookies, pixels and similar technologies ("Cookies"). To find out more about the Cookies we set please refer to "Cookie Policy".
+Personal Data
+ExpressVPN collects Personal Data that you provide by creating or updating an Account. We require Personal Data, such as an email address and payment information, so that we can provide you with our Services, email you, collect payments and corresponding taxes, prevent fraud, respond to support queries, and share relevant information about your Account and/or the Services.
+Specific Personal Data collected will depend on the payment method you choose and may include information such as name, billing country, billing address, and/or credit card number. For some forms of payment, you may be redirected to external websites operated by third-party payment processors (e.g., PayPal, Stripe, or other specific payment processors, depending on your location) to complete the transaction. To understand what personal data these processors collect and store, please refer to the respective processor’s terms and privacy policy. Payment methods that help to minimize the amount of Personal Data you submit to us, such as giftcards and Bitcoin, may also be available for you to use to subscribe to our Services. In addition, we engage with trusted partners for the purposes of simplifying the login process, detecting fraudulent signups, responding to chargeback requests, preventing account hijacking, and optimizing our marketing efforts. These partners may obtain user IP addresses, but these addresses are always stored separately from systems unrelated to these purposes and can never be connected to the online traffic of any user when using our VPN, because no record of any such behavior is collected.
+ExpressVPN uses your email address for the following reasons:
+To provide you with access to our Services, including through password reset or verification emails.
+To send emails related to your payment transactions. We may send you limited transactional communications related to your account and transactions with us. These communications include, but are not limited to, order confirmations, renewal notifications, and price increase notices. Such communications are necessary for the fulfillment of our contractual obligations and for legal purposes, including the defence against potential claims. We retain the data associated with these communications for a period of ten (10) years in compliance with applicable statutes of limitations for commercial claims to ensure compliance with legal requirements and to protect our legitimate interests. We ensure that these communications are kept to a minimum and are only sent when essential to maintain transparency and compliance with applicable laws.
+To send you updates and announcements.
+To communicate with you about your Account or respond to your communications.
+To send marketing information, such as offers, surveys, invitations, and content about other matters in connection with ExpressVPN that we believe may be of interest to you ("Marketing Emails"). You may choose to not receive Marketing Emails by following the unsubscribe procedure described in these emails.
+For marketing attribution. You may chose to opt-out from processing of your personal data for marketing purposes by contacting our DPO.
+Any personal information associated with ExpressVPN accounts is controlled only by ExpressVPN, including being stored on systems, servers, and services owned or leased by ExpressVPN and its subsidiaries. In the limited circumstances where this data may need to be processed by other related entities, it may be shared only when required, and for the duration required, for processing solely related to the purposes and legitimate interests outlined in this Privacy Policy, while ensuring at all times the same data protection standards. For avoidance of doubt, these circumstances do not include any situations where control of personal information of ExpressVPN users will be transferred to any other related entities, including but not limited to our ultimate holding company, Kape Technologies PLC, for any duration of time.
+ExpressVPN uses your Personal Data only for the purposes listed in this Privacy Policy, and we do not sell or lease your Personal Data to third parties. We collect and process your Personal Data for legitimate interest under the applicable law, more specifically to fulfill one or more lawful bases, as further described in the ‘Users in the European Union and the United Kingdom’ section of this Privacy Policy, including to fulfil our contractual obligations to you (i.e., according to the Agreement between you and ExpressVPN).
+You may opt-out from marketing communications at any time.
+How We Protect and Retain Your Personal Data
+Security. We have implemented best-in-class physical, procedural, and technical security measures with respect to our offices and information storage facilities so as to prevent any loss, misuse, or unauthorized access, disclosure, or modification of your Personal Data. Although we believe these systems are robust, it is important to understand that no data security measures in the world can offer completely infallible protection. For this reason, our guiding principle is to collect minimal data.
+Servers and data centers. Servers are housed in data centers with strong security practices. None of these data centers require us to collect or store any traffic data or Personal Data related to your use of the Services. If any data center were to ask us to log such data, we would immediately cease operations with said service provider and find alternative options. Even if a government were to physically seize one of our VPN servers, there would be no logs or information that would tie any individual user to a particular event, website, or behavior.
+Retention of your Personal Data. Your Personal Data—which, to reiterate, never includes any sensitive data such as browsing history, DNS queries, or IP addresses linked to that information or any other online behavior—is retained for a limited period in accordance with applicable data protection law (for as long as we have your consent or a legitimate reason for holding such data). You may request to have your data deleted by sending a valid deletion request to our DPO. Please note that if you request the deletion of your Personal Data, we will maintain records necessary for legal compliance, and you will no longer be able to use the Services.
+Dedicated IP add-on. ExpressVPN’s Dedicated IP was built with your privacy in mind. Zero-knowledge encryption is used to allocate IP addresses, ensuring that there is no link between your Account and your allocated Dedicated IP. Your allocated IP address and its configuration settings remain encrypted and protected by an access code of your choice, and this code is the only way to unlock your Dedicated IP on any of your devices. We recommend using a strong and unique code, different from your Account password, to ensure that it is not easily guessed. No ExpressVPN staff or Service Providers can view or retrieve the access code or the Dedicated IP address allocated to you (not even if you authorize us to do so).
+Legal. Your Personal Data is controlled by and stored under ExpressVPN, and not by its ultimate holding company, Kape Technologies PLC (UK) or other related entities. Express Technologies Ltd. operates under BVI jurisdiction, in accordance with BVI laws (pursuant to Section 16 of the Terms). Consequently, any demand via legal means for Personal Data (or other types of data) is subject to BVI jurisdiction and laws. We fight vigorously to defend our rights (and those of our users) if an attempt is made to bypass the privacy protections provided for by the BVI. A parent, subsidiary, or related entity cannot be compelled to, nor would it voluntarily, provide Personal Data stored by Express Technologies Ltd.
+To learn more about how we protect your privacy and security, visit the ExpressVPN Trust Center.
+How We Safeguard Your Personal Data With Relation to Service Providers
+Agents, contractors, and third-party service providers of ExpressVPN ("Service Providers") may have controlled access to relevant data to help us process payments, administer the Services, and otherwise assist us in operating our business. All Service Providers who may gain access to such data are bound by written data processing agreements and have confidentiality and data processing obligations to keep the data confidential and not use them for any other purpose than to carry out the services they are performing on behalf of ExpressVPN. These obligations include contractual commitments to protect data as required by applicable laws, including those covering the transfer of Personal Data from the United Kingdom, the European Union, or the European Economic Area to a third country. Where Personal Data is transferred internationally, we ensure that appropriate safeguards are in place, including the use of standard contractual clauses approved by the European Commission or the UK Secretary of State, reliance on adequacy decisions, or other lawful transfer mechanisms under applicable data protection law.
+Service Providers only have access to the data necessary for the services they are performing on behalf of ExpressVPN, which in any case will never include VPN activity or connection data as we do not collect such data.
+In addition to Service Providers, we may share your Personal Data where you have provided your consent to us for sharing or transferring your Personal Data (e.g., marketing consents or opt-in to optional additional services or functionality).
+Keys Data
+We collect and store Keys Data only if you choose to use ExpressKeys, the password and secure data manager service accessible via your Account. Keys Data stored in ExpressKeys is secured with zero-knowledge encryption. No ExpressVPN staff or Service Providers can view or retrieve the information you store in ExpressKeys (not even if you authorize us to do so).
+Your Keys Data is your property. You may add, modify, and delete Keys Data at your discretion by accessing your ExpressKeys dashboard. For your protection, you should create a strong and unique primary password for ExpressKeys to ensure that it is not easily guessed. It should also be different from the password used to access your Account.
+You can import data from other password management tools into ExpressKeys by following the instructions in your Account. Before doing so, we strongly suggest that you review the data portability rules of your former password manager provider, as these are not under ExpressVPN’s control.
+Usage Statistics Data and App Diagnostic Data
+In order to maintain excellent customer support and quality of service, ExpressVPN collects certain information related to your VPN usage, as described below. The data we collect for this purpose is visible to our staff strictly on a need-to-know basis, and may be shared with Service Providers for the purposes above, but is kept confidential at all times.
+We ensure that Usage Statistics Data and App Diagnostic Data never include any sensitive information, in line with our overall commitment to never logging browsing history, traffic destination, data content, IP addresses, or DNS queries.
+With regard to VPN Usage Statistics, our principle of minimal data collection means that:
+We do not know which user ever accessed a particular website or service.
+We do not know which user was connected to the VPN at a specific time or which VPN server IP addresses they used.
+We do not know the set of original IP addresses of any given user’s computer.
+Should anyone try to compel ExpressVPN to release user information based on any of the above, we cannot supply this information because the data does not exist.
+Apps and App Versions
+We collect information related to which Apps and Apps versions you have activated in order to use our Services. Knowing your current App version allows our Support Team to troubleshoot technical issues you may encounter.
+Marketing and Remarketing
+ExpressVPN collects limited technical and engagement data—including country code (derived from a hashed IP address), operating system version, device language, app version, device model, and randomized identifiers such as an Installation ID or XV User ID—to measure the effectiveness of our marketing campaigns and analyze conversion attribution. This data may also include advertising identifiers (such as IDFA or Android Advertising ID) only when you have provided explicit consent, and it is used solely to understand which channels drive app installs and subscriptions. While this data does not include your name, email, browsing activity, or precise location, it may be linked to your device or app installation for measurement purposes and can be treated as personal data under applicable privacy laws. You may manage or withdraw your consent at any time through the Privacy Settings in the ExpressVPN app or by contacting our DPO. This information is shared with third-party analytics platforms like AppsFlyer strictly for these marketing and attribution purposes. In line with our no-logs policy, commitment to genuine privacy, and to protect our users from IP correlation attacks, when connected to ExpressVPN, all AppsFlyer-bound traffic is automatically routed through a dedicated pool of ExpressVPN IP addresses. AppsFlyer can see that a user is connected to ExpressVPN, but has no visibility into which server location they've selected or any patterns in their server usage.
+With your consent where required by law, we may use mobile advertising identifiers (e.g., IDFA, Android Advertising ID) and hashed contact identifiers you provide (such as email addresses or hashed user IDs) to create advertising audiences for remarketing and winback campaigns. These campaigns may be delivered via third-party platforms such as Meta, TikTok, Google Search, YouTube, or similar services. This includes matching identifiers from our systems with advertising partners to show you ExpressVPN ads during or after your subscription.
+Successful Connection
+As you use the App, we collect information about whether you have successfully established a VPN connection on a particular day (but not a specific time of the day), to which VPN location (but not your assigned outgoing IP address), and from which country/ISP (but not your source IP address). This minimal information assists us in providing technical support, such as identifying connection problems, providing country-specific advice about how to best use our Services, and enabling ExpressVPN engineers to identify and fix network issues.
+Aggregate Sum of Data Transferred (in MB)
+We collect information regarding the total sum of data transferred by a given user. Although we provide unlimited data transfer, if we notice that a single user pushes more traffic than thousands of others combined, thereby affecting the quality of Services for other ExpressVPN users, we may contact that user for an explanation.
+Usage Statistics Data Summary
+In summary, we collect minimal usage statistics to maintain our quality of service. We may know, for example, that our customer John connected to our New York VPN location on Tuesday and transferred an aggregate of 823 MB of data across a 24-hour period. John cannot be uniquely identified as responsible for any specific online behavior because his usage pattern overlaps with thousands of other ExpressVPN customers who also connected to the same location on the same day.
+We’ve engineered our systems to categorically eliminate storage of sensitive data. We may know THAT a user has used ExpressVPN, but we are unable to single out the user, and we never know HOW they have utilized our Service. We stand by our firm commitment to our users’ privacy by not possessing any data related to a user’s online activities.
+App Diagnostic Data
+With your opt-in permission, we collect anonymized App Diagnostic Data, which includes crash reports, usability diagnostics, and VPN connection diagnostics. We use this data in our network operations tools to help optimize network speeds and to let us identify problems and areas for improvement related to specific apps, VPN servers, or internet service providers (ISPs). This App Diagnostic Data is fully anonymized and cannot be tied back to individual users (i.e., we do not store which user sent which data, and we do not store user IP addresses).
+If you opt in to share this information with ExpressVPN (in the settings menu of your Account), we will collect the following anonymized App Diagnostics Data:
+Diagnostic information about if and how a VPN connection attempt failed.
+Speed test data.
+App diagnostics, including crash reports and usability diagnostics, without any personally identifiable information. These are handled in an anonymized form by the following Service Providers bound by non-disclosure and other contractual obligations, dependent on the platform you are using ExpressVPN on:
+Windows: Sentry, owned by Functional Software, Inc. See Sentry's Privacy Policy.
+Mac: Firebase Crashlytics, owned by Google, and Sentry, owned by Functional Software, Inc. See Firebase's Privacy and Security documentation and Sentry's Privacy Policy.
+Linux: Sentry, owned by Functional Software, Inc. See Sentry's Privacy Policy.
+iOS: Firebase Crashlytics, owned by Google, and Apple. See Apple's Privacy Policy and Firebase's Privacy and Security documentation. You can disable Apple's crash reporting in iOS settings as described here.
+Android: Firebase Crashlytics, owned by Google. See Firebase's Privacy and Security documentation.
+Browser extensions: Google Analytics, owned by Google. See Google's Privacy Policy.
+Upon activation of any of our Apps, you will be asked if you would like to share App Diagnostics Data with ExpressVPN. You can start or stop sharing this data at any time in your App’s settings menu. On iOS, Apple’s crash reporting can be turned off in iOS settings.
+MediaStreamer Data
+MediaStreamer is our service for consoles and other devices that don’t support running a VPN (e.g., Roku). Because the service doesn’t run on an app and doesn’t have an option for username/password authorization, we rely on a system that authorizes specific IP addresses that you have chosen to register with us. You can register IP addresses by logging in to our Site and using the "DNS Settings" page. Those IP addresses (the MediaStreamer Data) are then stored in our system in order to identify authorized devices for MediaStreamer and are not used for any other purpose.
+If you do not wish to use our MediaStreamer service but have devices that cannot run a VPN, we suggest using the ExpressVPN App for routers. Like all of our Services outside of MediaStreamer, the App for routers does not require IP address registration. Please contact us via live chat at www.expressvpn.com/support, and we will guide you through the steps.
+How We Protect and Retain Information Related to Email, Live Chat, and Feedback Forms
+ExpressVPN keeps records of any correspondence, questions, complaints, or compliments you submit to us through our Site or Services, along with our response. Depending on how you contact ExpressVPN, we may collect your email address and any additional information you provide to us. Having full correspondence records enables our staff to provide the best possible customer support experience.
+We use two different third-party platforms for support correspondence: Zendesk for emails and support tickets and TeamSupport for live chat. When you correspond with us using these platforms, they will store your correspondence records—including your email address, as well as user and device attributes that help with troubleshooting, such as the country you are contacting us from and your device’s operating system. Both platforms utilize modern security practices and SSL encryption. See Zendesk’s Privacy Notice and TeamSupport’s Privacy Policy.
+Non-Personal Data we collect
+Device information
+ExpressVPN uses device information (including device type, operating system/language, or user agent, as well as mobile identifiers provided by Android or iOS devices) to generate statistics related to the marketing channels and advertising partners through which users learned about and signed up for ExpressVPN Apps. This device information does not contain your name, email address, or other Personal Data.
+Disabling or resetting mobile identifiers
+Users may disable or reset the mobile identifiers associated with their devices at any time. For instructions, see Apple’s page on Advertising and Privacy on iOS devices and Google’s page on Managing your Google Settings on your Android device.
+Email/communication analytics
+To assess and improve the emails and other communications we send, ExpressVPN or its Service Providers may collect data for statistical reports. For example, we may generate reports assessing whether emails were successfully sent, whether there were any delivery delays, or the number of times an email was opened.
+Interactions With Third-Party Products
+The Site may contain links to external websites, mobile software applications, products, or services that are not owned or controlled by ExpressVPN, and may be subject to specific terms and conditions. Please be aware that such third parties may collect personal information from you. ExpressVPN is not responsible for the privacy practices or the content of such external websites. We encourage you to read the terms and conditions and privacy policies of each third-party service provider you engage in connection with the Site or the Services.
+Users in the European Union and the United Kingdom
+ExpressVPN is committed to user privacy globally, and our existing practices reflect that through minimal collection of data and ensuring users have control over their Personal Data. The General Data Protection Regulation ("GDPR") of the European Union ("EU"), and the Data Protection Act 2018 ("UK GDPR"), the retained EU law version of the GDPR as it forms part of UK domestic law by virtue of the European Union (Withdrawal) Act 2018 require us to outline those practices in a specific manner for users in the EU and the United Kingdom ("UK").
+In line with the GDPR and the UK GDPR, we collect and process the Personal Data outlined in this Privacy Policy on one of the following bases, depending on the circumstances:
+For the purposes of fulfilling our contractual obligations, including:
+Providing Subscribers with the Services they have requested.
+Managing subscriptions and processing payments in connection with our Services.
+Providing customer support.
+For a legitimate interest associated with the operation of our business, including:
+Enhancing the quality, reliability, and effectiveness of our Services.
+Communicating with customers to provide information and seek feedback related to our Services.
+For compliance with a legal obligation to which ExpressVPN is subject.
+With the consent of users, which users can withdraw at any time.
+Your Privacy Rights
+In using our Services, you have the following rights (subject to certain exceptions or exemptions):
+You have a right to access personal data held about you.
+You have the right to request that we rectify any personal data we hold that is inaccurate or incomplete.
+You have the right to request the deletion of your personal data. Please note that such deletion may result in us no longer being able to provide you with our Services.
+You have the right to request restriction of the processing of your personal data.
+You have the right to object to the processing of your personal data, including where we process your data on the basis of legitimate interests.
+You have the right to request and receive your personal data in a commonly used format (data portability).
+You have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning you or similarly significantly affects you.
+You have the right to withdraw your consent on which processing is based at any time.
+You have a right to lodge a complaint with a supervisory authority, in particular the Information Commissioner’s Office (ICO) in the United Kingdom or your local data protection authority in the EU.
+You can exercise your rights above by contacting us as described in the ‘How to Contact ExpressVPN’ section below.
+You may have a third party submit a request on your behalf as an authorized agent. To confirm that the authorized agent is entitled to submit a request on your behalf, they must have written authorization signed by you, and you must provide us with a copy of the signed authorization. To ensure your privacy and security, we may take further steps to verify your identity.
+We will address any requests in accordance with applicable laws and to the best of our ability in a timely manner.
+Users in California
+Under the "Shine the Light Act" (California Civil Code Section 1798.83), California residents may request information about any disclosure of personal data to third parties for their direct marketing purposes. We do not disclose any such data to third parties for direct marketing. Nonetheless, California residents who wish to make a request (once per user per year) may contact us as described in the ‘How to Contact ExpressVPN’ section below.
+The following rights (which may be subject to certain exemptions or derogations) shall apply to individuals covered by the California Consumer Privacy Act, as amended by the California Privacy Rights Act (together, the "CCPA"):
+You have the right to know what categories and specific pieces of personal information are being collected about you, the sources from which it is collected, the purposes for which it is used, and the categories of third parties with whom it is shared.
+You have the right to request the deletion of your personal data. Please note that such deletion may result in us no longer being able to provide you with our Services.
+You have the right to opt out of the sale or sharing of your personal information for cross-context behavioural advertising. ExpressVPN does not sell or share your personal information as defined under the CCPA; however, you may exercise this right at any time by contacting us.
+You have the right to request the correction of inaccurate personal information that we hold about you.
+You have the right to limit the use and disclosure of your sensitive personal information to purposes that are necessary to perform the services you have requested.
+You have the right not to be discriminated against for exercising any of these rights or other rights under the CCPA.
+You have the right to withdraw your consent on which processing is based at any time.
+We will respond to verifiable consumer requests within forty-five (45) days of receipt, which period may be extended by an additional forty-five (45) days where reasonably necessary, provided we notify you of the extension. You will not be charged a fee to exercise any of the above rights.
+Users in Other US States
+A number of US states, including Virginia, Colorado, Connecticut, Texas, Oregon, Montana, and others, have enacted comprehensive privacy laws that grant their residents certain rights over their personal data. If you are a resident of a state with an applicable privacy law, you may have some or all of the following rights, depending on your state of residence:
+The right to access and obtain a copy of the personal data we hold about you.
+The right to request the correction of inaccurate personal data.
+The right to request the deletion of your personal data, subject to certain exceptions.
+The right to opt out of the sale of your personal data, targeted advertising, and, in certain states, profiling that produces legal or similarly significant effects.
+The right to obtain your personal data in a portable and readily usable format (data portability).
+The right not to be discriminated against for exercising your privacy rights.
+Where required by applicable state law, we will obtain your consent before processing sensitive personal data, which may include data revealing racial or ethnic origin, religious beliefs, health information, sexual orientation, citizenship or immigration status, genetic or biometric data, and precise geolocation data. ExpressVPN does not sell your personal data to third parties. To exercise any of the rights described above, or if you have questions about your state’s privacy protections, please contact us as described in the ‘How to Contact ExpressVPN’ section below. We will respond to your request within the timeframe required by applicable law. If you are unsatisfied with our response, certain state laws may permit you to appeal our decision by contacting us, and we will respond to your appeal in accordance with the applicable law.
+Use by Children
+We do not offer our Services for use by children and, therefore, we do not knowingly collect Personal Data from, and/or about individuals under the age of eighteen (18) or under the age of majority in the jurisdiction of residency / from which the Services are used. If you are under the age of eighteen (18), or under the age of majority in the jurisdiction where you reside or from which you use the Services, do not provide any Personal Data to us without the involvement of a parent or a legal guardian. In addition, we comply with the US Children’s Online Privacy Protection Act ("COPPA") and do not knowingly collect personal information from children under the age of thirteen (13). For the purposes of the UK GDPR and the DPA 2018, we do not intend to offer information society services directly to children. Where consent is relied upon as the lawful basis for processing, the consent of a child under the age of thirteen (13) must be given or authorised by the holder of parental responsibility, in accordance with section 9 of the DPA 2018. In the event that we become aware that you provide Personal Data in violation of applicable privacy laws, we reserve the right to delete it. If you believe that we might have any such information, please contact us as described in the ‘How to Contact ExpressVPN’ section below.
+Changes to This Privacy Policy
+We may change our Privacy Policy from time to time, consistent with applicable privacy laws and principles. Where we make material changes, we will notify you by email or through a prominent notice on our Site prior to the change becoming effective. Your continued use of the Services and/or access to the Site after such notification constitutes your acceptance of the updated Privacy Policy.
+How to Contact ExpressVPN
+If you have any questions, concerns, or complaints regarding our Privacy Policy, our compliance with the applicable laws, or how we handle your information or if you wish to exercise your privacy rights, please feel free to contact us at the following email address:
+You may also refer any questions regarding this Privacy Policy to our Group Data Protection Officer (DPO) by writing to dpo@expressvpn.com.
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More
+Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+PROUD TO HAVE PARTNERED WITH THE BIGGEST NAMES IN SPORTS
+Official Digital Privacy Partner
+Official Digital Privacy Partner
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Choose language
+Español
+Deutsch
+Français
+العربية
+Български
+Čeština
+Dansk
+Ελληνικά
+Suomi
+עברית
+Hrvatski
+Magyar
+Indonesia
+Italiano
+日本語
+한국어
+Nederlands
+Norsk
+Polski
+Português
+Română
+Русский
+Svenska
+ไทย
+Türkçe
+Українська
+Tiếng Việt
+Srpski
+Need help? Chat with us!
+Live Chat
+Online
+English
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+This content is not available in your region
+To continue, please visit our dedicated website for the United Arab Emirates.
+ExpressVPN for UAE

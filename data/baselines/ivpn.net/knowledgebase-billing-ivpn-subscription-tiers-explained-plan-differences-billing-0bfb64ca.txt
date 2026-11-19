@@ -1,0 +1,117 @@
+url: https://www.ivpn.net/knowledgebase/billing/ivpn-subscription-tiers-explained-plan-differences-billing-and-service-management/
+method: fetch
+saved: 2026-11-19
+
+IVPN Subscription Tiers Explained / Plan Differences, Billing, and Service Management - IVPN Help
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Help Center
+General
+Troubleshooting
+Billing
+Passwords
+Privacy
+Windows
+macOS
+GNU/Linux
+iOS
+Android
+Routers
+Media Players
+IVPN Subscription Tiers Explained / Plan Differences, Billing, and Service Management
+IVPN subscriptions are available in three tiers: Standard, Plus, and Pro Suite.
+Standard includes the VPN service with Multi-hop, AntiTracker, and up to five devices. Plus features everything in Standard and adds Mailx and modDNS. Pro Suite includes everything in Plus and adds Portmaster Pro, with VPN device limit increased to 10. A full comparison is available on the Services Overview page.
+If you had an existing IVPN Standard or Pro plan before May 2026: Standard now includes Multi-hop and a five-device limit, up from two. Pro is now the Pro Suite with access to additional services and a ten-device limit, up from seven. Pricing is unchanged and no action is required on your part. Details of these changes are covered in the announcement blog post.
+How do I get access to Additional Services after purchase?
+Log into the Account Area on the ivpn.net website, locate the “Additional Services” area near the bottom of the page, and click the “Set up” button to enable a service. A new browser tab will open to add credentials to the account for the service.
+When I click “Set up” for Mailx or modDNS, do I get a separate credential I also need to save?
+Yes. Services have no knowledge of any other service, so separate credentials are required. IVPN accounts require no email address, but both Mailx and modDNS require a valid email address. You have the option to use passkeys or passwords for these services, and 2-factor authentication is available.
+Can I upgrade mid-subscription? Is the price difference prorated?
+Yes, and yes. Cash and Apple/Google in-app payments are not available for upgrades.
+When will my account renew after upgrading?
+The original IVPN account expiry date is unchanged after upgrade.
+How do I downgrade? Can I do it at any time?
+Contact support to initiate an IVPN account downgrade. You will be presented with a choice to receive either a prorated refund, or a time extension on the existing expiry date, based on the time remaining and the new product selected.
+For cash and Apple/Google in-app payments, only the time extension option is available.
+If you have used a variety of payment methods over the history of the IVPN account, the most recent payment method governs the available options to handle the downgrade reimbursement.
+If I downgrade, will I have to set up the VPN again?
+A downgrade from the IVPN Pro Suite to either Plus or Standard resets all IVPN App sessions, and the app will require a login on all devices. A downgrade from IVPN Plus to Standard has no impact on the IVPN App’s sessions, so no logging back in is required.
+Manually generated and added WireGuard keys remain intact in all scenarios, so no action is required with manual connections where the IVPN App is not involved, like routers.
+What happens to my Additional Services and devices when I downgrade?
+Access to extra services will be immediately removed after the downgrade is complete. You will be asked to confirm your downgrade choice before the process is performed.
+Export data from Mailx and modDNS before confirming the downgrade request to prevent data loss.
+The Mailx and modDNS accounts will no longer be associated with your IVPN account and will be purged from our systems. Once removed, access cannot be restored.
+Portmaster Pro will revert to Portmaster Free.
+What happens to my Additional Services if my IVPN account expires?
+Mailx: Your account enters limited access mode. Existing aliases continue to forward email with no time limit. You cannot create new aliases, wildcard aliases, or recipients. To restore full access, add time to your IVPN account.
+modDNS: DNS resolution continues during a 14-day limited access period. No changes to custom entries or blocklists are accepted. After 14 days, resolution stops. Restore your account within this period to avoid service interruption.
+Portmaster Pro: Reverts to Portmaster Free when the account expires. SPN access and detailed bandwidth history are not available on the Free tier.
+You can delete your additional service accounts at any time, regardless of your IVPN subscription status. Deletion permanently removes all account data.
+If I lose the Mailx or modDNS credentials, what happens to my aliases and DNS config? How do I recover the accounts?
+The Mailx aliases and modDNS profiles will remain active as long as the IVPN account is active.
+Account recovery using your IVPN Account ID is not possible due to the privacy-first design of Unlinked Access. Contact support to reset access to Mailx and modDNS, which will enable you to create fresh accounts for these services.
+After reset, previous Mailx and modDNS accounts will not receive expiry date synchronization updates from the active IVPN account, and will be purged from our systems.
+We recommend that you store your Mailx and modDNS access details in a secure place to avoid this scenario. You can also set up multiple login methods (i.e. a passkey alongside email and password) as a failsafe. You might also prefer to regularly export data from your accounts to mitigate the recovery time from this scenario.
+Related Articles
+How can I reactivate my account?
+Paid with PayPal using eCheck but IVPN account is still in Pending/Suspended state. Why?
+PayPal won't let me pay with my credit card. Can you help?
+I paid with PayPal but my account is still pending. Why?
+Still have questions?
+Get in touch and we'll get back to you in a few hours.
+Contact support
+Interested in privacy?
+Read our latest privacy news and keep up-to-date on IVPN services.
+Visit IVPN Blog
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

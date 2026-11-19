@@ -1,0 +1,66 @@
+url: https://obscura.com/knowledge/deleting-account/
+method: fetch
+saved: 2026-11-19
+
+How to Delete an Obscura Account | Obscura
+Skip to content Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Search CtrlK Cancel
+How To Bypass Reddit "Network Security" Block
+How to Delete an Obscura Account
+DNS Options in Obscura
+Downloading Obscura
+Obscura's VPN Kill Switch
+Managing Devices
+Managing Payments
+Referring a Friend to Obscura
+Set Network Priority in macOS
+Using Obscura via WireGuard
+Troubleshooting Strict Leak Protection Bugs
+Troubleshooting Connection Issues
+Troubleshooting DNS Issues
+Our Architecture What is a Debug Bundle
+Relay Nodes & Exit Nodes
+Mitigating Attacks Protecting Against TunnelVision
+On this page Overview
+How Deletion Affects Payments Methods Top-Ups
+Stripe Subscriptions
+App Store Subscriptions
+Deleting Data Without Deleting Account
+On this page
+Overview
+How Deletion Affects Payments Methods Top-Ups
+Stripe Subscriptions
+App Store Subscriptions
+Deleting Data Without Deleting Account
+How to Delete an Obscura Account
+Last updated: Jan 12, 2026
+If you wish to permanently delete your Obscura account, all its associated data and cancel your subscription, simply follow these steps.
+Open the Obscura app
+Navigate to the Account tab in the app
+Select the red Delete Account button at the bottom of the page and confirm
+Caution
+Subscriptions purchased via Apple’s App Store must be canceled manually after account deletion. To cancel your subscription, see Apple’s subscription cancelation guide.
+Note
+Any use or login using the account number will recreate the account. No data will be retained from the previously deleted account.
+How Deletion Affects Payments Methods
+Section titled “How Deletion Affects Payments Methods”
+Top-Ups
+Section titled “Top-Ups”
+Any funds added to your account through top-up will be removed along with your account.
+Stripe Subscriptions
+Section titled “Stripe Subscriptions”
+Your stripe subscription will be canceled automatically when your account is deleted, so you won’t be charged for unused time.
+App Store Subscriptions
+Section titled “App Store Subscriptions”
+Apple requires that subscriptions purchased via Apple’s App Store are canceled manually, even after account deletion. See Apple’s subscription cancelation guide for instructions.
+Deleting Data Without Deleting Account
+Section titled “Deleting Data Without Deleting Account”
+To delete all data on your account without deleting the account itself, you can send a deletion request to support@obscura.net.

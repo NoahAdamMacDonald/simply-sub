@@ -1,0 +1,131 @@
+url: https://www.ivpn.net/en/pricing/
+method: browser
+saved: 2026-11-19
+
+Your status: not connected to IVPN
+IP address: 146.70.198.159
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+Login
+Select your plan
+Three tiers. Pick based on your privacy needs.
+IVPN STANDARD
+Core VPN service
+IVPN / 5 Devices
+[i]
+AntiTracker
+[i]
+1 Week
+$2
+1 Month
+$6
+1 Year
+$60
+SELECT PLAN
+IVPN PLUS
+Added DNS & email privacy
+IVPN / 5 Devices
+[i]
+modDNS
+[i]
+Mailx
+[i]
+1 Week
+$3
+1 Month
+$8
+1 Year
+$80
+SELECT PLAN
+IVPN PRO SUITE
+Complete network stack
+IVPN / 10 Devices
+[i]
+modDNS
+[i]
+Mailx
+[i]
+Portmaster Pro (Linux, Windows)
+[i]
+1 Week
+$4
+1 Month
+$10
+1 Year
+$100
+SELECT PLAN
+Pricing in USD. Team licensing for VPN-only plans available here.
+No email required for signup
+30-day refund window
+Cash, Monero, Bitcoin accepted
+The privacy stack
+Four standalone privacy services operated by IVPN
+All services are open-source
+Additional services are activated separately after purchase
+Additional services authorise access without receiving your IVPN account ID (Unlinked Access)
+REVIEW SERVICE FEATURES
+Portmaster
+IVPN features
+Open-source clients (Android, iOS, macOS, Windows, Linux/CLI)
+Quantum-resistant WireGuard connections
+Private DNS resolvers (no third-party logging)
+DNS-based AntiTracker with configurable blocklists
+Kill switch with network firewall integration
+Obfuscation protocols (v2Ray, obfsproxy)
+SOCKS5 proxy service
+Router and NAS deployment support
+Audited & transparent
+No connection logs or session data retained
+No customer information stored post-purchase
+Annual third-party security audits since 2019
+Public transparency reports and warrant canary
+Disclosed ownership and team, operating since 2009.
+No affiliate program, no tracking scripts, no surveillance advertising
+Limitations we acknowledge
+We operate servers in 58 locations / 41 countries.
+We don't offer port forwarding.
+No streaming compatibility guarantees.
+Payment Methods
+Credit Card
+PayPal
+Bitcoin
+BTC Lightning
+Monero
+Cash
+If you've read this far, you know what we're about.
+Choose the plan that matches your threat model.
+SELECT PLAN
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Versión española
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

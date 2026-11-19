@@ -1,0 +1,85 @@
+url: https://obscura.com/knowledge/payments/
+method: fetch
+saved: 2026-11-19
+
+Managing Payments | Obscura
+Skip to content Checking your connection…
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Product
+Learn
+PricingDiscord
+Manage AccountGet Started
+Search CtrlK Cancel
+How To Bypass Reddit "Network Security" Block
+How to Delete an Obscura Account
+DNS Options in Obscura
+Downloading Obscura
+Obscura's VPN Kill Switch
+Managing Devices
+Managing Payments
+Referring a Friend to Obscura
+Set Network Priority in macOS
+Using Obscura via WireGuard
+Troubleshooting Strict Leak Protection Bugs
+Troubleshooting Connection Issues
+Troubleshooting DNS Issues
+Our Architecture What is a Debug Bundle
+Relay Nodes & Exit Nodes
+Mitigating Attacks Protecting Against TunnelVision
+On this page Overview
+Subscriptions Managing Your Subscription
+Canceling a Subscription
+Top-Ups
+Combining Subscriptions and Top-Ups
+Discount Codes
+What Happens When Your Account Expires
+On this page
+Overview
+Subscriptions Managing Your Subscription
+Canceling a Subscription
+Top-Ups
+Combining Subscriptions and Top-Ups
+Discount Codes
+What Happens When Your Account Expires
+Managing Payments
+Last updated: Aug 10, 2026
+Obscura offers two ways to pay. Subscriptions that renew automatically and top-ups that add a fixed amount of time to your account.
+Subscriptions
+Section titled “Subscriptions”
+A subscription charges your credit card monthly and renews automatically. You can subscribe through:
+The Obscura website via credit card
+The iOS app via the Apple App Store
+The Android app via Google Play
+To subscribe from the website, you can visit the Subscription page.
+Note
+Cryptocurrency payments aren’t supported for subscriptions. To pay with either
+Bitcoin Lightning or Monero, top up your account instead.
+Managing Your Subscription
+Section titled “Managing Your Subscription”
+How you manage your subscription depends on where you subscribed:
+Subscription made on the website: Click Manage Subscription on your Subscription page to open the Stripe portal. From there you can update your payment method, view invoices, or cancel.
+Apple: Open Settings > Account > Subscriptions on your Apple device, or manage online at apps.apple.com. From there you can cancel auto-renewal.
+Google: Go to Google Play subscriptions or open the Google Play app and tap your profile > Payments & subscriptions > Subscriptions. From there you can cancel auto-renewal.
+Canceling a Subscription
+Section titled “Canceling a Subscription”
+When you cancel, your account stays active until the end of the current billing period. You won’t be charged again.
+Caution
+Apple and Google subscriptions must be canceled manually through their
+respective stores. They are not canceled automatically, even if you delete
+your Obscura account.
+Top-Ups
+Section titled “Top-Ups”
+A top-up is a one-time payment that adds time to your account. Once the time runs out, you need to top up again. Top-ups are available from the Top-Up page in your account.
+You can pay for a top-up via Credit Card, Bitcoin Lightning or Monero
+Combining Subscriptions and Top-Ups
+Section titled “Combining Subscriptions and Top-Ups”
+If you top up while you have an active subscription, your subscription pauses automatically. Obscura uses your top-up balance first, and once it runs out, your subscription resumes and starts billing again.
+Discount Codes
+Section titled “Discount Codes”
+If you have a discount code, you can apply it during checkout. On the Top-Up page, expand Got a code? and enter your code to see the discounted price before paying. On the Subscription page expand Add code at the top of the page. Discount codes can also be shared via link, so opening a shared link will apply the code automatically.
+What Happens When Your Account Expires
+Section titled “What Happens When Your Account Expires”
+If your account runs out of time and you don’t have an active subscription, you won’t be able to connect to Obscura. Your account is not deleted, so you can simply top up or re-subscribe to start using Obscura again.

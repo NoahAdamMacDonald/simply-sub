@@ -1,0 +1,94 @@
+url: https://www.ivpn.net/knowledgebase/general/what-payment-methods-do-you-accept/
+method: fetch
+saved: 2026-11-19
+
+What payment methods do you accept? - IVPN Help
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Help Center
+General
+Troubleshooting
+Billing
+Passwords
+Privacy
+Windows
+macOS
+GNU/Linux
+iOS
+Android
+Routers
+Media Players
+What payment methods do you accept?
+IVPN accepts the following payment methods via our website:
+Bitcoin (via our own BTCPay server)
+Monero (self-hosted)
+PayPal
+Credit/Debit Cards (except American Express and any types of Prepaid/Gift Cards)
+In-app payments for IVPN Standard via our mobile apps for iOS and Android. Note: Android in-app payments are temporarily unavailable while the app is not on Google Play. Add time via My account on ivpn.net instead.
+Physical voucher cards and digital voucher codes
+Cash
+We run our own nodes for both Bitcoin and Monero.
+Related Articles
+Does IVPN support Roku media players?
+Do you support IPv6?
+Does VoIP work with IVPN?
+How do I send a secure PGP encrypted email to IVPN?
+What information is collected and stored about all visitors to your website?
+Still have questions?
+Get in touch and we'll get back to you in a few hours.
+Contact support
+Interested in privacy?
+Read our latest privacy news and keep up-to-date on IVPN services.
+Visit IVPN Blog
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

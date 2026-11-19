@@ -1,0 +1,240 @@
+url: https://www.expressvpn.com/support/knowledge-hub/how-to-export-data-stored-in-expresskeys/
+method: fetch
+saved: 2026-11-19
+
+How to export data from ExpressKeys Explore ExpressVPN Why ExpressVPN? VPN Security & Access Features
+No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Desktop Mobile TV & Streaming Routers Extensions
+Windows new
+MacOS new
+Linux new
+iPhone / iPad
+Android
+Apple TV
+Fire Stick
+Android TV
+VPN for Routers
+Aircove Routers
+Chrome
+Firefox
+Edge
+Pricing
+Resources VPN Basics Content Library Tools Support
+What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Blog
+Glossary
+IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+My Account
+Get Started menu opener
+menu opener
+Explore ExpressVPN Explore ExpressVPN Why ExpressVPN? Why ExpressVPN? No-Logs Policy
+Servers in 113 Countries
+Use on Multiple Devices
+High-Speed VPN
+Access Online Services Securely
+VPN for Gaming
+Explore All Features
+About ExpressVPN
+One subscription gives you access to a fast-growing suite of privacy and security tools that work seamlessly together to improve your digital life.
+View all products
+VPN Security & Access Features VPN Security & Access Features Lightway VPN Protocol
+Internet Kill Switch
+Split Tunneling
+Private, Encrypted DNS
+Avoid ISP Throttling
+Threat Manager
+Ad Blocker
+Parental Controls
+Dedicated IP
+Download VPN Download VPN Desktop Desktop Windows new
+MacOS new
+Linux new
+Mobile Mobile iPhone / iPad
+Android
+TV & Streaming TV & Streaming Apple TV
+Fire Stick
+Android TV
+Routers Routers VPN for Routers
+Aircove Routers
+Extensions Extensions Chrome
+Firefox
+Edge
+Pricing
+Resources Resources VPN Basics VPN Basics What Is a VPN?
+VPN for Beginners
+How To Use a VPN
+VPN Encryption Explained
+Content Library Content Library Blog
+Glossary
+Tools Tools IP Address Checker
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Support Support Support Center
+FAQ
+Live Chat
+VPN Setup Tutorials
+Redemption Code
+VPN for Teams
+Products Products ExpressVPN Industry-leading, ultra-fast VPN with secure servers in 113 countries.
+ExpressMailGuard Private email relay service to protect your inbox and identity.
+ExpressKeys Secure password management, multi-factor authentication, and more.
+ExpressAI The first consumer AI powered by confidential computing for privacy-led intelligence.
+Identity Defender Powerful suite of ID protection, monitoring, and data removal tools.
+Fortify High-performance VPN router to secure every device on your network.
+Other products from the family behind ExpressVPN
+holiday.com eSIM Free eSIM across 150+ destinations.
+Intego Award-winning macOS antivirus, firewall, system tools, and more.
+ExpressVPN for Teams Get fast, secure VPN protection for growing teams. Easy to deploy, simple to manage, built to scale.
+My Account
+Get Started
+Home Home » How to export data stored in ExpressKeys
+Knowledge Hub
+How to export data stored in ExpressKeys
+Search the Support Center
+Last updated: October 22, 2026
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+This guide will show you how to export data stored in ExpressKeys.
+You can export your data stored in ExpressKeys (and import it into another ExpressVPN account or password manager service) using the ExpressKeys app for Android, iOS, or macOS, or the ExpressKeys extensions for Chrome and Firefox.
+Jump to…
+Android and iOS
+macOS
+Browser extensions
+Android and iOS
+On Android and iOS, your login items are exported as a CSV file inside an encrypted ZIP file. The ZIP is protected with a password that you create, meaning no one can open it or access your data without that password. This keeps your passwords and logins secure during the export process.
+Open the ExpressKeys app for Android or iOS, and tap in the top-right.
+Scroll down to Password Manager Settings and tap Export Your Data.
+Enter your vault password and tap Verify.
+Tap Export Password Data.
+Set a password for the encrypted ZIP file and tap Continue.
+Select where you want to save the export.
+Important: When you unzip the file using your password, the CSV file will appear as a separate document outside the ZIP. Unlike the ZIP, the CSV is not encrypted, so anyone with access to your device can potentially open it and view your passwords and logins.For security reasons, once the import is complete, delete the CSV file from your device. You can keep the encrypted ZIP file as a secure backup.
+Need help? Contact our Support Team for immediate assistance.
+Back to top
+macOS
+Just like on Android and iOS, when you export login items from the macOS app, you export them as a CSV file inside an encrypted ZIP file. The ZIP is protected with a password that you create, which keeps your passwords and logins secure during the export process.
+Select Account to open the settings menu.
+Scroll down and under Password Manager Settings, select Export your Data.
+Enter your vault password and click Verify.
+On the next sceen, select Export Password Data.
+Create your password for the ZIP file, re-enter it, and select Continue.
+Choose where you want to save the export.
+Important: When you unzip the file using your password, the CSV file will appear as a separate document outside the ZIP. Unlike the ZIP, the CSV is not encrypted, so anyone with access to your device can potentially open it and view your passwords and logins.For security reasons, once the import is complete, delete the CSV file from your device. You can keep the encrypted ZIP file as a secure backup.
+Need help? Contact the ExpressVPN Support Team for immediate assistance.
+Back to top
+Browser extensions
+In the ExpressKeys browser extensions, you can choose whether you want to download your data in an encrypted ZIP file or as a plain CSV file. The encrypted ZIP file is protected by a password you set, which keeps your logins, secure notes, and attachments safe during export. The CSV file is not protected, and anyone who might intercept it can potentially view your data.
+In the ExpressKeys extension, click the profile icon in the top-right.
+Select Export Your Data under Password Manager Settings.
+Enter your vault password and click Verify.
+Choose if you want to export your data as an Encrypted ZIP or CSV file. Then, select Export Password Data.
+If you chose a ZIP file, create a password and click CONTINUE.
+Follow the on-screen instructions to save the file.
+Important: Even if you download the data as an encrypted ZIP file, when you open it, the data is stored in a CSV file. This CSV is not encrypted; anyone who has access to it can view the data (such as your logins). For security reasons, you should delete the file from your device immediately after importing your data to another ExpressVPN account or password manager service.
+Need help? Contact our Support Team for immediate assistance.
+Back to top
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+Share in FacebookShare in TwitterShare in WhatsappShare in TelegramShare by email
+What is malware?
+What is a network security key?
+Are VPNs legal?
+How to change the location on your iPhone
+What is a digital footprint?
+How to combine a VPN and Tor for online anonymity
+Get the best VPN for multiple devices
+Show More Show Less
+VPN for All Devices Download ExpressVPN
+MacOS
+Windows PC
+iOS (iPhone & iPad)
+Android
+Linux
+Routers
+Apple TV
+Fire Stick
+Android TV
+Chrome Extension
+VPN Server Locations Servers in 113 Countries
+US VPN
+UK VPN
+Canada VPN
+Australia VPN
+Features Explore All Features
+Plans and Pricing
+Products ExpressKeys
+ExpressMailGuard
+eSIM
+Identity Defender
+ExpressAI
+Fortify VPN router
+About ExpressVPN About Us
+Trust Center
+Rights Center
+Security Audits
+Tech Events
+ExpressVPN Reviews
+Our Experts
+Press
+Careers
+Hey AI, learn more about us
+Programs Partner with Us
+Affiliates
+Influencers
+Get Help VPN Setup Tutorials
+FAQ
+Buy VPN
+Contact support
+Learn More What is a VPN?
+What Is My IP?
+Hide My IP
+Top 5 VPN Uses
+Blog
+© 2026 ExpressVPN. All rights reserved.
+Privacy Policy
+Terms of Service
+Cookie Preferences
+Cookie Policy
+Close Choose language
+Live chat
+Need help? Chat with us!
+Online

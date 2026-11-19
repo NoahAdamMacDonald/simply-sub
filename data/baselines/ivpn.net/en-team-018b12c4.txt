@@ -1,0 +1,94 @@
+url: https://www.ivpn.net/en/team/
+method: fetch
+saved: 2026-11-19
+
+IVPN Team
+Предупреждение: подключение и стабильная работа VPN в России не гарантируется из-за действующих ограничений. Рекомендуем сначала протестировать сервис с недельным тарифом.
+Team
+Ethics
+Privacy
+|
+Services
+Pricing
+Apps
+Guides
+Help
+My account
+My account
+Logout
+My account
+Login
+Team
+Ethics
+Privacy
+Services
+Pricing
+Apps
+Guides
+Help
+My Account
+My Account
+Logout
+Login
+Who is behind IVPN?
+IVPN is run by a team of information security experts and privacy activists. The founding team is a group of security professionals who met whilst studying information security at the University of London, UK (Royal Holloway). IVPN has been around since 2009, far longer than most VPN services.
+Our Manifesto
+What we believe
+Privacy is necessary for personal autonomy
+We believe privacy is a necessary precondition for the development and preservation of the self. The power to selectively reveal oneself to the world is under attack from governments and corporations. We are fighting back.
+Freedom is necessary for an open society
+We believe you have the right to freedom of opinion and expression online without interference or surveillance. Freedom leads to enhanced expressions of creativity and original thought. We are determined to protect this right.
+Surveillance can not be the answer
+Advanced surveillance tools like device monitoring and facial recognition technologies are being deployed at a rapid pace. We refuse to accept that these tools are necessary for a safe society and call on governments to roll back their use.
+Privacy requires strong security
+We need tools enabled by strong encryption to protect ourselves against hostile adversaries. With the right set of protections we can once again control what we share with those we don’t know and can’t trust.
+Our current team is fully distributed, with 10 people from 6 countries.
+Nicholas Pestell
+Nick is founder and CEO of IVPN and 100% owner of IVPN Limited, the company through which the IVPN service is operated. Nick brings considerable expertise in risk management and security testing whilst working for Royal Bank of Scotland, Network Rail and ABN AMRO Bank.
+Eduard De
+As the leader of our customer service department, Edward is responsible for making sure all customer inquiries are dealt with in a swift and professional manner, no matter when they come through.
+Ante Maretic
+Ante has over 10 years’ experience working with Linux-based infrastructure. He is responsible for ensuring the security and availability of our public VPN infrastructure.
+Gorka Pernas
+After gathering more than a decade of experience in quality assurance-related roles at technology firms, Gorka now applies his knowledge in helping the IVPN team ship bug-free apps and making sure you suffer no privacy leaks.
+Natanael Rodriguez
+With over 15 years of experience in software development, Nathan now uses his skills to tackle all backend related projects at IVPN.
+Juraj Hilje
+As an unapologetic Apple fan and believer in smooth user experience, it was a natural choice for Juraj to get into iOS development a decade ago. Now he’s obsessed with building the best VPN app available on the App Store.
+Oleksandr Stelnykovych
+Stenya has more than 15 years of experience as a software developer in various roles. At IVPN, he is working on building the best VPN applications for Windows and macOS desktops.
+Jordan Sullivan
+As a customer service shift leader for the Americas, Jordan uses his problem solving-based technical support skills to help anyone in need of clear and patient assistance.
+Marina Tretiakova
+As finance specialist, Marina not only ensures that IVPN’s books are in order, but she is also responsible for developing business processes, performing internal controls and ensuring statutory compliance.
+Viktor Vecsei
+Viktor leads operations at IVPN and wears many hats: product management, keeping the day-to-day running smoothly, communications, and representing IVPN publicly.
+Spotted a mistake or have an idea on how to improve this page?
+Suggest an edit on GitHub.
+Generate Account
+Services
+IVPN Light
+WireGuard® VPN
+AntiTracker
+What is a VPN?
+Protocol Comparison
+Versión española
+Blog
+Privacy Guides
+Our Manifesto
+Servers
+Transparency Report
+Warrant Canary
+Supported Projects
+Report Vulnerability
+Legal Guidelines
+Terms of Service
+Privacy Policy
+Refund Policy
+Contact us
+Reddit
+Twitter
+GitHub
+Mastodon
+WireGuard® is a registered trademark of Jason A. Donenfeld
+IVPN is operated by IVPN Limited, registered in Gibraltar.

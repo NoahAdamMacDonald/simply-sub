@@ -1,0 +1,284 @@
+url: https://surfshark.com/privacy
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Products
+Pricing
+Download
+Resources
+VPN for Teams
+English
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português
+Suomi
+Türkçe
+Русский
+Українська
+한국어
+简体中文
+香港繁體
+台灣繁體
+日本語
+My account
+Get Surfshark
+QUICK LINKS
+1. How do we handle your connection data?
+2. What personal data we collect, why, on what basis, and for how long?
+3. How long do we keep personal data?
+4. Is personal data transferred to other countries?
+5. With whom do we share personal data?
+6. What choices do you have over your personal data?
+7. How do we use cookies and other tracking technologies?
+8. How do we protect personal data?
+9. Children’s data
+10. Who should you contact with questions or concerns?
+11. Are there any other terms you should know?
+Surfshark Privacy Policy
+Last updated: 2026.10.12
+Since our privacy policy ("Privacy Policy") is quite lengthy, we thought you might appreciate a short and easy breakdown. These highlighted bits will do precisely that! Think of them as helpful guides — they'll make the legal language easier to understand.
+This Privacy Policy explains how Surfshark B.V, address Kabelweg 57, 1014BA Amsterdam, the Netherlands (“Surfshark”, “we”, “us”, or “our”), processes your personal data through our website (the “Website”), online hosted services and any related application, software or functionality offered by Surfshark (the “Services”).
+Please review this Privacy Policy thoroughly to understand our policies and practices concerning your personal data and how we will handle it. This Privacy Policy should be read alongside our Terms of Service. Together, these two documents create a single, legally binding agreement between you and Surfshark.
+Surfshark processes your personal data and acts as a data controller in accordance with privacy laws, including the General Data Protection Regulation (“GDPR”).
+By continuing to use our Website and / or Services, you agree to the terms of the current Privacy Policy. We kindly request that you refrain from using our Services and Websites if you do not agree with this Privacy Policy or any of its provisions.
+We may need to amend the Privacy Policy from time to time. If there are any significant updates, we'll let you know ahead of time through our Website or by email. You'll always find the date of the latest update at the top of the Privacy Policy.
+1. How do we handle your connection data?
+No-logs Policy is one of the most important features of our VPN service and we keep our VPN service logs-free. We don’t store any information that could lead us to see your online activities.
+Surfshark respects your privacy, therefore, we are committed to not process any information related to the online activity of our users. Surfshark is based in the Netherlands jurisdiction, which does not require information storage or reporting. We do not collect any information about what you do online (i.e., we do not collect your visited IP addresses, browsing history, session information, connection time stamps, used bandwidth, network traffic or any other similar information).
+To ensure the functionality of our VPN service, our servers temporarily keep details about your connection to a specific VPN server, such as your user ID and / or your IP address and connection to VPN server time stamps. However, this information is automatically deleted within 15 minutes after your session ends. Rest assured, we do not store any information about the websites you visit.
+2. What personal data we collect, why, on what basis, and for how long?
+Surfshark collects limited personal data, which includes any data that can directly or indirectly identify you when you use our Services. Personal data helps us to provide you Services, enhance your experience, improve our Services, and ensure compliance with legal obligations. We are committed to protecting your privacy and handling your personal data responsibly.
+Here's a breakdown of the personal data we gather and what we use it for:
+2.1 Personal data needed for us in order to provide Surfshark Services
+2.1.1 For you to be able to create a Surfshark account
+Data collected Legal basis How long we keep it
+Email address, encrypted password, account registration date, coupon code (if any). Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement. We keep your personal data for as long as your subscription is active and for 2 years after the last login.
+We use this information to create your account so that you can use our Services.
+2.1.2 To provide you with Surfshark Services
+2.2 Personal data needed for specific Surfshark Services
+In addition to the personal data needed for account setup and general service delivery, we'll also collect additional data specific to the individual service you use. This personal data is essential for the particular Surfshark Service to function correctly:
+2.2.1 Provision of the VPN service
+2.2.2 Provision of the Search tool service
+What you search for stays private. We don't collect such information.
+Data collected Legal basis How long we keep it
+Aggregated number of your performed searches. Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement. We keep your personal data for as long as your subscription is active and for 2 years after the last login.
+2.2.3 Provision of the Alternative ID service
+2.2.4 Provision of the Alert service
+Data collected Legal basis How long we keep it
+Email address and / or personal identity number (or a social security number), and / or credit card number, information related to data leaks found. Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement. We keep your personal data for as long as your subscription is active and for 2 years after the last login.
+To use our Alert service for detecting personal data leaks, you can submit your email address, personal identity number (or a social security number), or credit card number for monitoring. We'll securely retain this information, encrypting personal identity and credit card numbers. When you enter your email, you authorize us to find and provide you with additional leaks-related details, for example, usernames, passwords, full names, country, physical address, IP addresses. For credit card or social security number leaks, we'll only show you data categories (e.g., credit card details, name, address, password, nationality) for security reasons, rather than the specific compromised data.
+2.2.5 Provision of the Data Leak Checker service
+2.2.6 Provision of Dedicated IP service
+Data collected Legal basis How long we keep it
+Your email address, your dedicated IP address. Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement. We keep your personal data for as long as your subscription is active and for 2 years after the last login.
+If you opt for our Dedicated IP service, certain online activities could be linked back to your account.
+2.2.7 Provision of the Antivirus service for Windows, MacOS, and Android users
+2.2.8 Provision of email scam checker service
+Data collected Legal basis How long we keep it
+The sender's email address, the email subject, and the content of the email, including any website address indicated therein. Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement. The collected data will only be stored for the brief period necessary to perform the scan and provide you with the results. Sender’s email address will be kept for 30 days to improve our services.
+In order for you to be able to use our AI powered email scam checker, which scans your emails for potential scam threats, we need to collect specific data from the emails you choose to scan. This data includes the sender's email address, the email subject, and the content of the email, including any website address it contains. Your permission will be required to collect this information, as you will actively select which emails from your inbox to scan. The collected data (except sender’s email address) will only be stored for the brief period necessary to perform the scan and provide you with the results. Please note that in order to improve our email scam checker, we will use your data in a completely anonymized format, based on our legitimate interest in enhancing our services.
+Please note that we respect your privacy and do not access any of your private content or use any of your data to train our AI models.
+You can find information about how your personal data is processed for email scam checker diagnostics in paragraph 2.3.9 of this privacy policy.
+2.2.9 Provision of message protection service
+2.2.10 Provision of call protection service
+Data collected Legal basis How long we keep it
+Caller’s number, call classification, metadata (e.g. scan duration, timestamp). Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement. The collected data will only be accessed for the brief period necessary to perform the scan and provide you with the results.
+To protect you from scams and unwanted communications, our call protection service automatically screens incoming calls for potential threats in real time. To provide this protection, the feature requires permission to scan your phone calls and access your call logs. To perform this scanning, we process call data, such as the caller’s number, call classification and metadata (e.g., scan duration). Where necessary, we engage trusted data processors to support these services. The above mentioned data is analyzed instantly for potential threats and is never stored or retained on our servers (though we may keep anonymized metadata for statistical purposes). Any caller details and call history displayed in the app are stored locally on your device only.
+We respect your privacy and never access, listen to, or record your phone calls under any circumstances.
+You can find information about how your personal data is processed for call protection diagnostics in paragraph 2.3.9 of this privacy policy.
+2.3 Other personal data processing purposes
+2.3.1 To ensure the security of your account
+Data collected Legal basis How long we keep it
+Device name, operating system, Surfshark app version installed, last login date. Legal basis for the processing of personal data is our legitimate interest to ensure the security of your account. We keep your personal data for as long as your subscription is active and for 2 years after the last login.
+To enhance the security of your account, when you log in to the Surfshark app, we collect the information indicated above. This helps us recognize your trusted devices and allows us to provide better security for your account. As part of this, we'll notify you by email if you log in from a new device that differs from your last-used devices.
+This email will provide you with the login details. If you did not log in from this new device, it is crucial to change your password immediately to secure your account. We also strongly encourage you to enable two-factor authentication for enhanced protection. By promptly notifying you of logins from unfamiliar devices, we enable you to take swift action if anything appears suspicious, thereby helping to ensure your account's safety.
+2.3.2 To enable you to submit an inquiry and communicate with customer support
+2.3.3 To enable you to interact with the live chatbot
+Data collected Legal basis How long we keep it
+Your name, email address, date and time of inquiry. Processing your personal data is essential for us to provide you a service and carry out the terms of our service agreement and / or our legitimate interest. We will keep personal data related to customer support communications for up to 6 years following the receipt of your message.
+2.3.4 To contact you via email about important updates and announcements related to your use of the Services and Website (transactional communications)
+2.3.5 To send you offers, surveys, and other marketing content
+Data collected Legal basis How long we keep it
+Your email address, the content of the email letter, the date and time of the email letter sent. Legal basis for the processing of personal data is your consent or our legitimate interest to conduct marketing activities. We will process your information until we receive your opt-out request.
+We may contact you via email for this purpose, but we also encourage you to contact us via our online contact form to get the best VPN offer for you.
+Also, to help you with your order, we might send an email letting you know if a purchase wasn't completed (unfinished order). This is based on our legitimate interest in improving your experience with us and assisting you with any issues related to your orders.
+If you do not wish to receive emails from us, you can opt out by contacting support@surfshark.com or by clicking “unsubscribe” at the bottom of any correspondence. If you have multiple email addresses, you will need to opt out for each address to be removed from our active database. However, we will continue to communicate with you for essential service delivery, to address your inquiries, and to provide transactional product or service-related updates.
+Also, please note that you may still receive information about our Services from other parties who use their own mailing lists.
+2.3.6 To enable your participation in our referral program
+2.3.7 To manage and administer our accounts on social networks
+Data collected Legal basis How long we keep it
+Your interaction data, e.g., likes, comments, full name, pseudonym, social network profile name, pictures. Legal basis for the processing of personal data is our legitimate interest to engage with the community and to manage our social networks accounts. We will process your provided information until you delete your posted content or social networks account.
+Please note that when you share information on social network accounts, e.g., Facebook, X, we don't control how they use or store that data. These companies collect and process your information for their own reasons, including their own marketing efforts. For full details on how these platforms handle your personal data, please check each social media privacy policies directly.
+2.3.8 To determine eligibility for subscription discounts through automated decision-making, including profiling
+2.3.9 To maintain and improve the quality of our Services and provide effective support (diagnostics and crash reporting)
+Data collected Legal basis How long we keep it
+Aggregated performance information, the frequency of use of Services, unsuccessful connection attempts, device information, and other similar information.
+In the case of email scam checker diagnostics, we will collect information including the sender's name and email address, the receiver's email address, the email subject, the content of the email, and any attachments metadata (file name, file type).
+In the case of message protection diagnostics, we will collect information such as user ID, sender’s ID, sender's phone number, the content of the SMS, metadata (e.g. scan duration).
+In the case of call protection diagnostics, we will collect information such as user ID, caller’s number, call classification, metadata (e.g. scan duration, timestamp).
+Legal basis for such processing is your consent.
+We keep your personal data until you withdraw your consent, but no longer than 7 days from its receipt.
+In the case of message protection, call protection diagnostics, we keep your personal data until you withdraw your consent, but no longer than 30 days from its receipt.
+To fulfil this goal, we collect diagnostics information and monitor crash reports on our apps and extensions. Please note that diagnostics information does not contain uniquely identifiable information (except as provided below regarding email scam checker service, message protection service). However, if you face some problems when using our apps, we may require your device information to solve these problems. We will access this information only if you provide a separate consent for that.
+In the case of email scam checker diagnostics, we will collect a minimal amount of necessary personal data. This includes the email sender's name and email address, the receiver's email address, the email subject, the content of the email, and metadata of any attachments. Whereas, in case of message protection diagnostics, we will collect information such as user ID, sender’s ID, sender's phone number, the content of the SMS, metadata (e.g. scan duration). Additionally, in the case of call protection diagnostics, we will collect information such as the user ID, caller’s number, call classification, and metadata (e.g., scan duration, timestamp).
+2.3.10 To enable the auto-connect feature for the trusted Wi-Fi network
+2.3.11 To improve our analytics and optimize advertising
+Data collected Legal basis How long we keep it
+Cookie ID, mobile device ID, device specification, advertising IDs. Legal basis for the processing of personal data is your consent to deliver relevant ads and promotional messages to you, and to attribute sales. We will process your personal data until you withdraw your consent.
+When you use our Website, we automatically collect information about your activity through technologies like cookies if you've given us permission. We may receive information about you from certain advertisers and advertising partners for analytical and advertising purposes. Our advertising partners help us attribute sales, deliver more relevant ads and promotional messages to you, which may include interest-based advertising and account-based advertising.
+You can control the use of cookies at the individual browser level on your device. More information about cookies and how to disable them can be found in Section 7 of this Privacy Policy.
+Additionally, we may collect limited technical and engagement data through the app, for example, device model, operating system version, device language, randomized identifiers. This information helps us measure campaign effectiveness and enhance user experience. This data is shared with trusted service providers, such as AppsFlyer and Firebase Analytics for performance attribution, Iterable for marketing engagement, and Purchasely for subscription flows management and optimization. You may manage or withdraw your consent at any time by contacting us at support@surfshark.com.
+2.3.12 To carry out market research and perform internal analytics
+2.3.13 To comply with legal requirements, exercise or defend legal claims
+Data collected Legal basis How long we keep it
+Email address, subscription information, payment-related information, other necessary information and / or legal documents. Legal basis for the processing of personal data is a legal obligation to which we are subject (in case we need to collect your data statutorily) and our legitimate interest to defend our rights and interests (in case of other legal processes related to you, if any).
+We retain this data for as long as it is indicated in the specific law.
+We may also retain personal data for longer periods to comply with legal obligations, respond to government requests, or enforce our contracts and Terms of Service, including investigating potential violations.
+We are subject to tax and other statutory requirements. We may have to protect our legitimate interests and legal rights. In these cases, we may be required to collect and store a limited amount of your personal data indicated above: email address, subscription information, payment-related information, other necessary information and / or legal documents.
+2.3.14 To collect applicable tax, solve payment related issues, prevent fraud, and ensure accounting
+3. How long do we keep personal data?
+Please keep in mind that having an audited No-logs Policy is one of our core principles (see more in our Terms of Service), therefore we collect only the minimum amount of data about you, which is required to provide you with our Services.
+Thus, unless specified differently in this Privacy Policy, we retain your personal data until it is no longer necessary for the reasons we initially collected it for, or until we receive a valid request to remove it, with some exceptions. However, there may be instances where we need to use and store your personal data beyond the timeframes mentioned above for purposes such as compliance with our legal obligations and / or exercising and defending legal claims.
+4. Is personal data transferred to other countries?
+Wherever your personal data needs to be sent, we always take extra care to keep it safe and sound.
+Your data, as specified in this Privacy Policy, may be stored and processed in any country where we have facilities or in which we engage service providers. We carefully assess all international data transfers and implement appropriate safeguards to ensure your personal data remains protected as outlined in this Privacy Policy. Please note that we use Standard Contractual Clauses approved by the European Commission (you can access it here) to transfer your personal data from the EEA to other countries outside the EEA territory (e.g., the USA) or we transfer personal data to countries that the European Commission has recognized as ensuring an adequate level of data protection (you can access the list of countries here).
+5. With whom do we share personal data?
+It takes a village to keep our Website and Services up and running and we want to be transparent about what types of personal data we've shared and with whom, all for legitimate business reasons.We need third- party tools and services for things like marketing, payments, live chat, and so forth. Since these don’t belong to us, we urge you to read their terms and policies on their sites.
+Surfshark shares personal data with the authorized parties only in cases where necessary for the purposes described in this Privacy Policy and allowed in accordance with applicable laws.
+5.1 In the preceding 12 months, we have disclosed strictly necessary personal data for an operational purpose to the following categories of third parties:
+Category of data recipients Purpose of personal data transfer Country of the recipient
+Marketing and application analytics service providers, such as Iterable, Firebase Analytics (by Google), Purchasely and Appsflyer. We use them to manage our contacts, automate our marketing, gather analytics. United States, Sweden, France, Ireland, United Kingdom.
+Performance marketing service providers, such as Hasoffers (Tune Inc.). We use them to calculate our conversion attribution. United States
+Third-party payment providers, such as Stripe, Adyen, Checkout, Coingate and similar. They help us to process payments together with our own authorized payment processing companies. United States, Ireland, British Virgin Islands.
+Storage and infrastructure service providers, such as BigQuery (by Google). They help us to store, analyze, and manage data. United States
+Live chat and support service providers, such as Zendesk. We use them to provide live chat technology and provide support to our users. United States
+Security service providers, such as Cloudflare. We work with them to provide improved security and performance. United States
+Providers that help us deliver the Alternative ID service, such as Telnyx. We work with them to provide you with Alternative ID services (such as Alternative Number). United States
+Group companies. We share data with our group companies to support our daily operations and ensure Surfshark can continue providing you with Services. EEA, United States, United Kingdom.
+Other Surfshark’s partners. We share your personal data with our distribution, reseller, and app store partners, each of which is an independent controller of your personal data. United States
+Third parties whose services you buy through us. We may provide your personal data to the third parties that deliver the services you buy through us. We only share the minimum amount of data necessary (e.g. your email address) to enable you to receive the services you have requested. Each of these companies acts as an independent controller of your personal data. EEA, United States
+5.2 There are a few more cases in which we can share your information with other authorized parties:
+6. What choices do you have over your personal data?
+We respect GDPR, CCPA, and other privacy legislation, and you can ask us to delete your personal data or implement other rights by emailing us at support@surfshark.com.
+You may be aware that the GDPR, CCPA, and other privacy laws give certain rights to individuals in relation to their personal data. Accordingly, we have implemented additional transparency to help users take advantage of those rights.
+As available and except as limited under applicable law, individuals have the rights described below:
+Right Description
+Right to access You can access your personal data or receive a copy of it by contacting us.
+Right to portability You can ask us to provide you with a copy of your personal data in a structured, commonly used, and machine-readable format or, where it is technically feasible, to transmit that data directly to another controller. This right applies only where our processing, carried out by automated means, is based on your consent.
+Right to rectification You can ask for the correction of inaccurate personal data and, subject to the nature of the collection and use, the completion of incomplete personal data.
+Right to erasure Right to deletion of your personal data specified in Clause 2, unless we are legally required or we have a legal basis to maintain certain personal data.
+Right to withdraw consent If we have collected and processed your personal data with your consent, then you can withdraw your consent at any time. Withdrawing your consent will not affect the lawfulness of any processing we conducted prior to your withdrawal, nor will it affect processing of your personal data conducted in reliance on lawful processing grounds other than consent.
+Right to object You can object to us processing your personal data when we do so based on our legitimate interests.
+Right to lodge a complaint If you are located in the UK, you have the right to lodge a complaint with the Information Commissioner’s Office. If you are located in the EU, you have the right to lodge a complaint with the relevant Supervisory Authority.
+In addition to the above rights, the following rights (which may be subject to certain exemptions or derogations) shall also apply to individuals covered by the CCPA:
+Right Description
+Right to Opt Out of Sale/Sharing You have the right to opt out of the sale or sharing of your personal information to third parties. However, we would like to inform you that we do not sell, rent, lease, or trade your personal data with anyone, nor do we plan to do so in the future.
+Right to Non-Discrimination You have the right to not receive discriminatory treatment if and when you exercise your privacy rights under the CCPA.
+Right to Limit Use of Sensitive Personal Information. You have the right to limit the use of your sensitive personal information when such use goes beyond that which is necessary for providing the Services or certain other permissible purposes (e.g., fraud prevention). However, Surfshark does not process personal information in a manner that gives rise to this right.
+7. How do we use cookies and other tracking technologies?
+Most sites on the internet, including Surfshark’s, use cookies, pixels, web beacons, and other similar technologies (collectively called “cookies”), as they’re pretty convenient to help provide, protect, and improve our Services and Website. If you want to, you can reject those, but some things may not work completely or as well as they should.
+You can check what cookies we use in our Cookie Policy which is an integral part of this Privacy Policy.
+8. How do we protect personal data?
+We really care about your security and privacy and do a lot to protect it. However, anyone who tells you that 100% anything-proof security is possible either doesn’t know much about it or is trying to mislead you. Please keep that in mind.
+We have implemented appropriate organizational, physical and technical security measures, including SSL/TLS encryption for data transfers, hashed passwords, firewalls, and regular audits. We take all the reasonably necessary steps to ensure that your personal data is treated securely.
+While we implement security measures on our Website and through our Services, you should be aware that 100% security is not always possible. Whenever you give out your information online there is a risk that a third party may intercept and use that information. While we strive to protect your information and privacy, we cannot guarantee 100% security of any information you disclose online. By using the Services, you expressly acknowledge and agree that we cannot guarantee the security of any information provided to or received by us through the Services and that any general information, other information, or information received from you through the Website or our Services is provided under your own responsibility.
+9. Children’s data
+We do not knowingly collect or solicit personal data from anyone under the age of 18.
+We don't offer services to anyone under 18 and don't knowingly collect personal data from them. If you're under 18, please don't send us any personal data. If we find out that we have received personal data from someone under 18, we will delete it right away. If you believe that we might have any such data, please contact support@surfshark.com.
+10. Who should you contact with questions or concerns?
+Our 24/7 Customer Support Team will help you out as soon as they can.
+If you have any questions, concerns or complaints relating to this Privacy Policy and / or Surfshark Services, or you would like to exercise your privacy rights, please feel free to contact us at the following email address support@surfshark.com or chat with us on the Website.
+11. Are there any other terms you should know?
+The English version of this Privacy Policy prevails.
+While translations of this Privacy Policy may be provided in other languages, they may not be fully up-to-date or comprehensive. Thus, in case of any conflict between the English version and the translated versions of this Privacy Policy, the English version shall always take precedence.
+Products
+Surfshark VPN
+Alternative ID
+Surfshark Alert
+Surfshark Antivirus
+Pricing
+Other products
+Incogni
+Ironwall
+Saily
+HeyPolo
+Surfshark VPN
+What is a VPN?
+VPN features
+VPN use cases
+VPN servers
+Dedicated IP
+Reviews
+VPN download
+VPN free trial
+Solution
+VPN for teams
+Resources
+About us
+Media center
+Trust center
+Career
+Blog
+Transparency report
+Contact us
+Programs
+Affiliate
+YouTube creators
+Student discount
+Graduate discount
+Referral program
+Tools
+DNS
+What is my IP?
+IP address lookup
+DNS leak test
+WebRTC leak test
+Data leak checker
+Support
+Help center
+Setup guides
+Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Apple TV
+Fire TV
+Facebook
+X (Twitter)
+Threads
+Instagram
+Youtube
+Reddit
+TikTok
+Naver
+English
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português
+Suomi
+Türkçe
+Русский
+Українська
+한국어
+简体中文
+香港繁體
+台灣繁體
+日本語
+© 2026 Surfshark. All rights reserved.
+Surfshark B.V., KvK number: 81967985, address: Kabelweg 57, 1014BA Amsterdam, the Netherlands, VAT number NL862287339B01
+Cookie policy
+•
+Privacy policy•Terms of service

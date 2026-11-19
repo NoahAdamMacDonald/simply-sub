@@ -1,0 +1,33 @@
+url: https://windscribe.com/knowledge-base/articles/does-the-debug-log-contain-personal-identifiable-info
+method: fetch
+saved: 2026-11-19
+
+Does the debug log contain personal/identifiable info? | Windscribe
+Skip to main content The Windscribe Fuchsia Friday & Cyber Monday Sale is here! Get Pro for $29/year. Ends Nov 30th
+FeaturesPlansDownload Resources
+Log InMy Account Get WindscribeUpgrade
+Does the debug log contain personal/identifiable info?
+Winder S
+Oct 20, 2025
+Help
+First off, the debug logs are stored locally on your device. We do not collect any diagnostic data from our apps automatically. You the user have to manually go into the settings and send us a debug log from the app in order for it to be transmitted to our servers.
+The only exception to this is with app crash logs on mobile devices. These are only crash logs though and are of no concern to privacy as they merely show us the errors that arise on a device with regards to our app when it crashed.
+When you send us a debug log, it exists only as a text file linked to your account in our database. There is no processing done on the debug logs for the purposes of data collection. It is only looked at by humans on the support or development teams to help with support requests and fix bugs. All these logs are purged from our database every few months.
+The debug logs themselves do not have any personal identifying info, it's just a lot of diagnostic details for our team to track down issues if they arise. You are welcome to look at the log yourself by going to Preferences > Help > View Log.
+The only thing that might be of any concern is your WiFi network name which gets logged because the Network Options feature requires it. But unless you have a very identifying WiFi name then this shouldn't really be a concern.
+The log also stores your internal credentials that are used to authenticate with our VPN servers and get you connected. But this isn't your actual Windscribe username or password, it's a separate set of credentials that we ourselves issue to users so that's of no concern.
+Your email address or personal IP doesn't get stored in the debug log.
+Get in touch
+r/Windscribe
+Find solutions, discuss ideas and share your feelings on our subreddit.
+Discord
+Join the discussion with our active community and make real friends!
+Contact Support Feeling completely lost? Contact Support.
+Windscribe
+DownloadChangelogPricingBuy MerchSupportFeaturesOpen SourceEthics & PhilosophyFree DNSWhite Label VPNVPN ServersResellers & DistributorsRefer a Friend
+Apps
+VPN for WindowsVPN for AndroidVPN for MacVPN for LinuxVPN for ChromeVPN for FireTVVPN for FirefoxVPN for Apple TVVPN for MS EdgeVPN for HuaweiVPN for iPhoneVPN for RoutersVPN for AgentsWindscribe F-Droid
+Company
+About UsPrivacyTermsVDPJobsBlogInfoGang
+© 2069 Windscribe Limited
+Switch Language : English

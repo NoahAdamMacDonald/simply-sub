@@ -1,0 +1,200 @@
+url: https://airvpn.org/security_policy/
+method: fetch
+saved: 2026-11-19
+
+Security Policy - Vulnerability Disclosure Policy and Bug Bounty Program - AirVPN
+Jump to content
+Home
+Not connected, Your IP: 146.70.198.159
+Online: 49581 users - 612070 Mbit/s total BW
+Your IP: 146.70.198.159
+Guest access
+Existing user? Sign In
+Sign In
+Remember me
+Not recommended on shared computers
+Sign in anonymously
+Sign In
+Forgot your password?
+Sign Up
+Contact Us
+Search In
+Everywhere
+More options...
+Find results that contain...
+Any of my search term words
+All of my search term words
+Find results in...
+Content titles and body
+Content titles only
+Home
+Overview
+Mission
+Specs
+FAQ
+Terms Of Service
+Privacy
+About us
+More
+Buy
+Download
+Servers
+Community
+Forums
+All Activity
+Leaderboard
+More
+Client Area
+More
+More
+All Activity
+Home
+Security Policy - Vulnerability Disclosure Policy and Bug Bounty Program
+Security Policy - Vulnerability Disclosure Policy and Bug Bounty Program
+Scope
+This program covers the servers and the web, desktop and mobile applications developed by AirVPN. The following websites are included:
+airvpn.org
+eddie.website
+ipleak.net
+The AirVPN applications for Windows, macOS, GNU/Linux and Android are also included. AirVPN software is free and open source. Eddie, the AirVPN client for Windows, macOS and GNU/Linux, is released under the GPLv3 license, and its source code is available on GitHub: https://github.com/AirVPN/Eddie. The source code of Eddie Android edition and of the AirVPN Suite is available on GitLab: https://gitlab.com/AirVPN.
+Rules
+Responsible Disclosure: please report every vulnerability to security@airvpn.org. Participants agree not to disclose a vulnerability until it has been fixed, and to coordinate any disclosure with our team. Before transmitting any information about a vulnerability, please send us your GnuPG public key and use ours, published below, so that the whole communication remains confidential.
+Responsible Testing: do not crack user accounts, corrupt databases or leak data that may be sensitive. Testing that degrades the quality of service for our users is not allowed. If in doubt, please contact our Security Team at security@airvpn.org before testing.
+Adherence to Rules: by participating in this program, you agree to the rules and conditions on this page. A report is eligible for a bounty only if all of them have been followed.
+Qualifying Vulnerabilities
+Any design or implementation issue that substantially affects the confidentiality or the integrity of user data is within the scope of the program. This includes, but is not limited to:
+Web applications
+Cross-site scripting
+Cross-site request forgery
+Mixed-content scripts
+Authentication or authorization flaws
+Server-side code execution
+REST API vulnerabilities
+Servers
+Unauthorized shell access
+Privilege escalation
+Remote code execution
+Applications
+Authentication or authorization flaws
+Local data security breaches
+Non-Qualifying Vulnerabilities
+The following are not eligible for a bounty:
+Flaws that affect only out-of-date browsers
+Security issues outside the AirVPN threat model or service scope
+Phishing or social engineering attacks
+Bugs that require exceedingly unlikely user interaction
+Out-of-date software
+Software bugs in OpenVPN
+Reports from automated scanners without a demonstrated impact
+Missing security headers and Content Security Policy hardening
+Version or banner disclosure
+User name or e-mail address enumeration
+Vulnerable third-party libraries without a working exploit against our services
+Credentials stolen from users' devices, for example infostealer logs
+SPF, DKIM and DMARC configuration
+Rate limiting
+Reward Amounts
+Only very high risk and critical vulnerabilities are eligible for a bounty. The severity is assessed by AirVPN, case by case, with a DREAD-like scoring; a severity or CVSS score computed by the reporter is not binding. To be awarded a bounty, you need to be the first person to report the issue, and our team must be able to reproduce it from your report.
+very high risk vulnerability, 250 EUR
+critical vulnerability, 300 EUR AT LEAST
+Examples of very high risk and critical vulnerabilities include:
+remote code execution or unauthorized shell access on our servers;
+access to other users' accounts or data without their interaction;
+privilege escalation to root or Administrator through AirVPN applications;
+exposure of the user's real IP address or traffic while the VPN is connected.
+Reports of lower severity issues are still welcome: we evaluate them and fix them when appropriate, but they are not eligible for a bounty.
+Reporting Guidelines
+Please report issues to security@airvpn.org. Each report must include clear instructions to reproduce the issue, a proof of concept, or both.
+PGP public key of security@airvpn.org (also available here as plain text):
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+Version: GnuPG v2
+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
+aotBvfU=
+=7ALq
+-----END PGP PUBLIC KEY BLOCK-----
+Fingerprint
+pub rsa4096/08FF65DE46C5EA4B 2018-05-05 [SCA]
+Key fingerprint = 6F78 D101 B39E 824A C648 DDDE 08FF 65DE 46C5 EA4B
+uid AirVPN Security <security@airvpn.org>
+sub rsa4096/D28779677C1CF634 2018-05-05 [E]
+Thanks
+Kushal Arvind Shah of Fortinet's FortiGuard Labs - May 14, 2018 - for Eddie Windows installer - Vulnerability disclosure - NSIS bug 1125
+Created: ..., last update: ...
+AirVPN Announcements
+AirVPN Forums
+All Activity
+Home
+Security Policy - Vulnerability Disclosure Policy and Bug Bounty Program
+Terms of ServicePrivacy NoticeAbout us Tor: airvpn… .onion
+AirVPN | VAT ID IT03297800546 | REA PG - 279011 | CMS by IPS
+You are not allowed to access AirVPN services if you are a resident of Italy
+×
+Existing user? Sign In
+Sign Up
+Home
+Back
+Home
+Overview
+Mission
+Specs
+FAQ
+Terms Of Service
+Privacy
+About us
+Buy
+Download
+Servers
+Community
+Back
+Community
+Forums
+All Activity
+Leaderboard
+Client Area
+×
+Create New...

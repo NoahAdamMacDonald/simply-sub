@@ -1,0 +1,223 @@
+url: https://surfshark.com/terms-of-service/pricing
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Hurry up! Grab our Black Friday deal here
+Products
+Pricing
+Download
+Resources
+VPN for Teams
+English
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português
+Suomi
+Türkçe
+Русский
+Українська
+한국어
+简体中文
+香港繁體
+台灣繁體
+日本語
+My account
+Get Surfshark
+Billing Practices, Currency Policy & Renewal Prices
+1. How We Process Payments & Currencies
+At Surfshark, we strive to make payments as seamless as possible. While the prices on your order page may be displayed in your local currency based on your location (IP address), the actual transaction may be processed in a different currency.
+We use currency optimization — we match your payment to a currency we support. This way, you’ll pay lower or no conversion fees, depending on your payment currency.
+Supported Currencies
+We process payments in the following currencies based on your region:
+GBP: United Kingdom
+EUR: European Economic Area (EEA)
+HKD: Hong Kong
+PLN: Poland
+JPY: Japan
+KRW: South Korea
+CAD: Canada
+AUD: Australia
+USD: United States and the rest of the world (not listed above).
+How Your Charge Currency is Determined
+The currency you are charged in depends on the specific payment provider and the data available at the time of purchase:
+Card Payments: We prioritize the country where your card was issued ("Card Country"). For example, if you are currently in the US but use a credit card issued in the UK, we will charge you in GBP to match your card. If we cannot detect the Card Country, we default to the currency associated with your current location (IP address).
+Apple Pay: Due to technical processing requirements, Apple Pay transactions generally default to the currency associated with the country set in your Apple Pay account or device settings.
+Other Payment Methods: For most other methods, the charge currency is determined by your location (IP address).
+Please note: If your bank account or card is in a currency other than the one we support (e.g., your card is in SGD, but we charge in USD as indicated above), your bank may apply their own currency conversion fees. We do not control these bank-imposed fees.
+2. Taxes
+When buying a subscription plan for the first time, we add the sales tax / VAT applicable to the country you selected as your purchase location. For future renewals, the sales tax / VAT amount will be calculated and added to the renewal price using the current rate on the day the charge is deducted from your account.
+3. Subscription Renewal Prices
+All subscription plans renew automatically at the full price to ensure your service is not interrupted. We will inform you about your upcoming subscription renewal via email 30 days before the ending date (excluding 1-month plans). There are several important things that you must know about Surfshark renewal prices:
+Introductory Offers: An introductory promotional deal for the first term of the subscription may have been included in the initial purchase. The renewal price will be at the standard non-introductory rate.
+Currency: All renewal plans are charged in the same currency in which the first payment was made (unless you update your payment method details).
+Subscriptions: Surfshark subscriptions and add-ons are subject to their own renewal terms. If you purchased a Surfshark subscription and an add-on separately, the renewal price will be the sum of the separate renewal prices listed below.
+Surfshark reserves the right to conduct A/B price testing (“Testing“) as part of its business operations. The Testing may involve the comparison of different Services’ pricing strategies to assess their impact on users behavior, sales performance, or other relevant metrics. The displayed renewal prices may be subject to Testing. Surfshark reserves the right to modify or discontinue Testing at any time, without prior notice.
+Standard Renewal Prices
+The prices below are listed according to your current location/IP address (before taxes). If your billing currency is different (as per the policy above), these amounts will be converted.
+Renewal prices (before taxes) for Surfshark Subscriptions
+Surfshark Starter
+VPN
+ALTERNATIVE ID
+Subscription duration Renewal price
+1-month CA$25.79
+1-year CA$113.19
+2-year CA$113.19 (renews for 1-year term)
+Surfshark One
+VPN
+ANTIVIRUS
+ALERT
+SEARCH
+ALTERNATIVE ID
+Subscription duration Renewal price
+1-month CA$27.09
+1-year CA$141.85
+2-year CA$141.85 (renews for 1-year term)
+Surfshark One+
+VPN
+ANTIVIRUS
+ALERT
+SEARCH
+ALTERNATIVE ID
+IDENTITY THEFT COVERAGE
+INCOGNI
+Subscription duration Renewal price
+1-month CA$31.09
+1-year CA$170.50
+2-year CA$170.50 (renews for 1-year term)
+Renewal prices (before taxes) for Standalone Products
+Antivirus
+ANTIVIRUS
+Subscription duration Renewal price
+1-year CA$141.85
+AdBlocker
+ADBLOCKER
+Subscription duration Renewal price
+1-year CA$113.19
+Renewal prices (before taxes) for Surfshark add-ons
+The renewal price for Surfshark add-ons is calculated based on the renewal duration of your latest subscription. For example, if you have a 24-month subscription, your add-on will renew to match the subscription's renewal term (e.g., a 12-month term).
+Surfshark One add-on
+ANTIVIRUS
+ALERT
+SEARCH
+Subscription duration Renewal price
+1-month CA$2.13
+1-year CA$25.56
+2-year CA$25.56 (renews for 1-year term)
+Dedicated IP add-on
+DEDICATED IP
+Subscription duration Renewal price
+1-month CA$5.37
+1-year CA$64.44
+2-year CA$64.44 (renews for 1-year term)
+Incogni add-on
+INCOGNI
+Subscription duration Renewal price
+1-month CA$5.72
+1-year CA$68.64
+2-year CA$68.64 (renews for 1-year term)
+Incogni Unlimited add-on
+INCOGNI UNLIMITED
+Subscription duration Renewal price
+1-month CA$8.58
+1-year CA$102.96
+2-year CA$102.96 (renews for 1-year term)
+Alternative Number
+ALTERNATIVE NUMBER
+Subscription duration Renewal price
+1-month CA$3.28
+1-year CA$39.36
+2-year CA$39.36 (renews for 1-year term)
+Products
+Surfshark VPN
+Alternative ID
+Surfshark Alert
+Surfshark Antivirus
+Pricing
+Other products
+Incogni
+Ironwall
+Saily
+HeyPolo
+Surfshark VPN
+What is a VPN?
+VPN features
+VPN use cases
+VPN servers
+Dedicated IP
+Reviews
+VPN download
+VPN free trial
+Solution
+VPN for teams
+Resources
+About us
+Media center
+Trust center
+Career
+Blog
+Transparency report
+Contact us
+Programs
+Affiliate
+YouTube creators
+Student discount
+Graduate discount
+Referral program
+Tools
+DNS
+What is my IP?
+IP address lookup
+DNS leak test
+WebRTC leak test
+Data leak checker
+Support
+Help center
+Setup guides
+Windows
+macOS
+Linux
+Android
+iOS
+Chrome
+Firefox
+Edge
+Apple TV
+Fire TV
+Facebook
+X (Twitter)
+Threads
+Instagram
+Youtube
+Reddit
+TikTok
+Naver
+English
+Deutsch
+Español
+Français
+Italiano
+Nederlands
+Polski
+Português
+Suomi
+Türkçe
+Русский
+Українська
+한국어
+简体中文
+香港繁體
+台灣繁體
+日本語
+© 2026 Surfshark. All rights reserved.
+Surfshark B.V., KvK number: 81967985, address: Kabelweg 57, 1014BA Amsterdam, the Netherlands, VAT number NL862287339B01
+Cookie policy
+•
+Privacy policy•Terms of service
+Limited-time Black Friday offer
+Stay safe online for less with our special Black Friday VPN deal.
+Take the deal

@@ -1,0 +1,211 @@
+url: https://serialcart.com/buy/windscribe-vpn
+method: browser
+saved: 2026-11-19
+
+SKIP TO NAVIGATION
+SKIP TO MAIN CONTENT
+SUPPORT
+SECURITY
+OPERATING SYSTEM & OFFICE
+PC TOOLS
+PHOTO & VIDEO
+OFFICE & BUSINESS
+VPN
+0
+Home
+/
+VPN
+/
+Windscribe VPN
+/
+Windscribe VPN Pro
+Back to products
+-33%
+HOT
+Windscribe VPN Pro
+Limited Offer
+From 39,99 €
+Buy genuine Windscribe VPN Pro at up to 25% discount from the official distributor.
+Unlimited data and all server locations
+R.O.B.E.R.T. ad, tracker and malware blocking
+Works on Windows, Mac, iOS, Android, Linux and browsers
+1 or 2 years subscription plans
+Fast delivery and a money-back guarantee
+SKU: SC-Windsc
+From 39,99 €
+excl. VAT
+Options
+Choose an option
+Unlimited Devices, 1 Year
+Unlimited Devices, for 2 Years<!--wood-1-->Unlimited Devices, 2 Years
+-
+Windscribe VPN Pro quantity
++
+ADD TO CART
+7 items in stock
+DESCRIPTION
+REVIEWS (0)
+Q & A
+Windscribe VPN
+A reliable, feature-rich VPN that keeps your online activity private and secure — with unlimited devices and no identifying logs, it’s complete protection for the whole household on every platform.
+CNET: BEST Overall VPN
+Software Informer Editor’s Choice
+Software Informer 100% Clean
+Block Unwanted Content
+Our powerful network-level blocker lets you filter out ads, trackers, malware, and unwanted websites, giving you more control over your browsing while boosting privacy and speed.
+Fight Fingerprinting with Windscribe’s Browser Extensions
+Changing your IP isn’t enough.
+Use our extensions to block ads, rotate your user agent, spoof your timezone, language settings, GPS location, and more. Available for Firefox, Chrome and Edge.
+6 Protocols to Choose From
+Windscribe offers up to 6 connection protocols including WireGuard®, IKEv2 and OpenVPN, alongside a wide range of ports. Each protocol offers different benefits depending on your unique situation or geographic location.
+Personalized Protection with Split Tunneling
+Split Tunneling lets you pick and choose which apps and websites connect through the VPN and which ones don’t. Handy for banking, streaming and downloading Linux distros.
+Connecting Remotely Has Never Been Easier
+Port Forwarding allows you to access services on your computer or home network from anywhere, while connected to Windscribe.
+The Firewall That Killed the Killswitch
+Windscribe’s Firewall blocks all types of leaks, including (but not limited to): traffic leaks, DNS leaks and IPv6 leaks. A killswitch could never.
+General Features of Windscribe VPN
+Large Network
+Servers in over 69 countries and 135 cities.
+R.O.B.E.R.T.
+Blocks IPs and domains (ads) of your choice on all devices.
+No Identifying Logs
+We can’t personally identify you based on IP and timestamp.
+Strongest Encryption
+Strong & industry-leading encryption.
+Config Generators
+Generate OpenVPN, IKEv2, and WireGuard® configs.
+ScribeForce
+Team accounts with centralized billing and management.
+Simple Clients
+Feature-rich clients that don’t require a PhD degree to use.
+Static IPs
+Use the same IP address every time you connect.
+Port Forwarding
+Access internal resources on your LAN from a remote location.
+Split Tunneling
+Choose which apps go over the VPN tunnel, and which do not.
+Packet Size
+Tweak your packet size to improve performance.
+LAN Traffic
+Controls blocking of LAN traffic when connected to Windscribe
+Flexible Connectivity
+Connect via IKEv2, OpenVPN UDP & TCP, WireGuard®, Stealth or WStunnel on a wide range of ports.
+Circumvent Censorship
+Connect to the VPN even in hostile environments
+Network Options
+Easily manage how Windscribe connects to different networks.
+Unlimited Devices
+Secure every device you own — one account, no connection limits.
+Other Features
+DESKTOP
+MOBILE
+BROWSER
+TV
+Flexible DNS
+Secure protocol support, split DNS, or use our customizable server-side ad-blocker ROBERT.
+MAC Spoofing
+Spoof your device’s physical address (MAC address) on public networks for privacy.
+TCP Socket Termination
+Terminate all existing TCP sockets when connecting to the VPN.
+Proxy Gateway
+Create a proxy server on your network for other devices.
+Proxy Settings
+Configure Windscribe to use a LAN proxy server.
+Secure Hotspot
+Share your secure Windscribe connection wirelessly.
+Double Hop
+Proxy your connection through any 2 locations on the Windscribe network
+Firewall
+Blocks all connectivity outside the VPN tunnel to eliminate all types of leaks.
+Update Channels
+How do I keep Windscribe up to date?
+Auto Pilot
+Automatically picks the best location for you
+Clear Wi-Fi History
+Stop your device from hoarding a list of every Wi-Fi network you’ve joined.
+IPv6 Support
+Route IPv6 traffic through the tunnel automatically, no setup required.
+Technical specifications
+PLATFORM MINIMUM REQUIREMENT
+Windows Windows 10 or newer (64-bit x86 recommended; native ARM64 build exists). Windows 7 is no longer supported — current builds require Win 10+
+macOS macOS 13 Ventura or newer
+Linux Any supported desktop distribution; CLI support on all distros incl. headless servers
+Android Android 7.0+ (Always-On VPN needs Android 8+, auto-connect on boot needs 9+)
+iOS iOS 15.0 or later
+Browsers Chrome, Firefox, Edge, Opera (desktop extensions)
+Other Android TV / Fire TV, Apple TV, Huawei AppGallery, routers via OpenVPN/WireGuard config generators
+PROTOCOL CIPHER KEY EXCHANGE / EXTRAS
+WireGuard® (default) ChaCha20-Poly1305 Curve25519 ECDH, BLAKE2s hashing, HKDF, preshared-key slot, live post-quantum protection
+OpenVPN (UDP & TCP) AES-256-GCM SHA512 auth, 4096-bit RSA, perfect forward secrecy
+IKEv2 AES-256-GCM SHA-256 integrity, ECP384 (DH group 20) on desktop/Android, ECP521 (DH group 21) on iOS
+Stealth / WStunnel OpenVPN wrapped in a TLS tunnel / WebSockets For restrictive networks; multiple ports incl. 443
+Why Buy From SerialCart?
+Official distributor. Genuine codes sourced directly from Windscribe.
+Lower price. Save up to 25 % compared to the official price.
+Instant delivery. Your code arrives quickly after the confirmation of your payment.
+Secure payment. Processed by Stripe or PayPal. You will not enter any of your payment information on our website. You will be redirected to the secure payment page of Stripe or PayPal.
+Related products
+-60%
+Acronis Cyber Protect Home Office
+AOMEI
+49,99 €
+Original price was: 49,99 €.
+19,99 €
+Current price is: 19,99 €.
+excl. VAT
+-60%
+Acronis Cyber Protect Home Office – 1 Device, 1 Year
+AOMEI
+49,99 €
+Original price was: 49,99 €.
+19,99 €
+Current price is: 19,99 €.
+excl. VAT
+-68%
+HOT
+NEW
+AOMEI Backupper Professional – Lifetime License Key (Global)
+Rated 5.00 out of 5
+From 22,99 €
+excl. VAT
+-67%
+AOMEI Backupper Server
+299,00 €
+Original price was: 299,00 €.
+99,99 €
+Current price is: 99,99 €.
+excl. VAT
+-67%
+AOMEI Partition Assistant Professional – Lifetime License Key (Global)
+From 18,99 €
+excl. VAT
+Windscribe
+Disclaimer: None of the brands, logos and products sold on this website is owned by MySecure Space GmbH and SerialCart® and all the rights go to the respective owners.
+About Our Company
+Our Certificates
+Privacy Policy and Imprint
+Terms and Conditions
+My Account
+My Orders
+My Payment Methods
+My Address
+Support Center
+Refund Policy
+Security at SerialCart
+Help Center
+Copyright© 2017-2026 SerialCart®,All Rights Reserved.
+SEARCH
+SECURITY
+PC TOOLS
+PHOTO & VIDEO
+OFFICE & BUSINESS
+VPN
+SUPPORT
+LOGIN / REGISTER
+Shopping cart
+Close
+We use cookies to improve your experience on our website. By browsing this website, you agree to our use of cookies.
+MORE INFO
+MORE INFO
+ACCEPT
