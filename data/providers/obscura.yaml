@@ -160,7 +160,7 @@ freeUse:
 # - Anonymous signup: "Log in with just a randomized account number. No names, no emails, no phone numbers necessary."
 # - Unlimited traffic: inferred (below); no page names a data limit.
 # - The VPN batch's new features: no page says its servers run from memory only (vpn.ram-only-servers false), and it
-#   doesn't connect your own devices to each other (vpn.mesh false). No data allowance: its traffic is unlimited.
+#   doesn't connect your own devices to each other (vpn.mesh false). Data allowance: unlimited, inferred (below).
 # - No page offers split tunnelling, port forwarding, Tor over VPN or a P2P policy (the terms reserve "usage or service
 #   limits or block certain kinds of usage at our sole discretion"), so those are left out.
 # Speeds: no page states one ("The VPN Services coverage, speed, server locations, and quality may vary.", its terms).
@@ -172,6 +172,7 @@ plans:
       vpn.included: true
       vpn.devices: 5
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 28
       vpn.protocols: [wireguard, stealth]
       vpn.kill-switch: true
@@ -186,6 +187,12 @@ plans:
       account.parental-controls: false
     inferred:
       vpn.unlimited-traffic:
+        reason: 'No page names a data limit. Its pricing page lists what a subscription gets with no cap, and says you can “Browse, stream, and game without worrying about your VPN.”'
+        page:
+          name: Pricing
+          url: https://obscura.com/pricing/
+        lastVerified: 2026-11-19
+      vpn.data-allowance:
         reason: 'No page names a data limit. Its pricing page lists what a subscription gets with no cap, and says you can “Browse, stream, and game without worrying about your VPN.”'
         page:
           name: Pricing

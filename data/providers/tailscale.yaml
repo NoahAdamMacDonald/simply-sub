@@ -120,7 +120,7 @@ sourceRepo:
 # - Anonymous signup: false ("Tailscale doesn't support anonymous tailnets", Mullvad exit nodes).
 # - Unlimited traffic: inferred (below); no page names a data limit.
 # - No page offers a kill switch, multi-hop, DNS content blocking, a P2P policy, port forwarding, Tor over VPN or
-#   RAM-only servers (vpn.ram-only-servers false). No data allowance: its traffic is unlimited.
+#   RAM-only servers (vpn.ram-only-servers false). Data allowance: unlimited, inferred (below).
 # Speeds: no page states one.
 plans:
   - id: tailscale.personal
@@ -130,6 +130,7 @@ plans:
       vpn.included: true
       vpn.devices: unlimited
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 0
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
@@ -143,6 +144,12 @@ plans:
       account.parental-controls: false
     inferred:
       vpn.unlimited-traffic:
+        reason: 'No page names a data limit. Your traffic goes directly between your own devices, which Tailscale says it doesn’t pay for: “we don’t see your packets and don’t have to pay for them”.'
+        page:
+          name: About Tailscale
+          url: https://tailscale.com/company
+        lastVerified: 2026-11-19
+      vpn.data-allowance:
         reason: 'No page names a data limit. Your traffic goes directly between your own devices, which Tailscale says it doesn’t pay for: “we don’t see your packets and don’t have to pay for them”.'
         page:
           name: About Tailscale

@@ -1062,17 +1062,17 @@ policies:
   ratings:
     - topic: privacy.data-collection
       tier: poor
-      reason: 'Besides what it needs, it records which days you connect, to which location, from which internet provider, and how much data you use, to run its network. You can only object by emailing its privacy officer.'
+      reason: 'Its apps send crash reports and diagnostics only if you agree. But outside Europe and the UK its website’s analytics cookies, which count the pages you visit, are on until you turn them off, in each browser’s cookie choices.'
       sources:
         - url: https://www.expressvpn.com/privacy-policy
-          quote: 'As you use the App, we collect information about whether you have successfully established a VPN connection on a particular day (but not a specific time of the day), to which VPN location (but not your assigned outgoing IP address), and from which country/ISP (but not your source IP address).'
-        - url: https://www.expressvpn.com/privacy-policy
-          quote: 'We collect information regarding the total sum of data transferred by a given user.'
-        - url: https://www.expressvpn.com/privacy-policy
-          quote: 'You have the right to object to the processing of your personal data, including where we process your data on the basis of legitimate interests.'
+          quote: 'Upon activation of any of our Apps, you will be asked if you would like to share App Diagnostics Data with ExpressVPN.'
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'These help us understand how visitors interact with the Site by collecting information on a statistical basis — for example, which pages are visited and how the Site performs — so that we can measure and improve it. They are not strictly necessary and, in the EU and UK, are set only with your consent.'
+        - url: https://www.expressvpn.com/cookie-policy
+          quote: 'In the United States we operate, for non-essential Cookies, on a notice-and-opt-out basis rather than a prior-consent basis'
       action:
-        name: 'How to contact its privacy officer'
-        url: https://www.expressvpn.com/privacy-policy
+        name: 'How to change your cookie choices'
+        url: https://www.expressvpn.com/cookie-policy
       lastVerified: 2026-11-19
     - topic: privacy.data-sharing
       tier: poor
@@ -1344,11 +1344,13 @@ policies:
           quote: 'A Windows app audit to confirm remediation of a DNS issue related to split tunneling (April 2024)'
       lastVerified: 2026-11-19
     - topic: service.activity-logging
-      tier: great
-      reason: 'It keeps no record of the sites you visit, your IP address or when you connect, and its servers run from memory only. KPMG checked those safeguards in 2025 and found no problems.'
+      tier: neutral
+      reason: 'For each user it notes which days you connected (not the time), to which VPN location, from which country and internet provider (not your IP address), and how much data you used. KPMG checked its no-logs safeguards in 2025.'
       sources:
         - url: https://www.expressvpn.com/privacy-policy
-          quote: 'We also never store connection logs, meaning no logs of your IP address, your outgoing VPN IP address, connection timestamp, or session duration.'
+          quote: 'As you use the App, we collect information about whether you have successfully established a VPN connection on a particular day (but not a specific time of the day), to which VPN location (but not your assigned outgoing IP address), and from which country/ISP (but not your source IP address).'
+        - url: https://www.expressvpn.com/privacy-policy
+          quote: 'We collect information regarding the total sum of data transferred by a given user.'
         - url: https://www.expressvpn.com/blog/kpmg-2025-no-logs-policy-audit/
           quote: 'KPMG provided reasonable assurance that our systems functioned as designed, with no identified issues regarding our technical safeguards against activity logging'
       lastVerified: 2026-11-19

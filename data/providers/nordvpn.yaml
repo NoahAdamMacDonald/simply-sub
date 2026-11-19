@@ -127,18 +127,20 @@ renewalAnchor:
     - 'Such payments are billed annually (up to 14 days before the renewal) or monthly depending on your billing cycle.'
   chargedBefore: { days: 14, upTo: true }
   lastVerified: 2026-11-19
-# Owner (M11.2), read 2026-11-19: its press page says Nord Security brings it; nordsecurity.com's trademark policy calls
-# "NordSec B.V. and/or its affiliates (together “Nord Security”)", and its privacy policy gives NordSec B.V.'s Amsterdam
-# address. Its General Terms and Privacy Policy are with nordvpn S.A. of Panama City (the provider's notes). Private: no
-# page names a listing. Nord Security and Surfshark "merged under one holding company" in 2022 (surfshark.com/about-us).
+# Owner (M11.2), read 2026-11-19: its press page says "NordVPN is brought to you by Nord Security"; nordsecurity.com's
+# trademark policy (quoted, the review of 2026-11-19) defines it as "NordSec B.V. and/or its affiliates (together “Nord
+# Security”)", and its privacy policy gives NordSec B.V.'s Amsterdam address (the country). Its General Terms and
+# Privacy Policy are with nordvpn S.A. of Panama City (the provider's notes). Private: no page names a listing.
+# Nord Security and Surfshark "merged under one holding company" in 2022 (surfshark.com/about-us).
 notes: Its terms are with nordvpn S.A., a company in Panama, part of Nord Security.
 owner:
   name: Nord Security
+  website: https://nordsecurity.com
   page:
-    name: Press area
-    url: https://nordvpn.com/press-area/
+    name: Trademark policy
+    url: https://nordsecurity.com/trademark-policy/
   quotes:
-    - 'NordVPN is brought to you by Nord Security'
+    - 'are the exclusive property of NordSec B.V. and/or its affiliates (together “Nord Security”)'
   country:
     code: NL
     page:
@@ -1214,11 +1216,11 @@ policies:
           quote: 'You can end your relationship with us at any time after the effective date of the updated Terms by deleting your Account and/or not accessing our Websites.'
       lastVerified: 2026-11-19
     - topic: legal.account-closure
-      tier: good
-      reason: 'It closes accounts only for unpaid bills, breaking its rules or the law, and usually warns you first and lets you fix the problem.'
+      tier: neutral
+      reason: 'It can suspend or close your account as it sees fit, with or without warning, if you break the law or its terms even once. It usually warns you first, and its terms don’t promise a refund.'
       sources:
         - url: https://my.nordaccount.com/legal/terms-of-service/
-          quote: 'If the situation warrants, we will give you a reasonable opportunity to fix the issue before suspending or terminating your Account and/or your access to the Services.'
+          quote: 'We reserve the right to, at any time and in our sole discretion to suspend and/or terminate the Accounts and/or Services (with or without notice) of any users who violate any applicable laws or the Terms, whether it is a repeated violation or a single instance.'
         - url: https://my.nordaccount.com/legal/terms-of-service/
           quote: 'Usually, we will send you a prior notice before suspending or terminating your Account and/or your access to the Services.'
       lastVerified: 2026-11-19

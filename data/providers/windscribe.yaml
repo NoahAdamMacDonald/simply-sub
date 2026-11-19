@@ -16,9 +16,10 @@
 # Its individual plans: Free, Pro (monthly, yearly) and Build a Plan. ScribeForce (teams of 5 or more, "$5 per month
 # per account") is a team plan, out of scope. Lifetime Pro is no longer sold ("as of about 2019 we are no longer selling
 # these plans"). Static IPs and Build a Plan's unlimited data are add-ons.
-# Build a Plan (the owner's modelling, categories.md): one plan priced per location, "$1/location/mo, $3 min" (Free vs.
-# Paid table), with notes. Its amount is one location's month ($1); the $3 minimum, the 7-location maximum and the $1
-# "Unlimited Data + R.O.B.E.R.T" add-on are in its notes and add-ons (notes.md).
+# Build a Plan: one plan, "$1/location/mo, $3 min" (Free vs. Paid table). Its amount is the least anyone pays, the $3
+# minimum ("Each one is $1 per month and adds 10GB on top of your allowed monthly bandwidth. $3 minimum.", the upgrade
+# page's picker), with 3 locations' features (the review of 2026-11-19); the $1 a location, the 7-location maximum and
+# the $1 "Unlimited Data + R.O.B.E.R.T" add-on are in its notes and add-ons (notes.md).
 # Bundles: none (its Control D managed DNS is another company's product it links, and ScribeForce is for teams).
 # Official resellers: its Official Resellers & Distributors page names one, MySecure Space GmbH, which "Also operates
 # as" SerialCart.com and SerialCart.de (partner since November 2026): its offer is below. App stores (Apple, Google
@@ -143,10 +144,11 @@ sourceRepo:
 #   United Kingdom, Hong Kong, France, Germany, Netherlands, Switzerland, Norway, Romania). Build a Plan: "Pick up to 7"
 #   locations, each a country in its picker ("United States 52 Pro Data Centers"), on top of the free locations ("This
 #   includes all the Pro locations in your bundle as well as all the Free locations you already have access to."): its
-#   price is one location's, so 11 countries (inferred), 17 with the most it sells.
+#   price is the $3 minimum's 3 locations, so 13 countries (inferred), 17 with the most it sells.
 # - Data (the registry's rule of 2026-11-19: `unlimited` where its pages say so): Free "10 GB/mo (2 GB no email)" (10 GB
 #   with a confirmed email address, which comes with 1-2 promo emails a month); Build a Plan "10 GB per location bought",
-#   "on top of your allowed monthly bandwidth", so one location's 20 GB (inferred), unlimited with the add-on; Pro
+#   "on top of your allowed monthly bandwidth", so 3 locations' 40 GB (inferred; its help article's example: "three
+#   locations and has used 15GB of his 40GB"), unlimited with the add-on; Pro
 #   "Unlimited". Never throttled ("Never" on every plan).
 # - Protocols: "IKEv2", "WireGuard", "OpenVPN (UDP)", "OpenVPN (TCP)", "Stealth" (OpenVPN in a TLS tunnel) and
 #   "WStunnel" (OpenVPN in a WebSocket), the last two for blocked networks (stealth); "All 6 protocols, 20+ ports" on
@@ -215,8 +217,8 @@ plans:
       vpn.included: true
       vpn.devices: unlimited
       vpn.unlimited-traffic: false
-      vpn.data-allowance: 20
-      vpn.server-countries: 11
+      vpn.data-allowance: 40
+      vpn.server-countries: 13
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
       vpn.kill-switch: true
       vpn.split-tunneling: true
@@ -231,28 +233,28 @@ plans:
       account.pause: true
     inferred:
       vpn.server-countries:
-        reason: 'Its price is for one location, a country in its picker, which joins the 10 free countries you keep: 11 countries for $1 a month, and up to 17 with 7 locations.'
+        reason: 'Its $3 minimum buys 3 locations, each a country in its picker, which join the 10 free countries you keep: 13 countries, and up to 17 with 7 locations.'
         page:
           name: 'Does Build-a-Plan unlimited data apply to all locations?'
           url: https://windscribe.com/knowledge-base/articles/does-build-a-plan-unlimited-data-apply-to-all-locations
         lastVerified: 2026-11-19
       vpn.data-allowance:
-        reason: 'Each location adds 10 GB a month on top of the free plan’s 10 GB (its example: 3 locations, 40 GB), so one location carries 20 GB, unless you add unlimited data.'
+        reason: 'Its $3 minimum buys 3 locations, and its help article’s example of a plan with 3 locations has 40 GB a month (10 GB for each, on top of the free 10 GB), unless you add unlimited data.'
         page:
           name: 'How do changes to my Build-a-Plan affect my data?'
           url: https://windscribe.com/knowledge-base/articles/how-do-changes-to-my-build-a-plan-affect-my-data
         lastVerified: 2026-11-19
     notes: >-
-      Priced per location: $1 a month for each Pro location you pick (a country), at least $3 and at most 7 locations.
-      Each adds 10 GB a month to the free plan's data, or add Unlimited Data + R.O.B.E.R.T. for $1 a month (unlimited
-      data on every location you can use, and all of R.O.B.E.R.T.'s block lists). The free countries stay. No port
-      forwarding. Edits are refunded for the unused days and billed afresh, twice in 30 days at most.
+      Priced at its $3 minimum, 3 Pro locations (each a country you pick). Each location is $1 a month, up to 7
+      ($7), and adds 10 GB a month to the free plan's data, or add Unlimited Data + R.O.B.E.R.T. for $1 a month
+      (unlimited data on every location you can use, and all of R.O.B.E.R.T.'s block lists). The free countries stay.
+      No port forwarding. Edits are refunded for the unused days and billed afresh, twice in 30 days at most.
     addOnIds:
       [windscribe.unlimited-data, windscribe.static-ip-datacenter, windscribe.static-ip-residential]
     prices:
       - region: GLOBAL
         currency: USD
-        amount: 1
+        amount: 3
         interval: month
         intervalCount: 1
         autoRenew: true
