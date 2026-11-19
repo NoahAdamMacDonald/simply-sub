@@ -552,6 +552,20 @@
   source: own
   status: done
   date: 2026-11-19
+- id: tunnelbear
+  name: TunnelBear
+  website: https://www.tunnelbear.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: hotspot-shield
+  name: Hotspot Shield
+  website: https://www.hotspotshield.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
