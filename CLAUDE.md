@@ -24,8 +24,10 @@ The older notes (`plan.txt`, `pages.txt`, `subscriptions.txt`, `api-*-example.js
     (readdir-glob), all below the fix; archiver 8 is ESM-only, which exceljs's `require('archiver')` can't call.
     minimatch 11 matches without RegExps, so glob 7's own wildcards throw (archiver-utils' `file.expand`, rimraf 2's
     fallback), which exceljs never calls. Remove it once ESLint, typescript-eslint and archiver ask for 11.
-  Remove each one once the package that pulls it in ships a fixed version. CI runs `npm audit --audit-level=high`,
-  so a new advisory with no fix gets an override like these. npm applies a new override to a package already in the
+  Remove each one once the package that pulls it in ships a fixed version. CI runs `npm run audit:check`
+  (`scripts/audit.ts`: `npm audit` for high and critical advisories), so a new advisory gets an override like these.
+  One with no fixed version anywhere goes in `scripts/audit-allowlist.json` with its reason and a review-by date
+  (picomatch's ReDoS, dev tools only, the owner's choice of 2026-11-19); past that date the audit fails again. npm applies a new override to a package already in the
   lockfile only once it resolves that package again (`npm install exceljs@4.4.0 -w apps/web`).
 - Node 24.22.1 / npm 12.0.2 via Volta 2.0.2 (`"volta"` field in root package.json). Workers Builds pins Node
   with its `NODE_VERSION` build variable (BLUEPRINT §7.6), so change both together.
