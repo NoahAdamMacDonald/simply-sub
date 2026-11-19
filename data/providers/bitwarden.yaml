@@ -1,0 +1,623 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read with Edge from Canada (bitwarden.com's
+# pricing page, its Free, Premium and Families sign-up pages up to their first field, the web vault's sign-up form) and
+# with a plain fetch, which serves bitwarden.com whole: its about, open source, downloads, compliance, Bitwarden
+# Authenticator, personal plans, partners and contact pages, its terms of service, privacy policy and cookies policy, and
+# 49 help articles (bitwarden.com/help/...: plans, billing, cancelling, renewal, taxes, payment methods, import and
+# export, emergency access, offline use, both authenticators, Send, sharing, item types, reports, server regions,
+# self-hosting and licensing, audits, account deletion, languages); the pricing page again through US, UK, German and
+# Australian exits.
+# Pricing: bitwarden.com/pricing/, Personal tab: Premium "$1.65 per month" "Billed annually at $19.80", Families "$3.99
+# per month" "Up to 6 users" "Billed annually at $47.88", and "Pricing shown in USD and based on an annual subscription.
+# Taxes not included."; Free under "Just getting started?" ("Get basic password management today. Always free."). Its
+# help centre: "Premium individual subscriptions are billed annually." and "Families organizations subscriptions are
+# billed annually." (Password Manager Plans), so a year is the only period. The same US-dollar prices from Canada, its
+# language versions (/en-gb/, /de-de/, /fr-fr/, /nl-nl/, /it-it/, /es-la/: "US$19.80", "19,80 $US", "19,80 USD") and
+# through US, UK, German and Australian exits: one list for everyone (GLOBAL USD). No price includes tax ("Taxes not
+# included."; its tax article adds US sales tax and VAT or GST "as a separate line item on your invoice").
+# Region checklist for CA and US, 2026-11-19: 1. language paths only (hreflang en-GB, de-DE, es, fr-FR, it-IT, ja-JP,
+# nl-NL, pt-BR, sv-SE), all in USD; 2. no country or currency picker; 3. the page states USD for everyone; 4. sign-up
+# pages read up to the email field (no prices there); 5. "Taxes on Bitwarden Purchases" (help) names no other currency;
+# 6. Edge and a plain fetch from Canada, and Edge through US, UK, German and Australian exits: all the same; 7. no bill
+# offered.
+# Its individual plans: Free, Premium and Families, and Bitwarden Authenticator, a free app of its own ("Bitwarden
+# Authenticator is available for everyone, with or without a Bitwarden Password Manager account."), stored as a plan of
+# its own (2FAS's and Ente's precedent in the catalog list: one provider with both). A Free organization (sharing with
+# one other user) is part of every account, not a plan. Teams and Enterprise are business plans, out of scope; Families
+# sponsored by an employer's Enterprise plan isn't sold. Secrets Manager and Passwordless.dev are developer products.
+# Vaultwarden, a community server compatible with Bitwarden's apps, isn't Bitwarden's: a provider of its own later.
+# Bundles: none. Official resellers: none for personal plans; its partners page offers reselling to businesses ("Grow and
+# scale your business by reselling Bitwarden to other organizations"), and names no shop for Premium or Families.
+# Free use: its Free plan. Families has a 14-day free trial that becomes the paid plan.
+
+id: bitwarden
+name: Bitwarden
+website: https://bitwarden.com
+category: passwords
+spendCategory: software
+# Accepted cards, read 2026-11-19 in its payment methods article, for every plan.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover]
+    url: https://bitwarden.com/help/payment-methods/
+    quotes:
+      - 'All Bitwarden plans types accept major credit cards, including Visa, Mastercard, American Express, and Discover.'
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling (Settings → Subscription → Cancel subscription in the web app).
+cancelUrl: https://bitwarden.com/help/cancel-a-subscription/
+sources: { pricing: https://bitwarden.com/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-19 in its payment methods article: cards, PayPal, and cryptocurrency through account
+# credit bought with BitPay. Bank transfers, wires and checks are for Teams and Enterprise only ("Bank account payments
+# are available for some Teams and Enterprise plans"), so they aren't listed. No page offers app-store billing.
+paymentMethods:
+  - methods: [card, paypal, crypto]
+    page: 'Payment methods'
+    url: https://bitwarden.com/help/payment-methods/
+    quotes:
+      - 'All Bitwarden plans types accept major credit cards, including Visa, Mastercard, American Express, and Discover.'
+      - 'PayPal is available as a payment method for all plans.'
+      - 'Cryptocurrency, such as Bitcoin, is accepted.'
+# Renewal day (M11.5), read 2026-11-19: "Premium individual subscriptions renew automatically on an annual basis." (Premium
+# Renewal), and the terms' "the Service is billed in advance on a monthly or yearly basis respectively"; the cancel article
+# names a "Next charge date" but not how it's set. No page says on which day it renews (notes.md).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://bitwarden.com/terms/
+    - https://bitwarden.com/help/premium-renewal/
+    - https://bitwarden.com/help/cancel-a-subscription/
+    - https://bitwarden.com/help/billing-faqs/
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19 on its about page, whose address is "Santa Barbara, CA 93103 USA". Its terms are with 8bit
+# Solutions LLC, "wholly owned by Bitwarden Inc.", which "is incorporated in the State of Delaware". Private: no page
+# names a listing.
+owner:
+  name: Bitwarden, Inc.
+  page:
+    name: About
+    url: https://bitwarden.com/about/
+  quotes:
+    - 'Bitwarden is a corporation headquartered in Santa Barbara, California with employees located in the U.S. and around the world.'
+    - 'Bitwarden, Inc. is the parent company of 8bit Solutions LLC'
+  country:
+    code: US
+  lastVerified: 2026-11-19
+notes: >-
+  One US-dollar price list for everyone, billed yearly, with tax added. Bitwarden Authenticator is a separate free app
+  for two-factor codes; it works without a Bitwarden account and can sync with your vault.
+
+# Perks (M11.6): what Premium and Families add that no feature describes, in the pricing page's comparison words.
+perks:
+  - id: file-attachments
+    name: Encrypted file attachments
+  - id: send-files
+    name: Bitwarden Send for files
+  - id: priority-support
+    name: Priority support
+
+# General features, read 2026-11-19. Platforms: browser extensions (Edge, Chrome, Safari, Firefox, Opera and others),
+# desktop apps for Windows, macOS and Linux, the web app, iOS and Android apps and a command-line tool (its downloads
+# page). Sign-in: the master password, passkeys ("Use passkeys to log in and unlock your Bitwarden account."), two-step
+# login by FIDO2 security keys, an authenticator app or email "Free for all", Duo (push) and YubiKey OTP with Premium
+# ("Two-Step Login Methods"), and "Log in with device", approved from another app you're logged in to; SSO is for
+# Enterprise organizations only. Support: "24/7 email support for everyone and priority support for paid users." (pricing
+# page), its contact form and community forums (contact page); its chat window is an AI assistant. App languages: its
+# Localization article's list (Arabic, German, English, Spanish, French, Hindi, Italian, Japanese, Korean, Portuguese,
+# Chinese among about fifty). Open source: its open source page links the server and every app on GitHub ("The Bitwarden
+# Server project contains the APIs, database, and other core infrastructure items"), so fully open; some business
+# features of the server are under its own Bitwarden License (Billing FAQs). Self-hosting: "Self-hosting Bitwarden is
+# free" (License Organizations or Premium), with a Premium or Families licence file unlocking their features there. No
+# pause (no page offers one); no parental controls (Families' owners manage collections, not what members can see).
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [password, passkey, totp, security-key, email-code, push-approval]
+  support.channels: [email, community, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+  software.open-source: fully-open
+  software.self-hostable: true
+sourceRepo:
+  url: https://github.com/bitwarden
+  page:
+    name: Open source
+    url: https://bitwarden.com/open-source/
+  quotes:
+    - 'The source code for Bitwarden is hosted on GitHub and everyone is free to review, audit, and contribute to the Bitwarden codebase.'
+  lastVerified: 2026-11-19
+
+# Password manager features, read 2026-11-19 (Password Manager Plans' comparison, the pricing page's table and the help
+# articles named):
+# - Item types: "Login", "Card", "Identity", "Secure note" and "SSH key" (Vault Items), and passkeys ("Login items can
+#   also store passkeys and, for Premium users, verification codes"). Free stores authenticator keys but makes no codes
+#   ("Storing keys in Password Manager integrated authenticator is available to all accounts. Generating TOTP codes is
+#   available with Premium or membership to a paid organization (Families, Teams, or Enterprise)."), so 2FA codes are
+#   Premium's and Families'.
+# - Health: "Most vault health reports are only available for premium users, including members of paid organizations
+#   (families, teams, or enterprise), but the Data Breach report is free for all users." Premium's: Exposed, Reused and
+#   Weak Passwords, Unsecured Websites (http) and Inactive 2FA. Free's Data Breach report looks up your email address in
+#   Have I Been Pwned when you run it, not your saved passwords, so Free's health is empty; nothing monitors on its own,
+#   so no dark web monitoring.
+# - Sharing, every plan: a Free organization shares with one other user in up to two collections ("Any user of any plan
+#   can be the owner of one Free organization."), Families with all six; collection permissions ("View items", "Edit
+#   items", "Manage collection"); Bitwarden Send links to anyone ("Transmit data securely to anyone, even non-users, with
+#   end-to-end encryption.") with a deletion and expiration date, "Limit views (or, Maximum access count)" and a password
+#   (Send Lifespan, Send Privacy). Free's Send is "Text only"; Premium and Families send files too (a perk).
+# - Import: "Bitwarden (csv)" and "Bitwarden (json)" (Condition a Bitwarden .csv or .json), "KeePass (kdbx)" (Import from
+#   KeePass), other managers' exports (LastPass, 1Password, Chrome, Firefox and others: Import to your Vault) and the FIDO
+#   Credential Exchange Protocol on iOS 26 and Android 14. Export: ".json (plaintext)", ".csv (plaintext)", ".json
+#   (Encrypted)" and ".zip (with attachments)", and CXP to another app (Export Vault Data). Every plan ("Encrypted export"
+#   is a core feature on the pricing page).
+# - Emergency access: "Adding a trusted contact for emergency access is available to premium users, including members of
+#   paid organizations (Families, Teams, and Enterprise)."
+# - Offline: "Any unlocked Bitwarden app can be used offline in read-only mode" (Using Bitwarden Offline), every plan.
+# - Authenticator: Premium's and Families' integrated authenticator takes a QR code or a key ("Scan a QR code from the
+#   Bitwarden mobile app or browser extension.", the item's otpauth://totp/ URI), and its keys leave in the vault's exports,
+#   plain or encrypted ("The formats are identical to Bitwarden vault exports ."; its JSON sample has "totp" :
+#   "otpauth://totp/my-secret-key"). Free's vault keeps the keys without codes (above): false.
+# - End-to-end encryption: "Bitwarden uses end-to-end encryption for all vault data, which only your master password can
+#   decrypt." (Security and Compliance), its attachments included on Premium and Families ("Vault Data includes all
+#   information stored within accounts to the Bitwarden Service, including but not limited to login credentials,
+#   attachments including photos, videos, images and other files", privacy policy).
+plans:
+  - id: bitwarden.free
+    name: Free
+    link: https://bitwarden.com/go/start-free/
+    features:
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, identity, secure-note, ssh-key]
+      password-manager.sharing:
+        [
+          share-to-user,
+          share-vault,
+          share-link,
+          link-expiry,
+          link-view-limit,
+          link-password,
+          role-permissions,
+        ]
+      password-manager.import: [csv, json, kdbx, cxf, other-managers]
+      password-manager.export: [csv, json, cxf, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+    notes: >-
+      Unlimited passwords on unlimited devices. Shares with one other person through a free organization. Two-factor
+      codes need Premium, Families or the free Bitwarden Authenticator app.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://bitwarden.com/pricing/
+
+  - id: bitwarden.premium
+    name: Premium
+    link: https://bitwarden.com/go/start-premium/
+    features:
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, ssh-key]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing:
+        [
+          share-to-user,
+          share-vault,
+          share-link,
+          link-expiry,
+          link-view-limit,
+          link-password,
+          role-permissions,
+        ]
+      password-manager.import: [csv, json, kdbx, cxf, other-managers]
+      password-manager.export: [csv, json, cxf, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [otpauth, encrypted-backup, plain-backup]
+      encryption.end-to-end: [passwords, files]
+    perks: [file-attachments, send-files, priority-support]
+    notes: 5 GB of encrypted file attachments, with more storage for an extra fee.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 19.8
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://bitwarden.com/pricing/
+
+  - id: bitwarden.families
+    name: Families
+    link: https://bitwarden.com/go/start-families-trial/
+    features:
+      account.users: 6
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, ssh-key]
+      password-manager.health: [breached, weak, reused]
+      password-manager.sharing:
+        [
+          share-to-user,
+          share-vault,
+          share-link,
+          link-expiry,
+          link-view-limit,
+          link-password,
+          role-permissions,
+        ]
+      password-manager.import: [csv, json, kdbx, cxf, other-managers]
+      password-manager.export: [csv, json, cxf, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [otpauth, encrypted-backup, plain-backup]
+      encryption.end-to-end: [passwords, files]
+    perks: [file-attachments, send-files, priority-support]
+    notes: >-
+      Six Premium accounts with unlimited sharing between them. 5 GB of attachments each and 5 GB for shared items. A
+      14-day free trial, which asks for payment details, becomes the paid plan unless you cancel.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 47.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://bitwarden.com/pricing/
+
+  # Bitwarden Authenticator, read 2026-11-19: "a standalone app that generates time-based one-time passwords (TOTPs)", on
+  # iOS and Android only, "Available free on iOS and Android.", open source (its product page). It keeps codes on the
+  # device or syncs them with a Bitwarden vault. Import (Import & Export Authenticator Data): its own or Password
+  # Manager's JSON, "Google Authenticator (QR code)", LastPass Authenticator's JSON, a "2FAS backup file", Raivo OTP's
+  # export (iOS) and Aegis's unencrypted JSON (Android), besides scanning a site's QR code. Export: ".json or .csv",
+  # unencrypted (its sample sets encrypted to false), with "the otpauth://totp/?secret= string for each entry". Codes synced
+  # from a vault leave with the vault's export instead. No server to run, so not self-hostable.
+  - id: bitwarden.authenticator
+    name: Authenticator
+    link: https://bitwarden.com/products/authenticator/
+    features:
+      platforms: [android, ios]
+      software.self-hostable: false
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator, other-apps]
+      authenticator.export: [otpauth, plain-backup]
+    notes: >-
+      A free app for two-factor codes on iPhone and Android. No Bitwarden account needed; with one, it can sync codes with
+      your vault.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://bitwarden.com/products/authenticator/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch: its terms of service (effective June 1, 2017,
+# which include its privacy policy), privacy policy ("Last revised APRIL-2024"), cookies policy, the sign-up form's line
+# ("By continuing, you agree to the Terms of Service and Privacy Policy", web vault, Edge), and its help articles on
+# cancelling, renewal, plans, organizations, billing email, export, deletion, server regions, audits and Send. Every
+# agreement a user accepts (the owner's rule, 2026-11-03): the sign-up form names only the terms and privacy policy; the
+# terms include nothing else by reference beyond the operating rules and policies it may publish; its apps are open
+# source (its open source page), with the server's licence and licence FAQ on GitHub for its business modules, which
+# personal plans don't use. Not rated: its community forums' own rules and the App Store's and Google Play's terms for
+# the mobile apps. Its cookie banner and Google Analytics are the website's; the privacy policy also uses account data
+# "To monitor your user experience on the Service." No transparency report was found (notes.md).
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://bitwarden.com/terms/
+    - name: 'Privacy policy'
+      url: https://bitwarden.com/privacy/
+    - name: 'Cookies policy'
+      url: https://bitwarden.com/privacy/cookies/
+    - name: 'Payment methods'
+      url: https://bitwarden.com/help/payment-methods/
+    - name: 'Pricing'
+      url: https://bitwarden.com/pricing/
+    - name: 'Cancel a subscription'
+      url: https://bitwarden.com/help/cancel-a-subscription/
+    - name: 'Premium renewal'
+      url: https://bitwarden.com/help/premium-renewal/
+    - name: 'Upgrade from individual to organization'
+      url: https://bitwarden.com/help/upgrade-from-individual-to-org/
+    - name: 'Update billing information'
+      url: https://bitwarden.com/help/update-billing-info/
+    - name: 'Export vault data'
+      url: https://bitwarden.com/help/export-your-data/
+    - name: 'Delete an account or organization'
+      url: https://bitwarden.com/help/delete-your-account/
+    - name: 'Server regions'
+      url: https://bitwarden.com/help/server-geographies/
+    - name: 'Security FAQs'
+      url: https://bitwarden.com/help/security-faqs/
+    - name: 'Compliance, audits, and certifications'
+      url: https://bitwarden.com/help/is-bitwarden-audited/
+    - name: 'Security and compliance'
+      url: https://bitwarden.com/compliance/
+    - name: 'Password Manager plans'
+      url: https://bitwarden.com/help/password-manager-plans/
+    - name: 'Open source'
+      url: https://bitwarden.com/open-source/
+    - name: 'Downloads'
+      url: https://bitwarden.com/download/
+    - name: 'License organizations or Premium'
+      url: https://bitwarden.com/help/licensing-on-premise/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It tracks visits to its website with Google Analytics, which can link them to other sites, and watches how you use the service. You can block Google Analytics in your browser; nothing turns off the rest.'
+      sources:
+        - url: https://bitwarden.com/privacy/
+          quote: 'We use a variety of tools to do this, including Google Analytics.'
+        - url: https://bitwarden.com/privacy/
+          quote: 'When you visit the Site using Google Analytics, we and Google may link information about your activity from that site with activity from other sites that use Google Analytics services.'
+        - url: https://bitwarden.com/privacy/
+          quote: 'To monitor your user experience on the Service.'
+      action:
+        name: How to turn off Google Analytics
+        url: https://bitwarden.com/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It may share your details with its partners, and to stop that you have to write to it.'
+      sources:
+        - url: https://bitwarden.com/privacy/
+          quote: 'Bitwarden may also share your Personal Information with our affiliates and partners, to facilitate our global operations and in accordance with applicable laws, and our agreements with customers or service providers.'
+        - url: https://bitwarden.com/privacy/
+          quote: 'You may choose to opt-out of allowing your Personal Information to be shared with certain third-parties.'
+      action:
+        name: Ask it to stop sharing your details
+        url: https://bitwarden.com/contact/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website uses advertising cookies that follow what you browse to pick ads for you. To stop them you block cookies in each browser you use.'
+      sources:
+        - url: https://bitwarden.com/privacy/cookies/
+          quote: 'These Cookies track your browsing habits to enable Us to show advertising which is more likely to be of interest to you.'
+        - url: https://bitwarden.com/privacy/cookies/
+          quote: 'If you prefer to avoid the use of Cookies on the website, first you must disable the use of Cookies in your browser and then delete the Cookies saved in your browser associated with this website.'
+      action:
+        name: How to turn off its cookies
+        url: https://bitwarden.com/privacy/cookies/
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy policy and terms don't mention AI. It can't read what's in your vault."
+      pages: [https://bitwarden.com/privacy/, https://bitwarden.com/terms/]
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Everything in your vault is locked on your device before it leaves, so only you can open it. Bitwarden itself has no way to read it.'
+      sources:
+        - url: https://bitwarden.com/privacy/
+          quote: 'Vault Data is encrypted using secure cryptographic keys under your control. Bitwarden cannot access Vault Data.'
+        - url: https://bitwarden.com/help/security-faqs/
+          quote: 'With this end-to-end, zero knowledge encryption architecture even Bitwarden cannot access your data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your account details while you are a customer, then deletes them by its own rules, which give no times. Deleting your account wipes your vault at once.'
+      sources:
+        - url: https://bitwarden.com/privacy/
+          quote: 'We retain Administrative Data for as long as you are a customer of Bitwarden and as required by law.'
+        - url: https://bitwarden.com/privacy/
+          quote: 'If you terminate your relationship with Bitwarden, we will delete your Personal Information in accordance with our data retention policies.'
+        - url: https://bitwarden.com/help/delete-your-account/
+          quote: 'Bitwarden does not "soft delete" any data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself at any time, and everything in it is gone for good.'
+      sources:
+        - url: https://bitwarden.com/help/delete-your-account/
+          quote: 'Deleting a Bitwarden account or organization permanently deletes the account or organization and all data that is associated with it .'
+        - url: https://bitwarden.com/terms/
+          quote: 'All information is purged from our databases when you cancel your account.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You can download your whole vault yourself as a CSV or JSON file, or a locked JSON file, and its help centre shows how the files are laid out.'
+      sources:
+        - url: https://bitwarden.com/help/export-your-data/
+          quote: 'Export your vault data, including logins and notes, to back up important information or transfer to a new Bitwarden vault .'
+        - url: https://bitwarden.com/help/export-your-data/
+          quote: 'Review example .csv and .json files to decide which format is best for you.'
+      action:
+        name: How to export your vault
+        url: https://bitwarden.com/help/export-your-data/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It checks that a request from the police or a government is valid before handing anything over, and it can’t open your vault. It doesn’t promise to tell you or publish how many requests it gets.'
+      sources:
+        - url: https://bitwarden.com/privacy/
+          quote: 'In each case, we will make reasonable efforts to verify the validity of the request before disclosing your Personal Information.'
+        - url: https://bitwarden.com/help/security-faqs/
+          quote: 'With this end-to-end, zero knowledge encryption architecture even Bitwarden cannot access your data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: good
+      reason: 'You pick whether your vault is kept in the US or the EU. Its other records stay mostly in the EU and the US, moved under recognised safeguards.'
+      sources:
+        - url: https://bitwarden.com/help/server-geographies/
+          quote: 'The Bitwarden cloud is available globally with data storage in both United States and European Union regions.'
+        - url: https://bitwarden.com/privacy/
+          quote: 'We use applicable, approved information transfer mechanisms where required, such as EU Standard Contractual Clauses (SCCs), or the Data Privacy Framework.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'You only need an email address. A name is optional, and paid plans need billing details.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'You must provide a valid email address in order to complete the signup process.'
+        - url: https://bitwarden.com/terms/
+          quote: 'Any other information requested, such as your real name, is optional'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel with one button in your account settings, and you keep the paid features until the end of the time you paid for.'
+      sources:
+        - url: https://bitwarden.com/help/cancel-a-subscription/
+          quote: 'If you cancel automatic renewal, you can continue using your subscription until the end of your current billing cycle.'
+        - url: https://bitwarden.com/help/cancel-a-subscription/
+          quote: 'Select Cancel subscription .'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can ask for your money back only in the first 30 days of a new subscription. After that, there are no refunds.'
+      sources:
+        - url: https://bitwarden.com/help/cancel-a-subscription/
+          quote: 'If you cancel a premium subscription within 30 days of the its creation , contact us for a refund.'
+        - url: https://bitwarden.com/help/cancel-a-subscription/
+          quote: 'Subscriptions older than 30 days are not eligible for a refund.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: good
+      reason: 'Your price stays the same until the year you paid for ends. It posts a new price on its website at least 30 days before it starts.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'If you agree to a subscription price, that will remain your price for the duration of the payment term; however, prices are subject to change at the end of a payment term.'
+        - url: https://bitwarden.com/terms/
+          quote: 'We will notify our Users of material changes to this Agreement, such as price changes, at least 30 days prior to the change taking effect by posting a notice on our Website.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Families has a 14-day free trial that needs your payment details, and it starts charging when the trial ends unless you cancel first, which you can do at any time.'
+      sources:
+        - url: https://bitwarden.com/help/upgrade-from-individual-to-org/
+          quote: 'Paid organizations have a 14-day free trial built in.'
+        - url: https://bitwarden.com/help/upgrade-from-individual-to-org/
+          quote: 'For any paid organization, enter your Payment Information .'
+        - url: https://bitwarden.com/help/upgrade-from-individual-to-org/
+          quote: 'You can cancel your subscription at any time in the Settings tab of your organization.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: "Its pages don't say it reminds Premium members before the yearly renewal."
+      pages:
+        - https://bitwarden.com/help/premium-renewal/
+        - https://bitwarden.com/terms/
+        - https://bitwarden.com/help/cancel-a-subscription/
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      plans: [bitwarden.families]
+      tier: good
+      reason: 'Families’ billing email gets a reminder before the yearly renewal, though it doesn’t say how long before.'
+      sources:
+        - url: https://bitwarden.com/help/update-billing-info/
+          quote: 'The billing email on file is sent important announcements about your subscription, like upcoming renewal reminders or unpaid invoices.'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: "Its terms and billing help name no fees beyond the price and tax. More attachment storage costs extra, at a price its pages don't give."
+      pages:
+        - https://bitwarden.com/terms/
+        - https://bitwarden.com/help/payment-methods/
+        - https://bitwarden.com/pricing/
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms say an upgrade is billed at once, but not whether the time left on your old plan counts toward it.'
+      pages:
+        - https://bitwarden.com/terms/
+        - https://bitwarden.com/help/upgrade-from-individual-to-org/
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts in California, not to a private referee. That may be far from where you live.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'You and Bitwarden agree to submit to the exclusive jurisdiction and venue of the courts located in the State of California.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts big changes on its website at least 30 days ahead, but doesn’t send them to you. Small changes apply as soon as you keep using it.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'We will notify our Users of material changes to this Agreement, such as price changes, at least 30 days prior to the change taking effect by posting a notice on our Website.'
+        - url: https://bitwarden.com/terms/
+          quote: 'For non-material modifications, your continued use of the Website constitutes agreement to our revisions of these Terms of Service.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can shut your account at any time, for any reason or none, without warning, and its terms promise no money back.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'Bitwarden has the right to suspend or terminate your access to all or any part of the Website at any time, with or without cause, with or without notice, effective immediately.'
+        - url: https://bitwarden.com/terms/
+          quote: 'Bitwarden reserves the right to refuse service to anyone for any reason at any time.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-stated
+      reason: "Its terms take no licence over what you store and say nothing more about it. It can't read your vault anyway."
+      pages: [https://bitwarden.com/terms/, https://bitwarden.com/privacy/]
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of the service at any time, even without warning, and says it owes you nothing if it does.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'We reserve the right at any time and from time to time to modify or discontinue, temporarily or permanently, the Website (or any part of it) with or without notice.'
+        - url: https://bitwarden.com/terms/
+          quote: 'any modification, price change, suspension or discontinuance of the Service;'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://bitwarden.com/terms/, https://bitwarden.com/privacy/]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps and server are open source: anyone can read, check and add to their code on GitHub.'
+      sources:
+        - url: https://bitwarden.com/open-source/
+          quote: 'The source code for Bitwarden is hosted on GitHub and everyone is free to review, audit, and contribute to the Bitwarden codebase.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside security firms check its apps and servers every year and it publishes their reports. It pays researchers who find bugs, but its pages read show no reports of past incidents.'
+      sources:
+        - url: https://bitwarden.com/help/is-bitwarden-audited/
+          quote: 'Bitwarden regularly conducts comprehensive third-party security audits with notable security firms.'
+        - url: https://bitwarden.com/help/is-bitwarden-audited/
+          quote: 'Bitwarden also interacts with independent security researchers through our private bug bounty program on HackerOne .'
+        - url: https://bitwarden.com/compliance/
+          quote: 'Bitwarden is SOC2 Type II and SOC3 certified.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Families covers you and any five other people, friends or family, each with a login of their own.'
+      sources:
+        - url: https://bitwarden.com/help/password-manager-plans/
+          quote: 'Start a Families organization to share private data between you and five friends or family members.'
+        - url: https://bitwarden.com/terms/
+          quote: 'Your login may only be used by one person — i.e., a single login may not be shared by multiple people.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves, except the portable Windows version, and its pages mention no other changes to your device.'
+      sources:
+        - url: https://bitwarden.com/download/
+          quote: 'Some options are not capable of automatic updates and are labeled as such.'
+        - url: https://bitwarden.com/download/
+          quote: 'Portable App for Flash Drives (does not auto update)'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Run it on your own server, free
+      tier: great
+      reason: 'You can host Bitwarden yourself at no cost, so your vault never has to sit on its servers.'
+      sources:
+        - url: https://bitwarden.com/help/licensing-on-premise/
+          quote: 'Self-hosting Bitwarden is free'
+      lastVerified: 2026-11-19
