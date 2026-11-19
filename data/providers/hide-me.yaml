@@ -1,0 +1,870 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with a plain fetch (curl) from Canada, which
+# hide.me serves whole, and with Edge for its pricing page and checkout: its pricing, free VPN, about, network, features
+# (no logs, kill switch, split tunnelling, StealthGuard, SmartGuard, multihop, port forwarding, protocols, Bolt), reseller
+# and press pages, its terms of service (last update 25 August 2026) and privacy policy (effective 10th Jan 2023), 22
+# help articles (hide.me/en/help/...), Securitum's no-log audit report and its 2025 transparency report (PDFs it links);
+# its checkout (member.hide.me/en/checkout, its plans and order summary, typing nothing) from Canada, and its plan data
+# through US, UK, Irish, German, French, Dutch, Spanish, Italian, Australian and New Zealand exits, the UK's and Germany's
+# checkout pages read in Edge there too. Its sign-in page showed Edge Cloudflare's "Performing security verification",
+# so it wasn't read; its help articles describe sign-in.
+# Pricing: one Premium plan, "Pricing Guarantee: Your plan always renews with the same price and duration", so every
+# period's price is what it renews at. Its checkout with no offer sells "Billed $11.99 monthly", "Billed $54.99 every 13
+# months" (12 months plus "1 Month EXTRA") and "Billed $69.99 every 26 months" (24 plus 2); the pricing page's FAQ links
+# sell 3, 6 and 36 months ("Renews at $19.99 every 3 months. Same price, always.", $29.99 and $119.99), stored too
+# (notes.md: those links carry a coupon, and the same plans without it are dearer). The pricing page's Black Friday cards
+# (16 and 30 months for $54.99 and $69.99, utm_campaign "blackfriday2026") are a sale, not stored. The checkout's own
+# data names each country's currency: US dollars in Canada, the US, Australia and New Zealand ("All amounts are shown in
+# USD."), pounds in the UK ("All amounts are shown in GBP.") and euros in Ireland, Germany, France, the Netherlands, Spain
+# and Italy ("All amounts are shown in Euro."), the same amounts everywhere, before VAT ("VAT may apply."; the UK's adds
+# £2.40 to the month): GLOBAL USD, with the UK's and the euro countries' own prices.
+# Region checklist for CA and US, 2026-11-19: 1. its language paths (/en/, /de/...) change only the language; 2. a
+# language menu only; 3. the checkout's data ("currency":"USD" in Canada and the US); 4. the checkout's order summary,
+# typing nothing ("VAT 0% · Canada", "All amounts in USD."); 5. no prices-by-country article; 6. a plain fetch and Edge
+# from Canada, and the plan data through a US exit: the same; 7. no bill offered.
+# Its plans: Free and Premium. Its mobile subscriptions bought in the app stores ("You can only use a Mobile subscription
+# on your mobile devices") have no web price, so they aren't drafted (notes.md); Plus is "now retired". hide.me Business
+# and the reseller program are for businesses, out of scope.
+# Bundles: none. Official resellers: none named (its reseller program sells accounts to businesses that resell them under
+# their own name, and its pages name no shop). App stores bill its mobile plans (partners, not listed).
+# Free use: the Free plan, "Lifetime free VPN, not a trial".
+
+id: hide-me
+name: hide.me
+aliases: [hide.me vpn, hideme, hide me]
+website: https://hide.me
+category: vpn
+spendCategory: software
+billingCurrency: { GLOBAL: USD, GB: GBP, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+# Its help article on cancelling: in your account for its Paddle payments, the email link for Cleverbridge's, the store
+# for app store purchases.
+cancelUrl: https://hide.me/en/help/how-can-i-cancel-hide-me-subscription/
+sources: { pricing: https://hide.me/en/pricing }
+# Accepted cards, read 2026-11-19 in its payment methods article (last modified August 18, 2026); Diners Club is other.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, other]
+    url: https://hide.me/en/help/which-payment-methods-do-you-support/
+    quotes:
+      - Credit card (Visa, Mastercard, Amex, Diners Club), PayPal, SEPA and SOFORT.
+# Ways to pay (M11.5), read 2026-11-19: its payment methods article (cards, PayPal, SEPA and SOFORT bank payments, Apple
+# Pay, Google Pay, cryptocurrencies and a manual bank transfer) and its refund article (the app stores).
+paymentMethods:
+  - methods: [card, paypal, bank-transfer, apple-pay, google-pay, crypto]
+    page: 'Which payment methods do you support?'
+    url: https://hide.me/en/help/which-payment-methods-do-you-support/
+    quotes:
+      - Credit card (Visa, Mastercard, Amex, Diners Club), PayPal, SEPA and SOFORT.
+      - Apple Pay
+      - Google Pay
+      - Bitcoin, Dogecoin, Ethereum, Litecoin, Solana, KuCoin Pay, * Tether, * USD Coin.
+      - We also accept manual payment via bank transfer.
+  - methods: [app-store]
+    page: 'Money-back guarantee - refund policy'
+    url: https://hide.me/en/help/money-back-guarantee-refund-policy/
+    quotes:
+      - For purchases made through Google Play Store or Apple App Store, the respective store’s refund policies apply, and our general refund policy does not apply to these transactions.
+# Renewal day (M11.5), read 2026-11-19: its terms bill "each 30, 180, 365, 730 or 1095 days depending on the duration of
+# the selected plan", which core's wording doesn't read (it needs "30 days" together), and which predates the 13- and
+# 26-month plans; its checkout bills "monthly". So not-stated here, with the every-30-days block in notes.md.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://hide.me/en/legal
+    - https://hide.me/en/help/subscription-faq/
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19 in its terms, which name the company and its country; its help article calls it the
+# "Parent Company: eVenture Ltd." Private: no page names a listing.
+owner:
+  name: eVenture Limited
+  page:
+    name: Terms of Service
+    url: https://hide.me/en/legal
+  quotes:
+    - 'Hide.me websites, community forum and the hide.me VPN service is owned and operated by eVenture Limited. We are registered in Malaysia under registration number LL09685, and our registered office is at Unit 12F(1), Main Office Tower Financial Park Labuan, Jalan Merdeka 87000 Labuan, F.T. Labuan, Malaysia.'
+  country:
+    code: MY
+  lastVerified: 2026-11-19
+notes: >-
+  A free plan with no data cap and no sign-up, and Premium for 1, 3, 6, 13, 26 or 36 months, which always renews at the
+  price you paid. US dollars in Canada, the US, Australia and New Zealand, pounds in the UK and euros in the euro
+  countries, plus VAT where it applies.
+
+# General features, read 2026-11-19. Platforms: its VPN apps menu (Windows, macOS, Linux; Android, iPhone / iPad and other
+# phone systems; Apple TV, Android TV, Amazon Fire TV; Chrome, Firefox, Edge; routers). Sign-in: a username and password
+# ("this will now enable the option to create a username and password", How to register), with authenticator codes
+# ("Access your account if you lose your authenticator device", How to restore 2FA credentials). Support: "If you have any questions, please feel to contact our 24/7 support team either at
+# support@hide.me or via live chat.", and its community forum (community.hide.me). App languages: its language menu
+# (العَرَبِية, Čeština, Dansk, Deutsch, Ελληνικά, English, Español, Suomi, Français, Hrvatski, Magyar, Bahasa Indonesia,
+# Italiano, 日本語, 한국어, Nederlands, Norsk, Polski, Português, Русский, Svenska, Türkçe, Українська, 中文; no Hindi).
+# Open source: only its Linux client ("An open-source Linux VPN client", its company overview), so software.open-source
+# is left out (NordVPN's precedent). No pause. No parental controls: SmartGuard's "optional filters" for gambling and
+# adult content are settings you choose in your own app.
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password, totp]
+  support.channels: [email, chat, community, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+
+# Perks (M11.6): Premium's lines no feature describes, in its comparison table's and help article's words.
+perks:
+  - id: streaming-support
+    name: Streaming Support
+  - id: fixed-ip
+    name: Fixed IP Address
+  - id: bolt
+    name: Bolt “Fast Proxy”
+
+# VPN features, read 2026-11-19:
+# - Devices: Premium "you can connect up to ten devices at the same time, regardless of the platform"; Free "Our free
+#   VPN service allows you to connect one device at a time".
+# - Data: "While free users used to get a monthly limit of 10 GB data transfer, this is no longer the case and both free
+#   and paid subscribers have unlimited data transfer." (What is the difference between free and paid account?, March
+#   13, 2026), and the comparison's "Unlimited data" for Free; its home page FAQ still says "you can use one device and
+#   10 GB per month" (notes.md: the newer pages win). Free's speeds are limited ("you don't have unlimited speeds").
+# - Countries: Premium's network page lists 83 locations in 57 countries (the pricing page's "92+ Locations / 2600+
+#   Servers" counts cities; no page states a country count), Free "a choice of 7 server locations (Finland, France,
+#   Germany, Netherlands, Switzerland, United Kingdom, United States)" (the comparison's "8 Locations" adds a second US
+#   one).
+# - Protocols: WireGuard, OpenVPN, IKEv2, SoftEther and SSTP (its protocols page); SoftEther's "state of the art SSL-VPN
+#   protocol penetrates firewalls by tunneling the VPN traffic over HTTPS" and SSTP "gives you another way to connect when
+#   networks block protocols such as WireGuard or IKEv2", on Free too: stealth.
+# - Kill switch ("Similarly in our Desktop apps the feature is enabled by default."), split tunnelling (Windows, Android
+#   and macOS): on both plans, since Free's "only limitations" are speed, locations and one device.
+# - Premium only: Multihop ("hide.me VPN Multihop is only available for our Premium plan users."), SmartGuard ("blocking
+#   ads, trackers, and malicious websites", with "optional filters" for "gambling to adult content"), dynamic port
+#   forwarding ("This feature is not available in free and is only available in paid plan."), Bolt and streaming servers.
+# - P2P: its standard servers are "for general browsing, privacy, P2P, and torrents" (not its streaming servers); for
+#   Free, inferred, since its free locations are standard servers.
+# - No-logs and audits: its privacy policy ("We do NOT keep logs of your VPN sessions, browsing behaviour, websites you
+#   visit or any activity related to your VPN connection."); Securitum's "Audit of Hide.me’s no-log policy compliance"
+#   (19.03.2024 – 06.06.2024, its report linked from the about page), after DefenseCode's of 2015: no-logs.
+# - RAM-only: "RAM-only servers that do not store data on physical disks" (its company overview).
+# - Anonymous sign-up: Free needs no email ("You do not even need to provide your email address or credit card details
+#   when signing up for the FREE plan."); Premium asks for one ("Enter the email of your existing account or a new one.").
+# - No mesh, no Tor over VPN, no dedicated IP plan: none of its pages offers them.
+# - Speeds (notes only): "Our European powerhouse with over 25Gbps speeds." (Frankfurt, its network page).
+plans:
+  - id: hide-me.free
+    name: Free
+    link: https://hide.me/en/free-vpn
+    features:
+      vpn.included: true
+      vpn.devices: 1
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 7
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+    inferred:
+      vpn.p2p:
+        reason: 'Its standard servers allow P2P and torrents (only its Premium streaming servers don’t), and the free plan connects to standard locations; no page says so for Free in words.'
+        page:
+          name: 'Differences between hide.me VPN streaming, standard and multihop servers'
+          url: https://hide.me/en/help/differences-between-hide-me-vpn-streaming-standard-and-multihop-servers/
+        lastVerified: 2026-11-19
+    notes: 'No email or card needed, no ads and no data cap. One device at a time, 7 countries (Finland, France, Germany, the Netherlands, Switzerland, the UK and the US), and slower speeds than Premium. It doesn’t renew by itself: you renew it in the app or your account from time to time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://hide.me/en/free-vpn
+
+  - id: hide-me.premium
+    name: Premium
+    link: https://hide.me/en/pricing
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 57
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content, gambling]
+      vpn.p2p: true
+      vpn.port-forwarding: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: true
+      vpn.mesh: false
+    perks: [streaming-support, fixed-ip, bolt]
+    notes: 'Every period renews at the price you paid ("Pricing Guarantee"). The 13- and 26-month plans are 12 and 24 months with one and two months extra. Its 3, 6 and 36-month prices are those of the pricing page’s own links. The Black Friday sale (16 months for $54.99, 30 for $69.99) isn’t stored.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: GLOBAL
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: GLOBAL
+        currency: USD
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: GLOBAL
+        currency: USD
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: GLOBAL
+        currency: USD
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: GLOBAL
+        currency: USD
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: GB
+        currency: GBP
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: GB
+        currency: GBP
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: GB
+        currency: GBP
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: GB
+        currency: GBP
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: GB
+        currency: GBP
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: GB
+        currency: GBP
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: IE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: IE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: IE
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: IE
+        currency: EUR
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: IE
+        currency: EUR
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: IE
+        currency: EUR
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: DE
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: DE
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: DE
+        currency: EUR
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: DE
+        currency: EUR
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: DE
+        currency: EUR
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: FR
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: FR
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: FR
+        currency: EUR
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: FR
+        currency: EUR
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: FR
+        currency: EUR
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: NL
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: NL
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: NL
+        currency: EUR
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: NL
+        currency: EUR
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: NL
+        currency: EUR
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: ES
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: ES
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: ES
+        currency: EUR
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: ES
+        currency: EUR
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: ES
+        currency: EUR
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+      - region: IT
+        currency: EUR
+        amount: 11.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: IT
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+      - region: IT
+        currency: EUR
+        amount: 29.99
+        interval: month
+        intervalCount: 6
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
+      - region: IT
+        currency: EUR
+        amount: 54.99
+        interval: month
+        intervalCount: 13
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: IT
+        currency: EUR
+        amount: 69.99
+        interval: month
+        intervalCount: 26
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://member.hide.me/en/checkout
+      - region: IT
+        currency: EUR
+        amount: 119.99
+        interval: month
+        intervalCount: 36
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch: its terms of service (25 August 2026), privacy
+# policy (10th Jan 2023, which includes its cookie section), the refund, cancelling, subscription, registration, devices,
+# free plan and company help articles, its no-logs and about pages, Securitum's audit report and its 2025 transparency
+# report. Every agreement a user accepts (the owner's rule, 2026-11-03): its terms (which hold its apps' licence, section
+# 8) and its privacy policy; the checkout names no other ("Terms of Service", "Privacy Policy" and "Refund Policy" in its
+# footer), and the terms include nothing by reference. Its payment companies' terms (Paddle, Cleverbridge) weren't read:
+# they bill for it, and its own pages settle every topic. Its sign-in page wasn't read (a Cloudflare check).
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://hide.me/en/legal
+    - name: 'Privacy Policy'
+      url: https://hide.me/en/privacy
+    - name: 'What is the difference between free and paid account?'
+      url: https://hide.me/en/help/what-is-the-difference-between-free-and-paid-account/
+    - name: 'How can I cancel my hide.me subscription?'
+      url: https://hide.me/en/help/how-can-i-cancel-hide-me-subscription/
+    - name: 'Subscription FAQ'
+      url: https://hide.me/en/help/subscription-faq/
+    - name: 'Checkout'
+      url: https://member.hide.me/en/checkout
+    - name: 'Checkout (3, 6 and 36 months)'
+      url: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+    - name: 'Pricing'
+      url: https://hide.me/en/pricing
+    - name: 'Free VPN'
+      url: https://hide.me/en/free-vpn
+    - name: 'No logs policy'
+      url: https://hide.me/en/features/no-logs-policy
+    - name: 'About hide.me VPN - company overview'
+      url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
+    - name: 'Securitum no-log audit report (2024)'
+      url: https://hide.me/downloads/Securitum_Hide.me_no-log-policy_20240607.pdf
+    - name: 'Transparency report 2013-2025'
+      url: https://hide.me/downloads/hide.me-transparency-report-2025.pdf
+    - name: 'How many devices can be connected?'
+      url: https://hide.me/en/help/how-many-devices-can-be-connected-to-hide-me-vpn-simultaneously/
+    - name: 'How to renew free plan'
+      url: https://hide.me/en/help/how-to-renew-free-plan/
+    - name: 'Apps'
+      url: https://hide.me/en/software
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send crash reports only if you agree, but its website records your visits and uses analytics cookies by default, which you can only refuse in your browser.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'With your consent we may collect anonymized crash reports and network diagnostics.'
+        - url: https://hide.me/en/privacy
+          quote: 'Analytics cookies. We may use analytics cookies to track information how the Service is used so that we can make improvements.'
+        - url: https://hide.me/en/privacy
+          quote: "If you'd like to delete cookies or instruct your web browser to delete or refuse cookies, please visit the help pages of your web browser."
+      action:
+        name: 'How to refuse its cookies (its privacy policy)'
+        url: https://hide.me/en/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'The companies that run its service may use your data only for it, but its privacy policy lets other companies’ cookies on its website count visits and deliver ads. You can only refuse them per browser.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'These third parties have access to your Personal Data to the extent necessary to perform tasks on our behalf and are obligated not to disclose or use it for any other purpose.'
+        - url: https://hide.me/en/privacy
+          quote: 'In addition to our own cookies, we may also use various third-parties cookies to report usage statistics of the Service, deliver advertisements on and through the Service, and so on.'
+      action:
+        name: 'How to refuse its cookies (its privacy policy)'
+        url: https://hide.me/en/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads, even on the free plan, and its apps carry no trackers from other companies.'
+      sources:
+        - url: https://hide.me/en/pricing
+          quote: 'No ads or trackers, no logs'
+        - url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
+          quote: 'VPN apps do not contain third-party trackers'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy policy and terms don't mention AI. It keeps almost nothing about you."
+      pages: [https://hide.me/en/privacy, https://hide.me/en/legal]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: great
+      reason: 'Its short connection log is wiped every few hours, and everything tied to your account is deleted when the account ends.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'The troubleshooting log gets securely erased every few hours.'
+        - url: https://hide.me/en/privacy
+          quote: 'Once a VPN service account is terminated on our network, all data associated with that VPN service account including the VPN service account itself is deleted from all of our systems.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'It holds little more than your email address, and you can delete your details in your account yourself; paid customers can even remove their email and keep using it.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'Whenever made possible, you can update or delete your Personal Data directly within your account settings section.'
+        - url: https://hide.me/en/privacy
+          quote: 'Customers with a paid plan are able to remove their email from our system and continue to use our service.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your data in a common format. It doesn’t say how soon it answers.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'You can request to obtain a copy of your Personal Data in a commonly used electronic format so that you can manage and move it.'
+      action:
+        name: 'How to ask for your data (its privacy policy)'
+        url: https://hide.me/en/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It hands over data only for a court order from an authority with power over it, publishes every year’s requests, and keeps almost nothing to give. It doesn’t say it tells you.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'If a court order is received from a recognized legal authority with jurisdiction over hide.me then the company shall comply with that order.'
+        - url: https://hide.me/en/privacy
+          quote: 'However, the company cannot be compelled to hand over information which it does not have.'
+        - url: https://hide.me/downloads/hide.me-transparency-report-2025.pdf
+          quote: 'Publishing these numbers is part of our ongoing commitment to transparency, accountability, and data minimization.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your data is kept and handled in Malaysia, where it’s based. The email companies it uses abroad are covered by recognised safeguards such as the EU’s standard contract terms.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'If you are located outside Malaysia and choose to provide information to us, please note that we transfer the data, including Personal Data, to Malaysia and process it there.'
+        - url: https://hide.me/en/privacy
+          quote: 'Where applicable, transfers are additionally safeguarded by standard contractual clauses in our agreements with these providers.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'Premium asks only for an email address; it doesn’t ask your name or address.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'To maximize your privacy, we collect the minimum personal information required, and that is your email address.'
+        - url: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
+          quote: 'Enter the email of your existing account or a new one. No password needed.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      plans: [hide-me.free]
+      tier: great
+      reason: 'The free plan needs no email address, no card and no sign-up at all.'
+      sources:
+        - url: https://hide.me/en/features/no-logs-policy
+          quote: 'You do not even need to provide your email address or credit card details when signing up for the FREE plan.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel online in your account (or by your payment email’s link), after it asks why. You keep using it until your paid time ends.'
+      sources:
+        - url: https://hide.me/en/help/how-can-i-cancel-hide-me-subscription/
+          quote: 'Now, pick a reason why you chose to cancel hide.me.'
+        - url: https://hide.me/en/help/how-can-i-cancel-hide-me-subscription/
+          quote: 'Finally, click on the Cancel Subscription button and you will cancel hide.me subscription.'
+        - url: https://hide.me/en/help/subscription-faq/
+          quote: 'Please note that the cancellation only stops the automatic renewal/recurring billing. It does not stop the active membership.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get all your money back within 30 days of your first order, once. Renewals and app store purchases aren’t covered.'
+      sources:
+        - url: https://hide.me/en/legal
+          quote: 'You will be given a full refund of the contract amount in case you have 1) not previously claimed a refund, 2) not violated our Terms of Service, 3) made your first order with us (renewals do not qualify).'
+        - url: https://hide.me/en/legal
+          quote: "For purchases made through Google Play Store or Apple App Store, the respective store's refund policies apply, and our general refund policy does not apply to these transactions."
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'Your plan always renews at the price you first paid, so the price never goes up on you.'
+      sources:
+        - url: https://member.hide.me/en/checkout
+          quote: 'Your plan renews at the price you signed up for. Same price and plan. Always.'
+        - url: https://hide.me/en/pricing
+          quote: 'Pricing Guarantee: Your plan always renews with the same price and duration'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no trial that turns into a paid plan: it has a free plan instead, and Premium starts when you pay.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: "Premium renews by itself, and its pages don't say it reminds you first."
+      pages: [https://hide.me/en/legal, https://hide.me/en/help/subscription-faq/]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and checkout name no fees beyond the price and VAT.'
+      pages: [https://hide.me/en/legal, https://member.hide.me/en/checkout]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Its terms send no dispute to a private referee and don’t block class actions; they only say Malaysian law applies.'
+      sources:
+        - url: https://hide.me/en/legal
+          quote: 'These Terms shall be governed and construed in accordance with the laws of Malaysia, without regard to its conflict of law provisions.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts new terms on its website and tries to give 30 days’ notice of big changes, but doesn’t promise to tell you directly. Keeping on using it means you accept them.'
+      sources:
+        - url: https://hide.me/en/legal
+          quote: 'If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect.'
+        - url: https://hide.me/en/legal
+          quote: 'By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can suspend or close your account for conduct it decides is unwanted, not only for breaking the law or its rules, and keeps what you paid.'
+      sources:
+        - url: https://hide.me/en/legal
+          quote: 'Hacking, cracking, distribution of viruses, fraudulent activities, network sabotage, phishing, and/or any conduct deemed illegal or unwanted shall be subject to suspension or termination.'
+        - url: https://hide.me/en/legal
+          quote: 'We may suspend or terminate accounts that we reasonably believe are in breach of this Section, without refund, in accordance with Sections 3 and 7.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its locations, speeds and limits can change, and it may limit or suspend use to protect its network.'
+      sources:
+        - url: https://hide.me/en/legal
+          quote: 'Actual service coverage, speeds, locations and quality may vary.'
+        - url: https://hide.me/en/legal
+          quote: 'We may impose usage or service limits, suspend Service, or block certain kinds of usage in our sole discretion to protect the service.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its pages don't say it closes accounts you haven't used. The free plan has to be renewed by hand from time to time."
+      pages: [https://hide.me/en/legal, https://hide.me/en/help/how-to-renew-free-plan/]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps are for your own personal, non-commercial use, and its terms forbid taking them apart (reverse engineering) without saying where the law allows it.'
+      sources:
+        - url: https://hide.me/en/legal
+          quote: 'The Service, Apps and Software are provided strictly for your personal, non-commercial use as an individual.'
+        - url: https://hide.me/en/legal
+          quote: 'Modifying, distributing to unauthorized parties, reverse engineering, or otherwise using the Software in any way not expressly authorized by us is strictly prohibited.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'Outside security firms checked its no-logs setup (DefenseCode, then Securitum in 2024) and it publishes the report, but its pages offer no way to report security bugs.'
+      sources:
+        - url: https://hide.me/en/features/no-logs-policy
+          quote: 'This year, Securitum, a respected European security firm, has once again confirmed that our no-logs policy is strictly enforced.'
+        - url: https://hide.me/en/features/no-logs-policy
+          quote: 'hide.me is the first VPN provider in the industry who volunteered itself to be audited by one of the most reputed independent security analyst, Leon Juranic from DefenseCode Ltd, who certified that hide.me does not store any user or activity logs.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: neutral
+      reason: 'It keeps no record of what you do or your real IP address, and Securitum’s audit found no such logs, but it keeps a short connection log for troubleshooting, wiped every few hours.'
+      sources:
+        - url: https://hide.me/en/privacy
+          quote: 'We maintain a non-persistent log of connection data for troubleshooting purposes which includes customer’s randomly generated username and internally assigned (non-public) IP address.'
+        - url: https://hide.me/en/privacy
+          quote: 'The troubleshooting log gets securely erased every few hours.'
+        - url: https://hide.me/downloads/Securitum_Hide.me_no-log-policy_20240607.pdf
+          quote: 'As a result of the audit, it was confirmed, that declared by Hide.me no-logs policy is indeed applied, and the audit did not reveal any issues on VPN container that could lead to a compromise of user privacy.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: great
+      reason: 'Install it on as many devices as you like; the only limit is how many connect at once.'
+      sources:
+        - url: https://hide.me/en/help/how-many-devices-can-be-connected-to-hide-me-vpn-simultaneously/
+          quote: 'You can install hide.me VPN on any number of devices, but only ten devices can be connected at the same time .'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: "Its terms and apps pages don't say whether its apps update themselves or change anything else on your device."
+      pages: [https://hide.me/en/legal, https://hide.me/en/software]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Free plan with no data cap or sign-up
+      tier: great
+      reason: 'Its free plan needs no email or card, shows no ads and no longer caps your data, though it’s limited to one device, a few countries and lower speeds.'
+      sources:
+        - url: https://hide.me/en/help/what-is-the-difference-between-free-and-paid-account/
+          quote: 'While free users used to get a monthly limit of 10 GB data transfer, this is no longer the case and both free and paid subscribers have unlimited data transfer .'
+        - url: https://hide.me/en/free-vpn
+          quote: 'No registration, no sign up required'
+      lastVerified: 2026-11-19
