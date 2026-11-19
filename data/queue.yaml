@@ -510,6 +510,27 @@
   source: own
   status: done
   date: 2026-11-19
+- id: windscribe
+  name: Windscribe
+  website: https://windscribe.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: ivpn
+  name: IVPN
+  website: https://www.ivpn.net
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: airvpn
+  name: AirVPN
+  website: https://airvpn.org
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
