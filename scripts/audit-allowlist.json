@@ -1,0 +1,8 @@
+[
+  {
+    "id": "GHSA-fc5q-39xc-vjpf",
+    "package": "picomatch",
+    "reason": "A ReDoS in every picomatch version (<= 4.0.7) with no fix published; it's only in build and test tools (vitest, @angular/build, angular-eslint, stylelint's micromatch), never in the app or the Workers. The owner's choice of 2026-11-19.",
+    "reviewBy": "2026-12-19"
+  }
+]
