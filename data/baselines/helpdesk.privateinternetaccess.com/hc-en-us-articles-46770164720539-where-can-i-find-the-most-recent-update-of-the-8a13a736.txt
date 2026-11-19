@@ -1,0 +1,62 @@
+url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46770164720539-Where-Can-I-Find-the-Most-Recent-Update-of-the-PIA-App
+method: fetch
+saved: 2026-11-19
+
+Where Can I Find the Most Recent Update of the PIA App? – Private Internet Access Support
+PIA Support Portal
+Private Internet Access
+|
+Submit a request
+Private Internet Access Support
+Frequently Asked Questions
+Articles in this section
+What Server Locations Are Available in the PIA App?
+How Do I Know If My VPN Is Working?
+What Are the Most Common Reasons for VPN Connection Issues?
+What Operating Systems Are Supported?
+Where Can I Find the Most Recent Update of the PIA App?
+What Are Virtual Server Locations?
+How to Set Up and Use PIA Antivirus
+What Is Identity Guard?
+Streaming with Private Internet Access
+Can I Remote Access My Home Server/Computer While Using a VPN?
+See more
+Where Can I Find the Most Recent Update of the PIA App?
+July 29, 2026 17:27
+The latest version of the Private Internet Access (PIA) app is available from the official download source for your device or platform.
+Jump To…
+Windows, macOS, and Linux
+Android
+iOS
+Browser Extension
+Windows, macOS, and Linux
+The latest version of the PIA desktop app for Windows, macOS, and Linux is available on the Downloads page.
+The Downloads page also includes a link to the changelog for the latest update and the previous 5 desktop app versions.
+The PIA desktop app will also notify you when an update is available. You can check for update notifications in the following places:
+In the app’s connect menu, below the Power button.
+In the app’s Settings menu. A green arrow appears above the three-dot button (⋮) in the top-right corner of the connect menu.
+In the system tray. Right-click the PIA app icon to see if an option to download the latest version appears.
+Android
+The latest version of the PIA Android app is available on the Google Play Store. To check for updates if you have PIA installed, open the Google Play Store and search for PIA VPN. If an Update option appears, select it to install the latest version. If no update option appears, the latest version is already installed.
+For general guidance on keeping Android apps updated, refer to Google’s official documentation.
+iOS
+The latest version of the PIA iOS app is available on the App Store. The App Store also includes changelogs for the latest and previous updates.
+To check for updates, with PIA installed, open the App Store and search for PIA VPN. If an Update option appears, select it to install the latest version. If no update option appears, the latest version is already installed.
+Browser Extension
+The latest version of the PIA browser extension is available on the Downloads page. You can also install or update it from the Chrome Web Store or Firefox Browser Add-ons.
+Changelogs for recent browser extension updates are also available on the Downloads page.
+The PIA browser extension will also notify you when an update is available.
+Was this article helpful?
+Yes
+No
+Have more questions? Submit a request
+Return to top
+Related articles
+What Encryption Can I Use?
+How to Set Up and Use PIA Antivirus
+How Do I Uninstall and Reinstall the PIA App on Windows, macOS, and Linux
+Understanding Android Settings and Protocols
+How Do I Know If My VPN Is Working?
+Terms of Service
+Privacy and Cookie Policy
+Copyright © PIA Private Internet Access, Inc. All Rights Reserved.

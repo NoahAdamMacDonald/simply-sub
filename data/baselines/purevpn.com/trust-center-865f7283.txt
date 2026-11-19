@@ -1,0 +1,308 @@
+url: https://www.purevpn.com/trust-center
+method: fetch
+saved: 2026-11-19
+
+Trust Center [November 2026] - PureVPN
+You’d Be Surprised What’s Public About You.
+See What’s Exposed
+What is VPN
+Benefits
+Why PureVPN
+What Is My IP
+Protocols
+Access Websites
+Anonymous Browsing
+All Benefits
+Features
+Password Manager
+DNS Leak Protection
+Internet Kill Switch
+All Features
+Apps
+Windows
+Mac
+Android
+iOS
+Apple TV
+Linux
+Fire Stick
+See All
+Products
+PureVPN
+Family Plan
+PureDome
+Pure White Label
+Dedicated IP
+Residential Proxy
+Dedicated Server
+Port Forwarding
+Pricing
+Servers
+Safe Zone
+VPN for Teams
+Help
+Blog
+EN
+English
+Deutsch
+Español
+Türkçe
+Italiano
+العربية
+Login
+Get PureVPN
+Help
+Blog
+English
+Login
+Get PureVPN
+PureVPN
+Trust Center
+The trust of more than 5 million users aspires PureVPN to be the very best. Here’s a look at how we work to earn your trust at PureVPN.
+Start here
+Try for Free on Windows
+What’s inside:
+Security
+Privacy
+Transparency
+Warrant Canary
+Accountability
+Help us grow
+We are now ISO 27001 certified!
+Security
+Defending our infrastructure
+from security breaches
+Your online security is always a priority at PureVPN.
+Check out the security practices we follow, and the validation/testing practices we employ
+to keep your data secure at all times.
+1. Account and access control
+PureVPN’s infrastructure is equipped with a strong authentication mechanism at every level. Our VPN servers’ access is maintained via a centralized access manager, where the access request is assessed and, if approved, issues time-bound access with a one-time password (OTP). Our code repo is also authorized via Multi-Factor Authentication. IP whitelisting is mandatory for any access to our infrastructure.
+2. Application software security
+Our engineering process entails security assessment from Epic / Grooming phase until it goes live. The code review process follows the ‘four-eye’ principle where a review is performed by multiple teams prior to merging in release and master branches. A security scanning tool for static code assessment is integrated into continuous integration (CI) process and identified bugs are fixed prior to rollout in production. Additionally, a reputable third party is brought on to perform application security assessments using advanced testing methodologies.
+To ensure that there is no traffic leakage from the VPN tunnel, PureVPN has developed open-source tools to test the leakages. These are readily available on our website.
+The components of client-side applications running in privilege mode for required functionality, like adding firewall rules, etc., are secured using memory protection, strong authentication, and allowing only permissible actions to non-privileged users.
+3. Continuous vulnerability management
+We have implemented an automated vulnerability management program wherein weekly scans are performed and reported vulnerabilities are fixed. Any ad hoc vulnerability reported at random is tested and fixed across the infrastructure in minimal time. Our employees are subscribed to CVE announcements for all in-production software to support the Vulnerability Management Program. Additionally, policy compliance scans are also scheduled to continuously monitor security baseline configurations.
+4. Network monitoring and defense
+We have implemented an intrusion detection and prevention system on our infrastructure and cloud assets to mitigate attacks and get alerted of potentially malicious events in a timely fashion. Traffic is routed via a Web Application Firewall to mitigate platform attacks like DDoS, web application attacks, and so on.
+5. Penetration testing
+PureVPN has implemented a penetration testing program in multiple folds. Employees are assigned to penetrate our infrastructure and apps during engineering streams. A reputable third-party firm is then brought onboard to test all platforms.
+6. Secure configuration of assets
+At PureVPN, the deployment of applications and infrastructure is fully automated, removing the human element from the process. International security benchmarks are part of the security baseline configuration enforced at PureVPN. Hardened images are deployed using an automated configuration management tool.
+All firewalls are configured to deny traffic by default and only authorized protocols and intended traffic is allowed after the change assessment process.
+Where applicable, the dedicated workstation is used to access production systems hardened for specific tasks. This enables us to provide the best services to our users with embedded quality and security assurance. All services and operations run under the least privileged model to reduce the attack surface.
+Monitoring agents are part of the configuration baseline to ensure automated compliance and integrity of critical files.
+We have segregated web architecture. Our website servers do not host any data nor do they have any direct access to databases. Interaction is built using best practices by implementing API gateways with limited exposure to only intended data views. Attack surface is further reduced by allowing limited consumer interaction with business logic.
+7. Endpoint security
+Users are not authorized to export any consumer’s personally identifiable information. A device security policy is applied on user systems with predefined hardened images.
+Endpoint security control is implemented to mitigate the spread of malware and attacks on host systems. Strict URL monitoring is implemented to ensure that even potentially malicious sites are blocked.
+Systems are patched periodically via an automated tool. Host-based network firewalls, intrusion detection and prevention systems, security baseline benchmarking, application control, restricted removable storage access, privilege ID control, and continuous host monitoring via centralized solution are key highlights of endpoint security.
+8. Security awareness and training
+All staff, including employees and contractors, are part of the PureVPN security awareness program right from the time they join the company till they advance for opportunities outside PureVPN. We ensure that all our employees and contractors understand security requirements at PureVPN and that cybersecurity is a crucial part of their work philosophy.
+Since we deal with global customers, we make it a point that our employees, suppliers, and contractors understand the importance of cybersecurity measures to protect their data. We always screen our employees and contractors against human and technical security requirements, including security clearance of employees, and third-party security compliance certificates for vendors and partners.
+9. Information Security Policy
+1. Purpose
+The purpose of this policy is to define information security requirements for information assets (physical, logical or
+intangible). This policy acts as a compass to provide direction to protect information assets from both internal
+and external threats that compromise confidentiality, integrity or availability.
+2. Scope
+The scope of this policy applies to people, process, and technology systems that interact with information and
+information assets.
+3. Policy Statements
+Information Security activities shall be focused and overall driven by this information security policy:
+3.1 Management of GZ Systems shall demonstrate the due commitment to enable required resources for establishing information security objectives in line with policy.
+3.2 Management of GZ Systems shall ensure that adequate resources are provided, roles and responsibilities are clearly defined and documented, training and awareness program is established.
+3.3 All internal staff, outsourced staff, suppliers and third-party service providers share the commitment to the provision of appropriate levels of security across all functions that hold GZ Systems and its customer information.
+3.4 All internal staff, outsourced staff, suppliers and third-party service providers share the obligation to protect information, assure customer privacy, and remain vigilant in preventing unauthorized or fraudulent activity.
+3.5 Precautions and measures shall be taken at all the times, to ensure Confidentiality, Integrity and Availability of all information systems as per the importance (value) for business activities.
+3.6 Information Security objectives shall be established based on organizational information security requirements, best practices and ISO 27001.
+3.7 Information Assets shall be identified & their associated risks assessed, evaluated and appropriate measures shall be implemented in risk treatment planning.
+3.8 Access to Information assets shall be controlled and access rights shall be reviewed on regular basis to align with changing business needs.
+3.9 Backup shall be maintained for critical data as per classification to allow continuity of business without disruption.
+3.10 Mechanism for reporting information security incidents shall be established for timely resolution of information security incidents.
+3.11 Internal audits shall be conducted for establishing the effectiveness of the implemented ISMS.
+3.12 Management of GZ Systems shall ensure continual improvement through the periodic external assessments, established process of internal audit and risk management.
+3.13 Management of GZ Systems shall ensure compliance with all applicable legislative and regulatory requirements.
+3.14 Appropriate disciplinary actions shall be taken in case of any information security breach.
+3.15 This policy shall be widely available to users, including internal staff, outsourced staff, suppliers and its
+compliance shall be referred to in all Service Level Agreements (SLA)s, Operational Level Agreements
+(OLA)s, Underpinning Contracts (UC)s and Agreements.
+Privacy
+Is my data really private
+on PureVPN?
+Yes – and in this section we’ll breakdown the four main factors that allow PureVPN to keep your data safe from leaks.
+Learn more
+1. We do not log data that can identify you
+Outside contractors from Well known audit firm certified us as a “no-log” VPN Service Provider.
+They randomly check in with us to make sure we are not logging any VPN data from our customers.
+What does “no-log” mean for you?
+It means we do not store any of the data you make when you use PureVPN.
+We can’t see what you do online or link back to you at all.
+To find out more about how Well known audit firm evaluates PureVPN, you can read this article:
+PureVPN Excels Well known audit firm’s Always-On Audit Setting an Industry Benchmark
+When you get customer support, our Customer Success Agents can only access your account by using a pre-approved IP address, and verifying their identity through Multi-Factor Authentication (MFA).
+We use a third-party payments provider to process your subscription to PureVPN, so we can’t see any of your credit card details or payment information.
+2. PureVPN lives in a country that doesn’t require data storage
+In 2021, we moved the legal jurisdiction of PureVPN to the British Virgin Islands.
+Because of this, we are not legally required to store any kind of data.
+To find out more about why we moved our headquarters, you can read this article:
+PureVPN Moves From Hong Kong To British Virgin Islands
+3. We still have rules to follow – with consequences for breaking them
+The GDPR (General Data Protection Regulation) is a set of rules that require all businesses to protect the personal data of the people who use their online services and resources.
+We are required by law to follow these rules, which include asking your consent to share any of your PureVPN customer data with third parties.
+If we don’t, we could get into serious trouble.
+These rules began in 2018, and we have made sure that PureVPN follows them since they came into effect.
+To learn more about our privacy policy, you can see it here: Pure VPN Privacy Policy
+4. We have quantum computers to generate powerful encryption keys
+These keys are called “Quantum-Resistant Encryption Keys”.
+They protect you while you’re using PureVPN because they help prevent cyber threats, like someone getting your password through a Brute Force attack.
+Right now this extra (not necessary, but future-thinking) layer of PureVPN protection is only available for you if you are in one of these areas:
+Australia
+Canada
+Netherlands
+UK
+USA
+We are working on getting this feature to you, no matter where you use PureVPN.
+transparency
+Here’s how we handle the tough stuff
+We are building a safer, more equitable internet for us all.
+That means being honest with you about how we navigate the hard things; like emergencies or intellectual property.
+To get all of our transparency reports, just click the “See all reports” button below.
+See all reports
+warrent canary
+Can law enforcement request my data?
+Yes, law enforcement agencies can request anyone’s data.
+However, we do not store any data that can directly identify you.
+1. We have not received any court orders.
+2. We have not received any subpoenas
+3. We have not received any emergency disclosure reports
+You can check this page every month to see if we have received any requests from law enforcement.
+Get PureVPN
+Accountability
+Who keeps PureVPN accountable?
+We always have someone from outside of PureVPN watching how we conduct ourselves.
+Doing this protects the integrity of PureVPN so we can keep providing you a uniquly safe and private VPN experience.
+We are a member of i2C’s VPN Trust Initiative
+PureVPN is proud to be a member of the i2Coalition’s VPN Trust Initiative (VTI) – a collaborative industry effort to set strong, transparent, and ethical standards for VPN providers. Through this initiative, we’re helping shape a safer, more trustworthy digital ecosystem for users everywhere.
+As part of this commitment, PureVPN has earned the VPN Trust Seal – an independent accreditation that validates our adherence to rigorous standards across security, privacy, transparency, advertising practices, and social responsibility. This recognition reflects our engineering-led approach to safeguarding user privacy, securing devices, and managing identity and access (IAM) with precision and accountability.
+PureVPN’s no logs policy verified by a top auditor for the fourth time
+We’ve established an industry benchmark through our fourth consecutive no-log policy assessment by a prominent audit firm. This recent technical evaluation covered VPN servers, configurations, and supporting infrastructure across multiple locations.
+Our commitment to user transparency and data protection remains unwavering. To uphold this pledge, we voluntarily undergo periodic, independent technical assessments to ensure compliance with our privacy policy.
+Our ISO 27001 certification ensures your online security
+Trust and Reliability Reinforced
+We have achieved the prestigious ISO 27001 certification after rigorous audits, ensuring our commitment to following the industry’s best practices and policies to protect your online activities from cyberthreats, unauthorized access, and other vulnerabilities.
+Your Trusted Security Partner
+Upholding this international standard for information security reflects our focus on safeguarding sensitive information and mitigating potential threats. It signifies our dedication to earning your trust, reinforcing our role as your reliable partner in online privacy and security.
+Looking Ahead with Us
+The ISO 27001 certification signifies our dedication to implementing the industry’s most robust Information Security Management System (ISMS). Rest assured, your online activities are shielded by the industry’s most stringent protocols and security measures, ensuring you can navigate the digital world with peace of mind.
+Find out what real people
+say about PureVPN
+See Trustpilot reviews
+Do you have ideas for improving PureVPN?
+Here’s how you can help:
+Contribute to our Reddit community
+Send us a direct message at PureVPN
+Work with us – PureVPN careers
+Try PureVPN risk-free for 31 days
+If you don’t love PureVPN, let us know within your first 31 days.
+We’ll send you a full refund.
+Get PureVPN
+Thank you for downloading PureVPN
+Follow these simple steps to enjoy secure browsing!
+1
+2
+3
+After downloading,
+install the app.
+Sign up and select
+your preference.
+Connect and Enjoy
+internet freedom.
+If the download doesn’t start automatically, Click here
+PureVPN Apps
+Mac VPN
+Windows VPN
+Linux VPN
+iPhone VPN
+Huawei VPN
+Android VPN
+VPN Chrome Extension
+VPN Firefox Extension
+VPN Edge Extension
+Android TV VPN
+Firestick TV VPN
+Apple TV VPN
+Routers VPN
+Programs
+VPN Affiliate Program
+Student Discount
+Family Plan
+PureVPN
+What is a VPN?
+Benefits
+Trust Center
+Blog
+VPN Add-ons
+Dedicated IP VPN
+Port Forwarding
+Dedicated Server
+Residential Proxy
+Tools
+What is My IP
+IPv6 Leak Test
+DNS Leak Test
+WebRTC Leak Test
+Password Generator
+Password Sharer
+Password Strength Checker
+About PureVPN
+Pricing
+Features
+About Us
+PureVPN Reviews
+Information
+Privacy Policy
+Refund Policy
+Terms of Service
+Press Room
+Help
+Support Center
+VPN Setup Guides
+Contact Us
+VPN For Business
+VPN for Teams
+Developers (API)
+White Label VPN
+White Label Password Manager
+VPN Resellers Program
+Beyond VPN
+Password Manager
+Digital Privacy Protection
+Servers
+USA
+UK
+UAE
+Australia
+Mexico
+Canada
+Turkey
+Germany
+France
+Spain
+South Africa
+Singapore
+Japan
+BVI
+Italy
+Kuwait
+Follow Us
+Facebook
+X
+Instagram
+Youtube
+Reddit
+TikTok
+Discord
+LinkedIn
+Download
+© 2026 PureVPN All Rights Reserved

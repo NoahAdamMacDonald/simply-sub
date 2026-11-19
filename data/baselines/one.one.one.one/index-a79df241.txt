@@ -1,0 +1,48 @@
+url: https://one.one.one.one/
+method: browser
+saved: 2026-11-19
+
+DNS
+Families
+English
+The free app that makes your Internet safer.
+Now available for even more devices.
+App Store
+Google Play
+macOS
+macOS Installation Instructions
+Windows
+Windows Installation Instructions
+Linux
+Linux Installation Instructions
+You’re one tap away from a safer Internet.
+When the Internet was built, computers weren’t mobile. They sat in offices next to data centers. The Internet has changed but the assumptions made 30 years ago are making your experience slower and less secure.
+1.1.1.1 with WARP replaces the connection between your device and the Internet with a modern, optimized, protocol.
+Learn more
+Fast. Free. Private.
+Your Internet service provider can see every site and app you use—even if they’re encrypted. Some providers even sell this data, or use it to target you with ads.
+1.1.1.1 with WARP prevents anyone from snooping on you by encrypting more of the traffic leaving your device.
+We believe privacy is a right. We won't sell your data, ever.
+Share with Twitter
+Use the Internet fast-lane
+In addition to the full WARP service, WARP+ subscribers get access to a larger network. More cities to connect to means you’re likely to be closer to a Cloudflare data center – which can reduce the latency between your device and Cloudflare and improve your browsing speed.
+Built on a massive network.
+WARP is built on the same network that has made 1.1.1.1 one of the fastest DNS resolvers on Earth.
+Your connection to WARP is fast and reliable wherever you live and wherever you go.
+1.1.1.1
+Google
+OpenDNS
+August, 2024
+Now available for macOS and Windows
+Millions of people secure their phone Internet connections with the WARP app today.
+We’ve extended the same protection to macOS and Windows.
+New: use WARP with your team
+Bring the power of WARP to your business by integrating WARP with Gateway. Enroll user devices in your organization and protect your remote workforce from threats online.
+Learn more
+Brought to you by Cloudflare.
+Cloudflare provides security and performance to over 25 million Internet properties—and now this technology is available to the rest of us.
+App Store
+Google Play
+macOS
+Windows
+Linux

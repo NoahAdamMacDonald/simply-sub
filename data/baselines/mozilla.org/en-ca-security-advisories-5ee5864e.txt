@@ -1,0 +1,2181 @@
+url: https://www.mozilla.org/en-CA/security/advisories/
+method: fetch
+saved: 2026-11-19
+
+Mozilla Foundation Security Advisories — Mozilla
+Help us improve your Mozilla experience
+In addition to Cookies necessary for this site to function, we’d like your permission to set some additional Cookies to better understand your browsing needs and improve your experience. Rest assured — we value your privacy.
+Accept All Additional Cookies
+Reject All Additional Cookies
+Cookie settings
+Menu
+Products
+Close Products menu
+Firefox browsers
+Mozilla VPN
+Mozilla Monitor
+Firefox Relay
+MDN Plus
+Thunderbird
+0DIN
+Tabstack
+Otari
+All products
+About us
+Close About us menu
+Our Mission
+About Mozilla
+The Mozilla Manifesto
+Get Involved
+Blog
+Our Work
+Mozilla Foundation
+Mozilla.ai
+Mozilla Ventures
+Mozilla Advertising
+Mozilla Builders
+Mozilla New Products
+Menu
+Mozilla Security
+Advisories
+Mozilla Security
+Advisories
+Known Vulnerabilities
+Mozilla Security Blog
+Security Bug Bounty
+Third-party Injection Policy
+Client Bug Bounty
+Frequently Asked Questions
+Hall of Fame
+Web Bug Bounty
+Eligible Websites
+Frequently Asked Questions
+Hall of Fame
+Mozilla Foundation Security Advisories
+Impact key
+Critical
+Vulnerability can be used to run attacker code and install
+software, requiring no user interaction beyond normal browsing.
+High
+Vulnerability can be used to gather sensitive data
+from sites in other windows or inject data or code into
+those sites, requiring no more than normal browsing actions.
+Moderate
+Vulnerabilities that would otherwise be High or Critical
+except they only work in uncommon non-default configurations or
+require the user to perform complicated and/or unlikely steps.
+Low
+Minor security vulnerabilities such as Denial of Service
+attacks, minor data leaks, or spoofs. (Undetectable spoofs of
+SSL indicia would have "High" impact because those are generally
+used to steal sensitive data intended for other sites.)
+November 17, 2026
+MFSA 2026-130 Security Vulnerabilities fixed in Firefox 160.0.1
+November 10, 2026
+MFSA 2026-129 Security Vulnerabilities fixed in Thunderbird 153.7
+MFSA 2026-128 Security Vulnerabilities fixed in Thunderbird 160
+MFSA 2026-127 Security Vulnerabilities fixed in Firefox ESR 153.7
+MFSA 2026-126 Security Vulnerabilities fixed in Firefox ESR 115.45
+MFSA 2026-125 Security Vulnerabilities fixed in Firefox 160
+November 9, 2026
+MFSA 2026-124 Security Vulnerabilities fixed in Firefox for iOS 160.0
+November 3, 2026
+MFSA 2026-123 Security Vulnerabilities fixed in Firefox 159.0.1
+October 27, 2026
+MFSA 2026-122 Security Vulnerabilities fixed in Thunderbird 153.6
+MFSA 2026-121 Security Vulnerabilities fixed in Thunderbird 159
+MFSA 2026-120 Security Vulnerabilities fixed in Firefox ESR 153.6
+MFSA 2026-119 Security Vulnerabilities fixed in Firefox ESR 115.44
+MFSA 2026-118 Security Vulnerabilities fixed in Firefox 159
+October 26, 2026
+MFSA 2026-117 Security Vulnerabilities fixed in Firefox for iOS 156.1
+October 21, 2026
+MFSA 2026-116 Security Vulnerabilities fixed in Firefox for Android 158.0.2
+October 20, 2026
+MFSA 2026-115 Security Vulnerabilities fixed in Thunderbird 153.5.1
+MFSA 2026-114 Security Vulnerabilities fixed in Thunderbird 158.0.1
+MFSA 2026-113 Security Vulnerabilities fixed in Firefox ESR 115.43.1
+MFSA 2026-112 Security Vulnerabilities fixed in Firefox ESR 153.5.1
+MFSA 2026-111 Security Vulnerabilities fixed in Firefox 158.0.1
+October 13, 2026
+MFSA 2026-110 Security Vulnerabilities fixed in Thunderbird 153.5
+MFSA 2026-109 Security Vulnerabilities fixed in Thunderbird 158
+MFSA 2026-108 Security Vulnerabilities fixed in Firefox ESR 153.5
+MFSA 2026-107 Security Vulnerabilities fixed in Firefox ESR 115.43
+MFSA 2026-106 Security Vulnerabilities fixed in Firefox 158
+October 6, 2026
+MFSA 2026-104 Security Vulnerabilities fixed in Firefox 157.0.1
+October 5, 2026
+MFSA 2026-105 Security Vulnerabilities fixed in Firefox for iOS 157.1
+September 30, 2026
+MFSA 2026-103 Security Vulnerabilities fixed in Thunderbird 153.4
+MFSA 2026-102 Security Vulnerabilities fixed in Thunderbird 140.17
+MFSA 2026-101 Security Vulnerabilities fixed in Thunderbird 157
+September 29, 2026
+MFSA 2026-100 Security Vulnerabilities fixed in Firefox ESR 153.4
+MFSA 2026-99 Security Vulnerabilities fixed in Firefox ESR 140.17
+MFSA 2026-98 Security Vulnerabilities fixed in Firefox ESR 115.42
+MFSA 2026-97 Security Vulnerabilities fixed in Firefox 157
+September 16, 2026
+MFSA 2026-96 Security Vulnerabilities fixed in Thunderbird 153.3
+September 15, 2026
+MFSA 2026-95 Security Vulnerabilities fixed in Thunderbird 140.16
+MFSA 2026-94 Security Vulnerabilities fixed in Thunderbird 156
+MFSA 2026-93 Security Vulnerabilities fixed in Firefox ESR 153.3
+MFSA 2026-92 Security Vulnerabilities fixed in Firefox ESR 140.16
+MFSA 2026-91 Security Vulnerabilities fixed in Firefox ESR 115.41
+MFSA 2026-90 Security Vulnerabilities fixed in Firefox 156
+September 8, 2026
+MFSA 2026-89 Security Vulnerabilities fixed in Firefox for iOS 155.1
+September 1, 2026
+MFSA 2026-88 Security Vulnerabilities fixed in Thunderbird 153.2
+MFSA 2026-87 Security Vulnerabilities fixed in Thunderbird 140.15
+MFSA 2026-86 Security Vulnerabilities fixed in Thunderbird 155
+MFSA 2026-85 Security Vulnerabilities fixed in Firefox ESR 153.2
+MFSA 2026-84 Security Vulnerabilities fixed in Firefox ESR 140.15
+MFSA 2026-83 Security Vulnerabilities fixed in Firefox ESR 115.40
+MFSA 2026-82 Security Vulnerabilities fixed in Firefox 155
+August 31, 2026
+MFSA 2026-81 Security Vulnerabilities fixed in Firefox for iOS 155.0
+August 18, 2026
+MFSA 2026-80 Security Vulnerabilities fixed in Thunderbird 153.1
+MFSA 2026-79 Security Vulnerabilities fixed in Thunderbird 140.14
+MFSA 2026-78 Security Vulnerabilities fixed in Thunderbird 154
+MFSA 2026-77 Security Vulnerabilities fixed in Firefox ESR 153.1
+MFSA 2026-76 Security Vulnerabilities fixed in Firefox ESR 140.14
+MFSA 2026-75 Security Vulnerabilities fixed in Firefox ESR 115.39
+MFSA 2026-74 Security Vulnerabilities fixed in Firefox 154
+August 4, 2026
+MFSA 2026-73 Security Vulnerabilities fixed in Firefox for Android 153.0.3
+July 21, 2026
+MFSA 2026-72 Security Vulnerabilities fixed in Thunderbird 140.13
+MFSA 2026-71 Security Vulnerabilities fixed in Thunderbird 153
+MFSA 2026-70 Security Vulnerabilities fixed in Firefox ESR 140.13
+MFSA 2026-69 Security Vulnerabilities fixed in Firefox ESR 115.38
+MFSA 2026-68 Security Vulnerabilities fixed in Firefox 153
+July 14, 2026
+MFSA 2026-67 Security Vulnerabilities fixed in Firefox 152.0.6
+July 13, 2026
+MFSA 2026-66 Security Vulnerabilities fixed in Firefox for iOS 152.4
+July 5, 2026
+MFSA 2026-65 Security Vulnerabilities fixed in Firefox for iOS 152.3
+June 30, 2026
+MFSA 2026-64 Security Vulnerabilities fixed in Thunderbird 140.12.1
+MFSA 2026-63 Security Vulnerabilities fixed in Thunderbird 152.0.1
+MFSA 2026-62 Security Vulnerabilities fixed in Firefox 152.0.4
+June 16, 2026
+MFSA 2026-61 Security Vulnerabilities fixed in Thunderbird 140.12
+MFSA 2026-60 Security Vulnerabilities fixed in Thunderbird 152
+MFSA 2026-59 Security Vulnerabilities fixed in Firefox ESR 115.37
+MFSA 2026-58 Security Vulnerabilities fixed in Firefox ESR 140.12
+MFSA 2026-57 Security Vulnerabilities fixed in Firefox 152
+MFSA 2026-56 Security Vulnerabilities fixed in Firefox for iOS 152.0
+June 9, 2026
+MFSA 2026-55 Security Vulnerabilities fixed in Focus for iOS / Klar 151.3.1
+June 2, 2026
+MFSA 2026-54 Security Vulnerabilities fixed in Firefox 151.0.3
+June 1, 2026
+MFSA 2026-53 Security Vulnerabilities fixed in Firefox for iOS 151.2
+May 25, 2026
+MFSA 2026-52 Security Vulnerabilities fixed in Firefox for iOS 151.1
+May 19, 2026
+MFSA 2026-51 Security Vulnerabilities fixed in Thunderbird 140.11
+MFSA 2026-50 Security Vulnerabilities fixed in Thunderbird 151
+MFSA 2026-49 Security Vulnerabilities fixed in Firefox for iOS 151.0
+MFSA 2026-48 Security Vulnerabilities fixed in Firefox ESR 140.11
+MFSA 2026-47 Security Vulnerabilities fixed in Firefox ESR 115.36
+MFSA 2026-46 Security Vulnerabilities fixed in Firefox 151
+May 12, 2026
+MFSA 2026-45 Security Vulnerabilities fixed in Firefox 150.0.3
+May 8, 2026
+MFSA 2026-44 Security Vulnerabilities fixed in Thunderbird 140.10.2
+MFSA 2026-43 Security Vulnerabilities fixed in Thunderbird 150.0.2
+May 7, 2026
+MFSA 2026-42 Security Vulnerabilities fixed in Firefox ESR 115.35.2
+MFSA 2026-41 Security Vulnerabilities fixed in Firefox ESR 140.10.2
+MFSA 2026-40 Security Vulnerabilities fixed in Firefox 150.0.2
+April 30, 2026
+MFSA 2026-39 Security Vulnerabilities fixed in Thunderbird 140.10.1
+MFSA 2026-38 Security Vulnerabilities fixed in Thunderbird 150.0.1
+April 28, 2026
+MFSA 2026-37 Security Vulnerabilities fixed in Firefox ESR 115.35.1
+MFSA 2026-36 Security Vulnerabilities fixed in Firefox ESR 140.10.1
+MFSA 2026-35 Security Vulnerabilities fixed in Firefox 150.0.1
+April 21, 2026
+MFSA 2026-34 Security Vulnerabilities fixed in Thunderbird 140.10
+MFSA 2026-33 Security Vulnerabilities fixed in Thunderbird 150
+MFSA 2026-32 Security Vulnerabilities fixed in Firefox ESR 140.10
+MFSA 2026-31 Security Vulnerabilities fixed in Firefox ESR 115.35
+MFSA 2026-30 Security Vulnerabilities fixed in Firefox 150
+April 7, 2026
+MFSA 2026-29 Security Vulnerabilities fixed in Thunderbird 140.9.1
+MFSA 2026-28 Security Vulnerabilities fixed in Thunderbird 149.0.2
+MFSA 2026-27 Security Vulnerabilities fixed in Firefox ESR 140.9.1
+MFSA 2026-26 Security Vulnerabilities fixed in Firefox ESR 115.34.1
+MFSA 2026-25 Security Vulnerabilities fixed in Firefox 149.0.2
+March 24, 2026
+MFSA 2026-24 Security Vulnerabilities fixed in Thunderbird 140.9
+MFSA 2026-23 Security Vulnerabilities fixed in Thunderbird 149
+MFSA 2026-22 Security Vulnerabilities fixed in Firefox ESR 140.9
+MFSA 2026-21 Security Vulnerabilities fixed in Firefox ESR 115.34
+MFSA 2026-20 Security Vulnerabilities fixed in Firefox 149
+March 10, 2026
+MFSA 2026-19 Security Vulnerabilities fixed in Firefox 148.0.2
+March 2, 2026
+MFSA 2026-18 Security Vulnerabilities fixed in Focus for iOS 148.2
+February 24, 2026
+MFSA 2026-17 Security Vulnerabilities fixed in Thunderbird 140.8
+MFSA 2026-16 Security Vulnerabilities fixed in Thunderbird 148
+MFSA 2026-15 Security Vulnerabilities fixed in Firefox ESR 140.8
+MFSA 2026-14 Security Vulnerabilities fixed in Firefox ESR 115.33
+MFSA 2026-13 Security Vulnerabilities fixed in Firefox 148
+February 20, 2026
+MFSA 2026-12 Security Vulnerabilities fixed in Firefox for iOS 147.4
+February 16, 2026
+MFSA 2026-11 Security Vulnerabilities fixed in Thunderbird 147.0.2 and 140.7.2
+MFSA 2026-10 Security Vulnerabilities fixed in Firefox 147.0.4, ESR 140.7.1, and ESR 115.32.1
+February 9, 2026
+MFSA 2026-09 Security Vulnerabilities fixed in Firefox for iOS 147.2.1
+January 27, 2026
+MFSA 2026-08 Security Vulnerabilities fixed in Thunderbird 140.7.1
+MFSA 2026-07 Security Vulnerabilities fixed in Thunderbird 147.0.1
+MFSA 2026-06 Security Vulnerabilities fixed in Firefox 147.0.2
+January 13, 2026
+MFSA 2026-05 Security Vulnerabilities fixed in Thunderbird 140.7
+MFSA 2026-04 Security Vulnerabilities fixed in Thunderbird 147
+MFSA 2026-03 Security Vulnerabilities fixed in Firefox ESR 140.7
+MFSA 2026-02 Security Vulnerabilities fixed in Firefox ESR 115.32
+MFSA 2026-01 Security Vulnerabilities fixed in Firefox 147
+December 18, 2025
+MFSA 2025-98 Security Vulnerabilities fixed in Firefox 146.0.1
+December 15, 2025
+MFSA 2025-97 Security Vulnerabilities fixed in Firefox for iOS 144.0
+December 9, 2025
+MFSA 2025-96 Security Vulnerabilities fixed in Thunderbird 140.6
+MFSA 2025-95 Security Vulnerabilities fixed in Thunderbird 146
+MFSA 2025-94 Security Vulnerabilities fixed in Firefox ESR 140.6
+MFSA 2025-93 Security Vulnerabilities fixed in Firefox ESR 115.31
+MFSA 2025-92 Security Vulnerabilities fixed in Firefox 146
+November 13, 2025
+MFSA 2025-90 Security Vulnerabilities fixed in Thunderbird 145
+November 12, 2025
+MFSA 2025-91 Security Vulnerabilities fixed in Thunderbird 140.5
+November 11, 2025
+MFSA 2025-89 Security Vulnerabilities fixed in Firefox ESR 115.30
+MFSA 2025-88 Security Vulnerabilities fixed in Firefox ESR 140.5
+MFSA 2025-87 Security Vulnerabilities fixed in Firefox 145
+October 28, 2025
+MFSA 2025-86 Security Vulnerabilities fixed in Firefox 144.0.2
+October 14, 2025
+MFSA 2025-85 Security Vulnerabilities fixed in Thunderbird 140.4
+MFSA 2025-84 Security Vulnerabilities fixed in Thunderbird 144
+MFSA 2025-83 Security Vulnerabilities fixed in Firefox ESR 140.4
+MFSA 2025-82 Security Vulnerabilities fixed in Firefox ESR 115.29
+MFSA 2025-81 Security Vulnerabilities fixed in Firefox 144
+September 30, 2025
+MFSA 2025-80 Security Vulnerabilities fixed in Firefox 143.0.3
+September 28, 2025
+MFSA 2025-79 Security Vulnerabilities fixed in Firefox for iOS 143.1
+September 16, 2025
+MFSA 2025-78 Security Vulnerabilities fixed in Thunderbird 140.3
+MFSA 2025-77 Security Vulnerabilities fixed in Thunderbird 143
+MFSA 2025-76 Security Vulnerabilities fixed in Focus for iOS 143.0
+MFSA 2025-75 Security Vulnerabilities fixed in Firefox ESR 140.3
+MFSA 2025-74 Security Vulnerabilities fixed in Firefox ESR 115.28
+MFSA 2025-73 Security Vulnerabilities fixed in Firefox 143
+August 19, 2025
+MFSA 2025-72 Security Vulnerabilities fixed in Thunderbird 140.2
+MFSA 2025-71 Security Vulnerabilities fixed in Thunderbird 128.14
+MFSA 2025-70 Security Vulnerabilities fixed in Thunderbird 142
+MFSA 2025-69 Security Vulnerabilities fixed in Focus for iOS 142
+MFSA 2025-68 Security Vulnerabilities fixed in Firefox for iOS 142
+MFSA 2025-67 Security Vulnerabilities fixed in Firefox ESR 140.2
+MFSA 2025-66 Security Vulnerabilities fixed in Firefox ESR 128.14
+MFSA 2025-65 Security Vulnerabilities fixed in Firefox ESR 115.27
+MFSA 2025-64 Security Vulnerabilities fixed in Firefox 142
+July 22, 2025
+MFSA 2025-63 Security Vulnerabilities fixed in Thunderbird 140.1
+MFSA 2025-62 Security Vulnerabilities fixed in Thunderbird 128.13
+MFSA 2025-61 Security Vulnerabilities fixed in Thunderbird 141
+MFSA 2025-60 Security Vulnerabilities fixed in Firefox for iOS 141
+MFSA 2025-59 Security Vulnerabilities fixed in Firefox ESR 140.1
+MFSA 2025-58 Security Vulnerabilities fixed in Firefox ESR 128.13
+MFSA 2025-57 Security Vulnerabilities fixed in Firefox ESR 115.26
+MFSA 2025-56 Security Vulnerabilities fixed in Firefox 141
+July 2, 2025
+MFSA 2025-54 Security Vulnerabilities fixed in Thunderbird 140
+June 30, 2025
+MFSA 2025-55 Security Vulnerabilities fixed in Thunderbird 128.12
+June 24, 2025
+MFSA 2025-53 Security Vulnerabilities fixed in Firefox ESR 128.12
+MFSA 2025-52 Security Vulnerabilities fixed in Firefox ESR 115.25
+MFSA 2025-51 Security Vulnerabilities fixed in Firefox 140
+June 10, 2025
+MFSA 2025-50 Security Vulnerabilities fixed in Thunderbird 139.0.2
+MFSA 2025-49 Security Vulnerabilities fixed in Thunderbird 128.11.1
+MFSA 2025-47 Security Vulnerabilities fixed in Firefox 139.0.4
+May 30, 2025
+MFSA 2025-48 Security Issue fixed in Mozilla VPN for macOS v2.28.0
+May 27, 2025
+MFSA 2025-46 Security Vulnerabilities fixed in Thunderbird 128.11
+MFSA 2025-45 Security Vulnerabilities fixed in Thunderbird 139
+MFSA 2025-44 Security Vulnerabilities fixed in Firefox ESR 128.11
+MFSA 2025-43 Security Vulnerabilities fixed in Firefox ESR 115.24
+MFSA 2025-42 Security Vulnerabilities fixed in Firefox 139
+May 20, 2025
+MFSA 2025-41 Security Vulnerabilities fixed in Thunderbird 138.0.2
+MFSA 2025-40 Security Vulnerabilities fixed in Thunderbird 128.10.2
+MFSA 2025-39 Security Vulnerabilities fixed in Firefox for iOS 139
+May 17, 2025
+MFSA 2025-38 Security Vulnerabilities fixed in Firefox ESR 115.23.1
+MFSA 2025-37 Security Vulnerabilities fixed in Firefox ESR 128.10.1
+MFSA 2025-36 Security Vulnerabilities fixed in Firefox 138.0.4
+May 13, 2025
+MFSA 2025-35 Security Vulnerabilities fixed in Thunderbird 138.0.1
+MFSA 2025-34 Security Vulnerabilities fixed in Thunderbird 128.10.1
+April 29, 2025
+MFSA 2025-32 Security Vulnerabilities fixed in Thunderbird 128.10
+MFSA 2025-31 Security Vulnerabilities fixed in Thunderbird 138
+MFSA 2025-30 Security Vulnerabilities fixed in Firefox ESR 115.23
+MFSA 2025-29 Security Vulnerabilities fixed in Firefox ESR 128.10
+MFSA 2025-28 Security Vulnerabilities fixed in Firefox 138
+April 21, 2025
+MFSA 2025-33 Security vulnerability fixed in Focus for iOS 138
+April 15, 2025
+MFSA 2025-27 Security Vulnerabilities fixed in Thunderbird ESR 128.9.2
+MFSA 2025-26 Security Vulnerabilities fixed in Thunderbird 137.0.2
+MFSA 2025-25 Security vulnerability fixed in Firefox 137.0.2
+April 1, 2025
+MFSA 2025-24 Security Vulnerabilities fixed in Thunderbird ESR 128.9
+MFSA 2025-23 Security Vulnerabilities fixed in Thunderbird 137
+MFSA 2025-22 Security Vulnerabilities fixed in Firefox ESR 128.9
+MFSA 2025-21 Security Vulnerabilities fixed in Firefox ESR 115.22
+MFSA 2025-20 Security Vulnerabilities fixed in Firefox 137
+March 27, 2025
+MFSA 2025-19 Security Vulnerability fixed in Firefox 136.0.4, Firefox ESR 128.8.1, Firefox ESR 115.21.1
+March 4, 2025
+MFSA 2025-18 Security Vulnerabilities fixed in Thunderbird ESR 128.8
+MFSA 2025-17 Security Vulnerabilities fixed in Thunderbird 136
+MFSA 2025-16 Security Vulnerabilities fixed in Firefox ESR 128.8
+MFSA 2025-15 Security Vulnerabilities fixed in Firefox ESR 115.21
+MFSA 2025-14 Security Vulnerabilities fixed in Firefox 136
+February 24, 2025
+MFSA 2025-13 Security Vulnerabilities fixed in Firefox for iOS 136
+February 18, 2025
+MFSA 2025-12 Security Vulnerabilities fixed in Firefox 135.0.1
+February 4, 2025
+MFSA 2025-11 Security Vulnerabilities fixed in Thunderbird 135
+MFSA 2025-10 Security Vulnerabilities fixed in Thunderbird ESR 128.7
+MFSA 2025-09 Security Vulnerabilities fixed in Firefox ESR 128.7
+MFSA 2025-08 Security Vulnerabilities fixed in Firefox ESR 115.20
+MFSA 2025-07 Security Vulnerabilities fixed in Firefox 135
+January 10, 2025
+MFSA 2025-06 Security Vulnerabilities fixed in Firefox for iOS 134
+January 7, 2025
+MFSA 2025-05 Security Vulnerabilities fixed in Thunderbird ESR 128.6
+MFSA 2025-04 Security Vulnerabilities fixed in Thunderbird 134
+MFSA 2025-03 Security Vulnerabilities fixed in Firefox ESR 115.19
+MFSA 2025-02 Security Vulnerabilities fixed in Firefox ESR 128.6
+MFSA 2025-01 Security Vulnerabilities fixed in Firefox 134
+December 11, 2024
+MFSA 2024-70 Security Vulnerabilities fixed in Thunderbird 115.18
+December 10, 2024
+MFSA 2024-69 Security Vulnerabilities fixed in Thunderbird 128.5.2
+November 26, 2024
+MFSA 2024-68 Security Vulnerabilities fixed in Thunderbird 128.5
+MFSA 2024-67 Security Vulnerabilities fixed in Thunderbird 133
+MFSA 2024-66 Security Vulnerabilities fixed in Firefox for iOS 133
+MFSA 2024-65 Security Vulnerabilities fixed in Firefox ESR 115.18
+MFSA 2024-64 Security Vulnerabilities fixed in Firefox ESR 128.5
+MFSA 2024-63 Security Vulnerabilities fixed in Firefox 133
+November 12, 2024
+MFSA 2024-62 Security Vulnerabilities fixed in Thunderbird 132.0.1
+MFSA 2024-61 Security Vulnerabilities fixed in Thunderbird 128.4.3
+October 29, 2024
+MFSA 2024-59 Security Vulnerabilities fixed in Thunderbird 132
+MFSA 2024-58 Security Vulnerabilities fixed in Thunderbird 128.4
+MFSA 2024-57 Security Vulnerabilities fixed in Firefox ESR 115.17
+MFSA 2024-56 Security Vulnerabilities fixed in Firefox ESR 128.4
+MFSA 2024-55 Security Vulnerabilities fixed in Firefox 132
+October 28, 2024
+MFSA 2024-60 Security Vulnerabilities fixed in Focus for iOS 132
+October 15, 2024
+MFSA 2024-54 Security Vulnerabilities fixed in Firefox for iOS 131.2
+October 14, 2024
+MFSA 2024-53 Security Vulnerability fixed in Firefox 131.0.3
+October 10, 2024
+MFSA 2024-52 Security Vulnerability fixed in Thunderbird 131.0.1, Thunderbird 128.3.1, Thunderbird 115.16.0
+October 9, 2024
+MFSA 2024-51 Security Vulnerability fixed in Firefox 131.0.2, Firefox ESR 128.3.1, Firefox ESR 115.16.1
+October 1, 2024
+MFSA 2024-50 Security Vulnerabilities fixed in Thunderbird 131
+MFSA 2024-49 Security Vulnerabilities fixed in Thunderbird 128.3
+MFSA 2024-48 Security Vulnerabilities fixed in Firefox ESR 115.16
+MFSA 2024-47 Security Vulnerabilities fixed in Firefox ESR 128.3
+MFSA 2024-46 Security Vulnerabilities fixed in Firefox 131
+September 17, 2024
+MFSA 2024-45 Security Vulnerabilities fixed in Firefox for Android 130.0.1
+September 3, 2024
+MFSA 2024-44 Security Vulnerabilities fixed in Thunderbird 115.15
+MFSA 2024-43 Security Vulnerabilities fixed in Thunderbird 128.2
+MFSA 2024-42 Security Vulnerabilities fixed in Focus for iOS 130
+MFSA 2024-41 Security Vulnerabilities fixed in Firefox ESR 115.15
+MFSA 2024-40 Security Vulnerabilities fixed in Firefox ESR 128.2
+MFSA 2024-39 Security Vulnerabilities fixed in Firefox 130
+August 6, 2024
+MFSA 2024-38 Security Vulnerabilities fixed in Thunderbird 115.14
+MFSA 2024-37 Security Vulnerabilities fixed in Thunderbird 128.1
+MFSA 2024-35 Security Vulnerabilities fixed in Firefox ESR 128.1
+MFSA 2024-34 Security Vulnerabilities fixed in Firefox ESR 115.14
+MFSA 2024-33 Security Vulnerabilities fixed in Firefox 129
+August 5, 2024
+MFSA 2024-36 Security Vulnerabilities fixed in Firefox for iOS 129
+July 15, 2024
+MFSA 2024-31 Security Vulnerabilities fixed in Thunderbird 115.13
+July 11, 2024
+MFSA 2024-32 Security Vulnerabilities fixed in Thunderbird 128
+July 9, 2024
+MFSA 2024-30 Security Vulnerabilities fixed in Firefox ESR 115.13
+MFSA 2024-29 Security Vulnerabilities fixed in Firefox 128
+June 13, 2024
+MFSA 2024-28 Security Vulnerabilities fixed in Thunderbird 115.12
+MFSA 2024-27 Security Vulnerabilities fixed in Firefox for iOS 127
+June 11, 2024
+MFSA 2024-26 Security Vulnerabilities fixed in Firefox ESR 115.12
+MFSA 2024-25 Security Vulnerabilities fixed in Firefox 127
+May 16, 2024
+MFSA 2024-24 Security Vulnerabilities fixed in Focus for iOS 126
+May 15, 2024
+MFSA 2024-23 Security Vulnerabilities fixed in Thunderbird 115.11
+May 14, 2024
+MFSA 2024-22 Security Vulnerabilities fixed in Firefox ESR 115.11
+MFSA 2024-21 Security Vulnerabilities fixed in Firefox 126
+April 16, 2024
+MFSA 2024-20 Security Vulnerabilities fixed in Thunderbird 115.10
+MFSA 2024-19 Security Vulnerabilities fixed in Firefox ESR 115.10
+MFSA 2024-18 Security Vulnerabilities fixed in Firefox 125
+April 2, 2024
+MFSA 2024-17 Security Vulnerabilities fixed in Firefox for iOS 124
+March 22, 2024
+MFSA 2024-16 Security Vulnerabilities fixed in Firefox ESR 115.9.1
+MFSA 2024-15 Security Vulnerabilities fixed in Firefox 124.0.1
+March 19, 2024
+MFSA 2024-14 Security Vulnerabilities fixed in Thunderbird 115.9
+MFSA 2024-13 Security Vulnerabilities fixed in Firefox ESR 115.9
+MFSA 2024-12 Security Vulnerabilities fixed in Firefox 124
+March 4, 2024
+MFSA 2024-11 Security Vulnerabilities fixed in Thunderbird 115.8.1
+February 20, 2024
+MFSA 2024-07 Security Vulnerabilities fixed in Thunderbird 115.8
+MFSA 2024-06 Security Vulnerabilities fixed in Firefox ESR 115.8
+MFSA 2024-05 Security Vulnerabilities fixed in Firefox 123
+February 19, 2024
+MFSA 2024-10 Security Vulnerabilities fixed in Focus for iOS 123
+MFSA 2024-09 Security Vulnerabilities fixed in Focus for iOS 122
+MFSA 2024-08 Security Vulnerabilities fixed in Firefox for iOS 123
+January 23, 2024
+MFSA 2024-04 Security Vulnerabilities fixed in Thunderbird 115.7
+MFSA 2024-02 Security Vulnerabilities fixed in Firefox ESR 115.7
+MFSA 2024-01 Security Vulnerabilities fixed in Firefox 122
+January 22, 2024
+MFSA 2024-03 Security Vulnerabilities fixed in Focus for iOS 122
+December 19, 2023
+MFSA 2023-56 Security Vulnerabilities fixed in Firefox 121
+MFSA 2023-55 Security Vulnerabilities fixed in Thunderbird 115.6
+MFSA 2023-54 Security Vulnerabilities fixed in Firefox ESR 115.6
+December 12, 2023
+MFSA 2023-53 Timing side-channel in PKCS#1 v1.5 decryption depadding code
+November 21, 2023
+MFSA 2023-52 Security Vulnerabilities fixed in Thunderbird 115.5
+MFSA 2023-51 Security Vulnerabilities fixed in Firefox for iOS 120
+MFSA 2023-50 Security Vulnerabilities fixed in Firefox ESR 115.5.0
+MFSA 2023-49 Security Vulnerabilities fixed in Firefox 120
+October 24, 2023
+MFSA 2023-48 Security Vulnerabilities fixed in Firefox for iOS 119
+MFSA 2023-47 Security Vulnerabilities fixed in Thunderbird 115.4.1
+MFSA 2023-46 Security Vulnerabilities fixed in Firefox ESR 115.4
+MFSA 2023-45 Security Vulnerabilities fixed in Firefox 119
+September 28, 2023
+MFSA 2023-44 Security Vulnerability fixed in Firefox 118.0.1, Firefox ESR 115.3.1, Firefox for Android 118.1.0, Firefox Focus for Android 118.1.0, and Thunderbird 115.3.1.
+September 26, 2023
+MFSA 2023-43 Security Vulnerabilities fixed in Thunderbird 115.3
+MFSA 2023-42 Security Vulnerabilities fixed in Firefox ESR 115.3
+MFSA 2023-41 Security Vulnerabilities fixed in Firefox 118
+September 12, 2023
+MFSA 2023-40 Security Vulnerability fixed in Firefox 117.0.1, Firefox ESR 115.2.1, Firefox ESR 102.15.1, Thunderbird 102.15.1, and Thunderbird 115.2.2
+August 30, 2023
+MFSA 2023-39 Security Issues fixed in Mozilla VPN for Linux v2.16.1
+August 29, 2023
+MFSA 2023-38 Security Vulnerabilities fixed in Thunderbird 115.2
+MFSA 2023-37 Security Vulnerabilities fixed in Thunderbird 102.15
+MFSA 2023-36 Security Vulnerabilities fixed in Firefox ESR 115.2
+MFSA 2023-35 Security Vulnerabilities fixed in Firefox ESR 102.15
+MFSA 2023-34 Security Vulnerabilities fixed in Firefox 117
+August 2, 2023
+MFSA 2023-33 Security Vulnerabilities fixed in Thunderbird 115.1
+MFSA 2023-32 Security Vulnerabilities fixed in Thunderbird 102.14
+August 1, 2023
+MFSA 2023-31 Security Vulnerabilities fixed in Firefox ESR 115.1
+MFSA 2023-30 Security Vulnerabilities fixed in Firefox ESR 102.14
+MFSA 2023-29 Security Vulnerabilities fixed in Firefox 116
+July 20, 2023
+MFSA 2023-27 Security Vulnerabilities fixed in Thunderbird 115.0.1
+July 11, 2023
+MFSA 2023-26 Security Vulnerabilities fixed in Firefox 115.0.2 and Firefox ESR 115.0.2
+July 4, 2023
+MFSA 2023-28 Security Vulnerabilities fixed in Thunderbird 102.13.1
+MFSA 2023-25 Security Vulnerabilities fixed in Firefox for iOS 115
+MFSA 2023-24 Security Vulnerabilities fixed in Thunderbird 102.13
+MFSA 2023-23 Security Vulnerabilities fixed in Firefox ESR 102.13
+MFSA 2023-22 Security Vulnerabilities fixed in Firefox 115
+June 7, 2023
+MFSA 2023-21 Security Vulnerabilities fixed in Thunderbird 102.12
+June 6, 2023
+MFSA 2023-20 Security Vulnerabilities fixed in Firefox 114
+MFSA 2023-19 Security Vulnerabilities fixed in Firefox ESR 102.12
+May 10, 2023
+MFSA 2023-18 Security Vulnerabilities fixed in Thunderbird 102.11
+May 9, 2023
+MFSA 2023-17 Security Vulnerabilities fixed in Firefox ESR 102.11
+MFSA 2023-16 Security Vulnerabilities fixed in Firefox 113
+April 11, 2023
+MFSA 2023-15 Security Vulnerabilities fixed in Thunderbird 102.10
+MFSA 2023-14 Security Vulnerabilities fixed in Firefox ESR 102.10
+MFSA 2023-13 Security Vulnerabilities fixed in Firefox 112, Firefox for Android 112, Focus for Android 112
+March 28, 2023
+MFSA 2023-12 Security Vulnerabilities fixed in Thunderbird 102.9.1
+March 14, 2023
+MFSA 2023-11 Security Vulnerabilities fixed in Thunderbird 102.9
+MFSA 2023-10 Security Vulnerabilities fixed in Firefox ESR 102.9
+MFSA 2023-09 Security Vulnerabilities fixed in Firefox 111
+February 28, 2023
+MFSA 2023-08 Security Vulnerabilities fixed in Firefox for Android 110.1.0
+February 15, 2023
+MFSA 2023-07 Security Vulnerabilities fixed in Thunderbird 102.8
+February 14, 2023
+MFSA 2023-06 Security Vulnerabilities fixed in Firefox ESR 102.8
+MFSA 2023-05 Security Vulnerabilities fixed in Firefox 110
+January 23, 2023
+MFSA 2023-04 Security Vulnerabilities fixed in Thunderbird 102.7.1
+January 18, 2023
+MFSA 2023-03 Security Vulnerabilities fixed in Thunderbird 102.7
+January 17, 2023
+MFSA 2023-02 Security Vulnerabilities fixed in Firefox ESR 102.7
+MFSA 2023-01 Security Vulnerabilities fixed in Firefox 109
+December 20, 2022
+MFSA 2022-54 Security Vulnerabilities fixed in Thunderbird 102.6.1
+December 13, 2022
+MFSA 2022-53 Security Vulnerabilities fixed in Thunderbird 102.6
+MFSA 2022-52 Security Vulnerabilities fixed in Firefox ESR 102.6
+MFSA 2022-51 Security Vulnerabilities fixed in Firefox 108
+November 30, 2022
+MFSA 2022-50 Security Vulnerabilities fixed in Thunderbird 102.5.1
+November 15, 2022
+MFSA 2022-49 Security Vulnerabilities fixed in Thunderbird 102.5
+MFSA 2022-48 Security Vulnerabilities fixed in Firefox ESR 102.5
+MFSA 2022-47 Security Vulnerabilities fixed in Firefox 107
+October 18, 2022
+MFSA 2022-46 Security Vulnerabilities fixed in Thunderbird 102.4
+MFSA 2022-45 Security Vulnerabilities fixed in Firefox ESR 102.4
+MFSA 2022-44 Security Vulnerabilities fixed in Firefox 106
+September 28, 2022
+MFSA 2022-43 Security Vulnerabilities fixed in Thunderbird 102.3.1
+September 20, 2022
+MFSA 2022-42 Security Vulnerabilities fixed in Thunderbird 102.3
+MFSA 2022-41 Security Vulnerabilities fixed in Firefox ESR 102.3
+MFSA 2022-40 Security Vulnerabilities fixed in Firefox 105
+September 19, 2022
+MFSA 2022-39 Security Vulnerabilities fixed in Thunderbird 91.13.1
+August 31, 2022
+MFSA 2022-38 Security Vulnerabilities fixed in Thunderbird 102.2.1
+August 23, 2022
+MFSA 2022-37 Security Vulnerabilities fixed in Thunderbird 91.13
+MFSA 2022-36 Security Vulnerabilities fixed in Thunderbird 102.2
+MFSA 2022-35 Security Vulnerabilities fixed in Firefox ESR 91.13
+MFSA 2022-34 Security Vulnerabilities fixed in Firefox ESR 102.2
+MFSA 2022-33 Security Vulnerabilities fixed in Firefox 104
+July 28, 2022
+MFSA 2022-32 Security Vulnerabilities fixed in Thunderbird 102.1
+MFSA 2022-31 Security Vulnerabilities fixed in Thunderbird 91.12
+July 26, 2022
+MFSA 2022-30 Security Vulnerabilities fixed in Firefox ESR 102.1
+MFSA 2022-29 Security Vulnerabilities fixed in Firefox ESR 91.12
+MFSA 2022-28 Security Vulnerabilities fixed in Firefox 103
+June 29, 2022
+MFSA 2022-27 Security Vulnerabilities fixed in Firefox for iOS 102
+June 28, 2022
+MFSA 2022-26 Security Vulnerabilities fixed in Thunderbird 91.11 and Thunderbird 102
+MFSA 2022-25 Security Vulnerabilities fixed in Firefox ESR 91.11
+MFSA 2022-24 Security Vulnerabilities fixed in Firefox 102
+June 1, 2022
+MFSA 2022-23 Security Vulnerabilities fixed in Firefox for iOS 101
+May 31, 2022
+MFSA 2022-22 Security Vulnerabilities fixed in Thunderbird 91.10
+MFSA 2022-21 Security Vulnerabilities fixed in Firefox ESR 91.10
+MFSA 2022-20 Security Vulnerabilities fixed in Firefox 101
+May 20, 2022
+MFSA 2022-19 Security Vulnerabilities fixed in Firefox 100.0.2, Firefox for Android 100.3.0, Firefox ESR 91.9.1, Thunderbird 91.9.1
+May 3, 2022
+MFSA 2022-18 Security Vulnerabilities fixed in Thunderbird 91.9
+MFSA 2022-17 Security Vulnerabilities fixed in Firefox ESR 91.9
+MFSA 2022-16 Security Vulnerabilities fixed in Firefox 100
+April 5, 2022
+MFSA 2022-15 Security Vulnerabilities fixed in Thunderbird 91.8
+MFSA 2022-14 Security Vulnerabilities fixed in Firefox ESR 91.8
+MFSA 2022-13 Security Vulnerabilities fixed in Firefox 99
+March 8, 2022
+MFSA 2022-12 Security Vulnerabilities fixed in Thunderbird 91.7
+MFSA 2022-11 Security Vulnerabilities fixed in Firefox ESR 91.7
+MFSA 2022-10 Security Vulnerabilities fixed in Firefox 98
+March 5, 2022
+MFSA 2022-09 Security Vulnerabilities fixed in Firefox 97.0.2, Firefox ESR 91.6.1, Firefox for Android 97.3.0, and Focus 97.3.0
+February 23, 2022
+MFSA 2022-08 Mozilla VPN local privilege escalation vis uncontrolled OpenSSL search path
+February 15, 2022
+MFSA 2022-07 Security Vulnerabilities fixed in Thunderbird 91.6.1
+February 8, 2022
+MFSA 2022-06 Security Vulnerabilities fixed in Thunderbird 91.6
+MFSA 2022-05 Security Vulnerabilities fixed in Firefox ESR 91.6
+MFSA 2022-04 Security Vulnerabilities fixed in Firefox 97
+January 11, 2022
+MFSA 2022-03 Security Vulnerabilities fixed in Thunderbird 91.5
+MFSA 2022-02 Security Vulnerabilities fixed in Firefox ESR 91.5
+MFSA 2022-01 Security Vulnerabilities fixed in Firefox 96
+December 21, 2021
+MFSA 2021-55 Security Vulnerabilities fixed in Thunderbird 91.4.1
+December 7, 2021
+MFSA 2021-54 Security Vulnerabilities fixed in Thunderbird 91.4.0
+MFSA 2021-53 Security Vulnerabilities fixed in Firefox ESR 91.4.0
+MFSA 2021-52 Security Vulnerabilities fixed in Firefox 95
+December 1, 2021
+MFSA 2021-51 Memory corruption in NSS via DER-encoded DSA and RSA-PSS signatures
+November 3, 2021
+MFSA 2021-50 Security Vulnerabilities fixed in Thunderbird 91.3
+November 2, 2021
+MFSA 2021-49 Security Vulnerabilities fixed in Firefox ESR 91.3
+MFSA 2021-48 Security Vulnerabilities fixed in Firefox 94
+October 6, 2021
+MFSA 2021-47 Security Vulnerabilities fixed in Thunderbird 91.2
+October 5, 2021
+MFSA 2021-45 Security Vulnerabilities fixed in Firefox ESR 91.2
+MFSA 2021-44 Security Vulnerabilities fixed in Firefox ESR 78.15
+MFSA 2021-43 Security Vulnerabilities fixed in Firefox 93
+September 7, 2021
+MFSA 2021-42 Security Vulnerabilities fixed in Thunderbird 78.14
+MFSA 2021-41 Security Vulnerabilities fixed in Thunderbird 91.1
+MFSA 2021-40 Security Vulnerabilities fixed in Firefox ESR 91.1
+MFSA 2021-39 Security Vulnerabilities fixed in Firefox ESR 78.14
+MFSA 2021-38 Security Vulnerabilities fixed in Firefox 92
+August 16, 2021
+MFSA 2021-37 Security Vulnerabilities fixed in Firefox 91.0.1 and Thunderbird 91.0.1
+August 11, 2021
+MFSA 2021-36 Security Vulnerabilities fixed in Thunderbird 91
+August 10, 2021
+MFSA 2021-35 Security Vulnerabilities fixed in Thunderbird 78.13
+MFSA 2021-34 Security Vulnerabilities fixed in Firefox ESR 78.13
+MFSA 2021-33 Security Vulnerabilities fixed in Firefox 91
+July 14, 2021
+MFSA 2021-32 Insecure Sharing of HTML/JS Files in Hubs Cloud Reticulum
+MFSA 2021-31 Multiple Low Security Issues in Mozilla VPN
+July 13, 2021
+MFSA 2021-30 Security Vulnerabilities fixed in Thunderbird 78.12
+MFSA 2021-29 Security Vulnerabilities fixed in Firefox ESR 78.12
+MFSA 2021-28 Security Vulnerabilities fixed in Firefox 90
+June 16, 2021
+MFSA 2021-27 Security Vulnerabilities fixed in Firefox 89.0.1
+June 3, 2021
+MFSA 2021-26 Security Vulnerabilities fixed in Thunderbird 78.11
+June 1, 2021
+MFSA 2021-25 Security Vulnerabilities fixed in Firefox for iOS 34
+MFSA 2021-24 Security Vulnerabilities fixed in Firefox ESR 78.11
+MFSA 2021-23 Security Vulnerabilities fixed in Firefox 89
+May 17, 2021
+MFSA 2021-22 Security Vulnerabilities fixed in Thunderbird 78.10.2
+May 6, 2021
+MFSA 2021-21 Insecure Proxy Configuration in Hubs Cloud Reticulum
+May 5, 2021
+MFSA 2021-20 Security Vulnerabilities fixed in Firefox 88.0.1, Firefox for Android 88.1.3
+May 4, 2021
+MFSA 2021-19 Security Vulnerabilities fixed in Thunderbird 78.10.1
+MFSA 2021-18 Security Vulnerabilities fixed in Firefox ESR 78.10.1
+April 19, 2021
+MFSA 2021-16 Security Vulnerabilities fixed in Firefox 88
+MFSA 2021-15 Security Vulnerabilities fixed in Firefox ESR 78.10
+MFSA 2021-14 Security Vulnerabilities fixed in Thunderbird 78.10
+April 8, 2021
+MFSA 2021-13 Security Vulnerabilities fixed in Thunderbird 78.9.1
+March 23, 2021
+MFSA 2021-12 Security Vulnerabilities fixed in Thunderbird 78.9
+MFSA 2021-11 Security Vulnerabilities fixed in Firefox ESR 78.9
+MFSA 2021-10 Security Vulnerabilities fixed in Firefox 87
+March 8, 2021
+MFSA 2021-17 Security Vulnerabilities fixed in Thunderbird 78.8.1
+February 23, 2021
+MFSA 2021-09 Security Vulnerabilities fixed in Thunderbird 78.8
+MFSA 2021-08 Security Vulnerabilities fixed in Firefox ESR 78.8
+MFSA 2021-07 Security Vulnerabilities fixed in Firefox 86
+February 5, 2021
+MFSA 2021-06 Security Vulnerabilities fixed in Firefox 85.0.1 and Firefox ESR 78.7.1
+January 26, 2021
+MFSA 2021-05 Security Vulnerabilities fixed in Thunderbird 78.7
+MFSA 2021-04 Security Vulnerabilities fixed in Firefox ESR 78.7
+MFSA 2021-03 Security Vulnerabilities fixed in Firefox 85
+January 11, 2021
+MFSA 2021-02 Security Vulnerabilities fixed in Thunderbird 78.6.1
+January 6, 2021
+MFSA 2021-01 Security Vulnerabilities fixed in Firefox 84.0.2, Firefox for Android 84.1.3, and Firefox ESR 78.6.1
+December 15, 2020
+MFSA 2020-56 Security Vulnerabilities fixed in Thunderbird 78.6
+MFSA 2020-55 Security Vulnerabilities fixed in Firefox ESR 78.6
+MFSA 2020-54 Security Vulnerabilities fixed in Firefox 84
+December 1, 2020
+MFSA 2020-53 Security Vulnerabilities fixed in Thunderbird 78.5.1
+November 17, 2020
+MFSA 2020-52 Security Vulnerabilities fixed in Thunderbird 78.5
+MFSA 2020-51 Security Vulnerabilities fixed in Firefox ESR 78.5
+MFSA 2020-50 Security Vulnerabilities fixed in Firefox 83
+November 9, 2020
+MFSA 2020-49 Security Vulnerabilities fixed in Firefox 82.0.3, Firefox ESR 78.4.1, and Thunderbird 78.4.2
+November 4, 2020
+MFSA 2020-48 OAuth session fixation vulnerability in Mozilla VPN
+October 21, 2020
+MFSA 2020-47 Security Vulnerabilities fixed in Thunderbird 78.4
+October 20, 2020
+MFSA 2020-46 Security Vulnerabilities fixed in Firefox ESR 78.4
+MFSA 2020-45 Security Vulnerabilities fixed in Firefox 82
+September 22, 2020
+MFSA 2020-44 Security Vulnerabilities fixed in Thunderbird 78.3
+MFSA 2020-43 Security Vulnerabilities fixed in Firefox ESR 78.3
+MFSA 2020-42 Security Vulnerabilities fixed in Firefox 81
+September 2, 2020
+MFSA 2020-39 Security Vulnerabilities fixed in Firefox for Android 80
+August 25, 2020
+MFSA 2020-41 Security Vulnerabilities fixed in Thunderbird 78.2
+MFSA 2020-40 Security Vulnerabilities fixed in Thunderbird 68.12
+MFSA 2020-38 Security Vulnerabilities fixed in Firefox ESR 78.2
+MFSA 2020-37 Security Vulnerabilities fixed in Firefox ESR 68.12
+MFSA 2020-36 Security Vulnerabilities fixed in Firefox 80
+July 30, 2020
+MFSA 2020-35 Security Vulnerabilities fixed in Thunderbird 68.11
+July 28, 2020
+MFSA 2020-34 Security Vulnerabilities fixed in Firefox for iOS 28
+MFSA 2020-33 Security Vulnerabilities fixed in Thunderbird 78.1
+MFSA 2020-32 Security Vulnerabilities fixed in Firefox ESR 78.1
+MFSA 2020-31 Security Vulnerabilities fixed in Firefox ESR 68.11
+MFSA 2020-30 Security Vulnerabilities fixed in Firefox 79
+July 16, 2020
+MFSA 2020-29 Security Vulnerabilities fixed in Thunderbird 78
+July 8, 2020
+MFSA 2020-28 Security Vulnerabilities fixed in Firefox 78.0.2
+July 6, 2020
+MFSA 2020-27 Security Vulnerabilities fixed in Firefox for Android 68.10.1
+June 30, 2020
+MFSA 2020-26 Security Vulnerabilities fixed in Thunderbird 68.10.0
+MFSA 2020-25 Security Vulnerabilities fixed in Firefox ESR 68.10
+MFSA 2020-24 Security Vulnerabilities fixed in Firefox 78
+June 25, 2020
+MFSA 2020-23 Security Vulnerabilities fixed in Firefox for iOS 27
+June 2, 2020
+MFSA 2020-22 Security Vulnerabilities fixed in Thunderbird 68.9.0
+MFSA 2020-21 Security Vulnerabilities fixed in Firefox ESR 68.9
+MFSA 2020-20 Security Vulnerabilities fixed in Firefox 77
+May 30, 2020
+MFSA 2020-19 Security Vulnerabilities fixed in Firefox for iOS 26
+May 5, 2020
+MFSA 2020-18 Security Vulnerabilities fixed in Thunderbird 68.8.0
+MFSA 2020-17 Security Vulnerabilities fixed in Firefox ESR 68.8
+MFSA 2020-16 Security Vulnerabilities fixed in Firefox 76
+May 1, 2020
+MFSA 2020-15 Security Vulnerabilities fixed in Firefox for iOS 25
+April 9, 2020
+MFSA 2020-14 Security Vulnerabilities fixed in Thunderbird 68.7.0
+April 7, 2020
+MFSA 2020-13 Security Vulnerabilities fixed in Firefox ESR 68.7
+MFSA 2020-12 Security Vulnerabilities fixed in Firefox 75
+April 3, 2020
+MFSA 2020-11 Security Vulnerabilities fixed in Firefox 74.0.1 and Firefox ESR 68.6.1
+March 10, 2020
+MFSA 2020-10 Security Vulnerabilities fixed in Thunderbird 68.6
+MFSA 2020-09 Security Vulnerabilities fixed in Firefox ESR 68.6
+MFSA 2020-08 Security Vulnerabilities fixed in Firefox 74
+February 11, 2020
+MFSA 2020-07 Security Vulnerabilities fixed in Thunderbird 68.5
+MFSA 2020-06 Security Vulnerabilities fixed in Firefox ESR 68.5
+MFSA 2020-05 Security Vulnerabilities fixed in Firefox 73
+January 10, 2020
+MFSA 2020-04 Security Vulnerabilities fixed in Thunderbird 68.4.1
+January 8, 2020
+MFSA 2020-03 Security Vulnerabilities fixed in Firefox 72.0.1 and Firefox ESR 68.4.1
+January 7, 2020
+MFSA 2020-02 Security Vulnerabilities fixed in Firefox ESR 68.4
+MFSA 2020-01 Security Vulnerabilities fixed in Firefox 72
+December 3, 2019
+MFSA 2019-38 Security Vulnerabilities fixed in - Thunderbird 68.3
+MFSA 2019-37 Security Vulnerabilities fixed in - Firefox ESR 68.3
+MFSA 2019-36 Security Vulnerabilities fixed in - Firefox 71
+October 22, 2019
+MFSA 2019-35 Security vulnerabilities fixed in - Thunderbird 68.2
+MFSA 2019-34 Security vulnerabilities fixed in - Firefox 70
+MFSA 2019-33 Security vulnerabilities fixed in - Firefox ESR 68.2
+September 25, 2019
+MFSA 2019-32 Security vulnerabilities fixed in - Thunderbird 68.1.1
+September 18, 2019
+MFSA 2019-31 Security vulnerabilities fixed in Firefox 69.0.1
+September 11, 2019
+MFSA 2019-30 Security vulnerabilities fixed in - Thunderbird 68.1
+September 6, 2019
+MFSA 2019-29 Security vulnerabilities fixed in - Thunderbird 60.9
+September 3, 2019
+MFSA 2019-27 Security vulnerabilities fixed in Firefox ESR 60.9
+MFSA 2019-26 Security vulnerabilities fixed in Firefox ESR 68.1
+MFSA 2019-25 Security vulnerabilities fixed in Firefox 69
+August 27, 2019
+MFSA 2019-28 Security vulnerabilities fixed in Thunderbird 68
+August 14, 2019
+MFSA 2019-24 Stored passwords in 'Saved Logins' can be copied without master password entry
+July 9, 2019
+MFSA 2019-23 Security vulnerabilities fixed in Thunderbird 60.8
+MFSA 2019-22 Security vulnerabilities fixed in Firefox ESR 60.8
+MFSA 2019-21 Security vulnerabilities fixed in Firefox 68
+June 20, 2019
+MFSA 2019-20 Security vulnerabilities fixed in Thunderbird 60.7.2
+MFSA 2019-19 Security vulnerabilities fixed in Firefox 67.0.4 and Firefox ESR 60.7.2
+June 18, 2019
+MFSA 2019-18 Security vulnerabilities fixed in Firefox 67.0.3 and Firefox ESR 60.7.1
+June 13, 2019
+MFSA 2019-17 Security vulnerabilities fixed in Thunderbird 60.7.1
+June 11, 2019
+MFSA 2019-16 Security vulnerabilities fixed in Firefox 67.0.2
+May 21, 2019
+MFSA 2019-15 Security vulnerabilities fixed in Thunderbird 60.7
+MFSA 2019-14 Security vulnerabilities fixed in Firefox ESR 60.7
+MFSA 2019-13 Security vulnerabilities fixed in Firefox 67
+March 25, 2019
+MFSA 2019-12 Security vulnerabilities fixed in Thunderbird 60.6.1
+March 22, 2019
+MFSA 2019-10 Security vulnerabilities fixed in Firefox 60.6.1
+MFSA 2019-09 Security vulnerabilities fixed in Firefox 66.0.1
+March 19, 2019
+MFSA 2019-11 Security vulnerabilities fixed in Thunderbird 60.6
+MFSA 2019-08 Security vulnerabilities fixed in Firefox ESR 60.6
+MFSA 2019-07 Security vulnerabilities fixed in Firefox 66
+February 14, 2019
+MFSA 2019-06 Security vulnerabilities fixed in Thunderbird 60.5.1
+February 12, 2019
+MFSA 2019-05 Security vulnerabilities fixed in Firefox ESR 60.5.1
+MFSA 2019-04 Security vulnerabilities fixed in Firefox 65.0.1
+January 29, 2019
+MFSA 2019-03 Security vulnerabilities fixed in Thunderbird 60.5
+MFSA 2019-02 Security vulnerabilities fixed in Firefox ESR 60.5
+MFSA 2019-01 Security vulnerabilities fixed in Firefox 65
+December 21, 2018
+MFSA 2018-31 Security vulnerabilities fixed in Thunderbird 60.4
+December 11, 2018
+MFSA 2018-30 Security vulnerabilities fixed in Firefox ESR 60.4
+MFSA 2018-29 Security vulnerabilities fixed in Firefox 64
+October 31, 2018
+MFSA 2018-28 Security vulnerabilities fixed in Thunderbird ESR 60.3
+October 23, 2018
+MFSA 2018-27 Security vulnerabilities fixed in Firefox ESR 60.3
+MFSA 2018-26 Security vulnerabilities fixed in Firefox 63
+October 4, 2018
+MFSA 2018-25 Security vulnerabilities fixed in Thunderbird 60.2.1
+October 2, 2018
+MFSA 2018-24 Security vulnerabilities fixed in Firefox 62.0.3 and Firefox ESR 60.2.2
+September 21, 2018
+MFSA 2018-23 Security vulnerabilities fixed in Firefox ESR 60.2.1
+MFSA 2018-22 Security vulnerabilities fixed in Firefox 62.0.2
+September 5, 2018
+MFSA 2018-21 Security vulnerabilities fixed in Firefox ESR 60.2
+MFSA 2018-20 Security vulnerabilities fixed in Firefox 62
+August 17, 2018
+MFSA 2018-19 Security vulnerabilities fixed in Thunderbird 60
+July 3, 2018
+MFSA 2018-18 Security vulnerabilities fixed in Thunderbird 52.9
+June 26, 2018
+MFSA 2018-17 Security vulnerabilities fixed in Firefox ESR 52.9
+MFSA 2018-16 Security vulnerabilities fixed in Firefox ESR 60.1
+MFSA 2018-15 Security vulnerabilities fixed in Firefox 61
+June 6, 2018
+MFSA 2018-14 Security vulnerabilities fixed in Firefox 60.0.2, ESR 60.0.2, and ESR 52.8.1
+May 18, 2018
+MFSA 2018-13 Security vulnerabilities fixed in Thunderbird 52.8
+May 9, 2018
+MFSA 2018-12 Security vulnerabilities fixed in Firefox ESR 52.8
+MFSA 2018-11 Security vulnerabilities fixed in Firefox 60
+March 26, 2018
+MFSA 2018-10 Use-after-free in compositor
+March 23, 2018
+MFSA 2018-09 Security vulnerabilities fixed in Thunderbird 52.7
+March 16, 2018
+MFSA 2018-08 Out of bounds memory write while processing Vorbis audio data
+March 13, 2018
+MFSA 2018-07 Security vulnerabilities fixed in Firefox ESR 52.7
+MFSA 2018-06 Security vulnerabilities fixed in Firefox 59
+January 29, 2018
+MFSA 2018-05 Arbitrary code execution through unsanitized browser UI
+January 25, 2018
+MFSA 2018-04 Security vulnerabilities fixed in Thunderbird 52.6
+January 23, 2018
+MFSA 2018-03 Security vulnerabilities fixed in Firefox ESR 52.6
+MFSA 2018-02 Security vulnerabilities fixed in Firefox 58
+January 4, 2018
+MFSA 2018-01 Speculative execution side-channel attack ("Spectre")
+December 22, 2017
+MFSA 2017-30 Security vulnerabilities fixed in Thunderbird 52.5.2
+December 7, 2017
+MFSA 2017-29 Security vulnerabilities fixed in Firefox 57.0.2
+MFSA 2017-28 Security vulnerabilities fixed in Firefox ESR 52.5.2
+November 29, 2017
+MFSA 2017-27 Security vulnerabilities fixed in Firefox 57.0.1
+November 23, 2017
+MFSA 2017-26 Security vulnerabilities fixed in Thunderbird 52.5
+November 14, 2017
+MFSA 2017-25 Security vulnerabilities fixed in Firefox ESR 52.5
+MFSA 2017-24 Security vulnerabilities fixed in Firefox 57
+October 9, 2017
+MFSA 2017-23 Security vulnerabilities fixed in Thunderbird 52.4
+September 28, 2017
+MFSA 2017-22 Security vulnerabilities fixed in Firefox ESR 52.4
+MFSA 2017-21 Security vulnerabilities fixed in Firefox 56
+August 18, 2017
+MFSA 2017-20 Security vulnerabilities fixed in Thunderbird 52.3
+August 8, 2017
+MFSA 2017-19 Security vulnerabilities fixed in Firefox ESR 52.3
+MFSA 2017-18 Security vulnerabilities fixed in Firefox 55
+June 14, 2017
+MFSA 2017-17 Security vulnerabilities fixed in Thunderbird 52.2
+June 13, 2017
+MFSA 2017-16 Security vulnerabilities fixed in Firefox ESR 52.2
+MFSA 2017-15 Security vulnerabilities fixed in Firefox 54
+May 5, 2017
+MFSA 2017-14 Use after free in ANGLE
+April 30, 2017
+MFSA 2017-13 Security vulnerabilities fixed in Thunderbird 52.1
+April 19, 2017
+MFSA 2017-12 Security vulnerabilities fixed in Firefox ESR 52.1
+MFSA 2017-11 Security vulnerabilities fixed in Firefox ESR 45.9
+MFSA 2017-10 Security vulnerabilities fixed in Firefox 53
+April 5, 2017
+MFSA 2017-09 Security vulnerabilities fixed in - Thunderbird 52
+March 17, 2017
+MFSA 2017-08 integer overflow in createImageBitmap()
+March 7, 2017
+MFSA 2017-07 Security vulnerabilities fixed in Thunderbird 45.8
+MFSA 2017-06 Security vulnerabilities fixed in Firefox ESR 45.8
+MFSA 2017-05 Security vulnerabilities fixed in Firefox 52
+February 9, 2017
+MFSA 2017-04 Security vulnerabilities fixed in Firefox 51.0.3
+January 26, 2017
+MFSA 2017-03 Security vulnerabilities fixed in Thunderbird 45.7
+January 24, 2017
+MFSA 2017-02 Security vulnerabilities fixed in Firefox ESR 45.7
+MFSA 2017-01 Security vulnerabilities fixed in Firefox 51
+December 28, 2016
+MFSA 2016-96 Security vulnerabilities fixed in Thunderbird 45.6
+December 13, 2016
+MFSA 2016-95 Security vulnerabilities fixed in Firefox ESR 45.6
+MFSA 2016-94 Security vulnerabilities fixed in Firefox 50.1
+November 30, 2016
+MFSA 2016-92 Firefox SVG Animation Remote Code Execution
+November 28, 2016
+MFSA 2016-91 Security vulnerabilities fixed in Firefox 50.0.1
+November 18, 2016
+MFSA 2016-93 Security vulnerabilities fixed in Thunderbird 45.5
+November 15, 2016
+MFSA 2016-90 Security vulnerabilities fixed in Firefox ESR 45.5
+MFSA 2016-89 Security vulnerabilities fixed in Firefox 50
+October 20, 2016
+MFSA 2016-87 Security vulnerabilities fixed in Firefox 49.0.2
+October 3, 2016
+MFSA 2016-88 Security vulnerabilities fixed in Thunderbird 45.4
+September 20, 2016
+MFSA 2016-86 Security vulnerabilities fixed in Firefox ESR 45.4
+MFSA 2016-85 Security vulnerabilities fixed in Firefox 49
+August 2, 2016
+MFSA 2016-84 Information disclosure through Resource Timing API during page navigation
+MFSA 2016-83 Spoofing attack through text injection into internal error pages
+MFSA 2016-82 Addressbar spoofing with right-to-left characters on Firefox for Android
+MFSA 2016-81 Information disclosure and local file manipulation through drag and drop
+MFSA 2016-80 Same-origin policy violation using local HTML file and saved shortcut file
+MFSA 2016-79 Use-after-free when applying SVG effects
+MFSA 2016-78 Type confusion in display transformation
+MFSA 2016-77 Buffer overflow in ClearKey Content Decryption Module (CDM) during video playback
+MFSA 2016-76 Scripts on marquee tag can execute in sandboxed iframes
+MFSA 2016-75 Integer overflow in WebSockets during data buffering
+MFSA 2016-74 Form input type change from password to text can store plain text password in session restore file
+MFSA 2016-73 Use-after-free in service workers with nested sync events
+MFSA 2016-72 Use-after-free in DTLS during WebRTC session shutdown
+MFSA 2016-71 Crash in incremental garbage collection in JavaScript
+MFSA 2016-70 Use-after-free when using alt key and toplevel menus
+MFSA 2016-69 Arbitrary file manipulation by local user through Mozilla updater and callback application path parameter
+MFSA 2016-68 Out-of-bounds read during XML parsing in Expat library
+MFSA 2016-67 Stack underflow during 2D graphics rendering
+MFSA 2016-66 Location bar spoofing via data URLs with malformed/invalid mediatypes
+MFSA 2016-65 Cairo rendering crash due to memory allocation issue with FFmpeg 0.10
+MFSA 2016-64 Buffer overflow rendering SVG with bidirectional content
+MFSA 2016-63 Favicon network connection can persist when page is closed
+MFSA 2016-62 Miscellaneous memory safety hazards (rv:48.0 / rv:45.3)
+June 7, 2016
+MFSA 2016-61 Network Security Services (NSS) vulnerabilities
+MFSA 2016-60 Java applets bypass CSP protections
+MFSA 2016-59 Information disclosure of disabled plugins through CSS pseudo-classes
+MFSA 2016-58 Entering fullscreen and persistent pointerlock without user permission
+MFSA 2016-57 Incorrect icon displayed on permissions notifications
+MFSA 2016-56 Use-after-free when textures are used in WebGL operations after recycle pool destruction
+MFSA 2016-55 File overwrite and privilege escalation through Mozilla Windows updater
+MFSA 2016-54 Partial same-origin-policy through setting location.host through data URI
+MFSA 2016-53 Out-of-bounds write with WebGL shader
+MFSA 2016-52 Addressbar spoofing though the SELECT element
+MFSA 2016-51 Use-after-free deleting tables from a contenteditable document
+MFSA 2016-50 Buffer overflow parsing HTML5 fragments
+MFSA 2016-49 Miscellaneous memory safety hazards (rv:47.0 / rv:45.2)
+April 26, 2016
+MFSA 2016-48 Firefox Health Reports could accept events from untrusted domains
+MFSA 2016-47 Write to invalid HashMap entry through JavaScript.watch()
+MFSA 2016-46 Elevation of privilege with chrome.tabs.update API in web extensions
+MFSA 2016-45 CSP not applied to pages sent with multipart/x-mixed-replace
+MFSA 2016-44 Buffer overflow in libstagefright with CENC offsets
+MFSA 2016-43 Disclosure of user actions through JavaScript with motion and orientation sensors
+MFSA 2016-42 Use-after-free and buffer overflow in Service Workers
+MFSA 2016-41 Content provider permission bypass allows malicious application to access data
+MFSA 2016-40 Privilege escalation through file deletion by Maintenance Service updater
+MFSA 2016-39 Miscellaneous memory safety hazards (rv:46.0 / rv:45.1 / rv:38.8)
+March 8, 2016
+MFSA 2016-38 Out-of-bounds write with malicious font in Graphite 2
+MFSA 2016-37 Font vulnerabilities in the Graphite 2 library
+MFSA 2016-36 Use-after-free during processing of DER encoded keys in NSS
+MFSA 2016-35 Buffer overflow during ASN.1 decoding in NSS
+MFSA 2016-34 Out-of-bounds read in HTML parser following a failed allocation
+MFSA 2016-33 Use-after-free in GetStaticInstance in WebRTC
+MFSA 2016-32 WebRTC and LibVPX vulnerabilities found through code inspection
+MFSA 2016-31 Memory corruption with malicious NPAPI plugin
+MFSA 2016-30 Buffer overflow in Brotli decompression
+MFSA 2016-29 Same-origin policy violation using performance.getEntries and history navigation with session restore
+MFSA 2016-28 Addressbar spoofing though history navigation and Location protocol property
+MFSA 2016-27 Use-after-free during XML transformations
+MFSA 2016-26 Memory corruption when modifying a file being read by FileReader
+MFSA 2016-25 Use-after-free when using multiple WebRTC data channels
+MFSA 2016-24 Use-after-free in SetBody
+MFSA 2016-23 Use-after-free in HTML5 string parser
+MFSA 2016-22 Service Worker Manager out-of-bounds read in Service Worker Manager
+MFSA 2016-21 Displayed page address can be overridden
+MFSA 2016-20 Memory leak in libstagefright when deleting an array during MP4 processing
+MFSA 2016-19 Linux video memory DOS with Intel drivers
+MFSA 2016-18 CSP reports fail to strip location information for embedded iframe pages
+MFSA 2016-17 Local file overwriting and potential privilege escalation through CSP reports
+MFSA 2016-16 Miscellaneous memory safety hazards (rv:45.0 / rv:38.7)
+February 11, 2016
+MFSA 2016-14 Vulnerabilities in Graphite 2
+MFSA 2016-13 Same-origin-policy violation using Service Workers with plugins
+January 26, 2016
+MFSA 2016-15 Use-after-free in NSS during SSL connections in low memory
+MFSA 2016-12 Lightweight themes on Firefox for Android do not verify a secure connection
+MFSA 2016-11 Application Reputation service disabled in Firefox 43
+MFSA 2016-10 Unsafe memory manipulation found through code inspection
+MFSA 2016-09 Addressbar spoofing attacks
+MFSA 2016-08 Delay following click events in file download dialog too short on OS X
+MFSA 2016-07 Errors in mp_div and mp_exptmod cryptographic functions in NSS
+MFSA 2016-06 Missing delay following user click events in protocol handler dialog
+MFSA 2016-05 Addressbar spoofing through stored data url shortcuts on Firefox for Android
+MFSA 2016-04 Firefox allows for control characters to be set in cookie names
+MFSA 2016-03 Buffer overflow in WebGL after out of memory allocation
+MFSA 2016-02 Out of Memory crash when parsing GIF format images
+MFSA 2016-01 Miscellaneous memory safety hazards (rv:44.0 / rv:38.6)
+December 30, 2015
+MFSA 2015-153 HTML injection in homescreen app bypassing DOM sanitizer
+MFSA 2015-152 Lockscreen passcode bypass due to race condition
+MFSA 2015-151 Lockscreen delay bypass in Firefox OS
+December 22, 2015
+MFSA 2015-150 MD5 signatures accepted within TLS 1.2 ServerKeyExchange in server signature
+December 15, 2015
+MFSA 2015-149 Cross-site reading attack through data and view-source URIs
+MFSA 2015-148 Privilege escalation vulnerabilities in WebExtension APIs
+MFSA 2015-147 Integer underflow and buffer overflow processing MP4 metadata in libstagefright
+MFSA 2015-146 Integer overflow in MP4 playback in 64-bit versions
+MFSA 2015-145 Underflow through code inspection
+MFSA 2015-144 Buffer overflows found through code inspection
+MFSA 2015-143 Linux file chooser crashes on malformed images due to flaws in Jasper library
+MFSA 2015-142 DOS due to malformed frames in HTTP/2
+MFSA 2015-141 Hash in data URI is incorrectly parsed
+MFSA 2015-140 Cross-origin information leak through web workers error events
+MFSA 2015-139 Integer overflow allocating extremely large textures
+MFSA 2015-138 Use-after-free in WebRTC when datachannel is used after being destroyed
+MFSA 2015-137 Firefox allows for control characters to be set in cookies
+MFSA 2015-136 Same-origin policy violation using performance.getEntries and history navigation
+MFSA 2015-135 Crash with JavaScript variable assignment with unboxed objects
+MFSA 2015-134 Miscellaneous memory safety hazards (rv:43.0 / rv:38.5)
+November 3, 2015
+MFSA 2015-133 NSS and NSPR memory corruption issues
+MFSA 2015-132 Mixed content WebSocket policy bypass through workers
+MFSA 2015-131 Vulnerabilities found through code inspection
+MFSA 2015-130 JavaScript garbage collection crash with Java applet
+MFSA 2015-129 Certain escaped characters in host of Location-header are being treated as non-escaped
+MFSA 2015-128 Memory corruption in libjar through zip files
+MFSA 2015-127 CORS preflight is bypassed when non-standard Content-Type headers are received
+MFSA 2015-126 Crash when accessing HTML tables with accessibility tools on OS X
+MFSA 2015-125 XSS attack through intents on Firefox for Android
+MFSA 2015-124 Android intents can be used on Firefox for Android to open privileged files
+MFSA 2015-123 Buffer overflow during image interactions in canvas
+MFSA 2015-122 Trailing whitespace in IP address hostnames can bypass same-origin policy
+MFSA 2015-121 Disabling scripts in Add-on SDK panels has no effect
+MFSA 2015-120 Reading sensitive profile files through local HTML file on Android
+MFSA 2015-119 Firefox for Android addressbar can be removed after fullscreen mode
+MFSA 2015-118 CSP bypass due to permissive Reader mode whitelist
+MFSA 2015-117 Information disclosure through NTLM authentication
+MFSA 2015-116 Miscellaneous memory safety hazards (rv:42.0 / rv:38.4)
+October 15, 2015
+MFSA 2015-115 Cross-origin restriction bypass using Fetch
+September 22, 2015
+MFSA 2015-114 Information disclosure via the High Resolution Time API
+MFSA 2015-113 Memory safety errors in libGLES in the ANGLE graphics library
+MFSA 2015-112 Vulnerabilities found through code inspection
+MFSA 2015-111 Errors in the handling of CORS preflight request headers
+MFSA 2015-110 Dragging and dropping images exposes final URL after redirects
+MFSA 2015-109 JavaScript immutable property enforcement can be bypassed
+MFSA 2015-108 Scripted proxies can access inner window
+MFSA 2015-107 Out-of-bounds read during 2D canvas display on Linux 16-bit color depth systems
+MFSA 2015-106 Use-after-free while manipulating HTML media content
+MFSA 2015-105 Buffer overflow while decoding WebM video
+MFSA 2015-104 Use-after-free with shared workers and IndexedDB
+MFSA 2015-103 URL spoofing in reader mode
+MFSA 2015-102 Crash when using debugger with SavedStacks in JavaScript
+MFSA 2015-101 Buffer overflow in libvpx while parsing vp9 format video
+MFSA 2015-100 Arbitrary file manipulation by local user through Mozilla updater
+MFSA 2015-99 Site attribute spoofing on Android by pasting URL with unknown scheme
+MFSA 2015-98 Out of bounds read in QCMS library with ICC V4 profile attributes
+MFSA 2015-97 Memory leak in mozTCPSocket to servers
+MFSA 2015-96 Miscellaneous memory safety hazards (rv:41.0 / rv:38.3)
+August 27, 2015
+MFSA 2015-95 Add-on notification bypass through data URLs
+MFSA 2015-94 Use-after-free when resizing canvas element during restyling
+August 12, 2015
+MFSA 2015-93 Integer overflows in libstagefright while processing MP4 video metadata
+August 11, 2015
+MFSA 2015-92 Use-after-free in XMLHttpRequest with shared workers
+MFSA 2015-91 Mozilla Content Security Policy allows for asterisk wildcards in violation of CSP specification
+MFSA 2015-90 Vulnerabilities found through code inspection
+MFSA 2015-89 Buffer overflows on Libvpx when decoding WebM video
+MFSA 2015-88 Heap overflow in gdk-pixbuf when scaling bitmap images
+MFSA 2015-87 Crash when using shared memory in JavaScript
+MFSA 2015-86 Feed protocol with POST bypasses mixed content protections
+MFSA 2015-85 Out-of-bounds write with Updater and malicious MAR file
+MFSA 2015-84 Arbitrary file overwriting through Mozilla Maintenance Service with hard links
+MFSA 2015-83 Overflow issues in libstagefright
+MFSA 2015-82 Redefinition of non-configurable JavaScript object properties
+MFSA 2015-81 Use-after-free in MediaStream playback
+MFSA 2015-80 Out-of-bounds read with malformed MP3 file
+MFSA 2015-79 Miscellaneous memory safety hazards (rv:40.0 / rv:38.2)
+August 6, 2015
+MFSA 2015-78 Same origin violation and local file stealing via PDF reader
+MFSA 2015-77 Upper bound check bypass due to signed compare in SharedBufferManagerParent::RecvAllocateGrallocBuffer
+MFSA 2015-76 Wifi direct system messages don't require a permission
+MFSA 2015-75 COPPA error screen in FxAccounts signup allows loading arbitrary web content into B2G root process
+MFSA 2015-74 UMS (USB) mounting after reboot even without unlocking
+MFSA 2015-73 Remote HTML tag injection in Gaia System app
+MFSA 2015-72 Remote HTML tag injection in Gaia Search app
+July 2, 2015
+MFSA 2015-71 NSS incorrectly permits skipping of ServerKeyExchange
+MFSA 2015-70 NSS accepts export-length DHE keys with regular DHE cipher suites
+MFSA 2015-69 Privilege escalation through internal workers
+MFSA 2015-68 OS X crash reports may contain entered key press information
+MFSA 2015-67 Key pinning is ignored when overridable errors are encountered
+MFSA 2015-66 Vulnerabilities found through code inspection
+MFSA 2015-65 Use-after-free in workers while using XMLHttpRequest
+MFSA 2015-64 ECDSA signature validation fails to handle some signatures correctly
+MFSA 2015-63 Use-after-free in Content Policy due to microtask execution error
+MFSA 2015-62 Out-of-bound read while computing an oscillator rendering range in Web Audio
+MFSA 2015-61 Type confusion in Indexed Database Manager
+MFSA 2015-60 Local files or privileged URLs in pages can be opened into new tabs
+MFSA 2015-59 Miscellaneous memory safety hazards (rv:39.0 / rv:31.8 / rv:38.1)
+May 12, 2015
+MFSA 2015-58 Mozilla Windows updater can be run outside of application directory
+MFSA 2015-57 Privilege escalation through IPC channel messages
+MFSA 2015-56 Untrusted site hosting trusted page can intercept webchannel responses
+MFSA 2015-55 Buffer overflow and out-of-bounds read while parsing MP4 video metadata
+MFSA 2015-54 Buffer overflow when parsing compressed XML
+MFSA 2015-53 Use-after-free due to Media Decoder Thread creation during shutdown
+MFSA 2015-52 Sensitive URL encoded information written to Android logcat
+MFSA 2015-51 Use-after-free during text processing with vertical text enabled
+MFSA 2015-50 Out-of-bounds read and write in asm.js validation
+MFSA 2015-49 Referrer policy ignored when links opened by middle-click and context menu
+MFSA 2015-48 Buffer overflow with SVG content and CSS
+MFSA 2015-47 Buffer overflow parsing H.264 video with Linux Gstreamer
+MFSA 2015-46 Miscellaneous memory safety hazards (rv:38.0 / rv:31.7)
+April 20, 2015
+MFSA 2015-45 Memory corruption during failed plugin initialization
+April 3, 2015
+MFSA 2015-44 Certificate verification bypass through the HTTP/2 Alt-Svc header
+MFSA 2015-43 Loading privileged content through Reader mode
+March 31, 2015
+MFSA 2015-42 Windows can retain access to privileged content on navigation to unprivileged pages
+MFSA 2015-41 PRNG weakness allows for DNS poisoning on Android
+MFSA 2015-40 Same-origin bypass through anchor navigation
+MFSA 2015-39 Use-after-free due to type confusion flaws
+MFSA 2015-38 Memory corruption crashes in Off Main Thread Compositing
+MFSA 2015-37 CORS requests should not follow 30x redirections after preflight
+MFSA 2015-36 Incorrect memory management for simple-type arrays in WebRTC
+MFSA 2015-35 Cursor clickjacking with flash and images
+MFSA 2015-34 Out of bounds read in QCMS library
+MFSA 2015-33 resource:// documents can load privileged pages
+MFSA 2015-32 Add-on lightweight theme installation approval bypassed through MITM attack
+MFSA 2015-31 Use-after-free when using the Fluendo MP3 GStreamer plugin
+MFSA 2015-30 Miscellaneous memory safety hazards (rv:37.0 / rv:31.6)
+March 20, 2015
+MFSA 2015-29 Code execution through incorrect JavaScript bounds checking elimination
+MFSA 2015-28 Privilege escalation through SVG navigation
+February 24, 2015
+MFSA 2015-27 Caja Compiler JavaScript sandbox bypass
+MFSA 2015-26 UI Tour whitelisted sites in background tab can spoof foreground tabs
+MFSA 2015-25 Local files or privileged URLs in pages can be opened into new tabs
+MFSA 2015-24 Reading of local files through manipulation of form autocomplete
+MFSA 2015-23 Use-after-free in Developer Console date with OpenType Sanitiser
+MFSA 2015-22 Crash using DrawTarget in Cairo graphics library
+MFSA 2015-21 Buffer underflow during MP3 playback
+MFSA 2015-20 Buffer overflow during CSS restyling
+MFSA 2015-19 Out-of-bounds read and write while rendering SVG content
+MFSA 2015-18 Double-free when using non-default memory allocators with a zero-length XHR
+MFSA 2015-17 Buffer overflow in libstagefright during MP4 video playback
+MFSA 2015-16 Use-after-free in IndexedDB
+MFSA 2015-15 TLS TURN and STUN connections silently fail to simple TCP connections
+MFSA 2015-14 Malicious WebGL content crash when writing strings
+MFSA 2015-13 Appended period to hostnames can bypass HPKP and HSTS protections
+MFSA 2015-12 Invoking Mozilla updater will load locally stored DLL files
+MFSA 2015-11 Miscellaneous memory safety hazards (rv:36.0 / rv:31.5)
+February 5, 2015
+MFSA 2015-10 Update OpenH264 plugin to version 1.3
+January 13, 2015
+MFSA 2015-09 XrayWrapper bypass through DOM objects
+MFSA 2015-08 Delegated OCSP responder certificates failure with id-pkix-ocsp-nocheck extension
+MFSA 2015-07 Gecko Media Plugin sandbox escape
+MFSA 2015-06 Read-after-free in WebRTC
+MFSA 2015-05 Read of uninitialized memory in Web Audio
+MFSA 2015-04 Cookie injection through Proxy Authenticate responses
+MFSA 2015-03 sendBeacon requests lack an Origin header
+MFSA 2015-02 Uninitialized memory use during bitmap rendering
+MFSA 2015-01 Miscellaneous memory safety hazards (rv:35.0 / rv:31.4)
+December 2, 2014
+MFSA 2014-91 Privileged access to security wrapped protected objects
+MFSA 2014-90 Apple CoreGraphics framework on OS X 10.10 logging input data to /tmp directory
+MFSA 2014-89 Bad casting from the BasicThebesLayer to BasicContainerLayer
+MFSA 2014-88 Buffer overflow while parsing media content
+MFSA 2014-87 Use-after-free during HTML5 parsing
+MFSA 2014-86 CSP leaks redirect data via violation reports
+MFSA 2014-85 XMLHttpRequest crashes with some input streams
+MFSA 2014-84 XBL bindings accessible via improper CSS declarations
+MFSA 2014-83 Miscellaneous memory safety hazards (rv:34.0 / rv:31.3)
+October 14, 2014
+MFSA 2014-82 Accessing cross-origin objects via the Alarms API
+MFSA 2014-81 Inconsistent video sharing within iframe
+MFSA 2014-80 Key pinning bypasses
+MFSA 2014-79 Use-after-free interacting with text directionality
+MFSA 2014-78 Further uninitialized memory use during GIF rendering
+MFSA 2014-77 Out-of-bounds write with WebM video
+MFSA 2014-76 Web Audio memory corruption issues with custom waveforms
+MFSA 2014-75 Buffer overflow during CSS manipulation
+MFSA 2014-74 Miscellaneous memory safety hazards (rv:33.0 / rv:31.2)
+September 24, 2014
+MFSA 2014-73 RSA Signature Forgery in NSS
+September 2, 2014
+MFSA 2014-72 Use-after-free setting text directionality
+MFSA 2014-71 Profile directory file access through file: protocol
+MFSA 2014-70 Out-of-bounds read in Web Audio audio timeline
+MFSA 2014-69 Uninitialized memory use during GIF rendering
+MFSA 2014-68 Use-after-free during DOM interactions with SVG
+MFSA 2014-67 Miscellaneous memory safety hazards (rv:32.0 / rv:31.1 / rv:24.8)
+July 22, 2014
+MFSA 2014-66 IFRAME sandbox same-origin access through redirect
+MFSA 2014-65 Certificate parsing broken by non-standard character encoding
+MFSA 2014-64 Crash in Skia library when scaling high quality images
+MFSA 2014-63 Use-after-free while when manipulating certificates in the trusted cache
+MFSA 2014-62 Exploitable WebGL crash with Cesium JavaScript library
+MFSA 2014-61 Use-after-free with FireOnStateChange event
+MFSA 2014-60 Toolbar dialog customization event spoofing
+MFSA 2014-59 Use-after-free in DirectWrite font handling
+MFSA 2014-58 Use-after-free in Web Audio due to incorrect control message ordering
+MFSA 2014-57 Buffer overflow during Web Audio buffering for playback
+MFSA 2014-56 Miscellaneous memory safety hazards (rv:31.0 / rv:24.7)
+June 10, 2014
+MFSA 2014-55 Out of bounds write in NSPR
+MFSA 2014-54 Buffer overflow in Gamepad API
+MFSA 2014-53 Buffer overflow in Web Audio Speex resampler
+MFSA 2014-52 Use-after-free with SMIL Animation Controller
+MFSA 2014-51 Use-after-free in Event Listener Manager
+MFSA 2014-50 Clickjacking through cursor invisibility after Flash interaction
+MFSA 2014-49 Use-after-free and out of bounds issues found using Address Sanitizer
+MFSA 2014-48 Miscellaneous memory safety hazards (rv:30.0 / rv:24.6)
+April 29, 2014
+MFSA 2014-47 Debugger can bypass XrayWrappers with JavaScript
+MFSA 2014-46 Use-after-free in nsHostResolver
+MFSA 2014-45 Incorrect IDNA domain name matching for wildcard certificates
+MFSA 2014-44 Use-after-free in imgLoader while resizing images
+MFSA 2014-43 Cross-site scripting (XSS) using history navigations
+MFSA 2014-42 Privilege escalation through Web Notification API
+MFSA 2014-41 Out-of-bounds write in Cairo
+MFSA 2014-40 Firefox for Android addressbar suppression
+MFSA 2014-39 Use-after-free in the Text Track Manager for HTML video
+MFSA 2014-38 Buffer overflow when using non-XBL object as XBL
+MFSA 2014-37 Out of bounds read while decoding JPG images
+MFSA 2014-36 Web Audio memory corruption issues
+MFSA 2014-35 Privilege escalation through Mozilla Maintenance Service Installer
+MFSA 2014-34 Miscellaneous memory safety hazards (rv:29.0 / rv:24.5)
+March 25, 2014
+MFSA 2014-33 File: protocol links downloaded to SD card by default
+March 18, 2014
+MFSA 2014-32 Out-of-bounds write through TypedArrayObject after neutering
+MFSA 2014-31 Out-of-bounds read/write through neutering ArrayBuffer objects
+MFSA 2014-30 Use-after-free in TypeObject
+MFSA 2014-29 Privilege escalation using WebIDL-implemented APIs
+MFSA 2014-28 SVG filters information disclosure through feDisplacementMap
+MFSA 2014-27 Memory corruption in Cairo during PDF font rendering
+MFSA 2014-26 Information disclosure through polygon rendering in MathML
+MFSA 2014-25 Firefox OS DeviceStorageFile object vulnerable to relative path escape
+MFSA 2014-24 Android Crash Reporter open to manipulation
+MFSA 2014-23 Content Security Policy for data: documents not preserved by session restore
+MFSA 2014-22 WebGL content injection from one domain to rendering in another
+MFSA 2014-21 Local file access via Open Link in new tab
+MFSA 2014-20 onbeforeunload and Javascript navigation DOS
+MFSA 2014-19 Spoofing attack on WebRTC permission prompt
+MFSA 2014-18 crypto.generateCRMFRequest does not validate type of key
+MFSA 2014-17 Out of bounds read during WAV file decoding
+MFSA 2014-16 Files extracted during updates are not always read only
+MFSA 2014-15 Miscellaneous memory safety hazards (rv:28.0 / rv:24.4)
+February 6, 2014
+MFSA 2014-14 Script execution in HTML mail replies
+February 4, 2014
+MFSA 2014-13 Inconsistent JavaScript handling of access to Window objects
+MFSA 2014-12 NSS ticket handling issues
+MFSA 2014-11 Crash when using web workers with asm.js
+MFSA 2014-10 Firefox default start page UI content invocable by script
+MFSA 2014-09 Cross-origin information leak through web workers
+MFSA 2014-08 Use-after-free with imgRequestProxy and image processing
+MFSA 2014-07 XSLT stylesheets treated as styles in Content Security Policy
+MFSA 2014-06 Profile path leaks to Android system log
+MFSA 2014-05 Information disclosure with *FromPoint on iframes
+MFSA 2014-04 Incorrect use of discarded images by RasterImage
+MFSA 2014-03 UI selection timeout missing on download prompts
+MFSA 2014-02 Clone protected content with XBL scopes
+MFSA 2014-01 Miscellaneous memory safety hazards (rv:27.0 / rv:24.3)
+December 10, 2013
+MFSA 2013-117 Mis-issued ANSSI/DCSSI certificate
+MFSA 2013-116 JPEG information leak
+MFSA 2013-115 GetElementIC typed array stubs can be generated outside observed typesets
+MFSA 2013-114 Use-after-free in synthetic mouse movement
+MFSA 2013-113 Trust settings for built-in roots ignored during EV certificate validation
+MFSA 2013-112 Linux clipboard information disclosure though selection paste
+MFSA 2013-111 Segmentation violation when replacing ordered list elements
+MFSA 2013-110 Potential overflow in JavaScript binary search algorithms
+MFSA 2013-109 Use-after-free during Table Editing
+MFSA 2013-108 Use-after-free in event listeners
+MFSA 2013-107 Sandbox restrictions not applied to nested object elements
+MFSA 2013-106 Character encoding cross-origin XSS attack
+MFSA 2013-105 Application Installation doorhanger persists on navigation
+MFSA 2013-104 Miscellaneous memory safety hazards (rv:26.0 / rv:24.2)
+November 15, 2013
+MFSA 2013-103 Miscellaneous Network Security Services (NSS) vulnerabilities
+October 29, 2013
+MFSA 2013-102 Use-after-free in HTML document templates
+MFSA 2013-101 Memory corruption in workers
+MFSA 2013-100 Miscellaneous use-after-free issues found through ASAN fuzzing
+MFSA 2013-99 Security bypass of PDF.js checks using iframes
+MFSA 2013-98 Use-after-free when updating offline cache
+MFSA 2013-97 Writing to cycle collected object during image decoding
+MFSA 2013-96 Improperly initialized memory and overflows in some JavaScript functions
+MFSA 2013-95 Access violation with XSLT and uninitialized data
+MFSA 2013-94 Spoofing addressbar though SELECT element
+MFSA 2013-93 Miscellaneous memory safety hazards (rv:25.0 / rv:24.1 / rv:17.0.10)
+September 17, 2013
+MFSA 2013-92 GC hazard with default compartments and frame chain restoration
+MFSA 2013-91 User-defined properties on DOM proxies get the wrong "this" object
+MFSA 2013-90 Memory corruption involving scrolling
+MFSA 2013-89 Buffer overflow with multi-column, lists, and floats
+MFSA 2013-88 Compartment mismatch re-attaching XBL-backed nodes
+MFSA 2013-87 Shared object library loading from writable location
+MFSA 2013-86 WebGL Information disclosure through OS X NVIDIA graphic drivers
+MFSA 2013-85 Uninitialized data in IonMonkey
+MFSA 2013-84 Same-origin bypass through symbolic links
+MFSA 2013-83 Mozilla Updater does not lock MAR file after signature verification
+MFSA 2013-82 Calling scope for new Javascript objects can lead to memory corruption
+MFSA 2013-81 Use-after-free with select element
+MFSA 2013-80 NativeKey continues handling key messages after widget is destroyed
+MFSA 2013-79 Use-after-free in Animation Manager during stylesheet cloning
+MFSA 2013-78 Integer overflow in ANGLE library
+MFSA 2013-77 Improper state in HTML5 Tree Builder with templates
+MFSA 2013-76 Miscellaneous memory safety hazards (rv:24.0 / rv:17.0.9)
+August 6, 2013
+MFSA 2013-75 Local Java applets may read contents of local file system
+MFSA 2013-74 Firefox full and stub installer DLL hijacking
+MFSA 2013-73 Same-origin bypass with web workers and XMLHttpRequest
+MFSA 2013-72 Wrong principal used for validating URI for some Javascript components
+MFSA 2013-71 Further Privilege escalation through Mozilla Updater
+MFSA 2013-70 Bypass of XrayWrappers using XBL Scopes
+MFSA 2013-69 CRMF requests allow for code execution and XSS attacks
+MFSA 2013-68 Document URI misrepresentation and masquerading
+MFSA 2013-67 Crash during WAV audio file decoding
+MFSA 2013-66 Buffer overflow in Mozilla Maintenance Service and Mozilla Updater
+MFSA 2013-65 Buffer underflow when generating CRMF requests
+MFSA 2013-64 Use after free mutating DOM during SetBody
+MFSA 2013-63 Miscellaneous memory safety hazards (rv:23.0 / rv:17.0.8)
+June 25, 2013
+MFSA 2013-62 Inaccessible updater can lead to local privilege escalation
+MFSA 2013-61 Homograph domain spoofing in .com, .net and .name
+MFSA 2013-60 getUserMedia permission dialog incorrectly displays location
+MFSA 2013-59 XrayWrappers can be bypassed to run user defined methods in a privileged context
+MFSA 2013-58 X-Frame-Options ignored when using server push with multi-part responses
+MFSA 2013-57 Sandbox restrictions not applied to nested frame elements
+MFSA 2013-56 PreserveWrapper has inconsistent behavior
+MFSA 2013-55 SVG filters can lead to information disclosure
+MFSA 2013-54 Data in the body of XHR HEAD requests leads to CSRF attacks
+MFSA 2013-53 Execution of unmapped memory through onreadystatechange event
+MFSA 2013-52 Arbitrary code execution within Profiler
+MFSA 2013-51 Privileged content access and execution via XBL
+MFSA 2013-50 Memory corruption found using Address Sanitizer
+MFSA 2013-49 Miscellaneous memory safety hazards (rv:22.0 / rv:17.0.7)
+May 14, 2013
+MFSA 2013-48 Memory corruption found using Address Sanitizer
+MFSA 2013-47 Uninitialized functions in DOMSVGZoomEvent
+MFSA 2013-46 Use-after-free with video and onresize event
+MFSA 2013-45 Mozilla Updater fails to update some Windows Registry entries
+MFSA 2013-44 Local privilege escalation through Mozilla Maintenance Service
+MFSA 2013-43 File input control has access to full path
+MFSA 2013-42 Privileged access for content level constructor
+MFSA 2013-41 Miscellaneous memory safety hazards (rv:21.0 / rv:17.0.6)
+April 2, 2013
+MFSA 2013-40 Out-of-bounds array read in CERT_DecodeCertPackage
+MFSA 2013-39 Memory corruption while rendering grayscale PNG images
+MFSA 2013-38 Cross-site scripting (XSS) using timed history navigations
+MFSA 2013-37 Bypass of tab-modal dialog origin disclosure
+MFSA 2013-36 Bypass of SOW protections allows cloning of protected nodes
+MFSA 2013-35 WebGL crash with Mesa graphics driver on Linux
+MFSA 2013-34 Privilege escalation through Mozilla Updater
+MFSA 2013-33 World read and write access to app_tmp directory on Android
+MFSA 2013-32 Privilege escalation through Mozilla Maintenance Service
+MFSA 2013-31 Out-of-bounds write in Cairo library
+MFSA 2013-30 Miscellaneous memory safety hazards (rv:20.0 / rv:17.0.5)
+March 7, 2013
+MFSA 2013-29 Use-after-free in HTML Editor
+February 19, 2013
+MFSA 2013-28 Use-after-free, out of bounds read, and buffer overflow issues found using Address Sanitizer
+MFSA 2013-27 Phishing on HTTPS connection through malicious proxy
+MFSA 2013-26 Use-after-free in nsImageLoadingContent
+MFSA 2013-25 Privacy leak in JavaScript Workers
+MFSA 2013-24 Web content bypass of COW and SOW security wrappers
+MFSA 2013-23 Wrapped WebIDL objects can be wrapped again
+MFSA 2013-22 Out-of-bounds read in image rendering
+MFSA 2013-21 Miscellaneous memory safety hazards (rv:19.0 / rv:17.0.3)
+January 8, 2013
+MFSA 2013-20 Mis-issued TURKTRUST certificates
+MFSA 2013-19 Use-after-free in Javascript Proxy objects
+MFSA 2013-18 Use-after-free in Vibrate
+MFSA 2013-17 Use-after-free in ListenerManager
+MFSA 2013-16 Use-after-free in serializeToStream
+MFSA 2013-15 Privilege escalation through plugin objects
+MFSA 2013-14 Chrome Object Wrapper (COW) bypass through changing prototype
+MFSA 2013-13 Memory corruption in XBL with XML bindings containing SVG
+MFSA 2013-12 Buffer overflow in Javascript string concatenation
+MFSA 2013-11 Address space layout leaked in XBL objects
+MFSA 2013-10 Event manipulation in plugin handler to bypass same-origin policy
+MFSA 2013-09 Compartment mismatch with quickstubs returned values
+MFSA 2013-08 AutoWrapperChanger fails to keep objects alive during garbage collection
+MFSA 2013-07 Crash due to handling of SSL on threads
+MFSA 2013-06 Touch events are shared across iframes
+MFSA 2013-05 Use-after-free when displaying table with many columns and column groups
+MFSA 2013-04 URL spoofing in addressbar during page loads
+MFSA 2013-03 Buffer Overflow in Canvas
+MFSA 2013-02 Use-after-free and buffer overflow issues found using Address Sanitizer
+MFSA 2013-01 Miscellaneous memory safety hazards (rv:18.0/ rv:10.0.12 / rv:17.0.2)
+November 20, 2012
+MFSA 2012-106 Use-after-free, buffer overflow, and memory corruption issues found using Address Sanitizer
+MFSA 2012-105 Use-after-free and buffer overflow issues found using Address Sanitizer
+MFSA 2012-104 CSS and HTML injection through Style Inspector
+MFSA 2012-103 Frames can shadow top.location
+MFSA 2012-102 Script entered into Developer Toolbar runs with chrome privileges
+MFSA 2012-101 Improper character decoding in HZ-GB-2312 charset
+MFSA 2012-100 Improper security filtering for cross-origin wrappers
+MFSA 2012-99 XrayWrappers exposes chrome-only properties when not in chrome compartment
+MFSA 2012-98 Firefox installer DLL hijacking
+MFSA 2012-97 XMLHttpRequest inherits incorrect principal within sandbox
+MFSA 2012-96 Memory corruption in str_unescape
+MFSA 2012-95 Javascript: URLs run in privileged context on New Tab page
+MFSA 2012-94 Crash when combining SVG text on path with CSS
+MFSA 2012-93 evalInSanbox location context incorrectly applied
+MFSA 2012-92 Buffer overflow while rendering GIF images
+MFSA 2012-91 Miscellaneous memory safety hazards (rv:17.0/ rv:10.0.11)
+October 26, 2012
+MFSA 2012-90 Fixes for Location object issues
+October 11, 2012
+MFSA 2012-89 defaultValue security checks not applied
+MFSA 2012-88 Miscellaneous memory safety hazards (rv:16.0.1)
+October 9, 2012
+MFSA 2012-87 Use-after-free in the IME State Manager
+MFSA 2012-86 Heap memory corruption issues found using Address Sanitizer
+MFSA 2012-85 Use-after-free, buffer overflow, and out of bounds read issues found using Address Sanitizer
+MFSA 2012-84 Spoofing and script injection through location.hash
+MFSA 2012-83 Chrome Object Wrapper (COW) does not disallow access to privileged functions or properties
+MFSA 2012-82 top object and location property accessible by plugins
+MFSA 2012-81 GetProperty function can bypass security checks
+MFSA 2012-80 Crash with invalid cast when using instanceof operator
+MFSA 2012-79 DOS and crash with full screen and history navigation
+MFSA 2012-78 Reader Mode pages have chrome privileges
+MFSA 2012-77 Some DOMWindowUtils methods bypass security checks
+MFSA 2012-76 Continued access to initial origin after setting document.domain
+MFSA 2012-75 select element persistence allows for attacks
+MFSA 2012-74 Miscellaneous memory safety hazards (rv:16.0/ rv:10.0.8)
+September 21, 2012
+MFSA 2012-73 SPDY information disclosure
+August 28, 2012
+MFSA 2012-72 Web console eval capable of executing chrome-privileged code
+MFSA 2012-71 Insecure use of __android_log_print
+MFSA 2012-70 Location object security checks bypassed by chrome code
+MFSA 2012-69 Incorrect site SSL certificate data display
+MFSA 2012-68 DOMParser loads linked resources in extensions when parsing text/html
+MFSA 2012-67 Installer will launch incorrect executable following new installation
+MFSA 2012-66 HTTPMonitor extension allows for remote debugging without explicit activation
+MFSA 2012-65 Out-of-bounds read in format-number in XSLT
+MFSA 2012-64 Graphite 2 memory corruption
+MFSA 2012-63 SVG buffer overflow and use-after-free issues
+MFSA 2012-62 WebGL use-after-free and memory corruption
+MFSA 2012-61 Memory corruption with bitmap format images with negative height
+MFSA 2012-60 Escalation of privilege through about:newtab
+MFSA 2012-59 Location object can be shadowed using Object.defineProperty
+MFSA 2012-58 Use-after-free issues found using Address Sanitizer
+MFSA 2012-57 Miscellaneous memory safety hazards (rv:15.0/ rv:10.0.7)
+July 17, 2012
+MFSA 2012-56 Code execution through javascript: URLs
+MFSA 2012-55 feed: URLs with an innerURI inherit security context of page
+MFSA 2012-54 Clickjacking of certificate warning page
+MFSA 2012-53 Content Security Policy 1.0 implementation errors cause data leakage
+MFSA 2012-52 JSDependentString::undepend string conversion results in memory corruption
+MFSA 2012-51 X-Frame-Options header ignored when duplicated
+MFSA 2012-50 Out of bounds read in QCMS
+MFSA 2012-49 Same-compartment Security Wrappers can be bypassed
+MFSA 2012-48 use-after-free in nsGlobalWindow::PageHidden
+MFSA 2012-47 Improper filtering of javascript in HTML feed-view
+MFSA 2012-46 XSS through data: URLs
+MFSA 2012-45 Spoofing issue with location
+MFSA 2012-44 Gecko memory corruption
+MFSA 2012-43 Incorrect URL displayed in addressbar through drag and drop
+MFSA 2012-42 Miscellaneous memory safety hazards (rv:14.0/ rv:10.0.6)
+June 18, 2012
+MFSA 2012-41 Use-after-free in nsHTMLSelectElement
+June 5, 2012
+MFSA 2012-40 Buffer overflow and use-after-free issues found using Address Sanitizer
+MFSA 2012-39 NSS parsing errors with zero length items
+MFSA 2012-38 Use-after-free while replacing/inserting a node in a document
+MFSA 2012-37 Information disclosure though Windows file shares and shortcut files
+MFSA 2012-36 Content Security Policy inline-script bypass
+MFSA 2012-35 Privilege escalation through Mozilla Updater and Windows Updater Service
+MFSA 2012-34 Miscellaneous memory safety hazards (rv:13.0/ rv:10.0.5)
+April 24, 2012
+MFSA 2012-33 Potential site identity spoofing when loading RSS and Atom feeds
+MFSA 2012-32 HTTP Redirections and remote content can be read by javascript errors
+MFSA 2012-31 Off-by-one error in OpenType Sanitizer
+MFSA 2012-30 Crash with WebGL content using textImage2D
+MFSA 2012-29 Potential XSS through ISO-2022-KR/ISO-2022-CN decoding issues
+MFSA 2012-28 Ambiguous IPv6 in Origin headers may bypass webserver access restrictions
+MFSA 2012-27 Page load short-circuit can lead to XSS
+MFSA 2012-26 WebGL.drawElements may read illegal video memory due to FindMaxUshortElement error
+MFSA 2012-25 Potential memory corruption during font rendering using cairo-dwrite
+MFSA 2012-24 Potential XSS via multibyte content processing errors
+MFSA 2012-23 Invalid frees causes heap corruption in gfxImageSurface
+MFSA 2012-22 use-after-free in IDBKeyRange
+MFSA 2012-21 Multiple security flaws fixed in FreeType v2.4.9
+MFSA 2012-20 Miscellaneous memory safety hazards (rv:12.0/ rv:10.0.4)
+March 13, 2012
+MFSA 2012-19 Miscellaneous memory safety hazards (rv:11.0/ rv:10.0.3 / rv:1.9.2.28)
+MFSA 2012-18 window.fullScreen writeable by untrusted content
+MFSA 2012-17 Crash when accessing keyframe cssText after dynamic modification
+MFSA 2012-16 Escalation of privilege with Javascript: URL as home page
+MFSA 2012-15 XSS with multiple Content Security Policy headers
+MFSA 2012-14 SVG issues found with Address Sanitizer
+MFSA 2012-13 XSS with Drag and Drop and Javascript: URL
+MFSA 2012-12 Use-after-free in shlwapi.dll
+February 16, 2012
+MFSA 2012-11 libpng integer overflow
+February 10, 2012
+MFSA 2012-10 use after free in nsXBLDocumentInfo::ReadPrototypeBindings
+January 31, 2012
+MFSA 2012-09 Firefox Recovery Key.html is saved with unsafe permission
+MFSA 2012-08 Crash with malformed embedded XSLT stylesheets
+MFSA 2012-07 Potential Memory Corruption When Decoding Ogg Vorbis files
+MFSA 2012-06 Uninitialized memory appended when encoding icon images may cause information disclosure
+MFSA 2012-05 Frame scripts calling into untrusted objects bypass security checks
+MFSA 2012-04 Child nodes from nsDOMAttribute still accessible after removal of nodes
+MFSA 2012-03 <iframe> element exposed across domains via name attribute
+MFSA 2012-02 Overly permissive IPv6 literal syntax
+MFSA 2012-01 Miscellaneous memory safety hazards (rv:10.0/ 1.9.2.26)
+December 20, 2011
+MFSA 2011-59 .jar not treated as executable in Firefox 3.6 on Mac
+MFSA 2011-58 Crash scaling <video> to extreme sizes
+MFSA 2011-57 Crash when plugin removes itself on Mac OS X
+MFSA 2011-56 Key detection without JavaScript via SVG animation
+MFSA 2011-55 nsSVGValue out-of-bounds access
+MFSA 2011-54 Potentially exploitable crash in the YARR regular expression library
+MFSA 2011-53 Miscellaneous memory safety hazards (rv:9.0)
+November 8, 2011
+MFSA 2011-52 Code execution via NoWaiverWrapper
+MFSA 2011-51 Cross-origin image theft on Mac with integrated Intel GPU
+MFSA 2011-50 Cross-origin data theft using canvas and Windows D2D
+MFSA 2011-49 Memory corruption while profiling using Firebug
+MFSA 2011-48 Miscellaneous memory safety hazards (rv:8.0)
+MFSA 2011-47 Potential XSS against sites using Shift-JIS
+MFSA 2011-46 loadSubScript unwraps XPCNativeWrapper scope parameter (1.9.2 branch)
+September 27, 2011
+MFSA 2011-45 Inferring keystrokes from motion data
+MFSA 2011-44 Use after free reading OGG headers
+MFSA 2011-43 loadSubScript unwraps XPCNativeWrapper scope parameter
+MFSA 2011-42 Potentially exploitable crash in the YARR regular expression library
+MFSA 2011-41 Potentially exploitable WebGL crashes
+MFSA 2011-40 Code installation through holding down Enter
+MFSA 2011-39 Defense against multiple Location headers due to CRLF Injection
+MFSA 2011-38 XSS via plugins and shadowed window.location object
+MFSA 2011-37 Integer underflow when using JavaScript RegExp
+MFSA 2011-36 Miscellaneous memory safety hazards (rv:7.0 / rv:1.9.2.23)
+September 6, 2011
+MFSA 2011-35 Additional protection against fraudulent DigiNotar certificates
+August 30, 2011
+MFSA 2011-34 Protection against fraudulent DigiNotar certificates
+August 16, 2011
+MFSA 2011-33 Security issues addressed in SeaMonkey 2.3
+MFSA 2011-32 Security issues addressed in Thunderbird 3.1.12
+MFSA 2011-31 Security issues addressed in Thunderbird 6
+MFSA 2011-30 Security issues addressed in Firefox 3.6.20
+MFSA 2011-29 Security issues addressed in Firefox 6
+June 21, 2011
+MFSA 2011-28 Non-whitelisted site can trigger xpinstall
+MFSA 2011-27 XSS encoding hazard with inline SVG
+MFSA 2011-26 Multiple WebGL crashes
+MFSA 2011-25 Stealing of cross-domain images using WebGL textures
+MFSA 2011-24 Cookie isolation error
+MFSA 2011-23 Multiple dangling pointer vulnerabilities
+MFSA 2011-22 Integer overflow and arbitrary code execution in Array.reduceRight()
+MFSA 2011-21 Memory corruption due to multipart/x-mixed-replace images
+MFSA 2011-20 Use-after-free vulnerability when viewing XUL document with script disabled
+MFSA 2011-19 Miscellaneous memory safety hazards (rv:3.0/1.9.2.18)
+April 28, 2011
+MFSA 2011-18 XSLT generate-id() function heap address leak
+MFSA 2011-17 WebGLES vulnerabilities
+MFSA 2011-16 Directory traversal in resource: protocol
+MFSA 2011-15 Escalation of privilege through Java Embedding Plugin
+MFSA 2011-14 Information stealing via form history
+MFSA 2011-13 Multiple dangling pointer vulnerabilities
+MFSA 2011-12 Miscellaneous memory safety hazards (rv:2.0.1/ 1.9.2.17/ 1.9.1.19)
+March 22, 2011
+MFSA 2011-11 Update to HTTPS certificate blacklist
+March 1, 2011
+MFSA 2011-10 CSRF risk with plugins and 307 redirects
+MFSA 2011-09 Crash caused by corrupted JPEG image
+MFSA 2011-08 ParanoidFragmentSink allows javascript: URLs in chrome documents
+MFSA 2011-07 Memory corruption during text run construction (Windows)
+MFSA 2011-06 Use-after-free error using Web Workers
+MFSA 2011-05 Buffer overflow in JavaScript atom map
+MFSA 2011-04 Buffer overflow in JavaScript upvarMap
+MFSA 2011-03 Use-after-free error in JSON.stringify
+MFSA 2011-02 Recursive eval call causes confirm dialogs to evaluate to true
+MFSA 2011-01 Miscellaneous memory safety hazards (rv:1.9.2.14/ 1.9.1.17)
+December 9, 2010
+MFSA 2010-84 XSS hazard in multiple character encodings
+MFSA 2010-83 Location bar SSL spoofing using network error page
+MFSA 2010-82 Incomplete fix for CVE-2010-0179
+MFSA 2010-81 Integer overflow vulnerability in NewIdArray
+MFSA 2010-80 Use-after-free error with nsDOMAttribute MutationObserver
+MFSA 2010-79 Java security bypass from LiveConnect loaded via data: URL meta refresh
+MFSA 2010-78 Add support for OTS font sanitizer
+MFSA 2010-77 Crash and remote code execution using HTML tags inside a XUL tree
+MFSA 2010-76 Chrome privilege escalation with window.open and <isindex> element
+MFSA 2010-75 Buffer overflow while line breaking after document.write with long string
+MFSA 2010-74 Miscellaneous memory safety hazards (rv:1.9.2.13/ 1.9.1.16)
+October 27, 2010
+MFSA 2010-73 Heap buffer overflow mixing document.write and DOM insertion
+October 19, 2010
+MFSA 2010-72 Insecure Diffie-Hellman key exchange
+MFSA 2010-71 Unsafe library loading vulnerabilities
+MFSA 2010-70 SSL wildcard certificate matching IP addresses
+MFSA 2010-69 Cross-site information disclosure via modal calls
+MFSA 2010-68 XSS in gopher parser when parsing hrefs
+MFSA 2010-67 Dangling pointer vulnerability in LookupGetterOrSetter
+MFSA 2010-66 Use-after-free error in nsBarProp
+MFSA 2010-65 Buffer overflow and memory corruption using document.write
+MFSA 2010-64 Miscellaneous memory safety hazards (rv:1.9.2.11/ 1.9.1.14)
+September 7, 2010
+MFSA 2010-63 Information leak via XMLHttpRequest statusText
+MFSA 2010-62 Copy-and-paste or drag-and-drop into designMode document allows XSS
+MFSA 2010-61 UTF-7 XSS by overriding document charset using <object> type attribute
+MFSA 2010-60 XSS using SJOW scripted function
+MFSA 2010-59 SJOW creates scope chains ending in outer object
+MFSA 2010-58 Crash on Mac using fuzzed font in data: URL
+MFSA 2010-57 Crash and remote code execution in normalizeDocument
+MFSA 2010-56 Dangling pointer vulnerability in nsTreeContentView
+MFSA 2010-55 XUL tree removal crash and remote code execution
+MFSA 2010-54 Dangling pointer vulnerability in nsTreeSelection
+MFSA 2010-53 Heap buffer overflow in nsTextFrameUtils::TransformText
+MFSA 2010-52 Windows XP DLL loading vulnerability
+MFSA 2010-51 Dangling pointer vulnerability using DOM plugin array
+MFSA 2010-50 Frameset integer overflow vulnerability
+MFSA 2010-49 Miscellaneous memory safety hazards (rv:1.9.2.9/ 1.9.1.12)
+July 20, 2010
+MFSA 2010-48 Dangling pointer crash regression from plugin parameter array fix
+MFSA 2010-47 Cross-origin data leakage from script filename in error messages
+MFSA 2010-46 Cross-domain data theft using CSS
+MFSA 2010-45 Multiple location bar spoofing vulnerabilities
+MFSA 2010-44 Characters mapped to U+FFFD in 8 bit encodings cause subsequent character to vanish
+MFSA 2010-43 Same-origin bypass using canvas context
+MFSA 2010-42 Cross-origin data disclosure via Web Workers and importScripts
+MFSA 2010-41 Remote code execution using malformed PNG image
+MFSA 2010-40 nsTreeSelection dangling pointer remote code execution vulnerability
+MFSA 2010-39 nsCSSValue::Array index integer overflow
+MFSA 2010-38 Arbitrary code execution using SJOW and fast native function
+MFSA 2010-37 Plugin parameter EnsureCachedAttrParamArrays remote code execution vulnerability
+MFSA 2010-36 Use-after-free error in NodeIterator
+MFSA 2010-35 DOM attribute cloning remote code execution vulnerability
+MFSA 2010-34 Miscellaneous memory safety hazards (rv:1.9.2.7/ 1.9.1.11)
+June 22, 2010
+MFSA 2010-33 User tracking across sites using Math.random()
+MFSA 2010-32 Content-Disposition: attachment ignored if Content-Type: multipart also present
+MFSA 2010-31 focus() behavior can be used to inject or steal keystrokes
+MFSA 2010-30 Integer Overflow in XSLT Node Sorting
+MFSA 2010-29 Heap buffer overflow in nsGenericDOMDataNode::SetTextInternal
+MFSA 2010-28 Freed object reuse across plugin instances
+MFSA 2010-27 Use-after-free error in nsCycleCollector::MarkRoots()
+MFSA 2010-26 Crashes with evidence of memory corruption (rv:1.9.2.4/ 1.9.1.10)
+April 1, 2010
+MFSA 2010-25 Re-use of freed object due to scope confusion
+March 30, 2010
+MFSA 2010-24 XMLDocument::load() doesn't check nsIContentPolicy
+MFSA 2010-23 Image src redirect to mailto: URL opens email editor
+MFSA 2010-22 Update NSS to support TLS renegotiation indication
+MFSA 2010-21 Arbitrary code execution with Firebug XMLHttpRequestSpy
+MFSA 2010-20 Chrome privilege escalation via forced URL drag and drop
+MFSA 2010-19 Dangling pointer vulnerability in nsPluginArray
+MFSA 2010-18 Dangling pointer vulnerability in nsTreeContentView
+MFSA 2010-17 Remote code execution with use-after-free in nsTreeSelection
+MFSA 2010-16 Crashes with evidence of memory corruption (rv:1.9.2.2/ 1.9.1.9/ 1.9.0.19)
+March 23, 2010
+MFSA 2010-15 Asynchronous Auth Prompt attaches to wrong window
+MFSA 2010-14 Browser chrome defacement via cached XUL stylesheets
+MFSA 2010-13 Content policy bypass with image preloading
+MFSA 2010-12 XSS using addEventListener and setTimeout on a wrapped object
+MFSA 2010-11 Crashes with evidence of memory corruption (rv:1.9.2.2/ 1.9.1.8/ 1.9.0.18)
+MFSA 2010-10 XSS via plugins and unprotected Location object
+MFSA 2010-09 Deleted frame reuse in multipart/x-mixed-replace image
+March 22, 2010
+MFSA 2010-08 WOFF heap corruption due to integer overflow
+March 16, 2010
+MFSA 2010-07 Fixes for potentially exploitable crashes ported to the legacy branch
+MFSA 2010-06 Scriptable plugin execution in SeaMonkey mail
+February 17, 2010
+MFSA 2010-05 XSS hazard using SVG document and binary Content-Type
+MFSA 2010-04 XSS due to window.dialogArguments being readable cross-domain
+MFSA 2010-03 Use-after-free crash in HTML parser
+MFSA 2010-02 Web Worker Array Handling Heap Corruption Vulnerability
+MFSA 2010-01 Crashes with evidence of memory corruption (rv:1.9.1.8/ 1.9.0.18)
+December 15, 2009
+MFSA 2009-71 GeckoActiveXObject exception messages can be used to enumerate installed COM objects
+MFSA 2009-70 Privilege escalation via chrome window.opener
+MFSA 2009-69 Location bar spoofing vulnerabilities
+MFSA 2009-68 NTLM reflection vulnerability
+MFSA 2009-67 Integer overflow, crash in libtheora video library
+MFSA 2009-66 Memory safety fixes in liboggplay media library
+MFSA 2009-65 Crashes with evidence of memory corruption (rv:1.9.1.6/ 1.9.0.16)
+October 27, 2009
+MFSA 2009-64 Crashes with evidence of memory corruption (rv:1.9.1.4/ 1.9.0.15)
+MFSA 2009-63 Upgrade media libraries to fix memory safety bugs
+MFSA 2009-62 Download filename spoofing with RTL override
+MFSA 2009-61 Cross-origin data theft through document.getSelection()
+MFSA 2009-59 Heap buffer overflow in string to number conversion
+MFSA 2009-57 Chrome privilege escalation in XPCVariant::VariantDataToJS()
+MFSA 2009-56 Heap buffer overflow in GIF color map parser
+MFSA 2009-55 Crash in proxy auto-configuration regexp parsing
+MFSA 2009-54 Crash with recursive web-worker calls
+MFSA 2009-53 Local downloaded file tampering
+MFSA 2009-52 Form history vulnerable to stealing
+September 9, 2009
+MFSA 2009-51 Chrome privilege escalation with FeedWriter
+MFSA 2009-50 Location bar spoofing via tall line-height Unicode characters
+MFSA 2009-49 TreeColumns dangling pointer vulnerability
+MFSA 2009-48 Insufficient warning for PKCS11 module installation and removal
+MFSA 2009-47 Crashes with evidence of memory corruption (rv:1.9.1.3/ 1.9.0.14)
+August 3, 2009
+MFSA 2009-46 Chrome privilege escalation due to incorrectly cached wrapper
+MFSA 2009-45 Crashes with evidence of memory corruption (rv:1.9.1.2/1.9.0.13)
+MFSA 2009-44 Location bar and SSL indicator spoofing via window.open() on invalid URL
+August 1, 2009
+MFSA 2009-43 Heap overflow in certificate regexp parsing
+MFSA 2009-42 Compromise of SSL-protected communication
+July 21, 2009
+MFSA 2009-40 Multiple cross origin wrapper bypasses
+MFSA 2009-39 setTimeout loses XPCNativeWrappers
+MFSA 2009-38 Data corruption with SOCKS5 reply containing DNS name longer than 15 characters
+MFSA 2009-37 Crash and remote code execution using watch and __defineSetter__ on SVG element
+MFSA 2009-36 Heap/integer overflows in font glyph rendering libraries
+MFSA 2009-35 Crash and remote code execution during Flash player unloading
+MFSA 2009-34 Crashes with evidence of memory corruption (rv:1.9.1/1.9.0.12)
+July 16, 2009
+MFSA 2009-41 Corrupt JIT state after deep return from native function
+June 22, 2009
+MFSA 2009-33 Crash viewing multipart/alternative message with text/enhanced part
+June 11, 2009
+MFSA 2009-32 JavaScript chrome privilege escalation
+MFSA 2009-31 XUL scripts bypass content-policy checks
+MFSA 2009-30 Incorrect principal set for file: resources loaded via location bar
+MFSA 2009-29 Arbitrary code execution using event listeners attached to an element whose owner document is null
+MFSA 2009-28 Race condition while accessing the private data of a NPObject JS wrapper class object
+MFSA 2009-27 SSL tampering via non-200 responses to proxy CONNECT requests
+MFSA 2009-26 Arbitrary domain cookie access by local file: resources
+MFSA 2009-25 URL spoofing with invalid unicode characters
+MFSA 2009-24 Crashes with evidence of memory corruption (rv:1.9.0.11)
+April 27, 2009
+MFSA 2009-23 Crash in nsTextFrame::ClearTextRun()
+April 21, 2009
+MFSA 2009-22 Firefox allows Refresh header to redirect to javascript: URIs
+MFSA 2009-21 POST data sent to wrong site when saving web page with embedded frame
+MFSA 2009-20 Malicious search plugins can inject code into arbitrary sites
+MFSA 2009-19 Same-origin violations in XMLHttpRequest and XPCNativeWrapper.toString
+MFSA 2009-18 XSS hazard using third-party stylesheets and XBL bindings
+MFSA 2009-17 Same-origin violations when Adobe Flash loaded via view-source: scheme
+MFSA 2009-16 jar: scheme ignores the content-disposition: header on the inner URI
+MFSA 2009-15 URL spoofing with box drawing character
+MFSA 2009-14 Crashes with evidence of memory corruption (rv:1.9.0.9)
+March 27, 2009
+MFSA 2009-13 Arbitrary code execution via XUL tree element
+MFSA 2009-12 XSL Transformation vulnerability
+March 4, 2009
+MFSA 2009-11 URL spoofing with invisible control characters
+MFSA 2009-10 Upgrade PNG library to fix memory safety hazards
+MFSA 2009-09 XML data theft via RDFXMLDataSource and cross-domain redirect
+MFSA 2009-08 Mozilla Firefox XUL Linked Clones Double Free Vulnerability
+MFSA 2009-07 Crashes with evidence of memory corruption (rv:1.9.0.7)
+February 3, 2009
+MFSA 2009-06 Directives to not cache pages ignored
+MFSA 2009-05 XMLHttpRequest allows reading HTTPOnly cookies
+MFSA 2009-04 Chrome privilege escalation via local .desktop files
+MFSA 2009-03 Local file stealing with SessionStore
+MFSA 2009-02 XSS using a chrome XBL method and window.eval
+MFSA 2009-01 Crashes with evidence of memory corruption (rv:1.9.0.6)
+December 16, 2008
+MFSA 2008-69 XSS vulnerabilities in SessionStore
+MFSA 2008-68 XSS and JavaScript privilege escalation
+MFSA 2008-67 Escaped null characters ignored by CSS parser
+MFSA 2008-66 Errors parsing URLs with leading whitespace and control characters
+MFSA 2008-65 Cross-domain data theft via script redirect error message
+MFSA 2008-64 XMLHttpRequest 302 response disclosure
+MFSA 2008-63 User tracking via XUL persist attribute
+MFSA 2008-62 Additional XSS attack vectors in feed preview
+MFSA 2008-61 Information stealing via loadBindingDocument
+MFSA 2008-60 Crashes with evidence of memory corruption (rv:1.9.0.5/1.8.1.19)
+November 19, 2008
+MFSA 2008-59 Script access to .documentURI and .textContent in mail
+November 12, 2008
+MFSA 2008-58 Parsing error in E4X default namespace
+MFSA 2008-57 -moz-binding property bypasses security checks on codebase principals
+MFSA 2008-56 nsXMLHttpRequest::NotifyEventListeners() same-origin violation
+MFSA 2008-55 Crash and remote code execution in nsFrameManager
+MFSA 2008-54 Buffer overflow in http-index-format parser
+MFSA 2008-53 XSS and JavaScript privilege escalation via session restore
+MFSA 2008-52 Crashes with evidence of memory corruption (rv:1.9.0.4/1.8.1.18)
+MFSA 2008-51 file: URIs inherit chrome privileges when opened from chrome
+MFSA 2008-50 Crash and remote code execution via __proto__ tampering
+MFSA 2008-49 Arbitrary code execution via Flash Player dynamic module unloading
+MFSA 2008-48 Image stealing via canvas and HTTP redirect
+MFSA 2008-47 Information stealing via local shortcut files
+September 25, 2008
+MFSA 2008-46 Heap overflow when canceling newsgroup message
+September 23, 2008
+MFSA 2008-45 XBM image uninitialized memory reading
+MFSA 2008-44 resource: traversal vulnerabilities
+MFSA 2008-43 BOM characters, low surrogates stripped from JavaScript before execution
+MFSA 2008-42 Crashes with evidence of memory corruption (rv:1.9.0.2/1.8.1.17)
+MFSA 2008-41 Privilege escalation via XPCnativeWrapper pollution
+MFSA 2008-40 Forced mouse drag
+MFSA 2008-39 Privilege escalation using feed preview page and XSS flaw
+MFSA 2008-38 nsXMLDocument::OnChannelRedirect() same-origin violation
+MFSA 2008-37 UTF-8 URL stack buffer overflow
+July 23, 2008
+MFSA 2008-26 Buffer length checks in MIME processing
+July 16, 2008
+MFSA 2008-36 Crash with malformed GIF file on Mac OS X
+July 15, 2008
+MFSA 2008-35 Command-line URLs launch multiple tabs when Firefox not running
+MFSA 2008-34 Remote code execution by overflowing CSS reference counter
+July 1, 2008
+MFSA 2008-33 Crash and remote code execution in block reflow
+MFSA 2008-32 Remote site run as local file via Windows URL shortcut
+MFSA 2008-31 Peer-trusted certs can use alt names to spoof
+MFSA 2008-30 File location URL in directory listings not escaped properly
+MFSA 2008-29 Faulty .properties file results in uninitialized memory being used
+MFSA 2008-28 Arbitrary socket connections with Java LiveConnect on Mac OS X
+MFSA 2008-27 Arbitrary file upload via originalTarget and DOM Range
+MFSA 2008-25 Arbitrary code execution in mozIJSSubScriptLoader.loadSubScript()
+MFSA 2008-24 Chrome script loading from fastload file
+MFSA 2008-23 Signed JAR tampering
+MFSA 2008-22 XSS through JavaScript same-origin violation
+MFSA 2008-21 Crashes with evidence of memory corruption (rv:1.8.1.15)
+April 16, 2008
+MFSA 2008-20 Crash in JavaScript garbage collector
+March 25, 2008
+MFSA 2008-19 XUL popup spoofing variant (cross-tab popups)
+MFSA 2008-18 Java socket connection to any local port via LiveConnect
+MFSA 2008-17 Privacy issue with SSL Client Authentication
+MFSA 2008-16 HTTP Referrer spoofing with malformed URLs
+MFSA 2008-15 Crashes with evidence of memory corruption (rv:1.8.1.13)
+MFSA 2008-14 JavaScript privilege escalation and arbitrary code execution
+MFSA 2008-13 Multiple XSS vulnerabilities from character encoding
+February 26, 2008
+MFSA 2008-12 Heap buffer overflow in external MIME bodies
+February 19, 2008
+MFSA 2008-07 Possible information disclosure in BMP decoder
+February 7, 2008
+MFSA 2008-11 Web forgery overwrite with div overlay
+MFSA 2008-10 URL token stealing via stylesheet redirect
+MFSA 2008-09 Mishandling of locally-saved plain text files
+MFSA 2008-08 File action dialog tampering
+MFSA 2008-06 Web browsing history and forward navigation stealing
+MFSA 2008-05 Directory traversal via chrome: URI
+MFSA 2008-04 Stored password corruption
+MFSA 2008-03 Privilege escalation, XSS, Remote Code Execution
+MFSA 2008-02 Multiple file input focus stealing vulnerabilities
+MFSA 2008-01 Crashes with evidence of memory corruption (rv:1.8.1.12)
+December 19, 2007
+MFSA 2007-40 Upgraded Thunderbird 1.5.0.13 missing fix for MFSA 2007-23
+November 26, 2007
+MFSA 2007-39 Referer-spoofing via window.location race condition
+MFSA 2007-38 Memory corruption vulnerabilities (rv:1.8.1.10)
+MFSA 2007-37 jar: URI scheme XSS hazard
+October 18, 2007
+MFSA 2007-36 URIs with invalid %-encoding mishandled by Windows
+MFSA 2007-35 XPCNativeWraper pollution using Script object
+MFSA 2007-34 Possible file stealing through sftp protocol
+MFSA 2007-33 XUL pages can hide the window titlebar
+MFSA 2007-32 File input focus stealing vulnerability
+MFSA 2007-31 Digest authentication request splitting
+MFSA 2007-30 onUnload Tailgating
+MFSA 2007-29 Crashes with evidence of memory corruption (rv:1.8.1.8)
+September 18, 2007
+MFSA 2007-28 Code execution via QuickTime Media-link files
+July 30, 2007
+MFSA 2007-27 Unescaped URIs passed to external programs
+MFSA 2007-26 Privilege escalation through chrome-loaded about:blank windows
+July 17, 2007
+MFSA 2007-25 XPCNativeWrapper pollution
+MFSA 2007-24 Unauthorized access to wyciwyg:// documents
+MFSA 2007-23 Remote code execution by launching Firefox from Internet Explorer
+MFSA 2007-22 File type confusion due to %00 in name
+MFSA 2007-21 Privilege escallation using an event handler attached to an element not in the document
+MFSA 2007-20 Frame spoofing while window is loading
+MFSA 2007-19 XSS using addEventListener and setTimeout
+MFSA 2007-18 Crashes with evidence of memory corruption (rv:1.8.1.5)
+May 30, 2007
+MFSA 2007-17 XUL Popup Spoofing
+MFSA 2007-16 XSS using addEventListener
+MFSA 2007-15 Security Vulnerability in APOP Authentication
+MFSA 2007-14 Path Abuse in Cookies
+MFSA 2007-13 Persistent Autocomplete Denial of Service
+MFSA 2007-12 Crashes with evidence of memory corruption (rv:1.8.0.12/1.8.1.4)
+March 20, 2007
+MFSA 2007-11 FTP PASV port-scanning
+March 5, 2007
+MFSA 2007-10 Potential integer overflow with text/enhanced mail
+MFSA 2007-09 Privilege escalation by setting img.src to javascript: URI
+February 25, 2007
+MFSA 2007-08 onUnload + document.write() memory corruption
+February 23, 2007
+MFSA 2007-07 Embedded nulls in location.hostname confuse same-domain checks
+MFSA 2007-06 Mozilla Network Security Services (NSS) SSLv2 buffer overflows
+MFSA 2007-05 XSS and local file access by opening blocked popupsand local file access by opening blocked popups
+MFSA 2007-04 Spoofing using custom cursor and CSS3 hotspot
+MFSA 2007-03 Information disclosure through cache collisions
+MFSA 2007-02 Improvements to help protect against Cross-Site Scripting attacks
+MFSA 2007-01 Crashes with evidence of memory corruption (rv:1.8.0.10/1.8.1.2)
+December 19, 2006
+MFSA 2006-76 XSS using outer window's Function object
+MFSA 2006-75 RSS Feed-preview referrer leak
+MFSA 2006-74 Mail header processing heap overflows
+MFSA 2006-73 Mozilla SVG Processing Remote Code Execution
+MFSA 2006-72 XSS by setting img.src to javascript: URI
+MFSA 2006-71 LiveConnect crash finalizing JS objects
+MFSA 2006-70 Privilege escalation using watch point
+MFSA 2006-69 CSS cursor image buffer overflow (Windows only)
+MFSA 2006-68 Crashes with evidence of memory corruption (rv:1.8.0.9/1.8.1.1)
+November 7, 2006
+MFSA 2006-67 Running Script can be recompiled
+MFSA 2006-66 RSA Signature Forgery (variant)
+MFSA 2006-65 Crashes with evidence of memory corruption (rv:1.8.0.8)
+September 14, 2006
+MFSA 2006-64 Crashes with evidence of memory corruption (rv:1.8.0.7)
+MFSA 2006-63 JavaScript execution in mail via XBL
+MFSA 2006-62 Popup-blocker cross-site scripting (XSS)
+MFSA 2006-61 Frame spoofing using document.open()
+MFSA 2006-60 RSA Signature Forgery
+MFSA 2006-59 Concurrency-related vulnerability
+MFSA 2006-58 Auto-update compromise through DNS and SSL spoofing
+MFSA 2006-57 JavaScript Regular Expression Heap Corruption
+July 25, 2006
+MFSA 2006-56 chrome: scheme loading remote content
+MFSA 2006-55 Crashes with evidence of memory corruption (rv:1.8.0.5)
+MFSA 2006-54 XSS with XPCNativeWrapper(window).Function(...)
+MFSA 2006-53 UniversalBrowserRead privilege escalation
+MFSA 2006-52 PAC privilege escalation using Function.prototype.call
+MFSA 2006-51 Privilege escalation using named-functions and redefined "new Object()"
+MFSA 2006-50 JavaScript engine vulnerabilities
+MFSA 2006-49 Heap buffer overwrite on malformed VCard
+MFSA 2006-48 JavaScript new Function race condition
+MFSA 2006-47 Native DOM methods can be hijacked across domains
+MFSA 2006-46 Memory corruption with simultaneous events
+MFSA 2006-45 Javascript navigator Object Vulnerability
+MFSA 2006-44 Code execution through deleted frame reference
+June 1, 2006
+MFSA 2006-43 Privilege escalation using addSelectionListener
+MFSA 2006-42 Web site XSS using BOM on UTF-8 pages
+MFSA 2006-41 File stealing by changing input type (variant)
+MFSA 2006-40 Double-free on malformed VCard
+MFSA 2006-39 "View Image" local resource linking (Windows)
+MFSA 2006-38 Buffer overflow in crypto.signText()
+MFSA 2006-37 Remote compromise via content-defined setter on object prototypes
+MFSA 2006-36 PLUGINSPAGE privileged JavaScript execution II
+MFSA 2006-35 Privilege escalation through XUL persist.
+MFSA 2006-34 XSS viewing javascript: frames or images from context menu
+MFSA 2006-33 HTTP response smuggling
+MFSA 2006-32 Fixes for crashes with potential memory corruption (rv:1.8.0.4)
+MFSA 2006-31 EvalInSandbox escape (Proxy Autoconfig, Greasemonkey)
+May 2, 2006
+MFSA 2006-30 Deleted object reference when designMode="on"
+April 21, 2006
+MFSA 2006-27 Table Rebuilding Code Execution Vulnerability
+MFSA 2006-21 JavaScript execution in mail when forwarding in-line
+April 13, 2006
+MFSA 2006-29 Spoofing with translucent windows
+MFSA 2006-28 Security check of js_ValueToFunctionObject() can be circumvented
+MFSA 2006-26 Mail Multiple Information Disclosure
+MFSA 2006-25 Privilege escalation through Print Preview
+MFSA 2006-24 Privilege escalation using crypto.generateCRMFRequest
+MFSA 2006-23 File stealing by changing input type
+MFSA 2006-22 CSS Letter-Spacing Heap Overflow Vulnerability
+MFSA 2006-20 Crashes with evidence of memory corruption (rv:1.8.0.2)
+MFSA 2006-19 Cross-site scripting using .valueOf.call()
+MFSA 2006-18 Mozilla Firefox Tag Order Vulnerability
+MFSA 2006-17 cross-site scripting through window.controllers
+MFSA 2006-16 Accessing XBL compilation scope via valueOf.call()
+MFSA 2006-15 Privilege escalation using a JavaScript function's cloned parent
+MFSA 2006-14 Privilege escalation via XBL.method.eval
+MFSA 2006-13 Downloading executables with "Save Image As..."
+MFSA 2006-12 Secure-site spoof (requires security warning dialog)
+MFSA 2006-11 Crashes with evidence of memory corruption (rv:1.8)
+MFSA 2006-10 JavaScript garbage-collection hazard audit
+MFSA 2006-09 Cross-site JavaScript injection using event handlers
+February 1, 2006
+MFSA 2006-08 "AnyName" entrainment and access control hazard
+MFSA 2006-07 Read beyond buffer while parsing XML
+MFSA 2006-06 Integer overflows in E4X, SVG, and Canvas
+MFSA 2006-05 Localstore.rdf XML injection through XULDocument.persist()
+MFSA 2006-04 Memory corruption via QueryInterface on Location, Navigator objects
+MFSA 2006-03 Long document title causes startup denial of service
+MFSA 2006-02 Changing position:relative to static corrupts memory
+MFSA 2006-01 JavaScript garbage-collection hazards
+September 22, 2005
+MFSA 2005-59 Command-line handling on Linux allows shell execution
+MFSA 2005-58 Firefox 1.0.7 / Mozilla Suite 1.7.12 Vulnerability Fixes
+MFSA 2005-57 IDN heap overrun using soft-hyphens
+July 12, 2005
+MFSA 2005-56 Code execution through shared function objects
+MFSA 2005-55 XHTML node spoofing
+MFSA 2005-54 Javascript prompt origin spoofing
+MFSA 2005-53 Standalone applications can run arbitrary code through the browser
+MFSA 2005-52 Same origin violation: frame calling top.focus()
+MFSA 2005-51 The return of frame-injection spoofing
+MFSA 2005-50 Exploitable crash in InstallVersion.compareTo
+MFSA 2005-49 Script injection from Firefox sidebar panel using data:
+MFSA 2005-48 Same-origin violation with InstallTrigger callback
+MFSA 2005-47 Code execution via "Set as Wallpaper"
+MFSA 2005-46 XBL scripts ran even when Javascript disabled
+MFSA 2005-45 Content-generated event vulnerabilities
+May 11, 2005
+MFSA 2005-44 Privilege escalation via non-DOM property overrides
+MFSA 2005-43 "Wrapped" javascript: urls bypass security checks
+May 8, 2005
+MFSA 2005-42 Code execution via javascript: IconURL
+April 15, 2005
+MFSA 2005-41 Privilege escalation via DOM property overrides
+MFSA 2005-40 Missing Install object instance checks
+MFSA 2005-39 Arbitrary code execution from Firefox sidebar panel II
+MFSA 2005-38 Search plugin cross-site scripting
+MFSA 2005-37 Code execution through javascript: favicons
+MFSA 2005-36 Cross-site Scripting through global scope pollution
+MFSA 2005-35 Showing blocked javascript: popup uses wrong privilege context
+MFSA 2005-34 PLUGINSPAGE privileged javascript execution
+MFSA 2005-33 Javascript "lambda" replace exposes memory contents
+March 22, 2005
+MFSA 2005-32 Drag and drop loading of privileged XUL
+MFSA 2005-31 Arbitrary code execution from Firefox sidebar panel
+MFSA 2005-30 GIF heap overflow parsing Netscape extension 2
+February 24, 2005
+MFSA 2005-29 Internationalized Domain Name (IDN) homograph spoofing
+MFSA 2005-28 Unsafe /tmp/plugtmp directory exploitable to erase user's files
+MFSA 2005-27 Plugins can be used to load privileged content
+MFSA 2005-26 Cross-site scripting by dropping javascript: link on tab
+MFSA 2005-25 Image drag and drop executable spoofing
+MFSA 2005-24 HTTP auth prompt tab spoofing
+MFSA 2005-23 Download dialog source spoofing
+MFSA 2005-22 Download dialog spoofing using Content-Disposition header
+MFSA 2005-21 Overwrite arbitrary files downloading .lnk twice
+MFSA 2005-20 XSLT can include stylesheets from arbitrary hosts
+MFSA 2005-19 Autocomplete data leak
+MFSA 2005-18 Memory overwrite in string library
+MFSA 2005-17 Install source spoofing with user:pass@host
+MFSA 2005-16 Spoofing download and security dialogs with overlapping windows
+MFSA 2005-15 Heap overflow possible in UTF8 to Unicode conversion
+MFSA 2005-14 SSL "secure site" indicator spoofing
+MFSA 2005-13 Window Injection Spoofing
+January 21, 2005
+MFSA 2005-12 javascript: Livefeed bookmarks can steal cookies
+MFSA 2005-11 Mail responds to cookie requests
+MFSA 2005-10 javascript: links in Thunderbird launch Internet Explorer
+MFSA 2005-09 Browser responds to proxy auth request from non-proxy server (ssl/https)
+MFSA 2005-08 Synthetic middle-click event can steal clipboard contents
+MFSA 2005-07 Script-generated event can download without prompting
+MFSA 2005-06 Heap overrun handling malicious news: URL
+MFSA 2005-05 Input stealing from other tabs
+MFSA 2005-04 Secure site lock can be spoofed with view-source:
+MFSA 2005-03 Secure site lock can be spoofed with a binary download
+MFSA 2005-02 Opened attachments are temporarily saved world-readable
+MFSA 2005-01 Link opened in new tab can load a local file
+Company
+Leadership
+Press Center
+Careers
+Merch Store
+Contact
+Support
+Product Help
+File a Bug
+Localize Mozilla
+Security
+Developers
+Developer Edition
+Enterprise
+Tools
+MDN
+Firefox Release Notes
+Follow @Mozilla
+Bluesky (@mozilla.org)
+Instagram (@mozilla)
+LinkedIn (@mozilla)
+TikTok (@mozilla)
+Spotify (@mozilla)
+Follow @Firefox
+Bluesky (@firefox.com)
+Instagram (@firefox)
+YouTube (@firefoxchannel)
+TikTok (@firefox)
+Donate
+All languages
+Language
+English (Canadian)
+English (British)
+English
+Donate to the not-for-profit Mozilla Foundation.
+Portions of this content are ©1998–2026 by individual mozilla.org contributors. Content available under a Creative Commons license.
+Website Privacy Notice
+Cookies
+Legal
+Community Participation Guidelines
+About this site

@@ -1,0 +1,240 @@
+url: https://www.cloudflare.com/transparency/
+method: fetch
+saved: 2026-11-19
+
+Cloudflare Transparency Report | Cloudflare
+Log in
+Sign up
+Languages
+English
+English (United Kingdom)
+Deutsch
+Español (Latinoamérica)
+Español (España)
+Français
+Italiano
+日本語
+한국어
+Polski
+Português (Brasil)
+Русский
+繁體中文
+简体中文
+Platform
+Connectivity cloudCloudflare’s connectivity cloud delivers 60+ networking, security, and performance services.
+EnterpriseFor large and medium organizations
+Small businessFor small organizations
+PartnerBecome a Cloudflare partner
+use cases
+Modernize applications
+Accelerate performance
+Ensure app availability
+Optimize web experience
+Modernize security
+VPN replacement
+Phishing protection
+Secure web apps and APIs
+Modernize networks
+Coffee shop networking
+WAN modernization
+Network protection
+CxO topics
+Adopt AIBring AI into workforces and digital experiences
+AI securitySecure agentic AI and GenAI applications
+Data complianceStreamline compliance and minimize risk
+Post-quantum cryptographySafeguard data and meet compliance standards
+Industries
+Healthcare
+Financial services
+Retail
+Gaming
+Public sector
+Resources
+Product guides
+Reference architectures
+Analyst reports
+Engage
+Events
+Demos
+Webinars
+Workshops
+Request a demo
+Products
+products
+SASE (Cloudflare One)
+Zero trust network access
+Secure web gateway
+Network-as-a-service / SD-WAN
+Email security
+Application security
+L7 DDoS protection
+Web application firewall
+API security
+Bot management
+Application performance
+CDN
+DNS
+Smart routing
+Load balancing
+Networking
+L3/4 DDoS protection
+Firewall-as-a-service
+Network Interconnect
+Smart routing
+plans & pricing
+Enterprise plans
+Small business plans
+Individual plans
+Compare plans
+Domain registrationBuy and manage domains
+1.1.1.1Free DNS resolver
+Resources
+Product guides
+Reference architectures
+Analyst reports
+Product demos and tours
+Global servicesExpert-led success
+Help me choose
+Developers
+documentation
+Developer libraryDocumentation and guides
+Application demosExplore what you can build
+TutorialsStep-by-step build tutorials
+Reference architectureDiagrams and design patterns
+Products
+Artificial Intelligence
+AI GatewayObserve, control AI apps
+Workers AIRun ML models on our network
+Compute
+ObservabilityLogs, metrics, and traces
+WorkersBuild, deploy serverless apps
+Media
+ImagesTransform, optimize images
+RealtimeBuild real-time audio/video apps
+Storage & database
+D1Create serverless SQL databases
+R2Store data without costly egress fees
+Plans & Pricing
+WorkersBuild and deploy serverless apps
+Workers KVServerless key-value store for apps
+R2Store data without costly egrees fees
+Explore projectsCustomer stories
+AI Demo in 30 secondsQuick guide to get started
+Explore Workers PlaygroundBuild, test, and deploy
+Developers DiscordJoin the community
+Start building
+Partners
+Partner NetworkGrow, innovate and meet customer needs with Cloudflare
+Partner PortalFind resources and register deals
+Partnership Types
+PowerUP ProgramGrow your business while keeping your customers connected and secure
+Technology PartnersExplore our ecosystem of technology partners and integrators
+Global System IntegratorsSupport seamless large-scale digital transformation
+Service ProvidersDiscover our network of valued service providers
+Self-serve agency programManage Self-Serve Accounts for your clients
+Peer-to-peer portalTraffic insights for your network
+Find a partnerPowerUP your business - connect with Cloudflare Powered+ partners.
+Resources
+Engage
+Demos + product toursOn-demand product demos
+Case studiesDriving success with Cloudflare
+WebinarsInsightful discussions
+Test DriveLive virtual workshops
+LibraryHelpful guides, roadmaps, and more
+ReportsInsights from Cloudflare’s research
+BlogTechnical deep dives and product news
+Learning centerEducational tools and how-to content
+Build
+Reference architectureTechnical guides
+Solution + product guidesProduct documentation
+DocumentationDeveloper documentation
+Explore
+theNETExecutive insights for the digital enterprise
+Cloudflare TVInnovative series and events
+Cloudforce OneThreat research and operations
+RadarInternet traffic and security trends
+Analyst reportsIndustry research reports
+EventsUpcoming regional events
+Trust, privacy, and complianceCompliance information and policies
+Support
+Contact us
+Community forum
+Lost account access?
+Developers Discord
+Get help
+Company
+Company info
+LeadershipMeet our leaders
+Investor relationsInvestor information
+PressExplore recent news
+CareersExplore open roles
+Trust, Privacy, & Safety
+PrivacyPolicy, data, and protection
+TrustPolicy, process, and safety
+ComplianceCertification and regulation
+TransparencyPolicy and disclosures
+Public Interest
+HumanitarianProject Galileo
+GovernmentAthenian Project
+ElectionsCloudflare For Campaigns
+HealthProject Fair Shot
+Global networkGlobal locations and status
+Log inContact sales
+Transparency Reports
+Latest
+Archives
+Cloudflare Transparency Report - H2 2025
+An essential part of earning and maintaining the trust of our customers is being transparent about the requests we receive from governments, courts, and private parties around the world. To this end, Cloudflare publishes semi-annual updates to our Transparency Report on requests to disclose customer information or to take action against content on websites using our services.
+Legal requests for information reportAbuse processes report
+DSA template (xlsx)
+Some things we have never done
+Cloudflare has never turned over our encryption or authentication keys or our customers' encryption or authentication keys to anyone.
+Cloudflare has never installed any law enforcement software or equipment anywhere on our network.
+Cloudflare has never provided any law enforcement organization a feed of our customers' content transiting our network.
+Cloudflare has never modified customer content at the request of law enforcement or another third party.
+Cloudflare has never modified the intended destination of DNS responses at the request of law enforcement or another third party.
+Cloudflare has never weakened, compromised, or subverted any of its encryption at the request of law enforcement or another third party.
+If Cloudflare were asked to do any of these, we would exhaust all legal remedies, in order to protect our customers from what we believe are illegal or unconstitutional requests.
+Accurate as of November 19, 2026
+Background on the data
+The data above covers the period from July 1, 2025 to December 31, 2025 . For data covering prior periods, see previous reports available under the Archives tab. For more information about how Cloudflare approaches the issues addressed in these reports, see the Trust & Safety section of Cloudflare’s Trust Hub.
+You can subscribe to updates on our Transparency Report using an RSS Feed.
+GETTING STARTED
+Free plans
+Small business plans
+For enterprises
+Get a recommendation
+Request a demo
+Contact sales
+SOLUTIONS
+Connectivity cloud
+Application services
+SASE and workspace security
+Network services
+Developer platform
+SUPPORT
+Help center
+Customer support
+Community forum
+Developers Discord
+Lost account access?
+Cloudflare status
+COMPLIANCE
+Compliance resources
+Trust
+GDPR
+Responsible AI
+Transparency report
+Report abuse
+PUBLIC INTEREST
+Project Galileo
+Athenian Project
+Cloudflare for Campaigns
+Project Fairshot
+COMPANY
+About Cloudflare
+Network map
+Our team
+Logos & press kit
+Impact
+© 2026 Cloudflare, Inc.Privacy PolicyTerms of UseReport Security Issues Cookie Preferences Trademark

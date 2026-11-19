@@ -1,0 +1,56 @@
+url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46701550179995-What-Payment-Methods-Do-You-Accept
+method: fetch
+saved: 2026-11-19
+
+What Payment Methods Do You Accept? – Private Internet Access Support
+PIA Support Portal
+Private Internet Access
+|
+Submit a request
+Private Internet Access Support
+Billing Management
+Payment-related FAQs
+Articles in this section
+Can I change my payment method?
+Can I Remove the Payment Details from My Account?
+How can I change the credit card details on my account?
+How Do I Find My Transaction ID?
+How Do I Redeem a Gift Card Code for My Subscription?
+How to Change Payment Method within CCP
+What Payment Methods Do You Accept?
+Where can I find receipts for previous payments?
+Why Did My Payment Fail?
+Why is there an additional "pre-authorization" charge of $1 on my credit card statement?
+What Payment Methods Do You Accept?
+August 31, 2026 15:36
+Private Internet Access (PIA) accepts various payment methods subject to automatic renewal according to the subscription terms you choose (e.g., monthly, yearly, etc.).
+You may purchase a subscription via our website here, through Google Play on Android, or through the App Store on iOS.
+Recurring Payment Methods
+If you're interested in a recurring subscription (automatically drafted payments), you can use the following payment options:
+Credit card (Visa, Mastercard, American Express, and Discover)
+Apple Pay
+Google Pay
+PayPal
+Amazon Pay (specific locations only)
+Non-Recurring Payment Methods
+If you're interested in a one-time purchase, you can use the following payment options:
+Digital wallets such as iDEAL and Qiwi (via Paymentwall)
+Gift cards
+Prepaid Visa or Mastercard
+Non-recurring subscriptions can only renew through a special link sent via email. If you take no action, the account terminates automatically at the end of the 11-day grace period following the due date.
+If you experience any issues or have questions, please contact our support team.
+Important: If you are experiencing issues with prepaid cards, you need to make sure the prepaid card is registered with the card issuer and that the billing address you enter at checkout matches that registration exactly.
+Was this article helpful?
+Yes
+No
+Have more questions? Submit a request
+Return to top
+Related articles
+Understanding Advanced Settings on the Desktop PIA Client
+Create and Send a PIA VPN Debug Log
+How Do I Enable and Use Two-Factor Authentication?
+Purchase a PIA VPN Subscription Through the iOS App Store
+How Do I Retrieve My Username?
+Terms of Service
+Privacy and Cookie Policy
+Copyright © PIA Private Internet Access, Inc. All Rights Reserved.

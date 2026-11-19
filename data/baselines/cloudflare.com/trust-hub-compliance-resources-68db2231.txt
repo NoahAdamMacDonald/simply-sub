@@ -1,0 +1,391 @@
+url: https://www.cloudflare.com/trust-hub/compliance-resources/
+method: browser
+saved: 2026-11-19
+
+Sign up
+Sales: +1 226-705-2945
+Platform
+Connectivity cloud
+Cloudflare’s connectivity cloud delivers 60+ networking, security, and performance services.
+Enterprise
+For large and medium organizations
+Small business
+For small organizations
+Partner
+Become a Cloudflare partner
+USE CASES
+Modernize applications
+Accelerate performance
+Ensure app availability
+Optimize web experience
+Modernize security
+VPN replacement
+Phishing protection
+Secure web apps and APIs
+Modernize networks
+Coffee shop networking
+WAN modernization
+Network protection
+CXO TOPICS
+Adopt AI
+Bring AI into workforces and digital experiences
+AI security
+Secure agentic AI and GenAI applications
+Data compliance
+Streamline compliance and minimize risk
+Post-quantum cryptography
+Safeguard data and meet compliance standards
+Industries
+Healthcare
+Financial services
+Retail
+Gaming
+Public sector
+Resources
+Product guides
+Reference architectures
+Analyst reports
+Engage
+Events
+Demos
+Webinars
+Workshops
+Request a demo
+Products
+PRODUCTS
+SASE (Cloudflare One)
+Zero trust network access
+Secure web gateway
+Network-as-a-service / SD-WAN
+Email security
+Application security
+L7 DDoS protection
+Web application firewall
+API security
+Bot management
+Application performance
+CDN
+DNS
+Smart routing
+Load balancing
+Networking
+L3/4 DDoS protection
+Firewall-as-a-service
+Network Interconnect
+Smart routing
+PLANS & PRICING
+Enterprise plans
+Small business plans
+Individual plans
+Compare plans
+Domain registration
+Buy and manage domains
+1.1.1.1
+Free DNS resolver
+Resources
+Product guides
+Reference architectures
+Analyst reports
+Product demos and tours
+Global services
+Expert-led success
+Help me choose
+Developers
+DOCUMENTATION
+Developer library
+Documentation and guides
+Application demos
+Explore what you can build
+Tutorials
+Step-by-step build tutorials
+Reference architecture
+Diagrams and design patterns
+PRODUCTS
+Artificial Intelligence
+AI Gateway
+Observe, control AI apps
+Workers AI
+Run ML models on our network
+Compute
+Observability
+Logs, metrics, and traces
+Workers
+Build, deploy serverless apps
+Media
+Images
+Transform, optimize images
+Realtime
+Build real-time audio/video apps
+Storage & database
+D1
+Create serverless SQL databases
+R2
+Store data without costly egress fees
+PLANS & PRICING
+Workers
+Build and deploy serverless apps
+Workers KV
+Serverless key-value store for apps
+R2
+Store data without costly egrees fees
+Explore projects
+Customer stories
+AI Demo in 30 seconds
+Quick guide to get started
+Explore Workers Playground
+Build, test, and deploy
+Developers Discord
+Join the community
+Start building
+Partners
+Partner Network
+Grow, innovate and meet customer needs with Cloudflare
+Partner Portal
+Find resources and register deals
+PARTNERSHIP TYPES
+PowerUP Program
+Grow your business while keeping your customers connected and secure
+Technology Partners
+Explore our ecosystem of technology partners and integrators
+Global System Integrators
+Support seamless large-scale digital transformation
+Service Providers
+Discover our network of valued service providers
+Self-serve agency program
+Manage Self-Serve Accounts for your clients
+Peer-to-peer portal
+Traffic insights for your network
+Find a partner
+PowerUP your business - connect with Cloudflare Powered+ partners.
+Resources
+ENGAGE
+Demos + product tours
+On-demand product demos
+Case studies
+Driving success with Cloudflare
+Webinars
+Insightful discussions
+Test Drive
+Live virtual workshops
+Library
+Helpful guides, roadmaps, and more
+Reports
+Insights from Cloudflare’s research
+Blog
+Technical deep dives and product news
+Learning center
+Educational tools and how-to content
+BUILD
+Reference architecture
+Technical guides
+Solution + product guides
+Product documentation
+Documentation
+Developer documentation
+EXPLORE
+theNET
+Executive insights for the digital enterprise
+Cloudflare TV
+Innovative series and events
+Cloudforce One
+Threat research and operations
+Radar
+Internet traffic and security trends
+Analyst reports
+Industry research reports
+Events
+Upcoming regional events
+Trust, privacy, and compliance
+Compliance information and policies
+Support
+Contact us
+Community forum
+Lost account access?
+Developers Discord
+Get help
+Company
+COMPANY INFO
+Leadership
+Meet our leaders
+Investor relations
+Investor information
+Press
+Explore recent news
+Careers
+Explore open roles
+TRUST, PRIVACY, & SAFETY
+Privacy
+Policy, data, and protection
+Trust
+Policy, process, and safety
+Compliance
+Certification and regulation
+Transparency
+Policy and disclosures
+PUBLIC INTEREST
+Humanitarian
+Project Galileo
+Government
+Athenian Project
+Elections
+Cloudflare For Campaigns
+Health
+Project Fair Shot
+Global network
+Global locations and status
+Log in
+Contact sales
+Trust Hub
+Privacy & data protection
+Responsible AI
+Compliance resources
+Technologies
+Trust & Safety
+Certifications and compliance resources
+Learn about Cloudflare’s adherence to industry-standard security compliance certifications and regulations that help us preserve security and privacy.
+Cloudflare was built to help you and your customers be more secure on the Internet. Access Cloudflare’s compliance documentation through the dashboard.
+Download from dashboard
+Get instructions
+Certifications and Reports
+ISO 27001:2022
+Implementation of an Information Security Management System (ISMS) and security risk management processes certification.
+Learn more
+ISO 27701:2019
+Implementation of a comprehensive Privacy Information Management system (PIMS) certification.
+Learn more
+ISO 27018:2019
+Extension of an ISMS to protect personal data when being processed in the cloud; privacy certification.
+Learn more
+ISO 27017:2015
+ISO 27017 provides specialized guidelines for information security controls applicable to the provision and use of cloud services.
+Learn more
+FedRAMP High
+Federal Risk and Authorization Management Program.
+Learn more
+GovRAMP
+Government Risk and Authorization Management Program.
+Learn more
+SOC 2 Type II
+Certification to attest to Security, Confidentiality, and Availability controls in place in accordance to the AICPA Trust Service Criteria.
+Learn more
+PCI DSS 4.0
+Payment Card Industry Data Security Standard Attestation of Compliance.
+Learn more
+Global CBPR
+The Global Cross-Border Privacy Rules (Global CBPR) system. Certified organizations are listed here.
+Learn more
+Global PRP
+The Global Privacy Recognition for Processors (Global PRP) system. Certified organizations are listed here.
+Learn more
+EU Cloud Code of Conduct
+The EU Cloud Code of Conduct is an officially approved GDPR Article 40 Code of Conduct. Read the report here
+Learn more
+Cyber Essentials
+Cloudflare’s certificate can be found here.
+Learn more
+C5:2020
+Cloud Computing Compliance Criteria Catalogue (C5:2020) is an auditing standard created by Germany's Federal Office for Information Security (BSI).
+Learn more
+ENS
+Spain National Security framework - Esquema Nacional de Seguridad.
+Learn more
+IRAP
+Information Security Registered Assessors Program, Cloudflare for Government-Australia.
+Learn more
+ISMAP
+Information System Security Management and Assessment Program, Cloudflare for Government-Japan.
+Learn more
+HIPAA
+The Health Insurance Portability and Accountability Act (HIPAA) sets the standard for protecting sensitive patient data.
+Contact your account team to request the HIPAA AoC.
+Learn more
+BSI Qualification
+Cloudflare has been recognized by the German government's Federal Office for Information Security as a qualified provider of DDoS mitigation services. Download this qualification to learn more.
+Learn more
+ProcessUnity Global Risk Exchange
+Cloudflare has completed the Global Risk Exchange assessment. Customers can request to access the risk assessment here.
+CSA STAR
+Cloud Security Alliance’s Security, Trust, Assurance, and Risk Program validates and assesses Cloudflare’s security and compliance as a Cloud Service Provider. Customers can view Cloudflare’s listing here.
+1.1.1.1 Public DNS Resolver Privacy Examination
+Cloudflare conducted a first-of-its-kind privacy examination by a Big Four accounting firm to determine whether the 1.1.1.1 resolver was effectively configured to meet Cloudflare’s privacy commitments. See below for more information.
+Read report
+WCAG 2.1 AA and Section 508
+Cloudflare's dashboard completes Voluntary Product Accessibility Template (VPAT) in compliance with international standards set forth by the Web Content Accessibility Guidelines (WCAG) 2.1 AA and in conformance with legal standards set forth by Section 508 of the Rehabilitation Act.
+Contact your account team to request the VPAT.
+Korea ISMS
+Cloudflare holds South Korea's Information Security Management System (ISMS) certification, issued under the ISMS-P scheme administered by the Korea Internet & Security Agency (KISA).
+Learn more
+Data Protection Regulations
+Japan's Act on the Protection of Personal Information (APPI)
+Australia's Privacy Act
+Brazil’s General Data Protection Law (LGPD)
+India's Digital Personal Data Protection Bill (DPDP)
+General Data Protection Regulations (GDPR)
+Singapore's Personal Protection Act (PDPA)
+South Korea's Personal Information Protection Act (PIPA)
+United States Privacy Laws
+Financial Services
+EU Digital Operational Resilience Act (DORA)
+UK Operational Resilience
+Australian Prudential Regulation Authority
+Critical Infrastructure
+EU Network and Information Security Directive 2.0 (NIS 2)
+Resources
+Data confidentiality and availability
+Cloudflare encrypts data by default using the latest protocols, and offers granular control over where encryption keys are stored and where logs are sent.
+Learn More
+Encryption
+Cloudflare’s network can encrypt data throughout its journey from origin servers to end-users, using the very latest protocols.
+Learn More
+Data localization
+In many regions — including the EU — Cloudflare lets organizations control which regional data centers their traffic is inspected in and where logs are sent.
+Learn More
+Streamline data compliance
+A composable platform that helps enterprises streamline compliance with extensible security controls across systems that help you connect, protect and build.
+Learn More
+Protect and accelerate your websites, apps, and teams.
+Sign Up
+GETTING STARTED
+Free plans
+Small business plans
+For enterprises
+Get a recommendation
+Request a demo
+Contact sales
+SOLUTIONS
+Connectivity cloud
+Application services
+SASE and workspace security
+Network services
+Developer platform
+SUPPORT
+Help center
+Customer support
+Community forum
+Developers Discord
+Lost account access?
+Cloudflare status
+COMPLIANCE
+Compliance resources
+Trust
+GDPR
+Responsible AI
+Transparency report
+Report abuse
+PUBLIC INTEREST
+Project Galileo
+Athenian Project
+Cloudflare for Campaigns
+Project Fairshot
+COMPANY
+About Cloudflare
+Network map
+Our team
+Logos & press kit
+Impact
+© 2026 Cloudflare, Inc.
+Privacy Policy
+Terms of Use
+Report Security Issues
+Cookie Preferences
+Trademark

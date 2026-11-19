@@ -1,0 +1,91 @@
+url: https://www.tunnelbear.com/blog/tunnelbear-completes-8th-annual-independent-security-audit/
+method: fetch
+saved: 2026-11-19
+
+TunnelBear Completes 8th Annual Independent Security Audit
+Blog
+Plans
+What is VPN?
+Download
+Help
+Log in
+My Account
+Get TunnelBear
+security
+TunnelBear Completes 8th Annual Independent Security Audit
+Obi-Wan KenoBear
+24 November 2025
+Eight years ago, we made a promise to our users; you shouldn’t have to blindly trust your VPN. Every year since, we’ve backed that promise with a full, independent security audit - covering our apps, infrastructure, and services from maw to paw.
+A lot can change in eight years. Our apps have grown, our tunnels have multiplied, and the internet itself has evolved in many unexpected ways. But one thing hasn’t changed - our commitment to earning your trust through transparency.
+A VPN’s job is to keep your online activity and data private and secure. That responsibility can’t be verified with words alone. It requires independent testing, and accountability. Security audits help us find vulnerabilities before they can be exploited and gives a clear, honest picture of how seriously we take protection.
+So every year, we hand our code and systems over to outside experts and ask them to dig deep, poke hard, and share what they find with us.
+While it took us some time to get this post out, we’re proud to share that TunnelBear completed its 8th annual security audit in 2024.
+Scope and results
+Our 2024 audit consisted of 44 working days throughout the months of October and November, involving 8 senior auditors and researchers working directly with the TunnelBear development team to inspect and address findings.
+As always, Cure53 performed a white-box assessment - meaning they had full access to our source code, configurations, and internal documentation. This isn’t a surface-level scan. It’s an in-depth inspection by people who specialize in finding weaknesses, specifically in our:
+TunnelBear applications
+Backend systems and server configurations
+Public-facing APIs and network entry points
+Data handling and encryption layers
+During the 2024 audit, Cure53 found a total 10 vulnerabilities of medium severity or higher, and 3 vulnerabilities of low severity. An additional 10 minor improvements were shared - areas where we could harden our security but aren't necessarily at-risk vulnerabilities (such as detecting jailbroken devices or limiting support for older OS versions).
+We're happy to share that these vulnerabilities have been acknowledged, addressed, or mitigated.
+Security is never done
+A security audit isn’t a finish line. It’s merely a snapshot in an ongoing story. Each year, we take the findings - however small - and use them to make under-the-fur improvements in which we harden our systems, processes, and overall approach to security. Improvements such as:
+Streamlined internal monitoring and alerting for infrastructure changes
+Updated cryptographic libraries across all platforms
+Expanded automated testing to catch regressions before deployment
+Further separation of service components to minimize attack surface
+...and more
+Consider this our commitment that we’ll keep going. Our approach to privacy and security isn't going anywhere. Like honey, it's super sticky (and delicious).
+What's next?
+We're happy to share that we've already completed 2025's audit (our 9th year in a row!) and are working on reviewing and addressing the findings.
+The effort doesn't just start and stop there. We've been working with our own internal Infosec team this past year to further improve the systems we rely on to run our service. These efforts, alongside our annual audits, are an ongoing focus in 2026 as we look to further make TunnelBear one of the most secure VPNs around.
+We have more exciting changes coming to TunnelBear soon that we can't wait to share, and appreciate you all for sticking around through 8 years of transparent security audits.
+Commence tunneling,
+You Might Also Like
+security
+Harvest Now, Decrypt Later: The Internet’s Next Big Privacy Threat
+Engibear
+security
+Newly identified VPN vulnerability, TunnelVision
+Obi-Wan KenoBear
+security
+TunnelBear Completes 7th Annual Independent Security Audit
+Obi-Wan KenoBear
+security
+TunnelBear Completes 6th Annual Independent Security Audit
+Obi-Wan KenoBear
+anti-censorship
+Introducing Encrypted Client Hello (ECH)
+Obi-Wan KenoBear
+security
+TunnelBear Completes 5th Annual Independent Security Audit
+Obi-Wan KenoBear
+TunnelBear
+Why VPN?
+Download
+Features
+Pricing
+TunnelBear for Teams
+Help
+My Account
+Apps
+Mac
+Windows
+iPhone & iPad
+Android
+Browser
+Blocker
+Company
+Blog
+About Us
+Jobs
+Affiliate
+Internet Freedom Hub
+Privacy Policy
+Terms of Service
+Follow Us
+Get the Bear Essentials
+TunnelBear
+© TunnelBear LLC.
+Grizzly regards from Toronto, Canada

@@ -1,0 +1,43 @@
+url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46610823773851-How-many-devices-can-I-use-simultaneously-while-connected-to-the-VPN-service
+method: fetch
+saved: 2026-11-19
+
+How many devices can I use simultaneously while connected to the VPN service? – Private Internet Access Support
+PIA Support Portal
+Private Internet Access
+|
+Submit a request
+Private Internet Access Support
+Frequently Asked Questions
+Articles in this section
+What Server Locations Are Available in the PIA App?
+How Do I Know If My VPN Is Working?
+What Are the Most Common Reasons for VPN Connection Issues?
+What Operating Systems Are Supported?
+Where Can I Find the Most Recent Update of the PIA App?
+What Are Virtual Server Locations?
+How to Set Up and Use PIA Antivirus
+What Is Identity Guard?
+Streaming with Private Internet Access
+Can I Remote Access My Home Server/Computer While Using a VPN?
+See more
+How many devices can I use simultaneously while connected to the VPN service?
+April 21, 2026 04:40
+Private Internet Access (PIA) allows an unlimited number of simultaneous connections on a single subscription.
+You can use the service on any combination of routers, computers, and mobile devices. The service can be installed on multiple devices simultaneously.
+For home networks with many connected devices, a router-based configuration may be beneficial. This allows all devices connected to the router to share a single VPN connection, which can help reduce the number of active connections used across devices.
+For more information, refer to the router setup guides.
+Was this article helpful?
+Yes
+No
+Have more questions? Submit a request
+Return to top
+Related articles
+Can I Use the Private Internet Access Service with My Router?
+Streaming with Private Internet Access
+Can I Remote Access My Home Server/Computer While Using a VPN?
+Location-Aware Browsing
+Trouble Connecting or the Connection Drops Frequently
+Terms of Service
+Privacy and Cookie Policy
+Copyright © PIA Private Internet Access, Inc. All Rights Reserved.

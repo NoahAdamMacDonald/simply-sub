@@ -1,0 +1,78 @@
+url: https://developers.cloudflare.com/warp-client/privacy/
+method: fetch
+saved: 2026-11-19
+
+Privacy · Cloudflare WARP client docs Skip to content Documentation Index
+Fetch the complete documentation index at: https://developers.cloudflare.com/warp-client/llms.txt
+Use this file to discover all available pages before exploring further.
+Docs DirectoryAPISDKsChangelog
+SearchCtrlK
+Log inDashboard
+Home
+/WARP Client
+/Privacy
+Privacy
+Last updated Apr 17, 2026| Copy as Markdown | View as Markdown| Agent setup Overview What does Cloudflare do with your data? How Cloudflare Uses User Data: Registration ID Data Transferred Average Speed Aggregate Usage
+The WARP Client application uses a VPN profile and/or service that enables us to intercept and secure your DNS queries and to transmit data from your device through the Cloudflare network, depending on the services you have enabled. We only collect limited DNS query and traffic data (excluding payload) that is sent to our network when you have the app enabled on your device. All information is handled in accordance with our Privacy Policy ↗︎.
+What does Cloudflare do with your data?
+When not part of a Cloudflare for Teams organization, Cloudflare stores the absolute minimum amount of data we believe is required to provide the service. We will not sell, rent, share or otherwise disclose your personal information to anyone except as necessary to provide our services or as otherwise described in our Privacy Policy without first providing you with notice and the opportunity to consent. We do not use the data to identify who you are or what you are doing on the Internet beyond the exceptions below. We do not store any data except as set forth in our Privacy Policy. Such data may include: your app installation ID, the amount of data transferred through Cloudflare's network, and your average speed when you are using the WARP Client application.
+How Cloudflare Uses User Data:
+Registration ID
+Cloudflare uses a random identifier generated when you install the app to give you referral bonuses for referring the app to others.
+Data Transferred
+Cloudflare tracks the amount of data your WARP installation has transferred to keep track of your WARP+ usage. When you refer friends to WARP, this quota is increased.
+Average Speed
+Cloudflare uses this data to understand how much faster the WARP Client application is making your Internet connection. Knowing this information helps us improve the application in your region and on your mobile carrier or Internet provider.
+Aggregate Usage
+Cloudflare tracks the aggregate amount of traffic by website and by region. Knowing this information helps Cloudflare plan better when we should build future data centers.
+PreviousWindowsNextFAQ Was this helpful?
+Yes No
+Edit page Report issue
+On this page
+Overview
+What does Cloudflare do with your data?
+How Cloudflare Uses User Data:
+Registration ID
+Data Transferred
+Average Speed
+Aggregate Usage
+Edit page Report issue
+WARP Client
+/
+Overview
+WARP modes
+Get started Overview
+Android
+iOS
+Linux
+macOS
+Windows
+Privacy
+FAQ
+Legal
+Agent resources Agent setup ↗︎
+Cloudflare Skills ↗︎
+Code Mode MCP Server ↗︎
+Domain-specific MCP Servers ↗︎MCP
+WARP Client llms.txt ↗︎
+WARP Client llms-full.txt ↗︎
+Cloudflare Docs llms.txt ↗︎
+Cloudflare Docs llms-full.txt ↗︎
+Getting started
+PlansContact salesPartnersFind a partnerStartupsUnder attack?Domain name search
+Company
+AboutCareersInvestorsPressPress kitGlobal network
+Public interest
+Project GalileoAthenian ProjectCloudflare for CampaignsProject FairshotImpact/ESG
+Compliance
+Compliance resourcesTrust HubData ProtectionResponsible AITransparency reportReport abuse
+Resources
+App innovation reportCloudflare RadarCase studiesStatusSupportEventsBlog
+Developers
+DocumentationLearning centerCommunity
+Solutions
+SSE and SASE platformCloudflare AI CloudAI SecurityFrontend Development PlatformMulti-Tenant Platform DevelopmentWeb Security Platform
+Start Building Log In
+© 2026 Cloudflare, Inc. Privacy policy| Report security issues| Terms of use| Trademark
+| Your privacy choices
+Docs

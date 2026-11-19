@@ -1,0 +1,505 @@
+url: https://apps.apple.com/au/app/1-1-1-1-faster-internet/id1423538627
+method: fetch
+saved: 2026-11-19
+
+‎1.1.1.1: Faster Internet App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+1.1.1.1: Faster Internet
+A More Private Internet
+Free · In-App Purchases
+Share
+4.5K Ratings
+4.5
+Age Rating
+16+ Years
+Chart
+No. 136 Utilities
+Developer
+Cloudflare
+Language
+EN + 17 More
+Size
+77.6 MB
+iPhone, iPad
+1.1.1.1 w/ WARP – the free app that makes your Internet more private.
+1.1.1.1 w/ WARP makes your Internet more private and safer. No one should be able to snoop on what you do on the Internet. We’ve created 1.1.1.1 so that you can connect to the Internet securely anytime, anywhere.
+• A better way to connect
+1.1.1.1 with WARP replaces the connection between your phone and the Internet with a modern, optimized, protocol.
+• Greater privacy
+1.1.1.1 with WARP prevents anyone from snooping on you by encrypting more of the traffic leaving your phone. We believe privacy is a right. We won't sell your data.
+• Better security
+1.1.1.1 with WARP protects your phone from security threats like malware, phishing, crypto-mining and other security threats when you enable 1.1.1.1 for Families option from the DNS settings inside the app.
+• Easy to use
+One-touch setup to make your Internet more safe and private. Install it today, get a more private Internet, it’s that simple.
+• The only way to get WARP+
+In addition to the full WARP service, WARP+ subscribers get access to a larger network. More cities to connect to means you’re likely to be closer to a Cloudflare data center – which can reduce the latency between your device and Cloudflare and improve your browsing speed.
+---
+Subscription Information for WARP+
+• 1.1.1.1 with WARP is free, but WARP+ is a paid feature which can be enabled at any time.
+• You can get free WARP+ data by sharing 1.1.1.1 with friends.
+• Subscribe on a monthly basis to receive unlimited WARP+ data for the duration of the subscription.
+• Your subscription will automatically renew for the same package length at the same price until you cancel in settings in the iTunes Store at least 24 hours prior to the end of the current period.
+• Any unused portion of a free trial period and/or WARP+ data transfer credits, if offered, will be forfeited when you purchase a subscription, where applicable.
+Privacy Policy: https://www.cloudflare.com/application/privacypolicy/
+Terms of Service: https://www.cloudflare.com/application/terms/
+more
+Ratings & Reviews
+4.5
+out of 5
+4.5K Ratings
+Nice App
+06/02/2019 Xclusief
+Works as advertised and have not experienced any of the negatives mentioned in some comments.The app configures a VPN profile on your device and allows you to toggle the connection off and on. Once the profile is configured the app can be closed completely since the profile is configured in your settings it will always be on, until you disconnect manually or switch off with the app.
+Nice App
+06/02/2019 Xclusief
+Works as advertised and have not experienced any of the negatives mentioned in some comments.The app configures a VPN profile on your device and allows you to toggle the connection off and on. Once the profile is configured the app can be closed completely since the profile is configured in your settings it will always be on, until you disconnect manually or switch off with the app.
+Good, but has issues…
+06/11/2023 BadVPN🤮🤬😭
+This VPN works as advertised: it speeds up connection time, it’s free to use, and is simple to use. BUT, however this VPN has it’s drawbacks. Occasionally, while using this VPN, it hinders rather than helps with the device’s connectivity, slowing or even stopping connections altogether. I have noticed this more frequently, as of late, with the VPN simply failing to do anything useful no matter what I try to do with my wi-fi router and device settings. Otherwise, when it works, a great VPN. I recommend it, but keep in mind that it won’t work all the time.
+Good, but has issues…
+06/11/2023 BadVPN🤮🤬😭
+This VPN works as advertised: it speeds up connection time, it’s free to use, and is simple to use. BUT, however this VPN has it’s drawbacks. Occasionally, while using this VPN, it hinders rather than helps with the device’s connectivity, slowing or even stopping connections altogether. I have noticed this more frequently, as of late, with the VPN simply failing to do anything useful no matter what I try to do with my wi-fi router and device settings. Otherwise, when it works, a great VPN. I recommend it, but keep in mind that it won’t work all the time.
+Not working iOS 13
+22/09/2019 Red-71
+Love this app. But after upgrading to iOS 13 it is causing me all sorts of network issues. Browsing is really slow, App Store won’t connect etc etc.Had to disable it and now networks (WiFi and cellular) are working again. iOS 13 is full of problems but I am really looking forward to 1.1.1.1 working again. When it’s working it’s great.
+Not working iOS 13
+22/09/2019 Red-71
+Love this app. But after upgrading to iOS 13 it is causing me all sorts of network issues. Browsing is really slow, App Store won’t connect etc etc.Had to disable it and now networks (WiFi and cellular) are working again. iOS 13 is full of problems but I am really looking forward to 1.1.1.1 working again. When it’s working it’s great.
+Great app. Issues with ios13.1
+30/09/2019 K0WMaN
+Love this app! Having the same problem as others on iOS13.1 - Internet is all over the place. My phone thinks it’s on 4G when it’s actually on wireless. Apps wont connect as they think there isn’t an online connection.Easy fix. Opened app. Disconnected and all is now good. No need to uninstall. I’ll wait for a fix.Cheers.
+Great app. Issues with ios13.1
+30/09/2019 K0WMaN
+Love this app! Having the same problem as others on iOS13.1 - Internet is all over the place. My phone thinks it’s on 4G when it’s actually on wireless. Apps wont connect as they think there isn’t an online connection.Easy fix. Opened app. Disconnected and all is now good. No need to uninstall. I’ll wait for a fix.Cheers.
+What’s New
+Version History
+This hotfix addresses an issue building trusted certificate chains.
+6.31.8 20 Oct
+New 1.1.1.1 app changes:
+- Added dynamic updates of domain name resolutions for split tunnel rules during tunnel lifetime.
+- Fixed a networking issue that could lead to increased CPU and battery utilization.
+- Fixed an issue where upgrading to WARP+ could cause a reconnect loop.
+6.31.7 9 Oct
+- Added wildcard domain support to split tunnel exclude configurations. The client now dynamically resolves and routes wildcard entries at DNS query time.
+- Fixed a crash that occurred when triggering "Reset All Settings" while the app was disabled for a specific Wi-Fi connection.
+6.31.6 12 Aug
+New 1.1.1.1 app changes:
+- Logging into a Zero Trust team on the 1.1.1.1 app is no longer supported. For connecting to Cloudflare One Zero Trust teams, please use the Cloudflare One Agent app.
+- Adjusted TCP fallback time for MASQUE tunnels to further improve connectivity on unreliable networks.
+- Reduced events logged to reduce diagnostic log size and legibility.
+6.31.5 7 July
+New 1.1.1.1 app changes:
+- Logging into Cloudflare One Zero Trust accounts from 1.1.1.1 will be disabled May 2026. Users logged into Cloudflare One through 1.1.1.1 will lose access. To log into Cloudflare One, download the Cloudflare One Agent app from the App Store – https://apps.apple.com/us/app/cloudflare-one-agent/id6443476492
+- Added a TCP fallback for the MASQUE tunnel protocol to improve connectivity on networks that block UDP or HTTP/3.
+6.31.4 14 Apr
+New 1.1.1.1 app changes:
+Bug fixes and performance improvements.
+6.31.3 19 Mar
+- Bug fixes and performance improvements.
+6.31.1 11/08/2025
+- DNS over HTTPS traffic is now included in the WARP tunnel by default.
+- QLogs are now disabled by default and can be enabled in the 1.1.1.1 app by toggling on ‘Enable qlogs’ under Settings > Advanced > Diagnostics > Debug Logs. The QLog setting from previous releases will no longer be respected.
+6.31.0 01/07/2025
+- Bug fixes and performance improvements.
+6.30.3 07/05/2025
+New 1.1.1.1 app changes:
+- Improved in-app error messages
+6.30.2 18/03/2025
+- Bug fixes and performance improvements.
+6.30.1 11/02/2025
+- Fixed a potential crash when connecting to WARP.- Fixed incorrect classification of IP packets.
+- Fixed an issue where DNS starts failing after switching to a NAT64 network.
+- Fixed an issue where the first connection attempt always failed after rotating the WARP keys for a new tunnel protocol.
+6.30 20/12/2024
+New 1.1.1.1 app changes:
+- Fixed incorrect classification of IP packets.
+- Fixed an issue where DNS starts failing after switching to a NAT64 network
+- Fixed an issue where the first connection attempt always failed after rotating the WARP keys for a new tunnel protocol.
+- The 1.1.1.1 + WARP app can now connect using MASQUE as an alternate to WireGuard. No user action is required.
+- Active tunnel protocol is displayed; users can now switch between the WireGuard and MASQUE protocol.
+- Deprecated referral reception; users are notified if they have not registered with the WARP client.
+- All API and DNS traffic is now FIPS-compliant.
+Zero Trust features used with Cloudflare One will be removed from the 1.1.1.1 + WARP app in the future. If you use Zero Trust features, please migrate to the Cloudflare One Agent soon.
+1.1.1.1 + WARP docs: https://developers.cloudflare.com/warp-client/
+6.29 19/12/2024
+New 1.1.1.1 + WARP app changes
+Notable changes:
+- UI and sharing updates that reflect the WARP+ Referral Program conclusion.
+1.1.1.1 + WARP docs: https://developers.cloudflare.com/warp-client/
+6.28 31/10/2024
+New 1.1.1.1 app changes:
+- The 1.1.1.1 + WARP app can now connect using MASQUE as an alternate to WireGuard. No user action is required.
+- Active tunnel protocol is displayed; users can now switch between the WireGuard and MASQUE protocol.
+- Deprecated referral reception; users are notified if they have not registered with the WARP client.
+- All API and DNS traffic is now FIPS-compliant.
+Zero Trust features used with Cloudflare One will be removed from the 1.1.1.1 + WARP app in the future. If you use Zero Trust features, please migrate to the Cloudflare One Agent soon.
+1.1.1.1 + WARP docs: https://developers.cloudflare.com/warp-client/
+6.27 30/09/2024
+New 1.1.1.1 app changes:
+- The 1.1.1.1 + WARP app can now connect using MASQUE as an alternate to WireGuard. No user action is required.
+- Active tunnel protocol is displayed; users can now switch between the WireGuard and MASQUE protocol.
+- Deprecated referral reception; users are notified if they have not registered with the WARP client.
+- All API and DNS traffic is now FIPS-compliant.
+Zero Trust features used with Cloudflare One will be removed from the 1.1.1.1 + WARP app in the future. If you use Zero Trust features, please migrate to the Cloudflare One Agent soon.
+1.1.1.1 + WARP docs: https://developers.cloudflare.com/warp-client/
+6.26 24/09/2024
+New 1.1.1.1 app changes:
+- The 1.1.1.1 + WARP app can now connect using MASQUE as an alternate to WireGuard. No user action is required.
+- Active tunnel protocol is displayed; users can now switch between the WireGuard and MASQUE protocol.
+- Deprecated referral reception; users are notified if they have not registered with the WARP client.
+- All API and DNS traffic is now FIPS-compliant.
+Zero Trust features used with Cloudflare One will be removed from the 1.1.1.1 + WARP app in the future. If you use Zero Trust features, please migrate to the Cloudflare One Agent soon.
+1.1.1.1 + WARP docs: https://developers.cloudflare.com/warp-client/
+6.25 20/09/2024
+New 1.1.1.1 app changes:
+- The 1.1.1.1 + WARP app can now connect using MASQUE as an alternate to WireGuard. No user action is required.
+- Added support to display the active tunnel protocol and allow users to switch to the WireGuard protocol. (PR in review)
+- Deprecated referral reception; users are notified if they have not registered with the WARP client.
+- All API and DNS traffic is now FIPS-compliant.
+Zero Trust features used with Cloudflare One will be removed from the 1.1.1.1 + WARP app in the future. If you use Zero Trust features, please migrate to the Cloudflare One Agent soon.
+1.1.1.1 + WARP docs: https://developers.cloudflare.com/warp-client/
+6.24 19/09/2024
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable changes:
+* Added iOS Rapid Security Response extra version field support to OS Version posture check.
+* Fixed an issue with local domain fallback feature to match DNS query name with longest suffix.
+* Fixed an issue with tunnel connection on certain Managed networks.
+6.23 01/09/2023
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable changes:
+* Added initial support for integration and handoff to our forthcoming Cloudflare One Agent application, more information will be sent to Zero Trust customers on this soon.
+* Fixed an issue with local fallback domains.
+* Bug fixes, connectivity and stability improvements.
+6.22 17/08/2023
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable updates:
+- Fixed issue where Zero Trust requests for re-authentication session notifications did not work properly.
+- Fixed issue where the client would toggle between Connecting and Disconnecting when detecting multiple managed networks.
+6.21 12/07/2023
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable changes:
+* UI improvements.
+6.20 28/02/2023
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable changes:
+* UI improvements.
+6.19 27/02/2023
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable changes:
+* Added support for new Zero Trust network location aware WARP feature.
+* Added support for new MDM param unique_client_id which works similar to device serial numbers.
+* Connectivity and stability improvements.
+6.18 13/01/2023
+Our latest iOS client with improvements and bug fixes to keep your DNS fast and connection secure on the Internet.
+Notable changes:
+* Connectivity and stability improvements.
+6.17 02/12/2022
+This hotfix addresses an issue building trusted certificate chains.
+more
+Version 6.31.8 20 Oct
+App Privacy
+App Privacy
+The developer, Cloudflare, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the developer’s privacy policy .
+To help you better understand the developer’s responses, see Privacy Definitions and Examples .
+Privacy practices may vary, for example, based on the features you use or your age. Learn More
+Data Not Linked to You
+The following data, which may be collected but is not linked to your identity, may be used for the following purposes:
+Analytics
+Usage Data Product Interaction
+Diagnostics Other Diagnostic Data
+App Functionality
+Usage Data Product Interaction
+Diagnostics Crash Data
+Performance Data
+Other Diagnostic Data
+The developer, Cloudflare, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the developer’s privacy policy .
+Data Not Linked to You
+The following data may be collected but it is not linked to your identity:
+Usage Data
+Diagnostics
+Privacy practices may vary, for example, based on the features you use or your age. Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports. Learn More
+Information
+Seller
+Cloudflare Inc.
+Size
+77.6 MB
+Category
+Utilities
+Compatibility
+Requires iOS 13.0 or later. iPhone
+Requires iOS 13.0 or later.
+iPad
+Requires iPadOS 13.0 or later.
+iPod touch
+Requires iOS 13.0 or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English and 17 more English, Arabic, Dutch, French, German, Indonesian, Italian, Japanese, Korean, Persian, Polish, Portuguese, Russian, Simplified Chinese, Spanish, Traditional Chinese, Turkish, Ukrainian
+Age Classification
+16+ 16+
+Learn More
+Contains
+Unrestricted Web Access
+In-App Purchases
+Yes WARP+ UNLIMITED $4.99
+Learn More
+Copyright
+© 2026 Cloudflare Inc.
+Developer Website
+Privacy Policy
+More by Cloudflare
+View
+Cloudflare One Agent
+Utilities
+View
+Cloudflare Events
+Business
+You Might Also Like
+View
+Super VPN - Best VPN Master
+Secure, Fast Top VPN Proxy
+View
+Psiphon VPN: Secure Access
+Fast, Private & Reliable
+View
+Now VPN - Best VPN Proxy
+Unlimited VPN for iPhone
+View
+Gaming VPN : Ping & Bandwidth
+Fast Server & Low Ping Tool
+View
+TOP VPN - Easy Fast Secure
+Global Fast Unlimited Proxy
+View
+Panda VPN: Fast Secure Proxy
+Global Servers & Private Wi-Fi
+View
+DNS & IP Changer - Secure VPN
+High Speed - VPN & Proxy & DNS
+View
+VPN - Fast & Secure VPN Proxy
+WiFi Protection & IP Privacy
+View
+VPN – WiFi Hotspot VPN Proxy
+VPN For Wifi Hotspot Privacy
+View
+Secure VPN & Fast Proxy Master
+Best unlimited Internet speed
+Australia
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026 Apple Inc. All Rights Reserved.
+Internet Service Terms
+App Store & Privacy
+Cookie Warning
+Support
