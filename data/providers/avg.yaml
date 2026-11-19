@@ -192,6 +192,11 @@ perks:
 #   named). Server countries: "more than 100 server locations" names no countries, and no AVG page read lists them, so
 #   vpn.server-countries waits (core's awaitingRequiredFeatures, notes.md). Unlimited traffic: no page says, so false
 #   (the rule for a required boolean no page states; Avast's precedent).
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: no monthly data is stored, as no AVG page read gives a figure or
+# says it's unlimited (en-ca/secure-vpn, and "AVG Secure VPN - FAQs", whose connection logs keep "bandwidth usage" "to
+# help prevent abuse of the VPN connection"). Neither mentions RAM-only servers or a way to connect your own devices to
+# each other, so both are false.
 plans:
   # AntiVirus FREE (its page, en-ca/free-antivirus-download): "Download AVG AntiVirus Free for real-time protection
   # against viruses, infected emails, scam websites, and more.", "Also available for Mac, Android, and iOS". Its features
@@ -582,6 +587,8 @@ plans:
       vpn.split-tunneling: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       includes-subscription: [avg.internet-security-10-devices, avg.secure-vpn]
     perks: [remote-access-shield, sensitive-data-shield]
     notes: 'Internet Security on up to 10 devices, plus Secure VPN, TuneUp and AntiTrack.'
@@ -688,6 +695,8 @@ plans:
       vpn.split-tunneling: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     notes: 'A VPN for up to 10 devices, with a kill switch, split tunneling on Android and torrenting on some servers.'
     prices:
       - region: CA

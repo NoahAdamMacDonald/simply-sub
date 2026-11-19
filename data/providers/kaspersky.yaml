@@ -187,6 +187,11 @@ perks:
 #   Premium only; the Windows table has no Anti-Spam row.
 # Articles: support.kaspersky.com/us/kaspersky-for-windows/21.18/ 152975 (plans), 68174, 82511, 202599, 96493, 70776
 # and 81791; support.kaspersky.com/us/kaspersky-for-android/ 141191 (plans), 71836 and 206459.
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: unlimited on Plus ("Privacy features including unlimited VPN and
+# password manager", kaspersky.ca/plus) and Premium ("Fast, Unlimited VPN (worth $33.99 per year)", /premium). Its VPN
+# page and VPN FAQ (/vpn-secure-connection, /vpn-secure-connection/faq) mention no RAM-only servers or way to connect
+# your own devices to each other, so both are false.
 plans:
   - id: kaspersky.standard
     name: 'Standard'
@@ -324,11 +329,14 @@ plans:
       password-manager: true
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 93
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
@@ -395,11 +403,14 @@ plans:
       password-manager: true
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 93
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
@@ -440,11 +451,14 @@ plans:
       password-manager: true
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 93
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
@@ -501,11 +515,14 @@ plans:
       password-manager: true
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 93
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
@@ -564,11 +581,14 @@ plans:
       password-manager: true
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 93
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true
@@ -633,11 +653,14 @@ plans:
       password-manager: true
       vpn.included: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
       vpn.server-countries: 93
       vpn.protocols: [wireguard]
       vpn.split-tunneling: true
       vpn.no-logs-policy: true
       vpn.p2p: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.scans: [on-demand, scheduled, rescue]
       antivirus.vulnerability-scan: true

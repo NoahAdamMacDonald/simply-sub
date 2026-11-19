@@ -264,6 +264,18 @@ perks:
 #   its no-log article (answer 116380) says "In 2025, the infrastructure used by Bitdefender VPN underwent an independent
 #   audit to verify our no-log policy." (vpn.independent-audits: no-logs, added; it names no auditor and links no
 #   report). No port forwarding or Tor on any of these pages, and a Bitdefender account to sign up, so none of those.
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada:
+# - Monthly data: Premium VPN's is unlimited ("Unlimited VPN traffic", /en-ca/consumer/vpn; "You can purchase the
+#   Premium VPN subscription to get unlimited traffic", its FAQ, answer 7126). The standard version in Total Security,
+#   Antivirus Plus and Antivirus Free "offers 200 MB daily traffic per device" (answer 7126; "Standard VPN. 200 MB/day
+#   traffic for complete online privacy", Total Security's page; "up to 200 MB of encrypted traffic per device, per
+#   day", Antivirus Free's), and the limit "resets at midnight UTC": 6 GB in a 30-day month, inferred.
+# - RAM-only servers: its Premium VPN page's comparison gives Bitdefender "Double Hop, Ad-blocker, App Traffic
+#   Optimizer, RAM-Only Servers" as extras (bitdefender.com/pages/consumer/en/new/new-vpn); its VPN page, FAQ and no-log
+#   article don't mention it (notes.md). The standard version is the same Bitdefender VPN with a daily limit, so its
+#   value is inferred.
+# - Connects your own devices: no page read offers it, so false.
 plans:
   - id: bitdefender.total-security
     name: Total Security
@@ -296,9 +308,25 @@ plans:
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
+      vpn.data-allowance: 6
       vpn.included: true
+      vpn.mesh: false
+      vpn.ram-only-servers: true
     featureLabels:
       password-manager: SecurePass
+    inferred:
+      vpn.data-allowance:
+        reason: 'Its standard VPN gives 200 MB of traffic a day on each device, about 6 GB in a 30-day month.'
+        page:
+          name: 'Bitdefender VPN: Frequently Asked Questions'
+          url: https://www.bitdefender.com/consumer/support/answer/7126/
+        lastVerified: 2026-11-19
+      vpn.ram-only-servers:
+        reason: "Its Premium VPN page lists RAM-only servers among its extras, and the standard version is the same Bitdefender VPN with a daily limit, so it's taken to use the same servers."
+        page:
+          name: 'Bitdefender Premium VPN'
+          url: https://www.bitdefender.com/pages/consumer/en/new/new-vpn
+        lastVerified: 2026-11-19
     prices:
       - region: CA
         currency: CAD
@@ -527,14 +555,17 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.devices: 5
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -778,13 +809,16 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -1029,14 +1063,17 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.devices: 5
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -1380,13 +1417,16 @@ plans:
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -1732,14 +1772,17 @@ plans:
       security.identity-theft-insurance: 1
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.devices: 5
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -1807,14 +1850,17 @@ plans:
       security.identity-theft-insurance: 2
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.devices: 5
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -1893,13 +1939,16 @@ plans:
       security.identity-theft-insurance: 1
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -1970,13 +2019,16 @@ plans:
       security.identity-theft-insurance: 2
       security.webcam-protection: [webcam, microphone]
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -2169,10 +2221,26 @@ plans:
       security.dark-web-monitoring: true
       security.file-shredder: true
       security.webcam-protection: [webcam, microphone]
+      vpn.data-allowance: 6
       vpn.included: true
+      vpn.mesh: false
+      vpn.ram-only-servers: true
       account.parental-controls: true
     featureLabels:
       password-manager: SecurePass
+    inferred:
+      vpn.data-allowance:
+        reason: 'Its standard VPN gives 200 MB of traffic a day on each device, about 6 GB in a 30-day month.'
+        page:
+          name: 'Bitdefender VPN: Frequently Asked Questions'
+          url: https://www.bitdefender.com/consumer/support/answer/7126/
+        lastVerified: 2026-11-19
+      vpn.ram-only-servers:
+        reason: "Its Premium VPN page lists RAM-only servers among its extras, and the standard version is the same Bitdefender VPN with a daily limit, so it's taken to use the same servers."
+        page:
+          name: 'Bitdefender Premium VPN'
+          url: https://www.bitdefender.com/pages/consumer/en/new/new-vpn
+        lastVerified: 2026-11-19
     prices:
       - region: CA
         currency: CAD
@@ -2397,9 +2465,25 @@ plans:
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
+      vpn.data-allowance: 6
       vpn.included: true
+      vpn.mesh: false
+      vpn.ram-only-servers: true
     featureLabels:
       password-manager: SecurePass
+    inferred:
+      vpn.data-allowance:
+        reason: 'Its standard VPN gives 200 MB of traffic a day on each device, about 6 GB in a 30-day month.'
+        page:
+          name: 'Bitdefender VPN: Frequently Asked Questions'
+          url: https://www.bitdefender.com/consumer/support/answer/7126/
+        lastVerified: 2026-11-19
+      vpn.ram-only-servers:
+        reason: "Its Premium VPN page lists RAM-only servers among its extras, and the standard version is the same Bitdefender VPN with a daily limit, so it's taken to use the same servers."
+        page:
+          name: 'Bitdefender Premium VPN'
+          url: https://www.bitdefender.com/pages/consumer/en/new/new-vpn
+        lastVerified: 2026-11-19
     prices:
       - region: CA
         currency: CAD
@@ -2526,9 +2610,25 @@ plans:
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
+      vpn.data-allowance: 6
       vpn.included: true
+      vpn.mesh: false
+      vpn.ram-only-servers: true
     featureLabels:
       password-manager: SecurePass
+    inferred:
+      vpn.data-allowance:
+        reason: 'Its standard VPN gives 200 MB of traffic a day on each device, about 6 GB in a 30-day month.'
+        page:
+          name: 'Bitdefender VPN: Frequently Asked Questions'
+          url: https://www.bitdefender.com/consumer/support/answer/7126/
+        lastVerified: 2026-11-19
+      vpn.ram-only-servers:
+        reason: "Its Premium VPN page lists RAM-only servers among its extras, and the standard version is the same Bitdefender VPN with a daily limit, so it's taken to use the same servers."
+        page:
+          name: 'Bitdefender Premium VPN'
+          url: https://www.bitdefender.com/pages/consumer/en/new/new-vpn
+        lastVerified: 2026-11-19
     prices:
       - region: CA
         currency: CAD
@@ -2634,14 +2734,17 @@ plans:
     categories: [vpn]
     features:
       vpn.content-blocking: [ads, trackers]
+      vpn.data-allowance: unlimited
       vpn.devices: 10
       vpn.included: true
       vpn.independent-audits: [no-logs]
       vpn.kill-switch: true
+      vpn.mesh: false
       vpn.multi-hop: true
       vpn.no-logs-policy: true
       vpn.p2p: true
       vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.ram-only-servers: true
       vpn.server-countries: 110
       vpn.split-tunneling: true
       vpn.unlimited-traffic: true
@@ -2781,7 +2884,23 @@ plans:
       antivirus.vulnerability-scan: false
       antivirus.web-protection: true
       security.anti-tracker: false
+      vpn.data-allowance: 6
       vpn.included: true
+      vpn.mesh: false
+      vpn.ram-only-servers: true
+    inferred:
+      vpn.data-allowance:
+        reason: 'Its standard VPN gives 200 MB of traffic a day on each device, about 6 GB in a 30-day month.'
+        page:
+          name: 'Bitdefender VPN: Frequently Asked Questions'
+          url: https://www.bitdefender.com/consumer/support/answer/7126/
+        lastVerified: 2026-11-19
+      vpn.ram-only-servers:
+        reason: "Its Premium VPN page lists RAM-only servers among its extras, and the standard version is the same Bitdefender VPN with a daily limit, so it's taken to use the same servers."
+        page:
+          name: 'Bitdefender Premium VPN'
+          url: https://www.bitdefender.com/pages/consumer/en/new/new-vpn
+        lastVerified: 2026-11-19
     prices:
       - region: GLOBAL
         currency: USD

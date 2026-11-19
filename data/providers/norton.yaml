@@ -285,6 +285,12 @@ perks:
 # - Dark Web Monitoring and Privacy Monitor as each country's cards list them; Privacy Monitor finds your details on
 #   people-search sites (its licence's "request removal of your personal information from Third-Party Sites" is
 #   Privacy Monitor Assistant's, not drafted).
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: no monthly data is stored, as no page gives a figure: its help
+# centre says usage can pass "our standard bandwidth limits" ("Suspension of Norton services due to high VPN usage",
+# v20241010124716461, last modified 2025-09-24), and its VPN pages name none (ca.norton.com/products/norton-vpn and
+# /feature/vpn-server-locations, us.norton.com/products/norton-vpn). Those pages mention no RAM-only servers and no way
+# to connect your own devices to each other, so both are false.
 plans:
   # AntiVirus Plus: "1 PC, Mac, tablet, or phone" with Scam Protection, "Antivirus, malware, ransomware,
   # and hacking protection", Password Manager and 2 GB Cloud Backup, and no VPN (each country's cards). The US page
@@ -500,6 +506,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       antivirus.devices: 1
       antivirus.behavioural: true
@@ -614,6 +622,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       antivirus.devices: 3
       antivirus.behavioural: true
@@ -664,6 +674,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       security.dark-web-monitoring: true
       antivirus.devices: 3
@@ -715,6 +727,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -816,6 +830,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -877,6 +893,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -930,6 +948,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -984,6 +1004,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1085,6 +1107,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1146,6 +1170,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1200,6 +1226,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1290,6 +1318,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1356,6 +1386,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1417,6 +1449,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1514,6 +1548,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1577,6 +1613,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true
@@ -1648,6 +1686,8 @@ plans:
       vpn.p2p: true
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       security.webcam-protection: [webcam]
       parental-control: [content-filtering, screen-time, location]
       account.parental-controls: true

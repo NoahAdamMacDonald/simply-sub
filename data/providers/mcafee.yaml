@@ -186,6 +186,12 @@ perks:
 #   which plans scan email isn't clear (notes.md).
 # - Not added: Smart Scan's "PC performance scan for things slowing your computer down, such as junk files" is
 #   "available only with certain subscription plans" (000002838), so no speed-up tools.
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day through a US exit: unlimited on every plan ("McAfee unlimited VPN turns on
+# automatically to protect your personal data and credit card info", en-us/antivirus/mobile.html; "Subscribers can
+# also connect to 5 devices simultaneously with unlimited bandwidth.", its auto-renewal page). Its VPN page
+# (en-us/vpn.html) says of its servers only "We don't log or track what you do online"; no page read mentions RAM-only
+# servers or a way to connect your own devices to each other, so both are false.
 plans:
   # McAfee WebAdvisor: "McAfee® WebAdvisor FREE", "Search confidently and browse safely with our free WebAdvisor.", a
   # browser extension that warns of risky sites and downloads. No antivirus, so not a free plan of its suites.
@@ -224,6 +230,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -342,6 +351,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -462,6 +474,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -509,6 +524,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -614,6 +632,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -655,6 +676,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -759,6 +783,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -863,6 +890,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -971,6 +1001,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -1029,6 +1062,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -1086,6 +1122,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:
@@ -1146,6 +1185,9 @@ plans:
       vpn.included: true
       vpn.no-logs-policy: true
       vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.behavioural: true
       antivirus.vulnerability-scan: true
     inferred:

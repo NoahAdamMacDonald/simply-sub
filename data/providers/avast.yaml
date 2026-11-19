@@ -139,6 +139,10 @@ perks:
 # back to you." No audit named. Server countries: "over 100 server locations" names no countries, and no Avast page read
 # lists them, so vpn.server-countries waits (core's awaitingRequiredFeatures, notes.md). Unlimited traffic: no page says,
 # so false (the rule for a required boolean no page states).
+# The VPN features added 2026-11-19 (monthly VPN data, RAM-only servers, connects your own devices: the owner's design,
+# categories.md), read that day with Edge from Canada: no monthly data is stored, as no Avast page read gives a figure
+# or says it's unlimited (en-ca/premium-vpn, and its support centre's "Avast VPN - FAQs", none of whose questions is
+# about data). Neither mentions RAM-only servers or a way to connect your own devices to each other, so both are false.
 plans:
   # Free Antivirus (its page, en-ca/free-antivirus-download): "Download a free antivirus for your Windows PC", "Also
   # available for Mac , Android , and iOS", with Web Guard, Smart Scan, File Shield, Behavior Shield, Quarantine, Wi-Fi
@@ -530,6 +534,8 @@ plans:
       vpn.multi-hop: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.optimizer: true
       security.anti-tracker: true
       antivirus.devices: 2
@@ -649,6 +655,8 @@ plans:
       vpn.multi-hop: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.optimizer: true
       security.anti-tracker: true
       antivirus.devices: 2
@@ -772,6 +780,8 @@ plans:
       vpn.multi-hop: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
       antivirus.optimizer: true
       security.anti-tracker: true
       antivirus.devices: 10
@@ -883,6 +893,8 @@ plans:
       vpn.multi-hop: true
       vpn.p2p: true
       vpn.no-logs-policy: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
     notes: 'A VPN for up to 10 devices, with a kill switch, split tunneling, Double VPN and P2P servers.'
     prices:
       - region: CA
