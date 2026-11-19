@@ -1,0 +1,477 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada: obscura.com's home
+# page and its FAQ (every answer opened with "Show All"), pricing, sign-up page and legal page (its privacy policy and
+# terms of service, one page), its knowledge base (every article in the sitemap: payments, deleting an account, DNS
+# options, the kill switch, managing devices, referrals, relay and exit nodes, debug bundles, downloading), its blog
+# (every post: the first audit, Bootstrapping Trust, the Windows, Android and Linux launches, Circle of Trust, No Nord
+# November), Cure53's audit report (obscura.com/obs-01-report.v3.pdf, read with pdftotext), its status page
+# (obscurastatus.net) and its campaign page nonordnovember.com; the pricing page again with a plain fetch and through a
+# UK exit. obscura.net, the address this task named, now redirects to obscura.com; its privacy policy still names
+# "our websites (obscura.net and related subdomains)", and its support address is support@obscura.net.
+# Pricing: obscura.com/pricing, one plan, "$8.00/ month", with "Renew automatically with your credit card or top up as
+# you go with credit card, Lightning, or Monero". Its terms: "All prices are in United States Dollars, unless stated
+# otherwise.", and "You agree to pay the price stated at the time of your order, as well as any applicable taxes.", so
+# no price is marked tax-included. The page is the same static page whoever reads it: "$8.00/ month" from Canada, with
+# a plain fetch and through a UK exit, so one GLOBAL USD price.
+# Region checklist for CA and US, 2026-11-19: 1. no country paths or hreflang (obscura.com only, in English); 2. no
+# country, language or currency picker; 3. the price is in the page's static HTML, the same for every reader, and its
+# terms name US dollars; 4. checkout needs an account (sign-up generates an account number), not opened; 5. the
+# knowledge base's Managing Payments article prices nothing by country; 6. Edge, a plain fetch and a UK exit all show
+# "$8.00/ month"; 7. no bill offered.
+# Billing periods: a card subscription is monthly only ("A subscription charges your credit card monthly and renews
+# automatically.", Managing Payments). Top-ups ("A top-up is a one-time payment that adds time to your account") are
+# sold from "the Top-Up page in your account", which needs an account, so their periods and prices weren't read; its
+# launch posts offer "25% off on your first year" codes, so a year of time is sold somewhere behind the account
+# (notes.md). Only the monthly subscription is priced here.
+# Free use: none. "Try For Free" is a 7-day trial ("NEW: Obscura is now offering seven-day free trials.", No Nord
+# November), which needs no card ("No card or name required", nonordnovember.com) and ends; a trial isn't free use.
+# Bundles: none on its pages. Official resellers: none; no page names a shop that sells it. Partners, not listed: Mullvad
+# runs its exit servers ("It’s operated by our partner, Mullvad"), and its Circle of Trust (Ente Photos, addy.io) are
+# cross-promotions, each a first-year discount on the other's service (notes.md). Apple's App Store and Google Play bill
+# its app subscriptions: a way to pay, not a reseller.
+
+id: obscura
+name: Obscura VPN
+aliases: [obscura]
+website: https://obscura.com
+domains: [obscura.net, nonordnovember.com]
+category: vpn
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its Managing Payments article's "Canceling a Subscription" (the Stripe portal from the Subscription page, or Apple's
+# and Google's subscriptions).
+cancelUrl: https://obscura.com/knowledge/payments/
+sources: { pricing: https://obscura.com/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-19: a card (through Stripe), Bitcoin over Lightning or Monero (its pricing FAQ, "How
+# much does Obscura cost, what payment methods are accepted?"), and Apple's and Google's billing in its apps (Managing
+# Payments). Crypto pays top-ups only: "Cryptocurrency payments aren’t supported for subscriptions." Its terms name
+# "credit card or Bitcoin". No page names the card networks ("Credit Card (via Stripe)"), so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, crypto]
+    page: 'Pricing'
+    url: https://obscura.com/pricing/
+    quotes:
+      - 'Credit Card (via Stripe)'
+      - 'Bitcoin over Lightning (for more privacy)'
+      - 'Monero (for more privacy)'
+  - methods: [app-store]
+    page: 'Managing Payments'
+    url: https://obscura.com/knowledge/payments/
+    quotes:
+      - 'The iOS app via the Apple App Store'
+      - 'The Android app via Google Play'
+
+# Owner (M11.2), read 2026-11-19: its terms and privacy policy name the company that runs it, "Sovereign Engineering
+# Inc., d/b/a Obscura" (its footer: "© 2026 Sovereign Engineering Inc."). It has no about page; the home page's note
+# from its founder ("I’m Carl, head-janitor of Obscura") names no company. Country: the terms' only address is in New
+# York (a mailbox at "169 Madison Ave.; Ste. 11185 PMB 63183; New York, NY 10016"), and New York's law and courts govern
+# them; no page says where the company is incorporated (notes.md). Private: no page names a listing; its jobs are at
+# jobs.ashbyhq.com/sovereign-engineering.
+owner:
+  name: Sovereign Engineering Inc.
+  page:
+    name: Terms of service
+    url: https://obscura.com/legal/
+  quotes:
+    - 'These Terms of Service (“Terms”) are a binding legal agreement between you and Sovereign Engineering Inc. d/b/a Obscura (“Obscura”, “we”, “us” or “our”) that set forth the terms and conditions applicable to your access to and use of the Services.'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://obscura.com/legal/
+    quotes:
+      - 'your written notification must be mailed to 169 Madison Ave.; Ste. 11185 PMB 63183; New York, NY 10016 or emailed to legal@obscura.net'
+      - 'You agree that: (i) the Service shall be deemed solely based in New York'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  Two hops: Obscura's relay knows where you connect from but can't read your traffic, and the exit server, run by
+  Mullvad, sees the traffic but not who you are. Pay monthly by card, or top up time with a card, Bitcoin Lightning or
+  Monero.
+
+# Renewal day (M11.5), read 2026-11-19: its terms and Managing Payments say only that a subscription renews monthly, "on
+# the applicable renewal processing date", with no day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://obscura.com/legal/
+    - https://obscura.com/knowledge/payments/
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Apps for macOS, iOS, Android, Windows and Linux ("Start using Obscura for macOS,
+# iOS, Android, Windows, and Linux today", home page; Downloading Obscura), and WireGuard configurations for routers and
+# other devices (not a platform value). Sign-in: a random account number ("Log in with just a randomized account
+# number."), none of account.sign-in's ways, so it's left out (Mullvad's precedent). App languages: English only: its
+# site has no other language, and its app's own code (the GitHub repository its pages link) has only an English
+# translation file (obscura-ui/src/translations/en.json). Support by email (support@obscura.net) and its Discord and
+# Matrix communities ("reach out via one of our handles"). No pause: a subscription "pauses automatically" only while
+# prepaid top-up time is used up (Managing Payments), which isn't a pause of the service. No parental controls: its DNS
+# blocking is a setting you choose for yourself (DNS Options).
+# Open source (M11.5): "Our app’s entire source code is on GitHub for you to verify that we do what we say." (home page
+# FAQ), linking github.com/Sovereign-Engineering/obscuravpn-client, GPLv3 since 2026-09-22 ("Obscura is now licensed
+# under GPLv3", Linux at Long Last); its relay servers' code isn't published, so its apps are open, not all of it.
+features:
+  platforms: [macos, ios, android, windows, linux]
+  languages.interface: [en]
+  support.channels: [email, community]
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/Sovereign-Engineering/obscuravpn-client
+  page:
+    name: How Obscura works (FAQ)
+    url: https://obscura.com/
+  quotes:
+    - Our app’s entire source code is on GitHub for you to verify that we do what we say.
+  lastVerified: 2026-11-19
+
+# Free use (the owner's item of 2026-11-09): none; its 7-day trial ends, and its pricing page sells one paid plan.
+freeUse:
+  kind: none
+  pages:
+    - https://obscura.com/pricing/
+    - https://obscura.com/
+    - https://obscura.com/blog/no-nord-november/
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19 on obscura.com:
+# - Devices: "5 simultaneous connections, unlimited devices" (pricing), "Each Obscura account has 5 simultaneous
+#   connection slots." (FAQ); each WireGuard configuration keeps one of the 5 (Managing Devices).
+# - Server countries: 28, counted from the exit locations its FAQ and its Relay Nodes & Exit Nodes article list
+#   (updated 2026-09-23): Canada, the US, Brazil, Chile, Colombia, Mexico, Albania, the Czech Republic, Denmark, Finland,
+#   France, Germany, Italy, the Netherlands, Norway, Poland, Spain, Sweden, Switzerland, Ukraine, the UK, Hong Kong,
+#   Japan, Singapore, Turkey, South Africa, New Zealand and Australia. The pricing card says "Connections to 33+
+#   countries"; the list, which names each, is used (Bitdefender's precedent: the FAQ's count over a card's), notes.md.
+# - Protocols: WireGuard ("Your traffic is always end-to-end encrypted via WireGuard® to the exit server", WireGuard
+#   configurations) and its own obfuscated protocol over QUIC ("Obscura’s stealth protocol is much harder to block.").
+#   No OpenVPN or IKEv2.
+# - Kill switch: "Open Experimental and enable On demand kill switch" (Obscura's VPN Kill Switch; Android's own "Block
+#   connections without VPN").
+# - Multi-hop: every connection, by design ("Obscura routes your traffic through two separate servers before it reaches
+#   the internet. This 2-hop design is what makes Obscura fundamentally different", Relay Nodes & Exit Nodes), the exit
+#   being Mullvad's.
+# - Content blocking: "Our DNS allows you to block ads, trackers, malware, gambling, adult content and social media on
+#   your device." (DNS Options, Mullvad's DNS).
+# - No-logs: "Obscura VPN doesn’t log your IP address and can’t see your internet traffic, ever." (home, pricing) and
+#   "IP Addresses: We do not persist, log, or otherwise store your IP address when you use our VPN." (privacy policy).
+# - Independent audits: apps only. Cure53's audit (report dated 16 Jul 2025, post of Dec 16, 2025) covered "our macOS
+#   app, network extension and protocol" (its report: penetration tests and code audits of the macOS app, the network
+#   extension and the protocol's design); it tested no servers and no logging, so no servers or no-logs (notes.md).
+#   The exit servers are Mullvad's, whose own audits are Mullvad's, not Obscura's.
+# - Anonymous signup: "Log in with just a randomized account number. No names, no emails, no phone numbers necessary."
+# - Unlimited traffic: inferred (below); no page names a data limit.
+# - The VPN batch's new features: no page says its servers run from memory only (vpn.ram-only-servers false), and it
+#   doesn't connect your own devices to each other (vpn.mesh false). No data allowance: its traffic is unlimited.
+# - No page offers split tunnelling, port forwarding, Tor over VPN or a P2P policy (the terms reserve "usage or service
+#   limits or block certain kinds of usage at our sole discretion"), so those are left out.
+# Speeds: no page states one ("The VPN Services coverage, speed, server locations, and quality may vary.", its terms).
+plans:
+  - id: obscura.vpn
+    name: Obscura VPN
+    link: https://obscura.com/pricing/
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.server-countries: 28
+      vpn.protocols: [wireguard, stealth]
+      vpn.kill-switch: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware, adult-content, gambling, social-media]
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      account.pause: false
+      account.parental-controls: false
+    inferred:
+      vpn.unlimited-traffic:
+        reason: 'No page names a data limit. Its pricing page lists what a subscription gets with no cap, and says you can “Browse, stream, and game without worrying about your VPN.”'
+        page:
+          name: Pricing
+          url: https://obscura.com/pricing/
+        lastVerified: 2026-11-19
+    notes: '5 devices connected at once, signed in on as many as you like. Your traffic goes through an Obscura relay, then a Mullvad exit server in one of 28 countries. Top-ups add time without a subscription.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://obscura.com/pricing/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge. Every agreement a user accepts (the owner's rule,
+# 2026-11-03): its terms of service and privacy policy (one page, obscura.com/legal; the privacy policy "is part of our
+# Terms of Use", and the terms incorporate it: "Our Privacy Policy is incorporated by reference into these Terms."); its
+# terms are its apps' licence too ("license to download and install the Software"), and its apps' code is GPLv3. The
+# sign-up page shows no agreement line ("All you need is an account number and payment - that’s it."); its terms bind
+# "BY USING THE SERVICES". The terms' "APPLICATION PLATFORM TERMS" point to the app stores' own terms (not rated: Apple's
+# and Google's). Read for the rest: Managing Payments, How to Delete an Obscura Account, Referring a Friend, Managing
+# Devices, Relay Nodes & Exit Nodes, What Is a Debug Bundle, its first audit post and Cure53's report, Linux at Long
+# Last (GPLv3), No Nord November and its campaign page. No security.txt (obscura.com/.well-known/security.txt is a 404),
+# no bug bounty and no disclosure policy on any page read.
+# Not applicable (vpn isn't in their categories): who can read your content, rights over your content, children, account
+# sharing. Switching plans: it has one paid plan.
+policies:
+  links:
+    - name: 'Privacy policy and terms of service'
+      url: https://obscura.com/legal/
+    - name: 'How Obscura works (FAQ)'
+      url: https://obscura.com/
+    - name: 'Managing Payments'
+      url: https://obscura.com/knowledge/payments/
+    - name: 'How to Delete an Obscura Account'
+      url: https://obscura.com/knowledge/deleting-account/
+    - name: 'Referring a Friend to Obscura'
+      url: https://obscura.com/knowledge/referrals/
+    - name: 'Managing Devices'
+      url: https://obscura.com/knowledge/managing-devices/
+    - name: 'What Is a Debug Bundle?'
+      url: https://obscura.com/knowledge/debug-bundles/
+    - name: "Obscura's First Independent Audit by Cure53"
+      url: https://obscura.com/blog/obscuras-first-audit/
+    - name: 'Linux at Long Last + GPLv3'
+      url: https://obscura.com/blog/linux-at-long-last/
+    - name: 'No Nord November (free trial)'
+      url: https://nonordnovember.com/
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'Its app sends nothing it doesn’t need, but its website counts your visits with an outside analytics service, Plausible, to improve the service, and it gives no way to turn that off.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'Our Website: We use a privacy-friendly analytics provider – Plausible – on our website to improve our service.'
+        - url: https://obscura.com/knowledge/debug-bundles/
+          quote: 'Debug bundles are never created or sent automatically.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It shares what little it has only with the companies that run the service for it, or to protect people when the law calls for it.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'We use the limited information we process and disclose it to our service providers to provide and manage the Services'
+        - url: https://obscura.com/legal/
+          quote: 'We may also use and disclose this information to protect against harm to the rights, property, or safety of Obscura, our users, or the public, as required or permitted by law.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'Its privacy policy lists every use of your data: running the service, answering you, support and fixing bugs. Ads aren’t among them.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'We use the limited information we process and disclose it to our service providers to provide and manage the Services, to send you updates your eligibility to register if you have signed up for our waitlist, to respond to your inquiries, and provide technical support and assistance, and for debugging, repairs and troubleshooting.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy and terms don’t mention AI. It keeps almost nothing about you to train anything on.'
+      pages: [https://obscura.com/legal/]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'It never stores your IP address, forgets which friend referred you a month after your free months, and deletes your account and everything on it when you press delete.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'IP Addresses: We do not persist, log, or otherwise store your IP address when you use our VPN.'
+        - url: https://obscura.com/knowledge/referrals/
+          quote: 'One month after the free months are given, we automatically delete the association between the new account and the referrer.'
+        - url: https://obscura.com/knowledge/deleting-account/
+          quote: 'If you wish to permanently delete your Obscura account, all its associated data and cancel your subscription, simply follow these steps.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You delete your account and all its data yourself, with a button in the app. It keeps nothing from a deleted account.'
+      sources:
+        - url: https://obscura.com/knowledge/deleting-account/
+          quote: 'If you wish to permanently delete your Obscura account, all its associated data and cancel your subscription, simply follow these steps.'
+        - url: https://obscura.com/knowledge/deleting-account/
+          quote: 'No data will be retained from the previously deleted account.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can email it to ask for a copy of what it keeps about you, and it answers as the law requires, though it may refuse a request it finds too much work.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'You may request access to, or correction or deletion of, information that we maintain about you by contacting us at the email address below.'
+        - url: https://obscura.com/legal/
+          quote: 'We reserve the right not to agree to any such request if we deem it burdensome or otherwise injurious or inappropriate'
+      action:
+        name: 'How to ask for your data (its privacy policy)'
+        url: https://obscura.com/legal/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It may share data when the law requires or allows it. It doesn’t say it asks for a court order or tells you, but its design means it can’t see what you do online, even if made to.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'We may also use and disclose this information to protect against harm to the rights, property, or safety of Obscura, our users, or the public, as required or permitted by law.'
+        - url: https://obscura.com/
+          quote: 'It’s simply impossible for us to log your internet activity, even if we were compelled to, or if our servers were compromised.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Its privacy policy doesn’t say where it stores or processes the little data it keeps.'
+      pages: [https://obscura.com/legal/]
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You sign up with a random account number: no name, email or phone number. Only paying by card through Stripe may need an email, which Obscura doesn’t keep.'
+      sources:
+        - url: https://obscura.com/
+          quote: 'Log in with just a randomized account number. No names, no emails, no phone numbers necessary.'
+        - url: https://obscura.com/
+          quote: 'Note that Stripe may need your email for subscriptions, but Obscura never stores it.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel online at any time from your account, and keep using it until the end of the month you paid for, but you lose any free months you earned by referring friends.'
+      sources:
+        - url: https://obscura.com/knowledge/payments/
+          quote: 'When you cancel, your account stays active until the end of the current billing period. You won’t be charged again.'
+        - url: https://obscura.com/legal/
+          quote: 'You will also forfeit any service or referral credits and unredeemed benefits of the subscription upon cancellation.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back for time you don’t use, but you keep it until the end of the period you paid for.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'YOUR PAYMENT IS NONREFUNDABLE, AND WE DO NOT PROVIDE REFUNDS OR CREDITS FOR ANY PARTIAL-PERIOD SUBSCRIPTION PERIODS OR UNUSED SERVICES.'
+        - url: https://obscura.com/knowledge/payments/
+          quote: 'When you cancel, your account stays active until the end of the current billing period.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only at your next billing period, and it tells you ahead of time so you can cancel first.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'The modified Fees will take effect at the start of the next billing period if you are on a recurring subscription. We will provide advance notice of these changes, and you will have the opportunity to change or cancel your subscription prior to incurring the new charges.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its 7-day trial needs no card, so it can’t charge you. But its terms say a trial that comes with a subscription is charged when it ends, unless you cancel before then.'
+      sources:
+        - url: https://nonordnovember.com/
+          quote: 'No card or name required'
+        - url: https://obscura.com/legal/
+          quote: 'Once your free trial period ends, your first payment will be automatically charged to your payment method immediately at the then-current Fees, unless you cancel your subscription (as described in the “Cancellation” section above) prior to the expiration of your free trial period.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say a subscription renews and charges your card on its own, but not that it reminds you first.'
+      pages: [https://obscura.com/legal/, https://obscura.com/knowledge/payments/]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: poor
+      reason: 'Its terms let it charge your card “possible transaction fees” on top of the price, without saying what they are.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'You authorize us to charge your credit card on a recurring basis for the applicable Fees, any and all taxes or possible transaction fees.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee (an arbitrator) settles disputes, not a court, and you can’t join a group lawsuit. You can opt out only by writing to it within 30 days of first using it.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'ANY ARBITRATION SHALL BE CONDUCTED IN AN INDIVIDUAL CAPACITY ONLY AND NOT AS A CLASS OR OTHER CONSOLIDATED ACTION'
+        - url: https://obscura.com/legal/
+          quote: 'you must notify Obscura in writing within thirty (30) days of the date that you first accessed or otherwise become subject to this Arbitration Agreement'
+      action:
+        name: 'How to opt out of arbitration (its terms)'
+        url: https://obscura.com/legal/
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms whenever it likes, and the new ones apply as soon as they’re posted on its site.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'Except for Section 11 which provides for binding arbitration and waiver of class action rights, we reserve the right to modify these Terms at any time in our sole discretion. Any such modification will be effective upon the posting of the modified Terms, so we encourage you to check back here from time to time for any such modifications.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend or close your subscription, with or without warning, if it believes you broke the law or its terms, and gives no refund.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'We reserve the right, at any time, in our sole discretion, with or without notice, to suspend or terminate your subscription if we reasonably believe you have violated any applicable laws or these Terms.'
+        - url: https://obscura.com/legal/
+          quote: 'YOUR PAYMENT IS NONREFUNDABLE, AND WE DO NOT PROVIDE REFUNDS OR CREDITS FOR ANY PARTIAL-PERIOD SUBSCRIPTION PERIODS OR UNUSED SERVICES.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add, change or take away features of a subscription. If you don’t like a change, you can cancel.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'We may choose in our sole discretion to add, modify, or remove benefits and features from a subscription.'
+        - url: https://obscura.com/legal/
+          quote: 'If you do not wish to continue subscribing with the modified features, you may cancel your subscription.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: great
+      reason: 'If your time runs out, your account stays: you can top up or subscribe again whenever you like.'
+      sources:
+        - url: https://obscura.com/knowledge/payments/
+          quote: 'Your account is not deleted, so you can simply top up or re-subscribe to start using Obscura again.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source under the GPLv3 licence: anyone can read, change and share their code.'
+      sources:
+        - url: https://obscura.com/blog/linux-at-long-last/
+          quote: 'Obscura is now licensed under GPLv3'
+        - url: https://obscura.com/blog/linux-at-long-last/
+          quote: 'We’re relicensing from the PolyForm Noncommercial License 1.0.0 to the GNU General Public License v3.0 furthering our commitment to Open Source software.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'Security experts at Cure53 checked its Mac app and its design, and it published their report. It names no way to report a security bug and pays no reward for finding one.'
+      sources:
+        - url: https://obscura.com/blog/obscuras-first-audit/
+          quote: 'We brought in Cure53, the security researchers who’ve stress-tested Mullvad VPN, Bitwarden and Proton, to audit our macOS app, network extension and protocol.'
+        - url: https://obscura.com/blog/obscuras-first-audit/
+          quote: 'You can read the full Cure53 report.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: good
+      reason: 'It says it never stores your IP address and can’t see what you do online, because its servers only pass on traffic they can’t read. No outside audit has checked that it keeps no logs.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'IP Addresses: We do not persist, log, or otherwise store your IP address when you use our VPN.'
+        - url: https://obscura.com/
+          quote: 'It’s simply impossible for us to log your internet activity, even if we were compelled to, or if our servers were compromised.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: good
+      reason: 'Its app works on as many devices as you like, 5 at a time. Each WireGuard setup you make holds one of those 5 places until you delete it.'
+      sources:
+        - url: https://obscura.com/knowledge/managing-devices/
+          quote: 'This isn’t a device limit, you can install Obscura on as many devices as you want.'
+        - url: https://obscura.com/knowledge/managing-devices/
+          quote: 'Each config you create permanently reserves one of your 5 slots, even when the device using it isn’t connected.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: great
+      reason: 'Its terms leave updates to you: you accept and install new versions yourself. Its Mac app runs walled off, with no deep access to your system.'
+      sources:
+        - url: https://obscura.com/legal/
+          quote: 'timely accepting, installing and using any version updates, bug fixes, patches, error corrections, and other similar software or content updates to the Software and/or related documentation'
+        - url: https://obscura.com/
+          quote: 'Our macOS app installs a Network Extension, which is a fully sandboxed process with no kernel-level access to your system.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Two companies, so neither sees both
+      tier: great
+      reason: 'Your traffic passes through Obscura’s server, which knows who you are but can’t read it, then Mullvad’s, which sees the websites but not who you are.'
+      sources:
+        - url: https://obscura.com/
+          quote: 'Obscura’s servers relay your connection to exit servers but can never decrypt your traffic.'
+        - url: https://obscura.com/
+          quote: 'Exit servers (run by Mullvad) connect you to the internet but never see your personal info.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Pay without a card
+      tier: great
+      reason: 'You can pay with Bitcoin’s Lightning Network or Monero instead of a card, so it needn’t know who paid.'
+      sources:
+        - url: https://obscura.com/
+          quote: 'Easily pay using Bitcoin’s Lightning Network for better privacy, instant payments, and lower transaction fees. We also accept Monero.'
+      lastVerified: 2026-11-19
