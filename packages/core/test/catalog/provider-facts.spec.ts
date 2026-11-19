@@ -173,6 +173,8 @@ describe('namesRenewalAnchor', () => {
       'same-date',
       true,
     ],
+    // Midjourney's billing help (M11.15).
+    ['Subscriptions renew monthly based on the date you originally subscribed.', 'same-date', true],
     // Venice's terms (M11.15).
     ['Subscriptions renew on the date when you purchase the subscription.', 'same-date', true],
     // Fubo's billing help (M11.15).
