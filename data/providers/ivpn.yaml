@@ -1,0 +1,761 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada and with a plain fetch
+# (curl), which ivpn.net serves whole except its pricing, apps, server and IVPN Light pages (read in Edge): its pricing
+# page (with the plan data its script loads), services, team, ethics, apps, servers, IVPN Light, transparency report,
+# legal process guidelines, vulnerability reporting and contact pages, its terms of service, privacy policy and refund
+# policy, 42 help articles (ivpn.net/knowledgebase/...), and its blog posts on audits, the May 2026 plan changes and the
+# August 2026 payment server incident; the pricing page again through US and UK exits; ProxyStore's IVPN page.
+# Pricing: ivpn.net/en/pricing ("Pricing in USD."): Standard, Plus and Pro Suite, each "1 Week", "1 Month" and "1 Year"
+# ($2, $6, $60; $3, $8, $80; $4, $10, $100). The page's own plan data (its script, which the page filters to these three)
+# also has 2 and 3 years for each ($100 and $140; $140 and $180; $160 and $220), which its checkout sells ("select 1 year
+# or longer" for cash, which it takes "only for 1, 2, or 3 years") and ProxyStore's vouchers confirm ("IVPN Standard 2
+# years (100 USD, same as 1 year Pro)", "IVPN Plus 3 years (180 USD)", "IVPN Pro Suite 3 years (220 USD)"), so they're
+# stored too (notes.md). The same US-dollar prices from Canada and through US and UK exits: one list for everyone (GLOBAL
+# USD). No page says the prices include tax. None is a first-term offer: each period is one payment for that time.
+# Region checklist for CA and US, 2026-11-19: 1. no country paths (/en/ and /es/, the same prices); 2. a language choice
+# only; 3. the page says "Pricing in USD." and its data has one price per period; 4. the checkout starts by generating an
+# account, so it wasn't opened; 5. the help centre's "How much does IVPN cost?" points to the pricing page; 6. Edge and
+# a plain fetch from Canada, and Edge through US and UK exits: all the same; 7. no bill offered.
+# Its individual plans: Standard, Plus and Pro Suite (Pro until May 2026: "Pro is now the Pro Suite"). Team licensing
+# (/en/pricing-teams) is for teams, out of scope. IVPN Light (3 hours to 30 days of WireGuard access, priced only in
+# satoshis over Lightning, "IVPN Light purchases are non-refundable") isn't stored: no price in a currency (notes.md).
+# Bundles: none; Plus and Pro Suite include its own Mailx, modDNS and Portmaster Pro (perks below).
+# Official resellers: its voucher FAQ names Amazon US and ProxyStore ("Physical voucher cards are currently available on
+# Amazon US and ProxyStore DE . Digital vouchers can be purchased in the ProxyStore Onlineshop ."). ProxyStore's offer is
+# below; Amazon US's isn't (notes.md). App stores bill its mobile in-app purchases: partners, not listed.
+
+id: ivpn
+name: IVPN
+website: https://www.ivpn.net
+category: vpn
+spendCategory: software
+# Accepted cards, read 2026-11-19: its payment methods article names only the network it refuses ("Credit/Debit Cards
+# (except American Express and any types of Prepaid/Gift Cards)"); its card form shows Mastercard, Maestro, Discover and
+# Visa logos without words, so no acceptedNetworks.
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling ("Uncheck Recurring payments" in the account's billing settings).
+cancelUrl: https://www.ivpn.net/knowledgebase/billing/how-can-i-cancel-my-ivpn-subscription/
+sources: { pricing: https://www.ivpn.net/en/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-19 in its payment methods article: Bitcoin (its own BTCPay server, Lightning too),
+# Monero, PayPal, cards, its apps' in-app payments for Standard ("Android in-app payments are temporarily unavailable
+# while the app is not on Google Play"), voucher cards and codes, and cash, for 1, 2 or 3 years (How can I pay with cash?).
+paymentMethods:
+  - methods: [crypto, paypal, card, app-store, gift-card, cash]
+    page: 'What payment methods do you accept?'
+    url: https://www.ivpn.net/knowledgebase/general/what-payment-methods-do-you-accept/
+    quotes:
+      - Bitcoin (via our own BTCPay server)
+      - Monero (self-hosted)
+      - PayPal
+      - Credit/Debit Cards (except American Express and any types of Prepaid/Gift Cards)
+      - In-app payments for IVPN Standard via our mobile apps for iOS and Android .
+      - Physical voucher cards and digital voucher codes
+      - Cash
+# Renewal day (M11.5), read 2026-11-19: time is added to the account ("When you add time to your account"), card and
+# PayPal payments can recur ("If you elect to enable auto-renew for card payments"; cancelling unchecks "Recurring
+# payments"), and an upgrade keeps "The original IVPN account expiry date". No page says on which day a recurring payment
+# is charged, so not-stated (notes.md has the same-date wording these pages lack).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.ivpn.net/en/tos/
+    - https://www.ivpn.net/en/privacy/
+    - https://www.ivpn.net/knowledgebase/billing/how-can-i-cancel-my-ivpn-subscription/
+    - https://www.ivpn.net/knowledgebase/billing/ivpn-subscription-tiers-explained-plan-differences-billing-and-service-management/
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19 on its team page, whose footer names the company's country. Private: its CEO owns all
+# of it, and no page names a listing.
+owner:
+  name: IVPN Limited, 100% owned by its founder and CEO, Nicholas Pestell
+  page:
+    name: Team
+    url: https://www.ivpn.net/en/team/
+  quotes:
+    - Nick is founder and CEO of IVPN and 100% owner of IVPN Limited, the company through which the IVPN service is operated.
+    - IVPN is operated by IVPN Limited, registered in Gibraltar.
+  country:
+    code: GI
+  lastVerified: 2026-11-19
+notes: >-
+  No email or name needed: you sign up with a generated account ID. One US-dollar price list everywhere, for a week, a
+  month, or one, two or three years. Card and PayPal payments can renew automatically (you can turn that off); Bitcoin,
+  Monero, cash and vouchers add time that doesn't renew.
+
+# Perks (M11.6): the extra services Plus and Pro Suite include, in the pricing page's words: Mailx (email aliases),
+# modDNS (a DNS filter) and Portmaster Pro (an app firewall). Each is its own account, reached without passing the IVPN
+# account ID ("Additional services authorise access without receiving your IVPN account ID (Unlinked Access)").
+perks:
+  - id: mailx
+    name: Mailx
+  - id: moddns
+    name: modDNS
+  - id: portmaster-pro
+    name: Portmaster Pro (Linux, Windows)
+
+# General features, read 2026-11-19: apps for Windows, macOS, Linux, iOS and Android (its apps page and services page,
+# "Open-source apps for iOS, Android, macOS, Windows, Linux plus config generator for custom setups"; routers and NAS by
+# manual setup); sign-in with its generated account ID, none of account.sign-in's ways, plus authenticator app codes
+# ("Scan the barcode using the preferred TOTP (Time-based One-Time Password) app", Do you offer Two-Factor
+# Authentication?); support by email ("Send an email and we’ll normally reply within a few hours (in some rare cases up to
+# 24 hours).", Contact us); its site in English and Spanish ("Versión española"). Open-source apps: "Our applications are
+# open source and available for review on our GitHub page ." (Ethics), and its services page's "IVPN on GitHub ↗"
+# (github.com/ivpn). No pause: time runs out or renews (its Windows app's "Pause VPN" pauses the connection, not the
+# subscription). No parental controls: AntiTracker is a switch you set for yourself.
+features:
+  platforms: [windows, macos, linux, android, ios]
+  account.sign-in: [totp]
+  support.channels: [email]
+  software.open-source: open-clients
+  languages.interface: [en, es]
+sourceRepo:
+  url: https://github.com/ivpn
+  page:
+    name: Ethics
+    url: https://www.ivpn.net/en/ethics/
+  quotes:
+    - Our applications are open source and available for review on our GitHub page .
+  lastVerified: 2026-11-19
+
+# Free use: none: "We do not have a free trial option. We offer an affordable one week paid plan which can be used to
+# test our service out." (Does IVPN offer a free trial?), and its pricing page sells only paid plans.
+freeUse:
+  kind: none
+  pages:
+    - https://www.ivpn.net/en/pricing/
+    - https://www.ivpn.net/knowledgebase/billing/does-ivpn-offer-a-free-trial/
+  lastVerified: 2026-11-19
+
+# VPN features, read 2026-11-19, the same on every plan but devices (Standard includes "the VPN service with Multi-hop,
+# AntiTracker, and up to five devices", Plus adds Mailx and modDNS, Pro Suite adds Portmaster Pro "with VPN device limit
+# increased to 10": IVPN Subscription Tiers Explained):
+# - Devices: "a single subscription allows 5 devices with an IVPN Standard or IVPN Plus plan, or 10 devices with an IVPN
+#   Pro Suite plan" (How many devices). Data: "No, we do not record bandwidth used and therefore there is no limit."
+#   (Answers for "18 Questions"), so unlimited.
+# - Countries: "We operate servers in 58 locations / 41 countries." (pricing page); "Bare-metal servers in 41 countries.
+#   IVPN runs 89 gateways across 58 locations" (servers page).
+# - Protocols: "IVPN supports OpenVPN (2.3.7 and up), WireGuard®, and IPSec with IKEv2." (IKEv2 in its iOS app), and
+#   "V2Ray obfuscation (VMess over QUIC or TCP) on every platform, plus obfs4 for OpenVPN on desktop" (stealth).
+# - Kill switch: its firewall, on Windows, macOS, Linux and iOS (Do you offer a kill switch or VPN firewall?). Split
+#   tunnelling on Windows, Linux and Android (Split Tunnel FAQ). Multi-hop: "The Multi-hop feature is available in all
+#   plans ."
+# - Blocking: AntiTracker blocks "trackers that collect various information about your browser activity (e.g. Google
+#   Analytics), known malicious websites, and ads" (AntiTracker FAQ), with a Hardcore Mode for Google's and Meta's
+#   domains (not one of the registry's lists).
+# - P2P: "We do not restrict the use of any protocols", asking customers to avoid US servers for it. No port forwarding
+#   ("Port Forwarding is not available with our service."), no dedicated or static IPs, no Tor servers.
+# - No-logs and audits: "We do not log any data relating to a user’s VPN activity (while connected or connecting to the
+#   VPN)." (privacy policy); Cure53's no-logs audit of March 2019 ("The scope of the audit was to verify the no-logging
+#   claims made in our privacy policy"; "Our last and only no-logs audit was conducted by Cure53 in March 2019"), its
+#   gateway infrastructure audit (February 2023) and its apps' audits (2020, 2022), all by Cure53, with annual audits
+#   since: no-logs, servers and apps.
+# - Anonymous sign-up: "When you sign up for IVPN, you will not be asked for any personal information e.g. email
+#   address, name etc." (privacy policy).
+# - Not RAM-only: "Servers use LUKS full-disk encryption, mandatory access controls, and firewalled IPMI. A small number of
+#   pilot gateways also run a RAM-only (diskless) architecture, extending it across the network is an ongoing project."
+#   (servers page). No mesh: no page offers connecting your own devices to each other.
+# modDNS on Plus and Pro Suite (services page): "modDNS is an audited, open-source DNS service that blocks ads, trackers,
+# and malicious domains at the DNS level.", "Fine-tune filtering with custom rules to allow or deny specific domains or
+# IPs", "Enable optional query logging (off by default)" and "Use modern DNS protocols including DNS over HTTPS, DNS over
+# TLS or DNS over QUIC". The plans stay in the VPN category: no page gives modDNS's query allowance (dns.queries, the DNS
+# category's required feature), and Mailx's alias limit isn't stated, so it's a perk only.
+plans:
+  - id: ivpn.standard
+    name: Standard
+    link: https://www.ivpn.net/en/pricing/
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 41
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 2
+        interval: week
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 6
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 60
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 100
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 140
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+
+  - id: ivpn.plus
+    name: Plus
+    link: https://www.ivpn.net/en/pricing/
+    features:
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 41
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      dns.protocols: [doh, dot, doq]
+      dns.filtering: [ads, trackers, malware, custom]
+      dns.query-log: true
+    perks: [mailx, moddns]
+    notes: Mailx and modDNS are separate accounts, each needing an email address, which you set up from the IVPN account.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 3
+        interval: week
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 8
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 140
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 180
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+
+  - id: ivpn.pro-suite
+    name: Pro Suite
+    link: https://www.ivpn.net/en/pricing/
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 41
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.anonymous-signup: true
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      dns.protocols: [doh, dot, doq]
+      dns.filtering: [ads, trackers, malware, custom]
+      dns.query-log: true
+    perks: [mailx, moddns, portmaster-pro]
+    notes: >-
+      Called Pro until May 2026. Mailx and modDNS are separate accounts, each needing an email address; Portmaster Pro
+      reverts to Portmaster Free if the plan ends.
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 4
+        interval: week
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 100
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 160
+        interval: year
+        intervalCount: 2
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 220
+        interval: year
+        intervalCount: 3
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.ivpn.net/en/pricing/
+
+# Resellers, read 2026-11-19 (BLUEPRINT §4.9): ProxyStore (digitalgoods.proxystore.de/en/brand/ivpn, "We are an
+# official reseller of IVPN .") sells voucher codes for each plan for 1 month, 1 year, 2 years and 3 years, in euros, paid
+# with Monero, Bitcoin, cash or a SEPA transfer; "The vouchers are valid for at least two years from the date of
+# purchase." Its page asks where you live "for tax reasons" and says "It does not affect the price or the goods.", so no
+# tax words are stored (Mullvad's ProxyStore precedent). Amazon US's voucher cards weren't read (notes.md).
+resellers:
+  - reseller: proxystore
+    approvedBy:
+      url: https://www.ivpn.net/knowledgebase/billing/voucher-cards-faq/
+      quotes: ['Physical voucher cards are currently available on Amazon US and ProxyStore DE']
+    offers:
+      - plan: ivpn.standard
+        notes: Voucher codes, paid with Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 5.4,
+              interval: month,
+              intervalCount: 1,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 54,
+              interval: year,
+              intervalCount: 1,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 90,
+              interval: year,
+              intervalCount: 2,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 126,
+              interval: year,
+              intervalCount: 3,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+      - plan: ivpn.plus
+        notes: Voucher codes, paid with Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 7.2,
+              interval: month,
+              intervalCount: 1,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 72,
+              interval: year,
+              intervalCount: 1,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 126,
+              interval: year,
+              intervalCount: 2,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 162,
+              interval: year,
+              intervalCount: 3,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+      - plan: ivpn.pro-suite
+        notes: Voucher codes, paid with Monero, Bitcoin, cash or a SEPA transfer.
+        prices:
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 9,
+              interval: month,
+              intervalCount: 1,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 90,
+              interval: year,
+              intervalCount: 1,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 144,
+              interval: year,
+              intervalCount: 2,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+          - {
+              region: GLOBAL,
+              currency: EUR,
+              amount: 198,
+              interval: year,
+              intervalCount: 3,
+              autoRenew: false,
+              lastVerified: 2026-11-19,
+              sourceUrl: https://digitalgoods.proxystore.de/en/brand/ivpn,
+            }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its terms of service (last updated 21 January 2021), privacy
+# policy, refund policy, ethics page, legal process guidelines, transparency report, vulnerability reporting page, the
+# help articles on cancelling, deleting, reactivating, tiers and devices, its apps page, and its blog's audit and incident
+# posts. Every agreement a user accepts (the owner's rule, 2026-11-03): sign-up generates an account ID with no form to
+# agree to; its terms include nothing by reference; its apps are open source (Ethics) with no licence page of their own.
+# Its mobile apps' own terms and privacy pages (/en/tos-mobile-app, /en/privacy-mobile-app) and Mailx's and modDNS's own
+# policies weren't rated: the main terms and privacy policy settle every topic (notes.md). Its Matomo website analytics
+# and mobile crash reports are rated under data collection.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://www.ivpn.net/en/tos/
+    - name: 'Privacy policy'
+      url: https://www.ivpn.net/en/privacy/
+    - name: 'Refund policy'
+      url: https://www.ivpn.net/en/refunds/
+    - name: 'Ethics'
+      url: https://www.ivpn.net/en/ethics/
+    - name: 'Legal process guidelines'
+      url: https://www.ivpn.net/en/legal-process-guidelines/
+    - name: 'How can I cancel my IVPN subscription?'
+      url: https://www.ivpn.net/knowledgebase/billing/how-can-i-cancel-my-ivpn-subscription/
+    - name: 'Transparency report'
+      url: https://www.ivpn.net/en/transparency-report/
+    - name: 'Subscription tiers explained'
+      url: https://www.ivpn.net/knowledgebase/billing/ivpn-subscription-tiers-explained-plan-differences-billing-and-service-management/
+    - name: 'How can I reactivate my account?'
+      url: https://www.ivpn.net/knowledgebase/billing/how-can-i-reactivate-my-account/
+    - name: 'How many devices can I have?'
+      url: https://www.ivpn.net/knowledgebase/general/how-many-devices-or-simultaneous-connections-can-i-have-to-ivpn/
+    - name: 'IVPN no-logging claim verified by independent audit'
+      url: https://www.ivpn.net/blog/ivpn-no-logging-claim-verified-by-independent-audit/
+    - name: 'IVPN web infrastructure security audit concluded'
+      url: https://www.ivpn.net/blog/ivpn-sixth-security-audit-concluded/
+    - name: 'A security incident on our Bitcoin payment server'
+      url: https://www.ivpn.net/blog/security-incident-bitcoin-payment-server/
+    - name: 'Security and vulnerability reporting'
+      url: https://www.ivpn.net/en/vulnerability-reporting/
+    - name: 'IVPN for Windows'
+      url: https://www.ivpn.net/en/apps-windows/
+    - name: 'How can I pay with cash?'
+      url: https://www.ivpn.net/knowledgebase/billing/how-can-i-pay-with-cash/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It counts visits to its website with its own tool, which may set a cookie, and its phone apps send crash reports unless you switch that off in their settings. Nothing turns off the website counting.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'IVPN have selected Matomo as their web analytics platform.'
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'For our mobile apps, you can opt-out of crash log reporting by disabling it in user preferences.'
+      action:
+        name: How to turn off crash reports
+        url: https://www.ivpn.net/en/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'No other company gets your data: it runs its own tools on its own servers.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'No third-parties have access to any of your data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads, and no trackers from ad companies or social networks on its website.'
+      sources:
+        - url: https://www.ivpn.net/en/ethics/
+          quote: 'You won’t find them on ivpn.net: we are a tracking free provider.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy policy and terms don't mention AI. It keeps almost nothing about you."
+      pages: [https://www.ivpn.net/en/privacy/, https://www.ivpn.net/en/tos/]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'When your account ends, everything tied to it is deleted after 90 days; only payment records it can no longer link to you stay.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'all data associated with that VPN account including the account itself (with the exception of the accounting data below) is automatically deleted after 90 days.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account and its data yourself, at once, with a button in your account.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'If you want to delete your data immediately, simply click on the ‘delete account’ button within the client area.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for the data it holds about you, and it answers within 28 days.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'reasonable requests for release of a specific user’s data will be honoured within 28 days of an acceptable request from a user or person with a provable legal relationship with that user.'
+      action:
+        name: How to ask for your data
+        url: https://www.ivpn.net/en/privacy/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: great
+      reason: 'It hands over data only for a valid legal order, tells you when it can, publishes every request it gets, and keeps almost nothing to hand over.'
+      sources:
+        - url: https://www.ivpn.net/en/legal-process-guidelines/
+          quote: 'information about IVPN users will not be released without valid legal process.'
+        - url: https://www.ivpn.net/en/legal-process-guidelines/
+          quote: 'Where possible, IVPN will notify IVPN users when their IVPN account information is being sought in response to legal process from government, law enforcement, or third parties, except where providing notice is explicitly prohibited by the legal process itself, by a court order IVPN receives.'
+        - url: https://www.ivpn.net/en/transparency-report/
+          quote: 'The table below shows the number of valid legal requests received from government or law enforcement agencies.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: good
+      reason: 'It follows EU data law from Gibraltar, which bars moving your data to countries with weaker privacy laws.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'IVPN is subject to EU law and is in compliance with the EU Data Protection Directive (Directive 95/46/EC), which prohibits companies transferring data to overseas jurisdictions with weaker privacy laws.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'You get a random account ID. No name, email or password.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'When you sign up for IVPN, you will not be asked for any personal information e.g. email address, name etc.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You stop it renewing by unticking one box in your account, and it says it avoids tricks that make cancelling hard.'
+      sources:
+        - url: https://www.ivpn.net/knowledgebase/billing/how-can-i-cancel-my-ivpn-subscription/
+          quote: 'Uncheck Recurring payments .'
+        - url: https://www.ivpn.net/en/ethics/
+          quote: 'We shun fake reviews, made up social proofs, countdown timers, expiring deals, exit consoles and tricks that make it hard to cancel our service.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get all your money back within 30 days of paying, but only once per account, and never for cash or vouchers.'
+      sources:
+        - url: https://www.ivpn.net/en/refunds/
+          quote: 'If you are unsatisfied for any reason, you can request a full refund within 30 days of your payment.'
+        - url: https://www.ivpn.net/en/refunds/
+          quote: 'This full refund offer is available once per account and per customer .'
+        - url: https://www.ivpn.net/en/refunds/
+          quote: 'Cash and Voucher payments are non-refundable.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: "Its terms don't say whether it warns you before a price goes up."
+      pages: [https://www.ivpn.net/en/tos/, https://www.ivpn.net/en/privacy/]
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial: it sells a one-week plan to try it instead.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: "Its pages don't say it reminds you before a card or PayPal payment renews. It has no email address for you unless you add one."
+      pages:
+        [
+          https://www.ivpn.net/en/tos/,
+          https://www.ivpn.net/knowledgebase/billing/how-can-i-cancel-my-ivpn-subscription/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and refund policy name no fees beyond the price.'
+      pages: [https://www.ivpn.net/en/tos/, https://www.ivpn.net/en/refunds/]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'You can upgrade at any time and pay only the difference. To move down, you ask support, and get the rest back as money or extra time.'
+      sources:
+        - url: https://www.ivpn.net/knowledgebase/billing/ivpn-subscription-tiers-explained-plan-differences-billing-and-service-management/
+          quote: 'Yes, and yes.'
+        - url: https://www.ivpn.net/knowledgebase/billing/ivpn-subscription-tiers-explained-plan-differences-billing-and-service-management/
+          quote: 'Contact support to initiate an IVPN account downgrade.'
+        - url: https://www.ivpn.net/knowledgebase/billing/ivpn-subscription-tiers-explained-plan-differences-billing-and-service-management/
+          quote: 'You will be presented with a choice to receive either a prorated refund, or a time extension on the existing expiry date, based on the time remaining and the new product selected.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-stated
+      reason: "Its terms don't name a court or require a private referee, so disputes go to the courts as usual."
+      pages: [https://www.ivpn.net/en/tos/]
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It posts big changes on its website and emails customers it can reach, with a reasonable notice period, and you can stop using it before they start.'
+      sources:
+        - url: https://www.ivpn.net/en/tos/
+          quote: 'If we make changes that are material, we will take every reasonable step to ensure that changes are brought to your attention by posting all changes prominently on the IVPN website and emailing our existing customers.'
+        - url: https://www.ivpn.net/en/tos/
+          quote: 'The notice will designate a reasonable period of time after which the new Terms will take effect.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its rules, it can end your service without warning and keep what you paid.'
+      sources:
+        - url: https://www.ivpn.net/en/tos/
+          quote: 'If you violate any of our terms, we reserve the right to terminate your service without any advance warning or notification.'
+        - url: https://www.ivpn.net/en/tos/
+          quote: 'No refunds or credit will be given.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      status: not-stated
+      reason: "Its terms don't say whether it can change or remove features."
+      pages: [https://www.ivpn.net/en/tos/]
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'An account with no paid time left is deleted after 3 months, without a warning, since it has no email to send one to. Time you paid for is never lost.'
+      sources:
+        - url: https://www.ivpn.net/knowledgebase/billing/how-can-i-reactivate-my-account/
+          quote: 'If your IVPN account has been inactive for 3 months it will be automatically deleted from our systems.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source: anyone can read their code on GitHub.'
+      sources:
+        - url: https://www.ivpn.net/en/ethics/
+          quote: 'Our applications are open source and available for review on our GitHub page .'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside security experts check part of its systems every year and it publishes their reports. You can report security bugs to it, and it tells customers about incidents, but it offers no reward.'
+      sources:
+        - url: https://www.ivpn.net/blog/ivpn-sixth-security-audit-concluded/
+          quote: 'We continue to commit to an annual security audit where we will focus on those parts of our infrastructure and apps that we believe to be the most critical.'
+        - url: https://www.ivpn.net/en/vulnerability-reporting/
+          quote: 'If you believe you have found a security vulnerability please email our security@ mailbox.'
+        - url: https://www.ivpn.net/blog/security-incident-bitcoin-payment-server/
+          quote: 'We are publishing this because you are entitled to know when something goes wrong on infrastructure that handles your payments, whether or not it affected you directly.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: great
+      reason: 'It keeps no record of what you do or when you connect, and outside auditors (Cure53) checked its servers for that in 2019.'
+      sources:
+        - url: https://www.ivpn.net/en/privacy/
+          quote: 'We do not log any data relating to a user’s VPN activity (while connected or connecting to the VPN).'
+        - url: https://www.ivpn.net/blog/ivpn-no-logging-claim-verified-by-independent-audit/
+          quote: 'The scope of the audit was to verify the no-logging claims made in our privacy policy'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: neutral
+      reason: 'Every device signed in to its app takes one of your device slots, even when it isn’t connected, until you sign out there.'
+      sources:
+        - url: https://www.ivpn.net/knowledgebase/general/how-many-devices-or-simultaneous-connections-can-i-have-to-ivpn/
+          quote: 'Whether our app is connected or not and powered on or not, simply logging in is enough to occupy one of the device slots.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its Windows app can update itself, and its pages mention no other changes to your device.'
+      sources:
+        - url: https://www.ivpn.net/en/apps-windows/
+          quote: 'Auto-update.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Pay with cash in the mail
+      tier: great
+      reason: 'You can pay for one to three years by mailing cash, so you never have to give it your name or a card.'
+      sources:
+        - url: https://www.ivpn.net/knowledgebase/billing/how-can-i-pay-with-cash/
+          quote: 'Due to the manual processing required we accept cash payments only for 1, 2, or 3 years.'
+      lastVerified: 2026-11-19
