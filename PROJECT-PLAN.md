@@ -2279,6 +2279,11 @@ in every D1 `json` column search parses.
     DeepSeek (`deepseek`), Kimi (`kimi`, from kimi.ai), Qwen (`qwen`), Poe (`poe`: its paid plans' soldIn from its
     country table), Character.AI (`character-ai`), Venice (`venice`) and Pi (`pi`). Xbox Game Pass moved onto
     Microsoft's shared documents (#206, with AI batch 1's review fixes).
+  - **AI, batch 3** (2026-11-19): image, video and audio generators, each in ai and creative with its generative credits
+    a month (`creative.ai-credits`): Midjourney (`midjourney`), Ideogram (`ideogram`), Leonardo (`leonardo`), Runway
+    (`runway`), Pika (`pika`), Suno (`suno`), Udio (`udio`) and ElevenLabs (`elevenlabs`). Core reads a Canadian
+    province's code with a postal code as Canada. CI's audit allows a listed advisory with no fix until its review date
+    (#208).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
