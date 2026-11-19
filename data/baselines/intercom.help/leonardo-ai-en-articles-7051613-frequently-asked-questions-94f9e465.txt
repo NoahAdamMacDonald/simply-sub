@@ -1,0 +1,103 @@
+url: https://intercom.help/leonardo-ai/en/articles/7051613-frequently-asked-questions
+method: fetch
+saved: 2026-11-19
+
+Frequently Asked Questions | Leonardo.Ai Help Center Skip to main content
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+Search for articles...
+All Collections
+FAQ
+Frequently Asked Questions
+Frequently Asked Questions
+Frequently Asked Questions
+Written by Nick Lee
+Updated over a week ago
+Table of contents
+Welcome to the FAQ section of Leonardo.Ai!
+You can find answers to common questions about our AI platform here. This section is useful for both new and seasoned users, enhancing your understanding of the Leonardo platform and its creative potential.
+If you cannot find answers here jump into Discord, or use the Intercom chat bubble.
+What is Leonardo.Ai?
+At Leonardo.Ai, we're developing a comprehensive content production suite that integrates various generative AI technologies into a single, production-ready platform.
+Our aim is to augment the creative process and speed up creative workflows, and progressively build advanced generative Ai tools, models, pipelines, and processes that easily fit into various content production systems
+Will I still own the content generated using Leonardo.Ai if I switch from paid to free?
+When you generated content privately as a paid subscriber, Leonardo.Ai assigned to you all rights, titles, and interests in the outputs generated and returned by the services based on your input. This does not change even if you switch to a free account. For more details, please refer to the Terms of Service.
+​
+Can I use the images I generate on the platform for commercial purposes?
+Yes, you can use the images you generate on the platform for commercial purposes. This applies for free users too. Read more here.
+Can I control who can see my generated images?
+Paid subscribers have access to the 'Private Mode' toggle, allowing control over the visibility of generated images. If you generate with 'Private Mode' ON, the generated images are private and only visible to you. If you generate with 'Private Mode' OFF, the generated images are public and visible to all Leonardo users. Read more here.
+Can I generate private images?
+Yes, you can generate images privately when you are on any of the paid plans. Private image generation is exclusive to paid members. To enable this feature:
+Subscribe to a paid plan.
+Turn the 'Private Mode' toggle ON before you generate (you can always change this after generating - read more here.)
+How to delete my generated images and videos?
+To delete your generated image or video; hover over the image, click the three dots and click Delete Image. You can also click to open the image and click the trash can icon from the side info bar.
+Note: only paid subscribers can delete more than one image or video at a time. To delete an entire set of generated images, hover over the info side bar to the right of your generation set and click the trash can to Delete All.
+How to delete my uploaded images?
+Please refer to this guide to learn about uploading and deleting your uploaded images from Leonardo.Ai.
+Will my content be kept private or can it be used by Leonardo.Ai or other users?
+As per our Terms of Service, you can generate privately using any of the paid subscription plans. Private images cannot be accessed or used by others. Leonardo.Ai do not have the right to use your private images.
+For public images, Leonardo.Ai has the right to use, copy, reproduce, adapt, modify, publish, transmit, create derivative works from, display, perform, sublicense, and distribute your text prompts, images, and any generated assets. This license enables Leonardo.Ai to share these assets publicly and use them for service improvement and promotion. Please refer to our Terms of Service for more details.
+Please refer to this guide for commercial usage guidelines and how others can use your images on the platform if they are publicly visible.
+How to access Leonardo.Ai?
+To gain access to the Leonardo.Ai app, follow these steps:
+Visit Leonardo.Ai
+Click Create an account and sign up using SSO or email (Google SSO recommended).
+Login via app.leonardo.ai
+What are the username requirements for Leonardo.Ai?
+Usernames must adhere to the following criteria:
+Minimum of 4 characters
+Maximum of 15 characters
+No special characters (underscore '_' allowed), spaces, or duplicate usernames
+Using Leonardo.Ai on mobile
+Leonardo.Ai is available as an app for Android and Apple iOS devices! If you're on a mobile device, we recommend using the app for the best experience.
+Download the iOS app here
+Download the Android app here
+Can I change the language on Leonardo?
+At this moment, Leonardo's interface and functionalities are optimized for English to leverage the capabilities of our AI image generation models fully. While we do not offer multi-language support right now, it's something we might consider adding down the line. Thank you for your patience and understanding
+How does Content Moderation work at Leonardo.Ai?
+We take the safety of our community very seriously, which is why Leonardo.Ai implements robust content moderation practices.
+Our system includes two key levels of moderation: prompt-level and generation/output-level filtering. At the prompt level, certain combinations of words may activate filters to prevent inappropriate content generation. For outputs, any generation that might contain Not Safe For Work (NSFW) content is automatically flagged, allowing users to click to reveal if desired. You can enable (or disable) showing these image generations in your feeds by default by navigating to the Profile section in Settings (18+ required).
+We're constantly refining our filters to strike the perfect balance between being overly cautious and too permissive, ensuring a safe and enjoyable experience for all users.
+How does Not Safe For Work (NSFW) Content Moderation differ between free and paid accounts?
+The differences in Not Safe For Work (NSFW) content moderation for free and paid accounts are currently difficult to qualify. We are always updating our NSFW content moderation to make sure that the platform is safe for all. The only way to check is to use the lowest tiered paid subscription to verify for your particular use case and prompts.
+​
+When on a free account, you may get the message "Free users are subject to stricter filtering. As such your prompt has been blocked as it may result in inappropriate content. You may modify your prompt and try again or upgrade to a paid account." We recommend avoiding prompts that may lead to depictions of pornography, violence, etc. as listed in the Limitations of Use in our Terms of Service.
+How to access the Leonardo.Ai community and social channels?
+To gain access the Leonardo.Ai community and social channels, follow these steps:
+Join the Discord server here
+Join the Facebook community here
+Subscribe to the YouTube community channel here
+Follow the official Twitter here
+Join the Reddit community here
+How do I change my password?
+Unfortunately the only way to do this currently is to logout, then use "Forgot your password?" to reset your password. Note that resetting password only works if you are using username and password as authentication method, as opposed to using Apple, Google, or Microsoft login. Apologies for the inconvenience, we are working on implementing improved account management options.
+Why am I not receiving the email after clicking "Forgot your password?"
+Resetting your password only works if you are using email and password as login method. If you are using Apple, Google, Microsoft, or Canva login, you will not receive an email to reset your password.
+How much do paid Leonardo.Ai plans cost?
+To learn about the pricing for premium Leonardo.Ai web plans, please check the Plans page within the Leonardo.Ai web app. You can find it in the left sidebar under 'Plans'.
+How do I request a refund or a reimbursement?
+Refunds or reimbursements are assessed manually by a human agent. To request a refund or a reimbursement, click on "Talk to a person" button within the chat support to get in touch with a human support agent. Alternatively, you can send us an email at support@leonardo.ai or reach us via the Contact Form here. Please specify "Billing" as reason for contact and the email you use for your Leonardo.Ai account.
+Can I request support to answer in another language?
+Unfortunately, we currently don't provide support in languages other than English. Our AI support bot and our human agents are only able to provide answers in English. We recommend using an online translator to understand the English answers. To interact with a human agent, please press "Talk to a human".
+Do you offer a free trial on consumer subscription plans?
+Unfortunately, we currently do not provide free trials for consumer plans. We recommend that you purchase a plan to try out your use case. If the product does not meet your use case, you can simply cancel the subscription.
+How do I download a custom model I trained?
+Unfortunately, we currently do not support downloading a custom model. Please file a feature request with us detailing your use case and how you want to use the custom model once you downloaded it.
+How do I talk to a human support agent?
+Click the purple Intercom chat support function on the lower right of the Leonardo.Ai web app.
+Click Ask a Question, and type your question. If Fin, our AI bot can’t assist, you’ll be offered the option to Talk to a Person. Click this button if you’d like to connect with our customer support team.
+Do you support payment via Paypal?
+Yes! Choose PayPal as your payment method when purchasing a subscription or tokens. You will be taken to the PayPal website to complete your transaction.
+Why do generations cost more on Leonardo API compared to the Leonardo web app?
+The generation cost for Leonardo API and Leonardo web app are different because the Leonardo API uses API Credits, while the Leonardo web app uses Tokens.
+Tokens and API Credits are not directly comparable as they are calculated differently. To help plan your costs on API, you can refer to the Pricing Calculator.
+​
+Does Leonardo.Ai have community support?
+Leonardo.Ai has a thriving community on Discord. You can get help on settings, prompts, workflows, or if you're just trying to generate a specific image or style - ask in the #image-help channel or check out the Education Hub for self-serve content.
+You can join our Discord here.
+For further inquiries, please don't hesitate to reach out to us either via chat in the bottom right, or by emailing us at support@leonardo.ai.
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Table of contents
+Unleash your creativity with the power of Leonardo.Ai

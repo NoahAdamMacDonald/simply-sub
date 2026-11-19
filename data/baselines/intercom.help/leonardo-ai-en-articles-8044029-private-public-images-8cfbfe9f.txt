@@ -1,0 +1,36 @@
+url: https://intercom.help/leonardo-ai/en/articles/8044029-private-public-images
+method: fetch
+saved: 2026-11-19
+
+Private & Public Images | Leonardo.Ai Help Center Skip to main content
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+Search for articles...
+All Collections
+FAQ
+Private & Public Images
+Private & Public Images
+How to make your images private or public
+Written by Nick Lee
+August 25, 2026
+Table of contents
+How do I keep my generations private?
+Private image generation is a feature only available to paid members. Paid users will see the 'Private Mode' toggle on the left side bar of the AI creation tools.
+Toggle ON to enable private image generation.
+Toggle OFF will make images visible to the public feed.
+Can I control who can see my generated images?
+Paid users have full control over who can see their generated images with the Private Mode toggle and by manually selecting and changing the visibility settings of image from their Library.
+Please note that Images generated with the Private Mode toggle OFF or manually marked as Public will be visible and useable by other members. Publicly generated images that have since been manually marked as Private cannot be used by the public. Learn more about Image privacy settings and other options.
+Will my content be kept private or can it be used by Leonardo.AI or other users?
+As per our Terms of Service, any images that are not toggled to private (or for the duration that they are set to public) grants Leonardo.Ai the right to use, copy, reproduce, process, adapt, modify, publish, transmit, create derivative works of, publicly display, publicly perform, sublicense, and distribute text prompts and images you input into the services, or any assets produced by the service at your direction.
+This license also allows Leonardo.Ai to make the assets available to the public and use them in order to provide, maintain, promote, and improve the services.
+However, if you toggle your images to private, they won’t be visible to other users or Leonardo.Ai and they will not be subject to use by Leonardo.Ai for advertising or improvement purposes.
+Read this article for a detailed example of how free and paid users images may be used or not used based on if their images are private or public.
+Related Articles
+Frequently Asked Questions
+How to Generate Images with Leonardo.Ai
+Nano Banana (Gemini 2.5 Flash Image)
+How to Edit Leonardo.Ai images in Canva
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Table of contents
+Unleash your creativity with the power of Leonardo.Ai

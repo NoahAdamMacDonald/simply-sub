@@ -1,0 +1,34 @@
+url: https://help.suno.com/en/articles/9709569
+method: fetch
+saved: 2026-11-19
+
+Suno - CA AB 2013 Disclosure
+Knowledge Base
+Make Music Now!
+How can we help?
+Results
+No results found
+More results
+We use cookies to analyze website traffic and help improve our visitor experience. Privacy Policy
+Reject
+Accept
+Home
+Community Resources
+Suno - CA AB 2013 Disclosure
+Edited
+Suno Generative AI Model Training Disclosure
+This document provides information on how we, Suno, Inc. and our affiliates and subsidiaries (“Suno”), use data to train Suno’s generative artificial intelligence models.
+Dataset sources: Suno’s generative AI models are trained on user Content (as defined in the Suno Terms of Service), User Activity Information (as defined in the Suno Privacy Notice), certain other licensed content, metadata transcriptions from large language models, and for certain MIDI features, publicly available instrument sample files (for a non-music generative model).
+Intended purpose: Suno uses data to train its music and video generative AI models, which are intended to create audio from text prompts, enable voice renditions of text inputs, create music videos through text prompts and reference content, and facilitate AI powered music production through means such as stem separation and MIDI rendering and transcription.
+Data points, including counts and types: Suno’s training data consists of over 100 million music audio files and corresponding textual metadata that help teach the models about what certain genres or types of music sound like. Suno also uses User Activity Information and Content to improve its models. The volume of available data is consistent with the number of outputs that have been generated using the Service at any given time.
+Inclusion of public domain or IP-protected data: Suno trains its models on datasets consisting of audio and video that may be from the public domain, open source, or that may be subject to intellectual property protection.
+Acquisition of data: As described above, Suno’s models were developed through the acquisition of user Content (as defined in the Suno Terms of Service) and User Activity Information (as defined in the Suno Privacy Notice), certain other licensed content acquired through partnerships, and for certain MIDI features, publicly available instrument sample files (for a non-music generative model).
+Inclusion of personal information or aggregate consumer information: Suno’s training datasets contain Content (as defined in the Suno Terms of Service) and User Activity Information (as defined in the Suno Privacy Notice),. In addition, Suno’s training datasets consist of publicly available instrument sample files and licensed content from partners, which are not personal information under applicable privacy laws. Suno generally does not knowingly include in its training dataset aggregate consumer information as defined under applicable privacy laws.
+Cleaning, processing, and other modification to datasets: Suno undertakes processing steps to associate audio files to their related metadata. Prior to training, Suno has designed its processes to organize, clean, filter, and process the collected datasets to remove junk or other low-quality data and improve its usefulness for model training.
+Data collection time period: Suno has been collecting data to train its music generative AI models since 2023. Its data collection efforts remain ongoing as it continues to develop new versions of its models.
+Dates the datasets were first used: Suno began collecting the datasets in 2023 and began using them for model development shortly thereafter. Data collection and use remain ongoing as Suno continues to develop new versions of its generative AI models.
+Use of Synthetic Data: Suno uses synthetic data in the development of its generative artificial intelligence systems and services.
+Cookie preferences
+Terms of ServicePrivacy PolicySuno on iOS
+Community GuidelinesBlogSuno on Android
+Leave us feedback

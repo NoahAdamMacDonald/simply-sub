@@ -1,0 +1,648 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada: midjourney.com's
+# pricing page (each FAQ answer opened, and its Monthly billing view) and home page, and its help centre
+# (docs.midjourney.com: the plans, payment, currency, tax, free trial, renewal, cancelling, refund, plan change,
+# auto-renewal, support, sign-in, Editor, Video, Draft and Conversational mode, Stealth mode, privacy, commercial use,
+# content authenticity, data deletion and student billing articles, its Terms of Service, Privacy Policy, Cookie Policy,
+# Community Guidelines and Public Summary of Training Content). midjourney.com/about showed Cloudflare's check, and so
+# did the pricing page through a UK exit (2026-11-17); the help centre's currency article settles every country.
+# Pages, each quoted where it's used:
+# Pricing: midjourney.com/pricing, the monthly "Regular price" ("$10", "$30", "$60", "$120") and the yearly
+# per-month price ("With yearly billing" "$8" "/ month", "20% off billed annually"), and the help centre's Comparing
+# Midjourney Plans, the yearly price in full ("$96", "$288", "$576", "$1,152", "the full year fee is paid upfront").
+# "Midjourney accepts payments exclusively in US Dollars (USD)." (Payment Currency): one US-dollar price list for every
+# country, GLOBAL. Tax is added at checkout ("Any taxes due are added to your subscription price"), so no price
+# includes tax.
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang on the pricing page; 2. no country or currency
+# picker; 3. the page's text names no currency, but its help centre says USD only; 4. checkout needs an account
+# (Google or Discord); 5. Payment Currency and Tax / VAT Charges (USD only, tax added by Stripe); 6. Edge from Canada;
+# a UK exit met Cloudflare's check; 7. no bill offered.
+# Its plans: Basic, Standard, Pro and Mega, monthly or yearly. Not listed: extra Fast time bought as you go ("$4/hr",
+# "Purchased additional Fast time expires after 60 days if unused and purchases cannot be refunded."), group and
+# corporate billing (business), and the Midjourney Magazine subscription (a print magazine its store sells, not the
+# image service: notes.md).
+# Bundles: none on its pages. Official resellers: none; no page names a shop that sells it (third-party gift codes
+# that load a virtual card aren't its resellers: notes.md).
+
+id: midjourney
+name: Midjourney
+website: https://www.midjourney.com
+domains: [docs.midjourney.com]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help centre's Canceling Your Subscription: "You can cancel your Midjourney subscription at any time by going to
+# your Manage Subscription Page and clicking the Cancel Plan button."
+cancelUrl: https://docs.midjourney.com/hc/en-us/articles/25384024738573-Canceling-Your-Subscription
+sources: { pricing: https://www.midjourney.com/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: cards and some wallets through Stripe (Accepted Payment Methods); Amazon Pay
+# and Stripe's Link have no id, so they're `other`. "Unfortunately, PayPal isn't currently supported."
+paymentMethods:
+  - methods: [card, apple-pay, google-pay, alipay, other]
+    page: 'Accepted Payment Methods'
+    url: https://docs.midjourney.com/hc/en-us/articles/27868831972365-Accepted-Payment-Methods
+    quotes:
+      - 'Generally, you can pay with major credit and debit cards like Visa, Mastercard, and American Express, as well as some digital wallets such as Apple Pay, Amazon Pay, Alipay, Google Pay, and Link in some regions.'
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://docs.midjourney.com/hc/en-us/articles/27868831972365-Accepted-Payment-Methods
+    quotes:
+      - 'Generally, you can pay with major credit and debit cards like Visa, Mastercard, and American Express'
+
+# Owner (M11.2), read 2026-11-17: its terms name Midjourney, Inc. as the company you contract with; its takedown address
+# is in South San Francisco and its terms are California's. Private: no page names a listing.
+owner:
+  name: 'Midjourney, Inc.'
+  page:
+    name: Terms of service
+    url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+  quotes:
+    - 'These Terms of Service (“Terms”) govern the relationship between Midjourney, Inc. (“Midjourney”,”we”,”our”)'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+    quotes:
+      - 'South San Francisco, CA, 94080-7066, US'
+      - 'This Agreement shall be governed by the laws of the State of California, USA, without reference to conflict of law rules.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: Finding Your Renewal Time says "Subscriptions renew monthly based on the date
+# you originally subscribed. If a month doesn't have that date, your subscription will renew on the last day of the
+# month": the date you signed up.
+renewalAnchor:
+  kind: same-date
+  page: Finding Your Renewal Time
+  url: https://docs.midjourney.com/hc/en-us/articles/27870433501837-Finding-Your-Renewal-Time
+  quotes:
+    - 'Subscriptions renew monthly based on the date you originally subscribed.'
+  lastVerified: 2026-11-17
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-17: none. "No free trial is currently available in Discord or
+# the midjourney.com website." (Free Trials); its pricing page sells only the four paid plans. The niji · journey app's
+# "limited trial" is a trial in another app, not free use of this service.
+freeUse:
+  kind: none
+  pages:
+    - https://www.midjourney.com/pricing
+    - https://docs.midjourney.com/hc/en-us/articles/27870399340173-Free-Trials
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on the pricing cards and Comparing Midjourney Plans: GPU time and Relax mode (usage,
+# never features), Stealth mode (private generation: no registry feature) and the commercial-use terms.
+perks:
+  - id: fast-200-minutes
+    name: 'Limited generations (~200 image jobs / month)'
+  - id: fast-15h
+    name: 15h Fast generations
+  - id: fast-30h
+    name: 30h Fast generations
+  - id: fast-60h
+    name: 60h Fast generations
+  - id: relax-images
+    name: Unlimited Relax image generations
+  - id: relax-video
+    name: Unlimited Relax image and SD video generations
+  - id: stealth-mode
+    name: Stealth mode generation
+  - id: commercial-terms
+    name: General commercial terms
+  - id: commercial-big-companies
+    name: 'Commercial use for companies making more than $1,000,000 USD a year'
+
+# AI and creative features, read 2026-11-17, on every plan unless named:
+# - It's sold as an AI service (its about page: "a community-funded research lab of 60 people known for building the
+#   most beautiful AI models in the world"), so its plans are in the ai category with ai.assistant, and in creative
+#   (notes.md: an image generator under the registry's assistant group). Conversational mode is an assistant of its
+#   own: "Conversational mode allows you to describe your ideas and images in normal, conversational language to an AI
+#   that will write prompts for you." (Draft & Conversational Modes), on midjourney.com with no plan named. Its "With
+#   Voice: Prefer talking? Click the microphone  icon." is dictation: you speak your ideas and nothing answers aloud,
+#   so no voice conversations.
+# - Image and video generation: "SD video generation" (Basic) and "SD and HD video generation" (the other cards);
+#   "Midjourney videos are generated in 480p quality, also called Standard Definition (SD)." and "If you have the
+#   Standard, Pro, or Mega plan you can also generate videos in 720p quality" (Video): Standard, Pro and Mega export
+#   720p; Basic's 480p is below the registry's lowest value, so it states none.
+# - Creative tools: photo editing, its Editor on your own images on every card ("Use Editor on uploaded images"; "The
+#   Editor on midjourney.com provides a simple and easy-to-use web interface for editing and adjusting your favorite
+#   images—both Midjourney images and your own personal ones.", Editor).
+# - No watermark, inferred: its content authenticity article describes only a hidden tag ("Every image Midjourney
+#   delivers has a small ID tag hidden inside the file."), lost on "Screenshots, edits, and most social media sites".
+# - Chats and creations kept on its servers: "The personal information you provide is stored on Midjourney servers in
+#   the US." (Data Deletion and Privacy FAQ).
+# - None of its pages offers web search, memory across chats, projects, reasoning models, a coding agent, an API,
+#   other companies' models, music or voice generation, or apps for your phone (the niji · journey app is a separate
+#   app with its own trial). Personalization profiles learn your taste in images, not your chats (notes.md).
+# General features, read 2026-11-17: the web and Discord ("Every Midjourney plan lets you use both platforms—it's all
+# about setting things up correctly.", Logging In & Connecting Accounts); Discord has no platform value, so `web`.
+# Sign-in: "Right now, you can create a Midjourney account using either a Discord account or a Google account." and
+# "We don't have the option to create a username and password specific just to Midjourney." Support: "For billing
+# inquiries, please email billing@midjourney.com", and its Discord server. No app languages listed, no pause (a "Paused"
+# plan is a failed payment, Fixing a Paused Plan) and no parental controls on its pages.
+features:
+  platforms: [web]
+  account.sign-in: [sso]
+  support.channels: [email, community]
+
+plans:
+  - id: midjourney.basic
+    name: Basic
+    link: https://www.midjourney.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing]
+      creative.no-watermark: true
+    inferred:
+      creative.no-watermark:
+        reason: 'Its content authenticity article describes only a small ID tag hidden inside each file, which screenshots and edits remove; no page mentions a visible watermark.'
+        page:
+          name: Content Authenticity
+          url: https://docs.midjourney.com/hc/en-us/articles/48207461163661-Content-Authenticity
+        lastVerified: 2026-11-17
+    perks: [fast-200-minutes, commercial-terms]
+    notes: '3.3 hours (200 minutes) of Fast GPU time a month, about 200 image jobs; no Relax mode. Videos in SD (480p) only. 3 Fast image jobs and 1 Fast video job at a time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.midjourney.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 96
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+
+  - id: midjourney.standard
+    name: Standard
+    link: https://www.midjourney.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing]
+      creative.no-watermark: true
+      creative.export-resolution: 720p
+    inferred:
+      creative.no-watermark:
+        reason: 'Its content authenticity article describes only a small ID tag hidden inside each file, which screenshots and edits remove; no page mentions a visible watermark.'
+        page:
+          name: Content Authenticity
+          url: https://docs.midjourney.com/hc/en-us/articles/48207461163661-Content-Authenticity
+        lastVerified: 2026-11-17
+    perks: [fast-15h, relax-images, commercial-terms]
+    notes: '15 hours of Fast GPU time a month and unlimited images in Relax mode; HD (720p) video in Fast mode. 3 Fast image and 3 Fast video jobs at a time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 30
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.midjourney.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 288
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+
+  - id: midjourney.pro
+    name: Pro
+    link: https://www.midjourney.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing]
+      creative.no-watermark: true
+      creative.export-resolution: 720p
+    inferred:
+      creative.no-watermark:
+        reason: 'Its content authenticity article describes only a small ID tag hidden inside each file, which screenshots and edits remove; no page mentions a visible watermark.'
+        page:
+          name: Content Authenticity
+          url: https://docs.midjourney.com/hc/en-us/articles/48207461163661-Content-Authenticity
+        lastVerified: 2026-11-17
+    perks: [fast-30h, relax-video, stealth-mode, commercial-terms, commercial-big-companies]
+    notes: '30 hours of Fast GPU time a month, unlimited images and SD videos in Relax mode, and Stealth mode, which keeps your creations off the Explore page. A company making more than $1M a year needs Pro or Mega to own what it makes.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 60
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.midjourney.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 576
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+
+  - id: midjourney.mega
+    name: Mega
+    link: https://www.midjourney.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing]
+      creative.no-watermark: true
+      creative.export-resolution: 720p
+    inferred:
+      creative.no-watermark:
+        reason: 'Its content authenticity article describes only a small ID tag hidden inside each file, which screenshots and edits remove; no page mentions a visible watermark.'
+        page:
+          name: Content Authenticity
+          url: https://docs.midjourney.com/hc/en-us/articles/48207461163661-Content-Authenticity
+        lastVerified: 2026-11-17
+    perks: [fast-60h, relax-video, stealth-mode, commercial-terms, commercial-big-companies]
+    notes: 'Everything in Pro with 60 hours of Fast GPU time a month and 12 Fast video jobs at a time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 120
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.midjourney.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 1152
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge from its help centre: its
+# Terms of Service (effective May 27, 2026), which include its Privacy Policy, the Subscription Plans page and its
+# Community Guidelines (in the terms, and as their own article: no topic beyond them); its Cookie Policy, Data Deletion
+# and Privacy FAQ, and the Public Summary of Training Content (its EU AI Act disclosure). Not read: the sign-up form's
+# agreement line (sign-up is Google's or Discord's own form) and Discord's terms (for its Discord bot); the Purchase
+# Order Terms and Conditions are for companies buying in bulk (business).
+policies:
+  links:
+    - name: Terms of service
+      url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+    - name: Privacy policy
+      url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+    - name: Cookie policy
+      url: https://docs.midjourney.com/hc/en-us/articles/37012090959245-Cookie-Policy
+    - name: Data deletion and privacy FAQ
+      url: https://docs.midjourney.com/hc/en-us/articles/32084462534541-Data-Deletion-and-Privacy-FAQ
+    - name: Public summary of training content
+      url: https://docs.midjourney.com/hc/en-us/articles/48067080311309-Public-Summary-of-Training-Content
+    - name: Canceling your subscription
+      url: https://docs.midjourney.com/hc/en-us/articles/25384024738573-Canceling-Your-Subscription
+    - name: Requesting a refund
+      url: https://docs.midjourney.com/hc/en-us/articles/25386088618253-Requesting-a-Refund
+    - name: Free trials
+      url: https://docs.midjourney.com/hc/en-us/articles/27870399340173-Free-Trials
+    - name: Turning off automatic renewals
+      url: https://docs.midjourney.com/hc/en-us/articles/27868888211213-Turning-Off-Automatic-Renewals
+    - name: Payment currency
+      url: https://docs.midjourney.com/hc/en-us/articles/27868831424525-Payment-Currency
+    - name: Keeping your creations private
+      url: https://docs.midjourney.com/hc/en-us/articles/28014645615373-Keeping-Your-Creations-Private
+    - name: Stealth mode
+      url: https://docs.midjourney.com/hc/en-us/articles/32019750070669-Stealth-Mode
+    - name: Logging in and connecting accounts
+      url: https://docs.midjourney.com/hc/en-us/articles/33390994570509-Logging-In-Connecting-Accounts
+    - name: Upgrading or downgrading your plan
+      url: https://docs.midjourney.com/hc/en-us/articles/27870428114317-Upgrading-or-Downgrading-Your-Plan
+    - name: Comparing Midjourney plans
+      url: https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+    - name: Pricing
+      url: https://www.midjourney.com/pricing
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel at any time with one button on your subscription page, and you keep everything you paid for, Fast time included, until the period ends.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/25384024738573-Canceling-Your-Subscription
+          quote: 'You can cancel your Midjourney subscription at any time by going to your Manage Subscription Page and clicking the Cancel Plan button.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/25384024738573-Canceling-Your-Subscription
+          quote: "Your cancellation will become effective at the end of your current billing cycle, and you'll still have access to all of your subscription features—including any remaining Fast time—until then."
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get money back only if you have barely used it (under 20 minutes of generating, ever). Otherwise there is no refund, but you keep it to the end of the time you paid for.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/25386088618253-Requesting-a-Refund
+          quote: "You're eligible for a refund only if you've used less than 20 GPU minutes throughout the lifetime of your account."
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'You will not be refunded for the current subscription period, but You will not be charged after the current subscription period has ended.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices at any time, and its terms don’t say it will tell you first.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'We reserve the right to modify or discontinue any aspect of the Service, including pricing and features, at any time.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its website has no free trial. Its help centre mentions a limited trial in its separate niji · journey app, but not whether it turns into a paid plan.'
+      pages:
+        - https://docs.midjourney.com/hc/en-us/articles/27870399340173-Free-Trials
+        - https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its help centre says every plan renews on its own and you must cancel each time, but not that it reminds you before a renewal.'
+      pages:
+        - https://docs.midjourney.com/hc/en-us/articles/27868888211213-Turning-Off-Automatic-Renewals
+        - https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages list no fees beyond the price and tax. It charges only in US dollars, so your bank may convert the amount and add its own fee.'
+      pages:
+        - https://docs.midjourney.com/hc/en-us/articles/27868831424525-Payment-Currency
+        - https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up can start at once, with a discount for the Fast time you haven’t used. Moving down starts when your plan renews, with no money back.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/27870428114317-Upgrading-or-Downgrading-Your-Plan
+          quote: "If you upgrade right away, you'll receive a discount based on any unused Fast time from your current plan."
+        - url: https://www.midjourney.com/pricing
+          quote: "Downgrading: If you decide to switch to a lower plan, the change will take effect at your next renewal, not immediately. Please note that downgrading won't refund your current plan."
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'Every dispute goes to a private referee (an arbitrator) in California instead of a court, and you give up a jury. Its terms say nothing about class actions, and offer no way to opt out.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'In the event a dispute, controversy, or claim arises out of or relating to these Terms (“Dispute”), the Dispute will be resolved by binding arbitration rather than in court.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'The arbitration will be conducted in English in Santa Clara County, California, USA.'
+      action:
+        name: 'Its dispute clause (section 6 of its terms)'
+        url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It shows you its updated terms, without saying how long before they apply, and using Midjourney after that means you accept them.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'This agreement may be updated and presented again to the Customer from time to time. Continued use of the Services constitutes acceptance of the updated terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or ban you at any time, for any reason, and you get no money back for the time you paid for.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'Midjourney reserves the right to suspend or ban Your access to the Services at any time, and for any reason.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'You will not be refunded for the current subscription period, but You will not be charged after the current subscription period has ended.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'You give Midjourney a licence that never ends over what you type, upload and make, which it can pass to anyone. Your work is public for others to remix; Stealth mode (Pro, Mega) hides it but doesn’t narrow the licence.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'By using the Services, You grant to Midjourney, its affiliates, successors, and assigns a perpetual, worldwide, non-exclusive, sublicensable no-charge, royalty-free, irrevocable copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, sublicense, and distribute the Content You input into the Services, as well as any Assets produced by You through the Service.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'Please note: Midjourney is an open community which allows others to use and remix Your Content whenever they are posted in a public setting. By default, Your Content is publicly viewable and remixable.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/28014645615373-Keeping-Your-Creations-Private
+          quote: 'Available only with our Pro and Mega Plans, Stealth mode keeps your creations hidden from other users on the website.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'You own the images and videos you make, even after you cancel, but Midjourney keeps a licence to use them. A company earning over $1 million a year owns them only on Pro or Mega.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'You own all Assets You create with the Services to the fullest extent possible under applicable law.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'If you are a company or any employee of a company with more than $1,000,000 USD a year in revenue, you must be subscribed to a “Pro” or “Mega” plan to own Your Assets.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or drop any part of the service, including what your plan includes, at any time, and promises nothing about its quality or uptime.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'We reserve the right to modify or discontinue any aspect of the Service, including pricing and features, at any time.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'No guarantees are made with respect to the Services’ quality, stability, uptime or reliability.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+        - https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'One person may use each account, and you may not take the service or its images apart to see how they work, with no exception for what the law allows.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'You may not reverse engineer the Services or the Assets.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'Only one user may use the Services per registered account.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account: each account is for one person only.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'Only one user may use the Services per registered account. Each user of the Services may only have one account.'
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and plan pages limit how many jobs run at once, but say nothing about how many devices you can use.'
+      pages:
+        - https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+        - https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'You use it on its website or in Discord; its terms don’t say anything about changing your device.'
+      pages: [https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says it tries to use reasonable security; it names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It collects how you use the site for analytics. You can turn analytics cookies off in your settings, but it still keeps usage data for its own analysis.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/37012090959245-Cookie-Policy
+          quote: 'Analytics Cookies: These cookies help Us understand how visitors interact with Our Site and Services, such as which pages are most popular or which features are the most engaging.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'Midjourney will also retain Usage Data for internal analysis purposes.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/37012090959245-Cookie-Policy
+          quote: 'You can manage your cookie preferences at any time through the Privacy Settings page.'
+      action:
+        name: 'Your account settings (cookie and email choices)'
+        url: https://www.midjourney.com/account-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your data, but Google and Meta advertising cookies send what you do to those companies for ads. You can say no in your cookie settings, which are cookie choices, not a full stop.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'While Midjourney does not sell Your information, We may share it, for example, through advertising cookies that allow Our third party partners to deliver relevant and personalized ads.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'You can opt-out of such sharing at any time by updating Your preferences in the Account Settings page.'
+      action:
+        name: 'Your account settings (cookie choices)'
+        url: https://www.midjourney.com/account-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'There are no ads in Midjourney, but it uses advertising cookies to target its marketing at you. You can turn them off in your cookie settings.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/37012090959245-Cookie-Policy
+          quote: 'Advertising Cookies: These types of cookies are used to measure the effectiveness of Our marketing campaigns and help deliver relevant content and advertisement to users.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/37012090959245-Cookie-Policy
+          quote: 'You can manage your cookie preferences at any time through the Privacy Settings page.'
+      action:
+        name: 'Your account settings (cookie choices)'
+        url: https://www.midjourney.com/account-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In Europe and the UK its advertising cookies are used only if you agree to them.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'Non-essential advertising cookies will only be used with Your explicit consent.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you type and upload trains its image and video models, and no page offers a way to stop it, Stealth mode included.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/48067080311309-Public-Summary-of-Training-Content
+          quote: 'Was data from user interactions with the AI model (e.g. user input and prompts) used to train the model? ☒ Yes'
+        - url: https://docs.midjourney.com/hc/en-us/articles/48067080311309-Public-Summary-of-Training-Content
+          quote: 'Midjourney adheres to its Privacy Policy and Terms of Service, as applicable, for user data training.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'Everything you make, even in private Discord chats, can be seen by anyone on its Explore page, and on Basic and Standard there’s no way to hide it. Images you trash can still be found.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/28014645615373-Keeping-Your-Creations-Private
+          quote: 'Midjourney thrives as an open-by-default community, which means that every image and video you create can potentially be found on the Explore page on midjourney.com.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32019750070669-Stealth-Mode
+          quote: 'Trashed creations may still be found on the Explore page, in ranking, or by using the job ID or creation URL.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      plans: [midjourney.pro, midjourney.mega]
+      tier: poor
+      reason: 'What you make is public by default, but on Pro and Mega you can turn on Stealth mode to hide it from other members on the website.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32019750070669-Stealth-Mode
+          quote: 'Stealth mode is available only to Pro and Mega Plan members.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/28014645615373-Keeping-Your-Creations-Private
+          quote: 'Available only with our Pro and Mega Plans, Stealth mode keeps your creations hidden from other users on the website.'
+      action:
+        name: 'How to turn on Stealth mode'
+        url: https://docs.midjourney.com/hc/en-us/articles/32019750070669-Stealth-Mode
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it, but deletes your account and data within 30 days of your asking.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'Midjourney will retain Your Personal Data only for as long as is necessary for the purposes set out in this Policy.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32084462534541-Data-Deletion-and-Privacy-FAQ
+          quote: 'Your account and associated data will be deleted within 30 days after successful submission of your deletion request.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can ask to delete your account yourself from your account page, and it’s deleted within 30 days. You have 7 days to change your mind.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32084462534541-Data-Deletion-and-Privacy-FAQ
+          quote: 'Your account and associated data will be deleted within 30 days after successful submission of your deletion request.'
+      action:
+        name: 'Your account page (How can I delete my account?)'
+        url: https://www.midjourney.com/account
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask for a copy of your data yourself in your account settings, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32084462534541-Data-Deletion-and-Privacy-FAQ
+          quote: 'You can manage your privacy preferences and submit a data export request at any time through your account settings page: https://www.midjourney.com/account-settings.'
+      action:
+        name: 'Your account settings (data export)'
+        url: https://www.midjourney.com/account-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It promises to tell you when the police ask for your data, unless a law forbids it, but it may also hand data over to protect itself from legal trouble.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'To the extent we receive a request from law enforcement for Your Personal Data, We will promptly notify You and provide You with a copy of the request, unless We are legally prohibited from doing so.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'Protect against legal liability'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept on its servers in the US. For people in Europe and the UK it uses approved legal contracts when data leaves.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32084462534541-Data-Deletion-and-Privacy-FAQ
+          quote: 'The personal information you provide is stored on Midjourney servers in the US.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083472637453-Privacy-Policy
+          quote: 'When We share Personal Data of individuals in the EEA, Switzerland or UK with third parties, We make use of a variety of legal mechanisms to safeguard the transfer including the European Commission-approved standard contractual clauses, as well as additional safeguards where appropriate.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with a Google or Discord account; it has no sign-up of its own with just an email.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/33390994570509-Logging-In-Connecting-Accounts
+          quote: 'Right now, you can create a Midjourney account using either a Discord account or a Google account.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/33390994570509-Logging-In-Connecting-Accounts
+          quote: "We don't have the option to create a username and password specific just to Midjourney."
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: 'A year to bring a claim'
+      tier: bad
+      reason: 'Any claim against Midjourney has to be started within one year, or you lose it for good.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'You and Midjourney agree that any cause of action arising out of or related to the Services must commence within one (1) year after the cause of action accrues.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: '“Unlimited” can be slowed'
+      tier: poor
+      reason: 'Relax mode is sold as unlimited, but Midjourney can slow you down when it thinks it needs to.'
+      sources:
+        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
+          quote: 'However, we reserve the right to rate limit You to prevent quality decay or interruptions to other customers.'
+      lastVerified: 2026-11-17

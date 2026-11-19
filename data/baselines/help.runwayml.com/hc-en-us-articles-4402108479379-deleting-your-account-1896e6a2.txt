@@ -1,0 +1,96 @@
+url: https://help.runwayml.com/hc/en-us/articles/4402108479379-Deleting-your-account
+method: fetch
+saved: 2026-11-19
+
+Deleting your account – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Account Management
+Account FAQ
+Deleting your account
+Table of Contents
+We hope to see you back soon!
+You can delete your Runway account at any time from your My Account page. Deleting is permanent: once your account is gone, you won't be able to access or recover any assets you've created.
+If you signed up with Continue with Google or Continue with Apple, you'll need to set a password first.
+Deleting Your Account
+Navigate to your My Account page
+Scroll to the bottom of the General tab and select Delete Account
+Enter your password to confirm
+Once the deletion is complete, you'll be redirected to the sign in page.
+Important: You will no longer be able to access or recover any assets you've created after deleting your account.
+Deleting an Account Created with Google or Apple
+Accounts created with Google or Apple sign-in don't have a password, so you'll set one up before you can confirm the deletion:
+Navigate to your My Account page
+In the General tab, scroll down and select Change Password
+Enter your New Password and Confirm Password, then select Save
+You can now follow the deletion steps above, using this password to confirm.
+FAQ
+Will deleting my account unsubscribe me from Runway emails?
+Deleting your account doesn't remove you from our mailing list. To stop
+receiving emails, select the Unsubscribe link at the bottom
+of any email from us.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

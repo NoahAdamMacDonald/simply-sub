@@ -1,0 +1,604 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2: AI audio), read with Edge from Canada (udio.com's
+# pricing page in each of its three currencies, Monthly and Annually, its comparison table from the screenshot, its FAQ
+# answers opened one at a time, its home and sign-in pages, its Terms of Service and Privacy Policy) and its help
+# centre (help.udio.com, Intercom) with a plain fetch. Pages, each quoted where it's used:
+# Pricing: udio.com/pricing has a currency switch (USD, GBP, EUR) that every visitor gets. Read 2026-11-17 through a
+# US, a Canadian, a UK, a German, a French, a Dutch, a Spanish, an Italian, an Australian and a New Zealand exit (the
+# Irish exit didn't load): every one opens on USD ("$10", "$8/month", "$96 billed annually"), with the same switch. USD:
+# Standard $10 a month or $96 a year, Pro $30 or $288 ("* tax rates may vary by location"). GBP: £10 or £96, £30 or
+# £288; EUR: €12 or €115.20, €36 or €345.60, both with "* VAT tax collection included in price". The buyer picks the
+# currency (Proton's pattern): a GLOBAL price in each. The GBP and EUR prices include VAT, but core's saysTaxIncluded
+# doesn't read "VAT tax collection included" yet, so they have no taxIncluded (notes.md). Its terms (revised
+# November 12, 2025) still say "you agree to pay us the applicable fees and taxes in U.S. Dollars"; the newer pricing
+# page sells in all three (notes.md). The checkout needs an account, so which currency it charges wasn't seen.
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. the currency switch (no CAD); 3. no pricing
+# data naming a country; 4. checkout needs an account; 5. no prices article; 6. Edge from this machine and through a
+# Canadian exit, both USD; 7. no bill offered.
+# Plans: Free, Standard and Pro. Not listed: the student discount ("50% off for 6 months for students at accredited
+# universities", an offer for some buyers), and credits bought as you go ("Purchase 100 credits - $3.00").
+# Udio is in a transition since its licence deals with Universal Music Group (October 29, 2025) and Warner Music Group
+# (November 19, 2025): "Note that downloading of audio, video, and stems has been disabled", and its terms let you use
+# songs only on Udio, for personal, non-commercial purposes (notes.md).
+# Bundles: none on its pages. Official resellers: none; its affiliate program refers buyers, it doesn't sell.
+# Logo: udio.com's own icon is the source for data:icons.
+
+id: udio
+name: Udio
+aliases: [udio ai]
+website: https://www.udio.com
+domains: [help.udio.com]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help article on changing or cancelling (udio.com/account, "Cancel subscription").
+cancelUrl: https://help.udio.com/en/articles/10739199-changing-or-canceling-your-subscription
+sources: { pricing: https://www.udio.com/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: its terms name cards; its privacy policy names Stripe as its processor. Its iOS
+# app sells the plans too ("purchase and manage your subscription"), but no page says the App Store bills them. No page
+# names the card networks, so no acceptedNetworks.
+paymentMethods:
+  - methods: [card]
+    page: Terms of service
+    url: https://www.udio.com/terms-of-service
+    quotes:
+      - 'Payment can be made by credit card, debit card, or other means that we may make available.'
+
+# Owner (M11.2), read 2026-11-17: its terms name Uncharted Labs, Inc., which runs udio.com, and say where it operates.
+# Its help centre: "No, they did not." (the record labels didn't buy Udio). Private: no page names a listing.
+owner:
+  name: 'Uncharted Labs, Inc.'
+  page:
+    name: Terms of service
+    url: https://www.udio.com/terms-of-service
+  quotes:
+    - 'Please take the time to read these Terms of Service (these “Terms”) for the unchartedlabs.ai and udio.com websites (collectively, the “Websites”) operated on behalf of Uncharted Labs, Inc. (“Company”, “we” or “us”).'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://www.udio.com/terms-of-service
+    quotes:
+      - 'The Services are operated by us in the United States.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its trial article's example renews a year from the day the trial began ("Their
+# subscription will be renewed on Feb 10, 2027") and cycles credits on the day the subscription started ("the date
+# their full subscription started, not the date they started their trial"); its FAQ: "The credits refresh a month after
+# your payment goes through and the plan starts." That's the date you subscribed, but core's renewalWrittenAs doesn't
+# read these words: not-stated until it does (notes.md has the same-date block).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.udio.com/terms-of-service
+    - https://help.udio.com/en/articles/13338649-the-subscription-trial
+    - https://www.udio.com/pricing
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table (ticks read from the screenshot): Free's
+# daily and monthly allowance (a paid plan's credits a month are creative.ai-credits), cover art and the tools each
+# plan adds.
+perks:
+  - id: free-credits
+    name: 10 credits per day and 100 credits per month (no rollovers)
+  - id: songs-at-once-6
+    name: Generate up to 6 songs at the same time
+  - id: songs-at-once-10
+    name: Generate up to 10 songs at the same time
+  - id: unlimited-long-songs
+    name: Make 2-minute song generations without the limit of 3 per day
+  - id: voices
+    name: Create songs with Udio's library of Voices, and save and reuse your own
+  - id: upload-audio
+    name: Upload your own audio files
+  - id: artist-styles
+    name: Use premium Artist Styles, and blend and reduce Styles
+  - id: edit-music-lyrics
+    name: Edit music and lyrics
+  - id: cover-art
+    name: Generate cover art
+  - id: upload-cover-art
+    name: Upload your own cover art
+  - id: song-access-permissions
+    name: Adjust song access permissions
+
+# AI features (the AI category's registry) and the creative category's, read 2026-11-17 in its pricing cards, its
+# comparison table and its help centre:
+# - AI assistant on every plan, as the group its generation features belong to (validation needs it for them): you
+#   describe a song in words and it makes it. No page offers a chat or an agent (notes.md).
+# - Music generation on every plan ("Create any song. Just imagine it.", home page), with Voices from its library on
+#   Standard and Pro ("you cannot upload your own voice as a source at this time", Voices).
+# - Cover art on every plan: the table's "Generate cover art" row ticks Free, Standard and Pro. It's art for your song,
+#   as a video's sound is part of the clip for Ideogram and Leonardo, so a perk, not image generation.
+# - Generative credits a month on the paid plans: "2400 credits per month (monthly credit limit, no rollovers)" and
+#   "6000 credits per month (monthly credit limit, no rollovers)" on its cards. Free's allowance is a perk.
+# - Creative tools: audio and music production on every plan (extend, remix, trim and Styles on every plan; editing,
+#   uploads and Sessions, its timeline editor, on the paid ones as perks).
+# - Not offered: video generation, voice conversations, web search, memory, projects, reasoning, other companies'
+#   models, an API ("we don't currently offer a public API", Udio public API), early access.
+# General features, read 2026-11-17: the web and an iPhone app ("We don't currently have an Android app"); sign-up with
+# Google, Discord, X, Apple or an email address that gets a sign-in link ("Udio accounts themselves don't have
+# passwords", Changing your password); support through its help centre's messenger and support@udio.com (its privacy
+# policy and Deleting your Udio account). No page names the app's languages. No pause and no parental controls: its
+# terms and help centre offer neither (16 and over).
+features:
+  platforms: [web, ios]
+  account.sign-in: [email-code, sso]
+  support.channels: [chat, email]
+
+plans:
+  - id: udio.free
+    name: Free
+    categories: [ai, creative]
+    link: https://www.udio.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      creative.tools: [audio-production]
+    perks: [free-credits, cover-art]
+    notes: '10 credits a day and 100 a month (a credit is a ~30-second track), up to 4 songs at once and three 2-minute songs a day. Songs stay on Udio: no downloads, personal and non-commercial use only.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.udio.com/pricing
+
+  - id: udio.standard
+    name: Standard
+    categories: [ai, creative]
+    link: https://www.udio.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      creative.tools: [audio-production]
+      creative.ai-credits: 2400
+    perks:
+      [
+        songs-at-once-6,
+        unlimited-long-songs,
+        voices,
+        upload-audio,
+        artist-styles,
+        edit-music-lyrics,
+        cover-art,
+        upload-cover-art,
+      ]
+    notes: '2,400 credits a month (no rollovers), up to 6 songs at once, Voices, uploads and editing. A 7-day free trial (without the extra credits) becomes a yearly plan unless you cancel or pick monthly first.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 10,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 96,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: GBP,
+          amount: 10,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: GBP,
+          amount: 96,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: EUR,
+          amount: 12,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: EUR,
+          amount: 115.2,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+
+  - id: udio.pro
+    name: Pro
+    categories: [ai, creative]
+    link: https://www.udio.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      creative.tools: [audio-production]
+      creative.ai-credits: 6000
+    perks:
+      [
+        songs-at-once-10,
+        unlimited-long-songs,
+        voices,
+        upload-audio,
+        artist-styles,
+        edit-music-lyrics,
+        cover-art,
+        upload-cover-art,
+        song-access-permissions,
+      ]
+    notes: 'Everything in Standard, with 6,000 credits a month (no rollovers), up to 10 songs at once and control over what others can do with your songs.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 30,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 288,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: GBP,
+          amount: 30,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: GBP,
+          amount: 288,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: EUR,
+          amount: 36,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: EUR,
+          amount: 345.6,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://www.udio.com/pricing,
+        }
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: its Terms of Service (last
+# revised November 12, 2025), which include its Privacy Policy (effective May 19, 2025) and any third-party software's
+# terms; the sign-in page's line ("By continuing, you acknowledge that you (i) agree to the Terms of Service and (ii)
+# have read and understood our Privacy Policy."); its help centre's billing, trial, account and partnership articles.
+# Not read: the third-party software licence terms the terms mention (none is named), and its cookie banner's partner
+# list beyond its text.
+policies:
+  links:
+    - name: Terms of service
+      url: https://www.udio.com/terms-of-service
+    - name: Privacy policy
+      url: https://www.udio.com/privacy-policy
+    - name: Changing or cancelling
+      url: https://help.udio.com/en/articles/10739199-changing-or-canceling-your-subscription
+    - name: The subscription trial
+      url: https://help.udio.com/en/articles/13338649-the-subscription-trial
+    - name: Deleting your account
+      url: https://help.udio.com/en/articles/10739114-deleting-your-udio-account
+    - name: Creating an account
+      url: https://help.udio.com/en/articles/10739104-creating-a-udio-account
+    - name: Changes with Universal Music Group
+      url: https://help.udio.com/en/articles/12683565-changes-associated-with-the-universal-music-group-umg-partnership
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online, but at least 7 days before it renews, or you pay for the next period. You keep it until the end of the time you paid for.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'To avoid future subscription charges, you must cancel your subscription 7 days before the subscription period renewal date'
+        - url: https://help.udio.com/en/articles/10739199-changing-or-canceling-your-subscription
+          quote: "You'll have full use of your subscription until that time."
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back, not even for unused days, but you keep your plan until the period you paid for ends.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'Except as expressly set forth in these Terms, payments for any subscriptions to the Services are nonrefundable and there are no credits for partially used periods.'
+        - url: https://www.udio.com/terms-of-service
+          quote: 'Following any cancellation by you, however, you will continue to have access to the paid Services through the end of the subscription period for which payment has already been made.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you before a new price applies, “following reasonable notice”, without saying how long before.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'Except as otherwise provided in these Terms, any price changes or changes to your subscription plan will take effect following reasonable notice to you.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 7-day trial turns into a full year’s plan, charged at once, unless you cancel or switch it to monthly first. It doesn’t say it reminds you.'
+      sources:
+        - url: https://help.udio.com/en/articles/13338649-the-subscription-trial
+          quote: 'If not cancelled before the end of the 7 day period, the creator will be immediately charged the full price of an annual subscription unless they previously toggled the subscription period to monthly .'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages: [https://www.udio.com/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and help centre name no fees beyond the price and tax.'
+      pages:
+        - https://www.udio.com/terms-of-service
+        - https://help.udio.com/en/articles/10739199-changing-or-canceling-your-subscription
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once and you pay only the difference for the rest of the month. Moving down starts at your next period.'
+      sources:
+        - url: https://help.udio.com/en/articles/10739199-changing-or-canceling-your-subscription
+          quote: "Upgrades will take place immediately and you'll be charged on a pro-rated basis."
+        - url: https://help.udio.com/en/articles/10739199-changing-or-canceling-your-subscription
+          quote: 'Regardless of when you initiate it, your downgrade will happen at the beginning of the next monthly or yearly cycle'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by email within 30 days of signing up."
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You understand that by agreeing to these Terms, you and the Company are each waiving the right to trial by jury or to participate in a class action or class arbitration.'
+        - url: https://www.udio.com/terms-of-service
+          quote: 'The notice must be sent to the Company within thirty (30) days of your first registering to use the Services or agreeing to these Terms; otherwise you shall be bound to arbitrate disputes on a non-class basis in accordance with these Terms.'
+      action:
+        name: 'How to opt out of arbitration (section 9.6)'
+        url: https://www.udio.com/terms-of-service
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms count from the moment they’re posted. It only tries to tell you about big changes, and using Udio afterwards means you accept them.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'The updated Terms will be effective as of the time of posting, or such later date as may be specified in the updated Terms.'
+        - url: https://www.udio.com/terms-of-service
+          quote: 'If we make changes that are material, we will use reasonable efforts to attempt to notify you, such as by e-mail and/or by placing a prominent notice on the first page of the Website.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or delete your account for any reason or none, with or without warning.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'Additionally, the Company may suspend, disable, or delete your Account and/or the Services (or any part of the foregoing) with or without notice, for any or no reason.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'What you upload comes with a licence that never ends, that Udio can pass on to others, and that it can use to make money and advertise.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You agree that these rights and licenses are royalty free, fully paid-up, transferable, sub-licensable, assignable, worldwide, perpetual and irrevocable, and include a right for us to make Your Content available to, and pass these rights along to, others'
+        - url: https://www.udio.com/terms-of-service
+          quote: 'in and in connection with the use, monetization, advertising, promotion, marketing, and improvement of Company’s products and services, including the Services'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: bad
+      reason: 'The songs Udio makes for you belong to Udio and its licensors, on every plan, and you may use them only for yourself on Udio, never to earn money.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You agree that the Company and/or its licensors own all right, title and interest in and to the Services and the Output (including any and all intellectual property rights therein)'
+        - url: https://www.udio.com/terms-of-service
+          quote: 'you may use Output solely for your personal and non-commercial purposes, provided that you may not download any copies of your Output from the App for any purpose.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or remove any feature at any time and owes you nothing for it; it turned off downloads for everyone, subscribers included.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'The Company has the right, at any time and without liability, to modify, alter, update or eliminate the features, navigation, appearance, functionality and other elements of the Services'
+        - url: https://help.udio.com/en/articles/12683565-changes-associated-with-the-universal-music-group-umg-partnership
+          quote: 'Note that downloading of audio, video, and stems has been disabled'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms say nothing about closing accounts that aren’t used.'
+      pages: [https://www.udio.com/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use Udio and its app for personal, non-commercial use only, and may not copy or take them apart unless the law lets you.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You may not do any of the following in connection with your use of the Services, unless applicable laws or regulations prohibit these restrictions or you have our written permission to do so'
+        - url: https://www.udio.com/terms-of-service
+          quote: 'exploit the Services, any Output, or the outputs of other users for any commercial purpose;'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its app updates itself or changes anything else on your device.'
+      pages: [https://www.udio.com/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for your account and allow one free account each, but don’t say whether you may share it.'
+      pages: [https://www.udio.com/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre set no limits on devices. (Downloads, which are off, are graded under taking your data with you.)'
+      pages: [https://www.udio.com/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says it uses appropriate security, with no outside audit and no way named to report a security problem.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'We seek to protect your Personal Data from unauthorized access, use and disclosure using appropriate physical, technical, organizational and administrative security measures based on the type of Personal Data and how we are processing that data.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses cookies and analytics to see how you use Udio. You can only block them in your browser or its cookie settings, browser by browser.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'Performance/Analytical Cookies allow us to understand how visitors use our Services.'
+        - url: https://www.udio.com/privacy-policy
+          quote: 'You can decide whether or not to accept Cookies through your internet browser’s settings.'
+      action:
+        name: 'Its cookie choices'
+        url: https://www.udio.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It sells or shares your contact, device and browsing data with advertising partners. You can say no only per browser, in its cookie settings or with a privacy signal.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'We sell or share your Personal Data to the following categories of third parties:'
+        - url: https://www.udio.com/privacy-policy
+          quote: 'By accessing your cookie consent mechanism by accessing your "Cookie Settings" at the bottom of our website.'
+      action:
+        name: 'Its cookie choices'
+        url: https://www.udio.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and ad networks track what you do, on Udio and on other sites, to show you ads. You can only turn it off per browser.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'We may serve advertisements, and also allow third-party ad networks, including third-party ad servers, ad agencies, ad technology vendors and research firms, to serve advertisements through the Services.'
+        - url: https://www.udio.com/privacy-policy
+          quote: 'Such information may be gathered through tracking users’ activities across time and unaffiliated properties, including when you leave the Services.'
+      action:
+        name: 'Its cookie choices'
+        url: https://www.udio.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you type and upload, and the songs it makes, train its AI, and no setting turns that off.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You acknowledge and agree that we may use your Input Content and any Output to train or otherwise improve our Services, including our artificial intelligence and machine learnings model(s) related to the Services.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'It may screen, edit or delete what you upload at any time, for any reason, and no setting stops that. (Training is graded under AI training.)'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'the Company reserves the right, and has absolute discretion, to remove, screen, filter, edit, or delete any of Your Content at any time, for any reason, and without notice.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it: your profile while you have an account, payment data while it needs it.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'We retain Personal Data about you for as long as necessary to provide you with our Services or to perform our business or commercial purposes for collecting your Personal Data.'
+        - url: https://www.udio.com/privacy-policy
+          quote: 'We retain your profile information and credentials for as long as you have an account with us.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself at any time, and it deletes your songs and other data at once.'
+      sources:
+        - url: https://help.udio.com/en/articles/10739114-deleting-your-udio-account
+          quote: 'This will immediately delete your entire account, including all your songs and other data.'
+      action:
+        name: 'How to delete your account'
+        url: https://help.udio.com/en/articles/10739114-deleting-your-udio-account
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: bad
+      reason: 'You can’t download your songs at all: they stay on Udio, where you can only share links to them.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You may not download copies of any Output or any other output generated by the Services.'
+        - url: https://help.udio.com/en/articles/12683565-changes-associated-with-the-universal-music-group-umg-partnership
+          quote: 'Note that downloading of audio, video, and stems has been disabled'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      regions: [EU, GB]
+      tier: neutral
+      reason: 'In Europe and the UK you can ask by email for a copy of your personal data in a machine-readable file. Your songs aren’t part of it.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'Portability: You can ask for a copy of your Personal Data in a machine-readable format.'
+      action:
+        name: 'Its privacy policy'
+        url: https://www.udio.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over data to the government or police to meet legal requirements or protect people and its rights. It doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'In addition, each of the above referenced categories of Personal Data may be collected, used, and disclosed with the government, including law enforcement, or other parties to meet certain legal requirements and enforcing legal terms'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept on servers in the US and possibly elsewhere; sometimes it uses standard legal contracts to protect it.'
+      sources:
+        - url: https://www.udio.com/privacy-policy
+          quote: 'you authorize the Company to transfer, store and process your information to and in the U.S., and possibly other countries.'
+        - url: https://www.udio.com/privacy-policy
+          quote: 'In some circumstances, your Personal Data may be transferred to the U.S. pursuant to a data processing agreement incorporating standard data protection clauses.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'An account needs only an email address, which gets a sign-in link, or your Google, Discord, X or Apple sign-in. A paid plan adds your payment details.'
+      sources:
+        - url: https://help.udio.com/en/articles/10739104-creating-a-udio-account
+          quote: 'Choose your preferred sign-up method: Google, Discord, X, Apple, or email'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: A record label can enforce its terms
+      tier: bad
+      reason: 'Universal Music, one of the labels whose music Udio licenses, may enforce Udio’s terms against you itself.'
+      sources:
+        - url: https://www.udio.com/terms-of-service
+          quote: 'You acknowledge and agree that our licensors, including Universal International Music, B.V. and its affiliates, are express third-party beneficiaries of these Terms'
+      lastVerified: 2026-11-17

@@ -1,0 +1,158 @@
+url: https://docs.ideogram.ai/get-started/signup-and-registration
+method: fetch
+saved: 2026-11-19
+
+Sign In and Accounts | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Get Started
+Sign In and Accounts
+Sign In and Accounts
+Sign in to Ideogram with Google, Apple, Microsoft, SSO or email. Learn which accounts get free credits, the password rules and how to fix sign-in errors. Copy page
+View as Markdown
+On this page Ways to sign in
+Free credits
+Your first sign-in
+Username rules
+One account per sign-in method
+Forgot your password
+Related
+Use this page to sign in or sign up for Ideogram, see which accounts get free credits, and reset a forgotten password.
+Ways to sign in
+Sign in or sign up
+Go to ideogram.ai.
+Select Sign in or Get started.
+On Log in or sign up, select one of the options below.
+Continue with Google
+Continue with Apple
+Continue with Microsoft
+Continue with SSO, if your company uses single sign-on. See the steps below.
+Continue with email, with an email address and password. The same form signs you in or creates an account, depending on whether the email is new.
+When you come back, Ideogram may show only the method you used last. Select Use another account to see the rest.
+Sign in with email
+Choose Continue with email, enter your Email and Password, then select Continue with email in the form. The button becomes available when the address has a valid email format and the password has at least six characters. Use the same email/password pair when you return.
+If the form remembers an email address, check that it is the account you intend to use. Use another account returns to the other sign-in choices; it does not merge accounts.
+Sign in with SSO
+On Log in or sign up, select Continue with SSO.
+Enter your Work email.
+Click Continue with SSO.
+If your company requires SSO, other methods are refused and the SSO option opens with your email filled in.
+No SSO is configured for your organization: check the work email and ask your organization's administrator whether SSO has been set up for that domain.
+Something went wrong checking SSO: retry the lookup. This is different from a message saying SSO has not been configured.
+Your organization requires signing in with SSO: continue in the SSO panel with the work email shown, rather than repeatedly trying a different provider.
+Free credits
+Sign-in method Free credits
+Google or Apple 30 a week
+Microsoft, or email and password None, unless you later link a Google or Apple sign-in that uses the same verified email
+With a Microsoft or email account, you need to buy credits or subscribe to generate. If you want to try Ideogram for free first, sign up with Google or Apple.
+Your first sign-in
+On Tell us a bit about you., enter a Username. Ideogram suggests one from the part of your email before the @.
+Add a Full name (optional) if you want one.
+Select Continue.
+Under What best describes you?, pick any roles that fit and select Continue, or select Skip.
+On Choose a plan that's right for you, pick a plan or select Skip for now to stay on the free plan.
+Then you land on Home. The Quick Start takes it from there.
+Username rules
+Your username is your handle on Ideogram. It must:
+be 3 to 16 characters long
+use only letters, numbers and underscores
+not match anyone else's, ignoring upper and lower case
+not contain restricted words
+Warning You can't change your username once it's set, and support can't change it either. You can change your display name in Account Settings.
+One account per sign-in method
+Each sign-in method makes its own account, even if the email address is the same. You can't link methods, change your email or add a password, and support can't merge accounts made with different methods.
+If you see Account exists with a different sign-in method, that email already has an account made another way. Sign in with the method you first used. If you can't remember it, try each one, or contact [email protected].
+If you deleted an account, wait 48 hours before you sign up again with the same email.
+Forgot your password
+This applies to email accounts only.
+Enter your email in the sign-in form.
+Select Forgot password?
+Open the reset link Ideogram sends to your inbox and set a new password.
+The email field must contain a valid address before Forgot password? can send a reset link. A successful request shows Check your inbox and the address it was sent to. Check that address before making another request.
+Accounts made with Google, Apple, Microsoft or SSO have no Ideogram password. Reset it with that provider or your organization's sign-in system instead.
+If email sign-in fails
+Incorrect email or password: check both fields and confirm that this account uses email sign-in. Use Forgot password? for an email account rather than creating another account with a different provider.
+Too many attempts: wait a moment before trying again, as the message requests.
+This account has been disabled: contact support with the account's email and the message you see.
+Related
+Account Settings: display name, muted users and deleting your account
+Plans and Credits
+Team Plan: joining a team through an invite
+PreviousTour of the AppNextAccount Settings
+On this page
+Ways to sign in
+Free credits
+Your first sign-in
+Username rules
+One account per sign-in method
+Forgot your password
+Related

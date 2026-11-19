@@ -1,0 +1,69 @@
+url: https://docs.midjourney.com/hc/en-us/articles/27870484040333-Comparing-Midjourney-Plans
+method: browser
+saved: 2026-11-19
+
+Skip to main content
+Midjourney
+Midjourney
+Billing Support
+Plan Information
+Comparing Midjourney Plans
+All Midjourney plans are subscriptions - meaning they automatically renew on a monthly or yearly basis unless you set your plan to cancel.
+Midjourney offers four subscription tiers: Basic, Standard, Pro, and Mega. See the chart below for a comparison of plan features, and you can also view our pricing page.
+For unlimited image generations with Relax Mode, subscribe to the Standard, Pro, or Mega Plan.
+For unlimited video generations with Relax Mode, subscribe to the Pro or Mega Plan.
+Stealth Mode, which keeps your images and videos private, is only available on the Pro and Mega Plans.
+You can get a 20% discount on your subscription by committing to an annual plan, where the full year fee is paid upfront.
+Basic Plan Standard Plan Pro Plan Mega Plan
+Monthly Price $10 $30 $60 $120
+Annual Price $96
+($8 / month) $288
+($24 / month) $576
+($48 / month) $1,152
+($96 / month)
+Fast GPU Time 3.3 hr/month
+(200 minutes) 15 hr/month 30 hr/month 60 hr/month
+Relax GPU Time Unlimited Images Unlimited Images & SD Video Unlimited Images & SD Video
+Video Resolution SD SD & HD SD & HD SD & HD
+Purchase Extra
+GPU Time $4/hr $4/hr $4/hr $4/hr
+Work Solo in Discord Direct Messages
+Stealth Mode
+Maximum Concurrent Prompts (images) 3 Fast 3 Fast or Relax 12 Fast or
+3 Relax 12 Fast or
+3 Relax
+Maximum Concurrent Prompts (videos) 1 Fast 3 Fast 6 Fast or 3 Relax 12 Fast or 3 Relax
+Maximum Repeat / Permutation Size 4 jobs 10 jobs 40 jobs 40 jobs
+Maximum Queued Jobs 10 jobs 10 jobs 10 jobs*
+(3 Relax videos) 10 jobs*
+(3 Relax videos)
+Rate Images to Earn
+Free GPU Time
+Usage Rights General Commercial Terms** General Commercial Terms** General Commercial Terms** General Commercial Terms**
+*Queue size will extend to accommodate repeat/permutation jobs.
+**If you have subscribed at any point, you are free to use your images/videos in just about any way you want. You must purchase the Pro or Mega plan if you are a company making more than $1,000,000 USD in gross revenue per year. For complete details, please see the Terms of Service.
+Plan availability and features are subject to change. Our Terms of Service apply to all subscriptions.
+Need Help Getting Started?
+Getting Started Guide
+Documentation
+Billing Support
+Plan Information
+How to Subscribe
+Comparing Midjourney Plans
+GPU Speed (Fast, Relax, Turbo)
+Subscription Fast Time Expiration
+Purchasing Extra Fast Time
+Earning Free Fast Time
+Using Images & Videos Commercially
+Stealth Mode
+Keeping Your Creations Private
+Free Trials
+Discord Nitro Subscription
+Account Management
+Payments
+Cancellations & Refunds
+Taxes & VAT
+Magazines & Books
+Midjourney Website
+Midjourney Discord Server
+Return to top

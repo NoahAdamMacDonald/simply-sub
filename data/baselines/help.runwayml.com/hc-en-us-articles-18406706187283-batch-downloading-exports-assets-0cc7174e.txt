@@ -1,0 +1,84 @@
+url: https://help.runwayml.com/hc/en-us/articles/18406706187283-Batch-downloading-exports-assets
+method: fetch
+saved: 2026-11-19
+
+Batch downloading exports & assets – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Assets & Workspaces
+Assets
+Batch downloading exports & assets
+Table of Contents
+Batch downloads allow you to simultaneously download multiple files from your Runway account to your computer.
+You can batch download from the Assets page.
+Select Assets in the left-hand sidebar
+Select multiple assets or folders using hot keys
+Select a range: select the first asset, then hold SHIFT and select the last asset to include everything in between
+Select individual items: hold CTRL (PC) or CMD (Mac) while selecting each asset
+In the floating menu at the bottom of the screen, open the Actions dropdown and select Download
+Your assets are compressed into a ZIP file and downloaded to your computer.
+Tip: If your batch download doesn't work, the attempted selection may be too large. Try working in smaller batches if your download doesn't complete.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

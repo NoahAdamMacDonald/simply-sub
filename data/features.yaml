@@ -958,8 +958,8 @@
 
 # ── Creative & design ──────────────────────────────────────────────────────────
 # Adobe, Canva, Figma, Affinity, DaVinci Resolve, CapCut, Blender and the like. Generative AI is ai.image-generation
-# and ai.video-generation; each provider measures generative credits its own way, so they're perks, as AI usage levels
-# are (the owner's choice of 2026-10-30).
+# and ai.video-generation. A creative plan's generative credits a month are creative.ai-credits (below); other usage
+# limits, such as a free plan's daily or weekly allowance, stay perks, as AI usage levels are.
 - id: creative.tools
   name: Creative tools
   category: creative

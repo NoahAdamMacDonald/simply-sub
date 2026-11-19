@@ -1,0 +1,63 @@
+url: https://intercom.help/leonardo-ai/en/articles/9748859-image-and-video-generation-visibility-settings
+method: fetch
+saved: 2026-11-19
+
+Image and Video Generation Visibility Settings | Leonardo.Ai Help Center Skip to main content
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+Search for articles...
+All Collections
+Help Guides
+How to use Leonardo.Ai's AI Creation Tools
+Image and Video Generation Visibility Settings
+Image and Video Generation Visibility Settings
+Generation privacy options - enhanced.
+Written by Ayumi Umehara
+February 18, 2026
+Table of contents
+Overview
+Image and Video Generation visibility options allow users to better control if their generations are visible to others. This is particularly useful for Teams, allowing members to explore their ideas without cluttering the Team feed.
+How to change Visibility settings
+Image Visibility options can be accessed several ways, giving you control over your generations anywhere and at any point in your creation journey.
+From the AI Creation tool
+The easiest way to control the visibility of a generation before it's created is by generating in Private Mode from the AI creation tool.
+To do this, toggle Private Mode ON before generating, in the left side bar.
+To change a generation's visibility after it has been created;
+If you generated with the Private Mode toggle off, you can instantly change the visibility of your generation by;
+Click the three dots in the info panel
+Click Make All Private/Public, depending on what you wish to do.
+To make just one image private or public, click on the specific image, and follow the same steps. Or, hover over the image and click the eye icon to change visibility, denoted by the eye being open or closed.
+From your Library - suitable for bulk generations.
+You may also wish to change the visibility of many generations at once.
+Navigate to your Library (A) from the left side bar on the home page
+Click Select (B) from the top menu bar, and choose the images you wish to change. This will also show you by way of the eye icon being open or closed, if your images are currently private or public.
+Click Make Private/Public (C) depending on what you want to achieve.
+Note, this is also a convenient way to bulk Organise your creations into Collections and Download them.
+For Team Accounts
+Team users may opt to use the sidebar toggle "Hide in Team Feed" ON to keep generations hidden from the Team Feed, and toggle OFF to display them. This will affect the visibility of a generation to other team members. All images remain private to the internal team and never made public.
+Note: For Teams, any generation is private by design to external parties. Only internal team members can view a user's generations within the Team Feed if they are set to be visible to others.
+Frequently Asked Questions
+Is Image Visibility a premium feature?
+​
+Yes, Image Visibility options are a premium only feature. Image visibility requires a paid plan.
+​
+Can the Image Visibility of a Collection be adjusted?
+​
+Image Visibility of a user's collection cannot be changed and will always be private.
+​
+Are my generations private by default?
+​
+For users using a Personal plan, only Premium users with a paid plan can enable the Private Mode toggle in the Image Generation tool, which will remain it that state unless the user changes it.
+​
+For users using a Team plan, images will always be private to the team and cannot be set to public.
+​
+​
+​
+​
+​
+Related Articles
+How to Generate Images with Leonardo.Ai
+Sharing Leonardo.Ai Images & Videos to Social Media
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Table of contents
+Unleash your creativity with the power of Leonardo.Ai

@@ -1,0 +1,116 @@
+url: https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work
+method: fetch
+saved: 2026-11-19
+
+How do credits work? – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Credits
+How do credits work?
+Table of Contents
+Credits are used in Runway to generate images, videos, and audio. This guide covers frequently asked questions about credits.
+How many credits come with my plan?
+A one-time deposit of 125 credits is included with the Free plan and does not expire. A monthly credit allotment is included with Standard, Pro, Unlimited, Max and Team plans every month.
+Monthly credit amounts are as follows:
+Plan
+Standard
+Pro and Unlimited
+Max
+Team
+Enterprise
+Monthly credits
+625
+2250
+9500
+6,900 per seat, shared across the workspace
+Please see here
+Credits are added to your account within a few minutes of payment processing. If you don't see them immediately, please allow up to a few hours for the system to update. You can check your credit balance at any time by visiting your Plans & Billing page.
+What are my credits worth?
+This table outlines the credit costs associated with each tool. Please note that these are rates and do not indicate the total cost of a single generation in some cases.
+For example, Gen-4.5 uses 12 credits per second of generated video. This means your total cost per generation would be either 60 or 120 credits, depending on if you chose a 5 or 10 second duration.
+How do I get more credits?
+Users on Standard, Pro, Unlimited, Max and Team plans can purchase additional credits from the Plans and Billing page. You can buy credits once, or set up a recurring purchase that repeats weekly or monthly. Recurring purchases can include a discount based on the schedule you choose. The minimum amount of credits users may purchase is 1000. Credit purchases are not available to Free plan users.
+On the Team plan, only workspace admins can purchase credits, and purchases go into the workspace's shared pool. Admins can also turn on auto refill so generation continues without interruption once the monthly pool runs out.
+For Enterprise customers, please see the Enterprise Credits FAQ.
+Do credits expire or roll over?
+This depends on your plan, and on how you got the credits in the first place
+Standard, Pro and Unlimited: Monthly credits expire on your billing date.
+Max: Up to one month of unused credits may roll over to the following month.
+Team: Up to one month of unused pooled credits may roll over to the following month.
+Purchased credits: Do not expire.
+Free plan (one-time deposit): Does not expire.
+Credits are spent in a set order: the current month's plan credits first, then rollover credits, then additional purchased credits.
+How do I know what my billing date is?
+Your billing date is the day of the month on which you first initiated your plan. For monthly subscribers, this is also the day that you will receive your monthly subscription charge. For annual subscribers, the billing date is the same date each month (e.g. the 20th of each month), based on when you first initiated your plan.
+Your billing date is shown on the Plans and Billing page. Under Invoices, the date of your most recent invoice is your billing date.
+If I'm on a workspace with multiple users, how are credits used across the workspace?
+Credits are shared across a workspace: all members draw from one balance, not from individual per-member balances.
+You can learn more about workspaces here.
+Why can't I use credits for the API?
+Credits or plans purchased in Runway are completely separate from credits purchased for the Runway API.
+Runway credits will never appear in your API credits, and vice versa. For more information on the Runway API, see here.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

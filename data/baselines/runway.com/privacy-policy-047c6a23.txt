@@ -1,0 +1,344 @@
+url: https://runway.com/privacy-policy
+method: fetch
+saved: 2026-11-19
+
+Runway Privacy Policy & Data Practices
+Runway app for iPhoneRunway app for Android
+Create anything, anytime.
+Try appTry app
+Creative
+Dev
+Robotics
+Research
+Resources
+Enterprise
+Pricing
+Enterprise SalesLoginTry Runway
+Enterprises get up to 2 months of usage free. Sign by 12/31. See termsEnterprises get up to 2 months of usage free. Sign by 12/31. See terms
+Contact sales
+Privacy Policy
+Effective as of October 23, 2026
+This Privacy Policy describes how Runway AI, Inc. ("Runway," "we", "us" or "our") processes information about you through our website, services, mobile application, social media pages, marketing activities, live events and other activities described in this Privacy Policy (collectively, the "Service"). Runway may provide additional or supplemental privacy policies to individuals for specific products or services that we offer at the time we collect information about you.
+Runway provides a set of tools and services for creating, editing, and generating content. In certain cases, we process information about you on behalf of our business customers or their affiliates (“Customers”). Our processing of this information is at the direction of Customers and subject to our agreements with them. This Privacy Policy does not apply to such processing. If you have a question about how this information is processed, contact the Customer.
+Apps built with Runway App Studio. Runway App Studio lets users build apps and share them with others (“Apps”). If you use an App built by another user (“User App”), your use of User Apps may also be subject to the App creator’s own terms and privacy notices governing the collection, use, and sharing of your data.
+Index
+· Information we collect about you
+· How we use information about you
+· When we disclose the information we collect about you
+· Exercising your rights and choices
+· Additional US state-specific and other jurisdiction-specific rights
+· Residents of the European Economic Area and United Kingdom
+· Residents of California
+· Other sites and services
+· Security
+· Data retention
+· International data transfer
+· Children
+· Changes to this Privacy Policy
+· How to contact us
+Information we collect about you
+Information you provide to us. You may directly provide us with information about you. This may include:
+Identifiers and contact data, such as your first and last name, email address, billing and mailing addresses, and phone number.
+Demographic data, such as your city, state, country of residence, postal code, and age.
+Account login and profile data, such as the username and password that you may set to establish an online account on the Service, photograph or picture, preferences, and any other information that you add to your account profile.
+Professional data, such as your professional title and company name.
+Communications data based on our exchanges with you, including when you contact us through the Service, social media, or otherwise.
+Commercial and transactional data, such as information relating to or needed to complete your orders on or through the Service, including order numbers and transaction history.
+Inference and marketing data, such as your preferences for receiving our marketing communications and details about your engagement with them.
+User content, such as prompts, photos, images, music, videos, audio, screen sharing, comments, questions, messages, works of authorship, and other content or information that you, or third parties acting on your behalf, input, generate, transmit, upload, or submit to us as part of a contest or live event, or otherwise make available on or through the Service, including content or information from third party applications you choose to connect with our Services and transcripts and recordings generated through the Service, as well as associated metadata. Metadata includes information on how, when, where and by whom a piece of content was collected and how that content has been formatted or edited. Metadata also includes information that users can add or can have added to their content, such as keywords, geographical or location information, and other similar data.
+Biometric data, such as voice data and scans of faces that you submit when you use certain product features to create videos and audio using characteristics like voice and face. Such characteristics may be considered biometric identifiers or biometric information under certain laws including applicable privacy laws. When you choose to use these features, we use any biometric data submitted by you only to provide the service requested by you.
+Other data, such as surveys, feedback, and other additional information you may submit when you use the Service.
+Automatic data collection. We, our service providers, and our advertising and analytics partners may automatically log information about you, your computer or mobile device, and your interaction over time with the Service, our communications and other online services, such as:
+Device data, such as your computer or mobile device's operating system type and version, manufacturer and model, browser type, screen resolution, RAM and disk size, CPU usage, device type (e.g., phone, tablet), IP address, unique identifiers (including identifiers used for advertising purposes), language settings, mobile device carrier, radio/network information (e.g., Wi-Fi, LTE, 3G), and general location information such as city, state or geographic area.
+Internet network activity data, such as pages or screens you viewed, how long you spent on a page or screen, the website you visited before browsing to the Service, navigation paths between pages or screens, information about your activity on a page or screen, access times and duration of access.
+Communication interaction data, such as your interactions with our email, text or other communications (e.g., whether you open and/or forward emails or click links within them) -- we may do this through use of pixel tags (which are also known as clear GIFs), which may be embedded invisibly in our emails.
+Cookies. Some of our automatic data collection is facilitated by cookies and similar technologies. We, our service providers, and our ad and analytics partners may use these technologies to collect data about your online activities over time and across third-party websites or other online services to help us better understand users of the Service and provide advertising that we think will be of more interest to you. We may also store a record of your preferences in respect of the use of these technologies in connection with the Service.
+Cookies and similar technologies. Some of the automatic collection described above is facilitated by the following technologies:
+Cookies, which are small text files that websites store on user devices and that allow web servers to record users' web browsing activities and remember their submissions, preferences, and login status as they navigate a site. Cookies used on our sites may include "session cookies" that are deleted when a session ends, "persistent cookies" that remain longer, "first party" cookies that we place and "third party" cookies that our third-party business partners and vendors place.
+Local storage technologies, like HTML5, that provide cookie-equivalent functionality but can store larger amounts of data on your device outside of your browser in connection with specific applications.
+Web beacons, also known as pixel tags or clear GIFs, which may be used to determine that a webpage or email was accessed or opened, or that certain content was viewed or clicked.
+Data we collect from others. We may collect information about you or others through our affiliates or through non-affiliated parties. For example, we may offer features that help users invite their friends or contacts to use the Service, and we may collect contact details about these invitees so we can deliver their invitations. Please do not refer someone to us or share their contact details with us unless you have their permission to do so.
+You may be able to access the Service through a social networking or other third-party account, such as Google. If you access the Service through a social networking account, you may allow us to have access to certain information in your social networking account profile. This may include your name, profile picture, gender, and email address. Third party sites have their own policies for handling your information. For a description of how these sites may use and disclose your information, including any information you make public, please consult those sites' privacy policies.
+We may combine information that we collect from you through the Service with information that we obtain from others and information derived from other products or services we provide.
+How we use information about you
+We may use information about you for the following purposes, which include fulfilling our contract with you and for our legitimate business purposes:
+Service delivery and operations. We may use information about you to:
+provide, operate and improve the Service and our business;
+personalize the Service, including remembering the devices from which you have previously logged in and remembering your selections and preferences as you navigate the Service;
+facilitate your invitations to friends who you want to invite to join the Service;
+enable security features of the Service, such as by sending you security codes via email and remembering devices from which you have previously logged in;
+communicate with you about the Service, events, or contests, including by sending Service-related announcements, updates, security alerts, and support and administrative messages;
+provide support for the Service, and respond to your requests, questions and feedback.
+Service improvement, research, and analytics. We and our analytics partners may use information about you to analyze your usage of the Service, improve the Service, conduct research, improve the rest of our business, help us understand user activity on the Service, including which pages are most and least visited and how visitors move around the Service, as well as user interactions with our emails, and to develop new products and services. As part of our efforts to improve the Service, we may create aggregated, de-identified and/or anonymized data from personal data we collect. We make personal data into de-identified or anonymized data by taking steps to remove information that makes the data personally identifiable to you. We may use aggregated, de-identified or otherwise anonymized data and share it with other parties for our lawful business purposes, including to analyze and improve the Service and promote our business and will not attempt to reidentify any such data.
+Marketing and Advertising. We (directly or through our vendors or service providers) may collect and use information about you for marketing and advertising purposes:
+Direct marketing. We may send you direct marketing communications and may personalize these messages based on your needs and interests. You may opt-out of our marketing communications as described in the section called “Opt-out of marketing communications” below.
+Targeted advertising. We and our ad partners may use information about you to deliver more relevant content to you on our Service and across the Internet.
+Events, promotions and contests. We may use information about you to:
+administer promotions and contests;
+communicate with you about promotions or contests in which you participate; and
+contact or market to you after collecting information about you at an event.
+Compliance and protection. We may use information about you to:
+comply with applicable laws, lawful requests, and legal process, such as to respond to subpoenas, investigations or requests from government authorities;
+protect our, your or others' rights, privacy, safety or property (including by making and defending legal claims);
+audit our internal processes for compliance with legal and contractual requirements or our internal policies;
+enforce the terms and conditions that govern the Service; and
+prevent, identify, investigate and deter fraudulent, harmful, unauthorized, unethical or illegal activity, including cyberattacks and identity theft.
+With your consent. In some cases, we may specifically ask for your consent to collect, use or disclose information about you, such as when required by law. You may withdraw your consent at any time by contacting us at the address given at the end of this Privacy Policy or for marketing emails through the unsubscribe feature provided with each marketing email.
+Cookies and similar technologies. In addition to the other uses included in this section, we may use the cookies and similar technologies described above for the following purposes:
+Technical operation. To allow the technical operation of the Service, such as by remembering your selections and preferences as you navigate the site, and whether you are logged in when you visit password protected areas of the Service.
+Functionality. To enhance the performance and functionality of our services.
+Analytics. To help us understand user activity on the Service, including which pages are most and least visited and how visitors move around the Service, as well as user interactions with our emails.
+When we disclose the information we collect about you
+We may disclose information about you to certain other parties, as described below, to provide, build, protect, improve, and promote our products and as required by law.
+Vendors. Other parties like Amazon Web Services that provide, secure, promote, and improve our services.
+Advertising and analytics partners. We may disclose information about you to our advertising and analytics partners to help us better understand your use of the Service, customize the Service, and provide you with advertising that we think will be of interest to you. Some analytics providers we partner with may provide specific opt-out mechanisms. For example, you may opt out of having Google Analytics use your information for analytics by installing the Google Analytics Opt-out Browser Add-on.
+Payment processors. Any payment card information you use to make a purchase on the Service is collected and processed directly by our payment processors, such as Stripe. Stripe may use your payment data in accordance with its privacy policy, https://stripe.com/privacy.
+Other parties designated by you, with your consent, or at your direction. We may disclose information about you to other parties where you have instructed us or provided your consent to do so. For example, we may disclose information about you to advertisers or sponsors with whom we are collaborating to offer you additional services such as contests and promotions. This Privacy Policy does not apply to how such other parties process information about you, so please contact such other parties for more information about their privacy practices.
+Account administrators. When you join a Runway Enterprise or team account, the administrator of that team may access and control your account. If you created an account using an email address belonging to your employer or organization, we may disclose your email address to the administrators or representatives of that employer or organization to, for example, allow them to invite you to a Runway Enterprise workspace or reach out to them about purchasing Runway Enterprise.
+Affiliates. We may disclose information about you to our affiliates for the purposes identified in this Privacy Policy.
+Business and marketing partners. Other parties with whom we co-sponsor events or promotions, with whom we jointly offer products or services, or whose products or services may be of interest to you.
+Professional advisors. Professional advisors, such as lawyers, auditors, bankers and insurers, where necessary in the course of the professional services that they render to us.
+Authorities and others. Law enforcement, government authorities, and private parties, as we believe in good faith to be necessary or appropriate for the compliance and protection purposes described above.
+Business transferees. We may disclose information about you in the context of actual or prospective business transactions (e.g., investments in Runway, financing of Runway, public stock offerings, or the sale, transfer or merger of all or part of our business, assets or shares), for example, we may need to disclose certain information about you to prospective counterparties and their advisers. We may also disclose information about you to an acquirer, successor, or assignee of Runway as part of any merger, acquisition, sale of assets, or similar transaction, and/or in the event of an insolvency, bankruptcy, or receivership in which information about you is transferred to one or more unaffiliated parties as one of our business assets.
+Other users and the public. Your profile and other user-generated content data (except for messages) may be visible to other users of the Service and the public. For example, other users of the Service or the public may have access to your information if you chose to make your profile or other information about you available to them through the Service, such as when you invite collaborators, provide comments, reviews, or share other content. This information can be seen, collected and used by others, including being cached, copied, screen captured or stored elsewhere by others (e.g., search engines), and we are not responsible for any such use of this information.
+Exercising your rights and choices
+Access, correct, or update your information. If you have registered for an account with us through the Service, you may review and update certain account information by logging into the account.
+Opt-out of marketing communications. You may opt-out of marketing-related emails by following the opt-out or unsubscribe instructions at the bottom of the email, or by contacting us. Please note that if you choose to opt-out of marketing-related emails, you may continue to receive service-related and other non-marketing emails.
+Cookies. Most browsers let you remove or reject cookies. To do this, follow the instructions in your browser settings. Many browsers accept cookies by default until you change your settings. Please note that if you set your browser to disable cookies, the Service may not work properly. For more information about cookies, including how to see what cookies have been set on your browser and how to manage and delete them, visit www.allaboutcookies.org. You can also configure your device to prevent images from loading to prevent web beacons from functioning.
+Blocking images/clear gifs. Most browsers and devices allow you to configure your device to prevent images from loading. To do this, follow the instructions in your particular browser or device settings.
+Privacy settings. We make available certain privacy settings on the Service, including allowing you to make assets like your files, images, and projects sharable versus private.
+We cannot offer any assurances as to whether the companies we work with participate in the opt-out programs described above.
+Linked social media networking sites or other third-party platforms. If you choose to connect to the Service through a third-party platform like Google, you may be able to use your settings in your account with that platform to limit the information we receive from it. If you revoke our ability to access information from a third-party platform, that choice will not apply to information that we have already received from that third party.
+Delete your account. You can choose to delete your account by following the instructions here. To request deletion of your personal information, submit a request through our Privacy Request Portal.
+Additional US state-specific and other jurisdiction-specific rights
+In addition to the above rights, your local laws (including those in the EU, UK, Japan, California, Colorado, Connecticut, Delaware, Indiana, Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode Island, Tennessee, Texas, Virginia, or Utah) may afford you further rights, which may include:
+Right to know the categories and specific pieces of personal information we have collected, used, or shared;
+Right to delete, correct, or update your personal information;
+Right to prevent the processing of your information for direct marketing purposes (including any direct marketing processing based on profiling);
+Right to restrict the way that we process and disclose certain information about you;
+Right to object to certain processing of your personal information;
+Right to revoke your consent for the processing of your personal information;
+Right to be free from discrimination for exercising your rights;
+Right to data portability; and
+Right to information about financial incentives that we offer to you, if any
+California and Oregon residents can also request information about the categories of personal information we collect, disclose, or sell or share about you. California residents can request the categories of sources of such information; the business or commercial purpose for collecting or selling or sharing your personal information; and the categories of third parties to whom we disclose personal information. Such information is also set forth in this Privacy Policy.
+Connecticut, Minnesota and Oregon residents can request a list of the specific “third parties” (as that term is defined under applicable law) to which we have disclosed personal information, and Delaware and Maryland residents can request a list of the categories of such “third parties.”
+You can exercise the above rights by submitting a request via email to privacy@runwayml.com. To protect your privacy and security, we take reasonable steps to verify your identity and requests before granting such requests. If we are unable to verify your identity, we may be unable to respond to your requests. California residents have the right to designate an authorized agent to make requests on your behalf. Agents must submit a signed, written permission evidencing that the consumer has authorized them to make such requests, or a valid power of attorney for that consumer. We may also follow up with you to verify your identity before processing the authorized agent’s request as permitted by applicable law.
+Please note that certain information may be exempt from such requests under applicable law. For example, we may retain certain information for legal compliance and to secure the Service. We may need certain information to provide the Service to you; if you ask us to delete it, you may no longer be able to use the Service.
+Residents of certain states (such as Colorado, Connecticut, Delaware, Iowa, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Tennessee, Texas, and Virginia residents) may have the right to appeal the denial of a request. You may appeal a denial by emailing us at privacy@runwayml.com.
+Notice of Right to Opt Out
+Residents of certain states (such as California, Colorado, Connecticut, Delaware, Iowa, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Tennessee, Texas, Utah and Virginia) also have the right to opt out of the “sale” of your personal information or our processing/sharing of your information for online targeted advertising purposes.
+While we do not “sell” personal information in the traditional sense, our disclosure of personal information to third-party advertising and analytics partners as described in the section titled “When we disclose the information we collect about you” above may be considered a “sale” subject to these opt-out rights. You can opt out of such disclosures by clicking the “Your Privacy Choices” link on our website footer, or designate an authorized agent to do so on your behalf. Note, if you use a cookie blocker such as Ghostery, it may block visibility of this tool or link, including in your web footer. If you have enabled a legally recognized browser-based opt out preference signal (such as Global Privacy Control) on your browser, we recognize such preference in accordance and to the extent required by applicable law.
+Please note that you must opt out on each device and each browser where you want your choice to apply. Your preference may be lost if you clear, or your browser is set to clear, cookies.
+Residents of the European Economic Area and United Kingdom
+Runway is considered the “data controller” of the “personal data” (as defined under the General Data Protection Regulation) we handle under this Privacy Policy. In other words, Runway is responsible for deciding how to collect, use, and disclose personal data, subject to applicable law. The laws of the European Economic Area and the United Kingdom require data controllers to tell you about the legal ground that they rely on for using, sharing, or disclosing your personal data. To the extent those laws apply, our legal grounds are as follows:
+Contractual Commitments: We may use, share, or disclose personal data to honor our contractual commitments to you. For example, we will process your personal data to comply with our agreements with you, and to honor our commitments in any contracts that we have with you.
+With Your Consent: Where required by law, and in some other cases, we use, share, or disclose personal data on the basis of your consent.
+Legitimate Interests: In many cases, we use, share, or disclose personal data on the ground that it furthers our legitimate business interests in ways that are not overridden by the interests or fundamental rights and freedoms of the affected individuals, such as customer service, analyzing and improving our business, providing security for the Service and other products and services we may offer, preventing fraud, and managing legal issues.
+Legal Compliance: We need to use and disclose personal data in certain ways to comply with our legal obligations.
+In addition to the rights described above, residents of the European Economic Area and United Kingdom have the right to lodge a complaint with your relevant supervisory authority. However, we encourage you to contact us first, and we will do our very best to resolve your concern.
+Residents of California
+Except as explicitly stated in this Privacy Policy, this section applies solely to California residents. This section applies to “personal information,” as defined by the California Consumer Privacy Act (“CCPA”) that we collect on or through the Service and through other means (such as information collected offline and in person). It does not apply to current or former employees of Runway, independent contractors, or job applicants to jobs at Runway.
+How we collect, use, and disclose personal information
+The CCPA requires us to disclose information regarding the categories of personal information and sensitive personal information that we have collected about California consumers, the categories of sources from which we collect personal information, the business or commercial purposes (as each of those terms is defined by the CCPA) for which we collect personal information, and the categories of parties to whom we disclose personal information.
+Throughout this Privacy Policy, we discuss in detail the specific pieces of personal information and sensitive personal information we collect, the sources of that information, and how we disclose it. Under the California Consumer Privacy Act (“CCPA”), we also have to provide you with (1) the “categories” of personal information and sensitive personal information we collect and disclose for business or commercial purposes (as “categories” are defined by the CCPA); and (2) the categories of other parties to whom we disclose such information for a business purpose. Please see the following chart for the rest of this information, which is also described throughout this Privacy Policy:
+Category of Personal and/or Sensitive Personal Information Categories of Other Parties to Whom We Disclose Purposes of Use
+Identifiers and other contact information (e.g. name, email address, or social network account and profile data) Vendors
+Ad and analytics partners
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Advertising and marketing
+Legal and safety
+Business transfers
+As authorized by you
+Commercial information (e.g. transaction data) Vendors
+Ad and analytics partners
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Advertising and marketing
+Legal and safety
+Business transfers
+As authorized by you
+Financial data (e.g. limited payment card information to facilitate processing of payments by our payment processors) Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Legal and safety
+Business transfers
+As authorized by you
+Internet or other network or device activity (including general location inferred from an IP address) Vendors
+Affiliates
+Ad and analytics partners
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Advertising and marketing
+Legal and safety
+Business transfers
+As authorized by you
+Sensory information (e.g. images; audio or video recordings) Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Legal and safety
+Business transfers
+As authorized by you
+Other information that identifies or can be reasonably associated with you (such as user generated content) Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Marketing
+Legal and safety
+Business transfers
+As authorized by you
+Inferences drawn from non-sensitive information we collect Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Marketing
+Legal and safety
+Business transfers
+As authorized by you
+Professional information (such as professional titles of business contacts) Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Analyze and improve the Service
+Marketing
+Legal and safety
+Business transfers
+As authorized by you
+Biometric data Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Legal and safety
+Business transfers
+As authorized by you
+Log-in information (e.g. to access your account) Vendors
+Affiliates
+Entities for legal and safety purposes
+As consistent with your consent Provide the Service
+Communicate with you
+Legal and safety
+Business transfers
+As authorized by you
+We collect the categories of personal information identified above from the following sources: (1) directly from you; (2) through your use of the Service; and (3) other parties such as unaffiliated parties.
+We may combine the information we collect (“aggregate”) or remove pieces of information (“de-identify”) to limit or prevent identification of any particular user or device. We may use or disclose this aggregated or de-identified information in our discretion.
+Your CCPA rights
+If you are a California resident (as defined by the CCPA), you may have the right to request that we:
+Provide you the categories of personal information we have collected or disclosed about you; the categories of sources of such information; the business or commercial purpose for collecting, “sharing” or “selling” your personal information as those terms are defined by the CCPA; the categories of third parties to whom we disclose or “sell” or with whom we “share” personal information; and the categories of personal information we “sell” or “share.”
+Provide access to and/or a copy of certain personal information we have about you.
+Delete certain personal information we have about you.
+Correct inaccurate personal information we have about you.
+Opt out of the “sharing” or “selling” of your personal information, as such terms are defined by the CCPA.
+You also have the right to not be discriminated against (as provided for in California law) for exercising certain of your rights referenced herein. Certain information may be exempt from such requests under applicable law. In addition, we need certain types of information so that we can provide the Service to you. If you ask us to delete it, you may no longer be able to access or use the Service. Please see “Additional US state-specific and other jurisdiction-specific rights” above for information about how to exercise these rights.
+“Sale” and “sharing” of personal information
+The CCPA sets forth certain obligations for businesses that “sell” or “share” personal information. Where we refer to “sell” or “share” (or their variants) in quotes, we are referring to those terms as uniquely defined in the CCPA. Under the CCPA, “sharing” is defined as the targeting of advertising to a consumer based on that consumer’s personal information obtained from the consumer’s activity across websites, and “selling” is defined as the disclosure of personal information to third parties in exchange for monetary or other valuable consideration.
+While we do not “sell” personal information in the traditional sense, our disclosure of personal information to third-party advertising and analytics partners as described in the section titled “When we disclose the information we collect about you” above may be considered a “sale” subject to these opt-out rights. You can opt out of such disclosures by clicking the “Your Privacy Choices” link on our website footer, or designate an authorized agent to do so on your behalf.
+We do not knowingly “sell” or “share” the personal information of children under 16.
+Do-Not-Track Disclosure
+Some Internet browsers may be configured to send "Do Not Track" signals to the online services that you visit. We currently do not respond to "Do Not Track" signals. To find out more about "Do Not Track," please visit http://www.allaboutdnt.com.
+Retention of Personal Information About You
+Please see the Data retention section below.
+Other CCPA Rights
+The CCPA also allows you to limit the use or disclosure of your “sensitive personal information” if your sensitive personal information is used for certain purposes. The sensitive personal information we may have collected in the preceding twelve months are (1) account login and password or other credentials allowing access to your account; and (2) “biometric information” (as defined by the CCPA, though we do not use such data to establish individual identity). Please note that we do not use or disclose sensitive personal information other than for purposes for which you cannot opt out under the CCPA (e.g., to enable you to log into your account, to provide the Service).
+Shine the Light
+California’s Shine the Light Law (CA Civil Code § 1798.83) allows residents with which a business has an established business relationship to request a list of the third parties to which the business has disclosed certain “personal information” (as specifically defined by the Shine the Light law) during the preceding year where the business knows or reasonably should know that the third parties used the personal information for the third parties’ own "direct marketing purposes,” defined by the Shine the Light law as the use of personal information to solicit or induce a purchase, rental, lease, or exchange of products, goods, property, or services directly to individuals by means of the mail, telephone, or electronic mail for their personal, family, or household purposes. However, the business is not required to provide this information where the business adopts and discloses, in its privacy policy, a policy of not disclosing “personal information” to third parties for their “direct marketing purposes” 1) unless the resident first affirmatively agrees or 2) if the resident has exercised an option that prevents that information from being disclosed. Runway maintains such a policy and thus is not required to provide this information. Runway does not engage in any disclosures in which it knows or reasonably should know that the third parties use the personal information for their own direct marketing purposes as defined by Shine the Light. However, Runway provides California residents the ability to exercise rights under the California Consumer Privacy Act (“CCPA”) to opt out of “sales” and “sharing” of their personal information for cross-context behavioral advertising. Such opt out would apply to disclosures covered by Shine the Light if applicable. Please visit the Your Privacy Choices link in the website footer or app settings to exercise those CCPA rights.
+Other sites and services
+The Service may contain links to websites, mobile applications, and other online services operated by unaffiliated parties. In addition, our content may be integrated into web pages or other online services that are not associated with us. These links and integrations are not an endorsement of, or representation that we are affiliated with, any unaffiliated party. We do not control websites, mobile applications or online services operated by unaffiliated parties, and we are not responsible for their actions. We encourage you to read the privacy policies of the other websites, mobile applications and online services you use.
+Security
+We employ a number of technical, organizational and physical safeguards designed to protect the information we collect about you. However, security risk is inherent in all internet and information technologies and we cannot guarantee the security of the information about you.
+Data retention
+We will retain your information for only as long as necessary to provide the Service and for the other legitimate business purposes set out in this Policy such as safety, security, compliance, and dispute resolution. In determining how long to retain information, we consider the amount, nature and sensitivity of the information, the potential risk of harm from unauthorized use or disclosure of the information, the purposes for which we process the information, applicable legal requirements, and our legitimate interests. For example, we will retain face scans and voiceprints for no longer than the earlier of the date the initial purpose for collecting the data is satisfied or within three years of your last interaction with us.
+International data transfer
+We are headquartered in the United States and may use vendors or service providers that operate in other countries. By using the Service, or providing us with any information, you consent to the collection, processing, maintenance, and transfer of such information in and to the United States and other applicable countries in which the privacy laws may not be as comprehensive as, or equivalent to, those in the country where you reside and/or are a citizen.
+Children
+The Service is not intended for use by anyone under 13 years of age. If you are a parent or guardian of a child from whom you believe we have collected personal information in a manner prohibited by law, please contact us. If we learn that we have collected personal information through the Service from a child without the consent of the child's parent or guardian as required by law, we will comply with applicable legal requirements to delete the information.
+Changes to this Privacy Policy
+We reserve the right to modify this Privacy Policy at any time. If we make material changes to this Privacy Policy, we will notify you by updating the date of this Privacy Policy and posting it on the Service or other appropriate means. Any modifications to this Privacy Policy will be effective upon our posting the modified version (or as otherwise indicated at the time of posting). In all cases, your use of the Service after the effective date of any modified Privacy Policy indicates your acknowledging that the modified Privacy Policy applies to your interactions with the Service and our business.
+How to contact us
+Email: privacy@runwayml.com
+Creative
+Overview
+Agent
+Android app ↗
+iOS app ↗
+ChatGPT Plugin
+MCP
+Use Cases
+Pricing
+Team Plan
+Login
+Dev
+Platform ↗
+Models ↗
+Model Router ↗
+Workflows
+Recipes ↗
+Characters
+Documentation ↗
+Pricing
+Robotics
+Overview
+Get Access
+Praxis-1
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+Gen-4.5
+Aleph 2.0
+Ruby
+Act-Two
+Solaris
+Robotics
+World Simulation
+Resources
+Academy ↗
+Help Center ↗
+Resource Hub
+News
+Changelog
+Meetups ↗
+Events & Programs
+AI Festival ↗
+AI Summit 2026 ↗
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Runway Rewards
+Talent Network ↗
+Company
+About Us
+Careers
+Safety
+Verify Content Credentials
+Brand Guidelines
+Press
+Partnerships
+© 2026 Runway AI, Inc. / Terms of Use / Privacy Policy / California Notices / Your Privacy Choices / Cookie Settings
+Code of Conduct / System Status

@@ -1,0 +1,92 @@
+url: https://help.runwayml.com/hc/en-us/articles/24297557468563-Creating-a-Runway-Account
+method: fetch
+saved: 2026-11-19
+
+Creating a Runway Account – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Creating with Runway
+Getting Started
+Introduction to Runway
+Creating a Runway Account
+Table of Contents
+To create a Runway account, head to the sign up page.
+Signing up with an email address
+Enter the email address for the account
+Enter a username
+Enter a password that is at least 6 characters with a mix of letters, numbers, and symbols
+Confirm your selected password
+On the next screen, enter your first name and last name
+After submitting your information, the email you entered will be sent a verification code. You have 1 hour to retrieve the code from the message, and enter it on the following screen
+Signing up with Google
+Select Sign up with Google
+In the pop-up window that appears, select the Google account you want to make your account under
+An account will automatically be created under the email associated with your Google account. Your username and account name will also be pulled directly from your Google account's name and email handle
+Signing up with Apple
+Select Sign up with Apple
+In the pop-up window that appears, log into your Apple ID
+An account will automatically be created under the email associated with your Apple ID. Your username and account name will also be pulled directly from your Apple ID's name and email handle.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

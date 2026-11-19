@@ -1,0 +1,227 @@
+url: https://runway.com/data-security
+method: fetch
+saved: 2026-11-19
+
+Data Security & Privacy | Runway AI
+Runway app for iPhoneRunway app for Android
+Create anything, anytime.
+Try appTry app
+Creative
+Dev
+Robotics
+Research
+Resources
+Enterprise
+Pricing
+Enterprise SalesLoginTry Runway
+Enterprises get up to 2 months of usage free. Sign by 12/31. See termsEnterprises get up to 2 months of usage free. Sign by 12/31. See terms
+Contact sales
+Runway Security
+Enterprise security information for customers and partners.
+Last updated August 2026
+Introduction
+At Runway, we build AI-powered tools that transform video creation and editing. As we deliver these cutting-edge technologies, we recognize our responsibility to implement robust security measures that protect our customers' valuable content and data.
+This document outlines Runway's security measures, protocols, and practices. While it represents our security posture as of the last update date, security is an evolving discipline requiring continuous assessment and enhancement.
+We've organized this information into two main sections:
+Information Security at Runway: Our organizational approach to security.
+Product Security: How we build security into Runway's products and services.
+The trust our customers place in us when they upload their creative assets demands the highest level of security diligence across our entire organization.
+1. Information Security at Runway
+Security Leadership & Organization
+Runway employs a dedicated security team that oversees our comprehensive security program. A cross-functional security committee, including senior leadership, drives implementation and continuous improvement of our security initiatives. While our security team leads these efforts, we foster a culture where security is everyone's responsibility.
+Our security policies, procedures, and risk management frameworks undergo regular reviews and updates to address emerging threats and changing business needs.
+Compliance & Certifications
+SOC 2 Certification
+Runway maintains SOC 2 Type II certification, validating our security controls through rigorous independent auditing. This certification, developed by the American Institute of CPAs (AICPA), confirms our systems effectively protect customer data.
+Our annual SOC 2 Type II recertification demonstrates our ongoing commitment to security excellence. We've successfully maintained this certification since its initial achievement and continue to strengthen our controls with each audit cycle.
+Enterprise customers can request our SOC 2 Type II report through their sales process or they can request through Runway’s Trust Center.
+ISO/IEC 27001 Certification
+Runway is certified to ISO/IEC 27001, the international standard for information security management systems (ISMS). Our certification was issued by an accredited certification body following an independent audit of our security program.
+Enterprise customers can request a copy of our certificate through Runway’s Trust Center.
+Additional Security Frameworks
+Beyond SOC 2 and ISO 27001, Runway aligns with other key security standards:
+GDPR Readiness: Our systems incorporate protections for European users in accordance with GDPR requirements.
+CCPA/CPRA Controls: We implement the necessary protections for California residents' data.
+Industry Best Practices: Our security program incorporates elements from NIST frameworks.
+Workforce Security
+Personnel Screening
+New hires undergo thorough background verification conducted by specialized third-party services. These checks cover Global Watchlist Search, National Criminal Search, Sex Offender Search, SSN Trace, and other appropriate screenings in compliance with applicable employment laws.
+Confidentiality Commitments
+All Runway employees and contractors sign binding agreements that establish clear obligations to protect customer information and company intellectual property.
+Employee Offboarding
+We follow strict protocols when team members leave Runway. These include immediate access revocation, equipment recovery, and confirmation that all confidential information has been returned or securely destroyed.
+Security Training Program
+Every team member participates in mandatory security training upon joining Runway. We supplement this foundation with regular security updates, and awareness campaigns. All employees must acknowledge our security policies and acceptable use guidelines.
+Data Protection Measures
+Access Management
+Runway implements role-based access controls following the principle of least privilege. Team members receive only the minimum access rights needed to perform their job functions. Our production environments are secured through advanced identity management with mandatory multi-factor authentication.
+Our internal systems require SSO authentication with strong password policies and MFA enforcement.
+We've automated our production deployment pipelines to minimize the need for direct human access to sensitive environments. This automation enhances security by reducing manual interventions and potential human error.
+Activity Monitoring
+Comprehensive logging and monitoring systems track access across Runway's infrastructure. Security teams regularly review these logs for suspicious activity and potential unauthorized access attempts. For certain infrastructure-related alerts, engineering teams may also conduct reviews as part of our layered security approach. Other alerts containing sensitive information are directed to appropriate personnel with proper access permissions.
+Data Encryption
+We protect customer content with industry-standard encryption technologies:
+Transit Encryption: All data transmitted to and from our platforms uses TLS 1.2+ with strong cipher suites.
+Storage Encryption: Data at rest is secured with AES-256 encryption. Encryption keys are themselves protected in secure key management systems with regular rotation schedules.
+We rely on well-established, industry-proven encryption libraries rather than custom cryptographic implementations. Runway never stores customer passwords in plaintext or using reversible encryption.
+Backup Systems
+We maintain automated backup procedures to protect against data loss. These backups undergo regular testing to verify restoration capability and are retained according to defined retention schedules.
+Data Removal
+We honor customer requests for data deletion in accordance with our contractual obligations. Our data retention framework balances operational requirements with data minimization principles.
+Third-Party Risk Management
+Vendor Assessment
+We carefully select service providers who support our platform operations. Our vendor management process includes detailed security evaluations, reputation assessments, and capability reviews. Each potential vendor undergoes security risk analysis before integration into our supply chain.
+We establish formal contracts with all providers that include specific requirements for data protection, confidentiality, and service performance. Our agreements include provisions for security audits and compliance with applicable regulations.
+Service Provider Directory
+For transparency, we maintain a current list of subprocessors that handle enterprise customer data. This list is available at runway.com/subprocessors.
+Technology Infrastructure Security
+Device Security
+All end-user laptop and desktop computers are required to have anti-virus/anti-malware software installed and full disk encryption enabled. We use mobile device management (MDM) software to monitor our device fleet, enforce security settings, and push software updates. All IT assets issued by the company to employees are inventoried and tracked.
+Infrastructure Change Management
+Each proposed change to our production environment (including infrastructure changes) must be approved, and each such change and corresponding approval are logged. Our CI/CD pipeline provisions infrastructure changes in an automated manner after they are approved.
+Secrets Management
+We use a commercially available secrets management system to store secrets such as authentication tokens, passwords, API credentials, and certificates.
+Server Hardening
+Runway uses pre-hardened server infrastructure from major cloud providers. We interact with servers predominantly by deploying containers orchestrated with modern container management systems.
+Infrastructure Redundancy
+Runway's infrastructure is hosted in multiple, physically separated data centers for redundancy in case of technical fault or natural disaster and for load balancing. Our cloud providers also deliver protective measures against DDoS attacks. We use a variety of automated tools to monitor our services 24/7 and alert us of any service availability issues. Customers can monitor service status and scheduled maintenance periods at status.runwayml.com.
+Disaster Recovery & Business Continuity Planning
+Runway has a written disaster recovery and business continuity plan. Our goal is to ensure that customers always have access to our services whenever they are needed.
+Incident Management
+Runway maintains a structured Security Incident Response Program with established procedures for:
+Rapid identification and classification of security events
+Escalation pathways based on incident severity
+Mitigation and containment strategies
+Customer communication guidelines
+Post-incident review and security enhancement
+Our security team conducts regular incident response simulations to ensure readiness. We notify affected customers of security incidents in accordance with contractual and regulatory requirements, providing transparent updates throughout the resolution process.
+AI Platform-Specific Safeguards
+As developers of advanced AI video generation systems, we implement specialized controls for our unique technology stack:
+AI Model Protection
+Strict controls govern access to our proprietary AI models
+We maintain policies and processes to prevent misuse and unauthorized access
+Regular security assessments evaluate our AI infrastructure for emerging vulnerabilities
+Technical separation between customer content storage and model training systems
+Creative Content Protection
+Enterprise-grade encryption secures all customer content within our platform
+Clear intellectual property guidelines define ownership of AI-generated outputs
+Technical safeguards prevent unauthorized access to customer projects and generated assets
+Enterprise customers can utilize content provenance features for asset verification
+Ethical AI Practices
+Built-in safety mechanisms within our AI systems help prevent generation of harmful content
+We conduct regular bias and fairness evaluations of our AI models
+Combination of automated systems and internal human review to detect and block harmful content in user inputs and outputs
+Our security research team continuously monitors for novel AI-specific threats
+2. Product Security
+Application Design & Development
+Customer Data Overview
+Runway handles several data categories in our operations:
+User account information (email addresses, names, team memberships)
+Authentication tokens (we don't store passwords directly)
+Customer content (uploaded media, generated output, project configurations)
+System logs for auditing user activity and troubleshooting
+Secure Development Lifecycle
+Security is integrated throughout our product development process:
+All code changes undergo review and approval before deployment
+Production changes require formal approval through a pull request workflow
+Multiple reviewers evaluate security-sensitive code changes
+Regular external security assessments complement our internal reviews
+We strictly isolate production data from testing environments. Customer content is never used for testing new features or changes.
+Major product updates are communicated to customers before deployment. Security patches may be applied automatically to protect system integrity.
+Security Testing Program
+Our engineering team employs various security verification methods:
+Static code analysis tools scan for potential vulnerabilities
+Dependency scanning identifies vulnerable third-party components
+Container scanning checks for security issues in deployment images
+Regular automated security testing throughout our development pipeline
+External Security Validation
+Runway partners with specialized security firms to conduct independent assessments of our platform. These engagements include:
+In-depth application security reviews
+Penetration testing of our web applications and APIs
+Architecture security evaluation
+Code security reviews
+In addition to these assessments, Runway operates a private bug bounty program that enables select security researchers to responsibly disclose potential vulnerabilities in exchange for recognition and rewards.
+Enterprise customers can request a summary of these test results as well as Runway's independent third-party audit reports through Runway's trust portal. Unauthorized security scanning is not permitted.
+Platform Architecture
+Runway's platform architecture incorporates security fundamentals at every level:
+Zero Trust Design: Our security model assumes no implicit trust based on network location
+Defense in Depth: Multiple security layers protect against varying threat vectors
+Least Privilege Access: Users can access only specific resources they're authorized to use
+Content Isolation: Secure boundaries between customer projects and assets
+Comprehensive Logging: Detailed audit trails of all platform activity
+From the customer perspective, our architecture provides key security advantages:
+Centralized management of user permissions and resource access
+Granular control over sharing and collaboration settings
+Enterprise-ready integration with existing identity systems
+High-performance infrastructure that scales securely
+Reliability through redundant system design
+Get in Touch
+Interested in learning more about Runway's security measures or how we safeguard your creative content? We'd be happy to discuss our approach in more detail.
+For enterprise demonstrations and security discussions, please contact our Enterprise Sales team.
+Creative
+Overview
+Agent
+Android app ↗
+iOS app ↗
+ChatGPT Plugin
+MCP
+Use Cases
+Pricing
+Team Plan
+Login
+Dev
+Platform ↗
+Models ↗
+Model Router ↗
+Workflows
+Recipes ↗
+Characters
+Documentation ↗
+Pricing
+Robotics
+Overview
+Get Access
+Praxis-1
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+Gen-4.5
+Aleph 2.0
+Ruby
+Act-Two
+Solaris
+Robotics
+World Simulation
+Resources
+Academy ↗
+Help Center ↗
+Resource Hub
+News
+Changelog
+Meetups ↗
+Events & Programs
+AI Festival ↗
+AI Summit 2026 ↗
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Runway Rewards
+Talent Network ↗
+Company
+About Us
+Careers
+Safety
+Verify Content Credentials
+Brand Guidelines
+Press
+Partnerships
+© 2026 Runway AI, Inc. / Terms of Use / Privacy Policy / California Notices / Your Privacy Choices / Cookie Settings
+Code of Conduct / System Status

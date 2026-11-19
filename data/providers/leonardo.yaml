@@ -1,0 +1,628 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2). leonardo.ai answers this machine with
+# Cloudflare's check in Edge, headless and headed, and a plain fetch with 403, so its pages were read with Edge through
+# country exits: the pricing page (both its Pay Monthly and Pay Yearly views) through US, UK, German, Canadian and
+# Australian exits, and its home page, Terms of Service and Privacy Policy through a US exit; the page's own data from
+# its HTML through the same US exit. Its help centre (intercom.help/leonardo-ai, Leonardo's Intercom help centre, which
+# leonardo.ai links for help and refunds) read with Edge from Canada: the FAQ, refunds, subscribing and changing plans,
+# cancelling, deleting your account, commercial use, private and public images, visibility settings, tokens, token
+# rollover, top-ups, support, payment method, payment errors, sign-in, video (each FAQ answer opened), Edit in Canva
+# (each FAQ answer opened), 3D generation, Canvas Editor, Realtime Canvas, Flow State and invoices articles, and the
+# Canva Business access FAQ; Canva's own help article on Leonardo in Canva Business. Pages, each quoted where it's used:
+# Pricing: leonardo.ai/pricing, "Pay Monthly" Free "$0 /month", Essential "$12 /month", Premium "$30 /month", Ultimate
+# "$60 /month", and "Pay Yearly" ("Up to" "20% off") "$10 /month", "$24 /month", "$48 /month", each "ex. tax.". Every
+# exit (US, UK, Germany, Canada, Australia) showed the same figures in a bare $, and the page's own data names the
+# currency ("offers_currency":"USD") and both prices ("pay_monthly_price":12,"pay_yearly_price":10): one US-dollar
+# price list for everyone, GLOBAL. The yearly view gives only the price a month, paid yearly, so each yearly price is
+# twelve times it ($120, $288, $576: notes.md). No price includes tax ("ex. tax.").
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. no country or currency picker; 3. the page's
+# data names USD and no country; 4. checkout needs an account (app.leonardo.ai asks you to log in); 5. no prices or tax
+# article in its help centre ("please check the Plans page within the Leonardo.Ai web app"); 6. Edge, headed Edge and
+# a plain fetch from Canada were refused; a Canadian exit showed the same US-dollar list; 7. no bill offered.
+# Its individual plans: Free, Essential, Premium and Ultimate, monthly or yearly. Not listed: the Team plans (Starter
+# and Growth, "$24 / seat"), the API's "PAY AS YOU GO" and "API CUSTOM" (usage-billed), and top-up tokens (bought as you
+# go).
+# Bundles: none sold now. Canva Business and Canva Pro+ included Leonardo's Essential plan until 2026 ("If you start a
+# new Canva Business subscription on or after 1 September, 2026, access to Leonardo.Ai Essential plan will not be
+# included.", Canva's help centre); Canva isn't in the catalog and Business is out of scope (notes.md). Official
+# resellers: none; no page names a shop that sells it.
+
+id: leonardo
+name: Leonardo
+aliases: [leonardo.ai, leonardo ai]
+website: https://leonardo.ai
+# Its help centre is Intercom's (intercom.help/leonardo-ai), on Intercom's own host.
+domains: [app.leonardo.ai, intercom.help]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help centre's "How can I cancel my subscription?": Settings, Subscription and Billing, Cancel Plan.
+cancelUrl: https://intercom.help/leonardo-ai/en/articles/9035057-how-can-i-cancel-my-account-unsubscribe
+sources: { pricing: https://leonardo.ai/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: PayPal or a card through Stripe ("How do I subscribe to a paid plan, change or
+# upgrade my subscription?"). No page names the card networks.
+paymentMethods:
+  - methods: [paypal, card]
+    page: 'How do I subscribe to a paid plan, change or upgrade my subscription?'
+    url: https://intercom.help/leonardo-ai/en/articles/13755076-how-do-i-subscribe-to-a-paid-plan-change-or-upgrade-my-subscription
+    quotes:
+      - 'A confirmation pop up will appear advising you of the cost, and directing you to pay via PayPal, or Card (which will direct you to the Stripe billing page).'
+
+# Owner (M11.2), read 2026-11-17 through a US exit: its privacy policy names the company that runs it and calls it "a
+# Canva brand", and says the company is in Australia. Canva is private: no page names a listing.
+owner:
+  name: 'Leonardo Interactive Pty Ltd (Canva)'
+  page:
+    name: Privacy policy
+    url: https://leonardo.ai/privacy-policy
+  quotes:
+    - 'We are Leonardo Interactive Pty Ltd T/A Leonardo.Ai, a Canva brand (“Leonardo.Ai“).'
+  country:
+    code: AU
+    page:
+      name: Privacy policy
+      url: https://leonardo.ai/privacy-policy
+    quotes:
+      - 'By using the Service, you understand and agree that Leonardo Interactive Pty Ltd (an entity in Australia) will receive and process your personal data.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms bill "at the beginning of each Billing Cycle" and its pricing cards'
+# tokens "Resets on your Billing Date"; no page says which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://leonardo.ai/terms-of-service
+    - https://intercom.help/leonardo-ai/en/articles/13755076-how-do-i-subscribe-to-a-paid-plan-change-or-upgrade-my-subscription
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on the pricing cards and comparison table: usage (never features), the token bank,
+# Leo Agent (no page describes it beyond its name), private generations (no registry feature) and Edit in Canva.
+perks:
+  - id: daily-tokens
+    name: 150 fast tokens a day
+  - id: token-bank-25500
+    name: 'Rollover token bank of 25,500'
+  - id: token-bank-75000
+    name: 'Rollover token bank of 75,000'
+  - id: token-bank-180000
+    name: 'Rollover token bank of 180,000'
+  - id: relaxed-images
+    name: Unlimited relaxed image generation
+  - id: relaxed-video
+    name: Unlimited relaxed video generation
+  - id: leo-agent
+    name: Leo Agent
+  - id: private-generations
+    name: Private Generations
+  - id: model-training-10
+    name: Personal AI model training, 10 a month
+  - id: model-training-20
+    name: Personal AI model training, 20 a month
+  - id: model-training-50
+    name: Personal AI model training, 50 a month
+  - id: top-up-tokens
+    name: Top-up Tokens
+  - id: edit-in-canva
+    name: Edit in Canva
+
+# AI and creative features, read 2026-11-17, on every plan unless named:
+# - Sold as an AI service ("THE CREATOR-FIRST" "GENERATIVE AI PLATFORM", its home page), so its plans are in ai with
+#   ai.assistant, and in creative (notes.md).
+# - Image and video generation: the comparison table's "Image Generation" and "Video Generation" rows tick Free too
+#   ("No, however due to high token costs, only some Video models are accessible to Free users."). Its videos' sound
+#   ("videos that include sound effects and audio dialogue") is part of the clip, not music or voice generation.
+# - Models from other companies on the paid plans: the table's "Third-party Models" row ("-" on Free, whose "Platform
+#   Models" are "Auto only"); its video models include "Veo 3 and Kling Video 3.0".
+# - Edit in Canva, a perk on every plan ("Edit in Canva is available to all individual Leonardo.Ai users."): it sends
+#   an image to Canva's editor, not the assistant reaching your other apps (ai.integrations' `connectors`).
+# - Creative tools: photo editing ("Canvas Editor is a powerful image editing tool that allows you to make intricate
+#   adjustments to your images, remove unwanted elements, or even generate new content using advanced inpainting and
+#   outpainting techniques."), drawing and painting (Realtime Canvas, "designed to convert drawings into stunning
+#   artworks", "Limited" on Free), and on the paid plans 3D models ("then download the .glb file to use in Blender,
+#   Unity, or any tool that reads .glb files"; "A single 3D generation costs more than the free daily token allowance,
+#   so a paid plan is needed in practice.").
+# - No watermark on the paid plans: "To generate a Video without a watermark, consider upgrading to a paid plan."
+# - Generative credits a month on the paid plans: "Fast Tokens" "8,500 / monthly", "25,000 / monthly" and "60,000 /
+#   monthly"; Free's "150 / daily" is a perk.
+# - No page states video export resolutions by plan, web search, voice, memory, projects, reasoning, a coding agent or
+#   API use within a plan (its API is billed apart).
+# General features, read 2026-11-17: the web and "Leonardo.Ai is available as an app for Android and Apple iOS
+# devices!". Sign-in: an email and password, or "Apple, Google, Microsoft, or Canva login". App languages: English only
+# ("While we do not offer multi-language support right now, it's something we might consider adding down the line.").
+# Support: its Intercom chat with human agents ("Talk to a person"), "Alternatively, feel free to drop us an email
+# anytime at support@leonardo.ai." and Discord. Pause on the paid plans: its terms' "You may pause your Subscription for
+# a maximum period of three 3 months during each Subscription Period". No parental controls on its pages.
+features:
+  platforms: [web, ios, android]
+  account.sign-in: [password, sso]
+  languages.interface: [en]
+  support.channels: [email, chat, community]
+
+plans:
+  - id: leonardo.free
+    name: Free
+    link: https://app.leonardo.ai/
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      creative.tools: [photo-editing, painting]
+    perks: [daily-tokens, edit-in-canva]
+    notes: '150 fast tokens a day with its Auto model only; everything you make is public, and Leonardo owns it. Videos carry a watermark, and only some video models are open to Free.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+
+  - id: leonardo.essential
+    name: Essential
+    link: https://leonardo.ai/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.model-choice: true
+      creative.tools: [photo-editing, painting, 3d]
+      creative.no-watermark: true
+      creative.ai-credits: 8500
+      account.pause: true
+    perks:
+      [
+        token-bank-25500,
+        leo-agent,
+        private-generations,
+        model-training-10,
+        top-up-tokens,
+        edit-in-canva,
+      ]
+    notes: '8,500 fast tokens a month, with up to 25,500 unused tokens rolled over; 80+ models, 2 generations at a time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 12
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 120
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+
+  - id: leonardo.premium
+    name: Premium
+    link: https://leonardo.ai/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.model-choice: true
+      creative.tools: [photo-editing, painting, 3d]
+      creative.no-watermark: true
+      creative.ai-credits: 25000
+      account.pause: true
+    perks:
+      [
+        token-bank-75000,
+        relaxed-images,
+        leo-agent,
+        private-generations,
+        model-training-20,
+        top-up-tokens,
+        edit-in-canva,
+      ]
+    notes: '25,000 fast tokens a month (up to 75,000 rolled over), then unlimited image generation at a relaxed pace with 15 of its models; 3 generations at a time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 30
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 288
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+
+  - id: leonardo.ultimate
+    name: Ultimate
+    link: https://leonardo.ai/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.model-choice: true
+      creative.tools: [photo-editing, painting, 3d]
+      creative.no-watermark: true
+      creative.ai-credits: 60000
+      account.pause: true
+    perks:
+      [
+        token-bank-180000,
+        relaxed-images,
+        relaxed-video,
+        leo-agent,
+        private-generations,
+        model-training-50,
+        top-up-tokens,
+        edit-in-canva,
+      ]
+    notes: '60,000 fast tokens a month (up to 180,000 rolled over), then unlimited relaxed images and unlimited relaxed video with six video models (MiniMax H3 at 480p, Wan 2.6, Hailuo 2.3, Motion 2.0); 6 generations at a time.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 60
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 576
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://leonardo.ai/pricing
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 through a US exit: its Terms of Service
+# (updated 19 January 2026), which name its Privacy Policy and, for team and Canva multi-seat accounts, its Data
+# Processing Addendum (business, not read), and its Beta Services Terms (for beta features, not read: no link reached);
+# its Cookies Policy (named by the privacy policy, not read: the exit's session ended first); its help centre's billing,
+# privacy and account articles from Canada. Not read: the sign-up form's agreement line (app.leonardo.ai's sign-up is
+# behind its log-in page) and Apple's terms for its iOS app.
+policies:
+  links:
+    - name: Terms of service
+      url: https://leonardo.ai/terms-of-service
+    - name: Privacy policy
+      url: https://leonardo.ai/privacy-policy
+    - name: Cancelling your subscription
+      url: https://intercom.help/leonardo-ai/en/articles/9035057-how-can-i-cancel-my-account-unsubscribe
+    - name: Refunds
+      url: https://intercom.help/leonardo-ai/en/articles/11424250-refunds
+    - name: Frequently asked questions
+      url: https://intercom.help/leonardo-ai/en/articles/7051613-frequently-asked-questions
+    - name: Private and public images
+      url: https://intercom.help/leonardo-ai/en/articles/8044029-private-public-images
+    - name: Visibility settings
+      url: https://intercom.help/leonardo-ai/en/articles/9748859-image-and-video-generation-visibility-settings
+    - name: Deleting your account
+      url: https://intercom.help/leonardo-ai/en/articles/9665417-how-do-i-delete-my-account
+    - name: Generating video
+      url: https://intercom.help/leonardo-ai/en/articles/11027827-generating-video-on-leonardo-ai
+    - name: Pricing
+      url: https://leonardo.ai/pricing
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel in your settings at any time, and your plan keeps running until its renewal date.'
+      sources:
+        - url: https://intercom.help/leonardo-ai/en/articles/9035057-how-can-i-cancel-my-account-unsubscribe
+          quote: 'You can cancel your Leonardo.Ai subscription at any time, simply Follow the below steps to cancel your subscription:'
+        - url: https://intercom.help/leonardo-ai/en/articles/9035057-how-can-i-cancel-my-account-unsubscribe
+          quote: 'Your subscription remains active until your next renewal date, and from this date your subscription will not be renewed going forward.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Cancelling gives no money back, but you keep your plan until the period ends. A person at Leonardo looks at refund requests one by one.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'Your cancellation will take effect at the end of your current Subscription Period, and your Subscription will not be renewed (meaning you will need to continue paying all Subscription Fees due up until your current Subscription Period ends).'
+        - url: https://intercom.help/leonardo-ai/en/articles/11424250-refunds
+          quote: 'Refunds are assessed manually by a human agent.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms say only that prices are set out in the app; they don’t say whether it tells you before a price goes up.'
+      pages: [https://leonardo.ai/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial for its paid plans; the free plan is a plan of its own.'
+      pages: [https://intercom.help/leonardo-ai/en/articles/7051613-frequently-asked-questions]
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say plans renew on their own for the same period, but not that it reminds you first.'
+      pages: [https://leonardo.ai/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: neutral
+      reason: 'There are no fees beyond the price, except interest on a payment that’s late.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(b) Charge interest on any overdue payments at a rate equal to the Reserve Bank of Australia’s cash rate, from time-to-time, plus 2% per annum, calculated daily and compounding monthly.'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once and you pay the difference for the rest of the period. Moving down starts at your next billing period.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'Any upgrades to your Subscription will take effect immediately (and you will be charged the difference between your current Subscription and your new Subscription on a pro-rata basis). Any downgrades to your Subscription will take effect from the beginning of the next Billing Cycle.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'Outside Australia, a dispute goes to one private referee (an arbitrator) in Sydney after a meeting, not to a court. Its terms say nothing about class actions and offer no way to opt out.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(b) Where you are not resident or incorporated in Australia, refer the matter to arbitration administered by the Australian Centre for International Commercial Arbitration, with such arbitration to be conducted in Sydney, New South Wales, before one arbitrator, in English and in accordance with the ACICA Arbitration Rules.'
+      action:
+        name: 'Its dispute clause (clause 15.2 of its terms)'
+        url: https://leonardo.ai/terms-of-service
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      regions: [AU]
+      tier: good
+      reason: 'In Australia a dispute goes to mediation and then to the courts of New South Wales, with no private referee.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(a) Where you are resident or incorporated in Australia, refer the matter to mediation, administered by the Australian Disputes Centre in accordance with Australian Disputes Centre Guidelines for Commercial Mediation;'
+        - url: https://leonardo.ai/terms-of-service
+          quote: '15.3 Governing law and Venue: These Terms are interpreted under and governed by the laws of New South Wales.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It gives notice ahead of changes that hurt you, without saying how long ahead. If you don’t agree you can leave and get back what you paid for the time left.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '1.3 Variations: We may amend these Terms at any time, by providing reasonable advance notice of any change to the Terms that, in our sole determination, materially adversely affect your rights or your use of the Service.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(b) If you have paid Subscription Fees upfront, you will be issued a pro-rata refund based on the portion of the Subscription Period remaining.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It suspends or closes accounts for breaking its terms: it tells you, and gives you 14 days to fix most problems first.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '14.2 If we suspend your access to our Services, we will let you know within a reasonable time of doing so, and we will work with you to resolve the matter within 14 days, or if it cannot be resolved, then we may terminate your Account and your access to our Services will end.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(b) You or your Authorised Users breach these Terms and do not remedy that breach within 14 days of us notifying you of that breach.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'Everything public, which is everything on the free plan, can be used by every user, and Leonardo gets a licence that never ends to use it for anything, including selling it, and to pass it on.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '8.6 You grant us a non-exclusive, irrevocable, perpetual, royalty-free, worldwide and transferable right and licence to use, reproduce, modify, copy, process, adapt, publish, transmit, create derivative works of, publicly display and distribute any Public Content for providing, maintaining, promoting and improving the Services, including training AI models, developing new offerings, or for any commercial purpose.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'If you are using a free subscription, all Content you generate is publicly available by default.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      plans: [leonardo.essential, leonardo.premium, leonardo.ultimate]
+      tier: poor
+      reason: 'With Private Mode on, Leonardo may use your work only to run the service, but that licence can’t be taken back. Anything you leave public gets the free plan’s licence.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '8.5 You grant us a non-exclusive, irrevocable, royalty-free, worldwide, non-sublicensable (other than to our related bodies corporate, and non-transferable right and licence to use any Private Content solely for the purpose of performing of our obligations or exercising our rights under these Terms.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: '8.4 Paid Subscribers can select whether Content is public or private.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: bad
+      reason: 'On the free plan, what you make belongs to Leonardo, not you.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '8.7 If you are on one of our free Subscriptions (Free Subscriber), as between the Parties, ownership of all Intellectual Property Rights in any Output you, or your Authorised Users, create while using the Platform will vest in us upon creation'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      plans: [leonardo.essential, leonardo.premium, leonardo.ultimate]
+      tier: neutral
+      reason: 'On a paid plan you own what you make, but anything you leave public may also be used by Leonardo for any purpose.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '8.3 If you are on one of our paid Subscriptions (Paid Subscriber), as between the Parties, subject to your compliance with these Terms and to the extent permitted by law, ownership of all Intellectual Property Rights in any Content you, or your Authorised Users, create while using the Platform will vest in you upon creation.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'including training AI models, developing new offerings, or for any commercial purpose.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add, change or remove features at any time. If it stops the service your paid plan uses, it moves you to a similar one or refunds the time left.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '2.4 We may add, change or remove features or functionality to our Services; modify or introduce limitations to storage or other features; or discontinue our Services altogether at any time.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'If you are on a paid subscription and we discontinue the Service you are using during your subscription, we will migrate or make available to you a substantially similar service (if available) and if we’re unable to do so, we will provide you a pro-rata refund of fees prepaid for the remaining period of your subscription.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      tier: neutral
+      reason: 'If you don’t use your account for 12 months, it may delete it and everything you made, after emailing you first.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '3.7 If you have not used your Account for an extended period of time (12 months or more of inactivity), we may close and permanently delete your Account.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'We will notify you via the email address you provided when creating your Account prior to deleting your Account.'
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'Your right to use Leonardo can be suspended or taken back, and you may not take its software apart, with no exception for what the law allows.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '5.1 While you have an Account, we grant you and your Authorised Users a right to use our Platform (which may be suspended or revoked in accordance with these Terms).'
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'You agree not to copy or otherwise misuse our intellectual property without our written permission (for example, to reverse engineer or discover the source code of our intellectual property)'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your login: sharing it can get your account suspended. Other people need a team plan.'
+      sources:
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(a) We reasonably believe there has been any unauthorised access to or use of our Services (such as the unauthorised sharing of login details for our Platform);'
+        - url: https://leonardo.ai/terms-of-service
+          quote: '(f) Use our Platform in any way that involves service bureau use, outsourcing, renting, reselling, sublicensing, concurrent use of a single user login, or time-sharing;'
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and plans limit generations at once, but say nothing about how many devices you can use.'
+      pages:
+        - https://leonardo.ai/terms-of-service
+        - https://leonardo.ai/pricing
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://leonardo.ai/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says it takes reasonable security measures; it names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We take commercially reasonable security measures designed to protect the security of the personal information, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you do on Leonardo for analytics and machine learning. You can refuse some cookies in your browser, browser by browser, but not the rest.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We will directly collect or generate certain information about your use of the Service (e.g., user activity data, analytics event data and clickstream data), for data analytics and machine learning, and to help us measure traffic and usage trends for the Service.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'You can control or reset your cookies and similar technologies through your web browser, which will allow you to customise your cookie preferences and to refuse non-essential cookies or to indicate when a cookie is being sent.'
+      action:
+        name: 'Its privacy policy’s cookie choices'
+        url: https://leonardo.ai/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives ad partners such as Facebook and Google your email address, location and how you use Leonardo, to show you its ads elsewhere. Only some US states get a way to say no, by email or a banner.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We may share certain information with our third-party advertising partners, such as your email address, location, cookie information and information relating to your use of our Service, and allow partners to perform a match of your information against information from other third-party networks or sites to serve ads either on the Service or on third-party sites and to measure the effectiveness of these advertisements.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We do not sell or rent the information we collect about you with these third-party advertising servers or advertising networks for such parties’ own marketing purposes.'
+      action:
+        name: 'Its privacy policy’s advertising section'
+        url: https://leonardo.ai/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It shows you ads chosen from what you do, on Leonardo and on other sites. You can only refuse the cookies behind them in each browser.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We partner with third-party ad servers, ad networks and social media platforms (e.g., Facebook, Instagram and Google) to deliver personalised advertisements on our Service and other sites that may be of interest to you and/or to measure their effectiveness, and/or to identify potential new users of our Service.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'You can control or reset your cookies and similar technologies through your web browser, which will allow you to customise your cookie preferences and to refuse non-essential cookies or to indicate when a cookie is being sent.'
+      action:
+        name: 'Its privacy policy’s cookie choices'
+        url: https://leonardo.ai/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'On the free plan everything you make is public, and public content trains its AI. The free plan has no way to stop it.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'For Service improvement (including analytics and machine learning): We may analyse your Content and related data in your account to improve the Service, and to train our algorithms, models, and AI products and services using machine learning to develop, improve and provide our Service.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'If you are using a free subscription, all Content you generate is publicly available by default.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      plans: [leonardo.essential, leonardo.premium, leonardo.ultimate]
+      tier: neutral
+      reason: 'Your public content trains its AI, but on a paid plan you can turn on Private Mode, and private content isn’t used for training.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'If you don’t want your Content to be used for machine learning, you can generate Content privately with any paid subscription plan.'
+        - url: https://leonardo.ai/terms-of-service
+          quote: 'We will not use, retain, analyse, or process your Private Content for any other purpose, including training AI models or developing new products without your express written consent.'
+      action:
+        name: 'How to turn on Private Mode'
+        url: https://intercom.help/leonardo-ai/en/articles/8044029-private-public-images
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'On the free plan everything you make is public: other users can see and use it, search engines can find it, and Leonardo uses it for its own purposes.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'If you are using a free subscription, all Content you generate is publicly available by default. It may be viewed by other users, appears in search results, and can be indexed by search engines.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      plans: [leonardo.essential, leonardo.premium, leonardo.ultimate]
+      tier: poor
+      reason: 'What you make is public unless you turn on Private Mode; private content can’t be seen or used by other users or by Leonardo for ads and improvements.'
+      sources:
+        - url: https://intercom.help/leonardo-ai/en/articles/7051613-frequently-asked-questions
+          quote: "Paid subscribers have access to the 'Private Mode' toggle, allowing control over the visibility of generated images."
+        - url: https://intercom.help/leonardo-ai/en/articles/8044029-private-public-images
+          quote: 'However, if you toggle your images to private, they won’t be visible to other users or Leonardo.Ai and they will not be subject to use by Leonardo.Ai for advertising or improvement purposes.'
+      action:
+        name: 'How to turn on Private Mode'
+        url: https://intercom.help/leonardo-ai/en/articles/8044029-private-public-images
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your information while your account is open or as long as it has a reason to, with no set periods.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We will retain your personal information for as long as your account is active or as needed to provide you with the Service or for as long as we have a valid purpose to do so.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in settings, which removes all your information from its database for good.'
+      sources:
+        - url: https://intercom.help/leonardo-ai/en/articles/9665417-how-do-i-delete-my-account
+          quote: 'Note that deleting your account will remove all of your information from our database, and this cannot be undone.'
+      action:
+        name: 'How to delete your account'
+        url: https://intercom.help/leonardo-ai/en/articles/9665417-how-do-i-delete-my-account
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your images and videos yourself, many at once from your Library; for a copy of your other data you email it.'
+      sources:
+        - url: https://intercom.help/leonardo-ai/en/articles/9748859-image-and-video-generation-visibility-settings
+          quote: 'Note, this is also a convenient way to bulk Organise your creations into Collections and Download them.'
+        - url: https://intercom.help/leonardo-ai/en/articles/11027827-generating-video-on-leonardo-ai
+          quote: 'Video generations are available only in .mp4 format.'
+      action:
+        name: 'How to download from your Library'
+        url: https://intercom.help/leonardo-ai/en/articles/9748859-image-and-video-generation-visibility-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It hands data over when the law requires, but also when it thinks it helps it avoid a lawsuit or for “issues of public importance”. It doesn’t say it tells you.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We reserve the right to disclose your personal information as required by law (e.g., to comply with a subpoena, warrant, or court order) and when we believe that disclosure is necessary to protect our rights, avoid litigation, protect your safety or the safety of others, investigate fraud, and/or respond to a government request.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'We may also disclose information about you if we determine that such disclosure should be made for reasons of national security, law enforcement, or other issues of public importance.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information is kept in the US and handled in Australia and other countries; for Europe and the UK it uses approved legal contracts.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'Your information will be stored in the United States and processed in Australia and any other country in which Leonardo.Ai, its group companies, service providers and partners maintain facilities or employ staff or contractors.'
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'For individuals in the EEA, Switzerland or UK, where we transfer your information to a third-party service provider that is not located in Europe, and is not in a country that benefits from an adequacy decision by the European Commission, UK or Swiss authorities, we will require those third party providers to enter into an agreement that provides appropriate safeguards for your information, including by using the EU Model Clauses and the UK International Data Transfer Addendum.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and your interests, or with an Apple, Google, Microsoft or Canva account.'
+      sources:
+        - url: https://leonardo.ai/privacy-policy
+          quote: 'For example, when you register for an account, we ask for your email address and interests.'
+        - url: https://intercom.help/leonardo-ai/en/articles/7051613-frequently-asked-questions
+          quote: 'Click Create an account and sign up using SSO or email (Google SSO recommended).'
+      lastVerified: 2026-11-17

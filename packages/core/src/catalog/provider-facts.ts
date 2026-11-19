@@ -41,7 +41,7 @@ export const renewalAnchorNames: Readonly<Record<RenewalAnchorKind, string>> = {
  */
 const renewalWrittenAs: Readonly<Record<RenewalAnchorKind, RegExp>> = {
   'same-date':
-    /\b(?:date|day) (?:that |when )?you (?:sign(?:ed)? up|subscribed?|joined|purchased?|started|bought|became a paying)\b|\bsame (?:calendar )?(?:day|date)\b|\banniversary\b|\bon the subscription expiration date\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbeg(?:an|ins) on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b|\bcharged on a calendar month(?:, quarter,? and year)? basis, with the validity of each period aligning with the billing cycle\b|\bje kunt de betaaldatum alleen wijzigen naar de huidige datum\b|\bthe date when you would like [^.]{0,40}\bcharged each month and then subscribe again\b/i,
+    /\b(?:date|day) (?:that |when )?you (?:originally )?(?:sign(?:ed)? up|subscribed?|joined|purchased?|started|bought|became a paying)\b|\bsame (?:calendar )?(?:day|date)\b|\banniversary\b|\bon the subscription expiration date\b|\bmême (?:jour|date)\b|\bdate (?:de|d['’]) ?(?:votre )?(?:abonnement|inscription|achat)\b|\bbeg(?:an|ins) on a (?:day|date) not contained in a given month\b|\bcommencé à une date non comprise dans un mois donné|\b(?:re)?subscribe on your preferred billing date\b|\bthis charge will become your monthly billing date\b|\bpurchased\b[^.]{0,60}\bon the (\d{1,2})(?:st|nd|rd|th)\b[^.]{0,80}\bbilled on the \1(?:st|nd|rd|th) of each month\b|\bcharged on a calendar month(?:, quarter,? and year)? basis, with the validity of each period aligning with the billing cycle\b|\bje kunt de betaaldatum alleen wijzigen naar de huidige datum\b|\bthe date when you would like [^.]{0,40}\bcharged each month and then subscribe again\b/i,
   'every-30-days': /\b(?:30|thirty)[- ]days?\b|\b30 jours\b/i,
   'first-of-month':
     /\b(?:1st|first(?: day)?) of (?:each|every|the|the following|the next) (?:calendar )?month\b|\bpremier (?:jour )?(?:de|du) (?:chaque )?mois\b|\b1er (?:de|du) (?:chaque )?mois\b/i,
@@ -243,6 +243,8 @@ const countryWrittenAs: Readonly<Record<string, string>> = {
     'Territoires du Nord-Ouest',
     'Nunavut',
     'Yukon',
+    // A province's code with a postal code, as an address writes it (Ideogram's "Toronto, ON M5H 4A6", M11.15).
+    '(?:AB|BC|MB|NB|NL|NS|NT|NU|ON|PE|QC|SK|YT) [A-Z]\\d[A-Z] ?\\d[A-Z]\\d',
   ].join('|'),
   CH: 'Swiss|Suisses?',
   SE: 'Swedish|Suédois(?:es?)?',

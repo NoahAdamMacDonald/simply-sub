@@ -1,0 +1,175 @@
+url: https://help.runwayml.com/hc/en-us/articles/43109077483667-Runway-Education-FAQ
+method: fetch
+saved: 2026-11-19
+
+Runway Education FAQ – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Community & Programs
+Runway for Educators
+Runway Education FAQ
+Table of Contents
+Runway for Educators brings cutting-edge generative technology directly into classrooms, empowering both teachers and students to explore creative possibilities through hands-on learning with discounted resources.
+Below you'll find answers to the most frequently asked questions about this innovative program.
+Eligibility & Requirements
+How do I apply as a student for the discount?
+Fill out the student form at https://runwayml.com/educators
+How do I apply as an educator to purchase Runway for my class?
+Fill out the educator form at https://runwayml.com/educators
+What qualifies as an educational institution?
+Accredited universities, colleges, K-12 schools, vocational schools and other formally recognized educational organizations typically qualify. Both public and private institutions are generally eligible.
+Do I need a specific type of email address?
+Please use your school-issued email address. If you do not have a school-issued email address, you will need to provide proof that you are a student or professor at a university (a letter of enrollment or a photo ID)
+Can homeschool educators apply?
+Requirements vary by program. Homeschool educators may need to provide documentation of their educational activities, curriculum or registration with local educational authorities where applicable.
+Are international schools eligible?
+Yes, international schools are eligible.
+How long does it take to verify educational status for individual discounts?
+Verification typically takes a few days to complete.
+Pricing & Discounts
+What are the exact discount percentages?
+Students and professors seeking individual discounts receive 20% off. If a professor is seeking a discount for an entire class, each student can get 25% off when purchasing in bulk.
+How much does each plan type cost with the educational discount?
+Verified Educational users receive 20% off the stated prices listed at https://runwayml.com/pricing.
+Can I choose between monthly and annual billing?
+Yes, the discount is eligible for both monthly and annual subscriptions.
+Does the discount apply to credits?
+No, the discount only applies to paid subscription plans, not to credits.
+Are free trials available for educational users?
+We do not offer free trials for educational users.
+Application Process for a Course
+How long does the application process take?
+Please allow a minimum of 2 weeks lead time for processing.
+What information do I need to provide upfront?
+To get a class set up, you must provide:
+Class duration (in months, as billing is monthly/annual)
+Billing preference (monthly or annual rate)
+Desired plan type
+Number of students/licenses needed (one license per student is required)
+Billing address
+Proof of tax exemption (if applicable)
+Student list (see format requirements below)
+What format should the student list be in?
+The student list should be provided in Excel format. All students must already have created free Runway accounts using their educational email addresses before being added to the class.
+When will I receive my invoice?
+After the professor submits the student list, the Runway Education team will activate the plan and then send the invoice.
+Is there a maximum class size for bulk purchases?
+No, there's no limit on class size for bulk purchases. However, we recommend enterprise plans for larger groups or institutional programs.
+How do classes renew for subsequent terms/semesters?
+Message in your existing thread with the education team.
+Student Account Management
+How do students create their accounts?
+Students can create accounts at www.runwayml.com using their school-issued email addresses.
+What if a student doesn't have an school-issued email?
+Please contact education@runwayml.com for assistance with alternative verification methods.
+Can I create accounts for my students?
+Yes, professors can create accounts on behalf of their students if they wish.
+How do students join my workspace?
+Please see here for help with workspaces. Note that we do not set up workspaces for you.
+Is there central administration available?
+No, central administration is only available with enterprise plans.
+Is SSO available?
+SSO is only available on enterprise plans. Non-enterprise accounts can sign up with Google or Apple authentication.
+What happens when students graduate or are no longer enrolled?
+Subscriptions will end when the term is complete. Students can keep their account—assuming their email remains active—or create a new, personal account after graduation.
+Can students transfer their accounts after graduation?
+Yes, students can transfer their accounts to a different email after graduation.
+Can professors track student usage or activity?
+No, professors cannot track student usage or activity unless they have direct access to the student's account.
+Technical & Access
+What features are included in the educational plans?
+Educational plans include the same features as the corresponding paid plans listed on our pricing page, discounted at the relevant rate (20% discount for individual users, 25% for bulk class purchases).
+Are there any limitations on educational accounts?
+Educational accounts have the same functionality as regular paid accounts. The main requirement is that students must use their school-issued email addresses and maintain their student status.
+How do I manage multiple students' access?
+You can manage student access through workspaces. For detailed guidance on workspace management, see here. Note that central administration features are only available with enterprise plans.
+Can students work on projects outside of class time?
+Yes. Runway is web-based, so students can access their accounts and work on projects from home or on different computers throughout their subscription period, subject to the plan's usage limits and terms.
+Do my students own their work?
+Yes. See here for more information.
+Are there data protections?
+Data protections are available for enterprise plans. See here for more information.
+Billing & Payment
+What payment methods are accepted?
+Credit card only. Bank transfers are only available for enterprise plans.
+How do I handle tax-exempt status?
+In your correspondence with the education team, be sure to send your tax exemption or VAT certificate to us and we will ensure your invoice reflects the exemption.
+When are invoices sent and payments due?
+Invoices are due within one month of being sent.
+Can I redline the contract?
+Redlining is not available for standard plans. If you or your University require redlines, please see here for more information on enterprise plans.
+Can I cancel or modify my plan mid-term?
+Plans cannot be canceled or modified mid-term.
+Support & Resources
+What educational resources are provided?
+We have plenty of learning resources available at Runway Academy that will help you get the most out of the platform. Visit Runway Academy for more.
+How do I get help with classroom integration?
+Read our case studies to see how professors have integrated Runway into their courses.
+Is there training available for educators?
+Yes, training resources are available through Runway Academy.
+Who do I contact for technical support?
+Please use our support chat found within the app.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

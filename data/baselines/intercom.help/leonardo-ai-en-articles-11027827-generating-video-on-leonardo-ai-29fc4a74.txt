@@ -1,0 +1,83 @@
+url: https://intercom.help/leonardo-ai/en/articles/11027827-generating-video-on-leonardo-ai
+method: fetch
+saved: 2026-11-19
+
+Generating Video on Leonardo.Ai | Leonardo.Ai Help Center Skip to main content
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+Search for articles...
+All Collections
+Help Guides
+How to use Leonardo.Ai's AI Creation Tools
+Generating Video on Leonardo.Ai
+Generating Video on Leonardo.Ai
+New features: Create smooth coherent videos from images or text.
+Written by Ayumi Umehara
+February 18, 2026
+Table of contents
+Overview
+Video is Leonardo.Ai's dedicated motion tool, capable of breathing life into your ideas. Leonardo.Ai offers state of the art video models including Veo 3 and Kling Video 3.0, capable of coherent video that includes sound, allowing you to generate quality videos that include sound effects and audio dialogue.
+Whether you're a content creator, a filmmaker creating storyboards, visualizing pre-production assets, or just looking to bring your generations to life, Leonardo.Ai's Video features save valuable time and resources typically spent on video production and animation.
+Please note that due to high running costs of some third party models, not all video models are available to free users and there may be usage limits for paid users.
+How to use Video on Leonardo.Ai
+Generating a video from a text prompt
+From the home page, navigate to the Video tool from below the prompt bar or in the left side bar.
+2. Click the side bar to choose a model. You'll find labels that indicate each model's capabilities, including start and end frames, audio and more.
+Optional:
+Choose a Start and End Frame to better direct your video (depending on model capability. Learn more about start and end frames.
+When using the Motion 2.0 video model, you can guide your generation with a Motion Control and Motion Elements for more control over the visuals and camera movements (read on for more information).
+Choose your video duration, quality settings, dimensions, and more from the side bar (note that these options may vary depending on model compatibility).
+3. Enter your prompt in the prompt bar, and Generate. Generated videos live in your Library.
+Notes:
+Fast video models or quality settings are more affordable, but lower quality variants of models that are typically more expensive. We recommend using them to rapidly fleshing out your idea and perfect your prompt before jumping in with the full weight model to save you time and tokens. Alternatively, video upscaling is compatible with some models.
+If your model allows audio, the model may automatically generate what it thinks is appropriate unless you specifically include dialogue or sound effects in your prompt.
+Turning generated or uploaded images into a video
+Hover over any generated image anywhere on the Leonardo.Ai platform and click Generate Video. You can also click to open a generated image and choose Create Video from the side bar (note, this defaults to the Motion 2.0 Fast model - feel free to change this if you wish).
+To upload an image to be used for video, click the image guidance button in the prompt bar to add your start frame. For more details, read this detailed guide on how to upload images for image and video generation.
+Motion Controls & Motion Elements - compatible with Motion 2.0 only.
+Motion Controls are camera controls and visual effects that let you control the story in every video.
+Motion Elements act like visual effects or filters to help achieve a certain vibe or aesthetic.
+Motion 2.0 also offers style options that let you guide the overall aesthetic vibe (e.g stock footage), lighting (e.g lens flare) and color theme (e.g pastel). They are not compatible with Motion Controls or Motion Elements.
+Editing videos
+Hover or click on a generated video and click Edit to open the Editor.
+2. Enter a descriptive change you want to see - no prompting skills required!
+Notes on video editing functions:
+Editing is available with some video models such as Kling Video 3.0. However, depending on specific model's capabilities, it may not actually 'edit' your video, but will regenerate it with the new changes you wish to see. It is not the most reliable way of making changes to a scene and maintaining consistency, but is ideal for rapid iterations and experimentation.
+If consistency is important, a tip is to edit your images (learn more) to get the exact scenes and variations you want, and use them as start frames for ultimate control.
+Camera Movement
+You may describe how the camera should behave in the prompt including the speed at which it moves, though the effects may not be consistent or 100% effective:
+​Dolly in / out - Moves in / out: The camera moves in or out of the scene.
+Pull Back: The camera pulls (dollys) back.
+Zoom in / out: The camera zooms in or out (This is somewhat different to a dolly)
+​
+Pan left / right: The camera rotates sideways depending on direction stated. (Note: the model may not always adhere to the direction stated)
+​Orbit around: The camera moves around an point.
+Tilt: Tilts camera either up or down. (This does not work in most cases)
+​​Tracking shot: To use this, it is essential to state what the camera should follow in the shot. (eg, The camera follows the woman in a slow tracking shot)
+​​Pull Focus / Focus Racking: It may be possible to shift the focus from one subject to another. To do this, describe how the focus should shift between the subjects in the prompt. It can be described as such: focus pull, the camera shifts focus on a man in the foreground after looking at a woman in the background.
+Negative Prompting
+Negative prompts can be inputted for Text to Video by enabling the Negative Prompt toggle found in Advanced Settings. This is useful for shifting the aesthetics and movements away from certain biases.
+To use this, simply enter what you do not want to see. Avoid entering negatives such as no or without as this results in double negatives. (eg. No 3D render should be entered as just 3D render)
+​
+Frequently Asked Questions
+Is Video a premium feature?
+No, however due to high token costs, only some Video models are accessible to Free users.
+How many tokens does it cost to use Video?
+Video token costs vary by model and your desired output settings. The cost of generation is shown on the button before generating.
+What file formats are supported for uploading to Video?
+The supported file formats are: PNG, JPEG/JPG and WEBP (up to 5MB)
+How do I upload my own image to generate a Video?
+To upload your own image to generate a Video via the homepage, click the Video tab in left side bar or the top navigation bar. The Video modal will open. Click on "Select an Image". This will open the "Select Image Input" modal. Click on "Upload an image to get started" to upload an image. Note that only paid users can upload their own images.
+What file formats are available for downloading?
+Video generations are available only in .mp4 format.
+How do I remove the watermark on my video or motion generations?
+To generate a Video without a watermark, consider upgrading to a paid plan.​
+Related Articles
+How to Generate Images with Leonardo.Ai
+Using Omni Models and the Inline Editor
+Veo 3 & Veo 3.1 by Google
+Lucid Origin
+Creating Videos with Start Frames and End Frames
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Table of contents
+Unleash your creativity with the power of Leonardo.Ai

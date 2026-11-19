@@ -1,0 +1,211 @@
+url: https://compliance.elevenlabs.io/
+method: browser
+saved: 2026-11-19
+
+Skip to navigation
+Skip to main content
+Opens in new tab
+|
+ElevenLabs Compliance Portal
+Subscribe to updates
+Ask a question
+Request access
+ElevenLabs
+We are an audio AI research & product deployment company on a mission to build the singular most important audio AI platform in the world, solve AI audio intelligence and make information accessible in any voice, language & sound.
+security-assurance@elevenlabs.io
+Privacy Policy
+Opens in new tab
+Filter by
+Customer Type
+Zero Retention Mode
+Product
+Overview
+Resources
+Controls
+Subprocessors
+FAQ
+Updates
+Media
+ElevenLabs Customer Stories
+Opens in new tab
+Discover how the world’s leading teams use ElevenLabs for better customer experiences and high-quality content production.
+Compliance
+SOC 2 Type 2
+ISO 27001:2022
+ISO 27017:2015
+ISO 27018:2019
+ISO 27701:2019
+ISO/IEC 42001:2023
+PCI DSS 4.0.1 Level 1
+FedRAMP® 20x Class A
+CSA STAR L1
+CSA STAR AI L1
+AIUC-1
+HIPAA
+HDS
+GDPR
+CCPA
+COMPLIANT
+CCPA
+CPRA
+LGPD
+DORA
+EU AI ACT
+UK Cyber Essentials Plus
+TX-RAMP Level 2
+NHS DSPT
+EcoVadis Committed
+Trusted Partner Network - Silver Shield
+Esquema Nacional de Seguridad (ENS) - Alto
+Resources
+View all
+Whitepapers and Case Studies
+Security Whitepaper - ElevenLabs v1.6.pdf
+HIPAA Whitepaper - ElevenLabs v1.2.pdf
+NIST AI Risk Management Framework Readiness Case Study
+Opens in new tab
+ElevenLabs’ commitment to security, privacy, and responsible AI (2026)
+Opens in new tab
+Audit Reports
+2026 SOC 2 Type 2 + HIPAA Report Final.pdf
+2026 SOC 3 Report Final.pdf
+AIUC-1 Audit Report for ElevenLabs Docs Agent.pdf
+ElevenLabs - 2026 SOC 2 Type 1 Report - Productions
+Certificates
+ISO 27001/17/18 - ISMS Certificate - ElevenLabs.pdf
+ISO 27701 - PIMS Certificate - Eleven Labs.pdf
+ISO 42001 - AIMS Certificate - Eleven Labs.pdf
+Cyber Essentials Plus Certificate.pdf
+View 7 more
+Model Cards
+Eleven v4 [09.26]
+Eleven v4 Turbo [09.26]
+Eleven v3 [08.26]
+Eleven v3 Conversational [09.26]
+View 7 more
+Legal
+Training Data Transparency Disclosure (2025.12.31).pdf
+Annex II (Technical and Organizational Measures).pdf
+ElevenLabs Information Security Addendum
+External Code of Conduct
+View 5 more
+Pentests
+Mobile App Pentest 2 Apr 2026.pdf
+2026 Webapp Penetration Testing Report
+2026 Internal Network Penetration Testing Report
+Questionnaires
+CAIQv4.1.0
+Opens in new tab
+AI CAIQ
+Opens in new tab
+SIG LITE.xlsx
+Customer Resources
+Customer Testing Guidelines for ElevenLabs Agents.pdf
+FedRAMP 20x
+Certification Overview Package Machine Readable
+Opens in new tab
+ElevenLabs Agency Use Case Public Human Readable
+Opens in new tab
+ElevenLabs FedRAMP Progress Public Human Readable
+Opens in new tab
+MAS In Scope Resources Machine Readable
+View 12 more
+Controls
+Updated 9 minutes ago
+View all
+Infrastructure security
+Unique production database authentication enforced
+Encryption key access restricted
+Unique account authentication enforced
+View 10 more Infrastructure security controls
+Organizational security
+Employee background checks performed
+Code of Conduct acknowledged by employees and enforced
+Confidentiality Agreement acknowledged by employees
+View 3 more Organizational security controls
+Product security
+Control self-assessments conducted
+Vulnerability and system monitoring procedures established
+Data encryption utilized
+View 1 more Product security control
+Internal security procedures
+Continuity and Disaster Recovery plans established
+Continuity and disaster recovery plans tested
+Configuration management system established
+View 25 more Internal security procedures controls
+Data and privacy
+Data retention procedures established
+Data classification policy established
+Customer data deleted upon leaving
+Data supported
+Customer personally identifiable information
+Employee personally identifiable information
+Credit card information
+Personal health information
+Subprocessors
+View all
+ElevenLabs Affiliates • Affiliates
+Global
+ElevenLabs leverages its affiliates in connection with providing Services to its customers. These affiliates include Eleven Labs Ltd. (UK), Eleven Labs Poland Sp. z o.o (Poland), Eleven Labs Japan Godo Kaisha (Japan), Eleven Labs Tech Middle East Ltd (UAE), Eleven Labs Auto India Pvt Ltd (India), Eleven Labs Ireland Global Empl. Ltd (Ireland), Eleven Labs Netherlands B.V. (Netherlands), Eleven Labs Tech Singapore Pte. Ltd. (Singapore) and Eleven Labs Switzerland GmbH (Switzerland).
+Google Cloud Platform • Cloud infrastructure, security, data storage & LLM Services
+Enterprise: US or Customer's Selected Hosting Location; Non-Enterprise: US, EU or Singapore
+Enterprise plan customers may select from a set of specified data hosting locations
+Opens in new tab
+, subject to availability and ElevenLabs’ discretion. This includes Gemini & Anthropic models available in ElevenAgents via Vertex AI.
+For non-Enterprise plan customers, customer data may be processed in the US, EU, or Singapore for latency and service performance purposes. LLM Services may also be used for research, development, training, and product improvement purposes, to the extent permitted under the applicable agreement with the customer.
+Amazon Web Services • Cloud infrastructure & data storage
+Enterprise: US or Customer's Selected Hosting Location; Non-Enterprise: US, EU or Singapore
+Enterprise plan customers may select from a set of specified data hosting locations
+Opens in new tab
+, subject to availability and ElevenLabs’ discretion.
+For non-Enterprise plan customers, customer data may be processed in the US, EU, or Singapore for latency and service performance purposes.
+Azure • Cloud infrastructure, data storage & LLM Services
+India
+With respect to LLM Services, to the extent India Data Residency is selected by the customer per the terms of such customer's agreement, LLMs may be provided through Azure. Availability subject to ElevenLabs' discretion.
+FAQ
+View all
+Which services are HIPAA eligible?
+ElevenLabs' HIPAA Attestation can be requested by Enterprise customers. ElevenLabs will enter into a Business Associate Agreement (BAA) with eligible Enterprises. The information in the HIPAA Whitepaper is only applicable to such BAA eligible Enterprises.
+Covered Services, to the extent that Zero Retention Mode is enabled in connection therewith (HIPAA-eligible services):
+Text To Speech API
+Speech to Text API
+Text to Dialogue API
+ElevenAgents
+NOTE: If you are a Covered Entity or Business Associate as defined under the Health Insurance Portability and Accountability Act of 1996 (as amended, “HIPAA”), you agree not to use these HIPAA Eligible Services for any purpose or in any manner involving Protected Health Information (as defined under HIPAA) unless and until you have entered into a Business Associate Agreement with ElevenLabs.
+NOTE 2: For ElevenAgents, your Business Associate Agreement applies only to conversation content. Agent configuration data is persisted, meaning it is not covered by Zero Retention Mode and should not contain PHI.
+Updates
+View all
+General
+An Update on Recent Java and Nginx Security Advisories
+Published November 18, 2026
+ElevenLabs is aware of the current ongoing industry advisories in relation to Nginx and Java. We have done an initial investigation and have not identified any exposure affecting customer data. We will continue to monitor the situation and share any relevant updates if this changes.
+CVE’s:
+Nginx: CVE-2026-123633
+Nginx: CVE-2026-123007
+Java: CVE-2026-114938.
+Read more
+Read more
+about An Update on Recent Java and Nginx Security Advisories
+Security
+Recent Fireworks AI Incident
+Published November 12, 2026
+We have reviewed the Fireworks security incident and confirmed that our services and customer data were not affected. We will continue to monitor the situation and share any relevant updates.
+Security
+An Update on Recent Industry Security Advisories
+Published October 22, 2026
+ElevenLabs is aware of the current ongoing industry advisories in relation to eMudhra and PHP (CVE-2026-109618 and CVE-2026-109619). We are actively investigating our exposure, if any, to these advisories in line with our Vulnerability Management Policy. At this time, we have no information to suggest that there is any impact on the Services relating to these industry advisories.
+Read more
+Read more
+about An Update on Recent Industry Security Advisories
+Compliance
+ISO 27701 & ISO 42001 Certification
+Published February 9, 2026
+ElevenLabs has officially achieved ISO 27701 (Privacy Information Management) and ISO 42001 (AI Management Systems) certifications, marking a major milestone in our commitment to secure and ethical AI development. By meeting these rigorous international standards, we ensure our PII handling is world-class and our AI models are governed by a framework of transparency and accountability. These certifications provide our creators and enterprise partners with the highest level of assurance that as we scale the future of AI audio, responsible innovation remains our top priority.
+Read more
+Read more
+about ISO 27701 & ISO 42001 Certification
+Media
+View all
+Guardrails 2.0 in ElevenAgents
+Opens in new tab
+Opens in new tab

@@ -1,0 +1,113 @@
+url: https://help.runwayml.com/hc/en-us/articles/54396547993491-Exporting-Videos-in-ProRes-and-PNG-Sequence-Formats
+method: fetch
+saved: 2026-11-19
+
+Exporting Videos in ProRes and PNG Sequence Formats – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Creating with Runway
+Model Guides
+Runway Models
+Exporting Videos in ProRes and PNG Sequence Formats
+Table of Contents
+When generating with Gen-4.5 in Tool Mode or editing with Aleph 2.0 in Edit Studio, you can choose the output format of your video. These export formats give you a file that drops directly into other video editing tools without transcoding or quality loss from compression.
+Supported Output Formats
+MP4 — the default format, best for sharing and playback
+ProRes — a .mov file with PCM audio, made for editorial and broadcast pipelines. Choose from six profiles: 422 Proxy, 422 LT, 422, 422 HQ, 4444 and 4444 XQ
+PNG Sequence — a .zip containing every frame as an individual PNG, made for VFX and compositing work
+Output formats are available for Gen-4.5 generations in Tool Mode and Aleph 2.0 edits in Edit Studio.
+Choosing an Output Format
+Gen-4.5 in Tool Mode
+Open Tool Mode with Video selected, then choose Gen-4.5 from the model selector
+Select the Output Format setting and choose MP4, ProRes or PNG Sequence
+If you choose ProRes, select a profile
+Review the updated credit cost shown before generating, then select Generate
+Aleph 2.0 in Edit Studio
+Open Edit Studio from the Apps section and set up your edit as usual
+Select the Output Format setting and choose MP4, ProRes or PNG Sequence
+Review the updated credit cost, then select Generate video
+Edits applied to a specific portion of your video using the timeline's range handles always return an MP4.
+FAQ
+Which plans include ProRes and PNG sequence outputs?
+ProRes and PNG Sequence outputs are currently available on Max, Unlimited
+(Legacy)
+and Enterprise plans. Users on other plans can upgrade from
+account settings.
+Can I use ProRes or PNG sequence output in Workflows or with Runway Agent?
+Output format selection is currently available in Tool Mode and Edit
+Studio only. Workflows and Agent generations are delivered as MP4.
+Why did my Edit Studio generation return an MP4?
+Edits applied to a specific range of your video using the timeline's
+range handles are always delivered as MP4. ProRes and PNG Sequence outputs
+are supported for edits applied to the full video.
+Does ProRes output include audio?
+ProRes outputs include uncompressed PCM audio in the .mov
+file, ready for editorial timelines.
+Can I convert an existing generation to ProRes or a PNG sequence?
+The output format is chosen at generation time and can't be changed after
+a video is generated. To get a different format, run the generation again
+with the format you need selected.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

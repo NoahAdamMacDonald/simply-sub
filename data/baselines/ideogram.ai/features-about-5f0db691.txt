@@ -1,0 +1,128 @@
+url: https://ideogram.ai/features/about/
+method: fetch
+saved: 2026-11-19
+
+About Ideogram: company facts and model release dates Apps & Models Apps Precise Edit
+Ad Resizer
+Background Remover
+Colorways
+Material Swap
+Object Remover
+View all apps
+Models Ideogram Vector
+Ideogram 4.5
+Ideogram 4.0
+Ideogram 3.0
+P-Image-Ideogram
+Custom Image Models
+View all models
+Use cases Workflows Print on Demand
+Editable text layers
+Character consistency
+Styles
+Upscale
+View all features
+Developers OPEN SOURCE Licensing
+GitHub
+Hugging Face
+Build API
+API Pricing
+API Docs
+API Status
+MCP
+Pricing Enterprise
+Sign in
+Sign up
+Contact sales
+Sign in
+Apps & Models Apps Precise Edit Ad Resizer Background Remover Colorways Material Swap Object Remover View all apps
+Models Ideogram Vector Ideogram 4.5 Ideogram 4.0 Ideogram 3.0 P-Image-Ideogram Custom Image Models View all models
+Use cases Workflows Print on Demand Editable text layers Character consistency Styles Upscale View all features
+Developers OPEN SOURCE Licensing GitHub Hugging Face
+Build API API Pricing API Docs API Status MCP
+Pricing Enterprise
+Contact sales
+Sign in
+Sign up
+Company
+About Ideogram
+Ideogram is a generative media platform for AI image generation and editing, creative apps, and API workflows. The company's mission is to help people become more creative.
+Company facts
+Model release history
+Where to go next
+Company facts
+Founded
+Ideogram was founded in 2023.
+Founders
+Researchers from Google Brain and the University of Toronto founded Ideogram.
+Mohammad Norouzi is a co-founder and the CEO.
+Headquarters
+Ideogram is headquartered in Toronto and operates an office in San Francisco.
+Announced
+Ideogram AI was announced on
+August 22, 2023.
+Pronunciation
+The name is pronounced “eye-dee-oh-gram”.
+Mailing address
+You can write to Ideogram AI at 320 Bay St, Suite 700, Toronto, ON M5H 4A6.
+Email
+You can email [email protected] about the service
+and [email protected] with media requests.
+Model release history
+Ideogram model releases with a published date, newest first Model Release date Summary
+Ideogram Vector October 22, 2026 Ideogram Vector creates scalable, editable SVG artwork from a prompt or an existing image.
+Ideogram 4.0 June 3, 2026 Ideogram 4.0 is Ideogram's first open-weight model. It offers dense text rendering across languages, object and text placement through bounding box control, and 2K output.
+Ideogram 3.0 March 26, 2025 Ideogram 3.0 generates photorealistic images and legible text in a single generation. It is the only Ideogram model with style presets, style reference images, negative prompts and color palettes.
+Ideogram 0.1 August 29, 2023 Ideogram 0.1 opened to everyone for free on this date.
+Ideogram 4.5 is the latest Ideogram image model. It supports
+text in images and precise editing that preserves details across repeated edits.
+Ideogram 2.0 and 2a are older models that may still appear in the model picker.
+Ideogram recommends Ideogram 4.5 or 4.0 for new work.
+Where to go next
+Pricing Compare plans and prices.
+FAQ Read answers to common questions about Ideogram.
+Blog Read product updates, prompt guides, technical details, and case studies.
+News Read press releases and company announcements.
+Enterprise See plans for creative teams producing visual work at scale.
+Careers (opens in a new tab) Find out about working at Ideogram.
+Docs (opens in a new tab) Find guides for creating, editing, and managing media.
+API docs (opens in a new tab) Read the API documentation.
+One platform covers the work from prompt to production.
+iPhone app
+Apps Precise Edit Ad Resizer Background Remover Colorways Material Swap Object Remover
+Models Ideogram Vector Ideogram 4.5 Ideogram 4.0 Ideogram 3.0 P-Image-Ideogram Custom Image Models
+Product Home Features API MCP Pricing Enterprise About FAQ Careers Blog
+Social X (Twitter) YouTube LinkedIn Instagram TikTok Discord
+© 2026 Ideogram, Inc. All rights reserved. Terms of Service and Privacy Policy.
+Cookie settings
+We value your privacy
+We use cookies to keep the site working, understand how it’s used, and support our marketing.
+Optional cookies are on by default. You can change your preferences at any time.
+Privacy Policy.
+Essential cookies
+Keep the site secure and remember your preferences. These are always on.
+Always on
+Analytics cookies Help us understand how people use Ideogram and improve the website.
+Marketing cookies Help us understand interest in Ideogram and support our marketing efforts.
+Your browser’s privacy signal keeps marketing cookies off.
+Your browser couldn’t save these preferences. Your choices apply to this page only, including
+reloads.
+Reject all Accept all cookies
+Contact sales
+Tell us what you are building.
+Share a few details and our team will follow up about enterprise customization, API,
+licensing, or partnerships.
+About you
+Name Work email Title
+What are you interested in? Enterprise Customization API Licensing Partnerships
+What are you trying to solve for? Monthly generation volume Select a range 0-10K images / month 10K-100K images / month 100K-1M images / month 1M+ images / month
+Cancel
+Cancel
+Cancel Submit
+Submit
+Submit
+Request received
+✓
+Thanks, we received your request.
+We will review the details and follow up at your work email.
+Done

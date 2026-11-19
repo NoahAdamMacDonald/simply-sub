@@ -1,0 +1,36 @@
+url: https://help.suno.com/en/articles/3134401
+method: fetch
+saved: 2026-11-19
+
+How do I log in?
+Knowledge Base
+Make Music Now!
+How can we help?
+Results
+No results found
+More results
+We use cookies to analyze website traffic and help improve our visitor experience. Privacy Policy
+Reject
+Accept
+Home
+Mobile App
+How do I log in?
+Edited
+After downloading the Suno app, there are two options at the bottom of the Welcome page.
+The large Create a free account button
+Directly below reads "already have an account?" Tap directly on Sign In
+Suno has two primary login methods; Sign in via Phone Number, or SSO (Single Sign On)
+Tap the white button to sign in using your phone number.
+Enter your region code and phone number then tap Confirm. A verification code will be sent to the number via SMS
+Enter the verification code and Suno will validate the code automatically.
+Tap any of the four icons (Apple, Google, Microsoft, or Discord) and follow the steps you would normally use to login.
+This method may require you to enter a password. In this case, enter the password you have already established to log into the service you selected.
+sign in
+log in
+account
+mobile
+app
+Cookie preferences
+Terms of ServicePrivacy PolicySuno on iOS
+Community GuidelinesBlogSuno on Android
+Leave us feedback

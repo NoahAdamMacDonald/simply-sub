@@ -1,0 +1,128 @@
+url: https://ideogram.ai/legal/privacy/
+method: browser
+saved: 2026-11-19
+
+Apps & Models
+Use cases
+Developers
+Pricing
+Enterprise
+Sign in
+Sign up
+Sign up
+Contact sales
+Contact sales
+LEGAL
+Ideogram Privacy Policy
+Last revised: January 15, 2025
+This Privacy Policy describes how Ideogram AI (“Ideogram”, “we”, “us”, “our”) collects, uses and discloses information about you when you use our website (ideogram.ai), applications, services, tools and features, or otherwise interact with us (collectively, the “Services”). For the purpose of this Privacy Policy, Ideogram is the data controller for your information, and “you” and “your” means you as the user of the Services. Please read this Privacy Policy carefully. By using any of the Services, you agree to the collection, use, and disclosure of your information as described in this Privacy Policy. If you do not agree to this Privacy Policy, please do not use or access the Services.
+1. CHANGES TO THIS PRIVACY POLICY
+We may modify this Privacy Policy from time to time, in which case we will update the “Last Revised” date at the top of this Privacy Policy, post the updated version on our Services and take any other steps required by applicable law. If you do not agree to any updates to this Privacy Policy, please do not continue to use or access the Services.
+2. COLLECTION AND USE OF INFORMATION
+When you use or access the Services, we collect certain information about you from different sources.
+Information You Provide to Us
+Some features of the Services may require you to directly provide certain information. You may elect not to provide this information but doing so may prevent you from using or accessing these features. Information that you directly submit through our Services includes:
+Contact information, such as your name and email address. We collect this information to provide the Services, as required to perform our contract with you, and because it is in our legitimate interest to communicate with you (including to tell you about products or services that may be of interest).
+Account information, such as username, password, security questions that you select and the answers you provide, your account handle, profile picture and your IP address. We use this information to maintain your account and provide the Services, as required to perform our contract with you, and because it is in our legitimate interest to maintain and secure your account with us. If you choose to register an account, you are responsible for keeping your account credentials safe. We recommend you do not share your access details with anyone else. If you believe your account has been compromised, please contact us immediately.
+Payment and subscription information, such as credit or debit card information and billing address, which is collected on our behalf by our payment processor, and information about your subscription tier and transaction history. We collect this information to provide the Services, as required to perform our contract with you, and because it is in our legitimate interests to provide you with different account options and features.
+User Input, such as text prompts that you enter and images that you upload to generate and output new content based on your User Input. We also collect other information you post, submit or make available through the Services, such as your comments, “likes” an image or follow a user, and any other information that you upload. We use User Input and other information you submit to the Services because it is in our legitimate interest to administer and improve the Services and improve and develop our products and technology. Depending on your subscription and account settings, you may have the option to create, remix or display private content.
+Other information you choose to provide in communications with us, such as your name, email address and other information you provide. We use this information because it is in our legitimate interest to be responsive to your queries, manage our relationship with you and improve our customer service and product offerings.
+Information Collected Automatically
+We, and third parties on our behalf, may automatically collect certain information about your interactions with the Services and emails, including through cookies, session replay technology, and other tracking technologies (“Tracking Technologies”). We collect and use this information because it is in our legitimate interests to tailor your experience with the Services, run analytics, de-bug, and better understand user interactions with and improve the Services. We may associate this information with the device you use to access the Services, or email accounts you use to engage with us.
+Such information includes
+Device Information, such as device type, operating system, screen size, unique device identifier, Internet protocol (IP) address, preferred language and browser information.
+Location information, such as approximate location and, if you choose to provide it, precise geolocation.
+Other information regarding your interaction with the Services, such as session recordings, browser type, log data, date and time stamps, emails you have opened and clickstream data (e.g., page requests, page views, how much time is spent on a page, content viewed or interacted with, text entered, etc.).
+For further information on how we use Tracking Technologies and your choices, see the section below, Cookies and Other Tracking Technologies.
+Information Collected From Other Sources
+We may obtain information about you from outside sources, including:
+Information we receive when you choose to access the Services through your email account, such as through Gmail, which we use in our legitimate interests to maintain your account and login information.
+Information we receive from social media platforms, such as when you interact with us on Facebook or Instagram, which we use in our legitimate interests to communicate with you and personalize our Services.
+Any information received from outside sources will be treated in accordance with this Privacy Policy. We are not responsible for the accuracy of the information provided to us by third parties and are not responsible for any third party’s policies or practices. In addition to the specific uses described above, we may use any of the information described in this section to provide and improve the Services and our products offerings and to maintain our business relationship, as a matter of our legitimate interests, including by enhancing the safety and security of our Services (e.g., troubleshooting, data analysis, testing, system maintenance, reporting), training the models that power our Services, providing customer support, sending service and other communications, monitoring and analyzing trends, conducting internal research and development, complying with applicable legal obligations, enforcing any applicable terms of service, and protecting the Services, our rights, and the rights of our employees, users or other individuals.
+3. DISCLOSURE OF INFORMATION
+We may disclose your information for legitimate purposes subject to this Privacy Policy, including:
+Through your use of the Services, including when you enter User Input and generate an image that, alongside information that may identify you such as your account handle and account picture, is publicly available on the Services. You may also disclose information when you choose to directly interact with other users through our Services. We or others may store, display, reproduce, publish, or otherwise use or disclose such information, and may or may not attribute it to you. For further information on the use and display of User Input and other content, please see our Terms of Service.
+To vendors or other service providers who help us provide the Services, including for cloud storage, payment processing, system administration, security, customer relationship management, management of our referral program, marketing communications, data analytics and the deployment of Tracking Technologies.
+When you request or direct us to disclose information, such as through your use of login integrations and social media widgets, with your consent or to perform our contract with you.
+With another user, when you sign up for our Services via a referral link or invitation, in our legitimate interests and to perform our contract with the other user. The user that referred you may receive information indicating that you have chosen to subscribe to the Services, and information about your subscription tier.
+To our affiliates or others within our corporate group, as a matter of our legitimate interests to efficiently provide the Services.
+To third parties in connection with or anticipation of an asset sale, merger, bankruptcy, or other business transaction, as a matter of our legitimate interests to run a successful and efficient business.
+For legal and security reasons and to protect our services and business, in our legitimate interests or as required by law. We share your information with regulators, law enforcement agencies, public authorities, or any other relevant organizations to comply with applicable law or obligations thereunder, including cooperation with law enforcement, judicial orders, and regulatory inquiries, to protect the interests of, and ensure the safety and security, of us, our users, a third party or the public, to exercise or defend legal claims, and to enforce our Terms or other agreements.
+4. COOKIES AND OTHER TRACKING TECHNOLOGY
+We use Tracking Technologies, including Google Analytics and Amplitude’s session replay technology, to collect information about your browsing activities, including session recordings and information about your browsing over time and across different websites following your use of our Services. Most browsers accept Tracking Technologies automatically, but you may be able to control the way in which your devices permit the use of Tracking Technologies. If you so choose, you may block or delete certain Tracking Technologies from your browser; however, blocking or deleting Tracking Technologies may cause some of the Services, including login features and general functionality, to work incorrectly. Additionally, we will provide notice and ask for your consent before collecting any personal information that may be included in a session recording.
+Your browser settings may also allow you to transmit a “Do Not Track”, “opt-out preference” signal or other mechanism for exercising your choices regarding the collection of your information when you visit various websites. Like many websites, our website is not designed to respond to such signals and we do not use or disclose your information in any way that would legally require us to recognize opt-out preference signals. To learn more about “Do Not Track” signals, you can visit http://www.allaboutdnt.com/. To opt out of tracking by Google Analytics, you can download and install a plug-in available here.
+5. SOCIAL FEATURES
+Certain features of the Services allow you to initiate interactions between the Services and third-party services or platforms, such as Facebook, LinkedIn, X (formerly Twitter) and email integrations (“Social Features”). Social Features include features that allow you to access our pages on third-party platforms, and from there “like” or “share” our content, or to access our Services through a login integration. Use of Social Features may allow a third party to collect and/or use your information. If you use Social Features, information you post or make accessible may be publicly displayed by the third-party service. Both we and the third party may have access to information about you and your use of both the Services and the third-party service. For more information, see the section below, Third Party Websites and Materials.
+6. THIRD PARTY WEBSITES AND MATERIALS
+We may provide links to third-party websites or platforms, and display, or make available content, data, applications or materials from third parties. If you follow links to sites or platforms that we do not control and are not affiliated with us, you should review the applicable privacy notice, policies and other terms. We are not responsible for the privacy or security of, or information found on, these sites, or the accuracy, completeness or reliability of third-party materials. Information you provide on public or semi-public venues, such as third-party social networking platforms, may be viewable by other users of the Services and / or users of those third-party platforms without limitation as to its use. Our inclusion of such links does not, by itself, imply any endorsement of the content on such platforms or of their owners or operators.
+7. CHILDREN’S PRIVACY
+Our Services are not intended for children, and we do not seek or knowingly collect any personal information from children. If we become aware that we have unknowingly collected information from a child, in particular children under 13 years of age, we will make commercially reasonable efforts to delete such information from our database. If you are the parent or guardian of a child who has provided us with their personal information, you may contact us using the below information to request that it be deleted.
+8. DATA SECURITY AND RETENTION
+Please note that any information you send to us electronically, while using the Services or otherwise interacting with us, may not be secure while in transit. We recommend that you do not use unsecure channels to send us sensitive or confidential information. Despite our reasonable efforts, no security measures are impenetrable, and we cannot guarantee “perfect security.”
+We retain your information for as long as is reasonably necessary for the purposes specified in this Privacy Policy. When determining the length of time to retain information, we consider various criteria, including whether we need the information to continue to administer your account, provide the Services, resolve a dispute, enforce our contractual agreements, prevent harm, promote safety, security and integrity, or protect ourselves, including our rights, property or products.
+Your information may be stored, transferred to and processed outside of your country of residence, including transferred to recipients in other countries which may have data privacy or protection rules that are different from your country of residence or citizenship.
+9. U.S. RESIDENTS
+This section applies if you are a resident of California, Colorado or another U.S. state that has passed a privacy law similar to the California Consumer Privacy Act (“CCPA”) and requires specific privacy notice disclosures. For purposes of this section, references to “personal information” shall also include “sensitive personal information” as those terms are defined under the CCPA.
+The table below sets out the categories of personal information (including sensitive information, denoted by *) we collect and disclose (if applicable), including our collection and disclosure over the past 12 months.
+Category of Personal Information Recipient(s)
+Identifiers, such as name, email address, IP address, other device identifiers and credit/debit card information Other users, vendors and service providers, login integration partners, social media widgets, affiliates
+Personal information listed in the California Customer Records statute such as name and billing address. Other users, vendors and service providers, login integration partners, social media widgets, affiliates
+Commercial information, such as subscription status and history Vendors and service providers
+Internet and similar network activity information, such as information regarding your interaction with the Services and User Input Other users, vendors and service providers, third party providers of Tracking Technologies, login integration partners, social media widgets, affiliates
+Geolocation information, such as IP address and billing address Other users, vendors and service providers, third party providers of Tracking Technologies, login integration partners, social media widgets, affiliates
+Visual information such as images that you upload to the Services Other users, vendors and service providers, affiliates
+Account access credentials, such as username and password* Vendors and service providers, login integration partners
+Precise geolocation, if you choose to provide it* Vendors and service providers
+For information regarding the specific purposes for which we collect and disclose your information, and the categories of sources from which we collect such information, please see the sections above, Collection and Use of Information and Disclosure of Information. Information about our retention of personal information is described above in Data Security and Retention. We only use and disclose sensitive personal information for the purposes specified in the CCPA or otherwise in line with your consent.
+We do not “sell” or “share” (as those terms are defined under the CCPA) personal information, nor have we done so in the preceding 12 months. Further, we do not have actual knowledge that we sell or share personal information of residents under 16 years of age.
+California residents under the age of 18 who have registered to use the Services and who posted User Input can request that such information be removed from the Services by contacting us at the information provided below. Such request must state that they personally made such User Input available to other users and detail where such User Input is posted. We will make reasonable good faith efforts to remove the User Input from prospective public view or anonymize it so the minor cannot be individually identified in relation to such User Input. This removal process cannot ensure complete or comprehensive removal. For instance, third parties may have republished the User Input (and any User Output generated as a result) and archived copies of it may be stored by search engines and others that we do not control.
+10. YOUR RIGHTS AND CHOICES
+Depending on where you live, you may have some or all of the rights listed below in relation to your personal information. However, these rights are not absolute, and may apply only in certain circumstances.
+Right to Access / Know. You may have a right to request access to personal information that we hold about you, including details relating to the ways in which we use and share your personal information, or the ways in which your personal information has or may have been used or disclosed by us in the past.
+Right to Delete. You may have a right to request that we delete personal information we maintain about you.
+Right to Correct. You may have a right to request that we correct inaccurate personal information we maintain about you.
+Right of Portability. You may have the right to receive a copy of the personal information we hold about you and to request that we transfer it to a third party.
+Restriction of Processing. You may have the right to ask us to stop, suspend or restrict our processing of personal information.
+Objection. You may have the right to object to our processing of personal information.
+Opt-Out of Marketing. You may opt out of marketing emails using the opt-out or “unsubscribe” instructions provided in the email. However, after opting out you may still receive transactional emails from us such as emails about your account.
+Withdrawal of Consent. Where we rely on consent to process your personal information, you may have the right to withdraw this consent at any time.
+You may submit a request to exercise any of these rights by emailing us at privacy@ideogram.ai.
+We will not discriminate against you for exercising any of these rights. Further information may be needed to verify your identity before exercising these rights, such as your email address or government issued ID. You may designate, in writing or through a power of attorney document, an authorized agent to make requests on your behalf to exercise your rights. Before accepting such a request from an agent, we will require that the agent provide proof you have authorized them to act on your behalf, and we may need you to verify your identity directly with us. If we deny your request, you may appeal our decision by contacting us through the methods described in Section 11.
+11. CONTACT US
+Should you have any questions about our privacy practices or this Privacy Policy, please email us at privacy@ideogram.ai. If you think we have infringed applicable data protection laws, you can complain to your local data protection supervisory authority in the country in which you are based or where you think we have infringed data protection laws. Of course, we hope you will contact us first so we can resolve any issues.
+One platform covers the work from prompt to production.
+iPhone app
+Apps
+Precise Edit
+Ad Resizer
+Background Remover
+Colorways
+Material Swap
+Object Remover
+Models
+Ideogram Vector
+Ideogram 4.5
+Ideogram 4.0
+Ideogram 3.0
+P-Image-Ideogram
+Custom Image Models
+Product
+Home
+Features
+API
+MCP
+Pricing
+Enterprise
+About
+FAQ
+Careers
+Blog
+Social
+X (Twitter)
+YouTube
+LinkedIn
+Instagram
+TikTok
+Discord
+© 2026 Ideogram, Inc. All rights reserved. Terms of Service and Privacy Policy.
+Cookie settings
