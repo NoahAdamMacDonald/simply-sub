@@ -1,0 +1,554 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada (pika.art's pricing
+# page in its Monthly and Yearly views with each FAQ answer opened, with a plain fetch of its HTML for the page's own
+# plan data; its help centre at pika.art/faq with every answer opened; its support page's topics; its Terms of Service,
+# Acceptable Use Policy, Privacy Policy and Your Privacy Choices; its download, MCP and sign-up pages) and through UK and
+# German exits (the pricing page). Pages, each quoted where it's used:
+# Pricing: pika.art/pricing, its "Pika plans at a glance": "Starter: $10/month billed monthly or $8/month billed annually
+# ($96/year)", "Creator: $35/month billed monthly or $28/month billed annually ($336/year)", "Fancy: from $95/month billed
+# monthly or from $76/month billed annually (from $912/year)". Fancy is a slider, not tiers: its "Monthly amount" runs in
+# $1 steps from "$95/mo, 8,550 credits" to $880 ("$95–$880", "$76–$704" a month billed yearly), at "90 credits / $1";
+# Fancy is priced here at its lowest amount, the range in its notes (notes.md). Its terms bill "in U.S. Dollars", and
+# the UK and German exits got the same "$" prices as Canada: one US-dollar price list, GLOBAL. Its prices don't include
+# tax ("All fees are exclusive of taxes.").
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. no country or currency picker; 3. the page's
+# plan data names no currency or country; 4. checkout needs an account; 5. no prices or tax article in its help centre;
+# 6. Edge and a plain fetch from Canada, and the UK's and Germany's exits, all show the same prices; 7. no bill offered.
+# Not listed: the Free plan, which includes no credits ("Monthly credits 0 · credit packs only"), so nothing is free
+# (freeUse, below); credit packs ("1,500 credits Buy for $25" and up, "a one-off purchase"), usage-billed; Team plans
+# ("Team plan · 2 seat minimum"), Enterprise and the API ("API billing is separate from the Pika product"); the legacy
+# Basic, Standard, Pro and Unlimited plans ("Basic, Standard, Pro and Unlimited are legacy individual plan names.",
+# subscribers kept them: "Standard now appears as Starter and Pro as Creator"); its iOS app's App Store prices (a way to
+# pay).
+# Bundles: none on its pages or in a search. Official resellers: none; no page names a shop that sells it (its Referral
+# Program pays users, no shop).
+
+id: pika
+name: Pika
+aliases: [pika labs, pika art, pika.art]
+website: https://pika.art
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help centre's "How do I cancel my subscription?" (Subscription, Adjust plan), with Apple's subscriptions for the
+# iOS app.
+cancelUrl: https://pika.art/faq
+sources: { pricing: https://pika.art/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: a card through Stripe on the web (its terms; "Manage in Stripe", its help
+# centre) and Apple's billing in its iOS app (its support page). No page names the card networks, so no
+# acceptedNetworks, and no other way to pay is named.
+paymentMethods:
+  - methods: [card]
+    page: 'Terms of Service'
+    url: https://pika.art/terms-of-service
+    quotes:
+      - 'We use Stripe, Inc. and its affiliates as our third-party payment service provider for payment processing, including card acceptance, settlement, and related services.'
+  - methods: [app-store]
+    page: 'Help & Support (Cancel plan)'
+    url: https://pika.art/support
+    quotes:
+      - 'If you subscribed through our iOS app, your subscription page shows Billed through the App Store.'
+
+# Owner (M11.2), read 2026-11-17: its terms name Mellis, Inc., in Palo Alto, California, as the company behind Pika. A
+# private company: no page names a listing.
+owner:
+  name: 'Mellis, Inc.'
+  page:
+    name: Terms of service
+    url: https://pika.art/terms-of-service
+  quotes:
+    - 'Mellis, Inc. (“Pika”, “we”, “us”, or “our”) provides access to our generative artificial intelligence platform and related services'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://pika.art/terms-of-service
+    quotes:
+      - 'The Service is operated by Mellis, Inc., 849 High St, Palo Alto, California 94301, USA.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms renew "at the end of each billing cycle" and its help centre "on their
+# billing schedule", with no day named.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://pika.art/terms-of-service
+    - https://pika.art/faq
+  lastVerified: 2026-11-17
+
+# Free use, read 2026-11-17: its Free plan is an account for buying credit packs, with no credits of its own ("The Free
+# plan lets you buy credit packs without a monthly subscription. It doesn’t include a monthly credit allowance.", its
+# help centre; the comparison table's "0 · credit packs only"), so nothing on Pika is free to use.
+freeUse:
+  kind: none
+  pages:
+    - https://pika.art/pricing
+    - https://pika.art/faq
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table: usage levels (perks, never features) and the
+# commercial licence ("Starter, Creator, Fancy include a commercial license.").
+perks:
+  - id: commercial-license
+    name: Commercial license
+  - id: parallel-2-8
+    name: 2 video · 8 image + audio in parallel
+  - id: parallel-8-32
+    name: 8 video · 32 image + audio in parallel
+  - id: parallel-unlimited
+    name: Unlimited parallel generations
+  - id: priority-queue
+    name: Priority queue
+  - id: early-access-440
+    name: Early access to new models (from $440/mo)
+
+# AI features (the AI category's registry), read 2026-11-17 on its pricing page and help centre. Pika is an AI video,
+# image and audio generator ("Pika is an AI video, image and audio platform."), with no chat assistant: its apps take a
+# prompt ("Choose an app for what you want to make, add a prompt or your own media, and generate."). ai.assistant is
+# set because the registry puts video, image and audio generation under it (notes.md).
+# - Video, image and audio on every plan: "Pika is the creative platform that lets you create and edit videos, images,
+#   and sound using AI."; "Use Music Studio for music, Speech Studio for voiceovers, and SFX Studio for sound effects."
+#   Every card says "All models" ("All individual plans include access to all models.").
+# - Models from several companies: "It runs Pika’s own models, Pika H3 Flex (open weights) and Pika 2.5, alongside
+#   Seedance 2.5, Kling 4.0, Veo 3.1, Wan 3.0, MiniMax H3 and Gemini Omni."; "In apps with a model selector, you can
+#   choose the model you want to use."
+# - Projects: "Keep related work in projects and mark your favorites so they’re easy to find again." (help centre).
+# - Not counted: Pika MCP lets other assistants use Pika ("Pika credits also work with the new Pika MCP."; its MCP page
+#   lists ChatGPT, Claude and others), not Pika use MCP servers; the API is billed apart; Fancy's
+#   "Early access to new models (from $440/mo)" is a perk, since Fancy is priced here at $95. No page offers chat, web
+#   search, voice conversations, memory, reasoning, custom assistants, a coding or browser agent, scheduled tasks, deep
+#   research or office apps; it keeps no chats.
+# Creative features (the creative category's registry), read 2026-11-17:
+# - Tools: video editing ("Can I edit a video I already have?" "Yes!": Swap Anything, Extend Video, Color Grade) and photo
+#   editing ("Edit Image to change something in a photo you already have").
+# - Highest video export 1080p: every plan has "All models", and its credits table prices Seedance 2.5 and Kling 4.0 at
+#   "1080p · 5s"; no page offers 4K.
+# - No watermark: "Every current plan, including Free, exports without a watermark." (its support page).
+# - Generative credits a month: "600", "2,600" and "8,550" "credits / month" on its cards.
+# General features, read 2026-11-17: the web and its iPhone app ("Pika - AI Video is the official Pika app: Every creation
+# app and every model from pika.art, with the same account, on your iPhone."); no Android app on its pages. Sign-in:
+# "Continue with Google", "Continue with Apple", "Continue with Discord", or an email address (its sign-up page); no page
+# says how the email sign-in works, so only `sso` (Poe's precedent). App languages: no page lists them, and its pages
+# have no other language versions, so none. Support: its support page's form ("tick this and a real person will pick it
+# up"). No pause and no parental controls: its terms and help centre offer neither (18 and over: "you state that you are
+# at least 18 years old").
+features:
+  platforms: [ios, web]
+  account.sign-in: [sso]
+  support.channels: [email]
+
+plans:
+  - id: pika.starter
+    name: Starter
+    link: https://pika.art/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.model-choice: true
+      ai.projects: true
+      creative.tools: [video-editing, photo-editing]
+      creative.export-resolution: 1080p
+      creative.no-watermark: true
+      creative.ai-credits: 600
+    perks: [commercial-license, parallel-2-8]
+    notes: 'Pika’s own models (Pika H3 Flex, Pika 2.5) and others’ (Seedance 2.5, Kling 4.0, Veo 3.1, Nano Banana, GPT Image); 600 credits a month (about 60 Pika H3 Flex clips or 4 Seedance 2.5 720p clips) that don’t roll over.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pika.art/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 96
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pika.art/pricing
+
+  - id: pika.creator
+    name: Creator
+    link: https://pika.art/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.model-choice: true
+      ai.projects: true
+      creative.tools: [video-editing, photo-editing]
+      creative.export-resolution: 1080p
+      creative.no-watermark: true
+      creative.ai-credits: 2600
+    perks: [commercial-license, parallel-8-32]
+    notes: 'Everything in Starter with 2,600 credits a month (about 21 Seedance 2.5 720p clips) that don’t roll over, and more generations at once.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 35
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pika.art/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 336
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pika.art/pricing
+
+  - id: pika.fancy
+    name: Fancy
+    link: https://pika.art/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.model-choice: true
+      ai.projects: true
+      creative.tools: [video-editing, photo-editing]
+      creative.export-resolution: 1080p
+      creative.no-watermark: true
+      creative.ai-credits: 8550
+    perks: [commercial-license, parallel-unlimited, priority-queue, early-access-440]
+    notes: 'Priced at its lowest: you pick any amount from $95 to $880 a month ($76 to $704 a month billed yearly), at 90 credits per $1 (8,550 to 79,200 credits). Early access to new models comes from $440 a month.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pika.art/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 912
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://pika.art/pricing
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: its Terms of Service (last
+# modified 08/04/2026), which include its Acceptable Use Policy (last updated 05/16/2025: the same grades, no topic of its
+# own beyond the terms' monitoring and termination) and each third-party model's own terms ("Model Terms", not read: no
+# page lists them); its Privacy Policy (last modified 10/21/2026) and Your Privacy Choices, the two documents its sign-up
+# page names ("By signing up you agree with our Terms of Service & Privacy Policies"); its help centre and support page.
+# Its terms include Stripe's terms and privacy policy for payments (no topic). Its AI Self terms are pika.me's, another
+# product.
+policies:
+  links:
+    - name: Terms of service
+      url: https://pika.art/terms-of-service
+    - name: Privacy policy
+      url: https://pika.art/privacy-policy
+    - name: Your privacy choices
+      url: https://pika.art/privacy-choices
+    - name: Help centre
+      url: https://pika.art/faq
+    - name: Help & support
+      url: https://pika.art/support
+    - name: Pricing
+      url: https://pika.art/pricing
+    - name: Sign-up page
+      url: https://create.pika.art/signup
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online from your Subscription page whenever you like, and keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://pika.art/faq
+          quote: 'Go to Subscription, choose Adjust plan, and follow the cancellation option. Your plan stays active until the end of your current billing period, then moves to Free.'
+        - url: https://pika.art/terms-of-service
+          quote: 'You may cancel your subscription at any time through your account settings or by contacting support@pika.art.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back, but you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://pika.art/faq
+          quote: 'Subscription payments and credit packs are non-refundable. Cancelling stops your next renewal, and you can keep using your plan until the end of the period you’ve paid for.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you ahead of time before a big change to your plan’s price, without saying how long before, and it usually starts at your next renewal, so you can cancel first.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'Pika may modify the pricing or features of its Plans at any time. We will provide reasonable advance notice of any material changes to your Plan. Unless otherwise specified, any changes will take effect at the beginning of your next billing cycle.'
+        - url: https://pika.art/terms-of-service
+          quote: 'If you do not agree to the new pricing or terms, you must cancel your subscription before the next renewal to avoid incurring additional charges.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A trial turns into a paid plan on its own unless you cancel before it ends. It doesn’t say it reminds you first.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'At the end of the trial period, your Account will automatically convert to a paid subscription, and you authorize us to charge your selected payment method at the then-current subscription rate, unless you cancel before the trial ends.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      tier: neutral
+      reason: 'It warns you before a renewal only where the law requires it; its privacy policy says it may send renewal notices.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'We will provide advance notice of any auto-renewal where required by applicable law.'
+        - url: https://pika.art/privacy-policy
+          quote: 'To communicate with you, including to provide you with notices about your account, including expiration and renewal notices, changes to our Service or any products or services we offer or provide through it, along with information, products, or services that you request from us.'
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms add only taxes to the price, and say your bank may charge its own fees, but don’t say whether Pika charges any others.'
+      pages:
+        - https://pika.art/terms-of-service
+        - https://pika.art/faq
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'A move to a bigger plan starts at once, and a move to a smaller one at your next renewal, so you keep what you paid for. It doesn’t say how the upgrade is charged.'
+      sources:
+        - url: https://pika.art/pricing
+          quote: 'An upgrade applies immediately. A downgrade is scheduled for the start of your next billing period, and you can undo it until then.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by email within 30 days of signing up, and the class-action ban stays unless you opt out of both."
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'You and Pika are agreeing to give up any rights to litigate claims in a court or before a jury, or to participate in a class action or representative action regarding a claim.'
+        - url: https://pika.art/terms-of-service
+          quote: 'Your opt-out notice must be received by Pika within 30 days of the date you first registered for the Service or first agreed to these terms of service, whichever is earlier.'
+        - url: https://pika.art/terms-of-service
+          quote: 'However, if you opt out only of arbitration and not of the class action waiver, the class action waiver will still apply.'
+      action:
+        name: 'How to opt out of arbitration (Resolving Disputes)'
+        url: https://pika.art/terms-of-service
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms apply as soon as it posts them, and if you keep using Pika, you’ve agreed to them.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'All changes are effective immediately when we post them and apply to all access to and use of the Service afterwards.'
+        - url: https://pika.art/terms-of-service
+          quote: 'Your continued use of the Service after the posting of revised terms of service means that you accept and agree to the changes.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time for any reason or none, with or without warning, and gives no refund if it says you broke its rules.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'We may suspend or terminate your access to the Service, your AI Self, your Account, or any portion of it, at any time, for any reason or no reason, with or without notice.'
+        - url: https://pika.art/terms-of-service
+          quote: 'No refund will be provided if your Account is terminated for breach of these terms of service, the AUP, or any applicable Model Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'It may use, change and show what you upload to run, improve and promote Pika, and pass that right on, while your files are stored. It may also name you as a customer in its marketing unless you write to say no.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'By submitting User Content, you hereby grant Pika a worldwide, nonexclusive, royalty-free, transferable, sublicensable license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, perform, and display your User Content as necessary to operate, improve, and promote the Service.'
+        - url: https://pika.art/terms-of-service
+          quote: 'This license remains in effect for as long as your User Content is stored on the Service.'
+        - url: https://pika.art/terms-of-service
+          quote: 'Pika may identify you as a customer and use your name, logo, and a general description of your use of the Service in Pika’s marketing materials and customer lists. Pika will use commercially reasonable efforts to notify you of such use in advance. You may opt out of this use by notifying Pika in writing at support@pika.art.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What Pika makes for you is yours, and paid plans may use it commercially.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'Pika does not claim ownership of any Inputs you submit or Outputs generated through your use of the Service. As between you and Pika, you retain all interest in those Outputs. To the extent Pika acquires any interest in the Outputs, we hereby assign all interest to you.'
+        - url: https://pika.art/faq
+          quote: 'If you’re on a paid subscription plan (Starter, Creator or Fancy), then yes!'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of Pika at any time without warning, and gives no money back for time you’ve paid for. It tries to warn you 30 days before dropping a model you use.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'Pika may modify, update, or discontinue all or part of the Service at any time, with or without notice.'
+        - url: https://pika.art/terms-of-service
+          quote: 'Except as expressly provided in these terms of service or required by law, all subscription payments are non-refundable, and there are no refunds or credits for partially used periods.'
+        - url: https://pika.art/terms-of-service
+          quote: 'For generally available Pika models actively used in your Account, Pika will use commercially reasonable efforts to provide at least 30 days’ notice before discontinuing or materially reducing such models, unless doing so would create a security risk, violate law, or be technically infeasible.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It may close accounts that aren’t used and delete what’s in them, with no set waiting time or warning.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'Pika may establish general practices and limits concerning use of the Service, including limits on storage capacity, data retention periods, and account inactivity.'
+        - url: https://pika.art/terms-of-service
+          quote: 'You acknowledge that Pika may delete or disable access to User Content or terminate inactive accounts in accordance with these practices, and that Pika has no obligation to retain any User Content beyond the limits set by your Plan or applicable policies.'
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use Pika for yourself, and for business only on a paid plan. It forbids taking it apart or testing its security without its permission, even where the law would allow it.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'Pika hereby grants you a limited, nonexclusive, nontransferable, nonsublicensable, revocable license to access and use the Service solely for your personal, noncommercial use—except where your subscription Plan expressly permits commercial use.'
+        - url: https://pika.art/terms-of-service
+          quote: 'decompile, reverse engineer, disassemble, decode, or otherwise attempt to derive the source code or underlying ideas or algorithms of the Service;'
+        - url: https://pika.art/terms-of-service
+          quote: 'conduct or facilitate security testing, penetration testing, red-teaming, adversarial testing, or vulnerability assessments of the Service, any models, or any related systems without Pika’s prior written approval;'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its app updates itself or changes anything else on your device.'
+      pages: [https://pika.art/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Only one person may use an account, so you can’t share it, even at home.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'Unless your Plan expressly permits otherwise, each Account may only be used by a single individual, and the Service is for your personal, noncommercial use only.'
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre set no limit on how many devices you use it on, and say nothing about downloads expiring.'
+      pages:
+        - https://pika.art/terms-of-service
+        - https://pika.art/faq
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: neutral
+      reason: 'You can report a security problem to a person through its support page, but it names no outside audit or certification.'
+      sources:
+        - url: https://pika.art/support
+          quote: 'Thank you for telling us. Security reports go straight to a person — never handled automatically, never closed by a bot.'
+        - url: https://pika.art/support
+          quote: 'Tick the box below and describe what you found. Include steps to reproduce it if you have them, and please do not post the details publicly before we have replied.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It and other companies track how you use Pika, with Google Analytics among others. You can only limit it in part: block trackers in each browser, or use Google’s opt-out.'
+      sources:
+        - url: https://pika.art/privacy-policy
+          quote: 'As you navigate through and interact with our Service, we and third parties may use Tracking Technologies to collect certain information about you and your equipment, browsing actions, and patterns.'
+        - url: https://pika.art/privacy-policy
+          quote: 'For example, we use Google Analytics to help us understand how our users use our Service'
+        - url: https://pika.art/privacy-policy
+          quote: 'You can opt out of Google Analytics here: https://tools.google.com/dlpage/gaoptout.'
+      action:
+        name: 'Your choices, in its privacy policy'
+        url: https://pika.art/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares your visits with Google and Meta for its ads, and you can turn that off only in each browser. The other AI companies whose models you pick use what you send under their own rules.'
+      sources:
+        - url: https://pika.art/privacy-choices
+          quote: 'Pika shares information about your visits with Google and Meta to measure its ads.'
+        - url: https://pika.art/privacy-choices
+          quote: 'Your choice is saved in this browser only.'
+        - url: https://pika.art/privacy-policy
+          quote: 'These providers generally act as independent controllers of the information they receive, and process your Inputs and other content in accordance with their own terms, usage policies, and privacy notices.'
+      action:
+        name: 'Turn off ad measurement'
+        url: https://pika.art/privacy-choices
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Pika has no ads in the app, but it uses what you do to show you its ads on other sites. You can turn that off only browser by browser.'
+      sources:
+        - url: https://pika.art/privacy-policy
+          quote: 'To show you ads (including personalized ads) through the Services and third-party websites, and to provide advertising analytics and reporting.'
+        - url: https://pika.art/privacy-choices
+          quote: 'Your choice is saved in this browser only.'
+      action:
+        name: 'Turn off ad measurement'
+        url: https://pika.art/privacy-choices
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you upload and make trains Pika’s AI, with no way to turn it off, and its licence to do so never ends and can be passed on. Deleting your account only stops future training, as far as it can.'
+      sources:
+        - url: https://pika.art/privacy-policy
+          quote: 'Where permitted by applicable law or with your consent, we may also use content you submit—including Inputs and Outputs—to improve our artificial intelligence models and related technologies.'
+        - url: https://pika.art/terms-of-service
+          quote: 'To the extent any rights in your Content are necessary for this use, you hereby grant Pika a nonexclusive, perpetual, irrevocable, worldwide, royalty-free, fully paid, transferable, sublicensable license to use, reproduce, analyze, and modify that Content for the purposes described above.'
+        - url: https://pika.art/terms-of-service
+          quote: 'Upon deletion of your Account, Pika will permanently delete all data associated with your AI Self and will use commercially reasonable efforts to exclude your Content from future model training; provided, however, that Pika may not be able to remove Content that has already been incorporated into trained models, and will continue using Content that has been anonymized or aggregated prior to deletion.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Its systems and staff may look at what you upload and make, to enforce its rules. It says it keeps your information on secure servers, but not that your files are encrypted. (Training on it is graded under AI training.)'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'To the extent permitted by law, Pika may review or monitor Inputs and Outputs using automated or manual tools.'
+        - url: https://pika.art/privacy-policy
+          quote: 'Information you provide is stored on secure servers behind firewalls, access to personal information is limited to personnel who need it to perform their duties, and sensitive information (such as payment details) is transmitted using encryption technologies such as SSL.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it decides it needs it. Face and voice scans go within three years of deleting your account.'
+      sources:
+        - url: https://pika.art/privacy-policy
+          quote: 'we will only retain your personal information for as long as necessary to fulfill the purposes we collected it for as set forth in this privacy policy, or as otherwise required for security, abuse prevention, billing, troubleshooting, or satisfying any legal, accounting, or reporting requirements.'
+        - url: https://pika.art/privacy-policy
+          quote: 'If you submit biometric information (such as facial scans or voice recordings), we retain that information only as long as necessary to fulfill the purpose for which it was collected or, at most, for three years after you delete your account, whichever is earlier.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'To delete your data you email support from your account’s address, and a person deletes the whole account. It doesn’t say how soon.'
+      sources:
+        - url: https://pika.art/faq
+          quote: 'Contact support from the email address belonging to the account you want deleted.'
+        - url: https://pika.art/privacy-policy
+          quote: 'We cannot delete your personal information except by also deleting your user account.'
+      action:
+        name: 'Ask support to delete your account'
+        url: https://pika.art/support
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can download each of your creations yourself, one at a time; it can’t export them for you, and it doesn’t say in what kind of file.'
+      sources:
+        - url: https://pika.art/faq
+          quote: 'Open a creation to view or download it.'
+        - url: https://pika.art/support
+          quote: "We can't export your assets for you, so download anything you want to keep before you ask us to delete — once it's gone it's gone."
+      action:
+        name: 'Where your creations are, in its help centre'
+        url: https://pika.art/faq
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands information to the police or governments when the law requires it or they ask. It doesn’t say it tells you, or publish how often.'
+      sources:
+        - url: https://pika.art/privacy-policy
+          quote: 'To comply with any court order, law, or legal process, including to respond to any government or regulatory request.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information goes to the US and other countries. For Europe and the UK it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://pika.art/privacy-policy
+          quote: 'We are based in the United States. To provide our Service, we may process, store, and transfer your personal information to countries outside your own, including the United States, where privacy laws may differ and may not provide the same level of protection.'
+        - url: https://pika.art/privacy-policy
+          quote: 'These include the Standard Contractual Clauses (“SCCs”) approved by the European Commission under Article 46(2)(c) of the GDPR and the UK Data Transfer Addendum.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'You sign up with only an email address, or with your Google, Apple or Discord account. It asks for no name or phone number.'
+      sources:
+        - url: https://pika.art/terms-of-service
+          quote: 'To access certain features of the Service, you may be required to create an account with Pika (an “Account”) using your email address or by signing in through a third-party service, such as Google or Facebook.'
+        - url: https://create.pika.art/signup
+          quote: 'Continue with Discord'
+      lastVerified: 2026-11-17
