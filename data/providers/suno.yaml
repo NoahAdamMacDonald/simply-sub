@@ -1,0 +1,1198 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2: AI audio), read with Edge from Canada (suno.com's
+# pricing page in its Yearly and Monthly views with each FAQ answer opened, About, Safety, MCP, Voices and Studio pages,
+# its Terms of Service, Privacy Notice, Cookie Policy and Community Guidelines), a plain fetch of the pricing page's HTML
+# for its own pricing data, and its help centre (help.suno.com) with a plain fetch. Pages, each quoted where it's used:
+# Pricing: suno.com/pricing prices by where the visitor is. Its own pricing data (initialPlans in the page) lists every
+# plan's price in 16 currencies ("period_type":"month","currency":"CAD","price":14), and the page shows each country
+# its own. Read 2026-11-17 through a US, a Canadian, a UK, an Australian, a New Zealand, an Irish, a German, a French, a
+# Dutch, a Spanish and an Italian exit: the US and New Zealand $10 / $96 (the data's USD list, which has no NZD),
+# Canada $14 / $132 (a bare $, the data's CAD list: no other currency in it has those amounts), the UK £8 / £72,
+# Australia $15 / $144 (the data's AUD list), and the six euro countries 9 € / 86,40 €; Premier and Platinum the same way
+# (US$30 / $288 and $120 / $1,200; CA$40 / $420 and $165 / $1,620; £22 / £216 and £90 / £900; A$45 / $420 and $175 /
+# $1,740; 28 € / 264 € and 110 € / 1.080 €). The yearly cards show the monthly price struck through ("$10", "$8 / month",
+# "Billed $96/year"); the Monthly view the monthly price alone. USD is everyone else's list (GLOBAL). Poland and Sweden
+# get PLN and SEK lists, so the euro price isn't the whole EU's: each euro country read is its own region. No page says
+# a price includes tax ("Paid plans auto-renew. Cancel anytime. Taxes calculated at checkout"; its VAT article adds VAT
+# "at the rate determined by the purchasers country").
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. no picker; 3. the page's own data names CAD;
+# 4. checkout needs an account; 5. the payments article lists CAD among its currencies; 6. Edge from this machine showed
+# the USD list (its address placed elsewhere), so Canada was read through a Canadian exit; 7. no bill offered.
+# Plans: Free, Pro, Premier and Platinum ("Suno offers three paid subscription plans to support the way you create: Pro,
+# Premier, and Platinum", What paid subscription plans does Suno offer?). Platinum is sold on the web only ("Platinum is
+# currently available to purchase on the web only."). Business and enterprise use go through sales: out.
+# Not listed: add-on song credits, extra downloads and Visual credit packs bought as you go (usage-billed, out).
+# Bundles: none on its pages. Official resellers: none; its privacy notice mentions partners that "resell our Services"
+# but no page names one.
+# Logo: suno.com's own icons (cdn-o.suno.com/favicon-512x512.png) are the source for data:icons.
+
+id: suno
+name: Suno
+aliases: [suno ai]
+website: https://suno.com
+domains: [help.suno.com]
+category: ai
+spendCategory: software
+billingCurrency:
+  { GLOBAL: USD, CA: CAD, GB: GBP, AU: AUD, IE: EUR, DE: EUR, FR: EUR, NL: EUR, ES: EUR, IT: EUR }
+# Its help article on cancelling a subscription bought from Suno (suno.com/account, "Cancel Subscription"); app store
+# subscriptions are cancelled in the store (How do I cancel my subscription?).
+cancelUrl: https://help.suno.com/en/articles/4797249
+sources: { pricing: https://suno.com/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17 in its payments article: cards on Visa, Mastercard and American Express; Google
+# Pay, Apple Pay, Cash App Pay and stablecoins in some regions; Korean cards, UPI, KakaoPay and NaverPay (Korea and
+# India, `other`); and Google Play or the App Store in its apps (where PayPal can be used). Its other currencies
+# ("USD AUD BRL CAD EUR GBP IDR INR JPY KRW MXN NOK PLN SEK THB TRY UAH") are price lists for countries the catalog
+# doesn't read, so no `currencies` entry.
+paymentMethods:
+  - methods: [card, google-pay, apple-pay, cash-app, other]
+    page: 'What types of payments are accepted?'
+    url: https://help.suno.com/en/articles/2421185
+    quotes:
+      - 'We currently accept credit and debit cards from major payment networks such as VISA, Mastercard, and American Express. Stablecoin, Google Pay, Apple Pay, and Cash App Pay are available in some regions. Other available methods are Korean Card, UPI, KakaoPay, NaverPay.'
+  - methods: [app-store]
+    page: 'What types of payments are accepted?'
+    url: https://help.suno.com/en/articles/2421185
+    quotes:
+      - 'you can set your default payment method for Google Play(Android) or the App Store(iOS) to PayPal'
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://help.suno.com/en/articles/2421185
+    quotes:
+      - 'We currently accept credit and debit cards from major payment networks such as VISA, Mastercard, and American Express.'
+
+# Owner (M11.2), read 2026-11-17: its terms name Suno Inc., and the same terms say where it's headquartered. Its About
+# page names investors (Bond Capital, Menlo Ventures, Lightspeed and others) but no listing: private.
+owner:
+  name: 'Suno, Inc.'
+  page:
+    name: Terms of service
+    url: https://suno.com/terms
+  quotes:
+    - 'Suno Inc. (“Suno,” “we,” “us,” or “our”) provides our services (described below) and related content to you'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://suno.com/terms
+    quotes:
+      - 'Suno is headquartered in the United States.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms charge "at the start of each new subscription period", and its credits
+# article refreshes paid credits "at the same time as your original purchase" ("If you purchased on January 2nd at 3pm
+# local time, your next replenishment will also happen at 3pm local time!"), which says the date you subscribed, but
+# core's renewalWrittenAs doesn't read that wording yet: not-stated until it does (notes.md has the same-date block).
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://suno.com/terms
+    - https://help.suno.com/en/articles/2418177
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table, its help centre's MCP and Bridge articles:
+# usage and rights no feature describes (credits and downloads are perks, never features: the owner's rule).
+perks:
+  - id: daily-credits
+    name: 50 song credits per day
+  - id: credits-2500
+    name: 2,500 song credits per month
+  - id: credits-10000
+    name: 10,000 song credits per month
+  - id: credits-15000
+    name: 15,000 song credits per month
+  - id: visual-credits
+    name: 20,000 visual credits a month
+  - id: downloads-20
+    name: 20 song downloads per month
+  - id: downloads-60
+    name: 60 song downloads per month
+  - id: downloads-120
+    name: 120 song downloads per month
+  - id: commercial-use
+    name: Commercial use rights
+  - id: priority-queue
+    name: Priority queue; up to 10 songs at once
+  - id: stems-2
+    name: 2 stem separation types (Auto; Split from mix)
+  - id: stems-3
+    name: 3 stem separation types (Auto; Split from mix and Advanced split)
+  - id: own-voice
+    name: Record, upload, and create with your own voice
+  - id: custom-models
+    name: Create custom models
+  - id: uploads-30-min
+    name: Upload up to 30 minutes of audio
+  - id: advanced-editing
+    name: Advanced editing (replace or add section)
+  - id: studio
+    name: Access to Suno Studio - now with MIDI, effects, automation, and design-your-own-plugins
+  - id: bridge
+    name: Suno Bridge (beta), for Ableton Live on a Mac
+  - id: mcp
+    name: Suno MCP (Beta), to make music from Claude, ChatGPT and other AI assistants
+
+# AI features (the AI category's registry) and the creative category's, read 2026-11-17 in its pricing cards and
+# comparison table, its terms and its help centre:
+# - AI assistant on every plan: its terms' "Suno Chat" ("an artificial intelligence-powered chat assistant known as Suno
+#   Chat", for making music only) and the table's "Co-write with Suno" row, included on every plan. Chats are kept on
+#   its servers: its privacy notice collects "Interactive Chat Information" ("we collect any information submitted
+#   through such interactions").
+# - Music and voice generation on every plan: songs, and Speech on its apps ("Speech (beta) is available on all Suno
+#   plans in the Suno app for iOS or Android").
+# - Early access on the paid plans: "Early access to new features" on Pro, Premier and Platinum, not Free.
+# - Image and video generation on Platinum only: its "20,000 visual credits a month". Suno Visuals is open to anyone who
+#   buys Visual credits ("Anybody can buy Visuals credits."), but only Platinum includes them (notes.md, as Venice's
+#   pay-with-credits API).
+# - Creative tools: audio and music production on every plan (creating, remixing, extending and uploading songs; Suno
+#   Studio, "A browser-based studio suite", on Premier and Platinum is a perk).
+# - Not offered: web search, voice conversations, memory, projects, reasoning, a browser agent, code completion, models
+#   from other companies (its music models are its own; Visuals' "H3 Move" is "based on H3 from MiniMax" and not picked),
+#   API credits. Its MCP server lets other assistants use Suno, the reverse of the registry's MCP servers (an assistant that connects to them),
+#   so it's a perk (notes.md).
+# General features, read 2026-11-17: the web and its apps ("Full creative experiences on web, iOS and Android", About);
+# sign-in with a phone number and a text message code, or Apple, Discord, Facebook, Google or Microsoft ("Instead, we use
+# Single Sign On (SSO) with connected logins from Apple, Discord, Facebook, Google, and Microsoft.", How do I log in?);
+# its language menu lists English only; support by email only ("the only official support contact for Suno support is
+# support@suno.com", its Discord "is not considered an official support channel"). No pause and no parental controls:
+# its terms and help centre offer neither (13 and over, under 18 with a parent's consent).
+features:
+  platforms: [web, ios, android]
+  account.sign-in: [sms, sso]
+  languages.interface: [en]
+  support.channels: [email]
+
+plans:
+  - id: suno.free
+    name: Free
+    categories: [ai, creative]
+    link: https://suno.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.chat-storage: cloud
+      creative.tools: [audio-production]
+    perks: [daily-credits, mcp]
+    notes: '50 song credits a day (about 10 songs) on its free model, a shared queue, no downloads and no commercial use: the songs are Suno’s, for personal, non-commercial use.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://suno.com/pricing
+
+  - id: suno.pro
+    name: Pro
+    categories: [ai, creative]
+    link: https://suno.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.early-access: true
+      ai.chat-storage: cloud
+      creative.tools: [audio-production]
+    perks:
+      [
+        credits-2500,
+        downloads-20,
+        commercial-use,
+        priority-queue,
+        stems-2,
+        own-voice,
+        custom-models,
+        uploads-30-min,
+        advanced-editing,
+        mcp,
+      ]
+    notes: 'Its best models (v6 and v6-wild), 2,500 song credits a month (up to 500 songs) and 20 downloads a month, with commercial use of the songs you download while subscribed.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 10,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 96,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 14,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 132,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 8,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 72,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 15,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 144,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 9,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 86.4,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 9,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 86.4,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 9,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 86.4,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 9,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 86.4,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 9,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 86.4,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 9,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 86.4,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+
+  - id: suno.premier
+    name: Premier
+    categories: [ai, creative]
+    link: https://suno.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.early-access: true
+      ai.chat-storage: cloud
+      creative.tools: [audio-production]
+    perks:
+      [
+        credits-10000,
+        downloads-60,
+        commercial-use,
+        priority-queue,
+        stems-3,
+        own-voice,
+        custom-models,
+        uploads-30-min,
+        advanced-editing,
+        studio,
+        bridge,
+        mcp,
+      ]
+    notes: 'Everything in Pro, with 10,000 song credits a month (up to 2,000 songs), 60 downloads a month and Suno Studio, whose downloads have no limit.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 30,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 288,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 40,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 420,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 22,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 216,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 45,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 420,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 28,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 264,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 28,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 264,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 28,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 264,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 28,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 264,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 28,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 264,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 28,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 264,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+
+  - id: suno.platinum
+    name: Platinum
+    categories: [ai, creative]
+    link: https://suno.com/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.early-access: true
+      ai.chat-storage: cloud
+      creative.tools: [audio-production]
+    perks:
+      [
+        credits-15000,
+        visual-credits,
+        downloads-120,
+        commercial-use,
+        priority-queue,
+        stems-3,
+        own-voice,
+        custom-models,
+        uploads-30-min,
+        advanced-editing,
+        studio,
+        bridge,
+        mcp,
+      ]
+    notes: 'Everything in Premier, with 15,000 song credits and 20,000 Visual credits a month for images and videos, and 120 downloads a month. Sold on the web only.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 120,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 1200,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 165,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: CA,
+          currency: CAD,
+          amount: 1620,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 90,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: GB,
+          currency: GBP,
+          amount: 900,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 175,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: AU,
+          currency: AUD,
+          amount: 1740,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 110,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IE,
+          currency: EUR,
+          amount: 1080,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 110,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: DE,
+          currency: EUR,
+          amount: 1080,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 110,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: FR,
+          currency: EUR,
+          amount: 1080,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 110,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: NL,
+          currency: EUR,
+          amount: 1080,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 110,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: ES,
+          currency: EUR,
+          amount: 1080,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 110,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+      - {
+          region: IT,
+          currency: EUR,
+          amount: 1080,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://suno.com/pricing,
+        }
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: its Terms of Service (last
+# revised August 10, 2026, effective September 3, 2026), which include its Privacy Notice, its Community Guidelines and
+# "any additional terms applicable to such features"; its Cookie Policy; and its help centre's billing, rights,
+# download and account articles, and its AB 2013 training disclosure. The Community Guidelines (what may be posted) and
+# the Safety page held no topic. Not read: the sign-up dialog (it didn't open in a headless browser), the payment
+# processor's terms, and the app stores' terms.
+policies:
+  links:
+    - name: Terms of service
+      url: https://suno.com/terms
+    - name: Privacy notice
+      url: https://suno.com/privacy
+    - name: Cookie policy
+      url: https://suno.com/cookie-policy
+    - name: Training data disclosure
+      url: https://help.suno.com/en/articles/9709569
+    - name: Cancelling
+      url: https://help.suno.com/en/articles/4797249
+    - name: Refunds
+      url: https://help.suno.com/en/articles/2550209
+    - name: Pricing
+      url: https://suno.com/pricing
+    - name: Downloads
+      url: https://help.suno.com/en/articles/13876865
+    - name: Changes to downloads and terms
+      url: https://help.suno.com/en/articles/13614785
+    - name: Deleting your account
+      url: https://help.suno.com/en/articles/3480577
+    - name: Signing in with email
+      url: https://help.suno.com/en/articles/2553409
+    - name: Signing in
+      url: https://help.suno.com/en/articles/3134401
+    - name: Ways to pay
+      url: https://help.suno.com/en/articles/2421185
+    - name: Who owns your songs
+      url: https://help.suno.com/en/articles/2416769
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online from your account page at any time, and you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://help.suno.com/en/articles/4797249
+          quote: 'Please visit suno.com/account then choose Cancel Subscription at the top of the page.'
+        - url: https://suno.com/terms
+          quote: 'Following any cancellation by you, you will continue to have access to the paid Service through the end of the subscription period for which payment has already been made.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments aren’t refunded unless Suno decides to, but you keep your plan to the end of the period you paid for.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'Payments made by you hereunder are final and non-refundable, unless otherwise determined by Suno.'
+        - url: https://help.suno.com/en/articles/2550209
+          quote: 'You can continue to use the service through the end of the billing cycle, and the account will revert to the Basic plan upon completion.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It tells you when it changes a price, in the app or by email, without saying how long before.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'If Suno does change prices, Suno will provide notice of the change through the Service user interface, a pop-up notice, email, or through other reasonable means.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'When it offers a trial, it becomes a paid plan the day after it ends unless you cancel before then.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'By providing it, you authorize us to begin charging you for the applicable paid subscription on the first day after your trial ends, at the recurring rate and billing interval we disclose to you in advance, unless you cancel before the trial ends.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages: [https://suno.com/terms]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and billing articles name no fees beyond the price and tax.'
+      pages:
+        - https://suno.com/terms
+        - https://help.suno.com/en/articles/2421185
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'You can switch at any time: moving up starts at once and moving down at the end of your period. It doesn’t say whether what you paid counts toward a move up.'
+      sources:
+        - url: https://suno.com/pricing
+          quote: 'Yes, you can switch plans at any time from your account settings. Upgrades take effect immediately, while downgrades apply at the end of your billing cycle.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to a private referee (arbitration), not a court, and you can’t join a class action. You can only refuse later changes to that rule, not the rule itself.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'YOU AND SUNO EACH AGREE THAT ANY PROCEEDING, WHETHER IN ARBITRATION OR IN LITIGATION, WILL BE CONDUCTED ONLY ON AN INDIVIDUAL BASIS AND NOT IN A CLASS, COLLECTIVE, PRIVATE ATTORNEY GENERAL, OR REPRESENTATIVE ACTION.'
+        - url: https://suno.com/terms
+          quote: 'Such written notice does not constitute an opt out of arbitration altogether.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes to its terms, in the app or by email, without saying how long before; you can close your account if you don’t agree.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'We will also notify you of any material changes, either through the Service user interface, a pop-up notice, email, or through other reasonable means.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account and delete your songs for any reason, without warning, and owes you nothing for it.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'You agree that Suno, in its sole discretion, may suspend or terminate your account (or any part thereof) or use of the Service and remove and discard any content (including your Content or Voice Model) within the Service, for any reason in Suno’s sole discretion'
+        - url: https://suno.com/terms
+          quote: 'You agree that any termination of your access to the Service under any provision of these Terms of Service may be affected without prior notice'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'What you upload and make, your voice and likeness included, comes with a licence that never ends, that Suno can pass to anyone, and that it can use to make money and advertise.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'grant to Suno and our affiliates, successors, assigns, and designees a worldwide, non-exclusive, fully paid-up, sublicensable (directly and indirectly through multiple tiers), assignable, royalty-free, perpetual, irrevocable right and license'
+        - url: https://suno.com/terms
+          quote: 'This license to your Content and Voice Model includes a license to your likeness, voice rights and other indicia of your persona that may be embodied in your Content or Voice Model.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'On a paid plan the songs you make are yours, and you may use the ones you download commercially, but Suno’s licence lets it use them too.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'Suno hereby assigns to you all of its right, title and interest in and to any Output owned by Suno and generated from Submissions made by you through the Service'
+        - url: https://suno.com/terms
+          quote: 'in connection with the provision, use, monetization, promotion, marketing, and improvement of our products and services'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      plans: [suno.free]
+      tier: bad
+      reason: 'Songs made on the free plan belong to Suno, and you may use them only for yourself, never to earn money, even if you subscribe later.'
+      sources:
+        - url: https://help.suno.com/en/articles/2416769
+          quote: 'If you are using the free version of Suno (our Basic tier), we retain ownership of the songs you generate, but you are allowed to use those songs for non-commercial purposes'
+        - url: https://suno.com/terms
+          quote: 'If you are a user of the free or basic tier of the Service then you covenant and agree that you will only use such Outputs for your lawful, personal and non-commercial purposes.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of the service without notice and owes you nothing for it. Yearly plans sold with unlimited downloads got monthly limits, with cancelling as the only option.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'Suno reserves the right to modify, suspend or discontinue, temporarily or permanently, the Service (or any part thereof) with or without notice.'
+        - url: https://help.suno.com/en/articles/13614785
+          quote: 'I paid for an annual plan that included unlimited downloads. What are my options?'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It may close accounts that aren’t used for a long time, with their songs, without saying how long or that it warns you.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'You acknowledge that Suno reserves the right to terminate accounts (and all of their corresponding Submissions and Output) that are inactive for an extended period of time.'
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may not copy, change or take apart its apps, with no exception for what the law allows.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'You agree not to copy, modify, create a derivative work of, reverse engineer, reverse assemble, or otherwise attempt to discover any source code, sell, assign, sublicense, or otherwise transfer any right in the Software.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://suno.com/terms]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms make you responsible for your account and allow only one free account, but don’t say whether you may share it.'
+      pages: [https://suno.com/terms]
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre set no limits on devices. (How many songs you can download is graded under taking your data with you.)'
+      pages:
+        - https://suno.com/terms
+        - https://help.suno.com/en/articles/13876865
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says it uses reasonable security, with no outside audit and no way named to report a security problem.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'While we have implemented commercially reasonable security measures and safeguards intended to protect your personal information, no measures are impenetrable and we cannot guarantee “perfect security”.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you do on its site and apps for analytics. You can only turn off analytics cookies, browser by browser.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'Please be advised that such tracking will apply across your use of our Services, whether accessed through web, mobile app, or otherwise.'
+        - url: https://suno.com/cookie-policy
+          quote: 'You may grant or withdraw consent by category (Functional, Analytics, Social Media, Advertising).'
+      action:
+        name: 'Its cookie choices'
+        url: https://suno.com/cookie-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your data, but advertising partners’ cookies collect it for their own use. You can say no only per browser or with a privacy signal.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'We do not sell your information to third parties.'
+        - url: https://suno.com/cookie-policy
+          quote: 'Third-Party Cookies are set by our partners and service providers, and other advertising, analytics, and social media partners listed in our Cookie List. We do not control how these third parties use the data they collect.'
+        - url: https://suno.com/cookie-policy
+          quote: 'If your browser sends a GPC signal, we will automatically treat it as a request to opt out of targeted advertising and the sale/sharing of your personal information.'
+      action:
+        name: 'Its cookie choices'
+        url: https://suno.com/cookie-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Suno shows no ads in its apps, but its advertising cookies follow you to show you its ads elsewhere. Your choice is per browser and may need setting again.'
+      sources:
+        - url: https://suno.com/cookie-policy
+          quote: 'Advertising & Retargeting: These Cookies collect information about your browsing activities to understand your interests for marketing purposes.'
+        - url: https://suno.com/cookie-policy
+          quote: 'If you delete, block, or otherwise restrict Cookies, or if you use a different device or internet browser, you may need to renew your preferences again.'
+      action:
+        name: 'Its cookie choices'
+        url: https://suno.com/cookie-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you upload and make, your voice recordings included, trains its AI, and no setting turns that off.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'We use certain User Activity Information, Submissions, Interactive Chat Information, and other Content to improve our Services, product offerings, promotional activity, and business, including to train and enhance the models that power our Services'
+        - url: https://help.suno.com/en/articles/9709569
+          quote: 'Dataset sources: Suno’s generative AI models are trained on user Content'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'It may watch, edit or remove what you make, and studies it for its own trends, with no way to stop it. (Training is graded under AI training.)'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'We use certain User Account Information, User Activity Information, Interactive Chat Information, and Content to monitor and analyze trends, usage and activities in connection with our Services'
+        - url: https://suno.com/terms
+          quote: 'We may, but have no obligation to, monitor the Content or your Voice Model'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it. Voice data is deleted at most three years after you last use Suno.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'We retain your information for as long as is reasonably necessary for the purposes specified in this Privacy Notice.'
+        - url: https://suno.com/privacy
+          quote: 'To the extent we process your biometric information in connection with the Services, we will retain this data for no longer than three (3) years following your last interaction with us, except as required otherwise by applicable law.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account and songs yourself in its app, or ask it to delete your data; it says only “within a reasonable period of time”.'
+      sources:
+        - url: https://help.suno.com/en/articles/3480577
+          quote: 'Deleting an account is a permanent action. Songs and any personal details will not be recoverable.'
+        - url: https://suno.com/privacy
+          quote: 'We will comply with your request within a reasonable period of time; however, in certain circumstances, we may not be able or required to delete all of your information.'
+      action:
+        name: 'How to delete your account'
+        url: https://help.suno.com/en/articles/3480577
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: poor
+      reason: 'You can take only some of your songs with you: 20, 60 or 120 downloads a month on a paid plan, and none on Free unless you buy them.'
+      sources:
+        - url: https://help.suno.com/en/articles/13876865
+          quote: 'Pro plan subscribers will receive 20 download credits per month.'
+        - url: https://help.suno.com/en/articles/13614785
+          quote: "Free accounts no longer include trial downloads (0 downloads), so you'll need to upgrade to download songs to your device."
+      action:
+        name: 'How downloads work'
+        url: https://help.suno.com/en/articles/13876865
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      regions: [EU, GB]
+      tier: neutral
+      reason: 'In Europe and the UK you can also ask it to send your data in an easy-to-read file to another company, and it answers within a month.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'Portability: You have the right to request that we transfer your data in an easily readable format to another company.'
+        - url: https://suno.com/privacy
+          quote: 'We will respond to requests to exercise these rights without undue delay and at least within one month'
+      action:
+        name: 'Its privacy notice'
+        url: https://suno.com/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over data when the law or a government request requires it, or to protect people and its rights. It doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'comply with any applicable legal obligation, including applicable law, regulation, legal process or governmental request, including to meet national security requirements'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is kept mostly in the US, and may go to other countries; for Europe and the UK it uses approved countries or legal safeguards.'
+      sources:
+        - url: https://suno.com/privacy
+          quote: 'Suno is based in the United States, and we generally store your information on servers located in the United States.'
+        - url: https://suno.com/privacy
+          quote: 'we will only transfer personal data outside the EEA and/or UK to countries which have been found to have an adequate level of protection for personal data'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'There’s no plain email sign-up: you sign in with your Apple, Discord, Facebook, Google or Microsoft account, or with a phone number that gets a code.'
+      sources:
+        - url: https://help.suno.com/en/articles/2553409
+          quote: 'Instead, we use Single Sign On (SSO) with connected logins from Apple, Discord, Facebook, Google, and Microsoft.'
+        - url: https://help.suno.com/en/articles/3134401
+          quote: 'Suno has two primary login methods; Sign in via Phone Number, or SSO (Single Sign On)'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Your own voice only
+      tier: good
+      reason: 'Its voice models may copy only your own voice, so nobody can make a Suno voice model of yours.'
+      sources:
+        - url: https://suno.com/terms
+          quote: 'You agree that you can only create a Voice Model resembling your own voice.'
+        - url: https://suno.com/terms
+          quote: 'We reserve the right to remove your Voice Model at any time if we determine in our sole discretion it is not your own voice.'
+      lastVerified: 2026-11-17
