@@ -1,0 +1,701 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada and with a plain fetch
+# (curl) of the same pages, which purevpn.com serves whole except its transparency report and member sign-in (read in
+# Edge): its pricing page (its 2-year, 1-year and monthly views, and the order summary each card's button fills, read
+# without typing anything), its Subscription Renewal Prices page, the Black Friday order page (/order), the family plan
+# page (/family-plan/order), its about, trust center, servers, features, download, password manager, no-log assessment,
+# vulnerability disclosure policy, cookies, transparency report and reseller program pages, its terms of service, privacy
+# policy and refund policy, 33 help articles (support.purevpn.com/en_US/..., Helpjuice), and its blog posts on audits
+# (Altius IT, KPMG, the fourth no-log assessment), RAM-only servers and the September 2025 Linux security advisory; the
+# pricing page again through US, UK, German, Australian and Dutch exits.
+# Pricing: the Subscription Renewal Prices page ("The prices shown on this page are in US dollars (before taxes)."): each
+# plan's "1-month", "1-year", "2-year" and "5-year" renewal price. The monthly cards say "No Discount" and their order
+# summary charges the same ("Monthly plan ($15.95/mo)"); the yearly cards are first-term offers ("Billed $143.40 $47.95 on
+# purchase" for 16 months of Standard, which renews at $57.95), and the 2-year and 5-year deals (27 and 63 months first)
+# renew yearly ("Billed $815.85 $93.87 for 63 months, then auto-renews at $47.95 annually"), so only monthly and yearly
+# prices are stored, the yearly one the 1-year plan's renewal (notes.md: the 2-year and 5-year deals renew at $47.95,
+# $69.95 and $84.95 a year instead). The same US-dollar prices from Canada and through US, UK, German, Australian and Dutch
+# exits, and the German checkout added VAT to them in dollars: one list for everyone (GLOBAL USD). No price includes tax:
+# "we’ll add the sales tax that applies in the country you selected" (the renewal page).
+# Region checklist for CA and US, 2026-11-19: 1. its language paths (/de/, /es/, /fr/...) and Eng(CA) change only the
+# language; 2. a language menu only; 3. its page data holds US-dollar prices (and euro, pound and krone figures no page
+# shows); 4. the order summary, typing nothing: "$15.95", and the family checkout's "Payments are charged in USD."; 5. its
+# renewal page names US dollars; 6. Edge and a plain fetch from Canada, and Edge through US, UK, German, Australian and
+# Dutch exits: all the same; 7. no bill offered.
+# Its individual plans: Standard, Plus and Max (the pricing page), and the family plans Duo (2 members) and Family (5
+# members), each its own account. PureVPN for Teams, PureDome and white-label VPN are for businesses, out of scope.
+# Add-ons (Dedicated IP, Port Forwarding, Dedicated IP + Port Forwarding, Dedicated Server, Residential Network, Multi
+# Login) aren't stored: their prices change with the plan's length ("Dedicated IP" $5.99 a month on the monthly view,
+# $2.99 on the 2-year family view, "Starting from $2.49/mo" on the servers page) and no page gives their renewal price
+# (notes.md).
+# Bundles: none; Max includes eSIM data from Truely (a perk) and the password manager (Plus and Max), its own.
+# Official resellers: none named: its "VPN Resellers Program" is for businesses selling its service under their own
+# accounts, and its pages name no shop. App stores bill its mobile plans (partners, not listed).
+# Free use: none (below); a 7-day trial turns into the paid plan chosen.
+# Owner: GZ Systems Limited (its terms), "a part of PureSquare" (its press room). Private: no page names a listing.
+
+id: purevpn
+name: PureVPN
+aliases: [pure vpn]
+website: https://www.purevpn.com
+category: vpn
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling auto-recurring payments in the Member Area (app store purchases are cancelled in the
+# store: How to cancel recurring payment from Google Play Store and iOS App Store).
+cancelUrl: https://support.purevpn.com/en_US/billing/how-to-cancel-auto-recurring-payments
+sources: { pricing: https://www.purevpn.com/pricing }
+# Accepted cards, read 2026-11-19 in its payment article (updated July 10th, 2026). Its older payment processors table
+# (February 16th, 2026) also lists Discover; the newer article is taken.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex]
+    url: https://support.purevpn.com/en_US/billing/how-to-pay-for-purevpn-subscription
+    quotes:
+      - PureVPN accepts Visa, Mastercard, Amex, Virtual card.
+# Ways to pay (M11.5), read 2026-11-19: its payment article (cards, PayPal, Paymentwall's local methods, which is `other`,
+# and Coinpayment's crypto), the family checkout's Google Pay and Apple Pay buttons, its app store cancelling article,
+# and its payment processors table (Alipay, iDeal and other local methods, through Paymentwall). Card and PayPal payments
+# renew by themselves; Paymentwall and Coinpayment renewals are paid by hand ("Payments Payment wall and Coin payment are
+# non-recurring so you need to pay the renewal invoice manually from your Member Area .").
+paymentMethods:
+  - methods: [card, paypal, other, crypto]
+    page: 'How to pay for PureVPN Subscription'
+    url: https://support.purevpn.com/en_US/billing/how-to-pay-for-purevpn-subscription
+    quotes:
+      - PureVPN accepts Visa, Mastercard, Amex, Virtual card.
+      - Paypal is one of the commonly used payment processor. PureVPN accept payment from PayPal.
+      - PureVPN supports multiple methods through the platform Paymentwall, so you may proceed to purchase the subscription with the easiest available option.
+      - PureVPN accepts Bitcoin and other digital currencies via Coinpayment.
+  - methods: [google-pay, apple-pay]
+    page: 'Family plan'
+    url: https://www.purevpn.com/family-plan/order
+    quotes:
+      - Pay for your purchase through Google Pay
+      - Pay for your purchase through Apple Pay
+  - methods: [app-store]
+    page: 'How to cancel recurring payment from Google Play Store and iOS App Store'
+    url: https://support.purevpn.com/en_US/subscription-faqs/how-to-cancel-recurring-payment-from-google-play-store-and-ios-app-store
+    quotes:
+      - 'Play Store: check this Google Play support article about subscription cancellation.'
+      - 'App Store: Check this Apple support article about subscription cancellation.'
+  - methods: [alipay, bank-transfer]
+    page: 'Payment Processors: Refundable & Non-Refundable'
+    url: https://support.purevpn.com/en_US/subscription-faqs/payment-processors-refundable-non-refundable
+    quotes:
+      - Alipay
+      - iDeal
+# Renewal day (M11.5), read 2026-11-19: plans "renew automatically at full price" at "the end of your chosen plan term",
+# and its terms define the billing cycle by "the day when your account will expire"; no page says which day a renewal is
+# charged on, so not-stated.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.purevpn.com/subscription-renewal-plan
+    - https://www.purevpn.com/term.php
+    - https://support.purevpn.com/en_US/billing/how-to-renew-a-purevpn-account
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19 in its terms of service, which name the company and its country. Its press room calls
+# PureVPN "a leading consumer VPN service and a part of PureSquare", the group its co-founder Uzair Gadit runs as CEO
+# (its fourth no-log assessment post). Private: no page names a listing.
+owner:
+  name: GZ Systems Limited
+  page:
+    name: Terms of Service
+    url: https://www.purevpn.com/term.php
+  quotes:
+    - 'The Services are owned and operated by GZ Systems Limited (“Company”), doing business as ‘PureVPN’™, a British Virgin Islands limited liability company with a principal place of business located at Intershore Chambers P.O Box 4342, Road Town, Tortola, British Virgin Islands.'
+  country:
+    code: VG
+  lastVerified: 2026-11-19
+notes: >-
+  One price list in US dollars everywhere, plus sales tax or VAT. The 1-year, 2-year and 5-year deals are first terms:
+  the 1-year plan then renews yearly at the price stored, and the 2-year and 5-year deals renew yearly too, Standard and
+  Max for less ($47.95 and $84.95). Duo and Family give 2 or 5 people their own accounts.
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-19: none. Its pricing page sells only paid plans, its Windows
+# page says "PureVPN gives you the full Windows experience from the start" rather than a free plan, and its 7-day trial
+# renews into the plan chosen ("At the end of your trial, your subscription will automatically renew").
+freeUse:
+  kind: none
+  pages:
+    - https://www.purevpn.com/pricing
+    - https://www.purevpn.com/download/windows-vpn
+    - https://www.purevpn.com/refund-policy.php
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: its footer's apps (Mac, Windows, Linux, iPhone, Huawei, Android, Chrome,
+# Firefox and Edge extensions, Android TV, Firestick TV, Apple TV, routers). Sign-in: an email and password, "Sign in with
+# Apple" and "Sign in with Google" (its sign-in page), and two-factor codes by email ("Click Send One Time Code .", How to
+# set up two-factor authentication). Support: "24/7 Live chat is here" (pricing page) and email (help@purevpn.com, its
+# help articles). App languages: its site's language menu (Deutsch, Türkçe, Italiano, Español, Dansk, Português,
+# Русский, Polski, Nederlands, ไทย, Svenska, 한국어, Suomi, العربية, Français, 中文, 日本語 and English; no Hindi). Closed
+# source: "our proprietary VPN Software" (its terms). No pause, no parental controls.
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password, email-code, sso]
+  support.channels: [chat, email, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+  software.open-source: proprietary
+
+# Perks (M11.6): Max's eSIM data, which its terms call "a value-added feature included in the PureVPN Max subscription
+# package" (the Black Friday order page lists "eSIM (3GB for 30 days)" under every card, but its terms and privacy policy
+# say Max, and the pricing page's cards don't list it for Standard or Plus).
+perks:
+  - id: esim
+    name: eSIM (3GB for 30 days)
+
+# VPN features, read 2026-11-19, the same on every plan:
+# - Devices: "PureVPN offers the convenience of connecting up to 10 devices concurrently using a single account" (How
+#   many devices); each Duo and Family member "can connect to PureVPN on up to 10 devices at the same time".
+# - Data: "PureVPN does not put any cap on bandwidth or data usage per user; however, the use of the Service is subject
+#   to fair usage." (terms), so unlimited, with the fair-use rule as a notable term below.
+# - Countries: "Access 6,000+ servers in 80+ locations across 65+ countries." (servers page): 65.
+# - Protocols: "WireGuard, OpenVPN, and IKEv2/IPSec are the modern options most people should consider first." (its
+#   protocols page), and "Connect to specialized servers (obfuscated, quantum-resistant)." (servers page): stealth.
+# - Kill switch on Windows, Mac and Linux, split tunnelling on Windows and Android (Learn about PureVPN features).
+# - Blocking: every card's "Tracker & Ad Blocker" (ads, trackers); no malware list is named.
+# - P2P: allowed on listed servers ("P2P/ File sharing is allowed with our service, but on the below mentioned shared
+#   servers/countries."), not in the US, UK, Canada or Australia.
+# - Port forwarding and dedicated IPs are paid add-ons, so not on the plans. No page offers multi-hop, Tor over VPN or
+#   connecting your own devices to each other (vpn.mesh false).
+# - No-logs and audits: its privacy policy's list of what it doesn't store; Altius IT's no-log audit, KPMG's ("KPMG
+#   Validates PureVPN No-Log Claims", updated October 24, 2020, with an always-on audit clause), and its fourth no-log
+#   assessment ("The assessment was performed on VPN servers and their supporting infrastructure, in different countries
+#   between February 16 and February 22, 2023."), its auditor named only as "Well known audit firm" on its pages: no-logs.
+#   No app or server security audit names an auditor or a report.
+# - Not RAM-only: "PureVPN relies on hard disk servers protected with full-disk encryption, strict access controls, and a
+#   verified no-logs policy" (its RAM-only servers guide).
+# - Not anonymous: sign-up asks for "Name.", "Email address.", "Password." and "Payment method." (privacy policy).
+# - Dark web monitoring on every plan: "We provide dark web monitoring services through SpyCloud to all PureVPN users and
+#   subscribers. Standard and Plus plan users can monitor their email address and view the count of breaches associated
+#   with this asset." (terms); Max adds phone, card, passport and ID numbers and breach details, and Data Removal (a
+#   discovery scan of data brokers and removal requests: footprint and removal). Duo and Family get "all the VPN
+#   features" (its family FAQ: the tracker and ad blocker too).
+# - Speeds (notes only): "Experience high-speed, reliable connections via 20 Gbps speeds." (servers page).
+# Plus and Max add the password manager ("Everything in Standard, with Password Manager"), read on its page: "Logins,
+# Credit Cards, Bank Accounts, Crypto Wallets, WiFi Passwords, Passports, Secure Notes" and "Check your passwords for
+# strength and vulnerability" (weak), with a "breach scanner that tells you if your passwords are exposed" (the pricing
+# page's Max section: breached). No page describes sharing. Categories (M11.3): Plus and Max are also password managers.
+plans:
+  - id: purevpn.standard
+    name: Standard
+    link: https://www.purevpn.com/pricing
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 65
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+    notes: 'The VPN on 10 devices at once, with its tracker and ad blocker and dark web monitoring of your email address (a count of breaches). The 1-year deal is a 16-month first term; the 2-year and 5-year deals renew at $47.95 a year.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 12.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 57.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/subscription-renewal-plan
+
+  - id: purevpn.plus
+    name: Plus
+    link: https://www.purevpn.com/pricing
+    categories: [vpn, passwords]
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 65
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+      password-manager: true
+      password-manager.item-types:
+        [login, credit-card, bank-account, crypto-wallet, wifi, passport, secure-note]
+      password-manager.health: [weak, breached]
+    notes: 'Standard with its password manager (Android, iOS, Windows, macOS and the web). The 2-year and 5-year deals renew at $69.95 a year, as the 1-year plan does.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 15.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 69.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/subscription-renewal-plan
+
+  - id: purevpn.max
+    name: Max
+    link: https://www.purevpn.com/pricing
+    categories: [vpn, passwords]
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 65
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+      security.data-exposure: [footprint, removal]
+      password-manager: true
+      password-manager.item-types:
+        [login, credit-card, bank-account, crypto-wallet, wifi, passport, secure-note]
+      password-manager.health: [weak, breached]
+    perks: [esim]
+    notes: 'Plus with Data Removal (requests to data brokers on your behalf) and fuller dark web monitoring (phone, card, passport and ID numbers, with breach details), and eSIM data from Truely. The 2-year and 5-year deals renew at $84.95 a year.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 19.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 89.95
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/subscription-renewal-plan
+
+  # The family plans (/family-plan/order): "For 2 members" and "For 5 members", each member with "a separate VPN
+  # account". Only the monthly cards ("No Discount", order summary "Monthly ($17.95/mo)") give a regular price: the 1-year
+  # and 2-year cards are deals (the 2-year Duo "$74.95" for 24 months) whose renewal price no page states (the renewal
+  # page lists Standard, Plus and Max only), so they aren't stored (notes.md).
+  - id: purevpn.duo
+    name: Duo
+    link: https://www.purevpn.com/family-plan/order
+    features:
+      account.users: 2
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 65
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+    notes: 'Two VPN accounts, each on up to 10 devices at once. Its 1-year and 2-year deals are first terms whose renewal price no page states. Add-ons such as a dedicated IP are only for the account that buys the plan.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 17.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/family-plan/order
+
+  - id: purevpn.family
+    name: Family
+    link: https://www.purevpn.com/family-plan/order
+    features:
+      account.users: 5
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 65
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.content-blocking: [ads, trackers]
+      vpn.p2p: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs]
+      vpn.ram-only-servers: false
+      vpn.mesh: false
+      security.dark-web-monitoring: true
+    notes: 'Five VPN accounts, each on up to 10 devices at once, added by a link the plan manager shares. Its 1-year and 2-year deals are first terms whose renewal price no page states.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 39.95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.purevpn.com/family-plan/order
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch (the transparency report in Edge): its terms of
+# service (effective 14 October 2016), privacy policy (last updated October 22, 2026), refund policy, cookies policy,
+# vulnerability disclosure policy, trust center, no-log assessment page, password manager page and help articles. Every
+# agreement a user accepts (the owner's rule, 2026-11-03): the checkout's line ("By proceeding with this purchase, you
+# agree to our Terms of service, Renewal Prices and Privacy Policy."), so the renewal page too; its terms name "an
+# end-user license agreement for the Software" but no page links one, so the terms' licence is rated; Max's eSIM is
+# under Truely's "Supplemental eSIM Terms", whose link in the terms is empty, and Truely's privacy policy (truely.com),
+# not read (notes.md); dark web monitoring runs through SpyCloud, whose own terms weren't read. Its privacy policy's
+# Partner Program Notice is for business partners only (no topic).
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.purevpn.com/term.php
+    - name: 'Privacy Policy'
+      url: https://www.purevpn.com/privacy-policy.php
+    - name: 'Refund Policy'
+      url: https://www.purevpn.com/refund-policy.php
+    - name: 'Cookies Policy'
+      url: https://www.purevpn.com/cookies
+    - name: 'Subscription Renewal Prices'
+      url: https://www.purevpn.com/subscription-renewal-plan
+    - name: 'Pricing'
+      url: https://www.purevpn.com/pricing
+    - name: 'Family plan'
+      url: https://www.purevpn.com/family-plan/order
+    - name: 'Password Manager'
+      url: https://www.purevpn.com/password-manager
+    - name: 'No-log assessment'
+      url: https://www.purevpn.com/no-log-assessment
+    - name: 'Trust Center'
+      url: https://www.purevpn.com/trust-center
+    - name: 'Transparency report'
+      url: https://www.purevpn.com/vpn-transparency-report
+    - name: 'Vulnerability disclosure policy'
+      url: https://www.purevpn.com/vulnerability-disclosure-policy
+    - name: 'Security advisory: Linux client'
+      url: https://www.purevpn.com/blog/security-advisory-linux-client-ipv6-leak-firewall-rule-reset/
+    - name: 'How to delete my PureVPN account'
+      url: https://support.purevpn.com/en_US/subscription-faqs/how-to-delete-my-purevpn-account
+    - name: 'How to cancel auto-recurring payments'
+      url: https://support.purevpn.com/en_US/billing/how-to-cancel-auto-recurring-payments
+    - name: 'Billing FAQs'
+      url: https://support.purevpn.com/en_US/billing-faqs/billing-faqs
+    - name: 'How many devices can be connected'
+      url: https://support.purevpn.com/en_US/subscription-faqs/how-many-devices-can-be-connected-to-purevpn-simultaneously
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It notes the day you connect and your internet provider’s name for support, and its website counts your visits with analytics cookies, which you can only block in your browser’s settings.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'ISP Tracking (ISP Name and Routes) – We do NOT track or store your personal IP or exact location.'
+        - url: https://www.purevpn.com/cookies
+          quote: 'Analyse how you use PureVPN.com'
+        - url: https://www.purevpn.com/cookies
+          quote: 'You are free to change the settings in your browser and deny every incoming Cookie.'
+      action:
+        name: 'How to change your cookie settings'
+        url: https://www.purevpn.com/cookies
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your data, but its apps use Meta’s pixel and its website lets ad networks place cookies to show you its ads elsewhere. You can only stop that in Meta’s settings or per browser.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'Facebook Pixel – Please visit Facebook’s Privacy Policy here . You can stop the use of your data for the purpose of displaying Facebook ads by clicking here .'
+        - url: https://www.purevpn.com/cookies
+          quote: 'This is achieved by empowering our partners to show you our ads and ads relevant to what we offer on third-party platforms.'
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'PureVPN neither stores any user data nor sells or rents it out to any third party.'
+      action:
+        name: 'How to change your cookie settings'
+        url: https://www.purevpn.com/cookies
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website uses remarketing cookies to follow you with its ads, and they’re on unless you block cookies in each browser.'
+      sources:
+        - url: https://www.purevpn.com/cookies
+          quote: 'To serve our advertising messages and offers'
+        - url: https://www.purevpn.com/cookies
+          quote: 'We have partnered with advertisers and have allowed their Cookies based on their stellar reputation and use of data.'
+      action:
+        name: 'How to change your cookie settings'
+        url: https://www.purevpn.com/cookies
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: "Its privacy policy and terms don't mention AI or training models."
+      pages: [https://www.purevpn.com/privacy-policy.php, https://www.purevpn.com/term.php]
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Its password manager locks your vault so only you can open it: PureVPN can’t see your passwords.'
+      sources:
+        - url: https://www.purevpn.com/password-manager
+          quote: 'Your data stays private – only you can access your passwords. We can’t see or retrieve any of your stored information.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your account details while you subscribe, and after that for its own business reasons with no time limit. A few things have set times, such as a dedicated IP (25 days) and data-removal details (30 days).'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'We retain this data until you remain our subscriber and actively use our App and Web App.'
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'NOTE: In the case of a Dedicated IP add-on purchase, a fixed and dedicated VPN IP is assigned to the user which remains in our records for 25 days after a subscription ends.'
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'For Data Broker Service and Removal, we delete or anonymise your details within 30 days after you stop using the feature or your subscription ends, whichever is earlier.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You email its support to have your account deleted. It doesn’t say how soon that happens.'
+      sources:
+        - url: https://support.purevpn.com/en_US/subscription-faqs/how-to-delete-my-purevpn-account
+          quote: 'In order to get your account deleted from our database please contact us on this email help@purevpn.com and our support team will get back to you and help you out accordingly.'
+      action:
+        name: 'How to delete your PureVPN account'
+        url: https://support.purevpn.com/en_US/subscription-faqs/how-to-delete-my-purevpn-account
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for the data it holds about you. In Europe it answers within 30 days.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'Right to Access: You can request access to the personal data we hold about you at any time.'
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'To exercise your rights under GDPR, please contact us at support@purevpn.com. We will respond to your request within 30 days.'
+      action:
+        name: 'How to ask for your data'
+        url: https://www.purevpn.com/privacy-policy.php
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It publishes how many requests it gets each quarter and keeps no activity logs to hand over. It doesn’t say it needs a court order or that it tells you.'
+      sources:
+        - url: https://www.purevpn.com/vpn-transparency-report
+          quote: 'We publish request volumes and explain how our no-logs policy shapes every response.'
+        - url: https://www.purevpn.com/no-log-assessment
+          quote: 'Although we receive numerous data requests each month, we have been unable to fulfill them due to our strict policy of not collecting or logging users’ online activity.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be kept on servers in many countries. Data leaving Europe goes under the EU’s standard contract terms.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'Our systems are spread across the globe, which means the stored data is traveling through servers in multiple locations which might or might not be in the customer’s country of residence.'
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'For transfer of personal data from the European Economic Area (EEA) to third countries we rely on Standard Contractual Clauses.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Signing up asks for your name, an email address, a password and a way to pay. No phone number.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'When you sign up with PureVPN, we will ask for the following information:'
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'No other information is collected or stored at signup.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You turn off renewal online in your account, after it asks why and warns you against leaving.'
+      sources:
+        - url: https://support.purevpn.com/en_US/billing/how-to-cancel-auto-recurring-payments
+          quote: 'You will be asked for the reason and then click continue cancellation.'
+        - url: https://support.purevpn.com/en_US/billing/how-to-cancel-auto-recurring-payments
+          quote: 'We strongly recommend against canceling your subscription if you value your online security.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get your money back within 31 days of first buying, by email. Renewals, crypto and app store payments aren’t refunded.'
+      sources:
+        - url: https://www.purevpn.com/refund-policy.php
+          quote: 'If you aren’t satisfied with PureVPN’s service for any reason whatsoever, then you can claim a refund within 31 days of your initial purchaser.'
+        - url: https://www.purevpn.com/refund-policy.php
+          quote: 'The 31-day refund policy does not apply to renewal payments.'
+        - url: https://www.purevpn.com/refund-policy.php
+          quote: 'However, please note that some payment methods including Coinpayment, Google Play Store and Apple App Store do not support the refund option.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It emails you before charging a new price, so you can turn off renewal first, but it doesn’t say how far ahead.'
+      sources:
+        - url: https://www.purevpn.com/subscription-renewal-plan
+          quote: 'Keep in mind that prices are subject to change; however, we will notify you via email before being charged.'
+        - url: https://www.purevpn.com/pricing
+          quote: 'We’ll notify you before any price changes take effect, and auto-renew can be turned off anytime in your member area.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'Its 7-day trial turns into the paid plan you picked unless you cancel first, with no reminder promised, and that first charge can’t be refunded.'
+      sources:
+        - url: https://www.purevpn.com/refund-policy.php
+          quote: 'At the end of your trial, your subscription will automatically renew, and you’ll be charged based on the plan you selected during sign-up.'
+        - url: https://www.purevpn.com/refund-policy.php
+          quote: 'Please note that trial-based renewals are non-refundable.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its plans renew by themselves, and its pages promise an email only before a price change, not before every renewal.'
+      pages: [https://www.purevpn.com/subscription-renewal-plan, https://www.purevpn.com/term.php]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: poor
+      reason: 'Its terms let it add new charges or fees at any time, and its checkout warns that payment provider fees may apply, without saying how much.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'To introduce new charges, fees, or other conditions for use of the Service or parts thereof at any time;'
+        - url: https://www.purevpn.com/family-plan/order
+          quote: 'Payment provider fees may apply.'
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: "You can upgrade in your account or through support, but its pages don't say whether you get credit for time you already paid for."
+      pages:
+        [
+          https://support.purevpn.com/en_US/billing-faqs/billing-faqs,
+          https://www.purevpn.com/term.php,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'A dispute goes to a private referee (an arbitrator) in the British Virgin Islands, not a court, with no way to opt out. Its terms say nothing about class actions.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'In the event that the dispute cannot be resolved, the Parties agree that it shall be resolved exclusively by binding arbitration in accordance with the substantive laws of the British Virgin Islands and shall be brought for arbitration in the British Virgin Islands.'
+      action:
+        name: 'Its dispute clause (its terms)'
+        url: https://www.purevpn.com/term.php
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms whenever it likes, and the changes count as soon as they’re posted. Using it afterwards means you accept them.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'To modify, add to, suspend, or delete these Terms of Service or other agreements, in whole or in part, at our sole discretion at any time, with such modifications, additions, or deletions being immediately effective upon their posting to the Website.'
+        - url: https://www.purevpn.com/term.php
+          quote: 'Using our Services, even after any change in Terms, will mean that you agree to these Terms.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account at any time, for any reason, and isn’t bound to warn you. Its terms promise no refund.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'We may, in our sole discretion, limit or cancel a User Account for any reason whatsoever.'
+        - url: https://www.purevpn.com/term.php
+          quote: 'In the event that we make a change to or cancel an Account, we may attempt to notify you by contacting the e-mail and/or billing address/phone number provided at the time your Account was created; however, the failure to do so shall not result in any liability'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-stated
+      reason: "Its terms and privacy policy don't say what rights it takes over what you keep in its password manager."
+      pages: [https://www.purevpn.com/term.php, https://www.purevpn.com/privacy-policy.php]
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop any part of the service, with or without warning, and you agree not to hold it responsible.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'If and when required, we may temporarily/permanently revise or discontinue all or any part of our Services, which might impact the way you use our Services, with or without notice.'
+        - url: https://www.purevpn.com/term.php
+          quote: 'You agree that you or any third party will not hold us liable for any such revision, suspension, or discontinuation.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: "Its terms and privacy policy don't say it closes accounts you haven't used."
+      pages: [https://www.purevpn.com/term.php, https://www.purevpn.com/privacy-policy.php]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its apps are for your own personal use, and its terms forbid taking them apart (reverse engineering) without saying where the law allows it.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'When you register for an individual Account with us, we grant you a limited, non-exclusive personal, non-transferable license to use our Services and proprietary software.'
+        - url: https://www.purevpn.com/term.php
+          quote: 'You may neither reverse-engineer, modify, reverse-compile or decompile, disassemble, or copy the features and functions of our Software, nor may you charge anyone to use our Software.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors check its no-logs setup, it holds ISO 27001, it pays for reported security bugs, and it published a Linux app problem in 2025. Its audit report is sent only to those who ask by email.'
+      sources:
+        - url: https://www.purevpn.com/trust-center
+          quote: 'We have achieved the prestigious ISO 27001 certification after rigorous audits, ensuring our commitment to following the industry’s best practices and policies to protect your online activities from cyberthreats, unauthorized access, and other vulnerabilities.'
+        - url: https://www.purevpn.com/vulnerability-disclosure-policy
+          quote: 'An amount of upto $1500/- will be rewarded, at PureVPN’s sole and absolute discretion, resonating with the severity of the reported vulnerability.'
+        - url: https://www.purevpn.com/blog/security-advisory-linux-client-ipv6-leak-firewall-rule-reset/
+          quote: 'We were recently alerted to two issues in our Linux clients.'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: neutral
+      reason: 'It keeps no record of the sites you visit, your IP address or when you connect, and auditors checked that. It does note the day you connected and your internet provider, for support.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'Day of connection (Date) – We do NOT track or store the time you connected to our services.'
+        - url: https://www.purevpn.com/no-log-assessment
+          quote: 'PureVPN does not log a user’s activities through the VPN after connecting to the VPN server'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms forbid two people sharing one account (a help article says otherwise). Its Duo and Family plans give each person an account of their own instead.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'It is strictly prohibited for users to distribute login information without our prior consent, and also for two people to share one Account;'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      tier: good
+      reason: 'Besides 10 devices connected at once, you may start up to 300 sessions a day; going over can get your account closed.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'Maximum allowed sessions are 300 per day, and exceeding this limit may result in permanent suspension or termination of your account, unless explicitly allowed by the company.'
+        - url: https://support.purevpn.com/en_US/subscription-faqs/how-many-devices-can-be-connected-to-purevpn-simultaneously
+          quote: 'You have the flexibility to install PureVPN on numerous devices, although you can only have 10 of them connected at the same time.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps update themselves, sometimes by force, and it says so. Its pages mention no other changes to your device.'
+      sources:
+        - url: https://www.purevpn.com/privacy-policy.php
+          quote: 'We would like to notify our Users that there are times when we force update our App and Web-App to the latest version to ensure that our users get the best experience.'
+        - url: https://www.purevpn.com/term.php
+          quote: 'You hereby allow our Software and its updates to be installed on your computer/smart device/entertainment system.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Unlimited data, with a fair-use rule
+      tier: poor
+      reason: 'It promises no data cap, but using far more than the average user for a long time breaks its fair-use rule, and it can suspend or close your account for that.'
+      sources:
+        - url: https://www.purevpn.com/term.php
+          quote: 'PureVPN does not put any cap on bandwidth or data usage per user; however, the use of the Service is subject to fair usage.'
+        - url: https://www.purevpn.com/term.php
+          quote: 'PureVPN reserves the right to temporarily suspend or permanently terminate users found involved in unfair usage of its services;'
+      lastVerified: 2026-11-19
