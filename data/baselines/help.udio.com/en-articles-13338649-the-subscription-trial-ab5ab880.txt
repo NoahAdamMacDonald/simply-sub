@@ -1,0 +1,56 @@
+url: https://help.udio.com/en/articles/13338649-the-subscription-trial
+method: fetch
+saved: 2026-11-19
+
+The subscription trial | Udio Help Center Skip to main content
+Update subscription or accountSee what's newCheck Udio site status
+Update subscription or accountSee what's newCheck Udio site status
+Search for articles...
+All Collections
+Subscriptions, credits, and billing
+The subscription trial
+The subscription trial
+Learn how a trial benefits and limitations
+January 9, 2026
+Table of contents
+All creators have the one-time option to initiate a free trial of Udio's Standard subscription.
+The basics about subscription trials
+Here are some things to know before starting a trial:
+Trials last for up to 7 days from the moment initiated.
+Trials are cancelable at udio.com/account.
+If not cancelled before the end of the 7 day period, the creator will be immediately charged the full price of an annual subscription unless they previously toggled the subscription period to monthly.
+​
+Each creator may initiate only one subscription trial total.
+The subscription trial is for a subset of the Standard subscription features; we do not currently offer a Pro subscription trial.
+During a subscription trial, these benefits & features are activated:
+Ability to create up to 6 songs at the same time.
+Access to the Voice Control feature
+Music and lyrics editing
+Song generations guided by audio uploads
+Ability to use existing songs as a style reference
+Option to upload custom cover art
+However, during a trial, the following are not available:
+Increased credit limit
+Ability to generate more than three 2-minute songs per day
+To immediately obtain the increased credit limit and remove the three-per-day 2-minute song limit...
+Creators on a subscription trial may choose to immediately change their trial to full subscription at udio.com/pricing. Upon doing so, Udio will then immediately initiate a Standard subscription on that start date, and charge the full annual fee (or monthly fee, if the Monthly tab was selected when initiating the trial).
+Example situation:
+Creator initiates a trial subscription on Feb 10, 2026
+On Feb 14, they initiate a full subscription online
+They are immediately charged the full price for an annual subscription (e.g., $96 + tax in the U.S.)
+Their increased monthly credit limit is effective immediately and cycles on March 14 (the date their full subscription started, not the date they started their trial).
+Their subscription will be renewed on Feb 10, 2027 and their card charged the then-listed-price for an annual subscription.
+The edge case: payment issues
+A number of payments-related issues can cause problems in the context of Udio subscriptions and trial subscriptions.
+If a payments attempt fails (e.g., insufficient funds, wrong address entered, etc.) the account will remain in a 'trial subscription' state for a few days and then revert back to the free tier.
+If a payment is pending approval from the bank, the account will remain in a 'trial subscription' state for a few days in that case as well. If the charge is approved in the meantime, the full subscription will be effective on that date and monthly credit limits will also cycle on that day of the month. If the charge is not approved within one week, then the account will revert back to the free tier.
+Related Articles
+Deleting your Udio account
+Credits and credit limits
+Changing or canceling your subscription
+iOS app
+Changes associated with the Universal Music Group ("UMG") partnership
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Table of contents
+Udio Help Center
+We run on Intercom

@@ -1,0 +1,86 @@
+url: https://help.runwayml.com/hc/en-us/articles/30657959470483-What-payment-methods-are-available
+method: fetch
+saved: 2026-11-19
+
+What payment methods are available? – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Subscription Management
+Billing
+What payment methods are available?
+Table of Contents
+Runway uses Stripe as its third-party billing provider, which offers the payment methods listed below. Which ones you can use depends on your location.
+The payment methods Runway accepts through Stripe are:
+Credit or debit card
+Amazon Pay
+Apple Pay
+Google Pay
+Stripe Instant Bank Payments (U.S. only)
+Alipay
+Cash App Pay
+WeChat Pay
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

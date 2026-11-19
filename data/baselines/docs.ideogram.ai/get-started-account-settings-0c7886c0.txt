@@ -1,0 +1,148 @@
+url: https://docs.ideogram.ai/get-started/account-settings
+method: fetch
+saved: 2026-11-19
+
+Account Settings | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Get Started
+Account Settings
+Account Settings
+Update your Ideogram display name, manage muted users, choose a theme or delete your account, and fix a display name that won't save. Copy page
+View as Markdown
+On this page Open Settings
+The Account tab
+What isn't in Settings
+Delete your account
+Theme
+Use the Account page in Settings to change your display name, manage muted users or delete your account. Your display name is separate from your fixed Username (@handle). Billing, team membership and developer access have their own pages, with availability based on your workspace and role.
+Open Settings
+Click your avatar at the bottom left of the sidebar to open the user menu.
+Click Settings.
+The Account tab opens first. Other pages depend on your workspace and role:
+Wallet & Billing manages personal or organization funding. In an Enterprise agreement, this page is called Billing. See Billing & Subscriptions.
+Plans shows subscriptions and credit options where available.
+Team shows the member roster. Everyone on a Team plan can view it; Enterprise and prepaid API workspaces limit it to owners and admins.
+Groups lets Enterprise owners and admins manage groups for collection sharing. See Enterprise Groups.
+API Overview and API Keys manage developer access. Usage appears for eligible organization managers, and Usage costs lists operation prices. See Ideogram API.
+In Ideogram Legacy, the API pages are separate; use their own navigation and workspace switcher. The Tour of the App explains the app layouts.
+The Account tab opens first.
+The Account tab
+Row What you can do
+Username See your @handle. You can't change it here.
+Display name Click Update display name and enter a new name of up to 50 characters.
+Muted users Click Manage muted users to see who you muted and Unmute them. Muted users don't show up in your feed or notifications.
+Delete account Remove your account and all its data. See below.
+Change your display name
+Open Settings on the Account tab.
+Next to Display name, click Update display name.
+Enter a new name of up to 50 characters.
+Select Update, or press Enter, to save. Cancel closes the form without saving your draft.
+The character counter shows the limit. Update stays disabled until the saved name has loaded, you have changed it, and the new value is within the limit. After saving, you'll see Your display name has been updated.
+If Couldn’t save your display name. Please try again. appears, the change has not been confirmed. Keep the form open, check the name and retry. Changing this field does not change the username shown above it.
+Mute someone
+Go to the person's profile or one of their images.
+Click Mute creator.
+They won't know you muted them. Muted users don't show up in your feed or notifications.
+Unmute someone
+Open Settings on the Account tab.
+Next to Muted users, click Manage muted users.
+Find the person and click Unmute.
+What isn't in Settings
+Settings has no fields for your email, password, profile picture or notification preferences. You can't change your profile picture. You sign in with the method you chose at sign-up, so there is no password to change for Google, Apple, Microsoft or SSO accounts. If you use email and forget your password, click Forgot password? on the sign-in screen.
+You can't change the email on your account, and support can't change it for you.
+Delete your account
+Deleting your account permanently removes all your generations and data. You can't undo it. This action applies to the signed-in account; it is not a way to remove only one image, collection or team membership. Use Library, Collections or Team for those narrower changes.
+Warning If you have a subscription, cancel it first. Deleting the account cancels it only at the end of your current subscription period.
+Open the Account tab
+Open Settings and stay on the Account tab.
+Start the deletion
+Under Delete account, click Delete account.
+Click Delete account.
+Confirm
+Read the warning.
+Type delete in the text box.
+Click Yes.
+Type delete, then click Yes.
+Ideogram signs you out a few seconds later. Deletion usually takes about 48 hours. In that time you can't sign up again with the same email. If the app instead shows Failed to delete account, please try again later, the deletion request did not complete successfully; retry later or contact support.
+Theme
+Pick light or dark mode from the user menu, not Settings:
+Click your avatar to open the user menu.
+Under Theme, choose System, Light or Dark.
+System follows your device's setting.
+PreviousSign In and AccountsNextCreate Images
+On this page
+Open Settings
+The Account tab
+What isn't in Settings
+Delete your account
+Theme

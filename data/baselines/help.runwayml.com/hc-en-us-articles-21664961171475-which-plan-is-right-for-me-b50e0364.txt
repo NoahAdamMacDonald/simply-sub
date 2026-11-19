@@ -1,0 +1,146 @@
+url: https://help.runwayml.com/hc/en-us/articles/21664961171475-Which-plan-is-right-for-me
+method: fetch
+saved: 2026-11-19
+
+Which plan is right for me? – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Subscription Management
+Which plan is right for me?
+Table of Contents
+Notice: Max is replacing Unlimited plan for high-generation
+creators.
+Max will be offered to all new subscribers starting
+May 29, 2026. If you're currently on Unlimited, you'll automatically
+be switched to Max on November 30th, 2026. Learn more about
+the
+Max plan and
+Unlimited plan switching to Max.
+Runway offers plans built around how much you create and who you create with. If you're still unsure after reviewing our Pricing page, use this guide to help you decide.
+You can change your plan at any time. Upgrades are prorated immediately, and downgrades apply the price difference to your next billing cycle.
+How many generations do you need each month?
+The biggest difference between between plans is how many credits you get each month. Find the description that matches how you create, and use the plan next to it as your starting point.
+If this sounds like you...
+Consider...
+I want to try a few things before I commit.
+Free
+I've outgrown Free and want to create more.
+Standard
+I create a few times a week and need more room to work.
+Pro
+I generate every day.
+Max
+My team is growing, and multiple people generate every day.
+Team
+My organization has 10 or more people generating every day.
+Enterprise
+What features matter most to you?
+Credit volume isn't the only thing that changes by plan. Model access, upscale, credit rollover and team collaboration vary too, and any one of them might matter more to you than raw generation count.
+If you need…
+Consider…
+Because…
+Access to all the latest models
+Pro and higher
+Pro and higher plans include access to every model. Max and higher sometimes get early access to new releases.
+4K video upscale
+Pro and higher
+Pro, Max and Team include unlimited 4K upscale, which matters for production-ready work.
+Unused credits to roll over
+Max and higher
+On Standard and Pro, unused monthly credits expire at the end of the month. On Max and Team, up to one month of unused credits carries over.
+To collaborate with a team
+Team and higher
+Team is built for collaboration, with multiple seats, shared comments, more projects and brand kits.
+To create and track paid ads
+Standard and higher
+Runway Ads is included on every paid plan. It connects to Meta, TikTok and Google Ads so Agent can create ad variations from what is already performing.
+Plan FAQs
+Can I change my Runway plan at any time?
+Yes, you can upgrade or downgrade your plan at any time. Upgrades are
+prorated, and downgrades will apply credits toward your next billing
+cycle.
+What happens to my credits if I upgrade mid-cycle?
+When you upgrade, your credits refresh immediately to match your new
+plan's allocation while considering the current cycle's spend, and you'll
+be charged the prorated difference. See
+How do credits work?
+for more information.
+Can I add collaborators to my workspace?
+Yes, but adding collaborators requires a Team plan or higher. The Team
+plan is built with collaboration in mind.
+Do credits rollover to the next month?
+Yes, rollover up to one month of unused credits on the Max plan and higher.
+What happens if I run out of credits and need more generations?
+Standard, Pro, Max and Team plans can purchase additional credits at
+any
+time from the
+Plan & Billing page.
+Credits cannot be purchased on a Free plan.
+If you find yourself purchasing credits often, you might consider upgrading
+to a plan that includes more.
+For Enterprise plans, contact your account team or get in touch with our sales team by submitting this form.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

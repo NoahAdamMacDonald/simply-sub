@@ -1,0 +1,246 @@
+url: https://help.runwayml.com/hc/en-us/articles/50205612565779-Managing-your-subscription
+method: fetch
+saved: 2026-11-19
+
+Managing your subscription – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Subscription Management
+Managing your subscription
+Table of Contents
+This article covers everything you need to know about managing your Runway subscription, including how to change or cancel your plan, how billing cycles work, how credits are allocated and refreshed, and how to find and understand your invoices.
+On an Enterprise plan? Subscription changes are managed through your Account
+Manager — visit
+Contacting Enterprise Support.
+Upgrading or downgrading your plan
+Upgrading your plan
+Upgrading your plan takes place on the
+Billing section
+of your
+Dashboard. See the links below for step-by-step instructions to upgrade
+your
+subscription.
+Free plan upgrades
+How do I upgrade or resubscribe to a paid subscription?
+Paid plan upgrades
+How do I upgrade from a lower plan to a higher plan?
+When you upgrade an existing paid plan mid-cycle, you pay only the time-adjusted
+difference — not the full cost of the new plan.
+Downgrading your plan
+To downgrade a plan, follow the plan update steps on the
+Plans and Billing
+page and select a lower-tier or free plan:
+Select your profile icon in the bottom-left corner
+Select Plans and Billing
+Under Subscription, select Change plan
+Toggle the Monthly or Annual tab
+of
+the
+plan to update the cadence
+Select the desired plan
+Select Continue
+Select Confirm
+When you downgrade to a plan mid-cycle — for example from annual
+to monthly, or from Max to Pro — the unused amount of your current plan
+is
+refunded automatically to the card you paid with.
+In a few cases the unused amount stays on your account as credit toward
+future
+payments instead, and our support team can help with a refund:
+You reduced the number of seats on a Team plan
+Your Enterprise plan is billed manually
+You signed up through an affiliate and are downgrading in your first
+billing period
+The plan you’re leaving was paid for with account credit (for example,
+a second downgrade in the same billing period)
+Switching between monthly and annual plans
+You may update the billing cadence at any point from the Plans and Billing page:
+Select your profile icon in the bottom-left corner
+Select Plans and Billing
+Under Subscription, select Change plan
+Toggle the Monthly or Annual tab of the desired plan to adjust the billing cadence
+Select desired plan
+Select Continue
+Select Confirm
+If I switch from Annual to Monthly, what happens to the difference of
+the
+payment I made?
+If you switch from an annual to a monthly plan, the remaining balance
+of
+the annual payment will be added to your account as an invoice credit
+balance.
+Future monthly subscriptions will automatically deduct from this credit
+balance until fully exhausted before charging the card on file.
+If you'd instead prefer a refund of this balance, please
+get in touch with our support.
+Why am I unable to switch plans?
+If payment hasn't completed yet, the transaction may show as "pending"
+for up to 24 hours. Wait, then try again and select monthly. Once the charge goes through, follow the steps above to switch
+to a monthly plan and receive a balance credit for the difference.
+If I switch from annual to monthly, what happens to the difference of the
+payment I made?
+The unused part of your annual payment is refunded automatically to the card
+you paid with as soon as you switch. The exceptions listed under
+Downgrading your plan apply —
+in those cases the amount stays on your account as credit and our support
+team can help.
+Managing your invoices
+Your subscription invoices and billing profile are on the Plans and Billing page. You can download past invoices there, and update the name, address and tax ID that appear on them from your billing profile.
+Select your profile icon in the bottom-left corner
+Select Plans and Billing
+Select Manage billing
+Select Wallet in the left-hand sidebar
+Under Billing profile, select Edit profile
+Update your details
+Select Save
+Updated invoices are available on the Plans and Billing page, under Invoices. Your payment methods are on the same Wallet page, under Payment methods. For the full walkthrough, see Updating your Runway Invoice.
+Adding a business name
+Enter your business name in the Name or
+Address Line 1 field.
+Downloading invoice history
+There's no bulk download option. Click Download next
+to each invoice individually on your billing page.
+Updating invoices on a Free plan
+Invoice editing is only available on paid accounts. Upgrade to a paid
+plan first, then update your details.
+iOS billing
+Payments made through the Runway iOS app are managed by Apple. To update
+billing info or download receipts, use
+Apple's payment settings guide.
+Understanding your billing cycle
+Your billing day is the date you first activated your plan. To find it:
+Go to your billing page
+Scroll to the Invoices section — your billing day matches the date on your last invoice
+Subscription renewal
+All subscriptions renew automatically until cancelled. Monthly plans
+renew on your billing day each month. Annual plans renew one year after
+initiation — your credits still reset monthly, but you won't be charged
+again until the following year.
+Monthly credits
+Plan credits reset within 24 hours of your billing day. On Max and Team,
+up to one month of unused credits rolls over; on Standard and Pro plans,
+unused credits
+don't carry over.
+Purchased credits
+Purchased credits never expire. They stay on your account until spent
+and aren't affected by your billing cycle. Generations always draw from
+monthly plan credits first — you can't manually choose which balance
+to use.
+Cancelling your plan
+You can cancel your plan at any time by downgrading to a Free plan. See the links below for step-by-step instructions based on how you originally subscribed, whether directly through Runway or through the Apple App Store.
+Runway Purchases
+How do I cancel my plan?
+iOS Purchases
+Billing for iOS
+After cancellation, you keep access to paid features until the end of your current billing cycle. The subscription will not renew.
+Note: If you only see Update subscription and Don't cancel subscription, your cancellation is already confirmed. The cancellation date is shown at the top of the Stripe confirmation page.
+What happens after cancellation?
+You keep access to paid features until the end of your billing cycle.
+Your assets and projects stay on your account unless you delete your
+account
+entirely.
+On the Free plan, you can't create new projects if you already have
+more
+than three.
+Purchased credits remain on your account — but your plan level determines
+feature availability (e.g., generations on the Free tier include
+watermarks
+regardless of when credits were purchased).
+Requesting a refund
+For subscription and payment refunds, see Requesting a refund for your plan or payment.
+FAQs
+Do credits roll over to the next month?
+It depends on your plan. On Standard, Pro and Unlimited, plan credits
+reset
+on your billing day and don't carry over. On Max and Team, up to one
+month
+of unused credits rolls over. Purchased credits never expire. See
+How do credits work?
+for the full breakdown.
+Can I subscribe for a set amount of time, like three months?
+Not currently. Runway doesn't offer custom subscription durations — you'll
+need to cancel manually when you're ready to stop.
+Can I change my plan at any time?
+Yes. If you upgrade, you pay only the difference for the rest of your billing cycle. If you downgrade, the unused amount of your current plan is refunded to your card. See Downgrading your plan for the few cases where it stays as account credit instead.
+What happens to my credits if I upgrade mid-cycle?
+Your credits update immediately to match your new plan's allocation,
+and
+you're charged the prorated difference.
+Can I cancel if my renewal payment failed?
+Yes. Select Cancel plan on your
+billing page,
+share
+any feedback, then confirm in Stripe. To keep your plan instead, select
+Update Payment Details and add a new card. See
+How do I cancel my plan?
+for the full steps.
+I cancelled but I'm still being charged. What happened?
+Make sure you completed all cancellation steps, including the final confirmation
+in Stripe. If your billing page only shows "Update subscription" and
+"Don't
+cancel subscription," your cancellation is already confirmed.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

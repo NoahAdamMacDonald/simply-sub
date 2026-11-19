@@ -1,0 +1,227 @@
+url: https://pika.art/faq
+method: fetch
+saved: 2026-11-19
+
+Pika FAQ: Free Plan, Credits, Refunds & Commercial Use
+Skip to main content
+AI Video
+AI Image
+AI Audio
+Pricing
+Enterprise
+Resources
+Developers
+LoginTry Pika
+Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+AI Video Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+AI Image Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+AI Audio Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Pricing
+Enterprise
+Resources Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+Developers
+Login
+Skip to questions Help Center
+Explore helpful articles, popular features and other frequently asked questions.
+Need a hand? Contact support
+Help CenterAbout Pika About Pika
+What is Pika? Pika is the creative platform that lets you create and edit videos, images, and sound using AI. It’s the companion to your wildest dreams and weirdest content ideas, with creative apps for everything from product photos to talking characters. Make something from scratch, transform what you already have, or finally give that raccoon a voice.
+How does Pika work? Choose an app for what you want to make, add a prompt or your own media, and generate. Our apps use Pika’s own models and models from other providers to turn your ideas into videos, images, and sound. Some apps choose the model for you. Others let you pick your favorite and adjust the settings.
+What’s the difference between an app and a model? An app is the tool you use for a creative task, like making a product photo or changing the lighting in a video. A model is the AI that creates the result. Start with the app for what you want to make, or explore the models if you have a favorite.
+Which models can I use? Pika includes video models such as Seedance 2.5, MiniMax H3, and Pika 2.5; image models such as GPT Image 2.5, Nano Banana 2.1, and Seedream; and audio models including Elevenlabs Multilingual, Pika Music, Pika Speech, Pika SFX, and Pika Soundtrack. The selection keeps growing, so explore the apps and model options on the site for what’s available now.
+Do you have an API? We do! The Pika API Club gives developers access to 100+ of the leading video, image, and audio models through one API, at previously impossible prices. Head there for documentation, access, and pricing. API billing is separate from the Pika product.
+Coming from the previous version of Pika?
+Do I need a new account or subscription? Nope! Use the same login you’ve always used. Your existing subscription carries over at the same plan and price. There’s no need to create another account or subscribe again.
+Where are my previous creations? Look for the OG Pika project to find creations already migrated from your paid account. If you can’t find it, check that you’re using the same sign-in method as before. Still need a hand? Contact support.
+Were my creations migrated from old.pika.art? Yes. old.pika.art has been retired, and creations from paid accounts were migrated to the new Pika. Look for the OG Pika project in your Library.
+Can I still use Pikaffects and Pikaframes? Yes! Open Pikaffects to turn a photo into an effect video, or Pikaframes to animate between still images with Pika 2.5. You’ll find them in the apps catalog. There’s still plenty of room for creative mayhem.
+Creating & Editing
+Where should I start? Head to Video Studio for video, Image Studio for images, or the audio apps for music, speech, and sound effects. Have a more specific need? Try Product Shot for studio-quality product photos, Swap Anything to change the subjects or background in a clip, or Pika Soundtrack to score anything to picture. These are just a few of the apps we have on offer.
+Can I choose the model myself? Indeed, you can! In apps with a model selector, you can choose the model you want to use. The available settings will depend on that model, including the references you can add, video length, resolution, and sound. Some apps take care of the model choice for you. You can also navigate specifically by model. You’ll find them at the bottom of each modality tab, or by typing them into the search bar.
+Can I use my own photos, videos, or audio? Absolutely. Upload your media into the app you’re using. Each app shows which files it accepts and any size or length limits. Depending on the app, you can use a photo as a reference, transform an existing video, or work with audio. That photo sitting in your camera roll might have a whole new life ahead of it.
+How do I make a video? Open Video Studio, describe what you want to see, and add references if you have them. Choose your model and settings, check the credit cost, and generate. Tell us who’s in the scene, what they’re doing, and how it should look. The more clearly you describe it, the more Pika has to work with.
+How long can my videos be, and what resolution can I choose? It depends on the app and model. Video Studio supports short clips and multi-shot videos up to 30 seconds with supported models. Check the length and resolution options in the app before generating. Need a few more seconds on the beginning or end of a clip? Bring it into the Extend Video app.
+How do I animate between images with Pikaframes? Open Pikaframes and add two to five still images in the order you want them to appear. Choose the timing and describe how you’d like one frame to turn into the next. Pika generates the motion between them.
+Can I edit a video I already have? Yes! Choose the app for the change you want:
+Swap Anything: change subjects, outfits, or settings using references.
+Motion Transfer: use a motion clip to animate a character from a photo.
+Camera Director: explore a different camera angle or move.
+Extend Video: generate what happens after your clip ends, or before it begins.
+Relight Media or Color Grade: change the lighting or overall look.
+Video Studio: describe the change you want to make and add references to facilitate it.
+Upload your clip into the app you’ve chosen, add your direction or references, and generate the new version.
+How do I use Pikaffects? Open Pikaffects, upload a photo, choose an effect, and generate. Pick your favorite and get a little weird with it.
+Can I create and edit still images too? You sure can. Use Image Studio to generate an image from a prompt or references, or Edit Image to change something in a photo you already have. Try Product Shot for product photos or Character Studio to create a character and character sheet you can use again.
+How do I keep using the same character or product? Save characters and elements in your Library, then use them as references in apps that support them. Character Studio helps you create different angles and expressions for your character, resulting in a character sheet that gives most models the information they need to maintain consistency. Tip: using the same references per clip or image helps keep their look consistent, though results can vary by model and generation.
+Can Pika make music, voiceovers, and sound effects? Yes! Use Music Studio for music, Speech Studio for voiceovers, and SFX Studio for sound effects. Describe what you want to hear, or type the words you want spoken, then choose your settings and generate.
+What’s Pika Soundtrack? Pika Soundtrack creates music, ambience, and sound effects to match the action in your video. Upload a clip and tell Pika what you have in mind, or let it work from the video. It’s honestly kind of magic.
+How can I get better results? Give Pika something specific to work with. Describe the subject, what happens, the setting, the lighting, and the style. For video, include the camera move: “a slow push toward a raccoon at a tiny desk” gives us more to work with than “cinematic raccoon.” Clear references help, too. Try changing one thing at a time as you refine the result.
+Where do my creations go? You’ll find your images, videos, and audio in your Library. Keep related work in projects and mark your favorites so they’re easy to find again. Open a creation to view or download it. If Reuse is available, you can bring its inputs into a new generation.
+Plans & Credits
+Can I use Pika without a subscription? Yes. The Free plan lets you buy credit packs without a monthly subscription. It doesn’t include a monthly credit allowance. Check Pricing for current plans and packs.
+What’s the difference between the plans? Between the Free, Starter, Creator, and Fancy plan, the differences lie in how many credits you get, how many generations you can run at once, and benefits like commercial use and priority queue access. Head to Pricing to find your fit.
+How many credits does a generation cost? That depends on the app, model, and settings. Longer videos, different resolutions, and other options can change the cost. Each app shows the estimated credit cost before you generate, so check it after choosing your settings.
+Can I buy more credits without changing my plan? Yes! Open Credits to buy a one-time top-up on any plan, including Free. Buying a pack doesn’t start a subscription or change your plan. And credits will carry over and expire 365 days after purchase.
+Do unused credits carry over? Monthly plan credits don’t carry over; they refresh each month, including on annual plans. Top-up credits carry over and expire 365 days after purchase.
+I subscribed on old.pika.art. Where is my plan? Your subscription carried over to the new Pika at the same price. Open Subscription to see it; Standard now appears as Starter and Pro as Creator.
+Pika credits also work with the new Pika MCP. The API is separate and doesn’t use your Pika credits.
+How do I change my plan? Open Subscription and choose Adjust plan. Upgrades apply immediately; downgrades take effect at the start of your next billing period. Review the amount and timing shown before confirming. If you subscribed through the iOS app, manage that subscription through Apple.
+How do I cancel my subscription? Go to Subscription, choose Adjust plan, and follow the cancellation option. Your plan stays active until the end of your current billing period, then moves to Free. Payments are non-refundable. If you subscribed through the iOS app, cancel through your Apple subscriptions.
+Will my subscription renew automatically? Yes. Paid subscriptions renew automatically on their billing schedule unless you cancel. You can check your plan and renewal details on the Subscription page.
+Can I get a refund? Subscription payments and credit packs are non-refundable. Cancelling stops your next renewal, and you can keep using your plan until the end of the period you’ve paid for. If a charge looks wrong, contact support so we can take a look.
+Where can I find my invoices or update my payment method? Open Subscription, find Payment methods, and choose Manage in Stripe. Your invoices are available in the billing portal’s Invoice History. For purchases made through Apple, use your Apple purchase and subscription settings.
+Your Account & Your Creations
+Can I use what I make commercially? If you’re on a paid subscription plan (Starter, Creator or Fancy), then yes! The Free plan doesn’t include commercial use. If you’ve kept a plan from the previous Pika, check the terms for that plan. You’ll also need the rights to use any material you upload, and the terms of the model you choose still apply. See our Terms of Service for the details.
+Will my downloads have a Pika watermark? Downloads on our current plans are watermark-free, including the Free Plan. Older files that already have a watermark will keep it; upgrading doesn’t change those files. Planning to use your creation commercially? Make sure your plan includes commercial use, too. Free plans don’t have commercial use, even when you purchase credit packs.
+Are my creations private? Pika may use your uploads and creations to operate and improve our services, including our models. If you use a third-party model, that provider’s data practices may also apply. Our Privacy Policy and Terms of Service explain exactly how your content is handled.
+My subscription or library is missing. What should I do? First, check how you signed in. Google and Apple sign-ins can lead to separate accounts, even with the same email address. Use the same method you used when you subscribed or created your work. If things still don’t look right, contact support and tell us which sign-in method you used.
+How do I delete my account? Contact support from the email address belonging to the account you want deleted. Account deletion is permanent, so download anything you want to keep first. If you only want to stop future subscription charges, cancel your plan instead.
+Tech Issues
+Why is my generation taking a while? Generation time varies by model, settings, and demand. Your job may also be waiting in a queue. Give it a little time and check Library for the result; refreshing repeatedly won’t move it along. If it seems stuck, contact support with the app or model, roughly when you started, and any error you see.
+A generation failed and I lost credits. What now? Let us take a look. Contact support with what you were making, when it happened, and any error or generation details you have. We’ll investigate the missing result and any credits charged.
+What if something else isn’t working? Try a private browser window first; a browser extension or cached page might be getting in the way. If the problem continues, send support the error message, a screenshot, your device and browser, and what you were doing when it happened. The more we know, the easier it is to help.
+What if my question isn’t answered here? Head to Help & Support, choose pika.art, and pick the topic closest to your question. If the answer there doesn’t solve it, use the contact option to tell us more. We’re here to help you get back to making things.
+Stay in the know
+Follow us and don't miss anything
+Product
+Video Apps
+Image Apps
+Audio Apps
+Pika MCP
+Pika for ChatGPT
+iOS app
+Pricing
+Enterprise
+Developers
+Pika API Club
+Enterprise API
+Company
+Research
+Blog
+Experiments
+Contact
+Referral Program
+Resources
+Help Center
+Support
+Terms
+Privacy
+Cookies
+DMCA
+Your Privacy Choices
+© 2026 Pika. All rights reserved.

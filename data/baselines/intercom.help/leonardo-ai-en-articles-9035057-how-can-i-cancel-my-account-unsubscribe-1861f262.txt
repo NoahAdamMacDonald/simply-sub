@@ -1,0 +1,37 @@
+url: https://intercom.help/leonardo-ai/en/articles/9035057-how-can-i-cancel-my-account-unsubscribe
+method: fetch
+saved: 2026-11-19
+
+How can I cancel my account (unsubscribe)? | Leonardo.Ai Help Center Skip to main content
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+API DocsContact Support English Deutsch 日本語 简体中文 Español English
+Search for articles...
+All Collections
+Account Management
+Manage Subscriptions, Invoices, Billing & Payment, and Refunds
+How can I cancel my account (unsubscribe)?
+How can I cancel my account (unsubscribe)?
+Here's how you can unsubscribe from your current plan
+Written by Nick Lee
+February 17, 2026
+Table of contents
+How can I cancel my subscription?
+You can cancel your Leonardo.Ai subscription at any time, simply Follow the below steps to cancel your subscription:
+Please note: When you cancel your subscription, it does not immediately end the subscription. Your subscription remains active until your next renewal date, and from this date your subscription will not be renewed going forward.
+Click the Settings icon in the bottom left side bar on the home page.
+Under Workspace Settings, Click Subscription and Billing (A).
+Under Your Plan, click Cancel Plan (B).
+A pop up will appear outlining the details of your cancellation. Click Proceed with Cancellation to finalise.
+What happens to my Tokens after I cancel my subscription?
+When you cancel your subscription, it does not immediately end the subscription - so you keep your current Tokens until your next renewal date, at which point any unused Tokens expire.
+How do I check if my subscription is cancelled?
+Click the Settings icon in the bottom left side bar on the home page.
+Under Workspace Settings, Click Subscription and Billing (A).
+If your subscription is cancelled, you will see a message "Your plan will change to Free on <CANCELLATION DATE>" - on this date your subscription will end.
+Related Articles
+Frequently Asked Questions
+Managing Billing and Invoices in Leonardo.Ai for Teams
+How do I subscribe to a paid plan, change or upgrade my subscription?
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Table of contents
+Unleash your creativity with the power of Leonardo.Ai

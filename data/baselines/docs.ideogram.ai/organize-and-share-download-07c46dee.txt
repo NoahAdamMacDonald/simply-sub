@@ -1,0 +1,160 @@
+url: https://docs.ideogram.ai/organize-and-share/download
+method: fetch
+saved: 2026-11-19
+
+Download | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Organize and Share
+Download
+Download
+Download Ideogram images as JPEG, PNG or WEBP, keep transparent backgrounds, choose original or upscaled sizes, and fix failed ZIP or collection downloads. Copy page
+View as Markdown
+On this page Download one image
+Quick download from the grid
+Download many at once
+Videos
+SVG assets
+In this topic: organize and share
+Use Ideogram's Download button rather than your browser's "Save image". The button lets you pick the file type and size, save a transparent PNG, or upscale an image as you download it.
+Download one image
+Open the image
+Open the image to see its asset page.
+Click Download
+Click Download in the action bar.
+Click Download at the top right.
+Pick a file type
+Pick a File type: JPEG, PNG or WEBP.
+Choose the file type.
+Pick a size
+Pick a Size: 1K, 2K, 4K or 8K. Each size shows its pixel dimensions and a tag:
+(Original size): the image as it was made.
+(Upscale): Ideogram upscales the image first, then downloads it.
+Each size shows its pixel dimensions and a tag.
+Download
+Click the button at the bottom of the menu.
+The menu lists the original size, any smaller sizes, and upscale sizes up to the largest that fits. A 2K image, for example, offers 1K, 2K (Original size), 4K and 8K. The button text changes with your choice:
+Button When
+Download You picked the original size or a smaller one.
+Upscale & download You picked an upscale size. This spends credits, and the button shows how many. See how credits work.
+Subscribe to download Your choice needs a paid plan.
+To control the upscaler yourself, use the Upscale app instead. It works without a plan if you've bought credits, while Upscale & download needs a paid plan. See Upscale.
+Free and paid accounts
+Option Without a paid plan With a paid plan
+JPEG at original size Yes Yes
+PNG or WEBP No, except transparent images (below) Yes
+Upscale sizes No Yes, for credits
+Starts on JPEG, original size PNG, original size
+Options you can't use show a crown icon. Click one to see plans. See Plans and Credits.
+Transparent images
+Images with a removed or transparent background are different. Anyone can download them as PNG at 1K, free. JPEG is turned off for them, because JPEG can't keep transparency. See Transparent Backgrounds and Remove Backgrounds and Objects.
+Quick download from the grid
+Tiles in Library show a Download icon, and the right-click menu has Download image. Both skip the menu. With a paid plan, the default is PNG at original size. Without one, the default is JPEG at original size, or a 1K PNG for a transparent result. Open the asset page's Download menu when you want to choose a different format or size.
+Download many at once
+Open Library
+Open Library → Generations or Uploads, or open a collection.
+Select items
+Select the items you want. See Library and Favorites.
+Click Download in the bar
+Click Download in the bar at the bottom.
+Click Download in the bar.
+Ideogram builds a ZIP file named ideogram-images-<date>.zip. Images come as PNG if you subscribe and JPEG if you don't.
+The ZIP also holds a CSV file with one row per item. It lists the file name, prompt, Magic Prompt text, aspect ratio, model, visibility, seed, style, color palette and a link to the asset.
+Bulk downloads have these limits:
+Library selections are limited to 250 items. Subscribed collection views can support larger direct selections; collection results that include sub-collections through attribute filters keep the 250-item limit. The selection bar shows when you reach the limit.
+A Library bulk download can include up to 50 videos. Select fewer videos if you reach that limit.
+If you see You already have bulk downloads in progress…, wait for one to finish before starting another.
+To download a whole collection, open its … menu and click Download.
+While a ZIP is being prepared
+A bulk or collection download needs time to build the ZIP. Preparing… and the download-progress indicator mean that preparation is still running; the file downloads when it is ready. You can move around the app while it is being prepared.
+If you see Download failed or Download timed out, try the download again. If the app asks you to wait before downloading the collection again, let that wait finish rather than repeatedly starting new attempts.
+Downloads in the iOS app
+Bulk image downloads in the iOS app save images to your photo album. Videos cannot be saved in bulk there: open each video and use its own Download button. The iOS app doesn't support collection downloads; use the web app for a collection ZIP.
+Videos
+Videos download as one MP4 file, named after the asset. There's no format or size choice. If a video is still being made, you'll see "Video is not available for download yet."
+SVG assets
+If an available app has already produced an SVG asset, Download saves that original .svg file directly. It does not use the JPEG/PNG/WEBP format and size menu described above.
+Choosing PNG, JPEG or WEBP for a regular generated image does not turn it into vector artwork. Those formats remain pixel images. SVG assets also do not support image-only actions such as Remix, Upscale or Remove BG; those actions require a regular image source.
+In this topic: organize and share
+Library and Favorites: find everything you made
+Collections: sort images into folders and share them with a team
+Download (this page): save files in the format and size you need
+Share and Publish: share a link or publish to the community
+Troubleshooting: fix common problems
+PreviousCollectionsNextShare and Publish
+On this page
+Download one image
+Quick download from the grid
+Download many at once
+Videos
+SVG assets
+In this topic: organize and share

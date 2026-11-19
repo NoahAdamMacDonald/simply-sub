@@ -1,0 +1,283 @@
+url: https://pika.art/support
+method: fetch
+saved: 2026-11-19
+
+Help & Support — Pika
+Skip to main content
+AI Video
+AI Image
+AI Audio
+Pricing
+Enterprise
+Resources
+Developers
+LoginTry Pika
+Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+AI Video Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+AI Image Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+AI Audio Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Pricing
+Enterprise
+Resources Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+Developers
+Login
+Help & Support
+Sorry you're stuck — let's sort it out. On this page, you'll find the same answer our team would write you, right now. If it doesn't help, we're right here.
+You can also try the Help Center
+Which product is this about?pika.art — Pika creation web What's going on?
+Billing and Credits
+Credits vary by feature, resolution and length — and your invoices are under Subscription → Payment methods → Manage in Stripe.
+Pika emails you a copy of the invoice for your subscription as soon as you subscribe. If it isn't in your inbox, check your spam folder.
+If you need to change details on an invoice, use the Update Information option — we can't edit invoices that have already been issued.
+Refunds: subscription payments and credit packs are non-refundable, and there is no refund for the unused part of a billing period.
+Credits: unused plan credits don't carry over; they refresh every month, on annual plans too. Top-up credits you buy separately carry over and expire 365 days after purchase.
+1Go to pika.art/subscription.
+2Find the Payment methods section.
+3Click Manage in Stripe to open the billing portal.
+4Scroll to Invoice History and click the payment you want to download.
+People usually ask these next
+It says I have no active subscription.
+Nearly always this means you are signed in to a different account from the one you subscribed with — a Google sign-in and an Apple sign-in on the same address are two separate accounts. Check which one you are in before writing to us.
+Can I get a refund?
+No. Subscription payments and credit packs are non-refundable. If you cancel, your plan stays active until the end of the period you have paid for.
+Will my unused credits carry over?
+Unused plan credits refresh every month; they don't carry over. Top-up credits you buy separately carry over and expire 365 days after purchase.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Cancel plan
+Subscription → Adjust plan → Downgrade to free → Cancel plan. You keep what you have already paid for until the period ends.
+To cancel a subscription purchased on the web, go to pika.art/subscription, select Adjust plan, choose Downgrade to free, then follow the steps and confirm with Cancel plan.
+If you subscribed on old.pika.art, your plan carried over. Standard now appears as Starter and Pro as Creator, and you cancel it the same way.
+If you can't find these controls, check that you're signed in to the account with the subscription. If you're still unsure, contact us below so we can help confirm your subscription status.
+If you subscribed through our iOS app, your subscription page shows Billed through the App Store. Manage or cancel it in the App Store instead: Manage in App Store on that page takes you there.
+After you cancel, your plan stays active until the end of the current payment cycle, then it won't renew automatically.
+If what you actually want is to delete your entire account, write to us again saying so — and make sure you're reaching us from the account in question.
+People usually ask these next
+Will I lose access right away?
+No. Cancelling stops the next renewal; your plan stays usable until the end of the cycle you've already paid for.
+What happens to my credits when I change plan?
+Your allowance becomes the new plan's allowance. Top-up credits you bought separately stay with you until they expire, 365 days after purchase.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Stuck generation
+Reload and check your library — most stuck generations have actually finished. If credits went missing, tell us.
+At busy times a generation can wait in the queue for a while. Refreshing the page or restarting the app won't speed a queued job up.
+If a generation seems stuck, give it a little time and check your library — it often finishes there. We'll flag persistent problems to the team, but we can't promise to chase down every slow generation.
+If credits were taken for a generation you never received, that one we can look into — tell us roughly when and what you were making.
+People usually ask these next
+I lost credits on a generation that never arrived.
+Tell us roughly when it happened and what you were making. We can see the generation from our side, and if it failed on ours we'll put the credits back.
+It's showing an error rather than hanging.
+Then pick Bug / error above instead — send the device and any error message and we can identify it much faster.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Bug / error
+Tell us where it happened and send a screenshot. Those two things identify almost every bug straight away.
+Sorry you hit a snag. To investigate, we mainly need two things: any error message you're seeing, and a screenshot of it.
+It also helps to know where it happened and what you were doing just before — there's a field for that below, and the message box for the rest.
+People usually ask these next
+It happens every time, not just once.
+That's the most useful kind of report — say so in your message. A bug that reproduces is one we can usually fix rather than chase.
+Is it just me?
+Sometimes it's a browser extension or a cached page. Try a private window first, and tell us if that fixed it — that's a real clue either way.
+Is there an official Pika app for iPhone?
+Yes — Pika - AI Video, published on the App Store by Mellis, Inc. There is no Android version. pika.art/download has the link and shows how to spot copycats.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Delete account
+A person handles deletion and confirms with you first. If you only want the charges to stop, cancelling does that and keeps your videos.
+If what you really want is to stop being charged, you don't need to delete your account — just cancel the plan (that's the Cancel plan topic) and keep your videos.
+Deleting an account is permanent and can't be undone. Everything created under it is lost, and it can't be recovered afterwards.
+Because it's permanent, a person handles it. To go ahead, write to us from the account you want deleted — we can only act on a request that comes from the account's own email.
+People usually ask these next
+Can I get my videos out first?
+We can't export your assets for you, so download anything you want to keep before you ask us to delete — once it's gone it's gone.
+What if I only want to stop paying?
+Then cancel the plan instead (see Cancel plan). Your account and videos stay, and you just won't be charged again.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Watermark
+Every current plan, including Free, exports without a watermark. Upgrading doesn't change videos you already made.
+Every current plan, including Free, has no watermark on your outputs.
+The Starter, Creator and Fancy plans include a commercial license. The Free plan doesn't grant commercial rights.
+Watermark removal and commercial terms only apply to videos created under a plan that includes those benefits. Anything you generated earlier with a watermark keeps it — upgrading doesn't reach back and change files you already made.
+People usually ask these next
+I upgraded but an old video still has a watermark.
+That's expected — upgrading doesn't remove watermarks from videos you already made. Generate it again for a version without a watermark.
+Can I use my videos commercially?
+Commercial use is included on the Starter, Creator and Fancy plans. The Free plan doesn't grant commercial rights.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+API
+dev.pika.art has the docs and access. For volume or commercial terms, ask us below.
+Pika has an API for developers. Everything — documentation, keys and access — lives at dev.pika.art, so start there; it answers most integration questions directly.
+If your question isn't covered there — volume, rate limits or commercial terms — tick the box below and tell us what you're building, and we'll get it to the right people.
+People usually ask these next
+I'm getting errors from an endpoint.
+Tell us which endpoint and what came back — include the request if you can. It's usually identifiable straight away.
+I want to use Pika inside my own agent.
+Pika works inside ChatGPT, Claude, Codex, Claude Code and other agents, using your Pika credits. pika.art/mcp has the install steps for each. For Claude Code and Codex, the Pika plugin at github.com/Pika-Labs/pika-create-plugin also adds Pika's skills.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Security issue
+Straight to a person, never a bot. Describe what you found and please hold off posting it publicly.
+Thank you for telling us. Security reports go straight to a person — never handled automatically, never closed by a bot.
+Tick the box below and describe what you found. Include steps to reproduce it if you have them, and please do not post the details publicly before we have replied.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Something else
+Sign-in trouble is usually two accounts made by accident — Google and Apple on one address are two accounts.
+If your question is about billing, plans, watermarks, a stuck generation or a bug, pick that topic above — those answers are complete and faster than waiting for a reply.
+Two things land here often: sign-in trouble is nearly always two accounts made without meaning to, because a Google sign-in and an Apple sign-in on the same address are separate accounts. And credit costs differ by app, model and settings — each app shows its cost before you generate.
+If it is genuinely none of those, tick the box below and tell us in your own words.
+Where did you sign up?
+On the web In the iOS app
+People usually ask these next
+Are my videos private?
+How privacy works for what you generate is covered in the Privacy Policy. You can delete your own videos yourself at any time.
+I can't get back in — the password reset doesn't arrive.
+Check spam, then check whether you first signed in with Google or Apple rather than a password. If you're still stuck, tell us below which method you used.
+Read more in the Help Center →
+I still need help That didn't cover it? No problem — tick this and a real person will pick it up.
+Product
+Video Apps
+Image Apps
+Audio Apps
+Pika MCP
+Pika for ChatGPT
+iOS app
+Pricing
+Enterprise
+Developers
+Pika API Club
+Enterprise API
+Company
+Research
+Blog
+Experiments
+Contact
+Referral Program
+Resources
+Help Center
+Support
+Terms
+Privacy
+Cookies
+DMCA
+Your Privacy Choices
+© 2026 Pika. All rights reserved.

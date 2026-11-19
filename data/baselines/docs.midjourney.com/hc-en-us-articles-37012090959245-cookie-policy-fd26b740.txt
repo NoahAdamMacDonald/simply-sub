@@ -1,0 +1,59 @@
+url: https://docs.midjourney.com/hc/en-us/articles/37012090959245-Cookie-Policy
+method: browser
+saved: 2026-11-19
+
+Skip to main content
+Midjourney
+Midjourney
+Documentation
+Midjourney Policies
+Cookie Policy
+Last Updated: September 3, 2026
+This Cookie Policy explains how Midjourney, Inc. (“Midjourney”, “We”, “Us” or “Our”) uses cookies and similar technologies on the Site and Services (as defined in the Privacy Policy), and how a user (“You” or “Your”) can manage Your cookie preferences.
+Changes: We may update this Cookie Policy from time-to-time to reflect changes in legal, regulatory, operational requirements, Our practices, and other factors. Please check this Cookie Policy periodically for updates. Any such changes to this Cookie Policy will become effective when they are posted on this page. The “Last Updated” date at the top of this Cookie Policy will always indicate the most recent version. If any of the changes are unacceptable to You, you should cease interacting with Midjourney. When required under applicable law, We will notify You of any changes to this Cookie Policy.
+Cookies and Similar Technologies
+Cookies are small text files that may be placed on your device when you interact with certain websites and services. They are widely used to support key website functions like logging-in, remembering your account preference, and enhancing user experience. In this policy, we use the term “cookies” to also include similar technologies like web beacons and embedded scripts that help Us automatically collect certain Usage Data (as defined in the Privacy Policy).
+Types of Cookies
+Midjourney uses the following types of cookies:
+Essential Cookies: These types of cookies are necessary for the Site and Services to function properly. They help enable core features like secure login, session management, and navigation. Because these cookies are required for use of certain features and functionalities, they are always active and cannot be disabled.
+Analytics Cookies: These cookies help Us understand how visitors interact with Our Site and Services, such as which pages are most popular or which features are the most engaging. This information helps Us improve performance and usability of Our Site and Services.
+Advertising Cookies: These types of cookies are used to measure the effectiveness of Our marketing campaigns and help deliver relevant content and advertisement to users. These cookies may be set by Us through Our Site or Service or by Our advertising partners.
+Source Cookie Name Category Duration Purpose
+First Party __Host-Midjourney.AuthUserTokenV3_i Essential 30 days User Authentication
+First Party __Host-Midjourney.AuthUserTokenV3_r Essential 30 days User Authentication
+First Party AMP_437c42b22c Analytics 1 year Site Analytics
+First Party AMP_MKTG_437c42b22c Analytics 1 year Site Analytics
+Google _gcl_au Advertising Standard Google Durations Targeted Marketing
+Facebook _fbp Advertising Standard Meta Durations Targeted Marketing
+Stripe __stripe_mid Essential 1 year Payment Processing & Fraud Prevention
+Stripe __stripe_sid Essential 30 mins Payment Processing & Fraud Prevention
+Cloudflare cf_clearance, __cf_bm, _cfuvid Essential Managed by Cloudflare Security
+Managing your Cookie Preferences
+You can manage your cookie preferences at any time through the Privacy Settings page. There, You can choose which types of cookies to allow or disable. Please note that essential cookies cannot be disabled, as they are required for the Site and Services to operate.
+Most web browsers provide settings that let you control or block cookies. You can usually configure your browser to notify you when a cookie is being set, or to automatically disable or delete cookies. We also honor Global Privacy Control signals as valid opt-out requests. Please note that disabling cookies, especially essential cookies, means that certain features of Our Site and Services may not function properly. For more details about cookies and how to manage them across different browsers, please visit allaboutcookies.org.
+In this article
+Cookies and Similar Technologies
+Types of Cookies
+Managing your Cookie Preferences
+Documentation
+Getting Started
+Prompting Basics
+Using Your Own Images
+Using the Website
+Midjourney Controls
+Using Discord
+Midjourney Policies
+Terms of Service
+Community Guidelines
+Privacy Policy
+Cookie Policy
+Midjourney Trademark Policy
+Data Deletion and Privacy FAQ
+Purchase Order Terms and Conditions
+AB2013 Documentation
+Public Summary of Training Content
+Content Authenticity
+Billing Support
+Midjourney Website
+Midjourney Discord Server
+Return to top

@@ -1,0 +1,127 @@
+url: https://help.runwayml.com/hc/en-us/articles/24343363554067-Requesting-a-refund-for-your-plan-or-payment
+method: fetch
+saved: 2026-11-19
+
+Requesting a refund for your plan or payment – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Subscription Management
+Billing
+Requesting a refund for your plan or payment
+Table of Contents
+This article outlines common questions regarding our refund policies. Please also review the refunds section in our Terms of Use.
+When can I request a refund?
+In our discretion, we may provide a refund upon request under the following circumstances:
+You purchased or renewed your subscription within the last 30 days, and since the time of initial purchase or renewal, your subscription to the Services is unused, or close to unused (as determined by Runway in its discretion). The plan will be terminated as soon as the refund is initiated.
+You made a purchase of credits within the past 30 days, and the credits have not yet been used.
+You purchased credits by mistake, such as the wrong quantity, within the past 30 days, and the credits have not yet been used. These follow the same refund process as other credit purchases.
+You signed up for a different plan than what you intended, such as choosing annual instead of monthly, in which case you can switch to the correct plan and receive a refund for the difference.
+To switch an annual plan to monthly before requesting the difference as a refund, see What do I do if I accidentally selected a yearly plan instead of monthly?
+When is a refund not available?
+We generally can’t issue a refund if any of these apply:
+You’ve used your plan since you purchased or renewed it, so it’s no longer unused or close to unused (for example, you’ve generated videos or images)
+You’ve used some or all of the credits you purchased
+Your purchase was made more than 30 days ago
+The reason for your request is that you’re unhappy with your generation results
+Your account was suspended for a Usage Policy violation and your appeal was denied
+You made your purchase through the Apple App Store or Google Play, where Apple or Google handles refunds
+What if I’m unhappy with my generation results?
+Refunds are based on whether your plan or credits were used, not on satisfaction with the results. Each generation that uses credits is charged when it runs, even if the output isn’t what you expected, and credits are only returned automatically when a generation ends in a generation error.
+To learn when credits are returned, see Can I have credits refunded? For help getting closer to the result you want, see Introduction to Prompting.
+How can I request a refund?
+The quickest way to request a refund is through the AI assistant. It checks your eligibility right away and, if you qualify for an automatic refund, processes it. Anything that needs a closer look gets passed to our support team.
+Support is available from the help icon on the Plans and Billing page.
+Select your profile icon in the bottom-left corner
+Select Plans and Billing
+Select the help ( ) icon
+For more on how support works, see Getting Help with your Runway Account.
+What should I include in a refund request?
+If you contact us by email instead of through the AI assistant, we need to find your account and confirm the purchase before we can refund it. Here’s what to include:
+Write from the email address on your Runway account, if you can.
+Attach your Runway invoice or receipt. This is what we generally prefer, and you can find it by searching your inbox for “Your receipt from Runway AI”.
+If you don’t have an invoice, include the card type, the last 4 digits of the card, the charge amount and the date of the charge. We use these to confirm you own the account and that the refund request is valid.
+Without one of these, we will not be able to locate your account and can’t issue a refund.
+What happens if a refund request is reviewed?
+Refund requests the AI assistant can’t approve automatically go to our support team, which applies the same criteria: a plan or credit purchase made in the last 30 days that hasn’t been used. Our support team works Monday through Friday, and you can typically expect a reply within three business days.
+If a refund request doesn’t meet those criteria, submitting it again or asking to speak with a person won’t change the outcome.
+What if I purchased through Apple or Google Play?
+Both mobile app stores main their own payments ecosystem that our web payment processor does not have access to, so we are unable to manually initiate a refund for you and do not have control over authorization of one.
+To request a refund for a purchase made in either system, please see the external resources below:
+iOS — Request a refund for apps or content that you bought from Apple
+Google Play — Request a Google Play refund
+What else should I know about refunds?
+Service fees
+While we presently don't charge any service fees on our end, any service fees charged by a payment provider, your banking provider, or any other third party are not controlled by us; thus, we are not able to choose whether these are refunded.
+Alipay payments
+Our payment processor can only return a refund to Alipay within 90 days of the original payment. If you paid with Alipay more than 90 days ago and your refund is approved, the amount is added to your account balance instead. For details, see Can I get a refund if I paid with Alipay?
+Account suspensions
+If your suspension appeal is denied, your plan will be canceled and you will not receive a refund. You will no longer be able to access your account or assets. For more information, please review our Usage Policy.
+Credit refunds
+For more information on credit refunds, please see Can I have credits refunded?
+Account downgrades
+In the event that a refund is granted, the feature access included with the previous plan, including any unused plan credits, is immediately lost and the account is downgraded to free.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

@@ -1,0 +1,137 @@
+url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions
+method: fetch
+saved: 2026-11-19
+
+Billing & Subscriptions | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions Cancelling Your Subscription
+Renewals and Billing Cycles
+Refunds
+Switching or Downgrading Plans
+Invoices, Receipts, and Tax Details
+Troubleshooting Billing Issues
+Subscriptions Through the iOS App
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Plans and Billing
+Billing & Subscriptions
+Billing & Subscriptions
+Find the right Ideogram billing controls for subscriptions, pay-as-you-go credits and organizations, including payment methods, invoices and access errors. Copy page
+View as Markdown
+On this page Organization billing
+Which control changes which payment?
+Why can't I open billing?
+In this topic: plans and billing
+You manage your subscription from Wallet & Billing. Click your avatar at the bottom of the sidebar, then click Wallet & Billing. You can also go to Settings → Wallet & Billing. These pages cover how to cancel, upgrade or downgrade, find invoices, and fix problems such as a failed payment or a double charge.
+Open the user menu and click Wallet & Billing.
+To manage your own plan, switch to your Personal workspace first. On a seat-based Team plan, the owner manages the team's billing. Enterprise and prepaid organization billing is available to owners and admins. Ordinary members ask their organization's billing manager for help.
+In a personal workspace, the page has three parts:
+Plan card: your plan, its price and your renewal date. Upgrade plan opens the plans. For a web subscription, Manage plan & billing opens its billing portal, where you cancel, change your payment method and update billing details. Without a subscription, Manage billing opens your wallet's billing portal after payment setup.
+Credit balance: your credits, with Add credits and auto recharge. See Buying Extra Credits.
+Invoice history: every charge. Click ⋮ at the end of a row to download its invoice.
+The plan card, Credit balance and Invoice history on Wallet & Billing.
+To change plans, go to Settings → Plans.
+Organization billing
+Switch to the organization before opening billing:
+Team plan: the owner sees the Team plan card and Manage billing. Credits are managed per member.
+Enterprise Prepaid: owners and admins manage the shared wallet and organization invoices. See Enterprise Prepaid.
+Enterprise agreement: owners and admins see Billing and the organization's invoices. Contact your billing owner or support to change agreed terms or arrange invoicing.
+In Ideogram Legacy's API page, Billing page follows the selected API workspace. It may offer Credits, Billing Information and Invoices tabs. Use Billing Information → Manage via Stripe for the payment method or Add tax information for tax details, when those actions are available.
+See Invoices, Receipts, and Tax Details for the controls in each layout.
+Which control changes which payment?
+Manage plan & billing manages a personal subscription and its payment method.
+Add credits makes a wallet purchase. Saving a payment method first doesn't itself buy the credits.
+Manage auto recharge changes wallet top-ups. Use Turn off auto recharge to stop those automatic top-ups.
+Plans changes your subscription tier or billing frequency where supported.
+A pay-as-you-go or prepaid wallet doesn't have a subscription renewal date. Its balance and auto recharge settings are the relevant funding controls. See Buying Extra Credits.
+Why can't I open billing?
+Plan managed in the App Store directs you to Apple. A complimentary subscription can show Unable to access billing with You're currently on a complimentary subscription; contact support for help with that account's plan.
+Loading billing… is a loading state. If it changes to Please try again to load billing, use Try again. A loading failure isn't a confirmation that a subscription ended or a payment failed. Also check the selected workspace and your role before looking for organization billing controls.
+From here you can:
+Cancel your subscription, or undo a cancellation
+Check your renewal date and billing cycle
+Switch to a different plan
+Download invoices and add tax details
+Update your payment method
+Note Your subscription belongs to the account you were signed in to when you subscribed. If you sign in another way (Google instead of Apple, say, or a different email), you are in a different account and won't see your subscription there. See Troubleshooting Billing Issues.
+If you subscribed through the iOS app, manage the subscription in the App Store instead. See Subscriptions Through the iOS App.
+For what each plan includes, see Plans and Credits. Ideogram doesn't offer refunds; see Refunds.
+In this topic: plans and billing
+Plans and Credits: compare plans and see how credits work
+Buying Extra Credits: top up when you run low
+Team Plan: share a plan and credits with a team
+Billing & Subscriptions (this page): manage payment, invoices and your plan
+Troubleshooting Billing Issues: fix payment and charge problems
+PreviousBuying Extra CreditsNextCancelling Your Subscription
+On this page
+Organization billing
+Which control changes which payment?
+Why can't I open billing?
+In this topic: plans and billing

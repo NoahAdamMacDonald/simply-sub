@@ -1,0 +1,136 @@
+url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/switching-or-downgrading-plans
+method: fetch
+saved: 2026-11-19
+
+Switching or Downgrading Plans | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions Cancelling Your Subscription
+Renewals and Billing Cycles
+Refunds
+Switching or Downgrading Plans
+Invoices, Receipts, and Tax Details
+Troubleshooting Billing Issues
+Subscriptions Through the iOS App
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Plans and Billing
+Billing & Subscriptions
+Switching or Downgrading Plans
+Switching or Downgrading Plans
+Upgrade or downgrade your Ideogram plan, or switch between monthly and yearly billing, without cancelling. Upgrades apply now, downgrades at renewal. Copy page
+View as Markdown
+On this page How to switch plans
+Upgrades apply immediately
+Downgrades apply at your next renewal
+What if an upgrade quote or payment fails?
+Check the billing frequency before you confirm
+Changes that aren't self-serve
+You can move between Ideogram plans without cancelling and resubscribing. That covers upgrades, downgrades and moving between monthly and yearly billing.
+How to switch plans
+Go to Settings → Plans. Your plan is marked Current plan.
+Use the Monthly / Yearly toggle to pick your billing frequency.
+Click the button on the plan you want: Get Pro plan or Get Team plan to move up;
+Switch to yearly to move your plan to yearly billing;
+Downgrade to move down.
+Confirm in the dialog.
+To move to Free, cancel your subscription instead.
+Upgrades apply immediately
+When you upgrade, the confirmation dialog shows a prorated charge that is applied to your card right away. You pay the difference between the two plans for the days left in your billing period, and future renewals are billed at the new plan's full price. Your new benefits are available as soon as the purchase completes.
+Upgrades take effect immediately, with a prorated charge for the rest of the current period.
+Downgrades apply at your next renewal
+When you downgrade, the confirmation dialog compares your current plan's features against the lower plan's. Your current plan stays active until the end of the period you already paid for, with no refund or credit for the difference. On the renewal date, you switch to the lower plan and are billed at its price.
+The downgrade dialog shows what you'll lose and when the switch happens.
+Undo a pending downgrade
+While a downgrade is pending, the Plans page shows a banner with the switch date and a Keep button, and the lower plan's card shows Cancel downgrade.
+Go to Settings → Plans.
+Click Keep in the banner, or Cancel downgrade on the lower plan's card.
+You stay on your current plan.
+The app confirms Your pending downgrade has been cancelled after a successful undo. If you see Error cancelling downgrade, the request hasn't been confirmed; try again later and check whether the pending-change banner is still present.
+A pending downgrade can be undone from the banner or the plan card.
+Can I change a pending downgrade?
+If you choose another available lower plan while a downgrade is pending, the confirmation warns This will replace your pending downgrade. Review the destination plan, billing frequency, effective date and price before confirming. You're replacing a scheduled change, rather than stacking two future downgrades.
+What if an upgrade quote or payment fails?
+The upgrade dialog loads a current prorated quote before offering confirmation. If that preview can't load, the app shows Unable to upgrade plan and directs you to support. If payment fails after confirmation, the dialog says We couldn't process your payment.
+Check the plan shown in Settings before assuming a change completed. A successful upgrade can show Plan upgraded with the message Your upgraded plan is ready to use. For an error that remains unresolved, contact support with your account email, intended plan and billing frequency, and the message you saw.
+Check the billing frequency before you confirm
+Each plan is available with monthly or yearly billing, and the checkout shows both. Double-check that you selected the plan and the billing frequency you intended. For example, yearly Plus charges $180 at once, while monthly Plus charges $20. Ideogram doesn't offer refunds (see Refunds).
+Changes that aren't self-serve
+Yearly to monthly billing can't be changed from the Plans page; monthly plans show Not available while you're on a yearly plan. Contact [email protected].
+Team plans can't be downgraded to an individual plan (Plus, Pro, or the legacy Basic plan) from the billing screen. Contact [email protected].
+When you contact support, email from the address your Ideogram account is registered under so the team can find your subscription.
+For what each plan includes, see Plans and Credits and ideogram.ai/pricing.
+PreviousRefundsNextInvoices, Receipts, and Tax Details
+On this page
+How to switch plans
+Upgrades apply immediately
+Downgrades apply at your next renewal
+What if an upgrade quote or payment fails?
+Check the billing frequency before you confirm
+Changes that aren't self-serve

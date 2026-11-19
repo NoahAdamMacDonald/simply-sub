@@ -1,0 +1,28 @@
+url: https://help.suno.com/en/articles/2553409
+method: fetch
+saved: 2026-11-19
+
+I can't log in with my email address!
+Knowledge Base
+Make Music Now!
+How can we help?
+Results
+No results found
+More results
+We use cookies to analyze website traffic and help improve our visitor experience. Privacy Policy
+Reject
+Accept
+Home
+Accounts & Billing
+Troubleshooting
+I can't log in with my email address!
+Edited
+Suno accounts are most often connected to an email address, but we do not use the email/password format to sign up or sign in. Instead, we use Single Sign On (SSO) with connected logins from Apple, Discord, Facebook, Google, and Microsoft.
+If you have the same email to sign into Facebook and Google, for example, please use the method you selected during sign up!
+If you sign in and do not see your previous songs in your Library, there's a good chance you have more than one account. Contact our team at support@suno.com so we can help you navigate and recover your account details. We can also help you merge accounts if you have songs in two or more accounts!
+email
+login
+Cookie preferences
+Terms of ServicePrivacy PolicySuno on iOS
+Community GuidelinesBlogSuno on Android
+Leave us feedback

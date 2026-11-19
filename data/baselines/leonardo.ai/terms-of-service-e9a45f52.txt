@@ -1,0 +1,287 @@
+url: https://leonardo.ai/terms-of-service
+method: fetch
+saved: 2026-11-19
+
+Terms of Service | Leonardo.Ai
+Terms of Service
+Table of contents
+Our disclosures1. Engagement and Term2. Our Services3. Account4. Subscriptions5. Platform Licence6. Availability, Disruption and Downtime7. Disclaimer regarding Generative AI and Large Language Models8. Ownership of Inputs & Outputs9. Ownership of Services, Platform and Data10. Confidential Information and Personal Data11. Consumer Law Rights12. Liability13. Notice Regarding Apple14. Suspension and Termination15. General16. Definitions
+Welcome to Leonardo.Ai! We provide a cloud-based platform (Platform) where you can create images and videos by leveraging our generative AI, train your own AI models among many other things.
+In these Terms, when we say you or your, we mean both you and any entity you are authorised to represent (such as your employer). When we say we, us, or our, we mean Leonardo Interactive Pty Ltd T/A Leonardo.Ai (ACN 662 209 485).
+These Terms form our contract with you, and set out our obligations as a service provider and your obligations as a customer. You cannot use our Services unless you agree to these Terms.
+Some capitalised words in these Terms have defined meanings, and each time that word is used in these Terms it has the same meaning. You can find a list of the defined words and their meaning at the end of these Terms.
+For questions about these Terms, or to get in touch with us, please email: [email protected]
+These Terms were last updated on 19 January 2026.
+Our disclosures
+Please read these Terms carefully before you accept. We draw your attention to:
+our privacy policy and our data processing addendum (on our website) which each set out how we handle the Personal Data of our users and commercial customers (as applicable);
+clause 1.3 (Variations) which sets out how we may amend these Terms;
+clause 4 (Subscription) which sets out important information about your Subscription, including whether you can cancel your Subscription and whether your Subscription auto-renews; and
+clause 7 (Disclaimers regarding AI generated content and large language models) which sets out our disclaimers and things you should be aware of when using our Platform and Services.
+clause 12 (Liability) which sets out exclusions and limitations to our liability under these Terms.
+We may receive a benefit (which may include a referral fee or a commission) should you visit certain third party websites through a link on our Platform, or for featuring certain goods or services on our Platform.
+These Terms do not intend to limit your rights and remedies at law, including any of your Consumer Law Rights.
+1. Engagement and Term
+As a consumer, you will be entitled to a refund under the following circumstances:
+1.1 These Terms apply from when you sign up for an Account, until the date on which your Account is terminated in accordance with these Terms. We grant you a right to use our Services for this period of time only.
+1.2 You must be at least 13 years old (or the minimum legal age required to provide consent for processing of personal data in the country where the child is located). If you are under the age of 18, you must have obtained the consent of your parents or guardian or supervision of a responsible adult to use our Platform.
+1.3 Variations: We may amend these Terms at any time, by providing reasonable advance notice of any change to the Terms that, in our sole determination, materially adversely affect your rights or your use of the Service. By continuing to use our Platform after the notice or 30 days after notification (whichever date is earlier), you agree to the amended Terms. If you do not agree to the amendment, you may close your Account and cancel your Subscription with effect from the date of the change in these Terms by providing written notice to us. If you cancel your Subscription:
+(a) You will no longer be able to access our Services (including our Platform) on and from the date of cancellation;
+(b) If you have paid Subscription Fees upfront, you will be issued a pro-rata refund based on the portion of the Subscription Period remaining.
+2. Our Services
+2.1 We provide the following services to you:
+(a) Access to our Platform;
+(b) Access to our troubleshooting support (Support Services), (collectively, our Services).
+2.2 If you require Support Services, you may request these by getting in touch with us through our Platform.
+2.3 We will not be responsible for any other services unless expressly set out in these Terms or on our Platform.
+2.4 We may add, change or remove features or functionality to our Services; modify or introduce limitations to storage or other features; or discontinue our Services altogether at any time. If you are on a paid subscription and we discontinue the Service you are using during your subscription, we will migrate or make available to you a substantially similar service (if available) and if we’re unable to do so, we will provide you a pro-rata refund of fees prepaid for the remaining period of your subscription.
+2.5 Additional Services: If you require additional services, we may, in our sole discretion, provide such additional services (to be scoped and priced in a separate contract provided by us).
+2.6 Third Party Products or Services: Where you engage third parties to operate alongside our Services (for example, any third-party software systems you wish to integrate with our Platform), those third parties are independent of us and you are responsible for (meaning we will not be liable for) the goods or services they provide, unless we expressly agree otherwise under clause 2.5.
+3. Account
+3.1 You must sign up for an Account in order to access and use our Services and Platform.
+3.2 If you sign up for our Services using an email address associated with your employer or another organization (the “Admin Entity“), (i) you represent and warrant that you have the authority to bind the Admin Entity to these Terms; (ii) your use of our Services will bind your employer or the organization to these Terms; and (iii) “you” and “your” in these Terms will refer to both you and the Admin Entity. The account you create using an email address associated with an Admin Entity will be an Administered Account.
+3.3 If you’ve signed up for our Services using an Administered Account, at the Admin Entity’s request, we may:
+(a) Share your email address, name and account information with your Admin Entity;
+(b) Give control of the Administered Account to the Admin Entity.
+3.4 If your Administered Account is controlled by an Admin Entity, the Admin Entity’s admin may be able to access, transfer and control your Administered Account and all Content associated with it, as well as:
+(a) Make changes to the Administered Account settings;
+(b) Make changes to the permissions;
+(c) Delete the Administered Account.
+Where an Admin Entity has requested control of an existing Administered Account, we will make reasonable efforts to provide you with notice before your Admin Entity receives control over the Administered Account.
+3.5 Under a Teams Plan, you may invite Authorised Users to access and use our Services under your Account. Each of your Authorised Users will require a login (which is linked to your Account), in order to access and use our Platform. You are responsible for ensuring that your Authorised Users comply with these Terms. You may change who your Authorised Users are at any time through your Account, and what access rights or permissions they have when using our Platform. Any limitations on the number of Authorised Users you can have will be set out in your Account or on our Platform.
+3.6 While you have an Account with us, you agree to (and to ensure your Authorised Users agree to):
+(a) Keep your information up-to-date (and ensure it remains true, accurate and complete);
+(b) Keep usernames and passwords secure and confidential, and protect them from misuse or being stolen;
+(c) Notify us if you become aware of, or have reason to suspect, any unauthorised access to your Account or any logins linked to your Account.
+3.7 If you have not used your Account for an extended period of time (12 months or more of inactivity), we may close and permanently delete your Account. You acknowledge and agree that this means you will lose any Content you generated. We will notify you via the email address you provided when creating your Account prior to deleting your Account.
+4. Subscriptions
+4.1 Once you have created your Account, you may choose a Subscription. The Subscriptions we offer will be set out on our Platform, including details of each Subscription’s features and limitations, Subscription Fees and Subscription Periods.
+4.2 During the Subscription Period, you will be billed for the Subscription Fees on a recurring basis, as set out on our Platform (Billing Cycle).
+4.3 Your Subscription can be upgraded or downgraded at any time through your Account. Any upgrades to your Subscription will take effect immediately (and you will be charged the difference between your current Subscription and your new Subscription on a pro-rata basis). Any downgrades to your Subscription will take effect from the beginning of the next Billing Cycle.
+4.4 You will be billed for any Subscription Fees due at the beginning of each Billing Cycle. Our payment methods will be set out on our Platform. If you choose to pay your Subscription Fees using one of our third-party payment processors, you may need to accept their terms and conditions (if this is the case, these will be set out on our Platform).
+4.5 You must not pay, or attempt to pay, any Subscription Fees by fraudulent or unlawful means. If you make payment by debit or credit card, you must be the authorised card holder. If payment is made by direct debit, by providing your bank account details and accepting these Terms, you authorise our nominated third-party payment processor to debit your bank account in accordance with your chosen Subscription, and you confirm that you are either the holder or an authorised signatory of that bank account.
+4.6 Pausing your Subscription: You may pause your Subscription for a maximum period of three 3 months during each Subscription Period by notifying us through your Account (as set out in clause 15.8). While your Subscription is paused, neither you, nor your Authorised Users, will have access to the Services, and you will not be charged Subscription Fees for the period of suspension (calculated on a pro-rata basis).
+4.7 Cancellation: Your Subscription continues for the Subscription Period, and at the end of each Subscription Period, provided you have paid all Subscription Fees owing, your Subscription will be automatically renewed for the same Subscription Period. If you wish to cancel your Subscription, you may do so through your Account. Your cancellation will take effect at the end of your current Subscription Period, and your Subscription will not be renewed (meaning you will need to continue paying all Subscription Fees due up until your current Subscription Period ends).
+4.8 Late Payments: If any Subscription Fees are not paid on time, we may:
+(a) Suspend your access to our Services (including access to our Platform);
+(b) Charge interest on any overdue payments at a rate equal to the Reserve Bank of Australia’s cash rate, from time-to-time, plus 2% per annum, calculated daily and compounding monthly.
+4.9 Taxes: You are responsible for paying any levies or taxes associated with your use of our Services, for example sales taxes, value-added taxes or withholding taxes (unless we are required by law to collect these on your behalf).
+5. Platform Licence
+5.1 While you have an Account, we grant you and your Authorised Users a right to use our Platform (which may be suspended or revoked in accordance with these Terms). This right cannot be passed on or transferred to any other person and, if you have a Subscription, will also be subject to the conditions of your Subscription (as set out on our Platform or in your Account).
+5.2 You must not (and you must ensure that your Authorised Users do not):
+(a) Access or use our Platform in any way that is improper or breaches any laws, infringes any person’s rights (for example, intellectual property rights and privacy rights), or gives rise to any civil or criminal liability;
+(b) Interfere with or interrupt the supply of our Platform, or any other person’s access to or use of our Platform;
+(c) Introduce any viruses or other malicious software code into our Platform;
+(d) Use any unauthorised or modified version of our Platform, including but not limited to for the purpose of building similar or competitive software or for the purpose of obtaining unauthorised access to our Platform;
+(e) Attempt to access any data or log into any server or account that you are not expressly authorised to access;
+(f) Use our Platform in any way that involves service bureau use, outsourcing, renting, reselling, sublicensing, concurrent use of a single user login, or time-sharing;
+(g) Circumvent user authentication or security of any of our networks, accounts or hosts or those of any third party;
+(h) Access or use our Platform to transmit, publish or communicate material that is, defamatory, offensive, abusive, indecent, menacing, harassing or unwanted, including but not limited to:
+i. Using the Platform to transmit or publish any harassing, indecent, obscene, fraudulent, unlawful, or harmful material;
+ii. using the Platform to send unauthorised advertising, spam, or solicitation or to harvest, collect, or gather user data without the user’s express consent;
+iii. Generating content that includes impersonations of any real person or falsely portrays an individual in a misleading or defamatory way;
+iv. Generating content that includes depictions of sexual abuse, sexual violence, explicit pornography, or any form of non-consensual acts;
+v. Generating content that includes depictions of child nudity, child pornography, or any form of child exploitation;
+vi. Generating content that includes depictions of acts that involve non-consent, sexual or otherwise;
+vii. Generating content that includes depictions of animal cruelty or harm to animals, including acts of violence or torture;
+viii. Generating content that includes explicit depictions of gore or extreme violence;
+ix. Generating content that promotes or incites hatred, violence, discrimination, or harm based on race, ethnicity, religion, gender, sexual orientation, or any other protected characteristic;
+x. Generating content that intentionally endangers or threatens the safety, security, or well-being of any individual or group
+xi. Otherwise generating content that, in our sole discretion, is deemed unsuitable, obscene, offensive, or contrary to community standards and user expectations.
+5.3 Without limiting our rights under clause 14, if, in our sole determination, we identify excessive, unreasonable, or abusive product or feature usage patterns, we may impose reasonable limits (e.g. throttling or queuing) to ensure fair and equitable access and stability for other users.
+5.4 We may, from time-to-time, make Beta Services available on our Platform as part of the Service. You agree that use of any Beta Services will at all times be subject to your compliance with the Beta Services Terms.
+6. Availability, Disruption and Downtime
+6.1 While we strive to always make our Services available to you, we do not make any promises that these will be available 100% of the time. Our Services may be disrupted during certain periods, including, for example, as a result of scheduled or emergency maintenance.
+6.2 Our Services (including our Platform) may interact with, or be reliant on, products or services provided by third parties, such as cloud hosting service providers. To the maximum extent permitted by law, we are not liable for disruptions or downtime caused or contributed to by these third parties.
+6.3 We will try to provide you with reasonable notice, where possible, of any disruptions to your access to our Services.
+7. Disclaimer regarding Generative AI and Large Language Models
+7.1 Our Platform utilises generative AI and large language model technologies, which can produce content that may appear highly realistic or convincing, including text, images, audio, and video outputs (collectively, Generated Content). You acknowledge and agree that Generated Content may include deep fakes, misinformation, biases, or other potentially misleading or inaccurate information. You are solely responsible for evaluating and verifying the accuracy, reliability and legality of any Generated Content before relying on or using it for any purpose.
+7.2 Subject to your Consumer Law Rights, the Generated Content is provided “as is” without warranties of any kind, either expressed or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, title or non-infringement. We disclaim all liability for any errors, omissions, or inaccuracies in the Generated Content, any infringement on third party rights (including Intellectual Property Rights) and any damages or losses that may arise from your use or reliance on such content.
+8. Ownership of Inputs & Outputs
+8.1 You may be permitted to submit text, documents, images, videos or other inputs to our Service (Inputs) and receive output generated and returned by the Services based on the Inputs (Outputs). Inputs and Outputs are collectively referred to as Content.
+8.2 You are responsible for all Inputs you submit to our Services. By submitting Inputs to our Service, you represent, warrant and agree that you have all rights, licenses and permissions necessary for us to use and process the Inputs and to generate Outputs. You retain ownership of any Inputs.
+8.3 If you are on one of our paid Subscriptions (Paid Subscriber), as between the Parties, subject to your compliance with these Terms and to the extent permitted by law, ownership of all Intellectual Property Rights in any Content you, or your Authorised Users, create while using the Platform will vest in you upon creation. We hereby assign our right, title and interest in Content (if any) to you.
+8.4 Paid Subscribers can select whether Content is public or private. You acknowledge and agree that Content marked public (Public Content) will be available for use by all users on the Platform. Where you opt for Content to be private (Private Content), only you and your Authorised Users can access that Content.
+8.5 You grant us a non-exclusive, irrevocable, royalty-free, worldwide, non-sublicensable (other than to our related bodies corporate, and non-transferable right and licence to use any Private Content solely for the purpose of performing of our obligations or exercising our rights under these Terms. We will not use, retain, analyse, or process your Private Content for any other purpose, including training AI models or developing new products without your express written consent.
+8.6 You grant us a non-exclusive, irrevocable, perpetual, royalty-free, worldwide and transferable right and licence to use, reproduce, modify, copy, process, adapt, publish, transmit, create derivative works of, publicly display and distribute any Public Content for providing, maintaining, promoting and improving the Services, including training AI models, developing new offerings, or for any commercial purpose.
+8.7 If you are on one of our free Subscriptions (Free Subscriber), as between the Parties, ownership of all Intellectual Property Rights in any Output you, or your Authorised Users, create while using the Platform will vest in us upon creation, and to the extent that ownership of such Intellectual Property Rights does not automatically vest in us, you hereby assign your right, title and interest in the Output (if any) to us and agree to do all other things necessary to assure our title in such rights.
+8.8 If you (if you are an individual) or any of your personnel have any Moral Rights in any material provided, used or prepared in connection with these Terms, you agree to (and will procure that your personnel) consent to our use or infringement of those Moral Rights.
+8.9 Due to the nature of our technology, and artificial intelligence in general, outputs may not be unique, and other users may receive similar Outputs from the Services. Your ownership above does not extend to other users’ Outputs.
+9. Ownership of Services, Platform and Data
+9.1 We own all intellectual property rights in our Services (including our Platform). This includes how our Platform looks and functions, as well as our copyrighted works, trademarks, inventions, designs and other intellectual property, including Our Materials. You agree not to copy or otherwise misuse our intellectual property without our written permission (for example, to reverse engineer or discover the source code of our intellectual property), and you must not alter or remove any confidentiality, copyright or other ownership notice placed on our Platform. Nothing in these Terms constitutes a transfer or assignment of any Intellectual Property Rights in Our Materials.
+9.2 Notwithstanding anything else in these Terms, we will own all Intellectual Property Rights in any developments, modifications, enhancements or improvements to the Platform or Our Materials (Platform Developments). To the extent that any Platform Developments do not automatically vest in us by operation of law, you hereby assign all Intellectual Property Rights in such Platform Developments to us and agree to do all other things necessary to assure our title in such rights.
+9.3 We grant you a non-exclusive, revocable, royalty-free, worldwide, non-sublicensable and non-transferable right and licence, for the duration of the Subscription Period, to use Our Materials that we provide to you solely for your use and enjoyment of our Services, as contemplated by these Terms.
+9.4 We may use any feedback or suggestions that you give us in any manner which we see fit (for example, to develop new features), and no benefit will be owed to you as a result of any use by us of your feedback or suggestions.
+9.5 When you use our Services, we may create anonymised statistical data from your usage of our Services (for example, through aggregation). Once anonymised, we own that data and may use it for our own purposes, such as to provide and improve our Services, to develop new services or product offerings, to identify business trends, and for other uses we communicate to you. This may include making such anonymised data publicly available, provided it is not compiled using a sample size small enough to make your data or identity identifiable.
+10. Confidential Information and Personal Data
+10.1 While using our Services, you may share confidential information with us, and you may become aware of confidential information about us. You agree not to use our confidential information, and to take reasonable steps to protect our confidential information from being disclosed without our permission, and we agree to do the same for your confidential information. This also means making sure that any Authorised Users, employees, contractors, professional advisors or agents of ours or yours only have access to confidential information on a ‘need-to-know basis’ (in other words, the disclosure is absolutely necessary), and that they also agree to not misuse or disclose such confidential information.
+10.2 However, either you or we may share confidential information with legal or regulatory authorities if required by law to do so.
+10.3 If you are an individual user, we collect, use, transfer, disclose and store any personal Data you provide to us in accordance with our privacy policy, (available on our website), and Applicable Privacy Laws.
+10.4 If you are part of a subscription for multiple Authorised Users, or if you are accessing our Services using your Canva credentials associated with a Canva multi-seat team, then we collect, use, transfer, disclose and store certain Personal Data on your behalf as a data processor in connection with your use of our Services. In those cases, our Data Processing Addendum applies. Our Data Processing Addendum sets out the specific Personal Data we collect and processing operations we perform on your behalf as a processor and is incorporated into these Terms. In the event of any conflict between these Terms and the Data Processing Addendum, the Data Processing Addendum shall prevail. Any categories of Personal Data or processing operations that are not set out in our Data Processing Addendum will be processed and protected by us as a data controller subject to and in accordance with our Privacy Policy.
+10.5 You must only disclose Personal Data to us if you have the right to do so (such as having the individual’s express consent).
+10.6 We may need to disclose Personal Data to third parties, such as our related companies or our service providers (for example, IT and administrative service providers and our professional advisors).
+10.7 Where we are required by law to report on our activities, you acknowledge that from time to time we may request certain information from you in order to meet our requirements, and you agree to provide us with such information within the timeframes reasonably requested by us.
+11. Consumer Law Rights
+11.1 In some jurisdictions, you may have guarantees, rights or other remedies provided by law (Consumer Law Rights), and these Terms do not restrict your Consumer Law Rights. We will only be bound by your Consumer Law Rights and the express wording of these Terms.
+11.2 If you accept these Terms in Australia, nothing in these Terms should be interpreted to exclude, restrict or modify the application of, or any rights or remedies you may have under, any part of the Australian Consumer Law (as set out in Schedule 2 of the Competition and Consumer Act 2010 (Cth)). If our Platform is not ordinarily used for personal, household or domestic use, our liability for a breach of your Consumer Law Rights is limited to either resupplying our Services, or paying the cost of having our Services resupplied.
+12. Liability
+12.1 To the maximum extent permitted by law, we will not be liable for, and you release us from liability for, any Liability caused or contributed to by, arising from or in connection with:
+(a) Your computing environment (for example, your hardware, software, information technology and telecommunications services and systems);
+or
+(b) Any use of our Services by a person or entity other than you or your Authorised Users.
+12.2 Regardless of whatever else is stated in these Terms, to the maximum extent permitted by law:
+(a) Neither we or you are liable for any Consequential Loss;
+(b) A party’s liability for any Liability under these Terms will be reduced proportionately to the extent the relevant Liability was caused or contributed to by the actions (or inactions) of the other party, including any failure by the other party to mitigate its loss;
+(c) Where our Services are not ordinarily acquired for personal, domestic or household use or consumption) in respect of any failure by us to comply with relevant Consumer Law Rights, our Liability is limited (at our discretion) to supplying the Services again or paying the cost of having the Services supplied again; and
+(d) Our aggregate liability to you for any Liability arising from or in connection with these Terms will be limited to the amount of any Subscription Fees paid by you to us in respect of the supply of the relevant Services to which the Liability relates, or if you do not have a Subscription, to AU$1,000.
+13. Notice Regarding Apple
+13.1 To the extent that you are using or accessing our Platform on an iOS device through a mobile application from the Apple App Store, you further acknowledge and agree to the terms of this clause. You acknowledge that these Terms are between you and us only, not with Apple Inc. (Apple), and Apple is not responsible for our Platform and any content available on our Platform.
+13.2 Apple has no obligation to furnish you with any maintenance and support services with respect to our Platform.
+13.3 If our mobile application fails to conform to any applicable warranty, you may notify Apple and Apple will refund the purchase price of the mobile application to you. To the maximum extent permitted by applicable law, Apple will have no other warranty obligation whatsoever with respect to the mobile application and any other claims, losses, liabilities, damages, costs or expenses attributable to any failure to conform to any warranty will be our responsibility.
+13.4 Apple is not responsible for addressing any claims by you or any third party relating to our mobile application or your use of our mobile application, including but not limited to: (1) product liability claims; (2) any claim that our mobile application fails to conform to any applicable legal or regulatory requirement; and (3) claims arising under consumer protection or similar legislation.
+13.5 Apple is not responsible for the investigation, defence, settlement and discharge of any third-party claim that our mobile application infringes that third party’s intellectual property rights.
+13.6 You agree to comply with any applicable third-party terms when using our mobile application.
+13.7 Apple and Apple subsidiaries are third-party beneficiaries of these Terms, and upon your acceptance of these Terms, Apple will have the right (and will be deemed to have accepted the right) to enforce these Terms against you as a third-party beneficiary of these Terms.
+13.8 You hereby represent and warrant that: (1) you are not located in a country that is subject to a U.S. Government embargo, or that has been designated by the U.S. Government as a “terrorist supporting” country; and (2) you are not listed on any U.S. Government list of prohibited or restricted parties.
+14. Suspension and Termination
+14.1 We may suspend your access to our Services where:
+(a) We reasonably believe there has been any unauthorised access to or use of our Services (such as the unauthorised sharing of login details for our Platform);
+(b) You have transmitted or inputted to our Platform any Inputs that may be offensive, or any material in violation of any law;
+(c) You have otherwise breached clause 5.
+14.2 If we suspend your access to our Services, we will let you know within a reasonable time of doing so, and we will work with you to resolve the matter within 14 days, or if it cannot be resolved, then we may terminate your Account and your access to our Services will end.
+14.3 We may terminate these Terms (meaning you will lose access to our Services, including access to your Account, and any Subscription will be cancelled) if:
+(a) You fail to pay your Subscription Fees when they are due;
+(b) You or your Authorised Users breach these Terms and do not remedy that breach within 14 days of us notifying you of that breach. You acknowledge and agree that we may, in our sole discretion, immediately ban your or your Authorised Users if we believe, acting reasonably that you or your Authorised Users are in breach of clause 5 (Platform Licence) of these Terms;
+(c) You or your Authorised Users breach these Terms and that breach cannot be remedied;
+(d) You experience an insolvency event (including but not limited to bankruptcy, receivership, voluntary administration, liquidation, or entering into creditors’ schemes of arrangement).
+14.4 You may terminate these Terms if:
+(a) We breach these Terms and do not remedy that breach within 14 days of you notifying us of that breach;
+(b) We breach these Terms and that breach cannot be remedied, and if you have paid Subscription Fees upfront, you will be issued a pro-rata refund of any unused Subscription Fees based on the portion of the then-current Subscription Period remaining.
+14.5 You may also terminate these Terms at any time by notifying us through your Account or to our email for notices (as set out in clause 15.8), and if you have a Subscription, termination will take effect at the end of your current Subscription Period.
+14.6 Termination of these Terms will not affect any other rights or liabilities that we or you may have.
+15. General
+15.1 Assignment: You may not transfer or assign these Terms (including any benefits or obligations you have under these Terms) to any third party without our prior written consent. We may assign or transfer these Terms to a third party, or transfer any debt owed by you to us to a debt collector or other third party.
+15.2 Disputes: Neither we or you may commence court proceedings relating to any dispute, controversy or claim arising from, or in connection with, these Terms (including any question regarding its existence, validity or termination) (Dispute) unless we and you first meet (in good faith) to resolve the Dispute. Nothing in this clause will operate to prevent us or you from seeking urgent injunctive or equitable relief from a court of appropriate jurisdiction.
+If the Dispute is not resolved at that initial meeting:
+(a) Where you are resident or incorporated in Australia, refer the matter to mediation, administered by the Australian Disputes Centre in accordance with Australian Disputes Centre Guidelines for Commercial Mediation;
+(b) Where you are not resident or incorporated in Australia, refer the matter to arbitration administered by the Australian Centre for International Commercial Arbitration, with such arbitration to be conducted in Sydney, New South Wales, before one arbitrator, in English and in accordance with the ACICA Arbitration Rules.
+15.3 Governing law and Venue: These Terms are interpreted under and governed by the laws of New South Wales. Other than those matters subject to Section 15.2 above, any matter relating to these Terms is to be determined exclusively by the courts in New South Wales and any courts entitled to hear appeals from those courts.
+15.4 Events Outside Our Control: We will not be liable for any delay or failure to perform our obligations (including our Services), if such delay or failure is caused or contributed to by an event or circumstance beyond our reasonable control.
+15.5 Illegal Requests: We reserve the right to refuse any request for or in relation to our Services that we deem inappropriate, unethical, unreasonable, illegal or otherwise non-compliant with these Terms.
+15.6 Marketing: You agree that we may send you electronic communications about our products and services. You may opt-out at any time by using the unsubscribe function in our electronic communications.
+15.7 Nature of Legal Relationship: These Terms do not create, and should not be interpreted so as to create, a partnership, joint venture, employment or agency relationship between us and you.
+15.8 Notices: Any notice you send to us must be sent to the email set out at the beginning of these Terms. Any notice we send to you will be sent to the email address registered against your Account.
+15.9 Survival: Clauses 7 to 14 will survive the termination or expiry of these Terms.
+15.10 Third Party Sites: Our Platform may contain links to websites operated by third parties. Unless we tell you otherwise, we do not control, endorse or approve, and are not responsible for, the content on those websites. We recommend that you make your own investigations in relation to the suitability of those websites. If you purchase goods or services from a third party website linked from our Platform, those goods or services are being provided by that third party, not us. We may receive a benefit (which may include a referral fee or a commission) should you visit certain third party websites through a link on our Platform, or for featuring certain goods or services on our Platform. We will make it clear by notice to you which (if any) goods or services, or website links, we receive a benefit from by featuring them on our Platform.
+16. Definitions
+16.1 In these Terms:
+Account means an account accessible to the individual or entity who signed up to our Services, under which Authorised Users may be granted with access.
+Authorised User means a user that you have invited to use the Platform through your Account.
+Applicable Privacy Laws means all worldwide data protection and privacy laws and regulations applicable to the processing of Personal Data including but not limited to: (i) the Australian Privacy Act 1988 (Cth) (ii) the General Data Protection Regulation 2016/679 (the “GDPR“); (iii) the GDPR as it forms part of the laws of the United Kingdom pursuant to Section 3 of the European Union (Withdrawal) Act 2018 (the “UK GDPR“); and (iv) the Swiss Federal Data Protection Act of 19 June 1992 (the “Swiss DPA“); in each case as amended, superseded or replaced from time to time.
+Consequential Loss includes any consequential loss, special or indirect loss, real or anticipated loss of profit, loss of benefit, loss of revenue, loss of business, loss of goodwill, loss of opportunity, loss of savings, loss of reputation, loss of use and/or loss or corruption of data, whether under statute, contract, equity, tort (including negligence), indemnity or otherwise. However, your obligation to pay us any amounts for access to or use of our Services (including our Platform) will not constitute “Consequential Loss”.
+Intellectual Property Rights or Intellectual Property means any and all existing and future rights throughout the world conferred by statute, common law, equity or any corresponding law in relation to any copyright, designs, patents or trade marks, domain names, know-how, inventions, processes, trade secrets or confidential information, circuit layouts, software, computer programs, databases or source codes, including any application, or right to apply, for registration of, and any improvements, enhancements or modifications of, the foregoing, whether or not registered or registrable.
+Liability means any expense, cost, liability, loss, damage, claim, notice, entitlement, investigation, demand, proceeding or judgment (whether under statute, contract, equity, tort (including negligence), indemnity or otherwise), howsoever arising, whether direct or indirect and/or whether present, unascertained, future or contingent and whether involving a third party or us or you or otherwise.
+Moral Rights has the meaning given in the Copyright Act 1968 (Cth) and includes any similar rights in any jurisdiction in the world.
+Our Materials means all Intellectual Property which is owned by or licensed to us and any improvements, modifications or enhancements of such Intellectual Property.
+Personal Data means any information relating to an identified or identifiable individual or any other information defined as ‘personal data’ or ‘personal information’ under Applicable Privacy Laws.
+Create
+Industry
+Business
+Learn
+Pricing
+Contact
+Log in
+Tutorial
+Create
+Industry
+Business
+Learn
+Pricing
+Contact
+Tutorial Log in
+Create
+Image AI Image Generator
+Creative Ideation
+Background Remover
+Train Your Own Model
+Video AI Video Generator
+Upscaling Image Upscaler
+Editing Image Editor
+Video Editor
+Featured Models GPT Image 2.6
+Nano Banana 2.1
+FLUX 3 Image
+Veo 3.1
+Industry
+Industries Marketing Tools
+Graphic Design
+Print on Demand
+Photography
+Interior Design
+Architecture
+Use cases Art Generator
+Banner Generator
+Social Media Post Generator
+AI Storyboard Generator
+AI Character Generator
+About
+Pricing
+Blog
+Support
+Contact
+Careers
+Leonardo Creator Program
+Leonardo Imagination Fund
+Education Hub
+Business
+Collaborate via Teams
+Integrate via API
+Leonardo.ai is fully SOC 2 Type I and Type II accredited, demonstrating our commitment to the highest standards of security, availability, and data integrity. This ensures our customers can trust that their data is handled with enterprise-grade protection and compliance.
+Privacy Policy|
+Terms of Service|
+Cookie Policy
+Create
+Image AI Image Generator
+Creative Ideation
+Background Remover
+Train Your Own Model
+Video AI Video Generator
+Upscaling Image Upscaler
+Editing Image Editor
+Video Editor
+Featured Models GPT Image 2.6
+Nano Banana 2.1
+FLUX 3 Image
+Veo 3.1
+Industry
+Industries Marketing Tools
+Graphic Design
+Print on Demand
+Photography
+Interior Design
+Architecture
+Use cases Art Generator
+Banner Generator
+Social Media Post Generator
+AI Storyboard Generator
+AI Character Generator
+About
+Pricing
+Blog
+Support
+Contact
+Careers
+Leonardo Creator Program
+Leonardo Imagination Fund
+Education Hub
+Business
+Collaborate via Teams
+Integrate via API
+Privacy Policy|
+Terms of Service|
+Cookie Policy
+© 2026 All Rights Reserved, Leonardo Interactive Pty Ltd®
+Privacy Policy|
+Terms of Service|
+Cookie Policy
+| ABN: 56 662 209 485

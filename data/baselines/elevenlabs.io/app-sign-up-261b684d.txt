@@ -1,0 +1,14 @@
+url: https://elevenlabs.io/app/sign-up
+method: browser
+saved: 2026-11-19
+
+Create an account
+Sign up with SSO
+Sign up with Google
+By clicking “Sign up with Google” I agree to the Terms of Service, acknowledge ElevenLabs’ Privacy Policy, and consent to ElevenLabs' collection and use of my voice and data derived from my voice, which may be considered biometric data, to provide voice-related services I request, to improve and train its models, to prevent fraud and misuse, and as described in the Privacy Policy.
+Email
+Password
+I agree to the Terms of Service, acknowledge ElevenLabs’ Privacy Policy, and consent to ElevenLabs’ collection and use of my voice and data derived from my voice, which may be considered biometric data, to provide voice-related services I request, to improve and train its models, to prevent fraud or misuse, and as described in the Privacy Policy.
+Sign up
+Already registered?
+Sign in

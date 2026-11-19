@@ -1,0 +1,382 @@
+url: https://leonardo.ai/pricing
+method: browser
+saved: 2026-11-19
+
+Create
+Industry
+Business
+Learn
+Pricing
+Contact
+Tutorial
+Log in
+SOLO
+TEAM
+API
+CREATE ACROSS IMAGE, VIDEO, DESIGN, AND MOTION
+One subscription, all platforms
+Pay Yearly
+Up to
+20% off
+Pay Monthly
+FREE
+$0 /month
+ex. tax.
+Subscribe
+Perfect for casual creators who want to explore AI art
+Fast Tokens
+150 / day
+Model Access
+Auto Only
+Creations access
+Public
+Presets
+✓
+Quality settings
+Basic
+Personal collections
+1
+ESSENTIAL
+$12 /month
+ex. tax.
+Subscribe
+Best for daily hobbyists and enthusiasts
+Fast Tokens
+8,500 / month
+Model Access
+80+ Models
+Token Bank
+25,500
+Creations access
+Private️
+Presets
+✓
+Quality settings
+Enhanced
+Personal collections
+Unlimited️
+Personal AI models
+10
+Max Simultaneous Generations
+2
+Top-up Tokens
+✓
+PREMIUM
+$30 /month
+ex. tax.
+Subscribe
+Best for semi-professionals and active creators who need more output
+Fast Tokens
+25,000 / month
+Model Access
+80+ Models
+Token Bank
+75,000
+Creations access
+Private
+Presets
+✓
+Quality settings
+Enhanced
+Personal collections
+Unlimited️
+Personal AI models
+20
+Max Simultaneous Generations
+3
+Max generations queue
+10
+Top-up Tokens
+✓
+Image Generation for select models at a relaxed pace*
+Unlimited
+ULTIMATE
+$60 /month
+ex. tax.
+Subscribe
+Perfect for professional creators, small businesses, and content producers
+Fast Tokens
+60,000 / month
+Model Access
+80+ Models
+Token Bank
+180,000
+Creations access
+Private
+Presets
+✓
+Quality settings
+Enhanced
+Personal collections
+Unlimited️
+Personal AI models
+50
+Max Simultaneous Generations
+6
+Max generations queue
+20
+Top-up Tokens
+✓
+Image Generation for select models at a relaxed pace*
+Unlimited️
+Video Generation for select models at a relaxed pace*
+Unlimited️
+Number of seats
+−
++
+STARTER
+$72 / month
+$24 / seat
+ex. tax.
+Subscribe
+75,000 Shared Tokens
+225,000 Bank Capacity
+Fast Tokens Per Seat
+25,000
+Resets on your Billing Date
+✓
+Relaxed Image Generation for selected models*
+Unlimited
+Relaxed Video Generation for selected models*
+Unlimited
+Model Access
+80+ Models
+Private Team Generations
+✓
+Train AI models using team tokens
+Collections
+Unlimited
+Realtime Canvas actions
+Unlimited
+Realtime Generation actions
+Unlimited
+Max simultaneous generations run
+6
+Max generations queue at once
+20
+Enhanced Quality
+✓
+GROWTH
+$144 / month
+$48 / seat
+ex. tax.
+Subscribe
+180,000 Shared Tokens
+540,000 Bank Capacity
+Fast Tokens Per Seat
+60,000
+Resets on your Billing Date
+✓
+Relaxed Image Generation for selected models*
+Unlimited
+Relaxed Video Generation for selected models*
+Unlimited
+Model Access
+80+ Models
+Private Team Generations
+✓
+Train AI models using team tokens
+✓
+Collections
+Unlimited
+Realtime Canvas actions
+Unlimited
+Realtime Generation actions
+Unlimited
+Max simultaneous generations run
+6
+Max generations queue at once
+20
+Enhanced Quality
+✓
+NEED
+A CUSTOM
+PLAN?
+Contact us
+Our sales team will help craft a plan tailored to your unique workflows.
+Fast Tokens Per Seat
+Custom
+Resets on your Billing Date
+✓
+All Starter and Growth plan features included
+✓
+Tailored to your business needs
+✓
+Model Access
+80+ Models
+PAY AS YOU GO
+Start now
+Ideal if you’re moving quickly from early experiments to production
+No commitments – pay only for what you use
+Automatic top ups to keep production running smoothly
+Access to the latest models from day one
+Access to remove.bg background removal APIs
+Up to 10 concurrent generations
+API credit doesn’t expire
+API CUSTOM
+Contact us
+Built for running higher-volume workloads or planning long-term scale.
+Everything from Pay as you go
+Custom concurrent generation limits
+Model-based discounts
+Dedicated support for production deployments
+* Unlimited relaxed generation applies only to selected image and video models, depending on your plan. On Premium, it includes these image models: Lucid Origin, Lucid Realism, Phoenix 1.0, Phoenix 0.9, FLUX Dev, FLUX Schnell, Anime, Cinematic Kino, Concept Art, Graphic Design, Illustrative Albedo, Lifelike Vision, Leonardo Lightning, Portrait Perfect and Stock Photography. Ultimate includes all of these, plus these video models: MiniMax H3 (480p, Accelerated or Turbo), Wan 2.6, Hailuo 2.3, Hailuo 2.3 Fast, Motion 2.0 and Motion 2.0 Fast. Concurrency and queuing of unlimited generations may be slowed from time to time based on demand to ensure fair and equitable access and stability for other users.
+Generation Power
+Features
+Workflow
+FREE
+ESSENTIAL
+PREMIUM
+ULTIMATE
+Fast Tokens
+150 / daily
+8,500 / monthly
+25,000 / monthly
+60,000 / monthly
+Rollover Token Bank Capacity
+-
+25,500
+75,000
+180,000
+Top-up Tokens
+-
+✓
+✓
+✓
+Concurrent Generations Limit
+-
+2
+3
+6
+Generation Queue Limit
+-
+5
+10
+20
+Unlimited* Relaxed Image Generation
+-
+-
+Supported models: Lucid Origin, Lucid Realism, Phoenix 1.0, Phoenix 0.9, FLUX Dev, FLUX Schnell, Anime, Cinematic Kino, Concept Art, Graphic Design, Illustrative Albedo, Lifelike Vision, Leonardo Lightning, Portrait Perfect, Stock Photography
+Supported models: Lucid Origin, Lucid Realism, Phoenix 1.0, Phoenix 0.9, FLUX Dev, FLUX Schnell, Anime, Cinematic Kino, Concept Art, Graphic Design, Illustrative Albedo, Lifelike Vision, Leonardo Lightning, Portrait Perfect, Stock Photography
+Unlimited* Relaxed Video Generation
+-
+-
+-
+Supported models: MiniMax H3 (480p, Accelerated or Turbo), Wan 2.6, Hailuo 2.3, Hailuo 2.3 Fast, Motion 2.0, Motion 2.0 Fast
+Relaxed Image Queue Limit
+-
+-
+5
+5
+Relaxed Video Queue Limit
+-
+-
+-
+20
+Blueprints Concurrency Limit
+1
+2
+3
+6
+Blueprints Queue Limit
+5
+5
+10
+20
+FREE
+ESSENTIAL
+PREMIUM
+ULTIMATE
+Image Generation
+✓
+✓
+Unlimited relaxed*
+Unlimited relaxed*
+Video Generation
+✓
+✓
+✓
+Unlimited relaxed*
+Leo Agent
+-
+✓
+✓
+✓
+Blueprints
+Limited
+✓
+✓
+✓
+Flow State
+✓
+✓
+✓
+✓
+Ultra Quality
+Limited
+✓
+✓
+✓
+Image Guidance Reference Limit
+Limited
+6
+6
+6
+Video Guidance Reference Limit
+Limited
+✓
+✓
+✓
+Realtime Canvas
+Limited
+✓
+✓
+✓
+Realtime Generation
+Limited
+✓
+✓
+✓
+Presets
+✓
+✓
+✓
+✓
+Elements
+Limited
+✓
+✓
+✓
+Platform Models
+Auto only
+✓
+✓
+✓
+Third-party Models
+-
+✓
+✓
+✓
+FREE
+ESSENTIAL
+PREMIUM
+ULTIMATE
+Personal AI Model Training Limit
+-
+10 / month
+20 / month
+50 / month
+Private Generations
+-
+✓
+✓
+✓
+Collections
+Limited
+Unlimited
+Unlimited
+Unlimited
+* Unlimited relaxed generation applies only to selected image and video models, depending on your plan. On Premium, it includes these image models: Lucid Origin, Lucid Realism, Phoenix 1.0, Phoenix 0.9, FLUX Dev, FLUX Schnell, Anime, Cinematic Kino, Concept Art, Graphic Design, Illustrative Albedo, Lifelike Vision, Leonardo Lightning, Portrait Perfect and Stock Photography. Ultimate includes all of these, plus these video models: MiniMax H3 (480p, Accelerated or Turbo), Wan 2.6, Hailuo 2.3, Hailuo 2.3 Fast, Motion 2.0 and Motion 2.0 Fast. Concurrency and queuing of unlimited generations may be slowed from time to time based on demand to ensure fair and equitable access and stability for other users.
+NEED HELP CHOOSING?
+If you’re unsure which tier fits your creative needs, we’re here to help. Contact support or explore our help resources for more detail.
+Contact us

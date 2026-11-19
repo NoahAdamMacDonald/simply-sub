@@ -1,0 +1,117 @@
+url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/renewals-and-billing-cycles
+method: fetch
+saved: 2026-11-19
+
+Renewals and Billing Cycles | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions Cancelling Your Subscription
+Renewals and Billing Cycles
+Refunds
+Switching or Downgrading Plans
+Invoices, Receipts, and Tax Details
+Troubleshooting Billing Issues
+Subscriptions Through the iOS App
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Plans and Billing
+Billing & Subscriptions
+Renewals and Billing Cycles
+Renewals and Billing Cycles
+Ideogram subscriptions auto-renew monthly or yearly. Find your renewal date, see what happens to your credits and stop a renewal. Copy page
+View as Markdown
+On this page Finding your next renewal date
+Credits on renewal
+Avoiding an unwanted renewal
+Invoices for renewal charges
+Ideogram subscriptions renew automatically at the billing frequency you chose when subscribing: monthly or annual. Your payment method is charged on each renewal date until you cancel.
+Finding your next renewal date
+Click your avatar at the bottom of the sidebar and select Wallet & Billing. The plan card shows Renews on and the date.
+Renews on shows your next billing date.
+The billing portal shows it too. Click Manage plan & billing in the plan card, and the date appears under your current subscription.
+Your next billing date is shown under your current subscription.
+Credits on renewal
+Your monthly credits reset each month on your renewal day, and unused monthly credits don't carry over. Yearly plans work the same way: you pay once a year, but credits arrive each month. Credits you bought separately aren't affected. See Plans and Credits.
+Why did my annual plan's credits refresh without a renewal charge?
+An annual plan has two schedules: monthly credit refreshes and the yearly subscription renewal. A monthly allowance refresh doesn't start another paid year. Use Renews on for the next subscription charge date, and your credit balance for the credits you have left.
+For annual plans started near the end of a month, a refresh is due on the last day of a shorter month when the original day doesn't exist. For example, a plan started on January 31 has its next refresh due at February's month end, then on March 31. This describes the monthly credit schedule, not a new annual charge.
+Which plan will I have at the next renewal?
+If you've scheduled a downgrade, open Settings → Plans. The pending-change banner names the destination plan and switch date. Your current plan stays active until that change takes effect. Use Keep [plan name] if you want to undo it; see Undo a pending downgrade.
+Avoiding an unwanted renewal
+Cancel at least 5 days before your renewal date. Per the Terms of Service, cancellations must be made five days ahead of renewal to take effect for that period. See Cancelling Your Subscription.
+Cancelling early does not shorten your access: you keep your plan benefits until the end of the period you already paid for. There is no reason to wait until the last day.
+Annual plans renew once a year, which makes the renewal easy to forget. If you don't plan to continue, cancel ahead of time. Ideogram doesn't offer refunds (see Refunds).
+Invoices for renewal charges
+Every charge has an invoice under Invoice history on Wallet & Billing. See Invoices, Receipts, and Tax Details.
+PreviousCancelling Your SubscriptionNextRefunds
+On this page
+Finding your next renewal date
+Credits on renewal
+Avoiding an unwanted renewal
+Invoices for renewal charges

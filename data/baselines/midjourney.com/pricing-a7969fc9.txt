@@ -1,0 +1,98 @@
+url: https://www.midjourney.com/pricing
+method: fetch
+saved: 2026-11-19
+
+Midjourney Pricing & Plans Midjourney Purchase a subscription
+Choose the plan that works for you
+Yearly billingMonthly billing
+Switch to Yearly to save 20%.
+Basic Plan
+Regular price $10 With yearly billing $8 / month
+20% off billed annually
+Subscribe
+View monthly billing
+One image job has four images, so 200 jobs is 800 images.
+Limited generations (~200 image jobs / month)
+SD video generation
+General commercial terms
+Optional Fast hours top ups
+3 simultaneous Fast image jobs
+1 simultaneous Fast video job
+Use Editor on uploaded images
+Standard Plan
+Regular price $30 With yearly billing $24 / month
+20% off billed annually
+Subscribe
+View monthly billing
+15h Fast generations
+SD and HD video generation
+General commercial terms
+Optional Fast hours top ups
+3 simultaneous Fast image jobs
+3 simultaneous Fast video jobs
+Unlimited Relax image generations
+Use Editor on uploaded images
+Pro Plan
+Regular price $60 With yearly billing $48 / month
+20% off billed annually
+Subscribe
+View monthly billing
+30h Fast generations
+SD and HD video generation
+General commercial terms
+Optional Fast hours top ups
+12 simultaneous Fast image jobs
+6 simultaneous Fast video jobs
+Unlimited Relax image and SD video generations
+Stealth mode generation
+Use Editor on uploaded images
+Mega Plan
+Regular price $120 With yearly billing $96 / month
+20% off billed annually
+Subscribe
+View monthly billing
+60h Fast generations
+SD and HD video generation
+General commercial terms
+Optional Fast hours top ups
+12 simultaneous Fast image jobs
+12 simultaneous Fast video jobs
+Unlimited Relax image and SD video generations
+Stealth mode generation
+Use Editor on uploaded images
+Frequently asked questions
+What are Fast hours?
+Midjourney uses GPUs (Graphics Processing Units) to process prompts and create images. Your subscription to Midjourney buys you time on these GPUs, similar to buying data for a cell phone plan. There are three GPU speeds available: Relax, Fast, and Turbo.
+When using Fast or Turbo mode, you use the GPU time provided monthly with your subscription, which resets upon renewal. Unused Fast time does not carry over to the next month.
+Each Image Prompt usually consumes about one minute of GPU time, and video prompts consume about eight minutes. Activities like upscaling can take more time, while things like variations may use less. You can check your remaining Fast time on your Account page.
+For more information, read about GPU Speeds on our help site.
+What is Relax mode? Is it unlimited?
+Relax mode for images is available with the Standard, Pro, and Mega plans, offering unlimited image creation without using your Fast time. Unlimited video creation with Relax mode is only available on the Pro and Mega plans. The trade-off is that images and videos take longer to generate than in Fast mode.
+When using Relax mode, your images and videos are queued and processed as GPUs become available, leading to average wait times of 0 to 10 minutes. Your wait time can vary based on your Relax mode usage.
+Relax mode is not available on the Basic Plan.
+For more information, read about GPU Speeds on our help site.
+What if I run out of Fast time?
+If you want more Fast time before your plan renews, you can buy more from your Account page, or you may be able to complete activities on the Tasks page to earn free Fast time.
+Purchased additional Fast time expires after 60 days if unused and purchases cannot be refunded. Earned Fast time expires after 30 days if unused.
+You must have an active subscription to use Fast time.
+What is the Explore page?
+The Explore page is where you can browse images and videos created by other members.
+Clicking on any creation reveals details about its creator, prompt, and settings. You can use images and prompt text from the Explore page in your own prompts, find similar images, or like images to save them for later.
+What if I don't want my creations to appear on the Explore page?
+Midjourney thrives as an open-by-default community, meaning that by default every image and video you create can be found on the Explore page.
+If privacy is a priority for you, consider using Stealth mode. Available only with our Pro and Mega Plans, Stealth mode keeps your images and videos hidden from other members on the website. However, your creations will still need to adhere to our Community Guidelines.
+For more information, read about Stealth mode on our help site.
+Can I use my creations commercially?
+With Midjourney, you own all the images and videos you create, even if you decide to cancel your subscription. Feel free to use them commercially, with a few exceptions.
+Full details can be found in the Midjourney Terms of Service.
+Can I cancel my subscription?
+You can cancel your Midjourney subscription at any time from your Account page.
+Your cancellation will become effective at the end of your current billing cycle, and you'll still have access to all of your subscription features—including any remaining Fast time—until then.
+Canceling your subscription does not delete your generated images or account history. Images or videos made in Stealth mode will stay private. You can choose to resubscribe at any time.
+Can I upgrade or downgrade my plan?
+You can switch plans at any time from your Account page. Use the "Upgrade Plan" or "Downgrade Plan" button under the new plan you'd like to switch to.
+Upgrading: You can choose to upgrade immediately or wait until your regular renewal date. If you upgrade right away, you'll receive a discount based on any unused Fast time from your current plan. If all your Fast time is used up, the new plan will be at full price. Your subscription will reset immediately, granting you all the benefits of the new plan, including Fast time, and setting your next renewal one month (or one year for yearly plans) from your upgrade date.
+Downgrading: If you decide to switch to a lower plan, the change will take effect at your next renewal, not immediately. Please note that downgrading won't refund your current plan.
+For more information, read about Upgrading or Downgrading Your Plan on our help site.
+Can't find the answer you're looking for?
+Read the Getting Started Guide or contact support.

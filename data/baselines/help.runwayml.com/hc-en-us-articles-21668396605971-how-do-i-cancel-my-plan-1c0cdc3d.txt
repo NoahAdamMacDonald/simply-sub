@@ -1,0 +1,112 @@
+url: https://help.runwayml.com/hc/en-us/articles/21668396605971-How-do-I-cancel-my-plan
+method: fetch
+saved: 2026-11-19
+
+How do I cancel my plan? – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Account & Billing
+Subscription Management
+Plans
+How do I cancel my plan?
+Table of Contents
+You can cancel your plan by following the steps below:
+Go to your billing page (https://app.runwayml.com/settings/billing)
+Click Cancel plan
+Provide any feedback, then proceed by selecting Continue to cancel plan
+Click Confirm cancellation in Stripe
+You'll retain your subscription until the end of your billing cycle after cancellation, but the subscription will not renew. This means you’ll still have access to the paid features until the renewal date.
+If the Cancel plan button is inactive on your billing page, this means that your subscription is already scheduled for cancellation at the end of your current billing cycle and your plan will not renew. The cancellation date will be indicated by the Expires on... field.
+Cancelling a plan purchased through the iOS App Store
+Subscriptions purchased through the iOS App Store can be cancelled by following this tutorial from Apple: View or cancel subscriptions on iPhone
+FAQ
+Can I cancel my plan if my renewal payment failed?
+Yes. If you're getting failed renewal emails, you can cancel from your
+billing page without
+contacting Support. Select Cancel plan, share any feedback,
+then confirm the cancellation in Stripe.
+To keep your plan instead, select Update Payment Details
+on the same page and add a new card.
+I just signed up but don’t want an ongoing monthly subscription. Can I cancel and still use the plan features?
+Yes, you can cancel immediately after subscribing and will have access to
+the plan features until the end of the billing cycle.
+Can I subscribe for a set amount of time, such as three months?
+We do not currently offer the ability to schedule a custom subscription duration.
+You’d need to cancel the subscription manually once you’re ready to end the
+plan.
+Will I lose my assets and projects after cancelling?
+No. Your assets and projects remain on your account after you cancel your plan, unless you
+delete your account
+entirely.
+Please note you will not be able to create any new projects once on the Free
+plan if you have over three projects.
+Can I still use my purchased credits after cancelling my subscription?
+Yes, purchased credits will remain on your account until spent. It’s important
+to note that your current plan level determines the availability
+of features, not the plan type at the time the credits were purchased. For
+example, any generations made after downgrading to the Basic tier will have
+watermarks.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

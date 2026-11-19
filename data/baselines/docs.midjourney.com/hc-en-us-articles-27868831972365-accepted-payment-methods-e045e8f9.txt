@@ -1,0 +1,36 @@
+url: https://docs.midjourney.com/hc/en-us/articles/27868831972365-Accepted-Payment-Methods
+method: browser
+saved: 2026-11-19
+
+Skip to main content
+Midjourney
+Midjourney
+Billing Support
+Payments
+Accepted Payment Methods
+Midjourney uses Stripe as our payment processor, which means you can only use payment methods that Stripe accepts. Generally, you can pay with major credit and debit cards like Visa, Mastercard, and American Express, as well as some digital wallets such as Apple Pay, Amazon Pay, Alipay, Google Pay, and Link in some regions. The options you see during checkout are the ones available to you.
+We can only accept the payment methods shown at checkout, and our billing support team can't help set up any alternatives unless you're buying in bulk as a company.
+Unfortunately, PayPal isn't currently supported.
+Stripe is a PCI Service Provider Level 1, the most stringent level of certification available in the payments industry.
+Documentation
+Billing Support
+Plan Information
+Account Management
+Payments
+Accepted Payment Methods
+Editing Your Payment Information
+Viewing Your Payment History
+Unsuccessful Payments
+Fixing a Paused Plan
+Payment Currency
+Reporting a Duplicate Charge
+Reporting an Unauthorized Charge
+Changing Your Invoice Information
+Group Plans & Corporate Billing
+Educational Use & Student Billing
+Cancellations & Refunds
+Taxes & VAT
+Magazines & Books
+Midjourney Website
+Midjourney Discord Server
+Return to top

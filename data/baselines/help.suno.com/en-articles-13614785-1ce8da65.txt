@@ -1,0 +1,62 @@
+url: https://help.suno.com/en/articles/13614785
+method: fetch
+saved: 2026-11-19
+
+Upcoming Changes FAQ: Downloads, Models, and Terms of Service
+Knowledge Base
+Make Music Now!
+How can we help?
+Results
+No results found
+More results
+We use cookies to analyze website traffic and help improve our visitor experience. Privacy Policy
+Reject
+Accept
+Home
+Community Resources
+Upcoming Changes FAQ: Downloads, Models, and Terms of Service
+Edited
+As we continue to build, we want to provide transparency around upcoming changes to how you use Suno. Our new Terms of Service can be found here, and we're including an FAQ below to help preview the changes coming in September 2026.
+How do I download my songs?
+From your Library or Workspace, click the triple-dot (...) icon, and hover over Download to see download options and make your selection. To learn more about downloading, watch this video tutorial.
+Why do downloads matter?
+We believe a healthy music ecosystem is built on human creativity. As our platform grows, limiting downloads will make it harder for bad actors to mass-export music. We are introducing download limits to ensure our platform is used for intentional music creation, while still allowing everyone to create, remix, listen, and share on Suno.
+How many downloads does each tier get?
+Free: 0 downloads
+Pro: 20 downloads per month, with commercial use rights
+Premier: 60 downloads per month, with commercial use rights
+Monthly downloads reset on your billing date. Streaming and sharing on Suno remain unlimited on every plan. For Premier users on Suno Studio, our professional tool for generating and manipulating stems and samples, you can continue downloading without disrupting your workflow.
+Can users still listen to and share their full library in-app?
+Yes. Every song in your library stays fully playable and shareable through links on Suno, on every plan including free. These limits only apply to downloading files off the platform. Nothing changes about listening to, sharing, or linking your music on Suno.
+What exactly counts as one download?
+One song counts as one download, regardless of format. For example, if you download a song twice, that counts as one download. Failed or interrupted downloads don't count against your quota. Stems from a song count as part of that song's download, not as separate downloads.
+Do the new download restrictions apply to the songs I’ve already made in Suno?
+Download limits apply to all music on Suno starting September 3, including songs created before that date. Your existing library is not going anywhere: every song you've made stays fully playable and shareable on Suno, on every plan including free. The limits only apply to downloading files off the platform.
+Does downloading the same song twice count towards my quota?
+No. Once you've downloaded a song, downloading it again in any format, doesn't count against your quota.
+Does downloading the individual stems from the same song count as individual downloads?
+No. All stems from a song are part of that song's single download. Downloading a song plus its stems counts once, not per file.
+Can I purchase more downloads?
+Yes. For users who hit their download limits, they will be able to purchase additional downloads.
+Do unused monthly downloads roll over?
+No. Pro and Premier download counts reset each month and unused downloads don't carry over.
+How do download restrictions impact my Suno Studio workflow?
+For those using Suno Studio, our professional production suite for generating and manipulating stems and samples, users will still be able to download their work from Studio without limitation. We want to maintain all professional workflows.
+How do trial downloads work?
+Free accounts no longer include trial downloads (0 downloads), so you'll need to upgrade to download songs to your device. You do not get commercial rights to trial downloaded songs.
+I paid for an annual plan that included unlimited downloads. What are my options?
+If you no longer wish to be a subscriber, you can cancel your plan by heading to suno.com/account. Read more about how to cancel your plan here.
+What happens if I cancel my subscription?
+If you cancel your subscription, your library stays yours and all of your songs remain in your account. You can listen and share them on Suno on the free tier. However, downloads follow free tier limits.
+Do I still have commercial rights to my music?
+Yes. For any song that you download from the platform as a paying subscriber, you have the commercial rights to the music and can use it for commercial or personal use.
+Will my old songs still work after the previous models are retired?
+Yes. Retiring a model means you can't generate new songs with it. It doesn't affect anything you've already made. Every existing song stays in your library, playable and shareable, exactly as it is today.
+Can I still extend, remix, or edit songs made with retired models?
+You can still use your existing songs as the starting point for extensions, remixes, and covers. Those operations will run on the new models, so results may sound different from the original generation. The original song itself is never modified.
+What if I have specific workflows I prefer with old models?
+We will provide you with alternative options that will get you close to your old workflow, when we launch our new models.
+Cookie preferences
+Terms of ServicePrivacy PolicySuno on iOS
+Community GuidelinesBlogSuno on Android
+Leave us feedback

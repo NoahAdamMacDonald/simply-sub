@@ -1,0 +1,357 @@
+url: https://pika.art/privacy-policy
+method: fetch
+saved: 2026-11-19
+
+Privacy Policy — Pika
+Skip to main content
+AI Video
+AI Image
+AI Audio
+Pricing
+Enterprise
+Resources
+Developers
+LoginTry Pika
+Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+AI Video Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+AI Image Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+AI Audio Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Pricing
+Enterprise
+Resources Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+Developers
+Login
+Skip to legal document Last modified: 10/21/2026
+Privacy Policy
+On this pageIntroduction Introduction
+Mellis, Inc. (“Pika,” “we,” “us,” “our”) respects your privacy and is committed to protecting it through our compliance with this policy.
+This policy describes the types of information we may collect from you or that you may provide when you visit our websites, pika.art and pika.me, download, install, create an account on, access, or use our mobile applications, or through our application programming interfaces (collectively, our “Service”) and our practices for collecting, using, maintaining, protecting, and disclosing that information.
+This policy applies to information we collect:
+On the Service.
+In email, text, and other electronic messages between you and the Service.
+Through mobile and desktop applications you download from the Service, which provide dedicated non-browser-based interaction between you and the Service.
+Through our application programming interfaces (“APIs”), which provide access to both first-party Pika models and third-party models through an aggregated API platform.
+When you interact with our advertising and applications on third-party websites and services, if those applications or advertising include links to this policy
+The Service may include links to third-party websites, plug-ins, services, social networks, or applications, and may provide access to artificial intelligence models, services, or content provided by third-party model providers. Clicking on those links, enabling those connections, or using a third-party model through the Service may allow the third party to collect, process or share data about you. If you follow a link to a third-party website, engage a third-party plugin, or use a third-party model, please note that these nonparties have their own privacy policies, notices and other terms. We do not accept any responsibility or liability for the privacy or security of, or information found on, these sites, platforms or models, or the accuracy, completeness, or reliability of third-party materials. We do not control these third-party websites, plug-ins, or models, and we encourage you to read the privacy policy, notices, or other terms of every third-party service you visit.
+This policy does not apply to information collected by:
+Us offline or through any other means, including on any other website operated by Pika or any third party (including our affiliates and subsidiaries); or
+Any third party (including our affiliates and subsidiaries), including through any application or content (including advertising) that may link to or be accessible from or through the Service.
+Please read this policy carefully to understand our policies and practices regarding your information and how we will treat it. If you do not agree with our policies and practices, your choice is not to use our Service. By accessing or using the Service, you agree to this privacy policy. We may change this policy on one or more occasions (see Changes to Our Privacy Policy). Your continued use of the Service after we make changes is deemed to be acceptance of those changes, so please check the policy periodically for updates.
+Children and Minors
+Our Service is not intended for children or minors, in particular those under 13 years of age. No one under age 18 may provide any personal information to or on the Service. We do not knowingly collect personal information from children, in particular those under 13. If you are under 18, do not use or provide any information on the Service or through any of its features. Additionally, if we learn we have collected or received personal information from a child, we will delete that information. If you believe we might have any information from or about a child, please contact us at:
+Mellis, Inc.
+849 High St
+Palo Alto, California 94301
+support@pika.art
+Information We Collect About You and How We Collect It
+We collect several types of information from and about users of our Service, including the following categories of information:
+Contact information, such as your name, email address, and billing and mailing address.
+Demographic information, such as city, state, and country of residence.
+Profile information, including your account credentials and API keys, profile photo, biographical details, preferences and participation in our promotions or surveys.
+User-generated content, such as photos, videos, text, messages, and other material you submit to public or private parts of the Service, including content shared during interactions with others on the Service, including other users’ AI Selves.
+Inputs and Outputs, including text, image, and video inputs you provide to the Service, including through our APIs, and the associated generated content or metadata (such as tags or geolocation) that may be created. This includes user-submitted input, including text prompts, directions, images, videos, voice samples, likeness data, documentation, or other material submitted by the user to generate their AI Self and its corresponding behavior, which is then used to generate corresponding outputs (which may include AI Selves and content generated by AI Selves).
+Biometric information, such as scans of facial features or voice data, where applicable, when you use features that allow you to create content using such inputs.
+Payment and transaction information, which may include billing address, transaction history, your blockchain wallet address, and payment method (collected via our payment processor).
+Network and social connections, such as information about users you follow or interact with.
+Marketing data, such as your preferences regarding promotional communications and interactions with them.
+Information about your device and interactions with the Service, such as usage details, IP addresses, and information collected through cookies, pixels, web beacons, and other tracking technologies (“ Tracking Technologies”).
+We collect this information:
+Directly from you when you provide it to us.
+Automatically as you navigate through the Services.
+From third parties, for example, our business partners and third party applications that you choose to connect to the Service.
+Information You Provide to Us
+The information we collect on or through our Service may include:
+Information that you provide by filling in forms on our Service. This includes information provided at the time of registering to use our Service, subscribing to our Service, posting material, or requesting further services. We may also ask you for information when you enter a contest or promotion sponsored by us, and when you report a problem with our Service.
+Records and copies of your correspondence (including email addresses), if you contact us.
+Your responses to surveys that we might ask you to complete for research purposes.
+Details of transactions you carry out through our Service and of the fulfillment of your purchases. You may be required to provide financial information before placing an order through our Service.
+Your search queries on the Service.
+You may provide information to be published or displayed (“posted”) on public areas of the Service or transmitted to other users or third parties (collectively, “User Contributions”). User Contributions are made at your own risk. While you may be able to adjust certain privacy settings in your account profile, please note that no security measures are perfect or impenetrable, and we cannot control the actions of other users who may access or share your User Contributions. If you choose to make your profile or User Contributions publicly visible, they may also be indexed by search engines or accessed through third-party platforms. Others may copy, capture, archive, or otherwise preserve such content, and we cannot guarantee its complete removal if deleted from the Service.
+On one or more occasions, we may offer features that allow you to invite others to use the Service. If you use these features, we may collect the contact details you provide for your invitees to send the invitation. You should only share another person’s contact information with us if you have their permission to do so.
+Information We Collect Through Tracking Technologies
+As you navigate through and interact with our Service, we and third parties may use Tracking Technologies to collect certain information about you and your equipment, browsing actions, and patterns. Where required by law, we obtain your consent to collect and process this information. Such information includes:
+Details of your visits to and interactions with our Service, including traffic data, location data (such as approximate location based on IP address), logs, page views, sign-up and purchase conversions, date and time stamps, page requests, how much time is spent on a page, content viewed or interacted with, text entered, other clickstream data, and other communication data and the resources that you access and use on the Service. When you use our APIs, this includes API call volumes, feature usage, performance metrics, error logs, and other technical or operational data.
+Information about your device and internet connection, including your IP address, operating system, device type, unique device identifier, and browser type.
+We may also use these Tracking Technologies to collect information about your online activities over time and across third-party websites or other online services (behavioral tracking) and to target, deliver and measure interest-based advertising. For information on how you can opt out of behavioral tracking and targeted advertising on the Service and how we respond to web browser signals and other mechanisms that enable consumers to exercise choice about behavioral tracking, please see the section below, Choices About How We Use and Disclose Your Information.
+The information we collect automatically may include personal information, or we may maintain it or associate it with personal information we collect in other ways or receive from third parties. It helps us to improve our Service and to deliver a better and more personalized service, including by enabling us to:
+Estimate our audience size and usage patterns.
+Store information about your preferences, allowing us to customize our Service according to your individual interests.
+Speed up your searches.
+Recognize you when you return to our Service.
+The Tracking Technologies we use for this automatic data collection may include:
+Cookies. A cookie is a small file placed on your device. These may be “session cookies” (deleted when your session ends) or “persistent cookies” (which remain after you close your browser). Some are set by us (first-party cookies), while others are set by third parties such as analytics or advertising providers. You may refuse to accept cookies by activating the appropriate setting on your browser or mobile device. However, if you select this setting, you may be unable to access certain parts of our Service. Unless you have adjusted your settings so that it will refuse cookies, our system will issue cookies when you direct your browser or device to our Service. For information about managing your privacy and security settings for cookies, see Choices About How We Use and Disclose Your Information.
+Local Storage Technologies. Certain features of our Service may use browser-based storage technologies (such as cookies, localStorage, and sessionStorage) to collect and store information about your preferences and navigation activity. These technologies are managed through your browser settings.
+Web Beacons/Pixels. Pages of our website may contain small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and single-pixel gifs) that permit Pika, for example, to count users who have visited those pages and for other related website statistics (for example, recording the popularity of certain website content and verifying system and server integrity). We also use pixels provided by our advertising and analytics partners (such as the Meta Pixel and Google tag) to measure page views, sign-up and purchase conversions, and the effectiveness of our advertising, and to deliver interest-based advertising to you on third-party websites and platforms.
+Third-Party Use of Tracking Technologies
+Some content or applications, including advertisements, on the Service are served by third parties, including advertisers, ad networks and servers, content providers, and application providers. These third parties may use cookies alone or in conjunction with web beacons or other Tracking Technologies to collect information about you when you use our Service. The information they collect may be associated with your personal information or they may collect information, including personal information, about your online activities over time and across different websites and other online services. They may use this information to provide you with interest-based (behavioral) advertising or other targeted content.
+We do not control these third parties’ Tracking Technologies or how they may be used. If you have any questions about an advertisement or other targeted content, you should contact the responsible provider directly. For information about how you can limit the use opt out of certain Tracking Technologies receiving targeted advertising from many providers, see Choices About How We Use and Disclose Your Information.
+How We Use Your Information
+We use information that we collect about you or that you provide to us, including any personal information:
+To provide our Service and its contents to you, including operating and providing access to our aggregated API platform. For example, the personal information you provide may be used to create an “AI Self” based on your likeness, voice, and other personal characteristics.
+To send you notifications about products, events, promotions and offers, and to measure and understand the effectiveness of our marketing efforts.
+To show you ads (including personalized ads) through the Services and third-party websites, and to provide advertising analytics and reporting.
+To personalize your experience on the Services, including suggesting and offering you relevant products and recommendations.
+To communicate with you, including to provide you with notices about your account, including expiration and renewal notices, changes to our Service or any products or services we offer or provide through it, along with information, products, or services that you request from us.
+To understand and analyze how you use the Service, to improve and enhance the Services, and to solicit feedback and respond to your questions. We may also analyze your activity, content, media uploads and related data to create, operate, train or improve your AI Self.
+To fulfill any other purpose for which you provide it.
+To enable you to cash out your credits earned through using the Service and its features.
+To carry out our obligations and enforce our rights arising from any contracts entered into between you and us, including for billing and collection.
+To allow you to participate in interactive features on our Service.
+In any other way we may describe when you provide the information.
+For any other purpose with your consent.
+Where permitted by applicable law or with your consent, we may also use content you submit—including Inputs and Outputs—to improve our artificial intelligence models and related technologies. This includes using associated metadata (such as tags or location information), and usage data (such as API call volumes, feature usage, performance metrics, error logs, and other technical or operational data) for training, evaluation, moderation, and optimization purposes. Notwithstanding the foregoing, any personal information included in the Inputs used to create an AI Self (including your likeness, voice samples, and personal characteristics) will only be used to develop, operate, improve and train your AI Self and will not be used to train other artificial intelligence models or create artificial intelligence representations for other users. On the other hand, personal information that you include in Inputs through the API platform will generally be used to improve and train artificial intelligence models.
+That said, if you access the Service under an enterprise, business, or other separate written agreement with us, the data use and model training terms of that agreement will govern to the extent they conflict with this section, including any agreed limitations on using your content (including Inputs and Outputs) or usage data to train or otherwise improve our models or those of third-party model providers.
+Finally, we may deidentify or anonymize your information such that it cannot reasonably be used to infer information about you or otherwise be linked to you (or we may collect information that has already been deidentified/anonymized), and we may use deidentified information for any purpose, including to train, improve, and develop our machine learning models, algorithms, and related technologies and services. To the extent we possess or process any deidentified information, we will maintain and use such information in deidentified form and not attempt to re-identify the information, except for the purpose of determining whether our deidentification process satisfies legal requirements.
+We may also use your information to contact you about goods and services that may be of interest to you. For more information, see Choices About How We Use and Disclose Your Information.
+Disclosure of Your Information
+We may disclose personal information that we collect or you provide as described in this privacy policy:
+To our subsidiaries and affiliates.
+To vendors and service providers to support our business and who are bound by contractual obligations to keep personal information confidential and use it only for the purposes for which we disclose it to them. For example, we use Google Analytics to help us understand how our users use our Service (you can read more about how Google uses your personal information here: https://policies.google.com/privacy). We also use service providers to provide customer support, artificial intelligence/LLM providers, payment processors, the deployment of Tracking Technologies, and perform service-related services (e.g., maintenance services, database management, web analytics and improvement of Service features).
+To third-party artificial intelligence model providers integrated into our aggregated API platform, in order to process your Inputs and generate Outputs through the model you select. These providers generally act as independent controllers of the information they receive, and process your Inputs and other content in accordance with their own terms, usage policies, and privacy notices. They may also be located outside your country of residence.
+To our advertising, marketing, and analytics partners, including providers of Tracking Technologies (such as Meta and Google), and ad networks, to show you ads (including personalized ads) through the Services and third-party websites and to measure the effectiveness of our advertising.
+To other users. For example, any AI Self that users create will operate autonomously, and information (including personal information) provided to their AI Self may be disclosed to other users who interact with the AI Self depending on the content filters, topic restrictions, or other limitations the user places on the AI Self's responses.
+To a buyer or other successor in the event of a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Mellis, Inc.’s assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which personal information held by Mellis, Inc. about our Service users is among the assets transferred.
+To fulfill the purpose for which you provide it.
+For any other purpose disclosed by us when you provide the information.
+Parties with your consent.
+We may also disclose your personal information:
+To comply with any court order, law, or legal process, including to respond to any government or regulatory request.
+To enforce or apply our terms of service our Acceptable Use Policy and other agreements, including for billing and collection purposes.
+If we believe disclosure is necessary or appropriate to protect the rights, property, or safety of Mellis, Inc., our customers, or others. This includes exchanging information with other companies and organizations for fraud protection and credit risk reduction purposes.
+We may disclose aggregated information about our users, and information that does not identify any individual, without restriction.
+Consent to Personal Information Transfer
+We are based in the United States. To provide our Service, we may process, store, and transfer your personal information to countries outside your own, including the United States, where privacy laws may differ and may not provide the same level of protection. However, we apply the safeguards described in this policy to your personal information regardless of where it is processed.
+By submitting your personal information or engaging with our Service, you hereby consent to this transfer, storing, or processing, including transferring your information across international boundaries to jurisdictions anywhere in the world as permitted by law.
+If you are a Canadian resident or otherwise located in Canada, please note that we may process, store, and transfer your personal information in and to a foreign country, with different privacy laws that may or may not be as comprehensive as Canadian law. In these circumstances, the governments, courts, law enforcement, or regulatory agencies of that country may be able to obtain access to your personal information through the laws of the foreign country. Whenever we engage a service provider, we require that its privacy and security standards adhere to this policy and applicable Canadian privacy legislation.
+If you are located in the European Economic Area (EEA), Switzerland, or the United Kingdom (UK), please note that your information will be transferred outside of those areas, including to the United States. Where required, we rely on appropriate legal mechanisms to ensure the lawful transfer of personal information outside of the EEA, Switzerland, and the UK. These include the Standard Contractual Clauses (“SCCs”) approved by the European Commission under Article 46(2)(c) of the GDPR and the UK Data Transfer Addendum.
+Choices About How We Use and Disclose Your Information
+We strive to provide you with choices regarding the personal information you provide to us. We have created mechanisms to provide you with the following control over your information:
+Tracking Technologies and Advertising. Most browsers accept Tracking Technologies automatically, but you may be able to set your browser to refuse all or some Tracking Technologies or to alert you when Tracking Technologies are being sent. If you block, disable or refuse certain Tracking Technologies, please note that some parts of this site and the Services may then be inaccessible or not function properly. You can opt out of Google Analytics here: https://tools.google.com/dlpage/gaoptout.
+Promotional Offers from Pika. If you do not wish to have your email address used by Pika to promote our own or third parties’ products or services, you can opt out by sending us an email stating your request to support@pika.art. If we have sent you a promotional email, you may send us a return email asking to be omitted from future email distributions.
+Targeted Advertising. If you do not want us to use or disclose information that we collect or that you provide to us to deliver targeted advertisements, please submit a request through the Your Privacy Choices link available in the footer of our website. You may also opt out by sending us an email stating your request to support@pika.art.
+Your browser settings may allow you to transmit a “Do Not Track” signal, “opt-out preference” signal or other mechanism for exercising your choice regarding the collection or processing of your information when you visit various websites. Our website recognizes the Global Privacy Control (GPC) signal, which enables you to opt-out of certain uses or disclosures of your information. If you notify us of your preference through GPC, we will honor your request only for the browser or device that sends the GPC signal.
+We do not control third parties’ collection or use of your information to serve interest-based advertising. However, these third parties may provide you with ways to choose not to have your information collected or used in this way. You may be able to limit the use of your information for interest-based advertising through:
+Browser settings or privacy tools. You may be able to adjust your browser to block third-party Tracking Technologies or use privacy-focused browsers and ad-blocking plug-ins. However, as described above, blocking or disabling certain Tracking Technologies may cause some of the Services to not work properly.
+Platform settings. Opt out of personalized advertising on platforms such as Google (https://adssettings.google.com/) and Facebook (https://www.facebook.com/about/ads).
+Industry opt-out tools. You may also opt-out of the collection and use of information for interest-based advertising by advertisers that are part of certain industry alliances. Use the Digital Advertising Alliance (https://optout.aboutads.info), Network Advertising Initiative (http://www.networkadvertising.org/managing/opt_out.asp), European Interactive Digital Advertising Alliance (https://www.youronlinechoices.com), or AppChoices (https://www.youradchoices.com/appchoices).
+Mobile settings. Adjust your mobile device settings to restrict advertising IDs.
+Residents of certain jurisdictions may have additional personal information rights and choices. Please see Your State Privacy Rights, Your Canadian Privacy Rights, and Your EEA/UK Privacy Rights and Disclosures for more information.
+Accessing and Correcting Your Information
+You can review and change your personal information by logging into the Service and visiting your account profile page.
+You may also send us an email at support@pika.art to request access to, correct, or delete any personal information that you have provided to us. We cannot delete your personal information except by also deleting your user account. We may not accommodate a request to change information if we believe the change would violate any law or legal requirement or cause the information to be incorrect.
+If you delete your User Contributions from the Service, copies of your User Contributions may remain viewable in cached and archived pages, or might have been copied or stored by other Service users. Proper access and use of information provided on the Service, including User Contributions, is governed by our terms of service.
+Residents of certain jurisdictions may have additional personal information rights and choices. Please see Your State Privacy Rights, Your Canadian Privacy Rights, and Your EEA/UK Privacy Rights and Disclosures for more information.
+Your US State Privacy Rights
+For individuals residing in certain US states, this section is designed to help you better understand how we collect, use, and disclose your personal information and, depending on where you reside, how to exercise your rights under state privacy laws in the US. You can read more about the personal information we collect and where we collect it from in “Information We Collect About You and How We Collect It” above, how we use personal information in “How We Use Your Information” above, and how long we retain personal information in “Data Retention” below.
+Certain US state privacy laws may provide residents with some or all of the rights listed below. However, these rights are not absolute and may be subject to certain exceptions. Therefore, we may decline your request in certain cases as permitted by law. These rights may include the right to:
+Confirm whether we process their personal information.
+Request that we disclose to you the categories and specific pieces of personal information we have collected, sold and/or shared about you.
+Request that we disclose the following to you: The sources from which your personal information is collected
+The business or commercial purpose for collecting, selling, or sharing your personal information
+The categories of third parties with whom Pika shares or sells personal information
+A list of third parties to which we have disclosed your personal data.
+Request that we delete certain personal information we have collected about you.
+Request that we correct inaccuracies in their personal information, taking into account the information’s nature processing purpose.
+Data portability.
+Request to opt-out of personal data processing for: targeted advertising;
+selling or sharing; or
+profiling in furtherance of decisions that produce legal or similarly significant effects.
+Request to either limit (opt-out of) or require consent to process sensitive personal data.
+While we do not sell personal information in the traditional sense, we disclose (and have disclosed in the preceding 12 months) the following categories of personal information for marketing and advertising purposes with our advertising, marketing, and analytics partners for cross-context behavioral advertising purposes that may be considered “selling” or “sharing” as those terms are defined under the California Consumer Privacy Act (CCPA) and other US state privacy laws: identifiers, internet or similar network activity, geolocation information (such as IP address) and inferences drawn from other personal information. We have no actual knowledge of selling or sharing the personal information of minors under 16 years of age. We also do not process sensitive personal information for the purposes of inferring characteristics about a consumer.
+Exercising Your Rights. To exercise any of these rights, please email us at support@pika.art. We will not discriminate against you for exercising your privacy rights. To exercise the right to opt out of the sale or sharing or processing of your personal information for targeted advertising, please submit a request through the Your Privacy Choices link located in the footer of our website. For further information about how to opt-out of targeted advertising and the use of certain Tracking Technologies, and on how we process opt-out preference signals, please see the section above, Choices About How We Use and Disclose Your Information.
+Verification. To protect your personal information from unauthorized access, change, or deletion, we may require you to verify your credentials before you can submit a request to know, correct, or delete personal information. If you do not have an account with us, or if we suspect fraudulent or malicious activity, we may ask you to provide additional personal information for verification. If we cannot verify your identity, we will not be able to honor your request.
+Authorized Agents. You may also submit a rights request through an authorized agent. If you do so, the agent must present signed written permission to act on your behalf and you may also be required to independently verify your identity with us. Authorized agent requests can be submitted to support@pika.art.
+Appeals. To appeal a decision regarding a consumer rights request, please send us an email at support@pika.art within 30 days after the decision was rendered with a detailed explanation of why you believe the decision was incorrect or unsatisfactory and any additional information or evidence that supports your appeal. On receipt of your appeal, we will acknowledge its receipt within ten business days. The appeal will be reviewed by a senior member of our data protection or compliance team who was not involved in the initial decision. We may contact you for further information or clarification if necessary. We will provide a written response to your appeal within 30 days of receipt. If additional time is required to review your appeal, we will notify you of the extension and the reasons for it. If your appeal is upheld, we will take the necessary steps to rectify the issue and inform you of the actions taken. If your appeal is denied, we will provide a detailed explanation of the reasons for the denial and inform you of any further options available, such as contacting the relevant state authorities or data protection agencies.
+California “Eraser” Law. If you are a California resident under the age of 18 and have registered and posted content to the Service, you may request its removal by emailing us at support@pika.art. You must identify the content and confirm that you posted it. We will make reasonable efforts to anonymize or remove it from public view, although we cannot guarantee complete or comprehensive removal from all locations (e.g., if third parties have copied or shared the content elsewhere).
+California “Shine the Light” Law. Pursuant to California’s “Shine the Light Act,” California residents are permitted to request information about the manner in which we share certain categories of information with third parties for their marketing use. To make a request for information under the Shine the Light Act, please send an email to support@pika.art.
+Nevada. Nevada provides its residents with a limited right to opt-out of certain personal information sales. Residents who wish to exercise this sale opt-out rights may submit a request to this designated address: support@pika.art. However, please know we do not currently sell data triggering that statute’s opt-out requirements.
+Your Canadian Privacy Rights
+If you live in Canada, by law you have the right to request access to and to correct the personal information that we hold about you.
+If you want to review, verify, correct, or withdraw consent to the use of your personal information you may send us an email at support@pika.art to request access to, correct, or delete any personal information that you have provided to us. We may not accommodate a request to change information if we believe the change would violate any law or legal requirement or cause the information to be incorrect. We may charge you a fee to access your personal information, however, we will notify you of any fee in advance. Please note that if you withdraw your consent, we may not be able to provide you with a particular product or service. We will explain the impact to you at the time to help you with your decision.
+We may request specific information from you to help us confirm your identity and your right to access, and to provide you with the personal information that we hold about you or make your requested changes. Canadian law may allow or require us to refuse to provide you with access to some or all of the personal information that we hold about you, or we may have destroyed, erased, or made your personal information anonymous in accordance with our record retention obligations and practices. If we cannot provide you with access to your personal information, we will inform you of the reasons why, subject to any legal or regulatory restrictions.
+If you are concerned about our response or would like to correct the information provided, you may contact our Privacy Officer at support@pika.art.
+Your EEA/UK Privacy Rights and Disclosures
+If you reside in the EU, the EEA, Switzerland, or the UK, the following additional terms apply to our processing of your personal data.
+Controller. For purposes of the General Data Protection Regulation (GDPR), the United Kingdom GDPR, and other relevant data protection laws, the controller of your personal data is:
+Mellis, Inc.
+849 High St
+Palo Alto, California 94301
+support@pika.art
+Legal Basis for Processing. We only process your personal data where applicable law permits or requires it, including:
+Where the processing is necessary for the performance of our contract with you.
+Where the processing is necessary for our legitimate interests or the legitimate interests of third parties.
+Where the processing is necessary to comply with a legal obligation, such as responding to a legal request or retaining transaction information to comply with record-keeping obligations.
+With your consent. For example, certain personal data processed by the Service may be considered “special category data” under article 9 of the GDPR. We process this data only with your explicit consent or where necessary for reasons of substantial public interest, in accordance with applicable law.
+Legal Rights. Under certain circumstances, you have rights under data protection laws concerning your personal data. Your rights may include the following:
+Request access to your personal data (commonly known as a “data subject access request”). This enables you to receive a copy of the personal data we hold about you and to check that we are lawfully processing it.
+Request correction of the personal data that we hold about you. This enables you to have any incomplete or inaccurate data we hold about you corrected, though we may need to verify the accuracy of the new data you provide to us.
+Request erasure of your personal data. This enables you to ask us to delete or remove personal data where there is no good reason for us to continue to process it. You also have the right to ask us to delete or remove your personal data where you have successfully exercised your right to object to processing (see below), where we may have processed your information unlawfully, or where we are required to erase your personal data to comply with local law. Note, however, that we might not always be able to comply with your erasure request for specific legal reasons that will be notified to you, if applicable, at the time of your request.
+Object to processing of your personal data where we are relying on a legitimate interest (or those of a third party) and there is something about your particular situation that makes you want to object to processing on this ground as you feel it impacts on your fundamental rights and freedoms. You also have the right to object where we are processing your personal data for direct marketing purposes. In some cases, we may demonstrate that we have compelling legitimate grounds to process your information that override your rights and freedoms.
+Request restriction of processing your personal data. This enables you to ask us to suspend the processing of your personal data in the following scenarios: (1) if you want us to establish the data’s accuracy; (2) where our use of the data is unlawful, but you do not want us to erase it; (3) where you need us to hold the data even if we no longer require it as you need it to establish, exercise, or defend legal claims; or (4) you have objected to our use of your data, but we need to verify whether we have overriding legitimate grounds to use it.
+Request the transfer of your personal data to you or a third party. We will provide to you, or a third party you have chosen, your personal data in a structured, commonly used, machine-readable format. Note that this right only applies to automated information that you initially provided consent for us to use or where we used the information to perform a contract with you.
+Withdraw consent at any time where we are relying on consent to process your personal data. However, this will not affect the lawfulness of any processing carried out before you withdraw your consent. If you withdraw your consent, we might not be able to provide certain products or services to you. We will advise you if this is the case at the time you withdraw your consent.
+Exercising Your Rights. If you wish to exercise any of the rights set out above, please contact us at support@pika.art.
+Fees. You will not have to pay a fee to access your personal data (or to exercise any of the other rights). However, we may charge a reasonable fee if your request is clearly unfounded, repetitive, or excessive. Alternatively, we may refuse to honor your request in these circumstances.
+Verification. We may need to request specific information from you to help us confirm your identity and ensure your right to access your personal data (or to exercise any of your other rights). This is a security measure to ensure that personal data is not disclosed to any person who has no right to receive it. We may also contact you to ask you for further information regarding your request to speed up our response.
+Responding to Your Request. We try to respond to all legitimate requests within one month. Occasionally it may take us longer than a month if your request is particularly complex or you have made several requests. In this case, we will let you know and keep you updated.
+Right to Lodge Complaint. If you believe our data processing practices violate your rights under the EU or UK GDPR, you may lodge a complaint with the supervisory authority in your country of residence or work. If you are in the EU, you can find your local supervisory authority here. For any unresolved complaints relating to the UK, you can reach out to the Information Commissioner’s Office, and for Switzerland, to the Federal Data Protection and Information Commissioner. While you have the right to lodge a complaint directly with the supervisory authority, we welcome the opportunity to address your concerns and resolve any issues first.
+Data Security
+We implement technical, administrative, and physical measures that are designed to protect your personal information from unauthorized access, use, alteration, or disclosure. Information you provide is stored on secure servers behind firewalls, access to personal information is limited to personnel who need it to perform their duties, and sensitive information (such as payment details) is transmitted using encryption technologies such as SSL. Additional security commitments may be available to enterprise customers under a separate written agreement or security addendum.
+However, no system can be completely secure. We cannot guarantee the absolute security of your personal information, and any transmission is at your own risk. You are responsible for maintaining the confidentiality of your login credentials and should avoid sharing them with others. We urge you to exercise caution when sharing information in public or user-accessible areas of the Service.
+If your access includes API keys or similar credentials, you are responsible for keeping them confidential, for all activity conducted under them, and for promptly notifying us at support@pika.art if you know or suspect that a credential has been lost, disclosed, or otherwise compromised. We may rotate or revoke credentials at any time for security reasons or where we suspect abuse.
+Data Retention
+Except as otherwise permitted or required by applicable law or regulation, we will only retain your personal information for as long as necessary to fulfill the purposes we collected it for as set forth in this privacy policy, or as otherwise required for security, abuse prevention, billing, troubleshooting, or satisfying any legal, accounting, or reporting requirements. Under some circumstances, including when you request deletion or your personal information or delete your account, we may deidentify your personal information in accordance with applicable law so that it can no longer be associated with you. We may use that de-identified data for any legitimate business purpose without further notice to you or your consent.
+If you submit biometric information (such as facial scans or voice recordings), we retain that information only as long as necessary to fulfill the purpose for which it was collected or, at most, for three years after you delete your account, whichever is earlier.
+Changes to Our Privacy Policy
+It is our policy to post any changes we make to our privacy policy on this page with a notice that the privacy policy has been updated on the website home page. If we make material changes to how we treat our users’ personal information, we will notify you by email to the primary email address specified in your account or through a notice on the website home page. The date the privacy policy was last revised is identified at the top of the page. You are responsible for ensuring we have an up-to-date active and deliverable email address for you, and for periodically visiting our website and this privacy policy to check for any changes.
+Contact Information
+To ask questions or comment about this privacy policy and our privacy practices, contact us at:
+Privacy Officer
+Mellis, Inc.
+849 High St
+Palo Alto, CA 94301
+USA
+support@pika.art
+We have procedures in place to receive and respond to complaints or inquiries about our handling of personal information, our compliance with this policy, and with applicable privacy laws. To discuss our compliance with this policy please contact our Privacy Officer using the contact information listed above.
+Product
+Video Apps
+Image Apps
+Audio Apps
+Pika MCP
+Pika for ChatGPT
+iOS app
+Pricing
+Enterprise
+Developers
+Pika API Club
+Enterprise API
+Company
+Research
+Blog
+Experiments
+Contact
+Referral Program
+Resources
+Help Center
+Support
+Terms
+Privacy
+Cookies
+DMCA
+Your Privacy Choices
+© 2026 Pika. All rights reserved.

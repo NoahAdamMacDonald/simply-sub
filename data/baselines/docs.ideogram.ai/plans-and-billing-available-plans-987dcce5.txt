@@ -1,0 +1,185 @@
+url: https://docs.ideogram.ai/plans-and-billing/available-plans
+method: fetch
+saved: 2026-11-19
+
+Plans and Credits | Ideogram Docs Skip to content Docs
+API docsOpen Ideogram Menu
+Search the docs
+Welcome to Ideogram
+Quick Start
+Get Started
+Tour of the App
+Sign In and Accounts
+Account Settings
+Create
+Create Images
+Models
+Image Settings
+Reference Images
+Style Reference
+Describe
+Transparent Backgrounds
+Make a Logo
+Custom Models
+Create Videos
+Apps and Workflows
+Batch Generation
+Use Ideogram in AI Assistants
+Edit
+Edit Images
+Masks and Inpainting
+Studio
+Text and Layers
+Remix
+Upscale
+Remove Backgrounds and Objects
+Organize and Share
+Library and Favorites
+Characters
+Collections
+Download
+Share and Publish
+Creator Titles
+Prompting
+Prompting Basics
+Prompt Structure
+Text in Images
+JSON Prompting
+Refine and Iterate
+Fix Common Problems
+Vocabulary Reference
+Plans and Billing
+Plans and Credits
+Buying Extra Credits
+Billing & Subscriptions
+Team Plan
+Enterprise Prepaid
+Enterprise Groups
+Ideogram API
+API Docs ↗
+Help
+Frequently Asked Questions
+Troubleshooting
+Files and Limits
+Keyboard Shortcuts
+Glossary
+Contact Support
+Discord
+Privacy Policy ↗
+Terms of Service ↗
+About Ideogram
+Company
+Blog Posts
+Website ↗
+iOS app ↗
+External Links
+Docs
+Plans and Billing
+Plans and Credits
+Plans and Credits
+Compare Ideogram Free, Plus, Pro and Team pricing, monthly credits, pay-as-you-go options and what happens when credits run out. Copy page
+View as Markdown
+On this page Plans
+How credits work
+Free plan
+In this topic: plans and billing
+Related
+This page lists the price and monthly credits of the free plan and each paid plan. Prices were last verified on October 15, 2026.
+Plans
+Plan Monthly billing Yearly billing Credits each month
+Free $0 $0 30 a week (see Free plan)
+Plus $20/month $15/month ($180 a year) 2,400
+Pro $60/month $42/month ($504 a year) 7,500
+Team $30 per user/month $20 per user/month ($240 per user a year) 3,600 per user
+Enterprise agreement Custom Custom Custom
+Prices are in US dollars, before tax. Yearly plans still get their credits each month, not all at once. Team plans need at least 2 users. See Team Plan.
+To compare plan features, or to subscribe, go to Settings → Plans, or to ideogram.ai/pricing.
+The Credits tab in Settings, where available, also offers Pay as you go for personal accounts and Enterprise Prepaid for organizations. Prepaid organizations buy a shared balance without a monthly seat allowance. See Buying Extra Credits and Enterprise Prepaid.
+Note Basic plan: Ideogram no longer sells the Basic plan ($8/month or $7/month billed yearly). If you already have it, you keep it and get 960 credits each month.
+What changes besides the credit allowance?
+Plus includes private generation and quality export. Pro adds a larger generation queue. Batch Generation and custom model training are open to any plan with enough credits. Team adds central billing and administration, with credits assigned to each member. Enterprise features and allowances follow the organization's agreement.
+Open the plan comparison under Settings → Plans to review the features before choosing. Buying more credits funds usage; it doesn't change your subscription tier.
+Does pay as you go include monthly credits?
+Pay as you go uses credits you buy as needed, without a monthly subscription allowance. Credits pay for eligible image, video and API usage. Auto recharge is a separate option for replenishing the wallet.
+How credits work
+Images, videos, edits, upscales and app runs all cost credits. The cost depends on the model, quality, size and number of outputs. In most image apps, the run button shows the cost before you start. In the Video app, the Generate button shows credits once your inputs are ready and a quote is available. A ~ marks an estimate; hover over the number to see whether the quote is estimated or exact.
+To see what everything costs, including video, go to Settings → Usage costs.
+You spend credits in this order:
+Monthly credits from your plan. They reset on each renewal date, and unused monthly credits do not roll over.
+Top-up credits you bought for your plan. They roll over from month to month. See Buying Extra Credits.
+Pay-as-you-go credits in your wallet.
+The free allowance or the slower queue, where the action allows it. See After your credits run out.
+Each request is paid from one of these in full; it isn't split between them. One credit is one US cent of list price, so a free account that bought credits spends them before its free weekly credits.
+What common actions cost
+These are the prices the apps charged on November 15, 2026. The run button in each app shows the exact cost before you start. Studio doesn't show a price before running, and some Studio tools cost a different amount than the matching app.
+Action Credits
+Ideogram 4.5 image, Low, Medium or High quality 3, 6 or 10 per image
+Ideogram 4.0 image, Turbo, Default or Quality 3, 6 or 10 per image
+Ideogram 3.0 image, Turbo, Default or Quality 3, 6 or 9 per image
+Precise Edit, Very low, Low, Medium or High 0.8, 3, 6 or 22 per image (Medium is the default)
+Remove a background 1 per image, nothing for an image that's already transparent
+Remove an object 3, or 6 when the image's longest side is over 1024 px
+Upscale with a Topaz upscaler 3, 6 or 9 per megapixel of the result, by upscaler. A 1024 × 1024 image at 2x is about 12.6 at the lowest rate
+Describe Free on paid plans; 1 credit of the free weekly allowance
+Video with Seedance 2.5, the Video app's default 10.3, 23.1 or 61.4 per second at 480p, 720p or 1080p. A 10-second clip at 720p is 231. An Auto length is charged as 30 seconds
+Vector artwork with Ideogram Vector 1, Low, Medium or High 13, 16 or 20 per image
+Convert an image to a vector 10
+Train a custom model 4,000 per run
+Partner models, such as GPT Image and Nano Banana, and apps such as Ad Resizer, Colorways and Material Swap, are priced per run from the provider's cost. Check the run button. For every price, go to Settings → Usage costs.
+When you're charged
+Ideogram charges credits when a generation finishes and its results are saved. Your balance is held while the work runs, and nothing is taken if it doesn't finish.
+Not charged: a generation that fails or times out, and a prompt the safety check blocks before anything runs.
+Charged: an image that is generated and then hidden because it didn't pass the safety check.
+Charged when it starts: custom model training.
+Because failed work isn't charged, there's nothing to refund for it. For other questions about money back, see Refunds.
+Check your balance
+Click your avatar at the bottom of the sidebar.
+Read Credits in the user menu. It shows how many you have left.
+If you have a plan, Buy credits sits right below; without one, you'll see Upgrade.
+A funded personal account without a subscription is labeled Pay as you go. That label can remain after its balance reaches zero because the account has a completed credit purchase. Read the number of credits left to decide whether you need to add more.
+Your balance is in the user menu. Wallet & Billing has the details.
+See monthly and top-up credits
+Click Wallet & Billing in the same menu, or go to Settings → Wallet & Billing. The Credit balance card shows your total, with Add credits and Turn on auto recharge.
+Hover over the ⓘ next to the total to see monthly and top-up credits.
+The Credit balance card on Wallet & Billing.
+In a team workspace, members see only their credits in that team. Team owners also see Wallet & Billing (the team's billing) and Buy credits, which opens the member list so they can top up members' credits. See Team Plan.
+Enterprise Prepaid uses one organization balance. Its owners and admins manage the shared wallet; members don't buy top-ups for individual seats. See Enterprise Prepaid.
+After your credits run out
+What happens depends on your plan:
+Plan When your credits run out
+Free Wait for next week's 30 credits, or buy credits.
+Pay as you go Buy more credits, or turn on auto recharge so your balance refills itself.
+Basic Keep using Ideogram models in a slower queue, up to a daily limit.
+Plus, Pro, Team Keep using Ideogram models in a slower queue, with no limit.
+On Plus, Pro and Team you can keep generating with Ideogram models after your credits run out. These generations wait in a slower queue. These still need credits:
+custom models;
+partner models;
+generations that use a reference image;
+image edits;
+upscales;
+video;
+Layerize text, the Vectorizer and apps such as Ad Resizer;
+custom model training.
+On Basic, Plus, Pro and Team, buy extra credits or wait for your next renewal to keep using them.
+Free plan
+Free accounts get 30 credits each week if they signed up with Google or Apple. The credits reset every Saturday at 00:00 UTC. Accounts created with Microsoft or with an email and password don't get free credits, unless you later link a Google or Apple sign-in that uses the same verified email; they can buy credits or subscribe.
+The free plan also has these limits:
+10 edited images in total, not each week, from edits that work from reference images, such as AI edit in Studio. A failed edit doesn't count. Precise Edit isn't part of this limit; it runs on your weekly credits.
+100 Describes a week.
+On the free plan, everything you generate is public. Plus, Pro, Team and Enterprise keep new images private until you publish them; legacy Basic doesn't.
+In this topic: plans and billing
+Plans and Credits (this page): compare plans and see how credits work
+Buying Extra Credits: top up when you run low
+Team Plan: share a plan and credits with a team
+Billing & Subscriptions: manage payment, invoices and your plan
+Troubleshooting Billing Issues: fix payment and charge problems
+Related
+Enterprise Prepaid
+Terms of Service
+PreviousMemory Colors for Naming Color NuancesNextBuying Extra Credits
+On this page
+Plans
+How credits work
+Free plan
+In this topic: plans and billing
+Related

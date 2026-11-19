@@ -1,0 +1,237 @@
+url: https://leonardo.ai/privacy-policy
+method: fetch
+saved: 2026-11-19
+
+Privacy Policy | Leonardo.Ai
+Leonardo.Ai
+Privacy Policy
+Last updated: 19 January 2026
+Table of contents
+Personal information we collectHow we use your informationSharing your informationHow we transfer, store and protect your informationKeeping your information safeYour rightsData retentionChildrenAdvertisingAdditional information for users in EuropeAdditional information for users in the United StatesChanges to this PolicyContact us
+We are Leonardo Interactive Pty Ltd T/A Leonardo.Ai, a Canva brand (“Leonardo.Ai“). This Privacy Policy applies to our website at leonardo.ai (the “Website“), our cloud-based AI platform (the “Platform“), and all related websites, software, mobile apps, plug-ins and other services that we provide (together, the “Service“).
+This Privacy Policy (“Policy”) explains how we and our affiliates collect, use, disclose and protect information that applies to the Service. It also explains how you can exercise your privacy rights. If you have any questions, suggestions or complaints about our use of your personal information or this Policy, please contact us using the details provided at the bottom of this Policy. Any capitalised terms that are not defined in this Policy have the meaning given to them in our Terms of Service.
+1. Personal information we collect
+(a) Information you provide us directly
+Certain parts of the Service may ask you to provide personal information voluntarily. For example, when you register for an account, we ask for your email address and interests. If you apply to join the Leonardo Creator Program, we may also collect additional information relevant to your application, such as your location, links to your portfolio and social media profiles, and any other details you choose to share with us. Where payment is required to access the Service (i.e., if you pay for a subscription), our third-party payment processor may collect and store your payment information, such as payment card information.
+We collect personal information in any messages you send to us, as well as our social media channels (such as user feedback, messages and search queries). We may also collect personal information in content you submit or upload to the Service (such as text prompts, images, photos, videos and other media and the metadata about your content) as well as the resulting material you generate through the Service, such as images or videos (together, “Content“). We use this information to operate, maintain, improve and provide the features and functionality of the Service, to correspond with you, and to address any issues you raise about the Service.
+If you don’t provide your information to us, you may not be able to access or use certain features of the Service or your experience of using the Service may not be as enjoyable.
+(b) Information we receive from third parties
+We may receive information about you from third parties. For example, when you log into the Service using a third-party account (e.g., Apple or Google) we may also collect certain information from the third-party necessary to authenticate your account, such as your email address and any other information you allow the third-party to share with us. You should always review, and if necessary, adjust your privacy settings on third-party websites and services before linking or connecting them to our Service. You may also unlink your third-party account from our websites by adjusting your settings on the third-party service. If you unlink your third-party account, we will no longer receive information collected about you in connection with that service. We may also receive certain information from third-party data providers, such as contact details and professional information, to help us identify and reach potential customers who may be interested in the Service.
+(c) Information we collect from you automatically
+We will directly collect or generate certain information about your use of the Service (e.g., user activity data, analytics event data and clickstream data), for data analytics and machine learning, and to help us measure traffic and usage trends for the Service. We may also use third party analytics tools that automatically collect information sent by your browser or mobile device, including the pages you visit and other information that assists us in improving the Service. For more information, please see the paragraphs below on cookies information, log file information, clear gifs, device identifiers, and location data.
+(d) Cookies information and information taken from similar technologies
+When you visit the Service, we, and our third-party partners, will send cookies to your computer that uniquely identifies your browser and lets us do things like help you log in faster, enhance your navigation through the site, remember your preferences and generally improve the user experience. Cookies also convey information to us about how you use the Service (e.g., the pages you view, the links you click and other actions you take on the Service) and allow us or our business partners to track your usage of the Service over time. They also allow us to measure traffic and usage trends for the Service, deliver personalised advertisements that may be of interest to you and measure their effectiveness, and find potential new users of the Service.
+You can control or reset your cookies and similar technologies through your web browser, which will allow you to customise your cookie preferences and to refuse non-essential cookies or to indicate when a cookie is being sent. However, some features of the Service may not function properly if the ability to accept cookies is disabled. For more information on how we use cookies and other technologies and how you can control them, please read our Cookies Policy.
+(e) Log file information
+Log file information is automatically reported by your browser or mobile device each time you access the Service. When you use our Service, our servers automatically record certain log file information. These server logs may include anonymous information such as your web request, browser type, referring / exit pages and URLs, number of clicks and how you interact with links on the Service, domain names, landing pages, pages viewed, and other such information.
+(f) Clear gifs/web beacons information
+When you use the Service, we may employ clear GIFs (also known as web beacons) which are used to anonymously track the online usage patterns of our users. In addition, we may also use clear GIFs in HTML-based emails sent to our users to track which emails are opened and which links are clicked by recipients. This information allows for more accurate reporting and improvement of the Service.
+(g) Device identifiers
+When you access the Service on a device (including smart-phones or tablets), we may access, collect and/or monitor one or more “device identifiers,” such as a universally unique identifier (“UUID”). Device identifiers are small data files that uniquely identify your mobile device. A device identifier may convey information to us about how you use the Service. A device identifier may remain persistently on your device, to help you log in and navigate the Service better. Some features of the Service may not function properly if use of device identifiers is impaired.
+(h) Location data
+We collect information in order to understand where our users are located for a number of reasons. We may collect your precise or approximate location:
+from you, when you provide, correct or confirm your location (e.g., when you purchase products from us);
+by inferring your location from your IP address; and
+from our third party partners
+(i) Information we collect from other sources
+We also collect information from other sources, such as information that is publicly available on the Internet, to train our models and conduct research. While we do not intentionally collect personal information, this type of information may be incidentally included in these datasets.
+2. How we use your information
+We use the information we collect about you for the purposes set out below:
+Providing you with the Service: We use the information that you directly give us to provide the Service to you. This includes allowing you to log in to the Service, operating and maintaining the Service and giving you access to your Content. We may also use information we collect about you automatically to remember information about you so that you will not have to re-enter it during your visit or the next time you visit the Service.
+For data analytics: We use information about you to help us improve the Service and our users’ experience, including by monitoring aggregate metrics such as total number of visitors, traffic, and demographic patterns.
+For Service improvement (including analytics and machine learning): We may analyse your Content and related data in your account to improve the Service, and to train our algorithms, models, and AI products and services using machine learning to develop, improve and provide our Service. If you don’t want your Content to be used for machine learning, you can generate Content privately with any paid subscription plan. Private Content isn’t accessible to others and won’t be used by Leonardo.Ai for model training.
+Customizing the Service for you: We may use and combine the information you provide us and information about you that we collect automatically and receive from other sources (including information we receive on and off our Service) and combine it with information about the behaviour of other users to make sure that your use of the Service is customized to your needs. For example, to recommend content that is likely to be useful to you, we may use information derived from your prior behaviour on our Service, the use of content by other people and other inferred information.
+To communicate with you about the Service: We may use your contact information to get in touch with you and to send communications about critical elements of the Service. For example, we may send you emails about technical issues, security alerts or administrative matters.
+To promote and drive engagement with the Service: We may use your contact information to get in touch with you about taking part in our surveys or about features and offers relating to the Service that we think you would be interested in. We may also use information we collect about you to make sure that you get the most relevant offers and promotions based on your use of the Service, and your preferences.
+To improve the Service: We may analyse information about your use of the Service and related data in your account to better understand how users are engaging with our Service and measure the effectiveness of the Service so we can make improvements and develop our services for users.
+For advertising purposes: We may use information about you, including cookies information and other information we (and our third-party partners) collect from you automatically about your use of the Service, to serve, personalize and measure the effectiveness of advertising on the Service and third-party sites and platforms. This includes showing you advertising we think you might find interesting as well as displaying advertising to potential new users that have similar interests. For more information about how we use your information for advertising purposes, please see the section titled “Advertising” below.
+Customer service: We use information about you, information that we collect or and from within your account, information that you provide to our customer service team, and information about your interactions with the Service to resolve technical issues you experience with the Service, and to ensure that we can repair and improve the Service for all users.
+For safety, security, fraud and abuse measures: We may use information about you, your activity, Content, media uploads and related data in your account to prevent, detect, investigate and address safety, security, fraud and abuse risks, and to develop our algorithms and models to identify violations of this Policy or our Terms of Service.
+For troubleshooting, error resolution and service improvement: We may need to review your Content or information to support your request for help, correct general errors with the Service or improve our services.
+For matters that require use of your information by law: We will use or disclose your information where we reasonably believe that such action is necessary to (a) comply with the law and the reasonable requests of law enforcement; (b) to enforce our Terms of Service or to protect the security or integrity of our Service; and/or (c) to exercise or protect the rights, property, or personal safety of Leonardo.Ai, our users or others.
+3. Sharing your information
+How we share your information
+We respect and are committed to protecting your privacy. However, we may disclose your personal information to our group companies and to our services providers and partners who provide data processing services to us. This includes, for example, group companies and service providers who assist with functions such as billing, customer support, hosting and storage, data analytics, data labelling and machine learning, security, advertising and marketing, and other services. We may also disclose your personal information to our group companies and partners for other purposes that are described in this Privacy Policy or notified to you when we collect your information.
+In the event of a proposed purchase, merger or acquisition of any part of our business, we may disclose your personal information to an actual or potential buyer (and its agents and advisers) provided that we inform the buyer it must use your personal information only for the purposes disclosed in this Privacy Policy.
+We may also aggregate or otherwise strip data of all personally identifying characteristics and may share that aggregated such anonymized data with third parties.
+We reserve the right to disclose your personal information as required by law (e.g., to comply with a subpoena, warrant, or court order) and when we believe that disclosure is necessary to protect our rights, avoid litigation, protect your safety or the safety of others, investigate fraud, and/or respond to a government request. We may also disclose information about you if we determine that such disclosure should be made for reasons of national security, law enforcement, or other issues of public importance.
+If you have consented to the disclosure of your personal information to any other third party, we may also share the data with them.
+If you sign up to the Service using an email address associated with your employer or another organization associated with your email address (the “Admin Entity”), the account will be an “Administered Account” and we may:
+make changes to the Administered Account, including to your account settings;
+make changes to Content permissions;
+delete or lock the Administered Account.
+How you can share your Content
+With a paid subscription, you have control over who can see your generated Content. When you use private mode, your generated Content cannot be accessed or used by other users. If private mode is turned off, your Content is considered public and can be accessed and used by other users. If you are using a free subscription, all Content you generate is publicly available by default. It may be viewed by other users, appears in search results, and can be indexed by search engines. Please note that if you or Leonardo.Ai remove Content from the Service, copies may still be viewable in cached and archived pages, or if other users have copied or saved that information. Learn more here.
+If you are part of a Team account, any information or Content you create within that Team may be shared with other Team members and the Team administrator; such Content, by default, is private to those part of the Team account. If requested by the Team administrator, Leonardo.Ai may re-assign ownership of any shared Content to the Team administrator or another Team member. The Team administrator may also move, delete or edit any shared Content within the account. You should ensure that any personal information, confidential information, or Content that you’d like to keep private is retained in a separate personal account.
+4. How we transfer, store and protect your information
+Your information will be stored in the United States and processed in Australia and any other country in which Leonardo.Ai, its group companies, service providers and partners maintain facilities or employ staff or contractors.
+This means that your data may be transferred to and processed in countries other than the country in which you are located. These countries may have data protection laws that are different to the laws of your country (and, in some cases, may not be as protective).
+However, we always take steps to ensure that your data will remain protected in accordance with this Policy and applicable data protection laws. These measures include transferring your data to a country that the European Commission or UK authorities (as applicable) have determined provides an adequate level of protection for personal information, or by implementing appropriate transfer mechanisms and safeguards with our group companies, service providers and partners to protect your data.
+5. Keeping your information safe
+We take commercially reasonable security measures designed to protect the security of the personal information, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures. To protect your privacy and security, we take reasonable steps (such as requiring a unique password) to verify your identity before granting you access to your account. You are responsible for maintaining the secrecy of your unique password and account information, and for controlling access to your account, at all times; we are not responsible for any activity that occurs due to the use of a shared email address or otherwise shared access to your account. However, we cannot ensure or warrant the security of any information you transmit to us or guarantee that information on the Service may not be accessed, disclosed, altered, or destroyed.
+6. Your rights
+The laws of some countries grant particular rights in respect of personal information. Individuals in certain countries, including the European Union, United Kingdom, and Brazil have the right to:
+Request access to their information;
+Request that we correct inaccuracies in their information;
+Request that their information be deleted or that we restrict the processing of their information;
+Request a structured electronic version of their information; and
+Object to our use of their information.
+If we process your information on the basis of your consent, you have the option to withdraw your consent at any time. Doing so will not affect the lawfulness of the processing we carried out based on your consent up to the time of withdrawal.
+You can exercise any of these rights by contacting us using the contact details provided at the bottom of this page in the “Contact us” section. We respond to all requests we receive in accordance with applicable data protection laws. In some circumstances we will not be able to comply with your request regarding your personal information, and if that is the case we will explain why. For example, we may not be able to provide a copy of your information where it infringes on the rights of another individual. In some cases, you may have shared your information with third parties, such as by publishing an image or video on a third party’s website. In that case, Leonardo.Ai will not be able to delete the information, and you will need to contact that third party directly.
+You have the right to opt-out of marketing communications we send you at any time. You can exercise this right by clicking on the “unsubscribe” or “opt-out” link in the marketing emails we send you or in your user profile page. You can also contact us using the contact details provided at the bottom of this page under the “Contact us” heading.
+If we are unable to resolve your request, or if you are concerned about a potential violation, you have the option to report the issue or make a complaint to the data protection authority in your jurisdiction.
+7. Data retention
+We will retain your personal information for as long as your account is active or as needed to provide you with the Service or for as long as we have a valid purpose to do so. In particular, we may retain your information as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements.
+When we have no ongoing legitimate business need to process your information, we will either delete or anonymise it, or, if this is not possible (for example, because your information has been stored in backup archives), then we will securely store your information and isolate it from any further processing until deletion is possible.
+8. Children
+Children may not access or use the Service. For purposes of this Policy, a child is a person under the age of 13 (or the minimum legal age required to provide consent for processing of personal data in the country where the child is located).
+The Service and our content are not directed at children. Children are not permitted to sign up for the Service by themselves. We do not knowingly collect or solicit personal information from children.
+9. Advertising
+We partner with third-party ad servers, ad networks and social media platforms (e.g., Facebook, Instagram and Google) to deliver personalised advertisements on our Service and other sites that may be of interest to you and/or to measure their effectiveness, and/or to identify potential new users of our Service.
+We may share certain information with our third-party advertising partners, such as your email address, location, cookie information and information relating to your use of our Service, and allow partners to perform a match of your information against information from other third-party networks or sites to serve ads either on the Service or on third-party sites and to measure the effectiveness of these advertisements. We also share certain information with social media platforms to display advertising to potential new users whose demographics and behaviour look like those of our existing users.
+In addition, these third-party advertisement servers or advertisement networks may use technology to send, directly to your browser or mobile device, these personalised advertisements and advertising links directly to your browser or mobile device, and will automatically receive your IP address when they do so. They may also use other technologies (such as cookies, JavaScript, device identifiers, location data, and clear gifs) to compile information about your browser’s or device’s visits and usage patterns on the Service, and to measure the effectiveness of their ads and to personalise the advertising content. Please see our Cookies Policy for more information about how we and our third-party partners use cookies and other technologies to deliver ads to you.
+We do not sell or rent the information we collect about you with these third-party advertising servers or advertising networks for such parties’ own marketing purposes.
+Please note that an advertiser may ask us to show an ad on the Service to a certain audience of users (e.g., based on demographics or other interests). In that situation, we determine the target audience and we serve the advertising to that audience and only provide anonymous aggregated data to the advertiser. If you respond to such an ad, the advertiser or ad server may conclude that you fit the description of the audience they are trying to reach.
+The Policy does not apply to, and we cannot control the activities of, third-party advertisers. Please consult the respective privacy policies of such advertisers or contact such advertisers for more information.
+10. Additional information for users in Europe
+This section of the Policy applies to individuals that are located in the European Economic Area (EEA), Switzerland or United Kingdom (UK). Leonardo.Ai processes your personal data in accordance with European laws and regulations, such as the General Data Protection Regulation (GDPR) and UK Data Protection Act (UK DPA).
+Controller’s details
+For the purposes of the GDPR and UK DPA, Leonardo Interactive Pty Ltd T/A Leonardo.Ai (ABN 56 662 209 485) is the controller of your personal data. Leonardo.Ai’s registered address is at 110 Kippax Street, Surry Hills, NSW 2010, Australia, and we can be contacted using the details provided in the “Contact us” section below.
+In certain circumstances, we process personal data as a processor on behalf of our commercial customers. Leonardo.Ai’s Terms of Service set out the circumstances where we process personal data as a processor. In these cases, it is our customer that is responsible for the processing of your personal data and our processing will be governed by the terms of the data processing addendum⁠ we have entered with the customer. If you have questions or concerns about how your personal data is handled by one of our commercial customers, you should contact the relevant customer that is using the Service and refer to their separate privacy policies.
+Legal bases for processing
+If you are located in the EEA, Switzerland or UK, we need a lawful basis to collect, use and disclose your personal data as a controller. Our lawful basis will depend on the information concerned and the context in which it is processed.
+Generally, Leonardo.Ai will collect and use your personal data as follows:
+Contractual necessity: We need it to provide the Service to you and fulfil our obligations to you under our Terms of Service. For example, this includes creating and maintaining your account, resolving issues you may experience with the Service, obtaining payment for our Services and providing you with access to your Content.
+Legitimate interests: It is necessary for our legitimate interests for example, providing a useful and customized Service, sending you relevant marketing messages, displaying advertising and tracking its effectiveness, using information we collect about you (like your platform usage) so that we can make more informed predictions, decisions and offers for our users, helping users connect with team members, and enhancing our Service via research and development, data analytics, machine learning and predictive analytics. We do not rely on this lawful basis where our legitimate interests are overridden by your rights and interests.
+Consent: You consent to us, and our third party partners, using your information in a certain way – for example, to hear about new features or offers.
+Legal obligations: It is necessary for compliance with our legal obligations – for example, to disclose your information in response to law enforcement requests and to retain your information for our record keeping purposes.
+Legal obligations: It is necessary for compliance with our legal obligations – for example, to disclose your information in response to law enforcement requests and to retain your information for our record keeping purposes.
+If you consented to our use of your information, you can withdraw that consent at any time by contacting us at [email protected]. Where we use your information for our legitimate interests, you have the right to object to that use by contacting contacting us at [email protected].
+Cross-border transfers of information
+By using the Service, you understand and agree that Leonardo Interactive Pty Ltd (an entity in Australia) will receive and process your personal data. We may transfer your personal data to other countries where our affiliates and service providers are located. Please note that some of these countries may have data protection laws that are different from your country (and, in some cases, may not be as protective). For individuals in the EEA, Switzerland or UK, where we transfer your information to a third-party service provider that is not located in Europe, and is not in a country that benefits from an adequacy decision by the European Commission, UK or Swiss authorities, we will require those third party providers to enter into an agreement that provides appropriate safeguards for your information, including by using the EU Model Clauses and the UK International Data Transfer Addendum.
+11. Additional information for users in the United States
+This section of the Privacy Policy applies to individuals that are located in the United States. In certain U.S. states, individuals have additional rights afforded to them under applicable state privacy laws.
+Categories of personal information collected by Leonardo.Ai
+For more details about the personal information Leonardo.Ai has collected in the past year, please see the section above titled “Personal information we collect”. For details on how we use that information, who we share it with, and how long we keep it, please see the sections titled “How we use your information”, “Sharing your information”, and “Data retention.”
+We do not aim to collect sensitive personal information (such as information related to racial or ethnic origin, political opinions, religion beliefs, health, or biometric data) and ask that you do not provide us with such information.
+Rights in respect of your personal information
+These state privacy laws give residents various rights with respect to the personal information we collect, including the right to (subject to applicable law and certain limitations):
+Request access to the personal information Leonardo.Ai has collected about you;
+Request that Leonardo.Ai delete your personal information;
+Request that Leonardo.Ai correct inaccurate personal information;
+Opt out from the “sale” of your personal information;
+Opt out of the “sharing” of your personal information for cross-context behavioral advertising;
+Appeal decisions where we deny your rights request.
+Exercising your rights
+You may make a request by contacting us at [email protected]. We will authenticate your request using the email address associated with your account and if necessary, proof of residency. Depending on applicable state law, you may also appeal a refusal to take action on a request by contacting us at [email protected].
+You may opt out of the “selling or sharing” of your personal information, which may include us sharing your information with third party advertising partners as described above in the section “Advertising”. You can opt out by following the instructions on the “Do not sell or share my personal information” banner, or by emailing [email protected].
+12. Changes to this Policy
+We may update this Policy from time to time to reflect our current practice and ensure compliance with applicable laws. When we post changes to this Policy, we will revise the “Last Updated” date at the top of this Policy. If we make any material changes to the way we collect, use, store and/or share your personal information, we will take appropriate measures to notify you. We recommend that you check this page from time to time to inform yourself of any changes.
+13. Contact us
+If you have any questions, suggestions or concerns about our use of your personal information or this Policy, please contact us at:
+Email: [email protected]
+Write: Leonardo Interactive Pty Ltd, 110 Kippax Street, Surry Hills, NSW 2010, Australia
+Our local representative in the EEA is the European Data Protection Office (EDPO) with a registered address at Ground Floor, 71 Lower Baggot Street, Dublin, D02 P593, Ireland.
+Our local representative in the United Kingdom is the European Data Protection Office UK (EDPO UK) with a registered address at 8 Northumberland Avenue, London WC2N 5BY, United Kingdom.
+The EDPO and EDPO UK can both be contacted at [email protected]. If you are in the EEA, data subject request forms can be accessed at http://edpo.com/gdpr-data-request/. If you are in the UK, data subject request forms can be accessed at https://edpo.com/uk-gdpr-data-request/.
+Create
+Industry
+Business
+Learn
+Pricing
+Contact
+Log in
+Tutorial
+Create
+Industry
+Business
+Learn
+Pricing
+Contact
+Tutorial Log in
+Create
+Image AI Image Generator
+Creative Ideation
+Background Remover
+Train Your Own Model
+Video AI Video Generator
+Upscaling Image Upscaler
+Editing Image Editor
+Video Editor
+Featured Models GPT Image 2.6
+Nano Banana 2.1
+FLUX 3 Image
+Veo 3.1
+Industry
+Industries Marketing Tools
+Graphic Design
+Print on Demand
+Photography
+Interior Design
+Architecture
+Use cases Art Generator
+Banner Generator
+Social Media Post Generator
+AI Storyboard Generator
+AI Character Generator
+About
+Pricing
+Blog
+Support
+Contact
+Careers
+Leonardo Creator Program
+Leonardo Imagination Fund
+Education Hub
+Business
+Collaborate via Teams
+Integrate via API
+Leonardo.ai is fully SOC 2 Type I and Type II accredited, demonstrating our commitment to the highest standards of security, availability, and data integrity. This ensures our customers can trust that their data is handled with enterprise-grade protection and compliance.
+Privacy Policy|
+Terms of Service|
+Cookie Policy
+Create
+Image AI Image Generator
+Creative Ideation
+Background Remover
+Train Your Own Model
+Video AI Video Generator
+Upscaling Image Upscaler
+Editing Image Editor
+Video Editor
+Featured Models GPT Image 2.6
+Nano Banana 2.1
+FLUX 3 Image
+Veo 3.1
+Industry
+Industries Marketing Tools
+Graphic Design
+Print on Demand
+Photography
+Interior Design
+Architecture
+Use cases Art Generator
+Banner Generator
+Social Media Post Generator
+AI Storyboard Generator
+AI Character Generator
+About
+Pricing
+Blog
+Support
+Contact
+Careers
+Leonardo Creator Program
+Leonardo Imagination Fund
+Education Hub
+Business
+Collaborate via Teams
+Integrate via API
+Privacy Policy|
+Terms of Service|
+Cookie Policy
+© 2026 All Rights Reserved, Leonardo Interactive Pty Ltd®
+Privacy Policy|
+Terms of Service|
+Cookie Policy
+| ABN: 56 662 209 485

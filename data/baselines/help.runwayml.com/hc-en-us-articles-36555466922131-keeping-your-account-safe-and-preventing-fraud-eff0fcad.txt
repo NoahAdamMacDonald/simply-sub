@@ -1,0 +1,110 @@
+url: https://help.runwayml.com/hc/en-us/articles/36555466922131-Keeping-Your-Account-Safe-and-Preventing-Fraud
+method: fetch
+saved: 2026-11-19
+
+Keeping Your Account Safe and Preventing Fraud – Runway
+Skip to main content
+Go to Runway
+Get Help
+Runway
+Troubleshooting
+Account Troubleshooting
+Keeping Your Account Safe and Preventing Fraud
+Table of Contents
+Introduction
+To protect our community and increase the likelihood of signing up to a verified Runway subscription, this article provides recommended practices to protect your account, clear information about how Runway operates, and tips to avoid deceptive actors.
+Securing Your Runway Account
+Your account security depends on following best practices for authentication and browser hygiene. These recommendations will protect your Runway account from unauthorized access and potential compromises.
+Essential Security Steps
+Use unique credentials: Create a password you've never used elsewhere, or sign in with Apple/Google for enhanced security
+Enable two-factor authentication: Turn on MFA for the email account associated with your Runway account (such as Gmail's 2-Step Verification)
+Keep your browser current: Update to the latest browser version regularly, as outdated browsers contain security vulnerabilities that malicious actors can exploit
+Audit browser extensions: Remove extensions you don't actively use—malicious actors can update compromised extensions to include malicious code that steals credentials or compromises accounts
+Additional Protection Measures
+Monitor for breaches: Sign up for HaveIBeenPwned to receive alerts when your email appears in data breaches.
+Enterprise security: If you're an Enterprise customer, configure Single Sign-On (SSO) to use your organization's authentication system and security policies
+These security measures create multiple layers of protection. Even if one security measure fails, the others will help keep your account secure.
+How Runway Operates
+Runway operates exclusively from the runwayml.com domain. Below are some examples of official websites and channels:
+Our main website: https://runwayml.com
+Our pricing page: https://runwayml.com/pricing
+Our physical products store: https://store.runwayml.com
+Protect yourself by knowing:
+Official sub-sites are linked on our official website (https://runwayml.com)
+All payments are processed securely through Stripe with our official domain. We never direct users to external payment platforms or process payments outside of our website
+We do not accept and will never request cryptocurrency payments
+There are no “penalty fees” or “account reset” charges
+All staff will only communicate through the Runway app, email from the verified @runwayml.com domain, or verified community platforms listed on the official website
+Warning Signs
+Watch out for these common deceptive practices:
+Requests for cryptocurrency payments
+Claims about "negative balances" needing attention
+Websites using similar but different domain names
+Websites using Runway branding that don’t offer creative generative technology products
+Pressure to make immediate payments under threat of permanent account deletion or loss of assets
+Unsolicited contact through unofficial channels
+Requests to continue conversations on WhatsApp, Telegram, or other messaging platforms
+Stay Safe
+We're committed to protecting our community of creators. If you have any doubts about a communication or payment request, please reach out through our official support channels.
+Creative
+Overview
+Agent
+Android app
+iOS app
+MCP
+Use Cases
+Pricing
+Login
+Dev
+Dev Portal
+Models
+Workflows
+Recipes
+Characters
+Documentation
+Robotics
+Overview
+Policy Model
+Offline Policy Evaluation
+Data Augmentation
+Video Model Licensing
+Get Access
+Enterprise
+Overview
+Data Security
+Customer Stories
+For Education
+Contact Sales
+Research
+Research Hub
+Research News
+Publications
+General World Models
+GWM-1
+Gen-4.5
+Aleph 2.0
+Act-Two
+Resources
+Academy
+Help Center
+Resource Hub
+News
+Changelog
+Meetups
+Events & Programs
+AI Festival
+AI Summit 2026
+Gen:48
+Studios
+Creative Partners Program
+Runway Builders
+Affiliate Program
+Talent Network
+Company
+About Us
+Careers
+Safety
+Brand Guidelines
+Press
+Partnerships
+© 2026 RUNWAY AI, INC / TERMS OF USE / PRIVACY POLICY / CALIFORNIA NOTICES / CODE OF CONDUCT / SYSTEM STATUS

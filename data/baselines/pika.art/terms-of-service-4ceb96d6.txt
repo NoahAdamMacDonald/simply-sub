@@ -1,0 +1,428 @@
+url: https://pika.art/terms-of-service
+method: fetch
+saved: 2026-11-19
+
+Terms of Service — Pika
+Skip to main content
+AI Video
+AI Image
+AI Audio
+Pricing
+Enterprise
+Resources
+Developers
+LoginTry Pika
+Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+AI Video Video Apps
+Video Studio
+Dynamic CaptionsNEW
+Product Ad
+Swap Anything
+Motion Transfer
+Extend Video
+All Video Apps
+Top Models
+Pika H3 FlexNEW
+Kling 4.0NEW
+Seedance 2.5
+MiniMax H3
+Wan 3.0
+Gemini Omni 1.1 Flash
+Pika 2.5
+Pikaframes
+All Video Models
+AI Image Image Apps
+Image StudioNEW
+Edit Image
+Character Studio
+All Image Apps
+Image Models
+Ideogram 4.5NEW
+GPT Image 2.6
+Nano Banana 2.1
+Seedream 5.5
+Grok Imagine
+Explore Image Apps
+AI Audio Start Creating
+Music Studio
+Speech Studio
+SFX Studio
+All Audio Apps
+Speech Models
+Pika Speech
+Eleven Multilingual v2
+Eleven Turbo v2.5
+Audio Models
+Pika Music
+Pika Soundtrack
+Pika SFX
+MiniMax Music 3.0
+All Audio Models
+Pricing
+Enterprise
+Resources Company
+Contact Us
+Learn
+Blog
+Academy
+Help Center
+Support
+API
+Explore
+Pika MCP
+Pika for ChatGPT
+Experiments
+iOS app
+Use Cases
+Pricing
+Developers
+Login
+Skip to legal document Last modified: 08/04/2026
+Terms of Service
+On this page1. Introduction 1. Introduction
+Mellis, Inc. (“Pika”, “we”, “us”, or “our”) provides access to our generative artificial intelligence platform and related services (collectively, the “Service”) through our websites located at https://pika.me and https://pika.art, including all subdomains (collectively, the “Websites”), through our various mobile applications (collectively, the “Mobile Apps”), through our application programming interfaces (“APIs”), and through third-party platforms such as X or Discord. The Service includes, without limitation, all content, tools, features, functionality, and technologies offered via our Websites, Mobile Apps, APIs, or otherwise by Pika, including our platform for generating videos from user-submitted images, videos, text, and other content, creating AI-generated digital representations of individuals (“AI Selves”), and providing access to both first-party Pika models and third-party models through an aggregated API platform.
+These terms of service govern all access to and use of the Service. Please read these terms of service carefully before you start to use the Service. By using the Service or by clicking to accept or agree to the terms of service when this option is made available to you, you accept and agree to be bound and abide by these terms of service and our acceptable use policy (“AUP”), found at https://pika.art/acceptable-use-policy, which is incorporated by reference into, and made part of, these terms of service. If you do not want to agree to these terms of service or the AUP, you must not access or use the Service.
+These terms of service contain an arbitration clause and a class action waiver. By agreeing to these terms of service, you agree (1) to resolve any disputes related to Pika’s Service or products through binding individual arbitration (with limited exceptions), thereby waiving your right to a trial by judge or jury, and (2) to waive your right to participate in any class action, class arbitration, or representative action, as further described in the class action waiver. You have the right to opt out of the arbitration clause and the class action waiver as explained in the Arbitration and Class Action Waiver.
+2. Changes to the Terms of Service
+We may revise and update these terms of service on one or more occasions. All changes are effective immediately when we post them and apply to all access to and use of the Service afterwards. But any changes to the dispute resolution provisions will not apply to any disputes for which the parties have actual notice on or before the date the change is posted on the Websites.
+Your continued use of the Service after the posting of revised terms of service means that you accept and agree to the changes. You are expected to check this page frequently so you are aware of any changes, as they are binding on you.
+3. Who May Use the Service
+By accessing or using the Service, you state that you are at least 18 years old and meet the minimum age of digital consent in your country. You must be at least 18 years of age to create, operate, or interact with an AI Self, or to monetize any Content through the Service. If you are old enough to use the Service in your jurisdiction but not old enough to lawfully agree to these terms of service, your parent or legal guardian must review and accept these terms of service on your behalf. Please ask your parent or guardian to read these terms of service with you. If you are a parent or legal guardian and you permit your child to use the Service, these terms of service also apply to you, and you are responsible for your child’s use of the Service.
+If you are accessing or using the Service on behalf of an organization (“Organization”), you represent and warrant that you have authority to bind that Organization to these terms of service, and references to “you” will include that Organization.
+If you create an Account on behalf of an Organization, you may designate one or more administrators (“Admins”) who may invite additional authorized users to access and use the Service under your Account. Admins are responsible for (a) ensuring that all authorized users comply with these terms of service and the AUP, (b) managing access permissions and user roles, and (c) promptly removing access for any user who is no longer authorized. The Organization remains liable for all acts and omissions of its authorized users.
+You must not use the Service if you are prohibited from doing so under the laws of the United States, your country of residence, or any other applicable jurisdiction. By using the Service, you state that you meet all eligibility requirements under applicable law.
+Pika strives to make the Service PG-13 and family-friendly. However, the content generated by the Service is produced by an artificial intelligence system in response to user input. This is an emerging technology and might not always perform as expected. Pika is not making any guarantee regarding the appropriateness or suitability of any Output for any particular user.
+4. Use of the Service
+Service Description
+The Service uses artificial intelligence tools and functionalities to process user-submitted content, including text prompts, directions, images, videos, voice samples, likeness data, documentation, or other material (collectively, the “Input” or “Inputs”). Based on those Inputs, the Service generates corresponding outputs, which may include images, videos, dialogue, AI Selves, content generated by AI Selves, sound effects, or other content (collectively, the “Output” or “Outputs”). Together, Inputs and Outputs are referred to as “Content.” Content does not include any other material you submit or post to or through the Service that is not part of an Input. References to “User Content” elsewhere in these terms of service refer more broadly to any content you upload, post, or submit — including Inputs, but excluding Outputs unless stated otherwise. On Pika.me, an “AI Self” may be created using your likeness, voice, and other personal characteristics that can interact with other users of the Service, and, where enabled, on third-party platforms and services (such as social media networks) through integrations or authorized connections.
+Registration and Account Security
+To access certain features of the Service, you may be required to create an account with Pika (an “Account”) using your email address or by signing in through a third-party service, such as Google or Facebook. You agree to provide accurate, complete, and up-to-date information for your Account at all times. You may access and update your Account information via the “Profile” page.
+You are solely responsible for all activity that occurs under your Account and for maintaining the confidentiality and security of your login credentials. We are not liable for any loss or damage arising from your failure to safeguard your Account or password.
+You must promptly notify us at support@pika.art if you know or suspect that your Account or password has been lost, stolen, misappropriated, or otherwise compromised, or if there is any actual or suspected unauthorized use of your Account.
+You must not create a new Account if we have previously removed you or banned you from the Service, unless we have provided prior written consent.
+Plan Selection and Subscription Payment
+Certain features of the Service may require payment, either through a paid subscription (a “Plan”) or through prepaid credits. All fees are listed on our Site or in a mutually agreed written order form and may include subscription charges, usage-based charges, or credit-based charges. By selecting a Plan or purchasing credits, you agree to pay the applicable fees and any associated taxes in U.S. Dollars, in accordance with the billing terms presented at the time of purchase. You are responsible for keeping your billing and contact information accurate and up to date. Pika reserves the right to modify fees on a going forward basis, and will provide reasonable advance notice of any material changes.
+If you purchase prepaid credits, credits will be applied to your Account upon successful payment and may be used to access features of the Service as described on the applicable pricing page. Credits are nonrefundable except as required by law. Credits expire 365 days after purchase unless otherwise specified at the time of purchase. Expired or unused credits will not be refunded.
+Automatic Renewal and Recurring Charges
+Unless stated otherwise, subscriptions automatically renew at the end of each billing cycle (e.g., monthly or annually). By purchasing a Plan, you authorize Pika to charge your selected payment method on a recurring basis at the applicable rate then in effect, plus any applicable taxes, until you cancel. This authorization will remain in effect until you cancel the subscription in accordance with these terms of service. We will provide advance notice of any auto-renewal where required by applicable law.
+Price Changes
+Pika may modify the pricing or features of its Plans at any time. We will provide reasonable advance notice of any material changes to your Plan. Unless otherwise specified, any changes will take effect at the beginning of your next billing cycle. If you do not agree to the new pricing or terms, you must cancel your subscription before the next renewal to avoid incurring additional charges.
+Cancellation
+You may cancel your subscription at any time through your account settings or by contacting support@pika.art. Cancellations will take effect at the end of the current billing cycle. You will retain access to the paid features of your Plan through the end of the subscription term.
+No Refunds
+Except as expressly provided in these terms of service or required by law, all subscription payments are non-refundable, and there are no refunds or credits for partially used periods.
+Free and Trial Plans
+We may offer free or trial Plans at our discretion. Each trial will begin on the date you create the trial Account and continue for the duration specified at signup (or, if unspecified, seven days). At the end of the trial period, your Account will automatically convert to a paid subscription, and you authorize us to charge your selected payment method at the then-current subscription rate, unless you cancel before the trial ends.
+You must not create multiple accounts to gain additional access to a free or trial Plan. If we determine you are misusing a free or trial Plan or not acting in good faith, we may suspend or terminate your access to the Service.
+If you do not upgrade at the end of your trial, any Content or data associated with your trial Account may no longer be available, and we may delete that Content or data.
+Promotional Codes
+Pika may offer promotional, referral, or discount codes (“Promotional Codes”) that may be redeemed for discounts on subscription fees or other features of the Service, subject to any additional terms specified at the time of the offer. Promotional Codes:
+must be used only as directed and for their intended audience and purpose;
+must not be sold, transferred, duplicated, or made publicly available (e.g., on coupon sites) without Pika’s prior written consent;
+are not redeemable for cash or other credits unless required by law;
+may be modified or disabled by Pika at any time without liability; and
+may be subject to expiration dates or usage limits.
+Use of any Promotional Code in violation of these terms of service may result in the suspension or termination of your access to the Service.
+Third-Party Payment Provider
+We use Stripe, Inc. and its affiliates as our third-party payment service provider for payment processing, including card acceptance, settlement, and related services. By purchasing a Plan through the Websites, you agree to be bound by Stripe’s Terms of Service (https://stripe.com/ssa) and Privacy Policy (https://stripe.com/privacy).
+All fees are exclusive of taxes. You are responsible for all applicable taxes, duties, levies, and similar governmental assessments associated with your use of the Service, except for taxes based on Pika’s net income. If Pika is required to collect or remit taxes on your behalf, Pika will invoice you for such taxes, and you agree to pay them.
+You authorize Pika and Stripe to share your payment information and transaction details as needed to complete your transactions. Payment transactions may be subject to validation checks by Stripe and your card issuer. Pika is not responsible if your payment is declined or if additional fees (such as online handling or foreign transaction fees) are charged by your card issuer.
+One User Per Account
+Unless your Plan expressly permits otherwise, each Account may only be used by a single individual, and the Service is for your personal, noncommercial use only. If your Plan includes API access or commercial use rights, you may use the Service to build products and applications that integrate with the Service, subject to the terms of your Plan and any applicable usage limits. You may permit your authorized users or end users to access functionality powered by the Service, provided that (a) such access is through your own application or service, (b) you do not expose Pika’s APIs directly to third parties, and (c) you ensure that all end users comply with these terms of service and the AUP.
+If your Plan includes API access, Pika will issue you API keys or other credentials to authenticate your access to the Service (“API Keys”). You are solely responsible for (a) all activity and usage that occurs under your API Keys, (b) maintaining the confidentiality and security of your API Keys, (c) promptly notifying Pika at support@pika.art if you know or suspect that any API Key has been compromised, and (d) any charges incurred through use of your API Keys. You must not share API Keys across separate legal entities without Pika’s prior written consent. Pika may rotate or revoke API Keys at any time for security reasons or if Pika suspects abuse or violation of these terms of service.
+Pika may establish and publish rate limits, quotas, or other usage restrictions applicable to your use of the Service, which may vary by Plan. Pika reserves the right to throttle or limit usage that Pika reasonably determines is excessive, abusive, or likely to impair the Service for other users. If you exceed applicable rate limits or quotas, your requests may be queued or temporarily blocked until usage returns to permitted levels.
+Use of AI Self
+You acknowledge that your AI Self’s interactions on third-party platforms are subject to the terms and policies of those platforms in addition to these Terms. The Service may also include public or community-facing features, such as forums or shared spaces, where you may share your Content and engage with other users in a collaborative environment.
+Your AI Self operates autonomously when interacting with other users. You are responsible for training and instructing your AI Self regarding what information to share or restrict and how to respond to users. You are solely responsible for how you train your AI Self and for any Outputs or other content your AI Self generates. You must not use your AI Self to impersonate another person, commit fraud, harass, scam, or damage the reputation of any individual.
+Use of the Mobile Apps
+You are responsible for providing the mobile device, internet connection, wireless service plan, and any other equipment or services needed to download, install, and use the Mobile Apps. We do not guarantee that the Mobile Apps will be compatible with your device, service plan, or available in all geographic locations.
+As part of the Service, you may receive notifications from the applicable Mobile App, including push notifications, alerts, emails, text messages, and similar communications (“Push Messages”). You can manage your Push Message preferences through the Mobile App settings or your device’s operating system. Please note that disabling Push Messages may impact certain functionality of the Service.
+By enabling Push Messages, you consent to receive communications related to your use of the Service. Your wireless provider may charge fees for data, messaging, or other wireless access in connection with your use of the Mobile Apps, including Push Messages. You are solely responsible for any such fees.
+Mobile Software from the Apple App Store
+The following terms apply if you access one or more of the Mobile Apps through Apple Inc.’s App Store. These terms of service are solely between you and Pika, not Apple. Pika, not Apple, is solely responsible for the Mobile Apps and their content.
+Your use of the Mobile Apps must comply with the App Store’s terms of use. Apple has no obligation to provide any maintenance or support services regarding any of the Mobile Apps. If any of the Mobile Apps fail to conform to any applicable warranty, you may notify Apple, and Apple may refund the purchase price, if any. To the extent permitted by law, Apple has no other warranty obligation regarding the Mobile Apps, and all other claims, losses, or liabilities relating to the Mobile Apps are governed by these terms of service.
+You and Pika acknowledge that Apple is not responsible for addressing any claims by you or any third party relating to the Mobile Apps, including:
+product liability claims;
+claims that any of the Mobile Apps fail to conform to legal or regulatory requirements; and
+claims under consumer protection or similar laws.
+In the event of any third-party claim that any of the Mobile Apps or your use of them infringe a third party’s intellectual property rights, Pika, not Apple, is solely responsible for investigating, defending, settling, and discharging any such claim.
+You must comply with all applicable third-party agreements when using the Mobile Apps. You and Pika acknowledge that Apple and its subsidiaries are third-party beneficiaries of these terms of service as they relate to your use of the Mobile Apps, and that Apple will have the right to enforce these terms of service against you as a third-party beneficiary.
+Beta Offerings or Pika Experiments
+On one or more occasions, Pika may offer certain features, services, or tools as beta, trial, or pre-release versions (“Beta Offerings” or “Pika Experiments,” as applicable). Beta Offerings and Pika Experiments are provided for evaluation purposes only, may be modified or discontinued at any time, and are offered “as is” without warranties of any kind.
+You understand that Beta Offerings and Pika Experiments may be incomplete or contain errors, and you use them at your own risk. Pika is not responsible for any impact on your Content, data, or experience resulting from your use of a Beta Offering or Pika Experiment, as applicable.
+If Pika designates a Beta Offering or Pika Experiment, as applicable, as confidential, you must not disclose its existence or details without our prior written consent.
+Modifications and Updates to the Service
+Pika may modify, update, or discontinue all or part of the Service at any time, with or without notice. This includes changes to features, functionality, or the availability of the Service. You acknowledge that continued use of the Service after any modification constitutes your acceptance of the updated version.
+You may be required to install updates to third-party software or your device’s operating system to continue using certain parts of the Service. Pika is not responsible for any impact on your access or experience resulting from those updates or third-party requirements.
+Pika may add, modify, or discontinue models, features, or functionality of the Service at any time. For generally available Pika models actively used in your Account, Pika will use commercially reasonable efforts to provide at least 30 days’ notice before discontinuing or materially reducing such models, unless doing so would create a security risk, violate law, or be technically infeasible. Pika makes no guarantee that any specific model version will remain available indefinitely.
+5. Rights We Grant You
+Right to Use the Service
+Subject to your compliance with these terms of service and any applicable policies (including our AUP), Pika hereby grants you a limited, nonexclusive, nontransferable, nonsublicensable, revocable license to access and use the Service solely for your personal, noncommercial use—except where your subscription Plan expressly permits commercial use.
+Subject to this terms of service, commercial use rights granted under your subscription Plan extend to Content generated by or through your AI Self. Monetization of your AI Self content is permitted only through the Services while Pika is operating your AI Self. You may not separately re-stream, redistribute or license your AI Self content for monetization outside of the Service without Pika’s prior written consent.
+If any software, content, or other materials owned or licensed by Pika are made available to you as part of your use of the Service, you are hereby granted a limited license to access and display those materials solely to use the Service in accordance with these terms of service.
+Pika may interrupt or suspend your access to the Service on one or more occasions for maintenance, updates, or other operational reasons, and shall not be liable for any such interruptions.
+The Service is provided on an as-is, where-is basis, and Pika does not guarantee any specific level of availability, uptime, or response time for self-serve customers. Enterprise customers may negotiate service level commitments, including target uptime percentages and service credits, under a separate written agreement.
+Prohibited Uses
+You may use the Service only for lawful purposes and in accordance with these terms of service and the AUP. You must not do any of the following:
+copy, download (other than temporary caching for display), modify, distribute, transmit, display, perform, publish, license, create derivative works from, sell, resell, sublicense, or provide access to any part of the Service, its content, or API access to any third party, except as expressly permitted under your Plan;
+redistribute, record, screenshot, or otherwise capture and share private or exclusive content generated by or through another user’s AI Self without authorization;
+use, reproduce, remove, or alter any copyright, trademark, logo, or other proprietary notices displayed on or through the Service, or use framing, metatags, or other techniques to enclose or reference Pika’s trademarks, trade dress, or other proprietary materials;
+upload, post, or otherwise make available images or likenesses of individuals without their consent or legal right to do so, including creating an AI Self using another person's likeness, voice, or personal characteristics without explicit written permission or ownership of the relevant intellectual property rights, or creating deepfake videos or other manipulated media depicting any person without their prior consent;
+decompile, reverse engineer, disassemble, decode, or otherwise attempt to derive the source code or underlying ideas or algorithms of the Service;
+use bots, scripts, hacks, or unauthorized third-party software to modify or interfere with the Service;
+use the Service for any commercial purpose, including advertising, marketing, or selling products or services, except to the extent expressly authorized under your Plan; access or use the Service in any manner that could disable, disrupt, damage, impair, or interfere with the normal operation of the Service or with any other user’s access to or use of the Service;
+attempt to gain unauthorized access to the Service, other user accounts, or the systems or networks connected to the Service, or interfere with their operation;
+circumvent, disable, remove, or otherwise interfere with any security feature, content protection, or access control mechanism of the Service;
+use any robot, spider, scraper, crawler, or other automated or manual means to access, extract, copy, or collect data or content from the Service, except that operators of public search engines are granted a revocable, limited license to use spiders solely to index publicly available materials to create searchable indices (but not caches or archives);
+introduce or transmit any viruses, worms, trojan horses, malware, or other harmful or disruptive code or materials into or through the Service;
+upload, submit, or otherwise make available any content that is unlawful, deceptive, harassing, hateful, obscene, excessively violent, defamatory, libelous, pornographic, invasive of privacy or publicity rights, discriminatory, or otherwise objectionable or prohibited under our AUP, including by impersonating any person or entity, or misrepresenting your affiliation with any individual or organization, including Pika, or using an AI Self to impersonate another person, commit fraud, harass, scam, or damage the reputation of any individual;
+upload or make available (1) unsolicited advertising, promotional materials, or spam, (2) any personal, financial, or sensitive information (such as government IDs, social security numbers, or health data) without proper authorization or consent, or (3) contests, sweepstakes, barter offers, pyramid schemes, or similar commercial activities without our prior written consent;
+use the Service, any Outputs, or any Third-Party Models to research, train, fine-tune, or develop any machine learning or artificial intelligence system that competes with Pika’s or any third-party model provider’s products or services, or to reverse engineer, replicate, or extract training data from any model made available through the Service;
+use the Service to systematically extract, harvest, or mine data, content, or Outputs for the purpose of creating datasets, training data, or knowledge bases, except as expressly permitted under your Plan;
+conduct or facilitate security testing, penetration testing, red-teaming, adversarial testing, or vulnerability assessments of the Service, any models, or any related systems without Pika’s prior written approval;
+create multiple Accounts or use another person’s or entity’s Account to evade suspension, termination, rate limits, usage restrictions, or any other enforcement action taken by Pika;
+upload, post, or otherwise make available images or likenesses of individuals without their consent or legal right to do so;
+impersonate any person or entity, or misrepresent your affiliation with any individual or organization, including Pika;
+use the Service to generate Outputs in violation of applicable law, intellectual property rights, contractual restrictions, or other legal obligations; or
+access or use the Service in any way not expressly permitted by these terms of service.
+If your Plan permits you to make the Service or Outputs available to your own end users through your application or service, you are solely responsible for (a) all acts and omissions of your end users, (b) ensuring that your end users comply with these terms of service, the AUP, and all applicable Model Terms through your own binding end user agreement, (c) implementing appropriate content moderation and abuse prevention controls, (d) cooperating with Pika in connection with any takedown requests, abuse reports, or investigations related to your end users, and (e) restricting access to your application or service to users who are at least 18 years old or, if lower age thresholds apply under your jurisdiction, ensuring appropriate parental consent and supervision.
+You must implement reasonable measures to detect, prevent, and report the creation, distribution, or solicitation of child sexual abuse material (“CSAM”) through your application or service, and must promptly report any such content to the National Center for Missing & Exploited Children (NCMEC) and to Pika at support@pika.art.
+6. Responsibility for Content
+User Content
+You are solely responsible for any material you upload, submit, post, transmit, or otherwise make available through the Service, including to create, operate or train your AI Self or interact with another user’s AI Self (“User Content”). This includes Inputs and other user-submitted content, such as profile information, comments, or messages. Outputs generated by the Service are not considered “User Content” unless you choose to publish or share them.
+By submitting User Content, you hereby grant Pika a worldwide, nonexclusive, royalty-free, transferable, sublicensable license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, perform, and display your User Content as necessary to operate, improve, and promote the Service. This license includes the right for Pika to make User Content available to its service providers and contractors in connection with providing and supporting the Service. This license remains in effect for as long as your User Content is stored on the Service.
+You further state that the following facts are accurate:
+no third party owns or retains rights that would prevent you from granting this license; and
+any applicable moral rights in the User Content have been waived or validly licensed to you.
+User Content you post privately will not be shared with other users, except as required by law or to operate the Service. If you choose to make your User Content public, it may be viewed, tagged, or interacted with by other users in accordance with these terms of service.
+Pika does not claim ownership of your User Content. You retain all rights in your Inputs and the Outputs generated through your use of the Service, subject to these terms of service.
+Content Provided by Other Users
+The Service may include User Content submitted by other users, including creators of an AI Self. Pika does not control, endorse, or make any statements regarding that content, and disclaims all liability arising from it. By interacting with an AI Self on the Service, you acknowledge and agree that the AI Self is not the creator and does not represent the real-time thoughts, opinions, or actions of the creator. Your use of, interactions with or reliance on any User Content made available by others through the Service is at your own risk.
+User Responsibility
+You are solely responsible for your interactions with other users, AI Selves and third parties in connection with the Service. Pika is not responsible for any disputes or issues that arise between you and other users but reserves the right, in its discretion, to intervene if necessary. Pika will not be liable for any loss, damage, or liability arising from your interactions with others through the Service.
+No Obligation to Pre-Screen Content
+Pika is not obligated to monitor, review, or pre-screen any User Content, but reserves the right to do so at its sole discretion. By using the Service, you consent to that monitoring, including of chat, text, and voice communications, to the extent permitted by law.
+You acknowledge that you have no expectation of privacy regarding User Content transmitted through the Service. If Pika chooses to review, refuse, or remove any User Content, it does so for its own benefit and not on your behalf.
+Investigations
+Pika may monitor or review activity on the Service, including User Content. Pika reserves the right to investigate any suspected violations of these terms of service or applicable law.
+Pika may remove any User Content, suspend or terminate access to the Service, or take any other action it considers appropriate in response to actual or suspected violations. If Pika removes or disables access to any User Content or restricts your use of the Service in connection with a suspected violation, Pika will notify you without undue delay, including the reasons for that action, whether it was based on automated or manual review, and information about how to appeal the decision through our complaint-handling process, where applicable. If you publish or share any Output through a public feature of the Service, that Output may be treated as User Content for purposes of moderation, takedown, and complaint handling.
+In addition to the rights described above, Pika may refer any suspected illegal activity to law enforcement or other authorities. To the extent permitted by law, Pika may also disclose information or content related to your use of the Service—including User Content—if it reasonably believes such disclosure is necessary to (1) comply with applicable laws, legal process, or government requests, (2) enforce these terms of service, (3) respond to claims of third-party rights violations, (4) respond to customer support requests, or (5) protect the rights, safety, or property of Pika, its users, or the public.
+General Practices Regarding Use and Storage
+Pika may establish general practices and limits concerning use of the Service, including limits on storage capacity, data retention periods, and account inactivity. These practices may vary by subscription Plan and may be modified on one or more occasions at Pika’s sole discretion. You acknowledge that Pika may delete or disable access to User Content or terminate inactive accounts in accordance with these practices, and that Pika has no obligation to retain any User Content beyond the limits set by your Plan or applicable policies.
+Account Suspension and Termination
+We may suspend or terminate your access to the Service, your AI Self, your Account, or any portion of it, at any time, for any reason or no reason, with or without notice. Grounds for suspension or termination include, but are not limited to, if we believe you have violated these terms of service or our AUP, failed to make payment, or engaged in any fraudulent, abusive, or unlawful activity. A third-party model provider may also request that we suspend your access to its Third-Party Model in accordance with its Model Terms. Upon termination or suspension of your Account, your AI Self will also be immediately suspended or terminated, any scheduled interactions will be cancelled, and any third-party platform integrations will cease. Pika is not responsible for notifying third-party platforms or users who may have been interacting with your AI Self. We may also suspend or discontinue the Service generally, or any part of it, at any time and without notice.
+If your Account is terminated by Pika for reasons other than your breach of these terms of service, you may request a refund of any unused prepaid credits within 30 days of termination. No refund will be provided if your Account is terminated for breach of these terms of service, the AUP, or any applicable Model Terms.
+We may delete or remove any of your Content in connection with the suspension or termination of your Account, but we are not obligated to do so. We are not responsible for the deletion or failure to delete any of your Content.
+If your Account is terminated for breach, you may not create another Account without our prior written consent.
+7. Ownership
+Ownership of the Service
+The Service, including its design, features, software, proprietary materials, and all related intellectual property rights, are owned by Pika or its licensors and are protected by copyright, trademark, and other laws. You must not remove, alter, or obscure any proprietary notices or to use the Service in a way that is inconsistent with Pika’s ownership rights. Pika and its licensors reserve all rights not expressly granted under these terms of service.
+Ownership of Trademarks
+The names, logos, product and service names, designs, and slogans used in connection with the Service—including the term PIKA, the Pika logo, and any related branding—are trademarks of Mellis, Inc., its affiliates, or licensors. All other trademarks, trade names, or logos that appear on the Service are the property of their respective owners. You must not use any of these marks without prior written permission from the applicable rights holder.
+If you use the Service to integrate Pika’s models into your application or service, you must display appropriate attribution in a manner reasonably visible to end users, unless your Plan expressly permits white-labeling. White-labeling of Pika’s first-party models is available only to enterprise customers under a separate written agreement. For Third-Party Models, attribution requirements are governed by the applicable Model Terms.
+Pika may identify you as a customer and use your name, logo, and a general description of your use of the Service in Pika’s marketing materials and customer lists. Pika will use commercially reasonable efforts to notify you of such use in advance. You may opt out of this use by notifying Pika in writing at support@pika.art.
+Inputs and Outputs
+To the extent permitted by law, Pika may review or monitor Inputs and Outputs using automated or manual tools.
+Pika does not claim ownership of any Inputs you submit or Outputs generated through your use of the Service. As between you and Pika, you retain all interest in those Outputs. To the extent Pika acquires any interest in the Outputs, we hereby assign all interest to you. You acknowledge that Outputs might not qualify for copyright or other legal protections under applicable law, and Pika makes no representations regarding their eligibility for those protections. Although Outputs are not considered “User Content,” you remain solely responsible for any use or distribution of the Outputs you receive.
+Pika makes no representation or warranty that any Output is original, unique, non-infringing, or suitable for any particular purpose. You use Outputs entirely at your own risk. Multiple users may generate similar or identical Outputs, and Pika disclaims any liability arising from such similarities. You are solely responsible for ensuring that your use of any Output complies with all applicable laws, regulations, and third-party rights.
+If you create an AI Self using the Service, you retain ownership of your AI Self. You also retain ownership of all personal data, likeness, voice samples, and other materials you provide to create or train your AI Self. Pika will take a profit share of revenue you earn from monetizing your AI Self on the platform, as described in your Plan.
+You acknowledge that, due to the nature of generative artificial intelligence, Outputs may not be unique, and other users may generate similar or identical Outputs. You hereby waive any claim against Pika or its users based on similarities between your Outputs and those generated by others.
+Use of Content and Usage Data for Model Development
+In addition to Content, Pika collects and retains data about how you use the Service, including but not limited to API call volumes, feature usage, performance metrics, error logs, and other technical or operational data (“Usage Data”). You acknowledge that Pika may use Usage Data to operate, maintain, improve, and develop Pika’s products and services, including its AI models. Usage Data may also be used in anonymized or aggregated form to develop new features, conduct research, and improve Pika’s or third-party models. Unless otherwise agreed in writing, you acknowledge that Pika may use anonymized or aggregated Content, including Inputs, Outputs, and your interactions with the Service, and Usage Data to train, improve, and develop its machine learning models, algorithms, and related technologies and services (“Models”). This may include use for purposes such as content moderation, labeling, classification, and performance optimization. If you are an enterprise customer with a separate written agreement, the terms of that agreement will govern data use and training. Notwithstanding the foregoing, any personally identifiable data included in the Inputs used to create an AI Self (including your likeness, voice samples, and personal characteristics) will only be used to develop, operate, improve and train your AI Self and will not be used to train other Models or create AI representations for other users. Upon deletion of your Account, Pika will permanently delete all data associated with your AI Self and will use commercially reasonable efforts to exclude your Content from future model training; provided, however, that Pika may not be able to remove Content that has already been incorporated into trained models, and will continue using Content that has been anonymized or aggregated prior to deletion.
+To the extent any rights in your Content are necessary for this use, you hereby grant Pika a nonexclusive, perpetual, irrevocable, worldwide, royalty-free, fully paid, transferable, sublicensable license to use, reproduce, analyze, and modify that Content for the purposes described above.
+You remain solely responsible for the legality, accuracy, and appropriateness of your Inputs and any resulting Outputs, regardless of whether they are generated with assistance from the Service.
+Where required by applicable law, including the EU Digital Services Act, we may provide transparency regarding how Outputs are generated, how moderation decisions are made, and how recommender systems operate.
+Username Attribution
+By making User Content or an AI Self available on any public area of the Service, including forums, comments, or by interacting with other users’ AI Selves or other content (such as “liking” a post), you hereby grant Pika permission to identify you by your username (which may be a pseudonym) as the source of that User Content. This permission applies to any use, reproduction, or display of your User Content in connection with the Service, including in publications or promotional materials, regardless of the format or medium.
+Feedback and Unsolicited Submissions
+Pika does not accept or consider unsolicited ideas, proposals, or materials for new products, features, or services. If you submit any feedback, suggestions, or other unsolicited materials, you do so with the understanding that Pika has no obligation to review, compensate you for, or return them.
+You acknowledge that Pika may use or disregard any such submissions without restriction, and without any obligation to you, even if they are similar to or the same as ideas independently developed by Pika. You further acknowledge that all interest in any feedback you provide regarding the Service—including ideas, suggestions, improvements, or other input—will belong solely to Pika. To the extent any rights do not automatically vest in Pika, you hereby assign them.
+8. Third-Party Materials and Services
+The Service may provide access to artificial intelligence models, services, or content provided by third-party model providers (“Third-Party Models”). Each Third-Party Model is subject to its own terms and conditions, usage policies, and acceptable use policies established by the applicable third-party provider (“Model Terms”). By accessing or using any Third-Party Model through the Service, you agree to review, accept, and comply with the applicable Model Terms. You are solely responsible for ensuring that you and your authorized users comply with all applicable Model Terms (including ensuring that, as and where applicable, your authorized users agree to, and are directly bound by, the applicable Model Terms). Model Terms are directly binding between you and the applicable Third-Party Model provider, and such provider may enforce them directly against you. In addition, you are required hereunder to comply with any such Model Terms and accordingly, any violation of applicable Model Terms also constitute a violation of these terms of service.
+You must not (a) expose Pika’s APIs or any Third-Party Models directly to your end users without implementing your own application layer, (b) use Outputs from Third-Party Models to build competing products or services or to replicate training data of any Third-Party Model, or (c) access or enable access to any Third-Party Model that is restricted by geography, entity, or other criteria through the use of a VPN, proxy, or other circumvention technology.
+Pika may add, modify, or remove Third-Party Models at any time. Pika will use commercially reasonable efforts to provide notice before removing a generally available Third-Party Model, but makes no guarantee that any particular Third-Party Model will remain available. Third-party model providers may update their Model Terms from time to time, and your continued use of a Third-Party Model after such updates constitutes your acceptance of the updated Model Terms.
+Use of Third-Party Materials in the Service
+The Service may display, include, or provide access to content, data, applications, websites, or other materials provided by third parties (“Third-Party Materials”). Pika does not control or endorse any Third-Party Materials and is not responsible for their accuracy, completeness, legality, or quality. You access and use Third-Party Materials and linked websites at your own risk. Pika makes these materials and links available only as a convenience, and disclaims all liability arising from your access to or use of any third-party services, products, or content.
+If your AI Self operates on third-party platforms through authorized integrations, you are solely responsible for ensuring your AI Self's conduct complies with the terms, policies, and community guidelines of those platforms. Pika makes no warranty regarding your AI Self's compliance with third-party platform rules and is not responsible for any suspension, termination, penalty, or other action taken by a third-party platform in response to your AI Self's activity.
+Sharing Information with Third Parties
+The Service may include features that allow you to share or export User Content, including your AI Self, or other information to third-party platforms—for example, by linking your account to a third-party service or using social sharing buttons. If you use these features, you authorize Pika to transfer your information to the relevant third party. Pika is not responsible for how any third party uses the information you choose to share or export.
+9. Copyright Policy
+If you believe that any content on the Service infringes your copyright, you may submit a notification under the Digital Millennium Copyright Act (17 U.S.C. § 512(c)) by providing the following information in writing:
+a description of the copyrighted work you claim has been infringed;
+identification of the material that is claimed to be infringing, including its location on the Service;
+your contact information (name, address, phone number, email);
+a statement that you have a good-faith belief the use is not authorized by the copyright owner, its agent, or the law;
+a statement that the information in the notice is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner; and
+your physical or electronic signature.
+Send your notice, with the subject “DMCA Takedown Request” to:
+Mellis, Inc.
+Attn: DMCA Compliance Officer
+849 High Street
+Palo Alto, CA 94301
+support@pika.art
+If your content has been removed and you believe it was not infringing, you may submit a counter-notice in accordance with the DMCA. Your counter-notice must include:
+your physical or electronic signature;
+identification of the removed content and its location prior to removal;
+a statement under penalty of perjury that you have a good-faith belief the content was removed by mistake or misidentification; and
+your name, address, telephone number, and email address, a statement that you consent to the jurisdiction of the US district court in the state in which you reside (or the US District Court for the Northern District of California if your address is outside of the United States), and a statement that you will accept service of process from the person who provided notification of the alleged infringement to us.
+Counter-notices may be sent to the same contact listed above.
+Any person who knowingly materially misrepresents that material or an activity is infringing or that any material or activity was removed or disabled by mistake or misidentification, will be liable to us for any damages, including costs and attorneys’ fees incurred by us in removing or disabling access to the material or activity claimed to be infringing or in replacing the removed material or enabling access to it.
+Pika’s policy is to terminate a user’s access to the Service if, under appropriate circumstances, the user is determined to be a repeat infringer.
+10. Information About You and Your Use of the Service
+If you are an enterprise customer with a separate written agreement that includes confidentiality terms, those terms will govern. Otherwise, you agree that any non-public information about the Service, including but not limited to technical documentation, API specifications, pricing structures, and beta or preview features designated as confidential (“Confidential Information”), will be kept confidential and not disclosed to any third party without Pika’s prior written consent. This obligation does not apply to information that (a) is or becomes publicly available through no breach by you, (b) is rightfully received by you from a third party without restriction, (c) is independently developed by you without use of Confidential Information, or (d) is required to be disclosed by law or court order, provided that you give reasonable advance notice to Pika (unless prohibited by applicable law) to allow Pika to seek protective relief.
+All information we collect through the Service is subject to our Privacy Policy. By using the Service, you consent to all actions taken by us regarding your information in compliance with the Privacy Policy.
+You represent and warrant that you have obtained all necessary authorizations, consents, and permissions from any data subjects to process personal data that you submit to or through the Service, and that your collection, processing, and use of such personal data complies with all applicable data protection laws. If you are located in a jurisdiction that requires a data processing agreement (such as the GDPR or CCPA), you may request that Pika enter into a Data Processing Agreement, which will be incorporated by reference into these terms of service.
+11. International Use and Export Controls
+The Service is operated from the United States and might not be available or appropriate in all jurisdictions. Access to or use of the Service from outside the United States is at your own risk, and you are responsible for compliance with all local laws. The Service and any associated software or data transmissions may be subject to U.S. export control laws and regulations. You must not access, use, export, or re-export the Service in violation of any applicable laws. You must not access or use the Service if you are located in a country subject to U.S. sanctions or are designated on any U.S. government list of prohibited or restricted parties.
+You must not access or enable access to any Third-Party Model that is restricted by geography or entity through the use of a VPN, proxy, or other circumvention technology. The restrictions in this section apply to your authorized users and end users, and you are responsible for ensuring their compliance.
+12. Warranty Disclaimers
+The Service generates Output based on user Input using artificial intelligence. You acknowledge that Output may be unpredictable, inaccurate, biased, offensive, explicit, or otherwise objectionable. Pika does not review, verify, or endorse any Output generated by the Service, including any AI Selves, and you assume full responsibility for any reliance on, use of, or actions taken based on Output.
+The Output, including AI Selves, are fictional and intended for entertainment purposes only. Except with respect to AI Selves, any resemblance to real persons, living or dead, or actual events is purely coincidental. Pika does not claim that Output represents factual information, real events, or real individuals. You acknowledge that Output may contain fantasy elements that are not intended to depict reality or factual accuracy.
+An AI Self is a computer-generated simulation and is not a real person. By creating or interacting with an AI Self, you acknowledge that (1) an AI Self is not the creator and does not represent the real-time thoughts, opinions, actions, or endorsements of the creator, and any statements, opinions, or content generated by an AI Self are Outputs and should not be attributed to or relied upon as the views of the creator, Pika or any real person, and (2) AI Selves are not a substitute for human relationships, mental health support, medical care, legal advice, financial guidance, or any other professional service.
+Pika is not warranting that Output will comply with any applicable laws, regulations, or community standards, including but not limited to those related to obscenity, defamation, privacy, intellectual property, or other legal restrictions. You are solely responsible for ensuring that your use of the Service and any Output complies with all applicable laws in your jurisdiction.
+You acknowledge that the quality, appropriateness, and accuracy of Output depend on the Input you provide. Pika is not responsible for any Output that is unlawful, infringing, harmful, misleading, offensive, or otherwise inappropriate that may be generated as a result of your Input. If you encounter objectionable or inappropriate Output, you should discontinue use of the Service and report the issue if applicable.
+Pika does not exercise editorial control over Output. Pika is not responsible for any statements, representations, or information contained in Output and disclaims all liability arising from your reliance on that content. The inclusion of Output in the Service does not constitute an endorsement, representation, or warranty by Pika regarding its accuracy, legality, or suitability.
+Your use of the Service, including any creation of or interaction with an AI Self, any materials accessed through the Service, and any items obtained through the Service is at your own risk. The Service, any materials accessed through the Service, and any items obtained through it are provided “as is” and “as available,” without any warranties, either express or implied. Neither Pika nor any person associated with Pika makes any warranty regarding the completeness, security, reliability, quality, accuracy, or availability of the Service. Without limiting the preceding, neither Pika nor anyone associated with Pika states that (1) the Service, any materials accessed through the Service, or any items obtained through it will be accurate, reliable, error-free, or uninterrupted, (2) that defects will be corrected, (3) that the Service or the server that makes it available are free of viruses or other harmful components, (4) that any User Content will be secure or not lost or altered, or (5) that the Service or any items obtained through it will otherwise meet your needs or expectations.
+Pika is not making any warranty, whether express or implied, statutory, or otherwise, including but not limited to any warranty of merchantability, noninfringement, and fitness for a particular purpose.
+The foregoing does not affect any warranties that cannot be excluded or limited under law.
+13. Limitation of Liability
+Neither we nor any of our affiliates or licensors will be liable for any indirect, incidental, special, consequential, or exemplary damages, including damages for loss of profits, goodwill, use, or data or other losses, even if we have been advised of the possibility of those damages. Our aggregate liability under these terms of service will not exceed the greater of the amount you paid to Pika in the six months before the event giving rise to the claim and $100. The limitations in this section apply only to the extent permitted by law.
+The limitation of liability set out above does not apply to liability resulting from our gross negligence or willful misconduct.
+The foregoing does not affect any liability that cannot be excluded or limited under law.
+14. Indemnification
+You shall defend, indemnify, and hold harmless Pika, its affiliates, licensors, and service providers, and their respective officers, directors, employees, contractors, agents, suppliers, successors, and assigns, from and against any claims, liabilities, damages, judgments, awards, losses, costs, expenses, or fees (including reasonable attorneys’ fees) arising out of or relating to (1) your access to, use of, or alleged use of the Service (including any Third Party Model), (2) your violation of these terms of service, the AUP, any applicable Model Terms, or any applicable law or regulation, (3) your User Content, including any Outputs you generate or distribute and any Outputs generated by your AI Self, or your AI Self's interactions with other users or on third-party platforms, (4) your misuse of the Service or any unauthorized use of Content, (5) your violation of any third-party rights, (6) your negligence or willful misconduct, (7) the acts or omissions of your authorized users or end users, or (8) any claim by a third-party model provider arising from your use of a Third-Party Model. If Pika is obligated to respond to a third-party claim for which you must indemnify Pika, Pika may assume the exclusive defense and control of such claim, and you agree to cooperate as reasonably requested.
+15. Resolving Disputes
+Governing Law
+California law governs all adversarial proceedings arising out of this agreement or your access or use of the Service.
+Equitable Remedies
+Each party acknowledges that (1) breach by either party of that party’s obligations under this agreement has the potential to cause irreparable harm for which damages would be an inadequate remedy and (2) if any such breach occurs or is threatened and might cause irreparable harm, each party would want a court to grant the other party an injunction, a restraining order, or any other equitable remedy, in each case without posting a bond or other security and without proof of actual damages.
+Arbitration and Class Action Waiver
+Mandatory Arbitration
+You and Pika are agreeing to give up any rights to litigate claims in a court or before a jury, or to participate in a class action or representative action regarding a claim. Other rights that you would have if you went to court might also be unavailable or might be limited in arbitration.
+As the exclusive means of bringing adversarial proceedings to resolve any dispute arising out of these terms of service or your access or use of the Service (other than any proceeding brought by a party seeking an injunction, a restraining order, or any other equitable remedy to which that party is entitled under the Equitable Remedies provision), a party may demand that the dispute be resolved by arbitration administered by National Arbitration and Mediation (“NAM”) in accordance with its Comprehensive Dispute Resolution Rules and Procedures and, if applicable, Supplemental Rules for Mass Arbitration Filings, which are available at https://www.namadr.com/resources/rules-fees-forms/. Judgment on any award rendered in any arbitration may be entered in any court having jurisdiction.
+Any arbitration begun in accordance with this arbitration provision must be conducted by one arbitrator.
+Any arbitration begun in accordance with this arbitration provision must be conducted virtually using Zoom or a virtual meeting platform that provides similar functionality. If virtual arbitration is not possible due to technical issues, because the arbitrator is unwilling or unable to attend the arbitration virtually, or for one or more other compelling reasons, the arbitration must be conducted in Palo Alto, California, or any other place mutually agreed on by the parties.
+The arbitrator must not award punitive damages in addition to compensatory damages. Each party hereby waives any right to recover any such damages in any arbitration.
+If you prevail on any claim that affords the prevailing party attorneys’ fees, the arbitrator may award reasonable fees to you under the standards for fee shifting provided by law. Pika will not seek attorneys’ fees and costs in arbitration unless the arbitrator determines that your claim is frivolous.
+The arbitrator will have the power to rule on any challenge to its own jurisdiction or to the validity or enforceability of any portion of the agreement to arbitration, except that the state or federal courts of Palo Alto, California have the authority to determine any dispute about enforceability or validity of the class action waiver.
+The activities described in these terms of service involve interstate commerce and the Federal Arbitration Act governs the interpretation and enforcement of this arbitration agreement and any arbitration.
+Opt-Out of Arbitration
+You have the right to opt out of the arbitration provisions in these terms of service by sending written notice of your decision to opt out to support@pika.art with the subject line “Arbitration Opt-Out” or “Arbitration Only Opt-Out.” Your opt-out notice must be received by Pika within 30 days of the date you first registered for the Service or first agreed to these terms of service, whichever is earlier.
+To be valid, your notice must include (1) your full name, (2) the email address associated with your Pika account, and (3) a clear statement that you wish to opt out of the arbitration provision.
+If you opt out of arbitration, you will not be bound by the arbitration agreement in these terms of service, and neither will Pika. However, if you opt out only of arbitration and not of the class action waiver, the class action waiver will still apply. You cannot opt out of the class action waiver while remaining subject to arbitration.
+Opting out of arbitration will not affect any other terms of this agreement, including your obligation to resolve disputes on an individual basis outside of class or collective proceedings.
+Small Claims Exception
+You may elect to pursue your claim in small-claims court rather than arbitration if you provide us with written notice of your intent to do so within 60 days of the date your claim arose. The small-claims court proceeding will be limited solely to your individual dispute or controversy.
+Class and Jury Trial Waivers
+The parties intend to arbitrate solely on an individual basis, and this agreement does not permit class arbitration or any claims brought as a plaintiff or class member in any class or representative proceeding. The arbitrator must not consolidate more than one person’s claims and must not otherwise preside over any form of a representative or class proceeding. Only individual relief is available. The parties shall sever and litigate in court any request for public injunctive relief after completing arbitration for the underlying claim and all other claims. This does not prevent either party from participating in a class-wide settlement. To the extent permitted by law, you and Pika irrevocably waive any right to a trial by jury in any legal proceeding arising out of or relating to these terms of service or the Service.
+Batch Arbitration
+If 25 or more claimants represented by the same or similar counsel file demands for arbitration raising substantially similar disputes within 90 days of each other, then you and Pika agree that NAM will administer them in batches of up to 50 claimants each (“Batch”), unless there are less than 50 claimants in total or after batching, which will comprise a single Batch. NAM will administer each Batch as a single consolidated arbitration with one arbitrator, one set of arbitration fees, and one hearing held by videoconference or in a location decided by the arbitrator for each Batch. If any part of this section is found to be invalid or unenforceable as to a particular claimant or Batch, it will be severed and arbitrated in individual proceedings.
+Severability
+If any provision of this arbitration agreement is found unenforceable, the unenforceable provision will be severed, and the remaining portions of the arbitration agreement will remain in force.
+Jurisdiction
+If either party brings a proceeding regarding the enforceability or validity of the class action waiver or seeking an injunction, a restraining order, or other equitable remedy to which that party is entitled under the Equitable Remedies provision, that party may bring that proceeding only in the United States District Court for the Northern District of California or, only if there is no federal subject matter jurisdiction, in a state court of California sitting in Palo Alto.
+Each party hereby waives any claim that any proceeding brought in accordance with this provision has been brought in an inconvenient forum or that the venue of that proceeding is improper.
+Recovering Expenses
+Except as otherwise provided in the Arbitration and Class Action Waiver, in an adversarial proceeding between the parties arising out of these terms of service or your access or use of the Service, the prevailing party will be entitled to recover from the other party, in addition to any other relief awarded, all expenses that the prevailing party incurs in those proceedings, including legal fees and expenses.
+Time Limit to File Claims
+Apart from proceedings arising from a claim for Indemnification, neither party may initiate adversarial proceedings to resolve any dispute arising out of these terms of service or your access or use of the Service more than one year after the date that dispute arose.
+Crisis resources
+If you are experiencing a medical or mental health emergency, please seek support from a qualified professional, such as by contacting the 988 Suicide & Crisis Lifeline (call or text 988) or your local emergency services. If you are considering harming yourself or feel that you are a danger to yourself or others, you must discontinue use of the Services immediately and call 911 or notify appropriate police or emergency medical personnel.]
+California Users and Residents
+If any complaint with us is not satisfactorily resolved, you can contact the Complaint Assistance Unit of the Division of Consumer Service of the California Department of Consumer Affairs in writing at 1625 North Market Blvd., Suite N 112, Sacramento, California 95834 or by telephone at (800) 952-5210 or (916) 445-1254.
+Language
+These terms of service and all related documents are provided in English. If you access a translated version, the English version will prevail in the event of any conflict or inconsistency.
+Waiver and Severability
+No waiver of any provision of this agreement will be effective unless it is in writing and signed by the party granting the waiver. No failure or delay in exercising any right or remedy under this agreement will operate as a waiver of that right or remedy. A waiver granted on one occasion will not operate as a waiver on future occasions.
+If any provision of these terms of service is held by a court or other tribunal of competent jurisdiction to be invalid, illegal, or unenforceable for any reason, that provision will be eliminated or limited to the minimum extent so that the remaining provisions of the terms of service will continue in full effect.
+Entire Agreement
+These terms of service constitute the entire understanding between the parties regarding these terms of service or your access or use of the Service. You acknowledge that because you have not relied on, and will not be relying on, any statements made by Pika arising out of these terms of service or your access or use of the Service, you will have no basis for bringing any claim for fraud in connection with any such statements.
+Your Comments and Concerns
+The Service is operated by Mellis, Inc., 849 High St, Palo Alto, California 94301, USA.
+All feedback, comments, requests for technical support, and other communications relating to the Service should be directed to: support@pika.art.
+Product
+Video Apps
+Image Apps
+Audio Apps
+Pika MCP
+Pika for ChatGPT
+iOS app
+Pricing
+Enterprise
+Developers
+Pika API Club
+Enterprise API
+Company
+Research
+Blog
+Experiments
+Contact
+Referral Program
+Resources
+Help Center
+Support
+Terms
+Privacy
+Cookies
+DMCA
+Your Privacy Choices
+© 2026 Pika. All rights reserved.

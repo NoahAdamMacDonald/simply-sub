@@ -1,0 +1,70 @@
+url: https://docs.midjourney.com/hc/en-us/articles/33390994570509-Logging-In-Connecting-Accounts
+method: fetch
+saved: 2026-11-19
+
+Logging In & Connecting Accounts – Midjourney
+Midjourney Docs
+Skip to main content
+Midjourney
+Toggle navigation menu
+Midjourney
+Billing Support
+Account Management
+Logging In & Connecting Accounts
+Whether you're joining us for the first time or you're a returning member, it's important to log in with the correct account. This helps make sure you can enjoy using Midjourney on both our website and Discord without any issues. Every Midjourney plan lets you use both platforms—it's all about setting things up correctly.
+New Members
+If you’re new here, we’re excited to have you! Here’s how you can create an account:
+Visit the Home Page: Go to midjourney.com and click the Sign Up button.
+Choose a Sign-Up Method: You’ll see two options to sign up...
+Continue with Discord: Pick this option to use Discord for creating images.
+• You can link either an existing Discord account or make a new one.
+• Your Discord login details will serve as your Midjourney credentials. This means you’ll use the same credentials for both Discord and our website, so make sure your Discord account is verified and keep track of your email and password.
+Continue with Google: Choose this option to sign in to midjourney.com with your Google account.
+Connect Your Account: If you continue with Google, you’ll be prompted to enter your Google login details. If you continue with Discord, you’ll need to enter your Discord login details. You'll also be asked to authorize Midjourney to access your Discord account.
+Important Note for Discord Accounts:
+If you're linking an existing Discord account, double-check the email address associated with it. Entering an email that isn't linked to a Discord account will prompt Discord to take you through the steps of creating a new account. This could lead to complications if you already have an account.
+Add a Second Sign-In Method (optional): After setting up your account or subscribing, you can add the other sign-in option, like adding Google if you started with Discord, and vice versa. Simply go to your Account Settings page on midjourney.com. However, if your Discord account has already created Midjourney images, you’re considered a returning user and you need to sign in with Discord.
+Right now, you can create a Midjourney account using either a Discord account or a Google account. We don't have the option to create a username and password specific just to Midjourney. You will need to use Google or Discord as your login method.
+Returning Members
+Welcome back to Midjourney! If you've used our service before, even just a free trial, chances are it was before August 2024. Back then, Discord was the only option for account creation. To access your old image history and ensure a smooth experience, it’s crucial to log in with your Discord account first.
+Warning: If you log in with Google and create a new subscription, you will not be able to connect a Discord account with past image history.
+How to Reconnect:
+Visit the Home Page: Go to midjourney.com and click the Log In button.
+Log In with Discord: To link up with your past images and activity, start by logging in with your Discord account. You'll also be asked to authorize Midjourney to access your Discord account.
+Important Note for Discord Accounts:
+Double-check the email address associated with your Discord account. Entering an email that isn't linked to a Discord account will prompt Discord to take you through the steps of creating a new account. This could lead to complications if you already have an account. Before clicking "Authorize," double-check that your correct Discord username is shown at the top of the popup. If the username is incorrect, use the "Not you?" link.
+Add Google as a Login Option (optional): Once you're logged in, you can add Google as a login option by visiting your Account Settings page. This way, you’ll have the flexibility to use either method in the future.
+Remember, starting with your Discord login is key to ensuring that everything syncs correctly. Once you're all set, feel free to explore and create new images. Welcome back and happy creating!
+Connecting Accounts
+All our plans allow you to use Midjourney both on our website and in Discord. But if you want to make images in Discord, you will need to have a Discord account connected to your Midjourney account. You can do this, as well as add a Google login, on your Account Settings page on midjourney.com
+In the Connected Accounts section, you'll find your login methods displayed along with their details. If a login method isn't connected yet, you will see a Connect button next to it. Just click this button to proceed with linking your account.
+User Name & Display Name
+Set a unique, public user name that will be used in your public profile URL and in the file names of your downloaded images and videos. Your display name will be used on the Explore page and in the filenames of your creations.
+Both of these can be edited and updated at any time.
+Midjourney ID
+Your Midjourney ID is also shown on this page. When you contact billing support, providing this ID is really helpful and highly encouraged. This helps us assist you more quickly and effectively.
+Disconnecting Accounts
+Accounts can only be disconnected by our billing support team. If you need help with this, please reach out to billing support. You may be required to verify your account ownership before your login method can be disconnected.
+Your account must have one method connected at all times, so make sure you have a secondary method already connected before contacting support.
+Troubleshooting
+If you're having trouble connecting your accounts or logging in, you might see a message like this:
+"One of the accounts you are trying to link has a subscription while the other already contains jobs. At this time, linking such accounts is not supported."
+This often occurs if you log into midjourney.com using Google, subscribe to a plan, and then try to connect a Discord account that has already created images with Midjourney. Each account now has its own image gallery, so they can't be linked or connected.
+Solutions:
+Use a Different Discord Account:
+Try connecting a Discord account that hasn't used Midjourney before.
+Cancel and Switch Accounts:
+If eligible, cancel and refund your subscription. Log out of the website, then log in with your Discord account and re-subscribe (see Returning Subscribers).
+Contact Billing Support:
+Reach out to our billing support team for further assistance.
+"Another account already exists for [EMAIL]. Please log in with that account and then link it."
+This means there’s already an account registered with that email address.
+Solutions:
+If you encountered this error while trying to log in with Google, try logging in with the Discord account that uses the same email address instead. Once logged in, you can link your Google account on your Account Settings page.
+If you see this error while trying to log in with Discord, try logging in with Google using the same email instead. Once logged in, go to your Account Settings page and connect your Discord account.
+Reach out to our billing support team for further assistance.
+Need Help Getting Started?
+Getting Started Guide
+0">
+Midjourney Website
+Midjourney Discord Server

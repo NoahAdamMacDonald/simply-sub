@@ -1,0 +1,29 @@
+url: https://help.suno.com/en/articles/4797249
+method: fetch
+saved: 2026-11-19
+
+How do I cancel my paid subscription?
+Knowledge Base
+Make Music Now!
+How can we help?
+Results
+No results found
+More results
+We use cookies to analyze website traffic and help improve our visitor experience. Privacy Policy
+Reject
+Accept
+Home
+Accounts & Billing
+Billing
+How do I cancel my paid subscription?
+Edited
+To cancel a subscription you purchased from our direct billing processor (Stripe):
+Please visit suno.com/account then choose Cancel Subscription at the top of the page. You will need to confirm the changes before moving forward.
+Also from suno.com/account, you can also choose Update Payment to cancel the subscription directly within Stripe.
+Mobile subscriptions (paid via the App Store or Google Play Store) should be canceled directly through those third party services. You can typically find a list of subscriptions in your device's settings and cancel directly in this area.
+cancel
+subscription
+Cookie preferences
+Terms of ServicePrivacy PolicySuno on iOS
+Community GuidelinesBlogSuno on Android
+Leave us feedback
