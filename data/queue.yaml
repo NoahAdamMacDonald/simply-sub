@@ -538,6 +538,20 @@
   source: own
   status: done
   date: 2026-11-19
+- id: private-internet-access
+  name: Private Internet Access
+  website: https://www.privateinternetaccess.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: cyberghost
+  name: CyberGhost
+  website: https://www.cyberghostvpn.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
