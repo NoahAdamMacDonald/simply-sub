@@ -489,6 +489,20 @@
   source: own
   status: done
   date: 2026-11-19
+- id: obscura
+  name: Obscura
+  website: https://obscura.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
+- id: tailscale
+  name: Tailscale
+  website: https://tailscale.com
+  category: vpn
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
