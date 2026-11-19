@@ -43,8 +43,8 @@ jobs:
 
       - run: npm ci
       # Fails on a high or critical advisory in any dependency, dev tools included, since they build what ships
-      # (BLUEPRINT §11.5).
-      - run: npm audit --audit-level=high
+      # (BLUEPRINT §11.5), except one with no fix that scripts/audit-allowlist.json lists until its review date.
+      - run: npm run audit:check
       - run: npm run lint
       - run: npm run format:check
       - name: data/schema matches the Zod schemas

@@ -17,6 +17,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "data:schema": "tsx scripts/generate-json-schema.ts",
+    "audit:check": "tsx scripts/audit.ts",
     "data:validate": "tsx scripts/validate-data.ts",
     "data:coverage": "tsx scripts/coverage.ts",
     "data:writes": "tsx scripts/seed-writes.ts",
