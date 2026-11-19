@@ -100,8 +100,8 @@ perks:
     name: Unlimited parallel generations
   - id: priority-queue
     name: Priority queue
-  - id: early-access-440
-    name: Early access to new models (from $440/mo)
+  - id: mcp
+    name: Pika MCP, for ChatGPT, Claude, OpenClaw, Codex, Hermes and Claude Code
 
 # AI features (the AI category's registry), read 2026-11-17 on its pricing page and help centre. Pika is an AI video,
 # image and audio generator ("Pika is an AI video, image and audio platform."), with no chat assistant: its apps take a
@@ -115,8 +115,9 @@ perks:
 #   choose the model you want to use."
 # - Projects: "Keep related work in projects and mark your favorites so they’re easy to find again." (help centre).
 # - Not counted: Pika MCP lets other assistants use Pika ("Pika credits also work with the new Pika MCP."; its MCP page
-#   lists ChatGPT, Claude and others), not Pika use MCP servers; the API is billed apart; Fancy's
-#   "Early access to new models (from $440/mo)" is a perk, since Fancy is priced here at $95. No page offers chat, web
+#   lists ChatGPT, Claude and others), not Pika use MCP servers: a perk on every plan; the API is billed apart; Fancy's
+#   "Early access to new models (from $440/mo)" is neither a feature nor a perk, since Fancy is priced here at $95
+#   (its notes say so). No page offers chat, web
 #   search, voice conversations, memory, reasoning, custom assistants, a coding or browser agent, scheduled tasks, deep
 #   research or office apps; it keeps no chats.
 # Creative features (the creative category's registry), read 2026-11-17:
@@ -154,7 +155,7 @@ plans:
       creative.export-resolution: 1080p
       creative.no-watermark: true
       creative.ai-credits: 600
-    perks: [commercial-license, parallel-2-8]
+    perks: [commercial-license, parallel-2-8, mcp]
     notes: 'Pika’s own models (Pika H3 Flex, Pika 2.5) and others’ (Seedance 2.5, Kling 4.0, Veo 3.1, Nano Banana, GPT Image); 600 credits a month (about 60 Pika H3 Flex clips or 4 Seedance 2.5 720p clips) that don’t roll over.'
     prices:
       - region: GLOBAL
@@ -189,7 +190,7 @@ plans:
       creative.export-resolution: 1080p
       creative.no-watermark: true
       creative.ai-credits: 2600
-    perks: [commercial-license, parallel-8-32]
+    perks: [commercial-license, parallel-8-32, mcp]
     notes: 'Everything in Starter with 2,600 credits a month (about 21 Seedance 2.5 720p clips) that don’t roll over, and more generations at once.'
     prices:
       - region: GLOBAL
@@ -224,7 +225,7 @@ plans:
       creative.export-resolution: 1080p
       creative.no-watermark: true
       creative.ai-credits: 8550
-    perks: [commercial-license, parallel-unlimited, priority-queue, early-access-440]
+    perks: [commercial-license, parallel-unlimited, priority-queue, mcp]
     notes: 'Priced at its lowest: you pick any amount from $95 to $880 a month ($76 to $704 a month billed yearly), at 90 credits per $1 (8,550 to 79,200 credits). Early access to new models comes from $440 a month.'
     prices:
       - region: GLOBAL

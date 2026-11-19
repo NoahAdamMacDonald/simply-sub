@@ -118,8 +118,9 @@ perks:
 #   most beautiful AI models in the world"), so its plans are in the ai category with ai.assistant, and in creative
 #   (notes.md: an image generator under the registry's assistant group). Conversational mode is an assistant of its
 #   own: "Conversational mode allows you to describe your ideas and images in normal, conversational language to an AI
-#   that will write prompts for you." and "With Voice: Prefer talking? Click the microphone  icon." (Draft &
-#   Conversational Modes), on midjourney.com with no plan named: voice.
+#   that will write prompts for you." (Draft & Conversational Modes), on midjourney.com with no plan named. Its "With
+#   Voice: Prefer talking? Click the microphone  icon." is dictation: you speak your ideas and nothing answers aloud,
+#   so no voice conversations.
 # - Image and video generation: "SD video generation" (Basic) and "SD and HD video generation" (the other cards);
 #   "Midjourney videos are generated in 480p quality, also called Standard Definition (SD)." and "If you have the
 #   Standard, Pro, or Mega plan you can also generate videos in 720p quality" (Video): Standard, Pro and Mega export
@@ -154,7 +155,6 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.video-generation: true
-      ai.voice: true
       ai.chat-storage: cloud
       creative.tools: [photo-editing]
       creative.no-watermark: true
@@ -193,7 +193,6 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.video-generation: true
-      ai.voice: true
       ai.chat-storage: cloud
       creative.tools: [photo-editing]
       creative.no-watermark: true
@@ -233,7 +232,6 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.video-generation: true
-      ai.voice: true
       ai.chat-storage: cloud
       creative.tools: [photo-editing]
       creative.no-watermark: true
@@ -273,7 +271,6 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.video-generation: true
-      ai.voice: true
       ai.chat-storage: cloud
       creative.tools: [photo-editing]
       creative.no-watermark: true
@@ -365,8 +362,8 @@ policies:
           quote: 'You will not be refunded for the current subscription period, but You will not be charged after the current subscription period has ended.'
       lastVerified: 2026-11-17
     - topic: billing.price-changes
-      tier: bad
-      reason: 'It can change its prices at any time, and its terms don’t promise to tell you first.'
+      tier: poor
+      reason: 'It can change its prices at any time, and its terms don’t say it will tell you first.'
       sources:
         - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
           quote: 'We reserve the right to modify or discontinue any aspect of the Service, including pricing and features, at any time.'
@@ -431,22 +428,14 @@ policies:
       lastVerified: 2026-11-17
     - topic: legal.content-rights
       tier: bad
-      reason: 'You give Midjourney a licence that never ends over what you type, upload and make, which it can pass on, and by default everything you make is public for other members to use and remix.'
+      reason: 'You give Midjourney a licence that never ends over what you type, upload and make, which it can pass to anyone. Your work is public for others to remix; Stealth mode (Pro, Mega) hides it but doesn’t narrow the licence.'
       sources:
         - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
           quote: 'By using the Services, You grant to Midjourney, its affiliates, successors, and assigns a perpetual, worldwide, non-exclusive, sublicensable no-charge, royalty-free, irrevocable copyright license to reproduce, prepare derivative works of, publicly display, publicly perform, sublicense, and distribute the Content You input into the Services, as well as any Assets produced by You through the Service.'
         - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
           quote: 'Please note: Midjourney is an open community which allows others to use and remix Your Content whenever they are posted in a public setting. By default, Your Content is publicly viewable and remixable.'
-      lastVerified: 2026-11-17
-    - topic: legal.content-rights
-      plans: [midjourney.pro, midjourney.mega]
-      tier: poor
-      reason: 'Stealth mode keeps what you make out of public view, so others can’t remix it, but Midjourney’s own licence still never ends and survives your account.'
-      sources:
-        - url: https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service
-          quote: 'This license survives termination of this Agreement by any party, for any reason.'
-        - url: https://docs.midjourney.com/hc/en-us/articles/32019750070669-Stealth-Mode
-          quote: 'Stealth mode is available only to Pro and Mega Plan members.'
+        - url: https://docs.midjourney.com/hc/en-us/articles/28014645615373-Keeping-Your-Creations-Private
+          quote: 'Available only with our Pro and Mega Plans, Stealth mode keeps your creations hidden from other users on the website.'
       lastVerified: 2026-11-17
     - topic: legal.output-rights
       tier: neutral

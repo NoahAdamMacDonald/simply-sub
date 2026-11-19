@@ -76,15 +76,12 @@ renewalAnchor:
     - https://www.udio.com/pricing
   lastVerified: 2026-11-17
 
-# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table (ticks read from the screenshot): credits
-# (perks, never features) and the tools each plan adds.
+# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table (ticks read from the screenshot): Free's
+# daily and monthly allowance (a paid plan's credits a month are creative.ai-credits), cover art and the tools each
+# plan adds.
 perks:
   - id: free-credits
     name: 10 credits per day and 100 credits per month (no rollovers)
-  - id: credits-2400
-    name: 2400 credits per month
-  - id: credits-6000
-    name: 6000 credits per month
   - id: songs-at-once-6
     name: Generate up to 6 songs at the same time
   - id: songs-at-once-10
@@ -99,6 +96,8 @@ perks:
     name: Use premium Artist Styles, and blend and reduce Styles
   - id: edit-music-lyrics
     name: Edit music and lyrics
+  - id: cover-art
+    name: Generate cover art
   - id: upload-cover-art
     name: Upload your own cover art
   - id: song-access-permissions
@@ -110,7 +109,10 @@ perks:
 #   describe a song in words and it makes it. No page offers a chat or an agent (notes.md).
 # - Music generation on every plan ("Create any song. Just imagine it.", home page), with Voices from its library on
 #   Standard and Pro ("you cannot upload your own voice as a source at this time", Voices).
-# - Image generation on every plan: the table's "Generate cover art" row ticks Free, Standard and Pro.
+# - Cover art on every plan: the table's "Generate cover art" row ticks Free, Standard and Pro. It's art for your song,
+#   as a video's sound is part of the clip for Ideogram and Leonardo, so a perk, not image generation.
+# - Generative credits a month on the paid plans: "2400 credits per month (monthly credit limit, no rollovers)" and
+#   "6000 credits per month (monthly credit limit, no rollovers)" on its cards. Free's allowance is a perk.
 # - Creative tools: audio and music production on every plan (extend, remix, trim and Styles on every plan; editing,
 #   uploads and Sessions, its timeline editor, on the paid ones as perks).
 # - Not offered: video generation, voice conversations, web search, memory, projects, reasoning, other companies'
@@ -133,9 +135,8 @@ plans:
     features:
       ai.assistant: true
       ai.audio-generation: true
-      ai.image-generation: true
       creative.tools: [audio-production]
-    perks: [free-credits]
+    perks: [free-credits, cover-art]
     notes: '10 credits a day and 100 a month (a credit is a ~30-second track), up to 4 songs at once and three 2-minute songs a day. Songs stay on Udio: no downloads, personal and non-commercial use only.'
     prices:
       - region: GLOBAL
@@ -154,17 +155,17 @@ plans:
     features:
       ai.assistant: true
       ai.audio-generation: true
-      ai.image-generation: true
       creative.tools: [audio-production]
+      creative.ai-credits: 2400
     perks:
       [
-        credits-2400,
         songs-at-once-6,
         unlimited-long-songs,
         voices,
         upload-audio,
         artist-styles,
         edit-music-lyrics,
+        cover-art,
         upload-cover-art,
       ]
     notes: '2,400 credits a month (no rollovers), up to 6 songs at once, Voices, uploads and editing. A 7-day free trial (without the extra credits) becomes a yearly plan unless you cancel or pick monthly first.'
@@ -237,17 +238,17 @@ plans:
     features:
       ai.assistant: true
       ai.audio-generation: true
-      ai.image-generation: true
       creative.tools: [audio-production]
+      creative.ai-credits: 6000
     perks:
       [
-        credits-6000,
         songs-at-once-10,
         unlimited-long-songs,
         voices,
         upload-audio,
         artist-styles,
         edit-music-lyrics,
+        cover-art,
         upload-cover-art,
         song-access-permissions,
       ]

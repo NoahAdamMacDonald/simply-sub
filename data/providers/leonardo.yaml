@@ -77,7 +77,7 @@ renewalAnchor:
   lastVerified: 2026-11-17
 
 # Perks (M11.6), read 2026-11-17 on the pricing cards and comparison table: usage (never features), the token bank,
-# Leo Agent (no page describes it beyond its name) and private generations (no registry feature).
+# Leo Agent (no page describes it beyond its name), private generations (no registry feature) and Edit in Canva.
 perks:
   - id: daily-tokens
     name: 150 fast tokens a day
@@ -103,6 +103,8 @@ perks:
     name: Personal AI model training, 50 a month
   - id: top-up-tokens
     name: Top-up Tokens
+  - id: edit-in-canva
+    name: Edit in Canva
 
 # AI and creative features, read 2026-11-17, on every plan unless named:
 # - Sold as an AI service ("THE CREATOR-FIRST" "GENERATIVE AI PLATFORM", its home page), so its plans are in ai with
@@ -112,7 +114,8 @@ perks:
 #   ("videos that include sound effects and audio dialogue") is part of the clip, not music or voice generation.
 # - Models from other companies on the paid plans: the table's "Third-party Models" row ("-" on Free, whose "Platform
 #   Models" are "Auto only"); its video models include "Veo 3 and Kling Video 3.0".
-# - Connects to your other apps: "Edit in Canva is available to all individual Leonardo.Ai users."
+# - Edit in Canva, a perk on every plan ("Edit in Canva is available to all individual Leonardo.Ai users."): it sends
+#   an image to Canva's editor, not the assistant reaching your other apps (ai.integrations' `connectors`).
 # - Creative tools: photo editing ("Canvas Editor is a powerful image editing tool that allows you to make intricate
 #   adjustments to your images, remove unwanted elements, or even generate new content using advanced inpainting and
 #   outpainting techniques."), drawing and painting (Realtime Canvas, "designed to convert drawings into stunning
@@ -122,7 +125,6 @@ perks:
 # - No watermark on the paid plans: "To generate a Video without a watermark, consider upgrading to a paid plan."
 # - Generative credits a month on the paid plans: "Fast Tokens" "8,500 / monthly", "25,000 / monthly" and "60,000 /
 #   monthly"; Free's "150 / daily" is a perk.
-# - Kept on its servers: your Library of generations.
 # - No page states video export resolutions by plan, web search, voice, memory, projects, reasoning, a coding agent or
 #   API use within a plan (its API is billed apart).
 # General features, read 2026-11-17: the web and "Leonardo.Ai is available as an app for Android and Apple iOS
@@ -146,10 +148,8 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.video-generation: true
-      ai.integrations: [connectors]
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, painting]
-    perks: [daily-tokens]
+    perks: [daily-tokens, edit-in-canva]
     notes: '150 fast tokens a day with its Auto model only; everything you make is public, and Leonardo owns it. Videos carry a watermark, and only some video models are open to Free.'
     prices:
       - region: GLOBAL
@@ -170,13 +170,19 @@ plans:
       ai.image-generation: true
       ai.video-generation: true
       ai.model-choice: true
-      ai.integrations: [connectors]
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, painting, 3d]
       creative.no-watermark: true
       creative.ai-credits: 8500
       account.pause: true
-    perks: [token-bank-25500, leo-agent, private-generations, model-training-10, top-up-tokens]
+    perks:
+      [
+        token-bank-25500,
+        leo-agent,
+        private-generations,
+        model-training-10,
+        top-up-tokens,
+        edit-in-canva,
+      ]
     notes: '8,500 fast tokens a month, with up to 25,500 unused tokens rolled over; 80+ models, 2 generations at a time.'
     prices:
       - region: GLOBAL
@@ -205,8 +211,6 @@ plans:
       ai.image-generation: true
       ai.video-generation: true
       ai.model-choice: true
-      ai.integrations: [connectors]
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, painting, 3d]
       creative.no-watermark: true
       creative.ai-credits: 25000
@@ -219,6 +223,7 @@ plans:
         private-generations,
         model-training-20,
         top-up-tokens,
+        edit-in-canva,
       ]
     notes: '25,000 fast tokens a month (up to 75,000 rolled over), then unlimited image generation at a relaxed pace with 15 of its models; 3 generations at a time.'
     prices:
@@ -248,8 +253,6 @@ plans:
       ai.image-generation: true
       ai.video-generation: true
       ai.model-choice: true
-      ai.integrations: [connectors]
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, painting, 3d]
       creative.no-watermark: true
       creative.ai-credits: 60000
@@ -263,6 +266,7 @@ plans:
         private-generations,
         model-training-50,
         top-up-tokens,
+        edit-in-canva,
       ]
     notes: '60,000 fast tokens a month (up to 180,000 rolled over), then unlimited relaxed images and unlimited relaxed video with six video models (MiniMax H3 at 480p, Wan 2.6, Hailuo 2.3, Motion 2.0); 6 generations at a time.'
     prices:

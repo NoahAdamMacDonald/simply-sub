@@ -55,9 +55,9 @@ acceptedNetworks:
       - 'We process all payments through Stripe, which accepts credit or debit cards issued by networks like Mastercard, VISA, or American Express.'
 
 # Owner (M11.2), read 2026-11-17: its terms name Ideogram AI as the company that runs it; its About page says it's
-# headquartered in Toronto, with its mailing address there. No page names a parent or a listing. Country: no page of its
-# own names Canada or Ontario, only Toronto and "ON" in its address, which core's namesCountry doesn't read yet
-# (notes.md: this is the draft's one validation error).
+# headquartered in Toronto, with its mailing address there. No page names a parent or a listing. Country: its About
+# page gives its Toronto address ("Toronto, ON M5H 4A6"), a province's code with a postal code, which core's
+# namesCountry reads as Canada.
 owner:
   name: 'Ideogram AI'
   page:
@@ -86,8 +86,10 @@ renewalAnchor:
     - https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/renewals-and-billing-cycles
   lastVerified: 2026-11-17
 
-# Perks (M11.6), read 2026-11-17 on its pricing cards and Plans and Credits: usage (never features) and the private
-# generation no registry feature describes.
+# Perks (M11.6), read 2026-11-17 on its pricing cards and Plans and Credits: usage limits, the private generation no
+# registry feature describes, its MCP server on Plus and Pro ("Ideogram app and MCP", "A monthly or yearly Plus, Pro
+# or Team subscription", its pricing page) and commercial use on every plan ("we do not restrict your ability to use
+# User Output for your own purposes (including for commercial purposes)", its terms).
 perks:
   - id: weekly-free-credits
     name: 30 credits a week (Google or Apple sign-up)
@@ -103,6 +105,10 @@ perks:
     name: The largest generation queue
   - id: batch-generation
     name: Batch Generation
+  - id: mcp
+    name: An MCP server so AI assistants such as Claude can use Ideogram
+  - id: commercial-use
+    name: Use generated images for commercial purposes
 
 # AI and creative features, read 2026-11-17, on every plan unless named:
 # - Sold as an AI service ("Ideogram (pronounced "eye-dee-oh-gram") is an AI company on a mission to help people become
@@ -116,13 +122,12 @@ perks:
 # - Monthly credits that pay for its API on the paid plans: "Personal	Your monthly plan credits when they cover the
 #   whole request." (Ideogram API), so `api` and ai.api-credits; the free plan's credits are weekly. Its MCP server
 #   lets other assistants use Ideogram ("Ideogram's MCP server lets an AI assistant work in your Ideogram account."),
-#   the other way round from the registry's `mcp` (Ideogram reaching MCP servers): not set (notes.md).
+#   the other way round from the registry's `mcp` (Ideogram reaching MCP servers): not set (notes.md), a perk instead.
 # - Creative tools: photo editing (Precise Edit, Remove Backgrounds and Objects, Upscale), graphic design (Studio's text
 #   layers, logos: "Studio: edit an image with tools and layers.") and vector illustration ("Ideogram Vector creates
 #   scalable, editable SVG artwork from a prompt or an existing image."), each paid in credits, which the free plan has.
 # - Generative credits a month on the paid plans: "2,400 priority credits/mo." and "7,500 priority credits/mo." The free
 #   plan's 30 a week is a perk.
-# - Kept on its servers: your Library of generations.
 # - No watermark: not stated (its terms forbid removing "any watermarks included on any User Output"; no page says
 #   which plans add one), so left out. Its videos' generated sound is part of the clip, not music or voice
 #   generation. None of its pages offers web search, voice, memory, projects, reasoning, a coding agent or office apps.
@@ -144,9 +149,8 @@ plans:
       ai.assistant: true
       ai.image-generation: true
       ai.model-choice: true
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, graphic-design, illustration]
-    perks: [weekly-free-credits]
+    perks: [weekly-free-credits, commercial-use]
     notes: '30 credits a week for accounts made with Google or Apple; everything you make is public. 10 reference-image edits in total and JPEG downloads at original size; video and premium models need a paid plan or bought credits.'
     prices:
       - region: GLOBAL
@@ -169,11 +173,18 @@ plans:
       ai.model-choice: true
       ai.api-credits: true
       ai.integrations: [api]
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, graphic-design, illustration]
       creative.export-resolution: 4k
       creative.ai-credits: 2400
-    perks: [unlimited-slow-credits, private-generation, quality-export, larger-queue]
+    perks:
+      [
+        unlimited-slow-credits,
+        private-generation,
+        quality-export,
+        larger-queue,
+        mcp,
+        commercial-use,
+      ]
     notes: '2,400 priority credits a month (they don’t roll over), then unlimited generations with Ideogram models in a slower queue. New images stay private until you publish them.'
     prices:
       - region: GLOBAL
@@ -204,12 +215,19 @@ plans:
       ai.model-choice: true
       ai.api-credits: true
       ai.integrations: [api]
-      ai.chat-storage: cloud
       creative.tools: [photo-editing, graphic-design, illustration]
       creative.export-resolution: 4k
       creative.ai-credits: 7500
     perks:
-      [unlimited-slow-credits, private-generation, quality-export, largest-queue, batch-generation]
+      [
+        unlimited-slow-credits,
+        private-generation,
+        quality-export,
+        largest-queue,
+        batch-generation,
+        mcp,
+        commercial-use,
+      ]
     notes: '7,500 priority credits a month at its best cost per credit, the largest queue and Batch Generation; private generation as on Plus.'
     prices:
       - region: GLOBAL
@@ -466,6 +484,16 @@ policies:
           quote: 'On the free plan, images you generate are public.'
         - url: https://ideogram.ai/legal/privacy/
           quote: 'We use User Input and other information you submit to the Services because it is in our legitimate interest to administer and improve the Services and improve and develop our products and technology.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      plans: [ideogram.plus, ideogram.pro]
+      tier: bad
+      reason: 'Ideogram uses what you send to improve and develop its products, and there’s no way to say no. New images stay private from other users until you publish them.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We use User Input and other information you submit to the Services because it is in our legitimate interest to administer and improve the Services and improve and develop our products and technology.'
+        - url: https://ideogram.ai/pricing/
+          quote: 'On Plus, Pro, Team and Enterprise, new images stay private until you publish them, and you can unpublish images you published before.'
       lastVerified: 2026-11-17
     - topic: privacy.data-retention
       tier: neutral

@@ -499,6 +499,8 @@ describe('ownerCitation', () => {
     // Ideogram's address (M11.15): a province's code with a postal code is Canada's.
     ['Toronto, ON M5H 4A6', 'CA', true],
     ['Toronto, ON M5H 4A6', 'US', false],
+    // A US state's code with a ZIP code isn't a province's postal code.
+    ['Portland, OR 97204', 'CA', false],
     ['Bell Media is Canada’s leading media and entertainment company', 'CA', true],
     ['299 Queen Street West, Toronto, Ontario M5V 2Z5', 'CA', true],
     ['Montréal (Québec)', 'CA', true],

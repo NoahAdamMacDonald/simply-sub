@@ -93,16 +93,11 @@ renewalAnchor:
   lastVerified: 2026-11-17
 
 # Perks (M11.6), read 2026-11-17 on its pricing cards and comparison table, its help centre's MCP and Bridge articles:
-# usage and rights no feature describes (credits and downloads are perks, never features: the owner's rule).
+# usage and rights no feature describes. A plan's song credits a month are creative.ai-credits; Free's daily credits,
+# Platinum's Visual credits (a second pool beside its song credits) and downloads stay perks.
 perks:
   - id: daily-credits
     name: 50 song credits per day
-  - id: credits-2500
-    name: 2,500 song credits per month
-  - id: credits-10000
-    name: 10,000 song credits per month
-  - id: credits-15000
-    name: 15,000 song credits per month
   - id: visual-credits
     name: 20,000 visual credits a month
   - id: downloads-20
@@ -148,6 +143,8 @@ perks:
 #   pay-with-credits API).
 # - Creative tools: audio and music production on every plan (creating, remixing, extending and uploading songs; Suno
 #   Studio, "A browser-based studio suite", on Premier and Platinum is a perk).
+# - Generative credits a month on the paid plans: "2,500 song credits per month", "10,000 song credits per month" and
+#   "15,000 song credits per month" on its cards.
 # - Not offered: web search, voice conversations, memory, projects, reasoning, a browser agent, code completion, models
 #   from other companies (its music models are its own; Visuals' "H3 Move" is "based on H3 from MiniMax" and not picked),
 #   API credits. Its MCP server lets other assistants use Suno, the reverse of the registry's MCP servers (an assistant that connects to them),
@@ -196,9 +193,9 @@ plans:
       ai.early-access: true
       ai.chat-storage: cloud
       creative.tools: [audio-production]
+      creative.ai-credits: 2500
     perks:
       [
-        credits-2500,
         downloads-20,
         commercial-use,
         priority-queue,
@@ -422,9 +419,9 @@ plans:
       ai.early-access: true
       ai.chat-storage: cloud
       creative.tools: [audio-production]
+      creative.ai-credits: 10000
     perks:
       [
-        credits-10000,
         downloads-60,
         commercial-use,
         priority-queue,
@@ -652,9 +649,9 @@ plans:
       ai.early-access: true
       ai.chat-storage: cloud
       creative.tools: [audio-production]
+      creative.ai-credits: 15000
     perks:
       [
-        credits-15000,
         visual-credits,
         downloads-120,
         commercial-use,
