@@ -433,6 +433,62 @@
   source: own
   status: done
   date: 2026-11-17
+- id: midjourney
+  name: Midjourney
+  website: https://www.midjourney.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: ideogram
+  name: Ideogram
+  website: https://ideogram.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: leonardo
+  name: Leonardo
+  website: https://leonardo.ai
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: runway
+  name: Runway
+  website: https://runwayml.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: pika
+  name: Pika
+  website: https://pika.art
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: suno
+  name: Suno
+  website: https://suno.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: udio
+  name: Udio
+  website: https://www.udio.com
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
+- id: elevenlabs
+  name: ElevenLabs
+  website: https://elevenlabs.io
+  category: ai
+  source: own
+  status: done
+  date: 2026-11-19
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube

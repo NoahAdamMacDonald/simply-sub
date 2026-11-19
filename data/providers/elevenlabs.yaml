@@ -1,0 +1,659 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2: AI audio), read with Edge from Canada (its pricing
+# page in its Monthly and Yearly views with every FAQ answer opened, each comparison tab's text and the ticks from
+# screenshots, its sign-up, mobile app, Studio, About, Safety and Trust Center pages, its Terms of Service for outside
+# and inside the EEA, Service-Specific, ElevenCreative and Music Terms, Prohibited Use Policy and Privacy Policy) and its
+# help centre, which moved into its documentation (elevenlabs.io/docs/help-center), with a plain fetch. Pages, each
+# quoted where it's used:
+# Pricing: elevenlabs.io/pricing: Free "$0", Starter "Then $6 per month", Creator "Then $22 per month", Pro "$99" "/mo"
+# (the FAQ: "Monthly price and included credits per plan: Free $0 (10,000 credits); Starter $6 (30,000 credits); Creator
+# $22 (121,000 credits, $11 for the first month); Pro $99 (600,000 credits)"). A year is ten months: "Annual billing works
+# out to two months free — you pay for 10 months (annual price = monthly price × 10)." ($60, $220 and $990; the Yearly
+# view shows "$5", "$18.33/mo" and "$82.50/mo"). One US-dollar list for everyone but India: "Customers in all other
+# countries will continue to be charged in USD." (Can I pay for my ElevenLabs subscription in INR?), so GLOBAL; read
+# 2026-11-17 through a UK, a German and a Canadian exit too, each showing the same US-dollar prices. "Prices exclude all
+# taxes, levies and duties." Offers left out (notes only): "Get your first month for only $1" (Starter, then $6), Creator's
+# "$11 first month", and Black Friday's first-year prices on Creator and Pro ("$8.25 /mo first year", "$37.13").
+# Region checklist for CA, 2026-11-17: 1. no country paths; 2. its currency selector names US Dollar and Indian Rupee
+# only; 3. the page's own data names USD ("priceCurrency":"USD"); 4. checkout needs an account; 5. the INR article says
+# everyone else pays USD; 6. Edge from Canada and through a Canadian exit; 7. no bill offered.
+# Plans: Free, Starter, Creator and Pro. Scale ($299, "3 Workspace seats") and Business ($990, "10 Workspace seats") are
+# under "For Businesses", and Enterprise is sold by its team: out (business and per-seat). Not listed: pay-as-you-go
+# credits and usage-based billing (usage-billed, out), and ElevenReader, an app with terms of its own (notes.md).
+# Bundles: none on its pages. Official resellers: its terms speak of "an authorized ElevenLabs reseller or partner", but
+# no page names one that sells its individual plans.
+# Logo: elevenlabs.io's own icon is the source for data:icons.
+
+id: elevenlabs
+name: ElevenLabs
+aliases: [eleven labs, elevenlabs.io]
+website: https://elevenlabs.io
+domains: [compliance.elevenlabs.io]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help article on cancelling (Subscription > Billing > Cancel Plan).
+cancelUrl: https://elevenlabs.io/docs/help-center/account/cancellation-refunds/how-do-i-cancel-my-subscription
+sources: { pricing: https://elevenlabs.io/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17 in its pricing FAQ and its help centre ("At the moment we accept: Credit Card Apple
+# Pay Google Pay UPI (India only)", What kind of payment is accepted?). No page names the card networks, so no
+# acceptedNetworks; prepaid cards are "not something we directly support".
+paymentMethods:
+  - methods: [card, apple-pay, google-pay]
+    page: Pricing (What kind of payment do you accept?)
+    url: https://elevenlabs.io/pricing
+    quotes:
+      - 'We accept Credit Card, Apple Pay, and Google Pay.'
+
+# Owner (M11.2), read 2026-11-17: its terms name Eleven Labs Inc., and its EEA terms give its New York address. Private:
+# its About page names backers but no listing.
+owner:
+  name: 'Eleven Labs Inc.'
+  page:
+    name: Terms of service
+    url: https://elevenlabs.io/terms-of-use
+  quotes:
+    - 'These ElevenLabs Terms of Service (“Terms”) are between you (“you” or “your”) and Eleven Labs Inc. (“ElevenLabs”, “we”, “us”, or “our”).'
+  country:
+    code: US
+    page:
+      name: Terms of service (EEA, Switzerland and UK)
+      url: https://elevenlabs.io/terms-of-use-eu
+    quotes:
+      - 'To exercise the right of withdrawal, you must inform us, Eleven Labs Inc. of 169 Madison Ave #2484, New York, NY 10016 of your decision to withdraw from this contract by an unequivocal statement (e.g., a letter sent by post).'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17 in its pricing FAQ: billed from the day you subscribe ("Your credit allowance
+# resets at the start of each billing cycle, which begins on the day you subscribed.").
+renewalAnchor:
+  kind: same-date
+  page: Pricing (What kind of payment do you accept?)
+  url: https://elevenlabs.io/pricing
+  quotes:
+    - 'Subscriptions are billed on a monthly or yearly basis starting from the day you subscribe.'
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and comparison tabs: credits (perks, never features: a credit buys
+# about a character of speech, "Eleven Music 900 credits per minute") and the tools each plan adds.
+perks:
+  - id: credits-10k
+    name: 10k credits per month
+  - id: credits-30k
+    name: 30k credits per month
+  - id: credits-121k
+    name: 121k credits per month
+  - id: credits-600k
+    name: 600k credits per month
+  - id: credit-rollover
+    name: Unused credits roll over for up to two months
+  - id: commercial-license
+    name: Commercial License
+  - id: music-commercial
+    name: Music commercial use
+  - id: release-to-streaming
+    name: Release music to Spotify and Apple
+  - id: instant-voice-cloning
+    name: Instant Voice Cloning
+  - id: professional-voice-cloning
+    name: Professional Voice Cloning
+  - id: studio-3
+    name: 3 Projects in Studio
+  - id: studio-20
+    name: 20 Projects in Studio
+  - id: dubbing-studio
+    name: Dubbing Studio
+  - id: additional-credits
+    name: Additional Credits
+  - id: high-quality-audio
+    name: 44.1kHz PCM audio output via API and 192kbps quality audio
+
+# AI features (the AI category's registry) and the creative category's, read 2026-11-17 in its pricing cards, its
+# comparison tabs (Music, Image & Video and Voices from screenshots), its Studio page, its terms and its help centre:
+# - AI assistant on every plan: Studio's agent ("Studio Agent: Your AI co-editor", "Describe your idea, and watch Studio
+#   agent bring it to life."), and Studio is on every plan (Free's "3 Projects in Studio").
+# - Music and voice generation on every plan: Text to Speech, Music, Sound Effects and Voice Design on Free's card; voice
+#   cloning from Starter (perks).
+# - Image generation on every plan (Free's "Up to 40 images"), video generation from Starter (Free's videos are ✗).
+# - API with the plan's credits on every plan: "All products draw from one shared monthly credit pool", the API among
+#   them ("discounted pricing applies for API usage, costing between 0.5 and 1 credit per character"; "third-party
+#   services can call the ElevenLabs API and generate speech with the voices in your account", Can I export my voice
+#   clones?).
+# - Creative tools on every plan: audio and video editing in Studio ("Turn Ideas into Content with an AI Audio Editor",
+#   its terms' "timeline-based editing interface" for "professional audio and video content"). Watermark-free image and
+#   video export from Creator (the Image & Video tab's ticks); the highest resolution 720p on Starter, 1080p on Creator
+#   and 4K on Pro (its "Max resolution" row; Free makes no video).
+# - Not offered to these plans: web search, voice conversations with an assistant (ElevenAgents builds agents for
+#   businesses), memory, projects, reasoning, a browser agent, code completion, early access. Models from other companies:
+#   Image & Video and Studio use "third-party AI model providers", but no page says which plan picks which (notes.md).
+# General features, read 2026-11-17: the web and its apps ("Try for Free on iOS & Android", its mobile page); sign-up
+# with an email and a password or Google ("Sign up with Google"), Apple or SSO, and an authenticator app ("Add
+# Two-Factor Authentication"); its site's language menu (English, Svenska, Polski, Português, 日本語, 한국어, हिन्दी,
+# Español, Français, Deutsch, Italiano, 简体中文, Nederlands: the registry's values among them); support by email
+# (support@elevenlabs.io, its help articles). No pause: "It’s not possible to pause your paid subscription" (Can I pause
+# my subscription?), though its calculator says "Pause or cancel anytime" (notes.md). No parental controls: 18 and over.
+features:
+  platforms: [web, ios, android]
+  account.sign-in: [password, totp, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi]
+  support.channels: [email]
+
+plans:
+  - id: elevenlabs.free
+    name: Free
+    categories: [ai, creative]
+    link: https://elevenlabs.io/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.api-credits: true
+      ai.integrations: [api]
+      creative.tools: [audio-production, video-editing]
+    perks: [credits-10k, studio-3]
+    notes: '10,000 credits a month (about 10 minutes of speech or 11 of music) for personal, non-commercial use, with credit to ElevenLabs; no voice cloning.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://elevenlabs.io/pricing
+
+  - id: elevenlabs.starter
+    name: Starter
+    categories: [ai, creative]
+    link: https://elevenlabs.io/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.api-credits: true
+      ai.integrations: [api]
+      creative.tools: [audio-production, video-editing]
+      creative.export-resolution: 720p
+    perks:
+      [
+        credits-30k,
+        credit-rollover,
+        commercial-license,
+        music-commercial,
+        instant-voice-cloning,
+        studio-20,
+        dubbing-studio,
+      ]
+    notes: '30,000 credits a month with a commercial licence (music not for streaming services) and instant voice cloning. Offer: the first month for $1.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 6,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://elevenlabs.io/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 60,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://elevenlabs.io/pricing,
+        }
+
+  - id: elevenlabs.creator
+    name: Creator
+    categories: [ai, creative]
+    link: https://elevenlabs.io/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.api-credits: true
+      ai.integrations: [api]
+      creative.tools: [audio-production, video-editing]
+      creative.export-resolution: 1080p
+      creative.no-watermark: true
+    perks:
+      [
+        credits-121k,
+        credit-rollover,
+        commercial-license,
+        music-commercial,
+        release-to-streaming,
+        instant-voice-cloning,
+        professional-voice-cloning,
+        studio-20,
+        dubbing-studio,
+        additional-credits,
+      ]
+    notes: '121,000 credits a month, professional voice cloning of your own voice, music you may release on streaming services, and watermark-free 1080p video. Offer: the first month for $11.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 22,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://elevenlabs.io/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 220,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://elevenlabs.io/pricing,
+        }
+
+  - id: elevenlabs.pro
+    name: Pro
+    categories: [ai, creative]
+    link: https://elevenlabs.io/pricing
+    features:
+      ai.assistant: true
+      ai.audio-generation: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.api-credits: true
+      ai.integrations: [api]
+      creative.tools: [audio-production, video-editing]
+      creative.export-resolution: 4k
+      creative.no-watermark: true
+    perks:
+      [
+        credits-600k,
+        credit-rollover,
+        commercial-license,
+        music-commercial,
+        release-to-streaming,
+        instant-voice-cloning,
+        professional-voice-cloning,
+        studio-20,
+        dubbing-studio,
+        additional-credits,
+        high-quality-audio,
+      ]
+    notes: '600,000 credits a month, 192 kbps and 44.1 kHz PCM audio, and 4K video.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 99,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://elevenlabs.io/pricing,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 990,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-17,
+          sourceUrl: https://elevenlabs.io/pricing,
+        }
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: the sign-up page's line ("I
+# agree to the Terms of Service, and acknowledge ElevenLabs’ Privacy Policy"); its Terms of Service (non-EEA, last
+# updated 09 October 2026) and the EEA, Swiss and UK version, which include its Service-Specific Terms (ElevenCreative
+# and Music read: commercial rights by plan, community sharing; no topic graded worse), its Prohibited Use Policy (its
+# sections are collapsed; the parts shown held no topic) and supplemental terms for the Voice Library, beta services,
+# the Music Marketplace and ElevenReader (not read: they apply only when you use those); its Privacy Policy (updated 9
+# October 2026), its Trust Center and its help centre's billing, account, training and voice cloning articles.
+policies:
+  links:
+    - name: Terms of service
+      url: https://elevenlabs.io/terms-of-use
+    - name: Terms of service (EEA, Switzerland and UK)
+      url: https://elevenlabs.io/terms-of-use-eu
+    - name: Privacy policy
+      url: https://elevenlabs.io/privacy-policy
+    - name: Pricing
+      url: https://elevenlabs.io/pricing
+    - name: Sign-up page
+      url: https://elevenlabs.io/app/sign-up
+    - name: Trust Center
+      url: https://compliance.elevenlabs.io/
+    - name: Refund policy
+      url: https://elevenlabs.io/docs/help-center/account/cancellation-refunds/what-is-your-refund-policy
+    - name: Changing plans
+      url: https://elevenlabs.io/docs/help-center/account/general/what-happens-to-my-credits-when-i-upgrade-or-downgrade-my-subscription
+    - name: Content after a subscription ends
+      url: https://elevenlabs.io/docs/help-center/account/general/what-happens-to-my-content-after-my-subscription-ends
+    - name: AI training settings
+      url: https://elevenlabs.io/docs/help-center/legal/is-my-data-used-to-improve-eleven-labs-ai-models
+    - name: Deleting your account
+      url: https://elevenlabs.io/docs/help-center/account/general/how-can-i-delete-my-account
+    - name: Downloading files
+      url: https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-do-i-download-generated-files-from-text-to-speech
+    - name: Exporting voice clones
+      url: https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-export-my-voice-clones
+    - name: Workspace members
+      url: https://elevenlabs.io/docs/help-center/account/workspaces/can-i-add-users-to-my-account
+    - name: Signing in with GitHub or Facebook
+      url: https://elevenlabs.io/docs/help-center/account/general/can-i-still-log-in-using-github-or-facebook
+    - name: Cloning someone else’s voice
+      url: https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online whenever you like, and you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://elevenlabs.io/pricing
+          quote: 'You can cancel your subscription at any time. Your subscription will remain active until the end of your current billing cycle, after which it will not renew and your account will be downgraded to the Free plan.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can get your money back if you ask within 14 days of a payment and haven’t used any credits since.'
+      sources:
+        - url: https://elevenlabs.io/docs/help-center/account/cancellation-refunds/what-is-your-refund-policy
+          quote: 'You are eligible for a refund if a request is filed within 14 days of payment and no credit quota was used in the period for which you are seeking the refund.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can raise prices just by posting them, though not for time you’ve paid for. To avoid the new price you must cancel at least 7 days before it starts.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'ElevenLabs may change the prices charged for Recurring Subscriptions at any time by posting updated pricing through the Services; provided, however, that the prices for your Recurring Subscription will remain in force for the duration of the subscription period for which you have paid.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'If you do not agree to these price changes, you must cancel your Recurring Subscription at least 7 days before the changes take effect.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      regions: [GB, IE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In the UK and the EU outside Germany it tells you at least 30 days before a new price, and you can cancel first.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use-eu
+          quote: 'If you purchased your Recurring Subscription directly from us, we will give you at least 30 days’ notice of any price changes; if you do not want to continue your Recurring Subscription at the new price, you can cancel your Recurring Subscription before the start of the next subscription period.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its first-month offer turns into the regular price unless you cancel, which you can do at any time.'
+      sources:
+        - url: https://elevenlabs.io/pricing
+          quote: 'Get your first month for only $1'
+        - url: https://elevenlabs.io/pricing
+          quote: 'You can cancel your subscription at any time.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages: [https://elevenlabs.io/terms-of-use]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: neutral
+      reason: 'If you turn on usage-based billing, using more than your plan’s credits costs extra, at rates shown when you subscribe.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'In the event your usage exceeds the volume provided under your Recurring Subscription, you will be charged usage overage fees for your Recurring Subscription, as indicated to you upon subscribing.'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once with a new billing period, and your unused credits come with you. Moving down waits until your period ends, and unused credits are lost.'
+      sources:
+        - url: https://elevenlabs.io/docs/help-center/account/general/what-happens-to-my-credits-when-i-upgrade-or-downgrade-my-subscription
+          quote: 'If you upgrade your subscription in the middle of an ongoing subscription cycle, you will pay the fee for your new subscription plan, and begin a new billing cycle. Any unused credits from your previous plan will be added to your new credit quota.'
+        - url: https://elevenlabs.io/docs/help-center/account/general/what-happens-to-my-credits-when-i-upgrade-or-downgrade-my-subscription
+          quote: 'If you downgrade or cancel your plan, this will not take effect until the end of your current subscription cycle, and you will lose any unused credits on your account when this happens.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only within 30 days of accepting its terms, by email or letter."
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'You and ElevenLabs agree that arbitration will be solely on an individual basis and not as a class arbitration, class action, or any other kind of representative proceeding.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'You have the right to opt out of binding arbitration within 30 days of the date you first accepted these Terms by providing us with notice of your decision to opt-out via email or by certified mail to the applicable address set out below.'
+      action:
+        name: 'How to opt out of arbitration (section 12(c))'
+        url: https://elevenlabs.io/terms-of-use
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      regions: [EU, GB]
+      tier: great
+      reason: 'In the EU and the UK you can take it to court in your own country, under your country’s law.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use-eu
+          quote: 'If a claim or dispute arises out of or relates to your use of the Services as a consumer, both you and us agree that you may resolve your individual claim or dispute against us, and we may resolve our claim or dispute against you, in any competent court in the country of your main residence that has jurisdiction over your claim or dispute, and the laws of that country will apply.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'New terms can apply at once, and it may tell you only by changing the date at the top; using it afterwards means you accept them.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'If we make future changes, we may provide you with notice of those changes by any reasonable means, such as by sending an email, providing a notice through our Services, or updating the date at the top of these Terms.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'Unless we say otherwise in our notice, the amended Terms will be effective immediately, and your continued use of our Services after we provide such notice will confirm your acceptance of the changes.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It may refuse you any service without warning, and if your account is closed you lose your unused credits; sales are final.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'ElevenLabs reserves the right, including without prior notice to impose conditions on the honoring of any coupon, discount, or similar promotion; to bar any user from making any transaction; to alter the payment option for services; and to refuse to provide any user with any Service.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'If your account is closed or terminated, you will forfeit all unused credits related to our Services (including character credits) associated with your account.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'What you upload, your voice included, comes with a licence that never ends, to run and improve ElevenLabs and build new products. It won’t sell your voice on its own without asking.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'You hereby grant to ElevenLabs a license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, publicly or otherwise perform and display, and use your Content to provide the Services (including the trust and safety features therein), to improve the Services, and to develop new services and products.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'perpetual and irrevocable (which means this license cannot be withdrawn),'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'Notwithstanding the foregoing, we will not commercialize your voice on a standalone basis without your permission to do so.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'What it makes for you is yours, and paid plans may use it commercially, even after cancelling, but ElevenLabs’ licence lets it use it too.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'Except as expressly set forth herein, as between you and ElevenLabs, you retain all rights in and to your Output.'
+        - url: https://elevenlabs.io/docs/help-center/account/general/what-happens-to-my-content-after-my-subscription-ends
+          quote: 'Once your subscription ends, you will still have a commercial license to use whatever you generated during that subscription forever.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      plans: [elevenlabs.free]
+      tier: poor
+      reason: 'On the free plan what you make is yours, but you may use it only for non-commercial purposes, always crediting ElevenLabs.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'if you access or use our Services free of charge (such a user, a “Free User”), you may only use the Services for non-commercial purposes'
+        - url: https://elevenlabs.io/docs/help-center/account/general/what-happens-to-my-content-after-my-subscription-ends
+          quote: 'However, audio generated outside of a subscription will always require attribution.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change, limit or stop any part of its services at any time, without notice, and owes you nothing for it.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'We may: (a) modify, impose limits on, replace, upgrade, update, suspend, or terminate providing all or part of our Services at any time; (b) charge, modify, or waive any fees required to use the Services; or (c) offer opportunities to some or all end users of the Services, each of (a) through (c) without any liability or additional notice to you.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms say nothing about closing accounts that aren’t used.'
+      pages: [https://elevenlabs.io/terms-of-use]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'It gives you a limited licence it can take back; free users may use it only for non-commercial purposes.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'Subject to your compliance with these Terms, ElevenLabs hereby grants to you a limited, non-exclusive, non-transferable, non-sublicensable, revocable license to access and use our Services.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://elevenlabs.io/terms-of-use]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: great
+      reason: 'You may not hand out your own login, but every plan’s workspace can have members with their own accounts, who share its credits.'
+      sources:
+        - url: https://elevenlabs.io/docs/help-center/account/workspaces/can-i-add-users-to-my-account
+          quote: 'Yes, every ElevenLabs workspace can have multiple members.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'You may not share or permit others to use your individual account credentials.'
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre set no limits on devices or downloads.'
+      pages: [https://elevenlabs.io/terms-of-use]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors check it (SOC 2 Type 2 and ISO 27001), and it has a programme for reporting security problems.'
+      sources:
+        - url: https://compliance.elevenlabs.io/
+          quote: 'SOC 2 Type 2'
+        - url: https://compliance.elevenlabs.io/
+          quote: 'ISO 27001:2022'
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'participate in our responsible disclosure program'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use it, down to mouse movements and keystrokes. You can only limit its cookies, browser by browser.'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: "Our understanding of your usage may include the use of tools that look at mouse movements, clicks, keystrokes, data or text entered, which of our emails you've opened and which pages you visit."
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'You can manage your choices through the Cookie Settings link on the footer of our website.'
+      action:
+        name: 'Its cookie choices'
+        url: https://elevenlabs.io/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares some data with advertising partners and social networks for ads, which may count as selling. You can say no per browser or with a privacy signal.'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'We share limited personal information with advertising partners, social networks, and affiliate marketing companies that help us promote our Services on third-party properties, including through targeting Cookies.'
+        - url: https://elevenlabs.io/privacy-policy
+          quote: "You can opt out by clicking 'Your Privacy Choices' in the website footer and adjusting your settings."
+      action:
+        name: 'Its privacy choices'
+        url: https://elevenlabs.io/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'ElevenLabs shows no ads in its apps, but its marketing cookies follow you on other sites to show you its ads. You can turn them off per browser.'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'These Cookies are used to track users across our Services and third party services.'
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'You can manage your choices through the Cookie Settings link on the footer of our website.'
+      action:
+        name: 'Its cookie choices'
+        url: https://elevenlabs.io/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you upload trains its AI unless you turn that off in settings, and turning it off only covers what you send afterwards.'
+      sources:
+        - url: https://elevenlabs.io/terms-of-use
+          quote: "In addition, you may opt out of our use of your Content for training at any time by navigating to the 'Data use' menu in the 'Terms and Privacy' section of your ElevenLabs account."
+        - url: https://elevenlabs.io/docs/help-center/legal/is-my-data-used-to-improve-eleven-labs-ai-models
+          quote: 'Once the toggle is disabled, new data you submit to us won’t be used to train our models.'
+      action:
+        name: 'Turn off training (Data use)'
+        url: https://elevenlabs.io/docs/help-center/legal/is-my-data-used-to-improve-eleven-labs-ai-models
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: poor
+      reason: 'It studies what you upload and make to spot trends and build new products; its training setting limits that only partly. (Training is graded under AI training.)'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'This helps us spot trends, improve the Services, and to build new services.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'Your Content will no longer be used to improve our Services (including the Models) once the request has been processed by our team'
+      action:
+        name: 'Turn off training (Data use)'
+        url: https://elevenlabs.io/docs/help-center/legal/is-my-data-used-to-improve-eleven-labs-ai-models
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it. Data about your voice goes at most three years after you last use it.'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'We generally keep your personal information for as long as necessary to provide you with our Services or as otherwise required or permitted by law or to protect our rights.'
+        - url: https://elevenlabs.io/privacy-policy
+          quote: "We won't keep data we generate about your voice for longer than 3 years after your last interaction with us, unless the law requires or allows otherwise."
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account yourself in settings, and its data is then deleted under its policies, with no time stated.'
+      sources:
+        - url: https://elevenlabs.io/docs/help-center/account/general/how-can-i-delete-my-account
+          quote: 'Click the red Delete Account button.'
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'For example, you can access and correct some of the personal information we process via your account or delete your account.'
+      action:
+        name: 'How to delete your account'
+        url: https://elevenlabs.io/docs/help-center/account/general/how-can-i-delete-my-account
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download everything you make yourself, as MP3, WAV or FLAC files. Voice clones stay in your account.'
+      sources:
+        - url: https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-do-i-download-generated-files-from-text-to-speech
+          quote: 'From your history, you can click the download icon to see the option to download as either an MP3 (128kbps) or WAV file.'
+        - url: https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-export-my-voice-clones
+          quote: 'You cannot download or export your voice clones as standalone files.'
+      action:
+        name: 'How to download your files'
+        url: https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-do-i-download-generated-files-from-text-to-speech
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over data to police and authorities for legal processes and court orders, or to protect people. It doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'We may share your personal information with law enforcement, regulators, and public authorities.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Wherever you live, your data is stored in the US. It uses approved countries or standard legal contracts to protect it.'
+      sources:
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'Wherever you are, your personal information will be transferred to the United States for storage.'
+        - url: https://elevenlabs.io/privacy-policy
+          quote: 'We may use approved contract terms, such as the EU Standard Contractual Clauses'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: good
+      reason: 'An account needs only an email address and a password, or your Google sign-in. A paid plan adds your payment details.'
+      sources:
+        - url: https://elevenlabs.io/app/sign-up
+          quote: 'By clicking “Sign up with Google” I agree to the Terms of Service, and acknowledge ElevenLabs’ Privacy Policy.'
+        - url: https://elevenlabs.io/docs/help-center/account/general/can-i-still-log-in-using-github-or-facebook
+          quote: 'If you previously used GitHub or Facebook to sign in, you’ll need to switch to email and password, or - if your account uses a Gmail address - you can use Google SSO.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Cloning someone else’s voice
+      tier: good
+      reason: 'Its professional voice clones must be your own voice, checked by a test, even if someone agrees to share theirs. Quick clones of other voices need their permission.'
+      sources:
+        - url: https://elevenlabs.io/docs/help-center/product/voices/voice-cloning/can-i-create-a-professional-voice-clone-of-someone-elses-voice
+          quote: 'All Professional Voice Clones require a verification process to confirm that the voice belongs to you.'
+        - url: https://elevenlabs.io/terms-of-use
+          quote: 'Some of our Services allow you to create a voice model that can be used to generate Output in the form of synthetic audio sounding like your voice or a voice you are authorized to share with us (a "User Voice Model").'
+      lastVerified: 2026-11-17
