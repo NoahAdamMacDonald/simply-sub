@@ -1,0 +1,1327 @@
+# Researched by hand on 2026-11-19 (the full catalog run, VPN batch 1), read with Edge from Canada: nordvpn.com's pricing
+# page (its 2-year, 1-year and 1-month plan views, its plan comparison, FAQ and offer terms), its trust center, servers,
+# about, press and retail pages, its no-logs and Cure53 posts and its high-speed page; Nord Account's legal pages
+# (my.nordaccount.com/legal/: the General Terms, Subscription Terms, NordVPN and NordLocker Additional Terms, the General
+# Privacy Policy with each section opened, the NordVPN Privacy Notice, the Cookie Policy and the Subscription Renewal
+# Prices list, where the pricing page's "then-applicable renewal price" link leads); its help centre's articles through
+# its Zendesk API (support.nordvpn.com); nordsecurity.com's home, about, press and trademark pages. The pricing page
+# again on 2026-11-19 through US, UK, Irish, Australian, New Zealand, German, French, Dutch and Spanish exits (each
+# exit's country confirmed, and each page in the country's currency: US$ and NZ's bare "$", £, €, A$).
+# Pricing: nordvpn.com/pricing/ prices by where the visitor is. Its 1-month cards are the monthly price ("Billed every
+# month.", "Save 0%"); its 1-year and 2-year cards are first-term offers ("CA$217.35 CA$95.85 for the first 15 months.
+# ... Renews at CA$173.88/year.", "CA$102.33 for the first 27 months. ... Renews at CA$173.88/year."), so only the
+# yearly renewal price is stored, and no 2-year price: the Subscription Terms renew every plan of a year or longer
+# "annually for one (1) year Renewal Periods". The yearly prices come from the Subscription Renewal Prices list
+# (my.nordaccount.com/legal/pricing/, "Last updated June 9, 2026"), which names each country's currency ("Canada Price in
+# CAD Basic 1-year 173.88"), and match each pricing page's "Renews at"; New Zealand's Complete Max ($301.08) is only on
+# its pricing page. No page says its prices include tax: "GST/HST, PST may apply.", "Sales tax may apply.", "VAT may
+# apply.", "GST may apply.", and the list "We will add the sales tax, VAT, GST/PST, or other mandatory tax".
+# Plans: every country sells Basic and Complete, and a third plan that differs by country: Ultra (Canada, Ireland,
+# Spain: Incogni), Prime (the US: Coveron's identity theft insurance and credit monitoring), Ultimate Max (the UK,
+# Germany, France, the Netherlands: a Dedicated IP and cyber insurance) and Complete Max (Australia, New Zealand: a
+# Dedicated IP). Each is a plan of its own (Norton's precedent). The list's older plans (Standard, Plus, Ultimate,
+# Ultimate Pro) aren't on any pricing page read, so they're renewals of plans no longer sold, not drafted (notes.md).
+# Italy: its pricing page showed Italian exits Cloudflare's "Performing security verification" every time (seven exits,
+# headed and headless), so Italy's yearly Basic and Complete come from the list's "Euro zone" prices and its monthly
+# prices and third plan are unread (Coverage below).
+# New Zealand prices in US dollars: its page shows a bare "$" at the US list's amounts, NZD isn't among the list's
+# currencies, and "For countries and regions where the local currency is not supported, Nord products are billed in U.S.
+# dollars (USD)." (the list).
+# Region checklist for CA and US, 2026-11-19: 1. no locale paths (nordvpn.com/pricing/ for every country; /fr/ and the
+# other language paths change only the language); 2. no country or currency picker; 3. the page names its currency
+# (CA$, US prices read through a US exit); 4. checkout not opened; 5. the renewal list and the help centre's currency
+# article ("Our pricing is shown in USD, GBP, AUD ... and CAD, depending on the country you are accessing our website.");
+# 6. Edge, and a plain fetch (403); 7. no bill offered.
+# Bundles: none sold as a bundle of separate catalog plans; its plans include NordPass and NordLocker (Complete and up),
+# which aren't catalog providers yet, so they're features (password-manager, storage.cloud), not includes-subscription.
+# Official resellers: nordvpn.com/retail/ ("Where to buy") names BestBuy, Staples, MicroCenter, NewEgg and Amazon in the
+# US, Amazon in the UK, BestBuy, Staples, NewEgg, London Drugs, The Source and Amazon in Canada, MediaMarkt, Saturn,
+# Euronics and Amazon in Germany, Licentie2GO in the Netherlands and Amazon in Italy, France and Spain; their offers
+# aren't priced yet (notes.md). App stores (Apple, Google Play, Amazon Appstore) bill it: partners, not listed.
+# Free use: none; a 7-day free trial and a 3-day Google Play trial turn into paid plans.
+
+# Coverage: nordvpn.ultra in US, GB, AU, NZ, DE, FR and NL: each country's pricing page sells another third plan
+# (Prime in the US, Ultimate Max in the UK, Germany, France and the Netherlands, Complete Max in Australia and New
+# Zealand), read 2026-11-19 through each country's exit.
+# Coverage: nordvpn.prime in CA, GB, IE, AU, NZ, DE, FR, NL and ES: the US's own third plan; the other countries'
+# pricing pages sell Ultra, Ultimate Max or Complete Max instead (read 2026-11-19).
+# Coverage: nordvpn.ultimate-max in CA, US, IE, AU, NZ and ES: sold in the UK, Germany, France and the Netherlands only;
+# the other countries' pricing pages sell Ultra, Prime or Complete Max instead (read 2026-11-19).
+# Coverage: nordvpn.complete-max in CA, US, GB, IE, DE, FR, NL and ES: sold in Australia and New Zealand only; the
+# other countries' pricing pages sell Ultra, Prime or Ultimate Max instead (read 2026-11-19).
+# Coverage: nordvpn.ultra, nordvpn.ultimate-max, nordvpn.complete-max and nordvpn.prime in IT: Italy's pricing page
+# showed Italian exits a Cloudflare security check (2026-11-19), so which third plan it sells is unread; its yearly Basic
+# and Complete are the renewal list's "Euro zone" prices.
+
+id: nordvpn
+name: NordVPN
+aliases: [nord vpn, nord]
+website: https://nordvpn.com
+# Nord Account (my.nordaccount.com) holds its terms, privacy policy and renewal price list.
+domains: [nordaccount.com]
+category: vpn
+spendCategory: software
+# Charged in the price list's currency: "The displayed prices are charged upon the automatic renewal of the
+# subscription plans in the currency in which the first payment was made." and "For countries and regions where the
+# local currency is not supported, Nord products are billed in U.S. dollars (USD)." (the renewal list). Its help
+# article "What is the currency your prices are shown in" says "charges are made in USD except for some payment
+# providers": the renewal list, which is about charges, and its local payment companies (the General Terms name
+# cyberpost Inc. in Toronto for Canadians) are taken over that general answer (notes.md).
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help article on cancelling auto-renewal (the pricing page's offer terms link it: "Detailed instructions on how to
+# cancel can be found here").
+cancelUrl: https://support.nordvpn.com/hc/en-us/articles/19556844985489-How-to-cancel-auto-renewal-for-your-NordVPN-subscription
+sources: { pricing: https://nordvpn.com/pricing/ }
+# Accepted cards and ways to pay (M9.2, M11.5), read 2026-11-19: the pricing page's FAQ "What payment methods does
+# NordVPN accept?" names the networks for every buyer ("The exact choices shown at checkout depend on your country and
+# currency."): Visa, Mastercard, American Express and Discover, and Maestro (other). It lists UnionPay among "digital
+# wallets" with "other region-specific services", so UnionPay isn't listed as a network everywhere. GrabPay is other.
+# Its help article adds Sofort (Klarna), and its General Terms prepaid and gift cards.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard, amex, discover, other]
+    url: https://nordvpn.com/pricing/
+    quotes:
+      - 'NordVPN lets you pay with all major credit and debit cards (Visa, Mastercard, American Express, Discover, Maestro, and others), PayPal, digital wallets such as Google Pay, Apple Pay, UnionPay, GrabPay, and other region-specific services, a broad selection of cryptocurrencies (including Bitcoin, Ethereum, Litecoin, and Stablecoin), and local bank-transfer options like Sofort, iDEAL, and Twint where available.'
+paymentMethods:
+  - methods: [card, paypal, google-pay, apple-pay, crypto, bank-transfer, app-store, cash, other]
+    page: 'Pricing'
+    url: https://nordvpn.com/pricing/
+    quotes:
+      - 'NordVPN lets you pay with all major credit and debit cards (Visa, Mastercard, American Express, Discover, Maestro, and others), PayPal, digital wallets such as Google Pay, Apple Pay, UnionPay, GrabPay, and other region-specific services, a broad selection of cryptocurrencies (including Bitcoin, Ethereum, Litecoin, and Stablecoin), and local bank-transfer options like Sofort, iDEAL, and Twint where available.'
+      - 'You can also subscribe through in-app purchases on the Amazon Store, Apple App Store or Google Play, or buy a prepaid NordVPN card with cash in selected retail stores.'
+  - methods: [klarna]
+    page: 'What payment methods does NordVPN accept'
+    url: https://support.nordvpn.com/hc/en-us/articles/19685782821265-What-payment-methods-does-NordVPN-accept
+    quotes:
+      - 'You can pay with a credit card, cryptocurrency, PayPal, Sofort (Klarna), bank or local bank transfers, prepaid (debit) card, and many other payment methods.'
+  - methods: [gift-card]
+    page: 'General Terms of Service'
+    url: https://my.nordaccount.com/legal/terms-of-service/
+    quotes:
+      - 'Payments made using prepaid cards or gift cards will not be refunded if such refunds are not supported by the provider of the card.'
+# Renewal day (M11.5, M11.21), read 2026-11-19: monthly plans are charged on the day they renew and yearly ones up to 14
+# days before ("Monthly plans: Charged on the day of the auto-renewal (the start of the Renewal Period). All other plans:
+# Charged fourteen (14) days prior to the start of the Renewal Period.", its Subscription Terms), the date you signed up
+# a term on. Core reads the pricing page's "up to 14 days before the renewal", not the terms' "fourteen (14) days", so
+# the pricing page is quoted; "up to" plans for the same earliest day the terms name.
+renewalAnchor:
+  kind: same-date
+  page: Pricing
+  url: https://nordvpn.com/pricing/
+  quotes:
+    - 'Such payments are billed annually (up to 14 days before the renewal) or monthly depending on your billing cycle.'
+  chargedBefore: { days: 14, upTo: true }
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its press page says Nord Security brings it; nordsecurity.com's trademark policy calls
+# "NordSec B.V. and/or its affiliates (together “Nord Security”)", and its privacy policy gives NordSec B.V.'s Amsterdam
+# address. Its General Terms and Privacy Policy are with nordvpn S.A. of Panama City (the provider's notes). Private: no
+# page names a listing. Nord Security and Surfshark "merged under one holding company" in 2022 (surfshark.com/about-us).
+notes: Its terms are with nordvpn S.A., a company in Panama, part of Nord Security.
+owner:
+  name: Nord Security
+  page:
+    name: Press area
+    url: https://nordvpn.com/press-area/
+  quotes:
+    - 'NordVPN is brought to you by Nord Security'
+  country:
+    code: NL
+    page:
+      name: General Privacy Policy
+      url: https://my.nordaccount.com/legal/privacy-policy/
+    quotes:
+      - "For the purposes of the GDPR, Nord's representative in the European Economic Area (EEA) is NordSec B.V. (email: representative@nordsec.com; postal address: Fred. Roeskestraat 115, 1076 EE Amsterdam, the Netherlands)."
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-19: none. Its NordVPN Additional Terms: "Users will have to
+# purchase a paid Subscription from Nord to connect to the NordVPN Services, except in the case of a limited free trial
+# or certain coupon offers." Its 7-day free trial ("Does NordVPN have a free trial?") turns into the plan chosen.
+freeUse:
+  kind: none
+  pages:
+    - https://nordvpn.com/pricing/
+    - https://my.nordaccount.com/legal/terms-of-service/nordvpn/
+    - https://support.nordvpn.com/hc/en-us/articles/19744837091217-Does-NordVPN-have-a-free-trial
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: "We have NordVPN apps for Windows, Linux (with both a graphical and
+# command-line version), macOS, iOS, Android, and more." and "Browser proxy extensions: Light add-ons for Chrome,
+# Firefox, and Edge" ("What features does NordVPN have?"), and its Android TV and Apple TV guides ("Installing and using
+# NordVPN on Android TV or Nvidia Shield", "How to connect to your NordVPN Dedicated IP on Apple TV"). Sign-in: a Nord
+# Account's email and password, two-factor codes from "authenticator applications" or "a security key" ("What is MFA,
+# and how to enable it"), or Google or Apple ("If you choose to create your Account using a third-party provider, such
+# as companies like Google or Apple", its Privacy Policy). Support: "NordVPN has 24/7 customer support", by live chat
+# ("contact our customer support team via live chat", its refund article) and email (support@nordvpn.com, its NordVPN
+# Additional Terms). App languages: nordvpn.com's language menu (Bahasa Indonesia, Dansk, Deutsch, English, Español,
+# Français, Italiano, ... Português, ... 한국어, العربية, 日本語, 简体中文, 繁體中文; no Hindi). Open source: only its Linux
+# app ("Alongside the Linux app CLI, which has been open source for several years, the Linux app GUI source code is also
+# available", its trust center), so software.open-source is left out (notes.md). No pause; no parental controls.
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension, tv]
+  account.sign-in: [password, totp, security-key, sso]
+  support.channels: [email, chat, 24-7]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+
+# Perks (M11.6): the third plans' lines no feature describes, in the pricing pages' words.
+perks:
+  - id: dedicated-ip
+    name: Dedicated IP
+  - id: cyber-insurance
+    name: Cyber insurance
+  - id: credit-freeze-assistance
+    name: Credit freeze assistance
+  - id: cyber-extortion-insurance
+    name: Cyber extortion insurance
+  - id: credit-score
+    name: VantageScore 3.0® credit score by TransUnion®
+  - id: bank-transaction-monitoring
+    name: Bank transaction monitoring
+
+# VPN features, read 2026-11-19, the same on every plan ("Secure, high-speed VPN" and "10 devices secured at once" on
+# all three in every country's comparison):
+# - Devices: "NordVPN as VPN Service allows a maximum of ten simultaneous connections per Account." (Additional Terms).
+# - Traffic: "NordVPN has no VPN bandwidth or speed limits" (nordvpn.com/features/high-speed-vpn/).
+# - Countries: "6,459 ultra-fast servers covering 149 countries" (nordvpn.com/servers/ FAQ; "224 locations" counts
+#   cities and virtual locations).
+# - Protocols: "NordLynx, NordWhisper, OpenVPN, and IKEv2/IPsec support" ("What features does NordVPN have?"); NordLynx
+#   is "built on WireGuard", and NordWhisper is for restrictive networks: its Obfuscated Servers "run on the NordWhisper
+#   protocol" (stealth).
+# - Kill switch ("NordVPN Kill Switch: how does it work"), split tunnelling on Windows, Android and Android TV (an
+#   allowlist on Linux), Double VPN (multi-hop), Onion Over VPN (Tor over VPN), P2P on every server ("All standard
+#   NordVPN servers now support P2P activities"). Port forwarding only with the Dedicated Server add-on ("Standard
+#   NordVPN servers and the Dedicated IP add-on don't support port forwarding."), not a plan, so no port forwarding.
+# - Content blocking: Basic's "Scam and phishing protection" "Filters your online traffic through NordVPN's DNS servers
+#   to block ads and malicious domains" (ads, malware); Complete and up add the "Ad and tracker blocker", which "stops
+#   trackers" (desktop only).
+# - No-logs policy (NordVPN Additional Terms) and its audits: Deloitte Lithuania's sixth no-logs assurance engagement,
+#   "between November 10 and December 12, 2025", which "inspected our server infrastructure" (no-logs), after
+#   PricewaterhouseCoopers' (2018, 2020) and Deloitte's (2022 to 2024); Cure53's 2025 assessment of its "Android, iOS,
+#   Windows, macOS, and Linux applications" and "VPN servers and supporting infrastructure" (apps, servers).
+# - RAM-only servers: "NordVPN servers don’t rely on traditional hard drives. Instead, all server data is stored in RAM
+#   modules" (its trust center).
+# - Meshnet: "Meshnet is a NordVPN feature that allows you to create a secure private network for your devices."
+#   ("Guide for Meshnet users", updated 2026-11-03).
+# - Not anonymous: an account needs "your email address and password" (General Terms). Unlimited traffic, so its
+#   monthly VPN data is unlimited. Dedicated IP: an add-on (below), included in Ultimate Max and Complete Max (a perk).
+# - Speeds (notes only, its own pages' claims): "NordVPN’s NordLynx protocol achieved the best results overall (over 817
+#   Mbps)" (high-speed page) and "We’ve upgraded all our servers to 10 Gbps" (trust center).
+# The security features of Complete and up, read on each country's comparison: "Anti-malware & browsing protection
+# powered by next-gen antivirus" ("Scans the files you are downloading for malware, removes those that are dangerous,
+# and checks your apps for security weaknesses. Desktop only.": real-time, vulnerability scan, web protection, since
+# "Real-time protection: Checks files for malware and blocks harmful websites as you browse."), "Unlimited email
+# protection", "Call protection" and "Message protection" (scam protection: web, email, calls, text messages), a
+# "Cross-platform password manager" (NordPass), "1 TB of encrypted cloud storage" (NordLocker) and "Dark Web Monitor
+# Pro™"; every plan has "Dark Web Monitor™" ("Monitor up to 5 emails"). Categories (M11.3): Basic is a VPN; Complete and
+# up are also an antivirus (security), a password manager (passwords) and cloud storage (storage).
+plans:
+  - id: nordvpn.basic
+    name: Basic
+    link: https://nordvpn.com/pricing/
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 149
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, malware]
+      vpn.p2p: true
+      vpn.tor: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: true
+      security.dark-web-monitoring: true
+    notes: 'The VPN, with scam and phishing protection that blocks ads and harmful sites, and dark web monitoring for up to 5 emails.'
+    addOnIds: [nordvpn.dedicated-ip]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 19.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: CA
+        currency: CAD
+        amount: 173.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: US
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: US
+        currency: USD
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: GB
+        currency: GBP
+        amount: 10.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: GB
+        currency: GBP
+        amount: 104.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IE
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: IE
+        currency: EUR
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: AU
+        currency: AUD
+        amount: 20.49
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: AU
+        currency: AUD
+        amount: 187.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NZ
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: NZ
+        currency: USD
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: DE
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: DE
+        currency: EUR
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: FR
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: FR
+        currency: EUR
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NL
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: NL
+        currency: EUR
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: ES
+        currency: EUR
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: ES
+        currency: EUR
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IT
+        currency: EUR
+        amount: 139.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+  # Complete: the VPN plus the next-gen antivirus, the password manager, 1 TB of cloud storage and Dark Web Monitor Pro,
+  # in every country. The US's card adds "Bank transaction monitoring New", which no other country's lists (notes).
+  - id: nordvpn.complete
+    name: Complete
+    link: https://nordvpn.com/pricing/
+    categories: [vpn, security, passwords, storage]
+    features: &complete
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 149
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.tor: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.vulnerability-scan: true
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      storage.cloud: 1000
+      security.dark-web-monitoring: true
+    notes: 'The VPN with a next-gen antivirus (desktop only), scam protection for email, calls and texts, a password manager, 1 TB of encrypted cloud storage and Dark Web Monitor Pro. In the US it also monitors your bank and card transactions.'
+    addOnIds: [nordvpn.dedicated-ip]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 25.39
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: CA
+        currency: CAD
+        amount: 273.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: US
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: US
+        currency: USD
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: GB
+        currency: GBP
+        amount: 14.39
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: GB
+        currency: GBP
+        amount: 163.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: IE
+        currency: EUR
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: AU
+        currency: AUD
+        amount: 27.29
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: AU
+        currency: AUD
+        amount: 293.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NZ
+        currency: USD
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: NZ
+        currency: USD
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: DE
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: DE
+        currency: EUR
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: FR
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: FR
+        currency: EUR
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NL
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: NL
+        currency: EUR
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: ES
+        currency: EUR
+        amount: 19.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: ES
+        currency: EUR
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IT
+        currency: EUR
+        amount: 219.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+  # Ultra (Canada, Ireland, Spain): Complete plus Incogni, "a third-party tool recommended by NordVPN, available to US,
+  # UK, EU, Canada, and Switzerland residents only", its "Incogni Standard plan" (Canada's pricing page's offer terms).
+  - id: nordvpn.ultra
+    name: Ultra
+    link: https://nordvpn.com/pricing/
+    categories: [vpn, security, passwords, storage]
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 149
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.tor: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.vulnerability-scan: true
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      storage.cloud: 1000
+      security.dark-web-monitoring: true
+      security.data-exposure: [removal]
+    notes: 'Complete plus Incogni Standard, which asks data brokers and people search sites to remove your personal data.'
+    addOnIds: [nordvpn.dedicated-ip]
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 29.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: CA
+        currency: CAD
+        amount: 337.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IE
+        currency: EUR
+        amount: 22.89
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: IE
+        currency: EUR
+        amount: 269.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: ES
+        currency: EUR
+        amount: 22.89
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: ES
+        currency: EUR
+        amount: 269.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+  # Prime (the US): Complete plus Coveron: "Up to $1,000,000 in coverage provided in identity theft insurance", "Up to
+  # $100,000 in coverage provided in cyber extortion insurance", "1-Bureau credit monitoring", "Credit freeze
+  # assistance", a monthly VantageScore and "Consult with an identity recovery case manager" (the US comparison).
+  - id: nordvpn.prime
+    name: Prime
+    link: https://nordvpn.com/pricing/
+    categories: [vpn, security, passwords, storage]
+    features:
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 149
+      vpn.protocols: [wireguard, openvpn, ikev2, stealth]
+      vpn.kill-switch: true
+      vpn.split-tunneling: true
+      vpn.multi-hop: true
+      vpn.content-blocking: [ads, trackers, malware]
+      vpn.p2p: true
+      vpn.tor: true
+      vpn.no-logs-policy: true
+      vpn.independent-audits: [no-logs, servers, apps]
+      vpn.ram-only-servers: true
+      vpn.mesh: true
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.web-protection: true
+      antivirus.vulnerability-scan: true
+      antivirus.scam-protection: [web, email, sms, calls]
+      password-manager: true
+      storage.cloud: 1000
+      security.dark-web-monitoring: true
+      security.identity-theft-insurance: 1
+      security.credit-monitoring: 1
+      security.identity-restoration: true
+    perks:
+      [
+        credit-freeze-assistance,
+        cyber-extortion-insurance,
+        credit-score,
+        bank-transaction-monitoring,
+      ]
+    notes: 'Complete plus Coveron identity protection: up to $1M of identity theft insurance, up to $100,000 of cyber extortion insurance, credit monitoring with one bureau and a monthly credit score. Sold in the US.'
+    addOnIds: [nordvpn.dedicated-ip]
+    prices:
+      - region: US
+        currency: USD
+        amount: 29.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: US
+        currency: USD
+        amount: 296.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+  # Ultimate Max (the UK, Germany, France, the Netherlands): Complete plus a Dedicated IP ("Included") and cyber
+  # insurance: "Scam loss recovery" and "ID theft recovery", "The total coverage for scam loss and ID theft recovery is
+  # up to £5,000." (the UK's comparison; the euro countries' pages list the same lines).
+  - id: nordvpn.ultimate-max
+    name: Ultimate Max
+    link: https://nordvpn.com/pricing/
+    categories: [vpn, security, passwords, storage]
+    features: *complete
+    perks: [dedicated-ip, cyber-insurance]
+    notes: 'Complete plus a dedicated IP address and cyber insurance for scam losses and identity theft recovery (up to £5,000 in the UK).'
+    prices:
+      - region: GB
+        currency: GBP
+        amount: 17.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: GB
+        currency: GBP
+        amount: 249.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: DE
+        currency: EUR
+        amount: 23.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: DE
+        currency: EUR
+        amount: 338.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: FR
+        currency: EUR
+        amount: 23.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: FR
+        currency: EUR
+        amount: 338.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NL
+        currency: EUR
+        amount: 23.79
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: NL
+        currency: EUR
+        amount: 338.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+  # Complete Max (Australia, New Zealand): Complete plus a Dedicated IP ("Included", their comparisons).
+  - id: nordvpn.complete-max
+    name: Complete Max
+    link: https://nordvpn.com/pricing/
+    categories: [vpn, security, passwords, storage]
+    features: *complete
+    perks: [dedicated-ip]
+    notes: 'Complete plus a dedicated IP address.'
+    prices:
+      - region: AU
+        currency: AUD
+        amount: 30.09
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: AU
+        currency: AUD
+        amount: 409.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NZ
+        currency: USD
+        amount: 21.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+      - region: NZ
+        currency: USD
+        amount: 301.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://nordvpn.com/pricing/
+
+# Add-ons: a Dedicated IP ("This service is optional, and you can easily add it during checkout.", the comparison),
+# priced yearly on the renewal list ("Dedicated IP 1-year"); no page prices it by the month.
+addOns:
+  - id: nordvpn.dedicated-ip
+    name: Dedicated IP
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 101.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: US
+        currency: USD
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: GB
+        currency: GBP
+        amount: 61.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IE
+        currency: EUR
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: AU
+        currency: AUD
+        amount: 109.08
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NZ
+        currency: USD
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: DE
+        currency: EUR
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: FR
+        currency: EUR
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: NL
+        currency: EUR
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: ES
+        currency: EUR
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+      - region: IT
+        currency: EUR
+        amount: 81.48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://my.nordaccount.com/legal/pricing/
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its General Terms, Subscription Terms (incorporated "by
+# reference into the Terms"), NordVPN Additional Terms and NordLocker Additional Terms (Complete and up), its General
+# Privacy Policy with each section opened, its NordVPN Privacy Notice and its Cookie Policy, all at my.nordaccount.com;
+# its pricing page's offer terms and FAQ, its trust center, Deloitte and Cure53 posts, renewal price list and help
+# articles (free trial, refunds). Its apps' licence is the General Terms' "License terms" section. The NordPass
+# Additional Terms (Complete's password manager) add a dormant-account policy for free NordPass accounts (an inactivity
+# rating for the plans with it); no other topic is worse there. Incogni's and Coveron's own terms
+# (the third plans' third-party services) weren't read: their pages are incogni.com and Coveron's, other companies'
+# (notes.md). Nord's General Terms and Privacy Policy cover NordPass and NordLocker too, not Surfshark, so they're rated
+# here; they can move to shared documents when NordPass joins the catalog.
+policies:
+  links:
+    - name: 'General Terms of Service'
+      url: https://my.nordaccount.com/legal/terms-of-service/
+    - name: 'Subscription Terms'
+      url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+    - name: 'NordVPN Additional Terms'
+      url: https://my.nordaccount.com/legal/terms-of-service/nordvpn/
+    - name: 'NordLocker Additional Terms'
+      url: https://my.nordaccount.com/legal/terms-of-service/nordlocker/
+    - name: 'NordPass Additional Terms'
+      url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+    - name: 'General Privacy Policy'
+      url: https://my.nordaccount.com/legal/privacy-policy/
+    - name: 'NordVPN Privacy Notice'
+      url: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+    - name: 'Cookie Policy'
+      url: https://my.nordaccount.com/legal/cookie-policy/
+    - name: 'Subscription Renewal Prices'
+      url: https://my.nordaccount.com/legal/pricing/
+    - name: 'Pricing'
+      url: https://nordvpn.com/pricing/
+    - name: 'Trust Center'
+      url: https://nordvpn.com/trust/
+    - name: 'Sixth no-logs assurance engagement (Deloitte)'
+      url: https://nordvpn.com/blog/nordvpn-no-logs-assurance-engagement-2025/
+    - name: 'Cure53 security assessment (2025)'
+      url: https://nordvpn.com/blog/cure53-latest-security-assessment/
+    - name: 'Does NordVPN have a free trial?'
+      url: https://support.nordvpn.com/hc/en-us/articles/19744837091217-Does-NordVPN-have-a-free-trial
+  ratings:
+    - topic: privacy.data-collection
+      tier: good
+      reason: 'Its apps collect only what they need to work. Usage statistics and ad data are extra, and other companies get them only if you agree.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+          quote: 'By default, we collect only what is necessary for the operation of the Application and the provision of our Services. The collection of analytics and advertising data is optional and may be managed by you.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+          quote: 'As set out in our Privacy Policy, third-party providers for analytics or advertising purposes are engaged only when you provide your consent.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its websites pass what their cookies collect to analytics and ad companies for its ads. You can only stop it by turning off third-party cookies in each browser.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We share information gathered by cookies and other tracking technologies with our data analytics and advertising partners for our advertising.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'you may opt-out of such processing of your personal data by disabling third-party cookies.'
+      action:
+        name: 'How to manage cookie preferences'
+        url: https://my.nordaccount.com/legal/cookie-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its websites use ad cookies that follow the pages you visit to show you its ads elsewhere. You can opt out, but only in each browser’s cookie settings.'
+      sources:
+        - url: https://nordvpn.com/pricing/
+          quote: 'This website uses cookies to personalize your experience and may share data with partners for advertising and analytics. You can adjust preferences or opt out in Privacy Controls.'
+        - url: https://my.nordaccount.com/legal/cookie-policy/
+          quote: 'These cookies record your visit to our Websites, other pages you have visited, and the links you have clicked.'
+        - url: https://my.nordaccount.com/legal/cookie-policy/
+          quote: 'You have the option to modify or revoke non-essential cookies at any time.'
+      action:
+        name: 'How to manage cookie preferences'
+        url: https://my.nordaccount.com/legal/cookie-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its privacy policy says it uses AI tools to help answer support questions, but not whether what you send trains AI models.'
+      pages:
+        [
+          https://my.nordaccount.com/legal/privacy-policy/,
+          https://my.nordaccount.com/legal/privacy-policy/nordvpn/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it, with some set times: payment records for 10 years, and marketing emails for up to 2 years after you stop paying.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'Nord will only keep your personal data for as long as it is necessary to provide you with our Services, or for as long as we have other legitimate grounds to do so (but not longer than permitted or required by law).'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We retain billing and payment information for ten (10) years after your last transaction to comply with accounting, tax, and financial regulations.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We may continue sending you marketing emails, push notifications, and/or in-app messages for up to two (2) years after your Subscription ends, unless you opt out earlier.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself at any time in your Nord Account. It keeps only the payment records the tax law requires.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'You can delete your Account at any time.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'We retain billing and payment information for ten (10) years after your last transaction to comply with accounting, tax, and financial regulations.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask it for a copy of your data, or to send it to another company, by contacting it. There is no download button.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'You can ask us about your personal data that we process and have us send you a copy of it.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'You have the right to ask us to transfer the personal information you gave us to you or another organization.'
+      action:
+        name: 'How to ask for your data'
+        url: https://my.nordaccount.com/legal/privacy-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'Police must follow Panama’s legal process to ask it for data, it says it usually has nothing to give, and it publishes reports on the requests it gets.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'In most cases, we have no data to share.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'they must follow the appropriate legal process set out under the laws of the Republic of Panama (such as being submitted through a mutual legal assistance treaty or via letters rogatory) and must meet all applicable legal standards.'
+        - url: https://nordvpn.com/trust/
+          quote: 'which provide regular updates on government inquiries and DMCA requests we receive.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be sent to other countries, such as the US, with legal safeguards such as the EU’s standard contract terms.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'For example, your personal data may be transferred internationally, including to countries where Nord operates or where our trusted third-party service providers are located (such as the United States).'
+        - url: https://my.nordaccount.com/legal/privacy-policy/
+          quote: 'Using Standard Contractual Clauses'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address and a password, or use your Google or Apple account, and a way to pay.'
+      sources:
+        - url: https://nordvpn.com/pricing/
+          quote: 'In the order page, simply enter your email address, select your payment method, and finish the transaction.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'To access and use any of our Services, you must set up an Account by providing certain information (such as your email address and password).'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can turn off renewal in your Nord Account at any time, and keep using it to the end of the time you paid for.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If you have purchased an automatically renewing Subscription on our Websites and would like to stop it from automatically renewing, you can do so at any time from your Nord Account'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You will continue to receive access to the Services until the end of the remaining Subscription period.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You can get all your money back within 30 days of your first purchase only. After it renews, you keep the time you paid for but get nothing back.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Please note that terminated Services contracts may be refunded on the basis of the Money Back Guarantee only within thirty (30) days following your initial purchase.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Once a Services contract is renewed after the initial Service period, it cannot be refunded on the basis of the Money-Back Guarantee, unless the applicable law provides otherwise'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      regions: [GB, DE, NL]
+      tier: good
+      reason: 'In the UK, Germany and the Netherlands, a plan longer than a month is refunded in full within 30 days of each renewal, and after that for the months left.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'A Subscription for a period longer than one (1) month that has been renewed and purchased from Germany, Netherlands, or the United Kingdom, is eligible for either: (i) a full refund, if the refund request is made within thirty (30) days of being charged for automatic renewal; or (ii) a pro rata (partial) refund for the period left in your renewed Subscription (beginning the month after you request the refund), if the aforementioned thirty (30) days term has passed.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price never touches time you have paid for. It tells you first, and emails the new yearly price 30 days before charging, so you can cancel.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Any changes to prices will not affect your current Subscription period and will only affect you when renewing the Subscription.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We will notify you in advance of such changes, and you will have the opportunity to cancel the auto-renewal of your Subscription prior to incurring the new charges.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+          quote: 'We will send you a notification reminding you about the upcoming Renewal Period and specifying the then-current renewal price thirty (30) days before we are due to charge you (except for users of monthly and shorter Subscriptions).'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: good
+      reason: 'Its 7-day free trial turns into the plan you chose unless you cancel, but it emails you the price before it starts charging.'
+      sources:
+        - url: https://support.nordvpn.com/hc/en-us/articles/19744837091217-Does-NordVPN-have-a-free-trial
+          quote: 'Unless you cancel before the 7-day trial ends, your chosen plan will begin automatically, and you’ll pay the price shown when you started the trial.'
+        - url: https://support.nordvpn.com/hc/en-us/articles/19744837091217-Does-NordVPN-have-a-free-trial
+          quote: 'Before the subscription begins, NordVPN emails you a reminder of the price and conditions.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: good
+      reason: 'It emails you 30 days before charging a yearly renewal, with the price. Monthly plans get no reminder.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+          quote: 'We will send you a notification reminding you about the upcoming Renewal Period and specifying the then-current renewal price thirty (30) days before we are due to charge you (except for users of monthly and shorter Subscriptions).'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms show the price and the taxes before you pay, and say nothing about other fees.'
+      pages:
+        [
+          https://my.nordaccount.com/legal/terms-of-service/,
+          https://my.nordaccount.com/legal/terms-of-service/subscription/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: neutral
+      reason: 'You can switch plans at any time in your Nord Account, but the new plan starts only when your current one ends.'
+      sources:
+        - url: https://nordvpn.com/pricing/
+          quote: 'It will take effect when your current subscription expires.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'A dispute goes to the courts of Panama, where the company is, not to a private referee. Where your country’s law lets you use your own courts, you can.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You and Nord agree that any judicial proceedings to resolve claims relating to the Terms will be brought before the courts of Panama.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If you reside in a country (including countries of the European Union) where the law provides consumers with the right to bring disputes in their local courts, the mandatory provisions of the local laws of your country of residence shall apply.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about big changes ahead of time, without saying how long ahead, and you can leave by deleting your account.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We will notify you of any material changes to the Terms that affect your rights or obligations in advance by reasonable means (such as in-app notifications, messages on our Websites, or by email).'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You can end your relationship with us at any time after the effective date of the updated Terms by deleting your Account and/or not accessing our Websites.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: good
+      reason: 'It closes accounts only for unpaid bills, breaking its rules or the law, and usually warns you first and lets you fix the problem.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If the situation warrants, we will give you a reasonable opportunity to fix the issue before suspending or terminating your Account and/or your access to the Services.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'Usually, we will send you a prior notice before suspending or terminating your Account and/or your access to the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change how its services work at any time. If it shuts a whole service down, it refunds the time you have left.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'We reserve the right to modify or update the operation of the Services at our sole discretion, at any time, for any reason, and without notice or liability.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'If you have purchased a Service directly from Nord and Nord permanently discontinues it prior to the end of your Subscription period, excluding any discontinuation of ancillary features or functionalities of the Service, Nord will refund you such prepaid fees pro rata based on the remaining Subscription period after the discontinuation'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        [
+          https://my.nordaccount.com/legal/terms-of-service/,
+          https://my.nordaccount.com/legal/privacy-policy/,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      plans:
+        [nordvpn.complete, nordvpn.ultra, nordvpn.prime, nordvpn.ultimate-max, nordvpn.complete-max]
+      tier: good
+      reason: 'Its password manager may delete a free account left unused for 3 years, after emailing you first. A paid account is never treated as unused.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+          quote: 'A NordPass Account will be deemed as "dormant" and considered expired if it remains inactive for a continuous period of thirty-six (36) months.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+          quote: 'Prior to deletion, NordPass will provide notice, typically to the email address associated with your NordPass Account.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordpass/
+          quote: 'Accounts with an active Premium or Family Version will not be classified as dormant and will not be subject to deletion under this section.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use its apps for yourself, not for a business, on devices you own or control.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'This License is granted solely for personal, non-commercial use and its validity is based on your continued compliance with the Terms.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside experts at Cure53 tested its apps and servers in 2025, and it pays people who find security bugs. The full reports are only for its customers.'
+      sources:
+        - url: https://nordvpn.com/blog/cure53-latest-security-assessment/
+          quote: 'In 2025, NordVPN commissioned Cure53 to conduct a broad security assessment covering both our applications and our infrastructure.'
+        - url: https://nordvpn.com/trust/
+          quote: 'can earn generous rewards for uncovering potential vulnerabilities'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: great
+      reason: 'It keeps no record of the sites you visit or your IP address, only your last session for 15 minutes to count devices. Deloitte checked this in 2025, the sixth outside check.'
+      sources:
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+          quote: 'We do not store used bandwidth, traffic logs, IP addresses, or browsing information.'
+        - url: https://my.nordaccount.com/legal/privacy-policy/nordvpn/
+          quote: 'It is used to limit the amount of concurrent active user sessions and is automatically deleted within 15 minutes after a session is terminated.'
+        - url: https://nordvpn.com/blog/nordvpn-no-logs-assurance-engagement-2025/
+          quote: 'Based on the procedures performed and evidence obtained, Deloitte concluded that NordVPN’s IT systems and supporting operations are designed and implemented in line with our no-logs statement.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit beyond the 10 devices that can connect at once, which its plans show.'
+      pages: [https://my.nordaccount.com/legal/terms-of-service/nordvpn/]
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms say you should install its updates, but not whether its apps update themselves or change other settings.'
+      pages: [https://my.nordaccount.com/legal/terms-of-service/]
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms make you keep anyone else out of your account, so sharing it, even with family, breaks the rules.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'No sharing of Accounts.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/
+          quote: 'You are responsible for maintaining the confidentiality of your Account, and for preventing any third party from accessing/using your Account.'
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'The files in its cloud storage are locked with end-to-end encryption, so only you can open them.'
+      sources:
+        - url: https://nordvpn.com/pricing/
+          quote: 'Secures all types of files with end-to-end encryption and keeps them handy in a private, zero-knowledge cloud.'
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordlocker/
+          quote: 'NORD DOES NOT STORE OR HAVE ACCESS TO YOUR CLOUD PASSWORD OR CLOUD RECOVERY KEY, AND IF THEY ARE LOST, NORD CANNOT UNLOCK YOUR NORDLOCKER SERVICES ACCOUNT AND RETRIEVE YOUR CONTENT.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'The files you store stay yours: its storage terms take no rights over them.'
+      sources:
+        - url: https://my.nordaccount.com/legal/terms-of-service/nordlocker/
+          quote: 'We do not claim ownership of Your Content.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Renewal prices may be tested on you
+      tier: poor
+      reason: 'It may try different renewal prices on different people to see how they react, so the price you renew at can differ from the list.'
+      sources:
+        - url: https://my.nordaccount.com/legal/pricing/
+          quote: 'Nord reserves the right to conduct A/B price testing (“Testing“) as part of its business operations.'
+        - url: https://my.nordaccount.com/legal/pricing/
+          quote: 'The displayed renewal prices may be subject to Testing.'
+      lastVerified: 2026-11-19
