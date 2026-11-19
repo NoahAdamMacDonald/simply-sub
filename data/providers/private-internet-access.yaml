@@ -736,15 +736,18 @@ policies:
       url: https://helpdesk.privateinternetaccess.com/hc/en-us/articles/46770164720539-Where-Can-I-Find-the-Most-Recent-Update-of-the-PIA-App
   ratings:
     - topic: privacy.data-collection
-      tier: good
-      reason: 'Its apps collect only what they need, plus overall counts that can’t be tied to you. Connection reports and debug details are sent only if you choose to send them.'
+      tier: poor
+      reason: 'Its apps send connection reports only if you choose to. But its website’s analytics cookies are on until you turn them off, in each browser’s cookie preferences.'
       sources:
-        - url: https://www.privateinternetaccess.com/privacy-policy
-          quote: 'Any usage metric collected while using the Service is irreparably separated from the account user.'
         - url: https://www.privateinternetaccess.com/privacy-policy
           quote: 'From VPN Users Who Opt-in & Willingly Send Reports:'
         - url: https://www.privateinternetaccess.com/privacy-policy
-          quote: 'Anonymized connection events, protocol used, device identifiers (platform, app type/version), and connection source (whether manual or automated).'
+          quote: 'Analytics These technologies enable us to analyse the use of the website in order to measure and improve performance.'
+        - url: https://www.privateinternetaccess.com/privacy-policy
+          quote: 'By accessing our website, the following cookies will be installed. If you do not accept, you may set your preferences below.'
+      action:
+        name: 'Cookie Preferences, in its website’s footer'
+        url: https://www.privateinternetaccess.com/privacy-policy
       lastVerified: 2026-11-19
     - topic: privacy.data-sharing
       tier: poor

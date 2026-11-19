@@ -67,7 +67,7 @@ renewalAnchor:
 # Owner (M11.2), read 2026-11-19: its Teams page says McAfee bought it, and its terms and footer name TunnelBear LLC
 # ("©2026 TunnelBear LLC.", "Grizzly regards from Toronto, Canada"). Cure53's 2023 report says the audit "was requested
 # by McAfee ULC". McAfee is private (owned by an investor group led by Advent International and Permira since 2022,
-# data/providers/mcafee.yaml), so no stock. Country: TunnelBear's own, in Toronto.
+# data/providers/mcafee.yaml), so no stock. Country: TunnelBear's own, in Toronto, from its footer (the pricing page's).
 owner:
   name: 'TunnelBear LLC, owned by McAfee'
   page:
@@ -78,10 +78,10 @@ owner:
   country:
     code: CA
     page:
-      name: 'What currency will I be charged in?'
-      url: https://help.tunnelbear.com/hc/en-us/articles/360061422211-What-currency-will-I-be-charged-in
+      name: 'Pricing'
+      url: https://www.tunnelbear.com/pricing
     quotes:
-      - 'While the Bear Cave is tucked up here in the Canadian north, we have customers all over the world.'
+      - 'Grizzly regards from Toronto, Canada'
     lastVerified: 2026-11-19
   lastVerified: 2026-11-19
 notes: >-

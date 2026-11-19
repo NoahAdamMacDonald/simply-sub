@@ -154,8 +154,9 @@ perks:
 #   censors to block" (Which VPN protocol should I choose?). The plan page's "Hydra IPSec and Open VPN protocols" row
 #   names OpenVPN, which no app's settings list, so it's left out.
 # - Kill switch and split tunnelling: "Internet kill switch" and "Split tunneling" ticked for Basic and Premium (the free
-#   VPN page's cards; the app settings article: "Kill switch", "Split Tunneling"). Tor over VPN: the plan page's "Tor
-#   over VPN" row, ticked for both. Blocking: "Anti-phishing protection", ticked for both (malware).
+#   VPN page's cards; the app settings article: "Kill switch", "Split Tunneling"). The plan page's "Tor over VPN"
+#   row (ticked for both) is left out: no features page or help article mentions Tor, and the same table is stale
+#   elsewhere (Basic's data, the OpenVPN row). Blocking: "Anti-phishing protection", ticked for both (malware).
 # - P2P: Hydra "optimizes the connection based on your requirements — be it for gaming, streaming, downloading, P2P, or
 #   browsing" (server locations page), Premium's every location; its terms don't forbid P2P.
 # - No-logs policy: "we do not log or otherwise record IP addresses, device identifiers, or any other form of identifier
@@ -178,7 +179,6 @@ plans:
       vpn.protocols: [wireguard, ikev2, stealth]
       vpn.kill-switch: true
       vpn.split-tunneling: true
-      vpn.tor: true
       vpn.content-blocking: [malware]
       vpn.no-logs-policy: true
       vpn.independent-audits: [no-logs]
@@ -220,7 +220,6 @@ plans:
       vpn.protocols: [wireguard, ikev2, stealth]
       vpn.kill-switch: true
       vpn.split-tunneling: true
-      vpn.tor: true
       vpn.content-blocking: [malware]
       vpn.p2p: true
       vpn.no-logs-policy: true

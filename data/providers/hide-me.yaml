@@ -9,10 +9,12 @@
 # so it wasn't read; its help articles describe sign-in.
 # Pricing: one Premium plan, "Pricing Guarantee: Your plan always renews with the same price and duration", so every
 # period's price is what it renews at. Its checkout with no offer sells "Billed $11.99 monthly", "Billed $54.99 every 13
-# months" (12 months plus "1 Month EXTRA") and "Billed $69.99 every 26 months" (24 plus 2); the pricing page's FAQ links
-# sell 3, 6 and 36 months ("Renews at $19.99 every 3 months. Same price, always.", $29.99 and $119.99), stored too
-# (notes.md: those links carry a coupon, and the same plans without it are dearer). The pricing page's Black Friday cards
-# (16 and 30 months for $54.99 and $69.99, utm_campaign "blackfriday2026") are a sale, not stored. The checkout's own
+# months" (12 months plus "1 Month EXTRA") and "Billed $69.99 every 26 months" (24 plus 2): the three periods stored.
+# 3, 6 and 36 months exist only through a coupon link (the pricing page's FAQ links them with coupon EWA-B7R-PLA, at
+# $19.99, $29.99 and $119.99, "Renews at $19.99 every 3 months. Same price, always."); the same plans without the coupon
+# list at $50.00, $54.95 and $149.95 ("Billed $50.00 every 3 months"), so a coupon price isn't their regular price and
+# they aren't stored (the review, 2026-11-19). The pricing page's Black Friday cards (16 and 30 months for $54.99 and
+# $69.99, utm_campaign "blackfriday2026") are a sale, not stored. The checkout's own
 # data names each country's currency: US dollars in Canada, the US, Australia and New Zealand ("All amounts are shown in
 # USD."), pounds in the UK ("All amounts are shown in GBP.") and euros in Ireland, Germany, France, the Netherlands, Spain
 # and Italy ("All amounts are shown in Euro."), the same amounts everywhere, before VAT ("VAT may apply."; the UK's adds
@@ -85,8 +87,8 @@ owner:
     code: MY
   lastVerified: 2026-11-19
 notes: >-
-  A free plan with no data cap and no sign-up, and Premium for 1, 3, 6, 13, 26 or 36 months, which always renews at the
-  price you paid. US dollars in Canada, the US, Australia and New Zealand, pounds in the UK and euros in the euro
+  A free plan with no data cap and no sign-up, and Premium for 1, 13 or 26 months, which always renews at the price you
+  paid. US dollars in Canada, the US, Australia and New Zealand, pounds in the UK and euros in the euro
   countries, plus VAT where it applies.
 
 # General features, read 2026-11-19. Platforms: its VPN apps menu (Windows, macOS, Linux; Android, iPhone / iPad and other
@@ -140,7 +142,8 @@ perks:
 #   (19.03.2024 – 06.06.2024, its report linked from the about page), after DefenseCode's of 2015: no-logs.
 # - RAM-only: "RAM-only servers that do not store data on physical disks" (its company overview).
 # - Anonymous sign-up: Free needs no email ("You do not even need to provide your email address or credit card details
-#   when signing up for the FREE plan."); Premium asks for one ("Enter the email of your existing account or a new one.").
+#   when signing up for the FREE plan."); Premium asks for one ("When a customer signs up we request as little information as possible; a valid email
+#   address.", its privacy policy).
 # - No mesh, no Tor over VPN, no dedicated IP plan: none of its pages offers them.
 # - Speeds (notes only): "Our European powerhouse with over 25Gbps speeds." (Frankfurt, its network page).
 plans:
@@ -201,7 +204,7 @@ plans:
       vpn.ram-only-servers: true
       vpn.mesh: false
     perks: [streaming-support, fixed-ip, bolt]
-    notes: 'Every period renews at the price you paid ("Pricing Guarantee"). The 13- and 26-month plans are 12 and 24 months with one and two months extra. Its 3, 6 and 36-month prices are those of the pricing page’s own links. The Black Friday sale (16 months for $54.99, 30 for $69.99) isn’t stored.'
+    notes: 'Every period renews at the price you paid ("Pricing Guarantee"). The 13- and 26-month plans are 12 and 24 months with one and two months extra. 3, 6 and 36 months exist only through a coupon link on its pricing page ($19.99, $29.99 and $119.99, which list at $50.00, $54.95 and $149.95 without it), so they aren’t stored. The Black Friday sale (16 months for $54.99, 30 for $69.99) isn’t stored.'
     prices:
       - region: GLOBAL
         currency: USD
@@ -213,22 +216,6 @@ plans:
         sourceUrl: https://member.hide.me/en/checkout
       - region: GLOBAL
         currency: USD
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: GLOBAL
-        currency: USD
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
-      - region: GLOBAL
-        currency: USD
         amount: 54.99
         interval: month
         intervalCount: 13
@@ -243,14 +230,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: GLOBAL
-        currency: USD
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: GB
         currency: GBP
         amount: 11.99
@@ -259,22 +238,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: GB
-        currency: GBP
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: GB
-        currency: GBP
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: GB
         currency: GBP
         amount: 54.99
@@ -291,14 +254,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: GB
-        currency: GBP
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: IE
         currency: EUR
         amount: 11.99
@@ -307,22 +262,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: IE
-        currency: EUR
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: IE
-        currency: EUR
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: IE
         currency: EUR
         amount: 54.99
@@ -339,14 +278,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: IE
-        currency: EUR
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: DE
         currency: EUR
         amount: 11.99
@@ -355,22 +286,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: DE
-        currency: EUR
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: DE
-        currency: EUR
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: DE
         currency: EUR
         amount: 54.99
@@ -387,14 +302,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: DE
-        currency: EUR
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: FR
         currency: EUR
         amount: 11.99
@@ -403,22 +310,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: FR
-        currency: EUR
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: FR
-        currency: EUR
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: FR
         currency: EUR
         amount: 54.99
@@ -435,14 +326,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: FR
-        currency: EUR
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: NL
         currency: EUR
         amount: 11.99
@@ -451,22 +334,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: NL
-        currency: EUR
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: NL
-        currency: EUR
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: NL
         currency: EUR
         amount: 54.99
@@ -483,14 +350,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: NL
-        currency: EUR
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: ES
         currency: EUR
         amount: 11.99
@@ -499,22 +358,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: ES
-        currency: EUR
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: ES
-        currency: EUR
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: ES
         currency: EUR
         amount: 54.99
@@ -531,14 +374,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: ES
-        currency: EUR
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
       - region: IT
         currency: EUR
         amount: 11.99
@@ -547,22 +382,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: IT
-        currency: EUR
-        amount: 19.99
-        interval: month
-        intervalCount: 3
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-      - region: IT
-        currency: EUR
-        amount: 29.99
-        interval: month
-        intervalCount: 6
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=3'
       - region: IT
         currency: EUR
         amount: 54.99
@@ -579,14 +398,6 @@ plans:
         autoRenew: true
         lastVerified: 2026-11-19
         sourceUrl: https://member.hide.me/en/checkout
-      - region: IT
-        currency: EUR
-        amount: 119.99
-        interval: month
-        intervalCount: 36
-        autoRenew: true
-        lastVerified: 2026-11-19
-        sourceUrl: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=2'
 
 # Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch: its terms of service (25 August 2026), privacy
 # policy (10th Jan 2023, which includes its cookie section), the refund, cancelling, subscription, registration, devices,
@@ -594,7 +405,9 @@ plans:
 # report. Every agreement a user accepts (the owner's rule, 2026-11-03): its terms (which hold its apps' licence, section
 # 8) and its privacy policy; the checkout names no other ("Terms of Service", "Privacy Policy" and "Refund Policy" in its
 # footer), and the terms include nothing by reference. Its payment companies' terms (Paddle, Cleverbridge) weren't read:
-# they bill for it, and its own pages settle every topic. Its sign-in page wasn't read (a Cloudflare check).
+# they bill for it, and its own pages settle every topic. Its sign-in page wasn't read (a Cloudflare check). The company
+# overview article grades no topic: its "VPN apps do not contain third-party trackers" is about the apps, while the
+# privacy policy's third-party ad cookies on its website grade ads-tracking (the review, 2026-11-19).
 policies:
   links:
     - name: 'Terms of Service'
@@ -609,16 +422,12 @@ policies:
       url: https://hide.me/en/help/subscription-faq/
     - name: 'Checkout'
       url: https://member.hide.me/en/checkout
-    - name: 'Checkout (3, 6 and 36 months)'
-      url: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
     - name: 'Pricing'
       url: https://hide.me/en/pricing
     - name: 'Free VPN'
       url: https://hide.me/en/free-vpn
     - name: 'No logs policy'
       url: https://hide.me/en/features/no-logs-policy
-    - name: 'About hide.me VPN - company overview'
-      url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
     - name: 'Securitum no-log audit report (2024)'
       url: https://hide.me/downloads/Securitum_Hide.me_no-log-policy_20240607.pdf
     - name: 'Transparency report 2013-2025'
@@ -657,13 +466,18 @@ policies:
         url: https://hide.me/en/privacy
       lastVerified: 2026-11-19
     - topic: privacy.ads-tracking
-      tier: great
-      reason: 'No ads, even on the free plan, and its apps carry no trackers from other companies.'
+      tier: poor
+      reason: 'No ads in its apps, even on the free plan. But its privacy policy lets other companies’ cookies on its website deliver ads, and you can only refuse them per browser.'
       sources:
-        - url: https://hide.me/en/pricing
-          quote: 'No ads or trackers, no logs'
-        - url: https://hide.me/en/help/about-hide-me-vpn-company-overview-background/
-          quote: 'VPN apps do not contain third-party trackers'
+        - url: https://hide.me/en/privacy
+          quote: 'In addition to our own cookies, we may also use various third-parties cookies to report usage statistics of the Service, deliver advertisements on and through the Service, and so on.'
+        - url: https://hide.me/en/privacy
+          quote: "If you'd like to delete cookies or instruct your web browser to delete or refuse cookies, please visit the help pages of your web browser."
+        - url: https://hide.me/en/free-vpn
+          quote: "Unlike other free VPN services, we don't feed you ads to make money."
+      action:
+        name: 'How to refuse its cookies (its privacy policy)'
+        url: https://hide.me/en/privacy
       lastVerified: 2026-11-19
     - topic: privacy.ai-training
       status: not-stated
@@ -724,8 +538,10 @@ policies:
       sources:
         - url: https://hide.me/en/privacy
           quote: 'To maximize your privacy, we collect the minimum personal information required, and that is your email address.'
-        - url: 'https://member.hide.me/en/checkout?plan=promo3636&coupon=EWA-B7R-PLA&filter=1'
-          quote: 'Enter the email of your existing account or a new one. No password needed.'
+        - url: https://hide.me/en/privacy
+          quote: 'When a customer signs up we request as little information as possible; a valid email address.'
+        - url: https://hide.me/en/privacy
+          quote: 'We do not request or store your name, IP address or physical address, or any other personally identifiable information.'
       lastVerified: 2026-11-19
     - topic: privacy.sign-up-data
       plans: [hide-me.free]
