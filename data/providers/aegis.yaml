@@ -1,0 +1,275 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read with Edge from Canada and with a plain
+# fetch (curl): getaegis.app (its home page, with every FAQ answer opened, and its privacy policy; beem.dev, its GitHub
+# organization's verified domain, sends you there), its GitHub repository (github.com/beemdevelopment/Aegis: the README,
+# FAQ, vault format document, wiki and security tab) and its Crowdin translation project.
+# What it is: "Aegis Authenticator is a free, secure and open source app for Android to manage your 2-step verification
+# tokens for your online services." (its home page). It's an authenticator only, with no account and no servers: "Aegis
+# doesn't have access to the internet and we don't have plans to change this" (its FAQ).
+# Pricing: none. It's free, with nothing to buy, so its one plan is free, priced for everywhere. Donations ("We take
+# donations on Buy Me A Coffee, in case you'd like to send a few dollars our way.") buy nothing, so they aren't plans.
+# Region checklist, 2026-11-19: not needed: one free app for every country, with no prices.
+# Bundles: none. Official resellers: none; it sells nothing. Ways to pay: none. Its apps come from Google Play and
+# F-Droid, and as signed APKs on GitHub (its README).
+# Free use: its one plan is free.
+id: aegis
+name: Aegis Authenticator
+aliases: [aegis, aegis 2fa]
+website: https://getaegis.app
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free, with no account. Its home page is the closest page.
+cancelUrl: https://getaegis.app/
+sources: { pricing: https://getaegis.app/ }
+
+# Owner (M11.2), read 2026-11-19: no company. Its pages name "Beem Development" only in a copyright line and as its
+# GitHub organization (whose verified domain, beem.dev, is the app's own site), and its FAQ says its developers work on
+# it in their spare time; the README's icon-pack list names two of them (alexbakker, michaelschattgen) by their GitHub
+# accounts. No page names a company, a registration or a country, so a volunteer project (Jellyfin's precedent, the
+# owner's choice of 2026-11-11) with none.
+owner:
+  name: Beem Development
+  volunteer: true
+  page:
+    name: Aegis Authenticator
+    url: https://getaegis.app/
+  quotes:
+    - "However, as we work on this app in our spare time, we can't make any promises as to when or if it will make it into the app."
+    - '© Copyright 2025 Beem Development, all rights reserved.'
+  lastVerified: 2026-11-19
+# Source code (M11.5): its home page links its GitHub repository ("Check out the source code"), licensed under the GNU
+# GPL v3 ("This project is licensed under the GNU General Public License v3.0.", its README). It runs no servers, so
+# fully open.
+sourceRepo:
+  url: https://github.com/beemdevelopment/Aegis
+  page:
+    name: Aegis Authenticator
+    url: https://getaegis.app/
+  quotes:
+    - 'Aegis Authenticator is a free, secure and open source app for Android to manage your 2-step verification tokens for your online services.'
+    - 'All of the code is free and open source, so you can grab a copy of it from GitHub and start hacking!'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: Android only ("free, secure and open source 2FA app for Android", its
+# README; "We don't have plans to port Aegis to other platforms.", its FAQ). Sign-in: none, it has no accounts; the vault
+# opens with your own password or biometrics on the phone. Support: "We track all issues and feature requests on
+# GitHub. Please submit an issue there. If you prefer, you can also send us an e-mail." (its FAQ, linking
+# beemdevelopment@gmail.com), and its Matrix room ("Swing by our Matrix room to interact with other contributors"). App
+# languages: its Crowdin project (linked from its README) at 97% or more translated, Jellyfin's threshold: Arabic,
+# Chinese (Simplified and Traditional), French, German, Italian, Korean, Portuguese (98%, Brazilian 100%) and Spanish
+# at 100%; Japanese (86%) and Hindi (74%) are left out; English is the source. Not self-hostable: it's an app, not a
+# server. No pause or parental controls (no account).
+features:
+  platforms: [android]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, it, pt, ko, zh, ar]
+  software.open-source: fully-open
+
+# Authenticator features, read 2026-11-19 in its README and FAQ: an authenticator only, so password-manager false and
+# authenticator.included true.
+# - Imports: "Scan a QR code or an image of one" (otpauth), "Compatible with Google Authenticator", and "Import from other
+#   authenticator apps: 2FAS Authenticator, Authenticator Plus, Authy, andOTP, FreeOTP, FreeOTP+, Google Authenticator,
+#   Microsoft Authenticator, Plain text, Steam, TOTP Authenticator and WinAuth (root access is required for some of
+#   these)".
+# - Exports: "Export (plaintext or encrypted)", its vault file ("The format of the vault file is exactly the same for
+#   both."), documented in its vault document ("Users can configure the app to store the vault in plain text or to
+#   encrypt it with a password."); "Automatic backups of the vault to a location of your choosing". No page offers
+#   otpauth links or QR codes out.
+# - No end-to-end encryption to state: it has no cloud or servers ("Aegis doesn't have access to the internet"); its vault
+#   is encrypted on the phone ("The vault is encrypted (AES-256-GCM)").
+plans:
+  - id: aegis.free
+    name: Free
+    link: https://getaegis.app/
+    features:
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator, other-apps]
+      authenticator.export: [encrypted-backup, plain-backup]
+    notes: 'Free and open source, for Android only, with no account and no internet access: your codes stay in an encrypted vault on your phone, with automatic backups to a folder you choose.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://getaegis.app/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19. Aegis has no terms of service and no sign-up: its privacy
+# policy is two sentences (getaegis.app/privacy), and the app is free software under the GNU GPL v3 (its README and
+# LICENSE). So the topics about an account and a contract with it are not-applicable, with why. Read: its home page and
+# FAQ, privacy policy, README, FAQ.md, vault document, wiki and GitHub security tab ("No security policy detected",
+# "This project has not set up a SECURITY.md file yet.": GitHub's words, not quoted). Google Play's and F-Droid's own
+# terms for downloading it weren't read.
+policies:
+  links:
+    - name: 'Privacy policy'
+      url: https://getaegis.app/privacy
+    - name: 'Aegis Authenticator (home page and FAQ)'
+      url: https://getaegis.app/
+    - name: 'README (GitHub)'
+      url: https://github.com/beemdevelopment/Aegis
+    - name: 'FAQ (GitHub)'
+      url: https://github.com/beemdevelopment/Aegis/blob/master/FAQ.md
+    - name: 'Vault format and security design (GitHub)'
+      url: https://github.com/beemdevelopment/Aegis/blob/master/docs/vault.md
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: 'It collects nothing from your phone. It uses the camera only to scan QR codes.'
+      sources:
+        - url: https://getaegis.app/privacy
+          quote: 'Aegis Authenticator does not collect any data from your device.'
+        - url: https://getaegis.app/privacy
+          quote: 'Camera access is only used for scanning QR codes.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It collects nothing, so it has nothing to sell or share.'
+      sources:
+        - url: https://getaegis.app/privacy
+          quote: 'Aegis Authenticator does not collect any data from your device.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no tracking: the app can’t even reach the internet.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis/blob/master/FAQ.md
+          quote: "Aegis doesn't have access to the internet and we don't have plans to change this"
+        - url: https://getaegis.app/privacy
+          quote: 'Aegis Authenticator does not collect any data from your device.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'Your codes never leave your phone, so there’s nothing its makers could train AI on.'
+      pages:
+        - https://getaegis.app/privacy
+        - https://github.com/beemdevelopment/Aegis/blob/master/FAQ.md
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your codes are locked in a vault on your phone that only your password or fingerprint opens, and the app never sends them anywhere.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis
+          quote: 'The vault is encrypted (AES-256-GCM), and can be unlocked with:'
+        - url: https://github.com/beemdevelopment/Aegis/blob/master/FAQ.md
+          quote: "Aegis doesn't have access to the internet and we don't have plans to change this"
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      status: not-applicable
+      reason: 'Its makers keep no data about you: your codes stay on your phone for as long as you keep them.'
+      pages:
+        - https://getaegis.app/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'Its makers keep nothing about you. Your codes live only on your phone, where you delete them yourself.'
+      sources:
+        - url: https://getaegis.app/privacy
+          quote: 'Aegis Authenticator does not collect any data from your device.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You can export all your codes yourself, locked or not, in a file format it documents in full, and back them up automatically.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis
+          quote: 'Export (plaintext or encrypted)'
+        - url: https://github.com/beemdevelopment/Aegis/blob/master/docs/vault.md
+          quote: "This document describes Aegis' security design and file format."
+      action:
+        name: 'Exporting and backing up (FAQ)'
+        url: https://github.com/beemdevelopment/Aegis/blob/master/FAQ.md
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-applicable
+      reason: 'Its makers hold no data about you and run no servers, so they have nothing to hand to the police or governments.'
+      pages:
+        - https://getaegis.app/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Your codes stay on your phone, and backups go only where you choose to put them.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis
+          quote: 'Automatic backups of the vault to a location of your choosing'
+        - url: https://getaegis.app/privacy
+          quote: 'Aegis Authenticator does not collect any data from your device.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you install the app and use it, and it collects nothing about you.'
+      sources:
+        - url: https://getaegis.app/privacy
+          quote: 'Aegis Authenticator does not collect any data from your device.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account and no terms of service to agree to, so no dispute clause: Aegis is free software you use under the GNU GPL.'
+      pages:
+        - https://github.com/beemdevelopment/Aegis
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service to change. Aegis is free software under the GNU GPL, and the copy you have stays yours under it.'
+      pages:
+        - https://github.com/beemdevelopment/Aegis
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no Aegis account to close: you install it and use it without signing up.'
+      pages:
+        - https://getaegis.app/privacy
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Nothing you store goes to its makers: your codes stay on your phone.'
+      pages:
+        - https://getaegis.app/privacy
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: great
+      reason: 'Nothing can be taken away: it’s free software you keep, change and share under the GNU GPL.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis
+          quote: 'This project is licensed under the GNU General Public License v3.0.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no Aegis account to close for not using it.'
+      pages:
+        - https://getaegis.app/privacy
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'It’s open source under the GNU GPL: anyone may read, change and share its code.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis
+          quote: 'This project is licensed under the GNU General Public License v3.0.'
+        - url: https://getaegis.app/
+          quote: 'All of the code is free and open source, so you can grab a copy of it from GitHub and start hacking!'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: poor
+      reason: 'It publishes how its encryption works and anyone can read its code, but it names no outside security checks and no private way to report security flaws.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis
+          quote: 'The security design of the app and the vault format is described in detail in this document.'
+        - url: https://getaegis.app/
+          quote: 'We track all issues and feature requests on GitHub. Please submit an issue there. If you prefer, you can also send us an e-mail.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      status: not-applicable
+      reason: 'There’s no Aegis account to share: anyone can install it free, without one.'
+      pages:
+        - https://getaegis.app/
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: great
+      reason: 'It can’t reach the internet, so it can’t update or change anything by itself: new versions come from the app store you installed it from.'
+      sources:
+        - url: https://github.com/beemdevelopment/Aegis/blob/master/FAQ.md
+          quote: "Aegis doesn't have access to the internet and we don't have plans to change this"
+      lastVerified: 2026-11-19
