@@ -1,0 +1,150 @@
+url: https://venice.ai/faqs
+method: browser
+saved: 2026-11-17
+
+Ask anything...
+About
+Features
+Token
+VVV
+DIEM
+Pricing
+Resources
+API + Docs
+FAQs
+Privacy
+Blog
+Media
+Careers
+Brand Kit
+Changelog
+Download
+Status Page
+Store
+Log in
+Venice FAQs
+BROWSE CATEGORIES
+All Questions
+Models
+Using Venice
+Token
+Chat, Image and Code Generation
+File Uploads
+Venice API
+Mobile App
+Billing & Plans
+Support
+Browse common questions about Venice pricing, credits, models, privacy, search, billing, and API access.
+What is the difference between the AI models on Venice?
+What are the context lengths for Venice models?
+How is Venice different from ChatGPT, Claude, or other AI services?
+What do the privacy badges on Venice models mean?
+What’s the difference between TEE and E2EE on Venice?
+How does Web Search work on Venice?
+How can I manage my conversation history and start new chats?
+What happens if I switch models in the middle of my conversation?
+Can I access my chat history across different browsers or devices?
+How do I prevent my chat history from being cleared by my browser?
+Can I share my text chat conversation?
+How does Venice handle my privacy and data?
+How do Encrypted Backups on Venice Work?
+How does memory work on Venice?
+What languages are supported?
+How do I enable Voice Mode?
+How do I switch models in Venice?
+How do I switch between text and image?
+How do I switch to Dark Mode?
+How do I add line breaks or start a new paragraph in my messages?
+How do I import memories from another AI assistant?
+What is the Venice token (VVV)?
+What is DIEM?
+What is the Contract Address for the Venice token (VVV)?
+Can a single externally owned account (EOA) mint unlimited VVV tokens?
+Who controls the VVV staking contract?
+The staking contract's owner is 0x2D8CB8DC596daD0e1E34E2042E7ae6Df93B11524. This address is a Safe multisig with deployed bytecode, not a lone EOA. You can verify this directly on BaseScan.
+Can the owner mint arbitrary amounts of VVV?
+What are the key technical details of the VVV contracts?
+How can I verify VVV contract control and emissions myself?
+How much VVV has been burned?
+What happened to Points?
+What are the tokenomics of the Venice token (VVV)?
+Is the supply capped for the Venice token (VVV)?
+How does the Venice token (VVV) work and what are the benefits of staking it?
+How does VVV staking yield work?
+Does staking the Venice Token (VVV) grant access to Pro Features?
+When are staking rewards paid out?
+Do my staking rewards expire?
+How long do my VVV tokens take to unstake?
+How do I stake VVV or DIEM?
+How do I mint DIEM?
+How do I use DIEM for inference?
+Is DIEM a stablecoin?
+Can I transfer or trade DIEM?
+Is there a cooldown to unstake DIEM?
+How do I unlock my sVVV after minting DIEM?
+What happens if I sell the DIEM I minted and later want to unlock my sVVV?
+If part of my sVVV is in the 7-day unstake cooldown, can I still mint DIEM with the rest?
+Does burning DIEM give me more sVVV?
+Why do my unclaimed rewards disappear when I stake VVV?
+What yield do I earn while my sVVV is locked to back DIEM?
+What’s the difference between web search, web scraping, and X Search?
+What are the web scraping limits in the Venice UI?
+How do I generate the same person/face/subject in an image?
+How do I make a video from a reference image?
+Can I upload images into Venice?
+How do I disable the Mature Filter?
+How do I remove the Venice watermark on images?
+How do I upload a file for analysis?
+How large of a document can Venice analyze?
+How do I edit an image on Venice?
+How do I access the API?
+Where can I see my API usage and credit balances?
+Where can I find the API documentation?
+Is API usage included in my Pro, Pro+, or Max plan?
+How do I install Venice on my phone or tablet?
+Can I export an encrypted backup on my mobile device?
+Is there a limit to how much I can use Venice?
+What are Venice Credits?
+When do Venice credits reset?
+Is there a limit to Voice Mode usage?
+What is the refund policy?
+How does the referral program work?
+Why didn’t I get my referral credits?
+Can I pay with crypto?
+What are Pro+ and Max?
+How do I cancel my subscription?
+How do I manage my subscription, payment methods, or get receipts?
+How do I manage my subscription if I purchased through Apple?
+How do I manage my subscription if I purchased through Google Play?
+Why have I hit my image limit early?
+How does the Enhance feature consume image requests?
+How do Venice image requests work?
+Where can I find how many images I have left for the day?
+Is API usage included in my Pro, Pro+, or Max plan?
+How do I delete my account?
+How do I change my account password?
+How do I change my account email?
+How do I add 2FA on my account?
+What is the official support email?
+Where should I report a security vulnerability?
+WalletConnect users: Why do I keep getting logged out of Venice?
+Can you delete my data?
+How do I join the official Venice.ai Discord?
+Private, unrestricted AI for everyone.
+PRODUCT
+About
+Features
+Pricing
+Blog
+DEVELOPERS
+Venice API
+Media API
+API Docs
+Guides
+API Reference
+Status
+LEGAL
+Privacy Policy
+Terms of Service
+Contact
+© 2026 Venice AI. All rights reserved.

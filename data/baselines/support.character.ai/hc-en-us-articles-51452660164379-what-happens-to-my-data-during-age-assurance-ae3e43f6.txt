@@ -1,0 +1,57 @@
+url: https://support.character.ai/hc/en-us/articles/51452660164379-What-happens-to-my-data-during-age-assurance
+method: fetch
+saved: 2026-11-17
+
+What happens to my data during age assurance? – C.AI Help Center
+Skip to main content
+C.AI Help Center Help Center home page
+Submit a ticket
+Sign in
+C.AI Help Center
+Age Assurance
+About Age Assurance
+What happens to my data during age assurance?
+character.ai
+Updated July 14, 2026 21:42
+What happens to my personal data during age verification?
+Character.AI does not collect or store any personal data submitted during age verification. All submissions are handled entirely by Persona, our trusted third-party identity assurance partner.
+What does Persona collect?
+Most users will only need to complete a selfie — no ID required. A government-issued ID is only requested as a final step if Persona is unable to confirm your age from the selfie alone.
+Is my data safe?
+Persona is a reputable provider used by companies like LinkedIn, OpenAI, Block, and Etsy. Any biometric data or ID submitted is automatically and permanently deleted within 7 days. Character.AI does not have access to your submissions at any point.
+Do I need to submit a deletion request?
+No — deletion is automatic. You do not need to contact us to have your data removed. If you submitted a selfie or government ID during age verification, that information is permanently deleted by Persona within 7 days without any action required on your part.
+If you have further questions about how your data is handled, please refer to our Age Verification FAQ.
+related to:
+age verification
+age assurance
+ID check
+id verification
+data privacy
+Was this article helpful?
+Yes
+No
+129 out of 314 found this helpful
+Share via:
+Articles in this section:
+What is Age Assurance?
+Age Assurance FAQ
+How do I verify my age?
+What is Reading Mode?
+What happens to my data during age assurance?
+Why is Character.AI asking about my birthday?
+More articles
+Get the help you need to make the most of Character.ai. Browse guides, troubleshoot issues, and reach out anytime.
+Product
+Download for iOS
+Download for Android
+Web app
+Status
+Company
+About
+Careers
+Blog
+Terms
+Community
+Discord
+Reddit

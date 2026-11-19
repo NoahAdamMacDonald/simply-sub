@@ -1,0 +1,65 @@
+url: https://help.mistral.ai/en/articles/347628-how-long-do-you-store-my-data
+method: browser
+saved: 2026-11-17
+
+Skip to main content
+English
+Français
+Italiano
+English
+Search
+Ctrl K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+Data Governance
+How can I control or delete data connected to third-party tools?
+As an admin on Team plan or Enterprise, do I have company-wide controls?
+How do you ensure the security of user data?
+Can I opt out of my input or output data being used for training?
+How do you handle my data when using the Memories feature?
+Who owns input and output in Vibe and Mistral’s APIs?
+Where do you store my data or my Organization's data?
+How long do you store my data?
+How does Mistral ensure that my data remains encrypted and secure in transit and at rest?
+How do you use submitted feedback?
+How do I export my data from Vibe?
+How can I manage my cookie settings?
+How can I delete my account?
+Do you use my user data to train your Artificial Intelligence models?
+Do you use cookies at Mistral and why?
+Do you sell or share my data for marketing?
+Can I delete a chat conversation?
+Can I activate Zero Data Retention (ZDR)?
+Ethical and Safe Use
+Regulatory Compliance and Certification
+About our Models
+All Collections
+Trust, Security, Compliance
+Data Governance
+How long do you store my data?
+How long do you store my data?
+August 12, 2026
+We store your data for the duration for which your personal data are processed.
+For illustrative purposes only, note that the following categories of personal data will, however, be retained in our systems, in accordance with our legal obligations and/or for legal proceedings:
+The civil identity data you provided upon first creating your Mistral account (such as your first name and last name, etc.), for 5 years after the end of your user contract;
+Other data you may have provided upon first creating your account (such as the email address you listed in order to verify or change your account password, etc.), for 1 year after you delete your account;
+Technical data (such as the types of protocols used to connect to our service, etc.), for 1 rolling year from the date of connection, for each operation contributing to the operation of connection;
+Invoices and correspondence relating to invoices, for 10 years from the close of the relevant financial year.
+📌 Please note that the categories of personal data listed immediately above will not be accessed or used by any member of our teams during their legal keeping periods, except to fulfill our legal obligations or in case of dispute or litigation (e.g. to recover an unpaid invoice). Once the legal retention periods have expired, we will permanently delete these categories of data.
+🔎 For more information on data retention times, including legal retention times, please refer to our Privacy Policy.
+Did this answer your question?
+Disappointed Reaction
+Neutral Reaction
+Smiley Reaction
+Related Articles
+Can I activate Zero Data Retention (ZDR)?
+Do you sell or share my data for marketing?
+Where do you store my data or my Organization's data?
+How do you handle my data when using the Memories feature?
+How can I control or delete data connected to third-party tools?
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

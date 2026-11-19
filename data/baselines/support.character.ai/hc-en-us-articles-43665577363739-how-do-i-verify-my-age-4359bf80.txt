@@ -1,0 +1,60 @@
+url: https://support.character.ai/hc/en-us/articles/43665577363739-How-do-I-verify-my-age
+method: fetch
+saved: 2026-11-17
+
+How do I verify my age? – C.AI Help Center
+Skip to main content
+C.AI Help Center Help Center home page
+Submit a ticket
+Sign in
+C.AI Help Center
+Age Assurance
+About Age Assurance
+How do I verify my age?
+character.ai
+Updated June 24, 2026 22:27
+Age Assurance is being introduced step by step, so the pop-up might not show up for everyone right away.
+The age assurance pop-up should show up for most users; just click the link when you see it.
+If it doesn’t show up and you want to find it, or if you decide later you want to verify your age, just follow the instructions below:
+On the mobile app: Go to Settings -> Advanced -> Verify Age. If you don’t see this option, make sure your app is updated to the latest version.
+On the web: Go to character.ai, then go to Settings -> Advanced -> Verify Age.
+If you run into issues, see Tips for completing age verification or Troubleshooting age verification.
+related to:
+age verification
+under 18
+age assurance
+verify age
+ID check
+selfie
+driver's license
+passport
+face verification
+persona
+reading mode
+Was this article helpful?
+Yes
+No
+1735 out of 6227 found this helpful
+Share via:
+Articles in this section:
+What is Age Assurance?
+Age Assurance FAQ
+How do I verify my age?
+What is Reading Mode?
+What happens to my data during age assurance?
+Why is Character.AI asking about my birthday?
+More articles
+Get the help you need to make the most of Character.ai. Browse guides, troubleshoot issues, and reach out anytime.
+Product
+Download for iOS
+Download for Android
+Web app
+Status
+Company
+About
+Careers
+Blog
+Terms
+Community
+Discord
+Reddit

@@ -1,0 +1,158 @@
+url: https://github.com/anomalyco/opencode/blob/dev/LICENSE
+method: browser
+saved: 2026-11-17
+
+Skip to content
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+anomalyco
+opencode
+Repository navigation
+Code
+Issues
+2.7k
+(2.7k)
+Pull requests
+1.4k
+(1.4k)
+Actions
+Projects
+Security and quality
+3
+(3)
+Insights
+Files
+dev
+.github
+.husky
+.opencode
+.vscode
+.zed
+nix
+packages
+patches
+salesforce
+script
+sdks
+services
+specs
+.dockerignore
+.editorconfig
+.gitattributes
+.gitignore
+.gitleaksignore
+.oxlintrc.json
+.prettierignore
+AGENTS.md
+CHANGELOG.md
+CONTRIBUTING.md
+LICENSE
+README.ar.md
+README.bn.md
+README.br.md
+README.bs.md
+README.da.md
+README.de.md
+README.es.md
+README.fr.md
+README.gr.md
+README.it.md
+README.ja.md
+README.ko.md
+README.md
+README.no.md
+README.pl.md
+README.ru.md
+README.th.md
+README.tr.md
+README.uk.md
+README.vi.md
+README.zh.md
+README.zht.md
+SECURITY.md
+bun.lock
+bunfig.toml
+flake.lock
+flake.nix
+install
+package.json
+screenshot-uk.png
+strobe.json
+tsconfig.json
+turbo.json
+Breadcrumbs
+opencode
+/LICENSE
+anomalyco/opencode is licensed under the
+MIT License
+A short and simple permissive license with conditions only requiring preservation of copyright and license notices. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+Permissions
+Commercial use
+Modification
+Distribution
+Private use
+Limitations
+Liability
+Warranty
+Conditions
+License and copyright notice
+This is not legal advice. Learn more about repository licenses
+Latest commit
+adamdotdevin
+docs: cleanup casing
+ef3fd59
+·
+History
+History
+File metadata and controls
+Code
+Blame
+21 lines (17 loc) · 1.04 KB
+Raw
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+MIT License
+Copyright (c) 2025 opencode
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+While the code is focused, press Alt+F1 for a menu of operations.

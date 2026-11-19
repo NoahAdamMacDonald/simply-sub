@@ -1,0 +1,115 @@
+url: https://opencode.ai/docs/console/billing/
+method: fetch
+saved: 2026-11-17
+
+Billing | OpenCode Skip to content Console docs Console docs OpenCode docs V2(latest) V1
+CLI docsBuild docsAPI docsConsole docs
+Console docs Console docs OpenCode docs V2(latest) V1
+CLI docsBuild docsAPI docsConsole docs
+[]Billing []Intro
+[]Models
+[]Providers
+[]Web search
+[]Go
+Workspace []Basics
+[]Members
+[]SSO
+[]SCIM
+[]Budgets
+[]Billing
+API []Overview
+[]Inference
+[]Providers
+Harnesses []Overview
+[]Claude Code
+[]Codex
+[]Hermes
+[]Pi
+[]Raycast
+Add a payment method Add a payment method
+Add credits
+Auto-recharge
+Check your balance
+When credits run out
+Invoices
+Tax forms
+Invoiced billing
+Go
+Billing
+Console is free for any team size, with no seat fees. You pay only for usage, from prepaid credits that cover the
+whole workspace. Owners and admins manage billing in Settings › Billing.
+Usage through your own providers is billed by the provider, not by Console.
+Add a payment method
+Open Settings › Billing.
+Under Payment methods, click Add.
+Choose a method and finish the Stripe setup.
+Supported payment methods:
+Card
+Link
+Alipay
+UPI
+WeChat Pay
+Use ⋯ › Make default to choose the method for automatic charges. Removing a method can stop auto-recharge and Go
+renewals that use it.
+Add credits
+Under Credits, click Add credits.
+Pick $10, $50, or $100, or choose Other and enter an amount.
+Choose a payment method and click Confirm and pay.
+A processing fee of 4.6% + $0.31 is added on top, so a $50 purchase costs $52.61 and the full $50 is added to the
+balance.
+Auto-recharge
+Auto-recharge buys credits when the balance runs low.
+Under Auto-recharge, click Add rule.
+Set the balance that triggers a charge and the amount to add.
+Click Save.
+Auto-recharge charges the default payment method, including the processing fee. If a charge fails, auto-recharge
+turns off until you set it up again.
+Check your balance
+The Billing card on Activity shows the balance for owners and admins and opens Settings › Billing.
+The Billing button in the workspace header, or the B key, opens a drawer with live Go limits, credits, and usage.
+Owners and admins see the workspace’s balance, usage, and auto-recharge; members see only their own usage and limits.
+When credits run out
+Paid requests fail with HTTP 402 once the balance reaches zero. The balance never goes negative.
+CopyCopiedFailed
+Upstream request failed: Insufficient account funds
+Invoices
+Every payment appears under Invoices with its status and a link to Download invoice or View receipt.
+Entry Created by
+Balance top-up Adding credits
+Automatic top-up Auto-recharge
+Go subscription Subscribing to Go, Go Plus, or Go Teams
+Go renewal Monthly Go renewal
+Go Plus upgrade Upgrading Go to Go Plus
+Go Teams upgrade Upgrading Go or Go Plus to Go Teams
+Go Teams member A member joining a workspace on Go Teams
+Monthly Usage Invoiced billing
+Tax forms
+US customers can download Anomaly Innovations Inc.’s W-9.
+Invoiced billing
+Workspaces with a credit agreement can be invoiced monthly instead of buying credits. Contact support to set it up.
+Usage draws on a credit limit instead of a prepaid balance.
+The invoice for each month is issued on the 1st (UTC) and is due 14 days later.
+Open invoices have a Pay now button.
+Requests fail with HTTP 402 when the credit limit is reached or an invoice is overdue.
+Go
+OpenCode Go subscriptions use the same payment methods and appear in the same invoice list. You can
+also pay for Go with credit. Turn on Extra Usage on the Go page to pay from
+credits once a Go limit is reached.
+Previous BudgetsNext Overview Edit this page on GitHub (opens in a new tab) Copy as MarkdownCopiedFailedCopy page as Markdown
+Search⌘K Contents Add a payment method
+Add credits
+Auto-recharge
+Check your balance
+When credits run out
+Invoices
+Tax forms
+Invoiced billing
+Go
+[]Community (opens in a new tab)
+[]Changelog
+[]Press
+[]Brand
+[]Legal
+Status: Status unavailableStatus (opens in a new tab)
+©2026 Anomaly
+EscClose searchCancel

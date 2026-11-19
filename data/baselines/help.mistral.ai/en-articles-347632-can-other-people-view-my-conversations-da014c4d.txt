@@ -1,0 +1,44 @@
+url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+method: fetch
+saved: 2026-11-17
+
+Can other people view my conversations? | Mistral Help Center Copyright (c) 2023, Intercom, Inc. (legal@intercom.io) with Reserved Font Name "Inter".
+This Font Software is licensed under the SIL Open Font License, Version 1.1.Skip to main content
+English Français Italiano English
+Search⌘K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+About our Models
+All Collections Trust, Security, Compliance Ethical and Safe Use Can other people view my conversations? Can other people view my conversations?
+August 12, 2026
+People other than yourself may occasionally view your conversations, in the limited number of specific situations described below:
+Reported conversations
+When you report content by contacting our support team (whether the content in question is third-party content or your output data for instance), you grant a limited number of authorized and competent Mistral team members the right to access the reported content to improve the Services.
+🔑 This helps us make sure that the Services do not generate such illegal content again.
+Shared conversations
+Vibe provides you with the ability to share unique links to conversations you have with Vibe.
+When you share a unique conversation link to conversations you’ve had with Vibe, anyone with the conversation link (including any person with whom your intended recipient shares the conversation link) will be able to view your conversation.
+For the avoidance of doubt, these conversation links do not include:
+your Mistral username (unless you expressly include it in the conversation)
+any addition you make to the conversation after sharing it
+any other conversation you may have with Vibe
+Conversation feedback
+When you send us feedback, we will use your rating ("thumbs up" or "thumbs down") but also bits of your conversation (the input and output related to your rating).
+🔑 We will de-identify the conversation from you, and use it amongst other feedback to generate aggregated indications and datasets that will improve the behavior of our models.
+Did this answer your question? Disappointed Reaction Neutral Reaction Smiley Reaction
+Related Articles
+Can I activate Zero Data Retention (ZDR)?
+Do you use my user data to train your Artificial Intelligence models?
+Do you use my conversations with Vibe to show me ads?
+How can I exercise my GDPR rights?
+Can I opt out of my input or output data being used for training?
+On this page
+Reported conversations
+Shared conversations
+Conversation feedback
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

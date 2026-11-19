@@ -1,0 +1,555 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada (mistral.ai/pricing with
+# its USD and EUR tabs and each country of its EUR picker, its comparison table's ticks read from the page's own icons,
+# the French version mistral.ai/fr/pricing, chat.mistral.ai's sign-in page, Vibe's documentation on docs.mistral.ai, the
+# Legal Center on legal.mistral.ai), mistral.ai/pricing again through a US, a UK and an Australian exit, and with a plain
+# fetch (its help centre, help.mistral.ai, every article of its collections; its legal notice; the App Store's pages).
+# Pages, each quoted where it's used.
+# Le Chat is now Vibe: "Le Chat has become Vibe, Mistral's unified agent for productivity and coding. Your account, plan,
+# and conversations move with you." (Le Chat is now Vibe, 2026-08-12); chat.mistral.ai is still its address. So the
+# provider is named as it's sold now, "Mistral Vibe" (the pricing page's "Get Mistral Vibe", "Does Mistral Vibe have any
+# usage limits?"), found as Le Chat too (aliases), as Devin was for Windsurf (notes.md: the brief's id was `le-chat`).
+# Pricing: mistral.ai/pricing's Pro card: "$14.99" "/mo" "Excluding taxes" on its USD tab, which every reader gets first
+# (from Canada and through a US, a UK and an Australian exit alike, so one US-dollar list for everywhere), and on its EUR
+# tab, a price with VAT for the country picked from its list (the EU's and the United Kingdom): France "17.99€", Germany
+# "17.84€", Ireland "18.44€", the Netherlands "18.14€", Spain "18.14€", Italy "18.29€", the United Kingdom "17.99€", each
+# "Including taxes". Its terms agree: outside the EEA "The prices of the Mistral AI Products are exclusive of taxes and
+# Value Added Tax (VAT) or similar sales taxes will be added at the rate in force in your billing country on the date you
+# subscribe to a Mistral AI Product."; in it "The prices of the Mistral AI Products are indicated "all taxes included"".
+# Yearly: "For Pro and Team plans, you can choose between monthly or annual billing . Annual billing includes a 20%
+# discount compared with monthly billing." (How can I upgrade or cancel my subscription?), but no page shows the yearly
+# amount: it shows only at checkout, after signing in (chat.mistral.ai/upgrade/plans leads to the sign-in page), and the
+# App Store pages list no in-app purchases. So Pro has monthly prices only; a 20% discount isn't computed (notes.md).
+# Not listed: Team ("$24.99" "/user/mo", business), Enterprise, the Education plan ("Verified students can get Mistral
+# Pro for $5.99 / month (normally $14.99)."; an eligibility-only offer, as Spotify's student plan), Mistral Studio's API
+# (usage-billed).
+# Region checklist, 2026-11-17: 1. mistral.ai/fr/pricing (French) shows the same "$14.99"; no country paths; 2. the
+# page's USD and EUR tabs and the EUR tab's country picker (read for FR, DE, IE, NL, ES, IT, GB and AT); 3. the page's
+# own text (the tick and dash icons read from its table cells); 4. checkout needs an account (the sign-in page); 5. the
+# help centre's billing articles name no other currency; 6. Edge from Canada, through US, UK and Australian exits, and a
+# plain fetch: all "$14.99"; 7. no bill offered.
+# Bundles: none to list. French and Polish carriers bill Pro with their mobile plans ("Mobile carrier (Free Mobile,
+# Orange, NJU): manage your subscription directly with the carrier."): partners that bill for it, not shops, and not
+# listed as a way to pay (no page read names their countries, notes.md).
+# Official resellers: none: no page names a shop that sells Pro.
+# Free use: the Free plan ("Yes, Mistral’s Free plan provides limited access to Vibe, including our latest models, chat,
+# search, creation, and Vibe for code for agentic coding in your terminal.").
+
+id: mistral
+name: Mistral Vibe
+aliases: [le chat, le chat pro, mistral ai, mistral pro]
+website: https://mistral.ai
+# Its app (chat.mistral.ai), help centre (help.mistral.ai), documentation (docs.mistral.ai) and Legal Center
+# (legal.mistral.ai) are all under mistral.ai.
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD, FR: EUR, DE: EUR, IE: EUR, NL: EUR, ES: EUR, IT: EUR, GB: EUR }
+# Its help centre's How can I upgrade or cancel my subscription? (the Admin panel on the web, the App Store or Google Play
+# in its apps, the carrier for a carrier's plan).
+cancelUrl: https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+sources: { pricing: https://mistral.ai/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-17: Pro is sold on the web (its Admin panel's checkout, after signing in) and in its
+# apps through Apple's and Google's billing. No page names the web checkout's methods ("the accepted means of payment are
+# indicated on our pricing page", its terms, but the pricing page names none), so cards aren't listed and there are no
+# acceptedNetworks (notes.md).
+paymentMethods:
+  - methods: [app-store]
+    page: 'How can I upgrade or cancel my subscription?'
+    url: https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+    quotes:
+      - 'iOS / Android app : use the App Store or Google Play.'
+
+# Owner (M11.2), read 2026-11-17: its consumer terms name the company that provides Vibe, with its Paris address (its
+# legal notice: "Mistral, a simplified joint stock company with capital of EUR 15,000"). Private: no page names a listing.
+owner:
+  name: 'Mistral AI'
+  page:
+    name: 'Terms of service (outside the EU)'
+    url: https://legal.mistral.ai/terms/row-consumer-terms
+  quotes:
+    - 'The Mistral AI Products are provided by Mistral AI, a French limited joint-stock corporation, incorporated in Paris, under number 952 418 325, with VAT number FR95952418325, having its registered offices at 15 rue des Halles, 75001 Paris, France'
+  country:
+    code: FR
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms charge "on each periodic renewal as set forth in your order", and its
+# help centre's billing articles don't say which day that is.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://legal.mistral.ai/terms/row-consumer-terms
+    - https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+    - https://help.mistral.ai/en/articles/392902-how-can-i-manage-my-subscription-on-mobile-ios-and-android
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on the pricing page: usage levels (not comparable, so perks: the comparison table's
+# "Up to 6x free" messages, "Up to 5x free" web searches, "Up to 40x free" images, "Up to 15GB" of libraries and
+# documents, "Unlimited" scheduled tasks against Free's "Up to 5"), and what Pro's card and table add that no feature
+# describes.
+perks:
+  - id: more-usage
+    name: More access and usage
+  - id: faster-responses
+    name: Faster responses
+  - id: spreadsheets-and-slides
+    name: Generate spreadsheets and slides
+  - id: canvas
+    name: Canvas
+  - id: remote-coding-agents
+    name: Remote coding agents
+  - id: payg-credits
+    name: Extend usage with PAYG credits
+
+# AI features (the AI category's registry), read 2026-11-17 on the pricing page's table and Vibe's documentation, on both
+# plans unless named:
+# - Web search: the table's "Web searches" (Free ticked, Pro "Up to 5x free"); "Search the web" (Vibe Work's docs).
+# - Reasoning: "a fast/think toggle switches between quick conversational responses and deeper, agentic workflows"
+#   (Vibe's overview); Pro gets "more extended thinking and deep research reports" (the pricing FAQ).
+# - Deep research: "Deep Research is the Deep Research Skill" (Get started with Work); more on Pro (the FAQ above).
+# - Memory: "Knowledge saves what matters from your conversations so Vibe can recall it later." and "Knowledge is enabled
+#   by default." (Knowledge).
+# - Projects: "Projects are available on all plans." (Group tasks with Projects); the table's "Project folders".
+# - Scheduled tasks: "Scheduled tasks let you run a prompt automatically at a future date or on a recurring schedule."
+#   (Schedule tasks); the table's "Task scheduling" "Up to 5" on Free, "Unlimited" on Pro.
+# - Image generation: the table's "Image generation" (Free ticked, Pro "Up to 40x free").
+# - Coding agent: "Vibe Code is Vibe's coding mode. With read/write access to your filesystem, a shell, and a
+#   configurable set of tools, it can read files, run commands, write code, and open pull requests on your behalf, under
+#   your supervision." (Vibe Code); the table's "Use Vibe in the CLI, IDE, and remotely." ticked on both.
+# - Connects to: the table's "Connectors (beta)" and "Custom MCP connectors (beta)" and "Skills" ("Create and load
+#   instructions, tools, and scripts for specialized, repeatable tasks.") on both; "Vibe CLI" and "Vibe for IDE" on both;
+#   an API on Pro only, with its monthly credits ("$25.5 /mo in API credits.", Pro's card).
+# - Chats kept on its servers: "Input and output are maintained by default so you can see your conversation history in
+#   the product ." (Can I delete a chat conversation?); Temporary Chat is an option, not where chats are kept.
+# - Not on any page read: voice conversations ("Voice mode lets you start a task in Work using your voice instead of
+#   typing. Your speech is transcribed into text that you can review, edit, and send as a prompt."; its "Talk with Work in
+#   conversation mode" heading has no text under it, notes.md), code completion, computer use, models from other
+#   companies, office apps (its own spreadsheets and slides are perks), video, music or voice generation, early access.
+# General features, read 2026-11-17: apps: the table's "Vibe on web", "Vibe on mobile (iOS and Android)", and "Use Vibe
+# Work in the desktop app for macOS and Windows. Linux support is coming soon." (Work on Desktop). Sign-in: a password
+# and authenticator codes ("Any TOTP-compatible authenticator app can be used, such as Google Authenticator, Microsoft
+# Authenticator, 1Password, 2FAS, Aegis, or Bitwarden.", How do I update my account information) and the sign-in page's
+# Apple, Google and Microsoft buttons (icons only: its screenshot, saved). Support: the table's "Help center" on both and
+# "Chat and email support" on Pro only. No pause or parental controls; app languages: no page lists them (its help
+# centre's English, French and Italian are the help centre's own).
+features:
+  platforms: [web, ios, android, macos, windows]
+  account.sign-in: [password, totp, sso]
+
+plans:
+  - id: mistral.free
+    name: Free
+    link: https://chat.mistral.ai/chat
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.deep-research: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.image-generation: true
+      ai.coding-agent: true
+      ai.integrations: [mcp, connectors, custom-assistants, ide, cli]
+      ai.chat-storage: cloud
+    notes: 'Limited messages, web searches and coding sessions, up to 5 scheduled tasks, and basic image generation, on Mistral’s own models.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+
+  - id: mistral.pro
+    name: Pro
+    link: https://chat.mistral.ai/upgrade/plans
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.deep-research: true
+      ai.memory: true
+      ai.projects: true
+      ai.scheduled-tasks: true
+      ai.image-generation: true
+      ai.coding-agent: true
+      ai.api-credits: true
+      ai.integrations: [mcp, connectors, custom-assistants, ide, cli, api]
+      ai.chat-storage: cloud
+      support.channels: [email, chat]
+    perks:
+      [
+        more-usage,
+        faster-responses,
+        spreadsheets-and-slides,
+        canvas,
+        remote-coding-agents,
+        payg-credits,
+      ]
+    notes: 'Up to 6 times Free’s messages, 5 times its web searches and 40 times its images, unlimited scheduled tasks, 15 GB of libraries and documents, and $25.50 a month of API credits. Yearly billing (20% off) is priced only at checkout.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 14.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: FR
+        currency: EUR
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: DE
+        currency: EUR
+        amount: 17.84
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: IE
+        currency: EUR
+        amount: 18.44
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: NL
+        currency: EUR
+        amount: 18.14
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: ES
+        currency: EUR
+        amount: 18.14
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: IT
+        currency: EUR
+        amount: 18.29
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+      - region: GB
+        currency: EUR
+        amount: 17.99
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Including taxes' }
+        lastVerified: 2026-11-17
+        sourceUrl: https://mistral.ai/pricing/
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: its Terms of Service for
+# consumers outside the EU (Canada, the US, the UK and the rest) and for consumers in the EU (the EU's ratings below),
+# which include its Usage Policy (the conduct it forbids: no topic worse than the terms); its Privacy Policy and Cookie
+# Policy; the Additional Terms and the Connectors terms (business customers' and partners': not a consumer's); and the
+# help centre's billing, refund, cancelling, training, retention, deletion, export, data location, security and support
+# articles. Its apps' licence is the terms' own ("We grant you a non-exclusive right to access and use the Mistral AI
+# Products solely in your personal capacity"). The sign-up page shows only an email field and sign-in buttons before an
+# address is entered: its consent line wasn't read.
+policies:
+  links:
+    - name: 'Terms of service (outside the EU)'
+      url: https://legal.mistral.ai/terms/row-consumer-terms
+    - name: 'Terms of service (EU)'
+      url: https://legal.mistral.ai/terms/eu-consumers-terms-of-service
+    - name: 'Privacy policy'
+      url: https://legal.mistral.ai/terms/privacy-policy
+    - name: 'Cancelling'
+      url: https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+    - name: 'Refunds'
+      url: https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
+    - name: 'Opting out of training'
+      url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
+    - name: 'Who can see your conversations'
+      url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+    - name: 'Selling or sharing data'
+      url: https://help.mistral.ai/en/articles/347615-do-you-sell-or-share-my-data-for-marketing
+    - name: 'Ads'
+      url: https://help.mistral.ai/en/articles/347633-do-you-use-my-conversations-with-vibe-to-show-me-ads
+    - name: 'Who owns input and output'
+      url: https://help.mistral.ai/en/articles/347630-who-owns-input-and-output-in-vibe-and-mistral-s-apis
+    - name: 'How long it keeps your data'
+      url: https://help.mistral.ai/en/articles/347628-how-long-do-you-store-my-data
+    - name: 'Deleting your account'
+      url: https://help.mistral.ai/en/articles/347619-how-can-i-delete-my-account
+    - name: 'Deleting a chat'
+      url: https://help.mistral.ai/en/articles/347613-can-i-delete-a-chat-conversation
+    - name: 'Exporting your data'
+      url: https://help.mistral.ai/en/articles/347623-how-do-i-export-my-data-from-vibe
+    - name: 'Where your data is stored'
+      url: https://help.mistral.ai/en/articles/347629-where-do-you-store-my-data-or-my-organization-s-data
+    - name: 'SOC 2 and ISO 27001'
+      url: https://help.mistral.ai/en/articles/347638-do-you-have-soc-2-or-iso-27001-certification
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online at any time, and you keep your plan until the end of the period you paid for.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'You can cancel your paid subscription at any time via your account settings or the Help Center.'
+        - url: https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+          quote: 'You keep access to your current plan until the end of the billing period.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get your money back only if you cancel within 14 days of first buying on its website, not after a renewal. Otherwise you keep your plan to the end of the period.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
+          quote: 'You can get a refund only if you cancel within the legal withdrawal window : 14 days from your initial purchase.'
+        - url: https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
+          quote: 'The 14-day withdrawal window applies only to initial purchases , not to renewals.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: great
+      reason: 'It tells you at least 30 days before raising the price, and the new price starts only at a renewal after that, so you can cancel first.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'If we increase our prices, we will give you at least thirty (30) days’ notice and any price increase will take effect the next time your subscription renews following the notice period'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: great
+      reason: 'It has no free trial of its own. The free months some phone carriers give end on their own, with nothing to pay.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
+          quote: 'Orange / NJU: the offer includes 6 months free, so there is no payment to refund during the free period. The subscription ends automatically at the end of the offer.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first.'
+      pages:
+        - https://legal.mistral.ai/terms/row-consumer-terms
+        - https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and billing help list no fees beyond the price and taxes.'
+      pages:
+        - https://legal.mistral.ai/terms/row-consumer-terms
+        - https://help.mistral.ai/en/articles/568728-refund-policy-eligibility-timing-and-how-it-works
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Outside the EU, disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by emailing it within 30 days of agreeing to its terms."
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'YOU AND MISTRAL AI AGREE THAT ANY DISPUTE, CLAIM, OR CONTROVERSY ARISING OUT OF OR RELATING TO THESE TERMS, THE MISTRAL AI PRODUCTS, OR THE RELATIONSHIP THAT RESULTS FROM YOUR USE THEREOF, WILL BE RESOLVED EXCLUSIVELY BY BINDING ARBITRATION, RATHER THAN IN COURT'
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'You may opt out of this arbitration agreement by emailing us at support@mistral.ai within thirty (30) days of the date that you first accepted these Terms.'
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'YOU AND WE AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR OUR INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.'
+      action:
+        name: 'How to opt out of arbitration (section 10)'
+        url: https://legal.mistral.ai/terms/row-consumer-terms
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      regions: [FR, DE, IE, NL, ES, IT]
+      tier: great
+      reason: "In the EU, you can take a dispute to a court in your own country, under your country's law."
+      sources:
+        - url: https://legal.mistral.ai/terms/eu-consumers-terms-of-service
+          quote: 'As an EEA consumer, you may bring claims before the courts of your country of residence, and such claims shall be governed by the substantive law of your country of residence.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It tells you by email or in the app at least 30 days before a change to its terms that matters to you. If you disagree, you can leave.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'We will give you at least thirty (30) days advance notice of changes to these Terms that are expected to materially impact you either via email or an in-product notification.'
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'If you do not agree with the changes, you can terminate these Terms at any time'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: neutral
+      reason: "It can close or suspend your account straight away if you break its rules, don't pay, a law makes it or you put others at risk. You can appeal, but its terms promise no refund."
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'We reserve the right to immediately suspend or terminate your Mistral AI account and/or your access to all or part of the Mistral AI Products if: (a) you breach these Terms or our policies (including our Usage Policy), (b) you fail to pay any fees when due, (c) to comply with applicable law, or (d) your continued use of the Mistral AI Products could cause risk or harm to Mistral AI, our users, or anyone else.'
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'If you believe we have suspended or terminated your account in error, you can file an appeal with us by contacting us via support@mistral.ai.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: good
+      reason: 'What you put in stays yours. It may use it only to run and improve Vibe, for as long as that takes.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'You grant us a worldwide, non-exclusive, non-transferable (except as permitted in Section 12 (Assignment)), royalty-free, fully-paid license (with the right to sublicense to our delegates and subcontractors) to use Your Data for the purpose of (1) providing, maintaining and optimizing the Mistral AI Products'
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'each for the duration necessary to achieve the intended purposes.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'You own what Vibe makes for you, and Mistral won’t claim it.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'To the extent permitted by applicable law, as between you and Mistral AI, you (i) retain all ownership rights in Input and (ii) own all Output.'
+        - url: https://help.mistral.ai/en/articles/347630-who-owns-input-and-output-in-vibe-and-mistral-s-apis
+          quote: 'Mistral will not claim copyright over the output generated by you or your end users.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change Vibe with updates. If an update makes it much worse and there is no alternative, all you can do is leave.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'If an update materially impairs your use of the Mistral AI Products and we don’t provide an alternative, you may terminate these Terms as provided in Section 7 (Term, Suspension, Cancellation, and Termination), which is your sole remedy and ends your access to the affected Mistral AI Products.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy say nothing about closing accounts that aren’t used.'
+      pages:
+        - https://legal.mistral.ai/terms/row-consumer-terms
+        - https://legal.mistral.ai/terms/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use Vibe for yourself only, and may not take it apart unless the law lets you.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'We grant you a non-exclusive right to access and use the Mistral AI Products solely in your personal capacity in compliance with these Terms'
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'Attempt to reverse engineer, decompile, or otherwise attempt to discover the source code or underlying components (e.g., algorithms or systems) of the Mistral AI Products'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms say it updates Vibe, but not whether its apps update themselves or change anything else on your device.'
+      pages: [https://legal.mistral.ai/terms/row-consumer-terms]
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Your account is for you alone: you may not share it with anyone.'
+      sources:
+        - url: https://legal.mistral.ai/terms/row-consumer-terms
+          quote: 'Your account is intended for your individual use only and you may not share your account with any other person.'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: neutral
+      reason: 'It says it meets the SOC 2 Type II and ISO 27001 security standards. No page read names a way to report security problems.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347638-do-you-have-soc-2-or-iso-27001-certification
+          quote: 'Yes, Mistral complies with both SOC 2 Type II and ISO 27001/27701 frameworks.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what you do to study and improve its products, on its own say-so. Its privacy policy offers no setting to stop that, only a request to object.'
+      sources:
+        - url: https://legal.mistral.ai/terms/privacy-policy
+          quote: 'To improve the Mistral AI Products or develop new products (but excluding model training), such as to conduct research or to make aggregated or anonymous datasets or statistics'
+        - url: https://legal.mistral.ai/terms/privacy-policy
+          quote: 'Our legitimate interest in continuously improving the Mistral AI Products and to introduce new features.'
+      action:
+        name: 'Its privacy policy’s rights'
+        url: https://legal.mistral.ai/terms/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It doesn’t sell or share your data for marketing or ads. Partners’ ad cookies run only if you allowed them.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347615-do-you-sell-or-share-my-data-for-marketing
+          quote: 'Mistral does not sell or share your personal data for marketing or advertising purposes.'
+        - url: https://help.mistral.ai/en/articles/347615-do-you-sell-or-share-my-data-for-marketing
+          quote: 'Provided you have enabled such cookies upon your first visit to our website or services, marketing cookies set by our partners may help us deliver more effective marketing to you , by showing relevant ads on other websites.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'It shows no ads and never uses your chats for ads. Its own ads on other sites use cookies only if you allowed them.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347633-do-you-use-my-conversations-with-vibe-to-show-me-ads
+          quote: 'Mistral does not use the content of your conversations with Vibe for marketing or advertising purposes .'
+        - url: https://help.mistral.ai/en/articles/347615-do-you-sell-or-share-my-data-for-marketing
+          quote: 'Provided you have enabled such cookies upon your first visit to our website or services, marketing cookies set by our partners may help us deliver more effective marketing to you , by showing relevant ads on other websites.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: neutral
+      reason: 'What you write trains its AI unless you turn that off in your settings, which you can do at any time. After that, your chats are no longer used, but any feedback you give still is.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
+          quote: 'Vibe: users are not opted out by default and can opt out at any time in their settings.'
+        - url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
+          quote: 'Once the opt-out is confirmed, Mistral no longer uses your input or output data for the purpose of training its models.'
+      action:
+        name: 'How to turn off AI training'
+        url: https://help.mistral.ai/en/articles/455207-can-i-opt-out-of-my-input-or-output-data-being-used-for-training
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Its staff see a chat only when you report it to support, share its link or send feedback on it. (Training on your chats is graded under AI training.)'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+          quote: 'People other than yourself may occasionally view your conversations, in the limited number of specific situations described below:'
+        - url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+          quote: 'you grant a limited number of authorized and competent Mistral team members the right to access the reported content to improve the Services.'
+        - url: https://help.mistral.ai/en/articles/347632-can-other-people-view-my-conversations
+          quote: 'When you send us feedback, we will use your rating ("thumbs up" or "thumbs down") but also bits of your conversation (the input and output related to your rating).'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your chats until you delete them or your account, and your account details for a year after you leave. Some records are kept longer because the law says so.'
+      sources:
+        - url: https://legal.mistral.ai/terms/privacy-policy
+          quote: 'Data we use to provide Vibe to you: we keep your Input and Output until you delete your account or until you delete the conversation from Vibe.'
+        - url: https://legal.mistral.ai/terms/privacy-policy
+          quote: 'Account Data (such as the phone number or email address you provided to verify or change your account password, etc.): for 1 year after you delete your account.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete any chat, or your whole account, yourself at any time.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347613-can-i-delete-a-chat-conversation
+          quote: 'you can delete a chat conversation , in its entirety and at any time by following this simple process:'
+        - url: https://help.mistral.ai/en/articles/347619-how-can-i-delete-my-account
+          quote: 'You can delete your Vibe account at any time by:'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can download all your Vibe data yourself, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347623-how-do-i-export-my-data-from-vibe
+          quote: 'Simply click on the Export button to download all your Vibe data.'
+      action:
+        name: 'How to export your data'
+        url: https://help.mistral.ai/en/articles/347623-how-do-i-export-my-data-from-vibe
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its privacy policy names regulators among those who may get your data, but doesn’t say how it answers police or government requests.'
+      pages: [https://legal.mistral.ai/terms/privacy-policy]
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: good
+      reason: 'Your data is kept in the EU. When a service it uses is outside the EU, it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347629-where-do-you-store-my-data-or-my-organization-s-data
+          quote: 'By default, your data is hosted in the European Union .'
+        - url: https://legal.mistral.ai/terms/privacy-policy
+          quote: 'Additionally, we attach the most recent version of the European Commission’s Standard Contractual Clauses to all such contracts.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To make an account you give an email address and your first and last name.'
+      sources:
+        - url: https://help.mistral.ai/en/articles/347628-how-long-do-you-store-my-data
+          quote: 'The civil identity data you provided upon first creating your Mistral account (such as your first name and last name, etc.), for 5 years after the end of your user contract;'
+      lastVerified: 2026-11-17

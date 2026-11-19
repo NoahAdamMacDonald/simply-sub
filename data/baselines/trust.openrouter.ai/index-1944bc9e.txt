@@ -1,0 +1,136 @@
+url: https://trust.openrouter.ai/
+method: browser
+saved: 2026-11-17
+
+Start your security review
+View & download sensitive information
+Get access
+​
+​
+Overview
+Started in early 2023 as the first LLM marketplace, OpenRouter has grown to become the largest and most popular AI gateway. We eliminate vendor lock-in while offering better prices, uptime, and enterprise-grade reliability.
+Compliance
+SOC 2 Type 2
+OpenRouter is trusted by
+NVIDIA
+Replit
+Framer
+Zoom
+Lovable
+AMD
+Amplitude
+Webflow
+Archer
+Mintlify
+WTW
+Documents
+Get access
+REPORTS
+Pentest Report
+COMPLIANCE
+SOC 2 Type 2
+Legal
+Subprocessors
+Cyber Insurance
+Data Processing Agreement
+View more
+App Security
+Application Penetration Testing
+Vulnerability & Patch Management
+Web Application Firewall
+Data Security
+Data Backups
+Encryption-at-rest
+Encryption-in-transit
+View more
+Product Security
+Logging
+Two-Step Verification
+Passkeys
+View more
+Access Control
+Data Access
+Password Manager
+User Access Review
+Endpoint Security
+Device Lock
+Anti-Malware
+Disk Encryption
+View more
+Continuous Monitoring
+Automated Compliance Monitoring
+Event & Audit Log Management
+Reviews & Updates
+BC/DR
+Tabletop Exercises
+Infrastructure
+Status Monitoring
+Reports
+Pentest Report
+Subprocessors
+​
+​
+Company
+Purpose
+Location
+Clerk
+Authentication
+United States
+ClickHouse
+Database
+United States
+Cloudflare
+Cloud Infrastructure
+United States
+Coinbase
+Payments
+United States
+Customer.io
+Email Notifications
+United States
+Datadog
+Observability
+United States
+Fivetran
+Integrations
+United States
+GitHub
+Version Control
+United States
+Google Cloud
+Cloud Infrastructure, Inference
+United States
+Microsoft Azure
+Inference
+United States
+OpenAI
+Inference
+United States
+Plain
+Customer Support
+United States
+PostHog
+Analytics
+United States
+Pylon
+Customer Support
+United States
+Resend
+Email Notifications
+United States
+Stripe
+Payments
+United States
+Upstash
+Cache
+United States
+Vercel
+Website Hosting
+United States
+Model Providers
+Inference — Optional based on customer selection; visit openrouter.ai/providers for comprehensive list
+Global (provider-dependent)
+If you need help using this Trust Center, please contact us.
+Contact support
+Built on
+Share Trust Center

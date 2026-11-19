@@ -1,0 +1,539 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with a plain fetch from Canada (opencode.ai:
+# home, Go, models (Zen), download, product, mobile, desktop, Browse, data, enterprise, support and Console pages, its
+# terms of use and privacy policy, its documentation as pages and as its Markdown copies, its llms.txt index; its GitHub
+# repository's licence, README and security policy; its Trust Center), its Go and Console sign-up pages in Edge from
+# Canada, and opencode.ai/go through a US, a UK and a German exit. Pages, each quoted where it's used.
+# What it is: OpenCode, a free, open-source coding agent you run on your own computer ("OpenCode is an open source coding
+# agent. It’s available as a terminal-based interface, desktop app, or web app.", its docs), with free models and any of
+# "200+ providers"; and OpenCode Go, a monthly subscription to hosted open models from Anomaly, the company that makes
+# it ("Go is a subscription that gives you and your team access to the best open-weight models with generous usage
+# limits at a low-cost fixed monthly price.").
+# Pricing: opencode.ai/go: "Individuals": Go "$10 per month" and Go Plus "$40 per month"; Go Teams ("$20/member/month ,
+# 2-member minimum", its Go documentation) is a team plan, out. Monthly only ("with three monthly plans", its Go
+# documentation; no page offers a year). OpenCode itself is free ("OpenCode is 100% free to use. It also comes with a set
+# of free models.", its product page), its Free plan here. Pay-as-you-go models (OpenCode Models, formerly Zen, from
+# prepaid credits) are usage-billed and out. No currency is named on the Go page: a bare "$" from Canada and through a
+# US, a UK and a German exit alike; its Console prices models "in US dollars" and its budgets are "in US dollars", so one
+# price list for everywhere in US dollars (Devin's precedent). No page says the prices include tax.
+# Region checklist, 2026-11-17: 1. opencode.ai's language versions (its picker) change the language, not the prices;
+# 2. no country or currency picker; 3. the Go page's code names no currency; 4. checkout needs an account (Subscribe sends
+# you to sign up); 5. no help article prices by country; 6. a plain fetch and Edge from Canada, and Edge through a US, UK
+# and German exit, all "$10" and "$40"; 7. no bill offered. Where it's sold: "The service is designed primarily for
+# international users and provides stable global access." (its Go documentation); some free models aren't offered in
+# some countries (in the plans' notes).
+# Bundles: none found. Official resellers: none: its pages sell Go only in its Console and name no shop. "use your
+# ChatGPT Plus/Pro or GitHub Copilot subscriptions" in OpenCode is another company's plan used as a provider, not a
+# bundle.
+# Free use: the Free plan (OpenCode with its free models, or your own providers).
+
+id: opencode
+name: OpenCode
+aliases: [opencode go, opencode zen, anomaly]
+website: https://opencode.ai
+# Its Trust Center.
+domains: [trust.opencode.ai]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its Go page's "Can I cancel?": "An owner or admin can cancel any time from the Go page."
+cancelUrl: https://opencode.ai/go
+sources: { pricing: https://opencode.ai/go }
+notes: 'OpenCode, the open-source coding agent, is free with its free models or your own; OpenCode Go adds hosted open models for a fixed monthly price.'
+
+# Ways to pay (M11.5), read 2026-11-17 in its Console billing documentation: a card, Link (Stripe's wallet), Alipay, UPI
+# and WeChat Pay, for Go too ("OpenCode Go subscriptions use the same payment methods"); Link, UPI and WeChat Pay are
+# `other`. Go can also be paid from the workspace's credit, which is bought the same ways. No card networks are named
+# ("Card"), so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, alipay, other]
+    page: Billing
+    url: https://opencode.ai/docs/console/billing/
+    quotes:
+      - 'Card'
+      - 'Alipay'
+      - 'WeChat Pay'
+      - 'OpenCode Go subscriptions use the same payment methods and appear in the same invoice list.'
+
+# Owner (M11.2), read 2026-11-17: its terms and privacy policy name Anomaly Innovations, Inc. ("Made by: Anomaly", its
+# press page). Private: no page names shares or a listing. Where it is: its terms' address for opting out of
+# arbitration, in San Francisco (its terms are governed by Delaware's law).
+owner:
+  name: 'Anomaly Innovations, Inc.'
+  page:
+    name: Terms of use
+    url: https://opencode.ai/legal/terms-of-service
+  quotes:
+    - 'These Terms of Use (the "Terms") are a binding contract between you and ANOMALY INNOVATIONS, INC. ("OpenCode," "we" and "us").'
+  country:
+    code: US
+    page:
+      name: Terms of use
+      url: https://opencode.ai/legal/terms-of-service
+    quotes:
+      - 'You have the right to opt out of the provisions of this Section by sending written notice of your decision to opt out to the following address: 2443 Fillmore St #380-6343, San Francisco, CA 94115, United States postmarked within thirty (30) days of first accepting these Terms.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Source code (M11.5): its product page's FAQ links its GitHub repository under the MIT licence (the repository's
+# LICENSE: "MIT License"). The agent and its apps are open; the servers behind Go and its Console weren't found in the
+# repository, so open-source apps, not fully open, though its page calls OpenCode "fully open source" (notes.md).
+sourceRepo:
+  url: https://github.com/anomalyco/opencode
+  page:
+    name: Product
+    url: https://opencode.ai/product
+  quotes:
+    - 'Yes, OpenCode is fully open source.'
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its Go documentation says only "Your monthly allowance resets when a new paid
+# period starts.", and its terms speak of "PERIODIC CHARGES (E.G., MONTHLY)": no day.
+renewalAnchor:
+  kind: not-stated
+  pages: [https://opencode.ai/legal/terms-of-service, https://opencode.ai/docs/console/go/]
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on opencode.ai/go, each line no feature describes: Go's "Curated, affordable models"
+# (32 hosted open models with monthly allowances) and Go Plus's "Higher limits and fewer interruptions" (usage levels are
+# perks, never features: the owner's choice of 2026-10-30).
+perks:
+  - id: go-models
+    name: Curated, affordable models
+  - id: higher-limits
+    name: Higher limits and fewer interruptions
+
+# Features, read 2026-11-17 (AI: the registry's ai.* features), on every plan unless named:
+# - The assistant and coding agent: OpenCode itself ("OpenCode is an open source agent that helps you write and run code
+#   with any AI model.", its product page).
+# - Where chats are kept: on your device. OpenCode "runs locally on your machine" (its security policy), its phone app is
+#   "a remote for OpenCode on your computer" whose sessions "keep running there", and its hosted models' prompts "are
+#   passed through to the upstream model provider to provide the services and are not stored" (its privacy policy, which
+#   excepts only the Console's hosted agents, a team feature).
+# - Searches the web: "Ask OpenCode for current information and it can search the web, read the results, and include
+#   source links in its response." (with your own search provider; TinyFish needs no key).
+# - Voice conversations: its phone app ("Call a session and say what you need. The agent answers out loud.").
+# - Reasoning: "Variants are named options for one model, often used for reasoning effort or token budgets." (Models).
+# - Models from several companies: free models from several labs and "any of 200+ providers" (its home page); Go's 32
+#   models include Moonshot's Kimi, Alibaba's Qwen, xAI's Grok, Zhipu's GLM, DeepSeek's, Google's Gemini, MiniMax's and
+#   Anthropic's Claude Haiku (the Go page's model list).
+# - Uses a browser for you: Browse, Anomaly's free companion ("An MCP server and a Chromium extension that let your agents
+#   use your real browser, with your tabs, your logins and your extensions. They open tabs in the background, grouped out
+#   of your way, and read pages, click, type, take screenshots and record tabs."), offered with OpenCode.
+# - Connects to: MCP servers (its MCP servers documentation), code editors through the Agent Client Protocol ("so you
+#   can use it from an ACP client such as Zed"), the command line (its terminal app), a browser extension (Browse), and
+#   assistants you make ("An agent combines a system prompt, model preference, permissions, and display details into a
+#   named assistant profile."); on Go and Go Plus also the API ("You can also access Go models through the API at
+#   https://opencode.ai/inference/go"). Free models can't be called through the API ("Free-tier chat models require
+#   OpenCode", its models documentation), so Free has no `api`. No monthly API credits: Go's allowance isn't credits
+#   (Devin's precedent).
+# - Not stated by any page read: memory across chats, projects, image, video or audio generation, deep research,
+#   scheduled tasks (its changelog calls schedules experimental and opt-in), code
+#   completion, office apps, early access.
+# - Developer: a coding agent, so its plans are in developer too; no developer feature applies.
+# General features, read 2026-11-17: platforms: its desktop app for macOS, Windows and Linux, its terminal app, its web
+# app ("It’s available as a terminal-based interface, desktop app, or web app."), and its phone app for Android (Google
+# Play) and iPhone ("Install the OpenCode beta on your iPhone from TestFlight, or the app on your Android phone."). Sign-in for its Console: "Continue with Google", "Continue
+# with GitHub", or an email address and password (its sign-up page); OpenCode and its free models need no account. Support:
+# email ("Email help@anoma.ly", "First response Within two business days", its Console support page) and its Discord
+# community. App languages: its site's language picker (English, Chinese, Korean, German, Spanish, French, Italian,
+# Danish, Japanese, Polish, Russian, Ukrainian, Arabic, Norwegian, Portuguese (Brasil), Thai, Turkish), the registry's
+# ten of them. Self-hostable: OpenCode runs its own server on your computer ("Server mode is opt-in only.", its security
+# policy; its web app and phone app connect to it). No pause (cancel only). No parental controls.
+features:
+  platforms: [windows, macos, linux, web, android, ios]
+  account.sign-in: [password, sso]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+  software.open-source: open-clients
+  software.self-hostable: true
+
+plans:
+  - id: opencode.free
+    name: Free
+    link: https://opencode.ai/download
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.chat-storage: on-device
+      ai.web-search: true
+      ai.voice: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.computer-use: true
+      ai.integrations: [mcp, ide, cli, browser-extension, custom-assistants]
+    notes: 'OpenCode is free and open source, with a set of free models you can use without an account, each free for a limited time with a daily request limit (some, such as Inkling 2 Small Free, not in every country). Some free models’ makers keep and train on what you send; you can also bring any of 200+ providers, your ChatGPT Plus or Pro or GitHub Copilot plan, or local models.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://opencode.ai/product
+
+  - id: opencode.go
+    name: Go
+    link: https://opencode.ai/go
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.chat-storage: on-device
+      ai.web-search: true
+      ai.voice: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.computer-use: true
+      ai.integrations: [mcp, api, ide, cli, browser-extension, custom-assistants]
+    perks: [go-models]
+    notes: 'Everything in Free, plus 32 hosted open models (Kimi, Qwen, GLM, DeepSeek, Gemini, MiniMax, Grok and others) with usage allowances per 5 hours, week and month; usage past them can come from bought credits. Works in OpenCode, Claude Code, Codex and Pi.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 10
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://opencode.ai/go
+
+  - id: opencode.go-plus
+    name: Go Plus
+    link: https://opencode.ai/go
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.coding-agent: true
+      ai.chat-storage: on-device
+      ai.web-search: true
+      ai.voice: true
+      ai.reasoning: true
+      ai.model-choice: true
+      ai.computer-use: true
+      ai.integrations: [mcp, api, ide, cli, browser-extension, custom-assistants]
+    perks: [go-models, higher-limits]
+    notes: 'Everything in Go, with larger allowances on every model (about four times Go’s on most).'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 40
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://opencode.ai/go
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-17 with a plain fetch: its Terms of Use (effective Nov 8, 2026,
+# which include its Privacy Policy and any "Additional Terms" by reference) and Privacy Policy (effective Nov 9, 2026),
+# the Console's sign-up page ("By signing up, you agree to our Terms and DPA."), its Go page and documentation, its
+# models documentation's privacy section, its billing, config and support pages, its GitHub security policy and MIT
+# licence, and its Trust Center. Both legal documents say the open-source software you run yourself is governed by its
+# own licence, so they grade its hosted services and the licence grades the apps. Not read: the DPA (for organisations),
+# Stripe's terms (its payment processor), and the free models' makers' own terms (Thinking Machines', NVIDIA's), which
+# its models page links. No shared document applies. Calibrated against Claude, ChatGPT, Perplexity and Devin.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://opencode.ai/legal/terms-of-service
+    - name: 'Privacy policy'
+      url: https://opencode.ai/legal/privacy-policy
+    - name: 'Go'
+      url: https://opencode.ai/go
+    - name: 'Go (documentation)'
+      url: https://opencode.ai/docs/console/go/
+    - name: 'Models and their privacy'
+      url: https://opencode.ai/docs/console/models/
+    - name: 'Billing'
+      url: https://opencode.ai/docs/console/billing/
+    - name: 'Config (updates)'
+      url: https://opencode.ai/docs/config/
+    - name: 'Product (FAQ)'
+      url: https://opencode.ai/product
+    - name: 'Models (Console)'
+      url: https://opencode.ai/zen
+    - name: 'Support'
+      url: https://opencode.ai/console/support
+    - name: 'Sign up'
+      url: https://opencode.ai/console/signup
+    - name: 'Trust Center'
+      url: https://trust.opencode.ai
+    - name: 'Security policy (GitHub)'
+      url: https://github.com/anomalyco/opencode/blob/dev/SECURITY.md
+    - name: 'Licence (GitHub)'
+      url: https://github.com/anomalyco/opencode/blob/dev/LICENSE
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online at any time from the Go page, and you keep Go until the end of the time you paid for.'
+      sources:
+        - url: https://opencode.ai/go
+          quote: 'Yes. An owner or admin can cancel any time from the Go page. Your plan stays active until the end of the period you paid for.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: good
+      reason: 'You can ask for your money back within 14 days of any charge, but only if you’ve barely used that period’s allowance.'
+      sources:
+        - url: https://opencode.ai/go
+          quote: "You may qualify if you ask within 14 days of the charge and have used almost none of that period's allowance."
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms charge the prices in effect at the time, and don’t say whether it tells you before raising them.'
+      pages: [https://opencode.ai/legal/terms-of-service, https://opencode.ai/docs/console/go/]
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'Go has no free trial: OpenCode and its free models simply stay free.'
+      pages: [https://opencode.ai/go, https://opencode.ai/docs/console/go/]
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say it charges each period until you cancel, but not that it reminds you first.'
+      pages: [https://opencode.ai/legal/terms-of-service, https://opencode.ai/docs/console/go/]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: neutral
+      reason: 'Go costs its price. Credits you buy for extra usage carry a stated processing fee.'
+      sources:
+        - url: https://opencode.ai/docs/console/billing/
+          quote: 'A processing fee of 4.6% + $0.31 is added on top, so a $50 purchase costs $52.61 and the full $50 is added to the balance.'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'It doesn’t say what happens to time you’ve paid for when you move between Go and Go Plus.'
+      pages: [https://opencode.ai/docs/console/go/, https://opencode.ai/docs/console/billing/]
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to a private referee, not a court, and you give up class actions. You can opt out only by letter, within 30 days of signing up.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'YOU AGREE THAT DISPUTES BETWEEN YOU AND US WILL BE RESOLVED BY BINDING, INDIVIDUAL ARBITRATION AND YOU WAIVE YOUR RIGHT TO PARTICIPATE IN A CLASS ACTION LAWSUIT OR CLASS-WIDE ARBITRATION.'
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'You have the right to opt out of the provisions of this Section by sending written notice of your decision to opt out to the following address: 2443 Fillmore St #380-6343, San Francisco, CA 94115, United States postmarked within thirty (30) days of first accepting these Terms.'
+      action:
+        name: 'How to opt out (its terms)'
+        url: https://opencode.ai/legal/terms-of-service
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tells you about changes on its site, by email or in some other way, but doesn’t say how far ahead. Using it after a change means you agree.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'We reserve the right to change the Terms at any time, but if we do, we will place a notice on our site located at opencode.ai, send you an email, and/or notify you by some other means.'
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'If you use the Services in any way after a change to the Terms is effective, that means you agree to all of the changes.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can stop your use of its services for any reason it chooses, and its terms promise no notice and no refund.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'OpenCode is also free to terminate (or suspend access to) your use of the Services for any reason in our discretion, including your breach of these Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: good
+      reason: 'It uses what you send to run the service and keep it safe. On a free account it may also use it to improve its services.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'We use Content to provide our Services, comply with applicable law, enforce our terms and policies, and keep our Services safe.'
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'In addition, if you are using the Services through an unpaid account, we may use Content to further develop and improve our Services, except Content obtained or derived from a Connected Service (as defined in our Privacy Policy), which we never use for that purpose.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      plans: [opencode.go, opencode.go-plus]
+      tier: great
+      reason: 'On a paid account it uses what you send only to run the service, follow the law and keep it safe.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'We use Content to provide our Services, comply with applicable law, enforce our terms and policies, and keep our Services safe.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'The code and answers it makes for you are yours.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'you (a) retain your ownership rights in Input and (b) own the Output.'
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'We hereby assign to you all our right, title, and interest, if any, in and to Output.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change, limit or stop parts of its services, as any subscription can, and Go’s list of models may change.'
+      sources:
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'We may suspend or discontinue any part of the Services, or we may introduce new features or impose limits on certain features or restrict access to parts or all of the Services.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://opencode.ai/legal/terms-of-service]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: great
+      reason: 'OpenCode is open source under the MIT licence: anyone may use, change and share it.'
+      sources:
+        - url: https://opencode.ai/product
+          quote: 'Yes, OpenCode is fully open source.'
+        - url: https://github.com/anomalyco/opencode/blob/dev/LICENSE
+          quote: 'MIT License'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records what you do on its website and Console (pages, clicks, downloads) and links it to your account. Turning analytics off works browser by browser, and some events are still recorded.'
+      sources:
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'When you create an account, sign in, verify your email or approve a device, we link the records from that browser to your account.'
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: "We delete those Cookies and the local storage list from your browser and don't set them again while analytics are off."
+      action:
+        name: 'Turn off analytics (its privacy policy)'
+        url: https://opencode.ai/legal/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It says it doesn’t sell your data, but it may give your details to partners for joint promotions, and offers no easy way to stop that.'
+      sources:
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'We will not sell or share your Personal Data, and have not done so over the last 12 months.'
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'Companies that we partner with to offer joint promotional offers or opportunities.'
+      action:
+        name: 'Its privacy policy'
+        url: https://opencode.ai/legal/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads, and it doesn’t use your data to target ads. Its website’s analytics are its own, with no outside trackers.'
+      sources:
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'Targeted Advertising: We do not process your Personal Data for targeted advertising purposes.'
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: "We collect these records ourselves and don't use third-party analytics services on opencode.ai."
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'Some free models’ makers keep and train on what you send, and on a free account OpenCode may use it to improve its services. You avoid it only by choosing other models.'
+      sources:
+        - url: https://opencode.ai/docs/console/models/
+          quote: 'Iceman Free: During its free period, collected data is retained and used to improve the model.'
+        - url: https://opencode.ai/legal/terms-of-service
+          quote: 'In addition, if you are using the Services through an unpaid account, we may use Content to further develop and improve our Services, except Content obtained or derived from a Connected Service (as defined in our Privacy Policy), which we never use for that purpose.'
+      action:
+        name: 'Each model’s privacy (its models page)'
+        url: https://opencode.ai/docs/console/models/
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      plans: [opencode.go, opencode.go-plus]
+      tier: good
+      reason: 'Go blocks models that train on what you send unless you allow them in its settings.'
+      sources:
+        - url: https://opencode.ai/go
+          quote: 'By default, Go blocks paid endpoints that train on your requests, and an owner or admin can change that in Settings › Privacy.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'OpenCode runs on your computer. What you send to its hosted models passes through to the model’s maker and isn’t kept by OpenCode.'
+      sources:
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'Prompts are passed through to the upstream model provider to provide the services and are not stored, except by hosted agents, which keep sessions until 30 days without activity and email records until the inbox is disconnected (see Integrations with Third-Party Services ).'
+        - url: https://github.com/anomalyco/opencode/blob/dev/SECURITY.md
+          quote: 'OpenCode is an AI-powered coding assistant that runs locally on your machine.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it needs it, with a few stated periods, such as two years for website analytics.'
+      sources:
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'We retain Personal Data about you for as long as necessary to provide you with our Services or to perform our business or commercial purposes for collecting your Personal Data.'
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'We delete these records from our analytics database within a month after they turn 24 months old.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can ask by email for your data to be deleted, but it doesn’t say how quickly.'
+      sources:
+        - url: https://opencode.ai/console/support
+          quote: 'To ask for a copy of your data or for it to be deleted, email help@anoma.ly from the address on your OpenCode account'
+      action:
+        name: 'How to ask (its support page)'
+        url: https://opencode.ai/console/support
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your data. Its sessions stay on your computer.'
+      sources:
+        - url: https://opencode.ai/console/support
+          quote: 'To ask for a copy of your data or for it to be deleted, email help@anoma.ly from the address on your OpenCode account'
+      action:
+        name: 'How to ask (its support page)'
+        url: https://opencode.ai/console/support
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information to meet legal duties, such as a court order. It doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://opencode.ai/legal/privacy-policy
+          quote: 'In addition, each of the above referenced categories of Personal Data may be collected, used, and disclosed with the government, including law enforcement, or other parties to meet certain legal requirements and enforcing legal terms including: fulfilling our legal obligations under applicable law, regulation, court order or other legal process'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Its hosted models run in the US and Europe (one free model in China), and you can choose the regions. It doesn’t say where your account data is kept or what protects it abroad.'
+      sources:
+        - url: https://opencode.ai/docs/console/models/
+          quote: 'All our models are hosted in the US and EU.'
+        - url: https://opencode.ai/zen
+          quote: 'Choose which regions your requests run in and whether any model can train on your data.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Go needs an account: an email address and password, or a Google or GitHub account. It doesn’t say whether an email alias is fine.'
+      sources:
+        - url: https://opencode.ai/console/signup
+          quote: 'Continue with Google'
+        - url: https://opencode.ai/console/signup
+          quote: 'Email address'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      plans: [opencode.free]
+      tier: great
+      reason: 'OpenCode and its free models need no account at all.'
+      sources:
+        - url: https://opencode.ai/product
+          quote: 'OpenCode comes with a set of free models that you can use without creating an account.'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: good
+      reason: 'An outside audit checks its security (SOC 2 Type 2), and you can report flaws through GitHub or by email. The reports aren’t public, and it pays no bounty.'
+      sources:
+        - url: https://trust.opencode.ai
+          quote: 'SOC 2 Type 2'
+        - url: https://opencode.ai/console/support
+          quote: 'To report a security issue in Console or one of its integrations, email security@anoma.ly with what you found and how to reproduce it.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Go and Go Plus are for the one person who subscribes: others in your workspace can’t use its models’ allowance.'
+      sources:
+        - url: https://opencode.ai/docs/console/go/
+          quote: 'Go and Go Plus cover the member who subscribes and the workspace’s API keys.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      tier: great
+      reason: 'OpenCode asks before installing an update unless you choose automatic updates, and changes nothing else on your computer.'
+      sources:
+        - url: https://opencode.ai/docs/config/
+          quote: 'Set update to "disable" to skip them, "notify" to show available updates before installing them, or "auto" to install updates automatically.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: The agent runs without a sandbox
+      tier: neutral
+      reason: 'OpenCode can run commands and change files on your computer. It asks first, but that’s not a security wall: run it in a container or virtual machine to keep it apart.'
+      sources:
+        - url: https://github.com/anomalyco/opencode/blob/dev/SECURITY.md
+          quote: 'The permission system exists as a UX feature to help users stay aware of what actions the agent is taking - it prompts for confirmation before executing commands, writing files, etc.'
+        - url: https://github.com/anomalyco/opencode/blob/dev/SECURITY.md
+          quote: 'If you need true isolation, run OpenCode inside a Docker container or VM.'
+      lastVerified: 2026-11-17

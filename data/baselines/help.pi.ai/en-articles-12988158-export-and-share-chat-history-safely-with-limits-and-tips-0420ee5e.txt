@@ -1,0 +1,43 @@
+url: https://help.pi.ai/en/articles/12988158-export-and-share-chat-history-safely-with-limits-and-tips
+method: fetch
+saved: 2026-11-17
+
+Export and share chat history safely, with limits and tips | Pi Help Center Skip to main content
+Find answersRequest helpShare your feedback
+Find answersRequest helpShare your feedback
+Search for articles...
+All Collections
+Using Pi
+Export and share chat history safely, with limits and tips
+Export and share chat history safely, with limits and tips
+December 2, 2025
+Web app:
+Click on the gear icon at the bottom left corner of the window. You may need to extend the width of the screen to see the gear icon on the bottom left corner.
+Alternatively hover over the the PiTM icon on the top left corner of the page until the icon changes into the navigation bar icon, which looks like two rectangles side by side. Click on the navigation bar icon.
+Click on Account on the left hand navigation pane
+Click on Download Chat history link to initiate the full chat retrieval. You’ll see the message “Retrieval initiated: Retrieval in progress – your Pi history will be ready to download here on <today’s date>”
+Check back to this page later. The time it takes to retrieve and package your chat history depends on how many chat threads and how long each chat thread is.
+Once packaged, click on download link and a file named <pi-user-history.json> will be in your Download folder
+Android app:
+Click on the person icon on the top left corner of the page. This slides out the navigation bar
+Select “Manage history”
+Click on Download Chat history link to initiate the full chat retrieval. You’ll see the message “Retrieval initiated: Retrieval in progress – your Pi history will be ready to download here on <date>”
+Check back to this page later. The time it takes to retrieve and package your chat history depends on how many chat threads and how long each chat thread is.
+Once packaged, click on download link and a file named <pi-user-history.json> will be in your Download folder
+iOS app:
+Click on the icon that looks like a long and short horizontal lines, at the top left corner of the page. A navigation bar should slide out
+Click on Settings icon (looks like a gear) at the bottom of the navigation bar
+Click on Account
+Click on Download your Pi history. You’ll see the message “Retrieval initiated: Retrieval in progress – your Pi history will be ready to download here on <date>”
+Check back to this page later. The time it takes to retrieve and package your chat history depends on how many chat threads and how long each chat thread is.
+Once packaged, click on download link and a file named <pi-user-history.json> will be in your Download folder.
+Related Articles
+How do I copy, export, or share a conversation safely?
+How do I delete my Pi account and all my data?
+Why does Pi seem to forget earlier messages? What conversations does it remember?
+Daily Brief - FAQ
+Did this answer your question? Disappointed Reaction😞 Neutral Reaction😐 Smiley Reaction😃
+Pi Help Center
+Privacy policy
+Terms of service
+Inflection AI

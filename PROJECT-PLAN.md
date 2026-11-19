@@ -2273,6 +2273,12 @@ in every D1 `json` column search parses.
     (`x-subscription`: Grok, Cursor and X Premium, sold as one plan since 2026-10-12); Devin (`devin`, Windsurf's
     successor); Microsoft 365 (`microsoft-365`: Copilot, Office, OneDrive and Defender, on Microsoft's privacy statement
     and services agreement as shared documents); Perplexity (`perplexity`).
+  - **AI, batch 2** (2026-11-17): Ollama (`ollama`: local models, chats on your device), OpenRouter (`openrouter`: its
+    free models; its credits are usage-billed), OpenCode (`opencode`, with OpenCode Go), Meta AI (`meta-ai`: free and the
+    Meta One bundles, on Meta's terms and privacy policy as shared documents), Mistral Vibe (`mistral`, formerly Le Chat),
+    DeepSeek (`deepseek`), Kimi (`kimi`, from kimi.ai), Qwen (`qwen`), Poe (`poe`: its paid plans' soldIn from its
+    country table), Character.AI (`character-ai`), Venice (`venice`) and Pi (`pi`). Xbox Game Pass moved onto
+    Microsoft's shared documents (#206, with AI batch 1's review fixes).
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)

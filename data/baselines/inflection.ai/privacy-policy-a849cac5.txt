@@ -1,0 +1,235 @@
+url: https://inflection.ai/privacy-policy
+method: fetch
+saved: 2026-11-17
+
+Inflection AI
+Try Pi
+Labs
+Blog
+About Us
+Try Pi
+Labs
+Blog
+About Us
+Privacy Policy
+Last updated: August 11, 2026
+This Privacy Policy describes how Inflection AI, Inc. (“Inflection AI,” “we,” or “us”) collects, uses, discloses, and otherwise processes information about you. This Privacy Policy applies to information we collect or derive when you access or use our websites, mobile app, and other online products and services that link to this Privacy Policy (collectively, our “Services”) and when you otherwise interact with us, such as through our customer support channels, on social media, or at our events. We may provide different or additional notices of our privacy practices for certain offerings, in which case those notices will supplement or replace the disclosures in this Privacy Policy.
+We may change this Privacy Policy from time to time. If we make changes, we will notify you by revising the date at the top of this policy. If we make material changes, we may provide you with additional notice (such as by adding a statement to the Services or sending you a notification). We encourage you to review this Privacy Policy regularly to stay informed about our information practices and the choices available to you.
+This Privacy Policy does not apply where Inflection AI processes data as a processor on behalf of our commercial customers as part of our business offerings, such as our API. For information about how we collect and process personal information collected in these circumstances, please consult your agreement (including relevant data protection terms) for such information.
+Contents
+Collection of Information
+Use of Information
+Disclosure of Information
+Data Retention
+Your Choices
+Your Rights
+Additional Information for Individuals in Europe
+Contact us
+Collection of Information
+The information we collect about you depends on how you interact with us. In this section, we describe the categories of information we collect and the sources of this information.
+Information You Provide to Us
+We collect information you provide directly to us. For example, we collect information directly from you when you create an account, use our Services, fill out a form, participate in a contest or promotion, sign up for marketing communications from us, request customer support, or otherwise communicate with us. Depending on which Services you use, the types of information that we collect directly from you include your name, email address, “inputs” consisting of text, voice, audio, or other materials you input to our Services to generate conversational outputs and other responses, and any other information you choose to provide. If you provide personal information in inputs when you interact with our Services, that personal information may be reproduced in outputs from our Services.
+If you apply for a job with us, we collect the information that you provide to us in connection with your job application. This includes but is not limited to business and personal contact information, professional credentials and skills, educational and work history and other information of the type that may be included in a resume. This may also include diversity information that you voluntarily provide.
+Information We Collect Automatically
+We automatically collect information about your interactions with us or our Services, including:
+Device, Usage, and Activity Information: We collect information about how you access our Services, including data about the device and network you use, such as your device’s operating system type and version, manufacturer and model, browser type, screen resolution, device type (e.g., phone, tablet), IP address, unique identifiers, connection information, language settings and general location information such as city, state, or geographic area. We also collect information about the route by which you access our Services, access dates and times, whether you have opened or otherwise engage with our communications, and your activity on our Services, such as pages viewed, and links clicked.
+Information Collected by Cookies and Similar Tracking Technologies: We use cookies and similar tracking technologies to operate and provide our Services, as well as to collect information about your interactions with the Services and our marketing communications. For example, these technologies help you to navigate between pages efficiently and enable certain functionality, they also help us improve our Services and marketing communications, remember your preferences, and analyze your interactions with us, including to see which areas and features of our Services are popular and count visits. For more information about our use of cookies, see our Cookie Policy .
+Precise Geolocation Information: With your consent, we may collect information about the precise location of your device. You may stop the collection of precise location information at any time (see the Your Choices section below for details).
+Information We Collect from Other Sources
+We obtain information from other sources. For example, if you create or log into your account through a third-party platform (such as Google, Facebook, or Apple), we will have access to certain information from that platform, such as your name, email address, profile picture, and any other information the third-party platform discloses about you, in accordance with the authorization procedures determined by such platform. If you provide us with the relevant permission, we may have access to information in your contacts, emails, calendar, or documents on such third-party platform. We may also collect publicly available information from other websites and online services, such as social media profiles or posts and app store reviews. Finally, we may also collect information about you from other individuals, such as if a user of our Services has shared content about you.
+Information We Derive
+We may derive information or draw inferences about you based on the information we collect. For example, we may make inferences about your approximate location based on your IP address. We may also draw inferences about you by combining information we collect, including information from publicly available sources, with other information we hold about you, for purposes such as evaluating potential safety, security, or product issues. We may use your inputs to make inferences about your emotional state, tone, sentiments, or other characteristics. You may opt out of using voice to infer emotions in your Account settings page.
+Use of Information
+We use the information we collect or derive to:
+Provide, maintain, and improve the Services, including to develop and train our AI models / large language models that power our Services. You may opt out of model training in your Account settings page;
+Develop new products and services;
+Personalize your experience with us;
+Send you technical notices, security alerts, support messages, and other transactional or relationship messages;
+Send you marketing communications (see the Your Choices section below for information about how to opt out of these communications at any time);
+Facilitate contests and promotions and process and deliver rewards;
+Monitor and analyze trends, usage, and activities in connection with our products and services;
+Detect, investigate, respond to, prosecute, and help protect against safety or security incidents, violations of our Terms of Service, and other malicious, deceptive, fraudulent, or illegal activity, and help protect the safety, rights, and property of Inflection AI, our users, and others;
+Comply with our legal and financial obligations;
+To carry out any other purpose described to you at the time the information was collected; and
+To create de-identified and aggregate data that cannot reasonably be linked to you.
+If you apply for a job with us, we also use your information to facilitate our recruitment activities and process employment applications. If you are hired, the information we collect in connection with your application will become part of your employment records and be used during the onboarding process and for other employment-related purposes. If you apply for a job with us, we may collect information that is considered “sensitive” under U.S. state privacy laws, but we do not use or disclose this sensitive personal information for the purpose of inferring characteristics about you.
+We do not engage in “sales” or “sharing” of personal information or process personal information for “targeted advertising” purposes as those terms are defined by U.S. state privacy laws.
+Disclosure of Information
+We disclose personal information as described in this Privacy Policy and in the following ways:
+Vendors and Service Providers. We make personal information available to our vendors, service providers, contractors and consultants who perform services on our behalf, such as companies that assist us with web hosting, cloud computing and storage, maintenance, security, content moderation, marketing and advertising, advertising measurement, and customer support.
+Law Enforcement Authorities and Individuals Involved in Legal Proceedings. We disclose personal information in response to a request for information if we believe that disclosure is in accordance with, or required by, any applicable law, regulation, or legal process, including lawful requests by public authorities to meet national security or law enforcement requirements.
+To Protect the Rights of Inflection AI and Others. We may disclose personal information if we believe that your actions are inconsistent with our user agreements or policies, if we believe that you have violated the law, or if we believe it is necessary to protect the rights, property, and safety of Inflection AI, our users, the public, or others.
+Professional Advisors. We disclose personal information to our legal, financial, insurance, and other professional advisors where necessary to obtain advice or otherwise protect and manage our business interests.
+Corporate Transactions. We disclose personal information in connection with, or during negotiations of, certain corporate transactions, including a merger, sale of company assets, financing, or acquisition of all or a portion of our business by another company.
+With Your Consent or at Your Direction. We make personal information available to third parties when we have your consent or you intentionally direct us to do so.
+We also disclose aggregated or de-identified information that cannot reasonably be used to identify you. We maintain and use this information only in a de-identified fashion and will not attempt to re-identify such information, except as permitted by law.
+Data Retention
+We store personal information associated with your account for as long as your account remains active. We store other personal information for as long as necessary to carry out the purposes for which we originally collected and processed it, in accordance with our retention policies, and in accordance with applicable laws and regulatory obligations or until you withdraw your consent (where applicable). To determine the appropriate retention period for personal information, we consider factors such as:
+the amount, nature, and sensitivity of the personal information;
+the potential risk of harm from unauthorized use or disclosure of personal information;
+the purposes for which we use personal information and whether we can achieve those purposes through other means; and
+the applicable legal and regulatory requirements.
+For users of Pi, we generally retain inputs for at most 15 days after user deletion. In some cases, we retain inputs for longer, such as if needed to address fraud and abuse, for security reasons, if we are legally required to, or for financial record-keeping purposes. We retain outputs indefinitely for the limited purposes described in Section 4 of our Terms of Service.
+Your Choices
+Account Information
+You can access, correct, and delete certain information stored within your account at any time by navigating to your profile page on the particular Service.
+Cookies and Similar Tracking Technologies
+Inflection AI uses cookies and similar tracking technologies, as described above. For more information, please read our Cookie Policy .
+Communications Preferences
+You may opt out of receiving promotional emails from Inflection AI by following the instructions in those communications. If you opt out, we may still send you non-promotional emails, such as those about your account. You may opt out of receiving text messages from Pi by replying with STOP to any mobile message sent from us. Please note that this may prevent us from sending one-time codes to your phone and may limit your experience. If you would like to allow these codes but disable all other messages, reply with PAUSE to any mobile message sent from us.
+Precise Location Information
+When you first launch any of our mobile apps that collect precise location information, you will be asked to consent to the app’s collection of this information. If you initially consent to our collection of such location information, you can subsequently stop the collection of this information at any time by changing the preferences on your mobile device.
+Your Rights
+Depending on where you reside, you may have the right to (1) access your personal information, including in a portable format, (2) request deletion or erasure of your personal information, (3) request correction of inaccurate personal information, (4) object to certain processing of your personal information, or (5) request we restrict certain processing. You have the right not to be discriminated against for exercising any of your privacy rights.
+Users of Pi may delete their information at any time within the Service by either (1) navigating to their profile page within the Service, selecting Account, and clicking on the “Delete my account” button; or (2) typing “!delete” within the chat. Users of Pi may also delete individual messages, which will be removed immediately from your conversation history.
+To exercise your other rights, contact us by email at privacy@inflection.ai .
+Appeals and Complaints
+If we deny your rights request, you may appeal our decision by contacting us. If you have concerns about the result of an appeal, or if we are unable to resolve your concerns about our processing of your personal data, you may contact the attorney general in the state where you reside or, if you are in Europe, lodge a complaint with the Data Protection Authority where you reside. If you are in the UK, you also have the right to complain to us directly at privacy@inflection.ai .
+Authorized Agents
+Depending on where you reside, you may designate an authorized agent to submit an access, deletion, or correction request on your behalf. We may ask authorized agents to submit proof of their authority to make a request, such as a valid power of attorney or proof that they have signed permission from the consumer who is the subject of the request. In some cases, we may contact the individual who is the subject of the request to verify their own identity or confirm the authorized agent has permission to submit the request. If you are an authorized agent seeking to make an access, correction, or deletion request on behalf of a consumer, please contact us via email at privacy@inflection.ai .
+Additional Information for Individuals in Europe
+If you reside in Europe, this section applies to you.
+International Transfers
+Inflection AI is based in the United States, and we and our service providers process and store personal information on servers located in the United States and other countries. Whenever we make restricted international transfers of personal information, we take steps to ensure that your personal information receives an adequate level of protection (by putting in place appropriate safeguards, such as contractual clauses) or ensure that we can rely on an appropriate derogation under data protection laws. Where relevant, you may request access to any safeguard which we use to transfer your personal information outside of the European Economic Area, the United Kingdom, or Switzerland (although we may need to redact data transfer agreements for confidentiality reasons).
+Legal Basis for Processing
+The table below sets out the purposes for which we process your information, the type of personal information we process and our legal basis for processing.
+Privacy Policy: Legal Basis for Processing
+Purpose of processing
+Type of personal information processed (the exact information processed will depend on the processing activity)
+Legal basis (depending on the processing activity)
+To provide and maintain our Services.
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+Where necessary to perform a contract with you, such as processing inputs to provide a response when you interact with our Services or to provide a personalised experience.
+Your consent when we ask for it to process your personal information for a specific purpose (that we communicate to you, such as precise location).
+To improve and develop our Services, including to develop and train our AI models / large language models that power our Services and develop new products and services.
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+Where necessary for our legitimate interests and those of third parties and broader society, including in developing, improving, or promoting our Services, such as when we develop and train our models.
+To communicate with you about our Services, such as to send you technical notices, security alerts, support messages, and other transactional or relationship messages or to send you marketing communications.
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+Where necessary to perform a contract with you, such as processing your contact information to send you a technical announcement about the Services.
+In our legitimate interests to use personal information to respond to your requests, provide customer support, and communicate with you about our Services, including by sending announcements, surveys, reminders, updates and support and administrative messages.
+Your consent when we ask for it to process your personal information for a specific purpose that we communicate to you, such as processing your contact information to send you certain forms of marketing communications.
+To monitor and analyze trends, usage, and activities in connection with our products and services
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+In our legitimate interests to monitor and analyze our Services for business purposes.
+To protect our Services, such as to detect, investigate, respond to, prosecute, and help protect against security incidents and other malicious, deceptive, fraudulent, or illegal activity, and help protect the rights and property of Inflection AI and others.
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+Where necessary to comply with a legal obligation. It is in our legitimate interests and those of third parties to improve and keep our Services, including in protecting our Services from abuse, fraud, or security risks, such as processing data from security partners to protect against fraud, abuse and security threats in our Services.
+To comply with legal and financial obligations.
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+Where necessary to comply with a legal obligation, such as retaining transaction information to comply with record-keeping obligations.
+Where we are not under a specific legal obligation, where necessary for our legitimate interests and those of third parties and broader society, including in protecting our, your or others' rights, privacy safety, and property or to prevent, identify, investigate and deter fraudulent or harmful activity.
+To create de-identified and/or aggregate data.
+Information You Provide to Us
+Device, Usage, and Activity
+Information
+Cookies and Similar
+Technologies
+Information We Collect from
+Other Sources
+Information We Derive
+In our legitimate interest to de-identify or aggregate information in order to generate other data that we may use for purposes such as service or product improvement or general business reporting purposes.
+EEA and UK Representative
+EEA and UK
+Representative
+For users in the EEA, we have appointed DataRep, at 77 Camden Street Lower, Dublin, D02 XE80, Ireland, as our EU data representative, and DataRep, at 107-111 Fleet Street, London, EC4A 2AB, United Kingdom as our UK data representative. You can contact DataRep by mailing DataRep at one of the above addresses, emailing inflectionai@datarep.com , or alternatively through the DataRep webform .
+Contact Us
+If you have questions about this Privacy Policy, please contact us at privacy@inflection.ai . You can also contact our data protection officer at privacy@inflection.ai .
+© 2026 Inflection AI
+Product
+Pi
+Labs
+Support
+Company
+About Inflection AI
+Careers
+Blog
+Terms & Policies
+Terms of Service
+Privacy Policy
+Cookie Policy
+Transparency & Content Moderation
+Crisis Prevention & Safety Protocol
+Model Training Notice
+Training Data Transparency Notice
+EU Digital Services Act Notice
+Cookie Settings
+© 2026 Inflection AI
+Product
+Pi
+Labs
+Support
+Company
+About Inflection AI
+Careers
+Blog
+Terms & Policies
+Terms of Service
+Privacy Policy
+Cookie Policy
+Transparency & Content Moderation
+Crisis Prevention & Safety Protocol
+Model Training Notice
+Training Data Transparency Notice
+EU Digital Services Act Notice
+Cookie Settings
+© 2026 Inflection AI
+Product
+Pi
+Labs
+Support
+Company
+About Inflection AI
+Careers
+Blog
+Terms & Policies
+Terms of Service
+Privacy Policy
+Cookie Policy
+Transparency & Content Moderation
+Crisis Prevention & Safety Protocol
+Model Training Notice
+Training Data Transparency Notice
+EU Digital Services Act Notice

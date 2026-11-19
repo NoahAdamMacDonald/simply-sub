@@ -1,0 +1,103 @@
+url: https://bugbounty.meta.com/
+method: browser
+saved: 2026-11-17
+
+Skip to main content
+Meta Bug Bounty
+Tools
+Leaderboard
+Learn
+Blog
+Submit a report
+Meta Bug Bounty
+If you believe you have found a security vulnerability on Meta (or another member of the Meta family of companies), we encourage you to let us know right away.
+Submit a report
+Bug Bounty rewards
+All listed amounts are without bonuses. With Hacker Plus, and any applicable bonuses, you can earn up to 30% of the original bounty amount on top of it!
+We pay based on maximum security impact found internally, and our highest payouts reflect that.
+Learn more
+Total rewards for 2026
+$7,418,449
+7418449
+Total rewards to date
+$33,425,590
+33425590
+$300K*
+Mobile RCE
+WhatsApp Private Processing
+Muse VM Escape
+$130K*
+Account
+Takeover
+$30K*
+Quest Persistent full secure boot bypass
+$20K*
+2FA Bypass
+$10K*
+Contact point deanonymization
+$5K*
+Page admin disclosure
+$500*
+Minimum bounty
+Please keep in mind that this graphic is only an overview with maximum payouts per category listed. For more details about rewards, see our payout guidelines. All payout values are in USD.
+Program scope
+To be eligible for a bounty, you can report a security bug in one or more of the following Meta technologies:
+Facebook
+Messenger
+Instagram
+WhatsApp
+Workplace
+Meta Quest
+Ray-Ban Stories
+Muse
+Meta AI
+Open source
+View scope examples
+Our latest event
+0:00 / 0:00
+Transcript
+MBBRC 2026 brought top researchers together in Taipei, Taiwan. Want to be part of the next event? Join Meta Bug Bounty’s Hacker Plus program for a chance to qualify.
+Learn more about Hacker Plus
+Learn more
+Payout guidelines
+Hacker Plus benefits
+Data abuse
+Meta Bug Bounty
+Meta Bug Bounty overview
+Leaderboards
+Program scope
+Program terms
+Report anonymously
+Hacker Plus benefits
+Hacker Plus terms
+Bug Bounty blog
+Program tools
+SSRF validator
+Test accounts
+FBDL
+Access token debugger
+Graph API explorer
+Payout guidelines
+Payout guidelines overview
+Mobile remote code execution
+Account take-over
+Meta hardware devices
+Server side request forgery (SSRF)
+Platform privacy assertions
+2FA bypass
+Contact point deanonymization
+Page admin disclosure
+Cross-site leaks
+Data Abuse program
+Data Abuse program overview
+Data Abuse terms
+Report abuse
+Manage reports
+Site terms and policies
+Privacy policy
+Terms
+Cookie policy
+English (US)
+Legal
+* All payout amounts are in USD
+©2025 Meta.

@@ -1,0 +1,72 @@
+url: https://help.mistral.ai/en/articles/347619-how-can-i-delete-my-account
+method: browser
+saved: 2026-11-17
+
+Skip to main content
+English
+Français
+Italiano
+English
+Search
+Ctrl K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+Data Governance
+How can I control or delete data connected to third-party tools?
+As an admin on Team plan or Enterprise, do I have company-wide controls?
+How do you ensure the security of user data?
+Can I opt out of my input or output data being used for training?
+How do you handle my data when using the Memories feature?
+Who owns input and output in Vibe and Mistral’s APIs?
+Where do you store my data or my Organization's data?
+How long do you store my data?
+How does Mistral ensure that my data remains encrypted and secure in transit and at rest?
+How do you use submitted feedback?
+How do I export my data from Vibe?
+How can I manage my cookie settings?
+How can I delete my account?
+Do you use my user data to train your Artificial Intelligence models?
+Do you use cookies at Mistral and why?
+Do you sell or share my data for marketing?
+Can I delete a chat conversation?
+Can I activate Zero Data Retention (ZDR)?
+Ethical and Safe Use
+Regulatory Compliance and Certification
+About our Models
+All Collections
+Trust, Security, Compliance
+Data Governance
+How can I delete my account?
+How can I delete my account?
+August 12, 2026
+You can delete your Vibe account at any time by:
+Navigate to the Admin panel
+Go to the account page of the Admin panel.
+Click on the Delete account button under the Danger Zone section
+​
+Click on the Delete account button under the Danger Zone section
+​
+3. **Enter your email account** in full text to prevent you from deleting an account by mistake 4. **Click on** `Delete account` to confirm your account deletion
+​
+Click on Delete account to confirm your account deletion
+​
+🚨 Account deletion is definitive: deleted accounts can’t be recovered in any way.
+🔑 In the specific case where you are using a paid version of Vibe, you must pay all outstanding fees prior to the termination of your account, including any unpaid invoices and other charges incurred up to the termination date.
+Did this answer your question?
+Disappointed Reaction
+Neutral Reaction
+Smiley Reaction
+Related Articles
+Can I activate Zero Data Retention (ZDR)?
+How do you handle my data when using the Memories feature?
+How do I update my account information (email, password, and 2FA)?
+Can I opt out of my input or output data being used for training?
+How can I control or delete data connected to third-party tools?
+On this page
+Navigate to the Admin panel
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

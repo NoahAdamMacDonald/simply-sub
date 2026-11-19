@@ -1,0 +1,73 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): the Meta Terms of Service (Facebook's terms, which the Meta AIs Terms
+# of Service bind every Meta AI user to: "By using AIs, you agree to be bound by these Terms, the Meta Terms of Service, and
+# any other applicable terms and policies."), rated once here for Meta AI and, when they join the catalog, Facebook and the
+# other Meta Products it covers. Each provider names it in its policies' shared and adds ratings from its own terms (Meta
+# AI's: the Meta AIs Terms of Service and the Meta Subscription Terms of Service). Instagram and WhatsApp have terms of
+# their own.
+# Read 2026-11-17 (the full catalog run, AI batch 2) with Edge from Canada: "Effective December 10, 2025". Its disputes
+# clause sends a consumer's claims to the courts of the country they live in; whether its US version says the same wasn't
+# read through a US exit (notes.md).
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: meta-terms
+name: Meta's Terms of Service
+links:
+  - name: 'Terms of service'
+    url: https://www.facebook.com/terms/
+ratings:
+  - topic: legal.disputes
+    tier: great
+    reason: "As a consumer, you can take Meta to a court in your own country, under your country's laws. There's no private referee (arbitration)."
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'If you are a consumer, or where required by applicable law, the laws of the country in which you reside will apply to any claim, cause of action, or dispute you have against us that arises out of or relates to these Terms or the Meta Products, and you may resolve your claim in any competent court in that country that has jurisdiction over the claim.'
+    lastVerified: 2026-11-17
+  - topic: legal.terms-changes
+    tier: good
+    reason: 'It tells you by email or in its apps at least 30 days before its terms change. If you disagree, you can delete your account.'
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'We will notify you (for example, by email or through our Products) at least 30 days before we make changes to these Terms and give you an opportunity to review them before they go into effect, unless changes are required by law.'
+      - url: https://www.facebook.com/terms/
+        quote: 'if you do not agree to our updated Terms, or wish to terminate your agreement to this contract, you can delete your account at any time'
+    lastVerified: 2026-11-17
+  - topic: legal.account-closure
+    tier: good
+    reason: 'It closes or suspends an account only when it decides you clearly, seriously or again and again broke its rules, and it tells you and explains how to ask for a review.'
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'If we determine, in our discretion, that you have clearly, seriously or repeatedly breached our Terms or Policies, including in particular the Community Standards, we may suspend or permanently disable your access to Meta Company Products, and we may permanently disable or delete your account.'
+      - url: https://www.facebook.com/terms/
+        quote: 'Where we take such action we’ll let you know and explain any options you have to request a review'
+    lastVerified: 2026-11-17
+  - topic: legal.inactivity
+    tier: poor
+    reason: 'It may close an account no one has used for a long time, without saying how long or that it warns you first.'
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'We may disable or delete your account if after registration your account is not confirmed, your account is unused and remains inactive for an extended period of time'
+    lastVerified: 2026-11-17
+  - topic: legal.content-rights
+    tier: neutral
+    reason: 'What you share stays yours, but you give Meta a broad, worldwide licence to use, copy, change and share it to run and improve its products, until it is fully deleted.'
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'you grant us a non-exclusive, transferable, sub-licensable, royalty-free, and worldwide license to host, use, distribute, modify, run, copy, publicly perform or display, translate, and create derivative works of your content (consistent with your privacy and application settings).'
+      - url: https://www.facebook.com/terms/
+        quote: 'This is solely for the purposes of providing and improving our Products and services as described in Section 1 above.'
+      - url: https://www.facebook.com/terms/
+        quote: 'In each of the above cases, this license will continue until the content has been fully deleted.'
+    lastVerified: 2026-11-17
+  - topic: legal.licence
+    tier: good
+    reason: "You need Meta's permission to take its apps apart or copy their code, unless the law lets you. Its terms set no other limit on using them."
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'You must obtain our written permission (or permission under an open source license) to modify, translate, create derivative works of, decompile, or reverse engineer our products or their components, or otherwise attempt to extract source code from us, unless an exception or limitation applies under applicable law'
+    lastVerified: 2026-11-17
+  - topic: service.software-control
+    tier: good
+    reason: "Its apps may update themselves when a new version is out. Its terms don't say they change anything else on your device."
+    sources:
+      - url: https://www.facebook.com/terms/
+        quote: 'If you download or use our software, you give us permission to download and install updates to the software where available.'
+    lastVerified: 2026-11-17

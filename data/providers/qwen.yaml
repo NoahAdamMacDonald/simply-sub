@@ -1,0 +1,347 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada: chat.qwen.ai (its home,
+# sign-up and log-in pages, and the app's settings data the page loads), qwen.ai's home, download, language menu,
+# Service Agreement, Privacy Policy, Use Policy, Cookies Notice and Training Data Summary, Alibaba Group's own pages
+# about Qwen and its investor news (alibabagroup.com), and QwenWork's pages on alibabacloud.com; chat.qwen.ai's sign-up
+# page and settings data again through a US exit. Pages, each quoted where it's used:
+# Pricing: none to read. "Qwen is an AI assistant for everyone, powered by the Qwen series models. It’s free to use,
+# open to all, and ready to help with creativity, collaboration, and endless possibilities." (qwen.ai/qwenchat). Its
+# Service Agreement has a section on "Subscriptions, Plans, and Fees" (Stripe, Apple and Google billing), but no page
+# sells a plan: there's no pricing page (chat.qwen.ai/pricing and qwen.ai/pricing open the chat and the home page), and
+# the settings data chat.qwen.ai loads says "enable_subscription":false from Canada and through a US exit. Its API
+# (Alibaba Cloud Model Studio) is billed by use: out. QwenWork, Alibaba's workplace agent with personal Plus and Pro
+# plans, is a product of its own on alibabacloud.com, with its own account linked to an Alibaba Cloud account, so it
+# isn't one of this file's plans (notes.md).
+# Where it's sold (2026-11-17): no page lists countries. Its Service Agreement: "We do not guarantee that the Services are
+# available, or will continue to be available, in any particular jurisdiction." Its sign-up page, read from Canada and
+# through a US exit, takes "an email address that can receive verification codes" or a Google, GitHub or Apple account:
+# offered in Canada and the US, free everywhere it's offered, so one price of 0 for everywhere (GLOBAL), as Claude's and
+# Perplexity's free plans.
+# Ways to pay: none (nothing is sold), so no paymentMethods and no renewal day.
+# Bundles: none. Official resellers: none (nothing to resell).
+# Not on the pages: projects, MCP servers and other apps (chat.qwen.ai's settings data names "enable_project" and "mcp",
+# but no page offers them, notes.md); a help centre (its privacy policy names one "in the App or Website", which needs an
+# account).
+
+id: qwen
+name: Qwen
+website: https://qwen.ai
+category: ai
+spendCategory: software
+# Nothing to cancel: its privacy policy explains deleting your account from its settings.
+cancelUrl: https://qwen.ai/privacypolicy
+sources: { pricing: https://qwen.ai/qwenchat }
+notes: Free, with no paid plan. Its API is billed by use and isn't listed.
+
+# Owner (M11.2), read 2026-11-17: Alibaba Group's own news page about the Qwen App (its parent's page, with its site in
+# website); its corporate FAQ for the country, and its investor news for its listings. Qwen's own terms are with "Nth
+# Power Global Tech Singapore Pte. Ltd. (a company incorporated under the laws of Singapore", the company that runs the
+# service outside China; no page read says how it's related to Alibaba beyond its footer's "Powered by Alibaba Cloud"
+# (notes.md). No page read names a majority holder.
+owner:
+  name: 'Alibaba Group Holding Limited'
+  website: https://www.alibabagroup.com
+  page:
+    name: 'Alibaba’s Qwen App Advances Agentic AI Strategy by Turning Core Ecosystem Services into Executable AI Capabilities'
+    url: https://www.alibabagroup.com/en-US/document-1948497434959151104
+  quotes:
+    - 'Alibaba today announced a major upgrade to its flagship consumer-facing AI application, Qwen App'
+  country:
+    code: CN
+    page:
+      name: 'FAQs: corporate information'
+      url: https://www.alibabagroup.com/en-US/faqs-corporate-information
+    quotes:
+      - 'The principal executive offices of our main operations are located at 969 West Wen Yi Road, Yuhang District, Hangzhou, China.'
+    lastVerified: 2026-11-17
+  stock:
+    listings:
+      - { exchange: NYSE, symbol: BABA }
+      - { exchange: HKEX, symbol: '9988' }
+    page:
+      name: 'Alibaba Group Will Announce September Quarter 2026 Results on November 19, 2026'
+      url: https://www.alibabagroup.com/en-US/document-2054756418245885952
+    quotes:
+      - 'Alibaba Group Holding Limited (NYSE: BABA and HKEX: 9988 (HKD Counter) and 89988 (RMB Counter), “Alibaba” or “Alibaba Group”)'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# AI features (the AI category's registry), read 2026-11-17 on qwen.ai and in its policies:
+# - Web search, reasoning, deep research, image and video generation: qwen.ai's "Search", "Deep Research", "Image
+#   Generation" and "Video Generation" ("Deep Research is an intelligent agent system that leverages the vast amount of
+#   information available on the internet to perform multi-step searches and analytical summaries for complex tasks.");
+#   "By spending extra time analyzing and reasoning through complex questions, Qwen excels in reasoning and cognitive
+#   tasks" and "Ask Qwen to create images and videos using a simple prompt or detailed paragraph." (Qwen Overview).
+# - Voice: "Chat on the go, have voice conversations, and ask about photos." (Download Qwen, For Mobile).
+# - Memory: "retaining specific details from your conversations through the Memory feature" (its privacy policy).
+# - Chats kept on its servers: "We use the cloud infrastructure and hosting services of Alibaba Cloud (Singapore) Private
+#   Limited to store and process user input data, account data, and other data" (its privacy policy).
+# - Its Web Dev and Artifacts build web pages in the chat ("Qwen Artifacts enables users to effortlessly create,
+#   reference, and update dynamic HTML content and SVG images in conversations"): code in a chat, not a coding agent.
+# - None of these pages offers projects, connections to other apps, using a browser or computer for you, code completion,
+#   or other companies' models (Qwen's own: Qwen3.7-Plus is the chat's default).
+# General features, read 2026-11-17: "Try Qwen Web iOS Android macOS Windows" (qwen.ai's footer) and "For Desktop Chat
+# about email, screenshots, files, and anything on your screen. macOS Windows" (Download Qwen). Sign-in: "Login with
+# verification code" by email, "Log in with a password", and "Continue with Google", "Continue with GitHub" or "Continue
+# with Apple" (chat.qwen.ai's log-in page). App languages: qwen.ai's language menu (English, 简体中文, 繁體中文, Français,
+# Deutsch, Italiano, Español, Português, 日本語, 한국어, हिन्दी, العربية and 55 more). Support: "If you have any questions
+# about the service, please contact us at feedback@qwen.com." (its Service Agreement). No pause (nothing to pause), no
+# parental controls ("Our services are intended for users aged 18 and older and are not suitable for minors under 18.").
+features:
+  platforms: [web, ios, android, macos, windows]
+  account.sign-in: [email-code, password, sso]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, hi, ar]
+  support.channels: [email]
+
+plans:
+  - id: qwen.free
+    name: Free
+    link: https://chat.qwen.ai/
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.deep-research: true
+      ai.voice: true
+      ai.memory: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.chat-storage: cloud
+    notes: 'Free chat with Alibaba’s Qwen models, with web search, thinking, Deep Research, image and video generation, voice conversations in its apps, and memory. No paid plan; its API is billed by use.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://qwen.ai/qwenchat
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge: the sign-up page's "By
+# continuing, you agree to our Terms of Service and Privacy Policy." (its links open qwen.ai/termsservice and
+# qwen.ai/privacypolicy); the Service Agreement includes its Use Policy ("You must also comply with the Use Policy when
+# using the Services": conduct rules, no topic worse than the agreement's) and "terms of use for certain service
+# modules", none of which a signed-out page shows; its privacy policy names its Cookies Notice. Its Training Data
+# Summary describes its models' public training data (no topic). No billing topic applies: nothing is sold.
+policies:
+  links:
+    - name: Service agreement
+      url: https://qwen.ai/termsservice
+    - name: Privacy policy
+      url: https://qwen.ai/privacypolicy
+    - name: Cookies notice
+      url: https://qwen.ai/cookies-notice
+    - name: Sign-up page
+      url: https://chat.qwen.ai/auth?mode=register
+    - name: Cookie banner (Qwen Chat)
+      url: https://chat.qwen.ai/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records the features you use, what you look at and what you do, to study how Qwen is used and improve it. You can only turn off its website’s analytics cookies, browser by browser. (Training is graded under AI training.)'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Usage data: We may collect usage log information about your use of our services, including the specific Qwen features you browse and use, the types of content you view or engage with, the actions you take, your time zone, country, access dates and times, device type, and network connection information.'
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Product improvement and technological innovation: to analyze how Qwen services are used, conduct research, develop and test new features, and continuously optimize Qwen’s various features and user experience.'
+        - url: https://qwen.ai/cookies-notice
+          quote: "Cookie settings are device- and browser-specific, so you will need to set cookie preferences for each device's browser."
+      action:
+        name: 'Its cookies notice'
+        url: https://qwen.ai/cookies-notice
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares information about your device with ad and analytics companies to show Qwen’s ads on other sites, and its cookies share your browsing with advertisers. You can only say no browser by browser.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Advertising and Analytics Partners: Subject to legal requirements, we may share some automatically collected device information with advertising and analytics partners that assist in promoting Qwen services, so that relevant ads can be displayed on third-party platforms and the effectiveness and reach of marketing campaigns can be evaluated.'
+        - url: https://qwen.ai/cookies-notice
+          quote: 'We will keep track of your browsing activities and share data with advertisers so as to provide targeted advertisements to you.'
+        - url: https://qwen.ai/cookies-notice
+          quote: "Cookie settings are device- and browser-specific, so you will need to set cookie preferences for each device's browser."
+      action:
+        name: 'Its cookies notice'
+        url: https://qwen.ai/cookies-notice
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its website’s marketing cookies track your browsing to show you ads picked for you. You can keep only the necessary cookies, but that choice is per browser.'
+      sources:
+        - url: https://qwen.ai/cookies-notice
+          quote: 'These cookies are used to deliver personalized advertisements relevant to your interests and measure the effectiveness of our advertisements.'
+        - url: https://chat.qwen.ai/
+          quote: 'You can accept all, keep only necessary cookies, or manage your setting.'
+        - url: https://qwen.ai/cookies-notice
+          quote: "Cookie settings are device- and browser-specific, so you will need to set cookie preferences for each device's browser."
+      action:
+        name: 'Its cookies notice'
+        url: https://qwen.ai/cookies-notice
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: poor
+      reason: 'What you write can train its AI, with what identifies you removed, unless you email it to stop. Feedback you give still trains it after that.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'We may use content to provide, maintain, and improve the Services and to develop other products and Services, including to train models.'
+        - url: https://qwen.ai/termsservice
+          quote: 'You may opt out of model training by notifying us at privacy@qwen.com. After you opt out, we will no longer use your content for model training, but feedback you provide regarding content will still be used for model training.'
+      action:
+        name: 'How to opt out of training (its terms)'
+        url: https://qwen.ai/termsservice
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Your data is encrypted when sent and stored, and staff read what you send only for security, fraud, fixing problems or the law. (Training is graded under AI training.)'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Unless necessary for security, fraud/abuse prevention, debugging, or compliance with applicable laws and regulations, we will not manually review the input content you submit.'
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Specific measures include encrypting your personal data in transit and at rest'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it decides it needs it, sometimes after you delete your account, and gives no set periods.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'We retain your personal data only for as long as necessary to provide services to you and fulfill the purposes described in this policy.'
+        - url: https://qwen.ai/privacypolicy
+          quote: 'In certain circumstances, we may need to continue retaining your personal data after your account has been deleted.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account yourself in its settings, or ask it to delete your data, but it doesn’t say how quickly it’s gone.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Right to erasure: You may request the deletion of your personal data, subject to certain legal exceptions. Currently, you may choose to delete your account yourself from the Qwen Settings page.'
+      action:
+        name: 'How to delete your data (its privacy policy)'
+        url: https://qwen.ai/privacypolicy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can ask by email for a copy of your data in a common, machine-readable format, where the law gives you that right.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Data portability: If required by applicable law and technically feasible, you may have the right to request that we provide your personal data in a structured, commonly used, and machine-readable format.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://qwen.ai/privacypolicy
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information for legally binding demands such as subpoenas, court orders or search warrants, or to protect people’s safety. It doesn’t say it tells you, or publish how often.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Complying with applicable laws, regulations, or legally binding processes, such as subpoenas, court orders, or search warrants;'
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Protecting the safety, rights, or property of the company, users, or the public;'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is collected, stored and processed in Singapore, whose laws may protect it differently from yours. For Europeans it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'We collect, process, and store your personal data in Singapore, whose data protection laws may differ from those in your jurisdiction.'
+        - url: https://qwen.ai/privacypolicy
+          quote: 'We rely on Standard Contractual Clauses to transfer information to certain affiliates and third parties located in countries that have not received an adequacy decision.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a code sent to it, or a Google, GitHub or Apple account. It doesn’t say whether an email alias is fine.'
+      sources:
+        - url: https://chat.qwen.ai/auth?mode=register
+          quote: 'Enter an email address that can receive verification codes'
+        - url: https://qwen.ai/privacypolicy
+          quote: 'When you register for a Qwen account or otherwise need to provide us with personal data (for example, to receive service information), we may collect account data such as your name, email address, nickname, and profile picture.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'Disputes go to a private referee (arbitration) in Singapore, not a court, unless your own country’s consumer law lets you choose. Its terms don’t ban class actions.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'it shall be submitted to and finally resolved by arbitration at the Singapore International Arbitration Centre (SIAC) in accordance with its arbitration rules in effect at the time'
+        - url: https://qwen.ai/termsservice
+          quote: 'If applicable law grants consumers a right to choose a dispute resolution method, a right of withdrawal, or other statutory rights (for example, the option to seek relief from a court or competent authority in their place of residence, or to withdraw from a pre-agreed arbitration arrangement), you may exercise such rights in accordance with the law'
+      action:
+        name: 'Its dispute rules (Service Agreement, XI)'
+        url: https://qwen.ai/termsservice
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It tries to tell you by email or in the app about changes that hurt you, without saying how far ahead. If you keep using Qwen after they start, you’ve agreed to them.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'For changes to the Terms that materially adversely affect you, we will use commercially reasonable efforts to notify you by email or through in-product notifications in Qwen products.'
+        - url: https://qwen.ai/termsservice
+          quote: 'Your continued access to or use of the Services after the effective date of the new Agreement constitutes your acceptance of the new Agreement.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend or delete your account without warning if it decides you broke its rules, the law requires it, or you put others at risk. You can appeal by email.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'We reserve the right to suspend or terminate your access to the Service, or delete your account, without prior notice, if we determine at our sole discretion that any of the following has occurred:'
+        - url: https://qwen.ai/termsservice
+          quote: 'Appeals. If you believe your account was suspended or terminated in error, you may submit an appeal by contacting feedback@qwen.com.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'What you type stays yours, but it may use it to run and improve Qwen and to build other products. (Training is graded under AI training.)'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'The intellectual property rights and/or related rights and interests in content you input through the Services belong to you or the original rights holder.'
+        - url: https://qwen.ai/termsservice
+          quote: 'We may use content to provide, maintain, and improve the Services and to develop other products and Services, including to train models.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What Qwen makes for you is yours, though others may get similar answers.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'With respect to “Output,” as between you and the Company, we assign to you any rights, title, and interest, if any, in the content output by the Services.'
+        - url: https://qwen.ai/termsservice
+          quote: 'Due to the nature of artificial intelligence, output content may not be unique, and different users may receive similar outputs from our Service.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It may stop offering Qwen, and says it will tell you if it does.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'We may decide to suspend the provision of the Services. In the event of such discontinuation, we will provide you with notice.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages: [https://qwen.ai/termsservice, https://qwen.ai/privacypolicy]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use Qwen for private, non-commercial use only, and may not take it apart unless the law lets you.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'The Services are for private and non-commercial use only.'
+        - url: https://qwen.ai/termsservice
+          quote: 'Attempting to reverse engineer, decompile, or seek the source code or underlying components of our Service (including our algorithms or systems), or assisting others in doing so (unless such restrictions are prohibited by applicable law).'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only describes its own security measures, like encryption and following industry frameworks; it names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://qwen.ai/privacypolicy
+          quote: 'Specific measures include encrypting your personal data in transit and at rest; developing and implementing an information security program in accordance with standard industry frameworks; deploying advanced malware protection measures; and implementing other reasonable security safeguards, including vulnerability management, access management, and recovery and resilience measures.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'You shall not share your account credentials or make your account available to others, and you shall be responsible for all activities that occur under your account.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps get updates from it now and then. Its terms don’t say they change anything else on your device.'
+      sources:
+        - url: https://qwen.ai/termsservice
+          quote: 'In order to improve user experience and enhance Service offerings, we will continuously strive to develop new Services and periodically provide you with software updates (which may take the form of software replacement, modification, feature enhancement, version upgrades, etc.).'
+      lastVerified: 2026-11-17

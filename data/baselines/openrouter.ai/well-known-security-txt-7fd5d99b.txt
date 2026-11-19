@@ -1,0 +1,14 @@
+url: https://openrouter.ai/.well-known/security.txt
+method: fetch
+saved: 2026-11-17
+
+# OpenRouter Security PGP fingerprint: 4F7CF49931332BCDCE63528E5182D3BBADD5C390
+#
+# OpenRouter runs a private bug bounty program on HackerOne.
+# Send vulnerability reports to the Contact address below.
+# If we confirm your report is a real, high-impact issue, we will invite you to the program.
+Contact: mailto:security@openrouter.ai
+Encryption: https://openrouter.ai/pgp-key.txt
+Canonical: https://openrouter.ai/.well-known/security.txt
+Expires: 2027-08-12T00:00:00.000Z
+Preferred-Languages: en

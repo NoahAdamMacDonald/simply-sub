@@ -1,0 +1,330 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada: deepseek.com's home,
+# download, Harness and news pages, chat.deepseek.com's sign-in and sign-up pages, its help centre (static.deepseek.com/faq,
+# every article in Login Issues, User Guide and Chat Issues opened), its API docs' news and Build a Chatbot guide, and
+# its Terms of Use, Privacy Policy, Cookies Policy and Model Mechanism and Training Methods (cdn.deepseek.com, a plain
+# fetch). The sign-up page was read again through a US exit and an Italian exit. Pages, each quoted where it's used:
+# Pricing: none to read. Its chat is free: "The official AI assistant from DeepSeek. Chat with leading AI models for
+# free." (Downloads). Its API is billed by use (api-docs.deepseek.com/quick_start/pricing, "API Pricing"): out, as the
+# category rules say. DeepSeek Harness, its open-source desktop agent ("DeepSeek Harness is now in public preview
+# worldwide and open source"), runs on an API key: "Open Settings → Models, enter a DeepSeek API key, and save it."
+# (Harness quickstart), so it's the usage-billed API's, not the free chat's, and isn't listed.
+# Where it's sold (2026-11-17): no page lists countries. Its terms: "We make no warranty that the Services are available
+# or will continue to be available in certain jurisdictions." Its sign-up page, read from Canada and through a US exit
+# (and an Italian one), says "Only email registration is supported in your region." and takes an email address: offered
+# in Canada and the US, free everywhere it's offered, so one price of 0 for everywhere (GLOBAL), as Claude's and
+# Perplexity's free plans.
+# Ways to pay: none (nothing is sold but the API), so no paymentMethods and no renewal day.
+# Bundles: none. Official resellers: none (nothing to resell).
+# Not on the pages: the app's own interface languages (its settings need an account; its site's picker offers "中文" and
+# "EN"); voice conversations, memory, projects or image generation in the chat (no page offers them).
+
+id: deepseek
+name: DeepSeek
+website: https://www.deepseek.com
+category: ai
+spendCategory: software
+# Nothing to cancel: its help centre's article on deleting your account.
+cancelUrl: https://static.deepseek.com/faq/index.html?lang=en#/question/account-deletion
+sources: { pricing: https://www.deepseek.com/en/download/ }
+notes: Free, with no paid plan. Its API is billed by use and isn't listed.
+
+# Owner (M11.2), read 2026-11-17: its terms name the company that runs it, and its privacy policy where it's registered.
+# Private: no page names a listing or its shareholders.
+owner:
+  name: 'Hangzhou DeepSeek Artificial Intelligence Co., Ltd.'
+  page:
+    name: Terms of use
+    url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+  quotes:
+    - 'DeepSeek products and services are owned and operated by Hangzhou DeepSeek Artificial Intelligence Co., Ltd.'
+  country:
+    code: CN
+    page:
+      name: Privacy policy
+      url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+    quotes:
+      - 'Hangzhou DeepSeek Artificial Intelligence Co., Ltd., with its registered address in China'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# AI features (the AI category's registry), read 2026-11-17: the chat's web search and reasoning from its home page
+# ("DeepThink", "Search"), its terms ("When you enable the "Search" function, the accuracy of the Outputs may be improved
+# to some extent.") and its API guide ("The DeepSeek API offers the same conversation features as DeepSeek Chat on the
+# web and in the app: web search, deep thinking search, file input and URL reading, plus basic risk control for model
+# content safety."); "Try it now at chat.deepseek.com via Expert Mode / Instant Mode." (DeepSeek-V4 Preview). Chats kept
+# on its servers and synced: "☁️ Cross-platform chat history sync" (Introducing DeepSeek App) and its privacy policy's
+# "we directly collect, process and store your Personal Data in People's Republic of China."
+# - Deep thinking search (searching while it reasons) isn't counted as deep research: no page offers a research report
+#   mode (notes.md).
+# - Its privacy policy collects "voice input", and its API guide lists "Read aloud" and "Voice input" for chatbots built
+#   on the API, but no page says the chat holds voice conversations, so ai.voice is left out.
+# - None of these pages offers memory across chats, projects, image or video generation, a coding agent in the chat,
+#   connections to other apps, or other companies' models (its own V4.1 Flash).
+# General features, read 2026-11-17: the web (chat.deepseek.com) and its iOS and Android apps ("Download for iOS",
+# "Download for Android", Downloads; the Windows and macOS downloads there are DeepSeek Harness, which needs an API key).
+# Sign-in: an email address and password, or "Sign in with Google" and "Sign in with Apple" (its sign-in page; "Google
+# login is not supported for IPs in Mainland China.", WeChat only there). App languages: its site's picker ("中文", "EN");
+# the chat's own settings need an account (notes.md). Support: "you can submit them by going to the product interface,
+# checking the avatar, and clicking the "Contact Us" button, or by providing truthful feedback to us through our
+# publicly listed contact email" (its terms), service@deepseek.com. No pause (nothing to pause), no parental controls
+# (its terms ask a minor's legal guardian to consent, nothing more).
+features:
+  platforms: [web, ios, android]
+  account.sign-in: [password, sso]
+  languages.interface: [en, zh]
+  support.channels: [email]
+
+plans:
+  - id: deepseek.free
+    name: Free
+    link: https://chat.deepseek.com/
+    features:
+      ai.assistant: true
+      ai.web-search: true
+      ai.reasoning: true
+      ai.chat-storage: cloud
+    notes: 'Free chat with DeepSeek’s own models (V4.1 Flash), with web search, DeepThink reasoning and file uploads. No paid plan; its API is billed by use.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://www.deepseek.com/en/download/
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17: the sign-up page's line "By signing
+# up, you consent to DeepSeek's Terms of Use and Privacy Policy."; the terms name the privacy policy and the "Model
+# Mechanism and Training Methods of DeepSeek" (how its models are trained: user input "with a small portion potentially
+# based on user input", de-identified, with an opt-out, the same as the privacy policy's AI-training grade), and the
+# privacy policy its Cookies Policy (security and preference cookies only). Its help centre's account, chat and data
+# articles were read for deletion, export and account closure. DeepSeek Harness's own terms and privacy policy
+# (deepseek.com/en/harness/terms-of-use, /privacy, saved) cover the API-key desktop agent, not the free chat, so they
+# aren't rated here. No billing topic applies: nothing is sold.
+policies:
+  links:
+    - name: Terms of use
+      url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+    - name: Privacy policy
+      url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+    - name: Cookies policy
+      url: https://cdn.deepseek.com/policies/en-US/cookies-policy.html
+    - name: Sign-up page
+      url: https://chat.deepseek.com/sign_up
+    - name: Exporting chats
+      url: https://static.deepseek.com/faq/index.html?lang=en#/question/data-export
+    - name: Deleting your account
+      url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-deletion
+    - name: Email domains it accepts
+      url: https://static.deepseek.com/faq/index.html?lang=en#/question/unsupported-email
+    - name: Suspended accounts
+      url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-suspension
+    - name: Home page (security reports)
+      url: https://www.deepseek.com/en/
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'It records the features you use, what you do, crash reports and how you use it across your devices, to study and improve its service, and offers no way to turn that off. (Training is graded under AI training.)'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'We collect Personal Data regarding your use of the Services, such as the features you use and the actions you take.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'We also collect service-related, diagnostic, and performance Personal Data, including crash reports and performance logs.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'Including by monitoring interactions and usage across your devices, analyzing how people are using it, and training and improving our technology.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It shares your data with companies that run the service for it and with its own group, and says it doesn’t sell it or use it for targeted ads.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'Pursuant to our instructions, these parties will access, process, or store Personal Data only in the course of performing their duties to us.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'The Services are supported by certain entities within our corporate group.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'NOTE WE DO NOT ENGAGE IN TARGETED ADVERTISING, “SELL” PERSONAL DATA OR USE PERSONAL DATA FOR “PROFILING”'
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'DeepSeek shows no ads and says it doesn’t target ads at you. Its cookies are for security and remembering your settings.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'NOTE WE DO NOT ENGAGE IN TARGETED ADVERTISING, “SELL” PERSONAL DATA OR USE PERSONAL DATA FOR “PROFILING”'
+        - url: https://cdn.deepseek.com/policies/en-US/cookies-policy.html
+          quote: 'We use cookies to operate and provide the Service. For example, we use cookies for security purposes.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: neutral
+      reason: 'What you type can train its AI unless you turn off “Improve the model for everyone” in its settings. It says it removes what identifies you first.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'we may, to a minimal extent, use Inputs and Outputs to provide, maintain, operate, develop or improve the Services or the underlying technologies supporting the Services.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'If you refuse to allow us to process the data in the manner described above, you can opt out by turning off "Improve the model for everyone".'
+      action:
+        name: 'How to turn off training (its terms, 4.3)'
+        url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Its systems screen what you send for illegal content, to meet the law. (Training on your chats is graded under AI training.)'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'To fulfill legal and compliance requirements, DeepSeek has the right to use technical means to review the behavior of users using the Services, including but not limited to establishing risk filtering mechanisms, and creating databases for illegal content features.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it decides it needs it, and your account and chats as long as you have the account. It gives no deadline for deleting them after you leave.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'We retain Personal Data for as long as necessary to provide our Services and for the other purposes set out in this Privacy Policy.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'For example, when we process your Personal Data to provide you with the Services, we keep this Personal Data for as long as you have an account.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in its settings, and all your chats are then deleted for good. It keeps what the law makes it keep.'
+      sources:
+        - url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-deletion
+          quote: 'Go to 「Settings」 --> 「Account settings」 --> 「Delete Account」.'
+        - url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-deletion
+          quote: 'After deletion, all chat history in the current account will be permanently deleted.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'Retain certain data of the user as required by laws and regulations.'
+      action:
+        name: 'How to delete your account'
+        url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-deletion
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can download your account details and all your chats yourself from its settings on the web, but it doesn’t say what kind of file you get.'
+      sources:
+        - url: https://static.deepseek.com/faq/index.html?lang=en#/question/data-export
+          quote: 'On the web, go to 「Settings」 --> 「Data」 --> 「Export data」.'
+        - url: https://static.deepseek.com/faq/index.html?lang=en#/question/data-export
+          quote: 'The export contains your account information and all chat history.'
+      action:
+        name: 'How to export your chats'
+        url: https://static.deepseek.com/faq/index.html?lang=en#/question/data-export
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may give your data to police or other authorities when it believes the law or a government request calls for it, and it reports users it suspects of breaking the law and helps investigate them. It doesn’t say it tells you.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'We may access, preserve, and share the Personal Data described in “What Personal Data We Collect” with law enforcement agencies, public authorities, copyright holders, or other third parties if we have good faith belief that it is necessary to:'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'comply with applicable law, legal process or government requests, as consistent with internationally recognized standards, in accordance with the due process prescribed by law;'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'For behaviors suspected of violating laws and regulations or involving illegal activities, relevant records will be retained, and reports will be made to the competent authorities in accordance with the law, cooperating with their investigations.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Everything you give it is collected, stored and processed in China. It promises unnamed “appropriate safeguards” only where a law requires them.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: "To provide you with our services, we directly collect, process and store your Personal Data in People's Republic of China."
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+          quote: 'Where required, we will use appropriate safeguards for transferring Personal Data outside of certain countries'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password, or a Google or Apple account. It turns away email addresses on some domains, so a private alias may not work.'
+      sources:
+        - url: https://chat.deepseek.com/sign_up
+          quote: 'Only email registration is supported in your region.'
+        - url: https://static.deepseek.com/faq/index.html?lang=en#/question/unsupported-email
+          quote: 'The email domain you are currently using is not on the support list. We recommend signing up with a major international email provider such as Gmail, Outlook, Hotmail, or Yahoo.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: good
+      reason: 'There’s no arbitration, but disputes go to the courts where DeepSeek is based, in Hangzhou, China, under Chinese law.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: "The establishment, execution, interpretation, and resolution of disputes under these Terms shall be governed by the laws of the People's Republic of China in the mainland."
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'Also either party has the right to file a lawsuit with a court having jurisdiction over the location of the registered office of Hangzhou DeepSeek Artificial Intelligence Co., Ltd.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms by posting them on its website, and if you keep using DeepSeek you’ve accepted them.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'Once announced, it replaces the original terms. Please refer to the latest version of these Terms on the official website.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'Your continued usage of the Service will be considered as your acceptance of the modified terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can limit, suspend or close your account if it judges that you broke its terms or put others at risk. You can appeal with a form.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'In response to your violation of these Terms or other service terms, or your use of our Services could cause risk or harm to DeepSeek, our users, or anyone else, DeepSeek reserves the right to independently judge and take measures against you'
+        - url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-suspension
+          quote: 'If you believe this is an error, please contact us by filling out the「Account Suspension Appeal」form.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'What you type stays yours. It may use it to run, build and improve DeepSeek and the technology behind it. (Training is graded under AI training.)'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'You retain any rights, title, and interests—if any—in the Inputs you submit'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'we may, to a minimal extent, use Inputs and Outputs to provide, maintain, operate, develop or improve the Services or the underlying technologies supporting the Services.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What DeepSeek writes for you is yours to use, even to train other AI, though others may get similar answers.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'We assign any rights, title, and interests—if any—in the Outputs of the Services to you.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'You may apply the Inputs and Outputs of the Services to a wide range of use cases, including personal use, academic research, derivative product development, training other models (such as model distillation), etc., as long as such usage is legal and adhere to these Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can add, change, pause or end features as it develops DeepSeek, and says it will tell you when a change greatly affects your rights.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'we may add, upgrade, modify, suspend, or terminate services, or make necessary adjustments to the technology, methods, and performance of the services'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'If such changes may greatly affect your rights, we will promptly notify you through in-site notifications, website announcements, or via email.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+        - https://cdn.deepseek.com/policies/en-US/deepseek-privacy-policy.html
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: poor
+      reason: 'You may use DeepSeek under a licence it can take back, and may not take it apart or look for its code, with no exception for what the law allows.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'we grant you a revocable, non-transferable, and non-exclusive right to legally use this product and related services.'
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'reverse engineering, reverse assembly, reverse compilation, translation, or attempting to discover the source code, models, algorithms, and system source code or underlying components of the software in any way'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says its security meets industry practice; it names no outside checks. Its site gives an address to report security problems.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'DeepSeek will take necessary measures (not less than industry practices) to ensure the cyber security and stable operation of the Services.'
+        - url: https://www.deepseek.com/en/
+          quote: 'Report Security Issue'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone.'
+      sources:
+        - url: https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html
+          quote: 'Do not transfer, lend, rent, or provide your account to others in any form.'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://cdn.deepseek.com/policies/en-US/deepseek-terms-of-use.html]
+      lastVerified: 2026-11-17

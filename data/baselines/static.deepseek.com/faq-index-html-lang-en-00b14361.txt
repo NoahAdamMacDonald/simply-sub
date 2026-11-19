@@ -1,0 +1,14 @@
+url: https://static.deepseek.com/faq/index.html?lang=en#/question/data-export
+method: browser
+saved: 2026-11-17
+
+Help Center
+Login Issues
+User Guide
+Chat Issues
+API
+Send feedback
+User Guide
+Exporting Chats
+On the web, go to 「Settings」 --> 「Data」 --> 「Export data」.
+The export contains your account information and all chat history. This process may take some time. The download link is valid for 7 days.

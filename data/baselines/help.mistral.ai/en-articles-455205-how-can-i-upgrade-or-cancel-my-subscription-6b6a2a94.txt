@@ -1,0 +1,80 @@
+url: https://help.mistral.ai/en/articles/455205-how-can-i-upgrade-or-cancel-my-subscription
+method: fetch
+saved: 2026-11-17
+
+How can I upgrade or cancel my subscription? | Mistral Help Center Copyright (c) 2023, Intercom, Inc. (legal@intercom.io) with Reserved Font Name "Inter".
+This Font Software is licensed under the SIL Open Font License, Version 1.1.Skip to main content
+English Français Italiano English
+Search⌘K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+About our Models
+All Collections Help and Troubleshooting How can I upgrade or cancel my subscription? How can I upgrade or cancel my subscription?
+August 12, 2026
+📌 You can upgrade or cancel a subscription from the place where you originally subscribed:
+Mistral website: use the Admin panel (see below for details ⬇️).
+iOS / Android app: use the App Store or Google Play. See Manage your subscription on mobile.
+Mobile carrier (Free Mobile, Orange, NJU): manage your subscription directly with the carrier.
+Upgrade your subscription
+You can upgrade your subscription to a higher plan at any time. For example:
+From Free mode to the Pro or Team plan
+From the Pro plan to the Team plan
+To upgrade:
+Open Subscriptions in the Admin panel.
+In the Upgrade to Pro or Upgrade to Team section, select Compare plans.
+Choose the plan and billing frequency that fits your needs.
+Add or confirm your billing information, then complete payment.
+📌 For Pro and Team plans, you can choose between monthly or annual billing. Annual billing includes a 20% discount compared with monthly billing.
+Cancel your subscription
+You can cancel your web subscription at any time.
+To cancel:
+Open Subscriptions in the Admin panel and select the Subscription tab.
+In the Downgrade to Free section, select Unsubscribe.
+Confirm the cancellation.
+After you cancel:
+You receive a confirmation email.
+If you cancel within 14 days of your initial purchase:
+Cancellation is immediate and your plan is now free.
+Your payment may be refunded (see the refund policy for eligibility details).
+If you cancel after the 14-day withdrawal window:
+You keep access to your current plan until the end of the billing period.
+Your organization then switches to Free mode.
+If you change your mind before the billing period ends, select Resume subscription.
+🔑 Using Mistral APIs? Pay-as-you-go is a separate setting from your subscription. To disable pay-as-you-go and return to Free mode, go to the Subscriptions section in the Admin panel.
+FAQ
+Can I subscribe from the mobile app instead?
+Yes. You can subscribe to Pro directly from the iOS or Android app.
+If you subscribed from the mobile app, manage or cancel your subscription from the App Store or Google Play. See How can I manage my subscription on mobile?
+I can’t manage my subscription. What should I do?
+Your account may be managed by your organization’s administrator, for example, if your account was created by your company or school.
+If this is the case, contact your administrator for assistance.
+I can’t find my paid plan after the product was renamed. What should I do?
+Your plan, history, and settings are preserved. Sign in at chat.mistral.ai with the same account and email you used to subscribe.
+If your paid plan is still missing, contact our support team.
+How do I switch between monthly and annual billing?
+If the confirmation button stays inactive because your current plan appears to already be selected, cancel your current subscription first, then resubscribe with the new billing frequency at the end of the period.
+If you subscribed on iOS or Android, change the billing frequency directly in the App Store or Google Play.
+Can I get a refund after canceling?
+Refund eligibility depends on where you subscribed and when you cancel.
+For all refund scenarios (web, App Store, Google Play, mobile carrier, Education plan, or API credits), see Refund policy: eligibility, timing, and how it works.
+I want to delete my account after unsubscribing. What should I do?
+You can delete your account after your paid subscription is no longer active and all outstanding fees are paid.
+For detailed instructions, see How can I delete my account?.
+📩 Need help? Get in touch with our team.
+Did this answer your question? Disappointed Reaction Neutral Reaction Smiley Reaction
+Related Articles
+How do I contact support?
+How can I manage my subscription on mobile (iOS and Android)?
+How can I subscribe to Pro on mobile?
+Refund policy: eligibility, timing, and how it works
+I’m a student or a teacher. Am I eligible for a discount?
+On this page
+Upgrade your subscription
+Cancel your subscription
+FAQ
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

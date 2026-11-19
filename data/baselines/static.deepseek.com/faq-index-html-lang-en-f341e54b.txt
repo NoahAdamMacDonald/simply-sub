@@ -1,0 +1,14 @@
+url: https://static.deepseek.com/faq/index.html?lang=en#/question/account-suspension
+method: browser
+saved: 2026-11-17
+
+Help Center
+Login Issues
+User Guide
+Chat Issues
+API
+Send feedback
+Login Issues
+What should I do if I see「your account has been temporarily suspended」?
+We understand this may be inconvenient. This message indicates that your account has triggered suspension protocols due to potential violations of the platform usage guidelines.
+If you believe this is an error, please contact us by filling out the「Account Suspension Appeal」form. We will carefully review your appeal as soon as possible. Most reviews are completed within 3 business days. Once approved, you can log in and use the service immediately. Thank you for your patience and understanding!

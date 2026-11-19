@@ -1,0 +1,135 @@
+url: https://www.kimi.ai/help/membership/update-rules
+method: fetch
+saved: 2026-11-17
+
+ProductsProducts Products
+Kimi Kimi Work Kimi Code Kimi Browser Extension Downloads
+All products
+Features
+BuildAI app & website builder SlidesAI presentation maker DocsAI document agent SheetsAI spreadsheet agent Deep ResearchAI research agent
+All features
+APIAPI
+Use CasesUse Cases Featured use cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchConduct market researchCreate resumesCreate brochures
+All use cases
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generator
+All capabilities
+Showcases
+WebsitesAgent SwarmDeep ResearchSlidesSheetsDocsDesign
+All showcases
+BusinessBusiness Kimi BusinessBusiness plansContact sales
+ResearchResearch Kimi K3.1 ProKimi K3PerceptionBenchKimi K2.6Agent SwarmWorldVQAKimi K2.5Kimi Vendor VerifierKimi K2 ThinkingKimi K2
+All research
+ResourcesResources Support & docs
+Help centerKimi Code docs
+Academy
+Kimi Work 101Kimi Code 101
+All tutorials
+Articles
+AI agents explainedMulti-agent systemsParallel agentsWhat is vibe codingBuild a landing pageCreate a posterWrite a business proposal
+All articles
+PricingPricing
+DownloadDownload
+Download
+Download Try Kimi
+Getting Started
+Features
+Agent Mode
+Kimi Work
+Plugins & Skills
+Kimi Browser Extension
+Slides
+Docs & Sheets
+Deep Research
+Build
+3D Make
+Membership Membership plans overview
+Credit update & usage rules
+Pricing details
+Account & credit query
+Plan changes
+Extra Usage: pay-as-you-go top-ups
+Cancel subscription
+Payment issues
+Invoices
+Contact us
+Kimi Code
+Kimi API
+Kimi Business
+Kimi Claw
+Kimi Bulletin
+FAQ
+Help Center Membership Credit update & usage rules
+Credit update & usage rules
+All Kimi membership features (Agent, Deep Research, Slides, Docs, Sheets, Kimi Code, Kimi Work, Kimi Claw, etc.) share a single credit pool. Credits are consumed based on actual usage.
+How does the shared credit pool work?
+Kimi membership features share a single credit pool that works everywhere. Agent features and other Kimi features all draw from it:
+Feature Description
+Agent tasks Build, documents, slides, spreadsheets, deep research
+Kimi Code AI-powered coding assistant for developers
+Kimi Work Kimi desktop app
+Kimi Claw Your personal cloud-deployed AI assistant
+Other features Image generation and more
+K2.6: In Chat, K2.6 also consumes membership credits, billed the same way as when it is used as a K2.6 Agent inside Kimi Work.
+Kimi Code: New plans with Kimi Code access (Plus and higher) have a rolling 5-hour usage limit and no weekly limit. Legacy plans retain both rolling 5-hour and weekly limits. These are usage limits, not a cap of five hours of use per week, and apply only to Kimi Code. Exhausting the monthly shared credit pool also affects Kimi Code.
+This means you can allocate credits however you like across the shared pool — spend more on research one month, more on documents the next.
+How are credits calculated?
+Credits are consumed based on the number of tokens a task processes. Longer inputs and outputs use more tokens.
+Usage varies with the model, context length, tool calls, and plan. Check your usage details for actual consumption.
+Credit refresh rules
+Rule Description
+Cycle Monthly and annual subscribers both receive credits on a monthly cycle
+Expiration Unused credits expire at the end of each cycle — they do not roll over or convert to cash
+Kimi Code usage limits Separate from the monthly credit pool; see below. These do not describe task concurrency
+Kimi Code limits for new and legacy plans
+Rule New plans (Plus and higher) Legacy international plans (Moderato and higher)
+Rolling 5-hour usage limit Yes Yes
+Weekly limit No Yes; resets every 7 days from the subscription start time
+Monthly shared credit pool Applies Applies
+A rolling 5-hour limit caps usage within that window; it does not mean you can use Kimi Code for only five hours per week. Check the Kimi Code console for your remaining usage, reset times, and applicable rules. See the official membership guide for details.
+When credits run out
+Any task already in progress will finish normally
+New tasks will show an "insufficient credits" prompt
+Your options:
+Wait for your credits to refresh at the next billing cycle
+Upgrade to a higher-tier plan for a larger monthly allowance
+How exactly do credits refresh?
+Cycle-based — Credits refresh on your subscription anniversary date, not the calendar month
+No rollover — Remaining credits reset to zero, then your full allotment is re-issued
+Example — If you subscribed on December 1 at 3:00 PM, your credits refresh on January 1 at 3:00 PM
+System errors: If a task fails due to a system issue, use the 👎 button to report it and request a credit refund.
+Was this article helpful?
+Yes No
+PreviousMembership plans overviewNext Pricing details
+How does the shared credit pool work?
+How are credits calculated?
+Credit refresh rules
+Kimi Code limits for new and legacy plans
+When credits run out
+How exactly do credits refresh?
+System
+English
+Products
+KimiKimi WorkKimi CodeKimi Browser ExtensionKimi PlatformDownloadsAll products
+Pricing
+IndividualBusinessAPI
+Business
+Kimi BusinessContact sales
+Features
+BuildSlidesDocsSheetsDeep ResearchAll features
+Research
+Kimi K3.1 Pro tech blogKimi K3 tech blogKimi K2.6 tech blogKimi K2.5 tech blogPerceptionBenchAgent SwarmWorldVQAAll research
+Use Cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchCreate brochuresShowcasesAll use cases
+Academy
+Kimi Work 101Kimi Code 101All tutorials
+Support & docs
+Help centerKimi Code docs
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generatorAll capabilities
+Resources
+Help centerAI agents explainedMulti-agent systemsWhat is vibe codingBuild a landing pageCreate a posterAll articles
+Company
+About usMoonshot AIBrand guidelinesCareersTerms of ServicePrivacy PolicyTrust & Safety
+Credit update & usage rules - Kimi Help Center

@@ -1,0 +1,104 @@
+url: https://venice.ai/legal/privacy-policy
+method: fetch
+saved: 2026-11-17
+
+Venice | Privacy Policy
+Ask anything...
+AboutFeatures Token VVVDIEM
+Pricing Resources API + DocsFAQsPrivacyBlogMediaCareersBrand KitChangelogDownloadStatus Page
+Store
+Log inTry Venice
+Privacy Policy
+Effective: 2 June 2026
+This privacy policy (“Privacy Policy”) describes the types of personal data that Venice.ai (“Venice.ai,” “we,” “our,” and/or “us”) collects, uses, and discloses from individuals (“you” or “your”) who use our website at https://venice.ai/ along with our related websites and other services provided by us (collectively, the “Service”).
+As used in this Privacy Policy, “personal data” means any information relating to an identified or identifiable individual and includes any information that constitutes “personally identifiable information,” “personal data,” or “personal information” under applicable privacy or data protection laws or regulations.
+You acknowledge the collection, use, disclosure, procedures, and other processing described in this Privacy Policy. Beyond the Privacy Policy, your use of the Service is also subject to our Terms of Service.
+Personal Data We Collect
+We may collect a variety of personal data from or about you or your devices from various sources, as described below. Where applicable, we indicate whether and why you must provide us with your personal data, as well as the consequences of failing to do so. If you do not provide your personal data when requested, you may not be able to use the full extent of the Service if that personal data is necessary to provide you with the Service or if we are legally required to collect it.
+A. Personal Data You Provide to Us.
+Registration and Account Information.
+No Account Users. Without an account, we collect basic metadata on you, such as time zone, browser type, and IP address. Some of these values are used to prevent abuse of the Service by malicious actors, and some of these values are used to optimize the user experience.
+Free Account Users. When a free account is created, for the purposes of account verification, we collect your email address in addition to the above metadata. If you create a free account with a web3 crypto wallet, we don’t require email (unless you choose to provide it), and we instead record your public key (wallet address) for future verification.
+Third-Party Account Users. If you sign up for the Service using a third-party account (such as Apple, Google, or Discord), we will receive information from those third-party accounts, such as your email and profile image.
+Pro Account Users. If you pay for a Pro account with a credit card, only our payment service provider receives this information, which is not shared with us. If you pay with crypto, we will record your public key that paid.
+Service. We collect the personal data you provide when you use the Service.
+Communications. If you contact us directly, we may receive additional information about you, such as your name, email address, the contents of a message or attachments that you may send to us, and other information you choose to provide. When you communicate with us online, third-party vendors receive and store these communications on our behalf.
+Social Media Information. We have pages on third-party sites like Instagram, Facebook, Medium, Twitter, YouTube and LinkedIn. When you interact with our social media pages, we will collect personal data that you elect to provide to us, such as your contact details.
+Payment Information. If you make a payment on the Service, your payment-related information, such as credit card, crypto, or other financial information, is collected by our third-party payment processor on our behalf.
+Commercial Information. We may collect commercial information such as your transaction history.
+Careers. If you decide that you wish to apply for a job with us, you may submit your contact information and your resume online. We will collect the information you choose to provide on your resume, such as your education and employment experience.
+Other Information You Provide. We collect other information that you may provide to us, such as when you participate in our events or surveys.
+B. Personal Data We Collect When You Use the Service.
+Location Information. We may collect and infer your general location information, including, for example, by collecting and using your internet protocol (IP) address when you visit our website.
+Device Information. We receive information about the device and software you use to access the Service, including IP address, device type, device identifiers, web browser type and version, operating system version, phone carrier and manufacturer, application installations, mobile advertising identifiers, and push notification tokens.
+Usage Information. We automatically receive information about your interactions with the Service, like the pages or other content you view, referrer information (the website you visited before coming to the Service), the dates and times of your visits, the purchases you make, if you signed into the Service, if you created a new chat, and if you deleted a conversation.
+Prompts and Outputs. The Service allows you to submit text, audio, voice recordings, images, documents, and other materials to the Service (“Prompts”), which generate responses based on your Prompts (“Outputs”). We may record your actions (e.g., that you created a chat), but we will not have access to or store the content of your Prompts or Outputs. We will, however, temporarily store any videos you generate until you download them due to file size.
+Likeness Information. The Service enables you to use likeness content for image and video generation with your explicit consent. Such consent will be solicited via a consent prompt at each time of a likeness upload where you will confirm that any images you upload are of yourself, or that you have obtained explicit consent from the depicted individual.
+Storage and Use. We do not store your likeness images, videos, or biometric feature data on our servers. Processing and short-term storage of the image and video is carried out by BytePlus Pte. Ltd. (Singapore), acting solely on our instructions for the specific generation you requested. BytePlus does not use your likeness data for any unrelated purpose, and we do not use your likeness data for any of our own business purposes.
+Information from Cookies and Similar Technologies. We and our third-party partners collect information about your activities on the Service using cookies, pixel tags, SDKs, or other tracking technologies. Our third-party partners, such as analytics, advertising, and security partners, may also use these technologies to collect information about your online activities over time and across different services.
+How We Use the Personal Data We Collect
+We use the personal data we collect:
+To provide, maintain, improve, and enhance the Service;
+To understand and analyze how you use the Service and develop new products, services, features, and functionality;
+To communicate with you, provide you with updates and other information relating to the Service, provide information that you request, respond to comments and questions, and otherwise provide customer support;
+For marketing and advertising purposes, such as developing and providing promotional and advertising materials that may be relevant, valuable or otherwise of interest to you;
+To generate anonymized or aggregate data containing only de-identified, non-personal data that we may use and disclose for any lawful purposes;
+To facilitate transactions and payments;
+To process job applications;
+To find and prevent fraud and abuse, and respond to trust and safety issues that may arise;
+For compliance purposes, including enforcing our Terms of Service or other legal rights, or as may be required by applicable laws and regulations or requested by any judicial process or governmental agency; and
+For other purposes for which we provide specific notice at the time the personal data is collected.
+Legal Bases for Processing European Personal Data
+To the extent required by applicable law, if you are located in the European Economic Area (“EEA”), Switzerland or the United Kingdom (“UK”) (together “Europe”), we only process your personal data when we have a valid legal basis, including as set forth below.
+Consent. You have consented to the use of your personal data. For example, we may process your personal data to send you marketing communications where you have consented to such use.
+Contractual Necessity. We need your personal data to provide you with the Service. For example, we may need to process your personal data to respond to your inquiries or requests.
+Compliance with a Legal Obligation. We have a legal obligation to use your personal data. For example, we may process your personal data to comply with tax, labor and accounting obligations.
+Legitimate Interests. We or a third party may have a legitimate interest in using your personal data. Specifically, we have a legitimate interest in using your personal data for internal analytics purposes, to understand how our users use the Service, and otherwise to improve the safety, security, and performance of the Service. We only rely on our or a third party’s legitimate interests to process your personal data when these interests are not overridden by your rights and interests.
+How We Disclose the Personal Data We Collect
+Model Providers. We operate a zero data retention policy with our model providers in which our model providers are prohibited from storing, retaining, or using any of your Prompts or Outputs beyond the time strictly necessary to process and return a response. Please note that such model providers may receive any information you submit to them in your Prompts. We do not collect or retain your Prompts or Outputs (other than as described in the Prompts and Outputs section above).
+Partners and Affiliates. We may disclose any information we receive to our current or future affiliates for any of the purposes described in this Privacy Policy.
+Vendors and Service Providers. We work with third-party service providers to operate the Service, including for billing, payment processing, invoicing, analyzing data, providing IT-hosting and maintenance, and other services for us. These third parties may have access to or process your personal data as part of providing those services to us.
+Analytics Partners. We use analytics services, such as Google Analytics, to collect and process certain analytics data. You can learn more about Google’s practices by visiting https://www.google.com/policies/privacy/partners/.
+As Required By Law and Similar Disclosures. We may access, preserve, and disclose your personal data if we believe doing so is required or appropriate to:
+Comply with law enforcement requests and legal process, such as a court order or subpoena;
+Respond to your requests;
+Protect your, our, or others’ rights, property, or safety;
+Protect against legal liability; or
+Investigate fraud or other unlawful activity.
+For the avoidance of doubt, the disclosure of your personal data may occur if you post any objectionable content on or through with the Site.
+Merger, Sale, or Other Asset Transfers. We may transfer your personal data to service providers, advisors, potential transactional partners, or other third parties in connection with the consideration, negotiation, or completion of a corporate transaction in which we are acquired by or merged with another company or we sell, liquidate, or transfer all or a portion of our assets.
+Consent. We may also disclose your personal data with your permission.
+Your Rights and Choices
+Likeness Information. You can access, correct, delete, or download a copy of the metadata we hold about your face uploads, and withdraw your consent for face-asset processing, at any time by contacting [email protected].
+Marketing Communications. You can unsubscribe from our promotional emails via the link provided in the emails. Even if you opt out of receiving promotional email messages from us, you will continue to receive administrative messages from us.
+Your European Privacy Rights. To the extent applicable, if you are located in Europe, you have the additional rights described below:
+Access and Portability. You may ask us to provide you with a copy of the personal data we maintain about you, including a machine-readable copy of the personal data that you have provided to us, and request information about its processing.
+Rectification and Deletion. You may ask us to update and correct inaccuracies in your personal data, or to have the information anonymized or deleted, as appropriate.
+Restriction and Objection. You may ask us to restrict the processing of your personal data, or object to such processing.
+Consent Withdrawal. You may withdraw any consent you previously provided to us regarding the processing of your personal data, at any time and free of charge. We will apply your preferences going forward and this will not affect the lawfulness of the processing before you withdrew your consent.
+Complaint. You may lodge a complaint with a supervisory authority, including in your country of residence, place of work, or where an incident took place. We would, however, appreciate the chance to deal with your concerns before you approach a supervisory authority, so please contact us in the first instance.
+You may exercise these rights by contacting us using the contact details as indicated in the “Contact Information” section below. Before fulfilling your request, we may ask you to provide reasonable information to verify your identity. Please note that there are exceptions and limitations to each of these rights, and that while any changes you make will be reflected in active user databases instantly or within a reasonable period of time, we may retain personal data for backups, archiving, prevention of fraud and abuse, analytics, satisfaction of legal obligations, or where we otherwise reasonably believe that we have a legitimate reason to do so, to the extent permitted by applicable law.
+Third Parties
+The Service may contain links to other websites, products, or services that we do not own or operate. We are not responsible for the privacy practices of these third parties. Please be aware that this Privacy Policy does not apply to your activities on these third-party services or any information you disclose to these third parties. We encourage you to read their privacy policies before providing any personal data to them.
+Retention
+Retention. To the extent required by applicable law, we take measures to delete your personal data or keep it in a form that does not permit identifying you when your personal data is no longer necessary for the purposes for which we process it unless we are required by law to keep your personal data for a longer period. When determining the specific retention period, we consider various factors, such as the type of service provided to you, the nature and length of our relationship with you, and mandatory retention periods provided by law and the statute of limitations.
+Retention of Likeness Information. For compliance and audit purposes, we will retain minimal anonymized metadata in the form of a cryptographic hash of the uploaded image or video, the timestamp, your consent record, and an internal asset identifier, linked to your account. This metadata is not biometric data and cannot be used to reconstruct your likeness or biometric identity. We will delete any image or video from our temporary upload storage within 1 hour. BytePlus is instructed to delete any such image or video immediately after your generation completes.
+Security
+We make reasonable efforts to protect your data by using security measures designed to safeguard the data we maintain. However, because no electronic transmission or storage of data can be entirely secure, we can make no guarantees as to the security or privacy of your data.
+Children’s Privacy
+We do not knowingly collect, maintain, or use personal data from children under 13 years of age, and no part of the Service is directed to children. If you learn that a child has provided us with personal data in violation of this Privacy Policy, then you may alert us at [email protected].
+International Transfers
+The Service is hosted in the United States (“U.S.”). If you choose to use the Service from Europe or other regions of the world with laws governing data collection and use that may differ from U.S. law, then please note that your personal data is processed and stored in the U.S. We may also transfer your personal data from the U.S. to other countries or regions in connection with its storage and processing, fulfilling your requests, and operating the Service.
+If you are located in Europe, we will comply with applicable European data protection laws when transferring your personal data outside Europe. We may transfer your personal data to countries which have been found to provide adequate protection by the competent supervisory authorities as appropriate, use contractual protections for the transfer of personal data, transfer to recipients who have adopted Binding Corporate Rules, or rely on an appropriate legal derogation, to the extent necessary to comply with applicable European data protection laws. To the extent applicable, if you are located in Europe, you may contact us as specified below for more information about the safeguards we use to transfer personal data outside of Europe.
+Changes to this Privacy Policy
+We will post any adjustments to the Privacy Policy on this page, and the revised version will be effective when it is posted.
+Contact Information
+Venice.ai is responsible for processing your personal data. If you have any questions, comments, or concerns about our processing activities, please email us at [email protected].
+Private, unrestricted AI for everyone.
+Product
+AboutFeaturesPricingBlog
+Developers
+Venice APIMedia APIAPI DocsGuidesAPI ReferenceStatus
+Legal
+Privacy PolicyTerms of ServiceContact
+© 2026 Venice AI. All rights reserved.

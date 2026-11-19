@@ -1,0 +1,506 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with a plain fetch from Canada (ollama.com:
+# home, pricing, download, support, terms, privacy, sign-up and sign-in pages, its blog; docs.ollama.com as its Markdown
+# copies; its GitHub repository's licence, security policy and app README), the pricing page in Edge from Canada, and
+# ollama.com/pricing through a US, a UK and a German exit. Pages, each quoted where it's used.
+# What it is: free software that runs open models on your own computer ("Ollama runs locally. We don’t see your prompts
+# or data when you run locally.", its privacy policy), with an app for macOS and Windows "to download and chat with
+# models" (Ollama's new app) and a command line for Linux too, plus Ollama's cloud, which runs larger models on its
+# servers ("Cloud models run on Ollama's servers, so they are fast on any computer and need no download.", its download
+# page), paid by the token or with a plan's monthly credits.
+# Pricing: ollama.com/pricing: "Pay as you go" "$0" ("Run models locally", "No subscription", "Pay per token for every
+# cloud model."), Pro "$20 / mo. or $200/yr billed annually", Max "$100 / mo." (monthly only: its card has no yearly
+# price), Team "$500 / mo." and Enterprise (business plans, out). The blog post that launched these plans agrees ("Pro:
+# $20/month, includes $60 of monthly usage", "Max: $100/month, includes $300 of monthly usage"). The $0 card is the
+# Free plan: running models on your computer costs nothing ("Running models on your own hardware is always unlimited.",
+# its FAQ); its cloud use is paid by the token from bought credits, usage-billed and out of scope, so the plan's notes
+# say so. No currency is named anywhere: the page shows a bare "$" from Canada and through a US, a UK and a German exit
+# alike, and its code names none; one price list for everywhere in US dollars, the only dollar it can be (Devin's and
+# Stremio's precedent), flagged for the owner (notes.md). No page says the prices include tax ("You are responsible for
+# all applicable taxes", its terms). Not listed: legacy Pro and Max prices kept by older subscribers ("If you’re on an
+# existing Pro, Max, or Team plan, your plan continues to work as-is.", Ollama's transparent pricing), and extra usage at
+# per-token rates (usage-billed, out).
+# Region checklist, 2026-11-17: 1. ollama.com has no country or locale paths and no hreflang links; 2. no country or
+# currency picker; 3. the pricing page's code names no currency; 4. checkout needs an account (/upgrade sends you to
+# sign in); 5. no help article prices by country; 6. Edge from Canada and a plain fetch, and Edge through a US, UK and
+# German exit, all "$20" and "$200"; 7. no bill offered.
+# Bundles: none found. Official resellers: none: its pages sell Pro and Max only at ollama.com and name no shop. The
+# coding tools it launches (Claude Code, Codex, OpenCode) and the desktop apps it connects to are other companies'.
+# Free use: the Free plan (local models, unlimited, no account needed).
+
+id: ollama
+name: Ollama
+website: https://ollama.com
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its billing settings, which the pricing page links ("Switch any time from your billing settings"); its terms: "To
+# cancel your subscription, visit your account settings or contact us."
+cancelUrl: https://ollama.com/settings/billing
+sources: { pricing: https://ollama.com/pricing }
+notes: 'Runs open models on your own computer for free; its cloud runs larger models on its servers, with a plan’s monthly credits or paid by the token.'
+
+# Ways to pay (M11.5), read 2026-11-17: its terms name only Stripe, which processes its payments; no page names a card,
+# a wallet or any other method (its pricing page, FAQ, billing docs and support page were read; the checkout needs an
+# account). So the one entry is `other`, quoted, and there are no acceptedNetworks (notes.md, for the owner).
+paymentMethods:
+  - methods: [other]
+    page: Terms of service
+    url: https://ollama.com/terms
+    quotes:
+      - 'Payments are processed securely by Stripe'
+
+# Owner (M11.2), read 2026-11-17: its terms and privacy policy name Ollama Inc., which runs the service and is "the data
+# controller". Private: no page names shares or investors. Where it is: its terms name no address; they're governed by
+# California's law and send disputes to arbitration in San Francisco (its careers page, on another company's site, lists
+# jobs in Palo Alto).
+owner:
+  name: 'Ollama Inc.'
+  page:
+    name: Terms of service
+    url: https://ollama.com/terms
+  quotes:
+    - 'These Terms of Service (“Terms”) govern your access to and use of the services provided by Ollama Inc. (“Ollama,” “we,” “us,” or “our”), including our website, software, APIs, and related services (the “Service”).'
+  country:
+    code: US
+    page:
+      name: Terms of service
+      url: https://ollama.com/terms
+    quotes:
+      - 'These Terms are governed by the laws of the State of California, without regard to conflict of law principles.'
+      - 'The arbitration shall take place in San Francisco, California.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Source code (M11.5): every ollama.com page's header links its GitHub repository (github.com/ollama/ollama, "GitHub
+# 187.4K"), and the blog post on its app sends you to its releases there. The repository's licence is "MIT License"
+# (its LICENSE file), and it holds the server, the command line and the macOS and Windows app (its app folder: "Ollama
+# for macOS and Windows"). Its cloud's servers aren't published, so open-source apps, not fully open.
+sourceRepo:
+  url: https://github.com/ollama/ollama
+  page:
+    name: Ollama's new app
+    url: https://ollama.com/blog/new-app
+  quotes:
+    - 'For pure CLI versions of Ollama, standalone downloads are available on Ollama’s GitHub releases page.'
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms say only "Subscriptions automatically renew unless cancelled before the
+# renewal date". The pricing page's "included usage resets monthly on the same day of the month your subscription
+# started, including on annual plans" is about the monthly credits, not the charge, so it isn't used (notes.md).
+renewalAnchor:
+  kind: not-stated
+  pages: [https://ollama.com/terms, https://ollama.com/pricing]
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on ollama.com/pricing, each line no feature describes: Pro's "$60 of usage credits per
+# month" and "Access to larger pro models", Max's "$300 of usage credits per month" and "10 concurrent requests" (usage
+# levels are perks, never features: the owner's choice of 2026-10-30). Pro's "Fast mode (coming soon)" isn't offered
+# yet, so it's left out.
+perks:
+  - id: usage-credits-60
+    name: $60 of usage credits per month
+  - id: usage-credits-300
+    name: $300 of usage credits per month
+  - id: larger-pro-models
+    name: Access to larger pro models
+  - id: concurrent-requests-10
+    name: 10 concurrent requests
+
+# Features, read 2026-11-17 (AI: the registry's ai.* features), on every plan unless named:
+# - The assistant: its app chats with models ("Ollama’s macOS and Windows now include a way to download and chat with
+#   models.", Ollama's new app), and so does its command line ("ollama run").
+# - Where chats are kept: on your device. Local models never leave it ("Your data stays on your machine.", its privacy
+#   policy), and cloud models' prompts and answers aren't kept ("this content is not stored beyond the time required to
+#   fulfill the request"; "Ollama operates with a zero data retention (ZDR) policy.", its Cloud FAQ).
+# - Models from several companies: its library has other labs' open models (the pricing page's table lists deepseek,
+#   gemma4, glm, gpt-oss, kimi, minimax, mistral-large-4 and nemotron models; its documentation's "OpenAI’s gpt-oss
+#   models", its blog's "Clef, a 27B multimodal decision model from Cloudflare").
+# - Reasoning: "Ollama now has the ability to enable or disable thinking." (its blog) and its Thinking documentation.
+# - Web search: "Web search is included with a free Ollama account, with much higher rate limits available by upgrading
+#   your Ollama subscription" (its Web search post): a search the models can call, through its API and libraries. Free
+#   needs a free account for it.
+# - Image generation and music and voice generation: on macOS, locally ("Ollama now supports image generation on macOS,
+#   with Windows and Linux coming soon.", an experimental feature of January 2026; "Ollama can now turn text into
+#   speech.", with "redirect the output to save a WAV file"), so on every plan.
+# - Connects to: an API for your own apps (its local API, unlimited on your hardware, and the cloud API with a plan's
+#   credits: "From code, apps call the API at https://ollama.com."), code editors (its own VS Code extension: "Install the
+#   Ollama extension to use models in VS Code Chat"; JetBrains, Zed and Xcode guides), the command line, and custom
+#   assistants ("A Modelfile is the blueprint to create and share customized models using Ollama.", with "a custom system
+#   message to specify the behavior of the chat assistant").
+# - Monthly API credits on Pro and Max: their "$60" and "$300 of usage credits per month", spent through the app, the
+#   command line or the API ("Pro, Max, and Team plans include a set dollar amount of usage credits each month."). Early
+#   access on Max: "Early access to the newest models".
+# - Not stated by any page read: a coding agent of its own (its "ollama launch" starts other companies' agents: Claude
+#   Code, Codex, OpenCode), memory across chats, projects, voice conversations, deep research, scheduled tasks, computer
+#   use, code completion, office apps, video generation.
+# - Developer: Ollama is a tool to "build with open models" (its home page: "Ollama is the most popular way to build with
+#   open models."), so its plans are in developer too; no developer feature applies.
+# General features, read 2026-11-17: platforms: macOS, Linux and Windows (its download page); no mobile app and no web
+# app (ollama.com has no chat). Sign-in: an email address with a password ("Account information (names, email addresses,
+# user ID, passwords and other similar data)", its privacy policy), or "Continue with Google" and "Continue with GitHub"
+# (its sign-in page); Free needs no account for local models. Support: email ("Reach us by email", its support page) and
+# its Discord and Reddit communities. App languages: no page lists them, so none. Open source and self-hostable: the
+# server you run yourself is the product ("Ollama runs on your local device."), and its documentation covers Docker and
+# Linux servers. No pause (cancel only). No parental controls.
+features:
+  platforms: [windows, macos, linux]
+  account.sign-in: [password, sso]
+  support.channels: [email, community]
+  software.open-source: open-clients
+  software.self-hostable: true
+
+plans:
+  - id: ollama.free
+    name: Free
+    link: https://ollama.com/download
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.chat-storage: on-device
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.integrations: [api, ide, cli, custom-assistants]
+    notes: 'Free, open-source software that runs open models on your own Mac, Windows or Linux computer, as much as your hardware allows, with no account needed. Its cloud models are paid by the token from bought usage credits (pay as you go). Image and speech generation run on macOS only for now.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ollama.com/pricing
+
+  - id: ollama.pro
+    name: Pro
+    link: https://ollama.com/pricing
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.chat-storage: on-device
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.api-credits: true
+      ai.integrations: [api, ide, cli, custom-assistants]
+    perks: [usage-credits-60, larger-pro-models]
+    notes: 'Everything in Free, plus $60 of cloud usage each month at its published per-token rates and 3 requests at once. Its cloud models include deepseek-v4-pro, gemma4, glm-5.3, gpt-oss:120b, kimi-k3, minimax-m3, mistral-large-4 and nemotron-3-ultra. Usage past the monthly amount is paid by the token.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ollama.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 200
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ollama.com/pricing
+
+  - id: ollama.max
+    name: Max
+    link: https://ollama.com/pricing
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.chat-storage: on-device
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.web-search: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.api-credits: true
+      ai.early-access: true
+      ai.integrations: [api, ide, cli, custom-assistants]
+    perks: [usage-credits-300, larger-pro-models, concurrent-requests-10]
+    notes: 'Everything in Pro, with $300 of cloud usage each month, 10 requests at once and early access to the newest models. Monthly only.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 100
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ollama.com/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-17 with a plain fetch: its Terms of Service (last updated August
+# 2026, which include its Privacy Policy by reference), Privacy Policy (last updated March 2026), the sign-up page ("By
+# creating an account, you agree to the Terms of Service and Privacy Policy"), its pricing page's FAQ, its Cloud FAQ,
+# local FAQ and cloud model lifecycle documentation, its support page, and its GitHub repository's MIT licence and
+# security policy. Its apps have no licence of their own beyond the MIT licence. No shared document applies. The usage
+# credits it sells beside its plans are usage-billed (out of scope), but their expiry is in the terms every user agrees
+# to (a notable). Calibrated against Claude, ChatGPT, Perplexity and Devin.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://ollama.com/terms
+    - name: 'Privacy policy'
+      url: https://ollama.com/privacy
+    - name: 'Pricing (FAQ)'
+      url: https://ollama.com/pricing
+    - name: 'Cloud FAQ'
+      url: https://docs.ollama.com/cloud/faq
+    - name: 'Cloud'
+      url: https://docs.ollama.com/cloud
+    - name: 'Local FAQ'
+      url: https://docs.ollama.com/faq
+    - name: 'Support'
+      url: https://ollama.com/support
+    - name: 'Sign up'
+      url: https://ollama.com/signup
+    - name: 'Licence (GitHub)'
+      url: https://github.com/ollama/ollama/blob/main/LICENSE
+    - name: 'Security policy (GitHub)'
+      url: https://github.com/ollama/ollama/blob/main/SECURITY.md
+  ratings:
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You can cancel online in your account settings. Its terms don’t say whether you keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'To cancel your subscription, visit your account settings or contact us.'
+        - url: https://ollama.com/terms
+          quote: 'Subscriptions automatically renew unless cancelled before the renewal date'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      status: not-stated
+      reason: 'Its terms and pricing page don’t say whether you can get money back. Its support page only lists refunds among the billing questions you can email about.'
+      pages: [https://ollama.com/terms, https://ollama.com/pricing, https://ollama.com/support]
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It says it gives reasonable notice before changing prices, but not how much.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'Prices may change with reasonable notice'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It offers no free trial of Pro or Max: the Free plan simply stays free.'
+      pages: [https://ollama.com/pricing, https://ollama.com/terms]
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own, but not that it reminds you first. Its emails at 90% of your monthly usage aren’t renewal reminders.'
+      pages: [https://ollama.com/terms, https://ollama.com/pricing]
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: great
+      reason: 'You pay only the price and any tax: it says it charges no service fees.'
+      sources:
+        - url: https://ollama.com/pricing
+          quote: 'No service fees'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'It says you can switch plans at any time in your billing settings, but not what happens to time you’ve paid for.'
+      pages: [https://ollama.com/pricing, https://ollama.com/terms]
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Any dispute goes to a private referee in San Francisco, not a court, and you give up class actions, with no way to opt out.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'Arbitration: Any dispute arising from these Terms or your use of our services shall be resolved by binding arbitration administered by the American Arbitration Association under its Commercial Arbitration Rules.'
+        - url: https://ollama.com/terms
+          quote: 'Class action waiver: You agree to resolve disputes individually and waive any right to participate in a class action lawsuit or class-wide arbitration.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'It can change its terms at any time. For big changes it tells you by email or in the app, but it doesn’t say how far ahead; using it afterwards means you agree.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'We may modify these Terms at any time. We will provide notice of material changes by updating the “Last updated” date and, for significant changes, by providing additional notice (such as email or in-app notification).'
+        - url: https://ollama.com/terms
+          quote: 'Your continued use of our services after changes take effect constitutes acceptance of the revised Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can close your account for breaking its terms, or for any other reason with notice. It doesn’t say you’d get any money back.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'We may suspend or terminate your access if you violate these Terms, engage in fraudulent or illegal activity, or for any other reason with notice.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: great
+      reason: 'What you make stays yours, and it may use it only to run the service for you.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'By using our services, you grant us a limited, non-exclusive license to process your content solely to provide the Service.'
+        - url: https://ollama.com/terms
+          quote: 'We claim no ownership over your inputs or outputs.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: good
+      reason: 'What its AI makes for you is yours.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'Your content: You retain ownership of content you create using our services.'
+        - url: https://ollama.com/terms
+          quote: 'We claim no ownership over your inputs or outputs.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'Its cloud models can be retired as newer ones arrive, as any subscription’s line-up can change. The models on your own computer stay yours.'
+      sources:
+        - url: https://docs.ollama.com/cloud
+          quote: 'Cloud models may be deprecated as newer models become available.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://ollama.com/terms, https://ollama.com/privacy]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source under the MIT licence: anyone may use, change and share them.'
+      sources:
+        - url: https://github.com/ollama/ollama/blob/main/LICENSE
+          quote: 'MIT License'
+        - url: https://github.com/ollama/ollama/blob/main/LICENSE
+          quote: 'Permission is hereby granted, free of charge, to any person obtaining a copy'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It never sees what you run on your own computer, but it collects usage details (app version, request counts) and site cookies to improve its service. You can only block the cookies, browser by browser.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'We may collect limited device and usage metadata (such as app version and request counts) that does not include your prompt or response content.'
+        - url: https://ollama.com/privacy
+          quote: 'We use cookies and similar technologies for essential site functionality and, where applicable, to understand usage. You can control cookies through your browser settings, and disabling cookies may affect site functionality.'
+      action:
+        name: 'Its privacy policy on cookies'
+        url: https://ollama.com/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It doesn’t sell your data or share it for ads. Only companies that run the service for it, such as Stripe for payments and its cloud and model hosts, get it.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'We do not sell your personal information, and we do not share it for cross-context behavioral advertising.'
+        - url: https://ollama.com/privacy
+          quote: 'To provide you the Service: Third parties who help us operate (e.g., Stripe for payments, cloud infrastructure providers, model inference providers).'
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads, and it doesn’t share your data for ads on other sites. Its cookies only run its website and count visits.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'We do not sell your personal information, and we do not share it for cross-context behavioral advertising.'
+        - url: https://ollama.com/privacy
+          quote: 'We use cookies and similar technologies for essential site functionality and, where applicable, to understand usage.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It never trains AI on what you write or what its models answer, and its model hosts must promise not to either.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'We do not use your inputs or outputs to train AI models.'
+        - url: https://ollama.com/pricing
+          quote: 'When Ollama partners with providers, we require no logging, no training, and zero data retention policies in place.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'What you run on your computer never reaches it. Cloud prompts pass through its servers only to answer you and aren’t kept, and it never asks for them in support requests.'
+      sources:
+        - url: https://docs.ollama.com/cloud/faq
+          quote: 'When you use cloud models, Ollama processes your prompts and responses transiently to provide the service but does not store or log that content and never trains on it.'
+        - url: https://ollama.com/privacy
+          quote: 'We do not use your inputs or outputs to train any AI models or request prompt or response content in support requests.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps no chats. It keeps your account while it’s open and usage data as long as it needs it, with no time limits stated.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'Account information: retained while your account is active and deleted upon request, subject to legal obligations.'
+        - url: https://ollama.com/privacy
+          quote: 'Metadata and analytics: retained as needed for service operations, security, and improvement, then deleted or de-identified.'
+        - url: https://docs.ollama.com/cloud/faq
+          quote: 'Ollama operates with a zero data retention (ZDR) policy.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'It keeps almost nothing about you, and you can delete your account yourself at any time on its website.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'Deleting your account: You may, at any time, delete your account via ollama.com under your active profile.'
+        - url: https://ollama.com/privacy
+          quote: 'Account information: retained while your account is active and deleted upon request, subject to legal obligations.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'Your chats stay on your computer. For the little it holds about you, you can ask by email for a copy, where the law gives you that right.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'Data portability'
+        - url: https://ollama.com/privacy
+          quote: 'To exercise your rights, contact us at the email address below.'
+      action:
+        name: 'How to ask (its privacy policy)'
+        url: https://ollama.com/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law or a legal process requires it. It holds no chats to give, but doesn’t say it tells you or publish how often.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'Legal requirements: When required by law, a legal process, or to protect our rights.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can go to the US, and its cloud runs mainly in the US, sometimes in Europe. It says it uses the safeguards the law requires.'
+      sources:
+        - url: https://ollama.com/privacy
+          quote: 'Data may be transferred to and processed in the United States. Where required by law, we use appropriate safeguards for international transfers.'
+        - url: https://ollama.com/pricing
+          quote: 'Ollama hosts models and compute resources primarily in the United States. To serve global demand, we may route to Europe for additional capacity.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address or a Google or GitHub account. It doesn’t say whether an email alias is fine. Running models on your own computer needs no account.'
+      sources:
+        - url: https://ollama.com/signup
+          quote: 'Continue with Google'
+        - url: https://ollama.com/signup
+          quote: 'Email'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: neutral
+      reason: 'You can report security flaws privately on GitHub. It doesn’t say outside experts check its security or pay for reports.'
+      sources:
+        - url: https://github.com/ollama/ollama/blob/main/SECURITY.md
+          quote: 'If you discover a security vulnerability, please do not open a public issue.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its pages say each person gets one account, but not whether you may share yours with others at home.'
+      pages: [https://ollama.com/pricing, https://ollama.com/terms]
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      tier: good
+      reason: 'Its Mac and Windows apps download their own updates and install them when you click to restart. Nothing else on your computer changes.'
+      sources:
+        - url: https://docs.ollama.com/faq
+          quote: 'Ollama on macOS and Windows will automatically download updates. Click on the taskbar or menubar item and then click "Restart to update" to apply the update.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Bought credits expire after a year
+      tier: poor
+      reason: 'Usage credits you buy for its cloud run out one year after you buy them, used or not.'
+      sources:
+        - url: https://ollama.com/terms
+          quote: 'Purchased usage credits expire one year after they are added to your account'
+      lastVerified: 2026-11-17

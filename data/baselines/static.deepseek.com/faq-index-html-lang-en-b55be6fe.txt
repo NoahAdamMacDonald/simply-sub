@@ -1,0 +1,14 @@
+url: https://static.deepseek.com/faq/index.html?lang=en#/question/unsupported-email
+method: browser
+saved: 2026-11-17
+
+Help Center
+Login Issues
+User Guide
+Chat Issues
+API
+Send feedback
+Login Issues
+What should I do if I see "Login failed. Your email domain is currently not supported for registration"?
+The email domain you are currently using is not on the support list. We recommend signing up with a major international email provider such as Gmail, Outlook, Hotmail, or Yahoo.
+If the issue persists, contact service@deepseek.com.

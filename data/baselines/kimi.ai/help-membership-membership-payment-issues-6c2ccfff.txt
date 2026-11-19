@@ -1,0 +1,119 @@
+url: https://www.kimi.ai/help/membership/membership-payment-issues
+method: fetch
+saved: 2026-11-17
+
+ProductsProducts Products
+Kimi Kimi Work Kimi Code Kimi Browser Extension Downloads
+All products
+Features
+BuildAI app & website builder SlidesAI presentation maker DocsAI document agent SheetsAI spreadsheet agent Deep ResearchAI research agent
+All features
+APIAPI
+Use CasesUse Cases Featured use cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchConduct market researchCreate resumesCreate brochures
+All use cases
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generator
+All capabilities
+Showcases
+WebsitesAgent SwarmDeep ResearchSlidesSheetsDocsDesign
+All showcases
+BusinessBusiness Kimi BusinessBusiness plansContact sales
+ResearchResearch Kimi K3.1 ProKimi K3PerceptionBenchKimi K2.6Agent SwarmWorldVQAKimi K2.5Kimi Vendor VerifierKimi K2 ThinkingKimi K2
+All research
+ResourcesResources Support & docs
+Help centerKimi Code docs
+Academy
+Kimi Work 101Kimi Code 101
+All tutorials
+Articles
+AI agents explainedMulti-agent systemsParallel agentsWhat is vibe codingBuild a landing pageCreate a posterWrite a business proposal
+All articles
+PricingPricing
+DownloadDownload
+Download
+Download Try Kimi
+Getting Started
+Features
+Agent Mode
+Kimi Work
+Plugins & Skills
+Kimi Browser Extension
+Slides
+Docs & Sheets
+Deep Research
+Build
+3D Make
+Membership Membership plans overview
+Credit update & usage rules
+Pricing details
+Account & credit query
+Plan changes
+Extra Usage: pay-as-you-go top-ups
+Cancel subscription
+Payment issues
+Invoices
+Contact us
+Kimi Code
+Kimi API
+Kimi Business
+Kimi Claw
+Kimi Bulletin
+FAQ
+Help Center Membership Payment issues
+Payment issues
+Running into trouble with billing? Here are the most common scenarios and how to resolve them.
+Signed up but not a member?
+If you completed the checkout flow but your membership hasn't activated:
+Issue Solution
+Authorization ≠ charge Some payment methods require a separate authorization step. Check your bank or card statement to confirm the charge actually posted
+Processing delay Payments can take a few minutes to clear. Refresh the page after a short wait
+Wrong account Make sure you're signed into the same Kimi account you used at checkout
+If the charge has posted but your membership still isn't active, email [email protected] with your payment receipt.
+Payment failed?
+Common causes and fixes:
+Cause Fix
+Insufficient funds Ensure your account or card has enough balance
+Card limit Your bank may enforce per-transaction or daily limits. Contact your bank or try a different payment method
+Network issue Check your internet connection and retry
+Payment provider maintenance Occasionally a provider is temporarily unavailable. Try again later
+Fraud protection Your bank may block the transaction for security reasons. Contact them to authorize the charge
+If the problem persists, email [email protected] with a screenshot of the error.
+Unexpected charges?
+If you see an unrecognized charge from Kimi:
+Check your subscription — Sign in to Kimi and review your active subscriptions. You may have an auto-renewing plan you forgot about
+Trial conversion — If you started a free trial and didn't cancel before it ended, the system automatically converts it to a paid subscription
+Review payment authorizations — Check your Apple ID, Google Play, or card settings for recurring Kimi charges
+Cancel if needed — See Cancel Subscription to stop future charges
+If you believe the charge is unauthorized, email [email protected] immediately and we'll investigate.
+Was this article helpful?
+Yes No
+PreviousCancel subscriptionNext Invoices
+Signed up but not a member?
+Payment failed?
+Unexpected charges?
+System
+English
+Products
+KimiKimi WorkKimi CodeKimi Browser ExtensionKimi PlatformDownloadsAll products
+Pricing
+IndividualBusinessAPI
+Business
+Kimi BusinessContact sales
+Features
+BuildSlidesDocsSheetsDeep ResearchAll features
+Research
+Kimi K3.1 Pro tech blogKimi K3 tech blogKimi K2.6 tech blogKimi K2.5 tech blogPerceptionBenchAgent SwarmWorldVQAAll research
+Use Cases
+Build MVP sitesCreate portfolio sitesBuild blog sitesConduct academic researchCreate brochuresShowcasesAll use cases
+Academy
+Kimi Work 101Kimi Code 101All tutorials
+Support & docs
+Help centerKimi Code docs
+Featured tools
+AI landing page generatorImage to websiteAI document generatorPDF to PPT converterPDF translatorAI Python code generatorAI C++ code generatorAll capabilities
+Resources
+Help centerAI agents explainedMulti-agent systemsWhat is vibe codingBuild a landing pageCreate a posterAll articles
+Company
+About usMoonshot AIBrand guidelinesCareersTerms of ServicePrivacy PolicyTrust & Safety
+Payment issues - Kimi Help Center

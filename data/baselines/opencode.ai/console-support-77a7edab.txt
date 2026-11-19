@@ -1,0 +1,40 @@
+url: https://opencode.ai/console/support
+method: fetch
+saved: 2026-11-17
+
+Support | OpenCode Console
+Skip to content
+Console
+Models Subscriptions Teams Enterprise Sign inGet started
+Sign inGet started
+Support
+Get help with OpenCode Console
+Questions about Console or its integrations, a problem to report, or a request about your data: email us. You don't need an account.
+Email
+help@anoma.ly
+First response
+Within two business days
+Hours
+Monday to Friday, excluding US holidays
+Your data
+To ask for a copy of your data or for it to be deleted, email help@anoma.ly from the address on your OpenCode account or, without one, from the address of the account your request is about, such as your Slack or Zoom account, so we can confirm it's you. The privacy policy explains how Anomaly handles personal data.
+To end an integration's access yourself, open it in Console's Extensions tab and click Disconnect. Each integration's guide says what that deletes.
+Security
+To report a security issue in Console or one of its integrations, email security@anoma.ly with what you found and how to reproduce it. For the open source OpenCode client, use Report a vulnerability on GitHub.
+Integration guides
+How to add, use and remove each integration, and what happens to your data:
+Slack
+Zoom
+HubSpot
+Resources
+OpenCode documentation
+System status
+Privacy policy
+Terms of service
+Everything you need to work with AI, in one place. Leading models, simple subscriptions, and team controls like budgets, policies, and SSO.
+Product
+Models Go Teams Enterprise Changelog OpenCodeConsole docs Legal
+Terms of servicePrivacy policy Connect
+Contact us Support CommunityXGitHubYouTube
+©2026 Anomaly. All rights reserved
+System status

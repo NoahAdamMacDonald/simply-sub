@@ -1,0 +1,79 @@
+url: https://help.mistral.ai/en/articles/347613-can-i-delete-a-chat-conversation
+method: browser
+saved: 2026-11-17
+
+Skip to main content
+English
+Français
+Italiano
+English
+Search
+Ctrl K
+Help and Troubleshooting
+Vibe
+Trust, Security, Compliance
+Data Governance
+How can I control or delete data connected to third-party tools?
+As an admin on Team plan or Enterprise, do I have company-wide controls?
+How do you ensure the security of user data?
+Can I opt out of my input or output data being used for training?
+How do you handle my data when using the Memories feature?
+Who owns input and output in Vibe and Mistral’s APIs?
+Where do you store my data or my Organization's data?
+How long do you store my data?
+How does Mistral ensure that my data remains encrypted and secure in transit and at rest?
+How do you use submitted feedback?
+How do I export my data from Vibe?
+How can I manage my cookie settings?
+How can I delete my account?
+Do you use my user data to train your Artificial Intelligence models?
+Do you use cookies at Mistral and why?
+Do you sell or share my data for marketing?
+Can I delete a chat conversation?
+Can I activate Zero Data Retention (ZDR)?
+Ethical and Safe Use
+Regulatory Compliance and Certification
+About our Models
+All Collections
+Trust, Security, Compliance
+Data Governance
+Can I delete a chat conversation?
+Can I delete a chat conversation?
+August 12, 2026
+Input and output are maintained by default so you can see your conversation history in the product.
+However, you can delete a chat conversation, in its entirety and at any time by following this simple process:
+Reveal the conversation dropdown
+On Vibe page, click on the three vertical dots ⋮ on the right-hand side of your conversation title to reveal the conversation dropdown, then select the Delete option.
+​
+Select the Delete option
+​
+Confirm your choice
+A modal will appear asking for your to confirm your choice.
+Click on the Delete button. The chat conversation has now been deleted.
+​
+Confirm the chat deletion by clicking the Delete button
+​
+🚨 This operation is definitive on your side. You won’t be able to retrieve your conversation after deletion.
+Delay before definitive deletion of the underlying data
+Even after your manual deletion on your end, we may retain different types of data in our backend systems for different amounts of time, as specified in our Privacy Policy and/or your Data Protection Agreement with us.
+For instance, we may retain your input and output data to enforce our Usage Policy, address Terms of Service or policy violations, or as required by law.
+📌 For the Team and Enterprise plans, please note that your Organization may have separate controls in place based on its own data retention policies. Check with your organization for additional guidance.
+Did this answer your question?
+Disappointed Reaction
+Neutral Reaction
+Smiley Reaction
+Related Articles
+Can I activate Zero Data Retention (ZDR)?
+Can other people view my conversations?
+Can I opt out of my input or output data being used for training?
+How can I control or delete data connected to third-party tools?
+Le Chat is now Vibe
+On this page
+Reveal the conversation dropdown
+Confirm your choice
+Delay before definitive deletion of the underlying data
+Frontier AI in your hands
+Terms of Service
+Privacy Policy
+Data Processing Addendum
+Legal notice

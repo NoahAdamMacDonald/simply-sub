@@ -1,0 +1,336 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with a plain fetch from Canada (openrouter.ai:
+# home, pricing, about, chat, Ori, Labs, enterprise, terms and privacy pages; its documentation, also as its Markdown
+# copies; its security.txt and Trust Center), and its sign-up page in Edge from Canada. Pages, each quoted where it's
+# used.
+# What it is: one account and one API for hundreds of AI models from other companies ("OpenRouter operates a large
+# language model aggregator where users may use the Site to access third-party application programming interfaces",
+# its terms), with a chat page to talk to them ("Test and evaluate responses from OpenAI, Google, Anthropic, and 600+ AI
+# models in one chat interface.").
+# In scope (the catalog run's AI rules: usage-billed APIs are out, their free tiers in): it sells no flat plan. Its
+# pricing page lists Free, Standard ("Pay-as-you-go", a 5.5% fee on credits you buy), Business ("Pay-as-you-go", 8%)
+# and Enterprise (by contract): Standard and Business are prepaid credits spent per token ("you buy credits, manually or
+# with auto top-up, and each request deducts its cost from your balance"), usage-billed and out; Business and Enterprise
+# are business plans too. Its Free plan is more than API access: its chat page works with the free models ("The easiest
+# way to try these models is through the Chat Playground , where you can start chatting immediately.", its Free Models
+# Router guide), so it's an AI assistant you can use free, and in.
+# Pricing: Free, "25+ free models" from "4 free providers", "Chat and API Access" "Yes", "Rate limits" "50 requests/day"
+# (the pricing page; "Free models are capped at 20 requests per minute and 50 per day, rising to 1,000 per day once your
+# account has bought at least $10 of credits"). One plan for everywhere at $0.
+# Region checklist: not needed: one free plan with no prices.
+# Bundles: none found. Official resellers: none: it sells credits only on openrouter.ai and names no shop.
+# Free use: its one plan is free. A small one-time allowance for new accounts ("All new users receive a small free
+# allowance to test out OpenRouter.") is a trial of its paid models, not a plan.
+
+id: openrouter
+name: OpenRouter
+website: https://openrouter.ai
+# Its security contact file and Trust Center.
+domains: [trust.openrouter.ai]
+category: ai
+spendCategory: software
+# Nothing to pay for on Free; its FAQ's "How can I delete my account?" says where to close the account.
+cancelUrl: https://openrouter.ai/docs/faq
+sources: { pricing: https://openrouter.ai/pricing }
+notes: 'One account for hundreds of AI models from many companies. Only its free models are listed here: its paid models are bought as prepaid credits and billed by use.'
+
+# Ways to pay: none listed, since the plan it's listed with is free; its credits (out of scope) take "credit and debit
+# cards, AliPay, and crypto (USDC)" (its pricing page's FAQ).
+# Owner (M11.2), read 2026-11-17: its terms. Private: its about page names investors ("An investment arm of Alphabet is
+# backing OpenRouter"), no shares or listing.
+owner:
+  name: 'OpenRouter, Inc.'
+  page:
+    name: Terms of service
+    url: https://openrouter.ai/terms
+  quotes:
+    - 'The Service is owned and operated by OpenRouter.'
+    - 'The Service is offered by OpenRouter, Inc., located at 169 Madison Avenue, New York, NY 10016, United States.'
+  country:
+    code: US
+  lastVerified: 2026-11-17
+
+# Features, read 2026-11-17 (AI: the registry's ai.* features), for the Free plan:
+# - The assistant: its chat page with the free models (above); the Free Models Router picks one for you.
+# - Where chats are kept: on your device ("All conversations in the chatroom are stored locally on your device.
+#   Conversations will not sync across devices.", its FAQ).
+# - Models from several companies: "25+ free models" from other labs ("Trinity Large Preview (free)" from Arcee,
+#   "DeepSeek R1 (free)", "Llama models (free)" from Meta, its Free Models Router guide).
+# - Reasoning: "DeepSeek R1 (free) - DeepSeek’s reasoning model" (the same guide).
+# - Connects to: an API for your own apps ("Chat and API Access" on Free; "You can also use the Free Models Router
+#   programmatically.").
+# - Not on Free: web search (its web search tools charge your credits: "Searches are charged to your OpenRouter credits"),
+#   and image generation, though one free image model is listed until it goes away ("Going away November 28, 2026").
+#   Not stated by any page read: memory, projects, voice, deep research, scheduled tasks, computer use, code completion,
+#   coding agent (Ori Code, its terminal agent, is in its Labs), office apps, video or audio generation, early access.
+# General features, read 2026-11-17: platforms: the web (its chat page); Ori's terminal and desktop tools are
+# experimental or behind a waitlist ("Join the waitlist"), so they're left out. Sign-in: an email address and password
+# ("Email address", "Password", its sign-up page), and buttons for GitHub, Google and MetaMask (icons only, read from
+# the screenshot). Support: "Community support" on Free (its pricing page; "every plan can use the community Discord").
+# App languages: no page lists them, so none. Open source: not stated. No pause or parental controls.
+features:
+  platforms: [web]
+  account.sign-in: [password, sso]
+  support.channels: [community]
+
+plans:
+  - id: openrouter.free
+    name: Free
+    link: https://openrouter.ai/chat
+    categories: [ai, developer]
+    features:
+      ai.assistant: true
+      ai.chat-storage: on-device
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.integrations: [api]
+    notes: 'Its free models only (25 or more, from DeepSeek, Meta, Arcee and others), in its chat or through its API, at up to 20 requests a minute and 50 a day (1,000 a day once you’ve bought $10 of credits). Paid models are billed by use from prepaid credits, with a 5.5% fee on each purchase.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://openrouter.ai/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-17 with a plain fetch: its Terms of Service and Privacy Policy (both
+# last updated August 31, 2026), its documentation on data collection, provider logging, zero data retention and its FAQ,
+# its security.txt and Trust Center, and the sign-up page ("I agree to the Terms of Service, Privacy Policy, and Model
+# Terms."). The Model Terms are each model maker's own terms, listed by OpenRouter: not read (hundreds of companies);
+# the Stealth Program's licence and the Data Processing Agreement (for organisations) weren't read. Only its free plan is
+# listed, so the billing topics don't apply. Calibrated against Claude, ChatGPT, Perplexity and Devin.
+policies:
+  links:
+    - name: 'Terms of service'
+      url: https://openrouter.ai/terms
+    - name: 'Privacy policy'
+      url: https://openrouter.ai/privacy
+    - name: 'FAQ'
+      url: https://openrouter.ai/docs/faq
+    - name: 'Data collection'
+      url: https://openrouter.ai/docs/guides/privacy/data-collection
+    - name: 'Trust Center'
+      url: https://trust.openrouter.ai/
+    - name: 'Security contact (security.txt)'
+      url: https://openrouter.ai/.well-known/security.txt
+    - name: 'Pricing'
+      url: https://openrouter.ai/pricing
+    - name: 'Sign up'
+      url: https://openrouter.ai/sign-up
+  ratings:
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Any dispute goes to a private referee, not a court, and you give up class actions, with no way to opt out.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'you and OpenRouter agree that every dispute arising in connection with these Terms will be resolved by binding arbitration.'
+        - url: https://openrouter.ai/terms
+          quote: 'YOU AND OPENROUTER AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.'
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It tells you 30 days ahead, by email or in its app, before big changes to its terms, and you can stop using it.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'For any changes to these Terms that materially modifies your rights or obligations, we will provide you thirty (30) days advance notice via email or an in-product notification.'
+        - url: https://openrouter.ai/terms
+          quote: 'If you do not agree to the changes, you must stop using our Service.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can close your account at any time, for any reason, with or without notice. Unless you broke its terms, it refunds any credits left.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'In addition, OpenRouter may in its sole discretion terminate your user account on the Service or suspend or terminate your access to the Service at any time for any reason or no reason, with or without notice.'
+        - url: https://openrouter.ai/terms
+          quote: "Except for OpenRouter's termination of your account for violation of these Terms, any Credits remaining in your account upon termination will be refunded to you through your original payment method within thirty (30) days of termination."
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'It may use what you send to run the service, and keeps a lasting right to use your prompts, with your name removed, for its public usage rankings.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'In using the Service, you grant to OpenRouter a worldwide, perpetual, irrevocable, non-exclusive, royalty-free, fully paid right and license (with the right to sublicense) to use, host, reproduce, and prepare derivative works of, your Inputs in anonymized form, solely for tracking and sharing user metrics on the Site, such as for example, on our Rankings Page, on an ongoing basis.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      status: not-stated
+      reason: 'It doesn’t say who owns the answers: its terms leave that to each AI model maker’s own terms.'
+      pages: [https://openrouter.ai/terms]
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can add or remove models, and change or stop the service, at any time without notice, and takes no responsibility for it.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'We also reserve the right to modify or discontinue the Service at any time (including by limiting or discontinuing certain features of the Service), temporarily or permanently, without notice to you.'
+        - url: https://openrouter.ai/terms
+          quote: 'We will have no liability whatsoever on account of any change to the Service or any suspension or termination of your access to or use of the Service.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms don’t say it closes accounts you haven’t used.'
+      pages: [https://openrouter.ai/terms]
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may not resell access to its models, build a competing service, or test the models for weaknesses without its written permission.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'access the Site or Service for purposes of reselling API access to Models or otherwise developing a competing service;'
+        - url: https://openrouter.ai/terms
+          quote: "conduct, or work with any third parties to conduct, without OpenRouter's prior written approval, any Red Teaming of Models."
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its website with Google Analytics and PostHog, which can replay your visits. You can only block the cookies, browser by browser.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'Presently, we use Google Analytics.'
+        - url: https://openrouter.ai/privacy
+          quote: 'In collecting clickstream data, we use PostHog, a web and products analytics platform that may also utilize session replay features.'
+        - url: https://openrouter.ai/privacy
+          quote: 'You can use the browser with which you are viewing the Site to enable, disable or delete cookies.'
+      action:
+        name: 'Its privacy policy on cookies'
+        url: https://openrouter.ai/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your data, but it may share it with partners and ad companies. You can turn off its targeted ads in your account, but not the sharing with partners.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'Affiliates and Corporate Partners. We may share your personal data with our subsidiaries, affiliates, and partners.'
+        - url: https://openrouter.ai/privacy
+          quote: 'We also work with third parties, such as advertisers, social media networks, search engines, ad serving companies, and advertising companies working on their behalf, to improve the relevance of ads we serve.'
+        - url: https://openrouter.ai/privacy
+          quote: 'You can update your advertising preferences on your account page and choose not to receive interest-based ads from us.'
+      action:
+        name: 'Its privacy policy on your choices'
+        url: https://openrouter.ai/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It follows what you do on other websites to show you its ads. You can turn off its targeted ads in your account, but the tracking cookies stop only browser by browser.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'We also may use these technologies to collect information about your online activities over time and across third party websites or other online services (known as "behavioral tracking").'
+        - url: https://openrouter.ai/privacy
+          quote: 'You can update your advertising preferences on your account page and choose not to receive interest-based ads from us.'
+      action:
+        name: 'Its privacy policy on your choices'
+        url: https://openrouter.ai/privacy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: good
+      reason: 'OpenRouter doesn’t train AI on your chats, and it sends them only to model makers that don’t train on them, unless you turn that on.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'OpenRouter does not use your Inputs or Outputs for model training.'
+        - url: https://openrouter.ai/docs/faq
+          quote: 'Providers that do log, or where we have been unable to confirm their policy, will not be routed to unless the model training toggle is switched on in the privacy settings tab.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'It doesn’t keep your prompts unless you ask it to. Its systems check them for child abuse material, and flagged ones may be kept for people to review.'
+      sources:
+        - url: https://openrouter.ai/docs/guides/privacy/data-collection
+          quote: 'OpenRouter does not store your prompts or responses, unless you opt in to one or both of the following, or content is flagged as potential CSAM:'
+        - url: https://openrouter.ai/docs/guides/privacy/data-collection
+          quote: 'Content flagged as potential CSAM may be retained for human review, reporting, and preservation where required by law.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it needs it for its business and the law. It doesn’t keep your prompts unless you opt in.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'We are subject to applicable laws on the retention of information and will retain your information for as long as is reasonably necessary to comply with our business and legal obligations and to meet regulatory and compliance requirements.'
+        - url: https://openrouter.ai/docs/guides/privacy/data-collection
+          quote: 'OpenRouter does not store your prompts or responses, unless you opt in to one or both of the following, or content is flagged as potential CSAM:'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account yourself in its settings, but it may keep some data it says it needs for its business, and doesn’t say how quickly the rest goes.'
+      sources:
+        - url: https://openrouter.ai/docs/faq
+          quote: 'In the modal that opens, select the Security tab. You’ll find an option there to delete your account.'
+        - url: https://openrouter.ai/privacy
+          quote: 'When your account is deleted, all associated personal data is deleted, unless we are required to maintain it for regulatory and compliance purposes or for a legal or business necessity.'
+      action:
+        name: 'How to delete your account (its FAQ)'
+        url: https://openrouter.ai/docs/faq
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can export your chats from the chat’s settings yourself, and ask by email for a copy of your other data.'
+      sources:
+        - url: https://openrouter.ai/docs/faq
+          quote: 'It is possible to export and import conversations using the settings menu in the chatroom.'
+        - url: https://openrouter.ai/privacy
+          quote: 'Access and data portability. You have the right to request a copy of the personal data we process about you, subject to certain exceptions and conditions.'
+      action:
+        name: 'Exporting chats (its FAQ)'
+        url: https://openrouter.ai/docs/faq
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over information when the law requires it or when it believes in good faith that it must. It doesn’t say it tells you, or publish how often.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'We will preserve and disclose any and all information to law enforcement agencies or others if required to do so by law or in the good faith belief that such preservation or disclosure is reasonably necessary to'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your information can go to its servers in the US. For Europeans and the UK it uses the EU’s standard legal safeguards.'
+      sources:
+        - url: https://openrouter.ai/privacy
+          quote: 'your personal data may be transferred to our servers in the US, or to other countries outside the European Economic Area'
+        - url: https://openrouter.ai/privacy
+          quote: 'standard contractual clauses approved by the European Commission under Article 46 of the GDPR'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a password (your name is optional), or a GitHub, Google or MetaMask account. It doesn’t say whether an email alias is fine.'
+      sources:
+        - url: https://openrouter.ai/sign-up
+          quote: 'Email address'
+        - url: https://openrouter.ai/sign-up
+          quote: 'Optional'
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: good
+      reason: 'An outside audit checks its security (SOC 2 Type 2), and it runs a private bug bounty for reported flaws. The reports aren’t public.'
+      sources:
+        - url: https://trust.openrouter.ai/
+          quote: 'SOC 2 Type 2'
+        - url: https://openrouter.ai/.well-known/security.txt
+          quote: 'OpenRouter runs a private bug bounty program on HackerOne.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms forbid selling your access and making extra accounts, but don’t say whether you may share your account with others at home.'
+      pages: [https://openrouter.ai/terms, https://openrouter.ai/privacy]
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-applicable
+      reason: 'It’s used in a web browser or through its API: there’s no app of its own to install for its free plan.'
+      pages: [https://openrouter.ai/pricing]
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Paying for logging with your prompts
+      tier: good
+      reason: 'It’s off unless you turn it on: if you let it log your prompts, it may sell or license them, with your name removed, for its own business.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'license or sell your User Content in anonymized form, where your User Content is not associated with you or your account.'
+        - url: https://openrouter.ai/docs/guides/privacy/data-collection
+          quote: 'In exchange, you receive a 1% discount on all model usage. Off by default.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Bought credits can expire after a year
+      tier: poor
+      reason: 'Credits you buy for its paid models (or to raise the free models’ daily limit) can run out a year after you buy them, used or not.'
+      sources:
+        - url: https://openrouter.ai/terms
+          quote: 'OpenRouter reserves the right to expire unused credits three hundred sixty-five (365) days after purchase.'
+      lastVerified: 2026-11-17

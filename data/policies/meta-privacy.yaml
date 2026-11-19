@@ -1,0 +1,89 @@
+# A shared policy document (BLUEPRINT §4.10, M11.1): Meta's Privacy Policy, which covers every Meta Product (Meta AI,
+# and Facebook, Messenger, Instagram and the rest when they join the catalog), rated once here with its printable version
+# (whose collapsed sections the policy page shows only when opened), its United States Regional Privacy Notice and its
+# page on how Meta uses information for generative AI. Each provider names it in its policies' shared and adds ratings
+# from its own notices (Meta AI's: the Meta AIs Terms of Service and its help centre). WhatsApp has a privacy policy of
+# its own.
+# Read 2026-11-17 (the full catalog run, AI batch 2) with Edge from Canada: "Effective July 23, 2026".
+# Shapes: packages/core/src/catalog/policy.ts (policySetSchema).
+id: meta-privacy
+name: Meta's Privacy Policy
+links:
+  - name: 'Privacy policy'
+    url: https://www.facebook.com/privacy/policy/
+  - name: 'Privacy policy (printable version)'
+    url: https://mbasic.facebook.com/privacy/policy/printable/version/26776488768644674/
+  - name: 'United States Regional Privacy Notice'
+    url: https://www.facebook.com/privacy/policies/uso/
+  - name: 'How Meta uses information for generative AI'
+    url: https://www.facebook.com/privacy/genai/
+ratings:
+  - topic: privacy.data-collection
+    tier: poor
+    reason: 'It collects what you do across its apps to personalise them, show you ads and fix and improve its products. Its settings limit some of it, but nothing turns it all off.'
+    sources:
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'We use information we collect to provide a personalized experience to you, including ads, along with the other purposes we explain in detail below.'
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'Seeing if our Products are working correctly, such as troubleshooting, and fixing it when it’s not working'
+    action:
+      name: 'Its privacy policy’s controls'
+      url: https://www.facebook.com/privacy/policy/
+    lastVerified: 2026-11-17
+  - topic: privacy.data-sharing
+    tier: good
+    reason: "It says it doesn't sell your information, and never will, nor share it for other companies' ads under California's law. It does share it across Meta's own companies."
+    sources:
+      - url: https://www.facebook.com/privacy/policies/uso/
+        quote: 'We don’t “share” your Personal Information, as defined in the California Consumer Privacy Act (“CCPA”). We also don’t sell any of your Personal Information, and we never will.'
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'We share information we collect, infrastructure, systems and technology with the other Meta Companies.'
+    lastVerified: 2026-11-17
+  - topic: privacy.ads-tracking
+    tier: poor
+    reason: 'It picks the ads you see from what you do in its apps and on other sites and apps. You can turn off the part that comes from other businesses, but not the ads chosen from what you do in its own apps.'
+    sources:
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'We’ll use information that advertisers, businesses and other partners provide us about activity off the Meta Company Products that we have associated with you to personalize ads that we show you on our Products, and on websites, apps and devices that use our advertising services.'
+      - url: https://www.facebook.com/privacy/policies/uso/
+        quote: 'For ads you see through Meta Products, visit the “Activity from other businesses” control in Ad Preferences or visit the “Accounts” section in Accounts Center to control how your info is combined and used across your accounts, including for ads.'
+    action:
+      name: 'How to opt out of targeted ads'
+      url: https://www.facebook.com/privacy/policies/uso/
+    lastVerified: 2026-11-17
+  - topic: privacy.data-retention
+    tier: poor
+    reason: 'It keeps your information as long as it decides it needs it, case by case, and gives no set times. AI training data is kept the same way.'
+    sources:
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'We keep information as long as we need it to provide our Products, comply with legal obligations or protect our or other’s interests.'
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'We decide how long we need information on a case-by-case basis.'
+      - url: https://www.facebook.com/privacy/genai/
+        quote: 'We keep training data for as long as we need it on a case-by-case basis to ensure an AI model is operating appropriately, safely and efficiently.'
+    lastVerified: 2026-11-17
+  - topic: privacy.government-requests
+    tier: poor
+    reason: 'It answers search warrants and court orders, and sometimes gives some of your information even when the law does not make it.'
+    sources:
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'In response to legal requests, like search warrants, court orders, production orders or subpoenas.'
+      - url: https://www.facebook.com/privacy/policy/
+        quote: 'For example, responses to legal requests where not compelled by law will typically include limited information (such as contact details and login information).'
+    lastVerified: 2026-11-17
+  - topic: privacy.data-location
+    tier: neutral
+    reason: "Your information is kept in the US, Ireland, Denmark, Sweden and other countries, and moved under the EU's standard legal safeguards."
+    sources:
+      - url: https://mbasic.facebook.com/privacy/policy/printable/version/26776488768644674/
+        quote: 'Places we have infrastructure or data centers, including the United States, Ireland, Denmark and Sweden, among others'
+      - url: https://mbasic.facebook.com/privacy/policy/printable/version/26776488768644674/
+        quote: 'We utilize standard contractual clauses approved by the European Commission and by other relevant authorities.'
+    lastVerified: 2026-11-17
+  - topic: privacy.sign-up-data
+    tier: neutral
+    reason: 'To make an account, you give an email address or phone number and your age.'
+    sources:
+      - url: https://mbasic.facebook.com/privacy/policy/printable/version/26776488768644674/
+        quote: 'For example, if you don’t provide your email address, phone number or age, we won’t be able to create an account for you to use our Products.'
+    lastVerified: 2026-11-17

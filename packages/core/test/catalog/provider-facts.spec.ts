@@ -173,6 +173,8 @@ describe('namesRenewalAnchor', () => {
       'same-date',
       true,
     ],
+    // Venice's terms (M11.15).
+    ['Subscriptions renew on the date when you purchase the subscription.', 'same-date', true],
     // Fubo's billing help (M11.15).
     [
       'The date that you are billed is based on the date you became a paying Fubo subscriber.',
