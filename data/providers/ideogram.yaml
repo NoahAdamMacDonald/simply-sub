@@ -1,0 +1,535 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada: ideogram.ai's pages
+# showed a headless Edge Cloudflare's check and read in a visible (headed) Edge, with no check to click: its pricing
+# page (each FAQ answer opened), Terms of Service, Privacy Policy, About, launch post and careers link; its help site
+# (docs.ideogram.ai, read headless: plans and credits, billing and subscriptions with each billing article, sign-in,
+# account settings, the app tour, images, models, video, apps, batch, MCP, editing, Studio, text and layers, upscale,
+# download, share and publish, characters, the API, FAQ, files and limits, support and company pages); the pricing page
+# again through a UK exit. Pages, each quoted where it's used:
+# Pricing: ideogram.ai/pricing's FAQ "On monthly billing, Plus costs $20 per month. On yearly billing, Plus costs $15
+# per month, $180 billed annually." and "On monthly billing, Pro costs $60 per month. On yearly billing, Pro costs $42
+# per month, $504 billed annually.", and "Prices are in US dollars and exclude tax." (the same through a UK exit): one
+# US-dollar price list for everyone, GLOBAL. Its help site's Plans and Credits gives the same ("Prices are in US
+# dollars, before tax.") and the free plan's "30 a week". No price includes tax ("No, prices exclude tax.").
+# Region checklist for CA, 2026-11-17: 1. no country paths or hreflang; 2. no country or currency picker; 3. the page's
+# text names US dollars; 4. checkout needs an account; 5. its tax article ("Ideogram adds VAT, GST or sales tax where
+# the law requires it, based on your billing address."); 6. headed Edge from Canada and through a UK exit, the same US
+# dollars; 7. no bill offered.
+# Its individual plans: Free, Plus and Pro, monthly or yearly. Not listed: Team ("Team plans need at least 2 users."),
+# Enterprise and Enterprise Prepaid (business); pay-as-you-go credits ("1¢/credit") and the hosted API (usage-billed);
+# self-hosted model licences; the legacy Basic plan ("Ideogram no longer sells the Basic plan ($8/month or $7/month
+# billed yearly).", never in the catalog, so no retired entry). Its iOS app sells Plus and Pro through Apple: a way to
+# pay, not other prices.
+# Bundles: none on its pages. Official resellers: none; no page names a shop that sells it.
+
+id: ideogram
+name: Ideogram
+aliases: [ideogram.ai]
+website: https://ideogram.ai
+domains: [docs.ideogram.ai]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help site's Cancelling Your Subscription: "You can cancel your Ideogram subscription at any time from the billing
+# portal."
+cancelUrl: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/cancelling-your-subscription
+sources: { pricing: https://ideogram.ai/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-17: cards through Stripe (its pricing FAQ: "PayPal and other digital wallets are
+# not available at this time.") and Apple's billing in its iOS app.
+paymentMethods:
+  - methods: [card]
+    page: 'Pricing (What payment methods do you support?)'
+    url: https://ideogram.ai/pricing/
+    quotes:
+      - 'We process all payments through Stripe, which accepts credit or debit cards issued by networks like Mastercard, VISA, or American Express.'
+  - methods: [app-store]
+    page: 'Billing & Subscriptions'
+    url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions
+    quotes:
+      - 'If you subscribed through the iOS app, manage the subscription in the App Store instead.'
+acceptedNetworks:
+  GLOBAL:
+    networks: [mastercard, visa, amex]
+    url: https://ideogram.ai/pricing/
+    quotes:
+      - 'We process all payments through Stripe, which accepts credit or debit cards issued by networks like Mastercard, VISA, or American Express.'
+
+# Owner (M11.2), read 2026-11-17: its terms name Ideogram AI as the company that runs it; its About page says it's
+# headquartered in Toronto, with its mailing address there. No page names a parent or a listing. Country: no page of its
+# own names Canada or Ontario, only Toronto and "ON" in its address, which core's namesCountry doesn't read yet
+# (notes.md: this is the draft's one validation error).
+owner:
+  name: 'Ideogram AI'
+  page:
+    name: Terms of service
+    url: https://ideogram.ai/legal/tos/
+  quotes:
+    - 'and the related mobile applications (the “App”) operated on behalf of Ideogram AI (“Company”, “we” or “us”).'
+  country:
+    code: CA
+    page:
+      name: About Ideogram
+      url: https://ideogram.ai/features/about/
+    quotes:
+      - 'Ideogram is headquartered in Toronto and operates an office in San Francisco.'
+      - 'You can write to Ideogram AI at 320 Bay St, Suite 700, Toronto, ON M5H 4A6.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17: its terms charge "at the start of each new subscription period" and its Renewals
+# and Billing Cycles article shows the date in your account ("The plan card shows Renews on and the date."); neither says
+# which day it is. Only the yearly plans' monthly credit refresh is tied to the start date.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://ideogram.ai/legal/tos/
+    - https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/renewals-and-billing-cycles
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and Plans and Credits: usage (never features) and the private
+# generation no registry feature describes.
+perks:
+  - id: weekly-free-credits
+    name: 30 credits a week (Google or Apple sign-up)
+  - id: unlimited-slow-credits
+    name: Unlimited slow credits
+  - id: private-generation
+    name: Private generation
+  - id: quality-export
+    name: Quality export
+  - id: larger-queue
+    name: Larger generation queue
+  - id: largest-queue
+    name: The largest generation queue
+  - id: batch-generation
+    name: Batch Generation
+
+# AI and creative features, read 2026-11-17, on every plan unless named:
+# - Sold as an AI service ("Ideogram (pronounced "eye-dee-oh-gram") is an AI company on a mission to help people become
+#   more creative.", Company), so its plans are in ai with ai.assistant, and in creative (notes.md).
+# - Image generation on every plan ("Every plan, free included, can use Auto and all Ideogram models."); video on the
+#   paid plans ("Video is a premium app."), whose models include MiniMax H3 at "480p, 768p, 2K, 4K" (Create Videos):
+#   4K export.
+# - Models from other companies on every plan: "The Image app also runs models from other providers." (Models): GPT
+#   Image and Nano Banana are premium ("Premium models need a paid plan or bought credits"), Z-Image and P-Image-Ideogram
+#   free.
+# - Monthly credits that pay for its API on the paid plans: "Personal	Your monthly plan credits when they cover the
+#   whole request." (Ideogram API), so `api` and ai.api-credits; the free plan's credits are weekly. Its MCP server
+#   lets other assistants use Ideogram ("Ideogram's MCP server lets an AI assistant work in your Ideogram account."),
+#   the other way round from the registry's `mcp` (Ideogram reaching MCP servers): not set (notes.md).
+# - Creative tools: photo editing (Precise Edit, Remove Backgrounds and Objects, Upscale), graphic design (Studio's text
+#   layers, logos: "Studio: edit an image with tools and layers.") and vector illustration ("Ideogram Vector creates
+#   scalable, editable SVG artwork from a prompt or an existing image."), each paid in credits, which the free plan has.
+# - Generative credits a month on the paid plans: "2,400 priority credits/mo." and "7,500 priority credits/mo." The free
+#   plan's 30 a week is a perk.
+# - Kept on its servers: your Library of generations.
+# - No watermark: not stated (its terms forbid removing "any watermarks included on any User Output"; no page says
+#   which plans add one), so left out. Its videos' generated sound is part of the clip, not music or voice
+#   generation. None of its pages offers web search, voice, memory, projects, reasoning, a coding agent or office apps.
+# General features, read 2026-11-17: "Use Ideogram in the web app, the iOS app, or through the Ideogram API." Sign-in:
+# "Continue with Google", "Continue with Apple", "Continue with Microsoft", SSO, and "Continue with email, with an email
+# address and password." Support: "Email support@ideogram.ai." and its Discord server. No app languages listed, no pause
+# and no parental controls on its pages.
+features:
+  platforms: [web, ios]
+  account.sign-in: [password, sso]
+  support.channels: [email, community]
+
+plans:
+  - id: ideogram.free
+    name: Free
+    link: https://ideogram.ai/pricing/
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.model-choice: true
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing, graphic-design, illustration]
+    perks: [weekly-free-credits]
+    notes: '30 credits a week for accounts made with Google or Apple; everything you make is public. 10 reference-image edits in total and JPEG downloads at original size; video and premium models need a paid plan or bought credits.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://docs.ideogram.ai/plans-and-billing/available-plans
+
+  - id: ideogram.plus
+    name: Plus
+    link: https://ideogram.ai/pricing/
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.model-choice: true
+      ai.api-credits: true
+      ai.integrations: [api]
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing, graphic-design, illustration]
+      creative.export-resolution: 4k
+      creative.ai-credits: 2400
+    perks: [unlimited-slow-credits, private-generation, quality-export, larger-queue]
+    notes: '2,400 priority credits a month (they don’t roll over), then unlimited generations with Ideogram models in a slower queue. New images stay private until you publish them.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 20
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ideogram.ai/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 180
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ideogram.ai/pricing/
+
+  - id: ideogram.pro
+    name: Pro
+    link: https://ideogram.ai/pricing/
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.image-generation: true
+      ai.video-generation: true
+      ai.model-choice: true
+      ai.api-credits: true
+      ai.integrations: [api]
+      ai.chat-storage: cloud
+      creative.tools: [photo-editing, graphic-design, illustration]
+      creative.export-resolution: 4k
+      creative.ai-credits: 7500
+    perks:
+      [unlimited-slow-credits, private-generation, quality-export, largest-queue, batch-generation]
+    notes: '7,500 priority credits a month at its best cost per credit, the largest queue and Batch Generation; private generation as on Plus.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 60
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ideogram.ai/pricing/
+      - region: GLOBAL
+        currency: USD
+        amount: 504
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://ideogram.ai/pricing/
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 in a headed Edge: its Terms of Service
+# (last revised August 14, 2024), which name its Privacy Policy (last revised January 15, 2025); its help site's billing,
+# account and sharing pages. Its affiliate programme's terms (in the terms, for creators who apply) hold no topic. Not
+# read: the sign-up form's agreement line (it shows only after choosing a sign-in method), the self-hosting licence
+# (separate purchase) and Apple's terms for its iOS app.
+policies:
+  links:
+    - name: Terms of service
+      url: https://ideogram.ai/legal/tos/
+    - name: Privacy policy
+      url: https://ideogram.ai/legal/privacy/
+    - name: Pricing
+      url: https://ideogram.ai/pricing/
+    - name: Plans and credits
+      url: https://docs.ideogram.ai/plans-and-billing/available-plans
+    - name: Renewals and billing cycles
+      url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/renewals-and-billing-cycles
+    - name: Switching or downgrading plans
+      url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/switching-or-downgrading-plans
+    - name: Account settings
+      url: https://docs.ideogram.ai/get-started/account-settings
+    - name: Sign in and accounts
+      url: https://docs.ideogram.ai/get-started/signup-and-registration
+    - name: Download
+      url: https://docs.ideogram.ai/organize-and-share/download
+  ratings:
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can cancel online at any time and keep your plan to the end of the time you paid for, but you must cancel at least 5 days before it renews or you may pay for the next period.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'To avoid future subscription charges, you must cancel your subscription five (5) days before the subscription period renewal date by going to billing management on the Website or the App and clicking “Cancel Subscription”.'
+        - url: https://ideogram.ai/pricing/
+          quote: "You'll be able to use all the benefits and features of your plan until the end of your billing period and won't be charged again after that."
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You get no money back, not even for part of a period, but you keep your plan to the end of the time you paid for.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'Except as expressly set forth in these Terms, payments for any subscriptions to the Services are non-refundable and there are no credits for partially used periods.'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'Following any cancellation by you, however, you will continue to have access to the paid Services through the end of the subscription period for which payment has already been made.'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It can change its prices whenever it decides, but a new price applies only after it tells you, without saying how long before.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'Except as otherwise provided in these Terms, any price changes or changes to your subscription plan will take effect following reasonable notice to you.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial for its paid plans; the free plan is a plan of its own.'
+      pages: [https://ideogram.ai/pricing/]
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and help site say plans renew on their own and suggest cancelling ahead, but not that it reminds you before a renewal.'
+      pages:
+        - https://ideogram.ai/legal/tos/
+        - https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/renewals-and-billing-cycles
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages list no fees beyond the price and tax. It charges in US dollars, so your bank may convert the amount and add its own fee.'
+      pages:
+        - https://ideogram.ai/legal/tos/
+        - https://ideogram.ai/pricing/
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up starts at once and you pay only the difference for the days left. Moving down starts when your plan renews, with no money back for the difference.'
+      sources:
+        - url: https://ideogram.ai/pricing/
+          quote: "Upgrades are automatically prorated - you'll only pay the difference based on the unused portion of your current plan."
+        - url: https://docs.ideogram.ai/plans-and-billing/billing-and-subscriptions/switching-or-downgrading-plans
+          quote: 'Your current plan stays active until the end of the period you already paid for, with no refund or credit for the difference.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Disputes go to a private referee (arbitration), not a court, and you can’t join a class action. You can opt out only by emailing it within 30 days of agreeing to its terms.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'You and the Company agree that any proceeding to resolve any dispute, claim or controversy will be conducted only on an individual basis and not in a class, consolidated or representative action.'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'You have the right to opt out of the arbitration provisions of this Section 10 by sending written notice of your decision to opt out to support@ideogram.ai within thirty (30) days after first becoming subject to this arbitration agreement.'
+      action:
+        name: 'How to opt out of arbitration (section 10.4)'
+        url: https://ideogram.ai/legal/tos/
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'For big changes it tries to tell you and let you read them before they apply, without saying how long before. Using Ideogram after that means you accept them.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'If we make material changes, we will use reasonable efforts to notify you and give you an opportunity to review the changes before they become effective.'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'By continuing to access or use the Services after the revised Terms become effective, you agree to be bound by the revised Terms.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can suspend or delete your account at any time, for any reason or none, with or without warning, and gives no refund if it says you broke its terms.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'Additionally, the Company may suspend, disable, or delete your Account and/or the Services, with or without notice, for any or no reason.'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'your access to the paid Services will terminate immediately regardless of whether you have paid for the then-current subscription period, and you will not be entitled to any refunds whatsoever.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: bad
+      reason: 'On the free plan everything you make is public, and other users may copy, change and remix it. Ideogram’s own licence lasts while it stores your content and may be passed to companies it works with.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'As part of the foregoing license grant in Section 4.1, you agree that other users of the Services shall have the right to use, reproduce, modify, comment on and/or tag Your Content'
+        - url: https://ideogram.ai/pricing/
+          quote: 'On the free plan, images you generate are public.'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      plans: [ideogram.plus, ideogram.pro]
+      tier: neutral
+      reason: 'New images stay private, so other users can’t remix them unless you publish them. Ideogram’s licence is broad but only to run, improve and promote it, and lasts only while it stores your content.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'solely as required to be able to operate, improve, promote and provide the Services.'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'You agree that these rights and licenses are royalty-free, transferable, sublicensable, worldwide and irrevocable (for so long as Your Content is stored with us)'
+        - url: https://ideogram.ai/pricing/
+          quote: 'On Plus, Pro, Team and Enterprise, new images stay private until you publish them, and you can unpublish images you published before.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'What Ideogram makes for you is yours to use, even commercially, but its licence over your content lets it use them to run, improve and promote the service.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'We do not claim any ownership rights in your User Input or User Output, and we do not restrict your ability to use User Output for your own purposes (including for commercial purposes).'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'solely as required to be able to operate, improve, promote and provide the Services.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change its plans in any way at any time, but changes to your plan apply only after it tells you.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'We reserve the right to change our subscription plans or adjust pricing for the Services in any manner and at any time as we may determine in our sole and absolute discretion.'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'Except as otherwise provided in these Terms, any price changes or changes to your subscription plan will take effect following reasonable notice to you.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://ideogram.ai/legal/tos/
+        - https://ideogram.ai/legal/privacy/
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You get a personal licence it can take back, only to use the service. Its limits, such as not taking it apart, don’t apply where the law forbids them.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'we hereby grant you, a personal, non-assignable, non-sublicensable, non-transferrable, revocable, and non-exclusive right and license to access and display such software, content and materials provided to you as part of the Services'
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'You may not do any of the following in connection with your use of the Services, unless applicable laws or regulations prohibit these restrictions or you have our written permission to do so:'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its privacy policy only recommends not sharing your sign-in details; its terms don’t say whether you may share your account.'
+      pages:
+        - https://ideogram.ai/legal/tos/
+        - https://ideogram.ai/legal/privacy/
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help site limit how many generations run at once, but say nothing about how many devices you can use.'
+      pages:
+        - https://ideogram.ai/legal/tos/
+        - https://docs.ideogram.ai/plans-and-billing/available-plans
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its iOS app updates itself or changes anything else on your device.'
+      pages: [https://ideogram.ai/legal/tos/]
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: poor
+      reason: 'It only says it makes reasonable efforts; it names no outside checks and no way to report a security problem.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'Despite our reasonable efforts, no security measures are impenetrable, and we cannot guarantee “perfect security.”'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records your sessions and follows your browsing, also on other websites after you leave, for analytics. You can only block some of it in your browser, and it ignores Do Not Track signals.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We use Tracking Technologies, including Google Analytics and Amplitude’s session replay technology, to collect information about your browsing activities, including session recordings and information about your browsing over time and across different websites following your use of our Services.'
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'If you so choose, you may block or delete certain Tracking Technologies from your browser'
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'Like many websites, our website is not designed to respond to such signals'
+      action:
+        name: 'Its privacy policy’s tracking choices'
+        url: https://ideogram.ai/legal/privacy/
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: good
+      reason: 'It says it doesn’t sell or share your data for advertising. It gives it to companies that run the service for it and to its own group.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We do not “sell” or “share” (as those terms are defined under the CCPA) personal information, nor have we done so in the preceding 12 months.'
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'To our affiliates or others within our corporate group, as a matter of our legitimate interests to efficiently provide the Services.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'It shows no ads, and says it doesn’t share your data for ads targeted across other sites.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We do not “sell” or “share” (as those terms are defined under the CCPA) personal information, nor have we done so in the preceding 12 months.'
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'It uses what you type and upload to train the models behind Ideogram, on every plan, and offers no way to say no.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'training the models that power our Services'
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We use User Input and other information you submit to the Services because it is in our legitimate interest to administer and improve the Services and improve and develop our products and technology.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: bad
+      reason: 'On the free plan everything you make is public for anyone on Ideogram to see. On every plan it uses what you send to improve and develop its products, with no way to say no.'
+      sources:
+        - url: https://ideogram.ai/pricing/
+          quote: 'On the free plan, images you generate are public.'
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We use User Input and other information you submit to the Services because it is in our legitimate interest to administer and improve the Services and improve and develop our products and technology.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it decides it needs it. Deleting your account usually takes about two days.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We retain your information for as long as is reasonably necessary for the purposes specified in this Privacy Policy.'
+        - url: https://docs.ideogram.ai/get-started/account-settings
+          quote: 'Deletion usually takes about 48 hours.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself in Settings, which removes everything you made, usually within about 48 hours. Only Plus and Pro can delete single images.'
+      sources:
+        - url: https://docs.ideogram.ai/get-started/account-settings
+          quote: 'Deleting your account permanently removes all your generations and data.'
+        - url: https://docs.ideogram.ai/get-started/account-settings
+          quote: 'Deletion usually takes about 48 hours.'
+        - url: https://ideogram.ai/pricing/
+          quote: 'Yes, image deletion is available for Ideogram Plus and Ideogram Pro subscribers.'
+      action:
+        name: 'How to delete your account'
+        url: https://docs.ideogram.ai/get-started/account-settings
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your images yourself as common image files; for a copy of your other data you email it.'
+      sources:
+        - url: https://docs.ideogram.ai/organize-and-share/download
+          quote: 'Pick a File type: JPEG, PNG or WEBP.'
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'You may submit a request to exercise any of these rights by emailing us at privacy@ideogram.ai.'
+      action:
+        name: 'How to download your images'
+        url: https://docs.ideogram.ai/organize-and-share/download
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It hands data to police and authorities when the law calls for it, but also to protect its own interests. It doesn’t say it tells you.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'We share your information with regulators, law enforcement agencies, public authorities, or any other relevant organizations to comply with applicable law or obligations thereunder, including cooperation with law enforcement, judicial orders, and regulatory inquiries, to protect the interests of, and ensure the safety and security, of us, our users, a third party or the public, to exercise or defend legal claims, and to enforce our Terms or other agreements.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information may be kept in other countries with weaker privacy laws, which it doesn’t name, and it doesn’t describe any safeguards.'
+      sources:
+        - url: https://ideogram.ai/legal/privacy/
+          quote: 'Your information may be stored, transferred to and processed outside of your country of residence, including transferred to recipients in other countries which may have data privacy or protection rules that are different from your country of residence or citizenship.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with a Google, Apple or Microsoft account, or an email and a password, and pick a username; your full name is optional.'
+      sources:
+        - url: https://docs.ideogram.ai/get-started/signup-and-registration
+          quote: 'Continue with email, with an email address and password.'
+        - url: https://docs.ideogram.ai/get-started/signup-and-registration
+          quote: 'Add a Full name (optional) if you want one.'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: 'It can remove your images'
+      tier: bad
+      reason: 'It can remove, edit or delete anything you made or uploaded, at any time and for any reason, without telling you, paid plans included.'
+      sources:
+        - url: https://ideogram.ai/legal/tos/
+          quote: 'To the fullest extent permitted by applicable law, the Company reserves the right, and has absolute discretion, to remove, screen, edit, or delete any of Your Content at any time, for any reason, and without notice'
+      lastVerified: 2026-11-17
