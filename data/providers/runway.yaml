@@ -1,0 +1,766 @@
+# Researched by hand on 2026-11-17 (the full catalog run, AI batch 2), read with Edge from Canada (runway.com's pricing
+# page in its Monthly and Yearly views, with a plain fetch of its HTML for the page's own pricing data; its Terms of Use,
+# Privacy Policy, Usage Policy, Data Security and About pages; the sign-up and log-in pages) and through UK and German
+# exits (the pricing page), with a plain fetch of its help centre's articles (help.runwayml.com, Zendesk's API). Pages,
+# each quoted where it's used:
+# Pricing: runway.com/pricing (runwayml.com/pricing redirects there), Individual tab: Free "$0", Standard "$15" a month or
+# "$12" "/month" "Billed annually. Save $36/year.", Pro "$35" or "$28" ("Save $84/year."), Max "$95" or "$76" ("Save
+# $228/year."). A yearly plan is one payment for the year ("Annual plans are paid for in one lump sum at a discounted
+# rate", help centre), so its price is twelve times the monthly rate shown: $144, $336 and $912, which each card's
+# saving confirms (notes.md). The page's own data names the currency for everyone ("priceCurrency":"USD"), and the UK and
+# German exits got the same "$" prices as Canada: one US-dollar price list, GLOBAL. No page says a price includes tax
+# ("Company will charge tax when required.", its terms).
+# Region checklist for CA, 2026-11-17: 1. no country paths (hreflang only for its English, French, Japanese, Korean and
+# Brazilian Portuguese pages, the same prices); 2. no country or currency picker; 3. the page's data names USD and no
+# country; 4. checkout needs an account; 5. no prices or tax article in its help centre; 6. Edge and a plain fetch from
+# Canada, and the UK's and Germany's exits, all show the same USD prices; 7. no bill offered.
+# Not listed: Team ("teams of 2 to 9 people") and Enterprise (business plans); the API ("Credits or plans purchased in
+# Runway are completely separate from credits purchased for the Runway API", usage-billed); credits bought as you go
+# ("The minimum purchase is 1,000 credits."); the legacy Unlimited plan ("As of June 1, 2026, Unlimited is no longer
+# offered", its subscribers moving to Max on November 30); the student and educator discount (25% off, an offer); its
+# iOS app's App Store prices (a way to pay).
+# Bundles: none on its pages or in a search. Official resellers: none; no page names a shop that sells it.
+
+id: runway
+name: Runway
+aliases: [runwayml, runway ml, runway ai]
+website: https://runway.com
+domains: [runwayml.com]
+category: ai
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help centre's cancelling article (the billing page's "Cancel plan" steps), which also links Apple's steps for the
+# iOS app.
+cancelUrl: https://help.runwayml.com/hc/en-us/articles/21668396605971-How-do-I-cancel-my-plan
+sources: { pricing: https://runway.com/pricing }
+
+# Ways to pay (M11.5), read 2026-11-17: through Stripe, a card, Apple Pay, Google Pay, Alipay, Cash App Pay, and Amazon
+# Pay, WeChat Pay and Stripe's bank payments in the US (other) ("Which ones you can use depends on your location."), and
+# Apple's and Google's billing in its apps. "We do not accept and will never request cryptocurrency payments".
+paymentMethods:
+  - methods: [card, apple-pay, google-pay, alipay, cash-app, other]
+    page: 'What payment methods are available?'
+    url: https://help.runwayml.com/hc/en-us/articles/30657959470483-What-payment-methods-are-available
+    quotes:
+      - 'Credit or debit card'
+      - 'Amazon Pay'
+      - 'Apple Pay'
+      - 'Google Pay'
+      - 'Stripe Instant Bank Payments (U.S. only)'
+      - 'Alipay'
+      - 'Cash App Pay'
+      - 'WeChat Pay'
+  - methods: [app-store]
+    page: 'Requesting a refund for your plan or payment'
+    url: https://help.runwayml.com/hc/en-us/articles/24343363554067-Requesting-a-refund-for-your-plan-or-payment
+    quotes:
+      - 'You made your purchase through the Apple App Store or Google Play, where Apple or Google handles refunds'
+# Card networks (M9.2), read 2026-11-17 in its terms: Visa and Mastercard by name, for every buyer.
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard]
+    url: https://runway.com/terms-of-use
+    quotes:
+      - 'You must provide Company with a valid credit card (Visa, MasterCard, or any other issuer accepted by us) through a payment provider (“Payment Provider”), or purchase order information, as a condition to signing up for the Services.'
+
+# Owner (M11.2), read 2026-11-17: its privacy policy names Runway AI, Inc. as the company behind it, and its terms say it
+# runs the service from the United States. A private company: no page names a listing.
+owner:
+  name: 'Runway AI, Inc.'
+  page:
+    name: Privacy policy
+    url: https://runway.com/privacy-policy
+  quotes:
+    - 'This Privacy Policy describes how Runway AI, Inc. ("Runway," "we", "us" or "our") processes information about you through our website, services, mobile application, social media pages, marketing activities, live events and other activities described in this Privacy Policy (collectively, the "Service").'
+  country:
+    code: US
+    page:
+      name: Terms of use
+      url: https://runway.com/terms-of-use
+    quotes:
+      - 'The Services are controlled and offered by Company from its facilities in the United States of America.'
+    lastVerified: 2026-11-17
+  lastVerified: 2026-11-17
+
+# Renewal day (M11.5), read 2026-11-17 in its help centre: the date you first started your plan, monthly and for yearly
+# plans' credits ("Annual plans renew one year after initiation", Managing your subscription).
+renewalAnchor:
+  kind: same-date
+  page: How do credits work?
+  url: https://help.runwayml.com/hc/en-us/articles/15124877443219-How-do-credits-work
+  quotes:
+    - 'Your billing date is the day of the month on which you first initiated your plan. For monthly subscribers, this is also the day that you will receive your monthly subscription charge.'
+    - 'For annual subscribers, the billing date is the same date each month (e.g. the 20th of each month), based on when you first initiated your plan.'
+  lastVerified: 2026-11-17
+
+# Perks (M11.6), read 2026-11-17 on its pricing cards and help centre: usage levels (perks, never features), storage,
+# and what the dearer plans add that no feature describes. Commercial use is every plan's: "Yes, the content you create
+# using Runway is yours to use without any non-commercial restrictions from us." (Usage rights).
+perks:
+  - id: one-time-credits
+    name: "125 one-time credits to explore Runway's AI tools"
+  - id: commercial-rights
+    name: Commercial rights to your Runway generations
+  - id: storage-5gb
+    name: 5GB asset storage
+  - id: storage-20gb
+    name: 20GB storage
+  - id: storage-100gb
+    name: 100GB storage
+  - id: storage-500gb
+    name: 500GB storage
+  - id: parallel-5
+    name: 'Parallel generations: 5 videos & images'
+  - id: parallel-15
+    name: 'Parallel generations: 15 videos & images'
+  - id: parallel-20
+    name: 'Parallel generations: 20 videos & images'
+  - id: projects-3
+    name: Up to 3 projects
+  - id: projects-5
+    name: Up to 5 projects
+  - id: projects-10
+    name: Up to 10 projects
+  - id: app-studio
+    name: Build creative apps in App Studio
+  - id: runway-ads
+    name: Generate, test and publish ads with Runway Ads
+  - id: top-up-credits
+    name: Top-up credits anytime
+  - id: unlimited-upscaling
+    name: Unlimited 4K video upscaling
+  - id: topaz-upscale
+    name: Topaz AI Upscale (Unlimited)
+  - id: unlimited-mode
+    name: 'Unlimited Mode: generate without using credits on supported models and tools'
+  - id: brand-kit-1
+    name: 1 Brand Kit
+  - id: brand-kits-3
+    name: Up to 3 Brand Kits
+  - id: voice-clone-1
+    name: 1 custom voice clone
+  - id: voice-clones-3
+    name: Up to 3 custom voice clones
+  - id: runway-mcp
+    name: Runway MCP
+  - id: credit-rollover
+    name: Roll over unused credits for 1 month
+  - id: studio-grade
+    name: 'Studio-grade quality generations: HDR, ProRes, image sequences'
+
+# AI features (the AI category's registry), read 2026-11-17 on its pricing cards and comparison table and in its help
+# centre. Runway is an AI video, image and audio generator with a chat assistant, Runway Agent: "Runway Agent is a
+# chat-based collaborative agent that analyzes what you give it", which every paid card lists ("Agentic creative
+# collaborator") and the Free plan's article names ("let the Agent pick the right model for you").
+# - Video generation on every plan: "All videos generated on a Free plan feature a Runway watermark." (Free plan
+#   details); the paid cards' "Access to all AI video & image models". Image generation on the paid plans by the same
+#   line; on Free inferred (its "access to a select range of models", and "Upgrading to the Standard plan or above gives
+#   you access to all AI image and video models").
+# - Music and voice on the paid plans: Standard's "Music, voice & sound effects generation"; the comparison table's "AI
+#   audio" rows (Lyria 3 Pro songs, Text to Speech) for Standard, Pro and Max; Pro's "generative audio tools like Text to
+#   Speech and Custom Voices for Lip Sync".
+# - Models from several companies on the paid plans: "The Pro plan includes access to every AI image and video model on
+#   Runway, including third-party models" (Pro plan details); every paid card lists Kling 4.0 and Nano Banana Pro.
+#   Reasoning on the paid plans is inferred: Agent runs on a model you pick, among them "Opus 5.5 — deeper reasoning" and
+#   "GPT-6 Astra — advanced reasoning" (Creating with Runway Agent), with no plan named.
+# - Projects on every plan: "Projects let teams organize and collaborate on sessions, workflows, and assets within their
+#   Runway workspace." (Creating a Project); the paid cards' "Up to 3 projects" (5, 10), and on Free "you will not be
+#   able to create any new projects once on the Free plan if you have over three projects" (How do I cancel my plan?).
+# - Custom assistants on the paid plans, where its cards list Agent: Agent's own skills ("You can also turn a process
+#   you've worked out in a chat into a custom skill", Using Agent Skills).
+# - Early access on Max: "Early access to new models" (its card); "Max and higher sometimes get early access to new
+#   releases." (Which plan is right for me?).
+# - Chats kept on its servers: "If you've used Agent before, you'll land on your most recent session." (Creating with
+#   Runway Agent); its privacy policy collects "User content, such as prompts".
+# - Not counted: Runway MCP (Pro and Max cards: a perk) lets other assistants use Runway ("The Runway MCP (Model Context
+#   Protocol) brings the power of generative media into Claude, ChatGPT, and other LLM agents."), not Agent use MCP
+#   servers; Agent's connectors (Dropbox, Figma, Notion) are the Team plan's only ("It isn't included on Free, Standard,
+#   Pro or Max plans"); App Studio builds apps in a creative tool, not a coding tool (Perplexity's review of
+#   2026-11-17); the API is billed apart. No page offers web search, voice conversations, memory across chats, a browser
+#   agent, scheduled tasks, deep research, code completion or office apps.
+# Creative features (the creative category's registry), read 2026-11-17:
+# - Tools: video editing on every plan ("You can trim and arrange clips into a finished video directly in the Final Cut
+#   tab of the Agent panel", Trimming and Assembling Clips in Studio; "Edit Studio is a video editing experience");
+#   on the paid plans also image editing ("Image editing — modify or extend existing images using text instructions or
+#   reference images.", Creating with Runway Agent) and motion graphics and effects (Agent's skill "Motion Graphic —
+#   animate text, charts and infographics into a video"; Edit Studio's "from adding VFX and relighting scenes"). Free's
+#   generative tools are "a limited set", which no page names.
+# - Highest video export 4K on the paid plans: Standard's "4K upscaling", Pro's and Max's "Unlimited 4K video upscaling";
+#   generations are "created in 720p, but can be upscaled to 4K" (Can I generate videos in 4K?). Free's is left out: no
+#   page states it.
+# - No watermark on the paid plans: Standard's "No watermarks"; "You can generate without a watermark by signing up for
+#   the Standard plan or above". Free's videos have one.
+# - Generative credits a month: "625 credits monthly", "2250 credits monthly", "9500 credits" (its cards); Free's 125
+#   are once only ("Your one-time deposit of 125 credits does not expire, and does not renew or refresh once spent."), a
+#   perk.
+# General features, read 2026-11-17: the web and its apps ("The Runway mobile app is available for iPhone and Android via
+# their respective app stores.", Mobile device compatibility). Sign-in: an email address and password, Google or Apple
+# ("Signing up with an email address", "Signing up with Google", "Signing up with Apple", Creating a Runway Account; its
+# log-in page's "Forgot Password"); no two-factor sign-in of its own ("Turn on MFA for the email account associated with
+# your Runway account"). App languages: "Runway is currently only available in American English" (its marketing pages
+# have other languages, notes.md). Support: tickets through its AI assistant, answered by a person ("ticket-based
+# support from our team"), and its Discord's "#community-help"; "we don't currently offer phone or live chat with human
+# agents". No pause and no parental controls: its terms and help centre offer neither (13 and over, with "your parent or
+# legal guardian’s permission" under 18).
+features:
+  platforms: [android, ios, web]
+  account.sign-in: [password, sso]
+  languages.interface: [en]
+  support.channels: [email, community]
+
+plans:
+  - id: runway.free
+    name: Free
+    link: https://runway.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.projects: true
+      ai.chat-storage: cloud
+      creative.tools: [video-editing]
+      creative.no-watermark: false
+    inferred:
+      ai.image-generation:
+        reason: 'Free has “access to a select range of models”, and its article says upgrading “gives you access to all AI image and video models”; it doesn’t name Free’s.'
+        page:
+          name: Free plan details
+          url: https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details
+        lastVerified: 2026-11-17
+    perks: [one-time-credits, commercial-rights, storage-5gb]
+    notes: '125 credits once, on a selection of its models, with a Runway watermark on videos.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+
+  - id: runway.standard
+    name: Standard
+    link: https://runway.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.projects: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+      creative.tools: [video-editing, photo-editing, motion-graphics]
+      creative.export-resolution: 4k
+      creative.no-watermark: true
+      creative.ai-credits: 625
+    inferred:
+      ai.reasoning:
+        reason: 'Runway Agent runs on a model you pick, among them “Opus 5.5 — deeper reasoning” and “GPT-6 Astra — advanced reasoning”; no page says which plans have them.'
+        page:
+          name: Creating with Runway Agent
+          url: https://help.runwayml.com/hc/en-us/articles/51601639579667-Creating-with-Runway-Agent
+        lastVerified: 2026-11-17
+    perks:
+      [
+        commercial-rights,
+        storage-20gb,
+        parallel-5,
+        projects-3,
+        app-studio,
+        runway-ads,
+        top-up-credits,
+      ]
+    notes: 'Runway’s Gen-4.5 and Aleph 2.0 and others’ models (Kling 4.0, Seedance, Nano Banana Pro, Veo 3.1); 625 credits a month (about 52 seconds of Gen-4.5) that don’t roll over.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 15
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 144
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+
+  - id: runway.pro
+    name: Pro
+    link: https://runway.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.projects: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+      creative.tools: [video-editing, photo-editing, motion-graphics]
+      creative.export-resolution: 4k
+      creative.no-watermark: true
+      creative.ai-credits: 2250
+    inferred:
+      ai.reasoning:
+        reason: 'Runway Agent runs on a model you pick, among them “Opus 5.5 — deeper reasoning” and “GPT-6 Astra — advanced reasoning”; no page says which plans have them.'
+        page:
+          name: Creating with Runway Agent
+          url: https://help.runwayml.com/hc/en-us/articles/51601639579667-Creating-with-Runway-Agent
+        lastVerified: 2026-11-17
+    perks:
+      [
+        commercial-rights,
+        storage-100gb,
+        parallel-15,
+        projects-5,
+        app-studio,
+        runway-ads,
+        top-up-credits,
+        unlimited-upscaling,
+        topaz-upscale,
+        unlimited-mode,
+        brand-kit-1,
+        voice-clone-1,
+        runway-mcp,
+      ]
+    notes: 'Everything in Standard with 2,250 credits a month (about 187 seconds of Gen-4.5) that don’t roll over, and Unlimited Mode on supported models, which is slower but uses no credits.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 35
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 336
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+
+  - id: runway.max
+    name: Max
+    link: https://runway.com/pricing
+    categories: [ai, creative]
+    features:
+      ai.assistant: true
+      ai.video-generation: true
+      ai.image-generation: true
+      ai.audio-generation: true
+      ai.model-choice: true
+      ai.reasoning: true
+      ai.projects: true
+      ai.early-access: true
+      ai.integrations: [custom-assistants]
+      ai.chat-storage: cloud
+      creative.tools: [video-editing, photo-editing, motion-graphics]
+      creative.export-resolution: 4k
+      creative.no-watermark: true
+      creative.ai-credits: 9500
+    inferred:
+      ai.reasoning:
+        reason: 'Runway Agent runs on a model you pick, among them “Opus 5.5 — deeper reasoning” and “GPT-6 Astra — advanced reasoning”; no page says which plans have them.'
+        page:
+          name: Creating with Runway Agent
+          url: https://help.runwayml.com/hc/en-us/articles/51601639579667-Creating-with-Runway-Agent
+        lastVerified: 2026-11-17
+    perks:
+      [
+        commercial-rights,
+        storage-500gb,
+        parallel-20,
+        projects-10,
+        app-studio,
+        runway-ads,
+        top-up-credits,
+        unlimited-upscaling,
+        topaz-upscale,
+        unlimited-mode,
+        brand-kits-3,
+        voice-clones-3,
+        runway-mcp,
+        credit-rollover,
+        studio-grade,
+      ]
+    notes: 'Everything in Pro with 9,500 credits a month (about 791 seconds of Gen-4.5), up to a month of unused credits rolled over, ProRes and HDR output, and early access to new models. It replaced the Unlimited plan on June 1, 2026.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 95
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+      - region: GLOBAL
+        currency: USD
+        amount: 912
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-17
+        sourceUrl: https://runway.com/pricing
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-17 with Edge and a plain fetch: its Terms
+# of Use (last updated October 23, 2026), which include its Usage Policy and the Supplemental Terms some features show;
+# its Privacy Policy (effective October 23, 2026, with its California notices on the same page); its Data Security page;
+# its log-in page's agreement line ("you agree that we and our vendors may scan faces or capture voiceprints each time
+# you use certain features such as Act-Two and Custom Voice"); and its help centre's billing, account and privacy
+# articles. Its terms include Stripe's terms and privacy policy for payments (no topic) and the App Store's terms for
+# the iOS app. Not read: the sign-up form's agreement line, which shows only after an email is entered; the Enterprise
+# Services Terms (business plans); its Trust Center's reports (Enterprise customers only).
+policies:
+  links:
+    - name: Terms of use
+      url: https://runway.com/terms-of-use
+    - name: Privacy policy
+      url: https://runway.com/privacy-policy
+    - name: Usage policy
+      url: https://runway.com/safety/usage-policy
+    - name: Data security
+      url: https://runway.com/data-security
+    - name: Pricing
+      url: https://runway.com/pricing
+    - name: Cancelling
+      url: https://help.runwayml.com/hc/en-us/articles/21668396605971-How-do-I-cancel-my-plan
+    - name: Managing your subscription
+      url: https://help.runwayml.com/hc/en-us/articles/50205612565779-Managing-your-subscription
+    - name: Refunds
+      url: https://help.runwayml.com/hc/en-us/articles/24343363554067-Requesting-a-refund-for-your-plan-or-payment
+    - name: Keeping your account safe
+      url: https://help.runwayml.com/hc/en-us/articles/36555466922131-Keeping-Your-Account-Safe-and-Preventing-Fraud
+    - name: Usage rights
+      url: https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights
+    - name: Education FAQ
+      url: https://help.runwayml.com/hc/en-us/articles/43109077483667-Runway-Education-FAQ
+    - name: Deleting your account
+      url: https://help.runwayml.com/hc/en-us/articles/4402108479379-Deleting-your-account
+    - name: Downloading your files
+      url: https://help.runwayml.com/hc/en-us/articles/18406706187283-Batch-downloading-exports-assets
+    - name: Export formats
+      url: https://help.runwayml.com/hc/en-us/articles/54396547993491-Exporting-Videos-in-ProRes-and-PNG-Sequence-Formats
+    - name: Creating an account
+      url: https://help.runwayml.com/hc/en-us/articles/24297557468563-Creating-a-Runway-Account
+    - name: Which plan is right for me?
+      url: https://help.runwayml.com/hc/en-us/articles/21664961171475-Which-plan-is-right-for-me
+  ratings:
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You can cancel online from your billing page whenever you like, in a few steps, and keep your plan until the end of the time you paid for.'
+      sources:
+        - url: https://help.runwayml.com/hc/en-us/articles/50205612565779-Managing-your-subscription
+          quote: 'You can cancel your plan at any time by downgrading to a Free plan.'
+        - url: https://runway.com/terms-of-use
+          quote: 'If you cancel your subscription, you may use your subscription until the end of your then-current subscription term; your subscription will not be renewed after your then-current term expires.'
+        - url: https://help.runwayml.com/hc/en-us/articles/21668396605971-How-do-I-cancel-my-plan
+          quote: 'Yes, you can cancel immediately after subscribing and will have access to the plan features until the end of the billing cycle.'
+      lastVerified: 2026-11-17
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'Payments are usually not refunded, but you keep your plan to the end of the time you paid for. Within 30 days of paying, it may refund a plan you’ve hardly used, if it agrees.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'Except as stated in these Terms of Use or as required by applicable law, all fees for the Services are non-refundable, and if you cancel your subscription, you are not entitled to receive any refund or credits for the time remaining in your subscription period.'
+        - url: https://help.runwayml.com/hc/en-us/articles/24343363554067-Requesting-a-refund-for-your-plan-or-payment
+          quote: 'You purchased or renewed your subscription within the last 30 days, and since the time of initial purchase or renewal, your subscription to the Services is unused, or close to unused (as determined by Runway in its discretion).'
+      lastVerified: 2026-11-17
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices whenever it wants, as soon as it posts them, and doesn’t promise to tell you first. If you don’t want the new price, you can cancel.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'Company reserves the right at any time to change its prices and billing methods, either immediately upon posting on the Services or by email delivery to you.'
+        - url: https://runway.com/terms-of-use
+          quote: 'If you do not wish to continue subscribing with the new fees or features, you may cancel your subscription.'
+      lastVerified: 2026-11-17
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'A trial or a discounted start turns into the full price on its own unless you cancel before it ends. It doesn’t say it reminds you first.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'If your subscription includes a discount or promotional rate, you will be charged the promotional rate for the relevant number of subscription periods, and upon completion of the promotional period, your subscription will continue to automatically renew at the then-current subscription fee.'
+        - url: https://runway.com/terms-of-use
+          quote: 'To cancel and avoid being charged the full rate, you must notify us before the discount or promotional period ends.'
+      lastVerified: 2026-11-17
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own at the current price, but not that it reminds you first.'
+      pages:
+        - https://runway.com/terms-of-use
+        - https://help.runwayml.com/hc/en-us/articles/50205612565779-Managing-your-subscription
+      lastVerified: 2026-11-17
+    - topic: billing.fees
+      tier: great
+      reason: 'It charges nothing beyond the price. Your bank or payment service may charge its own fees.'
+      sources:
+        - url: https://help.runwayml.com/hc/en-us/articles/24343363554067-Requesting-a-refund-for-your-plan-or-payment
+          quote: "While we presently don't charge any service fees on our end, any service fees charged by a payment provider, your banking provider, or any other third party are not controlled by us; thus, we are not able to choose whether these are refunded."
+        - url: https://help.runwayml.com/hc/en-us/articles/36555466922131-Keeping-Your-Account-Safe-and-Preventing-Fraud
+          quote: 'There are no “penalty fees” or “account reset” charges'
+      lastVerified: 2026-11-17
+    - topic: billing.plan-changes
+      tier: great
+      reason: 'You can switch plans at any time. Moving up, you pay only the difference; moving down, it gives back what you hadn’t used.'
+      sources:
+        - url: https://runway.com/pricing
+          quote: 'You can upgrade at any time and the change takes effect immediately — upgrades are prorated, so you only pay the time-adjusted difference and receive the additional credits right away.'
+        - url: https://help.runwayml.com/hc/en-us/articles/50205612565779-Managing-your-subscription
+          quote: 'When you downgrade to a plan mid-cycle — for example from annual to monthly, or from Max to Pro — the unused amount of your current plan is refunded automatically to the card you paid with.'
+      lastVerified: 2026-11-17
+    - topic: legal.disputes
+      tier: poor
+      reason: "Disputes go to a private referee (arbitration), not a court, and you can't join a class action. You can opt out only by mailing a letter within 30 days of agreeing to its terms."
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'You agree that any dispute between you and any of the Company Parties relating in any way to the Services or this Agreement, will be resolved by binding arbitration, rather than in court'
+        - url: https://runway.com/terms-of-use
+          quote: 'EACH OF US MAY BRING CLAIMS AGAINST THE OTHER ONLY ON AN INDIVIDUAL BASIS AND NOT ON A CLASS, REPRESENTATIVE, OR COLLECTIVE BASIS'
+        - url: https://runway.com/terms-of-use
+          quote: 'Such notice shall be deemed given when received by Company by letter delivered by nationally recognized overnight delivery service or first class postage prepaid mail at the above address within 30 days after first becoming subject to this Arbitration Agreement.'
+      action:
+        name: 'How to opt out of arbitration (section 16.9)'
+        url: https://runway.com/terms-of-use
+      lastVerified: 2026-11-17
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its terms by posting them with a new date, and they apply at once. If you keep using Runway, you’ve agreed to them.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'We may make changes to the Terms of Use from time to time, and if we do, we will notify you by revising the date at the top of the Terms of Use.'
+        - url: https://runway.com/terms-of-use
+          quote: 'Unless otherwise noted, the amended Terms of Use will be effective immediately, and your continued use of our Services confirms your acceptance of the changes.'
+      lastVerified: 2026-11-17
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can close your account for any reason or none, at once and without warning, and you get no refund if it says you broke its rules.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'terminate or suspend your access to all or part of the Services for any or no reason, including without limitation, any violation of this Agreement.'
+        - url: https://runway.com/terms-of-use
+          quote: 'Company has the right to, immediately and without notice, suspend or terminate any Services provided to you.'
+        - url: https://runway.com/terms-of-use
+          quote: 'you acknowledge that you will not be entitled to receive a refund for fees related to those Services to which your access has been terminated'
+      lastVerified: 2026-11-17
+    - topic: legal.content-rights
+      tier: poor
+      reason: 'You keep what you upload and make, but give Runway a licence over it that never ends, can’t be taken back, and can be passed on, to run Runway for you and others.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'Subject to any applicable account settings that you select, you grant Company a fully paid, royalty-free, perpetual, irrevocable, worldwide, non-exclusive and fully sublicensable right (including any moral rights) and license to host, use, license, distribute, reproduce, modify, adapt, publicly perform, and publicly display, including on a through-to-the-audience basis, Your Content (in whole or in part) for the purposes of operating and providing the Services to you and to our other users.'
+      lastVerified: 2026-11-17
+    - topic: legal.output-rights
+      tier: neutral
+      reason: 'What Runway makes for you is yours, and you may use it commercially, but its licence over your content lets Runway use it too.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'The Company does not claim ownership of any of your Inputs or Outputs. Subject to your compliance with the Agreement, the Company does not restrict your commercial use of your Outputs.'
+        - url: https://runway.com/terms-of-use
+          quote: 'Your Content also includes any Content that you create or generate through the use of the Services, including Content you Make Available to other users through the Services.'
+        - url: https://help.runwayml.com/hc/en-us/articles/18927776141715-Usage-rights
+          quote: 'As between you and Runway, you retain ownership and all your rights to content that you upload and generate on Runway.'
+      lastVerified: 2026-11-17
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can take away features your plan includes whenever it chooses. You can cancel, but you get no money back for the rest of the time you paid for.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'We may choose in our sole discretion to add, modify, or remove benefits and features from the Services.'
+        - url: https://runway.com/terms-of-use
+          quote: 'However, you will not be entitled to receive a prorated refund of any portion of the subscription fee paid for the then-current subscription period unless otherwise stated in these Terms of Use or required by applicable law.'
+      lastVerified: 2026-11-17
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy policy say nothing about closing accounts that aren’t used.'
+      pages:
+        - https://runway.com/terms-of-use
+        - https://runway.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may install its app on a device you own, for your own or your business’s use, and may not take it apart unless the law lets you.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'Company grants you a limited non-exclusive, non-transferable, non-sublicensable, revocable license to download, install and use a copy of the Software Application on a single mobile device or computer that you own or control and to run such copy of the Software Application solely for your own personal or internal business purposes.'
+        - url: https://runway.com/terms-of-use
+          quote: 'you shall not modify, translate, adapt, merge, make derivative works of, disassemble, decompile, reverse compile or reverse engineer any part of the Services except to the extent the foregoing restrictions are expressly prohibited by applicable law'
+      lastVerified: 2026-11-17
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps may update themselves, with or without telling you. Its terms don’t say they change anything else on your device.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'You acknowledge and agree that Company may update the Services with or without notifying you.'
+      lastVerified: 2026-11-17
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You can’t share your account with anyone; working with others needs the Team plan.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'You may not share your Account, password, or API keys with anyone'
+        - url: https://help.runwayml.com/hc/en-us/articles/21664961171475-Which-plan-is-right-for-me
+          quote: 'Yes, but adding collaborators requires a Team plan or higher.'
+      lastVerified: 2026-11-17
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms and help centre set no limit on how many devices you use it on, and say nothing about downloads expiring.'
+      pages:
+        - https://runway.com/terms-of-use
+        - https://help.runwayml.com/hc/en-us/articles/50205612565779-Managing-your-subscription
+      lastVerified: 2026-11-17
+    - topic: security.practices
+      tier: good
+      reason: 'Outside auditors check its security every year (SOC 2 Type II, ISO 27001), and invited researchers can report problems for rewards. The reports aren’t public.'
+      sources:
+        - url: https://runway.com/data-security
+          quote: 'Runway maintains SOC 2 Type II certification, validating our security controls through rigorous independent auditing.'
+        - url: https://runway.com/data-security
+          quote: 'Runway is certified to ISO/IEC 27001, the international standard for information security management systems (ISMS).'
+        - url: https://runway.com/data-security
+          quote: 'In addition to these assessments, Runway operates a private bug bounty program that enables select security researchers to responsibly disclose potential vulnerabilities in exchange for recognition and rewards.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It and its advertising and analytics partners record how you use Runway. You can only limit it in part: block cookies in each browser, or install Google’s opt-out add-on for Google Analytics.'
+      sources:
+        - url: https://runway.com/privacy-policy
+          quote: 'We, our service providers, and our advertising and analytics partners may automatically log information about you, your computer or mobile device, and your interaction over time with the Service, our communications and other online services, such as:'
+        - url: https://runway.com/privacy-policy
+          quote: 'For example, you may opt out of having Google Analytics use your information for analytics by installing the Google Analytics Opt-out Browser Add-on.'
+        - url: https://runway.com/privacy-policy
+          quote: 'Most browsers let you remove or reject cookies.'
+      action:
+        name: 'Your choices, in its privacy policy'
+        url: https://runway.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It gives information about you to advertising and analytics partners, partly to show you ads. You can only block their cookies browser by browser; some US states get an opt-out link.'
+      sources:
+        - url: https://runway.com/privacy-policy
+          quote: 'We may disclose information about you to our advertising and analytics partners to help us better understand your use of the Service, customize the Service, and provide you with advertising that we think will be of interest to you.'
+        - url: https://runway.com/privacy-policy
+          quote: 'Most browsers let you remove or reject cookies.'
+      action:
+        name: 'Your choices, in its privacy policy'
+        url: https://runway.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Runway shows no ads in the app, but it and its ad partners follow what you do on other sites to show you its ads there. You can only block it browser by browser.'
+      sources:
+        - url: https://runway.com/privacy-policy
+          quote: 'Targeted advertising. We and our ad partners may use information about you to deliver more relevant content to you on our Service and across the Internet.'
+        - url: https://runway.com/privacy-policy
+          quote: 'We, our service providers, and our ad and analytics partners may use these technologies to collect data about your online activities over time and across third-party websites or other online services to help us better understand users of the Service and provide advertising that we think will be of more interest to you.'
+        - url: https://runway.com/privacy-policy
+          quote: 'Most browsers let you remove or reject cookies.'
+      action:
+        name: 'Your choices, in its privacy policy'
+        url: https://runway.com/privacy-policy
+      lastVerified: 2026-11-17
+    - topic: privacy.ai-training
+      tier: bad
+      reason: 'What you type, upload and make trains Runway’s AI, with no way to turn it off on personal plans, and its licence to do so never ends and can be passed on.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'You acknowledge that Inputs and Outputs may be used by the Company to train and improve its AI models, algorithms and related technology, products and services (including for labeling, classification, content moderation and model training purposes).'
+        - url: https://runway.com/terms-of-use
+          quote: 'As such, you hereby grant to the Company a non-exclusive, irrevocable, perpetual, worldwide, royalty-free, fully paid, transferable, sublicensable right and license to use any Inputs and Outputs Made Available by you or otherwise generated in connection with your use of the Services at any point, in connection with the purposes described above.'
+        - url: https://help.runwayml.com/hc/en-us/articles/43109077483667-Runway-Education-FAQ
+          quote: 'Data protections are available for enterprise plans.'
+      lastVerified: 2026-11-17
+    - topic: privacy.content-access
+      tier: neutral
+      reason: 'Your files are encrypted when sent and when stored. Its systems and staff check what you type and make for harmful content. (Training on it is graded under AI training.)'
+      sources:
+        - url: https://runway.com/data-security
+          quote: 'Storage Encryption: Data at rest is secured with AES-256 encryption.'
+        - url: https://runway.com/safety/usage-policy
+          quote: 'Runway uses a combination of automated systems and internal human review to detect and block harmful content in user inputs and outputs, and prioritizes reports related to child safety.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your information as long as it decides it needs it. Face scans and voiceprints go within three years of your last visit.'
+      sources:
+        - url: https://runway.com/privacy-policy
+          quote: 'We will retain your information for only as long as necessary to provide the Service and for the other legitimate business purposes set out in this Policy such as safety, security, compliance, and dispute resolution.'
+        - url: https://runway.com/privacy-policy
+          quote: 'For example, we will retain face scans and voiceprints for no longer than the earlier of the date the initial purpose for collecting the data is satisfied or within three years of your last interaction with us.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'You can delete your account yourself, and ask it to delete your other data, but it doesn’t say how soon it’s gone, and it may keep some.'
+      sources:
+        - url: https://help.runwayml.com/hc/en-us/articles/4402108479379-Deleting-your-account
+          quote: 'You can delete your Runway account at any time from your My Account page.'
+        - url: https://runway.com/privacy-policy
+          quote: 'To request deletion of your personal information, submit a request through our Privacy Request Portal.'
+        - url: https://runway.com/privacy-policy
+          quote: 'For example, we may retain certain information for legal compliance and to secure the Service.'
+      action:
+        name: 'How to delete your account'
+        url: https://help.runwayml.com/hc/en-us/articles/4402108479379-Deleting-your-account
+      lastVerified: 2026-11-17
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your videos and images yourself, many at once in a ZIP file, as ordinary MP4 and image files.'
+      sources:
+        - url: https://help.runwayml.com/hc/en-us/articles/18406706187283-Batch-downloading-exports-assets
+          quote: 'Your assets are compressed into a ZIP file and downloaded to your computer.'
+        - url: https://help.runwayml.com/hc/en-us/articles/54396547993491-Exporting-Videos-in-ProRes-and-PNG-Sequence-Formats
+          quote: 'MP4 — the default format, best for sharing and playback'
+      action:
+        name: 'How to download your files'
+        url: https://help.runwayml.com/hc/en-us/articles/18406706187283-Batch-downloading-exports-assets
+      lastVerified: 2026-11-17
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands information to the police or governments when it believes the law or its rules call for it. It doesn’t say it tells you, or publish how often.'
+      sources:
+        - url: https://runway.com/privacy-policy
+          quote: 'comply with applicable laws, lawful requests, and legal process, such as to respond to subpoenas, investigations or requests from government authorities;'
+        - url: https://runway.com/privacy-policy
+          quote: 'Authorities and others. Law enforcement, government authorities, and private parties, as we believe in good faith to be necessary or appropriate for the compliance and protection purposes described above.'
+      lastVerified: 2026-11-17
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Your information goes to the US and other countries whose laws may protect it less, and it doesn’t say what safeguards it uses.'
+      sources:
+        - url: https://runway.com/privacy-policy
+          quote: 'By using the Service, or providing us with any information, you consent to the collection, processing, maintenance, and transfer of such information in and to the United States and other applicable countries in which the privacy laws may not be as comprehensive as, or equivalent to, those in the country where you reside and/or are a citizen.'
+      lastVerified: 2026-11-17
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'To sign up you give an email address, a username and your first and last name, or use your Google or Apple account. No phone number is asked for.'
+      sources:
+        - url: https://help.runwayml.com/hc/en-us/articles/24297557468563-Creating-a-Runway-Account
+          quote: 'Enter the email address for the account'
+        - url: https://help.runwayml.com/hc/en-us/articles/24297557468563-Creating-a-Runway-Account
+          quote: 'On the next screen, enter your first name and last name'
+        - url: https://help.runwayml.com/hc/en-us/articles/24297557468563-Creating-a-Runway-Account
+          quote: 'Select Sign up with Google'
+      lastVerified: 2026-11-17
+    - topic: other.notable
+      title: Your identity to rights claimants
+      tier: poor
+      reason: 'If someone says something you posted breaks their rights, Runway may give them your name and other details, with no court order needed.'
+      sources:
+        - url: https://runway.com/terms-of-use
+          quote: 'disclose your identity or other information about you to any third party who claims that material posted by you violates their rights, including their intellectual property rights or their right to privacy'
+      lastVerified: 2026-11-17
