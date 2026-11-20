@@ -1,0 +1,785 @@
+# Researched by hand on 2026-11-20 (the full catalog run, security batch 2), read from Canada with Edge (its online
+# stores, whose prices load in the browser) and a plain fetch (its licence, privacy policy, store help and product
+# pages); one store page through a Canadian exit. Pages, each quoted where it's used:
+# Pricing: its international online store (estore.drweb.com, run for it by Noventiq Cyprus: "Orders are processed by
+# Doctor Web's partner - Noventiq Ecommerce") prices each product by licence period (1, 2 or 3 years) and number of
+# devices (1 to 5) in US dollars, "(excl.VAT*)" ("*VAT will be calculated and indicated after proceeding to purchase and
+# selecting the country"); its French and Italian stores (estore.drweb.fr, estore.drweb-av.it, its own country sites,
+# "© Doctor Web 2003 — 2026") price France and Italy in euros with tax in ("Prix pour la France, TTC", "prezzo per
+# l'Italia, IVA inclusa"). Its German store now opens the international site, and its Spanish one didn't answer.
+# A licence is bought for its term and doesn't renew unless you tick automatic renewal at checkout ("check the box
+# ..."): prices are stored as prepaid terms (`autoRenew: false`), each period it sells. A renewal licence costs less
+# ("You can renew it at 25% off"); the new licence's price is the regular one (the renewal is a loyalty discount for
+# existing keys, in the notes). Its week's offers ("Offer of the week", –20%) and its 2-month starter licence ($6, then
+# $31 a year) are offers, left out. France's PC page writes its "TTC" in Cyrillic letters, which the tax check can't
+# read, so France's PC prices have no taxIncluded (its mobile page's "TTC" is in Latin letters).
+# Plans: Dr.Web Security Space for PCs (Windows, macOS, Linux) and for mobile devices (Android and Android TV), each for
+# 1 device and for 5 (a plan per device count, Norton's precedent; 2 to 4 are in the notes). Free: Dr.Web CureIt!.
+# Not drafted: Dr.Web Katana (a second-layer, signature-free protection for PCs that run another antivirus: its US-dollar
+# prices didn't load, "$—", in any read; France €7.12 and Italy €7.23 a year for 1 PC), CureIt! Pro (5 or 10 days of a
+# scanner, sold once), its Telegram bot, and Dr.Web for Android Light (named on the components page; no page says it's
+# free or sold).
+# Where it sells: its licence's territory is "the entire world unless indicated otherwise when the License was acquired"
+# and its store's terms say "some Products might not be available for all countries. You will be informed of any such
+# territorial restrictions before you can purchase the Product." Its partner finder lists partners in Canada, the United
+# States, the United Kingdom, the Netherlands, New Zealand, France, Germany, Italy and Spain among others. No page of its
+# sites mentions sanctions; its only such notice is "Doctor Web's announcement for customers and partners" of March 22,
+# 2022 ("Given the situation, we would like to inform our customers and partners that our services currently remain
+# operational."). Its checkout's country list answered 403 after one read, so whether every country can buy there is
+# unread: one GLOBAL price in US dollars, with France's and Italy's own.
+# Region checklist for CA and US, 2026-11-20: 1. no country paths on drweb.com (en, fr, es, it... are languages; the
+# country stores are drweb.fr, drweb-av.it and others outside the catalog); 2. its language menu; 3. the store's script
+# prices in "$" for everyone; 4. the basket, up to the order form (country, name, email, phone, payment); 5. the store's
+# payment and terms pages; 6. Edge, a plain fetch and a Canadian exit; 7. no bill.
+# Bundles: its "More for less!" PC-and-phone offer is an offer, not read. Official resellers: its partner finder names
+# partners by country ("Sells licenses", "Sells subscriptions"), a reseller list for data/resellers.yaml left to the owner
+# (the shops weren't read). Google Play and AppGallery bill its Android app.
+# Lab results: Dr.Web isn't in AV-TEST's 2026 tests of Windows, macOS or Android products, so no rating is listed.
+
+id: dr-web
+name: Dr.Web
+aliases: [Doctor Web, Dr.Web Security Space, Dr.Web CureIt!]
+website: https://www.drweb.com
+# Its French and Italian sites (each one's own store and prices).
+domains: [drweb.fr, drweb-av.it]
+category: security
+spendCategory: software
+billingCurrency: { FR: EUR, IT: EUR, GLOBAL: USD }
+# Its store's help on automatic renewal, which says how to turn it off (a licence that doesn't renew needs nothing).
+cancelUrl: https://store.drweb.com/help/autorenewal
+sources: { pricing: 'https://estore.drweb.com/home/?lng=en' }
+# Owner (M11.2), read 2026-11-20: its licence names the company that owns the software (rule 3), a private company in
+# Russia; its privacy policy gives the address.
+owner:
+  name: Doctor Web
+  page:
+    name: Dr.Web software product end-user license agreement
+    url: 'https://license.drweb.com/agreement/?lng=en'
+  quotes:
+    - 'Copyright Holder: the limited liability company Doctor Web, incorporated and operating under the laws of the Russian Federation. Doctor Web is the owner of the exclusive rights to the Software product.'
+  country:
+    code: RU
+    page:
+      name: Doctor Web Privacy Policy
+      url: 'https://company.drweb.com/policy/?lng=en'
+    quotes:
+      - '3rd street Yamskogo polya, Moscow, Russia, 125124'
+    lastVerified: 2026-11-20
+  lastVerified: 2026-11-20
+# Ways to pay (M11.5), read 2026-11-20: its store's payment help (Noventiq's).
+acceptedNetworks:
+  GLOBAL:
+    networks: [visa, mastercard]
+    url: https://store.drweb.com/help/payment
+    quotes: ['VISA, MASTERCARD']
+paymentMethods:
+  - methods: [card, paypal, bank-transfer]
+    page: Order Payment
+    url: https://store.drweb.com/help/payment
+    quotes:
+      - 'VISA, MASTERCARD'
+      - 'PayPal'
+      - 'Wire transfer'
+# No renewalAnchor: its licences are prepaid terms that renew only if you tick automatic renewal at checkout, which then
+# charges "20, 10 and 0 days before the expiration of the current license" (its renewal help), wording core's
+# chargedBefore doesn't read.
+
+# General features, read 2026-11-20. Its account (doctor web's site) signs in with an email and a password, and My Dr.Web
+# with a serial number and email; no page offers two-step sign-in. Support channels and app languages: not read (left
+# out). No pause.
+features:
+  platforms: [windows]
+  account.sign-in: [password]
+
+# Perks (M11.6): its components page's protections no feature describes, in its words.
+perks:
+  - id: exploit-prevention
+    name: Exploit Prevention
+  - id: data-loss-prevention
+    name: Data Loss Prevention
+  - id: device-access-control
+    name: Removable device access control
+  - id: app-lock
+    name: Restrict access to apps
+
+# Features, read 2026-11-20:
+# - Security Space for PCs (its components page, by system, and its product page): "Anti-virus" ("Blocks viruses and
+#   malware from accessing the protected system and will cure the malicious programs that have already penetrated it"),
+#   SpIDer Guard and "HTTP monitor SpIDer Gate" ("Scans web pages in real time and blocks access to dangerous sites, such
+#   as those used for phishing attacks"), Anti-spam, Parental control ("Blocks access to websites by URL keywords"),
+#   Firewall, "Preventive Protection" ("Dr.Web can recognise suspicious programs that have similar behaviour patterns and
+#   block their operation", its company page), "Ransomware Protection" ("Trojan-encoder protection based on behavioural
+#   rules", Windows), "Privacy" ("Blocks a device’s camera and microphone", Windows), Exploit Prevention, Data Loss
+#   Prevention and removable device access control (Windows). The kinds of scan aren't on the pages read (left out).
+#   "Protection for 1 computer" up to 5 on one licence.
+# - Security Space for mobile devices (its Android page): real-time protection of the file system, scans "upon user
+#   request", call and SMS filtering ("SMS message filtering is not available in app versions installed from Google
+#   Play"), locate and lock a lost device, "Blocks access to selected sites and site categories", the Security Auditor
+#   ("Identifies and helps fix security issues and vulnerabilities"), a firewall, app access restriction, and unlocking a
+#   device locked by ransomware (no ransomware value describes unlocking: notes). Android 5.0 to 16.0 and Android TV.
+# - CureIt! (its free page): "will cure an infected system once, but it is not designed to provide a workstation with
+#   real-time protection from viruses"; free for home use, downloaded again for each scan's newest virus databases.
+# No VPN, password manager or identity protection on any Dr.Web page.
+plans:
+  - id: dr-web.cureit
+    name: CureIt!
+    link: 'https://free.drweb.com/cureit/?lng=en'
+    features:
+      antivirus.included: true
+      antivirus.real-time: false
+      antivirus.scans: [on-demand]
+    notes: 'A free scanner for Windows, for home use: download it, scan and cure your PC once. It doesn’t protect you in real time or update itself, so you download it again for the newest virus databases.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://free.drweb.com/cureit/?lng=en'
+
+  - id: dr-web.security-space
+    name: Security Space (1 PC)
+    link: 'https://estore.drweb.com/home/?lng=en'
+    features:
+      platforms: [windows, macos, linux]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.anti-spam: true
+      antivirus.network: [firewall]
+      antivirus.devices: 1
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    featureLabels:
+      antivirus.ransomware: Ransomware protection on Windows
+      security.webcam-protection: Camera and microphone blocking on Windows
+    perks: [exploit-prevention, data-loss-prevention, device-access-control]
+    notes: 'For 1 computer (Windows, Mac or Linux), bought for 1, 2 or 3 years at a time; it renews only if you choose automatic renewal. 2, 3 and 4 PCs cost US$32.55, $34.18 and $35.89 for a year. Renewing an existing licence costs 25% less.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 31
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/home/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 58.9
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/home/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 79.05
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/home/?lng=en'
+      - region: FR
+        currency: EUR
+        amount: 23.74
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/home/
+      - region: FR
+        currency: EUR
+        amount: 45.08
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/home/
+      - region: FR
+        currency: EUR
+        amount: 60.52
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/home/
+      - region: IT
+        currency: EUR
+        amount: 24.13
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/home/
+      - region: IT
+        currency: EUR
+        amount: 45.84
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/home/
+      - region: IT
+        currency: EUR
+        amount: 61.52
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/home/
+
+  - id: dr-web.security-space-5-pcs
+    name: Security Space (5 PCs)
+    link: 'https://estore.drweb.com/home/?lng=en'
+    features:
+      platforms: [windows, macos, linux]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.ransomware: [blocking]
+      antivirus.web-protection: true
+      antivirus.anti-spam: true
+      antivirus.network: [firewall]
+      antivirus.devices: 5
+      parental-control: [content-filtering]
+      account.parental-controls: true
+      security.webcam-protection: [webcam, microphone]
+    featureLabels:
+      antivirus.ransomware: Ransomware protection on Windows
+      security.webcam-protection: Camera and microphone blocking on Windows
+    perks: [exploit-prevention, data-loss-prevention, device-access-control]
+    notes: 'For 5 computers (Windows, Mac or Linux) on one licence, bought for 1, 2 or 3 years at a time; it renews only if you choose automatic renewal. Renewing an existing licence costs 25% less.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 37.68
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/home/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 71.59
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/home/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 96.09
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/home/?lng=en'
+      - region: FR
+        currency: EUR
+        amount: 34.74
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/home/
+      - region: FR
+        currency: EUR
+        amount: 66.01
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/home/
+      - region: FR
+        currency: EUR
+        amount: 88.6
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/home/
+      - region: IT
+        currency: EUR
+        amount: 35.32
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/home/
+      - region: IT
+        currency: EUR
+        amount: 67.11
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/home/
+      - region: IT
+        currency: EUR
+        amount: 90.07
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/home/
+
+  - id: dr-web.mobile
+    name: Security Space for mobile devices (1 device)
+    link: 'https://estore.drweb.com/mobile/?lng=en'
+    features:
+      platforms: [android, tv]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [on-demand]
+      antivirus.scam-protection: [calls, sms]
+      antivirus.network: [firewall]
+      antivirus.anti-theft: [locate, lock]
+      antivirus.vulnerability-scan: true
+      antivirus.devices: 1
+      parental-control: [content-filtering]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.scam-protection: Call and text filtering (texts not in the Google Play version)
+    perks: [app-lock]
+    notes: 'For 1 Android phone, tablet or Android TV, bought for 1, 2 or 3 years at a time. It can also unlock a device locked by ransomware. 2, 3 and 4 devices cost US$10.85, $11.39 and $11.96 for a year. Renewing an existing licence costs 25% less.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 10.33
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/mobile/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 19.63
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/mobile/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 26.35
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/mobile/?lng=en'
+      - region: FR
+        currency: EUR
+        amount: 11.87
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: 'Prix pour la France, TTC' }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/mobile/
+      - region: FR
+        currency: EUR
+        amount: 22.55
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: 'Prix pour la France, TTC' }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/mobile/
+      - region: FR
+        currency: EUR
+        amount: 30.25
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Prix pour la France, TTC' }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/mobile/
+      - region: IT
+        currency: EUR
+        amount: 12.07
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/mobile/
+      - region: IT
+        currency: EUR
+        amount: 22.92
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/mobile/
+      - region: IT
+        currency: EUR
+        amount: 30.76
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/mobile/
+
+  # France's 2-year price for 5 devices didn't show in two reads (its other periods did): left out.
+  - id: dr-web.mobile-5-devices
+    name: Security Space for mobile devices (5 devices)
+    link: 'https://estore.drweb.com/mobile/?lng=en'
+    features:
+      platforms: [android, tv]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.scans: [on-demand]
+      antivirus.scam-protection: [calls, sms]
+      antivirus.network: [firewall]
+      antivirus.anti-theft: [locate, lock]
+      antivirus.vulnerability-scan: true
+      antivirus.devices: 5
+      parental-control: [content-filtering]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.scam-protection: Call and text filtering (texts not in the Google Play version)
+    perks: [app-lock]
+    notes: 'For 5 Android phones, tablets or Android TVs on one licence, bought for 1, 2 or 3 years at a time. Renewing an existing licence costs 25% less.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 12.56
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/mobile/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 23.86
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/mobile/?lng=en'
+      - region: GLOBAL
+        currency: USD
+        amount: 32.03
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-20
+        sourceUrl: 'https://estore.drweb.com/mobile/?lng=en'
+      - region: FR
+        currency: EUR
+        amount: 17.38
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: 'Prix pour la France, TTC' }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/mobile/
+      - region: FR
+        currency: EUR
+        amount: 44.29
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Prix pour la France, TTC' }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb.fr/mobile/
+      - region: IT
+        currency: EUR
+        amount: 17.67
+        interval: year
+        intervalCount: 1
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/mobile/
+      - region: IT
+        currency: EUR
+        amount: 33.55
+        interval: year
+        intervalCount: 2
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/mobile/
+      - region: IT
+        currency: EUR
+        amount: 45.03
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: "prezzo per l'Italia, IVA inclusa" }
+        lastVerified: 2026-11-20
+        sourceUrl: https://estore.drweb-av.it/mobile/
+
+# Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-20: Doctor Web's end-user licence
+# agreement (its apps' licence, which includes its privacy policy), its Privacy Policy, and the store's Terms of Sale,
+# automatic-renewal help and payment help (Noventiq Cyprus's, which sells for it: "By placing my order, I agree to the
+# Terms of Sale and consent to have my personal data processed by Doctor Web."). The store's own Privacy Notice and Cookie
+# Policy (Noventiq's) cover the order only and weren't graded beyond these. Security: its "Safe development and
+# deployment practices" paper (2026) and its statement on the September 2024 attack. No bug bounty or vulnerability
+# disclosure page was found.
+policies:
+  links:
+    - name: End-user license agreement
+      url: 'https://license.drweb.com/agreement/?lng=en'
+    - name: Privacy Policy
+      url: 'https://company.drweb.com/policy/?lng=en'
+    - name: Terms of Sale (store)
+      url: https://store.drweb.com/help/rules
+    - name: Automatic renewal (store)
+      url: https://store.drweb.com/help/autorenewal
+    - name: Order payment (store)
+      url: https://store.drweb.com/help/payment
+    - name: Order form (store)
+      url: 'https://store.drweb.com/basket/add/4847819?clear=Y'
+    - name: Online store
+      url: 'https://estore.drweb.com/home/?lng=en'
+    - name: Dr.Web Security Space
+      url: 'https://products.drweb.com/win/security_space/?lng=en'
+    - name: Safe development and deployment practices
+      url: 'https://f2.drweb.com/get+meta+file/?sdf=t&sdl=en&k=fc8c1b2165a875e76f6275c41a54c913&inline=t'
+    - name: Statement on the 2024 attack
+      url: 'https://news.drweb.com/show/?i=14921&lng=en'
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It uses what its apps and sites collect about your device and what you do to improve its products and for research. Its cloud checks are optional; nothing turns off the rest short of withdrawing consent by letter, which ends your licence.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: '4.1. The Rights Holder and its authorised agent in the territory where the Services are being distributed receive and process the Information needed to provide the Services, ensure the security of You and its Services, monitor Your compliance with Service usage rules, render You technical assistance, provide services, develop and improve products and Services, and execute agreements.'
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'If You opt to enable the Copyright Holder’s cloud-based services, the Software may automatically send to the Copyright Holder files and/or portions of files found on the Device and recognized by the Software as potentially malicious or requiring additional analysis to identify and neutralize information security threats and to improve the effectiveness of the antivirus security features.'
+      action:
+        name: 'Withdraw consent (privacy policy, by letter)'
+        url: 'https://company.drweb.com/policy/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Your data can reach other companies through the analytics tools on its sites and apps, Google Analytics and Yandex Metrica among them. You can only block cookies in each browser.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: 'You understand and agree to have Your data sent to owners of software distribution sources and third-party services.'
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: 'You understand that it is at Your discretion to allow, prohibit, or restrict the use of Cookies.'
+      action:
+        name: 'Cookies (privacy policy)'
+        url: 'https://company.drweb.com/policy/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      status: not-stated
+      reason: 'Its policy says it sends advertising emails, which you can turn off in your account, but not that it tracks what you do to choose ads.'
+      pages:
+        - 'https://company.drweb.com/policy/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say whether your data trains AI models.'
+      pages:
+        - 'https://company.drweb.com/policy/?lng=en'
+        - 'https://license.drweb.com/agreement/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your data as long as it serves you, as its own rules decide, and to send you advertising. It gives no set times.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: '5.7. The storage period for Your personal data is equal to the period needed to execute contracts or agreements with You, render services, consultations, and technical support to You, and provide Services; this storage period is also equal to the period determined by the Rights Holder’s internal regulations'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You must send a letter to its address to have your data deleted, and that ends your licence with no money back for the time left.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: 'You have the right to revoke this consent at any time and to request that the Rights Holder stops processing Your personal data by sending a written notice/request to the address specified in the Rights Holder’s contact details'
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: 'the Rights Holder has no obligation to compensate You for the unused period of the agreement, contract or Services.'
+      action:
+        name: 'Its address (privacy policy)'
+        url: 'https://company.drweb.com/policy/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'You can ask what data it holds about you, but its policy offers no copy to take elsewhere.'
+      pages:
+        - 'https://company.drweb.com/policy/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands data over when Russian or other law requires it, by the procedures that law sets. It doesn’t say it tells you or publishes how often.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: 'the transfer is stipulated by Russian or other applicable legislation under procedures established by the legislation;'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: poor
+      reason: 'Wherever you live, your data is handled in Russia, whose privacy law may differ from yours. It names no safeguards.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: '5.6. The place that processes Your personal data, regardless of where You reside/stay, is the Rights Holder’s location—the Russian Federation.'
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: 'The legislation of the Russian Federation in the field of personal data protection may differ from the legislation of the country of Your residence/stay.'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'Its order form asks for your country, your name and email, and has a field for a phone number; its free trial asks for a name and email.'
+      sources:
+        - url: 'https://store.drweb.com/basket/add/4847819?clear=Y'
+          quote: 'Name and surname'
+        - url: 'https://store.drweb.com/basket/add/4847819?clear=Y'
+          quote: 'Phone number'
+        - url: 'https://products.drweb.com/win/security_space/?lng=en'
+          quote: 'To download a free trial, please fill out the fields below.'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: great
+      reason: 'A licence ends by itself unless you chose automatic renewal, which you can turn off at any time from your order page or the reminder email.'
+      sources:
+        - url: https://store.drweb.com/help/autorenewal
+          quote: 'check the box “I purchase automatic renewal and agree with the terms of renewal”;'
+        - url: https://store.drweb.com/help/autorenewal
+          quote: 'at any time before paying for the next license on your order page follow the “Disable” link;'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'No money back unless what you got is faulty or not as described; you keep using it until your licence ends.'
+      sources:
+        - url: https://store.drweb.com/help/rules
+          quote: 'Return/Refund for non-faulty merchandise: You may not cancel an Order delivered to you by Noventiq or require return or refund of Products, which comply with their description provided in the Web Store.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A licence is paid ahead, so a new price never touches time you have. If you chose automatic renewal, it emails you the renewal price 30 days before.'
+      sources:
+        - url: https://store.drweb.com/help/autorenewal
+          quote: '30 days prior to the expiration of the current license, you will receive a letter of notification with detailed information to the email address, which was provided when placing an order for the current license.'
+        - url: https://store.drweb.com/help/autorenewal
+          quote: 'Attention! The notification letter will indicate the cost of license renewal, including the discount at the time of the order.'
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      tier: good
+      reason: 'Its free month asks for no card. Its cheap 2-month starter licence renews on its own at the yearly price, with an email 9 days before.'
+      sources:
+        - url: 'https://products.drweb.com/win/security_space/?lng=en'
+          quote: 'To download a free trial, please fill out the fields below.'
+        - url: 'https://store.drweb.com/basket/add/4847819?clear=Y'
+          quote: 'Important! This is a subscription-based license that incorporates the automatic withdrawal of funds from your bank card.'
+        - url: https://store.drweb.com/help/autorenewal
+          quote: '9 days prior to the expiration of the current license, you will receive a notification letter with detailed information to the email address, which was provided when placing the order for the current license.'
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      tier: great
+      reason: 'Nothing renews unless you turn automatic renewal on, and then it emails you 30 days before a yearly licence renews.'
+      sources:
+        - url: https://store.drweb.com/help/autorenewal
+          quote: 'check the box “I purchase automatic renewal and agree with the terms of renewal”;'
+        - url: https://store.drweb.com/help/autorenewal
+          quote: '30 days prior to the expiration of the current license, you will receive a letter of notification with detailed information to the email address, which was provided when placing an order for the current license.'
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its store names no fees beyond the price and taxes.'
+      pages:
+        - https://store.drweb.com/help/rules
+        - https://store.drweb.com/help/payment
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'If you buy your next licence before yours ends, the time left is added to it. A licence for a different number of PCs counts as new, so it gets no renewal discount.'
+      sources:
+        - url: 'https://estore.drweb.com/home/?lng=en'
+          quote: 'If, when registering the new license, your current license has not yet expired, the remainder of its term will be added automatically to the term of your new license.'
+        - url: 'https://estore.drweb.com/home/?lng=en'
+          quote: 'If a new license for a different number of PCs is purchased to renew a Dr.Web Security Space license, it cannot be registered as a renewal license.'
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts where the company that sold you the licence is based, with no private referee (arbitration); your own country’s law is taken into account.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'All disputes related to the terms and conditions herein shall be resolved in the relevant courts at the place of incorporation of the representative authorized by the Copyright Holder to provide the Software to You'
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'Allowances are made for the relevant legislation of Your country of citizenship as an individual'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'It can change its privacy policy without telling you first, and the change starts as soon as it’s posted. Its licence tells you when it changes, in whatever way and time it likes.'
+      sources:
+        - url: 'https://company.drweb.com/policy/?lng=en'
+          quote: '6.3. The Rights Holder can change the terms of this Policy without giving prior notice to You. A new version of the Policy comes into force as soon as it is published at company.drweb.com/policy, unless stated otherwise by the new version of the Policy.'
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'You shall be notified when a new version of the Agreement enters into force by a means and within a timeframe acceptable to the Copyright Holder.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'It can stop letting you use its apps whenever it decides, for any reason, and owes you nothing.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'The Copyright Holder reserves the right to refuse to fulfill the Agreement at its sole discretion (including in situations when You violate the terms and conditions of the Agreement) and to deny You the ability to use the Software without reimbursing You for any damage or losses caused by a refusal of this kind.'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'If it stops releasing updates or support for your version, that isn’t a reason for a refund.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'if updates for the Software or its components/modules can no longer be made available, delivered, or released;'
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'None of the aforementioned events and circumstances can be deemed sufficient reason for refunding Your purchase of a License;'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - 'https://license.drweb.com/agreement/?lng=en'
+        - 'https://company.drweb.com/policy/?lng=en'
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: poor
+      reason: 'You need its written permission before publishing anything about your experience with its apps, a review included.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'You must obtain written consent from the Copyright Holder and/or its authorized representative prior to publishing or in any other way disseminating the contents of any informational materials related to the Software, the Copyright Holder, or Your experience with the Software regardless of the method of distribution and the reason for making it available.'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: neutral
+      reason: 'It says outside testing labs certify how it builds and tests updates, and it told users about an attack on its systems in 2024. It names no audit report or bug bounty.'
+      sources:
+        - url: 'https://f2.drweb.com/get+meta+file/?sdf=t&sdl=en&k=fc8c1b2165a875e76f6275c41a54c913&inline=t'
+          quote: 'These processes are certified to industry standards by both national and third-party testing laboratories.'
+        - url: 'https://news.drweb.com/show/?i=14921&lng=en'
+          quote: 'A targeted attack on our systems and services was indeed carried out in September.'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Your licence is for you and your family: your children, spouse and parents may use it too.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'The Software is intended to be used on a Supported Device by You (including Your children, spouse, parents and others representing You as an individual) as the User to whom it has been registered under the terms and conditions herein.'
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      tier: great
+      reason: 'Beyond the number of devices you pay for there’s no limit: remove it from one device and you can install it on another while your licence lasts.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'Once the Software has been removed from the Device pursuant to clause 2.3 hereof, You are entitled to install and use the Software on a new Supported Device for as long as Your License is valid.'
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: good
+      reason: 'It updates its own app over the internet while your licence lasts. Nothing says it changes anything else on your device.'
+      sources:
+        - url: 'https://license.drweb.com/agreement/?lng=en'
+          quote: 'If updates are made available for the Software and the Copyright Holder still supports the Software, You may receive throughout the license period (via the Internet) Software module updates for the Software version installed on the Device.'
+      lastVerified: 2026-11-20
