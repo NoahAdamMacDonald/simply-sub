@@ -1,5 +1,7 @@
+import type { IsoDate } from '../dates/iso-date';
 import type { FeatureValue } from './feature';
 import type { Plan, Provider } from './provider';
+import { isRetired } from './retired';
 
 // A plan's service categories (BLUEPRINT §4.3, §4.5, M1.10, M11.3). A provider has one category, its main one, where a
 // buyer would look first, and a plan lists every category it fits: Proton is a privacy suite, Proton VPN Plus is a
@@ -20,6 +22,35 @@ export function providerCategories(
   provider: Pick<Provider, 'category'> & { plans: readonly Pick<Plan, 'categories'>[] },
 ): string[] {
   return [...new Set(provider.plans.flatMap((plan) => planCategories(plan, provider)))];
+}
+
+/**
+ * A card's categories (M10.36, the owner's feedback): every category of the plans the provider still sells, and of
+ * `planId`'s if it's retired, each marked when `planId` is in it, so a card shows what the provider covers and what
+ * the plan picked does. In the order `order` names categories (categories.yaml's, so they never move as the plan
+ * changes); any it doesn't name come last.
+ */
+export function categoryCoverage(
+  provider: Pick<Provider, 'category' | 'retired' | 'endsOn'> & {
+    plans: readonly Pick<Plan, 'id' | 'categories' | 'retired' | 'endsOn'>[];
+  },
+  planId: string | undefined,
+  today: IsoDate,
+  order: readonly string[] = [],
+): { category: string; inPlan: boolean }[] {
+  const plans = provider.plans.filter(
+    (plan) => plan.id === planId || !isRetired(plan, provider, today),
+  );
+  const picked = provider.plans.find((plan) => plan.id === planId);
+  const inPlan = new Set(picked ? planCategories(picked, provider) : []);
+  const rank = (category: string) => {
+    const index = order.indexOf(category);
+    return index < 0 ? order.length : index;
+  };
+  return providerCategories({ category: provider.category, plans })
+    .map((category, index) => ({ category, index }))
+    .sort((a, b) => rank(a.category) - rank(b.category) || a.index - b.index)
+    .map(({ category }) => ({ category, inPlan: inPlan.has(category) }));
 }
 
 /**

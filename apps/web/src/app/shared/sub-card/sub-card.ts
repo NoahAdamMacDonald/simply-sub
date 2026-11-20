@@ -31,6 +31,7 @@ import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { ItemsRepository } from '../../core/storage/items-repository';
 import { AddToListMenu } from '../add-to-list/add-to-list-menu';
+import { CategoryChips } from '../category-chips/category-chips';
 import { countryName } from '../country-name';
 import { PriceTag } from '../price-tag/price-tag';
 import { ProviderIcon } from '../provider-icon/provider-icon';
@@ -57,6 +58,7 @@ let nextId = 0;
   host: { '[style.--price-rows]': 'priceRows()' },
   imports: [
     AddToListMenu,
+    CategoryChips,
     InLists,
     MatIcon,
     MatIconButton,

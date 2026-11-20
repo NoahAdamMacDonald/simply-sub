@@ -45,6 +45,11 @@
     margin-top: 4px;
   }
 
+  // What the provider's plans cover (M10.36), under its status.
+  .categories {
+    margin-top: 6px;
+  }
+
   // Text links (Plan ↗, Cancel ↗), not a link styled as a Material button.
   a:not(.mat-mdc-button-base) {
     display: inline-flex;
