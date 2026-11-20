@@ -1,0 +1,363 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada and with a plain
+# fetch (curl): yubico.com (the Yubico Authenticator page, its terms and conditions index and the documents below, its
+# Trust pages, security advisories and coordinated disclosure page), the Yubico Authenticator User Guide
+# (docs.yubico.com: overview, platforms, installation, Accounts: OATH, Passkeys: FIDO2, Settings, Troubleshooting and
+# Support), developers.yubico.com/yubioath-flutter, its GitHub repositories (yubioath-flutter and yubioath-ios: README
+# and LICENSE), its support portal's request page, its investor site (investors.yubico.com) and the app's Google Play
+# and App Store listings.
+# The brand rule (one company, one set of terms: Microsoft 365's precedent): Yubico AB makes YubiKeys, hardware security
+# keys sold once (not subscriptions, so out of scope), and Yubico Authenticator, a free app that stores 2FA codes on a
+# YubiKey. The app is its only consumer offer in scope, so one provider, yubico, named for the company, with the app as
+# its one free plan (yubico.authenticator): a later Yubico subscription for individuals would join it there. YubiKey as a
+# Service (subscriptions for organizations) is business-only: out.
+# Pricing: none. The app is free (the App Store: "Free"; Google Play: Install, with no in-app purchases), and Yubico's
+# page offers it to download. It needs a YubiKey, bought once from Yubico or a shop: "Adding a new account for OATH
+# authentication requires a YubiKey, Yubico Authenticator, and the secret key information provided by the
+# site/account/service you are registering the YubiKey with." (Accounts: OATH). Region checklist, 2026-11-19: not
+# needed (one free app for every country, no prices).
+# Bundles: none. Official resellers: none for the app (YubiKeys' resellers sell hardware). Ways to pay: none.
+# Free use: its one plan is free.
+id: yubico
+name: Yubico
+aliases: [yubico authenticator, yubikey, yubioath]
+website: https://www.yubico.com
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free, with no account. Its product page is the closest page.
+cancelUrl: https://www.yubico.com/products/yubico-authenticator/
+sources: { pricing: https://www.yubico.com/products/yubico-authenticator/ }
+
+# Owner (M11.2), read 2026-11-19: its website terms say Yubico AB operates yubico.com and developers.yubico.com (where the
+# app is downloaded); its legal imprint gives "Yubico AB (publ)" in Stockholm, Sweden. Listed on Nasdaq Stockholm (its
+# investor site's "The share"). Its largest holder has 16.95% of the capital (Bure Equity, its ownership page), so no
+# majority holder.
+owner:
+  name: Yubico AB
+  website: https://www.yubico.com
+  page:
+    name: Yubico website terms and conditions of use
+    url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+  quotes:
+    - 'The Yubico.com website, store.yubico.com, forum.yubico.com and developers.yubico.com (“Website”) is a web site and an open source service for secure online identity protection (“Service”) operated by Yubico AB (“Yubico”).'
+  country:
+    code: SE
+    page:
+      name: Yubico Toolset Software License Agreement
+      url: https://www.yubico.com/support/terms-conditions/yubico-toolset-software-license-agreement/
+    quotes:
+      - 'Yubico AB reg. No. 559278-6668, a limited liability company incorporated under the laws of Sweden'
+    lastVerified: 2026-11-19
+  stock:
+    listings:
+      - { exchange: Nasdaq Stockholm, symbol: YUBICO }
+    page:
+      name: The share
+      url: https://investors.yubico.com/en/investors/the-share/
+    quotes:
+      - 'Yubico’s share is listed on Nasdaq Stockholm since 5 December 2024.'
+      - 'Short name: YUBICO'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  Yubico makes YubiKeys, hardware security keys you buy once. Its free Yubico Authenticator app stores your 2FA codes
+  inside a YubiKey instead of on your phone.
+# Source code (M11.5): its User Guide's installation page sends developers to the source on GitHub, and both apps'
+# repositories are under the Apache License 2.0 (yubioath-flutter for desktop and Android, yubioath-ios for iPhone and
+# iPad). The codes are made inside the YubiKey, whose firmware no page read publishes, so open-source apps, not fully
+# open.
+sourceRepo:
+  url: https://github.com/Yubico/yubioath-flutter
+  page:
+    name: Yubico Authenticator User Guide (installation)
+    url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/installation.html
+  quotes:
+    - 'For developers wishing to build and package the Yubico Authenticator app from source, please see the GitHub documentation for your desired platform:'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: "The Yubico Authenticator app works across Windows, macOS, Linux,
+# iOS/iPadOS, and Android devices." (the User Guide's overview). Sign-in: none, the app has no accounts; an OATH password
+# or a FIDO2 PIN locks the YubiKey itself, so account.sign-in is left out (Cloudflare WARP's precedent). Support: "Submit
+# a help request to Yubico’s Customer Support team." (Troubleshooting and Support; its portal's "Submit a request" form)
+# and GitHub issues for bugs. App languages: its Settings chapter's list ("Supported languages include:" Bulgarian,
+# Chinese (Simplified and Traditional), Czech, Dutch, English, French, German, Greek, Hebrew, Hungarian, Italian, Japanese,
+# Polish, Portuguese (Brazil), Russian, Slovak, Spanish, Swedish, Turkish, Ukrainian and Vietnamese; the registry's are
+# listed), chosen on desktop and Android ("The app language can be changed on Yubico Authenticator for Desktop and
+# Android only."). No pause or parental controls (no account).
+features:
+  platforms: [windows, macos, linux, android, ios]
+  support.channels: [email]
+  languages.interface: [en, fr, es, de, it, pt, ja, zh]
+  software.open-source: open-clients
+
+# Authenticator features, read 2026-11-19 in its User Guide: an authenticator only, so password-manager false and
+# authenticator.included true.
+# - Imports: a site's QR code or key ("OATH accounts can be added via QR code or by entering the secret key and other
+#   fields manually."), and Google Authenticator's export QR code on desktop and Android ("If you’d like to transfer
+#   existing OATH two-factor authentication accounts from Google Authenticator to a YubiKey for use in Yubico
+#   Authenticator, you can do so via the “Export accounts” feature in Google Authenticator."). No other app's file.
+# - Exports: none, so authenticator.export is empty: "With Yubico Authenticator, credentials are stored in the secure
+#   element of the YubiKey; once stored, they cannot be extracted." (overview). Its backup is a second YubiKey set up
+#   from the same QR code ("Make a copy of the QR code or secret key information; you will need it when registering a
+#   second YubiKey.").
+# - No end-to-end encryption to state: there's no cloud; the codes stay in the key and the app collects nothing (its
+#   store listings).
+# - Passkeys: the app manages passkeys stored on a YubiKey ("Manage passkeys stored on your YubiKeys."), which no
+#   registry feature records for an authenticator; it's a note.
+plans:
+  - id: yubico.authenticator
+    name: Yubico Authenticator
+    link: https://www.yubico.com/products/yubico-authenticator/
+    features:
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator]
+      authenticator.export: []
+    notes: 'Free and open source, for Windows, macOS, Linux, Android and iPhone. Your 2FA codes are stored inside a YubiKey, bought separately once, so any device with the app shows them. They can’t be copied out: keep each QR code to set up a backup key. It also manages the passkeys on your YubiKey.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://www.yubico.com/products/yubico-authenticator/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: the app's licence (Apache License 2.0, its GitHub
+# repositories), Yubico's website terms (updated May 13th, 2020), which bind anyone who downloads "any software or
+# libraries" from its sites, its privacy notice (last updated October 22, 2026), cookie notice and California notice,
+# its legal imprint, Trust pages, coordinated disclosure page and security advisories, and the app's store listings
+# ("Data Not Collected"; "No data collected"). Also read, rating nothing for the app: the Sale and License Agreement for
+# consumers outside the Americas (it covers buying YubiKeys and their firmware, whose licence forbids publishing
+# benchmarks or reverse engineering the hardware; the app has its own open-source licence), the Toolset Software License
+# Agreement (developer libraries), the Product Policies and the End-of-Life Policy. Not read: the Americas consumer
+# agreement, which its terms page names without a link.
+policies:
+  links:
+    - name: 'Yubico privacy notice'
+      url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+    - name: 'Cookie notice'
+      url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+    - name: 'Supplemental privacy notice for California consumers'
+      url: https://www.yubico.com/support/terms-conditions/privacy-notice/ccpa/
+    - name: 'Website terms and conditions of use'
+      url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+    - name: 'Legal imprint'
+      url: https://www.yubico.com/support/terms-conditions/legal-imprint/
+    - name: 'Data security and privacy'
+      url: https://www.yubico.com/trust/data-security-and-privacy/
+    - name: 'Secure development'
+      url: https://www.yubico.com/trust/secure-development/
+    - name: 'Apache License 2.0 (yubioath-flutter on GitHub)'
+      url: https://github.com/Yubico/yubioath-flutter/blob/main/LICENSE
+    - name: 'User Guide: overview'
+      url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/ykauth-intro.html
+    - name: 'User Guide: Accounts (OATH)'
+      url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/oath.html
+    - name: 'User Guide: installation'
+      url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/installation.html
+    - name: 'Yubico Authenticator on the App Store'
+      url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+    - name: 'Yubico Authenticator on Google Play (data safety)'
+      url: https://play.google.com/store/apps/datasafety?id=com.yubico.yubioath
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'The app collects nothing. Yubico’s websites record your visits for statistics unless you refuse their cookies, and that choice only counts in the browser you make it in.'
+      sources:
+        - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+          quote: 'The developer does not collect any data from this app.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'We also automatically receive and store information from your web browser, such as IP address, language preferences cookie information and the pages you visit, to log files on our server.'
+        - url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+          quote: 'By browsing this site without restricting the use of cookies, you consent to our and third party use of cookies as set out in our Cookie Notice.'
+      action:
+        name: 'Change your cookie choices'
+        url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'The app shares nothing, but Yubico’s websites let ad companies’ cookies build a profile of you for ads elsewhere, unless you refuse them in each browser. It says it doesn’t sell your data.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+          quote: 'These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/ccpa/
+          quote: 'We do not sell your personal data.'
+        - url: https://play.google.com/store/apps/datasafety?id=com.yubico.yubioath
+          quote: "The developer says this app doesn't share user data with other companies or organizations."
+      action:
+        name: 'Change your cookie choices'
+        url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Yubico’s websites use advertising cookies unless you refuse them, and that choice is only for the browser you make it in.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+          quote: 'We use cookies to ensure that you get the best experience on our site and to present relevant content and advertising.'
+        - url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+          quote: 'By browsing this site without restricting the use of cookies, you consent to our and third party use of cookies as set out in our Cookie Notice.'
+      action:
+        name: 'Change your cookie choices'
+        url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: good
+      reason: 'Nothing from the app reaches Yubico. Only if you choose its optional AI support chat may what you write there be used to train its support tools.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'When you contact Yubico for customer support, you may choose to use an AI-based chatbot (“AI Assistant”) as an optional channel.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'Conversations with the AI Assistant may be logged and retained for quality assurance, training, and improvement of our support tools, and to maintain a record of your support case.'
+        - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+          quote: 'The developer does not collect any data from this app.'
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your codes are kept inside your YubiKey and can’t be read out of it, and the app sends Yubico nothing.'
+      sources:
+        - url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/ykauth-intro.html
+          quote: 'With Yubico Authenticator, credentials are stored in the secure element of the YubiKey; once stored, they cannot be extracted.'
+        - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+          quote: 'The developer does not collect any data from this app.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'Yubico keeps what it collects through its websites, store and support as long as it needs it, with set lifetimes for its cookies. The app gives it nothing to keep.'
+      sources:
+        - url: https://www.yubico.com/trust/data-security-and-privacy/
+          quote: 'Yubico retains data only as long as necessary to operate our business and to comply with statutory and regulatory requirements.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'Our Cookie Notice includes retention periods in respect of cookies that we use.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: neutral
+      reason: 'Yubico deletes what it has once it’s done with it, and you can ask it to delete your data sooner, with no set time. The app gives it nothing.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'We delete collected personal data when the purpose of the processing has been completed.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'to request that we shall stop processing and delete your personal data'
+      action:
+        name: 'How to contact Yubico about your data'
+        url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: bad
+      reason: 'By design, codes stored on a YubiKey can never be copied out, so you can’t move them to another app. Keep each site’s QR code when you add it, to set up a backup key.'
+      sources:
+        - url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/ykauth-intro.html
+          quote: 'With Yubico Authenticator, credentials are stored in the secure element of the YubiKey; once stored, they cannot be extracted.'
+        - url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/oath.html
+          quote: 'Make a copy of the QR code or secret key information; you will need it when registering a second YubiKey.'
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It may give your details to the police for a criminal investigation, not only when a law or court order requires it. The app gives it nothing about your codes.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'We may also disclose your personal data to third parties, for example the police or other public authorities, if it concerns criminal investigations or if we are otherwise required to disclose such data by law or public authority decision.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your codes stay in your YubiKey. What Yubico holds about you can go to its group or partners in other countries, under contract terms the EU approves.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'Your personal data may be transferred to Yubico Group companies or partners outside of your country for one or more of the purposes described above.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'like the standardized model clauses for data transfers adopted by the EU Commission'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you install the app and connect your YubiKey, and the app collects nothing about you.'
+      sources:
+        - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+          quote: 'The developer does not collect any data from this app.'
+        - url: https://play.google.com/store/apps/datasafety?id=com.yubico.yubioath
+          quote: 'The developer says this app doesn’t collect user data'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disagreements go to a court in Stockholm, Sweden, under Swedish law, wherever you live. There’s no private referee (arbitration).'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+          quote: 'Both parties hereby consent to the exclusive jurisdiction of the Swedish Court system with the City Court of Stockholm as first instance.'
+        - url: https://www.yubico.com/support/terms-conditions/legal-imprint/
+          quote: 'Yubico does not participate in out-of-court dispute resolution proceedings before consumer arbitration bodies and is not obliged to do so.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: bad
+      reason: 'Yubico can change the terms for its websites and downloads at any time without telling you, and they bind you from then on.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+          quote: 'The Website, Service, and these Terms and Conditions may be changed at the sole discretion of Yubico and without notice.'
+        - url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+          quote: 'You are bound by any such updates or changes, including but not limited to those affecting these Terms and Conditions, and so should periodically review these Terms and Conditions.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: bad
+      reason: 'Yubico can cut off your use of its websites and downloads, and any account there, at any time, for any reason, without warning.'
+      sources:
+        - url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+          quote: 'Yubico may terminate this Agreement, your rights under this Agreement, and your access to and use of the Website and Service in its sole discretion, for any reason or no reason at all, including but not limited to failure to pay your fees, with or without cause and without notice or liability to you or any third party.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'Yubico takes no rights over your codes: they stay inside your YubiKey and never reach it.'
+      sources:
+        - url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/oath.html
+          quote: 'The OATH secrets (account credentials) always stay within the YubiKey.'
+        - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+          quote: 'The developer does not collect any data from this app.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: great
+      reason: 'It’s free and open source: the copy you have stays yours for good under its licence, and your codes live in your own YubiKey.'
+      sources:
+        - url: https://github.com/Yubico/yubioath-flutter/blob/main/LICENSE
+          quote: 'each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.'
+        - url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/oath.html
+          quote: 'The OATH secrets (account credentials) always stay within the YubiKey.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you stop using, and the app needs none.'
+      pages:
+        - https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+        - https://www.yubico.com/support/terms-conditions/privacy-notice/
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'Its apps are open source under the Apache License: anyone may read, change and share their code.'
+      sources:
+        - url: https://github.com/Yubico/yubioath-flutter/blob/main/LICENSE
+          quote: 'each Contributor hereby grants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free, irrevocable copyright license to reproduce, prepare Derivative Works of, publicly display, publicly perform, sublicense, and distribute the Work and such Derivative Works in Source or Object form.'
+        - url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/installation.html
+          quote: 'For developers wishing to build and package the Yubico Authenticator app from source, please see the GitHub documentation for your desired platform:'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside experts review its products, it has a process for reporting security flaws, and it publishes its past security advisories. It names no bug bounty, and the reviews aren’t public.'
+      sources:
+        - url: https://www.yubico.com/trust/secure-development/
+          quote: 'We also work with trusted and independent third parties to review the security of our products and services.'
+        - url: https://www.yubico.com/trust/secure-development/
+          quote: 'Yubico operates a Coordinated Vulnerability Disclosure process to handle vulnerability disclosures in a manner that protects the community while encouraging responsible reporting.'
+        - url: https://www.yubico.com/trust/secure-development/
+          quote: 'See a full list of past security advisories'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      status: not-applicable
+      reason: 'There’s no account to share: your codes live in the YubiKey, which works with the app on any device.'
+      pages:
+        - https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/oath.html
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its pages don’t say how the app updates itself or whether it changes anything else on your device.'
+      pages:
+        - https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+        - https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/installation.html
+      lastVerified: 2026-11-19
