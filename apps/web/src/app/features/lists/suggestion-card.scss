@@ -117,22 +117,93 @@ article {
   color: var(--ss-text-muted);
 }
 
+// What it loses or gains (M10.34): its label, then a row each, the rank in a column of its own so the names line up.
+.effect {
+  display: grid;
+  gap: 4px;
+}
+
+.label {
+  margin: 0;
+  font-weight: 500;
+}
+
+.ranked {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+
+  // Wide enough for the longest name, Sometimes, so every feature starts in the same place.
+  .rank {
+    flex: none;
+    min-width: 7.5rem;
+  }
+
+  span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+// A service it gives up, marked as one rather than a rank, its icon right beside it.
+.ranked .service {
+  gap: 6px;
+  font-weight: 500;
+
+  mat-icon {
+    flex: none;
+    align-self: center;
+    width: 18px;
+    height: 18px;
+    color: var(--ss-text-muted);
+    font-size: 18px;
+  }
+}
+
+// The features you haven't ranked, folded: a summary that opens them, as runs of muted text.
+.unranked {
+  color: var(--ss-text-muted);
+
+  summary {
+    width: fit-content;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid var(--ss-accent-text);
+      outline-offset: 2px;
+    }
+  }
+
+  .label {
+    margin-top: 8px;
+    color: var(--ss-text);
+  }
+}
+
+.plain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 16px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
 .features {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 4px 12px;
   margin: 0;
-}
-
-.label {
-  font-weight: 500;
-}
-
-.feature {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 
 // A third-party claim's source (M11.16), as the cards' text links (Plan ↗, Cancel ↗).
