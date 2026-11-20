@@ -27,6 +27,7 @@ import { RankCounts } from '../../shared/rank/rank-counts';
 import { TypeCounts } from '../../shared/type-counts/type-counts';
 import { EmptyState } from '../../shared/empty-state/empty-state';
 import { openSnack, undoMillis } from '../../shared/snack/snack';
+import { YearlyTotalSwitch } from '../../shared/yearly-total-switch/yearly-total-switch';
 
 /** One list's card (P3). */
 interface ListCard {
@@ -70,6 +71,7 @@ interface PendingFocus {
     RankCounts,
     RouterLink,
     TypeCounts,
+    YearlyTotalSwitch,
   ],
   templateUrl: './lists-overview-page.html',
   styleUrl: './lists-overview-page.scss',

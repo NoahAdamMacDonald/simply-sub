@@ -121,7 +121,7 @@
       @if (total() > 0 && totals(); as totals) {
         <div class="money">
           <ss-yearly-total-switch />
-          <ss-budget-totals [metrics]="totals" [listIds]="listIds()" [yearly]="yearly()" />
+          <ss-budget-totals [metrics]="totals" [listIds]="listIds()" />
           @if (!wide()) {
             <ng-container [ngTemplateOutlet]="listCalendar" />
           }

@@ -239,6 +239,27 @@ describe('ListsOverviewPage', () => {
     ]);
   });
 
+  it('shows every total for the next 12 months once that’s chosen on any page, with the switch (M10.35)', async () => {
+    await plant();
+    settings.set({ ...alberta, annualBudget: 300, yearlyTotal: 'next-12-months' });
+    await open();
+    await until(() => page().querySelector('.money ss-yearly-total-switch') !== null);
+    await until(() => page().querySelectorAll('.money ss-budget-bar').length === 1);
+    const spoken = (selector: string) =>
+      Array.from(page().querySelectorAll(selector)).map((element) => text(element));
+    // Every list's together, and each list's card.
+    expect(spoken('.money ss-budget-totals .total .visually-hidden')[1]).toMatch(
+      /in the next 12 months$/,
+    );
+    for (const line of spoken('.cards ss-budget-totals .total .visually-hidden')) {
+      expect(line).not.toMatch(/in 2026$/);
+    }
+    const pressed = page().querySelector(
+      '.money ss-yearly-total-switch button[aria-checked="true"]',
+    );
+    expect(text(pressed)).toBe('Next 12 months');
+  });
+
   it('has only the empty state and the new list tile with no lists, and no feature column', async () => {
     await open();
     expect(page().querySelector('li.card')).toBeNull();

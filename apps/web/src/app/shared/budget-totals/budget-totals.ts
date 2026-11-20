@@ -38,8 +38,8 @@ let nextId = 0;
  * This month's and this year's totals against the budgets (PROJECT-PLAN §3.1, BLUEPRINT §8.1.1, M7.2): Home's for
  * every list together (P2), a list's on List view (P4) and on its Lists card (P3). Each budget that's set is a bar
  * with "$100 of $200 this month" beside it; without one, the total alone, and on Home "Set a monthly budget →". The
- * totals include sales tax, as charges do. List view's yearly total can be the next 12 months' instead (`yearly`),
- * against the same annual budget.
+ * totals include sales tax, as charges do. The yearly total can be the next 12 months' instead, against the same
+ * annual budget: settings.yearlyTotal, which ss-yearly-total-switch sets, so every page shows the one chosen (M10.35).
  */
 @Component({
   selector: 'ss-budget-totals',
@@ -60,8 +60,8 @@ export class BudgetTotals {
   readonly name = input('');
   /** The lists the totals are of, which the breakdowns add up (M10.30); left out, every list. */
   readonly listIds = input<ReadonlySet<string>>();
-  /** The yearly total: this calendar year's, or the next 12 months' (List view's choice, P4). */
-  readonly yearly = input<'calendar' | 'next-12-months'>('calendar');
+  /** The yearly total: this calendar year's, or the next 12 months', as chosen on this device (M10.35). */
+  private readonly yearly = computed(() => this.settings.saved()?.yearlyTotal ?? 'calendar');
 
   protected readonly id = `ss-budget-totals-${nextId++}`;
   protected readonly lines = computed<BudgetLine[]>(() => {

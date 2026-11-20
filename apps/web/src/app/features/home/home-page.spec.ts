@@ -48,7 +48,14 @@ describe('HomePage', () => {
     TestBed.configureTestingModule({
       providers: [
         storage.providers,
-        { provide: SettingsStore, useValue: { saved } },
+        {
+          provide: SettingsStore,
+          useValue: {
+            saved,
+            update: async (changes: Partial<Settings>) =>
+              saved.update((settings) => settings && { ...settings, ...changes }),
+          },
+        },
         {
           provide: CatalogStore,
           useValue: {
@@ -235,6 +242,23 @@ describe('HomePage', () => {
     await until(() => page().querySelectorAll('ss-budget-bar').length === 2);
     expect(page().querySelector('ss-budget-bar')?.getAttribute('data-level')).toBe('over');
     expect(page().querySelector('a.prompt')).toBeNull();
+  });
+
+  it('switches the yearly total to the next 12 months, for every page (M10.35)', async () => {
+    await plant();
+    saved.set({ ...alberta, annualBudget: 1000 });
+    await open();
+    await until(() => page().querySelectorAll('ss-budget-bar').length === 1);
+    const yearly = () => text(page().querySelectorAll('.budgets .total [aria-hidden]')[1]);
+    expect(yearly()).toMatch(/ of \$1,000\.00 in 2026$/);
+    const next12 = Array.from(page().querySelectorAll<HTMLButtonElement>('.budgets button')).find(
+      (button) => text(button) === 'Next 12 months',
+    );
+    next12?.click();
+    await until(() => yearly()?.endsWith('in the next 12 months') === true);
+    // Saved on this device, where Lists and List view read it.
+    expect(saved()?.yearlyTotal).toBe('next-12-months');
+    expect(next12?.getAttribute('aria-checked')).toBe('true');
   });
 
   it('opens the Calendar on a day’s month, or the month shown', async () => {

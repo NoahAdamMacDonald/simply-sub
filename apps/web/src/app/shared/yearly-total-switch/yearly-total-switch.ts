@@ -9,8 +9,9 @@ import { SettingsStore } from '../../core/settings/settings-store';
 let nextId = 0;
 
 /**
- * List view's yearly total (P4): this calendar year's or the next 12 months' (PROJECT-PLAN §3.1), a labelled segmented
- * button above the totals. The choice is this device's (settings.yearlyTotal, which sync leaves alone), saved at once.
+ * The yearly total (P2, P3, P4): this calendar year's or the next 12 months' (PROJECT-PLAN §3.1), a labelled segmented
+ * button above the totals on Home, the Lists overview and List view. The choice is this device's (settings.yearlyTotal,
+ * which sync leaves alone), saved at once, and every page's totals follow it (M10.35), so it's chosen once.
  */
 @Component({
   selector: 'ss-yearly-total-switch',

@@ -70,6 +70,8 @@
       <section class="budgets card" aria-labelledby="budgets-heading">
         <h2 id="budgets-heading">Budgets</h2>
         @if (global(); as global) {
+          <!-- The yearly total, as on Lists and List view: one choice for every page (M10.35). -->
+          <ss-yearly-total-switch />
           <ss-budget-totals [metrics]="global" prompt />
         }
       </section>

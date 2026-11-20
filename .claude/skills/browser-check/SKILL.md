@@ -230,6 +230,9 @@ Mullvad's details open), Lists, List view (Sort and a card's details open), the 
 Features, Custom subscriptions (editor open), Settings, Calendar and Payment. A failure names what sticks out, and
 anything inside a page that scrolls sideways fails too.
 
+`check-yearly-everywhere.cjs` (M10.35) chooses Next 12 months on Home by keyboard and checks that the Lists
+overview and List view show the same choice, with axe in both themes at 1280 and 360 px. Its base URL ends in `/`.
+
 `check-wide.cjs` (the owner's 21:9 feedback, 2026-11-19) screenshots every page at 1280, 1920, 2560 (dark) and
 3440 px with three lists written to IndexedDB, and fails a page that scrolls sideways. Pass widths as a fourth
 argument (`1280,3440`) to shoot fewer. Its base URL ends in `/`. Look at the shots: the pages of cards fill the
