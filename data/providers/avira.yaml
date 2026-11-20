@@ -220,9 +220,10 @@ perks:
 # - Authenticator: "Includes mobile authenticator" ("use Password Manager to securely generate codes to protect your
 #   online accounts", its page). No page says how codes are added: a QR code or setup key is inferred; no export of them
 #   is named.
-# - No end-to-end encryption in its words: "All passwords and data are encrypted on the user's side before they are sent
-#   to Avira‘s servers." (Avira Passwort Manager provides highest security), but no page says end-to-end or
-#   zero-knowledge, so it's left out (notes.md).
+# - End-to-end encryption, inferred: no page says end-to-end or zero-knowledge, but "All passwords and data are encrypted
+#   on the user's side before they are sent to Avira‘s servers." (Avira Passwort Manager provides highest security) and
+#   "Only you can see and access your passwords. Even Avira does not know what they are." (its page) say Avira can't
+#   read them, the registry's test, so passwords (inferred, PureVPN's heading being the same claim).
 plans:
   # Free Security (its page, en/free-security): antivirus, anti-ransomware, browser protection, a software updater, a
   # home network scan, a password manager, a shredder, speed-up tools and the free Phantom VPN (500 MB a month).
@@ -252,6 +253,7 @@ plans:
       password-manager.offline: false
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.data-allowance: 0.5
       vpn.ram-only-servers: false
@@ -262,6 +264,12 @@ plans:
         page:
           name: 'Avira Password Manager'
           url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
+      encryption.end-to-end:
+        reason: "No page says end-to-end or zero-knowledge, but its help says “All passwords and data are encrypted on the user's side before they are sent to Avira‘s servers.”, and its page “Even Avira does not know what they are.”"
+        page:
+          name: 'Avira Passwort Manager provides highest security'
+          url: https://support.avira.com/hc/en-us/articles/360001219537-Avira-Passwort-Manager-provides-highest-security
         lastVerified: 2026-11-19
     notes: 'Free: real-time antivirus with ransomware and phishing protection, a software updater, a password manager, a file shredder, speed-up tools and a VPN with 500 MB a month (1 GB if you register).'
     prices:
@@ -300,6 +308,7 @@ plans:
       password-manager.offline: false
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.data-allowance: 0.5
       vpn.ram-only-servers: false
@@ -312,6 +321,12 @@ plans:
         page:
           name: 'Avira Password Manager'
           url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
+      encryption.end-to-end:
+        reason: "No page says end-to-end or zero-knowledge, but its help says “All passwords and data are encrypted on the user's side before they are sent to Avira‘s servers.”, and its page “Even Avira does not know what they are.”"
+        page:
+          name: 'Avira Passwort Manager provides highest security'
+          url: https://support.avira.com/hc/en-us/articles/360001219537-Avira-Passwort-Manager-provides-highest-security
         lastVerified: 2026-11-19
     notes: 'Antivirus for 1 Windows PC or Mac, with a firewall on Windows, scheduled scans, phishing protection and the free VPN (500 MB a month).'
     prices:
@@ -520,6 +535,7 @@ plans:
       password-manager.offline: false
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       antivirus.devices: 1
       platforms: [windows]
     inferred:
@@ -528,6 +544,12 @@ plans:
         page:
           name: 'Avira Password Manager'
           url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
+      encryption.end-to-end:
+        reason: "No page says end-to-end or zero-knowledge, but its help says “All passwords and data are encrypted on the user's side before they are sent to Avira‘s servers.”, and its page “Even Avira does not know what they are.”"
+        page:
+          name: 'Avira Passwort Manager provides highest security'
+          url: https://support.avira.com/hc/en-us/articles/360001219537-Avira-Passwort-Manager-provides-highest-security
         lastVerified: 2026-11-19
     notes: 'Antivirus Pro for 1 Windows PC, plus Password Manager Pro with breach and weak-password alerts, automatic software and driver updates, and alerts when your data leaks.'
     prices:
@@ -738,6 +760,7 @@ plans:
       password-manager.offline: false
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -755,6 +778,12 @@ plans:
         page:
           name: 'Avira Password Manager'
           url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
+      encryption.end-to-end:
+        reason: "No page says end-to-end or zero-knowledge, but its help says “All passwords and data are encrypted on the user's side before they are sent to Avira‘s servers.”, and its page “Even Avira does not know what they are.”"
+        page:
+          name: 'Avira Passwort Manager provides highest security'
+          url: https://support.avira.com/hc/en-us/articles/360001219537-Avira-Passwort-Manager-provides-highest-security
         lastVerified: 2026-11-19
     perks: [safe-shopping, vip-support]
     notes: 'Every Avira app on up to 5 PCs, Macs, phones or tablets: Internet Security, the unlimited Phantom VPN Pro, System Speedup Pro and the premium mobile apps.'
@@ -965,6 +994,7 @@ plans:
       password-manager.offline: false
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       vpn.included: true
       vpn.unlimited-traffic: true
       vpn.data-allowance: unlimited
@@ -982,6 +1012,12 @@ plans:
         page:
           name: 'Avira Password Manager'
           url: https://www.avira.com/en/password-manager
+        lastVerified: 2026-11-19
+      encryption.end-to-end:
+        reason: "No page says end-to-end or zero-knowledge, but its help says “All passwords and data are encrypted on the user's side before they are sent to Avira‘s servers.”, and its page “Even Avira does not know what they are.”"
+        page:
+          name: 'Avira Passwort Manager provides highest security'
+          url: https://support.avira.com/hc/en-us/articles/360001219537-Avira-Passwort-Manager-provides-highest-security
         lastVerified: 2026-11-19
     perks: [safe-shopping, vip-support]
     notes: 'Prime on up to 25 devices.'

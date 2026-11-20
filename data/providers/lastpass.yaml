@@ -152,7 +152,9 @@ features:
 #   app ... Included" on Free and Premium), "a mobile app that can be used for multifactor authentication for any online
 #   account you create (on any website, not just for LastPass)". It adds accounts "by scanning a QR code or entering the
 #   details manually" (otpauth). No page read describes exporting its codes: it offers "secure cloud backup" to your
-#   LastPass account, not a file, so authenticator.export is empty (notes.md).
+#   LastPass account, not a file, so authenticator.export is empty (notes.md). Each plan labels it with the comparison's
+#   row, "LastPass Authenticator mobile app", so the card shows it's a separate app, not codes in the vault (which are
+#   business only; its item types have no totp), unlike Bitwarden's and 2FAS's, whose free apps are plans of their own.
 # - File storage for notes' attachments: Free "50 MB", the paid plans "1 GB" (in notes).
 plans:
   - id: lastpass.free
@@ -173,6 +175,8 @@ plans:
       authenticator.import: [otpauth]
       encryption.end-to-end: [passwords]
       security.dark-web-monitoring: true
+    featureLabels:
+      authenticator.included: LastPass Authenticator mobile app
     notes: 'On computers or on mobile devices, not both: you pick one device type and can switch it 3 times. Share an item with one person at a time, and 50 MB for files.'
     prices:
       - region: GLOBAL
@@ -199,6 +203,8 @@ plans:
       authenticator.import: [otpauth]
       encryption.end-to-end: [passwords]
       security.dark-web-monitoring: true
+    featureLabels:
+      authenticator.included: LastPass Authenticator mobile app
     notes: 'On all your devices, with 1 GB for files, emergency access and personal support. Billed once a year.'
     prices:
       - region: CA
@@ -306,6 +312,8 @@ plans:
       authenticator.import: [otpauth]
       encryption.end-to-end: [passwords]
       security.dark-web-monitoring: true
+    featureLabels:
+      authenticator.included: LastPass Authenticator mobile app
     notes: 'Six Premium accounts, each with its own vault, plus shared folders and a family manager dashboard. Billed once a year.'
     prices:
       - region: CA
@@ -428,6 +436,8 @@ plans:
       vpn.data-allowance: unlimited
       vpn.server-countries: 85
       vpn.no-logs-policy: true
+    featureLabels:
+      authenticator.included: LastPass Authenticator mobile app
     notes: 'Premium plus LastPass VPN on up to 10 Windows computers (other systems are coming), with unlimited data. Billed once a year.'
     prices:
       - region: CA
@@ -692,8 +702,8 @@ policies:
           quote: 'You will continue to be charged until the end of your current subscription term.'
       lastVerified: 2026-11-19
     - topic: billing.price-changes
-      tier: poor
-      reason: 'A new price starts only when you renew, but it may tell you just by posting it on its website, with no set warning time.'
+      tier: neutral
+      reason: 'A new price starts only when you renew, and it says it will tell you first, on its website, by email or on an invoice, but not how long before.'
       sources:
         - url: https://www.lastpass.com/legal-center/terms-of-service/personal
           quote: 'Price changes take effect at your next renewal.'

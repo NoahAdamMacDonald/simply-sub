@@ -190,10 +190,11 @@ sourceRepo:
 #   /support/pass-offline-access leads): Pass Plus, Unlimited, Duo and Family. Mail Plus, Drive Plus, VPN Plus and Lumo
 #   Plus come with "Proton Pass Free" (/support/proton-plans), so theirs is false like Free's, inferred (notes.md).
 # - Authenticator: Pass Plus's "Built-in 2FA authenticator" and "Unlimited 2FA codes", and Free's "Up to three 2FA
-#   items" (/support/proton-pass-plans-explained), which every plan with Pass Free has (its label). Codes go in from a
-#   QR code or key ("Tap inside the 2FA secret (TOTP) field → Scan code.", "paste in the 2FA key you copied from the
-#   website", /support/pass-2fa). Out, inferred: Proton Authenticator's import page lists Proton Pass among the apps
-#   "You can export 2FA codes from" (/support/import-2fa-codes), and Pass's export is PGP-encrypted or plain.
+#   items" (/support/proton-pass-plans-explained), which every plan with Pass Free has (its label), so their item types
+#   have totp too. Codes go in from a QR code or key ("Tap inside the 2FA secret (TOTP) field → Scan code.", "paste in
+#   the 2FA key you copied from the website", /support/pass-2fa). Out, inferred: Proton Authenticator's import page
+#   lists Proton Pass among the apps "You can export 2FA codes from" (/support/import-2fa-codes), and Pass's export is
+#   PGP-encrypted or plain.
 # - End-to-end encryption on every plan, each of which has Proton's free apps at least ("Proton Free gives you access to
 #   Proton Mail (and all other Proton services) under one account.", and /support/proton-plans lists "Proton Docs" under
 #   Drive, "Proton Meet Free" and "Proton Lumo Free" under each plan it explains): Mail ("Zero-access encryption means
@@ -242,7 +243,7 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
       password-manager.import: [csv, json, other-managers]
@@ -307,7 +308,7 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
       password-manager.import: [csv, json, other-managers]
@@ -432,7 +433,7 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
       password-manager.import: [csv, json, other-managers]
@@ -564,7 +565,7 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
       password-manager.import: [csv, json, other-managers]
@@ -857,7 +858,7 @@ plans:
       vpn.ram-only-servers: false
       vpn.mesh: false
       password-manager: true
-      password-manager.item-types: [login, passkey, credit-card, secure-note, email-alias]
+      password-manager.item-types: [login, totp, passkey, credit-card, secure-note, email-alias]
       password-manager.health: [weak, reused]
       password-manager.sharing: [share-vault, role-permissions]
       password-manager.import: [csv, json, other-managers]

@@ -88,9 +88,10 @@ features:
 #   file extension."), isn't a database export, so no json.
 # - Offline: "in an offline, encrypted file that can be stored in any location" (its home page). No emergency access.
 # - Authenticator: "Once set up, KeePassXC can calculate TOTP codes like any authenticator app, such as Google
-#   Authenticator." (its User Guide). Import: you paste the secret ("paste the secret code from the website"); no page
-#   says it reads otpauth links, QR codes or another app's backup, so none. Export: "You can also view the secret and
-#   configuration as a QR code for exporting to a mobile device." (its User Guide), so otpauth.
+#   Authenticator." (its User Guide). Import: you paste the secret ("paste the secret code from the website"), and a
+#   setup key pasted by hand is the registry's otpauth; no page says it scans QR codes or reads another app's backup, so
+#   otpauth only. Export: "You can also view the secret and configuration as a QR code for exporting to a mobile
+#   device." (its User Guide), so otpauth.
 # - End-to-end encryption: none stated in those words. "Your passwords remain encrypted at all times and no data is
 #   stored on remote servers" (its home page), but no page says "end-to-end" or "zero-knowledge", so
 #   encryption.end-to-end is left out (categories.md's rule); privacy.content-access grades the same fact.
@@ -109,6 +110,7 @@ plans:
       password-manager.export: [csv, kdbx, encrypted]
       password-manager.offline: true
       authenticator.included: true
+      authenticator.import: [otpauth]
       authenticator.export: [otpauth]
     notes: 'Free and open source (GPLv3). A desktop app for Windows, macOS and Linux with a browser extension; your passwords stay in one encrypted KDBX file that you keep and sync wherever you like. It has no phone app of its own: it suggests KeePassDX or KeePass2Android on Android, and Strongbox or KeePassium on iPhone.'
     prices:

@@ -121,7 +121,8 @@ their own.
     holder and percent.
   - A private company has no `stock`; its owners and their shares stay in `name`.
 - **A volunteer project** (the owner's choice, 2026-11-11): a provider no company runs (Jellyfin) names its project as
-  `owner.name`, quoted from its own pages, with `volunteer: true` and no country.
+  `owner.name`, quoted from its own pages, with `volunteer: true` and no country, unless it's one person's project
+  whose own imprint names them and their country (KeePass): that country, quoted without the street address.
 - **Where it's from** (the owner's choice, 2026-11-03): `owner.country`, the company's ISO 3166-1 code. When the
   owner's quotes say it ("a Swiss corporation"), the code alone; else a `page` of its own with one to three `quotes`
   and `lastVerified`, in the same order of pages, or an address in its terms or corporate information ("Los Gatos, CA

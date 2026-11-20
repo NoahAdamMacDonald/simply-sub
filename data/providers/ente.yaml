@@ -165,8 +165,9 @@ perks:
 #   the plain text being otpauth links that Auth and other apps import, and "Yes, you can export your codes as HTML QR
 #   codes and then scan them in Google Authenticator to import them." (Auth FAQ); each entry can also be shown "as QR
 #   code". So otpauth, an encrypted backup and a plain backup file.
-# - End-to-end encrypted backups ("Auth provides end-to-end encrypted cloud backups so you don't have to worry about
-#   losing your tokens.").
+# - End-to-end encrypted: its synced codes ("Your codes sync across all your devices, end-to-end encrypted.") and its
+#   backups ("Auth provides end-to-end encrypted cloud backups so you don't have to worry about losing your tokens."),
+#   so passwords (an authenticator's vault, the registry's words) and backups.
 plans:
   - id: ente.photos-free
     name: Photos Free
@@ -878,7 +879,7 @@ plans:
       authenticator.included: true
       authenticator.import: [otpauth, google-authenticator, other-apps]
       authenticator.export: [otpauth, encrypted-backup, plain-backup]
-      encryption.end-to-end: [backups]
+      encryption.end-to-end: [passwords, backups]
     perks: [auth-offline-mode]
     notes: 'Free and open source, for everyone. Sign in with an Ente account to sync your codes end-to-end encrypted, or use it on one device without an account.'
     prices:

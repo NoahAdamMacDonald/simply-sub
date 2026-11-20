@@ -28,7 +28,8 @@ sources: { pricing: https://keepass.info/ }
 # password manager developed by Dominik Reichl, its licence and every page's footer say "Copyright © 2003-2026 Dominik
 # Reichl.", its donations go to him, and its imprint names him as "Responsible for all pages on https://keepass.info/",
 # at an address in Metzingen, Germany. A free project with no company behind it (Jellyfin's precedent, the owner's
-# choice of 2026-11-11), so volunteer, but with the country its imprint gives (notes.md).
+# choice of 2026-11-11), so volunteer, but with the country its imprint gives (policy-research's volunteer rule). The
+# country's quote is the imprint's town and country only, not his street address.
 owner:
   name: Dominik Reichl
   volunteer: true
@@ -44,7 +45,7 @@ owner:
       url: https://keepass.info/contact.html
     quotes:
       - 'Responsible for all pages on https://keepass.info/ :'
-      - 'Dominik Reichl Haydnstr. 12 72555 Metzingen Germany'
+      - '72555 Metzingen Germany'
     lastVerified: 2026-11-19
   lastVerified: 2026-11-19
 # Source code (M11.5): its downloads page links each version's source code package on SourceForge, where the project's
@@ -100,8 +101,9 @@ features:
 #   encrypted.", its security page). So csv, kdbx and encrypted (notes.md).
 # - Offline: "KeePass does not require Internet/cloud access." (its FAQ). No emergency access: no page offers one.
 # - Authenticator: TOTP and HOTP codes, shown or copied from the main window or typed by Auto-Type (its placeholders
-#   page). Import and export of 2FA codes: none stated. Its OTP Generator Settings dialog takes the secret and settings
-#   by hand, and no page mentions otpauth links, QR codes or a codes-only export, so both are empty (Authy's precedent).
+#   page). Import: its OTP Generator Settings dialog takes the secret and settings by hand, and a setup key entered by
+#   hand is the registry's otpauth; no QR scan and no other app's backup, so otpauth only. Export: no page mentions
+#   otpauth links, QR codes or a codes-only export, so none (Authy's precedent).
 # - End-to-end encryption: none stated. Its pages say the whole database is encrypted and that "the disk/server and
 #   network never see your unencrypted data" (its FAQ), but never "end-to-end" or "zero-knowledge", so
 #   encryption.end-to-end is left out (categories.md's rule); privacy.content-access grades the same fact.
@@ -120,6 +122,7 @@ plans:
       password-manager.export: [csv, kdbx, encrypted]
       password-manager.offline: true
       authenticator.included: true
+      authenticator.import: [otpauth]
     notes: 'Free and open source (GNU GPL). A Windows app that also runs on Linux and macOS with Mono; your passwords stay in one encrypted file (KDBX) that you keep and sync wherever you like. Phones need another developer’s app that opens KeePass files. KeePass 1.x is still offered, without one-time passwords.'
     prices:
       - {

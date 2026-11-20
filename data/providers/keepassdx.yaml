@@ -124,8 +124,8 @@ plans:
 # Terms and policies (BLUEPRINT §4.10), read 2026-11-19. KeePassDX has no account, no sign-up and no terms of service:
 # you download free software under the GNU GPL v3 (its README and home page). Its privacy policy (kunzisoft.com, linked
 # from its Google Play listing) says the app collects nothing. So the topics about an account, data it holds and a
-# contract are not-applicable, with why. Read for security: its GitHub security page ("No security policy detected":
-# GitHub's words, not quoted), its README and FAQ. Google Play's listing (its data safety section says "No data
+# contract are not-applicable, with why. Read for security: its GitHub security page ("No security policy detected",
+# with GitHub's "Report a vulnerability" form switched on: GitHub's words, not quoted), its README and FAQ. Google Play's listing (its data safety section says "No data
 # collected") isn't KeePassDX's own page, so it isn't quoted. The app stores (Google Play, F-Droid, IzzyOnDroid) and
 # KeePro Support's purchase come under the stores' own terms, not read.
 policies:
@@ -284,7 +284,7 @@ policies:
       lastVerified: 2026-11-19
     - topic: security.practices
       tier: poor
-      reason: 'It says anyone can check its code and that the code is checked at each release, but it describes no outside audit and no way to report security flaws.'
+      reason: 'It says anyone can check its code and that the code is checked at each release, but it describes no outside audit and no security policy. GitHub’s private report form is its only way to report security flaws.'
       sources:
         - url: https://www.keepassdx.com/
           quote: 'The source code is open to the public and transparent, fully auditable by the community, and contains no ads or data tracking.'

@@ -154,9 +154,10 @@ sourceRepo:
 #   plain or encrypted ("The formats are identical to Bitwarden vault exports ."; its JSON sample has "totp" :
 #   "otpauth://totp/my-secret-key"). Free's vault keeps the keys without codes (above): false.
 # - End-to-end encryption: "Bitwarden uses end-to-end encryption for all vault data, which only your master password can
-#   decrypt." (Security and Compliance), its attachments included on Premium and Families ("Vault Data includes all
-#   information stored within accounts to the Bitwarden Service, including but not limited to login credentials,
-#   attachments including photos, videos, images and other files", privacy policy).
+#   decrypt." (Security and Compliance), so passwords. Premium's and Families' attachments are vault data ("Vault Data
+#   includes all information stored within accounts to the Bitwarden Service, including but not limited to login
+#   credentials, attachments including photos, videos, images and other files", privacy policy), not a files service,
+#   so no files (LastPass's and NordPass's attachments are counted the same way).
 plans:
   - id: bitwarden.free
     name: Free
@@ -218,7 +219,7 @@ plans:
       authenticator.included: true
       authenticator.import: [otpauth]
       authenticator.export: [otpauth, encrypted-backup, plain-backup]
-      encryption.end-to-end: [passwords, files]
+      encryption.end-to-end: [passwords]
     perks: [file-attachments, send-files, priority-support]
     notes: 5 GB of encrypted file attachments, with more storage for an extra fee.
     prices:
@@ -257,7 +258,7 @@ plans:
       authenticator.included: true
       authenticator.import: [otpauth]
       authenticator.export: [otpauth, encrypted-backup, plain-backup]
-      encryption.end-to-end: [passwords, files]
+      encryption.end-to-end: [passwords]
     perks: [file-attachments, send-files, priority-support]
     notes: >-
       Six Premium accounts with unlimited sharing between them. 5 GB of attachments each and 5 GB for shared items. A
@@ -278,7 +279,9 @@ plans:
   # Manager's JSON, "Google Authenticator (QR code)", LastPass Authenticator's JSON, a "2FAS backup file", Raivo OTP's
   # export (iOS) and Aegis's unencrypted JSON (Android), besides scanning a site's QR code. Export: ".json or .csv",
   # unencrypted (its sample sets encrypted to false), with "the otpauth://totp/?secret= string for each entry". Codes synced
-  # from a vault leave with the vault's export instead. No server to run, so not self-hostable.
+  # from a vault leave with the vault's export instead. No server to run, so not self-hostable. End-to-end encrypted:
+  # "Bitwarden Authenticator works perfectly as an end-to-end encrypted standalone app" (its product page), so passwords
+  # (an authenticator's vault, the registry's words).
   - id: bitwarden.authenticator
     name: Authenticator
     link: https://bitwarden.com/products/authenticator/
@@ -289,6 +292,7 @@ plans:
       authenticator.included: true
       authenticator.import: [otpauth, google-authenticator, other-apps]
       authenticator.export: [otpauth, plain-backup]
+      encryption.end-to-end: [passwords]
     notes: >-
       A free app for two-factor codes on iPhone and Android. No Bitwarden account needed; with one, it can sync codes with
       your vault.
@@ -456,8 +460,8 @@ policies:
           quote: 'We use applicable, approved information transfer mechanisms where required, such as EU Standard Contractual Clauses (SCCs), or the Data Privacy Framework.'
       lastVerified: 2026-11-19
     - topic: privacy.sign-up-data
-      tier: good
-      reason: 'You only need an email address. A name is optional, and paid plans need billing details.'
+      tier: neutral
+      reason: 'You only need an email address. A name is optional, and paid plans need billing details. Its pages don’t say whether an email alias works.'
       sources:
         - url: https://bitwarden.com/terms/
           quote: 'You must provide a valid email address in order to complete the signup process.'

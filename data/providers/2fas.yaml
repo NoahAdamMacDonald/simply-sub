@@ -116,8 +116,9 @@ perks:
 #   Authenticator Pro) and Google Authenticator." and "We also support imports from our app in the .2fas format.".
 # - Exports: a 2FAS Backup file, with a password or without ("For safety reasons, we recommend exporting this file with a
 #   password."). No page offers otpauth links or QR codes out.
-# - End-to-end encrypted backups: "if you’re using additional features like cloud sync or the Browser Extension , the
-#   communication between your phone and the cloud or Browser is end-to-end encrypted by default".
+# - End-to-end encrypted sync: "if you’re using additional features like cloud sync or the Browser Extension , the
+#   communication between your phone and the cloud or Browser is end-to-end encrypted by default". Its synced codes, so
+#   passwords (an authenticator's vault, the registry's words), as 2FAS Pass's sync; no page says "backup" beside it.
 # - App languages: "List of ready-to-use translations:" English, German, French, Spanish, Portuguese, Brazilian
 #   Portuguese, Ukrainian, Italian, Polish, Indonesian, Dutch, Turkish, Chinese (Simplified), Chinese (Traditional),
 #   Greek, Japanese and Swedish (the registry's are listed).
@@ -146,7 +147,7 @@ plans:
       authenticator.included: true
       authenticator.import: [otpauth, google-authenticator, other-apps]
       authenticator.export: [encrypted-backup, plain-backup]
-      encryption.end-to-end: [backups]
+      encryption.end-to-end: [passwords]
       languages.interface: [en, de, fr, es, pt, it, zh, ja]
     notes: 'Free and open source, with no account. Codes stay on your phone, with optional encrypted backup to your own iCloud or Google Drive, and a browser extension that asks your phone for a code.'
     prices:
