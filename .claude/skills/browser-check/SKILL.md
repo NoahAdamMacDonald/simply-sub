@@ -230,6 +230,11 @@ Mullvad's details open), Lists, List view (Sort and a card's details open), the 
 Features, Custom subscriptions (editor open), Settings, Calendar and Payment. A failure names what sticks out, and
 anything inside a page that scrolls sideways fails too.
 
+`check-wide.cjs` (the owner's 21:9 feedback, 2026-11-19) screenshots every page at 1280, 1920, 2560 (dark) and
+3440 px with three lists written to IndexedDB, and fails a page that scrolls sideways. Pass widths as a fourth
+argument (`1280,3440`) to shoot fewer. Its base URL ends in `/`. Look at the shots: the pages of cards fill the
+width with their cards in columns (BLUEPRINT §8.1), and 1280 px looks as before.
+
 `check-app-lock.cjs` (M6.10) checks the app lock on `ng serve` for a Canadian in Alberta. It writes to IndexedDB Work
 Related (Netflix Standard nicknamed Mom's, noted "Paid by Dad" and tagged Family), Goodlife Gym at $43.21 and a rank.
 
