@@ -15,6 +15,7 @@ import { ClockService } from '../../core/clock/clock-service';
 import { SettingsStore } from '../../core/settings/settings-store';
 import { conditionText, rateText } from '../account-terms/account-text';
 import { BillingCheck } from '../billing-check/billing-check';
+import { CategoryChips } from '../category-chips/category-chips';
 import { billingText, ownPriceText } from '../billing-text';
 import { chargeAmountText, type ShownAndSpoken } from '../charge-text';
 import { countryName } from '../country-name';
@@ -42,6 +43,7 @@ let nextId = 0;
   selector: 'ss-item-card',
   imports: [
     BillingCheck,
+    CategoryChips,
     FeatureList,
     MatButton,
     MatIcon,
@@ -66,6 +68,13 @@ export class ItemCard {
   private readonly body = viewChild<ElementRef<HTMLElement>>('body');
 
   readonly resolved = input.required<ResolvedItem>();
+  /** A catalog plan's provider, whose categories its card shows (M10.36); none for a bundle or a custom one. */
+  protected readonly provider = computed(() => {
+    const { providerId, planId } = this.resolved();
+    return providerId === undefined || planId === undefined
+      ? undefined
+      : this.catalog.catalog()?.providers.find(({ id }) => id === providerId);
+  });
   /** The item's tags, in its order. */
   readonly tags = input<readonly Tag[]>([]);
   /** Its share of the list's next 12 months, from 0 to 1 (M7.2): "31% of list". */
