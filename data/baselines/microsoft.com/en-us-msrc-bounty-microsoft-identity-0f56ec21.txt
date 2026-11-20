@@ -1,0 +1,267 @@
+url: https://www.microsoft.com/en-us/msrc/bounty-microsoft-identity
+method: fetch
+saved: 2026-11-20
+
+Microsoft Identity Bounty | MSRC
+This is the Trace Id: cd8fffd951c313d2ed9d6bd41274686f
+MSRC
+Report Security Vulnerability
+Report Abuse
+Report Infringement
+Submission FAQs
+Reporting Vulnerability
+Security Update Guide
+Exploitability index
+Developer API documentation
+Frequently Asked Questions
+Technical Security Notifications
+Glossary
+Microsoft Bug Bounty Programs
+Microsoft Active Protections Program
+BlueHat Security Conference
+Researcher Recognition Program
+Windows Security Servicing Criteria
+Researcher Resource Center
+Microsoft Security Response Center
+Security Research & Defense
+BlueHat Conference Blog
+Security Researcher Acknowledgments
+Online Services Researcher Acknowledgments
+AI Safety Acknowledgements
+Security Researcher Leaderboard
+Secure research starts with responsible testing.
+Microsoft Identity Bounty Program
+Partner with Microsoft to strengthen our products and services by identifying and reporting security vulnerabilities that could impact our customers.
+IMPORTANT: The Microsoft Bounty Program is subject to these terms and those outlined in the Microsoft Bounty Terms and Conditions, Microsoft Bounty Legal Safe Harbor, Rules of Engagement, Coordinated Vulnerability Disclosure (CVD), Bounty Program Guidelines, and the Microsoft Bounty Program page.
+PROGRAM DESCRIPTION
+Microsoft continues to invest heavily in the security and privacy of both our consumer (Microsoft Account) and enterprise (Azure Active Directory) identity solutions. We have focused on the creation, implementation, and improvement of identity-related specifications that foster strong authentication, secure sign-on, sessions, API security, and other critical infrastructure tasks, as part of the community of standards experts within official standards bodies such as IETF, W3C, or the OpenID Foundation.
+Qualified submissions are eligible for bounty awards from $375 to $100,000 USD. This includes third-party and open-source components included in the service. Please note that qualifying reports must demonstrate a qualifying security impact on the specified service.
+In conjunction with our collaboration with the OpenID standards community, our bounty includes certified implementations of select OpenID standards.
+ELIGIBLE SUBMISSIONS
+The goal of the Microsoft Bug Bounty program is to uncover significant technical vulnerabilities that have a direct and demonstrable impact on the security of our customers.
+In addition to the eligibility requirements listed on the Bounty Program Guidelines page, vulnerability submissions must meet the following criteria to be eligible for bounty awards:
+Identify a previously unreported critical or important vulnerability that results in an in-scope security impact and meets any of the below criteria: Reproduces in the latest, publicly available version of in-scope Microsoft Identity services
+Results in the taking over of a Microsoft Account or Azure Active Directory Account
+Is listed in OpenID standards or with a OpenID-compliant protocol and is implemented in our certified products, services, or libraries
+Includes all the following information: A description of the issue and concise reproducibility steps that are easily understood
+The impact of the vulnerability
+Attack vector if not obvious
+Correlation ID
+We request researchers include the following information to help us quickly assess their submission:
+Submit through the MSRC Researcher Portal.
+Microsoft may accept or reject any submission at our sole discretion that we determine does not meet the above criteria.
+SCOPE
+Vulnerabilities submitted in the following Product(s) are eligible under this bounty program:
+login.windows.net
+login.microsoftonline.com
+login.live.com
+account.live.com
+account.microsoft.com
+signup.live.com
+account.windowsazure.com
+account.activedirectory.windowsazure.com
+credential.activedirectory.windowsazure.com
+passwordreset.microsoftonline.com
+Microsoft Authenticator (iOS and Android applications)*
+Microsoft Authenticator Broker (iOS and Android applications)*
+Microsoft Authenticator Lite (iOS and Android applications)*
+graph.microsoft.com APIs that originate in and impact the Identity Authentication workflow, listed under the Directory Management, Governance, and Identity and Sign In tabs in the Manage Microsoft Entra identity and network access capabilities by using Microsoft Graph page
+Azure Active Directory B2C (awarded under the B2C Awards table)
+adminwebservice.microsoftonline.com
+api.mysignins.microsoft.com
+provisioningapi.microsoftonline.com
+myaccess.microsoft.com
+myapps.microsoft.com
+myaccount.microsoft.com
+microsoftazuread-sso.com
+mysignins.microsoft.com
+accounts.accesscontrol.windows.net
+* For mobile applications: research must reproduce on the latest version of the application and mobile operating system.
+Standards Scope:
+Microsoft products and services Certified Implementations listed here.
+OpenID Foundation - The OpenID Connect Family
+OpenID Connect Core
+OpenID Connect Discovery
+OpenID Connect Session
+OAuth 2.0 Multiple Response Types
+OAuth 2.0 Form Post Response Types
+Please note: Submissions for standards, protocols, or implementation bounties must be submitted with a fully ratified identity standard in scope of this bounty and have discovered a security vulnerability with the standard or protocol implemented in our certified products, services, or libraries.
+Standards professionals with contributions or affiliations to identity standards working groups are not eligible to receive standards-related bounties.
+GETTING STARTED
+Please follow the guidance below to create a test account for security testing and probing. Additionally, please follow the Research Rules of Engagement to avoid harm to customer data, privacy, and service availability.
+For Azure services, you can start a free trial to use as your test account here: https://azure.microsoft.com/en-us/free/
+For Microsoft Account, you can set up your test account here: http://signup.live.com/
+In all cases, where possible, include the string “MSOBB” in your account name and/or tenant name in order to identify it as being used for security research.
+Please include a Correlation ID to ensure accurate and timely assessment of your case.
+BOUNTY AWARDS
+Bounty awards range from $375 up to $100,000 USD. Higher awards are possible, at Microsoft's sole discretion, based on the severity and impact of the vulnerability and the completeness of the submission as outlined on the Requirements for Complete Vulnerability Reports page. If a single submission is eligible for multiple awards, the submission will be awarded the single highest qualifying award. Researchers who provide submissions that do not qualify for bounty awards may still be eligible for public acknowledgement if their submission leads to a vulnerability fix.
+GENERAL AWARDS
+Severity
+Security Impact Report Completeness Critical Important Moderate Low
+Elevation of Privilege (Involving Authentication + Multi-factor Authentication Bypass) Complete
+Not Complete $100,000
+$10,000 $50,000
+$5,000 $0 $0
+Elevation of Privilege (e.g Authentication Bypass or authentication flaw) Complete
+Not Complete $40,000
+$4,000 $20,000
+$2,000 $0 $0
+Spoofing (e.g Cross-Site Scripting (XSS) or Cross-Site Request Forgery CSRF)) Complete
+Not Complete $20,000
+$2,000 $10,000
+$1,000 $0 $0
+Information Disclosure (e.g. Sensitive Data Exposure) Complete
+Not Complete $12,000
+$1,200 $7,500
+$750 $0 $0
+Standards Design Vulnerabilities (Some limitations apply, see Out of Scope section below) Complete
+Not Complete $100,000
+$10,000 $30,000
+$3,000 $0 $0
+Standards-based implementation vulnerabilities (Some limitations apply, see Out of Scope section below) Complete
+Not Complete $75,000
+$7,500 $25,000
+$2,500 $0 $0
+B2C AWARDS
+Severity
+Security Impact Report Completeness Critical Important Moderate Low
+Elevation of Privilege (Involving Authentication + Multi-factor Authentication Bypass) Complete
+Not Complete $50,000
+$5,000 $25,000
+$2,500 $0 $0
+Elevation of Privilege (e.g Authentication Bypass or authentication flaw) Complete
+Not Complete $20,000
+$2,000 $10,000
+$1,000 $0 $0
+Spoofing (e.g Cross-Site Scripting (XSS) or Cross-Site Request Forgery CSRF)) Complete
+Not Complete $10,000
+$1,000 $5,000
+$500 $0 $0
+Information Disclosure (e.g. Sensitive Data Exposure) Complete
+Not Complete $6,000
+$600 $3,750
+$375 $0 $0
+Standards Design Vulnerabilities (Some limitations apply, see Out of Scope section below) Complete
+Not Complete $50,000
+$5,000 $15,000
+$1,500 $0 $0
+Standards-based implementation vulnerabilities (Some limitations apply, see Out of Scope section below) Complete
+Not Complete $37,500
+$3,750 $12,500
+$1,250 $0 $0
+OUT OF SCOPE SUBMISSIONS AND VULNERABILITIES
+Microsoft is happy to receive and review every submission on a case-by-case basis, but some submission and vulnerability types may not qualify for bounty award.
+If your submission is evaluated as out-of-scope for this individual bounty program, it may still qualify for an award under the Standard Award Policy.
+Here are some of the common low-severity or out-of-scope issues that typically do not earn bounty awards:
+Publicly-disclosed vulnerabilities which have already been reported to Microsoft or are already known to the wider security community
+Issues without clearly identified security impact (such as clickjacking on a static website), missing security headers, or descriptive error messages
+Out-of-scope vulnerability types, including: Server-side information disclosure such as IPs, server names and most stack traces
+Low impact CSRF bugs (such as logoff)
+Denial of Service issues
+Sub-Domain Takeovers
+Cookie replay vulnerabilities
+URL Redirects (unless combined with another vulnerability to produce a more severe vulnerability)
+Password, email and account policies, such as email id verification, reset link expiration, password complexity
+Vulnerabilities in a web application that only affect unsupported browsers and plugins
+Vulnerabilities that are addressed via product documentation updates, without change to product code or function
+Vulnerabilities based on user configuration, user action, or physical access, for example: Vulnerabilities requiring extensive or unlikely user actions
+Vulnerabilities in user-created content or applications
+Security misconfiguration of a service by a user, such as the enabling of HTTP access on a storage account to allow for man-in-the-middle (MiTM) attacks
+Submissions that require manipulation of data, network access, or physical attack against Microsoft offices or data centers and/or social engineering of our service desk, employees or contractors
+Two-factor authentication bypass that requires physical access to a logged-in device
+Local access to user data when operating a rooted mobile device
+Missing HTTP Security Headers (such as X-FRAME-OPTIONS) or cookie security flags (such as “httponly”)
+Vulnerabilities requiring preconditions such as running malware, access to local network or devices, or man-in-the-middle attacks
+Vulnerabilities based on third parties that do not demonstrate a qualifying security impact on the specified service, including:
+Vulnerabilities based on third parties that do not demonstrate a qualifying security impact on the specified service Vulnerabilities in third party software provided by Azure such as gallery images
+Vulnerabilities in third party sites redirected to during authentication
+Vulnerabilities in the operating system code not owned by Microsoft
+Vulnerabilities in the 3rd party integration code with the Microsoft Identity platform and brokers
+Reports from automated tools or scans
+Training, documentation, samples, and community forum sites related to Identity products and services are out-of-scope for bounty awards
+Vulnerabilities in other Microsoft Products: These submissions may be eligible for a bounty through another Bounty program. Please see our full list of Bounty Programs for other bounty eligible Microsoft products and services
+Issues resulting from misconfiguration or implementation of Authenticator libraries and brokers within other products will be awarded under the bounty programs for the products ingesting the applications
+Limitation on Standards-based vulnerabilities: Any of the following criteria would exclude a standards based vulnerability from qualifying for bounty: Standards with a status of draft, candidate release, or implementation draft. Issues with candidate, implementation, or draft standards should be reported directly to the standards body in question as part of the normal standards creation process
+In specifications not explicitly listed
+In non-certified implementations of Microsoft products and services
+Microsoft reserves the right to reject any submission that we determine, at our sole discretion, falls into any of these categories of vulnerabilities even if otherwise eligible for a bounty.
+ADDITIONAL INFORMATION
+For additional information, please see our FAQ.
+REVISION HISTORY
+December 6, 2018: Revision history section added.
+October 23, 2019: Revised reward model to include security impact, severity, and report quality. Revised bounty brief language to align with our other cloud programs.
+January 16, 2020: Added link to Research Project Grant
+February 24, 2022: Added clarification that vulnerabilities addressed via product documentation updates are out of scope.
+June 09, 2023: Added Identity Graph APIs to in scope. Added B2C to scope with a product-specific awards table.
+September 1, 2023: Added signup.live.com to in scope.
+March 19, 2024: Added Authenticator Lite and Authenticator Broker apps to scope (iOS and Android)
+August 28, 2024: Added adminwebservice.microsoftonline.com, api.mysignins.microsoft, and provisioningapi.microsoftonline.com to scope
+August 29, 2024: Clarified out of scope for vulnerabilities requiring preconditions such as running malware, access to local network or devices, or man-in-the-middle attacks
+November 19, 2024: Temporary 50% increase in High Impact Scenario amounts and eligible security impacts for Zero Day Quest event.
+February 11, 2025: Added Correlation ID to getting Eligible Submissions and Getting Started sections.
+March 3, 2025: Removed reference to Zero Day Quest and bonus multipliers as the research challenge ended.
+May 13, 2025: Updated Research Rules of Engagement section.
+July 18, 2025: Added mysignins.microsoft.com, myaccount.microsoft.com, myaccess.microsoft.com, myapps.microsoft.com, microsoftazuread-sso.com, accounts.accesscontrol.windows.net.
+November 8, 2025: Added account.microsoft.com to in scope.
+December 11, 2025: updated hyperlinks and standardized language.
+April 7, 2026: Updated Getting Started section.
+October 20, 2026: Updated bounty awards section to reference the Requirements for Complete Vulnerability Reports page.
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads

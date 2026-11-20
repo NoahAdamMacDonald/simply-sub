@@ -1,0 +1,161 @@
+url: https://www.enpass.io/cookie/
+method: browser
+saved: 2026-11-20
+
+Skip to content
+Business
+Personal
+Why Enpass
+Pricing
+Resources
+Get started here
+Talk to sales
+Our Use of Cookies
+Effective Date: Aug 28, 2024
+Our Platform uses cookies. A cookie is a small piece of data or a text file that is downloaded to your computer or mobile device when you access certain websites. Cookies may contain text that can be read by the web server that delivered the cookie to you. The text contained in the cookie generally consists of a sequence of letters and numbers that uniquely identifies your computer or mobile device; it may contain other information as well. By agreeing to accept our use of cookies you are giving us and the third parties with which we partner permission to place, store, and access some or all the cookies described below on your computer.
+We may also use cookies for:
+identifying the areas of our website that you have visited
+personalizing content that you see on our website
+our website analytics
+remarketing our products or services to you
+remembering your preferences, settings, and login details
+targeted advertising and serving ads relevant to your interests
+allowing you to post comments
+allowing you to share content with social networks.
+Most web browsers can be set to disable the use of cookies. However, if you disable cookies, you may not be able to access features on our Platform correctly or at all. Here is an updated list of cookies we use:
+Necessary
+These cookies are necessary for the proper functioning of the Platform, such as displaying content, logging in, validating your session, responding to your request for services, and other functions. Most web browsers can be set to disable the use of cookies. If you disable these cookies, you may not be able to access features on our Platform correctly or at all.
+Cookie Duration Description
+ips4_IPSSessionFront session
+This cookie is set by Enpass discussion forum. This cookie stores the ID of the visitors current session.
+ct_cookies_test session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+VISITOR_PRIVACY_METADATA 6 months YouTube sets this cookie to store the user's cookie consent state for the current domain.
+ips4_noCache session
+This cookie is set by Enpass discussion forum. This cookie is set when a guest members session requires that the output is not cached / coming from the cache.
+ct_prev_referer session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+ips4_lastSearch Less than a minute
+This cookie is set by Enpass discussion forum. This cookie stores the last search timestamp.
+ct_pointer_data session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+ct_timezone session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+YSC session Youtube sets this cookie to track the views of embedded videos on Youtube pages.
+VISITOR_INFO1_LIVE 6 months YouTube sets this cookie to measure bandwidth, determining whether the user gets the new or old player interface.
+yt-remote-device-id Never Expires YouTube sets this cookie to store the user's video preferences using embedded YouTube videos.
+yt-remote-connected-devices Never Expires YouTube sets this cookie to store the user's video preferences using embedded YouTube videos.
+yt.innertube::requests Never Expires YouTube sets this cookie to register a unique ID to store data on what videos from YouTube the user has seen.
+yt.innertube::nextId Never Expires YouTube sets this cookie to register a unique ID to store data on what videos from YouTube the user has seen.
+ct_sfw_pass_key 1 month
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+ct_ps_timestamp session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+ct_fkp_timestamp session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+ips4_ipsTimezone Session
+This cookie is set by Enpass discussion forum.
+ips4_hasJS 1 day
+This cookie is set by Enpass discussion forum. This cookie is used to identify if Javascript is enabled in the browser.
+ct_checkjs session
+CleanTalk sets this cookie to prevent spam on the site's comments/forms.
+cookieyes-consent 1 year CookieYes sets this cookie to remember users' consent preferences so that their preferences are respected on subsequent visits to this site. It does not collect or store any personal information about the site visitors.
+wpEmojiSettingsSupports session
+Our website sets this cookie to determine if the user's browser can display emojis properly.
+__awc_tld_test__ session
+Atlassian sets this cookie for checking top-level domain of the website. It is necessary for the support functionality of the website.
+__cflb 1 hour
+This cookie is set by Cloudflare when hCaptcha is being used by our website to identify bots to protect the website against malicious spam attacks. It is used by Cloudflare for load balancing.
+ytidb::LAST_RESULT_ENTRY_KEY Never Expires The cookie ytidb::LAST_RESULT_ENTRY_KEY is used by YouTube to store the last search result entry that was clicked by the user. This information is used to improve the user experience by providing more relevant search results in the future.
+yt-remote-cast-installed session The yt-remote-cast-installed cookie is used to store the user's video player preferences using embedded YouTube video.
+yt-remote-session-app session The yt-remote-session-app cookie is used by YouTube to store user preferences and information about the interface of the embedded YouTube video player.
+yt-remote-session-name session The yt-remote-session-name cookie is used by YouTube to store the user's video player preferences using embedded YouTube video.
+yt-remote-cast-available session
+The yt-remote-cast-available cookie is used to store the user's preferences regarding whether casting is available on their YouTube video player.
+yt-remote-fast-check-period session The yt-remote-fast-check-period cookie is used by YouTube to store the user's video player preferences for embedded YouTube videos.
+ips4_ipsTimezone Session
+This cookie is set by Enpass discussion forum.
+ips4_notificationMenuShown 1 Year
+This cookie is set by Enpass discussion forum.
+ips4_stream_view_all 1 Year
+This cookie is set by Enpass discussion forum.
+ips4_forum_list_view 1 Year
+This cookie is set by Enpass discussion forum.
+__Secure-ROLLOUT_TOKEN 6 months
+Registers a unique ID to keep statistics of what videos from YouTube the user has seen.
+__cf_bm 30 Minutes
+This cookie is set by HubSpot's CDN provider and is a necessary cookie for bot protection.
+_cfuvid session
+This cookie is set by HubSpot’s CDN provider because of their rate limiting policies.
+yt-player-headers-readable Never Expires
+The yt-player-headers-readable cookie is used by YouTube to store user preferences related to video playback and interface, enhancing the user's viewing experience.
+yt-remote-cast-available session
+The yt-remote-cast-available cookie is used to store the user's preferences regarding whether casting is available on their YouTube video player.
+yt-player-bandwidth Never Expires
+The yt-player-bandwidth cookie is used to store the user's video player preferences and settings, particularly related to bandwidth and streaming quality on YouTube.
+__cf_bm 30 Minutes
+This cookie is set by HubSpot's CDN provider and is a necessary cookie for bot protection.
+cfuvid Session
+This cookie is set by HubSpot’s CDN provider because of their rate limiting policies.
+PHPSESSID 3 Months
+Required for Enpass help site session.
+im_external_content 6 months
+Required for help site to show external content.
+im_released 6 Months
+Required for help site operation.
+Analytics
+Analytical cookies are used to understand how visitors interact with the website. These cookies help provide information on metrics such as the number of visitors, bounce rate, traffic source, etc.
+Cookie Duration Description
+_ga_* 1 year 1 month 4 days Google Analytics sets this cookie to store and count page views.
+_ga 1 year 1 month 4 days Google Analytics sets this cookie to calculate visitor, session and campaign data and track site usage for the site's analytics report. The cookie stores information anonymously and assigns a randomly generated number to recognise unique visitors.
+ajs_anonymous_id 1 year
+This cookie is set by embedded Atlassian chat support plugin to count the number of people who visited the site by tracking if they have visited before.
+__hssrc session This cookie is set by Hubspot whenever it changes the session cookie. The __hssrc cookie set to 1 indicates that the user has restarted the browser, and if the cookie does not exist, it is assumed to be a new session.
+__hssc 1 hour HubSpot sets this cookie to keep track of sessions and to determine if HubSpot should increment the session number and timestamps in the __hstc cookie.
+__hstc 6 months Hubspot set this main cookie for tracking visitors. It contains the domain, initial timestamp (first visit), last timestamp (last visit), current timestamp (this visit), and session number (increments for each subsequent session).
+hubspotutk 6 months HubSpot sets this cookie to keep track of the visitors to the website. This cookie is passed to HubSpot on form submission and used when deduplicating contacts.
+MUID 1 year 24 days Bing sets this cookie to recognise unique web browsers visiting Microsoft sites. This cookie is used for advertising, site analytics, and other operations.
+ANONCHK 10 minutes The ANONCHK cookie, set by Bing, is used to store a user's session ID and verify ads' clicks on the Bing search engine. The cookie helps in reporting and personalization as well.
+CLID 1 year Microsoft Clarity set this cookie to store information about how visitors interact with the website. The cookie helps to provide an analysis report. The data collection includes the number of visitors, where they visit the website, and the pages visited.
+_clck 1 year Microsoft Clarity sets this cookie to retain the browser's Clarity User ID and settings exclusive to that website. This guarantees that actions taken during subsequent visits to the same website will be linked to the same user ID.
+MR 7 days This cookie, set by Bing, is used to collect user information for analytics purposes.
+_clsk 1 day Microsoft Clarity sets this cookie to store and consolidate a user's pageviews into a single session recording.
+SM session Microsoft Clarity cookie set this cookie for synchronizing the MUID across Microsoft domains.
+SRM_B 1 year 24 days Used by Microsoft Advertising as a unique ID for visitors.
+Want to receive news and updates?
+Subscribe
+By subscribing, you agree to our Terms of Use and Privacy Notice. We do not send more than one email a month about the latest news of Enpass, special promotions and sneak peek of future releases.
+Connect with us on social media
+Explore
+Business
+Enterprise
+Personal
+Microsoft 365 Integration
+Google Workspace Integration
+Affiliate Program
+Partners Program
+Beta Program
+Students
+Features
+Autofill
+Passkeys
+Password Generator
+Security Dashboard
+Moving to Enpass
+Compromised Passwords
+Resources
+Blog
+Choosing Enpass
+Downloads
+Security
+Security Whitepaper
+Press: Resources
+Passkeys Catalogue
+Company
+About
+Privacy Notice
+Cookie Policy
+Terms of Use
+Copyright © 2026 Enpass Technologies Inc.
+Terms of Use
+Privacy Notice

@@ -1,0 +1,38 @@
+url: https://help.twilio.com/articles/19753631509019
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+Backups password and PIN protection with Authy
+Objective
+The purpose of this guide is to help you understand the distinct security mechanisms used to protect your Twilio Authy account data.
+While both features protect your information, they serve entirely different purposes and operate independently. It is critical to understand the differences between them, as a forgotten Backup Password cannot be recovered or reset by Authy Support, whereas a device PIN or biometric lock is managed entirely at the local device level.
+Product
+Authy
+Procedure
+Authy Backups Password
+This password is used to encrypt and decrypt your 2FA tokens when syncing them across multiple devices. Because Authy uses a zero-knowledge security architecture, this password is never sent to our servers. If you lose all your devices and forget this password, your backed-up tokens cannot be decrypted or recovered.
+For help enabling and disabling backups, or changing the backups password, see Backups and Sync in Authy.
+For help with a lost or forgotten backups password, see What is a Backup Password? Can it be recovered?.
+Authy Protection PIN for iOS and Android
+This is a local security layer (such as a 4-digit PIN, FaceID, or TouchID) used exclusively to unlock the Authy application on a specific smartphone or tablet. It prevents unauthorized physical access to your open app. If forgotten, this PIN can typically be reset by reinstalling the app or using your device's master settings, provided you still know your Backup Password to sync your tokens.
+For help enabling and disabling the Protection PIN, or changing the PIN, please see Authy Mobile App Protection PIN for iOS and Android.
+For help with a lost or forgotten PIN, see Authy Protection PIN Recovery for iOS and Android.
+(information)
+Notice: Authy doesn't have any other overall password to lock your account across all instances. You need to set the protection per device with the PIN.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

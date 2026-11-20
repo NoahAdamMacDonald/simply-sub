@@ -1,0 +1,435 @@
+url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+method: fetch
+saved: 2026-11-20
+
+‎Yubico Authenticator App - App Store
+Search
+Today
+Games
+Apps
+Arcade
+Platform
+iPhone
+iPad
+Mac
+Vision
+Watch
+TV
+Yubico Authenticator
+2FA with YubiKey
+Free
+Share
+289 Ratings
+3.7
+Age Rating
+4+ Years
+Category
+Productivity
+Developer
+Yubico
+Language
+EN + 4 More
+Size
+4.2 MB
+iPhone, iPad
+Store your unique credentials on a hardware-backed security key and take it wherever you go from mobile to desktop. No more storing sensitive secrets on your mobile phone, leaving your account vulnerable to takeovers. With the Yubico Authenticator you can raise the bar for security.
+* The Yubico Authenticator will work with any USB, Lightning, or NFC-enabled YubiKeys.
+* As iPads do not have NFC, they will only work through a Lightning or USB connection.
+The Yubico Authenticator generates a code used to verify your identity as you are logging into various services. No connectivity needed!
+Features include:
+Touch or NFC Authentication - Touch the YubiKey sensor or simply tap a YubiKey with NFC to a mobile phone that is NFC-enabled to store your credential on the YubiKey
+USB-C support - Connect the YubiKey 5Ci or any USB-C type YubiKey. When prompted, depending on the key, touch the contacts on the sides of the key or the golden ring on the top
+Biometric support - Experience greater convenience by unlocking your YubiKey with FaceID or TouchID
+Easy Setup - QR codes available from the services you wish to protect with strong authentication
+User Presence - New codes generated with just a touch or NFC tap of the YubiKey
+Compatible - Secure all the services currently compatible with other Authenticator apps
+Secure - Hardware-backed strong two-factor authentication with secret stored on the YubiKey, not on the mobile device
+Versatile - Support for multiple work and personal accounts
+Portable - Get the same set of codes across our other Yubico Authenticator apps for desktops as well as for all leading mobile platforms
+Flexible - Support for time-based and counter-based code generation
+Smart Card - Support for Apple's CryptoTokenKit Extension making it possible to use certificates stored on your YubiKey to authenticate with other apps and sites
+Experience security the modern way with the Yubico Authenticator. Visit yubico.com to learn more.
+more
+Ratings & Reviews
+3.7
+out of 5
+289 Ratings
+No tablet support?
+08/31/2021 Caerta
+Response to yubico: well isn’t that just like Apple to be nonsensical. Apple really needs to stop being anti-competitive and anti-user. Well, thank you Yubico for the replay. END UPDATE/:/:/Had a little difficulty getting it to work with the phone, but after spending a while and many attempts, I finally got it to work. Moving onto my iPad with a USB-C port, I am met with a notice that the device is not supported since it doesn’t have a lightning port or nfc. Which means, despite having a 5C NFC, I can’t use it with my tablet because they failed to update the app. This makes no sense: make a usb-C device but the app doesn’t support it? Get it together Yubico.
+Developer Response Hello! This has now been resolved in our latest version of the app: Version 1.7.1 :)
+No tablet support?
+08/31/2021 Caerta
+Response to yubico: well isn’t that just like Apple to be nonsensical. Apple really needs to stop being anti-competitive and anti-user. Well, thank you Yubico for the replay. END UPDATE/:/:/Had a little difficulty getting it to work with the phone, but after spending a while and many attempts, I finally got it to work. Moving onto my iPad with a USB-C port, I am met with a notice that the device is not supported since it doesn’t have a lightning port or nfc. Which means, despite having a 5C NFC, I can’t use it with my tablet because they failed to update the app. This makes no sense: make a usb-C device but the app doesn’t support it? Get it together Yubico. Developer Response 12/12/2022
+Hello! This has now been resolved in our latest version of the app: Version 1.7.1 :)
+Works as Designed, but complex and frustrating
+05/20/2022 Sawdust & Noise
+To get two different key types (PC and iWhatsit) working on both classes of device with ONE website took three hours of fooling with terse instructions and a load of mysterious, unexplained acronyms. This is supposed to be a slick, secure way to use two-factor authentication (2FA) to log on to web sites. However, the setup process is so convoluted, aggravating, and failure-prone, it seems better for my blood pressure and mental health to turn off 2FA and just forget the whole thing. If ever you get it set up right, it works correctly. I am a retired fifty-year computer geek. I can only wonder what chance an ordinary home user has to get going. Support is nonexistent. I submitted a simple question a week ago, and have gotten nothing but the robotic initial acknowledgment.Update after response: The email alias address I used to open the requests is not my Apple alias address. I own and administer my private email domain, so no spam folder issue. Search on the email domain.
+Developer Response Hi there, Apologies for the issues you had with the app. We took a look in our support tickets and didn't see a ticket--have you checked your spam folder to see if it perhaps landed there? You're welcome to reach out to us directly on Twitter @Yubico and we can manually open a ticket for you there as well.
+Works as Designed, but complex and frustrating
+05/20/2022 Sawdust & Noise
+To get two different key types (PC and iWhatsit) working on both classes of device with ONE website took three hours of fooling with terse instructions and a load of mysterious, unexplained acronyms. This is supposed to be a slick, secure way to use two-factor authentication (2FA) to log on to web sites. However, the setup process is so convoluted, aggravating, and failure-prone, it seems better for my blood pressure and mental health to turn off 2FA and just forget the whole thing. If ever you get it set up right, it works correctly. I am a retired fifty-year computer geek. I can only wonder what chance an ordinary home user has to get going. Support is nonexistent. I submitted a simple question a week ago, and have gotten nothing but the robotic initial acknowledgment.Update after response: The email alias address I used to open the requests is not my Apple alias address. I own and administer my private email domain, so no spam folder issue. Search on the email domain. Developer Response 05/20/2022
+Hi there, Apologies for the issues you had with the app. We took a look in our support tickets and didn't see a ticket--have you checked your spam folder to see if it perhaps landed there? You're welcome to reach out to us directly on Twitter @Yubico and we can manually open a ticket for you there as well.
+My favorite authenticator!
+06/11/2020 Wumpus42
+I really like yubico’s way keeping everything on my YubiKey. Much better than cloud backup or no backup at all. Google bit me with that when I moved to a new phone.Yubico support is fantastic. I contacted them to ask how to disable the NFC OTP notifications. They were very helpful. Then what do you know, the next version of Authenticator comes out a couple days later and there’s a new, easy peasy option to disable the notifications! If only all product support was this good. Now if they’d just allow editing and rearranging the entries and duplicating keys (for backup) :)
+Developer Response Hi there! Thank you for the kind words. We're so happy to hear that you're enjoying the app, and that you found our support team to be helpful. They're the best! Regarding your feature request, we will absolutely pass along to our product team to keep in mind for future releases.
+My favorite authenticator!
+06/11/2020 Wumpus42
+I really like yubico’s way keeping everything on my YubiKey. Much better than cloud backup or no backup at all. Google bit me with that when I moved to a new phone.Yubico support is fantastic. I contacted them to ask how to disable the NFC OTP notifications. They were very helpful. Then what do you know, the next version of Authenticator comes out a couple days later and there’s a new, easy peasy option to disable the notifications! If only all product support was this good. Now if they’d just allow editing and rearranging the entries and duplicating keys (for backup) :) Developer Response 06/11/2020
+Hi there! Thank you for the kind words. We're so happy to hear that you're enjoying the app, and that you found our support team to be helpful. They're the best! Regarding your feature request, we will absolutely pass along to our product team to keep in mind for future releases.
+Excellent - but one complaint
+07/10/2020 Ujdjeaujsji„
+This app is clean and well organized. I believe there is a bug with the NFC capability sometimes though.~50% of the time, the “reading data” prompt takes a LONG time. 10+ seconds. The reason why I think it’s a big is because, if the app is “reading data” with no end in sight and I remove my key... it instantly says “success!” And everything works as it should.
+Excellent - but one complaint
+07/10/2020 Ujdjeaujsji„
+This app is clean and well organized. I believe there is a bug with the NFC capability sometimes though.~50% of the time, the “reading data” prompt takes a LONG time. 10+ seconds. The reason why I think it’s a big is because, if the app is “reading data” with no end in sight and I remove my key... it instantly says “success!” And everything works as it should.
+What’s New
+Version History
+This version adds support for retired PIV slots and PIV decryption in the Smart card extension, enabling mail clients to decrypt encrypted emails using private keys stored on YubiKey. We've also added SCP11 support for PIV sessions over NFC on FIPS keys and improved PIV certificate display names. Additionally, we've improved how the app handles YubiKeys with the OATH application disabled and improved the reliability of the Yubico OTP disable feature.
+1.13.0 Mar 11
+Fixes issue with multiple Face ID scans
+1.12.3 08/11/2025
+- Fixes issues around codes disappearing after a NFC scan.
+- Fix an issue with the re-calculation of HOTP codes.
+1.12.2 07/07/2025
+Fixes an issue with codes not refreshing after changing views.
+Fixes problems around holding on to the YubiKey connection for too long after becoming inactive or in background.
+1.12.1 07/01/2025
+* Fixes an issue with TOTP codes not updating after scrolling them out of the screen.
+* Improves the naming around FIPS keys.
+1.12.0 05/30/2025
+Fixes a problem where OATH wasn't supported for keys missing the management application, like the YubiKey NEO.
+1.11.1 04/16/2025
+This version adds support for FIPS enabled YubiKeys.
+1.11 04/08/2025
+Added support for German and Slovak languages.
+1.10 01/30/2025
+Stability improvements for users on iPad.
+1.9.1 12/04/2024
+About view and its subviews rewritten in SwiftUI.
+1.9 11/26/2024
+This version fixes an issue where the app would crash instead of showing an error message.
+1.8.1 11/20/2024
+FIDO pin management and reset has been added to the app in this version. While adding new functionality to the configuration view we took the opportunity to give it a refresh with more colors and icons. We also fixed a crash that could occur when switching between the OATH account list and the configuration view. Lastly, trying to add an OATH account to a full YubiKey will now result in a more human readable error message.
+1.8 11/14/2024
+This version fixes a crash in the NFC settings view.
+1.7.11 09/26/2024
+French and Japanese language support.
+1.7.10 09/25/2024
+This version solves a bug that caused a "Credential not found" error to be displayed instead of a list of accounts. Improved handling on iPhone 15 with YubiKeys that have Yubico OTP enabled when using the SmartCard extension.
+1.7.9 12/21/2023
+Improved accessibility for visually impaired users. Handle iPhone 15 with YubiKeys that have Yubico OTP enabled. Truncate account name and issuer instead of scaling when they don't fit.
+1.7.8 10/30/2023
+Make sure to pick up any YubiKeys inserted before the app was started. Fixes a problem with changing advanced settings while manually adding a new account. More lenient parsing of the QR code string when scanning an account.
+1.7.7 09/28/2023
+Stop iOS from trying to save codes as passwords.
+1.7.6 09/22/2023
+Parts of user interface rewritten in SwiftUI.
+1.7.5 09/20/2023
+Tapping a YubiKey with OTP over NFC enabled will now open the app if the user taps the notification. The OTP will be displayed by the app and OATH accounts will be scanned. Immediate scanning of OATH accounts can be turned off in settings.
+1.7.4 05/25/2023
+In this version we've added support for compressed certificates in the Smart card extension.
+1.7.3 05/09/2023
+This version adds support for setting up new accounts by opening a otpauth:// link. This feature is enabled in the Password options section in the iOS Settings app. We've also improved the handling of YubiKeys with malformed PIV certificates in the Smart card extension. Error handling when trying to add an already existing account to a YubiKey has also been improved and lastly we fixed a crash that could occur when cancelling the password dialog.
+1.7.2 04/27/2023
+In this version we've added the Smart card extension to iPads with USB-C port. We've also fixed a bug that could cause the app to crash when pinning an account on a NFC YubiKey.
+1.7.1 11/30/2022
+The major update for this version is added USB-C support on iPads running iPadOS 16. We've also made the following changes to the app:
+- Fixed the bug where the required touch setting was ignored when creating a new account.
+- Fixed the bug in Steam account creation when bypass touch was enabled for NFC keys.
+- Fixed the bug where deleting an account would cause a sync issue between the YubiKey and Yubico Authenticator.
+- Storage of passwords in the keychain has been improved and now uses the derived access key. Old stored passwords will be migrated automatically.
+- The previous settings for account creation are no longer re-used for the next account.
+- Menu items for account and configuration are now disabled on iPads when no YubiKey is inserted into the device.
+1.7.0 10/24/2022
+This version contains improvements to the QR code scanner and various minor fixes.
+- Added a hint to the NFC prompt that it can be dismissed by swiping it down.
+- Disabled validation of issuer and account name when scanning a QR code. This allows the user to change an invalid issuer or account name before storing the account on a YubiKey.
+- Improved validation and error messages when scanning QR codes.
+- Added button displaying this change log to the start page.
+- Solved an issue where NFC might be unresponsive if interrupted during communication with a YubiKey.
+- Fixes issue where the requires touch setting was ignored when adding credential.
+1.6.9 06/27/2022
+This version adds support for retired PIV slots and PIV decryption in the Smart card extension, enabling mail clients to decrypt encrypted emails using private keys stored on YubiKey. We've also added SCP11 support for PIV sessions over NFC on FIPS keys and improved PIV certificate display names. Additionally, we've improved how the app handles YubiKeys with the OATH application disabled and improved the reliability of the Yubico OTP disable feature.
+more
+Version 1.13.0 Mar 11
+App Privacy
+App Privacy
+The developer, Yubico, indicated that the app’s privacy practices may include handling of data as described below. This information has not been verified by Apple. For more information, see the developer’s privacy policy .
+To help you better understand the developer’s responses, see Privacy Definitions and Examples .
+Privacy practices may vary, for example, based on the features you use or your age. Learn More
+Data Not Collected
+The developer does not collect any data from this app.
+The developer, Yubico, indicated that the app’s privacy practices may include handling of data as described below. For more information, see the developer’s privacy policy .
+Data Not Collected
+The developer does not collect any data from this app.
+Privacy practices may vary, for example, based on the features you use or your age. Learn More
+Accessibility
+The developer has not yet indicated which accessibility features this app supports. Learn More
+Information
+Seller
+Yubico Limited
+Size
+4.2 MB
+Category
+Productivity
+Compatibility
+Requires iOS 16.0 or later. iPhone
+Requires iOS 16.0 or later.
+iPad
+Requires iPadOS 16.0 or later.
+Apple Vision
+Requires visionOS 1.0 or later.
+Languages
+English and 4 more English, French, German, Japanese, Slovak
+Age Rating
+4+ 4+
+Learn More
+Copyright
+© 2025 Yubico AB
+Developer Website
+Privacy Policy
+You Might Also Like
+View
+Proton Authenticator & 2FA
+Secure verification, MFA & OTP
+View
+Proton Pass - Password Manager
+Passkeys, 2FA & secure vault
+View
+Proton Calendar: Secure Events
+Keep your schedule private
+View
+UniFi Design
+Productivity
+View
+Bitwarden Authenticator
+Generate 2FA on your device
+View
+Lumo AI by Proton
+Private Assistant from Europe
+View
+Proton Drive: Cloud Storage
+Docs, photos & file manager
+View
+Tuta Mail: Secure Email
+Encrypted Private Inbox
+View
+KDE Connect
+Communication Between Devices
+View
+Bitwarden Password Manager
+Secure your digital life
+United States Español (México)
+العربية
+Русский
+简体中文
+Français (France)
+한국어
+Português (Brazil)
+Tiếng Việt
+繁體中文 (台灣)
+Select a country or region
+Africa, Middle East, and India
+See All
+Algeria
+Angola
+Armenia
+Azerbaijan
+Bahrain
+Benin
+Botswana
+Burkina Faso
+Cameroun
+Cape Verde
+Chad
+Côte d’Ivoire
+Congo, The Democratic Republic Of The
+Egypt
+Eswatini
+Gabon
+Gambia
+Ghana
+Guinea-Bissau
+India
+Iraq
+Israel
+Jordan
+Kenya
+Kuwait
+Lebanon
+Liberia
+Libya
+Madagascar
+Malawi
+Mali
+Mauritania
+Mauritius
+Morocco
+Mozambique
+Namibia
+Niger (English)
+Nigeria
+Oman
+Qatar
+Congo, Republic of
+Rwanda
+São Tomé and Príncipe
+Saudi Arabia
+Senegal
+Seychelles
+Sierra Leone
+South Africa
+Sri Lanka
+Tajikistan
+Tanzania, United Republic Of
+Tunisia
+Turkmenistan
+United Arab Emirates
+Uganda
+Yemen
+Zambia
+Zimbabwe
+Asia Pacific
+See All
+Afghanistan
+Australia
+Bhutan
+Brunei Darussalam
+Cambodia
+中国大陆
+Fiji
+香港
+Indonesia (English)
+日本
+Kazakhstan
+대한민국
+Kyrgyzstan
+Lao People's Democratic Republic
+澳門
+Malaysia (English)
+Maldives
+Micronesia, Federated States of
+Mongolia
+Myanmar
+Nauru
+Nepal
+New Zealand
+Pakistan
+Palau
+Papua New Guinea
+Philippines
+Singapore
+Solomon Islands
+台灣
+Thailand
+Tonga
+Turkmenistan
+Uzbekistan
+Vanuatu
+Vietnam
+Europe
+See All
+Albania
+Armenia
+Österreich
+Belarus
+Belgium
+Bosnia and Herzegovina
+Bulgaria
+Croatia
+Cyprus
+Czechia
+Denmark
+Estonia
+Finland
+France (Français)
+Georgia
+Deutschland
+Greece
+Hungary
+Iceland
+Ireland
+Italia
+Kosovo
+Latvia
+Lithuania
+Luxembourg (English)
+Malta
+Moldova, Republic Of
+Montenegro
+Nederland
+North Macedonia
+Norway
+Poland
+Portugal (Português)
+Romania
+Россия
+Serbia
+Slovakia
+Slovenia
+España
+Sverige
+Schweiz
+Türkiye (English)
+Ukraine
+United Kingdom
+Latin America and the Caribbean
+See All
+Anguilla
+Antigua and Barbuda
+Argentina (Español)
+Bahamas
+Barbados
+Belize
+Bermuda
+Bolivia (Español)
+Brasil
+Virgin Islands, British
+Cayman Islands
+Chile (Español)
+Colombia (Español)
+Costa Rica (Español)
+Dominica
+República Dominicana
+Ecuador (Español)
+El Salvador (Español)
+Grenada
+Guatemala (Español)
+Guyana
+Honduras (Español)
+Jamaica
+México
+Montserrat
+Nicaragua (Español)
+Panamá
+Paraguay (Español)
+Perú
+St. Kitts and Nevis
+Saint Lucia
+St. Vincent and The Grenadines
+Suriname
+Trinidad and Tobago
+Turks and Caicos
+Uruguay (English)
+Venezuela (Español)
+The United States and Canada
+See All
+Canada (English)
+Canada (Français)
+United States
+Estados Unidos (Español México)
+الولايات المتحدة
+США
+美国 (简体中文)
+États-Unis (Français France)
+미국
+Estados Unidos (Português Brasil)
+Hoa Kỳ
+美國 (繁體中文台灣)
+Copyright © 2026 Apple Inc. All rights reserved.
+Internet Service Terms
+App Store & Privacy
+Cookie Warning
+Support

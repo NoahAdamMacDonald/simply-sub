@@ -1,0 +1,32 @@
+url: https://help.keeper.io/article/192-how-can-i-change-the-credit-card-info-that-my-subscription-is-getting-billed-to
+method: fetch
+saved: 2026-11-20
+
+How can I change the credit card info that my subscription is getting billed to? (Personal and Family Plans) - Keeper Security, Inc Knowledge Base
+Toggle Navigation
+Contact
+Contact
+How can I change the credit card info that my subscription is getting billed to? (Personal and Family Plans)
+If you purchased using Paypal via our checkout page, you can login to your Paypal account and change your payment card. If you purchased via the App Stores, you would need to change your payment card under your Apple ID/Google Play profile. If you bought a subscription via our checkout page, you will need to use a new payment card to make a new purchase. Note that the payment cards saved in your Keeper Vault are not necessarily the cards linked with your payment token. For further assistance, please contact our support team via our support page at keeper.io/freesupport.
+Keeper Business, Enterprise, and MSP customers: these steps do not apply to your account. Updating payment or credit card information for these accounts is handled by your Customer Success Manager or Account Manager. Please see Billing and Sales Support for Keeper Business, Enterprise, and MSP Customers.
+Still need help?
+Contact Us
+Contact Us
+Last updated on October 19, 2026
+Toggle Search
+Categories
+Keeper PAM
+Account Management
+SSO/SCIM Provisioning
+Using the App
+Technical Issues
+Admin Console
+MSP
+Keeper Automator
+Billing Issues
+General Questions
+Security
+No results found
+©
+Keeper Security, Inc
+2026. Powered by Help Scout

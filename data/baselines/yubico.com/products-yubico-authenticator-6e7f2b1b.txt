@@ -1,0 +1,80 @@
+url: https://www.yubico.com/products/yubico-authenticator/
+method: browser
+saved: 2026-11-20
+
+Consent
+Details
+About
+This website uses cookies
+We use cookies to ensure that you get the best experience on our site and to present relevant content and advertising. By browsing this site without restricting the use of cookies, you consent to our and third party use of cookies as set out in our Cookie Notice.
+Deny
+Preferences
+Accept all
+OpenAI mandates hardware-backed passkeys for Trusted Access for Cyber members. Read more.
+Skip to content
+English
+Français
+Deutsch
+日本語
+Español
+Svenska
+Investors
+Contact Sales
+Partners
+Support
+About
+Products
+Enterprise
+Resources
+Solutions
+Enterprise Sales
+Store
+Home
+/
+Products
+/
+Yubico Authenticator
+Yubico Authenticator
+The safest authenticator app experience across mobile and desktop
+Download now
+Yubico Authenticator adds a layer of security for online accounts
+Generate 2-step verification codes on a mobile or desktop device
+Experience stronger security for online accounts by adding a layer of security beyond passwords
+Secure all services currently compatible with other authenticator apps, including Google Authenticator
+Hardware-backed security
+Add your credential to the YubiKey with touch or NFC-enabled tap. Hardware-backed strong two-factor authentication raises the bar for security while delivering the convenience of an authenticator app.
+Users can also experience greater convenience by unlocking their YubiKey with FaceID or TouchID.
+And, users can use smart card certificates stored on the YubiKey to authenticate with other apps and sites, using their iPhone or iPad by leveraging Apple’s keychain capabilities that now extend to crypto assets.
+Easy and fast setup
+Generate your unique credential using QR codes available from the services you wish to protect with 2FA. Secures all the services currently compatible with other Authenticator apps. For example, Azure MFA supports TOTP authentication to secure Office 365.
+Secure multiple work and personal accounts
+Start protecting all of your accounts with stronger two-factor authentication. Easily generate new security codes that change periodically to add protection beyond passwords. And your secrets are never shared between services.
+The YubiKey advantage
+Stronger hardware-backed security
+Storing your credentials on a hardware key is safer than storing them on a mobile phone. Your credential stays safe in the secure element of the YubiKey and cannot be extracted.
+Cross-platform coverage
+The Yubico Authenticator app works across Windows, macOS, Linux, iOS and Android. Get the same set of codes across all Yubico Authenticator apps for desktops as well as for all leading mobile platforms.
+Portable credentials across devices
+Your credentials work seamlessly across multiple devices. With a portable hardware root of trust you do not lose your credentials when your phone is compromised or upgraded.
+Self-service reduces IT costs
+Users switch phones often. With other authenticator apps, when a user has a new phone or OS upgrade, IT often needs to help reset the enrollment flow and support calls rack up costs.
+The Yubico Authenticator app allows for user self-service to enroll multiple secrets across various services, making this a secure and efficient solution at scale.
+Download Yubico Authenticator
+Yubico Authenticator for Desktop
+Use the Yubico Authenticator for Desktop on your Windows, Mac, or Linux computers to generate OATH credentials on your YubiKeys.
+Linux
+Download for Linux directly here
+Mac
+Download from macOS AppStore
+Download for Mac directly here
+Windows
+Download from Microsoft app store
+Download for Windows directly here (64-bit)
+Yubico Authenticator for Mobile
+Use the Yubico Authenticator for Android and iOS, including secure tap-and-go authentication for NFC-enabled mobile devices.
+Android
+Android Download (on Google Play)
+iOS
+iOS Download (on Apple Store)
+Say hello to the YubiKey, and get protected against phishing.
+Buy online

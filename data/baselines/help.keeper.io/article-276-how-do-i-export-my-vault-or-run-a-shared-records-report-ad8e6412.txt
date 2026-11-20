@@ -1,0 +1,38 @@
+url: https://help.keeper.io/article/276-how-do-i-export-my-vault-or-run-a-shared-records-report
+method: fetch
+saved: 2026-11-20
+
+How do I export my vault or run a Shared Records Report? - Keeper Security, Inc Knowledge Base
+Toggle Navigation
+Contact
+Contact
+How do I export my vault or run a Shared Records Report?
+Keeper lets you export your vault as a backup or generate a report of everything you've shared. This is available to all Personal and Family plan users.
+Vault Export: From the Account Dropdown Menu, click Settings > Export. Choose a format:
+CSV: supports folders, subfolders, and shared folders. Can also be re-imported into Keeper.
+JSON: structured for compatibility with Keeper's import tools.
+PDF: a printer-friendly version of your records.
+Encrypted KeePass (.kdbx): the only format that includes file attachments. You'll set a separate password to encrypt this file, this is not your Keeper Master Password.
+Shared Records Report: From the same Settings > Export screen, you can also generate a report of every record you've shared, either directly or through a shared folder. It includes the record title, who it's shared with, how it was shared, the permission level (Read Only, Can Edit, Can Edit and Share), and the folder path. Available in CSV, JSON, or PDF.
+Security note: exported files, especially CSV and PDF, are not encrypted (other than the KDBX option). Store them securely and delete them when you're done.
+Still need help?
+Contact Us
+Contact Us
+Last updated on August 10, 2026
+Toggle Search
+Categories
+Keeper PAM
+Account Management
+SSO/SCIM Provisioning
+Using the App
+Technical Issues
+Admin Console
+MSP
+Keeper Automator
+Billing Issues
+General Questions
+Security
+No results found
+©
+Keeper Security, Inc
+2026. Powered by Help Scout

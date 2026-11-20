@@ -1,0 +1,125 @@
+url: https://support.dashlane.com/hc/en-us/articles/32877595753746-8-Security-operations
+method: fetch
+saved: 2026-11-20
+
+8. Security operations – Dashlane
+×
+To get the latest security improvements, keep Dashlane up to date.
+See the latest versions
+Learn how to update
+☰
+Ask a question
+Get help
+English (United States)
+Deutsch
+Español
+Français
+Home
+Admin Help Center
+How to get help with Dashlane
+×
+Loading help options…
+For users
+For admins
+×
+Home
+Protect your data
+Security at Dashlane
+Dashlane’s Security Principles & Architecture
+8. Security operations
+8. Security operations
+Dashlane’s Security Principles & Architecture
+For all plans
+8. Security operations
+Updated August 21, 2026 21:05
+Internal note: Notify of changes
+Summary
+Dashlane’s security operations focus on resilience, transparency, and ongoing improvement, ensuring enterprise trust through proactive defense and clear communication.
+Vulnerability management: Continuous scanning, patching, and dependency checks minimize exposure. Secure SDLC practices and code reviews catch issues early.
+Incident response: 24/7 monitoring, a tested IR plan, and a Code Red + Crisis Communication Plan enable fast containment and transparent updates, rehearsed annually.
+Bug bounty: Dashlane’s Intigriti program engages global researchers, integrates findings directly into engineering, and accelerates remediation.
+Penetration testing: Independent annual tests cover all apps and cloud infrastructure. Results are remediated and shared via the Trust Center.
+Continuous improvement: Dashlane’s Risk Committee drives regular updates and hardening
+Code transparency: Portions of Dashlane’s code (iOS, Android, and web extension) are publicly available, enabling independent verification of our zero-knowledge model.
+End of life and deprecation: Outdated client versions are retired on a 12-month support lifecycle. Deprecated APIs, dependencies, and dead code are removed continuously to reduce the attack surface. Inactive user vaults are deleted after 13 months following advance user notification.
+Dashlane’s defenses evolve continuously, combining prevention, fast response, and openness to keep enterprises secure.
+8.1 Secure by design
+Dashlane’s approach to security is rooted in the Secure by Design philosophy, embedding protection and resilience into every stage of development and operation. Dashlane has formally signed the U.S. CISA Secure by Design pledge, reinforcing its commitment to proactive risk management, transparency, and continuous improvement.
+This chapter covers how Dashlane approaches security operations to uphold the highest security standards and ensure that Dashlane remains resilient by design, aligning with industry best practices while maintaining the trust of enterprise customers.
+8.2 Vulnerability management
+Dashlane applies a structured vulnerability management program designed to identify, assess, and remediate risks before they can be exploited.
+Key practices:
+Continuous scanning and patching: Automated tools monitor infrastructure and applications for vulnerabilities. All findings are triaged and remediated according to severity and impact.
+Secure SDLC: Security is integrated throughout the Software Development Life Cycle (SDLC). Developers follow secure coding guidelines and mandatory code reviews, complemented by automated static and dynamic analysis tools.
+Dependency and supply chain management: Dashlane limits the number of third-party and open source components it relies on, and adding a new one is a decision made after peer review rather than an automatic import. Every dependency in production is verified for package integrity and signature, tracked in an internally maintained, real-time inventory, and scanned continuously for known vulnerabilities and license issues. Updates follow a risk-based cadence: teams can apply a short observation period before adopting a new version, unless the update addresses an urgent or critical vulnerability, in which case it's applied immediately. Each dependency is assigned to an owning engineering team responsible for keeping it current and resolving findings.
+8.3 Incident response
+Dashlane maintains a formal, tested Incident Response (IR) plan to ensure preparedness for potential security incidents.
+Core elements:
+Continuous security monitoring: Dashlane’s systems are continuously monitored through SIEM integrations, log analytics, and alerting pipelines.
+Clear roles and escalation paths: Dedicated incident response and security engineering teams coordinate detection, containment, eradication, and recovery phases.
+Code Red Plan: In the event of a critical security incident or breach, Dashlane activates a dedicated Code Red Plan that defines executive-level coordination, immediate containment measures, and external communications protocols.
+Communication Crisis Plan: A companion Crisis Communication Plan ensures clear, timely, and transparent communication with customers, partners, and regulators. Both the Code Red and Crisis Communication Plans are reviewed annually and rehearsed through a company-wide tabletop simulation.
+Post-incident transparency: Following any significant event, Dashlane conducts root-cause analyses and shares relevant information with affected customers in line with our commitment to transparency.
+8.4 Bug bounty & responsible disclosure
+Dashlane fosters an open and responsible security ecosystem through a public bug bounty program hosted on Intigriti.
+Program highlights:
+Open to all ethical researchers, focusing on vulnerabilities in Dashlane’s applications and APIs
+Rewards are based on impact and severity, encouraging high-quality submissions
+Dashlane commits to cooperative disclosure, maintaining clear timelines and communication with security researchers
+Our Responsible Disclosure Policy outlines the principles of safe testing and reporting
+After more than a decade of continuous operation, Dashlane’s bug bounty program has become a cornerstone of our security culture. As described in our 10-year retrospective, we have received thousands of reports and collaborated with hundreds of security researchers worldwide. The program has evolved with structured triage workflows, higher reward tiers for impactful vulnerabilities, and direct integration with our engineering backlog to ensure rapid remediation. This long-term engagement has helped shape our secure development lifecycle and strengthened the transparency and trust we maintain with the global security community.
+This ongoing collaboration with the security community enhances Dashlane’s defenses and complements internal security testing.
+8.5 Penetration testing
+Dashlane engages independent, accredited third parties to perform annual penetration tests.
+All findings are reviewed, prioritized, and tracked through remediation until closure. A summary of results is made available to enterprise customers under NDA through the Dashlane Trust Center.
+8.6 Continuous improvement
+Dashlane views security as an evolving process, not a fixed state. Continuous improvement is embedded in the company’s governance and culture.
+Governance and iteration mechanisms:
+Risk Committee: Cross-functional body that meets monthly to review risks and provide executive sponsorship to initiatives aiming to reduce risk. This forum is led by Dashlane’s CEO and includes representatives from across the organization, such as Dashlane’s CTO, CISO, General Counsel, CMO, and CPO.
+Lessons learned loop: Findings from incidents, penetration tests, and bug bounty reports directly inform architectural updates and operational defenses.
+Employee education: All staff participate in ongoing security training, phishing simulations, and secure coding refreshers.
+8.7 Code auditability and transparency
+Dashlane’s commitment to transparency extends to its engineering practices:
+Publicly available codebases: Large portions of Dashlane’s client code are open source and available on GitHub:
+iOS
+Android
+Web extension
+Verifiable integrity: Customers and researchers can independently review the code to validate our design choices and zero-knowledge implementation
+8.8 End-of-Life and continuous deprecation
+Dashlane manages the lifecycle of its products, features, and technical components with the same security discipline applied to active systems. Outdated client versions, deprecated APIs, and unmaintained code represent active security risk through unpatched vulnerabilities, widened attack surface, and inconsistent security behavior across platforms.
+Deprecation at Dashlane is continuous, not episodic. This applies to both planned End-Of-Life (EOL) milestones for our client applications, deprecation of features, such as the sunset of the standalone web app or our password changer feature, and reactive deprecations driven by external constraints, including OS version minimums enforced by Apple and Google, browser policy changes, or third-party ecosystem shifts.
+Key practices:
+Attack surface reduction: Components that can no longer be maintained to Dashlane's security standards are retired on a defined schedule, before they become exploitable.
+Bounded backward compatibility: Dashlane maintains backward compatibility during transition periods, but support windows are time-limited and communicated in advance.
+Ecosystem alignment: Where platform vendors impose constraints, Dashlane aligns its deprecation schedule accordingly.
+8.8.1 End-of-Life of client applications
+Dashlane enforces a 12-month support lifecycle for all client application versions. Dashlane provides progressive in-app notifications starting at 3 months without an update, escalating in urgency through the 9-12 month window. Once a version exceeds that threshold, the client application is automatically deactivated server-side: affected devices are logged out and prevented from reconnecting until the user updates. The same policy applies to deprecated OS versions, when Dashlane drops support for an older OS release (following Apple's annual OS cycle, for example), users who can't upgrade their OS will lose access to app updates and are subject to the same 12-month end-of-life clock.
+The primary driver behind this policy is security. A password manager handles highly sensitive credential data, and outdated app versions can't receive security patches. Unpatched clients represent an active attack surface regardless of official support status. Attackers do not distinguish between supported and unsupported versions. Maintaining live connections from old versions also forces the engineering team to preserve backward compatibility in server-side logic, increasing the risk of unintended exposure through legacy code paths.
+8.8.2 Deprecating features and code
+Keeping a large codebase healthy requires deliberate, ongoing deprecation of outdated code, APIs, frameworks, and dependencies. At Dashlane, this covers a range of scenarios: retiring legacy API endpoints in favor of improved versions, removing feature flags for experiments that have concluded, upgrading core frameworks and third-party libraries, and eliminating dead code paths that accumulate over time.
+The security dimension is central here. Outdated dependencies are one of the most common vectors for supply chain attacks. A library that is no longer maintained stops receiving CVE patches, and any vulnerability it carries becomes a permanent liability. Dashlane treats dependency hygiene as a core security practice.
+8.8.3 Data retention
+Dashlane applies a data retention policy to limit the attack surface associated with dormant user data. For personal accounts, user vaults that remain inactive for more than 13 months are subject to automatic deletion. Before any account is removed, users receive advance notification at 30 days and again at 10 days, with a 30-day grace period after the deletion date during which access can still be restored.
+Deleting obsolete data reduces the overall data footprint Dashlane must protect and limits the blast radius of any potential exposure. This follows a principle of data minimization.
+Was this article helpful?
+Yes No
+1 out of 55 found this helpful
+Have more questions? Submit a request
+Back to Top
+Dashlane.com
+Resource library
+Developer resources
+Blogs
+Dashlane plans
+Partner portal
+System Status: View system status
+Log in to Dashlane
+Get Dashlane
+Stay in touch
+© Dashlane Inc. All rights reserved.
+Dashlane and the Dashlane logo are trademarks of Dashlane SAS, registered in the U.S. and other countries.
+Terms
+Privacy
+Legal
+ACCESSIBILITY STATEMENT
+Powered by Zendesk

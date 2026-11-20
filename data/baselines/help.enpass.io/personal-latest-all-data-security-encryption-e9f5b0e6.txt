@@ -1,0 +1,63 @@
+url: https://help.enpass.io/personal/latest/all/data-security-encryption
+method: fetch
+saved: 2026-11-20
+
+Data security & encryption | Enpass Help
+Skip to main content
+Business
+Personal
+Security
+Blog
+Pricing
+Main navigation
+Close navigation
+Main
+Business
+Personal
+Security
+Blog
+Pricing
+Main
+Getting Started with Enpass
+Vaults & Syncing
+Organizing Your Enpass Items
+Generating & Changing Passwords
+Importing passwords
+Passkeys & 2FA
+Security & Biometrics
+Master Password
+Unlocking with face or fingerprint
+Autolock options
+Security Audit home screen
+Breach Monitoring
+Checking accounts for passkey & 2FA support
+Weak password monitoring
+Clearing clipboard contents
+Multi-factor authentication
+Data security & encryption
+Registration & Subscriptions
+Troubleshooting
+Breadcrumbs
+Home
+Personal & Family Support Center
+Security & Biometrics
+On this Page
+Data security & encryption
+Data security and encryption in Enpass
+Enpass encrypts your data using 256-bit AES encryption, using the peer-reviewed, open-source encryption engine SQLCipher, and 320,000 rounds of PBKDF2-HMAC-SHA512. This level of encryption provides advanced protection against brute force and side channel attacks. Even with direct access to your data, anyone trying to open the encrypted file would see nothing but gibberish — pages and pages of meaningless, random characters.
+But if, for any reason, you think you have encountered a potential security issue with Enpass, please contact the Enpass as soon as possible.
+Read more here: Enpass Security Whitepaper
+Data security of Enpass data on a stolen device
+The security of your Enpass data depends mainly on the strength of your chosen Master Password. If you have a strong and unique Master Password, which is not stored anywhere that it could be discovered, your Enpass data is virtually impossible for anyone else to access.
+Enpass encrypts your data with 256-bit AES encryption, which makes the data impossible to read or decipher without being unlocked by your Master Password.
+A strong Master Password should include a combination of symbols, letters, and numbers, and should avoid using birthdays, names and other common or public information. The longer your Master Password is, the safer it will be, but ideally it should also be easy to type on both your computer and your phone.
+For more information, you can read our article on the security of your data.
+Jailbroken or rooted devices
+Rooted or jailbroken devices compromise the integrity of their operating systems, which may enable attackers to steal data via activity-monitoring software, such as keyloggers. While a strong Master Password should still provide protection for your Enpass vaults in the event your data is stolen, it is strongly recommended Enpass not be used on jailbroken, rooted, or otherwise compromised devices.
+Related Topics
+Enpass Security Whitepaper
+Security & Biometrics
+Multi-factor authentication
+Creating a strong Master Password
+Copyright Enpass Technologies Inc.
+Powered by Scroll Sites & Atlassian Confluence

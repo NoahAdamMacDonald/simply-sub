@@ -1,0 +1,109 @@
+url: https://support.dashlane.com/hc/en-us/articles/360000960209-Your-specific-rights-under-GDPR-CCPA
+method: fetch
+saved: 2026-11-20
+
+Your specific rights under GDPR & CCPA – Dashlane
+×
+To get the latest security improvements, keep Dashlane up to date.
+See the latest versions
+Learn how to update
+☰
+Ask a question
+Get help
+English (United States)
+Deutsch
+Español
+Français
+Home
+Admin Help Center
+How to get help with Dashlane
+×
+Loading help options…
+For users
+For admins
+×
+Home
+Protect your data
+Security at Dashlane
+Privacy rights
+Your specific rights under GDPR & CCPA
+Your specific rights under GDPR & CCPA
+For all plans
+Your specific rights under GDPR & CCPA
+Updated October 29, 2026 17:44
+The General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA) are sets of rules designed to give residents of the European Union and California, respectively, more control over their personal data. Both give users a series of rights over their data, and make it easier to ensure that companies respect those rights. For more general information, see Dashlane and your privacy rights under GDPR and CCPA.
+Requests regarding these rights should be directed to our user support through the corresponding Privacy and data settings in your Dashlane application. Specific instructions for each right are listed below, as well as where to find your Privacy and data settings.
+Additionally, if you would like to turn off all advertising cookies on our site please, visit this page.
+We recommend that business users consult with their Admin before deciding to exercise any Privacy rights, as doing so may conflict with their use of the application.
+Right to withdraw consent
+You may withdraw consent to Dashlane processing your personal information within the Privacy and data settings in your Dashlane application.
+There you can choose to withdraw consent for Dashlane to send you guides and tips, as well as emails with personalized offers and promotions.
+If you wish to withdraw consent for Dashlane’s terms of service and Privacy Policy, or to withdraw your consent that Dashlane requires your personal data to provide its service, note that you will no longer be able to use Dashlane.
+As such, we invite you to delete your account by following our instructions. Remember, deleting your account will delete all your data stored in Dashlane, including your passwords, Secure Notes, and any shared data. We strongly recommend you export your data before deleting your account.
+Export your data with a CSV file
+Export your data with a secure DASH file
+Right of access
+You have the right to know if we collect any of your personal information and the kind of information we collect.
+Note that our Privacy Policy explains, in simple language, the kinds of information we collect, why, and what we do with that data: https://www.dashlane.com/privacy.
+Note that if you would like to request a copy of your specific information, please refer to the Right to data portability.
+Right to rectification
+You have the right to request that your personal information be rectified if it is incorrect.
+You are able to modify some of your personal information within Dashlane without having to make any special request. Within your application you are able to:
+Change your login email address
+Change your contact email address
+Change or remove your phone number for Two-Factor Authentication by turning on and turning off the feature
+Update your credit card information
+Professional plan admins may request rectification of their company name by submitting a request to our user support through the Privacy and data settings in your Dashlane application.
+Note that some of the information we collect cannot be modified without disrupting your use of Dashlane.
+For example, the email address you used to create your account ("Dashlane login") is what we use to identify you. Your IP address, browser, operating system, and cookies are based on your usage and cannot be changed manually.
+Right to erasure or to be forgotten
+You have the right to request that your personal information be erased.
+To exercise this right, you'll have to delete your account by following our instructions.
+By doing so, we will automatically delete all your data stored in Dashlane, including your passwords, Secure Notes, and any shared data. This will also delete all financial records and data associated with your account. We won't be able to process refunds, look up transactions, or provide any other support related to your account after it is deleted. We strongly recommend you export your data before deleting your account.
+Export your data with a CSV file
+Export your data with a secure DASH file
+Once your personal data is deleted from our servers, you'll no longer be able to reset your account.
+Right to restriction of processing
+You have the right to request that the processing of your personal information be restricted.
+As indicated under the Right to withdraw consent, you may adjust your consent to some of the ways we process your personal information by going to the Privacy and data settings in your Dashlane application.
+However, Dashlane users must necessarily consent to receiving emails related to their account. For example, you receive an email when we confirm your subscription, if a payment failed, or if we update our Terms of Service. Should you wish to ensure that you receive no communications whatsoever related to your account, see instead the Right to erasure or to be forgotten.
+If you wish to exercise your Right to restriction of processing, we will do the following:
+1) Cancel the renewal of any active subscription linked to your account. 2) Apply the Right to withdraw consent concerning guides, tips, emails with personalized offers, and promotions. Note that in this case even if you do not use your Dashlane account, you will still receive emails related to your account.
+Right to data portability
+You have the right to request a copy of the personal information listed under "The specific information we collect and process about you" in Dashlane's Privacy Policy.
+Should you wish to obtain a copy of this information, please submit a request to our user support through the Privacy and data settings in your Dashlane application.
+Note that this information does not include your passwords.
+Right to object
+You have the right to object to the processing of your personal information.
+This right applies to people who are not Dashlane users but to whom a Dashlane user has referred our service or shared items with. In accordance with GDPR, we will actively request the consent of such people within 30 days of receiving their personal data (most likely received in the form of an email address). These people should submit a request to our user support.
+Dashlane users may wish to refer to Right to withdraw consent or Right to erasure or to be forgotten.
+Right to lodge a complaint
+With GDPR, you have the right to lodge a complaint with your national supervisory authority regarding our compliance. For example, in France you would contact the Commission Nationale de l'Informatique et des Libertés, or CNIL.
+Should you wish to address us directly or have any questions regarding this right, please contact our user support through the Privacy and data settings in your Dashlane application.
+Where can I find my Privacy and data settings?
+Depending on your platform, these are the paths to follow:
+Dashlane browser extension: In the Vault menu in the top left of the app, select Settings, Account Summary and then Edit under View your data and privacy settings
+Android: Menu icon > Settings > Security > Privacy and data settings
+iOS: Settings > Security > Privacy and data settings
+Was this article helpful?
+Yes No
+23 out of 142 found this helpful
+Have more questions? Submit a request
+Back to Top
+Dashlane.com
+Resource library
+Developer resources
+Blogs
+Dashlane plans
+Partner portal
+System Status: View system status
+Log in to Dashlane
+Get Dashlane
+Stay in touch
+© Dashlane Inc. All rights reserved.
+Dashlane and the Dashlane logo are trademarks of Dashlane SAS, registered in the U.S. and other countries.
+Terms
+Privacy
+Legal
+ACCESSIBILITY STATEMENT
+Powered by Zendesk

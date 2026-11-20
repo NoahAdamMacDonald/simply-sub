@@ -1,0 +1,35 @@
+url: https://help.twilio.com/articles/19753637053595
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+How to Delete an Authy Account
+Objective
+Users are free to delete their Authy account at any time. Since your security is important, we have provided a secure self-service option for closing and deleting your account.
+(warning)
+Warning: 2FA security must be disabled on your secured user account -BEFORE- deleting your Authy account. This will need to be performed on the token account's website, or by contacting them for assistance.
+Product
+Authy
+Environment
+legacy Twilio Console
+Procedure
+If you delete your Authy account prior to disabling 2FA security on the website for your 2FA token account, you may be unable to log in to your account.
+This process will guide you through a number of verification steps to ensure that your request is authentic, and to prevent the unintended loss of access to the accounts that you use 2FA for. These steps will include confirmation emails which will give you the opportunity to terminate the process if you change your mind during the 30-day period. Please note that once the process is completed, it is irreversible and we cannot recover your account.
+(error)
+Notice: If you have created and registered an Authy app for others to log into (Via the Authy Dashboard or Twilio Console), you will need to delete it prior to closing and deleting your account.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

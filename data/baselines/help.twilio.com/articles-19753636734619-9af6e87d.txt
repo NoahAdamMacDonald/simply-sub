@@ -1,0 +1,34 @@
+url: https://help.twilio.com/articles/19753636734619
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+What if I Don't Backup my Authy Account?
+Question
+What if I don't backup my Authy Account?
+Product
+Authy
+Answer
+By default, all Authy 2FA account tokens are stored locally. We don't keep a record of the accounts you add, so the loss or failure of a device could result in you permanently losing your 2FA account tokens, or access to your important accounts.
+Enabling the backups function in Authy tells us to save an encrypted copy of every 2FA account token on your account. This allows you to easily recover 2FA tokens if needed, and synchronize them between multiple devices using the same account. We recommend all users enable backups, and configure a second Authy device as a sort of "insurance policy".
+For more help, see the following resources:
+Enable or Disable Authy app Backups
+Enable Authy Multi-Device to create a secondary backup installation.
+(warning)
+Notice: Enabling Authy backups only saves an encrypted copy of your 2FA account tokens. Your backups password is never transmitted to Authy, so we are unable to recover a lost or forgotten Authy backups password. For more details, including information on recovering access to your 2FA accounts, see What is a Backup Password? Can it be recovered?.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

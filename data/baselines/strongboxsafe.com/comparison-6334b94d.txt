@@ -1,0 +1,142 @@
+url: https://strongboxsafe.com/comparison/
+method: fetch
+saved: 2026-11-20
+
+Compare Features - Strongbox Skip to content
+Download
+Pro
+Pricing
+Getting Started
+Blog
+Help
+English Deutsch
+Download
+Pro
+Pricing
+Getting Started
+Blog
+Help
+English Deutsch
+🎄 🎄
+Compare Features
+View the full feature list for iOS and MacOS, Free and Pro.
+iOS
+Yearly, Monthly and Lifetime purchase options available.
+Strongbox requires a minimum of iOS 14.0 or macOS 11.0
+Free Pro
+Face ID / Touch ID Unlock
+Pin Code Unlock
+Apple Watch Companion App
+Premium Support
+YubiKey (KeePass only)
+NB: USB-C (e.g. iPad Pro) unsupported on iOS
+Compare Databases
+Offline Editing
+Duress PIN - Open Dummy Database
+Duress PIN - Delete All Data
+Have I Been Pwned? Audit
+Find Similar Audit
+Custom App Icons
+Favicon Downloader
+Microsoft Sharepoint
+Audit (Find Weaknesses)
+Passkeys
+Import & Export (1Password & CSV)
+AutoFill
+Advanced Sync & Merge
+Offline Viewing
+Private Attachments Viewer
+Handle Large Databases Effortlessly (250MB+)
+Auto Clear Clipboard
+Markdown Notes
+Move Items between Databases
+Regular Master Password Reminders
+Read Only Mode
+Diceware Passwords
+Configurable Password Generation
+App Lock (Delete All on Fails)
+Rolling Local Backups
+TOTP (QR Code, RFC 6238, Steam)
+Import & Export (CSV, Encrypted)
+Local Network Only Import & Export
+AirDrop Import/Export
+Powerful Search (All Fields)
+Entry History
+Custom URL Handling
+Attachments & Custom Fields
+Custom Icons & Preset Icon Sets
+Custom Order & Sorting
+KeePass Field References & Placeholders
+Tags (KeePass)
+Key File Support
+iCloud Support
+Local Only Databases
+OneDrive, Google Drive, Dropbox (Native Sync)
+SFTP (Native Support)
+WebDAV (Native Support)
+Nextcloud / Owncloud (Best via WebDAV)
+iOS Files Integration
+Direct URL Import
+Argon2 KDF (GPU Resistant)
+YubiKey Secret Unlock (Emergency)
+MacOS
+Free Pro
+Touch ID Unlock
+Apple Watch Unlock
+Compare Databases
+Premium Support
+YubiKey for KeePass
+AutoFill (MacOS Big Sur+)
+SSH Agent
+SFTP Sync
+WebDAV Sync
+FavIcon Downloader
+Have I Been Pwned? Audit
+Find Similar Audit
+Passkeys
+Microsoft Sharepoint
+Audit (Find Weaknesses)
+Advanced Sync & Merge
+Auto Clear Clipboard
+Offline Editing
+Read Only Mode
+OneDrive, Google Drive, Dropbox (Native Sync)
+Markdown Notes
+Offline Viewing
+Import & Export (1Password & CSV)
+Powerful Search (All Fields)
+Diceware Passwords
+Customizable Password Generation
+Regular Master Password Reminders
+Attachments
+Custom Fields
+Custom Order & Sorting
+Entry History
+Rolling Local Backups
+Tags
+Custom URL Handling
+Key File Support
+Argon2 KDF (GPU Resistant)
+Field References & Placeholders
+Local Databases
+Receive Tips & Updates
+The latest tips, product updates and info to help keep your digital life secure.
+Features & Pricing
+Strongbox Pro
+Pricing
+Compare Features
+Business
+Students
+Company
+News & Updates
+Press Kit
+About
+Privacy Policy
+Terms of Use
+Help & Support
+Helpdesk
+Getting Started PDF Guide
+Connect
+Twitter Reddit
+Sign Up
+©2023 Phoebe Code Limited

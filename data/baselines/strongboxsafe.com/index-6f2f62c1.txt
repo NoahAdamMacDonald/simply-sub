@@ -1,0 +1,55 @@
+url: https://strongboxsafe.com/
+method: browser
+saved: 2026-11-20
+
+Skip to content
+Download
+Pro
+Pricing
+Getting Started
+Blog
+Help
+English
+OWN YOUR SECRETS
+Never forget a password again with the most secure and powerful KeePass password manager on iPhone, iPad and Mac.
+Strongbox provides an unprecedented amount of control over your data and security, combined with an intuitive, beautiful user interface.
+Intuitive Design
+Don’t sacrifice good design for security and functionality. Work smarter with a native app that’s designed for power users and deeply integrated with the Apple ecosystem. Work faster with features like Face ID Unlock and AutoFill.
+Data Ownership
+Store your data anywhere you like, online or offline. Sync with every major cloud storage provider or your own server over WebDAV or SFTP. Use your Strongbox database with any KeePass compatible client on any platform.
+Zero lock-in.
+Next Level Security
+Protect yourself with state-of-the-art cryptography, brute force resistant KDFs, YubiKey support, duress PINs, and much more.
+Configure everything to your exact requirements. This is the gold standard.
+
+Rated 5 out of 5
+"Awesome App and Excellent Support!"
+"I had been using 1Password for about 10 years and wanted better flexibility with choice of cloud service and/or local DB storage. Strongbox turned out to be the winner! Migrating from 1Password was smooth and I was able to choose my preferred cloud storage with ease. During the switchover I reached out to Strongbox support with a cloud connectivity question and got an answer that same day! Excellent service and support. If you’re on the fence with making a password manager decision with full feature functionality, Strongbox is it!"
+Read our 3,000+ positive App Store reviews
+⭐️⭐️⭐️⭐️⭐️ (4.8 average)
+Built for Power Users
+Password Auditing
+Find and fix duplicate passwords, weak, common and short passwords
+Apple Watch App
+Your passwords, logins, secure notes, and 2FA codes available on the go with our Apple Watch companion app.
+Face ID Unlock
+Unlock your database instantly and securely with Face ID or Touch ID on iPhone, iPad and Mac.
+Automated Backups
+Relax knowing that your database is being backed up automatically and can be easily restored.
+Markdown Notes
+Format your notes with headers, lists, and more by writing directly in Markdown.
+SSH Agent
+Generate and store SSH keys within your Strongbox database.
+2FA Codes
+Add 2FA codes by QR Code, RFC 6238 or Steam. See which websites offer 2FA.
+YubiKey Support
+Secure your database with a hardware token across iPhone, iPad and Mac.
+Passkeys
+Future proof your password management solution with passkey support.
+Premium Support
+Get help when you need it from someone on our team. 7 days a week.
+Compare & Merge
+Say goodbye to sync conflicts with automatic database compare merge. Great for multi-user environments.
+Data Breach Notifications
+Know when your password has been detected in a data breach (powered by Have I Been Pwned?).
+Explore All the Features

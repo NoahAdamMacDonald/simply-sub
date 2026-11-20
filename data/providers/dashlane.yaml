@@ -1,0 +1,904 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada: dashlane.com's
+# personal pricing page (dashlane.com/pricing-personal), its checkout for each plan (dashlane.com/getpremium and
+# /getfamily, read up to the order summary, typing nothing), its terms, privacy policy, Do Not Sell page, security, bug
+# bounty, about and legal pages; and 70 of its help centre's articles through its Zendesk API (support.dashlane.com, a
+# plain fetch): plans, billing, cancelling, refunds, plan changes, VPN, import and export, 2FA codes, passkeys, sharing,
+# offline use, platforms, languages, deletion, inactive accounts, privacy rights, security operations and advisories.
+# Pricing: the pricing page shows each plan per month "Billed annually" (Premium "US$5.42", Friends & Family "US$8.13"
+# from Canada); the checkout gives the year: "1 year of Dashlane Premium" "US$64.99" and "1 year of Friends & Family"
+# "US$97.49", with no first-term discount ("Total US$64.99", "Renews automatically."). The same checkout in US dollars
+# was read through Vancouver and Calgary exits (Canada), and US, UK, Australian and New Zealand exits; through Irish,
+# German, French, Dutch, Spanish and Italian exits it charges euros: "1 year of Dashlane Premium" before VAT, which
+# varies with the country (€46.74 Ireland, €48.32 Germany, €47.91 France, €47.52 the Netherlands and Spain, €47.13
+# Italy; Friends & Family €70.73, €73.11, €72.50, €71.90, €71.90, €71.31), then "VAT", then the same "Total €57.49"
+# (Friends & Family "Total €86.99") in every one. Each country's price is its before-VAT line, with no taxIncluded, as
+# LastPass's, 1Password's and RoboForm's euro prices are stored before VAT (the euro pricing page says "€3.90 + VAT Per
+# month"; notes.md). Euro countries whose checkout wasn't read through their own exit have no price. Canada, the UK,
+# Australia and New Zealand pay in US dollars; US and Canadian prices are before sales tax ("If your billing address is
+# in the United States, you may be subject to state and local sales taxes.").
+# Billing periods: a year only ("Dashlane also no longer offers monthly subscriptions for any plan.").
+# Region checklist for CA and US, 2026-11-19: 1. language paths only (/de/, /es/, /fr/, /nl/pricing-personal); 2. no
+# country or currency picker; 3. the page's data holds no prices (its script loads them); 4. the checkout's order
+# summary names US$ for Canada (Montreal, Vancouver and Calgary readings) and $ for the US exit; 5. its billing article
+# on taxes; 6. Edge from Canada and through exits; 7. no bill offered.
+# Plans: Premium and Friends & Family (10 people). "Dashlane no longer offers or sells these plans: Dashlane Free,
+# Premium Plus, Premium Plus Family, Essentials, and Advanced." Starter, Standard, Team and the Omnix plans are business
+# plans, left out.
+# Bundles: none. Official resellers: none for personal plans (its partner programme and AWS Marketplace are for
+# businesses). App stores (Apple, Google Play) bill it: partners, not listed.
+# Free use: none (the Free plan was withdrawn); a 14-day Premium trial, after which "you can only export your passwords".
+# VPN: Premium and a Friends & Family plan's manager get Hotspot Shield's VPN ("You can set up your Hotspot Shield
+# Premium account directly from your Dashlane app."), but on 5 devices ("you can use the VPN on up to five devices"),
+# not the 10 of the catalog's hotspot-shield.premium, so it isn't listed in includes-subscription: the plans state
+# vpn.included and vpn.devices, with notIn: [vpn] (a password manager with a VPN, not sold as a VPN; notes.md). Its
+# traffic is unlimited by inference: Dashlane gives "their Premium VPN service" and Hotspot Shield's Premium plan has
+# "unlimited bandwidth" (its own page); server countries and protocols are left out. Turning it on means agreeing to
+# Hotspot Shield's terms and privacy policy, rated below where they're worse.
+
+id: dashlane
+name: Dashlane
+website: https://www.dashlane.com
+# Its help centre, whose articles state its billing, features and policies.
+domains: [support.dashlane.com]
+category: passwords
+spendCategory: software
+# The checkout's currency for each country read (above); every other country's wasn't read, so GLOBAL is USD.
+billingCurrency:
+  {
+    CA: USD,
+    US: USD,
+    GB: USD,
+    IE: EUR,
+    AU: USD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help article on cancelling ("Open the Vault menu in the top-left of the page, and select Subscription."); app store
+# and PayPal subscriptions are cancelled there.
+cancelUrl: https://support.dashlane.com/hc/en-us/articles/12247552144786-Cancel-my-Dashlane-subscription-and-stop-autorenewal
+sources: { pricing: https://www.dashlane.com/pricing-personal }
+# Ways to pay (M11.5), read 2026-11-19: cards on its website and the app stores everywhere; PayPal for new plans only in
+# the UK. Its terms name Stripe, PayPal and Checkout.com as processors. No page names a card network in words, so no
+# acceptedNetworks (the card shows "Card (networks not verified)").
+paymentMethods:
+  - methods: [card, app-store]
+    page: 'Manage subscription and billing for Dashlane personal plans'
+    url: https://support.dashlane.com/hc/en-us/articles/202699341-Manage-subscription-and-billing-for-Dashlane-personal-plans
+    quotes:
+      - 'You can buy a Dashlane subscription on our website with a credit card.'
+      - 'You can also buy a subscription in the Google Play Store or Apple App Store.'
+  - methods: [card, app-store, paypal]
+    regions: [GB]
+    page: 'Manage subscription and billing for Dashlane personal plans'
+    url: https://support.dashlane.com/hc/en-us/articles/202699341-Manage-subscription-and-billing-for-Dashlane-personal-plans
+    quotes:
+      - 'You can buy a Dashlane subscription on our website with a credit card.'
+      - 'You can also buy a subscription in the Google Play Store or Apple App Store.'
+      - 'You can no longer pay for new personal plans with PayPal unless you live in the United Kingdom.'
+# Renewal day (M11.5), read 2026-11-19: its terms renew a plan "for additional periods of the same duration" and warn 30
+# days before "your Subscription renewal date", but name no day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.dashlane.com/terms
+    - https://support.dashlane.com/hc/en-us/articles/202699341-Manage-subscription-and-billing-for-Dashlane-personal-plans
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its terms. Dashlane SAS in Paris contracts with buyers in the EU ("If you reside in…
+# European Union Dashlane SAS Laws of France"); everyone else's is Dashlane USA, Inc. No page read names its investors
+# or a listing: private, no stock.
+notes: Billed once a year. Buyers in the EU contract with Dashlane SAS in France; everyone else with Dashlane USA, Inc.
+owner:
+  name: Dashlane, Inc.
+  page:
+    name: Terms of Service
+    url: https://www.dashlane.com/terms
+  quotes:
+    - 'Dashlane, Inc. and its affiliates (“Dashlane”, or “we” and its derivatives) operate www.dashlane.com'
+  country:
+    code: US
+    page:
+      name: Terms of Service
+      url: https://www.dashlane.com/terms
+    quotes:
+      - 'The Services are provided by either Dashlane USA, Inc. a Delaware corporation with offices at 44 West 18th Street, New York, NY 10011 USA, or Dashlane SAS, a French company with offices at 21 Rue Pierre Picard, 75018 Paris, as indicated on the payment record for your subscription'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+
+# Perks (M11.6): what no feature describes, in its pages' words.
+perks:
+  - id: file-storage
+    name: Secure Notes with 1 GB of encrypted file storage
+
+# General features, read 2026-11-19. Platforms: its browser extension ("Google Chrome", "Firefox", "Safari", "Microsoft
+# Edge", "Other Chromium browsers", Supported devices and browsers), its web app, Android, iPhone and iPad, and a macOS
+# app ("Dashlane on macOS"); Windows and Linux only through the extension (its Windows app is gone: "the desktop app,
+# which we no longer offer"). Sign-in: a Master Password, a PIN or "a physical security key" (the Premium plan article),
+# an authenticator app's 2FA token, text messages for backup codes ("Dashlane uses this number to text OTP backup
+# codes", its terms) and a code by email on a new device ("When you log in to Dashlane on a new device, Dashlane sends a
+# code to your email."); SSO is for business plans. Support: "Email and live chat support are available". App
+# languages: "English", "French", "German", "Spanish", "Dutch", "Brazilian Portuguese", "Italian", "Japanese",
+# "Korean", "Simplified Chinese", "Swedish" (Available languages; Dutch and Swedish have no registry value). Open
+# source: "Large portions of Dashlane’s client code are open source and available on GitHub" (iOS, Android, web
+# extension; its server isn't), so open-source apps. No pause; no parental controls (the Friends & Family dashboard
+# manages members, not what they can do).
+features:
+  platforms: [macos, android, ios, web, browser-extension]
+  account.sign-in: [password, totp, security-key, sms, email-code]
+  support.channels: [email, chat]
+  languages.interface: [en, fr, de, es, pt, it, ja, ko, zh]
+  software.open-source: open-clients
+sourceRepo:
+  url: https://github.com/Dashlane
+  page:
+    name: '8. Security operations'
+    url: https://support.dashlane.com/hc/en-us/articles/32877595753746-8-Security-operations
+  quotes:
+    - 'Large portions of Dashlane’s client code are open source and available on GitHub'
+  lastVerified: 2026-11-19
+
+# Password manager features, read 2026-11-19 (Compare Dashlane personal plans, the Premium and Friends & Family
+# articles, and the articles named), the same on both plans:
+# - Items: logins, 2FA tokens in logins ("Dashlane stores the 2FA tokens for the sites and apps in your vault"),
+#   passkeys, Secure Notes, payments ("credit and debit cards, PayPal info, and bank accounts"), personal info ("Name,
+#   Email, Phone number, Address, Company, and Website"), IDs ("general ID cards, passports, driver’s licenses, Social
+#   Security cards, and tax numbers") and Wi-Fi ("Wi-Fi credentials are available for the mobile and macOS apps").
+#   Secrets are business only ("Only members of organizations with Password Management can use secrets.").
+# - Health: Password Health counts "compromised, reused, and weak passwords"; its AI phishing alerts warn "when you
+#   visit a website that our AI model identifies as risky" (suspicious sites); Dark Web Monitoring "to scan the web for
+#   possible leaks of your data".
+# - Sharing: with other Dashlane users, with four permission levels ("Full access", "Can edit", "Can view", "Can
+#   autofill"), and by link to anyone ("Links expire after one view or 24 hours"). Shared collections are for
+#   professional plans only.
+# - Import: "You can only use a CSV file to move your data from other password managers to Dashlane unless you use the
+#   Credential Exchange Protocol." (its import menu lists other managers), and its own encrypted DASH file; no KDBX.
+# - Export: CSV ("CSV files aren't encrypted"), Credential Exchange, and DASH ("A DASH file saves an encrypted copy of
+#   all your Dashlane data.", readable only by Dashlane). Attachments and passkeys aren't in the CSV.
+# - Emergency access: false. "The previous emergency contact feature was available only in the desktop app, which we no
+#   longer offer."; its replacement is handing someone a DASH file and its password yourself, not access it grants.
+# - Offline: "you can access any Dashlane app while offline as long as you've logged in previously" (Master Password
+#   accounts; passwordless accounts need a connection).
+# - Authenticator: a site's setup code or QR code ("Setup codes, which are long strings of numbers and letters";
+#   "Select Scan QR code"); its CSV keeps each login's setup code ("the CSV file named credentials contains a column
+#   named otpSecret") and its DASH file the tokens ("Your DASH export will include logins, 2FA tokens, and Secure
+#   Notes.").
+# - End-to-end: "Dashlane cannot access Secured Data; it is encrypted with keys that are unique to each user" (its
+#   privacy policy): passwords. The 1 GB for files is Secure Note attachments, a perk, not a files service.
+# - VPN (above): Hotspot Shield's on 5 devices, for Premium and the Friends & Family manager only ("Customers who were
+#   invited to join someone else's Friends & Family plan won't have VPN access."); not in free trials.
+plans:
+  - id: dashlane.premium
+    name: Premium
+    link: https://www.dashlane.com/getpremium
+    notIn: [vpn]
+    features:
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          bank-account,
+          identity,
+          secure-note,
+          wifi,
+          passport,
+          drivers-license,
+          government-id,
+        ]
+      password-manager.health: [breached, weak, reused, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, cxf, other-managers]
+      password-manager.export: [csv, cxf, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [plain-backup, encrypted-backup]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+    inferred:
+      vpn.unlimited-traffic:
+        reason: 'Dashlane says "We partner with Hotspot Shield to provide their Premium VPN service", and Hotspot Shield says its Premium plan offers "unlimited bandwidth".'
+        page:
+          name: 'Hotspot Shield security audit'
+          url: https://www.hotspotshield.com/security-audit/
+        lastVerified: 2026-11-19
+    perks: [file-storage]
+    notes: 'Unlimited devices, with Hotspot Shield’s VPN on up to 5 of them. A 14-day free trial (without the VPN). In the euro countries the total with VAT is €57.49 a year.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: US
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: GB
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: IE
+        currency: EUR
+        amount: 46.74
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: AU
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: NZ
+        currency: USD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: DE
+        currency: EUR
+        amount: 48.32
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: FR
+        currency: EUR
+        amount: 47.91
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: NL
+        currency: EUR
+        amount: 47.52
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: ES
+        currency: EUR
+        amount: 47.52
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+      - region: IT
+        currency: EUR
+        amount: 47.13
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getpremium
+  - id: dashlane.friends-family
+    name: Friends & Family
+    link: https://www.dashlane.com/getfamily
+    notIn: [vpn]
+    features:
+      account.users: 10
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          bank-account,
+          identity,
+          secure-note,
+          wifi,
+          passport,
+          drivers-license,
+          government-id,
+        ]
+      password-manager.health: [breached, weak, reused, suspicious]
+      password-manager.sharing:
+        [share-to-user, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, cxf, other-managers]
+      password-manager.export: [csv, cxf, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: [plain-backup, encrypted-backup]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+      vpn.included: true
+      vpn.devices: 5
+      vpn.unlimited-traffic: true
+    featureLabels:
+      vpn.included: 'Hotspot Shield’s VPN, for the plan manager only'
+    inferred:
+      vpn.unlimited-traffic:
+        reason: 'Dashlane says "We partner with Hotspot Shield to provide their Premium VPN service", and Hotspot Shield says its Premium plan offers "unlimited bandwidth".'
+        page:
+          name: 'Hotspot Shield security audit'
+          url: https://www.hotspotshield.com/security-audit/
+        lastVerified: 2026-11-19
+    perks: [file-storage]
+    notes: 'Premium for up to 10 people, each with a private account. Only the plan manager gets the VPN (on up to 5 devices). In the euro countries the total with VAT is €86.99 a year.'
+    prices:
+      - region: CA
+        currency: USD
+        amount: 97.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: US
+        currency: USD
+        amount: 97.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: GB
+        currency: USD
+        amount: 97.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: IE
+        currency: EUR
+        amount: 70.73
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: AU
+        currency: USD
+        amount: 97.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: NZ
+        currency: USD
+        amount: 97.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: DE
+        currency: EUR
+        amount: 73.11
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: FR
+        currency: EUR
+        amount: 72.50
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: NL
+        currency: EUR
+        amount: 71.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: ES
+        currency: EUR
+        amount: 71.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+      - region: IT
+        currency: EUR
+        amount: 71.31
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.dashlane.com/getfamily
+
+# Free use (the owner's item of 2026-11-09), read 2026-11-19: none. "Dashlane no longer offers or sells these plans:
+# Dashlane Free, …" (Compare Dashlane personal plans); after a trial or a lapsed plan "you can still log in, but you can
+# only export your passwords" (Export your Dashlane data to a CSV).
+freeUse:
+  kind: none
+  pages:
+    - https://support.dashlane.com/hc/en-us/articles/360001166969-Compare-Dashlane-personal-plans
+    - https://support.dashlane.com/hc/en-us/articles/32905278138002-Export-your-Dashlane-data-to-a-CSV
+    - https://www.dashlane.com/pricing-personal
+  lastVerified: 2026-11-19
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: its Terms of Service (last updated April 8, 2026, for
+# personal plans, which are its apps' licence too: section 3) and Privacy Policy (April 8, 2026, which the terms
+# include: "These Terms, along with our Privacy Policy, form a legal contract"); its Do Not Sell or Share page, cookie
+# preferences, security and Vulnerability Disclosure Policy pages; and its help articles on billing, cancelling,
+# refunds, plan changes, trials, export, deletion, inactive accounts, privacy rights, security operations and
+# advisories. The checkout's line: "I agree to Dashlane's Privacy Policy and Terms of Service." Its Business Terms (for
+# business plans) weren't rated. The VPN: setting it up asks you to "Read Hotspot Shield's Terms of Service and Privacy
+# Policy" and agree; those (and its VPN Products Privacy Notice, saved 2026-11-19 for Hotspot Shield's own file) are
+# rated for both plans where they're worse than Dashlane's own (Xbox Game Pass's precedent for EA Play). Dashlane's
+# help links Aura's copy of the VPN notice (aura.com/privacy/vpn-products); Hotspot Shield's own is quoted.
+policies:
+  links:
+    - name: 'Terms of Service'
+      url: https://www.dashlane.com/terms
+    - name: 'Privacy Policy'
+      url: https://www.dashlane.com/privacy
+    - name: 'Do Not Sell or Share My Personal Information'
+      url: https://www.dashlane.com/privacy/donotsell
+    - name: 'Security'
+      url: https://www.dashlane.com/security
+    - name: '8. Security operations'
+      url: https://support.dashlane.com/hc/en-us/articles/32877595753746-8-Security-operations
+    - name: 'Security advisory: Brute force attack'
+      url: https://support.dashlane.com/hc/en-us/articles/36038764990866-Security-advisory-Brute-force-attack-on-Dashlane-user-accounts
+    - name: 'Your specific rights under GDPR & CCPA'
+      url: https://support.dashlane.com/hc/en-us/articles/360000960209-Your-specific-rights-under-GDPR-CCPA
+    - name: 'Cancel my Dashlane subscription'
+      url: https://support.dashlane.com/hc/en-us/articles/12247552144786-Cancel-my-Dashlane-subscription-and-stop-autorenewal
+    - name: 'Change your Dashlane plan'
+      url: https://support.dashlane.com/hc/en-us/articles/18922732709138-Change-your-Dashlane-plan
+    - name: 'Do I need to cancel my Dashlane Premium trial?'
+      url: https://support.dashlane.com/hc/en-us/articles/32567141773330-Do-I-need-to-cancel-my-Dashlane-Premium-trial-to-avoid-charges
+    - name: 'Compare Dashlane personal plans'
+      url: https://support.dashlane.com/hc/en-us/articles/360001166969-Compare-Dashlane-personal-plans
+    - name: 'Dashlane Friends & Family plan'
+      url: https://support.dashlane.com/hc/en-us/articles/360013369820-Dashlane-Friends-Family-plan
+    - name: 'Manage subscription and billing'
+      url: https://support.dashlane.com/hc/en-us/articles/202699341-Manage-subscription-and-billing-for-Dashlane-personal-plans
+    - name: 'Export your Dashlane data to a CSV'
+      url: https://support.dashlane.com/hc/en-us/articles/32905278138002-Export-your-Dashlane-data-to-a-CSV
+    - name: 'Delete your Dashlane account and data'
+      url: https://support.dashlane.com/hc/en-us/articles/202907531-Delete-your-Dashlane-account-and-data
+    - name: 'Dashlane inactive accounts'
+      url: https://support.dashlane.com/hc/en-us/articles/17034174575250-Dashlane-inactive-accounts
+    - name: 'Supported devices and browsers'
+      url: https://support.dashlane.com/hc/en-us/articles/202625002-Supported-devices-and-browsers
+    - name: 'Hotspot Shield Terms of Service (its VPN)'
+      url: https://legal.hotspotshield.com/documents/terms_of_service
+    - name: 'Hotspot Shield Privacy Policy (its VPN)'
+      url: https://legal.hotspotshield.com/documents/privacy_policy
+    - name: 'Hotspot Shield VPN Products Privacy Notice'
+      url: https://www.hotspotshield.com/privacy-policy/vpn/
+    - name: 'Hotspot Shield security audit'
+      url: https://www.hotspotshield.com/security-audit/
+    - name: 'VPN protection with Hotspot Shield'
+      url: https://support.dashlane.com/hc/en-us/articles/360000037900-VPN-protection-with-Hotspot-Shield
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It records how you use its apps, to improve them and build new products. Its privacy settings only let you stop its marketing emails; anything more is a request.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'We may use your Personal Data to analyze your usage of the Service, improve the Service, improve the rest of our business, help us understand user activity on the Service, including which features are most and least used and how visitors move around the Service, as well as user interactions with our emails, and to develop new products and services.'
+        - url: https://support.dashlane.com/hc/en-us/articles/360000960209-Your-specific-rights-under-GDPR-CCPA
+          quote: 'There you can choose to withdraw consent for Dashlane to send you guides and tips, as well as emails with personalized offers and promotions.'
+      action:
+        name: 'Your privacy and data settings'
+        url: https://support.dashlane.com/hc/en-us/articles/360000960209-Your-specific-rights-under-GDPR-CCPA
+      lastVerified: 2026-11-19
+    - topic: privacy.data-collection
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: bad
+      reason: 'Its VPN is Hotspot Shield’s, under Hotspot Shield’s own privacy policy: it tracks how you use the VPN, tied to an ID for your device, partly for marketing, with no way to say no.'
+      sources:
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'device hashes, which are used to identify devices and associate them with other data we collect (such as for measuring bandwidth use, providing support, understanding how you interact with our VPN, and other analytics and marketing purposes).'
+        - url: https://support.dashlane.com/hc/en-us/articles/360000037900-VPN-protection-with-Hotspot-Shield
+          quote: "Read Hotspot Shield's Terms of Service and Privacy Policy."
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its ad partners get information about you to show its ads on other sites. Its opt-out page turns off the ad cookies, but only in that browser, and changing cookie settings can undo it.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'We may also share information about our users with these companies to facilitate interest-based advertising to those or similar users on other online properties.'
+        - url: https://www.dashlane.com/privacy/donotsell
+          quote: 'Changing the slider to “Inactive" will turn off all advertising cookies on the Site.'
+        - url: https://www.dashlane.com/privacy/donotsell
+          quote: 'NOTE THAT THIS ELECTION MAY BE UNDONE IF YOU LATER CHANGE YOUR COOKIE SETTINGS ON THE SITE OR WITHIN YOUR BROWSER TO ALLOW ALL COOKIES.'
+      action:
+        name: 'Do Not Sell or Share My Personal Information'
+        url: https://www.dashlane.com/privacy/donotsell
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It and its ad partners follow what you do, on its site and others, to show you its ads. You can turn that off, but only on each device and browser.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'We and our third-party advertising partners may use cookies, pixels and other technologies to collect information (including the data described in the Automatic Data Collection section above) about your interactions with the Services, our communications and other third-party online services over time, and use that information to serve online ads that they think will interest you.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'You will need to apply these settings on each device and browser from which you wish to limit the use of your information for interest-based advertising purposes.'
+      action:
+        name: 'Turn off its advertising cookies'
+        url: https://www.dashlane.com/privacy/donotsell
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It can’t read what you keep in your vault, and it says it doesn’t use personal data to train AI language models.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'Dashlane cannot access Secured Data; it is encrypted with keys that are unique to each user, that we do not have, and there is no “backdoor” or equivalent mechanism that lets us access Secured Data.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'We do not collect, use, or sell personal data for the purpose of training large language models (“LLMs”).'
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your vault is locked with keys only you have, and there is no back door, so no one at Dashlane can read it.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'Dashlane cannot access Secured Data; it is encrypted with keys that are unique to each user, that we do not have, and there is no “backdoor” or equivalent mechanism that lets us access Secured Data.'
+        - url: https://www.dashlane.com/security
+          quote: 'Only users hold the keys to their data—Dashlane can never view or access user credentials.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'It says how long it keeps things: records of your IP address for 45 days, with backups for a year more, and it erases your personal data within 30 days of deleting your account.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'We retain 45 days of IP activity for all users in our production logs.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'Backups of these logs are stored in a segregated environment for an additional year.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'If you delete your Account, all Personal Data will automatically be erased within 30 days of the date of deletion.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: neutral
+      reason: 'Its VPN’s company, Hotspot Shield, deletes your IP address when you disconnect, but keeps your other data as long as it says it needs it, with no time given.'
+      sources:
+        - url: https://www.hotspotshield.com/privacy-policy/vpn/
+          quote: 'When you initiate a VPN connection, we collect your device IP address, immediately encrypt it, and delete it at the end of your VPN session.'
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'We generally retain your personal information for as long as is needed to provide the Services to you, or for as long as you have an account or subscription with us.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your account yourself at any time, and everything in it is erased within 30 days.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/202907531-Delete-your-Dashlane-account-and-data
+          quote: "If you don't want to use Dashlane any longer, you can delete your account."
+        - url: https://www.dashlane.com/privacy
+          quote: 'If you delete your Account, all Personal Data will automatically be erased within 30 days of the date of deletion.'
+      action:
+        name: 'How to delete your account'
+        url: https://support.dashlane.com/hc/en-us/articles/202907531-Delete-your-Dashlane-account-and-data
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: neutral
+      reason: 'Your Hotspot Shield VPN account is deleted only when you ask Hotspot Shield, with no time given.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'Please contact us to request that we delete personal information we have about you, or to correct inaccurate personal information we have about you.'
+      action:
+        name: 'How to ask Hotspot Shield to delete your data'
+        url: https://legal.hotspotshield.com/documents/privacy_policy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your vault yourself as CSV files other apps can read. Files attached to notes and passkeys aren’t included.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/32905278138002-Export-your-Dashlane-data-to-a-CSV
+          quote: 'You can export your Dashlane data as comma-separated values (CSV) files on the web, in the browser extension, and on mobile devices.'
+        - url: https://support.dashlane.com/hc/en-us/articles/32905278138002-Export-your-Dashlane-data-to-a-CSV
+          quote: "Attachments you've added to your Secure Notes can't be exported to a CSV file, so make sure to download any attachments you want to keep."
+      action:
+        name: 'How to export your data'
+        url: https://support.dashlane.com/hc/en-us/articles/32905278138002-Export-your-Dashlane-data-to-a-CSV
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: neutral
+      reason: 'For your Hotspot Shield VPN account’s data, you have to ask Hotspot Shield for a copy.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/privacy_policy
+          quote: 'You may also request access to your information, and we will provide the relevant information to you in a portable and readily usable format.'
+      action:
+        name: 'How to ask Hotspot Shield for a copy'
+        url: https://legal.hotspotshield.com/documents/privacy_policy
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It hands over data only when the law or an order requires it, tells you when it’s allowed to, and can’t open your vault for anyone. It names no transparency report.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'However, regardless of choice regarding Personal Data, Dashlane may disclose your Personal Data (a) where required to comply with law enforcement directives, applicable laws or governmental orders; or (b) if we believe in good faith that doing so is necessary to protect our rights, those of other users, or the Services.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'However, because of our zero-knowledge architecture, we are unable to provide Secured Data to any third parties, even if we are subject to a valid order.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'To the extent permitted by law, we will inform affected users of legally-mandated disclosures of Personal Data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can go to the US and other countries, with contracts between its EU and US companies to protect it.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'Your information, including Personal Data that we collect from you, may be transferred to, stored by, and processed by us, our Affiliates, and service providers outside your home country, including in the United States, where data protection and privacy regulations may not offer the same protections as in other parts of the world.'
+        - url: https://www.dashlane.com/privacy
+          quote: 'To offer the levels of protection required, we have GDPR-compliant Data Processing Addenda in place among our EU and US Affiliates, in addition to the other measures indicated below.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a Master Password, and give payment details to pay. A phone number is only for two-step sign-in, if you want it.'
+      sources:
+        - url: https://www.dashlane.com/privacy
+          quote: 'You must create an Account to use an App, and to do so you must provide a valid email address (unless you are a B2B User logging in via SSO).'
+        - url: https://www.dashlane.com/privacy
+          quote: 'You must provide billing data to subscribe to the Services.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You cancel in its web app at any time, and keep your plan and data until the end of the time you paid for.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/12247552144786-Cancel-my-Dashlane-subscription-and-stop-autorenewal
+          quote: 'You can cancel your Dashlane subscription to a personal plan at any time to stop future charges.'
+        - url: https://support.dashlane.com/hc/en-us/articles/12247552144786-Cancel-my-Dashlane-subscription-and-stop-autorenewal
+          quote: 'You keep your plan and your data until the end of your current subscription period.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: good
+      reason: 'You get all your money back if you ask within 30 days of buying, and again within 30 days of each yearly renewal.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'However, we will refund the full Subscription Fee for annual Subscriptions if you request a refund within thirty (30) days of the Subscription start or renewal.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: great
+      reason: 'A new price starts only at your next renewal, and it tells you at least 30 days before each renewal, so you can cancel first.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'We may change our fees and billing practices at any time, but any such change will not apply to you until the next Subscription period or if you change your Subscription type.'
+        - url: https://www.dashlane.com/terms
+          quote: 'We will inform you at least thirty (30) days before your Subscription renewal date.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its 14-day trial needs no card and then just ends. If you do give a card, it charges you when the trial ends unless you cancel first.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/32567141773330-Do-I-need-to-cancel-my-Dashlane-Premium-trial-to-avoid-charges
+          quote: 'If you signed up for your free trial without payment details, your trial ends automatically at no cost.'
+        - url: https://support.dashlane.com/hc/en-us/articles/32567141773330-Do-I-need-to-cancel-my-Dashlane-Premium-trial-to-avoid-charges
+          quote: 'If you provided payment details, cancel before your trial ends to avoid a charge.'
+        - url: https://www.dashlane.com/terms
+          quote: 'At the end of the Trial Period, your access will automatically convert to a Subscription unless cancelled as set forth above.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      tier: great
+      reason: 'Its plans are sold by the year only, and it tells you at least 30 days before every renewal.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'We will inform you at least thirty (30) days before your Subscription renewal date.'
+        - url: https://support.dashlane.com/hc/en-us/articles/360001166969-Compare-Dashlane-personal-plans
+          quote: 'Dashlane also no longer offers monthly subscriptions for any plan.'
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and billing help name no fees of its own beyond the price and sales tax or VAT.'
+      pages:
+        - https://www.dashlane.com/terms
+        - https://support.dashlane.com/hc/en-us/articles/202699341-Manage-subscription-and-billing-for-Dashlane-personal-plans
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      tier: good
+      reason: 'Moving up to Friends & Family counts what’s left of your Premium year toward it. Moving down happens when your current plan ends.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'If you upgrade your Subscription, you will pay for the full duration of the new Subscription level but receive a pro-rata credit for the remaining value of your prior Subscription.'
+        - url: https://support.dashlane.com/hc/en-us/articles/18922732709138-Change-your-Dashlane-plan
+          quote: 'You can downgrade your Dashlane personal plan when your current subscription ends.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: poor
+      reason: 'Outside the EU, the UK and Australia, disputes go to a private referee (an arbitrator) in New York, with no group lawsuits. You can opt out only within 30 days of agreeing, in writing.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'ANY CLAIMS WITHIN THE SCOPE OF THIS ARBITRATION AGREEMENT MUST BE BROUGHT IN THE RESPECTIVE PARTY’S INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING, AND THE ARBITRATOR MAY NOT (A) CONSOLIDATE MORE THAN ONE PERSON’S CLAIMS, (B) OTHERWISE PRESIDE OVER ANY FORM OF A REPRESENTATIVE OR CLASS PROCEEDING, OR (C) AWARD CLASS-WIDE RELIEF.'
+        - url: https://www.dashlane.com/terms
+          quote: 'You may opt out of the provisions of this Arbitration Agreement requiring and governing arbitration by sending written notice to legal@dashlane.com or via mail to Dashlane, Inc., 44 West 18th Street, 4th Fl., New York, NY 10011, within thirty (30) days after accepting these Terms.'
+      action:
+        name: 'How to opt out of arbitration (its terms)'
+        url: https://www.dashlane.com/terms
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT, AU]
+      tier: good
+      reason: 'In the EU, the UK and Australia there’s no private referee: disputes go to a court, in the EU France’s courts or your local consumer body.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'THIS ARBITRATION AGREEMENT DOES NOT APPLY TO INDIVIDUALS WHO ARE SUBJECT TO THE LAWS OF JURISDICTIONS WHERE SUCH AGREEMENTS ARE PROHIBITED BY LAW, INCLUDING THE EU, UK, AND AUSTRALIA.'
+        - url: https://www.dashlane.com/terms
+          quote: 'European Union Dashlane SAS Laws of France French Courts or local mandatory consumer forum'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: bad
+      reason: 'Its VPN comes with Hotspot Shield’s terms, which send disputes with Hotspot Shield to a private referee (an arbitrator), with no group lawsuits, and let you opt out only where a law gives you that right.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'You and Us agree that the U.S. Federal Arbitration Act governs the interpretation and enforcement of these Terms, and that you and Us are each waiving the right to a trial by jury and the right to participate in a class action.'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'if you are a customer who resides in a jurisdiction where you have a legal right to opt out of arbitration in accordance with laws applicable to you – you may exercise your legal right to opt out.'
+      lastVerified: 2026-11-19
+    # The EU's own grade for the VPN's plans: a plan's rating outranks a region's, so without this one the plans' Bad
+    # would show in the EU too (hotspot-shield.yaml grades the EU Good from the same terms).
+    - topic: legal.disputes
+      plans: [dashlane.premium, dashlane.friends-family]
+      regions: [EU]
+      tier: good
+      reason: 'In the EU, neither Dashlane’s terms nor Hotspot Shield’s, which cover its VPN, send you to a private referee: disputes go to France’s courts or your local consumer body, and your country’s consumer laws apply.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'European Union Dashlane SAS Laws of France French Courts or local mandatory consumer forum'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If you reside in a country (including countries of the European Union) where laws provide consumers the right to bring disputes in their local courts, then, in such cases, mandatory provisions of the local laws of your country of residence shall apply.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It emails you or tells you in the app about big changes, and they start for you 30 days after it posts them, so you can leave first.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'if the changes are material, inform you via email or in-App messaging, as applicable.'
+        - url: https://www.dashlane.com/terms
+          quote: 'Amended Terms will be effective immediately for new users and thirty (30) days after we post them for existing users.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: neutral
+      reason: 'Its VPN’s terms are Hotspot Shield’s, which says it tries to warn you before big changes but doesn’t say how long before.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If a revision materially alters your rights, as determined by Us in its sole discretion, We will use reasonable efforts to notify you in advance of the change becoming effective, which may include sending a notification to the email address(es) associated with your account or displaying a pop-up or banner within the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can close your account if you seriously break its terms, usually warning you first, and your plan ends at once with no money back.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'We will make commercially reasonable efforts to notify you prior to taking any such action.'
+        - url: https://www.dashlane.com/terms
+          quote: 'If we terminate your Account for breach of the Terms, your Subscription will end immediately.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: bad
+      reason: 'Hotspot Shield, whose terms cover its VPN, can end your VPN access at any time, for any reason.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We may terminate your use of the Services or discontinue providing access to the Services at any time and for any reason'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'What you keep in your vault stays yours. It may use it only to run the service, and only while you have an account.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'you retain all right, title, and interest to your Secured Data.'
+        - url: https://www.dashlane.com/terms
+          quote: 'So long as you have an Account, you grant us a non-exclusive, royalty-free, fully-paid, sublicensable, transferable, worldwide right to process your Secured Data solely as required to provide the Services in compliance with applicable laws.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can remove features from its apps at any time.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'We may remove features from the Services or certain Apps at any time, and not all features are available with all plans and/or in all jurisdictions.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: poor
+      reason: 'Hotspot Shield’s terms, which cover its VPN, let updates remove any of its features entirely.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'Updates may also modify or delete certain features, functionality, tools, or content in their entirety.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: neutral
+      reason: 'It deletes a personal account no one has opened for 13 months, paid or not, after three warning emails over 30 days.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/17034174575250-Dashlane-inactive-accounts
+          quote: "In our ongoing commitment to ensure the safety of our customers' data, we're removing any Dashlane personal accounts that no one has accessed for more than 13 months and haven't been associated with a professional plan for more than 2 years."
+        - url: https://support.dashlane.com/hc/en-us/articles/17034174575250-Dashlane-inactive-accounts
+          quote: "You'll receive two additional email reminders before your account is deleted."
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'Its apps are for your personal use, and the licence can be taken back. You may not take them apart, except where the law allows it.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'Dashlane grants you a personal, non-exclusive, revocable, non-sublicensable, and non-transferable license to download and install the Apps in object code format on one or more devices (as permitted by your subscription type), for your personal use.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: poor
+      reason: 'Hotspot Shield’s VPN app is for your personal use under a licence it can take back and that lasts only for a set time.'
+      sources:
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'We agree to grant you, as an individual consumer, a limited, revocable, nonexclusive, personal, non-transferable and non-assignable, term-limited license to install and use the Software and to access the Services'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: great
+      reason: 'Outside firms test all its apps every year and it shares the results, it pays people who find bugs, and it publishes what happened in past incidents.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/32877595753746-8-Security-operations
+          quote: 'Penetration testing: Independent annual tests cover all apps and cloud infrastructure.'
+        - url: https://www.dashlane.com/security
+          quote: 'Results are shared publicly through the Dashlane Trust Center.'
+        - url: https://support.dashlane.com/hc/en-us/articles/36038764990866-Security-advisory-Brute-force-attack-on-Dashlane-user-accounts
+          quote: 'Starting on Sunday, May 31, 2026, an external party launched a brute force attack against certain Dashlane user accounts.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      plans: [dashlane.premium, dashlane.friends-family]
+      tier: neutral
+      reason: 'Its VPN is Hotspot Shield’s, which has had one outside check (Aon’s, in 2023) and gives no way to report a security bug.'
+      sources:
+        - url: https://www.hotspotshield.com/security-audit/
+          quote: "We've recently commissioned an independent security audit for our Hotspot Shield VPN, underscoring our commitment to user trust."
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You may not share your account with anyone. Friends & Family gives up to 10 people an account of their own instead.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'Keep your Login Details secure and do not share them with anyone.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [dashlane.friends-family]
+      tier: great
+      reason: 'Friends & Family is for you and nine others from your close circle, friends or family, each with a private account of their own.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/360013369820-Dashlane-Friends-Family-plan
+          quote: "With Dashlane's Friends & Family plan, you and nine members of your close circle can share a Dashlane subscription."
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'Its apps may update themselves, and it switches off versions more than a year old, so you must update. Its pages mention no other changes to your device.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'Updates may be installed automatically or require installation or approval by you.'
+        - url: https://support.dashlane.com/hc/en-us/articles/202625002-Supported-devices-and-browsers
+          quote: 'To keep your data secure, we deactivate versions of Dashlane that are more than 12 months old.'
+      lastVerified: 2026-11-19

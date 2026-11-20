@@ -19,6 +19,8 @@
 # switch to Microsoft 365 Premium") and its old store page (microsoft.com/en-ca/store/b/copilotpro) leads to Premium's.
 # Personal Classic and Family Classic are existing subscribers' plans (the switching article's table), not sold: left
 # out. Office Home 2024 is a one-time purchase: out. Student and military prices are offers: left out (notes.md).
+# Microsoft Authenticator joined as a free plan on 2026-11-19 (passwords batch 2: Microsoft's own app, one provider by the
+# brand rule), read on its help pages (above the plan).
 # Bundles: none. Its PC offers (a Windows PC with a year of Premium and Game Pass, ended 2026-09-30) are device
 # promotions, not subscription bundles.
 # Official resellers: none named as such. Its cancelling article says "If you purchased a Microsoft 365 subscription from
@@ -33,7 +35,7 @@
 
 id: microsoft-365
 name: Microsoft 365
-aliases: [Microsoft Copilot, Copilot, Office 365, OneDrive, Outlook.com]
+aliases: [Microsoft Copilot, Copilot, Office 365, OneDrive, Outlook.com, Microsoft Authenticator]
 website: https://www.microsoft.com/microsoft-365
 category: software
 spendCategory: software
@@ -1243,6 +1245,53 @@ plans:
         lastVerified: 2026-11-13
         sourceUrl: https://www.microsoft.com/it-it/copilot/pricing/individuals
 
+  # Microsoft Authenticator, read 2026-11-19 (the full catalog run, passwords batch 2) on support.microsoft.com's
+  # Authenticator help (About, Download, Add accounts, How to sign in, Import and Export passwords, Back up and Restore,
+  # FAQs), Microsoft's Authenticator page, its 2019 Entra blog post on backup (techcommunity.microsoft.com, read in a
+  # headed Edge once its automatic check cleared), the Microsoft Identity bounty page and the app's store listings.
+  # Microsoft's own app, so a free plan of Microsoft's provider (Bitwarden's and Proton's authenticators' precedent):
+  # "Microsoft Authenticator is a free app that helps you sign in to all your accounts without using a password" (About).
+  # - Platforms: iPhone and Android only ("Microsoft Authenticator is not available for PC or Mac, because authenticator
+  #   apps are designed for smartphones for security reasons.", Download; no Apple Watch or Wear OS, its FAQs).
+  # - Password autofill ended: "Autofill on Microsoft Authenticator was discontinued in mid-August 2025." (FAQs), and
+  #   "Starting July 2025, the autofill feature in Authenticator will stop working, and from August 2025, passwords will
+  #   no longer be accessible in Authenticator." (Import passwords); its "Changes to Microsoft Authenticator autofill"
+  #   article now opens Edge's Microsoft Password Manager page. So password-manager is false.
+  # - Passkeys: its consumer help names Authenticator only as the QR scanner when you save a Microsoft account passkey
+  #   to your phone ("the QR scan button in Microsoft Authenticator (or similar)", Create and save a passkey); passkeys
+  #   kept in Authenticator are for work or school accounts ("passkeys in Microsoft Authenticator for Microsoft Entra
+  #   ID", Microsoft Learn), out of scope. No registry feature records an authenticator's passkeys.
+  # - Imports: a site's QR code or key ("Select Personal account then tap Scan a QR Code."; "Enter code manually", Add
+  #   accounts), so otpauth. No page offers other apps' files or Google Authenticator's export.
+  # - Exports: none, so authenticator.export is empty: its cloud backup restores only into Authenticator on the same
+  #   kind of phone ("You can only back up and restore on the same device type: accounts backed up using an iOS device
+  #   cannot be restored on an Android device.", Back up), and its export article says "Only passwords can be
+  #   exported." Android's backup moves to Google One from January 2027 ("Starting January 2027, you will no longer use
+  #   your Microsoft personal account to enable backup.").
+  # - Not end-to-end encrypted: the backup is locked with a key Microsoft's own service hands out ("The Authenticator app
+  #   uses a strong authentication token to request a 256-bit key from an internal Microsoft account key service.", the
+  #   2019 post), so encryption.end-to-end is left out.
+  - id: microsoft-365.authenticator
+    name: Authenticator
+    link: https://www.microsoft.com/en-ca/security/mobile-authenticator-app
+    categories: [passwords]
+    features:
+      platforms: [android, ios]
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: []
+    notes: 'Microsoft Authenticator: free, for iPhone and Android. Two-factor codes for any site, and sign-in approvals or passwordless sign-in for your Microsoft account. Its optional cloud backup restores only on the same kind of phone. Its password autofill ended in August 2025: passwords now live in Edge.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
+
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-14: Copilot "is covered by the Microsoft
 # Services Agreement and the Copilot Terms of Use" and Microsoft's privacy statement (shared documents
 # microsoft-services-agreement, with the Store Terms of Sale, and microsoft-privacy); the Copilot Terms of Use
@@ -1252,6 +1301,9 @@ plans:
 # your data and privacy" add the AI topics. Not read: the Microsoft Consumer Health Data Privacy Policy (Copilot Health
 # only), the Payment Services Terms (Microsoft Wallet only), the Xbox Community Standards (Gaming Copilot only), and the
 # sign-up form's agreement line, which shows only after an email address is entered.
+# Microsoft Authenticator (read 2026-11-19): its store listings link the Microsoft privacy statement, and a personal
+# Microsoft account is under the services agreement (both shared); no licence of its own was found on Microsoft's
+# pages. Its own ratings below replace the Copilot-based ones that don't apply to it.
 policies:
   shared: [microsoft-privacy, microsoft-services-agreement]
   links:
@@ -1289,6 +1341,18 @@ policies:
       url: https://www.microsoft.com/en-ca/copilot/pricing/individuals
     - name: 'Copilot bug bounty'
       url: https://www.microsoft.com/en-us/msrc/bounty-ai
+    - name: 'Microsoft Privacy Statement'
+      url: https://www.microsoft.com/en-ca/privacy/privacystatement
+    - name: 'About Microsoft Authenticator'
+      url: https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
+    - name: 'Download Microsoft Authenticator'
+      url: https://support.microsoft.com/en-us/authenticator/download-microsoft-authenticator
+    - name: 'Microsoft Authenticator FAQs'
+      url: https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
+    - name: 'How Authenticator backup works (2019)'
+      url: https://techcommunity.microsoft.com/blog/microsoft-entra-blog/how-it-works-backup-and-restore-for-microsoft-authenticator/1006678
+    - name: 'Microsoft Identity bug bounty'
+      url: https://www.microsoft.com/en-us/msrc/bounty-microsoft-identity
   ratings:
     - topic: billing.cancellation
       tier: good
@@ -1440,3 +1504,71 @@ policies:
         - url: https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse
           quote: 'When you request that Copilot take Actions on your behalf, you are solely responsible for those Actions and any results or consequences.'
       lastVerified: 2026-11-14
+    # Microsoft Authenticator (read 2026-11-19): ratings of its own where the ones above come from Copilot's or
+    # Microsoft 365's pages and say nothing about it. Its FAQs' data section (required non-personal usage data, an
+    # optional usage data switch, logs sent only with feedback) would grade privacy.data-collection better than the
+    # shared privacy statement does, and the worse grade wins, so it isn't rated here.
+    - topic: privacy.content-access
+      plans: [microsoft-365.authenticator]
+      tier: neutral
+      reason: 'Your Authenticator codes stay on your phone unless you turn on backup. Backups are locked with a key from Microsoft’s own key service, so Microsoft could open them.'
+      sources:
+        - url: https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
+          quote: 'This data is stored on your device and can be removed by removing your account.'
+        - url: https://techcommunity.microsoft.com/blog/microsoft-entra-blog/how-it-works-backup-and-restore-for-microsoft-authenticator/1006678
+          quote: 'The Authenticator app uses a strong authentication token to request a 256-bit key from an internal Microsoft account key service.'
+      lastVerified: 2026-11-19
+    # Not applicable like the other authenticators' (Authy, 2FAS, Aegis): the privacy statement's general reservation
+    # ("we may use your data to develop and train our AI models") would be graded in microsoft-privacy.yaml for every
+    # Microsoft plan, not on this one.
+    - topic: privacy.ai-training
+      plans: [microsoft-365.authenticator]
+      status: not-applicable
+      reason: 'Authenticator holds sign-in codes and approvals, not anything you write or upload, so there’s nothing of yours to train AI on.'
+      pages:
+        - https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
+        - https://www.microsoft.com/en-ca/privacy/privacystatement
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      plans: [microsoft-365.authenticator]
+      tier: neutral
+      reason: 'If you break Microsoft’s rules it can cut off its services or close your Microsoft account right away, and you may lose what’s in it.'
+      sources:
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'This could include limiting access to certain features or Services, stopping providing Services, closing your Microsoft account immediately or blocking delivery of a communication'
+        - url: https://www.microsoft.com/en-ca/servicesagreement
+          quote: 'Closure of your access to a Service or your account may result in forfeiture of content licenses, associated content, memberships, and Microsoft account balances associated with the account.'
+      lastVerified: 2026-11-19
+    - topic: legal.output-rights
+      plans: [microsoft-365.authenticator]
+      status: not-applicable
+      reason: 'Authenticator makes nothing for you to own: it shows sign-in codes and approvals.'
+      pages:
+        - https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      plans: [microsoft-365.authenticator]
+      tier: neutral
+      reason: 'Microsoft pays security researchers up to US$100,000 for flaws they find in Authenticator, but names no outside audit of it.'
+      sources:
+        - url: https://www.microsoft.com/en-us/msrc/bounty-microsoft-identity
+          quote: 'Microsoft Authenticator (iOS and Android applications)*'
+        - url: https://www.microsoft.com/en-us/msrc/bounty-microsoft-identity
+          quote: 'Qualified submissions are eligible for bounty awards from $375 to $100,000 USD.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [microsoft-365.authenticator]
+      status: not-applicable
+      reason: 'Authenticator is free and holds your own sign-in codes on your own phone: there’s no subscription to share.'
+      pages:
+        - https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
+        - https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      plans: [microsoft-365.authenticator]
+      status: not-stated
+      reason: 'Its help pages set no limit on how many phones can run Authenticator.'
+      pages:
+        - https://support.microsoft.com/en-us/authenticator/download-microsoft-authenticator
+        - https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
+      lastVerified: 2026-11-19

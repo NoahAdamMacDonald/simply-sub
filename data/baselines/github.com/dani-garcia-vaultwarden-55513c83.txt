@@ -1,0 +1,244 @@
+url: https://github.com/dani-garcia/vaultwarden
+method: browser
+saved: 2026-11-20
+
+Skip to content
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+dani-garcia
+vaultwarden
+Repository navigation
+Code
+Issues
+15
+(15)
+Pull requests
+67
+(67)
+Discussions
+Actions
+Wiki
+Security and quality
+37
+(37)
+Insights
+vaultwarden
+Public
+Sponsor
+Notifications
+Fork3.5k
+(3.5k)
+Star71.1k
+(71.1k)
+main
+6 Branches
+90 Tags
+Code
+Latest commit
+BlackDex
+Misc updates (#7980)
+baff1ca
+·
+History
+3,166 Commits
+Folders and files
+Name Last commit message Last commit date
+.github
+Misc updates (#7980)
+docker
+Modernize Rust code and Fixes (#7971)
+macros
+Modernize Rust code and Fixes (#7971)
+migrations
+Add Custom Roles account recovery permission (#7965)
+playwright
+[web-v2026.7.1] 2FA userVerificationToken for Authenticator, Email an…
+resources
+Update README (#5153)
+src
+Misc updates (#7980)
+tools
+V2 Encryption followups (#7963)
+.dockerignore
+fix: Correct invalid comment syntax in .dockerignore (#7274)
+.editorconfig
+Misc changes.
+.env.template
+Add macOS native credential sync to supported feature flags (#7942)
+.gitattributes
+Update Rust, Crates, GHA and fix a DNS issue (#7108)
+.gitignore
+Rename included .env file to .env.template and ignored .env
+.hadolint.yaml
+Container building changes (#3958)
+.pre-commit-config.yaml
+Misc updates (#7980)
+.typos.toml
+Misc updates (#7980)
+Cargo.lock
+Misc updates (#7980)
+Cargo.toml
+Misc updates (#7980)
+Dockerfile
+Container building changes (#3958)
+LICENSE.txt
+Re-License Vaultwarden to AGPLv3
+README.md
+Update crates and web-vault (#7171)
+SECURITY.md
+Define threat model (#7957)
+THREAT_MODEL.md
+Define threat model (#7957)
+build.rs
+Modernize Rust code and Fixes (#7971)
+diesel.toml
+Update Rust, Crates, GHA and fix a DNS issue (#7108)
+rust-toolchain.toml
+Modernize Rust code and Fixes (#7971)
+rustfmt.toml
+Switch to Edition 2024, more clippy lints, and less macro calls (#7200)
+Repository files navigation
+README
+AGPL-3.0 license
+Security
+An alternative server implementation of the Bitwarden Client API, written in Rust and compatible with official Bitwarden clients [disclaimer], perfect for self-hosted deployment where running the official resource-heavy service might not be ideal.
+Important
+When using this server, please report any bugs or suggestions directly to us (see Get in touch), regardless of whatever clients you are using (mobile, desktop, browser...). DO NOT use the official Bitwarden support channels.
+Features
+A nearly complete implementation of the Bitwarden Client API is provided, including:
+Personal Vault
+Send
+Attachments
+Website icons
+Personal API Key
+Organizations
+Collections, Password Sharing, Member Roles, Groups, Event Logs, Admin Password Reset, Directory Connector, Policies
+Multi/Two Factor Authentication
+Authenticator, Email, FIDO2 WebAuthn, YubiKey, Duo
+Emergency Access
+Vaultwarden Admin Backend
+Modified Web Vault client (Bundled within our containers)
+Usage
+Important
+The web-vault requires the use of HTTPS and a secure context for the Web Crypto API.
+That means it will only work if you enable HTTPS.
+We also suggest to use a reverse proxy.
+The recommended way to install and use Vaultwarden is via our container images which are published to ghcr.io, docker.io and quay.io. See which container image to use for an explanation of the provided tags.
+There are also community driven packages which can be used, but those might be lagging behind the latest version or might deviate in the way Vaultwarden is configured, as described in our Wiki.
+Alternatively, you can also build Vaultwarden yourself.
+While Vaultwarden is based upon the Rocket web framework which has built-in support for TLS our recommendation would be that you setup a reverse proxy (see proxy examples).
+Tip
+For more detailed examples on how to install, use and configure Vaultwarden you can check our Wiki.
+Docker/Podman CLI
+Pull the container image and mount a volume from the host for persistent storage.
+You can replace docker with podman if you prefer to use podman.
+docker pull vaultwarden/server:latest
+docker run --detach --name vaultwarden \
+--env DOMAIN="https://vw.domain.tld" \
+--volume /vw-data/:/data/ \
+--restart unless-stopped \
+--publish 127.0.0.1:8000:80 \
+vaultwarden/server:latest
+This will preserve any persistent data under /vw-data/, you can adapt the path to whatever suits you.
+Docker Compose
+To use Docker compose you need to create a compose.yaml which will hold the configuration to run the Vaultwarden container.
+services:
+vaultwarden:
+image: vaultwarden/server:latest
+container_name: vaultwarden
+restart: unless-stopped
+environment:
+DOMAIN: "https://vw.domain.tld"
+volumes:
+- ./vw-data/:/data/
+ports:
+- 127.0.0.1:8000:80
+Get in touch
+Have a question, suggestion or need help? Join our community on Matrix, GitHub Discussions or Discourse Forums.
+Encountered a bug or crash? Please search our issue tracker and discussions to see if it's already been reported. If not, please start a new discussion or create a new issue. Ensure you're using the latest version of Vaultwarden and there aren't any similar issues open or closed!
+Contributors
+Thanks for your contribution to the project!
+Disclaimer
+This project is not associated with Bitwarden or Bitwarden, Inc.
+However, one of the active maintainers for Vaultwarden is employed by Bitwarden and is allowed to contribute to the project on their own time. These contributions are independent of Bitwarden and are reviewed by other maintainers.
+The maintainers work together to set the direction for the project, focusing on serving the self-hosting community, including individuals, families, and small organizations, while ensuring the project's sustainability.
+Please note: We cannot be held liable for any data loss that may occur while using Vaultwarden. This includes passwords, attachments, and other information handled by the application. We highly recommend performing regular backups of your files and database. However, should you experience data loss, we encourage you to contact us immediately.
+Bitwarden_RS
+This project was known as Bitwarden_RS and has been renamed to separate itself from the official Bitwarden server in the hopes of avoiding confusion and trademark/branding issues.
+Please see #1642 - v1.21.0 release and project rename to Vaultwarden for more explanation.
+About
+Unofficial Bitwarden compatible server written in Rust, formerly known as bitwarden_rs
+Topics
+bitwarden
+bitwarden-rs
+docker
+rocket
+rust
+vaultwarden
+Resources
+Readme
+AGPL-3.0 license
+Security policy
+Security policy
+Activity
+Stars
+71.1k stars
+Watchers
+323 watching
+Forks
+3.5k forks
+Report repository
+Releases
+89
+(89)
+1.37.5
+Latest
++ 88 releases
+Sponsor this project
+dani-garciaDaniel García
+liberapay.com/dani-garcia
+https://paypal.me/DaniGG
+Learn more about GitHub Sponsors
+Used by
+490
+(490)
++ 489
+Contributors
+218
+(218)
++ 204 contributors
+Languages
+Rust
+84.6%
+Handlebars
+8.4%
+TypeScript
+4.6%
+Shell
+1%
+Jinja
+0.5%
+HCL
+0.4%
+Other
+0.5%
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information

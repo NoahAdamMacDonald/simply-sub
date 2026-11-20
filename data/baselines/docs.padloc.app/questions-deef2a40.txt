@@ -1,0 +1,51 @@
+url: https://docs.padloc.app/questions/
+method: fetch
+saved: 2026-11-20
+
+Questions & Answers
+Docs & Resources
+User Manual
+Technical Docs
+Guides & Recipes
+Questions & Answers
+What is a password manager and why should I use one?
+What's so special about Padloc?
+Why should I trust you?
+Do I have to pay to use Padloc?
+Where is my data stored?
+Wasn't this called "Padlock" before?
+Downloads
+Docs & Resources /
+Questions & Answers
+What is a password manager and why should I use one?
+We'll let our friends at the Electronic Frontier Foundation
+take this one:
+Animated Overview: Using Password Managers to Stay Safe Online
+What's so special about Padloc?
+We believe that software should not only be useful but also simple and fun to
+use. Padloc is all about simplicity and usability. We deliberately left out
+features that make other password managers unnecessarily complex and potentially
+confusing. Padloc focuses only on the most essential functionality. No
+clutter, no distractions. We also put a high value on transparency and
+actively encourage inspection and contributions by other developers.
+Why should I trust you?
+You don't have to! Padloc is completely open source and we actively
+encourage developers to inspect the source code and offer contributions. This
+not only makes it impossible for us to build in back doors but also helps to
+identify and eliminate possible security flaws quickly and efficiently.
+Do I have to pay to use Padloc?
+No. Padloc has a Free plan that allows you to store an unlimited number of items!
+Where is my data stored?
+Your data is stored in a data center located in Frankfurt, Germany (provided by
+DigitalOcean).
+Wasn't this called "Padlock" before?
+It used to be "Padlock" but along with the release of version 3.0 we decided to
+do a minor rebranding, dropping the "k" from the name to make it a little less
+generic, more memorable and frankly easier to recognize by search engines.
+Previous Article
+Guides & Recipes
+Learn about all the cool things you can do with Padloc.
+Next Article
+Downloads
+App downloads for Windows, macOS, iOS, Android and more!
+Theme: auto

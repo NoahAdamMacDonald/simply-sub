@@ -1,0 +1,426 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2, a P3 from the catalog list), read from Canada
+# with a plain fetch: its GitHub repository (github.com/dani-garcia/vaultwarden: the README, SECURITY.md, THREAT_MODEL.md,
+# LICENSE.txt, .env.template, its security advisories, and its latest release, 1.37.5: "released this 01 Nov", "Latest",
+# with "Security Fixes"), its wiki (the home page,
+# FAQs, Audits, Supporting upstream, Backing up your vault, Disable registration of new users, Enabling admin page,
+# Enabling Mobile Client push notification, Enabling SSO support using OpenId Connect, Importing data from Keepass or
+# KeepassX, Which container image to use, Updating the vaultwarden image, Hardening Guide, Translating admin page,
+# Translating the email templates, Bitwarden clients troubleshooting and others), its web vault's repository
+# (github.com/dani-garcia/bw_web_builds) and its forum's home page (vaultwarden.discourse.group); on 2026-11-20, in Edge,
+# its web vault's Crowdin project (crowdin.com/project/bitwarden-web, below). Its repository is its home: vaultwarden.org
+# and www.vaultwarden.org answer "302 Found" with "Location: https://github.com/dani-garcia/vaultwarden" (a plain fetch,
+# 2026-11-20). Not in data/queue.yaml before (source: the catalog list; bitwarden.yaml's header names it as a provider of
+# its own).
+# What it is: "An alternative server implementation of the Bitwarden Client API, written in Rust and compatible with
+# official Bitwarden clients", "perfect for self-hosted deployment where running the official resource-heavy service might
+# not be ideal." (its README). It's only the server: "Vaultwarden only provides the API (server) side implementation, so
+# users still rely on clients from upstream (mobile apps, desktop apps and the web-vault)." (Supporting upstream), and "The
+# Vaultwarden project does not, and probably will never develop a custom client." (FAQs). Its containers bundle a "Modified
+# Web Vault client", Bitwarden's web app with its patches (GPL-3.0, bw_web_builds). Formerly Bitwarden_RS ("This project
+# was known as Bitwarden_RS and has been renamed to separate itself from the official Bitwarden server").
+# Pricing: none. It's free software under the GNU AGPL (LICENSE.txt), with no account and no servers of its own
+# ("Vaultwarden has no hosted service.", SECURITY.md; "This project does not host any public Vaultwarden instance and we
+# don't endorse the use of any such site either.", FAQs), and it gives some of Bitwarden's paid features free ("Vaultwarden
+# supports some paid features and offers that functionality for free.", Supporting upstream), so its one plan is free,
+# priced for everywhere. Its README's "Sponsor this project" (GitHub Sponsors) and buying an unused Bitwarden plan ("It's
+# kind of a donation because Vaultwarden can't use the purchased license in any way.") buy nothing: no ways to pay.
+# Region checklist, 2026-11-19: not needed: one free download for every country, with no prices.
+# Bundles: none. Official resellers: none; it sells nothing. Others' packages (Arch, Debian, Fedora, Cloudron, Home
+# Assistant and more) "are not maintained or controlled by vaultwarden" (Third party packages), and public servers that
+# run it aren't the project's (FAQs, above).
+# Free use: its one plan is free.
+id: vaultwarden
+name: Vaultwarden
+aliases: [bitwarden_rs, bitwarden rs]
+website: https://github.com/dani-garcia/vaultwarden
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free, with no account with its makers. Its README is the closest page.
+cancelUrl: https://github.com/dani-garcia/vaultwarden
+sources: { pricing: https://github.com/dani-garcia/vaultwarden/wiki/Supporting-upstream }
+# Owner (M11.2), read 2026-11-19: no company. Its README says its maintainers run it and that it isn't Bitwarden's; its
+# FAQs call it "a project done by people in their spare time", and its wiki's footer says "Maintained with care by
+# @dani-garcia and contributors" (Daniel García, whose GitHub account holds the repository). No page names a company, a
+# registration or a country, so a volunteer project (Jellyfin's precedent, the owner's choice of 2026-11-11) with none.
+owner:
+  name: Vaultwarden project
+  volunteer: true
+  page:
+    name: Vaultwarden (README)
+    url: https://github.com/dani-garcia/vaultwarden
+  quotes:
+    - 'This project is not associated with Bitwarden or Bitwarden, Inc.'
+    - "The maintainers work together to set the direction for the project, focusing on serving the self-hosting community, including individuals, families, and small organizations, while ensuring the project's sustainability."
+    - 'However, one of the active maintainers for Vaultwarden is employed by Bitwarden and is allowed to contribute to the project on their own time.'
+  lastVerified: 2026-11-19
+# Source code (M11.5): the repository is its home (its README, AGPL-3.0), and its security policy says it's open source.
+# The server and its bundled web vault (bw_web_builds, GPL-3.0) are both published, so fully open.
+sourceRepo:
+  url: https://github.com/dani-garcia/vaultwarden
+  page:
+    name: Security policy
+    url: https://github.com/dani-garcia/vaultwarden/security/policy
+  quotes:
+    - 'Vaultwarden is an open source project and does not offer rewards.'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: you use Bitwarden's own apps with it ("compatible with official Bitwarden
+# clients", its README linking bitwarden.com/download/, which offers Windows, macOS and Linux desktop apps, read
+# 2026-11-19 for bitwarden.yaml), the bundled web vault ("Web interface (equivalent to https://vault.bitwarden.com/)"),
+# "Live sync (WebSocket only) for desktop/browser clients/extensions" and "Live sync ( push notifications ) for mobile
+# clients (Android/iOS)" (its wiki's home). Sign-in to your account on the server: the master password, and "Two-step login
+# via email , Duo , YubiKey , and FIDO2 WebAuthn" plus "Authenticator" (README), so totp, email-code, security-key (FIDO2
+# and YubiKey) and push-approval (Duo, as bitwarden.yaml maps it, and its notifications "carry change notifications and
+# device login requests", the threat model: Bitwarden's log in with a device); "Single Sign-On (SSO)" through any OpenID
+# Connect provider you set up ("To use an external source of authentication your SSO will need to support OpenID
+# Connect"), so sso, a second gate rather than a replacement ("A master password will still be required and not controlled
+# by the SSO"). Not passkeys: "Login with Passkeys" is under "Missing features". Support: "Have a question, suggestion or
+# need help? Join our community on Matrix, GitHub Discussions or Discourse Forums." (README), and "DO NOT use the official
+# Bitwarden support channels."; email only for security reports (SECURITY.md), so community. App languages: its Supporting
+# upstream page says "There are projects on Crowdin for each of the apps." and links their owner's Crowdin profile; the
+# project for the web vault it bundles (Bitwarden - Web, crowdin.com/project/bitwarden-web, read in Edge 2026-11-20) has
+# French 97%, German 99%, Portuguese 100% (Brazilian 99%) and Chinese Simplified 99% translated, English being the source:
+# those, at Jellyfin's threshold of 97%. Spanish (33%), Italian (57%), Japanese (44%), Korean (20%), Arabic (7%) and Hindi
+# (0%) are left out. The mobile, desktop and browser apps' projects weren't read. Its own admin page "is currently only
+# available in English" and "If you set up mail Vaultwarden will send its mails in English." Open source and
+# self-hostable: above. No pause (nothing to pay); no parental controls.
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [password, totp, email-code, security-key, push-approval, sso]
+  support.channels: [community]
+  languages.interface: [en, fr, de, pt, zh]
+  software.open-source: fully-open
+  software.self-hostable: true
+
+# Perks (M11.6): Bitwarden's paid extras it gives free, in its wiki's words ("File attachments") and, for files sent with
+# "Bitwarden Send" (its wiki), its backup guide's ("Send file attachments are not stored in database tables").
+perks:
+  - id: file-attachments
+    name: File attachments
+  - id: send-files
+    name: Files in Bitwarden Send
+
+# Password manager features, read 2026-11-19 in its README's "Features" ("A nearly complete implementation of the Bitwarden
+# Client API is provided, including:") and its wiki's "Supported features", with its threat model; only what they state
+# (they link Bitwarden's help for each, but don't list the client's options):
+# - Items: its "Personal Vault" of logins, "Bitwarden Authenticator (TOTP)" ("TOTP secrets that users store in vault items
+#   are end-to-end encrypted with the rest of the item.", its threat model), cards (its supported policy "Remove card
+#   item type") and secure notes (its .env.template's "Increase secure note size limit (Know the risks!)": "Sets the secure
+#   note size limit to 100_000 instead of the default 10_000."). Passkeys are left out: .env.template names them only in
+#   client flags under "Enable experimental feature flags for clients." ("Allow passkeys stored in the vault to be used on
+#   related origins"), and the KeePass guide only in a third-party converter's features. Identities and SSH keys are the
+#   Bitwarden client's item types no Vaultwarden page names (the flag ssh-agent-v2, "Enable newer SSH agent support.", is
+#   the desktop app's agent, not the item), so they're left out too.
+# - Sharing: "Organizations" with "Collections", "Password Sharing", "Member Roles" and "Groups" (README; "Items in assigned
+#   collections, with read_only and manage enforced by the server", threat model), and "Send", whose links expire and limit
+#   views ("Reading a Send that is disabled or expired." and "Exceeding a Send's access limits when the attacker already
+#   holds the link.", its threat model's severities). No page says a Send can have a password, so no link-password.
+# - Import: "Bitwarden can import your data from a large number of applications.", with "Keepass CSV files" and "Keepass XML
+#   files" (Importing data from Keepass or KeepassX): csv and other-managers; not kdbx. Export: "CSV formula injection
+#   (exports are built in the browser)" (threat model): csv. No page names JSON or encrypted exports.
+# - Emergency access: "Emergency Access" (README).
+# - Health reports and working offline: no Vaultwarden page names them (they're the Bitwarden client's), so left out.
+# - Authenticator: "Bitwarden Authenticator (TOTP)" (wiki), linking Bitwarden's integrated authenticator, a paid
+#   Bitwarden feature it gives free; no page says how keys come in or go out, so authenticator.import and .export are
+#   left out.
+# - End-to-end encryption: "Clients encrypt vault contents end to end." (threat model): passwords. Attachments are vault
+#   items, not a files service (bitwarden.yaml's reading).
+# - People: anyone you let in gets an account of their own on your server (inferred below), and "Vaultwarden is targeted
+#   towards individuals, families, and smaller organizations." (its wiki's home); "no cap on the number of items a user
+#   stores" (threat model).
+plans:
+  - id: vaultwarden.free
+    name: Free
+    link: https://github.com/dani-garcia/vaultwarden
+    features:
+      account.users: unlimited
+      password-manager: true
+      password-manager.item-types: [login, totp, credit-card, secure-note]
+      password-manager.sharing:
+        [share-to-user, share-vault, share-link, link-expiry, link-view-limit, role-permissions]
+      password-manager.import: [csv, other-managers]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      authenticator.included: true
+      encryption.end-to-end: [passwords]
+    inferred:
+      account.users:
+        reason: 'Anyone you let in can make an account of their own on your server: sign-ups are open unless you turn them off, and its pages set no limit on how many.'
+        page:
+          name: Disable registration of new users
+          url: https://github.com/dani-garcia/vaultwarden/wiki/Disable-registration-of-new-users
+        lastVerified: 2026-11-19
+    perks: [file-attachments, send-files]
+    notes: 'Free and open source (AGPL): a server you run yourself, usually with Docker, that you use with Bitwarden’s own apps, browser extensions and web vault. Bitwarden’s paid extras, such as attachments, emergency access and 2FA codes, are free. It isn’t Bitwarden’s: its README says to take problems to Vaultwarden, not Bitwarden. Its makers run no server for you.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://github.com/dani-garcia/vaultwarden/wiki/Supporting-upstream,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch. Vaultwarden has no terms of service, no
+# privacy policy and no sign-up with its makers: you download free software under the GNU AGPL (LICENSE.txt) and make
+# accounts on the server you run. So the topics about an account with it, its data and a contract are not-applicable, with
+# why, as for Jellyfin, KeePassXC and Aegis. Read: its README, security policy, threat model, licence, .env.template,
+# security advisories and the wiki pages in the header. Every agreement a user accepts (the owner's rule, 2026-11-03): none
+# of its own. Not rated here:
+# - Bitwarden's apps, which it relies on: Bitwarden's terms cover "the applications, software, products, and services
+#   provided by Bitwarden", but they and its privacy policy are about an account with Bitwarden and its website, which a
+#   Vaultwarden user doesn't have; they're rated in bitwarden.yaml. Whether Bitwarden's apps show its terms when you make
+#   an account on another server wasn't read (that needs a server and the apps). If you turn on phone notifications, your
+#   server gets an installation key from Bitwarden for your email address and sends through "Bitwarden's Azure
+#   Notification Hub", and Android needs Google's Firebase (Enabling Mobile Client push notification); they're off by
+#   default ("# PUSH_ENABLED=false", .env.template). The second notable tells card readers the apps are Bitwarden's.
+# - Its forum, Matrix room and GitHub Discussions have their own rules for posting there, not part of using it; the
+#   container registries' and app stores' terms weren't read.
+# Its README's disclaimer: "Please note: We cannot be held liable for any data loss that may occur while using
+# Vaultwarden. This includes passwords, attachments, and other information handled by the application. We highly
+# recommend performing regular backups of your files and database." It's the AGPL's own "WITHOUT ANY WARRANTY" in plain
+# words (no topic grades a licence's warranty, as for KeePassXC's GPL), so it isn't rated; data-portability's action
+# links the backup guide it asks you to follow.
+# Silence: no page says whether the server sends anything about its use back to its makers, or mentions ads, so those two
+# are not-stated. Its admin page's diagnostics do "some basic information gathering" and "check if an update is
+# available", and make a "Support String" for the admin to share by hand; it doesn't say what, if anything, is sent.
+policies:
+  links:
+    - name: 'Vaultwarden (README)'
+      url: https://github.com/dani-garcia/vaultwarden
+    - name: 'Security policy'
+      url: https://github.com/dani-garcia/vaultwarden/security/policy
+    - name: 'Threat model'
+      url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+    - name: 'Licence (GNU AGPL)'
+      url: https://github.com/dani-garcia/vaultwarden/blob/main/LICENSE.txt
+    - name: 'FAQs (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+    - name: 'Audits (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Audits
+    - name: 'Backing up your vault (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+    - name: 'Disable registration of new users (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Disable-registration-of-new-users
+    - name: 'Enabling admin page (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Enabling-admin-page
+    - name: 'Which container image to use (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use
+    - name: 'Updating the vaultwarden image (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Updating-the-vaultwarden-image
+    - name: 'Supporting upstream (wiki)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki/Supporting-upstream
+    - name: 'Vaultwarden wiki (home)'
+      url: https://github.com/dani-garcia/vaultwarden/wiki
+  ratings:
+    - topic: privacy.data-collection
+      status: not-stated
+      reason: 'Its pages don’t say whether the server sends anything about how it’s used back to its makers, who run no service of their own.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+        - https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+        - https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+        - https://github.com/dani-garcia/vaultwarden/wiki/Enabling-admin-page
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'Your server shares data only to do its job: it fetches icons from the sites in your vault, and gives the services you set up, such as email or phone notifications, only what each needs to work.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+          quote: "The icon cache stores website icons so that they don't need to be fetched from the login site repeatedly."
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: 'Services the operator configures (SSO provider, SMTP server, push relay, S3 endpoint, Yubico)'
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: 'What they need for their function'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      status: not-stated
+      reason: 'Its pages don’t mention ads or tracking either way. Its makers run no service of their own.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+        - https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'Its makers run no service and never receive what you store, which stays locked even from the server, so there’s nothing they could train AI on.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+        - https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your vault is locked on your device before it reaches the server, which can’t unlock it. Only whoever runs the server could get around that, by changing the web vault it sends you.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: 'Clients encrypt vault contents end to end.'
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: 'The server stores and serves ciphertext it cannot decrypt, and it never sees the master password.'
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: 'Someone who controls the server can also serve a modified web vault, so end-to-end encryption does not protect web vault users from them.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      status: not-applicable
+      reason: 'Its makers run no service, so they hold no account or vault of yours. Your vault stays on the server you run, for as long as you keep it there.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+        - https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'Its makers run no service that holds your vault. Whoever runs the server can delete any account from its admin page.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/security/policy
+          quote: 'Vaultwarden has no hosted service.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Enabling-admin-page
+          quote: 'The Vaultwarden Admin panel allows a server administrator to configure Vaultwarden, view all the registered users and organizations and also to delete them.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You hold everything: its guide shows where the server keeps every file and how to back it all up, and its web vault can export your vault as a CSV file.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+          quote: 'By default, vaultwarden stores all of its data under a directory called data (in the same directory as the vaultwarden executable).'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+          quote: 'Since version 1.32.1 there is also a built-in command to do SQLite backups:'
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: "Bugs in Bitwarden's client code, including in the web vault we bundle, such as CSV formula injection (exports are built in the browser) or a client failing on a malformed stored value."
+      action:
+        name: 'How to back up your vault'
+        url: https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-applicable
+      reason: 'Its makers run no service and hold no account or vault of yours, so they have none to hand to the police or governments. Whoever runs the server holds it.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+        - https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Your vault stays on the server you run, wherever you put it: its makers have no servers that hold it.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Backing-up-your-vault
+          quote: 'By default, vaultwarden stores all of its data under a directory called data (in the same directory as the vaultwarden executable).'
+        - url: https://github.com/dani-garcia/vaultwarden/security/policy
+          quote: 'Vaultwarden has no hosted service.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up with its makers. Accounts are on the server you run, and the email address you register with needn’t be real unless the server is set to check it.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/security/policy
+          quote: 'Vaultwarden has no hosted service.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Disable-registration-of-new-users
+          quote: 'By default, anyone who can access your instance can register for a new account.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Disable-registration-of-new-users
+          quote: 'This would prevent someone from registering with a fake email address that has the proper domain.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account with its makers and no terms of service to agree to, so no dispute clause: Vaultwarden is free software you use under the GNU AGPL.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/blob/main/LICENSE.txt
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service to change. Vaultwarden is free software under the GNU AGPL, and the copy you run stays yours under it.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/blob/main/LICENSE.txt
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no account with its makers to close: accounts are on the server you run, and whoever runs it manages them.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+        - https://github.com/dani-garcia/vaultwarden/wiki/Enabling-admin-page
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Nothing you store goes to its makers: your vault stays on the server you run, so they take no rights over it.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: great
+      reason: 'The server is free software you keep, change and share under the GNU AGPL, and it gives some of Bitwarden’s paid features free. The apps are Bitwarden’s, which can change them.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/LICENSE.txt
+          quote: 'The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure cooperation with the community in the case of network server software.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Supporting-upstream
+          quote: 'At the same time Vaultwarden supports some paid features and offers that functionality for free.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use
+          quote: 'Occasionally, the upstream Bitwarden project (i.e., Bitwarden Inc.) makes backward-incompatible changes to the clients that require matching changes to the server implementation.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no account with its makers to close for not using it; the accounts on your server are yours to manage.'
+      pages:
+        - https://github.com/dani-garcia/vaultwarden/security/policy
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'It’s open source under the GNU AGPL: anyone may read, change and share it.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/LICENSE.txt
+          quote: 'The GNU Affero General Public License is a free, copyleft license for software and other kinds of works, specifically designed to ensure cooperation with the community in the case of network server software.'
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/LICENSE.txt
+          quote: 'our General Public Licenses are intended to guarantee your freedom to share and change all versions of a program--to make sure it remains free software for all its users.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'A German institute audited its code, and you can report security flaws to its makers privately. It pays no bug bounty.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Audits
+          quote: 'a German institute performed an audit on Vaultwarden v1.30.3 under their CAOS (Codeanalyse von Open Source Software) project'
+        - url: https://github.com/dani-garcia/vaultwarden/security/policy
+          quote: 'You can open a private vulnerability report on GitHub.'
+        - url: https://github.com/dani-garcia/vaultwarden/security/policy
+          quote: 'Vaultwarden is an open source project and does not offer rewards.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Anyone you let onto your server can have an account of their own, free: it’s made for individuals, families and small groups.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Disable-registration-of-new-users
+          quote: 'By default, anyone who can access your instance can register for a new account.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki
+          quote: 'Vaultwarden is targeted towards individuals, families, and smaller organizations.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: good
+      reason: 'The server changes only when you update it, by hand or with a tool you set up. The Bitwarden apps you use with it update themselves.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Updating-the-vaultwarden-image
+          quote: 'You can also use a tool like Watchtower to automate the update process.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use
+          quote: "However, since upstream controls the release of the clients, and mobile apps and browser extensions typically auto-update on their own, it's important for Vaultwarden users to keep up-to-date with the latest Vaultwarden release."
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: You have to keep it updated
+      tier: neutral
+      reason: 'Security flaws that only affect older versions are out of its scope, and Bitwarden’s apps can stop working with an old server, so whoever runs it must keep it updated. It has no release schedule.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/blob/main/THREAT_MODEL.md
+          quote: 'Issues that only affect outdated versions.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Which-container-image-to-use
+          quote: 'Otherwise, incompatible client and server versions can lead to sudden breakage or misbehavior.'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+          quote: 'There is no release schedule for Vaultwarden.'
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Its apps are Bitwarden’s
+      tier: neutral
+      reason: 'It’s only the server: the apps, browser extensions and web vault are Bitwarden’s, and Bitwarden won’t help with problems when you use them with Vaultwarden. Its own community helps instead.'
+      sources:
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/Supporting-upstream
+          quote: 'Vaultwarden only provides the API (server) side implementation, so users still rely on clients from upstream (mobile apps, desktop apps and the web-vault).'
+        - url: https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+          quote: "If you are using Vaultwarden as your server with any official Bitwarden client, you won't be able to report this at Bitwarden as they will close that issue the moment they see your using Vaultwarden, and they are right to do so."
+        - url: https://github.com/dani-garcia/vaultwarden
+          quote: 'When using this server, please report any bugs or suggestions directly to us'
+      lastVerified: 2026-11-19

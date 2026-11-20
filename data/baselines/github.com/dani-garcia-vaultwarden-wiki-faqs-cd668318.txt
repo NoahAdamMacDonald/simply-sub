@@ -1,0 +1,518 @@
+url: https://github.com/dani-garcia/vaultwarden/wiki/FAQs
+method: fetch
+saved: 2026-11-20
+
+FAQs · dani-garcia/vaultwarden Wiki · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+dani-garcia
+vaultwarden
+Repository navigation
+Code
+Issues15 ( 15 )
+Pull requests67 ( 67 )
+Discussions
+Actions
+Wiki
+Security and quality37 ( 37 )
+Insights
+More items
+FAQs
+Jump to bottom
+Edit
+New page
+Ali Asad Lotia edited this page Sep 3, 2026
+·
+14 revisions
+Frequently Asked Questions
+Is Vaultwarden associated with the Bitwarden project or Bitwarden, Inc?
+Short answer, No.
+There sometimes is some contact between the developers of both projects, but there is no collaboration.
+Besides that, the Vaultwarden project only uses the web vault provided by Bitwarden, Inc with some patches to make it work with our implementation.
+I've found a public Vaultwarden instance. Is it associated with this project? Is it safe to use?
+This project does not host any public Vaultwarden instance and we don't endorse the use of any such site either. Cf. #3233 #4142 #4367
+I have an issue with a Bitwarden client where do i need to report this?
+If you are using Vaultwarden as your server with any official Bitwarden client, you won't be able to report this at Bitwarden as they will close that issue the moment they see your using Vaultwarden, and they are right to do so.
+To determine if the issue is server-side or client side please read the following wiki page to help both Vaultwarden and Bitwarden on determining the issue and where and how to report it.
+https://github.com/dani-garcia/vaultwarden/wiki/Bitwarden-clients-troubleshooting
+I have a feature request for the web-vault (or any other client)
+Unfortunately we can't help here. The Vaultwarden project does not, and probably will never develop a custom client.
+We try to stay as close as possible to the upstream client way of working as possible, and since we would only be able to add something to the web-vault, that might even break other clients or cause issues with keeping up-to-date with the upstream web-vault. Therefor we will not add any special or unique feature which needs to be handled client side to Vaultwarden.
+When is the next release of Vaultwarden? Can you give an ETA?
+There is no release schedule for Vaultwarden. If the maintainers have time and think a new version is warranted then it could be released immediately but given that this is a project done by people in their spare time it could also take a couple of weeks if not months before the next release.
+If you "want early access to the newest features, enhancements, or bug fixes" you can always switch to using the testing image, which is always based upon the newest commit. Cf. Which container image to use
+Can Vaultwarden connect to an Oracle MySQL V8.x database?
+Note This warning does not occur with Vaultwarden version 1.35.5 or later so change described below is no longer necessary after version 1.35.5, which supports 'caching_sha2_password'.
+It could happen that you get the following warning when trying to start Vaultwarden when using Oracle MySQL v8.x
+[vaultwarden::util][WARN] Can't connect to database, retrying: DieselConError.
+[CAUSE] BadConnection(
+"Authentication plugin \'caching_sha2_password\' cannot be loaded: /usr/lib/x86_64-linux-gnu/mariadb18/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory",
+)
+Oracle MySQL v8.x uses a more secure password hashing method by default, which is good, but currently not supported by our builds.
+You need to create the Vaultwarden user in a specific way so that it uses the old native password hashing.
+-- Use this on MySQLv8 installations
+CREATE USER 'vaultwarden'@'localhost' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
+If you already created the user and only want to change the hashing method, use the following:
+-- Change password type from caching_sha2_password to native
+ALTER USER 'vaultwarden'@'localhost' IDENTIFIED WITH mysql_native_password BY 'yourpassword';
+Also see: Using MariaDB - Create Database and User
+My client (Desktop, Mobile, Web) does not work, I can not login or it complains about invalid certificates.
+The Bitwarden clients need a secure connection to fully work without any issues. Though some clients can work without a secure connection we do not recommend this.
+Most of the time when people are using certificates and still have issues, they are using so called Self-Signed certificates. While those could provide a secure connection, some platforms do not allow or support this.
+We recommend to use a service like Lets Encrypt to provide a valid and by most devices by default accepted certificate.
+See the following page:
+Enabling-HTTPS
+Running a private vaultwarden instance with Let's Encrypt certs
+Why do I see no icons for all my vault items?
+There are multiple reasons why there is no icon shown.
+If it is just for a few of the vault items it could be that we are not able to extract it. Some sites have some protections enabled which causes our implementation to fail. Most of them require Javascript to work.
+It could also be that the Vaultwarden server is not able to access the Internet or resolve DNS queries.
+You could check the /admin/diagnostics page (See Enabling admin page) to see if you can resolve DNS queries and have a connection to the Internet.
+If that does work, there could also be a firewall or Outgoing Internet Proxy which maybe blocks these requests.
+Websocket connections show wrong IP address
+This is not something we can fix on our side. The library we use doesn't support any form of X-Forwarded-For or Forward headers.
+It will always show the IP of the reverse proxy used unless you run vaultwarden directly without any proxy, or run a transparent proxy, that could cause it to do show the correct IP. It is not an important part to log, and if you use a reverse proxy you can probably also see this request in its logs which will have the correct IP.
+Why does Vaultwarden say [INFO] No .env file found. even though I provided one?
+While launching, Vaultwarden checks for the existence of a file called .env (if not changed via the environment variable ENV_FILE) in the current working directory of the process. If you have not provided this file Vaultwarden will simply inform you that it has not found it. This file is not related to the env file you have provided to docker which loads in the environment variables on container creation or the EnvironmentFile used within a systemd .service.
+Can i run Vaultwarden as an Azure WebApp
+Unfortunately Azure WebApp's uses CIFS/Samba as their volume storage which does not support locking. This causes issues with the SQLite database file.
+There are two ways to solve this.
+Do not use SQLite, but MariaDB/MySQL or Posgresql as the database backend.
+Try to disable WAL using the ENABLE_DB_WAL environment variable by setting it's value to false. This needs to be done on a new file, so you need to remove the previously created db.sqlite3 file and restart the Vaultwarden app again.
+I did not find my answer here in the FAQ, what to do next?
+Well, please try to search and click through our wonderful Wiki.
+If that does not help you, try to look at either Github Discussions or Vaultwarden Forums.
+If that also results in no solution, you could try to search the open and closed Issues.
+If you still have not found an answer, you can start a topic on either Github Discussions or Vaultwarden Forums, or joins us in our chatroom.
+🛡️ Vaultwarden — A Bitwarden server, reimagined in Rust
+🏠 Wiki Home ·
+📖 FAQs ·
+⚙️ Configuration ·
+🔒 Hardening Guide ·
+🐳 Docker
+💬 Get in touch
+❤️ Love Vaultwarden? Consider supporting upstream Bitwarden — without their work, this project wouldn't exist.
+Vaultwarden is an unofficial, community-driven Bitwarden-compatible server. It is not associated with, endorsed by, or affiliated with Bitwarden, Inc. — "Bitwarden" is a trademark of Bitwarden, Inc.
+Maintained with care by @dani-garcia and contributors · Wiki content licensed under the project's terms
+Wiki pages
+Pages 66
+Loading
+Home
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Allow icon fetching from internal services
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Audits
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Backing up your vault
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Bitwarden Android troubleshooting
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Bitwarden clients troubleshooting
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Building binary
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Building your own docker image
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Caddy 2.x with Cloudflare DNS
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Changing persistent data location
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Changing the API request size limit
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Changing the number of workers
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Configuration overview
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Customize Vaultwarden CSS
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Deployment examples
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Differences from the upstream API implementation
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disable admin token
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disable invitations
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disable registration of new users
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disabling or overriding the Vault interface hosting
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Docker Traefik ModSecurity Setup
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enable admin page
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling admin page
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling admin page secure the admin_token
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling HTTPS
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling Mobile Client push notification
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling SSO support using OpenId Connect
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling U2F (and FIDO2 WebAuthn) authentication
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling U2F authentication
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling WebSocket notifications
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling Yubikey OTP authentication
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Fail2Ban Setup
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+FAQs
+Frequently Asked Questions
+Is Vaultwarden associated with the Bitwarden project or Bitwarden, Inc?
+I've found a public Vaultwarden instance. Is it associated with this project? Is it safe to use?
+I have an issue with a Bitwarden client where do i need to report this?
+I have a feature request for the web-vault (or any other client)
+When is the next release of Vaultwarden? Can you give an ETA?
+Can Vaultwarden connect to an Oracle MySQL V8.x database?
+My client (Desktop, Mobile, Web) does not work, I can not login or it complains about invalid certificates.
+Why do I see no icons for all my vault items?
+Websocket connections show wrong IP address
+Why does Vaultwarden say [INFO] No .env file found. even though I provided one?
+Can i run Vaultwarden as an Azure WebApp
+I did not find my answer here in the FAQ, what to do next?
+Loading
+General (not docker)
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Git hooks
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Hardening Guide
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Importing data from Keepass or KeepassX
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Kubernetes deployment
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Logging
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Logrotate example
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Migrating from MariaDB (MySQL) to SQLite
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Other configuration
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Password hint display
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Pre built binaries
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Private CA and self signed certs that work with Chrome
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Proxy examples
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Running a private vaultwarden instance with Let's Encrypt certs
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Running docker container with non root user
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Running without WAL enabled
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Setup as a systemd service
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+SMTP Configuration
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Starting a Container
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Supporting upstream
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Syncing users from LDAP
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Third party packages
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Translating admin page
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Translating the email templates
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Updating the vaultwarden image
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using an alternate base dir
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using custom website icons
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using Docker Compose
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using Podman
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using the MariaDB (MySQL) Backend
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using the MySQL Backend
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using the PostgreSQL Backend
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Which container image to use
+Uh oh!
+There was an error while loading. Please reload this page.
+Show 51 more pages…
+FAQs
+FAQs
+Audits
+Supporting upstream development
+Troubleshooting
+Logging
+Bitwarden Android troubleshooting
+Bitwarden clients troubleshooting
+Container Image Usage
+Which container image to use
+Starting a container
+Using Docker Compose
+Using Podman
+Updating the vaultwarden image
+Reverse Proxy
+Proxy examples
+Using an alternate base dir (subdir/subpath)
+HTTPS
+Enabling HTTPS
+Running a private vaultwarden instance with Let's Encrypt certs
+Configuration
+Overview
+Enabling admin page
+SMTP configuration
+Disable registration of new users
+Disable invitations
+Enabling WebSocket notifications
+Enabling Mobile Client push notification
+Enabling SSO support using OpenId Connect
+Allow icon fetching from internal services
+Other configuration
+Database
+Using the MariaDB (MySQL) Backend
+Using the PostgreSQL Backend
+Running without WAL enabled
+Migrating from MariaDB (MySQL) to SQLite
+Security
+Hardening Guide
+Password hint display
+Enabling U2F and FIDO2 WebAuthn authentication
+Enabling YubiKey OTP authentication
+Fail2Ban Setup
+Fail2Ban + ModSecurity + Traefik + Docker
+Performance
+Changing the API request size limit
+Changing the number of workers
+Customization
+Translating the email templates
+Translating admin page
+Customize Vaultwarden CSS
+Using custom website icons
+Disabling or overriding the Vault interface hosting
+Backup
+General (not docker)
+Backing up your vault
+Development
+Building binary
+Building your own docker image
+Git hooks
+Differences from the upstream API implementation
+Alternative deployments
+Pre-built binaries
+Creating a systemd service
+Third-party packages
+Deployment examples
+Kubernetes deployment
+Disable the admin token
+Other Information
+Importing data from Keepass or KeepassX
+Changing persistent data location
+Syncing users from LDAP
+Caddy 2.x with Cloudflare DNS
+Logrotate example
+Clone this wiki locally
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

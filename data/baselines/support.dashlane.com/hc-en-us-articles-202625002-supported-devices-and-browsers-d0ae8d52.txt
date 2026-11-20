@@ -1,0 +1,115 @@
+url: https://support.dashlane.com/hc/en-us/articles/202625002-Supported-devices-and-browsers
+method: fetch
+saved: 2026-11-20
+
+Supported devices and browsers – Dashlane
+×
+To get the latest security improvements, keep Dashlane up to date.
+See the latest versions
+Learn how to update
+☰
+Ask a question
+Get help
+English (United States)
+Deutsch
+Español
+Français
+Home
+Admin Help Center
+How to get help with Dashlane
+×
+Loading help options…
+For users
+For admins
+×
+Home
+Manage your account
+Updates and requirements
+Supported devices and browsers
+Supported devices and browsers
+For all plans
+Supported devices and browsers
+Updated November 16, 2026 10:25
+To use Dashlane, your computer, phone, or tablet needs a recent operating system. If you use Dashlane in a browser, you also need a recent version of your browser. We call these versions the minimum requirements.
+Note: We can't guarantee that Dashlane works as intended with beta or developer versions of operating systems and browsers. We support only official, stable versions that meet the minimum requirements.
+Why do I need a recent version of the Dashlane app?
+We release a new version of the browser extension and the Android app every week. We release a new version of the iPhone, iPad, and macOS apps every two weeks.
+Each version can include new features, bug fixes, and security improvements.
+To keep your data secure, we deactivate versions of Dashlane that are more than 12 months old. After we deactivate a version, you need to update Dashlane to keep access to your account.
+To see which versions expire soon, check the releases from about one year ago in our release notes.
+Dashlane release notes
+Find out what version of Dashlane you're using
+Update your Dashlane app
+What if I can't update my Dashlane app?
+We release most updates gradually, so a new version can take up to 14 days to reach your device. If you don't see an update yet, wait a few days and try again.
+If you still can't update, update the operating system of your device and your browser. Then try to update Dashlane again.
+If you get a message that says Dashlane might stop working soon, your device might be too old for a supported operating system. In this case, you need to use Dashlane on another device with a more recent operating system.
+Update Dashlane
+What operating systems and browsers can I use with Dashlane?
+What versions of my device or browser work with Dashlane?
+Select the Dashlane app you're using to see the versions you need.
+Web
+Android
+Apple
+What operating systems can I use with the Dashlane browser extension?
+Your operating system, or OS, is the software that manages the basic functions of your computer. Companies release new versions of their OS every few months.
+If you use Chrome, Microsoft Edge, Firefox, or another Chromium browser, you can use any OS that lets you update both your browser and the Dashlane extension.
+If you use Safari, you need one of the last two major versions of macOS.
+See browser requirements
+Update your Mac operating system
+What browsers can I use with the Dashlane browser extension?
+You can use the Dashlane extension with the latest versions of these browsers:
+Google Chrome
+Firefox
+Safari
+Microsoft Edge
+Other Chromium browsers
+Chromium-based AI browsers like Perplexity's Comet, OpenAI's ChatGPT Atlas, and Atlassian's Dia
+You can use most Dashlane features in AI browsers, such as your vault, autofill, and security alerts. For security reasons, the AI agent of the browser can't use data from your vault when it completes tasks for you.
+You can't use the Dashlane extension with DuckDuckGo because DuckDuckGo doesn't support extensions.
+Notes:
+You need one of the last two major versions of your browser. If the latest version of your browser is 142, you can use any version that starts with 141 or 142.
+To check your browser version and update your browser, go to the support site for your browser:
+Google Chrome | Mozilla Firefox | Microsoft Edge | Safari | Opera
+You can’t install the Dashlane extension on your phone or tablet. To use Dashlane on a mobile device, install our app.
+Install Dashlane for Android
+Install Dashlane for iPhone or iPad
+What versions of Android can I use with the Dashlane Android app?
+You need Android 10.0 or later on your phone or tablet to use the Dashlane Android app and get the latest updates.
+You can also use Dashlane on e-readers with Android 10.0 or later, such as Barnes & Noble Nook. You can't use Dashlane on Kindle devices, which use the Amazon Fire OS.
+Dashlane no longer supports Android 8 and 9. You can't update or use Dashlane on devices with these versions.
+Install Dashlane from Google Play
+Check & update your Android version
+What if I can't update my Dashlane app?
+What operating systems can I use with Dashlane on Apple devices?
+Important: Dashlane supports only the last two major versions of macOS, regardless of the browser you use. Dashlane supports only the last two major versions of iOS and iPadOS.
+Your operating system, or OS, is the software that manages the basic functions of your computer, tablet, or phone. Apple releases new versions of macOS, iOS, and iPadOS every few months.
+If you can't update macOS, use the Dashlane extension in another browser, such as Chrome, Firefox, or Edge.
+Note: Sometimes we release a version with important bug fixes. When the version is available in the App Store, Dashlane shows a message that prompts you to update. The message stays visible until you update to the latest version.
+Update your Mac operating system
+Get started with Dashlane and the browser extension
+Update your iPhone or iPad
+What if I can't update Dashlane?
+You can access Dashlane on visionOS, but autofill isn't available. We don't currently offer support for visionOS devices.
+Was this article helpful?
+Yes No
+994 out of 2504 found this helpful
+Have more questions? Submit a request
+Back to Top
+Dashlane.com
+Resource library
+Developer resources
+Blogs
+Dashlane plans
+Partner portal
+System Status: View system status
+Log in to Dashlane
+Get Dashlane
+Stay in touch
+© Dashlane Inc. All rights reserved.
+Dashlane and the Dashlane logo are trademarks of Dashlane SAS, registered in the U.S. and other countries.
+Terms
+Privacy
+Legal
+ACCESSIBILITY STATEMENT
+Powered by Zendesk

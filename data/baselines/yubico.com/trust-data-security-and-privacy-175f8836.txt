@@ -1,0 +1,126 @@
+url: https://www.yubico.com/trust/data-security-and-privacy/
+method: fetch
+saved: 2026-11-20
+
+Data Security and Privacy | Yubico
+OpenAI mandates hardware-backed passkeys for Trusted Access for Cyber members. Read more.
+Skip to content
+English Français Deutsch 日本語 Español Svenska
+Investors
+Contact Sales
+Partners
+Support
+About Products Enterprise Resources Solutions
+0
+All YubiKeys
+Compare YubiKeys
+What is a YubiKey?
+Set up your YubiKey
+YubiKey 5 Series
+Learn more
+Buy
+YubiKey 5 FIPS Series
+Learn more
+Buy
+YubiKey Bio Series
+Learn more
+Buy
+Security Key Series
+Learn more
+Buy
+YubiHSM 2 & YubiHSM 2 FIPS
+Learn more
+Buy
+Accessories
+Buy
+Data security and privacy
+Data Protection
+Our customers’ data is important. Although the amount of data we handle is minimal, the type is sensitive and important. Data is protected throughout its lifecycle using industry best practices. Yubico uses a carefully selected range of methods to protect the information we store, including disk encryption, Pretty Good Privacy (PGP), Hardware Security Modules (HSMs), and a variety of platform security solutions offered by Google Cloud Platform (GCP), and Amazon Web Services (AWS).
+Transport Layer Security (TLS) is used for encryption to protect information in transit. Where possible, TLS connections are mutually authenticated, to ensure that the identity of both the server and the client are verified prior to allowing access to that data. Multi Factor authentication with YubiKeys is used anywhere an employee can interact with systems handling customer data.
+Yubico also uses shared responsibility and least privilege models to minimize the opportunities for abuse and unauthorized access. Administrative actions are immutably logged in a central location and monitored by multiple groups within Yubico. Alerts are used to report on anomalies and reviewed by Yubico’s operations and security team.
+Privacy
+Your privacy is important to us. We always strive to minimize the information we collect and remove that information when it is no longer required. We also limit where this information is stored and who has access to it.
+Our practices comply with:
+General Data Protection Regulation (GDPR)
+the California Consumer Privacy Act (CCPA)
+in addition to other legal requirements. Details about our privacy practices can be found at https://www.yubico.com/support/terms-conditions/privacy-notice/.
+Data Retention and Removal
+Yubico retains data only as long as necessary to operate our business and to comply with statutory and regulatory requirements. We do not use this data for any purposes other than the purpose for which it was collected to begin with.
+Yubico follows NIST 800-88 to sanitize or destroy physical media.
+Physical Security
+Yubico’s services are deployed across cloud services providers and colocation facilities for YubiHSM-backed services.
+We secure our colocated infrastructure in locked cages monitored 24x7x365. Access to these data centers requires two-factors of authentication at a minimum. Our colocation vendors publish a SOC-1 Type II report that attests to their ability to physically secure our infrastructure. Only Yubico personnel and employees of the colocation vendors have physical access to this infrastructure.
+For our cloud services, we use Google Cloud Platform (GCP) and Amazon Web Services (AWS). Google and Amazon have both undergone multiple certifications that attest to their ability to physically secure Yubico’s services. You can read more about Google Cloud Platform’s security here and Amazon Web Services’ here.
+Access to Yubico’s key programming facilities is restricted to only the Yubico personnel that require access. Access is logged and monitored.
+SOC 2 Type II
+The SOC 2 Type II is an attestation by a third party that validates the requirements and guidance for reporting on controls at a service organization relevant to an organization’s internal control over information security. By engaging an independent CPA to examine and report on a service organization’s controls, service organizations can obtain an objective evaluation of the effectiveness of controls that address operations and compliance.
+Yubico successfully completed a SOC 2 Type II examination, conducted by Schellman & Company, LLC, for YubiEnterprise Services, encompassing YubiEnterprise Delivery and YubiEnterprise Subscription. The examination reviewed the security controls for YubiEnterprise Services and found them to be “suitably designed” and “operated effectively”. The effort to complete the SOC examination represents a maturity milestone for Yubico and its service offerings. With it, Yubico continues operations as responsible stewards of our customers’ sensitive data while providing best of class services.
+Additional annual third-party penetration tests and code reviews are conducted on Yubico Enterprise Services to ensure the security and resilience of the service.
+Data Security and Privacy Portal
+To learn more about the data and privacy program at Yubico, as well as to request compliance artifacts, please visit https://trust.yubico.com/Yubico.
+Join our newsletter
+Distributed monthly, it includes product news, new applications, case studies, events, and
+discounts. Unsubscribe anytime.
+By subscribing you agree to our Privacy Policy.
+Subscribe
+About us
+About us
+The team
+Innovation history
+Secure it forward program
+Yubico blog
+Press Room
+Events
+Partner programs
+Careers
+Investors
+Products
+YubiKey 5 Series
+YubiKey 5 FIPS Series
+Security Key Series
+YubiKey Bio Series
+YubiHSM 2 & YubiHSM 2 FIPS
+Accessories
+Yubico Authenticator
+Computer login tools
+Software Development kits
+Enterprise
+YubiKey as a Service
+Delivery
+Contact Sales
+Enrollment
+Professional Services
+Solutions
+All Solutions
+Initiatives
+Industries
+Use cases
+Technologies
+Resources
+Setting up your YubiKey
+Find the right YubiKey
+Works with YubiKey Catalog
+What is a YubiKey
+Case studies
+Webinars
+White papers and reports
+Documentation
+All downloads
+Support Home
+Support services
+Buying and shipping information
+Social
+LinkedIn
+YouTube
+Instagram
+X
+Facebook
+English Français Deutsch 日本語 Español Svenska
+Sitemap
+Cookies
+Legal
+Privacy
+Terms of use
+Accessibility
+Legal Imprint
+EU Right of Withdrawal

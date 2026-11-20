@@ -1158,6 +1158,16 @@ policies:
       lastVerified: 2026-11-19
     - topic: service.account-sharing
       tier: great
+      reason: 'Its terms let you give your password to anyone you want to see your files, as long as they accept its terms; you answer for what they do.'
+      sources:
+        - url: https://ente.com/terms
+          quote: "SUBSCRIBERS MAY NOT SHARE THEIR PASSWORD OR RECOVERY KEYS WITH ANYONE ELSE UNLESS THEY WISH THEM TO HAVE ACCESS TO SUBSCRIBERS' DATA AND FILES."
+        - url: https://ente.com/terms
+          quote: "If a Subscriber allows others (Authorized Persons) to access Subscriber's data (e.g. via any of the sharing features such as public links within Ente), (i) the Authorized Person must accept these Terms, (ii) the Subscriber will be responsible for actions and omissions of the Authorized Persons while they are using our Services"
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [ente.photos-starter, ente.photos-popular, ente.photos-pro, ente.photos-pro-plus]
+      tier: great
       reason: 'A paid plan can be shared with up to 5 other people, each with their own private account, at no extra cost.'
       sources:
         - url: https://ente.com/help/photos/faq/storage-and-plans

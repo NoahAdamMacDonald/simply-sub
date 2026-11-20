@@ -1,0 +1,34 @@
+url: https://help.keeper.io/article/159-how-do-i-sign-up-for-keeper
+method: fetch
+saved: 2026-11-20
+
+How do I sign up for Keeper? - Keeper Security, Inc Knowledge Base
+Toggle Navigation
+Contact
+Contact
+How do I sign up for Keeper?
+Creating a Keeper account takes less than 2 minutes.
+Signing up for an Individual (Personal) plan: Go to the Web Vault or open the mobile app, enter your email address, and follow the prompts. You'll be asked to create a Master Password, this is the only password you need to remember, so choose something strong that you'll remember, and don't forget it.
+Signing up for a Family Plan: Purchase the Family Plan from keepersecurity.com, which creates the primary account the same way as above. Once you're signed up, you can invite up to 4 additional family members from your Account Dropdown Menu, see "How do I invite members to Family Plan?" for the exact steps.
+Signing up on mobile: The mobile app (iOS or Android) walks you through the same steps as the Web Vault, just tap to enter your email and create your Master Password when prompted.
+Still need help?
+Contact Us
+Contact Us
+Last updated on August 10, 2026
+Toggle Search
+Categories
+Keeper PAM
+Account Management
+SSO/SCIM Provisioning
+Using the App
+Technical Issues
+Admin Console
+MSP
+Keeper Automator
+Billing Issues
+General Questions
+Security
+No results found
+©
+Keeper Security, Inc
+2026. Powered by Help Scout

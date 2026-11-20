@@ -328,6 +328,8 @@ policies:
       url: https://bitwarden.com/help/payment-methods/
     - name: 'Pricing'
       url: https://bitwarden.com/pricing/
+    - name: 'Bitwarden Authenticator'
+      url: https://bitwarden.com/products/authenticator/
     - name: 'Cancel a subscription'
       url: https://bitwarden.com/help/cancel-a-subscription/
     - name: 'Premium renewal'
@@ -600,14 +602,27 @@ policies:
           quote: 'Bitwarden is SOC2 Type II and SOC3 certified.'
       lastVerified: 2026-11-19
     - topic: service.account-sharing
+      tier: bad
+      reason: 'Your login is for you alone: its terms say one login can’t be shared by several people. Families gives six people a login each instead.'
+      sources:
+        - url: https://bitwarden.com/terms/
+          quote: 'Your login may only be used by one person — i.e., a single login may not be shared by multiple people.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [bitwarden.families]
       tier: great
       reason: 'Families covers you and any five other people, friends or family, each with a login of their own.'
       sources:
         - url: https://bitwarden.com/help/password-manager-plans/
           quote: 'Start a Families organization to share private data between you and five friends or family members.'
-        - url: https://bitwarden.com/terms/
-          quote: 'Your login may only be used by one person — i.e., a single login may not be shared by multiple people.'
       lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [bitwarden.authenticator]
+      status: not-applicable
+      reason: 'There’s no account to share: Bitwarden Authenticator is a free standalone app on your phone.'
+      pages:
+        - https://bitwarden.com/products/authenticator/
+      lastVerified: 2026-11-20
     - topic: service.software-control
       tier: good
       reason: 'Its apps update themselves, except the portable Windows version, and its pages mention no other changes to your device.'

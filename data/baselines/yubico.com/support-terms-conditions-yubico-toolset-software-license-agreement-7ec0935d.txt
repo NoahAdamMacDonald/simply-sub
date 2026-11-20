@@ -1,0 +1,138 @@
+url: https://www.yubico.com/support/terms-conditions/yubico-toolset-software-license-agreement/
+method: fetch
+saved: 2026-11-20
+
+Yubico Toolset Software License Agreement | Yubico
+OpenAI mandates hardware-backed passkeys for Trusted Access for Cyber members. Read more.
+Skip to content
+English Français Deutsch 日本語 Español Svenska
+Investors
+Contact Sales
+Partners
+Support
+About Products Enterprise Resources Solutions
+0
+All YubiKeys
+Compare YubiKeys
+What is a YubiKey?
+Set up your YubiKey
+YubiKey 5 Series
+Learn more
+Buy
+YubiKey 5 FIPS Series
+Learn more
+Buy
+YubiKey Bio Series
+Learn more
+Buy
+Security Key Series
+Learn more
+Buy
+YubiHSM 2 & YubiHSM 2 FIPS
+Learn more
+Buy
+Accessories
+Buy
+Home / Support / Terms and conditions / Yubico Toolset Software License Agreement
+Yubico Toolset Software License Agreement
+This Yubico Toolset Software Agreement (the “Agreement”) is a legally binding agreement between Yubico AB reg. No. 559278-6668, a limited liability company incorporated under the laws of Sweden, with address Gävlegatan 22, 113 30 Stockholm, Sweden (“Yubico“) and the legal entity you represent (“You”) and governs the Yubico software libraries and tools that accompany this Agreement or have referenced this Agreement for governing their usage (any such software libraries and tools collectively shall be referred to as “Software”).
+Yubico is willing to license the Software, Yubico trademarks and other documentation described below to You only on the condition that You accept and agree to all of the terms and conditions in this Agreement. By installing, downloading or otherwise using the Software You acknowledge and agree, that You have read this agreement, understand it and agree to be bound by its terms and conditions.
+If You do not agree to these terms and conditions You may not commence any installation process and You shall not use the Software or retain any copies of the Software or documentation, even if You have in any manner come into possession thereof, and Yubico does not license the Software, Yubico trademarks or any documentation to You. Any use or possession of the Software, Yubico trademarks and/or documentation by You is subject to the terms and conditions set forth in this agreement.
+Each of Yubico and You is hereinafter referred to as a “Party” and, jointly, as the “Parties”.
+Use of the Software
+Subject to the terms and conditions of this Agreement, Yubico grants to You a limited, non-exclusive, non-sublicensable, non-transferrable, royalty-free, license to use the Software globally during the term of this Agreement in the specific code formats provided by Yubico (i.e. if the Software only includes software available in object code, then You shall only use such software in object code format), solely for the purpose of using the Software with Yubico products and services and/or to enable the usage of Yubico products and services. For the avoidance of doubt, you may use the Software in production as part of your own software for the purposes of enabling the usage of Yubico products and services, however you shall not resell, lease or otherwise attempt to monetize the Software on a standalone basis or other similar manner of monetizing the Software as a primary purpose of use.
+Subject to the terms and conditions of this Agreement, Yubico also grants to You a right to use the Yubico trademarks and logotypes “Yubico” and “YubiKey” (“Yubico Trademarks”) in connection with use of the Software in its applications and in accordance with the Yubico Brand Guidelines or any other written or published instructions issued by Yubico from time to time.
+In no event may You disclose to a third party, modify, copy, export, re-export, sublicense, sell, rent, lease, commercialize, or use the Software in any manner that is not expressly permitted under this Agreement or which would be inconsistent with this Agreement. You may reproduce the Software, provided that You reproduce only complete copies, including without limitation all “read me” files, copyright notices, and other legal notices and terms that Yubico has included. To the extent permitted by applicable mandatory law, You undertake not (or attempt to) itself or permit others to reverse engineer, reverse compile, or disassemble the Software or any part thereof.
+All intellectual property rights of Yubico shall at all times be the exclusive property of Yubico, including, but not limited to, Yubico’s intellectual property rights in the Software and the Yubico Trademarks. Nothing in this Agreement shall constitute or be construed as a transfer of ownership of the intellectual property rights of Yubico or to otherwise give You any proprietary rights in Yubico’s intellectual property rights, including, but not limited to, Yubico’s intellectual property rights in the Software and the Yubico Trademarks. Except as expressly set forth in this Agreement, You shall have no right to use Yubico’s intellectual property rights, including, but not limited to, Yubico’s intellectual property rights in the Software and the Yubico Trademarks.
+You shall not use the Software or the Yubico Trademarks in connection with any content which in Yubico’s opinion is illegal, obscene, threatening, defamatory, invasive of privacy, religious sensitivity, infringing of intellectual property rights, injurious to third parties or objectionable. You also shall not include ads on any page upon which the Yubico Trademarks are displayed.
+You may elect to provide Yubico with ideas or suggestions, however submitted, under this Agreement for the purpose of improving the Software (hereinafter “Feedback”). Yubico will be free to exploit and disclose any Feedback on an unrestricted basis without having to notify or compensate You. You release Yubico from all liability and obligations that may arise from the receipt, review, use, distribution, disclosure or sublicensing of any portion of any Feedback in connection with the Software.
+Your use of any Yubico products and services, and the use of the Yubico services by anyone hosting or using Your application, is governed by the then-current terms and conditions located at https://www.yubico.com/support/terms-conditions/. If the Software for which You are granted rights hereunder make use of any Yubico services (as governed by the applicable terms and conditions), then those Software rights are granted subject to Your compliance with the applicable terms and conditions.
+Yubico is not obligated to provide any technical or other support (“Support Services”) for the Software. However, if Yubico chooses to provide any Support Services to You, Your use of such Support Services will be governed by then-current Yubico policies.
+Yubico may decide in the future to charge for use of the Software and/or Support Services. If Yubico in its sole discretion chooses to establish fees and payment terms for such use, Yubico will provide notice of such terms as provided in Section 6.1 below, and You may elect to stop using the Software and/or Support Services rather than incurring fees.
+Use, reproduction and distribution of components of the Software licensed under an open source software license are governed solely by the terms of that open source software license and not this Agreement.
+Use of Personal Data
+You shall (i) where required by applicable law to provide to the end users a publicly available and easily accessible privacy policy that explains the data that You will collect and how You will process such data and comply with such privacy policy; (ii) comply with applicable data protection laws; (iii) implement and maintain administrative, organizational, physical and technical safeguards that prevent any unauthorized collection, use, disclosure of, or access to personal data; and (iv) upon an end user’s request delete all personal data relating to such end user.
+You shall indemnify and hold Yubico harmless from any claims, costs, expenses, damages and/or losses resulting from a third party claiming that personal data processed by You under this Agreement violates Your privacy policy or applicable data protection laws or does not comply with any obligations regarding the processing of personal data set out herein.
+No Warranties and Limitation of Liability
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, YUBICO MAKES NO WARRANTY OR REPRESENTATION, EITHER EXPRESSED OR IMPLIED WITH RESPECT TO PROVISION OR USE OF THE SOFTWARE OR THE YUBICO TRADEMARKS, THEIR QUALITY, PERFORMANCE, DATA ACCURACY, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON- INFRINGEMENT OF THIRD-PARTY RIGHTS. AS A RESULT, THE SOFTWARE AND THE YUBICO TRADEMARKS ARE PROVIDED “AS IS” AND YOU ARE ASSUMING THE ENTIRE RISK AS TO THEIR QUALITY AND PERFORMANCE.
+TO THE EXTENT NOT PROHIBITED BY APPLICABLE LAW, YOU EXPRESSLY AGREE THAT YUBICO SHALL IN NO EVENT BE LIABLE FOR ANY DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO DAMAGES FOR LOSS OF PROFITS, DATA AND GOODWILL, ARISING OUT OF THIS AGREEMENT. THIS LIMITATION SHALL APPLY EVEN IF YUBICO KNEW OR SHOULD HAVE KNOWN ABOUT THE POSSIBILITY OF THE DAMAGES.
+Confidentiality
+The Software (including as embodied in or utilized by any application) is the confidential and proprietary information of Yubico, and You may not, during the term or thereafter, disclose it to any third party, or to use it for any purpose other than as expressly provided herein, without a separate written agreement with Yubico authorizing You to do so.
+Term and Termination
+This Agreement shall be effective upon acceptance by You and shall continue until terminated. You may terminate the Agreement at any time by deleting and destroying all copies of the Software and all related information in Your possession or control. This Agreement terminates immediately and automatically, with or without notice, if You fail to comply with any provision hereof.
+Yubico may at any time terminate this Agreement, either with or without cause, upon notice to You. Upon termination You must immediately terminate any use of the Software and the Yubico Trademarks and permanently delete or destroy all copies of the Software, Yubico Trademarks and other Yubico data and documentation in Your possession, and the license and other rights granted to You in this Agreement shall terminate.
+Miscellaneous
+Yubico reserves the right to amend this Agreement at any time by providing prior written notice to You via email, by posting notice of the change or other means of communication. To the extent that such amendments are detrimental to You, You shall be entitled to terminate the Agreement by providing written notice to Yubico. Your continued use of the Software following expiry of a period of 30 days from Yubico’s notification shall be deemed as an acceptance by You of any such amendments.
+No Party may assign, or otherwise transfer or pledge or grant any other security interest in or over any of its rights and/or obligations under this Agreement, without the prior written consent of the other Party. However, Yubico may assign its rights and/or obligations under this Agreement to any legal entity which directly or indirectly controls, is controlled by or under common control with Yubico.
+You undertake to comply with all national and international export control laws and regulations relating to the licensed technology which may include restrictions on destinations, end users and end use.
+Nothing in this Agreement is intended to or shall operate to create a partnership between the Parties, or to authorize either Party to act as agent for the other, and neither Party shall have authority to act in the name or on behalf of or otherwise to bind the other in any way (including but not limited to the making of any representation or warranty, the assumption of any obligation or liability and the exercise of any right or power).
+In the event a term or provision in this Agreement is found to be invalid, illegal or otherwise unenforceable, the same shall not affect the other terms or provisions of the whole of this Agreement, but shall be deemed modified to the extent necessary to render it enforceable, and the rights and obligations of the Parties shall be construed and enforced accordingly, preserving to the fullest extent permissible the intent of the Parties as agreed within this Agreement.
+If You acquired the Software in the United States, California state law governs the interpretation of this Agreement, regardless of conflict of laws principles, and in such case all actions and proceedings relating directly or indirectly to this Agreement shall be litigated in courts located within California, and that the exclusive venue therefor shall be Santa Clara County. If You acquired the Software in any other country this Agreement shall be governed by the substantive laws of Sweden and the exclusive venue shall in such case be Stockholm, Sweden with Stockholm District Court as the court of first instance.
+The Parties agree that the International Convention on Sale of Goods (CISG) shall not apply to the Agreement.
+BY USING OR DOWNLOADING THE SOFTWARE YOU REPRESENT, WARRANT AND CERTIFY THAT: YOU ARE AN AUTHORIZED REPRESENTATIVE OF THE LEGAL ENTITY YOU REPRESENT; YOU HAVE READ THIS AGREEMENT AND UNDERSTAND IT; YOU HAVE THE AUTHORITY TO BIND THE LEGAL ENTITY YOU REPRESENT TO THE TERMS AND CONDITIONS OF THIS AGREEMENT; AND YOU AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
+Join our newsletter
+Distributed monthly, it includes product news, new applications, case studies, events, and
+discounts. Unsubscribe anytime.
+By subscribing you agree to our Privacy Policy.
+Subscribe
+About us
+About us
+The team
+Innovation history
+Secure it forward program
+Yubico blog
+Press Room
+Events
+Partner programs
+Careers
+Investors
+Products
+YubiKey 5 Series
+YubiKey 5 FIPS Series
+Security Key Series
+YubiKey Bio Series
+YubiHSM 2 & YubiHSM 2 FIPS
+Accessories
+Yubico Authenticator
+Computer login tools
+Software Development kits
+Enterprise
+YubiKey as a Service
+Delivery
+Contact Sales
+Enrollment
+Professional Services
+Solutions
+All Solutions
+Initiatives
+Industries
+Use cases
+Technologies
+Resources
+Setting up your YubiKey
+Find the right YubiKey
+Works with YubiKey Catalog
+What is a YubiKey
+Case studies
+Webinars
+White papers and reports
+Documentation
+All downloads
+Support Home
+Support services
+Buying and shipping information
+Social
+LinkedIn
+YouTube
+Instagram
+X
+Facebook
+English Français Deutsch 日本語 Español Svenska
+Sitemap
+Cookies
+Legal
+Privacy
+Terms of use
+Accessibility
+Legal Imprint
+EU Right of Withdrawal

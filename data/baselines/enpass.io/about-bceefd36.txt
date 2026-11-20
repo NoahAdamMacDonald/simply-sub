@@ -1,0 +1,138 @@
+url: https://www.enpass.io/about/
+method: fetch
+saved: 2026-11-20
+
+About Enpass: Why We Built a Password Manager You Can Trust
+Skip to content
+Business Plans
+Business
+Enterprise
+Compare plans and pricing
+For IT & security teams
+Admin Console
+SCIM provisioning
+SIEM integrations
+Policy enforcement
+Passkeys for Business
+Work with your stack
+Microsoft 365
+Google Workspace
+Latest from Enpass
+What Should a CIO Look for in an Enterprise Password Manager?
+Personal Plans
+Personal
+Get Enpass through work
+Features
+Password Generator
+Passkeys
+Autofill
+Security Dashboard
+Get set up
+Downloads
+Move to Enpass
+Fix Compromised Passwords
+Latest from Enpass
+What Should a CIO Look for in an Enterprise Password Manager?
+Why Enpass
+Pricing
+Resources Insight
+Blog
+FAQs
+Security & Trust
+Compliance & Accrediations
+Security whitepaper
+See all comparisons
+Security Dashboard
+Support
+Help Center
+Community Forum
+Contact Support
+Press Center
+Newsroom
+Media Kit
+Latest from Enpass
+What Should a CIO Look for in an Enterprise Password Manager?
+Get started here
+Talk to sales
+X
+Get started here
+Talk to sales
+Every Password Manager Asked Us to Give Up Control. So We Built One That Didn't
+Enpass was built with a mission: to provide complete control of the most sensitive data, without the cost or complexity of self-hosting.
+Download
+See Pricing
+It all started with a problem
+When Hemant (CEO) and Vinod (CTO) were working as consultants and evaluating password managers, they found something fundamentally broken: every option asked them to hand over their data sovereignty in exchange for convenience.
+Hemant and Vinod wanted full control of their password data without taking on the cost and complexity of self-hosting their own infrastructure. So they built a password manager that delivered this. When they shared it with colleagues, the response was immediate: people recognized the same problem and the same relief at finally solving it.
+That's how Enpass was born.
+Enpass has since grown into a multinational tech company headquartered in Wilmington, Delaware, with offices across the US, India, UK, Ireland, Belgium, Indonesia, Japan, and Singapore. We’re trusted by Fortune 500 companies and government organizations, with a core strength in regulated industries like financial services, healthcare, and manufacturing.
+Our Values
+Control
+Enpass is the only password manager where you maintain 100% control of your data, 100% of the time, in your own Microsoft 365, Google Workspace, or other trusted environment. It's true data sovereignty without the hassle of self-hosting.
+Compliance
+Most password managers treat compliance as a checklist to complete after the fact. Enpass treats it as an architectural default – because when your data never leaves your own infrastructure, there's nothing to retrofit, no policy exception to chase, and no new risk to explain.
+Confidence
+Hackers can’t breach what was never there. You can be completely confident in your password security because Enpass never touches your data.
+Convenience
+The best password manager is the one nobody notices – until it saves them time. Enpass deploys fast, works flawlessly across every device and browser, and gives you advanced centralized admin capabilities that make management easy.
+Learn More
+Security and trust
+We use industry-standard AES-256 encryption with 320,000 PBKDF2 rounds, built on the open source SQLCipher encryption engine.
+For certifications, audit reports, and full compliance documentation, visit our Trust Center.
+ISO 27001:2022
+SOC 2 Type II Audited
+GDPR Compliant
+Compliance and accreditations
+Meet our leadership team
+Enpass is built by a team of engineers and security professionals who share a key conviction: password management should never come at the cost of control.
+Hemant Kumar
+CEO, Co-founder
+LinkedIn
+Vinod Kumar
+CTO, Co-founder
+LinkedIn
+Rated 4.3 star on App Store and 4.1 star on Play App
+Rated 4.6 star on G2, 4.7 star on Capterra and 4.3 star on GetApp
+Recently mentioned by top media publications
+Switch to Enpass
+Take control of your passwords – without giving up control of your data.
+Explore Business
+Explore Enterprise
+Explore Personal
+Want to receive news and updates?
+Subscribe
+By subscribing, you agree to our Terms of Use and Privacy Notice. We do not send more than one email a month about the latest news of Enpass, special promotions and sneak peek of future releases.
+Connect with us on social media
+Explore
+Business
+Enterprise
+Personal
+Microsoft 365 Integration
+Google Workspace Integration
+Affiliate Program
+Partners Program
+Beta Program
+Students
+Features
+Autofill
+Passkeys
+Password Generator
+Security Dashboard
+Moving to Enpass
+Compromised Passwords
+Resources
+Blog
+Choosing Enpass
+Downloads
+Security
+Security Whitepaper
+Press: Resources
+Passkeys Catalogue
+Company
+About
+Privacy Notice
+Cookie Policy
+Terms of Use
+Copyright © 2026 Enpass Technologies Inc.
+Terms of Use
+Privacy Notice

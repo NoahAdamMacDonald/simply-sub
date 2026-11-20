@@ -1,0 +1,44 @@
+url: https://help.twilio.com/articles/19753646900379
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+Enable or Disable Authy Multi-Device
+Objective
+The Authy Multi-Device feature allows you to sync your account and 2FA tokens across multiple trusted devices, such as a phone and a tablet. This guide explains how this feature works and how to manually toggle it.
+By default, Multi-Device is enabled when you first create an account, allowing you to easily add a secondary device as a backup. To do this, simply install Authy on the new device, enter your phone number, and approve the access request from your original device.
+⚠️ Note: For tokens to successfully sync between your devices, you must have Authy backups enabled.
+We strongly recommend keeping a backup device registered. If you lose or break your primary phone, having a secondary linked device ensures you never get locked out of your 2FA-secured accounts.
+Product
+Authy
+Procedure
+Enable or disable Authy multi-device
+Please click the appropriate link for instructions on enabling or disabling Multi-device from each of our Authy apps:
+Android
+iOS
+Android
+Open the Authy Android app.
+Tap the gear icon in the upper right corner, and then select Settings.
+From the Devices tab, tap the Allow Multi-device switch to enable or disable.
+iOS
+Open the Authy iOS app.
+Tap Settings in the upper right corner.
+From the "Devices" tab, tap the Allow Multi-device switch to enable or disable.
+Automatic disable
+Authy will automatically disable Multi-device when it detects that you have added an Authy app to more than one device. You will still be able to access your account from all existing installations, but you would need to manually enable multi-device to add another authy app to your account. Once re-enabled, Authy remembers this choice, and won't disable it again. We recommend users keep the multi-device feature to disabled when not wanting to add additional devices to their account as an extra security step.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

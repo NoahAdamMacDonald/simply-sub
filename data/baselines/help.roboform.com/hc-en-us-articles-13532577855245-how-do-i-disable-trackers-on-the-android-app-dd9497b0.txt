@@ -1,0 +1,41 @@
+url: https://help.roboform.com/hc/en-us/articles/13532577855245-How-do-I-disable-trackers-on-the-Android-app
+method: browser
+saved: 2026-11-20
+
+PERSONAL BUSINESS PLANS SECURITY DOWNLOAD Support Log in Buy Now
+RoboForm Help Center Mobile Security and Privacy - RoboForm for Android
+Articles in this section
+How to Enable Biometrics for RoboForm on Android
+Enabling the Account Recovery Feature - Android
+How to use the Account Recovery Feature - Android
+How to Import TOTP QR Codes from Google Authenticator into RoboForm - Android
+Is my data encrypted on the RoboForm Android application?
+I forgot my RoboForm PIN. What do I do? - Android
+How to Use RoboForm's Private Mode on Android
+How to Use the RoboForm Ad Block Feature - Android
+How do I disable trackers on the Android app?
+How do I disable trackers on the Android app?
+The RoboForm Android app uses Google Firebase for analytics and crash reporting. All data is aggregated and anonymized. No encrypted information stored in RoboForm is ever passed through Firebase.
+To opt out of this tracking on your Android device, follow the steps below:
+1) Open the RoboForm app and tap the 3 dots in the upper-right corner.
+2) Select "Settings" from the menu. Then, tap the "General" option.
+3) Toggle the "Disable analytics and crash reporting" option to the ON (blue) position.
+Facebook Twitter LinkedIn
+Was this article helpful?
+Recently viewed articles
+How do I cancel auto-renewal for my RoboForm Subscription?
+How many accounts are under a RoboForm Family Plan subscription?
+How do I upgrade from an individual Premium subscription to a Family Plan?
+Related articles
+I forgot my Master Password. What can I do?
+How to Use a Login on Android
+How to use RoboForm as a 2FA authenticator for other sites and apps
+How to pick a search engine (Android)
+Enabling the Account Recovery Feature - Android
+Comments
+0 comments
+Article is closed for comments.
+RoboForm Help Center
+Didn't find an answer?
+Ask Us
+English (United States)

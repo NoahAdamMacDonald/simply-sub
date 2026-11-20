@@ -1,0 +1,313 @@
+url: https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
+method: fetch
+saved: 2026-11-20
+
+Microsoft Authenticator FAQs | Microsoft Support
+Skip to main content
+Microsoft
+Support
+Support
+Support
+Home
+Microsoft 365
+Office
+Products
+Microsoft 365
+Outlook
+Microsoft Teams
+OneDrive
+Microsoft Copilot
+OneNote
+Windows
+more ...
+Devices
+Surface
+PC Accessories
+Xbox
+PC Gaming
+HoloLens
+Surface Hub
+Hardware warranties
+Account & billing
+Resources
+Community forums
+Microsoft 365 Admins
+Developer
+Education
+Report a support scam
+Product safety
+More
+Buy Microsoft 365
+All Microsoft
+Global
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Software
+Software
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+PCs & Devices
+PCs & Devices
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+Entertainment
+Entertainment
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Business
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Developer & IT
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Other
+Other
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Search
+Search for help
+No results
+Cancel
+Sign in
+Sign in with Microsoft
+Sign in or create an account.
+Hello,
+Select a different account.
+You have multiple accounts
+Choose the account you want to sign in with.
+Related topics
+Related topics
+×
+Microsoft Authenticator
+About
+Download
+Add accounts
+How to sign in
+Sign out or remove accounts
+Import passwords
+Export passwords
+Back up accounts
+Restore accounts
+FAQs
+Troubleshooting
+Authentication did not complete
+Microsoft Authenticator FAQs
+This article answers common questions about Microsoft Authenticator. Select the headings below to see more information.
+Do I need to be connected to the internet to Microsoft Authenticator?
+Verification codes
+No. The codes don't require you to be on the internet or connected to data, so you don't need phone service to sign in. Additionally, because the app stops running as soon as you close it, it won't drain your battery.
+Sign in responses
+Yes. To get sign in notifications and to send your response your device needs to be connected to the internet.
+Why isn't Microsoft Authenticator available for PC or Mac?
+Microsoft Authenticator is not available for desktop computers because authenticator apps are typically designed for smartphones for two main reasons:
+Security: Having the second factor of a security question on a separate device enhances security. If both factors (password and authentication) are on the same device, it would be easier for an attacker to compromise both.
+Availability: Mobile devices are almost always with the user, making them convenient for authentication purposes. Desktops, on the other hand, are not as portable. Having your authenticator only on your PC means you couldn't sign in away from your home or desk.
+Why do I see PIN input rather than biometric for unlock in Microsoft Authenticator?
+A: If you're using Microsoft Authenticator with an Android or iOS work profile, make sure you add biometrics in your work profile. Biometrics for regular security don't always carry over to work profiles.
+What are verified IDs?
+Verified IDs are secure trusted credentials that can be used by websites and organizations to make account setup simpler and safer.
+Usually, you'll use your device's camera to capture a QR code on the site to get a new Verified ID, or a verification of an ID already on your device. You still use your password to access credentials to share with another organization.
+Sites that request your Verified ID will show up in the usage history in the details of your Verified ID card.
+How do I get push notifications in Microsoft Authenticator?
+You can set up notifications for your work or school account (if allowed by your administrator) or for your personal Microsoft account.
+Note
+Notifications won't work for third-party accounts, like Google or Facebook.
+To switch your personal account over to notifications, you'll have to re-register your device with the account. Go to Add Account, select Personal Microsoft Account, and then sign in using your username and password.
+For your work or school account, your organization decides whether to allow one-click notifications.
+Do Microsoft Authenticator notifications work for non-Microsoft accounts?
+No, notifications only work with Microsoft personal accounts work or school accounts. Work or school IT admins may turn off this feature.
+How do I make sure notifications don't go to an old device?
+Adding Authenticator to your new device doesn't automatically remove the app from your old device. Even deleting the app from your old device isn't enough. You must both delete the app from your old device AND tell Microsoft or your organization to forget and unregister the old device.
+To remove the app from a device using a personal Microsoft account, go to the two-step verification area of your Account Security page and choose to turn off verification for your old device.
+To remove the app from a device using a work or school Microsoft account, go to the two-step verification area of either your My Apps page or your organization's company portal to turn off verification for your old device.
+Can I use Apple Watch or Android wearable devices for Microsoft Authenticator?
+No, Apple Watch and Android wearable devices (such as Samsung Galaxy Watch) are currently incompatible with Authenticator's security features, but you can mirror Authenticator notifications from your phone to your wearable device.
+Why does Microsoft Authenticator ask me to grant permission to access my location?
+You'll see a prompt from Authenticator asking for access to your location if your IT admin has created a policy requiring you to share your GPS location before you are allowed to access specific resources. You'll need to share your location once every hour to ensure you're still within a country where you are allowed to access the resource.
+On iOS, Microsoft recommends allowing the app to access location always. Follow the iOS prompts to grant that permission. Here's what each permission level will mean for you:
+Allow while using the app: If you choose this option, you'll be prompted to select two more options.
+Always allow (recommended): While you're still accessing the protected resource, for the next 24 hours, your location will be shared silently once per hour from the device, so you won't need to get out your phone and manually approve each hour.
+Keep only while using: While you're still accessing the protected resource, every hour, you'll need to pull out your device and manually approve the request.
+Allow once: Once every hour that you're still accessing the resource, or next time you try to access the resource, you'll need to grant permission again. You will need to go to Settings and manually enable the permission.
+Don't allow: If you select this option, you'll be blocked from accessing the resource. If you change your mind, you'll need to go to Settings and manually enable the permission.
+On Android, Microsoft recommends allowing the app to access location all the time. Follow the Android prompts to grant that permission. Here's what each permission level will mean for you:
+Allow all the time (recommended): While you're still accessing the protected resource, for the next 24 hours, your location will be shared silently once per hour from the device, so you will not need to get out your phone and manually approve each hour.
+Allow only while using the app: While you're still accessing the protected resource, every hour, you'll need to pull out your device and manually approve the request.
+Deny and don't ask again: If you select this option, you'll be blocked from accessing the resource.
+How is my location information used and stored by Microsoft Authenticator?
+Authenticator collects your GPS information to determine what country you're located in. The country name and location coordinates are sent back to the system to determine if you are allowed to access the protected resource. The country name is stored and reported back to your IT admin (if applicable), but your actual coordinates are never saved or stored on Microsoft servers.
+What is Microsoft Authenticator Autofill?
+Autofill on Microsoft Authenticator was discontinued in mid-August 2025. Learn more.
+The Microsoft Autofill Chrome Extension was retired on December 14, 2024.
+What is Microsoft Authenticator lock?
+App Lock helps keep your one-time verification codes, app information, and app settings more secure. When App Lock is enabled, you'll be asked to authenticate using your device PIN or biometric every time you open Authenticator. App Lock also helps ensure that you're the only one who can approve notifications by prompting for your PIN or biometric any time you approve a sign-in notification. You can turn App Lock on or off on the Authenticator Settings page. By default, App Lock is turned on when you set up a PIN or biometric on your device.
+Unfortunately, there's no guarantee that App Lock will stop someone from accessing Authenticator. That's because device registration can happen in other locations outside of Authenticator, such as in Android account settings or in the Company Portal app.
+How do I take screenshots of my one-time password (OTP) codes on Microsoft Authenticator for Android?
+To see your OTP codes in screenshots or allow other apps to capture the Authenticator screen, turn on Screen Capture in Authenticator's Settings and restart the app.
+What data does Microsoft Authenticator collect and store on my behalf and how can I delete this data?
+Authenticator collects three types of information:
+Account info you provide when you add your account. After adding your account, depending on the features you enable for the account, your account data might sync down to the app. This data is stored on your device and can be removed by removing your account.
+Non-personally identifiable usage data, such as aggregate details about success or failure of important operations that are used to detect decreased reliability and bugs. This minimal data is needed to keep the app updated and secure. You need to accept the notice of this data collection when you use the app for the first time.
+You can also allow the sharing of additional non-personal usage data by turning on the "Usage Data" toggle button on the app's Settings page or when you use the app for the first time. This data allows our engineers to improve the app in ways that are important to you. This setting can be turned on or off at any time.
+Diagnostic log data that stays only in the app until you select Send feedback in the app's top menu to send logs to Microsoft. These logs can contain personal data such as email addresses, server addresses, or IP addresses. They also can contain device data such as device name and operating system version. Any personal data collected is limited to information needed to help troubleshoot app issues. Authenticator engineers will use them only to troubleshoot customer-reported issues.
+For more information, review the Microsoft Privacy Statement.
+Why does the number next to Microsoft Authenticator code keep counting down?
+The active verification code changes every 30 seconds so that if somebody were to learn what code you used to verify your sign in yesterday, or even a minute ago, they wouldn't be able to use that code to get into your account. This timer is the countdown to the verification code changing to the next code. Unlike a password, we don't want you to remember this number. Only someone with access to your phone should be able to get your verification code.
+Caution
+A common trick of attackers is to contact you via text or phone pretending to be your bank, IT support, or other service provider and saying they need you to read them the code from your Authenticator to verify your identity on the call. Don't give them the code - they're trying to break into your account and are stuck at the verification prompt. No real company should ever ask you to read your verification code to them over the telephone - especially if they called you.
+What is device registration for Microsoft Authenticator?
+Your work or school organization might require you to register the device to track access to secured resources, such as files and apps. They also might turn on Conditional Access to reduce the risk of unwanted access to those resources. You can unregister your device in Settings, but you may lose access to emails in Outlook, files in OneDrive, and you'll lose the ability to use phone sign-in.
+I don’t see my backup restored on my new iOS device. How can I troubleshoot?
+On your old device:
+Enable iCloud Drive on your iOS device. Learn how.
+Enable iCloud Keychain on you iOS device. Learn how.
+Enable iCloud Backup on your iOS device. Learn how.
+Go to your Saved to iCloud list and search for Authenticator. Learn how.
+Turn on the toggle for Authenticator.
+Upgrade to Authenticator version 6.8.33 or later.
+Open the app at least once before switching to your new phone.
+On your new device:
+Uninstall and reinstall the Authenticator app.
+Your backup should now appear.
+Why didn't I receive the push notification when registering a credential in the Authenticator app?
+If you're trying to register a credential and expected a push notification in your Authenticator app on your current phone - but didn't see one - it may have been sent to the Authenticator app on a different device.
+This often happens when the Microsoft Authenticator app is still active on an older phone. During the sign-in process, a push notification is sent to the device where the Authenticator app was last used. If that device is no longer in use or nearby, you won’t see the notification on your current phone, which can make it seem like the process failed.
+To fix this:
+Check your old device: If you still have access to your previous phone, open the Authenticator app there to approve the sign-in.
+Remove old devices: Follow steps in the "How do I make sure notifications don't go to an old device?" section of this FAQ.
+Use a different verification method: If you're unable to access the old device, choose a different verification method, such as SMS, if available.
+Tips to avoid this in the future:
+Always remove the Authenticator app from old devices when switching phones. Follow steps in the "How do I make sure notifications don't go to an old device?" section of this FAQ.
+Keep your device list up to date in your account security settings.
+If you're unsure which device received the notification, try signing in again and check all devices with the app instead.
+See also
+If you're having trouble getting your verification code for your personal Microsoft account, see Troubleshooting verification code issues.
+If your question wasn't answered here, we want to hear from you. Post your question to the Microsoft Authenticator forum to get help from the community.
+Was this information helpful?
+Yes
+No
+Thank you! Any more feedback for Microsoft?
+Can you help us improve? (Send feedback to Microsoft so we can help.)
+What affected your experience?
+Resolved my issue
+Clear instructions
+Easy to follow
+No jargon
+Pictures helped
+Other
+Didn't match my screen
+Incorrect instructions
+Too technical
+Not enough information
+Not enough pictures
+Other
+Any additional feedback? (Optional)
+Submit feedback
+By pressing submit, your feedback will be used to improve Microsoft products and services.
+Your IT admin will be able to collect this data.
+Privacy Statement.
+Thank you for your feedback!
+×
+What's new
+Surface Laptop Ultra
+Surface Pro
+Surface Laptop
+Surface RTX Spark Dev Box
+Explore Copilot
+Explore Microsoft products
+Windows 11 apps
+Microsoft Store
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Why buy from Microsoft Store
+Flexible Payments
+Education
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Business
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft Copilot
+Small Business
+Developer & IT
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Company
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads
+© Microsoft 2026

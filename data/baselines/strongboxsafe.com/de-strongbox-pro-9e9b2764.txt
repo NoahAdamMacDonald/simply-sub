@@ -1,0 +1,106 @@
+url: https://strongboxsafe.com/de/strongbox-pro/
+method: fetch
+saved: 2026-11-20
+
+Strongbox Pro - Strongbox Skip to content
+Download
+Strongbox Pro
+Pricing
+Einführung in Strongbox
+Blog
+Support
+Deutsch English
+Download
+Strongbox Pro
+Pricing
+Einführung in Strongbox
+Blog
+Support
+Deutsch English
+Entfalten Sie die volle Kraft von Strongbox
+Sparen Sie Zeit mit biometrischem Entsperren und automatischem Ausfüllen. Synchronisieren mit Ihrem eigenen Server über WebDAV oder SFTP. Überprüfen Sie Ihre Passwörter automatisch auf Sicherheitslücken. Und vieles mehr mit Strongbox Pro.
+Komforteinstellungen
+Mit Face ID entsperren
+Entsperren Sie Ihre Datenbank sofort und sicher mit Face ID oder Touch ID auf iPhone, iPad und Mac.
+Automatisch Ausfüllen
+Automatisch in Ihrem bevorzugten Browser ausfüllen
+Automatisches Ausfüllen in Safari, Chrome, Firefox (und vielen anderen). Schützen Sie Ihre Daten während der Übertragung mit unseren sicheren Browser-Integrationen.
+Sicherheit am Handgelenk
+ Watch App
+Ihre Passwörter, Anmeldedaten, sicheren Notizen und 2FA-Codes sind mit unserer App für die Apple Watch auch unterwegs verfügbar.
+Entwicklerwerkzeuge
+SSH-Agent
+Generieren und speichern Sie SSH-Schlüssel in Ihrer Strongbox-Datenbank auf dem Mac. Lassen Sie sich benachrichtigen, wenn ein Prozess versucht, einen SSH-Schlüssel zu verwenden. Verwalten Sie die Signierung und Authentifizierung von Git-Commits.
+Synchronisieren
+SFTP und WebDAV
+Übernehmen Sie die Kontrolle und hosten Sie Ihre Datenbank auf Ihrem eigenen Speicher. Nahtloser Zugriff auf Ihre Passwörter auf all Ihren Geräten.
+Sicherheit
+YubiKey-Unterstützung
+Sichern Sie Ihre Datenbank mit einem Hardware-Token auf iPhone, iPad und Mac. Erstellen Sie physische und virtuelle Sicherungsschlüssel.
+iPhones und iPads mit USB-C-Anschluss haben eingeschränkte Unterstützung.
+Und vieles mehr …
+Premium-Support
+Holen Sie sich Hilfe, wenn Sie sie brauchen, von jemandem aus unserem Team. 7 Tage die Woche.
+Vergleichen und Zusammenführen
+Verabschieden Sie sich von Synchronisierungskonflikten mit automatischem Datenbankvergleich und -zusammenführung. Großartig für Umgebungen mit mehreren Benutzern.
+Benachrichtigungen über Datenschutzverletzungen
+Erfahren Sie, wann Ihr Passwort bei einem Datenschutzverstoß entdeckt wurde (unterstützt von „Have I Been Pwned?”).
+Ähnliche Passwörter finden
+Strongbox verwendet einen fortschrittlichen Algorithmus, um Passwörter zu erkennen, die einander ähnlich sind.
+Offline-Bearbeitung unter iOS
+Nehmen Sie Änderungen an Ihrer Datenbank vor, während Sie offline sind, und lassen Sie diese Änderungen synchronisieren, wenn Sie wieder online sind.
+Favicons
+Laden Sie automatisch Favicons herunter, um Ihre Einträge farblich zu gestalten und leicht zu erkennen.
+PIN-Code-Entsperrung unter iOS
+Sichern Sie Ihre Datenbank mit einem leicht zu merkenden PIN-Code.
+Panik-PIN auf iOS
+Öffnen Sie eine Dummy-Datenbank, täuschen Sie einen Fehler vor oder löschen Sie Ihre lokalen Daten, wenn der Code der Panik-PIN eingegeben wird.
+Wi-Fi Sync
+Nahtlose geräteübergreifende Synchronisation ohne Cloud-Laufwerke oder Server.
+Benutzerdefinierte App-Symbole für iOS
+Wählen Sie eines der alternativen Strongbox-App-Symbole aus, um Ihren Startbildschirm individuell zu gestalten.
+Apple Watch unter macOS entsperren
+Entsperren Sie Ihre Datenbank mit Ihrer Apple Watch.
+Microsoft Sharepoint
+Hosten Sie Ihre Datenbank, arbeiten Sie mit Ihren Teammitgliedern zusammen und teilen Sie sie auf einer beliebigen Sharepoint-Seite mit nahtloser nativer Integration.
+Sind Sie bereit, Ihr Passwortsicherheit zu verbessern?
+Strongbox Pro
+Eine Lizenz für all Ihre Geräte
+Familienfreigabe für bis zu 6 Personen
+Jederzeit kündbar
+Unsere Preisgestaltung
+Monatlich
+Jederzeit kündbar
+2,99 € / Monat
+Jährlich
+3 Monate kostenlose Testversion verfügbar
+24,99 € / Jahr
+Lebenslang
+Einmaliger Kauf
+89,99 €
+Alle Preise sind in Euros angegeben. Ihr Preis kann je nach dem Land, das Sie für Ihren App Store verwenden, variieren.
+Es gibt auch eine kostenlose Version von Strongbox für die nicht kommerzielle Nutzung, der einige Komfortfunktionen fehlen.
+Alle Funktionen vergleichen
+Preisgestaltung für Unternehmen
+12 Monate kostenlos für Studenten und Aktivisten
+Erhalten Sie Tipps und Aktualisierungen
+Die neuesten Tipps, Produktaktualisierungen und Informationen, die Ihnen helfen, Ihr digitales Leben sicher zu gestalten.
+Tarife und Preise
+Strongbox Pro
+Preise
+Funktionsvergleich
+Geschäftlich
+Studenten
+Firma
+Nachrichten und Aktualisierungen
+Pressemappe
+Über
+Datenschutzerklärung
+Allgemeine Geschäftsbedingungen
+Hilfe und Unterstützung
+Helpdesk
+PDF-Handbuch „Erste Schritte”
+Verbinden
+Twitter Reddit Github
+Registrieren
+©2023 Phoebe Code Limited

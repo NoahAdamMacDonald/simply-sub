@@ -1,0 +1,155 @@
+url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+method: fetch
+saved: 2026-11-20
+
+Privacy Notice | Yubico
+OpenAI mandates hardware-backed passkeys for Trusted Access for Cyber members. Read more.
+Skip to content
+English Français Deutsch 日本語 Español Svenska
+Investors
+Contact Sales
+Partners
+Support
+About Products Enterprise Resources Solutions
+0
+All YubiKeys
+Compare YubiKeys
+What is a YubiKey?
+Set up your YubiKey
+YubiKey 5 Series
+Learn more
+Buy
+YubiKey 5 FIPS Series
+Learn more
+Buy
+YubiKey Bio Series
+Learn more
+Buy
+Security Key Series
+Learn more
+Buy
+YubiHSM 2 & YubiHSM 2 FIPS
+Learn more
+Buy
+Accessories
+Buy
+Home / Support / Terms and conditions / Privacy Notice
+Privacy Notice
+This privacy notice has been adopted by Yubico AB and applies to our and/or other companies in the Yubico group (together “Yubico”) processing of personal data relating to you as a (i) visitor of our websites or social media profiles/pages, (ii) customer buying our products online or potential customer, and to (iii) registered user of our services and products.
+1. INTRODUCTION
+(a) Your privacy is important to us and we strive for a high level of protection in all processing of personal data.
+(b) In accordance with applicable data protection legislation, Yubico AB or the specific Yubico Group company providing services (as identified when your personal data is collected) acts as the data controller. This entity is responsible for processing your personal data as outlined below. If you have any questions about this information, or if you wish to exercise any of your rights as set out below, contact Yubico via the contact information listed under Section 6 below.
+2. PROCESSING PERSONAL DATA
+(a) General
+(i) The term ‘personal data’ refers to such information which, directly or indirectly, may refer to you as an individual. Examples of such data are name, email address, government issued identification number, billing information, contact details, IP address and user behavior. Personal data processing refers to any action that we or a third party that we have engaged take with the personal data, such as collection, registration and storage. See also our Cookie Notice.
+(ii) Personal data may only be processed for specified and explicitly stated purposes and may not be subsequently processed for any purpose that goes beyond these stated purposes.
+(b) Websites and Social Media
+(i) We collect personal data such as name, e-mail address and other information which you voluntarily provide, e.g. when you choose to interact with Yubico by signing up for updates such as newsletters, surveys, deals and offers, product information, webinars, trade shows, events etc. through email (which you can opt-out from via a link in each message sent through email). We also automatically receive and store information from your web browser, such as IP address, language preferences cookie information and the pages you visit, to log files on our server. We use the information collected to respond to your requests regarding products and services, to improve the content on our websites and the services, to track and prevent abuse of our websites and services, and to develop anonymous usage statistics.
+(ii) We use Google Analytics, a web analytics service provided by Google Ireland Limited (“Google”). Google Analytics uses cookies to collect information that assists us in better understanding our site visitors, such as how often users visit this site, what pages they visit, and what sites refer visitors to the website. Google Analytics collects the IP address assigned to you on the date you visit this site, rather than your name or other identifying information. We do not combine the information collected through the use of Google Analytics with personally identifiable information. Google’s ability to use and share information collected by Google Analytics about your visits to this site is restricted by the Google Analytics Terms of Service and the Google Privacy Policy.
+(iii) From time to time we may offer marketing events, such as sweepstakes or prize draws, on our websites and/or social media presences. Any personal data such as name, e-mail and delivery address you provide in order to participate in a marketing event is collected and processed by us exclusively to conduct the marketing event and distribute any prizes.
+(iv) We also use personal data for direct marketing and advertising in accordance with applicable law and market practice. We use the information we collect with regard to how you, as a user, use the websites so that we can analyze search and usage behavior and be able to provide you with personalized content. Personal data may also be processed indirectly in connection with the development and administration of Yubico’s IT systems.
+(v) Legal ground: (i) performance of a contract where you request services/resources through the websites and (ii) legitimate interest for other processing activities, such as for the purpose of improving services and the content of the websites as well as for prevention of abuse and statistical purposes. In case your consent is required for any of the above purposes, we will obtain such consent before we process your personal data for such purpose (if you withdraw the consent, that will not affect the lawfulness of processing based on consent before its withdrawal). Note that denying consent may impact our ability to provide a specific service. See also our Cookie Notice.
+(vi) We delete collected personal data when the purpose of the processing has been completed. Our Cookie Notice includes retention periods in respect of cookies that we use.
+(c) Customer buying our products online or such potential customers.
+(i) When you are a customer buying products online, or a potential customer inquiring about our products and services, we may process information you have volunteered, such as name, home and/or delivery address, telephone number, e-mail address, payment information, historical order information and product you bought. When you buy, or inquire about, our products online via our Website, we also collect the information specified in Section 2(b)(ii).
+(ii) Legal ground: (i) performance of a contract and legal obligation where you have bought a product online and (ii) legitimate interest for other processing activities, such as for the purpose of improving services and the content of the websites as well as for statistical purposes. In case your consent is required for any of the above purposes, we will obtain such consent before we process your personal data for such purpose (if you withdraw the consent, that will not affect the lawfulness of processing based on consent before its withdrawal). Note that denying consent may impact our ability to provide a specific service. See also our Cookie Notice.
+(iii) We delete collected personal data when the purpose of the processing has been completed. Some of this information is retained for the duration required by applicable bookkeeping legislation.
+(d) Registered users of our services and products
+(i) We collect personal data such as name, address, phone number, e-mail address, payment information, designation and other information which you voluntarily provide. When you use our services via our Website, we also collect the information specified in Section 2(b). We use the information collected to provide you with the services/products, to respond to your requests and handle support cases regarding products and services, to improve the support/services and to develop anonymous usage statistics.
+(ii) Legal ground: (i) performance of a contract where you request services/resources through the website and (ii) legitimate interest for other processing activities, such as for the purpose of improving the services, support and content of the websites as well as for statistical purposes. In case your consent is required for any of the above purposes, we will obtain such consent before we process your personal data for such purpose (if you withdraw the consent, that will not affect the lawfulness of processing based on consent before its withdrawal). Note that denying consent may impact our ability to provide a specific service. See also our Cookie Notice.
+(iii) We delete collected personal data when the purpose of the processing has been completed.
+(e) AI-Assisted Customer Support
+(i) When you contact Yubico for customer support, you may choose to use an AI-based chatbot (“AI Assistant”) as an optional channel. If you use the AI Assistant, it processes the personal data you provide during the conversation, such as your name, e-mail address, and information relating to your account, product, or order (e.g. order number), together with the content of your messages, in order to understand and respond to your request, to escalate the request to a human agent where necessary, and to improve the quality and accuracy of our support services.
+(ii) You are not required to provide any personal data beyond what we already collect and process in connection with our products, services, or your order as described elsewhere in this Privacy Notice. You should avoid submitting sensitive personal data (such as health information, government identification numbers beyond what is requested, or financial account details) in the chat unless specifically requested and required to resolve your case.
+(iii) You may request to speak with a human support agent at any point during your interaction with the AI Assistant, and may stop using the AI Assistant at any time. Requesting a human agent will not affect the quality of the support you receive.
+(iv) Conversations with the AI Assistant may be logged and retained for quality assurance, training, and improvement of our support tools, and to maintain a record of your support case. We delete this data when the purpose of the processing has been completed, in line with Section 2(d)(iii).
+(v) The AI Assistant assists in triaging and responding to support requests but does not make decisions producing legal effects concerning you or similarly significantly affecting you. Any decision materially affecting your rights (e.g. refunds, warranty claims) is made or reviewed by a human agent.
+(vi) Legal ground: (i) performance of a contract or legitimate interest in providing efficient and effective customer support, and (ii) legitimate interest in improving our support services. See Section 4 for your rights, including the right to object to this processing.
+3. SECURITY FOR PROTECTION OF PERSONAL DATA
+(a) We protect your personal data against unauthorized or unlawful processing and against accidental loss, destruction or damage, by implementing appropriate technical and organizational security measures. Restrictions on the Disclosure of Personal Data.
+(b) We may appoint external partners to perform tasks on our behalf, such as providing IT services or helping with marketing and recruitment, administration of press releases, sales activities, data analysis or statistics. We may also use personal information to have our distributors, resellers or partners notify or contact you about our products or services, provided you have consented where required. The performance of these services may mean that our partners, are able to gain access to your personal data. Companies that process personal data on our behalf must always sign an agreement with us so that we are able to ensure a high level of protection of your personal data even with our partners.
+(c) Your personal data may be transferred to Yubico Group companies or partners outside of your country for one or more of the purposes described above. We will only transfer your information overseas in accordance with applicable data protection legislation and special safeguards are taken with regard to international transfers, such as signing agreements that include contractual provisions required under applicable data protection law, like the standardized model clauses for data transfers adopted by the EU Commission, which are available on the EU Commission’s website, or the ASEAN model contractual clauses for data transfers.
+(d) We may also disclose your personal data to third parties, for example the police or other public authorities, if it concerns criminal investigations or if we are otherwise required to disclose such data by law or public authority decision. We will not disclose your personal data to any extent other than described in this section.
+4. YOUR RIGHTS AND THE RIGHT TO FILE A COMPLAINT
+(a) Under applicable data protection legislation you are entitled, at any time, to request access to the personal data that is processed about you, to have erroneous personal data corrected, to request that we shall stop processing and delete your personal data, to request that the processing of your personal data is restricted, to exercise your right to data portability, to withdraw consent to particular processing (where such consent has been obtained) and to object to the processing of your personal data. In such event, contact Yubico via the contact details listed below. You are also entitled, at any time, to file a complaint with the relevant supervisory authority, the Swedish Data Protection Authority, if you consider that your personal data has been processed in contravention of applicable data protection legislation.
+5. DATA CONTROLLER AND CONTACT DETAILS
+(a) Data Controller.
+Below we indicate which Yubico company that is the data controller in respect of the different processing activities covered by this Privacy Notice:
+-Websites and social media: The Yubico Group company that provides the specific website, social media profile/page or the service is the data controller. Where applicable, other legal entities within the Yubico group may furthermore be data controllers for personal data processing in accordance with the terms of the respective service or function.
+-Customers buying our products online: The Yubico Group company that has entered into an agreement with the customer buying a product online is the data controller.
+-Registered users of our services and products: The Yubico Group company that provides the specific service and products is the data controller.
+(b) Contact Details.
+If you have any questions on how we process your personal data or want information about further contact details for the data controllers above, please contact us through our website or post. Yubico AB, Gävlegatan 22 113 30 Stockholm Sweden.
+6. CALIFORNIA NOTICE AT COLLECTION
+ut in this Privacy Notice as well as the Supplemental Privacy Notice for California Consumers. If you are a resident of the State of California in the U.S., please see our Supplemental Privacy Notice for California Consumers for additional California-specific privacy information. We will not discriminate against you because you have exercised any of your rights under the CCPA. If you are a consumer in California, USA, and would like to make a request concerning your rights under the California Consumer Privacy Act you may also contact us by email at: calpv@yubico.com
+7. EXTERNAL LINKS
+Our websites may sometimes contain links to external websites or services that we do not control. If you follow a link to an external website, you are encouraged to review the principles for processing of personal data and information about cookies that apply to the website or service in question.
+8. CHANGES TO THE PRIVACY NOTICE
+Occasionally we may, in our discretion, make changes to this Privacy Notice e.g. by making new versions available on our website or provide you with prominent notice as appropriate under the circumstances. You are encouraged to therefore visit our website from time to time to learn of any updates and make sure you read any such notice carefully.
+Last updated: October 22, 2026
+Join our newsletter
+Distributed monthly, it includes product news, new applications, case studies, events, and
+discounts. Unsubscribe anytime.
+By subscribing you agree to our Privacy Policy.
+Subscribe
+About us
+About us
+The team
+Innovation history
+Secure it forward program
+Yubico blog
+Press Room
+Events
+Partner programs
+Careers
+Investors
+Products
+YubiKey 5 Series
+YubiKey 5 FIPS Series
+Security Key Series
+YubiKey Bio Series
+YubiHSM 2 & YubiHSM 2 FIPS
+Accessories
+Yubico Authenticator
+Computer login tools
+Software Development kits
+Enterprise
+YubiKey as a Service
+Delivery
+Contact Sales
+Enrollment
+Professional Services
+Solutions
+All Solutions
+Initiatives
+Industries
+Use cases
+Technologies
+Resources
+Setting up your YubiKey
+Find the right YubiKey
+Works with YubiKey Catalog
+What is a YubiKey
+Case studies
+Webinars
+White papers and reports
+Documentation
+All downloads
+Support Home
+Support services
+Buying and shipping information
+Social
+LinkedIn
+YouTube
+Instagram
+X
+Facebook
+English Français Deutsch 日本語 Español Svenska
+Sitemap
+Cookies
+Legal
+Privacy
+Terms of use
+Accessibility
+Legal Imprint
+EU Right of Withdrawal

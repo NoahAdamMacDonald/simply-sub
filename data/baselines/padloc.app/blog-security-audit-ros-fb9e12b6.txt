@@ -1,0 +1,68 @@
+url: https://padloc.app/blog/security-audit-ros/
+method: fetch
+saved: 2026-11-20
+
+Security Audit By Radically Open Security
+Pricing
+Support
+Blog
+Login / Signup
+Pricing
+Support
+Blog
+Tue Aug 23 2022
+Security Audit By Radically Open Security
+We are happy to announce that Padloc has completed yet another security audit!
+Between March 23 and May 27, 2022, the fantastic people at
+Radically Open Security carried out a
+penetration test on Padloc version 4.
+The full report can be found
+here, but for those of
+you who don't want to read the whole thing, here is a summary:
+We discovered 2 Elevated, 2 Moderate and 1 Low -severity issues
+during this penetration test. The communication between ROS and Padloc was
+excellent, which resulted in discussions in the chat environment of ROS and
+fixes from Padloc before the conclusion of the audit.
+No high or critical issues were found and the amount of elevated, moderate
+and low severity findings indicate a robust code base at the implementation
+level. The server, app, pwa, cordova, extension, core and tauri packages
+were audited and were found to implement solid cryptographic primitives and
+hardened rendering libraries. The code seem to be well written and no major
+implementation issues were found.
+However, architecturally, there are fundamental challenges Padloc still
+faces in order to achieve the design goals of a zero-trust and secure password
+storage. These challenges are inherent to the chosen technologies: As a
+web-based password manager, users have to trust the served JavaScript code.
+[...] This is a known issue with other projects with similar design
+constraints, where end-to-end encryption is used in the context of a web
+browser. [...] As these issues are commonly accepted risks, we recommend
+qualifying these in the documentation and adjusting the claims of "no explicit
+trust" accordingly or investigate moving to other, native technologies.
+The filed issues were all marked as resolved. Either by fixing the issue
+completely, or by accepting and documenting certain risks. Further
+improvements were made by hardening the CSP and implementing a helper tool,
+which publishes hashsums of all files generated during releases. This tool
+and instructions how to verify server side files can help to assert if server
+side assets or code were changed beyond the official release. [...] We further
+encourage Padloc to engage in research for further hardening against advanced
+adversaries, but the current implementation seems like a reasonable secure
+implementation and we can recommend usage in productive environments.
+Instructions on how to use the code verification tool mentioned in the report
+can be found here.
+We'd like to thank the entire team at Radically Open Security for the pleasant
+collaboration and interesting and fruitful exchanges during the audit, as well
+as Open Tech Fund who graciously funded this
+audit.
+If you'd like to learn more about the security architecture behind Padloc,
+please refer to our
+security whitepaper or reach out to us
+directly at support@padloc.app!
+Blog
+User Manual
+Technical Docs
+Downloads
+Privacy Policy
+Terms of Service
+Theme:
+auto
+© 2022 MaKleSoft UG, Meisenstr. 5, 91522 Ansbach, Germany

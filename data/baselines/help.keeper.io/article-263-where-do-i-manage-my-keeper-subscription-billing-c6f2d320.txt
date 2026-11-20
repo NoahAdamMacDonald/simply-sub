@@ -1,0 +1,39 @@
+url: https://help.keeper.io/article/263-where-do-i-manage-my-keeper-subscription-billing
+method: fetch
+saved: 2026-11-20
+
+Where do I manage my Keeper subscription billing? (Personal and Family Plans) - Keeper Security, Inc Knowledge Base
+Toggle Navigation
+Contact
+Contact
+Where do I manage my Keeper subscription billing? (Personal and Family Plans)
+Where you manage your subscription (updating your payment method, cancelling, or viewing receipts) depends on where you originally purchased Keeper.
+Purchased on keepersecurity.com (web direct) You can view your current plan and download past receipts from the Web Vault under the Account tab. There's no self-service option to update your payment method at the moment; contact support for help with that. To cancel, see "How do I cancel my Keeper subscription?", since cancelling is handled through deleting your account rather than a separate cancel button.
+Purchased via Apple App Store (iPhone/iPad) Manage or cancel from your device: Settings > [Your Name] > Subscriptions > Keeper Password Manager. Keeper cannot update or cancel App Store subscriptions on your behalf; this must be done through Apple.
+Purchased via Mac App Store Manage or cancel from your Mac: System Settings > [Your Name] >Media & Purchases > Manage > Subscriptions > Keeper Password Manager. Keeper cannot update or cancel App Store subscriptions on your behalf; this must be done through Apple. This is the same Apple subscription system as iPhone/iPad, so it can also be managed from any Apple device signed into the same Apple ID.
+Purchased via Google Play Store (Android) Manage or cancel from the Google Play app: Menu > Payments & subscriptions > Subscriptions > Keeper Password Manager. Keeper cannot update or cancel Play Store subscriptions on your behalf; this must be done through Google.
+Purchased via Microsoft Store (Windows) Manage or cancel through your Microsoft account: see Microsoft's refund and subscription help. Keeper cannot update or cancel Microsoft Store subscriptions on your behalf; this must be done through Microsoft.
+Not sure how you originally purchased? Check your confirmation email from your original purchase, or check your bank or card statement. If you purchased through Apple, Google, or Microsoft, the charge will show up from that company, not from Keeper directly. If you don't see a Keeper or app store charge on your card at all, you may be on the free plan or a gifted/promotional subscription; contact support and they can look up your account.
+Want to upgrade or downgrade your plan, or add a feature like BreachWatch or Secure File Storage? Contact our support team, this isn't self-service for any purchase channel yet.
+Keeper Business, Enterprise, and MSP customers: these steps do not apply to your account. Updating payment methods, cancelling, and viewing billing details for these accounts are handled by your Customer Success Manager or Account Manager. Please see Billing and Sales Support for Keeper Business, Enterprise, and MSP Customers.
+Still need help?
+Contact Us
+Contact Us
+Last updated on October 19, 2026
+Toggle Search
+Categories
+Keeper PAM
+Account Management
+SSO/SCIM Provisioning
+Using the App
+Technical Issues
+Admin Console
+MSP
+Keeper Automator
+Billing Issues
+General Questions
+Security
+No results found
+©
+Keeper Security, Inc
+2026. Powered by Help Scout

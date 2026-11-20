@@ -1,0 +1,225 @@
+url: https://www.roboform.com/privacy-policy
+method: fetch
+saved: 2026-11-20
+
+RoboForm: Privacy Policy
+Personal
+Business
+Plans
+Security
+Download
+Support
+Log In
+Buy Now
+RoboForm Privacy Policy
+PRIVACY POLICY:
+RoboForm is wholly owned and operated by Siber Systems Inc. (Siber),
+a Virginia Corporation located at 3701 Pender Drive, Suite 400,
+Fairfax, VA 22030, United States.
+DATA WE COLLECT AND HOW WE USE IT:
+Customer is identified on Order Form, which is filled out
+by Customer when purchasing RoboForm products.
+Personal data of Customers that purchase RoboForm licenses
+is stored on Siber servers in the data center located in USA.
+Siber collects names, email addresses, and phone numbers
+to provide account management and customer support.
+For quality assurance, training, and support purposes,
+all communication conducted through support channels,
+including emails, support tickets, live chats, and phone calls,
+is recorded and retained.
+Siber collects Email, Phone Number, Full Name, Address and
+Credit Card Number for payment processing: making purchases,
+refunds and chargebacks, activation and reactivation of RoboForm licenses.
+Siber collects Product Name, Full Name (as recorded in payment / license
+management system), Order ID (as recorded in payment / license management system),
+Email (as recorded in payment / license management system), Unique ID (GUID),
+Computer ID (generated via one-way function from some of the computer attributes),
+Disk ID (generated via one-way function from Disk ID of a system disk)
+for license activation and periodic license check.
+Siber collects Product Version, Internet Explorer Version, OS Version,
+Full Name (as recorded in payment / license management system),
+Email (as recorded in payment / license management system),
+Product Executable File name during product auto-update.
+User needs to opt-in to use that option.
+Siber only uses minimum of user data necessary to manage user account
+or to process payment. No other information is collected.
+HOW WE SHARE YOUR DATA:
+Siber will not send personal data stored on Siber servers to other
+companies or individuals, except for cases when sending of such data
+is required by Siber business processes.
+Siber discloses Email, Full Name, Phone Number and Address
+to Stripe which is credit card processor. Siber may also disclose Email
+and Full Name to MailChimp and IBM Watson for purposes of sending email.
+MARKETING:
+Siber will send infrequent product update newsletters and promotional offers
+to the email and postal addresses stored by Siber, but Customer shall have
+an option to unsubscribe from such email newsletters and offers.
+Siber will also present infrequent offers of Siber and 3rd party software
+on post-update web page that is shown when user installs new version of RoboForm.
+EUROPEAN UNION, UNITED KINGDOM AND SWISS INDIVIDUALS
+Siber Systems complies with the EU-U.S. Data Privacy Framework (EU-U.S. DPF)
+and the UK Extension to the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework
+(Swiss-U.S. DPF) as set forth by the U.S. Department of Commerce.
+Siber Systems has certified to the U.S. Department of Commerce that it
+adheres to the EU-U.S. Data Privacy Framework Principles
+(EU-U.S. DPF Principles) with regard to the processing of personal data
+received from the European Union and the United Kingdom
+in reliance on the EU-U.S. DPF and the UK Extension to the EU-U.S. DPF.
+Siber Systems has certified to the U.S. Department of Commerce
+that it adheres to the Swiss-U.S. Data Privacy Framework Principles
+(Swiss-U.S. DPF Principles) with regard to the processing of personal data
+received from Switzerland in reliance on the Swiss-U.S. DPF.
+If there is any conflict between the terms in this privacy policy and
+the EU-U.S. DPF Principles and/or the Swiss-U.S. DPF Principles,
+the Principles shall govern.
+To learn more about the Data Privacy Framework (DPF) program, and
+to view our certification, please visit https://www.dataprivacyframework.gov/.
+In compliance with the EU-US Data Privacy Framework Principles,
+Siber Systems commits to resolve complaints about your privacy and
+our collection or use of your personal information transferred
+to the United States pursuant to the DPF Principles.
+EU, UK and Swiss individuals with DPF inquiries or complaints should first contact Email:
+jwalls@siber.com
+Justin Walls
+Privacy Officer
+Via Post:
+Siber Systems Inc - Privacy Officer
+3701 Pender Drive, Suite 400
+Fairfax, VA 22030, USA
+Siber Systems has further committed to refer unresolved privacy complaints
+under the DPF Principles to an independent dispute resolution mechanism,
+Data Privacy Framework Services, operated by BBB National Programs.
+If you do not receive timely acknowledgment of your complaint,
+or if your complaint is not satisfactorily addressed, please visit
+https://bbbprograms.org/programs/all-programs/dpf-consumers/ProcessForConsumers
+for more information and to file a complaint.
+This service is provided free of charge to you.
+If your DPF complaint cannot be resolved through the above channels,
+under certain conditions, you may invoke binding arbitration
+for some residual claims not resolved by other redress mechanisms.
+See https://www.dataprivacyframework.gov/s/article/G-Arbitration-Procedures-dpf?tabset-35584=2
+** TERMS OF USE **
+PERSONAL DATA IN ROBOFORM WITHOUT SYNCHRONIZATION:
+NO TRANSMISSION, NO RECOVERY.
+All Password Data that Customer enters into RoboForm
+is stored only locally on Customer's computer if Customer
+does not use option to Synchronize RoboForm.
+In this case RoboForm does not transmit any Password Data over the Internet.
+However, if Customer or a program running on Customer's
+computer causes RoboForm to fill an online form with such
+personal data, then submission of this form will result
+in this data being sent over the Internet but
+this shall be deemed not to be caused by RoboForm.
+Customer agrees that deletion or loss of Password Data entered
+into RoboForm will cause irreversible loss of the said Password Data
+and Customer accepts the risk of such loss.
+PERSONAL DATA IN ROBOFORM WITH SYNCHRONIZATION:
+DATA TRANSMITTED, RECOVERY POSSIBLE.
+If Customer uses Synchronize RoboForm option then
+Customer Password Data is stored locally on Customer Computer or
+portable disk and on RoboForm server.
+If local copy of user data is lost, Customer may obtain
+copy of this data from RoboForm server.
+However, availability of backup copy is NOT guaranteed
+by Siber and Siber shall NOT be held liable,
+if it cannot produce copy of Customer's RoboForm data.
+Customer is hereby encouraged to keep multiple copies of
+RoboForm user data on his/her computers, disks and devices.
+Also in this case RoboForm shall transmit RoboForm Password Data
+over the Internet, for the purposes of storing backup copy of
+Customer RoboForm Password data on RoboForm server and
+for purposes of synchronization of said data between Customer computers
+and mobile devices. Customer hereby authorizes such transmission.
+ONLINE LICENSE ACTIVATION AND MONITORING:
+Customer hereby agrees to Online License Activation and Monitoring
+process for all RoboForm licenses (Personal, Family, for Business).
+In this process RoboForm checks the validity of Customer's RoboForm license
+by contacting the Siber server at *.RoboForm.com via the Internet
+and sending data that uniquely identifies Customer's computer.
+Customer also agrees that Online Activation and Monitoring
+will be used to enforce provisions of this Agreement.
+TRANSMISSION OF DATA IN AUTOUPDATE:
+RoboForm automatically checks Siber's server www.RoboForm.com
+for new versions and security patches approximately once a day.
+If it finds a version that is newer than the version that is currently installed,
+RoboForm will suggest that Customer upgrades to the more recent version.
+The checking of new version results in various data related to computer
+and license to be transmitted to Siber server and maybe stored on this server.
+Customer hereby allows such data transmissions to occur.
+ROBOFORM WEB SITE:
+RoboForm web site may use cookies to track users and Customer agrees to that.
+RoboForm affiliates and advertisers may also use cookies and Customer agrees to that.
+RoboForm Web Site utilizes Google Analytics features, including Remarketing with
+Google Analytics, Google Display Network Impression Reporting, and Google
+Analytics Demographics and Interest Reporting and Customer consents to this.
+Google provides a complete privacy policy and instructions on opting out of
+Google Analytics here: https://www.google.com/intl/en/analytics/privacyoverview.html
+Personal
+Premium
+Family
+Pricing
+Form Filler
+Referral Program
+Educational Discount
+Military Discount
+Business
+Business Features
+Pricing
+Benefits
+Support
+Free Tools
+Password Generator
+Passphrase Generator
+How Secure is My Password?
+Have I Been Hacked?
+Download
+Browsers
+Windows
+Mac
+iOS
+Android
+Resources
+Security
+Blog
+Reviews
+RoboForm vs. LastPass
+RoboForm vs. Dashlane
+RoboForm vs. 1Password
+Support
+Help Center
+Contact Support
+Submit a Ticket
+User Manual
+Tutorials
+Bug Bounty Program
+Company
+About Us
+Press
+Office Locations
+Partners
+Partner Program
+Partner License Agreement
+Affiliates
+find us on
+LANGUAGE
+English
+English
+Deutsch
+Español-419
+Français
+Italiano
+日本語
+Nederlands
+Svenska
+Polski
+Русский
+中文（简体）
+繁體中文
+Portuguese-BR
+Copyright © 1999 - 2026 Siber Systems, Inc. All rights reserved.
+3701 Pender Dr, Suite 400, Fairfax, VA 22030
+Privacy Policy
+·
+License Agreement
+Our website uses cookies to ensure you get the best experience on our website. Review our Privacy Policy.
+Got it

@@ -1,0 +1,357 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada and with a plain
+# fetch (curl): authy.com (its home, App Features and Download pages), Twilio's Authy help centre (help.twilio.com: the
+# Authy category's articles on cost, system requirements, backups, multi-device, desktop and Chrome end of life, export,
+# adding tokens, deleting an account, login issues and support), Twilio's blog post "How Authy 2FA Backups Work", the
+# Twilio Authy Application Terms, the Twilio Privacy Notice (with its Authy section), Twilio's Acceptable Use Policy,
+# government requests, transparency, security and security overview pages, its July 2024 Authy security alert, its
+# investor FAQs, and the app's Google Play and App Store listings (their data safety and privacy sections).
+# What it is: "Authy is a free mobile app for two-factor authentication" (Welcome to Authy!), an authenticator only.
+# Pricing: none for its users: "For end users looking to secure their internet logins and accounts, Authy is free to
+# install and use." (How much does Authy cost?). Its developer API (Twilio Verify) is a business product: out of scope.
+# So one free plan, priced for everywhere. Region checklist, 2026-11-19: not needed (one free app for every country, no
+# prices); the login help notes SMS to China "cannot be guaranteed", which isn't a list of where it's offered.
+# Bundles: none. Official resellers: none; it sells nothing to its users. Ways to pay: none (free only).
+# Free use: its one plan is free.
+# Desktop and multi-device (the owner's checks, read 2026-11-19): "The Authy Desktop app for Linux, MacOS and Windows
+# reached their End-of-Life on March 19, 2024 and are no longer supported." (the desktop EOL guide), and Authy for Chrome
+# and its extension were deprecated earlier ("Authy will not be publishing updates, fixing bugs, or making improvements
+# to Authy for Chrome & Chrome Extension going forward."). Multi-device still works, between phones and tablets: "The
+# Authy Multi-Device feature allows you to sync your account and 2FA tokens across multiple trusted devices, such as a
+# phone and a tablet." (Enable or Disable Authy Multi-Device), and it turns itself off once a second device is added
+# ("Authy will automatically disable Multi-device when it detects that you have added an Authy app to more than one
+# device."). Smartwatches and widgets are "Beta initiatives" it doesn't officially support (System Requirements).
+id: authy
+name: Authy
+aliases: [twilio authy, authy 2fa, authy authenticator]
+website: https://authy.com
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free. Its help article on deleting an Authy account is the closest page.
+cancelUrl: https://help.twilio.com/articles/19753637053595
+sources: { pricing: https://help.twilio.com/articles/19753647012763 }
+
+# Owner (M11.2), read 2026-11-19: the Authy App Terms say Twilio owns the app and name Twilio Inc. (its app store
+# listings' seller is "Authy Inc.", which the terms don't name); Twilio's own privacy notice calls Authy "our standalone
+# two-factor authentication (“2FA”) service". Country from Twilio's terms of service; the listing from its investor FAQs.
+# No page read names a majority holder.
+owner:
+  name: Twilio Inc.
+  website: https://www.twilio.com
+  page:
+    name: Twilio Authy Application Terms
+    url: https://www.twilio.com/en-us/legal/authy-app-terms
+  quotes:
+    - 'Twilio owns all right, title, and interest in and to the Authy App.'
+    - 'For purposes of these Authy App Terms, Any references to “you” or “your” refer to you as the user of the Authy App, and any references to “Twilio” refer to Twilio Inc.'
+  country:
+    code: US
+    page:
+      name: Twilio Terms of Service
+      url: https://www.twilio.com/en-us/legal/tos
+    quotes:
+      - 'Twilio Inc., a Delaware corporation, with a place of business at 101 Spear Street, 5th Floor, San Francisco, California, 94105, United States of America'
+    lastVerified: 2026-11-19
+  stock:
+    listings:
+      - { exchange: New York Stock Exchange, symbol: TWLO }
+    page:
+      name: Investor FAQs
+      url: https://investors.twilio.com/ir-resources/investor-faqs
+    quotes:
+      - 'Twilio is traded on the New York Stock Exchange under the symbol TWLO.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  A free 2FA code app for iPhone, iPad and Android, tied to your phone number. Optional encrypted backups sync your codes
+  between your phones and tablets. There's no way to export your codes, and its desktop apps ended on March 19, 2024.
+
+# General features, read 2026-11-19. Platforms: Android and iOS/iPadOS (System Requirements: "Device types Phones
+# Tablets" and "iPhone, iPad, iPod touch"); desktop and Chrome are deprecated (above). Sign-in: an Authy account is your
+# phone number, verified by a code or another device ("To log into Authy, you have several options: SMS, call, WhatsApp,
+# other device." Authy Login Issues; "Add new devices with SMS, voice or existing device approval." App Features); its
+# backups password only decrypts your codes, and the app's PIN or fingerprint is a lock on the phone. Support: its help
+# centre and tickets ("All Twilio, SendGrid and Authy Customers can open Support tickets."; live chat and phone are for
+# paid support plans). App languages: "Languages supported English Portuguese Spanish" (System Requirements, both apps).
+# Not open source: Twilio "owns all right, title, and interest" and licenses "one (1) object code copy" (its terms), so
+# proprietary (LastPass's precedent). No pause and no parental controls (it's free; no page offers either).
+features:
+  platforms: [android, ios]
+  account.sign-in: [sms, push-approval]
+  support.channels: [email]
+  languages.interface: [en, es, pt]
+  software.open-source: proprietary
+
+# Authenticator features, read 2026-11-19: an authenticator only, so password-manager false and authenticator.included
+# true.
+# - Imports: a site's QR code or key ("Scan QR Code: Use this option to scan a QR code with your device's camera." and
+#   "Enter key manually", Add a New 2FA Account Token), so otpauth. Nothing from other apps: "the Authy application does
+#   not allow importing or exporting 2FA account tokens." (Export or Import Tokens in the Authy app Not Supported).
+# - Exports: none, so authenticator.export is empty (the owner's list: "no export: say so"). The same article, and the
+#   desktop EOL guide: "Note: The Authy app lacks an export feature, therefore you have to re-enable the 2FA method and
+#   re-add the token in your new application". Its backups restore only into Authy.
+# - End-to-end encrypted: its opt-in backups are encrypted on the phone with a password Twilio never receives ("Because
+#   Authy uses a zero-knowledge security architecture, this password is never sent to our servers.", Backups password
+#   and PIN protection; "The account is encrypted/decrypted inside your phone, so neither Authy or anyone affiliated with
+#   Authy have access to your accounts.", How Authy 2FA Backups Work), so passwords (an authenticator's vault, the
+#   registry's words, as 2FAS's and Bitwarden Authenticator's). Without backups: "By default, all Authy 2FA account
+#   tokens are stored locally." (What if I Don't Backup my Authy Account?).
+# - Works offline ("Works offline so you can still login to 2FA secured websites.", App Features), which the registry
+#   records only for a password manager's vault. No page mentions passkeys.
+plans:
+  - id: authy.free
+    name: Free
+    link: https://authy.com/download/
+    features:
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      authenticator.export: []
+      encryption.end-to-end: [passwords]
+    notes: 'Free, for iPhone, iPad and Android, and needs a working phone number. Backups, locked with a password only you know, sync your codes to your other phones and tablets. No export: moving to another app means setting up 2FA again on each site. Its desktop apps ended on March 19, 2024.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://help.twilio.com/articles/19753647012763,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: the Twilio Authy Application Terms (last updated
+# February 23, 2026), which a user accepts "By using, installing, or accessing the Twilio Authy Application" and which
+# include the Twilio Acceptable Use Policy (conduct only, no topic's) and the Twilio Privacy Notice (last updated April
+# 9, 2026, with its Authy section); Twilio's government requests, transparency, security and security overview pages;
+# the Authy help centre; and the app's store listings. The Twilio Terms of Service (authy.com's "Legal" link) are for
+# Twilio's business customers, not the app's users: read for the owner's country only. Not rated: the app stores' own
+# terms. Notable but no topic's grade: since February 23, 2026 new installs send device ID, device details (VPN, remote
+# access, rooted status) and IP-based location to Stytch, Twilio's subsidiary, for fraud prevention (the terms, 3(b): a
+# necessary exception, step 4).
+policies:
+  links:
+    - name: 'Twilio Authy Application Terms'
+      url: https://www.twilio.com/en-us/legal/authy-app-terms
+    - name: 'Twilio Privacy Notice'
+      url: https://www.twilio.com/en-us/legal/privacy
+    - name: 'Government requests'
+      url: https://www.twilio.com/en-us/legal/government-requests
+    - name: 'Security overview'
+      url: https://www.twilio.com/en-us/legal/security-overview
+    - name: 'Security alert: Authy apps (July 2024)'
+      url: https://www.twilio.com/en-us/changelog/Security_Alert_Authy_App_Android_iOS
+    - name: 'How Authy 2FA Backups Work'
+      url: https://www.twilio.com/en-us/blog/how-the-authy-two-factor-backups-work
+    - name: 'Backups password and PIN protection'
+      url: https://help.twilio.com/articles/19753631509019
+    - name: 'What if I don’t back up my Authy account?'
+      url: https://help.twilio.com/articles/19753636734619
+    - name: 'Export or import tokens not supported'
+      url: https://help.twilio.com/articles/19753420684059
+    - name: 'How to delete an Authy account'
+      url: https://help.twilio.com/articles/19753637053595
+    - name: 'Authy login issues'
+      url: https://help.twilio.com/articles/19753678752027
+    - name: 'Desktop app end of life'
+      url: https://help.twilio.com/articles/22771146070299
+    - name: 'Enable or disable multi-device'
+      url: https://help.twilio.com/articles/19753646900379
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Twilio uses what it learns from its apps and sites to improve its services, not only to run them. To stop that, you have to ask with its privacy form.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'Providing global connectivity and routing communications; troubleshooting technical issues; training AI/ML models with performance metrics to optimize network reliability; providing dedicated customer support; and, refining our Service suite through usage insights.'
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'Object or Restrict: Oppose or limit data processing, including automated decision making and related profiling.'
+      action:
+        name: 'Ask Twilio to limit how it uses your data'
+        url: https://www.twilio.com/en-us/help/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Twilio’s websites use ad cookies and pixels, which some US laws count as sharing your data. You can turn them off, but only browser by browser. It says your phone data is never shared for marketing.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'Under some U.S. state laws, this is considered "sharing" or "targeted advertising."'
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'Any choices concerning cookies are browser and/or device specific.'
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'While we may share certain categories of personal data for these business purposes, no mobile information will be shared with or sold to any third parties for marketing or promotional purposes.'
+      action:
+        name: 'Cookie choices (privacy notice)'
+        url: https://www.twilio.com/en-us/legal/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Twilio’s websites use advertising cookies unless you turn them off, and that choice only lasts in the browser you made it in, until you clear your cookies.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'Advertising: Used to show you content and ads that are relevant to your interests. You can opt-out of advertising cookies at any time.'
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'If you clear your cookies from your browser on any of your devices, your choices will need to be reset.'
+      action:
+        name: 'Cookie choices (privacy notice)'
+        url: https://www.twilio.com/en-us/legal/privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'Your codes stay on your phone, and backups are locked on your phone before upload, so Twilio has nothing of yours it could read to train AI.'
+      pages:
+        - https://www.twilio.com/en-us/blog/how-the-authy-two-factor-backups-work
+        - https://help.twilio.com/articles/19753636734619
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your codes stay on your phone unless you turn on backups, which your phone locks with a password Twilio never gets, so no one at Twilio can read them.'
+      sources:
+        - url: https://help.twilio.com/articles/19753636734619
+          quote: 'By default, all Authy 2FA account tokens are stored locally.'
+        - url: https://www.twilio.com/en-us/blog/how-the-authy-two-factor-backups-work
+          quote: 'The account is encrypted/decrypted inside your phone, so neither Authy or anyone affiliated with Authy have access to your accounts.'
+        - url: https://help.twilio.com/articles/19753631509019
+          quote: 'Because Authy uses a zero-knowledge security architecture, this password is never sent to our servers.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your account details as long as it needs them to run its services and business. Deleting your Authy account takes a 30-day wait before it’s final.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'Customer Account Data is stored as long as needed to provide Services and operate our business.'
+        - url: https://help.twilio.com/articles/19753637053595
+          quote: 'These steps will include confirmation emails which will give you the opportunity to terminate the process if you change your mind during the 30-day period.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: good
+      reason: 'You can delete your Authy account yourself at any time. It’s gone for good after a 30-day wait, during which you can still change your mind.'
+      sources:
+        - url: https://help.twilio.com/articles/19753637053595
+          quote: 'Users are free to delete their Authy account at any time. Since your security is important, we have provided a secure self-service option for closing and deleting your account.'
+        - url: https://help.twilio.com/articles/19753637053595
+          quote: 'Please note that once the process is completed, it is irreversible and we cannot recover your account.'
+      action:
+        name: 'How to delete your Authy account'
+        url: https://help.twilio.com/articles/19753637053595
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: bad
+      reason: 'You can’t export your 2FA codes at all: to move to another app, you turn 2FA off and on again on each site and scan its new QR code.'
+      sources:
+        - url: https://help.twilio.com/articles/19753420684059
+          quote: 'In order to maintain security for our users, the Authy application does not allow importing or exporting 2FA account tokens.'
+        - url: https://help.twilio.com/articles/22771146070299
+          quote: 'Note: The Authy app lacks an export feature, therefore you have to re-enable the 2FA method and re-add the token in your new application with the steps here.'
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It turns down requests that aren’t properly made, tells you when it’s allowed to, and publishes a yearly report on the requests it gets. It still holds your phone number and sign-in records.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'We notify users of legal requests whenever permitted and where Twilio determines the disclosure will not interfere with an on-going investigation. We object to any requests that are not properly issued.'
+        - url: https://www.twilio.com/en-us/legal/government-requests
+          quote: 'To maintain the trust you place in us, Twilio publishes annual Transparency Reports detailing government data requests.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data is mostly handled in the US, and moved between countries under legal safeguards regulators approve.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'While our primary processing facilities are in the U.S., we use regulator-approved frameworks to ensure personal data receives the same high level of protection everywhere it travels.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'You need a working phone number to sign up, and it asks for your email address too.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'To create an Authy account, we require a phone number.'
+        - url: https://www.twilio.com/en-us/legal/privacy
+          quote: 'We also collect your email address for identity verification and account recovery purposes.'
+        - url: https://help.twilio.com/articles/19753678752027
+          quote: 'An active (in-service) phone number is required to use Authy.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-stated
+      reason: 'The Authy app’s terms have no arbitration clause and don’t say which courts handle a dispute.'
+      pages:
+        - https://www.twilio.com/en-us/legal/authy-app-terms
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It emails you at least 30 days before big changes to the app’s terms, and if you don’t agree you can stop using it.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'Twilio will provide you with written notice of any material updates at least thirty (30) days prior to the date the updated version becomes effective, unless such material updates result from changes in laws, regulations, or requirements from telecommunications providers.'
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'All notices to you will be provided via email to the email address you used to register for the Authy App.'
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'If you do not agree to the updated version of these Authy App Terms, you must stop using the Authy App.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can cut you off at once, without warning, if it only suspects you broke its terms or thinks you put its reputation at risk.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'Twilio may, in its sole discretion, suspend or terminate these Authy App Terms immediately (a) if Twilio suspects you are in breach of these Authy App Terms;'
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: '(c) causes a significant risk of reputational harm to Twilio;'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'Its terms take no rights over your codes, and Twilio never sees them: they stay on your phone, or in backups locked before they leave it.'
+      sources:
+        - url: https://help.twilio.com/articles/19753636734619
+          quote: "We don't keep a record of the accounts you add, so the loss or failure of a device could result in you permanently losing your 2FA account tokens, or access to your important accounts."
+        - url: https://www.twilio.com/en-us/blog/how-the-authy-two-factor-backups-work
+          quote: 'The account is encrypted/decrypted inside your phone, so neither Authy or anyone affiliated with Authy have access to your accounts.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It’s free, but Twilio can drop the app, its features or whole platforms at any time: its desktop apps stopped on March 19, 2024.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'Twilio may discontinue the Authy App, any of its features, and/or support for the Authy App, including its use on certain devices and platforms, at any time.'
+        - url: https://help.twilio.com/articles/22771146070299
+          quote: 'The Authy Desktop app for Linux, MacOS and Windows reached their End-of-Life on March 19, 2024 and are no longer supported.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes Authy accounts you stop using.'
+      pages:
+        - https://www.twilio.com/en-us/legal/authy-app-terms
+        - https://www.twilio.com/en-us/legal/privacy
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'Its licence lets you install one copy of the app and use it under Twilio’s rules of use. Its code isn’t open.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'Twilio grants you a limited, non-exclusive, non-transferable license to install and use one (1) object code copy of the Authy App.'
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'You will use the Authy App in accordance with these Authy App Terms, the Twilio Acceptable Use Policy, and applicable law or regulation.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside firms audit Twilio’s security, it pays researchers who find bugs, and it told users when Authy phone numbers leaked in 2024. The audit reports aren’t public.'
+      sources:
+        - url: https://www.twilio.com/en-us/legal/security-overview
+          quote: 'Twilio has separate and dedicated Information Security teams that manage Twilio’s security program, including those that facilitate and support independent audits and assessments performed by third parties.'
+        - url: https://www.twilio.com/en-us/legal/security-overview
+          quote: 'Additionally, Twilio maintains a Bug Bounty Program through HackerOne, which allows independent security researchers to report security threats and vulnerabilities on an ongoing basis.'
+        - url: https://www.twilio.com/en-us/changelog/Security_Alert_Authy_App_Android_iOS
+          quote: 'Twilio has detected that threat actors were able to identify data associated with Authy accounts, including phone numbers, due to an unauthenticated endpoint.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its terms don’t say whether you may let someone else use your Authy account.'
+      pages:
+        - https://www.twilio.com/en-us/legal/authy-app-terms
+        - https://help.twilio.com/articles/19753646900379
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say how the app updates itself or whether it changes anything else on your phone.'
+      pages:
+        - https://www.twilio.com/en-us/legal/authy-app-terms
+      lastVerified: 2026-11-19

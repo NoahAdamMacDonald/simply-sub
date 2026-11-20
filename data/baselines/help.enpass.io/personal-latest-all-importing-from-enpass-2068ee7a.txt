@@ -1,0 +1,89 @@
+url: https://help.enpass.io/personal/latest/all/importing-from-enpass
+method: fetch
+saved: 2026-11-20
+
+Importing from Enpass | Enpass Help
+Skip to main content
+Business
+Personal
+Security
+Blog
+Pricing
+Main navigation
+Close navigation
+Main
+Business
+Personal
+Security
+Blog
+Pricing
+Main
+Getting Started with Enpass
+Vaults & Syncing
+Organizing Your Enpass Items
+Generating & Changing Passwords
+Importing passwords
+Import from Brave
+Import from Chrome
+Import from Firefox
+Import from Opera
+Import from Safari
+Import from 1Password
+Importing from Bitwarden
+Import from Dashlane
+Importing from Enpass
+Import from ESET Password Secure
+Import from KeePass
+Import from KeePassX
+Import from Keeper
+Import from LastPass
+Import from macOS Passwords
+Import from Microsoft Authenticator
+Import from Microsoft Edge
+Import from mSecure
+Import from Myki
+Import from NordPass
+Import from Norton Password Manager
+Import from Password Boss
+Import from Password Safe
+Import from RememBear
+Import from RoboForm
+Import from SafeInCloud
+Import from SplashID
+Import from Sticky Password
+Import from True Key
+Import from Zoho Vault
+Import from a CSV file
+Passkeys & 2FA
+Security & Biometrics
+Registration & Subscriptions
+Troubleshooting
+Breadcrumbs
+Home
+Personal & Family Support Center
+Importing passwords
+On this Page
+Importing from Enpass
+Importing Enpass data back into Enpass
+Passkeys (for signing into accounts with fingerprints or face recognition) are not transferrable by design, and cannot be imported or exported between password managers.
+If you lose your data accidentally from Enpass, you can restore it by importing from a previous backup or from a previous export.
+To export your data from Enpass:
+From the File menu in Enpass, select Export.
+Select the vault to export, and choose .json as the file format for your export.
+Select if you want to include Items from your Trash or Archive.
+Under Choose Location, click the folder icon, and choose your export location.
+Click Export.
+To import a previous Enpass export:
+From the File menu in Enpass, select Import, then select Enpass.
+Under Select File, click the folder icon.
+Locate the exported .json file on your computer, and click Continue.
+If you have multiple Enpass vaults, select the vault where you want your imported Items to appear. (Your Primary vault is selected by default.)
+Click Continue, and after the import is complete, click Done.
+After confirming your data has been successfully imported, for your security be sure to delete the unencrypted files you used to import your data, then empty your computer's trash/recycling bin.
+Related topics
+Restoring data from a backup
+Importing password data into Enpass
+Capturing & saving login credentials
+Adding items in Enpass
+Copyright Enpass Technologies Inc.
+Powered by Scroll Sites & Atlassian Confluence

@@ -1,0 +1,71 @@
+url: https://help.enpass.io/personal/latest/all/deleting-an-enpass-account-duplicate
+method: fetch
+saved: 2026-11-20
+
+Deleting an Enpass account | Enpass Help
+Skip to main content
+Business
+Personal
+Security
+Blog
+Pricing
+Main navigation
+Close navigation
+Main
+Business
+Personal
+Security
+Blog
+Pricing
+Main
+Getting Started with Enpass
+Vaults & Syncing
+Organizing Your Enpass Items
+Generating & Changing Passwords
+Importing passwords
+Passkeys & 2FA
+Security & Biometrics
+Registration & Subscriptions
+Haven't received Enpass activation code
+Managing subscriptions or payments
+Changing your registered email address
+Unable to restore purchase
+Sharing an Enpass family plan
+Deleting an Enpass account
+Troubleshooting
+Breadcrumbs
+Home
+Personal & Family Support Center
+Registration & Subscriptions
+On this Page
+Deleting an Enpass account
+Deleting an Enpass Account
+Enpass does not retain personal information about users other than your name and email address, which are used only to authenticate your subscription on each of your devices and unlock paid features.
+When an Enpass account is deleted from within the app, paid features will remain available only on the device that was used to purchase Enpass Pro or Enpass Premium. The Enpass app on your other devices will revert to the unregistered, free version of Enpass.
+Note: Deleting your account does not cancel your Enpass subscription.
+When you delete your Enpass account, the following information will be erased from Enpass servers:
+All information you provided when registering your Enpass app
+All data related to your Enpass license
+The following data remains under your control, and would need to be deleted separately:
+Enpass data stored on your devices
+Enpass vaults stored in your cloud accounts
+To delete your Enpass account from within Enpass on iOS or Android:
+Go to Settings and tap on your registered email address.
+In the Account screen, tap Delete Account.
+In the confirmation screen, tap the Delete Account button.
+In the warning overlay, tap Delete.
+To delete your Enpass account from within Enpass downloaded from the Mac App Store:
+Go to Settings > General.
+Click View Details to the right of your registered email address.
+In the Account screen, click Delete Account.
+In the confirmation screen, click the Delete Account button.
+In the warning overlay, click Delete.
+Not sure if your Enpass app came from the Mac App Store?
+Check in the Enpass menu > About Enpass. If you see "Mac App Store" below the version number, you can delete your account with the instructions above.
+To delete your Enpass account with other versions of Enpass:
+Contact Enpass Support
+Related topic
+Managing subscriptions or payments
+Why you should use Enpass
+Copyright Enpass Technologies Inc.
+Powered by Scroll Sites & Atlassian Confluence

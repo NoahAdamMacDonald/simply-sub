@@ -793,8 +793,8 @@ policies:
           quote: 'Free accounts, including the Content located therein, are automatically deleted after two (2) years of inactivity (i.e., no logins or activity associated with the account).'
       lastVerified: 2026-11-19
     - topic: legal.licence
-      tier: neutral
-      reason: 'You may use LastPass for yourself only, and you may not share your account or study its code.'
+      tier: poor
+      reason: 'You may use LastPass for yourself only, and you may not take its apps apart or study its code, with no exception for what the law allows.'
       sources:
         - url: https://www.lastpass.com/legal-center/terms-of-service/personal
           quote: 'We will provide the Services, and you may use them, in line with these Terms for your own personal use.'
@@ -827,6 +827,14 @@ policies:
       sources:
         - url: https://www.lastpass.com/legal-center/terms-of-service/personal
           quote: 'Individual accounts may not be shared with others.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [lastpass.families]
+      tier: great
+      reason: 'Families gives 6 people a Premium account each: family, friends, roommates or anyone you call family.'
+      sources:
+        - url: https://www.lastpass.com/pricing
+          quote: '6 Premium accounts for yourself and your parents, kids, roommates, friends, and whoever else you call family'
       lastVerified: 2026-11-19
     - topic: service.device-limits
       status: not-stated

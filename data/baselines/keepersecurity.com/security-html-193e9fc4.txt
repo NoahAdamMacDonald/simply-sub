@@ -1,0 +1,786 @@
+url: https://www.keepersecurity.com/security.html
+method: fetch
+saved: 2026-11-20
+
+How Keeper Secures Passwords, Secrets and Access Skip to main content Keeper Security named password management leader for fifth consecutive year
+Learn More
+Experiencing a Cyber Attack?
+Blog
+Partners
+English (US) English (US)
+English (UK)
+Español
+Deutsch
+Français
+Nederlands
+Português (BR)
+日本語
+中文 (简体)
+Polski
+Italiano
+Русский
+العربية
+Login Web Vault
+Admin Console
+Keeper
+Platform Products Password Management Enterprise
+Business
+Personal
+Family
+Privileged Access Management KeeperPAM
+Self-Managed Keeper
+Endpoint Privilege Manager
+KeeperDB
+Secrets Manager
+Remote Browser Isolation
+Managed Service Providers (MSPs) Password Manager for MSPs
+Privileged Access Manager for MSPs
+Public Sector
+Compare Keeper vs CyberArk
+Keeper vs Delinea
+Keeper vs BeyondTrust
+Keeper vs 1Password
+Keeper vs LastPass
+Keeper vs Bitwarden
+View All
+Technology Security
+Features
+Integrations
+Developers
+Trust Center
+Keeper DNA
+Solutions Use Cases Privileged Access Management
+Secure AI Agents
+Secure Remote Database Access
+Privileged Session Management
+Zero-Trust Security
+Password Management
+View all
+Industries Manufacturing
+Healthcare
+Universities
+Federal Government
+Financial Services
+Retail
+View all
+Pricing Enterprise Privileged Access Management
+Password Management
+Secure Add-Ons
+Personal Personal and Family
+Student
+Military and Medical
+Download
+Resources Product information Documentation
+End-User Guides
+Case Studies
+Datasheets
+Keeper University
+Keeper 101 Videos
+MSP Admin Guide
+Resources Webinars
+Research Reports
+Public Sector Resources
+Cybersecurity Glossary
+Cyber Threats Database
+Passkeys Directory
+Infographics
+Free Cybersecurity Tools KeeperDB
+Personal Dark Web Scan
+Business Dark Web Scan
+Secure Password Generator
+Secure Passphrase Generator
+Encrypted Messaging App
+Keeper Cyber Check
+Contact Support
+Business Sales
+Newsroom
+Call Us
+Get a Quote Try It Free
+Buy Now View Careers
+Get a Quote
+View Careers
+Login Web Vault
+Admin Console
+Keeper is fanatical about credential security and data protection
+Keeper utilizes world-class security with end-to-end encryption and a zero-knowledge and zero-trust architecture to protect your information and prevent cybercriminals from accessing your data.
+To learn more, view our Trust Center.
+Keeper’s best-in-class security at a glance
+Strongest end-to-end encryption
+Keeper safeguards your passwords, secrets and personal information with AES 256-bit encryption and Elliptic-Curve cryptography (ECC), which is accepted as the most robust encryption in the cybersecurity industry.
+Keeper is a zero-knowledge security provider. Zero knowledge is a system architecture that guarantees the highest levels of security and privacy. Encryption and decryption of data always occur locally on the user's device.
+Vulnerability and bug bounty program
+Keeper is committed to protecting our customers' privacy and personal data. Our mission is to build the world's most secure and innovative security apps, and we believe that bug reports from the worldwide community of security researchers are a valuable component to ensuring the security of Keeper's products and services. For these reasons, we have partnered with Bugcrowd to manage our Vulnerability Disclosure Program (VDP) and bug bounty program.
+FIPS 140-3 Validated
+Keeper is certified by the NIST Cryptographic Module Verification Program (CMVP) to meet the FIPS 140-3 standard.
+Penetration testing
+Keeper partners with third-party experts such as NCC Group, CyberTest and independent security researchers to perform quarterly pen testing against all solutions and systems.
+Secure and reliable cloud vault
+Keeper utilizes AWS in several regions – including the US, US GovCloud, EU, AU, CA and JP – to host and operate the Keeper platform and architecture. This provides customers with the most secure cloud storage available. Data is fully isolated in the customers' preferred AWS region while in transit and at rest.
+High availability
+The Keeper global infrastructure is hosted in multiple high-availability AWS data centers. These data centers are distributed across multiple AWS regions to ensure service availability in the event of a regional internet outage.
+Multi-factor authentication
+Keeper supports multi-factor authentication (MFA), SSO authentication, conditional access policies (CAP), FIDO2 WebAuthn hardware security keys, passkeys, biometric login (such as Face ID, Touch ID and Windows Hello), and Keeper DNA®, which uses smartwatch devices to confirm identity.
+Zero-knowledge encryption
+End-user data is encrypted and decrypted at the device level and record level – never in the cloud or on Keeper's servers. Record-level encryption reduces the "blast radius" of information stored in user vaults and underpins many least-privilege features within the platform, such as record sharing.
+Overview
+Keeper Security, Inc. is passionate about protecting its customers' information with Keeper mobile and desktop security software. Millions of consumers and businesses trust Keeper to secure and access their passwords and private information.
+Keeper's software is constantly improved and updated to provide our customers with the latest in technology and protection. This page provides an overview of Keeper's security architecture, encryption methodologies and hosting environment as of the current published version. An overview into the technical details involving our encryption and security methods are described in this document.
+Our Privacy Policy and Terms of Use are available on our website via the following links:
+Privacy Policy Terms of Use
+Zero-trust platform
+Keeper utilizes a zero-trust architecture, which ensures that every user must be verified and authenticated before they can access a website, application or system.
+Keeper Enterprise Password Management (EPM) gives businesses total visibility and control over their employees' password practices, empowering IT admins to monitor password use and enforce security best practices.
+Keeper Secrets Manager (KSM) provides engineering teams with a platform for managing all credentials – including infrastructure secrets, SSH keys, API keys and certificates with SDKs and CI/CD integration.
+Keeper Connection Manager (KCM) is a remote desktop gateway that provides DevOps and IT teams with effortless, Zero-Trust Network Access (ZTNA) to RDP, SSH, databases, internal web applications and Kubernetes endpoints through a web browser – no agent required.
+How Keeper Supports A Zero-Trust Platform
+Keeper's Encryption & Security Model
+Keeper’s best-in-class security in detail
+Encryption of vault data
+Keeper provides a multi-layered encryption model based on least privilege. 256-bit AES record-level keys and folder-level keys are generated on the client device, which encrypt each stored vault record. The vault records and all of its contents are fully encrypted, including logins, file attachments, TOTP codes, payment information, URLs and custom fields.
+Encryption keys are generated locally on the device to preserve zero knowledge and support advanced features such as record and folder sharing. Zero knowledge means each user has complete control over the encryption and decryption of all personal information in their Keeper Vault, and none of their stored information is accessible by anyone else, not even Keeper employees.
+Record keys and folder keys are encrypted by a 256-bit AES data key which is unique to each user and generated on the user's device.
+On the user's device, another 256-bit AES client key is generated for encrypting a local offline cache (if your enterprise administrator allows offline access). Finally, the 256-bit AES data key is encrypted with another key, as described in the next section.
+Vault encryption methods
+Keeper encrypts data in different ways depending on how users log in. For consumers and family plan members, a master password and biometric authentication are used. For business and enterprise users who log in with SSO, Keeper utilizes elliptic curve encryption for a secure and passwordless experience.
+For users who log in with a Master Password: The key to decrypt and encrypt the data key is derived from the user's master password utilizing the password-based key variation function (PBKDF2), with 1,000,000 iterations. After the user types their master password, the key is derived locally and then unwraps the data key. The data key is decrypted and used to unwrap the individual record and folder keys. The decryption of each key stores record content locally on the user's device.
+Keeper Encryption Model-Master Password Login For users who log in with SSO or passwordless technology: Elliptic Curve Cryptography is used to encrypt and decrypt data at the device level. A local ECC-256 (secp256r1) private key is used to decrypt the data key. After the data key is decrypted, it is used to unwrap the individual record and folder keys. The record key then decrypts each of the stored record contents. The encrypted data key is transmitted between the user's devices through a push system or key exchange service, which is called Device Approval. To preserve zero knowledge, Device Approval is managed locally by the end user.
+SSO Connect Cloud - Multi-Layer Encryption Model SSO encryption model
+First device flow (new user onboarding)
+The data key, sharing key pair and device EC private/public key pair are generated
+The data key is encrypted with the device EC public key and stored in the cloud (DEDK)
+The user logs in with their identity provider (IdP)
+After IdP login, the signed SAML assertion is verified by Keeper
+The vault is created, and the user is onboarded
+Existing device flow
+The user logs in with their identity provider (IdP)
+After IdP login, the signed SAML assertion is verified by Keeper
+Keeper delivers the device-encrypted data key (DEDK) to the user
+The data key is decrypted with the device EC private key
+The data key decrypts the folder keys and record keys
+Record keys decrypt the record contents
+New or unrecognized device flow
+On every new device, an EC private/public key pair is generated
+The user logs in with their identity provider (IdP)
+After IdP login, the signed SAML assertion is verified by Keeper
+The device is "approved" via Keeper Push, admin approval or the Keeper Automator service (*see Device Approval below)
+During the approval process, the data key is encrypted with the public key of the new device
+The device-encrypted data key (DEDK) is sent to the user
+Device approval
+A device approval is a mechanism to securely deliver the user's data key to their new device while preserving zero knowledge
+A user can approve their device by encrypting the data key with the new device's public key
+An admin can approve the device from the Admin Console, Commander or Keeper Automator service
+The admin decrypts the user's data key and re-encrypts the data key with the new device's public key
+The Keeper Automator service can perform automated device approvals on the customer's infrastructure
+Keeper Automator checks the SAML signature, unwraps the data key and encrypts the data key with the new device's public key
+Read more about the Keeper Automator service.
+Device-level security for SSO Connect Cloud
+For SSO Connect Cloud users, an Elliptic Curve private key is generated and stored locally on each device. On modern web browsers and the Electron-based Keeper Desktop application, the Keeper Vault stores the local device EC private key (“DPRIV”) as a non-exportable CryptoKey. On iOS and macOS devices, the key is stored in the device Keychain. On Android devices, the key is encrypted with the Android Keystore, utilizing Encrypted Shared Preferences. Where available, Keeper utilizes secure storage mechanisms on each operating system.
+The Device Private Key is not directly utilized to encrypt or decrypt vault data. Upon successful authentication from the Identity Provider, a separate key (that is not stored) is utilized for decryption of the vault data. Therefore, offline extraction of the local Device Private Key cannot decrypt a user's vault.
+Encryption of data at rest
+Keeper uses AWS to host the Keeper platform and architecture. Our AWS data centers are located in multiple geographic locations, and our customers may host their Keeper tenant in any preferred primary region. This ensures that customer data and access to the platform will be isolated to that specific region.
+Vault data at rest is encrypted on the user's device locally using AES-256 GCM, and encrypted data in transit is encrypted with TLS 1.3 with an additional layer of encryption in the payload. Customer data is isolated through the use of record-level encryption.
+The Keeper encryption model adheres to the following structure:
+All vaults are encrypted by a unique, client-side generated 256-bit AES key in GCM mode.
+All record-level keys in shared folders are wrapped by a 256-bit AES shared folder key.
+The record and folder keys for vault users are encrypted with another 256-bit AES key called the data key.
+For Keeper Secrets Manager (KSM), the user's record and folder keys are encrypted with a 256-bit AES application key.
+For users logging in with a master password, the keys to decrypt and encrypt data are derived from the master password.
+Logging in with SSO or passwordless technology uses Elliptic Curve Cryptography to encrypt and decrypt data at the device.
+Secure sharing of secrets between users uses Elliptic Curve Cryptography key distribution.
+Every encrypted payload is sent to Keeper servers and is wrapped by a 256-bit AES transmission key with TLS – to protect against Man in the Middle (MITM) attacks. The key is generated on the client and transferred using ECIES encryption via the server's public elliptic curve key. The encrypted transmission key is additionally wrapped with ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) to provide quantum-resistant encryption.
+Diagram of Record Encryption
+Record versioning
+Keeper maintains a full encrypted version history of every record stored in the user's vault, providing confidence that no critical data is ever lost. From the Keeper client application, users can examine the record history and perform a restore of any individual vault record. If a stored password or file in Keeper is changed or deleted, users always have the ability to perform a point-in-time restore.
+Keeper Business
+Customers who purchase Keeper Business are provided an extra layer of control over their users and devices. Keeper administrators are provided access to a cloud-based administrative console which allows full control over user on-boarding, off-boarding, role-based permissions, delegated administration, teams, Active Directory/LDAP integration, Two-Factor Authentication, Single Sign-On and security enforcement policies. Keeper's role-based enforcement policies are fully customizable and scalable to any sized organization.
+Super encryption of data at rest
+In addition to storing only device-encrypted ciphertext in the AWS infrastructure, Keeper also performs super-encryption with multi-region hardware security modules (HSM) using non-exportable keys.
+Encryption and protection of backups
+At the product/user level, Keeper's software maintains a full revision history of every record. Therefore if a user requires recovery, they can view and revert to prior versions of their stored Keeper records at any time, without limit through the user interface.
+At the system level, Keeper's encrypted databases and file objects are replicated and backed up in multiple geographical regions for disaster recovery purposes. All backups are encrypted with AES-256 in addition to super-encryption of device-generated ciphertext.
+For business customers who require recovery assistance (for example, due to a customer accidentally deleting a vault or shared folder), Keeper's Support Team can assist in a recovery to any point in time (up to the minute) within 30 days. For a fee, Keeper support can assist in any recovery, such as user restore, vault restore or full Enterprise restore.
+Account recovery
+A 24-word recovery phrase enables Keeper customers to regain access to their Keeper Vault if they lose or forget their master password.
+Keeper has implemented recovery phrases using the same BIP39 word list used to protect crypto wallets. The word list used in BIP39 is a set of 2,048 words used to generate an encryption key with 256 bits of entropy. This method of recovery is commonly used in popular bitcoin and cryptocurrency wallets. Each word in the BIP39 list is carefully selected to improve visibility and make the recovery process less error-prone. Users should write their recovery phrase down and store it in a secure place such as a safe.
+The recovery phrase generates a 256-bit AES key that encrypts a copy of the user's data key. To recover the account and reset the master password, users will need the recovery phrase along with an email verification and Two-Factor Authentication (2FA).
+Enterprise Admins can disable account recovery at the role enforcement policy level.
+Recovery Phrase Setup
+Enterprise encryption keys
+Keeper Enterprise and Business customers can manage many different capabilities of the Keeper platform, such as role-based access policies, provisioning, authentication and management.
+Admin functions are protected by the Keeper platform with both encryption and authorization. Authorization ensures that only designated users can perform certain functions. Encryption ensures that designated admins are only able to physically and cryptographically perform functionality that involves vault data or enterprise-controlled keys. A few examples of this include the following:
+Keeper's platform is a de facto key management platform, where users and administrators have full control over their private keys.
+Public and private encryption key pairs are used in the creation of devices, users and teams.
+Role policies for transferring vaults and performing device approvals utilize public and private encryption keys.
+Elliptic Curve (EC) key pairs are used for sharing data between users, and from the individual user to the admin at the enterprise level.
+Sensitive usage data, such as record password strength, is encrypted with enterprise public keys that only the admin can decrypt.
+The record title, URL and record type fields of each enterprise user's vault record is encrypted with the enterprise public key and can be decrypted within the Keeper Admin Console, by an admin assigned with compliance reporting privileges.
+Device verification
+Before a user can even attempt to log into an account, they must pass a device approval and verification step first. Device verification prevents enumeration of accounts, and protects against brute force attacks.
+Customers who log in with a master password can perform device verification using several methods, including:
+Email verification code
+2FA code entry from a TOTP or text message
+Using Keeper Push™ to send a message to a recognized device
+For customers who authenticate with Keeper SSO Connect Cloud, device approval is done with a key transfer, in which the user's encrypted data key is delivered to the device, which is decrypted locally using the user's elliptic curve private key. Device approval methods include the following:
+Keeper Push (using push notifications) to existing user devices
+Admin Approval via the Keeper Admin Console
+Automatic approval via Keeper Automator service
+Automatic Admin approval via Commander CLI
+Learn more about device approvals.
+Data privacy
+Keeper is GDPR compliant and committed to ensuring our processes and products maintain GDPR compliance for our customers in the European Union and across the world. We comply with the EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension to the EU-U.S. DPF, the German Federal Data Protection Act (BDSG) and the Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF") as set forth by the U.S. Department of Commerce.
+See Keeper's GDPR Privacy Policy.
+None of Keeper's applications contain trackers or 3rd party libraries that perform tracking. As an example, this report provides information on Keeper's Android app, which shows that zero trackers are installed.
+Data isolation
+Keeper's SaaS platform hosts data in the following Amazon AWS data centers. Customer may host their Keeper tenant in any preferred primary region. Customer data (stored ciphertext) and access to the platform is isolated to the specific region.
+Available regions:
+United States (US)
+United States Government Cloud (US_GOV)
+Department of Defense (DoD) Impact Level 5 (IL5)
+Europe (EU)
+Australia (AU)
+Japan (JP)
+Canada (CA)
+Encryption in transit
+The Keeper Vault is protected by APIs, which are validated through authorization on the user's device.
+The user retrieves a session token with their login and sends it with each API call.
+The session token is managed and controlled on the backend server.
+Login is performed with a master password, biometrics, session resumption or SAML 2.0 SSO authentication.
+When using a master password, the user device derives a 256-bit authentication key using PBKDF2-HMAC_SHA256 with 1,000,000 iterations and a random salt. An authentication hash is created by hashing the authentication key using SHA-256. When logging in, the authentication hash is compared against a stored authentication hash in the Keeper Vault. After the user logs in, a session token is created on the server and sent to the user to be utilized by the device for subsequent API requests. To allow ongoing use of client-to-server communications, the session must be active.
+Keeper uses 256-bit and 128-bit TLS to encrypt 100% of data stored in the user app and Keeper Secure File Storage.
+Keeper deploys TLS certificates signed using the SHA2 algorithm. SHA2 is the most secure signature algorithm currently available by commercial certificate authorities. Keeper's use of SHA2 protects against counterfeit certificates that an attacker could use to impersonate a website.
+Memory Protection with Keeper Forcefield
+Keeper Forcefield extends Keeper’s Zero-Knowledge security model by providing real-time memory protection for sensitive applications on Windows endpoints. While Keeper’s encryption ensures data is secure at rest and in transit, Forcefield prevents unauthorized access to decrypted data that resides in memory during runtime - closing a critical gap exploited by credential-stealing malware.
+Traditional encryption protects stored ciphertext and network transmissions, but runtime memory remains a targeted attack surface. On Windows, processes running under the same user context can read each other’s memory, enabling malware to extract sensitive credentials, session tokens, and other secrets directly from application memory. Keeper Forcefield blocks unauthorized memory access attempts - including those from infostealer malware by enforcing strict memory access controls at the operating-system kernel level.
+Learn more about Keeper Forcefield.
+Quantum-Resistant Cryptography
+Keeper has adopted Quantum-Resistant Cryptography (QRC), specifically Kyber Hybrid Key Encapsulation Mechanisms (KEM), to secure the vault against emerging quantum computing threats like the "store-and-crack" attack. This hybrid approach combines traditional cryptography with quantum-resistant algorithms, ensuring protection for user authentication and encrypted data transmission within TLS. The implementation leverages established Kyber libraries, allowing for a gradual, per-client rollout and independence from browser-specific support, thereby future-proofing user data against quantum adversaries.
+Quantum-Resistant Security: Integrates Kyber Hybrid KEM to protect sensitive data against future quantum attacks.
+Hybrid Approach: Combines traditional and quantum-resistant algorithms for layered defense and backwards compatibility.
+Targeted Implementation: Secures Keeper's authentication protocol and encrypted tunnels within TLS.
+Flexible Rollout: Enables gradual, per-client deployment using established Kyber libraries.
+Protection Against "Store-and-Crack": Ensures data intercepted today remains secure against future quantum decryption capabilities.
+Cloud authentication
+Keeper has created an advanced cloud authentication and network communications model with the highest levels of privacy, security, trust and transparency. A few key features of this authentication model include:
+Integration with any SAML 2.0 provider
+Keeper integrates with all SAML 2.0-compatible identity providers, including Okta, Microsoft Entra ID (Azure), AD FS, Google Workspace, Centrify, OneLogin, Ping Identity, JumpCloud, Duo, Auth0 and more.
+Our products offer two different SSO types: SSO Connect Cloud and SSO Connect On-Prem. Both implementations provide a zero-knowledge architecture with seamless authentication for users.
+User master passwords are never transmitted over the network layer
+Unlike most SaaS services, Keeper users' login credentials never leave their device. When users log in to Keeper using a master password, PBKDF2 is utilized on the local device to derive a 256-bit AES key for decryption. An additional PBKDF2 key is generated at the device level and then hashed with HMAC_SHA256 to create an authentication token. Keeper has zero knowledge of the user's decryption key.
+Traffic between the client device and Keeper Cloud cannot be intercepted or decrypted
+All encrypted payloads sent to Keeper's servers are wrapped by a 256-bit AES transmission key and TLS to protect against man-in-the-middle (MITM) attacks. The transmission key is generated on the client device and transferred to the server using ECIES encryption via the server's public EC key.
+New devices cannot be used to log in to an account without a verification step
+Users cannot use new devices to log in to their Keeper accounts without using a verification method. Keeper supports several types of verification methods, depending on the authentication scheme.
+Multi-factor authentication (MFA) is performed after verification, before users enter their master password
+If a user has MFA configured or enforced, they must first pass this step before entering their master password.
+Master password entry cannot be performed until the device verification and MFA steps succeed
+If no verification method is set up, the user is unable to proceed to enter their master password. This advanced authentication protects against several common attack methods, including brute force attacks, password spraying, enumeration and MITM.
+Multi-factor authentication (MFA)
+To protect against unauthorized access to a customer's account, Keeper offers multi-factor authentication (MFA) – an approach to authentication requiring two or more authentication factors, which are a knowledge factor, a possession factor and/or an inherence factor. Learn more about setting up MFA in Keeper.
+Keeper uses your master password and the device in your possession to provide an extra layer of security if either your master password or device is compromised. Keeper supports FIDO2 WebAuthn hardware keys and software-based solutions such as TOTP and SMS.
+When using a TOTP MFA/2FA method, Keeper generates a 10-byte secret key using a cryptographically-secure random number generator. This code is valid for about a minute and cannot be reused once a successful authentication is performed. Keeper supports any TOTP application, including Google Authenticator and Microsoft Authenticator. Keeper also directly integrates with popular MFA services such as Duo and RSA SecurID.
+When using MFA authenticators, such as Google Authenticator, Microsoft Authenticator or other TOTP applications on your mobile device, the Keeper server internally generates a QR code containing your secret key. Each time a user activates MFA, a new key is generated.
+To activate MFA, visit the settings screen of the Keeper Web App, Desktop App or iOS/Android application. Keeper Business admins can also enforce the use of MFA and supported MFA methods via the Keeper Admin Console.
+Support for FIDO2-compatible WebAuth is provided through Keeper, with hardware-based security key devices such as the YubiKey and Google Titan keys as an additional factor. Passkeys are also supported as a 2FA method using physical devices or web browsers. Security keys provide a secure way to perform MFA without requiring the user to enter codes manually.
+Android Smart Watch Apple Smart Watch DUO Entrust Google Authenticator Microsoft Authenticator RSA SecureID SMS Text Message Titan Security Key TOTP Yubico
+Keeper Active Directory / LDAP Bridge
+The Keeper Bridge integrates with Active Directory and LDAP servers for provisioning and onboarding of users. Keeper Bridge communication is first authorized by an admin with the privilege to manage the bridge. A transmission key is generated and shared with Keeper for all subsequent communication. The use of the transmission key is the authorization for all operations performed by the bridge except for the initialization of the Bridge. The transmission key may be regenerated at any time and it will automatically rotate every 30 days.
+The transmission key is only for transmission which means a compromised key may be reinitialized or revoked without any loss of data or permission.
+Keeper Bridge may not give privileges to a role or user. It may add a user to a privileged role, as long as no enforcement keys are needed. Keeper Bridge may not elevate itself or a user above the portion of the tree it is managing. Not all operations are available to the Bridge, i.e. the Bridge can disable an active user but may not delete the user. The admin will have to choose if the user is to be deleted or transferred.
+SSO authentication with MFA
+When Keeper is deployed with an SSO solution such as Entra ID / Azure AD, Okta, Ping, Google Workspace or any other SAML 2.0 identity provider, MFA can be fully managed during the IdP login process. Keeper also supports Azure conditional access policies across all device types and applications.
+MFA can be enforced on both the identity provider's side and Keeper's side. For example, once a user passes the MFA step with the identity provider, they can additionally be forced to pass a second MFA step at the Keeper interface. This policy can be enforced by the Keeper administrator.
+Amazon Web Services CAS Centrify DUO F5 Google Workplace IBM Security JumpCloud Microsoft ADFS Onelogin Okta Ping Identity
+SAML 2.0 authentication with SSO Connect Cloud
+Keeper SSO Connect Cloud enables enterprise customers to fully integrate Keeper with any SAML 2.0-compliant identity provider and deploy encrypted vaults to their users.
+SAML implementation with Keeper allows a user to authenticate through their SSO IdP and then decrypt their vault ciphertext on their device. Every user device has an individual Elliptic Curve (EC) key pair and a device-encrypted data key. In addition, each user has their own 256-bit AES data key. When signing in to Keeper using a new device, the user must approve it using an existing device, or an admin or automation service with privileges can approve the device. Once a device is approved, the system securely exchanges the data key, allowing the new device to decrypt the vault.
+This capability is essential so a user can decrypt their vault locally, on their device, without the requirement of a master password or password key derivation. Zero knowledge is maintained because the cloud cannot decrypt the user's data key. Instead, the device-encrypted data key (DEDK) is provided to the user upon successful authentication of the IdP (e.g., Okta, Azure, Google Workspace, AD FS, Ping, Duo, Jumpcloud, etc.). The data key for the user is decrypted locally on the device with the elliptic curve device private key. Keeper holds US Utility Patents on this technology, which has been in production since 2015.
+Keeper Automator is an optional service which performs instant team approvals, device approvals and team user assignments upon a successful login from the SSO identity provider.
+Once Automator is running, users can seamlessly access Keeper on new devices (not previously approved) after a successful authentication with your identity provider, without any further approval steps.
+Keeper SSO Connect On-Prem
+While most customers deploy Keeper SSO Connect Cloud, customers that require an on-prem solution can deploy SSO Connect On-Prem, a self-hosted integration that requires either a Windows or Linux hosted application server. In order to maintain Zero Knowledge security and ensure a seamless SSO experience for users, Keeper SSO Connect must be installed on the customer's server. Windows, Mac and Linux environments are fully supported with High Availability (HA) load balancing operational modes and super-encryption with hardware security modules.
+Keeper SSO Connect automatically generates and maintains the Master Password for each provisioned user, which is a randomly generated 256-bit key. This Master Password is encrypted with the SSO Key. The SSO Key is encrypted with the Tree Key. The SSO Key is retrieved from the server upon Keeper SSO Connect service startup, and then decrypted using the Tree Key, which is stored locally on the server to support automatic service startup. Communication between SSO Connect and Keeper's Cloud Security Vault is protected with a Transmission Key. SAML communications are cryptographically signed and are protected by the RSA-SHA256 or ECDSA-SHA256 signature algorithm depending on the type of encryption key (RSA or ECC) provided by the customer.
+Sharing
+Keeper supports the ability to securely share records between users, to an internal team or even outside their organization (if permitted by the Keeper administrator).
+Sharing records
+Keeper users can directly share records with each other. To do so, Keeper initially requests the user's elliptic curve public key from their vault. Each record has a record key that is encrypted with the recipient's elliptic curve public key and syncs to the user's Keeper Vault.
+The owner of the encrypted shared record decrypts the record key with their elliptic curve private key. The record key will also be re-encrypted with the user's data key, and the ciphertext is stored in the recipient's vault.
+Record Sharing Architecture One-Time Share
+Keeper One-Time Share provides limited-time, secure sharing of a record – such as a password, credential, secret, connection, document or other confidential information – with anyone, even if they don't have a Keeper account. The Keeper One-Time Share encryption model uses the same technology as Keeper Secrets Manager (KSM) – a zero-knowledge and zero-trust platform for securing cloud infrastructure.
+In the user's Keeper Vault, the originator generates one-time access by clicking on One-Time Share. The 256-bit AES record key is encrypted with a one-time access token, and the encrypted value is stored in the Keeper Vault.
+The user sharing the one-time access token to a recipient uses a simple URL or QR code. The portion of the URL that contains the access token is held within the "fragment identifier" portion of the URL – which is never sent to Keeper's servers. Therefore, Keeper cannot access or decrypt the information, and zero knowledge is preserved.
+The URL opens in the user's browser, and the vault application is loaded on the device. The token is handed off directly to the local vault application and is not sent to the server.
+The recipient then uses their device to generate an end user-side EC key pair, and the private key is stored locally, on the device, in the browser's CryptoKey storage.
+Upon the recipient's first use, the SDK library authenticates with the hash of the one-time access token. Then, Keeper's server responds with the encrypted record ciphertext and encrypted record key.
+The device decrypts the record key with the one-time access token, and the contents are decrypted. The key is stored on the client device in the browser's CryptoKey storage or another storage location.
+The encrypted record key for that given device is deleted so the token cannot be used again. After that, the client request must be signed with the private key.
+More calls on the same device are sent with an identifier defining the device and a request that is signed with the client private key. The request for the given device identifier – through the ECDSA signature – uses the client public key of the device and is checked by the server. Keeper processes the request, and the server returns an encrypted record in ciphertext to the user's device.
+In addition to the record-level encryption, the client device creates a randomly generated AES-256 bit transmission key, which is encrypted with the public key of the Keeper cloud API. The client device decrypts the response from the server with the transmission key and then decrypts the ciphertext response payload with the record key, which decrypts the contents of the record.
+One-Time Share Share Admin
+Keeper's Share Admin feature is a role-based access control (RBAC) permission that gives admins elevated privileges over an organization's shared folders and records. Share Admins have full user and record privileges for any shared record to which they have access.
+Share Admin
+Secrets Manager encryption model
+Keeper Secrets Manager is a zero-knowledge platform for IT and DevOps professionals that allows teams to manage secrets throughout the software development and deployment lifecycle.
+Keeper Secrets Manager Encryption Model Secrets Manager uses the following encryption model
+Encryption and decryption happens locally on the device (not on the server).
+Plain text is never stored on the device.
+Plain text is never received by the server.
+No one. including Keeper employees, third parties or intermediaries, can decrypt secrets.
+The client device manages the keys to encrypt and decrypt secrets, under control of the user.
+Every secret is encrypted by a client-side generated 256-bit AES encryption key in GCM mode.
+If the secret is contained within a shared folder, the record key is wrapped by a shared folder key.
+A 256-bit AES application key is generated on the client side and used to decrypt the shared folder and record keys. The record key will then decrypt the individual secret.
+Keeper servers are wrapped by a 256-bit AES key with TLS to secure against MITM attacks.
+The transmission key is generated on the client device and transferred to the server using ECIES encryption via the server's public EC key. The encrypted transmission key is additionally wrapped with ML-KEM (Module-Lattice-Based Key-Encapsulation Mechanism) to provide quantum-resistant encryption.
+Elliptic Curve Cryptography is used to share secrets between users for secure key distribution.
+Multi-layer encryption provides access control at the user, group and admin levels.
+Secrets that are managed within the vault are segmented and isolated to defined Secrets Manager devices that are granted access to the record and folder.
+Keeper Secrets Manager’s model for password rotation
+A unique Keeper Secrets Manager (KSM) client, called a gateway, is installed in the customer's environment.
+The gateway establishes a secure outbound connection to the Keeper router.
+The router is a cloud service hosted in Keeper's AWS environment, which facilitates communication between the Keeper backend API, end-user applications (Web Vault, Desktop App, etc.) and gateways installed in the user's environment.
+Websockets are established between the end-user device (e.g., Web Vault) and the Keeper Router using the current session token.
+The Keeper Router verifies the session token and authenticates the session. All encrypted payloads sent to the Keeper Router are wrapped by a 256-bit AES key, in addition to TLS, to protect against MITM attacks.
+The 256-bit AES key is created on the end-user device and transferred to the server using ECIES encryption via the router's public EC key.
+Rotation and discovery requests are issued between the end-user device (or Keeper Scheduler) and the gateway through the established websocket communications channel.
+During rotation, when the gateway requires a secret from the Keeper Vault, it authenticates and decrypts the secret using Keeper Secrets Manager APIs to preserve zero knowledge.
+Like any other Secrets Manager device, access can also be restricted based on IP address, in addition to the encryption and signing process.
+Password Rotation Infrastructure Diagram
+Zero-trust connection and tunnel security
+Zero-Trust KeeperPAM® provides the capability to establish cloud and on-prem privileged sessions, create tunnels, establish direct infrastructure access and secure remote database access without a VPN.
+A Connection is a visual remote session using the web browser. Interaction between the user and the target device is with a web browser window or within the Keeper Desktop application.
+A Tunnel is a TCP/IP connection that is established between the local vault client through the KeeperPAM Gateway to the target endpoint. The user can utilize any native application for communicating with the target endpoint, such as the command-line terminal, GUI application or database management application such as MySQL Workbench.
+When the user establishes a connection or tunnel:
+The Vault Client application communicates to the Keeper Router infrastructure to initiate a WebRTC connection that is protected by a ECDH symmetric key that is stored inside the relevant Keeper record.
+The KeeperPAM Gateway communicates with the Keeper Router through outbound-only WebSockets.
+The KeeperPAM Gateway utilizes Keeper Secrets Manager APIs to retrieve the necessary secrets from the vault, including the ECDH symmetric key.
+For Connections, the Vault Client (using the Apache Guacamole protocol) passes data through the WebRTC connection to the KeeperPAM Gateway that then uses Guacd to connect to the destination found in the Keeper record.
+For Tunneling features (port forwarding), a local port is opened up on the local device running Keeper Desktop software. Data sent to the local port is transmitted through the WebRTC connection to the KeeperPAM Gateway and subsequently forwarded to the target endpoint defined in the Keeper record.
+Session recordings of connections are protected by an AES-256 encryption key ("recording key") which is generated on the KeeperPAM Gateway on every session. The recording key is additionally wrapped by a HKDF-derived AES-256 resource key.
+Zero-trust connection and tunnel security Remote Browser Isolation security
+Keeper Remote Browser Isolation technology protects access to internal web applications or any other web-based asset through the Keeper Connection Manager Docker container or through the KeeperPAM Gateway.
+Using the Connection Manager Docker container method:
+The user authenticates into the Keeper Connection Manager web service, hosted by the customer in a Docker container.
+The user launches a Remote Browser Isolation session to the target web application. Between the user's browser and the hosted Keeper Connection Manager web service, communication over HTTPS is protected by Let's Encrypt or the customer's specified certificate.
+On the Keeper Connection Manager Docker container, an embedded version of Chromium is executed within a sandbox, the target website is rendered using a local display driver that streams the visible content of the page in real time to the user's web browser using the Apache Guacamole protocol.
+Using the KeeperPAM Gateway with the Keeper Web Vault or Desktop App:
+The Vault Client application communicates to the Keeper Router infrastructure to initiate a WebRTC connection that is protected by a ECDH symmetric key that is stored inside the relevant Keeper record.
+The KeeperPAM Gateway communicates with the Keeper Router through outbound-only WebSockets.
+The KeeperPAM Gateway utilizes Keeper Secrets Manager APIs to retrieve the necessary secrets from the vault, including the ECDH symmetric key.
+The Vault Client (using the Apache Guacamole protocol) passes data through the WebRTC connection to the KeeperPAM Gateway that then uses HTTP or HTTPS to connect to the destination found in the Keeper record.
+Session recordings of connections are protected by an AES-256 encryption key ("recording key") which is generated on the KeeperPAM Gateway on every session. The recording key is additionally wrapped by a HKDF-derived AES-256 resource key.
+Remote Browser Isolation security Browser Isolation protection
+Several security measures are activated by using the Remote Browser Isolation protocol:
+The web application endpoint being protected is wrapped by a layer of TLS encryption from the Keeper Connection Manager gateway to the user's local device, regardless of whether TLS is used between gateway and endpoint - protecting against MITM attack or packet inspection on the user's local network.
+The remote browsing session is visually projecting the interaction to the user's local device using a canvas and graphical rendering. No JavaScript code or HTML from the target website is executed on the user's local machine.
+Since no website code from the target is executed locally and the local browser cannot directly access the underlying application code, the isolated web application is protected against attack vectors such as reflected cross-site scripting vulnerabilities, cross-site request forgery, and API abuse.
+The end user can be restricted from performing data exfiltration from the target endpoint through URL and resource request filtering. File uploads and downloads are restricted, even if the target web application would otherwise permit the action.
+The browsing session and keystrokes can be recorded for auditing and compliance purposes, providing the ability to perform forensic analysis of web-based sessions.
+Credentials that are auto-filled from the gateway into the target web application are never transmitted to the user's device, and are not accessible by the user on their local device, protecting against secret leakage.
+Through firewall policies, the user can be required to access the target web application only through the remote browser isolation session, reducing the threat from a compromised browser or local device malware.
+The target web application becomes protected by Single Sign-On and/or MFA authentication, even if the application does not natively support it. Keeper protects access to the vault and any Remote Browser Isolation sessions through the advanced authentication methods described in this document.
+Browser Isolation protection
+BreachWatch®
+Keeper operates a managed, self-contained architecture on AWS called BreachWatch. BreachWatch is physically separate from the Keeper API and user records.
+A physical hardware security module (HSM) on BreachWatch servers is used to process, hash and store billions of unique passwords from dark web data breaches. All passwords are processed on Keeper's servers using the HMAC_SHA512 hashing method and hashed with HSM using a non-exportable key.
+When BreachWatch is activated on the client device, an HMAC_SHA512 hash is generated based on every record and sent to the server. On the server, a second hash is created using HMAC_SHA512 via the HSM using a non-exportable key. The “Hashes-of-Hashes” are compared to see if a credential has been breached.
+The BreachWatch architecture was built to prevent the correlation of a breached password to a password in the user's vault, no matter the size of the data breach. The breached password detection utilizes a physical HSM to make sure that hashing can only be performed online – to prevent any brute force attack on the data.
+The passwords are hashed twice with HMAC_512: once on the client device using a "pepper," and once in the AWS CloudHSM using a hardware security module with a non-exportable key.
+HMAC_512 is utilized because it takes advantage of a strong hashing function plus a secret key, which is not exportable. Therefore, an offline attack against the hashes is not feasible.
+Message Authentication Code (MAC) with the result of a cryptographic hash function expands the use of hash functions. Its results depend not only on the message but on a second input that can be a secret key.
+BreachWatch is 100% built by Keeper with the use of SpyCloud data feeds, but Keeper never sends any data to third parties.
+Keeper BreachWatch Model Domain scanning
+BreachWatch customers download a list of domains that have been breached and perform the checking locally.
+Username and password scanning
+Client devices connect to BreachWatch and upload a list of hashed usernames (or passwords) along with a client-selected, random identifier (separate identifiers for the username- and password-checking services). These password hashes are processed on upload with HMAC using a hardware security module (HSM) and a secret key stored in the HSM marked as non-exportable (meaning the HSM will only process the HMAC locally and the key cannot be extracted). These HMAC'd inputs (usernames or passwords) are compared against the breach datasets which have been processed with the same HMAC and key. Any matches are reported to the client device. Any values that don't match are stored alongside the client's anonymized ID.
+As new breached usernames and passwords are added to the system, they are processed with HMAC on the HSM, added to the BreachWatch dataset and compared against the stored client values. Any matches queue an alert for that client ID.
+Clients check-in periodically to BreachWatch and present their BreachWatch IDs. Any queued messages are downloaded and clients upload any new or changed usernames and passwords which are processed the same way.
+Security of the BreachWatch services is trust-on-first-use (TOFU). That is, clients must assume that the BreachWatch server is not malicious (that is, not actively compromised by an attacker) when the client uploads their hashed values. Once these values are processed with an HSM they are secured against offline cracking attempts. In other words, if an attacker steals the dataset of stored client values, they cannot crack those values offline without the HMAC key stored in the HSM.
+If a breach of a password is detected, the client device sends a username+password combination hash to the BreachWatch servers which then performs the same HMAC hash comparison to determine if a combination of username+password was breached, and if so, the domains related to those breaches are returned so the client device can determine if username+password+domain is matched. If all three parameters match on the client device, the user is alerted as to the severity of the breach.
+BreachWatch for business and enterprise customers
+When BreachWatch is activated for business and enterprise customers, the end-user vaults are scanned automatically, every time a user logs in with Keeper. The BreachWatch summary data scanned on the user's device is encrypted with the Enterprise public key and decrypted by the enterprise administrator when logging into the Keeper Admin Console. This encrypted information includes the email address, number of high-risk records, number of resolved records and number of ignored records. The Keeper administrator is able to view user-level summary statistics within the Admin Console user interface.
+Event logging and reporting
+When integrated with the Advanced Reporting & Alerts, Keeper end-user devices may also be optionally configured to transmit detailed real-time events into 3rd party SIEM solutions and the Keeper Admin Console reporting interface. The event data contains email address, record UID, IP address and device information (events do not include any decrypted record data, since Keeper is a Zero-Knowledge platform and cannot decrypt user data).
+By default, detailed BreachWatch event data is not sent to the Advanced Reporting & Alerts Module or any connected external logging systems. To activate event-level reporting of BreachWatch data to the Advanced Reporting & Alerts Module you must enable the event role enforcement policy under the specific role > Enforcement Policies > Vault Features screen. Once activated, the end-user client devices will begin sending this event data. Since integration with 3rd party SIEM solutions is transmitted from the Keeper backend to the target SIEM, this event information is therefore readable by the target SIEM and could be used to identify which records and which users within the organization have high-risk passwords. If the Keeper Administrator does not wish to transmit record-level event data to the Keeper Advanced Reporting & Alerts Module, this setting can be left disabled.
+Splunk Sumo Logic LogRhythm Syslog Push IBM QRadar Azure Sentinel AWS S3 Bucket Devo Datadog Logz.io Elastic Crowdstrike
+Offline Mode
+Offline Mode allows users to have access to their vault when they are not able to connect online to Keeper or to their SSO Identity Provider. This capability is available on Keeper's mobile app, desktop application and web vault across all browsers.
+The capability works by making a copy of the vault to the user's local device. The vault data stored offline is AES-GCM encrypted with a 256-bit “Client Key” that is generated randomly and protected by PBKDF2-HMAC-SHA512 with 1,000,000 iterations and a random salt. The salt and iterations are stored locally. When the user enters their Master Password or uses a biometric, a key is derived using the salt and iterations and an attempt is made to decrypt the Client Key. The Client Key is then used to decrypt the stored record cache. If Self-Destruct protection is enabled on the user's vault, 5 failed login attempts will automatically wipe all locally stored vault data. For business customers, offline access can be restricted based on role enforcement policies by the Keeper administrator.
+Emergency access (digital legacy)
+Keeper's individual and family plans allow users to add up to five emergency contacts to grant vault access in the event of the user's death or another emergency. The user specifies a wait time, and once this wait time has elapsed, the emergency contact will have access to the user's vault. Sharing the vault with an emergency contact is zero knowledge, and the user's master password is never shared. Additionally, 2048-bit RSA encryption is used with a 256-bit AES key. The emergency contact must have a Keeper account to accept the information.
+Emergency Access Feature
+Network architecture
+Keeper utilizes AWS in North America (Commercial or GovCloud), Europe, Australia, Japan and Canada for localized data privacy and geographic isolation to host and operate the Keeper solution and architecture. Utilizing AWS allows Keeper to seamlessly scale resources on-demand and provide customers with the fastest and safest cloud storage environment. Keeper operates both multi-zone and multi-region environments to maximize uptime and provide the fastest response time to customers. Enterprise customers may host their Keeper tenant in any preferred primary region. Customer data and access to the platform are isolated to that specific region.
+Cloud authentication
+Keeper has created an advanced cloud authentication and network communications model that has been built for the highest levels of privacy, security and trust. A few key features of the authentication model are:
+Master Password is never transmitted over the network layer. Unlike most SaaS services, the login credentials never leave the device. PBKDF2 is utilized on the local device to derive a 256-bit AES key used for decryption. A second PBKDF2 key is generated locally and then hashed with HMAC_SHA256 to derive an authentication token. Keeper’s Cloud Security vault has zero knowledge of the user’s decryption key.
+Traffic between client device and Keeper Cloud cannot be intercepted or decrypted. Keeper utilizes Key Pinning and additional layers of network-level encryption (Transmission Keys) between the device and the Keeper servers, to ensure that MITM attacks are prevented.
+New devices cannot login to an account without a device verification step. No login attempts can be made on an account without passing this step. Keeper supports several types of device verification methods that depend on the authentication scheme being used.
+2FA is performed after device verification, prior to Master Password entry. If a user has 2FA configured or enforced, this step must pass prior to the Master Password entry.
+Master Password entry cannot be performed until the Device Verification and 2FA step succeeds. The user is unable to proceed to the Master Password entry step without first performing a device verification and 2FA authentication. This advanced authentication flow provides protection against several attack vectors including brute force attack, password spraying, enumeration and MITM.
+Encryption in transit
+The Keeper Cloud Security Vault is protected by APIs which are validated through authorization by the client device. The client retrieves a session token upon login and sends it with each API call. The session token is tracked on the server. Login is performed either by a Master Password, session resumption, or SAML 2.0 SSO authentication.
+When using a Master Password, the client device derives a 256-bit "Authentication Key" using PBKDF2-HMAC-SHA256 with 1,000,000 iterations and a 128-bit random salt. An "Authentication Hash" is generated by hashing the Authentication Key using SHA-256. To login, the Authentication Hash is compared against a stored Authentication Hash on the Cloud Security Vault. After login, a session token is generated on the server and sent to the client to be used by the client device for subsequent API requests. The session must be active to allow continued use of client to server communications.
+Keeper supports 256-bit and 128-bit TLS to encrypt all data transport between the client application and Keeper's cloud-based storage.
+Keeper deploys TLS certificates signed by Digicert using the SHA2 algorithm, the most secure signature algorithm currently offered by commercial certificate authorities. SHA2 is significantly more secure than the more widely used SHA1, which could be exploited due to mathematical weakness identified in the algorithm. SHA2 helps protect against the issuance of counterfeit certificates that could be used by an attacker to impersonate a website.
+Keeper also supports Certificate Transparency (CT), an initiative by Google to create a publicly auditable record of certificates signed by certificate authorities. CT helps guard against issuance of certificates by unauthorized entities. CT is currently supported in the latest versions of the Chrome, Safari and Brave web browsers. More information about Certificate Transparency can be found at: https://certificate.transparency.dev/. Keeper supports the following TLS cipher suites:
+TLS_AES_128_GCM_SHA256
+TLS_AES_256_GCM_SHA384
+TLS_CHACHA20_POLY1305_SHA256
+ECDHE-ECDSA-AES128-GCM-SHA256
+ECDHE-RSA-AES128-GCM-SHA256
+ECDHE-ECDSA-AES128-SHA256
+ECDHE-RSA-AES128-SHA256
+ECDHE-ECDSA-AES256-GCM-SHA384
+ECDHE-RSA-AES256-GCM-SHA384
+ECDHE-ECDSA-AES256-SHA384
+ECDHE-RSA-AES256-SHA384
+Keeper client devices on iOS and Android also implement Key Pinning, a security mechanism which prevents impersonation by attackers using fraudulent digital certificates.
+Cross-Site Scripting (XSS) attack prevention
+The Keeper Web Vault implements a strict Content Security Policy that restricts the origin of outbound requests and prevents all scripts from being executed, except those explicitly sourced from Keeper, including inline scripts and event-handling HTML attributes, reducing or eliminating most vectors for cross-site scripting attacks.
+Access to the keeper domain names is restricted to HTTPS with TLS 1.3 and is enforced by HTTP Strict Transport Security. This prevents a wide array of packet sniffing, data modification, and man-in-the-middle attacks.
+Within the Keeper Browser Extension, Keeper will not prompt users for their vault credentials from within the page frame area. Login to the extension occurs within the Browser Extension toolbar area of the browser. Login to the vault on the web browser will always occur either on the keepersecurity.com, keepersecurity.eu, keepersecurity.com.au, keepersecurity.jp, keepersecurity.ca or govcloud.keepersecurity.us domain, or from the Keeper browser extension toolbar which exists outside of the content page.
+The Keeper Browser extension places an iFrame into the login forms of a web page to ensure that no malicious website has access to injected content. Record content injected into iFrames is also limited to the vault records stored in the user's vault which match the domain of the target website. Keeper will not offer Autofill of login or password data unless the website domain matches the website domain field of the Keeper vault record. The extension will not show records unless the records match the website address root domain.
+3rd party browser extensions may have elevated permissions in web browsers and can access information within the page. Therefore, it is recommended that Keeper administrators prevent users from installing 3rd party browser extensions from the browser's respective app store.
+Biometrics
+Keeper natively supports Windows Hello, Touch ID, Face ID and Android biometrics. Customers who normally log in to their Keeper Vault using a master password or enterprise SSO Login (SAML 2.0) can also log in to their devices using a biometric. Biometrics must be enabled by the Keeper Administrator in the role policy. Offline access can also be achieved with a biometric for both master password and SSO-enabled users when this feature is activated.
+When biometric login is enabled on a device, a key is randomly generated locally and stored in the secure enclave (e.g., Keychain or Keystore) of the device. The user's data key is encrypted with the biometric key. Upon successful biometric authentication, the key is retrieved, and the user is able to decrypt their vault.
+iOS Keychain, Touch ID and Face ID
+Touch ID and Face ID on iOS devices allows users to access your Keeper vault using biometrics. To provide this convenient feature, a randomly generated 256-bit "biometric key" is stored in the iOS Keychain. The iOS Keychain item created for this functionality is not designated to synchronize to the iCloud Keychain and thus will not leave your iOS mobile device.
+It is highly recommended that you use a complex Master Password and enable Multi-factor authentication in order to provide maximum security for your encrypted Keeper Vault. Using Touch ID and Face ID makes it more convenient to use a complex Master Password on your iOS mobile device. It is also recommended that you set a passcode longer than the minimum 4-digits to secure the iOS Keychain.
+The iOS Keychain is used by iOS and apps to securely store credentials. iOS apps use the iOS Keychain to store a variety of sensitive information, including website passwords, keys, credit card numbers and Apple Pay information. Keeper does not use the iOS Keychain to store your Keeper records - all Keeper records are protected with 256-bit AES encryption and are securely stored in the Keeper Vault. The iOS Keychain is also encrypted with 256-bit AES encryption using the device's passcode. Even if the device is lost or stolen or an attacker obtains physical access to the mobile device, they will be unable to access any stored Keeper information. The iOS Keychain cannot be decrypted without the passcode and the Keeper Vault cannot be decrypted without the user's Keeper Master Password.
+Apple Watch®
+The Apple Watch Favorite feature allows the viewing of selected records on a paired Apple Watch. Keeper records must be explicitly enabled to allow viewing on the Apple Watch. A paired Apple Watch communicates with the Keeper Watch Extension that transparently runs in a sandboxed space separate from the iOS Keeper App. The Keeper Watch Extension also uses iOS Keychain to securely store and access keys to enable it to seamlessly and securely communicate with the iOS Keeper app.
+Keeper DNA®
+Keeper DNA provides a multi-factor authentication method using a smart watch device. Keeper DNA uses secure tokens stored in the Keeper Vault to generate time-based codes for multi-factor authentication. These time-based authentication requests can be approved and sent automatically from the Apple Watch (or Android Wear device) with a tap on the screen of the watch or entered manually by the user.
+Employee offboarding (vault transfer)
+When an account transfer policy is activated for a node, the node policy for a public/private key pair is created in the Admin Console on the user's device. The end-user's data key– for users in a role that enforcement is applied to– is encrypted with the policy's public key when the user signs in to the vault. The private key is encrypted with the admin's public key and the admin can then decrypt the role enforcement key with a vault transfer.
+When performing a vault transfer, the Keeper Admin must first lock the user's account. The vault transfer can then occur immediately, followed by deletion of the user's account. This ensures the operation is not performed in secret. When performing the transfer, the user's data key is retrieved by first unwrapping the role enforcement private key and then unwrapping the user's data key. The data key is used to unwrap the record keys, team keys and folder keys.
+All encryption is performed client-side within the Admin Console, and at no time does Keeper have the ability to decrypt the information being shared or transferred. Additionally, at no time is a user's client data key shared. A user who is removed from a team, shared folder or direct share will not receive new data from the team, shared folder or record. Although the record, folder and team keys are decrypted locally for the admin during the transaction, the keys cannot be used to gain access to the underlying record or folder data.
+During vault transfer, the admin only receives the encrypted data key, encrypted record keys and encrypted folder keys. They decrypt these keys, which are then re-encrypted with the destination vault's public key. They never gain access to the actual record data. Keeper does not directly encrypt client-stored data with the data key – it happens on the device.
+Employee Offboarding
+Certifications and compliance
+Keeper is fanatical about security. Keeper is the most secure, certified, tested and audited password security solution and privileged access management platform in the world. Keeper has the longest-standing SOC 2 and ISO certifications in the industry. Keeper is ISO 27001, 27017 and 27018 certified. Keeper is GDPR compliant, CCPA compliant, HIPAA compliant, FedRAMP High and GovRAMP High Authorized, PCI DSS certified and certified by TrustArc for privacy.
+Keeper's software development teams consist of full-time employees located in the US.
+Keeper does not store passwords, credentials or secrets such as access keys in its source code. We regularly scan source code for this information.
+Keeper's source code, while privately held in Github Enterprise, does not provide the information required to access a user's vault, as encryption of data occurs at the device level. Much of this code is published in our public Github repository as part of Keeper's Commander and Secrets Manager products.
+Keeper does not embed third-party MFA provider code into our apps. Keeper's vendors have not been subject to any breaches involving Keeper.
+Keeper does not provide any third parties with management or access to our AWS data centers. All management is performed by full-time employees of Keeper Security who are US citizens, located in the US.
+ISO 27001, 27017 and 27018 SOC 2 FedRAMP High Certified GovRAMP
+High Authorized TX-RAMP
+Certified HIPAA GDPR PCI DSS Level 1 TRUSTe Level 1 FIPS 140-3
+FIPS 140-3 Validated
+Keeper utilizes FIPS 140-3 validated encryption modules to address rigorous government and public sector security requirements. Keeper's encryption has been certified by the NIST Cryptographic Module Validation Program (CMVP) and validated to the FIPS 140 standard by accredited third-party laboratories.
+Keeper uses FIPS 140-3 validated encryption that has been issued certificate #4743 under the NIST CMVP.
+ITAR Compliant
+Keeper ICAM & Identity Security Platform for Government supports compliance with the United States International Traffic in Arms Regulations (ITAR). Companies that are subject to ITAR export regulations must control unintended exports by restricting access to protected data to U.S. Citizens and by restricting the physical location of protected data to the U.S.
+Keeper ICAM & Identity Security Platform for Government's FedRAMP High environment supports ITAR requirements through the following:
+Fully-compliant data storage is hosted on AWS GovCloud and restricted to the US.
+Keeper ICAM & Identity Security Platform for Government provides secure data encryption in transit and at rest.
+Zero-knowledge and zero-trust security, in conjunction with granular permissions, allows organizations to ensure that only approved personnel can access sensitive data.
+Robust compliance reporting features provide a traceable, electronic audit trail of all actions performed and data entered.
+The sequestered customer success team is composed of US Citizens specifically trained in a safe handling of export-controlled and ITAR-governed data, with no non-US-based support.
+The Keeper FedRAMP environment has been audited by an independent third-party assessment organization (3PAO) to validate that proper controls are in place to support customer export compliance programs and continues to be audited annually as required to maintain compliance.
+More information about ITAR.
+Self-Managed Keeper for air-gapped and OT environments
+In October 2026, Keeper Security launched Self-Managed Keeper - an on-premises, air-gapped identity security platform built for isolated Operational Technology (OT), Information Technology (IT) and defense environments. Secure critical infrastructure, manage privileged access and meet strict regulatory compliance mandates.
+An air-gapped environment is typically defined as an environment with limited or controlled connectivity to external networks. Self-Managed Keeper runs as a set of Docker containers on a Linux host or virtual machine. The deployment can reside on-premises, in a private cloud or within an isolated network.
+See the full documentation of Self-Managed Keeper.
+Self-Hosted Privileged Access Management | KeeperPAM
+DoD IL5 Deployments
+Keeper Security Government Cloud (KSGC) runs in AWS GovCloud (US) and holds a FedRAMP High authorization, the government-wide baseline for high-impact unclassified data. In October 2026, KSGC completed its DoD Impact Level 5 (IL-5) assessment by A-LIGN, an accredited Third Party Assessment Organization, which recommended KSGC for DoD Provisional Authorization.
+IL-5 builds on the FedRAMP High baseline with DoD-specific FedRAMP+ controls and covers Controlled Unclassified Information (CUI) and unclassified National Security Systems. It requires physical separation from non-federal tenants and stricter personnel screening. Keeper employs only U.S. citizens in roles with access to the IL-5 environment, and all such personnel undergo background investigations that meet DoD requirements. Once sponsored by a DoD Mission Owner, KSGC will connect to the DoD network (NIPRNet) through a DoD CIO-approved DISA Boundary Cloud Access Point (BCAP).
+Deploying in Air Gapped Environments FedRAMP High Authorization
+Keeper ICAM & Identity Security Platform for Government is Keeper Security’s password management and cybersecurity platform for public sector organizations. Keeper ICAM & Identity Security Platform for Government is a FedRAMP Certified provider at the High Impact Level, hosted in AWS GovCloud (US). Keeper ICAM & Identity Security Platform for Government can be found on the FedRAMP Marketplace.
+The Federal Risk and Authorization Management Program (FedRAMP) is a US federal government program that provides a standardized approach to security assessment, authorization and continuous monitoring for cloud products and services. FedRAMP seeks to accelerate the adoption of modern cloud-based solutions by government agencies, with an emphasis on security and the protection of federal information. Learn more about FedRAMP.
+GovRAMP High Authorized
+GovRAMP was developed about a decade after FedRAMP, with the goal of encouraging the adoption of secure cloud-based solutions at state and local government levels. Achieving GovRAMP Authorization is normally a two-year process that was streamlined through a reciprocity program thanks to Keeper's FedRAMP Authorization.
+SOC 2 Compliant
+Customer vault records are protected using stringent and tightly monitored internal control practices. Keeper has been certified as SOC 2 Type 2 compliant for over ten years in accordance with the AICPA Service Organization Control framework. SOC 2 compliance helps ensure user vaults are kept secure through the implementation of standardized controls as defined in the AICPA Trust Service Principles framework.
+ISO Certifications
+Keeper is ISO 27001, 27017 and 27018 certified, covering the Keeper Security Information Management System and Cloud Infrastructure, which supports the Keeper Enterprise Platform. Keeper's ISO certifications include the management and operation of the digital vault and cloud services, cloud security controls, data privacy controls, software and application development and protection of digital assets for both the digital vault and cloud services.
+FDA 21 CFR Part 11 Compliant
+Keeper is compliant with 21 CFR Part 11, which applies to scientists working in highly regulated environments, including researchers who conduct clinical trials. This regulation specifies FDA criteria under which electronic records and signatures are considered to be trustworthy, reliable and equivalent to paper records with handwritten signatures. Specifically, scientists must ensure that all software they use complies with 21 CFR Part 11 rules regarding:
+Security controls for user identification - Keeper complies with 21 CFR Part 11 requirements for security features that limit user access and their privileges, including ensuring that all users have unique usernames and passwords, the ability to detect and prevent unauthorized system access and the ability to lock compromised accounts.
+Detailed audit trail
+During FDA inspections, regulators require researchers to provide an audit trail detailing a chronological record of all operations. Keeper's compliance reporting features allow researchers to easily produce traceable electronic audit trails.
+Electronic Signatures
+When a document requires a legally binding electronic signature, 21 CFR Part 11 requires that the signature be attached to a unique login and password or biometric identification. Keeper supports this requirement by enabling researchers to ensure that all users have unique usernames and passwords, securely stored in a digital vault that only the user can access.
+More information on 21 CFR Part 11 is located here.
+Protection of patient medical data
+Keeper software is compliant with global, medical data protection standards covering, without limitation, HIPAA (Health Insurance Portability and Accountability Act) and DPA (Data Protection Act).
+HIPAA Compliance and Business Associate Agreements
+Keeper is a SOC2-certified and ISO 27001-certified zero-knowledge security platform that is HIPAA compliant. Strict adherence and controls covering privacy, confidentiality, integrity and availability are maintained. With this security architecture, Keeper cannot decrypt, view or access any information, including ePHI, stored in a user's Keeper Vault. For the foregoing reasons, Keeper is not a Business Associate as defined in the Health Insurance Portability and Accountability Act (HIPAA), and therefore, is not subject to a Business Associate Agreement.
+To learn more about the additional benefits for healthcare providers and health insurance companies, please read this entire Security Disclosure and visit our Enterprise Guide.
+FSQS-NL Certified
+Keeper Security EMEA Limited is certified under the Hellios Financial Services Qualification System-Netherlands (FSQS-NL) which recognizes the highest standards in security, quality and innovation in the Netherlands. This standard demonstrates compliance with the Financial Conduct Authority and the Prudential Regulation Authority to ensure the trustworthiness of Keeper Enterprise software for large banks and financial institutions.
+U.S. Department of Commerce Export Licensed Under EAR
+Keeper is certified by the U.S. Department of Commerce Bureau of Industry and Security under Export Commodity Classification Control Number 5D992, in compliance with Export Administration Regulations (EAR).
+For more information about EAR: https://www.bis.doc.gov
+24x7 remote monitoring
+Keeper is monitored 24x7x365 by full time DevOps staff and a global third-party monitoring network to ensure that our website and Cloud Security Vault are available worldwide.
+If you have any questions regarding this security disclosure, please contact us.
+Phishing or spoofed emails
+If you receive an email purporting to be sent from Keeper Security and you are unsure if it is legitimate, it may be a “phishing email” where the sender's email address is forged or “spoofed”. In that case, an email may contain links to a website that looks like KeeperSecurity.com but is not our site. The website may ask you for your Keeper Security master password or try to install unwanted software on your computer in an attempt to steal your personal information or access your computer. Other emails contain links that may redirect you to other potentially dangerous web sites. The message may also include attachments, which typically contain unwanted software called "malware." If you are unsure about an email received in your inbox, you should delete it without clicking any links or opening any attachments.
+If you wish to report an email purporting to be from Keeper that you believe is a forgery or you have other security concerns involving other matters, please contact us.
+Hosting infrastructure certified to the strictest industry standards
+The Keeper website and cloud storage runs on secure Amazon Web Services (AWS) cloud computing infrastructure. The AWS cloud infrastructure which hosts Keeper's system architecture has been certified to meet the following third-party attestations, reports and certifications:
+SOC 2 PCI DSS Level 1 FIPS 140-3 ISO 27001, 27017 and 27018 FedRAMP High Certified GovRAMP
+High Authorized
+Vulnerability reporting and bug bounty program
+Keeper Security is dedicated to developing the most secure password and privileged access management solution on the market. We are committed to protecting our customers' privacy and personal data. Keeper's mission is to build the world's most secure and innovative security platform, and we believe that bug reports from the worldwide community of security researchers are crucial to ensuring the security of Keeper's products and services.
+Keeper conducts extensive internal and external testing, including pen tests performed by NCC Group and Cybertest with full source code access. Keeper operates its vulnerability disclosure program in partnership with Bugcrowd. In the aggregate, this benefits the entire industry and moreover, supports social good.
+Guidelines
+Keeper's Vulnerability Disclosure Policy sets out expectations when working with good-faith researchers, as well as what you can expect from us.
+If security testing and reporting are done within the guidelines of this policy, we:
+Consider it to be authorized in accordance with the Computer Fraud and Abuse Act.
+Consider it exempt from DMCA and will not bring a claim against you for bypassing any security or technology controls.
+Consider it legal and will not pursue or support any legal action related to this program against you.
+Will work with you to understand and resolve the issue quickly.
+Will recognize your contributions publicly if you are the first to report the issue and make a code or configuration change based on the issue.
+If at any time you are concerned or uncertain about testing in a way that is consistent with the guidelines and scope of this policy, please contact us at security@keepersecurity.com before proceeding.
+To encourage good-faith security testing and disclosure of discovered vulnerabilities, we ask that you:
+Avoid violating user privacy, harming the user experience, disrupting production or corporate systems and/or destroying data.
+Perform research only within the scope set out by the Bugcrowd vulnerability disclosure program linked below, and respect systems and activities which are out-of-scope.
+Contact us immediately at security@keepersecurity.com if you encounter any user data during testing.
+Provide us with reasonable time to analyze, confirm and resolve the reported issue before publicly disclosing any vulnerability finding.
+Please submit reports through: https://bugcrowd.com/keepersecurity
+Transparency
+Keeper isn't just committed to security; we are fanatical about it. That's why we make every detail of our encryption model available to the public. We believe that our customers deserve to know every step we take to ensure their data is secure in the face of an ever-changing cybersecurity landscape.
+Keeper's zero-trust and zero-knowledge encryption model ensures that even in a worst case scenario, your Keeper Vault is protected, and we continually conduct security tests to ensure we remain the best solution to protect your most valuable data.
+Modern Slavery Statement
+Product documentation
+Keeper’s documentation portal, containing product manuals, technical information, release notes and end-user guides, is available at this link.
+Product release notes
+To increase transparency, Keeper publishes detailed release notes across every platform.
+System status
+Real-time system status can be found here.
+Products
+Enterprise Password Management
+Business Password Management
+Privileged Access Management
+Self-Managed Keeper
+Endpoint Privilege Management
+KeeperDB
+Remote Browser Isolation
+Secrets Manager
+Password Manager for MSPs
+Privileged Access Manager for MSPs
+Public Sector
+Forcefield
+Personal Password Manager
+Family Password Manager
+Pricing
+Privileged Access Management
+Enterprise Password Management
+Personal and Family
+Student
+Military and Medical
+Compare & Evaluate
+Keeper Versus the Competition
+User Reviews
+Use Cases
+Industries
+Features
+Enterprise Guide
+User Guides
+Passkeys Directory
+Trust & Security
+Security
+Trust Center
+GDPR Compliance
+Vulnerability Disclosure Policy
+Legal and Compliance
+Privacy Policy
+System Status
+Developers & Integrations
+Developers
+Documentation Portal
+Commander SDK
+SSO Connect®
+Azure
+Passwordless
+All Integrations
+Add-Ons
+Dark Web Monitoring
+Secure File Storage
+Advanced Reporting & Alerts
+Compliance Reporting
+Support Services
+Concierge Service
+Secure Messaging
+Free Tools
+KeeperDB
+Personal Dark Web Scan
+Business Dark Web Scan
+Secure Password Generator
+Secure Passphrase Generator
+Encrypted Messaging App
+Password Strength Meter
+AI Blast Radius Calculator
+PubSec Cyber Risk Calculator
+Keeper Cyber Check
+Download
+Mac
+Windows
+Linux
+Chrome
+Firefox
+Safari
+Edge
+Opera
+Beta Program
+Resources
+Blog
+Resource Library
+Keeper Webinars
+Events
+Sitemap
+Featured Blogs
+Top PAM Solutions
+What Is a Password Manager?
+Top PAM Features You Need
+Company
+About Us
+Careers
+Branding
+Newsroom
+Our Partners
+Partner Program
+Affiliate Program
+MSP Partner Program
+Support
+Help Center
+Contact
+English (US)
+© 2026 Keeper Security, Inc.
+Withdraw Cookie Consent
+English (US)
+Withdraw Cookie Consent
+© 2026 Keeper Security, Inc.
+Business Sales Americas & APAC +1 708 722 5950
+EMEA +353 21 237 5250
+Support Business (Americas) +1 312 226 4782
+Business (EMEA) +353 21 237 5250
+Business (APAC) +81 3 4520 3533
+English (US)
+English (UK)
+日本語
+Español
+Português (BR)
+Nederlands
+Deutsch
+Русский
+Polski
+中文 (简体)
+Italiano
+العربية
+Français
+We value your privacy
+We use cookies on our site to give you the best browsing experience, serve personalized ads about our products and content, and analyze website traffic. To learn more, please refer to our Privacy Policy.
+Decline Accept
+Withdraw Cookie ConsentWe value your privacy
+We use cookies on our site to give you the best browsing experience, serve personalized ads about our products and content, and analyze website traffic. To learn more, please refer to our Privacy Policy.
+Withdraw Cancel
+Accept Decline
+Chat with Support
+You must accept cookies to use Live Chat.
+Sign up for a Free Trial
+Personal and Family Protect yourself and your family from cybercriminals.
+Start Free Trial
+Business and Enterprise Protect your company from cybercriminals.
+Start Free Trial
+MSPs Protect your MSP organization, your end customers and add new revenue streams.
+Start Free Trial
+Platform Platform
+Products Password Management Enterprise
+Business
+Personal
+Family
+Privileged Access Management KeeperPAM
+Self-Managed Keeper
+Endpoint Privilege Manager
+KeeperDB
+Secrets Manager
+Remote Browser Isolation
+Managed Service Providers (MSPs) Password Manager for MSPs
+Privileged Access Manager for MSPs
+Public Sector
+Compare Keeper vs CyberArk
+Keeper vs Delinea
+Keeper vs BeyondTrust
+Keeper vs 1Password
+Keeper vs LastPass
+Keeper vs Bitwarden
+View All
+Technology Security
+Features
+Integrations
+Developers
+Trust Center
+Keeper DNA
+Solutions Solutions
+Use Cases Privileged Access Management
+Secure AI Agents
+Secure Remote Database Access
+Privileged Session Management
+Zero-Trust Security
+Password Management
+View all
+Industries Manufacturing
+Healthcare
+Universities
+Federal Government
+Financial Services
+Retail
+View all
+Pricing Pricing
+Privileged Access Management
+Password Management
+Secure Add-Ons
+Personal and Family
+Student
+Military and Medical
+Download
+Resources Resources
+Product information Documentation
+End-User Guides
+Case Studies
+Datasheets
+Keeper University
+Keeper 101 Videos
+MSP Admin Guide
+Resources Webinars
+Research Reports
+Public Sector Resources
+Cybersecurity Glossary
+Cyber Threats Database
+Passkeys Directory
+Infographics
+Sitemap
+Free Cybersecurity Tools KeeperDB
+Personal Free Dark Web Scan
+Business Free Dark Web Scan
+Secure Password Generator
+Secure Passphrase Generator
+Encrypted Messaging App
+Keeper Cyber Check
+Partners Our Partners
+Partner Program
+Affiliate Program
+MSP Partner Program
+Contact Contact
+Support
+Business Sales
+Call Us
+About About
+About Us
+Legal and Compliance
+Newsroom
+Branding
+Careers
+User Reviews
+Experiencing a Cyber Attack?
+Blog
+Partners
+English (US)
+Buy Now

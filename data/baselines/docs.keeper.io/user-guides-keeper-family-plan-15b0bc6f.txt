@@ -1,0 +1,164 @@
+url: https://docs.keeper.io/user-guides/keeper-family-plan
+method: fetch
+saved: 2026-11-20
+
+Keeper Family Plan | User Guides | Keeper Documentation Portal
+For the complete documentation index, see llms.txt. Markdown versions of documentation pages are available by appending .md to page URLs.
+Skip to content
+⌘Ctrlk
+Ask
+HomepageSystem Status More
+Home
+User Guides
+Enterprise and MSP Guide
+KeeperPAM and Secrets Manager
+Connection Manager
+SSO Connect
+Bridge
+Release Notes
+English
+GitBook Assistant
+I'm here to help you with the docs.
+What is this page about? What should I read next? Can you give an example?
+⌘Ctrli
+AI Based on your context
+Send
+English
+Keeper End-User Guides
+System Requirements
+Quick Start Guides
+Enterprise End-User
+Enterprise End-User (SSO)
+Web Vault & Desktop App
+Browser Extensions
+KeeperFill for Apps
+iOS - iPhone & iPad
+Autofill & Passkey Setup for iOS
+Android Phone & Tablet
+Autofill & Passkey Setup for Android
+Record Types
+Sharing
+Vault Offline Access
+Security Audit
+Session Management
+BreachWatch
+Secure File Storage
+Emergency Access
+Keeper Family Plan
+KeeperChat
+Notification Center
+Passkeys
+Keeper Forcefield
+Troubleshooting
+Tips & Tricks
+Social Media Management
+Use Cases
+Uninstall Keeper
+Docs Home
+Import Records
+Import Overview
+Import from Mobile Apps
+Import from Chrome, Firefox, Edge, Safari
+Import from Chrome via Export
+Import Text File (.csv, .xls, .tsv)
+Import/Export Keeper JSON
+Import from 1Password
+Import from Avast
+Import from Bitwarden
+CyberArk Enterprise Import
+CyberArk User Portal Import
+Import from Dashlane
+Import from Delinea / Thycotic Secret Server
+Import from EnPass
+Import from Kaspersky
+Import from KeePass (.kdbx)
+Import from KeePass .XML
+Import from LastPass
+Import from MacPass
+Import from mSecure
+Import from MyKi
+Import from Passpack
+Import from Passportal
+Import from Password Boss
+Import from Proton Pass
+Import from Psono
+Import from RoboForm
+Import from Safari via Export
+Import from SplashID
+Import from Sticky Password
+Import from True Key
+Import from ZOHO
+Import from Commander CLI
+Microsoft Store App
+Export and Reports
+Vault Export
+Shared Records Report
+Developer Center
+Property File Record Type
+Developer Center and AI Access
+Documentation Home
+Powered by GitBook
+On this page
+Ask
+On this page
+User Guides
+Keeper Family Plan
+This guide provides an overview of Keeper's Family Plan, including how to sign up, invite family members and accept account invitations.
+Overview & Benefits
+Families share nearly everything – documents, photos, videos, website accounts, bank info, social media, security system codes and personal identification numbers. Keeper Family Plan allows you to securely store and share this information between family members with ease.
+The major features and benefits that are included with the Keeper Family Plan:
+Up to 5 Family Members with Private Vaults
+Minimum 10GB Secure File Storage
+Unlimited Password Storage
+Unlimited Devices & Sync
+Secure Record Sharing
+Signing Up
+Signing up for Keeper Family Plan is easy and can be done by visiting our Family Plan page , simply click "Buy Now" to get started. You will then be asked to enter your email address which will be used to create and login to your Keeper account.
+At the checkout page, you can make the following customizations to your plan:
+Subscription Term
+Base Plan
+Recommended Add-Ons: Secure File Storage (10GB, 50GB, 100GB), KeeperChat and BreachWatch
+Upon submitting payment, check your inbox for an email from Keeper Security inviting you to create your Keeper account.
+Invite Family Members
+Once you have logged into your Keeper account, inviting family members to join is easy and can be done from a desktop (Web Vault, Desktop App) or mobile device (iOS, Android).
+From your Account Dropdown click Account > Subscription > Manage.
+Your available/remaining number of family invites will be listed on this screen.
+Invite Family Members to Keeper
+Enter the email(s) of the family member(s) you would like to invite, then click Send. This will generate an email inviting the user to setup their private Keeper account.
+Once sent, you can view the status of each invite and click the more options icon (three horizontal dots) to resend or delete the invite.
+More Options (Resend, Delete)
+Accept a Keeper Invite
+If someone in your family has invited you to join Keeper, will receive an email from Keeper Security, (Subject: Keeper Invitation) inviting you to set up your own, private account.
+To set up your account, click Get Started.
+Recipient Invitation via Email
+You will then be directed to Keeper's "Create Your Keeper Account" page.
+To create your Keeper account, first enter your email address then you will be asked to create and confirm a Master Password which will be the only password you have to remember. We recommend that you choose a strong Master Password that is only used for Keeper -- don't forget your Master Password!
+To finalize your account and proceed to your vault, you will be asked to enter the security verification code that was sent to your email.
+Once you have created your account, use our Quick Start Guides to help you set up your new Keeper account.
+Share Records
+Once an invited family member has created a Keeper account, records can be shared with them.
+To share a record, simply click Share.
+Share a Record
+Enter the email address(es) of the family member(s) you would like to share the record with or select their email(s) from the dropdown menu.
+Select/Enter Email Address
+To learn more about Sharing, click here.
+Keeper for Business
+While Keeper Family Plan is perfect for families, Keeper Business Plan is best suited for your business organization. Keeper has purposefully created different plans to fit the unique needs of all types of users. That is why Keeper has a dedicated Business Plan, specializing in protecting companies of all sizes across every industry.
+Only Keeper for Business/Enterprise offers the following world-class features, specifically designed for business environments:
+Shared Team Folders
+Enforcement Policies
+Security Audit
+Role-Based Access
+Activity Reporting
+Team Management
+Unlimited Users (billed per user)
+To learn more about Keeper for Business click here .
+PreviousEmergency Access
+NextKeeperChat
+Last updated 7 months ago
+Overview & Benefits
+Signing Up
+Invite Family Members
+Accept a Keeper Invite
+Share Records
+Keeper for Business

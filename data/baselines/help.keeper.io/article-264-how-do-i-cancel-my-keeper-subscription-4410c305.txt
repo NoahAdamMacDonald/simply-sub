@@ -1,0 +1,38 @@
+url: https://help.keeper.io/article/264-how-do-i-cancel-my-keeper-subscription
+method: fetch
+saved: 2026-11-20
+
+How do I cancel my Keeper subscription? (Personal and Family Plans) - Keeper Security, Inc Knowledge Base
+Toggle Navigation
+Contact
+Contact
+How do I cancel my Keeper subscription? (Personal and Family Plans)
+You can cancel your Keeper subscription at any time, and you don't need to contact support to do it.
+If you're able to log in: Delete your account directly from the iOS app, Android app, or the Safari extension, under Help > Delete Keeper Account. Deleting your account automatically cancels your subscription and stops all future payments.
+If you're not able to log in: Email deleteme@keepersecurity.com and we'll delete your account for you. This has the same result: your subscription is cancelled and future payments stop.
+Important: deleting your account permanently removes your vault data. This can't be undone, so save or export anything you need first.
+If you purchased through the Apple App Store or Google Play: deleting your account may prompt you to also confirm cancelling your subscription with Apple or Google. Be sure to confirm that cancellation too, otherwise you could still be billed even after your Keeper data has been deleted.
+Want to upgrade or downgrade instead of cancelling? Contact our support team, plan changes and add-ons aren't self-service yet.
+Not sure how you originally purchased? See "Where do I manage my Keeper subscription billing?" for how to check.
+Keeper Business, Enterprise, and MSP customers: these steps do not apply to your account. Cancelling a subscription or licenses for these accounts is handled by your Customer Success Manager or Account Manager. Please do not delete your account to cancel. See Billing and Sales Support for Keeper Business, Enterprise, and MSP Customers.
+Still need help?
+Contact Us
+Contact Us
+Last updated on October 19, 2026
+Toggle Search
+Categories
+Keeper PAM
+Account Management
+SSO/SCIM Provisioning
+Using the App
+Technical Issues
+Admin Console
+MSP
+Keeper Automator
+Billing Issues
+General Questions
+Security
+No results found
+©
+Keeper Security, Inc
+2026. Powered by Help Scout
