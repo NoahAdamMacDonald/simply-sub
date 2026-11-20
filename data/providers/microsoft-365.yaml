@@ -32,10 +32,28 @@
 # fetch; 7. no bill offered.
 # Not on the pages: the card networks (its payment article names "credit card, debit card" only); the countries it sells
 # in (no list read); which regions lack Defender ("Defender is not available in certain regions").
+# Windows Security joined as a free plan on 2026-11-20 (security batch 2: Wikidata's Microsoft Defender, Microsoft's own
+# app, one provider by the brand rule), read on support.microsoft.com's Windows Security articles with a plain fetch and
+# Microsoft Learn's "Behavior monitoring in Microsoft Defender Antivirus" (above the plan). Defender's US page, read
+# 2026-11-20 through a US exit, adds US-only identity features to Personal, Family and Premium: "Identity theft
+# monitoring" (dark web scans), "24/7 identity theft support", "up to $1 million identity insurance coverage" and credit
+# monitoring ("Feature available in the United States and US territories. Credit score is a single bureau VantageScore 3.0
+# provided by Experian®."). They aren't stated on these plans, which are one plan for every country: a US-only plan would
+# move the US prices off published ids (a question for the owner, notes.md).
 
 id: microsoft-365
 name: Microsoft 365
-aliases: [Microsoft Copilot, Copilot, Office 365, OneDrive, Outlook.com, Microsoft Authenticator]
+aliases:
+  [
+    Microsoft Copilot,
+    Copilot,
+    Office 365,
+    OneDrive,
+    Outlook.com,
+    Microsoft Authenticator,
+    Microsoft Defender,
+    Windows Security,
+  ]
 website: https://www.microsoft.com/microsoft-365
 category: software
 spendCategory: software
@@ -128,6 +146,29 @@ renewalAnchor:
     - https://support.microsoft.com/en-us/accounts-billing/subscriptions/microsoft-subscription-refund-policy
   lastVerified: 2026-11-14
 
+# Lab results (M11.2), read 2026-11-20: AV-TEST's newest Windows test of home-user products, July and August 2026
+# (report 261414), tested Microsoft Defender Antivirus (Consumer), the antivirus of Windows Security (the free plan) and
+# of Defender on Windows. AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).
+ratings:
+  - rater: av-test
+    subject: antivirus-protection
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/microsoft-defender-antivirus-consumer-4.18-261414/
+    tested: Defender Antivirus (Consumer) 4.18, Windows 11
+  - rater: av-test
+    subject: antivirus-performance
+    label: 5.5/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/microsoft-defender-antivirus-consumer-4.18-261414/
+    tested: Defender Antivirus (Consumer) 4.18, Windows 11
+  - rater: av-test
+    subject: antivirus-usability
+    label: 6.0/6.0
+    date: 2026-08
+    url: https://www.av-test.org/en/antivirus/home-windows/windows-11/august-2026/microsoft-defender-antivirus-consumer-4.18-261414/
+    tested: Defender Antivirus (Consumer) 4.18, Windows 11
+
 # Perks (M11.6): each line of its plans that no feature describes, in their words. Usage levels are perks, never features
 # (the owner's choice of 2026-10-30): the compare and Copilot plans pages' "Higher usage than free", "Extensive" and
 # "Highest" for Personal and Family, Premium and Pro; "Preferred access to AI models during peak times" and "Use Copilot in
@@ -195,7 +236,11 @@ perks:
 #   anti-phishing."; on Windows "Antivirus and anti-phishing are provided by Windows Security". OneDrive's "ransomware
 #   detection and file recovery" ("files can be recovered for up to 30 days after malicious attacks"). Defender needs
 #   "A Microsoft 365 Personal, Family or Premium subscription" (Pro's page lists it too), so Basic and the free plan have
-#   none. No page states the kinds of scan or a device count for Defender: left out.
+#   none. No page states the kinds of scan or a device count for Defender: left out. Behaviour-based detection (added
+#   2026-11-20): Microsoft Learn's "Behavior monitoring in Microsoft Defender Antivirus" "Applies to: ... Microsoft
+#   Defender for Individuals" ("It observes process, file, and service activity in real time and detects threats from
+#   suspicious behavior"). Windows Security's own features (its scans, Controlled folder access, the firewall) are its
+#   free plan's, below, which every Windows PC has whatever the subscription.
 # - Sharing: "Microsoft 365 Family, Microsoft 365 Premium, and Microsoft 365 Pro subscribers can share subscription
 #   benefits with up to five other people in their family group", and the AI is the owner's only.
 
@@ -480,6 +525,7 @@ plans:
       ad-free: true
       antivirus.included: true
       antivirus.real-time: true
+      antivirus.behavioural: true
       antivirus.web-protection: true
       antivirus.ransomware: [file-recovery]
       account.parental-controls: true
@@ -695,6 +741,7 @@ plans:
       ad-free: true
       antivirus.included: true
       antivirus.real-time: true
+      antivirus.behavioural: true
       antivirus.web-protection: true
       antivirus.ransomware: [file-recovery]
       account.users: 6
@@ -916,6 +963,7 @@ plans:
       ad-free: true
       antivirus.included: true
       antivirus.real-time: true
+      antivirus.behavioural: true
       antivirus.web-protection: true
       antivirus.ransomware: [file-recovery]
       account.users: 6
@@ -1140,6 +1188,7 @@ plans:
       ad-free: true
       antivirus.included: true
       antivirus.real-time: true
+      antivirus.behavioural: true
       antivirus.web-protection: true
       antivirus.ransomware: [file-recovery]
       account.users: 6
@@ -1292,6 +1341,53 @@ plans:
         lastVerified: 2026-11-19
         sourceUrl: https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
 
+  # Windows Security, read 2026-11-20 (the full catalog run, security batch 2) on support.microsoft.com's Windows
+  # Security articles (Stay protected, Virus and threat protection, App and browser control, Family options) and Microsoft
+  # Learn's behaviour-monitoring article. The app a person uses on every Windows 10 and 11 PC: "The Windows Security app is
+  # a comprehensive security solution integrated into Windows" with "Microsoft Defender Antivirus, Windows Firewall, and
+  # Smart App Control" (Stay protected), at no cost beyond Windows itself, so a free plan of Microsoft's provider
+  # (Authenticator's precedent; Wikidata's Microsoft Defender).
+  # - Real-time: "Real-time protection is a feature in the Windows Security app that continuously monitors your device".
+  # - Behaviour: "Behavior monitoring is a critical Microsoft Defender Antivirus detection and protection capability",
+  #   "enabled by default" (Learn).
+  # - Scans: quick, full and custom scans you start, "scheduled scans will continue to run", and the offline scan, which
+  #   "happens after a restart, without loading Windows" (Microsoft Defender Offline: a boot-time scan).
+  # - Ransomware: Controlled folder access ("This is a powerful tool to make your files safer from ransomware", off until
+  #   "you turn on Controlled folder access") and Ransomware data recovery, which restores files from OneDrive.
+  # - Web: Microsoft Defender SmartScreen "protects from phishing attacks, malware, and potentially unwanted
+  #   applications" (App and browser control). Firewall: "the firewall feature monitors incoming and outgoing network
+  #   traffic". Family options open Microsoft Family Safety. Exploit protection and Smart App Control: no feature.
+  # No device count (each Windows PC has its own), no Mac, phone, VPN or identity features (those are Defender's, with the
+  # paid plans).
+  - id: microsoft-365.windows-security
+    name: Windows Security (Microsoft Defender Antivirus)
+    link: https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+    categories: [security]
+    features:
+      platforms: [windows]
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand, scheduled, rescue]
+      antivirus.ransomware: [blocking, file-recovery]
+      antivirus.web-protection: true
+      antivirus.network: [firewall]
+      account.parental-controls: true
+    featureLabels:
+      antivirus.ransomware: Controlled folder access (off until you turn it on) and recovery from OneDrive
+      antivirus.web-protection: Microsoft Defender SmartScreen
+      antivirus.scans: Quick, full and custom scans, scheduled scans and the offline (boot-time) scan
+    notes: 'Built into Windows 10 and 11 at no extra cost: Microsoft Defender Antivirus with real-time and behaviour-based protection, Windows Firewall, SmartScreen against phishing and bad downloads, and ransomware protection for chosen folders. On Mac and phones, the Defender app needs a paid plan.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+
 # Every agreement a user accepts (the owner's rule, 2026-11-03), read 2026-11-14: Copilot "is covered by the Microsoft
 # Services Agreement and the Copilot Terms of Use" and Microsoft's privacy statement (shared documents
 # microsoft-services-agreement, with the Store Terms of Sale, and microsoft-privacy); the Copilot Terms of Use
@@ -1304,6 +1400,8 @@ plans:
 # Microsoft Authenticator (read 2026-11-19): its store listings link the Microsoft privacy statement, and a personal
 # Microsoft account is under the services agreement (both shared); no licence of its own was found on Microsoft's
 # pages. Its own ratings below replace the Copilot-based ones that don't apply to it.
+# Windows Security (read 2026-11-20): Microsoft's Windows Security help articles and its Windows Insider Preview bounty;
+# it comes under Windows' own licence terms, which weren't read (the shared documents' grades still apply to it).
 policies:
   shared: [microsoft-privacy, microsoft-services-agreement]
   links:
@@ -1353,6 +1451,12 @@ policies:
       url: https://techcommunity.microsoft.com/blog/microsoft-entra-blog/how-it-works-backup-and-restore-for-microsoft-authenticator/1006678
     - name: 'Microsoft Identity bug bounty'
       url: https://www.microsoft.com/en-us/msrc/bounty-microsoft-identity
+    - name: 'Stay protected with Windows Security'
+      url: https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+    - name: 'Virus and threat protection in Windows Security'
+      url: https://support.microsoft.com/en-us/windows/security/threat-malware-protection/virus-and-threat-protection-in-the-windows-security-app
+    - name: 'Windows Insider Preview bug bounty'
+      url: https://www.microsoft.com/en-us/msrc/bounty-windows-insider-preview
   ratings:
     - topic: billing.cancellation
       tier: good
@@ -1572,3 +1676,62 @@ policies:
         - https://support.microsoft.com/en-us/authenticator/download-microsoft-authenticator
         - https://support.microsoft.com/en-us/authenticator/microsoft-authenticator-faqs
       lastVerified: 2026-11-19
+    # Windows Security (read 2026-11-20): ratings of its own where the ones above come from Copilot's or Microsoft 365's
+    # pages and say nothing about it, as Authenticator's. It needs no Microsoft account. The shared documents' grades
+    # (privacy statement, services agreement) still apply; Windows' own licence terms, which cover it, weren't read.
+    - topic: privacy.content-access
+      plans: [microsoft-365.windows-security]
+      tier: neutral
+      reason: 'With cloud protection on, it can send suspicious files to Microsoft to check them for threats. It asks you first when a file it wants has personal information in it.'
+      sources:
+        - url: https://support.microsoft.com/en-us/windows/security/threat-malware-protection/virus-and-threat-protection-in-the-windows-security-app
+          quote: 'you can have Defender automatically send suspicious files to Microsoft to check them for potential threats.'
+        - url: https://support.microsoft.com/en-us/windows/security/threat-malware-protection/virus-and-threat-protection-in-the-windows-security-app
+          quote: 'Microsoft will notify you if you need to send additional files, and alert you if a requested file contains personal information so you can decide whether or not you want to send that file or not.'
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      plans: [microsoft-365.windows-security]
+      status: not-stated
+      reason: 'Its help pages don’t say whether the files it sends to Microsoft train AI models.'
+      pages:
+        - https://support.microsoft.com/en-us/windows/security/threat-malware-protection/virus-and-threat-protection-in-the-windows-security-app
+        - https://www.microsoft.com/en-ca/privacy/privacystatement
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      plans: [microsoft-365.windows-security]
+      status: not-applicable
+      reason: 'Windows Security comes with Windows and needs no Microsoft account, so there’s no account to close.'
+      pages:
+        - https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+      lastVerified: 2026-11-20
+    - topic: legal.output-rights
+      plans: [microsoft-365.windows-security]
+      status: not-applicable
+      reason: 'Windows Security makes nothing for you to own: it scans and protects your PC.'
+      pages:
+        - https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      plans: [microsoft-365.windows-security]
+      tier: neutral
+      reason: 'Microsoft pays security researchers up to US$100,000 for flaws they find in Windows, its antivirus’s sandbox included, but names no outside audit of it.'
+      sources:
+        - url: https://www.microsoft.com/en-us/msrc/bounty-windows-insider-preview
+          quote: 'Qualified submissions are eligible for bounty awards from $50 to $100,000 USD.'
+        - url: https://www.microsoft.com/en-us/msrc/bounty-windows-insider-preview
+          quote: 'Windows Defender Sandbox (MsMpEngCP)'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      plans: [microsoft-365.windows-security]
+      status: not-applicable
+      reason: 'Windows Security is free and built into each Windows PC: there’s no subscription to share.'
+      pages:
+        - https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      plans: [microsoft-365.windows-security]
+      status: not-stated
+      reason: 'Its help pages set no limit: each Windows PC has its own.'
+      pages:
+        - https://support.microsoft.com/en-us/windows/security/windows-security/stay-protected-with-the-windows-security-app
+      lastVerified: 2026-11-20
