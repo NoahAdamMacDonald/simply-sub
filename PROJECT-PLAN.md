@@ -74,7 +74,8 @@ update BLUEPRINT.md / PROJECT-PLAN.md in the same PR, so future AI sessions get 
 - [ ] Acceptance criteria met
 - [ ] Tests: unit tests for logic in `packages/core`, component tests for interactive UI
 - [ ] `npm run lint` and `npm test` pass; CI is green
-- [ ] Checked in light **and** dark theme, at **360 px** and **≥ 1280 px** wide, and with the keyboard only
+- [ ] Checked in light **and** dark theme, at **360 px** and **≥ 1280 px** wide, and with the keyboard only; a page
+      of cards also on a wide screen (2560 or 3440 px, the browser-check skill's `check-wide.cjs`, BLUEPRINT §8.1)
 - [ ] Colours come from CSS tokens only (no hex values in components)
 - [ ] Docs updated if behaviour or the API contract changed
 
@@ -291,6 +292,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.29 | Card fees in the budgets (added 2026-10-30, the owner's report and choice): a charge paid with a card includes the card's FX fee, which leaves the account with it, so every total, budget bar and warning, the Calendar and the exports count it; cash back never lowers them, since it's paid later and not always monthly, but each charge carries it, and this year's shows as "≈ $12.40 cash back this year" on List view, the Lists overview (every list together), Home and the Calendar's year view (P2, P3, P4, P10; BLUEPRINT §9.3, §14) | Mullvad at ≈ $7.80 on a card with a 2.5% FX fee counts ≈ $8.00 in this month's budget; a 2% cash-back card shows the year's cash back in all four places and leaves the budgets as they were |
 | M10.30 | Cost breakdowns on the bars (added 2026-10-30, the owner's request): every budget bar (Home, the Lists overview and its cards, List view, the Calendar's month and year, Payment's card limits) opens what it adds up: each subscription's charges in the bar's period, with its price, sales tax and FX fee, and the exchange rate of a converted one, then the totals of each. Hovering the bar shows it and a click or tap keeps it; a breakdown button beside the bar does the same by keyboard, and Escape closes it (P2, P3, P4, P10, P11) | Home's this-month bar lists Mullvad's €5.00 at its rate with its 2.5% FX fee and Netflix's tax, and their sum is the bar's total |
 | M10.31 | Subscribed since the day it's added (added 2026-10-30, the owner's TODO): a new item's Subscribed since starts as the day it's added, so its totals don't count every month back to January; the user can clear it or pick an earlier day, and items already saved keep what they have (P6) | Netflix added on Oct 30 counts nothing before Oct 30 in this year's total; a cleared Subscribed since saves none |
+| M10.32 | Wide screens (added 2026-11-19, the owner's 21:9 feedback): the pages of cards (Home, Search, Lists, List view, Features, Calendar, Payment) take the whole width with their cards in columns, Settings its groups side by side, and a month view's days grow taller; the list editor and Custom subscriptions keep 960 px (BLUEPRINT §8.1) | At 3440 px List view has four cards a row and Search's expanded card leaves its neighbours' heights alone; the year view has two rows of six; 1280 px looks as before |
 
 #### M10 specs
 

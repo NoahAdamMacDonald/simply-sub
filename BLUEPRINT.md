@@ -3106,6 +3106,12 @@ Worker. The Worker quota is then spent only on search and detail endpoints.
 - **Shell:** a fixed left sidebar (logo, Home, Lists, Payment, Features, Calendar, then Search, with the settings
   cog and theme toggle at the bottom) and a main content area. The active nav item gets an underline in the
   accent colour. On narrow screens the sidebar collapses into a drawer.
+- **Wide screens** (the owner's 21:9 feedback, 2026-11-19): the pages of cards take the main area's whole width, with
+  no maximum, and put their cards in columns: Search's and List view's at least 600 px each (a card's wide layout),
+  the Lists overview's 560 px, Features' 26rem, Payment's tiles 340 px, and the year view's months six a row at most.
+  Home puts budgets, Coming up and the calendar in one row from 1800 px, Settings its groups side by side from 1700 px,
+  and a month view's days grow from 104 px to 180 px tall. At 1280 px every page looks as before. The list editor
+  and Custom subscriptions are one form or table each, and keep their 960 px.
 - **Theme tokens.** These are CSS custom properties fed into the Material 3 theme. The suggested palette below
   keeps your colours and fixes readability.
   - **The problem:** neon yellow, cyan and green text on `#D9D9D9` grey is very hard to read (roughly 1.1–1.5:1
