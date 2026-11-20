@@ -33,7 +33,7 @@
 # article ("Our pricing is shown in USD, GBP, AUD ... and CAD, depending on the country you are accessing our website.");
 # 6. Edge, and a plain fetch (403); 7. no bill offered.
 # Bundles: none sold as a bundle of separate catalog plans; its plans include NordPass and NordLocker (Complete and up),
-# which aren't catalog providers yet, so they're features (password-manager, storage.cloud), not includes-subscription.
+# NordPass is a catalog provider now (includes-subscription, below); NordLocker isn't yet, so it's storage.cloud.
 # Official resellers: nordvpn.com/retail/ ("Where to buy") names BestBuy, Staples, MicroCenter, NewEgg and Amazon in the
 # US, Amazon in the UK, BestBuy, Staples, NewEgg, London Drugs, The Source and Amazon in Canada, MediaMarkt, Saturn,
 # Euronics and Amazon in Germany, Licentie2GO in the Netherlands and Amazon in Italy, France and Spain; their offers
@@ -127,6 +127,8 @@ renewalAnchor:
     - 'Such payments are billed annually (up to 14 days before the renewal) or monthly depending on your billing cycle.'
   chargedBefore: { days: 14, upTo: true }
   lastVerified: 2026-11-19
+# NordPass (2026-11-20): Complete and every plan built on it include NordPass Premium, now its own provider, so they
+# list it in includes-subscription (the owner's standing rule for a perk that is another provider's plan).
 # Owner (M11.2), read 2026-11-19: its press page says "NordVPN is brought to you by Nord Security"; nordsecurity.com's
 # trademark policy (quoted, the review of 2026-11-19) defines it as "NordSec B.V. and/or its affiliates (together “Nord
 # Security”)", and its privacy policy gives NordSec B.V.'s Amsterdam address (the country). Its General Terms and
@@ -450,6 +452,7 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features: &complete
+      includes-subscription: [nordpass.premium]
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -672,6 +675,7 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features:
+      includes-subscription: [nordpass.premium]
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
@@ -776,6 +780,7 @@ plans:
     link: https://nordvpn.com/pricing/
     categories: [vpn, security, passwords, storage]
     features:
+      includes-subscription: [nordpass.premium]
       vpn.included: true
       vpn.devices: 10
       vpn.unlimited-traffic: true
