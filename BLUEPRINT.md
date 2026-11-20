@@ -3944,6 +3944,12 @@ None.
   `yearly` input gone, so Home, the Lists overview and its cards, and List view all show the choice made on any of them.
   The annual budget warning still checks this calendar year. The Calendar's year view stays a calendar year: its year
   is the one picked. The initial bundle is unchanged (499.78 kB).
+- **The warning follows it (M10.38, the owner's choice of 2026-11-20):** with Next 12 months, the annual warning is the
+  next 12 months' charges against the annual budget ("Your payments over the next 12 months add up to $2,905.59, over
+  your $750.00 annual budget."), core's `warnings.next12`, so the bar and the warning always agree; with This year it's
+  this calendar year's, as before. The next 12 months' period moves every day, so its dismissal is kept for the month
+  it's made in with the total then ("all next-12 2026-11 750 2905.59"): hidden through that month, unless the total
+  grows past it (core's `dismissingKey`). A dismissal of one doesn't hide the other.
 
 **Resolved (2026-11-10, the nightly bot in parts)**
 - **What failed:** the Workflow runs of 2026-11-07, 11-08 and 11-09 each ended "Errored" after about 42 minutes. Their

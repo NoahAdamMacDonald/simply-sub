@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   budgetWarningKey,
+  dismissingKey,
   maxDismissedBudgetWarnings,
   settingsSchema,
   withDismissedWarning,
@@ -18,6 +19,37 @@ describe('budgetWarningKey', () => {
   it('names whose payments, the period and the budget', () => {
     expect(budgetWarningKey(undefined, 'month', '2027-01', 50)).toBe('all month 2027-01 50');
     expect(budgetWarningKey(work, 'year', 2026, 1000.5)).toBe(`${work} year 2026 1000.5`);
+  });
+
+  it('gives the next 12 months’ warning the month it’s shown in and its total, to the cent (M10.38)', () => {
+    expect(budgetWarningKey(undefined, 'next-12', '2026-11', 750, 2905.594)).toBe(
+      'all next-12 2026-11 750 2905.59',
+    );
+  });
+});
+
+describe('dismissingKey (M10.38)', () => {
+  it('matches a month’s or a year’s key exactly', () => {
+    expect(dismissingKey(['all year 2026 750'], 'all year 2026 750')).toBe('all year 2026 750');
+    expect(dismissingKey(['all year 2026 750'], 'all year 2026 800')).toBeUndefined();
+  });
+
+  it('hides the next 12 months’ warning through its month while the total doesn’t grow', () => {
+    const dismissed = ['all next-12 2026-11 750 2905.59'];
+    const key = (month: string, total: number) =>
+      budgetWarningKey(undefined, 'next-12', month, 750, total);
+    expect(dismissingKey(dismissed, key('2026-11', 2905.59))).toBe(dismissed[0]);
+    // A smaller total (a subscription ended) stays hidden; a bigger one shows again.
+    expect(dismissingKey(dismissed, key('2026-11', 2700))).toBe(dismissed[0]);
+    expect(dismissingKey(dismissed, key('2026-11', 2905.6))).toBeUndefined();
+    // The next month, or another budget or list, shows it again.
+    expect(dismissingKey(dismissed, key('2026-12', 2700))).toBeUndefined();
+    expect(
+      dismissingKey(dismissed, budgetWarningKey(work, 'next-12', '2026-11', 750, 100)),
+    ).toBeUndefined();
+    expect(
+      dismissingKey(dismissed, budgetWarningKey(undefined, 'next-12', '2026-11', 800, 100)),
+    ).toBeUndefined();
   });
 });
 
@@ -42,6 +74,13 @@ describe('withDismissedWarning', () => {
     ]);
   });
 
+  it('drops a past month’s next 12 months’ key, and the one a new dismissal of it replaces (M10.38)', () => {
+    const october = budgetWarningKey(undefined, 'next-12', '2026-09', 750, 1000);
+    const before = budgetWarningKey(undefined, 'next-12', '2026-10', 750, 1000);
+    const after = budgetWarningKey(undefined, 'next-12', '2026-10', 750, 1200);
+    expect(withDismissedWarning([october, before], after, today)).toEqual([after]);
+  });
+
   it('keeps no more than the limit, dropping the oldest', () => {
     const keys = Array.from({ length: maxDismissedBudgetWarnings }, (_, index) =>
       budgetWarningKey(undefined, 'month', '2027-01', index + 1),
@@ -61,10 +100,21 @@ describe('withoutDismissedWarnings', () => {
 
 describe('settings.dismissedBudgetWarnings', () => {
   it('keeps budget warnings’ keys, and stays optional', () => {
-    const dismissed = ['all month 2027-01 50', `${work} year 2026 1000`];
+    const dismissed = [
+      'all month 2027-01 50',
+      `${work} year 2026 1000`,
+      'all next-12 2026-11 750 2905.59',
+    ];
     expect(issues(settingsSchema, { ...settings, dismissedBudgetWarnings: dismissed })).toEqual([]);
     expect(issues(settingsSchema, settings)).toEqual([]);
-    for (const bad of [[], ['all month 2027-13 50'], ['anyone year 2026 1'], ['all week 2026 1']]) {
+    for (const bad of [
+      [],
+      ['all month 2027-13 50'],
+      ['anyone year 2026 1'],
+      ['all week 2026 1'],
+      ['all next-12 2026-11 750'],
+      ['all year 2026 750 12'],
+    ]) {
       expect(
         issues(settingsSchema, { ...settings, dismissedBudgetWarnings: bad }).length,
       ).toBeGreaterThan(0);

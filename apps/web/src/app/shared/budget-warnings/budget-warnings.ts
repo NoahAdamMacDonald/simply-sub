@@ -12,6 +12,7 @@ import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import {
   budgetWarningKey,
+  dismissingKey,
   monthOf,
   withDismissedWarning,
   withoutDismissedWarnings,
@@ -26,7 +27,7 @@ import { amountText } from '../price-tag/price-text';
 
 /** One warning: what goes over which budget, and the month to see in the Calendar. */
 interface Warning extends ShownAndSpoken {
-  kind: 'month' | 'year';
+  kind: 'month' | 'year' | 'next-12';
   /** Its key among the dismissed (core's budgetWarningKey). */
   key: string;
   /** Its ✕'s name: "Dismiss the November 2026 warning". */
@@ -38,11 +39,12 @@ interface Warning extends ShownAndSpoken {
 /**
  * The budget warning banners (PROJECT-PLAN §3.1, M7.6): "Your payments in November 2026 add up to $212.40, over your
  * $200.00 monthly budget." for the first of the next 12 months over the monthly budget, and one for this year's
- * payments, past and to come, over the annual budget, from core's budget checks (ListMetrics.warnings). Home's are
+ * payments, past and to come, over the annual budget, or the next 12 months' when that's the yearly total this device
+ * shows (M10.38), from core's budget checks (ListMetrics.warnings). Home's are
  * for every list together; List view's for its own list ("This list's payments…"), which links its month in the
  * Calendar showing that list. A status region, so a warning that appears as prices load is read out. Its ✕ hides it
- * until its period or budget changes (M7.7, settings.dismissedBudgetWarnings), and "Show 1 hidden budget warning"
- * brings the hidden ones back.
+ * until its period or budget changes (M7.7, settings.dismissedBudgetWarnings), the next 12 months' through this month
+ * unless its total grows (core's dismissingKey), and "Show 1 hidden budget warning" brings the hidden ones back.
  */
 @Component({
   selector: 'ss-budget-warnings',
@@ -76,7 +78,7 @@ export class BudgetWarnings {
       spoken: `${whose} ${when} add up to ${approx ? 'about ' : ''}${money(amount)}, over your ${budget}.`,
     });
     const lines: Warning[] = [];
-    const { month, year } = warnings;
+    const { month, year, next12 } = warnings;
     const listId = this.listId();
     if (month && saved.monthlyBudget !== undefined) {
       const name = month.month === monthOf(this.today()) ? 'this month' : monthText(month.month);
@@ -92,26 +94,45 @@ export class BudgetWarnings {
         month: { month: month.month, name },
       });
     }
-    if (year && saved.annualBudget !== undefined) {
+    const annual =
+      saved.annualBudget === undefined ? undefined : `${money(saved.annualBudget)} annual budget`;
+    if (saved.yearlyTotal === 'next-12-months') {
+      if (next12 && saved.annualBudget !== undefined && annual) {
+        lines.push({
+          kind: 'next-12',
+          key: budgetWarningKey(
+            listId,
+            'next-12',
+            monthOf(this.today()),
+            saved.annualBudget,
+            next12.amount,
+          ),
+          dismissLabel: 'Dismiss the next 12 months’ warning',
+          ...line('over the next 12 months', next12, annual),
+        });
+      }
+    } else if (year && saved.annualBudget !== undefined && annual) {
       lines.push({
         kind: 'year',
         key: budgetWarningKey(listId, 'year', year.year, saved.annualBudget),
         dismissLabel: 'Dismiss this year’s warning',
-        ...line('this year, past and to come,', year, `${money(saved.annualBudget)} annual budget`),
+        ...line('this year, past and to come,', year, annual),
       });
     }
     return lines;
   });
-  private readonly dismissed = computed(
-    () => new Set(this.settings.saved()?.dismissedBudgetWarnings ?? []),
-  );
+  /** Each warning with the dismissed key that hides it, if one does. */
+  private readonly judged = computed(() => {
+    const dismissed = this.settings.saved()?.dismissedBudgetWarnings ?? [];
+    return this.all().map((warning) => ({ warning, by: dismissingKey(dismissed, warning.key) }));
+  });
   /** The warnings shown: the ones not dismissed. */
   protected readonly lines = computed(() =>
-    this.all().filter((warning) => !this.dismissed().has(warning.key)),
+    this.judged().flatMap(({ warning, by }) => (by === undefined ? [warning] : [])),
   );
   /** The dismissed ones that would show, which "Show hidden" brings back. */
   protected readonly hidden = computed(() =>
-    this.all().filter((warning) => this.dismissed().has(warning.key)),
+    this.judged().flatMap(({ warning, by }) => (by === undefined ? [] : [warning])),
   );
   /**
    * Where focus goes once the page has drawn it: Show hidden after ✕, the warning's ✕ after Show hidden. The settings
@@ -153,7 +174,7 @@ export class BudgetWarnings {
     if (!saved) return;
     const left = withoutDismissedWarnings(
       saved.dismissedBudgetWarnings ?? [],
-      this.hidden().map((warning) => warning.key),
+      this.judged().flatMap(({ by }) => (by === undefined ? [] : [by])),
     );
     const [first] = this.hidden();
     await this.settings.update({ dismissedBudgetWarnings: left.length > 0 ? left : undefined });
