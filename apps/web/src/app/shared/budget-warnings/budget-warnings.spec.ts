@@ -104,6 +104,35 @@ describe('BudgetWarnings', () => {
     expect(warnings()[1].link).toBeUndefined();
   });
 
+  it('warns of the next 12 months over the annual budget when that’s the yearly total, hidden through the month unless it grows (M10.38)', async () => {
+    saved.update((settings) => settings && { ...settings, yearlyTotal: 'next-12-months' });
+    const over = (amount: number): Warnings => ({
+      year: { year: 2026, amount: 1100, approx: false },
+      next12: { amount, approx: false },
+    });
+    await show(over(2905.59));
+    // The next 12 months' warning in place of this year's, as the totals show them.
+    expect(warnings().map((warning) => warning.shown)).toEqual([
+      'Your payments over the next 12 months add up to $2,905.59, over your $1,000.00 annual budget.',
+    ]);
+    element().querySelector<HTMLButtonElement>('.dismiss')?.click();
+    await vi.waitFor(() => expect(warnings()).toHaveLength(0));
+    expect(saved()?.dismissedBudgetWarnings).toEqual(['all next-12 2026-10 1000 2905.59']);
+
+    // A smaller total stays hidden this month; a bigger one shows again.
+    await show(over(2800));
+    expect(warnings()).toHaveLength(0);
+    await show(over(3000));
+    expect(warnings()).toHaveLength(1);
+
+    // This year's warning is its own: back on This year, it shows.
+    saved.update((settings) => settings && { ...settings, yearlyTotal: undefined });
+    await fixture.whenStable();
+    expect(warnings().map((warning) => warning.shown)).toEqual([
+      'Your payments this year, past and to come, add up to $1,100.00, over your $1,000.00 annual budget.',
+    ]);
+  });
+
   it('speaks of List view’s list alone, and opens the Calendar showing it', async () => {
     const listId = '0192f1c4-7b2e-7c3a-9d41-5e8f2a1b3c4d';
     await show({ month: { month: '2027-01', amount: 137.2, approx: true } }, listId);

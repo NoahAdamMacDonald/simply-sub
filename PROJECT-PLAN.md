@@ -297,6 +297,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.34 | Cards that are easy to follow (added 2026-11-19, the owner's feedback and choice): a card's services and ranked features lost or gained a row each, by rank, and the features not ranked folded under a summary (P14) | Removing Claude with AI computer use Wanted and API credits Sometimes lists Claude itself, then Wanted, then Sometimes, and "Also loses 6 features you haven't ranked" opens by keyboard; axe passes in both themes at 360 and 1280 px |
 | M10.35 | One yearly total everywhere (added 2026-11-19, the owner's feedback): the Yearly total switch on Home's Budgets and the Lists overview's totals as on List view, and every page's totals following the one device setting, so it's chosen once (P2, P3, P4; BLUEPRINT §8.1.1, §14) | Next 12 months chosen on Home shows on the Lists overview, its cards and List view; the annual warning still checks this year; the initial bundle is unchanged |
 | M10.36 | A card's categories (added 2026-11-19, the owner's request and choice): Search's and List view's cards show an icon chip for each category the provider's plans are in, the picked or the item's plan's filled with a check, the others muted, named by one tooltip and tab stop (P4, P8; BLUEPRINT §14) | Proton's card on Search fills Password managers for Pass Plus and all seven for Unlimited without moving a chip; Tab reaches the row and its tooltip names them; axe passes in both themes at 360 and 1280 px |
+| M10.38 | The annual warning follows the yearly total (added 2026-11-20, the owner's choice): with Next 12 months, the annual budget warning is the next 12 months' charges over the annual budget, as the bar shows; dismissed, it stays hidden through the month unless its total grows (P2, P3, P4; BLUEPRINT §14) | Next 12 months at $2,905.59 of $750.00 warns of it, not of 2026; dismissed, a smaller total stays hidden and a bigger one, or next month, shows it again; This year warns of 2026 as before |
 
 #### M10 specs
 
@@ -3096,8 +3097,9 @@ back):
 **Since the owner's request of 2026-11-10:** a **Yearly total** above the totals, a labelled segmented button (a radio
 group: one tab stop, the arrows choose) of **This year** and **Next 12 months**, This year by default. Next 12 months
 makes the annual line the next 12 months' total (§3.1) against the annual budget, "$516.47 of $500.00 in the next 12
-months", its bar and breakdown the same period; the annual budget warning still checks this calendar year, as Home's
-does. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once. Since M10.35 Home
+months", its bar and breakdown the same period; the annual budget warning checked this calendar year, as Home's did,
+until M10.38: since then it's the next 12 months' with Next 12 months, hidden when dismissed through that month
+unless its total grows. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once. Since M10.35 Home
 and the Lists page have the switch too and every page follows the one choice. `check-list-view-yearly.cjs`
 (browser-check skill).
 

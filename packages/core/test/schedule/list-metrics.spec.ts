@@ -255,6 +255,20 @@ describe('listMetrics', () => {
           .warnings,
       ).toEqual({});
     });
+
+    it('warns when the next 12 months’ charges go over the annual budget, for that yearly total (M10.38)', () => {
+      // A yearly plan first charged next spring: nothing this year, but the next 12 months go over.
+      const yearly = resolved(
+        { interval: 'year', anchorDate: '2027-03-01', startDate: '2027-03-01' },
+        picked(300, { interval: 'year', taxIncluded: true }),
+      );
+      const { warnings } = listMetrics(
+        { resolved: [yearly], unresolved: [] },
+        { ...context, annualBudget: 250 },
+      );
+      expect(warnings.next12).toEqual({ amount: 300, approx: false });
+      expect(warnings.year).toBeUndefined();
+    });
   });
 });
 
