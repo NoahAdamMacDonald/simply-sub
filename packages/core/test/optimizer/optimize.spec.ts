@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { optimize, type ListItem, type ProfileRank } from '../../src';
+import {
+  isDismissed,
+  optimize,
+  resolveItem,
+  suggestionSummary,
+  type ListItem,
+  type ProfileRank,
+} from '../../src';
 import { cards, catalog, item, resolveAll, run, today } from './fixtures';
 
 // Core's lib has no DOM or Node types; Vitest runs on Node, which has a performance clock.
@@ -365,5 +372,52 @@ describe('optimize: fingerprints', () => {
     // A rank that changes how the list is judged is a change to it too.
     const ranked = run(items, { 'video.hdr': 'unwanted' }).suggestions;
     expect(ranked.some((suggestion) => first.includes(suggestion.fingerprint))).toBe(false);
+  });
+});
+
+describe('optimize: an item with no exchange rate (M10.37)', () => {
+  it('keeps it as it is and still suggests for the rest, rather than failing', () => {
+    // No rates: Mullvad's euro price can't be converted, so it's kept, never changed, and still gives its VPN.
+    const place = { country: 'CA', subdivision: 'CA-AB' };
+    const context = { today, country: 'CA', currency: 'CAD', place, profileRanks: new Map() };
+    const resolved = [item('mullvad.vpn'), item('disney-plus.premium')].flatMap((listItem) => {
+      const resolution = resolveItem(listItem, {
+        ...context,
+        catalog,
+        customSubs: new Map(),
+        taxPlace: place,
+      });
+      return resolution.ok ? [resolution.resolved] : [];
+    });
+    expect(resolved).toHaveLength(2);
+    const result = optimize({ items: resolved, catalogs: new Map([['CA', catalog]]), context });
+    expect(cards(result)).toEqual([
+      'free | Switch Disney+ Premium to annual billing | save 35.58',
+      'red | Downgrade Disney+ Premium → Standard, annual billing | save 77.58 | lose video.quality=4k (not-ranked), video.hdr (not-ranked)',
+    ]);
+    expect(
+      result.suggestions.every((suggestion) =>
+        suggestion.actions.every((action) => !('item' in action) || action.item.name !== 'Mullvad'),
+      ),
+    ).toBe(true);
+  });
+});
+
+describe('optimize: dismissals from before M10.33 (M10.37)', () => {
+  it('keeps a dismissal of a card of several changes from before the split', () => {
+    const result = run([item('disney-plus.premium'), item('crave.premium')]);
+    const split = result.suggestions.filter((suggestion) => suggestion.groupFingerprint);
+    expect(split).toHaveLength(2);
+    const [{ groupFingerprint }] = split;
+    expect(split.every((suggestion) => suggestion.groupFingerprint === groupFingerprint)).toBe(
+      true,
+    );
+    // The old card's fingerprint, stored as dismissed, hides both; their own fingerprints are new.
+    const dismissed = new Set([groupFingerprint ?? '']);
+    expect(split.every((suggestion) => isDismissed(suggestion, dismissed))).toBe(true);
+    expect(split.some((suggestion) => suggestion.fingerprint === groupFingerprint)).toBe(false);
+    expect(suggestionSummary(result.suggestions, dismissed).count).toBe(
+      result.suggestions.length - 2,
+    );
   });
 });

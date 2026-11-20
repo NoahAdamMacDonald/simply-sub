@@ -17,6 +17,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
   draftItems,
+  isDismissed,
   planTitle,
   severities,
   severityText,
@@ -101,7 +102,12 @@ export class OptimizationsPage {
   /** The optimizer's answer; it runs again whenever the list, the catalog, the rates, the settings or the ranks change. */
   protected readonly result = resource({
     params: () => this.input(),
-    loader: ({ params }) => this.optimizer.run(params),
+    // A failure says so on the page (M10.37), rather than looking for savings for ever.
+    loader: ({ params }) =>
+      this.optimizer.run(params).catch((error: unknown) => {
+        console.error("The suggestions couldn't be worked out:", error);
+        throw error;
+      }),
   });
   protected readonly found = computed(() =>
     this.result.hasValue() ? this.result.value() : undefined,
@@ -159,16 +165,16 @@ export class OptimizationsPage {
           .filter(
             (suggestion) =>
               suggestion.severity === severity &&
-              (this.showDismissed() || !dismissed.has(suggestion.fingerprint)),
+              (this.showDismissed() || !isDismissed(suggestion, dismissed)),
           )
-          .map((suggestion) => ({ suggestion, dismissed: dismissed.has(suggestion.fingerprint) })),
+          .map((suggestion) => ({ suggestion, dismissed: isDismissed(suggestion, dismissed) })),
       }))
       .filter((section) => section.cards.length > 0);
   });
   protected readonly dismissedCount = computed(() => {
     const dismissed = this.dismissals.fingerprints();
     return (this.found()?.suggestions ?? []).filter((suggestion) =>
-      dismissed.has(suggestion.fingerprint),
+      isDismissed(suggestion, dismissed),
     ).length;
   });
   /** "Save up to $214.00 a year": the best plan's savings, while there's a card to show. */
@@ -261,7 +267,19 @@ export class OptimizationsPage {
   }
 
   protected async restore(suggestion: Suggestion): Promise<void> {
-    await this.dismissals.restore(suggestion.fingerprint);
+    const group = suggestion.groupFingerprint;
+    if (group === undefined || !this.dismissals.fingerprints().has(group)) {
+      await this.dismissals.restore(suggestion.fingerprint);
+      return;
+    }
+    // Dismissed as part of the card of several changes it was before M10.33 (M10.37): only this one comes back, and
+    // the others of that card stay dismissed, each under its own fingerprint.
+    for (const other of this.found()?.suggestions ?? []) {
+      if (other.groupFingerprint === group && other.fingerprint !== suggestion.fingerprint) {
+        await this.dismissals.dismiss(other.fingerprint, this.listId());
+      }
+    }
+    await this.dismissals.restore(group);
   }
 
   /** The heading to focus once a card goes: the next card's, else the one before, else Show dismissed. */

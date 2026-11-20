@@ -49,18 +49,25 @@ export function optimize(input: OptimizerInput): OptimizerResult {
     .sort()
     .join('\n');
   const byFingerprint = new Map<string, Suggestion>();
-  const judge = (card: readonly number[]) => {
-    const signature = card
-      .map((option) => model.options[option].signature)
-      .sort()
-      .join('|');
-    return suggestionOf(model, checks, card, fingerprintOf(list, signature));
-  };
+  const fingerprintOfCard = (card: readonly number[]) =>
+    fingerprintOf(
+      list,
+      card
+        .map((option) => model.options[option].signature)
+        .sort()
+        .join('|'),
+    );
+  const judge = (card: readonly number[]) =>
+    suggestionOf(model, checks, card, fingerprintOfCard(card));
   plans.forEach((plan, level) => {
     for (const card of cardsOf(model, checks, plan)) {
       const alone = card.map((option) => judge([option]));
+      // A card of one change from a group says which (M10.37), so a dismissal of the group before M10.33 still holds.
+      const group = card.length > 1 ? fingerprintOfCard(card) : undefined;
       const parts = alone.every((suggestion) => suggestion !== undefined)
-        ? alone
+        ? alone.map((suggestion) =>
+            group === undefined ? suggestion : { ...suggestion, groupFingerprint: group },
+          )
         : [judge(card)].filter((suggestion) => suggestion?.severity === severities[level]);
       for (const suggestion of parts) {
         if (suggestion && !byFingerprint.has(suggestion.fingerprint)) {
