@@ -701,6 +701,27 @@
   source: own
   status: done
   date: 2026-11-20
+- id: totalav
+  name: TotalAV
+  website: https://www.totalav.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: panda-dome
+  name: Panda Dome
+  website: https://www.pandasecurity.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
+- id: comodo
+  name: Comodo
+  website: https://www.comodo.com
+  category: security
+  source: own
+  status: done
+  date: 2026-11-20
 - id: webroot
   name: Webroot
   website: https://www.webroot.com
@@ -1582,7 +1603,9 @@
   source: wikidata
   wikidata: Q1789196
   sitelinks: 15
-  status: queued
+  status: rejected
+  date: 2026-11-20
+  note: "A plan of Comodo (comodo), by the brand rule, not a provider of its own"
 - id: aparat
   name: Aparat
   website: https://www.aparat.com
@@ -1656,7 +1679,9 @@
   source: wikidata
   wikidata: Q2659429
   sitelinks: 13
-  status: queued
+  status: rejected
+  date: 2026-11-20
+  note: "Panda Free Antivirus's old name: a plan of Panda Dome (panda-dome), not a provider of its own"
 - id: avira
   name: Avira
   website: https://www.avira.com
