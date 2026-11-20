@@ -1,0 +1,1016 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada: Keeper's
+# personal pricing page (keepersecurity.com/pricing/personal-and-family.html) in each currency of its picker, its
+# personal page, about, security and vulnerability disclosure pages, its legal centre's tabs (SaaS Terms of Use,
+# Privacy Policy, Usage Guidelines and Information, Website Terms of Use, Legacy Terms) and Cookie Policy, its help
+# centre (help.keeper.io, 23 articles) and its user guides (docs.keeper.io, 23 pages). Its checkout asks for an email
+# first ("First, verify your email."), so it wasn't opened further.
+# Pricing: the page has a currency picker ("USD ($)", "CAD ($)", "EUR (€)", "GBP (£)", "JPY (¥)", "AUD (A$)"). The
+# currency picked sets the price list wherever the reader is (each read through Vancouver and Calgary exits (Canada),
+# and US, UK, Irish, German, French, Dutch, Spanish, Italian, Australian and New Zealand exits, and from this machine):
+# Personal (Keeper Unlimited) "$42.99 billed annually", "CA$58.90", "€51.16", "£36.84", "AU$67.57"; Family "$91.99",
+# "CA$126.10", "€109.47", "£88.28", "AU$148.37"; its help centre says the same in US dollars ("Keeper Unlimited at
+# $42.99/yr or Keeper Family Plan at $91.99"). Two exceptions: Ireland's page in euros shows "€52.88" and "€113.15", and
+# the page's default view (before a currency is picked) adds a country's VAT to US dollars in some countries ($51.16 in
+# Germany, $51.59 in France, $52.02 in the Netherlands and from this machine); the picked lists are stored. Each region
+# gets the currency its own page uses or offers: Canada CAD (its default through Canadian exits), the US USD, the UK
+# GBP, Ireland EUR (its default), the other euro countries EUR (their page defaults to US dollars), Australia AUD
+# ("*Includes GST"), New Zealand USD (no NZD in the picker). The German page says its euro prices are before VAT
+# ("51,16 € jährliche Zahlweise *zzgl MwSt"). No first-term offer is in the prices (a pop-up offers "30% OFF 1-Yr
+# Personal & Family Plans!", not stored). Billing: "Subscription Fees are billed and collected annually in advance."
+# Region checklist for CA and US, 2026-11-19: 1. language paths only (/en_GB/, /de_DE/…); 2. the currency picker, every
+# currency read; 3. the page's data holds no prices (its script loads them); 4. the checkout asks for an email first;
+# 5. its help article on prices (US dollars); 6. Edge from Canada and through exits (a Toronto exit got "403
+# Forbidden"); 7. no bill offered.
+# Plans: Keeper Free, Keeper Unlimited (the pricing page's "Personal") and Family. Its checkout offers a "Subscription
+# Term" and gifts come in "1-Year or 3-Year" terms, but no page shows a longer term's price, so only the year is
+# stored. Student, military and medical discounts are offers. Business plans are out of scope.
+# Add-ons (its pricing page): BreachWatch (Personal and Family, each priced), Secure File Storage ("Starting at
+# $13.99/year": tiers not priced on any page read, so left out) and Concierge Service.
+# Bundles: none (its help mentions "Plus bundles", which no page read prices). Official resellers: its partner and
+# affiliate programmes are for businesses and referrals; no page names a shop selling personal plans. App stores
+# (Apple, Google Play, Microsoft Store) bill it: partners, not listed.
+# Free use: Keeper Free ($0, one mobile device, 10 records), and a 30-day trial that falls back to it.
+
+id: keeper
+name: Keeper
+aliases: [keeper security, keeper password manager]
+website: https://www.keepersecurity.com
+# Its help centre and user guides, whose articles state its billing, features and policies.
+domains: [help.keeper.io, docs.keeper.io]
+category: passwords
+spendCategory: software
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its help article on cancelling: deleting the account in its apps cancels; a web purchase's auto-renewal is otherwise
+# turned off by its support team (How do I request a refund…).
+cancelUrl: https://help.keeper.io/article/264-how-do-i-cancel-my-keeper-subscription
+sources: { pricing: https://www.keepersecurity.com/pricing/personal-and-family.html }
+# Ways to pay (M11.5), read 2026-11-19: cards (its terms), PayPal (its checkout, per its help) and the app stores (Apple,
+# Google Play, Microsoft Store). No page names a card network in words, so no acceptedNetworks.
+paymentMethods:
+  - methods: [card]
+    page: 'SaaS Terms of Use'
+    url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+    quotes:
+      - 'Payment for the Services may be made by a valid credit card, debit card or charge card (collectively referred to as "Payment Method") as accepted by Keeper via its Website or as otherwise agreed in an Order.'
+  - methods: [paypal, app-store]
+    page: 'How can I change the credit card info that my subscription is getting billed to?'
+    url: https://help.keeper.io/article/192-how-can-i-change-the-credit-card-info-that-my-subscription-is-getting-billed-to
+    quotes:
+      - 'If you purchased using Paypal via our checkout page, you can login to your Paypal account and change your payment card.'
+      - 'If you purchased via the App Stores, you would need to change your payment card under your Apple ID/Google Play profile.'
+# Renewal day (M11.5), read 2026-11-19: "Subscription Fees are billed and collected annually in advance." and "A standard
+# annual billing cycle is 365 days." (its terms, for adding users): no day named.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+    - https://help.keeper.io/article/263-where-do-i-manage-my-keeper-subscription-billing
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its privacy policy names the company; its terms give the entity and address for
+# buyers outside Europe and Japan (Europe's is Keeper Security EMEA Limited in Cork). Its about page: "Keeper is backed
+# by Insight Partners, a leading, global venture capital and private equity firm." (and Summit Partners as a "Strategic
+# Investor"); no page gives shares or a listing: private, no stock.
+notes: Billed once a year. Buyers in Europe contract with Keeper Security EMEA Limited in Ireland; others with Keeper Security, Inc.
+owner:
+  name: Keeper Security, Inc.
+  page:
+    name: Privacy Policy
+    url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+  quotes:
+    - 'Keeper Security, Inc. ("Keeper") is committed to protecting your privacy.'
+  country:
+    code: US
+    page:
+      name: SaaS Terms of Use
+      url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+    quotes:
+      - 'Other Keeper Security, Inc. 311 W. Monroe Street, Suite 406, Chicago, IL 60606, United States'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+
+# Perks (M11.6): what no feature describes, in its pages' words.
+perks:
+  - id: file-storage
+    name: 10 GB Secure File Storage
+
+# Add-ons (its pricing page, read 2026-11-19 with each currency picked; BreachWatch's Family price with its card's
+# "Family" switch): BreachWatch alerts "if your passwords are found on the dark web" (BreachWatch "monitors the internet
+# and dark web for breached accounts matching records stored within your Keeper Vault"); Concierge Service is "your own
+# Keeper product specialist". Prices as the plans' (above). BreachWatch Family wasn't read in New Zealand, so it has no
+# price there.
+addOns:
+  - id: keeper.breachwatch
+    name: BreachWatch
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 36.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: US
+        currency: USD
+        amount: 26.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: GB
+        currency: GBP
+        amount: 24.29
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IE
+        currency: EUR
+        amount: 28.22
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: AU
+        currency: AUD
+        amount: 43.07
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NZ
+        currency: USD
+        amount: 26.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: DE
+        currency: EUR
+        amount: 27.30
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: FR
+        currency: EUR
+        amount: 27.30
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NL
+        currency: EUR
+        amount: 27.30
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: ES
+        currency: EUR
+        amount: 27.30
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IT
+        currency: EUR
+        amount: 27.30
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+  - id: keeper.breachwatch-family
+    name: BreachWatch for Family
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 73.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: US
+        currency: USD
+        amount: 53.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: GB
+        currency: GBP
+        amount: 46.64
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IE
+        currency: EUR
+        amount: 66.41
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: AU
+        currency: AUD
+        amount: 86.13
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: DE
+        currency: EUR
+        amount: 64.25
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: FR
+        currency: EUR
+        amount: 64.25
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NL
+        currency: EUR
+        amount: 64.25
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: ES
+        currency: EUR
+        amount: 64.25
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IT
+        currency: EUR
+        amount: 64.25
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+  - id: keeper.concierge
+    name: Concierge Service
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 189.06
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: US
+        currency: USD
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: GB
+        currency: GBP
+        amount: 114.98
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IE
+        currency: EUR
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: AU
+        currency: AUD
+        amount: 220.11
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NZ
+        currency: USD
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: DE
+        currency: EUR
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: FR
+        currency: EUR
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NL
+        currency: EUR
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: ES
+        currency: EUR
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IT
+        currency: EUR
+        amount: 137.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+
+# General features, read 2026-11-19. Platforms: "Keeper works on every smartphone, tablet and computer." (System
+# Requirements): Windows, macOS and Linux desktop apps, iOS and Android apps, its Web Vault and its browser extension
+# (Chrome, Safari, Firefox, Edge, Opera, Brave). Sign-in: a Master Password, then 2FA by "Text Message or an
+# Authenticator app" (How can I turn on 2FA…) or a security key (How can I set up a security key?); "RSA and DUO Push
+# option are only available to business users". Support: "Email, live chat and phone customer support" (Keeper
+# Unlimited, its personal page) and "24/7 customer support" (the pricing page); Keeper Free's "Support will be limited
+# to our FAQ, Troubleshooting Guide, and User Guides". App languages: its site's language menu (English, Español,
+# Deutsch, Français, Nederlands, Português (BR), 日本語, 中文 (简体), Polski, Italiano, Русский, العربية; Dutch, Polish
+# and Russian have no registry value). Closed source: "The Services and the source code which it contains, is the
+# property of Keeper" (its terms). No pause; no parental controls (a Family plan's members have private vaults).
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [password, totp, sms, security-key]
+  support.channels: [email, chat, phone, 24-7]
+  languages.interface: [en, es, de, fr, pt, ja, zh, it, ar]
+  software.open-source: proprietary
+
+# Password manager features, read 2026-11-19 (its personal page's plan cards, the pricing page, What's included in the
+# free plan?, and the user guides named):
+# - Items (Record Types, "available for all consumer and business customers"): Login, Payment Card, Contact, Address,
+#   Bank Account, File Attachment, Photo, Driver's License, Birth Certificate, Database, Server, Health Insurance,
+#   Membership, Secure Note, Passport, Identity Card, Software License, SSH Key and WiFi; passkeys ("Storing passkeys in
+#   your Keeper Vault") and 2FA codes in records ("Simply scan the QR code or enter the secret key into Keeper"). Custom
+#   record types are for business customers. Keeper Free: "Limited to ten records for passwords and passkeys", and
+#   "up to two (2) vault records containing time-based one-time passcode (TOTP) two-factor authentication codes".
+# - Health: Security Audit rates each password's strength and reuse; breached passwords need the BreachWatch add-on
+#   (not on Free: "Secure add-ons available such as Secure File Store and BreachWatch" is ✅ only for paid).
+# - Sharing: records with other Keeper users with permissions ("can edit, can share, can edit & share, view only and
+#   transfer ownership"), and One-Time Share links to anyone ("Share links automatically expire at a time of your
+#   choosing"); Family adds "Unlimited shared folders, records and permissions". Free: "Sharing" ❌.
+# - Import: CSV ("Import Text File (.csv, .xls, .tsv)"), Keeper JSON, KeePass .kdbx ("Keeper supports the ability to
+#   import directly from encrypted Keepass files"), other managers (1Password, Bitwarden, Dashlane, LastPass, RoboForm
+#   and more), and Apple Passwords on iOS 26 ("Export Data to Another App": Credential Exchange).
+# - Export: "CSV", "JSON", "PDF" and "Encrypted KeePass (.kdbx)" ("This is available to all Personal and Family plan
+#   users."); Free can't ("do not have the ability to back up, restore, share or export their Keeper Records outside of
+#   that device"). No page says which formats carry 2FA secrets, so authenticator.export is left out.
+# - Emergency access: "You can designate up to five emergency contacts and decide how much time should pass before their
+#   access is granted." (Unlimited's card: "Emergency access"); not on Free.
+# - Offline: "Offline access is available with all Keeper plans (except "Keeper Free")".
+# - End-to-end: "Your vault contents remain fully encrypted on your device and are inaccessible to Keeper or its staff
+#   under our zero knowledge security model." (its privacy policy): passwords. File storage is vault records (a perk on
+#   Family, an add-on otherwise), not a files service.
+# - Keeper Free is its mobile app alone ("Web Vault Access" and "Browser Extension Access" ❌), so it imports only what
+#   the mobile apps take (Google's CSV on Android, Apple Passwords on iOS); its free plan table doesn't list Security
+#   Audit, so no password health is claimed for it.
+plans:
+  - id: keeper.free
+    name: Free
+    link: https://www.keepersecurity.com/personal.html
+    features:
+      support.channels: []
+      password-manager: true
+      password-manager.item-types: [login, totp, passkey, credit-card, identity, secure-note]
+      password-manager.import: [csv, cxf]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+    notes: 'One mobile device and up to 10 records (2 with 2FA codes), with no sync, backup, sharing or export.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/personal.html
+  - id: keeper.unlimited
+    name: Unlimited
+    link: https://www.keepersecurity.com/pricing/personal-and-family.html
+    addOnIds: [keeper.breachwatch, keeper.concierge]
+    features:
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          identity,
+          secure-note,
+          bank-account,
+          ssh-key,
+          wifi,
+          database,
+          server,
+          software-license,
+          drivers-license,
+          passport,
+          membership,
+          government-id,
+        ]
+      password-manager.health: [weak, reused]
+      password-manager.sharing: [share-to-user, share-link, link-expiry, role-permissions]
+      password-manager.import: [csv, json, kdbx, cxf, other-managers]
+      password-manager.export: [csv, json, kdbx, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+    notes: 'Unlimited devices, sync and sharing. Dark web alerts (BreachWatch) and file storage are add-ons. A 30-day free trial.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 58.90
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: US
+        currency: USD
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: GB
+        currency: GBP
+        amount: 36.84
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IE
+        currency: EUR
+        amount: 52.88
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: AU
+        currency: AUD
+        amount: 67.57
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NZ
+        currency: USD
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: DE
+        currency: EUR
+        amount: 51.16
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: FR
+        currency: EUR
+        amount: 51.16
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NL
+        currency: EUR
+        amount: 51.16
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: ES
+        currency: EUR
+        amount: 51.16
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IT
+        currency: EUR
+        amount: 51.16
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+  - id: keeper.family
+    name: Family
+    link: https://www.keepersecurity.com/pricing/personal-and-family.html
+    addOnIds: [keeper.breachwatch-family, keeper.concierge]
+    features:
+      account.users: 5
+      password-manager: true
+      password-manager.item-types:
+        [
+          login,
+          totp,
+          passkey,
+          credit-card,
+          identity,
+          secure-note,
+          bank-account,
+          ssh-key,
+          wifi,
+          database,
+          server,
+          software-license,
+          drivers-license,
+          passport,
+          membership,
+          government-id,
+        ]
+      password-manager.health: [weak, reused]
+      password-manager.sharing:
+        [share-to-user, share-vault, share-link, link-expiry, role-permissions]
+      password-manager.import: [csv, json, kdbx, cxf, other-managers]
+      password-manager.export: [csv, json, kdbx, encrypted]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+    perks: [file-storage]
+    notes: 'Five people, each with a private vault, plus shared folders and 10 GB for files. Dark web alerts (BreachWatch) are an add-on.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 126.10
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: US
+        currency: USD
+        amount: 91.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: GB
+        currency: GBP
+        amount: 88.28
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IE
+        currency: EUR
+        amount: 113.15
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: AU
+        currency: AUD
+        amount: 148.37
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NZ
+        currency: USD
+        amount: 91.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: DE
+        currency: EUR
+        amount: 109.47
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: FR
+        currency: EUR
+        amount: 109.47
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: NL
+        currency: EUR
+        amount: 109.47
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: ES
+        currency: EUR
+        amount: 109.47
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+      - region: IT
+        currency: EUR
+        amount: 109.47
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: its SaaS Terms of Use (the terms for anyone "PURCHASING
+# THROUGH AN ONLINE ORDERING PLATFORM, DOWNLOADING ANY SOFTWARE", personal plans included, and its apps' licence:
+# section 2), its Privacy Policy and Cookie Policy, its Usage Guidelines and Information (which the terms name for
+# support, and which hold Free's limits and the inactivity rule), its Website Terms of Use (the website only: no topic),
+# its security and vulnerability disclosure pages, and its help centre's billing, refund, cancelling, export and free
+# plan articles. Its DPA (data processing for business customers), Partner Terms and Service Level Objectives aren't
+# for personal plans. The sign-up form wasn't opened beyond its email field. Its terms are written for businesses
+# ("Customer") and apply to individuals too.
+policies:
+  links:
+    - name: 'SaaS Terms of Use'
+      url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+    - name: 'Privacy Policy'
+      url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+    - name: 'Usage Guidelines and Information'
+      url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+    - name: 'Cookie Policy'
+      url: https://www.keepersecurity.com/legal/cookie-policy/
+    - name: 'Security'
+      url: https://www.keepersecurity.com/security.html
+    - name: 'How do I request a refund?'
+      url: https://help.keeper.io/article/262-how-do-i-request-a-refund-for-my-keeper-subscription
+    - name: 'Where do I manage my Keeper subscription billing?'
+      url: https://help.keeper.io/article/263-where-do-i-manage-my-keeper-subscription-billing
+    - name: 'How do I cancel my Keeper subscription?'
+      url: https://help.keeper.io/article/264-how-do-i-cancel-my-keeper-subscription
+    - name: "What's included in the free plan?"
+      url: https://help.keeper.io/article/255-whats-included-in-the-free-plan
+    - name: 'How do I export my vault?'
+      url: https://help.keeper.io/article/276-how-do-i-export-my-vault-or-run-a-shared-records-report
+    - name: 'How do I sign up for Keeper?'
+      url: https://help.keeper.io/article/159-how-do-i-sign-up-for-keeper
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps collect details about your device and how they run, used to improve its services and support its marketing. To object you must contact it.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'As with any cloud-based services, when you download and use our product we automatically collect information on the type of device you use, operating system version, a randomly-generated device identifier, system performance information and IP address.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'In furtherance of our legitimate interests, we process your contact information, service data and diagnostic data to analyze and improve our existing services, support related business operations and, where permitted by applicable law, support our marketing activities.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'To exercise this right, contact us using the methods provided in the Contact Us section of this Privacy Policy.'
+      action:
+        name: 'How to object (its privacy policy)'
+        url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Dozens of ad companies set cookies on its websites, which US laws can count as selling your data. You can opt out, but only in each browser.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/cookie-policy/
+          quote: 'Although we do not sell your personal information for any monetary value, our use of certain online cookies for this purpose may qualify as the "sale" or "sharing" of information under applicable law.'
+        - url: https://www.keepersecurity.com/legal/cookie-policy/
+          quote: 'You can withdraw or change your cookie preferences at any time by selecting the link in the footer of our site.'
+      action:
+        name: 'Its cookie choices (Cookie Policy)'
+        url: https://www.keepersecurity.com/legal/cookie-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its websites let ad partners track what you browse to show you its ads elsewhere. You can turn the cookies off, but only per browser. Its apps show no ads.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/cookie-policy/
+          quote: 'Our third-party partner may use technologies such as cookies to gather information about your activities on other websites in order to provide you advertising based upon your browsing activities and interests.'
+        - url: https://www.keepersecurity.com/legal/cookie-policy/
+          quote: 'When you do so, all non essential analytics and marketing cookies will not load on your device.'
+        - url: https://www.keepersecurity.com/legal/cookie-policy/
+          quote: 'For security and privacy reasons, Keeper Security does not run third-party ads in its application.'
+      action:
+        name: 'Its cookie choices (Cookie Policy)'
+        url: https://www.keepersecurity.com/legal/cookie-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It can’t read your vault, and its terms forbid putting your data into AI tools in any way that trains AI models.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Customer Data shall be considered Customer Confidential Information.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: "Except as expressly permitted in writing, neither party shall make any Confidential Information received hereunder available to any artificial intelligence tools (including generative AI or large language models), except solely for the receiving party's internal use in a secure, access-controlled environment that does not result in AI model training or in the unauthorized retention, disclosure or use of such information."
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your vault is encrypted on your own device, so no one at Keeper can read it.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'Your vault contents remain fully encrypted on your device and are inaccessible to Keeper or its staff under our zero knowledge security model.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data while your account is open or as long as it needs it. Files in a lapsed paid account can go after 90 days.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'Keeper will retain information for as long as an account is active or as needed to provide the services.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: 'If a paid subscription expires and is not renewed within ninety (90) days, Keeper Security reserves the right to delete any Keeper Records in the account that contain files (such as documents, photos or videos).'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account yourself in its iPhone, Android or Safari app, which erases your vault for good.'
+      sources:
+        - url: https://help.keeper.io/article/264-how-do-i-cancel-my-keeper-subscription
+          quote: "If you're able to log in: Delete your account directly from the iOS app, Android app, or the Safari extension, under Help > Delete Keeper Account."
+        - url: https://help.keeper.io/article/264-how-do-i-cancel-my-keeper-subscription
+          quote: 'Important: deleting your account permanently removes your vault data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'On a paid plan you can download your whole vault yourself as CSV, JSON or an encrypted KeePass file, which holds your attached files too.'
+      sources:
+        - url: https://help.keeper.io/article/276-how-do-i-export-my-vault-or-run-a-shared-records-report
+          quote: 'Encrypted KeePass (.kdbx): the only format that includes file attachments.'
+        - url: https://help.keeper.io/article/276-how-do-i-export-my-vault-or-run-a-shared-records-report
+          quote: 'This is available to all Personal and Family plan users.'
+      action:
+        name: 'How to export your vault'
+        url: https://help.keeper.io/article/276-how-do-i-export-my-vault-or-run-a-shared-records-report
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      plans: [keeper.free]
+      tier: bad
+      reason: 'Keeper Free can’t export or back up your records: they stay on your one phone.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: 'Free Users may use Keeper on one mobile device only and do not have the ability to back up, restore, share or export their Keeper Records outside of that device.'
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'It gives data only when the law or a court requires it, tells you first where it’s allowed to, and can only hand over your name and account details, not your vault.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: "Accordingly, any account disclosure required by law, under a subpoena, would be limited to general account information such as the account holder's name and account term."
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'If and to the extent required by applicable law, including regulatory requirements, discovery request, subpoena, court order or governmental action, the receiving Party may disclose or produce Confidential Information but will give reasonable prior notice (and where prior notice is not permitted by applicable law, notice will be given as soon as the receiving Party is legally permitted) to the disclosing Party to permit the disclosing Party to intervene and to request protective orders or confidential treatment therefor or other appropriate remedy regarding such disclosure.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can go to the US and other countries, under the EU-US Data Privacy Framework or the EU’s standard contract terms.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'As a global organization, we may need to transfer your personal data to Keeper affiliates, contractors, service providers and third parties in various countries and jurisdictions around the world.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'Standard Contractual Clauses'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a Master Password, and pay with a card or PayPal. A phone number is for text-message sign-in codes, if you choose them.'
+      sources:
+        - url: https://help.keeper.io/article/159-how-do-i-sign-up-for-keeper
+          quote: 'Go to the Web Vault or open the mobile app, enter your email address, and follow the prompts.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: poor
+      reason: 'On its website you either delete your whole account or ask its support to stop the renewal. Its terms ask for 30 days’ written notice before the renewal date.'
+      sources:
+        - url: https://help.keeper.io/article/262-how-do-i-request-a-refund-for-my-keeper-subscription
+          quote: 'If you purchased directly through keepersecurity.com: contact our support team and they can turn off auto-renewal for you.'
+        - url: https://help.keeper.io/article/263-where-do-i-manage-my-keeper-subscription-billing
+          quote: 'To cancel, see "How do I cancel my Keeper subscription?", since cancelling is handled through deleting your account rather than a separate cancel button.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Either Party may terminate this Agreement for convenience or elect not to renew or extend an Order, in each case upon at least thirty (30) days’ prior written notice before the applicable renewal date, with such termination or non-renewal effective upon the expiration or termination of all active Orders.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'It never gives money back. If its support stops your renewal, you keep it until the end of the year you paid for.'
+      sources:
+        - url: https://help.keeper.io/article/262-how-do-i-request-a-refund-for-my-keeper-subscription
+          quote: 'Keeper subscriptions are non-refundable.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Since the Software is delivered in full at the time of purchase and we cannot uninstall it from your device(s) all fees are nonrefundable and considered earned on receipt.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'A new price starts only at your next renewal, after written notice, but its terms don’t say how long before.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Prices, fees and discounts for services are subject to change at the time of the next renewal upon prior written notice.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: great
+      reason: 'Its 30-day trial doesn’t turn into a paid plan: afterwards you keep your data on the free version.'
+      sources:
+        - url: https://help.keeper.io/article/255-whats-included-in-the-free-plan
+          quote: 'After the 30-day free trial, you can still access your data in the free version on the same mobile device without any paid features.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and billing help say plans are billed each year in advance, but not that it reminds you before renewing.'
+      pages:
+        - https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+        - https://help.keeper.io/article/263-where-do-i-manage-my-keeper-subscription-billing
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: neutral
+      reason: 'Beyond the price and taxes, its terms add interest on late payments and its costs of collecting them.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Customer shall be responsible for any costs (including attorney fees) reasonably incurred by Keeper related to its efforts to collect any missing or late payments for Undisputed fees.'
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Switching plans goes through its support team, and its pages don’t say what happens to the time you’ve paid for.'
+      pages:
+        - https://help.keeper.io/article/263-where-do-i-manage-my-keeper-subscription-billing
+        - https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: neutral
+      reason: 'Outside Europe and Japan, disputes go to a private referee (an arbitrator) in Delaware. Its terms don’t take away group lawsuits.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'EXCEPT FOR DISPUTES, CLAIMS OR CONTROVERSIES ARISING OUT OF OR RELATING TO OWNERSHIP, VALIDITY OR INFRINGEMENT OF INTELLECTUAL PROPERTY RIGHTS, ANY DISPUTE, CONTROVERSY OR CLAIM ARISING OUT OF OR RELATING TO THIS AGREEMENT SHALL BE RESOLVED BY BINDING ARBITRATION ADMINISTERED BY THE AMERICAN ARBITRATION ASSOCIATION ("AAA") IN ACCORDANCE WITH ITS COMMERCIAL ARBITRATION RULES THEN IN EFFECT.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'THE ARBITRATION SHALL TAKE PLACE IN WILMINGTON DELAWARE BEFORE A SINGLE ARBITRATOR.'
+      action:
+        name: 'Its dispute clause (SaaS Terms, section 12)'
+        url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      regions: [GB, IE, DE, FR, NL, ES, IT]
+      tier: good
+      reason: 'In Europe you contract with its Irish company, and disputes go to Ireland’s courts, not a private referee.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'THIS SECTION 12(C) APPLIES ONLY WHERE THE APPLICABLE KEEPER ENTITY IS KEEPER SECURITY, INC.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Keeper Security EMEA Limited Ireland'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: neutral
+      reason: 'Changes to its terms start only when you next buy or renew, and can’t take away important rights, but it doesn’t say it will tell you. Privacy changes come by email or a notice first.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Notwithstanding the foregoing, Keeper may modify or replace this Agreement, with any such changes taking effect at a subsequent purchase or renewal, provided they do not materially diminish Customer rights.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: 'If we make any material changes we will notify you by email or by means of a notice on this Site prior to the change becoming effective.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can cut you off at once, without warning, for some breaches of its terms. It refunds unused time only if the breach was its own.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'In the event of a breach of any obligations in this section 6 by Customer, Keeper may immediately and without notice suspend or terminate Customer access to the Services.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: "In the event of a Termination due to Keeper's material breach, any prepaid unused fees will be refunded to the Customer."
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'What you store counts as your confidential information, which it may use only to provide the service.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Customer Data shall be considered Customer Confidential Information.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: "not to use or permit others to use, the other Party's Confidential Information except as is reasonably necessary to perform its obligations or exercise its rights under this Agreement"
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'Its terms don’t say it may remove features from a paid plan, and it promises fixes and upgrades.'
+      pages: [https://www.keepersecurity.com/legal/terms-of-use/?s=saas]
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: good
+      reason: 'It may delete a free account left unused for 12 months, after an email warning. Paid accounts aren’t included.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: 'If a Free User account remains inactive for twelve (12) consecutive months, Keeper Security reserves the right to terminate and delete the account.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: 'Prior notice will be sent to the email address associated with the account.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'Its terms, written for businesses too, limit use to your own purposes, and forbid taking its apps apart or testing their security outside its bug bounty.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: "Unless expressly agreed in writing, all Services furnished to Customer under this Agreement shall be used by Customer only for Customer's internal business purposes, shall not be shared with third parties nor reproduced or copied in whole or in part."
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: 'Customer further agrees not to reverse engineer, modify, hack, perform penetration or load testing, circumvent any security or licensing protocols, attempt to gain access to any unauthorized systems/data, translate, resell, distribute, create derivative works from, exploit, encumber or crack any portion of the Services; nor to interfere with or disrupt the integrity or performance of the Services.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside firms test it every quarter, it holds SOC 2 and ISO 27001 certificates, and it pays people who find bugs. Its pages don’t publish the test reports.'
+      sources:
+        - url: https://www.keepersecurity.com/security.html
+          quote: 'Keeper partners with third-party experts such as NCC Group, CyberTest and independent security researchers to perform quarterly pen testing against all solutions and systems.'
+        - url: https://www.keepersecurity.com/security.html
+          quote: 'For these reasons, we have partnered with Bugcrowd to manage our Vulnerability Disclosure Program (VDP) and bug bounty program.'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=privacy
+          quote: "Keeper's security practices and controls are independently audited and certified, including SOC 2 and ISO 27001"
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'Its terms say its service isn’t to be shared with others. Family gives each of its 5 people a private vault of their own instead.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
+          quote: "Unless expressly agreed in writing, all Services furnished to Customer under this Agreement shall be used by Customer only for Customer's internal business purposes, shall not be shared with third parties nor reproduced or copied in whole or in part."
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: 'You may not share your Master Password with third parties, including Keeper support staff.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms say it regularly updates its apps, but not whether they update themselves or change anything else on your device.'
+      pages: [https://www.keepersecurity.com/legal/terms-of-use/?s=saas]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Stored files can go 90 days after a plan lapses
+      tier: neutral
+      reason: 'If you stop paying and don’t renew within 90 days, it may delete the files you stored, after emailing you. Download them or renew to keep them.'
+      sources:
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: 'If a paid subscription expires and is not renewed within ninety (90) days, Keeper Security reserves the right to delete any Keeper Records in the account that contain files (such as documents, photos or videos).'
+        - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
+          quote: "Notice will be provided prior to deletion using the email address associated with the user's Keeper account."
+      lastVerified: 2026-11-19
