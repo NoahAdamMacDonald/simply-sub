@@ -1172,6 +1172,7 @@
   wikidata: Q852000
   sitelinks: 29
   status: queued
+  note: "Live, free and open source (Cisco's), a mail-gateway engine more than a personal product: triage before drafting (2026-11-20)"
 - id: kick
   name: Kick
   website: https://kick.com
@@ -1443,7 +1444,8 @@
   source: wikidata
   wikidata: Q219866
   sitelinks: 20
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: futurelearn
   name: FutureLearn
   website: https://www.futurelearn.com
@@ -1645,7 +1647,8 @@
   source: wikidata
   wikidata: Q1233894
   sitelinks: 13
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: panda-cloud-antivirus
   name: Panda Cloud Antivirus
   website: https://www.cloudantivirus.com/ru
@@ -1834,7 +1837,9 @@
   source: wikidata
   wikidata: Q2619838
   sitelinks: 8
-  status: queued
+  status: out-of-scope
+  date: 2026-11-20
+  note: "Discontinued: activevirusshield.com answers 404 (2026-11-20)"
 - id: immunet
   name: Immunet
   website: https://www.immunet.com
@@ -1842,7 +1847,9 @@
   source: wikidata
   wikidata: Q3266644
   sitelinks: 8
-  status: queued
+  status: out-of-scope
+  date: 2026-11-20
+  note: "Discontinued: Cisco ended it on 2024-01-01 (university IT notices); immunet.com no longer answers (2026-11-20)"
 - id: tresorit
   name: Tresorit
   website: https://tresorit.com
