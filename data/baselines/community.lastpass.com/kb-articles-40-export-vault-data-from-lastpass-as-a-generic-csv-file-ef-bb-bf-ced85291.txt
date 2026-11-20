@@ -1,0 +1,46 @@
+url: https://community.lastpass.com/kb/articles/40-export-vault-data-from-lastpass-as-a-generic-csv-file%EF%BB%BF
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Learn
+Connect
+Support
+Discover
+Guidelines
+Sign In
+SUPPORT ARTICLES
+Support Articles
+View All
+Support Articles
+Export vault data from LastPass as a generic CSV file
+You can export your LastPass vault data as a CSV file and save it.
+Limitations and compatibility
+These steps can only be performed using the LastPass browser extension.
+Exporting attachments is not supported when exporting your LastPass vault data.
+Exporting TOTP codes for password items (that is, one-time passcodes you generate within your vault) is not supported.
+If you have a LastPass Teams or LastPass Business account, the ability to perform these actions may be limited or prohibited due to policies enabled by your LastPass admin.
+As an administrator enable the "Prohibit export" policy to disable the export option for the LastPass vault data (including passwords, notes, form fills, Wi-Fi passwords, and so on). For more information on enabling and disabling policies, see Manage general policies.
+Custom item types and custom fields are not supported during import or export.
+Export vault data from LastPass as a generic CSV file
+In your web browser toolbar, select the inactive (gray or black) LastPass icon.
+Enter your email address and master password, then select Log In.
+If prompted, complete steps for multifactor authentication (if it is enabled on your account).
+Select the LastPass icon in your browser toolbar.
+Select the Account tab, then go to Fix a problem yourself > Export vault items > Export data for use anywhere.
+If prompted, enter your master password.
+Optional: Select Do not re-prompt for and use the drop-down menu to select a time interval.
+Select Continue.
+Result: A CSV file containing your data is downloaded.
+Note: When exporting a CSV file in LastPass for Safari, the file will be opened in a separate browser tab. Right-click on the tab and select Save Page As.... In the pop-up window, enter a name for your CSV file, choose a location to save it and select Save.
+Results: You have successfully exported your LastPass vault data in CSV format.
+Important: If you decide to make changes to the exported CSV file, you must use lowercase text for all column headers.
+Troubleshooting
+If a CSV file is not generated and instead you encounter a message that an email notification was sent for verification, check the following instructions:
+Export vault data while logged in through the LastPass website
+As a LastPass Free user, can I still export my vault data if I select Mobile as my active device type?
+Was this article helpful?
+YesNo
+Be the first one to vote!
+This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service
+Loading

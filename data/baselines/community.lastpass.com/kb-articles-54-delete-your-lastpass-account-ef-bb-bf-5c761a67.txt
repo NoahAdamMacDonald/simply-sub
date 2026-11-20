@@ -1,0 +1,71 @@
+url: https://community.lastpass.com/kb/articles/54-delete-your-lastpass-account%EF%BB%BF
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Learn
+Connect
+Support
+Discover
+Guidelines
+Sign In
+SUPPORT ARTICLES
+Support Articles
+View All
+Support Articles
+Delete your LastPass account
+You can delete your LastPass account on the My Account page if you know your master password, or on the Delete Your Account page if you don't.
+Important:
+Deleting your LastPass account is permanent and cannot be undone. LastPass recommends to export and save all of your vault data before you delete your account.
+If you have a paid LastPass Premium subscription with auto-renewal enabled, cancel auto-renewal before deleting your LastPass account. If you did not cancel before deleting your account, contact LastPass Support for assistance with the cancellation.
+You can initiate the deletion of other data LastPass might maintain outside of your vault and exercise your privacy rights by submitting a deletion request using the Individual Rights Management Portal. For more information on the collection of your data, how LastPass uses it, and your rights, see
+LastPass Privacy Notice and Your Privacy Choices - LastPass.
+Important: A deletion request submitted through the Individual Rights Management Portal does not result in the deletion of a LastPass account.
+See Delete your LastPass company account for information on deleting a company account.
+I know my master password
+Before you begin: LastPass recommends that you export and save all of your vault data before proceeding, as this operation cannot be undone.
+Log in to LastPass and access your vault by doing either of the following:
+In your web browser toolbar, select and select Vault.
+Go to
+LastPass - Sign In and log in with your email address and master password.
+Select Account settings in the left navigation menu.
+In the Account Information section, in Links select My Account.
+Fastpath: You can navigate directly to the My Account page at LastPass - My Account .
+Select Delete or reset Account.
+On the Delete Your Account page, select Delete.
+When prompted, select Yes.
+Enter your master password.
+Optional: Please provide the reason you are deleting your account. You can also provide feedback about why you are leaving LastPass.
+Select Delete.
+When prompted, select Yes > Yes > OK.
+Results: You have permanently deleted your LastPass account.
+What to do next:
+You can create a new account with the same email address or a different one.
+You can uninstall LastPass.
+To learn more about our trust and privacy, visit our LastPass Trust Center and view the Technical and organizational measures compliance documentation. Additionally, you can view our LastPass Technical Whitepaper (PDF) for details about the LastPass architecture and our approach to security.
+You can submit a deletion request to delete other data LastPass may maintain outside of your vault using the Individual Rights Management Portal. To start a deletion request, select Delete. For security purposes, LastPass will send a verification email from datasubjectrights@lastpass.com to confirm your identity before processing your deletion request.
+I don't know my master password
+Open a web browser and go to LastPass - Delete Your Account .
+Select Delete.
+When prompted, select No to indicate that you do not know your master password.
+Enter your account email address, then select Send Email.
+Check your inbox and select the link in the email from LastPass to confirm that you want to continue with your account deletion.
+Result: You are redirected to the Delete Your Account page.
+Optional: Please provide the reason you are deleting your account and provide feedback.
+Select Delete.
+When prompted, select Yes > Yes > OK.
+Results: You have permanently deleted your LastPass account.
+I don't want to delete my LastPass account, but I can't log in because I forgot my master password
+You don't have to delete your account just because you forgot your master password. Instead, review your options to recover your LastPass account. If recovery doesn't work or isn't possible, you can try resetting your LastPass account. It will purge all of your vault data but allow you to keep using the same email address and create a new master password.
+Important: If you are a LastPass Teams or LastPass Business user, LastPass recommends contacting your LastPass admin before attempting account recovery. For more information, see Considerations for recovery of LastPass Business and LastPass Teams accounts.
+About contacting LastPass Support to delete your account
+If you choose to contact LastPass Support by selecting Request help logging in, your case submission is solely for the request of deleting your LastPass account. All other queries or escalations sent to LastPass using this article's case submission form will not be addressed.
+Request help logging in
+Important:
+Use the Request help logging in option only if you are unable to log in to LastPass to submit a support case. Otherwise, use the Contact Support option at the bottom of the page.
+Was this article helpful?
+YesNo
+Be the first one to vote!
+This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service
+Loading
+This is an embed external element. It can be deleted using the delete key or the backspace key. To view the full element, press the preview button below.

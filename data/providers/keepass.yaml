@@ -1,0 +1,366 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read from Canada with a plain fetch
+# (keepass.info serves every page whole): its home, downloads, features, translations, plugins, awards, links, contact
+# (imprint) and donate pages, its legal documentation (terms of use and privacy policy, help/base/terms.html), the
+# KeePass 2.x licence, and its help centre's FAQ, technical FAQ, security, security issues, import/export, placeholders
+# (one-time passwords), synchronization, multiple users, search, setup and KDBX format pages. Pages, each quoted where
+# it's used:
+# Pricing: none. KeePass is free, open-source software you run on your own computer: "Yes, KeePass is really free, and
+# more than that: it is open source (OSI certified)." (its home page). It has no account, no paid edition and no servers
+# for your passwords ("KeePass does not require Internet/cloud access.", its FAQ), so its one plan is free, priced for
+# everywhere. Donations (PayPal in euros or US dollars, a bank transfer to Dominik Reichl, its donate page) "support
+# the development of the project" and buy nothing, so they aren't plans and no ways to pay are listed. KeePass 1.x (1.44)
+# is still offered beside 2.x (2.62) ("If in doubt, use KeePass 2.x."); the plan describes 2.x, and the notes say 1.x
+# lacks one-time passwords ("KeePass 1.x Only No.", its FAQ).
+# Region checklist, 2026-11-19: not needed: one free download for every country, with no prices.
+# Bundles: none. Official resellers: none; it sells nothing. Its downloads page lists ports by other developers
+# ("Contributed/Unofficial KeePass Ports": KeePassDX, KeePassXC, Strongbox and others), which aren't KeePass's.
+# Free use: its one plan is free.
+id: keepass
+name: KeePass
+aliases: [keepass password safe]
+website: https://keepass.info
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free, with no account. Its home page says so ("Yes, KeePass is really free").
+cancelUrl: https://keepass.info/
+sources: { pricing: https://keepass.info/ }
+# Owner (M11.2), read 2026-11-19: no company. KeePass is one person's project: its downloads page says "KeePass" is the
+# password manager developed by Dominik Reichl, its licence and every page's footer say "Copyright © 2003-2026 Dominik
+# Reichl.", its donations go to him, and its imprint names him as "Responsible for all pages on https://keepass.info/",
+# at an address in Metzingen, Germany. A free project with no company behind it (Jellyfin's precedent, the owner's
+# choice of 2026-11-11), so volunteer, but with the country its imprint gives (policy-research's volunteer rule). The
+# country's quote is the imprint's town and country only, not his street address.
+owner:
+  name: Dominik Reichl
+  volunteer: true
+  page:
+    name: Downloads
+    url: https://keepass.info/download.html
+  quotes:
+    - '"KeePass" is the password manager developed by Dominik Reichl.'
+  country:
+    code: DE
+    page:
+      name: Legal contact / imprint
+      url: https://keepass.info/contact.html
+    quotes:
+      - 'Responsible for all pages on https://keepass.info/ :'
+      - '72555 Metzingen Germany'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+# Source code (M11.5): its downloads page links each version's source code package on SourceForge, where the project's
+# files are (sourceforge.net/projects/keepass/, which its awards page links too). Under the GNU GPL version 2 or later
+# (its licence page), with no server of its own, so fully open.
+sourceRepo:
+  url: https://sourceforge.net/projects/keepass/
+  page:
+    name: Downloads
+    url: https://keepass.info/download.html
+  quotes:
+    - 'Source code packages, containing everything you need to build KeePass yourself'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: "Supported operating systems: Windows 7 / 8 / 10 / 11, Mono (Linux,
+# MacOS, BSD, ...)." for KeePass 2.62 (its downloads page), so Windows, macOS and Linux; phones only through other
+# developers' ports. Sign-in: there's no account; you unlock your database with its master key, "One master password
+# decrypts the complete database." with a key file or the Windows user account as optional parts (its features page),
+# so password (a key file and the Windows account have no registry value; hardware keys only through plugins). Support:
+# its forums ("If you have questions about KeePass or improvement ideas, please post them in one of the KeePass forums",
+# its contact page); the imprint's email and phone are for legal issues, security vulnerabilities and donations only
+# ("Please do not send any KeePass usage questions or improvement suggestions to the addresses above"). App languages:
+# its translations page's KeePass 2.x translations (English is built in): Arabic (for 2.52 and later), Chinese
+# (Simplified, 2.58+; Traditional, 2.62+), French, German, Italian, Japanese, Korean, Portuguese (Portugal 2.62+, Brazil
+# 2.61+) and Spanish (2.62+); no Hindi. Open source: "KeePass is free and you have full access to its source code!" (its
+# features page). Not self-hostable: it's a desktop app with no server ("KeePass is a desktop application and does not
+# feature any server capabilities", its security issues page). No pause (nothing to pay) and no parental controls.
+features:
+  platforms: [windows, macos, linux]
+  account.sign-in: [password]
+  support.channels: [community]
+  languages.interface: [en, fr, es, de, it, pt, ja, ko, zh, ar]
+  software.open-source: fully-open
+
+# Password features, read 2026-11-19 (KeePass 2.x):
+# - Items: entries with a title, user name, password, URL and notes, file attachments and custom string fields (its
+#   features and import/export pages), and one-time passwords: "KeePass can generate HMAC-based and time-based one-time
+#   passwords according to RFC 4226 and 6238." (its FAQ), from secrets stored in an entry ("The parameters for the OTP
+#   generation are stored as entry strings", its placeholders page). So login and totp. No passkeys: its features page
+#   names passkeys only among what plugins by others can add ("providing integrations (passkeys, autofill in browsers,
+#   etc.)").
+# - Health: "If you want to find weak passwords instead, use the 'Password Quality' command in the 'Find' menu." (its
+#   search page), so weak; no page offers a breach or reuse check.
+# - Sharing: one database file shared by several people, "Both KeePass 1.x and 2.x allow multiple users working with
+#   one database, which is typically stored on a shared network drive or a file server." with the same master key and
+#   "no per-group or per-entry access control lists" (its multiple users page), so share-vault only.
+# - Import: "KeePass 2.x supports importing data from CSV files (all)", KeePass 1.x files and more than 35 other
+#   managers' exports (1Password, Bitwarden, Dashlane, Enpass, Keeper, LastPass, RoboForm and others: its import/export
+#   page), and KDBX is its own file format ("KDBX is the KeePass 2.x database file format", its KDBX page), which it opens
+#   and merges ('File' → 'Synchronize', its synchronization page). So csv, kdbx and other-managers; no page names JSON.
+# - Export: "The password list can be exported to various formats like TXT, HTML, XML and CSV." (its features page), and
+#   entries to "a KDBX database file" (its import/export page), which is encrypted ("KeePass database files are
+#   encrypted.", its security page). So csv, kdbx and encrypted (notes.md).
+# - Offline: "KeePass does not require Internet/cloud access." (its FAQ). No emergency access: no page offers one.
+# - Authenticator: TOTP and HOTP codes, shown or copied from the main window or typed by Auto-Type (its placeholders
+#   page). Import: its OTP Generator Settings dialog takes the secret and settings by hand, and a setup key entered by
+#   hand is the registry's otpauth; no QR scan and no other app's backup, so otpauth only. Export: no page mentions
+#   otpauth links, QR codes or a codes-only export, so none (Authy's precedent).
+# - End-to-end encryption: none stated. Its pages say the whole database is encrypted and that "the disk/server and
+#   network never see your unencrypted data" (its FAQ), but never "end-to-end" or "zero-knowledge", so
+#   encryption.end-to-end is left out (categories.md's rule); privacy.content-access grades the same fact.
+# - Sync: none of its own. You keep the file wherever you like, on a network share, a web server or a cloud folder
+#   ("Dropbox, Microsoft OneDrive and Google Drive provide such an integration", its synchronization page).
+plans:
+  - id: keepass.free
+    name: Free
+    link: https://keepass.info/download.html
+    features:
+      password-manager: true
+      password-manager.item-types: [login, totp]
+      password-manager.health: [weak]
+      password-manager.sharing: [share-vault]
+      password-manager.import: [csv, kdbx, other-managers]
+      password-manager.export: [csv, kdbx, encrypted]
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+    notes: 'Free and open source (GNU GPL). A Windows app that also runs on Linux and macOS with Mono; your passwords stay in one encrypted file (KDBX) that you keep and sync wherever you like. Phones need another developer’s app that opens KeePass files. KeePass 1.x is still offered, without one-time passwords.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://keepass.info/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch. KeePass has no account and no sign-up: you
+# download free software under the GNU GPL version 2 or later (its licence page). Its legal documentation (terms of use,
+# disclaimer and privacy policy, help/base/terms.html) covers its website: its log files, cookies, Google AdSense ads and
+# contact form, with GDPR rights; "Only the German version is legally binding.", and the English version was rated (the
+# same sections). The app itself sends nothing but an optional update check ("No personal information is sent to the
+# KeePass web server.", its technical FAQ). So the topics about an account and a contract are not-applicable, with why,
+# and its website's data is graded as its legal page states it (Morphe's precedent). Read for security: its security and
+# security issues pages, its awards page (the EU-FOSSA audit and bounty, the BSI's code analysis, ANSSI's CSPN) and the
+# contact page's channel for vulnerabilities. Its forums (SourceForge) and the plugins by others have their own terms,
+# not read.
+policies:
+  links:
+    - name: 'Downloads'
+      url: https://keepass.info/download.html
+    - name: 'Legal documentation (terms and privacy)'
+      url: https://keepass.info/help/base/terms.html
+    - name: 'KeePass 2.x licence'
+      url: https://keepass.info/help/v2/license.html
+    - name: 'KeePass (home page)'
+      url: https://keepass.info/
+    - name: 'Features'
+      url: https://keepass.info/features.html
+    - name: 'FAQ'
+      url: https://keepass.info/help/kb/faq.html
+    - name: 'Technical FAQ'
+      url: https://keepass.info/help/base/faq_tech.html
+    - name: 'Security issues'
+      url: https://keepass.info/help/kb/sec_issues.html
+    - name: 'KDBX file format'
+      url: https://keepass.info/help/kb/kdbx.html
+    - name: 'Multiple users'
+      url: https://keepass.info/help/base/multiuser.html
+    - name: 'Awards and ratings'
+      url: https://keepass.info/ratings.html
+    - name: 'Contact / imprint'
+      url: https://keepass.info/contact.html
+  ratings:
+    - topic: privacy.data-collection
+      tier: bad
+      reason: 'The app sends nothing about you. But its website keeps logs of your visits, which it also uses to improve the site, and it says you can’t object to that.'
+      sources:
+        - url: https://keepass.info/help/base/faq_tech.html
+          quote: 'No personal information is sent to the KeePass web server.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'In addition, the data serves us to optimize the website and to ensure the security of our information technology systems.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'Consequently, there is no possibility of objection on the part of the user.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'Its website shows Google ads, so Google and its partners get data about your visits for their own ads. A consent box appears only in some countries; elsewhere you can only block cookies in your browser.'
+      sources:
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'Your personal data and information on your device (cookies, etc.) may be processed (stored, accessed, shared and used) by this website, Google and its partners among other things for personalization of ads and content, ad and content measurement, audience insights and product development.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'In certain countries, a data processing consent dialog is displayed before showing ads.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'You can also delete/block cookies via your browser settings'
+      action:
+        name: 'How to limit the website’s ad tracking'
+        url: https://keepass.info/help/base/terms.html
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'The app has no ads, but its website shows Google ads chosen from your visits to it and other sites. You can only limit that per browser, or in a consent box shown in some countries.'
+      sources:
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'We use third-party advertising companies via Google AdSense (provided by Google and its partners) to serve ads when you visit our website.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'These companies may use information about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'In certain countries, a data processing consent dialog is displayed before showing ads.'
+      action:
+        name: 'How to limit the website’s ad tracking'
+        url: https://keepass.info/help/base/terms.html
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'KeePass never receives your passwords or anything you write: they stay in your own file, so there’s nothing it could train AI on.'
+      pages:
+        - https://keepass.info/help/kb/faq.html
+        - https://keepass.info/help/base/faq_tech.html
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Only you can open your passwords. The whole file is locked with your master key, and it stays locked even when you keep it on a server or in the cloud.'
+      sources:
+        - url: https://keepass.info/features.html
+          quote: 'The complete database is encrypted, not only the password fields.'
+        - url: https://keepass.info/help/kb/faq.html
+          quote: 'This means that your data is transferred and stored only in encrypted form; the disk/server and network never see your unencrypted data.'
+        - url: https://keepass.info/help/kb/faq.html
+          quote: 'KeePass does not require Internet/cloud access.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: good
+      reason: 'Your passwords stay in your own file. Its website deletes its visit logs within 7 days, and your messages once your question is settled.'
+      sources:
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'In the case of storing the data in log files, this is the case after seven days at the latest.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'For the personal data sent via contact form or e-mail, this is the case when the conversation with the user is finished.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'KeePass keeps almost nothing about you. Your passwords are a file you keep and delete yourself, and its website’s visit logs go within 7 days.'
+      sources:
+        - url: https://keepass.info/help/kb/faq.html
+          quote: 'A KeePass database is a regular file, which users can store wherever they want.'
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'In the case of storing the data in log files, this is the case after seven days at the latest.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You can take everything with you: your passwords are in a file format it publishes in full, which many other apps open, and you can export them to CSV, XML, HTML or text yourself.'
+      sources:
+        - url: https://keepass.info/features.html
+          quote: 'The password list can be exported to various formats like TXT, HTML, XML and CSV.'
+        - url: https://keepass.info/help/kb/kdbx.html
+          quote: 'KDBX is the KeePass 2.x database file format, which is used for storing user data (user names, passwords, URLs, etc.).'
+      action:
+        name: 'How to export your passwords'
+        url: https://keepass.info/help/base/importexport.html
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its pages don’t say what it does if police or governments ask. It never holds your passwords; only its website keeps visit logs.'
+      pages:
+        - https://keepass.info/help/base/terms.html
+        - https://keepass.info/contact.html
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      status: not-stated
+      reason: 'Your passwords stay in your own file, wherever you keep it. But it doesn’t say where its website’s logs are kept.'
+      pages:
+        - https://keepass.info/help/base/terms.html
+        - https://keepass.info/help/kb/faq.html
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you download it free and use it without an account or any personal details.'
+      sources:
+        - url: https://keepass.info/help/base/terms.html
+          quote: 'The use and payment of all offered services is permitted – if and so far technically possible and reasonable – without specification of any personal data or under specification of anonymized data or an alias.'
+        - url: https://keepass.info/help/kb/faq.html
+          quote: 'KeePass does not require Internet/cloud access.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account and no contract to agree to: KeePass is free software you use under the GNU GPL, and its website’s legal page has no dispute clause.'
+      pages:
+        - https://keepass.info/help/v2/license.html
+        - https://keepass.info/help/base/terms.html
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service for the app to change. KeePass is free software under the GNU GPL, and the copy you have stays yours under it.'
+      pages:
+        - https://keepass.info/help/v2/license.html
+        - https://keepass.info/help/base/terms.html
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no KeePass account to close: you download it and use it without signing up.'
+      pages:
+        - https://keepass.info/help/base/terms.html
+        - https://keepass.info/download.html
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Nothing you store goes to KeePass: your passwords stay in your own file, so it takes no rights over them.'
+      pages:
+        - https://keepass.info/help/kb/faq.html
+        - https://keepass.info/help/v2/license.html
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: great
+      reason: 'Nothing can be taken away: it’s free, open-source software that you keep, change and share under the GNU GPL.'
+      sources:
+        - url: https://keepass.info/
+          quote: 'Yes, KeePass is really free, and more than that: it is open source (OSI certified).'
+        - url: https://keepass.info/help/v2/license.html
+          quote: 'The program is distributed under the terms of the GNU General Public License version 2 or later.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no KeePass account to close for not using it.'
+      pages:
+        - https://keepass.info/help/base/terms.html
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'It’s open source under the GNU GPL: anyone may read, change and share it, and build it themselves from its source code.'
+      sources:
+        - url: https://keepass.info/help/v2/license.html
+          quote: 'The program is distributed under the terms of the GNU General Public License version 2 or later.'
+        - url: https://keepass.info/features.html
+          quote: 'KeePass is free and you have full access to its source code!'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside experts have checked its code: an audit for the European Commission and a review paid for by Germany’s cyber security office. You can report security flaws to its developer directly.'
+      sources:
+        - url: https://keepass.info/ratings.html
+          quote: "KeePass has been audited in the European Commission's Free and Open Source Software Auditing (EU-FOSSA 1) project."
+        - url: https://keepass.info/ratings.html
+          quote: 'The German Federal Office for Information Security (Bundesamt für Sicherheit in der Informationstechnik, BSI) and mgm security partners have sponsored and performed a code analysis of KeePass 2.x.'
+        - url: https://keepass.info/contact.html
+          quote: 'Use these addresses only in case of legal issues (like requests for KeePass distribution permission in magazines), security vulnerabilities or donation questions.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Share your passwords with anyone you like: several people can use the same database file, for example on a shared drive.'
+      sources:
+        - url: https://keepass.info/help/base/multiuser.html
+          quote: 'Both KeePass 1.x and 2.x allow multiple users working with one database, which is typically stored on a shared network drive or a file server.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      tier: great
+      reason: 'It asks before checking for updates, and never downloads or installs one itself: you update it by hand.'
+      sources:
+        - url: https://keepass.info/help/base/faq_tech.html
+          quote: 'When starting KeePass for the first time, it asks whether to enable automatic update checks (recommended).'
+        - url: https://keepass.info/help/base/faq_tech.html
+          quote: 'Updates are not downloaded or installed automatically.'
+        - url: https://keepass.info/help/kb/sec_issues.html
+          quote: 'First of all, we would like to note that KeePass cannot update itself.'
+      lastVerified: 2026-11-19

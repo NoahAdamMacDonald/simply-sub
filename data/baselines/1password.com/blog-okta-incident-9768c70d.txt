@@ -1,0 +1,233 @@
+url: https://1password.com/blog/okta-incident
+method: fetch
+saved: 2026-11-19
+
+Okta Support System incident and 1Password | 1Password Skip to Main Content 1Password for Agents: Give AI Agents access, not your passwords. Learn more Sign in
+Sign inGet started free
+Business
+Business
+Enterprise
+Small Teams
+Consumer Goods
+SaaS and Technology
+Financial Services
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Comparison
+Pricing
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Extended device compliance
+Integrations
+License management
+Posture checks
+Secrets management
+Watchtower and insights
+Explore more features
+AI agent identity
+AI agent security
+AI spend management
+Credential management
+Cyber insurance and compliance
+Device security
+Passwordless
+SaaS access governance
+Shadow IT discovery
+SaaS offboarding
+SaaS spend management
+Zero standing privileges
+Talk to sales
+View plans
+Community
+Personal
+Individuals
+Families
+How it works
+Meta Muse
+Grok Bot
+Instinct
+Autofill
+Dark web monitoring
+Secure password sharing
+Travel mode
+Zero knowledge encryption
+Password generator
+Username generator
+Demos
+Compare password managers
+Apple Passwords
+Bitwarden
+Dashlane
+Google Password Manager
+Keeper
+LastPass
+Nordpass
+Holiday sale: Save 25%
+Help and documentation
+Community
+Developers
+Partners
+Managed Service Providers
+Channel partners
+Partners Overview
+Enterprise Password Manager MSP Edition
+1Password Marketplace
+Demos
+AWS
+Crowdstrike
+Drata
+Perplexity
+Tailscale
+1Password Partner Portal
+MSP Edition login
+Become a partner
+1Password is the Official Cybersecurity Partner of Oracle Red Bull Racing
+Resources
+Our security model
+Password Management
+1Password Security Research
+Blog
+Customer stories
+Webinars
+Credentials management
+Device security
+SaaS management
+View all demos
+macOS
+Windows
+iOS
+Android
+Browser extension
+Linux
+Command line
+Talk to sales
+Help and documentation
+Community
+2026 Gartner® Magic Quadrant™ for SaaS Management Platforms
+Pricing
+Talk to sales
+Get started free
+Back to blog Okta Support System incident and 1Password
+by Pedro Canahuati
+October 23, 2023 - 1 min
+Related Categories
+News
+We detected suspicious activity on our Okta instance related to their Support System incident. After a thorough investigation, we concluded that no 1Password user data was accessed.
+On September 29, we detected suspicious activity on our Okta instance that we use to manage our employee-facing apps. We immediately terminated the activity, investigated, and found no compromise of user data or other sensitive systems, either employee-facing or user-facing.
+Since then, we’ve been working with Okta to determine the initial vector of compromise. As of late Friday, October 20, we’ve confirmed that this was a result of Okta’s Support System breach.
+Your trust is paramount to us. Our systems and policies were able to identify and terminate this attack, and we are continuously enhancing our security measures to keep you and your data safe.
+This blog post includes an incident report that was updated on October 25, 2023. We received additional logs from Okta after we finalized our prior report that confirmed Okta as the source of the incident. This update also confirms that our Google instance was not impacted by this attack.
+Continue Reading
+January 10, 2023
+How 1Password is designed to keep your data safe, even in the event of a breach
+Security
+February 6, 2023
+Why you can trust 1Password's cloud-based storage and syncing
+Security
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Unified Access Platform
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Products and Tools
+Personal password manager
+Password generator
+Username generator
+Comparison
+Demos
+Switch
+Pricing
+Features
+Autofill
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Posture checks
+Extended Device Compliance
+SaaS Manager integrations
+SaaS discovery
+SaaS workflows
+IT Asset Management
+License management
+Watchtower insights
+Secrets Management
+Password sharing
+Two-factor authentication
+Passkeys
+Solutions
+AI spend management
+Zero standing privileges
+Passwordless
+Device Security
+Shadow IT Discovery
+SaaS Access Governance
+SaaS Offboarding
+SaaS Spend Management
+Credential management
+Cyber insurance and compliance
+Agentic AI security
+Resources
+1Password Security Research
+Webinars
+Customer stories
+Resource library
+Blog
+Security
+Privacy
+Developers
+Developer documentation
+Developer community
+Secrets management
+Bug bounty
+Support
+Help and documentation
+Community
+Customer support
+Privacy support
+Company
+About
+We're hiring!
+Press
+Podcast
+Newsletter
+Legal Center
+Trust Center
+Partners
+Partnerships overview
+1Password for MSPs
+Password Manager - MSP edition
+1Password Marketplace
+For students
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Terms of Service
+Cookie Policy
+Your Privacy Choices
+Privacy Policy
+Accessibility
+Sitemap
+© 2026 1Password. All rights reserved.
+4711 Yonge St, 10th Floor, Toronto Ontario, M2N 6K8, Canada

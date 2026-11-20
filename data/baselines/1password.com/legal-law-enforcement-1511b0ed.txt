@@ -1,0 +1,254 @@
+url: https://1password.com/legal/law-enforcement
+method: fetch
+saved: 2026-11-19
+
+Data Availability for Law Enforcement | 1Password Skip to Main Content 1Password for Agents: Give AI Agents access, not your passwords. Learn more Sign in
+Sign inGet started free
+Business
+Business
+Enterprise
+Small Teams
+Consumer Goods
+SaaS and Technology
+Financial Services
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Comparison
+Pricing
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Extended device compliance
+Integrations
+License management
+Posture checks
+Secrets management
+Watchtower and insights
+Explore more features
+AI agent identity
+AI agent security
+AI spend management
+Credential management
+Cyber insurance and compliance
+Device security
+Passwordless
+SaaS access governance
+Shadow IT discovery
+SaaS offboarding
+SaaS spend management
+Zero standing privileges
+Talk to sales
+View plans
+Community
+Personal
+Individuals
+Families
+How it works
+Meta Muse
+Grok Bot
+Instinct
+Autofill
+Dark web monitoring
+Secure password sharing
+Travel mode
+Zero knowledge encryption
+Password generator
+Username generator
+Demos
+Compare password managers
+Apple Passwords
+Bitwarden
+Dashlane
+Google Password Manager
+Keeper
+LastPass
+Nordpass
+Compare plans
+Help and documentation
+Community
+Developers
+Partners
+Managed Service Providers
+Channel partners
+Partners Overview
+Enterprise Password Manager MSP Edition
+1Password Marketplace
+Demos
+AWS
+Crowdstrike
+Drata
+Perplexity
+Tailscale
+1Password Partner Portal
+MSP Edition login
+Become a partner
+1Password is the Official Cybersecurity Partner of Oracle Red Bull Racing
+Resources
+Our security model
+Password Management
+1Password Security Research
+Blog
+Customer stories
+Webinars
+Credentials management
+Device security
+SaaS management
+View all demos
+macOS
+Windows
+iOS
+Android
+Browser extension
+Linux
+Command line
+Talk to sales
+Help and documentation
+Community
+2026 Gartner® Magic Quadrant™ for SaaS Management Platforms
+Pricing
+Talk to sales
+Get started free
+Information for Law Enforcement
+Private by Design is our ethos. Learn what this means for Law Enforcement.
+Last updated: April 20, 2023.
+1Password Government Request Guidelines
+These guidelines set out how AgileBits Inc. (1Password, we or us) processes demands (Law Enforcement Requests) received from law enforcement agencies or other regulatory bodies (Law Enforcement) for information about or stored by our customers and users (User Information).
+These Guidelines are:
+provided for informational purposes only;
+subject to change at any time at our sole discretion;
+not intended to modify any existing contractual arrangements with our customers or users;
+not intended as legal advice; and
+not to be construed as a waiver of any right or privilege.
+Information we cannot provide
+We do not have the ability to decrypt the list of logins or the passwords that our users store in 1Password. There is more info here about the data we can and cannot access. In short, we can’t decrypt our users' passwords and other saved items, their account password, and their metadata (like titles, URLs, tags, and custom icons for saved items).
+Information we can provide in response to an enforceable Law Enforcement Request
+We do have access to the type of account our customers have signed up for and how that account has been paid for. We also have access to when our users log in, how many vaults they create, how many items are stored in those vaults, and how much storage space is used. We can also access our users' IP address, the devices connected to their account, and the name, email address, and profile pictures that they have given to us.
+We will not provide identifiable non-public information unless we believe in good faith that:
+we are responding to an enforceable Law Enforcement Request;
+disclosure is necessary to protect the safety of a user or the safety of others; or
+disclosure is necessary to investigate fraud or other criminal activity.
+How we respond to requests for User Information from Law Enforcement
+Whenever possible, 1Password will seek to:
+confirm that Law Enforcement has the appropriate authority under applicable law before providing any User Information;
+provide only such User Information as is reasonable and required given the circumstances and the demand from Law Enforcement; and
+notify the customer or user of a request for their User Information before disclosing it to Law Enforcement, unless 1Password is prohibited by applicable law or Law Enforcement or where there is a reasonable indication of illegal or malicious conduct or risk of harm.
+Law Enforcement Requests
+Law Enforcement Requests can be sent to Legal_Requests@agilebits.com.
+Please include in your request:
+the subject of the request;
+the information being requested;
+the name/title of the authority issuing the request;
+the jurisdiction of the requesting authority;
+whether there is an applicable statue, law or regulation prohibiting the disclosure of the request to the subject of the request;
+the deadline for the request and any emergency circumstances necessitating immediate response; and
+any relevant documents (i.e. subpoena, court order, non-disclosure order, copy or link to relevant statue, law or regulation).
+We do not waive any legal rights based on this agreement to accept requests by email, including but not limited to your obligation to attach documentation compelling our response to your request, and our right to object to your request after review.
+Last updated: April 20, 2023
+Legal
+Law Enforcement
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Unified Access Platform
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Products and Tools
+Personal password manager
+Password generator
+Username generator
+Comparison
+Demos
+Switch
+Pricing
+Features
+Autofill
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Posture checks
+Extended Device Compliance
+SaaS Manager integrations
+SaaS discovery
+SaaS workflows
+IT Asset Management
+License management
+Watchtower insights
+Secrets Management
+Password sharing
+Two-factor authentication
+Passkeys
+Solutions
+AI spend management
+Zero standing privileges
+Passwordless
+Device Security
+Shadow IT Discovery
+SaaS Access Governance
+SaaS Offboarding
+SaaS Spend Management
+Credential management
+Cyber insurance and compliance
+Agentic AI security
+Resources
+1Password Security Research
+Webinars
+Customer stories
+Resource library
+Blog
+Security
+Privacy
+Developers
+Developer documentation
+Developer community
+Secrets management
+Bug bounty
+Support
+Help and documentation
+Community
+Customer support
+Privacy support
+Company
+About
+We're hiring!
+Press
+Podcast
+Newsletter
+Legal Center
+Trust Center
+Partners
+Partnerships overview
+1Password for MSPs
+Password Manager - MSP edition
+1Password Marketplace
+For students
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Terms of Service
+Cookie Policy
+Your Privacy Choices
+Privacy Policy
+Accessibility
+Sitemap
+© 2026 1Password. All rights reserved.
+4711 Yonge St, 10th Floor, Toronto Ontario, M2N 6K8, Canada

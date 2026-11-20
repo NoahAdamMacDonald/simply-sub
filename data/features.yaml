@@ -512,6 +512,109 @@
     - { id: link-view-limit, name: Link view limits, aliases: [usage limits] }
     - { id: link-password, name: Password-protected links, aliases: [link password] }
     - { id: role-permissions, name: Access roles, aliases: [viewer/editor/admin, read/write/admin] }
+# Password managers and authenticators (the owner's design, 2026-11-13), filled 2026-11-19 from each provider's own
+# help pages; end-to-end encryption (the owner's checks for storage, email, calendars, passwords, file sharing and
+# messaging), filled the same day for every provider whose own pages say it.
+# - Imports from / Exports as: the files and ways its own help pages name. `csv`: a CSV file, its own template's or
+#   another app's; `json`: a JSON file; `kdbx`: KeePass's own database file, not KeePass's XML or CSV export; `cxf`: the
+#   FIDO Credential Exchange (an app-to-app transfer, CXP); `other-managers`: it names other password managers or
+#   browsers whose exports it reads; `encrypted`: an export locked with a password or key you set (a password-protected
+#   ZIP or JSON file, a PGP file, an encrypted backup); `text`: a plain text file. An export whose format no page names
+#   isn't listed (said in the provider's comment).
+# - Emergency access: someone you choose can get into your vault if you can't, after a wait or your approval; recovering
+#   your own account isn't it.
+# - Works offline: its apps open your vault with no connection, read-only included.
+# - Authenticator (2FA codes): the plan's apps generate time-based codes (TOTP) for other sites' two-factor sign-in, in
+#   its password manager or an authenticator app of its own; a limited free allowance counts (Proton Free's three 2FA
+#   items). Two-factor sign-in to the provider's own account is account.sign-in, not this.
+# - Imports 2FA codes from: `otpauth`: a site's QR code or setup key, scanned or pasted; `google-authenticator`: Google
+#   Authenticator's transfer QR code or export; `other-apps`: other authenticator apps' export or backup files.
+# - Exports 2FA codes as: what its pages say takes the codes out: otpauth links or QR codes, an encrypted backup file, a
+#   plain one. A vault export no page says carries the 2FA secrets doesn't count; an authenticator with no export
+#   (Authy's) leaves it empty and says so in a comment.
+# - End-to-end encrypted: what the provider's own pages say is end-to-end, zero-access or zero-knowledge encrypted, so
+#   it can't read it; encryption in transit, or at rest with its own keys, isn't it, and neither is a VPN's traffic.
+#   `files`: files and photos you store or send; `passwords`: a password manager's or authenticator's vault (logins, 2FA
+#   secrets and other items); `notes`: notes, documents and spreadsheets; `messages`: messages and calls between
+#   people; `chats`: an AI assistant's prompts and saved chats; `backups`: a device's or app's backups.
+- id: password-manager.import
+  parent: password-manager
+  name: Imports from
+  category: security
+  type: set
+  values:
+    - { id: csv, name: CSV files }
+    - { id: json, name: JSON files }
+    - { id: kdbx, name: KeePass files (.kdbx), aliases: [keepass] }
+    - { id: cxf, name: Credential Exchange (FIDO), aliases: [credential exchange format, cxp] }
+    - {
+        id: other-managers,
+        name: Other password managers' exports,
+        aliases: [1password, lastpass, bitwarden],
+      }
+- id: password-manager.export
+  parent: password-manager
+  name: Exports as
+  category: security
+  type: set
+  values:
+    - { id: csv, name: CSV files }
+    - { id: json, name: JSON files }
+    - { id: kdbx, name: KeePass files (.kdbx) }
+    - { id: cxf, name: Credential Exchange (FIDO) }
+    - { id: encrypted, name: An encrypted export }
+    - { id: text, name: A plain text file }
+- id: password-manager.emergency-access
+  parent: password-manager
+  name: Emergency access
+  category: security
+  type: boolean
+  aliases: [trusted contact, digital legacy]
+- id: password-manager.offline
+  parent: password-manager
+  name: Vault works offline
+  category: security
+  type: boolean
+  aliases: [offline vault, local vault]
+- id: authenticator.included
+  name: Authenticator (2FA codes)
+  category: security
+  type: boolean
+  aliases: [2fa app, totp app, two-factor codes, authenticator app]
+  requiredIn: [passwords]
+- id: authenticator.import
+  parent: authenticator.included
+  name: Imports 2FA codes from
+  category: security
+  type: set
+  values:
+    - { id: otpauth, name: Links and QR codes (otpauth), aliases: [otpauth uri, qr code] }
+    - { id: google-authenticator, name: Google Authenticator's export }
+    - { id: other-apps, name: Other apps' backup files, aliases: [aegis, 2fas, ente auth] }
+- id: authenticator.export
+  parent: authenticator.included
+  name: Exports 2FA codes as
+  category: security
+  type: set
+  values:
+    - { id: otpauth, name: Links and QR codes (otpauth) }
+    - { id: encrypted-backup, name: An encrypted backup file }
+    - { id: plain-backup, name: A plain backup file }
+  aliases: [totp export, 2fa backup]
+- id: encryption.end-to-end
+  name: End-to-end encryption
+  category: security
+  type: set
+  values:
+    - { id: files, name: Files and photos }
+    - { id: email, name: Emails, aliases: [pgp] }
+    - { id: calendar, name: Calendar events }
+    - { id: passwords, name: Passwords and vault items }
+    - { id: notes, name: Notes and documents }
+    - { id: messages, name: Messages and calls }
+    - { id: chats, name: AI chats }
+    - { id: backups, name: Backups }
+  aliases: [e2ee, zero-access encryption, zero-knowledge]
 - id: security.dark-web-monitoring
   name: Dark web monitoring
   category: security

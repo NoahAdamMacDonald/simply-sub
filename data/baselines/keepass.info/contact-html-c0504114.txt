@@ -1,0 +1,77 @@
+url: https://keepass.info/contact.html
+method: fetch
+saved: 2026-11-19
+
+Contact - KeePass
+KeePass
+Password Safe
+Home
+Home & News
+Forums
+Feature List
+Screenshots
+Getting KeePass
+Downloads
+Translations
+Plugins / Ext.
+Information / WWW
+Help
+FAQ
+Security
+Awards
+Links
+Support KeePass
+Donate
+Contact
+If you have questions about KeePass or improvement ideas, please post them in one
+of the KeePass forums.
+Legal Contact / Imprint
+Responsible for all pages on https://keepass.info/:
+Dominik Reichl
+Haydnstr. 12
+72555 Metzingen
+Germany
+📧 E-Mail: (JavaScript is required)
+📝 Message:
+[Contact Form]
+🌐 Website:
+https://www.dominik-reichl.de/
+🕾 Tel.: (0049) 0173 4621639
+[Terms & Privacy]
+[Acknowledgements]
+[Awards]
+[Donate]
+Important:
+Please do not send
+any KeePass usage questions or improvement suggestions
+to the addresses above (e-mail, postal and telephone)!
+They will be ignored. Use these addresses
+only in case of legal issues (like requests for KeePass distribution
+permission in magazines), security vulnerabilities or donation questions.
+If you have questions about KeePass or improvement ideas, please post them in one
+of the KeePass forums.
+Thanks!
+OpenPGP Public Key
+Current:
+OpenPGP Public Key
+Dominik Reichl
+Key ID: 58C6F98E.
+Key Fingerprint: D950 4428 3EE9 48D9 11E8 B606 A4F7 62DC 58C6 F98E.
+Public Key: [ASC File]
+[58C6F98E ASC signed by FEB7C7BC].
+Old:
+OpenPGP Public Key
+Dominik Reichl
+Key ID: FEB7C7BC.
+Key Fingerprint: 2171 BEEA D0DD 92A1 8065 5626 DCCA A5B3 FEB7 C7BC.
+Public Key: [ASC File]
+[Keybase.io].
+Copyright © 2003-2026 Dominik Reichl.
+[Legal Contact / Imprint]
+[Terms & Privacy]
+[Acknowledgements]
+[Donate]
+Plugins and Extensions
+Useful little plugins and extensions that
+provide additional functionality (import /
+export, database backup, ...).

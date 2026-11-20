@@ -1,0 +1,126 @@
+url: https://support.1password.com/security-assessments/
+method: fetch
+saved: 2026-11-19
+
+Security audits of 1Password | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Security and privacy
+Learn more
+Security audits of 1Password
+Security audits of 1Password 1Password products have been reviewed by multiple independent security firms.
+Security and privacyLearn more 1Password is periodically assessed to make sure it remains a secure way for you to share all your secrets. These unaltered reports provide insight into how independent auditors view the security of our products.
+We might not publish a report if we’ve recently published a report with the same or broadly similar scope. We also might hold back a report if it’s about an unreleased feature. Though we aren’t able to publish every audit, we aim to publish as many as we can.
+If you have a concern, contact the 1Password Security team. 1Password doesn’t make any assurances about responses to issues.
+Penetration tests
+Important
+As part of 1Password’s ongoing commitment to responsible transparency, security, and compliance, we’re centralizing the distribution of our penetration testing reports. Effective November 3, 2025, all annual pentest reports will be available through the 1Password Trust Center.
+1Password regularly requests auditors to perform penetration tests on its products and services. Penetration test reports are available through the 1Password Trust Center.
+ISO certifications
+1Password has achieved ISO 27001:2022, 27017:2015, 27018:2019, and 27701:2019 certifications. The International Organization for Standardization (ISO) sets the international standards for information security management, cloud security, and privacy.
+Collectively, these certifications confirm 1Password meets the highest international standards for information security and privacy. Full details of our ISO certifications are available from the 1Password Trust Center.
+Learn more about the ISO certifications of 1Password.
+SOC
+1Password is SOC 2 type 2 certified. SOC, or Service Organization Control, is an independent auditing process that makes sure that 1Password securely manages data to protect customers’ interests and privacy. Request a copy of the SOC 2 report.
+Learn more about SOC 2 certification of 1Password.
+Bug Bounty Program
+As of December 2024, 1Password has moved its bug bounty initiative to HackerOne.
+HackerOne is engaged in an ongoing bug bounty program targeting the 1Password service and web-application. Check out the program details.
+This program is currently open to the public and has received submissions from hundreds of unique researchers. Issues submitted range in scope and severity. Despite the presence of findings no user secrets were at risk. ISE
+Independent Security Evaluators (ISE) was engaged to perform a penetration test and code review of the 1Password system. The assessment was performed during April and June, 2020.
+Full details are available in the ISE security assessment report
+Onica
+Onica was engaged to perform an assessment and audit of existing 1Password security architecture, infrastructure configurations, tools, and practices.
+The review of the current AWS environments showed evidence that the AgileBits teams have undertaken significant research and gained a solid understanding of best practices from a platform level. The fundamentals of security best practices are being executed in the implementation. Full details are available in the Onica security audit report
+Learn more
+About ISO certifications of 1Password
+About SOC 2 certification of 1Password
+About the 1Password security model
+About 1Password and your privacy
+1Password Security Design White Paper
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: July 28, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

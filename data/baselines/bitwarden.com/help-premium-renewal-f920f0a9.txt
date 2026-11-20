@@ -1,0 +1,144 @@
+url: https://bitwarden.com/help/premium-renewal/
+method: browser
+saved: 2026-11-19
+
+Ctrl + K
+Business sales
+Get started
+Log In
+Docs
+Courses
+Home
+Release Notes
+Account Access
+Password Manager
+Bitwarden Authenticator
+Secrets Manager
+Admin Console
+Provider Portal
+Self-host
+Security
+Plans & Pricing
+Password Manager
+Password Manager Plans
+Upgrade from Individual to Organization
+Premium Renewal
+Organization Renewal
+Secrets Manager
+View & Update Billing Details
+Payment Methods
+Invoices & Receipts
+Taxes on Bitwarden Purchases
+Manage Subscription Seats in Your Organization
+Delete an Account or Organization
+Cancel a Subscription
+Billing FAQs
+PLANS & PRICINGPASSWORD MANAGER
+Premium Renewal
+Premium individual subscriptions renew automatically on an annual basis. You can check your renewal date from your web vault by navigating to Settings → Subscription:
+Subscription page
+As your renewal date approaches, we recommend confirming your payment method is up-top-date by going to Settings → Subscription → Payment method. Learn how to update your billing information.
+
+Warning
+If we cannot process your payment method, or if you have cancelled your subscription, your account will revert to free individual. Until you re-instate your premium subscription, this will result in the following:
+Two-step login
+You will not be locked out of your vault, however you will not be able to use advanced two-step login options such as Yubikey or Duo for authentication.
+If you have a core two-step login option enabled (authenticator app or email), you will be prompted to use the enabled option.
+If you do not have another two-step login option enabled, you will authenticate into your vault without two-step login.
+Your secret keys will remain stored in vault items in the Authenticator Key (TOTP) field, however Bitwarden will not generate TOTP codes.
+Encrypted file attachments
+Files will not be deleted from your vault, however you will not be able to upload or download.
+Emergency access
+Trusted emergency contacts will still be able to request and obtain access to your vault. As a grantor, however, you will not be able to add new or edit existing trusted emergency contacts.
+Suggest changes to this page
+Page Options
+
+Contact support
+
+Download Bitwarden
+
+Feature Request
+
+Ask the Community
+
+Contributor Guidelines
+Cloud Status
+Operational
+Check status
+SOLUTIONS
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+FOR DEVELOPERS
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+PRODUCTS
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+BUSINESS
+Enterprise
+Teams and Businesses
+PERSONAL
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+RESOURCES
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+FREE TOOLS
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+COMPANY
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.
+Terms
+Privacy
+Cookie Settings
+Sitemap
+Language
+English (United States)
+English (United Kingdom)
+Deutsch (Deutschland)
+Español (Latinoamérica)
+Français (France)
+Italiano (Italia)
+日本語 (日本)
+Nederlands (Nederland)
+Português (Brasil)
+Svenska (Sverige)
+Chat Now
+Hi there! What questions do you have?
+Which plan fits my team?
+Does Bitwarden support agentic AI?
+What is Access Intelligence?
+Don't share personal info. Here's how we handle your messages: Privacy Policy

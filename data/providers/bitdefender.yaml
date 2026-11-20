@@ -276,6 +276,22 @@ perks:
 #   article don't mention it (notes.md). The standard version is the same Bitdefender VPN with a daily limit, so its
 #   value is inferred.
 # - Connects your own devices: no page read offers it, so false.
+# The password and authenticator features and end-to-end encryption added 2026-11-19 (the owner's design,
+# categories.md), read that day with Edge from Canada in its support centre, for SecurePass on every plan with it:
+# - Imports "from supported password managers, browsers, and previously exported SecurePass files" (answer 108399),
+#   naming "1Password, Bitdefender SecurePass, Bitdefender Password Manager, Bitdefender Wallet, Bitwarden, Dashlane,
+#   Kaspersky, Keepass, LastPass, Roboform, SaferPass" (its FAQ, answer 107798), and its own CSV template ("import your
+#   newly created CSV file", answer 140953); its own exports are CSV or JSON (below), so JSON too. Keepass's format
+#   isn't named, so no .kdbx.
+# - Exports "CSV" or "JSON" (answer 108400), where "you can turn on the Password protection switch and enter a password
+#   to protect the exported JSON file".
+# - No emergency access and no offline vault: its FAQ (answer 107798) and its table of features by app (answer 109218)
+#   offer neither.
+# - Authenticator: "scan the QR code with SecurePass and save it in your vault" (answer 107798; "You’ll see options to
+#   Save key or Scan QR Code to set up the two-factor authentication key.", answer 108379). No page says its export
+#   carries the 2FA keys, so no authenticator.export.
+# - End-to-end: "SecurePass uses end-to-end encryption and requires both your Bitdefender login and master password to
+#   access your data." (answer 107798).
 plans:
   - id: bitdefender.total-security
     name: Total Security
@@ -304,6 +320,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -550,6 +573,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -804,6 +834,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -1057,6 +1094,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.data-exposure: [footprint]
@@ -1411,6 +1455,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.data-exposure: [footprint]
@@ -1763,6 +1814,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.credit-monitoring: 1
       security.dark-web-monitoring: true
@@ -1841,6 +1899,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.credit-monitoring: 3
       security.dark-web-monitoring: true
@@ -1930,6 +1995,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.credit-monitoring: 1
       security.dark-web-monitoring: true
@@ -2010,6 +2082,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.credit-monitoring: 3
       security.dark-web-monitoring: true
@@ -2217,6 +2296,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -2462,6 +2548,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true
@@ -2607,6 +2700,13 @@ plans:
       password-manager.health: [breached, weak, reused, old, suspicious]
       password-manager.sharing:
         [share-to-user, share-link, link-expiry, link-view-limit, link-password, role-permissions]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [csv, json, encrypted]
+      password-manager.emergency-access: false
+      password-manager.offline: false
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
       security.anti-tracker: true
       security.dark-web-monitoring: true
       security.file-shredder: true

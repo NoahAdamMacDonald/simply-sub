@@ -1,0 +1,453 @@
+url: https://keepassxc.org/docs/KeePassXC_GettingStarted
+method: browser
+saved: 2026-11-19
+
+KeePassXC: Getting Started Guide
+KeePassXC Team
+team@keepassxc.org
+Version 2.8.0
+Table of Contents
+License and Disclaimers
+Disclaimer of Warranty
+Limitation of Liability
+Welcome
+Overview
+Features
+Contact Us
+Downloading KeePassXC
+Microsoft Windows
+Linux
+macOS
+Interface Overview
+Application Layout
+Toolbar
+Screenshot Security
+View Options
+Application Settings
+Keyboard Shortcuts
+Database Operations
+Creating Your First Database
+Storing Your Database
+Opening an Existing Database
+Quick Unlock
+Entry Handling
+Search
+Password Generator
+Generating Passwords
+Generating Passphrases
+Browser Integration
+Install the Browser Extension
+Configure KeePassXC-Browser
+Using the Browser Extension
+Generate Passwords
+License and Disclaimers
+KeePassXC is licensed with the GNU General Public License Version 3. All copyrights and additional licenses are recorded in COPYING.
+Disclaimer of Warranty
+THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. Except when otherwise stated in writing the copyright holders and/or other parties provide the program "as is" without Warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of Merchantability and fitness for a particular purpose. The entire risk as to the quality and performance of the program Is with you. Should the program prove defective, you assume the cost of all necessary servicing, repair or correction.
+Limitation of Liability
+In no event unless required by applicable law or agreed to in writing will any copyright holder, or any other party Who modifies and/or conveys the program as permitted above, be liable to you for damages, including any general, Special, incidental or consequential damages arising out of the use or inability to use the program (including but not Limited to loss of data or data being rendered inaccurate or losses sustained by you or third parties or a failure of The program to operate with any other programs), even if such holder or other party has been advised of the possibility Of such damages.
+Welcome
+KeePassXC is a modern, secure, and open-source password manager that stores and manages your most sensitive information. You can run KeePassXC on Windows, macOS, and Linux systems.
+KeePassXC is for people with extremely high demands of secure personal data management. It saves many different types of information, such as usernames, passwords, URLs, attachments, and notes in an offline, encrypted file that can be stored in any location, including private and public cloud solutions. For easy identification and management, user-defined titles and icons can be specified for entries. In addition, entries are sorted in customizable groups. An integrated search function allows you to use advanced patterns to easily find any entry in your database. A customizable, fast, and easy-to-use password generator utility allows you to create passwords with any combination of characters or easy to remember passphrases.
+Overview
+You can store an unlimited number of passwords and information in a KeePassXC database. Every piece of information you store in your database is encrypted at all times within the kdbx file. When you are accessing your database from within KeePassXC, your information is decrypted and stored in your computer’s memory. KeePassXC places controls over the access to this data so other applications cannot read it (unless they have administrative rights). The interface is designed to let you quickly access your passwords, search for the right entry, perform Auto-Type or copy/paste operations, make and save changes, and then get out of your way.
+KeePassXC ships with light and dark themes specifically designed to meet accessibility standards. In most cases, the appropriate theme for your system will be determined automatically, but you can always set a specific theme in the application settings.
+Figure 1. Light and Dark Themes
+Features
+KeePassXC has numerous features for novice and power users alike. This guide will go over the basic features to get you up and running quickly. The User Guide contains more in-depth discussions on the major features in the application.
+Basic Features
+Create, open, and save databases in the KDBX format (KeePass Compatible)
+Store sensitive information in entries that are organized by groups
+Search for entries
+Password generator
+Auto-Type passwords into applications
+Browser integration with Google Chrome, Mozilla Firefox, Microsoft Edge, Chromium, Vivaldi, Brave, and Tor-Browser
+Support for passkeys using the browser integration
+Entry icon download
+Import databases from CSV, 1Password, Bitwarden, Proton Pass, and KeePass1 formats
+Advanced Features
+Database reports (password health, HIBP, and statistics)
+Database export to CSV, XML, and HTML formats
+TOTP storage and generation
+Field references between entries
+File attachments and custom attributes
+Entry history and data restoration
+YubiKey/OnlyKey challenge-response support
+Command line interface (keepassxc-cli)
+Auto-Open databases
+KeeShare shared databases (import, export, and synchronize)
+SSH Agent
+FreeDesktop.org Secret Service (replace Gnome keyring, etc.)
+Additional encryption choices: Twofish and ChaCha20
+Contact Us
+We are committed to continually improve KeePassXC through customer experience and your feedback is important to us. Please report any bugs you encounter at our GitHub issue tracker.
+We are also available on Matrix for real-time feedback and discussions. See our contact page for further options.
+Thank You,
+Team KeePassXC
+Downloading KeePassXC
+KeePassXC is available for download for the following operating systems and platforms:
+Microsoft Windows
+Portable and MSI Installer (64-bit and 32-bit)
+Linux – Official Cross-Distribution Packages
+AppImage and Snap Package
+Linux – Distribution-Specific Packages
+Ubuntu, Debian, Arch Linux, Gentoo, Fedora, CentOS, and OpenSUSE
+macOS
+DMG Installer, Homebrew Cask
+To download the KeePassXC installer for your desired platform, visit https://keepassxc.org/download or directly from our GitHub Releases.
+KeePassXC is open-source software and may be available on other websites that are unaffiliated with Team KeePassXC. We strongly discourage downloading KeePassXC from third-party websites.
+Before installing KeePassXC, it is recommended that you verify that your downloaded installer matches the signature, which is published alongside the release package. By verifying the signatures of KeePassXC releases, you can verify the authenticity and integrity of the downloaded installation file. This guarantees that the file you downloaded was originally created by the KeePassXC Team and its contents have not been tampered with.
+To know more about the steps to verify the authenticity and integrity of your downloaded package, visit https://keepassxc.org/verifying-signatures.
+Microsoft Windows
+The Windows MSI installer is signed by a secure certificate owned by DroidMonkey Apps, LLC. If you do not see this dialog when installing the application, click NO and download the installer from https://keepassxc.org.
+Figure 2. Windows UAC Dialog
+Installing KeePassXC is a simple process. In the following example, installation steps for KeePassXC on Microsoft Windows are described. Installing KeePassXC on other operating systems is also a simple process, which you can accomplish by using the native installers. To know more about the installation instructions on the other operating systems, refer to the KeePassXC User Manual.
+To install KeePassXC on Microsoft Windows, perform the following steps:
+Double click on the KeePassXC-Y.Y.Y-WinZZ.msi file. Here, Y.Y.Y represents the version of the software and ZZ represents the 32-bit/64-bit version of the Microsoft Windows operating system.
+Figure 3. Install wizard
+Click Next and follow the simple instructions on the KeePassXC Setup Wizard to complete the installation. You will have the option to choose your install location, add a desktop shortcut, and launch on startup.
+Figure 4. Install wizard (cont)
+The following options can be set when running the MSI in an unattended installation:
+LAUNCHAPPONEXIT – Launch KeePassXC after install (default ON)
+AUTOSTARTPROGRAM – KeePassXC will auto-start on login (default ON)
+INSTALLDESKTOPSHORTCUT – A desktop icon will be installed (default OFF)
+Example: msiexec.exe /q /i KeePassXC-Y.Y.Y-WinZZ.msi AUTOSTARTPROGRAM=0
+Linux
+You can easily download the KeePassXC installer for Linux. When you search for KeePassXC, multiple options are displayed as shown in the following screen:
+Figure 5. Ubuntu Store
+The Snap and Flatpak options are sandboxed applications (more secure). The Native option is installed with the operating system files. Read more about the limitations of these options here: KeePassXC Snap FAQ
+KeePassXC stores a configuration file in ~/.local/state to remember window position, recent files, and other local settings. If you mount this folder to a tmpdisk you will lose settings after reboot.
+macOS
+To install the KeePassXC app on macOS, double click on the downloaded DMG file and use the click and drag option as shown:
+Figure 6. macOS DMG Install
+Interface Overview
+Application Layout
+The KeePassXC interface is designed for simplicity and easy access to your information. The main database view is split into four main partitions detailed below. You can open multiple databases at the same time, they will appear in tabs.
+Figure 7. Main database interface
+(A) Groups – Organize your entries into discrete groups to bring order to all of your sensitive information. Groups can be nested under each other to create a hierarchy. Settings from parent groups get applied to their children. You can hide this panel on the View menu.
+(B) Searches and Tags – Dynamic groups of entries that can be quickly displayed with one click. Any number of custom tags can be added when editing an entry. This panel also includes useful pre-defined and custom saved searches, such as finding expired and weak passwords.
+(C) Entries – Entries contain all the information for a website or application you are storing in KeePassXC. This view shows all the entries in the selected group. Each column can be resized, reordered, and shown or hidden based on your preference. Right-click the header row to see all available options.
+(D) Preview – Shows a preview of the selected group or entry. You can interact with most information stored in an entry from here without opening the entry for editing. You can temporarily hide this preview using the down-arrow button on the right hand side or completely disable it from the View menu.
+Starting with version 2.7.0, double-click copying of entry usernames and passwords is disabled by default.
+To enable it:
+Open KeePassXC, and navigate to Tools → Settings.
+In the left sidebar, select General.
+Under Entry Management, check the box for "Copy data on double clicking field in entry view".
+Toolbar
+The toolbar provides a quick way to perform common tasks with your database. Some entries in the toolbar are dynamically disabled based on the information contained in the selected entry. Every common action in KeePassXC can be controlled with a keyboard shortcut as well.
+Figure 8. Toolbar overview
+(A) Database – Open Database, Save Database, Lock Database
+(B) Entries – Create Entry, Edit Entry, Delete Selected Entries
+(C) Entry Data – Copy Username, Copy Password, Copy URL, Perform Auto-Type
+(D) Tools – Database Settings, Reports, Password Generator, Application Settings
+(E) Search
+Screenshot Security
+By default, KeePassXC prevents recordings and screenshots of the application window on Windows and macOS. This prevents inadvertent spillage of information during meetings and disallows other applications to capture the window contents. If you would like to enable screen capture temporarily, navigate to View menu and select Allow Screen Capture. Alternatively, you can start the application with the --allow-screencapture command line flag.
+View Options
+You can customize the appearance of KeePassXC to your liking. The following options are available in the View menu:
+Themes
+KeePassXC ships with light and dark themes specifically designed to meet accessibility standards. In most cases, the appropriate theme for your system will be determined automatically, but you can always set a specific theme by using the View menu. When a new theme is selected you will be prompted to restart KeePassXC to apply the theme immediately.
+Figure 9. Setting the theme
+Compact Mode
+For users with smaller screens or those who desire seeing more entries at once, KeePassXC offers a compact view mode. This mode shows smaller toolbar, group, and entry icons. The effect of compact mode (left side) can be seen below.
+Figure 10. Compact mode comparison
+Application Settings
+Users can configure KeePassXC to their personal tastes with a wide variety of general and security settings that apply to the whole application. These settings are accessible from Tools → Settings or the cog wheel icon from the toolbar. Settings include: startup options, file management, entry management, user interface, language, security controls, and integration settings (Auto-Type, Browser, etc).
+Keyboard Shortcuts
+On macOS please substitute Ctrl with Cmd (AKA ⌘).
+Action Keyboard Shortcut
+Settings
+Ctrl+,
+Open Database
+Ctrl+O
+Save Database
+Ctrl+S
+Save Database As
+Ctrl+Shift+S
+New Database
+Ctrl+Shift+N
+Close Database
+Ctrl+W
+or
+Ctrl+F4
+Lock Current Database
+Ctrl+L
+Lock All Databases
+Ctrl+Shift+L
+Database Settings
+Ctrl+Shift+,
+Database Reports
+Ctrl+Shift+R
+Quit
+Ctrl+Q
+New Entry
+Ctrl+N
+Edit Entry
+Enter
+or
+Ctrl+E
+Delete Entry
+Del
+Clone Entry
+Ctrl+D
+Copy Username
+Ctrl+B
+Copy Password
+Ctrl+C
+Copy URL
+Ctrl+U
+Open URL
+Ctrl+Shift+U
+Copy TOTP
+Ctrl+T
+Copy Password and TOTP
+Ctrl+Y
+Show TOTP
+Ctrl+Shift+T
+Trigger AutoType
+Ctrl+Shift+V
+Add key to SSH Agent
+Ctrl+H
+Remove key from SSH Agent
+Ctrl+Shift+H
+Jump to Group (from search)
+Ctrl+Shift+J
+Move entry up (if unsorted)
+Alt+Up
+Move entry down (if unsorted)
+Alt+Down
+Sort Groups A-Z
+Ctrl+Down
+Sort Groups Z-A
+Ctrl+Up
+Minimize Window
+Ctrl+M
+Hide Window
+Ctrl+Shift+M
+Select Next Database Tab
+Ctrl+Tab
+or
+Ctrl+PgDn
+Select Previous Database Tab
+Ctrl+Shift+Tab
+or
+Ctrl+PgUp
+Select the nth database
+Ctrl+<n>, where <n> is the number of the database tab
+Toggle Passwords Hidden
+Ctrl+Shift+C
+Toggle Usernames Hidden
+Ctrl+Shift+B
+Focus Groups (edit if focused)
+F1
+Focus Entries (edit if focused)
+F2
+Focus Search
+F3
+or
+Ctrl+F
+Clear Search
+Esc
+Show Keyboard Shortcuts
+Ctrl+/
+Database Operations
+Creating Your First Database
+To start using KeePassXC, you need to first create a database that will store the password and other details.
+To create a database, perform the following steps:
+Open your KeePassXC application. Click the create new database button (A):
+Figure 11. Create database – Welcome screen
+The database creation wizard appears. Enter the desired database name and a short description (optional):
+Figure 12. Create database – General information
+Click Continue. The Encryption Settings screen appears, we don’t recommend making any changes besides increasing or decreasing the decryption time using the slider. Setting the Decryption Time slider at higher values means that the database will have higher level of protection but the time taken by the database to open will increase.
+Figure 13. Create database – Encryption settings
+Click the Continue button. The Database Credentials screen appears, enter your desired database password. We recommend using a long, randomized password.
+Figure 14. Create database – Database credentials
+(A) Open the password generator
+(B) Toggle password visibility
+Keep this password for your database safe. Either memorize it or note it down somewhere. Losing the database password might result in permanent locking of your database and you will not be able to retrieve information stored in the database.
+Click Done. You will be prompted to select a location to save your database file. The database file is saved on to your computer with the default .kdbx extension. You can store your database wherever you wish, it is fully encrypted at all times preventing unauthorized access.
+Storing Your Database
+The database file that you create might contain highly sensitive data and must be stored in a very secure way. You must make sure that the database is always protected with a strong and long password. The database file that is protected with a strong and long password is secure and encrypted while stored on your computer or cloud storage service.
+Make sure that you or someone else does not accidentally delete the database file. Deletion of the database file will result in the total loss of all your information (including all your passwords!) and a lot of inconvenience to manually retrieve your logins for various web applications. Do not share the credentials to access your database file with anyone unless you absolutely trust them (spouse, child, etc.).
+You can safely store your database file in the cloud (OneDrive, Dropbox, Google Drive, Nextcloud, Syncthing, etc.). The database file is always fully encrypted; unencrypted data is never written to disk and is never accessible to your cloud storage provider. We recommend using a storage service that keeps automatic backups (version history) of your database file in the event of corruption or accidental deletion.
+Opening an Existing Database
+To open an existing database, perform the following steps:
+Open your KeePassXC application. Click the Open existing database button (A) or select a recent database from the Recent Databases list (B).
+Figure 15. Open an existing database
+Navigate to the location of the database on your computer and open the database file. The database unlock screen will appear:
+Figure 16. Database unlock screen
+Enter the password for your database.
+(Optional) Click I have a key file (A) if you have one as an additional authentication factor for your database.
+(Optional) Plug in your configured YubiKey or OnlyKey to use it as an additional authentication factor. If you don’t see it listed, press the refresh button (B).
+Click OK. The database opens and the following screen is displayed:
+Figure 17. Unlocked database
+Quick Unlock
+On Windows and macOS, subject to hardware availability, your credentials can be securely stored to enable subsequent unlocking of your database through biometric authentication. This is enabled by default on Windows using Windows Hello and on macOS using Touch ID or Apple Watch services. You can disable this feature in the Application Settings under the Security section.
+On Windows, you will be prompted to authenticate to Windows Hello after unlocking your database with full credentials. This is required to setup Quick Unlock. If you cancel this prompt then Quick Unlock will not be enabled and your database will continue to unlock.
+Figure 18. Windows Hello example
+When your database is locked, you will see the following unlock dialog. Simply press Enter or click on Unlock Database to initiate the biometric authentication process. If you are using a hardware key (e.g. YubiKey), it must be connected to your computer to complete the unlock.
+Figure 19. Quick Unlock
+Entry Handling
+Entries in KeePassXC are the fundamental units where all your sensitive information is stored. Each entry can contain various fields such as usernames, passwords, URLs, attachments, and notes. You can create, edit, clone, and delete entries as needed. Additionally, KeePassXC supports advanced features like TOTP for two-factor authentication, custom attributes, and entry history to track changes over time. Proper management of entries ensures that your data is organized, secure, and easily accessible when needed.
+Adding an Entry
+All the details such as usernames, passwords, URLs, attachments, notes, and so on are stored in database entries. You can create as many entries as you want in the database.
+To add an entry, perform the following step:
+Navigate to Entries > New Entry (or press Ctrl+N). The following screen appears:
+Figure 20. Adding a new entry
+Enter a desired title for the entry, username, password, URL, and notes on this screen.
+Your most frequently used usernames will automatically be available in the username drop-down menu. They will also auto-complete for you when typing.
+You can generate a secure random password by clicking the dice icon in the password field to launch the password generator. Reveal the password by clicking the eye icon.
+After you add a URL to an entry you can press the download button to automatically download the website’s icon for this entry.
+(Optional) Add tags to the entry to quickly search for it using the tags panel on the main database view. You can easily add new tags or select existing ones from the drop-down list.
+(Optional) Select the Expires check-box to set the expiry date for the password. You can manually enter the date and time or click the Presets button to select an expiry date and time for your password.
+Click OK to add the entry to your database.
+Editing an Entry
+To edit the details in an entry, perform the following steps:
+Select the entry you want to edit.
+Press Enter, click the edit toolbar icon, or right-click and select Edit Entry from the menu.
+Make the desired changes.
+Click OK.
+Adding TOTP to an Entry
+Timed One-Time Passwords (TOTP) are a popular choice for two-factor authentication methods. These codes are typically six digits long and change every 30 seconds. They are derived from a shared secret value and the current time. Once set up, KeePassXC can calculate TOTP codes like any authenticator app, such as Google Authenticator. The codes can be used with copy/paste, browser extension, and Auto-Type.
+Your computer time must be synchronized with an internet time source to generate valid TOTP codes, read more here.
+Storing TOTP codes in the same database as the password will eliminate the advantages of two-factor authentication. If you desire maximum security, we recommend keeping TOTP codes in a separate database that you only unlock when needed.
+To add TOTP to a database entry, you must first retrieve the secret string from the website or application you are authenticating to. Often this secret is accompanied with a QR code and can be copy/pasted below. Example:
+Figure 21. Example TOTP Secret
+Once obtained, right-click the desired entry (1), choose TOTP → Set up TOTP…​ (2), and the setup dialog will appear. In that dialog, paste the secret code from the website (3), setup any custom settings (rare) (4), then press OK to save the settings.
+Figure 22. TOTP Setup Process
+After an entry is configured with TOTP, you will see a clock icon in that entry’s row and have the ability to reveal the current code in the preview pane. Additionally, you can navigate to the entry’s TOTP menu to show the code in a separate window. You can also view the secret and configuration as a QR code for exporting to a mobile device. TOTP codes can be entered into forms with the browser extension, with Auto-Type by using the {TOTP} placeholder, or via menu options in the Auto-Type selection dialog.
+Figure 23. TOTP Usage
+Entry Icons
+You can select an icon to be displayed with each entry for easy identification. KeePassXC comes with a set of default icons that you can use or you can use your own custom icons. If you defined a URL with an entry, you can also download the favorite icon for that particular website.
+To delete a custom icon, go to [Database Maintenance] where you can purge unused icons and delete one or more icons at a time.
+Figure 24. Entry icon selection
+Each KeePass application has different default icons. If you use a mobile app or KeePass2, be aware that the default icons may not be exactly correspond to the KeePassXC icons.
+Deleting an Entry
+To delete an entry, perform the following steps:
+Select the entry you want to delete and press the Del button on your keyboard.
+You will be prompted to move the entry to the Recycle Bin (if enabled).
+You can disable the recycle bin within the Database Settings. If the recycle bin is disabled then deleted entries will be permanently removed from the database.
+To permanently delete the entry, navigate to the Recycle Bin, select the entry you want to delete and press the Del button on your keyboard.
+Search
+KeePassXC provides a robust search that enables you to find specific entries in the databases using different modifiers, wild card characters, and logical operators. By default, search considers the following fields when matching your query: Title, Username, URL, Tags, and Notes. To include other fields and/or narrow your search to specific fields, you can use the search syntax described below.
+Modifiers and Fields
+Modifier Description
+-
+Exclude this term from results
+!
+Exclude this term from results
++
+Match this term exactly
+*
+Term is handled as a regular expression
+The following fields can be searched along with their abbreviated name in parentheses:
+Title (t)
+Username (u)
+Password (p, pw)
+URL (url)
+Notes (n)
+Attribute names and values (attr)
+Attachment (attach)
+Group (g)
+Tags (tag)
+Entry State (is:expired, is:weak)
+Wild Card Characters and Logical Operators
+Wild Card Character Description
+*
+Match anything
+?
+Match one character
+|
+Logical OR
+Sample Search Queries
+The following tables lists a few samples search queries for your reference:
+Query Description
+user:johnsmith url:www.google.com
+Searches the Username field for johnsmith and the URL field for www.google.com.
+user:john|smith
+Searches the Username field for john OR smith.
++user:johnsmith -url:www.google.com *notes:"secret note \d"
+Search the username field for exactly johnsmith, the URL must not contain www.google.com, and notes contains secret note [digit].
++attr:mystring123
+Searches all additional attributes for any name OR value equal to mystring123.
++tag:personal
+Search exactly for the 'personal' tag and do not include tags such as 'my personal'.
+is:expired is:weak
+Searches for all expired entries with weak passwords.
+Password Generator
+This password generator helps you to generate random strong passwords and passphrases that you can use for your applications and websites you visit.
+Generating Passwords
+To generate random passwords, specify the characters to be used in your choice of password (for example, upper-case letters, digits, special characters, and so on) and KeePassXC will randomly pick characters out of the set.
+To generate the random password using Password Generator, perform the following steps:
+Open KeePassXC.
+Navigate to Tools > Password Generator. The following screen appears:
+Figure 25. Password Generator
+Select the length of the desired password by dragging the Length slider.
+Select the character-sets that you want to include in your password.
+Use the regenerate button (Ctrl+R) to make a new password using the chosen options.
+Use the clipboard button (Ctrl+C) to copy the generated password to the clipboard.
+Click the Advanced button to specify additional conditions for your desired password.
+Figure 26. Advanced Password Generator Options
+Generating Passphrases
+A passphrase is a sequence of words or other text used to control access to your applications and data. A passphrase is specifically designed to be simple to remember but hard to guess. For this reason, we do not recommend making passphrases too complex; if you require something that is more complex than you could easily remember, it is better to use a randomly generated password instead.
+From the password generator, click the Passphrase tab. The following screen appears:
+Figure 27. Passphrase Generator
+Select the number of words you want to be included in your passphrase by dragging the Word Count slider.
+In the Word Separator field, enter a character, word, number, or space that you want to use as a separator between the words in your passphrase.
+(Optional) You can choose a word case between lower, upper, and title case options.
+(Optional) You can also load your own custom word lists. Click the plus sign button to the right of the wordlist selection dialog to choose a custom word list. You can download alternative lists from the EFF’s Website or from GitHub.
+Click the Regenerate button (Ctrl+R) to generate a new random passphrase.
+Click the Clipboard button (Ctrl+C) to copy the passphrase to the clipboard.
+Browser Integration
+The KeePassXC-Browser extension is installed within your web browser so that you can automatically pull usernames and passwords from KeePassXC and fill them directly into website fields. It is a very useful and secure extension that enhances your productivity while using KeePassXC. With this extension, you do not need to manually copy the data from your KeePassXC database and paste it into the website fields. The KeePassXC-Browser extension is available on the following web browsers:
+Google Chrome, Vivaldi, and Brave
+Mozilla Firefox and Tor-Browser
+Microsoft Edge
+Chromium
+On Linux, Flatpak and Snap based browsers are generally not supported. Ubuntu’s Firefox Snap is currently the only known exception.
+Install the Browser Extension
+You can download the KeePassXC-Browser extension from your web browser. To download the KeePassXC-Browser extension, perform the following steps:
+Click the link corresponding to your browser:
+Chrome, Chromium, Vivaldi, and Brave
+Mozilla Firefox and Tor-Browser
+Microsoft Edge
+Click the button to install/add the extension to the browser. Accept any confirmation dialogs.
+For the most up-to-date troubleshooting advice on all platforms, please read our Troubleshooting Guide.
+Configure KeePassXC-Browser
+To start using KeePassXC-Browser, you must configure it so that it can communicate with the KeePassXC application on your desktop.
+To configure KeePassXC-Browser, perform the following steps:
+Open the KeePassXC application on your desktop and navigate to Tools > Settings.
+Click the Browser Integration option on the left-hand side (1). The following screen appears:
+Figure 28. Browser Settings
+Click the Enable browser integration checkbox (2). Then select the browsers for which you have downloaded the KeePassXC-Browser extension (3) and click OK.
+Ensure your database is unlocked, then open (or restart) your browser.
+Click the KeePassXC-Browser extension icon (A) in your browser (see figure below). A pop-up window appears.
+Figure 29. Connect Extension to KeePassXC
+Click the Connect button (B) in the pop-up window to complete integrating the KeePassXC-Browser extension with your KeePassXC desktop application.
+You are now prompted to enter a unique name to identify the connection between this browser and your database. Enter a unique name in the field (e.g., firefox-laptop) and click the Save and allow access button.
+Figure 30. Extension Association Dialog
+If you reuse a connection name in a database, the previous browser connection will be overwritten and prevent access.
+Using the Browser Extension
+The KeePassXC-Browser extension lets you automatically fill the entries from your KeePassXC database into the fields on websites you visit. To do so, perform the following steps:
+Open your KeePassXC desktop application and unlock your database.
+Open your web browser. The KeePassXC-Browser extension icon in your browser window will change based on its connection state. The figure below shows the different states.
+(A) KeePassXC is not running or is disconnected.
+(B) KeePassXC is running, but KeePassXC Browser Extension is not connected to the current database.
+(C) Connected to KeePassXC, but database is locked.
+(D) Connected to KeePassXC and ready to use. If the icon is shown with a number, it indicates the number of credentials found for the current site.
+Figure 31. Extension Icon States
+If the KeePassXC desktop application is not connected with the KeePassXC-Browser extension, click the extension icon in your web browser and click Reload from the pop-up window as shown in the following screen.
+Figure 32. Reload Extension Connection
+Open the URL for which you want to use with your database. If you have previously created an entry in your database then the KeePassXC-Browser Confirm Access dialog may appear:
+Figure 33. Confirm Access Dialog
+Ensure the credentials you want to use are checked, then click (A) Remember (optional), then click Allow Selected (B).
+In your website, the KeePassXC icon will appear in the username field of the login form (A). Click the icon to populate the field with your stored credentials. If you have more than one credential for this website, a dropdown will appear to choose the one to use.
+Figure 34. Fill Credentials
+Generate Passwords
+The KeePassXC-Browser Extension also lets you generate passwords directly in your browser. This feature can be used for websites with existing credentials as well as for new websites. You can then choose to update/add the credentials to your KeePassXC database directly from the Browser.
+Ensure your database is unlocked and configured to use the Browser extension as shown above.
+Right click on a password field and from the KeePassXC sub-menu choose Show Password Generator. The standard KeePassXC password generator will appear.
+Configure the password generation options and click Apply Password when done. The generated password will be filled into the previously selected field.
+When you have successfully submitted the password on the website, a popup will appear asking you to either update an existing entry or add a new one.
+Version 2.8.0
+Last updated 2026-10-22 12:15:23 UTC

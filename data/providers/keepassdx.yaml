@@ -1,0 +1,307 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read from Canada with Edge (keepassdx.com,
+# which its script renders; its privacy policy on kunzisoft.com, whose script fills in the app's name; its Weblate
+# translation project; its Google Play listings) and a plain fetch (its GitHub repository, wiki and security page, and
+# kunzisoft.com). Pages, each quoted where it's used: its home page, its GitHub README, its wiki's FAQ, Import / Export,
+# OTP, Passkeys, Hardware Key, Templates, File Manager and Sync, Backup, Device Unlocking and Credentials pages, its
+# privacy policy, kunzisoft.com, and its Weblate project.
+# Pricing: none for the app. KeePassDX is free, open-source software for Android: "Do not worry, the main features
+# remain completely free" and "There is no advertising" (its README). It has no account and no servers for your
+# passwords, so its one plan is free, priced for everywhere. Its home page's "DONATION" section takes tips (Stripe,
+# Google Play, PayPal), regular donations (Liberapay, PayPal) and cryptocurrencies. The Google Play tip is a separate
+# paid app, KeePro Support ("$13.00 Buy" to this machine, a bare $), bought once: "The Pro version is accessible after
+# having purchased Contributor Pro app (both applications must be installed on the same device) or after another
+# contribution" (its FAQ). It unlocks "cosmetic content" (themes), creating Steam's non-standard TOTP codes and a
+# pre-filled list of privileged browsers for passkeys, and its README says "It does not improve safety and provides no
+# functional advantage." A one-time purchase, not a subscription, so not a plan (categories.md: one-time purchases are
+# notes); the plan's notes say so. No ways to pay are listed, since no plan is paid.
+# Its builds: "Free" on Google Play and "Libre" on F-Droid (no proprietary code), "All versions currently have the same
+# usage features but with two different purposes." (its FAQ); one plan covers both.
+# Region checklist, 2026-11-19: not needed: one free download for every country, with no prices.
+# Bundles: none. Official resellers: none.
+# Free use: its one plan is free.
+id: keepassdx
+name: KeePassDX
+website: https://www.keepassdx.com
+category: passwords
+spendCategory: software
+# Nothing to cancel: it's free, with no account. Its home page is the closest page ("No internet connection is
+# required.").
+cancelUrl: https://www.keepassdx.com/
+sources: { pricing: https://www.keepassdx.com/ }
+# Owner (M11.2), read 2026-11-19: Kunzisoft, Jeremy Jamet's name as an app developer. Its privacy policy (linked from its
+# Google Play listing) says the app "was created by Kunzisoft"; its home page's footer says "Powered by Kunzisoft"; its
+# README says "Copyright © 2026 Jeremy Jamet / Kunzisoft" and "KeePassDX is developed and maintained on a volunteer
+# basis"; kunzisoft.com is one developer's page, in the first person ("Je réalise et contribue à des applications et
+# librairies libres et open source pour la communauté."), listing KeePassDX. No page names a company or a country (its
+# page says only "Disponible en télétravail ou dans le grand ouest."), so a volunteer project (Jellyfin's precedent, the
+# owner's choice of 2026-11-11) with no country (notes.md).
+owner:
+  name: Kunzisoft (Jeremy Jamet)
+  volunteer: true
+  website: https://www.kunzisoft.com
+  page:
+    name: Privacy policy
+    url: https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+  quotes:
+    - 'This privacy policy applies to the KeePassDX app for mobile devices that was created by Kunzisoft under Open Source GPL3 license.'
+  lastVerified: 2026-11-19
+# Source code (M11.5): its home page links its GitHub repository ("Repo", "Pull request"); GPLv3, with no server of its
+# own, so fully open.
+sourceRepo:
+  url: https://github.com/Kunzisoft/KeePassDX
+  page:
+    name: KeePassDX
+    url: https://www.keepassdx.com/
+  quotes:
+    - 'The source code is open to the public and transparent, fully auditable by the community, and contains no ads or data tracking.'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: Android only ("Open source Password Manager for Android", its home page;
+# Google Play, F-Droid, IzzyOnDroid and GitHub). Sign-in: no account; you unlock a database "locked with a master key
+# and/or a keyfile" (its README) or a YubiKey: "It is currently possible to unlock a database using your Yubikey, alone or
+# combined with other credentials (password or/and keyfile)" (its FAQ), so password and security-key (a key file has no
+# registry value; fingerprint or face unlock is "only a faster unlocking tool", its FAQ). Support: its home page's
+# Feedback section links "Issues" (GitHub) and "Email" (contact@keepassdx.com), so email and community. App languages: its
+# Weblate project (linked from its home page's "Translate"), read in Edge: English, French, German, Italian, Japanese,
+# Spanish, Arabic, Chinese (Simplified and Traditional) and Portuguese (Brazil) are fully translated; Korean is 48% and
+# Hindi 22%, under Jellyfin's 97%, so they're left out. Not self-hostable: an app with no server. No pause (nothing to
+# pay) and no parental controls.
+features:
+  platforms: [android]
+  account.sign-in: [password, security-key]
+  support.channels: [email, community]
+  languages.interface: [en, fr, es, de, it, pt, ja, zh, ar]
+  software.open-source: fully-open
+
+# Password features, read 2026-11-19:
+# - Items: logins, "Passkeys for authentication and local storage of private keys", "One-Time Password management
+#   (HOTP / TOTP) for two-factor authentication (2FA)" and "Dynamic templates for each type of entry" (its README), whose
+#   templates you can make yourself ("it is possible to create, modify or delete templates", its Templates page). So
+#   login, totp, passkey and custom.
+# - Health: none stated. Sharing: "It is also possible to create a password database file (.kdbx) with shared accounts,
+#   and exchange it over secure channels" (its FAQ), so share-vault, as KeePass's shared file.
+# - Import and export: "It is possible to import and export KeePass database files (.kdbx) in KeePassDX but not plain
+#   text (.csv, .json or .xml) files" (its Import / Export page), and "Support for .kdb and .kdbx files (version 1 to 4)"
+#   (its README); a KDBX file is encrypted ("The database is stored in an encrypted KeePass file", its home page). So
+#   import kdbx, and export kdbx and encrypted (notes.md). The Credential Exchange Format "is not yet available and
+#   currently in development" (its Import / Export page), so no cxf.
+# - Offline: "No internet connection is required." (its home page). No emergency access.
+# - Authenticator: TOTP and HOTP codes ("it is possible to use the KeePassDX app as a token generator for external
+#   services using two-factor authentication (2FA)", its OTP page). Import: "KeePassDX can use the links generated by QR
+#   codes to register new OTP keys." shared from a QR code reader app, or the parameters copied "from the otpauth link"
+#   (its OTP page), so otpauth. Export of 2FA codes: none stated, so empty (Authy's precedent): its OTP page offers no
+#   way to show or share a code's link or QR code.
+# - End-to-end encryption: none stated in those words ("Your data is stored in a single encrypted file that you manage",
+#   its FAQ), so encryption.end-to-end is left out (categories.md's rule); privacy.content-access grades the same fact.
+# - Sync: none of its own: it opens the file through your phone's file manager or cloud app ("KeepassDX uses the file
+#   managers on your device.", its FAQ).
+plans:
+  - id: keepassdx.free
+    name: Free
+    link: https://www.keepassdx.com/
+    features:
+      password-manager: true
+      password-manager.item-types: [login, totp, passkey, custom]
+      password-manager.sharing: [share-vault]
+      password-manager.import: [kdbx]
+      password-manager.export: [kdbx, encrypted]
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+    notes: 'Free and open source (GPLv3), for Android, with no ads. Your passwords and passkeys stay in one encrypted KeePass file (KDBX) that you keep and sync with your own file manager or cloud app. A separate paid app on Google Play, KeePro Support, is a one-time contribution that unlocks extra themes and Steam’s 2FA codes; its makers say it adds no security or functions.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://www.keepassdx.com/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19. KeePassDX has no account, no sign-up and no terms of service:
+# you download free software under the GNU GPL v3 (its README and home page). Its privacy policy (kunzisoft.com, linked
+# from its Google Play listing) says the app collects nothing. So the topics about an account, data it holds and a
+# contract are not-applicable, with why. Read for security: its GitHub security page ("No security policy detected",
+# with GitHub's "Report a vulnerability" form switched on: GitHub's words, not quoted), its README and FAQ. Google Play's listing (its data safety section says "No data
+# collected") isn't KeePassDX's own page, so it isn't quoted. The app stores (Google Play, F-Droid, IzzyOnDroid) and
+# KeePro Support's purchase come under the stores' own terms, not read.
+policies:
+  links:
+    - name: 'Privacy policy'
+      url: https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+    - name: 'KeePassDX (home page)'
+      url: https://www.keepassdx.com/
+    - name: 'KeePassDX (GitHub)'
+      url: https://github.com/Kunzisoft/KeePassDX
+    - name: 'FAQ (GitHub wiki)'
+      url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+    - name: 'Import / export (GitHub wiki)'
+      url: https://github.com/Kunzisoft/KeePassDX/wiki/Import-and-Export
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: 'The app collects nothing about you, personal or otherwise.'
+      sources:
+        - url: https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+          quote: 'No information is collected, stored, used or shared by the KeePassDX app, personal or otherwise.'
+        - url: https://www.keepassdx.com/
+          quote: 'KeePassDX is distributed under GNU General Public License V3 and does not collect any user data.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It shares nothing, because the app collects nothing about you.'
+      sources:
+        - url: https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+          quote: 'No information is collected, stored, used or shared by the KeePassDX app, personal or otherwise.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no tracking, not even in the free version.'
+      sources:
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+          quote: 'No advertising. Not even in the free version.'
+        - url: https://www.keepassdx.com/
+          quote: 'The source code is open to the public and transparent, fully auditable by the community, and contains no ads or data tracking.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'KeePassDX never receives your passwords or anything you write: they stay in your own file, so there’s nothing it could train AI on.'
+      pages:
+        - https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Only you can open your passwords: they’re in an encrypted file you manage, not on anyone’s server.'
+      sources:
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+          quote: 'Your data is stored in a single encrypted file that you manage, it is not stored on a private server or in a closed cloud. You have control of your passwords.'
+        - url: https://www.keepassdx.com/
+          quote: 'No internet connection is required. The database is stored in an encrypted KeePass file using configurable secure algorithms.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      status: not-applicable
+      reason: 'KeePassDX keeps no data about you: your passwords stay in your own file, for as long as you keep it.'
+      pages:
+        - https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+        - https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'KeePassDX keeps nothing about you. To remove every trace, you delete the app and your password file yourself.'
+      sources:
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+          quote: 'For the same reason, if you wish to remove all traces of using KeePassDX, you need to delete both the application and the database file.'
+        - url: https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+          quote: 'No information is collected, stored, used or shared by the KeePassDX app, personal or otherwise.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: great
+      reason: 'You can take everything with you: your passwords are in the standard KeePass file, which most other KeePass apps open. It has no plain-text export on purpose.'
+      sources:
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/Import-and-Export
+          quote: 'It is possible to import and export KeePass database files (.kdbx) in KeePassDX but not plain text (.csv, .json or .xml) files for several reasons.'
+        - url: https://github.com/Kunzisoft/KeePassDX
+          quote: 'Compatible with the majority of alternative programs (KeePass, KeePassXC, KeeWeb, …).'
+      action:
+        name: 'How to import and export your database'
+        url: https://github.com/Kunzisoft/KeePassDX/wiki/Import-and-Export
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-applicable
+      reason: 'KeePassDX collects and stores nothing about you, so it has nothing to hand to the police or governments.'
+      pages:
+        - https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Your passwords stay in one file, wherever you choose to keep it and back it up. KeePassDX has no servers holding them.'
+      sources:
+        - url: https://www.keepassdx.com/
+          quote: 'Data resides in a database file with a single access point, giving you full control over where it’s stored and backed up.'
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+          quote: 'Your data is stored in a single encrypted file that you manage, it is not stored on a private server or in a closed cloud.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: you install it free and use it offline, without an account or any personal details.'
+      sources:
+        - url: https://www.keepassdx.com/
+          quote: 'No internet connection is required.'
+        - url: https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+          quote: 'No information is collected, stored, used or shared by the KeePassDX app, personal or otherwise.'
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      status: not-applicable
+      reason: 'There’s no account and no terms of service to agree to, so no dispute clause: KeePassDX is free software you use under the GNU GPL.'
+      pages:
+        - https://github.com/Kunzisoft/KeePassDX
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      status: not-applicable
+      reason: 'There are no terms of service to change. KeePassDX is free software under the GNU GPL, and the copy you have stays yours under it.'
+      pages:
+        - https://github.com/Kunzisoft/KeePassDX
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      status: not-applicable
+      reason: 'There’s no KeePassDX account to close: you install it and use it without signing up.'
+      pages:
+        - https://github.com/Kunzisoft/KeePassDX
+        - https://www.keepassdx.com/
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      status: not-applicable
+      reason: 'Nothing you store goes to KeePassDX: your passwords stay in your own file, so it takes no rights over them.'
+      pages:
+        - https://www.kunzisoft.com/privacy.html?creator=Kunzisoft&app=KeePassDX&id=com.kunzisoft.keepass.free&email=kunzisoft%40gmail.com
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: great
+      reason: 'Nothing can be taken away: it’s free software under the GNU GPL that you keep, and its makers say its main features stay free.'
+      sources:
+        - url: https://github.com/Kunzisoft/KeePassDX
+          quote: 'the main features remain completely free'
+        - url: https://github.com/Kunzisoft/KeePassDX
+          quote: 'meaning you can use, study, change and share it at will. Copyleft ensures it stays that way.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no KeePassDX account to close for not using it.'
+      pages:
+        - https://github.com/Kunzisoft/KeePassDX
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: great
+      reason: 'It’s open source under the GNU GPL: anyone may read, change and share it.'
+      sources:
+        - url: https://www.keepassdx.com/
+          quote: 'KeePassDX is distributed under GNU General Public License V3 and does not collect any user data.'
+        - url: https://github.com/Kunzisoft/KeePassDX
+          quote: 'meaning you can use, study, change and share it at will. Copyleft ensures it stays that way.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: poor
+      reason: 'It says anyone can check its code and that the code is checked at each release, but it describes no outside audit and no security policy. GitHub’s private report form is its only way to report security flaws.'
+      sources:
+        - url: https://www.keepassdx.com/
+          quote: 'The source code is open to the public and transparent, fully auditable by the community, and contains no ads or data tracking.'
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+          quote: 'Even if the code is audited at each release, there may be unexpected bugs'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: great
+      reason: 'Share your passwords with anyone you like: you can make a password file for shared accounts and give it to them, with its master password.'
+      sources:
+        - url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+          quote: 'It is also possible to create a password database file (.kdbx) with shared accounts, and exchange it over secure channels (e.g. USB memory stick) as well as the master password.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its pages don’t say whether it changes anything on your phone beyond its own app. Updates come from the app store you installed it from.'
+      pages:
+        - https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+        - https://www.keepassdx.com/
+      lastVerified: 2026-11-19

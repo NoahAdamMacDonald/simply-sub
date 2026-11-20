@@ -1,0 +1,389 @@
+url: https://www.lastpass.com/legal-center/law-enforcement-request-guidelines
+method: fetch
+saved: 2026-11-19
+
+Law Enforcement Request Guidelines - LastPass
+Skip to Content
+EN
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português
+Blog
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Webinars
+Product demos
+Events
+All resources
+Trust Center
+Compliance Center
+Security architecture
+LastPass University
+Product demos
+On-demand LastPass Business demos
+Report
+Stay ahead with the latest threat intel
+Support
+Help
+Support Center
+Self-service library of resources and guides for all LastPass products.
+Community forum
+System status
+Talk to support
+Personal support for all LastPass’ subscribed customers.
+Download LastPass apps
+LastPass works across all devices.
+Contact sales
+Submit sales inquiry
+Chat with sales
+Request a demo
+Find a partner
+Log in
+EN
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português
+Try Free
+Why LastPass?
+Overview
+Why LastPass?
+Create and store secure passwords for yourself, your team or business.
+How LastPass works
+Remember fewer passwords and log in faster with our browser extension.
+Security architecture
+LastPass zero-knowledge security model keeps your data private even from us.
+Compare LastPass
+Compare LastPass competitors, plans, and features in one place
+Key Features
+Password management
+Save and autofill
+Password generator
+Password sharing
+Passkeys
+Dark web monitoring
+Security dashboard
+All features
+Get Personal free
+Free LastPass Premium trial, no credit card required.
+Get Business free
+Free LastPass Business trial, no credit card required.
+Contact sales
+Let our experts help you find the right plan and successfully deploy LastPass.
+Download LastPass apps
+LastPass works across all devices.
+Personal
+Personal Plans
+Personal
+Sync passwords across all devices, monitor password health, data breaches and much more.
+Families
+Premium password management for family or group of 6 people.
+Plus
+New
+Premium password management and VPN together in one plan.
+Compare plans
+FOR INDIVIDUALS
+Password vault
+Save & autofill
+Mobile Smart Scanner
+VPN
+New
+Passkeys
+Automatic device sync
+Emergency access
+Personal password sharing
+All features
+Get Personal free
+30-day free LastPass Premium trial, no credit card required.
+Get Families free
+30-day free LastPass Families trial, no credit card required.
+Get started with LastPass Free
+Limited to 1 device type and basic password management features.
+Business
+Business Plans
+Business
+Designed for businesses of all sizes, from small startups to enterprises.
+Business Max
+Simplify secure access straight from the browser with more admin control.
+Teams
+For single teams just getting started with password management.
+MSP
+Designed to keep your clients' credentials protected and private.
+Compare plans
+For admins
+User management
+AI Monitoring & Protect
+New
+SaaS Monitoring & Protect
+Web Monitoring & Protect
+New
+Business sharing
+Multifactor authentication
+Integrations
+Single Sign-on
+Identity management
+All features
+Solutions by role
+Marketing teams
+Legal teams
+HR teams
+Business leaders
+IT admins
+All solutions by role
+Try Business free
+Free LastPass Business trial, no credit card required.
+E-Book
+Explore how LastPass supports ASD Essential Eight compliance
+Report
+The LastPass 2026 State of AI and SaaS Security Report
+Pricing
+Partners
+LastPass Partner Program
+Partner program overview
+Join the LastPass Partner Program to provide even more value to your customers.
+Managed Service Providers
+Resellers
+Cloud marketplaces
+Technology Alliance Partners
+Partner Login
+Start MSP free trial
+Grow new revenue streams by meeting customer's security needs.
+Contact partner team
+Looking for help or interested in becoming a LastPass partner? Get in touch with our partner team.
+Find a Partner
+Connect with trusted LastPass Partners to support your security needs.
+Blog
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Webinars
+Product demos
+Events
+All resources
+Trust Center
+Compliance Center
+Security architecture
+LastPass University
+Product demos
+On-demand LastPass Business demos
+Report
+Stay ahead with the latest threat intel
+Support
+Help
+Support Center
+Self-service library of resources and guides for all LastPass products.
+Community forum
+System status
+Talk to support
+Personal support for all LastPass’ subscribed customers.
+Download LastPass apps
+LastPass works across all devices.
+Try free
+Contact sales
+Submit sales inquiry
+Chat with sales
+Request a demo
+Find a partner
+Log in
+EN
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português
+Blog
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Webinars
+Product demos
+Events
+All resources
+Trust Center
+Compliance Center
+Security architecture
+LastPass University
+Product demos
+On-demand LastPass Business demos
+Report
+Stay ahead with the latest threat intel
+Support
+Help
+Support Center
+Self-service library of resources and guides for all LastPass products.
+Community forum
+System status
+Talk to support
+Personal support for all LastPass’ subscribed customers.
+Download LastPass apps
+LastPass works across all devices.
+Get LastPass free
+Contact sales
+Submit sales inquiry
+Chat with sales
+Request a demo
+Find a partner
+Log in
+LEGAL CENTER
+Law Enforcement, Legal Process, and Copyright Request Guidelines
+These guidelines provide instructions and greater transparency regarding LastPass’ handling of law enforcement and other legal and/or regulatory requests for information about our end users and customers (“User Information”), as well as takedown requests made under the Digital Millennium Copyright Act (“DMCA”).
+These guidelines apply to all LastPass services.
+Information We Can Provide
+LastPass Password Manager
+The LastPass Password Manager utilizes a “zero-knowledge” security model designed to ensure that customers’ data is kept private and protected from LastPass and from anyone else. This LastPass service features a “vault,” in which sensitive user data is stored in an encrypted form, which can only be decrypted at the user and device level by entering the user’s master password. By design, LastPass has no knowledge of the user’s master password and does not store or access a user’s master password. Therefore, no one at LastPass has the ability to decrypt the vault data on LastPass’ servers and cannot provide such information in response to a legal request.
+Wherever possible, the requester should first seek to obtain information directly from the user or customer who is the subject of the investigation before requesting such Information from LastPass.
+LastPass VPN Service
+The LastPass VPN service utilizes a third-party provider to operate the VPN infrastructure used to deliver the VPN service. When users connect through the LastPass VPN, their traffic appears to originate from a shared exit IP address operated by our VPN Service Provider (not LastPass). That exit IP address is shared among many users simultaneously. This means LastPass does not have the ability to identify an individual user based solely on the VPN exit IP address.
+Additionally, LastPass maintains a strict no-log policy with respect to VPN session activity. LastPass does not log, and cannot provide, records of websites visited, content accessed, DNS queries, or any other activity conducted through the VPN connection.
+Requests for information held by the VPN Service Provider in connection with the VPN service should be directed to the VPN Service Provider directly.[P(1.1][TG1.2][P(1.3]
+Information Requesters Must Provide
+To ensure that any requests for User Information be reasonable in scope and narrowly tailored to request only the information needed to complete their investigation, the request must include valid warrant, subpoena, court order, equivalent legal process, or emergency situation submitted in its original form as an unedited PDF issued by the appropriate authority.
+The request should include as much detail as possible to help us respond in an effective and timely manner. Please note: Most User Information and account data can only be identified by a user’s e-mail address. Therefore, the e-mail address associated with the account is the most helpful identifying information.
+Each request must also include contact information for the authorized requester, including:
+Name
+Badge/identification number (if applicable)
+Employer-issued e-mail address
+Phone number, including any extension
+Mailing address
+Requested response date
+Processing Requests
+Upon receipt of a request for User Information, LastPass takes the following steps before responding:
+Authority. LastPass will review and verify the requester has appropriate authority under applicable law to request the User Information. Absent a valid warrant, subpoena, court order, equivalent legal process, or emergency situation, it is LastPass’s position not to provide User Information to a requester.
+Scope. Wherever possible, LastPass will seek to ensure that any request for User Information is reasonable in scope and limited to a specific account. LastPass may request additional context if the nature of the investigation is unclear and may object to the request when appropriate. In the event LastPass does provide any User Information, it will seek to share only the minimum amount of information required to comply with the demand.
+Notice. Except in circumstances where LastPass is instructed by appropriate legal authority not to notify, is prohibited from doing so, or there is a clear indication of illegal or malicious conduct or risk of harm, LastPass will notify the customer of a request before disclosing any User Information so that the customer may seek available legal remedies.
+DMCA Notices
+LastPass accepts and reviews copyright takedown notices submitted in accordance with the DMCA Notice. DMCA notices must be submitted to LastPass’s designated DMCA agent as described in the DMCA Notice. Due to the technical limitations described above, identification of a specific VPN user from an IP address alone is generally not possible.
+International Requests
+All requests must be issued pursuant to applicable laws and made through official channels (e.g., executed order, official e-mail address, etc.). In addition, requests must be made under appropriate legal basis, and a Mutual Legal Assistance Treaty request, a request from a country meeting the obligations under the U.S. CLOUD Act, letter rogatory, or other form of domestication may be required to establish the legal basis of an international request.
+We will review all international requests on a country-by-country and case-by-case basis in order to consider and balance our local legal obligations against our commitments to promote users’ safety and privacy. We may choose to respond differently to requests from different countries where these commitments conflict with local law.
+Where to Submit a Request
+LastPass accepts law enforcement and User Information requests via e-mail at subpoenas@lastpass.com.
+DMCA copyright infringement notices should be submitted to LastPass at dmca@lastpass.com or by mail to LastPass US LP at the address found here. For more information on submitting DMCA notices, please see the LastPass DMCA Notice at www.lastpass.com/legal-center/dmca.
+While we agree to accept requests by this method, neither LastPass nor our customers waive any legal rights based on this accommodation. Additionally, e-mail requests must be made from an official government e-mail address, when applicable.
+Legal Center
+Explore LastPass’ terms of service, privacy notices, and other legal policies and documents.
+Go to Legal Center
+Trust Center
+Your single source for the latest security, privacy, compliance, and system performance information.
+Visit Trust Center
+About Us
+Leading the way in password security and identity management for personal and business digital safety.
+Learn about LastPass
+Get started with LastPass
+LastPass makes it easy to improve employee password habits and endpoint security. See for yourself with a free 14-day trial. No credit card required.
+Try Business for Free
+Contact Sales
+Products
+Home Page
+What is a password manager?
+Why LastPass?
+How is LastPass secure?
+How LastPass works
+Pricing
+Business Max
+Business
+Teams
+Families
+Plus
+New
+Premium
+MSP
+Compare LastPass
+Security Features
+All Features
+Solutions
+AI Monitoring & Protect
+New
+SaaS Monitoring & Protect
+Web Monitoring & Protect
+New
+Password sharing
+Authentication
+Integrations
+For enterprises
+For small businesses
+For marketing teams
+For legal teams
+For HR teams
+For Financial Services
+For Professional Services
+For Education Institutions
+All Solutions
+Resources
+Resource Center
+Case studies
+The AI & SaaS Security Guide
+Events
+Webinars
+On-demand Demos
+Trust Center
+Threat Intel
+Compliance Center
+LastPass University
+Password Generator
+Username Generator
+LastPass Authenticator
+Cybersecurity posts
+LastPass content for agents
+Support
+Support Center
+Reddit community
+Community forum
+Service status
+My account
+Security vulnerability disclosure
+Vault login
+Admin login
+Contact support
+Get LastPass
+Start free trial
+Google Play download
+App Store download
+Browser Extensions
+Company
+About Us
+Careers
+We're hiring
+Leadership
+Newsroom
+Legal Center
+Compliance
+Contact Us
+Partners
+Partner program overview
+MSP
+Resellers
+Find a Partner
+Partner login
+Affiliate partners
+Contact Sales
+See in action how LastPass can protect your business. Request a demo today.
+Want to use LastPass Business now? Start 14-day Free Trial
+Chat with sales experts
+Contact Sales
+Install Extension
+Download
+© 2026 LastPass US LP. All rights reserved.
+Privacy Notice
+Terms of Service
+Imprint
+Cookie Preferences
+Your Privacy Choices
+English
+English
+Español
+Deutsch
+Français
+Italiano
+Nederlands
+Português

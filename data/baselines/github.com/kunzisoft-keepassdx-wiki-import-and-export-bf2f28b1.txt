@@ -1,0 +1,246 @@
+url: https://github.com/Kunzisoft/KeePassDX/wiki/Import-and-Export
+method: fetch
+saved: 2026-11-19
+
+Import and Export · Kunzisoft/KeePassDX Wiki · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+Kunzisoft
+KeePassDX
+Repository navigation
+Code
+Issues571 ( 571 )
+Pull requests9 ( 9 )
+Discussions
+Actions
+Projects
+Wiki
+Security and quality
+Insights
+More items
+Import and Export
+Jump to bottom
+J-JAMET edited this page Sep 11, 2026
+·
+10 revisions
+It is possible to import/export two types of data in KeePassDX :
+The data in a password database
+The properties of the app parameters
+Database
+Importing and exporting databases containing your sensitive data allows you to switch between ecosystems and applications as you see fit.
+These actions can be performed in several different ways, either by using a dedicated protocol or by manually exporting the data.
+Credential Exchange Format (CXF)
+This is the safest way to import/export your credentials from/to another file manager, and it's even compatible with Passkeys
+This is the method that KeePassDX will recommend but is not yet available and currently in development. Follow its progress via the issue.
+Plaintext
+It is possible to import and export KeePass database files (.kdbx) in KeePassDX but not plain text (.csv, .json or .xml) files for several reasons. Although this method has been commonly used in the past by other programs, it requires the use of an unencrypted text file containing your login credentials, poses a security risk to your data and does not allow you to transfer your Passkeys from one credential manager to another.
+KeePassDX does not and will not offer this plaintext import feature. Instead, it focuses on integrating new secure protocols for data transfer.
+But these operations must be done externally to the app.
+Import
+There are several ways to convert an external database file into a KeePass file with a .KDBX extension, but the best and easiest way is to use a flat file that can be parsed more easily by the import tools.
+So, if you already have another password manager not compatible with KeePass, you must first export your database as a flat .CSV file.
+Refer to your previous software manual for more information.
+Import with computer
+This method is recommended if you own a computer, it allows you to import with a configurable setting all the data from your CSV with a KeePass application that you will be able to use every day on your office machine. 🦘
+Install KeePass2 or KeePassXC on your computer.
+Import your CSV file by following the software instructions. (KeePass2 guide or KeePassXC guide)
+Get your .KDBX file on your portable device to use it with KeePassDX
+Import with browser
+This method allows you to use only the browser to convert files. Be careful though, some .CSV files are not compatible. 🦅
+The first step is to convert .CSV to .XML :
+go to https://tibdex.github.io/lastpass-to-keepass/
+upload your .CSV file there
+then you'll get a .XML file.
+The second step is to convert .XML to .KDBX :
+go to https://app.keeweb.info/
+click open
+select your file
+click the name of your file at the bottom (it should be keepass.xml)
+enter a master password
+click save to..
+click file
+it should download a .KDBX file
+Now you can open it with your favourite Keepass app
+(Thanks to JavaCoder19)
+Hard way
+This method is very complicated but works only with a phone with F-Droid tools. 🐰
+Create PRoot environment in Termux
+Install Debian, Xfce4 and used MultiVNC to connect to it. I used AnLinux for this.
+Install firefox-esr in it to get .CSV from your old password manager.
+Install KeePass2. It worked fine (KeePassXC don't)
+Import .CSV in it, made database and move the file in KeePassDX.
+(Thanks to erwincatt)
+self hosted keeweb offline locally on device
+git clone --depth=1 --branch gh-pages https://github.com/keeweb/keeweb.git
+cd keeweb
+python3 -m http.server 8080
+Then visit localhost:8080 on your browser
+ps:requires git and python installed on termux
+Export
+The export must also be done with an external tool, KeePass2, KeePassXC and KeeWeb all offer to convert your .KDBX file into a flat file.
+App properties
+The properties of the application parameters can be exported to be reimported into a new instance of the application.
+Note : a KeePassDX property file is compatible with each Free / Pro / Libre version. No data or database metadata is exported with this method.
+Properties Export
+To export the properties to a configuration file, just click on Settings -> App Settings -> Export app properties and choose a location for the .properties file to export.
+Properties Import
+To import the properties from a configuration file, just click on Settings -> App Settings -> Import app properties and select the .properties file to import.
+Caution: After reimporting the properties, you must reselect the autofill service in the system by repeating the wiki procedure. You will need to restart your browser and clear the cache of KeePassDX.
+The wiki has been locked due to abuse. If you would like to make a change, please start a discussion.
+Wiki pages
+Pages 18
+Loading
+Home
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Attachments
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+AutoFill
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Backup
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Clipboard
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Credentials
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Device Unlocking
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+FAQ
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+File Manager and Sync
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Hardware Key
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Import and Export
+Database
+Credential Exchange Format (CXF)
+Plaintext
+Import
+Import with computer
+Import with browser
+Hard way
+self hosted keeweb offline locally on device
+Export
+App properties
+Properties Export
+Properties Import
+Loading
+Log
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Magikeyboard
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Opening Error
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+OTP
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Passkeys
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Templates
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+User Verification
+Uh oh!
+There was an error while loading. Please reload this page.
+Show 3 more pages…
+https://github.com/Kunzisoft/KeePassDX.wiki.git
+Clone this wiki locally
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

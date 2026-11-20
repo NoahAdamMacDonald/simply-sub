@@ -1,0 +1,498 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1), read with Edge from Canada and with a plain
+# fetch (curl), which 2fas.com serves whole: its home, 2FAS Auth, 2FAS Pass, Pass pricing, Pass recovery, both browser
+# extension pages, download, about us and support pages, its help centre (2fas.com/support: the 2FAS Auth, 2FAS Pass,
+# subscription and donation articles, 120 in all, from its sitemap), the 2FAS Pass white paper (a PDF, read with
+# pdftotext), and its legal pages: the 2FAS Auth EULA and privacy policy, the 2FAS Pass EULA and privacy policy, the
+# website's terms and privacy policy, the Business Source License page for Pass's code and its open-source licence lists.
+# Pricing: 2fas.com/pass/pricing: Free "$0" ("No credit card required") and Unlimited "$9.99 / year" ("Payment in app"),
+# the same "$9.99" on its English, German ("$9.99 / Jahr") and Polish ("$9.99 / rok") versions; the page is server-
+# rendered, not priced by where the visitor is. No page names the currency (its help centre: "Why 9.99 dollars a
+# year?"), so one US-dollar price for everywhere (GLOBAL USD), the only dollar it can be (Stremio's and Devin's
+# precedent), flagged for the owner: it's bought in the app, from Apple or Google, whose stores set each country's own
+# price, which no 2FAS page shows (notes.md). No page says the price includes tax. There's no monthly period.
+# Region checklist for CA and US, 2026-11-19: 1. language paths only (/pl/, /de/), the same price; 2. a language picker
+# only; 3. no price data in the page's code beyond the text; 4. the checkout is the app store's, in the app; 5. its help
+# centre's subscription articles ("Why 9.99 dollars a year?"); 6. Edge from Canada and a plain fetch; 7. no bill offered.
+# Its products: 2FAS Auth (free, "Open-source app that is and always will be free to use") and 2FAS Pass (Free and
+# Unlimited). Business plans are "coming soon" (out of scope). 2FAS Share, its one-time secret-sharing page, sells
+# nothing. Donations (Buy Me a Coffee and its own monthly donations) buy nothing and aren't plans.
+# Bundles: none. Official resellers: none (no page names a shop; Pass is sold only in the app).
+id: 2fas
+name: 2FAS
+aliases: [2fas auth, 2fas pass, two factor authentication service]
+website: https://2fas.com
+category: passwords
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# Its help article "How do I cancel the subscription?" (in the App Store's or Google Play's subscriptions).
+cancelUrl: https://2fas.com/support/subscription/how-do-i-cancel-the-subscription/
+sources: { pricing: https://2fas.com/pass/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-19: 2FAS Pass Unlimited is bought in the app ("Payment in app", its pricing page),
+# billed by the app stores (its EULA). No card or other way is named.
+paymentMethods:
+  - methods: [app-store]
+    page: '2FAS Pass EULA'
+    url: https://2fas.com/pass/eula/
+    quotes:
+      - 'Billing processed through platform stores (App Store, Google Play, etc.)'
+# Renewal day (M11.5), read 2026-11-19: the app stores bill and renew it ("Subscription cancellation governed by platform
+# policies", its EULA); no 2FAS page says on which day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://2fas.com/pass/eula/
+    - https://2fas.com/pass/pricing/
+    - https://2fas.com/support/subscription/how-do-i-cancel-the-subscription/
+  lastVerified: 2026-11-19
+
+# Owner (M11.2), read 2026-11-19: its apps' privacy policies name Two Factor Authentication Service, Inc. as the company
+# that provides them, and its website's terms say it's a Delaware corporation (its old terms of 2024 give "a registered
+# office located at 16192 Coastal Highway, Lewes, DE 19958"). Its about page ("Mark founded 2FAS.") names no company.
+# Private: no page names a listing.
+owner:
+  name: Two Factor Authentication Service, Inc.
+  page:
+    name: Privacy Policy - 2FAS Auth
+    url: https://2fas.com/auth/privacy-policy/
+  quotes:
+    - 'Two Factor Authentication Service, Inc. (“2FAS,” “we,” or “us”) provides 2FAS Auth, a mobile application and browser extension that enables users to generate TOTP and HOTP tokens for two-factor authentication.'
+  country:
+    code: US
+    page:
+      name: Website Terms of Service
+      url: https://2fas.com/website/terms-of-service/
+    quotes:
+      - 'These Website Terms of Service (“Terms”) apply only to your use of the website located at https://2fas.com (the “Site”), which is operated by Two Factor Authentication Service, Inc., a Delaware corporation (“2FAS,” “we,” “our,” or “us”).'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  No accounts: 2FAS Auth and 2FAS Pass keep your data on your phone, with optional encrypted backups to your own iCloud,
+  Google Drive or (Pass) WebDAV or S3 storage. 2FAS Auth is free; 2FAS Pass Unlimited is bought in the app.
+
+# Source code (M11.5): its about and Auth pages link its GitHub organization (github.com/twofas). 2FAS Auth is open
+# source ("2FAS Auth is Open-source to ensure full transparency and commitment to security.", its Auth page; GPL v3, its
+# /auth/gpl-v3/ page), and 2FAS Pass is source-available ("Source-available code ensures that every security feature we
+# use can be verified by independent security experts.", its Pass page; "The source code is separately licensed under
+# Business Source License 1.1.", its EULA, which allows only non-production use of the code). So open-source apps
+# provider-wide, and source-available on the Pass plans.
+sourceRepo:
+  url: https://github.com/twofas
+  page:
+    name: About us
+    url: https://2fas.com/about-us/
+  quotes:
+    - 'Open-source and Source-available 2FAS apps are essential to our mission of revolutionizing the security standards of protecting online accounts.'
+    - 'We launched a Discord server and a custom Browser Extension. 2FAS Auth reached 5 million downloads and turned into an Open-source project.'
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: iOS and Android apps and browser extensions for Chrome, Firefox, Edge and
+# Safari, for both products (its download page; "We support Chrome and chromium-based browsers (like Brave), Opera,
+# Firefox, Edge, and Safari."). Sign-in: none, it has no accounts ("No user accounts required", the Pass pricing page;
+# "the app is 100% anonymous and doesn't require an account to use", the Auth page). Support: "If you’d like to send us a
+# support ticket, you can contact us at this email: help@2fas.com." and its Discord ("Community support on Discord").
+# App languages: its website's own versions (English, German and Polish) for both; 2FAS Auth's app lists 17 (below).
+# No pause and no parental controls (no account; Pass is cancelled in the app store).
+features:
+  platforms: [ios, android, browser-extension]
+  support.channels: [email, community]
+  languages.interface: [en, de]
+  software.open-source: open-clients
+
+# Perks (M11.6): Unlimited's rows of the pricing table that no feature describes, in its words.
+perks:
+  - id: multi-device-sync
+    name: Multi-device Sync
+  - id: unlimited-items
+    name: 'Item Limit: Unlimited'
+  - id: unlimited-extensions
+    name: 'Extension Limit: Unlimited'
+  - id: unlimited-extension-timeout
+    name: 'Extension Inactivity Timeout: Unlimited'
+
+# 2FAS Auth, read 2026-11-19: an authenticator only, so password-manager false and authenticator.included true.
+# - Imports: services' QR codes ("You can scan new QR codes or add services manually"), Google Authenticator's
+#   "Transfer accounts" QR code, and other apps: "We support imports from Aegis, Raivo, LastPassAegis, Stratum (formerly
+#   Authenticator Pro) and Google Authenticator." and "We also support imports from our app in the .2fas format.".
+# - Exports: a 2FAS Backup file, with a password or without ("For safety reasons, we recommend exporting this file with a
+#   password."). No page offers otpauth links or QR codes out.
+# - End-to-end encrypted sync: "if you’re using additional features like cloud sync or the Browser Extension , the
+#   communication between your phone and the cloud or Browser is end-to-end encrypted by default". Its synced codes, so
+#   passwords (an authenticator's vault, the registry's words), as 2FAS Pass's sync; no page says "backup" beside it.
+# - App languages: "List of ready-to-use translations:" English, German, French, Spanish, Portuguese, Brazilian
+#   Portuguese, Ukrainian, Italian, Polish, Indonesian, Dutch, Turkish, Chinese (Simplified), Chinese (Traditional),
+#   Greek, Japanese and Swedish (the registry's are listed).
+# 2FAS Pass, read 2026-11-19: a password manager ("A local-first password manager with secure desktop sync, no accounts
+# and end-to-end encrypted backups."), the same on Free and Unlimited but for the pricing table's limits: Free has
+# "Auto-fill" and "Import / Export" but not "Multi-device Sync" ("In the free plan, your sync is limited to a single
+# phone or tablet."), "Up to 200" items, "< 60 min." extension timeout and "1 Extension" (perks above for Unlimited's).
+# - Imports: "We support imports from 1Password, Apple Passwords, Bitwarden, Chrome, Dashlane, LastPass and Proton Pass."
+#   (no file format named) and its own .2faspass vault files.
+# - Exports: its encrypted vault file ("Select the newest encrypted Vault available in your files"; "Backups remain
+#   secure thanks to encryption provided by Secret Words and Master Password."). No page names CSV or another format.
+# - Works offline: "you don't need the Internet to access your Items" (Pass page); "The app is fully functional without
+#   internet connection." (white paper).
+# - End-to-end encrypted: "Cloud synchronization is optional and uses end-to-end encryption" (its EULA).
+# - Self-hosting: "Freedom to self-host your data wherever you want" and "we support WebDAV and S3-compatible storage
+#   synchronization for users who would like to self-host their Items" (notes.md: storage you run, not a 2FAS server).
+# - Not stated on any page read (its Pass page, pricing page, white paper and help centre): which item types it stores,
+#   whether it holds 2FA codes (authenticator.included false), emergency access (false), password health or sharing
+#   ("Password sharing" is "COMING SOON").
+plans:
+  - id: 2fas.auth
+    name: 2FAS Auth
+    link: https://2fas.com/auth/
+    features:
+      password-manager: false
+      authenticator.included: true
+      authenticator.import: [otpauth, google-authenticator, other-apps]
+      authenticator.export: [encrypted-backup, plain-backup]
+      encryption.end-to-end: [passwords]
+      languages.interface: [en, de, fr, es, pt, it, zh, ja]
+    notes: 'Free and open source, with no account. Codes stay on your phone, with optional encrypted backup to your own iCloud or Google Drive, and a browser extension that asks your phone for a code.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://2fas.com/auth/,
+        }
+
+  - id: 2fas.pass-free
+    name: 2FAS Pass Free
+    link: https://2fas.com/pass/pricing/
+    features:
+      password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.export: [encrypted]
+      password-manager.offline: true
+      password-manager.emergency-access: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+      software.open-source: source-available
+      software.self-hostable: true
+    notes: 'Up to 200 items, one browser extension that locks after less than 60 minutes idle, and sync to a single phone or tablet. No account: the vault stays on your phone.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://2fas.com/pass/pricing/,
+        }
+
+  - id: 2fas.pass-unlimited
+    name: 2FAS Pass Unlimited
+    link: https://2fas.com/pass/pricing/
+    features:
+      password-manager: true
+      password-manager.import: [other-managers]
+      password-manager.export: [encrypted]
+      password-manager.offline: true
+      password-manager.emergency-access: false
+      authenticator.included: false
+      encryption.end-to-end: [passwords]
+      software.open-source: source-available
+      software.self-hostable: true
+    perks: [multi-device-sync, unlimited-items, unlimited-extensions, unlimited-extension-timeout]
+    notes: 'Bought in the app from Apple or Google, whose stores set the price in your country.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 9.99,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://2fas.com/pass/pricing/,
+        }
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with Edge: each product's own EULA and privacy policy (all
+# effective June 27, 2025), which the website's terms name as the documents that govern the apps ("Those uses are
+# governed by separate legal documents:"), the website's terms and privacy policy, the Pass white paper's security
+# section, and its help centre. Its older Terms of Service and Privacy Policy of 2024 (2fas.com/terms-of-service/ and
+# /privacy-policy/) are still online but no longer linked, so not rated. Each rating for everywhere is graded from
+# 2FAS Auth's documents and those both share; a rating for the Pass plans grades 2FAS Pass's own where it differs. No
+# sign-up form: neither app has accounts. The app stores' terms for Pass's billing weren't read.
+policies:
+  links:
+    - name: '2FAS Auth privacy policy'
+      url: https://2fas.com/auth/privacy-policy/
+    - name: '2FAS Auth EULA'
+      url: https://2fas.com/auth/eula/
+    - name: '2FAS Pass privacy policy'
+      url: https://2fas.com/pass/privacy-policy/
+    - name: '2FAS Pass EULA'
+      url: https://2fas.com/pass/eula/
+    - name: 'Website privacy policy'
+      url: https://2fas.com/website/privacy-policy/
+    - name: '2FAS Auth'
+      url: https://2fas.com/auth/
+    - name: '2FAS Pass'
+      url: https://2fas.com/pass/
+    - name: '2FAS Pass pricing'
+      url: https://2fas.com/pass/pricing/
+    - name: 'What data do you acquire?'
+      url: https://2fas.com/support/2fas-auth-security-privacy/what-data-do-you-acquire/
+    - name: 'Moving codes between iOS and Android'
+      url: https://2fas.com/support/2fas-auth-mobile-app/i-want-to-move-copy-transfer-tokens-codes-between-ios-and-android/
+    - name: 'How do I cancel the subscription?'
+      url: https://2fas.com/support/subscription/how-do-i-cancel-the-subscription/
+    - name: '2FAS Pass white paper'
+      url: https://2fas.com/pass/whitepaper.pdf
+    - name: 'GNU GPL v3 (2FAS Auth)'
+      url: https://2fas.com/auth/gpl-v3/
+  ratings:
+    - topic: privacy.data-collection
+      tier: great
+      reason: 'Its apps collect no analytics, only anonymous crash reports you can switch off in one tap, and its website collects nothing.'
+      sources:
+        - url: https://2fas.com/support/2fas-auth-security-privacy/what-data-do-you-acquire/
+          quote: 'However, we’ve decided to stick with Crashlytics (anonymous crash log from Google) – this tool allows us to react instantly if there are any major issues with our app.'
+        - url: https://2fas.com/support/2fas-auth-security-privacy/what-data-do-you-acquire/
+          quote: 'there’s an easy option for an opt-out from crash logs with one toggle in the app in the ‘About’ section of the Settings!'
+        - url: https://2fas.com/website/privacy-policy/
+          quote: 'This website does not collect, store, or process any personal information from visitors.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: great
+      reason: 'It doesn’t sell or trade your data. Only crash reports, if you leave them on, go to a company that runs them for it.'
+      sources:
+        - url: https://2fas.com/auth/privacy-policy/
+          quote: 'These providers process data only as necessary to deliver their services to us. We do not sell, rent, or trade your data to anyone.'
+        - url: https://2fas.com/pass/privacy-policy/
+          quote: 'We do not sell, share, or use personal data for advertising.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: great
+      reason: 'No ads and no tracking, in its apps or on its website.'
+      sources:
+        - url: https://2fas.com/auth/privacy-policy/
+          quote: 'We do not collect: your authentication tokens or secrets; your email address or contact information (unless you contact us directly); usage analytics, tracking IDs, tracking tools, or advertising data;'
+        - url: https://2fas.com/website/privacy-policy/
+          quote: 'We do not use cookies or tracking technologies.'
+        - url: https://2fas.com/pass/privacy-policy/
+          quote: 'The app and browser extension do not use advertising trackers, or behavioral analytics.'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-applicable
+      reason: 'Your codes and passwords never reach 2FAS: they stay on your phone or in your own cloud, locked, so there’s nothing it could train AI on.'
+      pages:
+        - https://2fas.com/auth/privacy-policy/
+        - https://2fas.com/pass/privacy-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your codes and passwords stay on your phone. Backups to your own cloud are locked before they leave it, and 2FAS can’t open them.'
+      sources:
+        - url: https://2fas.com/auth/privacy-policy/
+          quote: 'All authentication data is stored locally on your device and is never transmitted to our servers.'
+        - url: https://2fas.com/pass/eula/
+          quote: 'We cannot access your data whether stored locally or synchronized to cloud'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      status: not-applicable
+      reason: 'It keeps no account or data about you: your codes and passwords stay on your devices. Only an email you send it is kept, and it deletes that when you ask.'
+      pages:
+        - https://2fas.com/auth/privacy-policy/
+        - https://2fas.com/pass/privacy-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'It keeps almost nothing about you, and deletes what you sent it by email whenever you ask.'
+      sources:
+        - url: https://2fas.com/auth/privacy-policy/
+          quote: 'We do not maintain user accounts or databases for 2FAS Auth. If you contact us and provide personal information (e.g., via email), you may request deletion of that data at any time by contacting privacy@2fas.com.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: neutral
+      reason: 'You can export your codes or vault yourself, but as 2FAS’s own backup files, which you can protect with a password.'
+      sources:
+        - url: https://2fas.com/support/2fas-auth-mobile-app/i-want-to-move-copy-transfer-tokens-codes-between-ios-and-android/
+          quote: 'To do that, go to Settings/Menu, 2FAS Backup, tap “Export,” and save the file on your device.'
+      action:
+        name: 'How to export your codes'
+        url: https://2fas.com/support/2fas-auth-mobile-app/i-want-to-move-copy-transfer-tokens-codes-between-ios-and-android/
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      status: not-stated
+      reason: 'Its policies don’t say what it does if police or governments ask. It holds no account or vault data that it could hand over.'
+      pages:
+        - https://2fas.com/auth/privacy-policy/
+        - https://2fas.com/pass/privacy-policy/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: great
+      reason: 'Your data stays on your phone, or in the cloud or drive you choose. 2FAS has no servers holding it.'
+      sources:
+        - url: https://2fas.com/auth/privacy-policy/
+          quote: 'All authentication data is stored locally on your device and is never transmitted to our servers.'
+        - url: https://2fas.com/pass/
+          quote: 'You decide where to store your Items. You can store it in your own cloud or keep it as an encrypted file on an external drive.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: great
+      reason: 'There’s no sign-up: neither app has accounts, so you give it nothing.'
+      sources:
+        - url: https://2fas.com/pass/privacy-policy/
+          quote: 'We do not access your vault contents, require you to register or create an account, or collect any contact information unless you contact us directly.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: good
+      reason: 'You cancel 2FAS Pass Unlimited in your App Store or Google Play subscriptions, at any time.'
+      sources:
+        - url: https://2fas.com/support/subscription/how-do-i-cancel-the-subscription/
+          quote: 'Go to Subscriptions in Google Play'
+        - url: https://2fas.com/pass/eula/
+          quote: 'Subscription cancellation governed by platform policies'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      status: not-stated
+      reason: 'Its terms leave refunds to Apple’s or Google’s rules and don’t state any of their own.'
+      pages:
+        - https://2fas.com/pass/eula/
+        - https://2fas.com/support/subscription/how-do-i-cancel-the-subscription/
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: neutral
+      reason: 'It may change its plans and prices, but says it will tell you ahead of a big change, and your subscription keeps the terms you bought it on. It doesn’t say how far ahead.'
+      sources:
+        - url: https://2fas.com/pass/eula/
+          quote: 'Existing subscriptions remain subject to terms active at time of purchase'
+        - url: https://2fas.com/pass/eula/
+          quote: 'Material changes to existing plans will be communicated with advance notice'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'It has no free trial that turns into a paid plan: 2FAS Pass Free stays free.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Apple or Google renew 2FAS Pass Unlimited; 2FAS’s own pages don’t say you’re reminded first.'
+      pages:
+        - https://2fas.com/pass/eula/
+        - https://2fas.com/pass/pricing/
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its pages name no fees beyond the yearly price in the app.'
+      pages:
+        - https://2fas.com/pass/eula/
+        - https://2fas.com/pass/pricing/
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: poor
+      reason: 'A private referee settles disagreements instead of a court, and you can’t join a group lawsuit, unless you email it within 30 days of first agreeing to say no.'
+      sources:
+        - url: https://2fas.com/auth/eula/
+          quote: 'You and Company agree to bring claims only in your individual capacities and not as part of a class or representative action.'
+        - url: https://2fas.com/auth/eula/
+          quote: 'You may opt out of arbitration by sending written notice to legal@2fas.com within 30 days of first accepting this EULA.'
+      action:
+        name: 'How to opt out of arbitration'
+        url: https://2fas.com/auth/eula/
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It only posts a new version of its privacy policy, and if you keep using the app, that counts as saying yes.'
+      sources:
+        - url: https://2fas.com/auth/privacy-policy/
+          quote: 'We may update this Privacy Policy. If we do, we will post the updated version on our website or within the app. Continued use after an update constitutes acceptance of the revised terms.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      plans: [2fas.pass-free, 2fas.pass-unlimited]
+      tier: neutral
+      reason: 'For a big change to its 2FAS Pass terms, it gives 30 days’ notice in the app or on its website, so you can stop using it first.'
+      sources:
+        - url: https://2fas.com/pass/eula/
+          quote: "For material changes we will give 30 days' advance notice via in-app message or on our website."
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'There are no accounts, but it can end your right to use its apps if you break their rules, and its terms promise no refund of a paid year.'
+      sources:
+        - url: https://2fas.com/auth/eula/
+          quote: 'Company may terminate this EULA if you violate any term.'
+        - url: https://2fas.com/pass/eula/
+          quote: 'We may terminate for violation of this EULA'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'It takes no rights over your codes or passwords: it never receives them, and can’t open your backups.'
+      sources:
+        - url: https://2fas.com/auth/eula/
+          quote: 'The Company does not collect, store, or access any user authentication data.'
+        - url: https://2fas.com/pass/eula/
+          quote: 'We cannot access your data whether stored locally or synchronized to cloud'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      status: not-stated
+      reason: 'The 2FAS Auth terms don’t say whether it can take features away. It’s free, and its code is open.'
+      pages:
+        - https://2fas.com/auth/eula/
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      plans: [2fas.pass-free, 2fas.pass-unlimited]
+      tier: poor
+      reason: 'It can change, pause or stop 2FAS Pass or any of its features at any time, even without warning, including what Unlimited pays for.'
+      sources:
+        - url: https://2fas.com/pass/eula/
+          quote: 'We reserve the right to modify, suspend, or discontinue the Software or any features at any time, with or without notice.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-applicable
+      reason: 'There’s no 2FAS account to close for not using it.'
+      pages:
+        - https://2fas.com/auth/privacy-policy/
+        - https://2fas.com/pass/privacy-policy/
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: good
+      reason: 'You may use its apps at home or at work, on as many of your devices as you like, with only the usual limits. 2FAS Pass’s published code may only be studied, not run as your own copy.'
+      sources:
+        - url: https://2fas.com/pass/eula/
+          quote: 'Installation on unlimited devices you own or control'
+        - url: https://2fas.com/pass/eula/
+          quote: 'The source code is separately licensed under Business Source License 1.1.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      plans: [2fas.auth]
+      tier: great
+      reason: '2FAS Auth is open source: anyone may read, change and share its code under the GNU GPL.'
+      sources:
+        - url: https://2fas.com/auth/
+          quote: '2FAS Auth is Open-source to ensure full transparency and commitment to security.'
+        - url: https://2fas.com/auth/gpl-v3/
+          quote: 'The GNU General Public License is a free, copyleft license for software and other kinds of works.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'You can report security flaws by email, and it gives a 90-day timeline for fixing and disclosing them. It names no outside audit and no bug bounty.'
+      sources:
+        - url: https://2fas.com/pass/whitepaper.pdf
+          quote: 'For security vulnerabilities, please use responsible disclosure:'
+        - url: https://2fas.com/pass/whitepaper.pdf
+          quote: 'We follow a 90-day disclosure timeline and will keep you informed throughout the process.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      status: not-applicable
+      reason: 'There’s no 2FAS account to share: anyone can install its apps without one, and its terms let a family or team use them.'
+      pages:
+        - https://2fas.com/auth/eula/
+        - https://2fas.com/pass/eula/
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its apps come from the app and extension stores, and its terms don’t say how they update or whether they change anything else.'
+      pages:
+        - https://2fas.com/auth/eula/
+        - https://2fas.com/pass/eula/
+      lastVerified: 2026-11-19

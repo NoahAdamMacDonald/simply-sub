@@ -1,0 +1,93 @@
+url: https://2fas.com/website/terms-of-service/
+method: fetch
+saved: 2026-11-19
+
+2FAS.com Website Terms of Service
+MENU
+HomeHome
+Password ManagerPassword Manager 2FAS Pass Mobile App
+2FAS Pass Browser Extension
+2FAS Share
+Pricing
+AuthenticatorAuthenticator 2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Donate
+About usAbout
+Help CenterHelp Center
+Get the appsGet the apps
+Website Terms of Service
+Effective Date: June 27, 2025
+Last updated: June 27, 2025
+These Website Terms of Service (“Terms”) apply only to your use of the website located at https://2fas.com (the “Site”), which is operated by Two Factor Authentication Service, Inc., a Delaware corporation (“2FAS,” “we,” “our,” or “us”). By accessing or using the Site, you agree to these Terms.
+1. Scope of These Terms
+These Terms govern only your use of the Site. They do not apply to:
+Use of 2FAS Auth, 2FAS Auth Browser Extensions, 2FAS Pass or 2FAS Pass Browser Extensions
+Use of source code published by 2FAS
+Those uses are governed by separate legal documents:
+2FAS Auth and 2FAS Auth Browser Extensions End User License Agreement and Privacy Policy
+2FAS Auth and 2FAS Auth Browser Extensions source code license
+2FAS Pass and 2FAS Pass Browser Extensions End User License Agreement and Privacy Policy
+2FAS Pass and 2FAS Pass Browser Extensions source code licenses
+2. Acceptable Use
+You agree not to use the Site to:
+Violate any applicable laws or regulations, including those related to harassment, abuse, spam, or illegal content
+Upload or transmit malware, spyware, or other harmful code
+Infringe the intellectual property or privacy rights of others
+Attempt to scrape, mine, or harvest data from the Site without our express permission
+We reserve the right to suspend or block access to the Site in response to violations of these rules.
+3. Intellectual Property
+All content on the Site - including the 2FAS name, logo, text, and graphics - is owned by 2FAS or its licensors and is protected by intellectual property laws. You may not use, reproduce, or modify any Site content without written permission.
+4. Third-Party Links
+The Site may include links to third-party websites. We are not responsible for those sites or their content, terms, or privacy practices.
+5. No Warranties
+The Site is provided “as is” and “as available.” We do not guarantee that it will be secure, uninterrupted, or error-free. We disclaim all warranties to the extent permitted by law.
+6. Limitation of Liability
+To the extent permitted by law, 2FAS will not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Site.
+7. Changes to These Terms
+We may update these Terms at any time by posting the revised version on this page. Your continued use of the Site after updates means you accept the revised Terms.
+8. Governing Law
+These Terms are governed by the laws of the State of Delaware, without regard to its conflict of laws rules. Any legal action related to these Terms must be brought in Delaware.
+9. Contact
+If you have questions about these Terms, please email us at [email protected] with the subject line “Website Terms”.
+About us
+Press kit
+Terms of Service
+Privacy Policy
+Open-source Licenses
+Site settings
+Authenticator
+Products
+2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Resources
+Donations
+How to enable 2FA
+Quick Browser Extension Check
+Check generated token
+Your branding
+Your 2FA guide
+Open-source Licenses
+Comparisons
+Google Authenticator vs. 2FAS Auth
+Authy vs. 2FAS Auth
+Microsoft Authenticator vs. 2FAS Auth
+Duo vs. 2FAS Auth
+Policies
+2FAS Auth Privacy Policy
+2FAS Auth EULA
+Password manager
+Products
+2FAS Pass Mobile App
+2FAS Pass Browser Extension
+Resources
+2FAS Pass Pricing
+2FAS Pass Recovery
+Open-source Licenses
+Policies
+2FAS Pass Privacy Policy
+2FAS Pass EULA
+Support
+Help Center
+Support
+Connect
+© 2026 Two Factor Authentication Service, Inc. All rights reserved.

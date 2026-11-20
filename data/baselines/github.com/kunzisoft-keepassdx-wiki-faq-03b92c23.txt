@@ -1,0 +1,324 @@
+url: https://github.com/Kunzisoft/KeePassDX/wiki/FAQ
+method: fetch
+saved: 2026-11-19
+
+FAQ · Kunzisoft/KeePassDX Wiki · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+Kunzisoft
+KeePassDX
+Repository navigation
+Code
+Issues571 ( 571 )
+Pull requests9 ( 9 )
+Discussions
+Actions
+Projects
+Wiki
+Security and quality
+Insights
+More items
+FAQ
+Jump to bottom
+Benjamin Loison edited this page Jan 22, 2026
+·
+44 revisions
+Why KeePassDX?
+Lightweight password manager for Android, KeePassDX allows editing encrypted data in a single file in KeePass format and fill in the forms in a secure way.
+KeePassDX was created to meet the security and usability needs of having a KeePass app on Android:
+Easy secure password management and form filling tools.
+Only libre software tools to strengthen the security of the app.
+No closed APIs, or open APIs linked to closed tools.
+Native langage (Kotlin, Java, C) for a small app size, security and a better integration.
+Android design, architecture and ergonomics.
+What makes KeePassDX stand out from other password managers?
+Your data is stored in a single encrypted file that you manage, it is not stored on a private server or in a closed cloud. You have control of your passwords.
+KeePass file standards are used to maintain compatibility and portability with different devices (computers and portable devices with different operating systems).
+The code is open source, meaning you can check how the encryption algorithms are implemented.
+The developers are attentive to your needs, and can even integrate the features you define.
+No advertising. Not even in the free version.
+Can I open my database without my master key (master password and/or keyfile)?
+No, you can not open a database file without the master password (and/or) the associated keyfile.
+Be sure to remember your master password and save the keyfile in a safe place. To prevent this from happening, you could use some of the methods for remembering passphrases with mnemotechnical means.
+Can I open my database easily other than with a password?
+Yes, there is an alternative fingerprint/device credential opening option for Android devices that support this feature, so no one can access the app without scanning your fingerprint or enter your master key.
+You must always know your master password, the advanced unlocking is only a faster unlocking tool.
+How am I sure my passwords are safely stored in the app?
+Users are allowed to save and use passwords, keys and digital identities in a secure way by integrating the latest encryption algorithms and Android architecture standards. All the source-code can be used, studied, changed, and distributed freely.
+You can increase the security of your database by changing the encryption algorithm and increase the rounds of encryption keys. (In Settings → Database Settings when your database is open)
+Warning: Increase the number of rounds sparingly to maintain a reasonable opening time.
+If I uninstall or remove KeePassDX, what will happen to my passwords?
+The application will be deleted from your phone, but your database (stored in a .kdbx file) will remain.
+You can open this file at any time in the future if you install KeePassDX again. For the same reason, if you wish to remove all traces of using KeePassDX, you need to delete both the application and the database file.
+I accidentally deleted the database file!
+Hopefully you made a backup beforehand. Make sure you haven't simply forgotten where you stored the file in the first place. Search your phone for a file with a .kdbx extension.
+Can I recover my passwords on another device if I lose my main device?
+Yes, but you must save the .kdb or .kdbx file from your database to external storage first (like a hard-drive or to a secure cloud). It is recommended to backup your data after each modification in case you lose your Android device. That way you can retrieve the data and import it into a new installation of KeePass DX on your new Android device.
+The edit button is not present, why can't I edit an entry?
+You've probably opened your database in read-only mode. You can change the opening mode on the password selection page with the pencil icon. It's also possible that your file manager provides a read-only file URI, in which case please refer to the documentation for the file manager you're using.
+Can I open KeePassDX database on another phone or on the computer?
+Yes, you will need to copy the password database file to another phone or to a computer, install a KeePass compatible program on your computer or new device and then you will be ready to open the database.
+Make sure that you copy the file over secure means, like your own trusted USB disk or connecting the phone directly to the computer. Assess if the other phone or computer is a secure environment to open your password database on.
+What is the best possible security configuration for my database?
+It's always a question of balancing security and usability. We therefore recommend that you increase your encryption settings sparingly, so that you can open your database quickly, depending on your device. If you want the best security, put all the numbers to the maximum but you will not be able to open your database either because it will take way too long.
+As a reference see OWASP's general recommendations.
+What are the permissions used in KeePassDX?
+Foreground service : Processes database actions in device RAM, displays notifications
+dataSync : To manage the database save and synchronization service
+specialUse : To manage the Magikeyboard, clipboard and Advanced unlock
+Post notifications : Displays notifications
+Query all packages : Used to open apps directly from the AndroidApp field
+Schedule exact alarm : Manages timers for database closing
+Use biometric : Enables biometric/fingerprint recognition
+Use fingerprint : Enables fingerprint recognition for old devices
+Vibrate : Allows vibration at events, rarely used
+Dynamic receiver not exported : Manages internal events by broadcasts
+For more info see Android App Permissions list by IzzyOnDroid.
+Why does my database open slower on my phone with KeePassDX than on my PC?
+Your phone may be much less powerful than your PC, so when you set a decryption time of one second on your PC, it may take much longer on your phone. The solution is to lower the unlock time by lowering the KDF in the database security settings.
+Can I use KeePassDX to share accounts?
+Yes, but it's important to note a few details to ensure security.
+Make sure you share the username and password through a secure channel. The best option would be to exchange account details in person or in encrpyted communication. Once this is done, you can keep these account details in their own KeePassDX databases.
+It is also possible to create a password database file (.kdbx) with shared accounts, and exchange it over secure channels (e.g. USB memory stick) as well as the master password. Once you work with a shared database file, you should assign a person in charge of managing the database file, including backups, and update if any changes happened to any shared accounts.
+In certain circumstances, you may consider an online password manager. It is important that you understand the risks involved and take appropriate measures, such as excluding highly-sensitive accounts from the online database. There are open source alternatives.
+Why not an online version?
+The offline and online client concepts only exists in other apps because the file access network tools are directly integrated into the code of the main app. It’s a different choice that doesn’t meet app design and safety standards considering it is not normally the purpose of an Android password editor app to take care of external file synchronization on clouds (which can be under closed licensed and recover your database), it is rather the purpose of the file manager app.
+Of course, you use the file manager you want, whether it is connected to internet or not.
+Note that it is planned to create a separate file manager app to handle file sharing requests over the network.
+Can I store my data in cloud storage?
+Yes, You can of course add the cloud app of your choice to your file manager. We recommend using a cloud with a personal server and AGPLv3+ license. You can find a non-exhaustive list of compatible file managers on the wiki.
+How do I open my database file from a cloud?
+KeepassDX uses the file managers on your device. If your default manager is not connected to your cloud, you need to open your cloud app and select your database file. The linked file provided by the content provider may have a strange name, the alias feature can be used for better visibility.
+Why do I see an error asking me to re-open the database file from my file browser?
+KeePassDX uses one of your device's file manager and stores the generated links in the "recent databases" list.
+If the selected file manager breaks the link, it is necessary to re-open the file from your manager because it does not have the functionality to keep the persistent links. (More info on this in File Manager and Sync)
+Does this app display attachments?
+Yes, you can upload and download your attached files, there is even an internal image file viewer. But your attached files should not be very large. For large files, use alternative open source data encryption solutions (virtual encrypted disks).
+What is my database version?
+KeePassDX can handle KeePass database versions 1 to 4 with .kdb and .kdbx extension. Depending on the data it contains, the version of your database is automatically changed to make it compatible with as many KeePass applications as possible. To find out your version, open your database and click the burger button; you should see the version at the very top, for example "v2 - KDBX4.0".
+Why is the database file smaller after a save?
+The code for the database is constantly optimized (by ordering the nodes, managing the compression, and using the adapted version of the base). The filesize will be smaller, but all data will be present.
+Pressing the buttons has no effect, why that?
+KeePassDX has protections against TapJacking, so that other applications that use overlays cannot recover keystrokes and steal your passwords. Make sure you don't have any applications that override the KeePassDX UI. The "Smart pixels" setting can cause this behavior.
+https://developer.android.com/reference/android/view/View#security
+Why did the app lock before the timeout duration has elapsed?
+If Settings → Form filling → Magikeyboard settings → Entry selection and Settings → Form filling → Magikeyboard settings → Timeout are both enabled, the opening an entry will load it into magikeyboard and begin the magikeyboard timeout for clearing the entry.
+Once the magikeyboard timeout has elapsed, the database will be locked, which may happen sooner than the main app timeout set in Settings -> App settings -> Timeout.
+The same behavior can occur if you use clipboard notifications, have clipboard timeout enabled and copy your first item from the notification. You can disable this timeout in Settings → Form filling → Clipboard timeout.
+Why can't I press the buttons on KeePassDX, it's like it's frozen?
+KeePassDX is protected against TapJacking, so if an app covers KeePassDX but leaves transparency, you think you're pressing buttons when you're not. You need to deactivate the app causing the overlay in your device settings "Display over other apps".
+Why doesn't the Samsung DeX mode work immediately?
+The Android framework will not allow the DexModeReceiver broadcast receiver to run unless KeePassDX is successfully launched once outside of DeX mode. After that, it will work inside Samsung DeX without any problem.
+How can I secure KeePassDX and database access?
+There are various strategies which you could implement :
+It is possible to give a password database misleading name which would suggest it is something else like "notes.odt" or "image.png". You can instruct KeePassDX not to remember which database it opened last time. Open Settings -> App -> App setting -> History and deselect options Remember database locations and Show recent files. You will need to remember yourself which file is saved where to access your password database. And you will need to open it directly from KeePassDX.
+You can hide the applications name and icon or simply add a credential to prevent its access using a custom android launcher.
+Can I use a Yubikey to unlock my database?
+Yes, It is currently possible to unlock a database using your Yubikey, alone or combined with other credentials (password or/and keyfile) depending on the master key combination you want to configure. This feature is supported starting from version 3.5.0.
+Why do I have bugs in the beta version?
+KeePassDX allows its users to test new releases in advance on the Play Store beta channel. This beta channel is used to test new KeePassDX features that will be implemented later in production. It is not recommended to use your normal database on this channel. Even if the code is audited at each release, there may be unexpected bugs (and that's why this channel exists). All the feedbacks of bugs of this channel are obviously taken into account and corrected for a future release of the final version.
+Why are updates not available at the same time on all stores?
+the Play Store only needs an APK to be generated and manually signed to be added, it usually takes a few hours to be available because it is deployed with Fastlane. The management of the APK and its data by the Google servers is obscure.
+On F-Droid, to ensure the code is libre, it checks the sources of the Git repository directly (by checking the presence of new tags). Then an APK is built that the server signs during the compilation of the code and dependencies. Updating the project takes 1-5 days for F-Droid to analyze all available repositories, build sources and deploy the generated APK. So F-Droid is slower for deployment, but is run by volunteers and guaranteed to be a clean APK. :) Unfortunately, since an F-Droid update, the repos cannot be automatically built and causes a version delay. It is recommended to use Obtainium if you want the latest Libre version from Github.
+Why a Libre and Free version?
+All versions currently have the same usage features but with two different purposes.
+KeePassDX is a FLOSS application that provides two builds depending on individual needs, allowing for greater flexibility in adoption, with the underlying desire to maintain freedom and give users choice in all cases.
+The Free version, for everyday use, is the basic version at the Google Play Store. It is compiled and signed by the developers, and sent to the Play Store to be cataloged by Google. This build contains small additions of elements that are not entirely consistent with the ethics of libre software but with open source code which facilitate the integration of few services :
+OTP Steam, that does not comply with OTP standards.
+List of privileged Web Apps for Passkeys, that determines a white-list pre-established by Google, even though it is not necessarily the user's choice.
+The Libre version is the version provided to have no proprietary code, is not linked to any closed services and which best satisfies the philosophy of libre software for user freedom. The app is signed and compiled automatically by F-Droid server from the source code. It is possible to unlock the themes with a procedure.
+In both cases, these versions are also available on Github and signed by the creator of the app (since version 4.0.3).
+Why two KeePassDX versions on IzzyOnDroid?
+IzzyOnDroid retrieves the Free compiled version in addition to the Libre version, which may be ahead of schedule. You can migrate data from one version to the other using the backup procedure.
+What is KeePassDX Pro / Contributor Pro?
+KeePassDX Pro is the unlocked version of KeePassDX with unlocking cosmetic content, but more importantly, it is available to assist development.
+The contributions are necessary because the project requires a lot of work and maintenance and few human resources are dedicated to it. This allows us to keep the project active, respond to bugs, develop new features, and avoid imposing intrusive economic models that are unwanted by users. There is absolutely no advertising in the application.
+The Pro version is accessible after having purchased Contributor Pro app (both applications must be installed on the same device) or after another contribution (you will receive by e-mail a procedure to unlock the Libre version of F-Droid).
+For former KeePassDX Pro users, it is possible to transfer the properties of a KeePassDX application to another version (more info here)
+Why not give direct access to alternative themes or not standardized protocols?
+Instead of directly providing these optional visual styles, they are an incentive to contribute and replace advertising without depriving users of functionality in the free version.
+Non-standard protocols used in computing prevent interoperability with other applications. Proprietary and non-standard formats therefore do not respect the computing freedoms of free and open source software, and requires more integration work for no added value.
+The Steam TOTP algorithm is not a standardized protocol and is therefore not a standard feature. Manual selection of this algorithm can therefore only be unlocked after a contribution.
+The procedure to unlock these themes in KeePass Libre is sent by e-mail manually so feel free to ask at contact@kunzisoft.com if you have made a contribution.
+Can I suggest features and report bugs for the app?
+Yes, do so on GitHub: https://github.com/Kunzisoft/KeePassDX/issues. You can take screenshots or videos by activating the screenshot mode in Settings -> App Settings -> Screenshot mode
+The wiki has been locked due to abuse. If you would like to make a change, please start a discussion.
+Wiki pages
+Pages 18
+Loading
+Home
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Attachments
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+AutoFill
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Backup
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Clipboard
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Credentials
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Device Unlocking
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+FAQ
+Why KeePassDX?
+What makes KeePassDX stand out from other password managers?
+Can I open my database without my master key (master password and/or keyfile)?
+Can I open my database easily other than with a password?
+How am I sure my passwords are safely stored in the app?
+If I uninstall or remove KeePassDX, what will happen to my passwords?
+I accidentally deleted the database file!
+Can I recover my passwords on another device if I lose my main device?
+The edit button is not present, why can't I edit an entry?
+Can I open KeePassDX database on another phone or on the computer?
+What is the best possible security configuration for my database?
+What are the permissions used in KeePassDX?
+Why does my database open slower on my phone with KeePassDX than on my PC?
+Can I use KeePassDX to share accounts?
+Why not an online version?
+Can I store my data in cloud storage?
+How do I open my database file from a cloud?
+Why do I see an error asking me to re-open the database file from my file browser?
+Does this app display attachments?
+What is my database version?
+Why is the database file smaller after a save?
+Pressing the buttons has no effect, why that?
+Why did the app lock before the timeout duration has elapsed?
+Why can't I press the buttons on KeePassDX, it's like it's frozen?
+Why doesn't the Samsung DeX mode work immediately?
+How can I secure KeePassDX and database access?
+Can I use a Yubikey to unlock my database?
+Why do I have bugs in the beta version?
+Why are updates not available at the same time on all stores?
+Why a Libre and Free version?
+Why two KeePassDX versions on IzzyOnDroid?
+What is KeePassDX Pro / Contributor Pro?
+Why not give direct access to alternative themes or not standardized protocols?
+Can I suggest features and report bugs for the app?
+Loading
+File Manager and Sync
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Hardware Key
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Import and Export
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Log
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Magikeyboard
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Opening Error
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+OTP
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Passkeys
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Templates
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+User Verification
+Uh oh!
+There was an error while loading. Please reload this page.
+Show 3 more pages…
+https://github.com/Kunzisoft/KeePassDX.wiki.git
+Clone this wiki locally
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

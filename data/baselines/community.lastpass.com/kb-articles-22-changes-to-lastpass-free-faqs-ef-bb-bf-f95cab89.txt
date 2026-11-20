@@ -1,0 +1,50 @@
+url: https://community.lastpass.com/kb/articles/22-changes-to-lastpass-free-faqs%EF%BB%BF
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Learn
+Connect
+Support
+Discover
+Guidelines
+Sign In
+SUPPORT ARTICLES
+Support Articles
+View All
+Support Articles
+Changes to LastPass Free FAQs
+We've made changes to how LastPass Free users access LastPass across device types and how they get help.
+What has changed for LastPass Free users?
+LastPass offers access across two device types:
+Computer (including all browsers running on desktops and laptops)
+Mobile (including mobile phones, smart watches, and tablets)
+As of March 16, 2021, LastPass Free only includes access on unlimited devices of one type. For more information, see Device type overview.
+As a LastPass Free user, you have 3 opportunities to switch your active device type and explore what's right for you.
+Note: All of your devices sync automatically, so you’ll never lose access to anything stored in your vault or be locked out of your account due to these changes, regardless of whether you use computers or mobile devices to access LastPass. For more information, see Could I lose any of my passwords or data stored in my vault due to these changes?.
+LastPass Free users who would like unlimited access across all device types can upgrade to LastPass Premium or LastPass Families.
+Who is impacted by these changes?
+All LastPass Free users are impacted by these changes. As a LastPass Free user, the device type (computer or mobile) that you use to log in to LastPass on or after March 16, 2021 becomes your Active device type. For more information, see What is my active device type, and how many switches do I have left?.
+Device type overview and rules.
+LastPass Free has the following two device types:
+Computer
+Mobile
+Windows, macOS and Linux desktops or laptops
+iOS and Android phones
+Windows tablets
+Note: Chromebooks using the LastPass browser extension are counted as a "Computers" device type.
+Smart watches, iPads, Android tablets
+Note: Chromebooks using the LastPass Password Manager app are counted as a "Mobile" device type.
+Device type does not refer to the number of devices or operating systems being used to access LastPass, but rather the nature of those devices. LastPass Free users can use LastPass on an unlimited number of devices within their one active device type (either computers only or mobile devices only).
+For example:
+A LastPass Free user with Computer as their active device type could use LastPass on their desktop, but they would not be able to use LastPass on their mobile unless they upgrade to LastPass Premium or LastPass Families for unlimited device type access.
+A LastPass Free user with Mobile as their active device type could use LastPass on their mobile device, but they would not be able to use LastPass on their desktop unless they upgrade to LastPass Premium or LastPass Families for unlimited device type access.
+For more information, see Device type overview.
+What support options are available for LastPass Free users?
+All LastPass Free users have Basic support, including access to our wealth of support article and video resources. Additionally, LastPass Free users can access the LastPass Community to create discussions and view posts from other users. For more information, see How has customer support changed for LastPass Free users?.
+Additional FAQs
+Was this article helpful?
+YesNo
+Be the first one to vote!
+This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service
+Loading
