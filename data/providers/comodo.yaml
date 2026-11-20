@@ -1,0 +1,449 @@
+# Researched by hand on 2026-11-20 (M11.15, security batch 2; the queue's comodo-internet-security), read with Edge from
+# Canada and, for its checkout, through a US, UK and German exit; its legal documents (PDFs) and product pages with a
+# plain fetch. Pages, each quoted where it's used:
+# Pricing: its home-user page (comodo.com/antivirus-internet-security: "FULL VERSION + Award Winning Firewall", "1 PC
+# $29.99/Yr", "3 PC $39.99/Yr") and its Internet Security page ("Get 3 Licenses for $39.99") link to its checkout
+# (secure.nurd.com/home/purchase.php, which opens BlueSnap's checkout for its store): "Comodo Internet Security Pro (1
+# device) (1 year)", "$29.99 Initial Payment", "$29.99, charged annually", and for 3 devices "$39.99 Initial Payment.
+# $39.99, charged annually.", in "Currency: USD" whoever reads it (from Canada, and through a US, UK and German exit, each
+# showing its own "Payment Options For" country). So one price for everywhere, in US dollars (GLOBAL USD). Its checkout's
+# currency menu converts the price to some ninety others (see currencies). The Internet Security page's "We slashed our
+# prices from $39.99 to $29.99" names no end date, and the checkout renews at $29.99, so $29.99 is the regular price. No
+# page says its prices include tax.
+# Region checklist for CA and US, 2026-11-20: 1. no country paths; 2. the checkout's currency menu (USD by default, CAD
+# among its conversions); 3. no pricing data on its pages; 4. the checkout from Canada and the US, up to the payment form;
+# 5. no help article on prices or tax; 6. Edge from Canada and through a US exit; 7. no bill offered.
+# Not listed: its business products (Xcitium's and Comodo's platform), and its older consumer products whose pages are
+# gone (Comodo Antivirus for Mac, Mobile Security).
+# Bundles: none. Official resellers: none named.
+# Free use: Comodo Internet Security (its free antivirus and firewall), its free plan below.
+
+id: comodo
+name: Comodo
+website: https://www.comodo.com
+category: security
+spendCategory: software
+billingCurrency: { GLOBAL: USD }
+# No cancel page or help article on its sites: its licence says a paid subscription is ended by email ("Notification of
+# termination must be sent by email to support@comodo.com."), and its checkout that "You can cancel your subscription
+# online at any time." (BlueSnap's account pages, not Comodo's). The licence is the page that says how.
+cancelUrl: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+sources: { pricing: https://www.comodo.com/antivirus-internet-security/ }
+# Owner (M11.2), read 2026-11-20: its licence names the company it's between ("This end user license and subscriber
+# agreement is between you ... and Comodo Security Solutions, Inc."); its privacy policy gives its address in Bloomfield,
+# New Jersey. Private: no page names a listing. (Comodo's former business security arm is Xcitium, a separate company.)
+owner:
+  name: Comodo Security Solutions, Inc.
+  page:
+    name: 'End User License and Subscriber Agreement (Comodo Internet Security 10.X)'
+    url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+  quotes:
+    - 'This end user license and subscriber agreement is between you (“you” or “Subscriber”), as either an individual or as a business entity and Comodo Security Solutions, Inc.'
+  country:
+    code: US
+    page:
+      name: 'Privacy Policy'
+      url: https://www.comodo.com/repository/privacy.pdf
+    quotes:
+      - 'Comodo Security Solutions, Inc. 200 Broadacres Drive, Second Floor Bloomfield, New Jersey, U.S.A.'
+    lastVerified: 2026-11-20
+  lastVerified: 2026-11-20
+# Ways to pay (M11.5), read 2026-11-20 at its checkout from Canada, up to the payment form: "Payment Options For Canada",
+# "Credit & Debit Cards" and "PayPal". Its card menu lists Visa, Mastercard, American Express, Discover, Diners Club, JCB
+# and China UnionPay, but the checkout is on secure.nurd.com and BlueSnap's site, not Comodo's own, so no acceptedNetworks.
+paymentMethods:
+  - methods: [card, paypal]
+    page: 'Checkout'
+    url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+    quotes: ['Credit & Debit Cards', 'PayPal']
+# Currencies beyond its prices (M11.5): its checkout's currency menu charges a converted amount in the buyer's pick, the
+# catalog's regions' among them (and some ninety others).
+currencies:
+  - codes: [CAD, EUR, GBP, AUD, NZD]
+    methods: [card, paypal]
+    page: 'Checkout'
+    url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+    quotes:
+      - 'Canada Dollars - CAD'
+      - 'Euro - EUR'
+      - 'United Kingdom Pounds - GBP'
+      - 'Australia Dollars - AUD'
+      - 'New Zealand Dollars - NZD'
+# Renewal day (M11.5): its checkout charges "annually" and its licence renews "by paying an additional license fee",
+# naming no day.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+    - https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+  lastVerified: 2026-11-20
+# Lab results (M11.2): AV-TEST's newest test of Comodo is of August 2019 (Internet Security Premium 12, its Comodo page),
+# and it isn't in AV-TEST's Windows tests of 2025 and 2026, so no rating is listed (its Internet Security page still cites
+# AV-TEST's "Top Product" of February 2018). AV-Comparatives' and SE Labs' aren't listed (data/raters.yaml).
+
+# General features, read 2026-11-20. Platforms: "Compatible with Windows 10, 8, 7" (its Internet Security page); no other
+# platform's app is sold now. Support: its Internet Security page's "Product info & Sales & Support: 888-351-8017", "Submit
+# a Ticket" and its forum ("Our Forum is populated with fellow Comodo users and developers alike"); CIS Pro adds GeekBuddy's
+# chat, "available 24/7". App languages and sign-in: no page read lists them. No parental controls beyond its website
+# filtering's "custom block lists for different members of your family" (Pro), no pause.
+features:
+  platforms: [windows]
+  support.channels: [email, phone, community]
+
+# Perks (M11.6): what CIS Pro adds that no feature describes, in its page's words.
+perks:
+  - id: geekbuddy
+    name: GeekBuddy
+  - id: virus-free-guarantee
+    name: Virus-Free Guarantee
+
+# Features, read 2026-11-20: its home-user page's "Free vs Complete Antivirus" (the free version: "Defense+ Technology",
+# "Auto Sandbox Technology™", "Spyware Scanning", "Cloud based Antivirus", with "Award Winning Firewall", "Secure
+# Shopping" and "Web Filtering" crossed out; the full version all seven), and its Internet Security page: "Firewall and
+# Antivirus combine to stop viruses and malware before they enter the PC", "Cloud-based behavior analysis system detects
+# zero-day malware INSTANTLY", "ONE-CLICK VIRUS SCANNING", "GAME MODE", "Secure Shopping" ("running your favorite browser
+# inside a security-hardened virtual environment"), "MALICIOUS WEBSITE FILTERING" ("automatically blocking dangerous
+# websites"). Its free download installs the firewall too ("Can I install only the Firewall or only the Antivirus? Yes —
+# you are given the option to install exactly the components you want during setup.", and its Firewall section's "Download
+# Now"), so the free plan has it. No page read names scheduled or boot-time scans for these plans (its comparison table's
+# "Boot Time Scans" column has no legend), ransomware recovery, a VPN, a password manager or speed-up tools.
+plans:
+  # Comodo Internet Security, the free version: antivirus with the sandbox and HIPS (Defense+), and the firewall.
+  - id: comodo.free
+    name: 'Internet Security (free)'
+    link: https://www.comodo.com/home/internet-security/free-internet-security.php
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand]
+      antivirus.network: [firewall]
+      antivirus.activity-modes: true
+    notes: 'Free antivirus and firewall for Windows, with automatic sandboxing of unknown programs. Website filtering, Secure Shopping and support need CIS Pro.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://www.comodo.com/antivirus-internet-security/
+  # Comodo Internet Security Pro, 1 device ("1 PC $29.99/Yr").
+  - id: comodo.internet-security-pro
+    name: 'Internet Security Pro (1 device)'
+    link: https://www.comodo.com/antivirus-internet-security/
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand]
+      antivirus.network: [firewall]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+      antivirus.devices: 1
+      support.channels: [email, chat, phone, community, 24-7]
+    perks: [geekbuddy, virus-free-guarantee]
+    notes: 'The free version plus website filtering, Secure Shopping (a sealed-off browser for banking) and GeekBuddy support, on 1 Windows PC. Its virus-free guarantee (repairs up to $500) is for US residents only.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 29.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+  # Comodo Internet Security Pro, 3 devices ("3 PC $39.99/Yr").
+  - id: comodo.internet-security-pro-3-devices
+    name: 'Internet Security Pro (3 devices)'
+    link: https://www.comodo.com/antivirus-internet-security/
+    features:
+      antivirus.included: true
+      antivirus.real-time: true
+      antivirus.behavioural: true
+      antivirus.scans: [on-demand]
+      antivirus.network: [firewall]
+      antivirus.web-protection: true
+      antivirus.scam-protection: [web]
+      antivirus.secure-browser: true
+      antivirus.activity-modes: true
+      antivirus.devices: 3
+      support.channels: [email, chat, phone, community, 24-7]
+    perks: [geekbuddy, virus-free-guarantee]
+    notes: 'Internet Security Pro on 3 Windows PCs.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 39.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-20
+        sourceUrl: https://secure.nurd.com/home/purchase.php?pid=110&track=17179&af=17179
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-20 with a plain fetch: its End User License and Subscriber Agreement
+# for Comodo Internet Security 10.X (dated 2017-11-20, the newest its agreements page lists for Internet Security; the
+# installer of today's version may show a newer one, not read), which includes its privacy policy ("Comodo shall follow
+# the privacy policy posted on its website"), its Privacy Policy (effective May 10, 2022), its Website Terms & Conditions
+# (the site only), its Cookie Policy (2019) and its checkout. Read but holding no worse clause: the website terms and the
+# cookie policy. Not read: its "CSS Information Collection" page (the licence's link to it no longer resolves to a page on
+# comodo.com), BlueSnap's own terms (its checkout's processor), the GeekBuddy and Secure Shopping licences the 10.X
+# licence attaches beyond what's quoted.
+policies:
+  links:
+    - name: 'End User License and Subscriber Agreement (CIS 10.X)'
+      url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+    - name: 'Privacy Policy'
+      url: https://www.comodo.com/repository/privacy.pdf
+    - name: 'Checkout'
+      url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+    - name: 'Home products'
+      url: https://www.comodo.com/antivirus-internet-security/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send it details of your computer and how its software is used, and unknown files on your computer, to study and improve its products. Some you can switch off in its settings; the rest only by emailing it.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Data and information that is collected from users for statistics and analysis during Comodo product installation, uninstallation and product update(s) in order for Comodo to know specific Comodo product usage on various operating systems, and to assist in further product planning and support include:'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'The automatic submission function may be deactivated by de-selecting this option in the Advanced Settings.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'You may opt-out of having information used for purposes not directly related to the Products by emailing a clear notice to optout@comodo.com.'
+      action:
+        name: 'Opting out (privacy policy)'
+        url: https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares information with partners, advertisers and ad networks, and its licence lets it pass what its apps collect to its affiliates. To stop it, you must email it.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'Comodo will share aggregated demographic and other information with our partners and affiliates (such as our sponsors, partners, advertisers, advertising networks, advertising servers and analytics companies or other third parties in connection with marketing, promotional, and other offers, as well as product information).'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'FURTHER, YOU ARE GIVING EXPRESS PERMISSION FOR COMODO TO PROVIDE THE DATA AND INFORMATION TO THIRD PARTY AFFILIATES.'
+      action:
+        name: 'Opting out (privacy policy)'
+        url: https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'It uses what you do to target ads to you on its site, by email and on other sites. You can opt out through the ad industry’s tools, one browser or device at a time.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'To provide you with customized Services content, targeted offers, and advertising on the Services, via email, or across other websites, mobile applications, social media or online services;'
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'On your mobile device, you may also adjust your privacy and advertising settings to control whether you want to receive more relevant advertising.'
+      action:
+        name: 'Interest-based advertising choices (privacy policy)'
+        url: https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say whether what you send it trains AI models.'
+      pages:
+        - https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+        - https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.data-retention
+      tier: bad
+      reason: 'It keeps your data as long as it needs it, with no set time, and keeps what you delete for backups and analytics, among other reasons.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'We will keep your personal data for as long as we need it for the purpose it is being processed for.'
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'we may retain all information you submit for backups, archiving, prevention of fraud and abuse, analytics, satisfaction of legal obligations, or where we otherwise reasonably believe that we have a legitimate reason to do so.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-deletion
+      tier: poor
+      reason: 'You can delete your account details yourself in your account settings, but it may keep what you delete for backups, analytics and other reasons.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'You may update, correct, or delete your account information and preferences at any time by accessing your Account settings page on the Service.'
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'we may retain all information you submit for backups, archiving, prevention of fraud and abuse, analytics, satisfaction of legal obligations, or where we otherwise reasonably believe that we have a legitimate reason to do so.'
+      action:
+        name: 'Your rights (privacy policy)'
+        url: https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      status: not-stated
+      reason: 'Outside the European Economic Area its privacy policy doesn’t offer a copy of your data.'
+      pages: [https://www.comodo.com/repository/privacy.pdf]
+      lastVerified: 2026-11-20
+    - topic: privacy.data-portability
+      regions: [IE, DE, FR, NL, ES, IT]
+      tier: neutral
+      reason: 'In the European Economic Area you can ask it for your data, or for it to be sent elsewhere, by contacting it.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'If you live in the European Economic Area (EEA), and wish to access, amend, delete, or transfer any personal information we hold about you, you may contact us as set forth in the “Contact Us” section.'
+      action:
+        name: 'Contact us (privacy policy)'
+        url: https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: privacy.government-requests
+      tier: poor
+      reason: 'It hands information over for a subpoena or other lawful process, but recordings of its remote support sessions may also be released for a government request or to protect its business reputation.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo will disclose information where required by a subpoena, interception order or other lawful process.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may release recorded information for any of 1) satisfying a law, regulation or government request, 2) operating the remediation services properly, or 3) protecting Comodo’s business reputation, software, or customers.'
+      lastVerified: 2026-11-20
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data can be stored in many countries, including the US. Data leaving the European Economic Area goes under the EU’s model contracts.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'In the course of providing Services or otherwise, your data will be transferred to numerous countries including the United States.'
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'In particular, where we transfer your information outside the EEA, we rely on standard EU Model Clauses approved by the European Commission'
+      lastVerified: 2026-11-20
+    - topic: privacy.sign-up-data
+      tier: poor
+      reason: 'Its checkout asks for your name, email, full address and a phone number to buy.'
+      sources:
+        - url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+          quote: 'Email Address*'
+        - url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+          quote: 'Phone*'
+      lastVerified: 2026-11-20
+    - topic: billing.cancellation
+      tier: poor
+      reason: 'Its licence says you end a paid subscription by emailing it, which takes up to a day to process. Its checkout says you can cancel online.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Notification of termination must be sent by email to support@comodo.com. Your termination will be effective upon Comodo’s receipt and processing of the email. Processing may take up to 24 hours.'
+        - url: https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+          quote: 'You can cancel your subscription online at any time.'
+      lastVerified: 2026-11-20
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'You may get a full refund if you cancel within 30 days of paying and ask by email. After that it owes you nothing for unused time.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'To request a refund of an eligible product or service, you must email refunds@comodo.com within 30 days of the purchase date.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo is not obligated to provide a refund for any unused Products.'
+      lastVerified: 2026-11-20
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices when it likes by posting them on its website, and the new price applies when you renew unless you cancel. It doesn’t promise to tell you.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may modify fees for paid products in its sole discretion. Your failure to terminate this agreement after a fee change is posted to Comodo’s website constitutes your acceptance of amended prices, which will apply upon your renewal of the Products.'
+      lastVerified: 2026-11-20
+    - topic: billing.free-trials
+      tier: poor
+      reason: 'A trial usually needs your card, and when it ends it may charge you without telling you first. You must end it before then to avoid paying.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Generally, credit card information is required to access a free trial.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'At the end of the trial period, Comodo may bill the credit card for the Products without further notice.'
+      lastVerified: 2026-11-20
+    - topic: billing.renewal-notice
+      tier: poor
+      reason: 'It renews by charging your card each year, and no reminder before renewing is promised.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may automatically charge the credit card provided for renewing subscriptions to the Products.'
+      lastVerified: 2026-11-20
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its licence and checkout name no fees beyond the price.'
+      pages:
+        - https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+        - https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+      lastVerified: 2026-11-20
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its licence and checkout don’t say what happens when you move between 1 and 3 devices.'
+      pages:
+        - https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+        - https://secure.nurd.com/home/purchase.php?pid=109&track=17178&af=17178
+      lastVerified: 2026-11-20
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to a private referee (an arbitrator) in New Jersey, not a court, and you can’t join a group lawsuit. There’s no way to opt out.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'You agree that any dispute, claim or controversy arising out of this agreement shall be determined by binding arbitration.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Neither you nor Comodo will seek to have any dispute heard as a class action, private attorney general action, or in any other proceeding in which either party acts or proposes to act in a representative capacity.'
+      lastVerified: 2026-11-20
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It changes its licence by posting a new one on its website, and using its software after that means you accept it. You’re expected to check its website yourself.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo will give you notice of these amendments by posting the modified agreement to its website. You must periodically visit Comodo’s website to be aware of any changes. Continued use of a Product after an amendment constitutes your acceptance of the change.'
+      lastVerified: 2026-11-20
+    - topic: legal.account-closure
+      tier: poor
+      reason: 'It can end your licence at any time, with a notice on its website or by email, and no refunds are given when it ends.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may terminate this agreement at any time by posting notice of the termination on its website or sending an email to the address provided during your registration for the Products.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'No refunds shall be given for any reason.'
+      lastVerified: 2026-11-20
+    - topic: legal.service-changes
+      tier: poor
+      reason: 'It can change or stop its products, or limit how you use them, when it decides, and its licence gives no refund when it ends.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo may amend or discontinue certain Products offered under this agreement in its sole discretion, including modifying renewal license fees, availability, equipment and software requirements, and limiting or restricting use of Products.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'No refunds shall be given for any reason.'
+      lastVerified: 2026-11-20
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its licence and privacy policy don’t say it closes accounts you haven’t used.'
+      pages:
+        - https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+        - https://www.comodo.com/repository/privacy.pdf
+      lastVerified: 2026-11-20
+    - topic: legal.licence
+      tier: poor
+      reason: 'Its licence can be taken back, and it forbids taking the software apart, with no exception for what the law allows. Its free version may be used for business too.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo grants you a limited, non-exclusive, non-transferable, and revocable license'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'You shall not resell, lease, sell, modify, reverse engineer, decompile, or create derivative works of the Software.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Comodo Internet Security (CIS) may be used royalty-free for both commercial and personal use.'
+      lastVerified: 2026-11-20
+    - topic: security.practices
+      tier: poor
+      reason: 'Its policies describe its security only in general terms, with no outside audit or certification named. Its website gives an email address for security reports.'
+      sources:
+        - url: https://www.comodo.com/repository/privacy.pdf
+          quote: 'Comodo protects information both online and off-line.'
+        - url: https://www.comodo.com/antivirus-internet-security/
+          quote: 'security@comodo.com'
+      lastVerified: 2026-11-20
+    - topic: service.account-sharing
+      status: not-stated
+      reason: 'Its licence counts computers, not people, and doesn’t say who may use them.'
+      pages: [https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf]
+      lastVerified: 2026-11-20
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its licence names no limit beyond the number of computers you pay for.'
+      pages: [https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf]
+      lastVerified: 2026-11-20
+    - topic: service.software-control
+      tier: poor
+      reason: 'Some of its software updates itself without telling you, and installing it may install other Comodo products, which may stay switched off until you pay.'
+      sources:
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Some Products update automatically without notice.'
+        - url: https://www.comodo.com/repository/eula/CIS-10.X-EULA-11-20-2017.pdf
+          quote: 'Installation of CIS may include installation of additional Products. Use of these Products may be disabled until you pay for the Products.'
+      lastVerified: 2026-11-20
