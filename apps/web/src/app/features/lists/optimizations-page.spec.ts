@@ -114,9 +114,12 @@ describe('OptimizationsPage', () => {
       'Downgrade Netflix Standard → Standard with ads | Save $138.60 over the next 12 months',
     ]);
     expect(text(page().querySelector('.save-up-to'))).toBe('Save up to $138.60 a year');
-    expect(text(page().querySelector('ss-suggestion-card[data-severity="red"] .features'))).toBe(
-      'You lose: Ad free (Not ranked)',
+    // Ad free isn't ranked, so it's folded under the card's summary (M10.34).
+    const red = page().querySelector('ss-suggestion-card[data-severity="red"]');
+    expect(text(red?.querySelector('.unranked summary'))).toBe(
+      "Also loses 1 feature you haven't ranked",
     );
+    expect(text(red?.querySelector('.unranked ul'))).toBe('Ad free');
     expect(button('How suggestions are chosen')?.getAttribute('aria-describedby')).toBeTruthy();
   });
 
@@ -147,7 +150,6 @@ describe('OptimizationsPage', () => {
 
     const card = page().querySelector('ss-suggestion-card[data-severity="red"]');
     expect(Array.from(card?.querySelectorAll('.features') ?? []).map(text)).toEqual([
-      'You lose: Ad free (Not ranked)',
       'Rests on third-party claims: Video quality: 1080p (Full HD), per The Verge',
     ]);
     expect(card?.querySelector('.features a')?.getAttribute('href')).toBe(claim.url);
