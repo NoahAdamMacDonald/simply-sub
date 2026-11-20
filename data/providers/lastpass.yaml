@@ -1,0 +1,850 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 1). Pages, each quoted where it's used:
+# Pricing: lastpass.com/pricing (Personal tab) prices by where the visitor is. Edge from Canada gets the page but its
+# pricing script answers 403, so the prices stay placeholders ("{LPPremium}"); a plain fetch gets the same placeholders.
+# Read 2026-11-19 with Mullvad Browser from Canada ("C$4.25", "C$5.50", "C$10.00" "/month" "billed annually*"), and
+# with Mullvad Browser through US, UK, Irish, Australian, New Zealand, German, French, Dutch, Spanish and Italian exits
+# (each exit's country confirmed; Edge through US exits got "We couldn’t connect you to LastPass"): the US "$3.00",
+# "$4.00", "$7.00"; the UK "£2.60", "£3.40", "£5.50"; the euro countries "€2.90", "€3.90", "€6.50"; Australia "AU$4.50",
+# "AU$6.00", "AU$10.50"; New Zealand the US's bare "$3.00", "$4.00", "$7.00". Each is billed once a year ("billed
+# annually*", and its terms: "billed on a subscription basis, in advance, on a recurring cycle (typically yearly)"), so
+# a plan's yearly price is twelve times the monthly rate shown (Runway's precedent): Premium CA$51, US$36, £31.20,
+# €34.80, A$54; Families CA$66, US$48, £40.80, €46.80, A$72; Plus CA$120, US$84, £66, €78, A$126. The page's own script
+# (its countryCurrency and product-catalog data) gives the same yearly amounts and names each country's currency
+# ("CA":["CAD","USD"], "AU":["AUD","USD"], "GB":["GBP","USD"], every euro country EUR, every other country "*":["USD"]),
+# so New Zealand pays in US dollars. No monthly period: the plans are sold "billed annually" only. Tax is added at
+# checkout ("*Applicable taxes will be applied at checkout."), so no price includes tax. The price is the regular one:
+# the page names no first-term offer, and its footnote "*Promotional pricing is subject to separate promotion terms"
+# shows none (notes.md).
+# Region checklist for CA and US, 2026-11-19: 1. language paths only (/fr/pricing, /de/pricing...: the same
+# placeholders); 2. no country or currency picker; 3. the page's script names each country's currency; 4. checkout not
+# opened; 5. no prices or tax article in its help centre; 6. Edge (placeholders), a plain fetch (placeholders), Mullvad
+# Browser (C$ prices); US prices through a US exit; 7. no bill offered.
+# Plans: Free, Premium (the pricing menu calls it "Personal"), Families and Plus (new: Premium with LastPass VPN, on
+# Windows only). Teams, Business, Business Max and MSP are business plans, left out.
+# Bundles: none; Plus is one plan, not a bundle of two catalog plans. Official resellers: lastpass.com/partner/resellers
+# is its partner programme for selling to businesses; no page names a shop that sells personal plans. App stores
+# (Apple, Google Play) bill it: partners, not listed.
+# Free use: LastPass Free, a plan of its own ("Limited to 1 device type"), with a 30-day Premium trial.
+# Help pages: its Support Center (support.lastpass.com) renders only with scripts; its community knowledge base
+# (community.lastpass.com/kb, LastPass's own copies of the same articles, read through its API) is quoted instead.
+
+id: lastpass
+name: LastPass
+aliases: [last pass]
+website: https://www.lastpass.com
+category: passwords
+spendCategory: software
+# Charged in the page's currency for each country (its script's countryCurrency data; New Zealand and the rest of the
+# world in US dollars). The data also offers USD in every country ("CA":["CAD","USD"]): whether the checkout lets a
+# buyer pick it wasn't read (checkout not opened), so no second currency is listed.
+billingCurrency:
+  {
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    IE: EUR,
+    AU: AUD,
+    NZ: USD,
+    DE: EUR,
+    FR: EUR,
+    NL: EUR,
+    ES: EUR,
+    IT: EUR,
+    GLOBAL: USD,
+  }
+# Its terms: "You can cancel automatic renewal at any time by selecting “Cancel Auto-Renewal” in the My Account section
+# of your LastPass vault’s Account Settings"; My Account is lastpass.com/my.php (its "Update payment method" article:
+# "You can navigate directly to the My Account page at https://lastpass.com/my.php").
+cancelUrl: https://lastpass.com/my.php
+sources: { pricing: https://www.lastpass.com/pricing }
+# Ways to pay (M11.5), read 2026-11-19: cards ("We accept all major credit and debit/bank cards.", the pricing page's
+# FAQ), which names no network, so no acceptedNetworks (the card shows "Card (networks not verified)"); and the app
+# stores (its privacy notice). No page read names PayPal, wallets, gift cards or crypto.
+paymentMethods:
+  - methods: [card]
+    page: 'Pricing'
+    url: https://www.lastpass.com/pricing
+    quotes:
+      - 'We accept all major credit and debit/bank cards.'
+  - methods: [app-store]
+    page: 'Global Privacy Notice'
+    url: https://www.lastpass.com/legal-center/privacy-notice
+    quotes:
+      - 'LastPass does not have access to your payment method details or otherwise receive or store any billing data where payment is made for a LastPass subscription through the Google Play or Apple App Store.'
+# Renewal day (M11.5), read 2026-11-19: its terms say a subscription renews "for a period equal to your expiring term",
+# and its payment article that renewal must be done "no later than 30 days before the end of your billing period";
+# neither names the day it charges.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.lastpass.com/legal-center/terms-of-service/personal
+    - https://community.lastpass.com/kb/articles/43-update-payment-method%EF%BB%BF
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its Global Privacy Notice names LastPass US LP and its country. Its about page tells
+# the split: "LogMeIn (now GoTo) acquires LastPass for $110M" (2015) and "LastPass formally separates from GoTo, backed
+# by new leadership and renewed focus on modern access management." (2024), and "Founded in 2008, LastPass is
+# headquartered in Boston." No page read names its owners or a listing: private, no stock. Its contracting entities
+# (lastpass.com/legal-center/contracting-entities' table, updated November 1, 2026) are LastPass US LP for the US,
+# LastPass Technologies Canada ULC for Canada, LastPass UK Ltd, LastPass Australia Pty. Ltd. and LastPass Ireland
+# Limited for the rest of the world (the provider's notes).
+notes: Its terms are with LastPass US LP in the US, LastPass Technologies Canada ULC in Canada, and LastPass's UK, Australian or Irish company elsewhere.
+owner:
+  name: LastPass US LP
+  page:
+    name: Global Privacy Notice
+    url: https://www.lastpass.com/legal-center/privacy-notice
+  quotes:
+    - 'LastPass US LP is based in the United States of America, with affiliates around the world.'
+  country:
+    code: US
+  lastVerified: 2026-11-19
+
+# General features, read 2026-11-19. Platforms: its downloads page (lastpass.com/misc_download2.php: "LastPass for
+# Desktop", the Windows and macOS installers, a Linux section of browser extensions, "LastPass for Android", "LastPass
+# for iPhone/iPad", extensions for Chrome, Edge, Firefox, Opera and Safari) and its web vault ("Go to
+# https://lastpass.com/login/ and log in", its articles). Linux is browser extensions only. Sign-in: a master password,
+# then "SMS, one-time passwords (OTP), and push notifications with any major authenticator or the free LastPass
+# Authenticator app" (the pricing comparison), hardware keys "like Yubikey" (not on Free: "a Free user’s MFA options are
+# limited to popular MFA apps"), and trusted devices ("You can mark a device as trusted to skip multifactor
+# authentication for 30 days", Manage trusted devices). Support: "Personal support managed by the LastPass customer care
+# team" (email, the Premium vs Free page: "email support that’s managed by the LastPass customer care team") and its
+# community forum ("the LastPass Community, which is monitored by LastPass specialists"); Free has self-service and the
+# community only. App languages: lastpass.com's language menu (English, Español, Deutsch, Français, Italiano,
+# Nederlands, Português; Dutch has no registry value). Open source: none ("Modify, create derivative works of, reverse
+# engineer, decompile, or try to access the source code of the Services." is forbidden, its terms), so proprietary.
+# No pause (its terms offer cancelling auto-renewal only); no parental controls (Families' manager dashboard controls
+# membership and sharing: "controlling membership, granting manager rights, overseeing access, and organizing shared
+# credentials").
+features:
+  platforms: [windows, macos, linux, android, ios, web, browser-extension]
+  account.sign-in: [password, totp, sms, push-approval, security-key, trusted-device]
+  support.channels: [email, community]
+  software.open-source: proprietary
+  languages.interface: [en, fr, es, de, it, pt]
+
+# Password manager features, read 2026-11-19 on the pricing page's personal comparison (Premium, Families, Plus), its
+# Premium vs Free page (Free and Premium) and its knowledge base:
+# - Items: "Secure password vault: Personal encrypted space for all of your accounts, passwords, passkeys, notes, files,
+#   payment cards, and more", "Store an unlimited amount of passwords and notes, like Wi-Fi logins, banking cards,
+#   documents", and its export article's "passwords, notes, form fills, Wi-Fi passwords" (form fills: identity).
+#   Passkeys on every plan ("Passkeys ... Create, store, and manage passkeys alongside passwords in your vault",
+#   Included on Premium, Families and Plus; its passkey FAQs make no plan exception). 2FA codes inside the vault are
+#   business only: "Restriction: This feature is only available for LastPass Teams and LastPass Business accounts."
+#   (Create TOTPs for your password items), so no totp item type.
+# - Health: "Get notified of weak, reused, and old passwords" (security dashboard, every plan); breaches are dark web
+#   monitoring ("Monitor your accounts and receive immediate alerts if your information is identified in a breach
+#   database", every plan).
+# - Sharing: Free "One-to-one sharing", Premium and Plus "One-to-many sharing", Families also "Shared folders"
+#   ("Not included" on Premium and Plus).
+# - Import: "Import passwords and notes from any password manager into LastPass by exporting your data as a generic CSV
+#   file." (CSV; no format of another manager's own named). "For security reasons, passkeys cannot be imported".
+# - Export: "You can export your LastPass vault data as a CSV file and save it." (attachments and in-vault TOTPs not
+#   exported).
+# - Emergency access: Premium, Families and Plus ("Grant another LastPass user one-time access to your vault in the event
+#   of an emergency or crisis."); Free "Not included".
+# - Offline: "Offline mode: Access your password vault when you’re not connected to the Internet." (Premium, Families,
+#   Plus) and, for every user, its Technical and Organizational Measures: "LastPass offers offline access, which means
+#   that a user without an internet connection can still access a version of its encrypted vault".
+# - End-to-end: "LastPass zero-knowledge security model keeps your data private even from us." and "vault data is
+#   encrypted locally at the device level before syncing to LastPass servers in an already encrypted state" (its
+#   privacy notice): the vault (passwords).
+# - Authenticator: the LastPass Authenticator app, a separate free app on every plan ("LastPass Authenticator mobile
+#   app ... Included" on Free and Premium), "a mobile app that can be used for multifactor authentication for any online
+#   account you create (on any website, not just for LastPass)". It adds accounts "by scanning a QR code or entering the
+#   details manually" (otpauth). No page read describes exporting its codes: it offers "secure cloud backup" to your
+#   LastPass account, not a file, so authenticator.export is empty (notes.md).
+# - File storage for notes' attachments: Free "50 MB", the paid plans "1 GB" (in notes).
+plans:
+  - id: lastpass.free
+    name: Free
+    link: https://www.lastpass.com/pricing/lastpass-premium-vs-free
+    features:
+      account.sign-in: [password, totp, sms, push-approval, trusted-device]
+      support.channels: [community]
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, identity, secure-note, wifi]
+      password-manager.health: [weak, reused, old]
+      password-manager.sharing: [share-to-user]
+      password-manager.import: [csv]
+      password-manager.export: [csv]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    notes: 'On computers or on mobile devices, not both: you pick one device type and can switch it 3 times. Share an item with one person at a time, and 50 MB for files.'
+    prices:
+      - region: GLOBAL
+        currency: USD
+        amount: 0
+        interval: month
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing/lastpass-premium-vs-free
+  - id: lastpass.premium
+    name: Premium
+    link: https://www.lastpass.com/products/premium-password-manager
+    features:
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, identity, secure-note, wifi]
+      password-manager.health: [weak, reused, old]
+      password-manager.sharing: [share-to-user]
+      password-manager.import: [csv]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    notes: 'On all your devices, with 1 GB for files, emergency access and personal support. Billed once a year.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 51
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: US
+        currency: USD
+        amount: 36
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 31.20
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 34.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: AU
+        currency: AUD
+        amount: 54
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 36
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 34.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 34.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 34.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 34.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 34.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+  - id: lastpass.families
+    name: Families
+    link: https://www.lastpass.com/products/family-password-manager
+    features:
+      account.users: 6
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, identity, secure-note, wifi]
+      password-manager.health: [weak, reused, old]
+      password-manager.sharing: [share-to-user, share-vault]
+      password-manager.import: [csv]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    notes: 'Six Premium accounts, each with its own vault, plus shared folders and a family manager dashboard. Billed once a year.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 66
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: US
+        currency: USD
+        amount: 48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 40.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 46.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: AU
+        currency: AUD
+        amount: 72
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 48
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 46.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 46.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 46.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 46.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 46.80
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+  # Plus: Premium and LastPass VPN, "Up to 10 devices and unlimited usage for VPN", "Windows only" ("LastPass VPN is
+  # available on Windows only. Support for macOS, iOS, and Android is coming soon."). Countries: its plan page says
+  # "100+ locations across 85+ countries" and its VPN page "access to 125+ countries": the plan's own page is used (both
+  # are the same "More than 50" tier). No logs: "Neither LastPass nor the Infrastructure Provider maintains logs of
+  # websites visited, DNS requests, application usage, traffic content, or communications transmitted through the VPN
+  # Service" (its terms), with no audit of it named. No page read names its protocols, a kill switch, split tunnelling,
+  # multi-hop, a blocker, P2P, port forwarding, Tor, RAM-only servers or connecting your own devices; its
+  # infrastructure is "operated by a third-party provider" it doesn't name. Not anonymous: a LastPass account ("Your
+  # email is needed to validate, create, and use LastPass Services.").
+  - id: lastpass.plus
+    name: Plus
+    link: https://www.lastpass.com/products/plus
+    categories: [passwords, vpn]
+    features:
+      password-manager: true
+      password-manager.item-types: [login, passkey, credit-card, identity, secure-note, wifi]
+      password-manager.health: [weak, reused, old]
+      password-manager.sharing: [share-to-user]
+      password-manager.import: [csv]
+      password-manager.export: [csv]
+      password-manager.emergency-access: true
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+      vpn.included: true
+      vpn.devices: 10
+      vpn.unlimited-traffic: true
+      vpn.data-allowance: unlimited
+      vpn.server-countries: 85
+      vpn.no-logs-policy: true
+    notes: 'Premium plus LastPass VPN on up to 10 Windows computers (other systems are coming), with unlimited data. Billed once a year.'
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 120
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: US
+        currency: USD
+        amount: 84
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: GB
+        currency: GBP
+        amount: 66
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: IE
+        currency: EUR
+        amount: 78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: AU
+        currency: AUD
+        amount: 126
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: NZ
+        currency: USD
+        amount: 84
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: DE
+        currency: EUR
+        amount: 78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: FR
+        currency: EUR
+        amount: 78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: NL
+        currency: EUR
+        amount: 78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: ES
+        currency: EUR
+        amount: 78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+      - region: IT
+        currency: EUR
+        amount: 78
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://www.lastpass.com/pricing
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch: its Terms of Service for Personal Use (Last
+# Updated: October 2026, the terms for Free, Premium and Families: "Where you are using our Free, Premium, or Families
+# versions of LastPass, the Terms of Service for Personal Use apply"), which are its apps' licence too (section 1) and
+# include its contracting entities table (a PDF, updated November 1, 2026: governing law and courts by country); its
+# Global Privacy Notice (October 6, 2026) with its LastPass VPN Supplemental Privacy Notice (a PDF, October 6, 2026),
+# Your Privacy Choices, its Cookie Notice (a PDF: cookie categories only, no topic), its Law Enforcement Request
+# Guidelines, its Technical and Organizational Measures (a PDF, 6 October 2026), its trust centre, responsible
+# disclosure and security pages; and its knowledge base's export, delete-account and Free articles. Not read: the sign-up
+# form (lastpass.com/create-account, not opened: the brief's no-sign-up rule; its terms say "By using the Services, you
+# confirm that you are of legal age and agree to these Terms"), its Community Terms (the forum's, no topic for the
+# password manager), the API, partner and business terms (not for personal plans). Its 2022 breach is not graded by
+# itself: security.practices is graded from its own pages (notes.md).
+policies:
+  links:
+    - name: 'Terms of Service for Personal Use'
+      url: https://www.lastpass.com/legal-center/terms-of-service/personal
+    - name: 'Global Privacy Notice'
+      url: https://www.lastpass.com/legal-center/privacy-notice
+    - name: 'LastPass VPN Supplemental Privacy Notice'
+      url: https://www.lastpass.com/-/media/0b29716c51274eeda9b857393006def0.pdf
+    - name: 'Your Privacy Choices'
+      url: https://www.lastpass.com/legal-center/your-privacy-choices
+    - name: 'Law Enforcement Request Guidelines'
+      url: https://www.lastpass.com/legal-center/law-enforcement-request-guidelines
+    - name: 'Technical and Organizational Measures'
+      url: https://www.lastpass.com/-/media/175854c49fcb489baeaa87e78579e28f.pdf
+    - name: 'Responsible disclosure'
+      url: https://www.lastpass.com/trust-center/security/responsible-disclosure
+    - name: 'Security'
+      url: https://www.lastpass.com/security
+    - name: 'Pricing'
+      url: https://www.lastpass.com/pricing
+    - name: 'Export vault data as a CSV file'
+      url: https://community.lastpass.com/kb/articles/40-export-vault-data-from-lastpass-as-a-generic-csv-file%EF%BB%BF
+    - name: 'Delete your LastPass account'
+      url: https://community.lastpass.com/kb/articles/54-delete-your-lastpass-account%EF%BB%BF
+    - name: 'Changes to LastPass Free FAQs'
+      url: https://community.lastpass.com/kb/articles/22-changes-to-lastpass-free-faqs%EF%BB%BF
+    - name: 'Update payment method'
+      url: https://community.lastpass.com/kb/articles/43-update-payment-method%EF%BB%BF
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'It collects how you use its apps and sites by default, to improve them and to promote its services. To stop it, you have to ask through its privacy portal.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'We utilize this data to provide, operate, support the use of, improve our Services, and personalize and promote Services.'
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'Object to the processing of your personal data;'
+      action:
+        name: 'Make a privacy request'
+        url: https://datasubjectrequest.lastpass.com/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It shares data with social media and ad networks for its ads, which some US laws count as selling it. To stop that, you have to send a request.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'With third-party social media and advertising networks so that LastPass can advertise on those platforms and measure advertisement effectiveness;'
+        - url: https://www.lastpass.com/legal-center/your-privacy-choices
+          quote: 'we may also share your personal data with third parties for the purposes of cross-contextual advertising.'
+        - url: https://www.lastpass.com/legal-center/your-privacy-choices
+          quote: 'If you would like to opt out of the sale or sharing of your data, please submit a request to opt-out using our IRM Portal'
+      action:
+        name: 'Opt out of sharing for ads'
+        url: https://www.lastpass.com/legal-center/your-privacy-choices
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: poor
+      reason: 'Its websites track what you like to show you its ads. You can opt out of the ad cookies, but that choice is only for the browser you set it in.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'We process personal data to understand how you use our websites and what you like and dislike to display personalized advertisements and content based upon your interests'
+        - url: https://www.lastpass.com/legal-center/your-privacy-choices
+          quote: 'If you wish to opt-out of having the information these technologies collect used for the purpose of serving you targeted ads, you may opt-out'
+      action:
+        name: 'Your privacy choices'
+        url: https://www.lastpass.com/legal-center/your-privacy-choices
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      tier: great
+      reason: 'It can’t read what you keep in your vault, so it doesn’t use it to train AI.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'Your Content is not accessible to us or to our third-party AI providers. We therefore do not use your Content to train AI models.'
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your vault is locked on your own device with a password only you know, so no one at LastPass can read it.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'no one at LastPass has access to the encrypted data stored in your vault, except you.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We do not have access to your master password.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: neutral
+      reason: 'It keeps your data as long as it needs it. It deletes a free account left unused for 2 years, and an account it’s asked to delete within 30 days.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'We keep your personal data no longer than is needed for the business purposes for which it was collected (as outlined in Section 3) or as necessary to comply with our own legal and regulatory obligations.'
+        - url: https://www.lastpass.com/-/media/175854c49fcb489baeaa87e78579e28f.pdf
+          quote: 'Free accounts, including the Content located therein, are automatically deleted after two (2) years of inactivity (i.e., no logins or activity associated with the account).'
+        - url: https://www.lastpass.com/-/media/175854c49fcb489baeaa87e78579e28f.pdf
+          quote: 'Users without access to their LastPass vault or email address can submit a service request to the Care team, who will authenticate the user and delete the account and Content within 30 days of the request.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'You can delete your account and everything in your vault yourself, at any time, from your account page.'
+      sources:
+        - url: https://community.lastpass.com/kb/articles/54-delete-your-lastpass-account%EF%BB%BF
+          quote: "You can delete your LastPass account on the My Account page if you know your master password, or on the Delete Your Account page if you don't."
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can download your passwords and notes yourself as a CSV file other apps can read. Attached files aren’t included.'
+      sources:
+        - url: https://community.lastpass.com/kb/articles/40-export-vault-data-from-lastpass-as-a-generic-csv-file%EF%BB%BF
+          quote: 'You can export your LastPass vault data as a CSV file and save it.'
+        - url: https://community.lastpass.com/kb/articles/40-export-vault-data-from-lastpass-as-a-generic-csv-file%EF%BB%BF
+          quote: 'Exporting attachments is not supported when exporting your LastPass vault data.'
+      action:
+        name: 'How to export your vault'
+        url: https://community.lastpass.com/kb/articles/40-export-vault-data-from-lastpass-as-a-generic-csv-file%EF%BB%BF
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: good
+      reason: 'Police need a warrant or court order, it tells you first unless it’s not allowed to, and it can’t open your vault to hand it over. It names no transparency report.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/law-enforcement-request-guidelines
+          quote: 'Absent a valid warrant, subpoena, court order, equivalent legal process, or emergency situation, it is LastPass’s position not to provide User Information to a requester.'
+        - url: https://www.lastpass.com/legal-center/law-enforcement-request-guidelines
+          quote: 'LastPass will notify the customer of a request before disclosing any User Information so that the customer may seek available legal remedies.'
+        - url: https://www.lastpass.com/legal-center/law-enforcement-request-guidelines
+          quote: 'Therefore, no one at LastPass has the ability to decrypt the vault data on LastPass’ servers and cannot provide such information in response to a legal request.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your data goes to the US and other countries, with legal safeguards such as the EU’s standard contract terms.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'Data that we collect and maintain will be transferred to and processed in the United States and other countries around the world.'
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'Standard Contractual Clauses (inclusive of any variations recognized in other regions of the world)'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You sign up with an email address and a master password. Your name and phone number are optional.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'Your email is needed to validate, create, and use LastPass Services.'
+        - url: https://www.lastpass.com/legal-center/privacy-notice
+          quote: 'You may also choose to provide identifiers such as first and last name or phone number to help maintain and support your account.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: neutral
+      reason: 'You can turn off renewal online in your account, but its terms say to do it at least 30 days before your year ends.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'subscriptions will automatically renew for a period equal to your expiring term, unless either party cancels at least 30 days before the current term expires.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'You can cancel automatic renewal at any time by selecting “Cancel Auto-Renewal” in the My Account section of your LastPass vault’s Account Settings'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: neutral
+      reason: 'It never gives money back. If you stop, you keep paying for, and using, the year you’re in.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'All payments are final and non-refundable.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'You will continue to be charged until the end of your current subscription term.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'A new price starts only when you renew, but it may tell you just by posting it on its website, with no set warning time.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'Price changes take effect at your next renewal.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We will notify you of price changes in a timely manner, as required by law, by publishing information on our website, emailing you, or including the update on a quote or invoice.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      tier: neutral
+      reason: 'Its 30-day Premium trial needs no card, but if you give one, it charges you when the trial ends unless you cancel.'
+      sources:
+        - url: https://www.lastpass.com/pricing
+          quote: '30-day free LastPass Premium trial, no credit card required.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'At the end of the trial, unless you cancel, you will be automatically charged the applicable fees for the subscription type you selected.'
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say your plan renews on its own each year, but not that it reminds you before it does.'
+      pages:
+        [
+          https://www.lastpass.com/legal-center/terms-of-service/personal,
+          https://community.lastpass.com/kb/articles/43-update-payment-method%EF%BB%BF,
+        ]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      tier: neutral
+      reason: 'Beyond the price and taxes, it can charge more if more people use your account than you paid for.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We may review your account and charge additional fees if the number of users on your account exceeds your purchased quantity.'
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help pages read don’t say what happens to the time you paid for when you switch plans.'
+      pages:
+        [
+          https://www.lastpass.com/legal-center/terms-of-service/personal,
+          https://www.lastpass.com/pricing,
+        ]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'A dispute goes to a court (in Canada, British Columbia’s), not a private referee, but you can’t join a group lawsuit.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'You agree not to bring or participate in any class, consolidated, or representative action against us or any of our employees or affiliates.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'The applicable LastPass entity, contact information, and governing law depend on your billing location and are listed at lastpass.com/legal-center/contracting-entities'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: good
+      reason: 'It tries to tell you about big changes at least 30 days before they start, and you can stop using it if you don’t agree.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'If we make a material change, we will make reasonable efforts to give you at least 30 days’ notice before the new terms take effect.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'If you do not agree to the new terms, please stop using the Services.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'It can suspend or close your account if it believes you broke its terms, and it keeps what you paid.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We may suspend or terminate your account if we believe you have violated these Terms.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'All payments are final and non-refundable.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: great
+      reason: 'What you keep in your vault stays yours. It uses it only to run the service for you.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'You keep all rights to your Content. We may use your Content only as needed to operate and provide the Services to you.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change or stop its services as it chooses.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We may modify or discontinue the Services at our discretion.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      tier: poor
+      reason: 'It deletes a free account, and everything in it, after 2 years with no logins. Its pages don’t say it warns you first. Paid accounts aren’t included.'
+      sources:
+        - url: https://www.lastpass.com/-/media/175854c49fcb489baeaa87e78579e28f.pdf
+          quote: 'Free accounts, including the Content located therein, are automatically deleted after two (2) years of inactivity (i.e., no logins or activity associated with the account).'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: neutral
+      reason: 'You may use LastPass for yourself only, and you may not share your account or study its code.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We will provide the Services, and you may use them, in line with these Terms for your own personal use.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'Modify, create derivative works of, reverse engineer, decompile, or try to access the source code of the Services.'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: good
+      reason: 'Outside firms check it every year and it holds certificates such as ISO 27001 and SOC 2, and it pays people who find bugs. The full reports aren’t public.'
+      sources:
+        - url: https://www.lastpass.com/-/media/175854c49fcb489baeaa87e78579e28f.pdf
+          quote: 'LastPass commits that its products and services undergo annual security assessments and attestations conducted by multiple reputable, independent third-party security vendors.'
+        - url: https://www.lastpass.com/security
+          quote: 'LastPass holds third-party security certifications like ISO 27001, SOC2 Type II, SOC3, BSI C5, TRUSTe, and more.'
+        - url: https://www.lastpass.com/trust-center/security/responsible-disclosure
+          quote: 'LastPass participates in a bug bounty program, hosted at BugCrowd'
+      lastVerified: 2026-11-19
+    - topic: service.activity-logging
+      tier: good
+      reason: 'Its VPN keeps no record of the sites you visit or what you do, it says, but no outside check of this is named.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'Neither LastPass nor the Infrastructure Provider maintains logs of websites visited, DNS requests, application usage, traffic content, or communications transmitted through the VPN Service, or persistent records linking your activity to specific online destinations.'
+        - url: https://www.lastpass.com/-/media/0b29716c51274eeda9b857393006def0.pdf
+          quote: 'LastPass VPN has been designed with a strict no-log policy with respect to your activity inside the VPN tunnel.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: bad
+      reason: 'You may not share your account with anyone. Families gives each of its 6 people an account of their own instead.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'Individual accounts may not be shared with others.'
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      status: not-stated
+      reason: 'Its terms name no limit on devices beyond the 10 computers its VPN covers, which the Plus plan shows.'
+      pages: [https://www.lastpass.com/legal-center/terms-of-service/personal]
+      lastVerified: 2026-11-19
+    - topic: service.device-limits
+      plans: [lastpass.free]
+      tier: neutral
+      reason: 'Free works on computers or on phones and tablets, not both. You can change which 3 times.'
+      sources:
+        - url: https://community.lastpass.com/kb/articles/22-changes-to-lastpass-free-faqs%EF%BB%BF
+          quote: 'As of March 16, 2021, LastPass Free only includes access on unlimited devices of one type.'
+        - url: https://community.lastpass.com/kb/articles/22-changes-to-lastpass-free-faqs%EF%BB%BF
+          quote: "As a LastPass Free user, you have 3 opportunities to switch your active device type and explore what's right for you."
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://www.lastpass.com/legal-center/terms-of-service/personal]
+      lastVerified: 2026-11-19
+    - topic: other.notable
+      title: Its VPN runs on another company’s network
+      tier: neutral
+      reason: 'Plus’s VPN runs on servers another company operates, which LastPass doesn’t name and may change at any time. It says that company keeps no logs of what you do either.'
+      sources:
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'We may change the Infrastructure Provider, server locations, or the technology we use to deliver the VPN Service at any time.'
+        - url: https://www.lastpass.com/legal-center/terms-of-service/personal
+          quote: 'Neither LastPass nor the Infrastructure Provider maintains logs of websites visited, DNS requests, application usage, traffic content, or communications transmitted through the VPN Service, or persistent records linking your activity to specific online destinations.'
+      lastVerified: 2026-11-19
