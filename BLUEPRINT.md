@@ -3917,6 +3917,17 @@ None.
   free plan (browsers, DNS resolvers, Pluto TV, Kick), so the queue's entries left out as "Free, with ads" are
   queued again as the research reaches them.
 
+**Resolved (2026-11-19, the categories on a card, M10.36)**
+- **The owner's request:** a provider sold in several categories (password manager, antivirus, DNS, VPN) needed the
+  filter or the expanded card to tell which plan gives what. The owner chose, from mock-ups, icon chips with the names
+  on hover, on Search's cards and on List view's, the item's own plan's filled and the provider's other plans' muted.
+- **As built:** core's `categoryCoverage(provider, planId, today, order)`: the categories of every plan the provider
+  still sells (and the picked plan's, even retired), each marked when the plan is in it, in categories.yaml's order so
+  switching plans moves no chip. `ss-category-chips` draws them: the plan's filled in the accent's tint with a check,
+  the others outlined and muted. The row is one tab stop, `role="img"`, named by the sentence its tooltip shows on hover
+  or keyboard focus ("This plan: Password managers & authenticators. Its other plans: VPN, …"), so every card gets one
+  tab stop rather than one per category. A bundle's or custom subscription's card shows none.
+
 **Resolved (2026-11-10, List view's yearly total)**
 - **The owner's request:** switch List view's yearly figure between This year (what's left to pay this calendar year,
   past charges included) and Next 12 months (a full year's cost from today), both PROJECT-PLAN §3.1's terms, already in

@@ -23,6 +23,8 @@
           }
         }
       </ss-status-badge>
+      <!-- What the provider's plans cover, the picked plan's filled (M10.36). -->
+      <ss-category-chips class="categories" [provider]="provider()" [planId]="plan()?.plan?.id" />
       @if (rankCounts(); as counts) {
         <!-- How many of the plan's features the user ranks each way (P8). -->
         <div class="ranks" role="group" [attr.aria-label]="'Your ranks for ' + title()">

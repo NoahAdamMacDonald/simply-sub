@@ -1,0 +1,13 @@
+<!-- One tab stop, named by its tooltip's text; the chips inside are its picture. -->
+@if (chips().length > 0) {
+  <div class="chips" role="img" tabindex="0" [attr.aria-label]="label()" [matTooltip]="label()">
+    @for (chip of chips(); track chip.id) {
+      <span class="chip" [class.in-plan]="chip.inPlan">
+        @if (chip.inPlan) {
+          <mat-icon class="check">check</mat-icon>
+        }
+        <mat-icon>{{ chip.icon }}</mat-icon>
+      </span>
+    }
+  </div>
+}

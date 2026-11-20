@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { featureNamedCategories, planCategories, providerCategories } from '../../src';
+import {
+  categoryCoverage,
+  featureNamedCategories,
+  planCategories,
+  providerCategories,
+} from '../../src';
 
 const proton = {
   category: 'privacy-suite',
@@ -28,6 +33,43 @@ describe('providerCategories', () => {
     expect(
       providerCategories({ category: 'privacy-suite', plans: [{ categories: ['vpn'] }] }),
     ).toEqual(['vpn']);
+  });
+});
+
+describe('categoryCoverage (M10.36)', () => {
+  const suite = {
+    category: 'privacy-suite',
+    plans: [
+      { id: 'proton.unlimited', categories: ['privacy-suite', 'vpn', 'storage', 'email'] },
+      { id: 'proton.vpn-plus', categories: ['vpn'] },
+      { id: 'proton.pass-plus', categories: ['passwords'] },
+      { id: 'proton.old', categories: ['calendar'], retired: '2026-01-01' },
+    ],
+  };
+  const order = ['vpn', 'privacy-suite', 'passwords', 'email', 'calendar', 'storage'];
+
+  it('marks the picked plan’s categories among every one the provider sells, in the given order', () => {
+    expect(categoryCoverage(suite, 'proton.vpn-plus', '2026-11-19', order)).toEqual([
+      { category: 'vpn', inPlan: true },
+      { category: 'privacy-suite', inPlan: false },
+      { category: 'passwords', inPlan: false },
+      { category: 'email', inPlan: false },
+      { category: 'storage', inPlan: false },
+    ]);
+    // Another plan moves no category, only the marks.
+    expect(
+      categoryCoverage(suite, 'proton.unlimited', '2026-11-19', order).map(({ inPlan }) => inPlan),
+    ).toEqual([true, true, false, true, true]);
+  });
+
+  it('leaves out a retired plan’s categories unless it’s the one picked', () => {
+    expect(
+      categoryCoverage(suite, undefined, '2026-11-19').map(({ category }) => category),
+    ).toEqual(['privacy-suite', 'vpn', 'storage', 'email', 'passwords']);
+    expect(categoryCoverage(suite, 'proton.old', '2026-11-19', order).at(-2)).toEqual({
+      category: 'calendar',
+      inPlan: true,
+    });
   });
 });
 
