@@ -295,6 +295,7 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.32 | Wide screens (added 2026-11-19, the owner's 21:9 feedback): the pages of cards (Home, Search, Lists, List view, Features, Calendar, Payment) take the whole width with their cards in columns, Settings its groups side by side, and a month view's days grow taller; the list editor and Custom subscriptions keep 960 px (BLUEPRINT §8.1) | At 3440 px List view has four cards a row and Search's expanded card leaves its neighbours' heights alone; the year view has two rows of six; 1280 px looks as before |
 | M10.33 | A change a card (added 2026-11-19, the owner's feedback: a yellow card held seven removals, so Apply made them all): each change the optimizer finds is a card of its own, judged alone and shown in the section of what it alone gives up; changes stay together only when one isn't allowed without the others; a bundle takes over from any plan of a provider it includes (P14; BLUEPRINT §14) | Disney+ Premium and Crave Premium give a red Downgrade Disney+ card and a yellow Remove Crave card; a list's eleven yellow removals are eleven cards; applying cards in any order never ends an item with nothing taking over |
 | M10.34 | Cards that are easy to follow (added 2026-11-19, the owner's feedback and choice): a card's services and ranked features lost or gained a row each, by rank, and the features not ranked folded under a summary (P14) | Removing Claude with AI computer use Wanted and API credits Sometimes lists Claude itself, then Wanted, then Sometimes, and "Also loses 6 features you haven't ranked" opens by keyboard; axe passes in both themes at 360 and 1280 px |
+| M10.35 | One yearly total everywhere (added 2026-11-19, the owner's feedback): the Yearly total switch on Home's Budgets and the Lists overview's totals as on List view, and every page's totals following the one device setting, so it's chosen once (P2, P3, P4; BLUEPRINT §8.1.1, §14) | Next 12 months chosen on Home shows on the Lists overview, its cards and List view; the annual warning still checks this year; the initial bundle is unchanged |
 
 #### M10 specs
 
@@ -3094,8 +3095,9 @@ back):
 group: one tab stop, the arrows choose) of **This year** and **Next 12 months**, This year by default. Next 12 months
 makes the annual line the next 12 months' total (§3.1) against the annual budget, "$516.47 of $500.00 in the next 12
 months", its bar and breakdown the same period; the annual budget warning still checks this calendar year, as Home's
-does. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once; Home and the Lists
-page keep this year. `check-list-view-yearly.cjs` (browser-check skill).
+does. The choice is this device's (`settings.yearlyTotal`, which sync leaves alone), saved at once. Since M10.35 Home
+and the Lists page have the switch too and every page follows the one choice. `check-list-view-yearly.cjs`
+(browser-check skill).
 
 BLUEPRINT §14 has the details.
 

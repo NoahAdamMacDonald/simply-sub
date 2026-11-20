@@ -62,7 +62,7 @@ describe('BudgetTotals', () => {
   });
 
   function render(
-    inputs: Partial<Record<'metrics' | 'compact' | 'prompt' | 'name' | 'yearly', unknown>> = {},
+    inputs: Partial<Record<'metrics' | 'compact' | 'prompt' | 'name', unknown>> = {},
   ) {
     const fixture = TestBed.createComponent(BudgetTotals);
     fixture.componentRef.setInput('metrics', metrics);
@@ -98,8 +98,9 @@ describe('BudgetTotals', () => {
     expect(bars[1].getAttribute('aria-valuenow')).toBe('25');
   });
 
-  it('shows the next 12 months’ total against the annual budget, when List view asks (P4)', () => {
-    const element = render({ yearly: 'next-12-months' });
+  it('shows the next 12 months’ total against the annual budget, when that’s this device’s choice (M10.35)', () => {
+    saved.update((settings) => settings && { ...settings, yearlyTotal: 'next-12-months' });
+    const element = render();
     expect(totals(element)).toEqual([
       '$100.00 of $200.00 this month',
       '≈ $1,200.00 of $1,000.00 in the next 12 months',
@@ -115,11 +116,8 @@ describe('BudgetTotals', () => {
         button.getAttribute('aria-label'),
       ),
     ).toContain('Breakdown of the next 12 months');
-    saved.set(alberta);
-    expect(totals(render({ yearly: 'next-12-months' }))).toEqual([
-      '$100.00 this month',
-      '≈ $1,200.00 in the next 12 months',
-    ]);
+    saved.set({ ...alberta, yearlyTotal: 'next-12-months' });
+    expect(totals(render())).toEqual(['$100.00 this month', '≈ $1,200.00 in the next 12 months']);
   });
 
   it('shows a total alone without its budget, with a way to set one on Home', () => {
