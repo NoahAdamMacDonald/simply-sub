@@ -78,14 +78,15 @@ paymentMethods:
     quotes:
       - 'Payments made using prepaid cards or gift cards will not be refunded if such refunds are not supported by the provider of the card.'
 # Renewal day (M11.5, M11.21), read 2026-11-19: its Subscription Terms charge a yearly renewal "fourteen (14) days prior
-# to the start of the Renewal Period" (the date you signed up a term on), but core's chargedBefore wording doesn't read
-# "fourteen (14) days prior to the start", and no nordpass.com page says "up to 14 days before the renewal" as
-# nordvpn.com's does, so it's not-stated here, with the same-date block for core in notes.md.
+# to the start of the Renewal Period" (the date you signed up a term on), so a renewal is charged 14 days early.
+# Monthly plans, business only here, are "Charged on the day of the auto-renewal".
 renewalAnchor:
-  kind: not-stated
-  pages:
-    - https://my.nordaccount.com/legal/terms-of-service/subscription/
-    - https://nordpass.com/pricing/
+  kind: same-date
+  page: Subscription Terms
+  url: https://my.nordaccount.com/legal/terms-of-service/subscription/
+  quotes:
+    - 'All other plans: Charged fourteen (14) days prior to the start of the Renewal Period.'
+  chargedBefore: { days: 14 }
   lastVerified: 2026-11-19
 # Owner (M11.2), read 2026-11-19: its about page says "NordPass is developed by Nord Security"; the country is NordSec
 # B.V.'s Amsterdam address in Nord's General Privacy Policy, as for NordVPN. Its General Terms are with nordvpn S.A. of

@@ -290,6 +290,16 @@ describe('chargedBefore', () => {
     ['Cancel at least 35 days before your current period ends.', 35, false, true],
     ['Billed every 30 days.', 30, false, false],
     ['prélevé 15 jours avant la fin de votre abonnement', 15, false, true],
+    // The days spelled out, the numeral in brackets (NordPass's Subscription Terms).
+    ['Charged fourteen (14) days prior to the start of the Renewal Period.', 14, false, true],
+    ['Charged fourteen (14) days prior to the start of the Renewal Period.', 15, false, false],
+    ['Charged up to fourteen (14) days prior to the start of the Renewal Period.', 14, true, true],
+    [
+      'Charged up to fourteen (14) days prior to the start of the Renewal Period.',
+      14,
+      false,
+      false,
+    ],
   ] as const)('reads "%s" as charged %s days before (up to: %s): %s', (text, days, upTo, named) => {
     expect(namesChargedBefore(text, { days, ...(upTo && { upTo: true }) })).toBe(named);
   });

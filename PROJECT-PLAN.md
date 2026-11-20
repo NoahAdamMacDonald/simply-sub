@@ -2455,7 +2455,8 @@ in every D1 `json` column search parses.
 - **As built** (2026-11-13):
   - **Catalog:** a stated renewal day's optional `chargedBefore` (`days` 1 to 90, `upTo: true` when the page says "up
     to"), its quotes saying it (core's `namesChargedBefore`: the days, then before or prior to the subscription's end,
-    expiry, anniversary or renewal; "up to" only with `upTo`). A charge before a subscription "ends" says the date you
+    expiry, anniversary or renewal; "up to" only with `upTo`; the days as a numeral or spelled out with it in brackets,
+    NordPass's "fourteen (14) days prior", 2026-11-20). A charge before a subscription "ends" says the date you
     signed up too (`namesRenewalAnchor` with it), since a yearly term ends on that date a year on. Only yearly periods:
     every page that says it speaks of yearly terms, and Norton's bill monthly plans on the day. The extraction answer
     takes it, kept as far as its checked quotes go. `data/schema/` regenerated.
