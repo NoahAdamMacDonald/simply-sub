@@ -664,7 +664,7 @@
   source: own
   status: done
   date: 2026-11-19
-  note: "For the free Yubico Authenticator; YubiKeys are one-time purchases (out)"
+  note: 'For the free Yubico Authenticator; YubiKeys are one-time purchases (out)'
 - id: enpass
   name: Enpass
   website: https://www.enpass.io
@@ -686,7 +686,14 @@
   source: own
   status: done
   date: 2026-11-19
-  note: "Paid Premium and Family not listed: no page names the currency of their \"$\""
+  note: 'Premium and Family are priced in a bare "$" no page names: stored as GLOBAL USD (2FAS Pass''s precedent), flagged for the owner'
+- id: vaultwarden
+  name: Vaultwarden
+  website: https://github.com/dani-garcia/vaultwarden
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-19
 - id: psono
   name: Psono
   website: https://psono.com
@@ -694,7 +701,7 @@
   source: own
   status: out-of-scope
   date: 2026-11-19
-  note: "Self-hosted for companies (\"Open-Source Self-Hosted Password Manager for Companies\"); psono.pw is a demonstration instance"
+  note: 'Self-hosted for companies ("Open-Source Self-Hosted Password Manager for Companies"); psono.pw is a demonstration instance'
 - id: passbolt
   name: Passbolt
   website: https://www.passbolt.com
@@ -702,7 +709,7 @@
   source: own
   status: out-of-scope
   date: 2026-11-19
-  note: "Team password management only: the free Community Edition is self-hosted for teams, Pro and Cloud a minimum of 10 users"
+  note: 'Team password management only: the free Community Edition is self-hosted for teams, Pro and Cloud a minimum of 10 users'
 - id: buttercup
   name: Buttercup
   website: https://buttercup.pw
@@ -710,7 +717,7 @@
   source: own
   status: out-of-scope
   date: 2026-11-19
-  note: "Discontinued: \"The Buttercup project has come to an end\" (its GitHub), no releases since March 2025, archived 2025-06-26"
+  note: 'Discontinued: "The Buttercup project has come to an end" (its GitHub), no releases since March 2025, archived 2025-06-26'
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -1570,7 +1577,7 @@
   sitelinks: 14
   status: out-of-scope
   date: 2026-11-19
-  note: "Part of the GNOME desktop (its wiki: \"a collection of components in GNOME that store secrets, passwords, keys, certificates and make them available to applications\"), not a product or subscription"
+  note: 'Part of the GNOME desktop (its wiki: "a collection of components in GNOME that store secrets, passwords, keys, certificates and make them available to applications"), not a product or subscription'
 - id: norton
   name: Norton 360
   website: https://no.norton.com/360
@@ -1661,7 +1668,7 @@
   sitelinks: 12
   status: out-of-scope
   date: 2026-11-19
-  note: "Part of the GNOME desktop (its wiki: \"a GNOME application for managing encryption keys and passwords in the GNOME Keyring\"), not a product or subscription"
+  note: 'Part of the GNOME desktop (its wiki: "a GNOME application for managing encryption keys and passwords in the GNOME Keyring"), not a product or subscription'
 - id: firefox-lockwise
   name: Firefox Lockwise
   website: https://lockwise.firefox.com
@@ -1671,7 +1678,7 @@
   sitelinks: 12
   status: out-of-scope
   date: 2026-11-19
-  note: "Discontinued: lockwise.firefox.com redirects to Mozilla's \"End of support for Firefox Lockwise\" article (read 2026-11-19), its repositories archived on 2021-12-14"
+  note: 'Discontinued: lockwise.firefox.com redirects to Mozilla''s "End of support for Firefox Lockwise" article (read 2026-11-19), its repositories archived on 2021-12-14'
 - id: mailfence
   name: Mailfence
   website: https://mailfence.com

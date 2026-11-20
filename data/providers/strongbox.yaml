@@ -80,28 +80,25 @@ renewalAnchor:
     - https://strongboxsafe.com/terms/
     - https://strongbox.reamaze.com/kb/strongbox-pro/how-do-i-cancel-my-subscription
   lastVerified: 2026-11-19
-# Owner (M11.2), read 2026-11-19: Phoebe Code Limited, which its founder incorporated and which "wholly owned" Strongbox
-# (about page), joined the Applause group, a New York team of indie app developers, in March 2025 ("Strongbox Joins
-# Applause", posted March 13, 2025; the founder's message of March 15, 2025). Its privacy policy (updated 15 October 2026)
-# still says "Strongbox is provided by Phoebe Code Limited, based in the UK." No page names Applause's company or a
-# listing, so no stock.
+# Owner (M11.2), read 2026-11-20 on Applause's own site (applause.dev, the parent's page about it): its post "Strongbox
+# Joins Applause" (14 March 2025, the same text as Strongbox's blog post of 13 March) is headed "Strongbox starts a new
+# chapter under Applause's ownership", its portfolio lists Strongbox, and its privacy policy names the company ("This
+# Privacy Policy is for Applause Group, Inc."). Its country from the post: "We’re based in New York City". Strongbox's
+# own pages still name Phoebe Code Limited, the UK company its founder incorporated ("Strongbox is wholly owned by Phoebe
+# Code Limited a UK company", about page; "Strongbox is provided by Phoebe Code Limited, based in the UK.", privacy
+# policy updated 15 October 2026): in notes. No page names a listing: private, no stock.
 owner:
-  name: Phoebe Code Limited, part of the Applause group
+  name: Applause Group, Inc.
+  website: https://www.applause.dev
   page:
-    name: Founders message
-    url: https://strongboxsafe.com/founders-message/
+    name: Strongbox Joins Applause
+    url: https://www.applause.dev/news/articles/strongbox-joins-applause
   quotes:
-    - 'eventually we incorporated as Phoebe Code Limited and expanded the team beyond myself'
-    - 'To that end, I am happy to say that after a long search for a new home for Strongbox, we have joined the very capable Applause group.'
+    - "Strongbox starts a new chapter under Applause's ownership"
+    - 'We’re based in New York City and are dedicated to being a great home for indie developed apps.'
   country:
-    code: GB
-    page:
-      name: About
-      url: https://strongboxsafe.com/about/
-    quotes:
-      - 'Strongbox is wholly owned by Phoebe Code Limited a UK company registered in England & Wales (No. 12501317).'
-    lastVerified: 2026-11-19
-  lastVerified: 2026-11-19
+    code: US
+  lastVerified: 2026-11-20
 # Source code (M11.5): its help desk's audit article links its GitHub repository ("Strongbox Source Code:"), AGPL-3.0;
 # its README says the repository leaves out what's needed to build the app ("this repo are not compliant with the OSI
 # definition of Open Source"; "Others might use the term "Source Available"."), so source-available.
@@ -116,7 +113,8 @@ sourceRepo:
 notes: >-
   A KeePass and Password Safe app for iPhone, iPad and Mac. Your passwords stay in a KeePass file you keep wherever you
   like (on the device, iCloud, Dropbox, Google Drive, OneDrive, WebDAV, SFTP or its free Strongbox Sync). Pro is bought
-  in the App Store; it’s also sold for life, paid once, which isn’t listed.
+  in the App Store; it’s also sold for life, paid once, which isn’t listed. Applause, a New York app company, has owned
+  it since March 2025; its own pages name Phoebe Code Limited, a UK company, which its founder set up.
 
 # Perks (M11.6): what Pro adds that no feature describes, in its Pro page's words.
 perks:
@@ -166,8 +164,11 @@ features:
 # - Authenticator: "TOTP (QR Code, RFC 6238, Steam)" on both: otpauth. No page says how 2FA secrets leave it other than
 #   inside the database, so authenticator.export is left empty.
 # - End-to-end encryption: its pages say the database is encrypted on your device ("The only place your database is
-#   decrypted is on device for use there.", Strongbox Sync post) but don't use the words end-to-end or zero-knowledge, so
-#   encryption.end-to-end is left out (KeePassXC's precedent); privacy.content-access grades the same fact.
+#   decrypted is on device for use there.", Strongbox Sync post) and call it zero knowledge ("Strongbox is a zero
+#   knowledge password manager , which means that we are not able to access your database or the personal information
+#   stored inside it under any circumstances.", its help desk; "This is part of our zero knowledge security
+#   architecture.", Getting Started), so encryption.end-to-end is passwords on both plans (KeePassXC's, KeePass's and
+#   Aegis's pages don't say it); privacy.content-access grades the same fact.
 plans:
   - id: strongbox.free
     name: Free
@@ -185,6 +186,7 @@ plans:
       password-manager.offline: true
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
     notes: >-
       For non-commercial use. Unlimited entries and databases, AutoFill on iPhone and iPad, 2FA codes and free Strongbox
       Sync; no Face ID or Touch ID unlock, YubiKey or offline editing on iPhone.
@@ -215,6 +217,7 @@ plans:
       password-manager.offline: true
       authenticator.included: true
       authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
     perks: [premium-support, duress-pin, wi-fi-sync, watch-app]
     notes: >-
       Face ID and Touch ID unlock, YubiKey, AutoFill on Mac, SFTP and WebDAV sync on Mac, the SSH agent and the Apple Watch
@@ -515,13 +518,9 @@ policies:
       pages: [https://strongboxsafe.com/privacy/, https://strongboxsafe.com/terms/]
       lastVerified: 2026-11-19
     - topic: privacy.data-location
-      tier: poor
+      status: not-stated
       reason: 'Your passwords stay wherever you keep the file. Its privacy policy doesn’t say in which countries its service providers keep purchase, crash and usage records.'
-      sources:
-        - url: https://strongboxsafe.com/privacy/
-          quote: 'You can store databases locally or use a supported cloud service, WebDAV or SFTP.'
-        - url: https://strongboxsafe.com/privacy/
-          quote: 'We use Apple and RevenueCat to manage purchases and subscriptions, check access to paid features, restore purchases and determine offer eligibility.'
+      pages: [https://strongboxsafe.com/privacy/]
       lastVerified: 2026-11-19
     - topic: privacy.sign-up-data
       tier: great
@@ -604,6 +603,14 @@ policies:
           quote: 'Please note this repo are not compliant with the OSI definition of Open Source, because we have never provided an easy way to build our native App directly from this repo for anti-piracy reasons.'
         - url: https://github.com/strongbox-password-safe/Strongbox
           quote: 'The code is provided here in the spirit of transparency, security and openness.'
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      plans: [strongbox.free]
+      tier: neutral
+      reason: 'The free version is for non-commercial use only.'
+      sources:
+        - url: https://strongboxsafe.com/pro/
+          quote: 'There is also a free version of Strongbox available for non commercial use and lacking some convenience features.'
       lastVerified: 2026-11-19
     - topic: security.practices
       tier: neutral

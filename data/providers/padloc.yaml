@@ -5,21 +5,27 @@
 # questions and answers, and downloads). Not in data/queue.yaml before (source: the catalog list).
 # Plans: padloc.app's plan cards, Personal tab: Free "$0 / month", Premium "$3.49 / month or $34.90 / year", Family "$5.95
 # / month or $59.50 / year" ("Share data between up to 5 users"); its Business tab sells Team, Business and Enterprise
-# (business, out of scope). Only Free is listed: no Padloc page names the currency of the paid plans' "$" (it bills
-# through Stripe, "a German company" runs it, the page is the same from everywhere, and its plan picker is inside the app
-# after signing up), so Premium and Family wait for a page that names it (the owner's rule: a bare "$" names no
-# country; never guess). The paid plans have a 30-day free trial ("Try 30 Days For Free").
+# (business, out of scope). No page names the currency of the paid plans' "$" (it bills through Stripe, "a German
+# company" runs it, and its plan picker is inside the app after signing up); the page is server-rendered, the same from
+# everywhere, so one US-dollar price list for everywhere (GLOBAL USD), the only dollar it can be (Stremio's, Devin's and
+# 2FAS Pass's precedent), flagged for the owner. No page says the prices include tax. The paid plans have a 30-day free
+# trial ("Try 30 Days For Free").
 # Is it still sold? Its site's footer says "© 2022" and its last app release is 4.3.0 (downloads page), but its GitHub
 # repository had commits on 2026-11-18 ("Prepare v4.3.1 security release", 2026-11-10), and its web app and plans are
 # live, so it's a current service.
-# Region checklist: not needed for the free plan (one free sign-up for everyone).
+# Region checklist for CA and US, 2026-11-19: 1. no country or language paths; 2. no country or currency picker; 3. no
+# price data in the page beyond its text (server-rendered); 4. the checkout is in the app after signing up: not opened;
+# 5. no prices-by-country page; 6. a plain fetch from Canada, the same page from everywhere; 7. no bill offered.
 # Bundles: none. Official resellers: none named (its terms mention "a third-party (reseller)" without naming any).
 # Free use: its Free plan ("Do I have to pay to use Padloc? No. Padloc has a Free plan that allows you to store an
 # unlimited number of items!", Questions & Answers).
-# Conflicts: the plan cards list "Shared vaults" and "Encrypted file storage" under Free, but the user manual says sharing
-# needs an organization, created only with "the Family, Team and Business plans", and "Adding Attachments is one of the
-# advanced features only available in the Premium, Family, Team or Business plans." The manual describes how each works,
-# so it decides: Free has neither.
+# Plan cards: each line is ticked or crossed out (an icon and <s>, in its HTML). Free's ticks are "Unlimited vault items"
+# and "Unlimited devices"; it crosses out "Multi-Factor authentication", "Shared vaults", "Encrypted file storage",
+# "Security Report", "Built-in Authenticator / One-Time Passwords" and "Rich text notes with markdown support". Premium
+# ticks all of those but "Shared Vaults" (crossed out), with "Up to 1GB encrypted file storage"; Family ticks them all,
+# with "Share data between up to 5 users" and "Up to 5 Shared Vaults". The user manual agrees: sharing needs an
+# organization, created only with "the Family, Team and Business plans", and "Adding Attachments is one of the advanced
+# features only available in the Premium, Family, Team or Business plans."
 
 id: padloc
 name: Padloc
@@ -28,9 +34,25 @@ website: https://padloc.app
 category: passwords
 spendCategory: software
 billingCurrency: { GLOBAL: USD }
-# Nothing to cancel on Free: its account settings, where you delete your account, are the closest page.
+# Its user manual's settings page: "The Settings screen contains options for managing your account, your subscription
+# and billing info and various other things."
 cancelUrl: https://docs.padloc.app/manual/settings/
 sources: { pricing: https://padloc.app/ }
+# Ways to pay (M11.5), read 2026-11-19: its privacy policy's billing section (Stripe takes "your credit card data"). No
+# other way and no card network is named, and no app store bills it.
+paymentMethods:
+  - methods: [card]
+    page: 'Privacy policy'
+    url: https://padloc.app/privacy
+    quotes:
+      - 'In addition to your credit card data, you may choose to provide us with additional billing information like your full name, address and, in case of business customers, your business name and VAT number.'
+# Renewal day (M11.5), read 2026-11-19: its terms and manual don't say when a subscription renews.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://padloc.app/tos
+    - https://docs.padloc.app/manual/settings/
+  lastVerified: 2026-11-19
 # Owner (M11.2), read 2026-11-19 in its privacy policy: MaKleSoft UG, "a German company" in Ansbach, Bavaria (its terms:
 # "MaKleSoft UG, a German company with offices at Meisenstrasse 5, 91522 Ansbach"). Private: no listing.
 owner:
@@ -62,15 +84,20 @@ sourceRepo:
   lastVerified: 2026-11-19
 notes: >-
   Open source (AGPL), end-to-end encrypted, with apps for Windows, macOS, Linux, iPhone, Android, the web, Chrome and
-  Firefox. Its paid Premium ($3.49 a month or $34.90 a year) and Family ($5.95 or $59.50, up to 5 people) plans aren’t
-  listed yet: its pages don’t say which currency they’re in.
+  Firefox. Its pages price the paid plans in a bare "$", taken as US dollars.
+
+# Perks (M11.6): what no feature describes, in its plan cards' words.
+perks:
+  - id: file-storage
+    name: Up to 1GB encrypted file storage
 
 # General features, read 2026-11-19. Platforms: its downloads page (Mac, Windows, Linux, iOS, Android, Google Chrome,
 # Firefox) and its web app (web.padloc.app). Sign-in: an email address and master password; "your email address will be
 # used for things like two-factor authentication" (Creating An Account); Padloc 4 "added support for additional
 # multi-factor authentication methods like YubiKey Google Authenticator , Authy and more!", and "trusted devices", but the
-# plan cards give those to Premium ("Advanced multi-factor authentication"), so Free's sign-in is a password and an
-# emailed code. Support: email (support@padloc.app, its privacy policy) and GitHub issues ("If you want to report a bug or
+# plan cards give those to the paid plans ("Advanced multi-factor authentication"; Free's "Multi-Factor authentication"
+# is crossed out), so Free's sign-in is a password and an emailed code, and Premium's and Family's add authenticator
+# apps, security keys and trusted devices. Support: email (support@padloc.app, its privacy policy) and GitHub issues ("If you want to report a bug or
 # have a feature request"), so email and community. App languages: no page lists them, left out. Open source (above);
 # self-hosting: its README says guides to host your own are "coming soon", so not stated: false. No pause; no parental
 # controls.
@@ -83,17 +110,19 @@ features:
 
 # Password manager features, read 2026-11-19 (plan cards, user manual, the Padloc 4 post):
 # - Items: "from secret notes and WIFI passwords, to credit card numbers, bank details and even encrypted files", with
-#   templates you can change and fields you add (Vaults & Vault Items), and the Free card's "Built-in Authenticator /
-#   One-Time Passwords". No page mentions passkeys.
+#   templates you can change and fields you add (Vaults & Vault Items); 2FA codes ("Built-in Authenticator / One-Time
+#   Passwords") on the paid plans only. No page mentions passkeys.
 # - Health: "The new security report points out weak, reused and compromised passwords for you!" (Padloc 4), and items
-#   past an expiry period show "under "Expired Items"" (Vaults & Vault Items): breached, weak, reused, old. The Free card
-#   lists "Security Report".
-# - Sharing: none on Free (Conflicts, above).
+#   past an expiry period show "under "Expired Items"" (Vaults & Vault Items): breached, weak, reused, old. "Security
+#   Report" is crossed out on Free's card, so the paid plans only.
+# - Sharing: Family's organization shares vaults among its members, with "read and write permissions for vaults" set by
+#   its admins (Organizations): share-vault and role-permissions. None on Free or Premium (plan cards, above).
 # - Import: "Comma Separated Values (CSV)" and its own "Encrypted Padloc Export" (Settings): csv. Export: "Under Format ,
 #   select Encrypted Container or CSV.": csv and encrypted. No other manager's format is named.
 # - No emergency access. Offline: no page says the apps open your vault without a connection, so left out.
-# - Authenticator: the Free card's "Built-in Authenticator / One-Time Passwords"; no page says how a code's key is added
-#   or exported, so authenticator.import and .export are left out.
+# - Authenticator: the paid cards' "Built-in Authenticator / One-Time Passwords" (crossed out on Free's); no page says how
+#   a code's key is added or exported, so authenticator.import and .export are left out.
+# - Files: "Up to 1GB encrypted file storage" on Premium and Family, attachments to vault items (a perk).
 # - End-to-end encryption: "Open-source, end-to-end encrypted password management" (home page): passwords.
 plans:
   - id: padloc.free
@@ -101,15 +130,13 @@ plans:
     link: https://web.padloc.app/
     features:
       password-manager: true
-      password-manager.item-types:
-        [login, totp, credit-card, secure-note, bank-account, wifi, custom]
-      password-manager.health: [breached, weak, reused, old]
+      password-manager.item-types: [login, credit-card, secure-note, bank-account, wifi, custom]
       password-manager.import: [csv]
       password-manager.export: [csv, encrypted]
       password-manager.emergency-access: false
-      authenticator.included: true
+      authenticator.included: false
       encryption.end-to-end: [passwords]
-    notes: Unlimited items on unlimited devices, with its security report and 2FA codes. No file attachments or shared vaults.
+    notes: Unlimited items on unlimited devices. No security report, 2FA codes, extra sign-in steps, file attachments or shared vaults.
     prices:
       - {
           region: GLOBAL,
@@ -121,13 +148,90 @@ plans:
           lastVerified: 2026-11-19,
           sourceUrl: https://padloc.app/,
         }
+  - id: padloc.premium
+    name: Premium
+    link: https://web.padloc.app/
+    features:
+      account.sign-in: [password, email-code, totp, security-key, trusted-device]
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, credit-card, secure-note, bank-account, wifi, custom]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.import: [csv]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      authenticator.included: true
+      encryption.end-to-end: [passwords]
+    perks: [file-storage]
+    notes: 'Its security report, 2FA codes, security keys and 1 GB for files; no shared vaults. A 30-day free trial. Priced in a bare "$", taken as US dollars.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 3.49,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://padloc.app/,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 34.90,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://padloc.app/,
+        }
+  - id: padloc.family
+    name: Family
+    link: https://web.padloc.app/
+    features:
+      account.users: 5
+      account.sign-in: [password, email-code, totp, security-key, trusted-device]
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, credit-card, secure-note, bank-account, wifi, custom]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing: [share-vault, role-permissions]
+      password-manager.import: [csv]
+      password-manager.export: [csv, encrypted]
+      password-manager.emergency-access: false
+      authenticator.included: true
+      encryption.end-to-end: [passwords]
+    perks: [file-storage]
+    notes: 'Everything in Premium for up to 5 people, with up to 5 shared vaults. A 30-day free trial. Priced in a bare "$", taken as US dollars.'
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 5.95,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://padloc.app/,
+        }
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 59.50,
+          interval: year,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://padloc.app/,
+        }
 
 # Terms and policies (BLUEPRINT §4.10), read 2026-11-19: its terms of service (dated Mon Jul 18 2022, MaKleSoft UG's,
 # which are its apps' licence too: "This Software is licensed, not sold."), its privacy policy, the sign-up flow's
 # checkbox ("I have read and agree to the Terms of Service", Creating An Account), its account settings and its audit post.
 # Every agreement a user accepts (the owner's rule, 2026-11-03): sign-up names only the terms; the terms include nothing
-# else by reference. Its code is under the AGPL (GitHub). Stripe's terms (paid plans) aren't read, as no paid plan is
-# listed. Only the Free plan is listed, so the billing topics don't apply.
+# else by reference. Its code is under the AGPL (GitHub). Stripe's terms (its payment processor) aren't read. Its terms
+# say nothing about billing beyond a refund when Padloc fails to supply the app (7.5), and its manual and site add only
+# the 30-day trial, so most billing topics are not stated.
 policies:
   links:
     - name: 'Terms of service'
@@ -142,6 +246,8 @@ policies:
       url: https://docs.padloc.app/manual/create_account/
     - name: 'Settings (user manual)'
       url: https://docs.padloc.app/manual/settings/
+    - name: 'Organizations (user manual)'
+      url: https://docs.padloc.app/manual/orgs/
     - name: 'Security audit by Radically Open Security'
       url: https://padloc.app/blog/security-audit-ros/
   ratings:
@@ -244,10 +350,47 @@ policies:
         - url: https://padloc.app/privacy
           quote: 'This information is optional and does not have to be your real name.'
       lastVerified: 2026-11-19
-    - topic: legal.disputes
+    - topic: billing.cancellation
       status: not-stated
-      reason: 'Its terms name no court, law or private referee for disputes.'
+      reason: 'Its manual says you manage your subscription in the app’s settings, but its pages don’t say how you cancel or whether you keep what you paid for.'
+      pages: [https://docs.padloc.app/manual/settings/, https://padloc.app/tos]
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      status: not-stated
+      reason: 'Its terms give back what you paid for unused time only if Padloc fails to provide the app; they say nothing about refunds otherwise.'
       pages: [https://padloc.app/tos]
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      status: not-stated
+      reason: 'Its terms and pages don’t say it tells you before raising a price.'
+      pages: [https://padloc.app/tos, https://padloc.app/]
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-stated
+      reason: 'Its paid plans start with a 30-day free trial, but its pages don’t say whether you need a card or whether the trial turns into a paid plan by itself.'
+      pages: [https://padloc.app/, https://docs.padloc.app/manual/orgs/]
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms and pages don’t say it reminds you before a plan renews.'
+      pages: [https://padloc.app/tos, https://docs.padloc.app/manual/settings/]
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and pages name no fees beyond the price.'
+      pages: [https://padloc.app/tos, https://padloc.app/]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its pages don’t say what happens to the time you’ve paid for when you move between Premium and Family.'
+      pages: [https://docs.padloc.app/manual/orgs/, https://padloc.app/tos]
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: good
+      reason: 'Disputes go to the courts in Munich, Germany, under German law, not a private referee, though that may be far from where you live.'
+      sources:
+        - url: https://padloc.app/tos
+          quote: 'Any question or dispute arising from the application, interpretation, integration or execution of these terms, will be subject to the German courts in Munich.'
       lastVerified: 2026-11-19
     - topic: legal.terms-changes
       tier: bad
@@ -259,8 +402,8 @@ policies:
           quote: 'Padloc will revise the updated date on the top of this page.'
       lastVerified: 2026-11-19
     - topic: legal.account-closure
-      tier: poor
-      reason: 'It can suspend or close your account at once, without warning, if it suspects you of pretending to be someone else or of breaking its terms.'
+      tier: neutral
+      reason: 'It can suspend or close your account at once, without warning, if you break its terms (or it suspects you of pretending to be someone else), and its terms promise no refund then.'
       sources:
         - url: https://padloc.app/tos
           quote: 'Padloc is given the right to immediately suspend or terminate Your account at any time, with or without notice to You, if You are suspected of impersonating anyone on the Service or if You fail to comply or if You are in violation with any terms of these TOS.'
@@ -304,10 +447,20 @@ policies:
       lastVerified: 2026-11-19
     - topic: service.account-sharing
       tier: bad
-      reason: 'Your account is for you alone: its terms forbid letting anyone else use it. Sharing vaults needs a paid Family, Team or Business plan.'
+      reason: 'Your account is for you alone: its terms forbid letting anyone else use it. Family shares vaults among up to 5 people instead.'
       sources:
         - url: https://padloc.app/tos
           quote: 'Not allow others to access or use Your account'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [padloc.family]
+      tier: great
+      reason: 'Family is for your whole family: up to 5 people share passwords and files through its shared vaults.'
+      sources:
+        - url: https://padloc.app/
+          quote: 'Easy and straightforward password-sharing and file storage for the entire familiy.'
+        - url: https://padloc.app/
+          quote: 'Share data between up to 5 users'
       lastVerified: 2026-11-19
     - topic: service.software-control
       status: not-stated

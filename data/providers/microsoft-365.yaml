@@ -1518,13 +1518,16 @@ policies:
         - url: https://techcommunity.microsoft.com/blog/microsoft-entra-blog/how-it-works-backup-and-restore-for-microsoft-authenticator/1006678
           quote: 'The Authenticator app uses a strong authentication token to request a 256-bit key from an internal Microsoft account key service.'
       lastVerified: 2026-11-19
+    # Not applicable like the other authenticators' (Authy, 2FAS, Aegis): the privacy statement's general reservation
+    # ("we may use your data to develop and train our AI models") would be graded in microsoft-privacy.yaml for every
+    # Microsoft plan, not on this one.
     - topic: privacy.ai-training
       plans: [microsoft-365.authenticator]
-      tier: bad
-      reason: 'Microsoft’s privacy statement says it may use your data to train its AI. Authenticator’s pages don’t say otherwise, and name no way to say no.'
-      sources:
-        - url: https://www.microsoft.com/en-ca/privacy/privacystatement
-          quote: 'As part of our efforts to improve and develop our products, we may use your data to develop and train our AI models.'
+      status: not-applicable
+      reason: 'Authenticator holds sign-in codes and approvals, not anything you write or upload, so there’s nothing of yours to train AI on.'
+      pages:
+        - https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator
+        - https://www.microsoft.com/en-ca/privacy/privacystatement
       lastVerified: 2026-11-19
     - topic: legal.account-closure
       plans: [microsoft-365.authenticator]

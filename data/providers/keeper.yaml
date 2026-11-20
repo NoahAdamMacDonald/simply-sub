@@ -14,7 +14,8 @@
 # Germany, $51.59 in France, $52.02 in the Netherlands and from this machine); the picked lists are stored. Each region
 # gets the currency its own page uses or offers: Canada CAD (its default through Canadian exits), the US USD, the UK
 # GBP, Ireland EUR (its default), the other euro countries EUR (their page defaults to US dollars), Australia AUD
-# ("*Includes GST"), New Zealand USD (no NZD in the picker). The German page says its euro prices are before VAT
+# ("*Includes GST" under both plans' prices, so taxIncluded; not under the add-ons'), New Zealand USD (no NZD in the
+# picker). The German page says its euro prices are before VAT
 # ("51,16 € jährliche Zahlweise *zzgl MwSt"). No first-term offer is in the prices (a pop-up offers "30% OFF 1-Yr
 # Personal & Family Plans!", not stored). Billing: "Subscription Fees are billed and collected annually in advance."
 # Region checklist for CA and US, 2026-11-19: 1. language paths only (/en_GB/, /de_DE/…); 2. the currency picker, every
@@ -414,7 +415,10 @@ features:
 #   and more), and Apple Passwords on iOS 26 ("Export Data to Another App": Credential Exchange).
 # - Export: "CSV", "JSON", "PDF" and "Encrypted KeePass (.kdbx)" ("This is available to all Personal and Family plan
 #   users."); Free can't ("do not have the ability to back up, restore, share or export their Keeper Records outside of
-#   that device"). No page says which formats carry 2FA secrets, so authenticator.export is left out.
+#   that device"). The 2FA keys leave in the JSON export: its guide "Import/Export Keeper JSON" makes the file by
+#   "Exporting .JSON file from the Keeper Vault" ("Select JSON and click Export"), says "Records can also contain TOTP
+#   seeds", and its sample has "$oneTimeCode":"otpauth://totp/…" (Bitwarden's reading), so authenticator.export is
+#   plain-backup on Unlimited and Family. No page says whether the KeePass export carries them.
 # - Emergency access: "You can designate up to five emergency contacts and decide how much time should pass before their
 #   access is granted." (Unlimited's card: "Emergency access"); not on Free.
 # - Offline: "Offline access is available with all Keeper plans (except "Keeper Free")".
@@ -481,6 +485,7 @@ plans:
       password-manager.offline: true
       authenticator.included: true
       authenticator.import: [otpauth]
+      authenticator.export: [plain-backup]
       encryption.end-to-end: [passwords]
     notes: 'Unlimited devices, sync and sharing. Dark web alerts (BreachWatch) and file storage are add-ons. A 30-day free trial.'
     prices:
@@ -522,6 +527,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded: { quote: '*Includes GST' }
         lastVerified: 2026-11-19
         sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
       - region: NZ
@@ -607,6 +613,7 @@ plans:
       password-manager.offline: true
       authenticator.included: true
       authenticator.import: [otpauth]
+      authenticator.export: [plain-backup]
       encryption.end-to-end: [passwords]
     perks: [file-storage]
     notes: 'Five people, each with a private vault, plus shared folders and 10 GB for files. Dark web alerts (BreachWatch) are an add-on.'
@@ -649,6 +656,7 @@ plans:
         interval: year
         intervalCount: 1
         autoRenew: true
+        taxIncluded: { quote: '*Includes GST' }
         lastVerified: 2026-11-19
         sourceUrl: https://www.keepersecurity.com/pricing/personal-and-family.html
       - region: NZ
@@ -732,6 +740,10 @@ policies:
       url: https://help.keeper.io/article/276-how-do-i-export-my-vault-or-run-a-shared-records-report
     - name: 'How do I sign up for Keeper?'
       url: https://help.keeper.io/article/159-how-do-i-sign-up-for-keeper
+    - name: 'Keeper Family Plan'
+      url: https://docs.keeper.io/user-guides/keeper-family-plan
+    - name: 'Can I add a 6th user to my Family Plan?'
+      url: https://help.keeper.io/article/165-can-i-add-a-6th-user-to-my-family-plan
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -971,8 +983,8 @@ policies:
           quote: 'Prior notice will be sent to the email address associated with the account.'
       lastVerified: 2026-11-19
     - topic: legal.licence
-      tier: neutral
-      reason: 'Its terms, written for businesses too, limit use to your own purposes, and forbid taking its apps apart or testing their security outside its bug bounty.'
+      tier: poor
+      reason: 'Its terms, written for businesses too, limit use to your own purposes, and forbid taking its apps apart or testing their security, with no exception for what the law allows.'
       sources:
         - url: https://www.keepersecurity.com/legal/terms-of-use/?s=saas
           quote: "Unless expressly agreed in writing, all Services furnished to Customer under this Agreement shall be used by Customer only for Customer's internal business purposes, shall not be shared with third parties nor reproduced or copied in whole or in part."
@@ -998,6 +1010,16 @@ policies:
           quote: "Unless expressly agreed in writing, all Services furnished to Customer under this Agreement shall be used by Customer only for Customer's internal business purposes, shall not be shared with third parties nor reproduced or copied in whole or in part."
         - url: https://www.keepersecurity.com/legal/terms-of-use/?s=userGuidelines
           quote: 'You may not share your Master Password with third parties, including Keeper support staff.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [keeper.family]
+      tier: great
+      reason: 'Family covers up to 5 people in your family, each with a private vault of their own.'
+      sources:
+        - url: https://docs.keeper.io/user-guides/keeper-family-plan
+          quote: 'Keeper Family Plan allows you to securely store and share this information between family members with ease.'
+        - url: https://help.keeper.io/article/165-can-i-add-a-6th-user-to-my-family-plan
+          quote: "Keeper's Family Plan allows up to 5 users."
       lastVerified: 2026-11-19
     - topic: service.software-control
       status: not-stated

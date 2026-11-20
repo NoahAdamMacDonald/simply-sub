@@ -278,15 +278,15 @@ policies:
         - https://www.twilio.com/en-us/legal/authy-app-terms
       lastVerified: 2026-11-19
     - topic: legal.terms-changes
-      tier: neutral
-      reason: 'It emails you 30 days before big changes to the app’s terms, and you can stop using it. Big privacy changes come with notice too, but it doesn’t say how far ahead.'
+      tier: good
+      reason: 'It emails you at least 30 days before big changes to the app’s terms, and if you don’t agree you can stop using it.'
       sources:
         - url: https://www.twilio.com/en-us/legal/authy-app-terms
           quote: 'Twilio will provide you with written notice of any material updates at least thirty (30) days prior to the date the updated version becomes effective, unless such material updates result from changes in laws, regulations, or requirements from telecommunications providers.'
         - url: https://www.twilio.com/en-us/legal/authy-app-terms
+          quote: 'All notices to you will be provided via email to the email address you used to register for the Authy App.'
+        - url: https://www.twilio.com/en-us/legal/authy-app-terms
           quote: 'If you do not agree to the updated version of these Authy App Terms, you must stop using the Authy App.'
-        - url: https://www.twilio.com/en-us/legal/privacy
-          quote: 'If we make significant changes that affect your rights, we will provide advance notice via the Twilio console or by email and obtain your consent where legally required.'
       lastVerified: 2026-11-19
     - topic: legal.account-closure
       tier: poor

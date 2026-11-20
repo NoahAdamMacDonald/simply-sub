@@ -165,14 +165,14 @@ policies:
   ratings:
     - topic: privacy.data-collection
       tier: poor
-      reason: 'The app collects nothing. Yubico’s websites record your visits for statistics unless you refuse their cookies, and that choice only counts in the browser you make it in.'
+      reason: 'The app collects nothing. Yubico’s websites set cookies unless you refuse them in each browser, and chats with its optional AI support assistant may be kept for quality checks, training and better support tools.'
       sources:
         - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
           quote: 'The developer does not collect any data from this app.'
-        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
-          quote: 'We also automatically receive and store information from your web browser, such as IP address, language preferences cookie information and the pages you visit, to log files on our server.'
         - url: https://www.yubico.com/support/terms-conditions/cookie-notice/
           quote: 'By browsing this site without restricting the use of cookies, you consent to our and third party use of cookies as set out in our Cookie Notice.'
+        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
+          quote: 'Conversations with the AI Assistant may be logged and retained for quality assurance, training, and improvement of our support tools, and to maintain a record of your support case.'
       action:
         name: 'Change your cookie choices'
         url: https://www.yubico.com/support/terms-conditions/cookie-notice/
@@ -203,16 +203,15 @@ policies:
         name: 'Change your cookie choices'
         url: https://www.yubico.com/support/terms-conditions/cookie-notice/
       lastVerified: 2026-11-19
+    # Its privacy notice's AI support chat ("logged and retained for quality assurance, training, and improvement of our
+    # support tools") is graded under data collection, as RoboForm's support recordings are.
     - topic: privacy.ai-training
-      tier: good
-      reason: 'Nothing from the app reaches Yubico. Only if you choose its optional AI support chat may what you write there be used to train its support tools.'
-      sources:
-        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
-          quote: 'When you contact Yubico for customer support, you may choose to use an AI-based chatbot (“AI Assistant”) as an optional channel.'
-        - url: https://www.yubico.com/support/terms-conditions/privacy-notice/
-          quote: 'Conversations with the AI Assistant may be logged and retained for quality assurance, training, and improvement of our support tools, and to maintain a record of your support case.'
-        - url: https://apps.apple.com/us/app/yubico-authenticator/id1476679808
-          quote: 'The developer does not collect any data from this app.'
+      status: not-applicable
+      reason: 'Your codes stay inside your YubiKey and the app sends Yubico nothing, so there’s nothing of yours it could train AI on.'
+      pages:
+        - https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/ykauth-intro.html
+        - https://apps.apple.com/us/app/yubico-authenticator/id1476679808
+        - https://www.yubico.com/support/terms-conditions/privacy-notice/
       lastVerified: 2026-11-19
     - topic: privacy.content-access
       tier: great
@@ -297,11 +296,11 @@ policies:
           quote: 'You are bound by any such updates or changes, including but not limited to those affecting these Terms and Conditions, and so should periodically review these Terms and Conditions.'
       lastVerified: 2026-11-19
     - topic: legal.account-closure
-      tier: bad
-      reason: 'Yubico can cut off your use of its websites and downloads, and any account there, at any time, for any reason, without warning.'
-      sources:
-        - url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
-          quote: 'Yubico may terminate this Agreement, your rights under this Agreement, and your access to and use of the Website and Service in its sole discretion, for any reason or no reason at all, including but not limited to failure to pay your fees, with or without cause and without notice or liability to you or any third party.'
+      status: not-applicable
+      reason: 'There’s no account to close: you install the app and connect your YubiKey, and the copy you have stays yours under its open-source licence.'
+      pages:
+        - https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/oath.html
+        - https://github.com/Yubico/yubioath-flutter/blob/main/LICENSE
       lastVerified: 2026-11-19
     - topic: legal.content-rights
       tier: great

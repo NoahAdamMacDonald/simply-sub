@@ -860,13 +860,19 @@ policies:
           quote: 'But if, for any reason, you think you have encountered a potential security issue with Enpass, please contact the Enpass as soon as possible .'
       lastVerified: 2026-11-19
     - topic: service.account-sharing
+      tier: bad
+      reason: 'Your licence is for you alone: its terms say it can’t be shared or used by anyone else. Family covers up to six people in your household instead.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'This license is non-transferable and cannot be shared or used by anyone else.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [enpass.family]
       tier: good
-      reason: 'Family covers up to six people in your household. Any other licence is for you alone and can’t be shared.'
+      reason: 'Family covers up to six people in your household, with nothing said about checking who they are.'
       sources:
         - url: https://help.enpass.io/personal/latest/all/why-enpass
           quote: 'Manage up to 6 household users'
-        - url: https://www.enpass.io/terms-of-use/
-          quote: 'This license is non-transferable and cannot be shared or used by anyone else.'
       lastVerified: 2026-11-19
     - topic: service.software-control
       status: not-stated

@@ -433,6 +433,8 @@ policies:
       url: https://support.nordpass.com/hc/en-us/articles/360007646477-How-to-export-passwords-from-NordPass
     - name: 'Why do dormant accounts get deleted?'
       url: https://support.nordpass.com/hc/en-us/articles/40284545674769-Why-do-dormant-accounts-get-deleted
+    - name: 'How to add members to your Family plan'
+      url: https://support.nordpass.com/hc/en-us/articles/360012113398-How-to-add-members-to-your-Family-plan
     - name: 'How to change NordPass plan'
       url: https://support.nordpass.com/hc/en-us/articles/360002454638-How-to-change-NordPass-plan
   ratings:
@@ -697,6 +699,14 @@ policies:
           quote: 'No sharing of Accounts'
         - url: https://my.nordaccount.com/legal/terms-of-service/
           quote: 'You are responsible for maintaining the confidentiality of your Account, and for preventing any third party from accessing/using your Account.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [nordpass.family]
+      tier: great
+      reason: 'Family gives 6 people a vault of their own: you, your family and your friends.'
+      sources:
+        - url: https://support.nordpass.com/hc/en-us/articles/360012113398-How-to-add-members-to-your-Family-plan
+          quote: 'As the NordPass Family Plan enables you to create six separate encrypted vaults for yourself, your family, and your friends with just one subscription, this guide will explain how to add someone to your NordPass Family plan.'
       lastVerified: 2026-11-19
     - topic: service.software-control
       status: not-stated

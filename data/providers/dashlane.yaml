@@ -30,8 +30,10 @@
 # VPN: Premium and a Friends & Family plan's manager get Hotspot Shield's VPN ("You can set up your Hotspot Shield
 # Premium account directly from your Dashlane app."), but on 5 devices ("you can use the VPN on up to five devices"),
 # not the 10 of the catalog's hotspot-shield.premium, so it isn't listed in includes-subscription: the plans state
-# vpn.included and vpn.devices, with notIn: [vpn] (a password manager with a VPN, not sold as a VPN; notes.md). Turning
-# it on means agreeing to Hotspot Shield's terms and privacy policy, rated below where they're worse.
+# vpn.included and vpn.devices, with notIn: [vpn] (a password manager with a VPN, not sold as a VPN; notes.md). Its
+# traffic is unlimited by inference: Dashlane gives "their Premium VPN service" and Hotspot Shield's Premium plan has
+# "unlimited bandwidth" (its own page); server countries and protocols are left out. Turning it on means agreeing to
+# Hotspot Shield's terms and privacy policy, rated below where they're worse.
 
 id: dashlane
 name: Dashlane
@@ -203,8 +205,16 @@ plans:
       security.dark-web-monitoring: true
       vpn.included: true
       vpn.devices: 5
+      vpn.unlimited-traffic: true
+    inferred:
+      vpn.unlimited-traffic:
+        reason: 'Dashlane says "We partner with Hotspot Shield to provide their Premium VPN service", and Hotspot Shield says its Premium plan offers "unlimited bandwidth".'
+        page:
+          name: 'Hotspot Shield security audit'
+          url: https://www.hotspotshield.com/security-audit/
+        lastVerified: 2026-11-19
     perks: [file-storage]
-    notes: 'Unlimited devices, with Hotspot Shield’s VPN on up to 5 of them. A 14-day free trial (without the VPN).'
+    notes: 'Unlimited devices, with Hotspot Shield’s VPN on up to 5 of them. A 14-day free trial (without the VPN). In the euro countries the total with VAT is €57.49 a year.'
     prices:
       - region: CA
         currency: USD
@@ -329,8 +339,18 @@ plans:
       security.dark-web-monitoring: true
       vpn.included: true
       vpn.devices: 5
+      vpn.unlimited-traffic: true
+    featureLabels:
+      vpn.included: 'Hotspot Shield’s VPN, for the plan manager only'
+    inferred:
+      vpn.unlimited-traffic:
+        reason: 'Dashlane says "We partner with Hotspot Shield to provide their Premium VPN service", and Hotspot Shield says its Premium plan offers "unlimited bandwidth".'
+        page:
+          name: 'Hotspot Shield security audit'
+          url: https://www.hotspotshield.com/security-audit/
+        lastVerified: 2026-11-19
     perks: [file-storage]
-    notes: 'Premium for up to 10 people, each with a private account. Only the plan manager gets the VPN (on up to 5 devices).'
+    notes: 'Premium for up to 10 people, each with a private account. Only the plan manager gets the VPN (on up to 5 devices). In the euro countries the total with VAT is €86.99 a year.'
     prices:
       - region: CA
         currency: USD
@@ -466,6 +486,8 @@ policies:
       url: https://support.dashlane.com/hc/en-us/articles/32567141773330-Do-I-need-to-cancel-my-Dashlane-Premium-trial-to-avoid-charges
     - name: 'Compare Dashlane personal plans'
       url: https://support.dashlane.com/hc/en-us/articles/360001166969-Compare-Dashlane-personal-plans
+    - name: 'Dashlane Friends & Family plan'
+      url: https://support.dashlane.com/hc/en-us/articles/360013369820-Dashlane-Friends-Family-plan
     - name: 'Manage subscription and billing'
       url: https://support.dashlane.com/hc/en-us/articles/202699341-Manage-subscription-and-billing-for-Dashlane-personal-plans
     - name: 'Export your Dashlane data to a CSV'
@@ -575,13 +597,16 @@ policies:
           quote: 'We generally retain your personal information for as long as is needed to provide the Services to you, or for as long as you have an account or subscription with us.'
       lastVerified: 2026-11-19
     - topic: privacy.data-deletion
-      tier: great
+      tier: good
       reason: 'You can delete your account yourself at any time, and everything in it is erased within 30 days.'
       sources:
         - url: https://support.dashlane.com/hc/en-us/articles/202907531-Delete-your-Dashlane-account-and-data
           quote: "If you don't want to use Dashlane any longer, you can delete your account."
         - url: https://www.dashlane.com/privacy
           quote: 'If you delete your Account, all Personal Data will automatically be erased within 30 days of the date of deletion.'
+      action:
+        name: 'How to delete your account'
+        url: https://support.dashlane.com/hc/en-us/articles/202907531-Delete-your-Dashlane-account-and-data
       lastVerified: 2026-11-19
     - topic: privacy.data-deletion
       plans: [dashlane.premium, dashlane.friends-family]
@@ -739,6 +764,19 @@ policies:
         - url: https://legal.hotspotshield.com/documents/terms_of_service
           quote: 'if you are a customer who resides in a jurisdiction where you have a legal right to opt out of arbitration in accordance with laws applicable to you – you may exercise your legal right to opt out.'
       lastVerified: 2026-11-19
+    # The EU's own grade for the VPN's plans: a plan's rating outranks a region's, so without this one the plans' Bad
+    # would show in the EU too (hotspot-shield.yaml grades the EU Good from the same terms).
+    - topic: legal.disputes
+      plans: [dashlane.premium, dashlane.friends-family]
+      regions: [EU]
+      tier: good
+      reason: 'In the EU, neither Dashlane’s terms nor Hotspot Shield’s, which cover its VPN, send you to a private referee: disputes go to France’s courts or your local consumer body, and your country’s consumer laws apply.'
+      sources:
+        - url: https://www.dashlane.com/terms
+          quote: 'European Union Dashlane SAS Laws of France French Courts or local mandatory consumer forum'
+        - url: https://legal.hotspotshield.com/documents/terms_of_service
+          quote: 'If you reside in a country (including countries of the European Union) where laws provide consumers the right to bring disputes in their local courts, then, in such cases, mandatory provisions of the local laws of your country of residence shall apply.'
+      lastVerified: 2026-11-19
     - topic: legal.terms-changes
       tier: good
       reason: 'It emails you or tells you in the app about big changes, and they start for you 30 days after it posts them, so you can leave first.'
@@ -846,6 +884,14 @@ policies:
       sources:
         - url: https://www.dashlane.com/terms
           quote: 'Keep your Login Details secure and do not share them with anyone.'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [dashlane.friends-family]
+      tier: great
+      reason: 'Friends & Family is for you and nine others from your close circle, friends or family, each with a private account of their own.'
+      sources:
+        - url: https://support.dashlane.com/hc/en-us/articles/360013369820-Dashlane-Friends-Family-plan
+          quote: "With Dashlane's Friends & Family plan, you and nine members of your close circle can share a Dashlane subscription."
       lastVerified: 2026-11-19
     - topic: service.software-control
       tier: good

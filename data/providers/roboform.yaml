@@ -52,15 +52,35 @@ billingCurrency:
 # Its help article on cancelling ("toggle option for Auto Renewal Status to the "OFF" position").
 cancelUrl: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
 sources: { pricing: https://www.roboform.com/pricing-personal }
-# Ways to pay (M11.5), read 2026-11-19: "Credit or debit card" at its checkout (its card logos name no network in
-# words, so no acceptedNetworks), PayPal on its website and the app stores (its cancelling article and licence).
+# Ways to pay (M11.5), read 2026-11-19 on its checkout in each country (its card logos name no network in words, so no
+# acceptedNetworks): "Credit or debit card" only in Canada, the UK, Ireland, Australia and the euro countries read; the
+# US's adds "PayPal" and "Amazon Pay" (other, Enpass's precedent), New Zealand's "Amazon Pay". Its licence lists PayPal
+# among its processors ("Stripe, Paypal, Apple, Google, etc") and its cancelling article covers people who "purchased
+# using PayPal on our website", which fits older purchases: PayPal is listed only where a checkout shows it. The app
+# stores bill it too (its cancelling article), everywhere.
 paymentMethods:
-  - methods: [card, paypal]
-    page: 'License Agreement'
-    url: https://www.roboform.com/license
+  - methods: [card]
+    page: 'Checkout'
+    url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
     quotes:
-      - "Siber shall charge it automatically to Customer's credit card or other payment method from the original purchase that was stored in payment system database (Stripe, Paypal, Apple, Google, etc)."
+      - 'Credit or debit card'
   - methods: [app-store]
+    page: 'How do I cancel auto-renewal for my RoboForm Subscription?'
+    url: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
+    quotes:
+      - 'If you subscribed to an automatically renewed plan on the iOS App Store, you must manage your subscription within your Apple account.'
+  - methods: [card, paypal, other]
+    regions: [US]
+    page: 'Checkout (United States)'
+    url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+    quotes: ['Credit or debit card', 'PayPal', 'Amazon Pay', 'Country: United States']
+  - methods: [card, other]
+    regions: [NZ]
+    page: 'Checkout (New Zealand)'
+    url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
+    quotes: ['Credit or debit card', 'Amazon Pay', 'Country: New Zealand']
+  - methods: [app-store]
+    regions: [US, NZ]
     page: 'How do I cancel auto-renewal for my RoboForm Subscription?'
     url: https://help.roboform.com/hc/en-us/articles/115003064811-How-do-I-cancel-auto-renewal-for-my-RoboForm-Subscription
     quotes:
@@ -86,7 +106,7 @@ owner:
   country:
     code: US
   lastVerified: 2026-11-19
-notes: Billed once a year (2- and 3-year terms cost the same per year). Card and PayPal renewals are charged 14 days before the term ends.
+notes: Billed once a year (2- and 3-year terms cost the same per year). Renewals bought on its website are charged 14 days before the term ends.
 
 # Perks (M11.6): what no feature describes, in its pages' words.
 perks:
@@ -410,6 +430,10 @@ policies:
       url: https://online.roboform.com/?lic=premium#payment-page=buy&product-type=roboform-consumer&new-user
     - name: 'Premium'
       url: https://www.roboform.com/premium
+    - name: 'Family'
+      url: https://www.roboform.com/family
+    - name: 'How many accounts are under a Family Plan?'
+      url: https://help.roboform.com/hc/en-us/articles/115000407252-How-many-accounts-are-under-a-RoboForm-Family-Plan-subscription
   ratings:
     - topic: privacy.data-collection
       tier: poor
@@ -608,8 +632,8 @@ policies:
       pages: [https://www.roboform.com/license, https://www.roboform.com/privacy-policy]
       lastVerified: 2026-11-19
     - topic: legal.licence
-      tier: neutral
-      reason: 'Premium is for one person on their own devices, not a company, and you may not take its apps apart.'
+      tier: poor
+      reason: 'Premium is for one person on their own devices, not a company, and you may not take its apps apart, with no exception for what the law allows.'
       sources:
         - url: https://www.roboform.com/license
           quote: '- Customer is a physical person and not a company or organization or government institution.'
@@ -631,6 +655,16 @@ policies:
       sources:
         - url: https://www.roboform.com/license
           quote: '- All these computers and devices belong to the same Customer, and'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      plans: [roboform.family]
+      tier: great
+      reason: 'Family gives you and your family, up to 5 people, a Premium account each.'
+      sources:
+        - url: https://www.roboform.com/family
+          quote: 'Up to 5 RoboForm Premium accounts for you and your family.'
+        - url: https://help.roboform.com/hc/en-us/articles/115000407252-How-many-accounts-are-under-a-RoboForm-Family-Plan-subscription
+          quote: 'Up to five RoboForm accounts can be included under a family plan subscription.'
       lastVerified: 2026-11-19
     - topic: service.software-control
       tier: good
