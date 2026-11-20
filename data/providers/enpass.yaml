@@ -1,0 +1,875 @@
+# Researched by hand on 2026-11-19 (the full catalog run, passwords batch 2), read with Edge from Canada (enpass.io's
+# pricing page and its Annual, 3-year and Lifetime tabs, its comparison table's ticks from screenshots, its FastSpring
+# checkout and store pages) and with a plain fetch, which serves enpass.io and help.enpass.io whole: its home, personal,
+# about, security, why-Enpass, partners, students, contact, downloads and release-notes pages, its terms of use, privacy
+# notice and cookie policy, its trust centre (trust.enpass.io), and 50 articles of its Personal & Family Support Center
+# (subscriptions, account deletion, activation, family plan, import from a CSV, KeePass, Bitwarden, 1Password, LastPass,
+# NordPass and Microsoft Authenticator, export, backups, passkeys, 2FA codes, sharing, items, audit, breach monitoring,
+# sync, offline storage, security); its store's pages again through US, UK, German, Spanish, French, Irish, Italian, Dutch,
+# Australian and New Zealand exits, each kept only when the store's own page data named that country.
+# Pricing: enpass.io/pricing shows Free ("$0 CAD forever", "Store up to 25 items in 1 vault"), Premium (Annual, 3-year and
+# Lifetime tabs) and Family, and each "Get started" opens Enpass's FastSpring store, whose page for each product
+# (enpass.onfastspring.com/<product>) prices by where the visitor is. Every tab shows a sale ("40% off", "30% off"); the
+# regular price is the one struck through, which the yearly plans renew at: "Billed annually at $19.49 CAD with your
+# discount, then $32.49 CAD, billed yearly" (pricing page), "Renews every year . Next charge: $32.49 on Nov. 20, 2027 ."
+# (store). The 3-year plan is one payment that doesn't renew: "Renews every 3 years for free . Ends on Nov. 19, 2029"
+# (store; its page data has "nextChargeTotal":"$0.00"), so autoRenew is false (a prepaid period, the run's standing rule).
+# Regular prices read 2026-11-19 (yearly, 3 years, Family yearly): Canada CA$32.49, CA$71.99, CA$64.99; US $23.99, $47.99,
+# $47.99; UK £19.49, £45.99, £38.99; Germany €21.49, €53.99, €42.99; Spain, France and the Netherlands €21.49, €54.99,
+# €42.99; Ireland and Italy €21.49, €55.99, €42.99; Australia A$34.99, A$81.99, A$69.99; New Zealand NZ$37.49, NZ$104.99,
+# NZ$74.99. The euro countries' 3-year prices differ, so each country has its own (not EU). The European, UK, Australian
+# and New Zealand store pages say "Includes VAT …" or "Includes GST …" (the tax on the amount shown), so those prices
+# include tax; Canada's says "Includes GST $0.00 CAD (0%)" before an address is given and the US's names no tax, so theirs
+# are before tax (the catalog's default).
+# Region checklist for CA and US, 2026-11-19: 1. no country paths (one English site); 2. no country or currency picker; 3.
+# the store page's data names the visitor's country and currency ("country":"CA","currency":"CAD"); 4. the checkout
+# popup and store pages read up to the payment form, typing nothing; 5. no prices-by-country article; 6. Edge and a plain
+# fetch from Canada (the plain fetch shows the page's US-dollar placeholders, filled in by the store's script), Edge
+# through a US exit; 7. no bill offered.
+# Its personal plans: Free, Premium (yearly or 3 years) and Family (yearly, 6 people). Out of scope and not listed:
+# Premium Lifetime, a one-time purchase (CA$134.99 regular; categories.md: a lifetime plan beside subscriptions is left
+# out), and Enpass Business and Enterprise. In-app subscriptions on the App Store and Google Play are individual only
+# ("When purchasing Enpass from an app store or an in-app purchase, only individual user subscriptions are available.",
+# Sharing an Enpass family plan); no Enpass page prices them, so they aren't priced here.
+# Bundles: none. Official resellers: none for personal plans: its partners programme is for resellers to businesses
+# ("Recommend and sell Enpass to SMBs and enterprises."); FastSpring is its store ("Sold and fulfilled by FastSpring an
+# authorized reseller and Merchant of Record"), not a shop of its own. Students: "special pricing for students and
+# universities" by contacting it (no price).
+# Free use: its Free plan. No free trial of Premium or Family ("Can I try Enpass before I pay? Yes. A Free account lets you
+# use Enpass with up to 25 credentials in one vault.", personal page).
+
+id: enpass
+name: Enpass
+website: https://www.enpass.io
+# Its store, which its pricing page's "Get started" buttons open (FastSpring sells and bills it): its checkout lists the
+# cards each country can pay with.
+domains: [enpass.onfastspring.com]
+category: passwords
+spendCategory: software
+# Accepted cards (M9.2), read 2026-11-19 on its store's checkout for each country: the cards listed under "Credit / Debit
+# Card" differ by country.
+acceptedNetworks:
+  CA:
+    networks: [visa, mastercard, discover, amex, jcb, unionpay]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'Discover', 'American Express', 'JCB', 'UnionPay']
+  US:
+    networks: [visa, mastercard, discover, amex, jcb, unionpay]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'Discover', 'American Express', 'JCB', 'UnionPay']
+  GB:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  DE:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  ES:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  FR:
+    networks: [visa, mastercard, amex, jcb, unionpay]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB', 'UnionPay']
+  IE:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  IT:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  NL:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  AU:
+    networks: [visa, mastercard, amex, jcb]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express', 'JCB']
+  NZ:
+    networks: [visa, mastercard, amex]
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Visa', 'Mastercard', 'American Express']
+billingCurrency:
+  {
+    GLOBAL: USD,
+    CA: CAD,
+    US: USD,
+    GB: GBP,
+    DE: EUR,
+    ES: EUR,
+    FR: EUR,
+    IE: EUR,
+    IT: EUR,
+    NL: EUR,
+    AU: AUD,
+    NZ: NZD,
+  }
+# Its help article on managing a subscription: one bought on enpass.io is managed at enpass.onfastspring.com/account, one
+# bought in an app store with Apple or Google.
+cancelUrl: https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+sources: { pricing: https://www.enpass.io/pricing/ }
+
+# Ways to pay (M11.5), read 2026-11-19 on its store's checkout: "Credit / Debit Card", "PayPal Checkout" and "Google
+# Pay" everywhere read, and "Pay with Amazon" in the US only (other). App store billing: its help article on managing
+# subscriptions.
+paymentMethods:
+  - methods: [card, paypal, google-pay]
+    page: 'Enpass store checkout'
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Credit / Debit Card', 'PayPal Checkout', 'Google Pay']
+  - methods: [card, paypal, google-pay, other]
+    regions: [US]
+    page: 'Enpass store checkout'
+    url: https://enpass.onfastspring.com/premium-12-months
+    quotes: ['Credit / Debit Card', 'PayPal Checkout', 'Google Pay', 'Pay with Amazon']
+  - methods: [app-store]
+    page: 'Managing subscriptions or payments'
+    url: https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+    quotes:
+      - 'To manage an Enpass subscription purchased through the iOS or Mac App Stores:'
+      - 'To manage an Enpass subscription purchased through the Google Play Store:'
+# Renewal day (M11.5), read 2026-11-19: its terms say "At the end of each billing cycle, your subscription will
+# automatically renew under the same conditions."; its store shows the next charge a year after today's date, but no page
+# says on which day a subscription renews.
+renewalAnchor:
+  kind: not-stated
+  pages:
+    - https://www.enpass.io/terms-of-use/
+    - https://enpass.onfastspring.com/premium-12-months
+    - https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+  lastVerified: 2026-11-19
+# Owner (M11.2), read 2026-11-19: its terms name Enpass Technologies Inc., at "1201 N. Market Street, Wilmington, DE
+# 19801", and its about page says it's "headquartered in Wilmington, Delaware". Private: no page names a listing. No
+# current Enpass page names Sinew Software Systems, the name the catalog list had.
+owner:
+  name: Enpass Technologies Inc.
+  page:
+    name: Terms of use
+    url: https://www.enpass.io/terms-of-use/
+  quotes:
+    - 'The terms “us”, “we”, and “our” refer to our company Enpass Technologies Inc the owner of the Platform.'
+    - 'This Agreement is between you and Enpass Technologies Inc.'
+  country:
+    code: US
+    page:
+      name: About
+      url: https://www.enpass.io/about/
+    quotes:
+      - 'Enpass has since grown into a multinational tech company headquartered in Wilmington, Delaware, with offices across the US, India, UK, Ireland, Belgium, Indonesia, Japan, and Singapore.'
+    lastVerified: 2026-11-19
+  lastVerified: 2026-11-19
+notes: >-
+  Your vault stays on your devices and in your own cloud storage (iCloud, Google Drive, OneDrive, Dropbox, Box, Nextcloud
+  or WebDAV), never on Enpass’s servers. Premium is also sold for life, paid once, which isn’t listed. App store
+  purchases are individual only; Family is bought on enpass.io.
+
+# Perks (M11.6): what Premium and Family add that no feature describes, in the comparison table's words.
+perks:
+  - id: priority-support
+    name: Priority support
+  - id: two-factor-monitoring
+    name: Two-factor authentication monitoring
+  - id: passkey-monitoring
+    name: Passkey monitoring
+
+# General features, read 2026-11-19. Platforms: "Windows, MacOS, Linux, iOS, Android apps, including for wearables" and
+# "Browser extensions for Chrome, Edge, Firefox, Safari, Brave, Vivaldi, and Opera" (comparison table, every plan); no web
+# app (its downloads page). Sign-in: there's no Enpass password account: you activate the app with an emailed code ("Provide
+# an email address to receive an activation code"), or "Continue with Apple" or "Sign in with Google" (Activation), and
+# unlock your vault with its master password, optionally with a keyfile ("Keyfile support", every plan), which has no
+# registry value. Support: "Email support for paid users" and "Friendly user forums with staff participation" (Why
+# Enpass?), so email and community, the Free plan community only; Premium and Family's "Priority support" is a perk. App
+# languages: "Localization in 33 languages" (Why Enpass?), but no page names them, so languages.interface is left out.
+# Not open source: its apps are Enpass's own; only its encryption engine is open source ("the open-source SQLCipher
+# encryption engine"). Not self-hostable: there's no server to run. No pause; no parental controls (Family's "family
+# management" isn't described as restricting members).
+features:
+  platforms: [windows, macos, linux, android, ios, browser-extension]
+  account.sign-in: [password, email-code, sso]
+  support.channels: [email, community]
+  software.open-source: proprietary
+  software.self-hostable: false
+
+# Password manager features, read 2026-11-19 (pricing page and comparison table, and the help articles named):
+# - Items: "Store passwords, passkeys, and payment cards" "With customisable categories and templates" (comparison);
+#   custom templates (Creating custom templates); notes ("Logins", "Credit Cards", "Notes", "Miscellaneous" CSV
+#   templates); identities ("autofilling usernames, passwords, credit cards, and identities", downloads); a "One-time
+#   code" field for 2FA codes. File attachments ("Secure document storage", every plan) are vault data, not a files
+#   service.
+# - Health: the Security Audit ("Items with compromised, identical, weak, or expired passwords"); "Expired passwords"
+#   are ones whose expiry date has passed, counted as old. "Breach and dark web monitoring" ("Alerts if a credential is
+#   in a known breach or has been compromised") is Premium's and Family's, not Free's (comparison), so breached and
+#   security.dark-web-monitoring are theirs; Free's "Security dashboard" has weak, identical and expired.
+# - Sharing: a vault in a cloud account shared with other Enpass users (Sharing a vault: it must be "A vault separate from
+#   your Primary Vault", so not on Free's one vault); single items sent to another Enpass user as "an encrypted link"
+#   unlocked with a pre-shared key (Sharing individual Items): share-to-user, share-link and link-password.
+# - Import (desktop app): CSV templates, other managers' and browsers' exports (1Password's .1pux, Bitwarden's .json or
+#   .csv, LastPass's .csv and others: Importing passwords), and its own .json export; KeePass is imported from its .xml
+#   export, not a KDBX file. Passkeys "cannot be imported or exported between password managers", so no cxf. Free
+#   imports "Up to 25 items". Export: "choose .json as the file format for your export" (Importing from Enpass); no other
+#   format is named.
+# - No emergency access (no page offers one). Offline: vaults live on your devices, with offline sync over Wi-Fi or a
+#   folder (Offline Storage & Sync).
+# - Authenticator: "Integrated authenticator" on every plan (comparison); a site's key is entered or its QR code scanned
+#   ("tap the QR-code icon to scan in the key"): otpauth. No page says how 2FA secrets leave Enpass, so
+#   authenticator.export is left empty.
+# - End-to-end encryption: "Enpass uses end-to-end encryption , a zero-knowledge architecture , and never stores user data
+#   on its own infrastructure." (partners page), so passwords.
+plans:
+  - id: enpass.free
+    name: Free
+    link: https://www.enpass.io/downloads/
+    features:
+      support.channels: [community]
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, custom]
+      password-manager.health: [weak, reused, old]
+      password-manager.sharing: [share-to-user, share-link, link-password]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [json]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+    notes: Up to 25 items in one vault, on every device. Your vault syncs through your own cloud account or over Wi-Fi.
+    prices:
+      - {
+          region: GLOBAL,
+          currency: USD,
+          amount: 0,
+          interval: month,
+          intervalCount: 1,
+          autoRenew: true,
+          lastVerified: 2026-11-19,
+          sourceUrl: https://www.enpass.io/pricing/,
+        }
+
+  - id: enpass.premium
+    name: Premium
+    link: https://www.enpass.io/pricing/
+    features:
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, custom]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing: [share-to-user, share-vault, share-link, link-password]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [json]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [priority-support, two-factor-monitoring, passkey-monitoring]
+    notes: >-
+      Unlimited items and vaults. Billed yearly, or once for 3 years (that one doesn’t renew). Also sold in the App Store
+      and Google Play.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 32.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: US
+        currency: USD
+        amount: 23.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: GB
+        currency: GBP
+        amount: 19.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: DE
+        currency: EUR
+        amount: 21.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: ES
+        currency: EUR
+        amount: 21.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: FR
+        currency: EUR
+        amount: 21.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: IE
+        currency: EUR
+        amount: 21.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: IT
+        currency: EUR
+        amount: 21.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: NL
+        currency: EUR
+        amount: 21.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: AU
+        currency: AUD
+        amount: 34.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes GST' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: NZ
+        currency: NZD
+        amount: 37.49
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes GST' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/premium-12-months
+      - region: CA
+        currency: CAD
+        amount: 71.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: US
+        currency: USD
+        amount: 47.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: GB
+        currency: GBP
+        amount: 45.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: DE
+        currency: EUR
+        amount: 53.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: ES
+        currency: EUR
+        amount: 54.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: FR
+        currency: EUR
+        amount: 54.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: IE
+        currency: EUR
+        amount: 55.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: IT
+        currency: EUR
+        amount: 55.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: NL
+        currency: EUR
+        amount: 54.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: AU
+        currency: AUD
+        amount: 81.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes GST' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+      - region: NZ
+        currency: NZD
+        amount: 104.99
+        interval: year
+        intervalCount: 3
+        autoRenew: false
+        taxIncluded: { quote: 'Includes GST' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/enpass-36-months-premium
+
+  - id: enpass.family
+    name: Family
+    link: https://www.enpass.io/pricing/
+    features:
+      account.users: 6
+      password-manager: true
+      password-manager.item-types:
+        [login, totp, passkey, credit-card, identity, secure-note, custom]
+      password-manager.health: [breached, weak, reused, old]
+      password-manager.sharing: [share-to-user, share-vault, share-link, link-password]
+      password-manager.import: [csv, json, other-managers]
+      password-manager.export: [json]
+      password-manager.emergency-access: false
+      password-manager.offline: true
+      authenticator.included: true
+      authenticator.import: [otpauth]
+      encryption.end-to-end: [passwords]
+      security.dark-web-monitoring: true
+    perks: [priority-support, two-factor-monitoring, passkey-monitoring]
+    notes: Everything in Premium for up to 6 people, with family management. Billed yearly; sold only on enpass.io.
+    prices:
+      - region: CA
+        currency: CAD
+        amount: 64.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: US
+        currency: USD
+        amount: 47.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: GB
+        currency: GBP
+        amount: 38.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: DE
+        currency: EUR
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: ES
+        currency: EUR
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: FR
+        currency: EUR
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: IE
+        currency: EUR
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: IT
+        currency: EUR
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: NL
+        currency: EUR
+        amount: 42.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes VAT' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: AU
+        currency: AUD
+        amount: 69.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes GST' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+      - region: NZ
+        currency: NZD
+        amount: 74.99
+        interval: year
+        intervalCount: 1
+        autoRenew: true
+        taxIncluded: { quote: 'Includes GST' }
+        lastVerified: 2026-11-19
+        sourceUrl: https://enpass.onfastspring.com/families-annual-subscription
+
+# Terms and policies (BLUEPRINT §4.10), read 2026-11-19 with a plain fetch: its terms of use (effective May 03, 2022,
+# Enpass Technologies Inc.'s, which include its privacy notice), privacy notice (effective July 11, 2025), cookie policy
+# (effective Aug 28, 2024), its cookie banner (Edge, from Canada), its security and trust pages and its help articles on
+# subscriptions, account deletion, export, sharing and security. Every agreement a user accepts (the owner's rule,
+# 2026-11-03): the app's activation (email or Apple or Google sign-in, in the app, not readable here) falls under the
+# terms, which are also its apps' licence ("our mobile, web, and desktop applications"); its store's checkout is
+# FastSpring's ("Privacy Policy | Terms of Sale"), a merchant of record's terms, not read; the App Store's and Google
+# Play's terms cover in-app purchases. Its business terms (Enpass Business Terms of Use) are for business licences, not
+# read. Its Security Whitepaper is a PDF, not read; its trust centre lists ISO 27001, SOC 2, ISO 27701 and TISAX.
+policies:
+  links:
+    - name: 'Terms of use'
+      url: https://www.enpass.io/terms-of-use/
+    - name: 'Privacy notice'
+      url: https://www.enpass.io/privacy-notice/
+    - name: 'Cookie policy'
+      url: https://www.enpass.io/cookie/
+    - name: 'Pricing'
+      url: https://www.enpass.io/pricing/
+    - name: 'Personal'
+      url: https://www.enpass.io/personal/
+    - name: 'Security'
+      url: https://www.enpass.io/security/
+    - name: 'Managing subscriptions or payments'
+      url: https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+    - name: 'Deleting an Enpass account'
+      url: https://help.enpass.io/personal/latest/all/deleting-an-enpass-account-duplicate
+    - name: 'Activation'
+      url: https://help.enpass.io/personal/latest/all/activation
+    - name: 'Importing from Enpass (export)'
+      url: https://help.enpass.io/personal/latest/all/importing-from-enpass
+    - name: 'Data security & encryption'
+      url: https://help.enpass.io/personal/latest/all/data-security-encryption
+    - name: 'Why Enpass?'
+      url: https://help.enpass.io/personal/latest/all/why-enpass
+    - name: 'Enpass store (12-Month Premium)'
+      url: https://enpass.onfastspring.com/premium-12-months
+    - name: 'Downloads'
+      url: https://www.enpass.io/downloads/
+  ratings:
+    - topic: privacy.data-collection
+      tier: poor
+      reason: 'Its apps send device details and which features you use so it can study how they’re used, and its website uses Google Analytics and Clearbit. No setting stops it; you’d have to write and object.'
+      sources:
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'To enhance and improve our product, we gather certain device data to analyze apps usage.'
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'Some parts of our Platform use Google Analytics and Clearbit to collect information about the use of our Platform.'
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'Contact us using the information at the top of this privacy notice to exercise any of your legal rights contained within this privacy notice.'
+      action:
+        name: 'Ask it to stop (its privacy notice)'
+        url: https://www.enpass.io/privacy-notice/
+      lastVerified: 2026-11-19
+    - topic: privacy.data-sharing
+      tier: poor
+      reason: 'It doesn’t sell your details, but it may give your email and other details to companies it works with so they can tell you about their own products. To stop that you have to write to it.'
+      sources:
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'We share this information with them so that they can send you information about our products and services as well as their products and services.'
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'With the exception defined in our Disclosures to Successors provision, we never sell your PD.'
+      action:
+        name: 'Ask it to stop (its privacy notice)'
+        url: https://www.enpass.io/privacy-notice/
+      lastVerified: 2026-11-19
+    - topic: privacy.ads-tracking
+      tier: good
+      reason: 'No ads in its apps. Its website’s advertising cookies, which can show you ads based on your interests, are set only if you accept them.'
+      sources:
+        - url: https://www.enpass.io/pricing/
+          quote: 'By clicking "Accept All", you consent to our use of cookies.'
+        - url: https://www.enpass.io/cookie/
+          quote: 'targeted advertising and serving ads relevant to your interests'
+      lastVerified: 2026-11-19
+    - topic: privacy.ai-training
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t mention AI. It never receives what’s in your vault.'
+      pages: [https://www.enpass.io/privacy-notice/, https://www.enpass.io/terms-of-use/]
+      lastVerified: 2026-11-19
+    - topic: privacy.content-access
+      tier: great
+      reason: 'Your passwords never reach Enpass: they’re locked on your devices and kept in your own cloud, so nobody at Enpass can read them.'
+      sources:
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'All your secured data like logins, credit cards or any kind of data that you store in our Platform is stored locally and is never sent to our servers encrypted or unencrypted.'
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'PLEASE NOTE THAT IN ANY CASE YOUR SECURED DATA LIKE YOUR MASTER PASSWORD AND ANY DATA SAVED IN ENPASS CAN’T BE ACCESSED BY ANYONE.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-retention
+      tier: poor
+      reason: 'It keeps your name and email for as long as it decides it needs them, with no time limits stated. Deleting your account erases them from its servers.'
+      sources:
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'We only retain your PD for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.'
+        - url: https://help.enpass.io/personal/latest/all/deleting-an-enpass-account-duplicate
+          quote: 'When you delete your Enpass account, the following information will be erased from Enpass servers:'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-deletion
+      tier: great
+      reason: 'It holds only your name and email. You can delete your account yourself in its phone apps or its Mac App Store app; for its other apps you ask support.'
+      sources:
+        - url: https://help.enpass.io/personal/latest/all/deleting-an-enpass-account-duplicate
+          quote: 'Enpass does not retain personal information about users other than your name and email address, which are used only to authenticate your subscription on each of your devices and unlock paid features.'
+        - url: https://help.enpass.io/personal/latest/all/deleting-an-enpass-account-duplicate
+          quote: 'In the Account screen, tap Delete Account .'
+      action:
+        name: 'How to delete your Enpass account'
+        url: https://help.enpass.io/personal/latest/all/deleting-an-enpass-account-duplicate
+      lastVerified: 2026-11-19
+    - topic: privacy.data-portability
+      tier: good
+      reason: 'You can export a vault yourself from its desktop app as a JSON file, an open format. Its pages don’t describe the file’s layout.'
+      sources:
+        - url: https://help.enpass.io/personal/latest/all/importing-from-enpass
+          quote: 'From the File menu in Enpass, select Export .'
+        - url: https://help.enpass.io/personal/latest/all/importing-from-enpass
+          quote: 'Select the vault to export, and choose .json as the file format for your export.'
+      action:
+        name: 'How to export a vault'
+        url: https://help.enpass.io/personal/latest/all/importing-from-enpass
+      lastVerified: 2026-11-19
+    - topic: privacy.government-requests
+      tier: neutral
+      reason: 'It hands over your details when the law requires it, but doesn’t promise to tell you or publish how often. It holds only your name and email, and can’t open your vault.'
+      sources:
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'We may be legally required to disclose your PD if such disclosure is (a) required by subpoena, law, or other legal process;'
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'PLEASE NOTE THAT IN ANY CASE YOUR SECURED DATA LIKE YOUR MASTER PASSWORD AND ANY DATA SAVED IN ENPASS CAN’T BE ACCESSED BY ANYONE.'
+      lastVerified: 2026-11-19
+    - topic: privacy.data-location
+      tier: neutral
+      reason: 'Your passwords stay in the cloud account you pick. Your account details can go to any country it works in, under standard contracts when it thinks they’re needed.'
+      sources:
+        - url: https://www.enpass.io/pricing/
+          quote: "Every plan keeps your vault in your own iCloud, Google Drive, OneDrive, Dropbox, Box, or other personal cloud, never on Enpass's servers – so your passwords stay safe from hackers."
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'PD that we collect from you may be stored, processed, and transferred among any countries in which we operate.'
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'Also, we enter into data processing agreements and standard contractual clauses when appropriate.'
+      lastVerified: 2026-11-19
+    - topic: privacy.sign-up-data
+      tier: neutral
+      reason: 'You give your name and email address (or sign in with Apple or Google), and payment details for a paid plan. Its pages don’t say whether an email alias works.'
+      sources:
+        - url: https://www.enpass.io/privacy-notice/
+          quote: 'When you register as a user, we collect your first and last name and email address.'
+        - url: https://help.enpass.io/personal/latest/all/activation
+          quote: 'Activation is easy and free, and requires only an email address for registration, which is used to activate Enpass on other devices.'
+      lastVerified: 2026-11-19
+    - topic: billing.cancellation
+      tier: great
+      reason: 'You turn off renewal yourself online, in Enpass’s store account or the app store you paid through, and your plan runs to the end of the time you paid for.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'You can cancel your subscription renewal from where you were billed.'
+        - url: https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+          quote: 'Follow the link in the email you receive to access your account, view your order, manage your subscription, and update your payment details.'
+      lastVerified: 2026-11-19
+    - topic: billing.refunds
+      tier: good
+      reason: 'Bought on its website, you get all your money back if you ask within 30 days of buying or of a renewal. After that there’s no refund for the rest of the period. App store purchases follow the store’s rules.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'However, if you request a refund within thirty (30) days of the Subscription start or renewal, we will refund the full Subscription Fee.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'On cancelling the subscription purchased from our website, you will not receive any pro-rata refund of the current term.'
+      lastVerified: 2026-11-19
+    - topic: billing.price-changes
+      tier: poor
+      reason: 'It can change its prices whenever it likes and doesn’t promise to tell you first. A new price starts only after the period you’ve paid for.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'We, in our sole discretion and at any time, may modify the fees for the subscriptions.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Any Subscription fee change will become effective at the end of the then-current billing cycle.'
+      lastVerified: 2026-11-19
+    - topic: billing.free-trials
+      status: not-applicable
+      reason: 'There’s no free trial of Premium or Family: you try Enpass with its Free plan, which needs no card.'
+      pages: [https://www.enpass.io/personal/, https://www.enpass.io/pricing/]
+      lastVerified: 2026-11-19
+    - topic: billing.renewal-notice
+      status: not-stated
+      reason: 'Its terms say plans renew on their own at the end of each period, but not that it reminds you first.'
+      pages:
+        - https://www.enpass.io/terms-of-use/
+        - https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+      lastVerified: 2026-11-19
+    - topic: billing.fees
+      status: not-stated
+      reason: 'Its terms and its store’s checkout name no fees beyond the price and tax.'
+      pages:
+        [https://www.enpass.io/terms-of-use/, https://enpass.onfastspring.com/premium-12-months]
+      lastVerified: 2026-11-19
+    - topic: billing.plan-changes
+      status: not-stated
+      reason: 'Its terms and help pages don’t say what happens to time you’ve paid for when you move between Premium and Family.'
+      pages:
+        - https://www.enpass.io/terms-of-use/
+        - https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+      lastVerified: 2026-11-19
+    - topic: legal.disputes
+      tier: bad
+      reason: 'Disputes go to a private referee in Delaware, one person at a time, with no class actions, and you pay half the referee’s costs. There’s no way to opt out.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'will be settled solely by binding arbitration following the commercial arbitration rules of the American Arbitration Association.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Any such controversy or claim will be arbitrated on an individual basis and will not be consolidated in any arbitration with any claim or controversy of any other party.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Each party will bear half the arbitration fees and costs.'
+      lastVerified: 2026-11-19
+    - topic: legal.terms-changes
+      tier: poor
+      reason: 'It can change its terms at any time by posting them on its site, and they apply at once. Using Enpass after that means you accept them.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'We reserve the right to change these Terms of Use at any time. We will also post these changes on our Platform. These changes will become effective immediately.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Your continued use of our Platform after any change to these Terms of Use will constitute your acceptance of such change.'
+      lastVerified: 2026-11-19
+    - topic: legal.account-closure
+      tier: neutral
+      reason: 'If you break its terms, your rights end without warning, and a plan ended that way isn’t refunded.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Your rights under these Terms of Use will terminate without our notice if you fail to comply with any term of these Terms of Use.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Except as specifically described in Refund Policy above, we will not provide any refunds for terminated Subscriptions.'
+      lastVerified: 2026-11-19
+    - topic: legal.content-rights
+      tier: neutral
+      reason: 'It takes no rights over what you keep in Enpass. What you post on its forums, it may copy, publish and edit for its business, and its terms don’t say when that ends.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Member content does not include personal data saved by User in Enpass.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'You grant Enpass Technologies Inc a license to use the information and materials you post to our Platform.'
+      lastVerified: 2026-11-19
+    - topic: legal.service-changes
+      tier: neutral
+      reason: 'It can change its apps and what they do at any time, without telling you first.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Enpass Technologies Inc reserves the right at our sole discretion to change any content, software, and other items used or contained in our Platform at any time without notice.'
+      lastVerified: 2026-11-19
+    - topic: legal.inactivity
+      status: not-stated
+      reason: 'Its terms and privacy notice don’t say it closes accounts you haven’t used.'
+      pages: [https://www.enpass.io/terms-of-use/, https://www.enpass.io/privacy-notice/]
+      lastVerified: 2026-11-19
+    - topic: legal.licence
+      tier: poor
+      reason: 'Your licence is for your own personal use, and its terms forbid taking its apps apart to see how they work, with no exception for what the law allows.'
+      sources:
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'After registering, you will receive a license (“Lite”, “Pro”, “Premium”) for your personal use only.'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'Decompile, disassemble, or reverse engineer our Platform, and any related software'
+      lastVerified: 2026-11-19
+    - topic: security.practices
+      tier: neutral
+      reason: 'Outside auditors certify how it runs its company (ISO 27001, SOC 2). It asks you to contact it about security problems, but names no bug bounty or published audit of its apps.'
+      sources:
+        - url: https://www.enpass.io/security/
+          quote: 'Our security practices are reviewed against recognized standards. Independent auditors assess our controls and processes.'
+        - url: https://www.enpass.io/security/
+          quote: 'Enpass (ISMS) is ISO/IEC 27001 certified.'
+        - url: https://help.enpass.io/personal/latest/all/data-security-encryption
+          quote: 'But if, for any reason, you think you have encountered a potential security issue with Enpass, please contact the Enpass as soon as possible .'
+      lastVerified: 2026-11-19
+    - topic: service.account-sharing
+      tier: good
+      reason: 'Family covers up to six people in your household. Any other licence is for you alone and can’t be shared.'
+      sources:
+        - url: https://help.enpass.io/personal/latest/all/why-enpass
+          quote: 'Manage up to 6 household users'
+        - url: https://www.enpass.io/terms-of-use/
+          quote: 'This license is non-transferable and cannot be shared or used by anyone else.'
+      lastVerified: 2026-11-19
+    - topic: service.software-control
+      status: not-stated
+      reason: 'Its terms and help pages don’t say whether its apps update themselves or change anything else on your device.'
+      pages: [https://www.enpass.io/terms-of-use/, https://www.enpass.io/downloads/]
+      lastVerified: 2026-11-19
