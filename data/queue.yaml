@@ -622,6 +622,13 @@
   source: own
   status: done
   date: 2026-11-20
+- id: nordpass
+  name: NordPass
+  website: https://nordpass.com
+  category: passwords
+  source: own
+  status: done
+  date: 2026-11-20
 
 # Wikidata (npm run data:queue), the most written-about first.
 - id: youtube
@@ -1355,7 +1362,8 @@
   source: wikidata
   wikidata: Q2418462
   sitelinks: 18
-  status: queued
+  status: done
+  date: 2026-11-20
 - id: samsung-health
   name: Samsung Health
   website: https://health.apps.samsung.com
