@@ -71,13 +71,18 @@ export const maxChargedBeforeDays = 90;
 /**
  * Whether `text` says a renewal is charged `days` before it (M11.21), in English or French: the days, then before or
  * prior to its end, expiry, anniversary or renewal ("15 days before your subscription ends", "up to 35 days prior to
- * the anniversary of your subscription"). "Up to" goes with `upTo` only, so neither is read as the other.
+ * the anniversary of your subscription"), the days as a numeral or spelled out before it in brackets (NordPass's
+ * "fourteen (14) days prior to the start of the Renewal Period"). "Up to" goes with `upTo` only, so neither is read as
+ * the other.
  */
 export function namesChargedBefore(text: string, { days, upTo }: ChargedBefore): boolean {
-  const lead = upTo ? String.raw`\b(?:up to|jusqu['’]à) ` : String.raw`(?<!\bup to |jusqu['’]à )\b`;
+  const lead = upTo
+    ? String.raw`\b(?:up to|jusqu['’]à) `
+    : String.raw`(?<!\bup to |jusqu['’]à |\()\b`;
+  const count = String.raw`(?:[a-z]+(?:-[a-z]+)? \()?${days}\)?`;
   const before = String.raw`(?:days?|jours?) (?:before|prior to|ahead of|avant)\b[^.]{0,60}?`;
   const end = String.raw`\b(?:end|ends|expires?|expiry|expiration|anniversary|renews?|renewal|fin|anniversaire|renouvellement)\b`;
-  return new RegExp(`${lead}${days}[- ]${before}${end}`, 'i').test(text);
+  return new RegExp(`${lead}${count}[- ]${before}${end}`, 'i').test(text);
 }
 
 /**
