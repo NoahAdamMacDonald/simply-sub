@@ -1,7 +1,8 @@
-// Four months a row from 1280 px, three from 960, two from 600, one on a phone: as many as fit 220 px each.
+// Four months a row from 1280 px, three from 960, two from 600, one on a phone: as many as fit 220 px each, and six
+// at most, so a wide screen has two even rows.
 .months {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(max(220px, (100% - 5 * 12px) / 6), 1fr));
   gap: 12px;
   margin: 0;
   padding: 0;

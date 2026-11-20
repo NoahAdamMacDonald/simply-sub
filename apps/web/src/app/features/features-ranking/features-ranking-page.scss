@@ -1,6 +1,5 @@
 :host {
   display: block;
-  max-width: 1280px;
 }
 
 .toolbar {
@@ -23,7 +22,7 @@ input[type='search']::-webkit-search-cancel-button {
 
 // Cards in columns, as many as fit at about 26rem each, in reading order down each column.
 .cards {
-  columns: 2 26rem;
+  columns: 26rem;
   column-gap: 16px;
 }
 

@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  max-width: 1040px;
 }
 
 .note {
@@ -83,6 +82,15 @@
       'coming calendar'
       'lists lists'
       'save changes';
+  }
+
+  @media (min-width: 1800px) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(280px, 320px);
+    grid-template-areas:
+      'warnings warnings warnings'
+      'budgets coming calendar'
+      'lists lists lists'
+      'save changes changes';
   }
 
   h2 {
