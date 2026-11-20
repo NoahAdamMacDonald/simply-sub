@@ -293,6 +293,8 @@ that the user hasn't chosen to send. "Suggest a service" (BLUEPRINT §12) isn't 
 | M10.30 | Cost breakdowns on the bars (added 2026-10-30, the owner's request): every budget bar (Home, the Lists overview and its cards, List view, the Calendar's month and year, Payment's card limits) opens what it adds up: each subscription's charges in the bar's period, with its price, sales tax and FX fee, and the exchange rate of a converted one, then the totals of each. Hovering the bar shows it and a click or tap keeps it; a breakdown button beside the bar does the same by keyboard, and Escape closes it (P2, P3, P4, P10, P11) | Home's this-month bar lists Mullvad's €5.00 at its rate with its 2.5% FX fee and Netflix's tax, and their sum is the bar's total |
 | M10.31 | Subscribed since the day it's added (added 2026-10-30, the owner's TODO): a new item's Subscribed since starts as the day it's added, so its totals don't count every month back to January; the user can clear it or pick an earlier day, and items already saved keep what they have (P6) | Netflix added on Oct 30 counts nothing before Oct 30 in this year's total; a cleared Subscribed since saves none |
 | M10.32 | Wide screens (added 2026-11-19, the owner's 21:9 feedback): the pages of cards (Home, Search, Lists, List view, Features, Calendar, Payment) take the whole width with their cards in columns, Settings its groups side by side, and a month view's days grow taller; the list editor and Custom subscriptions keep 960 px (BLUEPRINT §8.1) | At 3440 px List view has four cards a row and Search's expanded card leaves its neighbours' heights alone; the year view has two rows of six; 1280 px looks as before |
+| M10.33 | A change a card (added 2026-11-19, the owner's feedback: a yellow card held seven removals, so Apply made them all): each change the optimizer finds is a card of its own, judged alone and shown in the section of what it alone gives up; changes stay together only when one isn't allowed without the others; a bundle takes over from any plan of a provider it includes (P14; BLUEPRINT §14) | Disney+ Premium and Crave Premium give a red Downgrade Disney+ card and a yellow Remove Crave card; a list's eleven yellow removals are eleven cards; applying cards in any order never ends an item with nothing taking over |
+| M10.34 | Cards that are easy to follow (added 2026-11-19, the owner's feedback and choice): a card's services and ranked features lost or gained a row each, by rank, and the features not ranked folded under a summary (P14) | Removing Claude with AI computer use Wanted and API credits Sometimes lists Claude itself, then Wanted, then Sometimes, and "Also loses 6 features you haven't ranked" opens by keyboard; axe passes in both themes at 360 and 1280 px |
 
 #### M10 specs
 
@@ -3824,6 +3826,11 @@ FREE SAVINGS — nothing is lost
 **As built (M8.1, M8.2):** the user's choices, which BLUEPRINT §14 has in full:
 - **Sections** are per-level plans: each lists its own plan's cards, which never conflict and can each be applied
   alone; a card in a looser section can be an alternative for the same item. "Save up to" is the yellow plan's.
+  Since M10.33 a card is one change, in the section of what it alone gives up (BLUEPRINT §14's "A change a card").
+- **What a card loses or gains** (M10.34, the owner's choice): "You lose" lists the services it gives up ("Claude Ultra
+  itself") and the features you ranked, a row each with the rank's dot and name in a column of their own, Essential
+  first; "You gain" the same. The features you haven't ranked are folded under one summary ("Also loses 8 features you
+  haven't ranked", or "Also changes 6 … : loses 4, gains 2"), a native `<details>` that lists them when opened.
 - **Free savings lose nothing at all** (losing a Not-ranked feature is red, as §10.4 says), and List view's button is
   green when they're all there is.
 - **Removing an item loses its service itself** (yellow, unless everything it gives is Unused or Unwanted), and it's
