@@ -1,0 +1,47 @@
+url: https://help.twilio.com/articles/19753678752027
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+Authy Login Issues
+Issue
+This guide is intended to help you regain access to your Authy account as efficiently as possible. Find the option that most closely matches your needs for detailed instructions.
+Product
+Authy
+Solution
+I'm not receiving the Authy SMS (text) message
+To log into Authy, you have several options: SMS, call, WhatsApp, other device. If any of them is giving you trouble, we advise you to try another option. However, you can find some helpful troubleshooting if you're not receiving the SMS here.
+(warning)
+Note: Due to local regulatory restrictions, SMS delivery to China cannot be guaranteed and you may not be able to register Authy.
+I'm trying to register a device, but I get a registration limit error
+Multiple failed attempts to register a device on your Authy account can trigger our security protocols, automatically suspending your Authy account. For more information, please see Authy Error "Device Registration Limit Reached".
+Authy remains loading at setup, or says there's no internet connection
+To log into Authy you need to be connected to the internet, and allow access to our URLs. Please check Authy App System Requirements.
+When I try to register a device, it says multi-device is disabled
+Multi-device is a feature to keep your account secure. You can find more info about it and how to regain access to your account at “Multi-device is disabled for your Authy account”.
+I have a new device, and need to access my Authy account
+If your phone has been lost, stolen, or is inaccessible because it’s broken in some way, Authy has options for you to help restore access as quickly and securely as possible. Please see Restoring Authy Access on a New, Lost, or Inaccessible Phone.
+I changed the phone number used for my Authy account
+Authy relies on your phone number to give you access, so your account could be inaccessible if you change your phone number. For help regaining access to your account, please see Phone Number Change Process for Authy and How Long it Takes.
+I no longer have an active wireless service or phone number
+An active (in-service) phone number is required to use Authy. Once you get a new number, you can start a phone number change.
+I forgot my old phone number and/or lost access to the email address I used to register my Authy account
+If you have these issues, please contact our Support team.
+My 2FA tokens are locked, I can't access my services protected by 2FA.
+If you have lost or forgotten your backups password, unfortunately, there's no way to recover the tokens. Please check What is a Backup Password? Can it be recovered? for more information.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

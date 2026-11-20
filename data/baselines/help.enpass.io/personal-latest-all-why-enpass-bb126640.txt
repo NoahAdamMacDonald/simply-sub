@@ -1,0 +1,122 @@
+url: https://help.enpass.io/personal/latest/all/why-enpass
+method: fetch
+saved: 2026-11-20
+
+Why Enpass? | Enpass Help
+Skip to main content
+Business
+Personal
+Security
+Blog
+Pricing
+Main navigation
+Close navigation
+Main
+Business
+Personal
+Security
+Blog
+Pricing
+Main
+Getting Started with Enpass
+Why Enpass?
+Enpass apps & installation
+Activation & Set-Up
+Browser extension
+Explore Features
+Security basics
+Customization
+Mobile & Wearables Apps
+Enpass for Windows
+Enpass for Mac
+Enpass for iPhone & iPad
+Enpass for Android
+Enpass for Linux
+Vaults & Syncing
+Organizing Your Enpass Items
+Generating & Changing Passwords
+Importing passwords
+Passkeys & 2FA
+Security & Biometrics
+Registration & Subscriptions
+Troubleshooting
+Breadcrumbs
+Home
+Personal & Family Support Center
+Getting Started with Enpass
+On this Page
+Why Enpass?
+8 reasons to choose Enpass
+A powerful, affordable, user-empowering alternative to all those cookie-cutter password managers.
+Enpass has inherently stronger security
+Choose your own safest storage location, adding several additional layers of multi-factor authentication
+Unlike other password managers, Enpass does not have a central server full of user data for hackers to attack — to steal your passwords from Enpass, a hacker would have to...
+Target you personally
+AND know which cloud services you’ve chosen for your password vaults
+AND discover the credentials to those cloud accounts
+AND get past each cloud account's multi-factor authentication
+AND know your Enpass Master Password
+(Plus there’s an extra Keyfile option for the tech-savvy)
+Enpass has many storage & syncing options
+Setting up an Enpass password vault takes about a minute on Dropbox, Google Drive, iCloud, OneDrive (Personal or Business) or Box
+You can also choose NextCloud, and WebDAV, or stay completely offline & sync via Wi-Fi
+Enpass has unlimited separate password vaults
+Keep a personal vault, a work vault, and vaults shared with a significant other or your kids
+Keep different vaults for different projects, and securely share them with project partners
+Help manage the vaults of elderly relatives, stored on their cloud accounts
+Enpass has tons of customizability
+Customizable templates, categories, and nesting tags
+Customizable Items (add, remove, rearrange, and customize fields)
+Customizable browser extension (autofill triggers, autosave options, shortcuts & more)
+System-wide access (hotkeys, Task bar or Menu Bar icons, autolock & more)
+Customizable user-interface options (item counts, items subtitles, sensitive fields, etc.)
+Enpass can manage passkeys and authenticator codes
+Generate authentication codes, eliminating the need for a separate app
+Take the confusion out of passkeys, logging you into accounts with just a face or fingerprint
+Enpass is family-friendly
+Manage up to 6 household users
+Enpass is affordable
+Enpass is free up to 25 Items, including syncing across all platforms
+And Enpass plans are far more affordable than other password managers with fewer features and more vulnerable vault storage
+And Enpass has everything else you'd expect
+Security
+Zero-knowledge architecture
+AES-256 encryption on 100% of user data
+Certified compliance with ISO/IEC 27001:2013 standards
+Unlock with a keyfile as second-factor authentication
+Automatically locks when idle
+Password safety
+Random and pronounceable password generation
+Securely auto-fills in apps and browsers
+Automatically checks for weak or compromised passwords
+Automatically monitors for website breaches
+Retains password history for each Item
+Convenience
+Quick unlock using Biometrics
+Quick unlock with a PIN
+Auto-fills authentication codes, credit cards, and webforms
+Auto-saves new or changed credentials
+Stores and syncs passkeys across devices
+Securely send vault Items to other Enpass users
+Usability
+Smartwatch integration
+Easy import from other password managers and CSVs in the desktop app
+Customize tags, categories, fields, and more
+Rich website icons
+File attachments (add ID cards & other documents to items)
+Powerful search
+Copy to clipboard
+Archive or trash Items no longer in use
+Dark Mode
+Localization in 33 languages
+Support
+Extensive, clear and simple support documentation
+Friendly user forums with staff participation
+Email support for paid users
+Learn more about
+Enpass apps & installation
+Activation & Set-Up
+Customization
+and other Enpass features
+Copyright Enpass Technologies Inc.
+Powered by Scroll Sites & Atlassian Confluence

@@ -1,0 +1,632 @@
+url: https://www.twilio.com/en-us/legal/security-overview
+method: fetch
+saved: 2026-11-20
+
+Security Overview | Twilio
+English
+English
+Japanese
+Portuguese
+Spanish
+Support
+Help Center
+Support Plans
+Partner Solutions
+Login
+Log in to
+Twilio Console
+Conversations, Communications and Authentication
+Or log in to access:
+Twilio Segment
+Customer Data Platform
+Twilio SendGrid
+Email and Marketing Campaigns
+Products
+Twilio Platform
+Next gen
+Built for engagement in the agentic era. Twilio connects communication channels, customer context, and AI on one flexible platform.
+Conversations
+Conversation Memory
+New
+Build a persistent memory of customer interactions
+Conversation Orchestrator
+New
+Keep conversations connected across channels
+Conversation Intelligence
+Extract context from real-time conversations
+Conversation Relay
+Build advanced voice AI for natural conversations
+Try the demo
+Conversations
+Communications
+Messaging
+SMS
+WhatsApp
+RCS
+Voice
+SIP Trunking
+Email
+SMTP Service
+Phone Numbers
+Toll-free
+10DLC
+Short Codes
+Video API
+Flex
+Communications
+Authentication
+Verify
+Lookup
+Authentication
+Customer Data
+Connections
+Warehouses
+Protocols
+Unify
+Engage
+Audiences
+Journeys
+Customer Data
+See all products
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+See Twilio’s latest innovations and integrations
+Solutions
+Use Cases
+Verification and identity
+Fraud prevention
+Alerts and notifications
+Appointment reminders
+Lead alerts
+Mass texting
+Marketing and promotions
+SMS marketing
+Cross-sell and upsell
+Optimize ad spend
+Support and sales
+Voice AI
+AI agent productivity
+|
+Try the demo
+IVR
+Contact center
+Customer data management
+Teams
+Developers
+Data Engineering
+Marketing
+Product
+Customer Experience
+Industry
+Financial services
+Healthcare
+Retail
+Nonprofit
+Hospitality
+Public sector
+Education
+Tech
+Company Size
+Enterprise
+Startup
+See all solutions
+Why Twilio
+Overview
+Why Twilio
+We help you build amazing experiences with contextual data, the right communication channels, and AI to scale personalization and increase efficiency.
+Customer stories
+Differentiators
+One platform
+Privacy and security
+Built for builders
+Enterprise scale
+Extensible by design
+Real-time customer data
+Artificial intelligence
+Infrastructure
+Company
+About us
+Values
+Diversity
+Careers
+Twilio.org
+Investor relations
+Press and media
+Events
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+2026 Gartner® Magic Quadrant™ for CPaaS1
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Twilio was once again named a Leader and positioned highest for our Ability to Execute.
+Read now
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+1 Gartner®, Magic Quadrant™ for Communications Platform as a Service, By Lisa Unden-Farboud et. al, May 18, 2026
+Resources
+Developers
+Documentation
+Code samples
+Developer Hub
+Champions
+Changelog
+Serverless
+Learn
+Blog
+Resource Center
+Guides
+Reports
+Webinars
+Podcasts
+Customer stories
+State of Customer Engagement
+Events
+Customer data recipes
+Support and services
+Help Center
+Find a partner
+Become a partner
+Professional services
+Support plans
+Status
+SendGrid status
+Segment status
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Customer Insights Series
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Discover what thousands of global consumers and executives revealed about AI adoption, engagement, and the next era of CX.
+See the findings
+Pricing
+Overview
+All Pricing
+Transparent pricing with discounts as you scale. Sign up for a free trial—no credit card required.
+Conversations
+Conversations
+Conversation Memory
+Conversation Orchestrator
+Conversation Intelligence
+Conversation Relay
+Communications
+Messaging
+SMS
+WhatsApp
+Conversations API
+Voice
+SIP Trunking
+Conferencing
+Email API
+Marketing Campaigns
+Video API
+Flex
+Authentication
+Verify
+Lookup
+Customer Data
+Customer Data Platform
+Customer Data Pipeline
+Data is collected based on search terms. Privacy Policy
+Contact sales
+Start for free
+Data is collected based on search terms. Privacy Policy
+Products
+Twilio Platform
+Next gen
+Built for engagement in the agentic era. Twilio connects communication channels, customer context, and AI on one flexible platform.
+Conversations
+Conversation Memory
+New
+Build a persistent memory of customer interactions
+Conversation Orchestrator
+New
+Keep conversations connected across channels
+Conversation Intelligence
+Extract context from real-time conversations
+Conversation Relay
+Build advanced voice AI for natural conversations
+Try the demo
+Conversations
+Communications
+Messaging
+SMS
+WhatsApp
+RCS
+Voice
+SIP Trunking
+Email
+SMTP Service
+Phone Numbers
+Toll-free
+10DLC
+Short Codes
+Video API
+Flex
+Communications
+Authentication
+Verify
+Lookup
+Authentication
+Customer Data
+Connections
+Warehouses
+Protocols
+Unify
+Engage
+Audiences
+Journeys
+Customer Data
+See all products
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+See Twilio’s latest innovations and integrations
+Solutions
+Use Cases
+Verification and identity
+Fraud prevention
+Alerts and notifications
+Appointment reminders
+Lead alerts
+Mass texting
+Marketing and promotions
+SMS marketing
+Cross-sell and upsell
+Optimize ad spend
+Support and sales
+Voice AI
+AI agent productivity
+|
+Try the demo
+IVR
+Contact center
+Customer data management
+Teams
+Developers
+Data Engineering
+Marketing
+Product
+Customer Experience
+Industry
+Financial services
+Healthcare
+Retail
+Nonprofit
+Hospitality
+Public sector
+Education
+Tech
+Company Size
+Enterprise
+Startup
+See all solutions
+Why Twilio
+Overview
+Why Twilio
+We help you build amazing experiences with contextual data, the right communication channels, and AI to scale personalization and increase efficiency.
+Customer stories
+Differentiators
+One platform
+Privacy and security
+Built for builders
+Enterprise scale
+Extensible by design
+Real-time customer data
+Artificial intelligence
+Infrastructure
+Company
+About us
+Values
+Diversity
+Careers
+Twilio.org
+Investor relations
+Press and media
+Events
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+2026 Gartner® Magic Quadrant™ for CPaaS1
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Twilio was once again named a Leader and positioned highest for our Ability to Execute.
+Read now
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+1 Gartner®, Magic Quadrant™ for Communications Platform as a Service, By Lisa Unden-Farboud et. al, May 18, 2026
+Resources
+Developers
+Documentation
+Code samples
+Developer Hub
+Champions
+Changelog
+Serverless
+Learn
+Blog
+Resource Center
+Guides
+Reports
+Webinars
+Podcasts
+Customer stories
+State of Customer Engagement
+Events
+Customer data recipes
+Support and services
+Help Center
+Find a partner
+Become a partner
+Professional services
+Support plans
+Status
+SendGrid status
+Segment status
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Customer Insights Series
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Discover what thousands of global consumers and executives revealed about AI adoption, engagement, and the next era of CX.
+See the findings
+Pricing
+Overview
+All Pricing
+Transparent pricing with discounts as you scale. Sign up for a free trial—no credit card required.
+Conversations
+Conversations
+Conversation Memory
+Conversation Orchestrator
+Conversation Intelligence
+Conversation Relay
+Communications
+Messaging
+SMS
+WhatsApp
+Conversations API
+Voice
+SIP Trunking
+Conferencing
+Email API
+Marketing Campaigns
+Video API
+Flex
+Authentication
+Verify
+Lookup
+Customer Data
+Customer Data Platform
+Customer Data Pipeline
+Contact sales
+Start for free
+Print this page
+Customer and Partner Agreements
+Terms of Service
+Acceptable Use Policy
+Service and Country Specific Requirements
+Data Protection Addendum (DPA)
+Security Overview
+Service Level Agreements
+Advisory Services Terms
+Professional Services Terms
+Twilio Marketplace Terms
+Twilio Segment Customer Data Platform Destination Integration and Listing Terms
+AI/ML Terms
+Twilio Messaging Campaign Terms
+Customer Name Changes and Assignments
+Updates to Legal Terms and Conditions
+Country Specific Disclosures
+EU Data Act Disclosures and Twilio’s Commitment to Open Portability and Switching
+European Electronic Communications Code Disclosures
+Italy ALIAS Database Code of Conduct
+Germany - Impressum
+Privacy
+Data Privacy at Twilio
+Privacy Notice
+Binding Corporate Rules
+Customer Proprietary Network Information (CPNI)
+Sub-processors
+Customer Data Protection Addendum
+Supplier Data Protection Addendum
+Global Applicant Privacy Notice
+Mobile Application Terms
+Twilio Frontline End User App Terms
+Twilio Authy App Terms
+Supplier Agreements
+Supplier Purchase Order Terms and Conditions
+Country-Specific Terms
+Supplier Data Protection Addendum
+Supplier Code of Conduct
+Intellectual Property
+DMCA Policy
+Trademark
+Resources for Law Enforcement
+Government Requests
+Transparency Report
+Civil Requests
+Submit a request or subpoena
+Code of Conduct & Ethics Hotline
+Twilio Code of Conduct
+Ethics and Whistleblower Hotline
+Discord Community Code of Conduct
+Twilio Discord FAQ
+Digital Promotions General Rules
+Sweepstakes Rules
+Customer Research and User Experience
+Acknowledgement and Waiver
+Twilio Security Overview
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Last Updated: April 9, 2026
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+This Security Overview (“Security Overview”) is incorporated into and made a part of the agreement between Twilio and Customer covering Customer’s use of the Services (as defined below), including any terms applicable to the processing of personal data set forth therein (collectively, “Agreement”). Any capitalized term used but not defined has the meaning provided in the Agreement.
+1. Definitions
+“Customer Data” means any data (a) provided by Customer, or any user of the Services, including via any products and services provided by Customer, to Twilio in connection with Customer’s use of the Services or (b) generated for Customer’s use as part of the Services.
+“Segment Services” means any services or application programming interfaces branded as “Segment”, “Twilio Segment”, or “Twilio Engage”.
+“SendGrid Services” means any services or application programming interfaces branded as “SendGrid” or “Twilio SendGrid”.
+“Services” means, collectively, the Twilio Services (as defined below), SendGrid Services, and Segment Services.
+“Twilio Services” means any (a) services or application programming interfaces branded as “Twilio” and (b) cloud-based identity, authentication, and security platform, and related services, branded as “Stytch”.
+2. Purpose. This Security Overview describes Twilio’s security program, including Twilio’s security certifications and self-attestations and technical and organizational security controls to protect (a) Customer Data from unauthorized use, access, disclosure, or theft and (b) the Services. As security threats change over time, Twilio continues to update its security program and strategy to protect Customer Data and the Services in accordance with industry best practices. As such, Twilio reserves the right to update this Security Overview from time to time; provided, however, any update will not materially reduce the overall protections set forth in this Security Overview. The then-current terms of this Security Overview are available at https://www.twilio.com/legal/security-overview. This Security Overview does not apply to any (a) Services that are identified as alpha, beta, not generally available, limited release, developer preview, or any similar Services offered by Twilio or (b) any services provided by telecommunications providers.
+3. Security Organization and Program. Twilio maintains a risk-based assessment security program based on the ISO / IEC 27001 Information Security Management System (ISMS), which includes administrative, technical, organizational, and physical safeguards reasonably designed to protect the Services and the security, confidentiality, integrity, and availability of Customer Data. Twilio’s security program is intended to be appropriate to the nature of the Services and the size and complexity of Twilio’s business operations. Twilio has separate and dedicated Information Security teams that manage Twilio’s security program, including those that facilitate and support independent audits and assessments performed by third parties. Twilio’s security program is managed at the highest levels of the company, with Twilio’s Chief Information Security Officer regularly meeting with executive management to discuss security-related issues and coordinate company-wide security initiatives. Twilio’s information security policies and standards are reviewed and approved by Twilio’s executive management at least annually.
+4. People Security and Onboarding. Twilio (a) maintains comprehensive policies, procedures, and controls that are regularly updated to align with industry best practices and (b) makes such policies and procedures readily accessible to all Twilio employees. All Twilio employees are subject to the following minimum security measures:
+(i) Performance of a background check that is administered by a recognized third-party background check provider on all new Twilio employees prior to hiring in accordance with applicable local laws, including education and employment verification and reference checks, and where permitted by local law and applicable to the job role, criminal, credit, and right-to-work verification;
+(ii) Execution of a confidentiality agreement;
+(iii) Annual completion of mandatory security and privacy training, with extended deadlines available for Twilio employees on leaves of absence;
+(iv) Maintenance and continuous monitoring of an anonymous hotline for Twilio employees to report any unethical behavior where anonymous reporting is legally permitted;
+(v) Raising awareness of emerging security threats through various mediums, including simulated security-related incidents (e.g. phishing campaigns); and
+(vi) Controlled and limited access of Customer Data strictly to authorized Twilio employees only in accordance with Section 10.1 (Provisioning Access) and Twilio’s internal standard operating procedures governing such Customer Data’s processing and protection.
+5. Physical Security. Twilio maintains strong physical security controls at its offices, which are guided by a physical security policy that is regularly reviewed. Twilio’s physical security policy establishes baseline physical security controls necessary for preventing unauthorized access to Twilio’s offices and for the safeguarding of Twilio’s physical assets. Twilio’s physical security policy covers areas such as access controls, employee and contractor badge requirements, securing IT equipment, and after hours monitoring. Twilio requires its infrastructure providers identified in Section 8 (Hosting Architecture and Data Segregation) of this Security Overview to maintain physical security standards that are at a minimum, aligned with SOC 2 standards.
+6. Third-Party Vendor Management. Twilio may use third-party vendors to provide the Services. Twilio has implemented a comprehensive vendor management program that applies the appropriate technical and organizational security controls that is proportional to the type of service the third-party vendor is providing and any associated security-related risks. Prospective third-party vendors are thoroughly vetted through a process that ensures they comply with, and will continue to comply with, Twilio’s rigorous confidentiality, security, and privacy requirements for the duration of their relationship with Twilio. Third-party vendors that process Customer Data are subject to more stringent technical and organizational security controls which are (a) reflected in Twilio’s contractual agreement with such third-party vendors and (b) regularly audited by Twilio to assure continued compliance. In addition, Twilio regularly reviews (i) each third-party vendor against Twilio’s security and business continuity standards; (ii) each third-party vendor’s access to Customer Data and its technical and organizational security controls to protect Customer Data; and (iii) evolving legal or regulatory requirements that impact Twilio’s security program or processing of Customer Data. Twilio’s current third-party vendors that are sub-processors are available at https://www.twilio.com/en-us/legal/sub-processors. For the avoidance of doubt, telecommunication providers are not considered third-party vendors or sub-processors of Twilio.
+7. Security Certifications and Attestations. Twilio holds the following security-related certifications and attestations:
+Certification or Attestation
+Covered Services
+ISO/IEC 27001, ISO/IEC 27017, ISO/IEC 27018
+Twilio Services, Segment Services
+SOC 2 Type 2
+All Services
+PCI DSS Level 1
+All Services that are expressly identified in the PCI DSS Responsibility Matrix
+PCI (SAQ-A)
+The portion of the Twilio Services that are the cloud-based identity, authentication, and security platform, and related services, branded as “Stytch”
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+For additional information relating to Twilio’s security certifications and attestations and other-related security documentation, please visit the applicable Trust Center below:
+Trust Center for the Twilio Services and SendGrid Services: https://security.twilio.com
+Trust Center for the Segment Services: https://security.segment.com
+8. Hosting Architecture and Data Segregation
+8.1 Infrastructure and Colocation Providers. The specific Services set forth below are hosted by the applicable industry-leading infrastructure or colocation provider. Information regarding the infrastructure and colocation providers technical and organizational security controls is also available below.
+Infrastructure Provider
+Covered Services
+Infrastructure Provider’s Technical and Organizational Security Controls
+Amazon Web Services (“AWS”)
+All Services
+https://aws.amazon.com/security/
+https://aws.amazon.com/compliance/shared-responsibility-model/
+Google Cloud Platform (“GCP”)
+Segment Services, Mobile identification and authentication services portion of the Twilio Services, but excluding Twilio Verify
+https://cloud.google.com/architecture#security
+Colocation Provider
+Covered Services
+Colocation Provider’s Technical and Organizational Security Controls
+Databank
+SendGrid Services
+https://www.databank.com/compliance-enablement/
+Lumen
+SendGrid Services
+https://www.lumen.com/en-us/about/legal/trust-center/security-and-compliance
+Digital Realty
+SendGrid Services
+https://www.digitalrealty.com/data-centers/design/certifications-compliance
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+8.2 Production Environment and Customer Data Access. The production environment of the Services that are hosted with the aforementioned infrastructure providers are logically isolated in a Virtual Private Cloud (VPC), and Customer Data is encrypted at all times. The infrastructure providers are hosted in the United States of America. The aforementioned infrastructure and colocation providers do not have access to unencrypted Customer Data. All network access between hosts within the production environment is restricted, using access control mechanisms and the principle of least privilege to allow only authorized services to interact within the production environment. Access control lists are in use to manage network segregation between different security zones in the production and corporate environments within Twilio’s hosting environment. Access control lists are reviewed regularly. Twilio separates Customer Data using logical identifiers. Customer Data is tagged with a unique customer identifier that is assigned to segregate Customer Data ownership. Twilio’s application programming interfaces are designed and built to identify and allow authorized access only to and from Customer Data identified with customer-specific tags. These controls prevent other customers from having access to Customer Data.
+9. Security by Design. Twilio follows security by design principles when it designs the Services. Twilio also applies the Twilio Secure Software Development Lifecycle (Secure SDLC) standard to perform numerous security-related activities for the Services across different phases of the product creation lifecycle, from requirements gathering and product design all the way through product deployment. These activities include, but are not limited to, the performance of (a) internal security reviews before deploying new Services or code; (b) penetration tests of new Services; and (c) threat models for new Services to detect potential security threats and vulnerabilities.
+10. Access Controls
+10.1 Provisioning Access. Twilio follows the principles of least privilege through a team-based access control mechanism when provisioning system access to minimize the risk of unauthorized Customer Data exposure. Twilio employees’ access to Customer Data must be approved before it is granted and is restricted based on if their job role or job responsibilities specifically require it. Access rights to the production environment of the Services that are not time-based are reviewed at least quarterly. An employee’s or contractor’s access to Customer Data is promptly removed upon termination of employment. In order to access the production environment of the Services, an authorized user must have a unique username and password and multi-factor authentication enabled. Before an authorized user is granted access to the production environment of the Services, access must be approved by management. Additionally, the authorized user is required to complete internal training for such access, including training on the proper use of the relevant systems that interface with or permit access to the production environment of the Services. Twilio logs high risk actions and changes in the production environment of the Services. Twilio leverages automation to identify any deviation from internal technical standards that could indicate anomalous and/or unauthorized activity to raise an alert within minutes of a configuration change.
+10.2 Password Controls. At a minimum, Twilio's password management policy for Twilio employees follows the NIST 800-63B guidance and requires the use of longer character lengths, special characters, and multi-factor authentication. Additionally, when a customer logs into its account, Twilio hashes the credentials of the user before it is stored. A customer must also require its users to add another layer of security to their account by using two-factor authentication (2FA).
+11. Change Management. Twilio has a formal change management process it follows to administer changes to the production environment of the Services, including any changes to its underlying software, applications, and systems. Each change is carefully reviewed and evaluated in a test environment before being deployed into the production environment of the Services. All changes, including the evaluation of the changes in a test environment, are documented using a formal, auditable system of record. A rigorous assessment is carried out for all high-risk changes to evaluate their impact on the overall security of the Services. Deployment approval for high-risk changes is required from the correct organizational stakeholders. Plans and procedures are also implemented in the event a deployed change needs to be rolled back to preserve the security of the Services.
+12. Encryption
+12.1 Encryption in Transit. Customer Data is encrypted when in transit between Customer’s software application and the Services using TLS v1.2. Additionally, for the SendGrid Services, Twilio provides opportunistic TLS v1.1 or higher for emails in transit between Customer’s software application and the recipient’s email server. The SendGrid Services are designed to opportunistically try outbound TLS v1.1 or higher when attempting to deliver an email to a recipient. This means that if a recipient's email server accepts an inbound TLS v1.1 or higher connection, Twilio will deliver an email over a TLS encrypted connection. If a recipient’s email server does not support TLS, Twilio will deliver an email over the default unencrypted connection. The SendGrid Services provide an optional feature, which Customer has to enable, that allows Customer to enforce TLS encryption. If Customer enables the enforced TLS feature, Twilio will only deliver an email to a recipient if the recipient’s email server accepts an inbound TLS v1.1 or higher connection. More information regarding enabling the enforced TLS feature for the SendGrid Services is available at https://www.twilio.com/docs/sendgrid/api-reference/settings-enforced-tls/update-enforced-tls-settings.
+12.2 Encryption at Rest. Customer Data is encrypted at rest in AWS and GCP using the Advanced Encryption Standard.
+13. Vulnerability Management. Twilio maintains controls and policies to mitigate the risk of security vulnerabilities in a measurable time frame that balances risk and the business and operational requirements. Twilio uses third-party tooling to conduct vulnerability scans regularly to assess vulnerabilities in Twilio’s hosting environment and corporate systems. Critical software patches are evaluated, tested, and applied proactively. Operating system patches are applied through the regeneration of a base virtual-machine image and deployed to all nodes in the Twilio cluster over a predefined schedule. For high-risk patches, Twilio will deploy directly to existing nodes through internally developed orchestration tools.
+14. Penetration Testing. Twilio performs penetration tests on a regular basis. Security threats and vulnerabilities that are detected are prioritized, triaged, and remediated promptly. Additionally, Twilio maintains a Bug Bounty Program through HackerOne, which allows independent security researchers to report security threats and vulnerabilities on an ongoing basis.
+15. Security Incident Management
+15.1 Prevention Measures. Twilio maintains security incident management policies and procedures in accordance with NIST SP 800-61. Twilio’s Security Incident Response Team (T-SIRT) assesses relevant security threats and vulnerabilities and establishes appropriate remediation and mitigation actions. Twilio retains security logs for one hundred and eighty (180) days. Access to these security logs is limited to T-SIRT. Twilio utilizes third-party tools to detect, mitigate, and prevent Distributed Denial of Service (DDoS) attacks.
+15.2 Incident Response. Twilio will promptly investigate a Security Incident upon discovery (as defined in the Agreement). To the extent permitted by applicable law or regulation, Twilio will notify Customer of a Security Incident in accordance with the Agreement. Security Incident notifications will be provided to Customer via email to the email address designated by Customer in its account. Twilio has a defined set of policies, procedures, standards, and tooling that guide its subsequent responses, with adherence to applicable law or regulation. This includes customer notifications where mandated, coordination with law enforcement, and declarations to applicable privacy and other regulatory bodies where appropriate.
+16. Resilience and Service Continuity
+16.1 Resilience. Twilio utilizes multiple geographically diverse regions within its infrastructure providers and has configured multiple fault-independent availability zones within each of those regions to ensure that a failure in any single data center does not affect the availability of the Services. This allows Twilio to detect and route around issues experienced by hosts or even whole data centers in real time and employ orchestration tooling that is able to regenerate hosts, building them from the latest backup.
+16.2 Service Continuity. Twilio leverages specialized tools available within the hosting infrastructure of the Services to monitor server performance, data, and traffic load capacity within each availability zone and colocation data center. If suboptimal server performance or overloaded capacity is detected on a server within an availability zone or colocation data center, these specialized tools increase the capacity or shift traffic to relieve any suboptimal server performance or capacity overload. Twilio is also immediately notified in the event of any suboptimal server performance or overloaded capacity.
+17. Customer Data Backups. Twilio performs regular backups of Customer Data, which is hosted on AWS’s data center infrastructure. Customer Data that is backed up is retained redundantly across multiple availability zones and encrypted in transit and at rest using a modern encryption standard based on the type of Customer Data being encrypted.
+Get an AI summary:
+Twilio careers
+Twilio.org
+Press and media
+Investor relations
+Legal
+Privacy
+Security
+Impressum
+Sitemap
+LLMS
+Copyright © 2026 Twilio Inc.
+All rights reserved.
+Considering Twilio?
+About Twilio
+Customer Engagement Platform (CEP)
+Communications
+Conversational AI
+User authentication and identity
+Customer Data Platform (CDP)
+AI
+Customer stories
+Events
+Contact sales
+Why Twilio
+Products and Features
+SMTP
+Branded Calling
+Twilio Segment
+Twilio Engage
+Connections
+SendGrid Email API
+RCS messaging
+Latest innovations
+Pre-built solutions
+Support plans
+All products
+Use Cases
+AI agent productivity
+Customer data management
+Audience segmentation
+Contact center
+SMS marketing
+Customer acquisition
+Voice response system (IVR)
+Fraud prevention
+Bulk text messaging
+Mass email sender
+All use cases
+Developers
+Developer resources
+Twilio Essentials
+SDKs
+CDP integrations
+Serverless
+Conversation
+SMTP Email API
+SMS API
+WhatsApp API
+Voice API
+Connections
+All docs

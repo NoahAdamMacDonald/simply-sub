@@ -1,0 +1,30 @@
+url: https://help.twilio.com/articles/19753647012763
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+How Much Does Authy Cost?
+Question
+How much does Authy cost?
+Product
+Authy
+Answer
+For end users looking to secure their internet logins and accounts, Authy is free to install and use. For help getting started using Authy and securing your accounts, please see our article Welcome to Authy!
+If you are a developer looking to use Authy for your project's two factor authentication, you'll find that our cost is only based on successful authentications and delivery costs. We also offer flexible pricing so costs scale with your usage.
+You can see full details on our Authy Pricing page.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

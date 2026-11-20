@@ -1,0 +1,359 @@
+url: https://www.keepersecurity.com/legal/cookie-policy/
+method: fetch
+saved: 2026-11-20
+
+Keeper Security Cookie Policy Skip to main content Keeper Security named password management leader for fifth consecutive year
+Learn More
+Experiencing a Cyber Attack?
+Blog
+Partners
+English (US) English (US)
+English (UK)
+Español
+Deutsch
+Français
+Nederlands
+Português (BR)
+日本語
+中文 (简体)
+Polski
+Italiano
+Русский
+العربية
+Login Web Vault
+Admin Console
+Keeper
+Platform Products Password Management Enterprise
+Business
+Personal
+Family
+Privileged Access Management KeeperPAM
+Self-Managed Keeper
+Endpoint Privilege Manager
+KeeperDB
+Secrets Manager
+Remote Browser Isolation
+Managed Service Providers (MSPs) Password Manager for MSPs
+Privileged Access Manager for MSPs
+Public Sector
+Compare Keeper vs CyberArk
+Keeper vs Delinea
+Keeper vs BeyondTrust
+Keeper vs 1Password
+Keeper vs LastPass
+Keeper vs Bitwarden
+View All
+Technology Security
+Features
+Integrations
+Developers
+Trust Center
+Keeper DNA
+Solutions Use Cases Privileged Access Management
+Secure AI Agents
+Secure Remote Database Access
+Privileged Session Management
+Zero-Trust Security
+Password Management
+View all
+Industries Manufacturing
+Healthcare
+Universities
+Federal Government
+Financial Services
+Retail
+View all
+Pricing Enterprise Privileged Access Management
+Password Management
+Secure Add-Ons
+Personal Personal and Family
+Student
+Military and Medical
+Download
+Resources Product information Documentation
+End-User Guides
+Case Studies
+Datasheets
+Keeper University
+Keeper 101 Videos
+MSP Admin Guide
+Resources Webinars
+Research Reports
+Public Sector Resources
+Cybersecurity Glossary
+Cyber Threats Database
+Passkeys Directory
+Infographics
+Free Cybersecurity Tools KeeperDB
+Personal Dark Web Scan
+Business Dark Web Scan
+Secure Password Generator
+Secure Passphrase Generator
+Encrypted Messaging App
+Keeper Cyber Check
+Contact Support
+Business Sales
+Newsroom
+Call Us
+Get a Quote Try It Free
+Buy Now View Careers
+Get a Quote
+View Careers
+Login Web Vault
+Admin Console
+Keeper Security Terms and Conditions
+Back to Privacy Policy
+Cookie Policy
+For convenience, this policy may be translated into your local language depending on your resident country when visiting the website. Where there is any ambiguity or conflict of terms, the english version will take precedence.
+Keeper Security and our marketing partners, affiliates or analytics or service providers, use technologies on Keeper web domains and sub domains such as cookies, beacons, tags, pixels and scripts, to analyse trends, administer website pages, track users' movements around the website and to gather demographic information about our user base as a whole.
+Cookies are small text files sent to your browser from a web server that is stored on your computer's hard drive and cookies are never used by Keeper to store web-vault authentication information or vault user record data. For the purposes of this policy, we will call both cookies and other tracking technologies "cookies."
+We also use third party solutions and trackers for our public pages that may set cookies on your computer. These cookies collect identifiable information that allow us to better understand our audience and serve more relevant advertisements to visitors. We also use these cookies to understand broad and anonymous/aggregated user behavior when you visit our websites. Such user behavior may include time spent by a visitor on the site, most visited webpage, etc.
+What Types of Cookies Do We Use and Why?
+The following information lists the different types of cookies implemented on Keeper Security websites:
+Category Purpose Who Serves these Cookies
+Required Cookies Required for basic operation of the site, security, bot protection, account sign-in and storing your cookie preferences. Keeper, AddSearch, Cloudflare, Font Awesome, TrustArc
+Functional Cookies Support and enhance non-critical functionality such as chat, video, search, preferences, status pages and site usability analytics. reCAPTCHA, Google, Vimeo, GitBook, Help Scout, Iframely, StatusPage
+Advertising Cookies Used to personalize your experience, measure campaign performance and serve relevant ads. Google, Microsoft, LinkedIn, Meta, X, Snap, Reddit, ZoomInfo, Demandbase, G2, Magellan, OpenAI, HubSpot, Braze, Crazy Egg, Podscribe, Upsellit, 6sense, Lamar, Yahoo, LINE, LiveRamp, Tapad, Trade Desk, Xandr, PubMatic, Index Exchange, Magnite, BidSwitch
+Managing Cookies
+You can withdraw or change your cookie preferences at any time by selecting the link in the footer of our site. When you do so, all non essential analytics and marketing cookies will not load on your device. If you choose to disable cookies, it may limit your use of certain features or functions on our website.
+California and US State Laws
+Users in states such as California have the right to opt out of the sale or sharing of their personal information, which may include cookies used to serve advertising. Although we do not sell your personal information for any monetary value, our use of certain online cookies for this purpose may qualify as the "sale" or "sharing" of information under applicable law. You can opt out via the link in the website footer.
+Keeper honors Global Privacy Control (GPC) browser signals and these signals also operate as an opt-out of sale or sharing.
+How Long Cookies Stay on Your Device
+Some cookies only work while you're visiting the Keeper website. These are called session cookies and they're deleted automatically when you close your browser.
+Other cookies, known as persistent cookies, stay on your device after you close your browser and between visits. How long they remain depends on the specific cookie. Persistent cookies are used for things like remembering your preferences, helping us understand how you use our site over time and measuring how effective our advertising is.
+Additional Technical Information
+As is true of most websites, we gather certain information automatically and store it in log files. This information may include Internet protocol (IP) addresses, browser type, internet service provider (ISP), referring/exit pages, operating system, date/time stamp and/or clickstream data.
+We use Local Storage, such as HTML5, to store content information and preferences. Third parties with whom we partner to provide certain features on our website or to display advertising based upon your web browsing activity also use HTML5 to collect and store information. Various browsers may offer their own management tools for removing HTML5.
+We partner with third parties to manage advertising of Keeper products on other websites. Our third-party partner may use technologies such as cookies to gather information about your activities on other websites in order to provide you advertising based upon your browsing activities and interests. As a result, you may receive advertisements for Keeper products on other third-party websites based on your browsing activity on our website. If you wish to opt out of interest-based advertising visit https://tools.google.com/dlpage/gaoptout, https://optout.aboutads.info/ and https://thenai.org/how-to-opt-out/ [or if located in the European Union visit https://www.youronlinechoices.eu/].
+For security and privacy reasons, Keeper Security does not run third-party ads in its application.
+Products
+Enterprise Password Management
+Business Password Management
+Privileged Access Management
+Self-Managed Keeper
+Endpoint Privilege Management
+KeeperDB
+Remote Browser Isolation
+Secrets Manager
+Password Manager for MSPs
+Privileged Access Manager for MSPs
+Public Sector
+Forcefield
+Personal Password Manager
+Family Password Manager
+Pricing
+Privileged Access Management
+Enterprise Password Management
+Personal and Family
+Student
+Military and Medical
+Compare & Evaluate
+Keeper Versus the Competition
+User Reviews
+Use Cases
+Industries
+Features
+Enterprise Guide
+User Guides
+Passkeys Directory
+Trust & Security
+Security
+Trust Center
+GDPR Compliance
+Vulnerability Disclosure Policy
+Legal and Compliance
+Privacy Policy
+System Status
+Developers & Integrations
+Developers
+Documentation Portal
+Commander SDK
+SSO Connect®
+Azure
+Passwordless
+All Integrations
+Add-Ons
+Dark Web Monitoring
+Secure File Storage
+Advanced Reporting & Alerts
+Compliance Reporting
+Support Services
+Concierge Service
+Secure Messaging
+Free Tools
+KeeperDB
+Personal Dark Web Scan
+Business Dark Web Scan
+Secure Password Generator
+Secure Passphrase Generator
+Encrypted Messaging App
+Password Strength Meter
+AI Blast Radius Calculator
+PubSec Cyber Risk Calculator
+Keeper Cyber Check
+Download
+Mac
+Windows
+Linux
+Chrome
+Firefox
+Safari
+Edge
+Opera
+Beta Program
+Resources
+Blog
+Resource Library
+Keeper Webinars
+Events
+Sitemap
+Featured Blogs
+Top PAM Solutions
+What Is a Password Manager?
+Top PAM Features You Need
+Company
+About Us
+Careers
+Branding
+Newsroom
+Our Partners
+Partner Program
+Affiliate Program
+MSP Partner Program
+Support
+Help Center
+Contact
+English (US)
+© 2026 Keeper Security, Inc.
+Withdraw Cookie Consent
+English (US)
+Withdraw Cookie Consent
+© 2026 Keeper Security, Inc.
+Business Sales Americas & APAC +1 708 722 5950
+EMEA +353 21 237 5250
+Support Business (Americas) +1 312 226 4782
+Business (EMEA) +353 21 237 5250
+Business (APAC) +81 3 4520 3533
+English (US)
+English (UK)
+日本語
+Español
+Português (BR)
+Nederlands
+Deutsch
+Русский
+Polski
+中文 (简体)
+Italiano
+العربية
+Français
+We value your privacy
+We use cookies on our site to give you the best browsing experience, serve personalized ads about our products and content, and analyze website traffic. To learn more, please refer to our Privacy Policy.
+Decline Accept
+Withdraw Cookie ConsentWe value your privacy
+We use cookies on our site to give you the best browsing experience, serve personalized ads about our products and content, and analyze website traffic. To learn more, please refer to our Privacy Policy.
+Withdraw Cancel
+Accept Decline
+Chat with Support
+You must accept cookies to use Live Chat.
+Sign up for a Free Trial
+Personal and Family Protect yourself and your family from cybercriminals.
+Start Free Trial
+Business and Enterprise Protect your company from cybercriminals.
+Start Free Trial
+MSPs Protect your MSP organization, your end customers and add new revenue streams.
+Start Free Trial
+Platform Platform
+Products Password Management Enterprise
+Business
+Personal
+Family
+Privileged Access Management KeeperPAM
+Self-Managed Keeper
+Endpoint Privilege Manager
+KeeperDB
+Secrets Manager
+Remote Browser Isolation
+Managed Service Providers (MSPs) Password Manager for MSPs
+Privileged Access Manager for MSPs
+Public Sector
+Compare Keeper vs CyberArk
+Keeper vs Delinea
+Keeper vs BeyondTrust
+Keeper vs 1Password
+Keeper vs LastPass
+Keeper vs Bitwarden
+View All
+Technology Security
+Features
+Integrations
+Developers
+Trust Center
+Keeper DNA
+Solutions Solutions
+Use Cases Privileged Access Management
+Secure AI Agents
+Secure Remote Database Access
+Privileged Session Management
+Zero-Trust Security
+Password Management
+View all
+Industries Manufacturing
+Healthcare
+Universities
+Federal Government
+Financial Services
+Retail
+View all
+Pricing Pricing
+Privileged Access Management
+Password Management
+Secure Add-Ons
+Personal and Family
+Student
+Military and Medical
+Download
+Resources Resources
+Product information Documentation
+End-User Guides
+Case Studies
+Datasheets
+Keeper University
+Keeper 101 Videos
+MSP Admin Guide
+Resources Webinars
+Research Reports
+Public Sector Resources
+Cybersecurity Glossary
+Cyber Threats Database
+Passkeys Directory
+Infographics
+Sitemap
+Free Cybersecurity Tools KeeperDB
+Personal Free Dark Web Scan
+Business Free Dark Web Scan
+Secure Password Generator
+Secure Passphrase Generator
+Encrypted Messaging App
+Keeper Cyber Check
+Partners Our Partners
+Partner Program
+Affiliate Program
+MSP Partner Program
+Contact Contact
+Support
+Business Sales
+Call Us
+About About
+About Us
+Legal and Compliance
+Newsroom
+Branding
+Careers
+User Reviews
+Experiencing a Cyber Attack?
+Blog
+Partners
+English (US)
+Buy Now

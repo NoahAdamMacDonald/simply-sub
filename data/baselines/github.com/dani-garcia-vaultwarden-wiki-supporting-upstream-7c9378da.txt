@@ -1,0 +1,140 @@
+url: https://github.com/dani-garcia/vaultwarden/wiki/Supporting-upstream
+method: browser
+saved: 2026-11-20
+
+Skip to content
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+dani-garcia
+vaultwarden
+Repository navigation
+Code
+Issues
+15
+(15)
+Pull requests
+67
+(67)
+Discussions
+Actions
+Wiki
+Security and quality
+37
+(37)
+Insights
+Supporting upstream
+Edit
+New page
+Stefan Melmuk edited this page · 6 revisions
+Vaultwarden only provides the API (server) side implementation, so users still rely on clients from upstream (mobile apps, desktop apps and the web-vault). This is a lot of work that is done upstream by Bitwarden, Inc. At the same time Vaultwarden supports some paid features and offers that functionality for free. This raises some questions about sustaining and supporting upstream development. Many users have raised this issue and were asking how they can support upstream while using Vaultwarden.
+Buying a subscription
+Many users just subscribe to an appropriate plan for their deployment and leave the license unused. It's kind of a donation because Vaultwarden can't use the purchased license in any way.
+You can also support upstream by buying Bitwarden merch from their shop.
+Help translating the apps
+There are projects on Crowdin for each of the apps. If you're fluent in any language other than English, you can help translating the apps.
+Testing, reporting bugs in clients
+Please, always report any bugs found here first. Chances are these aren't upstream bugs, but bugs in our implementation or in your configuration. We don't want to waste Kyle's time troubleshooting bugs with 3rd party server. In very rare cases there is a bug upstream, but at this stage we would have any other reason ruled out and the bug confirmed on the upstream server. So the takeaway here is to not report bugs in upstream, but report it here instead even if you think it is client issue. We can work together to see where the problem is.
+Cf. our Bitwarden clients troubleshooting page for more information.
+Helping other users in the community
+There are lot of new users that sometimes struggle with basic stuff. Helping them is a great way to support the project (and to grow the community). From my experience with the community around Vaultwarden, it's great to see people actually helping each other before I get to answer their question - it saves some time and I often end up learning something new. There's Bitwarden community on Reddit for example, there are also official forums.
+🛡️ Vaultwarden — A Bitwarden server, reimagined in Rust
+🏠 Wiki Home · 📖 FAQs · ⚙️ Configuration · 🔒 Hardening Guide · 🐳 Docker
+💬 Get in touch
+❤️ Love Vaultwarden? Consider supporting upstream Bitwarden — without their work, this project wouldn't exist.
+Vaultwarden is an unofficial, community-driven Bitwarden-compatible server. It is not associated with, endorsed by, or affiliated with Bitwarden, Inc. — "Bitwarden" is a trademark of Bitwarden, Inc.
+Maintained with care by @dani-garcia and contributors · Wiki content licensed under the project's terms
+Pages 66
+FAQs
+FAQs
+Audits
+Supporting upstream development
+Troubleshooting
+Logging
+Bitwarden Android troubleshooting
+Bitwarden clients troubleshooting
+Container Image Usage
+Which container image to use
+Starting a container
+Using Docker Compose
+Using Podman
+Updating the vaultwarden image
+Reverse Proxy
+Proxy examples
+Using an alternate base dir (subdir/subpath)
+HTTPS
+Enabling HTTPS
+Running a private vaultwarden instance with Let's Encrypt certs
+Configuration
+Overview
+Enabling admin page
+SMTP configuration
+Disable registration of new users
+Disable invitations
+Enabling WebSocket notifications
+Enabling Mobile Client push notification
+Enabling SSO support using OpenId Connect
+Allow icon fetching from internal services
+Other configuration
+Database
+Using the MariaDB (MySQL) Backend
+Using the PostgreSQL Backend
+Running without WAL enabled
+Migrating from MariaDB (MySQL) to SQLite
+Security
+Hardening Guide
+Password hint display
+Enabling U2F and FIDO2 WebAuthn authentication
+Enabling YubiKey OTP authentication
+Fail2Ban Setup
+Fail2Ban + ModSecurity + Traefik + Docker
+Performance
+Changing the API request size limit
+Changing the number of workers
+Customization
+Translating the email templates
+Translating admin page
+Customize Vaultwarden CSS
+Using custom website icons
+Disabling or overriding the Vault interface hosting
+Backup
+General (not docker)
+Backing up your vault
+Development
+Building binary
+Building your own docker image
+Git hooks
+Differences from the upstream API implementation
+Alternative deployments
+Pre-built binaries
+Creating a systemd service
+Third-party packages
+Deployment examples
+Kubernetes deployment
+Disable the admin token
+Other Information
+Importing data from Keepass or KeepassX
+Changing persistent data location
+Syncing users from LDAP
+Caddy 2.x with Cloudflare DNS
+Logrotate example
+Clone this wiki locally
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information

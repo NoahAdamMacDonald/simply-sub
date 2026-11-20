@@ -1,0 +1,122 @@
+url: https://www.yubico.com/support/terms-conditions/yubico-website-terms-conditions/
+method: fetch
+saved: 2026-11-20
+
+Yubico website terms and conditions of use | Yubico
+OpenAI mandates hardware-backed passkeys for Trusted Access for Cyber members. Read more.
+Skip to content
+English Français Deutsch 日本語 Español Svenska
+Investors
+Contact Sales
+Partners
+Support
+About Products Enterprise Resources Solutions
+0
+All YubiKeys
+Compare YubiKeys
+What is a YubiKey?
+Set up your YubiKey
+YubiKey 5 Series
+Learn more
+Buy
+YubiKey 5 FIPS Series
+Learn more
+Buy
+YubiKey Bio Series
+Learn more
+Buy
+Security Key Series
+Learn more
+Buy
+YubiHSM 2 & YubiHSM 2 FIPS
+Learn more
+Buy
+Accessories
+Buy
+Home / Support / Terms and conditions / Yubico website terms and conditions of use
+Yubico website terms and conditions of use
+Updated May 13th, 2020
+The Yubico.com website, store.yubico.com, forum.yubico.com and developers.yubico.com (“Website”) is a web site and an open source service for secure online identity protection (“Service”) operated by Yubico AB (“Yubico”). Any use of the Website and Service is subject to the following Yubico Terms and Conditions of Use (“Terms and Conditions”). We may process your personal data in relation to your use of the Website and.or the Service. For more information regarding our processing of your personal data and your rights in relation thereto, please see our Privacy Notice and Cookie Notice, which are both incorporated by reference into these Terms and Conditions. When you use any service available, or download any software or libraries, at Yubico.com, use any Yubico web APIs or other material, buy any products at the Yubico Store (“Products”) or access any part of the Website or use the Service, you agree that you have read, understood, and agree to be bound by the these Terms and Conditions concerning your use of: (a) the Website and Service; (b) the web API and downloaded Yubico material; and (c) the products from Yubico. Please note that any purchase at the Yubico Store and use of Yubico Products (including YubiCloud) is also subject to specific additional terms and conditions found at: “YUBICO TERMS AND CONDITIONS OF SALE AND LICENSE”.
+General. Yubico may in its sole discretion change, modify, suspend, make improvements to or discontinue any aspect of the Website and Service, temporarily or permanently, at any time and without notice to you. Under no circumstances will Yubico be liable for any such change, modification, suspension, improvement or discontinuance. If you do not agree with any of these changes, you shall stop using the Website and Services.
+Registration. By registering with Yubico, you represent and warrant that the information you provide to Yubico in connection with any registration process is true and accurate, and that you will promptly notify Yubico if any of that information changes.
+You must immediately notify Yubico of any unauthorized uses of your account or any other breaches of security. Yubico will not be liable for any acts or omissions by you, including any damages of any kind incurred as a result of such acts or omissions. Yubico reserves the right to terminate your access to, and use of, all of the Yubico services and websites if you provide false or inaccurate information.
+Responsibility of website visitors. You are responsible for taking precautions as necessary to protect yourself and your computer systems from viruses, worms, Trojan horses and other harmful or destructive content. Yubico disclaims any responsibility for any harm resulting from the use by visitors of the Website, or from any downloading by those visitors of content there posted.
+Content posted on other websites. We have not reviewed, and cannot review, all of the material, including computer software, made available through the websites and webpages to which the Website links, and that link to the Website (for example software linked to from the Development section of the site). Yubico does not have any control over those non-Yubico websites and webpages, and is not responsible for their contents or their use. By linking to a non-Yubico website or webpage, Yubico does not represent or imply that it endorses such website or webpage. You are responsible for taking precautions as necessary to protect yourself and your computer systems from viruses, worms, Trojan horses and other harmful or destructive content. Yubico disclaims any responsibility for any harm resulting from your use of non-Yubico websites and webpages.
+Copyright infringement and DMCA policy. As Yubico asks others to respect its intellectual property rights, it respects the intellectual property rights of others. If you believe that material located on or linked to by the Website violates your copyright, you are encouraged to notify Yubico in accordance with Yubico’s Digital Millennium Copyright Act (“DMCA”) Policy. Yubico will respond to all such notices, including as required or appropriate by removing the infringing material or disabling all links to the infringing material. In the case of a user who may infringe or repeatedly infringes the copyrights or other intellectual property rights of Yubico or others, Yubico may, in its discretion, terminate or deny access to and use of the Website or Service. In the case of such termination, Yubico will have no obligation to provide a refund of any amounts previously paid to Yubico.
+Trademarks. Yubico, YubiKey, the key to the cloud, Yubico.com, the Yubico logo and all other trademarks, service marks, graphics and logos used in connection with Yubico, YubiKey or the Website are trademarks or registered trademarks of Yubico or Yubico’s licensors. Other trademarks, service marks, graphics and logos used in connection with the Website may be the trademarks of other third parties. Your use of the Website grants you no right or license to reproduce or otherwise use any Yubico or third-party trademarks.
+Changes. The Website, Service, and these Terms and Conditions may be changed at the sole discretion of Yubico and without notice. You are bound by any such updates or changes, including but not limited to those affecting these Terms and Conditions, and so should periodically review these Terms and Conditions. The Privacy Notice and Cookie Notice may be changed from time to time in accordance with what is stated therein.
+Communications with Yubico. All notices and other communications to Yubico required under this Agreement should be directed to the Yubico support contact page. Notices from Yubico shall be deemed given immediately after notice is sent by email or posted on Website. Alternatively, we may give notice by email to the address provided during the registration process. In such case, notice is deemed given three (3) days after the date of mailing.
+Limitation of warranties of Yubico, its suppliers and its licensors. Except as otherwise expressly stated, all content posted to or available from the Website and the Service are provided “as is”, and Yubico, its supplies and its licensors make no representations or warranties, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, title or non-infringement of proprietary rights. Yubico makes no representations and warranties regarding uptime for the Service and the accuracy of the Service. You understand and agree that you download from, or otherwise obtain content or services through, the Website at your own discretion and risk, and that Yubico, its suppliers and its licensors will have no liability or responsibility for any damage to your computer system or data that results from the download or use of such content or services. Some jurisdictions may not allow the exclusion of implied warranties, so some of the above may not apply to you.
+Limitation of liability of Yubico, its suppliers and its licensors. Except as otherwise expressly stated, in no event will Yubico, its suppliers or its licensors be liable to you or any other party for any direct, indirect, special, consequential or exemplary damages, regardless of the basis or nature of the claim, resulting from any use of the Website or Service, or the contents thereof or of any hyperlinked website including without limitation any lost profits, business interruption, loss of data or otherwise, even if Yubico, its suppliers or its licensors were expressly advised of the possibility of such damages. In no event will the aggregate liability for any and all of your claims against Yubico, its suppliers and its licensors arising out of or related to use of the Website and Service, or the contents thereof or of any hyperlinked website exceed the amounts actually paid by you to Yubico during the 12-month period prior to the date a claim is made. Some jurisdictions may not allow the exclusion or limitation of liability for certain incidental or consequential damages, so some of the above limitations may not apply to you. You agree that this Section 10 represents a reasonable allocation of risk.
+General representation and warranty. You represent and warrant that your use of the Website and Service will be in accordance with these Terms and Conditions, with any applicable laws and regulations, including without limitation any local laws or regulations in your country, state, city, or other governmental area, regarding online conduct and acceptable content, and including all applicable laws regarding the transmission of technical data exported from the United States or the country in which you reside, and with any other applicable policy or terms and conditions.
+Indemnification. You agree to defend, indemnify and hold harmless Yubico, its contractors and its licensors, and their respective directors, officers, employees and agents from and against any and all claims and expenses, including attorneys’ fees, arising out of your use of the Service, including but not limited to out of your violation of any representation or warranty contained in these Terms and Conditions.
+Termination. Yubico may terminate this Agreement, your rights under this Agreement, and your access to and use of the Website and Service in its sole discretion, for any reason or no reason at all, including but not limited to failure to pay your fees, with or without cause and without notice or liability to you or any third party. Any termination of these Terms and Conditions automatically terminates the license to use the Service and this Website. You may terminate these Terms and Conditions for any reason upon thirty (30) days prior written notice to Yubico.
+Survival. Upon termination, all rights and obligations created by this Agreement will terminate, except that you will continue to be bound by those terms that would by their nature survive such termination, including without limitation those concerning intellectual property rights, disclaimers of warranties and limitations of liability; representations, warranties and indemnity obligations; Privacy Notice and Cookie Notice; and general provisions.
+Other. This Agreement is not assignable, transferable or sub licensable by you without the prior written consent of Yubico and any attempt to do so shall be void. Any notice, report, approval or consent required or permitted hereunder shall be in writing. The waiver by Yubico of a breach of this Agreement or any right hereunder shall not constitute a waiver of any subsequent breach of this Agreement; nor shall any delay by Yubico to exercise any right under this Agreement operate as a waiver of any such right. If any provision of this Agreement shall be adjudged by any court of competent jurisdiction to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary so that this Agreement shall otherwise remain in full force and effect and enforceable. This Agreement shall be deemed to have been made in, and shall be construed pursuant to the laws of Sweden without regard to conflicts of laws provisions thereof. Both parties hereby consent to the exclusive jurisdiction of the Swedish Court system with the City Court of Stockholm as first instance. The parties agree that a material breach of this Agreement adversely affecting Yubico’s proprietary rights in the Yubico Product would cause irreparable injury to Yubico for which monetary damages would not be an adequate remedy and that Yubico shall be entitled to equitable relief in addition to any remedies it may have hereunder or by law.
+(These Terms and Conditions of Use are adopted from Akismet.com TOS, available under a Creative Commons Sharealike license.)
+Join our newsletter
+Distributed monthly, it includes product news, new applications, case studies, events, and
+discounts. Unsubscribe anytime.
+By subscribing you agree to our Privacy Policy.
+Subscribe
+About us
+About us
+The team
+Innovation history
+Secure it forward program
+Yubico blog
+Press Room
+Events
+Partner programs
+Careers
+Investors
+Products
+YubiKey 5 Series
+YubiKey 5 FIPS Series
+Security Key Series
+YubiKey Bio Series
+YubiHSM 2 & YubiHSM 2 FIPS
+Accessories
+Yubico Authenticator
+Computer login tools
+Software Development kits
+Enterprise
+YubiKey as a Service
+Delivery
+Contact Sales
+Enrollment
+Professional Services
+Solutions
+All Solutions
+Initiatives
+Industries
+Use cases
+Technologies
+Resources
+Setting up your YubiKey
+Find the right YubiKey
+Works with YubiKey Catalog
+What is a YubiKey
+Case studies
+Webinars
+White papers and reports
+Documentation
+All downloads
+Support Home
+Support services
+Buying and shipping information
+Social
+LinkedIn
+YouTube
+Instagram
+X
+Facebook
+English Français Deutsch 日本語 Español Svenska
+Sitemap
+Cookies
+Legal
+Privacy
+Terms of use
+Accessibility
+Legal Imprint
+EU Right of Withdrawal

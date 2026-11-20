@@ -1,0 +1,32 @@
+url: https://help.twilio.com/articles/19753420684059
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+Export or Import Tokens in the Authy app Not Supported
+Objective
+In order to maintain security for our users, the Authy application does not allow importing or exporting 2FA account tokens.
+The alternative to import and export of tokens is to follow this process.
+Product
+Authy
+Procedure
+Login to the desired online account with your existing 2FA token.
+Disable 2FA in the app's site.
+Re-enable 2FA again in the app's site.
+Scan the QR code, optionally write the Authentication Key, this time on the desired 2FA App.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

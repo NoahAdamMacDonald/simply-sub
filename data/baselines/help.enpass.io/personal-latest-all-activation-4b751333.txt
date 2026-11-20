@@ -1,0 +1,82 @@
+url: https://help.enpass.io/personal/latest/all/activation
+method: fetch
+saved: 2026-11-20
+
+Activation | Enpass Help
+Skip to main content
+Business
+Personal
+Security
+Blog
+Pricing
+Main navigation
+Close navigation
+Main
+Business
+Personal
+Security
+Blog
+Pricing
+Main
+Getting Started with Enpass
+Why Enpass?
+Enpass apps & installation
+Activation & Set-Up
+Activation
+Creating your first vault
+Setting up Enpass in your browser
+Making Enpass your default password manager
+Importing passwords.
+Enable Enpass on more devices
+Recommended settings
+Browser extension
+Explore Features
+Security basics
+Customization
+Mobile & Wearables Apps
+Enpass for Windows
+Enpass for Mac
+Enpass for iPhone & iPad
+Enpass for Android
+Enpass for Linux
+Vaults & Syncing
+Organizing Your Enpass Items
+Generating & Changing Passwords
+Importing passwords
+Passkeys & 2FA
+Security & Biometrics
+Registration & Subscriptions
+Troubleshooting
+Breadcrumbs
+Home
+Personal & Family Support Center
+Getting Started with Enpass
+Activation & Set-Up
+On this Page
+Activation
+Activating Enpass
+If you are an Enpass Business user issued a license by your admin, visit this page.
+If you are interested in Enpass Business for your organization, start here.
+Activation is easy and free, and requires only an email address for registration, which is used to activate Enpass on other devices.
+When you launch Enpass for the first time, the Welcome to Enpass screen asks how you’ll be using Enpass. These instructions are for users who have chosen Enpass to manage their personal passwords and other credentials on their own devices. If your employer has chosen Enpass to manage your work credentials, visit this page.
+Desktop
+To active Enpass (personal edition) for desktop:
+On the Welcome screen, under Choose How You’ll Use Enpass, select Personal.
+Provide an email address to receive an activation code, and click Send Code.
+Enter your activation code, and click Continue.
+Click Done to complete the activation process.
+iOS
+To active Enpass for iPhone or iPad:
+On the Welcome screen, under Choose How You’ll Use Enpass, select Personal.
+Provide an email address to receive an activation code, or choose Continue with Apple.
+Enter your activation code, then tap Continue to complete your activation.
+Android
+To active Enpass for Android:
+On the Welcome screen, under Choose How You’ll Use Enpass, select Personal.
+Provide an email address to receive an activation code, or choose Sign in with Google.
+Enter your activation code, then tap Continue to complete your activation.
+If you have not received your activation code, check your spam folder, or click Resend.
+NEXT
+Create your first vault
+Copyright Enpass Technologies Inc.
+Powered by Scroll Sites & Atlassian Confluence

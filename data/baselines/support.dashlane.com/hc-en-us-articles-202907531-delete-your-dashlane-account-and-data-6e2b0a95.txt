@@ -1,0 +1,124 @@
+url: https://support.dashlane.com/hc/en-us/articles/202907531-Delete-your-Dashlane-account-and-data
+method: fetch
+saved: 2026-11-20
+
+Delete your Dashlane account and data – Dashlane
+×
+To get the latest security improvements, keep Dashlane up to date.
+See the latest versions
+Learn how to update
+☰
+Ask a question
+Get help
+English (United States)
+Deutsch
+Español
+Français
+Home
+Admin Help Center
+How to get help with Dashlane
+×
+Loading help options…
+For users
+For admins
+×
+Home
+Manage your account
+Cancel your plan and delete your account
+Delete your Dashlane account and data
+Delete your Dashlane account and data
+For all plans
+Delete your Dashlane account and data
+Updated November 18, 2026 17:29
+If you don't want to use Dashlane any longer, you can delete your account. You can create a new account at any time.
+When you delete your Dashlane account, all data associated with your account is erased, including all logins, Secure Notes, personal details, and payment info. After your account is deleted, Dashlane can't process refunds, look up transactions, or provide any other support related to the account. You'll also no longer receive emails from Dashlane.
+Account deletion doesn't uninstall our apps from your devices.
+Uninstall Dashlane
+If you need to delete an account for a deceased person, visit this article:
+Manage the account of a deceased Dashlane customer
+Before you delete your account
+Important: Before you delete your account, complete any of the steps in this section that apply to you. We can't help you with any of these processes after you delete your account.
+If you have a paid Dashlane plan, cancel your subscription.
+Cancel your Dashlane subscription
+Do I need to cancel my Dashlane Premium trial?
+I already deleted my account, but didn't cancel my subscription
+If you deleted your account and didn't cancel your subscription, you can get help. Select the Chat icon in the bottom right of this page and mention that you want to cancel your subscription.
+If you paid for your subscription within the last 30 days, you can request a refund. Refunds are available for personal plans but not professional plans.
+Get a refund for my Dashlane subscription
+If you have a paid Dashlane plan you want to move to another Dashlane account, make sure to transfer your subscription before you delete your account.
+You can get help. Select the Chat icon in the bottom right of this page and mention that you want to transfer your subscription.
+If you can't access the deletion page and are redirected to your vault, make sure you're logged out of the Dashlane browser extension
+We recommend that you export your data if you haven't already. Account deletion erases all your data.
+Export your data with a CSV file
+Export your data with a secure DASH file
+Delete your Dashlane account and data
+Warning! Account deletion erases all data stored in your account. You won't be able to log in or access your data, and we won't be able to recover the data. Before you delete your account, export your data. In some cases, you also need to cancel your subscription first.
+Important: On your computer, you need to have the Dashlane browser extension installed and then log out of the extension in that browser to be able to delete your account.
+Install the Dashlane browser extension
+I'm an admin. Can I delete a plan member's account?
+The process is the same as when you delete your Dashlane account. You'll be asked to insert a verification code sent to the account's contact email address, or a 2FA token/recovery code.
+You can delete your account and data from Dashlane on your computer or through the macOS, iPad, and iPhone apps. You can't delete your account and data on the Dashlane Android app.
+Select where you want to delete your account and data.
+Web
+iPhone
+macOS or iPad
+Delete your account and data on the web
+Go to our account deletion page
+If you can't access the deletion page and are redirected to your vault, make sure you're logged out of the Dashlane browser extension.
+Enter the email address you use to log in to Dashlane.
+A new tab opens to perform a security check, which helps prevent phishing. This security check confirms that the request is genuine, so attackers can't fake the process or trick you into a fraudulent request on a fake website.
+Do not close the account deletion page. If we've asked you to verify your email, open your email in a separate tab or on a separate device. If we've asked for a 2FA token, open your authenticator app. If you can't find your 2FA token, you can use a 2FA recovery code.
+More about 2FA
+Get new recovery codes sent to you by text
+On the account deletion page, enter your email verification code, 2FA token, or recovery code. Complete this step within 15 minutes, or you'll need to restart the process and enter your email address again.
+If one of the pages doesn't load or takes too long to load, turn off your ad blocker or VPN, or add Dashlane to your allowlist. If you're unable to receive your verification code or 2FA token, check these articles:
+Problems with email verification codes
+Problems using 2FA tokens when logging in to Dashlane
+Then, select Delete my account and confirm.
+Delete your account and data on your iPhone
+If you have a Free account, you can't delete your account on the iPhone.
+Select Settings in the bottom menu of the Dashlane iPhone app, and then select Help.
+On the Help screen, select Delete my account, and enter your Master Password.
+On the Delete your account screen, your contact email is pre-populated. A warning banner appears that states that deleting your account cannot be undone and that all data and passwords will be permanently lost. Select Continue.
+The Security check screen appears. Select the checkbox. This security check confirms that the request is genuine, so attackers can't fake the process or trick you into a fraudulent request on a fake website.
+Then, enter the 6-digit code sent to your email. Complete this step within 15 minutes, or you'll need to restart the process.
+If the page doesn't load or takes too long to load, you may need to turn off your VPN or try a different device. If you're unable to receive your verification code, check this article:
+Problems with email verification codes
+Confirm that you want to delete your account and data.
+Your account and data are deleted, and you're logged out. You're returned to the login screen.
+Delete your account and data on macOS or iPad
+Select the gear icon at the top of the left menu in the Dashlane macOS or iPad app, and then select Help.
+On the Help screen, select Delete my account, and enter your Master Password.
+On the Delete your account screen, your contact email is pre-populated. A warning banner appears that states that deleting your account cannot be undone and that all data and passwords will be permanently lost. Select Continue.
+The Security check screen appears. Select the checkbox if needed. This security check confirms that the request is genuine, so attackers can't fake the process or trick you into a fraudulent request on a fake website.
+Then, enter the 6-digit code sent to your email. Complete this step within 15 minutes, or you'll need to restart the process.
+If the page doesn't load or takes too long to load, you may need to turn off your VPN or try a different device. If you're unable to receive your verification code, check this article:
+Problems with email verification codes
+Confirm that you want to delete your account and data.
+Your account and data are deleted, and you're logged out. You're returned to the login screen.
+Uninstall Dashlane apps
+When you delete your account, Dashlane isn't removed from your computer or phone. To remove Dashlane from your devices, you need to uninstall all of our apps.
+Uninstall Dashlane
+Important: Your account won't be canceled or deleted when you uninstall Dashlane from your device. To completely leave Dashlane, you need to cancel your subscription, delete your account, and uninstall Dashlane.
+Was this article helpful?
+Yes No
+3009 out of 9170 found this helpful
+Have more questions? Submit a request
+Back to Top
+Dashlane.com
+Resource library
+Developer resources
+Blogs
+Dashlane plans
+Partner portal
+System Status: View system status
+Log in to Dashlane
+Get Dashlane
+Stay in touch
+© Dashlane Inc. All rights reserved.
+Dashlane and the Dashlane logo are trademarks of Dashlane SAS, registered in the U.S. and other countries.
+Terms
+Privacy
+Legal
+ACCESSIBILITY STATEMENT
+Powered by Zendesk

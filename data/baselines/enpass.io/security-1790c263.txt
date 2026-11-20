@@ -1,0 +1,127 @@
+url: https://www.enpass.io/security/
+method: fetch
+saved: 2026-11-20
+
+Data Security: Safeguard Sensitive Data with Enpass
+Skip to content
+Business Plans
+Business
+Enterprise
+Compare plans and pricing
+For IT & security teams
+Admin Console
+SCIM provisioning
+SIEM integrations
+Policy enforcement
+Passkeys for Business
+Work with your stack
+Microsoft 365
+Google Workspace
+Latest from Enpass
+What Should a CIO Look for in an Enterprise Password Manager?
+Personal Plans
+Personal
+Get Enpass through work
+Features
+Password Generator
+Passkeys
+Autofill
+Security Dashboard
+Get set up
+Downloads
+Move to Enpass
+Fix Compromised Passwords
+Latest from Enpass
+What Should a CIO Look for in an Enterprise Password Manager?
+Why Enpass
+Pricing
+Resources Insight
+Blog
+FAQs
+Security & Trust
+Compliance & Accrediations
+Security whitepaper
+See all comparisons
+Security Dashboard
+Support
+Help Center
+Community Forum
+Contact Support
+Press Center
+Newsroom
+Media Kit
+Latest from Enpass
+What Should a CIO Look for in an Enterprise Password Manager?
+Get started here
+Talk to sales
+X
+Get started here
+Talk to sales
+Your data security comes first
+Enpass is designed to keep your data safe and secure, and protects your right to privacy
+Your data is protected by the world’s leading cryptography algorithm
+Your data is fully encrypted with 256-bit AES with 320,000 rounds of PBKDF2-HMAC-SHA512 using the open-source encryption engine SQLCipher. This provides you with advanced protection against brute force and side channel attacks.
+We don’t keep your encryption key or its derivative
+The key that encrypts your data is derived from your master password which only you know. There is no record of your master password or its derivative with Enpass. If you forget your master password, there is no way to recover your data.
+Your data, available across all your devices
+Optionally, your (encrypted) data is available across all your devices through any of the supported environments (iCloud, Dropbox, Google Drive, OneDrive, and WebDAV). Your data is always transmitted in an encrypted format. Encryption and decryption always happens locally on your device.
+We never keep your data on our servers
+We do not save your Enpass data on our servers. Your data is only stored on your device(s) unless you specifically choose to sync it via your personal cloud storage (iCloud, Dropbox, Google Drive, OneDrive, and WebDAV).
+Use Enpass with confidence
+Our security practices are reviewed against recognized standards. Independent auditors assess our controls and processes.
+ISO 27001 certified
+Enpass (ISMS) is ISO/IEC 27001 certified. By meeting certification requirements, Enpass reduces risks to information security and improves compatibility with data protection mandates. This includes guarding against both criminals data breaching the potential for data exposure caused by internal errors. Learn more
+SOC 2 Type II Audited
+Our security and compliance practices have undergone an independent SOC 2 Type II audit, ensuring that our controls for security, availability, processing integrity, confidentiality, and privacy meet the rigorous standards required to protect customer data and maintain operational excellence.
+GDPR compliant
+Enpass adheres to the guidelines for data protection set forth by the European Union in the General Data Protection Regulation (GDPR). We make sure your personal data is protected and our data protection practices remain transparent.Facilitate easy file uploads, sharing, and access within your app.
+Frequently asked questions
+How can you unlock my Enpass data with Touch ID on iOS without my master password?
+Your Enpass data can only be decrypted by your master password. Please read more here to learn how we have used Touch ID to unlock Enpass with best possible security.
+Are there any design details available for Enpass Cryptography Engine?
+Enpass uses SQLCipher as cryptography engine which is used world wide for cryptographic operations. It is peer reviewed and open-source. Its design details are available here.
+How secure is my data?
+Your cloud always contains a copy of the same encrypted data available on your device. We download the entire encrypted copy and decrypt it on your device to merge changes. Afterwards, we upload the encrypted data on cloud. In a nutshell, your cloud is only a storage medium and no security related operation (encryption or decryption) is actually performed there. All such operations are performed locally on your device.
+How much of my data is encrypted?
+100% of your data is encrypted with Enpass everywhere. You can open data file inside a binary editor and see it yourself. All you will see is nonsense, gibberish data (encrypted with AES 256). For more information on Enpass security, check out the Enpass Security White Paper.
+How can you unlock my Enpass data with your biometric (fingerprint) on Android without using my master password?
+Your Enpass data can only be decrypted by your master password. Please read more here to learn how we have used Fingerprint to unlock Enpass with best possible security.
+How secure is it to share an item in Enpass?
+Enpass offers an option to share your vault’s items with other users. However, the security of the shared item depends on how you choose to share it. Please visit our help page here for more info.
+Want to receive news and updates?
+Subscribe
+By subscribing, you agree to our Terms of Use and Privacy Notice. We do not send more than one email a month about the latest news of Enpass, special promotions and sneak peek of future releases.
+Connect with us on social media
+Explore
+Business
+Enterprise
+Personal
+Microsoft 365 Integration
+Google Workspace Integration
+Affiliate Program
+Partners Program
+Beta Program
+Students
+Features
+Autofill
+Passkeys
+Password Generator
+Security Dashboard
+Moving to Enpass
+Compromised Passwords
+Resources
+Blog
+Choosing Enpass
+Downloads
+Security
+Security Whitepaper
+Press: Resources
+Passkeys Catalogue
+Company
+About
+Privacy Notice
+Cookie Policy
+Terms of Use
+Copyright © 2026 Enpass Technologies Inc.
+Terms of Use
+Privacy Notice

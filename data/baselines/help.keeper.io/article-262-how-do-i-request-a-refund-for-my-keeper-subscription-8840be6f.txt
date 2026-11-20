@@ -1,0 +1,43 @@
+url: https://help.keeper.io/article/262-how-do-i-request-a-refund-for-my-keeper-subscription
+method: fetch
+saved: 2026-11-20
+
+How do I request a refund for my Keeper subscription? (Personal and Family Plans) - Keeper Security, Inc Knowledge Base
+Toggle Navigation
+Contact
+Contact
+How do I request a refund for my Keeper subscription? (Personal and Family Plans)
+Keeper subscriptions are non-refundable. Since the software is delivered in full at the time of purchase, we're not able to issue refunds for past charges or for time already used on your subscription.
+What's not refundable:
+Subscription renewals and time already used on an active subscription.
+Any period of software access already delivered, since it can't be "returned."
+How to stop future charges: You can turn off auto-renewal so you're not billed again:
+If you purchased through the Apple App Store, Google Play Store, or Microsoft Store: turn off auto-renewal yourself from that store's subscription settings. See "Where do I manage my Keeper subscription billing?" for the exact steps.
+If you purchased directly through keepersecurity.com: contact our support team and they can turn off auto-renewal for you.
+Not sure how you originally purchased? See "Where do I manage my Keeper subscription billing?" for how to check.
+If you'd still like to ask the app store about a refund: Purchases through Apple, Google, or Microsoft are billed by that platform, not by Keeper, so only they can issue a refund for those charges.
+Apple App Store: Request a refund from Apple
+Google Play Store: Request a refund from Google
+Microsoft Store: Request a refund from Microsoft
+Keeper Business, Enterprise, and MSP customers: these steps do not apply to your account. Refund inquiries for these accounts are handled by your Customer Success Manager or Account Manager. Please see Billing and Sales Support for Keeper Business, Enterprise, and MSP Customers.
+Still need help?
+Contact Us
+Contact Us
+Last updated on October 19, 2026
+Toggle Search
+Categories
+Keeper PAM
+Account Management
+SSO/SCIM Provisioning
+Using the App
+Technical Issues
+Admin Console
+MSP
+Keeper Automator
+Billing Issues
+General Questions
+Security
+No results found
+©
+Keeper Security, Inc
+2026. Powered by Help Scout

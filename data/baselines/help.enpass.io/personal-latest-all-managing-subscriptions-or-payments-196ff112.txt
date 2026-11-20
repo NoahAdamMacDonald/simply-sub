@@ -1,0 +1,58 @@
+url: https://help.enpass.io/personal/latest/all/managing-subscriptions-or-payments
+method: fetch
+saved: 2026-11-20
+
+Managing subscriptions or payments | Enpass Help
+Skip to main content
+Business
+Personal
+Security
+Blog
+Pricing
+Main navigation
+Close navigation
+Main
+Business
+Personal
+Security
+Blog
+Pricing
+Main
+Getting Started with Enpass
+Vaults & Syncing
+Organizing Your Enpass Items
+Generating & Changing Passwords
+Importing passwords
+Passkeys & 2FA
+Security & Biometrics
+Registration & Subscriptions
+Haven't received Enpass activation code
+Managing subscriptions or payments
+Changing your registered email address
+Unable to restore purchase
+Sharing an Enpass family plan
+Deleting an Enpass account
+Troubleshooting
+Breadcrumbs
+Home
+Personal & Family Support Center
+Registration & Subscriptions
+On this Page
+Managing subscriptions or payments
+Managing Enpass subscriptions or payments
+How your Enpass subscription is managed depends on how you made your original purchase.
+To manage an Enpass subscription purchased through the iOS or Mac App Stores:
+Follow these instructions from Apple.
+To manage an Enpass subscription purchased through the Google Play Store:
+Follow these instructions from Google Play.
+To manage an Enpass subscription or purchase from Enpass.io:
+Visit enpass.onfastspring.com/account.
+Enter the email address used for your purchase, and click Continue.
+Follow the link in the email you receive to access your account, view your order, manage your subscription, and update your payment details.
+If you have questions or need assistance:
+Visit the Enpass Discussion Forum or contact Enpass Support
+Related Topics
+Changing your registered email address
+Deleting an Enpass account
+Copyright Enpass Technologies Inc.
+Powered by Scroll Sites & Atlassian Confluence

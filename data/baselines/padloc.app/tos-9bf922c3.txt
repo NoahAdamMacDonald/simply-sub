@@ -1,0 +1,226 @@
+url: https://padloc.app/tos
+method: fetch
+saved: 2026-11-20
+
+Padloc Terms of Service
+Pricing
+Support
+Blog
+Login / Signup
+Pricing
+Support
+Blog
+Mon Jul 18 2022
+Padloc Terms of Service
+These Terms Of Service ("TOS") shall govern the use of Padloc Software and
+constitutes a legally binding agreement between You and MaKleSoft UG, a German
+company with offices at Meisenstrasse 5, 91522 Ansbach, reg no HRB 5566
+(Amtsgericht Ansbach) (“Padloc”).
+1. DEFINITIONS
+“Content” means software (including machine images), applications, online
+services, features, technology, data, text, audio, video, images or other
+content.
+“You(r)" means the consumer executing and accepting these TOS that obtained
+the Software for private, non-commercial use only.
+"Intellectual Property" means any patents, patent rights, design rights,
+copyrights, database rights, trade secrets, know-how, trademarks, trade names,
+service marks and other intellectual property embodied therein and all
+applications and rights to apply for registration or protection rights
+pertaining thereto, in existence at the date hereof or created in the future.
+Rights regarding Intellectual Property shall be referred to as “Intellectual
+Property Rights”.
+“Software” means the Padloc’s Software, including its updates, upgrades, and
+documentation.
+“Subscription” means the provision of the Software as a service (i.e.
+through a Padloc managed infrastructure) for a period of time. “Subscription
+Term”: refers to the period of time for which Customer has acquired the
+Subscription. These Terms of Service are effective from the date you first use
+the Software and shall continue until terminated.
+2. CONSENT
+YOUR ACCEPTANCE OF THESE TERMS BY DOWNLOADING, INSTALLING, OR USING THE
+SOFTWARE, YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND
+BY THIS ENTIRE AGREEMENT. THESE TERMS OF SERVICE ARE A LEGAL AGREEMENT BETWEEN
+YOU AND PADLOC AND THE TERMS HEREOF APPLY TO YOU WHETHER YOU ARE A REGISTERED
+USER OR A VISITOR USING THE SOFTWARE. IF YOU DO NOT AGREE TO ITS TERMS, YOU MUST
+NOT DOWNLOAD, INSTALL OR USE SOFTWARE AND YOU MUST DELETE AND RETURN THE UNUSED
+SOFTWARE.
+3. LICENSE
+3.1. All Intellectual Property Rights in and to the Software are owned by
+Padloc and shall remain vested in Padloc.
+3.2. This Software is licensed, not sold. Padloc Software grants You a
+personal, non-transferable and non-exclusive right to use the Software on Your
+devices only for Your personal and non-commercial use during the Subscription
+Term. Any other rights not expressly granted herein are reserved by Padloc. Your
+rights are subject to the usage limits identified in these TOS.
+4. RESTRICTIONS OF USE
+4.1. Unless otherwise authorized in writing, You may not and will not allow
+any third party to: (i) use the Software for commercial purposes; (ii) resell,
+sell, rent, lease, license, sublicense, distribute, exploit commercially,
+pledge, assign or otherwise transfer in whole or in part the Software or any
+interest in it; (iii) provide, disclose, divulge or make available to, or permit
+use of the Subscription in whole or in part by any third party; (iv) install or
+use the Software in a manner that circumvents or interferes with the operation
+of the technological measure that controls the access to the Software; iv)
+modify, translate, adapt or create derivative works based on the Software; (vi)
+export or re-export the Software or any derivative work thereof; (vii) remove or
+modify any Software markings or any notice of Padloc’s proprietary rights;
+(viii) use the Software to develop, test, host, or run and operate applications
+on behalf of third-parties to these TOS; (ix) use the Software in any way that
+is contrary to the terms and conditions of these TOS; or (x) use the Software
+for any unlawful purposes or attempt to gain unauthorized access to it. You
+violate any of these restrictions, You may be subject to prosecution and liable
+for damages.
+4.2. You shall not use or permit use of the Software to display, store,
+process or transmit any Content, that may (i) menace or harass any person or
+cause damage or injury to any person or property; (ii) involve the publication
+of any material that is false, defamatory, harassing or obscene; (iii) violate
+privacy rights or promote bigotry, racism, hatred or harm; (iv) constitute
+unsolicited bulk e-mail, “junk mail”, “spam” or chain letters; (v) constitute an
+infringement of intellectual property or other proprietary rights; or (vi)
+otherwise violate applicable laws, ordinances or regulations.
+5. CONFIDENTIALITY
+5.1. The Software and all manuals, data, documentation, and other materials
+provided by Padloc may contain confidential and proprietary information. You
+agree to use the Software only as expressly set forth herein, not to disclose
+the Software to any third party and to maintain adequate procedures to prohibit
+the unauthorized disclosure, duplication, misuse or removal of the Software.
+5.2. In particular, You agree to (i) Maintain Your username, password and
+other account information confidential; (ii) Provide accurate and complete
+information and update Your account when necessary to keep it current; (iii) Not
+use false identities or use a username and/or password that You are not
+authorized to use; and (iv) Not allow others to access or use Your account and
+notify Padloc immediately of any unauthorized use of Your account.
+6. DISCLAIMER OF WARRANTIES
+6.1. TO THE EXTENT PERMITTED BY THE APPLICABLE LAWS, PADLOC DOES NOT WARRANT
+THAT THE SOFTWARE OR SUPPORT WILL BE UNINTERRUPTED, ERROR-FREE, COMPLETELY
+SECURE OR FULLY COMPATIBLE WITH A PARTICULAR DEVICE. YOU ACKNOWLEDGES THAT THERE
+ARE RISKS INHERENT IN INTERNET CONNECTIVITY THAT COULD RESULT IN THE LOSS OF
+CONFIDENTIAL INFORMATION AND/OR CONTENT. TO THE MAXIMUM EXTENT PERMITTED BY
+APPLICABLE LAW, PADLOC PROVIDES THE SOFTWARE AND SUPPORT “AS IS”, WITHOUT
+WARRANTY OF ANY KIND, INCLUDING BUT NOT LIMITED TO, EXPRESS OR IMPLIED OR
+STATUTORY OR OTHER WARRANTIES OR CONDITIONS, INCLUDING WARRANTIES OF
+MERCHANTABILITY AND THOSE ARISING OUT OF COURSE OF USAGE, OR TRADE.
+6.2. YOU SHALL HAVE SOLE RESPONSIBILITY FOR THE ACCURACY, QUALITY,
+INTEGRITY, LEGALITY, RELIABILITY, APPROPRIATENESS AND OWNERSHIP OF ALL YOUR
+CONTENT.
+7. TERM AND TERMINATION
+7.1. Upon termination of the Subscription, the TOS shall be automatically
+canceled, and You shall no longer have access to the Software.
+7.2. You may terminate it at any time upon removing the Software from all
+systems under Your control and ceasing access the software.
+7.3. Padloc is given the right to immediately suspend or terminate Your
+account at any time, with or without notice to You, if You are suspected of
+impersonating anyone on the Service or if You fail to comply or if You are in
+violation with any terms of these TOS.
+7.4. In case of a lack of conformity of the Software or where Padloc has
+failed to supply the Software, You shall call upon Padloc to rectify the
+situation. In such cases efforts will be made to bring the Software into
+conformity, without additional costs to You.
+7.5. Notwithstanding any other alternative remedies available to You under
+the applicable laws, such as receiving a proportionate reduction in the price
+(when applicable), if Padloc remains without supplying the Software within a
+reasonable additional period of time, You shall be entitled to terminate the
+contract with a refund of the paid and unused period.
+8. MODIFICATIONS TO THE SOFTWARE
+8.1. Padloc reserves the right to modify the Software at any time and
+without additional costs, including but not limited to updates, upgrades,
+modification of digital content features, changes in any of the characteristics
+of the Software or similar modifications to fulfill the objective requirements
+for conformity of the Software or for other reasons on Padloc’s sole discretion.
+You will be properly informed of such modifications.
+8.2. You shall be entitled to terminate the contract if the modification
+materially impacts Your access to or use of the Software or the Applications.
+9. LIABILITY
+9.1. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL
+PADLOC BE LIABLE FOR ANY LOSS OF USE, LOST DATA, FAILURE OF SECURITY MECHANISMS,
+INTERRUPTION OF BUSINESS, OR ANY INCIDENTAL, INDIRECT, SPECIAL, PUNITIVE OR
+CONSEQUENTIAL DAMAGES (INCLUDING WITHOUT LIMITATION LOSS OF PROFITS, GOODWILL,
+DATA OR DATA USE, OR CLAIMS OF THIRD PARTIES) ARISING FROM these TOS, WHETHER
+UNDER THEORY OF CONTRACT, TORT, INCLUDING NEGLIGENCE, OR OTHERWISE, EVEN IF A
+PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES IN ADVANCE.
+9.2. PADLOC WILL NOT BE LIABLE FOR: (i) YOUR INABILITY TO USE THE SOFTWARE,
+INCLUDING AS A RESULT OF ANY TERMINATION OR SUSPENSION OF SUBSCRIPTION OR ANY
+UNANTICIPATED OR UNSCHEDULED DOWNTIME OF ALL OR A PORTION OF THE SOFTWARE AS A
+RESULT OF POWER OUTAGES, SYSTEM FAILURES OR OTHER INTERRUPTIONS BEYOND PADLOC
+CONTROL; (ii) ANY UNAUTHORIZED ACCESS TO, ALTERATION OF, OR THE DELETION,
+DESTRUCTION, DAMAGE, LOSS OR FAILURE TO STORE ANY OF YOUR CONTENT DUE TO YOUR
+NEGLIGENCE AND OR MISCONDUCT; OR (iii) ANY INCIDENTAL, INDIRECT, SPECIAL,
+PUNITIVE OR CONSEQUENTIAL DAMAGES WHICH MAY ARISE OUT OF ANY THIRD PARTY
+SOFTWARE.
+9.3. PADLOC’S TOTAL AGGREGATE LIABILITY UNDER THESE TOS AND YOUR SOLE AND
+EXCLUSIVE REMEDY FOR ANY CLAIM OF ANY TYPE WHATSOEVER SHALL BE LIMITED TO PROVEN
+DIRECT DAMAGES CAUSED BY PADLOC’S GROSS NEGLIGENCE IN AN AMOUNT NOT TO EXCEED
+THE AMOUNTS PAID TO PADLOC UNDER THESE TOS.
+10. MISCELLANEOUS
+10.1. Changes: Padloc has the discretion to update these TOS at any time
+with or without notice to You. Padloc will revise the updated date on the top of
+this page. Padloc encourages You to frequently check this page for any changes
+to stay informed. You acknowledge and agree that it is Your responsibility to
+review these TOS periodically and become aware of modifications. If You do not
+agree to an update to the terms, You may terminate the TOS at any time by
+removing the Software from all systems under Your control and ceasing access to
+the Software.
+10.2. Entire Agreement: These TOS, as varied from time to time, constitutes
+the entire agreement in respect of the access to and use of the Software.
+10.3. Order of Precedence: When Subscription is acquired through a
+third-party (reseller), in case of inconsistency between the agreement executed
+with such third party and the TOS, the TOS shall prevail.
+10.4. Data Usage: To the extent permitted by law, Padloc may collect
+non-personal information whenever You interact with our Software and
+Applications. Therefore, the Parties hereby agree that Padloc may collect and
+use data related with the use of the Software (“Usage Data”) for statistical
+purposes, to improve the Software and for licensing or compliance audits. Padloc
+may, at its sole discretion, also implement technical measures regarding the
+functionality of the Software to assess whether the Your usage pattern are in
+line with the TOS.
+10.5. Force Majeure: Neither You nor Padloc are responsible for failure to
+fulfill any obligations due to causes beyond its control.
+10.6. Assignment: these TOS is not assignable or transferable by either
+Party without the prior written consent of the other Party, which shall not be
+unreasonably withheld. Any attempt by either Party to assign or transfer this
+TOS without such consent shall be void. Notwithstanding, Padloc may freely
+assign or transfer these TOS to any company that is a part of its group of
+companies or as a result of a merger or a sale of all or a substantial part of
+its share capital. In the case of any permitted assignment or transfer of or
+under these TOS, these TOS or the relevant provisions shall be binding upon, and
+inure to the benefit of, the successors, executors, heirs, representatives,
+administrators and assignees of the Parties here.
+10.7. Severability: If for any reason a court of competent jurisdiction
+finds any provision of these TOS or portion thereof, to be unenforceable, that
+provision will be enforced to the maximum extent permissible so as to affect the
+intent of the Parties, and the remainder of these TOS or of the provision will
+continue in full force and effect, except to the extent such invalid provision
+or part of provision relates to essential aspects of the TOS.
+10.8. Waivers of Rights: No waiver will be implied from conduct or failure
+to enforce or exercise rights under these TOS.
+10.9. Third Party Rights: Other than as expressly set out in these TOS,
+these TOS does not create any rights for any person who is not a party to it,
+and no person who is not a party to these TOS may enforce any of its terms or
+rely on any exclusion or limitation contained in it.
+10.10. Survival: Sections: 3. (“License”), 4. (“Restrictions of Use”), 6
+(“Disclaimer of Warranties”), 7. (“Term and Termination”), 9. (“Liability”),
+and 10. (“Miscellaneous”) of these TOS shall survive termination, without
+prejudice to other obligations that, pursuant to the applicable law or to this
+TOS, shall also remain in force after termination date.
+11. APPLICABLE LAW AND JURISDICTION
+11.1. For all omissions and for the correct interpretation of these terms,
+and any dispute arising out of or in connection with these TOS, shall be
+governed by and construed in accordance with the laws of Germany.
+11.2. Any question or dispute arising from the application, interpretation,
+integration or execution of these terms, will be subject to the German courts in
+Munich. Padloc shall still be entitled to file a suit at Your domicile.
+11.3. Consumer can also use the EU Online Dispute Resolution platform at
+https://ec.europa.eu/consumers/odr.
+12. CONTACTING US
+In order to exercise your rights or if You have any questions about these terms
+the practices of Padloc Software, please contact us at
+contact@padloc.app.
+Blog
+User Manual
+Technical Docs
+Downloads
+Privacy Policy
+Terms of Service
+Theme:
+auto
+© 2022 MaKleSoft UG, Meisenstr. 5, 91522 Ansbach, Germany

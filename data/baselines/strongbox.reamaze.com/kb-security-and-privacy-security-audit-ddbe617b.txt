@@ -1,0 +1,35 @@
+url: https://strongbox.reamaze.com/kb/security-and-privacy/security-audit
+method: fetch
+saved: 2026-11-20
+
+Has Strongbox Ever Been Audited?
+-
+Strongbox
+Strongbox
+Search for a topic or article...
+Support
+Security & Privacy
+Has Strongbox Ever Been Audited?
+Has Strongbox Ever Been Audited?
+There are a number of different types of Audit that come to mind here. We have a yearly CASA2 audit (see below), and have considered an SOC2 certification. Read on to learn more.
+CASA 2
+Strongbox performs a yearly CASA Tier 2 level audit as a requirement for integration with a certain third party storage provider. This involves automated code scanning and procedural checks. We're happy to report Strongbox has passed this audit and we would expect it will continue to do so yearly.
+SOC2
+We have had some inquiries/approaches about a SOC2 certification and have researched the requirements here. Ultimately, it seems that an SOC2 certification doesn't make sense for a company like ours. We do not store any customer data, run any servers, or provide any online services. In general it seems that SOC2 isn't really meant to apply to a software development firm like ours (Phoebe Code Limited) who produce a software product used/hosted by others. Rather it is aimed at companies that might store user data or provide a service to them actively. Since one of our main USPs or selling points is that you "own your secrets" and that we do not have access to them, SOC2 seems like the wrong tool for our firm and product. We're open to discussion on this and would be happy to hear a dissenting opinion, but an initial review of the requirements involved for an SOC2 certificate seem to corroborate its inapplicability here.
+Summary
+Outside of the above CASA 2 audit, we haven't had a more rigorous independent code level audit. We're certainly like open to this. Strongbox is a small independent startup company at the moment with limited resources. We are open to suggestions for how we can have this done in an efficient and economic manner. The source code for Strongbox is available for inspection online. Further the database formats and cryptographic algorithms used by Strongbox have been audited, and are open standards.
+Further Reading & References
+A full security audit of the Password Safe design can be found here:
+https://www.cs.ox.ac.uk/files/6487/pwvault.pdf
+Strongbox is a client built for the Password Safe file format, and is compatible with any other password safe applications. This format was designed by renowned security expert Bruce Schneier. A more general answer to the question can be found here:
+https://security.stackexchange.com/questions/11192/how-secure-are-the-password-files-used-by-password-safe-and-password-gorilla
+The original KeePass app and format have also been audited and those results are available here:
+https://joinup.ec.europa.eu/sites/default/files/inline-files/DLV%20WP6%20-02-%20Summary%20of%20the%20evaluation%20of%20results%20_KeePass_published.pdf
+https://joinup.ec.europa.eu/sites/default/files/inline-files/DLV%20WP6%20-01-%20KeePass%20Code%20Review%20Results%20Report_published.pdf
+Strongbox Source Code: https://github.com/strongbox-password-safe/Strongbox
+Next Article in Topic
+Set Up a Duress Pin
+Previous Article in Topic
+Can I Trust That Strongbox Is Not Stealing My Passwords?
+Not finding what you're looking for?
+We run on re:amaze

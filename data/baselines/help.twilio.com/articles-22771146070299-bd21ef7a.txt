@@ -1,0 +1,46 @@
+url: https://help.twilio.com/articles/22771146070299
+method: browser
+saved: 2026-11-20
+
+Help Center
+Ask AI
+System status
+Sign up
+Login
+How can we help you?
+User guide: End of Life (EOL) for Twilio Authy Desktop app
+Overview
+The Authy Desktop app for Linux, MacOS and Windows reached their End-of-Life on March 19, 2024 and are no longer supported.
+(warning)
+Twilio released its last update (v3.0.0) to the Authy Desktop apps to dynamically increase the amount of rounds of password-based key derivation function for encrypting seeds, making passwords harder to brute force.
+What You Need To Know
+What happens once the Authy Desktop app is completely EOL 🔗
+Your Authy Desktop app installation will be invalidated and the device will be removed from your Authy account.
+You will receive the following error on the registration screen.
+Authy recommendations 🔗
+We strongly recommend that you immediately switch to using our mobile apps instead.
+These top-rated apps offer similar or better features for securely storing your authenticator account tokens, and are fully supported and regularly updated. Simply download one or more of these apps from the relevant app stores:
+Apple App Store
+Google Play
+If you have the Backups feature enabled - your tokens will automatically sync up between the devices. You can enable Backups by visiting the Settings area in your Authy app.
+Authy desktop alternatives 🔗
+If you are unable to use the Authy mobile apps, we recommend you look in to alternative desktop products such as the following suggestions:
+https://support.1password.com/one-time-passwords/
+https://authenticator.cc/
+https://steptwo.app/
+https://secrets.app/
+https://keepassxc.org/
+Please be aware that Twilio Authy does not have any affiliation with the companies creating these apps, so be mindful of potential risks and exercise your own judgment when selecting the app.
+(warning)
+Note: The Authy app lacks an export feature, therefore you have to re-enable the 2FA method and re-add the token in your new application with the steps here. If you prefer to delete your authentication tokens, please make sure to disable 2FA in your account(s) first, then follow these instructions.
+(information)
+Still can't find what you need?
+Chat with our Help Center Assistant
+Legal
+Privacy
+Twilio.org
+Press & Media
+Signal
+Investors
+Jobs
+Copyright © 2026 Twilio Inc. All Rights Reserved. This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.

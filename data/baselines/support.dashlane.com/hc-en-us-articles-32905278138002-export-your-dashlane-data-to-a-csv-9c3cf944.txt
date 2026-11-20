@@ -1,0 +1,130 @@
+url: https://support.dashlane.com/hc/en-us/articles/32905278138002-Export-your-Dashlane-data-to-a-CSV
+method: fetch
+saved: 2026-11-20
+
+Export your Dashlane data to a CSV – Dashlane
+×
+To get the latest security improvements, keep Dashlane up to date.
+See the latest versions
+Learn how to update
+☰
+Ask a question
+Get help
+English (United States)
+Deutsch
+Español
+Français
+Home
+Admin Help Center
+How to get help with Dashlane
+×
+Loading help options…
+For users
+For admins
+×
+Home
+Manage your data
+Export your Dashlane data
+Export your Dashlane data to a CSV
+Export your Dashlane data to a CSV
+For all plans
+Export your Dashlane data to a CSV
+Updated November 12, 2026 16:22
+You can export your Dashlane data as comma-separated values (CSV) files on the web, in the browser extension, and on mobile devices. You can also move passwords, passkeys, verification codes, and other item types between Dashlane and other participating password managers or third-party iOS apps that support Credential Exchange.
+Export your Dashlane data using the Credential Exchange Protocol (CXP)
+What happens when my Premium trial ends, or my paid plan expires?
+What do I need to know about CSV files exported from the system?
+Important: We recommend that you delete the ZIP file and all CSV files from your device when you're finished using the files. If you need to store a CSV file of your Dashlane data, use a USB drive and store the drive in a secure location.
+You can export CSV files on the web, in the browser extension, and on mobile devices. If you use the Dashlane web version in Safari, you might need to update to Safari version 18.1 or later to open the exported file. You can also use another browser, such as Chrome, Firefox, or Opera.
+You can import the CSV files into another Dashlane account or another password manager.
+If you need to review the contents, you can open the files with a spreadsheet program, such as Google Sheets or Microsoft Excel.
+The logins and passwords file, which is labeled "credentials," doesn't include items shared with the Can autofill permission. These permissions mean that if someone shares an item with you, you can use the item but can't edit, copy, share, or change the permission level.
+How do shared logins with the Can autofill permission work?
+If you've saved information in the note section of a login, only the first line of the note will be visible when you open the CSV file. But the file contains the full note. You can double-click to verify that all your data is included in the note.
+You can't export passkeys using a CSV file. Although you might see passkeys in the CSV export, the passkeys won't work if you import the CSV back into Dashlane or another password manager.
+Attachments you've added to your Secure Notes can't be exported to a CSV file, so make sure to download any attachments you want to keep.
+With Dashlane, you can set up a second layer of protection to access the accounts saved to your vault without needing a separate authentication app. When 2-factor authentication (2FA) is turned on for logins, you're prompted for your password and a 2FA token.
+Protect logins stored in Dashlane with 2FA
+You can't directly export these 2-factor authentication (2FA) tokens from Dashlane to a CSV file. However, the CSV file named credentials contains a column named otpSecret. If you have 2FA turned on for a login stored in your Dashlane account, this column displays the 2FA setup code.
+The setup code isn't your 2FA token and won't be added automatically to your login if you import the CSV to another password manager or authenticator. But you can use the setup code to transfer your 2FA protection for that login to another password manager or authenticator.
+Important: If you're a member of a Dashlane professional plan, you might not be able to export items from your Business Space. This option depends on your organization's policies. Contact your plan admin for more information. If you want to export personal items, you can move them to your Personal Space.
+Use Spaces to separate your personal and work logins
+Are you the admin of a professional plan? Change export settings for your plan members
+Select where you want to export your data.
+Web
+Android
+iPhone
+macOS or iPad
+Export your Dashlane data using a CSV file in the web version
+In the web version, open the Vault menu in the top left. Select Settings.
+In the Settings panel, select Export data.
+In the Export data panel, select Export to CSV.
+If prompted, enter your Master Password, use your biometrics (Face ID or Touch ID), or enter your PIN, then select Unlock.
+If you have Dashlane through work and your plan admin has turned on Smart Space Management, a message prompts you to move personal items from your Business Space to your Personal Space. Move any personal items to your Personal Space, and repeat the export process. You can also select Continue to export your personal items without moving any items.
+Dashlane downloads a ZIP file to your computer's "Downloads" folder or your default download location. When you open the ZIP file, you'll see separate CSV files for logins and passwords (labeled "credentials"), IDs, payment information, personal information, and Secure Notes.
+Note: Attachments you added to your Secure Notes aren't included. You need to download and save the attachments separately. Also, you can't export passkeys using a CSV file.
+What happens when my Premium trial ends, or my paid plan expires?
+You can purchase a paid plan or export your passwords. If you don't switch to a paid plan, you can still log in, but you can only export your passwords. You can't add, edit, copy, or view your passwords in Dashlane.
+Export your Dashlane data using a CSV file in the Android app
+In your Dashlane Android app, select Settings in the side menu.
+On the Settings screen, select General.
+On the General screen, select Export data to CSV.
+Select Export & download. In the pop-up, enter your Master Password and select Unlock.
+If you have Dashlane through work and your plan admin has turned on Smart Space Management, a message prompts you to move personal items from your Business Space to your Personal Space. Move any personal items to your Personal Space, and repeat the export process. You can also select Continue to export your personal items without moving any items.
+A message appears at the bottom of the screen: CSV files were exported in Downloads folder. See file. Select See file.
+On the Downloads screen, open the Dashlane CSV folder. Inside the folder, you have separate CSV files for logins and passwords (labeled "credentials"), IDs, payment information, personal information, and Secure Notes.
+Note: Attachments you added to your Secure Notes aren't included. You need to download and save the attachments separately. Also, you can't export passkeys using a CSV file.
+What happens when my Premium trial ends, or my paid plan expires?
+You can purchase a paid plan or export your passwords. If you don't switch to a paid plan, you can still log in, but you can only export your passwords. You can't add, edit, copy, or view your passwords in Dashlane.
+Export your Dashlane data using a CSV file in the iPhone app
+In your Dashlane iPhone app, select Settings in the bottom menu.
+On the Settings screen, select General.
+On the General screen, select Export data and then Export data to CSV.
+On the Export your Dashlane data screen, select Export data now.
+On the next screen, select Save in the top right.
+If you have Dashlane through work and your plan admin has turned on Smart Space Management, a message prompts you to move personal items from your Business Space to your Personal Space. Move any personal items to your Personal Space, and repeat the export process. You can also select Continue to export your personal items without moving any items.
+A message appears at the top of the screen: File exported.
+Dashlane downloads a folder to "Files." Inside the folder, you have separate CSV files for logins and passwords (labeled "credentials"), IDs, payment information, personal information, Secure Notes, and Wi-Fi information.
+Note: Attachments you added to your Secure Notes aren't included. You need to download and save the attachments separately. Also, you can't export passkeys using a CSV file.
+What happens when my Premium trial ends, or my paid plan expires?
+You can purchase a paid plan or export your passwords. If you don't switch to a paid plan, you can still log in, but you can only export your passwords. You can't add, edit, copy, or view your passwords in Dashlane.
+Export your Dashlane data using a CSV file in the macOS or iPad app
+In your Dashlane macOS or iPad app, select the gear icon above the left menu to open the Settings screen. Select General
+On the General screen, select Export data and then Export data to CSV.
+Enter your Master Password or use Touch ID to unlock Dashlane to export the file.
+On the Export your Dashlane data screen, select Export data now.
+Select where to save your file and edit the filename as needed. Select Save.
+A message appears at the top of the screen: File exported.
+Dashlane downloads a folder to the location you chose. Inside the folder, you have separate CSV files for logins and passwords (labeled "credentials"), IDs, payment information, personal information, Secure Notes, and Wi-Fi information.
+Note: Attachments you added to your Secure Notes aren't included. You need to download and save the attachments separately. Also, you can't export passkeys using a CSV file.
+What happens when my Premium trial ends, or my paid plan expires?
+You can purchase a paid plan or export your passwords. If you don't switch to a paid plan, you can still log in, but you can only export your passwords. You can't add, edit, copy, or view your passwords in Dashlane.
+How do I open a ZIP file on my computer?
+On many computers, you can double-click a ZIP file to open it. If you have trouble when you try to open the file, try these steps depending on your computer:
+Windows | Mac | Linux | Chromebook
+In the macOS app, your export appears in a folder you choose to save it to, such as your "Downloads" folder or desktop.
+Still need help?
+You can try a different device or browser to see if you can export your content. You might also need to update Dashlane
+If you have trouble with the export, select Chat in the bottom right of this page.
+Was this article helpful?
+Yes No
+57 out of 103 found this helpful
+Have more questions? Submit a request
+Back to Top
+Dashlane.com
+Resource library
+Developer resources
+Blogs
+Dashlane plans
+Partner portal
+System Status: View system status
+Log in to Dashlane
+Get Dashlane
+Stay in touch
+© Dashlane Inc. All rights reserved.
+Dashlane and the Dashlane logo are trademarks of Dashlane SAS, registered in the U.S. and other countries.
+Terms
+Privacy
+Legal
+ACCESSIBILITY STATEMENT
+Powered by Zendesk

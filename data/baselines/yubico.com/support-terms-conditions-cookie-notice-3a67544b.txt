@@ -1,0 +1,221 @@
+url: https://www.yubico.com/support/terms-conditions/cookie-notice/
+method: browser
+saved: 2026-11-20
+
+Consent
+Details
+About
+This website uses cookies
+We use cookies to ensure that you get the best experience on our site and to present relevant content and advertising. By browsing this site without restricting the use of cookies, you consent to our and third party use of cookies as set out in our Cookie Notice.
+Deny
+Preferences
+Accept all
+OpenAI mandates hardware-backed passkeys for Trusted Access for Cyber members. Read more.
+Skip to content
+English
+Français
+Deutsch
+日本語
+Español
+Svenska
+Investors
+Contact Sales
+Partners
+Support
+About
+Products
+Enterprise
+Resources
+Solutions
+Enterprise Sales
+Store
+Home
+/
+Support
+/
+Terms and conditions
+/
+Yubico Cookie Notice
+Yubico Cookie Notice
+This website uses cookies. We use cookies to ensure that you get the best experience on our site and to present relevant content and advertising. By browsing this site without restricting the use of cookies, you consent to our and third party use of cookies as set out in our Cookie Notice.
+Yubico.com uses cookies to improve your experience while navigating through the website. When you visit any website, it may store or retrieve information on your browser, mostly in the form of cookies. This information might be about you, your preferences or your device and is mostly used to make the site work as you expect it to. The information does not usually identify you, but it can give you a more personalized web experience.
+Because we respect your right to privacy, you can choose not to allow some types of cookies.
+Click on the different category headings to find out more and change our default settings.
+Blocking some types of cookies may impact your experience on our site and the services we are able to offer.
+Your consent applies to the following domains: www.yubico.com
+Your current state: Deny.
+Change your consent
+Cookie declaration last updated on 2026-10-29 by Cookiebot:
+Strictly necessary cookies (32)
+These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms. You can set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information.
+Name Provider Purpose Maximum Storage Duration Type
+__cf_bm [x4] OpenAI
+LinkedIn
+Vimeo This cookie is used to distinguish between humans and bots. This is beneficial for the website, in order to make valid reports on the use of their website. 1 day HTTP Cookie
+__stripe_mid [x2] Stripe
+stripe This cookie is necessary for making credit card transactions on the website. The service is provided by Stripe.com which allows online transactions without storing any credit card information. 1 year HTTP Cookie
+__stripe_sid [x2] Stripe
+stripe This cookie is necessary for making credit card transactions on the website. The service is provided by Stripe.com which allows online transactions without storing any credit card information. 1 day HTTP Cookie
+_ab prod-assets.sequelvideo.com This cookie is necessary for making credit card transactions on the website. The service is provided by Stripe.com which allows online transactions without storing any credit card information. Session HTML Local Storage
+_cfuvid [x2] OpenAI This cookie is a part of the services provided by Cloudflare - Including load-balancing, deliverance of website content and serving DNS connection for website operators. Session HTTP Cookie
+_cs_c Hotjar Determines whether the visitor has accepted the cookie consent box. This ensures that the cookie consent box will not be presented again upon re-entry. 13 months HTTP Cookie
+_mf prod-assets.sequelvideo.com This cookie is necessary for making credit card transactions on the website. The service is provided by Stripe.com which allows online transactions without storing any credit card information. Session HTML Local Storage
+AWSALB [x2] prod-assets.sequelvideo.com
+data.sequel.io Registers which server-cluster is serving the visitor. This is used in context with load balancing, in order to optimize user experience. 7 days HTTP Cookie
+AWSALBCORS [x2] prod-assets.sequelvideo.com
+data.sequel.io Registers which server-cluster is serving the visitor. This is used in context with load balancing, in order to optimize user experience. 7 days HTTP Cookie
+cf.turnstile.u Cloudflare This cookie is used to distinguish between humans and bots. Persistent HTML Local Storage
+cf_clearance [x2] PodBean
+Vimeo This cookie is used to distinguish between humans and bots. 1 year HTTP Cookie
+CookieConsent [x2] sgtm.yubico.com
+Cookiebot Stores the user's cookie consent state for the current domain 1 year HTTP Cookie
+create-account-intent www.yubico.com Remembers the visitor's choice to create an account during checkout. 1 day HTTP Cookie
+id prod-assets.sequelvideo.com Pending Session HTML Local Storage
+li_gc LinkedIn Stores the user's cookie consent state for the current domain 180 days HTTP Cookie
+m Stripe Determines the device used to access the website. This allows the website to be formatted accordingly. 400 days HTTP Cookie
+object(#-#-##:#:#.#) prod-assets.sequelvideo.com Holds the users timezone. Persistent HTML Local Storage
+show-passkey-dialog www.yubico.com Shows the passkey setup prompt once after sign-in. Session HTTP Cookie
+store_had_auth_session www.yubico.com Remembers that the visitor was signed in, so an expired session shows a sign-in prompt instead of a guest page. 1 day HTTP Cookie
+test_cookie Google Used to check if the user's browser supports cookies. 1 day HTTP Cookie
+wpEmojiSettingsSupports www.yubico.com This cookie is part of a bundle of cookies which serve the purpose of content delivery and presentation. The cookies keep the correct state of font, blog/picture sliders, color themes and other website settings. Session HTML Local Storage
+yubi_id www.yubico.com Keeps the guest's shopping cart between pages. Session HTTP Cookie
+Functional cookies (9)
+These cookies enable the website to provide enhanced functionality and personalization. They may set by us or by third party providers whose services we have added to our pages. If you do not allow these cookies then some or all of these services may not function properly.
+Name Provider Purpose Maximum Storage Duration Type
+1 prod-assets.sequelvideo.com This cookie is used in conjunction with the payment window - The cookie is necessary for making secure transactions on the website. Session HTML Local Storage
+intercom.intercom-state-# [x2] Intercom
+www.yubico.com Remembers whether the user has minimized or closed chat-box or pop-up messages on the website. Persistent HTML Local Storage
+intercom-device-id-# Intercom Sets a specific ID for the user which ensures the integrity of the website’s chat function. 271 days HTTP Cookie
+intercom-id-# Intercom Allows the website to recoqnise the visitor, in order to optimize the chat-box functionality. 271 days HTTP Cookie
+intercom-session-# Intercom Sets a specific ID for the user which ensures the integrity of the website’s chat function. 7 days HTTP Cookie
+lidc LinkedIn Registers which server-cluster is serving the visitor. This is used in context with load balancing, in order to optimize user experience. 1 day HTTP Cookie
+wistia-video-progress-# [x2] Wistia
+www.yubico.com Contains a timestamp for the website’s video-content. This allows the user to resume watching without having to start over, if the user leaves the video or website. Persistent HTML Local Storage
+Performance cookies (37)
+These cookies allow us to count visits and traffic sources so we can measure and improve the performance of our site. They help us to know which pages are the most and least popular and see how visitors move around the site. All information these cookies collect is aggregated and therefore anonymous. If you do not allow these cookies we will not know when you have visited our site, and will not be able to monitor its performance.
+Name Provider Purpose Maximum Storage Duration Type
+_clck Microsoft Collects data on the user’s navigation and behavior on the website. This is used to compile statistical reports and heatmaps for the website owner. 1 year HTTP Cookie
+_clsk [x2] Microsoft Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. Session HTTP Cookie
+_cltk Microsoft Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. Session HTML Local Storage
+_cs_id Hotjar Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. 13 months HTTP Cookie
+_cs_root-domain Hotjar Registers how the user has reached the website to enable pay-out of referral commission fees to partners. Session HTTP Cookie
+_cs_s Hotjar This cookie is used to identify the frequency of visits and how long the visitor is on the website. The cookie is also used to determine how many and which subpages the visitor visits on a website – this information can be used by the website to optimize the domain and its subpages. 1 day HTTP Cookie
+_cs_same_site Hotjar Registers data on visitors' website-behaviour. This is used for internal analysis and website optimization. Session HTTP Cookie
+_ga sgtm.yubico.com Registers a unique ID that is used to generate statistical data on how the visitor uses the website. 2 years HTTP Cookie
+_ga_# sgtm.yubico.com Used by Google Analytics to collect data on the number of times a user has visited the website as well as dates for the first and most recent visit. 2 years HTTP Cookie
+_hjHasCachedUserAttributes [x2] Hotjar Identifies if the cookie data needs to be updated in the visitor's browser. Session HTTP Cookie
+_hjSession_# Hotjar Collects statistics on the visitor's visits to the website, such as the number of visits, average time spent on the website and what pages have been read. 1 day HTTP Cookie
+_hjSessionUser_# Hotjar Collects statistics on the visitor's visits to the website, such as the number of visits, average time spent on the website and what pages have been read. 1 year HTTP Cookie
+_hjTLDTest Hotjar Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. Session HTTP Cookie
+_hjUserAttributes Hotjar Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. Persistent HTML Local Storage
+_hjUserAttributesHash Hotjar Identifies if the cookie data needs to be updated in the visitor's browser. 1 day HTTP Cookie
+_sp_id.# Yotpo Voice Collects data on the user's visits to the website, such as the number of visits, average time spent on the website and what pages have been loaded with the purpose of generating reports for optimising the website content. 2 years HTTP Cookie
+_sp_ses.# Yotpo Voice Used by Snowplow Analytics to track how users are browsing and engaging with a website. 1 day HTTP Cookie
+c.gif Microsoft Collects data on the user’s navigation and behavior on the website. This is used to compile statistical reports and heatmaps for the website owner. Session Pixel Tracker
+dd_cookie_test_# embed.sequel.io Registers data on visitors' website-behaviour. This is used for internal analysis and website optimization. 1 day HTTP Cookie
+FPID yubico.com Registers statistical data on users' behaviour on the website. Used for internal analytics by the website operator. 400 days HTTP Cookie
+FPLC yubico.com Registers a unique ID that is used to generate statistical data on how the visitor uses the website. 1 day HTTP Cookie
+ga_resolved_cid yubico.com Pending 400 days HTTP Cookie
+ga_resolved_sid yubico.com Pending 1 day HTTP Cookie
+hjActiveViewportIds Hotjar This cookie contains an ID string on the current session. This contains non-personal information on what subpages the visitor enters – this information is used to optimize the visitor's experience. Persistent HTML Local Storage
+hjViewportId Hotjar Saves the user's screen size in order to adjust the size of images on the website. Session HTML Local Storage
+NID Google Remembering Google user preferences 30 days HTTP Cookie
+sentryReplaySession prod-assets.sequelvideo.com Registers data on visitors' website-behaviour. This is used for internal analysis and website optimization. Session HTML Local Storage
+survi::#::singleTabId:# Survicate Pending Persistent HTML Local Storage
+survi::#::visitInitialUrl Survicate Pending Session HTML Local Storage
+survi::#::visitReferrerUrl Survicate Pending Session HTML Local Storage
+survi::#::visitViews Survicate Pending Session HTML Local Storage
+utm_content www.yubico.com This cookie is used by the website’s operator in context with multi-variate testing. This is a tool used to combine or change content on the website. This allows the website to find the best variation/edition of the site. Persistent HTML Local Storage
+wistia [x2] Wistia
+www.yubico.com Used by the website to track the visitor's use of video-content - The cookie roots from Wistia, which provides video-software to websites. Persistent HTML Local Storage
+yotpo_pixel Yotpo Voice Contains data on the latest products viewed by the visitor. Used for internal statistics by the website operator. 2 days HTTP Cookie
+Targeting cookies (68)
+These cookies may be set through our site by our advertising partners. They may be used by those companies to build a profile of your interests and show you relevant adverts on other sites. They do not store directly personal information, but are based on uniquely identifying your browser and internet device. If you do not allow these cookies, you will experience less targeted advertising.
+Name Provider Purpose Maximum Storage Duration Type
+_/ad/75aa344edeef4dbfa3b3dd7cb5f40e6f/pixel Quora Collects data on user behaviour and interaction in order to optimize the website and make advertisement on the website more relevant. Session Pixel Tracker
+__cf_ob Vimeo Pending Session HTTP Cookie
+__oaiq_domain_probe OpenAI Tracks the conversion rate between the user and the advertisement banners on the website - This serves to optimise the relevance of the advertisements on the website. Session HTTP Cookie
+__obref OpenAI Tracks the conversion rate between the user and the advertisement banners on the website - This serves to optimise the relevance of the advertisements on the website. Session HTTP Cookie
+__Secure-1PAPISID Google Targeting cookie. Used by for targeting purposes to build a profile of the website visitor's interests in order to show relevant & personalised Google advertising. 1 year HTTP Cookie
+__Secure-1PSID Google Targeting cookie. Used by for targeting purposes to build a profile of the website visitor's interests in order to show relevant & personalised Google advertising. 1 year HTTP Cookie
+__Secure-1PSIDCC Google Used for targeting purposes to build a profile of the website visitor's interests in order to display relevant and personalized Google advertising. 1 year HTTP Cookie
+__Secure-3PAPISID Google Builds a profile of website visitor interests to show relevant and personalized ads through retargeting. 1 year HTTP Cookie
+__Secure-3PSID Google Builds a profile of website visitor interests to show relevant and personalized ads through retargeting. 1 year HTTP Cookie
+__Secure-3PSIDCC Google Used for targeting to profile the interests of website visitors and display relevant and personalised Google Ads. 1 year HTTP Cookie
+__Secure-ROLLOUT_TOKEN YouTube Used to track user’s interaction with embedded content. 180 days HTTP Cookie
+__Secure-YEC YouTube Stores the user's video player preferences using embedded YouTube video Session HTTP Cookie
+__Secure-YNID YouTube Used to track user’s interaction with embedded content. 180 days HTTP Cookie
+_cfPre_tabId Vimeo Pending Session HTML Local Storage
+_fbp Meta Platforms, Inc. Used by Facebook to deliver a series of advertisement products such as real time bidding from third party advertisers. 3 months HTTP Cookie
+_gcl_au sgtm.yubico.com Used by Google AdSense for experimenting with advertisement efficiency across websites using their services. 3 months HTTP Cookie
+_gcl_ls sgtm.yubico.com Tracks the conversion rate between the user and the advertisement banners on the website - This serves to optimise the relevance of the advertisements on the website. Persistent HTML Local Storage
+_gd_session j.6sc.co Collects visitor data related to the user's visits to the website, such as the number of visits, average time spent on the website and what pages have been loaded, with the purpose of displaying targeted ads. 1 day HTTP Cookie
+_gd_svisitor j.6sc.co Collects visitor data related to the user's visits to the website, such as the number of visits, average time spent on the website and what pages have been loaded, with the purpose of displaying targeted ads. 2 years HTTP Cookie
+_gd_visitor j.6sc.co Collects visitor data related to the user's visits to the website, such as the number of visits, average time spent on the website and what pages have been loaded, with the purpose of displaying targeted ads. 2 years HTTP Cookie
+_mkto_trk Marketo Contains data on visitor behaviour and website interaction. This is used in context with the email marketing service Marketo.com, which allows the website to target visitors via email. 2 years HTTP Cookie
+_rdt_uuid [x2] Reddit Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences. Session HTTP Cookie
+_uetsid Microsoft Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences. Persistent HTML Local Storage
+_uetsid Microsoft Collects data on visitor behaviour from multiple websites, in order to present more relevant advertisement - This also allows the website to limit the number of times that they are shown the same advertisement. 1 day HTTP Cookie
+_uetsid_exp Microsoft Contains the expiry-date for the cookie with corresponding name. Persistent HTML Local Storage
+_uetvid Microsoft Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences. Persistent HTML Local Storage
+_uetvid Microsoft Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences. 1 year HTTP Cookie
+_uetvid_exp Microsoft Contains the expiry-date for the cookie with corresponding name. Persistent HTML Local Storage
+6suuid 6sc.co Registers user behaviour and navigation on the website, and any interaction with active campaigns. This is used for optimizing advertisement and for efficient retargeting. 400 days HTTP Cookie
+ANONCHK Microsoft Registers data on visitors from multiple visits and on multiple websites. This information is used to measure the efficiency of advertisement on websites. 1 day HTTP Cookie
+APISID Google Google collects visitor information for videos played out by YouTube. 1 year HTTP Cookie
+bcookie LinkedIn Used by the social networking service, LinkedIn, for tracking the use of embedded services. 1 year HTTP Cookie
+ccm/conversion/11079607261/ Google Pending Session Pixel Tracker
+ccm/conversion/858648531/ Google Pending Session Pixel Tracker
+HSID Google Google set a number of cookies on any page that includes a Google Map. While we have no control over the cookies set by Google, they appear to include a mixture of pieces of information to measure the number and behaviour of Google Maps users. 1 year HTTP Cookie
+LAST_RESULT_ENTRY_KEY [x2] YouTube Used to track user’s interaction with embedded content. Session HTTP Cookie
+lastExternalReferrer Meta Platforms, Inc. Detects how the user reached the website by registering their last URL-address. Persistent HTML Local Storage
+lastExternalReferrerTime Meta Platforms, Inc. Detects how the user reached the website by registering their last URL-address. Persistent HTML Local Storage
+log/error Meta Platforms, Inc. Used to detect and log potential tracking errors. Session Pixel Tracker
+LogsDatabaseV2:V#||LogsRequestsStore YouTube Used to track user’s interaction with embedded content. Persistent IndexedDB
+MR [x2] Microsoft Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences. 7 days HTTP Cookie
+MUID [x2] Microsoft Used widely by Microsoft as a unique user ID. The cookie enables user tracking by synchronising the ID across many Microsoft domains. 1 year HTTP Cookie
+oaiq_cs:# OpenAI Tracks the conversion rate between the user and the advertisement banners on the website - This serves to optimise the relevance of the advertisements on the website. Session HTML Local Storage
+pagead/1p-user-list/# Google Tracks if the user has shown interest in specific products or events across multiple websites and detects how the user navigates between sites. This is used for measurement of advertisement efforts and facilitates payment of referral-fees between websites. Session Pixel Tracker
+SAPISID Google These cookies are used by Google to display personalized advertisements on Google sites, based on recent searches and previous interactions. HSID, SSID, APISID and SAPISID cookies enable Google to collect user information for videos hosted by YouTube. 1 year HTTP Cookie
+ServiceWorkerLogsDatabase#SWHealthLog YouTube Necessary for the implementation and functionality of YouTube video-content on the website. Persistent IndexedDB
+SID Google Google set a number of cookies on any page that includes a Google Map. While we have no control over the cookies set by Google, they appear to include a mixture of pieces of information to measure the number and behaviour of Google Maps users. 1 year HTTP Cookie
+SIDCC Google Google set a number of cookies on any page that includes a Google Map. While we have no control over the cookies set by Google, they appear to include a mixture of pieces of information to measure the number and behaviour of Google Maps users. 1 year HTTP Cookie
+SM Microsoft Registers a unique ID that identifies the user's device during return visits across websites that use the same ad network. The ID is used to allow targeted ads. Session HTTP Cookie
+SRM_B Microsoft Tracks the user’s interaction with the website’s search-bar-function. This data can be used to present the user with relevant products or services. 1 year HTTP Cookie
+SSID Google Google collects visitor information for videos played out by YouTube, which are played out on integrated maps from Google Maps. 1 year HTTP Cookie
+TESTCOOKIESENABLED [x2] YouTube Used to track user’s interaction with embedded content. 1 day HTTP Cookie
+utm_campaign www.yubico.com Collects information on user preferences and/or interaction with web-campaign content - This is used on CRM-campaign-platform used by website owners for promoting events or products. Persistent HTML Local Storage
+utm_medium www.yubico.com Detects how the user reached the website by registering their last URL-address. Persistent HTML Local Storage
+utm_source www.yubico.com Determines how the user accessed the website. This information is used by the website operator in order to measure the efficiency of their marketing. Persistent HTML Local Storage
+v1/beacon/img.gif b.6sc.co Used in context with Account-Based-Marketing (ABM). The cookie registers data such as IP-addresses, time spent on the website and page requests for the visit. This is used for retargeting of multiple users rooting from the same IP-addresses. ABM usually facilitates B2B marketing purposes. Session Pixel Tracker
+VISITOR_INFO1_LIVE YouTube Tries to estimate the users' bandwidth on pages with integrated YouTube videos. 180 days HTTP Cookie
+YSC YouTube Registers a unique ID to keep statistics of what videos from YouTube the user has seen. Session HTTP Cookie
+yt-icons-last-purged [x2] YouTube Necessary for the implementation and functionality of YouTube video-content on the website. Persistent HTML Local Storage
+ytidb::LAST_RESULT_ENTRY_KEY YouTube Used to track user’s interaction with embedded content. Persistent HTML Local Storage
+YtIdbMeta#databases [x2] YouTube Used to track user’s interaction with embedded content. Persistent IndexedDB
+Uncategorized (23)
+Undefined cookies are those that are being analyzed and have not been classified into a category as yet.
+Name Provider Purpose Maximum Storage Duration Type
+__apex_test__ Yotpo Voice Pending Session HTTP Cookie
+_rdt_cfg Reddit Pending Session HTML Local Storage
+gh-test Greenhouse Pending Session HTML Local Storage
+img.gif t.6sc.co Pending Session Pixel Tracker
+sequel:access:authTokens prod-assets.sequelvideo.com Pending Persistent HTML Local Storage
+sequel:access:generalTokens prod-assets.sequelvideo.com Pending Persistent HTML Local Storage
+sequel:clientId prod-assets.sequelvideo.com Pending Persistent HTML Local Storage
+sequel:w-session prod-assets.sequelvideo.com Pending Session HTML Local Storage
+sequel-consent prod-assets.sequelvideo.com Pending 1 year HTTP Cookie
+sequelSessionId prod-assets.sequelvideo.com Pending 1 day HTTP Cookie
+sequelUserId prod-assets.sequelvideo.com Pending 1 year HTTP Cookie
+survi::7543c3a79b785b9af5e6c9b796d31df8::statusrequestHandler_contacts Survicate Pending Persistent HTML Local Storage
+survi::7543c3a79b785b9af5e6c9b796d31df8::statusrequestHandler_respondent Survicate Pending Persistent HTML Local Storage
+survi::7543c3a79b785b9af5e6c9b796d31df8::unifiedSessionViews Survicate Pending Session HTML Local Storage
+survi::7543c3a79b785b9af5e6c9b796d31df8::visitDisplayedSurveys Survicate Pending Session HTML Local Storage
+survi::7543c3a79b785b9af5e6c9b796d31df8::VisitorStore::statusrequestHandler_contacts Survicate Pending Persistent HTML Local Storage
+survi::7543c3a79b785b9af5e6c9b796d31df8::VisitorStore::statusrequestHandler_respondent Survicate Pending Persistent HTML Local Storage
+survi::7543c3a79b785b9af5e6c9b796d31df8::VisitorStore::visitor Survicate Pending Persistent HTML Local Storage
+USER-SEGMENT www.yubico.com Pending Persistent HTML Local Storage
+utm_campaign_ft www.yubico.com Pending Persistent HTML Local Storage
+utm_content_ft www.yubico.com Pending Persistent HTML Local Storage
+utm_medium_ft www.yubico.com Pending Persistent HTML Local Storage
+utm_source_ft www.yubico.com Pending Persistent HTML Local Storage

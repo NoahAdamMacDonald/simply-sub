@@ -1,0 +1,79 @@
+url: https://docs.yubico.com/software/yubikey/tools/authenticator/auth-guide/ykauth-intro.html
+method: fetch
+saved: 2026-11-20
+
+Yubico Authenticator Overview — Yubico Authenticator User Guide documentation
+Yubico Authenticator User Guide
+Contents
+Yubico Authenticator Overview
+Highlighted features
+Advantages
+Command line interface (CLI) tool
+Platforms and Requirements
+Download the App
+Install the App
+Home
+Accounts: OATH
+Passkeys: FIDO2
+Fingerprints: FIDO2
+Certificates: PIV
+Slots: Yubico OTP Application
+Settings
+Factory Reset
+Tips
+Troubleshooting and Support
+Azure MFA with Yubico Authenticator
+Smart Card on iOS
+Release Notes
+Copyright
+Yubico Authenticator User Guide
+Yubico Authenticator Overview
+View page source
+Yubico Authenticator Overview
+Yubico Authenticator is a software application that provides an intuitive and easy-to-use interface for interacting with your YubiKeys. Features include the ability to generate codes for two-factor authentication (OATH TOTP/HOTP), manage credentials and accounts across multiple YubiKey applications and security protocols, and much more. See Highlighted features for more details.
+Yubico Authenticator is broadly supported across Windows, macOS, Linux, Android, and iOS/iPadOS devices and works over USB, Lightning, and wireless NFC connections.
+Note
+For a complete breakdown of Yubico Authenticator functionality by platform and connection type for each YubiKey model, see the Yubico Authenticator Functionality table.
+Highlighted features
+OATH
+Add OATH account credentials to your YubiKey via QR code or manual entry.
+Generate and display OATH OTPs from accounts on your YubiKey.
+Protect the OATH application with a password.
+Rename and delete OATH accounts.
+FIDO2
+Manage passkeys stored on your YubiKeys.
+Create and manage a FIDO2 pin.
+Register and manage fingerprints on YubiKey Bio Series keys for biometric authentication.
+PIV
+Load PIV certificates onto your YubiKeys.
+Change the PIV application PIN, PUK, and Management Key.
+Perform TLS authentication, create digital signatures, and decrypt email via the Smart Card on iOS feature.
+Yubico OTP
+Configure a Yubico OTP application slot with a Yubico OTP, challenge-response, OATH HOTP, or static password credential.
+Delete or swap slot configurations.
+Miscellaneous
+Toggle individual YubiKey applications on/off over physical and NFC connections.
+Perform a factory reset of an individual YubiKey application.
+Change a YubiKey’s label and color in the app.
+Toggle between multiple connected keys in the app.
+Change the app’s theme.
+Advantages
+With other authenticator apps, credentials (the secret keys associated with your accounts) are often stored in the app, phone, or computer. However, desktop and mobile devices can be compromised, stolen, or lost, which puts the security of your accounts at risk.
+With Yubico Authenticator, credentials are stored in the secure element of the YubiKey; once stored, they cannot be extracted.
+In addition to improving account security, if you lose or change your device, you will not be locked out of your accounts. Simply download Yubico Authenticator onto a new device and connect your YubiKey; OTP codes can be generated and credentials can be managed just as before.
+Stronger hardware-backed security
+Storing your credentials on a hardware security key is safer than storing them on a mobile phone. Your credentials cannot be extracted from the secure element of the YubiKey.
+Portable credentials across devices
+Once credentials have been configured on a YubiKey, you can use your key with any device running the Yubico Authenticator app, no additional setup required.
+Cross-platform coverage
+The Yubico Authenticator app works across Windows, macOS, Linux, iOS/iPadOS, and Android devices.
+Self-service reduces IT costs
+With other authenticator apps, when a user has a new phone or OS upgrade, IT often needs to help reset the enrollment flow, and support calls rack up costs. Yubico Authenticator allows users to self-enroll, making this a secure, efficient solution at scale.
+Command line interface (CLI) tool
+Looking for a CLI tool with similar capabilities? Check out the YubiKey Manager CLI tool.
+Previous
+Next
+© Copyright 2026, Yubico AB.
+Cookies
+|
+Privacy Policy

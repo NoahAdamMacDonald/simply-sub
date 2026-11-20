@@ -1,0 +1,505 @@
+url: https://github.com/dani-garcia/vaultwarden/wiki/Updating-the-vaultwarden-image
+method: fetch
+saved: 2026-11-20
+
+Updating the vaultwarden image · dani-garcia/vaultwarden Wiki · GitHub
+Skip to content
+Navigation Menu
+Sign in
+Products Platform GitHubRepository hosting, code review, and collaboration
+CopilotAI coding agent for tasks, projects, and automated work
+Build & Ship ActionsCI/CD and automation
+Code QualityQuality analysis, fixes, and enforcement
+CodespacesCloud development environments
+Secure Code SecurityVulnerability detection and remediation
+Secret ProtectionSecret scanning and leak prevention
+All Features
+Developers Learn Documentation
+Training
+Certifications
+Build Build with Copilot
+Customize Copilot
+Integrations
+Explore Trending repos
+GitHub Sponsors
+Developer articles
+Changelog Changelog Your source for the latest features, improvements, and fixes across GitHub products, all in one place.
+Businesses By Stage Enterprises
+Team
+Startups
+Nonprofits
+By Industry Healthcare
+Financial services
+Manufacturing
+Government
+See all industries
+Evaluate GitHub Why GitHub
+Customer Stories
+Business insights
+Trust Center
+Add-ons GitHub Advanced SecurityEnterprise-grade code security
+Copilot for businessEnterprise-grade AI features
+Premium SupportEnterprise-grade 24/7 support
+Resources Learn & Connect Documentation
+Resource center
+Blog
+Events & webinars
+Community Forum
+Customer Stories
+Integrations
+Support Customer support
+Training
+GitHub Status
+Company About
+Partners
+Changelog
+GitHub Universe GitHub Universe The event for developers, by developers — talks, workshops, and what’s next for GitHub.
+Pricing
+Search/
+Sign in
+Sign up Appearance settings
+You signed in with another tab or window. Reload to refresh your session.
+You signed out in another tab or window. Reload to refresh your session.
+You switched accounts on another tab or window. Reload to refresh your session.
+Dismiss alert
+dani-garcia
+vaultwarden
+Repository navigation
+Code
+Issues15 ( 15 )
+Pull requests67 ( 67 )
+Discussions
+Actions
+Wiki
+Security and quality37 ( 37 )
+Insights
+More items
+Updating the vaultwarden image
+Jump to bottom
+Edit
+New page
+Daniel edited this page May 10, 2024
+·
+9 revisions
+Updating is straightforward, you just make sure to preserve the mounted volume. If you used the bind-mounted path as in the example here, you just need to pull the latest image, stop and rm the current container and then start a new one the same way as before:
+# Pull the latest version
+docker pull vaultwarden/server:latest
+# Stop and remove the old container
+docker stop vaultwarden
+docker rm vaultwarden
+# Start new container with the data mounted
+docker run -d --name vaultwarden -v /vw-data/:/data/ -p 80:80 vaultwarden/server:latest
+Then visit http://localhost:80
+In case you didn't bind mount the volume for persistent data, you need an intermediate step where you preserve the data with an intermediate container:
+# Pull the latest version
+docker pull vaultwarden/server:latest
+# Create intermediate container to preserve data
+docker run --volumes-from vaultwarden --name vaultwarden_data busybox true
+# Stop and remove the old container
+docker stop vaultwarden
+docker rm vaultwarden
+# Start new container with the data mounted
+docker run -d --volumes-from vaultwarden_data --name vaultwarden -p 80:80 vaultwarden/server:latest
+# Optionally remove the intermediate container
+docker rm vaultwarden_data
+# Alternatively you can keep data container around for future updates in which case you can skip last step.
+You can also use a tool like Watchtower to automate the update process. Watchtower can periodically check for an update to the Docker image, pull the updated image, and recreate the container using the updated image.
+Updating when using Docker Compose
+docker compose pull # or `docker-compose pull` if using standalone Docker Compose
+docker compose up -d # or `docker-compose up -d` if using standalone Docker Compose
+Updating when using systemd service (in this case Debian/Raspbian)
+sudo systemctl restart vaultwarden.service
+sudo docker system prune -f
+#WARNING this could delete stopped or unused containers, etc. not associated with vaultwarden
+#be carefull and look which containers you need
+docker ps -a
+#shows stopped containers
+#WARNING! This will remove:
+# - all stopped #containers
+# - all networks not used by at least one container
+# - all dangling images
+# - all dangling build cache
+#you can list docker images with
+docker images
+#there you see all unused images
+#
+The restart command will stop the container, pull the newest images, run the container again.
+The prune command will remove the now old container (-f stands for: Do not ask for confirmation).
+Put these into cronjob if you want (time can be changed):
+$ sudo crontab -e
+0 2 * * * sudo systemctl restart vaultwarden.service
+0 3 * * * sudo /usr/bin/docker system prune -f
+Use the command
+which docker
+if /usr/bin/docker is not the correct path to docker
+Updating when using DietPi
+DietPi is a lightweight Debian-based distribution (image) for all kinds of devices like Raspberry Pi, Odroid, NanoPi and others. It offers a software script for installing various programs including Vaultwarden. That spares the user tinkering with installation commands.
+Vaultwarden updates must be manually initiated by the user on DietPi, there is no automatic installation nor will apt update && apt upgrade perform an update. To update a previously installed Vautwarden instance which was installed using DietPi's software installation script, enter the following command on the DietPi's command line:
+dietpi-software reinstall 183
+It is recommended to use DietPi version 8.7 or newer because the update process has been considerably sped up compared to previous versions.
+In case you have customised Vaultwarden's configuration file, it will be kept by the update script.
+🛡️ Vaultwarden — A Bitwarden server, reimagined in Rust
+🏠 Wiki Home ·
+📖 FAQs ·
+⚙️ Configuration ·
+🔒 Hardening Guide ·
+🐳 Docker
+💬 Get in touch
+❤️ Love Vaultwarden? Consider supporting upstream Bitwarden — without their work, this project wouldn't exist.
+Vaultwarden is an unofficial, community-driven Bitwarden-compatible server. It is not associated with, endorsed by, or affiliated with Bitwarden, Inc. — "Bitwarden" is a trademark of Bitwarden, Inc.
+Maintained with care by @dani-garcia and contributors · Wiki content licensed under the project's terms
+Wiki pages
+Pages 66
+Loading
+Home
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Allow icon fetching from internal services
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Audits
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Backing up your vault
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Bitwarden Android troubleshooting
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Bitwarden clients troubleshooting
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Building binary
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Building your own docker image
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Caddy 2.x with Cloudflare DNS
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Changing persistent data location
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Changing the API request size limit
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Changing the number of workers
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Configuration overview
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Customize Vaultwarden CSS
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Deployment examples
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Differences from the upstream API implementation
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disable admin token
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disable invitations
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disable registration of new users
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Disabling or overriding the Vault interface hosting
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Docker Traefik ModSecurity Setup
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enable admin page
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling admin page
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling admin page secure the admin_token
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling HTTPS
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling Mobile Client push notification
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling SSO support using OpenId Connect
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling U2F (and FIDO2 WebAuthn) authentication
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling U2F authentication
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling WebSocket notifications
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Enabling Yubikey OTP authentication
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Fail2Ban Setup
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+FAQs
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+General (not docker)
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Git hooks
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Hardening Guide
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Importing data from Keepass or KeepassX
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Kubernetes deployment
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Logging
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Logrotate example
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Migrating from MariaDB (MySQL) to SQLite
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Other configuration
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Password hint display
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Pre built binaries
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Private CA and self signed certs that work with Chrome
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Proxy examples
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Running a private vaultwarden instance with Let's Encrypt certs
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Running docker container with non root user
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Running without WAL enabled
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Setup as a systemd service
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+SMTP Configuration
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Starting a Container
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Supporting upstream
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Syncing users from LDAP
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Third party packages
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Translating admin page
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Translating the email templates
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Updating the vaultwarden image
+Updating when using Docker Compose
+Updating when using systemd service (in this case Debian/Raspbian)
+Updating when using DietPi
+Loading
+Using an alternate base dir
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using custom website icons
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using Docker Compose
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using Podman
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using the MariaDB (MySQL) Backend
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using the MySQL Backend
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Using the PostgreSQL Backend
+Uh oh!
+There was an error while loading. Please reload this page.
+Loading
+Which container image to use
+Uh oh!
+There was an error while loading. Please reload this page.
+Show 51 more pages…
+FAQs
+FAQs
+Audits
+Supporting upstream development
+Troubleshooting
+Logging
+Bitwarden Android troubleshooting
+Bitwarden clients troubleshooting
+Container Image Usage
+Which container image to use
+Starting a container
+Using Docker Compose
+Using Podman
+Updating the vaultwarden image
+Reverse Proxy
+Proxy examples
+Using an alternate base dir (subdir/subpath)
+HTTPS
+Enabling HTTPS
+Running a private vaultwarden instance with Let's Encrypt certs
+Configuration
+Overview
+Enabling admin page
+SMTP configuration
+Disable registration of new users
+Disable invitations
+Enabling WebSocket notifications
+Enabling Mobile Client push notification
+Enabling SSO support using OpenId Connect
+Allow icon fetching from internal services
+Other configuration
+Database
+Using the MariaDB (MySQL) Backend
+Using the PostgreSQL Backend
+Running without WAL enabled
+Migrating from MariaDB (MySQL) to SQLite
+Security
+Hardening Guide
+Password hint display
+Enabling U2F and FIDO2 WebAuthn authentication
+Enabling YubiKey OTP authentication
+Fail2Ban Setup
+Fail2Ban + ModSecurity + Traefik + Docker
+Performance
+Changing the API request size limit
+Changing the number of workers
+Customization
+Translating the email templates
+Translating admin page
+Customize Vaultwarden CSS
+Using custom website icons
+Disabling or overriding the Vault interface hosting
+Backup
+General (not docker)
+Backing up your vault
+Development
+Building binary
+Building your own docker image
+Git hooks
+Differences from the upstream API implementation
+Alternative deployments
+Pre-built binaries
+Creating a systemd service
+Third-party packages
+Deployment examples
+Kubernetes deployment
+Disable the admin token
+Other Information
+Importing data from Keepass or KeepassX
+Changing persistent data location
+Syncing users from LDAP
+Caddy 2.x with Cloudflare DNS
+Logrotate example
+Clone this wiki locally
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information
+You can’t perform that action at this time.

@@ -1,0 +1,504 @@
+url: https://www.twilio.com/en-us/changelog/Security_Alert_Authy_App_Android_iOS
+method: fetch
+saved: 2026-11-20
+
+Security Alert: Update to the Authy Android (v25.1.0) and iOS App (v26.1.0) | Twilio
+English
+Support
+Help Center
+Support Plans
+Partner Solutions
+Login
+Log in to
+Twilio Console
+Conversations, Communications and Authentication
+Or log in to access:
+Twilio Segment
+Customer Data Platform
+Twilio SendGrid
+Email and Marketing Campaigns
+Products
+Twilio Platform
+Next gen
+Built for engagement in the agentic era. Twilio connects communication channels, customer context, and AI on one flexible platform.
+Conversations
+Conversation Memory
+New
+Build a persistent memory of customer interactions
+Conversation Orchestrator
+New
+Keep conversations connected across channels
+Conversation Intelligence
+Extract context from real-time conversations
+Conversation Relay
+Build advanced voice AI for natural conversations
+Try the demo
+Conversations
+Communications
+Messaging
+SMS
+WhatsApp
+RCS
+Voice
+SIP Trunking
+Email
+SMTP Service
+Phone Numbers
+Toll-free
+10DLC
+Short Codes
+Video API
+Flex
+Communications
+Authentication
+Verify
+Lookup
+Authentication
+Customer Data
+Connections
+Warehouses
+Protocols
+Unify
+Engage
+Audiences
+Journeys
+Customer Data
+See all products
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+See Twilio’s latest innovations and integrations
+Solutions
+Use Cases
+Verification and identity
+Fraud prevention
+Alerts and notifications
+Appointment reminders
+Lead alerts
+Mass texting
+Marketing and promotions
+SMS marketing
+Cross-sell and upsell
+Optimize ad spend
+Support and sales
+Voice AI
+AI agent productivity
+|
+Try the demo
+IVR
+Contact center
+Customer data management
+Teams
+Developers
+Data Engineering
+Marketing
+Product
+Customer Experience
+Industry
+Financial services
+Healthcare
+Retail
+Nonprofit
+Hospitality
+Public sector
+Education
+Tech
+Company Size
+Enterprise
+Startup
+See all solutions
+Why Twilio
+Overview
+Why Twilio
+We help you build amazing experiences with contextual data, the right communication channels, and AI to scale personalization and increase efficiency.
+Customer stories
+Differentiators
+One platform
+Privacy and security
+Built for builders
+Enterprise scale
+Extensible by design
+Real-time customer data
+Artificial intelligence
+Infrastructure
+Company
+About us
+Values
+Diversity
+Careers
+Twilio.org
+Investor relations
+Press and media
+Events
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+2026 Gartner® Magic Quadrant™ for CPaaS1
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Twilio was once again named a Leader and positioned highest for our Ability to Execute.
+Read now
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+1 Gartner®, Magic Quadrant™ for Communications Platform as a Service, By Lisa Unden-Farboud et. al, May 18, 2026
+Resources
+Developers
+Documentation
+Code samples
+Developer Hub
+Champions
+Changelog
+Serverless
+Learn
+Blog
+Resource Center
+Guides
+Reports
+Webinars
+Podcasts
+Customer stories
+State of Customer Engagement
+Events
+Customer data recipes
+Support and services
+Help Center
+Find a partner
+Become a partner
+Professional services
+Support plans
+Status
+SendGrid status
+Segment status
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Customer Insights Series
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Discover what thousands of global consumers and executives revealed about AI adoption, engagement, and the next era of CX.
+See the findings
+Pricing
+Overview
+All Pricing
+Transparent pricing with discounts as you scale. Sign up for a free trial—no credit card required.
+Conversations
+Conversations
+Conversation Memory
+Conversation Orchestrator
+Conversation Intelligence
+Conversation Relay
+Communications
+Messaging
+SMS
+WhatsApp
+Conversations API
+Voice
+SIP Trunking
+Conferencing
+Email API
+Marketing Campaigns
+Video API
+Flex
+Authentication
+Verify
+Lookup
+Customer Data
+Customer Data Platform
+Customer Data Pipeline
+Data is collected based on search terms. Privacy Policy
+Contact sales
+Start for free
+Data is collected based on search terms. Privacy Policy
+Products
+Twilio Platform
+Next gen
+Built for engagement in the agentic era. Twilio connects communication channels, customer context, and AI on one flexible platform.
+Conversations
+Conversation Memory
+New
+Build a persistent memory of customer interactions
+Conversation Orchestrator
+New
+Keep conversations connected across channels
+Conversation Intelligence
+Extract context from real-time conversations
+Conversation Relay
+Build advanced voice AI for natural conversations
+Try the demo
+Conversations
+Communications
+Messaging
+SMS
+WhatsApp
+RCS
+Voice
+SIP Trunking
+Email
+SMTP Service
+Phone Numbers
+Toll-free
+10DLC
+Short Codes
+Video API
+Flex
+Communications
+Authentication
+Verify
+Lookup
+Authentication
+Customer Data
+Connections
+Warehouses
+Protocols
+Unify
+Engage
+Audiences
+Journeys
+Customer Data
+See all products
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+See Twilio’s latest innovations and integrations
+Solutions
+Use Cases
+Verification and identity
+Fraud prevention
+Alerts and notifications
+Appointment reminders
+Lead alerts
+Mass texting
+Marketing and promotions
+SMS marketing
+Cross-sell and upsell
+Optimize ad spend
+Support and sales
+Voice AI
+AI agent productivity
+|
+Try the demo
+IVR
+Contact center
+Customer data management
+Teams
+Developers
+Data Engineering
+Marketing
+Product
+Customer Experience
+Industry
+Financial services
+Healthcare
+Retail
+Nonprofit
+Hospitality
+Public sector
+Education
+Tech
+Company Size
+Enterprise
+Startup
+See all solutions
+Why Twilio
+Overview
+Why Twilio
+We help you build amazing experiences with contextual data, the right communication channels, and AI to scale personalization and increase efficiency.
+Customer stories
+Differentiators
+One platform
+Privacy and security
+Built for builders
+Enterprise scale
+Extensible by design
+Real-time customer data
+Artificial intelligence
+Infrastructure
+Company
+About us
+Values
+Diversity
+Careers
+Twilio.org
+Investor relations
+Press and media
+Events
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+2026 Gartner® Magic Quadrant™ for CPaaS1
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Twilio was once again named a Leader and positioned highest for our Ability to Execute.
+Read now
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+1 Gartner®, Magic Quadrant™ for Communications Platform as a Service, By Lisa Unden-Farboud et. al, May 18, 2026
+Resources
+Developers
+Documentation
+Code samples
+Developer Hub
+Champions
+Changelog
+Serverless
+Learn
+Blog
+Resource Center
+Guides
+Reports
+Webinars
+Podcasts
+Customer stories
+State of Customer Engagement
+Events
+Customer data recipes
+Support and services
+Help Center
+Find a partner
+Become a partner
+Professional services
+Support plans
+Status
+SendGrid status
+Segment status
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Customer Insights Series
+<title>An icon of a outbound link arrow</title>
+<path class="icon-stroke" d="M75.3037 3.98207L3 75.5935M75.3037 3.98207L76.0435 43.3021M75.3037 3.98207L35.951 3.59351" stroke="#F22F46" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+">
+Discover what thousands of global consumers and executives revealed about AI adoption, engagement, and the next era of CX.
+See the findings
+Pricing
+Overview
+All Pricing
+Transparent pricing with discounts as you scale. Sign up for a free trial—no credit card required.
+Conversations
+Conversations
+Conversation Memory
+Conversation Orchestrator
+Conversation Intelligence
+Conversation Relay
+Communications
+Messaging
+SMS
+WhatsApp
+Conversations API
+Voice
+SIP Trunking
+Conferencing
+Email API
+Marketing Campaigns
+Video API
+Flex
+Authentication
+Verify
+Lookup
+Customer Data
+Customer Data Platform
+Customer Data Pipeline
+Contact sales
+Start for free
+Back
+Authy | Jul. 01, 2024
+Security Alert: Update to the Authy Android (v25.1.0) and iOS App (v26.1.0)
+Twilio believes that the security of our products and our customers’ data is of paramount importance and when an incident occurs that might threaten that security, we tell you about it.
+Twilio has detected that threat actors were able to identify data associated with Authy accounts, including phone numbers, due to an unauthenticated endpoint. We have taken action to secure this endpoint and no longer allow unauthenticated requests.
+We have seen no evidence that the threat actors breached Twilio’s systems or that they obtained access to Twilio's systems or other sensitive internal data. As a precaution, we are requesting that all Authy users update to the latest Android and iOS apps for the latest security updates. While Authy accounts are not compromised, threat actors may try to use the phone number associated with Authy accounts for phishing and smishing attacks; we encourage all Authy users to stay diligent and have heightened awareness around the texts they are receiving.
+This latest update addresses bug fixes, which include security updates. Please click on the link to download the latest version:
+Android
+iOS
+We know the security of our systems is an important part of earning and keeping your trust. We sincerely apologize that this happened. The Twilio Security Incident Response Team will post any updates here if there are any changes. If you have further questions, please reach out to your Technical Account Manager or our Support team.
+Notice: If you cannot access your Authy account, we recommend you immediately contact Authy support. One of our specialists will respond to your request, and work with you to get your Authy account back up and running again.
+Authy
+Security
+Additional Resources
+Blog
+Read more about our latest product updates, product tutorials, and community projects.
+Read the blog
+Docs
+See API reference documentation, quickstarts, SDKs, and multi-language code samples.
+Read the docs
+Events
+Find upcoming events and join us virtually or in person to learn more about our products.
+View events
+Get an AI summary:
+Twilio careers
+Twilio.org
+Press and media
+Investor relations
+Legal
+Privacy
+Security
+Impressum
+Sitemap
+LLMS
+Copyright © 2026 Twilio Inc.
+All rights reserved.
+Considering Twilio?
+About Twilio
+Customer Engagement Platform (CEP)
+Communications
+Conversational AI
+User authentication and identity
+Customer Data Platform (CDP)
+AI
+Customer stories
+Events
+Contact sales
+Why Twilio
+Products and Features
+SMTP
+Branded Calling
+Twilio Segment
+Twilio Engage
+Connections
+SendGrid Email API
+RCS messaging
+Latest innovations
+Pre-built solutions
+Support plans
+All products
+Use Cases
+AI agent productivity
+Customer data management
+Audience segmentation
+Contact center
+SMS marketing
+Customer acquisition
+Voice response system (IVR)
+Fraud prevention
+Bulk text messaging
+Mass email sender
+All use cases
+Developers
+Developer resources
+Twilio Essentials
+SDKs
+CDP integrations
+Serverless
+Conversation
+SMTP Email API
+SMS API
+WhatsApp API
+Voice API
+Connections
+All docs

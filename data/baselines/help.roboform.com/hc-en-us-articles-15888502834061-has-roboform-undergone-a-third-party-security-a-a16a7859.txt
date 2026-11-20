@@ -1,0 +1,54 @@
+url: https://help.roboform.com/hc/en-us/articles/15888502834061-Has-RoboForm-undergone-a-third-party-security-audit
+method: browser
+saved: 2026-11-20
+
+PERSONAL BUSINESS PLANS SECURITY DOWNLOAD Support Log in Buy Now
+RoboForm Help Center Account, Data, and Security Common Security Concerns
+Articles in this section
+What to do if I think my account has been hacked?
+What do I do if I lose my device with RoboForm on it?
+Has RoboForm undergone a third-party security audit?
+Does RoboForm fall prey to hidden field attacks?
+Where is RoboForm data stored on my computer? How do I change it? (Windows)
+Does RoboForm have an on-screen keyboard?
+Has RoboForm undergone a third-party security audit?
+Yes. RoboForm has successfully undergone two comprehensive security audit and penetration tests conducted by Secfault Security.
+2025
+Our most recent assessment covered all aspects of the RoboForm platform, including:
+Windows Desktop Client (9.6.6.2)
+macOS Desktop Client & Safari extension (9.6.2)
+Android application (9.6.9.3)
+iOS application (9.6.4)
+Browser extension (Chrome (9.6.6.1_0), Edge and Firefox)
+Online portal
+Password generator (Source)
+Download the Executive Summary
+2023
+The assessment covered all aspects of the RoboForm platform, including:
+Windows desktop client
+Mac desktop client
+iOS mobile app
+Android mobile app
+Web portals (online.roboform.com and start.roboform.com)
+Browser extensions
+Download the Executive Summary
+Facebook Twitter LinkedIn
+Was this article helpful?
+Recently viewed articles
+How do I disable trackers on the Android app?
+How do I cancel auto-renewal for my RoboForm Subscription?
+How many accounts are under a RoboForm Family Plan subscription?
+How do I upgrade from an individual Premium subscription to a Family Plan?
+Related articles
+Does RoboForm fall prey to hidden field attacks?
+What do I do if I lose my device with RoboForm on it?
+I forgot my Master Password. What can I do?
+What to do if I think my account has been hacked?
+RoboForm for Business Security Overview
+Comments
+0 comments
+Article is closed for comments.
+RoboForm Help Center
+Didn't find an answer?
+Ask Us
+English (United States)

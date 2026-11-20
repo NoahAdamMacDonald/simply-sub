@@ -2304,6 +2304,12 @@ in every D1 `json` column search parses.
     value; Bitwarden (`bitwarden`, with its Authenticator), 1Password (`1password`), Ente (`ente`: Auth beside Photos),
     2FAS (`2fas`), Aegis (`aegis`), KeePass (`keepass`), KeePassXC (`keepassxc`) and KeePassDX (`keepassdx`), volunteer
     projects; LastPass (`lastpass`) and NordPass (`nordpass`), which NordVPN's Complete and higher plans include.
+  - **Passwords, batch 2** (2026-11-20): Dashlane (`dashlane`, its VPN Hotspot Shield's), Keeper (`keeper`, with its
+    add-ons), RoboForm (`roboform`), Enpass (`enpass`), Strongbox (`strongbox`, App Store prices), Padloc (`padloc`),
+    Vaultwarden (`vaultwarden`, self-hosted, for Bitwarden's apps), Authy (`authy`, no export), Yubico (`yubico`: Yubico
+    Authenticator) and Microsoft Authenticator (a free plan of `microsoft-365`). Account sharing grades the terms'
+    clause, each family plan its own rating. Apple's and Google's free managers wait for the storage section's Apple
+    and Google providers; Psono and Passbolt sell to companies, and Buttercup and Firefox Lockwise have closed.
 - **Acceptance**
   - [ ] Each category's providers pass validation, the coverage report and review, with `data/queue.yaml` up to date
         (AI: Claude, Google AI and ChatGPT, done; streaming: batches 1 to 8 and Prime Video done; music: parts 1 to 5 done)
