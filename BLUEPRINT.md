@@ -3944,6 +3944,12 @@ None.
   `yearly` input gone, so Home, the Lists overview and its cards, and List view all show the choice made on any of them.
   The annual budget warning still checks this calendar year. The Calendar's year view stays a calendar year: its year
   is the one picked. The initial bundle is unchanged (499.78 kB).
+- **The warning follows it (M10.38, the owner's choice of 2026-11-20):** with Next 12 months, the annual warning is the
+  next 12 months' charges against the annual budget ("Your payments over the next 12 months add up to $2,905.59, over
+  your $750.00 annual budget."), core's `warnings.next12`, so the bar and the warning always agree; with This year it's
+  this calendar year's, as before. The next 12 months' period moves every day, so its dismissal is kept for the month
+  it's made in with the total then ("all next-12 2026-11 750 2905.59"): hidden through that month, unless the total
+  grows past it (core's `dismissingKey`). A dismissal of one doesn't hide the other.
 
 **Resolved (2026-11-10, the nightly bot in parts)**
 - **What failed:** the Workflow runs of 2026-11-07, 11-08 and 11-09 each ended "Errored" after about 42 minutes. Their
@@ -5136,6 +5142,13 @@ The user's sixteen fixes and improvements after M9, as M5.11–M5.12, M6.12–M6
   host are one change: the host's add-on. Applying cards one at a time found that Optimizations offers Disney+ Standard
   into the bundle with Disney+ Premium while `itemReplacements` took a bundle over only from its exact plans: it now
   takes over from any plan of a provider it includes, as suites did.
+  **Since M10.37:** a card split from a group carries the group's fingerprint (`groupFingerprint`), which the optimizer
+  still works out, so a group dismissed before M10.33 keeps its cards hidden (core's `isDismissed`) until the list
+  changes, and Show again on one dismisses the others under their own. Cards that give up more together were looked
+  for in 2,000 random lists of the optimizer's fixtures (4,181 cards): none, since a split only separates changes their
+  plan passed together, so cards carry no warning about each other. An item with a charge there's no exchange rate for
+  is kept as it is: its "keep" option was refused as foreign, which left the search nothing to start from and stopped
+  Optimizations at "Looking for savings…"; a run that fails now says so.
 - **The coverage map** (section 10.1) is 12 slots, a month each from today, with a bit per slot an item is active
   in (`optimizer/coverage.ts`): Ongoing from its start date until its end date, a window through its end, copied
   into each year when it repeats.

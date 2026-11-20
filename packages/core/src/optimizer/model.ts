@@ -777,7 +777,10 @@ class ModelBuilder {
     signature: string,
     replaces = Infinity,
   ): void {
-    if (cost.foreign || cost.amount >= replaces - savingEpsilon) return;
+    // An option with a charge there's no rate for can't be compared, so it isn't one: except an item kept as it is,
+    // which every item needs (it then counts what can be priced, and is never changed, as `changeable` says), or the
+    // search has nothing to start from (Mullvad in euros with no rates crashed it).
+    if ((cost.foreign && signature !== 'keep') || cost.amount >= replaces - savingEpsilon) return;
     const byKey = new Map<number, Contribution[]>();
     for (const contribution of contributions) {
       const list = byKey.get(contribution.key);

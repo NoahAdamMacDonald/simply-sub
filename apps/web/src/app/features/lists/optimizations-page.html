@@ -51,7 +51,9 @@
     } @else {
       <!-- Says when the suggestions are ready, and when they change. -->
       <p class="note" role="status">
-        @if (!found()) {
+        @if (result.error()) {
+          The suggestions couldn't be worked out. Reload the page to try again.
+        } @else if (!found()) {
           Looking for savings…
         } @else if (updating()) {
           Updating the suggestions…

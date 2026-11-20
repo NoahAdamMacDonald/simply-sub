@@ -82,6 +82,11 @@ export interface BudgetWarnings {
   month?: { month: IsoMonth } & ChargeTotal;
   /** This calendar year's charges, past and projected, when they go over the annual budget. */
   year?: { year: number } & ChargeTotal;
+  /**
+   * The next 12 months' charges when they go over the annual budget (M10.38): the annual warning when the device's
+   * yearly total is the next 12 months.
+   */
+  next12?: ChargeTotal;
 }
 
 /** A list's money and ranks (PROJECT-PLAN §3.4), or every list's together. */
@@ -183,6 +188,9 @@ export function listMetrics(
   }
   if (annualBudget !== undefined && thisYear.amount > annualBudget) {
     warnings.year = { year: Number(today.slice(0, 4)), ...thisYear };
+  }
+  if (annualBudget !== undefined && total12.amount > annualBudget) {
+    warnings.next12 = { ...total12 };
   }
 
   return {

@@ -170,6 +170,22 @@ export interface Suggestion {
    * say so.
    */
   thirdParty?: { key: RankKey; label: string; publisher: string; url: string }[];
+  /**
+   * The fingerprint of the card of several changes it was part of before M10.33 split them, when it was: a dismissal
+   * of that card, stored under it, still hides this one (isDismissed) until the list changes.
+   */
+  groupFingerprint?: string;
+}
+
+/** Whether `suggestion` is dismissed: under its own fingerprint, or its group's from before M10.33. */
+export function isDismissed(
+  suggestion: Pick<Suggestion, 'fingerprint' | 'groupFingerprint'>,
+  dismissed: ReadonlySet<string>,
+): boolean {
+  return (
+    dismissed.has(suggestion.fingerprint) ||
+    (suggestion.groupFingerprint !== undefined && dismissed.has(suggestion.groupFingerprint))
+  );
 }
 
 /** What optimize found for one list. */
@@ -205,10 +221,10 @@ export interface SuggestionSummary {
 const strength: readonly Severity[] = ['red', 'orange', 'yellow', 'free'];
 
 export function suggestionSummary(
-  suggestions: readonly Pick<Suggestion, 'fingerprint' | 'severity'>[],
+  suggestions: readonly Pick<Suggestion, 'fingerprint' | 'groupFingerprint' | 'severity'>[],
   dismissed: ReadonlySet<string>,
 ): SuggestionSummary {
-  const shown = suggestions.filter((suggestion) => !dismissed.has(suggestion.fingerprint));
+  const shown = suggestions.filter((suggestion) => !isDismissed(suggestion, dismissed));
   const strongest = strength.find((severity) =>
     shown.some((suggestion) => suggestion.severity === severity),
   );
