@@ -1,0 +1,63 @@
+url: https://www.keepassdx.com/
+method: browser
+saved: 2026-11-19
+
+Open source
+Password Manager
+for Android
+Manage Passkeys and Passwords in a local vault
+F-droidPlay StoreRepo
+Password generatorAutofillMagikeyboardPasskeyOTPAttachmentEncryptionUser Verification
+Wiki
+WHY KEEPASSDX?
+Secure
+No internet connection is required. The database is stored in an encrypted KeePass file using configurable secure algorithms.
+Open Source
+The source code is open to the public and transparent, fully auditable by the community, and contains no ads or data tracking.
+Local
+Data resides in a database file with a single access point, giving you full control over where it’s stored and backed up.
+MAINTENANCE
+Language
+Translate into a language you know and correct any mistakes.
+Translate
+Feedback
+Share your feedback; your suggestions make the application better.
+IssuesEmail
+Code
+Develop the features you want to see implemented; it’s open source.
+Pull request
+ICON DOWNLOADER
+TaxBuzz
+Tata Consultancy Services
+Teal
+TeamCity
+Download the logo for your service and add it as a custom icon in a KeePassDX entry.
+«
+1
+...
+721
+722
+723
+724
+725
+...
+846
+»
+DONATION
+Tip
+A tip supports the work being done and shows your interest in voluntary development.
+Bugs are fixed thanks to you.
+StripeGoogle PlayPaypal
+Regular donations
+Regular donations are a great way to support the project and help ensure the long-term stability of the code and application.
+LiberapayPaypal
+Crypto-currency
+A digital donation system is a modern way to contribute using decentralized currency.
+Bitcoin (BTC)
+Ethereum (ETH)
+Monero (XMR)
+Avalanche (AVAX)
+More
+Powered by Kunzisoft
+Copyright © KeePassDX 2026. All rights reserved.
+KeePassDX is distributed under GNU General Public License V3 and does not collect any user data.

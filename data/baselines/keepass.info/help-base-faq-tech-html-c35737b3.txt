@@ -1,0 +1,509 @@
+url: https://keepass.info/help/base/faq_tech.html
+method: fetch
+saved: 2026-11-19
+
+Technical FAQ - KeePass
+KeePass Help Center
+KeePass Home |
+Downloads |
+Translations |
+Plugins |
+Donate
+Help Center Home |
+Forums |
+Awards |
+Links
+KeePass Help Center
+Help Center Home
+Forums
+First Steps Tutorial
+Acknowledgements
+KeePass 1.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Error Codes
+License
+KeePass 2.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Application Policy
+Auto-Type Obfuscation
+Synchronization
+Triggers
+XML Replace
+User Interface:
+Database Settings
+Entry
+Interface Options
+Load/Save From/To URL
+License
+Features
+Accessibility
+Auto-Type
+Command Line Options
+Configuration
+Field References
+Import / Export
+Integration
+Master Key
+Multiple Users
+Password Generator
+Placeholders
+Repair Databases
+Search
+Secure Edit Controls
+Security
+TAN Support
+URL Field
+Using Stored Passwords
+FAQs and Info
+Administrative FAQ
+Technical FAQ
+Additional FAQ
+Backup
+Development
+Customization (1.x)
+Customization (2.x)
+Scripting (2.x)
+Creating Plugins (1.x)
+Creating Plugins (2.x)
+Key Providers (1.x)
+Key Providers (2.x)
+KDBX File Format
+Support KeePass
+Donate
+Technical FAQ
+Frequently Asked Questions about the usage of KeePass.
+Configuration:
+I've saved my options, but when I reopen KeePass I
+get the old options. What's wrong?
+Installation / Integration:
+Why doesn't KeePass 2.x run on my computer?
+Why does KeePass 2.x crash when starting it from a
+network drive/share?
+Does KeePass 2.x use FIPS-validated algorithm implementations?
+Why doesn't the CHM help file work?
+Where can I find more application icons for Windows shortcuts?
+How can I add more client icons for password entries?
+Does KeePass support a mini mode?
+Why doesn't KeePass lock after Auto-Type?
+What to do in case of a global hot key conflict?
+Why doesn't printing work in KeePass 1.x?
+Why does KeePass try to connect to the Internet?
+Does the GUI support dark themes?
+How to change the GUI font (size)?
+Security:
+Is auto-type keylogger-safe?
+Can auto-type locate child controls?
+Could you add the ... encryption algorithm to KeePass?
+Why doesn't KeePass lock while a sub-dialog is open?
+Printing creates a temporary file. Will it be erased securely?
+Why the estimated quality of a password suddenly drops?
+Usage:
+How to store and work with large amounts of (formatted) text?
+Can an e-mail address field be added?
+I've saved my options, but when I reopen KeePass I get the old options. What's wrong?
+KeePass supports two different locations for storing configuration information:
+the global configuration file in the KeePass directory and a local, user-dependent
+one in the user's private configuration folder. Most likely you do not have write
+access to your global configuration file.
+For more details, see
+Configuration.
+Why doesn't KeePass 2.x run on my computer?
+Symptoms: When trying to run KeePass 2.x on Windows &le; XP,
+an error message like the following is displayed:
+"A required .DLL file, MSCOREE.DLL, was not found" or
+"The application failed to initialize properly (0xc0000135)".
+Cause: KeePass 2.x requires Microsoft .NET Framework &ge; 3.5.
+Resolution: Install Microsoft .NET Framework 3.5 or higher.
+It is available as a free download from the Microsoft website:
+Microsoft .NET Framework.
+Alternatively, you can install it through
+Windows Update (the framework is an optional component).
+KeePass 1.x does not require this framework.
+Why does KeePass 2.x crash when starting it from a network drive/share?
+Symptoms: When trying to run KeePass 2.x from a network drive/share,
+you get an error message like the following:
+"Application has generated an exception that could not be
+handled" or
+"KeePass has encountered a problem and needs to close".
+Cause: The strict default security policy by the Microsoft .NET
+Framework disallows running .NET applications from a network drive/share.
+Recommended resolution: Copy/install KeePass 2.x onto a local hard
+disk, and run the copy.
+Alternative, not recommended resolution:
+Configure the security policy to allow running .NET applications from
+network drives/shares. Ask your administrator to do this (administrative
+rights are required). If you have administrative rights and want to do
+it yourself, you can use the
+Code Access Security Policy Tool (Caspol.exe)
+that ships with the .NET framework (helpful instructions can be found
+here and
+here).
+Does KeePass 2.x use FIPS-validated algorithm implementations?
+KeePass uses many algorithms. This FAQ answer focuses on the algorithms
+used for encrypting/decrypting a database file.
+Typically, KeePass primarily uses AES-256, SHA-256, HMAC-SHA-256 and SHA-512
+here (unless the user has specified a different
+encryption algorithm or a different
+key derivation function in the
+database settings).
+For these algorithms, the .NET Framework provides classes, and KeePass
+uses these.
+Since version 4.8, the .NET Framework supports using FIPS-validated
+implementations of the algorithms above
+(see 'What's new in .NET Framework 4.8').
+For compatibility with older .NET Framework versions, KeePass ignores
+the FIPS mode by default. If all your PCs have the .NET Framework 4.8 or higher
+installed, you can enable the usage of FIPS-validated algorithm
+implementations by opening the 'KeePass.exe.config' file using a text editor
+and deleting the line
+'<enforceFIPSPolicy enabled="false" />'.
+Implementations of other algorithms (such as ChaCha20 and Argon2) are not
+FIPS-validated. If Microsoft provides validated implementations of those
+algorithms in the future, we will consider using them.
+Why doesn't the CHM help file work?
+Symptoms: When trying to open the KeePass CHM help file from
+a remote computer or shared network drive, it's not displayed correctly
+(navigation aborted, ...).
+Solution: See
+Microsoft Security Bulletin MS05-026.
+Where can I find more application icons for Windows shortcuts?
+Application icons are icons in Windows ICO format. They can be used in
+Windows shortcuts and/or as file association icons. The KeePass executable
+contains various application icons which can be used for these purposes.
+Additional application icons are available from the "Ext/Icons_*"
+directories of the KeePass source code package.
+Most of them, shown at right, are slight variations of the main KeePass icon.
+Even more, contributed icons (by users) can be found on the
+plugins page.
+If you have multiple KeePass databases, you can use differently colored KeePass
+application icons in order to distinguish them.
+These icons are not included in the binary distribution because this would make
+the application file too large.
+How can I add more client icons for password entries?
+Client icons are the icons used for password entries and groups within KeePass.
+Each entry can be assigned its own icon.
+KeePass 1.x Only
+These icons are built-in. You cannot add/import your own icons.
+KeePass 2.x Only
+You can import your own icons into KeePass databases. For this, click the 'Add...'
+button in the icon picker dialog.
+Supported formats are BMP, EMF, GIF, ICO, JPEG, PNG, TIFF and WMF.
+Does KeePass support a mini mode?
+KeePass 1.x Only
+Yes, see KeePass 1.x Mini Mode.
+KeePass 2.x Only
+Functions can be blocked/enforced using an enforced configuration file.
+Why doesn't KeePass lock after Auto-Type?
+KeePass 1.x Only
+I have enabled the "Use alternative auto-type method (minimize window)"
+and
+"Lock workspace when minimizing the main window" options. Why doesn't
+KeePass lock after auto-typing?
+In this very special case, the window minimization only is a way to lose the
+focus, i.e. the window below comes to the foreground. The minimization is not
+user-initiated (it's only a side-effect of auto-type),
+nor a consequence of an external minimization command, therefore
+it is not (and should not be) affected by the automatic workspace locking handler.
+If you worry about having KeePass minimized and unlocked, enable the
+"Automatically lock workspace after the following number of seconds"
+option and specify a reasonable amount.
+KeePass 2.x Only
+This does not apply to KeePass 2.x.
+What to do in case of a global hot key conflict?
+By default, the global hot key for performing auto-type
+is Ctrl+Alt+A. However, there are a
+few keyboard layouts where this key combination is used for typing a character.
+For example, there is a French keyboard layout where this key combination
+produces the character 'æ',
+and there is a Polish keyboard layout where it produces the character 'ą'.
+In case of such a conflict, you need to decide whether you want the key combination
+to continue to be the global hot key or whether you want to change it.
+In KeePass 2.x, the global hot keys can be changed in 'Tools' &rarr;
+'Options' &rarr; tab 'Integration'.
+Why doesn't printing work in KeePass 1.x?
+Symptoms: When trying to print a password list in KeePass 1.x,
+nothing happens after clicking OK in the 'Print Options' dialog.
+Cause: KeePass 1.x uses the application associated with .html
+files to print the password list. If this application does not support the
+"print" shell verb, nothing happens.
+Resolution: Associate .html files with a different
+application that supports the "print" shell verb (like Internet Explorer).
+Alternative Resolution / Workaround:
+Click 'File' &rarr; 'Print Preview' in KeePass 1.x and
+manually print the document in the application that just opened the file.
+Why does KeePass try to connect to the Internet?
+KeePass has an option to automatically check for updates on each program start.
+In order to check for updates, KeePass downloads a small version information
+file and compares the available version with the installed version.
+No personal information is sent to the KeePass web server.
+Automatic update checks are performed unintrusively in the background.
+A notification is only displayed when an update is available.
+Updates are not downloaded or installed automatically.
+When starting KeePass for the first time, it asks whether to enable
+automatic update checks (recommended). They can be enabled/disabled at any
+time using the option in 'Tools' &rarr; 'Options' &rarr; tab 'Advanced'.
+Does the GUI support dark themes?
+Yes. KeePass supports all system themes, including dark ones.
+On Windows 11, a (dark) theme can be selected in the
+Windows Settings &rarr; 'Accessibility' &rarr; 'Contrast themes'.
+On Windows 10, a (dark) theme can be selected in the
+Windows Settings &rarr; 'Ease of Access' &rarr; 'High contrast'.
+On Windows 7, 8 and 8.1, a (dark) theme can be selected in the
+Windows Control Panel &rarr; 'Appearance and Personalization' &rarr; 'Personalization'.
+Example (Windows 11, 'Dusk' theme):
+Option 'Choose your (default app) mode' &rarr; 'Dark'.
+Windows 11 has an option 'Choose your mode' (on Windows 10, it is called
+'Choose your default app mode'), which can be set to 'Dark'.
+Note that this option applies to UWP apps only, not to regular Windows applications.
+Windows allows the UWP option to contradict the system theme
+(e.g. a light system theme may be active even when the UWP option is set to 'Dark').
+KeePass is a regular Windows application, not a UWP app,
+thus it follows the system theme, not the UWP option.
+This is the expected behavior; KeePass does not have anything to do
+with UWP options.
+Custom appearance.
+If you want to change KeePass' appearance independent of the active
+system theme, you might be interested in the
+KeeTheme plugin.
+How to change the GUI font (size)?
+KeePass uses the default graphical user interface (GUI) font that has
+been specified in the operating system settings.
+So, if you want to change the font (especially the size of the font)
+that KeePass uses, change it globally.
+On Windows 11, the font size can be changed in the Windows Settings &rarr;
+'System' &rarr; 'Display' &rarr; 'Scale & layout' &rarr;
+option 'Scale'.
+Restart Windows after changing this option.
+Do not use the option 'Text size' (in the
+Windows Settings &rarr; 'Accessibility' &rarr; 'Vision'),
+because this option does not scale all texts properly.
+On Windows 10, the font size can be changed in the Windows Settings &rarr;
+'System' &rarr; 'Display' &rarr; 'Scale and layout' &rarr;
+option 'Change the size of text, apps, and other items'.
+Restart Windows after changing this option.
+Do not use the option 'Make text bigger' (in the
+Windows Settings &rarr; 'Ease of Access' &rarr; 'Display'),
+because this option does not scale all texts properly.
+On Windows 7, 8 and 8.1, the font size can be changed in the
+Windows Control Panel &rarr; 'Appearance and Personalization' &rarr; 'Display'.
+On Linux systems with KDE 5 or higher, the font can be
+changed in the system settings &rarr; 'Fonts'.
+On Linux systems with GNOME 3 or higher, the font can be
+changed using GNOME Tweaks &rarr; 'Fonts'.
+In addition to supporting these system settings, KeePass allows
+to customize the fonts that are used in lists and for passwords
+(in the options dialog; these settings affect KeePass only,
+no other applications).
+If you only want to change the font of the KeePass GUI (which typically
+is not a good idea): the
+KeeUIExt
+plugin provides an option for this.
+However, it is recommended to use the above settings instead.
+Is auto-type keylogger-safe?
+Is the Auto-Type feature resistant to keyloggers?
+KeePass 1.x Only
+No.
+The Auto-Type feature has been designed in a way that it's impossible for
+target applications to distinguish real keys from auto-typed ones. This
+on the one hand has the advantage that the feature is really compatible with
+all applications out there. On the other hand, the auto-typed keys can of
+course be logged by keyloggers.
+If you worry about keyloggers, you have to use one of the other
+methods (drag&drop, copying to clipboard, KeeForm, ...).
+KeePass 2.x Only
+By default: no. The Auto-Type method in KeePass 2.x works the same as the one in
+1.x and consequently is not keylogger-safe.
+However, KeePass features an alternative method called
+Two-Channel Auto-Type Obfuscation (TCATO),
+which renders keyloggers useless. This is an opt-in feature (because it
+doesn't work with all windows) and must be enabled for entries manually.
+See the TCATO documentation for details.
+Can auto-type locate child controls?
+No. Auto-Type only checks whether the title of the currently active top level
+window matches.
+Browsers like Mozilla Firefox completely draw the window (all controls)
+themselves, without using standard Windows controls. Consequently it is
+technically impossible for KeePass to check whether a URL matches (methods
+like creating a screenshot and using optical character recognition
+are not reliable and secure). Also, it's impossible to check which child
+control currently has the focus. These problems can only be avoided by using
+browser integration plugins, i.e. not using auto-type at all.
+The user must make sure that the focus
+is placed in the correct control before starting auto-type.
+Could you add the ... encryption algorithm to KeePass?
+KeePass 1.x Only
+AES (Rijndael) and Twofish are supported.
+There are no plans to add more algorithms for the following reasons:
+Compatibility: If new algorithms are implemented and used, older KeePass
+versions and ports will not be able to read files encrypted with the new algorithms.
+Security: Some people are not well informed about
+encryption algorithms and may choose a weak algorithm such as TEA, if implemented.
+This would compromise the security of passwords managed by KeePass.
+Size & Functionality: KeePass is a secure password manager, not a
+Swiss army knife of algorithms.
+KeePass 2.x Only
+AES (Rijndael) and ChaCha20 are supported.
+There exist various
+plugins
+that provide support for additional encryption algorithms,
+including but not limited to Twofish, Serpent and GOST.
+If you'd like to implement an algorithm, have a look at the ArcFourCipher sample plugin.
+Why doesn't KeePass lock while a sub-dialog is open?
+KeePass has various options to lock its workspace automatically
+(after some time of inactivity, when the computer gets locked or the user
+is switched, when the computer gets suspended, etc.).
+However, the workspace is not locked automatically while a sub-dialog
+(like the 'Edit Entry' dialog) is open.
+To understand why this behavior makes sense, it is first important to know what happens
+when the workspace gets locked. When locking, KeePass completely closes the database
+and only remembers several view parameters, like the last selected group, the top visible
+entry, selected entries, etc. From a security point of view, this achieves the best
+security possible: breaking a locked workspace is equal to breaking the database itself.
+Now back to the original question. Let's assume a sub-dialog is open and
+one of the events occurs that should automatically lock the workspace.
+What should KeePass do now?
+In this situation, KeePass cannot ask the user what to do,
+and must make an automatic decision. There are several possibilities:
+Do not save the database and lock.
+In this case, all unsaved data of the database would be lost. This not only applies to
+the data entered in the current dialog, but to all other entries and groups
+that have been modified previously.
+Save the database and lock.
+In this case, possibly unwanted changes are saved. Often you open files, try something,
+having in mind that you can just close the file without saving the changes.
+KeePass has an option 'Automatically save database when KeePass closes or the workspace
+is locked'. If this option is enabled and no sub-dialog is open, it's clear what to do:
+try to save the database and if successful: lock the workspace. But what to do with
+the unsaved changes in the sub-dialog? Should it be saved automatically, taking away the
+possibility of pressing the 'Cancel' button?
+Save to a temporary file and lock.
+This appears to be the best alternative at first glance, but there are several problems with
+it, too. First of all, saving to a temporary file could fail (for example, there could be too
+few free disk space, or some other program like a virus scanner could block it).
+Secondly, saving to a temporary file isn't uncritical from a security point of view.
+When having to choose a location, typically the user's temporary directory on the hard
+disk is chosen (because it likely has enough free space, required rights for access, etc.).
+KeePass databases could be leaked and accumulated there.
+It's not clear what should happen when the computer is being shutdown or crashes while being
+locked. When the database is opened the next time, should it use the database stored in
+the temporary directory instead? What should happen if the 'real' database has been modified
+in the meanwhile (a quite realistic situation if you're carrying your database on an
+USB stick)?
+Obviously, none of these alternatives is satisfactory.
+Therefore, KeePass implements the following simple and easy to understand behavior:
+KeePass doesn't lock while a sub-dialog is open.
+This simple concept avoids the problems above. The user is responsible for the
+state of the program.
+Note that opening a sub-dialog is typically only required for
+editing something; it is not required for using
+entries, as the main window provides
+various methods for this.
+Locking when Windows locks.
+On Windows XP and older, the Windows service 'Terminal Services'
+should be enabled. If this service is disabled, locking KeePass
+when Windows locks might not work. This service isn't required on newer
+operating systems.
+Printing creates a temporary file. Will it be erased securely?
+KeePass creates a temporary HTML file when printing password lists and showing
+print previews. This file is securely deleted when closing the database.
+You must wait for the file being printed completely before closing KeePass
+(and close the print preview before closing KeePass), otherwise it could happen
+that the printing application blocks KeePass from deleting the file.
+There is no way around the temporary file in the current printing system.
+If you want to write a plugin that directly sends the data to the printer, you can
+find a plugin development tutorial here:
+KeePass 2.x Plugin Development.
+Why the estimated quality of a password suddenly drops?
+For estimating the quality/strength of a password, KeePass not only uses
+statistical methods (like checking which character ranges are used,
+repeating characters and differences), it also has a built-in list of
+common passwords and checks for patterns. When completing a common password or a
+repetition, the estimated quality can drop.
+Details can be found on the
+Password Quality Estimation help page.
+How to store and work with large amounts of (formatted) text?
+KeePass 1.x Only
+There is no direct support for storing and working with large formatted texts.
+KeePass 2.x Only
+KeePass has a built-in editor that allows working conveniently with
+large amounts of (formatted) texts.
+To add a large text to an entry, import the file as attachment
+(or click 'Attach' &rarr; 'Create Empty Attachment').
+The built-in editor supports *.TXT (simple text) and *.RTF (formatted text) files.
+In order to edit an attachment, right-click onto the entry in the main window,
+point on 'Attachments' and click 'YourFile.*'. Alternatively, if the
+text file is the only attachment, you can open it by just double-clicking onto
+it in the main window (enable showing the attachment column in 'View' &rarr;
+'Configure Columns' &rarr; 'Attachments'). Alternatively, it's also possible to
+click onto the name of the attachment in the details view of the main window.
+For TXT files, the built-in editor supports standard operations like cut,
+copy, paste, undo, word wrap, etc. For RTF files, additionally standard formatting
+commands are available: choosing the font, font size, bold, italic, underline,
+strikeout, text and background colors, align left/center/right, etc.
+Can an e-mail address field be added?
+A few times it has been requested that a standard entry field for e-mail addresses
+is added (on the main tab page in the entry editing dialog).
+The short answer: an e-mail address field will not be added
+due to usability reasons. Now the long answer.
+First of all, let's assume that most of the entries stored in KeePass
+contain information for logging in to websites.
+When you register an account for a website, you often have to specify a
+user name as well as an e-mail address. When you regularly
+log in later, you usually only need to provide either user name + password
+or e-mail + password (never user name + e-mail + password).
+Here the first part (which is either user name or e-mail) serves as
+identification: you tell the website who you are.
+The second part (password) provides authentication: you prove to the
+website that you're really the one who you claim to be.
+There are various methods how KeePass can transfer data to
+other applications. All of these methods by default assume that the content
+of the user name field is used for identification. For example,
+the default auto-type sequence of
+an entry is
+{USERNAME}{TAB}{PASSWORD}{ENTER}, the default
+KeeForm
+configuration uses the user name, etc.
+Now on the one hand some websites require an e-mail address instead
+of a user name. On the other hand we want the default data transfer configuration
+to work for most websites (such that the work that the user has to put
+into the configuration is kept minimal and only needed for
+websites using special login forms).
+The solution is simple: instead of interpreting the 'User Name' field
+strictly as a field containing a user name, users should rather interpret
+it as a field in which the data required for identification is stored.
+This data can consist of a user name, an e-mail address or something else
+(e.g. an account number for an online banking website).
+By handling it like this, the default data transfer configuration will work for most
+websites, i.e. zero amount of work needs to be put into
+the configuration.
+If you had to provide both a user name and an e-mail address at
+registration time, the other information (which isn't required
+on a regular basis) can be stored e.g. in
+the notes field or a custom string field of the KeePass entry.
+Now assume a separate e-mail field would be added.
+When users store both a user name and an e-mail address,
+KeePass cannot know which of the two is required for identification.
+So, in order to setup data transfer for the entry, users would be forced
+to choose which of the two fields should be used.
+So, adding an e-mail field would be a step back in usability,
+because it forces users to put additional time into data transfer configuration.
+The current system ('User Name' containing identification information,
+without a separate e-mail field) doesn't require this, and thus is
+the better solution.
+For users that are willing to manually configure the data transfer for each
+entry, there are multiple ways to get a separate e-mail address field.
+After switching to the 'Advanced' tab in the entry editing dialog,
+an e-mail address field can be added as custom string.
+If the field should appear on the main tab page of the dialog, the
+KPEntryTemplates plugin can be used.
+Copyright © 2003-2026 Dominik Reichl.
+[Legal Contact / Imprint]
+[Terms & Privacy]
+[Acknowledgements]
+[Donate]

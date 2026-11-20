@@ -1,0 +1,549 @@
+url: https://bitwarden.com/help/export-your-data/
+method: fetch
+saved: 2026-11-19
+
+Export Vault Data | Bitwarden
+...
+Log In
+Get Started
+Business Sales
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Business salesGet startedLog In
+Docs Courses
+Password ManagerImport & Export
+DocsCourses
+HomeRelease Notes Account Access Create a Bitwarden Account
+Choose My Server
+My Master Password
+Forgot My Master Password
+Can't Access Two-Step Login
+Log in & Unlock Understand Log in vs. Unlock
+Automatic Logout or Lock
+New Device Login Protection
+Log in to Multiple Accounts
+Use Single Sign-On Log in with SSO
+Add a Trusted Device
+Link SSO
+More Log in & Unlock Methods Log in with Device
+Log in & Unlock with Passkeys
+Synchronized Unlock
+Unlock with Biometrics
+Unlock with PIN
+Two-Step Login Why Use Two-Step Login?
+Set up Two-Step Login Two-Step Login Methods
+Authenticator Two-Step Login
+Email Two-Step Login
+Duo Two-Step Login
+YubiKey OTP Two-Step Login
+Passkey Two-Step Login
+Recovery Code for Two-Step Login
+Can't Access Two-Step Login
+Two-Step Login FAQs
+Emergency Access About Emergency Access
+Add & Manage Trusted Emergency Contacts
+Request & Grant Emergency Access
+Password Manager Password Manager Overview
+Get Started Password Manager Web App
+Password Manager Browser Extensions
+Password Manager Mobile Apps
+Password Manager Desktop Apps
+Your Vault Vault Items Vault Items
+File Attachments
+Custom Fields
+Vault Navigation Search your Vault
+Filter your Vault
+Folders
+Favorites
+Security Tools Integrated Authenticator
+Username & Password Generator
+Password & Generator History
+Vault Health Reports
+Browser Extension Vault Health Reports
+Change At-Risk Passwords
+Master Password Re-Prompt
+Manage Devices
+Appearance Change App Appearance
+Localization
+Sync your Vault
+Client App Settings
+Keyboard Shortcuts
+Autofill Autofill From... Autofill from Browser Extension
+Autosave from Browser Extension
+Autofill from iOS App
+Autofill from Android App
+More Autofill Options Fill Assist
+Autofill Passkeys
+Autofill Cards & Identities
+Autofill Custom Fields
+Autofill Basic Auth Prompts
+Block Autofill on Specific Sites
+Block Autosave on Specific Sites
+Troubleshoot Autofill Form URIs for Autofill
+Deactivate My Browser's Built-in Password Manager
+Troubleshoot Android Autofill
+Autofill FAQs
+Import & Export Import to your Vault or Collections
+Import Guides Import from LastPass
+Import from 1Password
+Import from Keeper
+Import from Dashlane
+Import from Chrome, Edge, & Chromium Browsers
+Import from macOS & Safari
+Import from Firefox
+Import from KeePass
+Import from Password Safe
+Import from Myki
+Export Vault Data
+Encrypted Exports
+Import from a Custom File
+Import & Export FAQs
+Organization Members Share Items
+My Items
+Transfer Items to Organization
+Change At-Risk Passwords
+Bitwarden Send About Send
+Create & Edit a Send
+Receive a Send
+Send Lifespan
+Send Privacy
+Send from CLI
+Send Encryption
+Developer Tools API Password Manager APIs
+CLI Password Manager CLI
+CLI Authentication via API Key
+CLI Authentication Challenges
+SSH About SSH
+SSH Agent
+More More Platforms Using Bitwarden Offline
+Bitwarden on Apple Watch
+Bitwarden for DuckDuckGo macOS Browser
+Use Bitwarden in Firefox Private Windows
+Safari Web Extension
+Troubleshooting uMatrix and NoScript access rules
+Troubleshoot Mobile with Bitwarden Support
+Desktop App Feature Support
+Password Manager FAQs
+Bitwarden Authenticator Bitwarden Authenticator
+Sync Verification Codes
+Import & Export Authenticator Data
+Secrets Manager Secrets Manager Overview
+Get Started Secrets Manager Quick Start
+Developer Quick Start
+Log in to Secrets Manager
+Manage your Organization
+Your Secrets Projects
+Secrets
+Machine Accounts
+Access Tokens
+Secret Decryption
+Import & Export Import Data
+Export Data
+Developer Tools Secrets Manager CLI
+Secrets Manager SDK
+Integrations Ansible
+GitHub Actions
+GitLab CI/CD
+Jenkins Integration
+Secrets Manager Kubernetes Operator
+Terraform Provider
+More Secrets Manager FAQs
+Admin Console Organizations Overview
+Organizations Quick Start
+Manage Shared Items Collections About Collections
+Create Collections
+Assign Users to Collections
+Collection Permissions
+Collection Settings
+Import Organization Items Import to an Organization
+Import from a Custom File
+Export Organization Items Export Organization Items
+Encrypted Exports
+Share Items
+Hyperlink Organization Items
+Manage Members Invite & Manage Members
+Member Roles
+Groups
+Automatic Confirmation
+Change Members’ Account Email & Name
+Revoke & Remove Temporarily Revoke Access
+Permanently Remove Access
+Delete Organization Member Accounts
+Account Recovery About Account Recovery
+Set Up Account Recovery
+Recover a Member Account
+My Account Was Recovered
+Sponsored Families Sponsored Families for Members
+Sponsored Families for Non-Members
+Sponsored Families FAQs
+SCIM About SCIM
+JumpCloud SCIM
+Microsoft Entra ID SCIM
+Okta SCIM
+OneLogin SCIM Integration
+Ping Identity SCIM Integration
+Directory Connector About Directory Connector
+Directory Connector Desktop App
+Directory Connector CLI
+Directory Connector File Storage
+Sync Options and Filters
+Clear Sync Cache
+Schedule a Sync
+LDAP or Active Directory
+Sync with Microsoft Entra ID
+Google Workspace Directory
+Sync with Okta
+Sync with OneLogin
+Onboarding and Succession Guide
+Oversight & Visibility SIEM Integrations Blumira SIEM
+Elastic SIEM
+Huntress SIEM
+Microsoft Sentinel SIEM
+Panther SIEM
+Rapid7 SIEM
+Splunk SIEM
+Sumo Logic SIEM
+Generic HEC Integration
+Non-native SIEM
+Event Logging Event Logs
+Monitoring Event Logs
+Claimed Domains Claimed Domains
+Claimed Accounts
+Access Intelligence
+Enterprise Policies
+Vault Health Reports
+Custom Fill Assist Rules
+Single Sign-On About Single Sign-On
+SSO Decryption Options
+Add Members with JIT
+SSO Guides ADFS SAML
+ADFS OIDC
+Auth0 SAML
+AWS SAML
+Cloudflare Zero Trust SSO
+Duo SAML
+Generic SAML
+Generic OIDC
+Google SAML
+JumpCloud SAML
+Keycloak SAML
+Microsoft Entra ID SAML
+Microsoft Entra ID OIDC
+Okta SAML
+Okta OIDC
+OneLogin SAML
+Ping Identity SAML
+Ping Identity OIDC
+Trusted Devices About Trusted Devices
+Setup SSO with Trusted Devices
+Approve a Trusted Device
+SSO FAQs
+Onboarding Customer Success Hub
+Bitwarden Onboarding Playbook
+Customer Activation Kit
+Member Signup Workflows
+Deploy Client Apps Deploy Browser Extensions using GPOs, Linux Policies, & .plist Files
+Deploy Browser Extensions with Intune
+Deploy Desktop Apps with Intune
+Deploy Mobile Apps with Intune
+Connect Managed Devices
+Deactivate Browser Password Managers Using Device Management
+Bitwarden Public API
+More Organizations FAQs
+Product highlights and recent updates
+Bitwarden for Enterprise Features Datasheet
+Teams and Enterprise Migration Guide
+LastPass Enterprise Migration Guide
+Ownerless Organizations
+Proof-of-Concept Project Checklist
+Prepare your Trial Organization for Production
+Provider Portal Provider Portal Overview
+Provider Portal Quick Start
+Provider Users
+Start a Client Organization
+Ongoing Administration
+Unlink Client Organization
+Provider Event Logs
+Provider Billing
+Providers FAQs
+Business Unit Portal Business Unit Portal
+Business Unit Portal Quick Start
+Self-host Plan for Deployment Self-host Bitwarden
+Self-host Checklist
+Self-host an Organization
+Migrate to a New Server
+Deploy & Configure Deploy with Docker Linux Standard Deployment
+Linux Manual Deployment
+Linux Offline Deployment
+Windows Standard Deployment
+Windows Offline Deployment
+Lite Deployment
+Marketplace Deployments
+Configure Self-hosted environment with forward proxy
+Deploy with Helm Self-host with Helm
+Traffic Routing
+AWS EKS Deployment
+Azure AKS Deployment
+OpenShift Deployment
+Add rawManifest Files
+Configuration Options Environment Variables
+Certificate Options
+Database Options
+Connect to an External MSSQL Database
+Migrate from Default to External MSSQL
+Configure Push Relay
+Kerberos Integration
+Kubernetes Service Accounts
+SMTP Configurations
+Optional Features Self-hosting Send
+Self-hosting SCIM
+Self-hosting Families Sponsorships
+Connect Clients Connect Managed Devices
+Connect Individual Clients
+Key Connector About Key Connector
+Deploy Key Connector
+System Administrator Portal
+License Organizations or Premium
+Update a Server
+Backup Server Data
+Networking Requirements
+Server Logs
+Self-host FAQs
+Security Bitwarden Security Whitepaper
+Data Encrypted Data
+Administrative Data
+Data Storage
+Data Privacy for Website Icons
+Encryption Encryption Protocols
+Encryption Key Derivation
+Invoked Crypto Libraries
+Encryption Key Rotation
+Account Fingerprint Phrase
+Software Development Server & Client Versioning
+Software Release Support
+Trusted Communications About Trusted Communications
+Bitwarden Domains, Endpoints, & URLs
+Identify Legitimate Emails from Bitwarden
+Emails from Bitwarden Servers
+Compliance, Audits, and Certifications
+Bitwarden Subprocessors
+Server Regions
+Security FAQs
+Plans & Pricing Password Manager Password Manager Plans
+Upgrade from Individual to Organization
+Premium Renewal
+Organization Renewal
+Secrets Manager Secrets Manager Plans
+Sign up for Secrets Manager
+View & Update Billing Details
+Payment Methods
+Invoices & Receipts
+Taxes on Bitwarden Purchases
+Manage Subscription Seats in Your Organization
+Delete an Account or Organization
+Cancel a Subscription
+Billing FAQs
+Password ManagerImport & Export
+On this page
+Export file types
+Export an individual vault
+On this page
+Contact support
+Page Options
+Export Vault Data
+Export your vault data, including logins and notes, to back up important information or transfer to a new Bitwarden vault. No unencrypted data is transferred over the internet, because data is decrypted locally by the client before exporting.
+tip
+If you’re adding Bitwarden to a new device and your account is hosted on our cloud servers, you don’t need to create an export. Instead, download Bitwarden on your new device and log in with your existing account.
+warning
+Unless you use an encrypted export, do not store or send the exported file over insecure channels, like email, and delete the file immediately after use.
+Export file types
+Exports can be downloaded in a few formats:
+.json (plaintext)
+.csv (plaintext)
+.json (Encrypted)
+.zip (with attachments) (includes a .json file and your attachments)
+note
+.zip exports are currently only available for individual vault data.
+E xport directly to another app with iOS 26+ and Android 10+. The destination app must support the FIDO Credential Exchange Protocol (CXP).
+Review example .csv and .json files to decide which format is best for you. We recommend the encrypted .json option for best security and most complete export. Only .json exports include:
+Cards
+Identities
+Stored passkeys
+note
+Passkeys created prior to 2024.3.1 include a counter that increments with each use. If the stored counter does not match what's expected by the service the passkey is being used to log in to, it may reject it, so exports of passkeys of that age should not be used as long-term backups.
+SSH keys
+No export formats include trash items or Sends. For a complete list of all items and fields included in an individual vault export, check out this .json sample.
+Export an individual vault
+note
+Individual vault exports do not include organization-owned data. Only admins, owners, and some custom roles can export organization items via the web app or CLI. Members with Manage collection permission can, however, export data from collections they can access.
+Web app Browser extension Desktop Mobile CLI
+To export vault data:
+Select Tools.
+Select Export:
+Export items
+From the Export from dropdown menu, select which data to download:
+Select My vault for your individual vault’s items.
+Select an organization vault’s name, which will include data from collections where you have Manage collection permission.
+Select a File Format: .json, .csv, .json (Encrypted), or .zip (with attachments)).
+(Optional) If you choose .json (Encrypted), select an Export type for the encrypted file:
+Account restricted: This file can only be imported to the current Bitwarden account that generated the encrypted export file.
+warning
+Account restricted exports can only be imported to the same account where it originated. Account restricted exports cannot be imported to a different account, including:
+An account with the same email on a different geographic or self-hosted server
+Another account with the same email address, even if the originating account was deleted
+Additionally, rotating your account's encryption key will render an account restricted export impossible to decrypt. If you rotate your account encryption key, replace any old files with new ones that use the new encryption key.
+If you wish to import an encrypted .json file into a different Bitwarden account, generate a Password protected export instead.
+Password protected: This file can be imported to any Bitwarden account by utilizing the password set during the encrypted export process.
+tip
+S elect  to securely generate a unique password for the export. If you do, be sure to save that password in a safe place.
+Select Export.
+Enter your master password or an email verification code to confirm.
+Export files will be saved to the location set by your browser. By default this is typically a Downloads folder, but you can change it within the web browser.
+To export vault data:
+Select the Settings icon.
+Select Vault options.
+Select Export vault.
+From the Export from dropdown menu, select which data to download:
+Select My vault for your individual vault’s items.
+Select an organization vault’s name, which will include data from collections where you have Manage collection permission.
+Select a File Format: .json, .csv, .json (Encrypted), or .zip (with attachments)).
+(Optional) If you choose .json (Encrypted), select an Export type for the encrypted file:
+Account restricted: This file can only be imported to the current Bitwarden account that generated the encrypted export file.
+warning
+Account restricted exports can only be imported to the same account where it originated. Account restricted exports cannot be imported to a different account, including:
+An account with the same email on a different geographic or self-hosted server
+Another account with the same email address, even if the originating account was deleted
+Additionally, rotating your account's encryption key will render an account restricted export impossible to decrypt. If you rotate your account encryption key, replace any old files with new ones that use the new encryption key.
+If you wish to import an encrypted .json file into a different Bitwarden account, generate a Password protected export instead.
+Password protected: This file can be imported to any Bitwarden account by utilizing the password set during the encrypted export process.
+tip
+S elect  to securely generate a unique password for the export. If you do, be sure to save that password in a safe place.
+Select Export vault.
+Enter your master password or an email verification code to confirm.
+Select Export vault.
+Export files will be saved to the location set by your browser. By default this is typically a Downloads folder, but you can change it within the web browser.
+To export vault data:
+Select Export from the navigation menu.
+From the Export from dropdown menu, select which data to download:
+Select My vault for your individual vault’s items.
+Select an organization vault’s name, which will include data from collections where you have Manage collection permission.
+Select a File Format: .json, .csv, .json (Encrypted), or .zip (with attachments)).
+(Optional) If you choose .json (Encrypted), select an Export type for the encrypted file:
+Account restricted: This file can only be imported to the current Bitwarden account that generated the encrypted export file.
+warning
+Account restricted exports can only be imported to the same account where it originated. Account restricted exports cannot be imported to a different account, including:
+An account with the same email on a different geographic or self-hosted server
+Another account with the same email address, even if the originating account was deleted
+Additionally, rotating your account's encryption key will render an account restricted export impossible to decrypt. If you rotate your account encryption key, replace any old files with new ones that use the new encryption key.
+If you wish to import an encrypted .json file into a different Bitwarden account, generate a Password protected export instead.
+Password protected: This file can be imported to any Bitwarden account by utilizing the password set during the encrypted export process.
+tip
+S elect  to securely generate a unique password for the export. If you do, be sure to save that password in a safe place.
+Select Export vault.
+Enter your master password or an email verification code to confirm.
+Select Export vault.
+Export files will be saved to the location set by your device. By default this is typically a Downloads folder, but you can change it within the device settings.
+You can export your Bitwarden data on mobile by downloading a file. If you're moving to another mobile app that supports the FIDO Credential Exchange Protocol (CXP), you can transfer your data directly instead. Using CXP to import and export data is supported on iOS 26+ and Android 10+.
+Below are steps for file export on iOS and Android, and CXP on iOS. To use CXP on Android, you'll start from the destination app, and the exact steps will depend on which app you're using.
+To export vault data on mobile:
+Tap the Settings icon.
+Tap Vault.
+Tap Export vault.
+note
+On iOS 26+, you can choose between Export vault to a file and Export vault to another app.
+If you choose Export vault to a file, continue with these instructions. If you choose Export vault to another app, follow the simple on-screen process to export data directly to any other app that supports the FIDO Credential Exchange Protocol (CXP).
+Select a File Format: .json, .csv, or .json (Password protected).
+Export vault on mobile
+(Optional) If you choose json (Password protected), enter a new password. If you import this file back into Bitwarden, you'll need to enter that password.
+Enter your master password.
+Select Export. Export files will be saved to the location set by your device. By default this is typically a Downloads folder, but you can change it within the device settings.
+tip
+Sync your vault with bw sync before exporting to ensure the most up-to-date information is included.
+To export your individual vault data from the CLI, use the export command. By default, export will export your vault as a .csv and save the file to the working directory. This behavior can be altered using options:
+Bash Copy
+bw export --output /users/me/documents/ --format json --password mYP@ssw0rd
+The --password option can be used to specify a password to use to encrypt encrypted_json exports instead of your account encryption key.
+Suggest changes to this page
+Suggest changes to this page
+How can we improve this page for you?
+For technical, billing, and product questions, please contact support
+Page Options
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Cloud Status
+Check status
+On this page
+Export file types
+Export an individual vault
+On this page
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

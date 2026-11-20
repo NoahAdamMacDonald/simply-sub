@@ -1,0 +1,130 @@
+url: https://support.1password.com/delete-account/
+method: fetch
+saved: 2026-11-19
+
+How to delete your 1Password account | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Using 1Password
+Account management
+How to delete your 1Password account
+How to delete your 1Password account You can delete your 1Password account if you want to permanently remove your data from the service.
+Using 1PasswordAccount management Tip
+If you just want to cancel your subscription, you can do so without deleting your account. Your data will be kept safe for you if you decide to come back later.
+Please contact 1Password Support if you want to delete your organization or business account.
+Deleting your account will start the process to delete all your information from the 1Password service. When you delete your account:
+You can no longer sign in to 1Password.com or the 1Password apps.
+You have 30 days before your information is permanently deleted. If you have an individual account, or you’re family organizer or team owner in your account, you may be able to restore your account if you contact 1Password Support within 30 days.
+If your account has a custom sign-in address, someone else will be able to claim it after 30 days.
+Before you delete your account, be absolutely sure you want to proceed. You can also choose to cancel your subscription and freeze your account instead of deleting it.
+Delete an individual account
+To delete an individual account:
+Sign in to your 1Password account.
+Select your name in the top right, then select Manage Account.
+Select Permanently Delete Account at the bottom of the page.
+Delete a family, team, or business account
+Important
+Deleting a family, team, or business account will permanently erase the information for everyone who is part of the account.
+If you’re the family organizer, team owner, or part of a custom group with the delete account permission, you can delete the account:
+Sign in to your 1Password account.
+Select Settings in the sidebar.
+Select Permanently Delete Family Account or Permanently Delete Account and All Team Members.
+Get help
+Tip
+If you can’t access your business account and want to delete it, contact 1Password Support for help.
+If you can’t access your individual, family, or team account, you can still delete it. You’ll need to be a family organizer or team owner if you want to delete a family or team account. Follow these steps to delete your account:
+Go to https://start.1password.com/support.
+Enter your email address and select Request account recovery. You’ll get an email from 1Password.
+In the email, select View my account. You’ll see a list of your 1Password accounts.
+Select the name of the account you want to delete.
+Scroll down and select Delete Account.
+Learn more
+Manage your 1Password subscription
+How to uninstall 1Password
+About 1Password and your privacy
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: September 3, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

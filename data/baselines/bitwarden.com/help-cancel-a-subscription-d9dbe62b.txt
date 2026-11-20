@@ -1,0 +1,478 @@
+url: https://bitwarden.com/help/cancel-a-subscription/
+method: fetch
+saved: 2026-11-19
+
+Cancel a Subscription | Bitwarden
+...
+Log In
+Get Started
+Business Sales
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Business salesGet startedLog In
+Docs Courses
+Plans & Pricing
+DocsCourses
+HomeRelease Notes Account Access Create a Bitwarden Account
+Choose My Server
+My Master Password
+Forgot My Master Password
+Can't Access Two-Step Login
+Log in & Unlock Understand Log in vs. Unlock
+Automatic Logout or Lock
+New Device Login Protection
+Log in to Multiple Accounts
+Use Single Sign-On Log in with SSO
+Add a Trusted Device
+Link SSO
+More Log in & Unlock Methods Log in with Device
+Log in & Unlock with Passkeys
+Synchronized Unlock
+Unlock with Biometrics
+Unlock with PIN
+Two-Step Login Why Use Two-Step Login?
+Set up Two-Step Login Two-Step Login Methods
+Authenticator Two-Step Login
+Email Two-Step Login
+Duo Two-Step Login
+YubiKey OTP Two-Step Login
+Passkey Two-Step Login
+Recovery Code for Two-Step Login
+Can't Access Two-Step Login
+Two-Step Login FAQs
+Emergency Access About Emergency Access
+Add & Manage Trusted Emergency Contacts
+Request & Grant Emergency Access
+Password Manager Password Manager Overview
+Get Started Password Manager Web App
+Password Manager Browser Extensions
+Password Manager Mobile Apps
+Password Manager Desktop Apps
+Your Vault Vault Items Vault Items
+File Attachments
+Custom Fields
+Vault Navigation Search your Vault
+Filter your Vault
+Folders
+Favorites
+Security Tools Integrated Authenticator
+Username & Password Generator
+Password & Generator History
+Vault Health Reports
+Browser Extension Vault Health Reports
+Change At-Risk Passwords
+Master Password Re-Prompt
+Manage Devices
+Appearance Change App Appearance
+Localization
+Sync your Vault
+Client App Settings
+Keyboard Shortcuts
+Autofill Autofill From... Autofill from Browser Extension
+Autosave from Browser Extension
+Autofill from iOS App
+Autofill from Android App
+More Autofill Options Fill Assist
+Autofill Passkeys
+Autofill Cards & Identities
+Autofill Custom Fields
+Autofill Basic Auth Prompts
+Block Autofill on Specific Sites
+Block Autosave on Specific Sites
+Troubleshoot Autofill Form URIs for Autofill
+Deactivate My Browser's Built-in Password Manager
+Troubleshoot Android Autofill
+Autofill FAQs
+Import & Export Import to your Vault or Collections
+Import Guides Import from LastPass
+Import from 1Password
+Import from Keeper
+Import from Dashlane
+Import from Chrome, Edge, & Chromium Browsers
+Import from macOS & Safari
+Import from Firefox
+Import from KeePass
+Import from Password Safe
+Import from Myki
+Export Vault Data
+Encrypted Exports
+Import from a Custom File
+Import & Export FAQs
+Organization Members Share Items
+My Items
+Transfer Items to Organization
+Change At-Risk Passwords
+Bitwarden Send About Send
+Create & Edit a Send
+Receive a Send
+Send Lifespan
+Send Privacy
+Send from CLI
+Send Encryption
+Developer Tools API Password Manager APIs
+CLI Password Manager CLI
+CLI Authentication via API Key
+CLI Authentication Challenges
+SSH About SSH
+SSH Agent
+More More Platforms Using Bitwarden Offline
+Bitwarden on Apple Watch
+Bitwarden for DuckDuckGo macOS Browser
+Use Bitwarden in Firefox Private Windows
+Safari Web Extension
+Troubleshooting uMatrix and NoScript access rules
+Troubleshoot Mobile with Bitwarden Support
+Desktop App Feature Support
+Password Manager FAQs
+Bitwarden Authenticator Bitwarden Authenticator
+Sync Verification Codes
+Import & Export Authenticator Data
+Secrets Manager Secrets Manager Overview
+Get Started Secrets Manager Quick Start
+Developer Quick Start
+Log in to Secrets Manager
+Manage your Organization
+Your Secrets Projects
+Secrets
+Machine Accounts
+Access Tokens
+Secret Decryption
+Import & Export Import Data
+Export Data
+Developer Tools Secrets Manager CLI
+Secrets Manager SDK
+Integrations Ansible
+GitHub Actions
+GitLab CI/CD
+Jenkins Integration
+Secrets Manager Kubernetes Operator
+Terraform Provider
+More Secrets Manager FAQs
+Admin Console Organizations Overview
+Organizations Quick Start
+Manage Shared Items Collections About Collections
+Create Collections
+Assign Users to Collections
+Collection Permissions
+Collection Settings
+Import Organization Items Import to an Organization
+Import from a Custom File
+Export Organization Items Export Organization Items
+Encrypted Exports
+Share Items
+Hyperlink Organization Items
+Manage Members Invite & Manage Members
+Member Roles
+Groups
+Automatic Confirmation
+Change Members’ Account Email & Name
+Revoke & Remove Temporarily Revoke Access
+Permanently Remove Access
+Delete Organization Member Accounts
+Account Recovery About Account Recovery
+Set Up Account Recovery
+Recover a Member Account
+My Account Was Recovered
+Sponsored Families Sponsored Families for Members
+Sponsored Families for Non-Members
+Sponsored Families FAQs
+SCIM About SCIM
+JumpCloud SCIM
+Microsoft Entra ID SCIM
+Okta SCIM
+OneLogin SCIM Integration
+Ping Identity SCIM Integration
+Directory Connector About Directory Connector
+Directory Connector Desktop App
+Directory Connector CLI
+Directory Connector File Storage
+Sync Options and Filters
+Clear Sync Cache
+Schedule a Sync
+LDAP or Active Directory
+Sync with Microsoft Entra ID
+Google Workspace Directory
+Sync with Okta
+Sync with OneLogin
+Onboarding and Succession Guide
+Oversight & Visibility SIEM Integrations Blumira SIEM
+Elastic SIEM
+Huntress SIEM
+Microsoft Sentinel SIEM
+Panther SIEM
+Rapid7 SIEM
+Splunk SIEM
+Sumo Logic SIEM
+Generic HEC Integration
+Non-native SIEM
+Event Logging Event Logs
+Monitoring Event Logs
+Claimed Domains Claimed Domains
+Claimed Accounts
+Access Intelligence
+Enterprise Policies
+Vault Health Reports
+Custom Fill Assist Rules
+Single Sign-On About Single Sign-On
+SSO Decryption Options
+Add Members with JIT
+SSO Guides ADFS SAML
+ADFS OIDC
+Auth0 SAML
+AWS SAML
+Cloudflare Zero Trust SSO
+Duo SAML
+Generic SAML
+Generic OIDC
+Google SAML
+JumpCloud SAML
+Keycloak SAML
+Microsoft Entra ID SAML
+Microsoft Entra ID OIDC
+Okta SAML
+Okta OIDC
+OneLogin SAML
+Ping Identity SAML
+Ping Identity OIDC
+Trusted Devices About Trusted Devices
+Setup SSO with Trusted Devices
+Approve a Trusted Device
+SSO FAQs
+Onboarding Customer Success Hub
+Bitwarden Onboarding Playbook
+Customer Activation Kit
+Member Signup Workflows
+Deploy Client Apps Deploy Browser Extensions using GPOs, Linux Policies, & .plist Files
+Deploy Browser Extensions with Intune
+Deploy Desktop Apps with Intune
+Deploy Mobile Apps with Intune
+Connect Managed Devices
+Deactivate Browser Password Managers Using Device Management
+Bitwarden Public API
+More Organizations FAQs
+Product highlights and recent updates
+Bitwarden for Enterprise Features Datasheet
+Teams and Enterprise Migration Guide
+LastPass Enterprise Migration Guide
+Ownerless Organizations
+Proof-of-Concept Project Checklist
+Prepare your Trial Organization for Production
+Provider Portal Provider Portal Overview
+Provider Portal Quick Start
+Provider Users
+Start a Client Organization
+Ongoing Administration
+Unlink Client Organization
+Provider Event Logs
+Provider Billing
+Providers FAQs
+Business Unit Portal Business Unit Portal
+Business Unit Portal Quick Start
+Self-host Plan for Deployment Self-host Bitwarden
+Self-host Checklist
+Self-host an Organization
+Migrate to a New Server
+Deploy & Configure Deploy with Docker Linux Standard Deployment
+Linux Manual Deployment
+Linux Offline Deployment
+Windows Standard Deployment
+Windows Offline Deployment
+Lite Deployment
+Marketplace Deployments
+Configure Self-hosted environment with forward proxy
+Deploy with Helm Self-host with Helm
+Traffic Routing
+AWS EKS Deployment
+Azure AKS Deployment
+OpenShift Deployment
+Add rawManifest Files
+Configuration Options Environment Variables
+Certificate Options
+Database Options
+Connect to an External MSSQL Database
+Migrate from Default to External MSSQL
+Configure Push Relay
+Kerberos Integration
+Kubernetes Service Accounts
+SMTP Configurations
+Optional Features Self-hosting Send
+Self-hosting SCIM
+Self-hosting Families Sponsorships
+Connect Clients Connect Managed Devices
+Connect Individual Clients
+Key Connector About Key Connector
+Deploy Key Connector
+System Administrator Portal
+License Organizations or Premium
+Update a Server
+Backup Server Data
+Networking Requirements
+Server Logs
+Self-host FAQs
+Security Bitwarden Security Whitepaper
+Data Encrypted Data
+Administrative Data
+Data Storage
+Data Privacy for Website Icons
+Encryption Encryption Protocols
+Encryption Key Derivation
+Invoked Crypto Libraries
+Encryption Key Rotation
+Account Fingerprint Phrase
+Software Development Server & Client Versioning
+Software Release Support
+Trusted Communications About Trusted Communications
+Bitwarden Domains, Endpoints, & URLs
+Identify Legitimate Emails from Bitwarden
+Emails from Bitwarden Servers
+Compliance, Audits, and Certifications
+Bitwarden Subprocessors
+Server Regions
+Security FAQs
+Plans & Pricing Password Manager Password Manager Plans
+Upgrade from Individual to Organization
+Premium Renewal
+Organization Renewal
+Secrets Manager Secrets Manager Plans
+Sign up for Secrets Manager
+View & Update Billing Details
+Payment Methods
+Invoices & Receipts
+Taxes on Bitwarden Purchases
+Manage Subscription Seats in Your Organization
+Delete an Account or Organization
+Cancel a Subscription
+Billing FAQs
+Plans & Pricing
+On this page
+Cancel a personal subscription
+After personal cancellation
+Cancel an organization subscription
+After organization cancellation
+On this page
+Contact support
+Page Options
+Cancel a Subscription
+Bitwarden subscriptions renew automatically so you don't lose access to paid features. If you cancel automatic renewal, you can continue using your subscription until the end of your current billing cycle. After your subscription ends, you'll lose access to paid features, but your account or organization won't be deleted. If your subscription is less than 30 days old, contact us for a refund.
+note
+Deleting your account also stops your subscription from renewing at the end of your billing cycle, the same as canceling it. To keep your account but cancel your subscription, follow the steps below.
+Cancel a personal subscription
+To cancel a personal subscription:
+In the web app, go to Settings → Subscription:
+Subscription page
+Take note of the Next charge date. This is when you will lose access to paid features once your subscription is cancelled.
+Select Cancel subscription.
+note
+If you self-host Bitwarden, cancel your subscription from the Bitwarden web app and server where you created the subscription.
+After personal cancellation
+warning
+If you cancel a premium subscription within 30 days of the its creation, contact us for a refund. Subscriptions older than 30 days are not eligible for a refund.
+When you confirm cancellation, your account will move into a Pending cancellation status until the noted Next charge date is reached.
+tip
+If you change your mind before the end of the billing cycle, select Reinstate subscription on the same page to turn the renewal back on.
+When the Next charge date is reached, your account will revert to a free individual plan and you'll lose access to all paid features. The free plan also changes access to these specific features:
+Two-step login: You will not be locked out of your vault, however you will not be able to use advanced two-step login options such as Yubikey or Duo for authentication. Your secret keys will remain stored in vault items in the Authenticator Key (TOTP) field, however Bitwarden will not generate TOTP codes.
+If you have a core two-step login option enabled (authenticator app or email), you will be prompted to use the enabled option.
+If you do not have another two-step login option enabled, you will authenticate into your vault without two-step login.
+Encrypted file attachments: Attachments will not be deleted from your vault. You will not, however, be able to download saved attachments or upload new ones.
+Emergency access: Trusted emergency contacts will still be able to request and obtain access to your vault. As the account holder, however, you will not be able to add new or edit existing trusted emergency contacts.
+Cancel an organization subscription
+To cancel an organization subscription you must be an organization owner:
+In the web app, open the Admin Console and go to Billing → Subscription:
+Organization subscription
+Take note of the Subscription expiration date. This is when your organization will lose access to paid features once your subscription is cancelled.
+Scroll down and select Cancel subscription.
+After organization cancellation
+When you confirm cancellation, your organization will move into a Pending cancellation status until the noted Subscription expiration date is reached.
+tip
+If you change your mind before the end of the billing cycle, select Reinstate subscription on the same page to turn the renewal back on.
+When the Next charge date is reached, your account will revert to a free individual plan and your organization will move to a Disabled state. Your organization will lose access to all paid features and a few important things to note are:
+Organization members: Existing members and groups will not be removed from the organization. If for any reason you'd like to reinstate your subscription, members will not need to take action to regain access.
+Premium features: All members of the organization will lose access to premium features while your your organization is disabled, as described in the After personal cancellation section of this page.
+Organization-owned items: Organization-owned items and collections will not be deleted. Organization owners will retain access to organization-owned vault items, but all other members will lose access to shared items while your organization is disabled.
+Suggest changes to this page
+Suggest changes to this page
+How can we improve this page for you?
+For technical, billing, and product questions, please contact support
+Page Options
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Cloud Status
+Check status
+On this page
+Cancel a personal subscription
+After personal cancellation
+Cancel an organization subscription
+After organization cancellation
+On this page
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

@@ -1,0 +1,70 @@
+url: https://keepassxc.org/
+method: browser
+saved: 2026-11-19
+
+KeePassXC
+Download
+Blog
+Screenshots
+Docs / FAQ
+The Team
+KeePassXC
+Cross-platform Password Manager
+Let KeePassXC safely store your passwords and auto-fill them into your favorite apps, so you can forget all about them.
+We do the heavy lifting in a no-nonsense, ad-free, tracker-free, and cloud-free manner. Free and open source.
+KeePassXC has been awarded a Security Visa by the French National Cybersecurity Agency (ANSSI).
+DOWNLOAD LEARN MORE DONATE
+Secure
+Your passwords remain encrypted at all times and no data is stored on remote servers, so you stay in full control of your data. No cloud, no ads, no subscriptions.
+Cross-platform
+Every feature is thoroughly tested on Windows, macOS, and Linux, so you can expect a seamless experience no matter which operating system you use.
+Open Source
+The source code is completely open source under the GPLv3 license and openly available on GitHub. Feel free to inspect, share, and contribute!
+The Project
+KeePassXC is a modern, secure, and open-source password manager that stores and manages your most sensitive information.
+You can run KeePassXC on Windows, macOS, and Linux systems. KeePassXC is for people with extremely high demands of secure personal data management. It saves many types of information, such as usernames, passwords, URLs, attachments, and notes in an offline, encrypted file that can be stored in any location, including private and public cloud solutions.
+How to Get Started
+Our Getting Started Guide walks you through the steps of downloading and installing KeePassXC for Windows, macOS, or Linux. Additionally, many Linux distributions ship their own versions, so in that case please check your distribution's package list.
+Detailed usage documentation is available in the User Guide. Also head over to our Documentation & FAQ page for more information.
+Certified Security
+KeePassXC 2.7.9 has been awarded a security Visa by the French National Cybersecurity Agency (ANSSI).
+The security Visa has been awarded for passing ANSSI's First-level Security Certification (CSPN). The certificate demonstrates that KeePassXC has been tested for complying with security standards set by ANSSI, and it is recognised in France and in Germany.
+More information can be found on our security audits and certifications page.
+Recent Blog Posts
+KeePassXC 2.8.0 (Stable) released
+By Janek Bevendorff
+Posted on 21 October 2026, 23:55 in Releases
+A month after releasing the Beta version, we are now happy to announce KeePassXC 2.8.0, the first stable release in the new 2.8 series.
+The new release brings a lot of long-awaited new features, many bugfixes, and several security updates. Among the major features are the migration from Qt5 to Qt6, Auto-Type on Wayland (Linux), configurable keyboard shortcuts, remote database synchronization with external tools, quick unlock with password on macOS, and quick unlock via Polkit on Linux. Version 2.8.0 is also the first version for which we ship native ARM64 builds for Windows and an experimental AArch64 (i.e., ARM64) AppImage for Linux
+Read more…
+KeePassXC 2.8.0 (Beta 1) released
+By Janek Bevendorff
+Posted on 23 September 2026, 15:30 in Releases
+After many months of development, we are releasing KeePassXC 2.8.0-beta1, a test release for the next major version of KeePassXC.
+The new release brings a lot of long-awaited new features, many bugfixes, and several security updates. Among the major features are the migration from Qt5 to Qt6, Auto-Type on Wayland (Linux), configurable keyboard shortcuts, remote database synchronization with external tools, quick unlock with password on macOS, and quick unlock via Polkit on Linux. With version 2.8.0, we also ship native ARM64 builds for Windows for the first time.
+Read more…
+KeePassXC 2.7.12 released
+By Janek Bevendorff
+Posted on 10 March 2026, 16:22 in Releases
+Today, we are releasing KeePassXC 2.7.12 with several bug fixes and some enhancements.
+KeePassXC now supports {TIMEOTP} as an Auto-Type placeholder, the browser access confirm dialog now shows matched URLs in a tooltip, we added support for nested folders in Bitwarden imports, and Passkeys now store their backup elegibility (BE) and backup state (BS) flags. We also added mitigations to prevent DLL injection attacks via malicious OpenSSL config files on Windows.
+Read more…
+KeePassXC 2.7.11 released
+By Janek Bevendorff
+Posted on 24 November 2025, 01:10 in Releases
+Today, we are releasing KeePassXC 2.7.11 with many bug fixes and enhancements. We are also very happy to announce that a previous version (2.7.9) has received a security Visa for passing the First-level Security Certification (CSPN) by the French National Cybersecurity Agency (ANSSI).
+Read more…
+KeePassXC Password Manager
+KeePassXC is released under the GPLv3.
+© 2016 – 2026 KeePassXC Team
+Donate
+Blog
+Security Audits
+Privacy
+Contact
+Legal Info / Impressum
+GitHub
+Bluesky
+Mastodon
+Community Chat (Matrix)
+Development Chat (Matrix)

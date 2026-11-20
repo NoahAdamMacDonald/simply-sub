@@ -1,0 +1,64 @@
+url: https://2fas.com/support/2fas-auth-mobile-app/i-want-to-move-copy-transfer-tokens-codes-between-ios-and-android/
+method: fetch
+saved: 2026-11-19
+
+I want to move/copy/transfer tokens (codes) between iOS and Android | 2FAS
+MENU
+HomeHome
+Password ManagerPassword Manager 2FAS Pass Mobile App
+2FAS Pass Browser Extension
+2FAS Share
+Pricing
+AuthenticatorAuthenticator 2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Donate
+About usAbout
+Help CenterHelp Center
+Get the appsGet the apps
+Back to list I want to move/copy/transfer tokens (codes) between iOS and Android
+You can transfer tokens (codes) between iOS and Android by exporting them to a local 2FAS Backup file. To do that, go to Settings/Menu, 2FAS Backup, tap “Export,” and save the file on your device. For safety reasons, we recommend exporting this file with a password. Then import this file to the other phone in Settings/Menu, 2FAS Backup by tapping “Import.”
+Was this article helpful?
+That's great that you find our answer helpful! Did you know that you can support us by donating to 2FAS?
+Sorry to hear that our answer was not helpful. You can always contact us and our community on the 2FAS Discord Server!
+About us
+Press kit
+Terms of Service
+Privacy Policy
+Open-source Licenses
+Site settings
+Authenticator
+Products
+2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Resources
+Donations
+How to enable 2FA
+Quick Browser Extension Check
+Check generated token
+Your branding
+Your 2FA guide
+Open-source Licenses
+Comparisons
+Google Authenticator vs. 2FAS Auth
+Authy vs. 2FAS Auth
+Microsoft Authenticator vs. 2FAS Auth
+Duo vs. 2FAS Auth
+Policies
+2FAS Auth Privacy Policy
+2FAS Auth EULA
+Password manager
+Products
+2FAS Pass Mobile App
+2FAS Pass Browser Extension
+Resources
+2FAS Pass Pricing
+2FAS Pass Recovery
+Open-source Licenses
+Policies
+2FAS Pass Privacy Policy
+2FAS Pass EULA
+Support
+Help Center
+Support
+Connect
+© 2026 Two Factor Authentication Service, Inc. All rights reserved.

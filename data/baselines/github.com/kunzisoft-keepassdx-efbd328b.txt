@@ -1,0 +1,240 @@
+url: https://github.com/Kunzisoft/KeePassDX
+method: browser
+saved: 2026-11-19
+
+Skip to content
+Navigation Menu
+Products
+Developers
+Businesses
+Resources
+Pricing
+Search
+/
+Sign in
+Sign up
+Kunzisoft
+KeePassDX
+Repository navigation
+Code
+Issues
+571
+(571)
+Pull requests
+9
+(9)
+Discussions
+Actions
+Projects
+Wiki
+Security and quality
+Insights
+KeePassDX
+Public
+Sponsor
+Notifications
+Fork440
+(440)
+Star7.7k
+(7.7k)
+master
+12 Branches
+152 Tags
+Code
+Latest commit
+J-Jamet
+fix: Update to 4.5.8 - Revert obfuscation #2776
+77ecfa8
+·
+History
+9,342 Commits
+Folders and files
+Name Last commit message Last commit date
+.github
+fix: Update doc
+LICENSES
+Licensing organization
+app
+fix: Update to 4.5.8 - Revert obfuscation #2776
+art
+fix: material 10 and 13 icons #2361
+crypto
+fix: Rotated signing keys for native app #2752
+database
+fix: Rotated signing keys for native app #2752
+fastlane
+fix: Update to 4.5.8 - Revert obfuscation #2776
+gradle
+fix: Add Limits and better memory management #2640
+icon-pack
+fix: Gradle Groovy to Kotlin and toml file
+src/libre/fastlane/metadata/android/en-US/images
+fix: F-Droid logotype #1814
+.gitignore
+fix: Add scripts to gitignore
+CHANGELOG
+fix: Update to 4.5.8 - Revert obfuscation #2776
+CONTRIBUTING.md
+fix: update CONTRIBUTING.md
+Gemfile
+Update fastlane to copy the release file with name
+Gemfile.lock
+fix: Update to 4.5.7 and gemfile
+LICENSE
+Licensing organization
+README.md
+fix: Update doc
+build.gradle.kts
+fix: Gradle Groovy to Kotlin and toml file
+gradle.properties
+fix: Gradle Groovy to Kotlin and toml file
+gradlew
+fix: exec gradlew version 7.5.1 to update scripts
+gradlew.bat
+fix: exec gradlew version 7.5.1 to update scripts
+settings.gradle.kts
+fix: Gradle Groovy to Kotlin and toml file
+Repository files navigation
+README
+Contributing
+GPL-3.0 license
+Android KeePassDX
+Lightweight password safe and manager for Android, KeePassDX allows editing encrypted data in a single file in KeePass format and fill in the forms in a secure way.
+Features
+Passkeys for authentication and local storage of private keys.
+Biometric recognition for fast unlocking (fingerprint / face unlock / …).
+One-Time Password management (HOTP / TOTP) for two-factor authentication (2FA).
+Autofill for easy form filling with passwords.
+Magikeyboard to efficiently fill in any field.
+Create encrypted database files.
+Organisation of credentials by entry and in group trees.
+Allows opening and copying URI / URL fields quickly.
+Dynamic templates for each type of entry.
+History of each entry.
+Precise management of settings.
+Material design with themes.
+Support for .kdb and .kdbx files (version 1 to 4) with AES - Twofish - ChaCha20 - Argon2 algorithm.
+Compatible with the majority of alternative programs (KeePass, KeePassXC, KeeWeb, …).
+Code written in native languages (Kotlin / Java / JNI / C).
+KeePassDX is open source and ad-free.
+What is KeePassDX?
+An alternative to remembering an endless list of passwords manually. This is made more difficult by using different passwords for each account. If you use one password everywhere and security fails only one of those places, it grants access to your e-mail account, website, etc, and you may not know about it or notice, before bad things happen.
+KeePassDX is a local password and passkey manager for Android, which helps you manage your passwords in a secure way. You can put all your passwords in one database, locked with a master key and/or a keyfile. You only have to remember one single master password and/or select the keyfile to unlock the whole database. The databases are encrypted using the best and most secure encryption algorithms currently known.
+Small print?
+KeePassDX is under open source GPL3 license, meaning you can use, study, change and share it at will. Copyleft ensures it stays that way. From the full source, anyone can build, fork, and check whether for example the encryption algorithms are implemented correctly. There is no advertising.
+Do not worry, the main features remain completely free, no security features are reserved for a specific version; encryption and data protection are strictly the same for all users.
+KeePassDX is developed and maintained on a volunteer basis, so if you find the application useful and would like to support its development, there are several options available.
+Contribution
+Add features by making a pull request.
+Help to translate KeePassDX to your language on Weblate.
+Donate to encourage and finance design, deployment, ticket tracking, bug fixing, addition of new features, development and maintenance. You will then have access to a support version, KeePassDX Pro. (づ•ᴗ•)づ♡
+Note : The support version provides access to optional visual styles that are accessible after a contribution (and a thank-you message ≽^•⩊•^≼) to encourage the work of this open source project! It does not improve safety and provides no functional advantage. If you contribute and do not have access to the styles, do not hesitate to contact the author at contact@keepassdx.com.
+Download
+F-Droid is the recommended way of installing, a libre software project that verifies all the libraries and app code is libre software.
+Source Status Version
+Google Play Free + Pro
+F-Droid Libre
+IzzyOnDroid Free & Libre
+GitHub / Obtainium Free & Libre
+Package authenticity from GitHub
+Download the app from GitHub releases
+Install apksigner from Android Studio
+Open the directory where you saved the downloaded file in the Terminal
+Make sure that you have apksigner installed by running:
+apksigner --version
+Depending on the APK file you downloaded, run:
+apksigner verify --verbose --print-certs -min-sdk-version 24 KeePassDX-*.apk
+You should get this output :
+Verified using v2 scheme (APK Signature Scheme v2): true
+...
+Number of signers: 1
+Signer #1 certificate SHA-256 digest: 7d55b8af210381aabf960f07e17cf7857b6d2a642ca2da6bf0bdf1b200362f04
+...
+Signer #1 public key SHA-256 digest: 5d261d3176db1e077b80112824d9390167f3be0561827e42112ed6b71192db81
+If it's the case, this means that the APK was well built by the author of KeePassDX.
+Frequently Asked Questions
+Other questions? You can read the FAQ
+Other devices
+KeePass (https://keepass.info/) is the original and official project for the desktop, with technical documentation for standardized database files. It is updated regularly with active maintenance (written in C#).
+KeePassXC (https://keepassxc.org/) is an alternative integration of KeePass written in C++.
+KeeWeb (https://keeweb.info/) is a web version that is also compatible with KeePass files.
+License
+Copyright © 2026 Jeremy Jamet / Kunzisoft.
+This file is part of KeePassDX.
+KeePassDX is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+KeePassDX is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along with KeePassDX. If not, see http://www.gnu.org/licenses/.
+This project is a fork of KeePassDroid by bpellin.
+About
+Lightweight vault and password manager for Android, KeePassDX allows editing encrypted data in a single file in KeePass format and fill in the forms in a secure way.
+www.keepassdx.com/
+Topics
+android
+android-application
+autofill
+credential-manager
+fingerprint
+keepass
+keepass-dx
+keepassdx
+material
+material-design
+passkey
+passkeys
+password-manager
+prf
+vault
+Resources
+Readme
+GPL-3.0 license
+Contributing
+Contributing
+Activity
+Custom properties
+Stars
+7.7k stars
+Watchers
+101 watching
+Forks
+440 forks
+Report repository
+Releases
+144
+(144)
+🎃 Plump Pumpkin
+Latest
++ 143 releases
+Sponsor this project
+liberapay.com/Kunzisoft
+https://donate.stripe.com/dRm5kFdia7H0gcq9IpcfK00
+https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KM6QMDAXZM3UU
+https://www.keepassdx.com/#donation
+Contributors
+330
+(330)
++ 316 contributors
+Languages
+Kotlin
+83.8%
+C
+11.2%
+Java
+2.7%
+Assembly
+2.1%
+C++
+0.1%
+Ruby
+0.1%
+Footer
+© 2026 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Community
+Docs
+Contact
+Manage cookies
+Do not share my personal information

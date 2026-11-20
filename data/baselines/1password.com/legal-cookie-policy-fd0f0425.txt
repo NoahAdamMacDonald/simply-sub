@@ -1,0 +1,391 @@
+url: https://1password.com/legal/cookie-policy
+method: fetch
+saved: 2026-11-19
+
+Cookie Policy | 1Password Skip to Main Content 1Password for Agents: Give AI Agents access, not your passwords. Learn more Sign in
+Sign inGet started free
+Business
+Business
+Enterprise
+Small Teams
+Consumer Goods
+SaaS and Technology
+Financial Services
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Comparison
+Pricing
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Extended device compliance
+Integrations
+License management
+Posture checks
+Secrets management
+Watchtower and insights
+Explore more features
+AI agent identity
+AI agent security
+AI spend management
+Credential management
+Cyber insurance and compliance
+Device security
+Passwordless
+SaaS access governance
+Shadow IT discovery
+SaaS offboarding
+SaaS spend management
+Zero standing privileges
+Talk to sales
+View plans
+Community
+Personal
+Individuals
+Families
+How it works
+Meta Muse
+Grok Bot
+Instinct
+Autofill
+Dark web monitoring
+Secure password sharing
+Travel mode
+Zero knowledge encryption
+Password generator
+Username generator
+Demos
+Compare password managers
+Apple Passwords
+Bitwarden
+Dashlane
+Google Password Manager
+Keeper
+LastPass
+Nordpass
+Compare plans
+Help and documentation
+Community
+Developers
+Partners
+Managed Service Providers
+Channel partners
+Partners Overview
+Enterprise Password Manager MSP Edition
+1Password Marketplace
+Demos
+AWS
+Crowdstrike
+Drata
+Perplexity
+Tailscale
+1Password Partner Portal
+MSP Edition login
+Become a partner
+1Password is the Official Cybersecurity Partner of Oracle Red Bull Racing
+Resources
+Our security model
+Password Management
+1Password Security Research
+Blog
+Customer stories
+Webinars
+Credentials management
+Device security
+SaaS management
+View all demos
+macOS
+Windows
+iOS
+Android
+Browser extension
+Linux
+Command line
+Talk to sales
+Help and documentation
+Community
+2026 Gartner® Magic Quadrant™ for SaaS Management Platforms
+Pricing
+Talk to sales
+Get started free
+AgileBits Cookie Policy
+AgileBits Inc. its affiliates and our affiliated companies unless otherwise noted (collectively, “1Password” “our,” “we,” or “us”) maintain www.1password.com, www.1Password.eu, www.1Password.ca, and related 1Password emailing services (collectively, our “Website”). This 1Password Cookie Policy (“Cookie Policy”) describes how we and our business partners deploy cookies and similar technologies. Please review our Privacy Policy to learn how we process and use your personal information we collect through our Website more generally.
+What are cookies and similar technologies?
+Cookies are small text files that are stored in your web browser that allow us or a third party to recognize you. Cookies are used to store and receive identifiers and other information on computers, phones, and other devices. Cookies can be used to collect, store, and share pieces of information, such as IP addresses, about your activities across websites, including on our Website. However, there are other similar technologies, such as pixels, that store and access information on your device in a similar manner to cookies. Therefore, the single term “cookies” for this Cookie Policy, refers to cookies and similar technologies.
+We do not use third-party trackers in our web application (my.1password.com), or our client applications for macOS, Windows, Linux, Android or iOS.
+What types of cookies do we use and why?
+The following information lists the different types of cookies implemented on our Website, who serves those cookies, the cookie name, a brief description of the cookie, and the expiration of the cookie.,.
+We use both session cookies and persistent cookies.
+Session cookies
+Help us recognize a single visit to our Website. They let us identify you while you browse, then expire when you close your browser or after a short period of inactivity.
+Persistent cookies
+Stay on your device for a set amount of time, which is described in this Cookie Policy. They continue to work even after you close your browser. For example, if you choose to stay signed in to 1Password, we use a persistent cookie to remember that preference, so you don't have to sign in again the next time you visit.
+Categories of cookies
+Cookies can either be first-party, where 1Password sets and uses those directly, or third-party which are set by third parties, such as our analytics provider, through our Website or server.
+The types of cookies used by use and our providers in connection with the Website can be classified into one of the following purposes. To see what cookies we use, refer to the Cookies Addendum set out at the end of this Cookie Policy that lists out the provider, cookie name, description, purpose, and expiration period of each cookie.
+Essential Cookies
+Purpose: These cookies are essential for the Website to be provided to you, to prevent fraudulent activity, to maintain security, or to enable basic features of the Website and online services, such as to allow you to login to your account. Since these cookies are essential for the Website and the features you expect to work when visiting our Website, these can not be rejected within our consent preference management offerings.
+Functional Cookies
+Purpose: These cookies enable us or our providers to provide certain functions of our Website to you, such as a video player or language preference for our Website. Please note that if you disable these cookies, we may not be able to provide all functions of our Website to you.
+Analytics & Performance Cookies
+Purpose: These cookies help us and our providers understand how visitors interact with our Website, enabling us to improve user experience and optimize our content. If you do not allow these cookies, we will not be able to monitor our Website performance.
+Marketing Cookies
+Purpose: These cookies are used to help us and our providers personalize your experience, reach you and more people like you to spread the word about 1Password, as well as. analyze the effectiveness of our marketing campaigns.
+Sale or Share of Personal Information Cookies
+Purpose: These cookies may disclose personal information to third parties or support cross-context behavioral advertising in a manner that may be considered a "sale" or "sharing" of personal information under certain privacy laws. They help us and our advertising partners deliver more relevant advertisements, measure the effectiveness of advertising campaigns, and personalize advertising based on your interactions across websites and online services. You can choose whether to allow these cookies through our Cookie Preference Center, subject to the consent choices available in your region.
+Managing Cookies
+You can manage your cookie preferences at any time, including withdrawing your consent to non-essential cookies, by selecting "Your Privacy Choices" in the footer of our Website. Any changes you make will apply to the future use of non-essential cookies on our Website. You may need to refresh the page before your updated preferences take effect.
+Your cookie preferences are stored on the browser and device you use to access our Website. If you clear your browser cookies or cache, use a different browser or device, or otherwise remove the information used to remember your preferences, you may be asked to make your cookie choices again the next time you visit our Website.
+Some third-party cookies cannot be disabled through our cookie management tool once they have already been set. If you want to withdraw your consent to optional cookies, including third-party cookies, you can delete them through your browser settings. Most browsers allow you to control how cookies are used, block certain types of cookies, and clear existing cookies and browsing data.
+Some applications you use to access your 1Password account, including your web browser, may store information on your device to make future sign-ins easier and keep certain information available when you're signed out. You can remove this information from your device at any time. If you do, you'll need to enter your account details, Account Password, and Secret Key the next time you sign in to your 1Password account.
+You can also opt out of the sharing of your personal information for cross-context behavioral advertising or targeted advertising by selecting "Your Privacy Choices" in the footer of our Website and unchecking the box titled "Sharing or sale of personal information".
+We also recognize Global Privacy Control ("GPC") opt-out preference signals. GPC is a browser-based setting that lets you tell websites you do not want your personal information sold or shared for cross-context behavioral advertising or targeted advertising. If you enable GPC, we'll treat the browser and device you're using as opted out of those activities wherever they apply on our Website.
+Most web browsers allow you to control cookies through their settings, including blocking, deleting, or clearing existing cookies and browsing data. For browser-specific instructions, please refer to your browser manufacturer's documentation:
+Google Chrome
+Microsoft Edge
+Mozilla Firefox
+Safari (Desktop)
+Safari (Mobile)
+You can also opt out of Google Analytics across all websites by installing the Google Analytics Opt‑out Browser Add‑on.
+Industry Advertising Opt-Out Tools
+Some of our advertising partners participate in industry self-regulatory programs that provide information about interest-based advertising and offer tools to help you manage your advertising preferences. Depending on where you live, you can learn more or opt out by visiting:
+United States: Digital Advertising Alliance (DAA) AdChoices Tool
+European Economic Area (EEA) and United Kingdom: European Interactive Digital Advertising Alliance (EDAA)
+Canada: Digital Advertising Alliance of Canada (DAAC)
+If you interact with social networking services through our Website, or if those providers set cookies on our Website, you may also be able to manage your advertising preferences through your account settings with those providers. For more information, please refer to the privacy and advertising settings made available by providers such as Google, Meta, and Reddit.
+These opt-out tools and settings are provided by third parties, and we do not control their operation, availability, or accuracy. If your browser is configured to reject cookies when you visit these opt-out pages, if you later clear your browser cookies, or if you use a different browser or device, your opt-out preferences may no longer apply. You may need to update your preferences for each browser and device that you use.
+Changes to this Cookie Policy
+We may update this Cookie Policy from time to time to reflect changes to our Website, our use of cookies and similar technologies, our business practices, or applicable laws.
+When we make changes, we'll update the “Last Updated” date at the bottom of this Cookie Policy. If the changes are material, we'll let you know where required by law, such as by posting a prominent notice on our Website or requesting your consent before new cookies are used.
+We encourage you to review this Cookie Policy and your cookie preferences periodically so you stay informed about how and why we use cookies.
+Last Updated: August 10, 2026
+Contact us
+If you have any questions regarding this Cookie Policy, please send us an email at privacy@agilebits.com or click the "Get in touch" button below.
+Get in touch
+Cookies addendum
+Cookie name
+Service
+Categorization
+Purpose
+tcm
+Transcend Essential Required for the operation of the Transcend consent management platform.
+_ct
+1Password Essential Determines whether a visitor is eligible for analytics functionality based on their geographic jurisdiction.
+_ALGOLIA
+Gainsight Essential Required for the search bar to function.
+Session
+Gainsight Essential Required cookie for authentication.
+__cf_bm
+Cloudflare Essential Distinguishes between humans and bots.
+LithiumVisitor
+Khoros Essential Computes billing visits, registered billing visits, visits, registered visits, and unique visitors metrics.
+AWSALB / AWSALBCORS
+Amazon Web Services Essential These cookies are managed by Amazon Web Services and are used for load balancing to optimize user experience of the website.
+csrf-aurora
+Khoros Essential Cross-site request protection.
+LiSESSIONID
+Khoros Essential Session management.
+unleash-session-id
+Unleash Functional Maintains a consistent feature experience for anonymous users by assigning a unique session identifier for feature flag evaluations.
+_us
+Unleash Functional Stores a randomly generated session identifier to ensure visitors are consistently assigned to the same feature flag or A/B experiment throughout their session.
+_locale
+Gainsight Functional Sets the visitor's preferred language and country.
+LithiumTimezonePreference
+Khoros Functional Stores timezone information used to render dates/times within the community interface.
+_ga (x2)
+Google Analytics & performance Used to identify and track an individual session with a user device.
+_ga_G2KE51TPE4
+Google Analytics & performance Used to distinguish users and maintain session state for Google Analytics 4.
+_gid (x2)
+Google Analytics & performance Used to distinguish visitors and generate statistical data on how visitors use our Website to understand user behavior.
+_gat
+Google Analytics & performance Google Analytics cookie used to throttle the request rate - limiting the collection of data on high traffic websites.
+_dd_s
+Datadog Analytics & performance Used by Datadog to group all events generated from a unique user session across multiple pages.
+_ga_W68232CX9Y
+Google Analytics & performance Used by Google to maintain session state and associate user interactions within a browsing session for website analytics and reporting.
+_ga_9WXYK3PMB6
+Google Analytics & performance Used by Google to maintain session state and associate user interactions within a browsing session for website analytics and reporting.
+_ga_PCEFCJ... (x3)
+Google Analytics & performance Used by Google to maintain session state and associate user interactions within a browsing session for website analytics and reporting.
+_gat_skilljarTracker
+Google Analytics & performance Used by Skilljar's Google Analytics implementation to support analytics and measurement of user interactions within the Skilljar learning platform.
+t
+Gainsight Analytics & performance Maintains session scoped identifier to support analytics.
+tu
+Gainsight Analytics & performance Used to identify unique users across sessions for analytics.
+_gd_session
+6Sense Marketing A unique identifier for the visitor’s session on the website. Used to correlate page views and activities to a single browsing session on the website.
+_gd_svisitor
+6Sense Marketing A long-lived unique identifier of this visitor on the website. It is either correlated to the 6suuid or a unique value and can be changed during the lifetime of this cookie.
+_gd_visitor
+6Sense Marketing A unique identifier for the visitor that is specific to the website, and will remain unique for the duration of the cookie.
+_fs
+1Password Marketing Stores a random visitor UUID used by FlowService to correlate a visitor's page events and form submissions and associate them with a single lead in Marketo for marketing attribution and lead tracking.
+_fturl
+1Password Marketing Stores the first landing URL a visitor accessed on the website to preserve first-touch attribution to measure marketing campaign effectiveness and attribution.
+_gcl_au
+Google Marketing Used by Google Ads to store and track conversions, measure the effectiveness of advertising campaigns, and improve ad performance across websites using Google's advertising services.
+_gcl_aw
+Google Sale of info Stores information about ad clicks to help measure the effectiveness of advertising campaigns and attribute conversions after a user interacts with an advertisement.
+li_fat_id
+LinkedIn Sale of info Supports advertising by recognizing visitors, measuring the effectiveness of LinkedIn advertising campaigns, and enabling personalized advertising based on interactions with the website.
+_mkto_parent
+Marketo Marketing Recognizes returning visitors, remembers interactions with the website over time, and supports marketing analytics and communications.
+_mkto_trk
+Marketo Marketing Maintains an anonymous visitor identifier to recognize returning visitors, remember interactions with the website over time, and support marketing analytics and communications.
+_gac_*
+Google Marketing Used to track user activity and measure the performance of ad campaigns. It helps advertisers understand how users interact with their site after clicking on ads.
+_gcl_au
+Google Marketing Used to store and track conversions, measure the effectiveness of advertising campaigns, and improve ad performance across websites using Google's advertising services.
+_fbp
+Meta Sale of info Used to track visits across websites to deliver a series of advertisement products such as real time bidding from third party advertisers.
+_fbc
+Meta Sale of info Stores the Facebook Click ID to help measure and attribute conversions back to Meta advertising campaigns.
+_gd_session
+6Sense Sale of info Collects visitor data related to the user’s visit to the website, such as number of visits, average time spent on the website and which pages have been loaded, for the purpose of serving advertisements.
+_gd_svisitor
+6Sense Sale of info A long-lived unique identifier of this visitor on the website. It is either correlated to the 6suuid or a unique value and can be changed during the lifetime of this cookie for the purpose of serving advertisements.
+_gd_visitor
+6Sense Sale of info Collects visitor data related to the user’s visit to the website, such as number of visits, average time spent on the website and which pages have been loaded, for the purpose of serving advertisements.
+__q_state_8cjsdrJW8Z7VqB3b
+Qualified Marketing Supports personalized marketing interactions by recognizing returning visitors and maintaining information needed to deliver relevant sales and engagement experiences.
+_rdt_uuid
+Reddit Sale of info Used to track visitors on multiple websites, in order to present relevant advertisement based on the visitor's preferences.
+_rdt_cid
+Reddit Sale of info A unique identifier passed as a URL parameter by Reddit Ads to track engagement and ad performance.
+_rdt_em
+Reddit Sale of info Used to attribute conversions back to Reddit Ads.
+_rdt_pn
+Reddit Sale of info Stores identifiers and interaction data to enable retargeting, personalised marketing, and campaign performance measurement.
+_gcl_ls
+Google Sale of info Used to understand user interaction with the website by generating analytical data.
+_gcl_gs
+Google Sale of info Used to help advertisers determine how well their ad campaigns are performing by tracking actions taken by users after viewing or engaging with their ads.
+_gcl_ag
+Google Sale of info Stores an advertising identifier associated with a Google Ads click to support remarketing and personalized advertising.
+_gcl_gb
+Google Sale of info Used to track campaign related information on the user.
+_gcl_dc
+Google Sale of info Used to understand how users engage interaction with the website and advertainments. It helps in understanding user behavior and interaction patterns with the site's content and associated marketing campaigns.
+li_sugr
+LinkedIn Sale of info Used by LinkedIn to make a probabilistic match of a visitor's identity, helping measure advertising effectiveness and support ad attribution and personalization.
+bcookie
+LinkedIn Functional Purpose: Used to uniquely identify a visitor's browser or device, support security and fraud prevention, and facilitate advertising attribution and campaign measurement associated with LinkedIn services.
+lidc
+LinkedIn Sale of info Facilitates data center selection to optimize content delivery and routing performance.
+UserMatchHistory
+LinkedIn Sale of info Enables LinkedIn's Matched Audiences feature by syncing audience segments for targeted advertising across LinkedIn properties.
+AnalyticsSyncHistory
+LinkedIn Analytics & performance Records the time of last analytics data synchronization with LinkedIn to support accurate campaign reporting.
+6suuid
+6Sense Sale of info Registers user behavior and navigation on the website, as well as any interaction with active campaigns. This is used for optimizing advertisement and for efficient retargeting.
+Legal
+Cookie Policy
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Unified Access Platform
+Unified Access
+Enterprise Password Manager
+Credential Broker
+Privileged Access
+SaaS Manager
+Device Trust
+Products and Tools
+Personal password manager
+Password generator
+Username generator
+Comparison
+Demos
+Switch
+Pricing
+Features
+Autofill
+Access reviews
+Access requests
+Credential governance
+Developer watchtower
+Posture checks
+Extended Device Compliance
+SaaS Manager integrations
+SaaS discovery
+SaaS workflows
+IT Asset Management
+License management
+Watchtower insights
+Secrets Management
+Password sharing
+Two-factor authentication
+Passkeys
+Solutions
+AI spend management
+Zero standing privileges
+Passwordless
+Device Security
+Shadow IT Discovery
+SaaS Access Governance
+SaaS Offboarding
+SaaS Spend Management
+Credential management
+Cyber insurance and compliance
+Agentic AI security
+Resources
+1Password Security Research
+Webinars
+Customer stories
+Resource library
+Blog
+Security
+Privacy
+Developers
+Developer documentation
+Developer community
+Secrets management
+Bug bounty
+Support
+Help and documentation
+Community
+Customer support
+Privacy support
+Company
+About
+We're hiring!
+Press
+Podcast
+Newsletter
+Legal Center
+Trust Center
+Partners
+Partnerships overview
+1Password for MSPs
+Password Manager - MSP edition
+1Password Marketplace
+For students
+Downloads
+macOS
+Windows
+iOS
+Android
+Browser
+Linux
+CLI
+Terms of Service
+Cookie Policy
+Your Privacy Choices
+Privacy Policy
+Accessibility
+Sitemap
+© 2026 1Password. All rights reserved.
+4711 Yonge St, 10th Floor, Toronto Ontario, M2N 6K8, Canada

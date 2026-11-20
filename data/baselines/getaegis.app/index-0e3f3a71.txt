@@ -1,0 +1,93 @@
+url: https://getaegis.app/
+method: browser
+saved: 2026-11-19
+
+Features
+Reviews
+FAQ
+Download
+Check out the source code
+Aegis Authenticator
+Aegis Authenticator is a free, secure and open source app for Android to manage your 2-step verification tokens for your online services.
+Secure, simple and actively developed.
+Google Play Store
+F-Droid
+675K+ installs
+Meet Aegis Authenticator
+Aegis is an alternative to two factor authentication apps like Google Authenticator and Authy. Its most important features are security, backups and customization.
+Encryption
+Your tokens are in a secure vault, with optional biometric unlock for easy access.
+Organized
+All your tokens in a polished and modern interface. Material You included.
+Themes
+Bundled with different themes and viewmodes, including a true dark mode and a tiles view.
+Icons
+Easily find the tokens you need by using one of the available icon packs.
+Full control
+Export or import from a wide variety of 2FA apps. With support for automatic backups.
+Maintained
+The app is actively developed and we're constantly making improvements.
+What our users have to say
+We compiled a list of reviews from our Google Play listing
+Exactly what I was looking for! It's open source, ad-free, and lets me control my keys. It doesn't suck all my data into the cloud and lock it up like some other authenticator apps do. I can back up my keys where and when I want to. It's not tied to a SIM or phone number, so I can move to another device any time I want. This app has worked with every site/server I've tried (4 so far)
+5 years ago
+Free. Supports other authentication algorithms beyond SHA1. Has cloud backups. Can export data files. Automatically prompts to enter PIN and biometrics to lock the app. Automatically prompts to enter password to encrypt the backup files.
+3 years ago
+Great app. Google did not allow me to move from one phone to another: It did not recognize my own QR code. But this application recognized it. There are many interface settings and backup!
+6 years ago
+Switched to Aegis from Authy. I'm blown away by how good and customizable this app is. Love it. A big thank you to the developers.
+3 years ago
+Very good, I'm satisfied with the application. Easy to backup and faster than Google authenticator
+3 years ago
+A completely professional and flawless app. I don't see the slightest flaw in this app and it deserves five stars and a lot of praise. Thanks to the programmers
+3 years ago
+Exactly what I was looking for! It's open source, ad-free, and lets me control my keys. It doesn't suck all my data into the cloud and lock it up like some other authenticator apps do. I can back up my keys where and when I want to. It's not tied to a SIM or phone number, so I can move to another device any time I want. This app has worked with every site/server I've tried (4 so far)
+5 years ago
+Free. Supports other authentication algorithms beyond SHA1. Has cloud backups. Can export data files. Automatically prompts to enter PIN and biometrics to lock the app. Automatically prompts to enter password to encrypt the backup files.
+3 years ago
+Great app. Google did not allow me to move from one phone to another: It did not recognize my own QR code. But this application recognized it. There are many interface settings and backup!
+6 years ago
+Switched to Aegis from Authy. I'm blown away by how good and customizable this app is. Love it. A big thank you to the developers.
+3 years ago
+Very good, I'm satisfied with the application. Easy to backup and faster than Google authenticator
+3 years ago
+A completely professional and flawless app. I don't see the slightest flaw in this app and it deserves five stars and a lot of praise. Thanks to the programmers
+3 years ago
+Free, open source, it works completely offline, and allows you to encrypt the safe with a password of your choice. Requires only 3 permissions, avoiding dozens of unnecessary ones. Definitely the best Android app for managing two-step verification tokens.
+3 years ago
+User-friendly interface, can import key backups of many other two-factor authenticators. From the authenticators FreeOTP+, Google, Microsoft and andOTP I settled on this one. If the device is rooted, it can import data from other installed authenticators directly.
+4 years ago
+I especially like that there is import and export. Nice native interface. Lightweight and convenient utility. Class! 👌
+7 years ago
+Very nice interface, much better then andOTP. Thanks for doing opensource projects!
+3 years ago
+The best authenticator app. Open sourse, no ads, full control, import or export from other apps. Password protected, and the best is easy backup that can be saved anywhere. Couldn't find a better app with all these features.
+3 years ago
+Possibility of import and export, all necessary security measures, pleasant appearance and usability, free, no advertising, open source, actively updated. Of all the authentication apps I've used, this is the best.
+4 years ago
+Free, open source, it works completely offline, and allows you to encrypt the safe with a password of your choice. Requires only 3 permissions, avoiding dozens of unnecessary ones. Definitely the best Android app for managing two-step verification tokens.
+3 years ago
+User-friendly interface, can import key backups of many other two-factor authenticators. From the authenticators FreeOTP+, Google, Microsoft and andOTP I settled on this one. If the device is rooted, it can import data from other installed authenticators directly.
+4 years ago
+I especially like that there is import and export. Nice native interface. Lightweight and convenient utility. Class! 👌
+7 years ago
+Very nice interface, much better then andOTP. Thanks for doing opensource projects!
+3 years ago
+The best authenticator app. Open sourse, no ads, full control, import or export from other apps. Password protected, and the best is easy backup that can be saved anywhere. Couldn't find a better app with all these features.
+3 years ago
+Possibility of import and export, all necessary security measures, pleasant appearance and usability, free, no advertising, open source, actively updated. Of all the authentication apps I've used, this is the best.
+4 years ago
+Get started
+Download the app and start adding your 2FA tokens to your vault and improve your online security.
+Google Play Store
+Frequently asked questions
+What does your app offer that other 2FA apps do not?
+Compared to other 2FA apps, we think Aegis stands out in terms of its simplicity and security. Most popular apps like Google Authenticator and FreeOTP don't bother with additional security measures. They allow access to your tokens right after opening the app. Aegis, on the other hand, encrypts all of your tokens at rest and requires a password or the touch of a finger to decrypt them.
+Another important feature is the ability to export your tokens and import them into another device. Google Authenticator doesn't have this, which has not only annoyed users for years, but has also resulted in loss of access to lots of accounts.
+Can you implement feature x and y?
+I found a bug! Where can I report it?
+Yikes! We track all issues and feature requests on GitHub. Please submit an issue there. If you prefer, you can also send us an e-mail.
+Can I support your work?
+|
+Privacy Policy
+© Copyright 2025 Beem Development, all rights reserved.

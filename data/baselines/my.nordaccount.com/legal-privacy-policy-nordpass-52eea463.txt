@@ -1,0 +1,70 @@
+url: https://my.nordaccount.com/legal/privacy-policy/nordpass/
+method: browser
+saved: 2026-11-19
+
+Skip to main content
+Terms of service
+General
+Subscription Terms
+NordVPN
+NordPass
+NordLocker
+HangUp
+NordLabs
+Privacy Policy
+General
+NordVPN
+NordPass
+NordLocker
+HangUp
+NordLabs
+NordBot
+Cookie policy
+Reports
+DSA Transparency Report
+NordPass Privacy Notice
+Last updated: October 14, 2026
+GENERAL REMARKS
+The Privacy Policy describes the privacy practices of Nord’s Websites, applications, and Services which also apply to the NordPass product. Nevertheless, provision of Services related to NordPass (“NordPass Services”) involves processing of additional personal data. More details are provided below.
+NordPass has no technical means to access your encrypted passwords, secure notes, or other items stored in your vaults because we built NordPass based on zero-knowledge architecture. Zero-knowledge architecture means that only you know what is stored in your vault. In cryptography, it refers to being able to prove you know something without revealing what that is. As such, our zero-knowledge password manager keeps the proof that you have the key, but not the key itself, making it very safe. No one else can see your passwords, credit card details, or notes. We also don’t have your Master Password, so your encrypted data will stay secure even if someone breaches our servers.
+ADDITIONAL PERSONAL DATA PROCESSED WHEN PROVIDING NORDPASS SERVICES
+NordPass Services are provided through dedicated applications for mobile, desktop, and browser extensions (“Applications”). To ensure that these Applications work correctly, we automatically collect certain technical information required to provide you with the Services, keep them secure, maintain compatibility with a device, apply required settings, and deliver important Service-related notifications.
+By default, we collect only what is necessary for the operation of Applications, the provision of our Services and providing technical support for you. The collection of analytics and advertising data is optional and may be managed by you. Analytics data, if enabled, helps us know whether the Services work as intended, to identify problems related to our Application, as well as to improve the Application. Advertising data, if enabled, provides us with a small amount of additional information (such as device-level language preferences or features in use) which is processed to optimize our marketing campaigns.
+The data collected through Applications may include:
+Autofill diagnostics. We collect aggregated and anonymized data on your visited web addresses and autofilled fields. This helps us improve our autofill feature, as well as quickly identify and patch problems related to its performance.
+Device and system information, including basic device characteristics (such as device's country, city, or time zone), general operating system details, browser type and version (when applicable), device type, unique device identifier, session information.
+Application information, including Application source, name, version, and selected settings.
+Account information: user identifier, Subscription type.
+Event and Application usage information, including event time, which application sent the event, success or failure indicator (such as whether a login or registration attempt was completed), which features were accessed as well as various interactions with other features within our Applications (such as the number of items stored, when and how a password was created (e.g., imported, autosaved, created manually), the strength of your passwords in percentage, etc.).
+Diagnostic and performance information, including crash logs and error events.
+Device identifiers provided by the operating system. If you consent to us collecting advertising data for Applications, we may access a resettable device identifier made available by the operating system. This identifier is only used to measure the effectiveness of our own marketing campaigns - it is not used for targeted advertising or profiling. It can be reset at any time (Managing your Google Settings) and is not linked to any other data collected through the Application.
+While we primarily rely on our internal tools to provide Services, we may use third-party service providers to provide specific features of our Applications.
+When third-party providers are needed to provide essential Application features or service-related notifications, they act as our data processors and process only the data required for a specific purpose. As set out in our Privacy Policy, third-party providers for analytics or advertising purposes are engaged only when you provide your consent.
+You can check which specific providers your Application uses for analytics or advertising purposes in the “Privacy Preferences” section of the Application settings.
+OTHER SERVICES/FEATURES BY NORDPASS
+Profile photo. We process your photo if you provide it on a voluntary basis by uploading it on your NordPass Account. Please note that the photo available on your Account will be visible to other users of NordPass with whom you share and/or who share the items with you.
+Password History. This feature allows you to keep a record of the last ten (10) password changes made to an item in your NordPass vault, copy and restore the previous passwords and see who and when made the change. If a user with full administrative rights of a shared item overwrites your password, you will be able to see who and when did it and, if you deem it necessary, to restore the previous password. Only the owner of the item has access to a password history tab.
+The data that we process is the last ten (10) passwords created on an item, the timestamp of when the event happened, and the email address of a user who changed the password (applicable in cases when the password is shared with a user with full administrative rights). We use the aforementioned information to enable the item owner to have access to password history, to facilitate copying or restoring previous passwords and inform the owner of the item if a shared password was overwritten, and identify who and when did it.
+Password Health and Exposed Passwords. This feature gives users a way of checking whether passwords they use or plan to use are weak, easy-to-hack, reused in multiple accounts, old, or have been exposed in the past, and, in turn, which passwords should be changed to strong and secure ones.
+Password Health feature includes Exposed Passwords functionality, which checks both your saved and new passwords against a database of publicly known, compromised passwords to see if any match those previously exposed in data breaches. If a compromised password is found, you will receive a recommendation to update it to a stronger, more secure alternative. By enabling Password Health, you authorize us to share your hashed partial passwords with our trusted third-party service provider. These hashed passwords will be compared against breach databases, ensuring that no actual password data is shared or stored externally during the process.
+Please note that even when you choose to use the Password Health feature, NordPass does not have the technical ability to access the data stored in the NordPass vault or Password Health results shown on your device. These always remain encrypted and are only accessible to you.
+Data Breach Scanner. This feature enables you to track if any of your monitored assets (verified email address(es),credit card(s) or other assets you have added to monitoring) have been involved in any personal data breaches identified by our third-party service provider. By using Data Breach Scanner, you authorize us to share your hashed monitored assets with our third-party service provider. Should any of your monitored assets be breached, NordPass will inform you about the breach with an in-app notification and via email. Your Account email address is added to the Scanner automatically, and you may add your other assets to the monitoring list. You have the option to remove any asset from the monitoring list at any time.
+Please note that when you use the Data Breach Scanner, NordPass has no technical means to access your encrypted items stored in your NordPass vault. These always remain encrypted and are never transferred or visible to anyone but you.
+Email Masking & Personal Identity Masking. This feature allows you to create a masked email to keep your actual email address private, reducing the likelihood of receiving spam emails and helping to protect your data from data brokers. Personal Identity Masking feature builds on this and allows you to generate non-real contact details, including an Email Mask, for cases where real identity disclosure is unwanted.
+When you use an Email Mask, we will process your email address. You must verify your email address to use this service. Emails received through Email Masking, including the sender and recipient's email server IP address, sender's email address, recipient's email address, and timestamps, are deleted as soon as they are forwarded to your email address. We use a trusted third-party service provider to manage this service.
+TERM FOR STORING PERSONAL DATA
+NordPass stores personal data of active user Accounts until your Account is active unless we are asked to delete it. This is done to not lose the encrypted data present in your Account. However, once your Account is no longer active, we may delete it according to our Terms.
+Any Scanner generated results related to data which was exposed are wiped out as soon as you close the Scanner window.
+Back to general Privacy Policy
+Table of contents
+General remarks
+Additional personal data processed when providing NordPass services
+Other services/features by NordPass
+Term for storing personal data
+English
+Support center
+Terms of service
+(opens in a new tab)
+Privacy policy
+(opens in a new tab)
+© 2026 Nord Security. All rights reserved.

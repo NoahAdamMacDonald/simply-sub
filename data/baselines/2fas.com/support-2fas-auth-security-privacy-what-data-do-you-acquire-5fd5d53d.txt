@@ -1,0 +1,66 @@
+url: https://2fas.com/support/2fas-auth-security-privacy/what-data-do-you-acquire/
+method: fetch
+saved: 2026-11-19
+
+What data do you acquire? | 2FAS
+MENU
+HomeHome
+Password ManagerPassword Manager 2FAS Pass Mobile App
+2FAS Pass Browser Extension
+2FAS Share
+Pricing
+AuthenticatorAuthenticator 2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Donate
+About usAbout
+Help CenterHelp Center
+Get the appsGet the apps
+Back to list What data do you acquire?
+We care about the privacy of our users. Therefore, we’ve removed all analytics from our app. However, we’ve decided to stick with Crashlytics (anonymous crash log from Google) – this tool allows us to react instantly if there are any major issues with our app. But, as we stated before, we value our users’ privacy, so there’s an easy option for an opt-out from crash logs with one toggle in the app in the ‘About’ section of the Settings!
+Additionally, in case of problems with the application, we may ask you to send anonymous logs regarding the operation of the application. Then it is up to you to decide whether you will pass them on to us.
+However, we never send or collect your keys, tokens, passwords, PINs, or other private and personal data.
+Was this article helpful?
+That's great that you find our answer helpful! Did you know that you can support us by donating to 2FAS?
+Sorry to hear that our answer was not helpful. You can always contact us and our community on the 2FAS Discord Server!
+About us
+Press kit
+Terms of Service
+Privacy Policy
+Open-source Licenses
+Site settings
+Authenticator
+Products
+2FAS Auth Mobile App
+2FAS Auth Browser Extension
+Resources
+Donations
+How to enable 2FA
+Quick Browser Extension Check
+Check generated token
+Your branding
+Your 2FA guide
+Open-source Licenses
+Comparisons
+Google Authenticator vs. 2FAS Auth
+Authy vs. 2FAS Auth
+Microsoft Authenticator vs. 2FAS Auth
+Duo vs. 2FAS Auth
+Policies
+2FAS Auth Privacy Policy
+2FAS Auth EULA
+Password manager
+Products
+2FAS Pass Mobile App
+2FAS Pass Browser Extension
+Resources
+2FAS Pass Pricing
+2FAS Pass Recovery
+Open-source Licenses
+Policies
+2FAS Pass Privacy Policy
+2FAS Pass EULA
+Support
+Help Center
+Support
+Connect
+© 2026 Two Factor Authentication Service, Inc. All rights reserved.

@@ -1,0 +1,177 @@
+url: https://ente.com/auth
+method: browser
+saved: 2026-11-19
+
+Blog
+About
+Help
+30k
+Setup Auth
+Ente Auth
+Open source 2FA authenticator, with end-to-end encrypted backups
+Setup Auth
+Secure Backups
+Auth provides end-to-end encrypted cloud backups so you don't have to worry about losing your tokens. Our cryptography has been externally audited.
+Cross platform sync
+Auth has an app for every platform. Mobile, desktop and web. Your codes sync across all your devices, end-to-end encrypted.
+and more!
+Next code
+Save time by viewing your next code
+Ente
+photos@ente.com
+475 074
+next
+456 789
+Icons
+Easily identify your tokens by their icons
+Ente
+photos@ente.com
+475 074
+next
+456 789
+Stripe
+auth@ente.com
+475 074
+next
+456 789
+Github
+auth@ente.com
+475 074
+next
+456 789
+Cloudfare
+auth@ente.com
+475 074
+next
+456 789
+Share
+Share codes with your team securely
+auth.ente.com/share?data=encry...
+475 074
+next
+456 789
+Add notes
+Save important information about your codes
+Ente
+photos@ente.com
+475 074
+next
+456 789
+Notes
+Primary photos account
+Tag
+Organize with ease
+Ente
+photos@ente.com
+475 074
+next
+456 789
+Cloudfare
+auth@ente.com
+475 074
+next
+456 789
+Github
+auth@ente.com
+475 074
+next
+456 789
+Stripe
+auth@ente.com
+475 074
+next
+456 789
+Pin
+Favorite services to the top
+Cloudfare
+auth@ente.com
+475 074
+next
+456 789
+Ente
+photos@ente.com
+475 074
+next
+456 789
+Stripe
+auth@ente.com
+475 074
+next
+456 789
+Search
+Don't scroll
+Ente
+photos@ente.com
+475 074
+next
+456 789
+Stripe
+auth@ente.com
+475 074
+next
+456 789
+Github
+auth@ente.com
+475 074
+next
+456 789
+Use without backups
+Offline mode
+Use without an account
+Download Auth
+Available everywhere
+App Store
+Play Store
+F-Droid
+Web
+MacOS
+Linux
+Windows
+Import your tokens
+You can add tokens to Auth by following one of these methods
+Scan the QR code
+Manually enter the 2FA secret
+Bulk import from other 2FA apps
+Protect your accounts
+Scan the QR code to get started
+Free and open source
+Ente is fully open source. You can export and import your data. No lockins.
+ente /
+ente
+Fully open source, end-to-end encrypted cloud
+20k+ stars
+AGPL-3.0
+Compare Auth apps →
+Company
+About
+News
+Jobs
+Media Kit
+Products
+Photos
+Auth
+Locker
+Ensu
+Explore
+Friends
+Toys
+Shop
+Talks
+Open Source
+Mobile
+Web
+Desktop
+CLI
+Technology
+Encryption
+Replication
+Machine learning
+Compare
+Google Photos vs Ente
+Apple Photos vs Ente
+Dropbox vs Ente
+Contact
+Help
+Articles
+Privacy
+Terms

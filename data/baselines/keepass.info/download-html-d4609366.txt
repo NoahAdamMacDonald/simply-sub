@@ -1,0 +1,198 @@
+url: https://keepass.info/download.html
+method: fetch
+saved: 2026-11-19
+
+Downloads - KeePass
+KeePass
+Password Safe
+Home
+Home & News
+Forums
+Feature List
+Screenshots
+Getting KeePass
+Downloads
+Translations
+Plugins / Ext.
+Information / WWW
+Help
+FAQ
+Security
+Awards
+Links
+Support KeePass
+Donate
+Getting KeePass - Downloads
+Here you can download KeePass:
+KeePass 2.62
+Installer for Windows (2.62):
+Download Now
+KeePass-2.62-Setup.exe
+Download the EXE file above, run it and follow the steps of the installation program.
+You need local installation rights (use the Portable version on the right
+if you do not have local installation rights).
+Portable (2.62):
+Download Now
+KeePass-2.62.zip
+Download the ZIP package above and unpack it to your favorite location (USB stick, ...).
+KeePass runs without any additional installation and won't store any settings outside
+the application directory.
+Supported operating systems: Windows 7 / 8 / 10 / 11,
+Mono (Linux, MacOS, BSD, ...).
+Supported architectures: x86, x64, ARM64 (all three
+natively).
+Windows SmartScreen Warning.
+The warning can be ignored. For details, see the
+FAQ.
+KeePass does not contain any malware; here are reports
+by more than 60 anti-virus programs:
+VirusTotal Scan (for 2.62),
+Jotti Scan (for 2.62).
+KeePass 1.44
+Installer for Windows (1.44):
+Download Now
+KeePass-1.44-Setup.exe
+Download the EXE file above, run it and follow the steps of the installation program.
+You need local installation rights (use the Portable version on the right
+if you do not have local installation rights).
+Portable (1.44):
+Download Now
+KeePass-1.44.zip
+Download the ZIP package above and unpack it to your favorite location (USB stick, ...).
+KeePass runs without any additional installation and won't store any settings outside
+the application directory.
+Supported operating systems: Windows 7 / 8 / 10 / 11, Wine.
+Supported architectures: x86 (also runs on x64 and ARM64 via built-in
+compatibility layer / emulation).
+Windows SmartScreen Warning.
+The warning can be ignored. For details, see the
+FAQ.
+KeePass does not contain any malware; here are reports
+by more than 60 anti-virus programs:
+VirusTotal Scan (for 1.44),
+Jotti Scan (for 1.44).
+Unsure which edition (1.x or 2.x) to choose? See the
+Edition Comparison.
+If in doubt, use KeePass 2.x.
+Other downloads and links:
+Contributed/Unofficial KeePass Ports
+KeePassDroid
+(for Android)
+KeePass2Android
+(for Android)
+KeePassDX
+(for Android)
+KeepShare
+(for Android)
+JKeePass
+(for Android)
+KeeStone
+(for Android)
+OneKeePass
+(for Android / iPhone / iPad)
+Strongbox
+(for iPhone / iPad / MacOS)
+KeePassium
+(for iPhone / iPad / MacOS)
+KeeForge
+(for iPhone / iPad / MacOS)
+PassDrop 2
+(for iPhone / iPad / MacOS)
+KyPass
+(for iPhone / iPad)
+ModernKeePass
+(for Windows 8 Tablet and later)
+KeePassPPC & KeePassSD
+(for PocketPC / Smart Devices )
+KeePassBB
+(for BlackBerry)
+KeePassMobile
+(for J2ME / mobile phones)
+KeePassJ2ME
+(for J2ME / mobile phones)
+OwnKeePass
+(for Sailfish OS)
+KeePassHO
+(for HarmonyOS)
+KeeWeb
+(for web browsers, also offline)
+Kee Vault
+(for web browsers)
+QuickKee
+(for web browsers, Chrome extension)
+KeePass4Web
+(for web servers, serving to front-ends)
+Export to Keyring
+(for Palm OS)
+KPCLI
+(command line interface, see also
+KPScript)
+KeePass 2.x runs on Linux and MacOS (see the help),
+but there are also alternatives:
+GNOME Secrets
+(for Linux)
+KeeStone
+(for Linux)
+OneKeePass
+(for Linux / MacOS)
+KeePassX
+(for Linux / MacOS, discontinued)
+KeePassXC
+(for Linux / MacOS)
+MacPass
+(for MacOS)
+KyPass Companion
+(for MacOS)
+For developers:
+KeePassJava2
+(library for Java)
+Icons:
+No trailing icon = compatible with KeePass 2.x and 1.x.
+= compatible with KeePass 2.x only.
+= compatible with KeePass 1.x only.
+Others:
+"KeePass" is the password manager developed by Dominik Reichl.
+Any software by other developers that is using the name "KeePass"
+in the software's name without any direct non-numeric/non-special prefix/suffix
+is abusing the name "KeePass" and we do not recommend such software.
+For example, "KeePassDroid" is ok, but "KeePass Droid" is not.
+Contributed/Unofficial KeePass Packages
+KeePass 2.x for Debian/Ubuntu Linux
+KeePass 2.x for Fedora/RHEL/Rocky/Alma Linux
+KeePass 2.x for OpenSUSE Linux
+KeePass 2.x for Gentoo Linux
+KeePass 2.x for Arch Linux
+KeePass 2.x for MacOS
+KeePass 2.x for FreeBSD
+KeePass 2.x for Other Unix-like Systems
+KeePass 2.x for PortableApps.com Platform
+KeePass 1.x for PortableApps.com Platform
+KeePass 2.x for SyMenu
+KeePass 1.x for SyMenu
+KeePass 2.x for U3 Devices
+KeePass 1.x for U3 Devices
+KeePass 1.x for Preinstalled Environments (PE)
+KeePass 2.x for Windows Package Manager (WinGet)
+KeePass 2.x for Turbo
+Other Downloads and Resources
+Source code packages, containing everything you need to build KeePass yourself
+(source code, resources, ...):
+KeePass 2.62 Source Code Package
+KeePass 1.44 Source Code Package
+MSI packages (for network administrators only; regular users should use the
+installer or the portable ZIP package ):
+KeePass 2.62 MSI Package
+KeePass 1.44 MSI Package
+Integrity: Hashes and OpenPGP Signatures
+Integrity: .NET Public Keys
+Downloads Archive (Old KeePass Releases, ...)
+Alternative Download Sites
+Copyright © 2003-2026 Dominik Reichl.
+[Legal Contact / Imprint]
+[Terms & Privacy]
+[Acknowledgements]
+[Donate]
+Plugins and Extensions
+Useful little plugins and extensions that
+provide additional functionality (import /
+export, database backup, ...).

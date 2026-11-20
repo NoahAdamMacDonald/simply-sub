@@ -1,0 +1,188 @@
+url: https://support.1password.com/manage-subscription/
+method: fetch
+saved: 2026-11-19
+
+Manage your 1Password subscription on 1Password.com | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Billing
+Subscription management
+Manage your 1Password subscription on 1Password.com
+[billing]
+Manage your 1Password subscription on 1Password.com You can manage and cancel your subscription, add payment methods, and view invoices on 1Password.com.
+BillingSubscription management Help
+If you started your subscription using an in-app purchase on your Mac, iPhone, or iPad, you’ll manage your subscription with Apple instead.
+If you started your subscription using an in-app purchase on your Android device, you’ll manage your subscription with Google instead.
+Manage subscription
+Cancel subscription
+Update a payment method
+View invoices
+Manage your subscription
+To manage your 1Password subscription, sign in to your account on 1Password.com, then select Billing in the sidebar.
+On the Billing page, you’ll see information about your:
+Subscription status and plan
+Billing frequency
+Subscription renewal date
+Payment method
+Invoices
+If you don’t see the Billing page and you’re part of a 1Password family or team account, you may not have permission to manage billing. You can manage the subscription for your family or team account if you’re a family organizer, team owner, or part of a group with the Manage Billing permission.
+Start your subscription
+You can start your subscription at any time, including when you have a frozen account. To start your subscription, select Billing in the sidebar of your account on 1Password.com and choose the plan you want.
+If your account is on: Pricing is in:
+1Password.com 🇺🇸 USD
+1Password.ca 🇨🇦 CAD
+1Password.eu 🇪🇺 EUR
+You can pay for your subscription with Visa, Mastercard, American Express, Discover, Diners Club, UnionPay, or JCB. If your account is on 1Password.com, you can also pay with a U.S. bank account or a 1Password Gift Card. Your 1Password subscription will renew automatically.
+Taxes are collected where required by law and are listed on your invoice.
+Note
+1Password is based in Canada. Some banks and credit card companies may charge a small foreign transaction fee to non-Canadian customers, regardless of the region of your 1Password account. You can use a card that doesn’t charge for foreign transactions, or contact your bank or credit card company for more information about their fee policies.
+Change your subscription frequency
+Important
+When you change your billing frequency, your subscription price will update to the current rate listed on the pricing page. If you’re on an older pricing plan, you won’t be able to keep your previous rate after changing your billing frequency.
+You can change your subscription frequency to monthly or annual billing at any time. To change an active subscription:
+Sign in to your account on 1Password.com.
+Select Billing in the sidebar, then select Billing Settings in the “Upcoming invoice” section.
+Choose monthly or annual billing, then select Save Settings.
+Learn more about 1Password monthly and annual subscription billing.
+Change your account type
+If you need to change your account type, you can. For example, you can upgrade from an individual account to a family account.
+Learn how to change your 1Password account type.
+Cancel your subscription
+To cancel an active subscription:
+Sign in to your account on 1Password.com.
+Select Billing in the sidebar.
+Select Cancel subscription and follow the onscreen instructions. You may need to scroll down to see this button.
+Your canceled subscription will remain active until the end of the current billing period, then your account will be frozen. You can start your subscription again at any time.
+Learn more about 1Password subscription billing when you cancel your subscription.
+Add, remove, or update a payment method
+An active subscription is required to view and make changes to your payment methods.
+To add a payment method:
+Sign in to your account on 1Password.com.
+Select Billing in the sidebar, then select Add payment method.
+Enter your payment method details, then select Add payment.
+To automatically use the payment method for future payments, select it.
+To update billing details for your account, select the pen beside your address.
+To remove a payment method, select the ellipsis , then select Delete.
+View and manage invoices
+1Password generates invoices any time you make a change that affects your billing, like when you:
+Start or renew your monthly or yearly subscription.
+Add or remove people from your account.
+Change your subscription frequency.
+Change your account type.
+Invoices are emailed as PDF attachments and can also be accessed on 1Password.com.
+View your invoices as PDFs
+By default, 1Password emails your invoices as PDF attachments to the family organizer or team owner who created the account. If you need your invoices emailed to someone else, you can change the invoice recipients in your account.
+To view your invoice, open the email you received from 1Password. Your invoice details are included in the email message and attached to the email as a PDF document. You can download, print, or share the PDF as needed.
+View your invoices on 1Password.com
+To view your next invoice, select Billing in the sidebar of your account on 1Password.com. You’ll see your upcoming invoice in the “Upcoming invoice” section.
+To view previous invoices, select View Invoices under “Upcoming invoice” or select the Invoices tab at the top of the billing page. You’ll see a list of all your invoices.
+To print or email an invoice, select View Invoice for the one you want, then select Download or Email to me.
+Change or add invoice email addresses
+You can change who receives invoices for your account or add email addresses for anyone else who should receive them. Invoice recipients aren’t required to be part of your 1Password account.
+Sign in to your account on 1Password.com.
+Select Billing in the sidebar, then select the Invoices tab.
+Select Invoice Settings, then enter the email address(es) you want future invoices sent to in the Invoice Recipients section, then select Save Settings.
+Invoices will now be sent as PDF attachments to the email address(es) you added. This makes it easier to share your 1Password invoices with the people who help manage your payment records, like your bookkeeper, accountant, or finance department.
+To stop sending your 1Password invoices to someone, remove their email address from the list of recipients in the Invoice Settings.
+Customize your invoice
+You can customize your invoices to include additional information, like your company name or billing address:
+Sign in to your account on 1Password.com.
+Select Billing in the sidebar, then select the Invoices tab. If you're using 1Password for MSPs, learn how to manage invoices.
+Select Invoice Settings, then enter the details you want to add in the Invoice Customization section, then select Save Settings. If you don’t see the Invoice Customization section, make sure your subscription is active.
+Your information will be applied to all invoices from now on. You can even view a previous invoice to save a copy of it with your new details.
+Get help
+If your last payment couldn’t be completed, you won’t see Billing Settings. To reactivate your subscription, add a new payment method. Then you can remove expired payment methods, adjust your subscription, and make other changes. Or contact 1Password Support to cancel your subscription.
+If you canceled your subscription, and you want to remove your information from the 1Password service, you can delete your account on 1Password.com.
+If you have an issue when you try to add or update your payment method on 1Password.com, such as the credit card fields not appearing, learn how to troubleshoot the issue.
+Learn more
+About 1Password subscription billing
+About family organizers in 1Password Families
+Use the built-in groups in your organization
+Use custom groups in 1Password Business
+1Password refund policy
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: October 21, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

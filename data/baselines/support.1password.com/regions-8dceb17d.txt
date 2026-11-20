@@ -1,0 +1,127 @@
+url: https://support.1password.com/regions/
+method: fetch
+saved: 2026-11-19
+
+1Password in your region | 1Password Support Skip to main content
+Your browser is out of date. For the best experience, upgrade your browser now.
+Menu Home
+Tour
+Families
+Business
+Developers
+Pricing
+Security
+Download
+Support
+Blog
+Sign in
+Sign in
+Get started free
+1Password Support
+Popular searches
+Export
+Forgot password
+Virtual cards
+Secret Key
+Passkeys
+Emergency Kit
+Two-factor authentication
+Change password
+On this page
+Using 1Password
+Learn more
+1Password in your region
+1Password in your region 1Password was designed with you in mind. You can choose where your data is hosted and which currency you pay in.
+Using 1PasswordLearn more Choose your region
+Change your region
+Choose your region
+You can create your 1Password account in one of three different regions. The region you choose determines:
+the currency you’re billed in
+where your secure data is hosted
+Regardless of your region, 1Password staff can’t access your saved logins or other items.
+Accounts on: Billed in: Secure data hosted in:
+1Password.com 🇺🇸 USD United States
+1Password.ca 🇨🇦 CAD Canada
+1Password.eu 🇪🇺 EUR European Union
+1Password is GDPR compliant.
+If you’re new to 1Password, learn how to get started. If you’re upgrading to a 1Password membership, learn how to migrate your existing 1Password data to a 1Password account.
+Change your region
+Your data stays in the region you choose. It is never automatically moved from one region to another. To change from one region to another, sign up for a new 1Password account in a different region. Then migrate your data:
+Sign in to your new account.
+Copy your items from the original account to your new account. If you have multiple vaults, make sure to copy your items from all of them. Learn more about limitations when copying items from one region to another.
+Sign out of the original account on your device(s).
+If you share 1Password with your family or team, invite them to the new account and make sure they have access to the same vaults as before. Then each person will need to migrate their own personal data by following the same steps. Shared data that has already been migrated doesn’t need to be copied again.
+After the migration, you can delete the original account.
+If you have any time remaining on your original membership, contact 1Password Support.
+Appendix: Item limitations when changing regions
+Files can’t be copied across regions. To copy a Document item, download the file to your computer, then upload it to the new account.
+To copy an item with an attached file, download the file to your computer, remove the attached file from the item, copy the item to the new account, and add the file attachment back to the copied item.
+Items with custom icons can’t be copied across regions. Edit the item to remove the custom icon, copy the item to the new account, and add the custom icon back to the copied item.
+Items with related item links can be copied, but you’ll need to relink items after you copy them.
+Learn more
+1Password Privacy Notice
+About 1Password subscription billing
+Manage your 1Password subscription
+Was this article helpful?
+Yes, thanks!
+Not really
+Glad to hear it! If you have anything you'd like to add, feel free to contact us.
+Sorry to hear that. Please contact us if you'd like to provide more details.
+Published: October 6, 2026
+1Password
+Pricing
+Families
+Teams
+Business
+Small Business
+Enterprise
+Watchtower
+Developers
+Learn more
+Tour
+Password Generator
+Username Generator
+Security
+Privacy
+Customers
+Password Manager
+Resources
+Webinars
+1Password University
+Secrets Management
+Support
+Help & Documentation
+Community
+Contact Support
+Locations
+Europe
+Canada
+United States
+Company
+About
+Partnerships
+Affiliate
+Press
+Gift Cards
+We’re Hiring!
+Podcast
+Newsletter
+Legal Center
+Downloads
+macOS
+iOS
+Windows
+Android
+Linux
+Web Browser
+Command Line
+Browser extensions
+© 2026 1Password. All rights reserved.
+Terms of Service
+- Privacy Policy
+- Cookie Policy
+- Accessibility
+- Your Privacy Choices
+4711 Yonge St, 10th Floor, Toronto, Ontario, M2N 6K8, Canada.
+Find us on
+1Password on Mastodon

@@ -1,0 +1,353 @@
+url: https://keepass.info/help/kb/sec_issues.html
+method: fetch
+saved: 2026-11-19
+
+Security Issues - KeePass
+KeePass Help Center
+KeePass Home |
+Downloads |
+Translations |
+Plugins |
+Donate
+Help Center Home |
+Forums |
+Awards |
+Links
+KeePass Help Center
+Help Center Home
+Forums
+First Steps Tutorial
+Acknowledgements
+KeePass 1.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Error Codes
+License
+KeePass 2.x
+Installation / Portability
+Translations
+Plugins
+Compatibility
+Application Policy
+Auto-Type Obfuscation
+Synchronization
+Triggers
+XML Replace
+User Interface:
+Database Settings
+Entry
+Interface Options
+Load/Save From/To URL
+License
+Features
+Accessibility
+Auto-Type
+Command Line Options
+Configuration
+Field References
+Import / Export
+Integration
+Master Key
+Multiple Users
+Password Generator
+Placeholders
+Repair Databases
+Search
+Secure Edit Controls
+Security
+TAN Support
+URL Field
+Using Stored Passwords
+FAQs and Info
+Administrative FAQ
+Technical FAQ
+Additional FAQ
+Backup
+Development
+Customization (1.x)
+Customization (2.x)
+Scripting (2.x)
+Creating Plugins (1.x)
+Creating Plugins (2.x)
+Key Providers (1.x)
+Key Providers (2.x)
+KDBX File Format
+Support KeePass
+Donate
+Security Issues
+Potential security issues and their status/analysis.
+This page lists various potential security issues that have been reported
+and their status/analysis (whether the claims are valid, whether an issue is
+fixed, etc.).
+Header Authentication
+Header Field RAM Allocation (CVE-2026-86776)
+MemUtil.ArraysEqual
+Susceptible to Timing Attack
+KeeFarce
+Automatic Update Vulnerability
+Write Access to Configuration File
+Exporting CSV Files With Application-Specific Expressions
+Auto-Type Window/Sequence Matching
+.NET Framework Version
+Sensitive Data in Fedora System Log (CVE-2022-0725)
+Header Authentication
+Problem.
+In their paper 'On The Security of Password Manager Database Formats',
+P. Gasti and K. B. Rasmussen
+have presented attacks on the KDB and KDBX file formats based on
+unauthenticated header data.
+For KDB, this issue has allowed silent data removal attacks.
+For KDBX, the issue has allowed silent data corruption attacks.
+Both were minor security issues (confidentiality was not compromised).
+Status.
+Header data authentication has been introduced for both KDB and KDBX in KeePass
+1.24 and
+2.20, in order to prevent the attacks.
+See also the release notes
+'KeePass 1.24 and 2.20 Header Authentication'.
+P. Gasti and K. B. Rasmussen published their paper in a
+responsible disclosure process, and the defenses in KeePass have been
+implemented before the issues were presented to the public.
+Header Field RAM Allocation (CVE-2026-86776)
+When reading a KDBX file, KeePass may allocate about 2 GB of RAM (temporarily).
+We do not consider this to be a problem. Especially, it is not a security issue.
+About 2 GB is the intended maximum for the size of a header field value (we
+do not want to limit such values unnecessarily; for example, the header may
+contain a lot of information in custom data fields, which can be used by plugins
+and ports).
+This is documented in the KDBX file format specification,
+and this is what KeePass checks when reading a KDBX file (by checking whether
+the size of the header field value as Int32 is negative), i.e. KeePass does
+validate it (CVE-2026-86776 incorrectly claims the opposite).
+Allocating 2 GB of RAM (temporarily) is no problem on a desktop PC nowadays
+(KeePass is not a server application). Many web browsers easily need 1 GB of RAM
+and many other applications (e.g. games) even more. In our case, the memory is
+not blocked; the garbage collector of the framework frees it after a while or when
+necessary. There is no denial of service possible and KeePass does not crash.
+Trying to avoid the allocation of a large amount of RAM in this case by
+processing the data incrementally (using multiple buffers) would increase the
+complexity, reduce the performance and require more memory in certain normal
+cases (when multiple buffers are used). In our opinion, these disadvantages
+outweigh the advantages.
+The allocation size also cannot really be limited by the stream size, because
+the stream size is often unknown (e.g. when downloading the KDBX file from a
+server that does not report the size or in certain cloud storage scenarios).
+MemUtil.ArraysEqual Susceptible to Timing Attack
+Problem.
+It has been reported that the method MemUtil.ArraysEqual
+is susceptible to a timing side-channel attack.
+Analysis.
+The time required by MemUtil.ArraysEqual indeed depends
+on the data, but it is irrelevant.
+In a timing side-channel attack, an attacker analyzes the time that a
+cryptographic system requires to perform some operation and tries to
+deduce secret information from it.
+For KeePass, this is not applicable.
+KeePass is a desktop application and does not feature any server capabilities
+(especially, no automatic database opening can be triggered externally).
+If there is spyware on the PC that KeePass is running on, there are
+far more easy and efficient attacks for the spyware to steal passwords
+from KeePass than a timing side-channel attack
+(see also the section 'Specialized Spyware'
+on the security page).
+KeeFarce
+KeeFarce is not an attack (and the developer of the tool also nowhere
+declares it as attack or threat).
+KeeFarce extracts information of a running KeePass process (with an open database)
+using a rather complicated method (using DLL injection).
+There are much simpler ways to achieve that.
+For example, a tool could send simulated keypresses to the KeePass window
+to export the data to a file (e.g. press Alt+F,
+E, Tab,
+Space, ...).
+Before that, a screenshot could be created and displayed above all windows in
+order to hide this procedure (and a user probably would not notice a screen
+freeze of one second).
+Alternatively, imagine a tool that captures your master password (keylogger)
+and your database file.
+The actual problem here is running specialized spyware
+(as the same user and with the same rights, like KeeFarce assumes).
+If you are doing this, everything is over.
+An application cannot protect itself in such a case;
+all modern PC operating systems (Windows, Linux, ...) intentionally
+allow applications to manipulate other applications on the same level.
+See also the section
+'Specialized Spyware'
+on the security page.
+Protections against generic (non-specialized) spyware can sometimes be
+implemented. For example, Two-Channel
+Auto-Type Obfuscation (TCATO) is a way to protect auto-typed
+data from keyloggers, the secure desktop protects
+your master password from some keyloggers,
+secure edit controls protect against
+password control spies, and so on. These protections only work against
+specific classes of generic spyware. For example, while TCATO protects against
+keyloggers, a spyware that is both a keylogger and a clipboard spy at the same
+time renders TCATO useless. Again, the actual problem is running spyware,
+not any insufficient protections. There is no protection against a spyware
+monitoring everything and allowed to do everything, except not running the
+spyware in the first place.
+Protections like TCATO might save you in the case of running some
+non-advanced spyware, but they are not a license for running any arbitrary spyware.
+Neither KeePass nor any other password manager can magically run
+securely in a spyware-infected, insecure environment.
+Users still are responsible for the security of their PC.
+Do use anti-virus software, keep security-critical software up-to-date,
+use a proper firewall, only run software from trusted sources,
+do not open unknown e-mail attachments, etc.
+Automatic Update Vulnerability
+There have been some articles about automatic KeePass updates being vulnerable.
+This section clarifies the situation and its resolution.
+First of all, we would like to note that KeePass cannot update itself.
+KeePass does support checking for updates (optional; by downloading a version
+information file, comparing the available with the installed version
+number, and displaying a notification if necessary).
+However, it neither downloads nor installs any new version automatically.
+Users have to do this manually.
+KeePass can be downloaded from many servers (SourceForge with its
+many mirror servers, FossHub, etc.).
+All KeePass files containing executable code (files with the extension
+'exe' or 'dll') are digitally signed using Authenticode.
+Instructions how to verify the digital signatures can be found in the FAQ:
+'How to verify the digital signatures?'.
+The KeePass website links to SourceForge for downloading KeePass.
+However, even if SourceForge (or the KeePass website)
+is compromised and serves a malicious download,
+users who check the digital signature will notice the attack and
+will not run the malware.
+Note that HTTPS cannot prevent an attack via a compromise of the
+download server; checking the digital signature does.
+The version information file was downloaded from the KeePass website
+over HTTP. Thus, a man in the middle (someone who can intercept
+your connection to the KeePass website) could have
+returned an incorrect version information file, possibly making KeePass
+display a notification that a new KeePass version is available.
+However, the next steps (downloading and installing the new version)
+must be carried out by the user manually, and here users who check the
+digital signature will notice the attack.
+Resolution.
+In order to prevent a man in the middle from making KeePass display
+incorrect version information
+(even though this does not imply a successful attack, see above),
+the version information file is now digitally signed (using RSA-4096 and SHA-512).
+KeePass 2.34 and higher only accept such a digitally signed version information file.
+Furthermore, the version information file is now downloaded over HTTPS.
+Write Access to Configuration File
+An attacker who has write access to the KeePass
+configuration file
+can modify it maliciously.
+This is not really a security vulnerability of KeePass though.
+If the user has installed KeePass using the setup program, the
+configuration file is stored in the user's application data directory
+(in "%APPDATA%\KeePass"), which is within the user profile
+directory ("%USERPROFILE%").
+In this case, having write access to the KeePass configuration file is
+typically equivalent to having write access to the user profile directory.
+Someone who has write access to the user profile directory can
+perform various kinds of attacks.
+For example, the attacker could add malware in the startup folder
+("%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup";
+the malware will run automatically after the next user logon),
+modify desktop shortcuts (in "%USERPROFILE%\Desktop"),
+manipulate the user's registry (file "%USERPROFILE%\NTUSER.DAT"),
+modify configuration files of other applications
+(for instance to make a browser open a malicious website automatically),
+and so on.
+If the user is using the portable version of KeePass,
+the configuration file is stored in the application directory
+(which contains the "KeePass.exe" file).
+In this case, having write access to the KeePass configuration file is
+typically equivalent to having write access to the application directory.
+With this capability, an attacker can for instance simply replace the
+"KeePass.exe" file by some malware.
+In both cases, having write access to the KeePass configuration file
+typically implies that an attacker can actually perform much more
+powerful attacks than modifying the configuration file
+(and these attacks in the end can also affect KeePass, independent
+of a configuration file protection).
+These attacks can only be prevented by keeping the environment secure
+(by using an anti-virus software, a firewall, not opening unknown
+e-mail attachments, etc.).
+KeePass cannot magically run securely in an insecure environment.
+See also:
+Specialized Spyware and
+Enforced Configuration.
+Exporting CSV Files With Application-Specific Expressions
+When exporting data to a CSV file, KeePass encodes certain characters
+(as required by the file format), but it does not filter any expressions
+supported by some other applications (not defined by the generic CSV file format).
+This may result in a certain behavior in such an application.
+For example, when opening an exported CSV file in a spreadsheet application
+(e.g. Microsoft Excel or LibreOffice Calc), this application
+may interpret/evaluate some data as formulas.
+We think that this is not a problem in KeePass, but in the application
+that interprets/evaluates the application-specific expressions
+(which should ask the user whether/how to interpret the CSV file).
+For a detailed explanation, see
+'CSV formula injection'
+on the Google Bug Hunters website.
+Auto-Type Window/Sequence Matching
+The auto-type feature simulates
+keypresses into another application, usually to perform a login.
+A keystroke sequence is associated with a target window via the title
+of the target window (for details, see the auto-type help page).
+An advantage of this approach is that auto-type is compatible with
+almost all applications/windows; almost every window has a title.
+A disadvantage is that window titles are not unique.
+For example, a malicious website can use the same title as a legitimate
+website (which typically results in the browser window titles being the same).
+Thus, the user is responsible for ensuring that the target window is
+legitimate. With regard to association, auto-type's security is the same as
+the security of the clipboard and drag&drop:
+When copying data to the clipboard, the user is responsible for pasting
+the data only into a legitimate target window.
+When dragging data, the user is responsible for dropping
+the data only into a legitimate target window.
+When auto-typing a keystroke sequence, the user is responsible for
+ensuring that the target window is legitimate.
+There of course are other data transfer methods (see the
+plugins page) that support a stronger
+association than via the target window title (and thus are more resistant
+against phishing). However, these either do not have anything to do with
+auto-type (KeeForm,
+Kee, etc.) or work only with specific
+applications (WebAutoType,
+URL in Title Bar, etc.).
+The compatibility with basically all applications/windows is a design goal
+of auto-type.
+We do not think that the clipboard, drag&drop and auto-type are
+security issues.
+Users who worry about transferring data to a malicious application/window
+can use one of the other data transfer methods.
+.NET Framework Version
+For compatibility with as many systems as reasonably possible, KeePass
+is built in such a way that it runs with the .NET Framework 3.5 or higher.
+Nowadays, the .NET Framework 3.5 is old.
+However, the compatibility of KeePass with the .NET Framework 3.5 does
+not mean that KeePass inherits
+problems of the .NET Framework 3.5 when running on a higher version.
+KeePass is built/configured in such a way that it runs with the
+highest version of the .NET Frameworks installed on the PC.
+For example, if you have installed the .NET Frameworks 3.5 and 4.8 (both,
+in parallel) and start KeePass, then it runs with the .NET Framework 4.8.
+Microsoft fully supports the latest version of the .NET Framework
+and keeps it up-to-date automatically via Windows Update.
+Related: 'Is there a 64-bit version?'.
+Sensitive Data in Fedora System Log (CVE-2022-0725)
+On Fedora systems (other Linux systems do not seem to be affected),
+copying data to the clipboard may have resulted in the data to appear
+in the system log ('systemd' journal).
+This issue has been reported as CVE-2022-0725.
+KeePass itself does not (and never did) write any sensitive data to
+a system log. The issue must have been caused by an external component
+(tool, framework or operating system component).
+CVE-2022-0725 incorrectly claims that it would be caused by a flaw in KeePass.
+In order to avoid the issue, KeePass &ge; 2.54 uses a different method
+for copying data to the clipboard.
+Copyright © 2003-2026 Dominik Reichl.
+[Legal Contact / Imprint]
+[Terms & Privacy]
+[Acknowledgements]
+[Donate]

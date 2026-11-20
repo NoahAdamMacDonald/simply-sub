@@ -1,0 +1,622 @@
+url: https://bitwarden.com/help/is-bitwarden-audited/
+method: fetch
+saved: 2026-11-19
+
+Compliance, Audits, and Certifications | Bitwarden
+...
+Log In
+Get Started
+Business Sales
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Business salesGet startedLog In
+Docs Courses
+Security
+DocsCourses
+HomeRelease Notes Account Access Create a Bitwarden Account
+Choose My Server
+My Master Password
+Forgot My Master Password
+Can't Access Two-Step Login
+Log in & Unlock Understand Log in vs. Unlock
+Automatic Logout or Lock
+New Device Login Protection
+Log in to Multiple Accounts
+Use Single Sign-On Log in with SSO
+Add a Trusted Device
+Link SSO
+More Log in & Unlock Methods Log in with Device
+Log in & Unlock with Passkeys
+Synchronized Unlock
+Unlock with Biometrics
+Unlock with PIN
+Two-Step Login Why Use Two-Step Login?
+Set up Two-Step Login Two-Step Login Methods
+Authenticator Two-Step Login
+Email Two-Step Login
+Duo Two-Step Login
+YubiKey OTP Two-Step Login
+Passkey Two-Step Login
+Recovery Code for Two-Step Login
+Can't Access Two-Step Login
+Two-Step Login FAQs
+Emergency Access About Emergency Access
+Add & Manage Trusted Emergency Contacts
+Request & Grant Emergency Access
+Password Manager Password Manager Overview
+Get Started Password Manager Web App
+Password Manager Browser Extensions
+Password Manager Mobile Apps
+Password Manager Desktop Apps
+Your Vault Vault Items Vault Items
+File Attachments
+Custom Fields
+Vault Navigation Search your Vault
+Filter your Vault
+Folders
+Favorites
+Security Tools Integrated Authenticator
+Username & Password Generator
+Password & Generator History
+Vault Health Reports
+Browser Extension Vault Health Reports
+Change At-Risk Passwords
+Master Password Re-Prompt
+Manage Devices
+Appearance Change App Appearance
+Localization
+Sync your Vault
+Client App Settings
+Keyboard Shortcuts
+Autofill Autofill From... Autofill from Browser Extension
+Autosave from Browser Extension
+Autofill from iOS App
+Autofill from Android App
+More Autofill Options Fill Assist
+Autofill Passkeys
+Autofill Cards & Identities
+Autofill Custom Fields
+Autofill Basic Auth Prompts
+Block Autofill on Specific Sites
+Block Autosave on Specific Sites
+Troubleshoot Autofill Form URIs for Autofill
+Deactivate My Browser's Built-in Password Manager
+Troubleshoot Android Autofill
+Autofill FAQs
+Import & Export Import to your Vault or Collections
+Import Guides Import from LastPass
+Import from 1Password
+Import from Keeper
+Import from Dashlane
+Import from Chrome, Edge, & Chromium Browsers
+Import from macOS & Safari
+Import from Firefox
+Import from KeePass
+Import from Password Safe
+Import from Myki
+Export Vault Data
+Encrypted Exports
+Import from a Custom File
+Import & Export FAQs
+Organization Members Share Items
+My Items
+Transfer Items to Organization
+Change At-Risk Passwords
+Bitwarden Send About Send
+Create & Edit a Send
+Receive a Send
+Send Lifespan
+Send Privacy
+Send from CLI
+Send Encryption
+Developer Tools API Password Manager APIs
+CLI Password Manager CLI
+CLI Authentication via API Key
+CLI Authentication Challenges
+SSH About SSH
+SSH Agent
+More More Platforms Using Bitwarden Offline
+Bitwarden on Apple Watch
+Bitwarden for DuckDuckGo macOS Browser
+Use Bitwarden in Firefox Private Windows
+Safari Web Extension
+Troubleshooting uMatrix and NoScript access rules
+Troubleshoot Mobile with Bitwarden Support
+Desktop App Feature Support
+Password Manager FAQs
+Bitwarden Authenticator Bitwarden Authenticator
+Sync Verification Codes
+Import & Export Authenticator Data
+Secrets Manager Secrets Manager Overview
+Get Started Secrets Manager Quick Start
+Developer Quick Start
+Log in to Secrets Manager
+Manage your Organization
+Your Secrets Projects
+Secrets
+Machine Accounts
+Access Tokens
+Secret Decryption
+Import & Export Import Data
+Export Data
+Developer Tools Secrets Manager CLI
+Secrets Manager SDK
+Integrations Ansible
+GitHub Actions
+GitLab CI/CD
+Jenkins Integration
+Secrets Manager Kubernetes Operator
+Terraform Provider
+More Secrets Manager FAQs
+Admin Console Organizations Overview
+Organizations Quick Start
+Manage Shared Items Collections About Collections
+Create Collections
+Assign Users to Collections
+Collection Permissions
+Collection Settings
+Import Organization Items Import to an Organization
+Import from a Custom File
+Export Organization Items Export Organization Items
+Encrypted Exports
+Share Items
+Hyperlink Organization Items
+Manage Members Invite & Manage Members
+Member Roles
+Groups
+Automatic Confirmation
+Change Members’ Account Email & Name
+Revoke & Remove Temporarily Revoke Access
+Permanently Remove Access
+Delete Organization Member Accounts
+Account Recovery About Account Recovery
+Set Up Account Recovery
+Recover a Member Account
+My Account Was Recovered
+Sponsored Families Sponsored Families for Members
+Sponsored Families for Non-Members
+Sponsored Families FAQs
+SCIM About SCIM
+JumpCloud SCIM
+Microsoft Entra ID SCIM
+Okta SCIM
+OneLogin SCIM Integration
+Ping Identity SCIM Integration
+Directory Connector About Directory Connector
+Directory Connector Desktop App
+Directory Connector CLI
+Directory Connector File Storage
+Sync Options and Filters
+Clear Sync Cache
+Schedule a Sync
+LDAP or Active Directory
+Sync with Microsoft Entra ID
+Google Workspace Directory
+Sync with Okta
+Sync with OneLogin
+Onboarding and Succession Guide
+Oversight & Visibility SIEM Integrations Blumira SIEM
+Elastic SIEM
+Huntress SIEM
+Microsoft Sentinel SIEM
+Panther SIEM
+Rapid7 SIEM
+Splunk SIEM
+Sumo Logic SIEM
+Generic HEC Integration
+Non-native SIEM
+Event Logging Event Logs
+Monitoring Event Logs
+Claimed Domains Claimed Domains
+Claimed Accounts
+Access Intelligence
+Enterprise Policies
+Vault Health Reports
+Custom Fill Assist Rules
+Single Sign-On About Single Sign-On
+SSO Decryption Options
+Add Members with JIT
+SSO Guides ADFS SAML
+ADFS OIDC
+Auth0 SAML
+AWS SAML
+Cloudflare Zero Trust SSO
+Duo SAML
+Generic SAML
+Generic OIDC
+Google SAML
+JumpCloud SAML
+Keycloak SAML
+Microsoft Entra ID SAML
+Microsoft Entra ID OIDC
+Okta SAML
+Okta OIDC
+OneLogin SAML
+Ping Identity SAML
+Ping Identity OIDC
+Trusted Devices About Trusted Devices
+Setup SSO with Trusted Devices
+Approve a Trusted Device
+SSO FAQs
+Onboarding Customer Success Hub
+Bitwarden Onboarding Playbook
+Customer Activation Kit
+Member Signup Workflows
+Deploy Client Apps Deploy Browser Extensions using GPOs, Linux Policies, & .plist Files
+Deploy Browser Extensions with Intune
+Deploy Desktop Apps with Intune
+Deploy Mobile Apps with Intune
+Connect Managed Devices
+Deactivate Browser Password Managers Using Device Management
+Bitwarden Public API
+More Organizations FAQs
+Product highlights and recent updates
+Bitwarden for Enterprise Features Datasheet
+Teams and Enterprise Migration Guide
+LastPass Enterprise Migration Guide
+Ownerless Organizations
+Proof-of-Concept Project Checklist
+Prepare your Trial Organization for Production
+Provider Portal Provider Portal Overview
+Provider Portal Quick Start
+Provider Users
+Start a Client Organization
+Ongoing Administration
+Unlink Client Organization
+Provider Event Logs
+Provider Billing
+Providers FAQs
+Business Unit Portal Business Unit Portal
+Business Unit Portal Quick Start
+Self-host Plan for Deployment Self-host Bitwarden
+Self-host Checklist
+Self-host an Organization
+Migrate to a New Server
+Deploy & Configure Deploy with Docker Linux Standard Deployment
+Linux Manual Deployment
+Linux Offline Deployment
+Windows Standard Deployment
+Windows Offline Deployment
+Lite Deployment
+Marketplace Deployments
+Configure Self-hosted environment with forward proxy
+Deploy with Helm Self-host with Helm
+Traffic Routing
+AWS EKS Deployment
+Azure AKS Deployment
+OpenShift Deployment
+Add rawManifest Files
+Configuration Options Environment Variables
+Certificate Options
+Database Options
+Connect to an External MSSQL Database
+Migrate from Default to External MSSQL
+Configure Push Relay
+Kerberos Integration
+Kubernetes Service Accounts
+SMTP Configurations
+Optional Features Self-hosting Send
+Self-hosting SCIM
+Self-hosting Families Sponsorships
+Connect Clients Connect Managed Devices
+Connect Individual Clients
+Key Connector About Key Connector
+Deploy Key Connector
+System Administrator Portal
+License Organizations or Premium
+Update a Server
+Backup Server Data
+Networking Requirements
+Server Logs
+Self-host FAQs
+Security Bitwarden Security Whitepaper
+Data Encrypted Data
+Administrative Data
+Data Storage
+Data Privacy for Website Icons
+Encryption Encryption Protocols
+Encryption Key Derivation
+Invoked Crypto Libraries
+Encryption Key Rotation
+Account Fingerprint Phrase
+Software Development Server & Client Versioning
+Software Release Support
+Trusted Communications About Trusted Communications
+Bitwarden Domains, Endpoints, & URLs
+Identify Legitimate Emails from Bitwarden
+Emails from Bitwarden Servers
+Compliance, Audits, and Certifications
+Bitwarden Subprocessors
+Server Regions
+Security FAQs
+Plans & Pricing Password Manager Password Manager Plans
+Upgrade from Individual to Organization
+Premium Renewal
+Organization Renewal
+Secrets Manager Secrets Manager Plans
+Sign up for Secrets Manager
+View & Update Billing Details
+Payment Methods
+Invoices & Receipts
+Taxes on Bitwarden Purchases
+Manage Subscription Seats in Your Organization
+Delete an Account or Organization
+Cancel a Subscription
+Billing FAQs
+Security
+On this page
+Privacy
+GDPR
+CCPA
+Data Privacy Framework (DPF)
+HIPAA
+ISO 27001
+Third party security audits
+2025 Bitwarden Browser Extension & Autofill Overlay Security Assessment
+2025 Bitwarden Core Application Security Assessment
+2025 Bitwarden Desktop Application Security Assessment
+2025 Bitwarden RustCrypto Crate Security Assessment
+2025 Bitwarden RustCrypto Library Security Assessment
+2025 Bitwarden Web Vault Security Assessment
+2025 Bitwarden Cryptography Report
+2025 Mobile App Security Assessment
+2025 Bitwarden Web App and Network Security Assessment
+2024 Bitwarden Client Applications Security Assessment
+2024 Bitwarden Marketing Website Security Assessment
+2024 Bitwarden Mobile App Security Assessment
+2024 Web App and Network Security Assessment
+2024 Mobile Apps and SDK Security Assessment
+2023 Bitwarden Web App Security Assessment Report
+2023 Bitwarden Desktop App Security Assessment Report
+2023 Bitwarden Core App & Library Security Assessment Report
+2023 Bitwarden Browser Extension Security Assessment Report
+2023 Network Security Assessment
+2022 Security Assessment
+SOC 2 Type 2 and SOC 3
+2022 Network Security Assessment
+2021 Network Security Assessment
+2021 Security Assessment
+2020 Network Security Assessment
+2018 Security Assessment
+Open source codebase
+Codebase on GitHub
+Licensing
+Cloud hosting
+Security information
+Zero knowledge encryption
+Vault security in Bitwarden
+Bug bounty program
+On this page
+Contact support
+Page Options
+Compliance, Audits, and Certifications
+Bitwarden is a global company with customers located all over the world. Our business is to help customers protect, store, and share their sensitive data. We prioritize protecting the personal data of our customers and their end-users as paramount to our company mission. Bitwarden complies with industry standards, and conducts comprehensive annual audits that are shared transparently with our customers and users. Our open source approach puts us in a unique position, where our software is viewed and scrutinized by a globally engaged community.
+Privacy
+For our privacy policy, visit bitwarden.com/privacy.
+GDPR
+Bitwarden is GDPR compliant. We use applicable, approved information transfer mechanisms where required, such as EU Standard Contractual Clauses (SCCs), or the EU - U.S. Data Privacy Framework.
+Bitwarden uses Standard Contractual Clauses pursuant to Regulation (EU) 2016/679 of the European Parliament and the Council approved by European Commission Implementing Decision (EU) 2021/914 of 4 June 2021, as currently set out at https://eur-lex.europa.eu/eli/dec_impl/2021/914/oj.
+CCPA
+Bitwarden is compliant with the California Consumer Privacy Act (CCPA).
+Data Privacy Framework (DPF)
+Bitwarden complies with the Data Privacy Framework (DPF), previously called Privacy Shield, which defines the safe transfer of personal data
+HIPAA
+Bitwarden is HIPAA compliant and annually undergoes a third-party audit for HIPAA Security Rule compliance.
+ISO 27001
+Bitwarden is ISO 27001 certified and in compliance with ISO 27001 control sets surrounding data security. For more information, please contact your Account Executive.
+Third party security audits
+Bitwarden regularly conducts comprehensive third-party security audits with notable security firms. These annual audits include source code assessments and penetration testing across Bitwarden IPs, servers, and web applications.
+2025 Bitwarden Browser Extension & Autofill Overlay Security Assessment
+Bitwarden completed penetration testing and a dedicated audit of the Bitwarden browser extension and autofill overlay by cybersecurity firm Cure53.
+Read the report
+2025 Bitwarden Core Application Security Assessment
+Bitwarden completed penetration testing and a dedicated audit of the Bitwarden core application by cybersecurity firm Cure53.
+Read the report
+2025 Bitwarden Desktop Application Security Assessment
+Bitwarden completed penetration testing and a dedicated audit of the Bitwarden desktop application by cybersecurity firm Cure53.
+Read the report
+2025 Bitwarden RustCrypto Crate Security Assessment
+Bitwarden completed penetration testing and a dedicated audit of the Bitwarden RustCrypto crate by cybersecurity firm Cure53.
+Read the report
+2025 Bitwarden RustCrypto Library Security Assessment
+Bitwarden completed penetration testing and a dedicated audit of the Bitwarden client applications and libraries by cybersecurity firm Cure53.
+Read the report
+2025 Bitwarden Web Vault Security Assessment
+Bitwarden completed penetration testing and a dedicated audit of the Bitwarden web vault by cybersecurity firm Cure53.
+Read the report
+2025 Bitwarden Cryptography Report
+Bitwarden completed an audit of Bitwarden core cryptography operations by the Applied Cryptography Group at ETH Zurich under the assumption of a fully malicious server.
+Read the report
+2025 Mobile App Security Assessment
+Bitwarden completed a dedicated audit of the Bitwarden mobile and mobile authenticator applications by cybersecurity firm Unit 42 by Palo Alto Networks
+Read the report
+2025 Bitwarden Web App and Network Security Assessment
+Bitwarden completed a dedicated audit of the Bitwarden web application and its related network components by cybersecurity firm Fracture Labs.
+Read the report
+2024 Bitwarden Client Applications Security Assessment
+Bitwarden completed a dedicated audit of the Bitwarden client applications and SDKs by security firm IOActive.
+Read the report
+2024 Bitwarden Marketing Website Security Assessment
+Bitwarden completed a dedicated audit of the Bitwarden marketing website by security firm Paragon Initiative Enterprises (PIE).
+Read the report
+2024 Bitwarden Mobile App Security Assessment
+Bitwarden completed a dedicated audit of the Bitwarden mobile and mobile authenticator applications by security firm Mandiant.
+Read the report
+2024 Web App and Network Security Assessment
+Bitwarden completed a dedicated source code audit and penetration test of the web app and related network components by security firm Fracture Labs.
+Read the report.
+2024 Mobile Apps and SDK Security Assessment
+Bitwarden completed a dedicated source code audit and penetration test of the mobile apps and SDK by security firm Cure53.
+Read the report
+2023 Bitwarden Web App Security Assessment Report
+Bitwarden completed a dedicated source code audit and penetration test of the web app by security firm Cure53.
+Read the report
+2023 Bitwarden Desktop App Security Assessment Report
+Bitwarden completed a dedicated source code audit and penetration test of the desktop app by security firm Cure53.
+Read the report
+2023 Bitwarden Core App & Library Security Assessment Report
+Bitwarden completed a dedicated source code audit and penetration test of the core application and library by security firm Cure53.
+Read the report
+2023 Bitwarden Browser Extension Security Assessment Report
+Bitwarden completed a dedicated source code audit and penetration test of the browser extension by security firm Cure53.
+Read the report
+2023 Network Security Assessment
+Bitwarden completed a network security assessment and penetration test by security firm Cure53.
+Read the report
+2022 Security Assessment
+Bitwarden completed a dedicated source code audit and penetration test by security firm Cure53.
+Read the report
+SOC 2 Type 2 and SOC 3
+Bitwarden has completed SOC Type 2 and SOC 3 compliance. For more information, see the blog post Bitwarden achieves SOC 2 certification.
+2022 Network Security Assessment
+Bitwarden completed a network security assessment and penetration test by security firm Cure53.
+Read the report
+2021 Network Security Assessment
+Bitwarden completed a thorough network security assessment and penetration test by auditing firm Insight Risk Consulting.
+Read the report
+2021 Security Assessment
+Bitwarden completed a dedicated source code audit and penetration test by the security firm Cure53.
+Read the report
+2020 Network Security Assessment
+Bitwarden completed a thorough security assessment and penetration test by auditing firm Insight Risk Consulting. For more information, please see the blog post Bitwarden 2020 Security Audit is Complete.
+Read the report
+2018 Security Assessment
+Bitwarden completed a thorough security audit and cryptographic analysis by security firm Cure53. For more information, please see the blog post Bitwarden Completes Third-party Security Audit.
+Read the report
+Open source codebase
+Codebase on GitHub
+Bitwarden is focused on open source software with the entirety of the codebase available on github.com. See our codebase at github.com/bitwarden, or learn more on our open source page.
+Licensing
+Source code in Bitwarden repositories are covered by one of two licenses, the GNU Affero General Public License (AGPL) v3.0 and the Bitwarden License v1.0. Refer to these links to learn more about what is included in and permitted by each license.
+Cloud hosting
+The Bitwarden cloud service is hosted on Microsoft Azure. Please visit Microsoft Azure Compliance Offerings for more detail.
+Security information
+Zero knowledge encryption
+Bitwarden takes a zero knowledge encryption approach to password management, meaning every piece of information in your vault is encrypted. For more information on this approach, please see the blog post How End-to-End Encryption Paves the Way for Zero Knowledge.
+Vault security in Bitwarden
+For more information on how Bitwarden vaults are protected, including options for Bitwarden client applications, please see the blog post Vault Security in the Bitwarden Password Manager.
+Bug bounty program
+Bitwarden also interacts with independent security researchers through our private bug bounty program on HackerOne.
+Suggest changes to this page
+Suggest changes to this page
+How can we improve this page for you?
+For technical, billing, and product questions, please contact support
+Page Options
+Contact support
+Download Bitwarden
+Feature Request
+Ask the Community
+Contributor Guidelines
+Copy for LLM
+✨Ask AI
+Open page as Markdown
+Download as PDF
+Cloud Status
+Check status
+On this page
+Privacy
+GDPR
+CCPA
+Data Privacy Framework (DPF)
+HIPAA
+ISO 27001
+Third party security audits
+2025 Bitwarden Browser Extension & Autofill Overlay Security Assessment
+2025 Bitwarden Core Application Security Assessment
+2025 Bitwarden Desktop Application Security Assessment
+2025 Bitwarden RustCrypto Crate Security Assessment
+2025 Bitwarden RustCrypto Library Security Assessment
+2025 Bitwarden Web Vault Security Assessment
+2025 Bitwarden Cryptography Report
+2025 Mobile App Security Assessment
+2025 Bitwarden Web App and Network Security Assessment
+2024 Bitwarden Client Applications Security Assessment
+2024 Bitwarden Marketing Website Security Assessment
+2024 Bitwarden Mobile App Security Assessment
+2024 Web App and Network Security Assessment
+2024 Mobile Apps and SDK Security Assessment
+2023 Bitwarden Web App Security Assessment Report
+2023 Bitwarden Desktop App Security Assessment Report
+2023 Bitwarden Core App & Library Security Assessment Report
+2023 Bitwarden Browser Extension Security Assessment Report
+2023 Network Security Assessment
+2022 Security Assessment
+SOC 2 Type 2 and SOC 3
+2022 Network Security Assessment
+2021 Network Security Assessment
+2021 Security Assessment
+2020 Network Security Assessment
+2018 Security Assessment
+Open source codebase
+Codebase on GitHub
+Licensing
+Cloud hosting
+Security information
+Zero knowledge encryption
+Vault security in Bitwarden
+Bug bounty program
+On this page
+Solutions
+For IT Teams
+For healthcare
+For financial services
+For law firms
+For marketing agencies
+For government
+For the public sector
+For agentic AI security
+For MSPs
+Bitwarden across industries
+For Developers
+Developer hub
+Secrets Manager
+Passwordless.dev and passkeys
+Products
+Plans and pricing
+Integrations
+Downloads
+Self-hosting
+Business
+Enterprise
+Teams and Businesses
+Personal
+Families
+Individuals
+Bitwarden Authenticator
+Bitwarden Send
+Passkeys and passwordless
+Resources
+Resource center
+Help and documentation
+Case studies
+Security compliance
+Open source
+Bitwarden vs. alternatives
+Blog
+Courses
+Community forums
+Open Source Security Summit
+Creator collaborations
+Survey room
+Newsfeed
+Free Tools
+Password generator
+Passphrase generator
+Password strength tester
+Username generator
+Company
+About
+Careers
+Press Room
+Partners
+Events
+Contact support
+© 2026 Bitwarden, Inc.TermsPrivacyCookie SettingsSitemap
+Language English ( United States ) English ( United Kingdom ) Deutsch ( Deutschland ) Español ( Latinoamérica ) Français ( France ) Italiano ( Italia ) 日本語 ( 日本 ) Nederlands ( Nederland ) Português ( Brasil ) Svenska ( Sverige )

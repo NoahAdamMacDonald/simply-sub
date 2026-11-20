@@ -1,0 +1,121 @@
+url: https://2fas.com/auth/eula/
+method: browser
+saved: 2026-11-19
+
+PASSWORD MANAGER
+AUTHENTICATOR
+ABOUT US
+HELP CENTER
+GET THE APPS
+2FAS Auth End User License Agreement
+2FAS Auth and 2FAS Auth Browser Extensions
+Effective Date: June 27, 2025
+This End User License Agreement ("EULA") is between you ("User") and Two Factor Authentication Service, Inc. ("Company") regarding your use of 2FAS Auth mobile applications and 2FAS Auth browser extensions ("Software").
+1. LICENSE GRANT
+Company grants you a personal, non-exclusive, non-transferable license to:
+PERMITTED USES:
+Personal use on your own devices
+Installation on multiple devices you own or control
+Use in your business or organization
+Distribution within a team or family, provided each member complies with this EULA
+RESTRICTIONS:
+Except as permitted by law:
+Reverse engineering, decompiling, or disassembling
+Redistributing or reselling the Software
+Circumventing technical protection measures
+Removing copyright or proprietary notices
+Using the Software to create or assist in the development of competing authentication products
+Using any 2FAS trademark or logo without prior written consent
+Using the Software for illegal activities or to violate applicable laws
+2. DATA AND PRIVACY
+The Software stores TOTP and HOTP secrets locally on your devices. The Company does not collect, store, or access any user authentication data. You are solely responsible for maintaining access to your secrets, backup copies, and your device's security. The Company cannot recover your authentication tokens or data if lost, deleted, or corrupted. A separate Privacy Policy governs the handling of personal data (if any). You may review it via the Software's official store listing or website.
+3. DATA LOSS AND BACKUP RESPONSIBILITY
+You are solely responsible for:
+Safeguarding and backing up your stored secrets
+Avoiding deletion or reset without exporting your data
+Securing access to your passcode or biometrics used to protect the Software
+Testing any recovery methods you rely on
+Company is not responsible for any data loss due to:
+Device loss, theft, or failure
+Forgotten passcode or biometrics
+Corruption or deletion of local data
+Improper updates or uninstallation
+Failure to maintain backups
+4. SUBSCRIPTION SERVICES
+As of the Effective Date, the Software is free to use.
+5. WARRANTIES AND LIABILITY
+Disclaimer of Warranties:
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. COMPANY DISCLAIMS ALL IMPLIED WARRANTIES, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+Limitation of Liability:
+TO THE MAXIMUM EXTENT PERMITTED BY LAW, COMPANY SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF DATA, LOSS OF ACCESS, OR INTERRUPTION OF SERVICE.
+COMPANY'S TOTAL LIABILITY SHALL NOT EXCEED FIFTY U.S. DOLLARS (US$50) OR THE AMOUNT PAID FOR THE SOFTWARE IN THE TWELVE (12) MONTHS PRIOR TO THE CLAIM.
+6. PLATFORM-SPECIFIC TERMS
+Apple App Store:
+This EULA is solely between you and Company, not Apple. Apple is not responsible for the Software or its content. Apple has no warranty or support obligations under this EULA. Apple is a third-party beneficiary and may enforce this EULA.
+Google Play Store:
+This EULA is solely between you and Company, not Google. Google is not responsible for the Software or its content. Google has no warranty or support obligations under this EULA. Google is a third-party beneficiary of this EULA.
+7. INDEMNIFICATION
+You agree to indemnify and hold harmless the Company and its officers, directors, employees, and agents from any claims, damages, or losses (including reasonable attorney fees) resulting from your use of the Software, your violation of this EULA, your violation of any third-party rights, or any misuse of data stored or transmitted via the Software.
+8. TERMINATION
+You may terminate this EULA by uninstalling the Software. Company may terminate this EULA if you violate any term. Termination does not affect obligations that survive under this EULA.
+9. EXPORT COMPLIANCE
+You agree to comply with all applicable export laws. You may not use, export, or re-export the Software:
+Into any U.S.-embargoed country
+To anyone on the U.S. Treasury Department's SDN list or the U.S. Commerce Department's Denied Persons List
+10. DISPUTE RESOLUTION AND ARBITRATION
+Before initiating arbitration, you agree to contact us at legal@2fas.com to attempt informal resolution. Any unresolved dispute shall be resolved by binding arbitration under the rules of the American Arbitration Association. Arbitration will take place in Delaware or another mutually agreed location. You and Company agree to bring claims only in your individual capacities and not as part of a class or representative action.
+This arbitration agreement does not apply to:
+Small claims court actions
+Intellectual property disputes
+Injunctive relief
+You may opt out of arbitration by sending written notice to legal@2fas.com within 30 days of first accepting this EULA.
+11. GOVERNING LAW
+This EULA is governed by the laws of the State of Delaware, without regard to conflict of law principles. All disputes not subject to arbitration shall be resolved in the courts of Delaware.
+12. MISCELLANEOUS
+If any provision is held unenforceable, the remainder remains in effect. This EULA and any applicable store terms are the full agreement between you and Company. Failure to enforce any term is not a waiver of that term. We are not liable for events beyond our control. Sections related to warranties, liability, arbitration, and export controls survive termination.
+13. CONTACT
+For legal or licensing questions: legal@2fas.com with the subject line “Legal”.
+By downloading, installing, or using 2FAS Auth, you agree to this EULA.
+About us
+Press kit
+Terms of Service
+Privacy Policy
+Open-source Licenses
+SITE SETTINGS
+ENGLISH
+Authenticator
+PRODUCTS
+2FAS Auth Mobile App
+2FAS Auth Browser Extension
+RESOURCES
+Donations
+How to enable 2FA
+Quick Browser Extension Check
+Check generated token
+Your branding
+Your 2FA guide
+Open-source Licenses
+COMPARISONS
+Google Authenticator vs. 2FAS Auth
+Authy vs. 2FAS Auth
+Microsoft Authenticator vs. 2FAS Auth
+Duo vs. 2FAS Auth
+POLICIES
+2FAS Auth Privacy Policy
+2FAS Auth EULA
+Password manager
+PRODUCTS
+2FAS Pass Mobile App
+2FAS Pass Browser Extension
+RESOURCES
+2FAS Pass Pricing
+2FAS Pass Recovery
+Open-source Licenses
+POLICIES
+2FAS Pass Privacy Policy
+2FAS Pass EULA
+Support
+Help Center
+Support
+Connect
+© 2026 Two Factor Authentication Service, Inc. All rights reserved.
